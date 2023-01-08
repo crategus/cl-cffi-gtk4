@@ -1,0 +1,88 @@
+(def-suite gtk-media-controls :in gtk-suite)
+(in-suite gtk-media-controls)
+
+;;; --- Types and Values -------------------------------------------------------
+
+;;;     GtkMediaControls
+
+(test gtk-media-controls-class
+  ;; Type check
+  (is (g:type-is-object "GtkMediaControls"))
+  ;; Check the registered name
+  (is (eq 'gtk-media-controls
+          (gobject:symbol-for-gtype "GtkMediaControls")))
+  ;; Check the type initializer
+  (is (eq (gtype "GtkMediaControls")
+          (gtype (foreign-funcall "gtk_media_controls_get_type" g-size))))
+  ;; Check the parent
+  (is (eq (gtype "GtkWidget") (g-type-parent "GtkMediaControls")))
+  ;; Check the children
+  (is (equal '()
+             (mapcar #'g-type-name (g-type-children "GtkMediaControls"))))
+  ;; Check the interfaces
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+             (mapcar #'g-type-name (g-type-interfaces "GtkMediaControls"))))
+  ;; Check the class properties
+  (is (equal '("media-stream")
+             (list-class-property-names "GtkMediaControls")))
+  ;; Check the list of signals
+  (is (equal '()
+             (sort (mapcar #'g-signal-name
+                           (g-signal-list-ids "GtkMediaControls"))
+                   #'string<)))
+  ;; CSS information
+  (is (string= "controls"
+               (gtk-widget-class-css-name "GtkMediaControls")))
+  (is (string=
+"controls:dir(ltr)
+  box.horizontal:disabled:dir(ltr)
+    button.flat.image-button:disabled:dir(ltr)
+      image:disabled:dir(ltr)
+    box.horizontal:disabled:dir(ltr)
+      label:disabled:dir(ltr)
+      scale.horizontal:disabled:dir(ltr)
+        trough:disabled:dir(ltr)
+          highlight.top:disabled:dir(ltr)
+          slider:disabled:dir(ltr)
+      label:disabled:dir(ltr)
+    scalebutton.scale:disabled:dir(ltr)
+      button.flat.image-button.toggle:disabled:dir(ltr)
+        image:disabled:dir(ltr)
+      [popover.background.scale-popup:disabled:dir(ltr)]
+        contents:disabled:dir(ltr)
+          box.vertical:disabled:dir(ltr)
+            button.flat.image-button:disabled:dir(ltr)
+              image:disabled:dir(ltr)
+            scale.vertical:disabled:dir(ltr)
+              trough:disabled:dir(ltr)
+                highlight.bottom:disabled:dir(ltr)
+                slider:disabled:dir(ltr)
+            button.flat.image-button:disabled:dir(ltr)
+              image:disabled:dir(ltr)
+        arrow:dir(ltr)
+"
+               (gtk-style-context-to-string
+                   (gtk-widget-style-context (make-instance 'gtk-media-controls))
+                   :none)))
+  ;; Check the class definition
+  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMediaControls" GTK-MEDIA-CONTROLS
+                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                        :TYPE-INITIALIZER "gtk_media_controls_get_type")
+                       ((MEDIA-STREAM GTK-MEDIA-CONTROLS-MEDIA-STREAM
+                         "media-stream" "GtkMediaStream" T T)))
+             (get-g-type-definition "GtkMediaControls"))))
+
+;;; --- Properties -------------------------------------------------------------
+
+;;;     media-stream
+
+(test gtk-media-controls-properties
+  (let ((controls (make-instance 'gtk-media-controls)))
+    (is-false (gtk-media-controls-media-stream controls))))
+
+;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_media_controls_new
+
+;;; 2022-9-8
