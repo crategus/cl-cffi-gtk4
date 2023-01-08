@@ -1,0 +1,45 @@
+GDK-4.0 - The GTK toolkit
+
+API Reference
+
+General — Library initialization and versioning
+
+  gdk.display-manager.lisp        GdkDisplayManager                     GDK 4.0+
+  gdk.display.lisp                GdkDisplay                            GDK 4.0+
+  gdk.seat.lisp                   GdkSeat                               GDK 4.0+
+  gdk.device.lisp                 GdkDevice                             GDK 4.0+
+  gdk.device-pad.lisp             GdkDevicePad                          GDK 4.0+
+  gdk.monitor.lisp                GdkMonitor                            GDK 4.0+
+  gdk.rectangle.lisp              GdkRectangle                          GDK 4.0+
+  gdk.texture.lisp                GdkTexture                            GDK 4.0+
+  gdk.paintable.lisp              GdkPaintable, GdkSnapshot             GDK 4.0+
+  gdk.rgba.lisp                   GdkRGBA                               GDK 4.0+
+  gdk.cursor.lisp                 GdkCursor                             GDK 4.0+
+  gdk.surface.lisp                GdkSurface                            GDK 4.0+
+  gdk.toplevel.lisp               GdkToplevel                           GDK 4.0+
+  gdk.toplevel-layout.lisp        GdkToplevelLayout                     GDK 4.0+
+  gdk.toplevel-size.lisp          GdkToplevelSize                       GDK 4.0+
+  gdk.popup.lisp                  GdkPopup                              GDK 4.0+
+  gdk.popup-layout.lisp           GdkPopupLayout                        GDK 4.0+
+  gdk.frame-clock.lisp            GdkFrameClock                         GDK 4.0+
+  gdk.frame-timings.lisp          GdkFrameTimings                       GDK 4.0+
+  gdk.draw-context.lisp           GdkDrawContect                        GDK 4.0+
+  gdk.gl-context.lisp             GdkGLContext                          GDK 4.0+
+  gdk.vulkan-context.lisp         GdkVulkanContext                      GDK 4.0+
+  gdk.cairo-context.lisp          GdkCairoContext                       GDK 4.0+
+  gdk.event.lisp                  GdkEvent                              GDK 4.0+
+  gdk.keyval.lisp                 Key Values                            GDK 4.0+
+  gdk.clipboard.lisp              GdkClipboard                          GDK 4.0+
+  gdk.drag-and-drop.lisp          GdkDrag, GdkDrop                      GDK 4.0+
+  gdk.content-formats.lisp        GdkContentFormats                     GDK 4.0+
+  gdk.content-provider.lisp       GdkContentProvider                    GDK 4.0+
+  gdk.content-serializer.lisp     GdkContentSerializer                  GDK 4.0+
+  gdk.content-deserializer.lisp   GdkContentDeserializer                GDK 4.0+
+  gdk.pixbuf-interaction.lisp     GdkPixbuf interaction                 GDK 4.0+
+  gdk.pango-interaction.lisp      Pango interaction                     GDK 4.0+
+  gdk.cairo-interaction.lisp      Cairo interaction                     GDK 4.0+
+  gdk.app-launch-context.lisp     GdkAppLaunchContext                   GDK 4.0+
+  gdk.x11-interaction.lisp                                              GDK 4.0+
+  gdk.wayland-interaction.lisp                                          GDK 4.0+
+
+;;; 2022-11-26
