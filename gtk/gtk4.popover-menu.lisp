@@ -1,0 +1,409 @@
+;;; ----------------------------------------------------------------------------
+;;; gtk.popover-menu.lisp
+;;;
+;;; The documentation of this file is taken from the GTK 4 Reference Manual
+;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;;
+;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;;
+;;; This program is free software: you can redistribute it and/or modify
+;;; it under the terms of the GNU Lesser General Public License for Lisp
+;;; as published by the Free Software Foundation, either version 3 of the
+;;; License, or (at your option) any later version and with a preamble to
+;;; the GNU Lesser General Public License that clarifies the terms for use
+;;; with Lisp programs and is referred as the LLGPL.
+;;;
+;;; This program is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;; GNU Lesser General Public License for more details.
+;;;
+;;; You should have received a copy of the GNU Lesser General Public
+;;; License along with this program and the preamble to the Gnu Lesser
+;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
+;;; and <http://opensource.franz.com/preamble.html>.
+;;; ----------------------------------------------------------------------------
+;;;
+;;; GtkPopoverMenu
+;;;
+;;;     Popovers to use as menus
+;;;
+;;; Types and Values
+;;;
+;;;     GtkPopoverMenu
+;;;     GtkPopoverMenuFlags
+;;;
+;;; Accessors
+;;;
+;;;     gtk_popover_menu_set_menu_model
+;;;     gtk_popover_menu_get_menu_model
+;;;
+;;; Functions
+;;;
+;;;     gtk_popover_menu_new_from_model
+;;;     gtk_popover_menu_new_from_model_full
+;;;     gtk_popover_menu_add_child
+;;;     gtk_popover_menu_remove_child
+;;;
+;;; Properties
+;;;
+;;;     menu-model
+;;;     visible-submenu
+;;;
+;;; Object Hierarchy
+;;;
+;;;     GObject
+;;;     ╰── GInitiallyUnowned
+;;;         ╰── GtkWidget
+;;;             ╰── GtkPopover
+;;;                 ╰── GtkPopoverMenu
+;;;
+;;; Implemented Interfaces
+;;;
+;;;     GtkAccessible
+;;;     GtkBuildable
+;;;     GtkConstraintTarget
+;;;     GtkNative
+;;;     GtkShortcutManager
+;;; ----------------------------------------------------------------------------
+
+(in-package :gtk)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkPopoverMenuFlags
+;;; ----------------------------------------------------------------------------
+
+(define-g-flags "GtkPopoverMenuFlags" popover-menu-flags
+  (:export t
+   :type-initializer "gtk_popover_menu_flags_get_type")
+  (:none 0)
+  (:nested #.(ash 1 0)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'popover-menu-flags)
+      "GFlags"
+      (liber:symbol-documentation 'popover-menu-flags)
+ "@version{#2022-7-29}
+  @begin{short}
+    Flags that affect how popover menus are created from a menu model.
+  @end{short}
+  @begin{pre}
+(define-g-flags \"GtkPopoverMenuFlags\" popover-menu-flags
+  (:export t
+   :type-initializer \"gtk_popover_menu_flags_get_type\")
+  (:none 0)
+  (:nested #.(ash 1 0)))
+  @end{pre}
+  @begin[code]{table}
+    @entry[:none]{No flags set.}
+    @entry[:nested]{Create submenus as nested popovers. Without this flag,
+      submenus are created as sliding pages that replace the main menu.}
+  @end{table}
+  @see-class{gtk:popover-menu}")
+
+;;; ----------------------------------------------------------------------------
+;;; GtkPopoverMenu
+;;; ----------------------------------------------------------------------------
+
+(define-g-object-class "GtkPopoverMenu" popover-menu
+  (:superclass popover
+    :export t
+    :interfaces ("GtkAccessible"
+                 "GtkBuildable"
+                 "GtkConstraintTarget"
+                 "GtkNative"
+                 "GtkShortcutManager")
+    :type-initializer "gtk_popover_menu_get_type")
+  ((menu-model
+    popover-menu-menu-model
+    "menu-model" "GMenuModel" t t)
+   (visible-submenu
+    popover-menu-visible-submenu
+    "visible-submenu" "gchararray" t t)))
+
+#+liber-documentation
+(setf (documentation 'popover-menu 'type)
+ "@version{#2022-7-29}
+  @begin{short}
+    The @sym{gtk:popover-menu} class is a subclass of the @class{gtk:popover}
+    class that treats its children like menus and allows switching between them.
+  @end{short}
+  It can open submenus as traditional, nested submenus, or in a more
+  touch-friendly sliding fashion.
+
+  @image[popover-menu]{Figure: GtkPopoverMenu}
+
+  The @sym{gtk:popover-menu} widget is meant to be used primarily with menu
+  models, using the @fun{gtk:popover-menu-new-from-model} function. If you need
+  to put other widgets such as @class{gtk:spin-button} or @class{gtk:switch}
+  widgets into a popover, use a plain @class{gtk:popover} widget.
+
+  @subheading{Menu models}
+  The XML format understood by the @class{gtk:builder} object for the
+  @class{g:menu-model} object consists of a toplevel @code{<menu>} element,
+  which contains one or more @code{<item>} elements. Each @code{<item>} element
+  contains @code{<attribute>} and @code{<link>} elements with a mandatory name
+  @code{attribute}. @code{<link>} elements have the same content model as
+  @code{<menu>}. Instead of @code{<link name=\"submenu\">} or
+  @code{<link name=\"section\">}, you can use @code{<submenu>\} or
+  @code{<section>} elements.
+  @begin{pre}
+<menu id='app-menu'>
+  <section>
+    <item>
+      <attribute name='label' translatable='yes'>_New Window</attribute>
+      <attribute name='action'>app.new</attribute>
+    </item>
+    <item>
+      <attribute name='label' translatable='yes'>_About Sunny</attribute>
+      <attribute name='action'>app.about</attribute>
+    </item>
+    <item>
+      <attribute name='label' translatable='yes'>_Quit</attribute>
+      <attribute name='action'>app.quit</attribute>
+    </item>
+  </section>
+</menu>
+  @end{pre}
+  Attribute values can be translated using GNU @code{gettext}, like other
+  GtkBuilder content. @code{<attribute>} elements can be marked for translation
+  with a @code{translatable=\"yes\"} attribute. It is also possible to specify
+  message context and translator comments, using the context and comments
+  attributes. To make use of this, the GtkBuilder must have been given the
+  GNU @code{gettext} domain to use.
+
+  The following attributes are used when constructing menu items:
+  @begin[code]{table}
+    @entry[\"label\"]{a user-visible string to display}
+    @entry[\"action\"]{the prefixed name of the action to trigger}
+    @entry[\"target\"]{the parameter to use when activating the action}
+    @entry[\"icon\", \"verb-icon\"]{names of icons that may be displayed}
+    @entry[\"submenu-action\"]{name of an action that may be used to determine
+      if a submenu can be opened}
+    @entry[\"hidden-when\"]{a string used to determine when the item will be
+      hidden. Possible values include @code{\"action-disabled\"},
+      @code{\"action-missing\"}, @code{\"macos-menubar\"}. This is mainly useful
+      for exported menus, see the @fun{gtk:application-menubar} function.}
+    @entry[\"custom\"]{a string used to match against the ID of a custom child
+      added with the @fun{gtk:popover-menu-add-child},
+      @fun{gtk:popover-menu-bar-add-child} functions, or in the UI file with
+      @code{<child type=\"ID\">}.}
+  @end{table}
+  The following attributes are used when constructing sections:
+  @begin[code]{table}
+    @entry[\"label\"]{a user-visible string to use as section heading}
+    @entry[\"display-hint\"]{a string used to determine special formatting for
+      the section. Possible values include @code{\"horizontal-buttons\"},
+      @code{\"circular-buttons\"} and @code{\"inline-buttons\"}. They all
+      indicate that section should be displayed as a horizontal row of buttons.}
+    @entry[\"text-direction\"]{a string used to determine the GtkTextDirection
+      to use when @code{\"display-hint\"} is set to
+      @code{\"horizontal-buttons\"}. Possible values include @code{\"rtl\"},
+      @code{\"ltr\"}, and @code{\"none\"}.}
+  @end{table}
+  The following attributes are used when constructing submenus:
+  @begin[code]{table}
+    @entry[\"label\"]{a user-visible string to display}
+    @entry[\"icon\"]{icon name to display}
+  @end{table}
+  Menu items will also show accelerators, which are usually associated with
+  actions via the @fun{gtk:application-accels-for-action},
+  @fun{gtk:widget-class-add-binding-action} or
+  @fun{gtk:shortcut-controller-add-shortcut} functions.
+  @begin[CSS nodes]{dictionary}
+    The @sym{gtk:popover-menu} implementation is just a subclass of the
+    @class{gtk:popover} class that adds custom content to it, therefore it has
+    the same CSS nodes. It is one of the cases that add a @code{.menu} style
+    class to the popover's main node.
+  @end{dictionary}
+  @begin[Accessibility]{dictionary}
+    The @sym{gtk:popover-menu} implementation uses the @code{:menu} role of the
+    @symbol{gtk:accessible-role} enumeration, and its items use the
+    @code{:menu-item}, @code{:menu-item-checkbox} role or @code{menu-item-radio}
+    roles, depending on the action they are connected to.
+  @end{dictionary}
+  @see-slot{gtk:popover-menu-menu-model}
+  @see-slot{gtk:popover-menu-visible-submenu}
+  @see-constructor{gtk:popover-menu-new-from-model}
+  @see-constructor{gtk:popover-menu-new-from-model-full}
+  @see-class{gtk:popover}")
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;; --- popover-menu-menu-model --------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "menu-model"
+                                               'popover-menu) t)
+ "The @code{menu-model} property of type @class{g:menu-model} (Read / Write)
+  @br{}
+  The model from which the menu is made.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'popover-menu-menu-model)
+      "Accessor"
+      (documentation 'popover-menu-menu-model 'function)
+ "@version{#2022-7-29}
+  @syntax[]{(gtk:popover-menu-menu-model object) => model}
+  @syntax[]{(setf (gtk:popover-menu-menu-model object) model)}
+  @argument[object]{a @class{gtk:popover-menu} widget}
+  @argument[model]{a @class{g:menu-model} object}
+  @begin{short}
+    Accessor of the @slot[gtk:popover-menu]{menu-model} slot of the
+    @class{gtk:popover-menu} class.
+  @end{short}
+  The @sym{gtk:popover-menu-menu-model} function returns the menu model used to
+  populate the popover. The @sym{(setf gtk:popover-menu-menu-model)} function
+  sets the menu model. The existing contents of the popover are removed, and
+  the popover is populated with new contents according to the menu model.
+  @see-class{gtk:popover-menu}
+  @see-class{g:menu-model}")
+
+;;; --- popover-menu-visible-submenu ---------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "visible-submenu"
+                                               'popover-menu) t)
+ "The @code{visible-submenu} property of type @code{:string} (Read / Write)@br{}
+  The name of the visible submenu. @br{}
+  Default value: @code{nil}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'popover-menu-visible-submenu)
+      "Accessor"
+      (documentation 'popover-menu-visible-submenu 'function)
+ "@version{#2022-7-29}
+  @syntax[]{(gtk:popover-menu-visible-submenu object) => submenu}
+  @syntax[]{(setf (gtk:popover-menu-visible-submenu object) submenu)}
+  @argument[object]{a @class{gtk:popover-menu} widget}
+  @argument[submenu]{a string with the name of the submenu}
+  @begin{short}
+    Accessor of the @slot[gtk:popover-menu]{visible-submenu} slot of the
+    @class{gtk:popover-menu} class.
+  @end{short}
+  The name of the visible submenu.
+  @see-class{gtk:popover-menu}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_popover_menu_new_from_model ()
+;;; ----------------------------------------------------------------------------
+
+(defun popover-menu-new-from-model (model)
+ #+liber-documentation
+ "@version{#2022-7-29}
+  @argument[model]{a @class{g:menu-model} object, or @code{nil}}
+  @return{The new @class{gtk:popover-menu} widget.}
+  @begin{short}
+    Creates a popover menu and populates it according to the menu model.
+  @end{short}
+
+  The created buttons are connected to actions found in the
+  @class{gtk:application-window} widget to which the popover belongs -
+  typically by means of being attached to a widget that is contained within
+  the @class{gtk:application-window} widget hierarchy.
+
+  Actions can also be added using the @fun{gtk:widget-insert-action-group}
+  function on the menus attach widget or on any of its parent widgets.
+
+  This function creates menus with sliding submenus. See the
+  @fun{gtk:popover-menu-new-from-model-full} function for a way to control this.
+  @see-class{gtk:popover-menu}
+  @see-class{g:menu-model}
+  @see-class{gtk:application-window}
+  @see-function{gtk:popover-menu-new-from-model-full}
+  @see-function{gtk:widget-inseert-action-group}"
+  (if model
+      (make-instance 'popover-menu
+                     :menu-model model)
+      (make-instance 'popover-menu)))
+
+(export 'popover-menu-new-from-model)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_popover_menu_new_from_model_full ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_popover_menu_new_from_model_full"
+           popover-menu-new-from-model-full) (g:object popover-menu)
+ #+liber-documentation
+ "@version{#2022-7-29}
+  @argument[model]{a @class{g:menu-model} object, or @code{nil}}
+  @argument[flags]{a @symbol{gtk:popover-menu-flags} value, that affect hwo the
+    menu is created}
+  @return{The new @class{gtk:popover-menu} widget.}
+  @begin{short}
+    Creates a popover menu and populates it according to the menu model.
+  @end{short}
+
+  The created buttons are connected to actions found in the action groups that
+  are accessible from the parent widget. This includes the
+  @class{gtk:application-window} widget to which the popover menu belongs.
+  Actions can also be added using the @fun{gtk:widget-insert-action-group}
+  function on the parent widget or on any of its parent widgets.
+
+  The only flag that is supported currently is the @code{:nested} value, which
+  makes GTK create traditional, nested submenus instead of the default sliding
+  submenus.
+  @see-class{gtk:popover-menu}
+  @see-class{g:menu-model}
+  @see-class{gtk:application-window}
+  @see-symbol{gtk:popover-menu-flags}
+  @see-function{gtk:popover-menu-new-from-model}
+  @see-function{gtk:widget-insert-action-group}"
+  (model (g:object g:menu-model))
+  (flags popover-menu-flags))
+
+(export 'popover-menu-new-from-model-full)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_popover_menu_add_child ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_popover_menu_add_child" popover-menu-add-child) :boolean
+ #+liber-documentation
+ "@version{#2022-7-29}
+  @argument[popover]{a @class{gtk:popover-menu} widget}
+  @argument[child]{a @class{gtk:widget} child widget to add}
+  @argument[id]{a string with the ID to insert the child widget at}
+  @return{@em{True} if the ID was found and the child widget added.}
+  @begin{short}
+    Adds a custom widget to a generated menu.
+  @end{short}
+  For this to work, the menu model of the popover must have an item with a
+  custom attribute that matches the ID.
+  @see-class{gtk:popover-menu}
+  @see-class{gtk:widget}
+  @see-function{gtk:popover-menu-remove-child}"
+  (popover (g:object popover-menu))
+  (child (g:object widget))
+  (id :string))
+
+(export 'popover-menu-add-child)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_popover_menu_remove_child ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_popover_menu_remove_child" popover-menu-remove-child)
+    :boolean
+ #+liber-documentation
+ "@version{#2022-7-29}
+  @argument[popover]{a @class{gtk:popover-menu} widget}
+  @argument[child]{a @class{gtk:widget} child widget}
+  @return{@em{True} if the child widget was removed.}
+  @begin{short}
+    Removes a widget that has previously been added with the
+    @fun{gtk:popover-menu-add-child} function.
+  @end{short}
+  @see-class{gtk:popover-menu}
+  @see-function{gtk:popover-menu-add-child}"
+  (popover (g:object popover-menu))
+  (child (g:object widget)))
+
+(export 'popover-menu-remove-child)
+
+;;; --- End of file gtk.popover-menu.lisp --------------------------------------

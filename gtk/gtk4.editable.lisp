@@ -1,0 +1,859 @@
+;;; ----------------------------------------------------------------------------
+;;; gtk.editable.lisp
+;;;
+;;; The documentation of this file is taken from the GTK 4 Reference Manual
+;;; Version 4.9 and modified to document the Lisp binding to the GTK library.
+;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;;
+;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
+;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;;
+;;; This program is free software: you can redistribute it and/or modify
+;;; it under the terms of the GNU Lesser General Public License for Lisp
+;;; as published by the Free Software Foundation, either version 3 of the
+;;; License, or (at your option) any later version and with a preamble to
+;;; the GNU Lesser General Public License that clarifies the terms for use
+;;; with Lisp programs and is referred as the LLGPL.
+;;;
+;;; This program is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;; GNU Lesser General Public License for more details.
+;;;
+;;; You should have received a copy of the GNU Lesser General Public
+;;; License along with this program and the preamble to the Gnu Lesser
+;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
+;;; and <http://opensource.franz.com/preamble.html>.
+;;; ----------------------------------------------------------------------------
+;;;
+;;; GtkEditable
+;;;
+;;;     Interface for text-editing widgets
+;;;
+;;; Types and Values
+;;;
+;;;     GtkEditableProperties
+;;;     GtkEditable
+;;;
+;;; Accessors
+;;;
+;;;     gtk_editable_set_editable
+;;;     gtk_editable_get_editable
+;;;     gtk_editable_get_enable_undo
+;;;     gtk_editable_set_enable_undo
+;;;     gtk_editable_get_max_width_chars
+;;;     gtk_editable_set_max_width_chars
+;;;     gtk_editable_get_text
+;;;     gtk_editable_set_text
+;;;     gtk_editable_get_width_chars
+;;;     gtk_editable_set_width_chars
+;;;
+;;; Functions
+;;;
+;;;     gtk_editable_get_chars
+;;;     gtk_editable_insert_text
+;;;     gtk_editable_delete_text
+;;;     gtk_editable_get_selection_bounds
+;;;     gtk_editable_select_region
+;;;     gtk_editable_delete_selection
+;;;     gtk_editable_set_position
+;;;     gtk_editable_get_position
+;;;     gtk_editable_set_alignment
+;;;     gtk_editable_get_alignment
+;;;     gtk_editable_install_properties
+;;;     gtk_editable_get_delegate
+;;;     gtk_editable_init_delegate
+;;;     gtk_editable_finish_delegate
+;;;     gtk_editable_delegate_set_property
+;;;     gtk_editable_delegate_get_property
+;;;
+;;; Properties
+;;;
+;;;     cursor-position
+;;;     editable
+;;;     enable-undo
+;;;     max-width-chars
+;;;     selection-bound
+;;;     text
+;;;     width-chars
+;;;     xalign
+;;;
+;;; Signals
+;;;
+;;;     changed
+;;;     delete-text
+;;;     insert-text
+;;;
+;;; Object Hierarchy
+;;;
+;;;     GInterface
+;;;     ╰── GtkEditable
+;;; ----------------------------------------------------------------------------
+
+(in-package :gtk)
+
+;;; ----------------------------------------------------------------------------
+;;; enum GtkEditableProperties
+;;;
+;;; The identifiers for GtkEditable properties.
+;;;
+;;; See gtk_editable_install_properties() for details on how to implement the
+;;; GtkEditable interface.
+;;;
+;;; GTK_EDITABLE_PROP_TEXT :
+;;;     The property id for GtkEditable:text
+;;;
+;;; GTK_EDITABLE_PROP_CURSOR_POSITION :
+;;;     The property id for GtkEditable:cursor-position
+;;;
+;;; GTK_EDITABLE_PROP_SELECTION_BOUND :
+;;;     The property id for GtkEditable:selection-bound
+;;;
+;;; GTK_EDITABLE_PROP_EDITABLE :
+;;;     The property id for GtkEditable:editable
+;;;
+;;; GTK_EDITABLE_PROP_WIDTH_CHARS :
+;;;     The property id for GtkEditable:width-chars
+;;;
+;;; GTK_EDITABLE_PROP_MAX_WIDTH_CHARS :
+;;;     The property id for GtkEditable:max-width-chars
+;;;
+;;; GTK_EDITABLE_PROP_XALIGN :
+;;;     The property id for GtkEditable:xalign
+;;;
+;;; GTK_EDITABLE_PROP_ENABLE_UNDO :
+;;;     The property id for GtkEditable:enable-undo
+;;;
+;;; GTK_EDITABLE_NUM_PROPERTIES :
+;;;     The number of properties.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GtkEditable
+;;; ----------------------------------------------------------------------------
+
+(define-g-interface "GtkEditable" editable
+  (:export t
+   :type-initializer "gtk_editable_get_type")
+  ((cursor-position
+    editable-cursor-position
+    "cursor-position" "gint" t nil)
+   (editable
+    editable-editable
+    "editable" "gboolean" t t)
+   (enable-undo
+    editable-enable-undo
+    "enable-undo" "gboolean" t t)
+   (max-width-chars
+    editable-max-width-chars
+    "max-width-chars" "gint" t t)
+   (selection-bound
+    editable-selection-bound
+    "selection-bound" "gint" t nil)
+   (text
+    editable-text
+    "text" "gchararray" t t)
+   (width-chars
+    editable-width-chars
+    "width-chars" "gint" t t)
+   (xalign
+    editable-xalign
+    "xalign" "gfloat" t t)))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'editable)
+      "Interface"
+      (documentation 'editable 'type)
+ "@version{2022-9-10}
+  @begin{short}
+    The @sym{gtk:editable} interface is an interface which should be
+    implemented by text editing widgets, such as the @class{gtk:entry} and
+    @class{gtk:spin-button} widgets.
+  @end{short}
+  It contains functions for generically manipulating an editable widget, a large
+  number of action signals used for key bindings, and several signals that an
+  application can connect to to modify the behavior of a widget.
+  @begin[Example]{dictionary}
+    As an example of the latter usage, by connecting the following handler to
+    the \"insert-text\" signal, an application can convert all entry into a
+    widget into uppercase.
+
+    Forcing entry to uppercase.
+    @begin{pre}
+;; Handler for the \"insert-text\" signal
+(setf handlerid
+      (g:signal-connect entry \"insert-text\"
+          (lambda (editable text length position)
+            (g:signal-handler-block editable handlerid)
+            (gtk:editable-insert-text editable
+                                      (string-upcase text)
+                                      (mem-ref position :intptr))
+            (g:signal-stop-emission-by-name editable \"insert-text\")
+            (g:signal-handler-unblock editable handlerid))))
+    @end{pre}
+  @end{dictionary}
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"changed\" signal}
+      @begin{pre}
+lambda (editable)    :run-last
+      @end{pre}
+      The signal is emitted at the end of a single user visible operation on the
+      contents of the @sym{gtk:editable}. E.g., a paste operation that replaces
+      the contents of the selection will cause only one signal emission, even
+      though it is implemented by first deleting the selection, then inserting
+      the new content, and may cause multiple \"notify::text\" signals to be
+      emitted.
+      @begin[code]{table}
+        @entry[editable]{The @sym{gtk:editable} widget which received the
+          signal.}
+      @end{table}
+    @subheading{The \"delete-text\" signal}
+      @begin{pre}
+lambda (editable start end)    :run-last
+      @end{pre}
+      The signal is emitted when text is deleted from the widget by the user.
+      The default handler for this signal will normally be responsible for
+      deleting the text, so by connecting to this signal and then stopping the
+      signal with the @fun{g-signal-stop-emission} function, it is possible to
+      modify the range of deleted text, or prevent it from being deleted
+      entirely. The @arg{start} and @arg{end} parameters are interpreted as for
+      the @fun{gtk:editable-delete-text} function.
+      @begin[code]{table}
+        @entry[editable]{The @sym{gtk:editable} widget which received the
+          signal.}
+        @entry[start]{An integer with the starting position.}
+        @entry[end]{An integer with the end position.}
+      @end{table}
+    @subheading{The \"insert-text\" signal}
+      @begin{pre}
+lambda (editable text length position)    :run-last
+      @end{pre}
+      The signal is emitted when text is inserted into the widget by the user.
+      The default handler for this signal will normally be responsible for
+      inserting the text, so by connecting to this signal and then stopping the
+      signal with the @fun{g-signal-stop-emission} function, it is possible to
+      modify the inserted text, or prevent it from being inserted entirely.
+      @begin[code]{table}
+        @entry[editable]{The @sym{gtk:editable} widget which received the
+          signal.}
+        @entry[text]{A string with the new text to insert.}
+        @entry[length]{An integer with the length of the new text, in bytes, or
+          -1 if @arg{text} is nul-terminated.}
+        @entry[position]{A pointer to the position, in characters, at which to
+          insert the new text. This is an in-out parameter. After the signal
+          emission is finished, it should point after the newly inserted text.
+          You get the Lisp value of @arg{position} with the call
+          @code{(mem-ref position :intptr)}.}
+      @end{table}
+  @end{dictionary}
+  @see-class{gtk:entry}
+  @see-class{gtk:spin-button}")
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;; --- editable-cursor-position -----------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "cursor-position" 'editable) t)
+ "The @code{cursor-position} property of type @code{:int} (Read) @br{}
+  The current position of the insertion cursor in chars. @br{}
+  Allowed values: [0, 65535] @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'editable-cursor-position)
+      "Accessor"
+      (documentation 'editable-cursor-position 'function)
+ "@version{2022-6-12}
+  @syntax[]{(gtk:editable-cursor-position object) => position}
+  @syntax[]{(setf (gtk:editable-cursor-position object) position)}
+  @argument[object]{a @class{gtk:editable} widget}
+  @argument[position]{an integer with the current cursor position}
+  @begin{short}
+    Accessor of the @slot[gtk:editable]{cursor-position} slot of the
+    @class{gtk:editable} class.
+  @end{short}
+  The current position of the insertion cursor in chars.
+  @see-class{gtk:editable}")
+
+;;; --- editable-editable ------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "editable" 'editable) t)
+ "The @code{editable} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the entry contents can be edited. @br{}
+  Default value: @em{true}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'editable-editable)
+      "Accessor"
+      (documentation 'editable-editable 'function)
+ "@version{2022-9-10}
+  @syntax[]{(gtk:editable-editable object) => setting}
+  @syntax[]{(setf (gtk:editable-editable object) setting)}
+  @argument[object]{a @class{gtk:editable} widget}
+  @argument[setting]{a boolean whether the user is allowed to edit the text in
+    the widget}
+  @begin{short}
+    Accessor of the @slot[gtk:editable]{editable} slot of the
+    @class{gtk:editable} class.
+  @end{short}
+  The @sym{gtk:editable-editable} function retrieves whether @arg{object} is
+  editable. The @sym{(setf gtk:editable-editable)} function determines if the
+  user can edit the text in the editable widget or not.
+  @see-class{gtk:editable}")
+
+;;; --- editable-enable-undo ---------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "enable-undo" 'editable) t)
+ "The @code{enable-undo} property of type @code{:boolean} (Read / Write) @br{}
+  If undo/redo should be enabled for the editable widget. @br{}
+  Default value: @em{true}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'editable-enable-undo)
+      "Accessor"
+      (documentation 'editable-enable-undo 'function)
+ "@version{2022-6-12}
+  @syntax[]{(gtk:editable-enable-undo object) => setting}
+  @syntax[]{(setf (gtk:editable-enable-undo object) setting)}
+  @argument[object]{a @class{gtk:editable} widget}
+  @argument[setting]{a boolean whether undo is enabled}
+  @begin{short}
+    Accessor of the @slot[gtk:editable]{enable-undo} slot of the
+    @class{gtk:editable} class.
+  @end{short}
+  The @sym{gtk:editable-enable-undo} function gets if undo/redo actions are
+  enabled for the editable widget. The @sym{(setf gtk:editable-enable-undo)}
+  function sets the property.
+
+  If enabled, changes to editable will be saved for undo/redo actions.
+
+  This results in an additional copy of text changes and are not stored in
+  secure memory. As such, undo is forcefully disabled when the
+  @slot[gtk:text]{visibility} property is set to @em{false}.
+  @see-class{gtk:editable}
+  @see-function{gtk:text-visibility}")
+
+;;; --- editable-max-width-chars -----------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "max-width-chars" 'editable) t)
+ "The @code{max-width-chars} property of type @code{:int} (Read / Write) @br{}
+  The desired maximum width of the entry, in characters. @br{}
+  Allowed values: >= -1 @br{}
+  Default value: -1")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'editable-max-width-chars)
+      "Accessor"
+      (documentation 'editable-max-width-chars 'function)
+ "@version{2022-6-12}
+  @syntax[]{(gtk:editable-max-width-chars object) => max}
+  @syntax[]{(setf (gtk:editable-max-width-chars object) max)}
+  @argument[object]{a @class{gtk:editable} widget}
+  @argument[max]{an integer with the maximum width of the entry, in characters}
+  @begin{short}
+    Accessor of the @slot[gtk:editable]{max-width-chars} slot of the
+    @class{gtk:editable} class.
+  @end{short}
+  The @sym{gtk:editable-max-width-chars} function retrieves the desired maximum
+  width of the editable widget, in characters. The
+  @sym{(setf gtk:editable-max-width-chars)} function sets the desired maximum
+  width.
+  @see-class{gtk:editable}")
+
+;;; --- editable-selection-bound -----------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "selection-bound" 'editable) t)
+ "The @code{selection-bound} property of type @code{:int} (Read) @br{}
+  The position of the opposite end of the selection from the cursor in chars.
+  @br{}
+  Allowed values: [0, 65535] @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'editable-selection-bound)
+      "Accessor"
+      (documentation 'editable-selection-bound 'function)
+ "@version{2022-6-12}
+  @syntax[]{(gtk:editable-selection-bound object) => end}
+  @syntax[]{(setf (gtk:editable-selection-bound object) end)}
+  @argument[object]{a @class{gtk:editable} widget}
+  @argument[end]{an integer with the position of the opposite end of the
+    selection from the cursor in chars}
+  @begin{short}
+    Accessor of the @slot[gtk:editable]{selection-bound} slot of the
+    @class{gtk:editable} class.
+  @end{short}
+  The position of the opposite end of the selection from the cursor in chars.
+  @see-class{gtk:editable}")
+
+;;; --- editable-text ----------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "text" 'editable) t)
+ "The @code{text} property of type @code{:string} (Read / Write) @br{}
+  The contents of the entry. @br{}
+  Default value: \"\"")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'editable-text)
+      "Accessor"
+      (documentation 'editable-text 'function)
+ "@version{2022-9-9}
+  @syntax[]{(gtk:editable-text object) => text}
+  @syntax[]{(setf (gtk:editable-text object) text)}
+  @argument[object]{a @class{gtk:editable} widget}
+  @argument[text]{a string with the contents of the entry}
+  @begin{short}
+    Accessor of the @slot[gtk:editable]{text} slot of the @class{gtk:editable}
+    class.
+  @end{short}
+  The @sym{gtk:editable-text} function retrieves the contents of the editable.
+  The @sym{(setf gtk:editable-text)} function sets the text in the editable to
+  the given value, replacing the current contents.
+  @see-class{gtk:editable}")
+
+;;; --- editable-width-chars ---------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "width-chars" 'editable) t)
+ "The @code{width-chars} property of type @code{:int} (Read / Write) @br{}
+  Number of characters to leave space for in the editable. @br{}
+  Allowed values: >= -1 @br{}
+  Default value: -1")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'editable-width-chars)
+      "Accessor"
+      (documentation 'editable-width-chars 'function)
+ "@version{2022-6-12}
+  @syntax[]{(gtk:editable-width-chars object) => width}
+  @syntax[]{(setf (gtk:editable-width-chars object) width)}
+  @argument[object]{a @class{gtk:editable} widget}
+  @argument[width]{an integer with the width in chars}
+  @begin{short}
+    Accessor of the @slot[gtk:editable]{width-chars} slot of the
+    @class{gtk:editable} class.
+  @end{short}
+  The @sym{gtk:editable-width-chars} function gets the value of the width in
+  chars. The @sym{(setf gtk:editable-text)} function changes the size request
+  of the editable to be about the right size for @arg{width} characters.
+
+  Note that it changes the size request, the size can still be affected by how
+  you pack the widget into containers. If @arg{width} is -1, the size reverts
+  to the default size.
+  @see-class{gtk:editable}")
+
+;;; --- editable-xalign --------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "xalign" 'editable) t)
+ "The @code{xalign} property of type @code{:float} (Read / Write) @br{}
+  The horizontal alignment, from 0.0 (left) to 1.0 (right). Reversed for RTL
+  layouts. @br{}
+  Allowed values: [0.0, 1.0] @br{}
+  Default value: 0.0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'editable-xalign)
+      "Accessor"
+      (documentation 'editable-xalign 'function)
+ "@version{2022-6-12}
+  @syntax[]{(gtk:editable-xalign object) => align}
+  @syntax[]{(setf (gtk:editable-xalign object) align)}
+  @argument[object]{a @class{gtk:editable} widget}
+  @argument[align]{a float with the horizontal alignmemnt}
+  @begin{short}
+    Accessor of the @slot[gtk:editable]{xalign} slot of the @class{gtk:editable}
+    class.
+  @end{short}
+  The horizontal alignment, from 0.0 (left) to 1.0 (right). Reversed for RTL
+  layouts.
+  @see-class{gtk:editable}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_get_chars () -> editable-chars
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_editable_get_chars" %editable-get-chars) :string
+  (editable (g:object editable))
+  (start :int)
+  (end :int))
+
+(defun editable-chars (editable &key (start 0) (end -1))
+ #+liber-documentation
+ "@version{2020-5-30}
+  @argument[editable]{a @class{gtk:editable} object}
+  @argument[start]{an integer with the start of text}
+  @argument[end]{an integer with the end of text}
+  @return{A string with the contents of the widget.}
+  @begin{short}
+    Retrieves a sequence of characters.
+  @end{short}
+  The characters that are retrieved are those characters at positions from
+  @arg{start} up to, but not including @arg{end}. If @arg{end} is negative,
+  then the characters retrieved are those characters from @arg{start} to the
+  end of the text.
+
+  Note that positions are specified in characters, not bytes.
+  @see-class{gtk:editable}"
+  (%editable-get-chars editable start end))
+
+(export 'editable-chars)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_insert_text ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_editable_insert_text" %editable-insert-text) :void
+  (editable (g:object editable))
+  (text :string)
+  (length :int)
+  (position (:pointer :int)))
+
+(defun editable-insert-text (editable text position)
+ #+liber-documentation
+ "@version{2022-9-10}
+  @argument[editable]{a @class{gtk:editable} widget}
+  @argument[text]{a string with the text to insert}
+  @argument[position]{an integer with the position @arg{text} will be inserted
+    at}
+  @return{An integer with the position after the newly inserted text.}
+  @begin{short}
+    Inserts @arg{text} into the contents of the widget, at position
+    @arg{position}.
+  @end{short}
+  Note that @arg{position} is in characters, not in bytes. The function
+  returns the position to point after the newly inserted text.
+  @see-class{gtk:editable}"
+  (with-foreign-object (pos :int)
+    (setf (mem-ref pos :int) position)
+    (%editable-insert-text editable text -1 pos)
+    (mem-ref pos :int)))
+
+(export 'editable-insert-text)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_delete_text ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_editable_delete_text" %editable-delete-text) :void
+  (editable (g:object editable))
+  (start :int)
+  (end :int))
+
+(defun editable-delete-text (editable &key (start 0) (end -1))
+ #+liber-documentation
+ "@version{2020-6-1}
+  @argument[editable]{a @class{gtk:editable} widget}
+  @argument[start]{an integer with the start position}
+  @argument[end]{an integer with the end position}
+  @begin{short}
+    Deletes a sequence of characters.
+  @end{short}
+  The characters that are deleted are those characters at positions from
+  @arg{start} up to, but not including @arg{end}. If @arg{end} is negative,
+  then the characters deleted are those from @arg{start} to the end of the
+  text.
+
+  Note that the positions are specified in characters, not bytes.
+  @see-class{gtk:editable}"
+  (%editable-delete-text editable start end))
+
+(export 'editable-delete-text)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_get_selection_bounds () -> editable-selection-bounds
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_editable_get_selection_bounds" %editable-get-selection-bounds)
+     :boolean
+  (editable (g:object editable))
+  (start (:pointer :int))
+  (end (:pointer :int)))
+
+(defun editable-selection-bounds (editable)
+ "@version{2020-6-1}
+  @argument[editable]{a @class{gtk:editable} widget}
+  @begin{return}
+    @arg{selected-p} -- @em{true} if an area is selected, @em{false} otherwise
+      @br{}
+    @arg{start} -- an integer with the starting position, or @code{nil} @br{}
+    @arg{end} -- an integer with the end position, or @code{nil}
+  @end{return}
+  @begin{short}
+    Retrieves the selection bound of the editable.
+  @end{short}
+  @arg{start} will be filled with the start of the selection and @arg{end} with
+  end. If no text was selected both will be identical and @code{nil} will be
+  returned.
+
+  Note that positions are specified in characters, not bytes.
+  @see-class{gtk:editable}"
+  (with-foreign-objects ((start :int) (end :int))
+    (let ((selected-p (%editable-get-selection-bounds editable start end)))
+      (values selected-p
+              (mem-ref start :int)
+              (mem-ref end :int)))))
+
+(export 'editable-selection-bounds)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_select_region ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_editable_select_region" %editable-select-region) :void
+  (editable (g:object editable))
+  (start :int)
+  (end :int))
+
+(defun editable-select-region (editable &key (start 0) (end -1))
+ #+liber-documentation
+ "@version{2020-6-1}
+  @argument[editable]{a @class{gtk:editable} widget}
+  @argument[start]{an integer with the start of region}
+  @argument[end]{an integer with the end of region}
+  @begin{short}
+    Selects a region of text.
+  @end{short}
+  The characters that are selected are those characters at positions from
+  @arg{start} up to, but not including @arg{end}. If @arg{end} is negative,
+  then the the characters selected are those characters from @arg{start} to the
+  end of the text.
+
+  Note that positions are specified in characters, not bytes.
+  @see-class{gtk:editable}"
+  (%editable-select-region editable start end))
+
+(export 'editable-select-region)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_delete_selection ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_editable_delete_selection" editable-delete-selection) :void
+ #+liber-documentation
+ "@version{2020-6-1}
+  @argument[editable]{a @class{gtk:editable} widget}
+  @begin{short}
+    Deletes the currently selected text of the editable.
+  @end{short}
+  This call does not do anything if there is no selected text.
+  @see-class{gtk:editable}"
+  (editable (g:object editable)))
+
+(export 'editable-delete-selection)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_set_position ()
+;;; gtk_editable_get_position () -> editable-position
+;;; ----------------------------------------------------------------------------
+
+(defun (setf editable-position) (position editable)
+  (foreign-funcall "gtk_editable_set_position"
+                   (g:object editable) editable
+                   :int position
+                   :void)
+  position)
+
+(defcfun ("gtk_editable_get_position" editable-position) :int
+ #+liber-documentation
+ "@version{2020-6-1}
+  @syntax[]{(gtk:editable-position editable) => position}
+  @syntax[]{(setf (gtk:editable-position editable) position)}
+  @argument[editable]{a @class{gtk:editable} widget}
+  @argument[position]{an integer with the position of the cursor}
+  @begin{short}
+    Accessor of the cursor position in the editable.
+  @end{short}
+
+  The @sym{gtk:editable-position} function retrieves the current position of
+  the cursor relative to the start of the content of the editable. The
+  @sym{(setf gtk:editable-position)} function sets the cursor position in
+  the editable to the given value.
+
+  The cursor is displayed before the character with the given (base 0) index
+  in the contents of the editable. The value must be less than or equal to the
+  number of characters in the editable. A value of -1 indicates that the
+  position should be set after the last character of the editable. Note that
+  position is in characters, not in bytes.
+  @see-class{gtk:editable}"
+  (editable (g:object editable)))
+
+(export 'editable-position)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_get_alignment ()
+;;; gtk_editable_set_alignment () -> editable-alignment
+;;; ----------------------------------------------------------------------------
+
+(defun (setf editable-alignment) (align editable)
+  (setf (editable-xalign editable) align))
+
+(defun editable-alignment (editable)
+ #+liber-documentation
+ "@version{2022-6-12}
+  @syntax[]{(gtk:editable-alignment editable) => align}
+  @syntax[]{(setf (gtk:editable-alignment editable) align)}
+  @argument[editable]{a @class{gtk:editable} widget}
+  @argument[align]{an float with the horizontal alignment, from 0.0 (left) to
+    1.0 (right), reversed for RTL layouts}
+  @begin{short}
+    Accessor of the horizontal alignment of the editable.
+  @end{short}
+
+  The @sym{gtk:editable-alignment} function gets the value of the horizontal
+  alignment of the editable. The @sym{(setf gtk:editable-alignment)} function
+  sets the alignment for the contents of the editable.
+
+  This controls the horizontal positioning of the contents when the displayed
+  text is shorter than the width of the editable.
+  @see-class{gtk:editable}"
+  (editable-xalign editable))
+
+(export 'editable-alignment)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_install_properties ()
+;;;
+;;; guint
+;;; gtk_editable_install_properties (GObjectClass *object_class,
+;;;                                  guint first_prop);
+;;;
+;;; Installs the GtkEditable properties for class .
+;;;
+;;; This is a helper function that should be called in class_init, after
+;;; installing your own properties.
+;;;
+;;; To handle the properties in your set_property and get_property functions,
+;;; you can either use gtk_editable_delegate_set_property() and
+;;; gtk_editable_delegate_get_property() (if you are using a delegate), or
+;;; remember the first_prop offset and add it to the values in the
+;;; GtkEditableProperties enumeration to get the property IDs for these
+;;; properties.
+;;;
+;;; object_class :
+;;;     a GObjectClass
+;;;
+;;; first_prop :
+;;;     property ID to use for the first property
+;;;
+;;; Returns :
+;;;     the number of properties that were installed
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_get_delegate ()
+;;;
+;;; GtkEditable *
+;;; gtk_editable_get_delegate (GtkEditable *editable);
+;;;
+;;; Gets the GtkEditable that editable is delegating its implementation to.
+;;; Typically, the delegate is a GtkText widget.
+;;;
+;;; editable :
+;;;     a GtkEditable
+;;;
+;;; Returns :
+;;;     the delegate GtkEditable.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_init_delegate ()
+;;;
+;;; void
+;;; gtk_editable_init_delegate (GtkEditable *editable);
+;;;
+;;; Sets up a delegate for GtkEditable, assuming that the get_delegate vfunc in
+;;; the GtkEditable interface has been set up for the editable 's type.
+;;;
+;;; This is a helper function that should be called in instance init, after
+;;; creating the delegate object.
+;;;
+;;; editable :
+;;;     a GtkEditable
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_finish_delegate ()
+;;;
+;;; void
+;;; gtk_editable_finish_delegate (GtkEditable *editable);
+;;;
+;;; Undoes the setup done by gtk_editable_init_delegate().
+;;;
+;;; This is a helper function that should be called from dispose, before
+;;; removing the delegate object.
+;;;
+;;; editable :
+;;;     a GtkEditable
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_delegate_set_property ()
+;;;
+;;; gboolean
+;;; gtk_editable_delegate_set_property (GObject *object,
+;;;                                     guint prop_id,
+;;;                                     const GValue *value,
+;;;                                     GParamSpec *pspec);
+;;;
+;;; Sets a property on the GtkEditable delegate for object .
+;;;
+;;; This is a helper function that should be called in set_property, before
+;;; handling your own properties.
+;;;
+;;; object :
+;;;     a GObject
+;;;
+;;; prop_id :
+;;;     a property ID
+;;;
+;;; value :
+;;;     value to set
+;;;
+;;; pspec :
+;;;     the GParamSpec for the property
+;;;
+;;; Returns :
+;;;     TRUE if the property was found
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_delegate_get_property ()
+;;;
+;;; gboolean
+;;; gtk_editable_delegate_get_property (GObject *object,
+;;;                                     guint prop_id,
+;;;                                     GValue *value,
+;;;                                     GParamSpec *pspec);
+;;;
+;;; Gets a property of the GtkEditable delegate for object .
+;;;
+;;; This is helper function that should be called in get_property, before
+;;; handling your own properties.
+;;;
+;;; object :
+;;;     a GObject
+;;;
+;;; prop_id :
+;;;     a property ID
+;;;
+;;; value :
+;;;     value to set
+;;;
+;;; pspec :
+;;;     the GParamSpec for the property
+;;;
+;;; Returns :
+;;;     TRUE if the property was found
+;;; ----------------------------------------------------------------------------
+
+;;; --- End of file gtk.editable.lisp ------------------------------------------

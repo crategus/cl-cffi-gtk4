@@ -1,0 +1,368 @@
+;;; ----------------------------------------------------------------------------
+;;; gtk.drawing-area.lisp
+;;;
+;;; The documentation of this file is taken from the GTK 4 Reference Manual
+;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
+;;;
+;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
+;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;;
+;;; This program is free software: you can redistribute it and/or modify
+;;; it under the terms of the GNU Lesser General Public License for Lisp
+;;; as published by the Free Software Foundation, either version 3 of the
+;;; License, or (at your option) any later version and with a preamble to
+;;; the GNU Lesser General Public License that clarifies the terms for use
+;;; with Lisp programs and is referred as the LLGPL.
+;;;
+;;; This program is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;; GNU Lesser General Public License for more details.
+;;;
+;;; You should have received a copy of the GNU Lesser General Public
+;;; License along with this program and the preamble to the Gnu Lesser
+;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
+;;; and <http://opensource.franz.com/preamble.html>.
+;;; ----------------------------------------------------------------------------
+;;;
+;;; GtkDrawingArea
+;;;
+;;;     A widget for custom user interface elements
+;;;
+;;; Types and Values
+;;;
+;;;     GtkDrawingArea
+;;;
+;;; Accessors
+;;;
+;;;     gtk_drawing_area_get_content_height
+;;;     gtk_drawing_area_set_content_height
+;;;     gtk_drawing_area_get_content_width
+;;;     gtk_drawing_area_set_content_width
+;;;
+;;; Callbacks
+;;;
+;;;     GtkDrawingAreaDrawFunc
+;;;
+;;; Functions
+;;;
+;;;     gtk_drawing_area_new
+;;;     gtk_drawing_area_set_draw_func
+;;;
+;;; Properties
+;;;
+;;;     content-height
+;;;     content-width
+;;;
+;;; Signals
+;;;
+;;;     resize
+;;;
+;;; Hierarchy
+;;;
+;;;     GObject
+;;;     ╰── GInitiallyUnowned
+;;;         ╰── GtkWidget
+;;;             ╰── GtkDrawingArea
+;;;
+;;; Implemented Interfaces
+;;;
+;;;     GtkAccessible
+;;;     GtkBuildable
+;;;     GtkConstraintTarget
+;;; ----------------------------------------------------------------------------
+
+(in-package :gtk)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkDrawingArea
+;;; ----------------------------------------------------------------------------
+
+(define-g-object-class "GtkDrawingArea" drawing-area
+  (:superclass widget
+   :export t
+   :interfaces ("GtkAccessible"
+                "GtkBuildable"
+                "GtkConstraintTarget")
+   :type-initializer "gtk_drawing_area_get_type")
+  ((content-height
+    drawing-area-content-height
+    "content-height" "gint" t t)
+   (content-width
+    drawing-area-content-width
+    "content-width" "gint" t t)))
+
+#+liber-documentation
+(setf (documentation 'drawing-area 'type)
+ "@version{#2022-8-20}
+  @begin{short}
+    The @sym{gtk:drawing-area} widget is a widget that allows drawing with
+    Cairo.
+  @end{short}
+  It is essentially a blank widget. You can draw on it.
+
+  @image[drawing-area]{Figure: GtkDrawingArea}
+
+  After creating a drawing area, the application may want to connect to:
+  @begin{itemize}
+    @begin{item}
+      The \"GtkWidget::realize\" signal to take any necessary actions when the
+      widget is instantiated on a particular display. Create GDK resources in
+      response to this signal.
+    @end{item}
+    @begin{item}
+      The \"GtkDrawingArea::resize\" signal to take any necessary actions when
+      the widget changes size.
+    @end{item}
+    @begin{item}
+      Call the @fun{gtk:drawing-area-set-draw-func} function to handle redrawing
+      the contents of the widget.
+    @end{item}
+  @end{itemize}
+  The draw function is normally called when a drawing area first comes onscreen,
+  or when it is covered by another window and then uncovered. You can also force
+  a redraw by adding to the \"damage region\" of the drawing area’s window using
+  the @fun{gtk:widget-queue-draw} function. This will cause the drawing area to
+  call the draw function again.
+
+  The available routines for drawing are documented in the Cairo documentation.
+  GDK offers additional API to integrate with Cairo, like the
+  @fun{gdk:cairo-set-source-rgba} or @fun{gdk:cairo-set-source-pixbuf}
+  functions.
+
+  To receive mouse events on a drawing area, you will need to use event
+  controllers. To receive keyboard events, you will need to set the
+  \"can-focus\" property on the drawing area, and you should probably draw some
+  user-visible indication that the drawing area is focused.
+
+  If you need more complex control over your widget, you should consider
+  creating your own GtkWidget subclass.
+  @begin[Example]{dictionary}
+    The following example demonstrates using a drawing area to display a
+    circle in the normal widget foreground color.
+    @begin{pre}
+(defun do-drawing-area (&optional application)
+  (let* (;; Create the drawing area
+         (area (make-instance 'gtk:drawing-area))
+         (window (make-instance 'gtk:window
+                                :application application
+                                :child area
+                                :title \"Example Drawing Area\"
+                                :default-width 400
+                                :default-height 300)))
+    ;; Set a drawing function
+    (gtk:drawing-area-set-draw-func area
+        (lambda (widget cr width height)
+          (let* ((context (gtk:widget-style-context widget))
+                 (color (gtk:style-context-color context)))
+            ;; Set the color from the style context of the widget
+            (gdk:cairo-set-source-rgba cr color)
+            ;; Draw and fill a circle on the drawing area
+            (cairo-arc cr
+                       (/ width 2.0)
+                       (/ height 2.0)
+                       (- (/ (min width height) 2.0) 12)
+                       0.0
+                       (* 2.0 pi))
+            (cairo-fill cr))))
+    ;; Show the window
+    (gtk:widget-show window)))
+    @end{pre}
+  @end{dictionary}
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"resize\" signal}
+      @begin{pre}
+lambda (area width height)    :run-last
+      @end{pre}
+      The signal is emitted once when the widget is realized, and then each
+      time the widget is changed while realized. This is useful in order to
+      keep state up to date with the widget size, like for instance a backing
+      surface.
+      @begin[code]{table}
+        @entry[area]{The @sym{gtk:drawing-area} widget that emitted the
+          signal.}
+        @entry[width]{An integer with the width of the viewport.}
+        @entry[height]{An integer with the height of the viewport.}
+      @end{table}
+  @end{dictionary}
+  @see-slot{gtk:drawing-area-content-height}
+  @see-slot{gtk:drawing-area-content-width}
+  @see-constructor{gtk:drawing-area-new}")
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;; --- drawing-area-content-height ----------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "content-height"
+                                               'drawing-area) t)
+ "The @code{content-height} property of type @code{:int} (Read / Write) @br{}
+  The content height. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'drawing-area-content-height)
+      "Accessor"
+      (documentation 'drawing-area-content-height 'function)
+ "@version{#2022-8-20}
+  @syntax[]{(gtk:drawing-area-content-height object) => height}
+  @syntax[]{(setf gtk:drawing-area-content-height object) height)}
+  @argument[object]{a @class{gtk:drawing-area} widget}
+  @argument[height]{an integer with the content height}
+  @begin{short}
+    Accessor of the @slot[gtk:drawing-area]{content-height} slot of the
+    @class{gtk:drawing-area} class.
+  @end{short}
+  The @sym{gtk:drawing-area-content-height} function retrieves the content
+  height of the drawing area. The @sym{(setf gtk:drawing-area-content-height)}
+  function sets the desired height of the contents.
+
+  Note that because widgets may be allocated larger sizes than they requested,
+  it is possible that the actual height passed to your draw function is larger
+  than the height set here. You can use the @fun{gtk:widget-valign} function to
+  avoid that.
+
+  If the height is set to 0, the default, the drawing area may disappear.
+  @see-class{gtk:drawing-area}
+  @see-function{gtk:drawing-area-content-width}
+  @see-function{gtk:widget-valign}")
+
+;;; --- drawing-area-content-width -----------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "content-width"
+                                               'drawing-area) t)
+ "The @code{content-width} property of type @code{:int} (Read / Write) @br{}
+  The content width. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'drawing-area-content-width)
+      "Accessor"
+      (documentation 'drawing-area-content-width 'function)
+ "@version{#2022-8-20}
+  @syntax[]{(gtk:drawing-area-content-width object) => width}
+  @syntax[]{(setf gtk:drawing-area-content-width object) width)}
+  @argument[object]{a @class{gtk:drawing-area} widget}
+  @argument[width]{an integer with the content height}
+  @begin{short}
+    Accessor of the @slot[gtk:drawing-area]{content-width} slot of the
+    @class{gtk:drawing-area} class.
+  @end{short}
+  The @sym{gtk:drawing-area-content-width} function retrieves the content
+  width of the drawing area. The @sym{(setf gtk:drawing-area-content-width)}
+  function sets the desired width of the contents.
+
+  Note that because widgets may be allocated larger sizes than they requested,
+  it is possible that the actual height passed to your draw function is larger
+  than the height set here. You can use the @fun{gtk:widget-halign} function to
+  avoid that.
+
+  If the height is set to 0, the default, the drawing area may disappear.
+  @see-class{gtk:drawing-area}
+  @see-function{gtk:drawing-area-content-width}
+  @see-function{gtk:widget-halign}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_drawing_area_new
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline drawing-area-new))
+
+(defun drawing-area-new ()
+ #+liber-documentation
+ "@version{#2022-8-20}
+  @return{A new @class{gtk:drawing-area} widget.}
+  @short{Creates a new drawing area.}
+  @see-class{gtk:drawing-area}"
+  (make-instance 'drawing-area))
+
+(export 'drawing-area-new)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkDrawingAreaDrawFunc
+;;; ----------------------------------------------------------------------------
+
+(defcallback drawing-area-draw-func :void
+    ((area (g:object drawing-area))
+     (cr (:pointer (:struct cairo:context-t)))
+     (width :int)
+     (height :int)
+     (data :pointer))
+  (let ((ptr (get-stable-pointer-value data)))
+    (funcall ptr area cr width height)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'drawing-area-draw-func)
+      "Callback"
+      (liber:symbol-documentation 'drawing-area-draw-func)
+ "@version{#2022-8-20}
+  @begin{short}
+    Whenever the drawing area needs to redraw, this callback function will be
+    called.
+  @end{short}
+  This function should exclusively redraw the contents of the drawing area and
+  must not call any widget functions that cause changes.
+  @begin{pre}
+lambda (area cr width height)
+  @end{pre}
+  @begin[code]{table}
+    @entry[area]{A @class{gtk:drawing-area} widget.}
+    @entry[cr]{A @sym{cairo:context-t} instance to draw to.}
+    @entry[height]{An integer with the actual width of the contents.}
+    @entry[width]{An integer with the actual height of the contents.}
+  @end{table}
+  @see-class{gtk:drawing-area}
+  @see-function{gtk:drawing-area-content-height}
+  @see-function{gtk:drawing-area-content-width}")
+
+(export 'drawing-area-draw-func)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_drawing_area_set_draw_func
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_drawing_area_set_draw_func" %drawing-area-set-draw-func)
+    :void
+  (area (g:object drawing-area))
+  (func :pointer)
+  (data :pointer)
+  (destroy :pointer))
+
+(defun drawing-area-set-draw-func (area func)
+ #+liber-documentation
+ "@version{#2022-8-20}
+  @argument[area]{a @class{gtk:drawing-area} widget}
+  @argument[func]{a @symbol{gtk:drawing-area-draw-func} callback function}
+  @begin{short}
+    Setting a draw function is the main thing you want to do when using a
+    drawing area.
+  @end{short}
+  The draw function is called whenever GTK needs to draw the contents of the
+  drawing area to the screen.
+
+  The draw function will be called during the drawing stage of GTK. In the
+  drawing stage it is not allowed to change properties of any GTK widgets or
+  call any functions that would cause any properties to be changed. You should
+  restrict yourself exclusively to drawing your contents in the draw function.
+
+  If what you are drawing does change, call the @fun{gtk:widget-queue-draw}
+  function on the drawing area. This will cause a redraw and will call the draw
+  function again.
+  @see-class{gtk:drawing-area}
+  @see-symbol{gtk:drawing-area-draw-func}
+  @see-function{gtk:widget-queue-draw}"
+  (%drawing-area-set-draw-func area
+      (callback drawing-area-draw-func)
+      (glib:allocate-stable-pointer func)
+      (callback glib:stable-pointer-destroy-notify)))
+
+(export 'drawing-area-set-draw-func)
+
+;;; --- End of file gtk.drawing-area.lisp --------------------------------------
