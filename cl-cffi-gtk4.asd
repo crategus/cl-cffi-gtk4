@@ -695,7 +695,7 @@
 
      ;; GDK
      (:file "rtest-gdk4")
-;    (:file "rtest-gdk4-rgba")
+     (:file "rtest-gdk4-rgba")
      (:file "rtest-gdk4-event")
 
      ;; GSK
