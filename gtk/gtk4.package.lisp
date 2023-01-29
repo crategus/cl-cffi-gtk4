@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.package.lisp
+;;; gtk4.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -1730,20 +1730,18 @@
   @end{section}
   @begin[Tree, List and Icon Grid Widgets]{section}
     @begin[GtkTreeModel]{subsection}
-      The tree interface used by the @class{tree-view} widget.
+      The tree interface used by the @class{gtk:tree-view} widget.
       @about-class{tree-path}
       @about-function{tree-path-new}
+      @about-function{tree-path-copy}
       @about-function{tree-path-new-from-string}
       @about-function{tree-path-new-from-indices}
-      @about-function{tree-path-to-string}
       @about-function{tree-path-new-first}
+      @about-function{tree-path-to-string}
       @about-function{tree-path-append-index}
       @about-function{tree-path-prepend-index}
       @about-function{tree-path-depth}
       @about-function{tree-path-indices}
-      @about-function{tree-path-indices-with-depth}
-      @about-function{tree-path-free}
-      @about-function{tree-path-copy}
       @about-function{tree-path-compare}
       @about-function{tree-path-next}
       @about-function{tree-path-prev}
@@ -1753,12 +1751,11 @@
       @about-function{tree-path-is-descendant}
       @about-class{tree-row-reference}
       @about-function{tree-row-reference-new}
+      @about-function{tree-row-reference-copy}
       @about-function{tree-row-reference-new-proxy}
       @about-function{tree-row-reference-model}
       @about-function{tree-row-reference-path}
       @about-function{tree-row-reference-valid}
-      @about-function{tree-row-reference-free}
-      @about-function{tree-row-reference-copy}
       @about-function{tree-row-reference-inserted}
       @about-function{tree-row-reference-deleted}
       @about-function{tree-row-reference-reordered}
@@ -4092,4 +4089,4 @@
   @end{section}
 |#
 
-;;; --- End of file gtk.package.lisp -------------------------------------------
+;;; --- End of file gtk4.package.lisp ------------------------------------------

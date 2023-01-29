@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; cl-cffi-gtk4.asd
 ;;;
-;;; Copyright (C) 2021 - 2022 Dieter Kaiser
+;;; Copyright (C) 2021 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -318,7 +318,7 @@
      (:file "gtk4.im-multicontext")       ; GtkIMMulticontext
 
      ;; Recently Used Documents
-     (:file "gtk4.recent-manager")        ; GtkRecentManager
+     (:file "gtk4.recent-manager")        ; Managing recently used files
 
      ;; Choosing from installed applications
      (:file "gtk4.app-chooser")             ; GtkAppChooser
@@ -396,7 +396,7 @@
   :depends-on (:cl-cffi-gtk4 :fiveam)
   :perform (test-op (o c)
                (uiop:symbol-call :fiveam :run!
-                                 (uiop:find-symbol* :gtk-tests
+                                 (uiop:find-symbol* :gtk-test
                                                     :gtk-test)))
   :components
   ((:module test
@@ -404,7 +404,6 @@
     :components
     (;; GTK tests
      (:file "rtest-gtk4")
-     (:file "rtest-gtk4-utilities")
 
       ;; GListModel support
 ;      (:file "gtk4.expression")             ; GtkExpression
@@ -521,7 +520,7 @@
 ;    (:file "gtk4.text-view")             ; GtkTextView
 
      ;; Tree, List and Icon Grid Widgets
-;    (:file "gtk4.tree-model")            ; GtkTreeModel, GtkTreeIter, GtkTreePath
+     (:file "rtest-gtk4-tree-model")      ; GtkTreeModel, GtkTreeIter, GtkTreePath
 ;    (:file "gtk4.tree-selection")        ; GtkTreeSelection
 ;    (:file "gtk4.tree-view-column")      ; GtkTreeViewColumn
 ;    (:file "gtk4.tree-view")             ; GtkTreeView
@@ -637,7 +636,7 @@
 ;    (:file "gtk4.im-multicontext")           ; GtkIMMulticontext
 
      ;; Recently Used Documents
-;    (:file "gtk4.recent-manager")            ; GtkRecentManager
+     (:file "rtest-gtk4-recent-manager")      ; Managing recently used files
 
      ;; Choosing from installed applications
 ;    (:file "gtk4.app-chooser")              ; GtkAppChooser
@@ -694,12 +693,10 @@
      (:file "rtest-gtk4-application-window") ; GtkApplicationWindow
 
      ;; GDK
-     (:file "rtest-gdk4")
      (:file "rtest-gdk4-rgba")
      (:file "rtest-gdk4-event")
 
      ;; GSK
-;    (:file "rtest-gsk")
 ))))
 
 ;;; --- cl-cffi-gtk4.asd -------------------------------------------------------
