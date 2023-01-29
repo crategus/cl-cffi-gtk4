@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.tree-selection.lisp
+;;; gtk4.tree-selection.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -435,14 +435,13 @@ lambda (model path iter)
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_tree_selection_get_selected_rows"
-          %tree-selection-selected-rows)
-    (g:list-t (g:boxed tree-path))
+          %tree-selection-selected-rows) (g:list-t (g:boxed tree-path :return))
   (selection (g:object tree-selection))
   (model :pointer))
 
 (defun tree-selection-selected-rows (selection)
  #+liber-documentation
- "@version{#2022-1-23}
+ "@version{2023-1-28}
   @argument[selection]{a @class{gtk:tree-selection} object}
   @return{A list containing a @class{gtk:tree-path} instance for each selected
     row.}
@@ -462,7 +461,7 @@ lambda (model path iter)
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-row-reference}
   @see-function{gtk:tree-row-reference-new}"
-  (%tree-selection-selected-rows selection (null-pointer)))
+  (%tree-selection-selected-rows selection (cffi:null-pointer)))
 
 (export 'tree-selection-selected-rows)
 
@@ -686,4 +685,4 @@ lambda (model path iter)
 
 (export 'tree-selection-unselect-range)
 
-;;; --- End of file gtk.tree-selection.lisp ------------------------------------
+;;; --- End of file gtk4.tree-selection.lisp -----------------------------------

@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.tree-view.lisp
+;;; gtk4.tree-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -1755,17 +1755,17 @@ lambda (view)    :action
 
 (defcfun ("gtk_tree_view_get_cursor" %tree-view-get-cursor) :void
   (view (g:object tree-view))
-  (path (g:boxed tree-path))
-  (focus (g:object tree-view-column)))
+  (path :pointer)
+  (focus :pointer))
 
 (defun tree-view-get-cursor (view)
  #+liber-documentation
- "@version{#2021-2-26}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:tree-view} widget}
   @begin{return}
-    @arg{path} -- the current @class{gtk:tree-path} cursor path, or @code{nil}
+    @arg{path} -- a current @class{gtk:tree-path} cursor path, or @code{nil}
       @br{}
-    @arg{focus} -- the current @class{gtk:tree-view-column} focus column,
+    @arg{focus} -- a current @class{gtk:tree-view-column} focus column,
       or @code{nil}
   @end{return}
   @begin{short}
@@ -1778,8 +1778,8 @@ lambda (view)    :action
   @see-class{gtk:tree-view-column}"
   (with-foreign-objects ((path :pointer) (focus :pointer))
     (%tree-view-get-cursor view path focus)
-    (values (mem-ref path '(g:boxed tree-path :return))
-            (mem-ref focus '(g:object tree-view-column)))))
+    (values (cffi:mem-ref path '(g:boxed tree-path :return))
+            (cffi:mem-ref focus '(g:object tree-view-column)))))
 
 (export 'tree-view-get-cursor)
 
@@ -1986,8 +1986,6 @@ lambda (view)    :action
 ;;; gtk_tree_view_get_path_at_pos () -> tree-view-path-at-pos
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Check the implementation and documentation
-
 (defcfun ("gtk_tree_view_get_path_at_pos" %tree-view-path-at-pos) :boolean
   (view (g:object tree-view))
   (x :int)
@@ -1999,17 +1997,17 @@ lambda (view)    :action
 
 (defun tree-view-path-at-pos (view x y)
  #+liber-documentation
- "@version{#2021-2-26}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[x]{an integer with the x position to be identified (relative to
     the bin window)}
   @argument[y]{an integer with the y position to be identified (relative to
     the bin window)}
   @begin{return}
-    @arg{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
-    @arg{column} -- a @class{gtk:tree-view-column} object, or @code{nil} @br{}
-    @arg{cell-x} -- an integer with the x coordinate relative to the cell @br{}
-    @arg{cell-y} -- an integer with the y coordinate relative to the cell
+    @code{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
+    @code{column} -- a @class{gtk:tree-view-column} object, or @code{nil} @br{}
+    @code{cell-x} -- an integer with the x coordinate relative to the cell @br{}
+    @code{cell-y} -- an integer with the y coordinate relative to the cell
   @end{return}
   @begin{short}
     Finds the path at the point (@arg{x}, @arg{y}), relative to the bin window
@@ -2046,14 +2044,14 @@ lambda (view)    :action
                          (cell-x :int)
                          (cell-y :int))
     (when (%tree-view-path-at-pos view
-                                      x y
-                                      path
-                                      column
-                                      cell-x cell-y)
-      (values (mem-ref path '(g:boxed tree-path :return))
-              (mem-ref column '(g:object tree-view-column))
-              (mem-ref cell-x :int)
-              (mem-ref cell-y :int)))))
+                                  x y
+                                  path
+                                  column
+                                  cell-x cell-y)
+      (values (cffi:mem-ref path '(g:boxed tree-path :return))
+              (cffi:mem-ref column '(g:object tree-view-column))
+              (cffi:mem-ref cell-x :int)
+              (cffi:mem-ref cell-y :int)))))
 
 (export 'tree-view-path-at-pos)
 
@@ -2075,18 +2073,18 @@ lambda (view)    :action
 
 (defun tree-view-is-blank-at-pos (view x y)
  #+liber-documentation
- "@version{#2021-2-26}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[x]{an integer with the x position to be identified (relative to
     the bin window)}
   @argument[y]{an integer with the y position to be identified (relative to
     the bin window)}
   @begin{return}
-    @arg{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
-    @arg{column} -- a @class{gtk:tree-view-column} object, or @code{nil} @br{}
-    @arg{cell-x} -- an integer with the x coordinate relative to the cell,
+    @code{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
+    @code{column} -- a @class{gtk:tree-view-column} object, or @code{nil} @br{}
+    @code{cell-x} -- an integer with the x coordinate relative to the cell,
       or @code{nil} @br{}
-    @arg{cell-y} -- an integer where the y coordinate relative to the cell,
+    @code{cell-y} -- an integer where the y coordinate relative to the cell,
       or @code{nil}
   @end{return}
   @begin{short}
@@ -2120,14 +2118,14 @@ lambda (view)    :action
                          (cell-x :int)
                          (cell-y :int))
     (when (%tree-view-is-blank-at-pos view
-                                          x y
-                                          path
-                                          column
-                                          cell-x cell-y)
-      (values (mem-ref path '(g:boxed tree-path :return))
-              (mem-ref column 'g:object)
-              (mem-ref cell-x :int)
-              (mem-ref cell-y :int)))))
+                                      x y
+                                      path
+                                      column
+                                      cell-x cell-y)
+      (values (cffi:mem-ref path '(g:boxed tree-path :return))
+              (cffi:mem-ref column 'g:object)
+              (cffi:mem-ref cell-x :int)
+              (cffi:mem-ref cell-y :int)))))
 
 (export 'tree-view-is-blank-at-pos)
 
@@ -2258,12 +2256,12 @@ lambda (view)    :action
 
 (defun tree-view-visible-range (view)
  #+liber-documentation
- "@version{#2021-2-26}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:tree-view} widget}
   @begin{return}
-    @arg{start} -- a @class{gtk:tree-path} instance with the start of region,
+    @code{start} -- a @class{gtk:tree-path} instance with the start of region,
       or @code{nil} @br{}
-    @arg{end} -- a @class{gtk:tree-path} instance with the end of region,
+    @code{end} -- a @class{gtk:tree-path} instance with the end of region,
       or @code{nil}
   @end{return}
   @begin{short}
@@ -2274,8 +2272,8 @@ lambda (view)    :action
   @see-class{gtk:tree-path}"
   (with-foreign-objects ((start :pointer) (end :pointer))
     (when (%tree-view-visible-range view start end)
-      (values (mem-ref start '(g:boxed tree-path :return))
-              (mem-ref end '(g:boxed tree-path :return))))))
+      (values (cffi:mem-ref start '(g:boxed tree-path :return))
+              (cffi:mem-ref end '(g:boxed tree-path :return))))))
 
 (export 'tree-view-visible-range)
 
@@ -3128,35 +3126,33 @@ lambda (view)    :action
 ;;; gtk_tree_view_get_tooltip_context () -> tree-view-tooltip-context
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: This implementation is not correct. The arguments x,y are pointers.
-
 (defcfun ("gtk_tree_view_get_tooltip_context" %tree-view-tooltip-context)
     :boolean
   (view (g:object tree-view))
-  (x :int)
-  (y :int)
+  (x (:pointer :int))
+  (y (:pointer :int))
   (tip :boolean)
   (model :pointer)
   (path :pointer)
   (iter :pointer))
 
-(defun tree-view-tooltip-context (tree-view)
+(defun tree-view-tooltip-context (view)
  #+liber-documentation
  "@version{1111-11-11}
   @argument[view]{a @class{gtk:tree-view} widget}
   @begin{return}
-    @arg{x} -- a @code{:int} with the x coordinate (relative to widget
+    @code{x} -- an integer with the x coordinate (relative to widget
       coordinates) @br{}
-    @arg{y} -- a @code{:int} with the y coordinate (relative to widget
+    @code{y} -- an integer with the y coordinate (relative to widget
       coordinates) @br{}
-    @arg{tip} -- a boolean whether this is a keyboard tooltip or not @br{}
-    @arg{model} -- a @class{gtk:tree-model} or @code{nil} @br{}
-    @arg{path} -- a @class{gtk:tree-path} or @code{nil} @br{}
-    @arg{iter} -- a @class{gtk:tree-iter} or @code{nil}
+    @code{tip} -- a boolean whether this is a keyboard tooltip or not @br{}
+    @code{model} -- a @class{gtk:tree-model} object or @code{nil} @br{}
+    @code{path}  -- a @class{gtk:tree-path} instance or @code{nil} @br{}
+    @code{iter}  -- a @class{gtk:tree-iter} iterator or @code{nil}
   @end{return}
   @begin{short}
     This function is supposed to be used in a \"query-tooltip\" signal handler
-    for @class{gtk:tree-view}.
+    for @class{gtk:tree-view} widgets.
   @end{short}
   The @arg{x}, @arg{y} and @arg{tip} values which are received in the signal
   handler, should be passed to this function without modification.
@@ -3166,29 +3162,29 @@ lambda (view)    :action
   tooltips the row returned will be the cursor row. When @em{true}, then any of
   @arg{model}, @arg{path} and @arg{iter} which have been provided will be set to
   point to that row and the corresponding model. @arg{x} and @arg{y} will always
-  be converted to be relative to @arg{tree-view}'s \"bin window\" if @arg{tip}
+  be converted to be relative to @arg{view}'s \"bin window\" if @arg{tip}
   is @em{false}.
   @see-class{gtk:tree-view}"
   (with-foreign-objects ((x :int)
                          (y :int)
-                         (keyboard-tip :boolean)
+                         (tip :boolean)
                          (model :pointer)
                          (path :pointer)
                          (iter :pointer))
-    (when (%tree-view-tooltip-context tree-view
-                                          x
-                                          y
-                                          keyboard-tip
-                                          model
-                                          path
-                                          iter)
-      (values (mem-ref x :int)
-              (mem-ref y :int)
-              (mem-ref keyboard-tip :boolean)
-              (mem-ref model 'g:object)
-              (mem-ref path '(g:boxed tree-path :return))
-              (mem-ref iter '(g:boxed tree-iter :return))))))
+    (when (%tree-view-tooltip-context view
+                                      x
+                                      y
+                                      tip
+                                      model
+                                      path
+                                      iter)
+      (values (cffi:mem-ref x :int)
+              (cffi:mem-ref y :int)
+              (cffi:mem-ref tip :boolean)
+              (cffi:mem-ref model 'g:object)
+              (cffi:mem-ref path '(g:boxed tree-path :return))
+              (cffi:mem-ref iter '(g:boxed tree-iter :return))))))
 
 (export 'tree-view-tooltip-context)
 
-;;; --- End of file gtk.tree-view.lisp -----------------------------------------
+;;; --- End of file gtk4.tree-view.lisp ----------------------------------------

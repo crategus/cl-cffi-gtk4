@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.css-provider.lisp
+;;; gtk4.css-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.9 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2022 Dieter Kaiser
+;;; Copyright (C) 2013 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -238,25 +238,20 @@
 ;;; GtkCssSection
 ;;; ----------------------------------------------------------------------------
 
-(glib-init:at-init () (foreign-funcall "gtk_css_section_get_type" :size))
-
 (define-g-boxed-opaque css-section "GtkCssSection"
+  :type-initializer "gtk_css_section_get_type"
   :alloc (error "GtkCssSection cannot be created from the Lisp side."))
 
 #+liber-documentation
 (setf (liber:alias-for-class 'css-section)
       "GBoxed"
       (documentation 'css-section 'type)
- "@version{#2022-8-20}
+ "@version{#2023-1-24}
   @begin{short}
     Defines a part of a CSS document.
   @end{short}
   Because sections are nested into one another, you can use the
   @fun{gtk:css-section-parent} function to get the containing region.
-  @begin{pre}
-(define-g-boxed-opaque css-section \"GtkCssSection\"
-  :alloc (error \"GtkCssSection cannot be created from the Lisp side.\"))
-  @end{pre}
   @see-class{gtk:css-provider}
   @see-function{gtk:css-section-parent}")
 
@@ -409,8 +404,8 @@ lambda (provider section error)    :run-last
   that GTK uses for loading its own theme.
   @see-class{gtk:css-provider}"
   (%css-provider-load-named provider
-                                name
-                                (if variant variant (null-pointer))))
+                            name
+                            (if variant variant (null-pointer))))
 
 (export 'css-provider-load-named)
 
@@ -468,12 +463,16 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_load_from_path
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_provider_load_from_path" css-provider-load-from-path) :void
+(defcfun ("gtk_css_provider_load_from_path" %css-provider-load-from-path) :void
+  (provider (g:object css-provider))
+  (path :string))
+
+(defun css-provider-load-from-path (provider path)
  #+liber-documentation
- "@version{2022-11-25}
+ "@version{2023-1-29}
   @argument[provider]{a @class{gtk:css-provider} object}
-  @argument[path]{a string with the path of a file to load, in the GLib
-    filename encoding}
+  @argument[path]{a pathname or namestring with the path of a file to load, in
+    the GLib filename encoding}
   @begin{short}
     Loads the data contained in @arg{path} into the CSS provider, making it
     clear any previously loaded information.
@@ -481,8 +480,7 @@ lambda (provider section error)    :run-last
   To track errors while loading CSS, connect to the \"parsing-error\" signal
   of the @class{gtk:css-provider} object.
   @see-class{gtk:css-provider}"
-  (provider (g:object css-provider))
-  (path :string))
+  (%css-provider-load-from-path provider (namestring path)))
 
 (export 'css-provider-load-from-path)
 
@@ -552,8 +550,7 @@ lambda (provider section error)    :run-last
 ;;; gtk:css-section-new
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_section_new" css-section-new)
-    (g:boxed css-section)
+(defcfun ("gtk_css_section_new" css-section-new) (g:boxed css-section :return)
  #+liber-documentation
  "@version{#2022-8-20}
   @argument[file]{a @class{g-file} object this section refers to}
@@ -663,8 +660,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_section_get_parent  -> css-section-parent
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_section_get_parent" css-section-parent)
-    (g:boxed css-section)
+(defcfun ("gtk_css_section_get_parent" css-section-parent) (g:boxed css-section)
  #+liber-documentation
  "@version{#2022-8-20}
   @argument[section]{a @class{gtk:css-section} instance}
@@ -718,4 +714,4 @@ lambda (provider section error)    :run-last
 
 (export 'css-section-end-location)
 
-;;; --- End of file gtk.css-provider.lisp --------------------------------------
+;;; --- End of file gtk4.css-provider.lisp -------------------------------------

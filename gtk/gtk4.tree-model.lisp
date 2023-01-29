@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.tree-model.lisp
+;;; gtk4.tree-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -220,19 +220,19 @@
 ;;; GtkTreePath
 ;;; ----------------------------------------------------------------------------
 
-(glib-init:at-init () (foreign-funcall "gtk_tree_path_get_type" :size))
-
 (define-g-boxed-opaque tree-path "GtkTreePath"
+  :type-initializer "gtk_tree_path_get_type"
   :alloc (%tree-path-new))
 
 #+liber-documentation
 (setf (liber:alias-for-class 'tree-path)
       "GBoxed"
       (documentation 'tree-path 'type)
- "@version{#2021-3-4}
-  @short{}
+ "@version{#2023-1-27}
+  @short{No description available.}
   @begin{pre}
 (define-g-boxed-opaque tree-path \"GtkTreePath\"
+  :type-initializer \"gtk_tree_path_get_type\"
   :alloc (%tree-path-new))
   @end{pre}
   @see-class{gtk:tree-model}
@@ -244,17 +244,15 @@
 ;;; GtkTreeRowReference
 ;;; ----------------------------------------------------------------------------
 
-(glib-init:at-init ()
-  (foreign-funcall "gtk_tree_row_reference_get_type" :size))
-
 (define-g-boxed-opaque tree-row-reference "GtkTreeRowReference"
+  :type-initializer "gtk_tree_row_reference_get_type"
   :alloc (error "GtkTreeRowReference cannot be created from the Lisp side."))
 
 #+liber-documentation
 (setf (liber:alias-for-class 'tree-row-reference)
       "GBoxed"
       (documentation 'tree-row-reference 'type)
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @begin{short}
     A @sym{gtk:tree-row-reference} instance tracks model changes so that it
     always refers to the same row, a @class{gtk:tree-path} instance refers to a
@@ -263,7 +261,8 @@
   Create a new @sym{gtk:tree-row-reference} instance with the
     @fun{gtk:tree-row-reference-new} function.
   @begin{pre}
-(define-g-boxed-opaque tree-row-reference \"GtkTreeRowReference\"
+(define-g-boxed-opaque gtk:tree-row-reference \"GtkTreeRowReference\"
+  :type-initializer \"gtk_tree_row_reference_get_type\"
   :alloc (error \"GtkTreeRowReference cannot be created from the Lisp side.\"))
   @end{pre}
   @see-class{gtk:tree-path}
@@ -553,9 +552,9 @@ lambda (model path iter new-order)    :run-first
 
 (defcfun ("gtk_tree_path_new" %tree-path-new) :pointer)
 
-(defcfun ("gtk_tree_path_new" tree-path-new) (g:boxed tree-path)
+(defcfun ("gtk_tree_path_new" tree-path-new) (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @return{A newly created @class{gtk:tree-path} instance.}
   @short{Creates a new  tree path.}
   @see-class{gtk:tree-path}")
@@ -567,14 +566,13 @@ lambda (model path iter new-order)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_tree_path_new_from_string" tree-path-new-from-string)
-    (g:boxed tree-path)
+    (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2021-3-4}
-  @argument[pathstr]{the string representation of a path}
-  @return{A newly created @class{gtk:tree-path}, or @code{nil}.}
+ "@version{2023-1-27}
+  @argument[pathstr]{a string representation of a path}
+  @return{A newly created @class{gtk:tree-path} instance, or @code{nil}.}
   @short{Creates a tree path initialized to @arg{pathstr}.}
-
-  The argument @arg{pathstr} is expected to be a colon separated list of
+  The @arg{pathstr} argument is expected to be a colon separated list of
   numbers. For example, the string \"10:4:0\" would create a path of depth 3
   pointing to the 11th child of the root node, the 5th child of that 11th child,
   and the 1st child of that 5th child. If an invalid path string is passed in,
@@ -593,8 +591,8 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-path-new-from-indices (&rest indices)
  #+liber-documentation
- "@version{#2021-3-4}
-  @argument[indices]{list of integers}
+ "@version{2023-1-27}
+  @argument[indices]{a list of integers}
   @return{A newly created @class{gtk:tree-path} instance.}
   @begin{short}
     Creates a new tree path with @arg{indices} as indices.
@@ -630,7 +628,7 @@ lambda (model path iter new-order)    :run-first
 
 (defcfun ("gtk_tree_path_to_string" tree-path-to-string) :string
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2021-3-4}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{A string with the representation of the tree path.}
   @short{Generates a string representation of the tree path.}
@@ -647,9 +645,9 @@ lambda (model path iter new-order)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_tree_path_new_first" tree-path-new-first)
-    (g:boxed tree-path)
+    (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @return{A new @class{gtk:tree-path} instance.}
   @short{Creates a new tree path.}
   The string representation of this tree path is \"0\".
@@ -669,16 +667,16 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-path-append-index (path index)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @argument[index]{an integer with the index}
   @return{The @class{gtk:tree-path} instance.}
   @short{Appends a new index to the tree path.}
   As a result, the depth of @arg{path} is increased.
   @see-class{gtk:tree-path}"
-  (let ((path-new (tree-path-copy path)))
-    (%tree-path-append-index path-new index)
-    path-new))
+  (let ((path (tree-path-copy path)))
+    (%tree-path-append-index path index)
+    path))
 
 (export 'tree-path-append-index)
 
@@ -694,7 +692,7 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-path-prepend-index (path index)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @argument[index]{an integer with the index}
   @return{The @class{gtk:tree-path} instance.}
@@ -713,7 +711,7 @@ lambda (model path iter new-order)    :run-first
 
 (defcfun ("gtk_tree_path_get_depth" tree-path-depth) :int
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{An integer with the depth of @arg{path}.}
   @short{Returns the current depth of the tree path.}
@@ -731,20 +729,18 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-path-indices (path)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The current indices, or @code{nil}.}
   @short{Returns the current indices of the tree path.}
-  This is a list of integers, each representing a node in a tree.
-
-  The length of the list can be obtained with the @fun{gtk:tree-path-depth}
-  function.
+  This is a list of integers, each representing a node in a tree. The length of
+  the list can be obtained with the @fun{gtk:tree-path-depth} function.
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-depth}"
   (let ((n (tree-path-depth path))
         (indices (%tree-path-indices path)))
     (loop for i from 0 below n
-          collect (mem-aref indices :int i))))
+          collect (cffi:mem-aref indices :int i))))
 
 (export 'tree-path-indices)
 
@@ -787,10 +783,9 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_copy
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_copy" tree-path-copy)
-    (g:boxed tree-path)
+(defcfun ("gtk_tree_path_copy" tree-path-copy) (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{A new @class{gtk:tree-path} instance.}
   @short{Creates a new tree path as a copy of @arg{path}.}
@@ -805,9 +800,9 @@ lambda (model path iter new-order)    :run-first
 
 (defcfun ("gtk_tree_path_compare" tree-path-compare ) :int
  #+liber-documentation
- "@version{#2021-3-4}
-  @argument[path1]{a @class{gtk:tree-path} object}
-  @argument[path2]{a @class{gtk:tree-path} object to compare with}
+ "@version{2023-1-27}
+  @argument[path1]{a @class{gtk:tree-path} instance}
+  @argument[path2]{a @class{gtk:tree-path} instance to compare with}
   @return{The relative positions of @arg{path1} and @arg{path2}.}
   @short{Compares two paths.}
   If @arg{path1} appears before @arg{path2} in a tree, then -1 is returned. If
@@ -828,15 +823,15 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-path-next (path)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The new @class{gtk:tree-path} instance.}
   @short{Moves @arg{path} to point to the next node at the current depth.}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-prev}"
-  (let ((path-new (tree-path-copy path)))
-    (%tree-path-next path-new)
-    path-new))
+  (let ((path (tree-path-copy path)))
+    (%tree-path-next path)
+    path))
 
 (export 'tree-path-next)
 
@@ -849,7 +844,7 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-path-prev (path)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{A @class{gtk:tree-path} instance to point to the previous node,
     if it exists, otherwise @code{nil}.}
@@ -859,9 +854,9 @@ lambda (model path iter new-order)    :run-first
   @end{short}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-next}"
-  (let ((path-new (tree-path-copy path)))
-    (when (%tree-path-prev path-new)
-      path-new)))
+  (let ((path (tree-path-copy path)))
+    (when (%tree-path-prev path)
+      path)))
 
 (export 'tree-path-prev)
 
@@ -874,7 +869,7 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-path-up (path)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{A @class{gtk:tree-path} instance to point to the parent node, if it
     has a parent, otherwise @code{nil}.}
@@ -883,9 +878,9 @@ lambda (model path iter new-order)    :run-first
   @end{short}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-down}"
-  (let ((path-new (tree-path-copy path)))
-    (when (%tree-path-up path-new)
-      path-new)))
+  (let ((path (tree-path-copy path)))
+    (when (%tree-path-up path)
+      path)))
 
 (export 'tree-path-up)
 
@@ -898,16 +893,16 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-path-down (path)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @begin{short}
     Moves @arg{path} to point to the first child of the current tree path.
   @end{short}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-up}"
-  (let ((path-new (tree-path-copy path)))
-    (%tree-path-down path-new)
-    path-new))
+  (let ((path (tree-path-copy path)))
+    (%tree-path-down path)
+    path))
 
 (export 'tree-path-down)
 
@@ -917,7 +912,7 @@ lambda (model path iter new-order)    :run-first
 
 (defcfun ("gtk_tree_path_is_ancestor" tree-path-is-ancestor) :boolean
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @argument[descendant]{another @class{gtk:tree-path} instance}
   @return{@em{True} if @arg{descendant} is contained inside @arg{path}.}
@@ -937,7 +932,7 @@ lambda (model path iter new-order)    :run-first
 
 (defcfun ("gtk_tree_path_is_descendant" tree-path-is-descendant) :boolean
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
   @argument[ancestor]{another @class{gtk:tree-path} instance}
   @return{@em{True} if @arg{ancestor} contains @arg{path} somewhere below it.}
@@ -958,12 +953,12 @@ lambda (model path iter new-order)    :run-first
 (defcfun ("gtk_tree_row_reference_new" tree-row-reference-new)
     (g:boxed tree-row-reference :return)
  #+liber-documentation
- "@version{#2020-6-28}
+ "@version{2023-1-27}
   @argument[model]{a @class{gtk:tree-model} object}
-  @argument[path]{a valid @class{gtk:tree-path} object to monitor}
-  @return{A newly allocated @class{gtk:tree-row-reference}, or @code{nil}.}
+  @argument[path]{a valid @class{gtk:tree-path} instance to monitor}
+  @return{A newly allocated @class{gtk:tree-row-reference} instance, or
+    @code{nil}.}
   @short{Creates a row reference based on @arg{path}.}
-
   This reference will keep pointing to the node pointed to by @arg{path}, so
   long as it exists. Any changes that occur on @arg{model} are propagated, and
   @arg{path} is updated appropriately. If @arg{path} is not a valid path in
@@ -1023,21 +1018,16 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_row_reference_get_model -> tree-row-reference-model
 ;;; ----------------------------------------------------------------------------
 
-(define-boxed-opaque-accessor tree-row-reference
-                              %tree-row-reference-model
-  :reader "gtk_tree_row_reference_get_model"
-  :type (g:object tree-model))
-
-(declaim (inline tree-row-reference-model))
-
-(defun tree-row-reference-model (reference)
+(defcfun ("gtk_tree_row_reference_get_model" tree-row-reference-model)
+    (g:object tree-model)
  #+liber-documentation
- "@version{#2020-6-28}
-  @argument[reference]{a @class{gtk:tree-row-reference} object}
+ "@version{2023-1-27}
+  @argument[reference]{a @class{gtk:tree-row-reference} instance}
   @return{The @class{gtk:tree-model} object.}
   @short{Returns the model that the row reference is monitoring.}
-  @see-class{gtk:tree-row-reference}"
-  (%tree-row-reference-model reference))
+  @see-class{gtk:tree-row-reference}
+  @see-class{gtk:tree-model}"
+  (reference (g:boxed tree-row-reference)))
 
 (export 'tree-row-reference-model)
 
@@ -1045,24 +1035,19 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_row_reference_get_path
 ;;; ----------------------------------------------------------------------------
 
-(define-boxed-opaque-accessor tree-row-reference
-                              %tree-row-reference-path
-  :reader "gtk_tree_row_reference_get_path"
-  :type (g:boxed tree-path :return))
-
-(declaim (inline tree-row-reference-path))
-
-(defun tree-row-reference-path (reference)
+(defcfun ("gtk_tree_row_reference_get_path" tree-row-reference-path)
+    (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2020-6-28}
-  @argument[reference]{a @class{gtk:tree-row-reference} object}
-  @return{A current @class{gtk:tree-path} object, or @code{nil}.}
+ "@version{2023-1-27}
+  @argument[reference]{a @class{gtk:tree-row-reference} instance}
+  @return{A current @class{gtk:tree-path} instance, or @code{nil}.}
   @begin{short}
     Returns a path that the row reference currently points to, or @code{nil} if
     the path pointed to is no longer valid.
   @end{short}
-  @see-class{gtk:tree-row-reference}"
-  (%tree-row-reference-path reference))
+  @see-class{gtk:tree-row-reference}
+  @see-class{gtk:tree-path}"
+  (reference (g:boxed tree-path)))
 
 (export 'tree-row-reference-path)
 
@@ -1070,15 +1055,9 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_row_reference_valid
 ;;; ----------------------------------------------------------------------------
 
-(define-boxed-opaque-accessor tree-row-reference
-                              %tree-row-reference-valid
-  :reader "gtk_tree_row_reference_valid" :type :boolean)
-
-(declaim (inline tree-row-reference-valid))
-
-(defun tree-row-reference-valid (reference)
+(defcfun ("gtk_tree_row_reference_valid" tree-row-reference-valid) :boolean
  #+liber-documentation
- "@version{#2020-6-28}
+ "@version{2023-1-27}
   @argument[reference]{a @class{gtk:tree-row-reference}, or @code{nil}}
   @return{@em{True} if @arg{reference} points to a valid path.}
   @begin{short}
@@ -1086,7 +1065,7 @@ lambda (model path iter new-order)    :run-first
     current valid path.
   @end{short}
   @see-class{gtk:tree-row-reference}"
-  (%tree-row-reference-valid reference))
+  (reference (g:boxed tree-row-reference)))
 
 (export 'tree-row-reference-valid)
 
@@ -1106,9 +1085,9 @@ lambda (model path iter new-order)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_tree_row_reference_copy" tree-row-reference-copy)
-    (g:boxed tree-row-reference)
+    (g:boxed tree-row-reference :return)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2023-1-27}
   @argument[reference]{a @class{gtk:tree-row-reference} instance}
   @return{A @class{gtk:tree-row-reference} instance.}
   @begin{short}
@@ -1934,4 +1913,4 @@ lambda (model path iter new-order)    :run-first
 
 ;; not needed
 
-;;; --- End of file gtk.tree-model.lisp ----------------------------------------
+;;; --- End of file gtk4.tree-model.lisp ---------------------------------------

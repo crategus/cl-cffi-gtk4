@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.icon-view.lisp
+;;; gtk4.icon-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -1056,8 +1056,7 @@ lambda (view)    :action
 ;;; gtk_icon_view_get_item_at_pos () -> icon-view-item-at-pos
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_item_at_pos" %icon-view-item-at-pos)
-    :boolean
+(defcfun ("gtk_icon_view_get_item_at_pos" %icon-view-item-at-pos) :boolean
   (view (g:object icon-view))
   (x :int)
   (y :int)
@@ -1066,14 +1065,14 @@ lambda (view)    :action
 
 (defun icon-view-item-at-pos (view x y)
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[x]{an integer with the x position to be identified}
   @argument[y]{an integer with the y position to be identified}
   @begin{return}
-    @arg{path} -- the @class{gtk:tree-path} instance, or @code{nil} @br{}
-    @arg{cell} -- the @class{gtk:cell-renderer} object responsible for the
-      cell at (x, y), or @code{nil} if no item exists at the specified position
+    @code{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
+    @code{cell} -- a @class{gtk:cell-renderer} object responsible for the
+    cell at (x, y), or @code{nil} if no item exists at the specified position
   @end{return}
   @begin{short}
     Finds the path at the point (x, y), relative to the window coordinates.
@@ -1087,8 +1086,8 @@ lambda (view)    :action
   @see-function{gtk:icon-view-convert-widget-to-bin-window-coords}"
   (with-foreign-objects ((path :pointer) (cell :pointer))
     (when (%icon-view-item-at-pos view x y path cell)
-      (values (mem-ref path '(g:boxed tree-path :return))
-              (mem-ref cell 'g:object)))))
+      (values (cffi:mem-ref path '(g:boxed tree-path :return))
+              (cffi:mem-ref cell 'g:object)))))
 
 (export 'icon-view-item-at-pos)
 
@@ -1133,18 +1132,18 @@ lambda (view)    :action
 
 (defcfun ("gtk_icon_view_get_cursor" %icon-view-get-cursor) :boolean
   (view (g:object icon-view))
-  (path (g:boxed tree-path))
-  (cell (g:object cell-renderer)))
+  (path :pointer)
+  (cell :pointer))
 
 (defun icon-view-get-cursor (view)
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{return}
-    @arg{path} -- the current @class{gtk:tree-path} cursor path, or @code{nil}
-      @br{}
-    @arg{cell} -- the current @class{gtk:cell-renderer} focus cell,
-      or @code{nil} if the cursor is not set
+    @code{path} -- a current @class{gtk:tree-path} cursor path, or @code{nil}
+    @br{}
+    @code{cell} -- a current @class{gtk:cell-renderer} focus cell,
+    or @code{nil} if the cursor is not set
   @end{return}
   @begin{short}
     Returns the current cursor path and focus cell.
@@ -1157,8 +1156,8 @@ lambda (view)    :action
   @see-function{gtk:icon-view-set-cursor}"
   (with-foreign-objects ((path :pointer) (cell :pointer))
     (when (%icon-view-get-cursor view path cell)
-      (values (mem-ref path '(g:boxed tree-path :return))
-              (mem-ref cell 'g:object)))))
+      (values (cffi:mem-ref path '(g:boxed tree-path :return))
+              (cffi:mem-ref cell 'g:object)))))
 
 (export 'icon-view-get-cursor)
 
@@ -1322,9 +1321,9 @@ lambda (view path)
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_icon_view_get_selected_items" icon-view-selected-items)
-    (g:list-t (g:boxed tree-path))
+    (g:list-t (g:boxed tree-path :return))
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:icon-view} widget}
   @return{A list containing a @class{gtk:tree-path} instance for each selected
     row.}
@@ -1407,10 +1406,10 @@ lambda (view path)
   (col-align :float))
 
 (defun icon-view-scroll-to-path (view path
-                                     &key (row-align 0.5 row-align-p)
-                                          (col-align 0.5 col-align-p))
+                                 &key (row-align 0.5 row-align-p)
+                                      (col-align 0.5 col-align-p))
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance of the item to move to}
   @argument[row-align]{a float with the vertical alignment of the item
@@ -1420,13 +1419,13 @@ lambda (view path)
   @begin{short}
     Moves the alignments of @arg{view} to the position specified by @arg{path}.
   @end{short}
-  The argument @arg{row-align} determines where the row is placed, and the
-  argument @arg{col-align} determines where column is placed. Both are expected
-  to be between 0.0 and 1.0. 0.0 means left/top alignment, 1.0 means
+  The @arg{row-align} argument determines where the row is placed, and the
+  @arg{col-align} argument determines where the column is placed. Both are
+  expected to be between 0.0 and 1.0. 0.0 means left/top alignment, 1.0 means
   right/bottom alignment, 0.5 means center. The keyword arguments have the
   default value 0.5.
 
-  If both arguments @arg{row-align} and @arg{col-align} are @code{nil}, then
+  If both @arg{row-align} and @arg{col-align} arguments are @code{nil}, then
   the alignment arguments are ignored, and the tree does the minimum amount of
   work to scroll the item onto the screen. This means that the item will be
   scrolled to the edge closest to its current position. If the item is currently
@@ -1438,10 +1437,10 @@ lambda (view path)
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}"
   (%icon-view-scroll-to-path view
-                                 path
-                                 (or row-align-p col-align-p)
-                                 row-align
-                                 col-align))
+                             path
+                             (or row-align-p col-align-p)
+                             row-align
+                             col-align))
 
 (export 'icon-view-scroll-to-path)
 
@@ -1449,20 +1448,19 @@ lambda (view path)
 ;;; gtk_icon_view_get_visible_range () -> icon-view-visible-range
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_visible_range" %icon-view-visible-range)
-    :boolean
+(defcfun ("gtk_icon_view_get_visible_range" %icon-view-visible-range) :boolean
   (view (g:object icon-view))
   (start :pointer)
   (end :pointer))
 
 (defun icon-view-visible-range (view)
  #+liber-documentation
- "@version{#2021-3-9}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{return}
-    @arg{start} -- a @class{gtk:tree-path} instance with the start of region,
+    @code{start} -- a @class{gtk:tree-path} instance with the start of region,
       or @code{nil} @br{}
-    @arg{end} -- a @class{gtk:tree-path} instance with the end of region,
+    @code{end} -- a @class{gtk:tree-path} instance with the end of region,
       or  @code{nil}
   @end{return}
   @begin{short}
@@ -1474,8 +1472,8 @@ lambda (view path)
   @see-class{gtk:tree-path}"
   (with-foreign-objects ((start :pointer) (end :pointer))
     (when (%icon-view-visible-range view start end)
-      (values (mem-ref start '(g:boxed tree-path :return))
-              (mem-ref end '(g:boxed tree-path :return))))))
+      (values (cffi:mem-ref start '(g:boxed tree-path :return))
+              (cffi:mem-ref end '(g:boxed tree-path :return))))))
 
 (export 'icon-view-visible-range)
 
@@ -1537,29 +1535,29 @@ lambda (view path)
 ;;; gtk_icon_view_get_tooltip_context () -> icon-view-tooltip-context
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_tooltip_context"
-          %icon-view-tooltip-context) :boolean
+(defcfun ("gtk_icon_view_get_tooltip_context" %icon-view-tooltip-context)
+    :boolean
   (view (g:object icon-view))
   (x (:pointer :int))
   (y (:pointer :int))
   (tip :boolean)
-  (model (:pointer (g:object tree-model)))
-  (path (:pointer (g:boxed tree-path)))
+  (model :pointer)
+  (path :pointer)
   (iter (g:boxed tree-iter)))
 
 (defun icon-view-tooltip-context (view x y tip)
  #+liber-documentation
- "@version{#2021-8-20}
+ "@version{#2023-1-28}
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[x]{an integer with the x coordinate, relative to widget coordinates}
   @argument[y]{an integer with the y coordinate, relative to widget coordinates}
   @argument[tip]{a boolean whether this is a keyboard tooltip or not}
   @begin{return}
     @arg{xx} -- an integer with @arg{x} converted to be relative to the bin
-      window of @arg{view} @br{}
+    window of @arg{view} @br{}
     @arg{yy} -- an integer with @arg{y} converted to be relative to the bin
-      window of @arg{view} @br{}
-    @arg{model} -- a @class{gtk:tree-model} or @code{nil} @br{}
+    window of @arg{view} @br{}
+    @arg{model} -- a @class{gtk:tree-model} object or @code{nil} @br{}
     @arg{path} -- a @class{gtk:tree-path} instance or @code{nil} @br{}
     @arg{iter} -- a @class{gtk:tree-iter} iterator or @code{nil}
   @end{return}
@@ -1582,24 +1580,22 @@ lambda (view path)
   @see-class{gtk:tree-iter}"
   (with-foreign-objects ((xx :int)
                          (yy :int)
-                         (model-ptr :pointer)
-                         (path-ptr :pointer))
-    (setf (mem-ref xx :int) x
-          (mem-ref yy :int) y)
+                         (model :pointer)
+                         (path :pointer))
+    (setf (cffi:mem-ref xx :int) x
+          (cffi:mem-ref yy :int) y)
     (let ((iter (make-tree-iter)))
       (when (%icon-view-tooltip-context view
-                                            xx
-                                            yy
-                                            tip
-                                            model-ptr
-                                            path-ptr
-                                            iter)
-        (values (mem-ref xx :int)
-                (mem-ref yy :int)
-                (convert-from-foreign (mem-ref model-ptr :pointer)
-                                      '(g:object tree-model))
-                (convert-from-foreign (mem-ref path-ptr :pointer)
-                                      '(g:boxed tree-path :return))
+                                        xx
+                                        yy
+                                        tip
+                                        model
+                                        path
+                                        iter)
+        (values (cffi:mem-ref xx :int)
+                (cffi:mem-ref yy :int)
+                (cffi:mem-ref model '(g:object tree-model))
+                (cffi:mem-ref path '(g:boxed tree-path :return))
                 iter)))))
 
 (export 'icon-view-tooltip-context)

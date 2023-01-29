@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.cell-view.lisp
+;;; gtk4.cell-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -445,9 +445,9 @@
   path)
 
 (defcfun ("gtk_cell_view_get_display_row" cell-view-displayed-row)
-    (g:boxed tree-path)
+    (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2021-5-4}
+ "@version{#2023-1-28}
   @syntax[]{(gtk:cell-view-display-row cellview) => path}
   @syntax[]{(setf (gtk:cell-view-display-row cellview) path)}
   @argument[cellview]{a @class{gtk:cell-view} widget}
@@ -469,4 +469,4 @@
 
 (export 'cell-view-displayed-row)
 
-;;; --- End of file gtk.cell-view.lisp -----------------------------------------
+;;; --- End of file gtk4.cell-view.lisp ----------------------------------------
