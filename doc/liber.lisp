@@ -53,7 +53,6 @@
 (unexport 'gobject:*gobject-debug* :gobject)
 
 (unexport 'gobject:boxed-related-symbols :gobject)
-(unexport 'gobject:copy-boxed-slots-to-foreign :gobject)
 (unexport 'gobject:create-fn-ref :gobject)
 (unexport 'gobject:define-foreign-g-object-class :gobject)
 (unexport 'gobject:define-boxed-opaque-accessor :gobject)
@@ -82,22 +81,12 @@
 (unexport 'gobject:gobject-class-g-type-initializer :gobject)
 (unexport 'gobject:gobject-class-g-type-name :gobject)
 (unexport 'gobject:gobject-class-interface-p :gobject)
-(unexport 'gobject:list-signals :gobject)
-(unexport 'gobject:parse-g-param-spec :gobject)
 (unexport 'gobject:parse-g-value :gobject)
 (unexport 'gobject:set-g-value :gobject)
-(unexport 'gobject:signal-info :gobject)
-(unexport 'gobject:using* :gobject)
 (unexport 'gobject:with-foreign-boxed-array :gobject)
 (unexport 'gobject::g-initially-unowned :gobject)
-
 (unexport 'gobject:lisp-closure :gobject)
-
 (unexport 'gobject:gtype :gobject)
-(unexport 'gobject:gtype-from-id :gobject)
-(unexport 'gobject:gtype-from-name :gobject)
-(unexport 'gobject:gtype-id :gobject)
-(unexport 'gobject:gtype-name :gobject)
 
 ;;; ---------------------------------------------------------------------------
 
