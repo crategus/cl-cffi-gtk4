@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.recent-manager.lisp
+;;; gtk4.recent-manager.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -52,7 +52,7 @@
 ;;;     gtk_recent_manager_move_item
 ;;;     gtk_recent_manager_get_items
 ;;;     gtk_recent_manager_purge_items
-
+;;;
 ;;;     gtk_recent_info_ref
 ;;;     gtk_recent_info_unref
 ;;;     gtk_recent_info_get_uri
@@ -87,22 +87,41 @@
 ;;;
 ;;;     changed
 ;;;
-;;;Object Hierarchy
-;;;    GObject
-;;;    ╰── GtkRecentManager
+;;; Object Hierarchy
+;;;
+;;;     GObject
+;;;     ╰── GtkRecentManager
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkRecentInfo
-;;;
-;;; GtkRecentInfo contains private data only, and should be accessed using the
-;;; provided API.
-;;;
-;;; GtkRecentInfo contains all the meta-data associated with an entry in the
-;;; recently used files list.
 ;;; ----------------------------------------------------------------------------
+
+(define-g-boxed-opaque recent-info "GtkRecentInfo"
+  :type-initializer "gtk_recent_info_get_type"
+  :alloc (error "GtkRecentInfo cannot be created from the Lisp side."))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'recent-info)
+      "GBoxed"
+      (documentation 'recent-info 'type)
+ "@version{2023-1-29}
+  @begin{short}
+    The @sym{gtk:recent-info} structure constains all the meta-data associated
+    with an entry in the recently used files list.
+  @end{short}
+  The @sym{gtk:recent-info} structure is an opaque data structure whose members
+  can only be accessed using the provided API.
+  @begin{pre}
+(define-g-boxed-opaque gtk:recent-info \"GtkRecentInfo\"
+  :type-initializer \"gtk_recent_info_get_type\"
+  :alloc (error \"GtkRecentInfo cannot be created from the Lisp side.\"))
+  @end{pre}
+  @see-class{gtk:recent-manager}")
+
+(export (gobject:boxed-related-symbols 'recent-info))
 
 ;;; ----------------------------------------------------------------------------
 ;;; struct GtkRecentData
@@ -188,54 +207,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;;struct GtkRecentManager
-;;;
-;;; GtkRecentManager contains only private data and should be accessed using the
-;;; provided API.
-
-;;;GtkRecentManager provides a facility for adding, removing and looking up recently used files. Each recently used file is identified by its URI, and has meta-data associated to it, like the names and command lines of the applications that have registered it, the number of time each application has registered the same file, the mime type of the file and whether the file should be displayed only by the applications that have registered it.
-
-;;;The recently used files list is per user.
-
-;;;The GtkRecentManager acts like a database of all the recently used files. You can create new GtkRecentManager objects, but it is more efficient to use the default manager created by GTK
-
-;;;Adding a new recently used file is as simple as:
-
-;;;The GtkRecentManager will try to gather all the needed information from the file itself through GIO.
-
-;;;Looking up the meta-data associated with a recently used file given its URI requires calling gtk_recent_manager_lookup_item():
-
-;;;GtkRecentManager *manager;
-
-;;;manager = gtk_recent_manager_get_default ();
-;;;gtk_recent_manager_add_item (manager, file_uri);
-;;;In order to retrieve the list of recently used files, you can use gtk_recent_manager_get_items(), which returns a list of GtkRecentInfo.
-
-;;;A GtkRecentManager is the model used to populate the contents of one, or more GtkRecentChooser implementations.
-
-;;;Note that the maximum age of the recently used files list is controllable through the “gtk-recent-files-max-age” property.
-
-
-;;;Signal Details
-;;;The “changed” signal
-;;;void
-;;;user_function (GtkRecentManager *recent_manager,
-;;;               gpointer          user_data)
-;;;Emitted when the current recently used resources manager changes its contents, either by calling gtk_recent_manager_add_item() or by another application.
-
-;;;Parameters
-;;;recent_manager
-
-;;;the recent manager
-
-;;;user_data
-
-;;;user data set when the signal handler was connected.
-
-;;;Flags: Run First
-
-;;;See Also
-;;;GBookmarkFile, GtkSettings, GtkRecentChooser
+;;; struct GtkRecentManager
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GtkRecentManager" recent-manager
@@ -250,645 +222,878 @@
     recent-manager-size
     "size" "gint" t nil)))
 
+#+liber-documentation
+(setf (documentation 'recent-manager 'type)
+ "@version{2023-1-29}
+  @begin{short}
+    The @sym{gtk:recent-manager} object provides a facility for adding, removing
+    and looking up recently used files.
+  @end{short}
+  Each recently used file is identified by its URI, and has meta-data associated
+  to it, like the names and command lines of the applications that have
+  registered it, the number of time each application has registered the same
+  file, the MIME type of the file and whether the file should be displayed only
+  by the applications that have registered it. The recently used files list is
+  per user.
+
+  The @sym{gtk:recent-manager} object acts like a database of all the recently
+  used files. You can create new @sym{gtk:recent-manager} objects, but it is
+  more efficient to use the default manager created by GTK. Adding a new
+  recently used file is as simple as:
+  @begin{pre}
+(let ((uri \"file:///home/ ... uri to add ...\")
+      (manager (gtk:recent-manager-default)))
+  (gtk:recent-manager-add-item manager uri)
+  ... )
+  @end{pre}
+  The @sym{gtk:recent-manager} will try to gather all the needed information
+  from the file itself through GIO. Looking up the meta-data associated with a
+  recently used file given its URI requires calling the
+  @fun{gtk:recent-manager-lookup-item} function:
+  @begin{pre}
+(let* ((uri \"file:///home/ ... uri to look up ...\")
+       (manager (gtk:recent-manager-default))
+       (info (gtk:recent-manager-lookup-item manager uri)))
+    (when info
+      ;; Use the object
+      ... ))
+  @end{pre}
+  In order to retrieve the list of recently used files, you can use the
+  @fun{gtk:recent-manager-items} function, which returns a list of
+  @class{gtk:recent-info} instances. A @sym{gtk:recent-manager} object is the
+  model used to populate the contents of one, or more @class{gtk:recent-chooser}
+  implementations. The maximum age of the recently used files list is
+  controllable through the @slot[gtk:settings]{gtk-recent-files-max-age}
+  setting of the @class{gtk:settings} class.
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"changed\" signal}
+      @begin{pre}
+lambda (manager)    :run-first
+      @end{pre}
+      Emitted when the current recently used resources manager changes its
+      contents, either by calling the @fun{gtk:recent-manager-add-item} function
+      or by another application.
+      @begin[code]{table}
+        @entry[manager]{The @sym{gtk:recent-manager} object which received the
+          signal.}
+      @end{table}
+  @end{dictionary}
+  @see-constructor{gtk:recent-manager-new}
+  @see-constructor{gtk:recent-manager-default}
+  @see-slot{gtk:recent-manager-filename}
+  @see-slot{gtk:recent-manager-size}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “filename” property
-;;;
-;;;  “filename”                 char *
-;;;
-;;; The full path to the file to be used to store and read the recently used
-;;; resources list
-;;;
-;;; Owner: GtkRecentManager
-;;;
-;;; Flags: Read / Write / Construct Only
-;;;
-;;; Default value: NULL
-;;; ----------------------------------------------------------------------------
+;;; --- recent-manager-filename ------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "filename" 'recent-manager) t)
+ "The @code{filename} property of type @code{:string} (Read / Write / Construct)
+  @br{}
+  The full path to the file to be used to store and read the recently used
+  resources list. @br{}
+  Default value: @code{nil}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'recent-manager-filename)
+      "Accessor"
+      (documentation 'recent-manager-filename 'function)
+ "@version{2023-1-29}
+  @syntax[]{(gtk:recent-manager-filename object) => filename}
+  @syntax[]{(setf (gtk:recent-manager-filename object) filename)}
+  @argument[object]{a @class{gtk:recent-manager} object}
+  @argument[filename]{a string with the full path to the file}
+  @begin{short}
+    Accessor of the @slot[gtk:recent-manager]{filename} slot of the
+    @class{gtk:recent-manager} class.
+  @end[short}
+  The full path to the file to be used to store and read the recently used
+  resources list.
+  @see-class{gtk:recent-manager}")
+
+;;; --- recent-manager-size ----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "size" 'recent-manager) t)
+ "The @code{size} property of type @code{:int} (Read) @br{}
+  The size of the recently used resources list. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'recent-manager-size)
+      "Accessor"
+      (documentation 'recent-manager-size 'function)
+ "@version{2023-1-29}
+  @syntax[]{(gtk:recent-manager-size object) => size}
+  @syntax[]{(setf (gtk:recent-manager-size object) size)}
+  @argument[object]{a @class{gtk:recent-manager} object}
+  @argument[size]{an integer with the size of the resources list}
+  @begin{short}
+    Accessor of the @slot[gtk:recent-manager]{size} slot of the
+    @class{gtk:recent-manager} class.
+  @end{short}
+  The size of the recently used resources list.
+  @see-class{gtk:recent-manager}")
 
 ;;; ----------------------------------------------------------------------------
-;;; The “size” property
-;;;
-;;;  “size”                     int
-;;;
-;;; The size of the recently used resources list.
-;;;
-;;; Owner: GtkRecentManager
-;;;
-;;; Flags: Read
-;;;
-;;; Allowed values: >= -1
-;;;
-;;; Default value: 0
+;;; gtk_recent_manager_new ()
 ;;; ----------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-;;;Functions
-;;;gtk_recent_manager_new ()
-;;;GtkRecentManager *
-;;;gtk_recent_manager_new (void);
-;;;Creates a new recent manager object. Recent manager objects are used to handle the list of recently used resources. A GtkRecentManager object monitors the recently used resources list, and emits the “changed” signal each time something inside the list changes.
-
-;;;GtkRecentManager objects are expensive: be sure to create them only when needed. You should use gtk_recent_manager_get_default() instead.
-
-;;;Returns
-;;;A newly created GtkRecentManager object
-
-;;;gtk_recent_manager_get_default ()
-;;;GtkRecentManager *
-;;;gtk_recent_manager_get_default (void);
-;;;Gets a unique instance of GtkRecentManager, that you can share in your application without caring about memory management.
-
-;;;Returns
-;;;A unique GtkRecentManager. Do not ref or unref it.
-
-;;;[transfer none]
-
-;;;gtk_recent_manager_add_item ()
-;;;gboolean
-;;;gtk_recent_manager_add_item (GtkRecentManager *manager,
-;;;                             const char *uri);
-;;;Adds a new resource, pointed by uri , into the recently used resources list.
-
-;;;This function automatically retrieves some of the needed metadata and setting other metadata to common default values; it then feeds the data to gtk_recent_manager_add_full().
-
-;;;See gtk_recent_manager_add_full() if you want to explicitly define the metadata for the resource pointed by uri .
-
-;;;Parameters
-;;;manager
-
-;;;a GtkRecentManager
-
-;;;uri
-
-;;;a valid URI
-
-;;;Returns
-;;;TRUE if the new item was successfully added to the recently used resources list
-
-;;;gtk_recent_manager_add_full ()
-;;;gboolean
-;;;gtk_recent_manager_add_full (GtkRecentManager *manager,
-;;;                             const char *uri,
-;;;                             const GtkRecentData *recent_data);
-;;;Adds a new resource, pointed by uri , into the recently used resources list, using the metadata specified inside the GtkRecentData passed in recent_data .
-
-;;;The passed URI will be used to identify this resource inside the list.
-
-;;;In order to register the new recently used resource, metadata about the resource must be passed as well as the URI; the metadata is stored in a GtkRecentData, which must contain the MIME type of the resource pointed by the URI; the name of the application that is registering the item, and a command line to be used when launching the item.
-
-;;;Optionally, a GtkRecentData might contain a UTF-8 string to be used when viewing the item instead of the last component of the URI; a short description of the item; whether the item should be considered private - that is, should be displayed only by the applications that have registered it.
-
-;;;Parameters
-;;;manager
-
-;;;a GtkRecentManager
-
-;;;uri
-
-;;;a valid URI
-
-;;;recent_data
-
-;;;metadata of the resource
-
-;;;Returns
-;;;TRUE if the new item was successfully added to the recently used resources list, FALSE otherwise
-
-;;;gtk_recent_manager_remove_item ()
-;;;gboolean
-;;;gtk_recent_manager_remove_item (GtkRecentManager *manager,
-;;;                                const char *uri,
-;;;                                GError **error);
-;;;Removes a resource pointed by uri from the recently used resources list handled by a recent manager.
-
-;;;Parameters
-;;;manager
-
-;;;a GtkRecentManager
-
-;;;uri
-
-;;;the URI of the item you wish to remove
-
-;;;error
-
-;;;return location for a GError, or NULL.
-
-;;;[allow-none]
-;;;Returns
-;;;TRUE if the item pointed by uri has been successfully removed by the recently used resources list, and FALSE otherwise
-
-;;;gtk_recent_manager_lookup_item ()
-;;;GtkRecentInfo *
-;;;gtk_recent_manager_lookup_item (GtkRecentManager *manager,
-;;;                                const char *uri,
-;;;                                GError **error);
-;;;Searches for a URI inside the recently used resources list, and returns a GtkRecentInfo containing information about the resource like its MIME type, or its display name.
-
-;;;Parameters
-;;;manager
-
-;;;a GtkRecentManager
-
-;;;uri
-
-;;;a URI
-
-;;;error
-
-;;;a return location for a GError, or NULL.
-
-;;;[allow-none]
-;;;Returns
-;;;a GtkRecentInfo containing information about the resource pointed by uri , or NULL if the URI was not registered in the recently used resources list. Free with gtk_recent_info_unref().
-
-;;;[nullable]
-
-;;;gtk_recent_manager_has_item ()
-;;;gboolean
-;;;gtk_recent_manager_has_item (GtkRecentManager *manager,
-;;;                             const char *uri);
-;;;Checks whether there is a recently used resource registered with uri inside the recent manager.
-
-;;;Parameters
-;;;manager
-
-;;;a GtkRecentManager
-
-;;;uri
-
-;;;a URI
-
-;;;Returns
-;;;TRUE if the resource was found, FALSE otherwise
-
-;;;gtk_recent_manager_move_item ()
-;;;gboolean
-;;;gtk_recent_manager_move_item (GtkRecentManager *manager,
-;;;                              const char *uri,
-;;;                              const char *new_uri,
-;;;                              GError **error);
-;;;Changes the location of a recently used resource from uri to new_uri .
-
-;;;Please note that this function will not affect the resource pointed by the URIs, but only the URI used in the recently used resources list.
-
-;;;Parameters
-;;;manager
-
-;;;a GtkRecentManager
-
-;;;uri
-
-;;;the URI of a recently used resource
-
-;;;new_uri
-
-;;;the new URI of the recently used resource, or NULL to remove the item pointed by uri in the list.
-
-;;;[allow-none]
-;;;error
-
-;;;a return location for a GError, or NULL.
-
-;;;[allow-none]
-;;;Returns
-;;;TRUE on success
-
-;;;gtk_recent_manager_get_items ()
-;;;GList *
-;;;gtk_recent_manager_get_items (GtkRecentManager *manager);
-;;;Gets the list of recently used resources.
-
-;;;Parameters
-;;;manager
-
-;;;a GtkRecentManager
-
-;;;Returns
-;;;a list of newly allocated GtkRecentInfo objects. Use gtk_recent_info_unref() on each item inside the list, and then free the list itself using g_list_free().
-
-;;;[element-type GtkRecentInfo][transfer full]
-
-;;;gtk_recent_manager_purge_items ()
-;;;int
-;;;gtk_recent_manager_purge_items (GtkRecentManager *manager,
-;;;                                GError **error);
-;;;Purges every item from the recently used resources list.
-
-;;;Parameters
-;;;manager
-
-;;;a GtkRecentManager
-
-;;;error
-
-;;;a return location for a GError, or NULL.
-
-;;;[allow-none]
-;;;Returns
-;;;the number of items that have been removed from the recently used resources list
-
-;;;gtk_recent_info_ref ()
-;;;GtkRecentInfo *
-;;;gtk_recent_info_ref (GtkRecentInfo *info);
-;;;Increases the reference count of recent_info by one.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;the recent info object with its reference count increased by one
-
-;;;gtk_recent_info_unref ()
-;;;void
-;;;gtk_recent_info_unref (GtkRecentInfo *info);
-;;;Decreases the reference count of info by one. If the reference count reaches zero, info is deallocated, and the memory freed.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;gtk_recent_info_get_uri ()
-;;;const char *
-;;;gtk_recent_info_get_uri (GtkRecentInfo *info);
-;;;Gets the URI of the resource.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;the URI of the resource. The returned string is owned by the recent manager, and should not be freed.
-
-;;;gtk_recent_info_get_display_name ()
-;;;const char *
-;;;gtk_recent_info_get_display_name (GtkRecentInfo *info);
-;;;Gets the name of the resource. If none has been defined, the basename of the resource is obtained.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;the display name of the resource. The returned string is owned by the recent manager, and should not be freed.
-
-;;;gtk_recent_info_get_description ()
-;;;const char *
-;;;gtk_recent_info_get_description (GtkRecentInfo *info);
-;;;Gets the (short) description of the resource.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;the description of the resource. The returned string is owned by the recent manager, and should not be freed.
-
-;;;gtk_recent_info_get_mime_type ()
-;;;const char *
-;;;gtk_recent_info_get_mime_type (GtkRecentInfo *info);
-;;;Gets the MIME type of the resource.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;the MIME type of the resource. The returned string is owned by the recent manager, and should not be freed.
-
-;;;gtk_recent_info_get_added ()
-;;;GDateTime *
-;;;gtk_recent_info_get_added (GtkRecentInfo *info);
-;;;Gets the the time when the resource was added to the recently used resources list.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;a GDateTime for the time when the resource was added.
-
-;;;[transfer none]
-
-;;;gtk_recent_info_get_modified ()
-;;;GDateTime *
-;;;gtk_recent_info_get_modified (GtkRecentInfo *info);
-;;;Gets the time when the meta-data for the resource was last modified.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;a GDateTime for the time when the resource was last modified.
-
-;;;[transfer none]
-
-;;;gtk_recent_info_get_visited ()
-;;;GDateTime *
-;;;gtk_recent_info_get_visited (GtkRecentInfo *info);
-;;;Gets the time when the meta-data for the resource was last visited.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;a GDateTime for the time when the resource was last visited.
-
-;;;[transfer none]
-
-;;;gtk_recent_info_get_private_hint ()
-;;;gboolean
-;;;gtk_recent_info_get_private_hint (GtkRecentInfo *info);
-;;;Gets the value of the “private” flag. Resources in the recently used list that have this flag set to TRUE should only be displayed by the applications that have registered them.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;TRUE if the private flag was found, FALSE otherwise
-
-;;;gtk_recent_info_get_application_info ()
-;;;gboolean
-;;;gtk_recent_info_get_application_info (GtkRecentInfo *info,
-;;;                                      const char *app_name,
-;;;                                      const char **app_exec,
-;;;                                      guint *count,
-;;;                                      GDateTime **stamp);
-;;;Gets the data regarding the application that has registered the resource pointed by info .
-
-;;;If the command line contains any escape characters defined inside the storage specification, they will be expanded.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;app_name
-
-;;;the name of the application that has registered this item
-
-;;;app_exec
-
-;;;return location for the string containing the command line.
-
-;;;[transfer none][out]
-;;;count
-
-;;;return location for the number of times this item was registered.
-
-;;;[out]
-;;;stamp
-
-;;;return location for the time this item was last registered for this application.
-
-;;;[out][transfer none]
-;;;Returns
-;;;TRUE if an application with app_name has registered this resource inside the recently used list, or FALSE otherwise. The app_exec string is owned by the GtkRecentInfo and should not be modified or freed
-
-;;;gtk_recent_info_get_applications ()
-;;;char **
-;;;gtk_recent_info_get_applications (GtkRecentInfo *info,
-;;;                                  gsize *length);
-;;;Retrieves the list of applications that have registered this resource.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;length
-
-;;;return location for the length of the returned list.
-
-;;;[out][allow-none]
-;;;Returns
-;;;a newly allocated NULL-terminated array of strings. Use g_strfreev() to free it.
-
-;;;[array length=length zero-terminated=1][transfer full]
-
-;;;gtk_recent_info_last_application ()
-;;;char *
-;;;gtk_recent_info_last_application (GtkRecentInfo *info);
-;;;Gets the name of the last application that have registered the recently used resource represented by info .
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;an application name. Use g_free() to free it.
-
-;;;gtk_recent_info_has_application ()
-;;;gboolean
-;;;gtk_recent_info_has_application (GtkRecentInfo *info,
-;;;                                 const char *app_name);
-;;;Checks whether an application registered this resource using app_name .
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;app_name
-
-;;;a string containing an application name
-
-;;;Returns
-;;;TRUE if an application with name app_name was found, FALSE otherwise
-
-;;;gtk_recent_info_create_app_info ()
-;;;GAppInfo *
-;;;gtk_recent_info_create_app_info (GtkRecentInfo *info,
-;;;                                 const char *app_name,
-;;;                                 GError **error);
-;;;Creates a GAppInfo for the specified GtkRecentInfo
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;app_name
-
-;;;the name of the application that should be mapped to a GAppInfo; if NULL is used then the default application for the MIME type is used.
-
-;;;[allow-none]
-;;;error
-
-;;;return location for a GError, or NULL.
-
-;;;[allow-none]
-;;;Returns
-;;;the newly created GAppInfo, or NULL. In case of error, error will be set either with a GTK_RECENT_MANAGER_ERROR or a G_IO_ERROR.
-
-;;;[nullable][transfer full]
-
-;;;gtk_recent_info_get_groups ()
-;;;char **
-;;;gtk_recent_info_get_groups (GtkRecentInfo *info,
-;;;                            gsize *length);
-;;;Returns all groups registered for the recently used item info . The array of returned group names will be NULL terminated, so length might optionally be NULL.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;length
-
-;;;return location for the number of groups returned.
-
-;;;[out][allow-none]
-;;;Returns
-;;;a newly allocated NULL terminated array of strings. Use g_strfreev() to free it.
-
-;;;[array length=length zero-terminated=1][transfer full]
-
-;;;gtk_recent_info_has_group ()
-;;;gboolean
-;;;gtk_recent_info_has_group (GtkRecentInfo *info,
-;;;                           const char *group_name);
-;;;Checks whether group_name appears inside the groups registered for the recently used item info .
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;group_name
-
-;;;name of a group
-
-;;;Returns
-;;;TRUE if the group was found
-
-;;;gtk_recent_info_get_gicon ()
-;;;GIcon *
-;;;gtk_recent_info_get_gicon (GtkRecentInfo *info);
-;;;Retrieves the icon associated to the resource MIME type.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;a GIcon containing the icon, or NULL. Use g_object_unref() when finished using the icon.
-
-;;;[nullable][transfer full]
-
-;;;gtk_recent_info_get_short_name ()
-;;;char *
-;;;gtk_recent_info_get_short_name (GtkRecentInfo *info);
-;;;Computes a valid UTF-8 string that can be used as the name of the item in a menu or list. For example, calling this function on an item that refers to “file:///foo/bar.txt” will yield “bar.txt”.
-
-;;;Parameters
-;;;info
-
-;;;an GtkRecentInfo
-
-;;;Returns
-;;;A newly-allocated string in UTF-8 encoding free it with g_free()
-
-;;;gtk_recent_info_get_uri_display ()
-;;;char *
-;;;gtk_recent_info_get_uri_display (GtkRecentInfo *info);
-;;;Gets a displayable version of the resource’s URI. If the resource is local, it returns a local path; if the resource is not local, it returns the UTF-8 encoded content of gtk_recent_info_get_uri().
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;a newly allocated UTF-8 string containing the resource’s URI or NULL. Use g_free() when done using it.
-
-;;;[nullable]
-
-;;;gtk_recent_info_get_age ()
-;;;int
-;;;gtk_recent_info_get_age (GtkRecentInfo *info);
-;;;Gets the number of days elapsed since the last update of the resource pointed by info .
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;a positive integer containing the number of days elapsed since the time this resource was last modified
-
-;;;gtk_recent_info_is_local ()
-;;;gboolean
-;;;gtk_recent_info_is_local (GtkRecentInfo *info);
-;;;Checks whether the resource is local or not by looking at the scheme of its URI.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;TRUE if the resource is local
-
-;;;gtk_recent_info_exists ()
-;;;gboolean
-;;;gtk_recent_info_exists (GtkRecentInfo *info);
-;;;Checks whether the resource pointed by info still exists. At the moment this check is done only on resources pointing to local files.
-
-;;;Parameters
-;;;info
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;TRUE if the resource exists
-
-;;;gtk_recent_info_match ()
-;;;gboolean
-;;;gtk_recent_info_match (GtkRecentInfo *info_a,
-;;;                       GtkRecentInfo *info_b);
-;;;Checks whether two GtkRecentInfo point to the same resource.
-
-;;;Parameters
-;;;info_a
-
-;;;a GtkRecentInfo
-
-;;;info_b
-
-;;;a GtkRecentInfo
-
-;;;Returns
-;;;TRUE if both GtkRecentInfo point to the same resource, FALSE otherwise
-
-
-
-;;; --- End of file gtk.recent-manager.lisp ------------------------------------
+(declaim (inline recent-manager-new))
+
+(defun recent-manager-new ()
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @return{A newly created @class{gtk:recent-manager} object.}
+  @begin{short}
+    Creates a new recent manager object.
+  @end{short}
+  Recent manager objects are used to handle the list of recently used resources.
+  A @class{gtk:recent-manager} object monitors the recently used resources list,
+  and emits the \"changed\" signal each time something inside the list changes.
+
+  The @class{gtk:recent-manager} object is expensive: be sure to create it
+  only when needed. You should use the @fun{gtk:recent-manager-default} function
+  instead.
+  @see-class{gtk:recent-manager}
+  @see-function{gtk:recent-manager-default}"
+  (make-instance 'recent-manager))
+
+(export 'recent-manager-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_manager_get_default () -> recent-manager-default
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_manager_get_default" recent-manager-default)
+    (g:object recent-manager)
+ #+liber-documentation
+ "@version{2023-1-29}
+  @return{A unique @class{gtk:recent-manager} object.}
+  @begin{short}
+    Gets a unique instance of the default recent manager.
+  @end{short}
+  @see-class{gtk:recent-manager}")
+
+(export 'recent-manager-default)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_manager_add_item ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_manager_add_item" recent-manager-add-item) :boolean
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[manager]{a @class{gtk:recent-manager} object}
+  @argument[uri]{a string with a valid URI}
+  @begin{return}
+    @em{True} if the new item was successfully added to the recently used
+    resources list.
+  @end{return}
+  @begin{short}
+    Adds a new resource, pointed by @arg{uri}, into the recently used resources
+    list.
+  @end{short}
+  This function automatically retrieves some of the needed metadata and
+  setting other metadata to common default values. It then feeds the data to
+  the @fun{gtk:recent-manager-add-full} function.
+
+  See the @fun{gtk:recent-manager-add-full} function if you want to explicitly
+  define the metadata for the resource pointed by @arg{uri}.
+  @see-class{gtk:recent-manager}
+  @see-function{gtk:recent-manager-add-full}"
+  (manager (g:object recent-manager))
+  (uri :string))
+
+(export 'recent-manager-add-item)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_manager_add_full ()
+;;;
+;;; gboolean gtk_recent_manager_add_full (GtkRecentManager *manager,
+;;;                                       const gchar *uri,
+;;;                                       const GtkRecentData *recent_data);
+;;;
+;;; Adds a new resource, pointed by uri, into the recently used resources list,
+;;; using the metadata specified inside the GtkRecentData structure passed in
+;;; recent_data.
+;;;
+;;; The passed URI will be used to identify this resource inside the list.
+;;;
+;;; In order to register the new recently used resource, metadata about the
+;;; resource must be passed as well as the URI; the metadata is stored in a
+;;; GtkRecentData structure, which must contain the MIME type of the resource
+;;; pointed by the URI; the name of the application that is registering the
+;;; item, and a command line to be used when launching the item.
+;;;
+;;; Optionally, a GtkRecentData structure might contain a UTF-8 string to be
+;;; used when viewing the item instead of the last component of the URI; a short
+;;; description of the item; whether the item should be considered private -
+;;; that is, should be displayed only by the applications that have registered
+;;; it.
+;;;
+;;; manager :
+;;;     a GtkRecentManager
+;;;
+;;; uri :
+;;;     a valid URI
+;;;
+;;; recent_data :
+;;;     metadata of the resource
+;;;
+;;; Returns :
+;;;     TRUE if the new item was successfully added to the recently used
+;;;     resources list, FALSE otherwise.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_manager_remove_item ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_manager_remove_item" recent-manager-remove-item) :boolean
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[manager]{a @class{gtk:recent-manager} object}
+  @argument[uri]{a string with the URI of the item you wish to remove}
+  @begin{return}
+    @em{True} if the item pointed by @arg{uri} has been successfully removed by
+    the recently used resources list, and @em{false} otherwise.
+  @end{return}
+  @begin{short}
+    Removes a resource pointed by @arg{uri} from the recently used resources
+    list handled by a recent manager.
+  @end{short}
+  @see-class{gtk:recent-manager}
+  @see-function{gtk:recent-manager-add-item}"
+  (manager (g:object recent-manager))
+  (uri :string)
+  (err :pointer))
+
+(export 'recent-manager-remove-item)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_manager_lookup_item ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_manager_lookup_item" %recent-manager-lookup-item)
+    (g:boxed recent-info :return)
+  (manager (g:object recent-manager))
+  (uri :string)
+  (err :pointer))
+
+(defun recent-manager-lookup-item (manager uri)
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[manager]{a @class{gtk:recent-manager} object}
+  @argument[uri]{a string with the URI}
+  @begin{return}
+    A @class{gtk:recent-info} instance containing information about the
+    resource pointed by @arg{uri}, or @code{nil} if the URI was not registered
+    in the recently used resources list.
+  @end{return}
+  @begin{short}
+    Searches for a URI inside the recently used resources list, and returns a
+    structure containing informations about the resource like its MIME type, or
+    its display name.
+  @end{short}
+  @see-class{gtk:recent-manager}
+  @see-class{gtk:recent-info}"
+  (with-g-error (err)
+    (%recent-manager-lookup-item manager uri err)))
+
+(export 'recent-manager-lookup-item)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_manager_has_item ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_manager_has_item" recent-manager-has-item) :boolean
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[manager]{a @class{gtk:recent-manager} object}
+  @argument[uri]{a string with the URI}
+  @return{@em{True} if the resource was found, @em{false} otherwise.}
+  @begin{short}
+    Checks whether there is a recently used resource registered with @arg{uri}
+    inside the recent manager.
+  @end{short}
+  @see-class{gtk:recent-manager}
+  @see-function{gtk:recent-manager-add-item}"
+  (manager (g:object recent-manager))
+  (uri :string))
+
+(export 'recent-manager-has-item)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_manager_move_item ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_manager_move_item" %recent-manager-move-item) :boolean
+  (manager (g:object recent-manager))
+  (uri :string)
+  (newuri :string)
+  (err :pointer))
+
+(defun recent-manager-move-item (manager uri newuri)
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[manager]{a @class{gtk:recent-manager} object}
+  @argument[uri]{a string with the URI of a recently used resource}
+  @argument[newuri]{a string with the new URI of the recently used resource, or
+    @code{nil} to remove the item pointed by @arg{uri} in the list}
+  @return{@em{True} on success.}
+  @begin{short}
+    Changes the location of a recently used resource from @arg{uri}
+    to @arg{newuri}.
+  @end{short}
+  Please note that this function will not affect the resource pointed by the
+  URIs, but only the URI used in the recently used resources list.
+  @see-class{gtk:recent-manager}"
+  (with-g-error (err)
+    (%recent-manager-move-item manager uri newuri err)))
+
+(export 'recent-manager-move-item)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_manager_get_items ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_manager_get_items" recent-manager-items)
+    (g:list-t (g:boxed recent-info :return))
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[manager]{a @class{gtk:recent-manager} object}
+  @begin{return}
+    A list of newly allocated @class{gtk:recent-info} instances.
+  @end{return}
+  @begin{short}
+    Gets the list of recently used resources.
+  @end{short}
+  @see-class{gtk:recent-manager}
+  @see-class{gtk:recent-info}"
+  (manager (g:object recent-manager)))
+
+(export 'recent-manager-items)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_manager_purge_items ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_manager_purge_items" %recent-manager-purge-items) :int
+  (manager (g:object recent-manager))
+  (err :pointer))
+
+(defun recent-manager-purge-items (manager)
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[manager]{a @class{gtk:recent-manager} object}
+  @begin{return}
+    An integer with the number of items that have been removed from the
+    recently used resources list.
+  @end{return}
+  @begin{short}
+    Purges every item from the recently used resources list.
+  @end{short}
+  @see-class{gtk:recent-manager}"
+  (with-g-error (err)
+    (%recent-manager-purge-items manager err)))
+
+(export 'recent-manager-purge-items)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_ref ()
+;;;
+;;; GtkRecentInfo *
+;;; gtk_recent_info_ref (GtkRecentInfo *info);
+;;;
+;;; Increases the reference count of recent_info by one.
+;;;
+;;; info :
+;;;     a GtkRecentInfo
+;;;
+;;; Returns :
+;;;     the recent info object with its reference count increased by one
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_unref ()
+;;;
+;;; void
+;;; gtk_recent_info_unref (GtkRecentInfo *info);
+;;;
+;;; Decreases the reference count of info by one. If the reference count reaches
+;;; zero, info is deallocated, and the memory freed.
+;;;
+;;; info :
+;;;     a GtkRecentInfo
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_uri ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_uri" recent-info-uri) :string
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{A string with the URI of the resource.}
+  @short{Gets the URI of the resource.}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-uri)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_display_name ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_display_name" recent-info-display-name) :string
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{A string with the display name of the resource.}
+  @begin{short}
+    Gets the name of the resource.
+  @end{short}
+  If none has been defined, the basename of the resource is obtained.
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-display-name)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_description ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_description" recent-info-description) :string
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{A string with the description of the resource.}
+  @short{Gets the (short) description of the resource.}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-description)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_mime_type ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_mime_type" recent-info-mime-type) :string
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{A string with the MIME type of the resource.}
+  @short{Gets the MIME type of the resource.}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-mime-type)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_added ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_added" recent-info-added) g:date-time
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @begin{return}
+    A long integer with the number of seconds elapsed from system's Epoch when
+    the resource was added to the list, or -1 on failure.
+  @end{return}
+  @begin{short}
+    Gets the timestamp, seconds from system's Epoch, when the resource was added
+    to the recently used resources list.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-added)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_modified () -> recent-info-modified
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_modified" recent-info-modified) g:date-time
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @begin{return}
+    A long integer with the number of seconds elapsed from system's Epoch when
+    the resource was last modified, or -1 on failure.
+  @end{return}
+  @begin{short}
+    Gets the timestamp, seconds from system's Epoch, when the resource was last
+    modified.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-modified)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_visited () -> recent-info-visited
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_visited" recent-info-visited) g:date-time
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @begin{return}
+    A long integer with the number of seconds elapsed from system's Epoch when
+    the resource was last visited, or -1 on failure.
+  @end{return}
+  @begin{short}
+    Gets the timestamp, seconds from system's Epoch, when the resource was last
+    visited.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-visited)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_private_hint ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_private_hint" recent-info-private-hint) :boolean
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{@em{True} if the private flag was found, @em{false} otherwise.}
+  @begin{short}
+    Gets the value of the \"private\" flag.
+  @end{short}
+  Resources in the recently used list that have this flag set to @em{true}
+  should only be displayed by the applications that have registered them.
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-private-hint)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_application_info () -> recent-info-application-info
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_application_info"
+          %recent-info-application-info) :boolean
+  (info (g:boxed recent-info))
+  (name :string)
+  (exec (:pointer (:string :free-from-foreign nil)))
+  (count (:pointer :int))
+  (time (:pointer :long)))
+
+(defun recent-info-application-info (info name)
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @argument[name]{a string with the name of the application that has registered
+    this item}
+  @begin{return}
+    @arg{exec} -- a string containing the command line @br{}
+    @arg{count} -- an integer with the number of times this item was registered
+    @br{}
+    @arg{time} -- an long integer with the timestamp this item was last
+    registered for this application
+  @end{return}
+  @begin{short}
+    Gets the data regarding the application that has registered the resource
+    pointed by info.
+  @end{short}
+  If the command line contains any escape characters defined inside the
+  storage specification, they will be expanded.
+  @see-class{gtk:recent-info}"
+  (with-foreign-objects ((exec :string) (count :uint) (time :long))
+    (%recent-info-application-info info name exec count time)
+    (values (cffi:mem-ref exec :string)
+            (cffi:mem-ref count :uint)
+            (cffi:mem-ref time :long))))
+
+(export 'recent-info-application-info)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_applications () -> recent-info-applications
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_applications" %recent-info-applications) g:strv-t
+  (info (g:boxed recent-info))
+  (length (:pointer :size)))
+
+(defun recent-info-applications (info)
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{A list of strings.}
+  @begin{short}
+    Retrieves the list of applications that have registered this resource.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (with-foreign-object (length :size)
+    (%recent-info-applications info length)))
+
+(export 'recent-info-applications)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_last_application ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_last_application" recent-info-last-application)
+    (:string :free-from-foreign t)
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{A string with an application name.}
+  @begin{short}
+    Gets the name of the last application that have registered the recently used
+    resource represented by @arg{info}.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-last-application)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_has_application ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_has_application" recent-info-has-application)
+    :boolean
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @argument[name]{a string containing an application name}
+  @return{@em{True} if an application with name @arg{app-name} was found,
+    @em{false} otherwise.}
+  @begin{short}
+    Checks whether an application registered this resource using @arg{name}.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info))
+  (name :string))
+
+(export 'recent-info-has-application)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_create_app_info ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_create_app_info" %recent-info-create-app-info)
+    (g:object g:app-info)
+  (info (g:boxed recent-info))
+  (name :string)
+  (err :pointer))
+
+(defun recent-info-create-app-info (info name)
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @argument[name]{a string with the name of the application that should be
+    mapped to a @class{g:app-info} object, if @code{nil} is used then the
+    default application for the MIME type is used}
+  @begin{return}
+    The newly created @class{g:app-info} object, or @code{nil}.
+  @end{return}
+  @begin{short}
+    Creates a @class{g:app-info} object for the specified
+    @class{gtk:recent-info} instance.
+  @end{short}
+  @see-class{gtk:recent-info}
+  @see-class{g:app-info}"
+  (with-g-error (err)
+    (%recent-info-create-app-info info name err)))
+
+(export 'recent-info-create-app-info)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_groups () -> recent-info-groups
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_groups" %recent-info-groups) g:strv-t
+  (info (g:boxed recent-info))
+  (length (:pointer :size)))
+
+(defun recent-info-groups (info)
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{A list of strings.}
+  @begin{short}
+    Returns all groups registered for the recently used item info.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (with-foreign-object (length :size)
+    (%recent-info-groups info length)))
+
+(export 'recent-info-groups)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_has_group ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_has_group" recent-info-has-group) :boolean
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @argument[group]{a string with the name of a group}
+  @return{@em{True} if the group was found.}
+  @begin{short}
+    Checks whether @arg{group} appears inside the groups registered for the
+    recently used item info.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info))
+  (group :string))
+
+(export 'recent-info-has-group)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_gicon () -> recent-info-gicon
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_gicon" recent-info-gicon)
+    (g:object g-icon)
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{A @class{g-icon} icon containing the icon, or @code{nil}.}
+  @begin{short}
+    Retrieves the icon associated to the resource MIME type.
+  @end{short}
+  @see-class{gtk:recent-info}
+  @see-class{g-icon}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-gicon)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_short_name () -> recent-info-short-name
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_short_name" recent-info-short-name)
+    (:string :free-from-foreign t)
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{A string in UTF-8 encoding.}
+  @begin{short}
+    Computes a valid UTF-8 string that can be used as the name of the item in a
+    menu or list.
+  @end{short}
+  For example, calling this function on an item that refers to
+  \"file:///foo/bar.txt\" will yield \"bar.txt\".
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-short-name)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_uri_display () -> recent-info-uri-display
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_uri_display" recent-info-uri-display)
+    (:string :free-from-foreign t)
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @begin{return}
+    A UTF-8 string containing the resource's URI or @code{nil}.
+  @end{return}
+  @begin{short}
+    Gets a displayable version of the resource's URI.
+  @end{short}
+  If the resource is local, it returns a local path. If the resource is not
+  local, it returns the UTF-8 encoded content of the function
+  @fun{gtk:recent-info-uri}.
+  @see-class{gtk:recent-info}
+  @see-function{gtk:recent-info-uri}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-uri-display)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_get_age () -> recent-info-age
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_get_age" recent-info-age) :int
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @begin{return}
+    A positive integer containing the number of days elapsed since the time
+    this resource was last modified.
+  @end{return}
+  @begin{short}
+    Gets the number of days elapsed since the last update of the resource
+    pointed by info.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-age)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_is_local ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_is_local" recent-info-is-local) :boolean
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{@em{True} if the resource is local.}
+  @begin{short}
+    Checks whether the resource is local or not by looking at the scheme of its
+    URI.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-is-local)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_exists ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_exists" recent-info-exists) :boolean
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info]{a @class{gtk:recent-info} instance}
+  @return{@em{True} if the resource exists.}
+  @begin{short}
+    Checks whether the resource pointed by info still exists.
+  @end{short}
+  At the moment this check is done only on resources pointing to local files.
+  @see-class{gtk:recent-info}"
+  (info (g:boxed recent-info)))
+
+(export 'recent-info-exists)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_recent_info_match ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_recent_info_match" recent-info-match) :boolean
+ #+liber-documentation
+ "@version{#2023-1-29}
+  @argument[info1]{a @class{gtk:recent-info}}
+  @argument[info2]{a @class{gtk:recent-info}}
+  @begin{return}
+    @em{True} if both @class{gtk:recent-info} instances point to se same
+    resource, @em{false} otherwise.
+  @end{return}
+  @begin{short}
+    Checks whether two @class{gtk:recent-info} instances point to the same
+    resource.
+  @end{short}
+  @see-class{gtk:recent-info}"
+  (info1 (g:boxed recent-info))
+  (info2 (g:boxed recent-info)))
+
+(export 'recent-info-match)
+
+;;; --- End of file gtk4.recent-manager.lisp -----------------------------------
