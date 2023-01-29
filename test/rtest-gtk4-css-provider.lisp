@@ -88,7 +88,7 @@
 
 (test css-provider-load-from-file
   (let* ((provider (gtk:css-provider-new))
-         (path (sys-path "test/css-accordion.css"))
+         (path (sys-path "resource/css-accordion.css"))
          (file (g:file-new-for-path path)))
     (is-false (gtk:css-provider-load-from-file provider file))
     (is (= 2716 (length (gtk:css-provider-to-string provider))))))
@@ -96,7 +96,7 @@
 #+nil
 (test css-provider-load-from-file
   (let* ((provider (gtk:css-provider-new))
-         (path (sys-path "test/css-accordion.css"))
+         (path (sys-path "resource/css-accordion.css"))
          (file path))
     (is-false (gtk:css-provider-load-from-file provider file))
     (is (= 2716 (length (gtk:css-provider-to-string provider))))))
@@ -105,7 +105,7 @@
 ;;;     gtk_css_provider_load_from_path
 
 (test css-provider-load-from-path
-  (let ((path (sys-path "test/css-accordion.css"))
+  (let ((path (sys-path "resource/css-accordion.css"))
         (provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-from-path provider path))
     (is (= 2716 (length (gtk:css-provider-to-string provider))))))
@@ -114,7 +114,7 @@
 
 #-windows
 (test css-provider-load-from-resource
-  (with-g-resource (resource (sys-path "test/rtest-resource.gresource"))
+  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((provider (gtk:css-provider-new))
           (path "/com/crategus/test/css-accordion.css"))
       (is-false (gtk:css-provider-load-from-resource provider path))
@@ -164,4 +164,4 @@ button:last-child > label {
 ;;;     gtk_css_section_get_start_location
 ;;;     gtk_css_section_get_end_location
 
-;; 2022-11-9
+;;; --- 2023-1-29 --------------------------------------------------------------

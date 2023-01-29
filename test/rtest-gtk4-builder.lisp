@@ -153,19 +153,19 @@
     (is (typep (gtk:builder-object builder "dialog1") 'gtk:dialog)))
   (let ((builder (make-instance 'gtk:builder
                                 :from-file
-                                (sys-path "test/application.ui"))))
+                                (sys-path "resource/application.ui"))))
     (is (typep (gtk:builder-object builder "menubar") 'g:menu))))
 
 ;;;     gtk_builder_new_from_file
 
 (test builder-new-from-file
-  (is (typep (gtk:builder-new-from-file (sys-path "test/application.ui") )
+  (is (typep (gtk:builder-new-from-file (sys-path "resource/application.ui") )
              'gtk:builder)))
 
 ;;;     gtk_builder_new_from_resource
 
 (test builder-new-from-resource
-  (with-g-resource (resource (sys-path "test/rtest-resource.gresource"))
+  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
     (is (typep (gtk:builder-new-from-resource "/com/crategus/test/dialog.ui")
                'gtk:builder))))
 
@@ -178,12 +178,13 @@
 
 (test builder-add-from-file
   (let ((builder (gtk:builder-new)))
-    (is-true (gtk:builder-add-from-file builder (sys-path "test/application.ui")))))
+    (is-true (gtk:builder-add-from-file builder
+                                        (sys-path "resource/application.ui")))))
 
 ;;;     gtk_builder_add_from_resource
 
 (test builder-add-from-resource
-  (with-g-resource (resource (sys-path "test/rtest-resource.gresource"))
+  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-from-resource builder
                                               "/com/crategus/test/dialog.ui")))))
@@ -201,7 +202,7 @@
 (test builder-add-objects-from-file.1
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-file builder
-                                                (sys-path "test/dialog.ui")
+                                                (sys-path "resource/dialog.ui")
                                                 "dialog1"))
     (is (typep (gtk:builder-object builder "dialog1") 'gtk:dialog))
     (is (equal '(gtk:dialog gtk:box gtk:box gtk:button)
@@ -210,7 +211,7 @@
 (test builder-add-objects-from-file.2
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-file builder
-                                                (sys-path "test/dialog.ui")
+                                                (sys-path "resource/dialog.ui")
                                                 "dialog1"
                                                 "ok_button"))
     (is (typep (gtk:builder-object builder "dialog1") 'gtk:dialog))
@@ -220,7 +221,7 @@
 ;;;     gtk_builder_add_objects_from_resource
 
 (test builder-add-objects-from-resource
-  (with-g-resource (resource (sys-path "test/rtest-resource.gresource"))
+  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-objects-from-resource builder
                             "/com/crategus/test/dialog.ui"
@@ -284,4 +285,4 @@
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; 2022-11-5
+;;; --- 2023-1-29 --------------------------------------------------------------

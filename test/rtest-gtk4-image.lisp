@@ -101,16 +101,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     file
-;;;     gicon
-;;;     icon-name
-;;;     icon-size
-;;;     paintable
-;;;     pixel-size
-;;;     resource
-;;;     storage-type
-;;;     use-fallback
-
 (test image-properties
   (let ((image (make-instance 'gtk:image)))
     (is-false (gtk:image-file image))
@@ -142,7 +132,7 @@
 ;;;     gtk_image_new_from_file
 
 (test image-new-from-file
-  (let ((image (gtk:image-new-from-file (sys-path "test/gtk-logo-24.png"))))
+  (let ((image (gtk:image-new-from-file (sys-path "resource/gtk-logo-24.png"))))
     (is (string= "gtk-logo-24"
                  (pathname-name (gtk:image-file image))))
     (is-false (gtk:image-gicon image))
@@ -157,7 +147,7 @@
 ;;;     gtk_image_new_from_resource
 
 (test image-new-from-resource
-  (with-g-resource (resource (sys-path "test/rtest-resource.gresource"))
+  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((image (gtk:image-new-from-resource
                      "/com/crategus/test/gtk-logo-24.png")))
       (is-false (gtk:image-file image))
@@ -175,7 +165,7 @@
 
 (test image-new-from-pixbuf
   (let* ((pixbuf (gdk:pixbuf-new-from-file
-                     (sys-path "test/gtk-logo-24.png")))
+                     (sys-path "resource/gtk-logo-24.png")))
          (image (gtk:image-new-from-pixbuf pixbuf)))
     (is (typep pixbuf 'gdk:pixbuf))
     (is-false (gtk:image-file image))
@@ -192,7 +182,7 @@
 
 (test image-new-from-paintable
   (let* ((paintable (gdk:texture-new-from-filename
-                        (sys-path "test/gtk-logo-24.png")))
+                        (sys-path "resource/gtk-logo-24.png")))
          (image (gtk:image-new-from-paintable paintable)))
     (is (typep paintable 'gdk:texture))
     (is (typep paintable 'gdk:paintable))
@@ -243,4 +233,4 @@
 ;;;     gtk_image_set_from_icon_name
 ;;;     gtk_image_set_from_gicon
 
-;;; 2022-11-12
+;;; --- 2023-1-29 --------------------------------------------------------------
