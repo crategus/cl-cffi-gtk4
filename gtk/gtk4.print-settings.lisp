@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.print-settings.lisp
+;;; gtk4.print-settings.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -1778,13 +1778,14 @@ lambda (key value)
   (filename :string)
   (err :pointer))
 
-(defun print-settings-new-from-file (filename)
+(defun print-settings-new-from-file (path)
  #+liber-documentation
- "@version{#2021-3-17}
-  @argument[filename]{a string with the filename to read the settings from}
+ "@version{#2023-1-29}
+  @argument[path]{a pathname or namestring with the file to read the settings
+    from}
   @return{The restored @class{gtk:print-settings} object.}
   @begin{short}
-    Reads the print settings from @arg{filename}.
+    Reads the print settings from @arg{path}.
   @end{short}
   Returns a new @class{gtk:print-settings} object with the restored settings,
   or @code{nil} if an error occurred.
@@ -1792,7 +1793,7 @@ lambda (key value)
   @see-function{gtk:print-settings-to-file}
   @see-function{gtk:print-settings-load-file}"
   (with-ignore-g-error (err)
-    (%print-settings-new-from-file filename err)))
+    (%print-settings-new-from-file (namestring path) err)))
 
 (export 'print-settings-new-from-file)
 
@@ -1875,23 +1876,24 @@ lambda (key value)
 
 (defcfun ("gtk_print_settings_load_file" %print-settings-load-file) :boolean
   (settings (g:object print-settings))
-  (file-name :string)
-  (error :pointer))
+  (filename :string)
+  (err :pointer))
 
-(defun print-settings-load-file (settings file-name)
+(defun print-settings-load-file (settings path)
  #+liber-documentation
- "@version{#2020-4-6}
+ "@version{2023-1-29}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[file-name]{a string with the filename to read the settings from}
+  @argument[path]{a pathname or namestring with the filename to read the
+    settings from}
   @return{@em{True} on success.}
   @begin{short}
-    Reads the print settings from @arg{file-name}.
+    Reads the print settings from @arg{path}.
   @end{short}
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-to-file}
   @see-function{gtk:print-settings-new-from-file}"
   (with-g-error (err)
-    (%print-settings-load-file settings file-name err)))
+    (%print-settings-load-file settings (namestring path) err)))
 
 (export 'print-settings-load-file)
 
@@ -1933,13 +1935,13 @@ lambda (key value)
 (defcfun ("gtk_print_settings_to_file" %print-settings-to-file) :boolean
   (settings (g:object print-settings))
   (filename :string)
-  (error :pointer))
+  (err :pointer))
 
-(defun print-settings-to-file (settings filename)
+(defun print-settings-to-file (settings path)
  #+liber-documentation
- "@version{#2020-4-6}
+ "@version{2023-1-29}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @argument[file-name]{a string with the filename to save to}
+  @argument[path]{a pathname or namestring with the filename to save to}
   @return{@em{True} on success.}
   @begin{short}
     This function saves the print settings from settings to @arg{file-name}.
@@ -1948,7 +1950,7 @@ lambda (key value)
   @see-function{gtk:print-settings-load-file}
   @see-function{gtk:print-settings-new-from-file}"
   (with-g-error (err)
-    (%print-settings-to-file settings filename err)))
+    (%print-settings-to-file settings (namestring path) err)))
 
 (export 'print-settings-to-file)
 
@@ -1996,4 +1998,4 @@ lambda (key value)
 
 (export 'print-settings-to-gvariant)
 
-;;; --- End of file gtk.print-settings.lisp ------------------------------------
+;;; --- End of file gtk4.print-settings.lisp -----------------------------------

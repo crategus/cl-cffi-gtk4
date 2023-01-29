@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.texture.lisp
+;;; gdk4.texture.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -170,39 +170,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_texture_new_from_filename ()
-;;;
-;;; GdkTexture*
-;;; gdk_texture_new_from_filename (const char* path,
-;;;                                GError** error)
-;;;
-;;; Creates a new texture by loading an image from a file.
-;;;
-;;; The file format is detected automatically. The supported formats are PNG and
-;;; JPEG, though more formats might be available.
-;;;
-;;; If NULL is returned, then error will be set.
-;;;
-;;; This function is threadsafe, so that you can e.g. use GTask and
-;;; g_task_run_in_thread() to avoid blocking the main thread while loading a big
-;;; image.
-;;;
-;;; Since 4.6
-;;;
-;;; path :
-;;;     The filename to load. The data is owned by the caller of the function.
-;;;     The value is a file system path, using the OS encoding.
-;;;
-;;; error :
-;;;     The return location for a recoverable error. The argument can be NULL.
-;;;     If the return location is not NULL, then you must initialize it to a
-;;;     NULL GError*. The argument will left initialized to NULL by the
-;;;     constructor if there are no errors. In case of error, the argument will
-;;;     be set to a newly allocated GError; the caller will take ownership of
-;;;     the data, and be responsible for freeing it.
-;;;
-;;; Return :
-;;;     A newly-created GdkTexture. The caller of the function takes ownership
-;;;     of the data, and is responsible for freeing it.
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
@@ -212,9 +179,26 @@
   (err :pointer))
 
 #+gtk-4-6
-(defun texture-new-from-filename (filename)
+(defun texture-new-from-filename (path)
+ #+liber-documentation
+ "@version{2023-1-29}
+  @argument[path]{a pathname or namestring with the file to load, the value is
+    a file system path, using the OS encoding}
+  @return{A newly-created @class{gdk:texture} object.}
+  @begin{short}
+    Creates a new texture by loading an image from a file.
+  @end{short}
+  The file format is detected automatically. The supported formats are PNG and
+  JPEG, though more formats might be available.
+
+  This function is threadsafe, so that you can e.g. use @code{GTask} and the
+  @code{g_task_run_in_thread()} function to avoid blocking the main thread
+  while loading a big image.
+
+  Since 4.6
+  @see-class{gdk:texture}"
   (with-g-error (err)
-    (%texture-new-from-filename filename err)))
+    (%texture-new-from-filename (namestring path) err)))
 
 #+gtk-4-6
 (export 'texture-new-from-filename)
@@ -506,4 +490,4 @@
 ;;;Default value: 1
 
 
-;;; --- End of file gdk.texture.lisp -------------------------------------------
+;;; --- End of file gdk4.texture.lisp ------------------------------------------

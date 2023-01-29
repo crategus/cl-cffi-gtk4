@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.builder.lisp
+;;; gtk4.builder.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -225,7 +225,7 @@
 (defmethod initialize-instance :after ((builder builder)
                                        &key from-file from-string)
   (when from-file
-    (builder-add-from-file builder from-file))
+    (builder-add-from-file builder (namestring from-file)))
   (when from-string
     (builder-add-from-string builder from-string)))
 
@@ -540,11 +540,13 @@
 ;;; gtk_builder_new_from_file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_new_from_file" builder-new-from-file)
-    (g:object builder)
+(defcfun ("gtk_builder_new_from_file" %builder-new-from-file) (g:object builder)
+  (filename :string))
+
+(defun builder-new-from-file (path)
  #+liber-documentation
- "@version{#2022-1-10}
-  @argument[filename]{a string with the filename}
+ "@version{2023-1-29}
+  @argument[path]{a pathname or a namestring for the file}
   @return{A @class{gtk:builder} object containing the described interface.}
   @begin{short}
     Builds the @class{gtk:builder} UI definition from a user interface
@@ -554,7 +556,7 @@
   program will be aborted. You should only ever attempt to parse user interface
   descriptions that are shipped as part of your program.
   @see-class{gtk:builder}"
-  (filename :string))
+  (%builder-new-from-file (namestring path)))
 
 (export 'builder-new-from-file)
 
@@ -657,11 +659,11 @@
   (filename :string)
   (err :pointer))
 
-(defun builder-add-from-file (builder filename)
+(defun builder-add-from-file (builder path)
  #+liber-documentation
- "@version{#2022-9-13}
+ "@version{2023-1-29}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[filename]{a string with the name of the file to parse}
+  @argument[path]{a pathname or namestring with the name of the file to parse}
   @begin{short}
     Parses a file containing a @class{gtk:builder} UI definition and merges it
     with the current contents of the builder.
@@ -673,13 +675,13 @@
 
   If there is an error opening the file or parsing the description then the
   program will be aborted.
-    @see-class{gtk:builder}
+  @see-class{gtk:builder}
   @see-function{gtk:builder-current-object}
   @see-function{gtk:builder-new-from-file}
   @see-function{gtk:builder-add-from-resource}
   @see-function{gtk:builder-add-from-string}"
   (with-g-error (err)
-    (%builder-add-from-file builder filename err)))
+    (%builder-add-from-file builder (namestring path) err)))
 
 (export 'builder-add-from-file)
 
@@ -758,8 +760,8 @@
 ;;; gtk_builder_add_objects_from_file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_add_objects_from_file"
-          %builder-add-objects-from-file) :uint
+(defcfun ("gtk_builder_add_objects_from_file" %builder-add-objects-from-file)
+    :uint
   (builder (g:object builder))
   (filename :string)
   (strptr :pointer)
@@ -785,11 +787,11 @@
                  do (foreign-string-free (mem-aref ,strptr :pointer ,i)))
            (foreign-string-free ,strptr))))))
 
-(defun builder-add-objects-from-file (builder filename &rest args)
+(defun builder-add-objects-from-file (builder path &rest args)
  #+liber-documentation
- "@version{#2022-9-13}
+ "@version{2023-1-29}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[filename]{a string with the name of the file to parse}
+  @argument[path]{a pathname or namestring with the name of the file to parse}
   @argument[args]{strings with the object IDs to build}
   @return{A positive value on success, 0 if an error occurred.}
   @begin{short}
@@ -808,7 +810,7 @@
   @see-function{gtk:builder-add-objects-from-resource}"
   (with-foreign-string-array (strptr args)
     (with-g-error (err)
-      (%builder-add-objects-from-file builder filename strptr err))))
+      (%builder-add-objects-from-file builder (namestring path) strptr err))))
 
 (export 'builder-add-objects-from-file)
 
@@ -1094,4 +1096,4 @@
 ;;;     TRUE on success
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gtk.builder.lisp -------------------------------------------
+;;; --- End of file gtk4.builder.lisp ------------------------------------------

@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.image.lisp
+;;; gtk4.image.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -517,13 +517,16 @@
 ;;; gtk_image_new_from_file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_new_from_file" image-new-from-file) (g:object widget)
+(defcfun ("gtk_image_new_from_file" %image-new-from-file) (g:object widget)
+  (filename :string))
+
+(defun image-new-from-file (path)
  #+liber-documentation
- "@version{#2022-7-20}
-  @argument[filename]{a string with the name of the file}
+ "@version{2023-1-29}
+  @argument[path]{a pathname or namestring with the name of the file}
   @return{A new @class{gtk:image} widget.}
   @begin{short}
-    Creates a new image displaying the file @arg{filename}.
+    Creates a new image displaying the file @arg{path}.
   @end{short}
   If the file is not found or cannot be loaded, the resulting @class{gtk:image}
   widget will display a \"broken image\" icon. This function never returns
@@ -539,7 +542,7 @@
   @see-class{gtk:image}
   @see-function{gdk-texture-new-from-file}
   @see-function{gtk:image-storage-type}"
-  (filename :string))
+  (%image-new-from-file (namestring path)))
 
 (export 'image-new-from-file)
 
@@ -808,4 +811,4 @@
 
 (export 'image-set-from-gicon)
 
-;;; --- End of file gtk.image.lisp ---------------------------------------------
+;;; --- End of file gtk4.image.lisp --------------------------------------------
