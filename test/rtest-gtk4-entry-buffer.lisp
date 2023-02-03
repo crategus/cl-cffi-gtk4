@@ -93,7 +93,31 @@
     (is (= 4 (gtk:entry-buffer-delete-text buffer 8 4)))
     (is (string= "Ägypten ein Land." (gtk:entry-buffer-text buffer)))))
 
-;;;     gtk_entry_buffer_emit_deleted_text
-;;;     gtk_entry_buffer_emit_inserted_text
+;;;   gtk_entry_buffer_emit_deleted_text
 
-;;; 2022-11-17
+(test entry-buffer-emit-deleted-text
+  (let ((buffer (gtk:entry-buffer-new "first second third")))
+    (g:signal-connect buffer "deleted-text"
+        (lambda (object position n-chars)
+          (is (eq buffer object))
+          (is (string= "first second third"
+                       (gtk:entry-buffer-text object)))
+          (is (= 6 position))
+          (is (= 7 n-chars))
+          nil))
+    (is-false (gtk:entry-buffer-emit-deleted-text buffer 6 7))))
+
+;;;   gtk_entry_buffer_emit_inserted_text
+
+(test entry-buffer-emit-inserted-text
+  (let ((buffer (gtk:entry-buffer-new "first second third")))
+    (g:signal-connect buffer "inserted-text"
+        (lambda (object position text n-chars)
+          (is (eq buffer object))
+          (is (= 6 position))
+          (is (equal "text" text))
+          (is (= 7 n-chars))
+          nil))
+    (gtk:entry-buffer-emit-inserted-text buffer 6 "text" 7)))
+
+;;; --- 2023-1-30 --------------------------------------------------------------
