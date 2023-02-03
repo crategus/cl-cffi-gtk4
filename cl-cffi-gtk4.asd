@@ -194,7 +194,7 @@
      (:file "gtk4.lock-button")           ; GtkLockButton
 
      ;; Multiline Text Editor
-     (:file "gtk4.text-iter")             ; GtkTextIter
+     (:file "gtk4.text-iter")             ; Text buffer iterator
      (:file "gtk4.text-tag")              ; GtkTextTag
      (:file "gtk4.text-tag-table")        ; GtkTextTagTable
      (:file "gtk4.text-mark")             ; GtkTextMark
@@ -235,7 +235,7 @@
 
      ;; Numeric and Text Data Entry
      (:file "gtk4.editable")              ; GtkEditable
-     (:file "gtk4.entry-buffer")          ; GtkEntryBuffer
+     (:file "gtk4.entry-buffer")          ; Text buffer for GtkEntry
      (:file "gtk4.text")                  ; GtkText
      (:file "gtk4.entry")                 ; GtkEntry
      (:file "gtk4.entry-completion")      ; GtkEntryCompletion
@@ -294,7 +294,7 @@
      ;; Printing
      (:file "gtk4.print-operation")          ; GtkPrintOperation
      (:file "gtk4.print-context")            ; GtkPrintContext
-     (:file "gtk4.paper-size")               ; GtkPaperSize
+     (:file "gtk4.paper-size")               ; Support for named paper sizes
      (:file "gtk4.print-settings")           ; GtkPrintSettings
      (:file "gtk4.page-setup")               ; GtkPageSetup
      (:file "gtk4.page-setup-unix-dialog")   ; GtkPageSetupUnixDialog
@@ -512,12 +512,12 @@
      (:file "rtest-gtk4-lock-button")        ; GtkLockButton
 
      ;; Multiline Text Editor
-;    (:file "gtk4.text-iter")             ; GtkTextIter
-;    (:file "gtk4.text-tag")              ; GtkTextTag
-;    (:file "gtk4.text-tag-table")        ; GtkTextTagTable
-;    (:file "gtk4.text-mark")             ; GtkTextMark
-;    (:file "gtk4.text-buffer")           ; GtkTextBuffer
-;    (:file "gtk4.text-view")             ; GtkTextView
+     (:file "rtest-gtk4-text-iter")          ; Text buffer iterator
+;    (:file "gtk4.text-tag")                 ; GtkTextTag
+;    (:file "gtk4.text-tag-table")           ; GtkTextTagTable
+;    (:file "gtk4.text-mark")                ; GtkTextMark
+;    (:file "gtk4.text-buffer")              ; GtkTextBuffer
+;    (:file "gtk4.text-view")                ; GtkTextView
 
      ;; Tree, List and Icon Grid Widgets
      (:file "rtest-gtk4-tree-model")      ; GtkTreeModel, GtkTreeIter, GtkTreePath
@@ -553,7 +553,7 @@
 
      ;; Numeric and Text Data Entry
      (:file "rtest-gtk4-editable")                ; GtkEditable
-     (:file "rtest-gtk4-entry-buffer")            ; GtkEntryBuffer
+     (:file "rtest-gtk4-entry-buffer")            ; Text buffer for GtkEntry
      (:file "rtest-gtk4-text")                    ; GtkText
      (:file "rtest-gtk4-entry")                   ; GtkEntry
      (:file "rtest-gtk4-entry-completion")        ; GtkEntryCompletion
@@ -613,7 +613,7 @@
      ;; Printing
      (:file "rtest-gtk4-print-operation")     ; GtkPrintOperation
 ;    (:file "gtk4.print-context")             ; GtkPrintContext
-;    (:file "gtk4.paper-size")                ; GtkPaperSize
+     (:file "rtest-gtk4-paper-size")          ; Support for named paper sizes
 ;    (:file "gtk4.print-settings")            ; GtkPrintSettings
 ;    (:file "gtk4.page-setup")                ; GtkPageSetup
      #-win32

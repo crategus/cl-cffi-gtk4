@@ -1172,7 +1172,7 @@
       @about-function{editable-property}
     @end{subsection}
     @begin[GtkEntryBuffer]{subsection}
-      Text buffer for GtkEntry.
+      Text buffer for the @class{gtk:entry} widget.
       @about-class{entry-buffer}
       @about-generic{entry-buffer-length}
       @about-generic{entry-buffer-max-length}

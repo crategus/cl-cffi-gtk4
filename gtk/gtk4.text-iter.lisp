@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.text-iter.lisp
+;;; gtk4.text-iter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -172,12 +172,11 @@
 (setf (liber:alias-for-symbol 'text-search-flags)
       "GFlags"
       (liber:symbol-documentation 'text-search-flags)
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @short{Flags affecting how a search is done.}
-
   If neither @code{:visible-only} nor @code{:text-only} are enabled, the match
-  must be exact. The special @code{0xFFFC} character will match embedded
-  paintables or child widgets.
+  must be exact. The special @code{0xFFFC} character will match embedded pixbufs
+  or child widgets.
   @begin{pre}
 (define-g-flags \"GtkTextSearchFlags\" text-search-flags
   (:export t
@@ -189,7 +188,7 @@
   @begin[code]{table}
     @entry[:visible-only]{Search only visible data. A search match may have
       invisible text interspersed.}
-    @entry[:text-only]{Search only text. A match may have paintables or child
+    @entry[:text-only]{Search only text. A match may have pixbufs or child
       widgets mixed inside the matched range.}
     @entry[:case-insensitive]{The text will be matched regardless of what case
       it is in.}
@@ -199,37 +198,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTextIter
-;;; ----------------------------------------------------------------------------
-
-;; TODO: Simplify the implementation of GtkTextIter
-
-(glib-init:at-init () (foreign-funcall "gtk_text_iter_get_type" :size))
-
-(define-g-boxed-opaque text-iter "GtkTextIter"
-  :alloc (%text-iter-alloc))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'text-iter)
-      "GBoxed"
-      (documentation 'text-iter 'type)
- "@version{#2021-6-13}
-  @begin{short}
-    Most text manipulation is accomplished with iterators, represented by a
-    @sym{gtk:text-iter} instance.
-  @end{short}
-  An iterator represents a position between two characters in the text buffer.
-
-  The @sym{gtk:text-iter} structure is designed to be allocated on the stack.
-  It is guaranteed to be copiable by value and never contain any heap-allocated
-  data. Iterators are not valid indefinitely. Whenever the text buffer is
-  modified in a way that affects the number of characters in the text buffer,
-  all outstanding iterators become invalid. Note that deleting 5 characters and
-  then reinserting 5 still invalidates iterators, though you end up with the
-  same number of characters you pass through a state with a different number.
-  @see-class{gtk:text-buffer}")
-
-(export (boxed-related-symbols 'text-iter))
-
 ;;; ----------------------------------------------------------------------------
 
 (defcstruct %text-iter
@@ -248,18 +216,50 @@
   (dummy13 :int)
   (dummy14 :pointer))
 
+(defcfun ("gtk_text_iter_copy" %text-iter-copy) :pointer
+  (iter :pointer))
+
 (defun %text-iter-alloc ()
   (with-foreign-object (iter '(:struct %text-iter))
     (%text-iter-copy iter)))
 
 ;;; ----------------------------------------------------------------------------
+
+(define-g-boxed-opaque text-iter "GtkTextIter"
+  :type-initializer "gtk_text_iter_get_type"
+  :alloc (%text-iter-alloc))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'text-iter)
+      "GBoxed"
+      (documentation 'text-iter 'type)
+ "@version{2023-2-2}
+  @begin{short}
+    Most text manipulation is accomplished with iterators, represented by a
+    @sym{gtk:text-iter} instance.
+  @end{short}
+  An iterator represents a position between two characters in the text buffer.
+
+  The @sym{gtk:text-iter} structure is designed to be allocated on the stack.
+  It is guaranteed to be copiable by value and never contain any heap-allocated
+  data. Iterators are not valid indefinitely. Whenever the text buffer is
+  modified in a way that affects the number of characters in the text buffer,
+  all outstanding iterators become invalid. Note that deleting 5 characters and
+  then reinserting 5 still invalidates iterators, though you end up with the
+  same number of characters you pass through a state with a different number.
+  @see-constructor{gtk:text-iter-new}
+  @see-constructor{gtk:text-iter-copy}
+  @see-class{gtk:text-buffer}")
+
+(export 'text-iter)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_text_iter_get_buffer -> text-iter-buffer
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_buffer" text-iter-buffer)
-    (g:object text-buffer)
+(defcfun ("gtk_text_iter_get_buffer" text-iter-buffer) (g:object text-buffer)
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} iterator}
   @return{A @class{gtk:text-buffer} object.}
   @begin{short}
@@ -272,16 +272,29 @@
 (export 'text-iter-buffer)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk:text-iter-new
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline text-iter-new))
+
+(defun text-iter-new ()
+ "@version{2023-2-2}
+  @return{A newly allocated @class{gtk:text-iter} instance.}
+  @begin{short}
+    Returns an newly allocated iterator.
+  @end{short}
+  @see-class{gtk:text-iter}"
+  (make-instance 'text-iter))
+
+(export 'text-iter-new)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_text_iter_copy
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_copy" %text-iter-copy) :pointer
-  (iter :pointer))
-
-(defcfun ("gtk_text_iter_copy" text-iter-copy)
-    (g:boxed text-iter)
+(defcfun ("gtk_text_iter_copy" text-iter-copy) (g:boxed text-iter :return)
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{A copy of @arg{iter}.}
   @begin{short}
@@ -297,7 +310,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_text_iter_assign" text-iter-assign) :void
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[other]{another @class{gtk:text-iter} instance}
   @begin{short}
@@ -310,7 +323,7 @@
 (export 'text-iter-assign)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_iter_free ()
+;;; gtk_text_iter_free ()                                  not needed
 ;;;
 ;;; void gtk_text_iter_free (GtkTextIter *iter);
 ;;;
@@ -327,16 +340,16 @@
 ;;; gtk_text_iter_set_offset -> text-iter-offset
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf text-iter-offset) (char-offset iter)
-  (foreign-funcall "gtk_text_iter_set_offset"
-                   (g:boxed text-iter) iter
-                   :int char-offset
-                   :void)
-  char-offset)
+(defun (setf text-iter-offset) (offset iter)
+  (cffi:foreign-funcall "gtk_text_iter_set_offset"
+                        (g:boxed text-iter) iter
+                        :int offset
+                        :void)
+  offset)
 
 (defcfun ("gtk_text_iter_get_offset" text-iter-offset) :int
  #+liber-documentation
- "@version{#2021-12-9}
+ "@version{2023-2-2}
   @syntax[]{(gtk:text-iter-offset iter) => offset}
   @syntax[]{(setf (gtk:text-iter-offset iter) offset)}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -344,7 +357,6 @@
   @begin{short}
     Accessor of the character offset of the iterator.
   @end{short}
-
   The @sym{gtk:text-iter-offset} function returns the character offset of an
   iterator. The @sym{(setf gtk:text-iter-offset)} function sets the iterator
   to point to the character offset.
@@ -364,24 +376,23 @@
 ;;; gtk_text_iter_set_line -> text-iter-line
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf text-iter-line) (line-number iter)
-  (foreign-funcall "gtk_text_iter_set_line"
-                   (g:boxed text-iter) iter
-                   :int line-number
-                   :void)
-  line-number)
+(defun (setf text-iter-line) (line iter)
+  (cffi:foreign-funcall "gtk_text_iter_set_line"
+                        (g:boxed text-iter) iter
+                        :int line
+                        :void)
+  line)
 
 (defcfun ("gtk_text_iter_get_line" text-iter-line) :int
  #+liber-documentation
- "@version{#2021-7-24}
-  @syntax[]{(gtk:text-iter-line iter) => line-number}
-  @syntax[]{(setf (gtk:text-iter-line iter) line-number)}
+ "@version{2023-2-2}
+  @syntax[]{(gtk:text-iter-line iter) => line}
+  @syntax[]{(setf (gtk:text-iter-line iter) line)}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @argument[line-number]{an integer with the line number, counted from 0}
+  @argument[line]{an integer with the line number, counted from 0}
   @begin{short}
     Accessor of the line number containing the iterator.
   @end{short}
-
   The @sym{gtk:text-iter-line} function returns the line number containing the
   iterator. The @sym{(setf gtk:text-iter-line)} function moves the iterator
   to the start of the given line number.
@@ -401,26 +412,25 @@
 ;;; gtk_text_iter_set_line_offset -> text-iter-line-offset
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf text-iter-line-offset) (char-on-line iter)
-  (foreign-funcall "gtk_text_iter_set_line_offset"
-                   (g:boxed text-iter) iter
-                   :int char-on-line
-                   :void)
-  char-on-line)
+(defun (setf text-iter-line-offset) (offset iter)
+  (cffi:foreign-funcall "gtk_text_iter_set_line_offset"
+                        (g:boxed text-iter) iter
+                        :int offset
+                        :void)
+  offset)
 
 (defcfun ("gtk_text_iter_get_line_offset" text-iter-line-offset) :int
  #+liber-documentation
- "@version{#2021-7-24}
-  @syntax[]{(gtk:text-iter-line-offset iter) => char-on-line}
-  @syntax[]{(setf (gtk:text-iter-line-offset iter) char-on-line)}
+ "@version{2023-2-2}
+  @syntax[]{(gtk:text-iter-line-offset iter) => offset}
+  @syntax[]{(setf (gtk:text-iter-line-offset iter) offset)}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @argument[char-on-line]{an integer with a character offset relative to the
-    start of the current line of the iterator}
+  @argument[offset]{an integer with a character offset relative to the start of
+    the current line of the iterator}
   @begin{short}
     Accessor of the character offset relative to the start of the current line
     of the iterator.
   @end{short}
-
   The @sym{gtk:text-iter-line-offset} function returns the character offset of
   the iterator, counting from the start of a newline-terminated line. The
   @sym{(setf gtk:text-iter-line-offset)} function moves the iterator within a
@@ -443,26 +453,25 @@
 ;;; gtk_text_iter_set_line_index -> text-iter-line-index
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf text-iter-line-index) (byte-on-line iter)
-  (foreign-funcall "gtk_text_iter_set_line_index"
-                   (g:boxed text-iter) iter
-                   :int byte-on-line
-                   :void)
-  byte-on-line)
+(defun (setf text-iter-line-index) (index iter)
+  (cffi:foreign-funcall "gtk_text_iter_set_line_index"
+                        (g:boxed text-iter) iter
+                        :int index
+                        :void)
+  index)
 
 (defcfun ("gtk_text_iter_get_line_index" text-iter-line-index) :int
  #+liber-documentation
- "@version{#2021-6-13}
-  @syntax[]{(gtk:text-iter-line-index iter) => byte-on-line}
-  @syntax[]{(setf (gtk:text-iter-line-offset iter) byte-on-line)}
+ "@version{2023-2-2}
+  @syntax[]{(gtk:text-iter-line-index iter) => index}
+  @syntax[]{(setf (gtk:text-iter-line-offset iter) index)}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @argument[byte-on-line]{an integer with a byte index relative to the start
-    of the current line of the iterator}
+  @argument[index]{an integer with a byte index relative to the start of the
+    current line of the iterator}
   @begin{short}
     Accessor of the byte offset relative to the start of the current line
     of the iterator.
   @end{short}
-
   The @sym{gtk:text-iter-line-index} function returns the byte index of the
   iterator, counting from the start of a newline-terminated line. The
   @sym{(setf gtk:text-iter-line-index)} function sets the byte index.
@@ -483,26 +492,25 @@
 ;;; gtk_text_iter_set_visible_line_index -> text-iter-visible-line-index
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf text-iter-visible-line-index) (byte-on-line iter)
-  (foreign-funcall "gtk_text_iter_set_visible_line_index"
-                   (g:boxed text-iter) iter
-                   :int byte-on-line
-                   :void)
-  byte-on-line)
+(defun (setf text-iter-visible-line-index) (index iter)
+  (cffi:foreign-funcall "gtk_text_iter_set_visible_line_index"
+                        (g:boxed text-iter) iter
+                        :int index
+                        :void)
+  index)
 
-(defcfun ("gtk_text_iter_get_visible_line_index"
-           text-iter-visible-line-index) :int
+(defcfun ("gtk_text_iter_get_visible_line_index" text-iter-visible-line-index)
+    :int
  #+liber-documentation
- "@version{#2021-6-13}
-  @syntax[]{(gtk:text-iter-visible-line-index iter) => byte-on-line}
-  @syntax[]{(setf (gtk:text-iter-visible-line-index iter) byte-on-line)}
+ "@version{2023-2-2}
+  @syntax[]{(gtk:text-iter-visible-line-index iter) => index}
+  @syntax[]{(setf (gtk:text-iter-visible-line-index iter) index)}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @argument[byte-on-line]{an integer with a byte index}
+  @argument[index]{an integer with a byte index}
   @begin{short}
     Accessor of the byte index relative to the start of the current line
     of the iterator.
   @end{short}
-
   The @sym{gtk:text-iter-visible-line-index} function returns the number of
   bytes from the start of the line to the given iterator, not counting bytes
   that are invisible due to tags with the \"invisible\" flag toggled on.
@@ -518,26 +526,25 @@
 ;;; gtk_text_iter_set_visible_line_offset -> text-iter-visible-line-offset
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf text-iter-visible-line-offset) (char-on-line iter)
-  (foreign-funcall "gtk_text_iter_set_visible_line_offset"
-                   (g:boxed text-iter) iter
-                   :int char-on-line
-                   :void)
-  char-on-line)
+(defun (setf text-iter-visible-line-offset) (offset iter)
+  (cffi:foreign-funcall "gtk_text_iter_set_visible_line_offset"
+                        (g:boxed text-iter) iter
+                        :int offset
+                        :void)
+  offset)
 
-(defcfun ("gtk_text_iter_get_visible_line_offset"
-           text-iter-visible-line-offset) :int
+(defcfun ("gtk_text_iter_get_visible_line_offset" text-iter-visible-line-offset)
+    :int
  #+liber-documentation
- "@version{#2021-6-13}
-  @syntax[]{(gtk:text-iter-visible-line-offset iter) => char-on-line}
-  @syntax[]{(setf (gtk:text-iter-visible-line-offset iter) char-on-line)}
+ "@version{#2023-2-2}
+  @syntax[]{(gtk:text-iter-visible-line-offset iter) => offset}
+  @syntax[]{(setf (gtk:text-iter-visible-line-offset iter) offset)}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @argument[char-on-line]{an integer with a character offset}
+  @argument[offset]{an integer with a character offset}
   @begin{short}
     Accessor of the character offset relative to the start of the current line
     of the iterator.
   @end{short}
-
   The @sym{gtk:text-iter-visible-line-offset} function returns the offset in
   characters from the start of the line to the given iterator, not counting
   characters that are invisible due to tags with the \"invisible\" flag toggled
@@ -555,7 +562,7 @@
 
 (defcfun ("gtk_text_iter_get_char" text-iter-char) unichar
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{A Unicode character.}
   @begin{short}
@@ -580,7 +587,7 @@
 (defcfun ("gtk_text_iter_get_slice" text-iter-slice)
     (:string :free-from-foreign t)
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[start]{a @class{gtk:text-iter} instance with the start of a range}
   @argument[end]{a @class{gtk:text-iter} instance with the end of a range}
   @return{A string with a slice of text from the text buffer.}
@@ -592,8 +599,8 @@
   elements in the text buffer, such as images. Because images are encoded in
   the slice, byte and character offsets in the returned string will correspond
   to byte offsets in the text buffer. Note that the character @code{0xFFFC} can
-  occur in normal text as well, so it is not a reliable indicator that a
-  paintable or widget is in the text buffer.
+  occur in normal text as well, so it is not a reliable indicator that a pixbuf
+  or widget is in the text buffer.
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-function{gtk:text-iter-text}"
@@ -609,14 +616,13 @@
 (defcfun ("gtk_text_iter_get_text" text-iter-text)
     (:string :free-from-foreign t)
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[start]{a @class{gtk:text-iter} instance with the start of a range}
   @argument[end]{a @class{gtk:text-iter} instance with the end of a range}
   @return{A string with characters from the text buffer.}
   @begin{short}
     Returns a string with the text in the given range.
   @end{short}
-
   If the range contains non-text elements such as images, the character and
   byte offsets in the returned string will not correspond to character and byte
   offsets in the text buffer. If you want offsets to correspond, see the
@@ -636,15 +642,14 @@
 (defcfun ("gtk_text_iter_get_visible_slice" text-iter-visible-slice)
     (:string :free-from-foreign t)
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[start]{a @class{gtk:text-iter} instance with the start of a range}
-  @argument[end]{a @class{gtk:text-iter} intance with the end of a range}
+  @argument[end]{a @class{gtk:text-iter} instance with the end of a range}
   @return{A string with a slice of text from the text buffer.}
   @begin{short}
     Like the @fun{gtk:text-iter-slice} function, but invisible text is not
     included.
   @end{short}
-
   Invisible text is usually invisible because a @class{gtk:text-tag} object
   with the \"invisible\" attribute turned on has been applied to it.
   @see-class{gtk:text-iter}
@@ -663,7 +668,7 @@
 (defcfun ("gtk_text_iter_get_visible_text" text-iter-visible-text)
     (:string :free-from-foreign t)
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[start]{a @class{gtk:text-iter} instance with the start of a range}
   @argument[end]{a @class{gtk:text-iter} instance with the end of a range}
   @return{A string containing visible text in the range.}
@@ -671,7 +676,6 @@
     Like the @fun{gtk:text-iter-text} function, but invisible text is not
     included.
   @end{short}
-
   Invisible text is usually invisible because a @class{gtk:text-tag} object
   with the \"invisible\" attribute turned on has been applied to it.
   @see-class{gtk:text-iter}
@@ -690,7 +694,7 @@
 (defcfun ("gtk_text_iter_get_paintable" text-iter-paintable)
     (g:object gdk:paintable)
  #+liber-documentation
- "@version{#2022-1-22}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{The @class{gdk:paintable} object at the iterator.}
   @begin{short}
@@ -711,7 +715,7 @@
 (defcfun ("gtk_text_iter_get_marks" text-iter-marks)
     (g:slist-t (g:object text-mark))
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{List of @class{gtk:text-mark} objects.}
   @begin{short}
@@ -735,15 +739,15 @@
 (defcfun ("gtk_text_iter_get_toggled_tags" text-iter-toggled-tags)
     (g:slist-t (g:object text-tag))
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @argument[toggled-on]{@em{true} to get toggled-on tags}
+  @argument[toggled]{@em{true} to get toggled-on tags}
   @return{A list of @class{gtk:text-tag} objects toggled at this point.}
   @begin{short}
     Returns a list of tags that are toggled on or off at this point.
   @end{short}
 
-  If @arg{toggled-on} is @em{true}, the list contains tags that are toggled on.
+  If @arg{toggled} is @em{true}, the list contains tags that are toggled on.
   If a tag is toggled on at the iterator, then some non-empty range of
   characters following the iterator has that tag applied to it. If a tag is
   toggled off, then some non-empty range following the iterator does not have
@@ -752,7 +756,7 @@
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-tag}"
   (iter (g:boxed text-iter))
-  (toggled-on :boolean))
+  (toggled :boolean))
 
 (export 'text-iter-toggled-tags)
 
@@ -763,7 +767,7 @@
 (defcfun ("gtk_text_iter_get_child_anchor" text-iter-child-anchor)
     (g:object text-child-anchor)
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{The @class{gtk:text-child-anchor} object at the iterator.}
   @begin{short}
@@ -783,7 +787,7 @@
 
 (defcfun ("gtk_text_iter_starts_tag" text-iter-starts-tag) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[tag]{a @class{gtk:text-tag} object, or @code{nil}}
   @return{A boolean whether the iterator is the start of a range tagged with
@@ -817,7 +821,7 @@
 
 (defcfun ("gtk_text_iter_ends_tag" text-iter-ends-tag) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[tag]{a @class{gtk:text-tag} object, or @code{nil}}
   @return{A boolean whether the iterator is the end of a range tagged with
@@ -825,7 +829,6 @@
   @begin{short}
     Returns @em{true} if @arg{tag} is toggled off at exactly this point.
   @end{short}
-
   If @arg{tag} is @code{nil}, returns @em{true} if any tag is toggled off at
   this point. Note that the @sym{gtk:text-iter-ends-tag} function returns
   @em{true} if the iterator is the end of the tagged range. The
@@ -847,7 +850,7 @@
 
 (defcfun ("gtk_text_iter_toggles_tag" text-iter-toggles-tag) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[tag]{a @class{gtk:text-tag} object, or @code{nil}}
   @return{A boolean whether @arg{tag} is toggled on or off at the iterator.}
@@ -855,7 +858,6 @@
     Tells you whether a range with @arg{tag} applied to it begins or ends at
     the iterator.
   @end{short}
-
   This is equivalent to
   @begin{pre}
 (or (gtk:text-iter-starts-tag iter tag)
@@ -877,7 +879,7 @@
 
 (defcfun ("gtk_text_iter_has_tag" text-iter-has-tag) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[tag]{a @class{gtk:text-tag} object}
   @return{A boolean whether the iterator is tagged with @arg{tag}.}
@@ -901,7 +903,7 @@
 (defcfun ("gtk_text_iter_get_tags" text-iter-tags)
     (g:slist-t (g:object text-tag))
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{List of @class{gtk:text-tag} objects.}
   @begin{short}
@@ -921,7 +923,7 @@
 
 (defcfun ("gtk_text_iter_editable" text-iter-editable) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[setting]{@em{true} if text is editable by default}
   @return{A boolean whether the iterator is inside an editable range.}
@@ -930,8 +932,9 @@
     of text.
   @end{short}
   Non-editable text is \"locked\" and cannot be changed by the user via the
-  @class{gtk:text-view} widget.  If no tags applied to this text affect
-  editability, @arg{setting} will be returned.
+  @class{gtk:text-view} widget. This function is simply a convenience wrapper
+  around the @fun{gtk:text-iter-attributes} function. If no tags applied to
+  this text affect editability, @arg{setting} will be returned.
 
   You do not want to use this function to decide whether text can be inserted
   at the iterator, because for insertion you do not want to know whether the
@@ -941,6 +944,7 @@
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-view}
+  @see-function{gtk:text-iter-attributes}
   @see-function{gtk:text-iter-can-insert}"
   (iter (g:boxed text-iter))
   (setting :boolean))
@@ -953,7 +957,7 @@
 
 (defcfun ("gtk_text_iter_can_insert" text-iter-can-insert) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[editabe]{@em{true} if text is editable by default}
   @return{A boolean whether text inserted at the iterator would be editable.}
@@ -965,8 +969,8 @@
 
   If text inserted at the iterator would be editable then the user should be
   allowed to insert text at the iterator. The @fun{gtk:text-buffer-insert}
-  function with the value @em{true} for the argument @arg{interactive} uses
-  this function to decide whether insertions are allowed at a given position.
+  function with the @em{true} value for the @arg{interactive} argument uses this
+  function to decide whether insertions are allowed at a given position.
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-function{gtk:text-buffer-insert}"
@@ -981,13 +985,12 @@
 
 (defcfun ("gtk_text_iter_starts_word" text-iter-starts-word) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if the iterator is at the start of a word.}
   @begin{short}
     Determines whether the iterator begins a natural-language word.
   @end{short}
-
   Word breaks are determined by Pango and should be correct for nearly any
   language, if not, the correct fix would be to the Pango word break algorithms.
   @see-class{gtk:text-iter}
@@ -1003,13 +1006,12 @@
 
 (defcfun ("gtk_text_iter_ends_word" text-iter-ends-word) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if the iterator is at the end of a word.}
   @begin{short}
     Determines whether the iterator ends a natural-language word.
   @end{short}
-
   Word breaks are determined by Pango and should be correct for nearly any
   language, if not, the correct fix would be to the Pango word break algorithms.
   @see-class{gtk:text-iter}
@@ -1025,14 +1027,13 @@
 
 (defcfun ("gtk_text_iter_inside_word" text-iter-inside-word) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if the iterator is inside a word.}
   @begin{short}
     Determines whether the iterator is inside a natural-language word, as
     opposed to say inside some whitespace.
   @end{short}
-
   Word breaks are determined by Pango and should be correct for nearly any
   language, if not, the correct fix would be to the Pango word break algorithms.
   @see-class{gtk:text-iter}
@@ -1049,7 +1050,7 @@
 
 (defcfun ("gtk_text_iter_starts_line" text-iter-starts-line) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{A boolean whether the iterator begins a line.}
   @begin{short}
@@ -1074,7 +1075,7 @@
 
 (defcfun ("gtk_text_iter_ends_line" text-iter-ends-line) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{A boolean whether the iterator is at the end of a line.}
   @begin{short}
@@ -1099,16 +1100,14 @@
 ;;; gtk_text_iter_starts_sentence
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_starts_sentence" text-iter-starts-sentence)
-    :boolean
+(defcfun ("gtk_text_iter_starts_sentence" text-iter-starts-sentence) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if the iterator is at the start of a sentence.}
   @begin{short}
     Determines whether the iterator begins a sentence.
   @end{short}
-
   Sentence boundaries are determined by Pango and should be correct for nearly
   any language, if not, the correct fix would be to the Pango text boundary
   algorithms.
@@ -1125,13 +1124,12 @@
 
 (defcfun ("gtk_text_iter_ends_sentence" text-iter-ends-sentence) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if the iterator is at the end of a sentence.}
   @begin{short}
     Determines whether the iterator ends a sentence.
   @end{short}
-
   Sentence boundaries are determined by Pango and should be correct for nearly
   any language, if not, the correct fix would be to the Pango text boundary
   algorithms.
@@ -1146,10 +1144,9 @@
 ;;; gtk_text_iter_inside_sentence
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_inside_sentence" text-iter-inside-sentence)
-    :boolean
+(defcfun ("gtk_text_iter_inside_sentence" text-iter-inside-sentence) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if the iterator is inside a sentence.}
   @begin{short}
@@ -1157,7 +1154,6 @@
     between two sentences, e.g. after a period and before the first letter of
     the next sentence.
   @end{short}
-
   Sentence boundaries are determined by Pango and should be correct for nearly
   any language, if not, the correct fix would be to the Pango text boundary
   algorithms.
@@ -1176,18 +1172,18 @@
 (defcfun ("gtk_text_iter_is_cursor_position" text-iter-is-cursor-position)
     :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if the cursor can be placed at the iterator.}
   @begin{short}
     See the @fun{gtk:text-iter-forward-cursor-position} function, the
-    @symbol{pango:log-attr} structure or the @fun{pango:default-break} function
+    @symbol{pango-log-attr} structure or the @fun{pango-default-break} function
     for details on what a cursor position is.
   @end{short}
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
-  @see-symbol{pango:log-attr}
-  @see-function{pango:default-break}
+  @see-symbol{pango-log-attr}
+  @see-function{pango-default-break}
   @see-function{gtk:text-iter-forward-cursor-position}"
   (iter (g:boxed text-iter)))
 
@@ -1199,7 +1195,7 @@
 
 (defcfun ("gtk_text_iter_get_chars_in_line" text-iter-chars-in-line) :int
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{An integer with the number of characters in the line.}
   @begin{short}
@@ -1219,7 +1215,7 @@
 
 (defcfun ("gtk_text_iter_get_bytes_in_line" text-iter-bytes-in-line) :int
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{An integer with the number of bytes in the line.}
   @begin{short}
@@ -1240,18 +1236,20 @@
 (defcfun ("gtk_text_iter_get_language" text-iter-language)
     (g:boxed pango:language)
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{A @class{pange-language} instance with the language in effect at
     the iterator.}
   @begin{short}
-    Returns the language in effect at the iterator.
+    A convenience wrapper around the @fun{gtk:text-iter-attributes} function,
+    which returns the language in effect at the iterator.
   @end{short}
   If no tags affecting language apply to the iterator, the return value is
   identical to that of the @fun{gtk:default-language} function.
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-class{pango:language}
+  @see-function{gtk:text-iter-attributes}
   @see-function{gtk:default-language}"
   (iter (g:boxed text-iter)))
 
@@ -1263,14 +1261,13 @@
 
 (defcfun ("gtk_text_iter_is_end" text-iter-is-end) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{A boolean whether the iterator is the end iterator.}
   @begin{short}
     Returns @em{true} if the iterator is the end iterator, i.e. one past the
     last dereferenceable iterator in the text buffer.
   @end{short}
-
   The @sym{gtk:text-iter-is-end} function is the most efficient way to check
   whether an iterator is the end iterator.
   @see-class{gtk:text-iter}
@@ -1286,7 +1283,7 @@
 
 (defcfun ("gtk_text_iter_is_start" text-iter-is-start) :boolean
  #+liber-documentation
- "@version{#2021-6-13}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{A boolean whether the iterator is the first in the text buffer.}
   @begin{short}
@@ -1306,7 +1303,7 @@
 
 (defun text-iter-move (iter &key (count 1) (by :char) (direction :forward))
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[count]{an integer with the default value 1}
   @argument[by]{a keyword which determines the operation to perform, the
@@ -2263,13 +2260,12 @@
 
 (defcfun ("gtk_text_iter_forward_to_end" text-iter-forward-to-end) :void
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @begin{short}
     Moves the iterator forward to the \"end iterator\", which points one past
     the last valid character in the text buffer.
   @end{short}
-
   The @fun{gtk:text-iter-char} function called on the end iterator returns
   0, which is convenient for writing loops.
   @see-class{gtk:text-iter}
@@ -2286,7 +2282,7 @@
 (defcfun ("gtk_text_iter_forward_to_line_end" text-iter-forward-to-line-end)
     :boolean
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if we moved and the new location is not the end iterator.}
   @begin{short}
@@ -2309,10 +2305,10 @@
 ;;; gtk_text_iter_forward_to_tag_toggle
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_to_tag_toggle"
-          text-iter-forward-to-tag-toggle) :boolean
+(defcfun ("gtk_text_iter_forward_to_tag_toggle" text-iter-forward-to-tag-toggle)
+    :boolean
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[tag]{a @class{gtk:text-tag} object, or @code{nil}}
   @return{A boolean whether we found a tag toggle after the iterator.}
@@ -2320,7 +2316,6 @@
     Moves forward to the next toggle (on or off) of @arg{tag}, or to the next
     toggle of any tag if @arg{tag} is @code{nil}.
   @end{short}
-
   If no matching tag toggles are found, returns @em{false}, otherwise @em{true}.
   Does not return toggles located at the iterator, only toggles after the
   iterator. Sets the iterator to the location of the toggle, or to the end of
@@ -2337,9 +2332,9 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_text_iter_backward_to_tag_toggle"
-          text-iter-backward-to-tag-toggle) :boolean
+           text-iter-backward-to-tag-toggle) :boolean
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[tag]{a @class{gtk:text-tag} object, or @code{nil}}
   @return{A boolean whether we found a tag toggle before the iterator.}
@@ -2347,7 +2342,6 @@
     Moves backward to the next toggle (on or off) of the @arg{tag}, or to the
     next toggle of any tag if @arg{tag} is @code{nil}.
   @end{short}
-
   If no matching tag toggles are found, returns @em{false}, otherwise @em{true}.
   Does not return toggles located at the iterator, only toggles before the
   iterator. Sets the iterator to the location of the toggle, or the start of
@@ -2373,7 +2367,7 @@
 (setf (liber:alias-for-symbol 'text-char-predicate)
       "Callback"
       (liber:symbol-documentation 'text-char-predicate)
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @begin{short}
     A callback function used by the @fun{gtk:text-iter-find-char} function to
     search a char in the text buffer.
@@ -2397,7 +2391,7 @@ lambda (ch)
 
 (defun text-iter-find-char (iter predicate &key limit (direction :forward))
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[pred]{a @sym{gtk:text-char-predicate} callback function to be
     called on each character}
@@ -2409,7 +2403,7 @@ lambda (ch)
   @begin{short}
     This is a convenience function of the Lisp implementation which combines
     the @fun{gtk:text-iter-forward-find-char} and
-    @fun{gtk:text-iter-backward-find-char} functions into one single function.
+  @fun{gtk:text-iter-backward-find-char} functions into one single function.
   @end{short}
 
   The direction of the search is indicated with the keyword argument
@@ -2427,13 +2421,13 @@ lambda (ch)
   (with-stable-pointer (ptr predicate)
     (if (eq direction :forward)
         (%text-iter-forward-find-char iter
-                                          (callback text-char-predicate)
-                                          ptr
-                                          limit)
+                                      (cffi:callback text-char-predicate)
+                                      ptr
+                                      limit)
         (%text-iter-backward-find-char iter
-                                           (callback text-char-predicate)
-                                           ptr
-                                           limit))))
+                                       (cffi:callback text-char-predicate)
+                                       ptr
+                                       limit))))
 
 (export 'text-iter-find-char)
 
@@ -2510,7 +2504,7 @@ lambda (ch)
 
 (defun text-iter-search (iter str &key flags limit (direction :forward))
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-22}
   @argument[iter]{a @class{gtk:text-iter} with the start of search}
   @argument[str]{a search string}
   @argument[flags]{the @symbol{gtk:text-search-flags} flags affecting how
@@ -2520,10 +2514,10 @@ lambda (ch)
   @argument[direction]{the value @code{:forward} indicates forward search and
     the value @code{:backward} backward search}
   @begin{return}
-    @arg{search-p} -- a boolean whether a match was found @br{}
-    @arg{match-start} -- a @class{gtk:text-iter} instance with the start of
+    @code{search-p} -- a boolean whether a match was found @br{}
+    @code{match-start} -- a @class{gtk:text-iter} instance with the start of
       match, or @code{nil} @br{}
-    @arg{match-end} -- a @class{gtk:text-iter} instance with the end of match,
+    @code{match-end} -- a @class{gtk:text-iter} instance with the end of match,
       or @code{nil}
   @end{return}
   @begin{short}
@@ -2549,17 +2543,17 @@ lambda (ch)
         (match-end (make-instance 'text-iter)))
     (if (if (eq direction :forward)
             (%text-iter-forward-search iter
-                                           str
-                                           flags
-                                           match-start
-                                           match-end
-                                           limit)
+                                       str
+                                       flags
+                                       match-start
+                                       match-end
+                                       limit)
             (%text-iter-backward-search iter
-                                            str
-                                            flags
-                                            match-start
-                                            match-end
-                                            limit))
+                                        str
+                                        flags
+                                        match-start
+                                        match-end
+                                        limit))
         (values t match-start match-end)
         (values nil nil nil))))
 
@@ -2670,7 +2664,7 @@ lambda (ch)
 
 (defcfun ("gtk_text_iter_equal" text-iter-equal) :boolean
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @argument[lhs]{a @class{gtk:text-iter} instance}
   @argument[rhs]{another @class{gtk:text-iter} instance}
   @return{@em{True} if the iterators point to the same place in the text
@@ -2678,7 +2672,6 @@ lambda (ch)
   @begin{short}
     Tests whether two iterators are equal, using the fastest possible mechanism.
   @end{short}
-
   This function is very fast. You can expect it to perform better than e.g.
   getting the character offset for each iterator and comparing the offsets
   yourself. Also, it is a bit faster than the @fun{gtk:text-iter-compare}
@@ -2697,7 +2690,7 @@ lambda (ch)
 
 (defcfun ("gtk_text_iter_compare" text-iter-compare) :int
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @argument[lhs]{a @class{gtk:text-iter} instance}
   @argument[rhs]{another @class{gtk:text-iter} instance}
   @return{-1 if @arg{lhs} is less than @arg{rhs}, 1 if @arg{lhs} is greater, 0
@@ -2723,7 +2716,7 @@ lambda (ch)
 
 (defcfun ("gtk_text_iter_in_range" text-iter-in-range) :boolean
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[start]{a @class{gtk:text-iter} instance with the start of range}
   @argument[end]{a @class{gtk:text-iter} instance with the end of range}
@@ -2746,18 +2739,17 @@ lambda (ch)
 
 (defcfun ("gtk_text_iter_order" text-iter-order) :void
  #+liber-documentation
- "@version{#2021-6-15}
+ "@version{#2023-2-2}
   @argument[first]{a @class{gtk:text-iter} instance}
   @argument[second]{another @class{gtk:text-iter} instance}
   @begin{short}
     Swaps the value of @arg{first} and @arg{second} if @arg{second} comes
     before @arg{first} in the text buffer.
   @end{short}
-
   That is, ensures that @arg{first} and @arg{second} are in sequence. Most text
   buffer functions that take a range call this automatically on your behalf, so
   there is no real reason to call it yourself in those cases. There are some
-  exceptions, such as the @fun{gtk:text-iter-in-range} function, that expect a
+  exceptions, such as the @fun{gtk:text-iter-in-range} functions, that expect a
   pre-sorted range.
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
@@ -2767,4 +2759,4 @@ lambda (ch)
 
 (export 'text-iter-order)
 
-;;; --- End of file gtk.text-iter.lisp -----------------------------------------
+;;; --- End of file gtk4.text-iter.lisp ----------------------------------------
