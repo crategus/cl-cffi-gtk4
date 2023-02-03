@@ -57,7 +57,7 @@
      (:file "gdk4.draw-context")          ; GdkDrawContext
      (:file "gdk4.gl-context")            ; GdkGLContext
      (:file "gdk4.vulkan-context")        ; GdkVulkanContext
-     (:file "gdk4.cairo-context")         ; GdkCairoContext
+     (:file "gdk4.cairo-context")         ; Functions to support using Cairo.
      (:file "gdk4.event")                 ; GdkEvent
      (:file "gdk4.keyval")                ; Key Values
      (:file "gdk4.clipboard")             ; GdkClipboard
