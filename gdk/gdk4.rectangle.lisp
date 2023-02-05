@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.rectangle.lisp
+;;; gdk4.rectangle.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
 ;;; Version 4.9 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -49,6 +49,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (define-g-boxed-cstruct rectangle "GdkRectangle"
+  (:export t
+   :type-initializer "gdk_rectangle_get_type")
   (x :int :initform 0)
   (y :int :initform 0)
   (width :int :initform 0)
@@ -79,6 +81,8 @@
   in 2D and 3D.
   @begin{pre}
 (define-g-boxed-cstruct gdk:rectangle \"GdkRectangle\"
+  (:export t
+   :type-initializer \"gdk_rectangle_get_type\")
   (x :int :initform 0)
   (y :int :initform 0)
   (width :int :initform 0)
@@ -90,8 +94,6 @@
   @see-slot{gdk:rectangle-height}
   @see-symbol{cairo-region-t}
   @see-symbol{cairo-rectangle-t}")
-
-(export 'rectangle)
 
 ;;; --- rectangle-x --------------------------------------------------------
 
@@ -109,8 +111,6 @@
   @end{short}
   @see-class{gdk:rectangle}")
 
-(export 'rectangle-x)
-
 ;;; --- rectangle-y --------------------------------------------------------
 
 #+liber-documentation
@@ -126,8 +126,6 @@
     Accessor of the @code{y} slot of the @class{gdk:rectangle} structure.
   @end{short}
   @see-class{gdk:rectangle}")
-
-(export 'rectangle-y)
 
 ;;; --- gtk-rectangle-width ----------------------------------------------------
 
@@ -145,8 +143,6 @@
   @end{short}
   @see-class{gdk:rectangle}")
 
-(export 'rectangle-width)
-
 ;;; --- rectangle-height ---------------------------------------------------
 
 #+liber-documentation
@@ -162,8 +158,6 @@
     Accessor of the @code{height} slot of the @class{gdk:rectangle} structure.
   @end{short}
   @see-class{gdk:rectangle}")
-
-(export 'rectangle-height)
 
 ;;; --- rectangle-new ------------------------------------------------------
 
@@ -301,4 +295,4 @@
 
 (export 'rectangle-union)
 
-;;; --- End of file gdk.rectangle.lisp -----------------------------------------
+;;; --- End of file gdk4.rectangle.lisp -----------------------------------------

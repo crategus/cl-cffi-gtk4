@@ -128,7 +128,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (define-g-boxed-opaque paper-size "GtkPaperSize"
-  :type-initializer "GtkPaperSize"
+  :type-initializer "gtk_paper_size_get_type"
   :alloc (%paper-size-new (cffi:null-pointer)))
 
 #+liber-documentation

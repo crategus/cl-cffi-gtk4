@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.style-context.lisp
+;;; gtk4.style-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -102,12 +102,12 @@
 ;;; GtkBorder
 ;;; ----------------------------------------------------------------------------
 
-(glib-init:at-init () (foreign-funcall "gtk_border_get_type" :size))
-
 (define-g-boxed-cstruct border "GtkBorder"
-  (left   :int16 :initform 0)
-  (right  :int16 :initform 0)
-  (top    :int16 :initform 0)
+  (:export t
+   :type-initializer "gtk_border_get_type")
+  (left :int16 :initform 0)
+  (right :int16 :initform 0)
+  (top :int16 :initform 0)
   (bottom :int16 :initform 0))
 
 #+liber-documentation
@@ -121,9 +121,11 @@
   @end{short}
   @begin{pre}
 (define-g-boxed-cstruct border \"GtkBorder\"
-  (left   :int16 :initform 0)
-  (right  :int16 :initform 0)
-  (top    :int16 :initform 0)
+  (:export t
+   :type-initializer \"gtk_border_get_type\")
+  (left :int16 :initform 0)
+  (right :int16 :initform 0)
+  (top :int16 :initform 0)
   (bottom :int16 :initform 0))
   @end{pre}
   @begin[code]{table}
@@ -138,8 +140,6 @@
   @see-slot{gtk:border-bottom}
   @see-constructor{gtk:border-new}
   @see-constructor{gtk:border-copy}")
-
-(export 'border)
 
 ;;; ----------------------------------------------------------------------------
 ;;; Accessors for GtkBorder
@@ -1365,4 +1365,4 @@ GtkEntry.entry { ... @}
 
 (export 'render-option)
 
-;;; --- End of file gtk.style-context.lisp -------------------------------------
+;;; --- End of file gtk4.style-context.lisp ------------------------------------

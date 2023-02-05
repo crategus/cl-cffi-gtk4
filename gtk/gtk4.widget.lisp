@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.widget.lisp
+;;; gtk4.widget.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -370,12 +370,9 @@
 ;;; GtkRequisition
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: Ensure initializing the GtkRequisitin type.
-;; After loading the type is not initialized. Is something wrong?
-(glib-init:at-init ()
-  (foreign-funcall "gtk_requisition_get_type" :size))
-
 (define-g-boxed-cstruct requisition "GtkRequisition"
+  (:export t
+   :type-initializer "gtk_requisition_get_type")
   (width :int :initform 0)
   (height :int :initform 0))
 
@@ -391,6 +388,8 @@
   @class{gtk:widget} documentation for more information.
   @begin{pre}
 (define-g-boxed-cstruct requisition \"GtkRequisition\"
+  (:export t
+   :type-initializer \"gtk_requistion_get_type\")
   (width :int :initform 0)
   (height :int :initform 0))
   @end{pre}
@@ -404,8 +403,6 @@
   @see-constructor{gtk:requisition-copy}
   @see-class{gtk:widget}
   @see-function{gtk:widget-preferred-size}")
-
-(export 'requisition)
 
 ;;; ----------------------------------------------------------------------------
 ;;; Accessors of GtkRequistion
@@ -5508,4 +5505,4 @@ lambda (widget)    :run-last
 
 (export 'widget-action-set-enabled)
 
-;;; --- End of file gtk.widget.lisp --------------------------------------------
+;;; --- End of file gtk4.widget.lisp -------------------------------------------

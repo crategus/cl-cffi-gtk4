@@ -57,10 +57,9 @@
 ;;; GdkRGBA
 ;;; ----------------------------------------------------------------------------
 
-(eval-when (:execute :load-toplevel :compile-toplevel)
-  (cffi:foreign-funcall "gdk_rgba_get_type" :size))
-
 (define-g-boxed-cstruct rgba "GdkRGBA"
+  (:export t
+   :type-initializer "gdk_rgba_get_type")
   (red :float :initform 0.0)
   (green :float :initform 0.0)
   (blue :float :initform 0.0)
@@ -77,6 +76,8 @@
   @end{short}
   @begin{pre}
 (define-g-boxed-cstruct rgba \"GdkRGBA\"
+  (:export t
+   :type-initializer \"gdk_rgba_get_type\")
   (red :float :initform 0.0)
   (green :float :initform 0.0)
   (blue :float :initform 0.0)
@@ -95,11 +96,6 @@
   @see-slot{gdk:rgba-green}
   @see-slot{gdk:rgba-blue}
   @see-slot{gdk:rgba-alpha}")
-
-(export (boxed-related-symbols 'rgba))
-
-(unexport 'make-rgba)
-(unexport 'copy-rgba)
 
 ;;; ----------------------------------------------------------------------------
 ;;; Accessors

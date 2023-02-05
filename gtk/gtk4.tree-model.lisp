@@ -182,6 +182,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (define-g-boxed-cstruct tree-iter "GtkTreeIter"
+  (:export t
+   :type-initializer "gtk_tree_iter_get_type")
   (stamp :int :initform 0)
   (user-data pointer-as-integer :initform 0)
   (user-data-2 pointer-as-integer :initform 0)
@@ -200,6 +202,8 @@
   @end{short}
   @begin{pre}
 (define-g-boxed-cstruct tree-iter \"GtkTreeIter\"
+  (:export t
+   :type-initializer \"gtk_tree_iter_get_type\")
   (stamp :int :initform 0)
   (user-data pointer-as-integer :initform 0)
   (user-data-2 pointer-as-integer :initform 0)
@@ -213,8 +217,6 @@
   @end{table}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}")
-
-(export 'tree-iter)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTreePath
