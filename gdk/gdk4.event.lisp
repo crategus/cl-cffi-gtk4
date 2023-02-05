@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.event.lisp
+;;; gdk4.event.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -834,11 +834,11 @@
 ;;; An event related to a touchpad device.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkTouchPadEvent" touch-pad-event
+(define-g-object-class "GdkTouchpadEvent" touchpad-event
   (:superclass event
    :export t
    :interfaces nil
-   :type-initializer "gdk_touch_pad_event_get_type")
+   :type-initializer "gdk_touchpad_event_get_type")
   nil)
 
 ;;; ----------------------------------------------------------------------------
@@ -2025,4 +2025,4 @@
 
 (export 'events-distance)
 
-;;; --- End of file gdk.event.lisp ---------------------------------------------
+;;; --- End of file gdk4.event.lisp --------------------------------------------
