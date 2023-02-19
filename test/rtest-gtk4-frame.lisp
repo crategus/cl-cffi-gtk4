@@ -55,15 +55,27 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     child
-;;;     label
-;;;     label-widget
-;;;     label-xalign
+(test frame-properties.1
+  (let ((frame (make-instance 'gtk:frame
+                              :child (make-instance 'gtk:button))))
+    (is (typep (gtk:frame-child frame) 'gtk:button))
+    (is-false (gtk:frame-label frame))
+    (is-false (gtk:frame-label-widget frame))
+    (is (= 0.0 (gtk:frame-label-xalign frame)))))
+
+(test frame-properties.2
+  (let ((frame (gtk:frame-new "label")))
+    (is (string= "label" (gtk:frame-label frame)))
+    (is (typep (gtk:frame-label-widget frame) 'gtk:label))
+    (is (string= "label" (gtk:label-label (gtk:frame-label-widget frame))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_frame_new
-;;;     gtk_frame_set_label_align                          not implemented
-;;;     gtk_frame_get_label_align                          not implemented
 
-;;; 2022-11-11
+(test frame-new
+  (is (typep (gtk:frame-new) 'gtk:frame))
+  (is (typep (gtk:frame-new nil) 'gtk:frame))
+  (is (typep (gtk:frame-new "label") 'gtk:frame)))
+
+;;; --- 2023-2-18 --------------------------------------------------------------

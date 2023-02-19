@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.frame.lisp
+;;; gtk4.frame.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
@@ -7,7 +7,7 @@
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -99,7 +99,7 @@
 
 #+liber-documentation
 (setf (documentation 'frame 'type)
- "@version{#2022-9-9}
+ "@version{#2023-2-18}
   @begin{short}
     The frame widget is a widget that surrounds its child with a decorative
     frame and an optional label.
@@ -109,7 +109,7 @@
 
   If present, the label is drawn inside the top edge of the frame. The
   horizontal position of the label can be controlled with the
-  @fun{gtk:frame-label-align} function.
+  @fun{gtk:frame-label-xalign} function.
 
   The @sym{gtk:frame} widget clips its child. You can use this to add rounded
   corners to widgets, but be aware that it also cuts off shadows.
@@ -142,18 +142,17 @@ frame
     appearance of the border using CSS properties like @code{border-style}
     on this node.
   @end{dictionary}
+  @see-constructor{gtk:frame-new}
   @see-slot{gtk:frame-child}
   @see-slot{gtk:frame-label}
   @see-slot{gtk:frame-label-widget}
-  @see-slot{gtk:frame-label-xalign}
-  @see-constructor{gtk:frame-new}
-  @see-function{gtk:frame-label-align}")
+  @see-slot{gtk:frame-label-xalign}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- frame-child --------------------------------------------------------
+;;; --- frame-child ------------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'frame) t)
@@ -164,7 +163,7 @@ frame
 (setf (liber:alias-for-function 'frame-child)
       "Accessor"
       (documentation 'frame-child 'function)
- "@version{#2022-9-9}
+ "@version{#2023-2-18}
   @syntax[]{(gtk:frame-child object) => child}
   @syntax[]{(setf (gtk:frame-child object) child)}
   @argument[object]{a @class{gtk:frame} widget}
@@ -176,7 +175,7 @@ frame
   @sym{(setf gtk:frame-child)} function sets the child widget.
   @see-class{gtk:frame}")
 
-;;; --- frame-label --------------------------------------------------------
+;;; --- frame-label ------------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "label" 'frame) t)
@@ -188,12 +187,11 @@ frame
 (setf (liber:alias-for-function 'frame-label)
       "Accessor"
       (documentation 'frame-label 'function)
- "@version{#2022-9-9}
+ "@version{#2023-2-18}
   @syntax[]{(gtk:frame-label object) => label}
   @syntax[]{(setf (gtk:frame-label object) label)}
   @argument[object]{a @class{gtk:frame} widget}
-  @argument[label]{a @code{:string} with the text to use as the label of the
-    frame}
+  @argument[label]{a string with the text to use as the label of the frame}
   @begin{short}
     Accessor of the @slot[gtk:frame]{label} slot of the @class{gtk:frame} class.
   @end{short}
@@ -206,10 +204,11 @@ frame
   The frame will have a @class{gtk:label} widget for the label widget if a
   non-@code{nil} argument was passed to the @fun{gtk:frame-new} function.
   @see-class{gtk:frame}
+  @see-class{gtk:label}
   @see-function{gtk:frame-new}
   @see-function{gtk:frame-label-widget}")
 
-;;; --- frame-label-widget -------------------------------------------------
+;;; --- frame-label-widget -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "label-widget" 'frame) t)
@@ -221,7 +220,7 @@ frame
 (setf (liber:alias-for-function 'frame-label-widget)
       "Accessor"
       (documentation 'frame-label-widget 'function)
- "@version{#2022-9-9}
+ "@version{#2023-2-18}
   @syntax[]{(gtk:frame-label-widget object) => widget}
   @syntax[]{(setf (gtk:frame-label-widget object) widget)}
   @argument[object]{a @class{gtk:frame} widget}
@@ -235,9 +234,10 @@ frame
   This is the widget that will appear embedded in the top edge of the frame as
   a title.
   @see-class{gtk:frame}
+  @see-class{gtk:widget}
   @see-function{gtk:frame-label}")
 
-;;; --- frame-label-xalign -------------------------------------------------
+;;; --- frame-label-xalign -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "label-xalign" 'frame) t)
@@ -250,7 +250,7 @@ frame
 (setf (liber:alias-for-function 'frame-label-xalign)
       "Accessor"
       (documentation 'frame-label-xalign 'function)
- "@version{#2022-9-9}
+ "@version{#2023-2-18}
   @syntax[]{(gtk:frame-label-xalign object) => xalign}
   @syntax[]{(setf (gtk:frame-label-xalign object) xalign)}
   @argument[object]{a @class{gtk:frame} widget}
@@ -270,21 +270,19 @@ frame
 ;;; gtk_frame_new ()
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline frame-new))
-
 (defun frame-new (&optional label)
  #+liber-documentation
- "@version{#2022-9-9}
+ "@version{#2023-2-18}
   @argument[label]{an optional string with the text to use as the label of the
     frame}
   @return{A new @class{gtk:frame} widget.}
   @begin{short}
     Creates a new frame widget, with an optional label.
   @end{short}
-  If @arg{label} is @code{nil}, the label is omitted.
+  If the @arg{label} argument is @code{nil}, the label is omitted.
   @see-class{gtk:frame}"
   (make-instance 'frame
-                 :label (if label label (null-pointer))))
+                 :label (if label label (cffi:null-pointer))))
 
 (export 'frame-new)
 
@@ -318,4 +316,4 @@ frame
 ;;;     a GtkFrame
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gtk.frame.lisp ---------------------------------------------
+;;; --- End of file gtk4.frame.lisp --------------------------------------------
