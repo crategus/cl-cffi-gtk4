@@ -188,7 +188,7 @@
     (is (eq :unknown (gtk:about-dialog-license-type dialog)))
     (is-false (gtk:about-dialog-logo dialog))
     (is-false (gtk:about-dialog-logo-icon-name dialog))
-    (is-false (gtk:about-dialog-program-name dialog))
+    (is (string= "gtk-test" (gtk:about-dialog-program-name dialog)))
     (is-false (gtk:about-dialog-system-information dialog))
     (is-false (gtk:about-dialog-translator-credits dialog))
     (is-false (gtk:about-dialog-version dialog))
@@ -206,4 +206,4 @@
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; 2022-9-1
+;;; --- 2023-3-11 --------------------------------------------------------------

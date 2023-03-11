@@ -53,10 +53,9 @@
 
 ;;; --- gtk_application_window_new ---------------------------------------------
 
-;; TODO: This does not work as expected. The tests are not performed.
-;; We need a running application to check the function
 (test application-window-new
-  (let ((application (make-instance 'gtk:application
+  (let ((message nil)
+        (application (make-instance 'gtk:application
                                     :application-id "com.crategus.test"
                                     :flags :none
                                     :register-session nil)))
@@ -65,14 +64,17 @@
         (lambda (app)
           (g:application-hold app)
           (let ((window (gtk:application-window-new app)))
+            (setf message "in activate")
             (is (typep window 'gtk:application-window))
             (is (eq app (gtk:window-application window)))
             (is (= 1 (gtk:application-window-id window)))
-            ;; Remove the window, this shut down the application
+            ;; Remove the window, this shuts down the application
             (is-false (gtk:application-remove-window app window)))
           (g:application-release app)))
     ;; Run the application
-    (g:application-run application nil)))
+    (g:application-run application nil)
+    ;; Check if the "activate" signal is executed
+    (is (string= "in activate" message))))
 
 ;;; --- gtk_application_window_id ----------------------------------------------
 
@@ -98,4 +100,4 @@
     (is (typep (gtk:application-window-help-overlay window)
                'gtk:shortcuts-window))))
 
-;;; 2022-1-21
+;;; --- 2023-3-11 --------------------------------------------------------------

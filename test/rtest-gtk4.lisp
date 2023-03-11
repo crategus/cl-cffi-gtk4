@@ -59,6 +59,9 @@
 (def-suite gdk-suite :in gtk-test)
 (def-suite gsk-suite :in gtk-test)
 
+;; We set a PRGNAME to avoid side effects when running the tests a second time.
+(setf (g:prgname) "gtk-test")
+
 ;; Ensure directory for the output of test results
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (ensure-directories-exist
