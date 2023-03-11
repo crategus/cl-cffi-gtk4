@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.application-window.lisp
+;;; gtk4.application-window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2022 Dieter Kaiser
+;;; Copyright (C) 2013 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'application-window 'type)
- "@version{#2022-11-13}
+ "@version{2023-3-11}
   @begin{short}
     The @sym{gtk:application-window} class is a @class{gtk:window} subclass
     that offers some extra functionality for better integration with
@@ -121,11 +121,10 @@
   menus will be displayed remotely. On Windows neither will be.
 
   If the desktop environment does not display the menubar, then the application
-  window will automatically show a @class{gtk:menu-bar} widget for it. This
-  behaviour can be overridden with the @code{show-menubar} property. If the
-  desktop environment does not display the application menu, then it will
-  automatically be included in the menubar or in the windows client-side
-  decorations.
+  window will automatically show a menubar for it. This behaviour can be
+  overridden with the @code{show-menubar} property. If the desktop environment
+  does not display the application menu, then it will automatically be included
+  in the menubar or in the windows client-side decorations.
 
   See the @class{gtk:popover-menu} documentation for information about the XML
   language used by the @class{gtk:builder} object for menu models.
@@ -169,9 +168,7 @@
   @see-class{g:action-map}
   @see-class{g:menu-model}
   @see-class{gtk:actionable}
-  @see-class{gtk:menu-bar}
-  @see-class{gtk:builder}
-  @see-class{g:menu-model}")
+  @see-class{gtk:builder}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -194,7 +191,7 @@
 (setf (liber:alias-for-function 'application-window-show-menubar)
       "Accessor"
       (documentation 'application-window-show-menubar 'function)
- "@version{#2022-11-13}
+ "@version{2023-3-11}
   @syntax[]{(gtk:application-window-show-menubar object) => show}
   @syntax[]{(setf (gtk:application-window-show-menubar object) show)}
   @argument[window]{a @class{gtk:application-window} widget}
@@ -215,7 +212,7 @@
 
 (defcfun ("gtk_application_window_new" application-window-new) (g:object widget)
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2023-3-11}
   @argument[application]{a @class{gtk:application} instance}
   @return{A newly created @class{gtk:application-window} widget.}
   @short{Creates a new application window.}
@@ -231,7 +228,7 @@
 
 (defcfun ("gtk_application_window_get_id" application-window-id) :uint
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2023-3-11}
   @argument[window]{a @class{gtk:application-window} widget}
   @begin{return}
     The unique ID for @arg{window}, or 0 if @arg{window} has not yet been
@@ -254,16 +251,16 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf application-window-help-overlay) (overlay window)
-  (foreign-funcall "gtk_application_window_set_help_overlay"
-                   (g:object application-window) window
-                   (g:object shortcuts-window) overlay
-                   :void)
+  (cffi:foreign-funcall "gtk_application_window_set_help_overlay"
+                        (g:object application-window) window
+                        (g:object shortcuts-window) overlay
+                        :void)
   overlay)
 
 (defcfun ("gtk_application_window_get_help_overlay"
            application-window-help-overlay) (g:object shortcuts-window)
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2023-3-11}
   @syntax[]{(gtk:application-window-help-overlay window) => overlay}
   @syntax[]{(setf (gtk:application-window-help-overlay window) overlay)}
   @argument[window]{a @class{gtk:application-window} widget}
@@ -281,4 +278,4 @@
 
 (export 'application-window-help-overlay)
 
-;;; --- End of file gtk.application-window.lisp --------------------------------
+;;; --- End of file gtk4.application-window.lisp -------------------------------
