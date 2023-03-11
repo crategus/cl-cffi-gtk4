@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.pad-controller.lisp
+;;; gtk4.pad-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -34,7 +34,7 @@
 ;;;
 ;;;     GtkPadController
 ;;;     GtkPadActionType
-;;;     GtkPadActionEntry
+;;;     GtkPadActionEntry                                  not needed
 ;;;
 ;;; Functions
 ;;;
@@ -71,7 +71,7 @@
 (setf (liber:alias-for-symbol 'pad-action-type)
       "GEnum"
       (liber:symbol-documentation 'pad-action-type)
- "@version{#2020-9-11}
+ "@version{2023-3-11}
   @begin{short}
     The type of a pad action.
   @end{short}
@@ -91,8 +91,10 @@
   @see-class{gtk:pad-controller}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkPadActionEntry
+;;; struct GtkPadActionEntry                               not exported
 ;;; ----------------------------------------------------------------------------
+
+;; We pass the entries as Lisp lists. This structure is not needed.
 
 (defcstruct pad-action-entry
   (type pad-action-type)
@@ -105,7 +107,7 @@
 (setf (liber:alias-for-symbol 'pad-action-entry)
       "CStruct"
       (liber:symbol-documentation 'pad-action-entry)
- "@version{#2020-9-11}
+ "@version{2023-3-11}
   @begin{short}
     Structure defining a pad action entry.
   @end{short}
@@ -127,12 +129,11 @@
     @entry[label]{A string with the human readable description of this action
       entry, this string should be deemed user visible.}
     @entry[name]{An string with action name that will be activated in the
-      @class{g-action-group} object.}
+      @class{g:action-group} object.}
   @end{table}
   @see-class{gtk:pad-controller}
+  @see-class{g:action-group}
   @see-symbol{gtk:pad-action-type}")
-
-(export 'pad-action-entry)
 
 ;;; ----------------------------------------------------------------------------
 ;;; struct GtkPadController
@@ -152,9 +153,9 @@
 
 #+liber-documentation
 (setf (documentation 'pad-controller 'type)
- "@version{#2020-9-11}
+ "@version{2023-3-11}
   @begin{short}
-    The @sym{gtk:pad-controller} class is an event controller for the pads
+    The @sym{gtk:pad-controller} object is an event controller for the pads
     found in drawing tablets.
   @end{short}
   Pads are the collection of buttons and tactile sensors often found around the
@@ -162,7 +163,7 @@
 
   These buttons and sensors have no implicit meaning, and by default they
   perform no action, this event controller is provided to map those to
-  @class{g-action} objects, thus letting the application give those a more
+  @class{g:action} objects, thus letting the application give those a more
   semantic meaning.
 
   Buttons and sensors are not constrained to triggering a single action, some
@@ -170,13 +171,14 @@
   elements have one current mode, which may determine the final action being
   triggered. Pad devices often divide buttons and sensors into groups, all
   elements in a group share the same current mode, but different groups may
-  have different modes. See the @fun{gdk-device-pad-n-groups} and
-  @fun{gdk-device-pad-group-n-modes} functions.
+  have different modes. See the @fun{gdk:device-pad-n-groups} and
+  @fun{gdk:device-pad-group-n-modes} functions.
 
   Each of the actions that a given button/strip/ring performs for a given mode
-  is defined by @symbol{gtk:pad-action-entry}, it contains an action name that
-  will be looked up in the given @class{g-action-group} and activated whenever
-  the specified input element and mode are triggered.
+  is defined by the arguments of the @fun{gtk:pad-controller-set-action}
+  function, it contains an action name that will be looked up in the given
+  @class{g:action-group} object and activated whenever the specified input
+  element and mode are triggered.
 
   A simple example of @sym{gtk:pad-controller} usage, assigning button 1 in all
   modes and pad devices to an \"invert-selection\" action:
@@ -194,25 +196,26 @@ g_action_map_add_action (G_ACTION_MAP (action_group), action);
 ...
 pad_controller = gtk_pad_controller_new (window, action_group, NULL);
   @end{pre}
-  The actions belonging to rings/strips will be activated with a parameter of
-  \"d\" type bearing the value of the given axis, it
-  is required that those are made stateful and accepting this
-  @symbol{glib:variant-type}.
+  The actions belonging to rings/strips will be activated with a
+  @var{+g-variant-type-double+} parameter bearing the value of the given axis,
+  it is required that those are made stateful and accepting this
+  @symbol{g:variant-type} type.
+  @see-constructor{gtk:pad-controller-new}
   @see-slot{gtk:pad-controller-action-group}
   @see-slot{gtk:pad-controller-pad}
-  @see-class{gtk:event-conroller}
-  @see-class{gdk-device-pad}")
+  @see-class{gtk:event-controller}
+  @see-class{gdk:device-pad}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- pad-controller-action-group ----------------------------------------
+;;; --- pad-controller-action-group --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "action-group"
                                                'pad-controller) t)
- "The @code{action-group} property of type @class{g-action-group}
+ "The @code{action-group} property of type @class{g:action-group}
   (Read / Write / Construct Only) @br{}
   Action group to launch actions from.")
 
@@ -220,23 +223,23 @@ pad_controller = gtk_pad_controller_new (window, action_group, NULL);
 (setf (liber:alias-for-function 'pad-controller-action-group)
       "Accessor"
       (documentation 'pad-controller-action-group 'function)
- "@version{#2020-9-11}
+ "@version{2023-3-11}
   @syntax[]{(gtk:pad-controller-action-group object) => group)}
   @syntax[]{(setf (gtk:pad-controller-action-group object) group)}
   @argument[object]{a @class{gtk:pad-controller} object}
-  @argument[group]{a @class{g-action-group} object}
+  @argument[group]{a @class{g:action-group} object}
   @begin{short}
     Accessor of the @slot[gtk:pad-controller]{action-group} slot of the
     @class{gtk:pad-controller} class.
   @end{short}
-  @see-class{gtk:pad-controller}")
+  @see-class{gtk:pad-controller}
+  @see-class{g:action-group}")
 
-;;; --- pad-controller-pad -------------------------------------------------
+;;; --- pad-controller-pad -----------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "pad"
-                                               'pad-controller) t)
- "The @code{pad} property of type @class{gdk-device}
+(setf (documentation (liber:slot-documentation "pad" 'pad-controller) t)
+ "The @code{pad} property of type @class{gdk:device}
   (Read / Write / Construct Only) @br{}
   Pad device to control.")
 
@@ -244,106 +247,116 @@ pad_controller = gtk_pad_controller_new (window, action_group, NULL);
 (setf (liber:alias-for-function 'pad-controller-pad)
       "Accessor"
       (documentation 'pad-controller-pad 'function)
- "@version{#2020-9-11}
+ "@version{2023-3-11}
   @syntax[]{(gtk:pad-controller-pad object) => pad)}
   @syntax[]{(setf (gtk:pad-controller-pad object) pad)}
   @argument[object]{a @class{gtk:pad-controller} object}
-  @argument[pad]{a @class{gdk-device} object}
+  @argument[pad]{a @class{gdk:device} object}
   @begin{short}
     Accessor of the @slot[gtk:pad-controller]{pad} slot of the
     @class{gtk:pad-controller} class.
   @end{short}
-  @see-class{gtk:pad-controller}")
+  @see-class{gtk:pad-controller}
+  @see-class{gdk:device}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_pad_controller_new ()
-;;;
-;;; GtkPadController *
-;;; gtk_pad_controller_new (GActionGroup *group,
-;;;                         GdkDevice *pad);
-;;;
-;;; Creates a new GtkPadController that will associate events from pad to
-;;; actions. A NULL pad may be provided so the controller manages all pad
-;;; devices generically, it is discouraged to mix GtkPadController objects with
-;;; NULL and non-NULL pad argument on the same toplevel window, as execution
-;;; order is not guaranteed.
-;;;
-;;; The GtkPadController is created with no mapped actions. In order to map pad
-;;; events to actions, use gtk_pad_controller_set_action_entries() or
-;;; gtk_pad_controller_set_action().
-;;;
-;;; Be aware that pad events will only be delivered to GtkWindows, so adding a
-;;; pad controller to any other type of widget will not have an effect.
-;;;
-;;; group :
-;;;     GActionGroup to trigger actions from
-;;;
-;;; pad :
-;;;     A GDK_SOURCE_TABLET_PAD device, or NULL to handle all pads.
-;;;
-;;; Returns :
-;;;     A newly created GtkPadController
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_pad_controller_new" pad-controller-new)
+    (g:object pad-controller :already-referenced)
+ #+liber-documentation
+ "@version{2023-3-11}
+  @argument[group]{a @class{g:action-group} object to trigger actions from}
+  @argument[pad]{a @class{gdk:device} object of @code{:tablet-pad} type, or
+    @code{nil} to handle all pads}
+  @return{A newly created @class{gtk:pad-controller} object.}
+  @begin{short}
+    Creates a new @class{gtk:pad-controller} object that will associate events
+    from @arg{pad} to actions.
+  @end{short}
+  A @code{NULL} pad may be provided so the controller manages all pad devices
+  generically, it is discouraged to mix @class{gtk:pad-controller} objects with
+  @code{NULL} and non-@code{NULL} pad argument on the same window , as
+  execution order is not guaranteed.
+
+  The @class{gtk:pad-controller} object is created with no mapped actions. In
+  order to map pad events to actions, use the
+  @fun{gtk:pad-controller-set-action-entries} or
+  @fun{gtk:pad-controller-set-action} functions.
+
+  Be aware that pad events will only be delivered to @class{gtk:window} widgets
+  so adding a pad controller to any other type of widget will not have an
+  effect.
+  @see-class{gtk:pad-controller}
+  @see-class{gtk:window}
+  @see-class{g:action-group}
+  @see-function{gtk:pad-controller-set-action-entries}
+  @see-function{gtk:pad-controller-set-action}"
+  (group (g:object g:action-group))
+  (pad (g:object gdk:device)))
+
+(export 'pad-controller-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_pad_controller_set_action_entries ()
-;;;
-;;; void
-;;; gtk_pad_controller_set_action_entries (GtkPadController *controller,
-;;;                                        const GtkPadActionEntry *entries,
-;;;                                        int n_entries);
-;;;
-;;; This is a convenience function to add a group of action entries on
-;;; controller . See GtkPadActionEntry and gtk_pad_controller_set_action().
-;;;
-;;; controller :
-;;;     a GtkPadController
-;;;
-;;; entries :
-;;;     the action entries to set on controller .
-;;;
-;;; n_entries :
-;;;     the number of elements in entries
 ;;; ----------------------------------------------------------------------------
+
+(defun pad-controller-set-action-entries (controller entries)
+ #+liber-documentation
+ "@version{2023-3-11}
+  @argument[controller]{a @class{gtk:pad-controller} object}
+  @argument[entries]{a list of the action entries to set on @arg{controller}}
+  @begin{short}
+    This is a convenience function to add a group of action entries on
+    @arg{controller}.
+  @end{short}
+  See the @fun{gtk:pad-controller-set-action} function.
+  @see-class{gtk:pad-controller}
+  @see-function{gtk:pad-controller-set-action}"
+  (dolist (entry entries)
+    (apply #'pad-controller-set-action controller entry)))
+
+(export 'pad-controller-set-action-entries)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_pad_controller_set_action ()
-;;;
-;;; void
-;;; gtk_pad_controller_set_action (GtkPadController *controller,
-;;;                                GtkPadActionType type,
-;;;                                int index,
-;;;                                int mode,
-;;;                                const char *label,
-;;;                                const char *action_name);
-;;;
-;;; Adds an individual action to controller . This action will only be activated
-;;; if the given button/ring/strip number in index is interacted while the
-;;; current mode is mode . -1 may be used for simple cases, so the action is
-;;; triggered on all modes.
-;;;
-;;; The given label should be considered user-visible, so internationalization
-;;; rules apply. Some windowing systems may be able to use those for user
-;;; feedback.
-;;;
-;;; controller :
-;;;     a GtkPadController
-;;;
-;;; type :
-;;;     the type of pad feature that will trigger this action
-;;;
-;;; index :
-;;;     the 0-indexed button/ring/strip number that will trigger this action
-;;;
-;;; mode :
-;;;     the mode that will trigger this action, or -1 for all modes.
-;;;
-;;; label :
-;;;     Human readable description of this action, this string should be deemed
-;;;     user-visible.
-;;;
-;;; action_name :
-;;;     action name that will be activated in the GActionGroup
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gtk.pad-controller.lisp ------------------------------------
+(defcfun ("gtk_pad_controller_set_action" pad-controller-set-action) :void
+ #+liber-documentation
+ "@version{2023-3-11}
+  @argument[controller]{a @class{gtk:pad-controller} object}
+  @argument[type]{a @symbol{gtk:pad-action-type} value with the pad feature
+    that will trigger the action}
+  @argument[index]{an integer with the 0-indexed button/ring/strip number that
+    will trigger the action}
+  @argument[mode]{an integer with the mode that will trigger the action, or -1
+    for all modes}
+  @argument[label]{a string with the Human readable description of the action,
+    the string should be deemed user visible}
+  @argument[name]{a string with the action name that will be activated in the
+    @class{g:action-group} object}
+  @begin{short}
+    Adds an individual action to @arg{controller}.
+  @end{short}
+  The action will only be activated if the given button/ring/strip number in
+  @arg{index} is interacted while the current mode is @arg{mode}. -1 may be
+  used for simple cases, so the action is triggered on all modes.
+
+  The given @arg{label} should be considered user visible, so
+  internationalization rules apply. Some windowing systems may be able to use
+  those for user feedback.
+  @see-class{gtk:pad-controller}
+  @see-class{g:action-group}
+  @see-symbol{gtk:pad-action-type}"
+  (controller (g:object pad-controller))
+  (type pad-action-type)
+  (index :int)
+  (mode :int)
+  (label :string)
+  (name :string))
+
+(export 'pad-controller-set-action)
+
+;;; --- End of file gtk4.pad-controller.lisp -----------------------------------
