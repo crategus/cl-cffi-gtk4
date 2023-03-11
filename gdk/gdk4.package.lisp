@@ -145,7 +145,7 @@
     @about-generic{device-tool-serial}
     @about-generic{device-tool-tool-type}
   @end{section}
-  @begin[GtkDevicePad]{section}
+  @begin[GdkDevicePad]{section}
     Pad device interface.
     @about-symbol{device-pad-feature}
     @about-class{device-pad}

@@ -3560,13 +3560,12 @@
     @begin[GtkPadController]{subsection}
       Controller for drawing tablet pads.
       @about-symbol{pad-action-type}
-      @about-symbol{pad-action-entry}
       @about-class{pad-controller}
       @about-generic{pad-controller-action-group}
       @about-generic{pad-controller-pad}
       @about-function{pad-controller-new}
-      @about-generic{pad-controller-set-action-entries}
-      @about-generic{pad-controller-set-action}
+      @about-function{pad-controller-set-action-entries}
+      @about-function{pad-controller-set-action}
     @end{subsection}
     @begin[GtkShortcutController]{subsection}
       Event controller for shortcuts.
