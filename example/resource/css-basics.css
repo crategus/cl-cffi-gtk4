@@ -1,0 +1,19 @@
+/* You can edit the text in this window to change the
+ * appearance of this Window. Be careful, if you screw
+ * it up, nothing might be visible anymore.
+ */
+
+textview {
+  color: blue;
+  font-family: monospace;
+  border: 2px solid;
+}
+
+window *  {
+  background-color: yellow;
+}
+
+selection {
+  background-color: darkGreen;
+  color: black;
+}

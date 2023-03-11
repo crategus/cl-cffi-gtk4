@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/css-blendmodes">
+    <file>css-blendmodes.ui</file>
+    <file>css-blendmodes.css</file>
+    <file>blends.png</file>
+    <file>cmy.jpg</file>
+    <file>ducky.png</file>
+  </gresource>
+  <gresource prefix="/css-basics">
+    <file>css-basics.css</file>
+  </gresource>
+  <gresource prefix="/css-multiplebgs">
+    <file>brick.png</file>
+    <file>brick2.png</file>
+    <file>css-multiplebgs.css</file>
+  </gresource>
+</gresources>
