@@ -5266,10 +5266,10 @@ lambda (widget)    :run-last
 
 (defcfun ("gtk_widget_insert_action_group" widget-insert-action-group) :void
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{#2023-3-12}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[name]{a string with the prefix for actions in @arg{group}}
-  @argument[group]{a @class{g-action-group} object}
+  @argument[group]{a @class{g:action-group} object}
   @begin{short}
     Inserts @arg{group} into @arg{widget}.
   @end{short}
@@ -5277,10 +5277,10 @@ lambda (widget)    :run-last
   can then be associated with actions in @arg{group} by setting their
   @code{action-name} to \"prefix.action-name\".
   @see-class{gtk:widget}
-  @see-class{g-action-group}"
+  @see-class{g:action-group}"
   (widget (g:object widget))
   (name :string)
-  (group (g:object g-action-group)))
+  (group (g:object g:action-group)))
 
 (export 'widget-insert-action-group)
 
