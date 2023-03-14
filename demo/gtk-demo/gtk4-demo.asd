@@ -4,7 +4,9 @@
   :author "Dieter Kaiser"
   :license "LLGPL"
   :serial t
-  :depends-on (:gtk4-example)
+  :depends-on (:gtk4-example
+               :pango-example
+               :cairo-example)
   :components ((:file "gtk4-demo")))
 
-;;; --- 2023-3-11 --------------------------------------------------------------
+;;; --- 2023-3-13 --------------------------------------------------------------

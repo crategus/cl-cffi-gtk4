@@ -442,7 +442,122 @@
 
      "Printing"
      "Drag and Drop, Clipboard"
+
+     ;; Pango demos
+     "Pango"
+     (("Draw centered text"
+       ":drawfunc"
+       "pango-draw-text-centered"
+       "pango-example"
+       "text-centered.lisp")
+      ("Draw text metrics"
+       ":drawfunc"
+       "pango-draw-text-metrics"
+       "pango-example"
+       "text-metrics.lisp")
+      ("Draw text soulmate"
+       ":drawfunc"
+       "pango-draw-text-soulmate"
+       "pango-example"
+       "text-soulmate.lisp")
+      ("Pango Cario rendering"
+       ":drawfunc"
+       "pango-draw-cairo-rendering"
+       "pango-example"
+       "cairo-rendering.lisp"))
+
+     ;; Cairo demos
      "Cairo"
+     (("Cairo Stroke"
+       ":drawfunc"
+       "cairo-draw-stroke"
+       "cairo-example"
+       "draw-stroke.lisp")
+      ("Cairo Fill"
+       ":drawfunc"
+       "cairo-draw-fill"
+       "cairo-example"
+       "draw-fill.lisp")
+      ("Cairo Text"
+       ":drawfunc"
+       "cairo-draw-text"
+       "cairo-example"
+       "draw-text.lisp")
+      ("Cairo Paint"
+       ":drawfunc"
+       "cairo-draw-paint"
+       "cairo-example"
+       "draw-paint.lisp")
+      ("Cairo Mask"
+       ":drawfunc"
+       "cairo-draw-mask"
+       "cairo-example"
+       "draw-mask.lisp")
+      ("Cairo Source RGBA"
+       ":drawfunc"
+       "cairo-draw-source-rgba"
+       "cairo-example"
+       "draw-source-rgba.lisp")
+      ("Cairo Source Gradient"
+       ":drawfunc"
+       "cairo-draw-source-gradient"
+       "cairo-example"
+       "draw-source-gradient.lisp")
+      ("Cairo Path"
+       ":drawfunc"
+       "cairo-draw-path"
+       "cairo-example"
+       "draw-path.lisp")
+      ("Cairo Dash"
+       ":drawfunc"
+       "cairo-draw-dash"
+       "cairo-example"
+       "draw-path.lisp")
+      ("Cairo Dashes"
+       ":drawfunc"
+       "cairo-draw-dashes"
+       "cairo-example"
+       "draw-dashes.lisp")
+      ("Cairo Joins"
+       ":drawfunc"
+       "cairo-draw-joins"
+       "cairo-example"
+       "draw-joins.lisp")
+      ("Cairo Text centered"
+       ":drawfunc"
+       "cairo-draw-text-centered"
+       "cairo-example"
+       "draw-text-centered.lisp")
+      ("Cairo Text Glyph"
+       ":drawfunc"
+       "cairo-draw-text-glyph"
+       "cairo-example"
+       "draw-text-glyph.lisp")
+      ("Cairo Text Gradient"
+       ":drawfunc"
+       "cairo-draw-text-gradient"
+       "cairo-example"
+       "draw-text-gradient.lisp")
+      ("Cairo Text Shaded"
+       ":drawfunc"
+       "cairo-draw-text-shaded"
+       "cairo-example"
+       "draw-text-shaded.lisp")
+      ("Cairo Text Soulmate"
+       ":drawfunc"
+       "cairo-draw-text-soulmate"
+       "cairo-example"
+       "draw-text-soulmate.lisp")
+      ("Cairo Draw Logo"
+       ":drawfunc"
+       "cairo-draw-logo"
+       "cairo-example"
+       "draw-logo.lisp")
+      ("Cairo Draw Logo Translate"
+       ":drawfunc"
+       "cairo-draw-logo-translate"
+       "cairo-example"
+       "draw-logo.lisp"))
 
      "Miscellaneous"
      (("Size Groups"
@@ -451,6 +566,27 @@
        "gtk4-example"
        "size-group.lisp"))
 ))
+
+;;; ----------------------------------------------------------------------------
+
+(defun window-draw-func (title drawfunc application
+                         &optional (width 600) (height 600))
+  (let* ((area (make-instance 'gtk:drawing-area))
+         (window (make-instance 'gtk:window
+                                 :application application
+                                 :child area
+                                 :title title
+                                 :default-width width
+                                 :default-height height)))
+    ;; Set the drawing function
+    (gtk:drawing-area-set-draw-func area
+        (lambda (widget cr width height)
+          (declare (ignore widget))
+          (funcall drawfunc cr width height)))
+    ;; Show the window.
+    (gtk:widget-show window)))
+
+;;; ----------------------------------------------------------------------------
 
 (defun mklist (obj)
   (if (listp obj)
