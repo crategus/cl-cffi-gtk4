@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.password-entry.lisp
+;;; gtk4.password-entry.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+;;; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkPasswordEntry
@@ -100,7 +101,7 @@
 
 #+liber-documentation
 (setf (documentation 'password-entry 'type)
- "@version{#2022-6-8}
+ "@version{#2023-3-12}
   @begin{short}
     The @sym{gtk:password-entry} class is text entry field that has been
     tailored for entering secrets.
@@ -142,7 +143,7 @@ lambda (entry)    :action
       @end{pre}
       A keybinding signal which gets emitted when the user activates the entry.
       Applications should not connect to it, but may emit it with the
-      @fun{g-signal-emit} function if they need to control activation
+      @fun{g:signal-emit} function if they need to control activation
       programmatically. The default bindings for this signal are all forms of
       the @kbd{Enter} key.
       @begin[code]{table}
@@ -150,18 +151,18 @@ lambda (entry)    :action
           is emitted.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:password-entry-new}
   @see-slot{gtk:password-entry-activates-default}
   @see-slot{gtk:password-entry-extra-menu}
   @see-slot{gtk:password-entry-placeholder-text}
   @see-slot{gtk:password-entry-show-peek-icon}
-  @see-constructor{gtk:password-entry-new}
   @see-class{gtk:editable}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- password-entry-activates-default -----------------------------------
+;;; --- password-entry-activates-default ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "activates-default"
@@ -176,7 +177,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-activates-default)
       "Accessor"
       (documentation 'password-entry-activates-default 'function)
- "@version{#2022-7-31}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:password-entry-activates-default object) => setting}
   @syntax[]{(setf (gtk:password-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -195,12 +196,12 @@ lambda (entry)    :action
   closed, since the default widget is usually one of the dialog buttons.
   @see-class{gtk:password-entry}")
 
-;;; --- password-entry-extra-menu ------------------------------------------
+;;; --- password-entry-extra-menu ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "extra-menu"
                                                'password-entry) t)
- "The @code{extra-menu} property of type @class{g-menu-model} (Read / Write)
+ "The @code{extra-menu} property of type @class{g:menu-model} (Read / Write)
   @br{}
   A menu model whose contents will be appended to the context menu.")
 
@@ -208,11 +209,11 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-extra-menu)
       "Accessor"
       (documentation 'password-entry-extra-menu 'function)
- "@version{#2022-7-31}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:password-entry-extra-menu object) => menu}
   @syntax[]{(setf (gtk:password-entry-extra-menu object) menu)}
   @argument[object]{a @class{gtk:password-entry} widget}
-  @argument[menu]{a @class{g-menu-model} object}
+  @argument[menu]{a @class{g:menu-model} object}
   @begin{short}
     Accessor of the @slot[gtk:password-entry]{extra-menu} slot of the
     @class{gtk:password-entry} class.
@@ -221,9 +222,9 @@ lambda (entry)    :action
   @sym{(setf gtk:password-entry-extra-menu)} function sets a menu model to add
   when constructing the context menu for the text entry field.
   @see-class{gtk:password-entry}
-  @see-class{g-menu-model}")
+  @see-class{g:menu-model}")
 
-;;; --- password-entry-placeholder-text ------------------------------------
+;;; --- password-entry-placeholder-text ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "placeholder-text"
@@ -238,7 +239,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-placeholder-text)
       "Accessor"
       (documentation 'password-entry-placeholder-text 'function)
- "@version{#2022-7-31}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:password-entry-placeholder-text object) => text}
   @syntax[]{(setf (gtk:password-entry-placeholder-text object) text)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -259,7 +260,7 @@ lambda (entry)    :action
   the initial focus setting until the first key event arrives.
   @see-class{gtk:password-entry}")
 
-;;; --- password-entry-show-peek-icon --------------------------------------
+;;; --- password-entry-show-peek-icon ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-peek-icon"
@@ -273,7 +274,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-show-peek-icon)
       "Accessor"
       (documentation 'password-entry-show-peek-icon 'function)
- "@version{#2022-7-31}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:password-entry-show-peek-icon object) => setting}
   @syntax[]{(setf (gtk:password-entry-show-peek-icon object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -294,13 +295,16 @@ lambda (entry)    :action
 ;;; gtk_password_entry_new ()
 ;;; ----------------------------------------------------------------------------
 
+(declaim (inline password-entry-new))
+
 (defun password-entry-new ()
  #+liber-documentation
- "@version{#2022-7-31}
+ "@version{#2023-3-12}
   @return{A new @class{gtk:password-entry} widget.}
-  @short{Creates a password text entry field.}"
+  @short{Creates a password text entry field.}
+  @see-class{gtk:password-entry}"
   (make-instance 'password-entry))
 
 (export 'password-entry-new)
 
-;;; --- End of file gtk.password-entry.lisp ------------------------------------
+;;; --- End of file gtk4.password-entry.lisp -----------------------------------

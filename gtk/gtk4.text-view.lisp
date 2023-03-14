@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.text-view.lisp
+;;; gtk4.text-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.9 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+;;; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkTextView
@@ -528,7 +528,7 @@ lambda (view step count extend)    :action
       The signal is a keybinding signal which gets emitted when the user
       initiates a cursor movement. If the cursor is not visible in the text
       view, this signal causes the viewport to be moved instead. Applications
-      should not connect to it, but may emit it with the @fun{g-signal-emit}
+      should not connect to it, but may emit it with the @fun{g:signal-emit}
       function if they need to control the cursor programmatically. The default
       bindings for this signal come in two variants, the variant with the
       @kbd{Shift} modifier extends the selection, the variant without the
@@ -807,7 +807,7 @@ lambda (view)    :action
   @see-class{gtk:text-view}
   @see-function{gtk:text-tag-editable}")
 
-;;; --- text-view-extra_menu -----------------------------------------------
+;;; --- text-view-extra_menu ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "extra-menu" 'text-view) t)
@@ -819,11 +819,11 @@ lambda (view)    :action
 (setf (liber:alias-for-function 'text-view-extra-menu)
       "Accessor"
       (documentation 'text-view-extra-menu 'function)
- "@version{#2022-1-19}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-view-extra-menu object) => menu}
   @syntax[]{(setf (gtk:text-view-extra-menu object) menu)}
   @argument[object]{a @class{gtk:text-view} widget}
-  @argument[menu]{a @class{g-menu-model} object}
+  @argument[menu]{a @class{g:menu-model} object}
   @begin{short}
     Accessor of the @slot[gtk:text-view]{extra-menu} slot of the
     @class{gtk:text-view} class.
@@ -833,7 +833,7 @@ lambda (view)    :action
   constructing the context menu for the text view. You can pass @code{nil} to
   remove a previously set extra menu.
   @see-class{gtk:text-view}
-  @see-class{g-menu-model}")
+  @see-class{g:menu-model}")
 
 ;;; --- text-view-im-module ------------------------------------------------
 
@@ -2385,4 +2385,4 @@ lambda (view)    :action
 
 (export 'text-view-reset-im-context)
 
-;;; --- End of file gtk.text-view.lisp -----------------------------------------
+;;; --- End of file gtk4.text-view.lisp ----------------------------------------

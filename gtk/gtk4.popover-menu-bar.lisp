@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.popover-menu-bar.lisp
+;;; gtk4.popover-menu-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+;;; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkPopoverMenuBar
@@ -82,13 +83,13 @@
 
 #+liber-documentation
 (setf (documentation 'popover-menu-bar 'type)
- "@version{#2022-7-29}
+ "@version{#2023-3-12}
   @begin{short}
     The @sym{gtk:popover-menu-bar} widget presents a horizontal bar of items
     that pop up popover menus when clicked.
   @end{short}
   The only way to create instances of the @sym{gtk:popover-menu-bar} widget is
-  from a @class{g-menu-model} object.
+  from a @class{g:menu-model} object.
 
   @image[popover-menu-bar]{Figure: GtkPopoverMenuBar}
   @begin[CSS nodes]{dictionary}
@@ -109,22 +110,22 @@ menubar
     role of the @symbol{gtk:accessible-role} enumeration. The menu items use
     the @code{:menu-item} role and the menus use the @code{:menu} role.
   @end{dictionary}
-  @see-slot{gtk:popover-menu-bar-menu-model}
   @see-constructor{gtk:popover-menu-bar-new-from-model}
+  @see-slot{gtk:popover-menu-bar-menu-model}
   @see-class{gtk:popover}
   @see-class{gtk:popover-menu}
-  @see-class{g-menu-model}")
+  @see-class{g:menu-model}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- popover-menu-bar-menu-model ----------------------------------------
+;;; --- popover-menu-bar-menu-model --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "menu-model"
                                                'popover-menu-bar) t)
- "The @code{menu-model} property of type @class{g-menu-model} (Read / Write)
+ "The @code{menu-model} property of type @class{g:menu-model} (Read / Write)
   @br{}
   The model from which the menu bar is created. The model should only contain
   submenus as toplevel elements.")
@@ -133,11 +134,11 @@ menubar
 (setf (liber:alias-for-function 'popover-menu-bar-menu-model)
       "Accessor"
       (documentation 'popover-menu-bar-menu-model 'function)
- "@version{#2022-7-29}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:popover-menu-bar-menu-model object) => model}
   @syntax[]{(setf (gtk:popover-menu-bar-menu-model object) model)}
   @argument[object]{a @class{gtk:popover-menu} widget}
-  @argument[model]{a @class{g-menu-model} object}
+  @argument[model]{a @class{g:menu-model} object}
   @begin{short}
     Accessor of the @slot[gtk:popover-menu-bar]{menu-model} slot of the
     @class{gtk:popover-menu} class.
@@ -146,7 +147,7 @@ menubar
   which the contents of the menu bar are taken. The
   @sym{(setf gtk:popover-menu-bar-menu-model)} function sets a menu model.
   @see-class{gtk:popover-menu-bar}
-  @see-class{g-menu-model}")
+  @see-class{g:menu-model}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_popover_menu_bar_new_from_model ()
@@ -154,14 +155,15 @@ menubar
 
 (defun popover-menu-bar-new-from-model (model)
  #+liber-documentation
- "@version{#2022-7-29}
-  @argument[model]{a @class{g-menu-model} object, or @code{nil}}
+ "@version{#2023-3-12}
+  @argument[model]{a @class{g:menu-model} object, or @code{nil}}
   @return{A new @class{gtk:popover-menu-bar} widget.}
   @begin{short}
-    Creates a @class{gtk:popover-menu-bar} from a @class{g-menu-model} object.
+    Creates a @class{gtk:popover-menu-bar} widget from a @class{g:menu-model}
+    object.
   @end{short}
   @see-class{gtk:popover-menu-bar}
-  @see-class{g-menu-model}"
+  @see-class{g:menu-model}"
   (if model
       (make-instance 'popover-menu-bar
                      :menu-model model)
@@ -173,10 +175,9 @@ menubar
 ;;; gtk_popover_menu_bar_add_child ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_popover_menu_bar_add_child" popover-menu-bar-add-child)
-    :boolean
+(defcfun ("gtk_popover_menu_bar_add_child" popover-menu-bar-add-child) :boolean
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2023-3-12}
   @argument[menubar]{a @class{gtk:popover-menu-bar} widget}
   @argument[child]{a @class{gtk:widget} object to add}
   @argument[id]{a string with the ID to insert @arg{child} at}
@@ -202,7 +203,7 @@ menubar
 (defcfun ("gtk_popover_menu_bar_remove_child" popover-menu-bar-remove-child)
     :boolean
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2023-3-12}
   @argument[menubar]{a @class{gtk:popover-menu-bar} widget}
   @argument[child]{a @class{gtk:widget} object to remove}
   @return{@em{True} if the widget was removed.}
@@ -218,4 +219,4 @@ menubar
 
 (export 'popover-menu-bar-remove-child)
 
-;;; --- End of file gtk.popover-menu-bar.lisp ----------------------------------
+;;; --- End of file gtk4.popover-menu-bar.lisp ---------------------------------

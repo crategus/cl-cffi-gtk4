@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.text.lisp
+;;; gtk4.text.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+;;; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkText
@@ -209,11 +210,10 @@
 
 #+liber-documentation
 (setf (documentation 'text 'type)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @begin{short}
     The @sym{gtk:text} widget is a single line text entry widget.
   @end{short}
-
   A fairly large set of key bindings are supported by default. If the entered
   text is longer than the allocation of the widget, the widget will scroll so
   that the cursor position is visible.
@@ -356,7 +356,7 @@ lambda (entry step count extend)    :action
       initiates a cursor movement. If the cursor is not visible in the text
       entry field, this signal causes the viewport to be moved instead.
       Applications should not connect to it, but may emit it with the
-      @fun{g-signal-emit-by-name} function if they need to control the cursor
+      @fun{g:signal-emit} function if they need to control the cursor
       programmatically. The default bindings for this signal come in two
       variants, the variant with the @kbd{Shift} modifier extends the selection,
       the variant without the @kbd{Shift} modifier does not. There are too many
@@ -434,6 +434,8 @@ lambda (entry)    :action
     @subheading{The \"clipboard.cut\" action}
       Copies the contents to the clipboard and deletes it from the widget.
   @end{dictionary}
+  @see-constructor{gtk:text-new}
+  @see-constructor{gtk:text-new-with-buffer}
   @see-slot{gtk:text-activates-default}
   @see-slot{gtk:text-attributes}
   @see-slot{gtk:text-buffer}
@@ -452,8 +454,6 @@ lambda (entry)    :action
   @see-slot{gtk:text-tabs}
   @see-slot{gtk:text-truncate-multiline}
   @see-slot{gtk:text-visibility}
-  @see-constructor{gtk:text-new}
-  @see-constructor{gtk:text-new-with-buffer}
   @see-class{gtk:entry}
   @see-class{gtk:text-view}")
 
@@ -461,7 +461,7 @@ lambda (entry)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- text-activates-default ---------------------------------------------
+;;; --- text-activates-default -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "activates-default" 'text) t)
@@ -475,7 +475,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-activates-default)
       "Accessor"
       (documentation 'text-activates-default 'function)
- "@version{#2022-5-30}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-activates-default object) => setting}
   @syntax[]{(setf (gtk:text-activates-default object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -485,7 +485,6 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{activates-default} slot of the
     @class{gtk:text} class.
   @end{short}
-
   If the @slot[gtk:text]{activates-default} property is @em{true}, pressing
   @kbd{Enter} in the text entry field will activate the default widget for the
   window containing the text entry field. This usually means that the dialog box
@@ -493,7 +492,7 @@ lambda (entry)    :action
   usually one of the dialog buttons.
   @see-class{gtk:text}")
 
-;;; --- text-attributes ----------------------------------------------------
+;;; --- text-attributes --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "attributes" 'text) t)
@@ -509,7 +508,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-attributes)
       "Accessor"
       (documentation 'text-attributes 'function)
- "@version{#2022-5-30}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-attributes object) => attributes}
   @syntax[]{(setf (gtk:text-attributes object) attributes)}
   @argument[object]{a @class{gtk:text} widget}
@@ -518,14 +517,13 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{attributes} slot of the @class{gtk:text}
     class.
   @end{short}
-
   The @sym{gtk:text-attributes} function gets the attribute list that was set on
   the text entry field, if any. The @sym{(setf gtk:text-attributes)} function
   sets a attribute list. The attributes in the list are applied to the text.
   @see-class{gtk:text}
   @see-class{pango:attr-list}")
 
-;;; --- text-buffer --------------------------------------------------------
+;;; --- text-buffer ------------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "buffer" 'text) t)
@@ -537,7 +535,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-buffer)
       "Accessor"
       (documentation 'text-buffer 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-buffer object) => buffer}
   @syntax[]{(setf (gtk:text-buffer object) buffer)}
   @argument[object]{a @class{gtk:text} widget}
@@ -545,7 +543,6 @@ lambda (entry)    :action
   @begin{short}
     Accessor of the @slot[gtk:text]{buffer} slot of the @class{gtk:text} class.
   @end{short}
-
   The @sym{gtk:text-buffer} function gets the @class{gtk:entry-buffer} object
   which holds the text for the text entry field. The
   @sym{(setf gtk:text-buffer)} function sets the @class{gtk:entry-buffer}
@@ -553,7 +550,7 @@ lambda (entry)    :action
   @see-class{gtk:text}
   @see-class{gtk:entry-buffer}")
 
-;;; --- text-enable-emoji-completion ---------------------------------------
+;;; --- text-enable-emoji-completion -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "enable-emoji-completion"
@@ -567,7 +564,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-enable-emoji-completion)
       "Accessor"
       (documentation 'text-enable-emoji-completion 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-enable-emoji-completion object) => setting}
   @syntax[]{(setf (gtk:text-enable-emoji-completion object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -576,7 +573,6 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{enable-emoji-completion} slot of the
     @class{gtk:text} class.
   @end{short}
-
   The @sym{gtk:text-enable-emoji-completion} function returns whether Emoji
   completion is enabled for text entry field. The
   @sym{(setf gtk:text-enable-emoji-completion)} function sets whether Emoji
@@ -584,11 +580,11 @@ lambda (entry)    :action
   will pop up a window with suggested Emojis matching the keyword.
   @see-class{gtk:text}")
 
-;;; --- text-extra-menu ----------------------------------------------------
+;;; --- text-extra-menu --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "extra-menu" 'text) t)
- "The @code{extra-menu} property of type @class{g-menu-model} (Read / Write)
+ "The @code{extra-menu} property of type @class{g:menu-model} (Read / Write)
   @br{}
   A menu model whose contents will be appended to the context menu.")
 
@@ -596,23 +592,22 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-extra-menu)
       "Accessor"
       (documentation 'text-extra-menu 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-extra-menu object) => menu}
   @syntax[]{(setf (gtk:text-extra-menu object) menu)}
   @argument[object]{a @class{gtk:text} widget}
-  @argument[menu]{a @class{g-menu-model} object}
+  @argument[menu]{a @class{g:menu-model} object}
   @begin{short}
     Accessor of the @slot[gtk:text]{extra-menu} slot of the @class{gtk:text}
     class.
   @end{short}
-
   The @sym{gtk:text-extra-menu} function gets the menu model. The
   @sym{(setf gtk:text-extra-menu)} function sets a menu model to add when
   constructing the context menu for the text entry field.
   @see-class{gtk:text}
-  @see-class{g-menu-model}")
+  @see-class{g:menu-model}")
 
-;;; --- text-im-module -----------------------------------------------------
+;;; --- text-im-module ---------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "im-module" 'text) t)
@@ -627,7 +622,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-im-module)
       "Accessor"
       (documentation 'text-im-module 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-im-module object) => module}
   @syntax[]{(setf (gtk:text-im-module object) module)}
   @argument[object]{a @class{gtk:text} widget}
@@ -636,17 +631,15 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{im-module} slot of the @class{gtk:text}
     class.
   @end{short}
-
   Which IM (input method) module should be used for the text entry field. See
   the @class{gtk:im-context} documentation. Setting this to a non-@code{nil}
   value overrides the system-wide IM module setting. See the
   @slot[gtk:settings]{gtk-im-module} property.
-
   @see-class{gtk:text}
-  @see-class{gtk:im-module}
+  @see-class{gtk:im-context}
   @see-function{gtk:settings-gtk-im-module}")
 
-;;; --- text-input-hints ---------------------------------------------------
+;;; --- text-input-hints -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-hints" 'text) t)
@@ -659,7 +652,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-input-hints)
       "Accessor"
       (documentation 'text-input-hints 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-input-hints object) => hints}
   @syntax[]{(setf (gtk:text-input-hints object) hints)}
   @argument[object]{a @class{gtk:text} widget}
@@ -668,7 +661,6 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{input-hints} slot of the @class{gtk:text}
     class.
   @end{short}
-
   The @sym{gtk:text-input-hints} function gets the value of the
   @slot[gtk:text]{input-hints} property, which allows input methods to fine-tune
   their behaviour. The @sym{(setf gtk:text-input-hints)} function sets the
@@ -676,7 +668,7 @@ lambda (entry)    :action
   @see-class{gtk:text}
   @see-symbol{gtk:input-hints}")
 
-;;; --- text-input-purpose -------------------------------------------------
+;;; --- text-input-purpose -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-purpose" 'text) t)
@@ -692,7 +684,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-input-purpose)
       "Accessor"
       (documentation 'text-input-purpose 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-input-purpose object) => purpose}
   @syntax[]{(setf (gtk:text-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:text} widget}
@@ -701,7 +693,6 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{input-purpose} slot of the @class{gtk:text}
     class.
   @end{short}
-
   The @sym{gtk:text-input-purpose} function gets the value of the
   @slot[gtk:text]{input-purpose} property, which can be used by on-screen
   keyboards and other input methods to adjust their behaviour. The
@@ -709,7 +700,7 @@ lambda (entry)    :action
   @see-class{gtk:text}
   @see-symbol{gtk:input-purpose}")
 
-;;; --- text-invisible-char ------------------------------------------------
+;;; --- text-invisible-char ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "invisible-char" 'text) t)
@@ -722,7 +713,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-invisible-char)
       "Accessor"
       (documentation 'text-invisible-char 'function)
- "@version{#2022-7-17}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-invisible-char object) => char}
   @syntax[]{(setf (gtk:text-invisible-char object) char)}
   @argument[object]{a @class{gtk:text} widget}
@@ -731,12 +722,10 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{invisible-char} slot of the @class{gtk:text}
     class.
   @end{short}
-
   The @sym{gtk:text-invisible-char} function retrieves the character displayed
   in place of the real characters for entries with visibility set to false. Note
   that GTK does not compute this value unless it needs it, so the value returned
-  by this function is not very useful unless it has been explicitly set with
-  the @sym{(setf gtk:text-invisible-char)} function. The
+  by this function is not very useful unless it has been explicitly set. The
   @sym{(setf gtk:text-invisible-char)} function sets the character.
 
   By default, GTK picks the best invisible char available in the current font.
@@ -744,11 +733,10 @@ lambda (entry)    :action
   There will be no text on the screen as they type.
   @see-class{gtk:text}")
 
-;;; --- text-invisible-char-set --------------------------------------------
+;;; --- text-invisible-char-set ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "invisible-char-set"
-                                               'text) t)
+(setf (documentation (liber:slot-documentation "invisible-char-set" 'text) t)
  "The @code{invisible-char-set} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether the invisible char has been set for the text entry field. @br{}
@@ -758,7 +746,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-invisible-char-set)
       "Accessor"
       (documentation 'text-invisible-char-set 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-invisible-char-set object) => setting}
   @syntax[]{(setf (gtk:text-invisible-char-set object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -767,7 +755,6 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{invisible-char-set} slot of the
     @class{gtk:text} class.
   @end{short}
-
   Whether the invisible char has been set for the text entry field.
   @see-class{gtk:text}
   @see-function{gtk:text-invisible-char}")
@@ -786,7 +773,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-max-length)
       "Accessor"
       (documentation 'text-max-length 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-max-length object) => length}
   @syntax[]{(setf (gtk:text-max-length object) length)}
   @argument[object]{a @class{gtk:text} widget}
@@ -796,9 +783,8 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{max-length} slot of the @class{gtk:text}
     class.
   @end{short}
-
-  The @sym{gtk:text-max-length} function retrieves the maximum allowed length of
-  the text in the text entry field. This is equivalent to getting the
+  The @sym{gtk:text-max-length} function retrieves the maximum allowed length
+  of the text in the text entry field. This is equivalent to getting the
   @class{gtk:entry-buffer} object of the text entry field and calling the
   @fun{gtk:entry-buffer-max-length} function on it.
 
@@ -806,12 +792,12 @@ lambda (entry)    :action
   If the current contents are longer than the given length, then they will be
   truncated to fit. This is equivalent to getting the @class{gtk:entry-buffer}
   object of the text entry field and calling the
-  @sym{(setf gtk:entry-buffer-max-length)} on it.
+  @sym{(setf gtk:entry-buffer-max-length)} function on it.
   @see-class{gtk:text}
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-max-length}")
 
-;;; --- text-overwrite-mode ------------------------------------------------
+;;; --- text-overwrite-mode ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "overwrite-mode" 'text) t)
@@ -824,7 +810,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-overwrite-mode)
       "Accessor"
       (documentation 'text-overwrite-mode 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-overwrite-mode object) => setting}
   @syntax[]{(setf (gtk:text-overwrite-mode object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -833,13 +819,12 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{overwrite-mode} slot of the @class{gtk:text}
     class.
   @end{short}
-
   The @sym{gtk:text-overwrite-mode} function gets the value of the property. The
   @sym{(setf gtk:text-max-length)} function sets whether the text is overwritten
   when typing in the text entry field.
   @see-class{gtk:text}")
 
-;;; --- text-placeholder-text ----------------------------------------------
+;;; --- text-placeholder-text --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "placeholder-text" 'text) t)
@@ -853,7 +838,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-placeholder-text)
       "Accessor"
       (documentation 'text-placeholder-text 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-placeholder-text object) => text}
   @syntax[]{(setf (gtk:text-placeholder-text object) text)}
   @argument[object]{a @class{gtk:text} widget}
@@ -863,7 +848,6 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{placeholder-text} slot of the
     @class{gtk:text} class.
   @end{short}
-
   The @sym{gtk:text-placeholder-text} function retrieves the text that will be
   displayed when the text entry field is empty and unfocused. The
   @sym{(setf gtk:text-placeholder-text)} function sets text to be displayed.
@@ -871,11 +855,10 @@ lambda (entry)    :action
   entry field.
   @see-class{gtk:text}")
 
-;;; --- text-propagate-text-width ------------------------------------------
+;;; --- text-propagate-text-width ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "propagate-text-width"
-                                               'text) t)
+(setf (documentation (liber:slot-documentation "propagate-text-width" 'text) t)
  "The @code{propagate-text-width} property of type @code{:boolean}
   (Read / Write) @br{}
   Whether the text entry field should grow and shrink with the content. @br{}
@@ -885,7 +868,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-propagate-text-width)
       "Accessor"
       (documentation 'text-propagate-text-width 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-propagate-text-width object) => setting}
   @syntax[]{(setf (gtk:text-propagate-text-width object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -916,7 +899,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-scroll-offset)
       "Accessor"
       (documentation 'text-scroll-offset 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-scroll-offset object) => offset}
   @syntax[]{(setf (gtk:text-scroll-offset object) offset)}
   @argument[object]{a @class{gtk:text} widget}
@@ -926,11 +909,10 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{scroll-offset} slot of the @class{gtk:text}
     class.
   @end{short}
-
   Number of pixels the text entry field scrolled off the screen to the left.
   @see-class{gtk:text}")
 
-;;; --- text-tabs ----------------------------------------------------------
+;;; --- text-tabs --------------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tabs" 'text) t)
@@ -941,7 +923,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-tabs)
       "Accessor"
       (documentation 'text-tabs 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-tabs object) => tabs}
   @syntax[]{(setf (gtk:text-tabs object) tabs)}
   @argument[object]{a @class{gtk:text} widget}
@@ -949,7 +931,6 @@ lambda (entry)    :action
   @begin{short}
     Accessor of the @slot[gtk:text]{tabs} slot of the @class{gtk:text} class.
   @end{short}
-
   The @sym{gtk:text-tabs} function gets the tabstops that were set on the text
   entry field, if any. The @sym{(setf gtk:text-tabs)} function sets a
   @class{pango:tab-array} instance. The tabstops in the array are applied to
@@ -957,11 +938,10 @@ lambda (entry)    :action
   @see-class{gtk:text}
   @see-class{pango:tab-array}")
 
-;;;  --- text-truncate-multiline -------------------------------------------
+;;;  --- text-truncate-multiline -----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "truncate-multiline"
-                                               'text) t)
+(setf (documentation (liber:slot-documentation "truncate-multiline" 'text) t)
  "The @code{multiline-truncate} property of type @code{:boolean} (Read / Write)
   @br{}
   When @em{true}, pasted multi-line text is truncated to the first line. @br{}
@@ -971,7 +951,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-truncate-multiline)
       "Accessor"
       (documentation 'text-truncate-multiline 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-truncate-multiline object) => setting}
   @syntax[]{(setf (gtk:text-truncate-multiline object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -981,14 +961,13 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{truncate-multiline} slot of the
     @class{gtk:text} class.
   @end{short}
-
   The @sym{gtk:text-truncate-multiline} function returns whether the text
   entry field will truncate multi-line text that is pasted into the widget. The
   @sym{(setf gtk:text-truncate-multiline)} function sets whether the text entry
   field should truncate multi-line text.
   @see-class{gtk:text}")
 
-;;; --- text-visibility ----------------------------------------------------
+;;; --- text-visibility --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "visibility" 'text) t)
@@ -1001,7 +980,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-visibility)
       "Accessor"
       (documentation 'text-visibility 'function)
- "@version{#2022-6-5}
+ "@version{#2023-3-12}
   @syntax[]{(gtk:text-visibility object) => visible}
   @syntax[]{(setf (gtk:text-visibility object) visible)}
   @argument[object]{a @class{gtk:text} widget}
@@ -1010,7 +989,6 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{visibility} slot of the @class{gtk:text}
     class.
   @end{short}
-
   The @sym{gtk:text-visibility} function retrieves whether the text in the
   text entry field is visible. The @sym{(setf gtk:text-visibility)} function
   sets whether the contents of the text entry field are visible or not. When
@@ -1035,7 +1013,7 @@ lambda (entry)    :action
 
 (defun text-new ()
  #+liber-documentation
- "@version{#2022-7-17}
+ "@version{#2023-3-12}
   @return{A new @class{gtk:text} widget.}
   @short{Creates a new text widget.}
   @see-class{gtk:text}
@@ -1050,13 +1028,13 @@ lambda (entry)    :action
 
 (defun text-new-with-buffer (buffer)
  #+liber-documentation
- "@version{#2022-7-17}
+ "@version{#2023-3-12}
   @argument[buffer]{a @class{gtk:entry-buffer} object}
   @return{A new @class{gtk:text} widget.}
   @short{Creates a new text widget with the specified entry buffer.}
   @see-class{gtk:text}
   @see-class{gtk:entry-buffer}
-  @see-function{gtk:text-new-with-buffer}"
+  @see-function{gtk:text-new}"
   (make-instance 'text
                  :buffer buffer))
 
@@ -1068,7 +1046,7 @@ lambda (entry)    :action
 
 (defcfun ("gtk_text_unset_invisible_char" text-unset-invisible-char) :void
  #+liber-documentation
- "@version{#2022-7-17}
+ "@version{#2023-3-12}
   @argument[entry]{a @class{gtk:text} widget}
   @begin{short}
     Unsets the invisible char previously set with the
@@ -1087,14 +1065,13 @@ lambda (entry)    :action
 
 (defun text-text-length (entry)
  #+liber-documentation
- "@version{#2022-7-17}
+ "@version{#2023-3-12}
   @argument[entry]{a @class{gtk:text} widget}
   @return{An unsigned integer with the current number of characters in the
     @class{gtk:text} widget.}
   @begin{short}
     Retrieves the current length of the text in @arg{entry}.
   @end{short}
-
   This is equivalent to getting the @class{gtk:entry-buffer} object of the
   text widget and calling the @fun{gtk:entry-buffer-length} function on it.
   @see-class{gtk:text}
@@ -1111,20 +1088,20 @@ lambda (entry)    :action
 (defcfun ("gtk_text_grab_focus_without_selecting"
            text-grab-focus-without-selecting) :boolean
  #+liber-documentation
- "@version{#2022-7-17}
+ "@version{#2023-3-12}
   @argument[entry]{a @class{gtk:text} widget}
   @return{@em{True} if focus is inside @arg{entry}.}
   @begin{short}
     Causes the text widget to have keyboard focus.
   @end{short}
-
   It behaves likes the @fun{gtk:widget-grab-focus} function, except that it
   does not select the contents of @arg{entry}. You only want to call this on
   some special entries which the user usually does not want to replace all text
   in, such as search-as-you-type entries.
-  @see-class{gtk:text}"
+  @see-class{gtk:text}
+  @see-function{gtk:widget-grab-focus}"
   (entry (g:object text)))
 
 (export 'text-grab-focus-without-selecting)
 
-;;; --- End of file gtk.text.lisp ----------------------------------------------
+;;; --- End of file gtk4.text.lisp ---------------------------------------------
