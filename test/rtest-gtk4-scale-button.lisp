@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkScaleButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkScaleButton")
-          (g:gtype (foreign-funcall "gtk_scale_button_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_scale_button_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkScaleButton")))
@@ -72,4 +72,4 @@
 ;;;     gtk_scale_button_get_plus_button
 ;;;     gtk_scale_button_get_minus_button
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

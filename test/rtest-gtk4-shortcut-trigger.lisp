@@ -1,3 +1,5 @@
+(in-package :gtk-testsuite)
+
 (def-suite gtk-shortcut-trigger :in gtk-suite)
 (in-suite gtk-shortcut-trigger)
 
@@ -9,29 +11,27 @@
   ;; Type check
   (is (g:type-is-object "GtkShortcutTrigger"))
   ;; Check the registered name
-  (is (eq 'gtk-shortcut-trigger
+  (is (eq 'gtk:shortcut-trigger
           (gobject:symbol-for-gtype "GtkShortcutTrigger")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkShortcutTrigger")
-          (gtype (foreign-funcall "gtk_shortcut_trigger_get_type" g-size))))
+  (is (eq (g:gtype "GtkShortcutTrigger")
+          (g:gtype (cffi:foreign-funcall "gtk_shortcut_trigger_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GObject")
-          (g-type-parent "GtkShortcutTrigger")))
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkShortcutTrigger")))
   ;; Check the children
   (is (equal '("GtkKeyvalTrigger" "GtkMnemonicTrigger" "GtkAlternativeTrigger"
                "GtkNeverTrigger")
-             (mapcar #'g-type-name (g-type-children "GtkShortcutTrigger"))))
+             (list-children "GtkShortcutTrigger")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkShortcutTrigger"))))
+             (list-interfaces "GtkShortcutTrigger")))
   ;; Check the class properties
   (is (equal '()
-             (list-class-property-names "GtkShortcutTrigger")))
+             (list-properties "GtkShortcutTrigger")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkShortcutTrigger"))
-                   #'string<)))
+             (list-signals "GtkShortcutTrigger")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkShortcutTrigger" GTK-SHORTCUT-TRIGGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -45,28 +45,26 @@
   ;; Type check
   (is (g:type-is-object "GtkKeyvalTrigger"))
   ;; Check the registered name
-  (is (eq 'gtk-keyval-trigger
+  (is (eq 'gtk:keyval-trigger
           (gobject:symbol-for-gtype "GtkKeyvalTrigger")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkKeyvalTrigger")
-          (gtype (foreign-funcall "gtk_keyval_trigger_get_type" g-size))))
+  (is (eq (g:gtype "GtkKeyvalTrigger")
+          (g:gtype (cffi:foreign-funcall "gtk_keyval_trigger_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GtkShortcutTrigger")
-          (g-type-parent "GtkKeyvalTrigger")))
+  (is (eq (g:gtype "GtkShortcutTrigger")
+          (g:type-parent "GtkKeyvalTrigger")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkKeyvalTrigger"))))
+             (list-children "GtkKeyvalTrigger")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkKeyvalTrigger"))))
+             (list-interfaces "GtkKeyvalTrigger")))
   ;; Check the class properties
   (is (equal '("keyval" "modifiers")
-             (list-class-property-names "GtkKeyvalTrigger")))
+             (list-properties "GtkKeyvalTrigger")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkKeyvalTrigger"))
-                   #'string<)))
+             (list-signals "GtkKeyvalTrigger")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkKeyvalTrigger" GTK-KEYVAL-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
@@ -83,28 +81,26 @@
   ;; Type check
   (is (g:type-is-object "GtkMnemonicTrigger"))
   ;; Check the registered name
-  (is (eq 'gtk-mnemonic-trigger
+  (is (eq 'gtk:mnemonic-trigger
           (gobject:symbol-for-gtype "GtkMnemonicTrigger")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkMnemonicTrigger")
-          (gtype (foreign-funcall "gtk_mnemonic_trigger_get_type" g-size))))
+  (is (eq (g:gtype "GtkMnemonicTrigger")
+          (g:gtype (cffi:foreign-funcall "gtk_mnemonic_trigger_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GtkShortcutTrigger")
-          (g-type-parent "GtkMnemonicTrigger")))
+  (is (eq (g:gtype "GtkShortcutTrigger")
+          (g:type-parent "GtkMnemonicTrigger")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkMnemonicTrigger"))))
+             (list-children "GtkMnemonicTrigger")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkMnemonicTrigger"))))
+             (list-interfaces "GtkMnemonicTrigger")))
   ;; Check the class properties
   (is (equal '("keyval")
-             (list-class-property-names "GtkMnemonicTrigger")))
+             (list-properties "GtkMnemonicTrigger")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkMnemonicTrigger"))
-                   #'string<)))
+             (list-signals "GtkMnemonicTrigger")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMnemonicTrigger" GTK-MNEMONIC-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
@@ -119,28 +115,27 @@
   ;; Type check
   (is (g:type-is-object "GtkAlternativeTrigger"))
   ;; Check the registered name
-  (is (eq 'gtk-alternative-trigger
+  (is (eq 'gtk:alternative-trigger
           (gobject:symbol-for-gtype "GtkAlternativeTrigger")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkAlternativeTrigger")
-          (gtype (foreign-funcall "gtk_alternative_trigger_get_type" g-size))))
+  (is (eq (g:gtype "GtkAlternativeTrigger")
+          (g:gtype (cffi:foreign-funcall "gtk_alternative_trigger_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (gtype "GtkShortcutTrigger")
           (g-type-parent "GtkAlternativeTrigger")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkAlternativeTrigger"))))
+             (list-children "GtkAlternativeTrigger")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkAlternativeTrigger"))))
+             (list-interfaces "GtkAlternativeTrigger")))
   ;; Check the class properties
   (is (equal '("first" "second")
-             (list-class-property-names "GtkAlternativeTrigger")))
+             (list-properties "GtkAlternativeTrigger")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkAlternativeTrigger"))
-                   #'string<)))
+             (list-signals "GtkAlternativeTrigger")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkAlternativeTrigger"
                                      GTK-ALTERNATIVE-TRIGGER
@@ -159,28 +154,26 @@
   ;; Type check
   (is (g:type-is-object "GtkNeverTrigger"))
   ;; Check the registered name
-  (is (eq 'gtk-never-trigger
+  (is (eq 'gtk:never-trigger
           (gobject:symbol-for-gtype "GtkNeverTrigger")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkNeverTrigger")
-          (gtype (foreign-funcall "gtk_never_trigger_get_type" g-size))))
+  (is (eq (g:gtype "GtkNeverTrigger")
+          (g:gtype (cffi:foreign-funcall "gtk_never_trigger_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GtkShortcutTrigger")
-          (g-type-parent "GtkNeverTrigger")))
+  (is (eq (g:gtype "GtkShortcutTrigger")
+          (g:type-parent "GtkNeverTrigger")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkNeverTrigger"))))
+             (list-children "GtkNeverTrigger")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkNeverTrigger"))))
+             (list-interfaces "GtkNeverTrigger")))
   ;; Check the class properties
   (is (equal '()
-             (list-class-property-names "GtkNeverTrigger")))
+             (list-properties "GtkNeverTrigger")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkNeverTrigger"))
-                   #'string<)))
+             (list-signals "GtkNeverTrigger")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkNeverTrigger" GTK-NEVER-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
@@ -213,4 +206,4 @@
 
 ;;;     gtk_never_trigger_get
 
-;;; 2022-8-25
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-cell-area :in gtk-suite)
 (in-suite gtk-cell-area)
 
@@ -9,29 +11,27 @@
   ;; Type check
   (is (g:type-is-object "GtkCellArea"))
   ;; Check the registered name
-  (is (eq 'gtk-cell-area
+  (is (eq 'gtk:cell-area
           (gobject:symbol-for-gtype "GtkCellArea")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkCellArea")
-          (gtype (foreign-funcall "gtk_cell_area_get_type" g-size))))
+  (is (eq (g:gtype "GtkCellArea")
+          (g:gtype (cffi:foreign-funcall "gtk_cell_area_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GInitiallyUnowned")
-          (g-type-parent "GtkCellArea")))
+  (is (eq (g:gtype "GInitiallyUnowned")
+          (g:type-parent "GtkCellArea")))
   ;; Check the children
   (is (equal '("GtkCellAreaBox")
-             (mapcar #'g-type-name (g-type-children "GtkCellArea"))))
+             (list-children "GtkCellArea")))
   ;; Check the interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
-             (mapcar #'g-type-name (g-type-interfaces "GtkCellArea"))))
+             (list-interfaces "GtkCellArea")))
   ;; Check the class properties
   (is (equal '("edit-widget" "edited-cell" "focus-cell")
-             (list-class-property-names "GtkCellArea")))
+             (list-properties "GtkCellArea")))
   ;; Check the list of signals
   (is (equal '("add-editable" "apply-attributes" "focus-changed"
                "remove-editable")
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkCellArea"))
-                   #'string<)))
+             (list-signals "GtkCellArea")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkCellArea" GTK-CELL-AREA
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
@@ -168,4 +168,4 @@
 ;;;     gtk_cell_area_inner_cell_area
 ;;;     gtk_cell_area_request_renderer
 
-;;; 2022-8-25
+;;; --- 2023-3-18 --------------------------------------------------------------

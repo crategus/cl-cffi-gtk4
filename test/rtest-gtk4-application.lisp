@@ -16,16 +16,13 @@
   ;; Check the names
   (is (equal '("GTK_APPLICATION_INHIBIT_LOGOUT" "GTK_APPLICATION_INHIBIT_SWITCH"
                "GTK_APPLICATION_INHIBIT_SUSPEND" "GTK_APPLICATION_INHIBIT_IDLE")
-             (mapcar #'flags-item-name
-                     (get-flags-items "GtkApplicationInhibitFlags"))))
+             (list-flags-item-name "GtkApplicationInhibitFlags")))
   ;; Check the values
   (is (equal '(1 2 4 8)
-             (mapcar #'flags-item-value
-                     (get-flags-items "GtkApplicationInhibitFlags"))))
+             (list-flags-item-value "GtkApplicationInhibitFlags")))
   ;; Check the nick names
   (is (equal '("logout" "switch" "suspend" "idle")
-             (mapcar #'flags-item-nick
-                     (get-flags-items "GtkApplicationInhibitFlags"))))
+             (list-flags-item-nick "GtkApplicationInhibitFlags")))
   ;; Check the flags definition
   (is (equal '(DEFINE-G-FLAGS "GtkApplicationInhibitFlags"
                               GTK-APPLICATION-INHIBIT-FLAGS
@@ -48,7 +45,7 @@
           (gobject:symbol-for-gtype "GtkApplication")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkApplication")
-          (g:gtype (foreign-funcall "gtk_application_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_application_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GApplication") (g:type-parent "GtkApplication")))
   ;; Check the children

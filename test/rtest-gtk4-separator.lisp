@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkSeparator")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSeparator")
-          (g:gtype (foreign-funcall "gtk_separator_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_separator_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkSeparator")))
@@ -54,4 +54,4 @@
 
 ;;;     gtk_separator_new
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

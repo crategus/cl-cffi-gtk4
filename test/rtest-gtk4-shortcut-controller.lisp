@@ -19,7 +19,8 @@
           (gobject:symbol-for-gtype "GtkShortcutController")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutController")
-          (g:gtype (foreign-funcall "gtk_shortcut_controller_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_shortcut_controller_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkShortcutController")))
@@ -63,4 +64,4 @@
 ;;;     gtk_shortcut_controller_add_shortcut
 ;;;     gtk_shortcut_controller_remove_shortcut
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

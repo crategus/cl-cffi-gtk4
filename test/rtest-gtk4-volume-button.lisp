@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkVolumeButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkVolumeButton")
-          (g:gtype (foreign-funcall "gtk_volume_button_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_volume_button_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkScaleButton")
           (g:type-parent "GtkVolumeButton")))
@@ -59,4 +59,4 @@
 
 ;;;     gtk_volume_button_new
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

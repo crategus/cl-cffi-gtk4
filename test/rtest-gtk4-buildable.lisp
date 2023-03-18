@@ -35,7 +35,7 @@
           (gobject:symbol-for-gtype "GtkBuildable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBuildable")
-          (g:gtype (foreign-funcall "gtk_buildable_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_buildable_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '()
              (list-interface-properties "GtkBuildable")))
@@ -63,4 +63,4 @@
 ;;;     gtk_buildable_parse_context_pop                    not implemented
 ;;;     gtk_buildable_parse_context_push                   not implemented
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkLinkButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkLinkButton")
-          (g:gtype (foreign-funcall "gtk_link_button_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_link_button_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkButton")
           (g:type-parent "GtkLinkButton")))
@@ -66,4 +66,4 @@
 ;;;     gtk_link_button_new
 ;;;     gtk_link_button_new_with_label
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkGestureClick")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureClick")
-          (g:gtype (foreign-funcall "gtk_gesture_click_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_click_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureClick")))
@@ -49,4 +49,4 @@
 
 ;;;     gtk_gesture_click_new
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -17,7 +17,7 @@
           (gobject:symbol-for-gtype "GtkPopoverMenu")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPopoverMenu")
-          (g:gtype (foreign-funcall "gtk_popover_menu_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_popover_menu_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkPopover")
           (g:type-parent "GtkPopoverMenu")))
@@ -67,4 +67,4 @@
 ;;;     gtk_popover_menu_add_child
 ;;;     gtk_popover_menu_remove_child
 
-;;; 2022-11-14
+;;; --- 2023-3-18 --------------------------------------------------------------

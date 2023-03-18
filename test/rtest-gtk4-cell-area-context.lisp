@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-cell-area-context :in gtk-suite)
 (in-suite gtk-cell-area-context)
 
@@ -9,29 +11,27 @@
   ;; Type check
   (is (g:type-is-object "GtkCellAreaContext"))
   ;; Check the registered name
-  (is (eq 'gtk-cell-area-context
+  (is (eq 'gtk:cell-area-context
           (gobject:symbol-for-gtype "GtkCellAreaContext")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkCellAreaContext")
-          (gtype (foreign-funcall "gtk_cell_area_context_get_type" g-size))))
+  (is (eq (g:gtype "GtkCellAreaContext")
+          (g:gtype (cffI:foreign-funcall "gtk_cell_area_context_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GObject")
-          (g-type-parent "GtkCellAreaContext")))
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkCellAreaContext")))
   ;; Check the children
   (is (equal '("GtkCellAreaBoxContext")
-             (mapcar #'g-type-name (g-type-children "GtkCellAreaContext"))))
+             (list-children "GtkCellAreaContext")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkCellAreaContext"))))
+             (list-interfaces "GtkCellAreaContext")))
   ;; Check the class properties
   (is (equal '("area" "minimum-height" "minimum-width"
                       "natural-height" "natural-width")
              (list-class-property-names "GtkCellAreaContext")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkCellAreaContext"))
-                   #'string<)))
+             (list-signals "GtkCellAreaContext")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkCellAreaContext" GTK-CELL-AREA-CONTEXT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -74,4 +74,4 @@
 ;;;     gtk_cell_area_context_push_preferred_width
 ;;;     gtk_cell_area_context_push_preferred_height
 
-;;; 2022-8-25
+;;; --- 2023-3-18 --------------------------------------------------------------

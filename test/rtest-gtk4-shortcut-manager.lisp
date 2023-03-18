@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkShortcutManager")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutManager")
-          (g:gtype (foreign-funcall "gtk_shortcut_manager_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_shortcut_manager_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '()
              (list-interface-properties "GtkShortcutManager")))
@@ -25,4 +25,4 @@
                      "gtk_shortcut_manager_get_type"))
              (gobject:get-g-type-definition "GtkShortcutManager"))))
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

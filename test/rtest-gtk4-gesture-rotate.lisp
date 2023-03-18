@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkGestureRotate")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureRotate")
-          (g:gtype (foreign-funcall "gtk_gesture_rotate_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_rotate_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGesture")
           (g:type-parent "GtkGestureRotate")))
@@ -47,4 +47,4 @@
 ;;;     gtk_gesture_rotate_new
 ;;;     gtk_gesture_rotate_get_angle_delta
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

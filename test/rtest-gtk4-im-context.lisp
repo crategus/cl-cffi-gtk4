@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-im-context :in gtk-suite)
 (in-suite gtk-im-context)
 
@@ -9,29 +11,27 @@
   ;; Type check
   (is (g:type-is-object "GtkIMContext"))
   ;; Check the registered name
-  (is (eq 'gtk-im-context
+  (is (eq 'gtk:im-context
           (gobject:symbol-for-gtype "GtkIMContext")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkIMContext")
-          (gtype (foreign-funcall "gtk_im_context_get_type" g-size))))
+  (is (eq (g:gtype "GtkIMContext")
+          (g:gtype (cffi:foreign-funcall "gtk_im_context_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GObject")
-          (g-type-parent "GtkIMContext")))
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkIMContext")))
   ;; Check the children
   (is (equal '("GtkIMContextSimple" "GtkIMMulticontext" "IBusIMContext")
-             (mapcar #'g-type-name (g-type-children "GtkIMContext"))))
+             (list-children "GtkIMContext")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkIMContext"))))
+             (list-interfaces "GtkIMContext")))
   ;; Check the class properties
   (is (equal '("input-hints" "input-purpose")
-             (list-class-property-names "GtkIMContext")))
+             (list-properties "GtkIMContext")))
   ;; Check the list of signals
   (is (equal '("commit" "delete-surrounding" "preedit-changed" "preedit-end"
                "preedit-start" "retrieve-surrounding")
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkIMContext"))
-                   #'string<)))
+             (list-signals "GtkIMContext")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkIMContext" GTK-I-M-CONTEXT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL)
@@ -165,4 +165,4 @@
 ;;;     gtk_im_context_get_surrounding
 ;;;     gtk_im_context_delete_surrounding
 
-;;; 2022-7-10
+;;; --- 2023-3-18 --------------------------------------------------------------

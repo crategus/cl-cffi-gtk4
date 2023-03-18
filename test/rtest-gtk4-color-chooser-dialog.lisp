@@ -15,7 +15,8 @@
           (gobject:symbol-for-gtype "GtkColorChooserDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkColorChooserDialog")
-          (g:gtype (foreign-funcall "gtk_color_chooser_dialog_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_color_chooser_dialog_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkDialog")
           (g:type-parent "GtkColorChooserDialog")))
@@ -63,4 +64,4 @@
 
 ;;;     gtk_color_chooser_dialog_new
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

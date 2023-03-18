@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkAccessible")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessible")
-          (g:gtype (foreign-funcall "gtk_accessible_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '("accessible-role")
              (list-interface-properties "GtkAccessible")))
@@ -67,4 +67,4 @@
 ;;;     gtk_accessible_relation_init_value
 ;;;     gtk_accessible_state_init_value
 
-;;; 2022-7-10
+;;; --- 2023-3-18 --------------------------------------------------------------

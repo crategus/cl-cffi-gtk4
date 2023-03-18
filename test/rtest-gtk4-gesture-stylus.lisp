@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkGestureStylus")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureStylus")
-          (g:gtype (foreign-funcall "gtk_gesture_stylus_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_stylus_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureStylus")))
@@ -53,4 +53,4 @@
 ;;;     gtk_gesture_stylus_get_backlog
 ;;;     gtk_gesture_stylus_get_device_tool
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

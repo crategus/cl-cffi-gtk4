@@ -12,7 +12,7 @@
   (is (g:type-is-enum "GtkImageType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkImageType")
-          (g:gtype (foreign-funcall "gtk_image_type_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_image_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:image-type
           (gobject:symbol-for-gtype "GtkImageType")))
@@ -50,7 +50,7 @@
           (gobject:symbol-for-gtype "GtkImage")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkImage")
-          (g:gtype (foreign-funcall "gtk_image_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_image_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkImage")))
@@ -233,4 +233,4 @@
 ;;;     gtk_image_set_from_icon_name
 ;;;     gtk_image_set_from_gicon
 
-;;; --- 2023-1-29 --------------------------------------------------------------
+;;; --- 2023-3-18 --------------------------------------------------------------

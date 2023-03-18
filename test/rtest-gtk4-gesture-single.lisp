@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkGestureSingle")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureSingle")
-          (g:gtype (foreign-funcall "gtk_gesture_single_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_single_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGesture")
           (g:type-parent "GtkGestureSingle")))
@@ -54,4 +54,4 @@
 ;;;     gtk_gesture_single_get_current_button
 ;;;     gtk_gesture_single_get_current_sequence
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

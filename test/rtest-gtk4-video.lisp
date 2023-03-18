@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-video :in gtk-suite)
 (in-suite gtk-video)
 
@@ -9,27 +11,25 @@
   ;; Type check
   (is (g:type-is-object "GtkVideo"))
   ;; Check the registered name
-  (is (eq 'gtk-video
+  (is (eq 'gtk:video
           (gobject:symbol-for-gtype "GtkVideo")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkVideo")
-          (gtype (foreign-funcall "gtk_video_get_type" g-size))))
+  (is (eq (g:gtype "GtkVideo")
+          (g:gtype (cffi:foreign-funcall "gtk_video_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GtkWidget") (g-type-parent "GtkVideo")))
+  (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkVideo")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkVideo"))))
+             (list-children "GtkVideo")))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (mapcar #'g-type-name (g-type-interfaces "GtkVideo"))))
+             (list-interfaces "GtkVideo")))
   ;; Check the class properties
   (is (equal '("autoplay" "file" "loop" "media-stream")
-             (list-class-property-names "GtkVideo")))
+             (list-properties "GtkVideo")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkVideo"))
-                   #'string<)))
+             (list-signals "GtkVideo")))
   ;; CSS information
   (is (string= "video"
                (gtk-widget-class-css-name "GtkVideo")))
@@ -107,4 +107,4 @@
 ;;;     gtk_video_set_filename
 ;;;     gtk_video_set_resource
 
-;;; 2022-9-8
+;;; --- 2023-3-18 --------------------------------------------------------------

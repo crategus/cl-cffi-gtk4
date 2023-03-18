@@ -12,7 +12,7 @@
   (is (g:type-is-enum "GtkLicense"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkLicense")
-          (g:gtype (foreign-funcall "gtk_license_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_license_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:license
           (gobject:symbol-for-gtype "GtkLicense")))
@@ -25,19 +25,16 @@
                "GTK_LICENSE_LGPL_3_0_ONLY" "GTK_LICENSE_AGPL_3_0"
                "GTK_LICENSE_AGPL_3_0_ONLY" "GTK_LICENSE_BSD_3"
                "GTK_LICENSE_APACHE_2_0" "GTK_LICENSE_MPL_2_0")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkLicense"))))
+             (list-enum-item-name "GtkLicense")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkLicense"))))
+             (list-enum-item-value "GtkLicense")))
   ;; Check the nick names
   (is (equal '("unknown" "custom" "gpl-2-0" "gpl-3-0" "lgpl-2-1" "lgpl-3-0"
                "bsd" "mit-x11" "artistic" "gpl-2-0-only" "gpl-3-0-only"
                "lgpl-2-1-only" "lgpl-3-0-only" "agpl-3-0" "agpl-3-0-only"
                "bsd-3" "apache-2-0" "mpl-2-0")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkLicense"))))
+             (list-enum-item-nick "GtkLicense")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkLicense"
                              GTK-LICENSE
@@ -73,7 +70,7 @@
           (gobject:symbol-for-gtype "GtkAboutDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAboutDialog")
-          (g:gtype (foreign-funcall "gtk_about_dialog_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_about_dialog_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWindow")
           (g:type-parent "GtkAboutDialog")))
@@ -206,4 +203,4 @@
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; --- 2023-3-11 --------------------------------------------------------------
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkRoot")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRoot")
-          (g:gtype (foreign-funcall "gtk_root_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_root_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '()
              (list-interface-properties "GtkRoot")))
@@ -48,4 +48,4 @@
     (is (eq button (setf (gtk:root-focus window) button)))
     (is (eq button (gtk:root-focus window)))))
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

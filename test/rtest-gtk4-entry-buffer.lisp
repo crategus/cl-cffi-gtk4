@@ -5,7 +5,7 @@
 
 ;; Ensure the initialization of GtkPasswordEntryBuffer
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (foreign-funcall "gtk_password_entry_buffer_get_type" :size))
+  (cffi:foreign-funcall "gtk_password_entry_buffer_get_type" :size))
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -19,7 +19,7 @@
           (gobject:symbol-for-gtype "GtkEntryBuffer")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEntryBuffer")
-          (g:gtype (foreign-funcall "gtk_entry_buffer_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_entry_buffer_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkEntryBuffer")))
@@ -120,4 +120,4 @@
           nil))
     (gtk:entry-buffer-emit-inserted-text buffer 6 "text" 7)))
 
-;;; --- 2023-1-30 --------------------------------------------------------------
+;;; --- 2023-3-18 --------------------------------------------------------------

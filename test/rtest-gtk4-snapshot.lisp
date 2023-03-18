@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-snapshot :in gtk-suite)
 (in-suite gtk-snapshot)
 
@@ -9,28 +11,26 @@
   ;; Type check
   (is (g:type-is-object "GtkSnapshot"))
   ;; Check the registered name
-  (is (eq 'gtk-snapshot
+  (is (eq 'gtk:snapshot
           (gobject:symbol-for-gtype "GtkSnapshot")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkSnapshot")
-          (gtype (foreign-funcall "gtk_snapshot_get_type" g-size))))
+  (is (eq (g:gtype "GtkSnapshot")
+          (g:gtype (cffi:foreign-funcall "gtk_snapshot_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GdkSnapshot")
-          (g-type-parent "GtkSnapshot")))
+  (is (eq (g:gtype "GdkSnapshot")
+          (g:type-parent "GtkSnapshot")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkSnapshot"))))
+             (list-children "GtkSnapshot")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkSnapshot"))))
+             (list-interfaces "GtkSnapshot")))
   ;; Check the class properties
   (is (equal '()
-             (list-class-property-names "GtkSnapshot")))
+             (list-properties "GtkSnapshot")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkSnapshot"))
-                   #'string<)))
+             (list-signals "GtkSnapshot")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkSnapshot" GTK-SNAPSHOT
                        (:SUPERCLASS GDK-SNAPSHOT :EXPORT T :INTERFACES NIL
@@ -88,4 +88,4 @@
 ;;;     gtk_snapshot_render_focus
 ;;;     gtk_snapshot_render_layout
 
-;;; 2022-7-10
+;;; --- 2023-3-18 --------------------------------------------------------------

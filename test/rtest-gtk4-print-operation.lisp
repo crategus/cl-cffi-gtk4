@@ -15,8 +15,8 @@
           (gobject:symbol-for-gtype "GtkPrintOperationPreview")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPrintOperationPreview")
-          (g:gtype (foreign-funcall "gtk_print_operation_preview_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_print_operation_preview_get_type"
+                                         :size))))
   ;; Get the names of the interface properties.
   (is (equal '()
              (list-interface-properties "GtkPrintOperationPreview")))
@@ -48,7 +48,7 @@
   (is (g:type-is-enum "GtkPrintStatus"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPrintStatus")
-          (g:gtype (foreign-funcall "gtk_print_status_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_print_status_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:print-status
           (gobject:symbol-for-gtype "GtkPrintStatus")))
@@ -58,17 +58,14 @@
                "GTK_PRINT_STATUS_SENDING_DATA" "GTK_PRINT_STATUS_PENDING"
                "GTK_PRINT_STATUS_PENDING_ISSUE" "GTK_PRINT_STATUS_PRINTING"
                "GTK_PRINT_STATUS_FINISHED" "GTK_PRINT_STATUS_FINISHED_ABORTED")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkPrintStatus"))))
+             (list-enum-item-name "GtkPrintStatus")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7 8)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkPrintStatus"))))
+             (list-enum-item-value "GtkPrintStatus")))
   ;; Check the nick names
   (is (equal '("initial" "preparing" "generating-data" "sending-data" "pending"
                "pending-issue" "printing" "finished" "finished-aborted")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkPrintStatus"))))
+             (list-enum-item-nick "GtkPrintStatus")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkPrintStatus"
                              GTK-PRINT-STATUS
@@ -92,8 +89,8 @@
   (is (g:type-is-enum "GtkPrintOperationAction"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPrintOperationAction")
-          (g:gtype (foreign-funcall "gtk_print_operation_action_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_print_operation_action_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:print-operation-action
           (gobject:symbol-for-gtype "GtkPrintOperationAction")))
@@ -102,16 +99,13 @@
                "GTK_PRINT_OPERATION_ACTION_PRINT"
                "GTK_PRINT_OPERATION_ACTION_PREVIEW"
                "GTK_PRINT_OPERATION_ACTION_EXPORT")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkPrintOperationAction"))))
+             (list-enum-item-name "GtkPrintOperationAction")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkPrintOperationAction"))))
+             (list-enum-item-value "GtkPrintOperationAction")))
   ;; Check the nick names
   (is (equal '("print-dialog" "print" "preview" "export")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkPrintOperationAction"))))
+             (list-enum-item-nick "GtkPrintOperationAction")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkPrintOperationAction"
                              GTK-PRINT-OPERATION-ACTION
@@ -131,8 +125,8 @@
   (is (g:type-is-enum "GtkPrintOperationResult"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPrintOperationResult")
-          (g:gtype (foreign-funcall "gtk_print_operation_result_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_print_operation_result_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:print-operation-result
           (gobject:symbol-for-gtype "GtkPrintOperationResult")))
@@ -141,16 +135,13 @@
                "GTK_PRINT_OPERATION_RESULT_APPLY"
                "GTK_PRINT_OPERATION_RESULT_CANCEL"
                "GTK_PRINT_OPERATION_RESULT_IN_PROGRESS")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkPrintOperationResult"))))
+             (list-enum-item-name "GtkPrintOperationResult")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkPrintOperationResult"))))
+             (list-enum-item-value "GtkPrintOperationResult")))
   ;; Check the nick names
   (is (equal '("error" "apply" "cancel" "in-progress")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkPrintOperationResult"))))
+             (list-enum-item-nick "GtkPrintOperationResult")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkPrintOperationResult"
                              GTK-PRINT-OPERATION-RESULT
@@ -176,7 +167,7 @@
           (gobject:symbol-for-gtype "GtkPrintOperation")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPrintOperation")
-          (g:gtype (foreign-funcall "gtk_print_operation_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_print_operation_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkPrintOperation")))
@@ -293,4 +284,4 @@
 
 ;;;     gtk_print_run_page_setup_dialog_async
 
-;;; 2022-7-17
+;;; --- 2023-3-18 --------------------------------------------------------------

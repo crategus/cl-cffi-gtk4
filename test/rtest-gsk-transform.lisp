@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gsk-transform :in gsk-suite)
 (in-suite gsk-transform)
 
@@ -7,10 +9,10 @@
 
 (test gsk-transform-class
   ;; Type check
-  (is (g-type-is-a (gtype "GskTransform") +g-type-boxed+))
+  (is (g:type-is-a (gtype "GskTransform") +g-type-boxed+))
   ;; Check the type initializer
-  (is (eq (gtype "GskTransform")
-          (gtype (foreign-funcall "gsk_transform_get_type" g-size)))))
+  (is (eq (g:gtype "GskTransform")
+          (g:gtype (cffi:foreign-funcall "gsk_transform_get_type" :size)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -80,8 +82,6 @@
 
 ;;;     gsk_transform_to_string
 
-
-
 ;;;     gsk_transform_to_translate
 ;;;     gsk_transform_transform
 ;;;     gsk_transform_transform_bounds
@@ -90,4 +90,4 @@
 ;;;     gsk_transform_translate_3d
 ;;;     gsk_transform_unref
 
-;;; 2022-9-14
+;;; --- 2023-3-18 --------------------------------------------------------------

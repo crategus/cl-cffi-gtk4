@@ -4,11 +4,11 @@
   ;; Type check
   (is (g:type-is-object "GObject"))
   ;; Check the registered name
-  (is (eq 'g-object
+  (is (eq 'g:object
           (gobject:symbol-for-gtype "GObject")))
   ;; Check the type initializer
   (is (eq (g:gtype "GObject")
-          (g:gtype (foreign-funcall "g_object_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "g_object_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GObject")))
@@ -51,7 +51,7 @@
           (gobject:symbol-for-gtype "GtkWidget")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkWidget")
-          (g:gtype (foreign-funcall "gtk_widget_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_widget_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkWidget")))
@@ -88,7 +88,7 @@
           (gobject:symbol-for-gtype "GtkStyleProvider")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkStyleProvider")
-          (g:gtype (foreign-funcall "gtk_style_provider_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_style_provider_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '()
              (list-interface-properties "GtkStyleProvider")))
@@ -106,19 +106,16 @@
           (gobject:symbol-for-gtype "GtkApplicationInhibitFlags")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkTextAttributes")
-          (g:gtype (foreign-funcall "gtk_text_attributes_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_text_attributes_get_type" :size))))
   ;; Check the names
   (is (equal '()
-             (mapcar #'gobject:flags-item-name
-                     (gobject:get-flags-items "GtkApplicationInhibitFlags"))))
+             (list-flags-item-name "GtkApplicationInhibitFlags")))
   ;; Check the values
   (is (equal '()
-             (mapcar #'gobject:flags-item-value
-                     (gobject:get-flags-items "GtkApplicationInhibitFlags"))))
+             (list-flags-item-value "GtkApplicationInhibitFlags")))
   ;; Check the nick names
   (is (equal '()
-             (mapcar #'gobject:flags-item-nick
-                     (gobject:get-flags-items "GtkApplicationInhibitFlags"))))
+             (list-flags-item-nick "GtkApplicationInhibitFlags")))
   ;; Check the flags definition
   (is (equal '()
              (gobject:get-g-type-definition "GtkApplicationInhibitFlags"))))
@@ -130,22 +127,19 @@
   (is (g:type-is-enum "GtkWindowType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkTextAttributes")
-          (g:gtype (foreign-funcall "gtk_text_attributes_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_text_attributes_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:window-type
           (gobject:symbol-for-gtype "GtkWindowType")))
   ;; Check the names
   (is (equal '()
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GdkWindowType"))))
+             (list-enum-name "GdkWindowType")))
   ;; Check the values
   (is (equal '()
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GdkWindowType"))))
+             (list-enum-value "GdkWindowType")))
   ;; Check the nick names
   (is (equal '()
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GdkWindowType"))))
+             (list-enum-item-nick "GdkWindowType")))
   ;; Check the enum definition
   (is (equal '()
              (gobject:get-g-type-definition "GdkWindowType"))))
@@ -157,7 +151,7 @@
   (is (g:type-is-a (gtype "GtkTextAttributes") +g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkTextAttributes")
-          (g:gtype (foreign-funcall "gtk_text_attributes_get_type" :size)))))
+          (g:gtype (cffi:foreign-funcall "gtk_text_attributes_get_type" :size)))))
 
 ;;; --- Template for g-signal-emit ---------------------------------------------
 

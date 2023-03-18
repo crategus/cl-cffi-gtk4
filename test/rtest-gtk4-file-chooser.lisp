@@ -12,23 +12,21 @@
   (is (g:type-is-enum "GtkFileChooserAction"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileChooserAction")
-          (g:gtype (foreign-funcall "gtk_file_chooser_action_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_file_chooser_action_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:file-chooser-action
           (gobject:symbol-for-gtype "GtkFileChooserAction")))
   ;; Check the names
   (is (equal '("GTK_FILE_CHOOSER_ACTION_OPEN" "GTK_FILE_CHOOSER_ACTION_SAVE"
                "GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkFileChooserAction"))))
+             (list-enum-item-name "GtkFileChooserAction")))
   ;; Check the values
   (is (equal '(0 1 2)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkFileChooserAction"))))
+             (list-enum-item-value "GtkFileChooserAction")))
   ;; Check the nick names
   (is (equal '("open" "save" "select-folder")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkFileChooserAction"))))
+             (list-enum-item-nick "GtkFileChooserAction")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkFileChooserAction"
                              GTK-FILE-CHOOSER-ACTION
@@ -52,7 +50,7 @@
           (gobject:symbol-for-gtype "GtkFileChooser")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileChooser")
-          (g:gtype (foreign-funcall "gtk_file_chooser_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_file_chooser_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '("action" "create-folders" "filter" "filters" "select-multiple"
                "shortcut-folders")
@@ -121,4 +119,4 @@
 ;;;     gtk_file_chooser_set_choice
 ;;;     gtk_file_chooser_get_choice
 
-;;; 2022-7-10
+;;; --- 2023-3-18 --------------------------------------------------------------

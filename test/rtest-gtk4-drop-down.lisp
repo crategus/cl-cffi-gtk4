@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-drop-down :in gtk-suite)
 (in-suite gtk-drop-down)
 
@@ -9,31 +11,29 @@
   ;; Type check
   (is (g:type-is-object "GtkDropDown"))
   ;; Check the registered name
-  (is (eq 'gtk-drop-down
+  (is (eq 'gtk:drop-down
           (gobject:symbol-for-gtype "GtkDropDown")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkDropDown")
-          (gtype (foreign-funcall "gtk_drop_down_get_type" :size))))
+  (is (eq (g:gtype "GtkDropDown")
+          (g:gtype (cffi:foreign-funcall "gtk_drop_down_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GtkWidget") (g-type-parent "GtkDropDown")))
+  (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkDropDown")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkDropDown"))))
+             (list-children "GtkDropDown")))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (mapcar #'g-type-name (g-type-interfaces "GtkDropDown"))))
+             (list-interfaces "GtkDropDown")))
   ;; Check the class properties
   (is (equal '("enable-search" "expression" "factory" "list-factory" "model"
                "selected" "selected-item" "show-arrow")
-             (list-class-property-names "GtkDropDown")))
+             (list-properties "GtkDropDown")))
   ;; Check the list of signals
   (is (equal '("activate")
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkDropDown"))
-                   #'string<)))
+             (list-signals "GtkDropDown")))
   ;; CSS information
   (is (string= "dropdown"
-               (gtk-widget-class-css-name "GtkDropDown")))
+               (gtk:widget-class-css-name "GtkDropDown")))
   (is (string=
 "dropdown:dir(ltr)
   button.toggle:dir(ltr)
@@ -74,8 +74,8 @@
           junction:dir(ltr)
     arrow:dir(ltr)
 "
-               (gtk-style-context-to-string
-                   (gtk-widget-style-context (make-instance 'gtk-drop-down))
+               (gtk:style-context-to-string
+                   (gtk:widget-style-context (make-instance 'gtk:drop-down))
                    :none)))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkDropDown" GTK-DROP-DOWN
@@ -132,4 +132,4 @@
 ;;;     gtk_drop_down_new
 ;;;     gtk_drop_down_new_from_strings
 
-;;; 2022-9-6
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkGestureZoom")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureZoom")
-          (g:gtype (foreign-funcall "gtk_gesture_zoom_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_zoom_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGesture")
           (g:type-parent "GtkGestureZoom")))
@@ -47,4 +47,4 @@
 ;;;     gtk_gesture_zoom_new
 ;;;     gtk_gesture_zoom_get_scale_delta
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

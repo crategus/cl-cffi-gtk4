@@ -12,7 +12,7 @@
   (is (g:type-is-enum "GtkPropagationPhase"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPropagationPhase")
-          (g:gtype (foreign-funcall "gtk_propagation_phase_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_propagation_phase_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:propagation-phase
           (gobject:symbol-for-gtype "GtkPropagationPhase")))
@@ -47,7 +47,7 @@
   (is (g:type-is-enum "GtkPropagationLimit"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPropagationLimit")
-          (g:gtype (foreign-funcall "gtk_propagation_limit_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_propagation_limit_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:propagation-limit
           (gobject:symbol-for-gtype "GtkPropagationLimit")))
@@ -82,7 +82,7 @@
           (gobject:symbol-for-gtype "GtkEventController")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventController")
-          (g:gtype (foreign-funcall "gtk_event_controller_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_event_controller_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkEventController")))
@@ -133,4 +133,4 @@
 ;;;     gtk_event_controller_get_current_event_state
 ;;;     gtk_event_controller_get_current_event_time
 
-;;; 2022-7-15
+;;; --- 2023-3-18 --------------------------------------------------------------

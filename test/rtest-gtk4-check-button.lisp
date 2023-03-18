@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkCheckButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCheckButton")
-          (g:gtype (foreign-funcall "gtk_check_button_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_check_button_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkCheckButton")))
@@ -81,4 +81,4 @@
 ;;;     gtk_check_button_new_with_mnemonic
 ;;;     gtk_check_button_set_group
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

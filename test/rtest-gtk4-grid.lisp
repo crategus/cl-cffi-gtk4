@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkGrid")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGrid")
-          (g:gtype (foreign-funcall "gtk_grid_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_grid_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkGrid")))

@@ -7,7 +7,7 @@
 
 ;;;     GtkButton
 
-(test button-class
+(test gtk-button-class
   ;; Type check
   (is (g:type-is-object "GtkButton"))
   ;; Check the registered name
@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkButton")
-          (g:gtype (foreign-funcall "gtk_button_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_button_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkButton")))
@@ -60,7 +60,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test button-properties
+(test gtk-button-properties
   (let ((button (make-instance 'gtk:button)))
     (is-false (gtk:button-child button))
     (is-true  (gtk:button-has-frame button))
@@ -77,7 +77,7 @@
 
 ;;;     gtk_button_new
 
-(test button-new
+(test gtk-button-new
   (let ((button (gtk:button-new)))
     (is-false (gtk:button-child button))
     (is-true  (gtk:button-has-frame button))
@@ -87,7 +87,7 @@
 
 ;;;     gtk_button_new_from_icon_name
 
-(test button-new-from-icon-name
+(test gtk-button-new-from-icon-name
   (let ((button (gtk:button-new-from-icon-name "battery")))
     (is (eq (g:gtype "GtkImage") (g:object-type (gtk:button-child button))))
     (is-true  (gtk:button-has-frame button))
@@ -97,7 +97,7 @@
 
 ;;;     gtk_button_new_with_label
 
-(test button-new-with-label
+(test gtk-button-new-with-label
   (let ((button (gtk:button-new-with-label "battery")))
     (is (eq (g:gtype "GtkLabel") (g:object-type (gtk:button-child button))))
     (is-true  (gtk:button-has-frame button))
@@ -107,7 +107,7 @@
 
 ;;;     gtk_button_new_with_mnemonic
 
-(test button-new-with-mnemonic
+(test gtk-button-new-with-mnemonic
   (let ((button (gtk:button-new-with-mnemonic "_battery")))
     (is (eq (g:gtype "GtkLabel") (g:object-type (gtk:button-child button))))
     (is-true  (gtk:button-has-frame button))
@@ -115,4 +115,4 @@
     (is (string= "_battery" (gtk:button-label button)))
     (is-true (gtk:button-use-underline button))))
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

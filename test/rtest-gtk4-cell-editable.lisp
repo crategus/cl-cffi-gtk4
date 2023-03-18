@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkCellEditable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCellEditable")
-          (g:gtype (foreign-funcall "gtk_cell_editable_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_cell_editable_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '("editing-canceled")
              (list-interface-properties "GtkCellEditable")))
@@ -40,8 +40,8 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     gtk_cell_editable_start_editing ()
-;;;     gtk_cell_editable_editing_done ()
-;;;     gtk_cell_editable_remove_widget ()
+;;;     gtk_cell_editable_start_editing
+;;;     gtk_cell_editable_editing_done
+;;;     gtk_cell_editable_remove_widget
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

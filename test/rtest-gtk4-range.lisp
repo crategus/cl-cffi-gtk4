@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkRange")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRange")
-          (g:gtype (foreign-funcall "gtk_range_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_range_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkRange")))
@@ -91,4 +91,4 @@
 ;;;     gtk_range_get_slider_size_fixed
 ;;;     gtk_range_set_slider_size_fixed
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

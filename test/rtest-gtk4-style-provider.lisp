@@ -28,7 +28,7 @@
           (gobject:symbol-for-gtype "GtkStyleProvider")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkStyleProvider")
-          (g:gtype (foreign-funcall "gtk_style_provider_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_style_provider_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '()
              (list-interface-properties "GtkStyleProvider")))
@@ -41,4 +41,4 @@
 
 ;;;     gtk-private-changed
 
-;;; 2022-11-9
+;;; --- 2023-3-18 --------------------------------------------------------------

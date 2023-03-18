@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-layout-manager :in gtk-suite)
 (in-suite gtk-layout-manager)
 
@@ -9,30 +11,28 @@
   ;; Type check
   (is (g:type-is-object "GtkLayoutManager"))
   ;; Check the registered name
-  (is (eq 'gtk-layout-manager
+  (is (eq 'gtk:layout-manager
           (gobject:symbol-for-gtype "GtkLayoutManager")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkLayoutManager")
-          (gtype (foreign-funcall "gtk_layout_manager_get_type" g-size))))
+  (is (eq (g:gtype "GtkLayoutManager")
+          (g:gtype (cffi:foreign-funcall "gtk_layout_manager_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GObject")
-          (g-type-parent "GtkLayoutManager")))
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkLayoutManager")))
   ;; Check the children
   (is (equal '("GtkBinLayout" "GtkBoxLayout" "GtkCenterLayout" "GtkFixedLayout"
                "GtkGridLayout" "GtkOverlayLayout" "GtkCustomLayout"
                "GtkConstraintLayout")
-             (mapcar #'g:type-name (g-type-children "GtkLayoutManager"))))
+             (list-children "GtkLayoutManager")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g:type-name (g-type-interfaces "GtkLayoutManager"))))
+             (list-interfaces "GtkLayoutManager")))
   ;; Check the class properties
   (is (equal '()
-             (list-class-property-names "GtkLayoutManager")))
+             (list-properties "GtkLayoutManager")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkLayoutManager"))
-                   #'string<)))
+             (list-signals "GtkLayoutManager")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkLayoutManager" GTK-LAYOUT-MANAGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -105,4 +105,4 @@
 
 ;;;     gtk_layout_manager_layout_changed
 
-;;; 2022-9-10
+;;; --- 2023-3-18 --------------------------------------------------------------

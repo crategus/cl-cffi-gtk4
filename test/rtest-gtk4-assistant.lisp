@@ -12,7 +12,8 @@
   (is (g:type-is-enum "GtkAssistantPageType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAssistantPageType")
-          (g:gtype (foreign-funcall "gtk_assistant_page_type_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_assistant_page_type_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:assistant-page-type
           (gobject:symbol-for-gtype "GtkAssistantPageType")))
@@ -54,7 +55,7 @@
           (gobject:symbol-for-gtype "GtkAssistantPage")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAssistantPage")
-          (g:gtype (foreign-funcall "gtk_assistant_page_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_assistant_page_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkAssistantPage")))
@@ -105,7 +106,7 @@
           (gobject:symbol-for-gtype "GtkAssistant")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAssistant")
-          (g:gtype (foreign-funcall "gtk_assistant_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_assistant_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWindow")
           (g:type-parent "GtkAssistant")))
@@ -186,4 +187,4 @@
 ;;;     gtk_assistant_next_page
 ;;;     gtk_assistant_previous_page
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

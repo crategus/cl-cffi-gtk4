@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkPopover")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPopover")
-          (g:gtype (foreign-funcall "gtk_popover_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_popover_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkPopover")))
@@ -90,4 +90,4 @@
 ;;;     gtk_popover_set_offset
 ;;;     gtk_popover_get_offset
 
-;;; 2022-11-14
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkEntryCompletion")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEntryCompletion")
-          (g:gtype (foreign-funcall "gtk_entry_completion_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_entry_completion_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkEntryCompletion")))
@@ -92,4 +92,4 @@
 ;;;     gtk_entry_completion_get_completion_prefix
 ;;;     gtk_entry_completion_insert_prefix
 
-;;; 2022-11-17
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkProgressBar")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkProgressBar")
-          (g:gtype (foreign-funcall "gtk_progress_bar_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_progress_bar_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkProgressBar")))
@@ -75,4 +75,4 @@
 ;;;     gtk_progress_bar_new
 ;;;     gtk_progress_bar_pulse
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

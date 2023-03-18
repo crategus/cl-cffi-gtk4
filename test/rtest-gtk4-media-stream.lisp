@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-media-stream :in gtk-suite)
 (in-suite gtk-media-stream)
 
@@ -9,29 +11,27 @@
   ;; Type check
   (is (g:type-is-object "GtkMediaStream"))
   ;; Check the registered name
-  (is (eq 'gtk-media-stream
+  (is (eq 'gtk:media-stream
           (gobject:symbol-for-gtype "GtkMediaStream")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkMediaStream")
-          (gtype (foreign-funcall "gtk_media_stream_get_type" :size))))
+  (is (eq (g:gtype "GtkMediaStream")
+          (g:gtype (cffi:foreign-funcall "gtk_media_stream_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GObject")
-          (g-type-parent "GtkMediaStream")))
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkMediaStream")))
   ;; Check the children
   (is (equal '("GtkMediaFile")
-             (mapcar #'g-type-name (g-type-children "GtkMediaStream"))))
+             (list-children "GtkMediaStream")))
   ;; Check the interfaces
   (is (equal '("GdkPaintable")
-             (mapcar #'g-type-name (g-type-interfaces "GtkMediaStream"))))
+             (list-interfaces "GtkMediaStream")))
   ;; Check the class properties
   (is (equal '("duration" "ended" "error" "has-audio" "has-video" "loop" "muted"
                "playing" "prepared" "seekable" "seeking" "timestamp" "volume")
-             (list-class-property-names "GtkMediaStream")))
+             (list-properties "GtkMediaStream")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkMediaStream"))
-                   #'string<)))
+             (list-signals "GtkMediaStream")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMediaStream" GTK-MEDIA-STREAM
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -97,4 +97,4 @@
 ;;;     gtk_media_stream_error
 ;;;     gtk_media_stream_error_valist
 
-;;; 2022-9-8
+;;; --- 2023-3-18 --------------------------------------------------------------

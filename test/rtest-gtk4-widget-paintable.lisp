@@ -9,28 +9,26 @@
   ;; Type check
   (is (g:type-is-object "GtkWidgetPaintable"))
   ;; Check the registered name
-  (is (eq 'gtk-widget-paintable
+  (is (eq 'gtk:widget-paintable
           (gobject:symbol-for-gtype "GtkWidgetPaintable")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkWidgetPaintable")
-          (gtype (foreign-funcall "gtk_widget_paintable_get_type" g-size))))
+  (is (eq (g:gtype "GtkWidgetPaintable")
+          (g:gtype (cffi:foreign-funcall "gtk_widget_paintable_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GObject")
-          (g-type-parent "GtkWidgetPaintable")))
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkWidgetPaintable")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkWidgetPaintable"))))
+             (list-children "GtkWidgetPaintable")))
   ;; Check the interfaces
   (is (equal '("GdkPaintable")
-             (mapcar #'g-type-name (g-type-interfaces "GtkWidgetPaintable"))))
+             (list-interfaces "GtkWidgetPaintable")))
   ;; Check the class properties
   (is (equal '("widget")
-             (list-class-property-names "GtkWidgetPaintable")))
+             (list-properties "GtkWidgetPaintable")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkWidgetPaintable"))
-                   #'string<)))
+             (list-signals "GtkWidgetPaintable")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkWidgetPaintable" GTK-WIDGET-PAINTABLE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -58,4 +56,4 @@
 
 ;;;     gtk_widget_paintable_new
 
-;;; 2022-7-10
+;;; --- 2023-3-18 --------------------------------------------------------------

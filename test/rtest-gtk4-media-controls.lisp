@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-media-controls :in gtk-suite)
 (in-suite gtk-media-controls)
 
@@ -9,27 +11,25 @@
   ;; Type check
   (is (g:type-is-object "GtkMediaControls"))
   ;; Check the registered name
-  (is (eq 'gtk-media-controls
+  (is (eq 'gtk:media-controls
           (gobject:symbol-for-gtype "GtkMediaControls")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkMediaControls")
-          (gtype (foreign-funcall "gtk_media_controls_get_type" g-size))))
+  (is (eq (g:gtype "GtkMediaControls")
+          (g:gtype (cffi:foreign-funcall "gtk_media_controls_get_type" g-size))))
   ;; Check the parent
-  (is (eq (gtype "GtkWidget") (g-type-parent "GtkMediaControls")))
+  (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkMediaControls")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkMediaControls"))))
+             (list-children "GtkMediaControls")))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (mapcar #'g-type-name (g-type-interfaces "GtkMediaControls"))))
+             (list-interfaces "GtkMediaControls")))
   ;; Check the class properties
   (is (equal '("media-stream")
-             (list-class-property-names "GtkMediaControls")))
+             (list-properties "GtkMediaControls")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkMediaControls"))
-                   #'string<)))
+             (list-signals "GtkMediaControls")))
   ;; CSS information
   (is (string= "controls"
                (gtk-widget-class-css-name "GtkMediaControls")))
@@ -85,4 +85,4 @@
 
 ;;;     gtk_media_controls_new
 
-;;; 2022-9-8
+;;; --- 2023-3-18 --------------------------------------------------------------

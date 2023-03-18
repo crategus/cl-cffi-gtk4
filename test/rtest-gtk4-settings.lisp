@@ -18,7 +18,7 @@
           (gobject:symbol-for-gtype "GtkSettings")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSettings")
-          (g:gtype (foreign-funcall "gtk_settings_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_settings_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkSettings")))
@@ -302,4 +302,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; --- 2023-3-11 --------------------------------------------------------------
+;;; --- 2023-3-18 --------------------------------------------------------------

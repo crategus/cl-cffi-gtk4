@@ -15,8 +15,8 @@
           (gobject:symbol-for-gtype "GtkEventControllerKey")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventControllerKey")
-          (g:gtype (foreign-funcall "gtk_event_controller_key_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_event_controller_key_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkEventControllerKey")))
@@ -56,4 +56,4 @@
 ;;;     gtk_event_controller_key_forward
 ;;;     gtk_event_controller_key_get_group
 
-;;; 2022-11-13
+;;; --- 2023-3-18 --------------------------------------------------------------

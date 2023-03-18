@@ -15,8 +15,8 @@
           (gobject:symbol-for-gtype "GtkEventControllerLegacy")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventControllerLegacy")
-          (g:gtype (foreign-funcall "gtk_event_controller_legacy_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_event_controller_legacy_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkEventControllerLegacy")))
@@ -49,4 +49,4 @@
 
 ;;;     gtk_event_controller_legacy_new
 
-;;; 2022-11-13
+;;; --- 2023-3-18 --------------------------------------------------------------

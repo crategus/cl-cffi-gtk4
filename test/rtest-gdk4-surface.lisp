@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gdk-surface :in gdk-suite)
 (in-suite gdk-surface)
 
@@ -9,29 +11,27 @@
   ;; Type check
   (is (g:type-is-object "GdkSurface"))
   ;; Check the registered name
-  (is (eq 'gdk-surface
+  (is (eq 'gdk:surface
           (gobject:symbol-for-gtype "GdkSurface")))
   ;; Check the type initializer
-  (is (eq (gtype "GdkSurface")
-          (gtype (foreign-funcall "gdk_surface_get_type" g-size))))
+  (is (eq (g:gtype "GdkSurface")
+          (g:gtype (cffi:foreign-funcall "gdk_surface_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GObject")
-          (g-type-parent "GdkSurface")))
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GdkSurface")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GdkSurface"))))
+             (list-children "GdkSurface")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GdkSurface"))))
+             (list-interfaces "GdkSurface")))
   ;; Check the class properties
   (is (equal '("cursor" "display" "frame-clock" "height" "mapped" "scale-factor"
                "width")
-             (list-class-property-names "GdkSurface")))
+             (list-properties "GdkSurface")))
   ;; Check the list of signals
   (is (equal '("enter-monitor" "event" "layout" "leave-monitor" "render")
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GdkSurface"))
-                   #'string<)))
+             (list-signals "GdkSurface")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GdkSurface" GDK-SURFACE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -88,4 +88,4 @@
 ;;;     gdk_surface_set_opaque_region
 ;;;     gdk_surface_translate_coordinates
 
-;;; 2022-9-12
+;;; --- 2023-3-18 --------------------------------------------------------------

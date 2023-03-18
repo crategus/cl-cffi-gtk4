@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkLabel")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkLabel")
-          (g:gtype (foreign-funcall "gtk_label_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_label_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkLabel")))
@@ -149,4 +149,4 @@
 ;;;     gtk_label_get_selection_bounds
 ;;;     gtk_label_get_current_uri
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

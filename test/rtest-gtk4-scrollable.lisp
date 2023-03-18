@@ -12,22 +12,19 @@
   (is (g:type-is-enum "GtkScrollablePolicy"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkScrollablePolicy")
-          (g:gtype (foreign-funcall "gtk_scrollable_policy_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_scrollable_policy_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:scrollable-policy
           (gobject:symbol-for-gtype "GtkScrollablePolicy")))
   ;; Check the names
   (is (equal '("GTK_SCROLL_MINIMUM" "GTK_SCROLL_NATURAL")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkScrollablePolicy"))))
+             (list-enum-item-name "GtkScrollablePolicy")))
   ;; Check the values
   (is (equal '(0 1)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkScrollablePolicy"))))
+             (list-enum-item-value "GtkScrollablePolicy")))
   ;; Check the nick names
   (is (equal '("minimum" "natural")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkScrollablePolicy"))))
+             (list-enum-item-nick "GtkScrollablePolicy")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkScrollablePolicy"
                              GTK-SCROLLABLE-POLICY
@@ -48,7 +45,7 @@
           (gobject:symbol-for-gtype "GtkScrollable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkScrollable")
-          (g:gtype (foreign-funcall "gtk_scrollable_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_scrollable_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '("hadjustment" "hscroll-policy" "vadjustment" "vscroll-policy")
              (list-interface-properties "GtkScrollable")))
@@ -76,4 +73,4 @@
 
 ;;;     gtk_scrollable_get_border
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

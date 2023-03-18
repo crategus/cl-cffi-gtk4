@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-window-group :in gtk-suite)
 (in-suite gtk-window-group)
 
@@ -9,28 +11,26 @@
   ;; Type check
   (is (g:type-is-object "GtkWindowGroup"))
   ;; Check the registered name
-  (is (eq 'gtk-window-group
+  (is (eq 'gtk:window-group
           (gobject:symbol-for-gtype "GtkWindowGroup")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkWindowGroup")
-          (gtype (foreign-funcall "gtk_window_group_get_type" g-size))))
+  (is (eq (g:gtype "GtkWindowGroup")
+          (g:gtype (cffi:foreign-funcall "gtk_window_group_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GObject")
-          (g-type-parent "GtkWindowGroup")))
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkWindowGroup")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkWindowGroup"))))
+             (list-children "GtkWindowGroup")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkWindowGroup"))))
+             (list-interfaces "GtkWindowGroup")))
   ;; Check the class properties
   (is (equal '()
-             (list-class-property-names "GtkWindowGroup")))
+             (list-properties "GtkWindowGroup")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkWindowGroup"))
-                   #'string<)))
+             (list-signals "GtkWindowGroup")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkWindowGroup" GTK-WINDOW-GROUP
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -68,4 +68,4 @@
     (is (equal '(GTK-WINDOW)
                (mapcar #' type-of (gtk-window-group-list-windows group))))))
 
-;;; 2022-8-31
+;;; --- 2023-3-18 --------------------------------------------------------------

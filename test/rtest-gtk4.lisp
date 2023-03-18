@@ -1,5 +1,5 @@
 (defpackage :gtk-test
-  (:use :fiveam :cffi :common-lisp)
+  (:use :fiveam :common-lisp)
   (:export #:run!)
   (:import-from :gobject #:+g-type-invalid+
                          #:+g-type-none+
@@ -128,4 +128,4 @@
   (mapcar #'gobject:enum-item-value
           (gobject:get-enum-items gtype)))
 
-;;; --- 2023-1-29 --------------------------------------------------------------
+;;; --- 2023-3-18 --------------------------------------------------------------

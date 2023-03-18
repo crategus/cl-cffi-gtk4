@@ -17,7 +17,7 @@
           (gobject:symbol-for-gtype "GtkGesturePan")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGesturePan")
-          (g:gtype (foreign-funcall "gtk_gesture_pan_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_pan_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGestureDrag")
           (g:type-parent "GtkGesturePan")))
@@ -53,4 +53,4 @@
 
 ;;;     gtk_gesture_pan_new
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

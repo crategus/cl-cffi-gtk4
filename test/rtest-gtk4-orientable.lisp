@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkOrientable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkOrientable")
-          (g:gtype (foreign-funcall "gtk_orientable_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_orientable_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '("orientation")
              (mapcar #'g:param-spec-name
@@ -43,4 +43,4 @@
     (is (eq :vertical
             (gtk:orientable-orientation orientable)))))
 
-;;; 2022-11-6
+;;; --- 2023-3-18 --------------------------------------------------------------

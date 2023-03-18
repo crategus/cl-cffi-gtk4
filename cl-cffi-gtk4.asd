@@ -680,13 +680,13 @@
 ;    (:file "gtk4.drop-controller-motion")        ; GtkDropControllerMotion
 
      ;; Miscellaneous
-     (:file "rtest-gtk4-adjustment")        ; GtkAdjustment
-;    (:file "gtk4.size-group")              ; GtkSizeGroup
-;    (:file "gtk4.snapshot")                ; GtkSnapshot
-;    (:file "gtk4.tooltip")                 ; GtkTooltip
-;    (:file "gtk4.widget-paintable")        ; GtkWidgetPaintable
-;    (:file "gtk4.window-controls")         ; GtkWindowControls
-;    (:file "gtk4.window-handle")           ; GtkWindowHandle
+     (:file "rtest-gtk4-adjustment")              ; GtkAdjustment
+     (:file "rtest-gtk4-size-group")              ; GtkSizeGroup
+;    (:file "gtk4.snapshot")                      ; GtkSnapshot
+;    (:file "gtk4.tooltip")                       ; GtkTooltip
+;    (:file "gtk4.widget-paintable")              ; GtkWidgetPaintable
+;    (:file "gtk4.window-controls")               ; GtkWindowControls
+;    (:file "gtk4.window-handle")                 ; GtkWindowHandle
 
      ;; Application support
      (:file "rtest-gtk4-application")        ; GtkApplication

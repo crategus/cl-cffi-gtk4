@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkFrame")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFrame")
-          (g:gtype (foreign-funcall "gtk_frame_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_frame_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkFrame")))
@@ -78,4 +78,4 @@
   (is (typep (gtk:frame-new nil) 'gtk:frame))
   (is (typep (gtk:frame-new "label") 'gtk:frame)))
 
-;;; --- 2023-2-18 --------------------------------------------------------------
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -17,7 +17,7 @@
           (gobject:symbol-for-gtype "GtkWindow")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkWindow")
-          (g:gtype (foreign-funcall "gtk_window_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_window_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkWindow")))
@@ -288,4 +288,4 @@
 ;;;     gtk_window_set_auto_startup_notification
 ;;;     gtk_window_set_interactive_debugging
 
-;;; 2022-8-28
+;;; --- 2023-3-18 --------------------------------------------------------------

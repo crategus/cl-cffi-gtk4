@@ -12,23 +12,20 @@
   (is (g:type-is-enum "GtkAlign"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAlign")
-          (g:gtype (foreign-funcall "gtk_align_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_align_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:align
           (gobject:symbol-for-gtype "GtkAlign")))
   ;; Check the names
   (is (equal '("GTK_ALIGN_FILL" "GTK_ALIGN_START" "GTK_ALIGN_END"
                "GTK_ALIGN_CENTER" "GTK_ALIGN_BASELINE")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkAlign"))))
+             (list-enum-item-name "GtkAlign")))
   ;; Check the values
   (is (equal '(0 1 2 3 4)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkAlign"))))
+             (list-enum-item-value "GtkAlign")))
   ;; Check the nick names
   (is (equal '("fill" "start" "end" "center" "baseline")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkAlign"))))
+             (list-enum-item-nick "GtkAlign")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAlign"
                              GTK-ALIGN
@@ -51,23 +48,20 @@
   (is (g:type-is-enum "GtkArrowType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkArrowType")
-          (g:gtype (foreign-funcall "gtk_arrow_type_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_arrow_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:arrow-type
           (gobject:symbol-for-gtype "GtkArrowType")))
   ;; Check the names
   (is (equal '("GTK_ARROW_UP" "GTK_ARROW_DOWN" "GTK_ARROW_LEFT"
                "GTK_ARROW_RIGHT" "GTK_ARROW_NONE")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkArrowType"))))
+             (list-enum-item-name "GtkArrowType")))
   ;; Check the values
   (is (equal '(0 1 2 3 4)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkArrowType"))))
+             (list-enum-item-value "GtkArrowType")))
   ;; Check the nick names
   (is (equal '("up" "down" "left" "right" "none")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkArrowType"))))
+             (list-enum-item-nick "GtkArrowType")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkArrowType"
                              GTK-ARROW-TYPE
@@ -87,23 +81,20 @@
   (is (g:type-is-enum "GtkBaselinePosition"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBaselinePosition")
-          (g:gtype (foreign-funcall "gtk_baseline_position_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_baseline_position_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:baseline-position
           (gobject:symbol-for-gtype "GtkBaselinePosition")))
   ;; Check the names
   (is (equal '("GTK_BASELINE_POSITION_TOP" "GTK_BASELINE_POSITION_CENTER"
                "GTK_BASELINE_POSITION_BOTTOM")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkBaselinePosition"))))
+             (list-enum-item-name "GtkBaselinePosition")))
   ;; Check the values
   (is (equal '(0 1 2)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkBaselinePosition"))))
+             (list-enum-item-value "GtkBaselinePosition")))
   ;; Check the nick names
   (is (equal '("top" "center" "bottom")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkBaselinePosition"))))
+             (list-enum-item-nick "GtkBaselinePosition")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkBaselinePosition"
                              GTK-BASELINE-POSITION
@@ -121,7 +112,7 @@
   (is (g:type-is-enum "GtkDeleteType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkDeleteType")
-          (g:gtype (foreign-funcall "gtk_delete_type_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_delete_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:delete-type
           (gobject:symbol-for-gtype "GtkDeleteType")))
@@ -130,17 +121,14 @@
                "GTK_DELETE_DISPLAY_LINES" "GTK_DELETE_DISPLAY_LINE_ENDS"
                "GTK_DELETE_PARAGRAPH_ENDS" "GTK_DELETE_PARAGRAPHS"
                "GTK_DELETE_WHITESPACE")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkDeleteType"))))
+             (list-enum-item-name "GtkDeleteType")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkDeleteType"))))
+             (list-enum-item-value "GtkDeleteType")))
   ;; Check the nick names
   (is (equal '("chars" "word-ends" "words" "display-lines" "display-line-ends"
                "paragraph-ends" "paragraphs" "whitespace")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkDeleteType"))))
+             (list-enum-item-nick "GtkDeleteType")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkDeleteType"
                              GTK-DELETE-TYPE
@@ -172,22 +160,19 @@
   (is (g:type-is-enum "GtkOrientation"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkOrientation")
-          (g:gtype (foreign-funcall "gtk_orientation_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_orientation_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:orientation
           (gobject:symbol-for-gtype "GtkOrientation")))
   ;; Check the names
   (is (equal '("GTK_ORIENTATION_HORIZONTAL" "GTK_ORIENTATION_VERTICAL")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkOrientation"))))
+             (list-enum-item-name "GtkOrientation")))
   ;; Check the values
   (is (equal '(0 1)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkOrientation"))))
+             (list-enum-item-value "GtkOrientation")))
   ;; Check the nick names
   (is (equal '("horizontal" "vertical")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkOrientation"))))
+             (list-enum-item-nick "GtkOrientation")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkOrientation"
                              GTK-ORIENTATION
@@ -213,7 +198,39 @@
 ;;;     GtkPrintDuplex
 ;;;     GtkUnit
 ;;;     GtkTreeViewGridLines
+
 ;;;     GtkSizeGroupMode
+
+(test gtk-size-group-mode
+  ;; Check the type
+  (is (g:type-is-enum "GtkSizeGroupMode"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkSizeGroupMode")
+          (g:gtype (cffi:foreign-funcall "gtk_size_group_mode_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:size-group-mode
+          (gobject:symbol-for-gtype "GtkSizeGroupMode")))
+  ;; Check the names
+  (is (equal '("GTK_SIZE_GROUP_NONE" "GTK_SIZE_GROUP_HORIZONTAL"
+               "GTK_SIZE_GROUP_VERTICAL" "GTK_SIZE_GROUP_BOTH")
+             (list-enum-item-name "GtkSizeGroupMode")))
+  ;; Check the values
+  (is (equal '(0 1 2 3)
+             (list-enum-item-value "GtkSizeGroupMode")))
+  ;; Check the nick names
+  (is (equal '("none" "horizontal" "vertical" "both")
+             (list-enum-item-nick "GtkSizeGroupMode")))
+  ;; Check the enum definition
+  (is (equal '(DEFINE-G-ENUM "GtkSizeGroupMode"
+                             GTK-SIZE-GROUP-MODE
+                             (:EXPORT T
+                              :TYPE-INITIALIZER "gtk_size_group_mode_get_type")
+                             (:NONE 0)
+                             (:HORIZONTAL 1)
+                             (:VERTICAL 2)
+                             (:BOTH 3))
+             (gobject:get-g-type-definition "GtkSizeGroupMode"))))
+
 ;;;     GtkSizeRequestMode
 ;;;     GtkScrollablePolicy
 ;;;     GtkStateFlags
@@ -241,7 +258,7 @@
   (is (g:type-is-enum "GtkAccessibleRole"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleRole")
-          (g:gtype (foreign-funcall "gtk_accessible_role_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_role_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-role
           (gobject:symbol-for-gtype "GtkAccessibleRole")))
@@ -288,15 +305,13 @@
                "GTK_ACCESSIBLE_ROLE_TOOLTIP" "GTK_ACCESSIBLE_ROLE_TREE"
                "GTK_ACCESSIBLE_ROLE_TREE_GRID" "GTK_ACCESSIBLE_ROLE_TREE_ITEM"
                "GTK_ACCESSIBLE_ROLE_WIDGET" "GTK_ACCESSIBLE_ROLE_WINDOW")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkAccessibleRole"))))
+             (list-enum-item-name "GtkAccessibleRole")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
                25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
                47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
                69 70 71 72 73 74 75 76 77)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkAccessibleRole"))))
+             (list-enum-item-value "GtkAccessibleRole")))
   ;; Check the nick names
   (is (equal '("alert" "alert-dialog" "banner" "button" "caption" "cell"
                "checkbox" "column-header" "combo-box" "command" "composite"
@@ -312,8 +327,7 @@
                "table" "tab-list" "tab-panel" "text-box" "time" "timer"
                "toolbar" "tooltip" "tree" "tree-grid" "tree-item" "widget"
                "window")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkAccessibleRole"))))
+             (list-enum-item-nick "GtkAccessibleRole")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAccessibleRole"
                              GTK-ACCESSIBLE-ROLE
@@ -406,7 +420,7 @@
   (is (g:type-is-enum "GtkAccessibleState"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleState")
-          (g:gtype (foreign-funcall "gtk_accessible_state_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_state_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-state
           (gobject:symbol-for-gtype "GtkAccessibleState")))
@@ -419,17 +433,14 @@
                "GTK_ACCESSIBLE_STATE_INVALID"
                "GTK_ACCESSIBLE_STATE_PRESSED"
                "GTK_ACCESSIBLE_STATE_SELECTED")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkAccessibleState"))))
+             (list-enum-item-name "GtkAccessibleState")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkAccessibleState"))))
+             (list-enum-item-value "GtkAccessibleState")))
   ;; Check the nick names
   (is (equal '("busy" "checked" "disabled" "expanded" "hidden" "invalid"
                "pressed" "selected")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkAccessibleState"))))
+             (list-enum-item-nick "GtkAccessibleState")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAccessibleState"
                              GTK-ACCESSIBLE-STATE
@@ -452,7 +463,8 @@
   (is (g:type-is-enum "GtkAccessibleProperty"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleProperty")
-          (g:gtype (foreign-funcall "gtk_accessible_property_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_property_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-property
           (gobject:symbol-for-gtype "GtkAccessibleProperty")))
@@ -476,19 +488,16 @@
                "GTK_ACCESSIBLE_PROPERTY_VALUE_MIN"
                "GTK_ACCESSIBLE_PROPERTY_VALUE_NOW"
                "GTK_ACCESSIBLE_PROPERTY_VALUE_TEXT")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkAccessibleProperty"))))
+             (list-enum-item-name "GtkAccessibleProperty")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkAccessibleProperty"))))
+             (list-enum-item-value "GtkAccessibleProperty")))
   ;; Check the nick names
   (is (equal '("autocomplete" "description" "has-popup" "key-shortcuts" "label"
                "level" "modal" "multi-line" "multi-selectable" "orientation"
                "placeholder" "read-only" "required" "role-description" "sort"
                "value-max" "value-min" "value-now" "value-text")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkAccessibleProperty"))))
+             (list-enum-item-nick "GtkAccessibleProperty")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAccessibleProperty"
                              GTK-ACCESSIBLE-PROPERTY
@@ -523,7 +532,8 @@
   (is (g:type-is-enum "GtkAccessibleRelation"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleRelation")
-          (g:gtype (foreign-funcall "gtk_accessible_relation_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_relation_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-relation
           (gobject:symbol-for-gtype "GtkAccessibleRelation")))
@@ -546,19 +556,16 @@
                "GTK_ACCESSIBLE_RELATION_ROW_INDEX_TEXT"
                "GTK_ACCESSIBLE_RELATION_ROW_SPAN"
                "GTK_ACCESSIBLE_RELATION_SET_SIZE")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkAccessibleRelation"))))
+             (list-enum-item-name "GtkAccessibleRelation")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkAccessibleRelation"))))
+             (list-enum-item-value "GtkAccessibleRelation")))
   ;; Check the nick names
   (is (equal '("active-descendant" "col-count" "col-index" "col-index-text"
                "col-span" "controls" "described-by" "details" "error-message"
                "flow-to" "labelled-by" "owns" "pos-in-set" "row-count"
                "row-index" "row-index-text" "row-span" "set-size")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkAccessibleRelation"))))
+             (list-enum-item-nick "GtkAccessibleRelation")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAccessibleRelation"
                              GTK-ACCESSIBLE-RELATION
@@ -592,7 +599,8 @@
   (is (g:type-is-enum "GtkAccessibleTristate"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleTristate")
-          (g:gtype (foreign-funcall "gtk_accessible_tristate_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_tristate_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-tristate
           (gobject:symbol-for-gtype "GtkAccessibleTristate")))
@@ -600,16 +608,13 @@
   (is (equal '("GTK_ACCESSIBLE_TRISTATE_FALSE"
                "GTK_ACCESSIBLE_TRISTATE_TRUE"
                "GTK_ACCESSIBLE_TRISTATE_MIXED")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkAccessibleTristate"))))
+             (list-enum-item-name "GtkAccessibleTristate")))
   ;; Check the values
   (is (equal '(0 1 2)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkAccessibleTristate"))))
+             (list-enum-item-value "GtkAccessibleTristate")))
   ;; Check the nick names
   (is (equal '("false" "true" "mixed")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkAccessibleTristate"))))
+             (list-enum-item-nick "GtkAccessibleTristate")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAccessibleTristate"
                              GTK-ACCESSIBLE-TRISTATE
@@ -628,8 +633,8 @@
   (is (g:type-is-enum "GtkAccessibleInvalidState"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleInvalidState")
-          (g:gtype (foreign-funcall "gtk_accessible_invalid_state_get_type"
-                                  :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_invalid_state_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-invalid-state
           (gobject:symbol-for-gtype "GtkAccessibleInvalidState")))
@@ -638,16 +643,13 @@
                "GTK_ACCESSIBLE_INVALID_TRUE"
                "GTK_ACCESSIBLE_INVALID_GRAMMAR"
                "GTK_ACCESSIBLE_INVALID_SPELLING")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkAccessibleInvalidState"))))
+             (list-enum-item-name "GtkAccessibleInvalidState")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkAccessibleInvalidState"))))
+             (list-enum-item-value "GtkAccessibleInvalidState")))
   ;; Check the nick names
   (is (equal '("false" "true" "grammar" "spelling")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkAccessibleInvalidState"))))
+             (list-enum-item-nick "GtkAccessibleInvalidState")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAccessibleInvalidState"
                              GTK-ACCESSIBLE-INVALID-STATE
@@ -667,8 +669,8 @@
   (is (g:type-is-enum "GtkAccessibleAutocomplete"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleAutocomplete")
-          (g:gtype (foreign-funcall "gtk_accessible_autocomplete_get_type"
-                                  :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_autocomplete_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-autocomplete
           (gobject:symbol-for-gtype "GtkAccessibleAutocomplete")))
@@ -677,16 +679,13 @@
                "GTK_ACCESSIBLE_AUTOCOMPLETE_INLINE"
                "GTK_ACCESSIBLE_AUTOCOMPLETE_LIST"
                "GTK_ACCESSIBLE_AUTOCOMPLETE_BOTH")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkAccessibleAutocomplete"))))
+             (list-enum-item-name "GtkAccessibleAutocomplete")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkAccessibleAutocomplete"))))
+             (list-enum-item-value "GtkAccessibleAutocomplete")))
   ;; Check the nick names
   (is (equal '("none" "inline" "list" "both")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkAccessibleAutocomplete"))))
+             (list-enum-item-nick "GtkAccessibleAutocomplete")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAccessibleAutocomplete"
                              GTK-ACCESSIBLE-AUTOCOMPLETE
@@ -706,7 +705,7 @@
   (is (g:type-is-enum "GtkAccessibleSort"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleSort")
-          (g:gtype (foreign-funcall "gtk_accessible_sort_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_sort_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-sort
           (gobject:symbol-for-gtype "GtkAccessibleSort")))
@@ -715,16 +714,13 @@
                "GTK_ACCESSIBLE_SORT_ASCENDING"
                "GTK_ACCESSIBLE_SORT_DESCENDING"
                "GTK_ACCESSIBLE_SORT_OTHER")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkAccessibleSort"))))
+             (list-enum-item-name "GtkAccessibleSort")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkAccessibleSort"))))
+             (list-enum-item-value "GtkAccessibleSort")))
   ;; Check the nick names
   (is (equal '("none" "ascending" "descending" "other")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkAccessibleSort"))))
+             (list-enum-item-nick "GtkAccessibleSort")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAccessibleSort"
                              GTK-ACCESSIBLE-SORT
@@ -736,4 +732,4 @@
                              (:OTHER 3))
              (get-g-type-definition "GtkAccessibleSort"))))
 
-;;; 2022-11-6
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkDialogFlags")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkDialogFlags")
-          (g:gtype (foreign-funcall "gtk_dialog_flags_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_dialog_flags_get_type" :size))))
   ;; Check the names
   (is (equal '("GTK_DIALOG_MODAL" "GTK_DIALOG_DESTROY_WITH_PARENT"
                "GTK_DIALOG_USE_HEADER_BAR")
@@ -46,7 +46,7 @@
   (is (g:type-is-enum "GtkResponseType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkResponseType")
-          (g:gtype (foreign-funcall "gtk_response_type_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_response_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:response-type
           (gobject:symbol-for-gtype "GtkResponseType")))
@@ -94,7 +94,7 @@
           (gobject:symbol-for-gtype "GtkDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkDialog")
-          (g:gtype (foreign-funcall "gtk_dialog_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_dialog_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWindow")
           (g:type-parent "GtkDialog")))
@@ -202,4 +202,4 @@
 ;;;     gtk_dialog_get_content_area
 ;;;     gtk_dialog_get_header_bar
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkAdjustment")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAdjustment")
-          (g:gtype (foreign-funcall "gtk_adjustment_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_adjustment_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GInitiallyUnowned")
           (g:type-parent "GtkAdjustment")))
@@ -132,4 +132,4 @@
 ;;;     gtk_adjustment_configure
 ;;;     gtk_adjustment_get_minimum_increment
 
-;;; 2022-11-13
+;;; --- 2023-3-18 --------------------------------------------------------------

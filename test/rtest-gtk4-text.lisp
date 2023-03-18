@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkText")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkText")
-          (g:gtype (foreign-funcall "gtk_text_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_text_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkText")))
@@ -127,4 +127,4 @@
 ;;;     gtk_text_get_text_length
 ;;;     gtk_text_grab_focus_without_selecting
 
-;;; --- 2022-11-14
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -12,7 +12,8 @@
   (is (g:type-is-enum "GtkEventSequenceState"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventSequenceState")
-          (g:gtype (foreign-funcall "gtk_event_sequence_state_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_event_sequence_state_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:event-sequence-state
           (gobject:symbol-for-gtype "GtkEventSequenceState")))
@@ -50,7 +51,7 @@
           (gobject:symbol-for-gtype "GtkGesture")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGesture")
-          (g:gtype (foreign-funcall "gtk_gesture_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkGesture")))
@@ -123,4 +124,4 @@
 ;;;     gtk_gesture_get_group
 ;;;     gtk_gesture_is_grouped_with
 
-;; 2022-8-21
+;; --- 2023-3-18 ---------------------------------------------------------------

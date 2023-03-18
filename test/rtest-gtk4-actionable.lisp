@@ -13,7 +13,7 @@
           (gobject:symbol-for-gtype "GtkActionable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkActionable")
-          (g:gtype (foreign-funcall "gtk_actionable_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_actionable_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '("action-name" "action-target")
              (list-interface-properties "GtkActionable")))
@@ -34,7 +34,7 @@
     ;; Default is false
     (is-false (gtk:actionable-action-name button))
     ;; Default is null-pointer
-    (is-true (null-pointer-p (gtk:actionable-action-target button)))
+    (is-true (cffi:null-pointer-p (gtk:actionable-action-target button)))
     ;; Set the name and the target
     (gtk:actionable-set-detailed-action-name button "win.justify::left")
     (is (string= "win.justify"
@@ -48,14 +48,14 @@
 
 (test actionable-action-target
   (let ((button (make-instance 'gtk:button)))
-    (is (null-pointer-p (gtk:actionable-action-target button)))
+    (is (cffi:null-pointer-p (gtk:actionable-action-target button)))
     (setf (gtk:actionable-action-target button) (g:variant-new-int16 128))
     (is (= 128 (g:variant-int16 (gtk:actionable-action-target button))))
-    (setf (gtk:actionable-action-target button) (null-pointer))
-    (is (null-pointer-p (gtk:actionable-action-target button)))))
+    (setf (gtk:actionable-action-target button) (cffi:null-pointer))
+    (is (cffi:null-pointer-p (gtk:actionable-action-target button)))))
 
 ;;;     gtk_actionable_set_detailed_action_name
 
 ;;; See gtk-actionable-properties for an example
 
-;;; 2022-11-6
+;;; --- 2023-3-18 --------------------------------------------------------------

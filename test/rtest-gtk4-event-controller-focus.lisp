@@ -15,8 +15,8 @@
           (gobject:symbol-for-gtype "GtkEventControllerFocus")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventControllerFocus")
-          (g:gtype (foreign-funcall "gtk_event_controller_focus_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_event_controller_focus_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkEventControllerFocus")))
@@ -59,4 +59,4 @@
 
 ;;;     gtk_event_controller_focus_new
 
-;;; 2022-11-13
+;;; --- 2023-3-18 --------------------------------------------------------------

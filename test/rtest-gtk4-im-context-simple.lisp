@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-im-context-simple :in gtk-suite)
 (in-suite gtk-im-context-simple)
 
@@ -11,28 +13,26 @@
   ;; Type check
   (is (g:type-is-object "GtkIMContextSimple"))
   ;; Check the registered name
-  (is (eq 'gtk-im-context-simple
+  (is (eq 'gtk:im-context-simple
           (gobject:symbol-for-gtype "GtkIMContextSimple")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkIMContextSimple")
-          (gtype (foreign-funcall "gtk_im_context_simple_get_type" g-size))))
+  (is (eq (g:gtype "GtkIMContextSimple")
+          (g:gtype (cffi:foreign-funcall "gtk_im_context_simple_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GtkIMContext")
-          (g-type-parent "GtkIMContextSimple")))
+  (is (eq (g:gtype "GtkIMContext")
+          (g:type-parent "GtkIMContextSimple")))
   ;; Check the children
   (is (equal '("GtkIMContextWayland")
-             (mapcar #'g-type-name (g-type-children "GtkIMContextSimple"))))
+             (list-children "GtkIMContextSimple")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkIMContextSimple"))))
+             (list-interfaces "GtkIMContextSimple")))
   ;; Check the class properties
   (is (equal '()
-             (list-class-property-names "GtkIMContextSimple")))
+             (list-properties "GtkIMContextSimple")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkIMContextSimple"))
-                   #'string<)))
+             (list-signals "GtkIMContextSimple")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkIMContextSimple" GTK-I-M-CONTEXT-SIMPLE
                        (:SUPERCLASS GTK-I-M-CONTEXT :EXPORT T :INTERFACES NIL)
@@ -52,4 +52,4 @@
 ;;;     gtk_im_context_simple_add_table
 ;;;     gtk_im_context_simple_add_compose_file
 
-;;; 2022-7-10
+;;; --- 2023-3-18 --------------------------------------------------------------

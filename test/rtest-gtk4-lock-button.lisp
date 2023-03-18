@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkLockButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkLockButton")
-          (g:gtype (foreign-funcall "gtk_lock_button_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_lock_button_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkButton")
           (g:type-parent "GtkLockButton")))
@@ -76,4 +76,4 @@
 
 ;;;     gtk_lock_button_new
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

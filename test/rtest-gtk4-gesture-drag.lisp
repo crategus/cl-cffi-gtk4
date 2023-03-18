@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkGestureDrag")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureDrag")
-          (g:gtype (foreign-funcall "gtk_gesture_drag_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_drag_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureDrag")))
@@ -50,4 +50,4 @@
 ;;;     gtk_gesture_drag_get_start_point
 ;;;     gtk_gesture_drag_get_offset
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkColorChooser")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkColorChooser")
-          (g:gtype (foreign-funcall "gtk_color_chooser_get_type" g-size))))
+          (g:gtype (cffi:foreign-funcall "gtk_color_chooser_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '("rgba" "use-alpha")
              (list-interface-properties "GtkColorChooser")))
@@ -77,4 +77,4 @@
   (is (equal '(0.0 0.0 1.0) (multiple-value-list (gtk:rgb-to-hsv 1 1 1))))
   (is (equal '(0.0 0.0 0.5) (multiple-value-list (gtk:rgb-to-hsv 0.5 0.5 0.5)))))
 
-;;; 2022-11-20
+;;; --- 2023-3-18 --------------------------------------------------------------

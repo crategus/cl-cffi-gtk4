@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-combo-box :in gtk-suite)
 (in-suite gtk-combo-box)
 
@@ -7,26 +9,23 @@
 
 (test gtk-sensitivity-type
   ;; Check the type
-  (is (g-type-is-enum "GtkSensitivityType"))
+  (is (g:type-is-enum "GtkSensitivityType"))
   ;; Check the type initializer
-  (is (eq (gtype "GtkSensitivityType")
-          (gtype (foreign-funcall "gtk_sensitivity_type_get_type" g-size))))
+  (is (eq (g:gtype "GtkSensitivityType")
+          (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type" :size))))
   ;; Check the registered name
-  (is (eq 'gtk-sensitivity-type
+  (is (eq 'gtk:sensitivity-type
           (gobject:symbol-for-gtype "GtkSensitivityType")))
   ;; Check the names
   (is (equal '("GTK_SENSITIVITY_AUTO" "GTK_SENSITIVITY_ON"
                "GTK_SENSITIVITY_OFF")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GtkSensitivityType"))))
+             (list-enum-item-name "GtkSensitivityType")))
   ;; Check the values
   (is (equal '(0 1 2)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GtkSensitivityType"))))
+             (list-enum-item-value "GtkSensitivityType")))
   ;; Check the nick names
   (is (equal '("auto" "on" "off")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkSensitivityType"))))
+             (listenum-item-nick "GtkSensitivityType")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkSensitivityType"
                              GTK-SENSITIVITY-TYPE
@@ -43,31 +42,29 @@
   ;; Type check
   (is (g:type-is-object "GtkComboBox"))
   ;; Check the registered name
-  (is (eq 'gtk-combo-box
+  (is (eq 'gtk:combo-box
           (gobject:symbol-for-gtype "GtkComboBox")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkComboBox")
-          (gtype (foreign-funcall "gtk_combo_box_get_type" g-size))))
+  (is (eq (g:gtype "GtkComboBox")
+          (g:gtype (cffi:foreign-funcall "gtk_combo_box_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GtkWidget") (g-type-parent "GtkComboBox")))
+  (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkComboBox")))
   ;; Check the children
   (is (equal '("GtkComboBoxText")
-             (mapcar #'g-type-name (g-type-children "GtkComboBox"))))
+             (list-children "GtkComboBox")))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkCellEditable")
-             (mapcar #'g-type-name (g-type-interfaces "GtkComboBox"))))
+             (list-interfaces "GtkComboBox")))
   ;; Check the class properties
   (is (equal '("active" "active-id" "button-sensitivity" "child"
                "editing-canceled" "entry-text-column" "has-entry" "has-frame"
                "id-column" "model" "popup-fixed-width" "popup-shown")
-             (list-class-property-names "GtkComboBox")))
+             (list-properties "GtkComboBox")))
   ;; Check the list of signals
   (is (equal '("activate" "changed" "format-entry-text" "move-active" "popdown"
                "popup")
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkComboBox"))
-                   #'string<)))
+             (list-signals "GtkComboBox")))
   ;; CSS information
   (is (string= "combobox"
                (gtk-widget-class-css-name "GtkComboBox")))
@@ -150,4 +147,4 @@
 ;;;     gtk_combo_box_get_row_separator_func
 ;;;     gtk_combo_box_set_row_separator_func
 
-;;; 2022-9-6
+;;; --- 2023-3-18 --------------------------------------------------------------

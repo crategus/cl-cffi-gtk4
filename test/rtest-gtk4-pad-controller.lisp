@@ -46,7 +46,7 @@
           (gobject:symbol-for-gtype "GtkPadController")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPadController")
-          (g:gtype (foreign-funcall "gtk_pad_controller_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_pad_controller_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkPadController")))
@@ -120,4 +120,4 @@
     (is-false (g:action-map-lookup-action group "action"))
 ))
 
-;;; --- 2023-3-11 --------------------------------------------------------------
+;;; --- 2023-3-18 --------------------------------------------------------------

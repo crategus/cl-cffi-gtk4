@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-media-file :in gtk-suite)
 (in-suite gtk-media-file)
 
@@ -9,28 +11,26 @@
   ;; Type check
   (is (g:type-is-object "GtkMediaFile"))
   ;; Check the registered name
-  (is (eq 'gtk-media-file
+  (is (eq 'gtk:media-file
           (gobject:symbol-for-gtype "GtkMediaFile")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkMediaFile")
-          (gtype (foreign-funcall "gtk_media_file_get_type" :size))))
+  (is (eq (g:gtype "GtkMediaFile")
+          (g:gtype (cffi:foreign-funcall "gtk_media_file_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GtkMediaStream")
-          (g-type-parent "GtkMediaFile")))
+  (is (eq (g:gtype "GtkMediaStream")
+          (g:type-parent "GtkMediaFile")))
   ;; Check the children
   (is (equal '("GtkNoMediaFile")
-             (mapcar #'g-type-name (g-type-children "GtkMediaFile"))))
+             (list-children "GtkMediaFile")))
   ;; Check the interfaces
   (is (equal '("GdkPaintable")
-             (mapcar #'g-type-name (g-type-interfaces "GtkMediaFile"))))
+             (list-interfaces "GtkMediaFile")))
   ;; Check the class properties
   (is (equal '("file" "input-stream")
-             (list-class-property-names "GtkMediaFile")))
+             (list--properties "GtkMediaFile")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkMediaFile"))
-                   #'string<)))
+             (list-signals "GtkMediaFile")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMediaFile" GTK-MEDIA-FILE
                        (:SUPERCLASS GTK-MEDIA-STREAM :EXPORT T :INTERFACES
@@ -61,4 +61,4 @@
 ;;;     gtk_media_file_set_input_stream
 ;;;     gtk_media_file_get_input_stream
 
-;;; 2022-9-8
+;;; --- 2023-3-18 --------------------------------------------------------------

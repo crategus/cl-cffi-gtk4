@@ -15,8 +15,8 @@
           (gobject:symbol-for-gtype "GtkEventControllerMotion")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventControllerMotion")
-          (g:gtype (foreign-funcall "gtk_event_controller_motion_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_event_controller_motion_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkEventControllerMotion")))
@@ -60,4 +60,4 @@
 
 ;;;     gtk_event_controller_motion_new
 
-;;; 2022-11-13
+;;; --- 2023-3-18 --------------------------------------------------------------

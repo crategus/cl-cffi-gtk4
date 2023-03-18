@@ -3,10 +3,10 @@
 (def-suite gtk-file-filter :in gtk-suite)
 (in-suite gtk-file-filter)
 
-(foreign-funcall "gtk_bool_filter_get_type" :size)
-(foreign-funcall "gtk_custom_filter_get_type" :size)
-(foreign-funcall "gtk_multi_filter_get_type" :size)
-(foreign-funcall "gtk_string_filter_get_type" :size)
+(cffi:foreign-funcall "gtk_bool_filter_get_type" :size)
+(cffi:foreign-funcall "gtk_custom_filter_get_type" :size)
+(cffi:foreign-funcall "gtk_multi_filter_get_type" :size)
+(cffi:foreign-funcall "gtk_string_filter_get_type" :size)
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -20,7 +20,7 @@
           (gobject:symbol-for-gtype "GtkFileFilter")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileFilter")
-          (g:gtype (foreign-funcall "gtk_file_filter_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_file_filter_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkFilter")
           (g:type-parent "GtkFileFilter")))
@@ -114,7 +114,7 @@
   (let ((filter (gtk:file-filter-new))
         (variant nil))
     (is-false (gtk:file-filter-add-mime-type filter "text/plain"))
-    (is (pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
+    (is (cffi:pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
     #-windows
     (is (string= "('[Invalid UTF-8]', [(1, 'text/plain')])"
                  (g:variant-print variant)))
@@ -125,7 +125,7 @@
     (is (eq 'gtk:file-filter
             (type-of (setf filter
                            (gtk:file-filter-new-from-gvariant variant)))))
-    (is (pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
+    (is (cffi:pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
     #-windows
     (is (string= "('[Invalid UTF-8]', [(1, 'text/plain')])"
                  (g:variant-print variant)))
@@ -133,4 +133,4 @@
     (is (string= "('[Invalid UTF-8]', [(1, '*')])"
                  (g:variant-print variant)))))
 
-;;; 2022-11-19
+;;; --- 2023-3-18 --------------------------------------------------------------

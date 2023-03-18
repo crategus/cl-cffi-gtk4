@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkGestureSwipe")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureSwipe")
-          (g:gtype (foreign-funcall "gtk_gesture_swipe_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_swipe_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureSwipe")))
@@ -47,4 +47,4 @@
 ;;;     gtk_gesture_swipe_new
 ;;;     gtk_gesture_swipe_get_velocity
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkNative")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkNative")
-          (g:gtype (foreign-funcall "gtk_native_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_native_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '()
              (list-interface-properties "GtkNative")))
@@ -52,4 +52,4 @@
 ;;;     gtk_native_realize
 ;;;     gtk_native_unrealize
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

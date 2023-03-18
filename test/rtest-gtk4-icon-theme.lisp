@@ -23,7 +23,7 @@
           (gobject:symbol-for-gtype "GtkIconTheme")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkIconTheme")
-          (g:gtype (foreign-funcall "gtk_icon_theme_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_icon_theme_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkIconTheme")))
@@ -71,10 +71,6 @@
 ;;;     changed
 
 (test icon-theme-signals
-  ;; Check the list of signals
-  (is (member "changed"
-              (mapcar #'g:signal-name (g:signal-list-ids "GtkIconTheme"))
-              :test #'string=))
   ;; Query info for "changed" signal
   (let ((query (g:signal-query (g:signal-lookup "changed" "GtkIconTheme"))))
     (is (string= "changed" (g:signal-query-signal-name query)))
@@ -126,4 +122,4 @@
 ;;;     gtk_icon_theme_lookup_by_gicon
 ;;;     gtk_icon_theme_get_icon_sizes
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

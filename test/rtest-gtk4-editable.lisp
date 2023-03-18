@@ -17,7 +17,7 @@
           (gobject:symbol-for-gtype "GtkEditable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEditable")
-          (g:gtype (foreign-funcall "gtk_editable_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_editable_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '("cursor-position" "editable" "enable-undo" "max-width-chars"
                "selection-bound" "text" "width-chars" "xalign")
@@ -157,4 +157,4 @@
 ;;;     gtk_editable_delegate_set_property
 ;;;     gtk_editable_delegate_get_property
 
-;;; 2022-11-17
+;;; --- 2023-3-18 --------------------------------------------------------------

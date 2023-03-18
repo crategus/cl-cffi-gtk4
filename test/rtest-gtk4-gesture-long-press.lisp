@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkGestureLongPress")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureLongPress")
-          (g:gtype (foreign-funcall "gtk_gesture_long_press_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_gesture_long_press_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkGestureLongPress")))
@@ -53,4 +53,4 @@
 
 ;;;     gtk_gesture_long_press_new
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

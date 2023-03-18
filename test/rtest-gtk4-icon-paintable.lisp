@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkSymbolicPaintable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSymbolicPaintable")
-          (g:gtype (foreign-funcall "gtk_symbolic_paintable_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_symbolic_paintable_get_type" :size))))
   ;; Get the names of the interface properties.
   (is (equal '()
              (list-interfaces "GtkSymbolicPaintable")))
@@ -35,7 +35,7 @@
           (gobject:symbol-for-gtype "GtkIconPaintable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkIconPaintable")
-          (g:gtype (foreign-funcall "gtk_icon_paintable_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_icon_paintable_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkIconPaintable")))
@@ -88,4 +88,4 @@
     (is-false (gtk:icon-paintable-icon-name paintable))
     (is-false (gtk:icon-paintable-is-symbolic paintable))))
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

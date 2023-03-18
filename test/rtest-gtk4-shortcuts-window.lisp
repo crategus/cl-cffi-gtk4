@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkShortcutsWindow")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutsWindow")
-          (g:gtype (foreign-funcall "gtk_shortcuts_window_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_shortcuts_window_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWindow")
           (g:type-parent "GtkShortcutsWindow")))
@@ -64,4 +64,4 @@
 ;;;     close
 ;;;     search
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

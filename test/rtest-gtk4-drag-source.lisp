@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkDragSource")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkDragSource")
-          (g:gtype (foreign-funcall "gtk_drag_source_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_drag_source_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkGestureSingle")
           (g:type-parent "GtkDragSource")))
@@ -61,4 +61,4 @@
 ;;;     gtk_drag_source_get_drag
 ;;;     gtk_drag_check_threshold
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

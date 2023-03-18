@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gtk-expression :in gtk-suite)
 (in-suite gtk-expression)
 
@@ -10,28 +12,26 @@
   ;; Type check
   (is (g:type-is-object "GtkExpression"))
   ;; Check the registered name
-  (is (eq 'g-object
+  (is (eq 'g:object
           (gobject:symbol-for-gtype "GtkExpression")))
   ;; Check the type initializer
-  (is (eq (gtype "GtkExpression")
-          (gtype (foreign-funcall "gtk_expression_get_type" :size))))
+  (is (eq (g:gtype "GtkExpression")
+          (g:gtype (cffi:foreign-funcall "gtk_expression_get_type" :size))))
   ;; Check the parent
-  (is (eq (gtype "GObject")
-          (g-type-parent "GtkExpression")))
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkExpression")))
   ;; Check the children
   (is (equal '()
-             (mapcar #'g-type-name (g-type-children "GtkExpression"))))
+             (list-children "GtkExpression")))
   ;; Check the interfaces
   (is (equal '()
-             (mapcar #'g-type-name (g-type-interfaces "GtkExpression"))))
+             (list-interfaces "GtkExpression")))
   ;; Check the class properties
   (is (equal '()
-             (list-class-property-names "GtkExpression")))
+             (list-properties "GtkExpression")))
   ;; Check the list of signals
   (is (equal '()
-             (sort (mapcar #'g-signal-name
-                           (g-signal-list-ids "GtkExpression"))
-                   #'string<)))
+             (list-signals "GtkExpression")))
   ;; Check the class definition
   (is (equal '()
              (get-g-type-definition "GtkExpression"))))
@@ -79,4 +79,4 @@
 
 ;;;     gtk_param_spec_expression
 
-;;; 2022-9-6
+;;; --- 2023-3-18 --------------------------------------------------------------

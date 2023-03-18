@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkCenterBox")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCenterBox")
-          (g:gtype (foreign-funcall "gtk_center_box_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_center_box_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkCenterBox")))
@@ -65,4 +65,4 @@
 ;;;     gtk_center_box_get_center_widget
 ;;;     gtk_center_box_get_end_widget
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -1,3 +1,5 @@
+(in-package :gtk-test)
+
 (def-suite gsk-enumerations :in gsk-suite)
 (in-suite gsk-enumerations)
 
@@ -7,10 +9,10 @@
 
 (test render-node-type
   ;; Check the type
-  (is (g-type-is-enum "GskRenderNodeType"))
+  (is (g:type-is-enum "GskRenderNodeType"))
   ;; Check the type initializer
-  (is (eq (gtype "GskRenderNodeType")
-          (gtype (foreign-funcall "gsk_render_node_type_get_type" :size))))
+  (is (eq (g:gtype "GskRenderNodeType")
+          (g:gtype (cffi:foreign-funcall "gsk_render_node_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gsk:render-node-type
           (gobject:symbol-for-gype "GskRenderNodeType")))
@@ -25,13 +27,11 @@
                "GSK_ROUNDED_CLIP_NODE" "GSK_SHADOW_NODE" "GSK_BLEND_NODE"
                "GSK_CROSS_FADE_NODE" "GSK_TEXT_NODE" "GSK_BLUR_NODE"
                "GSK_DEBUG_NODE" "GSK_GL_SHADER_NODE")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GskRenderNodeType"))))
+             (listenum-item-name "GskRenderNodeType")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
                24 25)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GskRenderNodeType"))))
+             (list-enum-item-value "GskRenderNodeType")))
   ;; Check the nick names
   (is (equal '("not-a-render-node" "container-node" "cairo-node" "color-node"
                "linear-gradient-node" "repeating-linear-gradient-node"
@@ -41,8 +41,7 @@
                "opacity-node" "color-matrix-node" "repeat-node" "clip-node"
                "rounded-clip-node" "shadow-node" "blend-node" "cross-fade-node"
                "text-node" "blur-node" "debug-node" "gl-shader-node")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GskRenderNodeType"))))
+             (list-enum-item-nick "GskRenderNodeType")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GskRenderNodeType" RENDER-NODE-TYPE
                              (:EXPORT T
@@ -87,7 +86,7 @@
   (is (g-type-is-enum "GskTransformCategory"))
   ;; Check the type initializer
   (is (eq (gtype "GskTransformCategory")
-          (gtype (foreign-funcall "gsk_transform_category_get_type" :size))))
+          (gtype (cffi:foreign-funcall "gsk_transform_category_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gsk:transform-category
           (gobject:symbol-for-gtype "GskTransformCategory")))
@@ -97,16 +96,13 @@
                "GSK_TRANSFORM_CATEGORY_2D_AFFINE"
                "GSK_TRANSFORM_CATEGORY_2D_TRANSLATE"
                "GSK_TRANSFORM_CATEGORY_IDENTITY")
-             (mapcar #'enum-item-name
-                     (get-enum-items "GskTransformCategory"))))
+             (list-enum-item-name "GskTransformCategory")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6)
-             (mapcar #'enum-item-value
-                     (get-enum-items "GskTransformCategory"))))
+             (list-enum-item-value "GskTransformCategory")))
   ;; Check the nick names
   (is (equal '("unknown" "any" "3d" "2d" "2d-affine" "2d-translate" "identity")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GskTransformCategory"))))
+             (list-enum-item-nick "GskTransformCategory")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GskTransformCategory" TRANSFORM-CATEGORY
                              (:EXPORT T
@@ -123,4 +119,4 @@
 
 ;;;     GskGLUniformType
 
-;;; 2022-9-13
+;;; --- 2023-3-18 --------------------------------------------------------------

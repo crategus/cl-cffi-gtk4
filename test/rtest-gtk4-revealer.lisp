@@ -12,8 +12,8 @@
   (is (g:type-is-enum "GtkRevealerTransitionType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRevealerTransitionType")
-          (g:gtype (foreign-funcall "gtk_revealer_transition_type_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_revealer_transition_type_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:revealer-transition-type
           (gobject:symbol-for-gtype "GtkRevealerTransitionType")))
@@ -67,7 +67,7 @@
           (gobject:symbol-for-gtype "GtkRevealer")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRevealer")
-          (g:gtype (foreign-funcall "gtk_revealer_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_revealer_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkRevealer")))
@@ -121,4 +121,4 @@
 
 ;;;     gtk_revealer_new
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

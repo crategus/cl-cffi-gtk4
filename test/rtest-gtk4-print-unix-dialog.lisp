@@ -17,7 +17,7 @@
           (gobject:symbol-for-gtype "GtkPrintUnixDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPrintUnixDialog")
-          (g:gtype (foreign-funcall "gtk_print_unix_dialog_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_print_unix_dialog_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkDialog")
           (g:type-parent "GtkPrintUnixDialog")))
@@ -93,4 +93,4 @@
 ;;;     gtk_print_unix_dialog_add_custom_tab
 ;;;     gtk_print_unix_dialog_get_page_setup_set
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

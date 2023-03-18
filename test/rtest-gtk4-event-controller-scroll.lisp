@@ -17,8 +17,8 @@
           (gobject:symbol-for-gtype "GtkEventControllerScroll")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventControllerScroll")
-          (g:gtype (foreign-funcall "gtk_event_controller_scroll_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_event_controller_scroll_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkEventController")
           (g:type-parent "GtkEventControllerScroll")))
@@ -60,4 +60,4 @@
 ;;;     gtk_event_controller_scroll_new
 ;;;     gtk_event_controller_get_unit                      Since 4.8
 
-;;; 2022-11-13
+;;; --- 2023-3-18 --------------------------------------------------------------

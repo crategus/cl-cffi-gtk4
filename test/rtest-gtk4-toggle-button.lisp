@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkToggleButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkToggleButton")
-          (g:gtype (foreign-funcall "gtk_toggle_button_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_toggle_button_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkButton")
           (g:type-parent "GtkToggleButton")))
@@ -69,4 +69,4 @@
 ;;;     gtk_toggle_button_new_with_mnemonic
 ;;;     gtk_toggle_button_toggled
 
-;;; 2022-11-11
+;;; --- 2023-3-18 --------------------------------------------------------------

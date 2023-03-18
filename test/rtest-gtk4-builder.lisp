@@ -96,7 +96,7 @@
           (gobject:symbol-for-gtype "GtkBuilder")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBuilder")
-          (g:gtype (foreign-funcall "gtk_builder_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_builder_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkBuilder")))
@@ -285,4 +285,4 @@
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; --- 2023-1-29 --------------------------------------------------------------
+;;; --- 2023-3-18 --------------------------------------------------------------

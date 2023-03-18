@@ -6,7 +6,7 @@
 ;; GtkPrinterOptionWidget is a child of GtkBox
 #-win32
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (foreign-funcall "gtk_printer_option_widget_get_type" :size))
+  (cffi:foreign-funcall "gtk_printer_option_widget_get_type" :size))
 
 ;;; --- Types and Values -------------------------------------------------------
 
@@ -20,7 +20,7 @@
           (gobject:symbol-for-gtype "GtkBox")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBox")
-          (g:gtype (foreign-funcall "gtk_box_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_box_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkBox")))
@@ -115,4 +115,4 @@
 ;;;     gtk_box_insert_child_after
 ;;;     gtk_box_reorder_child_after
 
-;;; 2022-11-5
+;;; --- 2023-3-18 --------------------------------------------------------------

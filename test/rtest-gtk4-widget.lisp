@@ -12,7 +12,7 @@
   (is-true (g:type-is-a (g:gtype "GtkRequisition") +g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRequisition")
-          (g:gtype (foreign-funcall "gtk_requisition_get_type" :size)))))
+          (g:gtype (cffi:foreign-funcall "gtk_requisition_get_type" :size)))))
 
 (test requisition-new
   (is (typep (gtk:requisition-new) 'gtk:requisition)))
@@ -36,7 +36,7 @@
           (gobject:symbol-for-gtype "GtkWidget")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkWidget")
-          (g:gtype (foreign-funcall "gtk_widget_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_widget_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GInitiallyUnowned")
           (g:type-parent "GtkWidget")))
@@ -356,4 +356,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; --- 2023-3-11 --------------------------------------------------------------
+;;; --- 2023-3-18 --------------------------------------------------------------

@@ -12,22 +12,20 @@
   (is (g:type-is-enum "GtkEntryIconPosition"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEntryIconPosition")
-          (g:gtype (foreign-funcall "gtk_entry_icon_position_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_entry_icon_position_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:entry-icon-position
           (gobject:symbol-for-gtype "GtkEntryIconPosition")))
   ;; Check the names
   (is (equal '("GTK_ENTRY_ICON_PRIMARY" "GTK_ENTRY_ICON_SECONDARY")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkEntryIconPosition"))))
+             (list-enum-item-name "GtkEntryIconPosition")))
   ;; Check the values
   (is (equal '(0 1)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkEntryIconPosition"))))
+             (list-enum-item-value "GtkEntryIconPosition")))
   ;; Check the nick names
   (is (equal '("primary" "secondary")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkEntryIconPosition"))))
+             (list-enum-item-nick "GtkEntryIconPosition")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkEntryIconPosition"
                              GTK-ENTRY-ICON-POSITION
@@ -48,7 +46,7 @@
           (gobject:symbol-for-gtype "GtkEntry")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEntry")
-          (g:gtype (foreign-funcall "gtk_entry_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_entry_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkEntry")))
@@ -267,4 +265,4 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; 2022-11-17
+;;; --- 2023-3-18 --------------------------------------------------------------

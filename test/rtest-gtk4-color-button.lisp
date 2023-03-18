@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkColorButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkColorButton")
-          (g:gtype (foreign-funcall "gtk_color_button_get_type" :size))))
+          (g:gtype (cfi:foreign-funcall "gtk_color_button_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkColorButton")))
@@ -114,4 +114,4 @@
                  (gdk:rgba-to-string (gtk:color-chooser-rgba button))))
     (is-false (gtk:color-chooser-use-alpha button))))
 
-;;; 2022-11-20
+;;; --- 2023-3-18 --------------------------------------------------------------

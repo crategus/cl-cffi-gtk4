@@ -15,7 +15,8 @@
           (gobject:symbol-for-gtype "GtkFileChooserDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileChooserDialog")
-          (g:gtype (foreign-funcall "gtk_file_chooser_dialog_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_file_chooser_dialog_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkDialog")
           (g:type-parent "GtkFileChooserDialog")))
@@ -59,4 +60,4 @@
 
 ;;;     gtk_file_chooser_dialog_new
 
-;;; 2022-11-10
+;;; --- 2023-3-18 --------------------------------------------------------------

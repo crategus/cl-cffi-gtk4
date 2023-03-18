@@ -17,7 +17,7 @@
           (gobject:symbol-for-gtype "GtkPicture")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPicture")
-          (g:gtype (foreign-funcall "gtk_picture_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_picture_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkPicture")))
@@ -80,4 +80,4 @@
 ;;;     gtk_picture_set_filename
 ;;;     gtk_picture_set_resource
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------

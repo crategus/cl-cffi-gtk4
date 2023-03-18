@@ -15,22 +15,19 @@
           (gobject:symbol-for-gtype "GtkStyleContextPrintFlags")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkStyleContextPrintFlags")
-          (g:gtype (foreign-funcall "gtk_style_context_print_flags_get_type"
-                                    :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_style_context_print_flags_get_type"
+                                         :size))))
   ;; Check the names
   (is (equal '("GTK_STYLE_CONTEXT_PRINT_NONE" "GTK_STYLE_CONTEXT_PRINT_RECURSE"
                "GTK_STYLE_CONTEXT_PRINT_SHOW_STYLE"
                "GTK_STYLE_CONTEXT_PRINT_SHOW_CHANGE")
-             (mapcar #'gobject:flags-item-name
-                     (gobject:get-flags-items "GtkStyleContextPrintFlags"))))
+             (list-flags-item-name "GtkStyleContextPrintFlags")))
   ;; Check the values
   (is (equal '(0 1 2 4)
-             (mapcar #'gobject:flags-item-value
-                     (gobject:get-flags-items "GtkStyleContextPrintFlags"))))
+             (list-flags-item-value "GtkStyleContextPrintFlags")))
   ;; Check the nick names
   (is (equal '("none" "recurse" "show-style" "show-change")
-             (mapcar #'gobject:flags-item-nick
-                     (gobject:get-flags-items "GtkStyleContextPrintFlags"))))
+             (list-flags-item-nick "GtkStyleContextPrintFlags")))
   ;; Check the flags definition
   (is (equal '(DEFINE-G-FLAGS "GtkStyleContextPrintFlags"
                               GTK-STYLE-CONTEXT-PRINT-FLAGS
@@ -50,7 +47,7 @@
   (is (g:type-is-a (g:gtype "GtkBorder") +g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBorder")
-          (g:gtype (foreign-funcall "gtk_border_get_type" :size)))))
+          (g:gtype (cffi:foreign-funcall "gtk_border_get_type" :size)))))
 
 (test border-properties
   (let ((border (gtk:border-new)))
@@ -77,7 +74,7 @@
           (gobject:symbol-for-gtype "GtkStyleContext")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkStyleContext")
-          (g:gtype (foreign-funcall "gtk_style_context_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_style_context_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkStyleContext")))
@@ -148,4 +145,4 @@
 ;;;     gtk_render_line
 ;;;     gtk_render_option
 
-;;; 2022-11-9
+;;; --- 2023-3-18 --------------------------------------------------------------

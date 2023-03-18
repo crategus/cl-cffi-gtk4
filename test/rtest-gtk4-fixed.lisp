@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkFixed")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFixed")
-          (g:gtype (foreign-funcall "gtk_fixed_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_fixed_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkFixed")))
@@ -59,4 +59,4 @@
 ;;;     gtk_fixed_get_child_transform
 ;;;     gtk_fixed_set_child_transform
 
-;;; 2022-11-12
+;;; --- 2023-3-18 --------------------------------------------------------------
