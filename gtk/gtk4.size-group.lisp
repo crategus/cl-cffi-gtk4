@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.size-group.lisp
+;;; gtk4.size-group.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkSizeGroup
@@ -79,7 +79,7 @@
 
 #+liber-documentation
 (setf (documentation 'size-group 'type)
- "@version{#2022-7-30}
+ "@version{2023-3-18}
   @begin{short}
     The @sym{gtk:size-group} object provides a mechanism for grouping a number
     of widgets together so they all request the same amount of space.
@@ -94,9 +94,9 @@
   horizontal size, the vertical size, or both sizes.
 
   Note that size groups only affect the amount of space requested, not the
-  size that the widgets finally receive. If you want the widgets in a size group
-  to actually be the same size, you need to pack them in such a way that they
-  get the size they request and not more.
+  size that the widgets finally receive. If you want the widgets in a size
+  group to actually be the same size, you need to pack them in such a way that
+  they get the size they request and not more.
 
   Widgets can be part of multiple size groups. GTK will compute the horizontal
   size of a widget from the horizontal requisition of all widgets that can be
@@ -125,7 +125,7 @@
     one for each member of the size group. The name attribute gives the ID of
     the widget.
 
-    @b{Example:} A UI definition fragment with @sym{gtk:size-group}
+    @b{Example:} A UI definition fragment with the @sym{gtk:size-group} widget.
     @begin{pre}
 <object class=\"GtkSizeGroup\">
   <property name=\"mode\">GTK_SIZE_GROUP_HORIZONTAL</property>
@@ -136,15 +136,15 @@
 </object>
     @end{pre}
   @end{dictionary}
+  @see-constructor{gtk:size-group-new}
   @see-slot{gtk:size-group-ignore-hidden}
-  @see-slot{gtk:size-group-mode}
-  @see-constructor{gtk:size-group-new}")
+  @see-slot{gtk:size-group-mode}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- size-group-mode ----------------------------------------------------
+;;; --- size-group-mode --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mode" 'size-group) t)
@@ -158,7 +158,7 @@
 (setf (liber:alias-for-function 'size-group-mode)
       "Accessor"
       (documentation 'size-group-mode 'function)
- "@version{#2022-7-30}
+ "@version{2023-3-18}
   @syntax[]{(gtk:size-group-mode object) => mode}
   @syntax[]{(setf (gtk:size-group-mode object) mode)}
   @argument[object]{a @class{gtk:size-group} object}
@@ -186,7 +186,7 @@
 
 (defun size-group-new (mode)
  #+liber-documentation
- "@version{#2022-7-30}
+ "@version{2023-3-18}
   @argument[mode]{a @symbol{gtk:size-group-mode} value for the new size group}
   @return{A newly created @class{gtk:size-group} object.}
   @begin{short}
@@ -205,7 +205,7 @@
 
 (defcfun ("gtk_size_group_add_widget" size-group-add-widget) :void
  #+liber-documentation
- "@version{#2022-7-30}
+ "@version{2023-3-18}
   @argument[group]{a @class{gtk:size-group} object}
   @argument[widget]{a @class{gtk:widget} object to add}
   @begin{short}
@@ -233,7 +233,7 @@
 
 (defcfun ("gtk_size_group_remove_widget" size-group-remove-widget) :void
  #+liber-documentation
- "@version{#2022-7-30}
+ "@version{2023-3-18}
   @argument[group]{a @class{gtk:size-group} object}
   @argument[widget]{a @class{gtk:widget} object to remove}
   @begin{short}
@@ -254,7 +254,7 @@
 (defcfun ("gtk_size_group_get_widgets" size-group-widgets)
     (g:slist-t g:object :free-from-foreign nil)
  #+liber-documentation
- "@version{#2022-7-30}
+ "@version{2023-3-18}
   @argument[group]{a @class{gtk:size-group} object}
   @begin{return}
     A list of @class{gtk:widget} objects.
@@ -268,4 +268,4 @@
 
 (export 'size-group-widgets)
 
-;;; --- End of file gtk.size-group.lisp ----------------------------------------
+;;; --- End of file gtk4.size-group.lisp ---------------------------------------
