@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.link-button.lisp
+;;; gtk4.link-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkLinkButton
@@ -100,7 +100,7 @@
 
 #+liber-documentation
 (setf (documentation 'link-button 'type)
- "@version{#2021-12-23}
+ "@version{2023-3-18}
   @begin{short}
     A @sym{gtk:link-button} widget is a @class{gtk:button} widget with a
     hyperlink, similar to the one used by web browsers, which triggers an
@@ -143,6 +143,8 @@ lambda (button)    :run-last
           signal.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:link-button-new}
+  @see-constructor{gtk:link-button-new-with-label}
   @see-slot{gtk:link-button-uri}
   @see-slot{gtk:link-button-visited}
   @see-class{gtk:button}")
@@ -151,7 +153,7 @@ lambda (button)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- link-button-uri ----------------------------------------------------
+;;; --- link-button-uri --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "uri" 'link-button) t)
@@ -163,7 +165,7 @@ lambda (button)    :run-last
 (setf (liber:alias-for-function 'link-button-uri)
       "Accessor"
       (documentation 'link-button-uri 'function)
- "@version{#2021-12-23}
+ "@version{2023-3-18}
   @syntax[]{(gtk:link-button-uri object) => uri}
   @syntax[]{(setf (gtk:link-button-uri object) uri)}
   @argument[object]{a @class{gtk:link-button} widget}
@@ -172,13 +174,12 @@ lambda (button)    :run-last
     Accessor of the @slot[gtk:link-button]{uri} slot of the
     @class{gtk:link-button} class.
   @end{short}
-
   The @sym{gtk:link-button-uri} function retrieves the URI. The
   @sym{gtk:link-button-uri} function sets @arg{uri} as the URI where the link
   button points. As a side-effect this unsets the visited state of the button.
   @see-class{gtk:link-button}")
 
-;;; --- link-button-visited ------------------------------------------------
+;;; --- link-button-visited ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "visited" 'link-button) t)
@@ -191,7 +192,7 @@ lambda (button)    :run-last
 (setf (liber:alias-for-function 'link-button-visited)
       "Accessor"
       (documentation 'link-button-visited 'function)
- "@version{#2021-12-23}
+ "@version{2023-3-18}
   @syntax[]{(gtk:link-button-visited object) => visited}
   @syntax[]{(setf (gtk:link-button-visited object) visited)}
   @argument[object]{a @class{gtk:link-button} widget}
@@ -200,7 +201,6 @@ lambda (button)    :run-last
     Accessor of the @slot[gtk:link-button]{visited} slot of the
     @class{gtk:link-button} class.
   @end{short}
-
   The @sym{gtk:link-button-visited} function retrieves the \"visited\" state of
   the URI where the link button points. The @sym{(setf gtk:link-button-visited)}
   function sets the \"visited\" state of the URI.
@@ -217,7 +217,7 @@ lambda (button)    :run-last
 
 (defun link-button-new (uri)
  #+liber-documentation
- "@version{#2021-12-23}
+ "@version{2023-3-18}
   @argument[uri]{a string with a valid URI}
   @return{A new @class{gtk:link-button} widget.}
   @short{Creates a new link button with the URI as its text.}
@@ -237,7 +237,7 @@ lambda (button)    :run-last
 
 (defun link-button-new-with-label (uri label)
  #+liber-documentation
- "@version{#2021-12-23}
+ "@version{2023-3-18}
   @argument[uri]{a string with a valid URI}
   @argument[label]{a string with the text of the button}
   @return{A new @class{gtk:link-button} widget.}
@@ -250,4 +250,4 @@ lambda (button)    :run-last
 
 (export 'link-button-new-with-label)
 
-;;; --- End of file gtk.link-button.lisp ---------------------------------------
+;;; --- End of file gtk4.link-button.lisp --------------------------------------

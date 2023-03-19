@@ -275,7 +275,8 @@ lambda (button)    :action
   the button already contains a child widget, that child widget will be removed
   and replaced with the image.
   @see-class{gtk:button}
-  @see-class{gtk:image}")
+  @see-class{gtk:image}
+  @see-function{gtk:button-new}")
 
 ;;; --- button-label -----------------------------------------------------------
 
@@ -350,10 +351,10 @@ lambda (button)    :action
   @end{short}
   To add a child widget to the button, use the @fun{gtk:button-child} function.
   @see-class{gtk:button}
+  @see-function{gtk:button-child}
   @see-function{gtk:button-new-with-label}
   @see-function{gtk:button-new-with-mnemonic}
-  @see-function{gtk:button-new-from-icon-name}
-  @see-function{gtk:button-child}"
+  @see-function{gtk:button-new-from-icon-name}"
   (make-instance 'button))
 
 (export 'button-new)
