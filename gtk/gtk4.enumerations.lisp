@@ -512,7 +512,7 @@
 (setf (liber:alias-for-symbol 'message-type)
       "GEnum"
       (liber:symbol-documentation 'message-type)
- "@version{#2021-12-28}
+ "@version{2023-3-19}
   @begin{short}
     The type of message being displayed in the message dialog.
   @end{short}
@@ -685,7 +685,7 @@
 (setf (liber:alias-for-symbol 'orientation)
       "GEnum"
       (liber:symbol-documentation 'orientation)
- "@version{#2022-9-9}
+ "@version{2023-3-19}
   @begin{short}
     Represents the orientation of widgets and other objects which can be
     switched between horizontal and vertical orientation on the fly.

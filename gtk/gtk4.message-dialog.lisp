@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.message-dialog.lisp
+;;; gtk4.message-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkMessageDialog
@@ -98,7 +98,7 @@
 (setf (liber:alias-for-symbol 'buttons-type)
       "GEnum"
       (liber:symbol-documentation 'buttons-type)
- "@version{#2022-7-18}
+ "@version{2023-3-19}
   @begin{short}
     Prebuilt sets of buttons for the dialog.
   @end{short}
@@ -315,7 +315,7 @@
   @see-class{gtk:message-dialog}
   @see-symbol{gtk:message-type}")
 
-;;; --- message-dialog-secondary-text --------------------------------------
+;;; --- message-dialog-secondary-text ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-text"
@@ -328,7 +328,7 @@
 (setf (liber:alias-for-function 'message-dialog-secondary-text)
       "Accessor"
       (documentation 'message-dialog-secondary-text 'function)
- "@version{#2022-7-18}
+ "@version{2023-3-19}
   @syntax[]{(gtk:message-dialog-secondary-text object) => text}
   @syntax[]{(setf (gtk:message-dialog-secondary-text object) text)}
   @argument[object]{a @class{gtk:message-dialog} widget}
@@ -427,8 +427,9 @@
 
 (defun message-dialog-new (parent flags type buttons message &rest args)
  #+liber-documentation
- "@version{#2022-7-18}
-  @argument[parent]{transient @class{gtk:window} parent, or @code{nil} for none}
+ "@version{2023-3-19}
+  @argument[parent]{a transient @class{gtk:window} parent, or @code{nil} for
+    none}
   @argument[flags]{a value of the @symbol{gtk:dialog-flags} flags}
   @argument[type]{a value of the @symbol{gtk:message-type} enumeration for the
     type of the message}
@@ -616,4 +617,4 @@
 
 (export 'message-dialog-format-secondary-markup)
 
-;;; --- End of file gtk.message-dialog.lisp ------------------------------------
+;;; --- End of file gtk4.message-dialog.lisp -----------------------------------
