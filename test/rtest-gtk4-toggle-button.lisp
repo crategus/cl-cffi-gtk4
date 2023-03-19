@@ -67,6 +67,26 @@
 ;;;     gtk_toggle_button_new
 ;;;     gtk_toggle_button_new_with_label
 ;;;     gtk_toggle_button_new_with_mnemonic
+
+(test gtk-toggle-button-new
+  (let (button)
+    (is (typep (setf button
+                     (gtk:toggle-button-new)) 'gtk:toggle-button))
+    (is-false (gtk:button-label button))
+    (is-false (gtk:toggle-button-active button))
+
+    (is (typep (setf button
+                     (gtk:toggle-button-new-with-label "label"))
+               'gtk:toggle-button))
+    (is (string= "label"(gtk:button-label button)))
+    (is-false (gtk:toggle-button-active button))
+
+    (is (typep (setf button
+                     (gtk:toggle-button-new-with-mnemonic "_label"))
+               'gtk:toggle-button))
+    (is (string= "_label" (gtk:button-label button)))
+    (is-false (gtk:toggle-button-active button))))
+
 ;;;     gtk_toggle_button_toggled
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-3-19 --------------------------------------------------------------

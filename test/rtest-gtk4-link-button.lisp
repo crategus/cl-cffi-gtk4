@@ -7,7 +7,7 @@
 
 ;;;     GtkLinkButton
 
-(test link-button-class
+(test gtk-link-button-class
   ;; Type check
   (is (g:type-is-object "GtkLinkButton"))
   ;; Check the registered name
@@ -54,8 +54,11 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     uri
-;;;     visited
+(test gkt-link-button-properties
+  (let ((button (make-instance 'gtk:link-button)))
+    (is-false (gtk:link-button-uri button))
+    (is-false (gtk:link-button-visited button))))
+
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -64,6 +67,17 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_link_button_new
+
+(test gtk-link-button-new
+  (let ((button (gtk:link-button-new "http://crategus.com")))
+    (is (string= "http://crategus.com" (gtk:link-button-uri button)))
+    (is (string= "http://crategus.com" (gtk:button-label button)))))
+
 ;;;     gtk_link_button_new_with_label
+
+(test gtk-link-button-new-with-label
+  (let ((button (gtk:link-button-new-with-label "http://crategus.com" "Label")))
+    (is (string= "http://crategus.com" (gtk:link-button-uri button)))
+    (is (string= "Label" (gtk:button-label button)))))
 
 ;;; --- 2023-3-18 --------------------------------------------------------------
