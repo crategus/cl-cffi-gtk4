@@ -40,6 +40,7 @@
                ;; Buttons and Toggle Widgets
                (:file "button-more")
                (:file "toggle-button")
+               (:file "toggle-button-action")
                (:file "check-button")
                (:file "link-button")
                (:file "switch")

@@ -43,6 +43,7 @@
            ;; Button and Toggle Widgets
            #:do-button-more
            #:do-toggle-button
+           #:do-toggle-button-action
            #:do-check-button
            #:do-link-button
            #:do-switch

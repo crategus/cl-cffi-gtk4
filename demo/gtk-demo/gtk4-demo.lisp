@@ -273,6 +273,11 @@
        "DO-TOGGLE-BUTTON"
        "gtk4-example"
        "toggle-button.lisp")
+      ("Toggle Buttons Action"
+       ":window"
+       "DO-TOGGLE-BUTTON-ACTION"
+       "gtk4-example"
+       "toggle-button-action.lisp")
       ("Check Buttons"
        ":window"
        "DO-CHECK-BUTTON"
