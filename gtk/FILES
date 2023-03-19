@@ -161,15 +161,15 @@ Media Support
 
 Buttons and Toggles
 
-  gtk.button.lisp                      GtkButton                        GTK 4.6+
-  gtk.check-button.lisp                GtkCheckButton                   GTK 4.6+
-  gtk.toggle-button.lisp               GtkToggleButton                  GTK 4.6+
-  gtk.link-button.lisp                 GtkLinkButton                    GTK 4.0+
-  gtk.menu-button.lisp                 GtkMenuButton                    GTK 4.0+
-  gtk.switch.lisp                      GtkSwitch                        GTK 4.0+
-  gtk.scale-button.lisp                GtkScaleButton                   GTK 4.0+
-  gtk.volume-button.lisp               GtkVolumeButton                  GTK 4.0+
-  gtk.lock-button.lisp                 GtkLockButton                    GTK 4.0+
+  gtk.button.lisp                      GtkButton                       GTK 4.11
+  gtk.check-button.lisp                GtkCheckButton                  GTK 4.6+
+  gtk.toggle-button.lisp               GtkToggleButton                 GTK 4.11
+  gtk.link-button.lisp                 GtkLinkButton                   GTK 4.11
+  gtk.menu-button.lisp                 GtkMenuButton                   GTK 4.0+
+  gtk.switch.lisp                      GtkSwitch                       GTK 4.0+
+  gtk.scale-button.lisp                GtkScaleButton                  GTK 4.0+
+  gtk.volume-button.lisp               GtkVolumeButton                 GTK 4.0+
+  gtk.lock-button.lisp                 GtkLockButton                   GTK 4.0+
 
 Numeric and Text Data Entry
 
@@ -307,13 +307,13 @@ Input Methods
 
 Miscellaneous
 
-  gtk.adjustment.lisp                  GtkAdjustment                    GTK 4.6+
-  gtk.size-group.lisp                  GtkSizeGroup                     GTK 4.6+
-  gtk.snapshot.lisp                    GtkSnapshot                      GTK 4.0+
-  gtk.tooltip.lisp                     GtkTooltip                       GTK 4.0+
-  gtk.widget-paintable.lisp            GtkWidgetPaintable               GTK 4.6+
-  gtk.window-controls.lisp             GtkWindowControls                GTK 4.0+
-  gtk.window-handle.lisp               GtkWindowHandle                  GTK 4.0+
+  gtk.adjustment.lisp                  GtkAdjustment                   GTK 4.6+
+  gtk.size-group.lisp                  GtkSizeGroup                    GTK 4.10
+  gtk.snapshot.lisp                    GtkSnapshot                     GTK 4.0+
+  gtk.tooltip.lisp                     GtkTooltip                      GTK 4.0+
+  gtk.widget-paintable.lisp            GtkWidgetPaintable              GTK 4.6+
+  gtk.window-controls.lisp             GtkWindowControls               GTK 4.0+
+  gtk.window-handle.lisp               GtkWindowHandle                 GTK 4.0+
 
 Interfaces
 
@@ -391,4 +391,4 @@ V. Theming in GTK
   gtk.icon-paintable.lisp              GtkIconPaintable                 GTK 4.6+
   gtk.icon-theme.lisp                  GtkIconTheme                     GTK 4.0+
 
-2022-11-16
+2023-3-18
