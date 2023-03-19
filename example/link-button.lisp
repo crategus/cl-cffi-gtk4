@@ -4,21 +4,22 @@
 
 (defun do-link-button (&optional application)
   (let* ((vbox (make-instance 'gtk:box
-                             :orientation :vertical
-                             :row-spacing 6
-                             :homogeneous t))
+                              :orientation :vertical
+                              :row-spacing 6
+                              :homogeneous t
+                              :margin-top 12
+                              :margin-bottom 12
+                              :margin-start 48
+                              :margin-end 48))
          (window (make-instance 'gtk:window
-                                :title "Example Link Button"
+                                :title "Link Buttons"
                                 :child vbox
-                                :application application
-                                :default-width 280
-                                :border-width 18)))
-
+                                :application application)))
     (gtk:box-append vbox
                     (make-instance 'gtk:label
                                    :use-markup t
                                    :label
-                                   "<b>Link Button with url</b>"))
+                                   "<b>Link Button with URL</b>"))
     (gtk:box-append vbox
                     (gtk:link-button-new "http://www.gtk.org/"))
     (gtk:box-append vbox
