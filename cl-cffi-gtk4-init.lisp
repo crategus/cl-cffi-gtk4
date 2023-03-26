@@ -30,7 +30,7 @@
   (eval-when (:compile-toplevel :load-toplevel :execute)
     (define-foreign-library gtk4
       ((:and :unix (:not :darwin))
-       (:or "libgtk-4.so.0" "libgtk-4.so"))
+       (:or "libgtk-4.so.1" "libgtk-4.so.0" "libgtk-4.so"))
       (:darwin (:or "libgtk-4.0.dylib"
                     "libgtk-4.dylib"
                     "libgtk-x11-4.0.0.dylib"
