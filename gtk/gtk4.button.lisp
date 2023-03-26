@@ -2,7 +2,7 @@
 ;;; gtk4.button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -143,12 +143,11 @@
     made round by adding the @code{.circular} style class.
 
     Button-like widgets like the @class{gtk:toggle-button},
-    @class{gtk:menu-button}, @class{gtk:volume-button},
-    @class{gtk:loock-button}, @class{gtk:color-button} or
-    @class{gtk:font-button} widgets use style classes such as the
-    @code{.toggle}, @code{.popup}, @code{.scale}, @code{.lock}, @code{.color}
-    style classes on the button node to differentiate themselves from a plain
-    @sym{gtk:button} widget.
+    @class{gtk:menu-button}, @class{gtk:volume-button}, @class{gtk:lock-button},
+    @class{gtk:color-button} or @class{gtk:font-button} widgets use style
+    classes such as the @code{.toggle}, @code{.popup}, @code{.scale},
+    @code{.lock}, @code{.color} style classes on the button node to
+    differentiate themselves from a plain @sym{gtk:button} widget.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"activate\" signal}
@@ -198,7 +197,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-child)
       "Accessor"
       (documentation 'button-child 'function)
- "@version{2023-3-18}
+ "@version{2023-3-24}
   @syntax[]{(gtk:button-child object) => child}
   @syntax[]{(setf (gtk:button-child object) child)}
   @argument[object]{a @class{gtk:button} widget}
@@ -215,6 +214,26 @@ lambda (button)    :action
   likely, you will either set the accessibility label or description for the
   button explicitly, or you will set a labelled-by or described-by relations
   from the child widget to the button.
+  @begin[Examples]{dictionary}
+    Get the text of the label from the button:
+    @begin{pre}
+(defvar button (gtk:button-new-with-label \"Save\"))
+=> BUTTON
+(gtk:label-label (gtk:button-child button))
+=> \"Save\"
+    @end{pre}
+    Create a button with an image and a label:
+    @begin{pre}
+(defvar button (gtk:button-new))
+=> BUTTON
+(defvar box (gtk:box-new :horizontal 9))
+=> BOX
+(gtk:box-append box (make-instance 'gtk:image :icon-name \"edit-clear\"))
+(gtk:box-append box (make-instance 'gtk:label :label \"Edit Clear\"))
+(setf (gtk:button-child button) box)
+=> #<GTK:BOX {1003471C73@}>
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:button}
   @see-class{gtk:widget}")
 

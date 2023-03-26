@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.menu-button.lisp
+;;; gtk4.menu-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkMenuButton
@@ -37,18 +38,26 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_menu_button_set_popover
-;;;     gtk_menu_button_get_popover
-;;;     gtk_menu_button_set_menu_model
-;;;     gtk_menu_button_get_menu_model
+;;;     gtk_menu_button_set_active
+;;;     gtk_menu_button_get_active
+;;;     gtk_menu_button_set_always_show_arrow
+;;;     gtk_menu_button_get_always_show_arrow
+;;;     gtk_menu_button_set_child
+;;;     gtk_menu_button_get_child
 ;;;     gtk_menu_button_set_direction
 ;;;     gtk_menu_button_get_direction
+;;;     gtk_menu_button_set_has_frame
+;;;     gtk_menu_button_get_has_frame
 ;;;     gtk_menu_button_set_icon_name
 ;;;     gtk_menu_button_get_icon_name
 ;;;     gtk_menu_button_set_label
 ;;;     gtk_menu_button_get_label
-;;;     gtk_menu_button_set_has_frame
-;;;     gtk_menu_button_get_has_frame
+;;;     gtk_menu_button_set_menu_model
+;;;     gtk_menu_button_get_menu_model
+;;;     gtk_menu_button_set_popover
+;;;     gtk_menu_button_get_popover
+;;;     gtk_menu_button_set_primary
+;;;     gtk_menu_button_get_primary
 ;;;     gtk_menu_button_get_use_underline
 ;;;     gtk_menu_button_set_use_underline
 ;;;
@@ -63,13 +72,21 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     active
+;;;     always-show-arrow
+;;;     chils
 ;;;     direction
 ;;;     has-frame
 ;;;     icon-name
 ;;;     label
 ;;;     menu-model
 ;;;     popover
+;;;     primary
 ;;;     use-underline
+;;;
+;;; Signals
+;;;
+;;;     activate
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -104,7 +121,7 @@
 (setf (liber:alias-for-symbol 'arrow-type)
       "GEnum"
       (liber:symbol-documentation 'arrow-type)
- "@version{#2021-12-23}
+ "@version{2023-3-24}
   @begin{short}
     Used to indicate the direction in which an arrow should point in a
     @class{gtk:menu-button} widget.
@@ -139,7 +156,19 @@
                 "GtkBuildable"
                 "GtkConstraintTarget")
    :type-initializer "gtk_menu_button_get_type")
-  ((direction
+  (#+gtk-4-10
+   (active
+    menu-button-active
+    "active" "gboolean" t t)
+   #+gtk-4-4
+   (always-show-arrow
+    menu-button-always-show-arrow
+    "always-show-arrow" "gboolean" t t)
+   #+gtk-4-6
+   (child
+    menu-button-child
+    "child" "GtkWidget" t t)
+   (direction
     menu-button-direction
     "direction" "GtkArrowType" t t)
    (has-frame
@@ -157,13 +186,17 @@
    (popover
     menu-button-popover
     "popover" "GtkPopover" t t)
+   #+gtk-4-4
+   (primary
+    menu-button-primary
+    "primary" "gboolean" t t)
    (use-underline
     menu-button-use-underline
     "use-underline" "gboolean" t t)))
 
 #+liber-documentation
 (setf (documentation 'menu-button 'type)
- "@version{#2021-12-23}
+ "@version{2023-3-24}
   @begin{short}
     The @sym{gtk:menu-button} widget is used to display a popup when clicked on.
   @end{short}
@@ -173,7 +206,7 @@
   @image[menu-button]{Figure: GtkMenuButton}
 
   The @sym{gtk:menu-button} widget can show either an icon, set with the
-  @code{icon-name} property, or a label, set with the @code{label} property. if
+  @code{icon-name} property, or a label, set with the @code{label} property. If
   neither is explicitly set, a @class{gtk:image} widget is automatically
   created, using an arrow image oriented according to \"direction\" or the
   generic \"open-menu-symbolic\" icon if the direction is not set.
@@ -190,22 +223,57 @@
   above the button instead. If the alignment would move part of the menu
   offscreen, it is \"pushed in\".
   @begin[CSS nodes]{dictionary}
+    @begin{pre}
+ menubutton
+ ╰── button.toggle
+     ╰── <content>
+          ╰── [arrow]
+    @end{pre}
     The @sym{gtk:menu-button} implementation has a single CSS node with name
-    @code{button}. To differentiate it from a plain @class{gtk:button} widget,
-    it gets the @code{.popup} style class.
+    @code{menubutton} which contains a button node with a @code{.toggle} style
+    class.
+
+    If the menu button contains an icon, it will have the @code{.image-button}
+    style class, if it contains text, it will have the @code{.text-button} style
+    class. If an arrow is visible in addition to an icon, text or a custom
+    child widget, it will also have the @code{.arrow-button} style class.
+
+    Inside the toggle button content, there is an arrow node for the indicator,
+    which will carry one of the @code{.none}, @code{.up}, @code{.down},
+    @code{.left} or @code{.right} style classes to indicate the direction that
+    the menu will appear in. The CSS is expected to provide a suitable image
+    for each of these cases using the @code{-gtk-icon-source} property.
+
+    Optionally, the @code{menubutton} node can carry the @code{.circular} style
+    class to request a round appearance.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:menu-button} implementation uses the @code{:button} role of
+    The @sym{gtk:menu-button} implementation uses the @code{:button} role of
     the @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"activate\" signal}
+      @begin{pre}
+lambda (button)    :action
+      @end{pre}
+      The signal on the @sym{gtk:menu-button} widget is an action signal and
+      emitting it causes the button to pop up its menu. Since 4.4
+      @begin[code]{table}
+        @entry[button]{The @sym{gtk:button} widget which received the signal.}
+      @end{table}
+  @end{dictionary}
+  @see-constructor{gtk:menu-button-new}
+  @see-slot{gtk:menu-button-active}
+  @see-slot{gtk:menu-button-always-show-arrow}
+  @see-slot{gtk:menu-button-child}
   @see-slot{gtk:menu-button-direction}
   @see-slot{gtk:menu-button-has-frame}
   @see-slot{gtk:menu-button-icon-name}
   @see-slot{gtk:menu-button-label}
   @see-slot{gtk:menu-button-menu-model}
   @see-slot{gtk:menu-button-popover}
+  @see-slot{gtk:menu-button-primary}
   @see-slot{gtk:menu-button-use-underline}
-  @see-class{gtk:menu}
   @see-class{gtk:image}
   @see-class{gtk:popover}
   @see-class{g:menu-model}")
@@ -214,7 +282,101 @@
 ;;; Accessor and Property Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- menu-button-direction ----------------------------------------------
+;;; --- menu-button-active -----------------------------------------------------
+
+#+(and gtk-4-10 liber-documentation)
+(setf (documentation (liber:slot-documentation "active" 'menu-button) t)
+ "The @code{active} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the menu button is active.")
+
+#+(and gtk-4-10 liber-documentation)
+(setf (liber:alias-for-function 'menu-button-active)
+      "Accessor"
+      (documentation 'menu-button-active 'function)
+ "@version{#2023-3-24}
+  @syntax[]{(gtk:menu-button-active object) => active}
+  @syntax[]{(setf (gtk:menu-button-active object) active)}
+  @argument[object]{a @class{gtk:menu-button} widget}
+  @argument[active]{a boolean whether the menu button is active}
+  @begin{short}
+    Accessor of the @slot[gtk:menu-button]{active} slot of the
+    @class{gtk:menu-button} class.
+  @end{short}
+  The @sym{gtk:menu-button-active} function returns whether the menu button is
+  active. The @sym{(setf gtk:menu-button-active)} function sets the property.
+
+  Since 4.10
+  @see-class{gtk:menu-button}")
+
+;;; --- menu-button-always-show-arrow ------------------------------------------
+
+#+(and gtk-4-4 liber-documentation)
+(setf (documentation (liber:slot-documentation "always-show-arrow"
+                                               'menu-button) t)
+ "The @code{always-show-arrow} property of type @code{:boolean} (Read / Write)
+  @br{}
+  Whether to show a dropdown arrow even when using an icon or a custom child.")
+
+#+(and gtk-4-4 liber-documentation)
+(setf (liber:alias-for-function 'menu-button-always-show-arrow)
+      "Accessor"
+      (documentation 'menu-button-always-show-arrow 'function)
+ "@version{2023-3-24}
+  @syntax[]{(gtk:menu-button-always-show-arrow object) => setting}
+  @syntax[]{(setf (gtk:menu-button-always-show-arrow object) setting)}
+  @argument[object]{a @class{gtk:menu-button} widget}
+  @argument[setting]{a boolean whether to show a dropdown arrow even when using
+    an icon or a custom child}
+  @begin{short}
+    Accessor of the @slot[gtk:menu-button]{always-show-arrow} slot of the
+    @class{gtk:menu-button} class.
+  @end{short}
+  The @sym{gtk:menu-button-always-show-arrow} function gets whether to show a
+  dropdown arrow even when using an icon. The
+  @sym{(setf gtk:menu-button-always-show-arrow)} function sets the property.
+
+  Since 4.4
+  @see-class{gtk:menu-button}")
+
+;;; --- menu-button-child ------------------------------------------------------
+
+#+(and gtk-4-6 liber-documentation)
+(setf (documentation (liber:slot-documentation "child" 'menu-button) t)
+ "The @code{child} property of type @class{gtk:widget} (Read / Write) @br{}
+  The child widget.")
+
+#+(and gtk-4-6 liber-documentation)
+(setf (liber:alias-for-function 'menu-button-child)
+      "Accessor"
+      (documentation 'menu-button-child 'function)
+ "@version{2023-3-24}
+  @syntax[]{(gtk:menu-button-child object) => child}
+  @syntax[]{(setf (gtk:menu-button-child object) child)}
+  @argument[object]{a @class{gtk:menu-button} widget}
+  @argument[child]{a @class{gtk:widget} child widget}
+  @begin{short}
+    Accessor of the @slot[gtk:menu-button]{child} slot of the
+    @class{gtk:menu-button} class.
+  @end{short}
+  The @sym{gtk:menu-button-child} function gets the child widget. The
+  @sym{(setf gtk:menu-button-child)} function sets the child widget.
+
+  Setting a child widget resets the @slot[gtk:menu-button]{label} and
+  @slot[gtk:menu-button]{icon-name} properties. If the
+  @slot[gtk:menu-button]{always-show-arrow} property is set to @em{true} and
+  the @slot[gtk:menu-button]{direction} property is not @code{:none}, a
+  dropdown arrow will be shown next to the child widget.
+
+  Since 4.6
+  @see-class{gtk:menu-button}
+  @see-class{gtk:widget}
+  @see-symbol{gtk:arrow-type}
+  @see-function{gtk:menu-button-label}
+  @see-function{gtk:menu-button-icon-name}
+  @see-function{gtk:menu-button-always-show-arrow}
+  @see-function{gtk:menu-button-direction}")
+
+;;; --- menu-button-direction --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "direction" 'menu-button) t)
@@ -228,7 +390,7 @@
 (setf (liber:alias-for-function 'menu-button-direction)
       "Accessor"
       (documentation 'menu-button-direction 'function)
- "@version{#2021-12-23}
+ "@version{2023-3-24}
   @syntax[]{(gtk:menu-button-direction object) => direction}
   @syntax[]{(setf (gtk:menu-button-direction object) direction)}
   @argument[object]{a @class{gtk:menu-button} widget}
@@ -237,12 +399,11 @@
     Accessor of the @slot[gtk:menu-button]{direction} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-
   The @sym{gtk:menu-button-direction} function returns the direction the popup
   will be pointing at when popped up. The @sym{(setf gtk:menu-button-direction)}
   function sets the direction in which the popup will be popped up, as well as
-  changing the direction of the arrow. The child will not be changed to an arrow
-  if it was customized.
+  changing the direction of the arrow. The child widget will not be changed to
+  an arrow if it was customized.
 
   If the popup does not fit in the available space in the given direction, GTK
   will its best to keep it inside the screen and fully visible.
@@ -252,7 +413,7 @@
   @see-class{gtk:menu-button}
   @see-symbol{gtk:arrow-type}")
 
-;;; --- menu-button-has-frame ----------------------------------------------
+;;; --- menu-button-has-frame --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-frame" 'menu-button) t)
@@ -264,7 +425,7 @@
 (setf (liber:alias-for-function 'menu-button-has-frame)
       "Accessor"
       (documentation 'menu-button-has-frame 'function)
- "@version{#2022-5-29}
+ "@version{2023-3-24}
   @syntax[]{(gtk:menu-button-has-frame object) => setting}
   @syntax[]{(setf (gtk:menu-button-has-frame object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
@@ -273,13 +434,12 @@
     Accessor of the @slot[gtk:menu-button]{has-frame} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-
   The @sym{gtk:menu-button-has-frame} function returns whether the button
   has a frame. The @sym{(setf gtk:menu-button-has-frame)} function sets the
   style of the button.
   @see-class{gtk:menu-button}")
 
-;;; --- menu-button-icon-name ----------------------------------------------
+;;; --- menu-button-icon-name --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-name" 'menu-button) t)
@@ -291,23 +451,22 @@
 (setf (liber:alias-for-function 'menu-button-icon-name)
       "Accessor"
       (documentation 'menu-button-icon-name 'function)
- "@version{#2022-5-29}
-  @syntax[]{(gtk:menu-button-icon-name object) => icon-name}
-  @syntax[]{(setf (gtk:menu-button-icon-name object) icon-name)}
+ "@version{2023-3-24}
+  @syntax[]{(gtk:menu-button-icon-name object) => name}
+  @syntax[]{(setf (gtk:menu-button-icon-name object) name)}
   @argument[object]{a @class{gtk:menu-button} widget}
-  @argument[icon-name]{a string with the name of the icon}
+  @argument[name]{a string with the name of the icon}
   @begin{short}
     Accessor of the @slot[gtk:menu-button]{icon-name} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-
   The @sym{gtk:menu-button-icon-name} function gets the name of the icon shown
   in the button. The @sym{(setf gtk:menu-button-icon-name)} function sets the
-  name of the icon to show inside the menu button.
+  name of the icon.
   @see-class{gtk:menu-button}
   @see-function{gtk:menu-button-label}")
 
-;;; --- menu-button-label --------------------------------------------------
+;;; --- menu-button-label ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "label" 'menu-button) t)
@@ -319,7 +478,7 @@
 (setf (liber:alias-for-function 'menu-button-label)
       "Accessor"
       (documentation 'menu-button-label 'function)
- "@version{#2022-5-29}
+ "@version{2023-3-24}
   @syntax[]{(gtk:menu-button-label object) => label}
   @syntax[]{(setf (gtk:menu-button-label object) label)}
   @argument[object]{a @class{gtk:menu-button} widget}
@@ -328,14 +487,12 @@
     Accessor of the @slot[gtk:menu-button]{label} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-
   The @sym{gtk:menu-button-label} function gets the label shown in the button.
-  The @sym{(setf gtk:menu-button-label)} function sets the label to show inside
-  the menu button.
+  The @sym{(setf gtk:menu-button-label)} function sets the label.
   @see-class{gtk:menu-button}
   @see-function{gtk:menu-button-icon-name}")
 
-;;; --- menu-button-menu-model ---------------------------------------------
+;;; --- menu-button-menu-model -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "menu-model"
@@ -351,7 +508,7 @@
 (setf (liber:alias-for-function 'menu-button-menu-model)
       "Accessor"
       (documentation 'menu-button-menu-model 'function)
- "@version{#2021-12-23}
+ "@version{2023-3-24}
   @syntax[]{(gtk:menu-button-menu-model object) => model}
   @syntax[]{(setf (gtk:menu-button-menu-model object) model)}
   @argument[object]{a @class{gtk:menu-button} widget}
@@ -361,7 +518,6 @@
     Accessor of the @slot[gtk:menu-button]{menu-model} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-
   The @sym{gtk:menu-button-menu-model} function returns the menu model used to
   generate the popup. The @sym{(setf gtk:menu-button-menu-model)} function sets
   the menu model from which the popup will be constructed, or @code{nil} to
@@ -376,9 +532,9 @@
   @see-class{gtk:menu-button}
   @see-class{g:menu-model}
   @see-class{gtk:popover}
-  @see-function{gtk:popover-new-from-model}")
+  @see-function{gtk:popover-menu-new-from-model}")
 
-;;; --- menu-button-popover ------------------------------------------------
+;;; --- menu-button-popover ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "popover" 'menu-button) t)
@@ -389,7 +545,7 @@
 (setf (liber:alias-for-function 'menu-button-popover)
       "Accessor"
       (documentation 'menu-button-popover 'function)
- "@version{#2021-12-23}
+ "@version{2023-3-24}
   @syntax[]{(gtk:menu-button-popover object) => popover}
   @syntax[]{(setf (gtk:menu-button-popover object) popover)}
   @argument[object]{a @class{gtk:menu-button} widget}
@@ -399,7 +555,6 @@
     Accessor of the @slot[gtk:menu-button]{popover} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-
   The @sym{gtk:menu-button-popover} function returns the popover that pops out
   of the button. If the button is not using a popover, this function returns
   @code{nil}. The @sym{(setf gtk:menu-button-popover)} function sets the popover
@@ -409,13 +564,42 @@
   If the @slot[gtk:menu-button]{menu-model} property is set, the menu model is
   dissociated from the menu button, and the property is set to @code{nil}.
   @see-class{gtk:menu-button}
+  @see-class{gtk:popover}
   @see-function{gtk:menu-button-menu-model}")
 
-;;; --- menu-button-use-underline ------------------------------------------
+;;; --- menu-button-primary ----------------------------------------------------
+
+#+(and gtk-4-4 liber-documentation)
+(setf (documentation (liber:slot-documentation "primary" 'menu-button) t)
+ "The @code{primary} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the menu button acts as a primary menu. Primary menus can be opened
+  using the @kbd{F10} key.")
+
+#+(and gtk-4-4 liber-documentation)
+(setf (liber:alias-for-function 'menu-button-primary)
+      "Accessor"
+      (documentation 'menu-button-primary 'function)
+ "@version{2023-3-24}
+  @syntax[]{(gtk:menu-button-primary object) => setting}
+  @syntax[]{(setf (gtk:menu-button-primary object) setting)}
+  @argument[object]{a @class{gtk:menu-button} widget}
+  @argument[setting]{a boolean whether the menu button acts as a primary menu}
+  @begin{short}
+    Accessor of the @slot[gtk:menu-button]{primary} slot of the
+    @class{gtk:menu-button} class.
+  @end{short}
+  The @sym{gtk:menu-button-primary} function returns whether the menu button
+  acts as a primary menu. The @sym{(setf gtk:menu-button-primary)} function
+  sets whether menu button acts as a primary menu. Primary menus can be opened
+  with the @kbd{F10} key.
+
+  Since 4.4
+  @see-class{gtk:menu-button}")
+
+;;; --- menu-button-use-underline ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "use-underline"
-                                               'menu-button) t)
+(setf (documentation (liber:slot-documentation "use-underline" 'menu-button) t)
  "The @code{use-underline} property of type @code{:boolean} (Read / Write) @br{}
   If set, an underline in the text indicates the next character should be used
   for the mnemonic accelerator key.")
@@ -424,7 +608,7 @@
 (setf (liber:alias-for-function 'menu-button-use-underline)
       "Accessor"
       (documentation 'menu-button-use-underline 'function)
- "@version{#2022-5-29}
+ "@version{2023-3-24}
   @syntax[]{(gtk:menu-button-use-underline object) => setting}
   @syntax[]{(setf (gtk:menu-button-use-underline object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
@@ -434,7 +618,6 @@
     Accessor of the @slot[gtk:menu-button]{use-underline} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-
   The @sym{gtk:menu-button-use-underline} function returns whether an embedded
   underline in the text indicates a mnemonic. The
   @sym{(setf gtk:menu-button-use-underline)} function sets the property.
@@ -448,7 +631,7 @@
 
 (defun menu-button-new ()
  #+liber-documentation
- "@version{#2021-12-23}
+ "@version{2023-3-24}
   @return{The new @class{gtk:menu-button} widget.}
   @begin{short}
     Creates a new menu button with downwards pointing arrow as the only child.
@@ -461,80 +644,104 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_menu_button_popup ()
-;;;
-;;; void
-;;; gtk_menu_button_popup (GtkMenuButton *menu_button);
-;;;
-;;; Pop up the menu.
-;;;
-;;; menu_button :
-;;;     a GtkMenuButton
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_menu_button_popup" menu-button-popup) :void
+ #+liber-documentation
+ "@version{#2023-3-24}
+  @argument[button]{a @class{gtk:menu-button} widget}
+  @short{Pop up the menu.}
+  @see-class{gtk:menu-button}"
+  (button (g:object menu-button)))
+
+(export 'menu-button-popup)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_menu_button_popdown ()
-;;;
-;;; void
-;;; gtk_menu_button_popdown (GtkMenuButton *menu_button);
-;;;
-;;; Dismiss the menu.
-;;;
-;;; menu_button :
-;;;     a GtkMenuButton
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_menu_button_popdown" menu-button-popdown) :void
+ #+liber-documentation
+ "@version{#2023-3-24}
+  @argument[button]{a @class{gtk:menu-button} widget}
+  @short{Dismiss the menu.}
+  @see-class{gtk:menu-button}"
+  (button (g:object menu-button)))
+
+(export 'menu-button-popdown)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkMenuButtonCreatePopupFunc ()
-;;;
-;;; void
-;;; (*GtkMenuButtonCreatePopupFunc) (GtkMenuButton *menu_button,
-;;;                                  gpointer user_data);
-;;;
-;;; User-provided callback function to create a popup for menu_button on demand.
-;;; This function is called when the popup of menu_button is shown, but none has
-;;; been provided via gtk_menu_button_set_popover() or
-;;; gtk_menu_button_set_menu_model().
-;;;
-;;; menu_button :
-;;;     the GtkMenuButton
-;;;
-;;; user_data :
-;;;     User data passed to gtk_menu_button_set_create_popup_func()
 ;;; ----------------------------------------------------------------------------
+
+(defcallback menu-button-create-popup-func :void
+    ((button (g:object menu-button))
+     (data :pointer))
+  (let ((ptr (get-stable-pointer-value data)))
+    (funcall ptr button)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'menu-button-create-popup-func)
+      "Callback"
+      (liber:symbol-documentation 'menu-button-create-popup-func)
+ "@version{#2023-3-24}
+  @begin{short}
+    User-provided callback function to create a popup for @arg{button} on
+    demand.
+  @end{short}
+  This function is called when the popup of @arg{button} is shown, but none has
+  been provided via the @fun{gtk:menu-button-popover} or
+  @fun{gtk:menu-button-menu-model} functions.
+  @begin{pre}
+lambda (button)
+  @end{pre}
+  @begin[code]{table}
+    @entry[button]{A @class{gtk:menu-button} widget.}
+  @end{table}
+  @see-class{gtk:menu-button}
+  @see-function{gtk:menu-button-popover}
+  @see-function{gtk:menu-button-menu-model}")
+
+(export 'menu-button-create-popup-func)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_menu_button_set_create_popup_func ()
-;;;
-;;; void
-;;; gtk_menu_button_set_create_popup_func (GtkMenuButton *menu_button,
-;;;                                        GtkMenuButtonCreatePopupFunc func,
-;;;                                        gpointer user_data,
-;;;                                        GDestroyNotify destroy_notify);
-;;;
-;;; Sets func to be called when a popup is about to be shown. func should use
-;;; one of
-;;;
-;;; gtk_menu_button_set_popover()
-;;; gtk_menu_button_set_menu_model()
-;;;
-;;; to set a popup for menu_button . If func is non-NULL, menu_button will
-;;; always be sensitive.
-;;;
-;;; Using this function will not reset the menu widget attached to menu_button .
-;;; Instead, this can be done manually in func .
-;;;
-;;; menu_button :
-;;;     a GtkMenuButton
-;;;
-;;; func :
-;;;     function to call when a popuop is about to be shown, but none has been
-;;;     provided via other means, or NULL to reset to default behavior.
-;;;
-;;; user_data :
-;;;     user data to pass to func .
-;;;
-;;; destroy_notify :
-;;;     destroy notify for user_data .
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gtk.menu-button.lisp ---------------------------------------
+(defcfun ("gtk_menu_button_set_create_popup_func"
+          %menu-button-set-create-popup-func) :void
+  (button (g:object menu-button))
+  (func :pointer)
+  (data :pointer)
+  (notify :pointer))
+
+(defun menu-button-set-create-popup-func (button func)
+ #+liber-documentation
+ "@version{#2023-3-24}
+  @argument[button]{a @class{gtk:menu-button} widget}
+  @argument[func]{a @symbol{gtk:menu-button-create-popup-func} callback
+    function to call when a popuop is about to be shown, but none has been
+    provided via other means, or @code{nil} to reset to default behavior}
+  @begin{short}
+    Sets @arg{func} to be called when a popup is about to be shown.
+  @end{short}
+  The @arg{func} callback function should use one of the
+  @fun{gtk:menu-button-popover} or @fun{gtk:menu-button-menu-model} functions
+  to set a popup for @arg{button}. If @arg{func} is non-@code{nil}, @arg{button}
+  will always be sensitive.
+
+  Using this function will not reset the menu widget attached to @arg{button}.
+  Instead, this can be done manually in the @arg{func} callback function.
+  @see-class{gtk:menu-button}
+  @see-symbol{gtk:menu-button-create-popup-func}
+  @see-function{gtk:menu-button-popover}
+  @see-function{gtk:menu-button-menu-model}"
+  (%menu-button-set-create-popup-func
+          button
+          (callback menu-button-create-popup-func)
+          (glib:allocate-stable-pointer func)
+          (callback glib:stable-pointer-destroy-notify)))
+
+(export 'menu-button-set-create-popup-func)
+
+;;; --- End of file gtk4.menu-button.lisp --------------------------------------

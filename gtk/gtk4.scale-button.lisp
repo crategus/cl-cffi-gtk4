@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.scale-button.lisp
+;;; gtk4.scale-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkScaleButton
@@ -37,11 +37,12 @@
 ;;;
 ;;; Accessors
 ;;;
+;;;     gtk_scale_button_get_active                        Since 4.10
+;;;     gtk_scale_button_get_adjustment
 ;;;     gtk_scale_button_set_adjustment
 ;;;     gtk_scale_button_set_icons
-;;;     gtk_scale_button_set_value
-;;;     gtk_scale_button_get_adjustment
 ;;;     gtk_scale_button_get_value
+;;;     gtk_scale_button_set_value
 ;;;
 ;;; Functions
 ;;;
@@ -52,6 +53,7 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     active                                             Since 4.10
 ;;;     adjustment
 ;;;     icons
 ;;;     value
@@ -85,14 +87,18 @@
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GtkScaleButton" scale-button
-  (:superclass button
+  (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
                 "GtkBuildable"
                 "GtkConstraintTarget"
                 "GtkOrientable")
    :type-initializer "gtk_scale_button_get_type")
-  ((adjustment
+  (#+gtk-4-10
+   (active
+    scale-button-active
+    "active" "gboolean" t nil)
+   (adjustment
     scale-button-adjustment
     "adjustment" "GtkAdjustment" t t)
    (icons
@@ -104,7 +110,7 @@
 
 #+liber-documentation
 (setf (documentation 'scale-button 'type)
- "@version{#2021-12-23}
+ "@version{2023-3-25}
   @begin{short}
     The @sym{gtk:scale-button} widget provides a button which pops up a scale
     widget.
@@ -114,8 +120,8 @@
   tailored for this use case.
   @begin[CSS nodes]{dictionary}
     The @sym{gtk:scale-button} implementation has a single CSS node with name
-    @code{button}. To differentiate it from a plain @class{gtk:button} widget,
-    it gets the @code{.scale} style class.
+    @code{scalebutton}. To differentiate it from a plain @class{gtk:button}
+    widget, it gets the @code{.scale} style class.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"popdown\" signal}
@@ -150,6 +156,7 @@ lambda (button value)    :run-last
         @entry[value]{A double float with the new value.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:scale-button-new}
   @see-slot{gtk:scale-button-adjustment}
   @see-slot{gtk:scale-button-icons}
   @see-slot{gtk:scale-button-value}
@@ -159,11 +166,36 @@ lambda (button value)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- scale-button-adjustment --------------------------------------------
+;;; --- scale-button-active ----------------------------------------------------
+
+#+(and gtk-4-10 liber-documentation)
+(setf (documentation (liber:slot-documentation "active" 'scale-button) t)
+ "The @code{active} property of type @code{:boolean} (Read / Write) @br{}
+  If the scale button should be pressed in.")
+
+#+(and gtk-4-10 liber-documentation)
+(setf (liber:alias-for-function 'scale-button-active)
+      "Accessor"
+      (documentation 'scale-button-active 'function)
+ "@version{#2023-3-25}
+  @syntax[]{(gtk:scale-button-active object object) => active}
+  @argument[object]{a @class{gtk:scale-button} widget}
+  @argument[active]{a boolean whether the scale button should be pressed in}
+  @begin{short}
+    Accessor of the @slot[gtk:scale-button]{active} slot of the
+    @class{gtk:scale-button} class.
+  @end{short}
+  The @sym{gtk:scal-button-active} function queries a scale button and returns
+  its current state. Returns @em{true} if the scale button is pressed in and
+  @em{false} if it is raised.
+
+  Since: 4.10
+  @see-class{gtk:scale-button}")
+
+;;; --- scale-button-adjustment ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "adjustment"
-                                               'scale-button) t)
+(setf (documentation (liber:slot-documentation "adjustment" 'scale-button) t)
  "The @code{adjustment} property of type @class{gtk:adjustment} (Read / Write)
   @br{}
   The adjustment that contains the current value of the scale button.")
@@ -172,7 +204,7 @@ lambda (button value)    :run-last
 (setf (liber:alias-for-function 'scale-button-adjustment)
       "Accessor"
       (documentation 'scale-button-adjustment 'function)
- "@version{#2021-12-23}
+ "@version{#2023-3-25}
   @syntax[]{(gtk:scale-button-adjustment object object) => adjustment}
   @syntax[]{(setf (gtk:scale-button-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:scale-button} widget}
@@ -181,18 +213,17 @@ lambda (button value)    :run-last
     Accessor of the @slot[gtk:scale-button]{adjustment} slot of the
     @class{gtk:scale-button} class.
   @end{short}
-
   The @sym{gtk:scale-button-adjustment} function gets the adjustment associated
   with the scale button. The @sym{(setf gtk:scale-button-adjustment)} function
   sets the adjustment.
   @see-class{gtk:scale-button}
   @see-class{gtk:adjustment}")
 
-;;; --- scale-button-icons -------------------------------------------------
+;;; --- scale-button-icons -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icons" 'scale-button) t)
- "The @code{icons} property of type @type{glib:strv-t} (Read / Write) @br{}
+ "The @code{icons} property of type @type{g:strv-t} (Read / Write) @br{}
   The names of the icons to be used by the scale button. The first item in
   the list will be used in the button when the current value is the lowest
   value, the second item for the highest value. All the subsequent icons will
@@ -207,7 +238,7 @@ lambda (button value)    :run-last
 (setf (liber:alias-for-function 'scale-button-icons)
       "Accessor"
       (documentation 'scale-button-icons 'function)
- "@version{#2021-12-23}
+ "@version{#2023-3-25}
   @syntax[]{(gtk:scale-button-icons object object) => icons}
   @syntax[]{(setf (gtk:scale-button-icons object) icons)}
   @argument[object]{a @class{gtk:scale-button} widget}
@@ -216,10 +247,8 @@ lambda (button value)    :run-last
     Accessor of the @slot[gtk:scale-button]{icons} slot of the
     @class{gtk:scale-button} class.
   @end{short}
-
-  The @sym{(setf gtk:scale-button-icons} function sets the icons to be used by
-  the scale button. The @sym{(setf gtk:scale-button-icons)} function sets the
-  icons.
+  The @sym{(setf gtk:scale-button-icons)} function sets the icons to be used by
+  the scale button.
 
   The names of the icons to be used by the scale button. The first item in
   the list will be used in the button when the current value is the lowest
@@ -232,7 +261,7 @@ lambda (button value)    :run-last
   reflects the current value of the scale better for the users.
   @see-class{gtk:scale-button}")
 
-;;; --- scale-button-value -------------------------------------------------
+;;; --- scale-button-value -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "value" 'scale-button) t)
@@ -244,7 +273,7 @@ lambda (button value)    :run-last
 (setf (liber:alias-for-function 'scale-button-value)
       "Accessor"
       (documentation 'scale-button-value 'function)
- "@version{#2021-12-23}
+ "@version{#2023-3-25}
   @syntax[]{(gtk:scale-button-value object) => value}
   @syntax[]{(setf (gtk:scale-button-value object) value)}
   @argument[object]{a @class{gtk:scale-button} widget}
@@ -253,7 +282,6 @@ lambda (button value)    :run-last
     Accessor of the @slot[gtk:scale-button]{value} slot of the
     @class{gtk:scale-button} class.
   @end{short}
-
   The @sym{gtk:scale-button-value} function gets the current value of the scale
   button. The @sym{(setf gtk:scale-button-value)} function sets the current
   value.
@@ -269,14 +297,13 @@ lambda (button value)    :run-last
 
 (declaim (inline scale-button-new))
 
-(defun scale-button-new (size min max step icons)
+(defun scale-button-new (min max step icons)
  #+liber-documentation
- "@version{#2021-12-23}
-  @argument[size]{a value of the @symbol{gtk:icon-size} enumeration}
+ "@version{#2023-3-25}
   @argument[min]{a double float with the minimum value of the scale}
   @argument[max]{a double float with the maximum value of the scale}
-  @argument[step]{a double float with the stepping of the value when a
-    scroll-wheel event, or up/down arrow event occurs}
+  @argument[step]{a double float with the stepping of the value when a scroll
+    wheel event, or up/down arrow event occurs}
   @argument[icons]{a list of strings with the icon names, or @code{nil} if you
     want to set the list later with the @fun{gtk:scale-button-icons} function}
   @return{A new @class{gtk:scale-button} widget.}
@@ -285,10 +312,8 @@ lambda (button value)    :run-last
     a stepping of @arg{step}.
   @end{short}
   @see-class{gtk:scale-button}
-  @see-symbol{gtk:icon-size}
   @see-function{gtk:scale-button-icons}"
   (let ((button (make-instance 'scale-button
-                               :size size
                                :adjustment
                                (make-instance 'adjustment
                                               :value min
@@ -307,10 +332,9 @@ lambda (button value)    :run-last
 ;;; gtk_scale_button_get_popup () -> scale-button-popup
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scale_button_get_popup" scale-button-popup)
-    (g:object widget)
+(defcfun ("gtk_scale_button_get_popup" scale-button-popup) (g:object widget)
  #+liber-documentation
- "@version{#2021-12-23}
+ "@version{#2023-3-25}
   @argument[button]{a @class{gtk:scale-button} widget}
   @return{The @class{gtk:widget} popup of the scale button.}
   @short{Retrieves the popup of the scale button.}
@@ -327,12 +351,14 @@ lambda (button value)    :run-last
 (defcfun ("gtk_scale_button_get_plus_button" scale-button-plus-button)
     (g:object widget)
  #+liber-documentation
- "@version{#2021-12-23}
+ "@version{#2023-3-25}
   @argument[button]{a @class{gtk:scale-button} widget}
-  @return{The @class{gtk:widget} plus button of the scale button.}
+  @return{The @class{gtk:widget} widget for the plus button of the scale
+    button.}
   @short{Retrieves the plus button of the scale button.}
   @see-class{gtk:scale-button}
-  @see-function{gtk:sacle-button-minus-button}"
+  @see-class{gtk:widget}
+  @see-function{gtk:scale-button-minus-button}"
   (button (g:object scale-button)))
 
 (export 'scale-button-plus-button)
@@ -344,14 +370,16 @@ lambda (button value)    :run-last
 (defcfun ("gtk_scale_button_get_minus_button" scale-button-minus-button)
     (g:object widget)
  #+liber-documentation
- "@version{#2021-12-23}
+ "@version{#2023-3-25}
   @argument[button]{a @class{gtk:scale-button} widget}
-  @return{The @class{gtk:widget} minus button of the scale button.}
+  @return{The @class{gtk:widget} widget for the minus button of the scale
+    button.}
   @short{Retrieves the minus button of the scale button.}
   @see-class{gtk:scale-button}
+  @see-class{gtk:widget}
   @see-function{gtk:scale-button-plus-button}"
   (button (g:object scale-button)))
 
 (export 'scale-button-minus-button)
 
-;;; --- End of file gtk.scale-button.lisp --------------------------------------
+;;; --- End of file gtk4.scale-button.lisp -------------------------------------

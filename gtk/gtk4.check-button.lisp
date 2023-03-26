@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.check-button.lisp
+;;; gtk4.check-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkCheckButton
@@ -120,7 +120,7 @@
 
 #+liber-documentation
 (setf (documentation 'check-button 'type)
- "@version{#2022-9-8}
+ "@version{2023-3-20}
   @begin{short}
     A @sym{gtk:check-button} widget places a label next to an indicator.
   @end{short}
@@ -136,8 +136,8 @@
   @subheading{Inconsistent state}
   In addition to \"on\" and \"off\", check buttons can be an \"in between\"
   state that is neither on nor off. This can be used e.g. when the user has
-  selected a range of elements (such as some text or spreadsheet cells) that are
-  affected by a check button, and the current values in that range are
+  selected a range of elements, such as some text or spreadsheet cells, that
+  are affected by a check button, and the current values in that range are
   inconsistent. To set a check button to inconsistent state, use the
   @fun{gtk:check-button-inconsistent} function.
 
@@ -235,6 +235,9 @@ lambda (checkbutton)    :run-first
           the signal.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:check-button-new}
+  @see-constructor{gtk:check-button-new-with-label}
+  @see-constructor{gtk:check-button-new-with-mnemonic}
   @see-slot{gtk:check-button-active}
   @see-slot{gtk:check-button-group}
   @see-slot{gtk:check-button-inconsistent}
@@ -247,7 +250,7 @@ lambda (checkbutton)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- check-button-active ------------------------------------------------
+;;; --- check-button-active ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "active" 'check-button) t)
@@ -259,7 +262,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-active)
       "Accessor"
       (documentation 'check-button-active 'function)
- "@version{#2022-9-8}
+ "@version{2023-3-20}
   @syntax[]{(gtk:check-button-active object) => active}
   @syntax[]{(setf (gtk:check-button-active object) active)}
   @argument[object]{a @class{gtk:check-button} widget}
@@ -272,7 +275,7 @@ lambda (checkbutton)    :run-first
   state to both the check button and the indicator CSS node.
   @see-class{gtk:check-button}")
 
-;;; --- check-button-child -------------------------------------------------
+;;; --- check-button-child -----------------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "child" 'check-button) t)
@@ -283,7 +286,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-child)
       "Accessor"
       (documentation 'check-button-child 'function)
- "@version{#2022-9-8}
+ "@version{#2023-3-20}
   @syntax[]{(gtk:check-button-child object) => child}
   @syntax[]{(setf (gtk:check-button-child object) child)}
   @argument[object]{a @class{gtk:check-button} widget}
@@ -306,7 +309,7 @@ lambda (checkbutton)    :run-first
   @see-class{gtk:check-button}
   @see-function{gtk:check-button-label}")
 
-;;; --- check-button-group -------------------------------------------------
+;;; --- check-button-group -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "group" 'check-button) t)
@@ -317,7 +320,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-group)
       "Accessor"
       (documentation 'check-button-group 'function)
- "@version{#2022-9-8}
+ "@version{2023-3-20}
   @syntax[]{(setf (gtk:check-button-group object) group)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[group]{a @class{gtk:check-button} widget}
@@ -338,11 +341,10 @@ lambda (checkbutton)    :run-first
   @see-class{gtk:check-button}
   @see-function{gtk:actionable}")
 
-;;; --- check-button-inconsistent ------------------------------------------
+;;; --- check-button-inconsistent ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "inconsistent"
-                                               'check-button) t)
+(setf (documentation (liber:slot-documentation "inconsistent" 'check-button) t)
  "The @code{inconsistent} property of type @code{:boolean} (Read / Write) @br{}
   If the check button is in an \"in between\" state. @br{}
   Default value: @em{false}")
@@ -351,7 +353,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-inconsistent)
       "Accessor"
       (documentation 'check-button-inconsistent 'function)
- "@version{#2022-9-8}
+ "@version{2023-3-20}
   @syntax[]{(gtk:check-button-inconsistent object) => inconsistent}
   @syntax[]{(setf (gtk:check-button-inconsistent object) inconsistent)}
   @argument[object]{a @class{gtk:check-button} widget}
@@ -361,16 +363,16 @@ lambda (checkbutton)    :run-first
     Accessor of the @slot[gtk:check-button]{inconsistent} slot of the
     @class{gtk:check-button} class.
   @end{short}
-  If the user has selected a range of elements (such as some text or spreadsheet
-  cells) that are affected by a check button, and the current values in that
-  range are inconsistent, you may want to display the toggle in an
-  \"in between\" state. Normally you would turn off the inconsistent state again
-  if the user checks the check button. This has to be done manually,
+  If the user has selected a range of elements, such as some text or
+  spreadsheet cells, that are affected by a check button, and the current
+  values in that range are inconsistent, you may want to display the toggle in
+  an \"in between\" state. Normally you would turn off the inconsistent state
+  again if the user checks the check button. This has to be done manually,
   the @slot[gtk:check-button]{inconsistent} property only affects visual
   appearance, not the semantics of the button.
   @see-class{gtk:check-button}")
 
-;;; --- check-button-label -------------------------------------------------
+;;; --- check-button-label -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "label" 'check-button) t)
@@ -383,7 +385,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-label)
       "Accessor"
       (documentation 'check-button-label 'function)
- "@version{#2022-9-8}
+ "@version{2023-3-20}
   @syntax[]{(gtk:check-button-label object) => label}
   @syntax[]{(setf (gtk:check-button-label object) label)}
   @argument[object]{a @class{gtk:check-button} widget}
@@ -394,11 +396,10 @@ lambda (checkbutton)    :run-first
   @end{short}
   @see-class{gtk:check-button}")
 
-;;; --- check-button-use-underline -----------------------------------------
+;;; --- check-button-use-underline ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "use-underline"
-                                               'check-button) t)
+(setf (documentation (liber:slot-documentation "use-underline" 'check-button) t)
  "The @code{use-underline} property of type @code{:boolean} (Read / Write) @br{}
   If set, an underline in the text indicates the next character should be used
   for the mnemonic accelerator key. @br{}
@@ -408,7 +409,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-use-underline)
       "Accessor"
       (documentation 'check-button-use-underline 'function)
- "@version{#2022-9-8}
+ "@version{2023-3-20}
   @syntax[]{(gtk:check-button-use-underline object) => setting}
   @syntax[]{(setf (gtk:check-button-use-underline object) setting)}
   @argument[object]{a @class{gtk:check-button} widget}
@@ -428,7 +429,7 @@ lambda (checkbutton)    :run-first
 
 (defun check-button-new ()
  #+liber-documentation
- "@version{#2022-9-8}
+ "@version{2023-3-20}
   @return{A @class{gtk:check-button} widget.}
   @short{Creates a new check button.}
   @see-class{gtk:check-button}
@@ -446,7 +447,7 @@ lambda (checkbutton)    :run-first
 
 (defun check-button-new-with-label (label)
  #+liber-documentation
- "@version{#2022-9-8}
+ "@version{2023-3-20}
   @argument[label]{a string with the text for the check button}
   @return{A @class{gtk:check-button} widget.}
   @begin{short}
@@ -466,13 +467,11 @@ lambda (checkbutton)    :run-first
 ;;; gtk_check_button_new_with_mnemonic
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Rewrite the implementation in terms of the function make-instance
+(declaim (inline check-button-new-with-mnemonic))
 
-(defcfun ("gtk_check_button_new_with_mnemonic"
-           check-button-new-with-mnemonic)
-    (g:object check-button)
+(defun check-button-new-with-mnemonic (label)
 #+liber-documentation
- "@version{#2022-9-8}
+ "@version{2023-3-20}
   @argument[label]{a string with the text of the button, with an underscore in
     front of the mnemonic character}
   @return{A @class{gtk:check-button} widget.}
@@ -485,8 +484,10 @@ lambda (checkbutton)    :run-first
   @see-function{gtk:check-button-new}
   @see-function{gtk:check-button-new-with-label}
   @see-function{gtk:label-new-with-mnemonic}"
-  (label :string))
+  (make-instance 'check-button
+                 :label label
+                 :use-underline t))
 
 (export 'check-button-new-with-mnemonic)
 
-;;; --- End of file gtk.check-button.lisp --------------------------------------
+;;; --- End of file gtk4.check-button.lisp -------------------------------------
