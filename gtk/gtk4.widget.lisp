@@ -210,9 +210,9 @@
 ;;;     gtk_widget_add_css_class
 ;;;     gtk_widget_remove_css_class
 ;;;     gtk_widget_has_css_class
-;;;     gtk_widget_get_style_context
 ;;;     gtk_widget_class_get_css_name
 ;;;     gtk_widget_class_set_css_name
+;;;     gtk_widget_get_style_context
 ;;;     gtk_requisition_new
 ;;;     gtk_requisition_copy
 ;;;     gtk_requisition_free
@@ -1022,18 +1022,17 @@ lambda (widget)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "css-classes" 'widget) t)
- "The @code{css-classes} property of type @code{glib:strv-t} (Read / Write)
-  @br{}
+ "The @code{css-classes} property of type @code{g:strv-t} (Read / Write) @br{}
   A list of CSS classes applied to the widget.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'widget-css-classes)
       "Accessor"
       (documentation 'widget-css-classes 'function)
- "@version{#2022-1-16}
+ "@version{2023-3-26}
   @syntax[]{(gtk:widget-css-classes object) => classes}
   @syntax[]{(setf (gtk:widget-css-classes object) classes)}
-  @argument[object]{a @class{gtk:widget} object}
+  @argument[object]{a @class{gtk:widget} widget}
   @argument[classes]{a list of strings with the CSS classes applied to the
     widget}
   @begin{short}
@@ -1059,7 +1058,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-css-name)
       "Accessor"
       (documentation 'widget-css-name 'function)
- "@version{#2022-1-16}
+ "@version{2023-3-26}
   @syntax[]{(gtk:widget-css-name object) => name}
   @syntax[]{(setf (gtk:widget-css-classes object) name)}
   @argument[object]{a @class{gtk:widget} object}
@@ -4604,10 +4603,10 @@ lambda (widget)    :run-last
 
 (defcfun ("gtk_widget_add_css_class" widget-add-css-class) :void
  #+liber-documentation
- "@version{#2022-1-21}
+ "@version{2023-3-26}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[class]{a string with the style class to add, without the leading
-    '.' used for notation of style classes}
+    \".\" used for notation of style classes}
   @begin{short}
     Adds @arg{class} to the widget.
   @end{short}
@@ -4621,41 +4620,86 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_remove_css_class ()
-;;;
-;;; void
-;;; gtk_widget_remove_css_class (GtkWidget *widget,
-;;;                              const char *css_class);
-;;;
-;;; Removes css_class from widget . After this, the style of widget will stop
-;;; matching for css_class .
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; css_class :
-;;;     The style class to remove from widget , without the leading '.' used for
-;;;     notation of style classes
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_widget_remove_css_class" widget-remove-css-class) :void
+ #+liber-documentation
+ "@version{2023-3-26}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[class]{a string with the style class to remove from @arg{widget},
+    without the leading \".\" used for notation of style classes}
+  @begin{short}
+    Removes @arg{class} from @arg{widget}.
+  @end{short}
+  After this, the style of the widget will stop matching for @arg{class}.
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-add-css-class}"
+  (widget (g:object widget))
+  (class :string))
+
+(export 'widget-remove-css-class)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_has_css_class ()
-;;;
-;;; gboolean
-;;; gtk_widget_has_css_class (GtkWidget *widget,
-;;;                           const char *css_class);
-;;;
-;;; Returns whether css_class is currently applied to widget .
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; css_class :
-;;;     A CSS style class, without the leading '.' used for notation of style
-;;;     classes
-;;;
-;;; Returns :
-;;;      TRUE if css_class is currently applied to widget , FALSE otherwise.
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_widget_has_css_class" widget-has-css-class) :boolean
+ #+liber-documentation
+ "@version{2023-3-26}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[class]{a string with the style class, without the leading \".\"
+    used for notation of style classes}
+  @return{@em{True} if @arg{class} is currently applied to @arg{widget},
+    @em{false} otherwise.}
+  @short{Returns whether @arg{class} is currently applied to @arg{widget}.}
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-add-css-class}"
+  (widget (g:object widget))
+  (class :string))
+
+(export 'widget-has-css-class)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_widget_class_get_css_name
+;;; gtk_widget_class_set_css_name -> widget-class-css-name
+;;; ----------------------------------------------------------------------------
+
+(defun (setf widget-class-css-name) (name gtype)
+  (let ((class (g:type-class-ref gtype)))
+    (unwind-protect
+      (cffi:foreign-funcall "gtk_widget_class_set_css_name"
+                            :pointer class
+                            :string name
+                            :void)
+      (g:type-class-unref class))
+    name))
+
+(defcfun ("gtk_widget_class_get_css_name" %widget-class-css-name) :string
+  (class :pointer))
+
+(defun widget-class-css-name (gtype)
+  #+liber-documentation
+ "@version{2023-3-26}
+  @syntax[]{(gtk:widget-class-css-name gtype) => name}
+  @syntax[]{(setf (gtk:widget-class-css-name gtype) name)}
+  @argument[gtype]{a string with the widget class to set the CSS name on}
+  @argument[name]{a string with the CSS name}
+  @begin{short}
+    Accessor of the CSS name of the widget class.
+  @end{short}
+  The @sym{gtk:widget-class-css-name} function gets the name used by this class
+  for matching in CSS code. The @sym{(setf gtk:widget-class-css-name)} function
+  sets the name to be used for CSS matching of widgets.
+
+  If this function is not called for a given class, the name of the parent
+  class is used.
+  @see-class{gtk:widget}"
+  (let ((class (g:type-class-ref gtype)))
+    (unwind-protect
+      (%widget-class-css-name class)
+      (g:type-class-unref class))))
+
+(export 'widget-class-css-name)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_style_context -> widget-style-context
@@ -4664,7 +4708,7 @@ lambda (widget)    :run-last
 (defcfun ("gtk_widget_get_style_context" widget-style-context)
     (g:object style-context)
  #+liber-documentation
- "@version{2022-11-25}
+ "@version{2023-3-26}
   @argument[widget]{a @class{gtk:widget} object}
   @return{A @class{gtk:style-context} object.}
   @begin{short}
@@ -4677,47 +4721,41 @@ lambda (widget)    :run-last
 (export 'widget-style-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_get_css_name
-;;; gtk_widget_class_set_css_name -> widget-class-css-name
+;;; widget-apply-provider                                  Lisp extension
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf widget-class-css-name) (name gtype)
-  (let ((class (gobject:type-class-ref gtype)))
-    (unwind-protect
-      (foreign-funcall "gtk_widget_class_set_css_name"
-                       :pointer class
-                       :string name
-                       :void)
-      (gobject:type-class-unref class))
-    name))
-
-(defcfun ("gtk_widget_class_get_css_name" %widget-class-css-name) :string
-  (class :pointer))
-
-(defun widget-class-css-name (gtype)
-  #+liber-documentation
- "@version{#2021-9-20}
-  @syntax[]{(gtk:widget-class-css-name gtype) => name}
-  @syntax[]{(setf (gtk:widget-class-csss-name gtype) name)}
-  @argument[gtype]{a string with the widget class to set the CSS name on}
-  @argument[name]{a string with the CSS name}
+(defun widget-apply-provider (widget provider
+                              &optional (priority +gtk-priority-application+))
+ #+liber-documentation
+ "@version{2023-3-26}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[provider]{a @class{gtk:style-provider} object}
+  @argument[priority]{an optional unsigned integer with the priority of the
+    style provider}
   @begin{short}
-    Accessor of the CSS name of the widget class.
+    Adds a style provider to the style context of @arg{widget} and all child
+    widgets of @arg{widget}, to be used in style construction.
   @end{short}
 
-  The @sym{gtk:widget-class-css-name} function gets the name used by this class
-  for matching in CSS code. The @sym{(setf gtk:widget-class-css-name)} function
-  sets the name to be used for CSS matching of widgets.
+  The lower the priority of the style provider is, the earlier it will be used
+  in the style construction. Typically this will be in the range between the
+  @var{+gtk-priority-fallback+} and @var{+gtk-priority-user+} priorities. The
+  default value is @var{+gtk-priority-application+}. See the
+  @fun{gtk:style-context-add-provider} documentation for more information.
+  @begin[Note]{dictionary}
+    This function is a Lisp extension that provides a convenient way to apply a
+    provider to the widget and its children.
+  @end{dictionary}
+  @see-class{gtk:widget}
+  @see-function{gtk:style-context-add-provider}"
+  (let ((context (widget-style-context widget)))
+    (style-context-add-provider context provider priority)
+    (do ((child (widget-first-child widget)
+                (widget-next-sibling child)))
+         ((not child))
+      (widget-apply-provider child provider priority))))
 
-  If this function is not called for a given class, the name of the parent
-  class is used.
-  @see-class{gtk:widget}"
-  (let ((class (gobject:type-class-ref gtype)))
-    (unwind-protect
-      (%widget-class-css-name class)
-      (gobject:type-class-unref class))))
-
-(export 'widget-class-css-name)
+(export 'widget-apply-provider)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_request_mode -> widget-request-mode
