@@ -7,7 +7,7 @@
 
 ;;;     GtkLockButton
 
-(test lock-button-class
+(test gtk-lock-button-class
   ;; Type check
   (is (g:type-is-object "GtkLockButton"))
   ;; Check the registered name

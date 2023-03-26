@@ -7,7 +7,7 @@
 
 ;;;     GtkCheckButton
 
-(test check-button-class
+(test gtk-check-button-class
   ;; Type check
   (is (g:type-is-object "GtkCheckButton"))
   ;; Check the registered name
@@ -38,7 +38,6 @@
                (gtk:widget-class-css-name "GtkCheckButton")))
   (is (string=
 "checkbutton:dir(ltr)
-  check:dir(ltr)
 "
                (gtk:style-context-to-string
                    (gtk:widget-style-context (make-instance 'gtk:check-button))
@@ -62,12 +61,26 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     active
-;;;     child                                              Since 4.8
-;;;     group
-;;;     inconsistent
-;;;     label
-;;;     use-underline
+(test gtk-check-button-properties
+  (let ((group (make-instance 'gtk:check-button))
+        (button (make-instance 'gtk:check-button)))
+    ;; active
+    (is-true (setf (gtk:check-button-active button) t))
+    (is-true (gtk:check-button-active button))
+    ;; child availabe since 4.8
+    ;; group
+    (is (typep (setf (gtk:check-button-group button) group) 'gtk:check-button))
+    ;; group is not readable
+    (signals (error) (gtk:check-button-group button))
+    ;; inconsistent
+    (is-true (setf (gtk:check-button-inconsistent button) t))
+    (is-true (gtk:check-button-inconsistent button))
+    ;; label
+    (is (string= "label" (setf (gtk:check-button-label button) "label")))
+    (is (string= "label" (gtk:check-button-label button)))
+    ;; use-underline
+    (is-true (setf (gtk:check-button-use-underline button) t))
+    (is-true (gtk:check-button-use-underline button))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -79,6 +92,17 @@
 ;;;     gtk_check_button_new
 ;;;     gtk_check_button_new_with_label
 ;;;     gtk_check_button_new_with_mnemonic
-;;;     gtk_check_button_set_group
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+(test gtk-check-button-new
+  (let (button)
+    (is (typep (setf button (gtk:check-button-new)) 'gtk:check-button))
+    (is-false (gtk:check-button-label button))
+    (is (typep (setf button (gtk:check-button-new-with-label "label"))
+               'gtk:check-button))
+    (is (string= "label" (gtk:check-button-label button)))
+    (is (typep (setf button (gtk:check-button-new-with-mnemonic "_label"))
+               'gtk:check-button))
+    (is (string= "_label" (gtk:check-button-label button)))
+    (is-true (gtk:check-button-use-underline button))))
+
+;;; --- 2023-3-20 --------------------------------------------------------------

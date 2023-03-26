@@ -317,12 +317,58 @@
 ;;;     gtk_widget_insert_before
 ;;;     gtk_widget_insert_after
 ;;;     gtk_widget_should_layout
+
 ;;;     gtk_widget_add_css_class
 ;;;     gtk_widget_remove_css_class
 ;;;     gtk_widget_has_css_class
-;;;     gtk_widget_get_style_context
+
+(test gtk-widget-add/remove/has-css-class
+  (let ((button (gtk:button-new)))
+    (is (equal '() (gtk:widget-css-classes button)))
+    ;; Add a first class
+    (is-false (gtk:widget-add-css-class button "circular"))
+    (is-true (gtk:widget-has-css-class button "circular"))
+    (is (equal '("circular") (gtk:widget-css-classes button)))
+    ;; Add a second class
+    (is-false (gtk:widget-add-css-class button "text-button"))
+    (is-true (gtk:widget-has-css-class button "text-button"))
+    (is (equal '("text-button" "circular") (gtk:widget-css-classes button)))
+    ;; Remove class "circular"
+    (is-false (gtk:widget-remove-css-class button "circular"))
+    (is-false (gtk:widget-has-css-class button "circular"))
+    (is (equal '("text-button") (gtk:widget-css-classes button)))))
+
 ;;;     gtk_widget_class_get_css_name
 ;;;     gtk_widget_class_set_css_name
+
+(test gtk-widget-class-css-name.1
+  (let ((button (gtk:button-new)))
+    (is (string= "button" (gtk:widget-css-name button)))
+    (is (string= "button" (gtk:widget-class-css-name "GtkButton")))))
+
+(test gtk-widget-class-css-name.2
+  (let ((button (make-instance 'gtk:button
+                               :css-name "mybutton")))
+    (is (string= "mybutton" (gtk:widget-css-name button)))
+    (is (string= "button" (gtk:widget-class-css-name "GtkButton")))))
+
+(test gtk-widget-class-css-name.3
+  (let ((save (gtk:widget-class-css-name "GtkButton")))
+    (unwind-protect
+      (progn
+        ;; Change the CSS name for GtkButton
+        (is (string= "mybutton"
+                     (setf (gtk:widget-class-css-name "GtkButton") "mybutton")))
+        (is (string= "mybutton" (gtk:widget-class-css-name "GtkButton")))
+        (let ((button (gtk:button-new)))
+          (is (string= "mybutton" (gtk:widget-css-name button)))
+          (is (string= "mybutton" (gtk:widget-class-css-name "GtkButton")))))
+      ;; Restore the CSS name for GtkButton
+      (is (string= "button"
+                   (setf (gtk:widget-class-css-name "GtkButton") save))))))
+
+;;;     gtk_widget_get_style_context
+
 ;;;     gtk_requisition_new
 ;;;     gtk_requisition_copy
 ;;;     gtk_requisition_free

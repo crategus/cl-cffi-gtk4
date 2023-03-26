@@ -53,10 +53,23 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     use-symbolic
+(test gtk-volume-button-properties
+  (let ((button (make-instance 'gtk:volume-button)))
+    (is-true (setf (gtk:volume-button-use-symbolic button) t))
+    (is-true (gtk:volume-button-use-symbolic button))
+    (is-false (setf (gtk:volume-button-use-symbolic button) nil))
+    (is-false (gtk:volume-button-use-symbolic button))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_volume_button_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+(test gtk-volume-button-new
+  (let ((button (gtk:volume-button-new)))
+    (is (typep button 'gtk:volume-button))
+    (is (=  0.0d0 (gtk:adjustment-lower (gtk:scale-button-adjustment button))))
+    (is (=  1.0d0 (gtk:adjustment-upper (gtk:scale-button-adjustment button))))
+    (is (= 0.02d0 (gtk:adjustment-step-increment
+                      (gtk:scale-button-adjustment button))))))
+
+;;; --- 2023-3-26 --------------------------------------------------------------

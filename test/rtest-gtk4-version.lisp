@@ -29,17 +29,8 @@
 (test micro-version
   (is (<= 0 (gtk:micro-version))))
 
-;;;     gtk_get_binary_age
-
-#+nil
-(test binary-age
-  (is (<= 606 (gtk:binary-age))))
-
-;;;     gtk_get_interface_age
-
-#+nil
-(test interface-age
-  (is (<= 6 (gtk:interface-age))))
+;;;     gtk_get_binary_age                                 not implemented
+;;;     gtk_get_interface_age                              not implemented
 
 ;;;     gtk_check_version
 
@@ -48,4 +39,4 @@
                (gtk:check-version 5 0 0)))
   (is-false (gtk:check-version 4 0 0)))
 
-;;; 2022-11-11
+;;; --- 2023-3-24 --------------------------------------------------------------

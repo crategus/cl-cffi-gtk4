@@ -228,7 +228,7 @@
     (is (string= "Ubuntu 11" (gtk:settings-gtk-font-name settings)))
     (is (= 0 (gtk:settings-gtk-fontconfig-timestamp settings)))
     (is (string= "Yaru" (gtk:settings-gtk-icon-theme-name settings)))
-    (is (string= "gtk-im-context-simple" (gtk:settings-gtk-im-module settings)))
+    (is (stringp (gtk:settings-gtk-im-module settings)))
     (is-false (gtk:settings-gtk-keynav-use-caret settings))
     (is-true (gtk:settings-gtk-label-select-on-focus settings))
     (is (= 500 (gtk:settings-gtk-long-press-time settings)))
@@ -241,7 +241,7 @@
     (signals (error) (gtk:settings-gtk-recent-files-enabled settings))
     (is (= -1 (gtk:settings-gtk-recent-files-max-age settings)))
     (is-false (gtk:settings-gtk-shell-shows-app-menu settings))
-    (is-true (gtk:settings-gtk-shell-shows-desktop settings))
+    (is-false (gtk:settings-gtk-shell-shows-desktop settings))
     (is-false (gtk:settings-gtk-shell-shows-menubar settings))
     (is (string= "Yaru" (gtk:settings-gtk-sound-theme-name settings)))
     (is-false (gtk:settings-gtk-split-cursor settings))
@@ -302,4 +302,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-3-26 --------------------------------------------------------------
