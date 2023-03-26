@@ -23,7 +23,7 @@
 
 (defsystem :cl-cffi-gtk4
   :name "cl-cffi-gtk4"
-  :version "0.9.0"
+  :version "0.2.0"
   :author "Dieter Kaiser"
   :license "LLGPL"
   :serial t
@@ -184,14 +184,14 @@
 
      ;; Buttons and Toggles
      (:file "gtk4.button")                ; GtkButton
-     (:file "gtk4.check-button")          ; GtkCheckButton
      (:file "gtk4.toggle-button")         ; GtkToggleButton
-     (:file "gtk4.link-button")           ; GtkLinkButton
+     (:file "gtk4.check-button")          ; GtkCheckButton
      (:file "gtk4.menu-button")           ; GtkMenuButton
-     (:file "gtk4.switch")                ; GtkSwitch
+     (:file "gtk4.link-button")           ; GtkLinkButton
+     (:file "gtk4.lock-button")           ; GtkLockButton
      (:file "gtk4.scale-button")          ; GtkScaleButton
      (:file "gtk4.volume-button")         ; GtkVolumeButton
-     (:file "gtk4.lock-button")           ; GtkLockButton
+     (:file "gtk4.switch")                ; GtkSwitch
 
      ;; Multiline Text Editor
      (:file "gtk4.text-iter")             ; Text buffer iterator
@@ -502,14 +502,14 @@
 
      ;; Buttons and Toggles
      (:file "rtest-gtk4-button")             ; GtkButton
-;    (:file "gtk4.check-button")             ; GtkCheckButton
      (:file "rtest-gtk4-toggle-button")      ; GtkToggleButton
+     (:file "rtest-gtk4-check-button")       ; GtkCheckButton
+     (:file "rtest-gtk4-menu-button")        ; GtkMenuButton
      (:file "rtest-gtk4-link-button")        ; GtkLinkButton
-;    (:file "gtk4.menu-button")              ; GtkMenuButton
-;    (:file "gtk4.switch")                   ; GtkSwitch
+     (:file "rtest-gtk4-lock-button")        ; GtkLockButton
      (:file "rtest-gtk4-scale-button")       ; GtkScaleButton
      (:file "rtest-gtk4-volume-button")      ; GtkVolumeButton
-     (:file "rtest-gtk4-lock-button")        ; GtkLockButton
+     (:file "rtest-gtk4-switch")             ; GtkSwitch
 
      ;; Multiline Text Editor
      (:file "rtest-gtk4-text-iter")          ; Text buffer iterator

@@ -98,7 +98,7 @@
 (in-package :gtk)
 
 (defvar *cl-cffi-gtk-build-time* (multiple-value-list (get-decoded-time)))
-(defvar *cl-cffi-gtk-version* "0.0")
+(defvar *cl-cffi-gtk-version* "0.2.0")
 
 (export '*cl-cffi-gtk-build-time*)
 (export '*cl-cffi-gtk-version*)
@@ -1060,6 +1060,16 @@
       @about-function{button-new-with-mnemonic}
       @about-function{button-new-from-icon-name}
     @end{subsection}
+    @begin[GtkToggleButton]{subsection}
+      Create buttons which retain their state.
+      @about-class{toggle-button}
+      @about-generic{toggle-button-active}
+      @about-generic{toggle-button-group}
+      @about-function{toggle-button-new}
+      @about-function{toggle-button-new-with-label}
+      @about-function{toggle-button-new-with-mnemonic}
+      @about-function{toggle-button-toggled}
+    @end{subsection}
     @begin[GtkCheckButton]{subsection}
       Create widgets with a discrete toggle button.
       @about-class{check-button}
@@ -1073,15 +1083,26 @@
       @about-function{check-button-new-with-mnemonic}
       @about-function{check-button-set-group}
     @end{subsection}
-    @begin[GtkToggleButton]{subsection}
-      Create buttons which retain their state.
-      @about-class{toggle-button}
-      @about-generic{toggle-button-active}
-      @about-generic{toggle-button-group}
-      @about-function{toggle-button-new}
-      @about-function{toggle-button-new-with-label}
-      @about-function{toggle-button-new-with-mnemonic}
-      @about-function{toggle-button-toggled}
+    @begin[GtkMenuButton]{subsection}
+      A widget that shows a popup when clicked on.
+      @about-symbol{arrow-type}
+      @about-class{menu-button}
+      @about-generic{menu-button-active}
+      @about-generic{menu-button-always-show-arrow}
+      @about-generic{menu-button-child}
+      @about-generic{menu-button-direction}
+      @about-generic{menu-button-has-frame}
+      @about-generic{menu-button-icon-name}
+      @about-generic{menu-button-label}
+      @about-generic{menu-button-menu-model}
+      @about-generic{menu-button-popover}
+      @about-generic{menu-button-primary}
+      @about-generic{menu-button-use-underline}
+      @about-function{menu-button-new}
+      @about-function{menu-button-popup}
+      @about-function{menu-button-popdown}
+      @about-symbol{menu-button-create-popup-func}
+      @about-function{menu-button-set-create-popup-func}
     @end{subsection}
     @begin[GtkLinkButton]{subsection}
       Create buttons bound to a URL.
@@ -1091,29 +1112,16 @@
       @about-function{link-button-new}
       @about-function{link-button-new-with-label}
     @end{subsection}
-    @begin[GtkMenuButton]{subsection}
-      A widget that shows a popup when clicked on.
-      @about-symol{arrow-type}
-      @about-class{menu-button}
-      @about-generic{menu-button-direction}
-      @about-generic{menu-button-has-frame}
-      @about-generic{menu-button-icon-name}
-      @about-generic{menu-button-label}
-      @about-generic{menu-button-menu-model}
-      @about-generic{menu-button-popover}
-      @about-generic{menu-button-use-underline}
-      @about-function{menu-button-new}
-      @about-function{menu-button-popup}
-      @about-function{menu-button-popdown}
-      @about-symbol{menu-button-create-popup-func}
-      @about-function{menu-button-set-create-popup-func}
-    @end{subsection}
-    @begin[GtkSwitch]{subsection}
-      A \"light switch\" style toggle.
-      @about-class{switch}
-      @about-generic{switch-active}
-      @about-generic{switch-state}
-      @about-function{switch-new}
+    @begin[GtkLockButton]{subsection}
+      A widget to unlock or lock privileged operations.
+      @about-class{lock-button}
+      @about-generic{lock-button-permission}
+      @about-generic{lock-button-text-lock}
+      @about-generic{lock-button-text-unlock}
+      @about-generic{lock-button-tooltip-lock}
+      @about-generic{lock-button-tooltip-not-authorized}
+      @about-generic{lock-button-tooltip-unlock}
+      @about-function{lock-button-new}
     @end{subsection}
     @begin[GtkScaleButton]{subsection}
       A button which pops up a scale.
@@ -1132,16 +1140,12 @@
       @about-generic{volume-button-use-symbolic}
       @about-function{volume-button-new}
     @end{subsection}
-    @begin[GtkLockButton]{subsection}
-      A widget to unlock or lock privileged operations.
-      @about-class{lock-button}
-      @about-generic{lock-button-permission}
-      @about-generic{lock-button-text-lock}
-      @about-generic{lock-button-text-unlock}
-      @about-generic{lock-button-tooltip-lock}
-      @about-generic{lock-button-tooltip-not-authorized}
-      @about-generic{lock-button-tooltip-unlock}
-      @about-function{lock-button-new}
+    @begin[GtkSwitch]{subsection}
+      A \"light switch\" style toggle.
+      @about-class{switch}
+      @about-generic{switch-active}
+      @about-generic{switch-state}
+      @about-function{switch-new}
     @end{subsection}
   @end{section}
   @begin[Numeric and Text Data Entry]{section}
@@ -2921,8 +2925,9 @@
       @about-function{widget-add-css-class}
       @about-function{widget-remove-css-class}
       @about-function{widget-has-css-class}
-      @about-function{widget-style-context}
       @about-function{widget-class-css-name}
+      @about-function{widget-style-context}
+      @about-function{widget-apply-provider}
       @about-function{widget-request-mode}
       @about-function{widget-preferred-size}
       @about-function{distribute-natural-allocation}
@@ -3919,13 +3924,13 @@
       @about-function{render-option}
     @end{subsection}
     @begin[GtkStyleProvider]{subsection}
-      Interface to provide style information to a @class{style-context}
+      Interface to provide style information to a @class{gtk:style-context}
       object.
-      @about-variable{+priority-fallback+}
-      @about-variable{+priority-theme+}
-      @about-variable{+priority-settings+}
-      @about-variable{+priority-application+}
-      @about-variable{+priority-user+}
+      @about-variable{+gtk-priority-fallback+}
+      @about-variable{+gtk-priority-theme+}
+      @about-variable{+gtk-priority-settings+}
+      @about-variable{+gtk-priority-application+}
+      @about-variable{+gtk-priority-user+}
       @about-class{style-provider}
     @end{subsection}
     @begin[GtkCssProvider]{subsection}

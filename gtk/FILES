@@ -161,15 +161,15 @@ Media Support
 
 Buttons and Toggles
 
-  gtk.button.lisp                      GtkButton                       GTK 4.11
-  gtk.check-button.lisp                GtkCheckButton                  GTK 4.6+
-  gtk.toggle-button.lisp               GtkToggleButton                 GTK 4.11
-  gtk.link-button.lisp                 GtkLinkButton                   GTK 4.11
-  gtk.menu-button.lisp                 GtkMenuButton                   GTK 4.0+
-  gtk.switch.lisp                      GtkSwitch                       GTK 4.0+
-  gtk.scale-button.lisp                GtkScaleButton                  GTK 4.0+
-  gtk.volume-button.lisp               GtkVolumeButton                 GTK 4.0+
-  gtk.lock-button.lisp                 GtkLockButton                   GTK 4.0+
+  gtk.button.lisp                      GtkButton                       GTK 4.10
+  gtk.check-button.lisp                GtkCheckButton                  GTK 4.10
+  gtk.toggle-button.lisp               GtkToggleButton                 GTK 4.10
+  gtk.menu-button.lisp                 GtkMenuButton                   GTK 4.10
+  gtk.link-button.lisp                 GtkLinkButton                   GTK 4.10
+  gtk.lock-button.lisp                 GtkLockButton                   GTK 4.10
+  gtk.scale-button.lisp                GtkScaleButton                  GTK 4.10
+  gtk.volume-button.lisp               GtkVolumeButton                 GTK 4.10
+  gtk.switch.lisp                      GtkSwitch                       GTK 4.10
 
 Numeric and Text Data Entry
 
@@ -322,8 +322,8 @@ Interfaces
 
 Abstract Base Classes
 
-  gtk.widget.lisp                      GtkWidget                        GTK 4.6+
-  gtk.range.lisp                       GtkRange                         GTK 4.6++
+  gtk.widget.lisp                      GtkWidget                       GTK 4.6+
+  gtk.range.lisp                       GtkRange                        GTK 4.6++
 
 Recently Used Documents
 
@@ -377,18 +377,18 @@ Data exchange, clipboards and Drag-and-Drop
 
 IV. GTK Core Reference
 
-  gtk.main-loop.lisp                   Initialization                   GTK 4.0+
-  gtk.version.lisp                     Version Information              GTK 4.0+
-  gtk.settings.lisp                    GtkSettings                      Gtk 4.0+
-  gtk.enumerations.lisp                Standard Enumerations            GTK 4.6+
-  gtk.mount-operation.lisp             Filesystem utilities             GTK 4.0+
+  gtk.main-loop.lisp                   Initialization                  GTK 4.0+
+  gtk.version.lisp                     Version Information             GTK 4.10
+  gtk.settings.lisp                    GtkSettings                     Gtk 4.0+
+  gtk.enumerations.lisp                Standard Enumerations           GTK 4.6+
+  gtk.mount-operation.lisp             Filesystem utilities            GTK 4.0+
 
 V. Theming in GTK
 
-  gtk.style-context.lisp               GtkStyleContext                  GTK 4.6+
-  gtk.css-provider.lisp                GtkCssProvider                   GTK 4.6+
-  gtk.style-provider.lisp              GtkStyleProvider                 GTK 4.6+
-  gtk.icon-paintable.lisp              GtkIconPaintable                 GTK 4.6+
-  gtk.icon-theme.lisp                  GtkIconTheme                     GTK 4.0+
+  gtk.style-context.lisp               GtkStyleContext                 GTK 4.6+
+  gtk.css-provider.lisp                GtkCssProvider                  GTK 4.6+
+  gtk.style-provider.lisp              GtkStyleProvider                GTK 4.10
+  gtk.icon-paintable.lisp              GtkIconPaintable                GTK 4.6+
+  gtk.icon-theme.lisp                  GtkIconTheme                    GTK 4.0+
 
-2023-3-18
+2023-3-26
