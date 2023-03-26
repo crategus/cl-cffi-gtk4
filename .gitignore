@@ -1,3 +1,4 @@
 *.tmp
 *.gresource
 TODO
+test/rtest-templates.lisp
