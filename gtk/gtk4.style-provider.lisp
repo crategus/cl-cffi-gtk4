@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.style-provider.lisp
+;;; gtk4.style-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2022 Dieter Kaiser
+;;; Copyright (C) 2013 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkStyleProvider
@@ -72,14 +73,15 @@
 (setf (liber:alias-for-class 'style-provider)
       "Interface"
       (documentation 'style-provider 'type)
- "@version{#2022-1-9}
+ "@version{2023-3-26}
   @begin{short}
     The @sym{gtk:style-provider} interface is an interface used to provide
     style information to a @class{gtk:style-context} object.
   @end{short}
   See the @fun{gtk:style-context-add-provider} and
   @fun{gtk:style-context-add-provider-for-display} functions for adding style
-  providers.
+  providers to a style context and the @fun{gtk:widget-apply-provider}
+  function to apply a provider to a widget and its children.
   @begin[Signal Details]{dictionary}
     @subheading{The \"gtk:private-changed\" signal}
       @begin{pre}
@@ -106,7 +108,7 @@ lambda (provider)    :run-last
 (setf (liber:alias-for-variable '+gtk-priority-fallback+)
       "Constant"
       (documentation '+gtk-priority-fallback+ 'variable)
- "@version{#2022-1-9}
+ "@version{2023-3-26}
   @variable-value{1}
   @begin{short}
     The priority used for default style information that is used in the absence
@@ -129,7 +131,7 @@ lambda (provider)    :run-last
 (setf (liber:alias-for-variable '+gtk-priority-theme+)
       "Constant"
       (documentation '+gtk-priority-theme+ 'variable)
- "@version{#2022-1-9}
+ "@version{2023-3-26}
   @variable-value{200}
   @begin{short}
     The priority used for style information provided by themes.
@@ -148,7 +150,7 @@ lambda (provider)    :run-last
 (setf (liber:alias-for-variable '+gtk-priority-settings+)
       "Constant"
       (documentation '+gtk-priority-settings+ 'variable)
- "@version{#2011-1-9}
+ "@version{2023-3-26}
   @variable-value{400}
   @begin{short}
     The priority used for style information provided via the
@@ -172,7 +174,7 @@ lambda (provider)    :run-last
 (setf (liber:alias-for-variable '+gtk-priority-application+)
       "Constant"
       (documentation '+gtk-priority-application+ 'variable)
- "@version{#2022-1-9}
+ "@version{2023-3-26}
   @variable-value{600}
   @begin{short}
     A priority that can be used when adding a @class{gtk:style-provider} object
@@ -192,7 +194,7 @@ lambda (provider)    :run-last
 (setf (liber:alias-for-variable '+gtk-priority-user+)
       "Constant"
       (documentation '+gtk-priority-user+ 'variable)
- "@version{2022-11-25}
+ "@version{2023-3-26}
   @variable-value{800}
   @begin{short}
     The priority used for the style information from the
@@ -204,4 +206,4 @@ lambda (provider)    :run-last
 
 (export '+gtk-priority-user+)
 
-;;; --- End of file gtk-style-provider.lisp ------------------------------------
+;;; --- End of file gtk4.style-provider.lisp -----------------------------------
