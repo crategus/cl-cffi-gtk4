@@ -1,21 +1,20 @@
-;;;; Example Switch - 2022-11-18
+;;;; Example Switch - 2023-3-26
 
 (in-package :gtk4-example)
 
 (defun do-switch (&optional application)
-  (let* ((hbox (make-instance 'gtk:box
-                              :orientation :horizontal
-                              :halign :center
-                              :valign :center
-                              :margin-top 12
-                              :margin-bottom 12
-                              :margin-left 12
-                              :margin-right 12
-                              :spacing 24))
+  (let* ((box (make-instance 'gtk:box
+                             :orientation :horizontal
+                             :margin-top 48
+                             :margin-bottom 48
+                             :margin-start 36
+                             :margin-end 12
+                             :spacing 18))
         (window (make-instance 'gtk:window
-                               :title "Example Switch"
-                               :child hbox
-                               :application application))
+                               :title "Switch"
+                               :child box
+                               :application application
+                               :resizable nil))
         (switch (make-instance 'gtk:switch
                                :active t))
         (label (make-instance 'gtk:label
@@ -27,6 +26,6 @@
           (if (gtk:switch-active widget)
               (setf (gtk:label-label label) "Switch is On")
               (setf (gtk:label-label label) "Switch is Off"))))
-    (gtk:box-append hbox switch)
-    (gtk:box-append hbox label)
+    (gtk:box-append box switch)
+    (gtk:box-append box label)
     (gtk:widget-show window)))

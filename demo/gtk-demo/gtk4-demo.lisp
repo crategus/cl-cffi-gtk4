@@ -283,21 +283,26 @@
        "DO-CHECK-BUTTON"
        "gtk4-example"
        "check-button.lisp")
+      ("Menu Buttons"
+       ":window"
+       "DO-MENU-BUTTON"
+       "gtk4-example"
+       "menu-button.lisp")
       ("Link Button"
        ":window"
        "DO-LINK-BUTTON"
        "gtk4-example"
        "link-button.lisp")
-      ("Switch"
-       ":window"
-       "DO-SWITCH"
-       "gtk4-example"
-       "switch.lisp")
       ("Scale Button"
        ":window"
        "DO-SCALE-BUTTON"
        "gtk4-example"
-       "scale-button.lisp"))
+       "scale-button.lisp")
+      ("Switch"
+       ":window"
+       "DO-SWITCH"
+       "gtk4-example"
+       "switch.lisp"))
 
      "Numeric/Text Data Entry"
      (("Entry"

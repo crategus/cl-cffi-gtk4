@@ -42,9 +42,10 @@
                (:file "toggle-button")
                (:file "toggle-button-action")
                (:file "check-button")
+               (:file "menu-button")
                (:file "link-button")
-               (:file "switch")
                (:file "scale-button")
+               (:file "switch")
 
                ;; Numeric/Text Data Entry
                (:file "entry")

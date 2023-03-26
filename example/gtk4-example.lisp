@@ -45,9 +45,10 @@
            #:do-toggle-button
            #:do-toggle-button-action
            #:do-check-button
+           #:do-menu-button
            #:do-link-button
-           #:do-switch
            #:do-scale-button
+           #:do-switch
 
            ;; Numeric/Text Data Entry
            #:do-entry
@@ -164,7 +165,7 @@ Maecenas sagittis auctor leo a dictum. Sed at auctor."))
     ;; Run the application
     (g:application-run app nil)))
 
-;; Recursivly apply CSS to a widget an all child widgets
+;; Recursivly apply CSS to a widget and all child widgets
 (defun apply-css-to-widget (provider widget)
   (gtk:style-context-add-provider (gtk:widget-style-context widget)
                                   provider

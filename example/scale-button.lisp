@@ -1,17 +1,19 @@
-;;;; Example Scale Button - 2022-11-18
+;;;; Example Scale Button - 2023-3-26
 
 (in-package :gtk4-example)
 
-;; TODO: The size property is no longer available. Replace this functionality.
-
 (defun do-scale-button (&optional application)
-  (let* ((button (make-instance 'gtk:scale-button
-                                :margin-left 60
-                                :value 9.0
+  (let* ((provider (gtk:css-provider-new))
+         (button (make-instance 'gtk:scale-button
+                                :margin-start 60
+                                :margin-end 60
+                                :margin-top 60
+                                :margin-bottom 60
+                                :value 6.0
                                 :icons
                                 '("face-crying"     ; lowest value
                                   "face-smile-big"  ; highest value
-                                  "face-sad"        ; other value between
+                                  "face-sad"        ; other values between
                                   "face-worried"
                                   "face-uncertain"
                                   "face-plain"
@@ -23,13 +25,17 @@
                                                :step-increment 1.0
                                                :page-increment 2.0)))
         (window (make-instance 'gtk:window
-                               :title "Example Scale Button"
+                               :title "Scale Button"
                                :child button
                                :application application
-                               :width-request 360
-                               :height-request 240)))
-
-;    (format t "Child of button is ~a~%" (gtk:button-child button))
-
-    ;; Pack and show the widgets
+                               :resizable nil
+                               :width-request 300
+                               :height-request 240))
+        (css-button (format nil "scalebutton > button
+                                   {background : orange;
+                                    -gtk-icon-size : 48px;}")))
+    ;; Load and apply provider to style the button
+    (gtk:css-provider-load-from-data provider css-button)
+    (gtk:widget-apply-provider button provider)
+    ;; Show the window
     (gtk:widget-show window)))
