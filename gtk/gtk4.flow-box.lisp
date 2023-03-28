@@ -925,8 +925,8 @@ lambda (flowbox)    :action
   @see-symbol{gtk:flow-box-foreach-func}"
   (with-stable-pointer (ptr func)
     (%flow-box-selected-foreach flowbox
-                                    (callback flow-box-foreach-func)
-                                    ptr)))
+                                (cffi:callback flow-box-foreach-func)
+                                ptr)))
 
 (export 'flow-box-selected-foreach)
 
@@ -1087,9 +1087,9 @@ lambda (flowbox)    :action
   @see-function{gtk:flow-box-child-changed}
   @see-function{gtk:flow-box-invalidate-filter}"
   (%flow-box-set-filter-func flowbox
-      (callback flow-box-filter-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          (cffi:callback flow-box-filter-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'flow-box-set-filter-func)
 
@@ -1181,9 +1181,9 @@ lambda (flowbox)    :action
   @see-function{gtk:flow-box-child-changed}
   @see-function{gtk:flow-box-invalidate-sort}"
   (%flow-box-set-sort-func flowbox
-      (callback flow-box-sort-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          (cffi:callback flow-box-sort-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'flow-box-set-sort-func)
 
@@ -1281,10 +1281,10 @@ lambda (flowbox)    :action
   @see-class{g:list-model}
   @see-symbol{gtk:flow-box-create-widget-func}"
   (%flow-box-bind-model flowbox
-      model
-      (callback flow-box-create-widget-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          model
+          (cffi:callback flow-box-create-widget-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'flow-box-bind-model)
 

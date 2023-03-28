@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.tree-view-column.lisp
+;;; gtk4.tree-view-column.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK+ library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkTreeViewColumn
@@ -1174,11 +1174,11 @@ lambda (column)    :run-last
   @see-class{gtk:cell-renderer}
   @see-symbol{gtk:tree-cell-data-func}"
   (%tree-view-column-set-cell-data-func
-      column
-      renderer
-      (callback tree-cell-data-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          column
+          renderer
+          (cffi:callback tree-cell-data-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'tree-view-column-set-cell-data-func)
 
@@ -1309,15 +1309,15 @@ lambda (column)    :run-last
                          (width :int)
                          (height :int))
     (%tree-view-column-cell-size column
-                                     area
-                                     x-offset
-                                     y-offset
-                                     width
-                                     height)
-    (values (mem-ref x-offset :int)
-            (mem-ref y-offset :int)
-            (mem-ref width :int)
-            (mem-ref height :int))))
+                                 area
+                                 x-offset
+                                 y-offset
+                                 width
+                                 height)
+    (values (cffi:mem-ref x-offset :int)
+            (cffi:mem-ref y-offset :int)
+            (cffi:mem-ref width :int)
+            (cffi:mem-ref height :int))))
 
 (export 'tree-view-column-cell-size)
 
@@ -1350,11 +1350,11 @@ lambda (column)    :run-last
   @see-class{gtk:cell-renderer}"
   (with-foreign-objects ((x-offset :int) (width :int))
     (when (%tree-view-column-cell-position column
-                                               renderer
-                                               x-offset
-                                               width)
-      (values (mem-ref x-offset :int)
-              (mem-ref width :int)))))
+                                           renderer
+                                           x-offset
+                                           width)
+      (values (cffi:mem-ref x-offset :int)
+              (cffi:mem-ref width :int)))))
 
 (export 'tree-view-column-cell-position)
 
@@ -1446,4 +1446,4 @@ lambda (column)    :run-last
 
 (export 'tree-view-column-tree-view)
 
-;;; --- End of file gtk.tree-view-column.lisp ----------------------------------
+;;; --- End of file gtk4.tree-view-column.lisp ---------------------------------

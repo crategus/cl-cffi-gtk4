@@ -405,7 +405,7 @@ lambda (provider section error)    :run-last
   @see-class{gtk:css-provider}"
   (%css-provider-load-named provider
                             name
-                            (if variant variant (null-pointer))))
+                            (if variant variant (cffi:null-pointer))))
 
 (export 'css-provider-load-named)
 

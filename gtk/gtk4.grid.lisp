@@ -529,10 +529,10 @@
   @see-class{gtk:widget}"
   (with-foreign-objects ((column :int) (row :int) (width :int) (height :int))
     (%grid-query-child grid child column row width height)
-    (values (mem-ref column :int)
-            (mem-ref row :int)
-            (mem-ref width :int)
-            (mem-ref height :int))))
+    (values (cffi:mem-ref column :int)
+            (cffi:mem-ref row :int)
+            (cffi:mem-ref width :int)
+            (cffi:mem-ref height :int))))
 
 (export 'grid-query-child)
 
@@ -662,11 +662,11 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf grid-row-baseline-position) (position grid row)
-  (foreign-funcall "gtk_grid_set_row_baseline_position"
-                   (g:object grid) grid
-                   :int row
-                   position-type position
-                   :void)
+  (cffi:foreign-funcall "gtk_grid_set_row_baseline_position"
+                        (g:object grid) grid
+                        :int row
+                        position-type position
+                        :void)
   position)
 
 (defcfun ("gtk_grid_get_row_baseline_position"

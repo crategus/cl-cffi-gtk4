@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.tree-store.lisp
+;;; gtk4.tree-store.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkTreeStore
@@ -218,7 +218,7 @@
     (with-foreign-object (types-ar 'g:type-t n)
       (iter (for i from 0 below n)
             (for gtype in types)
-            (setf (mem-aref types-ar 'g:type-t i) gtype))
+            (setf (cffi:mem-aref types-ar 'g:type-t i) gtype))
       (%tree-store-set-column-types store n types-ar))))
 
 (export 'tree-store-set-column-types)
@@ -310,14 +310,15 @@
       (loop for i from 0 below n
             for value in values
             for gtype = (tree-model-column-type store i)
-            do (setf (mem-aref columns-ar :int i) i)
-               (set-g-value (mem-aptr value-ar '(:struct g:value) i)
+            do (setf (cffi:mem-aref columns-ar :int i) i)
+               (set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
                             value
                             gtype
                             :zero-g-value t))
       (%tree-store-set-valuesv store iter columns-ar value-ar n)
       (loop for i from 0 below n
-            do (gobject:value-unset (mem-aptr value-ar '(:struct g:value) i)))
+            do (gobject:value-unset (cffi:mem-aptr value-ar
+                                                   '(:struct g:value) i)))
       iter)))
 
 (export 'tree-store-set)
@@ -550,20 +551,20 @@
       (iter (for i from 0 below n)
             (for value in values)
             (for gtype = (tree-model-column-type store i))
-            (setf (mem-aref columns-ar :int i) i)
-            (set-g-value (mem-aptr v-ar '(:struct g:value) i)
+            (setf (cffi:mem-aref columns-ar :int i) i)
+            (set-g-value (cffi:mem-aptr v-ar '(:struct g:value) i)
                          value
                          gtype
                          :zero-g-value t))
       (%tree-store-insert-with-valuesv store
-                                           iter
-                                           parent
-                                           position
-                                           columns-ar
-                                           v-ar
-                                           n)
+                                       iter
+                                       parent
+                                       position
+                                       columns-ar
+                                       v-ar
+                                       n)
       (iter (for i from 0 below n)
-            (gobject:value-unset (mem-aptr v-ar '(:struct g:value) i)))
+            (gobject:value-unset (cffi:mem-aptr v-ar '(:struct g:value) i)))
       iter)))
 
 (export 'tree-store-insert-with-values)
@@ -777,7 +778,7 @@
     (with-foreign-object (order-ar :int n)
       (iter (for i from 0 below n)
             (for j in order)
-            (setf (mem-aref order-ar :int i) j))
+            (setf (cffi:mem-aref order-ar :int i) j))
       (%tree-store-reorder store parent order-ar))))
 
 (export 'tree-store-reorder)
@@ -854,4 +855,4 @@
 
 (export 'tree-store-move-after)
 
-;;; --- End of file gtk.tree-store.lisp ----------------------------------------
+;;; --- End of file gtk4.tree-store.lisp ---------------------------------------

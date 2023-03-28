@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.cell-renderer.lisp
+;;; gtk4.cell-renderer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkCellRenderer
@@ -942,11 +942,11 @@ lambda (renderer editable path)    :run-first
 
 (defun (setf cell-renderer-fixed-size) (value cell)
   (destructuring-bind (width height) value
-    (foreign-funcall "gtk_cell_renderer_set_fixed_size"
-                     (g:object cell-renderer) cell
-                     :int width
-                     :int height
-                     :void)
+    (cffi:foreign-funcall "gtk_cell_renderer_set_fixed_size"
+                          (g:object cell-renderer) cell
+                          :int width
+                          :int height
+                          :void)
     (values width height)))
 
 (defcfun ("gtk_cell_renderer_get_fixed_size" %cell-renderer-fixed-size)
@@ -972,8 +972,8 @@ lambda (renderer editable path)    :run-first
   @see-class{gtk:cell-renderer}"
   (with-foreign-objects ((width :int) (height :int))
     (%cell-renderer-fixed-size cell width height)
-    (values (mem-ref width :int)
-            (mem-ref height :int))))
+    (values (cffi:mem-ref width :int)
+            (cffi:mem-ref height :int))))
 
 (export 'cell-renderer-fixed-size)
 
@@ -984,11 +984,11 @@ lambda (renderer editable path)    :run-first
 
 (defun (setf cell-renderer-alignment) (value cell)
   (destructuring-bind (xalign yalign) value
-    (foreign-funcall "gtk_cell_renderer_set_alignment"
-                     (g:object cell-renderer) cell
-                     :float xalign
-                     :float yalign
-                     :void)
+    (cffi:foreign-funcall "gtk_cell_renderer_set_alignment"
+                          (g:object cell-renderer) cell
+                          :float xalign
+                          :float yalign
+                          :void)
      (values xalign yalign)))
 
 (defcfun ("gtk_cell_renderer_get_alignment" %cell-renderer-alignment) :void
@@ -1013,8 +1013,8 @@ lambda (renderer editable path)    :run-first
   @see-class{gtk:cell-renderer}"
   (with-foreign-objects ((xalign :float) (yalign :float))
     (%cell-renderer-alignment cell xalign yalign)
-    (values (mem-ref xalign :float)
-            (mem-ref yalign :float))))
+    (values (cffi:mem-ref xalign :float)
+            (cffi:mem-ref yalign :float))))
 
 (export 'cell-renderer-alignment)
 
@@ -1025,11 +1025,11 @@ lambda (renderer editable path)    :run-first
 
 (defun (setf cell-renderer-padding) (value cell)
   (destructuring-bind (xpad ypad) value
-    (foreign-funcall "gtk_cell_renderer_set_padding"
-                     (g:object cell-renderer) cell
-                     :int xpad
-                     :int ypad
-                     :void)
+    (cffi:foreign-funcall "gtk_cell_renderer_set_padding"
+                          (g:object cell-renderer) cell
+                          :int xpad
+                          :int ypad
+                          :void)
      (values xpad ypad)))
 
 (defcfun ("gtk_cell_renderer_get_padding" %cell-renderer-padding) :void
@@ -1054,8 +1054,8 @@ lambda (renderer editable path)    :run-first
   @see-class{gtk:cell-renderer}"
   (with-foreign-objects ((xpad :int) (ypad :int))
     (%cell-renderer-padding cell xpad ypad)
-    (values (mem-ref xpad :int)
-            (mem-ref ypad :int))))
+    (values (cffi:mem-ref xpad :int)
+            (cffi:mem-ref ypad :int))))
 
 (export 'cell-renderer-padding)
 
@@ -1132,8 +1132,8 @@ lambda (renderer editable path)    :run-first
   @see-class{gtk:cell-renderer}"
   (with-foreign-objects ((minimum-size :int) (natural-size :int))
     (%cell-renderer-preferred-height cell widget minimum-size natural-size)
-    (values (mem-ref minimum-size :int)
-            (mem-ref natural-size :int))))
+    (values (cffi:mem-ref minimum-size :int)
+            (cffi:mem-ref natural-size :int))))
 
 (export 'cell-renderer-preferred-height)
 
@@ -1172,8 +1172,8 @@ lambda (renderer editable path)    :run-first
                                                    width
                                                    minimum-height
                                                    natural-height)
-    (values (mem-ref minimum-height :int)
-            (mem-ref natural-height :int))))
+    (values (cffi:mem-ref minimum-height :int)
+            (cffi:mem-ref natural-height :int))))
 
 (export 'cell-renderer-preferred-height-for-width)
 
@@ -1243,8 +1243,8 @@ lambda (renderer editable path)    :run-first
   @see-class{gtk:widget}"
   (with-foreign-objects ((minimum-size :int) (natural-size :int))
     (%cell-renderer-preferred-width cell widget minimum-size natural-size)
-    (values (mem-ref minimum-size :int)
-            (mem-ref natural-size :int))))
+    (values (cffi:mem-ref minimum-size :int)
+            (cffi:mem-ref natural-size :int))))
 
 (export 'cell-renderer-preferred-width)
 
@@ -1279,12 +1279,12 @@ lambda (renderer editable path)    :run-first
   @see-class{gtk:widget}"
   (with-foreign-objects ((minimum-width :int) (natural-width :int))
     (%cell-renderer-preferred-width-for-height cell
-                                                   widget
-                                                   height
-                                                   minimum-width
-                                                   natural-width)
-    (values (mem-ref minimum-width :int)
-            (mem-ref natural-width :int))))
+                                               widget
+                                               height
+                                               minimum-width
+                                               natural-width)
+    (values (cffi:mem-ref minimum-width :int)
+            (cffi:mem-ref natural-width :int))))
 
 (export 'cell-renderer-preferred-width-for-height)
 
@@ -1309,4 +1309,4 @@ lambda (renderer editable path)    :run-first
 
 (export 'cell-renderer-request-mode)
 
-;;; --- End of file gtk.cell-renderer.lisp -------------------------------------
+;;; --- End of file gtk4.cell-renderer.lisp ------------------------------------

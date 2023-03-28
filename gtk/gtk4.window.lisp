@@ -1397,10 +1397,10 @@ lambda (window)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf window-focus) (focus window)
-  (foreign-funcall "gtk_window_set_focus"
-                   (g:object window) window
-                   (g:object widget) focus
-                   :void)
+  (cffi:foreign-funcall "gtk_window_set_focus"
+                        (g:object window) window
+                        (g:object widget) focus
+                        :void)
   focus)
 
 (defcfun ("gtk_window_get_focus" window-focus) (g:object widget)
@@ -1707,9 +1707,9 @@ lambda (window)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf window-default-icon-name) (name)
-  (foreign-funcall "gtk_window_set_defaul_icon_name"
-                   :string name
-                   :void)
+  (cffi:foreign-funcall "gtk_window_set_defaul_icon_name"
+                        :string name
+                        :void)
   name)
 
 (defcfun ("gtk_window_get_default_icon_name" window-default-icon-name)
@@ -1803,10 +1803,10 @@ lambda (window)    :run-first
 
 #-gtk-4-6
 (defun (setf window-titlebar) (widget window)
-  (foreign-funcall "gtk_window_set_titlebar"
-                   (g:object window) window
-                   (g:object widget) widget
-                   :void)
+  (cffi:foreign-funcall "gtk_window_set_titlebar"
+                        (g:object window) window
+                        (g:object widget) widget
+                        :void)
   widget)
 
 #-gtk-4-6

@@ -6,25 +6,25 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
 ;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkIconView
@@ -1220,8 +1220,8 @@ lambda (view path)
   @see-symbol{gtk:icon-view-foreach-func}"
   (with-stable-pointer (ptr func)
     (%icon-view-selected-foreach view
-                                     (callback icon-view-foreach-func)
-                                     ptr)))
+                                 (cffi:callback icon-view-foreach-func)
+                                 ptr)))
 
 (export 'icon-view-selected-foreach)
 
@@ -1678,8 +1678,8 @@ lambda (view path)
   (let ((n-targets (length targets)))
     (with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
       (loop for i from 0 below n-targets
-            for target-ptr = (mem-aptr targets-ptr
-                                       '(:struct %target-entry) i)
+            for target-ptr = (cffi:mem-aptr targets-ptr
+                                            '(:struct %target-entry) i)
             for entry in targets
             do (with-foreign-slots ((target flags info)
                                     target-ptr
@@ -1688,10 +1688,10 @@ lambda (view path)
                  (setf flags (second entry))
                  (setf info (third entry))))
       (%icon-view-enable-model-drag-source view
-                                               mask
-                                               targets-ptr
-                                               n-targets
-                                               actions))))
+                                           mask
+                                           targets-ptr
+                                           n-targets
+                                           actions))))
 
 #+nil
 (export 'icon-view-enable-model-drag-source)
@@ -1728,8 +1728,8 @@ lambda (view path)
   (let ((n-targets (length targets)))
     (with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
       (loop for i from 0 below n-targets
-            for target-ptr = (mem-aptr targets-ptr
-                                       '(:struct %target-entry) i)
+            for target-ptr = (cffi:mem-aptr targets-ptr
+                                            '(:struct %target-entry) i)
             for entry in targets
             do (with-foreign-slots ((target flags info)
                                     target-ptr
@@ -1738,9 +1738,9 @@ lambda (view path)
                  (setf flags (second entry))
                  (setf info (third entry))))
       (%icon-view-enable-model-drag-dest view
-                                             targets-ptr
-                                             n-targets
-                                             actions))))
+                                         targets-ptr
+                                         n-targets
+                                         actions))))
 
 #+nil
 (export 'icon-view-enable-model-drag-dest)
@@ -1849,8 +1849,8 @@ lambda (view path)
   @see-function{gtk:icon-view-set-drag-dest-item}"
   (with-foreign-objects ((path :pointer) (pos :pointer))
     (%icon-view-get-drag-dest-item view path pos)
-    (values (mem-ref path '(g:boxed tree-path :return))
-            (mem-ref pos 'icon-view-drop-position))))
+    (values (cffi:mem-ref path '(g:boxed tree-path :return))
+            (cffi:mem-ref pos 'icon-view-drop-position))))
 
 #+nil
 (export 'icon-view-get-drag-dest-item)
@@ -1889,8 +1889,8 @@ lambda (view path)
   @see-symbol{gtk:icon-view-drop-position}"
   (with-foreign-objects ((path :pointer) (pos :pointer))
     (when (%icon-view-dest-item-at-pos view drag-x drag-y path pos)
-      (values (mem-ref path '(g:boxed tree-path :return))
-              (mem-ref pos 'icon-view-drop-position)))))
+      (values (cffi:mem-ref path '(g:boxed tree-path :return))
+              (cffi:mem-ref pos 'icon-view-drop-position)))))
 
 #+nil
 (export 'icon-view-dest-item-at-pos)
@@ -1920,4 +1920,4 @@ lambda (view path)
 #+nil
 (export 'icon-view-create-drag-icon)
 
-;;; --- End of file gtk.icon-view.lisp -----------------------------------------
+;;; --- End of file gtk4.icon-view.lisp ----------------------------------------

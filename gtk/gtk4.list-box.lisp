@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.list-box.lisp
+;;; gtk4.list-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkListBox
@@ -906,8 +907,8 @@ lambda (listbox)    :action
   @see-symbol{gtk:list-box-foreach-func}"
   (with-stable-pointer (ptr func)
     (%list-box-selected-foreach listbox
-                                    (callback list-box-foreach-func)
-                                    ptr)))
+                                (cffi:callback list-box-foreach-func)
+                                ptr)))
 
 (export 'list-box-selected-foreach)
 
@@ -937,10 +938,10 @@ lambda (listbox)    :action
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf list-box-adjustment) (adjustment listbox)
-  (foreign-funcall "gtk_list_box_set_adjustment"
-                   (g:object list-box) listbox
-                   (g:object adjustment) adjustment
-                   :void)
+  (cffi:foreign-funcall "gtk_list_box_set_adjustment"
+                        (g:object list-box) listbox
+                        (g:object adjustment) adjustment
+                        :void)
   adjustment)
 
 (defcfun ("gtk_list_box_get_adjustment" list-box-adjustment)
@@ -1129,9 +1130,9 @@ lambda (listbox)    :action
   @see-function{gtk:list-box-invalidate-filter}
   @see-function{gtk:list-box-bind-model}"
   (%list-box-set-filter-func listbox
-      (callback list-box-filter-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          (cffi:callback list-box-filter-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'list-box-set-filter-func)
 
@@ -1182,9 +1183,9 @@ lambda (listbox)    :action
   @see-function{gtk:list-box-row-changed}
   @see-function{gtk:list-box-invalidate-headers}"
   (%list-box-set-header-func listbox
-      (callback list-box-update-header-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          (cffi:callback list-box-update-header-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'list-box-set-header-func)
 
@@ -1222,9 +1223,9 @@ lambda (listbox)    :action
   @see-function{gtk:list-box-invalidate-sort}
   @see-function{gtk:list-box-bind-model}"
   (%list-box-set-sort-func listbox
-    (callback list-box-sort-func)
-    (glib:allocate-stable-pointer func)
-    (callback glib:stable-pointer-destroy-notify)))
+          (cffi:callback list-box-sort-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'list-box-set-sort-func)
 
@@ -1354,10 +1355,10 @@ lambda (item)
   @see-symbol{gtk:list-box-create-widget-func}
   @see-function{gtk:list-box-insert}"
   (%list-box-bind-model listbox
-      model
-      (callback list-box-create-widget-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          model
+          (cffi:callback list-box-create-widget-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'list-box-bind-model)
 
@@ -1437,10 +1438,10 @@ lambda (item)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf list-box-row-header) (header row)
-  (foreign-funcall "gtk_list_box_row_set_header"
-                   (g:object list-box-row) row
-                   (g:object widget) header
-                   :void)
+  (cffi:foreign-funcall "gtk_list_box_row_set_header"
+                        (g:object list-box-row) row
+                        (g:object widget) header
+                        :void)
   header)
 
 (defcfun ("gtk_list_box_row_get_header" list-box-row-header)
@@ -1492,4 +1493,4 @@ lambda (item)
 
 (export 'list-box-row-index)
 
-;;; --- End of file gtk.list-box.lisp ------------------------------------------
+;;; --- End of file gtk4.list-box.lisp -----------------------------------------

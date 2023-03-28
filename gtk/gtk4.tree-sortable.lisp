@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.tree-sortable.lisp
+;;; gtk4.tree-sortable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkTreeSortable
@@ -184,10 +184,10 @@
     :impl-call ((sortable)
                 (multiple-value-bind (sorted-p r-sort-column-id r-order)
                     (tree-sortable-get-sort-column-id-impl sortable)
-                  (unless (null-pointer-p sort-column-id)
-                    (setf (mem-ref sort-column-id :int) r-sort-column-id))
-                  (unless (null-pointer-p order)
-                    (setf (mem-ref order 'sort-type) r-order))
+                  (unless (cffi:null-pointer-p sort-column-id)
+                    (setf (cffi:mem-ref sort-column-id :int) r-sort-column-id))
+                  (unless (cffi:null-pointer-p order)
+                    (setf (cffi:mem-ref order 'sort-type) r-order))
                   sorted-p)))
   (set-sort-column-id (:void (sortable (g:object tree-sortable))
                              (sort-column-id :int)
@@ -277,10 +277,11 @@
       (if (listp value)
           value
           (list value :ascending))
-    (foreign-funcall "gtk_tree_sortable_set_sort_column_id"
-                     (g:object tree-sortable) sortable
-                     :int column-id
-                     sort-type order)
+    (cffi:foreign-funcall "gtk_tree_sortable_set_sort_column_id"
+                          (g:object tree-sortable) sortable
+                          :int column-id
+                          sort-type order
+                          :boolean)
     value))
 
 (defcfun ("gtk_tree_sortable_get_sort_column_id"
@@ -318,8 +319,8 @@
   @see-symbol{gtk:sort-type}"
   (with-foreign-objects ((sort-column-id :int) (order 'sort-type))
     (%tree-sortable-sort-column-id sortable sort-column-id order)
-    (values (mem-ref sort-column-id :int)
-            (mem-ref order 'sort-type))))
+    (values (cffi:mem-ref sort-column-id :int)
+            (cffi:mem-ref order 'sort-type))))
 
 (export 'tree-sortable-sort-column-id)
 
@@ -350,11 +351,11 @@
   @see-class{gtk:tree-sortable}
   @see-symbol{gtk:tree-iter-compare-func}"
   (%tree-sortable-set-sort-func
-      sortable
-      column-id
-      (callback tree-iter-compare-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          sortable
+          column-id
+          (cffi:callback tree-iter-compare-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'tree-sortable-set-sort-func)
 
@@ -391,10 +392,10 @@
   @see-class{gtk:tree-sortable}
   @see-symbol{gtk:tree-iter-compare-func}"
   (%tree-sortable-set-default-sort-func
-      sortable
-      (callback tree-iter-compare-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          sortable
+          (cffi:callback tree-iter-compare-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'tree-sortable-set-default-sort-func)
 
@@ -419,4 +420,4 @@
 
 (export 'tree-sortable-has-default-sort-func)
 
-;;; --- End of file gtk.tree-sortable.lisp -------------------------------------
+;;; --- End of file gtk4.tree-sortable.lisp ------------------------------------

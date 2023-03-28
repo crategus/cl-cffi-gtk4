@@ -6,25 +6,25 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
 ;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkPrintSettings
@@ -555,7 +555,7 @@
   has the same effect as using the function @func{gtk:print-settings-unset}.
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-unset}"
-  (%print-settings-set settings key (if value value (null-pointer))))
+  (%print-settings-set settings key (if value value (cffi:null-pointer))))
 
 (export 'print-settings-set)
 
@@ -630,8 +630,8 @@ lambda (key value)
   @see-class{gtk:print-settings}"
   (with-stable-pointer (ptr func)
     (%print-settings-foreach settings
-                                 (callback print-settings-func)
-                                 ptr)))
+                             (cffi:callback print-settings-func)
+                             ptr)))
 
 (export 'print-settings-foreach)
 
@@ -641,11 +641,11 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-bool) (value settings key)
-  (foreign-funcall "gtk_print_settings_set_bool"
-                   (g:object print-settings) settings
-                   :string key
-                   :boolean value
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_bool"
+                        (g:object print-settings) settings
+                        :string key
+                        :boolean value
+                        :void)
   value)
 
 (defcfun ("gtk_print_settings_get_bool" print-settings-bool) :boolean
@@ -677,11 +677,11 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-double) (value settings key)
-  (foreign-funcall "gtk_print_settings_set_double"
-                   (g:object print-settings) settings
-                   :string key
-                   :double (coerce value 'double-float)
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_double"
+                        (g:object print-settings) settings
+                        :string key
+                        :double (coerce value 'double-float)
+                        :void)
   value)
 
 (defcfun ("gtk_print_settings_get_double" print-settings-double) :double
@@ -744,12 +744,12 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-length) (value settings key unit)
-  (foreign-funcall "gtk_print_settings_set_length"
-                   (g:object print-settings) settings
-                   :string key
-                   :double (coerce value 'double-float)
-                   unit unit
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_length"
+                        (g:object print-settings) settings
+                        :string key
+                        :double (coerce value 'double-float)
+                        unit unit
+                        :void)
   value)
 
 (defcfun ("gtk_print_settings_get_length" print-settings-length) :double
@@ -792,10 +792,11 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-int) (value settings key)
-  (foreign-funcall "gtk_print_settings_set_int"
-                   (g:object print-settings) settings
-                   :string key
-                   :int value)
+  (cffi:foreign-funcall "gtk_print_settings_set_int"
+                        (g:object print-settings) settings
+                        :string key
+                        :int value
+                        :void)
   value)
 
 (defcfun ("gtk_print_settings_get_int" print-settings-int) :int
@@ -850,10 +851,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-printer) (printer settings)
-  (foreign-funcall "gtk_print_settings_set_printer"
-                   (g:object print-settings) settings
-                   :string printer
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_printer"
+                        (g:object print-settings) settings
+                        :string printer
+                        :void)
   printer)
 
 (defcfun ("gtk_print_settings_get_printer" print-settings-printer) :string
@@ -883,10 +884,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-orientation) (orientation settings)
-  (foreign-funcall "gtk_print_settings_set_orientation"
-                   (g:object print-settings) settings
-                   page-orientation orientation
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_orientation"
+                        (g:object print-settings) settings
+                        page-orientation orientation
+                        :void)
   orientation)
 
 (defcfun ("gtk_print_settings_get_orientation" print-settings-orientation)
@@ -919,10 +920,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-paper-size) (paper-size settings)
-  (foreign-funcall "gtk_print_settings_set_paper_size"
-                   (g:object print-settings) settings
-                   (g:boxed paper-size) paper-size
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_paper_size"
+                        (g:object print-settings) settings
+                        (g:boxed paper-size) paper-size
+                        :void)
   paper-size)
 
 (defcfun ("gtk_print_settings_get_paper_size" print-settings-paper-size)
@@ -965,11 +966,11 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-paper-width) (width settings unit)
-  (foreign-funcall "gtk_print_settings_set_paper_width"
-                   (g:object print-settings) settings
-                   :double (coerce width 'double-float)
-                   unit unit
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_paper_width"
+                        (g:object print-settings) settings
+                        :double (coerce width 'double-float)
+                        unit unit
+                        :void)
   width)
 
 (defcfun ("gtk_print_settings_get_paper_width"
@@ -1003,11 +1004,11 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-paper-height) (height settings unit)
-  (foreign-funcall "gtk_print_settings_set_paper_height"
-                   (g:object print-settings) settings
-                   :double (coerce height 'double-float)
-                   unit unit
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_paper_height"
+                        (g:object print-settings) settings
+                        :double (coerce height 'double-float)
+                        unit unit
+                        :void)
   height)
 
 (defcfun ("gtk_print_settings_get_paper_height"
@@ -1042,10 +1043,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-use-color) (use-color settings)
-  (foreign-funcall "gtk_print_settings_set_use_color"
-                   (g:object print-settings) settings
-                   :boolean use-color
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_use_color"
+                        (g:object print-settings) settings
+                        :boolean use-color
+                        :void)
   use-color)
 
 (defcfun ("gtk_print_settings_get_use_color" print-settings-use-color)
@@ -1076,10 +1077,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-collate) (collate settings)
-  (foreign-funcall "gtk_print_settings_set_collate"
-                   (g:object print-settings) settings
-                   :boolean collate
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_collate"
+                        (g:object print-settings) settings
+                        :boolean collate
+                        :void)
   collate)
 
 (defcfun ("gtk_print_settings_get_collate" print-settings-collate) :boolean
@@ -1109,10 +1110,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-reverse) (reverse settings)
-  (foreign-funcall "gtk_print_settings_set_reverse"
-                   (g:object print-settings) settings
-                   :boolean reverse
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_reverse"
+                        (g:object print-settings) settings
+                        :boolean reverse
+                        :void)
   reverse)
 
 (defcfun ("gtk_print_settings_get_reverse" print-settings-reverse) :boolean
@@ -1143,10 +1144,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-duplex) (duplex settings)
-  (foreign-funcall "gtk_print_settings_set_duplex"
-                   (g:object print-settings) settings
-                   print-duplex duplex
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_duplex"
+                        (g:object print-settings) settings
+                        print-duplex duplex
+                        :void)
   duplex)
 
 (defcfun ("gtk_print_settings_get_duplex" print-settings-duplex) print-duplex
@@ -1177,10 +1178,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-quality) (quality settings)
-  (foreign-funcall "gtk_print_settings_set_quality"
-                   (g:object print-settings) settings
-                   print-quality quality
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_quality"
+                        (g:object print-settings) settings
+                        print-quality quality
+                        :void)
   quality)
 
 (defcfun ("gtk_print_settings_get_quality" print-settings-quality)
@@ -1211,10 +1212,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-n-copies) (n-copies settings)
-  (foreign-funcall "gtk_print_settings_set_n_copies"
-                   (g:object print-settings) settings
-                   :int n-copies
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_n_copies"
+                        (g:object print-settings) settings
+                        :int n-copies
+                        :void)
   n-copies)
 
 (defcfun ("gtk_print_settings_get_n_copies" print-settings-n-copies) :int
@@ -1245,10 +1246,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-number-up) (number-up settings)
-  (foreign-funcall "gtk_print_settings_set_number_up"
-                   (g:object print-settings) settings
-                   :int number-up
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_number_up"
+                        (g:object print-settings) settings
+                        :int number-up
+                        :void)
   number-up)
 
 (defcfun ("gtk_print_settings_get_number_up" print-settings-number-up) :int
@@ -1279,10 +1280,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-number-up-layout) (number-up-layout settings)
-  (foreign-funcall "gtk_print_settings_set_number_up_layout"
-                   (g:object print-settings) settings
-                   number-up-layout number-up-layout
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_number_up_layout"
+                        (g:object print-settings) settings
+                        number-up-layout number-up-layout
+                        :void)
   number-up-layout)
 
 (defcfun ("gtk_print_settings_get_number_up_layout"
@@ -1315,10 +1316,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-resolution) (resolution settings)
-  (foreign-funcall "gtk_print_settings_set_resolution"
-                   (g:object print-settings) settings
-                   :int resolution
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_resolution"
+                        (g:object print-settings) settings
+                        :int resolution
+                        :void)
   resolution)
 
 (defcfun ("gtk_print_settings_get_resolution" print-settings-resolution)
@@ -1406,10 +1407,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-printer-lpi) (printer-lpi settings)
-  (foreign-funcall "gtk_print_settings_set_printer_lpi"
-                   (g:object print-settings) settings
-                   :double (coerce printer-lpi 'double-float)
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_printer_lpi"
+                        (g:object print-settings) settings
+                        :double (coerce printer-lpi 'double-float)
+                        :void)
   printer-lpi)
 
 (defcfun ("gtk_print_settings_get_printer_lpi" print-settings-printer-lpi)
@@ -1441,10 +1442,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-scale) (scale settings)
-  (foreign-funcall "gtk_print_settings_set_scale"
-                   (g:object print-settings) settings
-                   :double (coerce scale 'double-float)
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_scale"
+                        (g:object print-settings) settings
+                        :double (coerce scale 'double-float)
+                        :void)
   scale)
 
 (defcfun ("gtk_print_settings_get_scale" print-settings-scale) :double
@@ -1474,10 +1475,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-print-pages) (print-pages settings)
-  (foreign-funcall "gtk_print_settings_set_print_pages"
-                   (g:object print-settings) settings
-                   print-pages print-pages
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_print_pages"
+                        (g:object print-settings) settings
+                        print-pages print-pages
+                        :void)
   print-pages)
 
 (defcfun ("gtk_print_settings_get_print_pages" print-settings-print-pages)
@@ -1567,10 +1568,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-page-set) (page-set settings)
-  (foreign-funcall "gtk_print_settings_set_page_set"
-                   (g:object print-settings) settings
-                   page-set page-set
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_page_set"
+                        (g:object print-settings) settings
+                        page-set page-set
+                        :void)
   page-set)
 
 (defcfun ("gtk_print_settings_get_page_set" print-settings-page-set)
@@ -1602,10 +1603,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-default-source) (default-source settings)
-  (foreign-funcall "gtk_print_settings_set_default_source"
-                   (g:object print-settings) settings
-                   :string default-source
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_default_source"
+                        (g:object print-settings) settings
+                        :string default-source
+                        :void)
   default-source)
 
 (defcfun ("gtk_print_settings_get_default_source"
@@ -1638,10 +1639,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-media-type) (media-type settings)
-  (foreign-funcall "gtk_print_settings_set_media_type"
-                   (g:object print-settings) settings
-                   :string media-type
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_media_type"
+                        (g:object print-settings) settings
+                        :string media-type
+                        :void)
   media-type)
 
 (defcfun ("gtk_print_settings_get_media_type" print-settings-media-type)
@@ -1674,10 +1675,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-dither) (dither settings)
-  (foreign-funcall "gtk_print_settings_set_dither"
-                   (g:object print-settings) settings
-                   :string dither
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_dither"
+                        (g:object print-settings) settings
+                        :string dither
+                        :void)
   dither)
 
 (defcfun ("gtk_print_settings_get_dither" print-settings-dither) :string
@@ -1707,10 +1708,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-finishings) (finishings settings)
-  (foreign-funcall "gtk_print_settings_set_finishings"
-                   (g:object print-settings) settings
-                   :string finishings
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_finishings"
+                        (g:object print-settings) settings
+                        :string finishings
+                        :void)
   finishings)
 
 (defcfun ("gtk_print_settings_get_finishings" print-settings-finishings)
@@ -1741,10 +1742,10 @@ lambda (key value)
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-settings-output-bin) (output-bin settings)
-  (foreign-funcall "gtk_print_settings_set_output_bin"
-                   (g:object print-settings) settings
-                   :string output-bin
-                   :void)
+  (cffi:foreign-funcall "gtk_print_settings_set_output_bin"
+                        (g:object print-settings) settings
+                        :string output-bin
+                        :void)
   output-bin)
 
 (defcfun ("gtk_print_settings_get_output_bin" print-settings-output-bin)

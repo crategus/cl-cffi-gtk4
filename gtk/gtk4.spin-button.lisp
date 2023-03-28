@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.spin-button.lisp
+;;; gtk4.spin-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkSpinButton
@@ -761,11 +761,11 @@ lambda (button)    :run-last
 
 (defun (setf spin-button-increments) (increments button)
   (destructuring-bind (step page) increments
-    (foreign-funcall "gtk_spin_button_set_increments"
-                     (g:object spin-button) button
-                     :double (coerce step 'double-float)
-                     :double (coerce page 'double-float)
-                     :void)
+    (cffi:foreign-funcall "gtk_spin_button_set_increments"
+                          (g:object spin-button) button
+                          :double (coerce step 'double-float)
+                          :double (coerce page 'double-float)
+                          :void)
     (values step page)))
 
 (defcfun ("gtk_spin_button_get_increments" %spin-button-increments) :void
@@ -803,8 +803,8 @@ lambda (button)    :run-last
   @see-function{gtk:adjustment-step-increment}"
   (with-foreign-objects ((step :double) (page :double))
     (%spin-button-increments button step page)
-    (values (mem-ref step :double)
-            (mem-ref page :double))))
+    (values (cffi:mem-ref step :double)
+            (cffi:mem-ref page :double))))
 
 (export 'spin-button-increments)
 
@@ -815,11 +815,11 @@ lambda (button)    :run-last
 
 (defun (setf spin-button-range) (range button)
   (destructuring-bind (min max) range
-    (foreign-funcall "gtk_spin_button_set_range"
-                     (g:object spin-button) button
-                     :double (coerce min 'double-float)
-                     :double (coerce max 'double-float)
-                     :void)
+    (cffi:foreign-funcall "gtk_spin_button_set_range"
+                          (g:object spin-button) button
+                          :double (coerce min 'double-float)
+                          :double (coerce max 'double-float)
+                          :void)
     (values min max)))
 
 (defcfun ("gtk_spin_button_get_range" %spin-button-range) :void
@@ -848,8 +848,8 @@ lambda (button)    :run-last
   @see-class{gtk:spin-button}"
   (with-foreign-objects ((min :double) (max :double))
     (%spin-button-range button min max)
-    (values (mem-ref min :double)
-            (mem-ref max :double))))
+    (values (cffi:mem-ref min :double)
+            (cffi:mem-ref max :double))))
 
 (export 'spin-button-range)
 
@@ -939,4 +939,4 @@ lambda (button)    :run-last
 
 (export 'spin-button-update)
 
-;;; --- End of file gtk.spin-button.lisp ---------------------------------------
+;;; --- End of file gtk4.spin-button.lisp --------------------------------------

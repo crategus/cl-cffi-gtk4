@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.center-box.lisp
+;;; gtk4.center-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkCenterBox
@@ -182,10 +183,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf center-box-start-widget) (value box)
-  (foreign-funcall "gtk_center_box_set_start_widget"
-                   (g:object center-box) box
-                   (g:object widget) value
-                   :void)
+  (cffi:foreign-funcall "gtk_center_box_set_start_widget"
+                        (g:object center-box) box
+                        (g:object widget) value
+                        :void)
   value)
 
 (defcfun ("gtk_center_box_get_start_widget" center-box-start-widget)
@@ -215,10 +216,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf center-box-center-widget) (value box)
-  (foreign-funcall "gtk_center_box_set_center_widget"
-                   (g:object center-box) box
-                   (g:object widget) value
-                   :void)
+  (cffi:foreign-funcall "gtk_center_box_set_center_widget"
+                        (g:object center-box) box
+                        (g:object widget) value
+                        :void)
   value)
 
 (defcfun ("gtk_center_box_get_center_widget" center-box-center-widget)
@@ -248,10 +249,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf center-box-end-widget) (value box)
-  (foreign-funcall "gtk_center_box_set_end_widget"
-                   (g:object center-box) box
-                   (g:object widget) value
-                   :void)
+  (cffi:foreign-funcall "gtk_center_box_set_end_widget"
+                        (g:object center-box) box
+                        (g:object widget) value
+                        :void)
   value)
 
 (defcfun ("gtk_center_box_get_end_widget" center-box-end-widget)
@@ -275,4 +276,4 @@
 
 (export 'center-box-end-widget)
 
-;;; --- End of file gtk.center-box.lisp ----------------------------------------
+;;; --- End of file gtk4.center-box.lisp ---------------------------------------

@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.notebook.lisp
+;;; gtk4.notebook.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkNotebook
@@ -1076,7 +1076,7 @@ lambda (notebook page num)    :run-last
                                          child
                                          tab
                                          (if (eq menu :default)
-                                             (null-pointer)
+                                             (cffi:null-pointer)
                                              menu))
           (notebook-append-page notebook child tab)))
     (:start
@@ -1085,7 +1085,7 @@ lambda (notebook page num)    :run-last
                                          child
                                          tab
                                          (if (eq menu :default)
-                                             (null-pointer)
+                                             (cffi:null-pointer)
                                              menu))
          (notebook-prepend-page notebook child tab)))
     (otherwise
@@ -1094,7 +1094,7 @@ lambda (notebook page num)    :run-last
                                         child
                                         tab
                                         (if (eq menu :default)
-                                            (null-pointer)
+                                            (cffi:null-pointer)
                                             menu)
                                         position)
          (notebook-insert-page notebook
@@ -1506,10 +1506,10 @@ lambda (notebook page num)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf notebook-current-page) (num notebook)
-  (foreign-funcall "gtk_notebook_set_current_page"
-                   (g:object notebook) notebook
-                   :int num
-                   :void)
+  (cffi:foreign-funcall "gtk_notebook_set_current_page"
+                        (g:object notebook) notebook
+                        :int num
+                        :void)
   num)
 
 (defcfun ("gtk_notebook_get_current_page" notebook-current-page) :int
@@ -1544,11 +1544,11 @@ lambda (notebook page num)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf notebook-menu-label) (value notebook child)
-  (foreign-funcall "gtk_notebook_set_menu_label"
-                   (g:object notebook) notebook
-                   (g:object widget) child
-                   (g:object widget) value
-                   :void)
+  (cffi:foreign-funcall "gtk_notebook_set_menu_label"
+                        (g:object notebook) notebook
+                        (g:object widget) child
+                        (g:object widget) value
+                        :void)
   value)
 
 (defcfun ("gtk_notebook_get_menu_label" notebook-menu-label)
@@ -1620,11 +1620,11 @@ lambda (notebook page num)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf notebook-tab-label) (value notebook child)
-  (foreign-funcall "gtk_notebook_set_tab_label"
-                   (g:object notebook) notebook
-                   (g:object widget) child
-                   (g:object widget) value
-                   :void)
+  (cffi:foreign-funcall "gtk_notebook_set_tab_label"
+                        (g:object notebook) notebook
+                        (g:object widget) child
+                        (g:object widget) value
+                        :void)
   value)
 
 (defcfun ("gtk_notebook_get_tab_label" notebook-tab-label)
@@ -1661,11 +1661,11 @@ lambda (notebook page num)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf notebook-menu-label-text) (value notebook child)
-  (foreign-funcall "gtk_notebook_set_menu_label_text"
-                   (g:object notebook) notebook
-                   (g:object widget) child
-                   :string value
-                   :void)
+  (cffi:foreign-funcall "gtk_notebook_set_menu_label_text"
+                        (g:object notebook) notebook
+                        (g:object widget) child
+                        :string value
+                        :void)
   value)
 
 (defcfun ("gtk_notebook_get_menu_label_text" notebook-menu-label-text)
@@ -1699,11 +1699,11 @@ lambda (notebook page num)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf notebook-tab-label-text) (value notebook child)
-  (foreign-funcall "gtk_notebook_set_tab_label_text"
-                   (g:object notebook) notebook
-                   (g:object widget) child
-                   :string value
-                   :void)
+  (cffi:foreign-funcall "gtk_notebook_set_tab_label_text"
+                        (g:object notebook) notebook
+                        (g:object widget) child
+                        :string value
+                        :void)
   value)
 
 (defcfun ("gtk_notebook_get_tab_label_text" notebook-tab-label-text) :string
@@ -1737,11 +1737,11 @@ lambda (notebook page num)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf notebook-tab-reorderable) (value notebook child)
-  (foreign-funcall "gtk_notebook_set_tab_reorderable"
-                   (g:object notebook) notebook
-                   (g:object widget) child
-                   :boolean value
-                   :void)
+  (cffi:foreign-funcall "gtk_notebook_set_tab_reorderable"
+                        (g:object notebook) notebook
+                        (g:object widget) child
+                        :boolean value
+                        :void)
   value)
 
 (defcfun ("gtk_notebook_get_tab_reorderable" notebook-tab-reorderable)
@@ -1774,11 +1774,11 @@ lambda (notebook page num)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf notebook-tab-detachable) (value notebook child)
-  (foreign-funcall "gtk_notebook_set_tab_detachable"
-                   (g:object notebook) notebook
-                   (g:object widget) child
-                   :boolean value
-                   :void)
+  (cffi:foreign-funcall "gtk_notebook_set_tab_detachable"
+                        (g:object notebook) notebook
+                        (g:object widget) child
+                        :boolean value
+                        :void)
   value)
 
 (defcfun ("gtk_notebook_get_tab_detachable" notebook-tab-detachable)
@@ -1846,11 +1846,11 @@ on_drop_zone_drag_data_received (GtkWidget        *widget,
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf notebook-action-widget) (value notebook packtype)
-  (foreign-funcall "gtk_notebook_set_action_widget"
-                   (g:object notebook) notebook
-                   pack-type packtype
-                   (g:object widget) value
-                   :void)
+  (cffi:foreign-funcall "gtk_notebook_set_action_widget"
+                        (g:object notebook) notebook
+                        pack-type packtype
+                        (g:object widget) value
+                        :void)
   value)
 
 (defcfun ("gtk_notebook_get_action_widget" notebook-action-widget)
@@ -1879,4 +1879,4 @@ on_drop_zone_drag_data_received (GtkWidget        *widget,
 
 (export 'notebook-action-widget)
 
-;;; --- End of file gtk.notebook.lisp ------------------------------------------
+;;; --- End of file gtk4.notebook.lisp -----------------------------------------

@@ -6,25 +6,25 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
 ;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkTreeView
@@ -1572,10 +1572,10 @@ lambda (view)    :action
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-view-column}"
   (%tree-view-set-column-drag-function
-      view
-      (callback tree-view-column-drop-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          view
+          (cffi:callback tree-view-column-drop-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'tree-view-set-column-drag-function)
 
@@ -1956,8 +1956,8 @@ lambda (view)    :action
   @see-symbol{gtk:tree-view-mapping-func}"
   (with-stable-pointer (ptr func)
     (%tree-view-map-expanded-rows view
-                                      (callback tree-view-mapping-func)
-                                      ptr)))
+                                  (cffi:callback tree-view-mapping-func)
+                                  ptr)))
 
 (export 'tree-view-map-expanded-rows)
 
@@ -2306,8 +2306,8 @@ lambda (view)    :action
   @see-class{gtk:tree-view}"
   (with-foreign-objects ((tx :int) (ty :int))
     (%tree-view-convert-bin-window-to-tree-coords view x y tx ty)
-    (values (mem-ref tx :int)
-            (mem-ref ty :int))))
+    (values (cffi:mem-ref tx :int)
+            (cffi:mem-ref ty :int))))
 
 (export 'tree-view-convert-bin-window-to-tree-coords)
 
@@ -2341,8 +2341,8 @@ lambda (view)    :action
   @see-function{gtk:tree-view-bin-window}"
   (with-foreign-objects ((wx :int) (wy :int))
     (%tree-view-convert-bin-window-to-widget-coords view x y wx wy)
-    (values (mem-ref wx :int)
-            (mem-ref wy :int))))
+    (values (cffi:mem-ref wx :int)
+            (cffi:mem-ref wy :int))))
 
 (export 'tree-view-convert-bin-window-to-widget-coords)
 
@@ -2375,8 +2375,8 @@ lambda (view)    :action
   @see-class{gtk:tree-view}"
   (with-foreign-objects ((bx :int) (by :int))
     (%tree-view-convert-tree-to-bin-window-coords view x y bx by)
-    (values (mem-ref bx :int)
-            (mem-ref by :int))))
+    (values (cffi:mem-ref bx :int)
+            (cffi:mem-ref by :int))))
 
 (export 'tree-view-convert-tree-to-bin-window-coords)
 
@@ -2409,8 +2409,8 @@ lambda (view)    :action
   @see-class{gtk:tree-view}"
   (with-foreign-objects ((wx :int) (wy :int))
     (%tree-view-convert-tree-to-widget-coords view x y wx wy)
-    (values (mem-ref wx :int)
-            (mem-ref wy :int))))
+    (values (cffi:mem-ref wx :int)
+            (cffi:mem-ref wy :int))))
 
 (export 'tree-view-convert-tree-to-widget-coords)
 
@@ -2444,8 +2444,8 @@ lambda (view)    :action
   @see-function{gtk:tree-view-bin-window}"
   (with-foreign-objects ((bx :int) (by :int))
     (%tree-view-convert-widget-to-bin-window-coords view x y bx by)
-    (values (mem-ref bx :int)
-            (mem-ref by :int))))
+    (values (cffi:mem-ref bx :int)
+            (cffi:mem-ref by :int))))
 
 (export 'tree-view-convert-widget-to-bin-window-coords)
 
@@ -2478,8 +2478,8 @@ lambda (view)    :action
   @see-class{gtk:tree-view}"
   (with-foreign-objects ((tx :int) (ty :int))
     (%tree-view-convert-widget-to-tree-coords view x y tx ty)
-    (values (mem-ref tx :int)
-            (mem-ref ty :int))))
+    (values (cffi:mem-ref tx :int)
+            (cffi:mem-ref ty :int))))
 
 (export 'tree-view-convert-widget-to-tree-coords)
 
@@ -2515,8 +2515,8 @@ lambda (view)    :action
   (let ((n-targets (length targets)))
     (with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
       (loop for i from 0 below n-targets
-            for target-ptr = (mem-aptr targets-ptr
-                                       '(:struct %target-entry) i)
+            for target-ptr = (cffi:mem-aptr targets-ptr
+                                            '(:struct %target-entry) i)
             for entry in targets
             do (with-foreign-slots ((target flags info)
                                     target-ptr
@@ -2525,9 +2525,9 @@ lambda (view)    :action
                  (setf flags (second entry))
                  (setf info (third entry))))
       (%tree-view-enable-model-drag-dest view
-                                             targets-ptr
-                                             n-targets
-                                             actions))))
+                                         targets-ptr
+                                         n-targets
+                                         actions))))
 
 #+nil
 (export 'tree-view-enable-model-drag-dest)
@@ -2569,8 +2569,8 @@ lambda (view)    :action
   (let ((n-targets (length targets)))
     (with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
       (loop for i from 0 below n-targets
-            for target-ptr = (mem-aptr targets-ptr
-                                       '(:struct %target-entry) i)
+            for target-ptr = (cffi:mem-aptr targets-ptr
+                                            '(:struct %target-entry) i)
             for entry in targets
             do (with-foreign-slots ((target flags info)
                                     target-ptr
@@ -2579,10 +2579,10 @@ lambda (view)    :action
                  (setf flags (second entry))
                  (setf info (third entry))))
       (%tree-view-enable-model-drag-source view
-                                               mask
-                                               targets-ptr
-                                               n-targets
-                                               actions))))
+                                           mask
+                                           targets-ptr
+                                           n-targets
+                                           actions))))
 
 #+nil
 (export 'tree-view-enable-model-drag-source)
@@ -2703,8 +2703,8 @@ lambda (view)    :action
   @see-function{gtk:tree-view-set-drag-dest-row}"
   (with-foreign-objects ((path :pointer) (pos :pointer))
     (%tree-view-get-drag-dest-row view path pos)
-    (values (mem-ref path '(g:boxed tree-path :return))
-            (mem-ref pos 'tree-view-drop-position))))
+    (values (cffi:mem-ref path '(g:boxed tree-path :return))
+            (cffi:mem-ref pos 'tree-view-drop-position))))
 
 #+nil
 (export 'tree-view-get-drag-dest-row)
@@ -2751,8 +2751,8 @@ lambda (view)    :action
   @see-symbol{gtk:tree-view-drop-position}"
   (with-foreign-objects ((path :pointer) (pos :int))
     (when (%tree-view-get-dest-row-at-pos view x y path pos)
-      (values (mem-ref path '(g:boxed tree-path :return))
-              (mem-ref pos 'tree-view-drop-position)))))
+      (values (cffi:mem-ref path '(g:boxed tree-path :return))
+              (cffi:mem-ref pos 'tree-view-drop-position)))))
 
 #+nil
 (export 'tree-view-get-dest-row-at-pos)
@@ -2865,10 +2865,10 @@ lambda (view)    :action
   @see-class{gtk:tree-view}
   @see-symbol{gtk:tree-view-search-equal-func}"
   (%tree-view-set-search-equal-func
-      view
-      (callback tree-view-search-equal-func)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          view
+          (cffi:callback tree-view-search-equal-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'tree-view-set-search-equal-func)
 
@@ -2878,10 +2878,10 @@ lambda (view)    :action
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf tree-view-search-entry) (value view)
-  (foreign-funcall "gtk_tree_view_set_search_entry"
-                   (g:object tree-view) view
-                   (g:object entry) value
-                   :void)
+  (cffi:foreign-funcall "gtk_tree_view_set_search_entry"
+                        (g:object tree-view) view
+                        (g:object entry) value
+                        :void)
   value)
 
 (defcfun ("gtk_tree_view_get_search_entry" tree-view-search-entry)
@@ -2993,14 +2993,14 @@ lambda (view)    :action
   @see-symbol{gtk:tree-view-row-separator-func}"
   (if func
       (%tree-view-set-row-separator-func
-          view
-          (callback tree-view-row-separator-func)
-          (glib:allocate-stable-pointer func)
-          (callback glib:stable-pointer-destroy-notify))
+              view
+              (cffi:callback tree-view-row-separator-func)
+              (glib:allocate-stable-pointer func)
+              (cffi:callback glib:stable-pointer-destroy-notify))
       (%tree-view-set-row-separator-func view
-                                             (null-pointer)
-                                             (null-pointer)
-                                             (null-pointer))))
+                                         (cffi:null-pointer)
+                                         (cffi:null-pointer)
+                                         (cffi:null-pointer))))
 
 (export 'tree-view-set-row-separator-func)
 
@@ -3032,10 +3032,10 @@ lambda (view)    :action
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf tree-view-grid-lines) (grid-lines view)
-  (foreign-funcall "gtk_tree_view_set_grid_lines"
-                   (g:object tree-view) view
-                   tree-view-grid-lines grid-lines
-                   :void)
+  (cffi:foreign-funcall "gtk_tree_view_set_grid_lines"
+                        (g:object tree-view) view
+                        tree-view-grid-lines grid-lines
+                        :void)
   grid-lines)
 
 (defcfun ("gtk_tree_view_get_grid_lines" tree-view-grid-lines)

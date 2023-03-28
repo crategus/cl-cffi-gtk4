@@ -176,17 +176,17 @@
                          (minimum-baseline :int)
                          (natural-baseline :int))
     (%layout-manager-measure manager
-                                 widget
-                                 orientation
-                                 for-size
-                                 minimum
-                                 natural
-                                 minimum-baseline
-                                 natural-baseline)
-    (values (mem-ref minimum :int)
-            (mem-ref natural :int)
-            (mem-ref minimum-baseline :int)
-            (mem-ref natural-baseline :int))))
+                             widget
+                             orientation
+                             for-size
+                             minimum
+                             natural
+                             minimum-baseline
+                             natural-baseline)
+    (values (cffi:mem-ref minimum :int)
+            (cffi:mem-ref natural :int)
+            (cffi:mem-ref minimum-baseline :int)
+            (cffi:mem-ref natural-baseline :int))))
 
 (export 'layout-manager-measure)
 

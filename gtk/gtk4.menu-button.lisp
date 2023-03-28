@@ -738,9 +738,9 @@ lambda (button)
   @see-function{gtk:menu-button-menu-model}"
   (%menu-button-set-create-popup-func
           button
-          (callback menu-button-create-popup-func)
+          (cffi:callback menu-button-create-popup-func)
           (glib:allocate-stable-pointer func)
-          (callback glib:stable-pointer-destroy-notify)))
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'menu-button-set-create-popup-func)
 

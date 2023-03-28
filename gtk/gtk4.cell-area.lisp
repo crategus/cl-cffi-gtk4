@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.cell-area.lisp
+;;; gtk4.cell-area.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2022 Dieter Kaiser
+;;; Copyright (C) 2012 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkCellArea
@@ -740,8 +741,8 @@ lambda (area renderer editable)    :run-first
   @see-symbol{gtk:cell-callback}"
   (with-stable-pointer (ptr func)
     (%cell-area-foreach area
-                            (callback cell-callback)
-                            ptr)))
+                        (cffi:callback cell-callback)
+                        ptr)))
 
 (export 'cell-area-foreach)
 
@@ -824,12 +825,12 @@ lambda (area renderer editable)    :run-first
   @see-symbol{gtk:cell-alloc-callback}"
   (with-stable-pointer (ptr func)
     (%cell-area-foreach-alloc area
-                                  context
-                                  widget
-                                  cell
-                                  background
-                                  (callback cell-callback-alloc)
-                                  ptr)))
+                              context
+                              widget
+                              cell
+                              background
+                              (cffi:callback cell-callback-alloc)
+                              ptr)))
 
 (export 'cell-area-foreach-alloc)
 
@@ -1112,12 +1113,12 @@ lambda (area renderer editable)    :run-first
   @see-function{gtk:cell-area-context-preferred-width}"
   (with-foreign-objects ((minimum-width :int) (natural-width :int))
     (%cell-area-preferred-width area
-                                    context
-                                    widget
-                                    minimum-width
-                                    natural-width)
-    (values (mem-ref minimum-width :int)
-            (mem-ref natural-width :int))))
+                                context
+                                widget
+                                minimum-width
+                                natural-width)
+    (values (cffi:mem-ref minimum-width :int)
+            (cffi:mem-ref natural-width :int))))
 
 (export 'cell-area-preferred-width)
 
@@ -1172,13 +1173,13 @@ lambda (area renderer editable)    :run-first
   @see-function{gtk:cell-area-context-preferred-width}"
   (with-foreign-objects ((minimum-height :int) (natural-height :int))
     (%cell-area-preferred-height-for-width area
-                                               context
-                                               widget
-                                               width
-                                               minimum-height
-                                               natural-height)
-       (values (mem-ref minimum-height :int)
-               (mem-ref natural-height :int))))
+                                           context
+                                           widget
+                                           width
+                                           minimum-height
+                                           natural-height)
+       (values (cffi:mem-ref minimum-height :int)
+               (cffi:mem-ref natural-height :int))))
 
 (export 'cell-area-preferred-height-for-width)
 
@@ -1222,12 +1223,12 @@ lambda (area renderer editable)    :run-first
   @see-function{gtk:cell-area-context-preferred-height}"
   (with-foreign-objects ((minimum-height :int) (natural-height :int))
     (%cell-area-preferred-height area
-                                     context
-                                     widget
-                                     minimum-height
-                                     natural-height)
-    (values (mem-ref minimum-height :int)
-            (mem-ref natural-height :int))))
+                                 context
+                                 widget
+                                 minimum-height
+                                 natural-height)
+    (values (cffi:mem-ref minimum-height :int)
+            (cffi:mem-ref natural-height :int))))
 
 (export 'cell-area-preferred-height)
 
@@ -1283,13 +1284,13 @@ lambda (area renderer editable)    :run-first
   @see-function{gtk:cell-area-context-preferred-height}"
   (with-foreign-objects ((minimum-width :int) (natural-width :int))
     (%cell-area-preferred-width-for-height area
-                                               context
-                                               widget
-                                               height
-                                               minimum-width
-                                               natural-width)
-    (values (mem-ref minimum-width :int)
-            (mem-ref natural-width :int))))
+                                           context
+                                           widget
+                                           height
+                                           minimum-width
+                                           natural-width)
+    (values (cffi:mem-ref minimum-width :int)
+            (cffi:mem-ref natural-width :int))))
 
 (export 'cell-area-preferred-width-for-height)
 
@@ -1472,7 +1473,7 @@ lambda (area renderer editable)    :run-first
   (let ((class (gobject:type-class-ref gtype)))
     (unwind-protect
       (let ((pspec (%cell-area-class-find-cell-property class property)))
-        (unless (null-pointer-p pspec) pspec))
+        (unless (cffi:null-pointer-p pspec) pspec))
       (gobject:type-class-unref class))))
 
 (export 'cell-area-class-find-cell-property)
@@ -1503,14 +1504,13 @@ lambda (area renderer editable)    :run-first
   (let ((class (gobject:type-class-ref gtype)))
     (unwind-protect
       (with-foreign-object (n-props :uint)
-        (let ((pspecs (%cell-area-class-list-cell-properties class
-                                                                 n-props)))
+        (let ((pspecs (%cell-area-class-list-cell-properties class n-props)))
           (unwind-protect
-            (loop for count from 0 below (mem-ref n-props :uint)
-                  for pspec = (mem-aref pspecs :pointer count)
+            (loop for count from 0 below (cffi:mem-ref n-props :uint)
+                  for pspec = (cffi:mem-aref pspecs :pointer count)
                   collect pspec)
             (glib:free pspecs))))
-      (gobject:type-class-unref class))))
+      (g:type-class-unref class))))
 
 (export 'cell-area-class-list-cell-properties)
 
@@ -2051,15 +2051,15 @@ lambda (area renderer editable)    :run-first
   @see-function{gtk:cell-area-inner-cell-area}"
   (with-foreign-objects ((minimum-size :int) (natural-size :int))
     (%cell-area-request-renderer area
-                                     renderer
-                                     orientation
-                                     widget
-                                     for-size
-                                     minimum-size
-                                     natural-size)
-      (values (mem-ref minimum-size :int)
-              (mem-ref natural-size :int))))
+                                 renderer
+                                 orientation
+                                 widget
+                                 for-size
+                                 minimum-size
+                                 natural-size)
+      (values (cffi:mem-ref minimum-size :int)
+              (cffi:mem-ref natural-size :int))))
 
 (export 'cell-area-request-renderer)
 
-;;; --- End of file gtk.cell-area.lisp -----------------------------------------
+;;; --- End of file gtk4.cell-area.lisp ----------------------------------------

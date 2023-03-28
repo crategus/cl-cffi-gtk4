@@ -1667,7 +1667,7 @@ lambda (view)    :action
   (let ((iter (make-instance 'text-iter)))
     (with-foreign-object (line :int)
       (%text-view-line-at-y view iter y line)
-      (values iter (mem-ref line :int)))))
+      (values iter (cffi:mem-ref line :int)))))
 
 (export 'text-view-line-at-y)
 
@@ -1701,8 +1701,8 @@ lambda (view)    :action
   @see-function{gtk:text-view-buffer-to-window-coords}"
   (with-foreign-objects ((y :int) (height :int))
     (%text-view-line-yrange view iter y height)
-    (values (mem-ref y :int)
-            (mem-ref height :int))))
+    (values (cffi:mem-ref y :int)
+            (cffi:mem-ref height :int))))
 
 (export 'text-view-line-yrange)
 
@@ -1784,7 +1784,7 @@ lambda (view)    :action
   (with-foreign-object (trailing :int)
     (let ((iter (make-instance 'text-iter)))
       (%text-view-iter-at-position view iter trailing x y)
-      (values iter (mem-ref trailing :int)))))
+      (values iter (cffi:mem-ref trailing :int)))))
 
 (export 'text-view-iter-at-position)
 
@@ -1826,11 +1826,11 @@ lambda (view)    :action
   @see-function{gtk:text-view-border-window-size}"
   (with-foreign-objects ((xwindow :int) (ywindow :int))
     (%text-view-buffer-to-window-coords view
-                                            wtype
-                                            xbuffer ybuffer
-                                            xwindow ywindow)
-    (values (mem-ref xwindow :int)
-            (mem-ref ywindow :int))))
+                                        wtype
+                                        xbuffer ybuffer
+                                        xwindow ywindow)
+    (values (cffi:mem-ref xwindow :int)
+            (cffi:mem-ref ywindow :int))))
 
 (export 'text-view-buffer-to-window-coords)
 
@@ -1875,8 +1875,8 @@ lambda (view)    :action
                                             wtype
                                             xwindow ywindow
                                             xbuffer ybuffer)
-    (values (mem-ref xbuffer :int)
-            (mem-ref ybuffer :int))))
+    (values (cffi:mem-ref xbuffer :int)
+            (cffi:mem-ref ybuffer :int))))
 
 (export 'text-view-window-to-buffer-coords)
 

@@ -2437,9 +2437,9 @@ lambda (widget)    :run-last
   @see-function{gdk:frame-clock-frame-time}
   @see-function{gdk:frame-timings-predicted-presentation-time}"
   (%widget-add-tick-callback widget
-      (callback tick-callback)
-      (glib:allocate-stable-pointer func)
-      (callback glib:stable-pointer-destroy-notify)))
+          (cffi:callback tick-callback)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'widget-add-tick-callback)
 
@@ -2921,13 +2921,13 @@ lambda (widget)    :run-last
   @see-class{gtk:widget}"
   (with-foreign-objects ((dst-x :int) (dst-y :int))
     (when (%widget-translate-coordinates src
-                                             dst
-                                             src-x
-                                             src-y
-                                             dst-x
-                                             dst-y)
-      (values (mem-ref dst-x :int)
-              (mem-ref dst-y :int)))))
+                                         dst
+                                         src-x
+                                         src-y
+                                         dst-x
+                                         dst-y)
+      (values (cffi:mem-ref dst-x :int)
+              (cffi:mem-ref dst-y :int)))))
 
 (export 'widget-translate-coordinates)
 
@@ -2985,10 +2985,10 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-direction) (direction widget)
-  (foreign-funcall "gtk_widget_set_direction"
-                   (g:object widget) widget
-                   text-direction direction
-                   :void)
+  (cffi:foreign-funcall "gtk_widget_set_direction"
+                        (g:object widget) widget
+                        text-direction direction
+                        :void)
   direction)
 
 (defcfun ("gtk_widget_get_direction" widget-direction) text-direction
@@ -3029,9 +3029,9 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-default-direction) (direction)
-  (foreign-funcall "gtk_widget_set_default_direction"
-                   text-direction direction
-                   :void)
+  (cffi:foreign-funcall "gtk_widget_set_default_direction"
+                        text-direction direction
+                        :void)
   direction)
 
 (defcfun ("gtk_widget_get_default_direction" widget-default-direction)
@@ -3115,13 +3115,12 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-font-options) (options widget)
-  (foreign-funcall "gtk_widget_set_font_options"
-                   (g:object widget) widget
-                   (:pointer (:struct cairo:font-options-t)) (if options
-                                                                 options
-                                                                 (null-pointer))
-                   :void)
-  options)
+  (let ((options1 (if options options (cffi:null-pointer))))
+    (cffi:foreign-funcall "gtk_widget_set_font_options"
+                          (g:object widget) widget
+                          (:pointer (:struct cairo:font-options-t)) options1
+                          :void)
+    options))
 
 (defcfun ("gtk_widget_get_font_options" %widget-font-options)
     (:pointer (:struct cairo:font-options-t))
@@ -3145,7 +3144,7 @@ lambda (widget)    :run-last
   @see-class{gdk:screen}
   @see-symbol{cairo:font-options-t}"
   (let ((options (%widget-font-options widget)))
-    (unless (null-pointer-p options)
+    (unless (cffi:null-pointer-p options)
       options)))
 
 (export 'widget-font-options)
@@ -3156,10 +3155,10 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-font-map) (fontmap widget)
-  (foreign-funcall "gtk_widget_set_font_map"
-                   (g:object widget) widget
-                   (g:object pango:font-map) fontmap
-                   :void)
+  (cffi:foreign-funcall "gtk_widget_set_font_map"
+                        (g:object widget) widget
+                        (g:object pango:font-map) fontmap
+                        :void)
   fontmap)
 
 (defcfun ("gtk_widget_get_font_map" widget-font-map)
@@ -3214,7 +3213,7 @@ lambda (widget)    :run-last
   @see-class{pango:layout}
   @see-function{pango:layout-context-changed}"
   (%widget-create-pango-layout widget
-                                   (if text text (null-pointer))))
+                               (if text text (cffi:null-pointer))))
 
 (export 'widget-create-pango-layout)
 
@@ -3348,10 +3347,10 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-child-visible) (is-visible widget)
-  (foreign-funcall "gtk_widget_set_child_visible"
-                   (g:object widget) widget
-                   :boolean is-visible
-                   :void)
+  (cffi:foreign-funcall "gtk_widget_set_child_visible"
+                        (g:object widget) widget
+                        :boolean is-visible
+                        :void)
   is-visible)
 
 (defcfun ("gtk_widget_get_child_visible" widget-child-visible) :boolean
@@ -3485,11 +3484,11 @@ lambda (widget)    :run-last
 
 (defun (setf widget-size-request) (size widget)
   (destructuring-bind (width height) size
-    (foreign-funcall "gtk_widget_set_size_request"
-                     (g:object widget) widget
-                     :int width
-                     :int height
-                     :void)
+    (cffi:foreign-funcall "gtk_widget_set_size_request"
+                          (g:object widget) widget
+                          :int width
+                          :int height
+                          :void)
     (values width height)))
 
 (defcfun ("gtk_widget_get_size_request" %widget-size-request) :void
@@ -3557,8 +3556,8 @@ lambda (widget)    :run-last
   @see-function{gtk:widget-margin-bottom}"
   (with-foreign-objects ((width :int) (height :int))
     (%widget-size-request widget width height)
-    (values (mem-ref width :int)
-            (mem-ref height :int))))
+    (values (cffi:mem-ref width :int)
+            (cffi:mem-ref height :int))))
 
 (export 'widget-size-request)
 
@@ -4155,11 +4154,11 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-state-flags) (flags widget &optional (clear nil))
-  (foreign-funcall "gtk_widget_set_state_flags"
-                   (g:object widget) widget
-                   state-flags flags
-                   :boolean clear
-                   :void)
+  (cffi:foreign-funcall "gtk_widget_set_state_flags"
+                        (g:object widget) widget
+                        state-flags flags
+                        :boolean clear
+                        :void)
   flags)
 
 (defcfun ("gtk_widget_get_state_flags" widget-state-flags) state-flags
@@ -4306,10 +4305,10 @@ lambda (widget)    :run-last
 ;; TODO: gtk_widget_set_realized has gone.
 
 (defun (setf widget-realized) (realized widget)
-  (foreign-funcall "gtk_widget_set_realized"
-                   (g:object widget) widget
-                   :boolean realized
-                   :void)
+  (cffi:foreign-funcall "gtk_widget_set_realized"
+                        (g:object widget) widget
+                        :boolean realized
+                        :void)
   realized)
 
 (defcfun ("gtk_widget_get_realized" widget-realized) :boolean
@@ -4341,10 +4340,10 @@ lambda (widget)    :run-last
 ;; TODO: gtk_widget_set_mapped has gone.
 
 (defun (setf widget-mapped) (mapped widget)
-  (foreign-funcall "gtk_widget_set_mapped"
-                   (g:object widget) widget
-                   :boolean mapped
-                   :void)
+  (cffi:foreign-funcall "gtk_widget_set_mapped"
+                        (g:object widget) widget
+                        :boolean mapped
+                        :void)
   mapped)
 
 (defcfun ("gtk_widget_get_mapped" widget-mapped) :boolean
@@ -4950,12 +4949,12 @@ lambda (widget)    :run-last
   @see-function{gtk:widget-class-set-template-from-resource}"
   (let ((class (gobject:type-class-ref gtype)))
     (multiple-value-bind (data len)
-        (foreign-string-alloc template)
+        (cffi:foreign-string-alloc template)
       (unwind-protect
         (%widget-class-set-template class (glib:bytes-new data len))
         (progn
           (gobject:type-class-unref class)
-          (foreign-string-free data))))))
+          (cffi:foreign-string-free data))))))
 
 (export 'widget-class-set-template)
 

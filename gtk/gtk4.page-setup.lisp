@@ -6,25 +6,25 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
 ;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkPageSetup
@@ -158,10 +158,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf page-setup-orientation) (orientation setup)
-  (foreign-funcall "gtk_page_setup_set_orientation"
-                   (g:object page-setup) setup
-                   page-orientation orientation
-                   :void)
+  (cffi:foreign-funcall "gtk_page_setup_set_orientation"
+                        (g:object page-setup) setup
+                        page-orientation orientation
+                        :void)
   orientation)
 
 (defcfun ("gtk_page_setup_get_orientation" page-setup-orientation)
@@ -201,10 +201,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf page-setup-paper-size) (size setup)
-  (foreign-funcall "gtk_page_setup_set_paper_size"
-                   (g:object page-setup) setup
-                   (g:boxed paper-size) size
-                   :void)
+  (cffi:foreign-funcall "gtk_page_setup_set_paper_size"
+                        (g:object page-setup) setup
+                        (g:boxed paper-size) size
+                        :void)
   size)
 
 (defcfun ("gtk_page_setup_get_paper_size" page-setup-paper-size)
@@ -236,11 +236,11 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf page-setup-top-margin) (margin setup unit)
-  (foreign-funcall "gtk_page_setup_set_top_margin"
-                   (g:object page-setup) setup
-                   :double (coerce margin 'double-float)
-                   unit unit
-                   :void)
+  (cffi:foreign-funcall "gtk_page_setup_set_top_margin"
+                        (g:object page-setup) setup
+                        :double (coerce margin 'double-float)
+                        unit unit
+                        :void)
   margin)
 
 (defcfun ("gtk_page_setup_get_top_margin" page-setup-top-margin) :double
@@ -271,11 +271,11 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf page-setup-bottom-margin) (margin setup unit)
-  (foreign-funcall "gtk_page_setup_set_bottom_margin"
-                   (g:object page-setup) setup
-                   :double (coerce margin 'double-float)
-                   unit unit
-                   :void)
+  (cffi:foreign-funcall "gtk_page_setup_set_bottom_margin"
+                        (g:object page-setup) setup
+                        :double (coerce margin 'double-float)
+                        unit unit
+                        :void)
   margin)
 
 (defcfun ("gtk_page_setup_get_bottom_margin" page-setup-bottom-margin)
@@ -308,11 +308,11 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf page-setup-left-margin) (margin setup unit)
-  (foreign-funcall "gtk_page_setup_set_left_margin"
-                   (g:object page-setup) setup
-                   :double (coerce margin 'double-float)
-                   unit unit
-                   :void)
+  (cffi:foreign-funcall "gtk_page_setup_set_left_margin"
+                        (g:object page-setup) setup
+                        :double (coerce margin 'double-float)
+                        unit unit
+                        :void)
   margin)
 
 (defcfun ("gtk_page_setup_get_left_margin" page-setup-left-margin) :double
@@ -343,11 +343,11 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf page-setup-right-margin) (margin setup unit)
-  (foreign-funcall "gtk_page_setup_set_right_margin"
-                   (g:object page-setup) setup
-                   :double (coerce margin 'double-float)
-                   unit unit
-                   :void)
+  (cffi:foreign-funcall "gtk_page_setup_set_right_margin"
+                        (g:object page-setup) setup
+                        :double (coerce margin 'double-float)
+                        unit unit
+                        :void)
   margin)
 
 (defcfun ("gtk_page_setup_get_right_margin" page-setup-right-margin) :double
@@ -663,7 +663,7 @@
   @see-type{glib:key-file}"
   (%page-setup-to-key-file setup
                                keyfile
-                               (if groupname groupname (null-pointer))))
+                               (if groupname groupname (cffi:null-pointer))))
 
 (export 'page-setup-to-key-file)
 

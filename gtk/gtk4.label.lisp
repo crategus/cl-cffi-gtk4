@@ -1130,10 +1130,10 @@ lambda (label step count extend)    :action
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf label-text) (text label)
-  (foreign-funcall "gtk_label_set_text"
-                   (g:object label) label
-                   :string text
-                   :void)
+  (cffi:foreign-funcall "gtk_label_set_text"
+                        (g:object label) label
+                        :string text
+                        :void)
   text)
 
 (defcfun ("gtk_label_get_text" label-text) :string
@@ -1249,7 +1249,7 @@ lambda (label step count extend)    :action
   @see-function{pango:pixels}"
   (with-foreign-objects ((x :int) (y :int))
     (%label-get-layout-offsets label x y)
-    (values (mem-ref x :int) (mem-ref y :int))))
+    (values (cffi:mem-ref x :int) (cffi:mem-ref y :int))))
 
 (export 'label-layout-offsets)
 
@@ -1384,8 +1384,8 @@ lambda (label step count extend)    :action
   @see-class{gtk:label}"
   (with-foreign-objects ((start :int) (end :int))
     (when (%label-get-selection-bounds label start end)
-      (values (mem-ref start :int)
-              (mem-ref end :int)))))
+      (values (cffi:mem-ref start :int)
+              (cffi:mem-ref end :int)))))
 
 (export 'label-selection-bounds)
 

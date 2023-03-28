@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.print-job.lisp
+;;; gtk4.print-job.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2022 Dieter Kaiser
+;;; Copyright (C) 2013 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkPrintJob
@@ -469,9 +470,9 @@
   the job completes or an error occurs}
   @short{Sends the print job off to the printer.}
   @see-class{gtk:print-job}"
-  (%print-job-send job (callback print-job-complete-func)
+  (%print-job-send job (cffi:callback print-job-complete-func)
                        (glib:allocate-stable-pointer func)
-                       (callback glib:stable-pointer-destroy-notify)))
+                       (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'print-job-send)
 
@@ -481,10 +482,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-job-pages) (pages job)
-  (foreign-funcall "gtk_print_job_set_pages"
-                   (g:object print-job) job
-                   print-pages pages
-                   :void)
+  (cffi:foreign-funcall "gtk_print_job_set_pages"
+                        (g:object print-job) job
+                        print-pages pages
+                        :void)
   pages)
 
 (defcfun ("gtk_print_job_get_pages" print-job-pages) print-pages
@@ -541,10 +542,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-job-page-set) (page-set job)
-  (foreign-funcall "gtk_print_job_set_page_set"
-                   (g:object print-job) job
-                   page-set page-set
-                   :void)
+  (cffi:foreign-funcall "gtk_print_job_set_page_set"
+                        (g:object print-job) job
+                        page-set page-set
+                        :void)
   page-set)
 
 (defcfun ("gtk_print_job_get_page_set" print-job-page-set) page-set
@@ -573,9 +574,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-job-numcopies) (num-copies job)
-  (foreign-funcall "gtk_print_job_set_num_copies"
-                   (g:object print-job) job
-                   :int num-copies)
+  (cffi:foreign-funcall "gtk_print_job_set_num_copies"
+                        (g:object print-job) job
+                        :int num-copies
+                        :void)
   num-copies)
 
 (defcfun ("gtk_print_job_get_num_copies" print-job-num-copies) :int
@@ -603,10 +605,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-job-scale) (scale job)
-  (foreign-funcall "gtk_print_job_set_scale"
-                   (g:object print-job) job
-                   :double scale
-                   :void)
+  (cffi:foreign-funcall "gtk_print_job_set_scale"
+                        (g:object print-job) job
+                        :double scale
+                        :void)
   scale)
 
 (defcfun ("gtk_print_job_get_scale" print-job-scale) :double
@@ -634,10 +636,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-job-n-up) (n-up job)
-  (foreign-funcall "gtk_print_job_set_n_up"
-                   (g:object print-job) job
-                   :uint n-up
-                   :void)
+  (cffi:foreign-funcall "gtk_print_job_set_n_up"
+                        (g:object print-job) job
+                        :uint n-up
+                        :void)
   n-up)
 
 (defcfun ("gtk_print_job_get_n_up" print-job-n-up) :uint
@@ -665,10 +667,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-job-n-up-layout) (layout job)
-  (foreign-funcall "gtk_print_job_set_n_up_layout"
-                   (g:object print-job) job
-                   number-up-layout layout
-                   :void)
+  (cffi:foreign-funcall "gtk_print_job_set_n_up_layout"
+                        (g:object print-job) job
+                        number-up-layout layout
+                        :void)
   layout)
 
 (defcfun ("gtk_print_job_get_n_up_layout" print-job-n-up-layout)
@@ -698,10 +700,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-job-rotate) (rotate job)
-  (foreign-funcall "gtk_print_job_set_rotate"
-                   (g:object print-job) job
-                   :boolean rotate
-                   :void)
+  (cffi:foreign-funcall "gtk_print_job_set_rotate"
+                        (g:object print-job) job
+                        :boolean rotate
+                        :void)
   rotate)
 
 (defcfun ("gtk_print_job_get_rotate" print-job-rotate) :boolean
@@ -729,10 +731,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-job-collate) (collate job)
-  (foreign-funcall "gtk_print_job_set_collate"
-                   (g:object print-job) job
-                   :boolean collate
-                   :void)
+  (cffi:foreign-funcall "gtk_print_job_set_collate"
+                        (g:object print-job) job
+                        :boolean collate
+                        :void)
   collate)
 
 (defcfun ("gtk_print_job_get_collate" print-job-collate) :boolean
@@ -761,10 +763,10 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf print-job-reverse) (reverse job)
-  (foreign-funcall "gtk_print_job_set_reverse"
-                   (g:object print-job) job
-                   :boolean reverse
-                   :void)
+  (cffi:foreign-funcall "gtk_print_job_set_reverse"
+                        (g:object print-job) job
+                        :boolean reverse
+                        :void)
   reverse)
 
 (defcfun ("gtk_print_job_get_reverse" print-job-reverse) :boolean
@@ -786,4 +788,4 @@
 
 (export 'print-job-reverse)
 
-;;; --- End of file gtk.print-job.lisp -----------------------------------------
+;;; --- End of file gtk4.print-job.lisp ----------------------------------------
