@@ -1,8 +1,6 @@
-;;;; Example Level Bar - 2022-11-18
+;;;; Example Level Bar - 2023-3-28
 
 (in-package :gtk4-example)
-
-;; FIXME: The coloring of the level bar does not work as expected.
 
 (defun create-level-bar (orientation mode)
   (let ((provider (gtk:css-provider-new))
@@ -18,19 +16,16 @@
     (gtk:level-bar-add-offset-value levelbar "high" 8.0)
     (gtk:level-bar-add-offset-value levelbar "full" 10.0)
     ;; CSS to change the color for the values
-    ;; TODO: This does not work as expected.
     (gtk:css-provider-load-from-data provider
-                                     "levelbar trough > block.filled {
+                                     "levelbar block.filled.empty {
                                         background-color: red; }
-                                      levelbar trough > block.filled.low {
+                                      levelbar block.filled.low {
                                         background-color: orange; }
-                                      levelbar trough > block.filled.high {
+                                      levelbar block.filled.high {
                                         background-color: yellow; }
-                                      levelbar trough > block.filled.full {
+                                      levelbar block.filled.full {
                                         background-color: green; }")
-    (gtk:style-context-add-provider (gtk:widget-style-context levelbar)
-                                    provider
-                                    +gtk-priority-application+)
+    (gtk:widget-apply-provider levelbar provider)
     ;; Return the new level bar
     levelbar))
 
@@ -43,7 +38,7 @@
                               :margin-end 12
                               :spacing 12))
          (window (make-instance 'gtk:window
-                                :title "Example Level bar"
+                                :title "Level bar"
                                 :child vbox
                                 :application application
                                 :default-width 420
