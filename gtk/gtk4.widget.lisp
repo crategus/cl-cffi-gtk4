@@ -318,12 +318,13 @@
 
 ;;; CairoContext represents a cairo-t, but we need a boxed type in GTK.
 
-;; TODO: Is this implementation longer needed.
+;; TODO: The implementation is removed. Delete the code.
 
+#+nil
 (define-g-boxed-opaque cairo-context "CairoContext"
   :alloc (error "CairoContext cannot be created from the Lisp side."))
 
-#+liber-documentation
+#+nil
 (setf (liber:alias-for-class 'cairo-context)
       "GBoxed"
       (documentation 'cairo-context 'type)
@@ -338,6 +339,7 @@
   @end{pre}
   @see-symbol{cairo-t}")
 
+#+nil
 (export (boxed-related-symbols 'cairo-context))
 
 ;;; ----------------------------------------------------------------------------
@@ -2838,6 +2840,11 @@ lambda (widget)    :run-last
 ;;;     the GtkNative widget of widget , or NULL.
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gtk_widget_get_native" widget-native) (g:object native)
+  (widget (g:object widget)))
+
+(export 'widget-native)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_ancestor -> widget-ancestor
 ;;; ----------------------------------------------------------------------------
@@ -3880,6 +3887,11 @@ lambda (widget)    :run-last
 ;;;     The width of widget
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gtk_widget_get_width" widget-width) :int
+  (widget (g:object widget)))
+
+(export 'widget-width)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_height ()
 ;;;
@@ -3896,6 +3908,11 @@ lambda (widget)    :run-last
 ;;; Returns :
 ;;;     The height of widget
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_widget_get_height" widget-height) :int
+  (widget (g:object widget)))
+
+(export 'widget-height)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_size ()
@@ -3920,6 +3937,12 @@ lambda (widget)    :run-last
 ;;; Returns :
 ;;;     The size of widget in orientation .
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_widget_get_size" widget-size) :int
+  (widget (g:object widget))
+  (orientation orientation))
+
+(export 'widget-size)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_compute_bounds ()
