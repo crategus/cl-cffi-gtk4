@@ -55,6 +55,10 @@
 (setf (documentation (find-package :gdk) t)
  "GDK is an intermediate layer which isolates GTK from the details of the
   windowing system. This is the API documentation of a Lisp binding to GDK.
+  @begin[Enumerations]{section}
+    @about-symbol{gdk:gravity}
+    @about-symbol{gdk:modifier-type}
+  @end{section}
   @begin[GdkDisplayManager]{section}
     Maintains a list of all open GdkDisplays.
     @about-class{display-manager}
@@ -259,9 +263,6 @@
   @end{section}
   @begin[Surfaces]{section}
     Onscreen display areas in the target window system.
-    @about-symbol{gravity}
-    @about-symbol{modifier-type}
-    @about-symbol{modifier-mask}
     @about-class{surface}
     @about-generic{surface-cursor}
     @about-generic{surface-display}
@@ -277,10 +278,12 @@
     @about-function{surface-hide}
     @about-function{surface-translate-coordinates}
     @about-function{surface-beep}
+    @about-function{surface-scale}
     @about-function{surface-set-opaque-region}
     @about-function{surface-create-gl-context}
     @about-function{surface-create-vulkan-context}
     @about-function{surface-create-cairo-context}
+    @about-function{surface-create-similar-surface}
     @about-function{surface-queue-render}
     @about-function{surface-request-layout}
     @about-function{surface-set-input-region}
@@ -623,7 +626,6 @@
     it allows to create Cairo contexts which can be used to draw on GdkSurfaces.
     Additional functions allow use GdkRectangles with Cairo and to use GdkRGBAs,
     GdkPixbufs and GdkSurfaces as sources for drawing operations.
-    @about-function{surface-create-similar-surface}
     @about-function{cairo-set-source-rgba}
     @about-function{cairo-set-source-pixbuf}
     @about-function{cairo-rectangle}

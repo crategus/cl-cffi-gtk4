@@ -36,6 +36,8 @@
      ;; Interfaces
      (:file "gdk4.paintable")             ; GdkPaintable
 
+     (:file "gdk4.enumerations")          ; Gdk enumerations
+
      (:file "gdk4.display-manager")       ; GdkDisplayManager
      (:file "gdk4.display")               ; GdkDisplay
      (:file "gdk4.seat")                  ; GdkSeat
@@ -689,10 +691,13 @@
 ;    (:file "gtk4.window-handle")                 ; GtkWindowHandle
 
      ;; Application support
-     (:file "rtest-gtk4-application")        ; GtkApplication
-     (:file "rtest-gtk4-application-window") ; GtkApplicationWindow
+     (:file "rtest-gtk4-application")             ; GtkApplication
+     (:file "rtest-gtk4-application-window")      ; GtkApplicationWindow
 
      ;; GDK
+     (:file "rtest-gdk4-app-launch-context")      ; GdkAppLaunchContext
+     (:file "rtest-gdk4-cairo-context")           ; GdkCairoContext
+
      (:file "rtest-gdk4-rgba")
      (:file "rtest-gdk4-event")
 
