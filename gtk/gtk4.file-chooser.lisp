@@ -675,6 +675,25 @@
 (export 'file-chooser-file)
 
 ;;; ----------------------------------------------------------------------------
+;;; file-chooser-namestring
+;;; ----------------------------------------------------------------------------
+
+(defun (setf file-chooser-namestring) (namestring chooser)
+  (with-g-error (err)
+    (cffi:foreign-funcall "gtk_file_chooser_set_file"
+                          (g:object file-chooser) chooser
+                          g:file-as-namestring namestring
+                          :pointer err
+                          :boolean)
+     namestring))
+
+(defcfun ("gtk_file_chooser_get_file" file-chooser-namestring)
+    g:file-as-namestring
+  (chooser (g:object file-chooser)))
+
+(export 'file-chooser-namestring)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_file_chooser_get_files () -> file-chooser-files
 ;;; ----------------------------------------------------------------------------
 
