@@ -189,7 +189,7 @@ lambda (button)    :action
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'button) t)
- "The @code{child} property of type @class{gtk:widget} (Read / Write)  @br{}
+ "The @code{child} property of type @class{gtk:widget} (Read / Write) @br{}
   The child widget. @br{}
   Default value: @code{nil}")
 

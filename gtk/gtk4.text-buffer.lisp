@@ -2,7 +2,7 @@
 ;;; gtk4.text-buffer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.9 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -584,7 +584,7 @@ lambda (buffer)    :run-last
 (setf (liber:alias-for-function 'text-buffer-text)
       "Accessor"
       (documentation 'text-buffer-text 'function)
- "@version{2022-12-4}
+ "@version{2023-4-3}
   @syntax[]{(gtk:text-buffer-text object) => text}
   @syntax[]{(setf (gtk:text-buffer-text object) text)}
   @argument[object]{a @class{gtk:text-buffer} object}
@@ -679,10 +679,10 @@ lambda (buffer)    :run-last
   (len :int))
 
 (defun text-buffer-insert (buffer text &key (position :cursor)
-                                                (interactive nil)
-                                                (editable t))
+                                            (interactive nil)
+                                            (editable t))
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2023-4-3}
   @syntax[]{(gtk:text-buffer-insert buffer text) => t}
   @syntax[]{(gtk:text-buffer-insert buffer text :position position) => t}
   @syntax[]{(gtk:text-buffer-insert buffer text :interactive t) => t}
@@ -723,8 +723,9 @@ lambda (buffer)    :run-last
     @code{gtk_text_buffer_insert_interactive()}, and
     @code{gtk_text_buffer_insert_interactive_at_cursor()} functions into one
     function using the @arg{position}, @arg{interactive}, and @arg{editable}
-    keyword arguments. The corresponding Lisp functions except for
-    @sym{gtk:text-buffer-insert} are not exported in the Lisp implementation.
+    keyword arguments. The corresponding Lisp functions except for the
+    @sym{gtk:text-buffer-insert} function are not exported in the Lisp
+    implementation.
   @end{dictionary}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-iter}
@@ -1059,7 +1060,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-delete (buffer start end &key interactive editable)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2023-4-3}
   @syntax[]{(gtk:text-buffer-delete buffer start end) => t}
   @syntax[]{(gtk:text-buffer-delete buffer start end :interactive t) => t}
   @syntax[]{(gtk:text-buffer-delete buffer start end :interactive t
@@ -1536,7 +1537,7 @@ lambda (buffer)    :run-last
 (defcfun ("gtk_text_buffer_get_insert" text-buffer-get-insert)
     (g:object text-mark)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2023-4-3}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @return{A @class{gtk:text-mark} insertion point mark.}
   @begin{short}
@@ -1965,19 +1966,18 @@ lambda (buffer)    :run-last
 ;;; gtk_text_buffer_get_iter_at_mark -> text-buffer-iter-at-mark
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_buffer_get_iter_at_mark"
-          %text-buffer-iter-at-mark) :void
+(defcfun ("gtk_text_buffer_get_iter_at_mark" %text-buffer-iter-at-mark) :void
   (buffer (g:object text-buffer))
   (iter (g:boxed text-iter))
   (mark (g:object text-mark)))
 
 (defun text-buffer-iter-at-mark (buffer mark)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2023-4-3}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[mark]{a @class{gtk:text-mark} object, or a string with the mark
     name in the text buffer}
-  @return{A @class{gtk:text-iter} interator.}
+  @return{A @class{gtk:text-iter} iterator.}
   @begin{short}
     Returns the iterator with the current position of @arg{mark}.
   @end{short}
@@ -2089,7 +2089,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-bounds (buffer)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2023-4-3}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @begin{return}
     @arg{start} -- a @class{gtk:text-iter} iterator with the first position in
@@ -2101,6 +2101,16 @@ lambda (buffer)    :run-last
     Retrieves the first and last iterators in the text buffer, i.e. the entire
     text buffer lies within the range [@arg{start}, @arg{end}).
   @end{short}
+  @begin[Example]{dictionary}
+    Get the start and end itererator for a text buffer and clear the text
+    buffer:
+    @begin{pre}
+(defun clear-buffer (buffer)
+  (multiple-value-bind (start end)
+      (gtk:text-buffer-bounds buffer)
+    (gtk:text-buffer-delete buffer start end)))
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-iter}"
   (let ((start (make-instance 'text-iter))

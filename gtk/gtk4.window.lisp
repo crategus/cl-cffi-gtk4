@@ -2,7 +2,7 @@
 ;;; gtk4.window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.9 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -1074,7 +1074,7 @@ lambda (window)    :run-first
   @see-class{gdk-window}
   @see-function{gtk:window-present}")
 
-;;; --- window-title -------------------------------------------------------
+;;; --- window-title -----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'window) t)
@@ -1086,7 +1086,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-title)
       "Accessor"
       (documentation 'window-title 'function)
- "@version{#2022-1-6}
+ "@version{2023-4-3}
   @syntax[]{(gtk:window-title object) => title}
   @syntax[]{(setf (gtk:window-title object) title)}
   @argument[object]{a @class{gtk:window} widget}

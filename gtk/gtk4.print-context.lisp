@@ -2,7 +2,7 @@
 ;;; gtk4.print-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -208,9 +208,9 @@
 
 (defcfun ("gtk_print_context_get_width" print-context-width) :double
  #+liber-documentation
- "@version{#2020-4-9}
+ "@version{2023-4-3}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{A @code{:double} with the width of @arg{context}.}
+  @return{A double float with the width of @arg{context}.}
   @begin{short}
     Obtains the width of the print context, in pixels.
   @end{short}
@@ -226,9 +226,9 @@
 
 (defcfun ("gtk_print_context_get_height" print-context-height) :double
  #+liber-documentation
- "@version{#2020-4-9}
+ "@version{2023-4-3}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{A @code{:double} with the height of @arg{context}.}
+  @return{A double float with the height of @arg{context}.}
   @begin{short}
     Obtains the height of the print context, in pixels.
   @end{short}
@@ -320,9 +320,9 @@
 (defcfun ("gtk_print_context_create_pango_layout"
            print-context-create-pango-layout) (g:object pango:layout)
  #+liber-documentation
- "@version{#2020-4-9}
+ "@version{2023-4-3}
   @argument[context]{a @class{gtk:print-context} object}
-  @return{A new Pango layout of type @class{pango:layout} for @arg{context}.}
+  @return{A new @class{pango:layout} object for @arg{context}.}
   @begin{short}
     Creates a new Pango layout that is suitable for use with the print context.
   @end{short}
