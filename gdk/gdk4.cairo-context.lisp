@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.cairo-context.lisp
+;;; gdk4.cairo-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GdkCairoContext
@@ -43,14 +44,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkCairoContext
-;;;
-;;;
-;;; GdkCairoContext is an object representing the platform-specific draw
-;;; context.
-;;;
-;;; GdkCairoContexts are created for a GdkDisplay using
-;;; gdk_surface_create_cairo_context(), and the context can then be used to
-;;; draw on that GdkSurface.
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GdkCairoContext" cairo-context
@@ -60,32 +53,47 @@
    :type-initializer "gdk_cairo_context_get_type")
   nil)
 
+#+liber-documentation
+(setf (documentation 'cairo-context 'type)
+ "@version{2023-4-7}
+  @begin{short}
+    The @sym{gdk:cairo-context} object is an object representing the platform
+    specific draw context.
+  @end{short}
+  The @sym{gdk:cairo-context} objects are created for a @class{gdk:display}
+  object using the @fun{gdk:surface-create-cairo-context} function, and the
+  context can then be used to draw on that @class{gdk:surface} object.
+  @see-class{gdk:display}
+  @see-class{gdk:surface}
+  @see-function{gdk:surface-create-cairo-context}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_cairo_context_cairo_create ()
-;;;
-;;; cairo_t *
-;;; gdk_cairo_context_cairo_create (GdkCairoContext *self);
-;;;
-;;; Retrieves a Cairo context to be used to draw on the GdkSurface of context .
-;;; A call to gdk_draw_context_begin_frame() with this context must have been
-;;; done or this function will return NULL.
-;;;
-;;; The returned context is guaranteed to be valid until
-;;; gdk_draw_context_end_frame() is called.
-;;;
-;;; self :
-;;;     a GdkCairoContext that is currently drawing
-;;;
-;;; Returns :
-;;;
-;;;     a Cairo context to be used to draw the contents of the GdkSurface.
-;;;     NULL is returned when context is not drawing.
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_cairo_context_cairo_create" cairo-context-cairo-create)
     (:pointer (:struct cairo:context-t))
+ #+liber-documentation
+ "@version{2023-4-7}
+  @argument[context]{a @class{gdk:cairo-context} object that is currently
+    drawing}
+  @return{A @symbol{cairo:context-t} instance with the Cairo context to be used
+    to draw the contents of the @class{gdk:surface} object. @code{NULL} is
+    returned when @arg{context} is not drawing.}
+  @begin{short}
+    Retrieves a Cairo context to be used to draw on the @class{gdk:surface}
+    object of @arg{context}.
+  @end{short}
+  A call to the @fun{gdk:draw-context-begin-frame} function with this context
+  must have been done or this function will return @code{NULL}. The returned
+  context is guaranteed to be valid until the @fun{gdk:draw-context-end-frame}
+  function is called.
+  @see-class{gdk:cairo-context}
+  @see-symbol{cairo:context-t}
+  @see-function{gdk:draw-context-begin-frame}
+  @see-function{gdk:draw-context-end-frame}"
   (context (g:object cairo-context)))
 
 (export 'cairo-context-cairo-create)
 
-;;; --- End of file gdk.cairo-context.lisp -------------------------------------
+;;; --- End of file gdk4.cairo-context.lisp ------------------------------------

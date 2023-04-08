@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.app-launch-context.lisp
+;;; gdk4.app-launch-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk/>.
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2022 Dieter Kaiser
+;;; Copyright (C) 2012 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; Application launching
@@ -73,10 +74,10 @@
 
 #+liber-documentation
 (setf (documentation 'app-launch-context 'type)
- "@version{#2021-12-11}
+ "@version{2023-4-7}
   @begin{short}
     The @sym{gdk:app-launch-context} object is an implementation of the
-    @class{g-app-launch-context} object that handles launching an application
+    @class{g:app-launch-context} object that handles launching an application
     in a graphical context.
   @end{short}
   It provides startup notification and allows to launch applications on a
@@ -84,18 +85,10 @@
   @begin[Example]{dictionary}
     Launching an application.
     @begin{pre}
-GdkAppLaunchContext *context;
-
-context = gdk_display_get_app_launch_context (display);
-
-gdk_app_launch_context_set_display (display);
-gdk_app_launch_context_set_timestamp (gdk_event_get_time (event));
-
-if (!g_app_info_launch_default_for_uri (\"http://www.gtk.org\",
-                                        context, &error))
-  g_warning (\"Launching failed: %s\n\", error->message);
-
-g_object_unref (context);
+(let* ((display (gdk:display-default))
+       (context (gdk:display-app-launch-context display)))
+  (unless (g:app-info-launch-default-for-uri \"http://www.gtk.org\" context)
+    (warn \"Launching failed\")))
     @end{pre}
   @end{dictionary}
   @see-class{g:app-launch-context}
@@ -108,8 +101,7 @@ g_object_unref (context);
 ;;; --- app-launch-context-display ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "display"
-                                               'app-launch-context) t)
+(setf (documentation (liber:slot-documentation "display" 'app-launch-context) t)
  "The @code{display} property of type @class{gdk:display}
   (Read / Write / Construct Only) @br{}
   The display that the launch context is for.")
@@ -118,7 +110,7 @@ g_object_unref (context);
 (setf (liber:alias-for-function 'app-launch-context-display)
       "Accessor"
       (documentation 'app-launch-context-display 'function)
- "@version{#2021-12-11}
+ "@version{2023-4-7}
   @syntax[]{(gdk:app-launch-context-display object) => display}
   @syntax[]{(setf (gdk:app-launch-context-display object) display)}
   @argument[object]{a @class{gdk:app-launch-context} object}
@@ -139,7 +131,7 @@ g_object_unref (context);
 (defcfun ("gdk_app_launch_context_set_desktop" app-launch-context-set-desktop)
     :void
  #+liber-documentation
- "@version{#2021-12-11}
+ "@version{2023-4-7}
   @argument[context]{a @class{gdk:app-launch-context} object}
   @argument[desktop]{an integer with the number of a workspace, or -1}
   @begin{short}
@@ -147,7 +139,6 @@ g_object_unref (context);
     context when running under a window manager that supports multiple
     workspaces, as described in the Extended Window Manager Hints.
   @end{short}
-
   When the workspace is not specified or the @arg{desktop} argument is set to
   -1, it is up to the window manager to pick one, typically it will be the
   current workspace.
@@ -164,7 +155,7 @@ g_object_unref (context);
 (defcfun ("gdk_app_launch_context_set_timestamp"
            app-launch-context-set-timestamp) :void
  #+liber-documentation
- "@version{#2021-12-11}
+ "@version{2023-4-7}
   @argument[context]{a @class{gdk:app-launch-context} object}
   @argument[timestamp]{an unsigned integer with a timestamp}
   @begin{short}
@@ -172,7 +163,6 @@ g_object_unref (context);
   @end{short}
   The timestamp should ideally be taken from the event that triggered the
   launch.
-
   Window managers can use this information to avoid moving the focus to the
   newly launched application when the user is busy typing in another window.
   This is also known as 'focus stealing prevention'.
@@ -188,7 +178,7 @@ g_object_unref (context);
 
 (defcfun ("gdk_app_launch_context_set_icon" app-launch-context-set-icon) :void
  #+liber-documentation
- "@version{#2021-12-11}
+ "@version{2023-4-7}
   @argument[context]{a @class{gdk:app-launch-context} object}
   @argument[icon]{a @class{g:icon} object, or @code{nil}}
   @begin{short}
@@ -212,7 +202,7 @@ g_object_unref (context);
 (defcfun ("gdk_app_launch_context_set_icon_name"
            app-launch-context-set-icon-name) :void
  #+liber-documentation
- "@version{#2021-12-11}
+ "@version{2023-4-7}
   @argument[context]{a @class{gdk:app-launch-context} object}
   @argument[name]{a string with an icon name, or @code{nil}}
   @begin{short}
@@ -220,11 +210,10 @@ g_object_unref (context);
   @end{short}
   The icon name will be interpreted in the same way as the icon field in
   desktop files. See also the @fun{gdk:app-launch-context-set-icon} function.
-
   If both an icon and an icon name are set, the @arg{name} argument takes
   priority. If neither an icon or an icon name is set, the icon is taken from
   either the file that is passed to launched application or from the
-  @class{g-app-info} object for the launched application itself.
+  @class{g:app-info} object for the launched application itself.
   @see-class{gdk:app-launch-context}
   @see-class{g:app-info}
   @see-function{gdk:app-launch-context-set-icon}"
@@ -233,4 +222,4 @@ g_object_unref (context);
 
 (export 'app-launch-context-set-icon-name)
 
-;;; -- End of file gdk.app-launch-context.lisp ---------------------------------
+;;; -- End of file gdk4.app-launch-context.lisp --------------------------------

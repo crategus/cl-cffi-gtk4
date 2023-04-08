@@ -2,28 +2,29 @@
 ;;; gdk4.cairo-interaction.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk/>.
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2012 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; Cairo Interaction
@@ -32,20 +33,19 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gdk_surface_create_similar_surface
 ;;;     gdk_cairo_set_source_rgba
 ;;;     gdk_cairo_set_source_pixbuf
 ;;;     gdk_cairo_rectangle
 ;;;     gdk_cairo_region
 ;;;     gdk_cairo_region_create_from_surface
-;;;     gdk_cairo_draw_from_gl
+;;;     gdk_cairo_draw_from_gl                             Since 4.6 deprecated
 ;;;
 ;;; Description
 ;;;
 ;;; Cairo is a graphics library that supports vector graphics and image
 ;;; compositing that can be used with GDK and GTK.
 ;;;
-;;; GDK does not wrap the cairo API, instead it allows to create cairo contexts
+;;; GDK does not wrap the cairo API, instead it allows to create Cairo contexts
 ;;; which can be used to draw on GdkSurfaces. Additional functions allow use
 ;;; GdkRectangles with Cairo and to use GdkRGBAs, GdkPixbufs and GdkSurfaces as
 ;;; sources for drawing operations.
@@ -54,57 +54,13 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_surface_create_similar_surface ()
-;;; ----------------------------------------------------------------------------
-
-(defcfun ("gdk_surface_create_similar_surface" surface-create-similar-surface)
-    (:pointer (:struct cairo:surface-t))
- #+liber-documentation
- "@version{#2023-2-3}
-  @argument[surface]{a @class{gdk:surface} object to make the new surface
-    similar to}
-  @argument[content]{a value of the @symbol{cairo:content-t} enumeration for
-    the content of the new surface}
-  @argument[width]{an integer with the width of the new surface}
-  @argument[height]{an integer with the height of the new surface}
-  @begin{return}
-    A newly allocated @symbol{cairo:surface-t} instance. The caller owns the
-    surface and should call the @fun{cairo:surface-destroy} function when done
-    with it. This function always returns a valid pointer, but it will return
-    a \"nil\" surface if the surface is in an error state.
-  @end{return}
-  @begin{short}
-    Creates a new surface that is as compatible as possible with the given
-    @arg{surface}.
-  @end{short}
-  For example the new surface will have the same fallback resolution and font
-  options as @arg{surface}. Generally, the new surface will also use the same
-  backend as @arg{surface}, unless that is not possible for some reason. The
-  type of the returned surface may be examined with the
-  @fun{cairo:surface-type} function.
-
-  Initially the surface contents are all 0, transparent if contents have
-  transparency, black otherwise.
-  @see-class{gdk:surface}
-  @see-symbol{cairo:surface-t}
-  @see-symbol{cairo:content-t}
-  @see-function{cairo:surface-destroy}
-  @see-function{cairo:surface-type}"
-  (surface (g:object surface))
-  (content cairo:content-t)
-  (width :int)
-  (height :int))
-
-(export 'surface-create-similar-surface)
-
-;;; ----------------------------------------------------------------------------
 ;;; gdk_cairo_set_source_rgba ()
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_cairo_set_source_rgba" cairo-set-source-rgba) :void
  #+liber-documentation
  "@version{#2023-2-3}
-  @argument[cr]{a @symbol{cairo:context-t} context}
+  @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[rgba]{a @class{gdk:rgba} color}
   @begin{short}
     Sets the specified @arg{rgba} color as the source color of the Cairo
@@ -130,11 +86,11 @@
 (defun cairo-set-source-pixbuf (cr pixbuf x y)
  #+liber-documentation
  "@version{#2023-2-3}
-  @argument[cr]{a @symbol{cairo:context-t} context}
+  @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[pixbuf]{a @class{gdk:pixbuf} object}
-  @argument[x]{a number coerced to a double float x coordinate of location to
+  @argument[x]{a number coerced to a double float with the x coordinate to
     place upper left corner of @arg{pixbuf}}
-  @argument[y]{a number coerced to a double float y coordinate of location to
+  @argument[y]{a number coerced to a double float with the y coordinate to
     place upper left corner of @arg{pixbuf}}
   @begin{short}
     Sets the given @arg{pixbuf} as the source pattern for @arg{cr}.
@@ -153,13 +109,13 @@
 (export 'cairo-set-source-pixbuf)
 
 ;;; ----------------------------------------------------------------------------
-;;;gdk_cairo_rectangle ()
+;;; gdk_cairo_rectangle ()
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_cairo_rectangle" cairo-rectangle) :void
  #+liber-documentation
  "@version{#2023-2-3}
-  @argument[cr]{a @symbol{cairo:context-t} context}
+  @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[rectangle]{a @class{gdk:rectangle} instance}
   @begin{short}
     Adds the given @arg{rectangle} to the current path of @arg{cr}.
@@ -178,7 +134,7 @@
 (defcfun ("gdk_cairo_region" cairo-region) :void
  #+liber-documentation
  "@version{#2023-2-3}
-  @argument[cr]{a @symbol{cairo:context-t} context}
+  @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[region]{a @symbol{cairo:region-t} instance}
   @begin{short}
     Adds the given @arg{region} to the current path of @arg{cr}.
@@ -219,13 +175,13 @@
 (export 'cairo-region-create-from-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cairo_draw_from_gl ()
+;;; gdk_cairo_draw_from_gl ()                              Since 4.6 deprecated
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_cairo_draw_from_gl" cairo-draw-from-gl) :void
  #+liber-documentation
  "@version{#2023-2-3}
-  @argument[cr]{a @symbol{cairo:context-t} context}
+  @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[surface]{a @class{gdk:surface} object we are rendering for,
     not necessarily into}
   @argument[source]{an integer with the GL ID of the source buffer}
@@ -244,8 +200,8 @@
   It takes a render buffer ID (@arg{type} == @code{GL_RENDERBUFFER}) or a
   texture ID (@arg{type} == @code{GL_TEXTURE}) and draws it onto @arg{cr} with
   an @code{OVER} operation, respecting the current clip. The top left corner of
-  the rectangle specified by @arg{x}, @arg{y}, @arg{width} and @arg{height} will
-  be drawn at the current (0,0) position of the Cairo context.
+  the rectangle specified by @arg{x}, @arg{y}, @arg{width} and @arg{height}
+  will be drawn at the current (0,0) position of the Cairo context.
 
   This will work for all Cairo contexts, as long as @arg{surface} is realized,
   but the fallback implementation that reads back the pixels from the buffer
@@ -258,8 +214,18 @@
   using alpha.
 
   Calling this may change the current GL context.
+  @begin[Warning]{dictionary}
+    The @sym{gdk:cairo-draw-from-gl} function is depracted since 4.6. The
+    function is overly complex and produces broken output in various
+    combinations of arguments. If you want to draw with GL textures in GTK, use
+    the @fun{gdk:gl-texture-new} function. If you want to use that texture in
+    Cairo, use the @fun{gdk:texture-download} function to download the data into
+    a Cairo image surface.
+  @end{dictionary}
   @see-symbol{cairo:context-t}
-  @see-class{gdk:surface}"
+  @see-class{gdk:surface}
+  @see-function{gdk:gl-texture-new}
+  @see-function{gdk:texture-download}"
   (cr (:pointer (:struct cairo:context-t)))
   (surface (g:object gdk:surface))
   (source :int)
