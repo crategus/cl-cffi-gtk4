@@ -863,7 +863,7 @@ lambda (area renderer editable)    :run-first
   (area (g:object cell-area))
   (context (g:object cell-area-context))
   (widget (g:object widget))
-  (event (g:object gdk:event))
+  (event gdk:event)
   (cell (g:boxed gdk:rectangle))
   (flags cell-renderer-state))
 
@@ -1938,7 +1938,7 @@ lambda (area renderer editable)    :run-first
   (area (g:object cell-area))
   (widget (g:object widget))
   (renderer (g:object cell-renderer))
-  (event (g:object gdk:event))
+  (event gdk:event)
   (cell (g:boxed gdk:rectangle))
   (flags cell-renderer-state))
 

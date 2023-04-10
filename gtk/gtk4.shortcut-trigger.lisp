@@ -351,7 +351,7 @@
   in event is a key event and has the right modifiers set.
   @see-class{gtk:shortcut-trigger}"
   (shortcut (g:object shortcut-trigger))
-  (event (g:object gdk:event))
+  (event gdk:event)
   (enable :boolean))
 
 (export 'shortcut-trigger-trigger)

@@ -176,7 +176,7 @@ lambda (editable)    :run-last
   @see-class{gdk:event}
   @see-function{gtk:cell-renderer-start-editing}"
   (editable (g:object cell-editable))
-  (event (g:object gdk:event)))
+  (event gdk:event))
 
 (export 'cell-editable-start-editing)
 

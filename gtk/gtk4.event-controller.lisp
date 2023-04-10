@@ -352,7 +352,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_event_controller_get_current_event"
-           event-controller-current-event) (g:object gdk:event)
+           event-controller-current-event) gdk:event
  #+liber-documentation
  "@version{#2022-8-22}
   @argument[controller]{a @class{gtk:event-controller} object}
