@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.toplevel-size.lisp
+;;; gdk4.toplevel-size.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GdkToplevelSize
@@ -44,121 +45,146 @@
 
 (in-package :gdk)
 
-;;;Description
-;;;The GdkToplevelSIze struct contains information that may be useful for users of GdkToplevel to compute a surface size. It also carries information back with the computational result.
+;;; ----------------------------------------------------------------------------
+;;; GdkToplevelSize
+;;; ----------------------------------------------------------------------------
 
-;;;Functions
-;;;gdk_toplevel_size_get_bounds ()
-;;;void
-;;;gdk_toplevel_size_get_bounds (GdkToplevelSize *size,
-;;;                              int *bounds_width,
-;;;                              int *bounds_height);
-;;;Retrieves the bounds the toplevel is placed within.
+(cffi:define-foreign-type toplevel-size-type ()
+  ()
+  (:actual-type :pointer)
+  (:simple-parser toplevel-size))
 
-;;;The bounds represent the largest size a toplevel may have while still being able to fit within some type of boundary. Depending on the backend, this may be equivalent to the dimensions of the work area or the monitor on which the window is being presented on, or something else that limits the way a toplevel can be presented.
+(defmethod cffi:translate-to-foreign (proxy (type toplevel-size-type))
+  proxy)
 
-;;;Parameters
-;;;size
+(defmethod cffi:translate-from-foreign (native (type toplevel-size-type))
+  native)
 
-;;;a GdkToplevelSize
+#+liber-documentation
+(setf (liber:alias-for-symbol 'toplevel-size)
+      "CStruct"
+      (liber:symbol-documentation 'toplevel-size)
+ "@version{#2023-4-10}
+  @begin{short}
+    The @sym{gdk:toplevel-size} structure contains information that may be
+    useful for users of @class{gdk:toplevel} objects to compute a surface size.
+  @end{short}
+  It also carries information back with the computational result.
+  @see-class{gdk:toplevel}")
 
-;;;
-;;;bounds_width
+(export 'toplevel-size)
 
-;;;return location for width.
+;;; ----------------------------------------------------------------------------
+;;; gdk_toplevel_size_get_bounds ()
+;;; ----------------------------------------------------------------------------
 
-;;;[out]
-;;;bounds_height
+(defcfun ("gdk_toplevel_size_bounds" %toplevel-size-bounds) :void
+  (size toplevel-size)
+  (width (:pointer :int))
+  (height (:pointer :int)))
 
-;;;return location for height.
+(defun toplevel-size-bounds (size)
+ #+liber-documentation
+ "@version{#2023-4-10}
+  @syntax[]{(gdk:toplevel-size size) => width, height}
+  @argument[size]{a @symbol{gdk:toplevel-size} instance}
+  @argument[width]{an integer with the width}
+  @argument[height]{an integer with the height}
+  @begin{short}
+    Retrieves the bounds the toplevel is placed within.
+  @end{short}
+  The bounds represent the largest size a toplevel may have while still being
+  able to fit within some type of boundary. Depending on the backend, this may
+  be equivalent to the dimensions of the work area or the monitor on which the
+  window is being presented on, or something else that limits the way a toplevel
+  can be presented.
+  @see-symbol{gdk:toplevel-size}
+  @see-class{gdk:toplevel}"
+  (cffi:with-foreign-objects ((width :int) (height :int))
+    (%toplevel-size-bounds size width height)
+    (values (cffi:mem-ref width :int)
+            (cffi:mem-ref height :int))))
 
-;;;[out]
-;;;gdk_toplevel_size_set_size ()
-;;;void
-;;;gdk_toplevel_size_set_size (GdkToplevelSize *size,
-;;;                            int width,
-;;;                            int height);
-;;;Sets the size the toplevel prefers to be resized to. The size should be within the bounds (see gdk_toplevel_size_get_bounds()). The set size should be considered as a hint, and should not be assumed to be respected by the windowing system, or backend.
+(export 'toplevel-size-bounds)
 
-;;;Parameters
-;;;size
+;;; ----------------------------------------------------------------------------
+;;; gdk_toplevel_size_set_size ()
+;;; ----------------------------------------------------------------------------
 
-;;;a GdkToplevelSize
+(defcfun ("gdk_toplevel_size_set_size" toplevel-size-set-size) :void
+ #+liber-documentation
+ "@version{#2023-4-10}
+  @argument[size]{a @symbol{gdk:toplevel-size} instance}
+  @argument[width]{an integer with the width}
+  @argument[height]{an integer with the height}
+  @begin{short}
+    Sets the size the toplevel prefers to be resized to.
+  @end{short}
+  The size should be within the bounds, see the @fun{gdk:toplevel-size-bounds}
+  function. The set size should be considered as a hint, and should not be
+  assumed to be respected by the windowing system, or backend.
+  @see-symbol{gdk:toplevel-size}
+  @see-function{gdk:toplevel-size-bounds}"
+  (size toplevel-size)
+  (width :int)
+  (height :int))
 
-;;;
-;;;width
+(export 'toplevel-size-set-size)
 
-;;;the width
+;;; ----------------------------------------------------------------------------
+;;; gdk_toplevel_size_set_min_size ()
+;;; ----------------------------------------------------------------------------
 
-;;;
-;;;height
+(defcfun ("gdk_toplevel_size_set_min_size" toplevel-size-set-min-size) :void
+ #+liber-documentation
+ "@version{#2023-4-10}
+  @argument[size]{a @symbol{gdk:toplevel-size} instance}
+  @argument[width]{an integer with the minimum width}
+  @argument[height]{an integer with the minimum height}
+  @begin{short}
+    The minimum size corresponds to the limitations the toplevel can be shrunk
+    to, without resulting in incorrect painting.
+  @end{short}
+  A user of a @class{gdk:toplevel} object should calculate these given both the
+  existing size, and the bounds retrieved from the @symbol{gdk:toplevel-size}
+  object.
 
-;;;the height
+  The minimum size should be within the bounds. see the
+  @fun{gdk:toplevel-size-bounds} function.
+  @see-symbol{gdk:toplevel-size}
+  @see-class{gdk:toplevel}
+  @see-function{gdk:toplevel-size-bounds}"
+  (size toplevel-size)
+  (width :int)
+  (height :int))
 
-;;;
-;;;gdk_toplevel_size_set_min_size ()
-;;;void
-;;;gdk_toplevel_size_set_min_size (GdkToplevelSize *size,
-;;;                                int min_width,
-;;;                                int min_height);
-;;;The minimum size corresponds to the limitations the toplevel can be shrunk to, without resulting in incorrect painting. A user of a GdkToplevel should calculate these given both the existing size, and the bounds retrieved from the GdkToplevelSize object.
+(export 'toplevel-size-set-min-size)
 
-;;;The minimum size should be within the bounds (see gdk_toplevel_size_get_bounds()).
+;;; ----------------------------------------------------------------------------
+;;; gdk_toplevel_size_set_shadow_width ()
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;size
+(defcfun ("gdk_toplevel_size_set_shadow_width" toplevel-size-set-shadow-width)
+    :void
+ #+liber-documentation
+ "@version{#2023-4-10}
+  @argument[size]{a @symbol{gdk:toplevel-size} instance}
+  @argument[left]{an integer with the width of the left part of the shadow}
+  @argument[right]{an integer with the width of the right part of the shadow}
+  @argument[top]{an integer with the height of the top part of the shadow}
+  @argument[bottom]{an integer with the height of the bottom part of the shadow}
+  @begin{short}
+    The shadow width corresponds to the part of the computed surface size that
+    would consist of the shadow margin surrounding the window, would there be
+    any.
+  @end{short}
+  @see-symbol{gdk:toplevel-size}"
+  (size toplevel-size)
+  (left :int)
+  (right :int)
+  (top :int)
+  (bottom :int))
 
-;;;a GdkToplevelSize
+(export 'toplevel-size-set-shadow-width)
 
-;;;
-;;;min_width
-
-;;;the minimum width
-
-;;;
-;;;min_height
-
-;;;the minimum height
-
-;;;
-;;;gdk_toplevel_size_set_shadow_width ()
-;;;void
-;;;gdk_toplevel_size_set_shadow_width (GdkToplevelSize *size,
-;;;                                    int left,
-;;;                                    int right,
-;;;                                    int top,
-;;;                                    int bottom);
-;;;The shadow width corresponds to the part of the computed surface size that would consist of the shadow margin surrounding the window, would there be any.
-
-;;;Parameters
-;;;size
-
-;;;a GdkToplevelSize
-
-;;;
-;;;left
-
-;;;width of the left part of the shadow
-
-;;;
-;;;right
-
-;;;width of the right part of the shadow
-
-;;;
-;;;top
-
-;;;height of the top part of the shadow
-
-;;;
-;;;bottom
-
-;;;height of the bottom part of the shadow
-
-;;;
-;;;Types and Values
-;;;GdkToplevelSize
-;;;typedef struct _GdkToplevelSize GdkToplevelSize;
-;;;Struct containing information for computing the size of a GdkToplevel.
-
-;;; --- End of file gdk.toplevel-size.lisp -------------------------------------
+;;; --- End of file gdk4.toplevel-size.lisp ------------------------------------
