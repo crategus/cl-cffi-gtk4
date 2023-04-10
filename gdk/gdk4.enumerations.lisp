@@ -38,40 +38,60 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GdkGravity
-;;;
-;;; Defines the reference point of a surface and is used in GdkPopupLayout.
-;;;
-;;; GDK_GRAVITY_NORTH_WEST
-;;;     the reference point is at the top left corner.
-;;;
-;;; GDK_GRAVITY_NORTH
-;;;     the reference point is in the middle of the top edge.
-;;;
-;;; GDK_GRAVITY_NORTH_EAST
-;;;     the reference point is at the top right corner.
-;;;
-;;; GDK_GRAVITY_WEST
-;;;     the reference point is at the middle of the left edge.
-;;;
-;;; GDK_GRAVITY_CENTER
-;;;     the reference point is at the center of the surface.
-;;;
-;;; GDK_GRAVITY_EAST
-;;;     the reference point is at the middle of the right edge.
-;;;
-;;; GDK_GRAVITY_SOUTH_WEST
-;;;     the reference point is at the lower left corner.
-;;;
-;;; GDK_GRAVITY_SOUTH
-;;;     the reference point is at the middle of the lower edge.
-;;;
-;;; GDK_GRAVITY_SOUTH_EAST
-;;;     the reference point is at the lower right corner.
-;;;
-;;; GDK_GRAVITY_STATIC
-;;;     the reference point is at the top left corner of the surface itself,
-;;;     ignoring window manager decorations.
 ;;; ----------------------------------------------------------------------------
+
+(define-g-enum "GdkGravity" gravity
+  (:export t
+   :type-initializer "gdk_gravity_get_type")
+  (:north-west 0)
+  (:north 1)
+  (:north-east 2)
+  (:west 3)
+  (:center 4)
+  (:east 5)
+  (:south-west 6)
+  (:south 7)
+  (:south-east 8)
+  (:static 9))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'gravity)
+      "GEnum"
+      (liber:symbol-documentation 'gravity)
+ "@version{#2023-4-9}
+  @begin{short}
+    Defines the reference point of a surface and is used in
+    the @class{gdk:popup-layout} implementation.
+  @end{short}
+  @begin{pre}
+(define-g-enum \"GdkGravity\" gravity
+  (:export t
+   :type-initializer \"gdk_gravity_get_type\")
+  (:north-west 0)
+  (:north 1)
+  (:north-east 2)
+  (:west 3)
+  (:center 4)
+  (:east 5)
+  (:south-west 6)
+  (:south 7)
+  (:south-east 8)
+  (:static 9))
+  @end{pre}
+  @begin[code]{table}
+    @entry[:north-west]{The reference point is at the top left corner.}
+    @entry[:north]{The reference point is in the middle of the top edge.}
+    @entry[:north-east]{The reference point is at the top right corner.}
+    @entry[:west]{The reference point is at the middle of the left edge.}
+    @entry[:center]{The reference point is at the center of the surface.}
+    @entry[:east]{The reference point is at the middle of the right edge.}
+    @entry[:south-west]{The reference point is at the lower left corner.}
+    @entry[:south]{The reference point is at the middle of the lower edge.}
+    @entry[:sout-east]{The reference point is at the lower right corner.}
+    @entry[:static]{The reference point is at the top left corner of the
+      surface itself, ignoring window manager decorations.}
+  @end{table}
+  @see-class{gdk:popup-layout}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GDK_MODIFIER_MASK
