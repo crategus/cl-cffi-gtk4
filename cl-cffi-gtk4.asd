@@ -49,8 +49,8 @@
      (:file "gdk4.rgba")                  ; GdkRGBA
      (:file "gdk4.cursor")                ; GdkCursor
      (:file "gdk4.surface")               ; GdkSurface
-     (:file "gdk4.toplevel")              ; GdkToplevel
      (:file "gdk4.toplevel-layout")       ; GdkToplevelLayout
+     (:file "gdk4.toplevel")              ; GdkToplevel
      (:file "gdk4.toplevel-size")         ; GdkToplevelSize
      (:file "gdk4.popup")                 ; GdkPopup
      (:file "gdk4.popup-layout")          ; GdkPopupLayout

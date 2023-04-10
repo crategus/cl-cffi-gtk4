@@ -295,6 +295,7 @@
     @about-symbol{toplevel-state}
     @about-symbol{full-screen-mode}
     @about-symbol{surface-edge}
+    @about-symbol{titlebar-edge}
     @about-class{toplevel}
     @about-generic{toplevel-decorated}
     @about-generic{toplevel-deletable}
@@ -316,6 +317,7 @@
     @about-function{toplevel-restore-system-shortcuts}
     @about-function{toplevel-begin-resize}
     @about-function{toplevel-begin-move}
+    @about-function{toplevel-titlebar-gesture}
   @end{section}
   @begin[GdkToplevelLayout]{section}
     Information for presenting toplevels.
