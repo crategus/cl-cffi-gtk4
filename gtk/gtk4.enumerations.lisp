@@ -128,7 +128,7 @@
     Controls how a widget deals with extra space in a single dimension.
   @end{short}
   Alignment only matters if the widget receives a \"too large\" allocation, for
-  example if you packed the widget with the @slot[widget]{hexpand} property
+  example if you packed the widget with the @slot[gtk:widget]{hexpand} property
   inside a @class{gtk:box} widget, then the widget might get extra space. If
   you have for example a 16 x 16 icon inside a 32 x 32 space, the icon could be
   scaled and stretched, it could be centered, or it could be positioned to one
@@ -727,7 +727,7 @@
   @end{short}
 
   This is used in the @fun{gtk:widget-overflow} function. The
-  @slot[widget]{overflow} property is modeled after the CSS overflow
+  @slot[gtk:widget]{overflow} property is modeled after the CSS overflow
   property, but implements it only partially.
   @begin{pre}
 (define-g-enum \"GtkOverflow\" overflow
@@ -1985,7 +1985,7 @@
       receiving events.}
     @entry[:insensitive]{Include widgets that are insensitive.}
     @entry[:non-targetable]{Include widgets that are marked as non-targetable.
-      See the @slot[widget]{can-target} property.}
+      See the @slot[gtk:widget]{can-target} property.}
   @end{table}
   @see-function{gtk:widget-pick}
   @see-function{gtk:wiget-can-target}")
@@ -2210,16 +2210,16 @@
   :icon-theme)
   @end{pre}
   @begin[code]{table}
-    @entry[:dpi]{The @slot[settings]{gtk-xft-dpi} setting has changed.}
-    @entry[:font-name]{The @slot[settings]{gtk-font-name} setting has
+    @entry[:dpi]{The @slot[gtk:settings]{gtk-xft-dpi} setting has changed.}
+    @entry[:font-name]{The @slot[gtk:settings]{gtk-font-name} setting has
       changed.}
     @entry[:font-config]{The font configuration has changed in a way that
       requires text to be redrawn. This can be any of the
-      @slot[settings]{gtk-xft-antialias},
-      @slot[settings]{gtk-xft-hinting},
-      @slot[settings]{gtk-xft-hintstyle}
-      @slot[settings]{gtk-xft-rgba} or
-      @slot[settings]{gtk-fontconfig-timestamp} settings.}
+      @slot[gtk:settings]{gtk-xft-antialias},
+      @slot[gtk:settings]{gtk-xft-hinting},
+      @slot[gtk:settings]{gtk-xft-hintstyle}
+      @slot[gtk:settings]{gtk-xft-rgba} or
+      @slot[gtk:settings]{gtk-fontconfig-timestamp} settings.}
     @entry[:display]{The display has changed.}
     @entry[:icon-theme]{The icon theme has changed in a way that requires icons
       to be looked up again.}
@@ -2598,14 +2598,14 @@
       @class{gtk:check-button} widget.
       Value type: @symbol{gtk:accessible-tristate} enumeration}
     @entry[:disabled]{A \"disabled\" state. Corresponds to the
-      @slot[widget]{sensitive} property on the @class{gtk:widget} widget. It
+      @slot[gtk:widget]{sensitive} property on the @class{gtk:widget} widget. It
       indicates a UI element that is perceivable, but not editable or operable.
       Value type: boolean}
     @entry[:expanded]{An \"expanded\" state. Corresponds to the
-      @slot[expander]{expanded} property on the @class{gtk:expander} widget.
+      @slot[gtk:expander]{expanded} property on the @class{gtk:expander} widget.
       Value type: boolean or undefined}
     @entry[:hidden]{A \"hidden\" state. Corresponds to the
-      @slot[widget]{visible} property on the @class{gtk:widget} widget. You
+      @slot[gtk:widget]{visible} property on the @class{gtk:widget} widget. You
       can use this state explicitly on UI elements that should not be exposed to
       an assistive technology. See also the @code{:disabled} value.
       Value type: boolean}
