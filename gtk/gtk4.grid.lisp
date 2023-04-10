@@ -216,7 +216,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "baseline-row" 'grid) t)
  "The @code{baseline-row} property of type @code{:int} (Read / Write) @br{}
-  The row to align to the baseline when @slot[widget]{valign} has the
+  The row to align to the baseline when @slot[gtk:widget]{valign} has the
   @code{:center} value of the @symbol{gtk:align} enumeration. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0 @br{}")

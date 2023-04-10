@@ -945,7 +945,7 @@ lambda (view)    :action
   in the icon view's model containing the tooltip texts, or -1 to disable this
   feature.
 
-  When enabled, the @slot[widget]{has-tooltip} property will be set to
+  When enabled, the @slot[gtk:widget]{has-tooltip} property will be set to
   @em{true} and the icon view will connect a \"query-tooltip\" signal handler.
   Note that the signal handler sets the text with the
   @fun{gtk:tooltip-set-markup} function, so &, <, etc have to be escaped in the

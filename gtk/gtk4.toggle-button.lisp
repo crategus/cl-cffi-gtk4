@@ -267,7 +267,7 @@ lambda (toggle)    :run-first
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "active" 'toggle-button) t)
-"The @code{active} property of type @code{:boolean} (Read / Write) @br{}
+ "The @code{active} property of type @code{:boolean} (Read / Write) @br{}
   Whether the toggle button should be pressed in. @br{}
   Default value: @em{false}")
 
@@ -297,7 +297,7 @@ lambda (toggle)    :run-first
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "group" 'toggle-button) t)
-"The @code{group} property of type @sym{gtk:toggle-button} (Write) @br{}
+ "The @code{group} property of type @sym{gtk:toggle-button} (Write) @br{}
   The toggle button whose group this widget belongs to.")
 
 #+liber-documentation

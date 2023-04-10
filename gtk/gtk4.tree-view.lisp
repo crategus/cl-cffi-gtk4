@@ -1161,7 +1161,7 @@ lambda (view)    :action
   in the tree view's model containing the tooltip texts, or -1 to disable this
   feature.
 
-  When enabled, the @slot[widget]{has-tooltip} property will be set to
+  When enabled, the @slot[gtk:widget]{has-tooltip} property will be set to
   @em{true} and the tree view will connect a \"query-tooltip\" signal handler.
 
   Note that the signal handler sets the text with the

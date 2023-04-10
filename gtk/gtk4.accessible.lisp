@@ -114,7 +114,7 @@
   The attributes are updated every time a state of a UI element changes in a
   way that should be reflected by assistive technologies. For instance, if a
   @class{gtk:widget} visibility changes, the @code{:hidden} state will also
-  change to reflect the @slot[widget]{visible} property.
+  change to reflect the @slot[gtk:widget]{visible} property.
   @see-slot{gtk:accessible-accessible-role}
   @see-class{gtk:widget}
   @see-symbol{gtk:accessible-role}

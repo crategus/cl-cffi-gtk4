@@ -849,7 +849,7 @@ lambda (widget direction)    :action
 lambda (widget x y mode tooltip)    :run-last
      @end{pre}
      Emitted when the @code{has-tooltip} property is @em{true} and the
-     @slot[settings]{gtk-tooltip-timeout} setting has expired with the
+     @slot[gtk:settings]{gtk-tooltip-timeout} setting has expired with the
      cursor hovering \"above\" widget, or emitted when the widget got focus in
      keyboard mode. Using the given coordinates, the signal handler should
      determine whether a tooltip should be shown for the widget. If this is the
@@ -980,7 +980,7 @@ lambda (widget)    :run-last
   @argument[setting]{a boolean whether or not @arg{widget} can own the input
     focus}
   @begin{short}
-    Accessor of the @slot[widget]{can-focus} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{can-focus} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-can-focus} function returns @em{true} if the widget can
@@ -1012,7 +1012,7 @@ lambda (widget)    :run-last
   @argument[setting]{a boolean whether or not @arg{widget} can receive pointer
     events}
   @begin{short}
-    Accessor of the @slot[widget]{can-target} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{can-target} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-can-target} function returns whether the widget can be
@@ -1038,7 +1038,7 @@ lambda (widget)    :run-last
   @argument[classes]{a list of strings with the CSS classes applied to the
     widget}
   @begin{short}
-    Accessor of the @slot[widget]{css-classes} slot of the
+    Accessor of the @slot[gtk:widget]{css-classes} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-css-classes} function returns the list of style classes
@@ -1066,7 +1066,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[name]{a string with the name of the widet in the CSS tree}
   @begin{short}
-    Accessor of the @slot[widget]{css-name} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{css-name} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-css-name} function returns the CSS name that is used for
@@ -1091,7 +1091,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[cursor]{a @class{gdk:cursor} object}
   @begin{short}
-    Accessor of the @slot[widget]{cursor} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{cursor} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-cursor} function queries the cursor set on the widget.
@@ -1120,7 +1120,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget should grab focus}
   @begin{short}
-    Accessor of the @slot[widget]{focus-on-click} slot of the
+    Accessor of the @slot[gtk:widget]{focus-on-click} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-focus-on-click} function returns @em{true} if the widget
@@ -1150,16 +1150,16 @@ lambda (widget)    :run-last
   @argument[setting]{a boolean whether the widget itself will accept the input
     focus}
   @begin{short}
-    Accessor of the @slot[widget]{focusable} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{focusable} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-focusable} function determines whether the widget can own
   the input focus. The @sym{(setf gtk:widget-focusable)} function specifies
   whether widget can own the input focus.
 
-  Widget implementations should set the @slot[widget]{focusable} property to
+  Widget implementations should set the @slot[gtk:widget]{focusable} property to
   @em{true} in their init function if they want to receive keyboard input. Note
-  that having the @slot[widget]{focusable} property be @em{true} is only one
+  that having the @slot[gtk:widget]{focusable} property be @em{true} is only one
   of the necessary conditions for being focusable. A widget must also be
   sensitive and can-focus and not have an ancestor that is marked as not
   can-focus in order to receive input focus. See the @fun{gtk:widget-grab-focus}
@@ -1185,7 +1185,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[align]{a value of the @symbol{gtk:align} enumeration}
   @begin{short}
-    Accessor of the @slot[widget]{halign} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{halign} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-halign} function returns the horizontal alignment of the
@@ -1213,7 +1213,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget is the default widget}
   @begin{short}
-    Accessor of the @slot[widget]{has-default} slot of the
+    Accessor of the @slot[gtk:widget]{has-default} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-has-default} function returns @em{true} if the widget is
@@ -1243,7 +1243,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget has the input focus}
   @begin{short}
-    Accessor of the @slot[widget]{has-focus} slot of the
+    Accessor of the @slot[gtk:widget]{has-focus} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-has-focus} function returns @em{true} if the widget has
@@ -1281,7 +1281,7 @@ lambda (widget)    :run-last
   @argument[setting]{a boolean whether the emission of the \"query-toolip\"
     signal is enabled or disabled}
   @begin{short}
-    Accessor of the @slot[widget]{has-tooltip} slot of the
+    Accessor of the @slot[gtk:widget]{has-tooltip} slot of the
     @class{gtk:widget} class.
   @end{short}
   Enables or disables the emission of the \"query-tooltip\" signal on the
@@ -1315,7 +1315,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[height]{an integer with the height request}
   @begin{short}
-    Accessor of the @slot[widget]{height-request} slot of the
+    Accessor of the @slot[gtk:widget]{height-request} slot of the
     @class{gtk:widget} class.
   @end{short}
   See the @fun{gtk:widget-size-request} function or details.
@@ -1341,12 +1341,12 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to expand horizontally}
   @begin{short}
-    Accessor of the @slot[widget]{hexpand} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{hexpand} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-hexpand} function gets whether the widget would like any
   available extra horizontal space. This function only looks at the own
-  @slot[widget]{hexpand} flag of the widget, rather than computing whether
+  @slot[gtk:widget]{hexpand} flag of the widget, rather than computing whether
   the entire widget tree rooted at this widget wants to expand.
 
   The @sym{(setf gtk:widget-hexpand)} function sets whether the widget would
@@ -1361,12 +1361,12 @@ lambda (widget)    :run-last
   of the container by overriding the @code{compute_expand} virtual method on the
   @class{gtk:widget} class.
 
-  Setting the @slot[widget]{hexpand} property explicitly with this function
+  Setting the @slot[gtk:widget]{hexpand} property explicitly with this function
   will override the automatic expand behavior. This function forces the widget
   to expand or not to expand, regardless of children. The override occurs
   because the @sym{gtk:widget-hexpand} function sets the
-  @slot[widget]{hexpand-set} property, which causes the
-  @slot[widget]{hexpand} property of the widget to be used, rather than
+  @slot[gtk:widget]{hexpand-set} property, which causes the
+  @slot[gtk:widget]{hexpand} property of the widget to be used, rather than
   looking at children and widget state.
   @see-class{gtk:widget}
   @see-function{gtk:widget-expand}
@@ -1392,22 +1392,22 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to use the @code{hexpand} property}
   @begin{short}
-    Accessor of the @slot[widget]{hexpand-set} slot of the
+    Accessor of the @slot[gtk:widget]{hexpand-set} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-hexpand-set} function gets whether the
   @fun{gtk:widget-hexpand} function has been used to explicitly set the expand
   flag on this widget.
 
-  The @slot[widget]{hexpand-set} property will be set automatically when
+  The @slot[gtk:widget]{hexpand-set} property will be set automatically when
   you call the @fun{gtk:widget-hexpand} function to set the
-  @slot[widget]{hexpand} property, so the most likely reason to use the
+  @slot[gtk:widget]{hexpand} property, so the most likely reason to use the
   @sym{(setf gtk:widget-hexpand-set)} function would be to unset an explicit
   expand flag.
 
-  If the @slot[widget]{hexpand} property is set, then it overrides any
+  If the @slot[gtk:widget]{hexpand} property is set, then it overrides any
   computed expand value based on child widgets. If the
-  @slot[widget]{hexpand} property is not set, then the expand value depends
+  @slot[gtk:widget]{hexpand} property is not set, then the expand value depends
   on whether any children of the widget would like to expand. There are few
   reasons to use this function, but it is here for completeness and consistency.
 
@@ -1434,7 +1434,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @begin{short}
-    Accessor of the @slot[widget]{layout-manager} slot of the
+    Accessor of the @slot[gtk:widget]{layout-manager} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-layout-manager} function retrieves the layout manager used
@@ -1464,7 +1464,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer with the margin on bottom side of the widget}
   @begin{short}
-    Accessor of the @slot[widget]{margin-bottom} slot of the
+    Accessor of the @slot[gtk:widget]{margin-bottom} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-margin-bottom} function gets the bottom marging of the
@@ -1500,7 +1500,7 @@ lambda (widget)    :run-last
   @argument[margin]{an integer with the margin on end of the widget,
     horizontally}
   @begin{short}
-    Accessor of the @slot[widget]{margin-end} slot of the
+    Accessor of the @slot[gtk:widget]{margin-end} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-margin-end} function gets the value of the end margin of
@@ -1537,7 +1537,7 @@ lambda (widget)    :run-last
   @argument[margin]{an integer with the margin on start of the widget,
     horizontally}
   @begin{short}
-    Accessor of the @slot[widget]{margin-start} slot of the
+    Accessor of the @slot[gtk:widget]{margin-start} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-margin-start} function returns the start margin of the
@@ -1572,7 +1572,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer with the margin on top side of the widget}
   @begin{short}
-    Accessor of the @slot[widget]{margin-top} slot of the
+    Accessor of the @slot[gtk:widget]{margin-top} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-margin-top} function returns the top margin of widget.
@@ -1603,7 +1603,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[name]{a string with the name of the widget}
   @begin{short}
-    Accessor of the @slot[widget]{name} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{name} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-name} function retrieves the name of a widget. The
@@ -1637,7 +1637,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[opacity]{a double float with the opacity of the widget}
   @begin{short}
-    Accessor of the @slot[widget]{opacity} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{opacity} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-opacity} function fetches the requested opacity for the
@@ -1682,7 +1682,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[overflow]{a value of the @symbol{gtk:overflow} enumeration}
   @begin{short}
-    Accessor of the @slot[widget]{overflow} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{overflow} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-overflow} function returns the widgets overflow value. The
@@ -1712,7 +1712,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[parent]{a @class{gtk:widget} parent widget}
   @begin{short}
-    Accessor of the @slot[widget]{parent} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{parent} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-parent} function returns the parent widget of the
@@ -1740,7 +1740,7 @@ lambda (widget)    :run-last
   @argument[setting]{a boolean whether the widget will receive the default
     action}
   @begin{short}
-    Accessor of the @slot[widget]{receives-default} slot of the
+    Accessor of the @slot[gtk:widget]{receives-default} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-receives-default} function determines whether the widget
@@ -1824,7 +1824,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget responds to input}
   @begin{short}
-    Accessor of the @slot[widget]{sensitive} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{sensitive} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-sensitive} function returns the sensitivity of the widget.
@@ -1865,7 +1865,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[markup]{a string with the text of the tooltip}
   @begin{short}
-    Accessor of the @slot[widget]{tooltip-markup} slot of the
+    Accessor of the @slot[gtk:widget]{tooltip-markup} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-tooltip-markup} function gets the contents of the tooltip.
@@ -1873,11 +1873,11 @@ lambda (widget)    :run-last
   contents of the tooltip, which is marked up with the Pango text markup
   language.
 
-  This function will take care of setting the @slot[widget]{has-tooltip}
+  This function will take care of setting the @slot[gtk:widget]{has-tooltip}
   property to @em{true} and of the default handler for the \"query-tooltip\"
   signal.
 
-  See also the @slot[widget]{tooltip-markup} property and the
+  See also the @slot[gtk:widget]{tooltip-markup} property and the
   @fun{gtk:tooltip-set-markup} function.
   @see-class{gtk:widget}
   @see-function{gtk:widget-has-toolip}
@@ -1906,18 +1906,18 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[text]{a string with the text of the tooltip}
   @begin{short}
-    Accessor of the @slot[widget]{tooltip-text} slot of the
+    Accessor of the @slot[gtk:widget]{tooltip-text} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-tooltip-text} function gets the contents of the tooltip.
   The @sym{(sef gtk:widget-tooltip-text)} function sets @arg{text} as the
   contents of the tooltip.
 
-  This function will take care of setting the @slot[widget]{has-tooltip}
+  This function will take care of setting the @slot[gtk:widget]{has-tooltip}
   property to @em{true} and of the default handler for the \"query-tooltip\"
   signal.
 
-  See also the @slot[widget]{tooltip-text} property and the
+  See also the @slot[gtk:widget]{tooltip-text} property and the
   @fun{gtk:tooltip-set-text} function.
   @see-class{gtk:widget}
   @see-function{gtk:widget-has-tooltip}
@@ -1941,7 +1941,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[align]{a value of the @symbol{gtk:align} enumeration}
   @begin{short}
-    Accessor of the @slot[widget]{valign} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{valign} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-valign} function gets the vertical alignment of the
@@ -1969,7 +1969,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to expand vertically}
   @begin{short}
-    Accessor of the @slot[widget]{vexpand} slot of the
+    Accessor of the @slot[gtk:widget]{vexpand} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-vexpand} function gets whether the widget would like any
@@ -1998,16 +1998,16 @@ lambda (widget)    :run-last
   @syntax[]{(gtk:widget-vexpand-set object) => setting}
   @syntax[]{(setf (gtk:widget-vexpand-set object) setting)}
   @argument[object]{a @class{gtk:widget} object}
-  @argument[setting]{a boolean whether to use the @slot[widget]{vexpand}
+  @argument[setting]{a boolean whether to use the @slot[gtk:widget]{vexpand}
     property}
   @begin{short}
-    Accessor of the @slot[widget]{vexpand-set} slot of the
+    Accessor of the @slot[gtk:widget]{vexpand-set} slot of the
     @class{gtk:widget} class.
   @end{short}
   The @sym{gtk:widget-vexpand-set} function gets whether the
   @sym{(setf gtk:widget-vexpand)} function has been used to explicitly set the
   expand flag on this widget. The @sym{(setf gtk:widget-vexpand-set)} function
-  sets whether the @slot[widget]{vexpand} property will be used.
+  sets whether the @slot[gtk:widget]{vexpand} property will be used.
 
   See the @fun{gtk:widget-hexpand-set} function for more detail.
   @see-class{gtk:widget}
@@ -2032,7 +2032,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget is visible}
   @begin{short}
-    Accessor of the @slot[widget]{visible} slot of the @class{gtk:widget}
+    Accessor of the @slot[gtk:widget]{visible} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @sym{gtk:widget-visible} function determines whether the widget is
@@ -2067,7 +2067,7 @@ lambda (widget)    :run-last
   @argument[object]{a @class{gtk:widget} object}
   @argument[width]{an integer with the width request}
   @begin{short}
-    Accessor of the @slot[widget]{width-request} slot of the
+    Accessor of the @slot[gtk:widget]{width-request} slot of the
     @class{gtk:widget} class.
   @end{short}
   See the @fun{gtk:widget-size-request} function for details.
@@ -3549,8 +3549,8 @@ lambda (widget)    :run-last
   pass 0 by 0 to this function to mean \"as small as possible\".
 
   The size request set here does not include any margin from the
-  @slot[widget]{margin-start}, @slot[widget]{margin-end},
-  @slot[widget]{margin-top}, and @slot[widget]{margin-bottom}
+  @slot[gtk:widget]{margin-start}, @slot[gtk:widget]{margin-end},
+  @slot[gtk:widget]{margin-top}, and @slot[gtk:widget]{margin-bottom}
   properties, but it does include pretty much all other padding or border
   properties set by any subclass of the @class{gtk:widget} class.
   @see-class{gtk:widget}
@@ -4891,7 +4891,7 @@ lambda (widget)    :run-last
     possible.
   @end{short}
   Containers should check this, rather than looking at the
-  @slot[widget]{hexpand} or @slot[widget]{vexpand} properties.
+  @slot[gtk:widget]{hexpand} or @slot[gtk:widget]{vexpand} properties.
 
   This function already checks whether the widget is visible, so visibility
   does not need to be checked separately. Non-visible widgets are not

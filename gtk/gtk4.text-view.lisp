@@ -694,7 +694,7 @@ lambda (view)    :action
   The bottom margin for text in the text view. Note that this property is
   confusingly named. In CSS terms, the value set here is padding, and it is
   applied in addition to the padding from the theme. Do not confuse this
-  property with the @slot[widget]{margin-bottom} property. @br{}
+  property with the @slot[gtk:widget]{margin-bottom} property. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1244,7 +1244,7 @@ lambda (view)    :action
   The top margin for text in the text view. Note that this property is
   confusingly named. In CSS terms, the value set here is padding, and it is
   applied in addition to the padding from the theme. Do not confuse this
-  property with the @slot[widget]{margin-top} property. @br{}
+  property with the @slot[gtk:widget]{margin-top} property. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 

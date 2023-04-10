@@ -295,8 +295,8 @@
 
   The @fun{gtk:label-justify} function sets how the lines in a label align with
   one another. If you want to set how the label as a whole aligns in its
-  available space, see the @slot[widget]{halign} and
-  @slot[widget]{valign} properties.
+  available space, see the @slot[gtk:widget]{halign} and
+  @slot[gtk:widget]{valign} properties.
 
   The @slot[gtk:label]{width-chars} and @slot[gtk:label]{max-width-chars}
   properties can be used to control the size allocation of ellipsized or
@@ -1046,7 +1046,7 @@ lambda (label step count extend)    :action
 (setf (documentation (liber:slot-documentation "xalign" 'label) t)
  "The @code{xalign} property of type @code{:float} (Read / Write) @br{}
   Determines the horizontal aligment of the label text inside the size
-  allocation of the label. Compare this to the @slot[widget]{halign}
+  allocation of the label. Compare this to the @slot[gtk:widget]{halign}
   property, which determines how the size allocation is positioned in the space
   available for the label. @br{}
   Allowed values: [0,1] @br{}
@@ -1077,7 +1077,7 @@ lambda (label step count extend)    :action
 (setf (documentation (liber:slot-documentation "yalign" 'label) t)
  "The @code{yalign} property of type @code{:float} (Read / Write) @br{}
   Determines the vertical aligment of the label text inside the size
-  allocation of the label. Compare this to @slot[widget]{valign}
+  allocation of the label. Compare this to @slot[gtk:widget]{valign}
   property, which determines how the size allocation is positioned in the space
   available for the label.
   @br{}

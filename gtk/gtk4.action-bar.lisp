@@ -133,8 +133,8 @@
   reveal (@em{true}) or conceal (@em{false}) itself via a sliding transition.
   @begin[Note]{dictionary}
     This does not show or hide the action bar in the
-    @slot[widget]{visible} property sense, so revealing has no effect if
-    the @slot[widget]{visible} property is @em{false}.
+    @slot[gtk:widget]{visible} property sense, so revealing has no effect if
+    the @slot[gtk:widget]{visible} property is @em{false}.
   @end{dictionary}
   @see-class{gtk:action-bar}
   @see-function{gtk:widget-visible}")

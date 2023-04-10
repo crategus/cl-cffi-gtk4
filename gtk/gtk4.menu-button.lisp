@@ -214,7 +214,7 @@
   The positioning of the popup is determined by the @code{direction} property
   of the menu button.
 
-  For menus, the @slot[widget]{halign} and @slot[widget]{valign}
+  For menus, the @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign}
   properties of the menu are also taken into account. For example, when the
   direction is @code{:down} and the horizontal alignment is @code{:start}, the
   menu will be positioned below the button, with the starting edge, depending

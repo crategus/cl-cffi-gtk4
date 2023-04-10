@@ -103,11 +103,11 @@
   @image[overlay]{Figure: GtkOverlay}
 
   The position of each overlay widget is determined by its
-  @slot[widget]{halign} and @slot[widget]{valign} properties. E.g. a
+  @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties. E.g. a
   overlay widget with both alignments set to @code{:start} will be placed at
   the top left corner of the main widget, whereas an overlay with the
-  @slot[widget]{halign} property set to @code{:center} and the
-  @slot[widget]{valign} property set to @code{:end} will be placed a the
+  @slot[gtk:widget]{halign} property set to @code{:center} and the
+  @slot[gtk:widget]{valign} property set to @code{:end} will be placed a the
   bottom edge of the main widget, horizontally centered. The position can be
   adjusted by setting the margin properties of the overlay widget to non-zero
   values.
@@ -135,7 +135,7 @@ lambda (overlay widget allocation)    :run-last
       child widgets. A handler for this signal should fill allocation with the
       desired position and size for @arg{widget}, relative to the 'main' child
       of the overlay. The default handler for this signal uses the
-      @slot[widget]{halign} and @slot[widget]{valign} properties of the
+      @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties of the
       widget to determine the position and gives the widget its natural size,
       except that an alignment of @code{:fill} will cause the overlay to be
       full-width/height. If the main child is a @class{gtk:scrolled-window}
@@ -214,7 +214,7 @@ lambda (overlay widget allocation)    :run-last
   @fun{gtk:overlay-child} function.
 
   The position at which the child widget is placed is determined from its
-  @slot[widget]{halign} and @slot[widget]{valign} properties.
+  @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties.
   @see-class{gtk:overlay}
   @see-class{gtk:widget}
   @see-function{gtk:overlay-child}
