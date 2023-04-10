@@ -372,7 +372,7 @@
     @entry[:pad-group-mode]{A tablet pad group mode change.}
     @entry[:touchpad-hold]{A touchpad hold gesture event, the current state is
       determined by its phase field. Since 4.6}
-    @entry[:event-last]{Marks the end of the @sym{gdk-event-type} enumeration.}
+    @entry[:event-last]{Marks the end of the @sym{gdk:event-type} enumeration.}
   @end{table}
   @see-class{gdk:event}")
 
@@ -672,15 +672,18 @@
 ;;; functions are rarely needed.
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: The implementation is wrong. GdkEvent is not a object, but has its
-;; own fundamental type.
+(cffi:define-foreign-type event-t ()
+  ()
+  (:actual-type :pointer)
+  (:simple-parser event))
 
-(define-g-object-class "GdkEvent" event
-  (:superclass g:object
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_event_get_type")
-  nil)
+(defmethod cffi:translate-to-foreign (proxy (type event-t))
+  proxy)
+
+(defmethod cffi:translate-from-foreign (native (type event-t))
+  native)
+
+(export 'event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkButtonEvent
@@ -690,12 +693,11 @@
 ;;; An event related to a button on a pointer device/
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkButtonEvent" button-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_button_event_get_type")
-  nil)
+(cffi:define-foreign-type button-event-t (event-t)
+  ()
+  (:simple-parser button-event))
+
+(export 'button-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkScrollEvent
@@ -705,12 +707,11 @@
 ;;; An event related to a scrolling motion.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkScrollEvent" scroll-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_scroll_event_get_type")
-  nil)
+(cffi:define-foreign-type scroll-event-t (event-t)
+  ()
+  (:simple-parser sroll-event))
+
+(export 'scroll-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkMotionEvent
@@ -720,12 +721,11 @@
 ;;; An event related to a pointer or touch device motion.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkMotionEvent" motion-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_motion_event_get_type")
-  nil)
+(cffi:define-foreign-type motion-event-t (event-t)
+  ()
+  (:simple-parser motion-event))
+
+(export 'motion-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkKeyEvent
@@ -735,12 +735,11 @@
 ;;; An event related to a key-based device.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkKeyEvent" key-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_key_event_get_type")
-  nil)
+(cffi:define-foreign-type key-event-t (event-t)
+  ()
+  (:simple-parser key-event))
+
+(export 'key-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkFocusEvent
@@ -750,12 +749,11 @@
 ;;; An event related to a focus change.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkFocusEvent" focus-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_focus_event_get_type")
-  nil)
+(cffi:define-foreign-type focus-event-t (event-t)
+  ()
+  (:simple-parser focus-event))
+
+(export 'focus-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkCrossingEvent
@@ -765,12 +763,11 @@
 ;;; An event caused by a pointing device moving between surfaces.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkCrossingEvent" crossing-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_crossing_event_get_type")
-  nil)
+(cffi:define-foreign-type crossing-event-t (event-t)
+  ()
+  (:simple-parser crossing-event))
+
+(export 'crossing-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkGrabBrokenEvent
@@ -780,12 +777,11 @@
 ;;; An event related to a broken windowing system grab.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkGrabBrokenEvent" grab-broken-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_grab_broken_event_get_type")
-  nil)
+(cffi:define-foreign-type grab-broken-event-t (event-t)
+  ()
+  (:simple-parser grab-broken-event))
+
+(export 'grab-broken-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkDeleteEvent
@@ -795,12 +791,11 @@
 ;;; An event related to closing a top-level surface.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkDeleteEvent" delete-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_delete_event_get_type")
-  nil)
+(cffi:define-foreign-type delete-event-t (event-t)
+  ()
+  (:simple-parser delete-event))
+
+(export 'delete-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkDNDEvent
@@ -810,12 +805,11 @@
 ;;; An event related to drag and drop operations.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkDNDEvent" dnd-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_dnd_event_get_type")
-  nil)
+(cffi:define-foreign-type dnd-event-t (event-t)
+  ()
+  (:simple-parser dnd-event))
+
+(export 'dnd-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkTouchEvent
@@ -825,12 +819,11 @@
 ;;; An event related to a touch-based device.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkTouchEvent" touch-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_touch_event_get_type")
-  nil)
+(cffi:define-foreign-type touch-event-t (event-t)
+  ()
+  (:simple-parser touch-event))
+
+(export 'touch-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkTouchpadEvent
@@ -840,12 +833,11 @@
 ;;; An event related to a touchpad device.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkTouchpadEvent" touchpad-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_touchpad_event_get_type")
-  nil)
+(cffi:define-foreign-type touchpad-event-t (event-t)
+  ()
+  (:simple-parser touchpad-event))
+
+(export 'touchpad-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkPadEvent
@@ -855,12 +847,11 @@
 ;;; An event related to a pad-based device.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkPadEvent" pad-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_pad_event_get_type")
-  nil)
+(cffi:define-foreign-type pad-event-t (event-t)
+  ()
+  (:simple-parser pad-event))
+
+(export 'pad-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkProximityEvent
@@ -870,12 +861,11 @@
 ;;; An event related to the proximity of a tool to a device.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkProximityEvent" proximity-event
-  (:superclass event
-   :export t
-   :interfaces nil
-   :type-initializer "gdk_proximity_event_get_type")
-  nil)
+(cffi:define-foreign-type proximity-event-t (event-t)
+  ()
+  (:simple-parser proximity-event))
+
+(export 'proximity-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_ref ()
@@ -921,7 +911,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_event_type" event-event-type) event-type
-  (event (g:object event)))
+  (event event))
 
 (export 'event-event-type)
 
@@ -941,7 +931,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_surface" event-surface) (g:object surface)
-  (event (g:object event)))
+  (event event))
 
 (export 'event-surface)
 
@@ -961,7 +951,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_device" event-device) (g:object device)
-  (event (g:object event)))
+  (event event))
 
 (export 'event-device)
 
@@ -987,7 +977,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_device_tool" event-device-tool) (g:object device-tool)
-  (event (g:object event)))
+  (event event))
 
 (export 'event-device-tool)
 
@@ -1008,7 +998,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_time" event-time) :uint32
-  (event (g:object event)))
+  (event event))
 
 (export 'event-time)
 
@@ -1028,7 +1018,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_display" event-display) (g:object display)
-  (event (g:object event)))
+  (event event))
 
 (export 'event-display)
 
@@ -1048,7 +1038,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_seat" event-seat) (g:object seat)
-  (event (g:object seat)))
+  (event event))
 
 (export 'event-seat)
 
@@ -1070,7 +1060,7 @@
 
 (defcfun ("gdk_event_get_event_sequence" event-event-sequence)
     (g:boxed event-sequence)
-  (event (g:object event)))
+  (event event))
 
 (export 'event-event-sequence)
 
@@ -1090,7 +1080,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_modifier_state" event-modifier-state) modifier-type
-  (event (g:object event)))
+  (event event))
 
 (export 'event-modifier-state)
 
@@ -1115,7 +1105,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_position" %event-position) :boolean
-  (event (g:object event))
+  (event event)
   (x (:pointer :double))
   (y (:pointer :double)))
 
@@ -1174,7 +1164,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_axis" %event-axis) :boolean
-  (event (g:object event))
+  (event event)
   (axis-use axis-use)
   (value (:pointer :double)))
 
@@ -1227,7 +1217,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_event_get_pointer_emulated" event-pointer-emulated) :boolean
-  (event (g:object event)))
+  (event event))
 
 (export 'event-pointer-emulated)
 
@@ -1253,7 +1243,7 @@
 
 (defcfun ("gdk_event_triggers_context_menu" event-triggers-context-menu)
     :boolean
-  (event (g:object event)))
+  (event event))
 
 (export 'event-triggers-context-menu)
 
@@ -1272,8 +1262,15 @@
 ;;;     the button of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_button_event_get_button" button-event-button) :uint
-  (event (g:object event)))
+;; TODO: We check for the correct event type. Implement this more general.
+
+(defcfun ("gdk_button_event_get_button" %button-event-button) :uint
+  (event event))
+
+(defun button-event-button (event)
+  (let ((type (event-event-type event)))
+    (when (or (eq :button-press type) (eq :button-release type))
+      (%button-event-button event))))
 
 (export 'button-event-button)
 
@@ -1294,7 +1291,7 @@
 
 (defcfun ("gdk_scroll_event_get_direction" scroll-event-direction)
     scroll-direction
-  (event (g:object event)))
+  (event event))
 
 (export 'scroll-event-direction)
 
@@ -1321,7 +1318,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_scroll_event_get_deltas" %scroll-event-deltas) :void
-  (event (g:object event))
+  (event event)
   (xdelta :double)
   (ydelta :double))
 
@@ -1355,7 +1352,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_scroll_event_is_stop" scroll-event-is-stop) :boolean
-  (event (g:object event)))
+  (event event))
 
 (export 'scroll-event-is-stop)
 
@@ -1375,7 +1372,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_key_event_get_keyval" key-event-keyval) :uint
-  (event (g:object event)))
+  (event event))
 
 (export 'key-event-keyval)
 
@@ -1395,7 +1392,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_key_event_get_keycode" key-event-keycode) :uint
-  (event (g:object event)))
+  (event event))
 
 (export 'key-event-keycode)
 
@@ -1416,7 +1413,7 @@
 
 (defcfun ("gdk_key_event_get_consumed_modifiers"
            key-event-consumed-modifiers) modifier-type
-  (event (g:object event)))
+  (event event))
 
 (export 'key-event-consumed-modifiers)
 
@@ -1436,7 +1433,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_key_event_get_layout" key-event-layout) :uint
-  (event (g:object event)))
+  (event event))
 
 (export 'key-event-layout)
 
@@ -1456,7 +1453,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_key_event_get_level" key-event-level) :uint
-  (event (g:object event)))
+  (event event))
 
 (export 'key-event-level)
 
@@ -1476,7 +1473,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_key_event_is_modifier" key-event-is-modifier) :boolean
-  (event (g:object event)))
+  (event event))
 
 (export 'key-event-is-modifier)
 
@@ -1508,7 +1505,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_key_event_matches" key-event-matches) key-match
-  (event (g:object event))
+  (event event)
   (keyval :uint)
   (modifiers modifier-type))
 
@@ -1539,7 +1536,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_key_event_get_match" %key-event-match) :boolean
-  (event (g:object event))
+  (event event)
   (keyval (:pointer :uint))
   (modifiers (:pointer modifier-type)))
 
@@ -1568,7 +1565,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_focus_event_get_in" focus-event-in) :boolean
-  (event (g:object event)))
+  (event event))
 
 (export 'focus-event-in)
 
@@ -1589,7 +1586,7 @@
 
 (defcfun ("gdk_touch_event_get_emulating_pointer" touch-event-emulating-pointer)
     :boolean
-  (event (g:object event)))
+  (event event))
 
 (export 'touch-event-emulating-pointer)
 
@@ -1609,7 +1606,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_crossing_event_get_mode" crossing-event-mode) crossing-mode
-  (event (g:object event)))
+  (event event))
 
 (export 'crossing-event-mode)
 
@@ -1629,7 +1626,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_crossing_event_get_detail" crossing-event-detail) notify-type
-  (event (g:object event)))
+  (event event))
 
 (export 'crossing-event-detail)
 
@@ -1649,7 +1646,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_crossing_event_get_focus" crossing-event-focus) :boolean
-  (event (g:object event)))
+  (event event))
 
 (export 'crossing-event-focus)
 
@@ -1670,7 +1667,7 @@
 
 (defcfun ("gdk_grab_broken_event_get_grab_surface"
            grab-broken-event-grab-surface) (g:object surface)
-  (event (g:object event)))
+  (event event))
 
 (export 'grab-broken-event-grab-surface)
 
@@ -1691,7 +1688,7 @@
 
 (defcfun ("gdk_grab_boken_event_get_implicit" grab-broken-event-implicit)
     :boolean
-  (event (g:object event)))
+  (event event))
 
 (export 'grab-broken-event-implicit)
 
@@ -1711,7 +1708,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_dnd_event_get_drop" dnd-event-drop) (g:object drop)
-  (event (g:object event)))
+  (event event))
 
 (export 'dnd-event-drop)
 
@@ -1732,7 +1729,7 @@
 
 (defcfun ("gdk_touchpad_event_get_gesture_phase"
            touchpad-event-gesture-phase) touchpad-gesture-phase
-  (event (g:object event)))
+  (event event))
 
 (export 'touchpad-event-gesture-phase)
 
@@ -1752,7 +1749,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_touchpad_event_get_n_fingers" touchpad-event-n-fingers) :uint
-  (event (g:object event)))
+  (event event))
 
 (export 'touchpad-event-n-fingers)
 
@@ -1775,7 +1772,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_touchpad_event_get_deltas" %touchpad-event-deltas) :void
-  (event (g:object event))
+  (event event)
   (dx (:pointer :double))
   (dy (:pointer :double)))
 
@@ -1804,7 +1801,7 @@
 
 (defcfun ("gdk_touchpad_event_get_pinch_angle_delta"
            touchpad-event-pinch-angle-delta) :double
-  (event (g:object event)))
+  (event event))
 
 (export 'touchpad-event-pinch-angle-delta)
 
@@ -1825,7 +1822,7 @@
 
 (defcfun ("gdk_touchpad_event_get_pinch_scale" touchpad-event-pinch-scale)
     :double
-  (event (g:object event)))
+  (event event))
 
 (export 'touchpad-event-pinch-scale)
 
@@ -1850,7 +1847,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_pad_event_get_axis_value" %pad-event-axis-value) :void
-  (event (g:object event))
+  (event event)
   (index (:pointer :uint))
   (value (:pointer :double)))
 
@@ -1878,7 +1875,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_pad_event_get_button" pad-event-button) :uint
-  (event (g:object event)))
+  (event event))
 
 (export 'pad-event-button)
 
@@ -1903,7 +1900,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_pad_event_get_group_mode" %pad-event-group-mode) :void
-  (event (g:object event))
+  (event event)
   (group (:pointer :uint))
   (mode (:pointer :uint)))
 
@@ -1942,8 +1939,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_events_get_angle" %events-angle) :boolean
-  (event1 (g:object event))
-  (event2 (g:object event))
+  (event1 event)
+  (event2 event)
   (angle (:pointer :double)))
 
 (defun events-angle (event1 event2)
@@ -1982,8 +1979,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_events_get_center" %events-center) :boolean
-  (event1 (g:object event))
-  (event2 (g:object event))
+  (event1 event)
+  (event2 event)
   (x (:pointer :double))
   (y (:pointer :double)))
 
@@ -2020,8 +2017,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_events_get_distance" %events-distance) :boolean
-  (event1 (g:object event))
-  (event2 (g:object event))
+  (event1 event)
+  (event2 event)
   (distance (:pointer :double)))
 
 (defun events-distance (event1 event2)
