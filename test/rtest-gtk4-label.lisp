@@ -7,7 +7,7 @@
 
 ;;;     GtkLabel
 
-(test label-class
+(test gtk-label-class
   ;; Type check
   (is (g:type-is-object "GtkLabel"))
   ;; Check the registered name
@@ -28,9 +28,9 @@
   ;; Check the class properties
   (is (equal '("attributes" "ellipsize" "extra-menu" "justify" "label" "lines"
                "max-width-chars" "mnemonic-keyval" "mnemonic-widget"
-               "natural-wrap-mode" "selectable" "single-line-mode" "use-markup"
-               "use-underline" "width-chars" "wrap" "wrap-mode" "xalign"
-               "yalign")
+               "natural-wrap-mode" "selectable" "single-line-mode" "tabs"
+               "use-markup" "use-underline" "width-chars" "wrap" "wrap-mode"
+               "xalign" "yalign")
              (list-properties "GtkLabel")))
   ;; Check the list of signals
   (is (equal '("activate-current-link" "activate-link" "copy-clipboard"
@@ -72,6 +72,7 @@
                          "gboolean" T T)
                         (SINGLE-LINE-MODE GTK-LABEL-SINGLE-LINE-MODE
                          "single-line-mode" "gboolean" T T)
+                        (TABS GTK-LABEL-TABS "tabs" "PangoTabArray" T T)
                         (USE-MARKUP GTK-LABEL-USE-MARKUP "use-markup"
                          "gboolean" T T)
                         (USE-UNDERLINE GTK-LABEL-USE-UNDERLINE "use-underline"
@@ -96,8 +97,10 @@
 ;;;     max-width-chars
 ;;;     mnemonic-keyval
 ;;;     mnemonic-widget
+;;;     natural-wrap-mode
 ;;;     selectable
 ;;;     single-line-mode
+;;;     tabs
 ;;;     use-markup
 ;;;     use-underline
 ;;;     width-chars
@@ -106,7 +109,7 @@
 ;;;     xalign
 ;;;     yalign
 
-(test label-properties
+(test gtk-label-properties
   (let ((label (make-instance 'gtk:label)))
     (is-false (gtk:label-attributes label))
     (is (eq :none (gtk:label-ellipsize label)))
@@ -117,8 +120,10 @@
     (is (= -1 (gtk:label-max-width-chars label)))
     (is (= 16777215 (gtk:label-mnemonic-keyval label)))
     (is-false (gtk:label-mnemonic-widget label))
+    (is (eq :inherit (gtk:label-natural-wrap-mode label)))
     (is-false (gtk:label-selectable label))
     (is-false (gtk:label-single-line-mode label))
+    (is-false (gtk:label-tabs label))
     (is-false (gtk:label-use-markup label))
     (is-false (gtk:label-use-underline label))
     (is (= -1 (gtk:label-width-chars label)))
@@ -134,7 +139,7 @@
 ;;;     copy-clipboard
 ;;;     move-cursor
 
-;;; Functions
+;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_label_new
 ;;;     gtk_label_set_text
@@ -149,4 +154,4 @@
 ;;;     gtk_label_get_selection_bounds
 ;;;     gtk_label_get_current_uri
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-15 --------------------------------------------------------------

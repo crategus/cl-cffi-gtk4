@@ -27,8 +27,8 @@
                "GtkActionable")
              (list-interfaces "GtkCheckButton")))
   ;; Check the properties
-  (is (equal '("action-name" "action-target" "active" "group" "inconsistent"
-               "label" "use-underline")
+  (is (equal '("action-name" "action-target" "active" "child" "group"
+               "inconsistent" "label" "use-underline")
              (list-properties "GtkCheckButton")))
   ;; Check the signals
   (is (equal '("activate" "toggled")
@@ -50,6 +50,7 @@
                         :TYPE-INITIALIZER "gtk_check_button_get_type")
                        ((ACTIVE GTK-CHECK-BUTTON-ACTIVE "active" "gboolean" T
                          T)
+                        (CHILD GTK-CHECK-BUTTON-CHILD "child" "GtkWidget" T T)
                         (GROUP GTK-CHECK-BUTTON-GROUP "group" "GtkCheckButton"
                          NIL T)
                         (INCONSISTENT GTK-CHECK-BUTTON-INCONSISTENT
@@ -68,6 +69,9 @@
     (is-true (setf (gtk:check-button-active button) t))
     (is-true (gtk:check-button-active button))
     ;; child availabe since 4.8
+    (is (typep (setf (gtk:check-button-child button)
+                     (gtk:button-new)) 'gtk:button))
+    (is (typep (gtk:check-button-child button) 'gtk:button))
     ;; group
     (is (typep (setf (gtk:check-button-group button) group) 'gtk:check-button))
     ;; group is not readable
@@ -105,4 +109,4 @@
     (is (string= "_label" (gtk:check-button-label button)))
     (is-true (gtk:check-button-use-underline button))))
 
-;;; --- 2023-3-20 --------------------------------------------------------------
+;;; --- 2023-4-15 --------------------------------------------------------------

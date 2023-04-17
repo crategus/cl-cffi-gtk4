@@ -7,7 +7,7 @@
 
 ;;;     GdkCairoContext
 
-(test g-object-class
+(test gdk-cairo-context-class
   ;; Type check
   (is (g:type-is-object "GdkCairoContext"))
   ;; Check the registered name
@@ -20,7 +20,7 @@
   (is (eq (g:gtype "GdkDrawContext")
           (g:type-parent "GdkCairoContext")))
   ;; Check the children
-  (is (equal '("GdkWaylandCairoContext")
+  (is (equal '("GdkBroadwayCairoContext" "GdkWaylandCairoContext")
              (list-children "GdkCairoContext")))
   ;; Check the interfaces
   (is (equal '()
@@ -50,4 +50,4 @@
     ;; TODO: We get a NULL Cairo context. Improve this !?
     (is (cffi:null-pointer-p (gdk:cairo-context-cairo-create context)))))
 
-;;; --- 2023-4-7 ---------------------------------------------------------------
+;;; --- 2023-4-15 --------------------------------------------------------------

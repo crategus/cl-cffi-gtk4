@@ -7,9 +7,11 @@
 
 ;;;     GtkContentFit                                      Since 4.8
 
+
+
 ;;;     GtkPicture
 
-(test picture-class
+(test gtk-picture-class
   ;; Type check
   (is (g:type-is-object "GtkPicture"))
   ;; Check the registered name
@@ -28,8 +30,8 @@
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkPicture")))
   ;; Check the properties
-  (is (equal '("alternative-text" "can-shrink" "file" "keep-aspect-ratio"
-               "paintable")
+  (is (equal '("alternative-text" "can-shrink" "content-fit" "file"
+               "keep-aspect-ratio" "paintable")
              (list-properties "GtkPicture")))
   ;; Check the signals
   (is (equal '()
@@ -52,6 +54,8 @@
                          "alternative-text" "gchararray" T T)
                         (CAN-SHRINK GTK-PICTURE-CAN-SHRINK "can-shrink"
                          "gboolean" T T)
+                        (CONTENT-FIT GTK-PICTURE-CONTENT-FIT "content-fit"
+                         "GtkContentFit" T T)
                         (FILE GTK-PICTURE-FILE "file" "GFile" T T)
                         (KEEP-ASPECT-RATIO GTK-PICTURE-KEEP-ASPECT-RATIO
                          "keep-aspect-ratio" "gboolean" T T)
@@ -80,4 +84,4 @@
 ;;;     gtk_picture_set_filename
 ;;;     gtk_picture_set_resource
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-15 --------------------------------------------------------------

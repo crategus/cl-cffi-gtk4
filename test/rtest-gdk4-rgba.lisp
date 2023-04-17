@@ -7,7 +7,7 @@
 
 ;;;     GdkRGBA
 
-(test rgba-structure
+(test gdk-rgba-boxed
   ;; Type check
   (is (g:type-is-a (g:gtype "GdkRGBA") +g-type-boxed+))
   ;; Check the type initializer

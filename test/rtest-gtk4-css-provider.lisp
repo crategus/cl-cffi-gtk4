@@ -65,17 +65,17 @@
 
 ;;;     gtk_css_provider_load_named
 
-#-windows
-(test css-provider-load-named.1
+#+crategus
+(test gtk-css-provider-load-named.1
   (let ((provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-named provider "Yaru"))
-    (is (= 534695 (length (gtk:css-provider-to-string provider))))))
+    (is (= 400215 (length (gtk:css-provider-to-string provider))))))
 
-#-windows
-(test css-provider-load-named.2
+#+crategus
+(test gtk-css-provider-load-named.2
   (let ((provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-named provider "Yaru" "dark"))
-    (is (= 534781 (length (gtk:css-provider-to-string provider))))))
+    (is (= 395346 (length (gtk:css-provider-to-string provider))))))
 
 ;;;     gtk_css_provider_load_from_data
 
@@ -164,4 +164,4 @@ button:last-child > label {
 ;;;     gtk_css_section_get_start_location
 ;;;     gtk_css_section_get_end_location
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-15 --------------------------------------------------------------

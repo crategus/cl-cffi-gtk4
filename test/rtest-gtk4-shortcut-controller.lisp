@@ -5,13 +5,13 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
-;;;     GtkShortcutScope                         -> gtk.enuerations.lisp
+;;;     GtkShortcutScope                         -> gtk.enumerations.lisp
 ;;;     GtkShortcutManager                       -> gtk.shortcut-manager.lisp
 ;;;     GtkShortcutManagerInterface
 
 ;;;     GtkShortcutController
 
-(test shortcut-controller-class
+(test gtk-shortcut-controller-class
   ;; Type check
   (is (g:type-is-object "GtkShortcutController"))
   ;; Check the registered name
@@ -31,7 +31,7 @@
   (is (equal '("GListModel" "GtkBuildable")
              (list-interfaces "GtkShortcutController")))
   ;; Check the properties
-  (is (equal '("mnemonic-modifiers" "model" "scope")
+  (is (equal '("item-type" "mnemonic-modifiers" "model" "n-items" "scope")
              (list-properties "GtkShortcutController")))
   ;; Check the signals
   (is (equal '()
@@ -42,19 +42,25 @@
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         ("GListModel" "GtkBuildable") :TYPE-INITIALIZER
                         "gtk_shortcut_controller_get_type")
-                       ((MNEMONIC-MODIFIERS
+                       ((ITEM-TYPE GTK-SHORTCUT-CONTROLLER-ITEM-TYPE
+                         "item-type" "GType" T NIL)
+                        (MNEMONIC-MODIFIERS
                          GTK-SHORTCUT-CONTROLLER-MNEMONIC-MODIFIERS
                          "mnemonic-modifiers" "GdkModifierType" T T)
                         (MODEL GTK-SHORTCUT-CONTROLLER-MODEL "model"
                          "GListModel" NIL NIL)
+                        (N-ITEMS GTK-SHORTCUT-CONTROLLER-N-ITEMS "n-items"
+                         "guint" T NIL)
                         (SCOPE GTK-SHORTCUT-CONTROLLER-SCOPE "scope"
                          "GtkShortcutScope" T T)))
              (gobject:get-g-type-definition "GtkShortcutController"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
+;;;     item-type
 ;;;     mnemonic-modifiers
 ;;;     model
+;;;     n-items
 ;;;     scope
 
 ;;; --- Functions --------------------------------------------------------------
@@ -64,4 +70,4 @@
 ;;;     gtk_shortcut_controller_add_shortcut
 ;;;     gtk_shortcut_controller_remove_shortcut
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-15 --------------------------------------------------------------

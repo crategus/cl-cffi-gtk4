@@ -54,6 +54,9 @@
 
 (in-package :gtk-test)
 
+;; push the hostname on *features*
+(pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)
+
 (def-suite gtk-test)
 (def-suite gtk-suite :in gtk-test)
 (def-suite gdk-suite :in gtk-test)
