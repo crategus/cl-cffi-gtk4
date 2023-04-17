@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.content-formats.lisp
+;;; gdk4.content-formats.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk/>.
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; Content Formats
@@ -55,7 +56,9 @@
 ;;;     gdk_content_formats_union_serialize_gtypes 
 ;;;     gdk_content_formats_union_deserialize_gtypes 
 ;;;     gdk_content_formats_union_serialize_mime_types 
-;;;     gdk_content_formats_union_deserialize_mime_types 
+;;;     gdk_content_formats_union_deserialize_mime_types
+;;;     gdk_content_formats_parse                          Since 4.4
+;;;
 ;;;     gdk_content_formats_builder_new 
 ;;;     gdk_content_formats_builder_free_to_formats 
 ;;;     gdk_content_formats_builder_add_formats 
@@ -122,6 +125,11 @@
 ;;;     GdkDrag, GdkDrop, GdkClipboard, GdkContentProvider
 ;;; ----------------------------------------------------------------------------
 
+(define-g-boxed-opaque content-formats "GdkContentFormats"
+  :export t
+  :type-initializer "gdk_content_formats_get_type"
+  :alloc (error "GdkContentFormats must be created with gdk:content-formats-new"))
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_intern_mime_type ()
 ;;;
@@ -164,6 +172,17 @@
 ;;;     the new GdkContentFormats.
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_content_formats_new" %content-formats-new)
+    (g:boxed content-formats :return)
+  (mime-types :pointer)
+  (n-mime-types :uint))
+
+(defun content-formats-new (mime-types)
+  (let ((n (length mime-types)))
+    (%content-formats-new (cffi:convert-to-foreign mime-types 'g:strv-t) n)))
+
+(export 'content-formats-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_new_for_gtype ()
 ;;;
@@ -178,6 +197,12 @@
 ;;; Returns :
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_content_formats_new_for_gtype" content-formats-new-for-gtype)
+    (g:boxed content-formats :return)
+  (type g:type-t))
+
+(export 'content-formats-new-for-gtype)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_ref () 
@@ -243,6 +268,11 @@
 ;;;     a new string.
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_content_formats_to_string" content-formats-to-string) :string
+  (formats (g:boxed content-formats)))
+
+(export 'content-formats-to-string)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_get_gtypes ()
 ;;;
@@ -265,6 +295,22 @@
 ;;;     G_TYPE_INVALID-terminated array of types included in formats or NULL if 
 ;;;     none.
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_content_formats_get_gtypes" %content-formats-gtypes) :pointer
+  (formats (g:boxed content-formats))
+  (n-gtypes (:pointer :size)))
+
+(defun content-formats-gtypes (formats)
+  (with-foreign-objects ((ptr :pointer) (n :size))
+
+    (setf (cffi:mem-ref ptr :pointer)
+          (%content-formats-gtypes formats n))
+    (setf n (cffi:mem-ref n :size))
+
+    (iter (for i from 0 below n)
+          (collect (cffi:mem-aref ptr 'g:type-t i)))))
+
+(export 'content-formats-gtypes)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_get_mime_types ()
@@ -289,6 +335,16 @@
 ;;;     formats or NULL if none.
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_content_formats_get_mime_types" %content-formats-mime-types)
+    g:strv-t
+  (formats (g:boxed content-formats))
+  (n-mime-types :pointer))
+
+(defun content-formats-mime-types (formats)
+  (%content-formats-mime-types formats (cffi:null-pointer)))
+
+(export 'content-formats-mime-types)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_union ()
 ;;;
@@ -309,6 +365,13 @@
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_content_formats_union" content-formats-union)
+    (g:boxed content-formats :return)
+  (first (g:boxed content-formats))
+  (second (g:boxed content-formats)))
+
+(export 'content-formats-union)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_match ()
 ;;;
@@ -327,6 +390,12 @@
 ;;; Returns :
 ;;;     TRUE if a matching format was found.
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_content_formats_match" content-formats-match) :boolean
+  (first (g:boxed content-formats))
+  (second (g:boxed content-formats)))
+
+(export 'content-formats-match)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_match_gtype ()
@@ -348,6 +417,13 @@
 ;;;     The first common GType or G_TYPE_INVALID if none.
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_content_formats_match_gtype" content-formats-match-gtype) 
+    g:type-t
+  (first (g:boxed content-formats))
+  (second (g:boxed content-formats)))
+
+(export 'content-formats-match-gtype)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_match_mime_type ()
 ;;;
@@ -368,6 +444,13 @@
 ;;;     The first common mime type or NULL if none.
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_content_formats_match_mime_type" content-formats-match-mime-type)
+    :string
+  (first (g:boxed content-formats))
+  (second (g:boxed content-formats)))
+
+(export 'content-formats-match-mime-type)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_contain_gtype () 
 ;;;
@@ -386,6 +469,13 @@
 ;;; Returns :
 ;;;     TRUE if the GType was found
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_content_formats_contain_gtype" content-formats-contain-gtype)
+    :boolean
+  (formats (g:boxed content-formats))
+  (gype g:type-t))
+
+(export 'content-formats-contain-gtype)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_contain_mime_type ()
@@ -406,6 +496,13 @@
 ;;;     TRUE if the mime_type was found
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_content_formats_contain_mime_type" 
+           content-formats-contain-mime-type) :boolean
+  (formats (g:boxed content-formats))
+  (mime-type :string))
+
+(export 'content-formats-contain-mime-type)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_union_serialize_gtypes ()
 ;;;
@@ -423,6 +520,12 @@
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_content_formats_union_serialize_gtypes"
+           content-formats-union-serialize-gtypes) (g:boxed content-formats)
+  (formats (g:boxed content-formats)))
+
+(export 'content-formats-union-serialize-gtypes)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_union_deserialize_gtypes ()
 ;;;
@@ -438,6 +541,12 @@
 ;;; Return : 
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_content_formats_union_deserialize_gtypes"
+           content-formats-union-deserialize-gtypes) (g:boxed content-formats)
+  (formats (g:boxed content-formats)))
+
+(export 'content-formats-union-deserialize-gtypes)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_union_serialize_mime_types ()
@@ -455,6 +564,12 @@
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_content_formats_union_serialize_mime_types"
+           content-formats-union-serialize-mime-types) (g:boxed content-formats)
+  (formats (g:boxed content-formats)))
+
+(export 'content-formats-union-serialize-mime-types)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_union_deserialize_mime_types ()
 ;;;
@@ -470,6 +585,40 @@
 ;;; Return : 
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_content_formats_union_deserialize_mime_types"
+           content-formats-union-deserialize-mime-types) 
+    (g:boxed content-formats)
+  (formats (g:boxed content-formats)))
+
+(export 'content-formats-union-deserialize-mime-types)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_content_formats_parse                              Since 4.4
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_content_formats_parse" content-formats-parse) 
+    (g:boxed content-formats :return)
+ #+liber-documentation
+ "@version{#2023-4-14}
+  @argument[str]{a string to parse}
+  @return{A @class{gdk:content-formats} instance with the content formats if
+    @arg{str} is valid.}
+  @begin{short}
+    Parses the given @arg{str} into a @class{gdk:content-formats} instance and 
+    returns the formats.
+  @end{short}
+  Strings printed via the @fun{gdk:content-formats-to-string} function can be 
+  read in again successfully using this function.
+
+  If @arg{str} does not describe valid content formats, @code{nil} is returned.
+
+  Since 4.4
+  @see-class{gdk:content-formats}
+  @see-function{gdk:content-formats-to-string}"
+  (str :string))
+
+(export 'content-formats-parse)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_builder_new ()
@@ -607,4 +756,4 @@
 ;;;     builder .
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gdk.content-formats.lisp -----------------------------------
+;;; --- End of file gdk4.content-formats.lisp ----------------------------------

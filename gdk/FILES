@@ -6,17 +6,28 @@ List of files for the GDK 4 Library
 
  I. API Reference
 
-  gdk4.enumerations.lisp           GdkGravity, GdkModifierType, ...    GDK 4.10+
-  gdk4.display-manager.lisp        GdkDisplayManager                   GDK 4.0+
-  gdk4.display.lisp                GdkDisplay                          GDK 4.0+
-  gdk4.seat.lisp                   GdkSeat                             GDK 4.0+
-  gdk4.device.lisp                 GdkDevice                           GDK 4.0+
+ General
+
+  gdk4.enumerations.lisp           GdkGravity, GdkModifierType, ...    GDK 4.10
+  gdk4.rectangle.lisp              GdkRectangle                        GDK 4.10
+  gdk4.rgba.lisp                   GdkRGBA                             GDK 4.10
+  gdk4.keyval.lisp                 Key Values                          GDK 4.10
+
+ Displays, Devices, Monitors, Seats
+
+  gdk4.display-manager.lisp        GdkDisplayManager                   GDK 4.10
+  gdk4.display.lisp                GdkDisplay                          GDK 4.10
+  gdk4.device.lisp                 GdkDevice                           GDK 4.10
   gdk4.device-pad.lisp             GdkDevicePad                        GDK 4.10
-  gdk4.monitor.lisp                GdkMonitor                          GDK 4.0+
-  gdk4.rectangle.lisp              GdkRectangle                        GDK 4.0+
+  gdk4.monitor.lisp                GdkMonitor                          GDK 4.10
+  gdk4.seat.lisp                   GdkSeat                             GDK 4.10
+
+ Events
+
+  gdk4.event.lisp                  GdkEvent                            GDK 4.0+
+
   gdk4.texture.lisp                GdkTexture                          GDK 4.0+
   gdk4.paintable.lisp              GdkPaintable, GdkSnapshot           GDK 4.0+
-  gdk4.rgba.lisp                   GdkRGBA                             GDK 4.0+
   gdk4.cursor.lisp                 GdkCursor                           GDK 4.0+
   gdk4.surface.lisp                GdkSurface                          GDK 4.10
   gdk4.toplevel.lisp               GdkToplevel                         GDK 4.10
@@ -30,8 +41,7 @@ List of files for the GDK 4 Library
   gdk4.gl-context.lisp             GdkGLContext                        GDK 4.0+
   gdk4.vulkan-context.lisp         GdkVulkanContext                    GDK 4.0+
   gdk4.cairo-context.lisp          GdkCairoContext                     GDK 4.0+
-  gdk4.event.lisp                  GdkEvent                            GDK 4.0+
-  gdk4.keyval.lisp                 Key Values                          GDK 4.0+
+
   gdk4.clipboard.lisp              GdkClipboard                        GDK 4.0+
   gdk4.drag-and-drop.lisp          GdkDrag, GdkDrop                    GDK 4.0+
   gdk4.content-formats.lisp        GdkContentFormats                   GDK 4.0+
@@ -45,4 +55,4 @@ List of files for the GDK 4 Library
   gdk4.x11-interaction.lisp                                            GDK 4.0+
   gdk4.wayland-interaction.lisp                                        GDK 4.0+
 
-;;; --- 2023-4-7 ---------------------------------------------------------------
+;;; --- 2023-4-15 --------------------------------------------------------------

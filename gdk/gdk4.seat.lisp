@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.seat.lisp
+;;; gdk4.seat.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GdkSeat
@@ -86,7 +87,7 @@
 (setf (liber:alias-for-symbol 'seat-capabilities)
       "GFlags"
       (liber:symbol-documentation 'seat-capabilities)
- "@version{#2022-11-26}
+ "@version{2023-4-15}
   @begin{short}
     Flags describing the seat capabilities.
   @end{short}
@@ -130,7 +131,7 @@
 
 #+liber-documentation
 (setf (documentation 'seat 'type)
- "@version{#2022-11-28}
+ "@version{2023-4-15}
   @begin{short}
     The @sym{gdk:seat} object represents a collection of input devices that
     belong to a user.
@@ -138,7 +139,7 @@
   @begin[Signal Details]{dictionary}
     @subheading{The \"device-added\" signal}
       @begin{pre}
-lambda (seat device)    : Run Last
+lambda (seat device)    :run-last
       @end{pre}
       The signal is emitted when a new input device is related to this seat.
       @begin[code]{table}
@@ -147,7 +148,7 @@ lambda (seat device)    : Run Last
       @end{table}
     @subheading{The \"device-removed\" signal}
       @begin{pre}
-lambda (seat device)    : Run Last
+lambda (seat device)    :run-last
       @end{pre}
       The signal is emitted when an input device is removed, e.g. unplugged.
       @begin[code]{table}
@@ -156,7 +157,7 @@ lambda (seat device)    : Run Last
       @end{table}
     @subheading{The \"tool-added\" signal}
       @begin{pre}
-lambda (seat tool)    : Run Last
+lambda (seat tool)    :run-last
       @end{pre}
       The signal is emitted whenever a new tool is made known to the seat. The
       tool may later be assigned to a device, i.e. on proximity with a tablet.
@@ -196,7 +197,7 @@ lambda (seat tool)    :run-last
 (setf (liber:alias-for-function 'seat-display)
       "Accessor"
       (documentation 'seat-display 'function)
- "@version{#2022-11-28}
+ "@version{2023-4-15}
   @syntax[]{(gdk:seat-display object) => display}
   @argument[object]{a @class{gdk:seat} object}
   @argument[display]{a @class{gdk:display} object}
@@ -213,7 +214,7 @@ lambda (seat tool)    :run-last
 
 (defcfun ("gdk_seat_get_capabilities" seat-capabilities) seat-capabilities
  #+liber-documentation
- "@version{#2022-11-28}
+ "@version{2023-4-15}
   @argument[seat]{a @class{gdk:seat} object}
   @return{The seat capabilities as a @symbol{gdk:seat-capabilities} value.}
   @begin{short}
@@ -231,7 +232,7 @@ lambda (seat tool)    :run-last
 
 (defcfun ("gdk_seat_get_pointer" seat-pointer) (g:object device)
  #+liber-documentation
- "@version{#2022-11-28}
+ "@version{2023-4-15}
   @argument[seat]{a @class{gdk:seat} object}
   @return{A master @class{gdk:device} object with pointer capabilities.}
   @begin{short}
@@ -249,7 +250,7 @@ lambda (seat tool)    :run-last
 
 (defcfun ("gdk_seat_get_keyboard" seat-keyboard) (g:object device)
  #+liber-documentation
- "@version{#2022-11-28}
+ "@version{2023-4-15}
   @argument[seat]{a @class{gdk:seat} object}
   @return{A master @class{gdk:device} object with keyboard capabilities.}
   @begin{short}
@@ -281,6 +282,12 @@ lambda (seat tool)    :run-last
 ;;;     elements are owned by GTK and must not be freed.
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_seat_get_devices" seat-devices) (g:list-t (g:object device))
+  (seat (g:object seat))
+  (capabilities seat-capabilities))
+
+(export 'seat-devices)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_seat_get_tools ()
 ;;;
@@ -296,4 +303,9 @@ lambda (seat tool)    :run-last
 ;;;     A list of tools. Free with g_list_free().
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gdk.seat.lisp ----------------------------------------------
+(defcfun ("gdk_seat_get_tools" seat-tools) (g:list-t (g:object device-tool))
+  (seat (g:object seat)))
+
+(export 'seat-tools)
+
+;;; --- End of file gdk4.seat.lisp ---------------------------------------------

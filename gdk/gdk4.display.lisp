@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.display.lisp
+;;; gdk4.display.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GdkDisplay
@@ -49,7 +50,7 @@
 ;;;     gdk_display_is_composited
 ;;;     gdk_display_supports_input_shapes
 ;;;     gdk_display_get_app_launch_context
-;;;     gdk_display_notify_startup_complete
+;;;     gdk_display_notify_startup_complete                Since 4.10 deprecated
 ;;;     gdk_display_get_default_seat
 ;;;     gdk_display_list_seats
 ;;;     gdk_display_get_monitors
@@ -57,8 +58,8 @@
 ;;;     gdk_display_get_clipboard
 ;;;     gdk_display_get_primary_clipboard
 ;;;     gdk_display_get_setting
-;;;     gdk_display_get_startup_notification_id
-;;;     gdk_display_put_event
+;;;     gdk_display_get_startup_notification_id            Since 4.10 deprecated
+;;;     gdk_display_put_event                              Since 4.10 deprecated
 ;;;     gdk_display_map_keyval
 ;;;     gdk_display_map_keycode
 ;;;     gdk_display_translate_key
@@ -108,7 +109,7 @@
 
 #+liber-documentation
 (setf (documentation 'display 'type)
- "@version{#2022-1-8}
+ "@version{2023-4-15}
   @begin{short}
     The @sym{gdk:display} object is the GDK representation of a workstation.
   @end{short}
@@ -193,7 +194,7 @@ lambda (display setting)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- display-composited -------------------------------------------------
+;;; --- display-composited -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "composited" 'display) t)
@@ -224,7 +225,7 @@ lambda (display setting)    :run-last
   @see-class{gdk:display}
   @see-function{gdk:display-is-rgba}")
 
-;;; --- display-input-shapes -----------------------------------------------
+;;; --- display-input-shapes ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-shapes" 'display) t)
@@ -252,7 +253,7 @@ lambda (display setting)    :run-last
   @see-class{gdk:display}
   @see-function{gdk:surface-set-input-region}")
 
-;;; --- display-rgba -------------------------------------------------------
+;;; --- display-rgba -----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "rgba" 'display) t)
@@ -555,7 +556,7 @@ lambda (display setting)    :run-last
 (export 'display-app-launch-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_notify_startup_complete
+;;; gdk_display_notify_startup_complete                    Since 4.10 deprecated
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_display_notify_startup_complete"
@@ -625,24 +626,34 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_monitors -> display-monitors
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_get_monitors" display-monitors)
-    (g:object g:list-model)
+;; TODO: Consider to export the CREATE-GOBJECT-FROM-POINTER function
+
+(defcfun ("gdk_display_get_monitors" %display-monitors) (g:object g:list-model)
+  (display (g:object display)))
+
+(defun display-monitors (display)
  #+liber-documentation
- "@version{#2022-1-8}
+ "@version{2023-4-11}
   @argument[display]{a @class{gdk:display} object}
-  @return{A @class{g:list-model} list of @class{gdk:monitor} objects.}
+  @return{A Lisp list of @class{gdk:monitor} objects.}
   @begin{short}
     Gets the list of monitors associated with the display.
   @end{short}
   Subsequent calls to this function will always return the same list for the
   same display.
-
-  You can listen to the \"GListModel::items-changed\" signal on this list to
-  monitor changes to the monitor of the display.
+  @begin[Lisp implementation]{dictionary}
+    The C code returns a @class{g:list-model} instance with pointers to the
+    monitors. For the Lisp implementation, the list is converted to a Lisp
+    list with @class{gdk:monitor} objects.
+  @end{dictionary}
   @see-class{gdk:display}
   @see-class{gdk:monitor}
   @see-class{g:list-model}"
-  (display (g:object display)))
+  (let ((monitors (%display-monitors display)))
+    (iter (for i from 0 below (g:list-model-n-items monitors))
+          (collect (g:list-model-item monitors i) into pointers)
+          (finally (return (mapcar #'gobject::create-gobject-from-pointer
+                                   pointers))))))
 
 (export 'display-monitors)
 
@@ -733,7 +744,7 @@ lambda (display setting)    :run-last
 (export 'display-setting)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_startup_notification_id
+;;; gdk_display_get_startup_notification_id                Since 4.10 deprecated
 ;;; -> display-startup-notification-id
 ;;; ----------------------------------------------------------------------------
 
@@ -753,7 +764,7 @@ lambda (display setting)    :run-last
 (export 'display-startup-notification-id)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_put_event
+;;; gdk_display_put_event                                  Since 4.10 deprecated
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gdk_display_put_event" display-put-event) :void
@@ -815,6 +826,32 @@ lambda (display setting)    :run-last
 ;;;     TRUE if keys were found and returned.
 ;;; ----------------------------------------------------------------------------
 
+(defcstruct %keymap-key
+  (keycode :uint)
+  (group :int)
+  (level :int))
+
+(defcfun ("gdk_display_map_kkeeyval" %display-map-keyval) :boolean
+  (display (g:object display))
+  (keyval :uint)
+  (keys :pointer)
+  (n-keys (:pointer :int)))
+
+(defun display-map-keyval (display keyval)
+  (with-foreign-objects ((keys-ptr :pointer) (n-keys-ptr :int))
+    (when (%display-map-keyval display keyval keys-ptr n-keys-ptr)
+      (let ((keys (cffi:mem-ref keys-ptr :pointer))
+            (n-keys (cffi:mem-ref n-keys-ptr :int)))
+        (iter (for i from 0 below n-keys)
+              (for key = (cffi:mem-aptr keys '(:struct %keymap-key) i))
+              (collect (with-foreign-slots ((keycode group level)
+                                            key
+                                            (:struct %keymap-key))
+                         (list keycode group level)))
+              (finally (g:free keys)))))))
+
+(export 'display-map-keyval)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_map_keycode
 ;;;
@@ -856,6 +893,62 @@ lambda (display setting)    :run-last
 ;;; Returns :
 ;;;     TRUE if there were any entries.
 ;;; ----------------------------------------------------------------------------
+
+#|
+;;; gboolean
+;;; gdk_display_map_keycode (GdkDisplay* display,
+;;;                          guint keycode,
+;;;                          GdkKeymapKey** keys,
+;;;                          guint** keyvals,
+;;;                          int* n_entries)
+
+  (with-foreign-objects ((keys :pointer) (keyvals :pointer) (n-keys :int))
+    (when (%keymap-entries-for-keycode keymap keycode keys keyvals n-keys)
+        (let ((keys (cffi:mem-ref keys :pointer))
+              (keyvals (cffi:mem-ref keyvals :pointer))
+              (n-keys (cffi:mem-ref n-keys :int)))
+          (loop for i from 0 below n-keys
+                for keyval = (cffi:mem-aref keyvals :uint i)
+                for key = (cffi:mem-aptr keys '(:struct %keymap-key) i)
+                collect (with-foreign-slots ((keycode group level)
+                                             key
+                                             (:struct %keymap-key))
+                          (list keyval keycode group level))
+                finally (g:free keys)
+                        (g:free keyvals)))))
+|#
+
+(defcfun ("gdk_display_map_keycode" %display-map-keycode) :boolean
+  (display (g:object display))
+  (keycode :uint)
+  (keys :pointer)
+  (keyvals (:pointer :uint))
+  (n-entries (:pointer :int)))
+
+(defun display-map-keycode (display keycode)
+
+  (with-foreign-objects ((keys-ptr :pointer)
+                         (keyvals-ptr :pointer)
+                         (n-entries-ptr :int))
+    (when (%display-map-keycode display
+                                keycode
+                                keys-ptr
+                                keyvals-ptr
+                                n-entries-ptr)
+      (let ((keys (cffi:mem-ref keys-ptr :pointer))
+            (keyvals (cffi:mem-ref keyvals-ptr :pointer))
+            (n-entries (cffi:mem-ref n-entries-ptr :int)))
+        (iter (for i from 0 below n-entries)
+              (for keyval = (cffi:mem-aref keyvals :uint i))
+              (for key = (cffi:mem-aptr keys '(:struct %keymap-key) i))
+              (collect (with-foreign-slots ((keycode group level)
+                                            key
+                                            (:struct %keymap-key))
+                         (list keyval keycode group level)))
+              (finally (g:free keys)
+                       (g:free keyvals)))))))
+
+(export 'display-map-keycode)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_translate_key
@@ -920,6 +1013,65 @@ lambda (display setting)    :run-last
 ;;;     TRUE if there was a keyval bound to keycode/state/group.
 ;;; ----------------------------------------------------------------------------
 
+#|
+;;; gboolean
+;;; gdk_display_translate_key (GdkDisplay* display,
+;;;                            guint keycode,
+;;;                            GdkModifierType state,
+;;;                            int group,
+;;;                            guint* keyval,
+;;;                            int* effective_group,
+;;;                            int* level,
+;;;                            GdkModifierType* consumed)
+
+  (with-foreign-objects ((keyval :uint)
+                         (effective :int)
+                         (level :int)
+                         (consumed 'modifier-type))
+    (when (%keymap-translate-keyboard-state keymap
+                                            keycode
+                                            state
+                                            group
+                                            keyval
+                                            effective
+                                            level
+                                            consumed)
+      (values (cffi:mem-ref keyval :uint)
+              (cffi:mem-ref effective :int)
+              (cffi:mem-ref level :int)
+              (cffi:mem-ref consumed 'modifier-type))))
+|#
+
+(defcfun ("gdk_display_translate_key" %display-translate-key) :boolean
+  (display (g:object display))
+  (keycode :uint)
+  (state modifier-type)
+  (group :int)
+  (keyval (:pointer :uint))
+  (effective (:pointer :int))
+  (level (:pointer :int))
+  (consumed (:pointer modifier-type)))
+
+(defun display-translate-key (display keycode state group)
+  (with-foreign-objects ((keyval :uint)
+                         (effective :int)
+                         (level :int)
+                         (consumed 'modifier-type))
+    (when (%display-translate-key display
+                                  keycode
+                                  state
+                                  group
+                                  keyval
+                                  effective
+                                  level
+                                  consumed)
+      (values (cffi:mem-ref keyval :uint)
+              (cffi:mem-ref effective :int)
+              (cffi:mem-ref level :int)
+              (cffi:mem-ref consumed 'modifier-type)))))
+
+(export 'display-translate-key)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_prepare_gl
 ;;;
@@ -946,6 +1098,17 @@ lambda (display setting)    :run-last
 ;;; Returns :
 ;;;     TRUE if the display supports OpenGL.
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-4
+(defcfun ("gdk_display_prepare_gl" %display-prepare-gl) :boolean
+  (display (g:object display))
+  (err :pointer))
+
+(defun display-prepare-gl (display)
+  (with-g-error (err)
+    (%display-prepare-gl display err)))
+
+(export 'display-prepare-gl)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_create_gl_context
@@ -985,4 +1148,4 @@ lambda (display setting)    :run-last
 #+gtk-4-6
 (export 'display-create-gl-context)
 
-;;; --- End of file gdk.display.lisp -------------------------------------------
+;;; --- End of file gdk4.display.lisp ------------------------------------------

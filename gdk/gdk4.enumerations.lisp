@@ -58,7 +58,7 @@
 (setf (liber:alias-for-symbol 'gravity)
       "GEnum"
       (liber:symbol-documentation 'gravity)
- "@version{#2023-4-9}
+ "@version{2023-4-9}
   @begin{short}
     Defines the reference point of a surface and is used in
     the @class{gdk:popup-layout} implementation.
@@ -128,7 +128,7 @@
 (setf (liber:alias-for-symbol 'modifier-type)
       "GFlags"
       (liber:symbol-documentation 'modifier-type)
- "@version{#2022-7-15}
+ "@version{2022-7-15}
   @begin{short}
     Flags to indicate the state of modifier keys and mouse buttons in events.
   @end{short}

@@ -1,196 +1,140 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.pango-interaction.lisp
+;;; gdk4.pango-interaction.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk/>.
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
-
-;;;Pango Interaction
-;;;Pango Interaction — Using Pango in GDK
-
-;;;Functions
-;;;cairo_region_t *	gdk_pango_layout_get_clip_region ()
-;;;cairo_region_t *	gdk_pango_layout_line_get_clip_region ()
+;;;
+;;; Pango Interaction
+;;;
+;;;     Using Pango in GDK
+;;;
+;;; Functions
+;;;
+;;;     gdk_pango_layout_get_clip_region 
+;;;     gdk_pango_layout_line_get_clip_region 
+;;; ----------------------------------------------------------------------------
 
 (in-package :gdk)
 
-;;;Description
-;;;Pango is the text layout system used by GDK and GTK. The functions and types in this section are used to obtain clip regions for PangoLayouts, and to get PangoContexts that can be used with GDK.
+;;; ----------------------------------------------------------------------------
+;;; gdk_pango_layout_get_clip_region ()
+;;; ----------------------------------------------------------------------------
 
-;;;Creating a PangoLayout object is the first step in rendering text, and requires getting a handle to a PangoContext. For GTK programs, you’ll usually want to use gtk_widget_get_pango_context(), or gtk_widget_create_pango_layout(). Once you have a PangoLayout, you can set the text and attributes of it with Pango functions like pango_layout_set_text() and get its size with pango_layout_get_size(). (Note that Pango uses a fixed point system internally, so converting between Pango units and pixels using PANGO_SCALE or the PANGO_PIXELS() macro.)
+(defcfun ("gdk_pango_layout_get_clip_region" %pango-layout-clip-region)
+    (:pointer (:struct cairo:region-t))
+  (layout (g:object pango:layout))
+  (xorigin :int)
+  (yorigin :int)
+  (ranges-ar :pointer)
+  (n-ranges :int))
 
-;;;Rendering a Pango layout is done most simply with pango_cairo_show_layout(); you can also draw pieces of the layout with pango_cairo_show_layout_line().
+(defun pango-layout-clip-region (layout xorigin yorigin ranges)
+ #+liber-documentation
+ "@version{#2023-4-14}
+  @argument[layout]{a @class{pango:layout} object}
+  @argument[xorigin]{an integer with the x pixel where you intend to draw the 
+    layout with this clip }
+  @argument[yorigin]{an integer with the y pixel where you intend to draw the 
+    layout with this clip }
+  @argument[ranges]{a list of integer with the byte indexes into the layout, 
+    where even members of the list are start indexes and elements end indexes}
+  @return{A @symbol{cairo:region-t} instance with the clip region containing 
+    the given ranges.}
+  @begin{short}
+    Obtains a clip region which contains the areas where the given ranges of 
+    text would be drawn. 
+  @end{short}
+  The @arg{xorigin} and @arg{yorigin} arguments are the top left point to center 
+  the layout. The @arg{ranges} argument should contain ranges of bytes in the 
+  text of the layout.
 
-;;;Draw transformed text with Pango and cairo
-;;;#define RADIUS 100
-;;;#define N_WORDS 10
-;;;#define FONT "Sans Bold 18"
+  Note that the regions returned correspond to logical extents of the text 
+  ranges, not ink extents. So the drawn layout may in fact touch areas out of 
+  the clip region. The clip region is mainly useful for highlightling parts of 
+  text, such as when text is selected.
+  @see-class{pango:layout}
+  @see-symbol{cairo:region-t}"
+  (let ((n (length ranges)))
+    (with-foreign-object (ranges-ar :int n)
+      (iter (for i from 0 below n)
+            (for range in ranges)
+            (setf (cffi:mem-aref ranges-ar :int i) range))
+      (%pango-layout-clip-region layout xorigin yorigin ranges-ar n))))
 
-;;;PangoContext *context;
-;;;PangoLayout *layout;
-;;;PangoFontDescription *desc;
+(export 'pango-layout-clip-region)
 
-;;;double radius;
-;;;int width, height;
-;;;int i;
+;;; ----------------------------------------------------------------------------
+;;; gdk_pango_layout_line_get_clip_region () 
+;;; ----------------------------------------------------------------------------
 
-;;;// Set up a transformation matrix so that the user space coordinates for
-;;;// where we are drawing are [-RADIUS, RADIUS], [-RADIUS, RADIUS]
-;;;// We first center, then change the scale
+(defcfun ("gdk_pango_layout_line_clip_region" %pango-layout-line-clip-region)
+    (:pointer (:struct cairo:region-t))
+  (line (g:boxed pango:layout-line))
+  (xorigin :int)
+  (yorigin :int)
+  (ranges-ar :pointer)
+  (n-ranges :int))
 
-;;;width = gdk_surface_get_width (surface);
-;;;height = gdk_surface_get_height (surface);
-;;;radius = MIN (width, height) / 2.;
+(defun pango-layout-line-clip-region (line xorigin yorigin ranges)
+ #+liber-documentation
+ "@version{#2023-4-14}
+  @argument[line]{a @class{pango:layout-line} instance}
+  @argument[xorigin]{an integer with the x pixel where you intend to draw the 
+    layout line with this clip }
+  @argument[yorigin]{an integer with the y pixel where you intend to draw the 
+    layout line with this clip }
+  @argument[ranges]{a list of integer with the byte indexes into the layout, 
+    where even members of the list are start indexes and elements end indexes}
+  @return{A @symbol{cairo:region-t} instance with the clip region containing 
+    the given ranges.}
+  @begin{short}
+    Obtains a clip region which contains the areas where the given ranges of 
+    text would be drawn. 
+  @end{short}
+  The @arg{xorigin} and @arg{yorigin} arguments are the top left position of 
+  the layout. The @arg{ranges} argument should contain ranges of bytes in the 
+  text of the layout. The clip region will include space to the left or right 
+  of the line (to the layout bounding box) if you have indexes above or below   
+  the indexes contained inside the line. This is to draw the selection all the 
+  way to the side of the layout. However, the clip region is in line 
+  coordinates, not layout coordinates.
 
-;;;cairo_translate (cr,
-;;;                 radius + (width - 2 * radius) / 2,
-;;;                 radius + (height - 2 * radius) / 2);
-;;;                 cairo_scale (cr, radius / RADIUS, radius / RADIUS);
+  Note that the regions returned correspond to logical extents of the text 
+  ranges, not ink extents. So the drawn layout may in fact touch areas out of 
+  the clip region. The clip region is mainly useful for highlightling parts of 
+  text, such as when text is selected.
+  @see-class{pango:layout}
+  @see-symbol{cairo:region-t}"
+  (let ((n (length ranges)))
+    (with-foreign-object (ranges-ar :int n)
+      (iter (for i from 0 below n)
+            (for range in ranges)
+            (setf (cffi:mem-aref ranges-ar :int i) range))
+      (%pango-layout-line-clip-region line xorigin yorigin ranges-ar n))))
 
-;;;// Create a PangoLayout, set the font and text
-;;;context = gdk_pango_context_get_for_display (display);
-;;;layout = pango_layout_new (context);
-;;;pango_layout_set_text (layout, "Text", -1);
-;;;desc = pango_font_description_from_string (FONT);
-;;;pango_layout_set_font_description (layout, desc);
-;;;pango_font_description_free (desc);
+(export 'pango-layout-line-clip-region)
 
-;;;// Draw the layout N_WORDS times in a circle
-;;;for (i = 0; i < N_WORDS; i++)
-;;;  {
-;;;    double red, green, blue;
-;;;    double angle = 2 * G_PI * i / n_words;
-
-;;;    cairo_save (cr);
-
-;;;    // Gradient from red at angle == 60 to blue at angle == 300
-;;;    red = (1 + cos (angle - 60)) / 2;
-;;;    green = 0;
-;;;    blue = 1 - red;
-
-;;;    cairo_set_source_rgb (cr, red, green, blue);
-;;;    cairo_rotate (cr, angle);
-
-;;;    // Inform Pango to re-layout the text with the new transformation matrix
-;;;    pango_cairo_update_layout (cr, layout);
-
-;;;    pango_layout_get_size (layout, &width, &height);
-
-;;;    cairo_move_to (cr, - width / 2 / PANGO_SCALE, - DEFAULT_TEXT_RADIUS);
-;;;    pango_cairo_show_layout (cr, layout);
-
-;;;    cairo_restore (cr);
-;;;  }
-
-;;;g_object_unref (layout);
-;;;g_object_unref (context);
-;;;Output of the example above.
-
-
-;;;Functions
-;;;gdk_pango_layout_get_clip_region ()
-;;;cairo_region_t *
-;;;gdk_pango_layout_get_clip_region (PangoLayout *layout,
-;;;                                  int x_origin,
-;;;                                  int y_origin,
-;;;                                  const int *index_ranges,
-;;;                                  int n_ranges);
-;;;Obtains a clip region which contains the areas where the given ranges of text would be drawn. x_origin and y_origin are the top left point to center the layout. index_ranges should contain ranges of bytes in the layout’s text.
-
-;;;Note that the regions returned correspond to logical extents of the text ranges, not ink extents. So the drawn layout may in fact touch areas out of the clip region. The clip region is mainly useful for highlightling parts of text, such as when text is selected.
-
-;;;[skip]
-
-;;;Parameters
-;;;layout
-
-;;;a PangoLayout
-
-;;;
-;;;x_origin
-
-;;;X pixel where you intend to draw the layout with this clip
-
-;;;
-;;;y_origin
-
-;;;Y pixel where you intend to draw the layout with this clip
-
-;;;
-;;;index_ranges
-
-;;;array of byte indexes into the layout, where even members of array are start indexes and odd elements are end indexes
-
-;;;
-;;;n_ranges
-
-;;;number of ranges in index_ranges , i.e. half the size of index_ranges
-
-;;;
-;;;Returns
-;;;a clip region containing the given ranges
-
-;;;gdk_pango_layout_line_get_clip_region ()
-;;;cairo_region_t *
-;;;gdk_pango_layout_line_get_clip_region (PangoLayoutLine *line,
-;;;                                       int x_origin,
-;;;                                       int y_origin,
-;;;                                       const int *index_ranges,
-;;;                                       int n_ranges);
-;;;Obtains a clip region which contains the areas where the given ranges of text would be drawn. x_origin and y_origin are the top left position of the layout. index_ranges should contain ranges of bytes in the layout’s text. The clip region will include space to the left or right of the line (to the layout bounding box) if you have indexes above or below the indexes contained inside the line. This is to draw the selection all the way to the side of the layout. However, the clip region is in line coordinates, not layout coordinates.
-
-;;;Note that the regions returned correspond to logical extents of the text ranges, not ink extents. So the drawn line may in fact touch areas out of the clip region. The clip region is mainly useful for highlightling parts of text, such as when text is selected.
-
-;;;[skip]
-
-;;;Parameters
-;;;line
-
-;;;a PangoLayoutLine
-
-;;;
-;;;x_origin
-
-;;;X pixel where you intend to draw the layout line with this clip
-
-;;;
-;;;y_origin
-
-;;;baseline pixel where you intend to draw the layout line with this clip
-
-;;;
-;;;index_ranges
-
-;;;array of byte indexes into the layout, where even members of array are start indexes and odd elements are end indexes.
-
-;;;[array]
-;;;n_ranges
-
-;;;number of ranges in index_ranges , i.e. half the size of index_ranges
-
-;;;
-;;;Returns
-;;;a clip region containing the given ranges
-
-;;; --- End of file gdk.pango-interaction.lisp ---------------------------------
+;;; --- End of file gdk4.pango-interaction.lisp --------------------------------

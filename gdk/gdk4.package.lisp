@@ -28,10 +28,12 @@
 ;;; ----------------------------------------------------------------------------
 
 (defpackage :gdk
-  (:use :common-lisp)
+  (:use :iterate :common-lisp)
   (:import-from #:cffi      #:defcfun
+                            #:defcstruct
                             #:with-foreign-object
-                            #:with-foreign-objects)
+                            #:with-foreign-objects
+                            #:with-foreign-slots)
   (:import-from #:glib      #:with-g-error
                             #:with-ignore-g-error)
   (:import-from #:gobject   #:define-g-enum
@@ -55,155 +57,284 @@
 (setf (documentation (find-package :gdk) t)
  "GDK is an intermediate layer which isolates GTK from the details of the
   windowing system. This is the API documentation of a Lisp binding to GDK.
-  @begin[Enumerations]{section}
-    @about-symbol{gdk:gravity}
-    @about-symbol{gdk:modifier-type}
+  @begin[General]{section}
+    @begin[Enumerations]{subsection}
+      @about-symbol{gdk:gravity}
+      @about-symbol{gdk:modifier-type}
+    @end{subsection}
+    @begin[GdkRectangle]{subsection}
+      Simple graphical data type.
+      @about-struct{rectangle}
+      @about-function{rectangle-x}
+      @about-function{rectangle-y}
+      @about-function{rectangle-width}
+      @about-function{rectangle-height}
+      @about-function{rectangle-new}
+      @about-function{rectangle-copy}
+      @about-function{rectangle-contains-point}
+      @about-function{rectangle-equal}
+      @about-function{rectangle-intersect}
+      @about-function{rectangle-union}
+    @end{subsection}
+    @begin[GdkRGBA]{subsection}
+      The @struct{gdk:rgba} structure is a convenient way to pass RGBA colors
+      around. It is based on Cairo's way to deal with colors and mirrors its
+      behavior. All values are in the range from 0.0 to 1.0 inclusive. So the
+      color
+      @begin{pre}
+(gdk:rgba-new :red 0.0 :green 0.0 :blue 0.0 :alpha 0.0)
+      @end{pre}
+      represents transparent black and
+      @begin{pre}
+(gdk:rgba-new :red 1.0 :green 1.0 :blue 1.0 :alpha 1.0)
+      @end{pre}
+      is opaque white. Other values will be clamped to this range when drawing.
+      @about-struct{rgba}
+      @about-function{rgba-red}
+      @about-function{rgba-green}
+      @about-function{rgba-blue}
+      @about-function{rgba-alpha}
+      @about-function{rgba-new}
+      @about-function{rgba-copy}
+      @about-function{rgba-is-clear}
+      @about-function{rgba-is-opaque}
+      @about-function{rgba-parse}
+      @about-function{rgba-hash}
+      @about-function{rgba-equal}
+      @about-function{rgba-to-string}
+    @end{subsection}
+    @begin[Key Values]{subsection}
+      Functions for manipulating keyboard codes
+      @about-function{keyval-name}
+      @about-function{keyval-from-name}
+      @about-function{keyval-convert-case}
+      @about-function{keyval-to-upper}
+      @about-function{keyval-to-lower}
+      @about-function{keyval-is-upper}
+      @about-function{keyval-is-lower}
+      @about-function{keyval-to-unicode}
+      @about-function{unicode-to-keyval}
+    @end{subsection}
   @end{section}
-  @begin[GdkDisplayManager]{section}
-    Maintains a list of all open GdkDisplays.
-    @about-class{display-manager}
-    @about-generic{display-manager-default-display}
-    @about-function{display-manager-get}
-    @about-function{display-manager-list-displays}
-    @about-function{display-manager-open-display}
-    @about-function{set-allowed-backends}
+  @begin[Displays, Devices, Monitors, and Seats]{section}
+    @begin[GdkDisplayManager]{subsection}
+      Maintains a list of all open GdkDisplays.
+      @about-class{display-manager}
+      @about-generic{display-manager-default-display}
+      @about-function{display-manager-get}
+      @about-function{display-manager-list-displays}
+      @about-function{display-manager-open-display}
+      @about-function{set-allowed-backends}
+    @end{subsection}
+    @begin[GdkDisplay]{subsection}
+      Controls a set of monitors and their associated input devices.
+      @about-class{display}
+      @about-generic{display-composited}
+      @about-generic{display-input-shapes}
+      @about-generic{display-rgba}
+      @about-function{display-open}
+      @about-function{display-default}
+      @about-function{display-name}
+      @about-function{display-device-is-grabbed}
+      @about-function{display-beep}
+      @about-function{display-sync}
+      @about-function{display-flush}
+      @about-function{display-close}
+      @about-function{display-is-closed}
+      @about-function{display-is-rgba}
+      @about-function{display-is-composited}
+      @about-function{display-supports-input-shapes}
+      @about-function{display-app-launch-context}
+      @about-function{display-notify-startup-complete}
+      @about-function{display-default-seat}
+      @about-function{display-list-seats}
+      @about-function{display-monitors}
+      @about-function{display-monitor-at-surface}
+      @about-function{display-clipboard}
+      @about-function{display-primary-clipboard}
+      @about-function{display-setting}
+      @about-function{display-startup-notification-id}
+      @about-function{display-put-event}
+      @about-function{display-map-keyval}
+      @about-function{display-map-keycode}
+      @about-function{display-translate-key}
+      @about-function{display-prepare-gl}
+      @about-function{display-create-gl-context}
+    @end{subsection}
+    @begin[GdkDevice]{subsection}
+      Object representing an input device.
+      @about-symbol{input-source}
+      @about-symbol{axis-use}
+      @about-symbol{axis-flags}
+      @about-symbol{device-tool-type}
+      @about-class{device}
+      @about-generic{device-caps-lock-state}
+      @about-generic{device-direction}
+      @about-generic{device-display}
+      @about-generic{device-has-bidi-layouts}
+      @about-generic{device-has-cursor}
+      @about-generic{device-modifier-state}
+      @about-generic{device-n-axes}
+      @about-generic{device-name}
+      @about-generic{device-num-lock-state}
+      @about-generic{device-num-touches}
+      @about-generic{device-product-id}
+      @about-generic{device-scroll-lock-state}
+      @about-generic{device-seat}
+      @about-generic{device-source}
+      @about-generic{device-tool}
+      @about-generic{device-vendor-id}
+      @about-function{device-has-cursor}
+      @about-function{device-device-tool}
+      @about-function{device-has-bidi-layouts}
+      @about-function{device-surface-at-position}
+      @about-function{device-timestamp}
+      @about-class{device-tool}
+      @about-generic{device-tool-axes}
+      @about-generic{device-tool-hardware-id}
+      @about-generic{device-tool-serial}
+      @about-generic{device-tool-tool-type}
+    @end{subsection}
+    @begin[GdkDevicePad]{subsection}
+      Pad device interface.
+      @about-symbol{device-pad-feature}
+      @about-class{device-pad}
+      @about-function{device-pad-n-groups}
+      @about-function{device-pad-group-n-modes}
+      @about-function{device-pad-n-features}
+      @about-function{device-pad-feature-group}
+    @end{subsection}
+    @begin[GdkMonitor]{subsection}
+      Object representing an output.
+      @about-symbol{subpixel-layout}
+      @about-class{monitor}
+      @about-generic{monitor-connector}
+      @about-generic{monitor-display}
+      @about-generic{monitor-geometry}
+      @about-generic{monitor-height-mm}
+      @about-generic{monitor-manufacturer}
+      @about-generic{monitor-model}
+      @about-generic{monitor-refresh-rate}
+      @about-generic{monitor-scale-factor}
+      @about-generic{monitor-subpixel-layout}
+      @about-generic{monitor-valid}
+      @about-generic{monitor-width-mm}
+      @about-function{monitor-is-valid}
+    @end{subsection}
+    @begin[GdkSeat]{subsection}
+      Object representing a user seat.
+      @about-symbol{seat-capabilities}
+      @about-class{seat}
+      @about-generic{seat-display}
+      @about-function{seat-capabilities}
+      @about-function{seat-pointer}
+      @about-function{seat-keyboard}
+      @about-function{seat-devices}
+      @about-function{seat-tools}
+    @end{subsection}
   @end{section}
-  @begin[GdkDisplay]{section}
-    Controls a set of monitors and their associated input devices.
-    @about-class{display}
-    @about-generic{display-composited}
-    @about-generic{display-input-shapes}
-    @about-generic{display-rgba}
-    @about-function{display-open}
-    @about-function{display-default}
-    @about-function{display-name}
-    @about-function{display-device-is-grabbed}
-    @about-function{display-beep}
-    @about-function{display-sync}
-    @about-function{display-flush}
-    @about-function{display-close}
-    @about-function{display-is-closed}
-    @about-function{display-is-rgba}
-    @about-function{display-is-composited}
-    @about-function{display-supports-input-shapes}
-    @about-function{display-app-launch-context}
-    @about-function{display-notify-startup-complete}
-    @about-function{display-default-seat}
-    @about-function{display-list-seats}
-    @about-function{display-monitors}
-    @about-function{display-monitor-at-surface}
-    @about-function{display-clipboard}
-    @about-function{display-primary-clipboard}
-    @about-function{display-setting}
-    @about-function{display-startup-notification-id}
-    @about-function{display-put-event}
-    @about-function{display-map-keyval}
-    @about-function{display-map-keycode}
-    @about-function{display-translate-key}
-    @about-function{display-prepare-gl}
-    @about-function{display-create-gl-context}
-  @end{section}
-  @begin[GdkSeat]{section}
-    Object representing a user seat.
-    @about-symbol{seat-capabilities}
-    @about-class{seat}
-    @about-generic{seat-display}
-    @about-function{seat-capabilities}
-    @about-function{seat-pointer}
-    @about-function{seat-keyboard}
-    @about-function{seat-devices}
-    @about-function{seat-tools}
-  @end{section}
-  @begin[GdkDevice]{section}
-    Object representing an input device.
-    @about-symbol{input-source}
-    @about-symbol{axis-use}
-    @about-symbol{axis-flags}
-    @about-symbol{device-tool-type}
-    @about-symbol{time-coord}
-    @about-class{device}
-    @about-generic{device-caps-lock-state}
-    @about-generic{device-direction}
-    @about-generic{device-display}
-    @about-generic{device-has-bidi-layouts}
-    @about-generic{device-has-cursor}
-    @about-generic{device-modifier-state}
-    @about-generic{device-n-axes}
-    @about-generic{device-name}
-    @about-generic{device-num-lock-state}
-    @about-generic{device-num-touches}
-    @about-generic{device-product-id}
-    @about-generic{device-scroll-lock-state}
-    @about-generic{device-seat}
-    @about-generic{device-source}
-    @about-generic{device-tool}
-    @about-generic{device-vendor-id}
-    @about-function{device-has-cursor}
-    @about-function{device-device-tool}
-    @about-function{device-has-bidi-layouts}
-    @about-function{device-surface-at-position}
-    @about-function{device-timestamp}
-    @about-class{device-tool}
-    @about-generic{device-tool-axes}
-    @about-generic{device-tool-hardware-id}
-    @about-generic{device-tool-serial}
-    @about-generic{device-tool-tool-type}
-  @end{section}
-  @begin[GdkDevicePad]{section}
-    Pad device interface.
-    @about-symbol{device-pad-feature}
-    @about-class{device-pad}
-    @about-function{device-pad-n-groups}
-    @about-function{device-pad-group-n-modes}
-    @about-function{device-pad-n-features}
-    @about-function{device-pad-feature-group}
-  @end{section}
-  @begin[GdkMonitor]{section}
-    Object representing an output.
-    @about-symbol{subpixel-layout}
-    @about-class{monitor}
-    @about-generic{monitor-connector}
-    @about-generic{monitor-display}
-    @about-generic{monitor-geometry}
-    @about-generic{monitor-height-mm}
-    @about-generic{monitor-manufacturer}
-    @about-generic{monitor-model}
-    @about-generic{monitor-refresh-rate}
-    @about-generic{monitor-scale-factor}
-    @about-generic{monitor-subpixel-layout}
-    @about-generic{monitor-valid}
-    @about-generic{monitor-width-mm}
-    @about-function{monitor-is-valid}
-  @end{section}
-  @begin[GdkRectangle]{section}
-    Simple graphical data type.
-    @about-struct{rectangle}
-    @about-function{rectangle-x}
-    @about-function{rectangle-y}
-    @about-function{rectangle-width}
-    @about-function{rectangle-height}
-    @about-function{rectangle-new}
-    @about-function{rectangle-copy}
-    @about-function{rectangle-contains-point}
-    @about-function{rectangle-equal}
-    @about-function{rectangle-intersect}
-    @about-function{rectangle-union}
+  @begin[Events]{section}
+      Functions for handling events from the window system.
+      @about-variable{+gdk-current-time+}
+      @about-variable{+gdk-priority-events+}
+      @about-variable{+gdk-priority-redraw+}
+      @about-variable{+gdk-event-propagate+}
+      @about-variable{+gdk-event-stop+}
+      @about-variable{+gdk-buton-primary+}
+      @about-variable{+gdk-button-middle+}
+      @about-variable{+gdk-button-secondary+}
+      @about-symbol{event-type}
+      @about-symbol{keymap-key}
+      @about-symbol{key-match}
+      @about-symbol{touchpad-gesture-phase}
+      @about-symbol{scroll-direction}
+      @about-symbol{crossing-mode}
+      @about-symbol{notify-type}
+      @about-class{event-sequence}
+      @about-class{event}
+      @about-class{button-event}
+      @about-class{scroll-event}
+      @about-class{motion-event}
+      @about-class{key-event}
+      @about-class{focus-event}
+      @about-class{crossing-event}
+      @about-class{grab-broken-event}
+      @about-class{delete-event}
+      @about-class{dnd-event}
+      @about-class{touch-event}
+      @about-class{touchpad-event}
+      @about-class{pad-event}
+      @about-class{proximity-event}
+      @about-function{event-ref}
+      @about-function{event-unref}
+      @about-function{event-event-type}
+      @about-function{event-surface}
+      @about-function{event-device}
+      @about-function{event-device-tool}
+      @about-function{event-time}
+      @about-function{event-display}
+      @about-function{event-seat}
+      @about-function{event-event-sequence}
+      @about-function{event-modifier-state}
+      @about-function{event-position}
+      @about-function{event-axes}
+      @about-function{event-axis}
+      @about-function{event-history}
+      @about-function{event-pointer-emulated}
+      @about-function{event-triggers-context-menu}
+      @about-function{button-event-button}
+      @about-function{scroll-event-direction}
+      @about-function{scroll-event-deltas}
+      @about-function{scroll-event-is-stop}
+      @about-function{key-event-keyval}
+      @about-function{key-event-keycode}
+      @about-function{key-event-consumed-modifiers}
+      @about-function{key-event-layout}
+      @about-function{key-event-level}
+      @about-function{key-event-is-modifier}
+      @about-function{key-event-matches}
+      @about-function{key-event-match}
+      @about-function{focus-event-in}
+      @about-function{touch-event-emulating-pointer}
+      @about-function{crossing-event-mode}
+      @about-function{crossing-event-detail}
+      @about-function{crossing-event-focus}
+      @about-function{grab-broken-event-grab-surface}
+      @about-function{grab-broken-event-implicit}
+      @about-function{dnd-event-drop}
+      @about-function{touchpad-event-gesture-phase}
+      @about-function{touchpad-event-n-fingers}
+      @about-function{touchpad-event-deltas}
+      @about-function{touchpad-event-pinch-angle-delta}
+      @about-function{touchpad-event-pinch-scale}
+      @about-function{pad-event-axis-value}
+      @about-function{pad-event-button}
+      @about-function{pad-event-group-mode}
+      @about-function{events-angle}
+      @about-function{events-center}
+      @about-function{events-distance}
   @end{section}
   @begin[GdkTexture]{section}
     Pixel data.
-    @about-symbol{memory-texture}
-    @about-symbol{gl-texture}
-    @about-symbol{memory-format}
     @about-symbol{memory-default}
+    @about-symbol{memory-format}
     @about-class{texture}
     @about-generic{texture-height}
     @about-generic{texture-width}
     @about-function{texture-new-for-pixbuf}
     @about-function{texture-new-from-resource}
     @about-function{texture-new-from-file}
+    @about-function{texture-new-from-filename}
+    @about-function{texture-new-from-bytes}
     @about-function{texture-download}
     @about-function{texture-save-to-png}
+    @about-function{texture-save-to-png-bytes}
+    @about-function{texture-save-to-tiff}
+    @about-function{texture-save-to-tiff-bytes}
+    @about-function{texture-format}
+    @about-class{memory-texture}
     @about-function{memory-texture-new}
+    @about-class{gl-texture}
     @about-function{gl-texture-new}
     @about-function{gl-texture-release}
   @end{section}
@@ -222,33 +353,6 @@
     @about-function{paintable-invalidate-contents}
     @about-function{paintable-invalidate-size}
     @about-function{paintable-new-empty}
-  @end{section}
-  @begin[GdkRGBA]{section}
-    The @struct{gdk:rgba} structure is a convenient way to pass RGBA colors
-    around. It is based on Cairo's way to deal with colors and mirrors its
-    behavior. All values are in the range from 0.0 to 1.0 inclusive. So the
-    color
-    @begin{pre}
-(gdk:rgba-new :red 0.0 :green 0.0 :blue 0.0 :alpha 0.0)
-    @end{pre}
-    represents transparent black and
-    @begin{pre}
-(gdk:rgba-new :red 1.0 :green 1.0 :blue 1.0 :alpha 1.0)
-    @end{pre}
-    is opaque white. Other values will be clamped to this range when drawing.
-    @about-struct{rgba}
-    @about-function{rgba-red}
-    @about-function{rgba-green}
-    @about-function{rgba-blue}
-    @about-function{rgba-alpha}
-    @about-function{rgba-new}
-    @about-function{rgba-copy}
-    @about-function{rgba-is-clear}
-    @about-function{rgba-is-opaque}
-    @about-function{rgba-parse}
-    @about-function{rgba-hash}
-    @about-function{rgba-equal}
-    @about-function{rgba-to-string}
   @end{section}
   @begin[Cursors]{section}
     Named and texture cursors.
@@ -291,191 +395,167 @@
     @about-function{surface-device-cursor}
   @end{section}
   @begin[Toplevels]{section}
-    Interface for toplevel surfaces.
-    @about-symbol{toplevel-state}
-    @about-symbol{full-screen-mode}
-    @about-symbol{surface-edge}
-    @about-symbol{titlebar-edge}
-    @about-class{toplevel}
-    @about-generic{toplevel-decorated}
-    @about-generic{toplevel-deletable}
-    @about-generic{toplevel-fullscreen-mode}
-    @about-generic{toplevel-icon-list}
-    @about-generic{toplevel-modal}
-    @about-generic{toplevel-shortcuts-inhibited}
-    @about-generic{toplevel-startup-id}
-    @about-generic{toplevel-state}
-    @about-generic{toplevel-title}
-    @about-generic{toplevel-transient-for}
-    @about-function{toplevel-present}
-    @about-function{toplevel-minimize}
-    @about-function{toplevel-lower}
-    @about-function{toplevel-focus}
-    @about-function{toplevel-show-window-menu}
-    @about-function{toplevel-supports-edge-constraints}
-    @about-function{toplevel-inhibit-system-shortcuts}
-    @about-function{toplevel-restore-system-shortcuts}
-    @about-function{toplevel-begin-resize}
-    @about-function{toplevel-begin-move}
-    @about-function{toplevel-titlebar-gesture}
-  @end{section}
-  @begin[GdkToplevelLayout]{section}
-    Information for presenting toplevels.
-    @about-class{toplevel-layout}
-    @about-function{toplevel-layout-new}
-    @about-function{toplevel-layout-ref}
-    @about-function{toplevel-layout-unref}
-    @about-function{toplevel-layout-copy}
-    @about-function{toplevel-layout-equal}
-    @about-function{toplevel-layout-maximized}
-    @about-function{toplevel-layout-fullscreen}
-    @about-function{toplevel-layout-fullscreen-monitor}
-    @about-function{toplevel-layout-resizable}
-  @end{section}
-  @begin[GdkToplevelSize]{section}
-    Information for computing toplevel size.
-    @about-symbol{toplevel-size}
-    @about-function{toplevel-size-bounds}
-    @about-function{toplevel-size-set-size}
-    @about-function{toplevel-size-set-min-size}
-    @about-function{toplevel-size-set-shadow-width}
+    @begin[GdkToplevelSize]{subsection}
+      Information for computing toplevel size.
+      @about-symbol{toplevel-size}
+      @about-function{toplevel-size-bounds}
+      @about-function{toplevel-size-set-size}
+      @about-function{toplevel-size-set-min-size}
+      @about-function{toplevel-size-set-shadow-width}
+    @end{subsection}
+    @begin[GdkToplevelLayout]{subsection}
+      Information for presenting toplevels.
+      @about-class{toplevel-layout}
+      @about-function{toplevel-layout-new}
+      @about-function{toplevel-layout-ref}
+      @about-function{toplevel-layout-unref}
+      @about-function{toplevel-layout-copy}
+      @about-function{toplevel-layout-equal}
+      @about-function{toplevel-layout-maximized}
+      @about-function{toplevel-layout-fullscreen}
+      @about-function{toplevel-layout-fullscreen-monitor}
+      @about-function{toplevel-layout-resizable}
+    @end{subsection}
+    @begin[GdkToplevel]{subsection}
+      Interface for toplevel surfaces.
+      @about-symbol{toplevel-state}
+      @about-symbol{full-screen-mode}
+      @about-symbol{surface-edge}
+      @about-symbol{titlebar-edge}
+      @about-class{toplevel}
+      @about-generic{toplevel-decorated}
+      @about-generic{toplevel-deletable}
+      @about-generic{toplevel-fullscreen-mode}
+      @about-generic{toplevel-icon-list}
+      @about-generic{toplevel-modal}
+      @about-generic{toplevel-shortcuts-inhibited}
+      @about-generic{toplevel-startup-id}
+      @about-generic{toplevel-state}
+      @about-generic{toplevel-title}
+      @about-generic{toplevel-transient-for}
+      @about-function{toplevel-present}
+      @about-function{toplevel-minimize}
+      @about-function{toplevel-lower}
+      @about-function{toplevel-focus}
+      @about-function{toplevel-show-window-menu}
+      @about-function{toplevel-supports-edge-constraints}
+      @about-function{toplevel-inhibit-system-shortcuts}
+      @about-function{toplevel-restore-system-shortcuts}
+      @about-function{toplevel-begin-resize}
+      @about-function{toplevel-begin-move}
+      @about-function{toplevel-titlebar-gesture}
+    @end{subsection}
   @end{section}
   @begin[Popups]{section}
-    Interface for popup surfaces.
-    @about-class{popup}
-    @about-generic{popup-autohide}
-    @about-generic{popup-parent}
-    @about-function{popup-present}
-    @about-function{popup-surface-anchor}
-    @about-function{popup-rect-anchor}
-    @about-function{popup-position-x}
-    @about-function{popup-position-y}
+    @begin[GdkPopupLayout]{subsection}
+      Information for presenting popups.
+      @about-symbol{anchor-hints}
+      @about-class{popup-layout}
+      @about-function{popup-layout-new}
+      @about-function{popup-layout-ref}
+      @about-function{popup-layout-unref}
+      @about-function{popup-layout-copy}
+      @about-function{popup-layout-equal}
+      @about-function{popup-layout-anchor-rect}
+      @about-function{popup-layout-rect-anchor}
+      @about-function{popup-layout-surface-anchor}
+      @about-function{popup-layout-anchor-hints}
+      @about-function{popup-layout-offset}
+      @end{subsection}
+    @begin[GdkPopup]{subsection}
+      Interface for popup surfaces.
+      @about-class{popup}
+      @about-generic{popup-autohide}
+      @about-generic{popup-parent}
+      @about-function{popup-present}
+      @about-function{popup-surface-anchor}
+      @about-function{popup-rect-anchor}
+      @about-function{popup-position-x}
+      @about-function{popup-position-y}
+    @end{subsection}
   @end{section}
-  @begin[GdkPopupLayout]{section}
-    Information for presenting popups.
-    @about-symbol{anchor-hints}
-    @about-class{popup-layout}
-    @about-function{popup-layout-new}
-    @about-function{popup-layout-ref}
-    @about-function{popup-layout-unref}
-    @about-function{popup-layout-copy}
-    @about-function{popup-layout-equal}
-    @about-function{popup-layout-anchor-rect}
-    @about-function{popup-layout-rect-anchor}
-    @about-function{popup-layout-surface-anchor}
-    @about-function{popup-layout-anchor-hints}
-    @about-function{popup-layout-offset}
+  @begin[Frame clock and frame timings]{section}
+    @begin[GdkFrameTimings]{subsection}
+      Object holding timing information for a single frame.
+      @about-class{frame-timings}
+      @about-function{frame-timings-ref}
+      @about-function{frame-timings-unref}
+      @about-function{frame-timings-frame-counter}
+      @about-function{frame-timings-complete}
+      @about-function{frame-timings-frame-time}
+      @about-function{frame-timings-presentation-time}
+      @about-function{frame-timings-refresh-interval}
+      @about-function{frame-timings-predicted-presentation-time}
+    @end{subsection}
+    @begin[GdkFrameClock]{subsection}
+      Synchronizes painting to a surface.
+      @about-symbol{frame-clock-phase}
+      @about-class{frame-clock}
+      @about-function{frame-clock-frame-time}
+      @about-function{frame-clock-request-phase}
+      @about-function{frame-clock-begin-updating}
+      @about-function{frame-clock-end-updating}
+      @about-function{frame-clock-frame-counter}
+      @about-function{frame-clock-history-start}
+      @about-function{frame-clock-timings}
+      @about-function{frame-clock-current-timings}
+      @about-function{frame-clock-refresh-info}
+      @about-function{frame-clock-fps}
+    @end{subsection}
   @end{section}
-  @begin[GdkFrameClock]{section}
-    Synchronizes painting to a surface
-  @end{section}
-  @begin[Frame timings]{section}
-    Object holding timing information for a single frame
-  @end{section}
-  @begin[GdkDrawContext]{section}
-    Base class for draw contexts.
-    @about-class{draw-context}
-    @about-generic{draw-context-display}
-    @about-generic{draw-context-surface}
-    @about-function{draw-context-begin-frame}
-    @about-function{draw-context-end-frame}
-    @about-function{draw-context-is-in-frame}
-    @about-function{draw-context-frame-region}
-  @end{section}
-  @begin[GdkGLContext]{section}
-    OpenGL draw context
-  @end{section}
-  @begin[GdkVulkanContext]{section}
-    Vulkan draw context
-  @end{section}
-  @begin[GdkCairoContext]{section}
-    Cairo draw context.
-    @about-class{cairo-context}
-    @about-function{cairo-context-cairo-create}
-  @end{section}
-  @begin[Events]{section}
-    Functions for handling events from the window system.
-    @about-variable{+gdk-current-time+}
-    @about-variable{+gdk-priority-events+}
-    @about-variable{+gdk-priority-redraw+}
-    @about-variable{+gdk-event-propagate+}
-    @about-variable{+gdk-event-stop+}
-    @about-variable{+gdk-buton-primary+}
-    @about-variable{+gdk-button-middle+}
-    @about-variable{+gdk-button-secondary+}
-    @about-symbol{event-type}
-    @about-symbol{keymap-key}
-    @about-symbol{key-match}
-    @about-symbol{touchpad-gesture-phase}
-    @about-symbol{scroll-direction}
-    @about-symbol{crossing-mode}
-    @about-symbol{notify-type}
-    @about-class{event-sequence}
-    @about-class{event}
-    @about-class{button-event}
-    @about-class{scroll-event}
-    @about-class{motion-event}
-    @about-class{key-event}
-    @about-class{focus-event}
-    @about-class{crossing-event}
-    @about-class{grab-broken-event}
-    @about-class{delete-event}
-    @about-class{dnd-event}
-    @about-class{touch-event}
-    @about-class{touchpad-event}
-    @about-class{pad-event}
-    @about-class{proximity-event}
-    @about-function{event-ref}
-    @about-function{event-unref}
-    @about-function{event-event-type}
-    @about-function{event-surface}
-    @about-function{event-device}
-    @about-function{event-device-tool}
-    @about-function{event-time}
-    @about-function{event-display}
-    @about-function{event-seat}
-    @about-function{event-event-sequence}
-    @about-function{event-modifier-state}
-    @about-function{event-position}
-    @about-function{event-axes}
-    @about-function{event-axis}
-    @about-function{event-history}
-    @about-function{event-pointer-emulated}
-    @about-function{event-triggers-context-menu}
-    @about-function{button-event-button}
-    @about-function{scroll-event-direction}
-    @about-function{scroll-event-deltas}
-    @about-function{scroll-event-is-stop}
-    @about-function{key-event-keyval}
-    @about-function{key-event-keycode}
-    @about-function{key-event-consumed-modifiers}
-    @about-function{key-event-layout}
-    @about-function{key-event-level}
-    @about-function{key-event-is-modifier}
-    @about-function{key-event-matches}
-    @about-function{key-event-match}
-    @about-function{focus-event-in}
-    @about-function{touch-event-emulating-pointer}
-    @about-function{crossing-event-mode}
-    @about-function{crossing-event-detail}
-    @about-function{crossing-event-focus}
-    @about-function{grab-broken-event-grab-surface}
-    @about-function{grab-broken-event-implicit}
-    @about-function{dnd-event-drop}
-    @about-function{touchpad-event-gesture-phase}
-    @about-function{touchpad-event-n-fingers}
-    @about-function{touchpad-event-deltas}
-    @about-function{touchpad-event-pinch-angle-delta}
-    @about-function{touchpad-event-pinch-scale}
-    @about-function{pad-event-axis-value}
-    @about-function{pad-event-button}
-    @about-function{pad-event-group-mode}
-    @about-function{events-angle}
-    @about-function{events-center}
-    @about-function{events-distance}
-  @end{section}
-  @begin[Key Values]{section}
-    Functions for manipulating keyboard codes
+  @begin[Draw contexts]{section}
+    @begin[GdkDrawContext]{subsection}
+      Base class for draw contexts.
+      @about-class{draw-context}
+      @about-generic{draw-context-display}
+      @about-generic{draw-context-surface}
+      @about-function{draw-context-begin-frame}
+      @about-function{draw-context-end-frame}
+      @about-function{draw-context-is-in-frame}
+      @about-function{draw-context-frame-region}
+    @end{subsection}
+    @begin[GdkGLContext]{subsection}
+      OpenGL draw context
+      @about-symbol{gl-api}
+      @about-symbol{gl-error}
+      @about-class{gl-context}
+      @about-generic{gl-context-allowed-apis}
+      @about-generic{gl-context-api}
+      @about-generic{gl-context-shared-context}
+      @about-function{gl-context-display}
+      @about-function{gl-context-surface}
+      @about-function{gl-context-version}
+      @about-function{gl-context-required-version}
+      @about-function{gl-context-debug-enabled}
+      @about-function{gl-context-forward-compatible}
+      @about-function{gl-context-use-es}
+      @about-function{gl-context-is-legacy}
+      @about-function{gl-context-realize}
+      @about-function{gl-context-make-current}
+      @about-function{gl-context-current}
+      @about-function{gl-context-clear-current}
+      @about-function{gl-context-is-shared}
+    @end{subsection}
+    @begin[GdkVulkanContext]{subsection}
+      Vulkan draw context.
+      @about-symbol{vulkan-error}
+      @about-class{vulkan-context}
+      @about-function{vulkan-context-device}
+      @about-function{vulkan-context-draw-index}
+      @about-function{vulkan-context-draw-semaphore}
+      @about-function{vulkan-context-image}
+      @about-function{vulkan-context-image-format}
+      @about-function{vulkan-context-instance}
+      @about-function{vulkan-context-n-images}
+      @about-function{vulkan-context-physical-device}
+      @about-function{vulkan-context-queue}
+      @about-function{vulkan-context-queue-family-index}
+    @end{subsection}
+    @begin[GdkCairoContext]{subsection}
+      Cairo draw context.
+      @about-class{cairo-context}
+      @about-function{cairo-context-cairo-create}
+    @end{subsection}
   @end{section}
   @begin[Clipboards]{section}
     Share data between applications for Copy-and-Paste.
@@ -533,107 +613,144 @@
     @about-function{drop-read-value-async}
     @about-function{drop-read-value-finish}
   @end{section}
-  @begin[Content Formats]{section}
-    Advertising and negotiating of content exchange formats.
-    @about-class{content-formats}
-    @about-function{intern-mime-type}
-    @about-function{content-formats-new}
-    @about-function{content-formats-new-for-gtype}
-    @about-function{content-formats-ref}
-    @about-function{content-formats-unref}
-    @about-function{content-formats-print}
-    @about-function{content-formats-to-string}
-    @about-function{content-formats-gtypes}
-    @about-function{content-formats-mime-types}
-    @about-function{content-formats-union}
-    @about-function{content-formats-match}
-    @about-function{content-formats-match-gtype}
-    @about-function{content-formats-match-mime-type}
-    @about-function{content-formats-contain-gtype}
-    @about-function{content-formats-mime-type}
-    @about-function{content-formats-union-serialize-gtypes}
-    @about-function{content-formats-union-deserialize-gtypes}
-    @about-function{content-formats-union-serialize-mime-types}
-    @about-function{content-formats-union-deserialize-mime-types}
-    @about-symbol{content-formats-builder}
-    @about-function{content-formats-builder-new}
-    @about-function{content-formats-builder-free-to-formats}
-    @about-function{content-formats-builder-add-formats}
-    @about-function{content-formats-builder-add-gtype}
-    @about-function{content-formats-builder-add-mime-type}
-    @about-function{content-formats-builder-ref}
-    @about-function{content-formats-builder-unref}
-    @about-function{content-formats-builder-to-formats}
+  @begin[Content Provider, Serializer, and Deserializer]{section}
+    @begin[Content Formats]{subsection}
+      Advertising and negotiating of content exchange formats.
+      @about-class{content-formats}
+      @about-function{intern-mime-type}
+      @about-function{content-formats-new}
+      @about-function{content-formats-new-for-gtype}
+      @about-function{content-formats-ref}
+      @about-function{content-formats-unref}
+      @about-function{content-formats-print}
+      @about-function{content-formats-to-string}
+      @about-function{content-formats-parse}
+      @about-function{content-formats-gtypes}
+      @about-function{content-formats-mime-types}
+      @about-function{content-formats-union}
+      @about-function{content-formats-match}
+      @about-function{content-formats-match-gtype}
+      @about-function{content-formats-match-mime-type}
+      @about-function{content-formats-contain-gtype}
+      @about-function{content-formats-mime-type}
+      @about-function{content-formats-union-serialize-gtypes}
+      @about-function{content-formats-union-deserialize-gtypes}
+      @about-function{content-formats-union-serialize-mime-types}
+      @about-function{content-formats-union-deserialize-mime-types}
+      @about-symbol{content-formats-builder}
+      @about-function{content-formats-builder-new}
+      @about-function{content-formats-builder-free-to-formats}
+      @about-function{content-formats-builder-add-formats}
+      @about-function{content-formats-builder-add-gtype}
+      @about-function{content-formats-builder-add-mime-type}
+      @about-function{content-formats-builder-ref}
+      @about-function{content-formats-builder-unref}
+      @about-function{content-formats-builder-to-formats}
+    @end{subsection}
+    @begin[GdkContentProvider]{subsection}
+      Provides content for data transfer between applications.
+      @about-class{content-provider}
+      @about-generic{content-provider-formats}
+      @about-generic{content-provider-storable-formats}
+      @about-function{content-provider-new-for-value}
+      @about-function{content-provider-new-typed}
+      @about-function{content-provider-new-for-bytes}
+      @about-function{content-provider-new-union}
+      @about-function{content-provider-ref-formats}
+      @about-function{content-provider-ref-storable-formats}
+      @about-function{content-provider-content-changed}
+      @about-function{content-provider-write-mime-type-async}
+      @about-function{content-provider-write-mime-type-finish}
+      @about-function{content-provider-value}
+    @end{subsection}
+    @begin[GdkContentSerializer]{subsection}
+      Serialize content for transfer.
+      @about-class{content-serializer}
+      @about-symbol{content-serialize-func}
+      @about-function{content-serializer-mime-type}
+      @about-function{content-serializer-gtype}
+      @about-function{content-serializer-value}
+      @about-function{content-serializer-output-stream}
+      @about-function{content-serializer-priority}
+      @about-function{content-serializer-cancellable}
+      @about-function{content-serializer-user-data}
+      @about-function{content-serializer-task-data}
+      @about-function{content-serializer-return-success}
+      @about-function{content-serializer-return-error}
+      @about-function{content-register-serializer}
+      @about-function{content-serialize-async}
+      @about-function{content-serialize-finish}
+    @end{subsection}
+    @begin[GdkContentDeserializer]{subsection}
+      Deserialize content for transfer.
+      @about-class{content-deserializer}
+      @about-symbol{content-deserialize-func}
+      @about-function{content-deserializer-mime-type}
+      @about-function{content-deserializer-gtype}
+      @about-function{content-deserializer-value}
+      @about-function{content-deserializer-input-stream}
+      @about-function{content-deserializer-priority}
+      @about-function{content-deserializer-cancellable}
+      @about-function{content-deserializer-user-data}
+      @about-function{content-deserializer-task-data}
+      @about-function{content-deserializer-return-success}
+      @about-function{content-deserializer-return-error}
+      @about-function{content-register-deserializer}
+      @about-function{content-deserialize-async}
+      @about-function{content-deserialize-finish}
+    @end{subsection}
   @end{section}
-  @begin[GdkContentProvider]{section}
-    Provides content for data transfer between applications.
-    @about-class{content-provider}
-    @about-generic{content-provider-formats}
-    @about-generic{content-provider-storable-formats}
-    @about-function{content-provider-new-for-value}
-    @about-function{content-provider-new-typed}
-    @about-function{content-provider-new-for-bytes}
-    @about-function{content-provider-new-union}
-    @about-function{content-provider-ref-formats}
-    @about-function{content-provider-ref-storable-formats}
-    @about-function{content-provider-content-changed}
-    @about-function{content-provider-write-mime-type-async}
-    @about-function{content-provider-write-mime-type-finish}
-    @about-function{content-provider-value}
-  @end{section}
-  @begin[GdkContentSerializer]{section}
-    Serialize content for transfer.
-    @about-class{content-serializer}
-    @about-symbol{content-serialize-func}
-    @about-function{content-serializer-mime-type}
-    @about-function{content-serializer-gtype}
-    @about-function{content-serializer-value}
-    @about-function{content-serializer-output-stream}
-    @about-function{content-serializer-priority}
-    @about-function{content-serializer-cancellable}
-    @about-function{content-serializer-user-data}
-    @about-function{content-serializer-task-data}
-    @about-function{content-serializer-return-success}
-    @about-function{content-serializer-return-error}
-    @about-function{content-register-serializer}
-    @about-function{content-serialize-async}
-    @about-function{content-serialize-finish}
-  @end{section}
-  @begin[GdkContentDeserializer]{section}
-    Deserialize content for transfer.
-    @about-class{content-deserializer}
-    @about-symbol{content-deserialize-func}
-    @about-function{content-deserializer-mime-type}
-    @about-function{content-deserializer-gtype}
-    @about-function{content-deserializer-value}
-    @about-function{content-deserializer-input-stream}
-    @about-function{content-deserializer-priority}
-    @about-function{content-deserializer-cancellable}
-    @about-function{content-deserializer-user-data}
-    @about-function{content-deserializer-task-data}
-    @about-function{content-deserializer-return-success}
-    @about-function{content-deserializer-return-error}
-    @about-function{content-register-deserializer}
-    @about-function{content-deserialize-async}
-    @about-function{content-deserialize-finish}
-  @end{section}
-  @begin[GdkPixbuf Interaction]{section}
-    Functions for obtaining pixbufs
-  @end{section}
-  @begin[Pango Interaction]{section}
-    Using Pango in GDK
-  @end{section}
-  @begin[Cairo Interaction]{section}
-    Functions to support using Cairo. GDK does not wrap the cairo API, instead
-    it allows to create Cairo contexts which can be used to draw on GdkSurfaces.
-    Additional functions allow use GdkRectangles with Cairo and to use GdkRGBAs,
-    GdkPixbufs and GdkSurfaces as sources for drawing operations.
-    @about-function{cairo-set-source-rgba}
-    @about-function{cairo-set-source-pixbuf}
-    @about-function{cairo-rectangle}
-    @about-function{cairo-region}
-    @about-function{cairo-region-create-from-surface}
-    @about-function{cairo-draw-from-gl}
+  @begin[Pixbuf, Pango, and Backends interaction]{section}
+    @begin[GdkPixbuf Interaction]{subsection}
+      Functions for obtaining pixbufs. Pixbufs are client-side images. For
+      details on how to create and manipulate pixbufs, see the GdkPixbuf API
+      documentation. The functions described here allow to obtain pixbufs from
+      GdkSurfaces and Cairo surfaces.
+      @about-function{pixbuf-from-surface}
+      @about-function{pixbuf-from-texture}
+    @end{subsection}
+    @begin[Pango Interaction]{subsection}
+      Pango is the text layout system used by GDK and GTK. The functions and
+      types in this section are used to obtain clip regions for PangoLayouts,
+      and to get @class{pango:context} objects that can be used with GDK.
+
+      Creating a @class{pango:layout} object is the first step in rendering
+      text, and requires getting a handle to a @class{pango:context} object.
+      For GTK programs, you will usually want to use the
+      @fun{gtk:widget-pango-context} function, or the
+      @fun{gtk:widget-create-pango-layout} function. Once you have a
+      @class{pango:layout} object, you can set the text and attributes of it
+      with Pango functions like the @fun{pango:layout-text} function and get its
+      size with the @fun{pango:layout-size} function. Note that Pango uses a
+      fixed point system internally, so converting between Pango units and
+      pixels using the @var{pango:+pango-scale+} value or the
+      @fun{pango:pixels} function.
+
+      Rendering a Pango layout is done most simply with the
+      @fun{pango:cairo-show-layout} function. You can also draw pieces of the
+      layout with the @fun{pango:cairo-show-layout-line} function.
+      @about-function{pango-layout-clip-region}
+      @about-function{pango-layout-line-clip-region}
+    @end{subsection}
+    @begin[Cairo Interaction]{subsection}
+      Functions to support using Cairo. GDK does not wrap the cairo API,
+      instead it allows to create Cairo contexts which can be used to draw on
+      GdkSurfaces. Additional functions allow use GdkRectangles with Cairo and
+      to use GdkRGBAs, GdkPixbufs and GdkSurfaces as sources for drawing
+      operations.
+      @about-function{cairo-set-source-rgba}
+      @about-function{cairo-set-source-pixbuf}
+      @about-function{cairo-rectangle}
+      @about-function{cairo-region}
+      @about-function{cairo-region-create-from-surface}
+      @about-function{cairo-draw-from-gl}
+    @end{subsection}
+    @begin[X Window System Interaction]{subsection}
+      X backend-specific functions.
+    @end{subsection}
+    @begin[Wayland Interaction]{subsection}
+      Wayland backend-specific functions.
+    @end{subsection}
   @end{section}
   @begin[Application launching]{section}
     Startup notification for applications
@@ -643,12 +760,6 @@
     @about-function{app-launch-context-set-timestamp}
     @about-function{app-launch-context-set-icon}
     @about-function{app-launch-context-set-icon-name}
-  @end{section}
-  @begin[X Window System Interaction]{section}
-    X backend-specific functions
-  @end{section}
-  @begin[Wayland Interaction]{section}
-    Wayland backend-specific functions
   @end{section}
   ")
 

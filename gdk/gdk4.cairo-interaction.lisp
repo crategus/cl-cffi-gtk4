@@ -39,16 +39,6 @@
 ;;;     gdk_cairo_region
 ;;;     gdk_cairo_region_create_from_surface
 ;;;     gdk_cairo_draw_from_gl                             Since 4.6 deprecated
-;;;
-;;; Description
-;;;
-;;; Cairo is a graphics library that supports vector graphics and image
-;;; compositing that can be used with GDK and GTK.
-;;;
-;;; GDK does not wrap the cairo API, instead it allows to create Cairo contexts
-;;; which can be used to draw on GdkSurfaces. Additional functions allow use
-;;; GdkRectangles with Cairo and to use GdkRGBAs, GdkPixbufs and GdkSurfaces as
-;;; sources for drawing operations.
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gdk)

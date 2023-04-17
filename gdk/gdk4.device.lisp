@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.device.lisp
+;;; gdk4.device.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GdkDevice
@@ -39,12 +40,10 @@
 ;;;
 ;;;     GdkDeviceTool
 ;;;     GdkDeviceToolType
-;;;     GdkTimeCoord
 ;;;
 ;;; Accessors
-
+;;;
 ;;;     gdk_device_get_caps_lock_state
-
 ;;;     gdk_device_get_direction
 ;;;     gdk_device_get_display
 ;;;     gdk_device_has_bidi_layouts
@@ -127,7 +126,7 @@
 (setf (liber:alias-for-symbol 'input-source)
       "GEnum"
       (liber:symbol-documentation 'input-source)
- "@version{#2021-12-13}
+ "@version{2023-4-15}
   @begin{short}
     An enumeration describing the type of an input device in general terms.
   @end{short}
@@ -183,7 +182,7 @@
 (setf (liber:alias-for-symbol 'axis-use)
       "GEnum"
       (liber:symbol-documentation 'axis-use)
- "@version{#2022-11-26}
+ "@version{2023-4-15}
   @begin{short}
     An enumeration describing the way in which a device axis (valuator) maps
     onto the predefined valuator types that GTK understands.
@@ -249,7 +248,7 @@
 (setf (liber:alias-for-symbol 'axis-flags)
       "GFlags"
       (liber:symbol-documentation 'axis-flags)
- "@version{#2021-12-13}
+ "@version{2023-4-15}
   @begin{short}
     Flags describing the current capabilities of a device/tool.
   @end{short}
@@ -304,13 +303,13 @@
 (setf (liber:alias-for-symbol 'device-tool-type)
       "GEnum"
       (liber:symbol-documentation 'device-tool-type)
- "@version{#2021-12-13}
+ "@version{2023-4-15}
   @begin{short}
     Indicates the specific type of tool being used being a tablet. Such as an
     airbrush, pencil, etc.
   @end{short}
   @begin{pre}
-(define-g-enum \"GdkDeviceToolType\" gdk-device-tool-type
+(define-g-enum \"GdkDeviceToolType\" device-tool-type
   (:export t
    :type-initializer \"gdk_device_tool_type_get_type\")
   :unknown
@@ -335,41 +334,7 @@
   @see-class{gdk:device}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GdkTimeCoord                                    not exported
-;;; ----------------------------------------------------------------------------
-
-;; FIXME: Is this in use? There is no longer a GDK_DEVICE_HISTORY function.
-
-#+nil
-(defcstruct time-coord
-  (time :uint32)
-  (axes :double :count 128))
-
-#+nil
-(setf (liber:alias-for-symbol 'time-coord)
-      "CStruct"
-      (liber:symbol-documentation 'time-coord)
- "@version{#2021-12-13}
-  @begin{short}
-    The @sym{gdk:time-coord} structure stores a single event in a motion
-    history.
-  @end{short}
-  @begin{pre}
-(defcstruct time-coord
-  (time :uint32)
-  (axes :double :count 128))
-  @end{pre}
-  @begin[code]{table}
-    @entry[time]{The timestamp for this event.}
-    @entry[axes]{The values of the axes of the device.}
-  @end{table}
-  @see-class{gdk:device}
-  @see-function{gdk:device-history}")
-
-;;; ----------------------------------------------------------------------------
 ;;; GdkDeviceTool
-;;;
-;;; A physical tool associated to a GdkDevice.
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GdkDeviceTool" device-tool
@@ -392,7 +357,7 @@
 
 #+liber-documentation
 (setf (documentation 'device-tool 'type)
- "@version{#2021-12-13}
+ "@version{2023-4-15}
   @short{A physical tool associated to a @class{gdk:device} object.}
   @see-slot{gdk:device-tool-axes}
   @see-slot{gdk:device-tool-hardware-id}
@@ -578,7 +543,7 @@
 
 #+liber-documentation
 (setf (documentation 'device 'type)
- "@version{#2021-12-13}
+ "@version{2023-4-15}
   @begin{short}
     The @sym{gdk-device} object represents a single input device, such as a
     keyboard, a mouse, a touchpad, etc.
@@ -1123,9 +1088,11 @@ get_device_settings (GdkDevice *device)
 ;;;     The timestamp of the last activity for this device.
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-2
 (defcfun ("gdk_device_get_timestamp" device-timestamp) :uint32
   (device (g:object device)))
 
+#+gtk-4-2
 (export 'device-timestamp)
 
-;;; --- End of file gdk.device.lisp --------------------------------------------
+;;; --- End of file gdk4.device.lisp -------------------------------------------

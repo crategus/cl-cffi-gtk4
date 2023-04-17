@@ -2,28 +2,29 @@
 ;;; gdk4.texture.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GdkTexture
@@ -39,16 +40,26 @@
 ;;;
 ;;;     GDK_MEMORY_DEFAULT
 ;;;
+;;; Accessors
+;;;
+;;;     gdk_texture_get_width
+;;;     gdk_texture_get_height
+;;;
 ;;; Functions
 ;;;
 ;;;     gdk_texture_new_for_pixbuf
 ;;;     gdk_texture_new_from_resource
 ;;;     gdk_texture_new_from_file
 ;;;     gdk_texture_new_from_filename                      Since 4.6
-;;;     gdk_texture_get_width
-;;;     gdk_texture_get_height
+;;;     gdk_texture_new_from_bytes                         Since 4.6
+;;;
 ;;;     gdk_texture_download
 ;;;     gdk_texture_save_to_png
+;;;     gdk_texture_save_to_png_bytes                      Since 4.6
+;;;     gdk_texture_save_to_tiff                           Since 4.6
+;;;     gdk_texture_save_to_tiff_bytes                     Since 4.6
+;;;     gdk_texture_get_format                             Since 4.10
+;;;
 ;;;     gdk_memory_texture_new
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
@@ -75,20 +86,125 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
+;;; GDK_MEMORY_DEFAULT
+;;;
+;;; #define GDK_MEMORY_DEFAULT GDK_MEMORY_B8G8R8A8_PREMULTIPLIED
+;;;
+;;; This is the default memory format used by GTK and is the format provided by
+;;; gdk_texture_download(). It is equal to CAIRO_FORMAT_ARGB32.
+;;;
+;;; Be aware that unlike the GdkMemoryFormat values, this format is different
+;;; for different endianness.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; enum GdkMemoryFormat
+;;; ----------------------------------------------------------------------------
+
+(define-g-enum "GdkMemoryFormat" memory-format
+  (:export t
+   :type-initializer "gdk_memory_format_get_type")
+  :B8G8R8A8-PREMULTIPLIED
+  :A8R8G8B8-PREMULTIPLIED
+  :R8G8B8A8-PREMULTIPLIED
+  :B8G8R8A8
+  :A8R8G8B8
+  :R8G8B8A8
+  :A8B8G8R8
+  :R8G8B8
+  :B8G8R8
+  :R16G16B16
+  :R16G16B16A16-PREMULTIPLIED
+  :R16G16B16A16
+  :R16G16B16-FLOAT
+  :R16G16B16A16-FLOAT-PREMULTIPLIED
+  :R16G16B16A16-FLOAT
+  :R32G32B32-FLOAT
+  :R32G32B32A32-FLOAT-PREMULTIPLIED
+  :R32G32B32A32_FLOAT
+  :N-FORMATS)
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'memory-format)
+      "GEnum"
+      (liber:symbol-documentation 'memory-format)
+ "@version{#2023-4-12}
+  @begin{short}
+    The @sym{gdk:memory-format} enumeration describes a format that bytes can
+    have in memory.
+  @end{short}
+  It describes formats by listing the contents of the memory passed to it. So
+  @code{:A8R8G8B8} will be 1 byte (8 bits) of alpha, followed by a byte each of
+  red, green and blue. It is not endian-dependent, so the @code{:argb32} value
+  of the @symbol{cairo:format-t} enumeration is represented by different
+  @symol{gdk:memory-format} values on architectures with different endiannesses.
+
+  Its naming is modelled after VkFormat. See
+  https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.htmlVkFormat
+  for details.
+  @begin{pre}
+(define-g-enum \"GdkMemoryFormat\" memory-format
+  (:export t
+   :type-initializer \"gdk_memory_format_get_type\")
+  :B8G8R8A8-PREMULTIPLIED
+  :A8R8G8B8-PREMULTIPLIED
+  :R8G8B8A8-PREMULTIPLIED
+  :B8G8R8A8
+  :A8R8G8B8
+  :R8G8B8A8
+  :A8B8G8R8
+  :R8G8B8
+  :B8G8R8
+  :R16G16B16
+  :R16G16B16A16-PREMULTIPLIED
+  :R16G16B16A16
+  :R16G16B16-FLOAT
+  :R16G16B16A16-FLOAT-PREMULTIPLIED
+  :R16G16B16A16-FLOAT
+  :R32G32B32-FLOAT
+  :R32G32B32A32-FLOAT-PREMULTIPLIED
+  :R32G32B32A32-FLOAT
+  :N-FORMATS)
+  @end{pre}
+  @begin[code]{table}
+    @entry[:B8G8R8A8-PREMULTIPLIED]{4 bytes; for blue, green, red, alpha. The
+      color values are premultiplied with the alpha value.}
+    @entry[:A8R8G8B8-PREMULTIPLIED]{4 bytes; for alpha, red, green, blue. The
+      color values are premultiplied with the alpha value.}
+    @entry[:R8G8B8A8-PREMULTIPLIED]{4 bytes; for red, green, blue, alpha The
+      color values are premultiplied with the alpha value.}
+    @entry[:B8G8R8A8]{4 bytes; for blue, green, red, alpha.}
+    @entry[:A8R8G8B8]{4 bytes; for alpha, red, green, blue.}
+    @entry[:R8G8B8A8]{4 bytes; for red, green, blue, alpha.}
+    @entry[:A8B8G8R8]{4 bytes; for alpha, blue, green, red.}
+    @entry[:R8G8B8]{3 bytes; for red, green, blue. The data is opaque.}
+    @entry[:B8G8R8]{3 bytes; for blue, green, red. The data is opaque.}
+    @entry[:R16G16B16]{3 guint16 values; for red, green, blue. Since 4.6}
+    @entry[:R16G16B16A16-PREMULTIPLIED]{4 guint16 values; for red, green, blue,
+      alpha. The color values are premultiplied with the alpha value.
+      Since 4.6}
+    @entry[:R16G16B16A16]{4 guint16 values; for red, green, blue, alpha.
+      Since 4.6}
+    @entry[:R16G16B16-FLOAT]{3 half-float values; for red, green, blue. The
+      data is opaque. Since 4.6}
+    @entry[:R16G16B16A16-FLOAT-PREMULTIPLIED]{4 half-float values; for red,
+      green, blue and alpha. The color values are premultiplied with the alpha
+      value. Since 4.6}
+    @entry[:R16G16B16A16-FLOAT]{4 half-float values; for red, green, blue and
+      alpha. Since 4.6}
+    @entry[:R32G32B32-FLOAT]{No description available.}
+    @entry[:R32G32B32A32-FLOAT-PREMULTIPLIED]{4 float values; for red, green,
+      blue and alpha. The color values are premultiplied with the alpha value.
+      Since 4.6}
+    @entry[:R32G32B32A32-FLOAT]{4 float values; for red, green, blue and alpha.
+      Since 4.6}
+    @entry[:N-FORMATS]{The number of formats. This value will change as more
+      formats get added, so do not rely on its concrete integer.}
+  @end{table}
+  @see-class{gdk:texture}")
+
+;;; ----------------------------------------------------------------------------
 ;;; GdkTexture
-;;;
-;;; GdkTexture is the basic element used to refer to pixel data. It is primarily
-;;; mean for pixel data that will not change over multiple frames, and will be
-;;; used for a long time.
-;;;
-;;; There are various ways to create GdkTexture objects from a GdkPixbuf, or a
-;;; Cairo surface, or other pixel data.
-;;;
-;;; The ownership of the pixel data is transferred to the GdkTexture instance;
-;;; you can only make a copy of it, via gdk_texture_download().
-;;;
-;;; GdkTexture is an immutable object: That means you cannot change anything
-;;; about it other than increasing the reference count via g_object_ref().
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GdkTexture" texture
@@ -105,68 +221,162 @@
     texture-width
     "width" "gint" t t)))
 
+#+liber-documentation
+(setf (liber:alias-for-class 'texture)
+      "Class"
+      (documentation 'texture 'type)
+ "@version{#2023-4-12}
+  @begin{short}
+    The @sym{gdk:texture} object is the basic element used to refer to pixel
+    data.
+  @end{short}
+  It is primarily mean for pixel data that will not change over multiple frames,
+  and will be used for a long time.
+
+  There are various ways to create @sym{gdk:texture} objects from a
+  @class{gdk-pixbuf:pixbuf} object, or a Cairo surface, or other pixel data.
+
+  The ownership of the pixel data is transferred to the @sym{gdk:texture}
+  instance; you can only make a copy of it, via the @fun{gdk:texture-download}
+  function.
+
+  The @sym{gdk:texture} object is an immutable object: That means you cannot
+  change anything about it other than increasing the reference count via the
+  @fun{g:object-ref} function.
+  @see-constructor{gdk:texture-new-for-pixbuf}
+  @see-constructor{gdk:texture-new-from-bytes}
+  @see-constructor{gdk:texture-new-from-file}
+  @see-constructor{gdk:texture-new-from-filename}
+  @see-constructor{gdk:texture-new-from-resource}
+  @see-class{gdk-pixbuf:pixbuf}")
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;; --- texture-height ---------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "height" 'texture) t)
+ "The @code{height} property of type @code{:int} (Read / Write / Construct only)
+  @br{}
+  The height of the texture, in pixels. @br{}
+  Allowed values: >= 1 @br{}
+  Default value: 1")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'texture-height)
+      "Accessor"
+      (documentation 'texture-height 'function)
+ "@version{#2023-4-12}
+  @syntax[]{(gdk:texture-height object) => height}
+  @argument[object]{a @class{gdk:texture} object}
+  @argument[height]{an integer with the height of the texture}
+  @begin{short}
+    Accessor of the @slot[gdk:texture]{height} slot of the @class{gdk:texture}
+    class.
+  @end{short}
+  The @sym{gdk:texture-height} function returns the height of the texture , in
+  pixels.
+  @see-class{gdk:texture}")
+
+;;; --- texture-width ----------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "width" 'texture) t)
+ "The @code{width} property of type @code{:int} (Read / Write / Construct only)
+  @br{}
+  The width of the texture, in pixels. @br{}
+  Allowed values: >= 1 @br{}
+  Default value: 1")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'texture-width)
+      "Accessor"
+      (documentation 'texture-width 'function)
+ "@version{#2023-4-12}
+  @syntax[]{(gdk:texture-width object) => width}
+  @argument[object]{a @class{gdk:texture} object}
+  @argument[width]{an integer with the width of the texture}
+  @begin{short}
+    Accessor of the @slot[gdk:texture]{width} slot of the @class{gdk:texture}
+    class.
+  @end{short}
+  The @sym{gdk:texture-width} function returns the width of the texture , in
+  pixels.
+  @see-class{gdk:texture}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_texture_new_for_pixbuf ()
-;;;
-;;; GdkTexture *
-;;; gdk_texture_new_for_pixbuf (GdkPixbuf *pixbuf);
-;;;
-;;; Creates a new texture object representing the GdkPixbuf.
-;;;
-;;; pixbuf :
-;;;     a GdkPixbuf
-;;;
-;;;  Returns :
-;;;     a new GdkTexture
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_texture_new_for_pixbuf" gdk-texture-new-for-pixbuf)
+(defcfun ("gdk_texture_new_for_pixbuf" texture-new-for-pixbuf)
     (g:object texture)
+ #+liber-documentation
+ "@version{#2023-4-12}
+  @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
+  @return{A newly created @class{gdk:texture} object.}
+  @begin{short}
+    Creates a new texture object representing @arg{pixbuf}.
+  @end{short}
+  @see-class{gdk:texture}
+  @see-class{gdk-pixbuf:pixbuf}"
   (pixbuf (g:object gdk-pixbuf:pixbuf)))
 
-(export 'gdk-texture-new-for-pixbuf)
+(export 'texture-new-for-pixbuf)
 
 ;;; ----------------------------------------------------------------------------
-;;;gdk_texture_new_from_resource ()
-;;;GdkTexture *
-;;;gdk_texture_new_from_resource (const char *resource_path);
-;;;Creates a new texture by loading an image from a resource. The file format is detected automatically. The supported formats are PNG and JPEG, though more formats might be available.
+;;; gdk_texture_new_from_resource ()
+;;; ----------------------------------------------------------------------------
 
-;;;It is a fatal error if resource_path does not specify a valid image resource and the program will abort if that happens. If you are unsure about the validity of a resource, use gdk_texture_new_from_file() to load it.
+(defcfun ("gdk_texture_new_from_resource" texture-new-from-resource)
+    (g:object texture)
+ #+liber-documentation
+ "@version{#2023-4-12}
+  @argument[path]{a string with the path of the resource file}
+  @return{A newly created @class{gdk:texture} object.}
+  @begin{short}
+    Creates a new texture by loading an image from a resource.
+  @end{short}
+  The file format is detected automatically. The supported formats are PNG and
+  JPEG, though more formats might be available.
 
-;;;Parameters
-;;;resource_path
+  It is a fatal error if @arg{path} does not specify a valid image resource
+  and the program will abort if that happens. If you are unsure about the
+  validity of a resource, use the @fun{gdk:texture-new-from-file} function to
+  load it.
+  @see-class{gdk:texture}
+  @see-function{gdk:texture-new-from-file}"
+  (path :string))
 
-;;;the path of the resource file
-
-;;;
-;;;Returns
-;;;A newly-created texture
-
+(export 'texture-new-from-resource)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_texture_new_from_file ()
-;;;
-;;; GdkTexture *
-;;; gdk_texture_new_from_file (GFile *file,
-;;;                            GError **error);
-;;;
-;;; Creates a new texture by loading an image from a file. The file format is
-;;; detected automatically. The supported formats are PNG and JPEG, though more
-;;; formats might be available.
-;;;
-;;; If NULL is returned, then error will be set.
-;;;
-;;; file :
-;;;     GFile to load
-;;;
-;;; error :
-;;;     Return location for an error
-;;;
-;;; Returns :
-;;;     A newly-created GdkTexture or NULL if an error occurred.
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gdk_texture_new_from_file" %texture-new-from-file)
+    (g:object texture)
+  (file g:object)
+  (err :pointer))
+
+(defun texture-new-from-file (file)
+ #+liber-documentation
+ "@version{#2023-4-12}
+  @argument[file]{a @class{g:file} object to load}
+  @return{A newly created @class{gdk:texture} object, or @code{nil} if an
+    error occurred.}
+  @begin{short}
+    Creates a new texture by loading an image from a file.
+  @end{short}
+  The file format is detected automatically. The supported formats are PNG and
+  JPEG, though more formats might be available.
+  @see-class{gdk:texture}
+  @see-class{g:file}"
+  (with-g-error (err)
+    (%texture-new-from-file file err)))
+
+(export 'texture-new-from-file)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_texture_new_from_filename ()
@@ -181,10 +391,10 @@
 #+gtk-4-6
 (defun texture-new-from-filename (path)
  #+liber-documentation
- "@version{2023-1-29}
+ "@version{2023-4-12}
   @argument[path]{a pathname or namestring with the file to load, the value is
     a file system path, using the OS encoding}
-  @return{A newly-created @class{gdk:texture} object.}
+  @return{A newly created @class{gdk:texture} object.}
   @begin{short}
     Creates a new texture by loading an image from a file.
   @end{short}
@@ -204,290 +414,309 @@
 (export 'texture-new-from-filename)
 
 ;;; ----------------------------------------------------------------------------
-;;;gdk_texture_get_width ()
-;;;int
-;;;gdk_texture_get_width (GdkTexture *texture);
-;;;Returns the width of texture , in pixels.
+;;; gdk_texture_new_from_bytes                             Since 4.6
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;texture
+#+gtk-4-6
+(defcfun ("gdk_texture_new_from_bytes" %texture-new-from-bytes)
+    (g:object texture)
+  (bytes (g:boxed g:bytes))
+  (err :pointer))
 
-;;;a GdkTexture
+#+gtk-4-6
+(defun texture-new-from-bytes (bytes)
+ #+liber-documentation
+ "@version{#2023-4-12}
+  @argument[bytes]{a @class{g:bytes} instance containing data to load}
+  @return{A newly created @class{gdk:texture} object.}
+  @begin{short}
+    Creates a new texture by loading an image from a memory.
+  @end{short}
+  The file format is detected automatically. The supported formats are PNG,
+  JPEG, and TIFF, though more formats might be available.
 
+  This function is threadsafe, so that you can e.g. use @code{GTask} and the
+  @code{g_task_run_in_thread()} function to avoid blocking the main thread
+  while loading a big image.
+
+  Since 4.6
+  @see-class{gdk:texture}
+  @see-class{g:bytes}"
+  (with-g-error (err)
+    (%texture-new-from-bytes bytes err)))
+
+#+gtk-4-6
+(export 'texture-new-from-bytes)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_texture_download ()
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_texture_download" texture-download) :void
+ #+liber-documentation
+ "@version{#2023-4-12}
+  @argument[texture]{a @class{gdk:texture} object}
+  @argument[data]{a pointer to enough memory to be filled with the downloaded
+    data of @arg{texture}}
+  @argument[stride]{rowstride in bytes}
+  @begin{short}
+    Downloads the texture into local memory.
+  @end{short}
+  This may be an expensive operation, as the actual texture data may reside on
+  a GPU or on a remote display server.
+
+  The data format of the downloaded data is equivalent to the @code{:argb32}
+  value of the @symbol{cairo:format-t} enumeration, so every downloaded pixel
+  requires 4 bytes of memory.
+  @begin[Example]{dictionary}
+  Downloading a texture into a Cairo image surface:
+  @begin{pre}
+(let ((surface (cairo:image-surface-reate :argb32
+                                          (gdk:texture-width texture)
+                                          (gdk:texture-height texture))))
+  (gdk:texture-download texture
+                        (cairo:image-surface-data surface)
+                        (cairo:image-surface-stride surface))
+  (cairo:surface-mark-dirty surface)
+    @end{pre}
+  @end{dictionary}
+  @see-class{gdk:texture}"
+  (texture (g:object texture))
+  (data :pointer)
+  (stride :size))
+
+(export 'texture-download)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_texture_save_to_png ()
 ;;;
-;;;Returns
-;;;the width of the GdkTexture
-
-;;;gdk_texture_get_height ()
-;;;int
-;;;gdk_texture_get_height (GdkTexture *texture);
-;;;Returns the height of the texture , in pixels.
-
-;;;Parameters
-;;;texture
-
-;;;a GdkTexture
-
+;;; gboolean
+;;; gdk_texture_save_to_png (GdkTexture *texture,
+;;;                          const char *filename);
 ;;;
-;;;Returns
-;;;the height of the GdkTexture
-
-;;;gdk_texture_download ()
-;;;void
-;;;gdk_texture_download (GdkTexture *texture,
-;;;                      guchar *data,
-;;;                      gsize stride);
-;;;Downloads the texture into local memory. This may be an expensive operation, as the actual texture data may reside on a GPU or on a remote display server.
-
-;;;The data format of the downloaded data is equivalent to CAIRO_FORMAT_ARGB32, so every downloaded pixel requires 4 bytes of memory.
-
-;;;Downloading a texture into a Cairo image surface:
-
-;;;surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-;;;                                      gdk_texture_get_width (texture),
-;;;                                      gdk_texture_get_height (texture));
-;;;gdk_texture_download (texture,
-;;;                      cairo_image_surface_get_data (surface),
-;;;                      cairo_image_surface_get_stride (surface));
-;;;cairo_surface_mark_dirty (surface);
-;;;Parameters
-;;;texture
-
-;;;a GdkTexture
-
+;;; Store the given texture to the filename as a PNG file.
 ;;;
-;;;data
-
-;;;pointer to enough memory to be filled with the downloaded data of texture .
-
-;;;[array]
-;;;stride
-
-;;;rowstride in bytes
-
+;;; This is a utility function intended for debugging and testing. If you want
+;;; more control over formats, proper error handling or want to store to a GFile
+;;; or other location, you might want to look into using the gdk-pixbuf library.
 ;;;
-;;;gdk_texture_save_to_png ()
-;;;gboolean
-;;;gdk_texture_save_to_png (GdkTexture *texture,
-;;;                         const char *filename);
-;;;Store the given texture to the filename as a PNG file.
-
-;;;This is a utility function intended for debugging and testing. If you want more control over formats, proper error handling or want to store to a GFile or other location, you might want to look into using the gdk-pixbuf library.
-
-;;;Parameters
-;;;texture
-
-;;;a GdkTexture
-
+;;; texture :
+;;;     a GdkTexture
 ;;;
-;;;filename
-
-;;;the filename to store to
-
+;;; filename :
+;;;     the filename to store to
 ;;;
-;;;Returns
-;;;TRUE if saving succeeded, FALSE on failure.
+;;; Returns :
+;;;     TRUE if saving succeeded, FALSE on failure.
+;;; ----------------------------------------------------------------------------
 
-;;;gdk_memory_texture_new ()
-;;;GdkTexture *
-;;;gdk_memory_texture_new (int width,
-;;;                        int height,
-;;;                        GdkMemoryFormat format,
-;;;                        GBytes *bytes,
-;;;                        gsize stride);
-;;;Creates a new texture for a blob of image data. The GBytes must contain stride x height pixels in the given format.
+(defcfun ("gdk_texture_save_to_png" texture-save-to-png) :boolean
 
-;;;Parameters
-;;;width
+  (texture (g:object texture))
+  (filename :string))
 
-;;;the width of the texture
+(export 'texture-save-to-png)
 
+;;; ----------------------------------------------------------------------------
+;;; gdk_texture_save_to_png_bytes                          Since 4.6
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-6
+(defcfun ("gdk_texture_save_to_png_bytes" texture-save-to-png-bytes)
+    (g:boxed g:bytes)
+  (texture (g:object texture)))
+
+#+gtk-4-6
+(export 'texture-save-to-png-bytes)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_texture_save_to_tiff                               Since 4.6
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-6
+(defcfun ("gdk_texture_save_to_tiff" texture-save-to-tiff) :boolean
+  (texture (g:object texture))
+  (filename :string))
+
+#+gtk-4-6
+(export 'texture-save-to-tiff)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_texture_save_to_tiff_bytes                         Since 4.6
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-6
+(defcfun ("gdk_texture_save_to_tiff_bytes" texture-save-to-tiff-bytes)
+    (g:boxed g:bytes)
+  (texture (g:object texture)))
+
+#+gtk-4-6
+(export 'texture-save-to-tiff-bytes)
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_texture_get_format                                 Since 4.10
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-10
+(defcfun ("gdk_texture_get_format" texture-format) memory-format
+  (texture (g:object texture)))
+
+#+gtk-4-10
+(export 'texture-format)
+
+;;; ----------------------------------------------------------------------------
+;;; GdkMemoryTexture
 ;;;
-;;;height
-
-;;;the height of the texture
-
+;;; typedef struct _GdkMemoryTexture GdkMemoryTexture;
 ;;;
-;;;format
+;;; A GdkTexture representing image data in memory.
+;;; ----------------------------------------------------------------------------
 
-;;;the format of the data
+(define-g-object-class "GdkMemoryTexture" memory-texture
+  (:superclass texture
+   :export t
+   :interfaces ("GdkPaintable"
+                "GIcon"
+                "GLoadableIcon")
+   :type-initializer "gdk_memory_texture_get_type")
+  nil)
 
+;;; ----------------------------------------------------------------------------
+;;; gdk_memory_texture_new ()
 ;;;
-;;;bytes
-
-;;;the GBytes containing the pixel data
-
+;;; GdkTexture *
+;;; gdk_memory_texture_new (int width,
+;;;                         int height,
+;;;                         GdkMemoryFormat format,
+;;;                         GBytes *bytes,
+;;;                         gsize stride);
 ;;;
-;;;stride
-
-;;;rowstride for the data
-
+;;; Creates a new texture for a blob of image data. The GBytes must contain
+;;; stride x height pixels in the given format.
 ;;;
-;;;Returns
-;;;A newly-created GdkTexture
-
-;;;gdk_gl_texture_new ()
-;;;GdkTexture *
-;;;gdk_gl_texture_new (GdkGLContext *context,
-;;;                    guint id,
-;;;                    int width,
-;;;                    int height,
-;;;                    GDestroyNotify destroy,
-;;;                    gpointer data);
-;;;Creates a new texture for an existing GL texture.
-
-;;;Note that the GL texture must not be modified until destroy is called, which will happen when the GdkTexture object is finalized, or due to an explicit call of gdk_gl_texture_release().
-
-;;;Parameters
-;;;context
-
-;;;a GdkGLContext
-
+;;; width :
+;;;     the width of the texture
 ;;;
-;;;id
-
-;;;the ID of a texture that was created with context
-
+;;; height :
+;;;     the height of the texture
 ;;;
-;;;width
-
-;;;the nominal width of the texture
-
+;;; format :
+;;;     the format of the data
 ;;;
-;;;height
-
-;;;the nominal height of the texture
-
+;;; bytes :
+;;;     the GBytes containing the pixel data
 ;;;
-;;;destroy
-
-;;;a destroy notify that will be called when the GL resources are released
-
+;;; stride :
+;;;     rowstride for the data
 ;;;
-;;;data
+;;; Returns :
+;;;     A newly-created GdkTexture
+;;; ----------------------------------------------------------------------------
 
-;;;data that gets passed to destroy
+(defcfun ("gdk_memory_texture_new" memory-texture-new) (g:object texture)
+  (width :int)
+  (height :int)
+  (format memory-format)
+  (bytes (g:boxed g:bytes))
+  (stride :size))
 
+(export 'memory-texture-new)
+
+;;; ----------------------------------------------------------------------------
+;;; GdkGLTexture
 ;;;
-;;;Returns
-;;;A newly-created GdkTexture.
-
-;;;[transfer full]
-
-;;;gdk_gl_texture_release ()
-;;;void
-;;;gdk_gl_texture_release (GdkGLTexture *self);
-;;;Releases the GL resources held by a GdkGLTexture that was created with gdk_gl_texture_new().
-
-;;;The texture contents are still available via the gdk_texture_download() function, after this function has been called.
-
-;;;Parameters
-;;;self
-
-;;;a GdkTexture wrapping a GL texture
-
+;;; typedef struct _GdkGLTexture GdkGLTexture;
 ;;;
-;;;Types and Values
-;;;GdkTexture
-;;;typedef struct _GdkTexture GdkTexture;
-;;;The GdkTexture structure contains only private data.
+;;; A GdkTexture representing a GL texture object.
+;;; ----------------------------------------------------------------------------
 
-;;;GdkMemoryTexture
-;;;typedef struct _GdkMemoryTexture GdkMemoryTexture;
-;;;A GdkTexture representing image data in memory.
+(define-g-object-class "GdkGLTexture" gl-texture
+  (:superclass texture
+   :export t
+   :interfaces ("GdkPaintable"
+                "GIcon"
+                "GLoadableIcon")
+   :type-initializer "gdk_gl_texture_get_type")
+  nil)
 
-;;;GdkGLTexture
-;;;typedef struct _GdkGLTexture GdkGLTexture;
-;;;A GdkTexture representing a GL texture object.
-
-;;;enum GdkMemoryFormat
-;;;GdkMemoryFormat describes a format that bytes can have in memory.
-
-;;;It describes formats by listing the contents of the memory passed to it. So GDK_MEMORY_A8R8G8B8 will be 1 byte (8 bits) of alpha, followed by a byte each of red, green and blue. It is not endian-dependent, so CAIRO_FORMAT_ARGB32 is represented by different GdkMemoryFormats on architectures with different endiannesses.
-
-;;;Its naming is modelled after VkFormat (see https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.htmlVkFormat for details).
-
-;;;Members
-;;;GDK_MEMORY_B8G8R8A8_PREMULTIPLIED
-
-;;;4 bytes; for blue, green, red, alpha. The color values are premultiplied with the alpha value.
-
+;;; ----------------------------------------------------------------------------
+;;; gdk_gl_texture_new ()
 ;;;
-;;;GDK_MEMORY_A8R8G8B8_PREMULTIPLIED
-
-;;;4 bytes; for alpha, red, green, blue. The color values are premultiplied with the alpha value.
-
+;;; GdkTexture *
+;;; gdk_gl_texture_new (GdkGLContext *context,
+;;;                     guint id,
+;;;                     int width,
+;;;                     int height,
+;;;                     GDestroyNotify destroy,
+;;;                     gpointer data);
 ;;;
-;;;GDK_MEMORY_R8G8B8A8_PREMULTIPLIED
-
-;;;4 bytes; for red, green, blue, alpha The color values are premultiplied with the alpha value.
-
+;;; Creates a new texture for an existing GL texture.
 ;;;
-;;;GDK_MEMORY_B8G8R8A8
-
-;;;4 bytes; for blue, green, red, alpha.
-
+;;; Note that the GL texture must not be modified until destroy is called, which
+;;; will happen when the GdkTexture object is finalized, or due to an explicit
+;;; call of gdk_gl_texture_release().
 ;;;
-;;;GDK_MEMORY_A8R8G8B8
-
-;;;4 bytes; for alpha, red, green, blue.
-
+;;; context :
+;;;     a GdkGLContext
 ;;;
-;;;GDK_MEMORY_R8G8B8A8
-
-;;;4 bytes; for red, green, blue, alpha.
-
+;;; id :
+;;;     the ID of a texture that was created with context
 ;;;
-;;;GDK_MEMORY_A8B8G8R8
-
-;;;4 bytes; for alpha, blue, green, red.
-
+;;; width :
+;;;     the nominal width of the texture
 ;;;
-;;;GDK_MEMORY_R8G8B8
-
-;;;3 bytes; for red, green, blue. The data is opaque.
-
+;;; height :
+;;;     the nominal height of the texture
 ;;;
-;;;GDK_MEMORY_B8G8R8
-
-;;;3 bytes; for blue, green, red. The data is opaque.
-
+;;; destroy :
+;;;     a destroy notify that will be called when the GL resources are released
 ;;;
-;;;GDK_MEMORY_N_FORMATS
-
-;;;The number of formats. This value will change as more formats get added, so do not rely on its concrete integer.
-
+;;; data :
+;;;     data that gets passed to destroy
 ;;;
-;;;GDK_MEMORY_DEFAULT
-;;;#define GDK_MEMORY_DEFAULT GDK_MEMORY_B8G8R8A8_PREMULTIPLIED
-;;;This is the default memory format used by GTK and is the format provided by gdk_texture_download(). It is equal to CAIRO_FORMAT_ARGB32.
+;;; Returns :
+;;;     A newly-created GdkTexture.
+;;; ----------------------------------------------------------------------------
 
-;;;Be aware that unlike the GdkMemoryFormat values, this format is different for different endianness.
+;; TODO: The arguments destroy and data are not implemented.
 
-;;;Property Details
-;;;The “height” property
-;;;  “height”                   int
-;;;The height of the texture, in pixels.
+(defcfun ("gdk_gl_texture_new" %gl-texture-new) (g:object texture)
+  (context (g:object gl-context))
+  (id :uint)
+  (width :int)
+  (height :int)
+  (destroy :pointer)
+  (data :pointer))
 
-;;;Owner: GdkTexture
+(defun gl-texture-new (context id width height)
+  (%gl-texture-new context
+                   id
+                   width
+                   height
+                   (cffi:null-pointer)
+                   (cffi:null-pointer)))
 
-;;;Flags: Read / Write / Construct Only
+(export 'gl-texture-new)
 
-;;;Allowed values: >= 1
+;;; ----------------------------------------------------------------------------
+;;; gdk_gl_texture_release ()
+;;;
+;;; void
+;;; gdk_gl_texture_release (GdkGLTexture *self);
+;;;
+;;; Releases the GL resources held by a GdkGLTexture that was created with
+;;; gdk_gl_texture_new().
+;;;
+;;; The texture contents are still available via the gdk_texture_download()
+;;; function, after this function has been called.
+;;;
+;;; self :
+;;;     a GdkTexture wrapping a GL texture
+;;; ----------------------------------------------------------------------------
 
-;;;Default value: 1
+(defcfun ("gdk_gl_texture_release" gl-texture-release) :void
+  (texture (g:object texture)))
 
-;;;The “width” property
-;;;  “width”                    int
-;;;The width of the texture, in pixels.
-
-;;;Owner: GdkTexture
-
-;;;Flags: Read / Write / Construct Only
-
-;;;Allowed values: >= 1
-
-;;;Default value: 1
-
+(export 'gl-texture-release)
 
 ;;; --- End of file gdk4.texture.lisp ------------------------------------------

@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.content-provider.lisp
+;;; gdk4.content-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk/>.
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; Types and Values
@@ -100,8 +101,8 @@
   ((formats
     content-provider-formats
     "formats" "GdkContentFormats" t nil)
-   (storeable-formats
-    content-provider-storeable-formats
+   (storable-formats
+    content-provider-storable-formats
     "storeable-formats" "GdkContentFormats" t nil)))
 
 ;;; ----------------------------------------------------------------------------
@@ -124,11 +125,11 @@
 ;;;
 ;;;  “storable-formats”         GdkContentFormats *
 ;;;
-;;; The subset of formats that clipboard managers should store this provider's 
+;;; The subset of formats that clipboard managers should store this provider's
 ;;; data in.
 ;;;
-;;;Owner: GdkContentProvider
-;;;Flags: Read
+;;; Owner: GdkContentProvider
+;;; Flags: Read
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -155,7 +156,7 @@
 ;;;
 ;;; Create a content provider that provides the value of the given type .
 ;;;
-;;; The value is provided using G_VALUE_COLLECT(), so the same rules apply as 
+;;; The value is provided using G_VALUE_COLLECT(), so the same rules apply as
 ;;; when calling g_object_new() or g_object_set().
 ;;;
 ;;; type :
@@ -175,7 +176,7 @@
 ;;; gdk_content_provider_new_for_bytes (const char *mime_type,
 ;;;                                     GBytes *bytes);
 ;;;
-;;; Create a content provider that provides the given bytes as data for the 
+;;; Create a content provider that provides the given bytes as data for the
 ;;; given mime_type .
 ;;;
 ;;; mime_type :
@@ -197,17 +198,17 @@
 ;;;
 ;;; Creates a content provider that represents all the given providers .
 ;;;
-;;; Whenever data needs to be written, the union provider will try the given 
-;;; providers in the given order and the first one supporting a format will be 
+;;; Whenever data needs to be written, the union provider will try the given
+;;; providers in the given order and the first one supporting a format will be
 ;;; chosen to provide it.
 ;;;
-;;; This allows an easy way to support providing data in different formats. For 
-;;; example, an image may be provided by its file and by the image contents with 
+;;; This allows an easy way to support providing data in different formats. For
+;;; example, an image may be provided by its file and by the image contents with
 ;;; a call such as
 ;;;
-;;; gdk_content_provider_new_union ((GdkContentProvider *[2]) 
+;;; gdk_content_provider_new_union ((GdkContentProvider *[2])
 ;;;    {
-;;;     gdk_content_provider_new_typed 
+;;;     gdk_content_provider_new_typed
 ;;;                    (G_TYPE_FILE, file),
 ;;;                     gdk_content_provider_new_typed (G_TYPE_TEXTURE, texture)
 ;;;    }, 2);
@@ -244,7 +245,7 @@
 ;;; gdk_content_provider_ref_storable_formats
 ;;;                                (GdkContentProvider *provider);
 ;;;
-;;; Gets the formats that the provider suggests other applications to store the 
+;;; Gets the formats that the provider suggests other applications to store the
 ;;; data in. An example of such an application would be a clipboard manager.
 ;;;
 ;;; This can be assumed to be a subset of gdk_content_provider_ref_formats().
@@ -257,7 +258,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_provider_content_changed () 
+;;; gdk_content_provider_content_changed ()
 ;;;
 ;;; void
 ;;; gdk_content_provider_content_changed (GdkContentProvider *provider);
@@ -281,13 +282,13 @@
 ;;;                                 GAsyncReadyCallback callback,
 ;;;                                 gpointer user_data);
 ;;;
-;;; Asynchronously writes the contents of provider to stream in the given 
-;;; mime_type . When the operation is finished callback will be called. You can 
-;;; then call gdk_content_provider_write_mime_type_finish() to get the result of 
+;;; Asynchronously writes the contents of provider to stream in the given
+;;; mime_type . When the operation is finished callback will be called. You can
+;;; then call gdk_content_provider_write_mime_type_finish() to get the result of
 ;;; the operation.
 ;;;
-;;; The given mime type does not need to be listed in the formats returned by 
-;;; gdk_content_provider_ref_formats(). However, if the given GType is not 
+;;; The given mime type does not need to be listed in the formats returned by
+;;; gdk_content_provider_ref_formats(). However, if the given GType is not
 ;;; supported, G_IO_ERROR_NOT_SUPPORTED will be reported.
 ;;;
 ;;; The given stream will not be closed.
@@ -323,7 +324,7 @@
 ;;;                                 GAsyncResult *result,
 ;;;                                 GError **error);
 ;;;
-;;; Finishes an asynchronous write operation started with 
+;;; Finishes an asynchronous write operation started with
 ;;; gdk_content_provider_write_mime_type_async().
 ;;;
 ;;; provider :
@@ -336,7 +337,7 @@
 ;;;     a GError location to store the error occurring, or NULL to ignore.
 ;;;
 ;;; Returns :
-;;;     TRUE if the operation was completed successfully. Otherwise error will 
+;;;     TRUE if the operation was completed successfully. Otherwise error will
 ;;;     be set to describe the failure.
 ;;; ----------------------------------------------------------------------------
 
@@ -348,12 +349,12 @@
 ;;;                                 GValue *value,
 ;;;                                 GError **error);
 ;;;
-;;; Gets the contents of provider stored in value . 
+;;; Gets the contents of provider stored in value .
 ;;;
-;;; The value will have been initialized to the GType the value should be 
-;;; provided in. This given GType does not need to be listed in the formats 
-;;; returned by gdk_content_provider_ref_formats(). However, if the given GType 
-;;; is not supported, this operation can fail and G_IO_ERROR_NOT_SUPPORTED will 
+;;; The value will have been initialized to the GType the value should be
+;;; provided in. This given GType does not need to be listed in the formats
+;;; returned by gdk_content_provider_ref_formats(). However, if the given GType
+;;; is not supported, this operation can fail and G_IO_ERROR_NOT_SUPPORTED will
 ;;; be reported.
 ;;;
 ;;; provider :
@@ -366,8 +367,8 @@
 ;;;     a GError location to store the error occurring, or NULL to ignore.
 ;;;
 ;;; Returns :
-;;;     TRUE if the value was set successfully. Otherwise error will be set to 
+;;;     TRUE if the value was set successfully. Otherwise error will be set to
 ;;;     describe the failure.
 ;;; ----------------------------------------------------------------------------
 
-;;; --- gdk.content-provider.lisp ----------------------------------------------
+;;; --- gdk4.content-provider.lisp ---------------------------------------------

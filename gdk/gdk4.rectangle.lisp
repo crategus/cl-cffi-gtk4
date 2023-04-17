@@ -2,28 +2,29 @@
 ;;; gdk4.rectangle.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.9 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; Rectangles
@@ -60,27 +61,27 @@
 (setf (liber:alias-for-class 'rectangle)
       "GBoxed"
       (documentation 'rectangle 'type)
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @begin{short}
-    A @sym{gdk:rectangle} data type for representing rectangles.
+    The @sym{gdk:rectangle} structure is a data type for representing
+    rectangles.
   @end{short}
-
   The @sym{gdk:rectangle} structure is identical to the
-  @symbol{cairo-rectangle-t} structure. Together with the
-  @symbol{cairo-region-t} data type of Cairo, these are the central types for
+  @symbol{cairo:rectangle-t} structure. Together with the
+  @symbol{cairo:region-t} data type of Cairo, these are the central types for
   representing sets of pixels.
 
   The intersection of two rectangles can be computed with the
-  @fun{gdk:rectangle-intersect}. To find the union of two rectangles use the
-  @fun{gdk:rectangle-union} function.
+  @fun{gdk:rectangle-intersect} function. To find the union of two rectangles
+  use the @fun{gdk:rectangle-union} function.
 
-  The @symbol{cairo-region-t} type provided by Cairo is usually used for
+  The @symbol{cairo:region-t} type provided by Cairo is usually used for
   managing non-rectangular clipping of graphical operations.
 
   The Graphene library has a number of other data types for regions and volumes
   in 2D and 3D.
   @begin{pre}
-(define-g-boxed-cstruct gdk:rectangle \"GdkRectangle\"
+(define-g-boxed-cstruct rectangle \"GdkRectangle\"
   (:export t
    :type-initializer \"gdk_rectangle_get_type\")
   (x :int :initform 0)
@@ -88,6 +89,8 @@
   (width :int :initform 0)
   (height :int :initform 0))
   @end{pre}
+  @see-constructor{gdk:rectangle-new}
+  @see-constructor{gdk:rectangle-copy}
   @see-slot{gdk:rectangle-x}
   @see-slot{gdk:rectangle-y}
   @see-slot{gdk:rectangle-width}
@@ -95,13 +98,13 @@
   @see-symbol{cairo-region-t}
   @see-symbol{cairo-rectangle-t}")
 
-;;; --- rectangle-x --------------------------------------------------------
+;;; --- rectangle-x ------------------------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'rectangle-x)
       "Accessor"
       (documentation 'rectangle-x 'function)
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @syntax[]{(gdk:rectangle-x instance) => x}
   @syntax[]{(setf (gdk:rectangle-x instance) x)}
   @argument[instance]{a @class{gdk:rectangle} instance}
@@ -111,13 +114,13 @@
   @end{short}
   @see-class{gdk:rectangle}")
 
-;;; --- rectangle-y --------------------------------------------------------
+;;; --- rectangle-y ------------------------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'rectangle-y)
       "Accessor"
       (documentation 'rectangle-y 'function)
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @syntax[]{(gdk:rectangle-y instance) => y}
   @syntax[]{(setf (gdk:rectangle-y instance) y)}
   @argument[instance]{a @class{gdk:rectangle} instance}
@@ -133,7 +136,7 @@
 (setf (liber:alias-for-function 'rectangle-width)
       "Accessor"
       (documentation 'rectangle-width 'function)
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @syntax[]{(gdk:rectangle-width instance) => width}
   @syntax[]{(setf (gdk:rectangle-width instance) width)}
   @argument[instance]{a @class{gdk:rectangle} instance}
@@ -143,13 +146,13 @@
   @end{short}
   @see-class{gdk:rectangle}")
 
-;;; --- rectangle-height ---------------------------------------------------
+;;; --- rectangle-height -------------------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'rectangle-height)
       "Accessor"
       (documentation 'rectangle-height 'function)
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @syntax[]{(gdk:rectangle-height instance) => height}
   @syntax[]{(setf (gdk:rectangle-height instance) height)}
   @argument[instance]{a @class{gdk:rectangle} instance}
@@ -159,13 +162,13 @@
   @end{short}
   @see-class{gdk:rectangle}")
 
-;;; --- rectangle-new ------------------------------------------------------
+;;; --- rectangle-new ----------------------------------------------------------
 
 (declaim (inline rectangle-new))
 
 (defun rectangle-new (&key (x 0) (y 0) (width 0) (height 0))
  #+liber-documentation
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @argument[x]{an integer with the value for the @code{x} slot}
   @argument[y]{an integer with the value for the @code{y} slot}
   @argument[width]{an integer with the value for the @code{width} slot}
@@ -180,13 +183,13 @@
 
 (export 'rectangle-new)
 
-;;; --- rectangle-copy -----------------------------------------------------
+;;; --- rectangle-copy ---------------------------------------------------------
 
 (declaim (inline rectangle-copy))
 
 (defun rectangle-copy (instance)
  #+liber-documentation
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @argument[instance]{a @class{gdk:rectangle} instance}
   @begin{short}
     Copy constructor of a @class{gdk:rectangle} structure.
@@ -203,7 +206,7 @@
 
 (defcfun ("gdk_rectangle_contains_point" rectangle-contains-point) :boolean
  #+liber-documentation
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @argument[rect]{a @class{gdk:rectangle} instance}
   @argument[x]{an integer with the x coordinate}
   @argument[y]{an integer with the y coordinate}
@@ -225,7 +228,7 @@
 
 (defcfun ("gdk_rectangle_equal" rectangle-equal) :boolean
  #+liber-documentation
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @argument[rect1]{a @class{gdk:rectangle} instance}
   @argument[rect2]{a @class{gdk:rectangle} instance}
   @return{@em{True} if the rectangles are equal.}
@@ -249,7 +252,7 @@
 
 (defun rectangle-intersect (rect1 rect2)
  #+liber-documentation
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @argument[rect1]{a @class{gdk:rectangle} instance}
   @argument[rect2]{a @class{gdk:rectangle} instance}
   @return{A @class{gdk:rectangle} instance with the intersection of @arg{rect1}
@@ -277,7 +280,7 @@
 
 (defun rectangle-union (rect1 rect2)
  #+liber-documentation
- "@version{#2022-1-21}
+ "@version{2023-4-14}
   @argument[rect1]{a @class{gdk:rectangle} instance}
   @argument[rect2]{a @class{gdk:rectangle} instance}
   @return{A @class{gdk:rectangle} instance with the union of @arg{rect1} and
