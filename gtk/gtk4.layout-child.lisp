@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.layout-child.lisp
+;;; gtk4.layout-child.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License. If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkLayoutChild
@@ -58,15 +59,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkLayoutChild
-;;;
-;;; GtkLayoutChild is the base class for objects that are meant to hold layout
-;;; properties. If a GtkLayoutManager has per-child properties, like their
-;;; packing type, or the horizontal and vertical span, or the icon name, then
-;;; the layout manager should use a GtkLayoutChild implementation to store
-;;; those properties.
-;;;
-;;; A GtkLayoutChild instance is only ever valid while a widget is part of a
-;;; layout.
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GtkLayoutChild" layout-child
@@ -81,64 +73,72 @@
     layout-child-layout-manager
     "layout-manager" "GtkLayoutManager" t nil)))
 
+#+liber-documentation
+(setf (documentation 'layout-child 'type)
+ "@version{2023-4-15}
+  @begin{short}
+    The @sym{gtk:layout-child} class is the base class for objects that are
+    meant to hold layout properties.
+  @end{short}
+  If a @class{gtk:layout-manager} object has per-child properties, like their
+  packing type, or the horizontal and vertical span, or the icon name, then
+  the layout manager should use a @sym{gtk:layout-child} implementation to
+  store those properties.
+
+  A @sym{gtk:layout-child} instance is only ever valid while a widget is part
+  of a layout.
+  @see-class{gtk:layout-child}
+  @see-class{gtk:layout-manager}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;;The “child-widget” property
-;;;
-;;;  “child-widget”             GtkWidget *
-;;;
-;;; The widget that is associated to the GtkLayoutChild instance.
-;;;
-;;; Owner: GtkLayoutChild
-;;;
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+;;; --- layout-child-child-widget ----------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “layout-manager” property
-;;;
-;;;  “layout-manager”           GtkLayoutManager *
-;;;
-;;; The layout manager that created the GtkLayoutChild instance.
-;;;
-;;; Owner: GtkLayoutChild
-;;;
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "child-widget" 'layout-child) t)
+ "The @code{child-widget} property of type @class{gtk:widget}
+ (Read / Write / Construct only) @br{}
+ The widget that is associated to the @sym{gtk:layout-child} object.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'layout-child-child-widget)
+      "Accessor"
+      (documentation 'layout-child-child-widget 'function)
+ "@version{#2023-4-17}
+  @syntax[]{(gtk:layout-child-child-widget object) => child}
+  @argument[object]{a @class{gtk:layout-child} object}
+  @argument[child]{a @class{gtk:widget} widget}
+  @begin{short}
+    Retrieves the @class{gtk:widget} widget associated to the given
+    @arg{child}.
+  @end{short}
+  @see-class{gtk:layout-child}
+  @see-class{gtk:widget}")
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_layout_child_get_layout_manager ()
-;;;
-;;; GtkLayoutManager *
-;;; gtk_layout_child_get_layout_manager (GtkLayoutChild *layout_child);
-;;;
-;;; Retrieves the GtkLayoutManager instance that created the given
-;;; layout_child .
-;;;
-;;; layout_child :
-;;;     a GtkLayoutChild
-;;;
-;;; Returns :
-;;;     a GtkLayoutManager.
-;;; ----------------------------------------------------------------------------
+;;; --- layout-child-layout-manager --------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_layout_child_get_child_widget ()
-;;;
-;;; GtkWidget *
-;;; gtk_layout_child_get_child_widget (GtkLayoutChild *layout_child);
-;;;
-;;; Retrieves the GtkWidget associated to the given layout_child .
-;;;
-;;; layout_child :
-;;;     a GtkLayoutChild
-;;;
-;;; Returns :
-;;;     a GtkWidget.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "layout-manager"
+                                               'layout-child) t)
+ "The @code{layout-manager} property of type @class{gtk:layout-manager}
+ (Read / Write / Construct only) @br{}
+ The layout manager that created the @sym{gtk:layout-child} object.")
 
-;;; --- End of file gtk.layout-child.lisp --------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'layout-child-layout-manager)
+      "Accessor"
+      (documentation 'layout-child-layout-manager 'function)
+ "@version{#2023-4-17}
+  @syntax[]{(gtk:layout-child-layout-manager object) => manager}
+  @argument[object]{a @class{gtk:layout-child} object}
+  @argument[manager]{a @class{gtk:layout-manager} object}
+  @begin{short}
+    Retrieves the @class{gtk:layout-manager} object that created the given
+    @arg{child}.
+  @end{short}
+  @see-class{gtk:layout-child}
+  @see-class{gtk:layout-manager}")
+
+;;; --- End of file gtk4.layout-child.lisp -------------------------------------

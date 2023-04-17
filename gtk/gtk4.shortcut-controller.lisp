@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.shortcut-controller.lisp
+;;; gtk4.shortcut-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkShortcutController
@@ -53,8 +54,10 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     item-type                                          Since 4.8
 ;;;     mnemonic-modifiers
 ;;;     model
+;;;     n-items                                            Since 4.8
 ;;;     scope
 ;;;
 ;;; Object Hierarchy
@@ -139,7 +142,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut-controller 'type)
- "@version{#2022-8-24}
+ "@version{2023-4-15}
   @begin{short}
     The @sym{gtk:shortcut-controller} class is an event controller that manages
     shortcuts.
@@ -154,7 +157,7 @@
   But it is possible to create your own shortcut controller, and add shortcuts
   to it.
 
-  The @sym{gtk:shortcut-controller} class implements the @class{g-list-model}
+  The @sym{gtk:shortcut-controller} class implements the @class{g:list-model}
   interface for querying the shortcuts that have been added to it.
 
   @subheading{GtkShortcutController as a GtkBuildable}
@@ -184,11 +187,13 @@
   of @class{gtk:shortcut-action} objects. See the
   @fun{gtk:shortcut-trigger-parse-string} function to learn more about the
   syntax for triggers.
-  @see-slot{gtk:shortcut-controller-mnemonic-modifers}
-  @see-slot{gtk:shortcut-controller-model}
-  @see-slot{gtk:shortcut-controller-scope}
   @see-constructor{gtk:shortcut-controller-new}
   @see-constructor{gtk:shortcut-controller-new-for-model}
+  @see-slot{gtk:shortcut-controller-item-type}
+  @see-slot{gtk:shortcut-controller-mnemonic-modifers}
+  @see-slot{gtk:shortcut-controller-model}
+  @see-slot{gtk:shortcut-controller-n-items}
+  @see-slot{gtk:shortcut-controller-scope}
   @see-class{gtk:event-controller}
   @see-class{gtk:shortcut}")
 
@@ -196,7 +201,32 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- shortcut-controller-mnemonic-modifiers -----------------------------
+;;; --- shortcut-controller-item-type ------------------------------------------
+
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "item-type"
+                                               'shortcut-controller) t)
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
+  The type of items. Since 4.8")
+
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'shortcut-controller-item-type)
+      "Accessor"
+      (documentation 'shortcut-controller-item-type 'function)
+ "@version{#2023-4-15}
+  @syntax[]{(gtk:shortcut-controller-item-type object) => gtype)}
+  @argument[object]{a @class{gtk:shortcut-controller} object}
+  @argument[gtype]{a @class{g:type-t} item type}
+  @begin{short}
+    Accessor of the @slot[gtk:shortcut-controller]{item-type} slot of the
+    @class{gtk:shortcut-controller} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:shortcut-controller}
+  @see-class{g:list-model}")
+
+;;; --- shortcut-controller-mnemonic-modifiers ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonic-modifiers"
@@ -238,12 +268,11 @@
   @see-class{gtk:shortcut-controller}
   @see-symbol{gdk:modifier-type}")
 
-;;; --- shortcut-controller-model ------------------------------------------
+;;; --- shortcut-controller-model ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "model"
-                                               'shortcut-controller) t)
- "The @code{model} property of type @class{g-list-model}
+(setf (documentation (liber:slot-documentation "model" 'shortcut-controller) t)
+ "The @code{model} property of type @class{g:list-model}
   (Write / Construct Only) @br{}
   A list model to take shortcuts from.")
 
@@ -255,20 +284,45 @@
   @syntax[]{(gtk:shortcut-controller-model object) => model)}
   @syntax[]{(setf (gtk:shortcut-controller-model object) model)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
-  @argument[model]{a @class{g-list-model} object}
+  @argument[model]{a @class{g:list-model} object}
   @begin{short}
     Accessor of the @slot[gtk:shortcut-controller]{model} slot of the
     @class{gtk:shortcut-controller} class.
   @end{short}
   A list model to take shortcuts from.
   @see-class{gtk:shortcut-controller}
-  @see-class{g-list-model}")
+  @see-class{g:list-model}")
 
-;;; --- shortcut-controller-scope ------------------------------------------
+;;; --- shortcut-controller-n-items --------------------------------------------
+
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "n-items"
+                                               'shortcut-controller) t)
+ "The @code{n-items} property of type @symbol{:uint} (Read) @br{}
+  The number of items. Since 4.8 @br{}
+  Default value: 0")
+
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'shortcut-controller-n-items)
+      "Accessor"
+      (documentation 'shortcut-controller-n-items 'function)
+ "@version{#2023-4-15}
+  @syntax[]{(gtk:shortcut-controller-n-items object) => n-items)}
+  @argument[object]{a @class{gtk:shortcut-controller} object}
+  @argument[n-items]{an unsigned integer with the number of items}
+  @begin{short}
+    Accessor of the @slot[gtk:shortcut-controller]{n-items} slot of the
+    @class{gtk:shortcut-controller} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:shortcut-controller}
+  @see-class{g:list-model}")
+
+;;; --- shortcut-controller-scope ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "scope"
-                                               'shortcut-controller) t)
+(setf (documentation (liber:slot-documentation "scope" 'shortcut-controller) t)
  "The @code{scope} property of type @symbol{gtk:shortcut-scope} (Read / Write)
   @br{}
   What scope the shortcuts will be handled in. @br{}
@@ -313,6 +367,13 @@
 ;;;     a newly created shortcut controller
 ;;; ----------------------------------------------------------------------------
 
+(declaim (inline shortcut-controller-new))
+
+(defun shortcut-controller-new ()
+  (make-instance 'shortcut-controller))
+
+(export 'shortcut-controller-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_controller_new_for_model ()
 ;;;
@@ -333,6 +394,14 @@
 ;;;     a newly created shortcut controller
 ;;; ----------------------------------------------------------------------------
 
+(declaim (inline shortcut-controller-new-for-model))
+
+(defun shortcut-controller-new-for-model (model)
+  (make-instance 'shortcut-controller
+                 :model model))
+
+(export 'shortcut-controller-new-for-model)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_controller_add_shortcut ()
 ;;;
@@ -351,6 +420,13 @@
 ;;; shortcut :
 ;;;     a GtkShortcut.
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_shortcut_controller_add_shortcut"
+           shortcut-controller-add-shortcut) :void
+  (controller (g:object shortcut-controller))
+  (shortcut (g:object shortcut)))
+
+(export 'shortcut-controller-add-shortcut)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_controller_remove_shortcut ()
@@ -372,4 +448,11 @@
 ;;;     a GtkShortcut
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gtk.shortcut-controller.lisp -------------------------------
+(defcfun ("gtk_shortcut_controller_remove_shortcut"
+           shortcut-controller-remove-shortcut) :void
+  (controller (g:object shortcut-controller))
+  (shortcut (g:object shortcut)))
+
+(export 'shortcut-controller-remove-shortcut)
+
+;;; --- End of file gtk4.shortcut-controller.lisp ------------------------------

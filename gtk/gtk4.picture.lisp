@@ -2,7 +2,7 @@
 ;;; gtk4.picture.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -42,14 +42,14 @@
 ;;;     gtk_picture_get_alternative_text
 ;;;     gtk_picture_set_can_shrink
 ;;;     gtk_picture_get_can_shrink
+;;;     gtk_picture_set_content_fit                        Since 4.8
+;;;     gtk_picture_get_content_fit                        Since 4.8
 ;;;     gtk_picture_set_file
 ;;;     gtk_picture_get_file
 ;;;     gtk_picture_set_keep_aspect_ratio
 ;;;     gtk_picture_get_keep_aspect_ratio
 ;;;     gtk_picture_set_paintable
 ;;;     gtk_picture_get_paintable
-;;;     gtk_picture_set_content_fit                        Since 4.8
-;;;     gtk_picture_get_content_fit                        Since 4.8
 ;;;
 ;;; Functions
 ;;;
@@ -90,30 +90,51 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GtkContentFit
-;;;
-;;; Controls how a content should be made to fit inside an allocation.
-;;;
-;;; Available since: 4.8
-;;;
-;;; GTK_CONTENT_FIT_FILL :
-;;;     Make the content fill the entire allocation, without taking its aspect
-;;;     ratio in consideration. The resulting content will appear as stretched
-;;;     if its aspect ratio is different from the allocation aspect ratio.
-;;;
-;;; GTK_CONTENT_FIT_CONTAIN :
-;;;     Scale the content to fit the allocation, while taking its aspect ratio
-;;;     in consideration. The resulting content will appear as letterboxed if
-;;;     its aspect ratio is different from the allocation aspect ratio.
-;;;
-;;; GTK_CONTENT_FIT_COVER :
-;;;     Cover the entire allocation, while taking the content aspect ratio in
-;;;     consideration. The resulting content will appear as clipped if its
-;;;     aspect ratio is different from the allocation aspect ratio.
-;;;
-;;; GTK_CONTENT_FIT_SCALE_DOWN :
-;;;     The content is scaled down to fit the allocation, if needed, otherwise
-;;;     its original size is used.
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-8
+(define-g-enum "GtkContentFit" content-fit
+  (:export t
+   :type-initializer "gtk_content_fit_get_type")
+  (:fill 0)
+  (:contain 1)
+  (:cover 2)
+  (:scale-down 3))
+
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-symbol 'content-fit)
+      "GEnum"
+      (liber:symbol-documentation 'content-fit)
+ "@version{2023-4-15}
+  @begin{short}
+    Controls how a content should be made to fit inside an allocation.
+  @end{short}
+  Since 4.8
+  @begin{pre}
+(define-g-enum \"GtkContentFit\" content-fit
+  (:export t
+   :type-initializer \"gtk_content_fit_get_type\")
+  (:fill 0)
+  (:contain 1)
+  (:cover 2)
+  (:scale-down 3))
+  @end{pre}
+  @begin[code]{table}
+    @entry[:fill]{Make the content fill the entire allocation, without taking
+      its aspect ratio in consideration. The resulting content will appear as
+      stretched if its aspect ratio is different from the allocation aspect
+      ratio.}
+    @entry[:contain]{Scale the content to fit the allocation, while taking its
+      aspect ratio in consideration. The resulting content will appear as
+      letterboxed if its aspect ratio is different from the allocation aspect
+      ratio.}
+    @entry[:cover]{Cover the entire allocation, while taking the content aspect
+      ratio in consideration. The resulting content will appear as clipped if
+      its aspect ratio is different from the allocation aspect ratio.}
+    @entry[:scale-down]{The content is scaled down to fit the allocation, if
+      needed, otherwise its original size is used.}
+  @end{table}
+  @see-class{gtk:picture}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkPicture
@@ -148,7 +169,7 @@
 
 #+liber-documentation
 (setf (documentation 'picture 'type)
- "@version{#2022-7-29}
+ "@version{2023-4-15}
   @begin{short}
     The @sym{gtk:picture} widget displays a @class{gdk:paintable} object.
   @end{short}
@@ -201,6 +222,7 @@
   @see-constructor{gtk:picture-new-for-resource}
   @see-slot{gtk:picture-alternative-tex}
   @see-slot{gtk:picture-can-shrink}
+  @see-slot{gtk:picture-content-fit}
   @see-slot{gtk:picture-file}
   @see-slot{gtk:picture-keep-aspect-ratio}
   @see-slot{gtk:picture-paintable}
@@ -210,14 +232,13 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- picture-alternative-text -------------------------------------------
+;;; --- picture-alternative-text -----------------------------------------------
 
 ;; TODO: To unset the text we have to use the NULL-POINTER value. Can we
 ;; implement a function with uses this with the NIL value?
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "alternative-text"
-                                               'picture) t)
+(setf (documentation (liber:slot-documentation "alternative-text" 'picture) t)
  "The @code{alternative-text} property of type @code{:string} (Read / Write)
   @br{}
   The alternative textual description for the picture. @br{}
@@ -246,7 +267,7 @@
   property to @code{null-pointer}.
   @see-class{gtk:picture}")
 
-;;; --- picture-can-shrink -------------------------------------------------
+;;; --- picture-can-shrink -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "can-shrink" 'picture) t)
@@ -280,7 +301,37 @@
   @see-function{gtk:widget-halign}
   @see-function{gtk:widget-valign}")
 
-;;; --- picture-file -------------------------------------------------------
+;;; --- picture-content-fit ----------------------------------------------------
+
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "content-fit" 'picture) t)
+ "The @code{content-fit} property of type @symbol{gtk:content-fit}
+  (Read / Write) @br{}
+  How the content should be resized to fit inside the picture. Since 4.8 @br{}
+  Default value: @code{:contain}")
+
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'picture-content-fit)
+      "Accessor"
+      (documentation 'picture-content-fit 'function)
+ "@version{#2023-4-15}
+  @syntax[]{(picture-content-fit object) => setting}
+  @syntax[]{(setf (picture-content-fit object) setting)}
+  @argument[object]{a @class{gtk:picture} widget}
+  @argument[setting]{a @symbol{gtk:content-fit} value}
+  @begin{short}
+    Accessor of the @slot[gtk:picture]{content-fit} slot of the
+    @class{gtk:picture} class.
+  @end{short}
+  The @sym{gtk:picture-content-fit} function returns the fit mode for the
+  content of the picture. The @sym{(setf gtk:picture-content-fit)} function
+  sets how the content should be resized to fit the picture.
+
+  Since 4.8
+  @see-class{gtk:picture}
+  @see-symbol{gtk:content-fit}")
+
+;;; --- picture-file -----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "file" 'picture) t)
@@ -311,11 +362,10 @@
   @see-function{gtk:picture-paintable}
   @see-function{gtk:picture-new-for-file}")
 
-;;; --- picture-keep-aspect-ratio ------------------------------------------
+;;; --- picture-keep-aspect-ratio ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "keep-aspect-ratio"
-                                               'picture) t)
+(setf (documentation (liber:slot-documentation "keep-aspect-ratio" 'picture) t)
  "The @code{keep-aspect-ratio} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether the picture will render its contents trying to preserve the aspect
@@ -343,7 +393,7 @@
   whole area of the picture.
   @see-class{gtk:picture}")
 
-;;; --- picture-paintable --------------------------------------------------
+;;; --- picture-paintable ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "paintable" 'picture) t)
@@ -377,6 +427,8 @@
 ;;; gtk_picture_new ()
 ;;; ----------------------------------------------------------------------------
 
+(declaim (inline picture-new))
+
 (defun picture-new ()
  #+liber-documentation
  "@version{#2022-7-29}
@@ -390,6 +442,8 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_picture_new_for_paintable ()
 ;;; ----------------------------------------------------------------------------
+
+(declaim (inline picture-new-for-paintable))
 
 (defun picture-new-for-paintable (paintable)
  #+liber-documentation
@@ -412,8 +466,7 @@
 ;;; gtk_picture_new_for_pixbuf ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_picture_new_for_pixbuf" picture-new-for-pixbuf)
-    (g:object widget)
+(defcfun ("gtk_picture_new_for_pixbuf" picture-new-for-pixbuf) (g:object widget)
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
@@ -435,6 +488,8 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_picture_new_for_file ()
 ;;; ----------------------------------------------------------------------------
+
+(declaim (inline picture-new-for-file))
 
 (defun picture-new-for-file (file)
  #+liber-documentation
@@ -546,7 +601,6 @@
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_picture_set_resource" picture-set-resource) :void
-
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[picture]{a @class{gtk:picture} widget}

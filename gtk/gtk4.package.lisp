@@ -730,10 +730,10 @@
     @end{subsection}
     @begin[GtkFixedLayout]{subsection}
       A layout manager that allows positioning at fixed coordinates.
-      @about-class{fixed-layout}
       @about-class{fixed-layout-child}
+      @about-generic{fixed-layout-child-transform}
+      @about-class{fixed-layout}
       @about-function{fixed-layout-new}
-      @about-function{fixed-layout-child-transform}
     @end{subsection}
     @begin[GtkGridLayout]{subsection}
       Layout manager for grid-like widgets.
@@ -834,6 +834,7 @@
       @about-generic{label-natural-wrap-mode}
       @about-generic{label-selectable}
       @about-generic{label-single-line-mode}
+      @about-generic{label-tabs}
       @about-generic{label-use-markup}
       @about-generic{label-use-underline}
       @about-generic{label-width-chars}
@@ -882,9 +883,11 @@
       @about-function{image-set-from-gicon}
     @end{subsection}
     @begin[GtkPicture]{subsection}
+      @about-symbol{content-fit}
       @about-class{picture}
       @about-generic{picture-alternative-text}
       @about-generic{picture-can-shrink}
+      @about-generic{picture-content-fit}
       @about-generic{picture-file}
       @about-generic{picture-keep-aspect-ratio}
       @about-generic{picture-paintable}

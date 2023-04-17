@@ -2,7 +2,7 @@
 ;;; gtk4.css-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.9 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -393,7 +393,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-named (provider name &optional variant)
  #+liber-documentation
- "@version{#2022-8-20}
+ "@version{2023-4-15}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[name]{a string with the theme name}
   @argument[variant]{an optional string with a variant to load, e.g. \"dark\"}
@@ -516,7 +516,7 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-new ()
  #+liber-documentation
- "@version{#2022-8-20}
+ "@version{2023-4-15}
   @return{A new @class{gtk:css-provider} object.}
   @short{Returns a newly created CSS provider object.}
   @see-class{gtk:css-provider}"
@@ -530,7 +530,7 @@ lambda (provider section error)    :run-last
 
 (defcfun ("gtk_css_provider_to_string" css-provider-to-string) :string
  #+liber-documentation
- "@version{#2022-8-20}
+ "@version{2023-4-15}
   @argument[provider]{a @class{gtk:css-provider} object to write to a string}
   @return{A string representing the CSS provider.}
   @begin{short}

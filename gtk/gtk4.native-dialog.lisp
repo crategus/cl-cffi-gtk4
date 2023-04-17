@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.native-dialog.lisp
+;;; gtk4.native-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkNativeDialog
@@ -94,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'native-dialog 'type)
- "@version{#2022-9-11}
+ "@version{#2023-4-16}
   @begin{short}
     Native dialogs are platform dialogs that do not use the @class{gtk:dialog}
     or @class{gtk:window} classes.
@@ -133,7 +134,7 @@ lambda (dialog response)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- native-dialog-modal ------------------------------------------------
+;;; --- native-dialog-modal ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'native-dialog) t)
@@ -141,8 +142,32 @@ lambda (dialog response)    :run-last
   Whether the window should be modal with respect to its transient parent. @br{}
   Default value: @em{false}")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'native-dialog-modal)
+      "Accessor"
+      (documentation 'native-dialog-modal 'function)
+ "@version{#2023-4-16}
+  @syntax[]{(gtk:native-dialog-modal object) => modal}
+  @syntax[]{(setf (gtk:native-dialog-modal object) modal)}
+  @argument[object]{a @class{gtk:native-dialog} widget}
+  @argument[modal]{@em{true} if the dialog is modal}
+  @begin{short}
+    Accessor of the @slot[gtk:native-dialog]{modal} slot of the
+    @class{gtk:native-dialog} class.
+  @end{short}
+  The @sym{gtk:native-dialog-modal} function returns whether the dialog is
+  modal. The @sym{(setf gtk:native-dialog-modal)} function sets a dialog modal
+  or non-modal.
 
-;;; --- native-dialog-title ------------------------------------------------
+  Modal dialogs prevent interaction with other windows in the same application.
+  To keep modal dialogs on top of main application windows, use the
+  @fun{gtk:native-dialog-transient-for} function to make the dialog transient
+  for the parent. Most window managers will then disallow lowering the dialog
+  below the parent.
+  @see-class{gtk:native-dialog}
+  @see-function{gtk:native-dialog-transient-for}")
+
+;;; --- native-dialog-title ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'native-dialog) t)
@@ -150,205 +175,145 @@ lambda (dialog response)    :run-last
   The title of the dialog window. @br{}
   Default value: @code{nil}")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'native-dialog-title)
+      "Accessor"
+      (documentation 'native-dialog-title 'function)
+ "@version{#2023-4-16}
+  @syntax[]{(gtk:native-dialog-title object) => title}
+  @syntax[]{(setf (gtk:native-dialog-title object) title)}
+  @argument[object]{a @class{gtk:native-dialog} widget}
+  @argument[title]{a string with the title of the dialog, or @code{nil} if
+    none has been set explicitly}
+  @begin{short}
+    Accessor of the @slot[gtk:native-dialog]{title} slot of the
+    @class{gtk:native-dialog} class.
+  @end{short}
+  The @sym{gtk:native-dialog-title} function gets the title of the dialog. The
+  @sym{(setf gtk:native-dialog-title)} function sets the title.
+  @see-class{gtk:native-dialog}")
 
+;;; --- native-dialog-transient-for --------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “transient-for” property
-;;;
-;;;  “transient-for”            GtkWindow *
-;;;
-;;; The transient parent of the dialog, or NULL for none.
-;;;
-;;; Owner: GtkNativeDialog
-;;;
-;;; Flags: Read / Write / Construct
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "transient-for"
+                                               'native-dialog) t)
+ "The @code{transient-for} property of type @class{gtk:window}
+  (Read / Write / Construct) @br{}
+  The transient parent of the dialog, or @code{nil} for none.")
 
-;;; ----------------------------------------------------------------------------
-;;; The “visible” property
-;;;
-;;;  “visible”                  gboolean
-;;;
-;;; Whether the window is currently visible.
-;;;
-;;; Owner: GtkNativeDialog
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: FALSE
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'native-dialog-transient-for)
+      "Accessor"
+      (documentation 'native-dialog-transient-for 'function)
+ "@version{#2023-4-16}
+  @syntax[]{(gtk:native-dialog-transient-for object) => parent}
+  @syntax[]{(setf (gtk:native-dialog-transient-for object) parent)}
+  @argument[object]{a @class{gtk:native-dialog} widget}
+  @argument[parent]{a @class{gtk:window} parent window}
+  @begin{short}
+    Accessor of the @slot[gtk:native-dialog]{transient-for} slot of the
+    @class{gtk:native-dialog} class.
+  @end{short}
+  The @sym{gtk:native-dialog-transient-for} function fetches the transient
+  parent for the dialog. The @sym{(setf gtk:native-dialog-transient-for)}
+  function sets the parent.
 
+  Dialog windows should be set transient for the main application window they
+  were spawned from. This allows window managers to e.g. keep the dialog on
+  top of the main window, or center the dialog over the main window.
+
+  Passing @code{nil} for parent unsets the current transient window.
+  @see-class{gtk:native-dialog}
+  @see-class{gtk:window}")
+
+;;; --- native-dialog-visible --------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "visible" 'native-dialog) t)
+ "The @code{visible} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the window is currently visible. @br{}
+  Default value: @em{false}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'native-dialog-visible)
+      "Accessor"
+      (documentation 'native-dialog-visible 'function)
+ "@version{#2023-4-16}
+  @syntax[]{(gtk:native-dialog-visible object) => visible}
+  @syntax[]{(setf (gtk:native-dialog-visible object) visible)}
+  @argument[object]{a @class{gtk:native-dialog} widget}
+  @argument[visible]{@em{true} if the dialog is visible}
+  @begin{short}
+    Accessor of the @slot[gtk:native-dialog]{visible} slot of the
+    @class{gtk:native-dialog} class.
+  @end{short}
+  Determines whether the dialog is visible.
+  @see-class{gtk:native-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_native_dialog_show ()
-;;;
-;;; void
-;;; gtk_native_dialog_show (GtkNativeDialog *self);
-;;;
-;;; Shows the dialog on the display, allowing the user to interact with it. When
-;;; the user accepts the state of the dialog the dialog will be automatically
-;;; hidden and the “response” signal will be emitted.
-;;;
-;;; Multiple calls while the dialog is visible will be ignored.
-;;;
-;;; self :
-;;;     a GtkNativeDialog
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_native_dialog_show" native-dialog-show) :void
+ #+liber-documentation
+ "@version{#2023-4-16}
+  @argument[dialog]{a @class{gtk:native-dialog} widget}
+  @begin{short}
+    Shows the dialog on the display, allowing the user to interact with it.
+  @end{short}
+  When the user accepts the state of the dialog the dialog will be automatically
+  hidden and the \"response\" signal will be emitted.
+
+  Multiple calls while the dialog is visible will be ignored.
+  @see-class{gtk:native-dialog}"
+  (dialog (g:object native-dialog)))
+
+(export 'native-dialog-show)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_native_dialog_hide ()
-;;;
-;;; void
-;;; gtk_native_dialog_hide (GtkNativeDialog *self);
-;;;
-;;; Hides the dialog if it is visilbe, aborting any interaction. Once this is
-;;; called the “response” signal will not be emitted until after the next call
-;;; to gtk_native_dialog_show().
-;;;
-;;; If the dialog is not visible this does nothing.
-;;;
-;;; self :
-;;;     a GtkNativeDialog
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gdk_native_dialog_hide" native-dialog-hide) :void
+ #+liber-documentation
+ "@version{#2023-4-16}
+  @argument[dialog]{a @class{gtk:native-dialog} widget}
+  @begin{short}
+    Hides the dialog if it is visilbe, aborting any interaction.
+  @end{short}
+  Once this is called the \"response\" signal will not be emitted until after
+  the next call to the @fun{gtk:native-dialog-show} function.
+
+  If the dialog is not visible this does nothing.
+  @see-class{gtk:native-dialog}
+  @see-function{gtk:native-dialog-show}"
+  (dialog (g:object native-dialog)))
+
+(export 'native-dialog-hide)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_native_dialog_destroy ()
-;;;
-;;; void
-;;; gtk_native_dialog_destroy (GtkNativeDialog *self);
-;;;
-;;; Destroys a dialog.
-;;;
-;;; When a dialog is destroyed, it will break any references it holds to other
-;;; objects. If it is visible it will be hidden and any underlying window system
-;;; resources will be destroyed.
-;;;
-;;; Note that this does not release any reference to the object (as opposed to
-;;; destroying a GtkWindow) because there is no reference from the windowing
-;;; system to the GtkNativeDialog.
-;;;
-;;; self :
-;;;     a GtkNativeDialog
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_get_visible ()
-;;;
-;;; gboolean
-;;; gtk_native_dialog_get_visible (GtkNativeDialog *self);
-;;;
-;;; Determines whether the dialog is visible.
-;;;
-;;; self :
-;;;     a GtkNativeDialog
-;;;
-;;; Returns :
-;;;     TRUE if the dialog is visible
-;;; ----------------------------------------------------------------------------
+(defcfun ("gdk_native_dialog_destroy" native-dialog-destroy) :void
+ #+liber-documentation
+ "@version{#2023-4-16}
+  @argument[dialog]{a @class{gtk:native-dialog} widget}
+  @begin{short}
+    Destroys a dialog.
+  @end{short}
+  When a dialog is destroyed, it will break any references it holds to other
+  objects. If it is visible it will be hidden and any underlying window system
+  resources will be destroyed.
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_set_modal ()
-;;;
-;;; void
-;;; gtk_native_dialog_set_modal (GtkNativeDialog *self,
-;;;                              gboolean modal);
-;;;
-;;; Sets a dialog modal or non-modal. Modal dialogs prevent interaction with
-;;; other windows in the same application. To keep modal dialogs on top of main
-;;; application windows, use gtk_native_dialog_set_transient_for() to make the
-;;; dialog transient for the parent; most window managers will then disallow
-;;; lowering the dialog below the parent.
-;;;
-;;; self :
-;;;     a GtkNativeDialog
-;;;
-;;; modal :
-;;;     whether the window is modal
-;;; ----------------------------------------------------------------------------
+  Note that this does not release any reference to the object, as opposed to
+  destroying a @class{gtk:window} widget, because there is no reference from the
+  windowing system to the @class{gtk:native-dialog} widget.
+  @see-class{gtk:native-dialog}
+  @see-class{gtk:window}"
+  (dialog (g:object native-dialog)))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_get_modal ()
-;;;
-;;; gboolean
-;;; gtk_native_dialog_get_modal (GtkNativeDialog *self);
-;;;
-;;; Returns whether the dialog is modal. See gtk_native_dialog_set_modal().
-;;;
-;;; self :
-;;;     a GtkNativeDialog
-;;;
-;;; Returns :
-;;;     TRUE if the dialog is set to be modal
-;;; ----------------------------------------------------------------------------
+(export 'native-dialog-destroy)
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_set_title ()
-;;;
-;;; void
-;;; gtk_native_dialog_set_title (GtkNativeDialog *self,
-;;;                              const char *title);
-;;;
-;;; Sets the title of the GtkNativeDialog.
-;;;
-;;; self :
-;;;     a GtkNativeDialog
-;;;
-;;; title :
-;;;     title of the dialog
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_get_title ()
-;;;
-;;; const char *
-;;; gtk_native_dialog_get_title (GtkNativeDialog *self);
-;;;
-;;; Gets the title of the GtkNativeDialog.
-;;;
-;;; self :
-;;;     a GtkNativeDialog
-;;;
-;;; Returns :
-;;;     the title of the dialog, or NULL if none has been set explicitly. The
-;;;     returned string is owned by the widget and must not be modified or
-;;;     freed.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_set_transient_for ()
-;;;
-;;; void
-;;; gtk_native_dialog_set_transient_for (GtkNativeDialog *self,
-;;;                                      GtkWindow *parent);
-;;;
-;;; Dialog windows should be set transient for the main application window they
-;;; were spawned from. This allows window managers to e.g. keep the dialog on
-;;; top of the main window, or center the dialog over the main window.
-;;;
-;;; Passing NULL for parent unsets the current transient window.
-;;;
-;;; self :
-;;;     a GtkNativeDialog
-;;;
-;;; parent :
-;;;     parent window, or NULL.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_get_transient_for ()
-;;;
-;;; GtkWindow *
-;;; gtk_native_dialog_get_transient_for (GtkNativeDialog *self);
-;;;
-;;; Fetches the transient parent for this window. See
-;;; gtk_native_dialog_set_transient_for().
-;;;
-;;; self :
-;;;     a GtkNativeDialog
-;;;
-;;; Returns :
-;;;     the transient parent for this window, or NULL if no transient parent
-;;;     has been set.
-;;; ----------------------------------------------------------------------------
-
-;;; --- End of file gtk.native-dialog.lisp -------------------------------------
+;;; --- End of file gtk4.native-dialog.lisp ------------------------------------

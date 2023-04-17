@@ -39,14 +39,14 @@
 ;;;
 ;;;     gtk_check_button_get_active
 ;;;     gtk_check_button_set_active
+;;;     gtk_check_button_get_child                         Since 4.8
+;;;     gtk_check_button_set_child                         Since 4.8
 ;;;     gtk_check_button_get_inconsistent
 ;;;     gtk_check_button_set_inconsistent
 ;;;     gtk_check_button_get_label
 ;;;     gtk_check_button_set_label
 ;;;     gtk_check_button_get_use_underline
 ;;;     gtk_check_button_set_use_underline
-;;;     gtk_check_button_get_child                         Since 4.8
-;;;     gtk_check_button_set_child                         Since 4.8
 ;;;
 ;;; Functions
 ;;;
@@ -239,6 +239,7 @@ lambda (checkbutton)    :run-first
   @see-constructor{gtk:check-button-new-with-label}
   @see-constructor{gtk:check-button-new-with-mnemonic}
   @see-slot{gtk:check-button-active}
+  @see-slot{gtk:check-button-child}
   @see-slot{gtk:check-button-group}
   @see-slot{gtk:check-button-inconsistent}
   @see-slot{gtk:check-button-label}
@@ -286,7 +287,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-child)
       "Accessor"
       (documentation 'check-button-child 'function)
- "@version{#2023-3-20}
+ "@version{2023-4-15}
   @syntax[]{(gtk:check-button-child object) => child}
   @syntax[]{(setf (gtk:check-button-child object) child)}
   @argument[object]{a @class{gtk:check-button} widget}
@@ -297,7 +298,7 @@ lambda (checkbutton)    :run-first
   @end{short}
   The @sym{gtk:check-button-child} function gets the child widget of the check
   button or @code{nil} if the @slot[gtk:check-button]{label} property is set.
-  The @sym{(setf gtk:check-button-child)} functionn sets the child widget.
+  The @sym{(setf gtk:check-button-child)} function sets the child widget.
 
   Note that by using this API, you take full responsibility for setting up the
   proper accessibility label and description information for the check button.

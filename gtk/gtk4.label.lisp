@@ -2,7 +2,7 @@
 ;;; gtk4.label.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -58,6 +58,8 @@
 ;;;     gtk_label_set_selectable
 ;;;     gtk_label_get_single_line_mode
 ;;;     gtk_label_set_single_line_mode
+;;;     gtk_label_get_tabs
+;;;     gtk_label_set_tabs
 ;;;     gtk_label_get_use_markup
 ;;;     gtk_label_set_use_markup
 ;;;     gtk_label_get_use_underline
@@ -91,8 +93,10 @@
 ;;;     max-width-chars
 ;;;     mnemonic-keyval
 ;;;     mnemonic-widget
+;;;     natural-wrap-mode                                  Since 4.6
 ;;;     selectable
 ;;;     single-line-mode
+;;;     tabs                                               Since 4.8
 ;;;     use-markup
 ;;;     use-underline
 ;;;     width-chars
@@ -182,6 +186,10 @@
    (single-line-mode
     label-single-line-mode
     "single-line-mode" "gboolean" t t)
+   #+gtk-4-8
+   (tabs
+    label-tabs
+    "tabs" "PangoTabArray" t t)
    (use-markup
     label-use-markup
     "use-markup" "gboolean" t t)
@@ -206,7 +214,7 @@
 
 #+liber-documentation
 (setf (documentation 'label 'type)
- "@version{2023-3-19}
+ "@version{2023-4-15}
   @begin{short}
     The @sym{gtk:label} widget displays a small amount of text.
   @end{short}
@@ -469,6 +477,7 @@ lambda (label step count extend)    :action
   @see-slot{gtk:label-natural-wrap-mode}
   @see-slot{gtk:label-selectable}
   @see-slot{gtk:label-single-line-mode}
+  @see-slot{gtk:label-tabs}
   @see-slot{gtk:label-use-markup}
   @see-slot{gtk:label-use-underline}
   @see-slot{gtk:label-width-chars}
@@ -481,7 +490,7 @@ lambda (label step count extend)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- label-attributes ---------------------------------------------------
+;;; --- label-attributes -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "attributes" 'label) t)
@@ -493,7 +502,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-attributes)
       "Accessor"
       (documentation 'label-attributes 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-attributes object) => attrs}
   @syntax[]{(setf (gtk:label-attributes object) attrs)}
   @argument[object]{a @class{gtk:label} widget}
@@ -527,7 +536,7 @@ lambda (label step count extend)    :action
   @see-function{gtk:label-use-markup}
   @see-function{gtk:label-use-underline}")
 
-;;; --- label-ellipsize ----------------------------------------------------
+;;; --- label-ellipsize --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "ellipsize" 'label) t)
@@ -548,7 +557,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-ellipsize)
       "Accessor"
       (documentation 'label-ellipsize 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-ellipsize object) => mode}
   @syntax[]{(setf (gtk:label-ellipsize object) mode)}
   @argument[object]{a @class{gtk:label} widget}
@@ -576,7 +585,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-extra-menu)
       "Accessor"
       (documentation 'label-extra-menu 'function)
- "@version{#2022-1-21}
+ "@version{2022-1-21}
   @syntax[]{(gtk:label-extra-menu object) => menu}
   @syntax[]{(setf (gtk:label-extra-menu object) menu)}
   @argument[object]{a @class{gtk:label} widget}
@@ -591,7 +600,7 @@ lambda (label step count extend)    :action
   @see-class{gtk:label}
   @see-class{g:menu-model}")
 
-;;; --- label-justify ------------------------------------------------------
+;;; --- label-justify ----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "justify" 'label) t)
@@ -606,7 +615,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-justify)
       "Accessor"
       (documentation 'label-justify 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-justify object) => justify}
   @syntax[]{(setf (gtk:label-justify object) justify)}
   @argument[object]{a @class{gtk:label} widget}
@@ -664,7 +673,7 @@ lambda (label step count extend)    :action
   @see-function{gtk:label-use-markup}
   @see-function{gtk:label-use-underline}")
 
-;;; --- label-lines --------------------------------------------------------
+;;; --- label-lines ------------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "lines" 'label) t)
@@ -679,7 +688,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-lines)
       "Accessor"
       (documentation 'label-lines 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-lines object) => lines}
   @syntax[]{(setf (gtk:label-lines object) lines)}
   @argument[object]{a @class{gtk:label} widget}
@@ -695,7 +704,7 @@ lambda (label step count extend)    :action
   of lines.
   @see-class{gtk:label}")
 
-;;; --- label-max-width-chars ----------------------------------------------
+;;; --- label-max-width-chars --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-width-chars" 'label) t)
@@ -711,7 +720,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-max-width-chars)
       "Accessor"
       (documentation 'label-max-width-chars 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-max-width-chars object) => n-chars}
   @syntax[]{(setf (gtk:label-max-width-chars object) n-chars)}
   @argument[object]{a @class{gtk:label} widget}
@@ -725,7 +734,7 @@ lambda (label step count extend)    :action
   the desired maximum width.
   @see-class{gtk:label}")
 
-;;; --- label-mnemonic-keyval ----------------------------------------------
+;;; --- label-mnemonic-keyval --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonic-keyval" 'label) t)
@@ -737,7 +746,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-mnemonic-keyval)
       "Accessor"
       (documentation 'label-mnemonic-keyval 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-mnemonic-keyval object) => keyval}
   @argument[object]{a @class{gtk:label} widget}
   @argument[keyval]{an unsigned integer with the keyval}
@@ -758,7 +767,7 @@ lambda (label step count extend)    :action
   @end{dictionary}
   @see-class{gtk:label}")
 
-;;; --- label-mnemonic-widget ----------------------------------------------
+;;; --- label-mnemonic-widget --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonic-widget" 'label) t)
@@ -770,7 +779,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-mnemonic-widget)
       "Accessor"
       (documentation 'label-mnemonic-widget 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-mnemonic-widget object) => widget}
   @syntax[]{(setf (gtk:label-mnemonic-widget object) widget)}
   @argument[object]{a @class{gtk:label} widget}
@@ -805,11 +814,10 @@ lambda (label step count extend)    :action
   @see-function{gtk:label-new-with-mnemonic}
   @see-function{gtk:label-use-underline}")
 
-;;; --- label-natural-wrap-mode --------------------------------------------
+;;; --- label-natural-wrap-mode ------------------------------------------------
 
 #+(and gtk-4-6 liber-documentation)
-(setf (documentation (liber:slot-documentation "natural-wrap-mode"
-                                               'label) t)
+(setf (documentation (liber:slot-documentation "natural-wrap-mode" 'label) t)
  "The @code{natural-wrap-mode} property of type @symbol{gtk:natural-wrap-mode}
   (Read / Write) @br{}
   Select the line wrapping for the natural size request. This only affects the
@@ -822,7 +830,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-natural-wrap-mode)
       "Accessor"
       (documentation 'label-natural-wrap-mode 'function)
- "@version{#2022-7-21}
+ "@version{2022-7-21}
   @syntax[]{(gtk:label-natural-wrap-mode object) => mode}
   @syntax[]{(setf (gtk:label-natural-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:label} widget}
@@ -842,7 +850,7 @@ lambda (label step count extend)    :action
   @see-class{gtk:label}
   @see-function{gtk:label-wrap-mode}")
 
-;;; --- label-selectable ---------------------------------------------------
+;;; --- label-selectable -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selectable" 'label) t)
@@ -854,7 +862,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-selectable)
       "Accessor"
       (documentation 'label-selectable 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-selectable object) => selectable}
   @syntax[]{(setf (gtk:label-selectable object) selectable)}
   @argument[object]{a @class{gtk:label} widget}
@@ -867,11 +875,10 @@ lambda (label step count extend)    :action
   paste.
   @see-class{gtk:label}")
 
-;;; --- label-single-line-mode ---------------------------------------------
+;;; --- label-single-line-mode -------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "single-line-mode"
-                                               'label) t)
+(setf (documentation (liber:slot-documentation "single-line-mode" 'label) t)
  "The @code{single-line-mode} property of type  @code{:boolean} (Read / Write)
   @br{}
   Whether the label is in single line mode. In single line mode, the height
@@ -885,7 +892,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-single-line-mode)
       "Accessor"
       (documentation 'label-single-line-mode 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-single-line-mode object) => mode}
   @syntax[]{(setf (gtk:label-single-line-mode object) mode)}
   @argument[object]{a @class{gtk:label} widget}
@@ -899,7 +906,41 @@ lambda (label step count extend)    :action
   whether the label is in single line mode.
   @see-class{gtk:label}")
 
-;;; --- label-use-markup ---------------------------------------------------
+;;; --- label-tabs -------------------------------------------------------------
+
+;; TODO: PangoTabArray is a boxed type. But the automatic memory management
+;; might not work for accessor functions. Perhaps the implementation of
+;; the accessor functions must be improved. Check the implementation.
+
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "tabs" 'label) t)
+ "The @code{tabs} property of type @class{pango:tab-array} (Read / Write) @br{}
+  Custom tabs for this label.")
+
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'label-tabs)
+      "Accessor"
+      (documentation 'label-tabs 'function)
+ "@version{2023-4-15}
+  @syntax[]{(gtk:label-tabs object) => tabs}
+  @syntax[]{(setf (gtk:label-tabs object) tabs)}
+  @argument[object]{a @class{gtk:label} widget}
+  @argument[tabs]{a @class{pango:tab-array} instance with the tabs}
+  @begin{short}
+    Accessor of the @slot[gtk:label]{tabs} slot of the @class{gtk:label} class.
+  @end{short}
+  The @sym{gtk:label-tabs} function gets the tabs for the label. The
+  @sym{(setf gtk:label-tabs)} function sets the default tab stops for
+  paragraphs in the label.
+
+  The returned array will be @code{nil} if \"standard\" (8-space) tabs are used.
+  Free the return value with the @fun{pango:tab-array-free} function.
+
+  Since 4.8
+  @see-class{gtk:label}
+  @see-class{pango:tab-array}")
+
+;;; --- label-use-markup -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-markup" 'label) t)
@@ -911,7 +952,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-use-markup)
       "Accessor"
       (documentation 'label-use-markup 'function)
- "@version{#2021-12-3}
+ "@version{2021-12-3}
   @syntax[]{(gtk:label-use-markup object) => setting}
   @syntax[]{(setf (gtk:label-use-markup object) setting)}
   @argument[object]{a @class{gtk:label} widget}
@@ -928,7 +969,7 @@ lambda (label step count extend)    :action
   @see-class{gtk:label}
   @see-function{gtk:label-set-markup}")
 
-;;; --- label-use-underline ------------------------------------------------
+;;; --- label-use-underline ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-underline" 'label) t)
@@ -941,7 +982,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-use-underline)
       "Accessor"
       (documentation 'label-use-underline 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-use-underline object) => setting}
   @syntax[]{(setf (gtk:label-use-underline object) setting)}
   @argument[object]{a @class{gtk:label} widget}
@@ -956,7 +997,7 @@ lambda (label step count extend)    :action
   key.
   @see-class{gtk:label}")
 
-;;; --- label-width-chars --------------------------------------------------
+;;; --- label-width-chars ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "width-chars" 'label) t)
@@ -972,7 +1013,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-width-chars)
       "Accessor"
       (documentation 'label-width-chars 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-width-chars object) => n-chars}
   @syntax[]{(setf (gtk:label-width-chars object) n-chars)}
   @argument[object]{a @class{gtk:label} widget}
@@ -986,7 +1027,7 @@ lambda (label step count extend)    :action
   desired width.
   @see-class{gtk:label}")
 
-;;; --- label-wrap ---------------------------------------------------------
+;;; --- label-wrap -------------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "wrap" 'label) t)
@@ -998,7 +1039,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-wrap)
       "Accessor"
       (documentation 'label-wrap 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-wrap object) => wrap}
   @syntax[]{(setf (gtk:label-wrap object) wrap)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1009,7 +1050,7 @@ lambda (label step count extend)    :action
   If set, wrap lines if the text becomes too wide.
   @see-class{gtk:label}")
 
-;;; --- label-wrap-mode ----------------------------------------------------
+;;; --- label-wrap-mode --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "wrap-mode" 'label) t)
@@ -1024,7 +1065,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-wrap-mode)
       "Accessor"
       (documentation 'label-wrap-mode 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-wrap-mode object) => setting}
   @syntax[]{(setf (gtk:label-wrap-mode object) setting)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1040,7 +1081,7 @@ lambda (label step count extend)    :action
   @see-symbol{pango:wrap-mode}
   @see-function{gtk:label-wrap}")
 
-;;; --- label-xalign -------------------------------------------------------
+;;; --- label-xalign -----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "xalign" 'label) t)
@@ -1056,7 +1097,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-xalign)
       "Accessor"
       (documentation 'label-xalign 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-xalign object) => xalign}
   @syntax[]{(setf (gtk:label-xalign object) xalign)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1071,7 +1112,7 @@ lambda (label step count extend)    :action
   @see-function{gtk:label-yalign}
   @see-function{gtk:widget-halign}")
 
-;;; --- label-yalign -------------------------------------------------------
+;;; --- label-yalign -----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "yalign" 'label) t)
@@ -1088,7 +1129,7 @@ lambda (label step count extend)    :action
 (setf (liber:alias-for-function 'label-yalign)
       "Accessor"
       (documentation 'label-yalign 'function)
- "@version{#2021-10-31}
+ "@version{2021-10-31}
   @syntax[]{(gtk:label-yalign object) => yalign}
   @syntax[]{(setf (gtk:label-yalign object) yalign)}
   @argument[object]{a @class{gtk:label} widget}
@@ -1138,7 +1179,7 @@ lambda (label step count extend)    :action
 
 (defcfun ("gtk_label_get_text" label-text) :string
  #+liber-documentation
- "@version{#2021-10-31}
+ "@version{#2023-4-15}
   @syntax[]{(gtk:label-text label) => text}
   @syntax[]{(setf (gtk:label-text-label) text)}
   @argument[label]{a @class{gtk:label} widget}
@@ -1146,7 +1187,6 @@ lambda (label step count extend)    :action
   @begin{short}
     Accessor of the text in the label.
   @end{short}
-
   The @sym{gtk:label-text} function fetches the text from a label, as displayed
   on the screen. The @sym{(setf gtk:label-text)} function sets the text.
 

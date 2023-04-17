@@ -2,7 +2,7 @@
 ;;; gtk4.fixed.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -76,7 +76,7 @@
 
 #+liber-documentation
 (setf (documentation 'fixed 'type)
- "@version{#2022-2-6}
+ "@version{2023-4-16}
   @begin{short}
     The @sym{gtk:fixed} widget is a container which can place child widgets at
     fixed positions and with fixed sizes, given in pixels.
@@ -223,35 +223,7 @@
 (export 'fixed-move)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_fixed_get_child_position ()
-;;;void
-;;;gtk_fixed_get_child_position (GtkFixed *fixed,
-;;;                              GtkWidget *widget,
-;;;                              double *x,
-;;;                              double *y);
-;;;Retrieves the translation transformation of the given child GtkWidget in the given GtkFixed container.
-
-;;;See also: gtk_fixed_get_child_transform().
-
-;;;Parameters
-;;;fixed
-
-;;;a GtkFixed
-
-;;;widget
-
-;;;a child of fixed
-
-;;;x
-
-;;;the horizontal position of the widget .
-
-;;;[out]
-;;;y
-
-;;;the vertical position of the widget .
-
-;;;[out]
+;;; gtk_fixed_get_child_position ()
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_fixed_get_child_position" %fixed-child-position) :void
@@ -261,6 +233,22 @@
   (y (:pointer :double)))
 
 (defun fixed-child-position (fixed child)
+ #+liber-documentation
+ "@version{#2023-4-16}
+  @argument[fixed]{a @class{gtk:fixed} widget}
+  @argument[child]{a @class{gtk:widget} child widget of @arg{fixed}}
+  @begin{return}
+    @arg{x} -- a double float with the horizontal position of @arg{widget} @br{}
+    @arg{y} -- a double float with the vertical position of @arg{widget}
+  @end{return}
+  @begin{short}
+    Retrieves the translation transformation of the given child widget in the
+    fixed container.
+  @end{short}
+  See also the @fun{gtk:fixed-child-transform} function.
+  @see-class{gtk:fixed}
+  @see-class{gtk:widget}
+  @see-function{gtk:fixed-child-transform}"
   (with-foreign-objects ((x :double) (y :double))
     (%fixed-child-position fixed child x y)
     (values (cffi:mem-ref x :double)
@@ -269,49 +257,8 @@
 (export 'fixed-child-position)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_fixed_get_child_transform ()
-;;;GskTransform *
-;;;gtk_fixed_get_child_transform (GtkFixed *fixed,
-;;;                               GtkWidget *widget);
-;;;Retrieves the transformation for widget set using gtk_fixed_set_child_transform().
-
-;;;Parameters
-;;;fixed
-
-;;;a GtkFixed
-
-;;;widget
-
-;;;a GtkWidget, child of fixed
-
-;;;Returns
-;;;a GskTransform or NULL in case no transform has been set on widget .
-
-;;;[transfer none][nullable]
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;;gtk_fixed_set_child_transform ()
-;;;void
-;;;gtk_fixed_set_child_transform (GtkFixed *fixed,
-;;;                               GtkWidget *widget,
-;;;                               GskTransform *transform);
-;;;Sets the transformation for widget .
-
-;;;This is a convenience function that retrieves the GtkFixedLayoutChild instance associated to widget and calls gtk_fixed_layout_child_set_transform().
-
-;;;Parameters
-;;;fixed
-
-;;;a GtkFixed
-
-;;;widget
-
-;;;a GtkWidget, child of fixed
-
-;;;transform
-
-;;;the transformation assigned to widget or NULL to reset widget 's transform.
+;;; gtk_fixed_get_child_transform ()
+;;; gtk_fixed_set_child_transform ()
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf fixed-child-transform) (value fixed child)
@@ -323,6 +270,23 @@
 
 (defcfun ("gtk_fixed_get_child_transform" fixed-child-transform)
     (g:boxed gsk:transform)
+ #+liber-documentation
+ "@version{#2023-4-16}
+  @syntax[]{(gtk:fixed-child-transform object) => transform}
+  @syntax[]{(setf (gtk:fixed-child-transform object) transform)}
+  @argument[fixed]{a @class{gtk:fixed} widget}
+  @argument[child]{a @class{gtk:widget} child widget of @arg{fixed}}
+  @argument[transform]{a @class{gsk:transform} instance with the transformation
+    assigned to the child widget}
+  @begin{short}
+    The @sym{gtk:fixed-child-transform} function retrieves the transformation
+    for @arg{child}.
+  @end{short}
+  The @sym{(setf gtk:fixed-child-transform)} function sets the transformation
+  for @arg{child}. This is a convenience function that retrieves the
+  @class{gtk:fixed-layout-child} instance associated to @arg{child} and calls
+  the @fun{gtk:fixed-layout-child-transform} function.
+  @see-class{gtk:fixed}"
   (fixed (g:object fixed))
   (child (g:object widget)))
 
