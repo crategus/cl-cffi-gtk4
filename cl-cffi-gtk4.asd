@@ -3,22 +3,23 @@
 ;;;
 ;;; Copyright (C) 2021 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 
 (defsystem :cl-cffi-gtk4
@@ -33,20 +34,27 @@
     :components
     ((:file "gdk4.package")
 
-     ;; Interfaces
-     (:file "gdk4.paintable")             ; GdkPaintable
-
+     ;; General
      (:file "gdk4.enumerations")          ; Gdk enumerations
+     (:file "gdk4.rectangle")             ; GdkRectangle
+     (:file "gdk4.rgba")                  ; GdkRGBA
+     (:file "gdk4.keyval")                ; Key Values
 
+     ;; Display, Seat, Device, Monitor
      (:file "gdk4.display-manager")       ; GdkDisplayManager
      (:file "gdk4.display")               ; GdkDisplay
-     (:file "gdk4.seat")                  ; GdkSeat
      (:file "gdk4.device")                ; GdkDevice
      (:file "gdk4.device-pad")            ; GdkDevicePad
      (:file "gdk4.monitor")               ; GdkMonitor
-     (:file "gdk4.rectangle")             ; GdkRectangle
+     (:file "gdk4.seat")                  ; GdkSeat
+
+     ;; Events
+     (:file "gdk4.event")                 ; GdkEvent
+
+     ;; Interfaces
+     (:file "gdk4.paintable")             ; GdkPaintable
+
      (:file "gdk4.texture")               ; GdkTexture
-     (:file "gdk4.rgba")                  ; GdkRGBA
      (:file "gdk4.cursor")                ; GdkCursor
      (:file "gdk4.surface")               ; GdkSurface
      (:file "gdk4.toplevel-layout")       ; GdkToplevelLayout
@@ -54,14 +62,12 @@
      (:file "gdk4.toplevel-size")         ; GdkToplevelSize
      (:file "gdk4.popup")                 ; GdkPopup
      (:file "gdk4.popup-layout")          ; GdkPopupLayout
-     (:file "gdk4.frame-clock")           ; GdkFrameClock
      (:file "gdk4.frame-timings")         ; GdkFrameTimings
+     (:file "gdk4.frame-clock")           ; GdkFrameClock
      (:file "gdk4.draw-context")          ; GdkDrawContext
      (:file "gdk4.gl-context")            ; GdkGLContext
      (:file "gdk4.vulkan-context")        ; GdkVulkanContext
      (:file "gdk4.cairo-context")         ; Functions to support using Cairo.
-     (:file "gdk4.event")                 ; GdkEvent
-     (:file "gdk4.keyval")                ; Key Values
      (:file "gdk4.clipboard")             ; GdkClipboard
      (:file "gdk4.drag-and-drop")         ; GdkDrag, GdkDrop
      (:file "gdk4.content-formats")       ; GdkContentFormats
@@ -453,7 +459,7 @@
 ;    (:file "gtk4.bin-layout")               ; GtkBinLayout
 ;    (:file "gtk4.box-layout")               ; GtkBoxLayout
 ;    (:file "gtk4.center-layout")            ; GtkCenterLayout
-;    (:file "gtk4.fixed-layout")             ; GtkFixedLayout
+     (:file "rtest-gtk4-fixed-layout")       ; GtkFixedLayout
 ;    (:file "gtk4.grid-layout")              ; GtkGridLayout
 ;    (:file "gtk4.overlay-layout")           ; GtkOverlayLayout
 ;    (:file "gtk4.custom-layout")            ; GtkCustomLayout
@@ -610,7 +616,7 @@
      (:file "rtest-gtk4-about-dialog")        ; GtkAboutDialog
      (:file "rtest-gtk4-assistant")           ; GtkAssistant
 ;    (:file "gtk4.window-group")              ; GtkWindowGroup
-;    (:file "gtk4.native-dialog")             ; GtkNativeDialog
+     (:file "rtest-gtk4-native-dialog")       ; GtkNativeDialog
 
      ;; Printing
      (:file "rtest-gtk4-print-operation")     ; GtkPrintOperation
@@ -694,12 +700,27 @@
      (:file "rtest-gtk4-application")             ; GtkApplication
      (:file "rtest-gtk4-application-window")      ; GtkApplicationWindow
 
-     ;; GDK
+     ;; GDK General
+     (:file "rtest-gdk4-enumerations")            ; Enumerations
+     (:file "rtest-gdk4-rectangle")               ; GdkRectangle
+     (:file "rtest-gdk4-rgba")                    ; GdkRGBA
+     (:file "rtest-gdk4-keyval")                  ; Manipulating keyboard codes
+
+     ;; Displays, Devices, Monitors, Seats
+     (:file "rtest-gdk4-display-manager")         ; GdkDisplayManager
+     (:file "rtest-gdk4-display")                 ; GdkDisplay
+     (:file "rtest-gdk4-device")                  ; GdkDevice
+     (:file "rtest-gdk4-device-pad")              ; GdkDevicePad
+     (:file "rtest-gdk4-monitor")                 ; GdkMonitor
+     (:file "rtest-gdk4-seat")                    ; GdkSeat
+
+     ;; Events
+     (:file "rtest-gdk4-event")                   ; GdkEvent
+
+
      (:file "rtest-gdk4-app-launch-context")      ; GdkAppLaunchContext
      (:file "rtest-gdk4-cairo-context")           ; GdkCairoContext
-
-     (:file "rtest-gdk4-rgba")
-     (:file "rtest-gdk4-event")
+     (:file "rtest-gdk4-texture")                 ; GdkTexture
 
      ;; GSK
 ))))
