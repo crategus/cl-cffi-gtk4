@@ -70,7 +70,7 @@
   each other, using the @slot[gtk:widget]{hexpand}, @slot[gtk:widget]{vexpand},
   @slot[gtk:widget]{halign}, and @slot[gtk:widget]{valign} properties of each
   child widget to determine where they should be positioned.
-  @see-class{layout-manager}
+  @see-class{gtk:layout-manager}
   @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
