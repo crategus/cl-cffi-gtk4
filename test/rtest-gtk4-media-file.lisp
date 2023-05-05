@@ -20,14 +20,14 @@
   (is (eq (g:gtype "GtkMediaStream")
           (g:type-parent "GtkMediaFile")))
   ;; Check the children
-  (is (equal '("GtkNoMediaFile")
+  (is (equal '("GtkGstMediaFile" "GtkNoMediaFile")
              (list-children "GtkMediaFile")))
   ;; Check the interfaces
   (is (equal '("GdkPaintable")
              (list-interfaces "GtkMediaFile")))
   ;; Check the class properties
   (is (equal '("file" "input-stream")
-             (list--properties "GtkMediaFile")))
+             (list-properties "GtkMediaFile")))
   ;; Check the list of signals
   (is (equal '()
              (list-signals "GtkMediaFile")))
@@ -61,4 +61,4 @@
 ;;;     gtk_media_file_set_input_stream
 ;;;     gtk_media_file_get_input_stream
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-3 ---------------------------------------------------------------

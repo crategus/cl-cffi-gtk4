@@ -503,10 +503,10 @@
 ;    (:file "gtk4.calendar")                 ; GtkCalendar
 
      ;; Media Support
-;    (:file "gtk4.video")                    ; GtkVideo
-;    (:file "gtk4.media-controls")           ; GtkMediaControls
-;    (:file "gtk4.media-stream")             ; GtkMediaStream
-;    (:file "gtk4.media-file")               ; GtkMediaFile
+     (:file "rtest-gtk4-video")              ; GtkVideo
+     (:file "rtest-gtk4-media-controls")     ; GtkMediaControls
+     (:file "rtest-gtk4-media-stream")       ; GtkMediaStream
+     (:file "rtest-gtk4-media-file")         ; GtkMediaFile
 
      ;; Buttons and Toggles
      (:file "rtest-gtk4-button")             ; GtkButton

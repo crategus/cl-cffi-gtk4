@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.media-controls.lisp
+;;; gtk4.media-controls.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkMediaControls
@@ -65,12 +66,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkMediaControls
-;;;
-;;; GtkMediaControls is a widget to show controls for a GtkMediaStream and
-;;; giving users a way to use it.
-;;;
-;;; See Also
-;;;     GtkVideo
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GtkMediaControls" media-controls
@@ -84,68 +79,68 @@
     media-controls-media-stream
     "media-stream" "GtkMediaStream" t t)))
 
+#+liber-documentation
+(setf (documentation 'media-controls 'type)
+ "@version{#2023-4-29}
+  @begin{short}
+    The @sym{gtk:media-controls} widget is a widget to show controls for a
+    @class{gtk:media-stream} object and giving users a way to use it.
+  @end{short}
+
+  @image[media-controls]{Figure: GtkMediaControls}
+
+  Usually, the @sym{gtk:media-controls} widget is used as part of the
+  @class{gtk:video} widget.
+  @see-class{gtk:media-stream}
+  @see-class{gtk:video}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “media-stream” property
-;;;
-;;;  “media-stream”             GtkMediaStream *
-;;;
-;;; The media-stream managed by this object or NULL if none.
-;;;
-;;; Owner: GtkMediaControls
-;;;
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "media-stream"
+                                               'media-controls) t)
+ "The @code{media-stream} property of type @class{gtk:media-stream}
+  (Read / Write) @br{}
+  The media stream managed by the media controls.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'media-controls-media-stream)
+      "Accessor"
+      (documentation 'media-controls-media-stream 'function)
+ "@version{#2023-4-29}
+  @syntax[]{(gtk:media-controls-media-stream object) => stream}
+  @syntax[]{(setf (gtk:media-controls-media-stream object) stream)}
+  @argument[object]{a @class{gtk:media-controls} widget}
+  @argument[stream]{a @class{gtk:media-stream} object, or @code{nil}}
+  @begin{short}
+    Accessor of the @slot[gtk:media-controls]{media-stream} slot of the
+    @class{gtk:media-controls} class.
+  @end{short}
+  The @sym{gtk:media-controls-media-stream} function gets the media stream
+  managed by the media controls or @code{nil} if none. The
+  @sym{(setf gtk:media-controls-media-stream)} function sets the media stream.
+  @see-class{gtk:media-controls}
+  @see-class{gtk:media-stream}")
 
 ;;; ----------------------------------------------------------------------------
 ;;;gtk_media_controls_new ()
-;;;GtkWidget *
-;;;gtk_media_controls_new (GtkMediaStream *stream);
-;;;Creates a new GtkMediaControls managing the stream passed to it.
-
-;;;Parameters
-;;;stream
-
-;;;a GtkMediaStream to manage or NULL for none.
-
-;;;[allow-none][transfer none]
-;;;Returns
-;;;a new GtkMediaControls
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;;gtk_media_controls_get_media_stream ()
-;;;GtkMediaStream *
-;;;gtk_media_controls_get_media_stream (GtkMediaControls *controls);
-;;;Gets the media stream managed by controls or NULL if none.
+(declaim (inline media-controls-new))
 
-;;;Parameters
-;;;controls
+(defun media-controls-new (stream)
+ #+liber-documentation
+ "@version{#2023-4-29}
+  @argument[stream]{a @class{gtk:media-stream} object}
+  @return{A new @class{gtk:media-controls} widget.}
+  @short{Creates the new media controls managing the media stream passed to it.}
+  @see-class{gtk:media-controls}
+  @see-class{gtk:media-stream}"
+  (make-instance 'media-controls
+                 :media-stream stream))
 
-;;;a GtkMediaControls
+(export 'media-controls-new)
 
-;;;Returns
-;;;The media stream managed by controls .
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;;gtk_media_controls_set_media_stream ()
-;;;void
-;;;gtk_media_controls_set_media_stream (GtkMediaControls *controls,
-;;;                                     GtkMediaStream *stream);
-;;;Sets the stream that is controlled by controls .
-
-;;;Parameters
-;;;controls
-
-;;;a GtkMediaControls widget
-
-;;;stream
-
-;;;a GtkMediaStream, or NULL.
-;;; ----------------------------------------------------------------------------
-
-;;; --- End of file gtk.media-controls.lisp ------------------------------------
+;;; --- End of file gtk4.media-controls.lisp -----------------------------------

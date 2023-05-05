@@ -15,7 +15,7 @@
           (gobject:symbol-for-gtype "GtkMediaControls")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkMediaControls")
-          (g:gtype (cffi:foreign-funcall "gtk_media_controls_get_type" g-size))))
+          (g:gtype (cffi:foreign-funcall "gtk_media_controls_get_type" :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkMediaControls")))
   ;; Check the children
@@ -32,7 +32,7 @@
              (list-signals "GtkMediaControls")))
   ;; CSS information
   (is (string= "controls"
-               (gtk-widget-class-css-name "GtkMediaControls")))
+               (gtk:widget-class-css-name "GtkMediaControls")))
   (is (string=
 "controls:dir(ltr)
   box.horizontal:disabled:dir(ltr)
@@ -61,9 +61,7 @@
               image:disabled:dir(ltr)
         arrow:dir(ltr)
 "
-               (gtk-style-context-to-string
-                   (gtk-widget-style-context (make-instance 'gtk-media-controls))
-                   :none)))
+               (print-style-context "GtkMediaControls")))
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMediaControls" GTK-MEDIA-CONTROLS
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -78,11 +76,11 @@
 ;;;     media-stream
 
 (test gtk-media-controls-properties
-  (let ((controls (make-instance 'gtk-media-controls)))
-    (is-false (gtk-media-controls-media-stream controls))))
+  (let ((controls (make-instance 'gtk:media-controls)))
+    (is-false (gtk:media-controls-media-stream controls))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_media_controls_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-3 ---------------------------------------------------------------

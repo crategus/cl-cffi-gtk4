@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.media-file.lisp
+;;; gtk4.media-file.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkMediaFile
@@ -34,6 +35,13 @@
 ;;;
 ;;;     GtkMediaFile
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_media_file_set_file
+;;;     gtk_media_file_get_file
+;;;     gtk_media_file_set_input_stream
+;;;     gtk_media_file_get_input_stream
+;;;
 ;;; Functions
 ;;;
 ;;;     gtk_media_file_new
@@ -41,13 +49,10 @@
 ;;;     gtk_media_file_new_for_resource
 ;;;     gtk_media_file_new_for_file
 ;;;     gtk_media_file_new_for_input_stream
+;;;
 ;;;     gtk_media_file_clear
 ;;;     gtk_media_file_set_filename
 ;;;     gtk_media_file_set_resource
-;;;     gtk_media_file_set_file
-;;;     gtk_media_file_get_file
-;;;     gtk_media_file_set_input_stream
-;;;     gtk_media_file_get_input_stream
 ;;;
 ;;; Properties
 ;;;
@@ -69,17 +74,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkMediaFile
-
-
-;;;Description
-;;;GtkMediaFile is the implementation for media file usage with GtkMediaStream.
-
-;;;This provides a simple way to play back video files with GTK.
-
-;;;GTK provides a GIO extension point for GtkMediaFile implementations to allow for external implementations using various media frameworks. GTK itself includes implementations using GStreamer and ffmpeg.
-
-;;;See Also
-;;;GtkMediaStream, GtkVideo
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GtkMediaFile" media-file
@@ -94,212 +88,256 @@
     media-file-input-stream
     "input-stream" "GInputStream" t t)))
 
+#+liber-documentation
+(setf (documentation 'media-file 'type)
+ "@version{#2023-5-3}
+  @begin{short}
+    The @sym{gtk:media-file} class is the implementation for media file usage
+    with the @class{gtk:media-stream} class.
+  @end{short}
+  This provides a simple way to play back video files with GTK.
 
+  GTK provides a GIO extension point for @sym{gtk:media-file} implementations
+  to allow for external implementations using various media frameworks. GTK
+  itself includes implementations using @code{GStreamer} and @code{ffmpeg}.
+  @see-constructor{gtk:media-file-new}
+  @see-constructor{gtk:media-file-new-for-filename}
+  @see-constructor{gtk:media-file-new-for-resource}
+  @see-constructor{gtk:media-file-new-for-file}
+  @see-constructor{gtk:media-file-new-for-input-stream}
+  @see-slot{gtk:media-file-file}
+  @see-slot{gtk:media-file-input-stream}
+  @see-class{gtk:media-stream}
+  @see-class{gtk:video}")
 
-;;;Property Details
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;The “file” property
-;;;  “file”                     GFile *
-;;;The file being played back or NULL if not playing a file.
+;;; --- media-file-file --------------------------------------------------------
 
-;;;Owner: GtkMediaFile
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "file" 'media-file) t)
+ "The @code{file} property of type @class{g:file} (Read / Write) @br{}
+  The file being played back or @code{nil} if not playing a file.")
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (liber:alias-for-function 'media-file-file)
+      "Accessor"
+      (documentation 'media-file-file 'function)
+ "@version{#2023-5-3}
+  @syntax[]{(gtk:media-file-file object) => file}
+  @syntax[]{(setf (gtk:media-file-file object) file)}
+  @argument[object]{a @class{gtk:media-file} object}
+  @argument[file]{a @class{g:file} object with the file to play}
+  @begin{short}
+    Accessor of the @slot[gtk:media-file]{file} slot of the
+    @class{gtk:media-file} class.
+  @end{short}
+  The @sym{gtk:media-file-file} function returns the file that @arg{object} is
+  currently playing from. When @arg{object} is not playing or not playing from
+  a file, @code{nil} is returned.
 
-;;;The “input-stream” property
-;;;  “input-stream”             GInputStream *
-;;;The stream being played back or NULL if not playing a stream, like when playing a file.
+  The @sym{(setf gtk:media-file-file)} function sets the file. If any file is
+  still playing, stop playing it. Then start playing the given @arg{file}.
+  @see-class{gtk:media-file}
+  @see-class{g:file}")
 
-;;;Owner: GtkMediaFile
+;;; --- media-file-input-stream ------------------------------------------------
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "input-stream" 'media-file) t)
+ "The @code{input-stream} property of type @code{GInputStream} (Read / Write)
+  @br{}
+  The stream being played back or @code{nil} if not playing a stream, like when
+  playing a file.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'media-file-input-stream)
+      "Accessor"
+      (documentation 'media-file-input-stream 'function)
+ "@version{#2023-5-3}
+  @syntax[]{(gtk:media-file-input-stream object) => stream}
+  @syntax[]{(setf (gtk:media-file-input-stream object) stream)}
+  @argument[object]{a @class{gtk:media-file} object}
+  @argument[stream]{a @code{GInputStream} object with the stream to play from}
+  @begin{short}
+    Accessor of the @slot[gtk:media-file]{input-stream} slot of the
+    @class{gtk:media-file} class.
+  @end{short}
+  The @sym{gtk:media-file-input-stream} function returns the stream that
+  @arg{object} is currently playing from. When @arg{object} is not playing or
+  not playing from a stream, @code{nil} is returned.
 
+  The @sym{(setf gtk:media-file-input-stream)} function sets the stream. If
+  anything is still playing, stop playing it. Then start playing the given
+  @arg{stream}. Full control about the stream is assumed for the duration of
+  playback. The stream will not bt be closed.
+  @see-class{gtk:media-file}")
 
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_file_new ()
+;;; ----------------------------------------------------------------------------
 
+(declaim (inline media-file-new))
 
-;;;Functions
-;;;gtk_media_file_new ()
-;;;GtkMediaStream *
-;;;gtk_media_file_new (void);
-;;;Creates a new empty media file.
+(defun media-file-new ()
+ #+liber-documentation
+ "@version{#2023-5-3}
+  @return{A new @class{gtk:media-file} object.}
+  @short{Creates a new empty media file.}
+  @see-class{gtk:media-file}"
+  (make-instance 'media-file))
 
-;;;Returns
-;;;a new GtkMediaFile.
+(export 'media-file-new)
 
-;;;[type Gtk.MediaFile]
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_file_new_for_filename ()
+;;; ----------------------------------------------------------------------------
 
-;;;gtk_media_file_new_for_filename ()
-;;;GtkMediaStream *
-;;;gtk_media_file_new_for_filename (const char *filename);
-;;;This is a utility function that converts the given filename to a GFile and calls gtk_media_file_new_for_file().
+(defcfun ("gtk_media_file_new_for_filename" %media-file-new-for-filename)
+    (g:object media-stream)
+  (filename :string))
 
-;;;Parameters
-;;;filename
+(defun media-file-new-for-filename (path)
+ #+liber-documentation
+ "@version{#2023-5-3}
+  @argument[filename]{a pathname or namestring with the file to open}
+  @return{A new @class{gtk:media-file} object playing @arg{filename}.}
+  @short{Creates a new media file.}
+  This is a utility function that converts the given filename to a
+  @class{g:file} object and calls the @fun{gtk:media-file-new-for-file}
+  function.
+  @see-class{gtk:media-file}
+  @see-class{g:file}
+  @see-function{gtk:media-file-new-for-file}"
+  (%media-file-new-for-filename (namestring path)))
 
-;;;filename to open
+(export 'media-file-new-for-filename)
 
-;;;Returns
-;;;a new GtkMediaFile playing filename .
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_file_new_for_resource ()
+;;; ----------------------------------------------------------------------------
 
-;;;[type Gtk.MediaFile]
+(defcfun ("gtk_media_file_new_for_resource" %media-file-new-for-resource)
+    (g:object media-stream)
+  (path :string))
 
-;;;gtk_media_file_new_for_resource ()
-;;;GtkMediaStream *
-;;;gtk_media_file_new_for_resource (const char *resource_path);
-;;;This is a utility function that converts the given resource to a GFile and calls gtk_media_file_new_for_file().
+(defun media-file-new-for-resource (path)
+ #+liber-documentation
+ "@version{#2023-5-3}
+  @argument[path]{a string with the resource path to open}
+  @return{A new @class{gtk:media-file} object playing @arg{path}.}
+  @short{Creates a new media file.}
+  This is a utility function that converts the given resource to a
+  @class{g:file} object and calls the @fun{gtk:media-file-new-for-file}
+  function.
+  @see-class{gtk:media-file}
+  @see-class{g:file}
+  @see-function{gtk:media-file-new-for-file}"
+  (%media-file-new-for-resource (namestring path)))
 
-;;;Parameters
-;;;resource_path
+(export 'media-file-new-for-resource)
 
-;;;resource path to open
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_file_new_for_file ()
+;;; ----------------------------------------------------------------------------
 
-;;;Returns
-;;;a new GtkMediaFile playing resource_path .
+(declaim (inline media-file-new-for-file))
 
-;;;[type Gtk.MediaFile]
+(defun media-file-new-for-file (file)
+ #+liber-documentation
+ "@version{#2023-5-3}
+  @argument[file]{a @class{g:file} object with the file to play}
+  @return{A new @class{gtk:media-file} object playing @arg{file}.}
+  @short{Creates a new media file.}
+  @see-class{gtk:media-file}
+  @see-class{g:file}"
+  (make-instance 'media-file
+                 :file file))
 
-;;;gtk_media_file_new_for_file ()
-;;;GtkMediaStream *
-;;;gtk_media_file_new_for_file (GFile *file);
-;;;Creates a new media file to play file .
+(export 'media-file-new-for-file)
 
-;;;Parameters
-;;;file
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_file_new_for_input_stream ()
+;;; ----------------------------------------------------------------------------
 
-;;;The file to play
+(declaim (inline media-file-new-for-input-stream))
 
-;;;Returns
-;;;a new GtkMediaFile playing file .
+(defun media-file-new-for-input-stream (stream)
+ #+liber-documentation
+ "@version{#2023-5-3}
+  @argument[stream]{a @code{GInputStream} object with the stream to play}
+  @return{A new @class{gtk:media-file} object playing @arg{stream}.}
+  @short{Creates a new media file to play @arg{stream}.}
+  If you want the resulting media to be seekable, the stream should implement
+  the @code{GSeekable} interface.
+  @see-class{gtk:media-file}"
+  (make-instance 'media-file
+                 :input-stream stream))
 
-;;;[type Gtk.MediaFile]
+(export 'media-file-new-for-input-stream)
 
-;;;gtk_media_file_new_for_input_stream ()
-;;;GtkMediaStream *
-;;;gtk_media_file_new_for_input_stream (GInputStream *stream);
-;;;Creates a new media file to play stream . If you want the resulting media to be seekable, the stream should implement the GSeekable interface.
-
-;;;Parameters
-;;;stream
-
-;;;The stream to play
-
-;;;Returns
-;;;a new GtkMediaFile.
-
-;;;[type Gtk.MediaFile]
-
+;;; ----------------------------------------------------------------------------
 ;;;gtk_media_file_clear ()
-;;;void
-;;;gtk_media_file_clear (GtkMediaFile *self);
-;;;Resets the media file to be empty.
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;self
+(defcfun ("gtk_media_file_clear" media-file-clear) :void
+ #+liber-documentation
+ "@version{#2023-5-3}
+  @argument[mediafile]{a @class{gtk:media-file} object}
+  @short{Resets the media file to be empty.}
+  @see-class{gtk:media-file}"
+  (mediafile (g:object media-file)))
 
-;;;a GtkMediaFile
+(export 'media-file-clear)
 
-;;;gtk_media_file_set_filename ()
-;;;void
-;;;gtk_media_file_set_filename (GtkMediaFile *self,
-;;;                             const char *filename);
-;;;This is a utility function that converts the given filename to a GFile and calls gtk_media_file_set_file().
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_file_set_filename ()
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;self
+(defcfun ("gtk_media_file_set_filename" %media-file-set-filename) :void
+  (mediafile (g:object media-file))
+  (filename :string))
 
-;;;a GtkMediaFile
+(defun media-file-set-filename (mediafile path)
+ #+liber-documentation
+ "@version{#2023-5-3}
+  @argument[mediafile]{a @class{gtk:media-file} object}
+  @argument[path]{a pathname or namestring with the name of file to play}
+  @begin{short}
+    This is a utility function that converts the given @arg{filename} to a
+    @class{g:file} object and calls the @fun{gtk:media-file-file} function.
+  @end{short}
+  @see-class{gtk:media-file}
+  @see-class{g:file}
+  @see-function{gtk:media-file-file}"
+  (%media-file-set-filename mediafile (namestring path)))
 
-;;;filename
+(export 'media-file-set-filename)
 
-;;;name of file to play.
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_file_set_resource ()
+;;; ----------------------------------------------------------------------------
 
-;;;[allow-none]
-;;;gtk_media_file_set_resource ()
-;;;void
-;;;gtk_media_file_set_resource (GtkMediaFile *self,
-;;;                             const char *resource_path);
-;;;This is a utility function that converts the given resource_path to a GFile and calls gtk_media_file_set_file().
+(defcfun ("gtk_media_file_set_resource" %media-file-set-resource) :void
+  (mediafile (g:object media-file))
+  (path :string))
 
-;;;Parameters
-;;;self
+(defun media-file-set-resource (mediafile path)
+ #+liber-documentation
+ "@version{#2023-5-3}
+  @argument[mediafile]{a @class{gtk:media-file} object}
+  @argument[path]{a string with the path to resource to play}
+  @begin{short}
+    This is a utility function that converts the given @arg{path} to a
+    @class{g:file} object and calls the @fun{gtk:media-file-file} function.
+  @end{short}
+  @see-class{gtk:media-file}
+  @see-class{g:file}
+  @see-function{gtk:media-file-file}"
+  (%media-file-set-resource mediafile (namestring path)))
 
-;;;a GtkMediaFile
+(export 'media-file-set-resource)
 
-;;;resource_path
-
-;;;path to resource to play.
-
-;;;[allow-none]
-;;;gtk_media_file_set_file ()
-;;;void
-;;;gtk_media_file_set_file (GtkMediaFile *self,
-;;;                         GFile *file);
-;;;If any file is still playing, stop playing it.
-
-;;;Then start playing the given file .
-
-;;;Parameters
-;;;self
-
-;;;a GtkMediaFile
-
-;;;file
-
-;;;the file to play.
-
-;;;[allow-none]
-;;;gtk_media_file_get_file ()
-;;;GFile *
-;;;gtk_media_file_get_file (GtkMediaFile *self);
-;;;Returns the file that self is currently playing from.
-
-;;;When self is not playing or not playing from a file, NULL is returned.
-
-;;;Parameters
-;;;self
-
-;;;a GtkMediaFile
-
-;;;Returns
-;;;The currently playing file or NULL if not playing from a file.
-
-;;;[nullable][transfer none]
-
-;;;gtk_media_file_set_input_stream ()
-;;;void
-;;;gtk_media_file_set_input_stream (GtkMediaFile *self,
-;;;                                 GInputStream *stream);
-;;;If anything is still playing, stop playing it. Then start playing the given stream .
-
-;;;Full control about the stream is assumed for the duration of playback. The stream will not bt be closed.
-
-;;;Parameters
-;;;self
-
-;;;a GtkMediaFile
-
-;;;stream
-
-;;;the stream to play from.
-
-;;;[allow-none]
-;;;gtk_media_file_get_input_stream ()
-;;;GInputStream *
-;;;gtk_media_file_get_input_stream (GtkMediaFile *self);
-;;;Returns the stream that self is currently playing from.
-
-;;;When self is not playing or not playing from a stream, NULL is returned.
-
-;;;Parameters
-;;;self
-
-;;;a GtkMediaFile
-
-;;;Returns
-;;;The currently playing stream or NULL if not playing from a stream.
-
-;;;[nullable][transfer none]
-
-
-;;; --- End of file gtk.media-file.lisp ----------------------------------------
+;;; --- End of file gtk4.media-file.lisp ---------------------------------------

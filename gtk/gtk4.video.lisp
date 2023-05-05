@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.video.lisp
+;;; gtk4.video.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkVideo
@@ -110,303 +111,289 @@
     video-media-stream
     "media-stream" "GtkMediaStream" t t)))
 
+#+liber-documentation
+(setf (documentation 'video 'type)
+ "@version{#2023-4-21}
+  @begin{short}
+    The @sym{gtk:video} widget is a widget to show a @class{gtk:media-stream}
+    object with media controls.
+  @end{short}
+
+  @image[video]{Figure: GtkVideo}
+
+  The controls are available separately as @class{gtk:media-controls} widgets.
+  If you just want to display a video without controls, you can treat it like
+  any other paintable and for example put it into a @class{gtk:picture} widget.
+
+  The @sym{gtk:video} widget aims to cover use cases such as previews, embedded
+  animations, etc. It supports autoplay, looping, and simple media controls. It
+  does not have support for video overlays, multichannel audio, device
+  selection, or input. If you are writing a full-fledged video player, you may
+  want to use the @class{gdk:paintable} API and a media framework such as
+  @code{Gstreamer} directly.
+  @see-constructor{gtk:video-new}
+  @see-constructor{gtk:video-new-for-file}
+  @see-constructor{gtk:video-new-for-filename}
+  @see-constructor{gtk:video-new-for-media-stream}
+  @see-constructor{gtk:video-new-for-resource}
+  @see-slot{gtk:video-autoplay}
+  @see-slot{gtk:video-file}
+  @see-slot{gtk:video-loop}
+  @see-slot{gtk:video-media-stream}
+  @see-class{gtk:media-stream}
+  @see-class{gtk:media-controls}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;;The “autoplay” property
-;;;  “autoplay”                 gboolean
-;;;If the video should automatically begin playing.
+;;; --- video-autoplay ---------------------------------------------------------
 
-;;;Owner: GtkVideo
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "autoplay" 'video) t)
+ "The @code{autoplay} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the video should automatically begin playing. @br{}
+  Default value: @em{false}")
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (liber:alias-for-function 'video-autoplay)
+      "Accessor"
+      (documentation 'video-autoplay 'function)
+ "@version{#2023-4-29}
+  @syntax[]{(gtk:video-autoplay object) => autoplay}
+  @syntax[]{(setf (gtk:video-autoplay object) autoplay)}
+  @argument[object]{a @class{gtk:video} widget}
+  @argument[autoplay]{a boolean whether media streams should autoplay}
+  @begin{short}
+    Accessor of the @slot[gtk:video]{autoplay} slot of the @class{gtk:video}
+    class.
+  @end{short}
+  The @sym{gtk:video-autoplay} function returns @em{true} if videos have been
+  set to loop via the @fun{gtk:video-loop} function. The
+  @sym{(setf gtk:video-autoplay)} function sets whether self automatically
+  starts playback when it becomes visible or when a new file gets loaded.
+  @see-class{gtk:video}
+  @see-function{gtk:video-loop}")
 
-;;;Default value: FALSE
-;;; ----------------------------------------------------------------------------
+;;; --- video-file -------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;;The “file” property
-;;;  “file”                     GFile *
-;;;The file played by this video if the video is playing a file.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "file" 'video) t)
+ "The @code{file} property of type @class{g:file} (Read / Write) @br{}
+  The file played by the video if the video is playing a file.")
 
-;;;Owner: GtkVideo
+#+liber-documentation
+(setf (liber:alias-for-function 'video-file)
+      "Accessor"
+      (documentation 'video-file 'function)
+ "@version{#2023-4-29}
+  @syntax[]{(gtk:video-file object) => file}
+  @syntax[]{(setf (gtk:video-file object) file)}
+  @argument[object]{a @class{gtk:video} widget}
+  @argument[file]{a @class{g:file} object to play}
+  @begin{short}
+    Accessor of the @slot[gtk:video]{file} slot of the @class{gtk:video} class.
+  @end{short}
+  The @sym{gtk:video-file} function gets the file played by @arg{object} or
+  @code{nil} if not playing back a file. The @sym{(setf gtk:video-file)}
+  function makes @arg{object} play the given @arg{file}.
+  @see-class{gtk:video}
+  @see-class{g:file}")
 
-;;;Flags: Read / Write
-;;; ----------------------------------------------------------------------------
+;;; --- video-loop -------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;;The “loop” property
-;;;  “loop”                     gboolean
-;;;If new media files should be set to loop.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "loop" 'video) t)
+ "The @code{loop} property of type @code{:boolean} (Read / Write) @br{}
+  Whether new media files should be set to loop. @br{}
+  Default value: @em{false}")
 
-;;;Owner: GtkVideo
+#+liber-documentation
+(setf (liber:alias-for-function 'video-loop)
+      "Accessor"
+      (documentation 'video-loop 'function)
+ "@version{#2023-4-29}
+  @syntax[]{(gtk:video-loop object) => loop}
+  @syntax[]{(setf (gtk:video-loop object) loop)}
+  @argument[object]{a @class{gtk:video} widget}
+  @argument[loop]{a boolean whether media streams should loop}
+  @begin{short}
+    Accessor of the @slot[gtk:video]{loop} slot of the @class{gtk:video} class.
+  @end{short}
+  The @sym{gtk:video-loop} function returns @em{true} if videos have been set
+  to loop. The @sym{(setf gtk:video-loop)} function sets whether new files
+  loaded by @arg{object} should be set to loop.
+  @see-class{gtk:video}")
 
-;;;Flags: Read / Write
+;;; --- video-media-stream -----------------------------------------------------
 
-;;;Default value: FALSE
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "media-stream" 'video) t)
+ "The @code{media-stream} property of type @class{gtk:media-stream}
+  (Read / Write) @br{}
+  The media stream played.")
 
-;;; ----------------------------------------------------------------------------
-;;;The “media-stream” property
-;;;  “media-stream”             GtkMediaStream *
-;;;The media-stream played
+#+liber-documentation
+(setf (liber:alias-for-function 'video-media-stream)
+      "Accessor"
+      (documentation 'video-media-stream 'function)
+ "@version{#2023-4-29}
+  @syntax[]{(gtk:video-media-stream object) => stream}
+  @syntax[]{(setf (gtk:video-media-stream object) stream)}
+  @argument[object]{a @class{gtk:video} widget}
+  @argument[stream]{a @class{gtk:media-stream} object to play or @code{nil}
+    to unset}
+  @begin{short}
+    Accessor of the @slot[gtk:video]{media-stream} slot of the @class{gtk:video}
+    class.
+  @end{short}
+  The @sym{gtk:video-media-stream} function gets the media stream managed by
+  @arg{object} or @code{nil} if none. The @sym{(setf gtk:video-media-steam)}
+  function sets the media stream to be played back. @arg{object} will take full
+  control of managing the media stream. If you want to manage a media stream
+  yourself, consider using a @class{gtk:image} widget for display.
 
-;;;Owner: GtkVideo
-
-;;;Flags: Read / Write
-;;; ----------------------------------------------------------------------------
-
+  If you want to display a file, consider using the @fun{gtk:video-file}
+  function instead.
+  @see-class{gtk:video}
+  @see-class{gtk:media-stream}
+  @see-function{gtk:video-file}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_video_new ()
-;;;
-;;; GtkWidget *
-;;; gtk_video_new (void);
-;;;
-;;; Creates a new empty GtkVideo.
-;;;
-;;; Returns :
-;;;     a new GtkVideo
 ;;; ----------------------------------------------------------------------------
+
+(declaim (inline video-new))
+
+(defun video-new ()
+ #+liber-documentation
+ "@version{#2023-4-29}
+  @return{A new @class{gtk:video} widget.}
+  @short{Creates a new empty @class{gtk:video} widget.}
+  @see-class{gtk:video}"
+  (make-instance 'video))
+
+(export 'video-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_video_new_for_media_stream ()
-;;;
-;;; GtkWidget *
-;;; gtk_video_new_for_media_stream (GtkMediaStream *stream);
-;;;
-;;; Creates a GtkVideo to play back the given stream .
-;;;
-;;; stream :
-;;;     a GtkMediaStream.
-;;;
-;;; Returns :
-;;;     a new GtkVideo
 ;;; ----------------------------------------------------------------------------
+
+(declaim (inline video-new-for-media-stream))
+
+(defun video-new-for-media-stream (stream)
+ #+liber-documentation
+ "@version{#2023-4-29}
+  @argument[stream]{a @class{gtk:media-stream} object}
+  @return{A new @class{gtk:video} widget.}
+  @short{Creates a new @class{gtk:video} widget to play the given media stream.}
+  @see-class{gtk:video}
+  @see-class{gtk:media-stream}"
+  (make-instance 'video
+                 :media-stream stream))
+
+(export 'video-new-for-media-stream)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_video_new_for_file ()
-;;;
-;;; GtkWidget *
-;;; gtk_video_new_for_file (GFile *file);
-;;;
-;;; Creates a GtkVideo to play back the given file .
-;;;
-;;; file :
-;;;     a GFile.
-;;;
-;;; Returns :
-;;;     a new GtkVideo
 ;;; ----------------------------------------------------------------------------
 
+(declaim (inline video-new-for-file))
+
+(defun video-new-for-file (file)
+ #+liber-documentation
+ "@version{#2023-4-29}
+  @argument[file]{a @class{g:file} object}
+  @return{A new @class{gtk:video} widget.}
+  @short{Creates a new @class{gtk:video} widget to play the given @arg{file}.}
+  @see-class{gtk:video}
+  @see-class{g:file}"
+  (make-instance 'video
+                 :file file))
+
+(export 'video-new-for-file)
+
 ;;; ----------------------------------------------------------------------------
-;;;gtk_video_new_for_filename ()
-;;;GtkWidget *
-;;;gtk_video_new_for_filename (const char *filename);
-;;;Creates a GtkVideo to play back the given filename .
-
-;;;This is a utility function that calls gtk_video_new_for_file(), See that function for details.
-
-;;;Parameters
-;;;filename
-
-;;;filename to play back.
-
-;;;[allow-none][type filename]
-;;;Returns
-;;;a new GtkVideo
+;;; gtk_video_new_for_filename ()
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_video_new_for_filename" %video-new-for-filename) (g:object video)
+  (filename :string))
+
+(defun video-new-for-filename (path)
+ #+liber-documentation
+ "@version{#2023-4-29}
+  @argument[path]{a pathname or namestring with the file to play back}
+  @return{A new @class{gtk:video} widget.}
+  @short{Creates a new @class{gtk:video} widget to play the given @arg{path}.}
+  This is a utility function that calls the @fun{gtk:video-new-for-file}
+  function.
+  @see-class{gtk:video}
+  @see-function{gtk:video-new-for-file}"
+  (%video-new-for-filename (namestring path)))
+
+(export 'video-new-for-filename)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_video_new_for_resource ()
-;;;
-;;; GtkWidget *
-;;; gtk_video_new_for_resource (const char *resource_path);
-;;;
-;;; Creates a GtkVideo to play back the resource at the given resource_path .
-;;;
-;;; This is a utility function that calls gtk_video_new_for_file(),
-;;;
-;;; resource_path :
-;;;     resource path to play back.
-;;;
-;;; Returns :
-;;;     a new GtkVideo
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_video_get_media_stream ()
-;;;
-;;; GtkMediaStream *
-;;; gtk_video_get_media_stream (GtkVideo *self);
-;;;
-;;; Gets the media stream managed by self or NULL if none.
-;;;
-;;; self :
-;;;     a GtkVideo
-;;;
-;;; Returns :
-;;;     The media stream managed by self .
-;;; ----------------------------------------------------------------------------
+(defcfun ("gtk_video_new_for_resource" %video-new-for-resource) (g:object video)
+  (path :string))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_video_set_media_stream ()
-;;;
-;;; void
-;;; gtk_video_set_media_stream (GtkVideo *self,
-;;;                             GtkMediaStream *stream);
-;;;
-;;; Sets the media stream to be played back. self will take full control of
-;;; managing the media stream. If you want to manage a media stream yourself,
-;;; consider using a GtkImage for display.
-;;;
-;;; If you want to display a file, consider using gtk_video_set_file() instead.
-;;;
-;;; self :
-;;;     a GtkVideo
-;;;
-;;; stream :
-;;;     The media stream to play or NULL to unset.
-;;; ----------------------------------------------------------------------------
+(defun video-new-for-resource (path)
+ #+liber-documentation
+ "@version{#2023-4-29}
+  @argument[path]{a pathname or namestring with the resource path to play back}
+  @return{A new @class{gtk:video} widget.}
+  @short{Creates a new @class{gtk:video} widget to play the given @arg{path}.}
+  This is a utility function that calls the @fun{gtk:video-new-for-file}
+  function.
+  @see-class{gtk:video}
+  @see-function{gtk:video-new-for-file}"
+  (%video-new-for-resource (namestring path)))
 
-;;; ----------------------------------------------------------------------------
-;;;gtk_video_get_file ()
-;;;GFile *
-;;;gtk_video_get_file (GtkVideo *self);
-;;;Gets the file played by self or NULL if not playing back a file.
-
-;;;Parameters
-;;;self
-
-;;;a GtkVideo
-
-;;;Returns
-;;;The file played by self .
-
-;;;[nullable][transfer none]
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_video_set_file ()
-;;;
-;;; void
-;;; gtk_video_set_file (GtkVideo *self,
-;;;                     GFile *file);
-;;;
-;;; Makes self play the given file .
-;;;
-;;; self :
-;;;     a GtkVideo
-;;;
-;;; file :
-;;;     the file to play.
-;;; ----------------------------------------------------------------------------
+(export 'video-new-for-resource)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_video_set_filename ()
-;;;
-;;; void
-;;; gtk_video_set_filename (GtkVideo *self,
-;;;                         const char *filename);
-;;;
-;;; Makes self play the given filename .
-;;;
-;;; This is a utility function that calls gtk_video_set_file(),
-;;;
-;;; self :
-;;;     a GtkVideo
-;;;
-;;; filename :
-;;;     the filename to play.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_video_set_filename" video-set-filename) :void
+(defcfun ("gtk_video_set_filename" %video-set-filename) :void
   (video (g:object video))
   (filename :string))
+
+(defun video-set-filename (video path)
+ #+liber-documentation
+ "@version{#2023-4-29}
+  @argument[video]{a @class{gtk:video} widget}
+  @argument[path]{a pathname or namestring with the file to play}
+  @short{Makes @arg{object} play the given @arg{path}.}
+  This is a utility function that calls the @fun{gtk:video-file} function,
+  @see-class{gtk:video}
+  @see-function{gtk:video-file}"
+  (%video-set-filename video (namestring path)))
 
 (export 'video-set-filename)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_video_set_resource ()
-;;;
-;;; void
-;;; gtk_video_set_resource (GtkVideo *self,
-;;;                         const char *resource_path);
-;;;
-;;; Makes self play the resource at the given resource_path .
-;;;
-;;; This is a utility function that calls gtk_video_set_file(),
-;;;
-;;; self :
-;;;     a GtkVideo
-;;;
-;;; resource_path :
-;;;     the resource to set.
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_video_get_autoplay ()
-;;;
-;;; gboolean
-;;; gtk_video_get_autoplay (GtkVideo *self);
-;;;
-;;; Returns TRUE if videos have been set to loop via gtk_video_set_loop().
-;;;
-;;; self :
-;;;     a GtkVideo
-;;;
-;;; Returns :
-;;;     TRUE if streams should autoplay
-;;; ----------------------------------------------------------------------------
+(defcfun ("gtk_video_set_resource" %video-set-resource) (g:object video)
+  (path :string))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_video_set_autoplay ()
-;;;
-;;; void
-;;; gtk_video_set_autoplay (GtkVideo *self,
-;;;                         gboolean autoplay);
-;;;
-;;; Sets whether self automatically starts playback when it becomes visible or
-;;; when a new file gets loaded.
-;;;
-;;; self :
-;;;     a GtkVideo
-;;;
-;;; autoplay :
-;;;     whether media streams should autoplay
-;;; ----------------------------------------------------------------------------
+(defun video-set-resource (video path)
+ #+liber-documentation
+ "@version{#2023-4-29}
+  @argument[video]{a @class{gtk:video} widget}
+  @argument[path]{a pathname or namestring with the resource to play}
+  @short{Makes @arg{object} play the resource at the given @arg{path}.}
+  This is a utility function that calls the @fun{gtk:video-file} function,
+  @see-class{gtk:video}
+  @see-function{gtk:video-file}"
+  (%video-set-resource (namestring path)))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_video_get_loop ()
-;;;
-;;; gboolean
-;;; gtk_video_get_loop (GtkVideo *self);
-;;;
-;;; Returns TRUE if videos have been set to loop via gtk_video_set_loop().
-;;;
-;;; self :
-;;;     a GtkVideo
-;;;
-;;; Returns :
-;;;     TRUE if streams should loop
-;;; ----------------------------------------------------------------------------
+(export 'video-set-resource)
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_video_set_loop ()
-;;;
-;;; void
-;;; gtk_video_set_loop (GtkVideo *self,
-;;;                     gboolean loop);
-;;;
-;;; Sets whether new files loaded by self should be set to loop.
-;;;
-;;; self :
-;;;     a GtkVideo
-;;;
-;;; loop :
-;;;     whether media streams should loop
-;;; ----------------------------------------------------------------------------
-
-;;; --- End of file gtk.video.lisp ---------------------------------------------
+;;; --- End of file gtk4.video.lisp --------------------------------------------
