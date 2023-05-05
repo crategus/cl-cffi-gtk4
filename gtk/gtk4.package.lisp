@@ -384,10 +384,10 @@
       A centering container.
       @about-class{center-box}
       @about-generic{center-box-baseline-position}
+      @about-generic{center-box-center-widget}
+      @about-generic{center-box-end-widget}
+      @about-generic{center-box-start-widget}
       @about-function{center-box-new}
-      @about-function{center-box-start-widget}
-      @about-function{center-box-center-widget}
-      @about-function{center-box-end-widget}
       @end{subsection}
     @begin[GtkGrid]{subsection}
       Arranges its child widgets in rows and columns.
@@ -769,9 +769,8 @@
     @end{subsection}
     @begin[GtkConstraintLayout]{subsection}
       A layout manager using constraints.
-      @about-class{constraint-layout}
       @about-class{constraint-layout-child}
-      @about-symbol{constraint-vfl-parser-error}
+      @about-class{constraint-layout}
       @about-function{constraint-layout-new}
       @about-function{constraint-layout-add-constraint}
       @about-function{constraint-layout-remove-constraint}
@@ -2564,6 +2563,7 @@
       A file chooser widget.
       @about-class{file-chooser-widget}
       @about-generic{file-chooser-widget-search-mode}
+      @about-generic{file-chooser-widget-show-time}
       @about-generic{file-chooser-widget-subtitle}
       @about-function{file-chooser-widget-new}
     @end{subsection}
@@ -4035,14 +4035,17 @@
     @begin[GtkFileFilter]{subsection}
       Filtering files.
       @about-class{file-filter}
+      @about-generic{file-filter-mime-types}
       @about-generic{file-filter-name}
+      @about-generic{file-filter-patterns}
+      @about-generic{file-filter-suffixes}
       @about-function{file-filter-new}
+      @about-function{file-filter-new-from-gvariant}
       @about-function{file-filter-add-mime-type}
       @about-function{file-filter-add-pattern}
       @about-function{file-filter-add-pixbuf-formats}
       @about-function{file-filter-add-suffix}
       @about-function{file-filter-attributes}
-      @about-function{file-filter-new-from-gvariant}
       @about-function{file-filter-to-gvariant}
     @end{subsection}
     @begin[GtkFlattenListModel]{subsection}
