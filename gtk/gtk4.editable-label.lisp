@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.editable-label.lisp
+;;; gtk4.editable-label.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkEditableLabel
@@ -103,7 +104,6 @@
   @kbd{Enter} key. The default bindings for leaving the edit mode are the
   @kbd{Enter} key, to save the results, or the @kbd{Escape} key, to cancel the
   editing.
-
   @begin[CSS Nodes]{dictionary}
     @begin{pre}
 editablelabel[.editing]
@@ -113,10 +113,8 @@ editablelabel[.editing]
     @end{pre}
     The @sym{gtk:editable-label} implementation has a main node with the name
     @code{editablelabel}. When the entry is in editing mode, it gets the
-    @code{.editing} style class.
-
-    For all the subnodes added to the text node in various situations, see
-    the @class{gtk:text} documentation.
+    @code{.editing} style class. For all the subnodes added to the text node in
+    various situations, see the @class{gtk:text} documentation.
   @end{dictionary}
   @begin[Action Details]{dictionary}
     @subheading{The \"editing.stop\" action}
@@ -134,8 +132,8 @@ editablelabel[.editing]
       and the @kbd{Enter} key. This action is disabled when the @code{editing}
       property is @em{false}.
   @end{dictionary}
-  @see-slot{gtk:editable-label}
   @see-constructor{gtk:editable-label-new}
+  @see-slot{gtk:editable-label-editing}
   @see-class{gtk:editable}
   @see-class{gtk:label}
   @see-class{gtk:entry}")
@@ -144,7 +142,7 @@ editablelabel[.editing]
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- editable-label-editing ---------------------------------------------
+;;; --- editable-label-editing -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "editing" 'editable-label) t)
@@ -165,7 +163,6 @@ editablelabel[.editing]
     Accessor of the @slot[gtk:editable-label]{editing} slot of the
     @class{gtk:editable-label} class.
   @end{short}
-
   The @sym{gtk:editable-label-editing} function returns whether the label is
   currently in editing mode.
   @see-class{gtk:editable-label}")
@@ -187,45 +184,39 @@ editablelabel[.editing]
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_editable_label_start_editing ()
-;;;
-;;; void
-;;; gtk_editable_label_start_editing (GtkEditableLabel *self);
-;;;
-;;; Switches the label into “editing mode”.
-;;;
-;;; label:
-;;;     a GtkEditableLabel
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_editable_label_start_editing" editable-label-start-editing)
-    :void
+(defcfun ("gtk_editable_label_start_editing" editable-label-start-editing) :void
+ #+liber-documentation
+ "@version{#2023-5-4}
+  @argument[label]{a @class{gtk:editable-label} widget}
+  @short{Switches the label into \"editing mode\".}
+  @see-class{gtk:editable-label}"
   (label (g:object editable-label)))
 
 (export 'editable-label-start-editing)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_editable_label_stop_editing ()
-;;;
-;;; void
-;;; gtk_editable_label_stop_editing (GtkEditableLabel *self,
-;;;                                  gboolean commit);
-;;;
-;;; Switches the label out of “editing mode”. If commit is TRUE, the resulting
-;;; text is kept as the “text” property value, otherwise the resulting text is
-;;; discarded and the label will keep its previous “text” property value.
-;;;
-;;; self :
-;;;     a GtkEditableLabel
-;;;
-;;; commit :
-;;;     whether to set the edited text on the label
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_editable_label_stop_editing" editable-label-stop-editing)
-    :void
+(defcfun ("gtk_editable_label_stop_editing" editable-label-stop-editing) :void
+ #+liber-documentation
+ "@version{#2023-5-4}
+  @argument[label]{a @class{gtk:editable-label} widget}
+  @argument[commit]{a boolean whether to set the edited text on the label}
+  @begin{short}
+    Switches the label out of “editing mode”.
+  @end{short}
+  If commit is @em{true}, the resulting text is kept as the
+  @slot[gtk:editable]{text} property value, otherwise the resulting text is
+  discarded and the label will keep its previous @slot[gtk:editable]{text}
+  property value.
+  @see-class{gtk:editable-label}
+  @see-function{gtk:editable-text}"
   (label (g:object editable-label))
   (commit :boolean))
 
 (export 'editable-label-stop-editing)
 
-;;; --- End of file gtk.editable-label.lisp ------------------------------------
+;;; --- End of file gtk4.editable-label.lisp -----------------------------------

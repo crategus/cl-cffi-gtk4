@@ -1,33 +1,33 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.file-chooser-widget.lisp
+;;; gtk4.file-chooser-widget.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
-;;; GtkFileChooserWidget
+;;; GtkFileChooserWidget                                   Deprecated since 4.10
 ;;;
 ;;;     A file chooser widget
 ;;;
@@ -42,6 +42,7 @@
 ;;; Properties
 ;;;
 ;;;     search-mode
+;;;     show-time                                          Since 4.10
 ;;;     subtitle
 ;;;
 ;;; Signals
@@ -91,6 +92,10 @@
   ((search-mode
     file-chooser-widget-search-mode
     "search-mode" "gboolean" t t)
+   #+gtk-4-10
+   (show-time
+    file-chooser-widget-show-time
+    "show-time" "gboolean" t nil)
    (subtitle
     file-chooser-widget-subtitle
     "subtitle" "gchararray" t nil)))
@@ -103,6 +108,10 @@
   @end{short}
   It exposes the @class{gtk:file-chooser} interface, and you should use the
   methods of this interface to interact with the widget.
+  @begin[Warning]{dictionary}
+    The @sym{gtk:file-chooser-widget} class is deprecated since 4.10. Direct
+    use of the @sym{gtk:file-chooser-widget} widget is deprecated.
+  @end{dictionary}
   @begin[CSS nodes]{dictionary}
     The @sym{gtk:file-chooser-widget} widget has a single CSS node with name
     @code{filechooser}.
@@ -261,6 +270,10 @@ lambda (widget)    :action
           the signal.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:file-chooser-widget-new}
+  @see-slot{gtk:file-chooser-widget-search-mode}
+  @see-slot{gtk:file-chooser-widget-show-time}
+  @see-slot{gtk:file-chooser-widget-subtitle}
   @see-class{gtk:file-chooser}
   @see-class{gtk:file-chooser-dialog}")
 
@@ -268,7 +281,7 @@ lambda (widget)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- file-chooser-widget-search-mode ------------------------------------
+;;; --- file-chooser-widget-search-mode ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "search-mode"
@@ -282,17 +295,50 @@ lambda (widget)    :action
       "Accessor"
       (documentation 'file-chooser-widget-search-mode 'function)
  "@version{#2021-2-5}
-  @syntax[]{(gtk:file-chooser-widget object) => search-mode}
-  @syntax[]{(setf (gtk:file-chooser-widget object) search-mode)}
+  @syntax[]{(gtk:file-chooser-widget-search-mode object) => mode}
+  @syntax[]{(setf (gtk:file-chooser-widget-search-mode object) mode)}
   @argument[object]{a @class{gtk:file-chooser-widget} widget}
-  @argument[search-mode]{a boolean whether in search mode}
+  @argument[mode]{a boolean whether in search mode}
   @begin{short}
     Accessor of the @slot[gtk:file-chooser-widget]{search-mode} slot of the
     @class{gtk:file-chooser-widget} class.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @sym{gtk:file-chooser-widget} class is deprecated since 4.10. Direct
+    use of the @sym{gtk:file-chooser-widget} widget is deprecated.
+  @end{dictionary}
   @see-class{gtk:file-chooser-widget}")
 
-;;; --- file-chooser-widget-subtitle ---------------------------------------
+;;; --- file-chooser-widget-show-time ------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "show-time"
+                                               'file-chooser-widget) t)
+ "The @code{show-time} property of type @code{:boolean} (Read) @br{}
+  Whether to show the time. Since 4.10 @br{}
+  Default value: @em{false}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'file-chooser-widget-show-time)
+      "Accessor"
+      (documentation 'file-chooser-widget-show-time 'function)
+ "@version{#2023-5-5}
+  @syntax[]{(gtk:file-chooser-widget-show-time object) => setting}
+  @argument[object]{a @class{gtk:file-chooser-widget} widget}
+  @argument[setting]{a boolean whether in search mode}
+  @begin{short}
+    Accessor of the @slot[gtk:file-chooser-widget]{show-time} slot of the
+    @class{gtk:file-chooser-widget} class.
+  @end{short}
+
+  Since 4.10
+  @begin[Warning]{dictionary}
+    The @sym{gtk:file-chooser-widget} class is deprecated since 4.10. Direct
+    use of the @sym{gtk:file-chooser-widget} widget is deprecated.
+  @end{dictionary}
+  @see-class{gtk:file-chooser-widget}")
+
+;;; --- file-chooser-widget-subtitle -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "subtitle"
@@ -306,14 +352,17 @@ lambda (widget)    :action
       "Accessor"
       (documentation 'file-chooser-widget-subtitle 'function)
  "@version{#2021-2-5}
-  @syntax[]{(gtk:file-chooser-widget object) => subtitle}
-  @syntax[]{(setf (gtk:file-chooser-widget object) subtitle)}
+  @syntax[]{(gtk:file-chooser-widget-subtitle object) => subtitle}
   @argument[object]{a @class{gtk:file-chooser-widget} widget}
   @argument[subtitle]{a string with the subtitle}
   @begin{short}
     Accessor of the @slot[gtk:file-chooser-widget]{subtitle} slot of the
     @class{gtk:file-chooser-widget} class.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @sym{gtk:file-chooser-widget} class is deprecated since 4.10. Direct
+    use of the @sym{gtk:file-chooser-widget} widget is deprecated.
+  @end{dictionary}
   @see-class{gtk:file-chooser-widget}")
 
 ;;; ----------------------------------------------------------------------------
@@ -333,6 +382,10 @@ lambda (widget)    :action
   @end{short}
   This is a file chooser widget that can be embedded in custom windows, and it
   is the same widget that is used by the @class{gtk:file-chooser-dialog} widget.
+  @begin[Warning]{dictionary}
+    The @sym{gtk:file-chooser-widget} class is deprecated since 4.10. Direct
+    use of the @sym{gtk:file-chooser-widget} widget is deprecated.
+  @end{dictionary}
   @see-class{gtk:file-chooser-widget}
   @see-class{gtk:file-chooser-dialog}
   @see-symbol{gtk:file-chooser-action}"
@@ -341,4 +394,4 @@ lambda (widget)    :action
 
 (export 'file-chooser-widget-new)
 
-;;; --- End of file gtk.file-chooser-widget.lisp -------------------------------
+;;; --- End of file gtk4.file-chooser-widget.lisp ------------------------------

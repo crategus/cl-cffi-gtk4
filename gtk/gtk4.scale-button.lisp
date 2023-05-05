@@ -75,6 +75,7 @@
 ;;; Implemented Interfaces
 ;;;
 ;;;     GtkAccessible
+;;;     GtkAccessibleRange                                 Since 4.10
 ;;;     GtkBuildable
 ;;;     GtkConstraintTarget
 ;;;     GtkOrientable
@@ -85,6 +86,8 @@
 ;;; ----------------------------------------------------------------------------
 ;;; struct GtkScaleButton
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: Implement the GtkAccessibleRange interface
 
 (define-g-object-class "GtkScaleButton" scale-button
   (:superclass widget

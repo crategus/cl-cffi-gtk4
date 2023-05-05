@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.paned.lisp
+;;; gtk4.paned.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkPaned
@@ -91,6 +91,7 @@
 ;;; Implemented Interfaces
 ;;;
 ;;;     GtkAccessible
+;;;     GtkAccessibleRange                                 Since 4.10
 ;;;     GtkBuildable
 ;;;     GtkConstraintTarget
 ;;;     GtkOrientable
@@ -101,6 +102,8 @@
 ;;; ----------------------------------------------------------------------------
 ;;; GtkPaned
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: Implement the GtkAccessibleRange interface
 
 (define-g-object-class "GtkPaned" paned
   (:superclass widget
@@ -278,6 +281,7 @@ lambda (widget)    :action
         @entry[widget]{The @sym{gtk:paned} widget that received the signal.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:paned-new}
   @see-slot{gtk:paned-end-child}
   @see-slot{gtk:paned-max-position}
   @see-slot{gtk:paned-min-position}
@@ -289,14 +293,13 @@ lambda (widget)    :action
   @see-slot{gtk:paned-shrink-start-child}
   @see-slot{gtk:paned-start-child}
   @see-slot{gtk:paned-wide-handle}
-  @see-constructor{gtk:paned-new}
   @see-symbol{gtk:scroll-type}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- paned-end-child ----------------------------------------------------
+;;; --- paned-end-child --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "end-child" 'paned) t)
@@ -322,7 +325,7 @@ lambda (widget)    :action
   @see-class{gtk:paned}
   @see-class{gtk:widget}")
 
-;;; --- paned-max-position -------------------------------------------------
+;;; --- paned-max-position -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-position" 'paned) t)
@@ -351,7 +354,7 @@ lambda (widget)    :action
   @see-function{gtk:paned-position}
   @see-function{gtk:paned-min-position}")
 
-;;; --- paned-min-position -------------------------------------------------
+;;; --- paned-min-position -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "min-position" 'paned) t)
@@ -374,13 +377,13 @@ lambda (widget)    :action
     Accessor of the @slot[gtk:paned]{min-position} slot of the
     @class{gtk:paned} class.
   @end{short}
-  The @sym{gtk:paned-min-position} function gets the smallest possible value for
-  the position property.
+  The @sym{gtk:paned-min-position} function gets the smallest possible value
+  for the position property.
   @see-class{gtk:paned}
   @see-function{gtk:paned-position}
   @see-function{gtk:paned-max-position}")
 
-;;; --- paned-position -----------------------------------------------------
+;;; --- paned-position ---------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "position" 'paned) t)
@@ -411,7 +414,7 @@ lambda (widget)    :action
   @see-function{gtk:paned-max-position}
   @see-function{gtk:paned-min-position}")
 
-;;; --- paned-position-set -------------------------------------------------
+;;; --- paned-position-set -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "position-set" 'paned) t)
@@ -441,11 +444,10 @@ lambda (widget)    :action
   @see-class{gtk:paned}
   @see-function{gtk:paned-position}")
 
-;;; --- paned-resize-end-child ---------------------------------------------
+;;; --- paned-resize-end-child -------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "resize-end-child"
-                                               'paned) t)
+(setf (documentation (liber:slot-documentation "resize-end-child" 'paned) t)
  "The @code{resize-end-child} property of type @code{:boolean} (Read / Write)
   @br{}
   Determines whether the second child expands and shrinks along with the paned
@@ -470,11 +472,10 @@ lambda (widget)    :action
   sets the property.
   @see-class{gtk:paned}")
 
-;;; --- paned-resize-start-child -------------------------------------------
+;;; --- paned-resize-start-child -----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "resize-start-child"
-                                               'paned) t)
+(setf (documentation (liber:slot-documentation "resize-start-child" 'paned) t)
  "The @code{resize-start-child} property of type @code{:boolean} (Read / Write)
   @br{}
   Determines whether the first child expands and shrinks along with the paned
@@ -499,11 +500,10 @@ lambda (widget)    :action
   function sets the property.
   @see-class{gtk:paned}")
 
-;;; --- paned-shrink-end-child ---------------------------------------------
+;;; --- paned-shrink-end-child -------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "shrink-end-child"
-                                               'paned) t)
+(setf (documentation (liber:slot-documentation "shrink-end-child" 'paned) t)
  "The @code{shrink-end-child} property of type @code{:boolean} (Read / Write)
   @br{}
   Determines whether the second child can be made smaller than its requisition.
@@ -529,11 +529,10 @@ lambda (widget)    :action
   @sym{(setf gtk:paned-shrink-end-child)} function sets the property.
   @see-class{gtk:paned}")
 
-;;; --- paned-shrink-start-child -------------------------------------------
+;;; --- paned-shrink-start-child -----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "shrink-start-child"
-                                               'paned) t)
+(setf (documentation (liber:slot-documentation "shrink-start-child" 'paned) t)
  "The @code{shrink-start-child} property of type @code{:boolean} (Read / Write)
   @br{}
   Determines whether the first child can be made smaller than its requisition.
@@ -559,7 +558,7 @@ lambda (widget)    :action
   @sym{(setf gtk:paned-shrink-start-child)} function sets the property.
   @see-class{gtk:paned}")
 
-;;; --- paned-start-child --------------------------------------------------
+;;; --- paned-start-child ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "start-child" 'paned) t)
@@ -634,4 +633,4 @@ lambda (widget)    :action
 
 (export 'paned-new)
 
-;;; --- End of file gtk.paned.lisp ---------------------------------------------
+;;; --- End of file gtk4.paned.lisp --------------------------------------------

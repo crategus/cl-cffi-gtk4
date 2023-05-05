@@ -54,6 +54,7 @@
 ;;; Implemented Interfaces
 ;;;
 ;;;     GtkAccessible
+;;;     GtkAccessibleRange                                 Since 4.10
 ;;;     GtkBuildable
 ;;;     GtkConstraintTarget
 ;;;     GtkOrientable
@@ -64,6 +65,8 @@
 ;;; ----------------------------------------------------------------------------
 ;;; struct GtkVolumeButton
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: Implement the GtkAccessibleRange interface
 
 (define-g-object-class "GtkVolumeButton" volume-button
   (:superclass scale-button

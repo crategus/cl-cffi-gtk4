@@ -2,7 +2,7 @@
 ;;; gtk4.entry.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -2271,18 +2271,18 @@ lambda (entry pos)    :run-last
 
 (defcfun ("gtk_entry_grab_focus_without_selecting"
           entry-grab-focus-without-selecting) :void
- #+cl-cffi-documentation
- "@version{#2021-11-4}
+ #+liber-documentation
+ "@version{#2023-5-3}
   @argument[entry]{a @class{gtk:entry} widget}
   @begin{short}
     Causes entry to have keyboard focus.
   @end{short}
-
   It behaves like the @fun{gtk:widget-grab-focus} function, except that it
   does not select the contents of the entry. You only want to call this on some
   special entries which the user usually does not want to replace all text in,
   such as search-as-you-type entries.
-  @see-class{gtk:entry}"
+  @see-class{gtk:entry}
+  @see-function{gtk:widget-grab-focus}"
   (entry (g:object entry)))
 
 (export 'entry-grab-focus-without-selecting)

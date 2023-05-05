@@ -253,7 +253,7 @@
 
 #+liber-documentation
 (setf (documentation 'window 'type)
- "@version{2023-3-19}
+ "@version{2023-4-29}
   @begin{short}
     A @sym{gtk:window} widget is a toplevel window which can contain other
     widgets.
@@ -364,8 +364,10 @@ lambda (window toggle)    :action
       @begin{pre}
 lambda (window)    :run-first
       @end{pre}
-      The signal gets emitted when the set of accelerators or mnemonics that are
-      associated with the window changes.
+      The signal gets emitted when the set of accelerators or mnemonics that
+      are associated with the window changes. @br{}
+      @em{Warning:} Deprecated since 4.10. Use @class{gtk:shortcut} and
+      @class{gtk:event-controller} objects to implement keyboard shortcuts.
       @begin[code]{table}
         @entry[window]{The @sym{gtk:window} widget which received the signal.}
       @end{table}

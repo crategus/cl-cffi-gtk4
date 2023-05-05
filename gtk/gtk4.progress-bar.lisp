@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.progress-bar.lisp
+;;; gtk4.progress-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkProgressBar
@@ -73,6 +74,7 @@
 ;;; Implemented Interfaces
 ;;;
 ;;;     GtkAccessible
+;;;     GtkAcessibleRange                                  Since 4.10
 ;;;     GtkBuildable
 ;;;     GtkConstraintTarget
 ;;;     GtkOrientable
@@ -83,6 +85,8 @@
 ;;; ----------------------------------------------------------------------------
 ;;; struct GtkProgressBar
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: Implement the GtkAccessibleRange interface
 
 (define-g-object-class "GtkProgressBar" progress-bar
   (:superclass widget
@@ -162,6 +166,7 @@ progressbar[.osd]
     The @class{gtk:progress-bar} implementation uses the @code{:progress-bar}
     role of the @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
+  @see-constructor{gtk:progress-bar-new}
   @see-slot{gtk:progress-bar-ellipsize}
   @see-slot{gtk:progress-bar-fraction}
   @see-slot{gtk:progress-bar-inverted}
@@ -173,11 +178,10 @@ progressbar[.osd]
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- progress-bar-ellipsize ---------------------------------------------
+;;; --- progress-bar-ellipsize -------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "ellipsize"
-                                               'progress-bar) t)
+(setf (documentation (liber:slot-documentation "ellipsize" 'progress-bar) t)
  "The @code{ellipsize} property of type @symbol{pango:ellipsize-mode}
   (Read / Write) @br{}
   The preferred place to ellipsize the string, if the progress bar does not
@@ -210,7 +214,7 @@ progressbar[.osd]
   @see-class{gtk:progress-bar}
   @see-symbol{pango:ellipsize-mode}")
 
-;;; --- progress-bar-fraction ----------------------------------------------
+;;; --- progress-bar-fraction --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fraction" 'progress-bar) t)
@@ -234,14 +238,14 @@ progressbar[.osd]
     @class{gtk:progress-bar} class.
   @end{short}
 
-  The @sym{gtk:progress-bar-fraction} function returns the current fraction from
-  0.0 to 1.0 of the task that is been completed. The
+  The @sym{gtk:progress-bar-fraction} function returns the current fraction
+  from 0.0 to 1.0 of the task that is been completed. The
   @sym{(setf gtk:progress-bar-fraction)} function causes the progress bar to
   \"fill in\" the given fraction of the bar. The fraction should be between 0.0
   and 1.0, inclusive.
   @see-class{gtk:progress-bar}")
 
-;;; --- progress-bar-inverted ----------------------------------------------
+;;; --- progress-bar-inverted --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "inverted" 'progress-bar) t)
@@ -267,11 +271,10 @@ progressbar[.osd]
   progress bars grow in the opposite direction.
   @see-class{gtk:progress-bar}")
 
-;;; --- progress-bar-pulse-step --------------------------------------------
+;;; --- progress-bar-pulse-step ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "pulse-step"
-                                               'progress-bar) t)
+(setf (documentation (liber:slot-documentation "pulse-step" 'progress-bar) t)
  "The @code{pulse-step} property of type @code{:double} (Read / Write) @br{}
   The fraction of total progress to move the bouncing block when pulsed. @br{}
   Allowed values: [0.0, 1.0] @br{}
@@ -298,11 +301,10 @@ progressbar[.osd]
   @see-class{gtk:progress-bar}
   @see-function{gtk:progress-bar-pulse}")
 
-;;; --- progress-bar-show-text ---------------------------------------------
+;;; --- progress-bar-show-text -------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "show-text"
-                                               'progress-bar) t)
+(setf (documentation (liber:slot-documentation "show-text" 'progress-bar) t)
  "The @code{show-text} property of type @code{:boolean} (Read / Write) @br{}
   Sets whether the progress bar will show text superimposed over the bar. The
   shown text is either the value of the @code{text} property or, if that is
@@ -341,7 +343,7 @@ progressbar[.osd]
   @see-function{gtk:progress-bar-text}
   @see-function{gtk:progress-bar-fraction}")
 
-;;; --- progress-bar-text --------------------------------------------------
+;;; --- progress-bar-text ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text" 'progress-bar) t)
@@ -426,4 +428,4 @@ progressbar[.osd]
 
 (export 'progress-bar-pulse)
 
-;;; --- End of file gtk.progress-bar.lisp --------------------------------------
+;;; --- End of file gtk4.progress-bar.lisp -------------------------------------

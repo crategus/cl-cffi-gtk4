@@ -2,7 +2,7 @@
 ;;; gtk4.enumerations.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -220,7 +220,7 @@
 (setf (liber:alias-for-symbol 'baseline-position)
       "GEnum"
       (liber:symbol-documentation 'baseline-position)
- "@version{#2021-12-28}
+ "@version{#2023-4-19}
   @begin{short}
     Baseline position in a row of widgets.
   @end{short}
@@ -228,7 +228,7 @@
   Whenever a container has some form of natural row it may align children in
   that row along a common typographical baseline. If the amount of vertical
   space in the row is taller than the total requested height of the
-  baseline-aligned children then it can use a @sym{baseline-position} value
+  baseline aligned children then it can use a @sym{gtk:baseline-position} value
   to select where to put the baseline inside the extra available space.
   @begin{pre}
 (define-g-enum \"GtkBaselinePosition\" baseline-position
@@ -242,7 +242,9 @@
     @entry[:top]{Align the baseline at the top.}
     @entry[:center]{Center the baseline.}
     @entry[:bottom]{Align the baseline at the bottom.}
-  @end{table}")
+  @end{table}
+  @see-class{gtk:box}
+  @see-class{gtk:grid}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkDeleteType
@@ -2357,7 +2359,9 @@
   :tree-grid
   :tree-item
   :widget
-  :window)
+  :window
+  #+gtk-4-10
+  :toggle-button)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-role)
@@ -2450,7 +2454,8 @@
   :tree-grid
   :tree-item
   :widget
-  :window)
+  :window
+  :toggle-button)
   @end{pre}
   @begin[code]{table}
     @entry[:alert]{An element with important, and usually time-sensitive,
@@ -2552,6 +2557,8 @@
     @entry[:widget]{An interactive component of a graphical user interface. This
       is the role that GTK uses by default for widgets.}
     @entry[:window]{An application window.}
+    @entry[:toggle-button]{A type of push button which stays pressed until
+      depressed by a second activation. Since: 4.10}
   @end{table}
   @see-class{gtk:accessible}")
 

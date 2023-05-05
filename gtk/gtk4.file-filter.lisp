@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.file-filter.lisp
+;;; gtk4.file-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkFileFilter
@@ -42,17 +43,20 @@
 ;;; Functions
 ;;;
 ;;;     gtk_file_filter_new
+;;;     gtk_file_filter_new_from_gvariant
 ;;;     gtk_file_filter_add_mime_type
 ;;;     gtk_file_filter_add_pattern
 ;;;     gtk_file_filter_add_pixbuf_formats
 ;;;     gtk_file_filter_add_suffix                         Since 4.4
 ;;;     gtk_file_filter_get_attributes
-;;;     gtk_file_filter_new_from_gvariant
 ;;;     gtk_file_filter_to_gvariant
 ;;;
 ;;; Properties
 ;;;
+;;;     mime-types                                         Since 4.10
 ;;;     name
+;;;     patterns                                           Since 4.10
+;;;     suffixes                                           Since 4.10
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -69,47 +73,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkFileFilter
-;;;
-;;; A GtkFileFilter can be used to restrict the files being shown in a
-;;; GtkFileChooser. Files can be filtered based on their name (with
-;;; gtk_file_filter_add_pattern()) or on their mime type (with
-;;; gtk_file_filter_add_mime_type()).
-;;;
-;;; Filtering by mime types handles aliasing and subclassing of mime types; e.g.
-;;; a filter for text/plain also matches a file with mime type application/rtf,
-;;; since application/rtf is a subclass of text/plain. Note that GtkFileFilter
-;;; allows wildcards for the subtype of a mime type, so you can e.g. filter for
-;;; image/*.
-;;;
-;;; Normally, file filters are used by adding them to a GtkFileChooser (see
-;;; gtk_file_chooser_add_filter()), but it is also possible to manually use a
-;;; file filter on any GtkFilterListModel containing GFileInfo objects.
-;;;
-;;; GtkFileFilter as GtkBuildable
-;;;
-;;; The GtkFileFilter implementation of the GtkBuildable interface supports
-;;; adding rules using the <mime-types> and <patterns> elements and listing the
-;;; rules within. Specifying a <mime-type> or <pattern> has the same effect as
-;;; as calling gtk_file_filter_add_mime_type() or gtk_file_filter_add_pattern().
-;;;
-;;; An example of a UI definition fragment specifying GtkFileFilter rules:
-;;;
-;;; <object class="GtkFileFilter">
-;;;   <property name="name" translatable="yes">Text and Images</property>
-;;;   <mime-types>
-;;;     <mime-type>text/plain</mime-type>
-;;;     <mime-type>image/ *</mime-type>
-;;;   </mime-types>
-;;;   <patterns>
-;;;     <pattern>*.txt</pattern>
-;;;   </patterns>
-;;;   <suffixes>
-;;;     <suffix>png</suffix>
-;;;   </suffixes>
-;;; </object>
-;;;
-;;; See Also
-;;;     GtkFileChooser
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GtkFileFilter" file-filter
@@ -117,110 +80,203 @@
    :export t
    :interfaces nil
    :type-initializer "gtk_file_filter_get_type")
-  ((name
+  (#+gtk-4-10
+   (mime-types
+    file-filter-mime-types
+    "mime-types" "gchararray" nil nil)
+   (name
     file-filter-name
-    "name" "gchararray" t t)))
+    "name" "gchararray" t t)
+   #+gtk-4-10
+   (patterns
+    file-filter-patterns
+    "patterns" "gchararray" nil nil)
+   #+gtk-4-10
+   (suffixes
+    file-filter-suffixes
+    "suffixes" "gchararray" nil nil)))
+
+#+liber-documentation
+(setf (documentation 'file-filter 'type)
+ "@version{#2023-5-5}
+  @begin{short}
+    A @sym{gtk:file-filter} object can be used to restrict the files being shown
+    in a @class{gtk:file-chooser} widget.
+  @end{short}
+  Files can be filtered based on their name with the
+  @fun{gtk:file-filter-add-pattern} function or on their mime type with the
+  @fun{gtk:file-filter-add-mime-type} function.
+
+  Filtering by mime types handles aliasing and subclassing of mime types. E.g.
+  a filter for @file{text/plain} also matches a file with mime type
+  @file{application/rtf}, since @file{application/rtf} is a subclass of
+  @file{text/plain}. Note that the @sym{gtk:file-filter} object allows wildcards
+  for the subtype of a mime type, so you can e.g. filter for @file{image/*}.
+
+  Normally, file filters are used by adding them to a @class{gtk:file-chooser}
+  widget, see the @fun{gtk:file-chooser-add-filter} function, but it is also
+  possible to manually use a file filter on any @class{gtk:filter-list-model}
+  object containing @class{g:file-info} objects.
+  @begin[GtkFileFilter as GtkBuildable]{dictionary}
+    The @sym{gtk:file-filter} implementation of the @class{gtk:buildable}
+    interface supports adding rules using the @code{<mime-types>} and
+    @code{<patterns>} elements and listing the rules within. Specifying a
+    @code{<mime-type>} or @code{<pattern>} has the same effect as calling
+    the @fun{gtk:file-filter-add-mime-type} or @fun{gtk:file-filter-add-pattern}
+    functions.
+  @end{dictionary}
+  @begin[Example]{dictionary}
+    An example of a UI definition fragment specifying @sym{gtk:file-filter}
+    rules:
+    @begin{pre}
+<object class=\"GtkFileFilter\">
+  <property name=\"name\" translatable=\"yes\">Text and Images</property>
+  <mime-types>
+    <mime-type>text/plain</mime-type>
+    <mime-type>image/ *</mime-type>
+  </mime-types>
+  <patterns>
+    <pattern>*.txt</pattern>
+  </patterns>
+  <suffixes>
+    <suffix>png</suffix>
+  </suffixes>
+</object>
+    @end{pre}
+  @end{dictionary}
+  @see-constructor{gtk:file-filter-new}
+  @see-constructor{gtk:file-filter-new-from-gvariant}
+  @see-slot{gtk:file-filter-name}
+  @see-class{gtk:file-chooser}")
 
 ;;; ----------------------------------------------------------------------------
-;;; Property Details
+;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “name” property
-;;;
-;;;  “name”                     char *
-;;;
-;;; The human-readable name of the filter.
-;;;
-;;; This is the string that will be displayed in the file selector user
-;;; interface if there is a selectable list of filters.
-;;;
-;;; Owner: GtkFileFilter
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: NULL
-;;; ----------------------------------------------------------------------------
+;;; --- file-filter-mime-types -------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "mime-types" 'file-filter) t)
+ "The @code{mime-types} property of type @code{gchararray}
+  (Write / Construct only) @br{}
+  The MIME types that this filter matches. Since 4.10")
+
+(unexport 'file-filter-mime-types)
+
+;;; --- file-filter-name -------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "name" 'file-filter) t)
+ "The @code{name} property of type @code{:string} (Read / Write) @br{}
+  The human-readable name of the filter. This is the string that will be
+  displayed in the file selector user interface if there is a selectable list
+  of filters. @br{}
+  Default value: @code{nil}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'file-filter-name)
+      "Accessor"
+      (documentation 'file-filter-name 'function)
+ "@version{#2023-5-5}
+  @syntax[]{(gtk:file-filter-name object) => name}
+  @syntax[]{(setf (gtk:file-filter-name object) name)}
+  @argument[object]{a @class{gtk:file-filter} object}
+  @argument[name]{a string with the human-readable-name for the filter, or
+    @code{nil} to remove any existing name}
+  @begin{short}
+    Accessor of the @slot[gtk:file-filter]{name} slot of the
+    @class{gtk:file-filter} class.
+  @end{short}
+  The @sym{gtk:file-filter-name} function gets the human-readable name for the
+  filter. The @sym{(setf gtk:file-filter-name)} function sets a human-readable
+  name of the filter. This is the string that will be displayed in the file
+  chooser if there is a selectable list of filters.
+  @see-class{gtk:file-filter}")
+
+;;; --- file-filter-patterns ---------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "patterns" 'file-filter) t)
+ "The @code{patterns} property of type @code{gchararray}
+  (Write / Construct only) @br{}
+  The patterns that this filter matches. Since 4.10")
+
+(unexport 'file-filter-patterns)
+
+;;; --- file-filter-suffixes ---------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "suffixes" 'file-filter) t)
+ "The @code{suffixes} property of type @code{gchararray}
+  (Write / Construct only) @br{}
+  The suffixes that this filter matches. Since 4.10")
+
+(unexport 'file-filter-suffixes)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_file_filter_new ()
-;;;
-;;; GtkFileFilter *
-;;; gtk_file_filter_new (void);
-;;;
-;;; Creates a new GtkFileFilter with no rules added to it.
-;;;
-;;; Such a filter doesn’t accept any files, so is not particularly useful until
-;;; you add rules with gtk_file_filter_add_mime_type(),
-;;; gtk_file_filter_add_pattern(), or gtk_file_filter_add_pixbuf_formats().
-;;;
-;;; To create a filter that accepts any file, use:
-;;;
-;;; GtkFileFilter *filter = gtk_file_filter_new ();
-;;; gtk_file_filter_add_pattern (filter, "*");
-;;;
-;;; Returns :
-;;;     a new GtkFileFilter
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline file-filter-new))
 
 (defun file-filter-new ()
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @return{A new @class{gtk:file-filter} object.}
+  @begin{short}
+    Creates a new @class{gtk:file-filter} instance with no rules added to it.
+  @end{short}
+  Such a filter does not accept any files, so is not particularly useful until
+  you add rules with the @fun{gtk:file-filter-add-mime-type}, the
+  @fun{gtk:file-filter-add-pattern}, or @fun{gtk:file-filter-add-pixbuf-formats}
+  functions.
+
+  To create a filter that accepts any file, use:
+  @begin{pre}
+(let ((filter (gtk:file-filter-new)))
+  (gtk:file-filter-add-pattern filter \"*\")
+  ... )
+  @end{pre}
+  @see-class{gtk:file-filter}
+  @see-function{gtk:file-filter-add-mime-type}
+  @see-function{gtk:file-filter-add-pattern}
+  @see-function{gtk:file-filter-add-pixbuf-formats}"
   (make-instance 'file-filter))
 
 (export 'file-filter-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_set_name ()
-;;;
-;;; void
-;;; gtk_file_filter_set_name (GtkFileFilter *filter,
-;;;                           const char *name);
-;;;
-;;; Sets a human-readable name of the filter; this is the string that will be
-;;; displayed in the file chooser if there is a selectable list of filters.
-;;;
-;;; filter :
-;;;     a GtkFileFilter
-;;;
-;;; name :
-;;;     the human-readable-name for the filter, or NULL to remove any existing
-;;;     name.
+;;; gtk_file_filter_new_from_gvariant ()
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_get_name ()
-;;;
-;;; const char *
-;;; gtk_file_filter_get_name (GtkFileFilter *filter);
-;;;
-;;; Gets the human-readable name for the filter. See gtk_file_filter_set_name().
-;;;
-;;; filter :
-;;;     a GtkFileFilter
-;;;
-;;; Returns :
-;;;     The human-readable name of the filter, or NULL. This value is owned by
-;;;     GTK and must not be modified or freed.
-;;; ----------------------------------------------------------------------------
+(defcfun ("gtk_file_filter_new_from_gvariant" file-filter-new-from-gvariant)
+    (g:object file-filter)
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[variant]{a @type{g:variant} instance of @code{a{sv@}} type}
+  @return{A new @class{gtk:file-filter} object.}
+  @begin{short}
+    Deserialize a file filter from an @code{a{sv@}} variant in the format
+    produced by the @fun{gtk:file-filter-to-gvariant} function.
+  @end{short}
+  @see-class{gtk:file-filter}
+  @see-type{g:variant}
+  @see-function{gtk:file-filter-to-gvariant}"
+  (variant (:pointer (:struct g:variant))))
+
+(export 'file-filter-new-from-gvariant)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_file_filter_add_mime_type ()
-;;;
-;;; void
-;;; gtk_file_filter_add_mime_type (GtkFileFilter *filter,
-;;;                                const char *mime_type);
-;;;
-;;; Adds a rule allowing a given mime type to filter .
-;;;
-;;; filter :
-;;;     A GtkFileFilter
-;;;
-;;; mime_type :
-;;;     name of a MIME type
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_file_filter_add_mime_type" file-filter-add-mime-type) :void
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[filter]{a @class{gtk:file-filter} object}
+  @argument[mime-type]{a string with the name of MIME type}
+  @short{Adds a rule allowing a given mime type to @arg{filter}.}
+  @see-class{gtk:file-filter}"
   (filter (g:object file-filter))
   (mime-type :string))
 
@@ -228,21 +284,15 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_file_filter_add_pattern ()
-;;;
-;;; void
-;;; gtk_file_filter_add_pattern (GtkFileFilter *filter,
-;;;                              const char *pattern);
-;;;
-;;; Adds a rule allowing a shell style glob to a filter.
-;;;
-;;; filter :
-;;;     a GtkFileFilter
-;;;
-;;; pattern :
-;;;     a shell style glob
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_file_filter_add_pattern" file-filter-add-pattern) :void
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[filter]{a @class{gtk:file-filter} object}
+  @argument[pattern]{a string with a shell style glob}
+  @short{Adds a rule allowing a shell style glob to a filter.}
+  @see-class{gtk:file-filter}"
   (filter (g:object file-filter))
   (pattern :string))
 
@@ -250,119 +300,89 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_file_filter_add_pixbuf_formats ()
-;;;
-;;; void
-;;; gtk_file_filter_add_pixbuf_formats (GtkFileFilter *filter);
-;;;
-;;; Adds a rule allowing image files in the formats supported by GdkPixbuf.
-;;;
-;;; This is equivalent to calling gtk_file_filter_add_mime_type() for all the
-;;; supported mime types.
-;;;
-;;; filter :
-;;;     a GtkFileFilter
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_file_filter_add_pixbuf_formats" file-filter-add-pixbuf-formats)
     :void
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[filter]{a @class{gtk:file-filter} object}
+  @begin{short}
+    Adds a rule allowing image files in the formats supported by the
+    @class{gdk-pixbuf:pixbuf} object.
+  @end{short}
+  This is equivalent to calling the @fun{gtk:file-filter-add-mime-type}
+  function for all the supported mime types.
+  @see-class{gtk:file-filter}
+  @see-class{gdk-pixbuf:pixbuf}
+  @see-function{gtk:file-filter-add-mime-type}"
   (filter (g:object file-filter)))
 
 (export 'file-filter-add-pixbuf-formats)
 
-
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_file_filter_add_suffix
-;;;
-;;; void
-;;; gtk_file_filter_add_suffix (GtkFileFilter* filter, const char* suffix)
-;;;
-;;; Adds a suffix match rule to a filter.
-;;;
-;;; This is similar to adding a match for the pattern “*.suffix“.
-;;;
-;;; In contrast to pattern matches, suffix matches are always case-insensitive.
-;;;
-;;; suffix :
-;;;     Filename suffix to match. The data is owned by the caller of the
-;;;     function. The value is a NUL terminated UTF-8 string.
-;;;
-;;; Since 4.4
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
 (defcfun ("gtk_file_filter_add_suffix" file-filter-add-suffix) :void
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[filter]{a @class{gtk:file-filter} object}
+  @argument[suffix]{a string with the filename suffix to match}
+  @begin{short}
+    Adds a suffix match rule to a filter.
+  @end{short}
+  This is similar to adding a match for the @code{*.suffix} pattern. In
+  contrast to pattern matches, suffix matches are always case-insensitive.
+
+  Since 4.4
+  @see-class{gtk:file-filter}"
   (filter (g:object file-filter))
-  (suffix :string))
+  (suffix (:string :free-to-foreign nil)))
 
 #+gtk-4-4
 (export 'file-filter-add-suffix)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_file_filter_get_attributes ()
-;;;
-;;; const char **
-;;; gtk_file_filter_get_attributes (GtkFileFilter *filter);
-;;;
-;;; Gets the attributes that need to be filled in for the GFileInfo passed to
-;;; this filter.
-;;;
-;;; This function will not typically be used by applications; it is intended
-;;; principally for use in the implementation of GtkFileChooser.
-;;;
-;;; filter :
-;;;     a GtkFileFilter
-;;;
-;;; Returns :
-;;;     the attributes.
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_file_filter_get_attributes" file-filter-attributes)
     (g:strv-t :free-from-foreign nil)
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[filter]{a @class{gtk:file-filter} object}
+  @return{A list of strings with the attributes.}
+  @begin{short}
+    Gets the attributes that need to be filled in for the @class{g:file-info}
+    object passed to this filter.
+  @end{short}
+  This function will not typically be used by applications. It is intended
+  principally for use in the implementation of the @class{gtk:file-chooser}
+  widget.
+  @see-class{gtk:file-filter}
+  @see-class{g:file-info}
+  @see-class{gtk:file-chooser}"
   (filter (g:object file-filter)))
 
 (export 'file-filter-attributes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_new_from_gvariant ()
-;;;
-;;; GtkFileFilter *
-;;; gtk_file_filter_new_from_gvariant (GVariant *variant);
-;;;
-;;; Deserialize a file filter from an a{sv} variant in the format produced by
-;;; gtk_file_filter_to_gvariant().
-;;;
-;;; variant :
-;;;     an a{sv} GVariant
-;;;
-;;; Returns :
-;;;     a new GtkFileFilter object.
-;;; ----------------------------------------------------------------------------
-
-(defcfun ("gtk_file_filter_new_from_gvariant" file-filter-new-from-gvariant)
-    (g:object file-filter)
-  (variant (:pointer (:struct g:variant))))
-
-(export 'file-filter-new-from-gvariant)
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_file_filter_to_gvariant ()
-;;;
-;;; GVariant *
-;;; gtk_file_filter_to_gvariant (GtkFileFilter *filter);
-;;;
-;;; Serialize a file filter to an a{sv} variant.
-;;;
-;;; filter :
-;;;     a GtkFileFilter
-;;;
-;;; Returns :
-;;;     a new, floating, GVariant.
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_file_filter_to_gvariant" file-filter-to-gvariant)
     (:pointer (:struct g:variant))
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[filter]{a @class{gtk:file-filter} object}
+  @return{A new @type{g:variant} instance.}
+  @short{Serialize a file filter to an @code{a{sv@}} variant.}
+  @see-class{gtk:file-filter}
+  @see-type{g:variant}"
   (filter (g:object file-filter)))
 
 (export 'file-filter-to-gvariant)
 
-;;; --- End of file gtk.file-filter.lisp ---------------------------------------
+;;; --- End of file gtk4.file-filter.lisp --------------------------------------

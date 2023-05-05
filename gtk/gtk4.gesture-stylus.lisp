@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-stylus.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -42,6 +42,12 @@
 ;;;     gtk_gesture_stylus_get_axes
 ;;;     gtk_gesture_stylus_get_backlog
 ;;;     gtk_gesture_stylus_get_device_tool
+;;;     gtk_gesture_stylus_get_stylus_only
+;;;     gtk_gesture_stylus_set_stylus_only
+;;;
+;;; Properties
+;;;
+;;;     stylus-only                                        Since 4.10
 ;;;
 ;;; Signals
 ;;;
@@ -70,7 +76,10 @@
    :export t
    :interfaces nil
    :type-initializer "gtk_gesture_stylus_get_type")
-  nil)
+  (#+gtk-4-10
+   (stylus-only
+    gesture-stylus-stylus-only
+    "stylus-only" "gboolean" t t)))
 
 #+liber-documentation
 (setf (documentation 'gesture-stylus 'type)
@@ -122,9 +131,70 @@ lambda (gesture x y)    :run-last
         @entry[y]{A double float with the y coordinate of the stylus event.}
       @end{table}
   @end{dictionary}
-  @see-constructor{gtk:gesture-single-new}
+  @see-constructor{gtk:gesture-stylus-new}
+  @see-slot{gtk:gesture-stylus-stylus-only}
   @see-class{gtk:gesture}
   @see-class{gtk:gesture-single}")
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;; --- gesture-stylus-stylus-only ---------------------------------------------
+
+#|
+GestureStylus
+:stylus-only
+since: 4.10
+
+Declaration
+property stylus-only: gboolean [ read, write, construct ]
+
+Description
+
+
+Type:	gboolean
+Available since:	4.10
+Default value	TRUE
+Getter method	gtk_gesture_stylus_get_stylus_only()
+Setter method	gtk_gesture_stylus_set_stylus_only()
+
+Flags
+Readable	yes
+Writable	yes
+Construct	yes
+Construct only	no
+|#
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "stylus-only" 'gesture-stylus) t)
+ "The @code{stylus-only} property of type @code{:boolean}
+  (Read / Write / Construct) @br{}
+  If this gesture should exclusively react to stylus input devices. Since 4.10
+  @br{}
+  Default value: @em{true}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'gesture-stylus-stylus-only)
+      "Accessor"
+      (documentation 'gesture-stylus-stylus-only 'function)
+ "@version{#2023-5-5}
+  @syntax[]{(gtk:gesture-stylus-only object) => setting}
+  @syntax[]{(setf (gtk:gesture-stylus-only object) setting)}
+  @argument[object]{a @class{gtk:gesture-stylus} object}
+  @argument[setting]{a boolean whether the gesture is used exclusivly for
+    stylus events}
+  @begin{short}
+    Accessor of the @slot[gtk:gesture-stylus]{stylus-only} slot of the
+    @class{gtk:gesture-stylus} class.
+  @end{short}
+  The @sym{gtk:gesture-stylus-stylus-only} function checks whether the gesture
+  handle events from stylus input devices, otherwise it will handle events from
+  any pointing device. The @sym{(setf gtk:gesture-stylus-stylus-only)} function
+  sets the state of the property.
+
+  Since 4.10
+  @see-class{gtk:gesture-stylus}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_stylus_new ()
