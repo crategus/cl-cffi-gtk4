@@ -8,5 +8,6 @@
     <file>dialog2.ui</file>
     <file>application.ui</file>
     <file>css-accordion.css</file>
+    <file>gtk-logo.webm</file>
   </gresource>
 </gresources>

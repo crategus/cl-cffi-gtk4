@@ -229,7 +229,11 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkDevice")))
   ;; Check the children
+  #-windows
   (is (equal '("GdkBroadwayDevice" "GdkWaylandDevice")
+             (list-children "GdkDevice")))
+  #+windows
+  (is (equal '("GdkDeviceVirtual" "GdkDeviceWin32")
              (list-children "GdkDevice")))
   ;; Check the interfaces
   (is (equal '()
@@ -306,4 +310,4 @@
 ;;;     gdk_device_get_surface_at_position
 ;;;     gdk_device_get_timestamp                           Since 4.2
 
-;;; --- 2023-4-15 --------------------------------------------------------------
+;;; --- 2023-5-2 ---------------------------------------------------------------

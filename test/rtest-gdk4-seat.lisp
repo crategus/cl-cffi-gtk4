@@ -61,7 +61,11 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkSeat")))
   ;; Check the children
+  #-windows
   (is (equal '("GdkSeatDefault" "GdkWaylandSeat")
+             (list-children "GdkSeat")))
+  #+windows
+  (is (equal '("GdkSeatDefault")
              (list-children "GdkSeat")))
   ;; Check the interfaces
   (is (equal '()
@@ -109,14 +113,22 @@
 (test gdk-seat-pointer
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is (typep (gdk:seat-pointer seat) 'gdk:device))
-    (is (string= "Core Pointer" (gdk:device-name (gdk:seat-pointer seat))))))
+    #-windows
+    (is (string= "Core Pointer" (gdk:device-name (gdk:seat-pointer seat))))
+    #+windows
+    (is (string= "Virtual Core Pointer" 
+                 (gdk:device-name (gdk:seat-pointer seat))))))
 
 ;;;     gdk_seat_get_keyboard
 
 (test gdk-seat-keyboard
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is (typep (gdk:seat-keyboard seat) 'gdk:device))
-    (is (string= "Core Keyboard" (gdk:device-name (gdk:seat-keyboard seat))))))
+    #-windows
+    (is (string= "Core Keyboard" (gdk:device-name (gdk:seat-keyboard seat))))
+    #+windows
+    (is (string= "Virtual Core Keyboard" 
+                 (gdk:device-name (gdk:seat-keyboard seat))))))
 
 ;;;     gdk_seat_get_devices
 
@@ -131,4 +143,4 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is-false (gdk:seat-tools seat))))
 
-;;; --- 2023-4-15 --------------------------------------------------------------
+;;; --- 2023-5-2 ---------------------------------------------------------------

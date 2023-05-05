@@ -58,15 +58,19 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkMonitor")))
   ;; Check the children
+  #-windows
   (is (equal '("GdkBroadwayMonitor" "GdkWaylandMonitor")
+             (list-children "GdkMonitor")))
+  #+windows
+  (is (equal '("GdkWin32Monitor")
              (list-children "GdkMonitor")))
   ;; Check the interfaces
   (is (equal '()
              (list-interfaces "GdkMonitor")))
   ;; Check the properties
-  (is (equal '("connector" "display" "geometry" "height-mm" "manufacturer"
-               "model" "refresh-rate" "scale-factor" "subpixel-layout" "valid"
-               "width-mm")
+  (is (equal '("connector" "description" "display" "geometry" "height-mm" 
+               "manufacturer" "model" "refresh-rate" "scale-factor" 
+               "subpixel-layout" "valid" "width-mm")
              (list-properties "GdkMonitor")))
   ;; Check the signals
   (is (equal '("invalidate")
@@ -76,6 +80,8 @@
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_monitor_get_type")
                        ((CONNECTOR GDK-MONITOR-CONNECTOR "connector"
+                         "gchararray" T NIL)
+                        (DESCRIPTION GDK-MONITOR-DESCRIPTION "description"
                          "gchararray" T NIL)
                         (DISPLAY GDK-MONITOR-DISPLAY "display" "GdkDisplay" T
                          NIL)
@@ -103,9 +109,13 @@
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
 
     (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
-
+    #+crategus
     (is (stringp (gdk:monitor-connector monitor)))
-    #+gtk-4-10
+    #+txlksd1-ws063
+    (is-false (gdk:monitor-connector monitor))
+    #+crategus
+    (is (string= "Iiyama North America 24\"" (gdk:monitor-description monitor)))
+    #+txlksd1-ws063
     (is-false (gdk:monitor-description monitor))
     (is (typep (gdk:monitor-display monitor) 'gdk:display))
     (is (typep (gdk:monitor-geometry monitor) 'gdk:rectangle))
@@ -122,12 +132,9 @@
 #+crategus
 (test gdk-monitor-properties.2
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
-
     (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
-
     (is (string= "DP-1" (gdk:monitor-connector monitor)))
-    #+gtk-4-10
-    (is-false (gdk:monitor-description monitor))
+    (is (string= "Iiyama North America 24\"" (gdk:monitor-description monitor)))
     (is (typep (gdk:monitor-display monitor) 'gdk:display))
     (is (gdk:rectangle-equal (gdk:rectangle-new :width 1920 :height 1080)
                              (gdk:monitor-geometry monitor)))
@@ -147,8 +154,7 @@
       (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
 
       (is (string= "eDP-1" (gdk:monitor-connector monitor)))
-      #+gtk-4-10
-      (is-false (gdk:monitor-description monitor))
+      (is (string= "Eingebaute Anzeige" (gdk:monitor-description monitor)))
       (is (typep (gdk:monitor-display monitor) 'gdk:display))
       (is (gdk:rectangle-equal (gdk:rectangle-new :x 1920 :y 94
                                                   :width 1920 :height 1080)
@@ -170,4 +176,4 @@
 
 ;;;     gdk_monitor_is_valid
 
-;;; --- 2023-4-15 --------------------------------------------------------------
+;;; --- 2023-5-2 ---------------------------------------------------------------

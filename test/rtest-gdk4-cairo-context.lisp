@@ -20,7 +20,11 @@
   (is (eq (g:gtype "GdkDrawContext")
           (g:type-parent "GdkCairoContext")))
   ;; Check the children
+  #-windows
   (is (equal '("GdkBroadwayCairoContext" "GdkWaylandCairoContext")
+             (list-children "GdkCairoContext")))
+  #+windows
+  (is (equal '("GdkWin32CairoContext")
              (list-children "GdkCairoContext")))
   ;; Check the interfaces
   (is (equal '()
@@ -50,4 +54,4 @@
     ;; TODO: We get a NULL Cairo context. Improve this !?
     (is (cffi:null-pointer-p (gdk:cairo-context-cairo-create context)))))
 
-;;; --- 2023-4-15 --------------------------------------------------------------
+;;; --- 2023-5-2 ---------------------------------------------------------------

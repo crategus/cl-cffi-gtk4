@@ -70,12 +70,20 @@
 
 ;;;     gdk_display_manager_open_display
 
+#-windows
 (test gdk-display-manager-open-display
   (let ((manager (gdk:display-manager-get)))
     (is (typep (gdk:display-manager-open-display manager "wayland-0")
                'gdk:display))
     (is-false (gdk:display-manager-open-display manager "xxx"))))
 
+#+windows
+(test gdk-display-manager-open-display
+  (let ((manager (gdk:display-manager-get)))
+    (is (typep (gdk:display-manager-open-display manager "1\\WinSta0\\Default")
+               'gdk:display))
+    (is-false (gdk:display-manager-open-display manager "xxx"))))
+
 ;;;     gdk_set_allowed_backends
 
-;;; --- 2023-4-14 --------------------------------------------------------------
+;;; --- 2023-5-2 ---------------------------------------------------------------

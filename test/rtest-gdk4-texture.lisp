@@ -33,7 +33,7 @@
 ;;;     gdk_texture_new_from_resource
 
 (test gdk-texture-new-from-resource
-  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
+  (with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let* ((path "/com/crategus/test/ducky.png")
            (texture (gdk:texture-new-from-resource path)))
       (is (typep texture 'gdk:texture))
@@ -59,4 +59,4 @@
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
 
-;;; --- 2023-4-12 --------------------------------------------------------------
+;;; --- 2023-4-28 --------------------------------------------------------------
