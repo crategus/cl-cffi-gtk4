@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.overlay-layout.lisp
+;;; gtk4.overlay-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkOverlayLayout
@@ -78,48 +79,78 @@
     overlay-layout-child-measure
     "measure" "gboolean" t t)))
 
+#+liber-documentation
+(setf (documentation 'overlay-layout-child 'type)
+ "@version{#2023-4-19}
+  @begin{short}
+    The @sym{gtk:overlay-layout-child} subclass for children in a
+    @class{gtk:overlay-layout} object.
+  @end{short}
+  @see-class{gtk:overlay-layout}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “clip-overlay” property
-;;;
-;;;  “clip-overlay”             gboolean
-;;;
-;;; Whether the child should be clipped to fit the parent's size.
-;;;
-;;; Owner: GtkOverlayLayoutChild
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: FALSE
-;;; ----------------------------------------------------------------------------
+;;; --- overlay-layout-child-clip-overlay --------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “measure” property
-;;;
-;;;  “measure”                  gboolean
-;;;
-;;; Whether the child size should contribute to the GtkOverlayLayout's
-;;; measurement.
-;;;
-;;; Owner: GtkOverlayLayoutChild
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: FALSE
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "clip-overlay"
+                                               'overlay-layout-child) t)
+ "The @code{clip-overlay} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the child widget should be clipped to fit the size of the parent.
+  @br{}
+  Default value: @em{false}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'overlay-layout-child-clip-overlay)
+      "Accessor"
+      (documentation 'overlay-layout-child-clip-overlay 'function)
+ "@version{#2023-4-19}
+  @syntax[]{(gtk:overlay-layout-child-clip-overlay object) => clip}
+  @syntax[]{(setf (gtk:overlay-layout-child-clip-overlay object) clip)}
+  @argument[object]{a @class{gtk:overlay-layout-child} object}
+  @argument[clip]{a boolean whether the child widget is clipped}
+  @begin{short}
+    Accessor of the @slot[gtk:overlay-layout-child]{clip-overlay} slot of the
+    @class{gtk:overlay-layout-child} class.
+  @end{short}
+  The @sym{gtk:overlay-layout-child-clip-region} function retrieves whether the
+  child widget is clipped. The
+  @sym{(setf gtk:overlay-layout-child-clip-overlay)} function sets whether to
+  clip the child widget.
+  @see-class{gtk:overlay-layout-child}")
+
+;;; --- overlay-layout-child-measure -------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "measure"
+                                               'overlay-layout-child) t)
+ "The @code{measure} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the child widget size should contribute to the overlay layout
+  measurement. @br{}
+  Default value: @em{false}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'overlay-layout-child-measure)
+      "Accessor"
+      (documentation 'overlay-layout-child-measure 'function)
+ "@version{#2023-4-19}
+  @syntax[]{(gtk:overlay-layout-child-measure object) => measure}
+  @syntax[]{(setf (gtk:overlay-layout-child-measure object) measure)}
+  @argument[object]{a @class{gtk:overlay-layout-child} object}
+  @argument[measure]{a boolean whether to measure the child widget}
+  @begin{short}
+    Accessor of the @slot[gtk:overlay-layout-child]{measure} slot of the
+    @class{gtk:overlay-layout-child} class.
+  @end{short}
+  The @sym{gtk:overlay-layout-child-measure} function retrieves whether the
+  child widget is measured. The @sym{(setf gtk:overlay-layout-child-measure)}
+  function sets whether to measure the child widget.
+  @see-class{gtk:overlay-layout-child}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkOverlayLayout
-;;;
-;;; GtkOverlayLayout is the layout manager used by GtkOverlay. It places widgets
-;;; as overlays on top of the main child.
-;;;
-;;; This is not a reusable layout manager, since it expects its widget to be a
-;;; GtkOverlay. It only listed here so that its layout properties get
-;;; documented.
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GtkOverlayLayout" overlay-layout
@@ -129,74 +160,33 @@
    :type-initializer "gtk_overlay_layout_get_type")
   nil)
 
+#+liber-documentation
+(setf (documentation 'overlay-layout 'type)
+ "@version{#2023-4-19}
+  @begin{short}
+    The @sym{gtk:overlay-layout} object is the layout manager used by
+    the @class{gtk:overlay} widget.
+  @end{short}
+  It places widgets as overlays on top of the main child.
 
+  This is not a reusable layout manager, since it expects its widget to be a
+  @class{gtk:overlay} widget. It only listed here so that its layout properties
+  get documented.
+  @see-constructor{gtk:overlay-layout-new}
+  @see-class{gtk:overlay}")
 
-;;;Functions
-;;;gtk_overlay_layout_new ()
-;;;GtkLayoutManager *
-;;;gtk_overlay_layout_new (void);
-;;;Creates a new GtkOverlayLayout instance.
+;;; ----------------------------------------------------------------------------
+;;; gtk_overlay_layout_new ()
+;;; ----------------------------------------------------------------------------
 
-;;;Returns
-;;;the newly created instance
+(defun overlay-layout-new ()
+ #+liber-documentation
+ "@version{#2023-4-19}
+  @return{The newly created @class{gtk:overlay-layout} object}
+  @short{Creates a new overlay layout manager.}
+  @see-class{gtk:overlay-layout}"
+  (make-instance 'overlay-layout))
 
-;;;gtk_overlay_layout_child_set_measure ()
-;;;void
-;;;gtk_overlay_layout_child_set_measure (GtkOverlayLayoutChild *child,
-;;;                                      gboolean measure);
-;;;Sets whether to measure this child.
+(export 'overlay-layout-new)
 
-;;;Parameters
-;;;child
-
-;;;a GtkOverlayLayoutChild
-
-;;;measure
-
-;;;whether to measure this child
-
-;;;gtk_overlay_layout_child_get_measure ()
-;;;gboolean
-;;;gtk_overlay_layout_child_get_measure (GtkOverlayLayoutChild *child);
-;;;Retrieves whether the child is measured.
-
-;;;Parameters
-;;;child
-
-;;;a GtkOverlayLayoutChild
-
-;;;Returns
-;;;whether the child is measured
-
-;;;gtk_overlay_layout_child_set_clip_overlay ()
-;;;void
-;;;gtk_overlay_layout_child_set_clip_overlay
-;;;                               (GtkOverlayLayoutChild *child,
-;;;                                gboolean clip_overlay);
-;;;Sets whether to clip this child.
-
-;;;Parameters
-;;;child
-
-;;;a GtkOverlayLayoutChild
-
-;;;clip_overlay
-
-;;;whether to clip this child
-
-;;;gtk_overlay_layout_child_get_clip_overlay ()
-;;;gboolean
-;;;gtk_overlay_layout_child_get_clip_overlay
-;;;                               (GtkOverlayLayoutChild *child);
-;;;Retrieves whether the child is clipped.
-
-;;;Parameters
-;;;child
-
-;;;a GtkOverlayLayoutChild
-
-;;;Returns
-;;;whether the child is clipped
-
-
-;;; --- End of file gtk.overlay-layout.lisp ------------------------------------
+;;; --- End of file gtk4.overlay-layout.lisp -----------------------------------

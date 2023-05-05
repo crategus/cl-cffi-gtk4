@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.constraint-guide.lisp
+;;; gtk4.constraint-guide.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkConstraintGuide
@@ -76,21 +77,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkConstraintGuide
-;;;
-;;; An object that can be added to a GtkConstraintLayout and be used in
-;;; constraints like a widget, without being drawn.
-;;;
-;;; Guides have a minimum, maximum and natural size. Depending on the
-;;; constraints that are applied, they can act like a guideline that widgets
-;;; can be aligned to, or like 'flexible space'.
-;;;
-;;; Description
-;;;
-;;; A GtkConstraintGuide is an invisible layout element that can be used by
-;;; widgets inside a GtkConstraintLayout as a source or a target of a
-;;; GtkConstraint. Guides can be used like guidelines or as flexible space.
-;;;
-;;; Unlike a GtkWidget, a GtkConstraintGuide will not be drawn.
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GtkConstraintGuide" constraint-guide
@@ -123,181 +109,256 @@
     constraint-guide-strength
     "strength" "GtkConstraintStrength" t t)))
 
+#+liber-documentation
+(setf (documentation 'constraint-guide 'type)
+ "@version{#2023-4-21}
+  @begin{short}
+    An object that can be added to a @class{gtk:constraint-layout} object and
+    be used in constraints like a widget, without being drawn.
+  @end{short}
+
+  Guides have a minimum, maximum and natural size. Depending on the constraints
+  that are applied, they can act like a guideline that widgets can be aligned
+  to, or like 'flexible space'.
+  @see-constructor{gtk:constraint-guide-new}
+  @see-slot{gtk:constraint-guide-max-height}
+  @see-slot{gtk:constraint-guide-max-width}
+  @see-slot{gtk:constraint-guide-min-height}
+  @see-slot{gtk:constraint-guide-min-width}
+  @see-slot{gtk:constraint-guide-name}
+  @see-slot{gtk:constraint-guide-nat-height}
+  @see-slot{gtk:constraint-guide-nat-width}
+  @see-slot{gtk:constraint-guide-strength}
+  @see-class{gtk:constraint-layout}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “max-height” property
-;;;
-;;;  “max-height”               int
-;;;
-;;; The maximum height of the guide.
-;;;
-;;; Flags: Read / Write
-;;; Allowed values: >= 0
-;;; Default value: 2147483647
-;;; ----------------------------------------------------------------------------
+;;; --- constraint-guide-max-height --------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “max-width” property
-;;;
-;;;  “max-width”                int
-;;;
-;;; The maximum width of the guide.
-;;;
-;;; Flags: Read / Write
-;;; Allowed values: >= 0
-;;; Default value: 2147483647
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "max-height"
+                                               'constraint-guide) t)
+ "The @code{max-height} property of type @code{:int} (Read / Write) @br{}
+  The maximum height of the guide. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 2147483647")
 
-;;; ----------------------------------------------------------------------------
-;;; The “min-height” property
-;;;
-;;;  “min-height”               int
-;;;
-;;; The minimum height of the guide.
-;;;
-;;; Flags: Read / Write
-;;; Allowed values: >= 0
-;;; Default value: 0
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'constraint-guide-max-height)
+      "Accessor"
+      (documentation 'constraint-guide-max-height 'function)
+ "@version{#2023-4-21}
+  @syntax[]{(gtk:constraint-guide-max-height object) => height}
+  @syntax[]{(setf (gtk:constraint-guide-max-height object) height)}
+  @argument[object]{a @class{gtk:constraint-guide} object}
+  @argument[height]{an integer with the maximum height of the guide}
+  @begin{short}
+    Accessor of the @slot[gtk:constraint-guide]{max-height} slot of the
+    @class{gtk:constraint-guide} class.
+  @end{short}
+  @see-class{gtk:constraint-guide}")
 
-;;; ----------------------------------------------------------------------------
-;;; The “min-width” property
-;;;
-;;;  “min-width”                int
-;;;
-;;; The minimum width of the guide.
-;;;
-;;; Flags: Read / Write
-;;; Allowed values: >= 0
-;;; Default value: 0
-;;; ----------------------------------------------------------------------------
+;;; --- constraint-guide-max-width ---------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “name” property
-;;;
-;;;  “name”                     char *
-;;;
-;;; A name that identifies the GtkConstraintGuide, for debugging.
-;;;
-;;; Flags: Read / Write
-;;; Default value: NULL
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "max-width"
+                                               'constraint-guide) t)
+ "The @code{max-width} property of type @code{:int} (Read / Write) @br{}
+  The maximum width of the guide. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 2147483647")
 
-;;; ----------------------------------------------------------------------------
-;;; The “nat-height” property
-;;;
-;;;  “nat-height”               int
-;;;
-;;; The preferred, or natural, height of the guide.
-;;;
-;;; Flags: Read / Write
-;;; Allowed values: >= 0
-;;; Default value: 0
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'constraint-guide-max-width)
+      "Accessor"
+      (documentation 'constraint-guide-max-width 'function)
+ "@version{#2023-4-21}
+  @syntax[]{(gtk:constraint-guide-max-width object) => width}
+  @syntax[]{(setf (gtk:constraint-guide-max-width object) width)}
+  @argument[object]{a @class{gtk:constraint-guide} object}
+  @argument[height]{an integer with the maximum width of the guide}
+  @begin{short}
+    Accessor of the @slot[gtk:constraint-guide]{max-width} slot of the
+    @class{gtk:constraint-guide} class.
+  @end{short}
+  @see-class{gtk:constraint-guide}")
 
-;;; ----------------------------------------------------------------------------
-;;; The “nat-width” property
-;;;
-;;;  “nat-width”                int
-;;;
-;;; The preferred, or natural, width of the guide.
-;;;
-;;; Flags: Read / Write
-;;; Allowed values: >= 0
-;;; Default value: 0
-;;; ----------------------------------------------------------------------------
+;;; --- constraint-guide-min-height --------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “strength” property
-;;;
-;;;  “strength”                 GtkConstraintStrength
-;;;
-;;; The GtkConstraintStrength to be used for the constraint on the natural size 
-;;; of the guide.
-;;;
-;;; Flags: Read / Write
-;;; Default value: GTK_CONSTRAINT_STRENGTH_MEDIUM
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "min-height"
+                                               'constraint-guide) t)
+ "The @code{min-height} property of type @code{:int} (Read / Write) @br{}
+  The minimum height of the guide. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'constraint-guide-min-height)
+      "Accessor"
+      (documentation 'constraint-guide-min-height 'function)
+ "@version{#2023-4-21}
+  @syntax[]{(gtk:constraint-guide-min-height object) => height}
+  @syntax[]{(setf (gtk:constraint-guide-min-height object) height)}
+  @argument[object]{a @class{gtk:constraint-guide} object}
+  @argument[height]{an integer with the minimum height of the guide}
+  @begin{short}
+    Accessor of the @slot[gtk:constraint-guide]{min-height} slot of the
+    @class{gtk:constraint-guide} class.
+  @end{short}
+  @see-class{gtk:constraint-guide}")
+
+;;; --- constraint-guide-min-width ---------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "min-width"
+                                               'constraint-guide) t)
+ "The @code{min-width} property of type @code{:int} (Read / Write) @br{}
+  The minimum width of the guide. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'constraint-guide-min-width)
+      "Accessor"
+      (documentation 'constraint-guide-min-width 'function)
+ "@version{#2023-4-21}
+  @syntax[]{(gtk:constraint-guide-min-width object) => width}
+  @syntax[]{(setf (gtk:constraint-guide-min-width object) width)}
+  @argument[object]{a @class{gtk:constraint-guide} object}
+  @argument[height]{an integer with the minimum width of the guide}
+  @begin{short}
+    Accessor of the @slot[gtk:constraint-guide]{min-width} slot of the
+    @class{gtk:constraint-guide} class.
+  @end{short}
+  @see-class{gtk:constraint-guide}")
+
+;;; --- constraint-guide-name --------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "name" 'constraint-guide) t)
+ "The @code{name} property of type @code{:string} (Read / Write) @br{}
+  A name that identifies the @class{gtk:constraint-guide} object, for debugging.
+  @br{}
+  Default value: @code{nil}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'constraint-guide-name)
+      "Accessor"
+      (documentation 'constraint-guide-name 'function)
+ "@version{#2023-4-21}
+  @syntax[]{(gtk:constraint-guide-name object) => name}
+  @syntax[]{(setf (gtk:constraint-guide-name object) name)}
+  @argument[object]{a @class{gtk:constraint-guide} object}
+  @argument[name]{a string with the name for the guide}
+  @begin{short}
+    Accessor of the @slot[gtk:constraint-guide]{name} slot of the
+    @class{gtk:constraint-guide} class.
+  @end{short}
+  The @sym{gtk:constraint-guide-name} function retrieves the name for the
+  constraint guide. The @sym{(setf gtk:constraint-guide-name)} function sets a
+  name. The name is useful for debugging purposes.
+  @see-class{gtk:constraint-guide}")
+
+;;; --- constraint-guide-nat-height --------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "nat-height"
+                                               'constraint-guide) t)
+ "The @code{nat-height} property of type @code{:int} (Read / Write) @br{}
+  The preferred, or natural, height of the guide. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'constraint-guide-nat-height)
+      "Accessor"
+      (documentation 'constraint-guide-nat-height 'function)
+ "@version{#2023-4-21}
+  @syntax[]{(gtk:constraint-guide-nat-height object) => height}
+  @syntax[]{(setf (gtk:constraint-guide-nat-height object) height)}
+  @argument[object]{a @class{gtk:constraint-guide} object}
+  @argument[height]{an integer with the preferred, or natural, height of the
+    guide}
+  @begin{short}
+    Accessor of the @slot[gtk:constraint-guide]{nat-height} slot of the
+    @class{gtk:constraint-guide} class.
+  @end{short}
+  @see-class{gtk:constraint-guide}")
+
+;;; --- constraint-guide-nat-width ---------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "nat-width"
+                                               'constraint-guide) t)
+ "The @code{nat-width} property of type @code{:int} (Read / Write) @br{}
+  The preferred, or natural, width of the guide. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'constraint-guide-nat-width)
+      "Accessor"
+      (documentation 'constraint-guide-nat-width 'function)
+ "@version{#2023-4-21}
+  @syntax[]{(gtk:constraint-guide-nat-width object) => height}
+  @syntax[]{(setf (gtk:constraint-guide-nat-width object) height)}
+  @argument[object]{a @class{gtk:constraint-guide} object}
+  @argument[height]{an integer with the preferred, or natural, width of the
+    guide}
+  @begin{short}
+    Accessor of the @slot[gtk:constraint-guide]{nat-width} slot of the
+    @class{gtk:constraint-guide} class.
+  @end{short}
+  @see-class{gtk:constraint-guide}")
+
+;;; --- constraint-guide-strength ----------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "strength" 'constraint-guide) t)
+ "The @code{name} property of type @code{:string} (Read / Write) @br{}
+  The @symbol{gtk:constraint-strength} value to be used for the constraint on
+  the natural size of the guide. @br{}
+  Default value: @code{:medium}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'constraint-guide-strength)
+      "Accessor"
+      (documentation 'constraint-guide-strength 'function)
+ "@version{#2023-4-21}
+  @syntax[]{(gtk:constraint-guide-strength object) => strength}
+  @syntax[]{(setf (gtk:constraint-guide-strength object) strength)}
+  @argument[object]{a @class{gtk:constraint-guide} object}
+  @argument[strength]{a @symbol{gtk:constraint-strength} value with the
+    strength of the constraint on the natural size}
+  @begin{short}
+    Accessor of the @slot[gtk:constraint-guide]{strength} slot of the
+    @class{gtk:constraint-guide} class.
+  @end{short}
+  The @sym{gtk:constraint-guide-strength} function retrieves the strength of
+  the constraint on the natural size of the given @arg{guide}. The
+  @sym{(setf gtk:constraint-guide-strength)} function sets the strength of
+  the constraint.
+  @see-class{gtk:constraint-guide}
+  @see-symbol{gtk:constraint-strength}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constraint_guide_new ()
-;;;
-;;; GtkConstraintGuide *
-;;; gtk_constraint_guide_new (void);
-;;;
-;;; Creates a new GtkConstraintGuide object.
-;;;
-;;; Return : 
-;;;     a new GtkConstraintGuide object.
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_set_name ()
-;;;
-;;; void
-;;; gtk_constraint_guide_set_name (GtkConstraintGuide *guide,
-;;;                                const char *name);
-;;;
-;;; Sets a name for the given GtkConstraintGuide.
-;;;
-;;; The name is useful for debugging purposes.
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide
-;;;
-;;; name :
-;;;     a name for the guide .
-;;; ----------------------------------------------------------------------------
+(declaim (inline constraint-guide-new))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_get_name ()
-;;;
-;;; const char *
-;;; gtk_constraint_guide_get_name (GtkConstraintGuide *guide);
-;;;
-;;; Retrieves the name set using gtk_constraint_guide_set_name().
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide
-;;;
-;;; Returns :
-;;;     the name of the guide.
-;;; ----------------------------------------------------------------------------
+(defun constraint-guide-new ()
+ #+liber-documentation
+ "@version{#2023-4-21}
+  @return{The newly created @class{gtk:constraint-guide} object.}
+  @short{Creates a new constraint guide.}
+  @see-class{gtk:constraint-guide}"
+  (make-instance 'conatraint-guide))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_set_strength ()
-;;;
-;;; void
-;;; gtk_constraint_guide_set_strength (GtkConstraintGuide *guide,
-;;;                                    GtkConstraintStrength strength);
-;;;
-;;; Sets the strength of the constraint on the natural size of the given 
-;;; GtkConstraintGuide.
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide
-;;;
-;;; strength :
-;;;     the strength of the constraint
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_get_strength ()
-;;;
-;;; GtkConstraintStrength
-;;; gtk_constraint_guide_get_strength (GtkConstraintGuide *guide);
-;;;
-;;; Retrieves the strength set using gtk_constraint_guide_set_strength().
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide
-;;;
-;;; Returns :
-;;;     the strength of the constraint on the natural size
-;;; ----------------------------------------------------------------------------
+(export 'constraint-guide-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constraint_guide_set_min_size ()
@@ -309,7 +370,7 @@
 ;;;
 ;;; Sets the minimum size of guide .
 ;;;
-;;; If guide is attached to a GtkConstraintLayout, the constraints will be 
+;;; If guide is attached to a GtkConstraintLayout, the constraints will be
 ;;; updated to reflect the new size.
 ;;;
 ;;; guide :
@@ -321,6 +382,8 @@
 ;;; height :
 ;;;     the new minimum height, or -1 to not change it
 ;;; ----------------------------------------------------------------------------
+
+;; not implemented, see the corresponding accessor functions
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constraint_guide_get_min_size ()
@@ -342,6 +405,8 @@
 ;;;     return location for the minimum height, or NULL.
 ;;; ----------------------------------------------------------------------------
 
+;; not implemented, see the corresponding accessor functions
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constraint_guide_set_nat_size ()
 ;;;
@@ -352,7 +417,7 @@
 ;;;
 ;;; Sets the natural size of guide .
 ;;;
-;;; If guide is attached to a GtkConstraintLayout, the constraints will be 
+;;; If guide is attached to a GtkConstraintLayout, the constraints will be
 ;;; updated to reflect the new size.
 ;;;
 ;;; guide :
@@ -364,6 +429,8 @@
 ;;; height :
 ;;;     the new natural height, or -1 to not change it
 ;;; ----------------------------------------------------------------------------
+
+;; not implemented, see the corresponding accessor functions
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constraint_guide_get_nat_size ()
@@ -385,6 +452,8 @@
 ;;;     return location for the natural height, or NULL.
 ;;; ----------------------------------------------------------------------------
 
+;; not implemented, see the corresponding accessor functions
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constraint_guide_set_max_size ()
 ;;;
@@ -395,7 +464,7 @@
 ;;;
 ;;; Sets the maximum size of guide .
 ;;;
-;;; If guide is attached to a GtkConstraintLayout, the constraints will be 
+;;; If guide is attached to a GtkConstraintLayout, the constraints will be
 ;;; updated to reflect the new size.
 ;;;
 ;;; guide :
@@ -408,6 +477,8 @@
 ;;;     the new maximum height, or -1 to not change it
 ;;; ----------------------------------------------------------------------------
 
+;; not implemented, see the corresponding accessor functions
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constraint_guide_get_max_size ()
 ;;;
@@ -416,7 +487,7 @@
 ;;;                                    int *width,
 ;;;                                    int *height);
 ;;;
-;;; Gets the maximum size of guide . 
+;;; Gets the maximum size of guide .
 ;;;
 ;;; guide :
 ;;;     a GtkConstraintGuide object
@@ -428,4 +499,6 @@
 ;;;     return location for the maximum height, or NULL.
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gtk.constraint-guide.lisp ----------------------------------
+;; not implemented, see the corresponding accessor functions
+
+;;; --- End of file gtk4.constraint-guide.lisp ---------------------------------

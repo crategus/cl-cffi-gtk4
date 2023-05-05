@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.box-layout.lisp
+;;; gtk4.box-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License. If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkBoxLayout
@@ -68,18 +69,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkBoxLayout
-;;;
-;;; A GtkBoxLayout is a layout manager that arranges the children of any widget
-;;; using it into a single row or column, depending on the value of its
-;;; “orientation” property. Within the other dimension all children all
-;;; allocated the same size. The GtkBoxLayout will respect the “halign” and
-;;; “valign” properties of each child widget.
-;;;
-;;; If you want all children to be assigned the same size, you can use the
-;;; “homogeneous” property.
-;;;
-;;; If you want to specify the amount of space placed between each child, you
-;;; can use the “spacing” property.
 ;;; ----------------------------------------------------------------------------
 
 (define-g-object-class "GtkBoxLayout" box-layout
@@ -97,172 +86,140 @@
     box-layout-spacing
     "spacing" "gint" t t)))
 
+#+liber-documentation
+(setf (documentation 'box-layout 'type)
+ "@version{#2023-4-18}
+  @begin{short}
+    A @sym{gtk:box-layout} class is a layout manager that arranges the children
+    of any widget using it into a single row or column.
+  @end{short}
+  Whether it is a row or column depends on the value of its
+  @slot[gtk:orientable]{orientation} property. Within the other dimension all
+  children all allocated the same size. The @sym{gtk:box-layout} object will
+  respect the @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties
+  of each child widget.
+
+  If you want all children to be assigned the same size, you can use the
+  @slot[gtk:box-layout]{homogeneous} property.
+
+  If you want to specify the amount of space placed between each child, you
+  can use the @slot[gtk:box-layout]{spacing} property.
+  @see-constructor{gtk:box-layout-new}
+  @see-class{gtk:layout-manager}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “baseline-position” property
-;;;
-;;;  “baseline-position”        GtkBaselinePosition
-;;;
-;;; The position of the allocated baseline within the extra space allocated to
-;;; each child of the widget using a box layout manager.
-;;;
-;;; This property is only relevant for horizontal layouts containing at least
-;;; one child with a baseline alignment.
-;;;
-;;; Owner: GtkBoxLayout
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: GTK_BASELINE_POSITION_CENTER
-;;; ----------------------------------------------------------------------------
+;;; --- box-layout-baseline-position -------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “homogeneous” property
-;;;
-;;;  “homogeneous”              gboolean
-;;;
-;;; Whether the box layout should distribute the available space homogeneously
-;;; among the children of the widget using it as a layout manager.
-;;;
-;;; Owner: GtkBoxLayout
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: FALSE
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "baseline-position"
+                                               'box-layout) t)
+ "The @code{baseline-position} property of type @symbol{gtk:baseline-position}
+  (Read / Write) @br{}
+  The position of the allocated baseline within the extra space allocated to
+  each child of the widget using a box layout manager. This property is only
+  relevant for horizontal layouts containing at least one child with a baseline
+  alignment. @br{}
+  Default value: @code{:center}")
 
-;;; ----------------------------------------------------------------------------
-;;; The “spacing” property
-;;;
-;;;  “spacing”                  int
-;;;
-;;; The space between each child of the widget using the box layout as its
-;;; layout manager.
-;;;
-;;; Owner: GtkBoxLayout
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Allowed values: >= 0
-;;;
-;;; Default value: 0
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'box-layout-baseline-position)
+      "Accessor"
+      (documentation 'box-layout-baseline-position 'function)
+ "@version{#2023-4-18}
+  @syntax[]{(gtk:box-layout-baseline-position object) => position}
+  @syntax[]{(setf (gtk:box-layout-baseline-position object) position)}
+  @argument[object]{a @class{gtk:box-layout} object}
+  @argument[position]{a @symbol{gtk:baseline-position} value}
+  @begin{short}
+    Accessor of the @slot[box-layout]{baseline-position} slot of the
+    @class{gtk:box-layout} class.
+  @end{short}
+  The @sym{gtk:box-layout-baseline-position} function gets the baseline
+  position. The @sym{(setf gtk:box-layout-baseline-position)} function sets the
+  baseline position of a box layout.
 
+  The baseline position affects only horizontal boxes with at least one
+  baseline aligned child. If there is more vertical space available than
+  requested, and the baseline is not allocated by the parent then the given
+  position is used to allocate the baseline within the extra space available.
+  @see-class{gtk:box-layout}
+  @see-symbol{gtk:baseline-position}")
+
+;;; --- box-layout-homogeneous -------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "homogeneous" 'box-layout) t)
+ "The @code{homogeneous} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the box layout should distribute the available space homogeneously
+  among the children of the widget using it as a layout manager. @br{}
+  Default value: @em{false}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'box-layout-homogeneous)
+      "Accessor"
+      (documentation 'box-layout-homogeneous 'function)
+ "@version{#2023-4-18}
+  @syntax[]{(gtk:box-layout-homogeneous object) => homogeneous}
+  @syntax[]{(setf (gtk:box-layout-homogeneous object) homogeneous)}
+  @argument[object]{a @class{gtk:box-layout} object}
+  @argument[homogeneous]{@em{true} if the box layout is homogeneous}
+  @begin{short}
+    Accessor of the @slot[box-layout]{homogeneous} slot of the
+    @class{gtk:box-layout} class.
+  @end{short}
+  The @sym{gtk:box-layout-homogeneous} function returns whether the box layout
+  will allocate the same size to all children. The
+  @sym{(setf gtk:box-layout-homogeneous)} function sets the property.
+  @see-class{gtk:box-layout}")
+
+;;; --- box-layout-spacing -----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "spacing" 'box-layout) t)
+ "The @code{spacing} property of type @code{:int} (Read / Write) @br{}
+  The space between each child of the widget using the box layout as its
+  layout manager. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'box-layout-spacing)
+      "Accessor"
+      (documentation 'box-layout-spacing 'function)
+ "@version{#2023-4-18}
+  @syntax[]{(gtk:box-layout-spacing object) => spacing}
+  @syntax[]{(setf (gtk:box-layout-homogeneous object) spacing)}
+  @argument[object]{a @class{gtk:box-layout} object}
+  @argument[spacing]{an integer with the spacing of the box layout}
+  @begin{short}
+    Accessor of the @slot[box-layout]{spacing} slot of the
+    @class{gtk:box-layout} class.
+  @end{short}
+  The @sym{gtk:box-layout-spacing} function returns the space that the box
+  layout puts between children. The @sym{(setf gtk:box-layout-spacing)} function
+  sets the spacing.
+  @see-class{gtk:box-layout}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_box_layout_new ()
-;;;
-;;; GtkLayoutManager *
-;;; gtk_box_layout_new (GtkOrientation orientation);
-;;;
-;;; Creates a new box layout.
-;;;
-;;; orientation :
-;;;     the orientation for the new layout
-;;;
-;;; Returns :
-;;;     a new box layout
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_box_layout_set_homogeneous ()
-;;;
-;;; void
-;;; gtk_box_layout_set_homogeneous (GtkBoxLayout *box_layout,
-;;;                                 gboolean homogeneous);
-;;;
-;;; Sets whether the box layout will allocate the same size to all children.
-;;;
-;;; box_layout :
-;;;     a GtkBoxLayout
-;;;
-;;; homogeneous :
-;;;     TRUE to set the box layout as homogeneous
-;;; ----------------------------------------------------------------------------
+(declaim (inline box-layout-new))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_box_layout_get_homogeneous ()
-;;;
-;;; gboolean
-;;; gtk_box_layout_get_homogeneous (GtkBoxLayout *box_layout);
-;;;
-;;; Returns whether the layout is set to be homogeneous.
-;;;
-;;; box_layout :
-;;;     a GtkBoxLayout
-;;;
-;;; Return :
-;;;     TRUE if the layout is homogeneous
-;;; ----------------------------------------------------------------------------
+(defun box-layout-new (orientation)
+ #+liber-documentation
+ "@version{#2023-4-18}
+  @argument[orientation]{a @symbol{gtk:orientable} value}
+  @return{A new @class{gtk:box-layout} object.}
+  @short{Creates a new box layout.}
+  @see-class{gtk:box-layout}
+  @see-symbol{gtk:orientable}"
+  (make-instance 'box-layout
+                 :orientation orientation))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_box_layout_set_spacing ()
-;;;
-;;; void
-;;; gtk_box_layout_set_spacing (GtkBoxLayout *box_layout,
-;;;                             guint spacing);
-;;;
-;;; Sets how much spacing to put between children.
-;;;
-;;; box_layout :
-;;;     a GtkBoxLayout
-;;;
-;;; spacing :
-;;;     the spacing to apply between children
-;;; ----------------------------------------------------------------------------
+(export 'box-layout-new)
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_box_layout_get_spacing ()
-;;;
-;;; guint
-;;; gtk_box_layout_get_spacing (GtkBoxLayout *box_layout);
-;;;
-;;; Returns the space that box_layout puts between children.
-;;;
-;;; box_layout :
-;;;     a GtkBoxLayout
-;;;
-;;; Returns :
-;;;     the spacing of the layout
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_box_layout_set_baseline_position ()
-;;;
-;;; void
-;;; gtk_box_layout_set_baseline_position (GtkBoxLayout *box_layout,
-;;;                                       GtkBaselinePosition position);
-;;;
-;;; Sets the baseline position of a box layout.
-;;;
-;;; The baseline position affects only horizontal boxes with at least one
-;;; baseline aligned child. If there is more vertical space available than
-;;; requested, and the baseline is not allocated by the parent then the given
-;;; position is used to allocate the baseline within the extra space available.
-;;;
-;;; box_layout :
-;;;     a GtkBoxLayout
-;;;
-;;; position :
-;;;     a GtkBaselinePosition
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_box_layout_get_baseline_position ()
-;;;
-;;; GtkBaselinePosition
-;;; gtk_box_layout_get_baseline_position (GtkBoxLayout *box_layout);
-;;;
-;;; Gets the value set by gtk_box_layout_set_baseline_position().
-;;;
-;;; box_layout :
-;;;     a GtkBoxLayout
-;;;
-;;; Returns :
-;;;     the baseline position
-;;; ----------------------------------------------------------------------------
-
-;;; --- End of file gtk.box-layout.lisp ----------------------------------------
+;;; --- End of file gtk4.box-layout.lisp ---------------------------------------
