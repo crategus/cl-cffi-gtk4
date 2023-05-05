@@ -728,6 +728,7 @@ lambda (display setting)    :run-last
 (defcfun ("gdk_display_get_setting" display-setting) :boolean
  #+liber-documentation
  "@version{#2022-1-21}
+  @argument[display]{a @class{gdk:display} object}
   @argument[name]{a string with the name of the setting}
   @argument[gvalue]{a @symbol{g:value} location to store the value of the
     setting}
@@ -738,6 +739,7 @@ lambda (display setting)    :run-last
   @end{short}
   @see-class{gdk:display}
   @see-symbol{g:value}"
+  (display (g:object display))
   (name :string)
   (gvalue (:pointer (:struct g:value))))
 
@@ -831,7 +833,7 @@ lambda (display setting)    :run-last
   (group :int)
   (level :int))
 
-(defcfun ("gdk_display_map_kkeeyval" %display-map-keyval) :boolean
+(defcfun ("gdk_display_map_keyval" %display-map-keyval) :boolean
   (display (g:object display))
   (keyval :uint)
   (keys :pointer)
@@ -893,30 +895,6 @@ lambda (display setting)    :run-last
 ;;; Returns :
 ;;;     TRUE if there were any entries.
 ;;; ----------------------------------------------------------------------------
-
-#|
-;;; gboolean
-;;; gdk_display_map_keycode (GdkDisplay* display,
-;;;                          guint keycode,
-;;;                          GdkKeymapKey** keys,
-;;;                          guint** keyvals,
-;;;                          int* n_entries)
-
-  (with-foreign-objects ((keys :pointer) (keyvals :pointer) (n-keys :int))
-    (when (%keymap-entries-for-keycode keymap keycode keys keyvals n-keys)
-        (let ((keys (cffi:mem-ref keys :pointer))
-              (keyvals (cffi:mem-ref keyvals :pointer))
-              (n-keys (cffi:mem-ref n-keys :int)))
-          (loop for i from 0 below n-keys
-                for keyval = (cffi:mem-aref keyvals :uint i)
-                for key = (cffi:mem-aptr keys '(:struct %keymap-key) i)
-                collect (with-foreign-slots ((keycode group level)
-                                             key
-                                             (:struct %keymap-key))
-                          (list keyval keycode group level))
-                finally (g:free keys)
-                        (g:free keyvals)))))
-|#
 
 (defcfun ("gdk_display_map_keycode" %display-map-keycode) :boolean
   (display (g:object display))
@@ -1013,35 +991,6 @@ lambda (display setting)    :run-last
 ;;;     TRUE if there was a keyval bound to keycode/state/group.
 ;;; ----------------------------------------------------------------------------
 
-#|
-;;; gboolean
-;;; gdk_display_translate_key (GdkDisplay* display,
-;;;                            guint keycode,
-;;;                            GdkModifierType state,
-;;;                            int group,
-;;;                            guint* keyval,
-;;;                            int* effective_group,
-;;;                            int* level,
-;;;                            GdkModifierType* consumed)
-
-  (with-foreign-objects ((keyval :uint)
-                         (effective :int)
-                         (level :int)
-                         (consumed 'modifier-type))
-    (when (%keymap-translate-keyboard-state keymap
-                                            keycode
-                                            state
-                                            group
-                                            keyval
-                                            effective
-                                            level
-                                            consumed)
-      (values (cffi:mem-ref keyval :uint)
-              (cffi:mem-ref effective :int)
-              (cffi:mem-ref level :int)
-              (cffi:mem-ref consumed 'modifier-type))))
-|#
-
 (defcfun ("gdk_display_translate_key" %display-translate-key) :boolean
   (display (g:object display))
   (keycode :uint)
@@ -1104,10 +1053,12 @@ lambda (display setting)    :run-last
   (display (g:object display))
   (err :pointer))
 
+#+gtk-4-4
 (defun display-prepare-gl (display)
   (with-g-error (err)
     (%display-prepare-gl display err)))
 
+#+gtk-4-4
 (export 'display-prepare-gl)
 
 ;;; ----------------------------------------------------------------------------

@@ -229,7 +229,8 @@ lambda (monitor)    :run-first
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "description" 'monitor) t)
  "The @code{description} property of type @code{:string} (Read) @br{}
-  A short description of the monitor, meant for display to the user. @br{}
+  A short description of the monitor, meant for display to the user.
+  Since 4.10 @br{}
   Default value: @code{nil}")
 
 #+(and gtk-4-10 liber-documentation)

@@ -1140,6 +1140,37 @@
 ;;;     TRUE on success, otherwise FALSE
 ;;; ----------------------------------------------------------------------------
 
+#|
+(defun display-map-keyval (display keyval)
+  (with-foreign-objects ((keys-ptr :pointer) (n-keys-ptr :int))
+    (when (%display-map-keyval display keyval keys-ptr n-keys-ptr)
+      (let ((keys (cffi:mem-ref keys-ptr :pointer))
+            (n-keys (cffi:mem-ref n-keys-ptr :int)))
+        (iter (for i from 0 below n-keys)
+              (for key = (cffi:mem-aptr keys '(:struct %keymap-key) i))
+              (collect (with-foreign-slots ((keycode group level)
+                                            key
+                                            (:struct %keymap-key))
+                         (list keycode group level)))
+              (finally (g:free keys-ptr)))))))
+|#
+
+(defcfun ("gdk_event_get_axes" %event-axes) :boolean
+  (event event)
+  (axes :pointer)
+  (n-axes (:pointer :int)))
+
+(defun event-axes (event)
+  (with-foreign-objects ((axes-ptr :pointer) (n-axes-ptr :int))
+    (when (%event-axes event axes-ptr n-axes-ptr)
+      (let ((axes (cffi:mem-ref axes-ptr :pointer))
+            (n-axes (cffi:mem-ref n-axes-ptr :int)))
+        (iter (for i from 0 below n-axes)
+              (collect (cffi:mem-aref axes :double i))
+              (finally (g:free axes-ptr)))))))
+
+(export 'event-axes)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_axis ()
 ;;;
