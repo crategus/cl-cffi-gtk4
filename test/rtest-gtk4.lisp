@@ -41,7 +41,7 @@
                          #:flags-item-value
                          #:get-g-type-definition
                          )
-  (:import-from :gio     #:with-g-resource)
+  (:import-from :gio     #:with-g-resources)
   (:import-from :gtk
                          ;; Symbols from gtk.style-provider.lisp
                          #:+gtk-priority-fallback+
@@ -107,6 +107,10 @@
   (sort (mapcar #'g:signal-name
                 (g:signal-list-ids gtype)) #'string<))
 
+(defun print-style-context (gtype &optional (flags :recurse))
+  (let ((widget (make-instance (gobject:symbol-for-gtype gtype))))
+    (gtk:style-context-to-string (gtk:widget-style-context widget) flags)))
+
 (defun list-flags-item-name (gtype)
   (mapcar #'gobject:flags-item-name
           (gobject:get-flags-items gtype)))
@@ -131,4 +135,4 @@
   (mapcar #'gobject:enum-item-value
           (gobject:get-enum-items gtype)))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-28 --------------------------------------------------------------

@@ -147,7 +147,7 @@
 ;;;     gtk_image_new_from_resource
 
 (test image-new-from-resource
-  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
+  (with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((image (gtk:image-new-from-resource
                      "/com/crategus/test/gtk-logo-24.png")))
       (is-false (gtk:image-file image))
@@ -233,4 +233,4 @@
 ;;;     gtk_image_set_from_icon_name
 ;;;     gtk_image_set_from_gicon
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-28 --------------------------------------------------------------

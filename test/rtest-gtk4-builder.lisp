@@ -165,7 +165,7 @@
 ;;;     gtk_builder_new_from_resource
 
 (test builder-new-from-resource
-  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
+  (with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (is (typep (gtk:builder-new-from-resource "/com/crategus/test/dialog.ui")
                'gtk:builder))))
 
@@ -184,7 +184,7 @@
 ;;;     gtk_builder_add_from_resource
 
 (test builder-add-from-resource
-  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
+  (with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-from-resource builder
                                               "/com/crategus/test/dialog.ui")))))
@@ -221,7 +221,7 @@
 ;;;     gtk_builder_add_objects_from_resource
 
 (test builder-add-objects-from-resource
-  (with-g-resource (resource (sys-path "resource/rtest-resource.gresource"))
+  (with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-objects-from-resource builder
                             "/com/crategus/test/dialog.ui"
@@ -285,4 +285,4 @@
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-28 --------------------------------------------------------------

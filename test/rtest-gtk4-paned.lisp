@@ -23,8 +23,8 @@
   (is (equal '()
              (list-children "GtkPaned")))
   ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-               "GtkOrientable")
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+               "GtkOrientable" "GtkAccessibleRange")
              (list-interfaces "GtkPaned")))
   ;; Check the properties
   (is (equal '("end-child" "max-position" "min-position" "orientation"
@@ -48,8 +48,8 @@
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkPaned" GTK-PANED
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkOrientable")
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable" 
+                         "GtkConstraintTarget" "GtkOrientable")
                         :TYPE-INITIALIZER "gtk_paned_get_type")
                        ((END-CHILD GTK-PANED-END-CHILD "end-child" "GtkWidget"
                          T T)
@@ -101,4 +101,4 @@
 
 ;;;     gtk_paned_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-29 --------------------------------------------------------------

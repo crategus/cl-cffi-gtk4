@@ -7,7 +7,7 @@
 
 ;;;     GtkGestureStylus
 
-(test gesture-stylus-class
+(test gtk-gesture-stylus-class
   ;; Type check
   (is (g:type-is-object "GtkGestureStylus"))
   ;; Check the registered name
@@ -26,7 +26,7 @@
   (is (equal '()
              (list-interfaces "GtkGestureStylus")))
   ;; Check the properties
-  (is (equal '()
+  (is (equal '("stylus-only")
              (list-properties "GtkGestureStylus")))
   ;; Check the signals
   (is (equal '("down" "motion" "proximity" "up")
@@ -35,8 +35,13 @@
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGestureStylus" GTK-GESTURE-STYLUS
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_stylus_get_type")
-                       NIL)
+                       ((STYLUS-ONLY GTK-GESTURE-STYLUS-STYLUS-ONLY
+                         "stylus-only" "gboolean" T T)))
              (gobject:get-g-type-definition "GtkGestureStylus"))))
+
+;;; --- Properties -------------------------------------------------------------
+
+;;;     stylus-only                                        Since 4.10
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -53,4 +58,4 @@
 ;;;     gtk_gesture_stylus_get_backlog
 ;;;     gtk_gesture_stylus_get_device_tool
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-29 --------------------------------------------------------------

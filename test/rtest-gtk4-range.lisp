@@ -24,7 +24,7 @@
              (list-children "GtkRange")))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-               "GtkOrientable")
+               "GtkAccessibleRange" "GtkOrientable")
              (list-interfaces "GtkRange")))
   ;; Check the properties
   (is (equal '("adjustment" "fill-level" "inverted" "orientation"
@@ -45,8 +45,8 @@
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkRange" GTK-RANGE
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkOrientable")
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                         "GtkConstraintTarget" "GtkOrientable")
                         :TYPE-INITIALIZER "gtk_range_get_type")
                        ((ADJUSTMENT GTK-RANGE-ADJUSTMENT "adjustment"
                          "GtkAdjustment" T T)
@@ -91,4 +91,4 @@
 ;;;     gtk_range_get_slider_size_fixed
 ;;;     gtk_range_set_slider_size_fixed
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-28 --------------------------------------------------------------

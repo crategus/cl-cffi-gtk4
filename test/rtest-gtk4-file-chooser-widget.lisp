@@ -28,8 +28,8 @@
                "GtkFileChooser")
              (list-interfaces "GtkFileChooserWidget")))
   ;; Check the properties
-  (is (equal '("action" "create-folders" "filter" "filters" "search-mode"
-               "select-multiple" "shortcut-folders" "subtitle")
+  (is (equal '("action" "create-folders" "filter" "filters" "search-mode" 
+               "select-multiple" "shortcut-folders" "show-time" "subtitle")
              (list-properties "GtkFileChooserWidget")))
   ;; Check the signals
   (is (equal '("desktop-folder" "down-folder" "home-folder" "location-popup"
@@ -48,13 +48,16 @@
                        (make-instance 'gtk:file-chooser-widget))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFileChooserWidget" GTK-FILE-CHOOSER-WIDGET
+  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFileChooserWidget" 
+                                     GTK-FILE-CHOOSER-WIDGET
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkFileChooser")
                         :TYPE-INITIALIZER "gtk_file_chooser_widget_get_type")
                        ((SEARCH-MODE GTK-FILE-CHOOSER-WIDGET-SEARCH-MODE
                          "search-mode" "gboolean" T T)
+                        (SHOW-TIME GTK-FILE-CHOOSER-WIDGET-SHOW-TIME
+                         "show-time" "gboolean" T NIL)
                         (SUBTITLE GTK-FILE-CHOOSER-WIDGET-SUBTITLE "subtitle"
                          "gchararray" T NIL)))
              (gobject:get-g-type-definition "GtkFileChooserWidget"))))
@@ -62,6 +65,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 ;;;     search-mode
+;;;     show-time                                          Since 4.10
 ;;;     subtitle
 
 ;;; --- Signals ----------------------------------------------------------------
@@ -83,4 +87,4 @@
 
 ;;;     gtk_file_chooser_widget_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-29 --------------------------------------------------------------

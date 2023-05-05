@@ -24,7 +24,7 @@
              (list-children "GtkProgressBar")))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-               "GtkOrientable")
+               "GtkOrientable" "GtkAccessibleRange")
              (list-interfaces "GtkProgressBar")))
   ;; Check the properties
   (is (equal '("ellipsize" "fraction" "inverted" "orientation" "pulse-step"
@@ -45,8 +45,8 @@
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkProgressBar" GTK-PROGRESS-BAR
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkOrientable")
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable" 
+                         "GtkConstraintTarget" "GtkOrientable")
                         :TYPE-INITIALIZER "gtk_progress_bar_get_type")
                        ((ELLIPSIZE GTK-PROGRESS-BAR-ELLIPSIZE "ellipsize"
                          "PangoEllipsizeMode" T T)

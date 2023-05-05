@@ -59,8 +59,9 @@
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkMenuButton")))
   ;; Check the properties
-  (is (equal '("always-show-arrow" "child" "direction" "has-frame" "icon-name"
-               "label" "menu-model" "popover" "primary" "use-underline")
+  (is (equal '("active" "always-show-arrow" "child" "direction" "has-frame" 
+               "icon-name" "label" "menu-model" "popover" "primary" 
+               "use-underline")
              (list-properties "GtkMenuButton")))
   ;; Check the signals
   (is (equal '("activate")
@@ -79,7 +80,8 @@
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_menu_button_get_type")
-                       ((ALWAYS-SHOW-ARROW GTK-MENU-BUTTON-ALWAYS-SHOW-ARROW
+                       ((ACTIVE GTK-MENU-BUTTON-ACTIVE "active" "gboolean" T T)
+                        (ALWAYS-SHOW-ARROW GTK-MENU-BUTTON-ALWAYS-SHOW-ARROW
                          "always-show-arrow" "gboolean" T T)
                         (CHILD GTK-MENU-BUTTON-CHILD "child" "GtkWidget" T T)
                         (DIRECTION GTK-MENU-BUTTON-DIRECTION "direction"
@@ -145,4 +147,4 @@
 ;;;     GtkMenuButtonCreatePopupFunc
 ;;;     gtk_menu_button_set_create_popup_func
 
-;;; --- 2023-3-24 --------------------------------------------------------------
+;;; --- 2023-4-29 --------------------------------------------------------------

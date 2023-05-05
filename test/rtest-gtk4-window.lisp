@@ -176,17 +176,6 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query)))
 
-  ;; Query info for "keys-changed"
-  (let ((query (g:signal-query (g:signal-lookup "keys-changed" "GtkWindow"))))
-    (is (string= "keys-changed" (g:signal-query-signal-name query)))
-    (is (string= "GtkWindow" (g:type-name (g:signal-query-owner-type query))))
-    (is (equal '(:RUN-FIRST)
-               (g:signal-query-signal-flags query)))
-    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
-    (is (equal '()
-               (mapcar #'g:type-name (g:signal-query-param-types query))))
-    (is-false (g:signal-query-signal-detail query)))
-
   ;; Query info for "close-request"
   (let ((query (g:signal-query (g:signal-lookup "close-request" "GtkWindow"))))
     (is (string= "close-request" (g:signal-query-signal-name query)))
@@ -194,6 +183,18 @@
     (is (equal '(:RUN-LAST)
                (g:signal-query-signal-flags query)))
     (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
+(test gtk-window-keys-changed-signal
+  ;; Query info for "keys-changed"
+  (let ((query (g:signal-query (g:signal-lookup "keys-changed" "GtkWindow"))))
+    (is (string= "keys-changed" (g:signal-query-signal-name query)))
+    (is (string= "GtkWindow" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-FIRST :DEPRECATED)
+               (g:signal-query-signal-flags query)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
@@ -288,4 +289,4 @@
 ;;;     gtk_window_set_auto_startup_notification
 ;;;     gtk_window_set_interactive_debugging
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-29 --------------------------------------------------------------

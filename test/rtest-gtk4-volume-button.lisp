@@ -23,8 +23,8 @@
   (is (equal '()
              (list-children "GtkVolumeButton")))
   ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-               "GtkOrientable")
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+               "GtkAccessibleRange" "GtkOrientable")
              (list-interfaces "GtkVolumeButton")))
   ;; Check the properties
   (is (equal '("use-symbolic")
@@ -44,8 +44,8 @@
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkVolumeButton" GTK-VOLUME-BUTTON
                        (:SUPERCLASS GTK-SCALE-BUTTON :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkOrientable")
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                         "GtkConstraintTarget" "GtkOrientable")
                         :TYPE-INITIALIZER "gtk_volume_button_get_type")
                        ((USE-SYMBOLIC GTK-VOLUME-BUTTON-USE-SYMBOLIC
                          "use-symbolic" "gboolean" T T)))
@@ -72,4 +72,4 @@
     (is (= 0.02d0 (gtk:adjustment-step-increment
                       (gtk:scale-button-adjustment button))))))
 
-;;; --- 2023-3-26 --------------------------------------------------------------
+;;; --- 2023-4-29 --------------------------------------------------------------

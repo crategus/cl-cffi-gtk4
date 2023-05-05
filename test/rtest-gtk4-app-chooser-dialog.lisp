@@ -7,7 +7,7 @@
 
 ;;;     GtkAppChooserDialog
 
-(test app-chooser-dialog-class
+(test gtk-app-chooser-dialog-class
   ;; Type check
   (is (g:type-is-object "GtkAppChooserDialog"))
   ;; Check the registered name
@@ -35,8 +35,17 @@
   ;; CSS information
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAppChooserDialog")))
+  #-windows
   (is (string=
 "[window.background.csd.dialog:dir(ltr)]
+"
+               (gtk:style-context-to-string
+                   (gtk:widget-style-context
+                       (make-instance 'gtk:app-chooser-dialog))
+                   :none)))
+  #+windows
+  (is (string=
+"[window.background.dialog:dir(ltr)]
 "
                (gtk:style-context-to-string
                    (gtk:widget-style-context
@@ -66,4 +75,4 @@
 ;;;     gtk_app_chooser_dialog_new_for_content_type
 ;;;     gtk_app_chooser_dialog_get_widget
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-2 ---------------------------------------------------------------

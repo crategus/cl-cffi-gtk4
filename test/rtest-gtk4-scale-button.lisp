@@ -23,11 +23,11 @@
   (is (equal '("GtkVolumeButton")
              (list-children "GtkScaleButton")))
   ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-               "GtkOrientable")
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+               "GtkAccessibleRange" "GtkOrientable")
              (list-interfaces "GtkScaleButton")))
   ;; Check the properties
-  (is (equal '("adjustment" "icons" "orientation" "value")
+  (is (equal '("active" "adjustment" "icons" "orientation" "value")
              (list-properties "GtkScaleButton")))
   ;; Check the signals
   (is (equal '("popdown" "popup" "value-changed")
@@ -44,10 +44,12 @@
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkScaleButton" GTK-SCALE-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkOrientable")
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
+                         "GtkConstraintTarget" "GtkOrientable")
                         :TYPE-INITIALIZER "gtk_scale_button_get_type")
-                       ((ADJUSTMENT GTK-SCALE-BUTTON-ADJUSTMENT "adjustment"
+                       ((ACTIVE GTK-SCALE-BUTTON-ACTIVE "active" "gboolean" T
+                         NIL)
+                        (ADJUSTMENT GTK-SCALE-BUTTON-ADJUSTMENT "adjustment"
                          "GtkAdjustment" T T)
                         (ICONS GTK-SCALE-BUTTON-ICONS "icons" "GStrv" T T)
                         (VALUE GTK-SCALE-BUTTON-VALUE "value" "gdouble" T T)))
@@ -55,6 +57,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+;;;     active                                             Since 4.10
 ;;;     adjustment
 ;;;     icons
 ;;;     value
@@ -72,4 +75,4 @@
 ;;;     gtk_scale_button_get_plus_button
 ;;;     gtk_scale_button_get_minus_button
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-4-29 --------------------------------------------------------------

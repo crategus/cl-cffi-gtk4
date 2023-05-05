@@ -123,6 +123,7 @@
     (is (eq :inherit (gtk:label-natural-wrap-mode label)))
     (is-false (gtk:label-selectable label))
     (is-false (gtk:label-single-line-mode label))
+    #+gtk-4-8
     (is-false (gtk:label-tabs label))
     (is-false (gtk:label-use-markup label))
     (is-false (gtk:label-use-underline label))

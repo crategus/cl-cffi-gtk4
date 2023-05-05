@@ -31,7 +31,7 @@
   (is (equal '("GtkBuildable")
              (list-interfaces "GtkFileFilter")))
   ;; Check the properties
-  (is (equal '("name")
+  (is (equal '("mime-types" "name" "patterns" "suffixes")
              (list-properties "GtkFileFilter")))
   ;; Check the signals
   (is (equal '()
@@ -41,7 +41,13 @@
                        (:SUPERCLASS GTK-FILTER :EXPORT T :INTERFACES
                         ("GtkBuildable") :TYPE-INITIALIZER
                         "gtk_file_filter_get_type")
-                       ((NAME GTK-FILE-FILTER-NAME "name" "gchararray" T T)))
+                       ((MIME-TYPES GTK-FILE-FILTER-MIME-TYPES "mime-types"
+                         "GStrv" NIL NIL)
+                        (NAME GTK-FILE-FILTER-NAME "name" "gchararray" T T)
+                        (PATTERNS GTK-FILE-FILTER-PATTERNS "patterns" "GStrv"
+                         NIL NIL)
+                        (SUFFIXES GTK-FILE-FILTER-SUFFIXES "suffixes" "GStrv"
+                         NIL NIL)))
              (gobject:get-g-type-definition "GtkFileFilter"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -110,16 +116,16 @@
 ;;;     gtk_file_filter_new_from_gvariant
 ;;;     gtk_file_filter_to_gvariant
 
-(test file-filter-to-gvariant
+(test gtk-file-filter-to-gvariant
   (let ((filter (gtk:file-filter-new))
         (variant nil))
     (is-false (gtk:file-filter-add-mime-type filter "text/plain"))
     (is (cffi:pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
     #-windows
-    (is (string= "('[Invalid UTF-8]', [(1, 'text/plain')])"
+    (is (string= "('Einfaches Textdokument', [(1, 'text/plain')])"
                  (g:variant-print variant)))
     #+windows
-    (is (string= "('[Invalid UTF-8]', [(1, '.mhjl')])"
+    (is (string= "('.mhjl-Dateityp', [(1, '.mhjl')])"
                  (g:variant-print variant)))
 
     (is (eq 'gtk:file-filter
@@ -127,10 +133,10 @@
                            (gtk:file-filter-new-from-gvariant variant)))))
     (is (cffi:pointerp (setf variant (gtk:file-filter-to-gvariant filter))))
     #-windows
-    (is (string= "('[Invalid UTF-8]', [(1, 'text/plain')])"
+    (is (string= "('Einfaches Textdokument', [(1, 'text/plain')])"
                  (g:variant-print variant)))
     #+windows
-    (is (string= "('[Invalid UTF-8]', [(1, '*')])"
+    (is (string= "('.mhjl-Dateityp', [(1, '*')])"
                  (g:variant-print variant)))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-2 ---------------------------------------------------------------

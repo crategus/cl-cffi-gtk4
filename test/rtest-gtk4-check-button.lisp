@@ -68,9 +68,10 @@
     ;; active
     (is-true (setf (gtk:check-button-active button) t))
     (is-true (gtk:check-button-active button))
-    ;; child availabe since 4.8
+    #+gtk-4-8
     (is (typep (setf (gtk:check-button-child button)
                      (gtk:button-new)) 'gtk:button))
+    #+gtk-4-8
     (is (typep (gtk:check-button-child button) 'gtk:button))
     ;; group
     (is (typep (setf (gtk:check-button-group button) group) 'gtk:check-button))
