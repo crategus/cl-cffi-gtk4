@@ -96,6 +96,7 @@
 
            ;; Miscellaneous
            #:do-size-group
+           #:do-emblemed-icon
            #:do-event-controller
 
            ;; Theming in GTK
@@ -105,6 +106,9 @@
            #:do-css-multiplebgs
            #:do-css-pixbufs
            #:do-css-shadows
+
+           ;;; Gdk examples
+           #:do-app-launch-context
            ))
 
 (in-package :gtk4-example)
@@ -145,8 +149,7 @@ Maecenas sagittis auctor leo a dictum. Sed at auctor."))
         ;; Create an application
         (app (make-instance 'gtk:application
                             :application-id "com.crategus.run-example"
-                            :resource-base-path (null-pointer)
-                            :flags :none)))
+                            :resource-base-path (null-pointer))))
     ;; Register the resources
     (when resource
       (g:resources-register resource))

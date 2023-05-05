@@ -95,6 +95,7 @@
 
                ;; Miscellaneous
                (:file "size-group")
+               (:file "emblemed-icon")
 ;               (:file "event-controller")
 
                ;; Theming in GTK
@@ -104,6 +105,9 @@
                (:file "css-multiplebgs")
                (:file "css-pixbufs")
                (:file "css-shadows")
+
+               ;; GDK examples
+               (:file "app-launch-context")
               ))
 
 ;;; --- 2023-3-11 --------------------------------------------------------------
