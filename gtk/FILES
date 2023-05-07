@@ -245,10 +245,11 @@ Selector Widgets and Dialogs
   gtk.color-chooser-widget.lisp        GtkColorChooserWidget           GTK 4.6+
   gtk.color-chooser-dialog.lisp        GtkColorChooserDialog           GTK 4.6+
 
-  gtk.file-chooser.lisp                GtkFileChooser                  GTK 4.0+
-  gtk.file-chooser-native.lisp         GtkFileChooserNative            GTK 4.0+
+  gtk.file-chooser.lisp                GtkFileChooser                  GTK 4.10
+  gtk.file-chooser-native.lisp         GtkFileChooserNative            GTK 4.10
   gtk.file-chooser-dialog.lisp         GtkFileChooserDialog            GTK 4.0+
   gtk.file-chooser-widget.lisp         GtkFileChooserWidget            GTK 4.10
+  gtk.file-dialog.lisp                 GtkFileDialog                   GTK 4.10+
 
   gtk.font-chooser.lisp                GtkFontChooser                  GTK 4.0+
   gtk.font-button.lisp                 GtkFontButton                   GTK 4.0+

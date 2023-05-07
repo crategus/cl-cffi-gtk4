@@ -2567,6 +2567,27 @@
       @about-generic{file-chooser-widget-subtitle}
       @about-function{file-chooser-widget-new}
     @end{subsection}
+    @begin[GtkFileDialog]{subsection}
+      @about-class{file-dialog}
+      @about-generic{file-dialog-accept-label}
+      @about-generic{file-dialog-default-filter}
+      @about-generic{file-dialog-filters}
+      @about-generic{file-dialog-initial-file}
+      @about-generic{file-dialog-initial-folder}
+      @about-generic{file-dialog-initial-name}
+      @about-generic{file-dialog-modal}
+      @about-generic{file-dialog-title}
+      @about-function{file-dialog-open}
+      @about-function{file-dialog-open-finish}
+      @about-function{file-dialog-open-multiple}
+      @about-function{file-dialog-open-multiple-finish}
+      @about-function{file-dialog-save}
+      @about-function{file-dialog-save-finish}
+      @about-function{file-dialog-select-folder}
+      @about-function{file-dialog-select-folder-finish}
+      @about-function{file-dialog-select-multiple-folders}
+      @about-function{file-dialog-select-multiple-folders-finish}
+    @end{subsection}
     @begin[GtkFontChooser]{subsection}
       Interface implemented by widgets displaying fonts.
       @about-symbol{font-chooser-level}

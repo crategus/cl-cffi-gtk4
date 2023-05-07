@@ -267,10 +267,13 @@
      (:file "gtk4.color-button")          ; GtkColorButton
      (:file "gtk4.color-chooser-widget")  ; GtkColorChooserWidget
      (:file "gtk4.color-chooser-dialog")  ; GtkColorChooserDialog
-     (:file "gtk4.file-chooser")          ; GtkFileChooser
-     (:file "gtk4.file-chooser-native")   ; GtkFileChooserNative
-     (:file "gtk4.file-chooser-dialog")   ; GtkFileChooserDialog
-     (:file "gtk4.file-chooser-widget")   ; GtkFileChooserWidget
+
+     (:file "gtk4.file-chooser")
+     (:file "gtk4.file-chooser-native")
+     (:file "gtk4.file-chooser-dialog")
+     (:file "gtk4.file-chooser-widget")
+     (:file "gtk4.file-dialog" :if-feature :gtk-4-10)
+
      (:file "gtk4.font-chooser")          ; GtkFontChooser
      (:file "gtk4.font-button")           ; GtkFontButton
      (:file "gtk4.font-chooser-widget")   ; GtkFontChooserWidget
@@ -386,6 +389,7 @@
      (:file "gtk4.init")                    ; More initialization
   )))
   :in-order-to ((asdf:test-op (test-op "cl-cffi-gtk4/test")))
+  :defsystem-depends-on (:cl-cffi-gtk4-init)
   :depends-on (:cl-cffi-gtk4-init
                :cl-cffi-glib
                :cl-cffi-gdk-pixbuf
@@ -586,10 +590,12 @@
 ;     (:file "rtest-gtk4-color-chooser-widget")    ; GtkColorChooserWidget
 ;     (:file "rtest-gtk4-color-chooser-dialog")    ; GtkColorChooserDialog
 
-     (:file "rtest-gtk4-file-chooser")            ; GtkFileChooser
-;    (:file "gtk4.file-chooser-native")           ; GtkFileChooserNative
-     (:file "rtest-gtk4-file-chooser-dialog")     ; GtkFileChooserDialog
-     (:file "rtest-gtk4-file-chooser-widget")     ; GtkFileChooserWidget
+     (:file "rtest-gtk4-file-chooser")
+     (:file "rtest-gtk4-file-chooser-native")
+     (:file "rtest-gtk4-file-chooser-dialog")
+     (:file "rtest-gtk4-file-chooser-widget")
+     (:file "rtest-gtk4-file-dialog" :if-feature :gtk-4-10)
+
 ;    (:file "gtk4.font-chooser")                  ; GtkFontChooser
 ;    (:file "gtk4.font-button")                   ; GtkFontButton
 ;    (:file "gtk4.font-chooser-widget")           ; GtkFontChooserWidget
