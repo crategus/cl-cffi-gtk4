@@ -2,7 +2,7 @@
 ;;; gtk4.widget.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -2823,24 +2823,22 @@ lambda (widget)    :run-last
 (export 'widget-grab-focus)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_native ()
-;;;
-;;; GtkNative *
-;;; gtk_widget_get_native (GtkWidget *widget);
-;;;
-;;; Returns the GtkNative widget that contains widget , or NULL if the widget is
-;;; not contained inside a widget tree with a native ancestor.
-;;;
-;;; GtkNative widgets will return themselves here.
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; Returns :
-;;;     the GtkNative widget of widget , or NULL.
+;;; gtk_widget_get_native () -> widget-native
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_widget_get_native" widget-native) (g:object native)
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @return{A @class{gtk:native} widget of @arg{widget}, or @code{nil}.}
+  @begin{short}
+    Returns the @class{gtk:native} widget that contains @arg{widget}, or
+    @code{nil} if the widget is not contained inside a widget tree with a native
+    ancestor.
+  @end{short}
+  The @class{gtk:native} widgets will return themselves here.
+  @see-class{gtk:widget}
+  @see-class{gtk:native}"
   (widget (g:object widget)))
 
 (export 'widget-native)
@@ -3854,8 +3852,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_allocated_baseline -> widget-allocated-baseline
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_allocated_baseline" widget-allocated-baseline)
-    :int
+(defcfun ("gtk_widget_get_allocated_baseline" widget-allocated-baseline) :int
  #+liber-documentation
  "@version{#2021-9-20}
   @argument[widget]{a @class{gtk:widget} object to query}
@@ -3871,74 +3868,73 @@ lambda (widget)    :run-last
 (export 'widget-allocated-baseline)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_width ()
-;;;
-;;; int
-;;; gtk_widget_get_width (GtkWidget *widget);
-;;;
-;;; Returns the content width of the widget, as passed to its size-allocate
-;;; implementation. This is the size you should be using in
-;;; GtkWidgetClass.snapshot(). For pointer events, see gtk_widget_contains().
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; Returns :
-;;;     The width of widget
+;;; gtk_widget_get_width () -> widget-width
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_widget_get_width" widget-width) :int
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @return{An integer with the width of @arg{widget}.}
+  @begin{short}
+    Returns the content width of the widget, as passed to its size allocate
+    implementation.
+  @end{short}
+  This is the size you should be using in the @code{GtkWidgetClass.snapshot()}
+  virtual function. For pointer events, see the @fun{gtk:widget-contains}
+  function.
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-contains}"
   (widget (g:object widget)))
 
 (export 'widget-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_height ()
-;;;
-;;; int
-;;; gtk_widget_get_height (GtkWidget *widget);
-;;;
-;;; Returns the content height of the widget, as passed to its size-allocate
-;;; implementation. This is the size you should be using in
-;;; GtkWidgetClass.snapshot(). For pointer events, see gtk_widget_contains().
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; Returns :
-;;;     The height of widget
+;;; gtk_widget_get_height () -> widget-height
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_widget_get_height" widget-height) :int
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @return{An integer with the height of @arg{widget}.}
+  @begin{short}
+    Returns the content width of the widget, as passed to its size allocate
+    implementation.
+  @end{short}
+  This is the size you should be using in the @code{GtkWidgetClass.snapshot()}
+  virtual function. For pointer events, see the @fun{gtk:widget-contains}
+  function.
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-contains}"
   (widget (g:object widget)))
 
 (export 'widget-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_size ()
-;;;
-;;; int
-;;; gtk_widget_get_size (GtkWidget *widget,
-;;;                      GtkOrientation orientation);
-;;;
-;;; Returns the content width or height of the widget, depending on orientation.
-;;; This is equivalent to calling gtk_widget_get_width() for
-;;; GTK_ORIENTATION_HORIZONTAL or gtk_widget_get_height() for
-;;; GTK_ORIENTATION_VERTICAL, but can be used when writing
-;;; orientation-independent code, such as when implementing GtkOrientable
-;;; widgets.
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; orientation :
-;;;     the orientation to query
-;;;
-;;; Returns :
-;;;     The size of widget in orientation .
+;;; gtk_widget_get_size () -> widget-size
 ;;; ----------------------------------------------------------------------------
 
 (defcfun ("gtk_widget_get_size" widget-size) :int
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[orientation]{a @symbol{gtk:orientation} value with the orientation
+    to query}
+  @return{An integer with the size of the widget in @arg{orientation}.}
+  @begin{short}
+    Returns the content width or height of the widget, depending on the given
+    orientation.
+  @end{short}
+  This is equivalent to calling the @fun{gtk:widget-width} function for the
+  @code{:horizontal} value or the @fun{gtk:widget-height} function for the
+  @code{:vertical} value, but can be used when writing orientation independent
+  code, such as when implementing @class{gtk-orientable} widgets.
+  @see-class{gtk:widget}
+  @see-class{gtk:orientable}
+  @see-symbol{gtk:orientation}
+  @see-function{gtk:widget-width}
+  @see-function{gtk:widget-height}"
   (widget (g:object widget))
   (orientation orientation))
 
@@ -4034,29 +4030,33 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_contains ()
-;;;
-;;; gboolean
-;;; gtk_widget_contains (GtkWidget *widget,
-;;;                      double x,
-;;;                      double y);
-;;;
-;;; Tests if the point at (x , y ) is contained in widget .
-;;;
-;;; The coordinates for (x , y ) must be in widget coordinates, so (0, 0) is
-;;; assumed to be the top left of widget 's content area.
-;;;
-;;; widget :
-;;;     the widget to query
-;;;
-;;; x :
-;;;     X coordinate to test, relative to widget 's origin
-;;;
-;;; y :
-;;;     Y coordinate to test, relative to widget 's origin
-;;;
-;;; Returns :
-;;;     TRUE if widget contains (x , y ).
 ;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_widget_contains" %widget-contains) :boolean
+  (widget (g:object widget))
+  (x :double)
+  (y :double))
+
+(defun widget-contains (widget x y)
+ #+liber-documentation
+ "@version{#2023-5-5}
+  @argument[widget]{a @class{gtk:widget} widget to query}
+  @argument[x]{a number coerced to a double float with the x coordinate to test,
+    relative to the origin of the widget}
+  @argument[y]{a number coerced to a double float with the y coordinate to test,
+    relative to the origin of the widget}
+  @return{@em{True} if @arg{widget} contains @code{(x, y)}.}
+  @begin{short}
+    Tests if the point at @code{(x, y)} is contained in the widget.
+  @end{short}
+  The coordinates for @code{(x, y)} must be in widget coordinates, so
+  @code{(0, 0)} is assumed to be the top left of the content area of the widget.
+  @see-class{gtk:widget}"
+  (%widget-contains widget
+                    (coerce x 'double-float)
+                    (coerce y 'double-float)))
+
+(export 'widget-contains)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_pick ()
