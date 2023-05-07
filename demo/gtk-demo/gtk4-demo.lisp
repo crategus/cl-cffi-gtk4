@@ -167,8 +167,13 @@
        "gtk4-example"
        "window-simple.lisp")
       ("Simple Message Dialog"
-       ":window"
-       "DO-MESSAGE-DIALOG-SIMPLE"
+       ":dialog"
+       "CREATE-MESSAGE-DIALOG-SIMPLE"
+       "gtk4-example"
+       "message-dialog-simple.lisp")
+      ("Simple Message Dialog with Constructor"
+       ":dialog"
+       "CREATE-MESSAGE-DIALOG-SIMPLE2"
        "gtk4-example"
        "message-dialog-simple.lisp")
       ("Various Dialogs"
