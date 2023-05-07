@@ -365,11 +365,13 @@
 
 (defun video-set-filename (video path)
  #+liber-documentation
- "@version{#2023-4-29}
+ "@version{#2023-5-6}
   @argument[video]{a @class{gtk:video} widget}
   @argument[path]{a pathname or namestring with the file to play}
-  @short{Makes @arg{object} play the given @arg{path}.}
-  This is a utility function that calls the @fun{gtk:video-file} function,
+  @begin{short}
+    Makes @arg{object} play the given @arg{path}.
+  @end{short}
+  This is a utility function that calls the @fun{gtk:video-file} function.
   @see-class{gtk:video}
   @see-function{gtk:video-file}"
   (%video-set-filename video (namestring path)))
@@ -380,19 +382,22 @@
 ;;; gtk_video_set_resource ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_video_set_resource" %video-set-resource) (g:object video)
+(defcfun ("gtk_video_set_resource" %video-set-resource) :void
+  (video (g:object video))
   (path :string))
 
 (defun video-set-resource (video path)
  #+liber-documentation
- "@version{#2023-4-29}
+ "@version{#2023-5-6}
   @argument[video]{a @class{gtk:video} widget}
   @argument[path]{a pathname or namestring with the resource to play}
-  @short{Makes @arg{object} play the resource at the given @arg{path}.}
-  This is a utility function that calls the @fun{gtk:video-file} function,
+  @begin{short}
+    Makes @arg{object} play the resource at the given @arg{path}.
+  @end{short}
+  This is a utility function that calls the @fun{gtk:video-file} function.
   @see-class{gtk:video}
   @see-function{gtk:video-file}"
-  (%video-set-resource (namestring path)))
+  (%video-set-resource video (namestring path)))
 
 (export 'video-set-resource)
 
