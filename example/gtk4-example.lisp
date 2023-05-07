@@ -11,8 +11,8 @@
            #:do-window-simple
            #:do-dialog-quick-message
            #:do-dialog-various
-           #:do-message-dialog-simple
-           #:do-message-dialog-simple2
+           #:create-message-dialog-simple
+           #:create-message-dialog-simple2
            #:do-message-dialog-new
            #:do-message-dialog-new-with-markup
            #:do-message-dialog-with-markup
@@ -142,8 +142,25 @@ Maecenas sagittis auctor leo a dictum. Sed at auctor."))
         (read-sequence string instream)
         string))))
 
+(defun window-draw-func (title drawfunc application
+                         &optional (width 600) (height 600))
+  (let* ((area (make-instance 'gtk:drawing-area))
+         (window (make-instance 'gtk:window
+                                 :application application
+                                 :child area
+                                 :title title
+                                 :default-width width
+                                 :default-height height)))
+    ;; Set the drawing function
+    (gtk:drawing-area-set-draw-func area
+        (lambda (widget cr width height)
+          (declare (ignore widget))
+          (funcall drawfunc cr width height)))
+    ;; Show the window.
+    (gtk:widget-show window)))
+
  ;; A wrapper to run an example
-(defun run-example (func &optional (filename nil))
+(defun run-example (func &optional (functype :window) (filename nil))
   (let ((resource (when filename
                         (g:resource-load (sys-path filename))))
         ;; Create an application
@@ -156,8 +173,22 @@ Maecenas sagittis auctor leo a dictum. Sed at auctor."))
     ;; Connect signal "activate" to the application
     (g:signal-connect app "activate"
         (lambda (application)
-          ;; Create an application window
-          (funcall func application)))
+          (cond ((eq :window functype)
+                 ;; Start example as application window
+                 (funcall func application))
+                ((eq :dialog functype)
+                 ;; Start example as transient for application window
+                 (let ((window (make-instance 'gtk:application-window
+                                :application application
+                                :title "GTK Example"
+                                :default-width 600
+                                :default-height 400)))
+                   (gtk:widget-show window)
+                   (funcall func window)))
+                ((eq :drawfunc functype)
+                 (window-draw-func "GTK Example" func application))
+                (t
+                 (error "Type of function is unknown.")))))
     ;; Connect signal "shutdown"
     (g:signal-connect app "shutdown"
         (lambda (application)
@@ -178,4 +209,4 @@ Maecenas sagittis auctor leo a dictum. Sed at auctor."))
        ((not child))
     (apply-css-to-widget provider child)))
 
-;;; 2022-11-11
+;;; --- 2023-5-7 ---------------------------------------------------------------
