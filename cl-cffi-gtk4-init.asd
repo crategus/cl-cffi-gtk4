@@ -24,13 +24,13 @@
 
 (defsystem :cl-cffi-gtk4-init
   :name "cl-cffi-gtk4-init"
-  :version "0.9.0"
+  :version "0.2.0"
   :author "Dieter Kaiser"
-  :license "LLGPL"
+  :license "MIT"
   :serial t
   :components ((:file "cl-cffi-gtk4-init")          ; Library Initialization
               )
-  :depends-on (:cl-cffi-glib/init
+  :depends-on (:cl-cffi-glib-init
                :cffi
                :iterate
                :trivial-features))

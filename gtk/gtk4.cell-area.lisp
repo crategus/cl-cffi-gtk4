@@ -143,7 +143,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-area 'type)
- "@version{#2022-9-10}
+ "@version{2023-5-13}
   @begin{short}
     The @sym{gtk:cell-area} class is an abstract class for
     @class{gtk:cell-layout} widgets, also referred to as \"layouting widgets\",
@@ -220,7 +220,7 @@ gtk_cell_area_context_get_preferred_width (context, &minimum_width,
   support requesting and rendering rows in treemodels with an exceedingly
   large amount of rows. The @class{gtk:cell-layout} widget in that case would
   calculate the required width of the rows in an idle or timeout source, see
-  the @fun{g-timeout-add} function, and when the widget is requested its
+  the @fun{g:timeout-add} function, and when the widget is requested its
   actual width in @code{get_preferred_width()} it can simply consult the width
   accumulated so far in the @class{gtk:cell-area-context} object.
 
@@ -539,16 +539,16 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edit-widget)
       "Accessor"
       (documentation 'cell-area-edit-widget 'function)
- "@version{#2021-12-19}
-  @syntax[]{(gtk:cell-area-edit-widget object) => edit-widget}
+ "@version{2023-5-13}
+  @syntax[]{(gtk:cell-area-edit-widget object) => widget}
   @argument[object]{a @class{gtk:cell-area} object}
-  @argument[edit-widget]{a @class{gtk:cell-editable} widget}
+  @argument[widget]{a @class{gtk:cell-editable} widget}
   @begin{short}
     Accessor of the @slot[gtk:cell-area]{edit-widget} slot of the
     @class{gtk:cell-area} class.
   @end{short}
-  The @sym{gtk:cell-area-edit-widget} slot access function gets the widget
-  currently used to edit the currently edited cell.
+  The @sym{gtk:cell-area-edit-widget} function gets the widget currently used
+  to edit the currently edited cell.
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-editable}")
 
@@ -565,7 +565,7 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edited-cell)
       "Accessor"
       (documentation 'cell-area-edited-cell 'function)
- "@version{#2021-12-19}
+ "@version{2023-5-13}
   @syntax[]{(gtk:cell-area-edited-cell object) => renderer}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
@@ -573,7 +573,7 @@ lambda (area renderer editable)    :run-first
     Accessor of the @slot[gtk:cell-area]{edited-cell} slot of the
     @class{gtk:cell-area} class.
   @end{short}
-  The @sym{gtk:cell-area-edited-cell} slot access function gets the
+  The @sym{gtk:cell-area-edited-cell} function gets the
   @class{gtk:cell-renderer} object in the area that is currently being edited.
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}")
@@ -590,7 +590,7 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-focus-cell)
       "Accessor"
       (documentation 'cell-area-focus-cell 'function)
- "@version{#2021-12-19}
+ "@version{2023-5-13}
   @syntax[]{(gtk:cell-area-edited-cell object) => renderer}
   @syntax[]{(setf (gtk:cell-area-edited-cell object) renderer}
   @argument[object]{a @class{gtk:cell-area} object}
@@ -599,10 +599,9 @@ lambda (area renderer editable)    :run-first
     Accessor of the @slot[gtk:cell-area]{focus-cell} slot of the
     @class{gtk:cell-area} class.
   @end{short}
-  The @sym{gtk:cell-area-focus-cell} slot access function retrieves the
-  currently focused cell for the area. The @sym{(setf gtk:cell-area-focus-cell)}
-  slot access function explicitly sets the currently focused cell to
-  @arg{renderer}.
+  The @sym{gtk:cell-area-focus-cell} function retrieves the currently focused
+  cell for the area. The @sym{(setf gtk:cell-area-focus-cell)} function
+  explicitly sets the currently focused cell to @arg{renderer}.
 
   This is generally called by implementations of the
   @code{GtkCellAreaClass.focus()} or @code{GtkCellAreaClass.event()} functions,
@@ -703,14 +702,14 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-symbol 'cell-callback)
       "Callback"
       (liber:symbol-documentation 'cell-callback)
- "@version{#2021-12-19}
+ "@version{2023-5-13}
   @begin{short}
     The type of the callback function used for iterating over the cell renderers
     of a @class{gtk:cell-area} object, see the @fun{gtk:cell-area-foreach}
     function.
   @end{short}
   @begin{pre}
- lambda (renderer)
+lambda (renderer)
   @end{pre}
   @begin[code]{table}
     @entry[renderer]{The @class{gtk:cell-renderer} object to operate on.}
@@ -733,7 +732,7 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-foreach (area func)
  #+liber-documentation
- "@version{#2021-12-19}
+ "@version{2023-5-13}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[func]{a @symbol{gtk:cell-callback} callback function to call}
   @short{Calls a callback function for every cell renderer in the cell area.}
@@ -764,14 +763,14 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-symbol 'cell-alloc-callback)
       "Callback"
       (liber:symbol-documentation 'cell-alloc-callback)
- "@version{#2021-12-19}
+ "@version{2023-5-13}
   @begin{short}
-    The type of the callback functions used for iterating over the cell
+    The type of the callback function used for iterating over the cell
     renderers of a @class{gtk:cell-area} object, see the
     @fun{gtk:cell-area-foreach-alloc} function.
   @end{short}
   @begin{pre}
- lambda (renderer cell background)
+lambda (renderer cell background)
   @end{pre}
   @begin[code]{table}
     @entry[renderer]{The @class{gtk:cell-renderer} object to operate on.}
@@ -805,14 +804,14 @@ lambda (area renderer editable)    :run-first
 
 (defun cell-area-foreach-alloc (area context widget cell background func)
  #+liber-documentation
- "@version{#2021-12-19}
+ "@version{2023-5-13}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering to}
-  @argument[cell]{a @class{gdk:rectangle} instance with the @arg{widget}
-    relative coordinates and size for @arg{area}}
-  @argument[background]{a @class{gdk:rectangle} instance with the @arg{widget}
-    relative coordinates of the background area}
+  @argument[cell]{a @class{gdk:rectangle} instance with the relative coordinates
+    and size of @arg{widget} for rendering @arg{area}}
+  @argument[background]{a @class{gdk:rectangle} instance with the relative
+    coordinates of the background for rendering @arg{area}}
   @argument[func]{a @symbol{gtk:cell-alloc-callback} callback function}
   @begin{short}
     Calls the callback function for every @class{gtk:cell-renderer} object in
@@ -829,7 +828,7 @@ lambda (area renderer editable)    :run-first
                               widget
                               cell
                               background
-                              (cffi:callback cell-callback-alloc)
+                              (cffi:callback cell-alloc-callback)
                               ptr)))
 
 (export 'cell-area-foreach-alloc)
@@ -915,8 +914,7 @@ lambda (area renderer editable)    :run-first
 ;;; gtk_cell_area_get_cell_allocation ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_get_cell_allocation" %cell-area-cell-allocation)
-    :void
+(defcfun ("gtk_cell_area_get_cell_allocation" %cell-area-cell-allocation) :void
   (area (g:object cell-area))
   (context (g:object cell-area-context))
   (widget (g:object widget))
@@ -944,11 +942,11 @@ lambda (area renderer editable)    :run-first
   @see-class{gtk:cell-area}"
   (let ((allocation (gdk:rectangle-new)))
     (%cell-area-cell-allocation area
-                                    context
-                                    widget
-                                    renderer
-                                    cell
-                                    allocation)
+                                context
+                                widget
+                                renderer
+                                cell
+                                allocation)
     allocation))
 
 (export 'cell-area-cell-allocation)
@@ -990,11 +988,11 @@ lambda (area renderer editable)    :run-first
   @see-class{gtk:cell-area}"
   (let* ((alloc (gdk:rectangle-new))
          (renderer (%cell-area-cell-at-position area
-                                                    context
-                                                    widget
-                                                    cell
-                                                    x y
-                                                    alloc)))
+                                                context
+                                                widget
+                                                cell
+                                                x y
+                                                alloc)))
     (values renderer alloc)))
 
 (export 'cell-area-cell-at-position)
@@ -1460,7 +1458,7 @@ lambda (area renderer editable)    :run-first
   @argument[gtype]{a @class{g:type-t} type ID}
   @argument[property]{a string with the name of the cell property to find}
   @begin{return}
-    The @symbol{g-param-spec} instance of the cell property or a
+    The @symbol{g:param-spec} instance of the cell property or a
     @code{null-pointer} if the @arg{gtype} type has no child property with that
     name.
   @end{return}
@@ -1468,8 +1466,8 @@ lambda (area renderer editable)    :run-first
     Finds a cell property of a cell area type by name.
   @end{short}
   @see-class{gtk:cell-area}
-  @see-symbol{g_type-t}
-  @see-symbol{g-param-spec}"
+  @see-symbol{g:type-t}
+  @see-symbol{g:param-spec}"
   (let ((class (gobject:type-class-ref gtype)))
     (unwind-protect
       (let ((pspec (%cell-area-class-find-cell-property class property)))
@@ -1492,7 +1490,7 @@ lambda (area renderer editable)    :run-first
  #+liber-documentation
  "@version{#2021-12-19}
   @argument[gtype]{a @class{g:type-t} type ID}
-  @return{A list of @symbol{g-param-spec} instances.}
+  @return{A list of @symbol{g:param-spec} instances.}
   @short{Returns the cell properties of a cell area class.}
   @begin[Note]{dictionary}
     In the Lisp binding we pass the type of a cell area class and not
@@ -1500,7 +1498,7 @@ lambda (area renderer editable)    :run-first
   @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{g:type-t}
-  @see-class{g-param-spec}"
+  @see-class{g:param-spec}"
   (let ((class (gobject:type-class-ref gtype)))
     (unwind-protect
       (with-foreign-object (n-props :uint)
@@ -1642,8 +1640,7 @@ lambda (area renderer editable)    :run-first
 ;;; gtk_cell_area_cell_get_property () -> cell-area-cell-property
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_cell_set_property" %cell-area-cell-set-property)
-    :void
+(defcfun ("gtk_cell_area_cell_set_property" %cell-area-cell-set-property) :void
   (area (g:object cell-area))
   (renderer (g:object cell-renderer))
   (property :string)
@@ -1780,8 +1777,7 @@ lambda (area renderer editable)    :run-first
 ;;; gtk_cell_area_add_focus_sibling ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_add_focus_sibling" cell-area-add-focus-sibling)
-    :void
+(defcfun ("gtk_cell_area_add_focus_sibling" cell-area-add-focus-sibling) :void
  #+liber-documentation
  "@version{#2021-12-20}
   @argument[area]{a @class{gtk:cell-area} object}
@@ -1833,8 +1829,7 @@ lambda (area renderer editable)    :run-first
 ;;; gtk_cell_area_is_focus_sibling ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_is_focus_sibling" cell-area-is-focus-sibling)
-    :boolean
+(defcfun ("gtk_cell_area_is_focus_sibling" cell-area-is-focus-sibling) :boolean
  #+liber-documentation
  "@version{#2021-12-20}
   @argument[area]{a @class{gtk:cellArea} object}
@@ -2019,10 +2014,10 @@ lambda (area renderer editable)    :run-first
   (natural-size (:pointer :int)))
 
 (defun cell-area-request-renderer (area
-                                       renderer
-                                       orientation
-                                       widget
-                                       for-size)
+                                   renderer
+                                   orientation
+                                   widget
+                                   for-size)
  #+liber-documentation
  "@version{#2021-12-20}
   @argument[area]{a @class{gtk:cell-area} object}

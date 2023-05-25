@@ -54,6 +54,7 @@
 ;;;
 ;;; Functions
 ;;;
+;;;     gtk_file_dialog_new
 ;;;     gtk_file_dialog_open
 ;;;     gtk_file_dialog_open_finish
 ;;;     gtk_file_dialog_open_multiple
@@ -132,6 +133,15 @@
 ;;;     title
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_file_dialog_new
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline file-dialog-new))
+
+(defun file-dialog-new ()
+  (make-instance 'file-dialog))
+
+(export 'file-dialog-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_file_dialog_open
@@ -170,9 +180,80 @@
 ;;;     by the caller of the function.
 ;;; ----------------------------------------------------------------------------
 
+(defcfun ("gtk_file_dialog_open" %file-dialog-open) :void
+  (dialog (g:object file-dialog))
+  (parent (g:object window))
+  (cancellable (g:object g:cancellable))
+  (func :pointer)
+  (data :pointer))
 
+(defun file-dialog-open (dialog parent cancellable func)
+  (with-stable-pointer (ptr func)
+    (%file-dialog-open dialog
+                       parent
+                       cancellable
+                       (cffi:callback g:async-ready-callback)
+                       ptr)))
 
+(export 'file-dialog-open)
+
+;;; ----------------------------------------------------------------------------
 ;;;     gtk_file_dialog_open_finish
+#|
+FileDialogopen_finish
+since: 4.10
+
+[−]
+Declaration
+[src]
+GFile*
+gtk_file_dialog_open_finish (
+  GtkFileDialog* self,
+  GAsyncResult* result,
+  GError** error
+)
+
+Finishes the gtk_file_dialog_open() call and returns the resulting file.
+
+Available since: 4.10
+
+result
+Type: GAsyncResult
+
+A GAsyncResult
+
+The data is owned by the caller of the function.
+error
+Type: GError **
+
+The return location for a recoverable error.
+
+The argument can be NULL.
+If the return location is not NULL, then you must initialize it to a NULL GError*.
+The argument will left initialized to NULL by the method if there are no errors.
+In case of error, the argument will be set to a newly allocated GError; the caller will take ownership of the data, and be responsible for freeing it.
+[−]
+Return value 
+Type: GFile
+
+The file that was selected. Otherwise, NULL is returned and error is set.
+
+The caller of the method takes ownership of the data, and is responsible for freeing it.
+The return value can be NULL.
+|#
+;;; ----------------------------------------------------------------------------
+
+(defcfun ("gtk_file_dialog_open_finish" %file-dialog-open-finish)
+    (g:object g:file)
+  (dialog (g:object file-dialog))
+  (result (g:object g:async-result))
+  (err :pointer))
+
+(defun file-dialog-open-finish (dialog result)
+  (%file-dialog-open-finish dialog result (cffi:null-pointer)))
+
+(export 'file-dialog-open-finish)
+
 ;;;     gtk_file_dialog_open_multiple
 ;;;     gtk_file_dialog_open_multiple_finish
 ;;;     gtk_file_dialog_save
