@@ -7,7 +7,7 @@
 
 ;;; --- GtkApplicationInhibitFlags ---------------------------------------------
 
-(test application-inhibit-flags
+(test gtk-application-inhibit-flags
   ;; Check the type
   (is (g:type-is-flags "GtkApplicationInhibitFlags"))
   ;; Check the registered name
@@ -37,7 +37,7 @@
 
 ;;; --- GtkApplication ---------------------------------------------------------
 
-(test application-class
+(test gtk-application-class
   ;; Type check
   (is (g:type-is-object "GtkApplication"))
   ;; Check the registered name
@@ -80,8 +80,7 @@
 
 ;;; --- Properties and Accessors -----------------------------------------------
 
-#+nil
-(test application-properties
+(test gtk-application-properties
   (let ((message nil)
         (application (make-instance 'gtk:application
                                     :application-id "com.crategus.test"
@@ -106,8 +105,8 @@
                         ;; gtk:application-menubar
                         (is-false (gtk:application-menubar app))
                         (setf (gtk:application-menubar app)
-                              (make-instance 'g-menu))
-                        (is (typep (gtk:application-menubar app) 'g-menu))
+                              (make-instance 'g:menu))
+                        (is (typep (gtk:application-menubar app) 'g:menu))
                         ;; gtk:application-register-session
                         (is-false (gtk:application-register-session app))
                         (setf (gtk:application-register-session app) t)
@@ -135,13 +134,10 @@
 ;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: 
 ;; The name com.crategus.test was not provided by any .service files
 
-#+nil
-(test application-signals
+(test gtk-application-signals
   (let ((message nil)
         (application (make-instance 'gtk:application
-                                    :application-id "com.crategus.test"
-                                    :flags :default-flags
-                                    :register-session nil)))
+                                    :application-id "com.crategus.test")))
     ;; Connect signal "query-end", will not be executed
     (g:signal-connect application "query-end"
                       (lambda (app)
@@ -194,14 +190,14 @@
 
 ;;;     gtk_application_new
 
-(test application-new.1
+(test gtk-application-new.1
   (let ((application (gtk:application-new "com.crategus.test" '(:handles-open))))
     (is-true (g:application-id-is-valid "com.crategus.test"))
     (is (string= "com.crategus.test"
                  (g:application-application-id application)))
     (is (equal '(:handles-open) (g:application-flags application)))))
 
-(test applicaton-new.2
+(test gtk-application-new.2
   ;; Create application without ID
   (is-false (g:application-application-id
                 (gtk:application-new nil '(:handles-open)))))
@@ -215,13 +211,10 @@
 ;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: 
 ;; The name com.crategus.test was not provided by any .service files
 
-#+nil
-(test application-add-window
+(test gtk-application-add-window
   (let ((message nil)
         (application (make-instance 'gtk:application
-                                    :application-id "com.crategus.test"
-                                    :flags :default-flags
-                                    :register-session nil)))
+                                    :application-id "com.crategus.test")))
     ;; Connect signal "window-added"
     (g:signal-connect application "window-added"
                       (lambda (app window)
@@ -278,7 +271,7 @@
 ;;;     gtk_application_get_accels_for_action
 ;;;     gtk_application_set_accels_for_action
 
-(test application-accels-for-action
+(test gtk-application-accels-for-action
   (let ((application (make-instance 'gtk:application)))
     (is-false (gtk:application-accels-for-action application "win::close"))
     (is (equal '("<Control>q" "<Shift><Alt>F1" "<Control>z")
@@ -289,7 +282,7 @@
 
 ;;;     gtk_application_get_actions_for_accel
 
-(test application-actions-for-accel
+(test gtk-application-actions-for-accel
   (let ((application (make-instance 'gtk:application)))
     (is (equal '("<Control>q" "<Shift><Alt>F1" "<Control>z")
                (setf (gtk:application-accels-for-action application "win::close")
@@ -307,7 +300,7 @@
 
 ;;;     gtk_application_list_action_descriptions
 
-(test applicaton-list-action-descriptions
+(test gtk-application-list-action-descriptions
   (let ((application (make-instance 'gtk:application)))
     (is (equal '()
                (gtk:application-list-action-descriptions application)))
@@ -319,4 +312,4 @@
 
 ;;;     gtk_application_uninhibit
 
-;;; --- 2023-4-29 --------------------------------------------------------------
+;;; --- 2023-5-11 --------------------------------------------------------------
