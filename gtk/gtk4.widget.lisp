@@ -315,34 +315,6 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-
-;;; CairoContext represents a cairo-t, but we need a boxed type in GTK.
-
-;; TODO: The implementation is removed. Delete the code.
-
-#+nil
-(define-g-boxed-opaque cairo-context "CairoContext"
-  :alloc (error "CairoContext cannot be created from the Lisp side."))
-
-#+nil
-(setf (liber:alias-for-class 'cairo-context)
-      "GBoxed"
-      (documentation 'cairo-context 'type)
- "@version{#2021-9-14}
-  @begin{short}
-    The @sym{cairo-context} structure represents a Cairo context in GTK.
-  @end{short}
-  See the documentation of the @symbol{cairo-t} structure for more information.
-  @begin{pre}
-(define-g-boxed-opaque cairo-context \"CairoContext\"
-  :alloc (error \"CairoContext cannot be created from the Lisp side.\"))
-  @end{pre}
-  @see-symbol{cairo-t}")
-
-#+nil
-(export (boxed-related-symbols 'cairo-context))
-
-;;; ----------------------------------------------------------------------------
 ;;; struct GtkRequestedSize
 ;;;
 ;;; struct GtkRequestedSize {
