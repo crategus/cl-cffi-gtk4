@@ -2,7 +2,7 @@
 ;;; gtk4.dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -194,7 +194,7 @@
 
 ;; We must store the symbol for GtkDialog at this place. Why? - 2022-12-22
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (setf (gobject:symbol-for-gtype "GtkDialog") 'dialog))
+  (setf (glib:symbol-for-gtype "GtkDialog") 'dialog))
 
 (define-g-object-class "GtkDialog" dialog
   (:superclass gtk:window
