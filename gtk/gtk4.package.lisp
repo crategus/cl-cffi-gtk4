@@ -2,7 +2,7 @@
 ;;; gtk4.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -47,6 +47,10 @@
                             #:with-g-error
                             #:with-ignore-g-error
                             #:with-catching-to-g-error
+                            #:define-g-boxed-opaque
+                            #:define-boxed-opaque-accessor
+                            #:define-g-boxed-cstruct
+                            #:with-foreign-boxed-array
                             ;; Symbols from glib.version.lisp
                             #:+glib-major-version+
                             #:+glib-minor-version+
@@ -81,17 +85,12 @@
                             #:define-g-flags
                             #:define-g-object-class
                             #:define-g-interface
-                            #:define-g-boxed-opaque
-                            #:define-boxed-opaque-accessor
-                            #:define-g-boxed-cstruct
 
                             #:define-vtable
                             #:define-cb-methods
-                            #:boxed-related-symbols
                             #:set-g-value
                             #:parse-g-value
-                            #:pointer
-                            #:with-foreign-boxed-array)
+                            #:pointer)
   (:import-from :gdk-pixbuf #:+gdk-pixbuf-version+)
   (:import-from :pango      #:+pango-scale-xx-small+
                             #:+pango-scale-x-small+
