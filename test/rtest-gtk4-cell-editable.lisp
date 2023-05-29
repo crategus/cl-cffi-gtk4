@@ -12,7 +12,7 @@
   (is (g:type-is-interface "GtkCellEditable"))
   ;; Check the registered name
   (is (eq 'gtk:cell-editable
-          (gobject:symbol-for-gtype "GtkCellEditable")))
+          (glib:symbol-for-gtype "GtkCellEditable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCellEditable")
           (g:gtype (cffi:foreign-funcall "gtk_cell_editable_get_type" :size))))
@@ -44,4 +44,4 @@
 ;;;     gtk_cell_editable_editing_done
 ;;;     gtk_cell_editable_remove_widget
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

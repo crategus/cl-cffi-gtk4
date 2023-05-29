@@ -14,7 +14,7 @@
   (is (g:type-is-object "GtkGesturePan"))
   ;; Check the registered name
   (is (eq 'gtk:gesture-pan
-          (gobject:symbol-for-gtype "GtkGesturePan")))
+          (glib:symbol-for-gtype "GtkGesturePan")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGesturePan")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_pan_get_type" :size))))
@@ -53,4 +53,4 @@
 
 ;;;     gtk_gesture_pan_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

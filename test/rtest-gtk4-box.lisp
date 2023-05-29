@@ -17,7 +17,7 @@
   (is (g:type-is-object "GtkBox"))
   ;; Check the registered name
   (is (eq 'gtk:box
-          (gobject:symbol-for-gtype "GtkBox")))
+          (glib:symbol-for-gtype "GtkBox")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBox")
           (g:gtype (cffi:foreign-funcall "gtk_box_get_type" :size))))
@@ -115,4 +115,4 @@
 ;;;     gtk_box_insert_child_after
 ;;;     gtk_box_reorder_child_after
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

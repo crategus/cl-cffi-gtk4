@@ -14,7 +14,7 @@
   (is (g:type-is-object "GtkEventControllerScroll"))
   ;; Check the registered name
   (is (eq 'gtk:event-controller-scroll
-          (gobject:symbol-for-gtype "GtkEventControllerScroll")))
+          (glib:symbol-for-gtype "GtkEventControllerScroll")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventControllerScroll")
           (g:gtype (cffi:foreign-funcall "gtk_event_controller_scroll_get_type"
@@ -60,4 +60,4 @@
 ;;;     gtk_event_controller_scroll_new
 ;;;     gtk_event_controller_get_unit                      Since 4.8
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

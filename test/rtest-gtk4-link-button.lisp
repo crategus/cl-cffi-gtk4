@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkLinkButton"))
   ;; Check the registered name
   (is (eq 'gtk:link-button
-          (gobject:symbol-for-gtype "GtkLinkButton")))
+          (glib:symbol-for-gtype "GtkLinkButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkLinkButton")
           (g:gtype (cffi:foreign-funcall "gtk_link_button_get_type" :size))))
@@ -80,4 +80,4 @@
     (is (string= "http://crategus.com" (gtk:link-button-uri button)))
     (is (string= "Label" (gtk:button-label button)))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

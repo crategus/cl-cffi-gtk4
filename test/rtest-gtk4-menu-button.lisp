@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_arrow_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:arrow-type
-          (gobject:symbol-for-gtype "GtkArrowType")))
+          (glib:symbol-for-gtype "GtkArrowType")))
   ;; Check the names
   (is (equal '("GTK_ARROW_UP" "GTK_ARROW_DOWN" "GTK_ARROW_LEFT"
                "GTK_ARROW_RIGHT" "GTK_ARROW_NONE")
@@ -45,7 +45,7 @@
   (is (g:type-is-object "GtkMenuButton"))
   ;; Check the registered name
   (is (eq 'gtk:menu-button
-          (gobject:symbol-for-gtype "GtkMenuButton")))
+          (glib:symbol-for-gtype "GtkMenuButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkMenuButton")
           (g:gtype (cffi:foreign-funcall "gtk_menu_button_get_type" :size))))
@@ -59,8 +59,8 @@
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkMenuButton")))
   ;; Check the properties
-  (is (equal '("active" "always-show-arrow" "child" "direction" "has-frame" 
-               "icon-name" "label" "menu-model" "popover" "primary" 
+  (is (equal '("active" "always-show-arrow" "child" "direction" "has-frame"
+               "icon-name" "label" "menu-model" "popover" "primary"
                "use-underline")
              (list-properties "GtkMenuButton")))
   ;; Check the signals
@@ -147,4 +147,4 @@
 ;;;     GtkMenuButtonCreatePopupFunc
 ;;;     gtk_menu_button_set_create_popup_func
 
-;;; --- 2023-4-29 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

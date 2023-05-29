@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkFixed"))
   ;; Check the registered name
   (is (eq 'gtk:fixed
-          (gobject:symbol-for-gtype "GtkFixed")))
+          (glib:symbol-for-gtype "GtkFixed")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFixed")
           (g:gtype (cffi:foreign-funcall "gtk_fixed_get_type" :size))))
@@ -59,4 +59,4 @@
 ;;;     gtk_fixed_get_child_transform
 ;;;     gtk_fixed_set_child_transform
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

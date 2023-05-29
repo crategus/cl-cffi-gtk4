@@ -19,7 +19,7 @@
   (is (g:type-is-object "GtkCssProvider"))
   ;; Check the registered name
   (is (eq 'gtk:css-provider
-          (gobject:symbol-for-gtype "GtkCssProvider")))
+          (glib:symbol-for-gtype "GtkCssProvider")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCssProvider")
           (g:gtype (cffi:foreign-funcall "gtk_css_provider_get_type" :size))))
@@ -164,4 +164,4 @@ button:last-child > label {
 ;;;     gtk_css_section_get_start_location
 ;;;     gtk_css_section_get_end_location
 
-;;; --- 2023-4-28 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

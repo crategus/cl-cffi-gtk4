@@ -10,7 +10,7 @@
   (is (g:type-is-object "GtkDrawingArea"))
   ;; Check the registered name
   (is (eq 'gtk-drawing-area
-          (gobject:symbol-for-gtype "GtkDrawingArea")))
+          (glib:symbol-for-gtype "GtkDrawingArea")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkDrawingArea")
           (g:gtype (cffi:foreign-funcall "gtk_drawing_area_get_type" :size))))
@@ -39,7 +39,7 @@
                          "content-height" "gint" T T)
                         (CONTENT-WIDTH GTK-DRAWING-AREA-CONTENT-WIDTH
                          "content-width" "gint" T T)))
-             (get-g-type-definition "GtkDrawingArea"))))
+             (gobject:get-g-type-definition "GtkDrawingArea"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -70,4 +70,4 @@
 
 ;;;     gtk_drawing_area_set_draw_func
 
-;; 2022-8-20
+;;; --- 2023-5-29 --------------------------------------------------------------

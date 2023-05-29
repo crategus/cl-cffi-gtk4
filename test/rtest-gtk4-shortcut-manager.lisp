@@ -12,7 +12,7 @@
   (is (g:type-is-interface "GtkShortcutManager"))
   ;; Check the registered name
   (is (eq 'gtk:shortcut-manager
-          (gobject:symbol-for-gtype "GtkShortcutManager")))
+          (glib:symbol-for-gtype "GtkShortcutManager")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutManager")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_manager_get_type" :size))))
@@ -25,4 +25,4 @@
                      "gtk_shortcut_manager_get_type"))
              (gobject:get-g-type-definition "GtkShortcutManager"))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

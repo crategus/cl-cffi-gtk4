@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkFileChooserWidget"))
   ;; Check the registered name
   (is (eq 'gtk:file-chooser-widget
-          (gobject:symbol-for-gtype "GtkFileChooserWidget")))
+          (glib:symbol-for-gtype "GtkFileChooserWidget")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileChooserWidget")
           (g:gtype (cffi:foreign-funcall "gtk_file_chooser_widget_get_type"
@@ -28,7 +28,7 @@
                "GtkFileChooser")
              (list-interfaces "GtkFileChooserWidget")))
   ;; Check the properties
-  (is (equal '("action" "create-folders" "filter" "filters" "search-mode" 
+  (is (equal '("action" "create-folders" "filter" "filters" "search-mode"
                "select-multiple" "shortcut-folders" "show-time" "subtitle")
              (list-properties "GtkFileChooserWidget")))
   ;; Check the signals
@@ -48,7 +48,7 @@
                        (make-instance 'gtk:file-chooser-widget))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFileChooserWidget" 
+  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFileChooserWidget"
                                      GTK-FILE-CHOOSER-WIDGET
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
@@ -87,4 +87,4 @@
 
 ;;;     gtk_file_chooser_widget_new
 
-;;; --- 2023-4-29 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

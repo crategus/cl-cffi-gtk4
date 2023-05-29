@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkMediaStream"))
   ;; Check the registered name
   (is (eq 'gtk:media-stream
-          (gobject:symbol-for-gtype "GtkMediaStream")))
+          (glib:symbol-for-gtype "GtkMediaStream")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkMediaStream")
           (g:gtype (cffi:foreign-funcall "gtk_media_stream_get_type" :size))))
@@ -59,7 +59,7 @@
                          "gint64" T NIL)
                         (VOLUME GTK-MEDIA-STREAM-VOLUME "volume" "gdouble" T
                          T)))
-             (get-g-type-definition "GtkMediaStream"))))
+             (gobject:get-g-type-definition "GtkMediaStream"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -97,4 +97,4 @@
 ;;;     gtk_media_stream_error
 ;;;     gtk_media_stream_error_valist
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

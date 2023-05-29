@@ -16,7 +16,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:entry-icon-position
-          (gobject:symbol-for-gtype "GtkEntryIconPosition")))
+          (glib:symbol-for-gtype "GtkEntryIconPosition")))
   ;; Check the names
   (is (equal '("GTK_ENTRY_ICON_PRIMARY" "GTK_ENTRY_ICON_SECONDARY")
              (list-enum-item-name "GtkEntryIconPosition")))
@@ -43,7 +43,7 @@
   (is (g:type-is-object "GtkEntry"))
   ;; Check the registered name
   (is (eq 'gtk:entry
-          (gobject:symbol-for-gtype "GtkEntry")))
+          (glib:symbol-for-gtype "GtkEntry")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEntry")
           (g:gtype (cffi:foreign-funcall "gtk_entry_get_type" :size))))
@@ -265,4 +265,4 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

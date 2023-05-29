@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkAppChooserDialog"))
   ;; Check the registered name
   (is (eq 'gtk:app-chooser-dialog
-          (gobject:symbol-for-gtype "GtkAppChooserDialog")))
+          (glib:symbol-for-gtype "GtkAppChooserDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAppChooserDialog")
           (g:gtype (cffi:foreign-funcall "gtk_app_chooser_dialog_get_type" :size))))
@@ -75,4 +75,4 @@
 ;;;     gtk_app_chooser_dialog_new_for_content_type
 ;;;     gtk_app_chooser_dialog_get_widget
 
-;;; --- 2023-5-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

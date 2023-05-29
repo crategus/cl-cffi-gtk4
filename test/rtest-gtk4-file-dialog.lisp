@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkFileDialog"))
   ;; Check the registered name
   (is (eq 'gtk:file-dialog
-          (gobject:symbol-for-gtype "GtkFileDialog")))
+          (glib:symbol-for-gtype "GtkFileDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileDialog")
           (g:gtype (cffi:foreign-funcall "gtk_file_dialog_get_type" :size))))
@@ -126,4 +126,4 @@
 ;;;     gtk_file_dialog_select_multiple_folders
 ;;;     gtk_file_dialog_select_multiple_folders_finish
 
-;;; --- 2023-5-6 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

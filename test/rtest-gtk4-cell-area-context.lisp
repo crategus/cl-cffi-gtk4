@@ -12,10 +12,11 @@
   (is (g:type-is-object "GtkCellAreaContext"))
   ;; Check the registered name
   (is (eq 'gtk:cell-area-context
-          (gobject:symbol-for-gtype "GtkCellAreaContext")))
+          (glib:symbol-for-gtype "GtkCellAreaContext")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCellAreaContext")
-          (g:gtype (cffI:foreign-funcall "gtk_cell_area_context_get_type" :size))))
+          (g:gtype (cffI:foreign-funcall "gtk_cell_area_context_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkCellAreaContext")))
@@ -46,7 +47,7 @@
                          "natural-height" "gint" T NIL)
                         (NATURAL-WIDTH GTK-CELL-AREA-CONTEXT-NATURAL-WIDTH
                          "natural-width" "gint" T NIL)))
-             (get-g-type-definition "GtkCellAreaContext"))))
+             (gobject:get-g-type-definition "GtkCellAreaContext"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -74,4 +75,4 @@
 ;;;     gtk_cell_area_context_push_preferred_width
 ;;;     gtk_cell_area_context_push_preferred_height
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

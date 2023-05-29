@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkRange"))
   ;; Check the registered name
   (is (eq 'gtk:range
-          (gobject:symbol-for-gtype "GtkRange")))
+          (glib:symbol-for-gtype "GtkRange")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRange")
           (g:gtype (cffi:foreign-funcall "gtk_range_get_type" :size))))
@@ -91,4 +91,4 @@
 ;;;     gtk_range_get_slider_size_fixed
 ;;;     gtk_range_set_slider_size_fixed
 
-;;; --- 2023-4-28 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

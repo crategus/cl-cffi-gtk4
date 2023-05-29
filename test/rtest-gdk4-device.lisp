@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gdk_input_source_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gdk:input-source
-          (gobject:symbol-for-gtype "GdkInputSource")))
+          (glib:symbol-for-gtype "GdkInputSource")))
   ;; Check the names
   (is (equal '("GDK_SOURCE_MOUSE" "GDK_SOURCE_PEN" "GDK_SOURCE_KEYBOARD"
                "GDK_SOURCE_TOUCHSCREEN" "GDK_SOURCE_TOUCHPAD"
@@ -52,7 +52,7 @@
           (g:gtype (cffi:foreign-funcall "gdk_axis_use_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gdk:axis-use
-          (gobject:symbol-for-gtype "GdkAxisUse")))
+          (glib:symbol-for-gtype "GdkAxisUse")))
   ;; Check the names
   (is (equal '("GDK_AXIS_IGNORE" "GDK_AXIS_X" "GDK_AXIS_Y" "GDK_AXIS_DELTA_X"
                "GDK_AXIS_DELTA_Y" "GDK_AXIS_PRESSURE" "GDK_AXIS_XTILT"
@@ -93,7 +93,7 @@
   (is (g:type-is-flags "GdkAxisFlags"))
   ;; Check the registered name
   (is (eq 'gdk:axis-flags
-          (gobject:symbol-for-gtype "GdkAxisFlags")))
+          (glib:symbol-for-gtype "GdkAxisFlags")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkAxisFlags")
           (g:gtype (cffi:foreign-funcall "gdk_axis_flags_get_type" :size))))
@@ -139,7 +139,7 @@
           (g:gtype (cffi:foreign-funcall "gdk_device_tool_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gdk:device-tool-type
-          (gobject:symbol-for-gtype "GdkDeviceToolType")))
+          (glib:symbol-for-gtype "GdkDeviceToolType")))
   ;; Check the names
   (is (equal '("GDK_DEVICE_TOOL_TYPE_UNKNOWN" "GDK_DEVICE_TOOL_TYPE_PEN"
                "GDK_DEVICE_TOOL_TYPE_ERASER" "GDK_DEVICE_TOOL_TYPE_BRUSH"
@@ -175,7 +175,7 @@
   (is (g:type-is-object "GdkDeviceTool"))
   ;; Check the registered name
   (is (eq 'gdk:device-tool
-          (gobject:symbol-for-gtype "GdkDeviceTool")))
+          (glib:symbol-for-gtype "GdkDeviceTool")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkDeviceTool")
           (g:gtype (cffi:foreign-funcall "gdk_device_tool_get_type" :size))))
@@ -221,7 +221,7 @@
   (is (g:type-is-object "GdkDevice"))
   ;; Check the registered name
   (is (eq 'gdk:device
-          (gobject:symbol-for-gtype "GdkDevice")))
+          (glib:symbol-for-gtype "GdkDevice")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkDevice")
           (g:gtype (cffi:foreign-funcall "gdk_device_get_type" :size))))
@@ -310,4 +310,4 @@
 ;;;     gdk_device_get_surface_at_position
 ;;;     gdk_device_get_timestamp                           Since 4.2
 
-;;; --- 2023-5-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

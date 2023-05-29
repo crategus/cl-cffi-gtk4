@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkFrame"))
   ;; Check the registered name
   (is (eq 'gtk:frame
-          (gobject:symbol-for-gtype "GtkFrame")))
+          (glib:symbol-for-gtype "GtkFrame")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFrame")
           (g:gtype (cffi:foreign-funcall "gtk_frame_get_type" :size))))
@@ -78,4 +78,4 @@
   (is (typep (gtk:frame-new nil) 'gtk:frame))
   (is (typep (gtk:frame-new "label") 'gtk:frame)))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

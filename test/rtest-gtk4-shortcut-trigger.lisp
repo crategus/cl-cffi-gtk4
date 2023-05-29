@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkShortcutTrigger"))
   ;; Check the registered name
   (is (eq 'gtk:shortcut-trigger
-          (gobject:symbol-for-gtype "GtkShortcutTrigger")))
+          (glib:symbol-for-gtype "GtkShortcutTrigger")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutTrigger")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_trigger_get_type" :size))))
@@ -37,7 +37,7 @@
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_shortcut_trigger_get_type")
                        NIL)
-             (get-g-type-definition "GtkShortcutTrigger"))))
+             (gobject:get-g-type-definition "GtkShortcutTrigger"))))
 
 ;;;     GtkKeyvalTrigger
 
@@ -46,7 +46,7 @@
   (is (g:type-is-object "GtkKeyvalTrigger"))
   ;; Check the registered name
   (is (eq 'gtk:keyval-trigger
-          (gobject:symbol-for-gtype "GtkKeyvalTrigger")))
+          (glib:symbol-for-gtype "GtkKeyvalTrigger")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkKeyvalTrigger")
           (g:gtype (cffi:foreign-funcall "gtk_keyval_trigger_get_type" :size))))
@@ -73,7 +73,7 @@
                          NIL)
                         (MODIFIERS GTK-KEYVAL-TRIGGER-MODIFIERS "modifiers"
                          "GdkModifierType" T NIL)))
-             (get-g-type-definition "GtkKeyvalTrigger"))))
+             (gobject:get-g-type-definition "GtkKeyvalTrigger"))))
 
 ;;;     GtkMnemonicTrigger
 
@@ -82,7 +82,7 @@
   (is (g:type-is-object "GtkMnemonicTrigger"))
   ;; Check the registered name
   (is (eq 'gtk:mnemonic-trigger
-          (gobject:symbol-for-gtype "GtkMnemonicTrigger")))
+          (glib:symbol-for-gtype "GtkMnemonicTrigger")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkMnemonicTrigger")
           (g:gtype (cffi:foreign-funcall "gtk_mnemonic_trigger_get_type" :size))))
@@ -107,7 +107,7 @@
                         NIL :TYPE-INITIALIZER "gtk_mnemonic_trigger_get_type")
                        ((KEYVAL GTK-MNEMONIC-TRIGGER-KEYVAL "keyval" "guint" T
                          NIL)))
-             (get-g-type-definition "GtkMnemonicTrigger"))))
+             (gobject:get-g-type-definition "GtkMnemonicTrigger"))))
 
 ;;;     GtkAlternativeTrigger
 
@@ -116,7 +116,7 @@
   (is (g:type-is-object "GtkAlternativeTrigger"))
   ;; Check the registered name
   (is (eq 'gtk:alternative-trigger
-          (gobject:symbol-for-gtype "GtkAlternativeTrigger")))
+          (glib:symbol-for-gtype "GtkAlternativeTrigger")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAlternativeTrigger")
           (g:gtype (cffi:foreign-funcall "gtk_alternative_trigger_get_type"
@@ -146,7 +146,7 @@
                                "GtkShortcutTrigger" T NIL)
                         (SECOND GTK-ALTERNATIVE-TRIGGER-SECOND "second"
                                 "GtkShortcutTrigger" T NIL)))
-             (get-g-type-definition "GtkAlternativeTrigger"))))
+             (gobject:get-g-type-definition "GtkAlternativeTrigger"))))
 
 ;;;     GtkNeverTrigger
 
@@ -155,7 +155,7 @@
   (is (g:type-is-object "GtkNeverTrigger"))
   ;; Check the registered name
   (is (eq 'gtk:never-trigger
-          (gobject:symbol-for-gtype "GtkNeverTrigger")))
+          (glib:symbol-for-gtype "GtkNeverTrigger")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkNeverTrigger")
           (g:gtype (cffi:foreign-funcall "gtk_never_trigger_get_type" :size))))
@@ -179,7 +179,7 @@
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_never_trigger_get_type")
                        NIL)
-             (get-g-type-definition "GtkNeverTrigger"))))
+             (gobject:get-g-type-definition "GtkNeverTrigger"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -206,4 +206,4 @@
 
 ;;;     gtk_never_trigger_get
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

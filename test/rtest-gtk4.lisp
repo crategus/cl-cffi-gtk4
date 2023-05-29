@@ -30,16 +30,6 @@
                          #:define-g-flags
                          #:define-g-object-class
                          #:define-g-interface
-
-                         #:get-enum-items
-                         #:get-flags-items
-                         #:enum-item-name
-                         #:enum-item-nick
-                         #:enum-item-value
-                         #:flags-item-name
-                         #:flags-item-nick
-                         #:flags-item-value
-                         #:get-g-type-definition
                          )
   (:import-from :gio     #:with-g-resources)
   (:import-from :gtk
@@ -108,7 +98,7 @@
                 (g:signal-list-ids gtype)) #'string<))
 
 (defun print-style-context (gtype &optional (flags :recurse))
-  (let ((widget (make-instance (gobject:symbol-for-gtype gtype))))
+  (let ((widget (make-instance (glib:symbol-for-gtype gtype))))
     (gtk:style-context-to-string (gtk:widget-style-context widget) flags)))
 
 (defun list-flags-item-name (gtype)

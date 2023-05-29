@@ -25,7 +25,7 @@
   (is (g:type-is-interface "GtkStyleProvider"))
   ;; Check the registered name
   (is (eq 'gtk:style-provider
-          (gobject:symbol-for-gtype "GtkStyleProvider")))
+          (glib:symbol-for-gtype "GtkStyleProvider")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkStyleProvider")
           (g:gtype (cffi:foreign-funcall "gtk_style_provider_get_type" :size))))
@@ -41,4 +41,4 @@
 
 ;;;     gtk-private-changed
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

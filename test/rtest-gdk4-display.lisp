@@ -12,7 +12,7 @@
   (is (g:type-is-object "GdkDisplay"))
   ;; Check the registered name
   (is (eq 'gdk:display
-          (gobject:symbol-for-gtype "GdkDisplay")))
+          (glib:symbol-for-gtype "GdkDisplay")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkDisplay")
           (g:gtype (cffi:foreign-funcall "gdk_display_get_type" :size))))
@@ -201,13 +201,13 @@
 #+windows
 (test gdk-display-map-keyval
   (let ((display (gdk:display-default)))
-    (is (equal '((65 0 0) 
-                 (65 0 3) 
-                 (65 0 15) 
+    (is (equal '((65 0 0)
+                 (65 0 3)
+                 (65 0 15)
                  (65 0 2)) (gdk:display-map-keyval display 97)))
-    (is (equal '((65 0 1) 
-                 (65 0 4) 
-                 (65 0 15) 
+    (is (equal '((65 0 1)
+                 (65 0 4)
+                 (65 0 15)
                  (65 0 5)) (gdk:display-map-keyval display 65)))))
 
 ;;;     gdk_display_map_keycode
@@ -217,13 +217,13 @@
 #-windows
 (test gdk-display-map-keycode
   (let ((display (gdk:display-default)))
-    (is (equal '(( 97 38 0 0) 
-                 ( 65 38 0 1) 
-                 (230 38 0 2) 
-                 (198 38 0 3) 
-                 ( 97 38 1 0) 
+    (is (equal '(( 97 38 0 0)
+                 ( 65 38 0 1)
+                 (230 38 0 2)
+                 (198 38 0 3)
+                 ( 97 38 1 0)
                  ( 65 38 1 1)
-                 (230 38 1 2) 
+                 (230 38 1 2)
                  (198 38 1 3)) (gdk:display-map-keycode display 38)))))
 
 #+windows
@@ -248,4 +248,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; --- 2023-5-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

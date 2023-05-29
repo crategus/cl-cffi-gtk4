@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkAdjustment"))
   ;; Check the registered name
   (is (eq 'gtk:adjustment
-          (gobject:symbol-for-gtype "GtkAdjustment")))
+          (glib:symbol-for-gtype "GtkAdjustment")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAdjustment")
           (g:gtype (cffi:foreign-funcall "gtk_adjustment_get_type" :size))))
@@ -132,4 +132,4 @@
 ;;;     gtk_adjustment_configure
 ;;;     gtk_adjustment_get_minimum_increment
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

@@ -38,7 +38,7 @@
   (is (g:type-is-object "GdkEvent"))
   ;; Check the registered name
   (is (eq 'gdk:event
-          (gobject:symbol-for-gtype "GdkEvent")))
+          (glib:symbol-for-gtype "GdkEvent")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkEvent")
           (g:gtype (cffi:foreign-funcall "gdk_event_get_type" :size))))
@@ -140,3 +140,4 @@
 ;;;     gdk_events_get_center
 ;;;     gdk_events_get_distance
 
+;;; --- 2023-5-29 --------------------------------------------------------------

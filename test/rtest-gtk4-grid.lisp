@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkGrid"))
   ;; Check the registered name
   (is (eq 'gtk:grid
-          (gobject:symbol-for-gtype "GtkGrid")))
+          (glib:symbol-for-gtype "GtkGrid")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGrid")
           (g:gtype (cffi:foreign-funcall "gtk_grid_get_type" :size))))
@@ -84,4 +84,4 @@
 ;;;     gtk_grid_get_row_baseline_position
 ;;;     gtk_grid_set_row_baseline_position
 
-;;; 2022-11-11
+;;; --- 2023-5-29 --------------------------------------------------------------

@@ -12,7 +12,7 @@
   (is (g:type-is-object "GdkDisplayManager"))
   ;; Check the registered name
   (is (eq 'gdk:display-manager
-          (gobject:symbol-for-gtype "GdkDisplayManager")))
+          (glib:symbol-for-gtype "GdkDisplayManager")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkDisplayManager")
           (g:gtype (cffi:foreign-funcall "gdk_display_manager_get_type" :size))))
@@ -86,4 +86,4 @@
 
 ;;;     gdk_set_allowed_backends
 
-;;; --- 2023-5-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

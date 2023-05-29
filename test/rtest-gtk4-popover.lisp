@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkPopover"))
   ;; Check the registered name
   (is (eq 'gtk:popover
-          (gobject:symbol-for-gtype "GtkPopover")))
+          (glib:symbol-for-gtype "GtkPopover")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPopover")
           (g:gtype (cffi:foreign-funcall "gtk_popover_get_type" :size))))
@@ -90,4 +90,4 @@
 ;;;     gtk_popover_set_offset
 ;;;     gtk_popover_get_offset
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

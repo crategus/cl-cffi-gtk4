@@ -16,21 +16,18 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:assistant-page-type
-          (gobject:symbol-for-gtype "GtkAssistantPageType")))
+          (glib:symbol-for-gtype "GtkAssistantPageType")))
   ;; Check the names
   (is (equal '("GTK_ASSISTANT_PAGE_CONTENT" "GTK_ASSISTANT_PAGE_INTRO"
                "GTK_ASSISTANT_PAGE_CONFIRM" "GTK_ASSISTANT_PAGE_SUMMARY"
                "GTK_ASSISTANT_PAGE_PROGRESS" "GTK_ASSISTANT_PAGE_CUSTOM")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkAssistantPageType"))))
+             (list-enum-item-name "GtkAssistantPageType")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkAssistantPageType"))))
+             (list-enum-item-value "GtkAssistantPageType")))
   ;; Check the nick names
   (is (equal '("content" "intro" "confirm" "summary" "progress" "custom")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkAssistantPageType"))))
+             (list-enum-item-nick "GtkAssistantPageType")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkAssistantPageType"
                              GTK-ASSISTANT-PAGE-TYPE
@@ -52,7 +49,7 @@
   (is (g:type-is-object "GtkAssistantPage"))
   ;; Check the registered name
   (is (eq 'gtk:assistant-page
-          (gobject:symbol-for-gtype "GtkAssistantPage")))
+          (glib:symbol-for-gtype "GtkAssistantPage")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAssistantPage")
           (g:gtype (cffi:foreign-funcall "gtk_assistant_page_get_type" :size))))
@@ -103,7 +100,7 @@
   (is (g:type-is-object "GtkAssistant"))
   ;; Check the registered name
   (is (eq 'gtk:assistant
-          (gobject:symbol-for-gtype "GtkAssistant")))
+          (glib:symbol-for-gtype "GtkAssistant")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAssistant")
           (g:gtype (cffi:foreign-funcall "gtk_assistant_get_type" :size))))
@@ -187,4 +184,4 @@
 ;;;     gtk_assistant_next_page
 ;;;     gtk_assistant_previous_page
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

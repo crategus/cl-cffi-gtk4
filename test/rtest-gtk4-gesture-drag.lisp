@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkGestureDrag"))
   ;; Check the registered name
   (is (eq 'gtk:gesture-drag
-          (gobject:symbol-for-gtype "GtkGestureDrag")))
+          (glib:symbol-for-gtype "GtkGestureDrag")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureDrag")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_drag_get_type" :size))))
@@ -50,4 +50,4 @@
 ;;;     gtk_gesture_drag_get_start_point
 ;;;     gtk_gesture_drag_get_offset
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

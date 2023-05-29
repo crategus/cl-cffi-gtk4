@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkSnapshot"))
   ;; Check the registered name
   (is (eq 'gtk:snapshot
-          (gobject:symbol-for-gtype "GtkSnapshot")))
+          (glib:symbol-for-gtype "GtkSnapshot")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSnapshot")
           (g:gtype (cffi:foreign-funcall "gtk_snapshot_get_type" :size))))
@@ -36,7 +36,7 @@
                        (:SUPERCLASS GDK-SNAPSHOT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_snapshot_get_type")
                        NIL)
-             (get-g-type-definition "GtkSnapshot"))))
+             (gobject:get-g-type-definition "GtkSnapshot"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -88,4 +88,4 @@
 ;;;     gtk_snapshot_render_focus
 ;;;     gtk_snapshot_render_layout
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

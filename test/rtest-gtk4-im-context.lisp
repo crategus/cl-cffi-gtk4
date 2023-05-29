@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkIMContext"))
   ;; Check the registered name
   (is (eq 'gtk:im-context
-          (gobject:symbol-for-gtype "GtkIMContext")))
+          (glib:symbol-for-gtype "GtkIMContext")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkIMContext")
           (g:gtype (cffi:foreign-funcall "gtk_im_context_get_type" :size))))
@@ -39,7 +39,7 @@
                          "GtkInputHints" T T)
                         (INPUT-PURPOSE GTK-I-M-CONTEXT-INPUT-PURPOSE
                          "input-purpose" "GtkInputPurpose" T T)))
-             (get-g-type-definition "GtkIMContext"))))
+             (gobject:get-g-type-definition "GtkIMContext"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -165,4 +165,4 @@
 ;;;     gtk_im_context_get_surrounding
 ;;;     gtk_im_context_delete_surrounding
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

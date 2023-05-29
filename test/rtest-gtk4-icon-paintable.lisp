@@ -12,7 +12,7 @@
   (is (g:type-is-interface "GtkSymbolicPaintable"))
   ;; Check the registered name
   (is (eq 'gtk:symbolic-paintable
-          (gobject:symbol-for-gtype "GtkSymbolicPaintable")))
+          (glib:symbol-for-gtype "GtkSymbolicPaintable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSymbolicPaintable")
           (g:gtype (cffi:foreign-funcall "gtk_symbolic_paintable_get_type" :size))))
@@ -32,7 +32,7 @@
   (is (g:type-is-object "GtkIconPaintable"))
   ;; Check the registered name
   (is (eq 'gtk:icon-paintable
-          (gobject:symbol-for-gtype "GtkIconPaintable")))
+          (glib:symbol-for-gtype "GtkIconPaintable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkIconPaintable")
           (g:gtype (cffi:foreign-funcall "gtk_icon_paintable_get_type" :size))))
@@ -88,4 +88,4 @@
     (is-false (gtk:icon-paintable-icon-name paintable))
     (is-false (gtk:icon-paintable-is-symbolic paintable))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

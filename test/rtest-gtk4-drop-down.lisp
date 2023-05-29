@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkDropDown"))
   ;; Check the registered name
   (is (eq 'gtk:drop-down
-          (gobject:symbol-for-gtype "GtkDropDown")))
+          (glib:symbol-for-gtype "GtkDropDown")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkDropDown")
           (g:gtype (cffi:foreign-funcall "gtk_drop_down_get_type" :size))))
@@ -97,7 +97,7 @@
                          "selected-item" "GObject" T NIL)
                         (SHOW-ARROW GTK-DROP-DOWN-SHOW-ARROW "show-arrow"
                          "gboolean" T T)))
-             (get-g-type-definition "GtkDropDown"))))
+             (gobject:get-g-type-definition "GtkDropDown"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -132,4 +132,4 @@
 ;;;     gtk_drop_down_new
 ;;;     gtk_drop_down_new_from_strings
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

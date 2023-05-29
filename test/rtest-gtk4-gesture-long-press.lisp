@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkGestureLongPress"))
   ;; Check the registered name
   (is (eq 'gtk:gesture-long-press
-          (gobject:symbol-for-gtype "GtkGestureLongPress")))
+          (glib:symbol-for-gtype "GtkGestureLongPress")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureLongPress")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_long_press_get_type" :size))))
@@ -53,4 +53,4 @@
 
 ;;;     gtk_gesture_long_press_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

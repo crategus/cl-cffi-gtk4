@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkText"))
   ;; Check the registered name
   (is (eq 'gtk:text
-          (gobject:symbol-for-gtype "GtkText")))
+          (glib:symbol-for-gtype "GtkText")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkText")
           (g:gtype (cffi:foreign-funcall "gtk_text_get_type" :size))))
@@ -127,4 +127,4 @@
 ;;;     gtk_text_get_text_length
 ;;;     gtk_text_grab_focus_without_selecting
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

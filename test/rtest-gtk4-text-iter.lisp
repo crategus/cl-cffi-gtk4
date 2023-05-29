@@ -41,9 +41,9 @@ dann benutzen Sie es immer noch.")
   (is-true (g:type-is-a (g:gtype "GtkTextIter") +g-type-boxed+))
   (is-true (eq 'gtk:text-iter (type-of (make-instance 'gtk:text-iter))))
   (is (eq 'gobject::boxed-opaque-info
-          (type-of (gobject::get-boxed-info 'gtk:text-iter))))
+          (type-of (glib::get-boxed-info 'gtk:text-iter))))
   (is (eq 'gobject::boxed-opaque-info
-          (type-of (gobject::get-boxed-info (g:gtype "GtkTextIter"))))))
+          (type-of (glib::get-boxed-info (g:gtype "GtkTextIter"))))))
 
 ;;;     gtk_text_iter_get_buffer
 
@@ -52,7 +52,7 @@ dann benutzen Sie es immer noch.")
                                 :text "Some sample text for the text buffer."))
          (iter (gtk:text-buffer-start-iter buffer)))
     (is (typep iter 'gtk:text-iter))
-    (is (cffi:pointerp (gobject::boxed-opaque-pointer iter)))
+    (is (cffi:pointerp (glib::boxed-opaque-pointer iter)))
     (is (eq buffer (gtk:text-iter-buffer iter)))))
 
 ;;;     gtk-text-iter-new
@@ -67,13 +67,13 @@ dann benutzen Sie es immer noch.")
          (iter3 (gtk:text-iter-new)))
     (is-false (gtk:text-iter-assign iter3 iter1))
     (is (typep iter1 'gtk:text-iter))
-    (is (cffi:pointerp (gobject::boxed-opaque-pointer iter1)))
+    (is (cffi:pointerp (glib::boxed-opaque-pointer iter1)))
     (is (eq buffer (gtk:text-iter-buffer iter1)))
     (is (typep iter2 'gtk:text-iter))
-    (is (cffi:pointerp (gobject::boxed-opaque-pointer iter2)))
+    (is (cffi:pointerp (glib::boxed-opaque-pointer iter2)))
     (is (eq buffer (gtk:text-iter-buffer iter2)))
     (is (typep iter3 'gtk:text-iter))
-    (is (cffi:pointerp (gobject::boxed-opaque-pointer iter3)))
+    (is (cffi:pointerp (glib::boxed-opaque-pointer iter3)))
     (is (eq buffer (gtk:text-iter-buffer iter3)))))
 
 
@@ -320,4 +320,4 @@ dann benutzen Sie es immer noch.")
 ;;;     gtk_text_iter_in_range
 ;;;     gtk_text_iter_order
 
-;;; --- 2023-2-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkFixedLayoutChild"))
   ;; Check the registered name
   (is (eq 'gtk:fixed-layout-child
-          (gobject:symbol-for-gtype "GtkFixedLayoutChild")))
+          (glib:symbol-for-gtype "GtkFixedLayoutChild")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFixedLayoutChild")
           (g:gtype (cffi:foreign-funcall "gtk_fixed_layout_child_get_type"
@@ -51,7 +51,7 @@
   (is (g:type-is-object "GtkFixedLayout"))
   ;; Check the registered name
   (is (eq 'gtk:fixed-layout
-          (gobject:symbol-for-gtype "GtkFixedLayout")))
+          (glib:symbol-for-gtype "GtkFixedLayout")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFixedLayout")
           (g:gtype (cffi:foreign-funcall "gtk_fixed_layout_get_type" :size))))
@@ -81,4 +81,4 @@
 
 ;;;     gtk_fixed_layout_new
 
-;;; --- 2023-4-16 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

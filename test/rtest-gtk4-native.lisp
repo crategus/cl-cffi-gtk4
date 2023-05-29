@@ -12,7 +12,7 @@
   (is (g:type-is-interface "GtkNative"))
   ;; Check the registered name
   (is (eq 'gtk:native
-          (gobject:symbol-for-gtype "GtkNative")))
+          (glib:symbol-for-gtype "GtkNative")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkNative")
           (g:gtype (cffi:foreign-funcall "gtk_native_get_type" :size))))
@@ -52,4 +52,4 @@
 ;;;     gtk_native_realize
 ;;;     gtk_native_unrealize
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

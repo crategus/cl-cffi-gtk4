@@ -10,7 +10,7 @@
   (is (g:type-is-object "GtkWidgetPaintable"))
   ;; Check the registered name
   (is (eq 'gtk:widget-paintable
-          (gobject:symbol-for-gtype "GtkWidgetPaintable")))
+          (glib:symbol-for-gtype "GtkWidgetPaintable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkWidgetPaintable")
           (g:gtype (cffi:foreign-funcall "gtk_widget_paintable_get_type" :size))))
@@ -36,7 +36,7 @@
                         "gtk_widget_paintable_get_type")
                        ((WIDGET GTK-WIDGET-PAINTABLE-WIDGET "widget"
                          "GtkWidget" T T)))
-             (get-g-type-definition "GtkWidgetPaintable"))))
+             (gobject:get-g-type-definition "GtkWidgetPaintable"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -56,4 +56,4 @@
 
 ;;;     gtk_widget_paintable_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gdk_subpixel_layout_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gdk:subpixel-layout
-          (gobject:symbol-for-gtype "GdkSubpixelLayout")))
+          (glib:symbol-for-gtype "GdkSubpixelLayout")))
   ;; Check the names
   (is (equal '("GDK_SUBPIXEL_LAYOUT_UNKNOWN" "GDK_SUBPIXEL_LAYOUT_NONE"
                "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_RGB"
@@ -50,7 +50,7 @@
   (is (g:type-is-object "GdkMonitor"))
   ;; Check the registered name
   (is (eq 'gdk:monitor
-          (gobject:symbol-for-gtype "GdkMonitor")))
+          (glib:symbol-for-gtype "GdkMonitor")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkMonitor")
           (g:gtype (cffi:foreign-funcall "gdk_monitor_get_type" :size))))
@@ -68,8 +68,8 @@
   (is (equal '()
              (list-interfaces "GdkMonitor")))
   ;; Check the properties
-  (is (equal '("connector" "description" "display" "geometry" "height-mm" 
-               "manufacturer" "model" "refresh-rate" "scale-factor" 
+  (is (equal '("connector" "description" "display" "geometry" "height-mm"
+               "manufacturer" "model" "refresh-rate" "scale-factor"
                "subpixel-layout" "valid" "width-mm")
              (list-properties "GdkMonitor")))
   ;; Check the signals
@@ -176,4 +176,4 @@
 
 ;;;     gdk_monitor_is_valid
 
-;;; --- 2023-5-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

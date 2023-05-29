@@ -93,7 +93,7 @@
   (is (g:type-is-object "GtkBuilder"))
   ;; Check the registered name
   (is (eq 'gtk:builder
-          (gobject:symbol-for-gtype "GtkBuilder")))
+          (glib:symbol-for-gtype "GtkBuilder")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBuilder")
           (g:gtype (cffi:foreign-funcall "gtk_builder_get_type" :size))))
@@ -285,4 +285,4 @@
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; --- 2023-4-28 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

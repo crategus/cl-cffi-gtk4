@@ -10,7 +10,7 @@
   (is (g:type-is-interface "GtkActionable"))
   ;; Check the registered name
   (is (eq 'gtk:actionable
-          (gobject:symbol-for-gtype "GtkActionable")))
+          (glib:symbol-for-gtype "GtkActionable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkActionable")
           (g:gtype (cffi:foreign-funcall "gtk_actionable_get_type" :size))))
@@ -58,4 +58,4 @@
 
 ;;; See gtk-actionable-properties for an example
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

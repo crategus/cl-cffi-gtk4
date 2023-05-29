@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkFontChooserDialog"))
   ;; Check the registered name
   (is (eq 'gtk:font-chooser-dialog
-          (gobject:symbol-for-gtype "GtkFontChooserDialog")))
+          (glib:symbol-for-gtype "GtkFontChooserDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFontChooserDialog")
           (g:gtype (cffi:foreign-funcall "gtk_font_chooser_dialog_get_type"
@@ -60,4 +60,4 @@
 
 ;;;     gtk_font_chooser_dialog_new ()
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

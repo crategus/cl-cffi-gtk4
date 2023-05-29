@@ -12,7 +12,7 @@
   (is (g:type-is-flags "GtkShortcutActionFlags"))
   ;; Check the registered name
   (is (eq 'gtk:shortcut-action-flags
-          (gobject:symbol-for-gtype "GtkShortcutActionFlags")))
+          (glib:symbol-for-gtype "GtkShortcutActionFlags")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutActionFlags")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_action_flags_get_type"
@@ -33,7 +33,7 @@
                                :TYPE-INITIALIZER
                                "gtk_shortcut_action_flags_get_type")
                               (:EXCLUSIVE 1))
-             (get-g-type-definition "GtkShortcutActionFlags"))))
+             (gobject:get-g-type-definition "GtkShortcutActionFlags"))))
 
 ;;;     GtkShortcutAction
 
@@ -42,7 +42,7 @@
   (is (g:type-is-object "GtkShortcutAction"))
   ;; Check the registered name
   (is (eq 'gtk:shortcut-action
-          (gobject:symbol-for-gtype "GtkShortcutAction")))
+          (glib:symbol-for-gtype "GtkShortcutAction")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutAction")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_action_get_type" :size))))
@@ -67,7 +67,7 @@
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_shortcut_action_get_type")
                        NIL)
-             (get-g-type-definition "GtkShortcutAction"))))
+             (gobject:get-g-type-definition "GtkShortcutAction"))))
 
 ;;;     GtkNothingAction
 
@@ -76,7 +76,7 @@
   (is (g:type-is-object "GtkNothingAction"))
   ;; Check the registered name
   (is (eq 'gtk:nothing-action
-          (gobject:symbol-for-gtype "GtkNothingAction")))
+          (glib:symbol-for-gtype "GtkNothingAction")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkNothingAction")
           (g:gtype (cffi:foreign-funcall "gtk_nothing_action_get_type" :size))))
@@ -100,7 +100,7 @@
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_nothing_action_get_type")
                        NIL)
-             (get-g-type-definition "GtkNothingAction"))))
+             (gobject:get-g-type-definition "GtkNothingAction"))))
 
 ;;;     GtkCallbackAction
 
@@ -109,7 +109,7 @@
   (is (g:type-is-object "GtkCallbackAction"))
   ;; Check the registered name
   (is (eq 'gtk:callback-action
-          (gobject:symbol-for-gtype "GtkCallbackAction")))
+          (glib:symbol-for-gtype "GtkCallbackAction")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCallbackAction")
           (g:gtype (cffi:foreign-funcall "gtk_callback_action_get_type" :size))))
@@ -133,7 +133,7 @@
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_callback_action_get_type")
                        NIL)
-             (get-g-type-definition "GtkCallbackAction"))))
+             (gobject:get-g-type-definition "GtkCallbackAction"))))
 
 ;;;     GtkMnemonicAction
 
@@ -142,7 +142,7 @@
   (is (g:type-is-object "GtkMnemonicAction"))
   ;; Check the registered name
   (is (eq 'gtk:mnemonic-action
-          (gobject:symbol-for-gtype "GtkMnemonicAction")))
+          (glib:symbol-for-gtype "GtkMnemonicAction")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkMnemonicAction")
           (g:gtype (cffi:foreign-funcall "gtk_mnemonic_action_get_type" :size))))
@@ -166,7 +166,7 @@
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_mnemonic_action_get_type")
                        NIL)
-             (get-g-type-definition "GtkMnemonicAction"))))
+             (gobject:get-g-type-definition "GtkMnemonicAction"))))
 
 ;;;     GtkActivateAction
 
@@ -175,7 +175,7 @@
   (is (g:type-is-object "GtkActivateAction"))
   ;; Check the registered name
   (is (eq 'gtk:activate-action
-          (gobject:symbol-for-gtype "GtkActivateAction")))
+          (glib:symbol-for-gtype "GtkActivateAction")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkActivateAction")
           (g:gtype (cffi:foreign-funcall "gtk_activate_action_get_type" :size))))
@@ -199,7 +199,7 @@
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_activate_action_get_type")
                        NIL)
-             (get-g-type-definition "GtkActivateAction"))))
+             (gobject:get-g-type-definition "GtkActivateAction"))))
 
 ;;;     GtkSignalAction
 
@@ -208,7 +208,7 @@
   (is (g:type-is-object "GtkSignalAction"))
   ;; Check the registered name
   (is (eq 'gtk:signal-action
-          (gobject:symbol-for-gtype "GtkSignalAction")))
+          (glib:symbol-for-gtype "GtkSignalAction")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSignalAction")
           (g:gtype (cffi:foreign-funcall "gtk_signal_action_get_type" :size))))
@@ -233,7 +233,7 @@
                         NIL :TYPE-INITIALIZER "gtk_signal_action_get_type")
                        ((SIGNAL-NAME GTK-SIGNAL-ACTION-SIGNAL-NAME
                          "signal-name" "gchararray" T NIL)))
-             (get-g-type-definition "GtkSignalAction"))))
+             (gobject:get-g-type-definition "GtkSignalAction"))))
 
 ;;;     gtk-signal-action-signal-name
 
@@ -248,7 +248,7 @@
   (is (g:type-is-object "GtkNamedAction"))
   ;; Check the registered name
   (is (eq 'gtk-named-action
-          (gobject:symbol-for-gtype "GtkNamedAction")))
+          (glib:symbol-for-gtype "GtkNamedAction")))
   ;; Check the type initializer
   (is (eq (gtype "GtkNamedAction")
           (gtype (cffi:foreign-funcall "gtk_named_action_get_type" :size))))
@@ -275,7 +275,7 @@
                         NIL :TYPE-INITIALIZER "gtk_named_action_get_type")
                        ((ACTION-NAME GTK-NAMED-ACTION-ACTION-NAME "action-name"
                          "gchararray" T NIL)))
-             (get-g-type-definition "GtkNamedAction"))))
+             (gobject:get-g-type-definition "GtkNamedAction"))))
 
 ;;;     gtk-named-action-action-name
 
@@ -342,4 +342,4 @@
 (test gtk-named-action-new
   (is (typep (gtk-named-action-new "named") 'gtk-named-action)))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

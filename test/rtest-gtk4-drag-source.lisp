@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkDragSource"))
   ;; Check the registered name
   (is (eq 'gtk:drag-source
-          (gobject:symbol-for-gtype "GtkDragSource")))
+          (glib:symbol-for-gtype "GtkDragSource")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkDragSource")
           (g:gtype (cffi:foreign-funcall "gtk_drag_source_get_type" :size))))
@@ -61,4 +61,4 @@
 ;;;     gtk_drag_source_get_drag
 ;;;     gtk_drag_check_threshold
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

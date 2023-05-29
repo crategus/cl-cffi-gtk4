@@ -12,7 +12,7 @@
   (is (g:type-is-interface "GtkRoot"))
   ;; Check the registered name
   (is (eq 'gtk:root
-          (gobject:symbol-for-gtype "GtkRoot")))
+          (glib:symbol-for-gtype "GtkRoot")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRoot")
           (g:gtype (cffi:foreign-funcall "gtk_root_get_type" :size))))
@@ -48,4 +48,4 @@
     (is (eq button (setf (gtk:root-focus window) button)))
     (is (eq button (gtk:root-focus window)))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

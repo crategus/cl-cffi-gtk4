@@ -14,7 +14,7 @@
   (is (g:type-is-interface "GtkEditable"))
   ;; Check the registered name
   (is (eq 'gtk:editable
-          (gobject:symbol-for-gtype "GtkEditable")))
+          (glib:symbol-for-gtype "GtkEditable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEditable")
           (g:gtype (cffi:foreign-funcall "gtk_editable_get_type" :size))))
@@ -157,4 +157,4 @@
 ;;;     gtk_editable_delegate_set_property
 ;;;     gtk_editable_delegate_get_property
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

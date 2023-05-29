@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkSwitch"))
   ;; Check the registered name
   (is (eq 'gtk:switch
-          (gobject:symbol-for-gtype "GtkSwitch")))
+          (glib:symbol-for-gtype "GtkSwitch")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSwitch")
           (g:gtype (cffi:foreign-funcall "gtk_switch_get_type" :size))))
@@ -66,4 +66,4 @@
 (test gtk-switch-new
   (is (typep (gtk:switch-new) 'gtk:switch)))
 
-;;; --- 2023-3-26 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

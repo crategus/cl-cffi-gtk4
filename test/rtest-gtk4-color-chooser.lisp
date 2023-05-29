@@ -12,7 +12,7 @@
   (is (g:type-is-interface "GtkColorChooser"))
   ;; Check the registered name
   (is (eq 'gtk:color-chooser
-          (gobject:symbol-for-gtype "GtkColorChooser")))
+          (glib:symbol-for-gtype "GtkColorChooser")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkColorChooser")
           (g:gtype (cffi:foreign-funcall "gtk_color_chooser_get_type" :size))))
@@ -77,4 +77,4 @@
   (is (equal '(0.0 0.0 1.0) (multiple-value-list (gtk:rgb-to-hsv 1 1 1))))
   (is (equal '(0.0 0.0 0.5) (multiple-value-list (gtk:rgb-to-hsv 0.5 0.5 0.5)))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

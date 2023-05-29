@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_size_group_mode_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:size-group-mode
-          (gobject:symbol-for-gtype "GtkSizeGroupMode")))
+          (glib:symbol-for-gtype "GtkSizeGroupMode")))
   ;; Check the names
   (is (equal '("GTK_SIZE_GROUP_NONE" "GTK_SIZE_GROUP_HORIZONTAL"
                "GTK_SIZE_GROUP_VERTICAL" "GTK_SIZE_GROUP_BOTH")
@@ -35,7 +35,7 @@
                              (:HORIZONTAL 1)
                              (:VERTICAL 2)
                              (:BOTH 3))
-             (get-g-type-definition "GtkSizeGroupMode"))))
+             (gobject:get-g-type-definition "GtkSizeGroupMode"))))
 
 ;;;     GtkSizeGroup
 
@@ -44,7 +44,7 @@
   (is (g:type-is-object "GtkSizeGroup"))
   ;; Check the registered name
   (is (eq 'gtk:size-group
-          (gobject:symbol-for-gtype "GtkSizeGroup")))
+          (glib:symbol-for-gtype "GtkSizeGroup")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSizeGroup")
           (g:gtype (cffi:foreign-funcall "gtk_size_group_get_type" :size))))
@@ -70,7 +70,7 @@
                         "gtk_size_group_get_type")
                        ((MODE GTK-SIZE-GROUP-MODE "mode" "GtkSizeGroupMode" T
                          T)))
-             (get-g-type-definition "GtkSizeGroup"))))
+             (gobject:get-g-type-definition "GtkSizeGroup"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -120,4 +120,4 @@
                           (g:type-name (g:type-from-instance x)))
                         (gtk:size-group-widgets group))))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

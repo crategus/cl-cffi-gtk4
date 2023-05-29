@@ -16,7 +16,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:revealer-transition-type
-          (gobject:symbol-for-gtype "GtkRevealerTransitionType")))
+          (glib:symbol-for-gtype "GtkRevealerTransitionType")))
   ;; Check the names
   (is (equal '("GTK_REVEALER_TRANSITION_TYPE_NONE"
                "GTK_REVEALER_TRANSITION_TYPE_CROSSFADE"
@@ -28,17 +28,14 @@
                "GTK_REVEALER_TRANSITION_TYPE_SWING_LEFT"
                "GTK_REVEALER_TRANSITION_TYPE_SWING_UP"
                "GTK_REVEALER_TRANSITION_TYPE_SWING_DOWN")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkRevealerTransitionType"))))
+             (list-enum-item-name "GtkRevealerTransitionType")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7 8 9)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkRevealerTransitionType"))))
+             (list-enum-item-value "GtkRevealerTransitionType")))
   ;; Check the nick names
   (is (equal '("none" "crossfade" "slide-right" "slide-left" "slide-up"
                "slide-down" "swing-right" "swing-left" "swing-up" "swing-down")
-             (mapcar #'gobject:enum-item-nick
-                     (gobject:get-enum-items "GtkRevealerTransitionType"))))
+             (list-enum-item-nick "GtkRevealerTransitionType")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkRevealerTransitionType"
                              GTK-REVEALER-TRANSITION-TYPE
@@ -64,7 +61,7 @@
   (is (g:type-is-object "GtkRevealer"))
   ;; Check the registered name
   (is (eq 'gtk:revealer
-          (gobject:symbol-for-gtype "GtkRevealer")))
+          (glib:symbol-for-gtype "GtkRevealer")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRevealer")
           (g:gtype (cffi:foreign-funcall "gtk_revealer_get_type" :size))))
@@ -121,4 +118,4 @@
 
 ;;;     gtk_revealer_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

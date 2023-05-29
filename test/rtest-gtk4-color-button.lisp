@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkColorButton"))
   ;; Check the registered name
   (is (eq 'gtk:color-button
-          (gobject:symbol-for-gtype "GtkColorButton")))
+          (glib:symbol-for-gtype "GtkColorButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkColorButton")
           (g:gtype (cfi:foreign-funcall "gtk_color_button_get_type" :size))))
@@ -114,4 +114,4 @@
                  (gdk:rgba-to-string (gtk:color-chooser-rgba button))))
     (is-false (gtk:color-chooser-use-alpha button))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

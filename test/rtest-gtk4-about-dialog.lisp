@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_license_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:license
-          (gobject:symbol-for-gtype "GtkLicense")))
+          (glib:symbol-for-gtype "GtkLicense")))
   ;; Check the names
   (is (equal '("GTK_LICENSE_UNKNOWN" "GTK_LICENSE_CUSTOM" "GTK_LICENSE_GPL_2_0"
                "GTK_LICENSE_GPL_3_0" "GTK_LICENSE_LGPL_2_1"
@@ -67,7 +67,7 @@
   (is (g:type-is-object "GtkAboutDialog"))
   ;; Check the registered name
   (is (eq 'gtk:about-dialog
-          (gobject:symbol-for-gtype "GtkAboutDialog")))
+          (glib:symbol-for-gtype "GtkAboutDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAboutDialog")
           (g:gtype (cffi:foreign-funcall "gtk_about_dialog_get_type" :size))))
@@ -203,4 +203,4 @@
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

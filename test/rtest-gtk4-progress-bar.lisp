@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkProgressBar"))
   ;; Check the registered name
   (is (eq 'gtk:progress-bar
-          (gobject:symbol-for-gtype "GtkProgressBar")))
+          (glib:symbol-for-gtype "GtkProgressBar")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkProgressBar")
           (g:gtype (cffi:foreign-funcall "gtk_progress_bar_get_type" :size))))
@@ -45,7 +45,7 @@
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkProgressBar" GTK-PROGRESS-BAR
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable" 
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
                          "GtkConstraintTarget" "GtkOrientable")
                         :TYPE-INITIALIZER "gtk_progress_bar_get_type")
                        ((ELLIPSIZE GTK-PROGRESS-BAR-ELLIPSIZE "ellipsize"
@@ -75,4 +75,4 @@
 ;;;     gtk_progress_bar_new
 ;;;     gtk_progress_bar_pulse
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

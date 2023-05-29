@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkCenterBox"))
   ;; Check the registered name
   (is (eq 'gtk:center-box
-          (gobject:symbol-for-gtype "GtkCenterBox")))
+          (glib:symbol-for-gtype "GtkCenterBox")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCenterBox")
           (g:gtype (cffi:foreign-funcall "gtk_center_box_get_type" :size))))
@@ -27,7 +27,7 @@
                "GtkOrientable")
              (list-interfaces "GtkCenterBox")))
   ;; Check the properties
-  (is (equal '("baseline-position" "center-widget" "end-widget" "orientation" 
+  (is (equal '("baseline-position" "center-widget" "end-widget" "orientation"
                "start-widget")
              (list-properties "GtkCenterBox")))
   ;; Check the signals
@@ -91,4 +91,4 @@
 (test gtk-center-box-new
   (is (typep (gtk:center-box-new) 'gtk:center-box)))
 
-;;; --- 2023-5-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

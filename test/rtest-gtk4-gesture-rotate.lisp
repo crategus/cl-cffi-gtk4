@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkGestureRotate"))
   ;; Check the registered name
   (is (eq 'gtk:gesture-rotate
-          (gobject:symbol-for-gtype "GtkGestureRotate")))
+          (glib:symbol-for-gtype "GtkGestureRotate")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureRotate")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_rotate_get_type" :size))))
@@ -47,4 +47,4 @@
 ;;;     gtk_gesture_rotate_new
 ;;;     gtk_gesture_rotate_get_angle_delta
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

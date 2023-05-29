@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkShortcutsWindow"))
   ;; Check the registered name
   (is (eq 'gtk:shortcuts-window
-          (gobject:symbol-for-gtype "GtkShortcutsWindow")))
+          (glib:symbol-for-gtype "GtkShortcutsWindow")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutsWindow")
           (g:gtype (cffi:foreign-funcall "gtk_shortcuts_window_get_type" :size))))
@@ -64,4 +64,4 @@
 ;;;     close
 ;;;     search
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

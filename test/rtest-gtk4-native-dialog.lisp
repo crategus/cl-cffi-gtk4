@@ -14,8 +14,8 @@
   ;; FIXME: We have no symbol for GtkNativeDialog. Why!?
   #+nil
   (is (eq 'gtk:native-dialog
-          (gobject:symbol-for-gtype "GtkNativeDialog")))
-  (is-false (gobject:symbol-for-gtype "GtkNativeDialog"))
+          (glib:symbol-for-gtype "GtkNativeDialog")))
+  (is-false (glib:symbol-for-gtype "GtkNativeDialog"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkNativeDialog")
           (g:gtype (cffi:foreign-funcall "gtk_native_dialog_get_type" :size))))
@@ -64,4 +64,4 @@
 ;;;     gtk_native_dialog_hide
 ;;;     gtk_native_dialog_destroy
 
-;;; --- 2023-4-16 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_pad_action_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:pad-action-type
-          (gobject:symbol-for-gtype "GtkPadActionType")))
+          (glib:symbol-for-gtype "GtkPadActionType")))
   ;; Check the names
   (is (equal '("GTK_PAD_ACTION_BUTTON" "GTK_PAD_ACTION_RING"
                "GTK_PAD_ACTION_STRIP")
@@ -43,7 +43,7 @@
   (is (g:type-is-object "GtkPadController"))
   ;; Check the registered name
   (is (eq 'gtk:pad-controller
-          (gobject:symbol-for-gtype "GtkPadController")))
+          (glib:symbol-for-gtype "GtkPadController")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPadController")
           (g:gtype (cffi:foreign-funcall "gtk_pad_controller_get_type" :size))))
@@ -120,4 +120,4 @@
     (is-false (g:action-map-lookup-action group "action"))
 ))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

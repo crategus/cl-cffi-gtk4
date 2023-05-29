@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkIMMulticontext"))
   ;; Check the registered name
   (is (eq 'gtk:im-multicontext
-          (gobject:symbol-for-gtype "GtkIMMulticontext")))
+          (glib:symbol-for-gtype "GtkIMMulticontext")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkIMMulticontext")
           (g:gtype (cffi:foreign-funcall "gtk_im_multicontext_get_type" :size))))
@@ -35,7 +35,7 @@
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkIMMulticontext" GTK-I-M-MULTICONTEXT
                        (:SUPERCLASS GTK-I-M-CONTEXT :EXPORT T :INTERFACES NIL)
                        NIL)
-             (get-g-type-definition "GtkIMMulticontext"))))
+             (gobject:get-g-type-definition "GtkIMMulticontext"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -50,4 +50,4 @@
 ;;;     gtk_im_multicontext_get_context_id
 ;;;     gtk_im_multicontext_set_context_id
 
-;;; ... 2023-3-18 --------------------------------------------------------------
+;;; ... 2023-5-29 --------------------------------------------------------------

@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkMediaControls"))
   ;; Check the registered name
   (is (eq 'gtk:media-controls
-          (gobject:symbol-for-gtype "GtkMediaControls")))
+          (glib:symbol-for-gtype "GtkMediaControls")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkMediaControls")
           (g:gtype (cffi:foreign-funcall "gtk_media_controls_get_type" :size))))
@@ -69,7 +69,7 @@
                         :TYPE-INITIALIZER "gtk_media_controls_get_type")
                        ((MEDIA-STREAM GTK-MEDIA-CONTROLS-MEDIA-STREAM
                          "media-stream" "GtkMediaStream" T T)))
-             (get-g-type-definition "GtkMediaControls"))))
+             (gobject:get-g-type-definition "GtkMediaControls"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -83,4 +83,4 @@
 
 ;;;     gtk_media_controls_new
 
-;;; --- 2023-5-3 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

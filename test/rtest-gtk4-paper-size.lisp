@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_unit_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:unit
-          (gobject:symbol-for-gtype "GtkUnit")))
+          (glib:symbol-for-gtype "GtkUnit")))
   ;; Check the names
   (is (equal '("GTK_UNIT_NONE" "GTK_UNIT_POINTS" "GTK_UNIT_INCH" "GTK_UNIT_MM")
              (list-enum-item-name "GtkUnit")))
@@ -249,4 +249,4 @@ Height=297
     (is (eq 'gtk:paper-size (type-of (gtk:paper-size-new-from-gvariant value))))
     (is (string= "iso_a4" (gtk:paper-size-name (gtk:paper-size-new-from-gvariant value))))))
 
-;;; --- 2023-1-31 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

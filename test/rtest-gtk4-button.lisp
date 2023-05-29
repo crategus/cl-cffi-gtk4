@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkButton"))
   ;; Check the registered name
   (is (eq 'gtk:button
-          (gobject:symbol-for-gtype "GtkButton")))
+          (glib:symbol-for-gtype "GtkButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkButton")
           (g:gtype (cffi:foreign-funcall "gtk_button_get_type" :size))))
@@ -115,4 +115,4 @@
     (is (string= "_battery" (gtk:button-label button)))
     (is-true (gtk:button-use-underline button))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

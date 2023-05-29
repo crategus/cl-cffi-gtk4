@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkGestureSingle"))
   ;; Check the registered name
   (is (eq 'gtk:gesture-single
-          (gobject:symbol-for-gtype "GtkGestureSingle")))
+          (glib:symbol-for-gtype "GtkGestureSingle")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureSingle")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_single_get_type" :size))))
@@ -54,4 +54,4 @@
 ;;;     gtk_gesture_single_get_current_button
 ;;;     gtk_gesture_single_get_current_sequence
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

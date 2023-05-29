@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkGestureSwipe"))
   ;; Check the registered name
   (is (eq 'gtk:gesture-swipe
-          (gobject:symbol-for-gtype "GtkGestureSwipe")))
+          (glib:symbol-for-gtype "GtkGestureSwipe")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureSwipe")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_swipe_get_type" :size))))
@@ -47,4 +47,4 @@
 ;;;     gtk_gesture_swipe_new
 ;;;     gtk_gesture_swipe_get_velocity
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

@@ -15,7 +15,7 @@
   (is (g:type-is-object "GtkSettings"))
   ;; Check the registered name
   (is (eq 'gtk:settings
-          (gobject:symbol-for-gtype "GtkSettings")))
+          (glib:symbol-for-gtype "GtkSettings")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSettings")
           (g:gtype (cffi:foreign-funcall "gtk_settings_get_type" :size))))
@@ -302,4 +302,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; --- 2023-3-26 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

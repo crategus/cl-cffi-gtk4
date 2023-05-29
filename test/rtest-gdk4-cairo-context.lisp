@@ -12,7 +12,7 @@
   (is (g:type-is-object "GdkCairoContext"))
   ;; Check the registered name
   (is (eq 'gdk:cairo-context
-          (gobject:symbol-for-gtype "GdkCairoContext")))
+          (glib:symbol-for-gtype "GdkCairoContext")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkCairoContext")
           (g:gtype (cffi:foreign-funcall "gdk_cairo_context_get_type" :size))))
@@ -54,4 +54,4 @@
     ;; TODO: We get a NULL Cairo context. Improve this !?
     (is (cffi:null-pointer-p (gdk:cairo-context-cairo-create context)))))
 
-;;; --- 2023-5-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

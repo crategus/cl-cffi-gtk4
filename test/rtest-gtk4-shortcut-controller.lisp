@@ -16,7 +16,7 @@
   (is (g:type-is-object "GtkShortcutController"))
   ;; Check the registered name
   (is (eq 'gtk:shortcut-controller
-          (gobject:symbol-for-gtype "GtkShortcutController")))
+          (glib:symbol-for-gtype "GtkShortcutController")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutController")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_controller_get_type"
@@ -70,4 +70,4 @@
 ;;;     gtk_shortcut_controller_add_shortcut
 ;;;     gtk_shortcut_controller_remove_shortcut
 
-;;; --- 2023-4-15 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

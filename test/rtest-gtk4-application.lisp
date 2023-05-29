@@ -12,7 +12,7 @@
   (is (g:type-is-flags "GtkApplicationInhibitFlags"))
   ;; Check the registered name
   (is (eq 'gtk:application-inhibit-flags
-          (gobject:symbol-for-gtype "GtkApplicationInhibitFlags")))
+          (glib:symbol-for-gtype "GtkApplicationInhibitFlags")))
   ;; Check the names
   (is (equal '("GTK_APPLICATION_INHIBIT_LOGOUT" "GTK_APPLICATION_INHIBIT_SWITCH"
                "GTK_APPLICATION_INHIBIT_SUSPEND" "GTK_APPLICATION_INHIBIT_IDLE")
@@ -33,7 +33,7 @@
                               (:SWITCH 2)
                               (:SUSPEND 4)
                               (:IDLE 8))
-             (get-g-type-definition "GtkApplicationInhibitFlags"))))
+             (gobject:get-g-type-definition "GtkApplicationInhibitFlags"))))
 
 ;;; --- GtkApplication ---------------------------------------------------------
 
@@ -42,7 +42,7 @@
   (is (g:type-is-object "GtkApplication"))
   ;; Check the registered name
   (is (eq 'gtk:application
-          (gobject:symbol-for-gtype "GtkApplication")))
+          (glib:symbol-for-gtype "GtkApplication")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkApplication")
           (g:gtype (cffi:foreign-funcall "gtk_application_get_type" :size))))
@@ -76,7 +76,7 @@
                          "register-session" "gboolean" T T)
                         (SCREENSAVER-ACTIVE GTK-APPLICATION-SCREENSAVER-ACTIVE
                          "screensaver-active" "gboolean" T NIL)))
-             (get-g-type-definition "GtkApplication"))))
+             (gobject:get-g-type-definition "GtkApplication"))))
 
 ;;; --- Properties and Accessors -----------------------------------------------
 
@@ -131,7 +131,7 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;; FIXME: We get the following error. The application is not run.
-;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: 
+;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown:
 ;; The name com.crategus.test was not provided by any .service files
 
 (test gtk-application-signals
@@ -208,7 +208,7 @@
 ;;;     gtk_application_remove_window
 
 ;; FIXME: We get the following error. The application is not run.
-;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: 
+;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown:
 ;; The name com.crategus.test was not provided by any .service files
 
 (test gtk-application-add-window
@@ -312,4 +312,4 @@
 
 ;;;     gtk_application_uninhibit
 
-;;; --- 2023-5-11 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

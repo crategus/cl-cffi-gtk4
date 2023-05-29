@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkVideo"))
   ;; Check the registered name
   (is (eq 'gtk:video
-          (gobject:symbol-for-gtype "GtkVideo")))
+          (glib:symbol-for-gtype "GtkVideo")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkVideo")
           (g:gtype (cffi:foreign-funcall "gtk_video_get_type" :size))))
@@ -77,7 +77,7 @@
                         (LOOP GTK-VIDEO-LOOP "loop" "gboolean" T T)
                         (MEDIA-STREAM GTK-VIDEO-MEDIA-STREAM "media-stream"
                          "GtkMediaStream" T T)))
-             (get-g-type-definition "GtkVideo"))))
+             (gobject:get-g-type-definition "GtkVideo"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -138,4 +138,4 @@
 ;;;     gtk_video_set_filename
 ;;;     gtk_video_set_resource
 
-;;; --- 2023-5-3 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

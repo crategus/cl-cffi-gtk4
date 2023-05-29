@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkToggleButton"))
   ;; Check the registered name
   (is (eq 'gtk:toggle-button
-          (gobject:symbol-for-gtype "GtkToggleButton")))
+          (glib:symbol-for-gtype "GtkToggleButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkToggleButton")
           (g:gtype (cffi:foreign-funcall "gtk_toggle_button_get_type" :size))))
@@ -89,4 +89,4 @@
 
 ;;;     gtk_toggle_button_toggled
 
-;;; --- 2023-3-19 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

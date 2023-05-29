@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkTooltip"))
   ;; Check the registered name
   (is (eq 'gtk:tooltip
-          (gobject:symbol-for-gtype "GtkTooltip")))
+          (glib:symbol-for-gtype "GtkTooltip")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkTooltip")
           (g:gtype (cffi:foreign-funcall "gtk_tooltip_get_type" :size))))
@@ -36,7 +36,7 @@
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_tooltip_get_type")
                        NIL)
-             (get-g-type-definition "GtkTooltip"))))
+             (gobject:get-g-type-definition "GtkTooltip"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -48,4 +48,4 @@
 ;;;     gtk_tooltip_set_custom
 ;;;     gtk_tooltip_set_tip_area
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

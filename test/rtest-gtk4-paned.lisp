@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkPaned"))
   ;; Check the registered name
   (is (eq 'gtk:paned
-          (gobject:symbol-for-gtype "GtkPaned")))
+          (glib:symbol-for-gtype "GtkPaned")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPaned")
           (g:gtype (cffi:foreign-funcall "gtk_paned_get_type" :size))))
@@ -23,7 +23,7 @@
   (is (equal '()
              (list-children "GtkPaned")))
   ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
              (list-interfaces "GtkPaned")))
   ;; Check the properties
@@ -48,7 +48,7 @@
   ;; Check the class definition
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkPaned" GTK-PANED
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable" 
+                        ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
                          "GtkConstraintTarget" "GtkOrientable")
                         :TYPE-INITIALIZER "gtk_paned_get_type")
                        ((END-CHILD GTK-PANED-END-CHILD "end-child" "GtkWidget"
@@ -101,4 +101,4 @@
 
 ;;;     gtk_paned_new
 
-;;; --- 2023-4-29 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

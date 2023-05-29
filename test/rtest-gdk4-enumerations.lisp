@@ -13,7 +13,7 @@
           (g:gtype (cffi:foreign-funcall "gdk_gravity_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gdk:gravity
-          (gobject:symbol-for-gtype "GdkGravity")))
+          (glib:symbol-for-gtype "GdkGravity")))
   ;; Check the names
   (is (equal '("GDK_GRAVITY_NORTH_WEST" "GDK_GRAVITY_NORTH"
                "GDK_GRAVITY_NORTH_EAST" "GDK_GRAVITY_WEST" "GDK_GRAVITY_CENTER"
@@ -53,7 +53,7 @@
   (is (g:type-is-flags "GdkModifierType"))
   ;; Check the registered name
   (is (eq 'gdk:modifier-type
-          (gobject:symbol-for-gtype "GdkModifierType")))
+          (glib:symbol-for-gtype "GdkModifierType")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkModifierType")
           (g:gtype (cffi:foreign-funcall "gdk_modifier_type_get_type" :size))))
@@ -90,4 +90,4 @@
                               (:META-MASK 268435456))
              (gobject:get-g-type-definition "GdkModifierType"))))
 
-;;; --- 2023-4-14 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

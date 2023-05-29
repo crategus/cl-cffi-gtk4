@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkLockButton"))
   ;; Check the registered name
   (is (eq 'gtk:lock-button
-          (gobject:symbol-for-gtype "GtkLockButton")))
+          (glib:symbol-for-gtype "GtkLockButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkLockButton")
           (g:gtype (cffi:foreign-funcall "gtk_lock_button_get_type" :size))))
@@ -76,4 +76,4 @@
 
 ;;;     gtk_lock_button_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

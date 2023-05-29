@@ -12,7 +12,7 @@
   (is (g:type-is-object "GdkSurface"))
   ;; Check the registered name
   (is (eq 'gdk:surface
-          (gobject:symbol-for-gtype "GdkSurface")))
+          (glib:symbol-for-gtype "GdkSurface")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkSurface")
           (g:gtype (cffi:foreign-funcall "gdk_surface_get_type" :size))))
@@ -46,7 +46,7 @@
                         (SCALE-FACTOR GDK-SURFACE-SCALE-FACTOR "scale-factor"
                          "gint" T NIL)
                         (WIDTH GDK-SURFACE-WIDTH "width" "gint" T NIL)))
-             (get-g-type-definition "GdkSurface"))))
+             (gobject:get-g-type-definition "GdkSurface"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -88,4 +88,4 @@
 ;;;     gdk_surface_set_opaque_region
 ;;;     gdk_surface_translate_coordinates
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

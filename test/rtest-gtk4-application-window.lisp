@@ -10,7 +10,7 @@
   (is (g:type-is-object "GtkApplicationWindow"))
   ;; Check the registered name
   (is (eq 'gtk:application-window
-          (gobject:symbol-for-gtype "GtkApplicationWindow")))
+          (glib:symbol-for-gtype "GtkApplicationWindow")))
   ;; Check the parent
   (is (eq (g:gtype "GtkWindow") (g:type-parent "GtkApplicationWindow")))
   ;; Check the children
@@ -54,7 +54,7 @@
 ;;; --- gtk_application_window_new ---------------------------------------------
 
 ;; FIXME: We get the following error. The application is not run.
-;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: 
+;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown:
 ;; The name com.crategus.test was not provided by any .service files
 
 #+nil
@@ -105,4 +105,4 @@
     (is (typep (gtk:application-window-help-overlay window)
                'gtk:shortcuts-window))))
 
-;;; --- 2023-4-29 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

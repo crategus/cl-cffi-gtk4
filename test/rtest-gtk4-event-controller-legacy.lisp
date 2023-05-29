@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkEventControllerLegacy"))
   ;; Check the registered name
   (is (eq 'gtk:event-controller-legacy
-          (gobject:symbol-for-gtype "GtkEventControllerLegacy")))
+          (glib:symbol-for-gtype "GtkEventControllerLegacy")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventControllerLegacy")
           (g:gtype (cffi:foreign-funcall "gtk_event_controller_legacy_get_type"
@@ -49,4 +49,4 @@
 
 ;;;     gtk_event_controller_legacy_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

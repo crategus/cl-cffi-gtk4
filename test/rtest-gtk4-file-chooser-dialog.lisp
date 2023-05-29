@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkFileChooserDialog"))
   ;; Check the registered name
   (is (eq 'gtk:file-chooser-dialog
-          (gobject:symbol-for-gtype "GtkFileChooserDialog")))
+          (glib:symbol-for-gtype "GtkFileChooserDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileChooserDialog")
           (g:gtype (cffi:foreign-funcall "gtk_file_chooser_dialog_get_type"
@@ -60,4 +60,4 @@
 
 ;;;     gtk_file_chooser_dialog_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

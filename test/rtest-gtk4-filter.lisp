@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_filter_match_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:filter-match
-          (gobject:symbol-for-gtype "GtkFilterMatch")))
+          (glib:symbol-for-gtype "GtkFilterMatch")))
   ;; Check the names
   (is (equal '("GTK_FILTER_MATCH_SOME" "GTK_FILTER_MATCH_NONE"
                "GTK_FILTER_MATCH_ALL")
@@ -45,7 +45,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_filter_change_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:filter-change
-          (gobject:symbol-for-gtype "GtkFilterChange")))
+          (glib:symbol-for-gtype "GtkFilterChange")))
   ;; Check the names
   (is (equal '("GTK_FILTER_CHANGE_DIFFERENT" "GTK_FILTER_CHANGE_LESS_STRICT"
                "GTK_FILTER_CHANGE_MORE_STRICT")
@@ -72,7 +72,7 @@
   (is (g:type-is-object "GtkFilter"))
   ;; Check the registered name
   (is (eq 'gtk:filter
-          (gobject:symbol-for-gtype "GtkFilter")))
+          (glib:symbol-for-gtype "GtkFilter")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFilter")
           (g:gtype (cffi:foreign-funcall "gtk_filter_get_type" :size))))
@@ -109,4 +109,4 @@
 ;;;     gtk_filter_get_strictness
 ;;;     gtk_filter_changed
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

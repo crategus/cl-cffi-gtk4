@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkColorChooserDialog"))
   ;; Check the registered name
   (is (eq 'gtk:color-chooser-dialog
-          (gobject:symbol-for-gtype "GtkColorChooserDialog")))
+          (glib:symbol-for-gtype "GtkColorChooserDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkColorChooserDialog")
           (g:gtype (cffi:foreign-funcall "gtk_color_chooser_dialog_get_type"
@@ -64,4 +64,4 @@
 
 ;;;     gtk_color_chooser_dialog_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

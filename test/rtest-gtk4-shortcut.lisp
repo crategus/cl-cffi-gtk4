@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkShortcut"))
   ;; Check the registered name
   (is (eq 'gtk:shortcut
-          (gobject:symbol-for-gtype "GtkShortcut")))
+          (glib:symbol-for-gtype "GtkShortcut")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcut")
           (g:gtype (cffi:foreign-funcall "gtk_shortcut_get_type" :size))))
@@ -41,7 +41,7 @@
                          "GVariant" T T)
                         (TRIGGER GTK-SHORTCUT-TRIGGER "trigger"
                          "GtkShortcutTrigger" T T)))
-             (get-g-type-definition "GtkShortcut"))))
+             (gobject:get-g-type-definition "GtkShortcut"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -66,4 +66,4 @@
 ;;;     gtk_shortcut_new
 ;;;     gtk_shortcut_new_with_arguments
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

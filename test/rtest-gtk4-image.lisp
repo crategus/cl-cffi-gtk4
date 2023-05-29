@@ -15,20 +15,17 @@
           (g:gtype (cffi:foreign-funcall "gtk_image_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:image-type
-          (gobject:symbol-for-gtype "GtkImageType")))
+          (glib:symbol-for-gtype "GtkImageType")))
   ;; Check the names
   (is (equal '("GTK_IMAGE_EMPTY" "GTK_IMAGE_ICON_NAME" "GTK_IMAGE_GICON"
                "GTK_IMAGE_PAINTABLE")
-             (mapcar #'gobject:enum-item-name
-                     (gobject:get-enum-items "GtkImageType"))))
+             (list-enum-item-name "GtkImageType")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (mapcar #'gobject:enum-item-value
-                     (gobject:get-enum-items "GtkImageType"))))
+             (list-enum-item-value "GtkImageType")))
   ;; Check the nick names
   (is (equal '("empty" "icon-name" "gicon" "paintable")
-             (mapcar #'enum-item-nick
-                     (get-enum-items "GtkImageType"))))
+             (list-enum-item-nick "GtkImageType")))
   ;; Check the enum definition
   (is (equal '(DEFINE-G-ENUM "GtkImageType"
                              GTK-IMAGE-TYPE
@@ -47,7 +44,7 @@
   (is (g:type-is-object "GtkImage"))
   ;; Check the registered name
   (is (eq 'gtk:image
-          (gobject:symbol-for-gtype "GtkImage")))
+          (glib:symbol-for-gtype "GtkImage")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkImage")
           (g:gtype (cffi:foreign-funcall "gtk_image_get_type" :size))))
@@ -233,4 +230,4 @@
 ;;;     gtk_image_set_from_icon_name
 ;;;     gtk_image_set_from_gicon
 
-;;; --- 2023-4-28 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

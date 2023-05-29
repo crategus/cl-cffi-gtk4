@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkSeparator"))
   ;; Check the registered name
   (is (eq 'gtk:separator
-          (gobject:symbol-for-gtype "GtkSeparator")))
+          (glib:symbol-for-gtype "GtkSeparator")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSeparator")
           (g:gtype (cffi:foreign-funcall "gtk_separator_get_type" :size))))
@@ -54,4 +54,4 @@
 
 ;;;     gtk_separator_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

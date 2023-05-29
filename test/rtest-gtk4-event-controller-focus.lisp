@@ -12,7 +12,7 @@
   (is (g:type-is-object "GObject"))
   ;; Check the registered name
   (is (eq 'gtk:event-controller-focus
-          (gobject:symbol-for-gtype "GtkEventControllerFocus")))
+          (glib:symbol-for-gtype "GtkEventControllerFocus")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventControllerFocus")
           (g:gtype (cffi:foreign-funcall "gtk_event_controller_focus_get_type"
@@ -59,4 +59,4 @@
 
 ;;;     gtk_event_controller_focus_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

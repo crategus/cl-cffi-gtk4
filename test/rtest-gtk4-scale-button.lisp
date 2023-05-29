@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkScaleButton"))
   ;; Check the registered name
   (is (eq 'gtk:scale-button
-          (gobject:symbol-for-gtype "GtkScaleButton")))
+          (glib:symbol-for-gtype "GtkScaleButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkScaleButton")
           (g:gtype (cffi:foreign-funcall "gtk_scale_button_get_type" :size))))
@@ -23,7 +23,7 @@
   (is (equal '("GtkVolumeButton")
              (list-children "GtkScaleButton")))
   ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
              (list-interfaces "GtkScaleButton")))
   ;; Check the properties
@@ -75,4 +75,4 @@
 ;;;     gtk_scale_button_get_plus_button
 ;;;     gtk_scale_button_get_minus_button
 
-;;; --- 2023-4-29 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

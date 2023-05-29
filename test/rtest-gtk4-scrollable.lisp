@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_scrollable_policy_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:scrollable-policy
-          (gobject:symbol-for-gtype "GtkScrollablePolicy")))
+          (glib:symbol-for-gtype "GtkScrollablePolicy")))
   ;; Check the names
   (is (equal '("GTK_SCROLL_MINIMUM" "GTK_SCROLL_NATURAL")
              (list-enum-item-name "GtkScrollablePolicy")))
@@ -42,7 +42,7 @@
   (is (g:type-is-interface "GtkScrollable"))
   ;; Check the registered name
   (is (eq 'gtk:scrollable
-          (gobject:symbol-for-gtype "GtkScrollable")))
+          (glib:symbol-for-gtype "GtkScrollable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkScrollable")
           (g:gtype (cffi:foreign-funcall "gtk_scrollable_get_type" :size))))
@@ -73,4 +73,4 @@
 
 ;;;     gtk_scrollable_get_border
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

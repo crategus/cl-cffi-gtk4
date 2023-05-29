@@ -12,7 +12,7 @@
   (is (g:type-is-flags "GtkStyleContextPrintFlags"))
   ;; Check the registered name
   (is (eq 'gtk:style-context-print-flags
-          (gobject:symbol-for-gtype "GtkStyleContextPrintFlags")))
+          (glib:symbol-for-gtype "GtkStyleContextPrintFlags")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkStyleContextPrintFlags")
           (g:gtype (cffi:foreign-funcall "gtk_style_context_print_flags_get_type"
@@ -71,7 +71,7 @@
   (is (g:type-is-object "GtkStyleContext"))
   ;; Check the registered name
   (is (eq 'gtk:style-context
-          (gobject:symbol-for-gtype "GtkStyleContext")))
+          (glib:symbol-for-gtype "GtkStyleContext")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkStyleContext")
           (g:gtype (cffi:foreign-funcall "gtk_style_context_get_type" :size))))
@@ -145,4 +145,4 @@
 ;;;     gtk_render_line
 ;;;     gtk_render_option
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_align_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:align
-          (gobject:symbol-for-gtype "GtkAlign")))
+          (glib:symbol-for-gtype "GtkAlign")))
   ;; Check the names
   (is (equal '("GTK_ALIGN_FILL" "GTK_ALIGN_START" "GTK_ALIGN_END"
                "GTK_ALIGN_CENTER" "GTK_ALIGN_BASELINE")
@@ -51,7 +51,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_arrow_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:arrow-type
-          (gobject:symbol-for-gtype "GtkArrowType")))
+          (glib:symbol-for-gtype "GtkArrowType")))
   ;; Check the names
   (is (equal '("GTK_ARROW_UP" "GTK_ARROW_DOWN" "GTK_ARROW_LEFT"
                "GTK_ARROW_RIGHT" "GTK_ARROW_NONE")
@@ -84,7 +84,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_baseline_position_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:baseline-position
-          (gobject:symbol-for-gtype "GtkBaselinePosition")))
+          (glib:symbol-for-gtype "GtkBaselinePosition")))
   ;; Check the names
   (is (equal '("GTK_BASELINE_POSITION_TOP" "GTK_BASELINE_POSITION_CENTER"
                "GTK_BASELINE_POSITION_BOTTOM")
@@ -103,7 +103,7 @@
                              (:TOP 0)
                              (:CENTER 1)
                              (:BOTTOM 2))
-             (get-g-type-definition "GtkBaselinePosition"))))
+             (gobject:get-g-type-definition "GtkBaselinePosition"))))
 
 ;;;     GtkDeleteType
 
@@ -115,7 +115,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_delete_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:delete-type
-          (gobject:symbol-for-gtype "GtkDeleteType")))
+          (glib:symbol-for-gtype "GtkDeleteType")))
   ;; Check the names
   (is (equal '("GTK_DELETE_CHARS" "GTK_DELETE_WORD_ENDS" "GTK_DELETE_WORDS"
                "GTK_DELETE_DISPLAY_LINES" "GTK_DELETE_DISPLAY_LINE_ENDS"
@@ -142,7 +142,7 @@
                              (:PARAGRAPH-ENDS 5)
                              (:PARAGRAPHS 6)
                              (:WHITESPACE 7))
-             (get-g-type-definition "GtkDeleteType"))))
+             (gobject:get-g-type-definition "GtkDeleteType"))))
 
 ;;;     GtkDirectionType
 
@@ -163,7 +163,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_orientation_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:orientation
-          (gobject:symbol-for-gtype "GtkOrientation")))
+          (glib:symbol-for-gtype "GtkOrientation")))
   ;; Check the names
   (is (equal '("GTK_ORIENTATION_HORIZONTAL" "GTK_ORIENTATION_VERTICAL")
              (list-enum-item-name "GtkOrientation")))
@@ -180,7 +180,7 @@
                               :TYPE-INITIALIZER "gtk_orientation_get_type")
                              (:HORIZONTAL 0)
                              (:VERTICAL 1))
-             (get-g-type-definition "GtkOrientation"))))
+             (gobject:get-g-type-definition "GtkOrientation"))))
 
 ;;;     GtkOverflow
 ;;;     GtkPackType
@@ -209,7 +209,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_size_group_mode_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:size-group-mode
-          (gobject:symbol-for-gtype "GtkSizeGroupMode")))
+          (glib:symbol-for-gtype "GtkSizeGroupMode")))
   ;; Check the names
   (is (equal '("GTK_SIZE_GROUP_NONE" "GTK_SIZE_GROUP_HORIZONTAL"
                "GTK_SIZE_GROUP_VERTICAL" "GTK_SIZE_GROUP_BOTH")
@@ -261,7 +261,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_accessible_role_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-role
-          (gobject:symbol-for-gtype "GtkAccessibleRole")))
+          (glib:symbol-for-gtype "GtkAccessibleRole")))
   ;; Check the names
   (is (equal '("GTK_ACCESSIBLE_ROLE_ALERT" "GTK_ACCESSIBLE_ROLE_ALERT_DIALOG"
                "GTK_ACCESSIBLE_ROLE_BANNER" "GTK_ACCESSIBLE_ROLE_BUTTON"
@@ -413,7 +413,7 @@
                              (:WIDGET 76)
                              (:WINDOW 77)
                              (:TOGGLE-BUTTON 78))
-             (get-g-type-definition "GtkAccessibleRole"))))
+             (gobject:get-g-type-definition "GtkAccessibleRole"))))
 
 ;;;     GtkAccessibleState
 
@@ -425,7 +425,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_accessible_state_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-state
-          (gobject:symbol-for-gtype "GtkAccessibleState")))
+          (glib:symbol-for-gtype "GtkAccessibleState")))
   ;; Check the names
   (is (equal '("GTK_ACCESSIBLE_STATE_BUSY"
                "GTK_ACCESSIBLE_STATE_CHECKED"
@@ -456,7 +456,7 @@
                              (:INVALID 5)
                              (:PRESSED 6)
                              (:SELECTED 7))
-             (get-g-type-definition "GtkAccessibleState"))))
+             (gobject:get-g-type-definition "GtkAccessibleState"))))
 
 ;;;     GtkAccessibleProperty
 
@@ -469,7 +469,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-property
-          (gobject:symbol-for-gtype "GtkAccessibleProperty")))
+          (glib:symbol-for-gtype "GtkAccessibleProperty")))
   ;; Check the names
   (is (equal '("GTK_ACCESSIBLE_PROPERTY_AUTOCOMPLETE"
                "GTK_ACCESSIBLE_PROPERTY_DESCRIPTION"
@@ -525,7 +525,7 @@
                              (:VALUE-MIN 16)
                              (:VALUE-NOW 17)
                              (:VALUE-TEXT 18))
-             (get-g-type-definition "GtkAccessibleProperty"))))
+             (gobject:get-g-type-definition "GtkAccessibleProperty"))))
 
 ;;;     GtkAccessibleRelation
 
@@ -538,7 +538,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-relation
-          (gobject:symbol-for-gtype "GtkAccessibleRelation")))
+          (glib:symbol-for-gtype "GtkAccessibleRelation")))
   ;; Check the names
   (is (equal '("GTK_ACCESSIBLE_RELATION_ACTIVE_DESCENDANT"
                "GTK_ACCESSIBLE_RELATION_COL_COUNT"
@@ -592,7 +592,7 @@
                              (:ROW-INDEX-TEXT 15)
                              (:ROW-SPAN 16)
                              (:SET-SIZE 17))
-             (get-g-type-definition "GtkAccessibleRelation"))))
+             (gobject:get-g-type-definition "GtkAccessibleRelation"))))
 
 ;;;     GtkAccessibleTristate
 
@@ -605,7 +605,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-tristate
-          (gobject:symbol-for-gtype "GtkAccessibleTristate")))
+          (glib:symbol-for-gtype "GtkAccessibleTristate")))
   ;; Check the names
   (is (equal '("GTK_ACCESSIBLE_TRISTATE_FALSE"
                "GTK_ACCESSIBLE_TRISTATE_TRUE"
@@ -626,7 +626,7 @@
                              (:FALSE 0)
                              (:TRUE 1)
                              (:MIXED 2))
-             (get-g-type-definition "GtkAccessibleTristate"))))
+             (gobject:get-g-type-definition "GtkAccessibleTristate"))))
 
 ;;;     GtkAccessibleInvalidState
 
@@ -639,7 +639,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-invalid-state
-          (gobject:symbol-for-gtype "GtkAccessibleInvalidState")))
+          (glib:symbol-for-gtype "GtkAccessibleInvalidState")))
   ;; Check the names
   (is (equal '("GTK_ACCESSIBLE_INVALID_FALSE"
                "GTK_ACCESSIBLE_INVALID_TRUE"
@@ -662,7 +662,7 @@
                              (:TRUE 1)
                              (:GRAMMAR 2)
                              (:SPELLING 3))
-             (get-g-type-definition "GtkAccessibleInvalidState"))))
+             (gobject:get-g-type-definition "GtkAccessibleInvalidState"))))
 
 ;;;     GtkAccessibleAutocomplete
 
@@ -675,7 +675,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-autocomplete
-          (gobject:symbol-for-gtype "GtkAccessibleAutocomplete")))
+          (glib:symbol-for-gtype "GtkAccessibleAutocomplete")))
   ;; Check the names
   (is (equal '("GTK_ACCESSIBLE_AUTOCOMPLETE_NONE"
                "GTK_ACCESSIBLE_AUTOCOMPLETE_INLINE"
@@ -698,7 +698,7 @@
                              (:INLINE 1)
                              (:LIST 2)
                              (:BOTH 3))
-             (get-g-type-definition "GtkAccessibleAutocomplete"))))
+             (gobject:get-g-type-definition "GtkAccessibleAutocomplete"))))
 
 ;;;     GtkAccessibleSort
 
@@ -710,7 +710,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_accessible_sort_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-sort
-          (gobject:symbol-for-gtype "GtkAccessibleSort")))
+          (glib:symbol-for-gtype "GtkAccessibleSort")))
   ;; Check the names
   (is (equal '("GTK_ACCESSIBLE_SORT_NONE"
                "GTK_ACCESSIBLE_SORT_ASCENDING"
@@ -732,6 +732,6 @@
                              (:ASCENDING 1)
                              (:DESCENDING 2)
                              (:OTHER 3))
-             (get-g-type-definition "GtkAccessibleSort"))))
+             (gobject:get-g-type-definition "GtkAccessibleSort"))))
 
-;;; --- 2023-4-28 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

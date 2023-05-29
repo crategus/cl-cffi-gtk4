@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkLayoutManager"))
   ;; Check the registered name
   (is (eq 'gtk:layout-manager
-          (gobject:symbol-for-gtype "GtkLayoutManager")))
+          (glib:symbol-for-gtype "GtkLayoutManager")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkLayoutManager")
           (g:gtype (cffi:foreign-funcall "gtk_layout_manager_get_type" :size))))
@@ -38,7 +38,7 @@
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_layout_manager_get_type")
                        NIL)
-             (get-g-type-definition "GtkLayoutManager"))))
+             (gobject:get-g-type-definition "GtkLayoutManager"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -105,4 +105,4 @@
 
 ;;;     gtk_layout_manager_layout_changed
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

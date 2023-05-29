@@ -12,7 +12,7 @@
   (is (g:type-is-interface "GtkPrintOperationPreview"))
   ;; Check the registered name
   (is (eq 'gtk:print-operation-preview
-          (gobject:symbol-for-gtype "GtkPrintOperationPreview")))
+          (glib:symbol-for-gtype "GtkPrintOperationPreview")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPrintOperationPreview")
           (g:gtype (cffi:foreign-funcall "gtk_print_operation_preview_get_type"
@@ -51,7 +51,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_print_status_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:print-status
-          (gobject:symbol-for-gtype "GtkPrintStatus")))
+          (glib:symbol-for-gtype "GtkPrintStatus")))
   ;; Check the names
   (is (equal '("GTK_PRINT_STATUS_INITIAL" "GTK_PRINT_STATUS_PREPARING"
                "GTK_PRINT_STATUS_GENERATING_DATA"
@@ -93,7 +93,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:print-operation-action
-          (gobject:symbol-for-gtype "GtkPrintOperationAction")))
+          (glib:symbol-for-gtype "GtkPrintOperationAction")))
   ;; Check the names
   (is (equal '("GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG"
                "GTK_PRINT_OPERATION_ACTION_PRINT"
@@ -129,7 +129,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:print-operation-result
-          (gobject:symbol-for-gtype "GtkPrintOperationResult")))
+          (glib:symbol-for-gtype "GtkPrintOperationResult")))
   ;; Check the names
   (is (equal '("GTK_PRINT_OPERATION_RESULT_ERROR"
                "GTK_PRINT_OPERATION_RESULT_APPLY"
@@ -164,7 +164,7 @@
   (is (g:type-is-object "GtkPrintOperation"))
   ;; Check the registered name
   (is (eq 'gtk:print-operation
-          (gobject:symbol-for-gtype "GtkPrintOperation")))
+          (glib:symbol-for-gtype "GtkPrintOperation")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPrintOperation")
           (g:gtype (cffi:foreign-funcall "gtk_print_operation_get_type" :size))))
@@ -284,4 +284,4 @@
 
 ;;;     gtk_print_run_page_setup_dialog_async
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

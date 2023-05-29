@@ -16,7 +16,7 @@
   (is (g:type-is-object "GtkPicture"))
   ;; Check the registered name
   (is (eq 'gtk:picture
-          (gobject:symbol-for-gtype "GtkPicture")))
+          (glib:symbol-for-gtype "GtkPicture")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPicture")
           (g:gtype (cffi:foreign-funcall "gtk_picture_get_type" :size))))
@@ -84,4 +84,4 @@
 ;;;     gtk_picture_set_filename
 ;;;     gtk_picture_set_resource
 
-;;; --- 2023-4-15 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

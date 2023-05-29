@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkEntryCompletion"))
   ;; Check the registered name
   (is (eq 'gtk:entry-completion
-          (gobject:symbol-for-gtype "GtkEntryCompletion")))
+          (glib:symbol-for-gtype "GtkEntryCompletion")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEntryCompletion")
           (g:gtype (cffi:foreign-funcall "gtk_entry_completion_get_type" :size))))
@@ -92,4 +92,4 @@
 ;;;     gtk_entry_completion_get_completion_prefix
 ;;;     gtk_entry_completion_insert_prefix
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

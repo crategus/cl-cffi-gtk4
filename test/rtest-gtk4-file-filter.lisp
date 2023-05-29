@@ -17,7 +17,7 @@
   (is (g:type-is-object "GtkFileFilter"))
   ;; Check the registered name
   (is (eq 'gtk:file-filter
-          (gobject:symbol-for-gtype "GtkFileFilter")))
+          (glib:symbol-for-gtype "GtkFileFilter")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileFilter")
           (g:gtype (cffi:foreign-funcall "gtk_file_filter_get_type" :size))))
@@ -139,4 +139,4 @@
     (is (string= "('.mhjl-Dateityp', [(1, '*')])"
                  (g:variant-print variant)))))
 
-;;; --- 2023-5-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

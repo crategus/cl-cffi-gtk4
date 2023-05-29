@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_message_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:message-type
-          (gobject:symbol-for-gtype "GtkMessageType")))
+          (glib:symbol-for-gtype "GtkMessageType")))
   ;; Check the names
   (is (equal '("GTK_MESSAGE_INFO" "GTK_MESSAGE_WARNING" "GTK_MESSAGE_QUESTION"
                "GTK_MESSAGE_ERROR" "GTK_MESSAGE_OTHER")
@@ -48,7 +48,7 @@
           (g:gtype (cffi:foreign-funcall "gtk_buttons_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gtk:buttons-type
-          (gobject:symbol-for-gtype "GtkButtonsType")))
+          (glib:symbol-for-gtype "GtkButtonsType")))
   ;; Check the names
   (is (equal '("GTK_BUTTONS_NONE" "GTK_BUTTONS_OK" "GTK_BUTTONS_CLOSE"
                "GTK_BUTTONS_CANCEL" "GTK_BUTTONS_YES_NO"
@@ -80,7 +80,7 @@
   (is (g:type-is-object "GtkMessageDialog"))
   ;; Check the registered name
   (is (eq 'gtk:message-dialog
-          (gobject:symbol-for-gtype "GtkMessageDialog")))
+          (glib:symbol-for-gtype "GtkMessageDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkMessageDialog")
           (g:gtype (cffi:foreign-funcall "gtk_message_dialog_get_type" :size))))
@@ -160,4 +160,4 @@
 ;;;     gtk_message_dialog_format_secondary_text
 ;;;     gtk_message_dialog_format_secondary_markup
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

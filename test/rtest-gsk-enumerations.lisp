@@ -15,7 +15,7 @@
           (g:gtype (cffi:foreign-funcall "gsk_render_node_type_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gsk:render-node-type
-          (gobject:symbol-for-gype "GskRenderNodeType")))
+          (glib:symbol-for-gype "GskRenderNodeType")))
   ;; Check the names
   (is (equal '("GSK_NOT_A_RENDER_NODE" "GSK_CONTAINER_NODE" "GSK_CAIRO_NODE"
                "GSK_COLOR_NODE" "GSK_LINEAR_GRADIENT_NODE"
@@ -72,7 +72,7 @@
                              (:BLUR-NODE 23)
                              (:DEBUG-NODE 24)
                              (:GL-SHADER-NODE 25))
-             (get-g-type-definition "GskRenderNodeType"))))
+             (gobject:get-g-type-definition "GskRenderNodeType"))))
 
 ;;;     GskScalingFilter
 ;;;     GskBlendMode
@@ -89,7 +89,7 @@
           (gtype (cffi:foreign-funcall "gsk_transform_category_get_type" :size))))
   ;; Check the registered name
   (is (eq 'gsk:transform-category
-          (gobject:symbol-for-gtype "GskTransformCategory")))
+          (glib:symbol-for-gtype "GskTransformCategory")))
   ;; Check the names
   (is (equal '("GSK_TRANSFORM_CATEGORY_UNKNOWN" "GSK_TRANSFORM_CATEGORY_ANY"
                "GSK_TRANSFORM_CATEGORY_3D" "GSK_TRANSFORM_CATEGORY_2D"
@@ -115,8 +115,8 @@
                              (:2D-AFFINE 4)
                              (:2D-TRANSLATE 5)
                              (:IDENTITY 6))
-             (get-g-type-definition "GskTransformCategory"))))
+             (gobject:get-g-type-definition "GskTransformCategory"))))
 
 ;;;     GskGLUniformType
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

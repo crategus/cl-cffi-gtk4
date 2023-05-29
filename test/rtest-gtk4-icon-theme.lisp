@@ -20,7 +20,7 @@
   (is (g:type-is-object "GtkIconTheme"))
   ;; Check the registered name
   (is (eq 'gtk:icon-theme
-          (gobject:symbol-for-gtype "GtkIconTheme")))
+          (glib:symbol-for-gtype "GtkIconTheme")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkIconTheme")
           (g:gtype (cffi:foreign-funcall "gtk_icon_theme_get_type" :size))))
@@ -122,4 +122,4 @@
 ;;;     gtk_icon_theme_lookup_by_gicon
 ;;;     gtk_icon_theme_get_icon_sizes
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

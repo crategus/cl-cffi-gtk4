@@ -32,7 +32,7 @@
   (is (g:type-is-interface "GtkBuildable"))
   ;; Check the registered name
   (is (eq 'gtk:buildable
-          (gobject:symbol-for-gtype "GtkBuildable")))
+          (glib:symbol-for-gtype "GtkBuildable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBuildable")
           (g:gtype (cffi:foreign-funcall "gtk_buildable_get_type" :size))))
@@ -63,4 +63,4 @@
 ;;;     gtk_buildable_parse_context_pop                    not implemented
 ;;;     gtk_buildable_parse_context_push                   not implemented
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

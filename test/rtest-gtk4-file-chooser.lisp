@@ -16,7 +16,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:file-chooser-action
-          (gobject:symbol-for-gtype "GtkFileChooserAction")))
+          (glib:symbol-for-gtype "GtkFileChooserAction")))
   ;; Check the names
   (is (equal '("GTK_FILE_CHOOSER_ACTION_OPEN" "GTK_FILE_CHOOSER_ACTION_SAVE"
                "GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER")
@@ -47,7 +47,7 @@
   (is (g:type-is-interface "GtkFileChooser"))
   ;; Check the registered name
   (is (eq 'gtk:file-chooser
-          (gobject:symbol-for-gtype "GtkFileChooser")))
+          (glib:symbol-for-gtype "GtkFileChooser")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileChooser")
           (g:gtype (cffi:foreign-funcall "gtk_file_chooser_get_type" :size))))
@@ -119,4 +119,4 @@
 ;;;     gtk_file_chooser_set_choice
 ;;;     gtk_file_chooser_get_choice
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

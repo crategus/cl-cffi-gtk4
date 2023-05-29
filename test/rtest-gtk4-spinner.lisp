@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkSpinner"))
   ;; Check the registered name
   (is (eq 'gtk:spinner
-          (gobject:symbol-for-gtype "GtkSpinner")))
+          (glib:symbol-for-gtype "GtkSpinner")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSpinner")
           (g:gtype (cffi:foreign-funcall "gtk_spinner_get_type" :size))))
@@ -37,7 +37,7 @@
                         :TYPE-INITIALIZER "gtk_spinner_get_type")
                        ((SPINNING GTK-SPINNER-SPINNING "spinning" "gboolean" T
                          T)))
-             (get-g-type-definition "GtkSpinner"))))
+             (gobject:get-g-type-definition "GtkSpinner"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -65,4 +65,4 @@
     (is-false (gtk-spinner-stop spinner))
     (is-false (gtk-spinner-spinning spinner))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

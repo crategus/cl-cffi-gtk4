@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkEventControllerKey"))
   ;; Check the registered name
   (is (eq 'gtk:event-controller-key
-          (gobject:symbol-for-gtype "GtkEventControllerKey")))
+          (glib:symbol-for-gtype "GtkEventControllerKey")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEventControllerKey")
           (g:gtype (cffi:foreign-funcall "gtk_event_controller_key_get_type"
@@ -56,4 +56,4 @@
 ;;;     gtk_event_controller_key_forward
 ;;;     gtk_event_controller_key_get_group
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

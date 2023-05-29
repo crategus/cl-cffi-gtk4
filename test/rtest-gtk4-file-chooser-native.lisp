@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkFileChooserNative"))
   ;; Check the registered name
   (is (eq 'gtk:file-chooser-native
-          (gobject:symbol-for-gtype "GtkFileChooserNative")))
+          (glib:symbol-for-gtype "GtkFileChooserNative")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkFileChooserNative")
           (g:gtype (cffi:foreign-funcall "gtk_file_chooser_native_get_type"
@@ -64,4 +64,4 @@
   (is (string= "Accept Label" (gtk:file-chooser-native-accept-label dialog)))
   (is (string= "Cancel Label" (gtk:file-chooser-native-cancel-label dialog)))))
 
-;;; --- 2023-5-5 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

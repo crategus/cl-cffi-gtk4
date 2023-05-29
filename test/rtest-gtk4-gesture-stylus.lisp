@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkGestureStylus"))
   ;; Check the registered name
   (is (eq 'gtk:gesture-stylus
-          (gobject:symbol-for-gtype "GtkGestureStylus")))
+          (glib:symbol-for-gtype "GtkGestureStylus")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureStylus")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_stylus_get_type" :size))))
@@ -58,4 +58,4 @@
 ;;;     gtk_gesture_stylus_get_backlog
 ;;;     gtk_gesture_stylus_get_device_tool
 
-;;; --- 2023-4-29 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

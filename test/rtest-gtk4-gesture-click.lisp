@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkGestureClick"))
   ;; Check the registered name
   (is (eq 'gtk:gesture-click
-          (gobject:symbol-for-gtype "GtkGestureClick")))
+          (glib:symbol-for-gtype "GtkGestureClick")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkGestureClick")
           (g:gtype (cffi:foreign-funcall "gtk_gesture_click_get_type" :size))))
@@ -49,4 +49,4 @@
 
 ;;;     gtk_gesture_click_new
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

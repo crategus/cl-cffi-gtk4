@@ -12,7 +12,7 @@
   (is (g:type-is-flags "GdkSeatCapabilities"))
   ;; Check the registered name
   (is (eq 'gdk:seat-capabilities
-          (gobject:symbol-for-gtype "GdkSeatCapabilities")))
+          (glib:symbol-for-gtype "GdkSeatCapabilities")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkSeatCapabilities")
           (g:gtype (cffi:foreign-funcall "gdk_seat_capabilities_get_type"
@@ -53,7 +53,7 @@
   (is (g:type-is-object "GdkSeat"))
   ;; Check the registered name
   (is (eq 'gdk:seat
-          (gobject:symbol-for-gtype "GdkSeat")))
+          (glib:symbol-for-gtype "GdkSeat")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkSeat")
           (g:gtype (cffi:foreign-funcall "gdk_seat_get_type" :size))))
@@ -116,7 +116,7 @@
     #-windows
     (is (string= "Core Pointer" (gdk:device-name (gdk:seat-pointer seat))))
     #+windows
-    (is (string= "Virtual Core Pointer" 
+    (is (string= "Virtual Core Pointer"
                  (gdk:device-name (gdk:seat-pointer seat))))))
 
 ;;;     gdk_seat_get_keyboard
@@ -127,7 +127,7 @@
     #-windows
     (is (string= "Core Keyboard" (gdk:device-name (gdk:seat-keyboard seat))))
     #+windows
-    (is (string= "Virtual Core Keyboard" 
+    (is (string= "Virtual Core Keyboard"
                  (gdk:device-name (gdk:seat-keyboard seat))))))
 
 ;;;     gdk_seat_get_devices
@@ -143,4 +143,4 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is-false (gdk:seat-tools seat))))
 
-;;; --- 2023-5-2 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

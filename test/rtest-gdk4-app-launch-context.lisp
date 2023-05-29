@@ -16,7 +16,7 @@
   (is (g:type-is-object "GdkAppLaunchContext"))
   ;; Check the registered name
   (is (eq 'gdk:app-launch-context
-          (gobject:symbol-for-gtype "GdkAppLaunchContext")))
+          (glib:symbol-for-gtype "GdkAppLaunchContext")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkAppLaunchContext")
           (g:gtype (cffi:foreign-funcall "gdk_app_launch_context_get_type"
@@ -97,4 +97,4 @@
     (is-false (gdk:app-launch-context-set-icon-name context
                                                     (cffi:null-pointer)))))
 
-;;; --- 2023-4-7 ---------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

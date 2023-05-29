@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkWindowGroup"))
   ;; Check the registered name
   (is (eq 'gtk:window-group
-          (gobject:symbol-for-gtype "GtkWindowGroup")))
+          (glib:symbol-for-gtype "GtkWindowGroup")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkWindowGroup")
           (g:gtype (cffi:foreign-funcall "gtk_window_group_get_type" :size))))
@@ -36,7 +36,7 @@
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_window_group_get_type")
                        NIL)
-             (get-g-type-definition "GtkWindowGroup"))))
+             (gobject:get-g-type-definition "GtkWindowGroup"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -68,4 +68,4 @@
     (is (equal '(GTK-WINDOW)
                (mapcar #' type-of (gtk-window-group-list-windows group))))))
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

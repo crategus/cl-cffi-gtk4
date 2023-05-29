@@ -14,7 +14,7 @@
   (is (g:type-is-object "GtkWindow"))
   ;; Check the registered name
   (is (eq 'gtk:window
-          (gobject:symbol-for-gtype "GtkWindow")))
+          (glib:symbol-for-gtype "GtkWindow")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkWindow")
           (g:gtype (cffi:foreign-funcall "gtk_window_get_type" :size))))
@@ -289,4 +289,4 @@
 ;;;     gtk_window_set_auto_startup_notification
 ;;;     gtk_window_set_interactive_debugging
 
-;;; --- 2023-4-29 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

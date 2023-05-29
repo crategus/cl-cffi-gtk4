@@ -12,10 +12,11 @@
   (is (g:type-is-enum "GtkSensitivityType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSensitivityType")
-          (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type"
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:sensitivity-type
-          (gobject:symbol-for-gtype "GtkSensitivityType")))
+          (glib:symbol-for-gtype "GtkSensitivityType")))
   ;; Check the names
   (is (equal '("GTK_SENSITIVITY_AUTO" "GTK_SENSITIVITY_ON"
                "GTK_SENSITIVITY_OFF")
@@ -34,7 +35,7 @@
                              (:AUTO 0)
                              (:ON 1)
                              (:OFF 2))
-             (get-g-type-definition "GtkSensitivityType"))))
+             (gobject:get-g-type-definition "GtkSensitivityType"))))
 
 ;;;     GtkComboBox
 
@@ -43,7 +44,7 @@
   (is (g:type-is-object "GtkComboBox"))
   ;; Check the registered name
   (is (eq 'gtk:combo-box
-          (gobject:symbol-for-gtype "GtkComboBox")))
+          (glib:symbol-for-gtype "GtkComboBox")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkComboBox")
           (g:gtype (cffi:foreign-funcall "gtk_combo_box_get_type" :size))))
@@ -108,7 +109,7 @@
                          "popup-fixed-width" "gboolean" T T)
                         (POPUP-SHOWN GTK-COMBO-BOX-POPUP-SHOWN "popup-shown"
                          "gboolean" T NIL)))
-             (get-g-type-definition "GtkComboBox"))))
+             (gobject:get-g-type-definition "GtkComboBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -147,4 +148,4 @@
 ;;;     gtk_combo_box_get_row_separator_func
 ;;;     gtk_combo_box_set_row_separator_func
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

@@ -12,7 +12,7 @@
   (is (g:type-is-object "GtkCheckButton"))
   ;; Check the registered name
   (is (eq 'gtk:check-button
-          (gobject:symbol-for-gtype "GtkCheckButton")))
+          (glib:symbol-for-gtype "GtkCheckButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCheckButton")
           (g:gtype (cffi:foreign-funcall "gtk_check_button_get_type" :size))))
@@ -110,4 +110,4 @@
     (is (string= "_label" (gtk:check-button-label button)))
     (is-true (gtk:check-button-use-underline button))))
 
-;;; --- 2023-4-15 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

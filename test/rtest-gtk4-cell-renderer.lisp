@@ -12,7 +12,7 @@
   (is (g:type-is-flags "GtkCellRendererState"))
   ;; Check the registered name
   (is (eq 'gtk:cell-renderer-state
-          (gobject:symbol-for-gtype "GtkCellRendererState")))
+          (glib:symbol-for-gtype "GtkCellRendererState")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCellRendererState")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_state_get_type"
@@ -43,7 +43,7 @@
                               (:FOCUSED 16)
                               (:EXPANDABLE 32)
                               (:EXPANDED 64))
-             (get-g-type-definition "GtkCellRendererState"))))
+             (gobject:get-g-type-definition "GtkCellRendererState"))))
 
 ;;;     GtkCellRendererMode
 
@@ -56,7 +56,7 @@
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:cell-renderer-mode
-          (gobject:symbol-for-gtype "GtkCellRendererMode")))
+          (glib:symbol-for-gtype "GtkCellRendererMode")))
   ;; Check the names
   (is (equal '("GTK_CELL_RENDERER_MODE_INERT"
                "GTK_CELL_RENDERER_MODE_ACTIVATABLE"
@@ -77,7 +77,7 @@
                              (:INERT 0)
                              (:ACTIVATABLE 1)
                              (:EDITABLE 2))
-             (get-g-type-definition "GtkCellRendererMode"))))
+             (gobject:get-g-type-definition "GtkCellRendererMode"))))
 
 ;;;     GtkCellRenderer
 
@@ -86,7 +86,7 @@
   (is (g:type-is-object "GtkCellRenderer"))
   ;; Check the registered name
   (is (eq 'gtk:cell-renderer
-          (gobject:symbol-for-gtype "GtkCellRenderer")))
+          (glib:symbol-for-gtype "GtkCellRenderer")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCellRenderer")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_get_type" :size))))
@@ -139,7 +139,7 @@
                         (XPAD GTK-CELL-RENDERER-XPAD "xpad" "guint" T T)
                         (YALIGN GTK-CELL-RENDERER-YALIGN "yalign" "gfloat" T T)
                         (YPAD GTK-CELL-RENDERER-YPAD "ypad" "guint" T T)))
-             (get-g-type-definition "GtkCellRenderer"))))
+             (gobject:get-g-type-definition "GtkCellRenderer"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -235,4 +235,4 @@
 ;;;     gtk_cell_renderer_get_preferred_width_for_height
 ;;;     gtk_cell_renderer_get_request_mode
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

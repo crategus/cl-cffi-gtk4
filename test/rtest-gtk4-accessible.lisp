@@ -12,7 +12,7 @@
   (is (g:type-is-interface "GtkAccessible"))
   ;; Check the registered name
   (is (eq 'gtk:accessible
-          (gobject:symbol-for-gtype "GtkAccessible")))
+          (glib:symbol-for-gtype "GtkAccessible")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessible")
           (g:gtype (cffi:foreign-funcall "gtk_accessible_get_type" :size))))
@@ -39,7 +39,7 @@
 
 (test accessible-properties.2
   (let ((children (remove nil
-                          (mapcar #'gobject:symbol-for-gtype
+                          (mapcar #'glib:symbol-for-gtype
                                   (mapcar #'g:type-name
                                           (g:type-children "GtkWidget"))))))
      (is (equal '(:BUTTON :CHECKBOX :COMBO-BOX :GRID :GRID-CELL :GROUP :IMG
@@ -67,4 +67,4 @@
 ;;;     gtk_accessible_relation_init_value
 ;;;     gtk_accessible_state_init_value
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------

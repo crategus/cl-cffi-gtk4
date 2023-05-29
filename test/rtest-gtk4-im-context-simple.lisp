@@ -14,7 +14,7 @@
   (is (g:type-is-object "GtkIMContextSimple"))
   ;; Check the registered name
   (is (eq 'gtk:im-context-simple
-          (gobject:symbol-for-gtype "GtkIMContextSimple")))
+          (glib:symbol-for-gtype "GtkIMContextSimple")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkIMContextSimple")
           (g:gtype (cffi:foreign-funcall "gtk_im_context_simple_get_type" :size))))
@@ -37,7 +37,7 @@
   (is (equal '(DEFINE-G-OBJECT-CLASS "GtkIMContextSimple" GTK-I-M-CONTEXT-SIMPLE
                        (:SUPERCLASS GTK-I-M-CONTEXT :EXPORT T :INTERFACES NIL)
                        NIL)
-             (get-g-type-definition "GtkIMContextSimple"))))
+             (gobject:get-g-type-definition "GtkIMContextSimple"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -52,4 +52,4 @@
 ;;;     gtk_im_context_simple_add_table
 ;;;     gtk_im_context_simple_add_compose_file
 
-;;; --- 2023-3-18 --------------------------------------------------------------
+;;; --- 2023-5-29 --------------------------------------------------------------
