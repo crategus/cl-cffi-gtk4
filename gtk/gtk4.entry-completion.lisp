@@ -102,7 +102,7 @@
 ;;; GtkEntryCompletion
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkEntryCompletion" entry-completion
+(gobject:define-g-object-class "GtkEntryCompletion" entry-completion
   (:superclass g:object
    :export t
    :interfaces("GtkBuildable"
@@ -571,7 +571,7 @@ lambda (widget)    :run-last
 ;;; GtkEntryCompletionMatchFunc ()
 ;;; ----------------------------------------------------------------------------
 
-(define-cb-methods entry-completion-match-func :boolean
+(gobject:define-cb-methods entry-completion-match-func :boolean
   ((completion (g:object entry-completion))
    (key :string)
    (iter (g:boxed tree-iter))))

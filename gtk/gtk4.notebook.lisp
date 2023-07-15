@@ -154,7 +154,7 @@
 ;;; enum GtkNotebookTab
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkNotebookTab" notebook-tab
+(gobject:define-g-enum "GtkNotebookTab" notebook-tab
   (:export t
    :type-initializer "gtk_notebook_tab_get_type")
   (:tab-first 0)
@@ -170,7 +170,7 @@
     signal.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkNotebookTab\" notebook-tab
+(gobject:define-g-enum \"GtkNotebookTab\" notebook-tab
   (:export t
    :type-initializer \"gtk_notebook_tab_get_type\")
   (:tab-first 0)
@@ -186,7 +186,7 @@
 ;;; GtkNotebookPage
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkNotebookPage" notebook-page
+(gobject:define-g-object-class "GtkNotebookPage" notebook-page
   (:superclass g:object
    :export t
    :interfaces ()
@@ -511,7 +511,7 @@
 ;;; GtkNotebook
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkNotebook" notebook
+(gobject:define-g-object-class "GtkNotebook" notebook
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

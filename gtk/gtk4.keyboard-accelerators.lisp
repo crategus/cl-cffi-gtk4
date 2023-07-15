@@ -58,7 +58,7 @@
 ;;; gtk_accelerator_valid ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accelerator_valid" accelerator-valid) :boolean
+(cffi:defcfun ("gtk_accelerator_valid" accelerator-valid) :boolean
  #+liber-documentation
  "@version{#2022-11-13}
   @argument[keyval]{an unsigned integer with a GDK keyval}
@@ -121,7 +121,7 @@
   @end{dictionary}
   @see-symbol{gdk:modifier-type}
   @see-function{gdk-keyval-from-name}"
-  (with-foreign-objects ((key :uint) (mask 'gdk:modifier-type))
+  (cffi:with-foreign-objects ((key :uint) (mask 'gdk:modifier-type))
     (cffi:foreign-funcall "gtk_accelerator_parse"
                           :string accelerator
                           (:pointer :uint) key
@@ -136,7 +136,7 @@
 ;;; gtk_accelerator_name ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accelerator_name" accelerator-name) :string
+(cffi:defcfun ("gtk_accelerator_name" accelerator-name) :string
  #+liber-documentation
  "@version{#2022-11-13}
   @argument[key]{an unsigned integer with the accelerator keyval}
@@ -167,7 +167,7 @@
 ;;; gtk_accelerator_get_label () -> accelerator-label
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accelerator_get_label" accelerator-label) :string
+(cffi:defcfun ("gtk_accelerator_get_label" accelerator-label) :string
  #+liber-documentation
  "@version{#2022-11-13}
   @argument[key]{an unsigned integer with the accelerator keyval}
@@ -300,8 +300,8 @@
 ;;; gtk_accelerator_get_default_mod_mask ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accelerator_get_default_mod_mask"
-           accelerator-default-mod-mask) gdk:modifier-type
+(cffi:defcfun ("gtk_accelerator_get_default_mod_mask"
+               accelerator-default-mod-mask) gdk:modifier-type
  #+liber-documentation
  "@version{#2022-11-13}
   @return{A @symbol{gdk:modifier-type} accelerator modifier mask.}

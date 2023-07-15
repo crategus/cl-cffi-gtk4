@@ -88,7 +88,7 @@
 ;;; GtkFontChooserLevel
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkFontChooserLevel" font-chooser-level
+(gobject:define-g-flags "GtkFontChooserLevel" font-chooser-level
   (:export t
    :type-initializer "gtk_font_chooser_level_get_type")
   (:family 0)
@@ -110,7 +110,7 @@
   These flags may be extended in the future. Applications should ignore
   unknown values.
   @begin{pre}
-(define-g-flags \"GtkFontChooserLevel\" font-chooser-level
+(gobject:define-g-flags \"GtkFontChooserLevel\" font-chooser-level
   (:export t
    :type-initializer \"gtk_font_chooser_level_get_type\")
   (:family 0)
@@ -132,7 +132,7 @@
 ;;; GtkFontChooser
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkFontChooser" font-chooser
+(gobject:define-g-interface "GtkFontChooser" font-chooser
   (:export t
    :type-initializer "gtk_font_chooser_get_type")
   ((font
@@ -422,7 +422,7 @@ lambda (fontchooser fontname)    :run-first
 ;;; gtk_font_chooser_get_font_family () -> font-chooser-font-family
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_font_chooser_get_font_family" font-chooser-font-family)
+(cffi:defcfun ("gtk_font_chooser_get_font_family" font-chooser-font-family)
     (g:object pango:font-family)
  #+liber-documentation
  "@version{#2021-2-11}
@@ -456,7 +456,7 @@ lambda (fontchooser fontname)    :run-first
 ;;; gtk_font_chooser_get_font_face () -> font-chooser-font-face
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_font_chooser_get_font_face" font-chooser-font-face)
+(cffi:defcfun ("gtk_font_chooser_get_font_face" font-chooser-font-face)
     (g:object pango:font-face)
  #+liber-documentation
  "@version{#2021-2-11}
@@ -480,7 +480,7 @@ lambda (fontchooser fontname)    :run-first
 ;;; gtk_font_chooser_get_font_size () -> font-chooser-font-size
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_font_chooser_get_font_size" font-chooser-font-size) :int
+(cffi:defcfun ("gtk_font_chooser_get_font_size" font-chooser-font-size) :int
  #+liber-documentation
  "@version{#2021-2-11}
   @argument[fontchooser]{a @class{gtk:font-chooser} object}
@@ -500,11 +500,11 @@ lambda (fontchooser fontname)    :run-first
 ;;; GtkFontFilterFunc ()
 ;;; ----------------------------------------------------------------------------
 
-(defcallback font-filter-func :boolean
+(cffi:defcallback font-filter-func :boolean
     ((family (g:object pango:font-family))
      (face (g:object pango:font-face))
      (data :pointer))
-  (funcall (get-stable-pointer-value data) family face))
+  (funcall (glib:get-stable-pointer-value data) family face))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'font-filter-func)
@@ -535,7 +535,7 @@ lambda (fontchooser fontname)    :run-first
 ;;; gtk_font_chooser_set_filter_func ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_font_chooser_set_filter_func" %font-chooser-set-filter-func)
+(cffi:defcfun ("gtk_font_chooser_set_filter_func" %font-chooser-set-filter-func)
     :void
   (fontchooser (g:object font-chooser))
   (filter :pointer)
@@ -595,7 +595,7 @@ lambda (fontchooser fontname)    :run-first
                         :void)
   fontmap)
 
-(defcfun ("gtk_font_chooser_get_font_map" font-chooser-font-map)
+(cffi:defcfun ("gtk_font_chooser_get_font_map" font-chooser-font-map)
     (g:object pango:font-map)
  #+liber-documentation
  "@version{#2021-1-20}

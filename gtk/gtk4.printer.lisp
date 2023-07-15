@@ -492,7 +492,7 @@
 ;;; gtk_printer_get_description ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_get_description" printer-description) :string
+(cffi:defcfun ("gtk_printer_get_description" printer-description) :string
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer]{a @class{gtk:printer} object}
@@ -507,7 +507,7 @@
 ;;; gtk_printer_is_active ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_is_active" printer-is-active) :boolean
+(cffi:defcfun ("gtk_printer_is_active" printer-is-active) :boolean
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer]{a @class{gtk:printer} object}
@@ -524,7 +524,7 @@
 ;;; gtk_printer_is_paused ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_is_paused" printer-is-paused) :boolean
+(cffi:defcfun ("gtk_printer_is_paused" printer-is-paused) :boolean
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer]{a @class{gtk:printer} object}
@@ -542,7 +542,7 @@
 ;;; gtk_printer_is_accepting_jobs ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_is_accepting_jobs" printer-is-accepting-jobs)
+(cffi:defcfun ("gtk_printer_is_accepting_jobs" printer-is-accepting-jobs)
     :boolean
  #+liber-documentation
  "@version{#2021-12-25}
@@ -558,7 +558,7 @@
 ;;; gtk_printer_is_default ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_is_default" printer-is-default) :boolean
+(cffi:defcfun ("gtk_printer_is_default" printer-is-default) :boolean
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer]{a @class{gtk:printer} object}
@@ -585,7 +585,7 @@
 ;;; gtk_printer_list_papers ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_list_papers" printer-list-papers)
+(cffi:defcfun ("gtk_printer_list_papers" printer-list-papers)
     (g:list-t (g:object page-setup))
  #+liber-documentation
  "@version{#2021-12-25}
@@ -609,7 +609,7 @@
 ;;; gtk_printer_compare ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_compare" printer-compare) :int
+(cffi:defcfun ("gtk_printer_compare" printer-compare) :int
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer1]{a @class{gtk:printer} object}
@@ -629,7 +629,7 @@
 ;;; gtk_printer_has_details ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_has_details" printer-has-details) :boolean
+(cffi:defcfun ("gtk_printer_has_details" printer-has-details) :boolean
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer]{a @class{gtk:printer} object}
@@ -645,7 +645,7 @@
 ;;; gtk_printer_request_details ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_request_details" printer-request-details) :void
+(cffi:defcfun ("gtk_printer_request_details" printer-request-details) :void
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer]{a @class{gtk:printer} object}
@@ -664,7 +664,7 @@
 ;;; gtk_printer_get_capabilities ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_get_capabilities" printer-capabilities)
+(cffi:defcfun ("gtk_printer_get_capabilities" printer-capabilities)
     print-capabilities
  #+liber-documentation
  "@version{#2021-12-25}
@@ -693,7 +693,7 @@
 ;;; gtk_printer_get_default_page_size ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_get_default_page_size" printer-default-page-size)
+(cffi:defcfun ("gtk_printer_get_default_page_size" printer-default-page-size)
     (g:object page-setup)
  #+liber-documentation
  "@version{#2021-12-25}
@@ -711,7 +711,7 @@
 ;;; gtk_printer_get_hard_margins ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_printer_get_hard_margins" %printer-hard-margins) :boolean
+(cffi:defcfun ("gtk_printer_get_hard_margins" %printer-hard-margins) :boolean
   (printer (g:object printer))
   (top (:pointer :double))
   (bottom (:pointer :double))
@@ -740,10 +740,10 @@
   @see-class{gtk:printer}
   @see-function{gtk:printer-has-details}
   @see-function{gtk:printer-request-details}"
-  (with-foreign-objects ((top :double)
-                         (bottom :double)
-                         (left :double)
-                         (right :double))
+  (cffi:with-foreign-objects ((top :double)
+                              (bottom :double)
+                              (left :double)
+                              (right :double))
     (when (%printer-hard-margins printer top bottom left right)
       (values (cffi:mem-ref top :double)
               (cffi:mem-ref bottom :double)
@@ -756,8 +756,8 @@
 ;;; gtk_printer_get_hard_margins_for_paper_size ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_get_hard_margins_for_paper_size"
-          %printer-hard-margins-for-paper-size) :boolean
+(cffi:defcfun ("gtk_print_get_hard_margins_for_paper_size"
+               %printer-hard-margins-for-paper-size) :boolean
   (printer (g:object printer))
   (size (g:boxed paper-size))
   (top (:pointer :double))
@@ -789,10 +789,10 @@
   @see-class{gtk:printer}
   @see-function{gtk:printer-has-details}
   @see-function{gtk:printer-request-details}"
-  (with-foreign-objects ((top :double)
-                         (bottom :double)
-                         (left :double)
-                         (right :double))
+  (cffi:with-foreign-objects ((top :double)
+                              (bottom :double)
+                              (left :double)
+                              (right :double))
     (when (%printer-hard-margins-for-paper-size printer
                                                 size
                                                 top
@@ -810,10 +810,10 @@
 ;;; GtkPrinterFunc ()
 ;;; ----------------------------------------------------------------------------
 
-(defcallback printer-func :boolean
+(cffi:defcallback printer-func :boolean
     ((printer (g:object printer))
      (data :pointer))
-  (funcall (get-stable-pointer-value data) printer))
+  (funcall (glib:get-stable-pointer-value data) printer))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'printer-func)
@@ -839,7 +839,7 @@
 ;;; gtk_enumerate_printers ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_enumerate_printers" %enumerate-printers) :void
+(cffi:defcfun ("gtk_enumerate_printers" %enumerate-printers) :void
   (func :pointer)
   (data :pointer)
   (destroy :pointer)

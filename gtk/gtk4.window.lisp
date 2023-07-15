@@ -1051,7 +1051,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-startup-id)
       "Accessor"
       (documentation 'window-startup-id 'function)
- "@version{#2022-7-13}
+ "@version{#2023-6-10}
   @syntax[]{(setf (gtk:window-startup-id object) id)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[id]{a string with the startup ID}
@@ -1065,7 +1065,7 @@ lambda (window)    :run-first
   Startup notification identifiers are used by the desktop environment to track
   application startup, to provide user feedback and other features. This
   function changes the corresponding property on the underlying
-  @class{gdk-window} object. Normally, startup identifier is managed
+  @class{gdk:window} object. Normally, startup identifier is managed
   automatically and you should only use this function in special cases like
   transferring focus from other processes. You should use this function before
   calling the @fun{gtk:window-present} function or any equivalent function
@@ -1073,7 +1073,7 @@ lambda (window)    :run-first
 
   This function is only useful on X11, not with other GTK targets.
   @see-class{gtk:window}
-  @see-class{gdk-window}
+  @see-class{gdk:window}
   @see-function{gtk:window-present}")
 
 ;;; --- window-title -----------------------------------------------------------
@@ -1444,13 +1444,16 @@ lambda (window)    :run-first
 
 (defcfun ("gtk_window_present" window-present) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-6-10}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Presents a window to the user.
   @end{short}
-  This function should not be used as when it is called, it is too late to
-  gather a valid timestamp to allow focus stealing prevention to work correctly.
+  This may mean raising the window in the stacking order, unminimizing it,
+  moving it to the current desktop and/or giving it the keyboard focus, possibly
+  dependent on the user’s platform, window manager and preferences.
+
+  If the window is hidden, this function also makes it visible.
   @see-class{gtk:window}
   @see-function{gtk:window-present-with-time}"
   (window (g:object window)))
@@ -1463,33 +1466,25 @@ lambda (window)    :run-first
 
 (defcfun ("gtk_window_present_with_time" window-present-with-time) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-6-10}
   @argument[window]{a @class{gtk:window} widget}
   @argument[timestamp]{an unsigned integer with the timestamp of the user
     interaction, typically a button or key press event, which triggered this
     call}
   @begin{short}
-    Presents a window to the user in response to a user interaction.
+    Presents a window to the user in response to an user interaction.
   @end{short}
   This may mean raising the window in the stacking order, unminimizing it,
   moving it to the current desktop, and/or giving it the keyboard focus,
   possibly dependent on the platform of the user, window manager, and
   preferences.
 
-  If the window is hidden, this function calls the @fun{gtk:widget-show}
-  function as well.
+  If the window is hidden, this function also makes it visible.
 
-  This function should be used when the user tries to open a window that is
-  already open. Say for example the preferences dialog is currently open, and
-  the user chooses Preferences from the menu a second time. Use the
-  @fun{gtk:window-present} function to move the already-open dialog where the
-  user can see it.
-
-  Presents a window to the user in response to a user interaction. The timestamp
-  should be gathered when the window was requested to be shown, when clicking a
-  link for example, rather than once the window is ready to be shown.
+  The timestamp should be gathered when the window was requested to be shown,
+  when clicking a link for example, rather than once the window is ready to be
+  shown.
   @see-class{gtk:window}
-  @see-function{gtk:window-show}
   @see-function{gtk:window-present}"
   (window (g:object window))
   (timestamp :uint32))

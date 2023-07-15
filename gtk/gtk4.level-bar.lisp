@@ -118,7 +118,7 @@
 ;;; enum GtkLevelBarMode
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkLevelBarMode" level-bar-mode
+(gobject:define-g-enum "GtkLevelBarMode" level-bar-mode
   (:export t
    :type-initializer "gtk_level_bar_mode_get_type")
   (:continuous 0)
@@ -135,7 +135,7 @@
   Note that this enumeration could be extended with additional modes in the
   future.
   @begin{pre}
-(define-g-enum \"GtkLevelBarMode\" level-bar-mode
+(gobject:define-g-enum \"GtkLevelBarMode\" level-bar-mode
   (:export t
    :type-initializer \"gtk_level_bar_mode_get_type\")
   (:continuous 0)
@@ -151,7 +151,7 @@
 ;;; struct GtkLevelBar
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkLevelBar" level-bar
+(gobject:define-g-object-class "GtkLevelBar" level-bar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -560,7 +560,7 @@ lambda (levelbar name)    :detailed
     bar, returning @code{nil} in case an offset named @arg{name} was not found.
   @end{short}
   @see-class{gtk:level-bar}"
-  (with-foreign-object (value :double)
+  (cffi:with-foreign-object (value :double)
     (when (%level-bar-offset-value levelbar name value)
       (cffi:mem-ref value :double))))
 

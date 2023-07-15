@@ -64,7 +64,7 @@
 ;;; GtkActionable
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkActionable" actionable
+(gobject:define-g-interface "GtkActionable" actionable
   (:export t
    :type-initializer "gtk_actionable_get_type")
   ((action-name
@@ -247,8 +247,8 @@
 ;;; gtk_actionable_set_detailed_action_name
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_actionable_set_detailed_action_name"
-           actionable-set-detailed-action-name) :void
+(cffi:defcfun ("gtk_actionable_set_detailed_action_name"
+               actionable-set-detailed-action-name) :void
  #+liber-documentation
  "@version{2023-3-19}
   @argument[actionable]{a @class{gtk:actionable} widget}

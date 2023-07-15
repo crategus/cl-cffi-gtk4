@@ -162,7 +162,7 @@
 ;;; enum GtkIconViewDropPosition
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkIconViewDropPosition" icon-view-drop-position
+(gobject:define-g-enum "GtkIconViewDropPosition" icon-view-drop-position
   (:export t
    :type-initializer "gtk_icon_view_drop_position_get_type")
   (:no-drop 0)
@@ -179,7 +179,7 @@
  "@version{#2020-12-2}
   @short{An enumeration for determining where a dropped item goes.}
   @begin{pre}
-(define-g-enum \"GtkIconViewDropPosition\" icon-view-drop-position
+(gobject:define-g-enum \"GtkIconViewDropPosition\" icon-view-drop-position
   (:export t
    :type-initializer \"gtk_icon_view_drop_position_get_type\")
   (:no-drop 0)
@@ -203,7 +203,7 @@
 ;;; struct GtkIconView
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkIconView" icon-view
+(gobject:define-g-object-class "GtkIconView" icon-view
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -1024,7 +1024,7 @@ lambda (view)    :action
 ;;; gtk_icon_view_get_path_at_pos () -> icon-view-path-at-pos
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_path_at_pos" icon-view-path-at-pos)
+(cffi:defcfun ("gtk_icon_view_get_path_at_pos" icon-view-path-at-pos)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{#2021-3-9}
@@ -1056,7 +1056,7 @@ lambda (view)    :action
 ;;; gtk_icon_view_get_item_at_pos () -> icon-view-item-at-pos
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_item_at_pos" %icon-view-item-at-pos) :boolean
+(cffi:defcfun ("gtk_icon_view_get_item_at_pos" %icon-view-item-at-pos) :boolean
   (view (g:object icon-view))
   (x :int)
   (y :int)
@@ -1084,7 +1084,7 @@ lambda (view)    :action
   @see-class{gtk:icon-view}
   @see-function{gtk:icon-view-path-at-pos}
   @see-function{gtk:icon-view-convert-widget-to-bin-window-coords}"
-  (with-foreign-objects ((path :pointer) (cell :pointer))
+  (cffi:with-foreign-objects ((path :pointer) (cell :pointer))
     (when (%icon-view-item-at-pos view x y path cell)
       (values (cffi:mem-ref path '(g:boxed tree-path :return))
               (cffi:mem-ref cell 'g:object)))))
@@ -1095,7 +1095,7 @@ lambda (view)    :action
 ;;; gtk_icon_view_set_cursor ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_set_cursor" icon-view-set-cursor) :void
+(cffi:defcfun ("gtk_icon_view_set_cursor" icon-view-set-cursor) :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1130,7 +1130,7 @@ lambda (view)    :action
 ;;; gtk_icon_view_get_cursor ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_cursor" %icon-view-get-cursor) :boolean
+(cffi:defcfun ("gtk_icon_view_get_cursor" %icon-view-get-cursor) :boolean
   (view (g:object icon-view))
   (path :pointer)
   (cell :pointer))
@@ -1154,7 +1154,7 @@ lambda (view)    :action
   @see-class{gtk:tree-path}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:icon-view-set-cursor}"
-  (with-foreign-objects ((path :pointer) (cell :pointer))
+  (cffi:with-foreign-objects ((path :pointer) (cell :pointer))
     (when (%icon-view-get-cursor view path cell)
       (values (cffi:mem-ref path '(g:boxed tree-path :return))
               (cffi:mem-ref cell 'g:object)))))
@@ -1165,11 +1165,11 @@ lambda (view)    :action
 ;;; GtkIconViewForeachFunc ()
 ;;; ----------------------------------------------------------------------------
 
-(defcallback icon-view-foreach-func :void
+(cffi:defcallback icon-view-foreach-func :void
     ((view (g:object icon-view))
      (path (g:boxed tree-path))
      (data :pointer))
-  (let ((fn (get-stable-pointer-value data)))
+  (let ((fn (glib:get-stable-pointer-value data)))
     (restart-case
       (funcall fn view path)
       (return () nil))))
@@ -1201,7 +1201,7 @@ lambda (view path)
 ;;; gtk_icon_view_selected_foreach ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_selected_foreach" %icon-view-selected-foreach)
+(cffi:defcfun ("gtk_icon_view_selected_foreach" %icon-view-selected-foreach)
     :void
   (view (g:object icon-view))
   (func :pointer)
@@ -1218,7 +1218,7 @@ lambda (view path)
   Note that the model or selection cannot be modified from within this function.
   @see-class{gtk:icon-view}
   @see-symbol{gtk:icon-view-foreach-func}"
-  (with-stable-pointer (ptr func)
+  (glib:with-stable-pointer (ptr func)
     (%icon-view-selected-foreach view
                                  (cffi:callback icon-view-foreach-func)
                                  ptr)))
@@ -1229,7 +1229,7 @@ lambda (view path)
 ;;; gtk_icon_view_get_cell_rect () -> icon-view-cell-rect
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_cell_rect" %icon-view-cell-rect) :boolean
+(cffi:defcfun ("gtk_icon_view_get_cell_rect" %icon-view-cell-rect) :boolean
   (view (g:object icon-view))
   (path (g:boxed tree-path))
   (cell (g:object cell-renderer))
@@ -1263,7 +1263,7 @@ lambda (view path)
 ;;; gtk_icon_view_select_path ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_select_path" icon-view-select-path) :void
+(cffi:defcfun ("gtk_icon_view_select_path" icon-view-select-path) :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1280,7 +1280,7 @@ lambda (view path)
 ;;; gtk_icon_view_unselect_path ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_unselect_path" icon-view-unselect-path) :void
+(cffi:defcfun ("gtk_icon_view_unselect_path" icon-view-unselect-path) :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1297,7 +1297,7 @@ lambda (view path)
 ;;; gtk_icon_view_path_is_selected ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_path_is_selected" icon-view-path-is-selected)
+(cffi:defcfun ("gtk_icon_view_path_is_selected" icon-view-path-is-selected)
     :boolean
  #+liber-documentation
  "@version{#2021-3-9}
@@ -1320,7 +1320,7 @@ lambda (view path)
 ;;; gtk_icon_view_get_selected_items () -> icon-view-selected-items
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_selected_items" icon-view-selected-items)
+(cffi:defcfun ("gtk_icon_view_get_selected_items" icon-view-selected-items)
     (g:list-t (g:boxed tree-path :return))
  #+liber-documentation
  "@version{#2023-1-28}
@@ -1346,7 +1346,7 @@ lambda (view path)
 ;;; gtk_icon_view_select_all ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_select_all" icon-view-select-all) :void
+(cffi:defcfun ("gtk_icon_view_select_all" icon-view-select-all) :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1365,7 +1365,7 @@ lambda (view path)
 ;;; gtk_icon_view_unselect_all ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_unselect_all" icon-view-unselect-all) :void
+(cffi:defcfun ("gtk_icon_view_unselect_all" icon-view-unselect-all) :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1379,7 +1379,7 @@ lambda (view path)
 ;;; gtk_icon_view_item_activated ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_item_activated" icon-view-item-activated) :void
+(cffi:defcfun ("gtk_icon_view_item_activated" icon-view-item-activated) :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1398,7 +1398,7 @@ lambda (view path)
 ;;; gtk_icon_view_scroll_to_path ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_scroll_to_path" %icon-view-scroll-to-path) :void
+(cffi:defcfun ("gtk_icon_view_scroll_to_path" %icon-view-scroll-to-path) :void
   (view (g:object icon-view))
   (path (g:boxed tree-path))
   (use-align :boolean)
@@ -1448,7 +1448,8 @@ lambda (view path)
 ;;; gtk_icon_view_get_visible_range () -> icon-view-visible-range
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_visible_range" %icon-view-visible-range) :boolean
+(cffi:defcfun ("gtk_icon_view_get_visible_range" %icon-view-visible-range) 
+    :boolean
   (view (g:object icon-view))
   (start :pointer)
   (end :pointer))
@@ -1470,7 +1471,7 @@ lambda (view path)
   @arg{end}. Note that there may be invisible paths in between.
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}"
-  (with-foreign-objects ((start :pointer) (end :pointer))
+  (cffi:with-foreign-objects ((start :pointer) (end :pointer))
     (when (%icon-view-visible-range view start end)
       (values (cffi:mem-ref start '(g:boxed tree-path :return))
               (cffi:mem-ref end '(g:boxed tree-path :return))))))
@@ -1481,7 +1482,8 @@ lambda (view path)
 ;;; gtk_icon_view_set_tooltip_item ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_set_tooltip_item" icon-view-set-tooltip-item) :void
+(cffi:defcfun ("gtk_icon_view_set_tooltip_item" icon-view-set-tooltip-item) 
+    :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1506,7 +1508,8 @@ lambda (view path)
 ;;; gtk_icon_view_set_tooltip_cell ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_set_tooltip_cell" icon-view-set-tooltip-cell) :void
+(cffi:defcfun ("gtk_icon_view_set_tooltip_cell" icon-view-set-tooltip-cell) 
+    :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1535,7 +1538,7 @@ lambda (view path)
 ;;; gtk_icon_view_get_tooltip_context () -> icon-view-tooltip-context
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_tooltip_context" %icon-view-tooltip-context)
+(cffi:defcfun ("gtk_icon_view_get_tooltip_context" %icon-view-tooltip-context)
     :boolean
   (view (g:object icon-view))
   (x (:pointer :int))
@@ -1578,10 +1581,10 @@ lambda (view path)
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-iter}"
-  (with-foreign-objects ((xx :int)
-                         (yy :int)
-                         (model :pointer)
-                         (path :pointer))
+  (cffi:with-foreign-objects ((xx :int)
+                              (yy :int)
+                              (model :pointer)
+                              (path :pointer))
     (setf (cffi:mem-ref xx :int) x
           (cffi:mem-ref yy :int) y)
     (let ((iter (make-tree-iter)))
@@ -1604,7 +1607,7 @@ lambda (view path)
 ;;; gtk_icon_view_get_item_row () -> icon-view-item-row
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_item_row" icon-view-item-row) :int
+(cffi:defcfun ("gtk_icon_view_get_item_row" icon-view-item-row) :int
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1625,7 +1628,7 @@ lambda (view path)
 ;;; gtk_icon_view_get_item_column () -> icon-view-item-column
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_view_get_item_column" icon-view-item-column) :int
+(cffi:defcfun ("gtk_icon_view_get_item_column" icon-view-item-column) :int
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1649,8 +1652,8 @@ lambda (view path)
 ;; TODO: New implementation needed.
 
 #+nil
-(defcfun ("gtk_icon_view_enable_model_drag_source"
-          %icon-view-enable-model-drag-source) :void
+(cffi:defcfun ("gtk_icon_view_enable_model_drag_source"
+               %icon-view-enable-model-drag-source) :void
   (view (g:object icon-view))
   (start-button-mask gdk:modifier-type)
   (targets :pointer)
@@ -1676,14 +1679,14 @@ lambda (view path)
   @see-symbol{gdk:modifier-type}
   @see-symbol{gdk-drag-action}"
   (let ((n-targets (length targets)))
-    (with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
+    (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
       (loop for i from 0 below n-targets
             for target-ptr = (cffi:mem-aptr targets-ptr
                                             '(:struct %target-entry) i)
             for entry in targets
-            do (with-foreign-slots ((target flags info)
-                                    target-ptr
-                                    (:struct %target-entry))
+            do (cffi:with-foreign-slots ((target flags info)
+                                         target-ptr
+                                         (:struct %target-entry))
                  (setf target (first entry))
                  (setf flags (second entry))
                  (setf info (third entry))))
@@ -1703,8 +1706,8 @@ lambda (view path)
 ;; TODO: New implementation needed.
 
 #+nil
-(defcfun ("gtk_icon_view_enable_model_drag_dest"
-          %icon-view-enable-model-drag-dest) :void
+(cffi:defcfun ("gtk_icon_view_enable_model_drag_dest"
+               %icon-view-enable-model-drag-dest) :void
   (view (g:object icon-view))
   (targets :pointer)
   (n-targets :int)
@@ -1726,14 +1729,14 @@ lambda (view path)
   @see-class{gtk:icon-view}
   @see-symbol{gdk-drag-action}"
   (let ((n-targets (length targets)))
-    (with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
+    (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
       (loop for i from 0 below n-targets
             for target-ptr = (cffi:mem-aptr targets-ptr
                                             '(:struct %target-entry) i)
             for entry in targets
-            do (with-foreign-slots ((target flags info)
-                                    target-ptr
-                                    (:struct %target-entry))
+            do (cffi:with-foreign-slots ((target flags info)
+                                         target-ptr
+                                         (:struct %target-entry))
                  (setf target (first entry))
                  (setf flags (second entry))
                  (setf info (third entry))))
@@ -1750,8 +1753,8 @@ lambda (view path)
 ;;; ----------------------------------------------------------------------------
 
 #+nil
-(defcfun ("gtk_icon_view_unset_model_drag_source"
-           icon-view-unset-model-drag-source) :void
+(cffi:defcfun ("gtk_icon_view_unset_model_drag_source"
+               icon-view-unset-model-drag-source) :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1773,8 +1776,8 @@ lambda (view path)
 ;;; ----------------------------------------------------------------------------
 
 #+nil
-(defcfun ("gtk_icon_view_unset_model_drag_dest"
-           icon-view-unset-model-drag-dest) :void
+(cffi:defcfun ("gtk_icon_view_unset_model_drag_dest"
+               icon-view-unset-model-drag-dest) :void
  #+liber-documentation
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
@@ -1796,7 +1799,7 @@ lambda (view path)
 ;;; ----------------------------------------------------------------------------
 
 #+nil
-(defcfun ("gtk_icon_view_set_drag_dest_item" icon-view-set-drag-dest-item)
+(cffi:defcfun ("gtk_icon_view_set_drag_dest_item" icon-view-set-drag-dest-item)
     :void
  #+liber-documentation
  "@version{#2021-3-9}
@@ -1823,7 +1826,7 @@ lambda (view path)
 ;;; ----------------------------------------------------------------------------
 
 #+nil
-(defcfun ("gtk_icon_view_get_drag_dest_item" %icon-view-get-drag-dest-item)
+(cffi:defcfun ("gtk_icon_view_get_drag_dest_item" %icon-view-get-drag-dest-item)
     :void
   (view (g:object icon-view))
   (path :pointer)
@@ -1847,7 +1850,7 @@ lambda (view path)
   @see-class{gtk:tree-path}
   @see-symbol{gtk:icon-view-drop-position}
   @see-function{gtk:icon-view-set-drag-dest-item}"
-  (with-foreign-objects ((path :pointer) (pos :pointer))
+  (cffi:with-foreign-objects ((path :pointer) (pos :pointer))
     (%icon-view-get-drag-dest-item view path pos)
     (values (cffi:mem-ref path '(g:boxed tree-path :return))
             (cffi:mem-ref pos 'icon-view-drop-position))))
@@ -1860,8 +1863,8 @@ lambda (view path)
 ;;; ----------------------------------------------------------------------------
 
 #+nil
-(defcfun ("gtk_icon_view_get_dest_item_at_pos"
-          %icon-view-dest-item-at-pos) :boolean
+(cffi:defcfun ("gtk_icon_view_get_dest_item_at_pos"
+               %icon-view-dest-item-at-pos) :boolean
   (view (g:object icon-view))
   (drag-x :int)
   (drag-y :int)
@@ -1887,7 +1890,7 @@ lambda (view path)
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-symbol{gtk:icon-view-drop-position}"
-  (with-foreign-objects ((path :pointer) (pos :pointer))
+  (cffi:with-foreign-objects ((path :pointer) (pos :pointer))
     (when (%icon-view-dest-item-at-pos view drag-x drag-y path pos)
       (values (cffi:mem-ref path '(g:boxed tree-path :return))
               (cffi:mem-ref pos 'icon-view-drop-position)))))
@@ -1900,7 +1903,7 @@ lambda (view path)
 ;;; ----------------------------------------------------------------------------
 
 #+nil
-(defcfun ("gtk_icon_view_create_drag_icon" icon-view-create-drag-icon)
+(cffi:defcfun ("gtk_icon_view_create_drag_icon" icon-view-create-drag-icon)
     (:pointer (:struct cairo:surface-t))
  #+liber-documentation
  "@version{#2021-3-9}

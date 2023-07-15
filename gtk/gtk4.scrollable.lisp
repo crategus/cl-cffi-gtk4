@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.scrollable.lisp
+;;; gtk4.scrollable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2022 Dieter Kaiser
+;;; Copyright (C) 2012 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -69,7 +69,7 @@
 ;;; enum GtkScrollablePolicy
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkScrollablePolicy" scrollable-policy
+(gobject:define-g-enum "GtkScrollablePolicy" scrollable-policy
   (:export t
    :type-initializer "gtk_scrollable_policy_get_type")
   (:minimum 0)
@@ -85,7 +85,7 @@
     scrolled window adjustments in a given orientation.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkScrollablePolicy\" scrollable-policy
+(gobject:define-g-enum \"GtkScrollablePolicy\" scrollable-policy
   (:export t
    :type-initializer \"gtk_scrollable_policy_get_type\")
   (:minimum 0)
@@ -101,7 +101,7 @@
 ;;; GtkScrollable
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkScrollable" scrollable
+(gobject:define-g-interface "GtkScrollable" scrollable
   (:export t
    :type-initializer "gtk_scrollable_get_type")
   ((hadjustment
@@ -323,4 +323,4 @@
 
 (export 'scrollable-border)
 
-;;; --- End of file gtk.scrollable.lisp ----------------------------------------
+;;; --- End of file gtk4.scrollable.lisp ---------------------------------------

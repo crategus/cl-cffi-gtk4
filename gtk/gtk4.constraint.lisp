@@ -84,7 +84,7 @@
 ;;; GtkConstraintTarget
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkConstraintTarget" constraint-target
+(gobject:define-g-interface "GtkConstraintTarget" constraint-target
   (:export t
    :type-initializer "gtk_constraint_target_get_type")
   nil)
@@ -108,7 +108,7 @@
 ;;; GtkConstraint
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkConstraint" constraint
+(gobject:define-g-object-class "GtkConstraint" constraint
   (:superclass g:object
    :export t
    :interfaces ()

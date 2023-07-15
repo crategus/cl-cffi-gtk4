@@ -249,8 +249,8 @@
 ;;; gtk_file_filter_new_from_gvariant ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_filter_new_from_gvariant" file-filter-new-from-gvariant)
-    (g:object file-filter)
+(cffi:defcfun ("gtk_file_filter_new_from_gvariant" 
+               file-filter-new-from-gvariant) (g:object file-filter)
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[variant]{a @type{g:variant} instance of @code{a{sv@}} type}
@@ -270,7 +270,7 @@
 ;;; gtk_file_filter_add_mime_type ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_filter_add_mime_type" file-filter-add-mime-type) :void
+(cffi:defcfun ("gtk_file_filter_add_mime_type" file-filter-add-mime-type) :void
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[filter]{a @class{gtk:file-filter} object}
@@ -286,7 +286,7 @@
 ;;; gtk_file_filter_add_pattern ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_filter_add_pattern" file-filter-add-pattern) :void
+(cffi:defcfun ("gtk_file_filter_add_pattern" file-filter-add-pattern) :void
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[filter]{a @class{gtk:file-filter} object}
@@ -302,8 +302,8 @@
 ;;; gtk_file_filter_add_pixbuf_formats ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_filter_add_pixbuf_formats" file-filter-add-pixbuf-formats)
-    :void
+(cffi:defcfun ("gtk_file_filter_add_pixbuf_formats" 
+               file-filter-add-pixbuf-formats) :void
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[filter]{a @class{gtk:file-filter} object}
@@ -325,7 +325,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
-(defcfun ("gtk_file_filter_add_suffix" file-filter-add-suffix) :void
+(cffi:defcfun ("gtk_file_filter_add_suffix" file-filter-add-suffix) :void
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[filter]{a @class{gtk:file-filter} object}
@@ -348,7 +348,7 @@
 ;;; gtk_file_filter_get_attributes ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_filter_get_attributes" file-filter-attributes)
+(cffi:defcfun ("gtk_file_filter_get_attributes" file-filter-attributes)
     (g:strv-t :free-from-foreign nil)
  #+liber-documentation
  "@version{#2023-5-5}
@@ -372,7 +372,7 @@
 ;;; gtk_file_filter_to_gvariant ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_filter_to_gvariant" file-filter-to-gvariant)
+(cffi:defcfun ("gtk_file_filter_to_gvariant" file-filter-to-gvariant)
     (:pointer (:struct g:variant))
  #+liber-documentation
  "@version{#2023-5-5}

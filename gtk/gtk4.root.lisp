@@ -53,7 +53,7 @@
 ;;; GtkRoot
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkRoot" root
+(gobject:define-g-interface "GtkRoot" root
   (:export t
    :type-initializer "gtk_root_get_type")
   nil)

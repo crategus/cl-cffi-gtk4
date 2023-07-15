@@ -107,7 +107,7 @@
 ;;; enum GtkBuilderError                                   not exported
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkBuilderError" builder-error
+(gobject:define-g-enum "GtkBuilderError" builder-error
   (:export t
    :type-initializer "gtk_builder_error_get_type")
   (:invalid-type-function 0)
@@ -136,7 +136,7 @@
     @class{gtk:builder} UI definition.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkBuilderError\" builder-error
+(gobject:define-g-enum \"GtkBuilderError\" builder-error
   (:export t
    :type-initializer \"gtk_builder_error_get_type\")
   (:invalid-type-function 0)
@@ -206,7 +206,7 @@
 ;;; GtkBuilder
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkBuilder" builder
+(gobject:define-g-object-class "GtkBuilder" builder
   (:superclass g:object
    :export t
    :interfaces nil
@@ -680,7 +680,7 @@
   @see-function{gtk:builder-new-from-file}
   @see-function{gtk:builder-add-from-resource}
   @see-function{gtk:builder-add-from-string}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%builder-add-from-file builder (namestring path) err)))
 
 (export 'builder-add-from-file)
@@ -716,7 +716,7 @@
   @see-function{gtk:builder-new-from-resource}
   @see-function{gtk:builder-add-from-file}
   @see-function{gtk:builder-add-from-string}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%builder-add-from-resource builder path err)))
 
 (export 'builder-add-from-resource)
@@ -751,7 +751,7 @@
   @see-function{gtk:builder-new-from-string}
   @see-function{gtk:builder-add-from-file}
   @see-function{gtk:builder-add-from-resource}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%builder-add-from-string builder string -1 err)))
 
 (export 'builder-add-from-string)
@@ -810,7 +810,7 @@
   @see-function{gtk:builder-add-objects-from-string}
   @see-function{gtk:builder-add-objects-from-resource}"
   (with-foreign-string-array (strptr args)
-    (with-g-error (err)
+    (glib:with-g-error (err)
       (%builder-add-objects-from-file builder (namestring path) strptr err))))
 
 (export 'builder-add-objects-from-file)
@@ -848,7 +848,7 @@
   @see-function{gtk:builder-add-objects-from-file}
   @see-function{gtk:builder-add-objects-from-string}"
   (with-foreign-string-array (strptr args)
-    (with-g-error (err)
+    (glib:with-g-error (err)
       (%builder-add-objects-from-resource builder path strptr err))))
 
 (export 'builder-add-objects-from-resource)
@@ -886,7 +886,7 @@
   @see-function{gtk:builder-add-objects-from-file}
   @see-function{gtk:builder-add-objects-from-resource}"
   (with-foreign-string-array (strptr args)
-    (with-g-error (err)
+    (glib:with-g-error (err)
       (%builder-add-objects-from-string builder string -1 strptr err))))
 
 (export 'builder-add-objects-from-string)

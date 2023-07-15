@@ -80,7 +80,7 @@
 ;;; GtkAccessible
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkAccessible" accessible
+(gobject:define-g-interface "GtkAccessible" accessible
   (:export t
    :type-initializer "gtk_accessible_get_type")
   ((accessible-role
@@ -220,7 +220,7 @@
 ;;; gtk_accessible_reset_state
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accessible_reset_state" accessible-reset-state) :void
+(cffi:defcfun ("gtk_accessible_reset_state" accessible-reset-state) :void
  "@version{#2022-1-4}
   @argument[accessible]{a @class{gtk:accessible} widget}
   @argument[state]{a @symbol{gtk:accessible-state} value}
@@ -269,8 +269,8 @@
 ;;; gtk_accessible_update_property_value
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accessible_update_property_value"
-          %accessible-update-property-value) :void
+(cffi:defcfun ("gtk_accessible_update_property_value"
+               %accessible-update-property-value) :void
   (accessible (g:object accessible))
   (n-properties :int)
   (properties (:pointer accessible-property))
@@ -293,19 +293,19 @@
   @see-symbol{gtk:accessible-property}
   @see-symbol{g:value}"
   (let ((n (length values)))
-    (with-foreign-objects ((value-ar '(:struct g:value) n)
-                           (prop-ar 'accessible-property n))
+    (cffi:with-foreign-objects ((value-ar '(:struct g:value) n)
+                                (prop-ar 'accessible-property n))
       (loop for i from 0 below n
             for value in values
             for property in properties
-         do (with-foreign-object (gvalue '(:struct g:value))
+         do (cffi:with-foreign-object (gvalue '(:struct g:value))
               (setf (cffi:mem-aref prop-ar 'accessible-property i) property)
               (g:value-init gvalue)
               (accessible-property-init-value property gvalue)
-              (set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
-                           value
-                           (gobject:value-type gvalue)
-                           :zero-g-value t)))
+              (gobject:set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
+                                   value
+                                   (gobject:value-type gvalue)
+                                   :zero-gvalue t)))
       (%accessible-update-property-value accessible n prop-ar value-ar)
       (loop for i from 0 below n
          do (gobject:value-unset (cffi:mem-aptr value-ar
@@ -317,7 +317,7 @@
 ;;; gtk_accessible_reset_property
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accessible_reset_property" accessible-reset-property) :void
+(cffi:defcfun ("gtk_accessible_reset_property" accessible-reset-property) :void
  #+liber-documentation
  "@version{#2022-1-4}
   @argument[accessible]{a @class{gtk:accessible} widget}
@@ -396,7 +396,7 @@
 ;;; gtk_accessible_reset_relation
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accessible_reset_relation" accessible-reset-relation) :void
+(cffi:defcfun ("gtk_accessible_reset_relation" accessible-reset-relation) :void
  #+liber-documentation
  "@version{#2022-1-4}
   @argument[accessible]{a @class{gtk:accessible} widget}
@@ -415,8 +415,8 @@
 ;;; gtk_accessible_property_init_value
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accessible_property_init_value" accessible-property-init-value)
-    :void
+(cffi:defcfun ("gtk_accessible_property_init_value" 
+               accessible-property-init-value) :void
  #+liber-documentation
  "@version{#2022-1-4}
   @argument[property]{a @symbol{gtk:accessible-property} value}
@@ -437,8 +437,8 @@
 ;;; gtk_accessible_relation_init_value
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accessible_relation_init_value" accessible-relation-init-value)
-    :void
+(cffi:defcfun ("gtk_accessible_relation_init_value" 
+               accessible-relation-init-value) :void
  #+liber-documentation
  "@version{#2022-1-4}
   @argument[relation]{a @symbol{gtk:accessible-relation} value}
@@ -459,7 +459,8 @@
 ;;; gtk_accessible_state_init_value
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_accessible_state_init_value" accessible-state-init-value) :void
+(cffi:defcfun ("gtk_accessible_state_init_value" accessible-state-init-value) 
+    :void
  #+liber-documentation
  "@version{#2022-1-4}
   @argument[state]{a @symbol{gtk:accessible-state} value}

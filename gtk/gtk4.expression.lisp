@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.expression.lisp
+;;; gtk4.expression.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -92,7 +92,7 @@
 ;; FIXME : GtkExpression is not derived from GObject. It is a new fundamental
 ;; type.
 
-(define-g-object-class "GtkExpression" expression
+(gobject:define-g-object-class "GtkExpression" expression
   (:superclass g-object
    :export t
    :interfaces nil
@@ -105,7 +105,7 @@
 ;;; A GParamSpec for properties holding a GtkExpression.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkParamSpecExpression" param-spec-expression
+(gobject:define-g-object-class "GtkParamSpecExpression" param-spec-expression
   (:superclass expression
    :export t
    :interfaces nil
@@ -121,7 +121,7 @@
 ;;; provided API.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque expression-watch "GtkExpressionWatch"
+(glib:define-g-boxed-opaque expression-watch "GtkExpressionWatch"
   :alloc (error "GtkExpressionWatch cannot be created from the Lisp side."))
 
 (export 'expression-watch)
@@ -751,4 +751,4 @@
 ;;;[transfer full]
 
 
-;;; --- End of file gtk.expression.lisp ----------------------------------------
+;;; --- End of file gtk4.expression.lisp ---------------------------------------

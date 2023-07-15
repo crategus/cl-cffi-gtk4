@@ -102,7 +102,7 @@
 ;;; struct GtkPopover
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPopover" popover
+(gobject:define-g-object-class "GtkPopover" popover
   (:superclass widget
     :export t
     :interfaces ("GtkAccessible"
@@ -500,7 +500,7 @@ lambda (popover)    :run-last
 ;;; gtk_popover_popup ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_popover_popup" popover-popup) :void
+(cffi:defcfun ("gtk_popover_popup" popover-popup) :void
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[popover]{a @class{gtk:popover} widget}
@@ -520,7 +520,7 @@ lambda (popover)    :run-last
 ;;; gtk_popover_popdown ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_popover_popdown" popover-popdown) :void
+(cffi:defcfun ("gtk_popover_popdown" popover-popdown) :void
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[popover]{a @class{gtk:popover} widget}
@@ -540,7 +540,7 @@ lambda (popover)    :run-last
 ;;; gtk_popover_present ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_popover_present" popover-present) :void
+(cffi:defcfun ("gtk_popover_present" popover-present) :void
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[popover]{a @class{gtk:popover} widget}
@@ -566,7 +566,7 @@ lambda (popover)    :run-last
                           :void)
     (values x-offset y-offset)))
 
-(defcfun ("gtk_popover_get_offset" %popover-get-offset) :void
+(cffi:defcfun ("gtk_popover_get_offset" %popover-get-offset) :void
   (popover (g:object popover))
   (x-offset (:pointer :int))
   (y-offset (:pointer :int)))
@@ -590,7 +590,7 @@ lambda (popover)    :run-last
   positioning the popover.
   @see-class{gtk:popover}
   @see-class{gtk:popover-layout}"
-  (with-foreign-objects ((x-offset :int) (y-offset :int))
+  (cffi:with-foreign-objects ((x-offset :int) (y-offset :int))
     (%popover-get-offset popover x-offset y-offset)
     (values (cffi:mem-ref x-offset :int)
             (cffi:mem-ref y-offset :int))))

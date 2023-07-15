@@ -212,7 +212,7 @@
 ;;; GtkTextWindowType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkTextWindowType" text-window-type
+(gobject:define-g-enum "GtkTextWindowType" text-window-type
   (:export t
    :type-initializer "gtk_text_window_type_get_type")
   (:private 0)
@@ -232,7 +232,7 @@
     Used to reference the parts of the @class{gtk:text-view} widget.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkTextWindowType\" text-window-type
+(gobject:define-g-enum \"GtkTextWindowType\" text-window-type
   (:export t
    :type-initializer \"gtk_text_window_type_get_type\")
   (:private 0)
@@ -258,7 +258,7 @@
 ;;; GtkTextExtendSelection
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkTextExtendSelection" text-extend-selection
+(gobject:define-g-enum "GtkTextExtendSelection" text-extend-selection
   (:export t
    :type-initializer "gtk_text_extend_selection_get_type")
   (:word 0)
@@ -274,7 +274,7 @@
   @end{short}
   Use the \"extend-selection\" signal to customize the selection.
   @begin{pre}
-(define-g-enum \"GtkTextExtendSelection\" text-extend-selection
+(gobject:define-g-enum \"GtkTextExtendSelection\" text-extend-selection
   (:export t
    :type-initializer \"gtk_text_extend_selection_get_type\")
   (:word 0)
@@ -292,7 +292,7 @@
 ;;; GtkTextChildAnchor
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkTextChildAnchor" text-child-anchor
+(gobject:define-g-object-class "GtkTextChildAnchor" text-child-anchor
   (:superclass g:object
     :export t
     :interfaces nil
@@ -323,7 +323,7 @@
 ;;; GtkTextView
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkTextView" text-view
+(gobject:define-g-object-class "GtkTextView" text-view
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -1353,7 +1353,7 @@ lambda (view)    :action
 ;;; gtk_text_view_scroll_to_mark
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_scroll_to_mark" %text-view-scroll-to-mark) :void
+(cffi:defcfun ("gtk_text_view_scroll_to_mark" %text-view-scroll-to-mark) :void
   (view (g:object text-view))
   (mark (g:object text-mark))
   (margin :double)
@@ -1362,8 +1362,8 @@ lambda (view)    :action
   (yalign :double))
 
 (defun text-view-scroll-to-mark (view mark &key (margin 0.4)
-                                                    (xalign 0.0 xalign-p)
-                                                    (yalign 0.0 yalign-p))
+                                                (xalign 0.0 xalign-p)
+                                                (yalign 0.0 yalign-p))
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -1402,7 +1402,7 @@ lambda (view)    :action
 ;;; gtk_text_view_scroll_to_iter
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_scroll_to_iter" %text-view-scroll-to-iter) :void
+(cffi:defcfun ("gtk_text_view_scroll_to_iter" %text-view-scroll-to-iter) :void
   (view (g:object text-view))
   (iter (g:boxed text-iter))
   (margin :double)
@@ -1411,8 +1411,8 @@ lambda (view)    :action
   (yalign :double))
 
 (defun text-view-scroll-to-iter (view iter &key (margin 0.4)
-                                                    (xalign 0.0 xalign-p)
-                                                    (yalign 0.0 yalign-p))
+                                                (xalign 0.0 xalign-p)
+                                                (yalign 0.0 yalign-p))
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -1460,8 +1460,8 @@ lambda (view)    :action
 ;;; gtk_text_view_scroll_mark_onscreen
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_scroll_mark_onscreen"
-          text-view-scroll-mark-onscreen) :void
+(cffi:defcfun ("gtk_text_view_scroll_mark_onscreen"
+               text-view-scroll-mark-onscreen) :void
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -1482,8 +1482,8 @@ lambda (view)    :action
 ;;; gtk_text_view_move_mark_onscreen
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_move_mark_onscreen"
-          text-view-move-mark-onscreen) :boolean
+(cffi:defcfun ("gtk_text_view_move_mark_onscreen"
+               text-view-move-mark-onscreen) :boolean
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -1504,8 +1504,8 @@ lambda (view)    :action
 ;;; gtk_text_view_place_cursor_onscreen
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_place_cursor_onscreen"
-          text-view-place-cursor-onscreen) :boolean
+(cffi:defcfun ("gtk_text_view_place_cursor_onscreen"
+                text-view-place-cursor-onscreen) :boolean
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -1523,8 +1523,7 @@ lambda (view)    :action
 ;;; gtk_text_view_get_visible_rect -> text-view-visible-rect
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_get_visible_rect" %text-view-visible-rect)
-    :void
+(cffi:defcfun ("gtk_text_view_get_visible_rect" %text-view-visible-rect) :void
   (view (g:object text-view))
   (visible-rect (g:boxed gdk:rectangle)))
 
@@ -1551,7 +1550,7 @@ lambda (view)    :action
 ;;; gtk_text_view_get_iter_location -> text-view-iter-location
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_get_iter_location" %text-view-iter-location) :void
+(cffi:defcfun ("gtk_text_view_get_iter_location" %text-view-iter-location) :void
   (view (g:object text-view))
   (iter (g:boxed text-iter))
   (location (g:boxed gdk:rectangle)))
@@ -1586,7 +1585,7 @@ lambda (view)    :action
 ;;; gtk_text_view_get_cursor_locations -> text-view-cursor-locations
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_get_cursor_locations" %text-view-cursor-locations)
+(cffi:defcfun ("gtk_text_view_get_cursor_locations" %text-view-cursor-locations)
     :void
   (view (g:object text-view))
   (iter (g:boxed text-iter))
@@ -1638,7 +1637,7 @@ lambda (view)    :action
 ;;; gtk_text_view_get_line_at_y -> text-view-line-at-y
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_get_line_at_y" %text-view-line-at-y) :void
+(cffi:defcfun ("gtk_text_view_get_line_at_y" %text-view-line-at-y) :void
   (view (g:object text-view))
   (iter (g:boxed text-iter))
   (y :int)
@@ -1665,7 +1664,7 @@ lambda (view)    :action
   @see-class{gtk:text-iter}
   @see-function{gtk:text-view-window-to-buffer-coords}"
   (let ((iter (make-instance 'text-iter)))
-    (with-foreign-object (line :int)
+    (cffi:with-foreign-object (line :int)
       (%text-view-line-at-y view iter y line)
       (values iter (cffi:mem-ref line :int)))))
 
@@ -1675,7 +1674,7 @@ lambda (view)    :action
 ;;; gtk_text_view_get_line_yrange -> text-view-line-yrange
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_get_line_yrange" %text-view-line-yrange) :void
+(cffi:defcfun ("gtk_text_view_get_line_yrange" %text-view-line-yrange) :void
   (view (g:object text-view))
   (iter (g:boxed text-iter))
   (y (:pointer :int))
@@ -1699,7 +1698,7 @@ lambda (view)    :action
   @see-class{gtk:text-view}
   @see-class{gtk:text-iter}
   @see-function{gtk:text-view-buffer-to-window-coords}"
-  (with-foreign-objects ((y :int) (height :int))
+  (cffi:with-foreign-objects ((y :int) (height :int))
     (%text-view-line-yrange view iter y height)
     (values (cffi:mem-ref y :int)
             (cffi:mem-ref height :int))))
@@ -1710,7 +1709,7 @@ lambda (view)    :action
 ;;; gtk_text_view_get_iter_at_location -> text-view-iter-at-location
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_get_iter_at_location" %text-view-iter-at-location)
+(cffi:defcfun ("gtk_text_view_get_iter_at_location" %text-view-iter-at-location)
     :void
   (view (g:object text-view))
   (iter (g:boxed text-iter))
@@ -1746,7 +1745,7 @@ lambda (view)    :action
 ;;; gtk_text_view_get_iter_at_position -> text-view-iter-at-positon
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_get_iter_at_position" %text-view-iter-at-position)
+(cffi:defcfun ("gtk_text_view_get_iter_at_position" %text-view-iter-at-position)
     :void
   (view (g:object text-view))
   (iter (g:boxed text-iter))
@@ -1781,7 +1780,7 @@ lambda (view)    :action
   @see-class{gtk:text-iter}
   @see-function{gtk:text-view-window-to-buffer-coords}
   @see-function{gtk:text-view-iter-at-location}"
-  (with-foreign-object (trailing :int)
+  (cffi:with-foreign-object (trailing :int)
     (let ((iter (make-instance 'text-iter)))
       (%text-view-iter-at-position view iter trailing x y)
       (values iter (cffi:mem-ref trailing :int)))))
@@ -1792,8 +1791,8 @@ lambda (view)    :action
 ;;; gtk_text_view_buffer_to_window_coords
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_buffer_to_window_coords"
-          %text-view-buffer-to-window-coords) :void
+(cffi:defcfun ("gtk_text_view_buffer_to_window_coords"
+               %text-view-buffer-to-window-coords) :void
   (view (g:object text-view))
   (wtype text-window-type)
   (xbuffer :int)
@@ -1824,7 +1823,7 @@ lambda (view)    :action
   @see-class{gtk:text-view}
   @see-symbol{gtk:text-window-type}
   @see-function{gtk:text-view-border-window-size}"
-  (with-foreign-objects ((xwindow :int) (ywindow :int))
+  (cffi:with-foreign-objects ((xwindow :int) (ywindow :int))
     (%text-view-buffer-to-window-coords view
                                         wtype
                                         xbuffer ybuffer
@@ -1838,8 +1837,8 @@ lambda (view)    :action
 ;;; gtk_text_view_window_to_buffer_coords
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_window_to_buffer_coords"
-          %text-view-window-to-buffer-coords) :void
+(cffi:defcfun ("gtk_text_view_window_to_buffer_coords"
+               %text-view-window-to-buffer-coords) :void
   (view (g:object text-view))
   (wtype text-window-type)
   (xwindow :int)
@@ -1870,11 +1869,11 @@ lambda (view)    :action
   @see-class{gtk:text-view}
   @see-symbol{gtk:text-view-window-type}
   @see-function{gtk:text-view-border-window-size}"
-  (with-foreign-objects ((xbuffer :int) (ybuffer :int))
+  (cffi:with-foreign-objects ((xbuffer :int) (ybuffer :int))
     (%text-view-window-to-buffer-coords view
-                                            wtype
-                                            xwindow ywindow
-                                            xbuffer ybuffer)
+                                        wtype
+                                        xwindow ywindow
+                                        xbuffer ybuffer)
     (values (cffi:mem-ref xbuffer :int)
             (cffi:mem-ref ybuffer :int))))
 
@@ -1885,7 +1884,7 @@ lambda (view)    :action
 ;;; ----------------------------------------------------------------------------
 
 (defun text-view-move-display-line (view iter &key (direction :forward)
-                                                       (start-or-end nil))
+                                                   (start-or-end nil))
  #+liber-documentation
  "@version{#2021-10-21}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -1935,8 +1934,8 @@ lambda (view)    :action
 ;;; gtk_text_view_forward_display_line                     not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_forward_display_line"
-          text-view-forward-display-line) :boolean
+(cffi:defcfun ("gtk_text_view_forward_display_line"
+               text-view-forward-display-line) :boolean
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -1960,8 +1959,8 @@ lambda (view)    :action
 ;;; gtk_text_view_backward_display_line                    not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_backward_display_line"
-          text-view-backward-display-line) :boolean
+(cffi:defcfun ("gtk_text_view_backward_display_line"
+               text-view-backward-display-line) :boolean
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -1985,8 +1984,8 @@ lambda (view)    :action
 ;;; gtk_text_view_forward_display_line_end                 not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_forward_display_line_end"
-          text-view-forward-display-line-end) :boolean
+(cffi:defcfun ("gtk_text_view_forward_display_line_end"
+               text-view-forward-display-line-end) :boolean
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -2010,8 +2009,8 @@ lambda (view)    :action
 ;;; gtk_text_view_backward_display_line_start              not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_backward_display_line_start"
-          text-view-backward-display-line-start) :boolean
+(cffi:defcfun ("gtk_text_view_backward_display_line_start"
+               text-view-backward-display-line-start) :boolean
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -2035,8 +2034,8 @@ lambda (view)    :action
 ;;; gtk_text_view_starts_display_line
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_starts_display_line"
-           text-view-starts-display-line) :boolean
+(cffi:defcfun ("gtk_text_view_starts_display_line"
+               text-view-starts-display-line) :boolean
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -2059,7 +2058,7 @@ lambda (view)    :action
 ;;; gtk_text_view_move_visually
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_move_visually" text-view-move-visually) :boolean
+(cffi:defcfun ("gtk_text_view_move_visually" text-view-move-visually) :boolean
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -2091,8 +2090,8 @@ lambda (view)    :action
 ;;; gtk_text_view_add_child_at_anchor
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_add_child_at_anchor" text-view-add-child-at-anchor)
-    :void
+(cffi:defcfun ("gtk_text_view_add_child_at_anchor" 
+               text-view-add-child-at-anchor) :void
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -2156,7 +2155,7 @@ lambda (view)    :action
 ;;; gtk_text_child_anchor_get_widgets -> text-child-anchor-widgets
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_child_anchor_get_widgets" text-child-anchor-widgets)
+(cffi:defcfun ("gtk_text_child_anchor_get_widgets" text-child-anchor-widgets)
     (g:list-t (g:object widget))
  #+liber-documentation
  "@version{#2021-10-16}
@@ -2175,7 +2174,7 @@ lambda (view)    :action
 ;;; gtk_text_child_anchor_get_deleted -> text-view-anchor-deleted
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_child_anchor_get_deleted" text-child-anchor-deleted)
+(cffi:defcfun ("gtk_text_child_anchor_get_deleted" text-child-anchor-deleted)
     :boolean
  #+liber-documentation
  "@version{#2021-10-16}
@@ -2297,7 +2296,7 @@ lambda (view)    :action
 ;;; gtk_text_view_reset_cursor_blink
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_reset_cursor_blink" text-view-reset-cursor-blink)
+(cffi:defcfun ("gtk_text_view_reset_cursor_blink" text-view-reset-cursor-blink)
     :void
  #+liber-documentation
  "@version{#2021-10-16}
@@ -2322,8 +2321,8 @@ lambda (view)    :action
 ;; TODO: GdkEvent is missing at this time. Implement GdkEvent.
 
 #+nil
-(defcfun ("gtk_text_view_im_context_filter_keypress"
-           text-view-im-context-filter-keypress) :boolean
+(cffi:defcfun ("gtk_text_view_im_context_filter_keypress"
+               text-view-im-context-filter-keypress) :boolean
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}
@@ -2371,7 +2370,8 @@ lambda (view)    :action
 ;;; gtk_text_view_reset_im_context
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_view_reset_im_context" text-view-reset-im-context) :void
+(cffi:defcfun ("gtk_text_view_reset_im_context" text-view-reset-im-context) 
+    :void
  #+liber-documentation
  "@version{#2021-10-16}
   @argument[view]{a @class{gtk:text-view} widget}

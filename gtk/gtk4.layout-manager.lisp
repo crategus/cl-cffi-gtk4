@@ -63,7 +63,7 @@
 ;;; GtkLayoutManager
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkLayoutManager" layout-manager
+(gobject:define-g-object-class "GtkLayoutManager" layout-manager
   (:superclass g:object
    :export t
    :interfaces ()
@@ -130,7 +130,7 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; gtk_layout_manager_measure ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_layout_manager_measure" %layout-manager-measure) :void
+(cffi:defcfun ("gtk_layout_manager_measure" %layout-manager-measure) :void
   (manager (g:object layout-manager))
   (widget (g:object widget))
   (orientation orientation)
@@ -171,10 +171,10 @@ create_layout_child (GtkLayoutManager *manager,
   @see-class{gtk:layout-manager}
   @see-class{gtk:widget}
   @see-symbol{gtk:orientation}"
-  (with-foreign-objects ((minimum :int)
-                         (natural :int)
-                         (minimum-baseline :int)
-                         (natural-baseline :int))
+  (cffi:with-foreign-objects ((minimum :int)
+                              (natural :int)
+                              (minimum-baseline :int)
+                              (natural-baseline :int))
     (%layout-manager-measure manager
                              widget
                              orientation
@@ -194,7 +194,7 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; gtk_layout_manager_allocate ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_layout_manager_allocate" layout-manager-allocate) :void
+(cffi:defcfun ("gtk_layout_manager_allocate" layout-manager-allocate) :void
  #+liber-documentation
  "@version{#2023-4-16}
   @argument[manager]{a @class{gtk:layout-manager} object}
@@ -221,8 +221,8 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; gtk_layout_manager_get_request_mode ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_layout_manager_get_request_mode" layout-manager-request-mode)
-    size-request-mode
+(cffi:defcfun ("gtk_layout_manager_get_request_mode" 
+               layout-manager-request-mode) size-request-mode
  #+liber-documentation
  "@version{#2023-4-16}
   @argument[manager]{a @class{gtk:layout-manager} object}
@@ -238,7 +238,7 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; gtk_layout_manager_get_widget ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_layout_manager_get_widget" layout-manager-widget)
+(cffi:defcfun ("gtk_layout_manager_get_widget" layout-manager-widget)
     (g:object widget)
  #+liber-documentation
  "@version{#2023-4-16}
@@ -257,8 +257,8 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; gtk_layout_manager_get_layout_child ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_layout_manager_get_layout_child" layout-manager-layout-child)
-    (g:object layout-child)
+(cffi:defcfun ("gtk_layout_manager_get_layout_child" 
+               layout-manager-layout-child) (g:object layout-child)
  #+liber-documentation
  "@version{#2023-4-16}
   @argument[manager]{a @class{gtk:layout-manager} object}
@@ -284,8 +284,8 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; gtk_layout_manager_layout_changed ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_layout_manager_layout_changed" layout-manager-layout-changed)
-    :void
+(cffi:defcfun ("gtk_layout_manager_layout_changed" 
+               layout-manager-layout-changed) :void
  #+liber-documentation
  "@version{#2023-4-16}
   @argument[manager]{a @class{gtk:layout-manager} object}

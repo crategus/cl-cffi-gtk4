@@ -92,7 +92,7 @@
 ;;; enum GtkFileChooserAction
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkFileChooserAction" file-chooser-action
+(gobject:define-g-enum "GtkFileChooserAction" file-chooser-action
   (:export t
    :type-initializer "gtk_file_chooser_action_get_type")
   (:open 0)
@@ -109,7 +109,7 @@
     open existing files or to save to a possibly new file.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkFileChooserAction\" gtk:file-chooser-action
+(gobject:define-g-enum \"GtkFileChooserAction\" gtk:file-chooser-action
   (:export t
    :type-initializer \"gtk_file_chooser_action_get_type\")
   (:open 0)
@@ -158,7 +158,7 @@
 ;;; GtkFileChooser
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkFileChooser" file-chooser
+(gobject:define-g-interface "GtkFileChooser" file-chooser
   (:export t
    :type-initializer "gtk_file_chooser_get_type")
   ((action
@@ -574,7 +574,7 @@
 ;; gtk:file-chooser-current-folder-file function
 
 (defun (setf file-chooser-file) (file chooser)
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (cffi:foreign-funcall "gtk_file_chooser_set_file"
                           (g:object file-chooser) chooser
                           (g:object g:file) file
@@ -637,7 +637,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf file-chooser-namestring) (namestring chooser)
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (cffi:foreign-funcall "gtk_file_chooser_set_file"
                           (g:object file-chooser) chooser
                           g:file-as-namestring namestring
@@ -790,7 +790,7 @@
   \"/usr/share/mydrawprogram/Clipart\" folder to the volume list.
   @see-class{gtk:file-chooser}
   @see-function{gtk:file-chooser-remove-shortcut-folder}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%file-chooser-add-shortcut-folder chooser folder err)))
 
 (export 'file-chooser-add-shortcut-folder)
@@ -819,7 +819,7 @@
   See also the @fun{gtk:file-chooser-add-shortcut-folder} function.
   @see-class{gtk:file-chooser}
   @see-function{gtk:file-chooser-add-shortcut-folder}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%file-chooser-remove-shortcut-folder chooser folder err)))
 
 (export 'file-chooser-remove-shortcut-folder)

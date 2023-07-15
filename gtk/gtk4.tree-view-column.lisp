@@ -143,7 +143,7 @@
 ;;; GtkTreeViewColumnSizing
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkTreeViewColumnSizing" tree-view-column-sizing
+(gobject:define-g-enum "GtkTreeViewColumnSizing" tree-view-column-sizing
   (:export t
    :type-initializer "gtk_tree_view_column_sizing_get_type")
   (:grow-only 0)
@@ -161,7 +161,7 @@
   Please note that the value @code{:autosize} is inefficient for large tree
   views, and can make tree view columns appear choppy.
   @begin{pre}
-(define-g-enum \"GtkTreeViewColumnSizing\" tree-view-column-sizing
+(gobject:define-g-enum \"GtkTreeViewColumnSizing\" tree-view-column-sizing
   (:export t
    :type-initializer \"gtk_tree_view_column_sizing_get_type\")
   (:grow-only 0)
@@ -184,7 +184,7 @@
 
 ;; TODO: Implement the GtkCellLayout interface
 
-(define-g-object-class "GtkTreeViewColumn" tree-view-column
+(gobject:define-g-object-class "GtkTreeViewColumn" tree-view-column
   (:superclass g:initially-unowned
    :export t
    :interfaces ("GtkBuildable"
@@ -975,7 +975,7 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_pack_start
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_pack_start" %tree-view-column-pack-start)
+(cffi:defcfun ("gtk_tree_view_column_pack_start" %tree-view-column-pack-start)
     :void
   (column (g:object tree-view-column))
   (renderer (g:object cell-renderer))
@@ -1005,7 +1005,7 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_pack_end
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_pack_end" %tree-view-column-pack-end) :void
+(cffi:defcfun ("gtk_tree_view_column_pack_end" %tree-view-column-pack-end) :void
   (column (g:object tree-view-column))
   (renderer (g:object cell-renderer))
   (expand :boolean))
@@ -1034,7 +1034,7 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_clear
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_clear" tree-view-column-clear) :void
+(cffi:defcfun ("gtk_tree_view_column_clear" tree-view-column-clear) :void
  #+liber-documentation
  "@version{#2021-2-24}
   @argument[column]{a @class{gtk:tree-view-column} object}
@@ -1050,8 +1050,8 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_add_attribute
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_add_attribute"
-           tree-view-column-add-attribute) :void
+(cffi:defcfun ("gtk_tree_view_column_add_attribute"
+               tree-view-column-add-attribute) :void
  #+liber-documentation
  "@version{#2021-2-24}
   @argument[column]{a @class{gtk:tree-view-column} object}
@@ -1107,13 +1107,13 @@ lambda (column)    :run-last
 ;;; GtkTreeCellDataFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback tree-cell-data-func :void
+(cffi:defcallback tree-cell-data-func :void
     ((column (g:object tree-view-column))
      (renderer (g:object cell-renderer))
      (model (g:object tree-model))
      (iter (g:boxed tree-iter))
      (data :pointer))
-  (let ((func (get-stable-pointer-value data)))
+  (let ((func (glib:get-stable-pointer-value data)))
     (restart-case
       (funcall func column renderer model iter)
       (return-from-tree-cell-data-func () nil))))
@@ -1150,8 +1150,8 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_set_cell_data_func
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_set_cell_data_func"
-          %tree-view-column-set-cell-data-func) :void
+(cffi:defcfun ("gtk_tree_view_column_set_cell_data_func"
+               %tree-view-column-set-cell-data-func) :void
   (column (g:object tree-view-column))
   (renderer (g:object cell-renderer))
   (func :pointer)
@@ -1186,8 +1186,8 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_clear_attributes
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_clear_attributes"
-           tree-view-column-clear-attributes) :void
+(cffi:defcfun ("gtk_tree_view_column_clear_attributes"
+               tree-view-column-clear-attributes) :void
  #+liber-documentation
  "@version{#2021-2-24}
   @argument[column]{a @class{gtk:tree-view-column} object}
@@ -1208,7 +1208,7 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_clicked
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_clicked" tree-view-column-clicked) :void
+(cffi:defcfun ("gtk_tree_view_column_clicked" tree-view-column-clicked) :void
  #+liber-documentation
  "@version{#2021-2-24}
   @argument[column]{a @class{gtk:tree-view-column} object}
@@ -1225,7 +1225,7 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_get_button -> tree-view-column-button
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_get_button" tree-view-column-button)
+(cffi:defcfun ("gtk_tree_view_column_get_button" tree-view-column-button)
     (g:object widget)
  #+liber-documentation
  "@version{#2021-2-24}
@@ -1243,8 +1243,8 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_cell_set_cell_data
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_cell_set_cell_data"
-           tree-view-column-cell-set-cell-data) :void
+(cffi:defcfun ("gtk_tree_view_column_cell_set_cell_data"
+               tree-view-column-cell-set-cell-data) :void
  #+liber-documentation
  "@version{#2021-2-24}
   @argument[column]{a @class{gtk:tree-view-column} object}
@@ -1275,7 +1275,7 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_cell_get_size -> tree-view-column-cell-size
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_cell_get_size" %tree-view-column-cell-size)
+(cffi:defcfun ("gtk_tree_view_column_cell_get_size" %tree-view-column-cell-size)
     :void
   (column (g:object tree-view-column))
   (area (g:boxed gdk:rectangle))
@@ -1304,10 +1304,10 @@ lambda (column)    :run-last
   This is used primarily by the tree view.
   @see-class{gtk:tree-view-column}
   @see-class{gdk:rectangle}"
-  (with-foreign-objects ((x-offset :int)
-                         (y-offset :int)
-                         (width :int)
-                         (height :int))
+  (cffi:with-foreign-objects ((x-offset :int)
+                              (y-offset :int)
+                              (width :int)
+                              (height :int))
     (%tree-view-column-cell-size column
                                  area
                                  x-offset
@@ -1325,8 +1325,8 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_cell_get_position -> tree-view-column-cell-position
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_cell_get_position"
-          %tree-view-column-cell-position) :boolean
+(cffi:defcfun ("gtk_tree_view_column_cell_get_position"
+               %tree-view-column-cell-position) :boolean
   (column (g:object tree-view-column))
   (renderer (g:object cell-renderer))
   (x-offset (:pointer :int))
@@ -1348,7 +1348,7 @@ lambda (column)    :run-last
   If the cell is not found in the column, @code{nil} is returned.
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}"
-  (with-foreign-objects ((x-offset :int) (width :int))
+  (cffi:with-foreign-objects ((x-offset :int) (width :int))
     (when (%tree-view-column-cell-position column
                                            renderer
                                            x-offset
@@ -1362,8 +1362,8 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_cell_is_visible
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_cell_is_visible"
-           tree-view-column-cell-is-visible) :boolean
+(cffi:defcfun ("gtk_tree_view_column_cell_is_visible"
+               tree-view-column-cell-is-visible) :boolean
  #+liber-documentation
  "@version{#2021-2-24}
   @argument[column]{a @class{gtk:tree-view-column} object}
@@ -1387,7 +1387,7 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_focus_cell
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_focus_cell" tree-view-column-focus-cell)
+(cffi:defcfun ("gtk_tree_view_column_focus_cell" tree-view-column-focus-cell)
     :void
  #+liber-documentation
  "@version{#2021-2-24}
@@ -1408,8 +1408,8 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_queue_resize
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_queue_resize"
-           tree-view-column-queue-resize) :void
+(cffi:defcfun ("gtk_tree_view_column_queue_resize"
+               tree-view-column-queue-resize) :void
  #+liber-documentation
  "@version{#2021-2-24}
   @argument[column]{a @class{gtk:tree-view-column} object}
@@ -1426,7 +1426,7 @@ lambda (column)    :run-last
 ;;; gtk_tree_view_column_get_tree_view -> tree-view-columun-tree-view
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_view_column_get_tree_view" tree-view-column-tree-view)
+(cffi:defcfun ("gtk_tree_view_column_get_tree_view" tree-view-column-tree-view)
     (g:object widget)
  #+liber-documentation
  "@version{#2021-2-24}

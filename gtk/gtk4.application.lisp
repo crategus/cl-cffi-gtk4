@@ -88,7 +88,7 @@
 ;;; GtkApplicationInhibitFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkApplicationInhibitFlags" application-inhibit-flags
+(gobject:define-g-flags "GtkApplicationInhibitFlags" application-inhibit-flags
   (:export t
    :type-initializer "gtk_application_inhibit_flags_get_type")
   (:logout  #.(ash 1 0))
@@ -107,7 +107,7 @@
   @end{short}
   See the @fun{gtk:application-inhibit} function.
   @begin{pre}
-(define-g-flags \"GtkApplicationInhibitFlags\" application-inhibit-flags
+(gobject:define-g-flags \"GtkApplicationInhibitFlags\" application-inhibit-flags
   (:export t
    :type-initializer \"gtk_application_inhibit_flags_get_type\")
   (:logout  #.(ash 1 0))
@@ -129,7 +129,7 @@
 ;;; GtkApplication
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkApplication" application
+(gobject:define-g-object-class "GtkApplication" application
   (:superclass gio:application
    :export t
    :interfaces ("GActionGroup"

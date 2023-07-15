@@ -1,12 +1,11 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.cell-renderer-accel.lisp
+;;; gtk4.cell-renderer-accel.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
 ;;; Copyright (C) 2011 - 2022 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
@@ -67,7 +66,7 @@
 ;;; enum GtkCellRendererAccelMode
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkCellRendererAccelMode" cell-renderer-accel-mode
+(gobject:define-g-enum "GtkCellRendererAccelMode" cell-renderer-accel-mode
   (:export t
    :type-initializer "gtk_cell_renderer_accel_mode_get_type")
   (:gtk 0)
@@ -85,7 +84,7 @@
   GTK+ are allowed, and the accelerators are rendered in the same way as they
   are in menus.
   @begin{pre}
-(define-g-enum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
+(gobject:define-g-enum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
   (:export t
    :type-initializer \"gtk_cell_renderer_accel_mode_get_type\")
   (:gtk 0)
@@ -101,7 +100,7 @@
 ;;; struct GtkCellRendererAccel
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCellRendererAccel" cell-renderer-accel
+(gobject:define-g-object-class "GtkCellRendererAccel" cell-renderer-accel
   (:superclass cell-renderer-text
    :export t
    :interfaces nil
@@ -303,4 +302,4 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
 
 (export 'cell-renderer-accel-new)
 
-;;; --- gtk.cell-renderer-accel.lisp -------------------------------------------
+;;; --- gtk4.cell-renderer-accel.lisp ------------------------------------------

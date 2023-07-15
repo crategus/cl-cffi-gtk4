@@ -123,7 +123,8 @@ lambda (gesture vel-x vel-y)    :run-last
 ;;; gtk_gesture_swipe_get_velocity () ->gesture-swipe-velocity
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_gesture_swipe_get_velocity" %gesture-swipe-velocity) :boolean
+(cffi:defcfun ("gtk_gesture_swipe_get_velocity" %gesture-swipe-velocity) 
+    :boolean
   (gesture (g:object gesture-swipe))
   (vel-x (:pointer :double))
   (vel-y (:pointer :double)))
@@ -143,7 +144,7 @@ lambda (gesture vel-x vel-y)    :run-last
     as per the last event(s) processed.
   @end{short}
   @see-class{gtk:gesture-swipe}"
-  (with-foreign-objects ((vel-x :double) (vel-y :double))
+  (cffi:with-foreign-objects ((vel-x :double) (vel-y :double))
     (when (%gesture-swipe-velocity gesture vel-x vel-y)
       (values (cffi:mem-ref vel-x :double)
               (cffi:mem-ref vel-y :double)))))

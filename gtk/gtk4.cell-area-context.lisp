@@ -391,7 +391,7 @@
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
-  (with-foreign-objects ((minimum-width :int) (natural-width :int))
+  (cffi:with-foreign-objects ((minimum-width :int) (natural-width :int))
     (%cell-area-context-preferred-width context
                                         minimum-width
                                         natural-width)
@@ -430,7 +430,7 @@
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
-  (with-foreign-objects ((minimum-height :int) (natural-height :int))
+  (cffi:with-foreign-objects ((minimum-height :int) (natural-height :int))
     (%cell-area-context-preferred-height context
                                          minimum-height
                                          natural-height)
@@ -471,7 +471,7 @@
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
-  (with-foreign-objects ((minimum-height :int) (natural-height :int))
+  (cffi:with-foreign-objects ((minimum-height :int) (natural-height :int))
     (%cell-area-context-preferred-height-for-width context
                                                    width
                                                    minimum-height
@@ -513,7 +513,7 @@
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
-  (with-foreign-objects ((minimum-width :int) (natural-width :int))
+  (cffi:with-foreign-objects ((minimum-width :int) (natural-width :int))
     (%cell-area-context-preferred-height-for-width context
                                                    height
                                                    minimum-width
@@ -550,7 +550,7 @@
   function, the returned value will be -1.
   @see-class{gtk:cell-area-context}
   @see-function{gtk:cell-area-context-reset}"
-  (with-foreign-objects ((width :int) (height :int))
+  (cffi:with-foreign-objects ((width :int) (height :int))
     (%cell-area-context-allocation context width height)
     (values (cffi:mem-ref width :int)
             (cffi:mem-ref height :int))))

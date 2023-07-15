@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.flow-box.lisp
+;;; gtk4.flow-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkFlowBox
@@ -668,7 +669,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_insert
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_insert" flow-box-insert) :void
+(cffi:defcfun ("gtk_flow_box_insert" flow-box-insert) :void
  #+liber-documentation
  "@version{#2022-9-7}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -698,7 +699,7 @@ lambda (flowbox)    :action
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(defcfun ("gtk_flow_box_append" flow-box-append) :void
+(cffi:defcfun ("gtk_flow_box_append" flow-box-append) :void
  #+liber-documentation
  "@version{#2022-9-7}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -725,7 +726,7 @@ lambda (flowbox)    :action
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(defcfun ("gtk_flow_box_append" flow-box-prepend) :void
+(cffi:defcfun ("gtk_flow_box_append" flow-box-prepend) :void
  #+liber-documentation
  "@version{#2022-9-7}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -751,7 +752,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_remove
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_remove" flow-box-remove) :void
+(cffi:defcfun ("gtk_flow_box_remove" flow-box-remove) :void
  #+liber-documentation
  "@version{#2022-2-4}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -769,7 +770,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_get_child_at_index -> flow-box-child-at-index
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_get_child_at_index" flow-box-child-at-index)
+(cffi:defcfun ("gtk_flow_box_get_child_at_index" flow-box-child-at-index)
     (g:object flow-box-child)
  #+liber-documentation
  "@version{#2021-12-6}
@@ -791,7 +792,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_get_child_at_pos flow-box-child-at-pos
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_get_child_at_pos" flow-box-child-at-pos)
+(cffi:defcfun ("gtk_flow_box_get_child_at_pos" flow-box-child-at-pos)
     (g:object flow-box-child)
  #+liber-documentation
  "@version{#2021-12-6}
@@ -816,7 +817,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_set_hadjustment
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_set_hadjustment" flow-box-set-hadjustment) :void
+(cffi:defcfun ("gtk_flow_box_set_hadjustment" flow-box-set-hadjustment) :void
  #+liber-documentation
  "@version{#2021-12-6}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -844,7 +845,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_set_vadjustment
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_set_vadjustment" flow-box-set-vadjustment) :void
+(cffi:defcfun ("gtk_flow_box_set_vadjustment" flow-box-set-vadjustment) :void
  #+liber-documentation
  "@version{#2021-12-6}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -872,12 +873,12 @@ lambda (flowbox)    :action
 ;;; GtkFlowBoxForeachFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback flow-box-foreach-func :void
+(cffi:defcallback flow-box-foreach-func :void
     ((flowbox (g:object flow-box))
      (child (g:object flow-box-child))
      (data :pointer))
   (restart-case
-    (let ((ptr (get-stable-pointer-value data)))
+    (let ((ptr (glib:get-stable-pointer-value data)))
       (funcall ptr flowbox child))
     (return () :report "Error in the GtkFlowBoxForeachFunc callback." nil)))
 
@@ -907,7 +908,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_selected_foreach
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_selected_foreach" %flow-box-selected-foreach) :void
+(cffi:defcfun ("gtk_flow_box_selected_foreach" %flow-box-selected-foreach) :void
   (flowbox (g:object flow-box))
   (func :pointer)
   (data :pointer))
@@ -923,7 +924,7 @@ lambda (flowbox)    :action
   Note that the selection cannot be modified from within this function.
   @see-class{gtk:flow-box}
   @see-symbol{gtk:flow-box-foreach-func}"
-  (with-stable-pointer (ptr func)
+  (glib:with-stable-pointer (ptr func)
     (%flow-box-selected-foreach flowbox
                                 (cffi:callback flow-box-foreach-func)
                                 ptr)))
@@ -934,7 +935,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_get_selected_children
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_get_selected_children" flow-box-selected-children)
+(cffi:defcfun ("gtk_flow_box_get_selected_children" flow-box-selected-children)
     (g:list-t (g:object flow-box-child))
  #+liber-documentation
  "@version{#2021-12-6}
@@ -954,7 +955,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_select_child
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_select_child" flow-box-select-child) :void
+(cffi:defcfun ("gtk_flow_box_select_child" flow-box-select-child) :void
  #+liber-documentation
  "@version{#2021-12-6}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -974,7 +975,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_unselect_child
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_unselect_child" flow-box-unselect-child) :void
+(cffi:defcfun ("gtk_flow_box_unselect_child" flow-box-unselect-child) :void
  #+liber-documentation
  "@version{#2021-12-6}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -993,7 +994,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_select_all
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_select_all" flow-box-select-all) :void
+(cffi:defcfun ("gtk_flow_box_select_all" flow-box-select-all) :void
  #+liber-documentation
  "@version{#2021-12-6}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -1009,7 +1010,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_unselect_all
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_unselect_all" flow-box-unselect-all) :void
+(cffi:defcfun ("gtk_flow_box_unselect_all" flow-box-unselect-all) :void
  #+liber-documentation
  "@version{#2021-12-6}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -1025,10 +1026,10 @@ lambda (flowbox)    :action
 ;;; GtkFlowBoxFilterFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback flow-box-filter-func :boolean
+(cffi:defcallback flow-box-filter-func :boolean
     ((child (g:object flow-box-child))
      (data :pointer))
-  (let ((ptr (get-stable-pointer-value data)))
+  (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr child)))
 
 #+liber-documentation
@@ -1056,7 +1057,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_set_filter_func
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_set_filter_func" %flow-box-set-filter-func) :void
+(cffi:defcfun ("gtk_flow_box_set_filter_func" %flow-box-set-filter-func) :void
   (flowbox (g:object flow-box))
   (func :pointer)
   (data :pointer)
@@ -1097,7 +1098,8 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_invalidate_filter
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_invalidate_filter" flow-box-invalidate-filter) :void
+(cffi:defcfun ("gtk_flow_box_invalidate_filter" flow-box-invalidate-filter) 
+    :void
  #+liber-documentation
  "@version{#2021-12-15}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -1118,11 +1120,11 @@ lambda (flowbox)    :action
 ;;; GtkFlowBoxSortFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback flow-box-sort-func :int
+(cffi:defcallback flow-box-sort-func :int
     ((child1 (g:object flow-box-child))
      (child2 (g:object flow-box-child))
      (data :pointer))
-  (let ((ptr (get-stable-pointer-value data)))
+  (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr child1 child2)))
 
 #+liber-documentation
@@ -1152,7 +1154,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_set_sort_func
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_set_sort_func" %flow-box-set-sort-func) :void
+(cffi:defcfun ("gtk_flow_box_set_sort_func" %flow-box-set-sort-func) :void
   (flowbox (g:object flow-box))
   (func :pointer)
   (data :pointer)
@@ -1191,7 +1193,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_invalidate_sort
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_invalidate_sort" flow-box-invalidate-sort) :void
+(cffi:defcfun ("gtk_flow_box_invalidate_sort" flow-box-invalidate-sort) :void
  #+liber-documentation
  "@version{#2021-12-6}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
@@ -1209,10 +1211,10 @@ lambda (flowbox)    :action
 ;;; GtkFlowBoxCreateWidgetFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback flow-box-create-widget-func (g:object widget)
+(cffi:defcallback flow-box-create-widget-func (g:object widget)
     ((item :pointer)
      (data :pointer))
-  (let ((ptr (get-stable-pointer-value data)))
+  (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr item)))
 
 #+liber-documentation
@@ -1246,7 +1248,7 @@ lambda (flowbox)    :action
 
 ;; TODO: Check the handling of NIL as an argument
 
-(defcfun ("gtk_flow_box_bind_model" %flow-box-bind-model) :void
+(cffi:defcfun ("gtk_flow_box_bind_model" %flow-box-bind-model) :void
   (flowbox (g:object flow-box))
   (model (g:object g:list-model))
   (func :pointer)
@@ -1312,7 +1314,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_child_get_index
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_child_get_index" flow-box-child-index) :int
+(cffi:defcfun ("gtk_flow_box_child_get_index" flow-box-child-index) :int
  #+liber-documentation
  "@version{#2021-12-6}
   @argument[child]{a @class{gtk:flow-box-child} widget}
@@ -1331,7 +1333,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_child_is_selected
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_child_is_selected" flow-box-child-is-selected)
+(cffi:defcfun ("gtk_flow_box_child_is_selected" flow-box-child-is-selected)
     :boolean
  #+liber-documentation
  "@version{#2021-12-6}
@@ -1350,7 +1352,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_child_changed
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_flow_box_child_changed" flow-box-child-changed) :void
+(cffi:defcfun ("gtk_flow_box_child_changed" flow-box-child-changed) :void
  #+liber-documentation
  "@version{#2021-12-6}
   @argument[child]{a @class{gtk:flow-box-child} widget}
@@ -1379,4 +1381,4 @@ lambda (flowbox)    :action
 
 (export 'flow-box-child-changed)
 
-;;; --- End of file gtk.flow-box.lisp ------------------------------------------
+;;; --- End of file gtk4.flow-box.lisp -----------------------------------------

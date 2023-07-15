@@ -249,7 +249,7 @@
   @see-class{gtk:fixed}
   @see-class{gtk:widget}
   @see-function{gtk:fixed-child-transform}"
-  (with-foreign-objects ((x :double) (y :double))
+  (cffi:with-foreign-objects ((x :double) (y :double))
     (%fixed-child-position fixed child x y)
     (values (cffi:mem-ref x :double)
             (cffi:mem-ref y :double))))

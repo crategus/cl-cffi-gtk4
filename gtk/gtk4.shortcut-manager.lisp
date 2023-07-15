@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.shortcut-manager.lisp
+;;; gtk4.shortcut-manager.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -47,7 +47,7 @@
 ;;; GtkShortcutManager
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkShortcutManager" shortcut-manager
+(gobject:define-g-interface "GtkShortcutManager" shortcut-manager
   (:export t
    :type-initializer "gtk_shortcut_manager_get_type")
   nil)
@@ -77,4 +77,4 @@
   @see-class{gtk:popover}
   @see-symbol{gtk:shortcut-scope}")
 
-;;; --- End of file gtk.shortcut-manager.lisp ----------------------------------
+;;; --- End of file gtk4.shortcut-manager.lisp ---------------------------------

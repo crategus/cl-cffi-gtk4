@@ -180,7 +180,7 @@
 ;;;     by the caller of the function.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_dialog_open" %file-dialog-open) :void
+(cffi:defcfun ("gtk_file_dialog_open" %file-dialog-open) :void
   (dialog (g:object file-dialog))
   (parent (g:object window))
   (cancellable (g:object g:cancellable))
@@ -188,7 +188,7 @@
   (data :pointer))
 
 (defun file-dialog-open (dialog parent cancellable func)
-  (with-stable-pointer (ptr func)
+  (glib:with-stable-pointer (ptr func)
     (%file-dialog-open dialog
                        parent
                        cancellable
@@ -243,7 +243,7 @@ The return value can be NULL.
 |#
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_dialog_open_finish" %file-dialog-open-finish)
+(cffi:defcfun ("gtk_file_dialog_open_finish" %file-dialog-open-finish)
     (g:object g:file)
   (dialog (g:object file-dialog))
   (result (g:object g:async-result))

@@ -110,7 +110,7 @@
 ;;; GtkAlign
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAlign" align
+(gobject:define-g-enum "GtkAlign" align
   (:export t
    :type-initializer "gtk_align_get_type")
   (:fill 0)
@@ -141,7 +141,7 @@
   is only supported for vertical alignment. When it is not supported by a child
   widget or a container it is treated as the @code{:fill} value.
   @begin{pre}
-(define-g-enum \"GtkAlign\" align
+(gobject:define-g-enum \"GtkAlign\" align
   (:export t
    :type-initializer \"gtk_align_get_type\")
   (:fill 0)
@@ -169,7 +169,7 @@
 ;; Defined in gtk.menu-button.lisp
 
 #|
-(define-g-enum "GtkArrowType" arrow-type
+(gobject:define-g-enum "GtkArrowType" arrow-type
   (:export t
    :type-initializer "gtk_arrow_type_get_type")
   (:up 0)
@@ -187,7 +187,7 @@
     Used to indicate the direction in which an arrow should point.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkArrowType\" arrow-type
+(gobject:define-g-enum \"GtkArrowType\" arrow-type
   (:export t
    :type-initializer \"gtk_arrow_type_get_type\")
   (:up 0)
@@ -209,7 +209,7 @@
 ;;; GtkBaselinePosition
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkBaselinePosition" baseline-position
+(gobject:define-g-enum "GtkBaselinePosition" baseline-position
   (:export t
    :type-initializer "gtk_baseline_position_get_type")
   (:top 0)
@@ -231,7 +231,7 @@
   baseline aligned children then it can use a @sym{gtk:baseline-position} value
   to select where to put the baseline inside the extra available space.
   @begin{pre}
-(define-g-enum \"GtkBaselinePosition\" baseline-position
+(gobject:define-g-enum \"GtkBaselinePosition\" baseline-position
   (:export t
    :type-initializer \"gtk_baseline_position_get_type\")
   (:top 0)
@@ -250,7 +250,7 @@
 ;;; GtkDeleteType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkDeleteType" delete-type
+(gobject:define-g-enum "GtkDeleteType" delete-type
   (:export t
    :type-initializer "gtk_delete_type_get_type")
   (:chars 0)
@@ -272,7 +272,7 @@
     keybinding signals for deleting text.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkDeleteType\" delete-type
+(gobject:define-g-enum \"GtkDeleteType\" delete-type
   (:export t
    :type-initializer \"gtk_delete_type_get_type\")
   (:chars 0)
@@ -306,7 +306,7 @@
 ;;; GtkDirectionType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkDirectionType" direction-type
+(gobject:define-g-enum "GtkDirectionType" direction-type
   (:export t
    :type-initializer "gtk_direction_type_get_type")
   (:tab-forward 0)
@@ -323,7 +323,7 @@
  "@version{#2021-12-28}
   @short{Focus movement types.}
   @begin{pre}
-(define-g-enum \"GtkDirectionType\" direction-type
+(gobject:define-g-enum \"GtkDirectionType\" direction-type
   (:export t
    :type-initializer \"gtk_direction_type_get_type\")
   (:tab-forward 0)
@@ -346,7 +346,7 @@
 ;;; GtkIconSize
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkIconSize" icon-size
+(gobject:define-g-enum "GtkIconSize" icon-size
   (:export t
    :type-initializer "gtk_icon_size_get_type")
   (:inherit 0)
@@ -369,7 +369,7 @@
   and let themes determine the actual size to be used with the
   @code{-gtk:icon-size} CSS property.
   @begin{pre}
-(define-g-enum \"GtkIconSize\" icon-size
+(gobject:define-g-enum \"GtkIconSize\" icon-size
   (:export t
    :type-initializer \"gtk_icon_size_get_type\")
   (:inherit 0)
@@ -387,7 +387,7 @@
 ;;; GtkSensitivityType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkSensitivityType" sensitivity-type
+(gobject:define-g-enum "GtkSensitivityType" sensitivity-type
   (:export t
    :type-initializer "gtk_sensitivity_type_get_type")
   (:auto 0)
@@ -404,7 +404,7 @@
     combo box buttons.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkSensitivityType\" sensitivity-type
+(gobject:define-g-enum \"GtkSensitivityType\" sensitivity-type
   (:export t
    :type-initializer \"gtk_sensitivity_type_get_type\")
   (:auto 0)
@@ -423,7 +423,7 @@
 
 ;; TODO: Implement a base-type for defining an enumeration
 
-(define-g-enum "GtkTextDirection" text-direction
+(gobject:define-g-enum "GtkTextDirection" text-direction
   (:export t
    :type-initializer "gtk_text_direction_get_type")
   (:dummy -1) ; Workaround to ensure the base-type is :int for the enumeration
@@ -440,7 +440,7 @@
     Reading directions for text.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkTextDirection\" text-direction
+(gobject:define-g-enum \"GtkTextDirection\" text-direction
   (:export t
    :type-initializer \"gtk_text_direction_get_type\")
   (:none 0)
@@ -461,7 +461,7 @@
 
 ;; TODO: Implement a base-type for defining an enumeration
 
-(define-g-enum "GtkJustification" justification
+(gobject:define-g-enum "GtkJustification" justification
   (:export t
    :type-initializer "gtk_justification_get_type")
   (:dummy1 -1)  ; Workaround to ensure the base-type is :int for the enumeration
@@ -480,7 +480,7 @@
   @end{short}
   See also the @class{gtk:alignment} widget.
   @begin{pre}
-(define-g-enum \"GtkJustification\" justification
+(gobject:define-g-enum \"GtkJustification\" justification
   (:export t
    :type-initializer \"gtk_justification_get_type\")
   (:left 0)
@@ -501,7 +501,7 @@
 ;;; GtkMessageType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkMessageType" message-type
+(gobject:define-g-enum "GtkMessageType" message-type
   (:export t
    :type-initializer "gtk_message_type_get_type")
   (:info 0)
@@ -519,7 +519,7 @@
     The type of message being displayed in the message dialog.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkMessageType\" message-type
+(gobject:define-g-enum \"GtkMessageType\" message-type
   (:export t
    :type-initializer \"gtk_message_type_get_type\")
   (:info 0)
@@ -541,7 +541,7 @@
 ;;; GtkMovementStep
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkMovementStep" movement-step
+(gobject:define-g-enum "GtkMovementStep" movement-step
   (:export t
    :type-initializer "gtk_movement_step_get_type")
   (:logical-positions 0)
@@ -565,7 +565,7 @@
     moving the cursor position.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkMovementStep\" movement-step
+(gobject:define-g-enum \"GtkMovementStep\" movement-step
   (:export t
    :type-initializer \"gtk_movement_step_get_type\")
   (:logical-positions 0)
@@ -601,7 +601,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(define-g-enum "GtkNaturalWrapMode" natural-wrap-mode
+(gobject:define-g-enum "GtkNaturalWrapMode" natural-wrap-mode
   (:export t
    :type-initializer "gtk_natural_wrap_mode_get_type")
   (:inherit 0)
@@ -618,7 +618,7 @@
   @end{short}
   See for example the @slot[gtk:label]{natural-wrap-mode} property.
   @begin{pre}
-(define-g-enum \"GtkNaturalWrapMode\" natural-wrap-mode
+(gobject:define-g-enum \"GtkNaturalWrapMode\" natural-wrap-mode
   (:export t
    :type-initializer \"gtk_natural_wrap_mode_get_type\")
   (:inherit 0)
@@ -645,7 +645,7 @@
 
 ;; TODO: This enumeration is not in use in the cl-cffi-gtk implementation.
 
-(define-g-enum "GtkScrollStep" scroll-step
+(gobject:define-g-enum "GtkScrollStep" scroll-step
   (:export t
    :type-initializer "gtk_scroll_step_get_type")
   (:steps 0)
@@ -662,7 +662,7 @@
  "@version{#2021-12-28}
   @short{Passed as argument to various keybinding signals.}
   @begin{pre}
-(define-g-enum \"GtkScrollStep\" scroll-step
+(gobject:define-g-enum \"GtkScrollStep\" scroll-step
   (:export t
    :type-initializer \"gtk_scroll_step_get_type\")
   (:steps 0)
@@ -677,7 +677,7 @@
 ;;; GtkOrientation
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkOrientation" orientation
+(gobject:define-g-enum "GtkOrientation" orientation
   (:export t
    :type-initializer "gtk_orientation_get_type")
   (:horizontal 0)
@@ -695,7 +695,7 @@
   Typical examples are the @class{gtk:box} widget or the @class{gtk:gesture-pan}
   object.
   @begin{pre}
-(define-g-enum \"GtkOrientation\" orientation
+(gobject:define-g-enum \"GtkOrientation\" orientation
   (:export t
    :type-initializer \"gtk_orientation_get_type\")
   (:horizontal 0)
@@ -713,7 +713,7 @@
 ;;; GtkOverflow
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkOverflow" overflow
+(gobject:define-g-enum "GtkOverflow" overflow
   (:export t
    :type-initializer "gtk_overflow_get_type")
   (:visible 0)
@@ -732,7 +732,7 @@
   @slot[gtk:widget]{overflow} property is modeled after the CSS overflow
   property, but implements it only partially.
   @begin{pre}
-(define-g-enum \"GtkOverflow\" overflow
+(gobject:define-g-enum \"GtkOverflow\" overflow
   (:export t
    :type-initializer \"gtk_overflow_get_type\")
   (:visible 0)
@@ -750,7 +750,7 @@
 ;;; GtkPackType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPackType" pack-type
+(gobject:define-g-enum "GtkPackType" pack-type
   (:export t
    :type-initializer "gtk_pack_type_get_type")
   (:start 0)
@@ -766,7 +766,7 @@
   @end{short}
   See the @class{gtk:window-controls} widget.
   @begin{pre}
-(define-g-enum \"GtkPackType\" pack-type
+(gobject:define-g-enum \"GtkPackType\" pack-type
   (:export t
    :type-initializer \"gtk_pack_type_get_type\")
   (:start 0)
@@ -782,7 +782,7 @@
 ;;; GtkPositionType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPositionType" position-type
+(gobject:define-g-enum "GtkPositionType" position-type
   (:export t
    :type-initializer "gtk_position_type_get_type")
   (:left 0)
@@ -801,7 +801,7 @@
   For example, see the tabs of a @class{gtk:notebook} widget, or the label of
   a @class{gtk:scale} widget.
   @begin{pre}
-(define-g-enum \"GtkPositionType\" position-type
+(gobject:define-g-enum \"GtkPositionType\" position-type
   (:export t
    :type-initializer \"gtk_position_type_get_type\")
   (:left 0)
@@ -822,7 +822,7 @@
 ;;; GtkScrollType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkScrollType" scroll-type
+(gobject:define-g-enum "GtkScrollType" scroll-type
   (:export t
    :type-initializer "gtk_scroll_type_get_type")
   (:none 0)
@@ -853,7 +853,7 @@
     @class{gtk:scrolled-window}, or @class{gtk:combo-box}.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkScrollType\" scroll-type
+(gobject:define-g-enum \"GtkScrollType\" scroll-type
   (:export t
    :type-initializer \"gtk_scroll_type_get_type\")
   (:none 0)
@@ -881,7 +881,7 @@
 ;;; GtkSelectionMode
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkSelectionMode" selection-mode
+(gobject:define-g-enum "GtkSelectionMode" selection-mode
   (:export t
    :type-initializer "gtk_selection_mode_get_type")
   (:none 0)
@@ -896,7 +896,7 @@
  "@version{#2021-12-28}
   @short{Used to control what selections users are allowed to make.}
   @begin{pre}
-(define-g-enum \"GtkSelectionMode\" gtk:selection-mode
+(gobject:define-g-enum \"GtkSelectionMode\" gtk:selection-mode
   (:export t
    :type-initializer \"gtk_selection_mode_get_type\")
   (:none 0)
@@ -926,7 +926,7 @@
 ;;; GtkWrapMode
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkWrapMode" wrap-mode
+(gobject:define-g-enum "GtkWrapMode" wrap-mode
   (:export t
    :type-initializer "gtk_wrap_mode_get_type")
   (:none 0)
@@ -941,7 +941,7 @@
  "@version{#2021-12-28}
   @short{Describes a type of line wrapping.}
   @begin{pre}
-(define-g-enum \"GtkWrapMode\" wrap-mode
+(gobject:define-g-enum \"GtkWrapMode\" wrap-mode
   (:export t
    :type-initializer \"gtk_wrap_mode_get_type\")
   (:none 0)
@@ -966,7 +966,7 @@
 ;;; GtkSortType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkSortType" sort-type
+(gobject:define-g-enum "GtkSortType" sort-type
   (:export t
    :type-initializer "gtk_sort_type_get_type")
   (:ascending 0)
@@ -979,7 +979,7 @@
  "@version{#2021-12-28}
   @short{Determines the direction of a sort.}
   @begin{pre}
-(define-g-enum \"GtkSortType\" sort-type
+(gobject:define-g-enum \"GtkSortType\" sort-type
   (:export t
    :type-initializer \"gtk_sort_type_get_type\")
   (:ascending 0)
@@ -996,7 +996,7 @@
 ;;; GtkPrintPages
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPrintPages" print-pages
+(gobject:define-g-enum "GtkPrintPages" print-pages
   (:export t
    :type-initializer "gtk_print_pages_get_type")
   (:all 0)
@@ -1014,7 +1014,7 @@
     functions.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPrintPages\" print-pages
+(gobject:define-g-enum \"GtkPrintPages\" print-pages
   (:export t
    :type-initializer \"gtk_print_pages_get_type\")
   (:all 0)
@@ -1036,7 +1036,7 @@
 ;;; GtkPageSet
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPageSet" page-set
+(gobject:define-g-enum "GtkPageSet" page-set
   (:export t
    :type-initializer "gtk_page_set_get_type")
   (:all 0)
@@ -1050,7 +1050,7 @@
  "@version{#2021-12-28}
   @short{See the @fun{gtk:print-job-page-set} function.}
   @begin{pre}
-(define-g-enum \"GtkPageSet\" page-set
+(gobject:define-g-enum \"GtkPageSet\" page-set
   (:export t
    :type-initializer \"gtk_page_set_get_type\")
   (:all 0)
@@ -1071,7 +1071,7 @@
 
 ;; TODO: Change the nick names to the short form
 
-(define-g-enum "GtkNumberUpLayout" number-up-layout
+(gobject:define-g-enum "GtkNumberUpLayout" number-up-layout
   (:export t
    :type-initializer "gtk_number_up_layout_get_type")
   (:left-to-right-top-to-bottom 0)
@@ -1093,7 +1093,7 @@
     pages per sheet.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkNubmerUpLayout\" number-up-layout
+(gobject:define-g-enum \"GtkNubmerUpLayout\" number-up-layout
   (:export t
    :type-initializer \"gtk_number_up_layout_get_type\")
   (:left-to-right-top-to-bottom 0)
@@ -1122,7 +1122,7 @@
 ;;; GtkOrdering
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkOrdering" ordering
+(gobject:define-g-enum "GtkOrdering" ordering
   (:export t
    :type-initializer "gtk_ordering_get_type")
   (:smaller -1)
@@ -1143,7 +1143,7 @@
   values. For converting such a value to a `GtkOrdering` value, use the
   @fun{gtk:ordering-from-cmpfunc} function.
   @begin{pre}
-(define-g-enum \"GtkOrdering\" ordering
+(gobject:define-g-enum \"GtkOrdering\" ordering
   (:export t
    :type-initializer \"gtk_ordering_get_type\")
   (:smaller -1)
@@ -1161,7 +1161,7 @@
 ;;; GtkPageOrientation
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPageOrientation" page-orientation
+(gobject:define-g-enum "GtkPageOrientation" page-orientation
   (:export t
    :type-initializer "gtk_page_orientation_get_type")
   :portrait
@@ -1176,7 +1176,7 @@
  "@version{#2021-12-28}
   @short{See the @fun{gtk:print-settings-orientation} function.}
   @begin{pre}
-(define-g-enum \"GtkPageOrienation\" page-orientation
+(gobject:define-g-enum \"GtkPageOrienation\" page-orientation
   (:export t
    :type-initializer \"gtk_page_orientation_get_type\")
   :portrait
@@ -1197,7 +1197,7 @@
 ;;; GtkPrintQuality
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPrintQuality" print-quality
+(gobject:define-g-enum "GtkPrintQuality" print-quality
   (:export t
    :type-initializer "gtk_print_quality_get_type")
   :low
@@ -1212,7 +1212,7 @@
  "@version{#2021-12-28}
   @short{See the @fun{gtk:print-settings-quality} function.}
   @begin{pre}
-(define-g-enum \"GtkPrintQuality\" print-quality
+(gobject:define-g-enum \"GtkPrintQuality\" print-quality
   (:export t
    :type-initializer \"gtk_print_quality_get_type\")
   :low
@@ -1233,7 +1233,7 @@
 ;;; GtkPrintDuplex
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPrintDuplex" print-duplex
+(gobject:define-g-enum "GtkPrintDuplex" print-duplex
   (:export t
    :type-initializer "gtk_print_duplex_get_type")
   :simplex
@@ -1247,7 +1247,7 @@
  "@version{#2021-12-28}
   @short{See the @fun{gtk:print-settings-duplex} function.}
   @begin{pre}
-(define-g-enum \"GtkPrintDuplex\" print-duplex
+(gobject:define-g-enum \"GtkPrintDuplex\" print-duplex
   (:export t
    :type-initializer \"gtk_print_duplex_get_type\")
   :simplex
@@ -1266,7 +1266,7 @@
 ;;; GtkUnit
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkUnit" unit
+(gobject:define-g-enum "GtkUnit" unit
   (:export t
    :type-initializer "gtk_unit_get_type")
   (:none 0)
@@ -1282,7 +1282,7 @@
  "@version{#2021-12-28}
   @short{Enumeration for dimensions of paper sizes.}
   @begin{pre}
-(define-g-enum \"GtkUnit\" unit
+(gobject:define-g-enum \"GtkUnit\" unit
   (:export t
    :type-initializer \"gtk_unit_get_type\")
   (:none 0)
@@ -1302,7 +1302,7 @@
 ;;; GtkTreeViewGridLines
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkTreeViewGridLines" tree-view-grid-lines
+(gobject:define-g-enum "GtkTreeViewGridLines" tree-view-grid-lines
   (:export t
    :type-initializer "gtk_tree_view_grid_lines_get_type")
   (:none 0)
@@ -1319,7 +1319,7 @@
     Used to indicate which grid lines to draw in a tree view.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkTreeViewGridLines\" tree-view-grid-lines
+(gobject:define-g-enum \"GtkTreeViewGridLines\" tree-view-grid-lines
   (:export t
    :type-initializer \"gtk_tree_view_grid_lines_get_type\")
   (:none 0)
@@ -1339,7 +1339,7 @@
 ;;; GtkSizeGroupMode
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkSizeGroupMode" size-group-mode
+(gobject:define-g-enum "GtkSizeGroupMode" size-group-mode
   (:export t
    :type-initializer "gtk_size_group_mode_get_type")
   (:none 0)
@@ -1358,7 +1358,7 @@
     widgets.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkSizeGroupMode\" size-group-mode
+(gobject:define-g-enum \"GtkSizeGroupMode\" size-group-mode
   (:export t
    :type-initializer \"gtk_size_group_mode_get_type\")
   (:none 0)
@@ -1378,7 +1378,7 @@
 ;;; GtkSizeRequestMode
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkSizeRequestMode" size-request-mode
+(gobject:define-g-enum "GtkSizeRequestMode" size-request-mode
   (:export t
    :type-initializer "gtk_size_request_mode_get_type")
   (:height-for-width 0)
@@ -1395,7 +1395,7 @@
     management.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkSizeRequestMode\" size-request-mode
+(gobject:define-g-enum \"GtkSizeRequestMode\" size-request-mode
   (:export t
    :type-initializer \"gtk_size_request_mode_get_type\")
   (:height-for-width 0)
@@ -1415,7 +1415,7 @@
 ;;; GtkScrollablePolicy
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkScrollablePolicy" scrollable-policy
+(gobject:define-g-enum "GtkScrollablePolicy" scrollable-policy
   (:export t
    :type-initializer "gtk_scrollable_policy_get_type")
   (:minimum 0)
@@ -1431,7 +1431,7 @@
     scrolled window adjustments in a given orientation.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkScrollablePolicy\" scrollable-policy
+(gobject:define-g-enum \"GtkScrollablePolicy\" scrollable-policy
   (:export t
    :type-initializer \"gtk_scrollable_policy_get_type\")
   (:minimum 0)
@@ -1447,7 +1447,7 @@
 ;;; GtkStateFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkStateFlags" state-flags
+(gobject:define-g-flags "GtkStateFlags" state-flags
   (:export t
    :type-initializer "gtk_state_flags_get_type")
   (:normal 0)
@@ -1478,7 +1478,7 @@
   Widget states are used to match the widget against CSS pseudo-classes. Note
   that GTK extends the regular CSS classes and sometimes uses different names.
   @begin{pre}
-(define-g-flags \"GtkStateFlags\" state-flags
+(gobject:define-g-flags \"GtkStateFlags\" state-flags
   (:export t
    :type-initializer \"gtk_state_flags_get_type\")
   (:normal 0)
@@ -1524,7 +1524,7 @@
 ;;; GtkBorderStyle
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkBorderStyle" border-style
+(gobject:define-g-enum "GtkBorderStyle" border-style
   (:export t
    :type-initializer "gtk_border_style_get_type")
   :none
@@ -1547,7 +1547,7 @@
     Describes how the border of a UI element should be rendered.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkBorderStyle\" border-style
+(gobject:define-g-enum \"GtkBorderStyle\" border-style
   (:export t
    :type-initializer \"gtk_border_style_get_type\")
   :none
@@ -1579,7 +1579,7 @@
 ;;; GtkLevelBarMode
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkLevelBarMode" level-bar-mode
+(gobject:define-g-enum "GtkLevelBarMode" level-bar-mode
   (:export t
    :type-initializer "gtk_level_bar_mode_get_type")
   (:continuous 0)
@@ -1596,7 +1596,7 @@
   Note that this enumeration could be extended with additional modes in the
   future.
   @begin{pre}
-(define-g-enum \"GtkLevelBarMode\" level-bar-mode
+(gobject:define-g-enum \"GtkLevelBarMode\" level-bar-mode
   (:export t
    :type-initializer \"gtk_level_bar_mode_get_type\")
   (:continuous 0)
@@ -1612,7 +1612,7 @@
 ;;; GtkInputPurpose
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkInputPurpose" input-purpose
+(gobject:define-g-enum "GtkInputPurpose" input-purpose
   (:export t
    :type-initializer "gtk_input_purpose_get_type")
   (:free-form 0)
@@ -1651,7 +1651,7 @@
   This enumeration may be extended in the future. Input methods should
   interpret unknown values as 'free form'.
   @begin{pre}
-(define-g-enum \"GtkInputPurpose\" input-purpose
+(gobject:define-g-enum \"GtkInputPurpose\" input-purpose
   (:export t
    :type-initializer \"gtk_input_purpose_get_type\")
   (:free-form 0)
@@ -1686,7 +1686,7 @@
 ;;; GtkInputHints
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkInputHints" input-hints
+(gobject:define-g-flags "GtkInputHints" input-hints
   (:export t
    :type-initializer "gtk_input_hints_get_type")
   (:none 0)
@@ -1721,7 +1721,7 @@
   This flags may be extended in the future. Input methods should ignore
   unknown values.
   @begin{pre}
-(define-g-flags \"GtkInputHints\" input-hints
+(gobject:define-g-flags \"GtkInputHints\" input-hints
   (:export t
    :type-initializer \"gtk_input_hints_get_type\")
   (:none 0)
@@ -1764,7 +1764,7 @@
 ;;; GtkPropagationPhase
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPropagationPhase" propagation-phase
+(gobject:define-g-enum "GtkPropagationPhase" propagation-phase
   (:export t
    :type-initializer "gtk_propagation_phase_get_type")
   (:phase-none 0)
@@ -1782,7 +1782,7 @@
     @class{gtk:event-controller} object.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPropagationPhase\" propagation-phase
+(gobject:define-g-enum \"GtkPropagationPhase\" propagation-phase
   (:export t
    :type-initializer \"gtk_propagation_phase_get_type\")
   (:phase-none 0)
@@ -1814,7 +1814,7 @@
 ;;; GtkPropagationLimit
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPropagationLimit" propagation-limit
+(gobject:define-g-enum "GtkPropagationLimit" propagation-limit
   (:export t
    :type-initializer "gtk_propagation_limit_get_type")
   :none
@@ -1830,7 +1830,7 @@
     events targeting other widgets.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPropagationLimit\" propagation-limit
+(gobject:define-g-enum \"GtkPropagationLimit\" propagation-limit
   (:export t
    :type-initializer \"gtk_propagation_limit_get_type\")
   :none
@@ -1848,7 +1848,7 @@
 ;;; GtkEventSequenceState
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkEventSequenceState" event-sequence-state
+(gobject:define-g-enum "GtkEventSequenceState" event-sequence-state
   (:export t
    :type-initializer "gtk_event_sequence_state_get_type")
   (:none 0)
@@ -1865,7 +1865,7 @@
     @class{gtk:gesture} object.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkEventSequenceState\" event-sequence-state
+(gobject:define-g-enum \"GtkEventSequenceState\" event-sequence-state
   (:export t
    :type-initializer \"gtk_event_sequence_state_get_type\")
   (:none 0)
@@ -1884,7 +1884,7 @@
 ;;; GtkPanDirection
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPanDirection" pan-direction
+(gobject:define-g-enum "GtkPanDirection" pan-direction
   (:export t
    :type-initializer "gtk_pan_direction_get_type")
   :left
@@ -1901,7 +1901,7 @@
     Describes the panning direction of a @class{gtk:gesture-pan} object.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPanDirection\" pan-direction
+(gobject:define-g-enum \"GtkPanDirection\" pan-direction
   (:export t
    :type-initializer \"gtk_pan_direction_get_type\")
   :left
@@ -1921,7 +1921,7 @@
 ;;; GtkShortcutScope
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkShortcutScope" shortcut-scope
+(gobject:define-g-enum "GtkShortcutScope" shortcut-scope
   (:export t
    :type-initializer "gtk_shortcut_scope_get_type")
   :local
@@ -1938,7 +1938,7 @@
     @class{gtk:shortcut-controller} object get handled.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkShortcutScope\" shortcut-scope
+(gobject:define-g-enum \"GtkShortcutScope\" shortcut-scope
   (:export t
    :type-initializer \"gtk_shortcut_scope_get_type\")
   :local
@@ -1959,7 +1959,7 @@
 ;;; GtkPickFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkPickFlags" pick-flags
+(gobject:define-g-flags "GtkPickFlags" pick-flags
   (:export t
    :type-initializer "gtk_pick_flags_get_type")
   (:default 0)
@@ -1975,7 +1975,7 @@
     Flags that influence the behavior of the @fun{gtk:widget-pick} function.
   @end{short}
   @begin{pre}
-(define-g-flags \"GtkPickFlags\" pick-flags
+(gobject:define-g-flags \"GtkPickFlags\" pick-flags
   (:export t
    :type-initializer \"gtk_pick_flags_get_type\")
   (:default 0)
@@ -1996,7 +1996,7 @@
 ;;; GtkConstraintRelation
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkConstraintRelation" constraint-relation
+(gobject:define-g-enum "GtkConstraintRelation" constraint-relation
   (:export t
    :type-initializer "gtk_constraint_relation_get_type")
   (:le -1)
@@ -2012,7 +2012,7 @@
     The relation between two terms of a constraint.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkConstraintRelation\" constraint-relation
+(gobject:define-g-enum \"GtkConstraintRelation\" constraint-relation
   (:export t
    :type-initializer \"gtk_constraint_relation_get_type\")
   (:le -1)
@@ -2029,7 +2029,7 @@
 ;;; GtkConstraintStrength
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkConstraintStrength" constraint-strength
+(gobject:define-g-enum "GtkConstraintStrength" constraint-strength
   (:export t
    :type-initializer "gtk_constraint_strength_get_type")
   (:required 1001001000)
@@ -2048,7 +2048,7 @@
   The strength of a @class{gtk:constraint} widget can be expressed with any
   positive integer. The values of this enumeration can be used for readability.
   @begin{pre}
-(define-g-enum \"GtkConstraintStrength\" constraint-strength
+(gobject:define-g-enum \"GtkConstraintStrength\" constraint-strength
   (:export t
    :type-initializer \"gtk_constraint_strength_get_type\")
   (:required 1001001000)
@@ -2068,7 +2068,7 @@
 ;;; GtkConstraintAttribute
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkConstraintAttribute" constraint-attribute
+(gobject:define-g-enum "GtkConstraintAttribute" constraint-attribute
   (:export t
    :type-initializer "gtk_constraint_attribute_get_type")
   :none
@@ -2094,7 +2094,7 @@
     @class{gtk:constraint} widget.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkConstraintAttribute\" constraint-attribute
+(gobject:define-g-enum \"GtkConstraintAttribute\" constraint-attribute
   (:export t
    :type-initializer \"gtk_constraint_attribute_get_type\")
   :none
@@ -2134,7 +2134,7 @@
 ;;; GtkConstraintVflParserError
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkConstraintVflParserError" constraint-vfl-parser-error
+(gobject:define-g-enum "GtkConstraintVflParserError" constraint-vfl-parser-error
   (:export t
    :type-initializer "gtk_constraint_vfl_parser_error_get_type")
   :invalid-symbol
@@ -2153,7 +2153,7 @@
     Domain for VFL parsing errors.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkConstraintVflParserError\" constraint-vfl-parser-error
+(gobject:define-g-enum \"GtkConstraintVflParserError\" constraint-vfl-parser-error
   (:export t
    :type-initializer \"gtk_constraint_vfl_parser_error\")
   :invalid-symbol
@@ -2176,7 +2176,7 @@
 ;;; GtkSystemSetting
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkSystemSetting" system-setting
+(gobject:define-g-enum "GtkSystemSetting" system-setting
   (:export t
    :type-initializer "gtk_system_setting_get_type")
   :dpi
@@ -2202,7 +2202,7 @@
 
   More values may be added over time.
   @begin{pre}
-(define-g-enum \"GtkSystemSetting\" system-setting
+(gobject:define-g-enum \"GtkSystemSetting\" system-setting
   (:export t
    :type-initializer \"gtk_system_setting_get_type\")
   :dpi
@@ -2240,7 +2240,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(define-g-enum "GtkSymbolicColor" symbolic-color
+(gobject:define-g-enum "GtkSymbolicColor" symbolic-color
   (:export t
    :type-initializer "gtk_symbolic_color_get_type")
   (:foreground 0)
@@ -2259,7 +2259,7 @@
   @end{short}
   More values may be added over time.
   @begin{pre}
-(define-g-enum \"GtkSymbolicColor\" symbolic-color
+(gobject:define-g-enum \"GtkSymbolicColor\" symbolic-color
   (:export t
    :type-initializer \"gtk_symbolic_color_get_type\")
   (:foreground 0)
@@ -2279,7 +2279,7 @@
 ;;; GtkAccessibleRole
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAccessibleRole" accessible-role
+(gobject:define-g-enum "GtkAccessibleRole" accessible-role
   (:export t
    :type-initializer "gtk_accessible_role_get_type")
   :alert
@@ -2374,7 +2374,7 @@
   Abstract roles are only used as part of the ontology. Application developers
   must not use abstract roles in their code.
   @begin{pre}
-(define-g-enum \"GtkAccessibleRole\" accessible-role
+(gobject:define-g-enum \"GtkAccessibleRole\" accessible-role
   (:export t
    :type-initializer \"gtk_accessible_role_get_type\")
   :alert
@@ -2566,7 +2566,7 @@
 ;;; GtkAccessibleState
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAccessibleState" accessible-state
+(gobject:define-g-enum "GtkAccessibleState" accessible-state
   (:export t
    :type-initializer "gtk_accessible_state_get_type")
    :busy
@@ -2587,7 +2587,7 @@
     The possible accessible states of a @class{gtk:accessible} widget.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkAccessibleState\" gtk:accessible-state
+(gobject:define-g-enum \"GtkAccessibleState\" gtk:accessible-state
   (:export t
    :type-initializer \"gtk_accessible_state_get_type\")
    :busy
@@ -2630,7 +2630,7 @@
 ;;; GtkAccessibleProperty
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAccessibleProperty" accessible-property
+(gobject:define-g-enum "GtkAccessibleProperty" accessible-property
   (:export t
    :type-initializer "gtk_accessible_property_get_type")
   :autocomplete
@@ -2662,7 +2662,7 @@
     The possible accessible properties of a @class{gtk:accessible} widget.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkAccessibleProperty\" accessible-property
+(gobject:define-g-enum \"GtkAccessibleProperty\" accessible-property
   (:export t
    :type-initializer \"gtk_accessible_property_get_type\")
   :autocomplete
@@ -2739,7 +2739,7 @@
 ;;; GtkAccessibleRelation
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAccessibleRelation" accessible-relation
+(gobject:define-g-enum "GtkAccessibleRelation" accessible-relation
   (:export t
    :type-initializer "gtk_accessible_relation_get_type")
   :active-descendant
@@ -2771,7 +2771,7 @@
   @end{short}
   Accessible relations can be references to other widgets, integers or strings.
   @begin{pre}
-(define-g-enum \"GtkAccessibleRelation\" accessible-relation
+(gobject:define-g-enum \"GtkAccessibleRelation\" accessible-relation
   (:export t
    :type-initializer \"gtk_accessible_relation_get_type\")
   :active-descendant
@@ -2844,7 +2844,7 @@
 ;;; GtkAccessibleTristate
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAccessibleTristate" accessible-tristate
+(gobject:define-g-enum "GtkAccessibleTristate" accessible-tristate
   (:export t
    :type-initializer "gtk_accessible_tristate_get_type")
   :false
@@ -2862,7 +2862,7 @@
   Note that the @code{:false} and @code{:true} values have the same values as
   @em{false} and @em{true}.
   @begin{pre}
-(define-g-enum \"GtkAccessibleTristate\" accessible-tristate
+(gobject:define-g-enum \"GtkAccessibleTristate\" accessible-tristate
   (:export t
    :type-initializer \"gtk_accessible_tristate_get_type\")
   :false
@@ -2880,7 +2880,7 @@
 ;;; GtkAccessibleInvalidState
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAccessibleInvalidState" accessible-invalid-state
+(gobject:define-g-enum "GtkAccessibleInvalidState" accessible-invalid-state
   (:export t
    :type-initializer "gtk_accessible_invalid_state_get_type")
   :false
@@ -2899,7 +2899,7 @@
   Note that the @code{:false} and @code{:true} values have the same values
   as @em{false} and @em{true}.
   @begin{pre}
-(define-g-enum \"GtkAccessibleInvalidState\" accessible-invalid-state
+(gobject:define-g-enum \"GtkAccessibleInvalidState\" accessible-invalid-state
   (:export t
    :type-initializer \"gtk_accessible_invalid_state_get_type\")
   :false
@@ -2919,7 +2919,7 @@
 ;;; GtkAccessibleAutocomplete
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAccessibleAutocomplete" accessible-autocomplete
+(gobject:define-g-enum "GtkAccessibleAutocomplete" accessible-autocomplete
   (:export t
    :type-initializer "gtk_accessible_autocomplete_get_type")
   :none
@@ -2936,7 +2936,7 @@
     The possible values for the @code{:autocomplete} accessible property.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkAccessibleAutocomplete\" accessible-autocomplete
+(gobject:define-g-enum \"GtkAccessibleAutocomplete\" accessible-autocomplete
   (:export t
    :type-initializer \"gtk_accessible_autocomplete_get_type\")
   :none
@@ -2963,7 +2963,7 @@
 ;;; GtkAccessibleSort
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAccessibleSort" accessible-sort
+(gobject:define-g-enum "GtkAccessibleSort" accessible-sort
   (:export t
    :type-initializer "gtk_accessible_sort_get_type")
   :none
@@ -2980,7 +2980,7 @@
     The possible values for the @code{:sort} accessible property.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkAccessibleSort\" accessible-sort
+(gobject:define-g-enum \"GtkAccessibleSort\" accessible-sort
   (:export t
    :type-initializer \"gtk_accessible_sort_get_type\")
   :none

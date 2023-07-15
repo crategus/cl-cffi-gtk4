@@ -93,7 +93,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-8
-(define-g-enum "GtkContentFit" content-fit
+(gobject:define-g-enum "GtkContentFit" content-fit
   (:export t
    :type-initializer "gtk_content_fit_get_type")
   (:fill 0)
@@ -111,7 +111,7 @@
   @end{short}
   Since 4.8
   @begin{pre}
-(define-g-enum \"GtkContentFit\" content-fit
+(gobject:define-g-enum \"GtkContentFit\" content-fit
   (:export t
    :type-initializer \"gtk_content_fit_get_type\")
   (:fill 0)
@@ -140,7 +140,7 @@
 ;;; GtkPicture
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPicture" picture
+(gobject:define-g-object-class "GtkPicture" picture
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

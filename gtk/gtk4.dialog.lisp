@@ -93,7 +93,7 @@
 ;;; GtkDialogFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkDialogFlags" dialog-flags
+(gobject:define-g-flags "GtkDialogFlags" dialog-flags
   (:export t
    :type-initializer "gtk_dialog_flags_get_type")
   (:modal               #.(ash 1 0))
@@ -109,7 +109,7 @@
     Flags used to influence the @class{gtk:dialog} widget construction.
   @end{short}
   @begin{pre}
-(define-g-flags \"GtkDialogFlags\" dialog-flags
+(gobject:define-g-flags \"GtkDialogFlags\" dialog-flags
   (:export t
    :type-initializer \"gtk_dialog_flags_get_type\")
   (:modal               #.(ash 1 0))
@@ -129,7 +129,7 @@
 ;;; GtkResponseType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkResponseType" response-type
+(gobject:define-g-enum "GtkResponseType" response-type
   (:export t
    :type-initializer "gtk_response_type_get_type")
   (:none -1)
@@ -156,7 +156,7 @@
   All predefined values are negative, GTK leaves positive values for application
   defined response IDs.
   @begin{pre}
-(define-g-enum \"GtkResponseType\" response-type
+(gobject:define-g-enum \"GtkResponseType\" response-type
   (:export t
    :type-initializer \"gtk_response_type_get_type\")
   (:none -1)
@@ -196,7 +196,7 @@
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (setf (glib:symbol-for-gtype "GtkDialog") 'dialog))
 
-(define-g-object-class "GtkDialog" dialog
+(gobject:define-g-object-class "GtkDialog" dialog
   (:superclass gtk:window
    :export t
    :interfaces ("GtkAccessible"

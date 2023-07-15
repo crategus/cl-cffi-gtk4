@@ -80,7 +80,7 @@
 ;;; gtk_get_major_version -> major-version
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_get_major_version" major-version) :uint
+(cffi:defcfun ("gtk_get_major_version" major-version) :uint
  #+liber-documentation
  "@version{2023-3-24}
   @return{An unsigned integer with the major version number of the GTK library.}
@@ -97,7 +97,7 @@
 ;;; gtk_get_minor_version -> minor-version
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_get_minor_version" minor-version) :uint
+(cffi:defcfun ("gtk_get_minor_version" minor-version) :uint
  #+liber-documentation
  "@version{2023-3-24}
   @return{An unsigned integer with the minor version number of the GTK library.}
@@ -114,7 +114,7 @@
 ;;; gtk_get_micro_version -> micro-version
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_get_micro_version" micro-version) :uint
+(cffi:defcfun ("gtk_get_micro_version" micro-version) :uint
  #+liber-documentation
  "@version{2023-3-24}
   @return{An unsigned integer with the micro version number of the GTK library.}
@@ -139,7 +139,7 @@
 ;;; gtk_check_version
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_check_version" check-version) :string
+(cffi:defcfun ("gtk_check_version" check-version) :string
  #+liber-documentation
  "@version{2023-3-24}
   @argument[major]{an unsigned integer with the required major version}
@@ -198,10 +198,10 @@ NIL
   @see-function{gtk:major-version}
   @see-function{gtk:minor-version}
   @see-function{gtk:micro-version}
-  @see-symbol{+glib-major-version+}
-  @see-symbol{+glib-minor-version+}
-  @see-symbol{+glib-micro-version+}
-  @see-symbol{+gdk-pixbuf-version+}
+  @see-symbol{glib:+glib-major-version+}
+  @see-symbol{glib:+glib-minor-version+}
+  @see-symbol{glib:+glib-micro-version+}
+  @see-symbol{gdk-pixbuf:+gdk-pixbuf-version+}
   @see-function{pango:version-string}
   @see-function{cairo:version-string}"
   (format out "cl-cffi-gtk version: ~a~%" *cl-cffi-gtk-version*)
@@ -216,10 +216,10 @@ NIL
           (minor-version)
           (micro-version))
   (format out "GLIB version: ~a.~a.~a~%"
-          +glib-major-version+
-          +glib-minor-version+
-          +glib-micro-version+)
-  (format out "GDK-Pixbuf version: ~a~%" +gdk-pixbuf-version+)
+          glib:+glib-major-version+
+          glib:+glib-minor-version+
+          glib:+glib-micro-version+)
+  (format out "GDK-Pixbuf version: ~a~%" gdk-pixbuf:+gdk-pixbuf-version+)
   (format out "Pango version: ~a~%" (pango:version-string))
   (format out "Cairo version: ~a~%" (cairo:version-string))
   (format out "Machine type: ~a~%" (machine-type))

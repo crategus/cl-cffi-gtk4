@@ -115,7 +115,7 @@
   The @sym{gtk:recent-info} structure is an opaque data structure whose members
   can only be accessed using the provided API.
   @begin{pre}
-(define-g-boxed-opaque gtk:recent-info \"GtkRecentInfo\"
+(glib:define-g-boxed-opaque gtk:recent-info \"GtkRecentInfo\"
   :type-initializer \"gtk_recent_info_get_type\"
   :alloc (error \"GtkRecentInfo cannot be created from the Lisp side.\"))
   @end{pre}
@@ -210,7 +210,7 @@
 ;;; struct GtkRecentManager
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkRecentManager" recent-manager
+(gobject:define-g-object-class "GtkRecentManager" recent-manager
   (:superclass g:object
    :export t
    :interfaces nil
@@ -502,7 +502,7 @@ lambda (manager)    :run-first
   @end{short}
   @see-class{gtk:recent-manager}
   @see-class{gtk:recent-info}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%recent-manager-lookup-item manager uri err)))
 
 (export 'recent-manager-lookup-item)
@@ -553,7 +553,7 @@ lambda (manager)    :run-first
   Please note that this function will not affect the resource pointed by the
   URIs, but only the URI used in the recently used resources list.
   @see-class{gtk:recent-manager}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%recent-manager-move-item manager uri newuri err)))
 
 (export 'recent-manager-move-item)
@@ -599,7 +599,7 @@ lambda (manager)    :run-first
     Purges every item from the recently used resources list.
   @end{short}
   @see-class{gtk:recent-manager}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%recent-manager-purge-items manager err)))
 
 (export 'recent-manager-purge-items)
@@ -809,7 +809,7 @@ lambda (manager)    :run-first
   If the command line contains any escape characters defined inside the
   storage specification, they will be expanded.
   @see-class{gtk:recent-info}"
-  (with-foreign-objects ((exec :string) (count :uint) (time :long))
+  (cffi:with-foreign-objects ((exec :string) (count :uint) (time :long))
     (%recent-info-application-info info name exec count time)
     (values (cffi:mem-ref exec :string)
             (cffi:mem-ref count :uint)
@@ -834,7 +834,7 @@ lambda (manager)    :run-first
     Retrieves the list of applications that have registered this resource.
   @end{short}
   @see-class{gtk:recent-info}"
-  (with-foreign-object (length :size)
+  (cffi:with-foreign-object (length :size)
     (%recent-info-applications info length)))
 
 (export 'recent-info-applications)
@@ -905,7 +905,7 @@ lambda (manager)    :run-first
   @end{short}
   @see-class{gtk:recent-info}
   @see-class{g:app-info}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%recent-info-create-app-info info name err)))
 
 (export 'recent-info-create-app-info)
@@ -927,7 +927,7 @@ lambda (manager)    :run-first
     Returns all groups registered for the recently used item info.
   @end{short}
   @see-class{gtk:recent-info}"
-  (with-foreign-object (length :size)
+  (cffi:with-foreign-object (length :size)
     (%recent-info-groups info length)))
 
 (export 'recent-info-groups)

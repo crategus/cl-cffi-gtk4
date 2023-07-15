@@ -65,7 +65,7 @@
 ;;; GtkTreeDragSource
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkTreeDragSource" tree-drag-source
+(gobject:define-g-interface "GtkTreeDragSource" tree-drag-source
   (:export t
    :type-initializer "gtk_tree_drag_source_get_type")
   nil)
@@ -119,7 +119,7 @@
 ;;; };
 ;;; ----------------------------------------------------------------------------
 
-(define-vtable ("GtkTreeDragSource" tree-drag-source)
+(gobject:define-vtable ("GtkTreeDragSource" tree-drag-source)
   (:skip parent-instance (:pointer (:struct gobject:type-interface)))
   ;;methods
   (row-draggable (:boolean
@@ -136,8 +136,8 @@
 ;;; gtk_tree_drag_source_drag_data_delete ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_drag_source_drag_data_delete"
-           tree-drag-source-drag-data-delete) :boolean
+(cffi:defcfun ("gtk_tree_drag_source_drag_data_delete"
+               tree-drag-source-drag-data-delete) :boolean
  #+liber-documentation
  "@version{#2021-3-5}
   @argument[source]{a @class{gtk:tree-drag-source} object}
@@ -162,8 +162,8 @@
 ;;; gtk_tree_drag_source_drag_data_get ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_drag_source_drag_data_get"
-           tree-drag-source-drag-data-get) (g:object gdk-content-provider)
+(cffi:defcfun ("gtk_tree_drag_source_drag_data_get"
+               tree-drag-source-drag-data-get) (g:object gdk-content-provider)
  #+liber-documentation
  "@version{#2021-3-5}
   @argument[source]{a @class{gtk:tree-drag-source} object}
@@ -187,8 +187,8 @@
 ;;; gtk_tree_drag_source_row_draggable ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_drag_source_row_draggable"
-           tree-drag-source-row-draggable) :boolean
+(cffi:defcfun ("gtk_tree_drag_source_row_draggable"
+               tree-drag-source-row-draggable) :boolean
  #+liber-documentation
  "@version{#2021-3-5}
   @argument[source]{a @class{gtk:tree-drag-source} object}
@@ -211,7 +211,7 @@
 ;;; GtkTreeDragDest
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkTreeDragDest" tree-drag-dest
+(gobject:define-g-interface "GtkTreeDragDest" tree-drag-dest
   (:export t
    :type-initializer "gtk_tree_drag_dest_get_type")
   nil)
@@ -261,7 +261,7 @@
 ;;; };
 ;;; ----------------------------------------------------------------------------
 
-(define-vtable ("GtkTreeDragDest" tree-drag-dest)
+(gobject:define-vtable ("GtkTreeDragDest" tree-drag-dest)
   (:skip parent-instance (:pointer (:struct gobject:type-interface)))
   ;;methods
   (drag-data-received (:boolean
@@ -277,8 +277,8 @@
 ;;; gtk_tree_drag_dest_drag_data_received ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_drag_dest_drag_data_received"
-           tree-drag-dest-drag-data-received) :boolean
+(cffi:defcfun ("gtk_tree_drag_dest_drag_data_received"
+               tree-drag-dest-drag-data-received) :boolean
  #+liber-documentation
  "@version{#2021-3-5}
   @argument[dest]{a @class{gtk:tree-drag-dest} object}
@@ -307,8 +307,8 @@
 ;;; gtk_tree_drag_dest_row_drop_possible ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_drag_dest_row_drop_possible"
-           tree-drag-dest-row-drop-possible) :boolean
+(cffi:defcfun ("gtk_tree_drag_dest_row_drop_possible"
+               tree-drag-dest-row-drop-possible) :boolean
  #+liber-documentation
  "@version{#2021-3-5}
   @argument[dest]{a @class{gtk:tree-drag-dest} object}
@@ -354,7 +354,7 @@
 ;;; gtk_tree_get_row_drag_data ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_get_row_drag_data" tree-get-row-drag-data) :boolean
+(cffi:defcfun ("gtk_tree_get_row_drag_data" tree-get-row-drag-data) :boolean
  #+liber-documentation
  "@version{#2021-3-5}
   @argument[data]{a @symol{g:value} instance}

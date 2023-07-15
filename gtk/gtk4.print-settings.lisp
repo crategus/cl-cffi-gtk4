@@ -175,7 +175,7 @@
 ;;; GtkPrintSettings
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPrintSettings" print-settings
+(gobject:define-g-object-class "GtkPrintSettings" print-settings
   (:superclass g:object
    :export t
    :interfaces nil
@@ -220,7 +220,7 @@
 ;;; enum GtkPageOrientation
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPageOrientation" page-orientation
+(gobject:define-g-enum "GtkPageOrientation" page-orientation
   (:export t
    :type-initializer "gtk_page_orientation_get_type")
   :portrait
@@ -235,7 +235,7 @@
  "@version{#2020-4-5}
   @short{See the function @fun{gtk:print-settings-orientation}.}
   @begin{pre}
-(define-g-enum \"GtkPageOrienation\" page-orientation
+(gobject:define-g-enum \"GtkPageOrienation\" page-orientation
   (:export t
    :type-initializer \"gtk_page_orientation_get_type\")
   :portrait
@@ -256,7 +256,7 @@
 ;;; enum GtkPrintDuplex
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPrintDuplex" print-duplex
+(gobject:define-g-enum "GtkPrintDuplex" print-duplex
   (:export t
    :type-initializer "gtk_print_duplex_get_type")
   :simplex
@@ -270,7 +270,7 @@
  "@version{#2020-4-5}
   @short{See the function @fun{gtk:print-settings-duplex}.}
   @begin{pre}
-(define-g-enum \"GtkPrintDuplex\" print-duplex
+(gobject:define-g-enum \"GtkPrintDuplex\" print-duplex
   (:export t
    :type-initializer \"gtk_print_duplex_get_type\")
   :simplex
@@ -289,7 +289,7 @@
 ;;; enum GtkPrintQuality
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPrintQuality" print-quality
+(gobject:define-g-enum "GtkPrintQuality" print-quality
   (:export t
    :type-initializer "gtk_print_quality_get_type")
   :low
@@ -304,7 +304,7 @@
  "@version{#2020-4-5}
   @short{See the function @fun{gtk:print-settings-quality}.}
   @begin{pre}
-(define-g-enum \"GtkPrintQuality\" print-quality
+(gobject:define-g-enum \"GtkPrintQuality\" print-quality
   (:export t
    :type-initializer \"gtk_print_quality_get_type\")
   :low
@@ -327,7 +327,7 @@
 
 ;; TODO: Change the nick names to the short form
 
-(define-g-enum "GtkNumberUpLayout" number-up-layout
+(gobject:define-g-enum "GtkNumberUpLayout" number-up-layout
   (:export t
    :type-initializer "gtk_number_up_layout_get_type")
   (:left-to-right-top-to-bottom 0)
@@ -349,7 +349,7 @@
     pages per sheet.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkNubmerUpLayout\" number-up-layout
+(gobject:define-g-enum \"GtkNubmerUpLayout\" number-up-layout
   (:export t
    :type-initializer \"gtk_number_up_layout_get_type\")
   (:left-to-right-top-to-bottom 0)
@@ -378,7 +378,7 @@
 ;;; enum GtkPrintPages
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPrintPages" print-pages
+(gobject:define-g-enum "GtkPrintPages" print-pages
   (:export t
    :type-initializer "gtk_print_pages_get_type")
   (:all 0)
@@ -396,7 +396,7 @@
     @fun{gtk:print-settings-print-pages}.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPrintPages\" print-pages
+(gobject:define-g-enum \"GtkPrintPages\" print-pages
   (:export t
    :type-initializer \"gtk_print_pages_get_type\")
   (:all 0)
@@ -439,7 +439,7 @@
 ;;; enum GtkPageSet
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPageSet" page-set
+(gobject:define-g-enum "GtkPageSet" page-set
   (:export t
    :type-initializer "gtk_page_set_get_type")
   (:all 0)
@@ -453,7 +453,7 @@
  "@version{#2020-4-5}
   @short{See the function @fun{gtk:print-job-page-set}.}
   @begin{pre}
-(define-g-enum \"GtkPageSet\" page-set
+(gobject:define-g-enum \"GtkPageSet\" page-set
   (:export t
    :type-initializer \"gtk_page_set_get_type\")
   (:all 0)
@@ -488,7 +488,7 @@
 ;;; gtk_print_settings_copy ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_copy" print-settings-copy)
+(cffi:defcfun ("gtk_print_settings_copy" print-settings-copy)
     (g:object print-settings)
  #+liber-documentation
  "@version{#2020-4-5}
@@ -504,7 +504,7 @@
 ;;; gtk_print_settings_has_key ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_has_key" print-settings-has-key) :boolean
+(cffi:defcfun ("gtk_print_settings_has_key" print-settings-has-key) :boolean
  #+liber-documentation
  "@version{#2020-4-5}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -521,7 +521,7 @@
 ;;; gtk_print_settings_get ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_get" print-settings-get) :string
+(cffi:defcfun ("gtk_print_settings_get" print-settings-get) :string
  #+liber-documentation
  "@version{#2020-4-5}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -538,7 +538,7 @@
 ;;; gtk_print_settings_set ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_set" %print-settings-set) :void
+(cffi:defcfun ("gtk_print_settings_set" %print-settings-set) :void
   (settings (g:object print-settings))
   (key :string)
   (value :string))
@@ -563,7 +563,7 @@
 ;;; gtk_print_settings_unset ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_unset" print-settings-unset) :void
+(cffi:defcfun ("gtk_print_settings_unset" print-settings-unset) :void
  #+liber-documentation
  "@version{#2020-4-5}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -583,7 +583,7 @@
 ;;; GtkPrintSettingsFunc ()
 ;;; ----------------------------------------------------------------------------
 
-(defcallback print-settings-func :void
+(cffi:defcallback print-settings-func :void
     ((key :string)
      (value :string)
      (data :pointer))
@@ -614,7 +614,7 @@ lambda (key value)
 ;;; gtk_print_settings_foreach ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_foreach" %print-settings-foreach) :void
+(cffi:defcfun ("gtk_print_settings_foreach" %print-settings-foreach) :void
   (settings (g:object print-settings))
   (callback :pointer)
   (data :pointer))
@@ -628,7 +628,7 @@ lambda (key value)
     Calls @arg{func} for each key value pair of the print settings.
   @end{short}
   @see-class{gtk:print-settings}"
-  (with-stable-pointer (ptr func)
+  (glib:with-stable-pointer (ptr func)
     (%print-settings-foreach settings
                              (cffi:callback print-settings-func)
                              ptr)))
@@ -648,7 +648,7 @@ lambda (key value)
                         :void)
   value)
 
-(defcfun ("gtk_print_settings_get_bool" print-settings-bool) :boolean
+(cffi:defcfun ("gtk_print_settings_get_bool" print-settings-bool) :boolean
  #+liber-documentation
  "@version{#2020-4-12}
   @syntax[]{(gtk:print-settings-bool settings key) => value}
@@ -684,7 +684,7 @@ lambda (key value)
                         :void)
   value)
 
-(defcfun ("gtk_print_settings_get_double" print-settings-double) :double
+(cffi:defcfun ("gtk_print_settings_get_double" print-settings-double) :double
  #+liber-documentation
  "@version{#2020-11-25}
   @syntax[]{(gtk:print-settings-double settings key) => value}
@@ -710,8 +710,8 @@ lambda (key value)
 ;;; gtk_print_settings_get_double_with_default ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_get_double_with_default"
-          %print-settings-double-with-default) :double
+(cffi:defcfun ("gtk_print_settings_get_double_with_default"
+               %print-settings-double-with-default) :double
   (settings (g:object print-settings))
   (key :string)
   (default :double))
@@ -752,7 +752,7 @@ lambda (key value)
                         :void)
   value)
 
-(defcfun ("gtk_print_settings_get_length" print-settings-length) :double
+(cffi:defcfun ("gtk_print_settings_get_length" print-settings-length) :double
  #+liber-documentation
  "@version{#2020-4-13}
   @syntax[]{(gtk:print-settings-length settings key unit) => value}
@@ -799,7 +799,7 @@ lambda (key value)
                         :void)
   value)
 
-(defcfun ("gtk_print_settings_get_int" print-settings-int) :int
+(cffi:defcfun ("gtk_print_settings_get_int" print-settings-int) :int
  #+liber-documentation
  "@version{#2020-4-13}
   @syntax[]{(gtk:print-settings-int settings key) => value}
@@ -825,8 +825,8 @@ lambda (key value)
 ;;; gtk_print_settings_get_int_with_default ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_get_int_with_default"
-           print-settings-int-with-default) :int
+(cffi:defcfun ("gtk_print_settings_get_int_with_default"
+               print-settings-int-with-default) :int
  #+liber-documentation
  "@version{#2020-4-5}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -857,7 +857,7 @@ lambda (key value)
                         :void)
   printer)
 
-(defcfun ("gtk_print_settings_get_printer" print-settings-printer) :string
+(cffi:defcfun ("gtk_print_settings_get_printer" print-settings-printer) :string
  #+liber-documentation
  "@version{#2020-4-5}
   @syntax[]{(gtk:print-settings-printer settings) => printer}
@@ -890,7 +890,7 @@ lambda (key value)
                         :void)
   orientation)
 
-(defcfun ("gtk_print_settings_get_orientation" print-settings-orientation)
+(cffi:defcfun ("gtk_print_settings_get_orientation" print-settings-orientation)
     page-orientation
  #+liber-documentation
  "@version{#2020-4-5}
@@ -926,7 +926,7 @@ lambda (key value)
                         :void)
   paper-size)
 
-(defcfun ("gtk_print_settings_get_paper_size" print-settings-paper-size)
+(cffi:defcfun ("gtk_print_settings_get_paper_size" print-settings-paper-size)
     (g:boxed paper-size)
  #+liber-documentation
  "@version{#2020-4-5}
@@ -973,8 +973,8 @@ lambda (key value)
                         :void)
   width)
 
-(defcfun ("gtk_print_settings_get_paper_width"
-           print-settings-paper-width) :double
+(cffi:defcfun ("gtk_print_settings_get_paper_width"
+               print-settings-paper-width) :double
  #+liber-documentation
  "@version{#2020-4-13}
   @syntax[]{(gtk:print-settings-paper-width settings) => width}
@@ -1011,8 +1011,8 @@ lambda (key value)
                         :void)
   height)
 
-(defcfun ("gtk_print_settings_get_paper_height"
-           print-settings-paper-height) :double
+(cffi:defcfun ("gtk_print_settings_get_paper_height"
+               print-settings-paper-height) :double
  #+liber-documentation
  "@version{#2020-4-13}
   @syntax[]{(gtk:print-settings-paper-height settings) => height}
@@ -1049,7 +1049,7 @@ lambda (key value)
                         :void)
   use-color)
 
-(defcfun ("gtk_print_settings_get_use_color" print-settings-use-color)
+(cffi:defcfun ("gtk_print_settings_get_use_color" print-settings-use-color)
     :boolean
  #+liber-documentation
  "@version{#2020-4-5}
@@ -1083,7 +1083,7 @@ lambda (key value)
                         :void)
   collate)
 
-(defcfun ("gtk_print_settings_get_collate" print-settings-collate) :boolean
+(cffi:defcfun ("gtk_print_settings_get_collate" print-settings-collate) :boolean
  #+liber-documentation
  "@version{#2020-4-5}
   @syntax[]{(gtk:print-settings-collate settings) => collate}
@@ -1116,7 +1116,7 @@ lambda (key value)
                         :void)
   reverse)
 
-(defcfun ("gtk_print_settings_get_reverse" print-settings-reverse) :boolean
+(cffi:defcfun ("gtk_print_settings_get_reverse" print-settings-reverse) :boolean
  #+liber-documentation
  "@version{#2020-4-5}
   @syntax[]{(gtk:print-settings-reverse settings) => reverse}
@@ -1150,7 +1150,8 @@ lambda (key value)
                         :void)
   duplex)
 
-(defcfun ("gtk_print_settings_get_duplex" print-settings-duplex) print-duplex
+(cffi:defcfun ("gtk_print_settings_get_duplex" print-settings-duplex) 
+    print-duplex
  #+liber-documentation
  "@version{#2020-4-5}
   @syntax[]{(gtk:print-settings-duplex settings) => duplex}
@@ -1184,7 +1185,7 @@ lambda (key value)
                         :void)
   quality)
 
-(defcfun ("gtk_print_settings_get_quality" print-settings-quality)
+(cffi:defcfun ("gtk_print_settings_get_quality" print-settings-quality)
     print-quality
  #+liber-documentation
  "@version{#2020-4-5}
@@ -1218,7 +1219,7 @@ lambda (key value)
                         :void)
   n-copies)
 
-(defcfun ("gtk_print_settings_get_n_copies" print-settings-n-copies) :int
+(cffi:defcfun ("gtk_print_settings_get_n_copies" print-settings-n-copies) :int
  #+liber-documentation
  "@version{#2020-4-5}
   @syntax[]{(gtk:print-settings-n-copies settings) => n-copies}
@@ -1252,7 +1253,7 @@ lambda (key value)
                         :void)
   number-up)
 
-(defcfun ("gtk_print_settings_get_number_up" print-settings-number-up) :int
+(cffi:defcfun ("gtk_print_settings_get_number_up" print-settings-number-up) :int
  #+liber-documentation
  "@version{#2020-4-5}
   @syntax[]{(gtk:print-settings-number-up settings) => number-up}
@@ -1286,8 +1287,8 @@ lambda (key value)
                         :void)
   number-up-layout)
 
-(defcfun ("gtk_print_settings_get_number_up_layout"
-           print-settings-number-up-layout) number-up-layout
+(cffi:defcfun ("gtk_print_settings_get_number_up_layout"
+               print-settings-number-up-layout) number-up-layout
  #+liber-documentation
  "@version{#2020-4-5}
   @syntax[]{(gtk:print-settings-number-up-layout settings) => number-up-layout}
@@ -1322,7 +1323,7 @@ lambda (key value)
                         :void)
   resolution)
 
-(defcfun ("gtk_print_settings_get_resolution" print-settings-resolution)
+(cffi:defcfun ("gtk_print_settings_get_resolution" print-settings-resolution)
     :int
  #+liber-documentation
  "@version{#2020-4-5}
@@ -1350,8 +1351,8 @@ lambda (key value)
 
 ;; We do not export this function. Consider to remove it.
 
-(defcfun ("gtk_print_settings_set_resolution_xy"
-           print-settings-set-resolution-xy) :void
+(cffi:defcfun ("gtk_print_settings_set_resolution_xy"
+               print-settings-set-resolution-xy) :void
  #+liber-documentation
  "@version{#2020-4-6}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1369,8 +1370,8 @@ lambda (key value)
 ;;; gtk_print_settings_get_resolution_x ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_get_resolution_x" print-settings-resolution-x)
-    :int
+(cffi:defcfun ("gtk_print_settings_get_resolution_x" 
+               print-settings-resolution-x) :int
  #+liber-documentation
  "@version{#2020-4-6}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1387,8 +1388,8 @@ lambda (key value)
 ;;; gtk_print_settings_get_resolution_y ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_get_resolution_y" print-settings-resolution-y)
-    :int
+(cffi:defcfun ("gtk_print_settings_get_resolution_y" 
+               print-settings-resolution-y) :int
  #+liber-documentation
  "@version{#2020-4-6}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1413,7 +1414,7 @@ lambda (key value)
                         :void)
   printer-lpi)
 
-(defcfun ("gtk_print_settings_get_printer_lpi" print-settings-printer-lpi)
+(cffi:defcfun ("gtk_print_settings_get_printer_lpi" print-settings-printer-lpi)
     :double
  #+liber-documentation
  "@version{#2020-4-6}
@@ -1448,7 +1449,7 @@ lambda (key value)
                         :void)
   scale)
 
-(defcfun ("gtk_print_settings_get_scale" print-settings-scale) :double
+(cffi:defcfun ("gtk_print_settings_get_scale" print-settings-scale) :double
  #+liber-documentation
  "@version{#2020-4-6}
   @syntax[]{(gtk:print-settings-scale settings) => scale}
@@ -1481,7 +1482,7 @@ lambda (key value)
                         :void)
   print-pages)
 
-(defcfun ("gtk_print_settings_get_print_pages" print-settings-print-pages)
+(cffi:defcfun ("gtk_print_settings_get_print_pages" print-settings-print-pages)
     print-pages
  #+liber-documentation
  "@version{#2020-4-6}
@@ -1574,7 +1575,7 @@ lambda (key value)
                         :void)
   page-set)
 
-(defcfun ("gtk_print_settings_get_page_set" print-settings-page-set)
+(cffi:defcfun ("gtk_print_settings_get_page_set" print-settings-page-set)
     page-set
  #+liber-documentation
  "@version{#2020-4-6}
@@ -1609,8 +1610,8 @@ lambda (key value)
                         :void)
   default-source)
 
-(defcfun ("gtk_print_settings_get_default_source"
-           print-settings-default-source) :string
+(cffi:defcfun ("gtk_print_settings_get_default_source"
+               print-settings-default-source) :string
  #+liber-documentation
  "@version{#2020-4-6}
   @syntax[]{(gtk:print-settings-default-source settings) => default-source}
@@ -1645,7 +1646,7 @@ lambda (key value)
                         :void)
   media-type)
 
-(defcfun ("gtk_print_settings_get_media_type" print-settings-media-type)
+(cffi:defcfun ("gtk_print_settings_get_media_type" print-settings-media-type)
     :string
  #+liber-documentation
  "@version{#2020-4-6}
@@ -1681,7 +1682,7 @@ lambda (key value)
                         :void)
   dither)
 
-(defcfun ("gtk_print_settings_get_dither" print-settings-dither) :string
+(cffi:defcfun ("gtk_print_settings_get_dither" print-settings-dither) :string
  #+liber-documentation
  "@version{#2020-4-6}
   @syntax[]{(gtk:print-settings-dither settings) => dither}
@@ -1714,7 +1715,7 @@ lambda (key value)
                         :void)
   finishings)
 
-(defcfun ("gtk_print_settings_get_finishings" print-settings-finishings)
+(cffi:defcfun ("gtk_print_settings_get_finishings" print-settings-finishings)
     :string
  #+liber-documentation
  "@version{#2020-4-6}
@@ -1748,7 +1749,7 @@ lambda (key value)
                         :void)
   output-bin)
 
-(defcfun ("gtk_print_settings_get_output_bin" print-settings-output-bin)
+(cffi:defcfun ("gtk_print_settings_get_output_bin" print-settings-output-bin)
     :string
  #+liber-documentation
  "@version{#2020-4-6}
@@ -1774,7 +1775,7 @@ lambda (key value)
 ;;; gtk_print_settings_new_from_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_new_from_file" %print-settings-new-from-file)
+(cffi:defcfun ("gtk_print_settings_new_from_file" %print-settings-new-from-file)
     (g:object print-settings)
   (filename :string)
   (err :pointer))
@@ -1793,7 +1794,7 @@ lambda (key value)
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-to-file}
   @see-function{gtk:print-settings-load-file}"
-  (with-ignore-g-error (err)
+  (glib:with-ignore-g-error (err)
     (%print-settings-new-from-file (namestring path) err)))
 
 (export 'print-settings-new-from-file)
@@ -1802,8 +1803,8 @@ lambda (key value)
 ;;; gtk_print_settings_new_from_key_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_new_from_key_file"
-          %print-settings-new-from-key-file) (g:object print-settings)
+(cffi:defcfun ("gtk_print_settings_new_from_key_file"
+               %print-settings-new-from-key-file) (g:object print-settings)
   (key-file (:pointer (:struct glib:variant)))
   (group-name :string)
   (error :pointer))
@@ -1824,7 +1825,7 @@ lambda (key value)
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-to-file}
   @see-function{gtk:print-settings-load-file}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%print-settings-new-from-key-file key-file group-name err)))
 
 (export 'print-settings-new-from-key-file)
@@ -1833,8 +1834,8 @@ lambda (key value)
 ;;; gtk_print_settings_new_from_gvariant ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_new_from_gvariant"
-           print-settings-new-from-gvariant) (g:object print-settings)
+(cffi:defcfun ("gtk_print_settings_new_from_gvariant"
+               print-settings-new-from-gvariant) (g:object print-settings)
  #+liber-documentation
  "@version{#2020-4-6}
   @argument[variant]{an @code{a{sv@}} @type{glib:variant} structure}
@@ -1875,7 +1876,8 @@ lambda (key value)
 ;;; gtk_print_settings_load_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_load_file" %print-settings-load-file) :boolean
+(cffi:defcfun ("gtk_print_settings_load_file" %print-settings-load-file) 
+    :boolean
   (settings (g:object print-settings))
   (filename :string)
   (err :pointer))
@@ -1893,7 +1895,7 @@ lambda (key value)
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-to-file}
   @see-function{gtk:print-settings-new-from-file}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%print-settings-load-file settings (namestring path) err)))
 
 (export 'print-settings-load-file)
@@ -1902,7 +1904,7 @@ lambda (key value)
 ;;; gtk_print_settings_load_key_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_load_key_file" %print-settings-load-key-file)
+(cffi:defcfun ("gtk_print_settings_load_key_file" %print-settings-load-key-file)
     :boolean
   (settings (g:object print-settings))
   (keyfile (:pointer (:struct glib:key-file)))
@@ -1924,7 +1926,7 @@ lambda (key value)
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-to-key-file}
   @see-function{gtk:print-settings-new-from-key-file}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%print-settings-load-key-file settings keyfile group err)))
 
 (export 'print-settings-load-key-file)
@@ -1933,7 +1935,7 @@ lambda (key value)
 ;;; gtk_print_settings_to_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_to_file" %print-settings-to-file) :boolean
+(cffi:defcfun ("gtk_print_settings_to_file" %print-settings-to-file) :boolean
   (settings (g:object print-settings))
   (filename :string)
   (err :pointer))
@@ -1950,7 +1952,7 @@ lambda (key value)
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-load-file}
   @see-function{gtk:print-settings-new-from-file}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%print-settings-to-file settings (namestring path) err)))
 
 (export 'print-settings-to-file)
@@ -1959,7 +1961,8 @@ lambda (key value)
 ;;; gtk_print_settings_to_key_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_to_key_file" print-settings-to-key-file) :void
+(cffi:defcfun ("gtk_print_settings_to_key_file" print-settings-to-key-file) 
+    :void
  #+liber-documentation
  "@version{#2022-10-21}
   @argument[settings]{a @class{gtk:print-settings} object}
@@ -1984,7 +1987,7 @@ lambda (key value)
 ;;; gtk_print_settings_to_gvariant ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_settings_to_gvariant" print-settings-to-gvariant)
+(cffi:defcfun ("gtk_print_settings_to_gvariant" print-settings-to-gvariant)
     (:pointer (:struct glib:variant))
  #+liber-documentation
  "@version{#2020-4-6}

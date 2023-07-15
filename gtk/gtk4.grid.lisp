@@ -380,7 +380,7 @@
 ;;; gtk_grid_attach
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_attach" grid-attach) :void
+(cffi:defcfun ("gtk_grid_attach" grid-attach) :void
  #+liber-documentation
  "@version{2023-3-19}
   @argument[grid]{a @class{gtk:grid} widget}
@@ -415,7 +415,7 @@
 ;;; gtk_grid_attach_next_to
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_attach_next_to" grid-attach-next-to) :void
+(cffi:defcfun ("gtk_grid_attach_next_to" grid-attach-next-to) :void
  #+liber-documentation
  "@version{#2022-1-15}
   @argument[grid]{a @class{gtk:grid} widget}
@@ -453,7 +453,7 @@
 ;;; gtk_grid_remove
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_remove" grid-remove) :void
+(cffi:defcfun ("gtk_grid_remove" grid-remove) :void
  #+liber-documentation
  "@version{#2022-1-15}
   @argument[grid]{a @class{gtk:grid} widget}
@@ -476,7 +476,7 @@
 ;;; gtk_grid_get_child_at
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_get_child_at" grid-child-at) (g:object widget)
+(cffi:defcfun ("gtk_grid_get_child_at" grid-child-at) (g:object widget)
  #+liber-documentation
  "@version{#2022-1-15}
   @argument[grid]{a @class{gtk:grid} widget}
@@ -500,7 +500,7 @@
 ;;; gtk_grid_query_child
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_query_child" %grid-query-child) :void
+(cffi:defcfun ("gtk_grid_query_child" %grid-query-child) :void
   (grid (g:object grid))
   (child (g:object widet))
   (column (:pointer :int))
@@ -527,7 +527,10 @@
   @end{short}
   @see-class{gtk:grid}
   @see-class{gtk:widget}"
-  (with-foreign-objects ((column :int) (row :int) (width :int) (height :int))
+  (cffi:with-foreign-objects ((column :int) 
+                              (row :int) 
+                              (width :int) 
+                              (height :int))
     (%grid-query-child grid child column row width height)
     (values (cffi:mem-ref column :int)
             (cffi:mem-ref row :int)
@@ -540,7 +543,7 @@
 ;;; gtk_grid_insert_row
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_insert_row" grid-insert-row) :void
+(cffi:defcfun ("gtk_grid_insert_row" grid-insert-row) :void
  #+liber-documentation
  "@version{#2022-1-15}
   @argument[grid]{a @class{gtk:grid} widget}
@@ -562,7 +565,7 @@
 ;;; gtk_grid_insert_column
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_insert_column" grid-insert-column) :void
+(cffi:defcfun ("gtk_grid_insert_column" grid-insert-column) :void
  #+liber-documentation
  "@version{#2022-1-15}
   @argument[grid]{a @class{gtk:grid} widget}
@@ -585,7 +588,7 @@
 ;;; gtk_grid_remove_row
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_remove_row" grid-remove-row) :void
+(cffi:defcfun ("gtk_grid_remove_row" grid-remove-row) :void
  #+liber-documentation
  "@version{#2022-1-15}
   @argument[grid]{a @class{gtk:grid} widget}
@@ -608,7 +611,7 @@
 ;;; gtk_grid_remove_column
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_remove_column" grid-remove-column) :void
+(cffi:defcfun ("gtk_grid_remove_column" grid-remove-column) :void
  #+liber-documentation
  "@version{#2022-1-15}
   @argument[grid]{a @class{gtk:grid} widget}
@@ -631,7 +634,7 @@
 ;;; gtk_grid_insert_next_to
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_grid_insert_next_to" grid-insert-next-to) :void
+(cffi:defcfun ("gtk_grid_insert_next_to" grid-insert-next-to) :void
  #+liber-documentation
  "@version{#2022-1-15}
   @argument[grid]{a @class{gtk:grid} widget}
@@ -669,8 +672,8 @@
                         :void)
   position)
 
-(defcfun ("gtk_grid_get_row_baseline_position"
-           grid-row-baseline-position) position-type
+(cffi:defcfun ("gtk_grid_get_row_baseline_position"
+               grid-row-baseline-position) position-type
  #+liber-documentation
  "@version{#2022-1-15}
   @syntax[]{(gtk:grid-row-baseline-position grid row) => position}

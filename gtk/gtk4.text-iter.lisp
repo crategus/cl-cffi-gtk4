@@ -144,8 +144,7 @@
 
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: This new type is not documented.
-
+#|
 (define-foreign-type unichar ()
   ()
   (:actual-type :uint32)
@@ -156,12 +155,13 @@
 
 (defmethod cffi:translate-to-foreign (value (type unichar))
   (char-code value))
+|#
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTextSearchFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkTextSearchFlags" text-search-flags
+(gobject:define-g-flags "GtkTextSearchFlags" text-search-flags
   (:export t
    :type-initializer "gtk_text_search_flags_get_type")
   (:visible-only 1)
@@ -178,7 +178,7 @@
   must be exact. The special @code{0xFFFC} character will match embedded pixbufs
   or child widgets.
   @begin{pre}
-(define-g-flags \"GtkTextSearchFlags\" text-search-flags
+(gobject:define-g-flags \"GtkTextSearchFlags\" text-search-flags
   (:export t
    :type-initializer \"gtk_text_search_flags_get_type\")
   (:visible-only 1)
@@ -200,7 +200,7 @@
 ;;; GtkTextIter
 ;;; ----------------------------------------------------------------------------
 
-(defcstruct %text-iter
+(cffi:defcstruct %text-iter
   (dummy1 :pointer)
   (dummy2 :pointer)
   (dummy3 :int)
@@ -216,16 +216,16 @@
   (dummy13 :int)
   (dummy14 :pointer))
 
-(defcfun ("gtk_text_iter_copy" %text-iter-copy) :pointer
+(cffi:defcfun ("gtk_text_iter_copy" %text-iter-copy) :pointer
   (iter :pointer))
 
 (defun %text-iter-alloc ()
-  (with-foreign-object (iter '(:struct %text-iter))
+  (cffi:with-foreign-object (iter '(:struct %text-iter))
     (%text-iter-copy iter)))
 
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque text-iter "GtkTextIter"
+(glib:define-g-boxed-opaque text-iter "GtkTextIter"
   :type-initializer "gtk_text_iter_get_type"
   :alloc (%text-iter-alloc))
 
@@ -257,7 +257,8 @@
 ;;; gtk_text_iter_get_buffer -> text-iter-buffer
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_buffer" text-iter-buffer) (g:object text-buffer)
+(cffi:defcfun ("gtk_text_iter_get_buffer" text-iter-buffer) 
+    (g:object text-buffer)
  #+liber-documentation
  "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} iterator}
@@ -292,7 +293,7 @@
 ;;; gtk_text_iter_copy
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_copy" text-iter-copy) (g:boxed text-iter :return)
+(cffi:defcfun ("gtk_text_iter_copy" text-iter-copy) (g:boxed text-iter :return)
  #+liber-documentation
  "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -309,7 +310,7 @@
 ;;; gtk_text_iter_assign
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_assign" text-iter-assign) :void
+(cffi:defcfun ("gtk_text_iter_assign" text-iter-assign) :void
  "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @argument[other]{another @class{gtk:text-iter} instance}
@@ -347,7 +348,7 @@
                         :void)
   offset)
 
-(defcfun ("gtk_text_iter_get_offset" text-iter-offset) :int
+(cffi:defcfun ("gtk_text_iter_get_offset" text-iter-offset) :int
  #+liber-documentation
  "@version{2023-2-2}
   @syntax[]{(gtk:text-iter-offset iter) => offset}
@@ -383,7 +384,7 @@
                         :void)
   line)
 
-(defcfun ("gtk_text_iter_get_line" text-iter-line) :int
+(cffi:defcfun ("gtk_text_iter_get_line" text-iter-line) :int
  #+liber-documentation
  "@version{2023-2-2}
   @syntax[]{(gtk:text-iter-line iter) => line}
@@ -419,7 +420,7 @@
                         :void)
   offset)
 
-(defcfun ("gtk_text_iter_get_line_offset" text-iter-line-offset) :int
+(cffi:defcfun ("gtk_text_iter_get_line_offset" text-iter-line-offset) :int
  #+liber-documentation
  "@version{2023-2-2}
   @syntax[]{(gtk:text-iter-line-offset iter) => offset}
@@ -460,7 +461,7 @@
                         :void)
   index)
 
-(defcfun ("gtk_text_iter_get_line_index" text-iter-line-index) :int
+(cffi:defcfun ("gtk_text_iter_get_line_index" text-iter-line-index) :int
  #+liber-documentation
  "@version{2023-2-2}
   @syntax[]{(gtk:text-iter-line-index iter) => index}
@@ -499,8 +500,8 @@
                         :void)
   index)
 
-(defcfun ("gtk_text_iter_get_visible_line_index" text-iter-visible-line-index)
-    :int
+(cffi:defcfun ("gtk_text_iter_get_visible_line_index" 
+               text-iter-visible-line-index) :int
  #+liber-documentation
  "@version{2023-2-2}
   @syntax[]{(gtk:text-iter-visible-line-index iter) => index}
@@ -533,8 +534,8 @@
                         :void)
   offset)
 
-(defcfun ("gtk_text_iter_get_visible_line_offset" text-iter-visible-line-offset)
-    :int
+(cffi:defcfun ("gtk_text_iter_get_visible_line_offset" 
+               text-iter-visible-line-offset) :int
  #+liber-documentation
  "@version{#2023-2-2}
   @syntax[]{(gtk:text-iter-visible-line-offset iter) => offset}
@@ -560,7 +561,7 @@
 ;;; gtk_text_iter_get_char -> text-iter-char
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_char" text-iter-char) unichar
+(cffi:defcfun ("gtk_text_iter_get_char" text-iter-char) g:unichar
  #+liber-documentation
  "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -584,7 +585,7 @@
 ;;; gtk_text_iter_get_slice -> text-iter-slice
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_slice" text-iter-slice)
+(cffi:defcfun ("gtk_text_iter_get_slice" text-iter-slice)
     (:string :free-from-foreign t)
  #+liber-documentation
  "@version{2023-2-2}
@@ -613,7 +614,7 @@
 ;;; gtk_text_iter_get_text -> text-iter-text
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_text" text-iter-text)
+(cffi:defcfun ("gtk_text_iter_get_text" text-iter-text)
     (:string :free-from-foreign t)
  #+liber-documentation
  "@version{2023-2-2}
@@ -639,7 +640,7 @@
 ;;; gtk_text_iter_get_visible_slice -> text-iter-visible-slice
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_visible_slice" text-iter-visible-slice)
+(cffi:defcfun ("gtk_text_iter_get_visible_slice" text-iter-visible-slice)
     (:string :free-from-foreign t)
  #+liber-documentation
  "@version{2023-2-2}
@@ -665,7 +666,7 @@
 ;;; gtk_text_iter_get_visible_text -> text-iter-visible-text
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_visible_text" text-iter-visible-text)
+(cffi:defcfun ("gtk_text_iter_get_visible_text" text-iter-visible-text)
     (:string :free-from-foreign t)
  #+liber-documentation
  "@version{2023-2-2}
@@ -691,7 +692,7 @@
 ;;; gtk_text_iter_get_paintable -> text-iter-paintable
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_paintable" text-iter-paintable)
+(cffi:defcfun ("gtk_text_iter_get_paintable" text-iter-paintable)
     (g:object gdk:paintable)
  #+liber-documentation
  "@version{#2023-2-2}
@@ -712,7 +713,7 @@
 ;;; gtk_text_iter_get_marks -> text-iter-marks
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_marks" text-iter-marks)
+(cffi:defcfun ("gtk_text_iter_get_marks" text-iter-marks)
     (g:slist-t (g:object text-mark))
  #+liber-documentation
  "@version{2023-2-2}
@@ -736,7 +737,7 @@
 ;;; gtk_text_iter_get_toggled_tags -> text-iter-toggled-tags
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_toggled_tags" text-iter-toggled-tags)
+(cffi:defcfun ("gtk_text_iter_get_toggled_tags" text-iter-toggled-tags)
     (g:slist-t (g:object text-tag))
  #+liber-documentation
  "@version{2023-2-2}
@@ -764,7 +765,7 @@
 ;;; gtk_text_iter_get_child_anchor -> text-iter-child-anchor
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_child_anchor" text-iter-child-anchor)
+(cffi:defcfun ("gtk_text_iter_get_child_anchor" text-iter-child-anchor)
     (g:object text-child-anchor)
  #+liber-documentation
  "@version{2023-2-2}
@@ -785,7 +786,7 @@
 ;;; gtk_text_iter_starts_tag
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_starts_tag" text-iter-starts-tag) :boolean
+(cffi:defcfun ("gtk_text_iter_starts_tag" text-iter-starts-tag) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -819,7 +820,7 @@
 ;;; gtk_text_iter_ends_tag
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_ends_tag" text-iter-ends-tag) :boolean
+(cffi:defcfun ("gtk_text_iter_ends_tag" text-iter-ends-tag) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -848,7 +849,7 @@
 ;;; gtk_text_iter_toggles_tag
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_toggles_tag" text-iter-toggles-tag) :boolean
+(cffi:defcfun ("gtk_text_iter_toggles_tag" text-iter-toggles-tag) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -877,7 +878,7 @@
 ;;; gtk_text_iter_has_tag
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_has_tag" text-iter-has-tag) :boolean
+(cffi:defcfun ("gtk_text_iter_has_tag" text-iter-has-tag) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -900,7 +901,7 @@
 ;;; gtk_text_iter_get_tags -> text-iter-tags
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_tags" text-iter-tags)
+(cffi:defcfun ("gtk_text_iter_get_tags" text-iter-tags)
     (g:slist-t (g:object text-tag))
  #+liber-documentation
  "@version{#2023-2-2}
@@ -921,7 +922,7 @@
 ;;; gtk_text_iter_editable
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_editable" text-iter-editable) :boolean
+(cffi:defcfun ("gtk_text_iter_editable" text-iter-editable) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -955,7 +956,7 @@
 ;;; gtk_text_iter_can_insert
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_can_insert" text-iter-can-insert) :boolean
+(cffi:defcfun ("gtk_text_iter_can_insert" text-iter-can-insert) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -983,7 +984,7 @@
 ;;; gtk_text_iter_starts_word
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_starts_word" text-iter-starts-word) :boolean
+(cffi:defcfun ("gtk_text_iter_starts_word" text-iter-starts-word) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1004,7 +1005,7 @@
 ;;; gtk_text_iter_ends_word
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_ends_word" text-iter-ends-word) :boolean
+(cffi:defcfun ("gtk_text_iter_ends_word" text-iter-ends-word) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1025,7 +1026,7 @@
 ;;; gtk_text_iter_inside_word
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_inside_word" text-iter-inside-word) :boolean
+(cffi:defcfun ("gtk_text_iter_inside_word" text-iter-inside-word) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1048,7 +1049,7 @@
 ;;; gtk_text_iter_starts_line
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_starts_line" text-iter-starts-line) :boolean
+(cffi:defcfun ("gtk_text_iter_starts_line" text-iter-starts-line) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1073,7 +1074,7 @@
 ;;; gtk_text_iter_ends_line
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_ends_line" text-iter-ends-line) :boolean
+(cffi:defcfun ("gtk_text_iter_ends_line" text-iter-ends-line) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1100,7 +1101,8 @@
 ;;; gtk_text_iter_starts_sentence
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_starts_sentence" text-iter-starts-sentence) :boolean
+(cffi:defcfun ("gtk_text_iter_starts_sentence" text-iter-starts-sentence) 
+    :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1122,7 +1124,7 @@
 ;;; gtk_text_iter_ends_sentence
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_ends_sentence" text-iter-ends-sentence) :boolean
+(cffi:defcfun ("gtk_text_iter_ends_sentence" text-iter-ends-sentence) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1144,7 +1146,8 @@
 ;;; gtk_text_iter_inside_sentence
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_inside_sentence" text-iter-inside-sentence) :boolean
+(cffi:defcfun ("gtk_text_iter_inside_sentence" text-iter-inside-sentence) 
+    :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1169,7 +1172,7 @@
 ;;; gtk_text_iter_is_cursor_position
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_is_cursor_position" text-iter-is-cursor-position)
+(cffi:defcfun ("gtk_text_iter_is_cursor_position" text-iter-is-cursor-position)
     :boolean
  #+liber-documentation
  "@version{#2023-2-2}
@@ -1193,7 +1196,7 @@
 ;;; gtk_text_iter_get_chars_in_line -> text-iter-chars-in-line
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_chars_in_line" text-iter-chars-in-line) :int
+(cffi:defcfun ("gtk_text_iter_get_chars_in_line" text-iter-chars-in-line) :int
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1213,7 +1216,7 @@
 ;;; gtk_text_iter_get_bytes_in_line -> text-iter-bytes-in-line
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_bytes_in_line" text-iter-bytes-in-line) :int
+(cffi:defcfun ("gtk_text_iter_get_bytes_in_line" text-iter-bytes-in-line) :int
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1233,7 +1236,7 @@
 ;;; gtk_text_iter_get_language -> text-iter-language
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_get_language" text-iter-language)
+(cffi:defcfun ("gtk_text_iter_get_language" text-iter-language)
     (g:boxed pango:language)
  #+liber-documentation
  "@version{2023-2-2}
@@ -1259,7 +1262,7 @@
 ;;; gtk_text_iter_is_end
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_is_end" text-iter-is-end) :boolean
+(cffi:defcfun ("gtk_text_iter_is_end" text-iter-is-end) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1281,7 +1284,7 @@
 ;;; gtk_text_iter_is_start
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_is_start" text-iter-is-start) :boolean
+(cffi:defcfun ("gtk_text_iter_is_start" text-iter-is-start) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1516,7 +1519,7 @@
 ;;; gtk_text_iter_forward_char                             not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_char" text-iter-forward-char) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_char" text-iter-forward-char) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1540,7 +1543,7 @@
 ;;; gtk_text_iter_backward_char                            not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_char" text-iter-backward-char) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_char" text-iter-backward-char) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1561,7 +1564,7 @@
 ;;; gtk_text_iter_forward_chars                            not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_chars" text-iter-forward-chars) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_chars" text-iter-forward-chars) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1588,7 +1591,7 @@
 ;;; gtk_text_iter_backward_chars                           not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_chars" text-iter-backward-chars) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_chars" text-iter-backward-chars) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1614,7 +1617,7 @@
 ;;; gtk_text_iter_forward_line                             not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_line" text-iter-forward-line) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_line" text-iter-forward-line) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1636,7 +1639,7 @@
 ;;; gtk_text_iter_backward_line                            not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_line" text-iter-backward-line) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_line" text-iter-backward-line) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1660,7 +1663,7 @@
 ;;; gtk_text_iter_forward_lines                            not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_lines" text-iter-forward-lines) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_lines" text-iter-forward-lines) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1687,7 +1690,7 @@
 ;;; gtk_text_iter_backward_lines                           not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_lines" text-iter-backward-lines) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_lines" text-iter-backward-lines) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1714,7 +1717,7 @@
 ;;; gtk_text_iter_forward_word_ends                        not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_word_ends" text-iter-forward-word-ends)
+(cffi:defcfun ("gtk_text_iter_forward_word_ends" text-iter-forward-word-ends)
     :boolean
  #+liber-documentation
  "@version{#2021-6-15}
@@ -1736,8 +1739,8 @@
 ;;; gtk_text_iter_backward_word_starts                     not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_word_starts"
-          text-iter-backward-word-starts) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_word_starts"
+               text-iter-backward-word-starts) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1758,7 +1761,7 @@
 ;;; gtk_text_iter_forward_word_end                         not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_word_end" text-iter-forward-word-end)
+(cffi:defcfun ("gtk_text_iter_forward_word_end" text-iter-forward-word-end)
     :boolean
  #+liber-documentation
  "@version{#2021-6-15}
@@ -1781,8 +1784,8 @@
 ;;; gtk_text_iter_backward_word_start                      not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_word_start" text-iter-backward-word-start)
-    :boolean
+(cffi:defcfun ("gtk_text_iter_backward_word_start" 
+               text-iter-backward-word-start) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1804,8 +1807,8 @@
 ;;; gtk_text_iter_forward_cursor_position                  not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_cursor_position"
-           text-iter-forward-cursor-position) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_cursor_position"
+               text-iter-forward-cursor-position) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1833,8 +1836,8 @@
 ;;; gtk_text_iter_backward_cursor_position                 not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_cursor_position"
-           text-iter-backward-cursor-position) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_cursor_position"
+               text-iter-backward-cursor-position) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1852,8 +1855,8 @@
 ;;; gtk_text_iter_forward_cursor_positions                 not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_cursor_positions"
-          text-iter-forward-cursor-positions) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_cursor_positions"
+               text-iter-forward-cursor-positions) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1874,8 +1877,8 @@
 ;;; gtk_text_iter_backward_cursor_positions                not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_cursor_positions"
-           text-iter-backward-cursor-positions) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_cursor_positions"
+               text-iter-backward-cursor-positions) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1896,8 +1899,8 @@
 ;;; gtk_text_iter_backward_sentence_start                  not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_sentence_start"
-           text-iter-backward-sentence-start) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_sentence_start"
+               text-iter-backward-sentence-start) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1920,8 +1923,8 @@
 ;;; gtk_text_iter_backward_sentence_starts                 not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_sentence_starts"
-          text-iter-backward-sentence-starts) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_sentence_starts"
+               text-iter-backward-sentence-starts) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1942,8 +1945,8 @@
 ;;; gtk_text_iter_forward_sentence_end                     not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_sentence_end"
-           text-iter-forward-sentence-end) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_sentence_end"
+               text-iter-forward-sentence-end) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1966,8 +1969,8 @@
 ;;; gtk_text_iter_forward_sentence_ends                    not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_sentence_ends"
-          text-iter-forward-sentence-ends) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_sentence_ends"
+               text-iter-forward-sentence-ends) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -1989,8 +1992,8 @@
 ;;; gtk_text_iter_forward_visible_word_ends                not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_visible_word_ends"
-          text-iter-forward-visible-word-ends) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_visible_word_ends"
+               text-iter-forward-visible-word-ends) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2010,8 +2013,8 @@
 ;;; gtk_text_iter_backward_visible_word_starts             not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_visible_word_starts"
-          text-iter-backward-visible-word-starts) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_visible_word_starts"
+               text-iter-backward-visible-word-starts) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2031,8 +2034,8 @@
 ;;; gtk_text_iter_forward_visible_word_end                 not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_visible_word_end"
-           text-iter-forward-visible-word-end) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_visible_word_end"
+               text-iter-forward-visible-word-end) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2054,8 +2057,8 @@
 ;;; gtk_text_iter_backward_visible_word_start              not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_visible_word_start"
-           text-iter-backward-visible-word-start) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_visible_word_start"
+               text-iter-backward-visible-word-start) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2077,8 +2080,8 @@
 ;;; gtk_text_iter_forward_visible_cursor_position          not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_visible_cursor_position"
-           text-iter-forward-visible-cursor-position) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_visible_cursor_position"
+               text-iter-forward-visible-cursor-position) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2096,8 +2099,8 @@
 ;;; gtk_text_iter_backward_visible_cursor_position         not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_visible_cursor_position"
-           text-iter-backward-visible-cursor-position) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_visible_cursor_position"
+               text-iter-backward-visible-cursor-position) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2115,8 +2118,8 @@
 ;;; gtk_text_iter_forward_visible_cursor_positions         not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_visible_cursor_positions"
-          text-iter-forward-visible-cursor-positions) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_visible_cursor_positions"
+               text-iter-forward-visible-cursor-positions) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2136,8 +2139,8 @@
 ;;; gtk_text_iter_backward_visible_cursor_positions        not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_visible_cursor_positions"
-           text-iter-backward-visible-cursor-positions) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_visible_cursor_positions"
+               text-iter-backward-visible-cursor-positions) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2157,8 +2160,8 @@
 ;;; gtk_text_iter_forward_visible_line                     not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_visible_line"
-           text-iter-forward-visible-line) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_visible_line"
+               text-iter-forward-visible-line) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2178,8 +2181,8 @@
 ;;; gtk_text_iter_backward_visible_line                    not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_visible_line"
-           text-iter-backward-visible-line) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_visible_line"
+               text-iter-backward-visible-line) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2203,8 +2206,8 @@
 ;;; gtk_text_iter_forward_visible_lines                    not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_visible_lines"
-          text-iter-forward-visible-lines) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_visible_lines"
+               text-iter-forward-visible-lines) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2231,8 +2234,8 @@
 ;;; gtk_text_iter_backward_visible_lines                   not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_visible_lines"
-           text-iter-backward-visible-lines) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_visible_lines"
+               text-iter-backward-visible-lines) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2258,7 +2261,7 @@
 ;;; gtk_text_iter_forward_to_end
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_to_end" text-iter-forward-to-end) :void
+(cffi:defcfun ("gtk_text_iter_forward_to_end" text-iter-forward-to-end) :void
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2279,8 +2282,8 @@
 ;;; gtk_text_iter_forward_to_line_end
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_to_line_end" text-iter-forward-to-line-end)
-    :boolean
+(cffi:defcfun ("gtk_text_iter_forward_to_line_end" 
+               text-iter-forward-to-line-end) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2305,8 +2308,8 @@
 ;;; gtk_text_iter_forward_to_tag_toggle
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_to_tag_toggle" text-iter-forward-to-tag-toggle)
-    :boolean
+(cffi:defcfun ("gtk_text_iter_forward_to_tag_toggle" 
+               text-iter-forward-to-tag-toggle) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2331,8 +2334,8 @@
 ;;; gtk_text_iter_backward_to_tag_toggle
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_to_tag_toggle"
-           text-iter-backward-to-tag-toggle) :boolean
+(cffi:defcfun ("gtk_text_iter_backward_to_tag_toggle"
+               text-iter-backward-to-tag-toggle) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2357,10 +2360,10 @@
 ;;; GtkTextCharPredicate
 ;;; ----------------------------------------------------------------------------
 
-(defcallback text-char-predicate :boolean
-    ((char unichar)
+(cffi:defcallback text-char-predicate :boolean
+    ((char g:unichar)
      (user-data :pointer))
-  (let ((func (get-stable-pointer-value user-data)))
+  (let ((func (glib:get-stable-pointer-value user-data)))
     (funcall func char)))
 
 #+liber-documentation
@@ -2418,7 +2421,7 @@ lambda (ch)
   @see-function{gtk:text-iter-forward-find-char}
   @see-function{gtk:text-iter-backward-find-char}"
   (assert (typep direction '(member :forward :backward)))
-  (with-stable-pointer (ptr predicate)
+  (glib:with-stable-pointer (ptr predicate)
     (if (eq direction :forward)
         (%text-iter-forward-find-char iter
                                       (cffi:callback text-char-predicate)
@@ -2435,8 +2438,8 @@ lambda (ch)
 ;;; gtk_text_iter_forward_find_char                        not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_find_char"
-          %text-iter-forward-find-char) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_find_char"
+               %text-iter-forward-find-char) :boolean
   (iter (g:boxed text-iter))
   (pred :pointer)
   (user-data :pointer)
@@ -2470,7 +2473,7 @@ lambda (ch)
 ;;; gtk_text_iter_backward_find_char                       not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_find_char" %text-iter-backward-find-char)
+(cffi:defcfun ("gtk_text_iter_backward_find_char" %text-iter-backward-find-char)
     :boolean
   (iter (g:boxed text-iter))
   (pred :pointer)
@@ -2563,7 +2566,8 @@ lambda (ch)
 ;;; gtk_text_iter_forward_search                           not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_forward_search" %text-iter-forward-search) :boolean
+(cffi:defcfun ("gtk_text_iter_forward_search" %text-iter-forward-search) 
+    :boolean
   (iter (g:boxed text-iter))
   (str (:string :free-to-foreign t))
   (flags text-search-flags)
@@ -2619,7 +2623,7 @@ lambda (ch)
 ;;; gtk_text_iter_backward_search                          not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_backward_search" %text-iter-backward-search)
+(cffi:defcfun ("gtk_text_iter_backward_search" %text-iter-backward-search)
     :boolean
   (iter (g:boxed text-iter))
   (str (:string :free-to-foreign t))
@@ -2662,7 +2666,7 @@ lambda (ch)
 ;;; gtk_text_iter_equal
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_equal" text-iter-equal) :boolean
+(cffi:defcfun ("gtk_text_iter_equal" text-iter-equal) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[lhs]{a @class{gtk:text-iter} instance}
@@ -2688,7 +2692,7 @@ lambda (ch)
 ;;; gtk_text_iter_compare
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_compare" text-iter-compare) :int
+(cffi:defcfun ("gtk_text_iter_compare" text-iter-compare) :int
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[lhs]{a @class{gtk:text-iter} instance}
@@ -2714,7 +2718,7 @@ lambda (ch)
 ;;; gtk_text_iter_in_range
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_in_range" text-iter-in-range) :boolean
+(cffi:defcfun ("gtk_text_iter_in_range" text-iter-in-range) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
@@ -2737,7 +2741,7 @@ lambda (ch)
 ;;; gtk_text_iter_order
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_iter_order" text-iter-order) :void
+(cffi:defcfun ("gtk_text_iter_order" text-iter-order) :void
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[first]{a @class{gtk:text-iter} instance}

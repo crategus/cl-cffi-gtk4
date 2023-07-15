@@ -60,7 +60,7 @@
 ;;; enum GtkPadActionType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPadActionType" pad-action-type
+(gobject:define-g-enum "GtkPadActionType" pad-action-type
   (:export t
    :type-initializer "gtk_pad_action_type_get_type")
   :button
@@ -76,7 +76,7 @@
     The type of a pad action.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPadActionType\" pad-action-type
+(gobject:define-g-enum \"GtkPadActionType\" pad-action-type
   (:export t
    :type-initializer \"gtk_pad_action_type_get_type\")
   :button
@@ -96,7 +96,7 @@
 
 ;; We pass the entries as Lisp lists. This structure is not needed.
 
-(defcstruct pad-action-entry
+(cffi:defcstruct pad-action-entry
   (type pad-action-type)
   (index :int)
   (mode :int)
@@ -112,7 +112,7 @@
     Structure defining a pad action entry.
   @end{short}
   @begin{pre}
-(defcstruct pad-action-entry
+(cffi:defcstruct pad-action-entry
   (type pad-action-type)
   (index :int)
   (mode :int)
@@ -139,7 +139,7 @@
 ;;; struct GtkPadController
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPadController" pad-controller
+(gobject:define-g-object-class "GtkPadController" pad-controller
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -263,7 +263,7 @@ pad_controller = gtk_pad_controller_new (window, action_group, NULL);
 ;;; gtk_pad_controller_new ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_pad_controller_new" pad-controller-new)
+(cffi:defcfun ("gtk_pad_controller_new" pad-controller-new)
     (g:object pad-controller :already-referenced)
  #+liber-documentation
  "@version{2023-3-11}
@@ -323,7 +323,7 @@ pad_controller = gtk_pad_controller_new (window, action_group, NULL);
 ;;; gtk_pad_controller_set_action ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_pad_controller_set_action" pad-controller-set-action) :void
+(cffi:defcfun ("gtk_pad_controller_set_action" pad-controller-set-action) :void
  #+liber-documentation
  "@version{2023-3-11}
   @argument[controller]{a @class{gtk:pad-controller} object}

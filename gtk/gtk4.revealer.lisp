@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.revealer.lisp
+;;; gtk4.revealer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -79,7 +79,7 @@
 ;;; GtkRevealerTransitionType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkRevealerTransitionType" revealer-transition-type
+(gobject:define-g-enum "GtkRevealerTransitionType" revealer-transition-type
   (:export t
    :type-initializer "gtk_revealer_transition_type_get_type")
   (:none 0)
@@ -103,7 +103,7 @@
     widget of a @class{gtk:revealer} widget is shown or hidden.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkRevealerTransitionType\" revealer-transition-type
+(gobject:define-g-enum \"GtkRevealerTransitionType\" revealer-transition-type
   (:export t
    :type-initializer \"gtk_revealer_transition_type_get_type\")
   (:none 0)
@@ -135,7 +135,7 @@
 ;;; GtkRevealer
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkRevealer" revealer
+(gobject:define-g-object-class "GtkRevealer" revealer
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -357,4 +357,4 @@
 
 (export 'revealer-new)
 
-;;; --- End of file gtk.revealer.lisp ------------------------------------------
+;;; --- End of file gtk4.revealer.lisp -----------------------------------------

@@ -80,7 +80,7 @@
 ;;; GtkDrawingArea
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkDrawingArea" drawing-area
+(gobject:define-g-object-class "GtkDrawingArea" drawing-area
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -289,13 +289,13 @@ lambda (area width height)    :run-last
 ;;; GtkDrawingAreaDrawFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback drawing-area-draw-func :void
+(cffi:defcallback drawing-area-draw-func :void
     ((area (g:object drawing-area))
      (cr (:pointer (:struct cairo:context-t)))
      (width :int)
      (height :int)
      (data :pointer))
-  (let ((ptr (get-stable-pointer-value data)))
+  (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr area cr width height)))
 
 #+liber-documentation
@@ -328,7 +328,7 @@ lambda (area cr width height)
 ;;; gtk_drawing_area_set_draw_func
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_drawing_area_set_draw_func" %drawing-area-set-draw-func)
+(cffi:defcfun ("gtk_drawing_area_set_draw_func" %drawing-area-set-draw-func)
     :void
   (area (g:object drawing-area))
   (func :pointer)

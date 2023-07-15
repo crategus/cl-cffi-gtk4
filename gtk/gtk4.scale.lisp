@@ -431,7 +431,7 @@
 ;;; gtk_scale_get_layout () -> scale-layout
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scale_get_layout" scale-layout)
+(cffi:defcfun ("gtk_scale_get_layout" scale-layout)
     (g:object pango:layout :free-from-foreign nil)
  #+liber-documentation
  "@version{#2021-12-27}
@@ -450,7 +450,7 @@
 ;;; gtk_scale_get_layout_offsets () -> scale-layout-offsets
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scale_get_layout_offsets" %scale-get-layout-offsets) :void
+(cffi:defcfun ("gtk_scale_get_layout_offsets" %scale-get-layout-offsets) :void
   (scale (g:object scale))
   (x (:pointer :int))
   (y (:pointer :int)))
@@ -474,7 +474,7 @@
   @see-class{gtk:scale}
   @see-function{pango:pixels}
   @see-variable{+pango-scale+}"
-  (with-foreign-objects ((x :int) (y :int))
+  (cffi:with-foreign-objects ((x :int) (y :int))
     (%scale-get-layout-offsets scale x y)
     (values (cffi:mem-ref x :int)
             (cffi:mem-ref y :int))))
@@ -485,7 +485,7 @@
 ;;; gtk_scale_add_mark ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scale_add_mark" scale-add-mark) :void
+(cffi:defcfun ("gtk_scale_add_mark" scale-add-mark) :void
  #+liber-documentation
  "@version{#2021-12-27}
   @argument[scale]{a @class{gtk:scale} widget}
@@ -517,7 +517,7 @@
 ;;; gtk_scale_clear_marks ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scale_clear_marks" scale-clear-marks) :void
+(cffi:defcfun ("gtk_scale_clear_marks" scale-clear-marks) :void
  #+liber-documentation
  "@version{#2021-12-27}
   @argument[scale]{a @class{gtk:scale} widget}

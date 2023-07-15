@@ -1,12 +1,11 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.orientable.lisp
+;;; gtk4.orientable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
 ;;; Copyright (C) 2011 - 2022 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
@@ -56,7 +55,7 @@
 ;;; GtkOrientable
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkOrientable" orientable
+(gobject:define-g-interface "GtkOrientable" orientable
   (:export t
    :type-initializer "gtk_orientable_get_type")
   ((orientation
@@ -111,4 +110,4 @@
   @see-class{gtk:orientable}
   @see-symbol{gtk:orientation}")
 
-;;; --- End of file gtk.orientable.lisp ----------------------------------------
+;;; --- End of file gtk4.orientable.lisp ---------------------------------------

@@ -81,7 +81,7 @@
 ;;; enum GtkShortcutActionFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkShortcutActionFlags" shortcut-action-flags
+(gobject:define-g-flags "GtkShortcutActionFlags" shortcut-action-flags
   (:export t
    :type-initializer "gtk_shortcut_action_flags_get_type")
   (:exclusive #.(ash 1 0)))
@@ -96,7 +96,7 @@
   @end{short}
   More flags may be added in the future.
   @begin{pre}
-(define-g-enum \"GtkShortcutActionFlags\" shortcut-action-flags
+(gobject:define-g-enum \"GtkShortcutActionFlags\" shortcut-action-flags
   (:export t
    :type-initializer \"gtk_shortcut_action_flags_get_type\")
   (:exclusive #.(ash 1 0)))
@@ -111,7 +111,7 @@
 ;;; GtkShortcutAction
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkShortcutAction" shortcut-action
+(gobject:define-g-object-class "GtkShortcutAction" shortcut-action
   (:superclass g:object
    :export t
    :interfaces nil
@@ -154,7 +154,7 @@
 ;;; GtkNothingAction
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkNothingAction" nothing-action
+(gobject:define-g-object-class "GtkNothingAction" nothing-action
   (:superclass shortcut-action
    :export t
    :interfaces nil
@@ -173,7 +173,7 @@
 ;;; GtkCallbackAction
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCallbackAction" callback-action
+(gobject:define-g-object-class "GtkCallbackAction" callback-action
   (:superclass shortcut-action
    :export t
    :interfaces nil
@@ -193,7 +193,7 @@
 ;;; GtkMnemonicAction
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkMnemonicAction" mnemonic-action
+(gobject:define-g-object-class "GtkMnemonicAction" mnemonic-action
   (:superclass shortcut-action
    :export t
    :interfaces nil
@@ -214,7 +214,7 @@
 ;;; GtkActivateAction
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkActivateAction" activate-action
+(gobject:define-g-object-class "GtkActivateAction" activate-action
   (:superclass shortcut-action
    :export t
    :interfaces nil
@@ -235,7 +235,7 @@
 ;;; GtkSignalAction
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkSignalAction" signal-action
+(gobject:define-g-object-class "GtkSignalAction" signal-action
   (:superclass shortcut-action
    :export t
    :interfaces nil
@@ -286,7 +286,7 @@
 ;;; GtkNamedAction
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkNamedAction" named-action
+(gobject:define-g-object-class "GtkNamedAction" named-action
   (:superclass shortcut-action
    :export t
    :interfaces nil
@@ -335,7 +335,8 @@
 ;;; gtk_shortcut_action_to_string ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_shortcut_action_to_string" shortcut-action-to-string) :string
+(cffi:defcfun ("gtk_shortcut_action_to_string" shortcut-action-to-string) 
+    :string
  #+liber-documentation
  "@version{#2022-8-26}
   @argument[shortcut]{a @class{gtk:shortcut-action} object}
@@ -374,7 +375,7 @@
 ;;; gtk_shortcut_action_parse_string ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_shortcut_action_parse_string" shortcut-action-parse-string)
+(cffi:defcfun ("gtk_shortcut_action_parse_string" shortcut-action-parse-string)
     (g:object shortcut-action)
  #+liber-documentation
  "@version{#2022-8-26}
@@ -401,7 +402,7 @@
 ;;; gtk_shortcut_action_activate ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_shortcut_action_activated" shortcut-action-activate)
+(cffi:defcfun ("gtk_shortcut_action_activated" shortcut-action-activate)
     :boolean
  #+liber-documentation
  "@version{#2022-8-26}
@@ -434,7 +435,7 @@
 ;;; gtk_nothing_action_get ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_nothing_action_get" nothing-action-get)
+(cffi:defcfun ("gtk_nothing_action_get" nothing-action-get)
     (g:object shortcut-action)
  #+liber-documentation
  "@version{#2022-8-26}
@@ -451,7 +452,7 @@
 ;;; GtkShortcutFunc ()
 ;;; ----------------------------------------------------------------------------
 
-(defcallback shortcut-func :boolean
+(cffi:defcallback shortcut-func :boolean
     ((widget (g:object widget))
      (args (:pointer (:struct glib:variant)))
      (data :pointer))
@@ -482,7 +483,7 @@ lambda (widget args)
 ;;; gtk_callback_action_new ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_callback_action_new" %callback-action-new)
+(cffi:defcfun ("gtk_callback_action_new" %callback-action-new)
     (g:object shortcut-action)
   (callback :pointer)
   (data :pointer)
@@ -495,7 +496,7 @@ lambda (widget args)
   @return{A new @class{gtk:callback-action} object.}
   @short{Create a custom action that calls the given callback when activated.}
   @see-class{gtk:callback-action}"
-  (with-stable-pointer (ptr func)
+  (glib:with-stable-pointer (ptr func)
     (%callback-action-new (cffi:callback shortcut-func)
                            ptr
                            (cffi:callback glib:stable-pointer-destroy-notify))))
@@ -506,7 +507,7 @@ lambda (widget args)
 ;;; gtk_mnemonic_action_get ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_mnemonic_action_get" mnemonic-action-get)
+(cffi:defcfun ("gtk_mnemonic_action_get" mnemonic-action-get)
     (g:object shortcut-action)
  #+liber-documentation
  "@version{#2022-8-26}
@@ -525,7 +526,7 @@ lambda (widget args)
 ;;; gtk_activate_action_get ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_activate_action_get" activate-action-get)
+(cffi:defcfun ("gtk_activate_action_get" activate-action-get)
     (g:object shortcut-action)
  #+liber-documentation
  "@version{#2022-8-26}

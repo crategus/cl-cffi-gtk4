@@ -344,7 +344,7 @@
 ;;; GtkRequisition
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-cstruct requisition "GtkRequisition"
+(glib:define-g-boxed-cstruct requisition "GtkRequisition"
   (:export t
    :type-initializer "gtk_requisition_get_type")
   (width :int :initform 0)
@@ -361,7 +361,7 @@
   See the section called \"Height-for-width Geometry Management\" in the
   @class{gtk:widget} documentation for more information.
   @begin{pre}
-(define-g-boxed-cstruct requisition \"GtkRequisition\"
+(glib:define-g-boxed-cstruct requisition \"GtkRequisition\"
   (:export t
    :type-initializer \"gtk_requistion_get_type\")
   (width :int :initform 0)
@@ -490,7 +490,7 @@
 ;;; GtkWidget
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkWidget" widget
+(gobject:define-g-object-class "GtkWidget" widget
   (:superclass g:initially-unowned
    :export t
    :interfaces ("GtkAccessible"
@@ -2051,7 +2051,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_in_destruction
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_in_destruction" widget-in-destruction) :boolean
+(cffi:defcfun ("gtk_widget_in_destruction" widget-in-destruction) :boolean
  #+liber-documentation
  "@version{#2021-9-16}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2070,7 +2070,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_unparent
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_unparent" widget-unparent) :void
+(cffi:defcfun ("gtk_widget_unparent" widget-unparent) :void
  #+liber-documentation
  "@version{#2022-9-10}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2088,7 +2088,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_show
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_show" widget-show) :void
+(cffi:defcfun ("gtk_widget_show" widget-show) :void
  #+liber-documentation
  "@version{2022-12-4}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2110,7 +2110,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_hide
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_hide" widget-hide) :void
+(cffi:defcfun ("gtk_widget_hide" widget-hide) :void
  #+liber-documentation
  "@version{#2022-9-8}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2128,7 +2128,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_map
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_map" widget-map) :void
+(cffi:defcfun ("gtk_widget_map" widget-map) :void
  #+liber-documentation
  "@version{#2021-9-16}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2146,7 +2146,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_unmap
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_unmap" widget-unmap ) :void
+(cffi:defcfun ("gtk_widget_unmap" widget-unmap ) :void
  #+liber-documentation
  "@version{#2021-9-16}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2164,7 +2164,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_realize
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_realize" widget-realize) :void
+(cffi:defcfun ("gtk_widget_realize" widget-realize) :void
  #+liber-documentation
  "@version{#2021-9-16}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2196,7 +2196,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_unrealize
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_unrealize" widget-unrealize) :void
+(cffi:defcfun ("gtk_widget_unrealize" widget-unrealize) :void
  #+liber-documentation
  "@version{#2021-9-16}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2215,7 +2215,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_queue_draw
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_queue_draw" widget-queue-draw) :void
+(cffi:defcfun ("gtk_widget_queue_draw" widget-queue-draw) :void
  #+liber-documentation
  "@version{#2021-9-16}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2233,7 +2233,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_queue_resize
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_queue_resize" widget-queue-resize) :void
+(cffi:defcfun ("gtk_widget_queue_resize" widget-queue-resize) :void
  #+liber-documentation
  "@version{#2021-9-16}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2260,7 +2260,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_queue_allocate
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_queue_allocate" widget-queue-allocate) :void
+(cffi:defcfun ("gtk_widget_queue_allocate" widget-queue-allocate) :void
  #+liber-documentation
  "@version{#2021-9-21}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2284,7 +2284,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_frame_clock -> widget-frame-clock
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_frame_clock" widget-frame-clock)
+(cffi:defcfun ("gtk_widget_get_frame_clock" widget-frame-clock)
     (g:object gdk-frame-clock)
  #+liber-documentation
  "@version{#2021-9-16}
@@ -2327,12 +2327,12 @@ lambda (widget)    :run-last
 ;;; GtkTickCallback
 ;;; ----------------------------------------------------------------------------
 
-(defcallback tick-callback :boolean
+(cffi:defcallback tick-callback :boolean
     ((widget (g:object widget))
      (clock (g:object gdk-frame-clock))
      (data :pointer))
   (restart-case
-    (let ((func (get-stable-pointer-value data)))
+    (let ((func (glib:get-stable-pointer-value data)))
       (funcall func widget clock))
     (return () :report "Error in GtkTickCallback function." nil)))
 
@@ -2366,7 +2366,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_add_tick_callback
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_add_tick_callback" %widget-add-tick-callback) :uint
+(cffi:defcfun ("gtk_widget_add_tick_callback" %widget-add-tick-callback) :uint
   (widget (g:object widget))
   (func :pointer)
   (data :pointer)
@@ -2421,7 +2421,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_remove_tick_callback
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_remove_tick_callback" widget-remove-tick-callback)
+(cffi:defcfun ("gtk_widget_remove_tick_callback" widget-remove-tick-callback)
     :void
  #+liber-documentation
  "@version{#2021-9-16}
@@ -2443,7 +2443,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_size_allocate
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_size_allocate" widget-size-allocate) :void
+(cffi:defcfun ("gtk_widget_size_allocate" widget-size-allocate) :void
  #+liber-documentation
  "@version{#2022-9-10}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2468,7 +2468,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_allocate ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_allocate" widget-allocate) :void
+(cffi:defcfun ("gtk_widget_allocate" widget-allocate) :void
  #+liber-documentation
  "@version{#2022-9-10}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2733,7 +2733,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_activate
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_activate" widget-activate) :boolean
+(cffi:defcfun ("gtk_widget_activate" widget-activate) :boolean
  #+liber-documentation
  "@version{#2021-9-16}
   @argument[widget]{a @class{gtk:widget} object that is activatable}
@@ -2771,7 +2771,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_grab_focus
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_grab_focus" widget-grab-focus) :boolean
+(cffi:defcfun ("gtk_widget_grab_focus" widget-grab-focus) :boolean
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2798,7 +2798,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_native () -> widget-native
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_native" widget-native) (g:object native)
+(cffi:defcfun ("gtk_widget_get_native" widget-native) (g:object native)
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[widget]{a @class{gtk:widget} widget}
@@ -2819,7 +2819,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_ancestor -> widget-ancestor
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_ancestor" widget-ancestor) (g:object widget)
+(cffi:defcfun ("gtk_widget_get_ancestor" widget-ancestor) (g:object widget)
  #+liber-documentation
  "@version{#2021-9-16}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2848,7 +2848,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_is_ancestor
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_is_ancestor" widget-is-ancestor) :boolean
+(cffi:defcfun ("gtk_widget_is_ancestor" widget-is-ancestor) :boolean
  #+liber-documentation
  "@version{#2021-9-19}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2870,7 +2870,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_translate_coordinates
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_translate_coordinates" %widget-translate-coordinates)
+(cffi:defcfun ("gtk_widget_translate_coordinates" %widget-translate-coordinates)
     :boolean
   (src-widget g:object)
   (dst-widget g:object)
@@ -2896,7 +2896,7 @@ lambda (widget)    :run-last
   In order to perform this operation, both widgets must be realized, and must
   share a common toplevel.
   @see-class{gtk:widget}"
-  (with-foreign-objects ((dst-x :int) (dst-y :int))
+  (cffi:with-foreign-objects ((dst-x :int) (dst-y :int))
     (when (%widget-translate-coordinates src
                                          dst
                                          src-x
@@ -2912,7 +2912,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_add_controller ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_add_controller" widget-add-controller) :void
+(cffi:defcfun ("gtk_widget_add_controller" widget-add-controller) :void
  #+liber-documentation
  "@version{#2022-7-21}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2935,7 +2935,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_remove_controller ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_remove_controller" widget-remove-controller) :void
+(cffi:defcfun ("gtk_widget_remove_controller" widget-remove-controller) :void
  #+liber-documentation
  "@version{#2022-7-21}
   @argument[widget]{a @class{gtk:widget} object}
@@ -2968,7 +2968,7 @@ lambda (widget)    :run-last
                         :void)
   direction)
 
-(defcfun ("gtk_widget_get_direction" widget-direction) text-direction
+(cffi:defcfun ("gtk_widget_get_direction" widget-direction) text-direction
  #+liber-documentation
  "@version{#2021-9-19}
   @syntax[]{(gtk:widget-direction widget) => direction}
@@ -3011,7 +3011,7 @@ lambda (widget)    :run-last
                         :void)
   direction)
 
-(defcfun ("gtk_widget_get_default_direction" widget-default-direction)
+(cffi:defcfun ("gtk_widget_get_default_direction" widget-default-direction)
     text-direction
  #+liber-documentation
  "@version{#2021-9-19}
@@ -3037,7 +3037,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_create_pango_context
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_create_pango_context" widget-create-pango-context)
+(cffi:defcfun ("gtk_widget_create_pango_context" widget-create-pango-context)
     (g:object pango:context :already-referenced)
  #+liber-documentation
  "@version{#2021-9-19}
@@ -3059,7 +3059,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_pango_context -> widget-pango-context
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_pango_context" widget-pango-context)
+(cffi:defcfun ("gtk_widget_get_pango_context" widget-pango-context)
     (g:object pango:context)
  #+liber-documentation
  "@version{#2021-9-19}
@@ -3099,7 +3099,7 @@ lambda (widget)    :run-last
                           :void)
     options))
 
-(defcfun ("gtk_widget_get_font_options" %widget-font-options)
+(cffi:defcfun ("gtk_widget_get_font_options" %widget-font-options)
     (:pointer (:struct cairo:font-options-t))
   (widget (g:object widget)))
 
@@ -3138,7 +3138,7 @@ lambda (widget)    :run-last
                         :void)
   fontmap)
 
-(defcfun ("gtk_widget_get_font_map" widget-font-map)
+(cffi:defcfun ("gtk_widget_get_font_map" widget-font-map)
     (g:object pango:font-map)
  #+liber-documentation
  "@version{#2021-9-22}
@@ -3165,7 +3165,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_create_pango_layout
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_create_pango_layout" %widget-create-pango-layout)
+(cffi:defcfun ("gtk_widget_create_pango_layout" %widget-create-pango-layout)
     (g:object pango:layout :already-referenced)
   (widget (g:object widget))
   (text :string))
@@ -3221,7 +3221,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_mnemonic_activate
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_mnemonic_activate" widget-mnemonic-activate) :boolean
+(cffi:defcfun ("gtk_widget_mnemonic_activate" widget-mnemonic-activate) :boolean
  #+liber-documentation
  "@version{#2021-9-19}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3282,7 +3282,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_child_focus
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_child_focus" widget-child-focus) :boolean
+(cffi:defcfun ("gtk_widget_child_focus" widget-child-focus) :boolean
  #+liber-documentation
  "@version{#2022-9-10}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3330,7 +3330,7 @@ lambda (widget)    :run-last
                         :void)
   is-visible)
 
-(defcfun ("gtk_widget_get_child_visible" widget-child-visible) :boolean
+(cffi:defcfun ("gtk_widget_get_child_visible" widget-child-visible) :boolean
  #+liber-documentation
  "@version{#2021-9-20}
   @syntax[]{(gtk:widget-child-visible widget) => visible}
@@ -3369,7 +3369,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_settings -> widget-settings
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_settings" widget-settings) (g:object settings)
+(cffi:defcfun ("gtk_widget_get_settings" widget-settings) (g:object settings)
  #+liber-documentation
  "@version{#2021-9-20}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3392,7 +3392,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_clipboard -> widget-clipboard
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_clipboard" widget-clipboard)
+(cffi:defcfun ("gtk_widget_get_clipboard" widget-clipboard)
     (g:object gdk-clipboard)
  #+liber-documentation
  "@version{#2022-1-12}
@@ -3433,7 +3433,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_display -> widget-display
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_display" widget-display) (g:object gdk:display)
+(cffi:defcfun ("gtk_widget_get_display" widget-display) (g:object gdk:display)
  #+liber-documentation
  "@version{#2021-10-31}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3468,7 +3468,7 @@ lambda (widget)    :run-last
                           :void)
     (values width height)))
 
-(defcfun ("gtk_widget_get_size_request" %widget-size-request) :void
+(cffi:defcfun ("gtk_widget_get_size_request" %widget-size-request) :void
   (widget (g:object widget))
   (width (:pointer :int))
   (height (:pointer :int)))
@@ -3531,7 +3531,7 @@ lambda (widget)    :run-last
   @see-function{gtk:widget-margin-end}
   @see-function{gtk:widget-margin-top}
   @see-function{gtk:widget-margin-bottom}"
-  (with-foreign-objects ((width :int) (height :int))
+  (cffi:with-foreign-objects ((width :int) (height :int))
     (%widget-size-request widget width height)
     (values (cffi:mem-ref width :int)
             (cffi:mem-ref height :int))))
@@ -3542,7 +3542,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_list_mnemonic_labels
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_list_mnemonic_labels" widget-list-mnemonic-labels)
+(cffi:defcfun ("gtk_widget_list_mnemonic_labels" widget-list-mnemonic-labels)
     (g:list-t (g:object widget))
  #+liber-documentation
  "@version{#2021-9-20}
@@ -3573,7 +3573,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_add_mnemonic_label
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_add_mnemonic_label" widget-add-mnemonic-label) :void
+(cffi:defcfun ("gtk_widget_add_mnemonic_label" widget-add-mnemonic-label) :void
  #+liber-documentation
  "@version{#2021-9-20}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3601,7 +3601,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_remove_mnemonic_label
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_remove_mnemonic_label" widget-remove-mnemonic-label)
+(cffi:defcfun ("gtk_widget_remove_mnemonic_label" widget-remove-mnemonic-label)
     :void
  #+liber-documentation
  "@version{#2021-9-20}
@@ -3626,7 +3626,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_error_bell
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_error_bell" widget-error-bell) :void
+(cffi:defcfun ("gtk_widget_error_bell" widget-error-bell) :void
  #+liber-documentation
  "@version{#2021-9-20}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3650,7 +3650,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_keynav_failed
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_keynav_failed" widget-keynav-failed) :boolean
+(cffi:defcfun ("gtk_widget_keynav_failed" widget-keynav-failed) :boolean
  #+liber-documentation
  "@version{#2021-9-20}
   @argument[widget]{a @class{gtk:widget} object}
@@ -3704,7 +3704,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_trigger_tooltip_query
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tooltip_trigger_tooltip_query" widget-trigger-tooltip-query)
+(cffi:defcfun ("gtk_tooltip_trigger_tooltip_query" widget-trigger-tooltip-query)
     :void
  #+liber-documentation
  "@version{#2021-9-20}
@@ -3724,7 +3724,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_allocated_width -> widget-allocated-width
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_allocated_width" widget-allocated-width) :int
+(cffi:defcfun ("gtk_widget_get_allocated_width" widget-allocated-width) :int
  #+liber-documentation
  "@version{#2021-11-30}
   @argument[widget]{the @class{gtk:widget} object to query}
@@ -3751,7 +3751,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_allocated_height  -> widget-allocated-height
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_allocated_height" widget-allocated-height) :int
+(cffi:defcfun ("gtk_widget_get_allocated_height" widget-allocated-height) :int
  #+liber-documentation
  "@version{#2021-11-30}
   @argument[widget]{the @class{gtk:widget} object to query}
@@ -3782,7 +3782,7 @@ lambda (widget)    :run-last
 ;; It works with the type gdk:rectangle. In the C implementation the
 ;; new type GtkAllocation is a synonym for GdkRectangle
 
-(defcfun ("gtk_widget_get_allocation" %widget-allocation) :void
+(cffi:defcfun ("gtk_widget_get_allocation" %widget-allocation) :void
   (widget (g:object widget))
   (allocation (g:boxed gdk:rectangle)))
 
@@ -3824,7 +3824,8 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_allocated_baseline -> widget-allocated-baseline
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_allocated_baseline" widget-allocated-baseline) :int
+(cffi:defcfun ("gtk_widget_get_allocated_baseline" widget-allocated-baseline) 
+    :int
  #+liber-documentation
  "@version{#2021-9-20}
   @argument[widget]{a @class{gtk:widget} object to query}
@@ -3843,7 +3844,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_width () -> widget-width
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_width" widget-width) :int
+(cffi:defcfun ("gtk_widget_get_width" widget-width) :int
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[widget]{a @class{gtk:widget} widget}
@@ -3865,7 +3866,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_height () -> widget-height
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_height" widget-height) :int
+(cffi:defcfun ("gtk_widget_get_height" widget-height) :int
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[widget]{a @class{gtk:widget} widget}
@@ -3887,7 +3888,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_size () -> widget-size
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_size" widget-size) :int
+(cffi:defcfun ("gtk_widget_get_size" widget-size) :int
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[widget]{a @class{gtk:widget} widget}
@@ -4004,7 +4005,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_contains ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_contains" %widget-contains) :boolean
+(cffi:defcfun ("gtk_widget_contains" %widget-contains) :boolean
   (widget (g:object widget))
   (x :double)
   (y :double))
@@ -4108,7 +4109,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_is_sensitive
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_is_sensitive" widget-is-sensitive) :boolean
+(cffi:defcfun ("gtk_widget_is_sensitive" widget-is-sensitive) :boolean
  #+liber-documentation
  "@version{#2021-9-20}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4127,7 +4128,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_is_visible
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_is_visible" widget-is-visible) :boolean
+(cffi:defcfun ("gtk_widget_is_visible" widget-is-visible) :boolean
  #+liber-documentation
  "@version{#2021-9-20}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4156,7 +4157,7 @@ lambda (widget)    :run-last
                         :void)
   flags)
 
-(defcfun ("gtk_widget_get_state_flags" widget-state-flags) state-flags
+(cffi:defcfun ("gtk_widget_get_state_flags" widget-state-flags) state-flags
  #+liber-documentation
  "@version{#2022-8-3}
   @syntax[]{(gtk:widget-state-flags widget) => flags}
@@ -4194,7 +4195,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_unset_state_flags
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_unset_state_flags" widget-unset-state-flags) :void
+(cffi:defcfun ("gtk_widget_unset_state_flags" widget-unset-state-flags) :void
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4251,7 +4252,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_has_visible_focus ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_has_visible_focus" widget-has-visible-focus) :boolean
+(cffi:defcfun ("gtk_widget_has_visible_focus" widget-has-visible-focus) :boolean
  #+liber-documentation
  "@version{#2020-9-22}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4278,7 +4279,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_is_drawable
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_is_drawable" widget-is-drawable) :boolean
+(cffi:defcfun ("gtk_widget_is_drawable" widget-is-drawable) :boolean
  #+liber-documentation
  "@version{#2021-9-20}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4306,7 +4307,7 @@ lambda (widget)    :run-last
                         :void)
   realized)
 
-(defcfun ("gtk_widget_get_realized" widget-realized) :boolean
+(cffi:defcfun ("gtk_widget_get_realized" widget-realized) :boolean
  #+liber-documentation
  "@version{#2021-9-20}
   @syntax[]{(gtk:widget-realized widget) => realized}
@@ -4341,7 +4342,7 @@ lambda (widget)    :run-last
                         :void)
   mapped)
 
-(defcfun ("gtk_widget_get_mapped" widget-mapped) :boolean
+(cffi:defcfun ("gtk_widget_get_mapped" widget-mapped) :boolean
  #+liber-documentation
  "@version{#2021-12-15}
   @syntax[]{(gtk:widget-mapped widget) => mapped}
@@ -4441,7 +4442,8 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_next_sibling -> widget-next-sibling
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_next_sibling" widget-next-sibling) (g:object widget)
+(cffi:defcfun ("gtk_widget_get_next_sibling" widget-next-sibling) 
+    (g:object widget)
  #+liber-documentation
  "@version{2022-11-25}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4459,7 +4461,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_prev_sibling -> widget-prev-sibling
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_prev_sibling" widget-prev-sibling)
+(cffi:defcfun ("gtk_widget_get_prev_sibling" widget-prev-sibling)
     (g:object widget)
  #+liber-documentation
  "@version{#2022-1-21}
@@ -4478,7 +4480,8 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_first_child -> widget-first-child
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_first_child" widget-first-child) (g:object widget)
+(cffi:defcfun ("gtk_widget_get_first_child" widget-first-child) 
+    (g:object widget)
  #+liber-documentation
  "@version{2022-11-25}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4496,7 +4499,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_last_child -> widget-last-child
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_last_child" widget-last-child) (g:object widget)
+(cffi:defcfun ("gtk_widget_get_last_child" widget-last-child) (g:object widget)
  #+liber-documentation
  "@version{2023-3-19}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4595,7 +4598,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_add_css_class
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_add_css_class" widget-add-css-class) :void
+(cffi:defcfun ("gtk_widget_add_css_class" widget-add-css-class) :void
  #+liber-documentation
  "@version{2023-3-26}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4616,7 +4619,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_remove_css_class ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_remove_css_class" widget-remove-css-class) :void
+(cffi:defcfun ("gtk_widget_remove_css_class" widget-remove-css-class) :void
  #+liber-documentation
  "@version{2023-3-26}
   @argument[widget]{a @class{gtk:widget} widget}
@@ -4637,7 +4640,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_has_css_class ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_has_css_class" widget-has-css-class) :boolean
+(cffi:defcfun ("gtk_widget_has_css_class" widget-has-css-class) :boolean
  #+liber-documentation
  "@version{2023-3-26}
   @argument[widget]{a @class{gtk:widget} widget}
@@ -4668,7 +4671,7 @@ lambda (widget)    :run-last
       (g:type-class-unref class))
     name))
 
-(defcfun ("gtk_widget_class_get_css_name" %widget-class-css-name) :string
+(cffi:defcfun ("gtk_widget_class_get_css_name" %widget-class-css-name) :string
   (class :pointer))
 
 (defun widget-class-css-name (gtype)
@@ -4699,7 +4702,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_style_context -> widget-style-context
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_style_context" widget-style-context)
+(cffi:defcfun ("gtk_widget_get_style_context" widget-style-context)
     (g:object style-context)
  #+liber-documentation
  "@version{2023-3-26}
@@ -4755,7 +4758,8 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_request_mode -> widget-request-mode
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_request_mode" widget-request-mode) size-request-mode
+(cffi:defcfun ("gtk_widget_get_request_mode" widget-request-mode) 
+    size-request-mode
  #+liber-documentation
  "@version{#2022-9-7}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4777,7 +4781,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_preferred_size -> widget-preferred-size
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_preferred_size" %widget-preferred-size) :void
+(cffi:defcfun ("gtk_widget_get_preferred_size" %widget-preferred-size) :void
   (widget (g:object widget))
   (minium-size (g:boxed requisition))
   (natural-size (g:boxed requisition)))
@@ -4851,7 +4855,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_compute_expand
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_compute_expand" widget-compute-expand) :boolean
+(cffi:defcfun ("gtk_widget_compute_expand" widget-compute-expand) :boolean
  #+liber-documentation
  "@version{#2021-9-21}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4885,7 +4889,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_init_template
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_init_template" widget-init-template) :void
+(cffi:defcfun ("gtk_widget_init_template" widget-init-template) :void
  #+liber-documentation
  "@version{#2021-9-21}
   @argument[widget]{a @class{gtk:widget} object}
@@ -4919,7 +4923,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_class_set_template
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_class_set_template" %widget-class-set-template) :void
+(cffi:defcfun ("gtk_widget_class_set_template" %widget-class-set-template) :void
   (class (:pointer (:struct gobject:type-class)))
   (template (g:boxed glib:bytes)))
 
@@ -4957,8 +4961,8 @@ lambda (widget)    :run-last
 ;;; gtk_widget_class_set_template_from_resource ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_class_set_template_from_resource"
-          %widget-class-set-template-from-resource) :void
+(cffi:defcfun ("gtk_widget_class_set_template_from_resource"
+               %widget-class-set-template-from-resource) :void
   (class (:pointer (:struct gobject:type-class)))
   (name :string))
 
@@ -4991,7 +4995,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_template_child -> widget-template-child
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_get_template_child" widget-template-child) g:object
+(cffi:defcfun ("gtk_widget_get_template_child" widget-template-child) g:object
  #+liber-documentation
  "@version{#2021-9-22}
   @argument[widget]{a @class{gtk:widget} object}
@@ -5295,7 +5299,8 @@ lambda (widget)    :run-last
 ;;; gtk_widget_insert_action_group
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_insert_action_group" widget-insert-action-group) :void
+(cffi:defcfun ("gtk_widget_insert_action_group" widget-insert-action-group) 
+    :void
  #+liber-documentation
  "@version{#2023-3-12}
   @argument[widget]{a @class{gtk:widget} object}
@@ -5518,7 +5523,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_action_set_enabled
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_widget_action_set_enabled" widget-action-set-enabled) :void
+(cffi:defcfun ("gtk_widget_action_set_enabled" widget-action-set-enabled) :void
  #+liber-documentation
  "@version{#2022-1-21}
   @argument[widget]{a @class{gtk:widget} object}

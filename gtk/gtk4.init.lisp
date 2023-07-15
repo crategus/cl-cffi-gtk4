@@ -28,7 +28,6 @@
 ;; DIVISION-BY-ZERO signalled". This code disables floating point errors for
 ;; SBCL. Check which part of the library can produce floating point errors.
 
-#+nil
 (when (and (find-package "SB-EXT")
            (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT")))
   (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT"))
@@ -46,6 +45,10 @@
 
 ;; Initialize the GTK main loop
 (glib-init:at-init ()
+  ;; Possible backend names are x11, win32, quartz, broadway, wayland
+  ;; At this time 2023-6-10 sbcl crashes with the WAYLAND backend. Therefore
+  ;; we use the X11 backend.
+  (gdk:set-allowed-backends "x11")
   (init))
 
 ;;; --- End of file gtk.init.lisp ----------------------------------------------

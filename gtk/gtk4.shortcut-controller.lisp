@@ -78,7 +78,7 @@
 ;;; enum GtkShortcutScope
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkShortcutScope" shortcut-scope
+(gobject:define-g-enum "GtkShortcutScope" shortcut-scope
   (:export t
    :type-initializer "gtk_shortcut_scope_get_type")
   (:local 0)
@@ -95,7 +95,7 @@
     @class{gtk:shortcut-controller} object get handled.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkShortcutScope\" shortcut-scope
+(gobject:define-g-enum \"GtkShortcutScope\" shortcut-scope
   (:export t
    :type-initializer \"gtk_shortcut_scope_get_type\")
   (:local 0)
@@ -117,7 +117,7 @@
 ;;; struct GtkShortcutController
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkShortcutController" shortcut-controller
+(gobject:define-g-object-class "GtkShortcutController" shortcut-controller
   (:superclass event-controller
    :export t
    :interfaces nil

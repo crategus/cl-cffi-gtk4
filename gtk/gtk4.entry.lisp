@@ -175,7 +175,7 @@
 ;;; enum GtkEntryIconPosition
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkEntryIconPosition" entry-icon-position
+(gobject:define-g-enum "GtkEntryIconPosition" entry-icon-position
   (:export t
    :type-initializer "gtk_entry_icon_position_get_type")
   (:primary 0)
@@ -190,7 +190,7 @@
     Specifies the side of the entry at which an icon is placed.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkEntryIconPosition\" entry-icon-position
+(gobject:define-g-enum \"GtkEntryIconPosition\" entry-icon-position
   (:export t
    :type-initializer \"gtk_entry_icon_position_get_type\")
   (:primary 0)
@@ -208,7 +208,7 @@
 ;;; struct GtkEntry
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkEntry" entry
+(gobject:define-g-object-class "GtkEntry" entry
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

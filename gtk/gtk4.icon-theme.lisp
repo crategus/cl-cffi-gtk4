@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.icon-theme.lisp
+;;; gtk4.icon-theme.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkIconTheme
@@ -88,7 +88,7 @@
 ;;; enum GtkIconLookupFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkIconLookupFlags" icon-lookup-flags
+(gobject:define-g-flags "GtkIconLookupFlags" icon-lookup-flags
   (:export t
    :type-initializer "gtk_icon_lookup_flags_get_type")
   (:none 0)
@@ -105,7 +105,7 @@
     Used to specify options for the @fun{gtk:icon-theme-lookup-icon} function.
   @end{short}
   @begin{pre}
-(define-g-flags \"GtkIconLookupFlags\" icon-lookup-flags
+(gobject:define-g-flags \"GtkIconLookupFlags\" icon-lookup-flags
   (:export t
    :type-initializer \"gtk_icon_lookup_flags_get_type\")
   (:force-regular  #.(ash 1 0))
@@ -159,7 +159,7 @@
 ;;; struct GtkIconTheme
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkIconTheme" icon-theme
+(gobject:define-g-object-class "GtkIconTheme" icon-theme
   (:superclass g:object
    :export t
    :interfaces nil
@@ -426,7 +426,7 @@ lambda (theme)    :run-last
 ;;; gtk_icon_theme_get_for_display () -> icon-theme-for-display
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_theme_get_for_display" icon-theme-for-display)
+(cffi:defcfun ("gtk_icon_theme_get_for_display" icon-theme-for-display)
     (g:object icon-theme)
  #+liber-documentation
  "@version{#2022-7-3}
@@ -454,7 +454,8 @@ lambda (theme)    :run-last
 ;;; gtk_icon_theme_add_search_path ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_theme_add_search_path" icon-theme-add-search-path) :void
+(cffi:defcfun ("gtk_icon_theme_add_search_path" icon-theme-add-search-path) 
+    :void
  #+liber-documentation
  "@version{#2022-7-3}
   @argument[theme]{a @class{gtk:icon-theme} object}
@@ -473,8 +474,8 @@ lambda (theme)    :run-last
 ;;; gtk_icon_theme_add_resource_path ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_theme_add_resource_path"
-           icon-theme-add-resource-path) :void
+(cffi:defcfun ("gtk_icon_theme_add_resource_path"
+               icon-theme-add-resource-path) :void
  #+liber-documentation
  "@version{#2022-7-3}
   @argument[theme]{a @class{gtk:icon-theme} object}
@@ -497,7 +498,7 @@ lambda (theme)    :run-last
 ;;; gtk_icon_theme_has_icon ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_theme_has_icon" icon-theme-has-icon) :boolean
+(cffi:defcfun ("gtk_icon_theme_has_icon" icon-theme-has-icon) :boolean
  #+liber-documentation
  "@version{#2022-7-3}
   @argument[theme]{a @class{gtk:icon-theme} object}
@@ -516,7 +517,7 @@ lambda (theme)    :run-last
 ;;; gtk_icon_theme_lookup_icon ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_theme_lookup_icon" icon-theme-lookup-icon)
+(cffi:defcfun ("gtk_icon_theme_lookup_icon" icon-theme-lookup-icon)
     (g:object icon-paintable)
  #+liber-documentation
  "@version{#2022-7-3}
@@ -563,7 +564,7 @@ lambda (theme)    :run-last
 ;;;gtk_icon_theme_lookup_by_gicon ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_icon_theme_lookup_by_gicon" icon-theme-lookup-by-gicon)
+(cffi:defcfun ("gtk_icon_theme_lookup_by_gicon" icon-theme-lookup-by-gicon)
     (g:object icon-paintable)
  #+liber-documentation
  "@version{#2022-7-3}
@@ -600,7 +601,7 @@ lambda (theme)    :run-last
 
 ;; TODO: Check this implementation. Return a list of integer?!
 
-(defcfun ("gtk_icon_theme_get_icon_sizes" %icon-theme-icon-sizes) :pointer
+(cffi:defcfun ("gtk_icon_theme_get_icon_sizes" %icon-theme-icon-sizes) :pointer
   (theme (g:object icon-theme))
   (name :string))
 

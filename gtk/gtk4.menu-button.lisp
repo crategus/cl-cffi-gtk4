@@ -108,7 +108,7 @@
 ;;; enum GtkArrowType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkArrowType" arrow-type
+(gobject:define-g-enum "GtkArrowType" arrow-type
   (:export t
    :type-initializer "gtk_arrow_type_get_type")
   (:up 0)
@@ -127,7 +127,7 @@
     @class{gtk:menu-button} widget.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkArrowType\" arrow-type
+(gobject:define-g-enum \"GtkArrowType\" arrow-type
   (:export t
    :type-initializer \"gtk_arrow_type_get_type\")
   (:up 0)
@@ -149,7 +149,7 @@
 ;;; struct GtkMenuButton
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkMenuButton" menu-button
+(gobject:define-g-object-class "GtkMenuButton" menu-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -646,7 +646,7 @@ lambda (button)    :action
 ;;; gtk_menu_button_popup ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_menu_button_popup" menu-button-popup) :void
+(cffi:defcfun ("gtk_menu_button_popup" menu-button-popup) :void
  #+liber-documentation
  "@version{#2023-3-24}
   @argument[button]{a @class{gtk:menu-button} widget}
@@ -660,7 +660,7 @@ lambda (button)    :action
 ;;; gtk_menu_button_popdown ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_menu_button_popdown" menu-button-popdown) :void
+(cffi:defcfun ("gtk_menu_button_popdown" menu-button-popdown) :void
  #+liber-documentation
  "@version{#2023-3-24}
   @argument[button]{a @class{gtk:menu-button} widget}
@@ -674,10 +674,10 @@ lambda (button)    :action
 ;;; GtkMenuButtonCreatePopupFunc ()
 ;;; ----------------------------------------------------------------------------
 
-(defcallback menu-button-create-popup-func :void
+(cffi:defcallback menu-button-create-popup-func :void
     ((button (g:object menu-button))
      (data :pointer))
-  (let ((ptr (get-stable-pointer-value data)))
+  (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr button)))
 
 #+liber-documentation
@@ -708,8 +708,8 @@ lambda (button)
 ;;; gtk_menu_button_set_create_popup_func ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_menu_button_set_create_popup_func"
-          %menu-button-set-create-popup-func) :void
+(cffi:defcfun ("gtk_menu_button_set_create_popup_func"
+               %menu-button-set-create-popup-func) :void
   (button (g:object menu-button))
   (func :pointer)
   (data :pointer)

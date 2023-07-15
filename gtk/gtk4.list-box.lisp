@@ -555,10 +555,10 @@ lambda (listbox)    :action
 ;;; GtkListBoxFilterFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback list-row-filter-func :boolean
+(cffi:defcallback list-row-filter-func :boolean
     ((row (g:object list-box-row))
      (data :pointer))
-  (let ((ptr (get-stable-pointer-value data)))
+  (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr row)))
 
 #+liber-documentation
@@ -587,11 +587,11 @@ lambda (listbox)    :action
 ;;; GtkListBoxSortFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback list-box-sort-func :int
+(cffi:defcallback list-box-sort-func :int
     ((row1 (g:object list-box-row))
      (row2 (g:object list-box-row))
      (data :pointer))
-  (let ((ptr (get-stable-pointer-value data)))
+  (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr row1 row2)))
 
 #+liber-documentation
@@ -621,11 +621,11 @@ lambda (listbox)    :action
 ;;; GtkListBoxUpdateHeaderFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback list-box-update-header-func :void
+(cffi:defcallback list-box-update-header-func :void
     ((row (g:object list-box-row))
      (before (g:object list-box-row))
      (data :pointer))
-  (let ((ptr (get-stable-pointer-value data)))
+  (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr row before)))
 
 #+liber-documentation
@@ -674,7 +674,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_prepend
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_prepend" list-box-prepend) :void
+(cffi:defcfun ("gtk_list_box_prepend" list-box-prepend) :void
  #+liber-documentation
  "@version{#2022-9-7}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -696,7 +696,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_append
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_append" list-box-append) :void
+(cffi:defcfun ("gtk_list_box_append" list-box-append) :void
  #+liber-documentation
  "@version{#2022-9-7}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -717,7 +717,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_insert
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_insert" list-box-insert) :void
+(cffi:defcfun ("gtk_list_box_insert" list-box-insert) :void
  #+liber-documentation
  "@version{#2022-9-7}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -745,7 +745,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_remove
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_remove" list-box-remove) :void
+(cffi:defcfun ("gtk_list_box_remove" list-box-remove) :void
  #+liber-documentation
  "@version{#2022-2-3}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -762,7 +762,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_select_row
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_select_row" list-box-select-row) :void
+(cffi:defcfun ("gtk_list_box_select_row" list-box-select-row) :void
  #+liber-documentation
  "@version{#2021-11-30}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -781,7 +781,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_unselect_row
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_unselect_row" list-box-unselect-row) :void
+(cffi:defcfun ("gtk_list_box_unselect_row" list-box-unselect-row) :void
  #+liber-documentation
  "@version{#2021-11-15}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -800,7 +800,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_select_all
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_select_all" list-box-select-all) :void
+(cffi:defcfun ("gtk_list_box_select_all" list-box-select-all) :void
  #+liber-documentation
  "@version{#2021-11-15}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -816,7 +816,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_unselect_all
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_unselect_all" list-box-unselect-all) :void
+(cffi:defcfun ("gtk_list_box_unselect_all" list-box-unselect-all) :void
  "@version{#2021-11-15}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @begin{short}
@@ -831,7 +831,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_get_selected_row -> list-box-selected-row
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_get_selected_row" list-box-selected-row)
+(cffi:defcfun ("gtk_list_box_get_selected_row" list-box-selected-row)
     (g:object list-box-row)
  "@version{#2021-11-15}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -853,12 +853,12 @@ lambda (listbox)    :action
 ;;; GtkListBoxForeachFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback list-box-foreach-func :void
+(cffi:defcallback list-box-foreach-func :void
     ((listbox (g:object list-box))
      (row (g:object list-box-row))
      (data :pointer))
   (restart-case
-    (let ((ptr (get-stable-pointer-value data)))
+    (let ((ptr (glib:get-stable-pointer-value data)))
       (funcall ptr listbox row))
     (return () :report "Error in GtkListBoxForeachFunc callback." nil)))
 
@@ -889,7 +889,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_selected_foreach
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_selected_foreach" %list-box-selected-foreach) :void
+(cffi:defcfun ("gtk_list_box_selected_foreach" %list-box-selected-foreach) :void
   (listbox (g:object list-box))
   (func :pointer)
   (data :pointer))
@@ -905,7 +905,7 @@ lambda (listbox)    :action
   Note that the selection cannot be modified from within this function.
   @see-class{gtk:list-box}
   @see-symbol{gtk:list-box-foreach-func}"
-  (with-stable-pointer (ptr func)
+  (glib:with-stable-pointer (ptr func)
     (%list-box-selected-foreach listbox
                                 (cffi:callback list-box-foreach-func)
                                 ptr)))
@@ -916,7 +916,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_get_selected_rows -> list-box-selected-rows
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_get_selected_rows" list-box-selected-rows)
+(cffi:defcfun ("gtk_list_box_get_selected_rows" list-box-selected-rows)
     (g:list-t (g:object list-box-row))
  #+liber-documentation
  "@version{#2021-12-15}
@@ -944,7 +944,7 @@ lambda (listbox)    :action
                         :void)
   adjustment)
 
-(defcfun ("gtk_list_box_get_adjustment" list-box-adjustment)
+(cffi:defcfun ("gtk_list_box_get_adjustment" list-box-adjustment)
     (g:object adjustment)
  #+liber-documentation
  "@version{#2021-11-15}
@@ -975,7 +975,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_set_placeholder
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_set_placeholder" list-box-set-placeholder) :void
+(cffi:defcfun ("gtk_list_box_set_placeholder" list-box-set-placeholder) :void
  #+liber-documentation
  "@version{#2021-12-15}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -995,7 +995,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_get_row_at_index -> list-box-row-at-index
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_get_row_at_index" list-box-row-at-index)
+(cffi:defcfun ("gtk_list_box_get_row_at_index" list-box-row-at-index)
     (g:object list-box-row)
  #+liber-documentation
  "@version{#2021-11-15}
@@ -1018,7 +1018,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_get_row_at_y -> list-box-row-at-y
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_get_row_at_y" list-box-row-at-y)
+(cffi:defcfun ("gtk_list_box_get_row_at_y" list-box-row-at-y)
     (g:object list-box-row)
  #+liber-documentation
  "@version{#2021-12-15}
@@ -1039,7 +1039,8 @@ lambda (listbox)    :action
 ;;; gtk_list_box_invalidate_filter
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_invalidate_filter" list-box-invalidate-filter) :void
+(cffi:defcfun ("gtk_list_box_invalidate_filter" list-box-invalidate-filter) 
+    :void
  #+liber-documentation
  "@version{#2021-11-15}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -1060,7 +1061,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_invalidate_headers
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_invalidate_headers" list-box-invalidate-headers)
+(cffi:defcfun ("gtk_list_box_invalidate_headers" list-box-invalidate-headers)
     :void
  #+liber-documentation
  "@version{#2021-11-15}
@@ -1080,7 +1081,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_invalidate_sort
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_invalidate_sort" list-box-invalidate-sort) :void
+(cffi:defcfun ("gtk_list_box_invalidate_sort" list-box-invalidate-sort) :void
  #+liber-documentation
  "@version{#2021-11-15}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -1099,7 +1100,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_set_filter_func
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_set_filter_func" %list-box-set-filter-func) :void
+(cffi:defcfun ("gtk_list_box_set_filter_func" %list-box-set-filter-func) :void
   (listbox (g:object list-box))
   (func :pointer)
   (data :pointer)
@@ -1140,7 +1141,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_set_header_func
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_set_header_func" %list-box-set-header-func) :void
+(cffi:defcfun ("gtk_list_box_set_header_func" %list-box-set-header-func) :void
   (listbox (g:object list-box))
   (func :pointer)
   (data :pointer)
@@ -1193,7 +1194,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_set_sort_func
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_set_sort_func" %list-box-set-sort-func) :void
+(cffi:defcfun ("gtk_list_box_set_sort_func" %list-box-set-sort-func) :void
   (listbox (g:object list-box))
   (func :pointer)
   (user-data :pointer)
@@ -1233,7 +1234,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_drag_highlight_row
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_drag_highlight_row" list-box-drag-highlight-row)
+(cffi:defcfun ("gtk_list_box_drag_highlight_row" list-box-drag-highlight-row)
     :void
  #+liber-documentation
  "@version{#2021-11-15}
@@ -1257,8 +1258,8 @@ lambda (listbox)    :action
 ;;; gtk_list_box_drag_unhighlight_row
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_drag_unhighlight_row" list-box-drag-unhighlight-row)
-    :void
+(cffi:defcfun ("gtk_list_box_drag_unhighlight_row" 
+               list-box-drag-unhighlight-row) :void
  #+liber-documentation
  "@version{#2021-11-15}
   @argument[listbox]{a @class{gtk:list-box} widget}
@@ -1279,10 +1280,10 @@ lambda (listbox)    :action
 
 ;; TODO: Check this. Perhaps it is better to pass a GObject for item.
 
-(defcallback list-box-create-widget-func (g:object widget)
+(cffi:defcallback list-box-create-widget-func (g:object widget)
     ((item :pointer)
      (data :pointer))
-  (let ((ptr (get-stable-pointer-value data)))
+  (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr item)))
 
 #+liber-documentation
@@ -1318,7 +1319,7 @@ lambda (item)
 
 ;; TODO: Check the implementation for value of NIL for MODEL or FUNC.
 
-(defcfun ("gtk_list_box_bind_model" %list-box-bind-model) :void
+(cffi:defcfun ("gtk_list_box_bind_model" %list-box-bind-model) :void
   (listbox (g:object list-box))
   (model (g:object g-list-model))
   (func :pointer)
@@ -1385,7 +1386,7 @@ lambda (item)
 ;;; gtk_list_box_row_changed
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_row_changed" list-box-row-changed) :void
+(cffi:defcfun ("gtk_list_box_row_changed" list-box-row-changed) :void
  #+liber-documentation
  "@version{#2021-11-15}
   @argument[row]{a @class{gtk:list-box-row} widget}
@@ -1418,7 +1419,7 @@ lambda (item)
 ;;; gtk_list_box_row_is_selected
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_row_is_selected" list-box-row-is-selected) :boolean
+(cffi:defcfun ("gtk_list_box_row_is_selected" list-box-row-is-selected) :boolean
  #+liber-documentation
  "@version{#2021-7-13}
   @argument[row]{a @class{gtk:list-box-row} widget}
@@ -1444,7 +1445,7 @@ lambda (item)
                         :void)
   header)
 
-(defcfun ("gtk_list_box_row_get_header" list-box-row-header)
+(cffi:defcfun ("gtk_list_box_row_get_header" list-box-row-header)
     (g:object widget)
  #+liber-documentation
  "@version{#2021-11-15}
@@ -1478,7 +1479,7 @@ lambda (item)
 ;;; gtk_list_box_row_get_index -> list-box-row-index
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_box_row_get_index" list-box-row-index) :int
+(cffi:defcfun ("gtk_list_box_row_get_index" list-box-row-index) :int
  #+liber-documentation
  "@version{#2021-11-30}
   @argument[row]{a @class{gtk:list-box-row} widget}

@@ -124,7 +124,7 @@
 ;;; enum GtkLicense
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkLicense" license
+(gobject:define-g-enum "GtkLicense" license
   (:export t
    :type-initializer "gtk_license_get_type")
   (:unknown 0)
@@ -156,7 +156,7 @@
   @end{short}
   This enumeration can be expanded at later date.
   @begin{pre}
-(define-g-enum \"GtkLicense\" license
+(gobject:define-g-enum \"GtkLicense\" license
   (:export t
    :type-initializer \"gtk_license_get_type\")
   (:unknown 0)
@@ -208,7 +208,7 @@
 ;;; GtkAboutDialog
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkAboutDialog" about-dialog
+(gobject:define-g-object-class "GtkAboutDialog" about-dialog
   (:superclass window
    :export t
    :interfaces ("GtkAccessible"
@@ -913,7 +913,7 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
                       about-dialog)))
       (when (cffi:null-pointer-p (if (cffi:pointerp dialog)
                                      dialog
-                                     (pointer dialog)))
+                                     (g:object-pointer dialog)))
         (setf dialog (apply #'make-instance 'about-dialog args))
         (setf (window-hide-on-close dialog) t)
         (g:signal-connect dialog "close-request"

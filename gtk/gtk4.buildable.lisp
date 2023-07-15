@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.buildable.lisp
+;;; gtk4.buildable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -57,7 +57,7 @@
 ;;; GtkBuildable
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkBuildable" buildable
+(gobject:define-g-interface "GtkBuildable" buildable
   (:export t
    :type-initializer "gtk_buildable_get_type")
   nil)
@@ -293,4 +293,4 @@
 ;;;     user data to pass to GtkBuildableParser functions
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gtk.buildable.lisp -----------------------------------------
+;;; --- End of file gtk4.buildable.lisp ----------------------------------------

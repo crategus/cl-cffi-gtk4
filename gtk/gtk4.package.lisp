@@ -30,75 +30,12 @@
 (in-package :cl-user)
 
 (defpackage :gtk
-  (:use :common-lisp :iterate)
-  (:import-from :cffi       #:defcfun
-                            #:defcenum
-                            #:defbitfield
-                            #:defcallback
-                            #:defcstruct
-                            #:define-foreign-type
-                            #:define-parse-method
-                            #:with-foreign-slots
-                            #:with-foreign-object
-                            #:with-foreign-objects)
-  (:import-from :glib       #:allocate-stable-pointer
-                            #:get-stable-pointer-value
-                            #:with-stable-pointer
-                            #:with-g-error
-                            #:with-ignore-g-error
-                            #:with-catching-to-g-error
-                            #:define-g-boxed-opaque
-                            #:define-boxed-opaque-accessor
-                            #:define-g-boxed-cstruct
-                            #:with-foreign-boxed-array
-                            ;; Symbols from glib.version.lisp
-                            #:+glib-major-version+
-                            #:+glib-minor-version+
-                            #:+glib-micro-version+
-                            #:cl-cffi-glib-build-info)
-  (:import-from :gobject    #:+g-type-invalid+
-                            #:+g-type-none+
-                            #:+g-type-interface+
-                            #:+g-type-char+
-                            #:+g-type-uchar+
-                            #:+g-type-boolean+
-                            #:+g-type-int+
-                            #:+g-type-uint+
-                            #:+g-type-long+
-                            #:+g-type-ulong+
-                            #:+g-type-int64+
-                            #:+g-type-uint64+
-                            #:+g-type-enum+
-                            #:+g-type-flags+
-                            #:+g-type-float+
-                            #:+g-type-double+
-                            #:+g-type-string+
-                            #:+g-type-pointer+
-                            #:+g-type-boxed+
-                            #:+g-type-param+
-                            #:+g-type-object+
-                            #:+g-type-gtype+
-                            #:+g-type-variant+
-                            #:+g-type-checksum+
-
-                            #:define-g-enum
-                            #:define-g-flags
-                            #:define-g-object-class
-                            #:define-g-interface
-
-                            #:define-vtable
-                            #:define-cb-methods
-                            #:set-g-value
-                            #:parse-g-value
-                            #:pointer)
-  (:import-from :gdk-pixbuf #:+gdk-pixbuf-version+)
-  (:import-from :pango      #:+pango-scale-xx-small+
-                            #:+pango-scale-x-small+
-                            #:+pango-scale-small+
-                            #:+pango-scale-medium+
-                            #:+pango-scale-large+
-                            #:+pango-scale-x-large+
-                            #:+pango-scale-xx-large+)
+  (:use :iterate :common-lisp)
+  (:import-from :cffi       #:defcfun)
+  (:import-from :glib)
+  (:import-from :gobject    #:define-g-object-class)
+  (:import-from :gdk-pixbuf)
+  (:import-from :pango)
   (:export #:cl-cffi-build-info))
 
 (in-package :gtk)
@@ -108,6 +45,12 @@
 
 (export '*cl-cffi-gtk-build-time*)
 (export '*cl-cffi-gtk-version*)
+
+#+sbcl
+(when (and (find-package "SB-EXT")
+           (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT")))
+  (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT"))
+           :traps nil))
 
 #+liber-documentation
 (setf (documentation (find-package :gtk) t)

@@ -96,7 +96,7 @@
 ;;; GtkImageType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkImageType" image-type
+(gobject:define-g-enum "GtkImageType" image-type
   (:export t
    :type-initializer "gtk_image_type_get_type")
   (:empty 0)
@@ -118,7 +118,7 @@
   @fun{gtk:image-paintable} function. For empty images, you can request any
   storage type, but they will all return @code{nil} values.
   @begin{pre}
-(define-g-enum \"GtkImageType\" image-type
+(gobject:define-g-enum \"GtkImageType\" image-type
   (:export t
    :type-initializer \"gtk_image_type_get_type\")
   (:empty 0)
@@ -141,7 +141,7 @@
 ;;; GtkImage
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkImage" image
+(gobject:define-g-object-class "GtkImage" image
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

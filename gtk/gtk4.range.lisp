@@ -506,7 +506,7 @@ lambda (range)    :run-last
                         :void)
   flippable)
 
-(defcfun ("gtk_range_get_flippable" range-flippable) :boolean
+(cffi:defcfun ("gtk_range_get_flippable" range-flippable) :boolean
  #+liber-documentation
  "@version{#2021-12-26}
   @syntax[]{gtk:range-flippable range) => flippable}
@@ -529,7 +529,7 @@ lambda (range)    :run-last
 ;;; gtk_range_get_range_rect () -> range-range-rect
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_range_get_range_rect" %range-get-range-rect) :void
+(cffi:defcfun ("gtk_range_get_range_rect" %range-get-range-rect) :void
   (range (g:object range))
   (range-rect (g:boxed gdk:rectangle)))
 
@@ -555,7 +555,7 @@ lambda (range)    :run-last
 ;;; gtk_range_get_slider_range () -> range-slider-range
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_range_get_slider_range" %range-get-slider-range) :void
+(cffi:defcfun ("gtk_range_get_slider_range" %range-get-slider-range) :void
   (range (g:object range))
   (slider-start (:pointer :int))
   (slider-end (:pointer :int)))
@@ -576,7 +576,7 @@ lambda (range)    :run-last
 
   This function is useful mainly for @class{gtk:range} subclasses.
   @see-class{gtk:range}"
-  (with-foreign-objects ((slider-start :int) (slider-end :int))
+  (cffi:with-foreign-objects ((slider-start :int) (slider-end :int))
     (%range-get-slider-range range slider-start slider-end)
     (values (if (not (cffi:null-pointer-p slider-start))
                 (cffi:mem-ref slider-start :int)
@@ -599,7 +599,7 @@ lambda (range)    :run-last
                         :void)
   size-fixed)
 
-(defcfun ("gtk_range_get_slider_size_fixed" range-slider-size-fixed)
+(cffi:defcfun ("gtk_range_get_slider_size_fixed" range-slider-size-fixed)
     :boolean
  #+liber-documentation
  "@version{#2021-12-26}

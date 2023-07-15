@@ -325,7 +325,7 @@
   @see-class{gtk:tree-model}
   @see-function{gtk:list-store-new}"
   (let ((n (length column-types)))
-    (with-foreign-object (types-ar 'g:type-t n)
+    (cffi:with-foreign-object (types-ar 'g:type-t n)
       (loop for i from 0 below n
             for gtype in column-types
          do (setf (cffi:mem-aref types-ar 'g:type-t i) gtype))
@@ -371,16 +371,16 @@
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-set-value}"
   (let ((n (length values)))
-    (with-foreign-objects ((value-ar '(:struct g:value) n)
-                           (columns-ar :int n))
+    (cffi:with-foreign-objects ((value-ar '(:struct g:value) n)
+                                (columns-ar :int n))
       (loop for i from 0 below n
             for value in values
             for gtype = (tree-model-column-type store i)
          do (setf (cffi:mem-aref columns-ar :int i) i)
-            (set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
-                         value
-                         gtype
-                         :zero-g-value t))
+            (gobject:set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
+                                 value
+                                 gtype
+                                 :zero-gvalue t))
       (%list-store-set-valuesv store iter columns-ar value-ar n)
       (loop for i from 0 below n
          do (gobject:value-unset (cffi:mem-aptr value-ar '(:struct g:value) i)))
@@ -436,11 +436,11 @@
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-set}"
-  (with-foreign-object (gvalue '(:struct g:value))
-    (set-g-value gvalue
-                 value
-                 (tree-model-column-type store column)
-                 :zero-g-value t)
+  (cffi:with-foreign-object (gvalue '(:struct g:value))
+    (gobject:set-g-value gvalue
+                         value
+                         (tree-model-column-type store column)
+                         :zero-gvalue t)
     (%list-store-set-value store iter column gvalue)
     (gobject:value-unset gvalue)
     (values)))
@@ -646,16 +646,16 @@
   @see-function{gtk:list-store-set}"
   (let ((n (length values))
         (iter (make-tree-iter)))
-    (with-foreign-objects ((value-ar '(:struct g:value) n)
-                           (columns-ar :int n))
+    (cffi:with-foreign-objects ((value-ar '(:struct g:value) n)
+                                (columns-ar :int n))
       (iter (for i from 0 below n)
             (for value in values)
             (for gtype = (tree-model-column-type store i))
             (setf (cffi:mem-aref columns-ar :int i) i)
-            (set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
-                         value
-                         gtype
-                         :zero-g-value t))
+            (gobject:set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
+                                 value
+                                 gtype
+                                 :zero-gvalue t))
       (%list-store-insert-with-valuesv store
                                        iter
                                        position
@@ -830,7 +830,7 @@
   Note that this function only works with unsorted stores.
   @see-class{gtk:list-store}"
   (let ((n (length order)))
-    (with-foreign-object (order-ar :int n)
+    (cffi:with-foreign-object (order-ar :int n)
       (iter (for i from 0 below n)
             (for j in order)
             (setf (cffi:mem-aref order-ar :int i) j))

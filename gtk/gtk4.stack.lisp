@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.stack.lisp
+;;; gtk4.stack.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -125,7 +125,7 @@
 ;;; GtkStackTransitionType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkStackTransitionType" stack-transition-type
+(gobject:define-g-enum "GtkStackTransitionType" stack-transition-type
   (:export t
    :type-initializer "gtk_stack_transition_type_get_type")
   (:none 0)
@@ -163,7 +163,7 @@
   @end{short}
   New values may be added to this enumeration over time.
   @begin{pre}
-(define-g-enum \"GtkStackTransitionType\" stack-transition-type
+(gobject:define-g-enum \"GtkStackTransitionType\" stack-transition-type
   (:export t
    :type-initializer \"gtk_stack_transition_type_get_type\")
   (:none 0)
@@ -230,7 +230,7 @@
 ;;; GtkStackPage
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkStackPage" stack-page
+(gobject:define-g-object-class "GtkStackPage" stack-page
   (:superclass g:object
    :export t
    :interfaces ("GtkAccessible")
@@ -454,7 +454,7 @@
 ;;; GtkStack
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkStack" stack
+(gobject:define-g-object-class "GtkStack" stack
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -995,4 +995,4 @@
 
 (export 'stack-set-visible-child-full)
 
-;;; --- End of file gtk.stack.lisp ---------------------------------------------
+;;; --- End of file gtk4.stack.lisp --------------------------------------------

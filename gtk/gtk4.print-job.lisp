@@ -98,7 +98,7 @@
 ;;; struct GtkPrintJob
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPrintJob" print-job
+(gobject:define-g-object-class "GtkPrintJob" print-job
   (:superclass g:object
     :export t
     :interfaces nil
@@ -323,7 +323,7 @@
 ;;; gtk_print_job_get_status () -> print-job-status
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_job_get_status" print-job-status) print-status
+(cffi:defcfun ("gtk_print_job_get_status" print-job-status) print-status
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[job]{a @class{gtk:print-job} object}
@@ -370,7 +370,7 @@
 ;;; gtk_print_job_set_source_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_job_set_source_file" %print-job-set-source-file)
+(cffi:defcfun ("gtk_print_job_set_source_file" %print-job-set-source-file)
     :boolean
   (job (g:object print-job))
   (filename :string)
@@ -391,7 +391,7 @@
   @see-class{gtk:print-job}
   @see-function{gtk:printer-accepts-pdf}
   @see-function{gtk:printer-accepts-ps}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%print-job-set-source-file job filename err)))
 
 (export 'print-job-set-source-file)
@@ -400,7 +400,7 @@
 ;;; gtk_print_job_get_surface () -> print-job-surface
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_job_get_surface" %print-job-get-surface)
+(cffi:defcfun ("gtk_print_job_get_surface" %print-job-get-surface)
     (:pointer (:struct cairo:surface-t))
   (job (g:object print-job))
   (err :pointer))
@@ -416,7 +416,7 @@
   @end{short}
   @see-class{gtk:print-job}
   @see-symbol{cairo:surface-t}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%print-job-get-surface job err)))
 
 (export 'print-job-surface)
@@ -425,11 +425,11 @@
 ;;; GtkPrintJobCompleteFunc ()
 ;;; ----------------------------------------------------------------------------
 
-(defcallback print-job-complete-func :void
+(cffi:defcallback print-job-complete-func :void
     ((job (g:object print-job))
      (data :pointer)
      (err :pointer))
-  (funcall (get-stable-pointer-value data) job err))
+  (funcall (glib:get-stable-pointer-value data) job err))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'print-job-complete-func)
@@ -456,7 +456,7 @@
 ;;; gtk_print_job_send ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_job_send" %print-job-send) :void
+(cffi:defcfun ("gtk_print_job_send" %print-job-send) :void
   (job (g:object print-job))
   (func :pointer)
   (data :pointer)
@@ -488,7 +488,7 @@
                         :void)
   pages)
 
-(defcfun ("gtk_print_job_get_pages" print-job-pages) print-pages
+(cffi:defcfun ("gtk_print_job_get_pages" print-job-pages) print-pages
  #+liber-documentation
  "@version{#2021-12-25}
   @syntax[]{(gtk:print-job-pages job) => pages}
@@ -548,7 +548,7 @@
                         :void)
   page-set)
 
-(defcfun ("gtk_print_job_get_page_set" print-job-page-set) page-set
+(cffi:defcfun ("gtk_print_job_get_page_set" print-job-page-set) page-set
  #+liber-documentation
  "@version{#2021-12-26}
   @syntax[]{(gtk:print-job-page-set job) => page-set}
@@ -580,7 +580,7 @@
                         :void)
   num-copies)
 
-(defcfun ("gtk_print_job_get_num_copies" print-job-num-copies) :int
+(cffi:defcfun ("gtk_print_job_get_num_copies" print-job-num-copies) :int
  #+liber-documentation
  "@version{#2021-12-26}
   @syntax[]{(gtk:print-job-num-copies job) => num-copies}
@@ -611,7 +611,7 @@
                         :void)
   scale)
 
-(defcfun ("gtk_print_job_get_scale" print-job-scale) :double
+(cffi:defcfun ("gtk_print_job_get_scale" print-job-scale) :double
  #+liber-documentation
  "@version{#2021-12-26}
   @syntax[]{(gtk:print-job-scale job) => scale}
@@ -642,7 +642,7 @@
                         :void)
   n-up)
 
-(defcfun ("gtk_print_job_get_n_up" print-job-n-up) :uint
+(cffi:defcfun ("gtk_print_job_get_n_up" print-job-n-up) :uint
  #+liber-documentation
  "@version{#2021-12-26}
   @syntax[]{(gtk:print-job-n-up job) => n-up}
@@ -673,7 +673,7 @@
                         :void)
   layout)
 
-(defcfun ("gtk_print_job_get_n_up_layout" print-job-n-up-layout)
+(cffi:defcfun ("gtk_print_job_get_n_up_layout" print-job-n-up-layout)
     number-up-layout
  #+liber-documentation
  "@version{#2021-12-26}
@@ -706,7 +706,7 @@
                         :void)
   rotate)
 
-(defcfun ("gtk_print_job_get_rotate" print-job-rotate) :boolean
+(cffi:defcfun ("gtk_print_job_get_rotate" print-job-rotate) :boolean
  #+liber-documentation
  "@version{#2021-12-26}
   @syntax[]{(gtk:print-job-rotate job) => rotate}
@@ -737,7 +737,7 @@
                         :void)
   collate)
 
-(defcfun ("gtk_print_job_get_collate" print-job-collate) :boolean
+(cffi:defcfun ("gtk_print_job_get_collate" print-job-collate) :boolean
  #+liber-documentation
  "@version{#2021-12-26}
   @syntax[]{(gtk:print-job-collate job) => collate}
@@ -769,7 +769,7 @@
                         :void)
   reverse)
 
-(defcfun ("gtk_print_job_get_reverse" print-job-reverse) :boolean
+(cffi:defcfun ("gtk_print_job_get_reverse" print-job-reverse) :boolean
  #+liber-documentation
  "@version{#2021-12-26}
   @syntax[]{(gtk:print-job-reverse job) => reverse}

@@ -62,7 +62,7 @@
 ;;; GtkCellLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkCellLayout" cell-layout
+(gobject:define-g-interface "GtkCellLayout" cell-layout
   (:export t
    :type-initializer "gtk_cell_layout_get_type")
   nil)
@@ -131,14 +131,14 @@
 ;;; GtkCellLayoutDataFunc ()
 ;;; ----------------------------------------------------------------------------
 
-(defcallback cell-layout-cell-data-func :void
+(cffi:defcallback cell-layout-cell-data-func :void
   ((layout (g:object cell-layout))
    (cell (g:object cell-renderer))
    (model (g:object tree-model))
    (iter (g:boxed tree-iter))
    (data :pointer))
   (restart-case
-    (funcall (get-stable-pointer-value data) layout cell model iter)
+    (funcall (glib:get-stable-pointer-value data) layout cell model iter)
     (return () nil)))
 
 #+liber-documentation
@@ -169,7 +169,7 @@
 ;;; gtk_cell_layout_pack_start ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_layout_pack_start" %cell-layout-pack-start) :void
+(cffi:defcfun ("gtk_cell_layout_pack_start" %cell-layout-pack-start) :void
   (layout (g:object cell-layout))
   (cell (g:object cell-renderer))
   (expand :boolean))
@@ -201,7 +201,7 @@
 ;;; gtk_cell_layout_pack_end ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_layout_pack_end" %cell-layout-pack-end) :void
+(cffi:defcfun ("gtk_cell_layout_pack_end" %cell-layout-pack-end) :void
   (layout (g:object cell-layout))
   (cell (g:object cell-renderer))
   (expand :boolean))
@@ -233,7 +233,7 @@
 ;;; gtk_cell_layout_get_area () -> cell-layout-area
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_layout_get_area" cell-layout-area)
+(cffi:defcfun ("gtk_cell_layout_get_area" cell-layout-area)
     (g:object cell-area)
  "@version{#2021-3-13}
   @argument[layout]{a @class{gtk:cell-layout} object}
@@ -253,7 +253,7 @@
 ;;; gtk_cell_layout_get_cells () -> cell-layout-cells
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_layout_get_cells" cell-layout-cells)
+(cffi:defcfun ("gtk_cell_layout_get_cells" cell-layout-cells)
     (g:list-t g:object)
  #+liber-documentation
  "@version{#2021-3-13}
@@ -272,7 +272,7 @@
 ;;; gtk_cell_layout_reorder ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_layout_reorder" cell-layout-reorder) :void
+(cffi:defcfun ("gtk_cell_layout_reorder" cell-layout-reorder) :void
  #+liber-documentation
  "@version{#2021-3-13}
   @argument[layout]{a @class{gtk:cell-layout} object}
@@ -296,7 +296,7 @@
 ;;; gtk_cell_layout_clear ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_layout_clear" cell-layout-clear) :void
+(cffi:defcfun ("gtk_cell_layout_clear" cell-layout-clear) :void
  #+liber-documentation
  "@version{#2021-3-13}
   @argument[layout]{a @class{gtk:cell-layout} object}
@@ -338,7 +338,7 @@
 ;;; gtk_cell_layout_add_attribute ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_layout_add_attribute" cell-layout-add-attribute) :void
+(cffi:defcfun ("gtk_cell_layout_add_attribute" cell-layout-add-attribute) :void
  #+liber-documentation
  "@version{#2021-3-13}
   @argument[layout]{a @class{gtk:cell-layout} object}
@@ -369,8 +369,8 @@
 ;;; gtk_cell_layout_set_cell_data_func ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_layout_set_cell_data_func"
-          %cell-layout-set-cell-data-func) :void
+(cffi:defcfun ("gtk_cell_layout_set_cell_data_func"
+               %cell-layout-set-cell-data-func) :void
   (layout (g:object cell-layout))
   (cell (g:object cell-renderer))
   (func :pointer)
@@ -408,7 +408,7 @@
 ;;; gtk_cell_layout_clear_attributes ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_layout_clear_attributes" cell-layout-clear-attributes)
+(cffi:defcfun ("gtk_cell_layout_clear_attributes" cell-layout-clear-attributes)
      :void
  #+liber-documentation
  "@version{#2021-3-13}

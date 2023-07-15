@@ -1287,7 +1287,7 @@ lambda (label step count extend)    :action
   @see-class{pango:layout}
   @see-variable{+pango-scale+}
   @see-function{pango:pixels}"
-  (with-foreign-objects ((x :int) (y :int))
+  (cffi:with-foreign-objects ((x :int) (y :int))
     (%label-get-layout-offsets label x y)
     (values (cffi:mem-ref x :int) (cffi:mem-ref y :int))))
 
@@ -1422,7 +1422,7 @@ lambda (label step count extend)    :action
     Gets the selected range of characters in the label.
   @end{short}
   @see-class{gtk:label}"
-  (with-foreign-objects ((start :int) (end :int))
+  (cffi:with-foreign-objects ((start :int) (end :int))
     (when (%label-get-selection-bounds label start end)
       (values (cffi:mem-ref start :int)
               (cffi:mem-ref end :int)))))

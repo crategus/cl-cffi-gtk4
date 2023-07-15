@@ -70,7 +70,7 @@
 ;;; GtkColorChooser
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkColorChooser" color-chooser
+(gobject:define-g-interface "GtkColorChooser" color-chooser
   (:export t
    :type-initializer "gtk_color_chooser_get_type")
   ((rgba
@@ -181,7 +181,7 @@ lambda (chooser color)    :run-first
 ;;; gtk_color_chooser_add_palette ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_color_chooser_add_palette" %color-chooser-add-palette) :void
+(cffi:defcfun ("gtk_color_chooser_add_palette" %color-chooser-add-palette) :void
   (chooser (g:object color-chooser))
   (orientation orientation)
   (colors-per-line :int)
@@ -218,7 +218,7 @@ lambda (chooser color)    :run-first
   @see-class{gtk:color-chooser}
   @see-symbol{gtk:orientation}"
   (if colors
-      (with-foreign-boxed-array (n-colors colors-ptr gdk:rgba colors)
+      (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba colors)
         (%color-chooser-add-palette chooser
                                         orientation
                                         colors-per-line
@@ -238,7 +238,7 @@ lambda (chooser color)    :run-first
 
 ;; TODO: Check the implementation for the GTK3 library
 
-(defcfun ("gtk_hsv_to_rgb" %hsv-to-rgb) :void
+(cffi:defcfun ("gtk_hsv_to_rgb" %hsv-to-rgb) :void
   (h :float)
   (s :float)
   (v :float)
@@ -263,7 +263,7 @@ lambda (chooser color)    :run-first
   @end{short}
   @see-class{gtk:hsv}
   @see-function{gtk:rgb-to-hsv}"
-  (with-foreign-objects ((r :float) (g :float) (b :float))
+  (cffi:with-foreign-objects ((r :float) (g :float) (b :float))
     (%hsv-to-rgb (coerce h 'float)
                  (coerce s 'float)
                  (coerce v 'float)
@@ -280,7 +280,7 @@ lambda (chooser color)    :run-first
 
 ;; TODO: Check the implementation for the GTK3 library
 
-(defcfun ("gtk_rgb_to_hsv" %rgb-to-hsv) :void
+(cffi:defcfun ("gtk_rgb_to_hsv" %rgb-to-hsv) :void
   (r :float)
   (g :float)
   (b :float)
@@ -305,7 +305,7 @@ lambda (chooser color)    :run-first
   @end{short}
   @see-class{gtk:hsv}
   @see-function{gtk:hsv-to-rgb}"
-  (with-foreign-objects ((h :float) (s :float) (v :float))
+  (cffi:with-foreign-objects ((h :float) (s :float) (v :float))
     (%rgb-to-hsv (coerce r 'float)
                  (coerce g 'float)
                  (coerce b 'float)

@@ -120,7 +120,7 @@
 ;;; GtkPolicyType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPolicyType" policy-type
+(gobject:define-g-enum "GtkPolicyType" policy-type
   (:export t
    :type-initializer "gtk_policy_type_get_type")
   (:always 0)
@@ -138,7 +138,7 @@
     mode for the scrollbars.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPolicyType\" policy-type
+(gobject:define-g-enum \"GtkPolicyType\" policy-type
   (:export t
    :type-initializer \"gtk_policy_type_get_type\")
   (:always 0)
@@ -163,7 +163,7 @@
 ;;; GtkCornerType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkCornerType" corner-type
+(gobject:define-g-enum "GtkCornerType" corner-type
   (:export t
    :type-initializer "gtk_corner_type_get_type")
   (:top-left 0)
@@ -182,7 +182,7 @@
   @end{short}
   This is effectively the opposite of where the scroll bars are placed.
   @begin{pre}
-(define-g-enum \"GtkCornerType\" corner-type
+(gobject:define-g-enum \"GtkCornerType\" corner-type
   (:export t
    :type-initializer \"gtk_corner_type_get_type\")
   (:top-left 0)
@@ -206,7 +206,7 @@
 ;;; GtkScrolledWindow
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkScrolledWindow" scrolled-window
+(gobject:define-g-object-class "GtkScrolledWindow" scrolled-window
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

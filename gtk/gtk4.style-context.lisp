@@ -103,7 +103,7 @@
 ;;; GtkBorder
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-cstruct border "GtkBorder"
+(glib:define-g-boxed-cstruct border "GtkBorder"
   (:export t
    :type-initializer "gtk_border_get_type")
   (left :int16 :initform 0)
@@ -121,7 +121,7 @@
     of different width on each side.
   @end{short}
   @begin{pre}
-(define-g-boxed-cstruct border \"GtkBorder\"
+(glib:define-g-boxed-cstruct border \"GtkBorder\"
   (:export t
    :type-initializer \"gtk_border_get_type\")
   (left :int16 :initform 0)
@@ -272,7 +272,7 @@
 ;;; GtkStyleContextPrintFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkStyleContextPrintFlags" style-context-print-flags
+(gobject:define-g-flags "GtkStyleContextPrintFlags" style-context-print-flags
   (:export t
    :type-initializer "gtk_style_context_print_flags_get_type")
   (:none 0)
@@ -291,7 +291,7 @@
   @end{short}
   New values may be added to this enumeration.
   @begin{pre}
-(define-g-flags \"GtkStyleContextPrintFlags\" style-context-print-flags
+(gobject:define-g-flags \"GtkStyleContextPrintFlags\" style-context-print-flags
   (:export t
    :type-initializer \"gtk_style_context_print_flags_get_type\")
   (:none 0)
@@ -313,7 +313,7 @@
 ;;; GtkStyleContext
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkStyleContext" style-context
+(gobject:define-g-object-class "GtkStyleContext" style-context
   (:superclass g:object
    :export t
    :interfaces nil
@@ -410,7 +410,8 @@
 ;;; gtk_style_context_add_provider
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_add_provider" style-context-add-provider) :void
+(cffi:defcfun ("gtk_style_context_add_provider" style-context-add-provider) 
+    :void
  #+liber-documentation
  "@version{2022-11-25}
   @argument[context]{a @class{gtk:style-context} object}
@@ -447,8 +448,8 @@
 ;;; gtk_style_context_add_provider_for_display
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_add_provider_for_display"
-           style-context-add-provider-for-display) :void
+(cffi:defcfun ("gtk_style_context_add_provider_for_display"
+               style-context-add-provider-for-display) :void
  #+liber-documentation
  "@version{#2022-8-1}
   @argument[display]{a @class{gdk:display} object}
@@ -490,7 +491,7 @@
                         :void)
   state)
 
-(defcfun ("gtk_style_context_get_state" style-context-state) state-flags
+(cffi:defcfun ("gtk_style_context_get_state" style-context-state) state-flags
  #+liber-documentation
  "@version{#2022-8-3}
   @syntax[]{(gtk:style-context-state context) => state}
@@ -521,7 +522,7 @@
 ;;; gtk_style_context_get_color -> style-context-color
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_get_color" %style-context-color) :void
+(cffi:defcfun ("gtk_style_context_get_color" %style-context-color) :void
   (context (g:object style-context))
   (color (g:boxed gdk:rgba)))
 
@@ -545,7 +546,7 @@
 ;;; gtk_style_context_get_border -> style-context-border
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_get_border" %style-context-border) :void
+(cffi:defcfun ("gtk_style_context_get_border" %style-context-border) :void
   (context (g:object style-context))
   (state state-flags)
   (border (g:boxed border)))
@@ -572,7 +573,7 @@
 ;;; gtk_style_context_get_padding -> style-context-padding
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_get_padding" %style-context-padding) :void
+(cffi:defcfun ("gtk_style_context_get_padding" %style-context-padding) :void
   (context (g:object style-context))
   (state state-flags)
   (padding (g:boxed border)))
@@ -599,7 +600,7 @@
 ;;; gtk_style_context_get_margin -> style-context-margin
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_get_margin" %style-context-margin) :void
+(cffi:defcfun ("gtk_style_context_get_margin" %style-context-margin) :void
   (context (g:object style-context))
   (state state-flags)
   (margin (g:boxed border)))
@@ -626,7 +627,7 @@
 ;;; gtk_style_context_lookup_color
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_lookup_color" %style-context-lookup-color)
+(cffi:defcfun ("gtk_style_context_lookup_color" %style-context-lookup-color)
     :boolean
   (context (g:object style-context))
   (name :string)
@@ -653,8 +654,8 @@
 ;;; gtk_style_context_remove_provider
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_remove_provider" style-context-remove-provider)
-    :void
+(cffi:defcfun ("gtk_style_context_remove_provider" 
+               style-context-remove-provider) :void
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[context]{a @class{gtk:style-context} object}
@@ -675,8 +676,8 @@
 ;;; gtk_style_context_remove_provider_for_display
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_remove_provider_for_display"
-           style-context-remove-provider-for-display) :void
+(cffi:defcfun ("gtk_style_context_remove_provider_for_display"
+               style-context-remove-provider-for-display) :void
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[display]{a @class{gdk:display} object}
@@ -697,7 +698,7 @@
 ;;; gtk_style_context_restore
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_restore" style-context-restore) :void
+(cffi:defcfun ("gtk_style_context_restore" style-context-restore) :void
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[context]{a @class{gtk:style-context} object}
@@ -715,7 +716,7 @@
 ;;; gtk_style_context_save
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_save" style-context-save) :void
+(cffi:defcfun ("gtk_style_context_save" style-context-save) :void
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[context]{a @class{gtk:style-context} object}
@@ -739,7 +740,7 @@
 ;;; gtk_style_context_add_class
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_add_class" style-context-add-class) :void
+(cffi:defcfun ("gtk_style_context_add_class" style-context-add-class) :void
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[context]{a @class{gtk:style-context} object}
@@ -770,7 +771,8 @@ GtkEntry.entry { ... @}
 ;;; gtk_style_context_remove_class
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_remove_class" style-context-remove-class) :void
+(cffi:defcfun ("gtk_style_context_remove_class" style-context-remove-class) 
+    :void
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[context]{a @class{gtk:style-context} object}
@@ -788,7 +790,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_style_context_has_class
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_has_class" style-context-has-class) :boolean
+(cffi:defcfun ("gtk_style_context_has_class" style-context-has-class) :boolean
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[context]{a @class{gtk:style-context} object}
@@ -816,7 +818,7 @@ GtkEntry.entry { ... @}
                         :void)
   scale)
 
-(defcfun ("gtk_style_context_get_scale" style-context-scale) :int
+(cffi:defcfun ("gtk_style_context_get_scale" style-context-scale) :int
  #+liber-documentation
  "@version{#2022-8-3}
   @syntax[]{(gtk:style-context-scale context) => scale}
@@ -838,7 +840,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_style_context_to_string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_style_context_to_string" style-context-to-string) :string
+(cffi:defcfun ("gtk_style_context_to_string" style-context-to-string) :string
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[context]{a @class{gtk:style-context} object}
@@ -887,7 +889,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_activity
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_activity" %render-activity) :void
+(cffi:defcfun ("gtk_render_activity" %render-activity) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x :double)
@@ -920,9 +922,9 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
   (%render-activity context cr (coerce x 'double-float)
-                                   (coerce y 'double-float)
-                                   (coerce width 'double-float)
-                                   (coerce height 'double-float)))
+                               (coerce y 'double-float)
+                               (coerce width 'double-float)
+                               (coerce height 'double-float)))
 
 (export 'render-activity)
 
@@ -930,7 +932,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_arrow
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_arrow" %render-arrow) :void
+(cffi:defcfun ("gtk_render_arrow" %render-arrow) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (angle :double)
@@ -959,9 +961,9 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   (%render-arrow context cr (coerce angle 'double-float)
-                                (coerce x 'double-float)
-                                (coerce y 'double-float)
-                                (coerce size 'double-float)))
+                            (coerce x 'double-float)
+                            (coerce y 'double-float)
+                            (coerce size 'double-float)))
 
 (export 'render-arrow)
 
@@ -969,7 +971,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_background
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_background" %render-background) :void
+(cffi:defcfun ("gtk_render_background" %render-background) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x :double)
@@ -999,9 +1001,9 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   (%render-background context cr (coerce x 'double-float)
-                                     (coerce y 'double-float)
-                                     (coerce width 'double-float)
-                                     (coerce height 'double-float)))
+                                 (coerce y 'double-float)
+                                 (coerce width 'double-float)
+                                 (coerce height 'double-float)))
 
 (export 'render-background)
 
@@ -1009,7 +1011,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_check
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_check" %render-check) :void
+(cffi:defcfun ("gtk_render_check" %render-check) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x :double)
@@ -1043,9 +1045,9 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
   (%render-check context cr (coerce x 'double-float)
-                                (coerce y 'double-float)
-                                (coerce width 'double-float)
-                                (coerce height 'double-float)))
+                            (coerce y 'double-float)
+                            (coerce width 'double-float)
+                            (coerce height 'double-float)))
 
 (export 'render-check)
 
@@ -1053,7 +1055,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_expander
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_expander" %render-expander) :void
+(cffi:defcfun ("gtk_render_expander" %render-expander) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x :double)
@@ -1088,9 +1090,9 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
   (%render-expander context cr (coerce x 'double-float)
-                                   (coerce y 'double-float)
-                                   (coerce width 'double-float)
-                                   (coerce height 'double-float)))
+                               (coerce y 'double-float)
+                               (coerce width 'double-float)
+                               (coerce height 'double-float)))
 
 (export 'render-expander)
 
@@ -1098,7 +1100,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_focus
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_focus" %render-focus) :void
+(cffi:defcfun ("gtk_render_focus" %render-focus) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x :double)
@@ -1127,9 +1129,9 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   (%render-focus context cr (coerce x 'double-float)
-                                (coerce y 'double-float)
-                                (coerce width 'double-float)
-                                (coerce height 'double-float)))
+                            (coerce y 'double-float)
+                            (coerce width 'double-float)
+                            (coerce height 'double-float)))
 
 (export 'render-focus)
 
@@ -1137,7 +1139,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_frame
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_frame" %render-frame) :void
+(cffi:defcfun ("gtk_render_frame" %render-frame) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x :double)
@@ -1169,9 +1171,9 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   (%render-frame context cr (coerce x 'double-float)
-                                (coerce y 'double-float)
-                                (coerce width 'double-float)
-                                (coerce height 'double-float)))
+                            (coerce y 'double-float)
+                            (coerce width 'double-float)
+                            (coerce height 'double-float)))
 
 (export 'render-frame)
 
@@ -1179,7 +1181,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_handle
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_handle" %render-handle) :void
+(cffi:defcfun ("gtk_render_handle" %render-handle) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x :double)
@@ -1211,9 +1213,9 @@ GtkEntry.entry { ... @}
   @see-class{gtk:window}
   @see-symbol{cairo:context-t}"
   (%render-handle context cr (coerce x 'double-float)
-                                 (coerce y 'double-float)
-                                 (coerce width 'double-float)
-                                 (coerce height 'double-float)))
+                             (coerce y 'double-float)
+                             (coerce width 'double-float)
+                             (coerce height 'double-float)))
 
 (export 'render-handle)
 
@@ -1221,7 +1223,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_icon
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_icon" %render-icon) :void
+(cffi:defcfun ("gtk_render_icon" %render-icon) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (texture (g:object gdk-texture))
@@ -1257,7 +1259,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_layout
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_layout" %render-layout) :void
+(cffi:defcfun ("gtk_render_layout" %render-layout) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x :double)
@@ -1281,8 +1283,8 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{pango:layout}"
   (%render-layout context cr (coerce x 'double-float)
-                                 (coerce y 'double-float)
-                                 layout))
+                             (coerce y 'double-float)
+                             layout))
 
 (export 'render-layout)
 
@@ -1290,7 +1292,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_line
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_line" %render-line) :void
+(cffi:defcfun ("gtk_render_line" %render-line) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x0 :double)
@@ -1317,9 +1319,9 @@ GtkEntry.entry { ... @}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
   (%render-line context cr (coerce x0 'double-float)
-                               (coerce y0 'double-float)
-                               (coerce x1 'double-float)
-                               (coerce y1 'double-float)))
+                           (coerce y0 'double-float)
+                           (coerce x1 'double-float)
+                           (coerce y1 'double-float)))
 
 (export 'render-line)
 
@@ -1327,7 +1329,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_render_option
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_render_option" %render-option) :void
+(cffi:defcfun ("gtk_render_option" %render-option) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
   (x :double)
@@ -1360,9 +1362,9 @@ GtkEntry.entry { ... @}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
   (%render-option context cr (coerce x 'double-float)
-                                 (coerce y 'double-float)
-                                 (coerce width 'double-float)
-                                 (coerce height 'double-float)))
+                             (coerce y 'double-float)
+                             (coerce width 'double-float)
+                             (coerce height 'double-float)))
 
 (export 'render-option)
 

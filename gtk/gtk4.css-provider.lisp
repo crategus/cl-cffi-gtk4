@@ -84,7 +84,7 @@
 ;; the boxed type for Lisp callback functions which handles the "parsing-error"
 ;; signal.
 
-(define-g-boxed-opaque g-error "GError"
+(glib:define-g-boxed-opaque g-error "GError"
   :alloc (error "GError cannot be created from the Lisp side."))
 
 (export 'g-error)
@@ -93,7 +93,7 @@
 ;;; GtkCssLocation
 ;;; ----------------------------------------------------------------------------
 
-(defcstruct css-location
+(cffi:defcstruct css-location
   (bytes :size)
   (chars :size)
   (lines :size)
@@ -118,7 +118,7 @@
   \"\\r\", \"\\n\" and \"\\f\" as newlines. If your document uses different
   rules for line breaking, you might want run into problems here.
   @begin{pre}
-(defcstruct css-location
+(cffi:defcstruct css-location
   (bytes :size)
   (chars :size)
   (lines :size)
@@ -239,7 +239,7 @@
 ;;; GtkCssSection
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque css-section "GtkCssSection"
+(glib:define-g-boxed-opaque css-section "GtkCssSection"
   :type-initializer "gtk_css_section_get_type"
   :alloc (error "GtkCssSection cannot be created from the Lisp side."))
 
@@ -313,7 +313,7 @@
 ;;; GtkCssProvider
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCssProvider" css-provider
+(gobject:define-g-object-class "GtkCssProvider" css-provider
   (:superclass g:object
    :export t
    :interfaces ("GtkStyleProvider")
@@ -386,7 +386,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_load_named
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_provider_load_named" %css-provider-load-named) :void
+(cffi:defcfun ("gtk_css_provider_load_named" %css-provider-load-named) :void
   (provider (g:object css-provider))
   (name :string)
   (variant :string))
@@ -414,7 +414,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_load_from_data
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_provider_load_from_data" %css-provider-load-from-data)
+(cffi:defcfun ("gtk_css_provider_load_from_data" %css-provider-load-from-data)
     :void
   (provider (g:object css-provider))
   (data :string)
@@ -440,7 +440,8 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_load_from_file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_provider_load_from_file" css-provider-load-from-file) :void
+(cffi:defcfun ("gtk_css_provider_load_from_file" css-provider-load-from-file) 
+    :void
  #+liber-documentation
  "@version{#2022-8-20}
   @argument[provider]{a @class{gtk:css-provider} object}
@@ -464,7 +465,8 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_load_from_path
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_provider_load_from_path" %css-provider-load-from-path) :void
+(cffi:defcfun ("gtk_css_provider_load_from_path" %css-provider-load-from-path) 
+    :void
   (provider (g:object css-provider))
   (path :string))
 
@@ -489,8 +491,8 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_load_from_resource
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_provider_load_from_resource"
-           css-provider-load-from-resource) :void
+(cffi:defcfun ("gtk_css_provider_load_from_resource" 
+               css-provider-load-from-resource) :void
  #+liber-documentation
  "@version{#2022-8-20}
   @argument[provider]{a @class{gtk:css-provider} object}
@@ -528,7 +530,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_to_string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_provider_to_string" css-provider-to-string) :string
+(cffi:defcfun ("gtk_css_provider_to_string" css-provider-to-string) :string
  #+liber-documentation
  "@version{2023-4-15}
   @argument[provider]{a @class{gtk:css-provider} object to write to a string}
@@ -551,7 +553,7 @@ lambda (provider section error)    :run-last
 ;;; gtk:css-section-new
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_section_new" css-section-new) (g:boxed css-section :return)
+(cffi:defcfun ("gtk_css_section_new" css-section-new) (g:boxed css-section :return)
  #+liber-documentation
  "@version{#2022-8-20}
   @argument[file]{a @class{g-file} object this section refers to}
@@ -620,7 +622,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_section_to_string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_section_to_string" css-section-to-string) :string
+(cffi:defcfun ("gtk_css_section_to_string" css-section-to-string) :string
  #+liber-documentation
  "@version{#2022-8-20}
   @argument[section]{a @class{gtk:css-section} instance}
@@ -639,7 +641,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_section_get_file  -> css-section-file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_provider_get_file" css-section-file) (g:object g-file)
+(cffi:defcfun ("gtk_css_provider_get_file" css-section-file) (g:object g-file)
  #+liber-documentation
  "@version{#2022-8-20}
   @argument[section]{a @class{gtk:css-section} instance}
@@ -661,7 +663,8 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_section_get_parent  -> css-section-parent
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_section_get_parent" css-section-parent) (g:boxed css-section)
+(cffi:defcfun ("gtk_css_section_get_parent" css-section-parent) 
+    (g:boxed css-section)
  #+liber-documentation
  "@version{#2022-8-20}
   @argument[section]{a @class{gtk:css-section} instance}
@@ -679,7 +682,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_section_get_start_location  -> css-section-start-location
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_section_get_start_location" css-section-start-location)
+(cffi:defcfun ("gtk_css_section_get_start_location" css-section-start-location)
     (:pointer (:struct css-location))
  #+liber-documentation
  "@version{2022-12-4}
@@ -699,7 +702,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_section_get_end_location  -> css-section-end-location
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_css_section_get_end_location" css-section-end-location)
+(cffi:defcfun ("gtk_css_section_get_end_location" css-section-end-location)
     (:pointer (:struct css-location))
  #+liber-documentation
  "@version{2022-12-4}

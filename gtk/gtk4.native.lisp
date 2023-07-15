@@ -56,7 +56,7 @@
 ;;; GtkNative
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkNative" native
+(gobject:define-g-interface "GtkNative" native
   (:export t
    :type-initializer "gtk_native_get_type")
   nil)
@@ -79,7 +79,7 @@
 ;;;gtk_native_get_for_surface -> native-for-surface
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_native_get_for_surface" native-for-surface)
+(cffi:defcfun ("gtk_native_get_for_surface" native-for-surface)
     (g:object native)
  #+liber-documentation
  "@version{#2022-7-11}
@@ -98,7 +98,7 @@
 ;;; gtk_native_get_surface -> native-surface
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_native_get_surface" native-surface) (g:object gdk-surface)
+(cffi:defcfun ("gtk_native_get_surface" native-surface) (g:object gdk:surface)
  #+liber-documentation
  "@version{#2022-7-11}
   @argument[native]{a @class{gtk:native} widget}
@@ -116,7 +116,7 @@
 ;;; gtk_native_get_renderer -> native-renderer
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_native_get_renderer" native-renderer)
+(cffi:defcfun ("gtk_native_get_renderer" native-renderer)
     (g:object gsk:renderer)
  #+liber-documentation
  "@version{#2022-7-11}
@@ -135,7 +135,7 @@
 ;;; gtk_native_get_surface_transform -> native-surface-transform
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_native_get_surface_transform" %native-surface-transform)
+(cffi:defcfun ("gtk_native_get_surface_transform" %native-surface-transform)
     :void
   (native (g:object native))
   (x (:pointer :double))
@@ -155,7 +155,7 @@
   This is the translation from the surface coordinates into the coordinates of
   the native widget.
   @see-class{gtk:native}"
-  (with-foreign-objects ((x :double) (y :double))
+  (cffi:with-foreign-objects ((x :double) (y :double))
     (%native-surface-transform native x y)
     (values (cffi:mem-ref x :double)
             (cffi:mem-ref y :double))))
@@ -166,7 +166,7 @@
 ;;; gtk_native_realize
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_native_realize" native-realize) :void
+(cffi:defcfun ("gtk_native_realize" native-realize) :void
  #+liber-documentation
  "@version{#2022-7-11}
   @argument[native]{a @class{gtk:native} widget}
@@ -182,7 +182,7 @@
 ;;; gtk_native_unrealize
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_native_unrealize" native-unrealize) :void
+(cffi:defcfun ("gtk_native_unrealize" native-unrealize) :void
  #+liber-documentation
  "@version{#2022-7-11}
   @argument[native]{a @class{gtk:native} widget}

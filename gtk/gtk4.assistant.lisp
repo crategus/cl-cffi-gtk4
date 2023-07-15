@@ -116,7 +116,7 @@
 ;;; GtkAssistantPageType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkAssistantPageType" assistant-page-type
+(gobject:define-g-enum "GtkAssistantPageType" assistant-page-type
   (:export t
    :type-initializer "gtk_assistant_page_type_get_type")
   (:content  0)
@@ -142,7 +142,7 @@
   Cancel button will only be shown if the page is not \"committed\". See the
   @fun{gtk:assistant-commit} function for details.
   @begin{pre}
-(define-g-enum \"GtkAssistantPageType\" assistant-page-type
+(gobject:define-g-enum \"GtkAssistantPageType\" assistant-page-type
   (:export t
    :type-initializer \"gtk_assistant_page_type_get_type\")
   (:content  0)
@@ -181,7 +181,7 @@
 ;; functions are replaced with corresponding functions for the GTkAssistant
 ;; class.
 
-(define-g-object-class "GtkAssistantPage" assistant-page
+(gobject:define-g-object-class "GtkAssistantPage" assistant-page
   (:superclass g:object
    :export nil
    :interfaces ()
@@ -287,7 +287,7 @@
 ;;; GtkAssistant
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkAssistant" assistant
+(gobject:define-g-object-class "GtkAssistant" assistant
   (:superclass window
    :export t
    :interfaces ("GtkAccessible"
@@ -677,7 +677,7 @@ lambda (assistant page)    :run-last
 ;;; GtkAssistantPageFunc
 ;;; ----------------------------------------------------------------------------
 
-(define-cb-methods assistant-page-func :int ((current-page :int)))
+(gobject:define-cb-methods assistant-page-func :int ((current-page :int)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'assistant-page-func)
@@ -691,7 +691,7 @@ lambda (assistant page)    :run-last
   It is called both for computing the Next page when the user presses the
   Forward button and for handling the behavior of the Last button.
   @begin{pre}
- lambda (current)
+lambda (current)
   @end{pre}
   @begin[code]{table}
     @entry[current]{An integer with the page number used to calculate the Next

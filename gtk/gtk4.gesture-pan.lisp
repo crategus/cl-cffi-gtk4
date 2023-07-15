@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.gesture-pan.lisp
+;;; gtk4.gesture-pan.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -68,7 +68,7 @@
 ;;; enum GtkPanDirection
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPanDirection" pan-direction
+(gobject:define-g-enum "GtkPanDirection" pan-direction
   (:export t
    :type-initializer "gtk_pan_direction_get_type")
   :left
@@ -85,7 +85,7 @@
     Describes the panning direction of a @class{gtk:gesture-pan} object.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPanDirection\" pan-direction
+(gobject:define-g-enum \"GtkPanDirection\" pan-direction
   (:export t
    :type-initializer \"gtk_pan_direction_get_type\")
   :left
@@ -105,7 +105,7 @@
 ;;; struct GtkGesturePan
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkGesturePan" gesture-pan
+(gobject:define-g-object-class "GtkGesturePan" gesture-pan
   (:superclass gesture-drag
    :export t
    :interfaces nil
@@ -210,4 +210,4 @@ lambda (gesture direction offset)    :run-last
 
 (export 'gesture-pan-new)
 
-;;; --- End of file gtk.gesture-pan.lisp ---------------------------------------
+;;; --- End of file gtk4.gesture-pan.lisp --------------------------------------

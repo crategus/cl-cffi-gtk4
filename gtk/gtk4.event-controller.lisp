@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.event-controller.lisp
+;;; gtk4.event-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
 ;;; This program is free software: you can redistribute it and/or modify
 ;;; it under the terms of the GNU Lesser General Public License for Lisp
@@ -83,7 +83,7 @@
 ;;; enum GtkPropagationPhase
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPropagationPhase" propagation-phase
+(gobject:define-g-enum "GtkPropagationPhase" propagation-phase
   (:export t
    :type-initializer "gtk_propagation_phase_get_type")
   (:none 0)
@@ -101,7 +101,7 @@
     @class{gtk:event-controller} object.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPropagationPhase\" propagation-phase
+(gobject:define-g-enum \"GtkPropagationPhase\" propagation-phase
   (:export t
    :type-initializer \"gtk_propagation_phase_get_type\")
   (:none 0)
@@ -128,7 +128,7 @@
 ;;; enum GtkPropagationLimit
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkPropagationLimit" propagation-limit
+(gobject:define-g-enum "GtkPropagationLimit" propagation-limit
   (:export t
    :type-initializer "gtk_propagation_limit_get_type")
   (:none 0)
@@ -144,7 +144,7 @@
     events targeting other widgets.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkPropagationLimit\" propagation-limit
+(gobject:define-g-enum \"GtkPropagationLimit\" propagation-limit
   (:export t
    :type-initializer \"gtk_propagation_limit_get_type\")
   (:none 0)
@@ -163,7 +163,7 @@
 ;;; struct GtkEventController
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkEventController" event-controller
+(gobject:define-g-object-class "GtkEventController" event-controller
   (:superclass g:object
    :export t
    :interfaces nil
@@ -430,4 +430,4 @@
 
 (export 'event-controller-current-event-time)
 
-;;; --- End of file gtk.event-controller.lisp ----------------------------------
+;;; --- End of file gtk4.event-controller.lisp ---------------------------------

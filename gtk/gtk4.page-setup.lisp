@@ -504,7 +504,7 @@
   @fun{gtk:page-setup-to-file}.
   @see-class{gtk:page-setup}
   @see-function{gtk:page-setup-to-file}"
-  (with-ignore-g-error (err)
+  (glib:with-ignore-g-error (err)
     (%page-setup-new-from-file (namestring path) err)))
 
 (export 'page-setup-new-from-file)
@@ -534,7 +534,7 @@
   @code{nil} if an error occurred.
   @see-class{gtk:page-setup}
   @see-type{glib:key-file}"
-  (with-ignore-g-error (err)
+  (glib:with-ignore-g-error (err)
     (%page-setup-new-from-key-file keyfile groupname err)))
 
 (export 'page-setup-new-from-key-file)
@@ -582,7 +582,7 @@
   See the function @fun{gtk:page-setup-to-file}.
   @see-class{gtk:page-setup}
   @see-function{gtk:page-setup-to-file}"
-  (with-ignore-g-error (err)
+  (glib:with-ignore-g-error (err)
     (%page-setup-load-file setup (namestring path) err)))
 
 (export 'page-setup-load-file)
@@ -611,7 +611,7 @@
   @end{short}
   @see-class{gtk:page-setup}
   @see-type{glib:key-file}"
-  (with-ignore-g-error (err)
+  (glib:with-ignore-g-error (err)
     (%page-setup-load-key-file setup keyfile groupname err)))
 
 (export 'page-setup-load-key-file)
@@ -635,7 +635,7 @@
     The function saves the information from the page setup to a file.
   @end{short}
   @see-class{gtk:page-setup}"
-  (with-ignore-g-error (err)
+  (glib:with-ignore-g-error (err)
     (%page-setup-to-file setup (namestring path) err)))
 
 (export 'page-setup-to-file)
@@ -662,8 +662,8 @@
   @see-class{gtk:page-setup}
   @see-type{glib:key-file}"
   (%page-setup-to-key-file setup
-                               keyfile
-                               (if groupname groupname (cffi:null-pointer))))
+                           keyfile
+                           (if groupname groupname (cffi:null-pointer))))
 
 (export 'page-setup-to-key-file)
 

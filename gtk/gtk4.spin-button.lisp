@@ -114,7 +114,7 @@
 ;;; enum GtkSpinButtonUpdatePolicy
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkSpinButtonUpdatePolicy" spin-button-update-policy
+(gobject:define-g-enum "GtkSpinButtonUpdatePolicy" spin-button-update-policy
   (:export t
    :type-initializer "gtk_spin_button_update_policy_get_type")
   (:always 0)
@@ -131,7 +131,7 @@
   @end{short}
   See the @fun{gtk:spin-button-update-policy} function.
   @begin{pre}
-(define-g-enum \"GtkSpinButtonUpdatePolicy\" spin-button-update-policy
+(gobject:define-g-enum \"GtkSpinButtonUpdatePolicy\" spin-button-update-policy
   (:export t
    :type-initializer \"gtk_spin_button_update_policy_get_type\")
   (:always 0)
@@ -151,7 +151,7 @@
 ;;; enum GtkSpinType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GtkSpinType" spin-type
+(gobject:define-g-enum "GtkSpinType" spin-type
   (:export t
    :type-initializer "gtk_spin_type_get_type")
   (:step-forward 0)
@@ -172,7 +172,7 @@
     change to make in the @fun{gtk:spin-button-spin} function.
   @end{short}
   @begin{pre}
-(define-g-enum \"GtkSpinType\" spin-type
+(gobject:define-g-enum \"GtkSpinType\" spin-type
   (:export t
    :type-initializer \"gtk_spin_type_get_type\")
   (:step-forward 0)
@@ -208,7 +208,7 @@
 ;;; struct GtkSpinButton
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkSpinButton" spin-button
+(gobject:define-g-object-class "GtkSpinButton" spin-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -702,7 +702,7 @@ lambda (button)    :run-last
 ;;; gtk_spin_button_new_with_range ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_spin_button_new_with_range" %spin-button-new-with-range)
+(cffi:defcfun ("gtk_spin_button_new_with_range" %spin-button-new-with-range)
     (g:object spin-button)
   (min :double)
   (max :double)
@@ -768,7 +768,7 @@ lambda (button)    :run-last
                           :void)
     (values step page)))
 
-(defcfun ("gtk_spin_button_get_increments" %spin-button-increments) :void
+(cffi:defcfun ("gtk_spin_button_get_increments" %spin-button-increments) :void
   (button (g:object spin-button))
   (step (:pointer :double))
   (page (:pointer :double)))
@@ -801,7 +801,7 @@ lambda (button)    :run-last
   @see-class{gtk:spin-button}
   @see-function{gtk:adjustment-page-increment}
   @see-function{gtk:adjustment-step-increment}"
-  (with-foreign-objects ((step :double) (page :double))
+  (cffi:with-foreign-objects ((step :double) (page :double))
     (%spin-button-increments button step page)
     (values (cffi:mem-ref step :double)
             (cffi:mem-ref page :double))))
@@ -822,7 +822,7 @@ lambda (button)    :run-last
                           :void)
     (values min max)))
 
-(defcfun ("gtk_spin_button_get_range" %spin-button-range) :void
+(cffi:defcfun ("gtk_spin_button_get_range" %spin-button-range) :void
   (button (g:object spin-button))
   (min (:pointer :double))
   (max (:pointer :double)))
@@ -846,7 +846,7 @@ lambda (button)    :run-last
   If the current value is outside this range, it will be adjusted to fit
   within the range, otherwise it will remain unchanged.
   @see-class{gtk:spin-button}"
-  (with-foreign-objects ((min :double) (max :double))
+  (cffi:with-foreign-objects ((min :double) (max :double))
     (%spin-button-range button min max)
     (values (cffi:mem-ref min :double)
             (cffi:mem-ref max :double))))
@@ -875,7 +875,7 @@ lambda (button)    :run-last
 ;;; gtk_spin_button_configure ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_spin_button_configure" spin-button-configure) :void
+(cffi:defcfun ("gtk_spin_button_configure" spin-button-configure) :void
  #+liber-documentation
  "@version{#2021-2-10}
   @argument[button]{a @class{gtk:spin-button} widget}
@@ -903,7 +903,7 @@ lambda (button)    :run-last
 ;;; gtk_spin_button_spin ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_spin_button_spin" spin-button-spin) :void
+(cffi:defcfun ("gtk_spin_button_spin" spin-button-spin) :void
  #+liber-documentation
  "@version{#2021-2-10}
   @argument[button]{a @class{gtk:spin-button} widget}
@@ -927,7 +927,7 @@ lambda (button)    :run-last
 ;;; gtk_spin_button_update ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_spin_button_update" spin-button-update) :void
+(cffi:defcfun ("gtk_spin_button_update" spin-button-update) :void
  #+liber-documentation
  "@version{#2021-2-10}
   @argument[button]{a @class{gtk:spin-button} widget}

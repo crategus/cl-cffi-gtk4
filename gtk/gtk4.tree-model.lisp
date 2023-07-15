@@ -130,7 +130,7 @@
 ;;; GtkTreeModelFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GtkTreeModelFlags" tree-model-flags
+(gobject:define-g-flags "GtkTreeModelFlags" tree-model-flags
   (:export t
    :type-initializer "gtk_tree_model_flags_get_type")
   (:iters-persist 1)
@@ -149,7 +149,7 @@
   static for the lifetime of the object. A more complete description of
   @code{:iters-persist} can be found in the overview of this section.
   @begin{pre}
-(define-g-flags \"GtkTreeModelFlags\" tree-model-flags
+(gobject:define-g-flags \"GtkTreeModelFlags\" tree-model-flags
   (:export t
    :type-initializer \"gtk_tree_model_flags_get_type\")
   (:iters-persist 1)
@@ -166,7 +166,7 @@
 ;;; GtkTreeIter
 ;;; ----------------------------------------------------------------------------
 
-(define-foreign-type pointer-as-integer-foreign-type ()
+(cffi:define-foreign-type pointer-as-integer-foreign-type ()
   ()
   (:actual-type :pointer)
   (:simple-parser pointer-as-integer))
@@ -181,7 +181,7 @@
 
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-cstruct tree-iter "GtkTreeIter"
+(glib:define-g-boxed-cstruct tree-iter "GtkTreeIter"
   (:export t
    :type-initializer "gtk_tree_iter_get_type")
   (stamp :int :initform 0)
@@ -201,7 +201,7 @@
     @arg{user-data} members.
   @end{short}
   @begin{pre}
-(define-g-boxed-cstruct tree-iter \"GtkTreeIter\"
+(glib:define-g-boxed-cstruct tree-iter \"GtkTreeIter\"
   (:export t
    :type-initializer \"gtk_tree_iter_get_type\")
   (stamp :int :initform 0)
@@ -222,7 +222,7 @@
 ;;; GtkTreePath
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque tree-path "GtkTreePath"
+(glib:define-g-boxed-opaque tree-path "GtkTreePath"
   :type-initializer "gtk_tree_path_get_type"
   :alloc (%tree-path-new))
 
@@ -233,7 +233,7 @@
  "@version{#2023-1-27}
   @short{No description available.}
   @begin{pre}
-(define-g-boxed-opaque tree-path \"GtkTreePath\"
+(glib:define-g-boxed-opaque tree-path \"GtkTreePath\"
   :type-initializer \"gtk_tree_path_get_type\"
   :alloc (%tree-path-new))
   @end{pre}
@@ -246,7 +246,7 @@
 ;;; GtkTreeRowReference
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque tree-row-reference "GtkTreeRowReference"
+(glib:define-g-boxed-opaque tree-row-reference "GtkTreeRowReference"
   :type-initializer "gtk_tree_row_reference_get_type"
   :alloc (error "GtkTreeRowReference cannot be created from the Lisp side."))
 
@@ -263,7 +263,7 @@
   Create a new @sym{gtk:tree-row-reference} instance with the
     @fun{gtk:tree-row-reference-new} function.
   @begin{pre}
-(define-g-boxed-opaque gtk:tree-row-reference \"GtkTreeRowReference\"
+(glib:define-g-boxed-opaque gtk:tree-row-reference \"GtkTreeRowReference\"
   :type-initializer \"gtk_tree_row_reference_get_type\"
   :alloc (error \"GtkTreeRowReference cannot be created from the Lisp side.\"))
   @end{pre}
@@ -276,7 +276,7 @@
 ;;; GtkTreeModel
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GtkTreeModel" tree-model
+(gobject:define-g-interface "GtkTreeModel" tree-model
   (:export t
    :type-initializer "gtk_tree_model_get_type")
   nil)
@@ -512,12 +512,12 @@ lambda (model path iter new-order)    :run-first
 ;;; GtkTreeModelForeachFunc
 ;;; ----------------------------------------------------------------------------
 
-(defcallback tree-model-foreach-func :boolean
+(cffi:defcallback tree-model-foreach-func :boolean
     ((model g:object)
      (path (g:boxed tree-path))
      (iter (g:boxed tree-iter))
      (data :pointer))
-  (let ((fn (get-stable-pointer-value data)))
+  (let ((fn (glib:get-stable-pointer-value data)))
     (restart-case
       (funcall fn model path iter)
       (stop-tree-model-iteration () t)
@@ -552,9 +552,9 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_new
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_new" %tree-path-new) :pointer)
+(cffi:defcfun ("gtk_tree_path_new" %tree-path-new) :pointer)
 
-(defcfun ("gtk_tree_path_new" tree-path-new) (g:boxed tree-path :return)
+(cffi:defcfun ("gtk_tree_path_new" tree-path-new) (g:boxed tree-path :return)
  #+liber-documentation
  "@version{2023-1-27}
   @return{A newly created @class{gtk:tree-path} instance.}
@@ -567,7 +567,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_new_from_string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_new_from_string" tree-path-new-from-string)
+(cffi:defcfun ("gtk_tree_path_new_from_string" tree-path-new-from-string)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{2023-1-27}
@@ -628,7 +628,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_to_string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_to_string" tree-path-to-string) :string
+(cffi:defcfun ("gtk_tree_path_to_string" tree-path-to-string) :string
  #+liber-documentation
  "@version{2021-3-4}
   @argument[path]{a @class{gtk:tree-path} instance}
@@ -646,7 +646,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_new_first
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_new_first" tree-path-new-first)
+(cffi:defcfun ("gtk_tree_path_new_first" tree-path-new-first)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{2023-1-27}
@@ -661,7 +661,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_append_index
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_append_index" %tree-path-append-index) :void
+(cffi:defcfun ("gtk_tree_path_append_index" %tree-path-append-index) :void
   (path (g:boxed tree-path))
   (index :int))
 
@@ -686,7 +686,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_prepend_index
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_prepend_index" %tree-path-prepend-index) :void
+(cffi:defcfun ("gtk_tree_path_prepend_index" %tree-path-prepend-index) :void
   (path (g:boxed tree-path))
   (index :int))
 
@@ -711,7 +711,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_get_depth -> tree-path-depth
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_get_depth" tree-path-depth) :int
+(cffi:defcfun ("gtk_tree_path_get_depth" tree-path-depth) :int
  #+liber-documentation
  "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
@@ -726,7 +726,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_get_indices -> tree-path-indices
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_get_indices" %tree-path-indices) (:pointer :int)
+(cffi:defcfun ("gtk_tree_path_get_indices" %tree-path-indices) (:pointer :int)
   (path (g:boxed tree-path)))
 
 (defun tree-path-indices (path)
@@ -774,7 +774,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_free                                     not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_free" tree-path-free) :void
+(cffi:defcfun ("gtk_tree_path_free" tree-path-free) :void
  #+liber-documentation
  "@version{#2013-5-12}
   @argument[path]{a @class{gtk:tree-path} object}
@@ -785,7 +785,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_copy
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_copy" tree-path-copy) (g:boxed tree-path :return)
+(cffi:defcfun ("gtk_tree_path_copy" tree-path-copy) (g:boxed tree-path :return)
  #+liber-documentation
  "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
@@ -800,7 +800,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_compare
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_compare" tree-path-compare ) :int
+(cffi:defcfun ("gtk_tree_path_compare" tree-path-compare ) :int
  #+liber-documentation
  "@version{2023-1-27}
   @argument[path1]{a @class{gtk:tree-path} instance}
@@ -820,7 +820,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_next
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_next" %tree-path-next) :void
+(cffi:defcfun ("gtk_tree_path_next" %tree-path-next) :void
   (path (g:boxed tree-path)))
 
 (defun tree-path-next (path)
@@ -841,7 +841,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_prev
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_prev" %tree-path-prev) :boolean
+(cffi:defcfun ("gtk_tree_path_prev" %tree-path-prev) :boolean
   (path (g:boxed tree-path)))
 
 (defun tree-path-prev (path)
@@ -866,7 +866,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_up
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_up" %tree-path-up) :boolean
+(cffi:defcfun ("gtk_tree_path_up" %tree-path-up) :boolean
   (path (g:boxed tree-path)))
 
 (defun tree-path-up (path)
@@ -890,7 +890,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_down
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_down" %tree-path-down) :void
+(cffi:defcfun ("gtk_tree_path_down" %tree-path-down) :void
   (path (g:boxed tree-path)))
 
 (defun tree-path-down (path)
@@ -912,7 +912,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_is_ancestor
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_is_ancestor" tree-path-is-ancestor) :boolean
+(cffi:defcfun ("gtk_tree_path_is_ancestor" tree-path-is-ancestor) :boolean
  #+liber-documentation
  "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
@@ -932,7 +932,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_path_is_descendant
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_path_is_descendant" tree-path-is-descendant) :boolean
+(cffi:defcfun ("gtk_tree_path_is_descendant" tree-path-is-descendant) :boolean
  #+liber-documentation
  "@version{2023-1-27}
   @argument[path]{a @class{gtk:tree-path} instance}
@@ -952,7 +952,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_row_reference_new
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_row_reference_new" tree-row-reference-new)
+(cffi:defcfun ("gtk_tree_row_reference_new" tree-row-reference-new)
     (g:boxed tree-row-reference :return)
  #+liber-documentation
  "@version{2023-1-27}
@@ -1020,7 +1020,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_row_reference_get_model -> tree-row-reference-model
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_row_reference_get_model" tree-row-reference-model)
+(cffi:defcfun ("gtk_tree_row_reference_get_model" tree-row-reference-model)
     (g:object tree-model)
  #+liber-documentation
  "@version{2023-1-27}
@@ -1037,7 +1037,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_row_reference_get_path
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_row_reference_get_path" tree-row-reference-path)
+(cffi:defcfun ("gtk_tree_row_reference_get_path" tree-row-reference-path)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{2023-1-27}
@@ -1057,7 +1057,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_row_reference_valid
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_row_reference_valid" tree-row-reference-valid) :boolean
+(cffi:defcfun ("gtk_tree_row_reference_valid" tree-row-reference-valid) :boolean
  #+liber-documentation
  "@version{2023-1-27}
   @argument[reference]{a @class{gtk:tree-row-reference}, or @code{nil}}
@@ -1086,7 +1086,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_row_reference_copy
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_row_reference_copy" tree-row-reference-copy)
+(cffi:defcfun ("gtk_tree_row_reference_copy" tree-row-reference-copy)
     (g:boxed tree-row-reference :return)
  #+liber-documentation
  "@version{2023-1-27}
@@ -1190,7 +1190,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_flags -> tree-model-flags
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_get_flags" tree-model-flags) tree-model-flags
+(cffi:defcfun ("gtk_tree_model_get_flags" tree-model-flags) tree-model-flags
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1210,7 +1210,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_n_columns -> tree-model-n-columns
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_get_n_columns" tree-model-n-columns) :int
+(cffi:defcfun ("gtk_tree_model_get_n_columns" tree-model-n-columns) :int
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1228,7 +1228,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_column_type -> tree-model-column-type
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_get_column_type" tree-model-column-type) g:type-t
+(cffi:defcfun ("gtk_tree_model_get_column_type" tree-model-column-type) g:type-t
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1248,7 +1248,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_iter -> tree-model-iter
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_get_iter" %tree-model-iter) :boolean
+(cffi:defcfun ("gtk_tree_model_get_iter" %tree-model-iter) :boolean
   (model (g:object tree-model))
   (iter (g:boxed tree-iter))
   (path (g:boxed tree-path)))
@@ -1277,8 +1277,8 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_iter_from_string -> tree-model-iter-from-string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_get_iter_from_string"
-          %tree-model-iter-from-string) :boolean
+(cffi:defcfun ("gtk_tree_model_get_iter_from_string"
+               %tree-model-iter-from-string) :boolean
   (model (g:object tree-model))
   (iter (g:boxed tree-iter))
   (pathstr :string))
@@ -1306,8 +1306,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_iter_first -> tree-model-iter-first
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_get_iter_first" %tree-model-iter-first)
-    :boolean
+(cffi:defcfun ("gtk_tree_model_get_iter_first" %tree-model-iter-first) :boolean
   (model (g:object tree-model))
   (iter (g:boxed tree-iter)))
 
@@ -1333,8 +1332,8 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_path -> tree-model-path
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_get_path" tree-model-path)
-     (g:boxed tree-path :return)
+(cffi:defcfun ("gtk_tree_model_get_path" tree-model-path) 
+    (g:boxed tree-path :return)
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1355,7 +1354,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_value -> tree-model-value
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_get_value" %tree-model-value) :void
+(cffi:defcfun ("gtk_tree_model_get_value" %tree-model-value) :void
   (model (g:object tree-model))
   (iter (g:boxed tree-iter))
   (column :int)
@@ -1373,11 +1372,11 @@ lambda (model path iter new-order)    :run-first
   @end{short}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
-  (with-foreign-object (value '(:struct g:value))
+  (cffi:with-foreign-object (value '(:struct g:value))
     (gobject:value-init value)
     (%tree-model-value model iter column value)
     (prog1
-      (parse-g-value value)
+      (gobject:parse-g-value value)
       (gobject:value-unset value))))
 
 (export 'tree-model-value)
@@ -1386,7 +1385,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_iter_next
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_iter_next" %tree-model-iter-next) :boolean
+(cffi:defcfun ("gtk_tree_model_iter_next" %tree-model-iter-next) :boolean
   (model (g:object tree-model))
   (iter (g:boxed tree-iter)))
 
@@ -1414,7 +1413,8 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_iter_previous
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_iter_previous" %tree-model-iter-previous) :boolean
+(cffi:defcfun ("gtk_tree_model_iter_previous" %tree-model-iter-previous) 
+    :boolean
   (model (g:object tree-model))
   (iter (g:boxed tree-iter)))
 
@@ -1440,7 +1440,8 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_iter_children
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_iter_children" %tree-model-iter-children) :boolean
+(cffi:defcfun ("gtk_tree_model_iter_children" %tree-model-iter-children) 
+    :boolean
   (model (g:object tree-model))
   (iter (g:boxed tree-iter))
   (parent (g:boxed tree-iter)))
@@ -1476,7 +1477,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_iter_has_child
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_iter_has_child" tree-model-iter-has-child)
+(cffi:defcfun ("gtk_tree_model_iter_has_child" tree-model-iter-has-child)
     :boolean
  #+liber-documentation
  "@version{#2021-3-4}
@@ -1497,7 +1498,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_iter_n_children
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_iter_n_children" tree-model-iter-n-children) :int
+(cffi:defcfun ("gtk_tree_model_iter_n_children" tree-model-iter-n-children) :int
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1519,7 +1520,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_iter_nth_child
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_iter_nth_child" %tree-model-iter-nth-child)
+(cffi:defcfun ("gtk_tree_model_iter_nth_child" %tree-model-iter-nth-child)
     :boolean
   (model (g:object tree-model))
   (iter (g:boxed tree-iter))
@@ -1553,7 +1554,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_iter_parent
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_iter_parent" %tree-model-iter-parent) :boolean
+(cffi:defcfun ("gtk_tree_model_iter_parent" %tree-model-iter-parent) :boolean
   (model g:object)
   (iter (g:boxed tree-iter))
   (child (g:boxed tree-iter)))
@@ -1583,8 +1584,8 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_string_from_iter -> tree-model-string-from-iter
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_get_string_from_iter"
-           tree-model-string-from-iter) (:string :free-from-foreign t)
+(cffi:defcfun ("gtk_tree_model_get_string_from_iter"
+               tree-model-string-from-iter) (:string :free-from-foreign t)
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1606,7 +1607,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_ref_node                                not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_ref_node" tree-model-ref-node) :void
+(cffi:defcfun ("gtk_tree_model_ref_node" tree-model-ref-node) :void
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1637,7 +1638,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_unref_node                              not exported
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_unref_node" tree-model-unref-node) :void
+(cffi:defcfun ("gtk_tree_model_unref_node" tree-model-unref-node) :void
  #+liber-documentation
  "@version{#2020-6-28}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1719,7 +1720,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_foreach
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_foreach" %tree-model-foreach) :void
+(cffi:defcfun ("gtk_tree_model_foreach" %tree-model-foreach) :void
   (model g:object)
   (func :pointer)
   (data :pointer))
@@ -1737,7 +1738,7 @@ lambda (model path iter new-order)    :run-first
   @sym{gtk:tree-model-foreach} function returns.
   @see-class{gtk:tree-model}
   @see-symbol{gtk:tree-model-foreach-func}"
-  (with-stable-pointer (ptr func)
+  (glib:with-stable-pointer (ptr func)
     (%tree-model-foreach model
                          (cffi:callback tree-model-foreach-func)
                          ptr)))
@@ -1748,7 +1749,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_row_changed
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_row_changed" tree-model-row-changed) :void
+(cffi:defcfun ("gtk_tree_model_row_changed" tree-model-row-changed) :void
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1771,7 +1772,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_row_inserted
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_row_inserted" tree-model-row-inserted) :void
+(cffi:defcfun ("gtk_tree_model_row_inserted" tree-model-row-inserted) :void
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1794,8 +1795,8 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_row_has_child_toggled
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_row_has_child_toggled"
-           tree-model-row-has-child-toggled) :void
+(cffi:defcfun ("gtk_tree_model_row_has_child_toggled"
+               tree-model-row-has-child-toggled) :void
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1819,7 +1820,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_row_deleted
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_row_deleted" tree-model-row-deleted) :void
+(cffi:defcfun ("gtk_tree_model_row_deleted" tree-model-row-deleted) :void
  #+liber-documentation
  "@version{#2021-3-4}
   @argument[model]{a @class{gtk:tree-model} object}
@@ -1846,8 +1847,8 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_rows_reordered
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_rows_reordered_with_length"
-          %tree-model-rows-reordered) :void
+(cffi:defcfun ("gtk_tree_model_rows_reordered_with_length"
+               %tree-model-rows-reordered) :void
   (model (g:object tree-model))
   (path (g:boxed tree-path))
   (iter (g:boxed tree-iter))
@@ -1871,7 +1872,7 @@ lambda (model path iter new-order)    :run-first
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-iter}"
-  (with-foreign-object (order-ar :int (length order))
+  (cffi:with-foreign-object (order-ar :int (length order))
     ;; TODO: Check this implementation. Is this correct?
     (dolist (i order)
       (cffi:mem-aref order-ar :int i))
