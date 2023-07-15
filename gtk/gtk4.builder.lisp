@@ -540,7 +540,8 @@
 ;;; gtk_builder_new_from_file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_new_from_file" %builder-new-from-file) (g:object builder)
+(cffi:defcfun ("gtk_builder_new_from_file" %builder-new-from-file) 
+    (g:object builder)
   (filename :string))
 
 (defun builder-new-from-file (path)
@@ -564,7 +565,7 @@
 ;;; gtk_builder_new_from_resource
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_new_from_resource" builder-new-from-resource)
+(cffi:defcfun ("gtk_builder_new_from_resource" builder-new-from-resource)
     (g:object builder)
  #+liber-documentation
  "@version{#2022-1-10}
@@ -588,7 +589,7 @@
 ;;; gtk_builder_new_from_string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_new_from_string" %builder-new-from-string)
+(cffi:defcfun ("gtk_builder_new_from_string" %builder-new-from-string)
     (g:object builder)
   (string :string)
   (length :int))
@@ -654,7 +655,7 @@
 ;;; gtk_builder_add_from_file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_add_from_file" %builder-add-from-file) :uint
+(cffi:defcfun ("gtk_builder_add_from_file" %builder-add-from-file) :uint
   (builder (g:object builder))
   (filename :string)
   (err :pointer))
@@ -689,7 +690,7 @@
 ;;; gtk_builder_add_from_resource
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_add_from_resource" %builder-add-from-resource) :uint
+(cffi:defcfun ("gtk_builder_add_from_resource" %builder-add-from-resource) :uint
   (builder (g:object builder))
   (path :string)
   (err :pointer))
@@ -725,7 +726,7 @@
 ;;; gtk_builder_add_from_string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_add_from_string" %builder-add-from-string) :uint
+(cffi:defcfun ("gtk_builder_add_from_string" %builder-add-from-string) :uint
   (builder (g:object builder))
   (string :string)
   (length :int)
@@ -760,8 +761,8 @@
 ;;; gtk_builder_add_objects_from_file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_add_objects_from_file" %builder-add-objects-from-file)
-    :uint
+(cffi:defcfun ("gtk_builder_add_objects_from_file" 
+               %builder-add-objects-from-file) :uint
   (builder (g:object builder))
   (filename :string)
   (strptr :pointer)
@@ -819,8 +820,8 @@
 ;;; gtk_builder_add_objects_from_resource
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_add_objects_from_resource"
-          %builder-add-objects-from-resource) :uint
+(cffi:defcfun ("gtk_builder_add_objects_from_resource"
+               %builder-add-objects-from-resource) :uint
   (builder (g:object builder))
   (path :string)
   (strptr :pointer)
@@ -857,8 +858,8 @@
 ;;; gtk_builder_add_objects_from_string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_add_objects_from_string"
-          %builder-add-objects-from-string) :uint
+(cffi:defcfun ("gtk_builder_add_objects_from_string"
+               %builder-add-objects-from-string) :uint
   (builder (g:object builder))
   (string :string)
   (length :int)
@@ -934,7 +935,7 @@
 ;;; gtk_builder_get_object -> builder-object
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_get_object" builder-object) g:object
+(cffi:defcfun ("gtk_builder_get_object" builder-object) g:object
  #+liber-documentation
  "@version{#2022-1-10}
   @argument[builder]{a @class{gtk:builder} object}
@@ -956,7 +957,7 @@
 ;;; gtk_builder_get_objects -> builder-objects
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_get_objects" builder-objects) (g:slist-t g:object)
+(cffi:defcfun ("gtk_builder_get_objects" builder-objects) (g:slist-t g:object)
  #+liber-documentation
  "@version{#2022-1-10}
   @argument[builder]{a @class{gtk:builder} object}
@@ -978,7 +979,7 @@
 ;;; gtk_builder_expose_object
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_builder_expose_object" builder-expose-object) :void
+(cffi:defcfun ("gtk_builder_expose_object" builder-expose-object) :void
  #+liber-documentation
  "@version{#2022-9-13}
   @argument[builder]{a @class{gtk:builder} object}
@@ -1002,7 +1003,7 @@
 
 ;; The default implementation returns (gtype name) e.g. (gtype "GtkDialog").
 
-(defcfun ("gtk_builder_get_type_from_name" builder-type-from-name) g:type-t
+(cffi:defcfun ("gtk_builder_get_type_from_name" builder-type-from-name) g:type-t
  #+liber-documentation
  "@version{#2022-1-10}
   @argument[builder]{a @class{gtk:builder} object}

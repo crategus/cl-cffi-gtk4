@@ -80,7 +80,7 @@
 
 (in-package :gtk)
 
-(define-g-object-class "GtkAdjustment" adjustment
+(gobject:define-g-object-class "GtkAdjustment" adjustment
   (:superclass g:initially-unowned
    :export t
    :interfaces nil
@@ -404,7 +404,7 @@ lambda (adjustment)    :no-recurse
 ;;; ----------------------------------------------------------------------------
 
 #+nil
-(defcfun ("gtk_adjustment_clamp_page" adjustment-clamp-page) :void
+(cffi:defcfun ("gtk_adjustment_clamp_page" adjustment-clamp-page) :void
   (adjustment (g:object adjustment))
   (lower :double)
   (upper :double))
@@ -435,7 +435,7 @@ lambda (adjustment)    :no-recurse
 ;;; gtk_adjustment_configure ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_adjustment_configure" adjustment-configure) :void
+(cffi:defcfun ("gtk_adjustment_configure" adjustment-configure) :void
  #+liber-documentation
  "@version{#2022-11-13}
   @argument[adjustment]{a @class{gtk:adjustment} object}

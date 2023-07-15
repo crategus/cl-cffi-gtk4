@@ -71,7 +71,7 @@
 ;;; GtkBoxLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkBoxLayout" box-layout
+(gobject:define-g-object-class "GtkBoxLayout" box-layout
   (:superclass layout-manager
    :export t
    :interfaces ("GtkOrientable")

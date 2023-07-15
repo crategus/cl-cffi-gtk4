@@ -73,7 +73,7 @@
 ;;; GtkActionBar
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkActionBar" action-bar
+(gobject:define-g-object-class "GtkActionBar" action-bar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -159,7 +159,7 @@
 ;;; gtk_action_bar_pack_start
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_action_bar_pack_start" action-bar-pack-start) :void
+(cffi:defcfun ("gtk_action_bar_pack_start" action-bar-pack-start) :void
  #+liber-documentation
  "@version{#2021-12-17}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
@@ -180,7 +180,7 @@
 ;;; gtk_action_bar_pack_end
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_action_bar_pack_end" action-bar-pack-end) :void
+(cffi:defcfun ("gtk_action_bar_pack_end" action-bar-pack-end) :void
  #+liber-documentation
  "@version{#2021-12-8}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
@@ -201,7 +201,7 @@
 ;;;gtk_action_bar_remove
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_action_bar_remove" action-bar-remove) :void
+(cffi:defcfun ("gtk_action_bar_remove" action-bar-remove) :void
  #+liber-documentation
  "@version{#2022-2-6}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
@@ -226,7 +226,7 @@
                         :void)
   widget)
 
-(defcfun ("gtk_action_bar_get_center_widget" action-bar-center-widget)
+(cffi:defcfun ("gtk_action_bar_get_center_widget" action-bar-center-widget)
     (g:object widget)
  #+liber-documentation
  "@version{#2021-12-8}

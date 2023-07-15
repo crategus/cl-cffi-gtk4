@@ -87,7 +87,7 @@
 ;;; gtk_buildable_get_buildable_id -> buildable-buildable-id
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_buildable_get_buildable_id" buildable-buildable-id) :string
+(cffi:defcfun ("gtk_buildable_get_buildable_id" buildable-buildable-id) :string
  #+liber-documentation
  "@version{#2022-1-21}
   @argument[buildable]{a @class{gtk:buildable} object}

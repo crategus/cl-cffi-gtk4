@@ -873,8 +873,8 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 ;;; gtk_about_dialog_add_credit_section
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_about_dialog_add_credit_section"
-           about-dialog-add-credit-section) :void
+(cffi:defcfun ("gtk_about_dialog_add_credit_section"
+               about-dialog-add-credit-section) :void
  #+liber-documentation
  "@version{#2022-1-13}
   @argument[about]{a @class{gtk:about-dialog} widget}

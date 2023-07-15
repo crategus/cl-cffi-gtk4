@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.box.lisp
+;;; gtk4.box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.9 and modified to document the Lisp binding to the GTK library.
@@ -9,22 +9,23 @@
 ;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
 ;;; Copyright (C) 2011 - 2022 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkBox
@@ -83,7 +84,7 @@
 ;;; GtkBox
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkBox" box
+(gobject:define-g-object-class "GtkBox" box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -269,7 +270,7 @@
 ;;; gtk_box_append
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_box_append" box-append) :void
+(cffi:defcfun ("gtk_box_append" box-append) :void
  #+liber-documentation
  "@version{2022-11-25}
   @argument[box]{a @class{gtk:box} widget}
@@ -286,7 +287,7 @@
 ;;; gtk_box_prepend
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_box_prepend" box-prepend) :void
+(cffi:defcfun ("gtk_box_prepend" box-prepend) :void
  #+liber-documentation
  "@version{#2022-1-14}
   @argument[box]{a @class{gtk:box} widget}
@@ -303,7 +304,7 @@
 ;;; gtk_box_remove
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_box_remove" box-remove) :void
+(cffi:defcfun ("gtk_box_remove" box-remove) :void
  #+liber-documentation
  "@version{#2022-1-14}
   @argument[box]{a @class{gtk:box} widget}
@@ -327,7 +328,7 @@
 ;;; gtk_box_insert_child_after
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_box_insert_child_after" box-insert-child-after) :void
+(cffi:defcfun ("gtk_box_insert_child_after" box-insert-child-after) :void
  #+liber-documentation
  "@version{#2022-1-14}
   @argument[box]{a @class{gtk:box} widget}
@@ -352,7 +353,7 @@
 ;;; gtk_box_reorder_child_after
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_box_reorder_child_after" box-reorder-child-after) :void
+(cffi:defcfun ("gtk_box_reorder_child_after" box-reorder-child-after) :void
  #+liber-documentation
  "@version{#2022-1-14}
   @argument[box]{a @class{gtk:box} widget}
@@ -373,4 +374,4 @@
 
 (export 'box-reorder-child-after)
 
-;;; --- End of file gtk.box.lisp -----------------------------------------------
+;;; --- End of file gtk4.box.lisp ----------------------------------------------

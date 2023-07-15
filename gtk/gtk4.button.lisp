@@ -92,7 +92,7 @@
 ;;; GtkButton
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkButton" button
+(gobject:define-g-object-class "GtkButton" button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

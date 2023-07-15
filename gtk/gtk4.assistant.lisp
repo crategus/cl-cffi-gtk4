@@ -485,7 +485,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_get_page -> assistant-page
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_get_page" assistant-page)
+(cffi:defcfun ("gtk_assistant_get_page" assistant-page)
     (g:object assistant-page)
  #+liber-documentation
  "@version{#2022-1-31}
@@ -514,7 +514,7 @@ lambda (assistant page)    :run-last
                         :void)
   index)
 
-(defcfun ("gtk_assistant_get_current_page" assistant-current-page) :int
+(cffi:defcfun ("gtk_assistant_get_current_page" assistant-current-page) :int
  #+liber-documentation
  "@version{#2021-11-1}
   @syntax[]{(gtk:assistant-current-page assistant) => index}
@@ -542,7 +542,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_get_n_pages -> assistant-n-pages
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_get_n_pages" assistant-n-pages) :int
+(cffi:defcfun ("gtk_assistant_get_n_pages" assistant-n-pages) :int
  #+liber-documentation
  "@version{#2021-11-1}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -559,7 +559,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_get_nth_page -> assistant-nth-page
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_get_nth_page" assistant-nth-page)
+(cffi:defcfun ("gtk_assistant_get_nth_page" assistant-nth-page)
     (g:object widget)
  #+liber-documentation
  "@version{#2021-11-2}
@@ -583,7 +583,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_prepend_page
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_prepend_page" assistant-prepend-page) :int
+(cffi:defcfun ("gtk_assistant_prepend_page" assistant-prepend-page) :int
  #+liber-documentation
  "@version{#2021-10-26}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -606,7 +606,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_append_page
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_append_page" assistant-append-page) :int
+(cffi:defcfun ("gtk_assistant_append_page" assistant-append-page) :int
  #+liber-documentation
  "@version{#2021-11-1}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -629,7 +629,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_insert_page
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_insert_page" assistant-insert-page) :int
+(cffi:defcfun ("gtk_assistant_insert_page" assistant-insert-page) :int
  #+liber-documentation
  "@version{#2021-10-26}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -655,7 +655,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_remove_page
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_remove_page" assistant-remove-page) :void
+(cffi:defcfun ("gtk_assistant_remove_page" assistant-remove-page) :void
  #+liber-documentation
  "@version{#2021-11-1}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -707,8 +707,8 @@ lambda (current)
 ;;; gtk_assistant_set_forward_page_func
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_set_forward_page_func"
-          %assistant-set-forward-page-func) :void
+(cffi:defcfun ("gtk_assistant_set_forward_page_func"
+               %assistant-set-forward-page-func) :void
   (assistant (g:object assistant))
   (func :pointer)
   (data :pointer)
@@ -754,7 +754,7 @@ lambda (current)
                         :void)
   value)
 
-(defcfun ("gtk_assistant_get_page_type" assistant-page-type)
+(cffi:defcfun ("gtk_assistant_get_page_type" assistant-page-type)
     assistant-page-type
  #+liber-documentation
  "@version{#2022-1-31}
@@ -789,7 +789,7 @@ lambda (current)
                         :void)
   value)
 
-(defcfun ("gtk_assistant_get_page_title" assistant-page-title) :string
+(cffi:defcfun ("gtk_assistant_get_page_title" assistant-page-title) :string
  #+liber-documentation
  "@version{#2021-11-2}
   @syntax[]{(gtk:assistant-page-title assistant page) => title}
@@ -825,7 +825,7 @@ lambda (current)
                         :void)
   value)
 
-(defcfun ("gtk_assistant_get_page_complete" assistant-page-complete)
+(cffi:defcfun ("gtk_assistant_get_page_complete" assistant-page-complete)
     :boolean
  #+liber-documentation
  "@version{#2021-11-2}
@@ -853,7 +853,7 @@ lambda (current)
 ;;; gtk_assistant_add_action_widget
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_add_action_widget" assistant-add-action-widget)
+(cffi:defcfun ("gtk_assistant_add_action_widget" assistant-add-action-widget)
     :void
  #+liber-documentation
  "@version{#2021-11-2}
@@ -874,8 +874,8 @@ lambda (current)
 ;;; gtk_assistant_remove_action_widget
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_remove_action_widget"
-           assistant-remove-action-widget) :void
+(cffi:defcfun ("gtk_assistant_remove_action_widget"
+               assistant-remove-action-widget) :void
  #+liber-documentation
  "@version{#2021-11-2}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -895,8 +895,8 @@ lambda (current)
 ;;; gtk_assistant_update_buttons_state
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_update_buttons_state"
-          assistant-update-buttons-state) :void
+(cffi:defcfun ("gtk_assistant_update_buttons_state"
+               assistant-update-buttons-state) :void
  #+liber-documentation
  "@version{#2021-10-26}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -917,7 +917,7 @@ lambda (current)
 ;;; gtk_assistant_commit
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_commit" assistant-commit) :void
+(cffi:defcfun ("gtk_assistant_commit" assistant-commit) :void
  #+liber-documentation
  "@version{#2021-11-1}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -938,7 +938,7 @@ lambda (current)
 ;;; gtk_assistant_next_page
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_next_page" assistant-next-page) :void
+(cffi:defcfun ("gtk_assistant_next_page" assistant-next-page) :void
  #+liber-documentation
  "@version{#2021-11-2}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -959,7 +959,7 @@ lambda (current)
 ;;; gtk_assistant_previous_page
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_assistant_previous_page" assistant-previous-page) :void
+(cffi:defcfun ("gtk_assistant_previous_page" assistant-previous-page) :void
  #+liber-documentation
  "@version{#2021-11-2}
   @argument[assistant]{a @class{gtk:assistant} widget}

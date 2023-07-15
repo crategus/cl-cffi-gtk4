@@ -456,7 +456,7 @@ lambda (application window)    :run-first
 ;;; gtk_application_add_window
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_application_add_window" application-add-window) :void
+(cffi:defcfun ("gtk_application_add_window" application-add-window) :void
  #+liber-documentation
  "@version{#2022-11-13}
   @argument[application]{a @class{gtk:application} instance}
@@ -489,7 +489,7 @@ lambda (application window)    :run-first
 ;;; gtk_application_remove_window
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_application_remove_window" application-remove-window) :void
+(cffi:defcfun ("gtk_application_remove_window" application-remove-window) :void
  #+liber-documentation
  "@version{#2022-11-13}
   @argument[application]{a @class{gtk:application} instance}
@@ -516,7 +516,7 @@ lambda (application window)    :run-first
 ;;; gtk_application_get_windows -> application-windows
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_application_get_windows" application-windows)
+(cffi:defcfun ("gtk_application_get_windows" application-windows)
     (g:list-t (g:object window) :free-from-foreign nil)
  #+liber-documentation
  "@version{#2022-11-13}
@@ -538,7 +538,7 @@ lambda (application window)    :run-first
 ;;; gtk_application_get_window_by_id -> application-window-by-id
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_application_get_window_by_id" application-window-by-id)
+(cffi:defcfun ("gtk_application_get_window_by_id" application-window-by-id)
     (g:object window)
  #+liber-documentation
  "@version{#2022-11-13}
@@ -569,7 +569,7 @@ lambda (application window)    :run-first
 ;;; gtk_application_inhibit
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_application_inhibit" application-inhibit) :uint
+(cffi:defcfun ("gtk_application_inhibit" application-inhibit) :uint
  #+liber-documentation
  "@version{#2022-11-13}
   @argument[application]{a @class{gtk:application} instance}
@@ -622,7 +622,7 @@ lambda (application window)    :run-first
 ;;; gtk_application_uninhibit
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_application_uninhibit" application-uninhibit) :void
+(cffi:defcfun ("gtk_application_uninhibit" application-uninhibit) :void
  #+liber-documentation
  "@version{#2022-11-13}
   @argument[application]{a @class{gtk:application} instance}
@@ -644,7 +644,7 @@ lambda (application window)    :run-first
 ;;; gtk_application_get_menu_by_id -> application-menu-by-id
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_application_get_menu_by_id" application-menu-by-id)
+(cffi:defcfun ("gtk_application_get_menu_by_id" application-menu-by-id)
     (g:object g:menu)
  #+liber-documentation
  "@version{#2022-11-13}
@@ -666,8 +666,8 @@ lambda (application window)    :run-first
 ;;; gtk_application_list_action_descriptions
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_application_list_action_descriptions"
-           application-list-action-descriptions) g:strv-t
+(cffi:defcfun ("gtk_application_list_action_descriptions"
+               application-list-action-descriptions) g:strv-t
  #+liber-documentation
  "@version{#2022-11-13}
   @argument[application]{a @class{gtk:application} instance}
@@ -695,8 +695,8 @@ lambda (application window)    :run-first
                         :void)
   accels)
 
-(defcfun ("gtk_application_get_accels_for_action"
-           application-accels-for-action) g:strv-t
+(cffi:defcfun ("gtk_application_get_accels_for_action"
+               application-accels-for-action) g:strv-t
  #+liber-documentation
  "@version{#2022-11-13}
   @syntax[]{(gtk:application-accels-for-action application name) => accels}
@@ -734,8 +734,8 @@ lambda (application window)    :run-first
 ;;; gtk_application_get_actions_for_accel -> application-actions-for-accel
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_application_get_actions_for_accel"
-           application-actions-for-accel) g:strv-t
+(cffi:defcfun ("gtk_application_get_actions_for_accel"
+               application-actions-for-accel) g:strv-t
  "@version{#2022-11-13}
   @argument[application]{a @class{gtk:application} instance}
   @argument[accel]{a string with an accelerator that can be parsed by the

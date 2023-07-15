@@ -272,4 +272,9 @@ lambda (manager display)    :run-last
 ;;;     a comma-separated list of backends
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gdk_set_allowed_backends" set-allowed-backends) :void
+  (backends :string))
+
+(export 'set-allowed-backends)
+
 ;;; -- End of file gdk4.display-manager.lisp -----------------------------------

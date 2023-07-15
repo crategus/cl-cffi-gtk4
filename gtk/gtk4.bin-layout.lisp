@@ -52,7 +52,7 @@
 ;;; GtkBinLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkBinLayout" bin-layout
+(gobject:define-g-object-class "GtkBinLayout" bin-layout
   (:superclass layout-manager
    :export t
    :interfaces ()

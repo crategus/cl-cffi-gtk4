@@ -66,7 +66,7 @@
 ;;; GtkATContext
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkATContext" at-context
+(gobject:define-g-object-class "GtkATContext" at-context
   (:superclass g:object
    :export t
    :interfaces ()
@@ -185,7 +185,7 @@ lambda (context)    :run-first
 ;;; gtk_at_context_create ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_at_context_create" at-context-create) (g:object at-context)
+(cffi:defcfun ("gtk_at_context_create" at-context-create) (g:object at-context)
  #+liber-documentation
  "@version{#2023-4-21}
   @argument[role]{a @symbol{gtk:accessible-role} value used by the context}
