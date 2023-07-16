@@ -63,7 +63,7 @@
 ;;; struct GtkEventControllerKey
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkEventControllerKey" event-controller-key
+(gobject:define-g-object-class "GtkEventControllerKey" event-controller-key
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -166,8 +166,8 @@ lambda (controller state)    :run-last
                         :void)
   value)
 
-(defcfun ("gtk_event_controller-key_get_im_context"
-           event-controller-key-im-context) (g:object im-context)
+(cffi:defcfun ("gtk_event_controller-key_get_im_context"
+               event-controller-key-im-context) (g:object im-context)
  #+liber-documentation
  "@version{#2022-8-23}
   @syntax[]{(gtk:event-controller-key-im-context controller) => context}
@@ -191,7 +191,7 @@ lambda (controller state)    :run-last
 ;;; gtk_event_controller_key_forward ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_event_controller_key_forward" event-controller-key-forward)
+(cffi:defcfun ("gtk_event_controller_key_forward" event-controller-key-forward)
     :boolean
  #+liber-documentation
  "@version{#2022-8-23}
@@ -214,7 +214,7 @@ lambda (controller state)    :run-last
 ;;; gtk_event_controller_key_get_group () -> event-controller-key-group
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_event_controller_key_get_group" event-controller-key-group)
+(cffi:defcfun ("gtk_event_controller_key_get_group" event-controller-key-group)
     :uint
  #+liber-documentation
  "@version{#2022-8-23}

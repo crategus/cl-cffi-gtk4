@@ -75,7 +75,7 @@
 ;;; GtkFileFilter
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkFileFilter" file-filter
+(gobject:define-g-object-class "GtkFileFilter" file-filter
   (:superclass filter
    :export t
    :interfaces nil
@@ -249,7 +249,7 @@
 ;;; gtk_file_filter_new_from_gvariant ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_file_filter_new_from_gvariant" 
+(cffi:defcfun ("gtk_file_filter_new_from_gvariant"
                file-filter-new-from-gvariant) (g:object file-filter)
  #+liber-documentation
  "@version{#2023-5-5}
@@ -302,7 +302,7 @@
 ;;; gtk_file_filter_add_pixbuf_formats ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_file_filter_add_pixbuf_formats" 
+(cffi:defcfun ("gtk_file_filter_add_pixbuf_formats"
                file-filter-add-pixbuf-formats) :void
  #+liber-documentation
  "@version{#2023-5-5}

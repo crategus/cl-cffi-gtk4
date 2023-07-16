@@ -75,7 +75,7 @@
 ;;; struct GtkEditableLabel
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkEditableLabel" editable-label
+(gobject:define-g-object-class "GtkEditableLabel" editable-label
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -186,7 +186,8 @@ editablelabel[.editing]
 ;;; gtk_editable_label_start_editing ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_editable_label_start_editing" editable-label-start-editing) :void
+(cffi:defcfun ("gtk_editable_label_start_editing" editable-label-start-editing)
+    :void
  #+liber-documentation
  "@version{#2023-5-4}
   @argument[label]{a @class{gtk:editable-label} widget}
@@ -200,7 +201,8 @@ editablelabel[.editing]
 ;;; gtk_editable_label_stop_editing ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_editable_label_stop_editing" editable-label-stop-editing) :void
+(cffi:defcfun ("gtk_editable_label_stop_editing" editable-label-stop-editing)
+    :void
  #+liber-documentation
  "@version{#2023-5-4}
   @argument[label]{a @class{gtk:editable-label} widget}

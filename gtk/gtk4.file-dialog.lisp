@@ -89,7 +89,7 @@
 ;;; GtkFileDialog
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkFileDialog" file-dialog
+(gobject:define-g-object-class "GtkFileDialog" file-dialog
   (:superclass g:object
    :export t
    :interfaces ()
@@ -233,7 +233,7 @@ If the return location is not NULL, then you must initialize it to a NULL GError
 The argument will left initialized to NULL by the method if there are no errors.
 In case of error, the argument will be set to a newly allocated GError; the caller will take ownership of the data, and be responsible for freeing it.
 [−]
-Return value 
+Return value
 Type: GFile
 
 The file that was selected. Otherwise, NULL is returned and error is set.

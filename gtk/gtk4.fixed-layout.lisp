@@ -58,7 +58,7 @@
 ;;; GtkFixedLayoutChild
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkFixedLayoutChild" fixed-layout-child
+(gobject:define-g-object-class "GtkFixedLayoutChild" fixed-layout-child
   (:superclass layout-child
    :export t
    :interfaces ()
@@ -112,7 +112,7 @@
 ;;; GtkFixedLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkFixedLayout" fixed-layout
+(gobject:define-g-object-class "GtkFixedLayout" fixed-layout
   (:superclass layout-manager
    :export t
    :interfaces ()

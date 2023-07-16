@@ -651,7 +651,7 @@ lambda (widget)    :run-last
 ;;; gtk_entry_completion_get_entry () -> entry-completion-entry
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_completion_get_entry" entry-completion-entry)
+(cffi:defcfun ("gtk_entry_completion_get_entry" entry-completion-entry)
     (g:object widget)
  #+liber-documentation
  "@version{#2020-5-31}
@@ -669,8 +669,8 @@ lambda (widget)    :run-last
 ;;; gtk_entry_completion_set_match_func ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_completion_set_match_func"
-          %entry-completion-set-match-func) :void
+(cffi:defcfun ("gtk_entry_completion_set_match_func"
+               %entry-completion-set-match-func) :void
   (completion (g:object entry-completion))
   (func :pointer)
   (data :pointer)
@@ -705,8 +705,8 @@ lambda (widget)    :run-last
 ;;; gtk_entry_completion_compute_prefix ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_completion_compute_prefix" entry-completion-compute-prefix)
-    :string
+(cffi:defcfun ("gtk_entry_completion_compute_prefix"
+               entry-completion-compute-prefix) :string
  #+liber-documentation
  "@version{#2020-5-31}
   @argument[completion]{a @class{gtk:entry-completion} object}
@@ -733,7 +733,7 @@ lambda (widget)    :run-last
 ;;; gtk_entry_completion_complete ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_completion_complete" entry-completion-complete) :void
+(cffi:defcfun ("gtk_entry_completion_complete" entry-completion-complete) :void
  #+liber-documentation
  "@version{#2020-5-31}
   @argument[completion]{a @class{gtk:entry-completion} object}
@@ -752,8 +752,9 @@ lambda (widget)    :run-last
 ;;; -> entry-completion-completion-prefix
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_completion_get_completion_prefix"
-           entry-completion-completion-prefix) (:string :free-from-foreign t)
+(cffi:defcfun ("gtk_entry_completion_get_completion_prefix"
+               entry-completion-completion-prefix)
+    (:string :free-from-foreign t)
  #+liber-documentation
  "@version{#2020-5-31}
   @argument[completion]{a @class{gtk:entry-completion} object}
@@ -771,8 +772,8 @@ lambda (widget)    :run-last
 ;;; gtk_entry_completion_insert_prefix ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_completion_insert_prefix" entry-completion-insert-prefix)
-    :void
+(cffi:defcfun ("gtk_entry_completion_insert_prefix"
+               entry-completion-insert-prefix) :void
  #+liber-documentation
  "@version{#2020-5-31}
   @argument[completion]{a @class{gtk:entry-completion} object}
@@ -784,4 +785,4 @@ lambda (widget)    :run-last
 
 (export 'entry-completion-insert-prefix)
 
-;;; --- End of file gtk3.entry-completion.lisp ---------------------------------
+;;; --- End of file gtk4.entry-completion.lisp ---------------------------------

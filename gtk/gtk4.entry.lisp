@@ -1712,7 +1712,8 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_unset_invisible_char ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_unset_invisible_char" entry-unset-invisible-char) :void
+(cffi:defcfun ("gtk_entry_unset_invisible_char" entry-unset-invisible-char)
+    :void
  #+liber-documentation
  "@version{#2021-11-3}
   @argument[entry]{a @class{gtk:entry} widget}
@@ -1739,7 +1740,7 @@ lambda (entry pos)    :run-last
                         :void)
   align)
 
-(defcfun ("gtk_entry_get_alignment" entry-alignment) :float
+(cffi:defcfun ("gtk_entry_get_alignment" entry-alignment) :float
  #+liber-documentation
  "@version{#2021-11-3}
   @syntax[]{(gtk:entry-alignment entry) => align}
@@ -1762,7 +1763,7 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_progress_pulse ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_progress_pulse" entry-progress-pulse) :void
+(cffi:defcfun ("gtk_entry_progress_pulse" entry-progress-pulse) :void
  #+liber-documentation
  "@version{#2021-11-3}
   @argument[entry]{a @class{gtk:entry} widget}
@@ -1784,7 +1785,7 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_reset_im_context ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_reset_im_context" entry-reset-im-context) :void
+(cffi:defcfun ("gtk_entry_reset_im_context" entry-reset-im-context) :void
  #+liber-documentation
  "@version{#2021-11-3}
   @argument[entry]{a @class{gtk:entry} widget}
@@ -1803,8 +1804,8 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_set_icon_from_paintable ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_set_icon_from_paintable" entry-set-icon-from-paintable)
-    :void
+(cffi:defcfun ("gtk_entry_set_icon_from_paintable"
+               entry-set-icon-from-paintable) :void
  #+liber-documentation
  "@version{#2021-11-3}
   @argument[entry]{a @class{gtk:entry} widget}
@@ -1829,8 +1830,8 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_set_icon_from_icon_name ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_set_icon_from_icon_name" entry-set-icon-from-icon-name)
-    :void
+(cffi:defcfun ("gtk_entry_set_icon_from_icon_name"
+               entry-set-icon-from-icon-name) :void
  #+liber-documentation
  "@version{#2021-11-3}
   @argument[entry]{a @class{gtk:entry} widget}
@@ -1856,7 +1857,7 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_set_icon_from_gicon ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_set_icon_from_gicon" entry-set-icon-from-gicon) :void
+(cffi:defcfun ("gtk_entry_set_icon_from_gicon" entry-set-icon-from-gicon) :void
  #+liber-documentation
  "@version{#2021-11-4}
   @argument[entry]{a @class{gtk:entry} widget}
@@ -2072,7 +2073,7 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_get_icon_at_pos () -> entry-icon-at-pos
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_get_icon_at_pos" entry-icon-at-pos) :int
+(cffi:defcfun ("gtk_entry_get_icon_at_pos" entry-icon-at-pos) :int
  #+liber-documentation
  "@version{#2021-11-4}
   @argument[entry]{a @class{gtk:entry} widget}
@@ -2189,7 +2190,8 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_set_icon_drag_source ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_set_icon_drag_source" entry-set-icon-drag-source) :void
+(cffi:defcfun ("gtk_entry_set_icon_drag_source" entry-set-icon-drag-source)
+    :void
  #+liber-documentation
  "@version{#2021-11-4}
   @argument[entry]{a @class{gtk:entry} widget}
@@ -2217,8 +2219,8 @@ lambda (entry pos)    :run-last
 ;;; -> entry-current-icon-drag-source
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_get_current_icon_drag_source"
-          entry-current-icon-drag-source) :int
+(cffi:defcfun ("gtk_entry_get_current_icon_drag_source"
+               entry-current-icon-drag-source) :int
  #+liber-documentation
  "@version{#2021-4-11}
   @argument[entry]{a @class{gtk:entry} widget}
@@ -2238,7 +2240,7 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_get_icon_area () -> entry-icon-area
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_get_icon_area" %entry-get-icon-area) :void
+(cffi:defcfun ("gtk_entry_get_icon_area" %entry-get-icon-area) :void
   (entry (g:object entry))
   (pos entry-icon-position)
   (area (g:boxed gdk:rectangle)))
@@ -2269,8 +2271,8 @@ lambda (entry pos)    :run-last
 ;;; gtk_entry_grab_focus_without_selecting ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_entry_grab_focus_without_selecting"
-          entry-grab-focus-without-selecting) :void
+(cffi:defcfun ("gtk_entry_grab_focus_without_selecting"
+               entry-grab-focus-without-selecting) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[entry]{a @class{gtk:entry} widget}

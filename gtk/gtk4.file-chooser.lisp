@@ -529,7 +529,7 @@
                         :void)
   name)
 
-(defcfun ("gtk_file_chooser_get_current_name" file-chooser-current-name)
+(cffi:defcfun ("gtk_file_chooser_get_current_name" file-chooser-current-name)
     (:string :free-from-foreign t :encoding :utf-8)
  #+liber-documentation
  "@version{#2023-5-5}
@@ -582,7 +582,7 @@
                           :boolean)
      file))
 
-(defcfun ("gtk_file_chooser_get_file" file-chooser-file) (g:object g:file)
+(cffi:defcfun ("gtk_file_chooser_get_file" file-chooser-file) (g:object g:file)
  #+liber-documentation
  "@version{#2023-5-5}
   @syntax[]{(gtk:file-chooser-file chooser) => file}
@@ -645,7 +645,7 @@
                           :boolean)
      namestring))
 
-(defcfun ("gtk_file_chooser_get_file" file-chooser-namestring)
+(cffi:defcfun ("gtk_file_chooser_get_file" file-chooser-namestring)
     g:file-as-namestring
   (chooser (g:object file-chooser)))
 
@@ -655,7 +655,7 @@
 ;;; gtk_file_chooser_get_files () -> file-chooser-files
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_chooser_get_files" file-chooser-files)
+(cffi:defcfun ("gtk_file_chooser_get_files" file-chooser-files)
     (g:slist-t (g:object g:file))
  #+liber-documentation
  "@version{#2021-2-5}
@@ -688,8 +688,8 @@
                         :boolean)
   filename)
 
-(defcfun ("gtk_file_chooser_get_current_folder" file-chooser-current-folder)
-    :string
+(cffi:defcfun ("gtk_file_chooser_get_current_folder"
+               file-chooser-current-folder) :string
  #+liber-documentation
  "@version{#2021-2-5}
   @syntax[]{(gtk:file-chooser-current-folder chooser) => filename}
@@ -726,7 +726,7 @@
 ;;; gtk_file_chooser_add_filter ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_chooser_add_filter" file-chooser-add-filter) :void
+(cffi:defcfun ("gtk_file_chooser_add_filter" file-chooser-add-filter) :void
  #+liber-documentation
  "@version{#2021-2-5}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
@@ -748,7 +748,8 @@
 ;;; gtk_file_chooser_remove_filter ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_chooser_remove_filter" file-chooser-remove-filter) :void
+(cffi:defcfun ("gtk_file_chooser_remove_filter" file-chooser-remove-filter)
+    :void
  #+liber-documentation
  "@version{#2021-2-5}
   @argument[chooser]{a @class{gtk:file-chooser} widget}
@@ -768,11 +769,11 @@
 ;;; gtk_file_chooser_add_shortcut_folder ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_chooser_add_shortcut_folder"
-          %file-chooser-add-shortcut-folder) :boolean
+(cffi:defcfun ("gtk_file_chooser_add_shortcut_folder"
+               %file-chooser-add-shortcut-folder) :boolean
   (chooser (g:object file-chooser))
   (folder :string)
-  (error :pointer))
+  (err :pointer))
 
 (defun file-chooser-add-shortcut-folder (chooser folder)
  #+liber-documentation
@@ -799,8 +800,8 @@
 ;;; gtk_file_chooser_remove_shortcut_folder ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_chooser_remove_shortcut_folder"
-          %file-chooser-remove-shortcut-folder) :boolean
+(cffi:defcfun ("gtk_file_chooser_remove_shortcut_folder"
+               %file-chooser-remove-shortcut-folder) :boolean
   (chooser (g:object file-chooser))
   (folder :string)
   (error :pointer))

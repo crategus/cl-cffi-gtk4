@@ -573,7 +573,7 @@ lambda (editable text length position)    :run-last
 ;;; gtk_editable_get_selection_bounds () -> editable-selection-bounds
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_editable_get_selection_bounds" 
+(cffi:defcfun ("gtk_editable_get_selection_bounds"
                %editable-get-selection-bounds) :boolean
   (editable (g:object editable))
   (start (:pointer :int))

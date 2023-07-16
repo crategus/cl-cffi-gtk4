@@ -149,7 +149,7 @@
 ;;; GtkFlowBoxChild
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkFlowBoxChild" flow-box-child
+(gobject:define-g-object-class "GtkFlowBoxChild" flow-box-child
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -220,7 +220,7 @@ lambda (child)    :action
 ;;; GtkFlowBox
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkFlowBox" flow-box
+(gobject:define-g-object-class "GtkFlowBox" flow-box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -1098,7 +1098,7 @@ lambda (flowbox)    :action
 ;;; gtk_flow_box_invalidate_filter
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_flow_box_invalidate_filter" flow-box-invalidate-filter) 
+(cffi:defcfun ("gtk_flow_box_invalidate_filter" flow-box-invalidate-filter)
     :void
  #+liber-documentation
  "@version{#2021-12-15}

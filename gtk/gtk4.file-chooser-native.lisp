@@ -69,7 +69,7 @@
 ;;; GtkFileChooserNative
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkFileChooserNative" file-chooser-native
+(gobject:define-g-object-class "GtkFileChooserNative" file-chooser-native
   (:superclass native-dialog
    :export t
    :interfaces ("GtkFileChooser")
@@ -307,7 +307,7 @@ on_response (GtkNativeDialog *native,
 ;;; gtk_file_chooser_native_new ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_file_chooser_native_new" file-chooser-native-new)
+(cffi:defcfun ("gtk_file_chooser_native_new" file-chooser-native-new)
     (g:object file-chooser-native)
  #+liber-documentation
  "@version{2023-5-5}

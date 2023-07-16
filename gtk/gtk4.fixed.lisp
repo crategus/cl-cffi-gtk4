@@ -65,7 +65,7 @@
 ;;; GtkFixed
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkFixed" fixed
+(gobject:define-g-object-class "GtkFixed" fixed
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -140,7 +140,7 @@
 ;;; gtk_fixed_put
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_fixed_put" %fixed-put) :void
+(cffi:defcfun ("gtk_fixed_put" %fixed-put) :void
   (fixed (g:object fixed))
   (child (g:object widget))
   (x :double)
@@ -173,7 +173,7 @@
 ;;; gtk_fixed_remove
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_fixed_remove" fixed-remove) :void
+(cffi:defcfun ("gtk_fixed_remove" fixed-remove) :void
  #+liber-documentation
  "@version{#2022-2-12}
   @argument[fixed]{a @class{gtk:fixed} widget}
@@ -193,7 +193,7 @@
 ;;; gtk_fixed_move
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_fixed_move" %fixed-move) :void
+(cffi:defcfun ("gtk_fixed_move" %fixed-move) :void
   (fixed (g:object fixed))
   (child (g:object widget))
   (x :double)
@@ -226,7 +226,7 @@
 ;;; gtk_fixed_get_child_position ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_fixed_get_child_position" %fixed-child-position) :void
+(cffi:defcfun ("gtk_fixed_get_child_position" %fixed-child-position) :void
   (fixed (g:object fixed))
   (child (g:object widget))
   (x (:pointer :double))
@@ -268,7 +268,7 @@
                         (g:boxed gsk:transform) value)
   value)
 
-(defcfun ("gtk_fixed_get_child_transform" fixed-child-transform)
+(cffi:defcfun ("gtk_fixed_get_child_transform" fixed-child-transform)
     (g:boxed gsk:transform)
  #+liber-documentation
  "@version{#2023-4-16}

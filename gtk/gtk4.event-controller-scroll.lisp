@@ -70,7 +70,7 @@
 ;;; enum GtkEventControllerScrollFlags
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-flags "GtkEventControllerScrollFlags" 
+(gobject:define-g-flags "GtkEventControllerScrollFlags"
                         event-controller-scroll-flags
   (:export t
    :type-initializer "gtk_event_controller_scroll_flags_get_type")
@@ -90,7 +90,7 @@
     Describes the behavior of a @class{gtk:event-controller-scroll} object.
   @end{short}
   @begin{pre}
-(gobject:define-g-flags \"GtkEventControllerScrollFlags\" 
+(gobject:define-g-flags \"GtkEventControllerScrollFlags\"
                         event-controller-scroll-flags
   (:export t
    :type-initializer \"gtk_event_controller_scroll_flags_get_type\")
@@ -115,7 +115,7 @@
 ;;; struct GtkEventControllerScroll
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEventControllerScroll" 
+(gobject:define-g-object-class "GtkEventControllerScroll"
                                event-controller-scroll
   (:superclass event-controller
    :export t
