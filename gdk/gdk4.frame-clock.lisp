@@ -71,7 +71,7 @@
 ;;; enum GdkFrameClockPhase
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkFrameClockPhase" frame-clock-phase
+(gobject:define-g-enum "GdkFrameClockPhase" frame-clock-phase
   (:export t
    :type-initializer "gdk_frame_clock_phase_get_type")
   :none
@@ -115,7 +115,7 @@
 ;;; GdkFrameClock
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkFrameClock" frame-clock
+(gobject:define-g-object-class "GdkFrameClock" frame-clock
   (:superclass g:object
    :export t
    :interfaces nil
@@ -238,7 +238,7 @@ lambda (clock)    :run-last
 ;;; gdk_frame_clock_get_frame_time () -> frame-clock-frame-time
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_get_frame_time" frame-clock-frame-time) :int64
+(cffi:defcfun ("gdk_frame_clock_get_frame_time" frame-clock-frame-time) :int64
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[clock]{a @class{gdk:frame-clock} object}
@@ -259,7 +259,7 @@ lambda (clock)    :run-last
 ;;; gdk_frame_clock_request_phase ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_request_phase" frame-clock-request-phase) :void
+(cffi:defcfun ("gdk_frame_clock_request_phase" frame-clock-request-phase) :void
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[clock]{a @class{gdk:frame-clock} object}
@@ -287,7 +287,8 @@ lambda (clock)    :run-last
 ;;; gdk_frame_clock_begin_updating ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_begin_updating" frame-clock-begin-updating) :void
+(cffi:defcfun ("gdk_frame_clock_begin_updating" frame-clock-begin-updating)
+    :void
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[clock]{a @class{gdk:frame-clock} object}
@@ -309,7 +310,7 @@ lambda (clock)    :run-last
 ;;; gdk_frame_clock_end_updating ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_end_updating" frame-clock-end-updating) :void
+(cffi:defcfun ("gdk_frame_clock_end_updating" frame-clock-end-updating) :void
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[clock]{a @class{gdk:frame-clock} object}
@@ -327,7 +328,8 @@ lambda (clock)    :run-last
 ;;; gdk_frame_clock_get_frame_counter () -> frame-clock-frame-counter
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_get_frame_counter" frame-clock-frame-counter) :int64
+(cffi:defcfun ("gdk_frame_clock_get_frame_counter" frame-clock-frame-counter)
+    :int64
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[clock]{a @class{gdk:frame-clock} object}
@@ -349,7 +351,8 @@ lambda (clock)    :run-last
 ;;; gdk_frame_clock_get_history_start () -> frame-clock-history-start
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_get_history_start" frame-clock-history-start) :int64
+(cffi:defcfun ("gdk_frame_clock_get_history_start" frame-clock-history-start)
+    :int64
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[clock]{a @class{gdk:frame-clock} object}
@@ -377,7 +380,7 @@ lambda (clock)    :run-last
 ;;; gdk_frame_clock_get_timings () -> frame-clock-timings
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_get_timings" frame-clock-timings)
+(cffi:defcfun ("gdk_frame_clock_get_timings" frame-clock-timings)
     (g:boxed frame-timings)
  #+liber-documentation
  "@version{#2023-3-10}
@@ -408,8 +411,8 @@ lambda (clock)    :run-last
 ;;; gdk_frame_clock_get_current_timings () -> frame-clock-current-timings
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_get_current_timings" frame-clock-current-timings)
-    (g:boxed frame-timings)
+(cffi:defcfun ("gdk_frame_clock_get_current_timings"
+               frame-clock-current-timings) (g:boxed frame-timings)
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[clock]{a @class{gdk:frame-clock} object}
@@ -431,7 +434,8 @@ lambda (clock)    :run-last
 ;;; gdk_frame_clock_get_refresh_info () -> frame-clock-refresh-info
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_get_refresh_info" %frame-clock-refresh-info) :void
+(cffi:defcfun ("gdk_frame_clock_get_refresh_info" %frame-clock-refresh-info)
+    :void
   (clock (g:object frame-clock))
   (time :int64)
   (refresh-interval (:pointer :int64))
@@ -458,8 +462,8 @@ lambda (clock)    :run-last
     later than @arg{time}.
   @end{short}
   @see-class{gdk:frame-clock}"
-  (with-foreign-objects ((refresh-interval :int64)
-                         (presentation-time :int64))
+  (cffi:with-foreign-objects ((refresh-interval :int64)
+                              (presentation-time :int64))
     (%frame-clock-refresh-info clock
                                time
                                refresh-interval
@@ -485,7 +489,7 @@ lambda (clock)    :run-last
 ;;;     the current fps, as a double
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_clock_get_fps" frame-clock-fps) :double
+(cffi:defcfun ("gdk_frame_clock_get_fps" frame-clock-fps) :double
   (clock (g:object frame-clock)))
 
 (export 'frame-clock-fps)

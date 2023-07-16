@@ -124,7 +124,7 @@
 ;;; Flags: Run Last
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkClipboard" clipboard
+(gobject:define-g-object-class "GdkClipboard" clipboard
   (:superclass g:object
    :export t
    :interfaces nil
@@ -246,7 +246,7 @@
 ;;;     TRUE if the clipboard is local
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_clipboard_is_local" clipboard-is-local) :boolean
+(cffi:defcfun ("gdk_clipboard_is_local" clipboard-is-local) :boolean
   (clipboard (g:object clipboard)))
 
 (export 'clipboard-is-local)

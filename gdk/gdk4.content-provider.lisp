@@ -93,7 +93,7 @@
 ;;;     GdkContentSerializer, GdkContentDeserializer
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkContentProvider" content-provider
+(gobject:define-g-object-class "GdkContentProvider" content-provider
   (:superclass g:object
    :export t
    :interfaces nil

@@ -52,7 +52,7 @@
 ;;; struct GdkFrameTimings
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque frame-timings "GdkFrameTimings"
+(glib:define-g-boxed-opaque frame-timings "GdkFrameTimings"
   :export t
   :type-initializer "gdk_frame_timings_get_type"
   :alloc (error "GdkFrameTimings cannot be created from the Lisp side."))
@@ -109,8 +109,8 @@
 ;;; gdk_frame_timings_get_frame_counter () -> frame-timings-frame-counter
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_timings_get_frame_counter" frame-timings-frame-counter)
-    :int64
+(cffi:defcfun ("gdk_frame_timings_get_frame_counter"
+               frame-timings-frame-counter) :int64
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[timings]{a @class{gdk:frame-timings} instance}
@@ -127,7 +127,7 @@
 ;;; gdk_frame_timings_get_complete () -> frame-timings-complete
 ;;;-----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_timings_get_complete" frame-timings-complete) :boolean
+(cffi:defcfun ("gdk_frame_timings_get_complete" frame-timings-complete) :boolean
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[timings]{a @class{gdk:frame-timings} instance}
@@ -155,7 +155,8 @@
 ;;; gdk_frame_timings_get_frame_time () -> frame-timings-frame-time
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_timings_get_frame_time" frame-timings-frame-time) :int64
+(cffi:defcfun ("gdk_frame_timings_get_frame_time" frame-timings-frame-time)
+    :int64
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[timings]{a @class{gdk:frame-timings} instance}
@@ -178,8 +179,8 @@
 ;;;     -> frame-timings-presentation-time
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_timings_get_presentation_time"
-           frame-timings-presentation-time) :int64
+(cffi:defcfun ("gdk_frame_timings_get_presentation_time"
+               frame-timings-presentation-time) :int64
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[timings]{a @class{gdk:frame-timings} instance}
@@ -203,8 +204,8 @@
 ;;;     -> frame-timings-refresh-interval
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_timings_get_refresh_interval"
-           frame-timings-refresh-interval) :int64
+(cffi:defcfun ("gdk_frame_timings_get_refresh_interval"
+               frame-timings-refresh-interval) :int64
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[timings]{a @class{gdk:frame-timings} instance}
@@ -229,8 +230,8 @@
 ;;;     -> frame-timings-predicted-presentation-time
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_frame_timings_get_predicted_presentation_time"
-           frame-timings-predicted-presentation-time) :int64
+(cffi:defcfun ("gdk_frame_timings_get_predicted_presentation_time"
+               frame-timings-predicted-presentation-time) :int64
  #+liber-documentation
  "@version{#2023-3-10}
   @argument[timings]{a @class{gdk:frame-timings} instance}

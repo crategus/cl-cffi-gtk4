@@ -253,7 +253,7 @@
 ;;; enum GdkEventType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkEventType" event-type
+(gobject:define-g-enum "GdkEventType" event-type
   (:export t
    :type-initializer "gdk_event_type_get_type")
   (:nothing -1)
@@ -296,7 +296,7 @@
  "@version{#2021-12-13}
   @short{Specifies the type of a @class{gdk-event} instance.}
   @begin{pre}
-(define-g-enum \"GdkEventType\" event-type
+(gobject:define-g-enum \"GdkEventType\" event-type
   (:export t
    :type-initializer \"gdk_event_type_get_type\")
   (:nothing -1)
@@ -410,7 +410,7 @@
 ;;; enum GdkKeyMatch
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkKeyMatch" key-match
+(gobject:define-g-enum "GdkKeyMatch" key-match
   (:export t
    :type-initializer "gdk_key_match_get_type")
   (:none 0)
@@ -428,7 +428,7 @@
   The @symbol{gdk:key-match} values are returned by the
   @fun{gdk:key-event-matches} function.
   @begin{pre}
-(define-g-enum \"GdkKeyMatch\" key-match
+(gobject:define-g-enum \"GdkKeyMatch\" key-match
   (:export t
    :type-initializer \"gdk_key_match_get_type\")
   (:none 0)
@@ -448,7 +448,7 @@
 ;;; enum GdkTouchpadGesturePhase
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkTouchpadGesturePhase" touchpad-gesture-phase
+(gobject:define-g-enum "GdkTouchpadGesturePhase" touchpad-gesture-phase
   (:export t
    :type-initializer "gdk_touchpad_gesture_phase_get_type")
   (:begin 0)
@@ -479,7 +479,7 @@
   should be used as a hint to undo any visible/permanent changes that were done
   throughout the progress of the gesture.
   @begin{pre}
-(define-g-enum \"GdkTouchpadGesturePhase\" touchpad-gesture-phase
+(gobject:define-g-enum \"GdkTouchpadGesturePhase\" touchpad-gesture-phase
   (:export t
    :type-initializer \"gdk_touchpad_gesture_phase_get_type\")
   (:begin 0)
@@ -500,7 +500,7 @@
 ;;; enum GdkScrollDirection
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkScrollDirection" scroll-direction
+(gobject:define-g-enum "GdkScrollDirection" scroll-direction
   (:export t
    :type-initializer "gdk_scroll_direction_get_type")
   (:up 0)
@@ -516,7 +516,7 @@
  "@version{#2021-12-13}
   @short{Specifies the direction for a @class{gdk:event-scroll} event.}
   @begin{pre}
-(define-g-enum \"GdkScrollDirection\" scroll-direction
+(gobject:define-g-enum \"GdkScrollDirection\" scroll-direction
   (:export t
    :type-initializer \"gdk_scroll_direction_get_type\")
   (:up 0)
@@ -541,7 +541,7 @@
 ;;; enum GdkCrossingMode
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkCrossingMode" crossing-mode
+(gobject:define-g-enum "GdkCrossingMode" crossing-mode
   (:export t
    :type-initializer "gdk_crossing_mode_get_type")
   :normal
@@ -561,7 +561,7 @@
  "@version{#2021-12-13}
   @short{Specifies the crossing mode for enter and leave events.}
   @begin{pre}
-(define-g-enum \"GdkCrosssingMode\" crossing-mode
+(gobject:define-g-enum \"GdkCrosssingMode\" crossing-mode
   (:export t
    :type-initializer \"gdk_crossing_mode_get_type\")
   :normal
@@ -596,7 +596,7 @@
 ;;; enum GdkNotifyType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkNotifyType" notify-type
+(gobject:define-g-enum "GdkNotifyType" notify-type
   (:export t
    :type-initializer "gdk_notify_type_get_type")
   (:ancestor 0)
@@ -615,7 +615,7 @@
   See the X11 protocol specification of @code{LeaveNotify} for full details of
   crossing event generation.
   @begin{pre}
-(define-g-enum notify-type
+(gobject:define-g-enum notify-type
   (:export t
    :type-initializer \"gdk_notify_type_get_type\")
   (:ancestor 0)
@@ -645,7 +645,7 @@
 ;;; GdkEventSequence
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque event-sequence "GdkEventSequence"
+(glib:define-g-boxed-opaque event-sequence "GdkEventSequence"
   :alloc (error "GdkEventSequence cannot be created from the Lisp side."))
 
 #+liber-documentation
@@ -910,7 +910,7 @@
 ;;;     a GdkEventType
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_event_type" event-event-type) event-type
+(cffi:defcfun ("gdk_event_get_event_type" event-event-type) event-type
   (event event))
 
 (export 'event-event-type)
@@ -930,7 +930,7 @@
 ;;;     The GdkSurface associated with the event.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_surface" event-surface) (g:object surface)
+(cffi:defcfun ("gdk_event_get_surface" event-surface) (g:object surface)
   (event event))
 
 (export 'event-surface)
@@ -950,7 +950,7 @@
 ;;;     a GdkDevice.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_device" event-device) (g:object device)
+(cffi:defcfun ("gdk_event_get_device" event-device) (g:object device)
   (event event))
 
 (export 'event-device)
@@ -976,7 +976,8 @@
 ;;;     The current device tool, or NULL.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_device_tool" event-device-tool) (g:object device-tool)
+(cffi:defcfun ("gdk_event_get_device_tool" event-device-tool)
+    (g:object device-tool)
   (event event))
 
 (export 'event-device-tool)
@@ -997,7 +998,7 @@
 ;;;     time stamp field from event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_time" event-time) :uint32
+(cffi:defcfun ("gdk_event_get_time" event-time) :uint32
   (event event))
 
 (export 'event-time)
@@ -1017,7 +1018,7 @@
 ;;;     a GdkDisplay.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_display" event-display) (g:object display)
+(cffi:defcfun ("gdk_event_get_display" event-display) (g:object display)
   (event event))
 
 (export 'event-display)
@@ -1037,7 +1038,7 @@
 ;;;     a GdkSeat.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_seat" event-seat) (g:object seat)
+(cffi:defcfun ("gdk_event_get_seat" event-seat) (g:object seat)
   (event event))
 
 (export 'event-seat)
@@ -1058,7 +1059,7 @@
 ;;;     the event sequence that the event belongs to.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_event_sequence" event-event-sequence)
+(cffi:defcfun ("gdk_event_get_event_sequence" event-event-sequence)
     (g:boxed event-sequence)
   (event event))
 
@@ -1079,7 +1080,8 @@
 ;;;     the modifier state of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_modifier_state" event-modifier-state) modifier-type
+(cffi:defcfun ("gdk_event_get_modifier_state" event-modifier-state)
+    modifier-type
   (event event))
 
 (export 'event-modifier-state)
@@ -1104,13 +1106,13 @@
 ;;;     location to put event surface y coordinate.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_position" %event-position) :boolean
+(cffi:defcfun ("gdk_event_get_position" %event-position) :boolean
   (event event)
   (x (:pointer :double))
   (y (:pointer :double)))
 
 (defun event-position (event)
-  (with-foreign-objects ((x :double) (y :double))
+  (cffi:with-foreign-objects ((x :double) (y :double))
     (%event-position event x y)
     (values (cffi:mem-ref x :double)
             (cffi:mem-ref y :double))))
@@ -1142,26 +1144,26 @@
 
 #|
 (defun display-map-keyval (display keyval)
-  (with-foreign-objects ((keys-ptr :pointer) (n-keys-ptr :int))
+  (cffi:with-foreign-objects ((keys-ptr :pointer) (n-keys-ptr :int))
     (when (%display-map-keyval display keyval keys-ptr n-keys-ptr)
       (let ((keys (cffi:mem-ref keys-ptr :pointer))
             (n-keys (cffi:mem-ref n-keys-ptr :int)))
         (iter (for i from 0 below n-keys)
               (for key = (cffi:mem-aptr keys '(:struct %keymap-key) i))
-              (collect (with-foreign-slots ((keycode group level)
+              (collect (cffi:with-foreign-slots ((keycode group level)
                                             key
                                             (:struct %keymap-key))
                          (list keycode group level)))
               (finally (g:free keys-ptr)))))))
 |#
 
-(defcfun ("gdk_event_get_axes" %event-axes) :boolean
+(cffi:defcfun ("gdk_event_get_axes" %event-axes) :boolean
   (event event)
   (axes :pointer)
   (n-axes (:pointer :int)))
 
 (defun event-axes (event)
-  (with-foreign-objects ((axes-ptr :pointer) (n-axes-ptr :int))
+  (cffi:with-foreign-objects ((axes-ptr :pointer) (n-axes-ptr :int))
     (when (%event-axes event axes-ptr n-axes-ptr)
       (let ((axes (cffi:mem-ref axes-ptr :pointer))
             (n-axes (cffi:mem-ref n-axes-ptr :int)))
@@ -1194,13 +1196,13 @@
 ;;;     TRUE if the specified axis was found, otherwise FALSE
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_axis" %event-axis) :boolean
+(cffi:defcfun ("gdk_event_get_axis" %event-axis) :boolean
   (event event)
   (axis-use axis-use)
   (value (:pointer :double)))
 
 (defun event-axis (event axis-use)
-  (with-foreign-object (value :double)
+  (cffi:with-foreign-object (value :double)
     (when (%event-axis event axis-use value)
       (cffi:mem-ref value :double))))
 
@@ -1247,7 +1249,7 @@
 ;;;     TRUE if this event is emulated
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_get_pointer_emulated" event-pointer-emulated) :boolean
+(cffi:defcfun ("gdk_event_get_pointer_emulated" event-pointer-emulated) :boolean
   (event event))
 
 (export 'event-pointer-emulated)
@@ -1272,7 +1274,7 @@
 ;;;     TRUE if the event should trigger a context menu.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_event_triggers_context_menu" event-triggers-context-menu)
+(cffi:defcfun ("gdk_event_triggers_context_menu" event-triggers-context-menu)
     :boolean
   (event event))
 
@@ -1295,7 +1297,7 @@
 
 ;; TODO: We check for the correct event type. Implement this more general.
 
-(defcfun ("gdk_button_event_get_button" %button-event-button) :uint
+(cffi:defcfun ("gdk_button_event_get_button" %button-event-button) :uint
   (event event))
 
 (defun button-event-button (event)
@@ -1320,7 +1322,7 @@
 ;;;     the scroll direction of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_scroll_event_get_direction" scroll-event-direction)
+(cffi:defcfun ("gdk_scroll_event_get_direction" scroll-event-direction)
     scroll-direction
   (event event))
 
@@ -1348,13 +1350,13 @@
 ;;;     return location for y scroll delta.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_scroll_event_get_deltas" %scroll-event-deltas) :void
+(cffi:defcfun ("gdk_scroll_event_get_deltas" %scroll-event-deltas) :void
   (event event)
   (xdelta :double)
   (ydelta :double))
 
 (defun scroll-event-deltas (event)
-  (with-foreign-objects ((xdelta :double) (ydelta :double))
+  (cffi:with-foreign-objects ((xdelta :double) (ydelta :double))
     (%scroll-event-deltas event xdelta ydelta)
     (values (cffi:mem-ref xdelta :double)
             (cffi:mem-ref ydelta :double))))
@@ -1382,7 +1384,7 @@
 ;;;     TRUE if the event is a scroll stop event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_scroll_event_is_stop" scroll-event-is-stop) :boolean
+(cffi:defcfun ("gdk_scroll_event_is_stop" scroll-event-is-stop) :boolean
   (event event))
 
 (export 'scroll-event-is-stop)
@@ -1402,7 +1404,7 @@
 ;;;     the keyval of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_key_event_get_keyval" key-event-keyval) :uint
+(cffi:defcfun ("gdk_key_event_get_keyval" key-event-keyval) :uint
   (event event))
 
 (export 'key-event-keyval)
@@ -1422,7 +1424,7 @@
 ;;;     the keycode of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_key_event_get_keycode" key-event-keycode) :uint
+(cffi:defcfun ("gdk_key_event_get_keycode" key-event-keycode) :uint
   (event event))
 
 (export 'key-event-keycode)
@@ -1442,8 +1444,8 @@
 ;;;     the consumed modifiers or event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_key_event_get_consumed_modifiers"
-           key-event-consumed-modifiers) modifier-type
+(cffi:defcfun ("gdk_key_event_get_consumed_modifiers"
+               key-event-consumed-modifiers) modifier-type
   (event event))
 
 (export 'key-event-consumed-modifiers)
@@ -1463,7 +1465,7 @@
 ;;;     the layout of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_key_event_get_layout" key-event-layout) :uint
+(cffi:defcfun ("gdk_key_event_get_layout" key-event-layout) :uint
   (event event))
 
 (export 'key-event-layout)
@@ -1483,7 +1485,7 @@
 ;;;     the shift level of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_key_event_get_level" key-event-level) :uint
+(cffi:defcfun ("gdk_key_event_get_level" key-event-level) :uint
   (event event))
 
 (export 'key-event-level)
@@ -1503,7 +1505,7 @@
 ;;;     TRUE if the event is for a modifier key
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_key_event_is_modifier" key-event-is-modifier) :boolean
+(cffi:defcfun ("gdk_key_event_is_modifier" key-event-is-modifier) :boolean
   (event event))
 
 (export 'key-event-is-modifier)
@@ -1535,7 +1537,7 @@
 ;;;     a GdkKeyMatch value describing whether event matches
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_key_event_matches" key-event-matches) key-match
+(cffi:defcfun ("gdk_key_event_matches" key-event-matches) key-match
   (event event)
   (keyval :uint)
   (modifiers modifier-type))
@@ -1566,14 +1568,14 @@
 ;;;     TRUE on success
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_key_event_get_match" %key-event-match) :boolean
+(cffi:defcfun ("gdk_key_event_get_match" %key-event-match) :boolean
   (event event)
   (keyval (:pointer :uint))
   (modifiers (:pointer modifier-type)))
 
 (defun key-event-match (event)
-  (with-foreign-objects ((keyval :uint)
-                         (modifiers 'modifier-type))
+  (cffi:with-foreign-objects ((keyval :uint)
+                              (modifiers 'modifier-type))
     (when (%key-event-match event keyval modifiers)
       (values (cffi:mem-ref keyval :uint)
               (cffi:mem-ref modifiers 'modifier-type)))))
@@ -1595,7 +1597,7 @@
 ;;;     TRUE of the focus is entering
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_focus_event_get_in" focus-event-in) :boolean
+(cffi:defcfun ("gdk_focus_event_get_in" focus-event-in) :boolean
   (event event))
 
 (export 'focus-event-in)
@@ -1615,8 +1617,8 @@
 ;;;     TRUE if event is emulating
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_touch_event_get_emulating_pointer" touch-event-emulating-pointer)
-    :boolean
+(cffi:defcfun ("gdk_touch_event_get_emulating_pointer"
+               touch-event-emulating-pointer) :boolean
   (event event))
 
 (export 'touch-event-emulating-pointer)
@@ -1636,7 +1638,7 @@
 ;;;     the mode of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_crossing_event_get_mode" crossing-event-mode) crossing-mode
+(cffi:defcfun ("gdk_crossing_event_get_mode" crossing-event-mode) crossing-mode
   (event event))
 
 (export 'crossing-event-mode)
@@ -1656,7 +1658,8 @@
 ;;;     the notify detail of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_crossing_event_get_detail" crossing-event-detail) notify-type
+(cffi:defcfun ("gdk_crossing_event_get_detail" crossing-event-detail)
+    notify-type
   (event event))
 
 (export 'crossing-event-detail)
@@ -1676,7 +1679,7 @@
 ;;;     TRUE if the surface is the focus surface
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_crossing_event_get_focus" crossing-event-focus) :boolean
+(cffi:defcfun ("gdk_crossing_event_get_focus" crossing-event-focus) :boolean
   (event event))
 
 (export 'crossing-event-focus)
@@ -1696,8 +1699,8 @@
 ;;;     the grab surface of event .
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_grab_broken_event_get_grab_surface"
-           grab-broken-event-grab-surface) (g:object surface)
+(cffi:defcfun ("gdk_grab_broken_event_get_grab_surface"
+               grab-broken-event-grab-surface) (g:object surface)
   (event event))
 
 (export 'grab-broken-event-grab-surface)
@@ -1717,7 +1720,7 @@
 ;;;     TRUE if the an implicit grab was broken
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_grab_boken_event_get_implicit" grab-broken-event-implicit)
+(cffi:defcfun ("gdk_grab_boken_event_get_implicit" grab-broken-event-implicit)
     :boolean
   (event event))
 
@@ -1738,7 +1741,7 @@
 ;;;     the drop.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_dnd_event_get_drop" dnd-event-drop) (g:object drop)
+(cffi:defcfun ("gdk_dnd_event_get_drop" dnd-event-drop) (g:object drop)
   (event event))
 
 (export 'dnd-event-drop)
@@ -1758,8 +1761,8 @@
 ;;;     the gesture phase of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_touchpad_event_get_gesture_phase"
-           touchpad-event-gesture-phase) touchpad-gesture-phase
+(cffi:defcfun ("gdk_touchpad_event_get_gesture_phase"
+               touchpad-event-gesture-phase) touchpad-gesture-phase
   (event event))
 
 (export 'touchpad-event-gesture-phase)
@@ -1779,7 +1782,8 @@
 ;;;     the number of fingers for event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_touchpad_event_get_n_fingers" touchpad-event-n-fingers) :uint
+(cffi:defcfun ("gdk_touchpad_event_get_n_fingers" touchpad-event-n-fingers)
+    :uint
   (event event))
 
 (export 'touchpad-event-n-fingers)
@@ -1802,13 +1806,13 @@
 ;;;     return location for y.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_touchpad_event_get_deltas" %touchpad-event-deltas) :void
+(cffi:defcfun ("gdk_touchpad_event_get_deltas" %touchpad-event-deltas) :void
   (event event)
   (dx (:pointer :double))
   (dy (:pointer :double)))
 
 (defun touchpad-event-deltas (event)
-  (with-foreign-objects ((dx :double) (dy :double))
+  (cffi:with-foreign-objects ((dx :double) (dy :double))
     (%touchpad-event-deltas event dx dy)
     (values (cffi:mem-ref dx :double)
             (cffi:mem-ref dy :double))))
@@ -1830,8 +1834,8 @@
 ;;;     the angle delta of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_touchpad_event_get_pinch_angle_delta"
-           touchpad-event-pinch-angle-delta) :double
+(cffi:defcfun ("gdk_touchpad_event_get_pinch_angle_delta"
+               touchpad-event-pinch-angle-delta) :double
   (event event))
 
 (export 'touchpad-event-pinch-angle-delta)
@@ -1851,7 +1855,7 @@
 ;;;     the scale of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_touchpad_event_get_pinch_scale" touchpad-event-pinch-scale)
+(cffi:defcfun ("gdk_touchpad_event_get_pinch_scale" touchpad-event-pinch-scale)
     :double
   (event event))
 
@@ -1877,13 +1881,13 @@
 ;;;     Return location for the axis value.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_pad_event_get_axis_value" %pad-event-axis-value) :void
+(cffi:defcfun ("gdk_pad_event_get_axis_value" %pad-event-axis-value) :void
   (event event)
   (index (:pointer :uint))
   (value (:pointer :double)))
 
 (defun pad-event-axis-value (event)
-  (with-foreign-objects ((index :uint) (value :double))
+  (cffi:with-foreign-objects ((index :uint) (value :double))
     (%pad-event-axis-value event index value)
     (values (cffi:mem-ref index :uint)
             (cffi:mem-ref value :double))))
@@ -1905,7 +1909,7 @@
 ;;;     the button of event
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_pad_event_get_button" pad-event-button) :uint
+(cffi:defcfun ("gdk_pad_event_get_button" pad-event-button) :uint
   (event event))
 
 (export 'pad-event-button)
@@ -1930,13 +1934,13 @@
 ;;;     return location for the mode.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_pad_event_get_group_mode" %pad-event-group-mode) :void
+(cffi:defcfun ("gdk_pad_event_get_group_mode" %pad-event-group-mode) :void
   (event event)
   (group (:pointer :uint))
   (mode (:pointer :uint)))
 
 (defun pad-event-group-mode (event)
-  (with-foreign-objects ((group :uint) (mode :uint))
+  (cffi:with-foreign-objects ((group :uint) (mode :uint))
     (%pad-event-group-mode event group mode)
     (values (cffi:mem-ref group :uint)
             (cffi:mem-ref mode :uint))))
@@ -1969,13 +1973,13 @@
 ;;;     TRUE if the angle could be calculated.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_events_get_angle" %events-angle) :boolean
+(cffi:defcfun ("gdk_events_get_angle" %events-angle) :boolean
   (event1 event)
   (event2 event)
   (angle (:pointer :double)))
 
 (defun events-angle (event1 event2)
-  (with-foreign-object (angle :double)
+  (cffi:with-foreign-object (angle :double)
     (when (%events-angle event1 event2 angle)
       (cffi:mem-ref angle :double))))
 
@@ -2009,14 +2013,14 @@
 ;;;     TRUE if the center could be calculated.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_events_get_center" %events-center) :boolean
+(cffi:defcfun ("gdk_events_get_center" %events-center) :boolean
   (event1 event)
   (event2 event)
   (x (:pointer :double))
   (y (:pointer :double)))
 
 (defun events-center (event1 event2)
-  (with-foreign-objects ((x :double) (y :double))
+  (cffi:with-foreign-objects ((x :double) (y :double))
     (when (%events-center event1 event2 x y)
       (values (cffi:mem-ref x :double)
               (cffi:mem-ref y :double)))))
@@ -2047,13 +2051,13 @@
 ;;;     TRUE if the distance could be calculated.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_events_get_distance" %events-distance) :boolean
+(cffi:defcfun ("gdk_events_get_distance" %events-distance) :boolean
   (event1 event)
   (event2 event)
   (distance (:pointer :double)))
 
 (defun events-distance (event1 event2)
-  (with-foreign-object (distance :double)
+  (cffi:with-foreign-object (distance :double)
     (when (%events-distance event1 event2 distance)
       (cffi:mem-ref distance :double))))
 

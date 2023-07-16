@@ -47,7 +47,7 @@
 ;;; gdk_cairo_set_source_rgba ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_cairo_set_source_rgba" cairo-set-source-rgba) :void
+(cffi:defcfun ("gdk_cairo_set_source_rgba" cairo-set-source-rgba) :void
  #+liber-documentation
  "@version{#2023-2-3}
   @argument[cr]{a @symbol{cairo:context-t} instance}
@@ -67,7 +67,7 @@
 ;;; gdk_cairo_set_source_pixbuf ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_cairo_set_source_pixbuf" %cairo-set-source-pixbuf) :void
+(cffi:defcfun ("gdk_cairo_set_source_pixbuf" %cairo-set-source-pixbuf) :void
   (cr (:pointer (:struct cairo:context-t)))
   (pixbuf (g:object gdk-pixbuf:pixbuf))
   (x :double)
@@ -102,7 +102,7 @@
 ;;; gdk_cairo_rectangle ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_cairo_rectangle" cairo-rectangle) :void
+(cffi:defcfun ("gdk_cairo_rectangle" cairo-rectangle) :void
  #+liber-documentation
  "@version{#2023-2-3}
   @argument[cr]{a @symbol{cairo:context-t} instance}
@@ -121,7 +121,7 @@
 ;;; gdk_cairo_region ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_cairo_region" cairo-region) :void
+(cffi:defcfun ("gdk_cairo_region" cairo-region) :void
  #+liber-documentation
  "@version{#2023-2-3}
   @argument[cr]{a @symbol{cairo:context-t} instance}
@@ -140,8 +140,8 @@
 ;;; gdk_cairo_region_create_from_surface ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_cairo_region_create_from_surface"
-           cairo-region-create-from-surface)
+(cffi:defcfun ("gdk_cairo_region_create_from_surface"
+               cairo-region-create-from-surface)
     (:pointer (:struct cairo:region-t))
  #+liber-documentation
  "@version{#2023-2-3}
@@ -168,7 +168,7 @@
 ;;; gdk_cairo_draw_from_gl ()                              Since 4.6 deprecated
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_cairo_draw_from_gl" cairo-draw-from-gl) :void
+(cffi:defcfun ("gdk_cairo_draw_from_gl" cairo-draw-from-gl) :void
  #+liber-documentation
  "@version{#2023-2-3}
   @argument[cr]{a @symbol{cairo:context-t} instance}

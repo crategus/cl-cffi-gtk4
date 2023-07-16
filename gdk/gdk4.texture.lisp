@@ -101,7 +101,7 @@
 ;;; enum GdkMemoryFormat
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkMemoryFormat" memory-format
+(gobject:define-g-enum "GdkMemoryFormat" memory-format
   (:export t
    :type-initializer "gdk_memory_format_get_type")
   :B8G8R8A8-PREMULTIPLIED
@@ -143,7 +143,7 @@
   https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.htmlVkFormat
   for details.
   @begin{pre}
-(define-g-enum \"GdkMemoryFormat\" memory-format
+(gobject:define-g-enum \"GdkMemoryFormat\" memory-format
   (:export t
    :type-initializer \"gdk_memory_format_get_type\")
   :B8G8R8A8-PREMULTIPLIED
@@ -207,7 +207,7 @@
 ;;; GdkTexture
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkTexture" texture
+(gobject:define-g-object-class "GdkTexture" texture
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable"
@@ -310,7 +310,7 @@
 ;;; gdk_texture_new_for_pixbuf ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_texture_new_for_pixbuf" texture-new-for-pixbuf)
+(cffi:defcfun ("gdk_texture_new_for_pixbuf" texture-new-for-pixbuf)
     (g:object texture)
  #+liber-documentation
  "@version{#2023-4-12}
@@ -329,7 +329,7 @@
 ;;; gdk_texture_new_from_resource ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_texture_new_from_resource" texture-new-from-resource)
+(cffi:defcfun ("gdk_texture_new_from_resource" texture-new-from-resource)
     (g:object texture)
  #+liber-documentation
  "@version{#2023-4-12}
@@ -355,7 +355,7 @@
 ;;; gdk_texture_new_from_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_texture_new_from_file" %texture-new-from-file)
+(cffi:defcfun ("gdk_texture_new_from_file" %texture-new-from-file)
     (g:object texture)
   (file g:object)
   (err :pointer))
@@ -373,7 +373,7 @@
   JPEG, though more formats might be available.
   @see-class{gdk:texture}
   @see-class{g:file}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%texture-new-from-file file err)))
 
 (export 'texture-new-from-file)
@@ -383,7 +383,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(defcfun ("gdk_texture_new_from_filename" %texture-new-from-filename)
+(cffi:defcfun ("gdk_texture_new_from_filename" %texture-new-from-filename)
     (g:object texture)
   (path :string)
   (err :pointer))
@@ -407,7 +407,7 @@
 
   Since 4.6
   @see-class{gdk:texture}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%texture-new-from-filename (namestring path) err)))
 
 #+gtk-4-6
@@ -418,7 +418,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(defcfun ("gdk_texture_new_from_bytes" %texture-new-from-bytes)
+(cffi:defcfun ("gdk_texture_new_from_bytes" %texture-new-from-bytes)
     (g:object texture)
   (bytes (g:boxed g:bytes))
   (err :pointer))
@@ -442,7 +442,7 @@
   Since 4.6
   @see-class{gdk:texture}
   @see-class{g:bytes}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%texture-new-from-bytes bytes err)))
 
 #+gtk-4-6
@@ -452,7 +452,7 @@
 ;;; gdk_texture_download ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_texture_download" texture-download) :void
+(cffi:defcfun ("gdk_texture_download" texture-download) :void
  #+liber-documentation
  "@version{#2023-4-12}
   @argument[texture]{a @class{gdk:texture} object}
@@ -510,7 +510,7 @@
 ;;;     TRUE if saving succeeded, FALSE on failure.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_texture_save_to_png" texture-save-to-png) :boolean
+(cffi:defcfun ("gdk_texture_save_to_png" texture-save-to-png) :boolean
 
   (texture (g:object texture))
   (filename :string))
@@ -522,7 +522,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(defcfun ("gdk_texture_save_to_png_bytes" texture-save-to-png-bytes)
+(cffi:defcfun ("gdk_texture_save_to_png_bytes" texture-save-to-png-bytes)
     (g:boxed g:bytes)
   (texture (g:object texture)))
 
@@ -534,7 +534,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(defcfun ("gdk_texture_save_to_tiff" texture-save-to-tiff) :boolean
+(cffi:defcfun ("gdk_texture_save_to_tiff" texture-save-to-tiff) :boolean
   (texture (g:object texture))
   (filename :string))
 
@@ -546,7 +546,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(defcfun ("gdk_texture_save_to_tiff_bytes" texture-save-to-tiff-bytes)
+(cffi:defcfun ("gdk_texture_save_to_tiff_bytes" texture-save-to-tiff-bytes)
     (g:boxed g:bytes)
   (texture (g:object texture)))
 
@@ -558,7 +558,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
-(defcfun ("gdk_texture_get_format" texture-format) memory-format
+(cffi:defcfun ("gdk_texture_get_format" texture-format) memory-format
   (texture (g:object texture)))
 
 #+gtk-4-10
@@ -572,7 +572,7 @@
 ;;; A GdkTexture representing image data in memory.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkMemoryTexture" memory-texture
+(gobject:define-g-object-class "GdkMemoryTexture" memory-texture
   (:superclass texture
    :export t
    :interfaces ("GdkPaintable"
@@ -613,7 +613,7 @@
 ;;;     A newly-created GdkTexture
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_memory_texture_new" memory-texture-new) (g:object texture)
+(cffi:defcfun ("gdk_memory_texture_new" memory-texture-new) (g:object texture)
   (width :int)
   (height :int)
   (format memory-format)
@@ -630,7 +630,7 @@
 ;;; A GdkTexture representing a GL texture object.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkGLTexture" gl-texture
+(gobject:define-g-object-class "GdkGLTexture" gl-texture
   (:superclass texture
    :export t
    :interfaces ("GdkPaintable"
@@ -680,7 +680,7 @@
 
 ;; TODO: The arguments destroy and data are not implemented.
 
-(defcfun ("gdk_gl_texture_new" %gl-texture-new) (g:object texture)
+(cffi:defcfun ("gdk_gl_texture_new" %gl-texture-new) (g:object texture)
   (context (g:object gl-context))
   (id :uint)
   (width :int)
@@ -714,7 +714,7 @@
 ;;;     a GdkTexture wrapping a GL texture
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_gl_texture_release" gl-texture-release) :void
+(cffi:defcfun ("gdk_gl_texture_release" gl-texture-release) :void
   (texture (g:object texture)))
 
 (export 'gl-texture-release)

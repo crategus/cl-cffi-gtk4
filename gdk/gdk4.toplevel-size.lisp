@@ -78,7 +78,7 @@
 ;;; gdk_toplevel_size_get_bounds ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_size_bounds" %toplevel-size-bounds) :void
+(cffi:defcfun ("gdk_toplevel_size_bounds" %toplevel-size-bounds) :void
   (size toplevel-size)
   (width (:pointer :int))
   (height (:pointer :int)))
@@ -111,7 +111,7 @@
 ;;; gdk_toplevel_size_set_size ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_size_set_size" toplevel-size-set-size) :void
+(cffi:defcfun ("gdk_toplevel_size_set_size" toplevel-size-set-size) :void
  #+liber-documentation
  "@version{#2023-4-10}
   @argument[size]{a @symbol{gdk:toplevel-size} instance}
@@ -135,7 +135,8 @@
 ;;; gdk_toplevel_size_set_min_size ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_size_set_min_size" toplevel-size-set-min-size) :void
+(cffi:defcfun ("gdk_toplevel_size_set_min_size" toplevel-size-set-min-size)
+    :void
  #+liber-documentation
  "@version{#2023-4-10}
   @argument[size]{a @symbol{gdk:toplevel-size} instance}
@@ -164,8 +165,8 @@
 ;;; gdk_toplevel_size_set_shadow_width ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_size_set_shadow_width" toplevel-size-set-shadow-width)
-    :void
+(cffi:defcfun ("gdk_toplevel_size_set_shadow_width"
+               toplevel-size-set-shadow-width) :void
  #+liber-documentation
  "@version{#2023-4-10}
   @argument[size]{a @symbol{gdk:toplevel-size} instance}

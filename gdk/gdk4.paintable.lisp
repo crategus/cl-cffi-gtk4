@@ -145,7 +145,7 @@
 ;;;ClutterContent, GtkImage, GdkTexture, GtkSnapshot
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GdkPaintable" paintable
+(gobject:define-g-interface "GdkPaintable" paintable
   (:export t
    :type-initializer "gdk_paintable_get_type")
   nil)
@@ -156,7 +156,7 @@
 ;;; Base type for snapshot operations.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkSnapshot" snapshot
+(gobject:define-g-object-class "GdkSnapshot" snapshot
   (:superclass g:object
    :export t
    :interfaces nil

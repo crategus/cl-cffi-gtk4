@@ -67,7 +67,7 @@
 ;;; GdkDisplayManager
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkDisplayManager" display-manager
+(gobject:define-g-object-class "GdkDisplayManager" display-manager
   (:superclass g:object
    :export t
    :interfaces nil
@@ -178,7 +178,7 @@ lambda (manager display)    :run-last
 ;;; gdk_display_manager_get ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_manager_get" display-manager-get)
+(cffi:defcfun ("gdk_display_manager_get" display-manager-get)
     (g:object display-manager)
  #+liber-documentation
  "@version{2023-4-14}
@@ -203,7 +203,7 @@ lambda (manager display)    :run-last
 ;;; gdk_display_manager_list_displays ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_manager_list_displays" display-manager-list-displays)
+(cffi:defcfun ("gdk_display_manager_list_displays" display-manager-list-displays)
     (g:slist-t (g:object display))
  #+liber-documentation
  "@version{2023-4-14}
@@ -220,7 +220,7 @@ lambda (manager display)    :run-last
 ;;; gdk_display_manager_open_display ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_manager_open_display" display-manager-open-display)
+(cffi:defcfun ("gdk_display_manager_open_display" display-manager-open-display)
     (g:object display)
  #+liber-documentation
  "@version{2023-4-14}

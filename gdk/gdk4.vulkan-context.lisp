@@ -119,7 +119,7 @@
 ;;; Flags: Run Last
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkVulkanContext" vulkan-context
+(gobject:define-g-object-class "GdkVulkanContext" vulkan-context
   (:superclass draw-context
    :export t
    :interfaces nil

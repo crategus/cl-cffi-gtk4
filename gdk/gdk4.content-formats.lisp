@@ -38,35 +38,35 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gdk_intern_mime_type 
-;;;     gdk_content_formats_new 
-;;;     gdk_content_formats_new_for_gtype 
-;;;     gdk_content_formats_ref 
-;;;     gdk_content_formats_unref 
-;;;     gdk_content_formats_print 
-;;;     gdk_content_formats_to_string 
-;;;     gdk_content_formats_get_gtypes 
-;;;     gdk_content_formats_get_mime_types 
-;;;     gdk_content_formats_union 
-;;;     gdk_content_formats_match 
-;;;     gdk_content_formats_match_gtype 
-;;;     gdk_content_formats_match_mime_type 
-;;;     gdk_content_formats_contain_gtype 
-;;;     gdk_content_formats_contain_mime_type 
-;;;     gdk_content_formats_union_serialize_gtypes 
-;;;     gdk_content_formats_union_deserialize_gtypes 
-;;;     gdk_content_formats_union_serialize_mime_types 
+;;;     gdk_intern_mime_type
+;;;     gdk_content_formats_new
+;;;     gdk_content_formats_new_for_gtype
+;;;     gdk_content_formats_ref
+;;;     gdk_content_formats_unref
+;;;     gdk_content_formats_print
+;;;     gdk_content_formats_to_string
+;;;     gdk_content_formats_get_gtypes
+;;;     gdk_content_formats_get_mime_types
+;;;     gdk_content_formats_union
+;;;     gdk_content_formats_match
+;;;     gdk_content_formats_match_gtype
+;;;     gdk_content_formats_match_mime_type
+;;;     gdk_content_formats_contain_gtype
+;;;     gdk_content_formats_contain_mime_type
+;;;     gdk_content_formats_union_serialize_gtypes
+;;;     gdk_content_formats_union_deserialize_gtypes
+;;;     gdk_content_formats_union_serialize_mime_types
 ;;;     gdk_content_formats_union_deserialize_mime_types
 ;;;     gdk_content_formats_parse                          Since 4.4
 ;;;
-;;;     gdk_content_formats_builder_new 
-;;;     gdk_content_formats_builder_free_to_formats 
-;;;     gdk_content_formats_builder_add_formats 
-;;;     gdk_content_formats_builder_add_gtype 
-;;;     gdk_content_formats_builder_add_mime_type 
-;;;     gdk_content_formats_builder_ref 
-;;;     gdk_content_formats_builder_unref 
-;;;     gdk_content_formats_builder_to_formats 
+;;;     gdk_content_formats_builder_new
+;;;     gdk_content_formats_builder_free_to_formats
+;;;     gdk_content_formats_builder_add_formats
+;;;     gdk_content_formats_builder_add_gtype
+;;;     gdk_content_formats_builder_add_mime_type
+;;;     gdk_content_formats_builder_ref
+;;;     gdk_content_formats_builder_unref
+;;;     gdk_content_formats_builder_to_formats
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -81,43 +81,43 @@
 ;;;
 ;;; typedef struct _GdkContentFormatsBuilder GdkContentFormatsBuilder;
 ;;;
-;;; A GdkContentFormatsBuilder struct is an opaque struct. It is meant to not 
+;;; A GdkContentFormatsBuilder struct is an opaque struct. It is meant to not
 ;;; be kept around and only be used to create new GdkContentFormats objects.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; GdkContentFormats 
+;;; GdkContentFormats
 ;;;
 ;;; typedef struct _GdkContentFormats GdkContentFormats;
 ;;;
-;;; A GdkContentFormats struct is a reference counted struct and should be 
+;;; A GdkContentFormats struct is a reference counted struct and should be
 ;;; treated as opaque.
 ;;;
-;;; This section describes the GdkContentFormats structure that is used to 
-;;; advertise and negotiate the format of content passed between different 
-;;; widgets, windows or applications using for example the clipboard or 
+;;; This section describes the GdkContentFormats structure that is used to
+;;; advertise and negotiate the format of content passed between different
+;;; widgets, windows or applications using for example the clipboard or
 ;;; drag'n'drop.
 ;;;
-;;; GDK supports content in 2 forms: GType and mime type. Using GTypes is meant 
-;;; only for in-process content transfers. Mime types are meant to be used for 
-;;; data passing both in-process and out-of-process. The details of how data is 
+;;; GDK supports content in 2 forms: GType and mime type. Using GTypes is meant
+;;; only for in-process content transfers. Mime types are meant to be used for
+;;; data passing both in-process and out-of-process. The details of how data is
 ;;; passed is described in the documentation of the actual implementations.
 ;;;
-;;; A GdkContentFormats describes a set of possible formats content can be 
-;;; exchanged in. It is assumed that this set is ordered. GTypes are more 
-;;; important than mime types. Order between different GTypes or mime types is 
-;;; the order they were added in, most important first. Functions that care 
-;;; about order, such as gdk_content_formats_union() will describe in their 
-;;; documentation how they interpret that order, though in general the order of 
-;;; the first argument is considered the primary order of the result, followed 
+;;; A GdkContentFormats describes a set of possible formats content can be
+;;; exchanged in. It is assumed that this set is ordered. GTypes are more
+;;; important than mime types. Order between different GTypes or mime types is
+;;; the order they were added in, most important first. Functions that care
+;;; about order, such as gdk_content_formats_union() will describe in their
+;;; documentation how they interpret that order, though in general the order of
+;;; the first argument is considered the primary order of the result, followed
 ;;; by the order of further arguments.
 ;;;
-;;; For debugging purposes, the function gdk_content_formats_to_string() exists. 
-;;; It will print a comma-seperated formats of formats from most important to 
+;;; For debugging purposes, the function gdk_content_formats_to_string() exists.
+;;; It will print a comma-seperated formats of formats from most important to
 ;;; least important.
 ;;;
-;;; GdkContentFormats is an immutable struct. After creation, you cannot change 
-;;; the types it represents. Instead, new GdkContentFormats have to be created. 
+;;; GdkContentFormats is an immutable struct. After creation, you cannot change
+;;; the types it represents. Instead, new GdkContentFormats have to be created.
 ;;; The GdkContentFormatsBuilder structure is meant to help in this endeavor.
 ;;;
 ;;; See Also
@@ -125,10 +125,11 @@
 ;;;     GdkDrag, GdkDrop, GdkClipboard, GdkContentProvider
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque content-formats "GdkContentFormats"
+(glib:define-g-boxed-opaque content-formats "GdkContentFormats"
   :export t
   :type-initializer "gdk_content_formats_get_type"
-  :alloc (error "GdkContentFormats must be created with gdk:content-formats-new"))
+  :alloc
+  (error "GdkContentFormats must be created with gdk:content-formats-new"))
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_intern_mime_type ()
@@ -138,14 +139,14 @@
 ;;;
 ;;; Canonicalizes the given mime type and interns the result.
 ;;;
-;;; If string is not a valid mime type, NULL is returned instead. See RFC 2048 
+;;; If string is not a valid mime type, NULL is returned instead. See RFC 2048
 ;;; for the syntax of mime types.
 ;;;
 ;;; string :
 ;;;     string of a potential mime type.
 ;;;
 ;;; Returns :
-;;;     An interned string for the canonicalized mime type or NULL if the string 
+;;;     An interned string for the canonicalized mime type or NULL if the string
 ;;;     wasn't a valid mime type
 ;;; ----------------------------------------------------------------------------
 
@@ -158,8 +159,8 @@
 ;;;
 ;;; Creates a new GdkContentFormats from an array of mime types.
 ;;;
-;;; The mime types must be valid and different from each other or the behavior 
-;;; of the return value is undefined. If you cannot guarantee this, use 
+;;; The mime types must be valid and different from each other or the behavior
+;;; of the return value is undefined. If you cannot guarantee this, use
 ;;; GdkContentFormatsBuilder instead.
 ;;;
 ;;; mime_types :
@@ -172,7 +173,7 @@
 ;;;     the new GdkContentFormats.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_new" %content-formats-new)
+(cffi:defcfun ("gdk_content_formats_new" %content-formats-new)
     (g:boxed content-formats :return)
   (mime-types :pointer)
   (n-mime-types :uint))
@@ -198,14 +199,14 @@
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_new_for_gtype" content-formats-new-for-gtype)
-    (g:boxed content-formats :return)
+(cffi:defcfun ("gdk_content_formats_new_for_gtype"
+               content-formats-new-for-gtype) (g:boxed content-formats :return)
   (type g:type-t))
 
 (export 'content-formats-new-for-gtype)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_ref () 
+;;; gdk_content_formats_ref ()
 ;;;
 ;;; GdkContentFormats *
 ;;; gdk_content_formats_ref (GdkContentFormats *formats);
@@ -225,7 +226,7 @@
 ;;; void
 ;;; gdk_content_formats_unref (GdkContentFormats *formats);
 ;;;
-;;; Decreases the reference count of a GdkContentFormats by one. If the 
+;;; Decreases the reference count of a GdkContentFormats by one. If the
 ;;; resulting reference count is zero, frees the formats.
 ;;;
 ;;; formats :
@@ -239,10 +240,10 @@
 ;;; gdk_content_formats_print (GdkContentFormats *formats,
 ;;;                            GString *string);
 ;;;
-;;; Prints the given formats into a string for human consumption. This is meant 
+;;; Prints the given formats into a string for human consumption. This is meant
 ;;; for debugging and logging.
 ;;;
-;;; The form of the representation may change at any time and is not guaranteed 
+;;; The form of the representation may change at any time and is not guaranteed
 ;;; to stay identical.
 ;;;
 ;;; formats :
@@ -258,7 +259,7 @@
 ;;; char *
 ;;; gdk_content_formats_to_string (GdkContentFormats *formats);
 ;;;
-;;; Prints the given formats into a human-readable string. This is a small 
+;;; Prints the given formats into a human-readable string. This is a small
 ;;; wrapper around gdk_content_formats_print() to help when debugging.
 ;;;
 ;;; formats :
@@ -268,7 +269,8 @@
 ;;;     a new string.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_to_string" content-formats-to-string) :string
+(cffi:defcfun ("gdk_content_formats_to_string" content-formats-to-string)
+    :string
   (formats (g:boxed content-formats)))
 
 (export 'content-formats-to-string)
@@ -280,33 +282,32 @@
 ;;; gdk_content_formats_get_gtypes (const GdkContentFormats *formats,
 ;;;                                 gsize *n_gtypes);
 ;;;
-;;; Gets the GTypes included in formats . Note that formats may not contain any 
-;;; GTypes, in particular when they are empty. In that case NULL will be 
+;;; Gets the GTypes included in formats . Note that formats may not contain any
+;;; GTypes, in particular when they are empty. In that case NULL will be
 ;;; returned.
 ;;;
 ;;; formats :
 ;;;     a GdkContentFormats
 ;;;
 ;;; n_gtypes :
-;;;     optional pointer to take the number of GTypes contained in the return 
+;;;     optional pointer to take the number of GTypes contained in the return
 ;;;     value.
 ;;;
 ;;; Returns :
-;;;     G_TYPE_INVALID-terminated array of types included in formats or NULL if 
+;;;     G_TYPE_INVALID-terminated array of types included in formats or NULL if
 ;;;     none.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_get_gtypes" %content-formats-gtypes) :pointer
+(cffi:defcfun ("gdk_content_formats_get_gtypes" %content-formats-gtypes)
+    :pointer
   (formats (g:boxed content-formats))
   (n-gtypes (:pointer :size)))
 
 (defun content-formats-gtypes (formats)
-  (with-foreign-objects ((ptr :pointer) (n :size))
-
+  (cffi:with-foreign-objects ((ptr :pointer) (n :size))
     (setf (cffi:mem-ref ptr :pointer)
           (%content-formats-gtypes formats n))
     (setf n (cffi:mem-ref n :size))
-
     (iter (for i from 0 below n)
           (collect (cffi:mem-aref ptr 'g:type-t i)))))
 
@@ -319,23 +320,23 @@
 ;;; gdk_content_formats_get_mime_types (const GdkContentFormats *formats,
 ;;;                                     gsize *n_mime_types);
 ;;;
-;;; Gets the mime types included in formats . Note that formats may not contain 
-;;; any mime types, in particular when they are empty. In that case NULL will be 
+;;; Gets the mime types included in formats . Note that formats may not contain
+;;; any mime types, in particular when they are empty. In that case NULL will be
 ;;; returned.
 ;;;
 ;;; formats :
 ;;;     a GdkContentFormats
 ;;;
 ;;; n_mime_types :
-;;;     optional pointer to take the number of mime types contained in the 
+;;;     optional pointer to take the number of mime types contained in the
 ;;;     return value.
 ;;;
 ;;; Returns :
-;;;     NULL-terminated array of interned strings of mime types included in 
+;;;     NULL-terminated array of interned strings of mime types included in
 ;;;     formats or NULL if none.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_get_mime_types" %content-formats-mime-types)
+(cffi:defcfun ("gdk_content_formats_get_mime_types" %content-formats-mime-types)
     g:strv-t
   (formats (g:boxed content-formats))
   (n-mime-types :pointer))
@@ -352,7 +353,7 @@
 ;;; gdk_content_formats_union (GdkContentFormats *first,
 ;;;                            const GdkContentFormats *second);
 ;;;
-;;; Append all missing types from second to first , in the order they had in 
+;;; Append all missing types from second to first , in the order they had in
 ;;; second .
 ;;;
 ;;; first :
@@ -365,7 +366,7 @@
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_union" content-formats-union)
+(cffi:defcfun ("gdk_content_formats_union" content-formats-union)
     (g:boxed content-formats :return)
   (first (g:boxed content-formats))
   (second (g:boxed content-formats)))
@@ -391,7 +392,7 @@
 ;;;     TRUE if a matching format was found.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_match" content-formats-match) :boolean
+(cffi:defcfun ("gdk_content_formats_match" content-formats-match) :boolean
   (first (g:boxed content-formats))
   (second (g:boxed content-formats)))
 
@@ -404,7 +405,7 @@
 ;;; gdk_content_formats_match_gtype (const GdkContentFormats *first,
 ;;;                                  const GdkContentFormats *second);
 ;;;
-;;; Finds the first GType from first that is also contained in second . If no 
+;;; Finds the first GType from first that is also contained in second . If no
 ;;; matching GType is found, G_TYPE_INVALID is returned.
 ;;;
 ;;; first :
@@ -417,7 +418,7 @@
 ;;;     The first common GType or G_TYPE_INVALID if none.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_match_gtype" content-formats-match-gtype) 
+(cffi:defcfun ("gdk_content_formats_match_gtype" content-formats-match-gtype)
     g:type-t
   (first (g:boxed content-formats))
   (second (g:boxed content-formats)))
@@ -431,7 +432,7 @@
 ;;; gdk_content_formats_match_mime_type (const GdkContentFormats *first,
 ;;;                                      const GdkContentFormats *second);
 ;;;
-;;; Finds the first mime type from first that is also contained in second . If 
+;;; Finds the first mime type from first that is also contained in second . If
 ;;; no matching mime type is found, NULL is returned.
 ;;;
 ;;; first :
@@ -444,15 +445,15 @@
 ;;;     The first common mime type or NULL if none.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_match_mime_type" content-formats-match-mime-type)
-    :string
+(cffi:defcfun ("gdk_content_formats_match_mime_type"
+               content-formats-match-mime-type) :string
   (first (g:boxed content-formats))
   (second (g:boxed content-formats)))
 
 (export 'content-formats-match-mime-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_formats_contain_gtype () 
+;;; gdk_content_formats_contain_gtype ()
 ;;;
 ;;; gboolean
 ;;; gdk_content_formats_contain_gtype (const GdkContentFormats *formats,
@@ -470,8 +471,8 @@
 ;;;     TRUE if the GType was found
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_contain_gtype" content-formats-contain-gtype)
-    :boolean
+(cffi:defcfun ("gdk_content_formats_contain_gtype"
+               content-formats-contain-gtype) :boolean
   (formats (g:boxed content-formats))
   (gype g:type-t))
 
@@ -496,8 +497,8 @@
 ;;;     TRUE if the mime_type was found
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_contain_mime_type" 
-           content-formats-contain-mime-type) :boolean
+(cffi:defcfun ("gdk_content_formats_contain_mime_type"
+               content-formats-contain-mime-type) :boolean
   (formats (g:boxed content-formats))
   (mime-type :string))
 
@@ -510,18 +511,18 @@
 ;;; gdk_content_formats_union_serialize_gtypes
 ;;;                                (GdkContentFormats *formats);
 ;;;
-;;; Add GTypes for the mime types in formats for which serializers are 
+;;; Add GTypes for the mime types in formats for which serializers are
 ;;; registered.
 ;;;
 ;;; formats :
 ;;;     a GdkContentFormats.
 ;;;
-;;; Return : 
+;;; Return :
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_union_serialize_gtypes"
-           content-formats-union-serialize-gtypes) (g:boxed content-formats)
+(cffi:defcfun ("gdk_content_formats_union_serialize_gtypes"
+               content-formats-union-serialize-gtypes) (g:boxed content-formats)
   (formats (g:boxed content-formats)))
 
 (export 'content-formats-union-serialize-gtypes)
@@ -538,12 +539,13 @@
 ;;; formats :
 ;;;     a GdkContentFormats.
 ;;;
-;;; Return : 
+;;; Return :
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_union_deserialize_gtypes"
-           content-formats-union-deserialize-gtypes) (g:boxed content-formats)
+(cffi:defcfun ("gdk_content_formats_union_deserialize_gtypes"
+               content-formats-union-deserialize-gtypes)
+    (g:boxed content-formats)
   (formats (g:boxed content-formats)))
 
 (export 'content-formats-union-deserialize-gtypes)
@@ -560,12 +562,13 @@
 ;;; formats :
 ;;;     a GdkContentFormats.
 ;;;
-;;; Return : 
+;;; Return :
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_union_serialize_mime_types"
-           content-formats-union-serialize-mime-types) (g:boxed content-formats)
+(cffi:defcfun ("gdk_content_formats_union_serialize_mime_types"
+               content-formats-union-serialize-mime-types)
+    (g:boxed content-formats)
   (formats (g:boxed content-formats)))
 
 (export 'content-formats-union-serialize-mime-types)
@@ -582,12 +585,12 @@
 ;;; formats :
 ;;;     a GdkContentFormats.
 ;;;
-;;; Return : 
+;;; Return :
 ;;;     a new GdkContentFormats
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_union_deserialize_mime_types"
-           content-formats-union-deserialize-mime-types) 
+(cffi:defcfun ("gdk_content_formats_union_deserialize_mime_types"
+               content-formats-union-deserialize-mime-types)
     (g:boxed content-formats)
   (formats (g:boxed content-formats)))
 
@@ -597,7 +600,7 @@
 ;;; gdk_content_formats_parse                              Since 4.4
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_content_formats_parse" content-formats-parse) 
+(cffi:defcfun ("gdk_content_formats_parse" content-formats-parse)
     (g:boxed content-formats :return)
  #+liber-documentation
  "@version{#2023-4-14}
@@ -605,10 +608,10 @@
   @return{A @class{gdk:content-formats} instance with the content formats if
     @arg{str} is valid.}
   @begin{short}
-    Parses the given @arg{str} into a @class{gdk:content-formats} instance and 
+    Parses the given @arg{str} into a @class{gdk:content-formats} instance and
     returns the formats.
   @end{short}
-  Strings printed via the @fun{gdk:content-formats-to-string} function can be 
+  Strings printed via the @fun{gdk:content-formats-to-string} function can be
   read in again successfully using this function.
 
   If @arg{str} does not describe valid content formats, @code{nil} is returned.
@@ -626,8 +629,8 @@
 ;;; GdkContentFormatsBuilder *
 ;;; gdk_content_formats_builder_new (void);
 ;;;
-;;; Create a new GdkContentFormatsBuilder object. The resulting builder would 
-;;; create an empty GdkContentFormats. Use addition functions to add types to 
+;;; Create a new GdkContentFormatsBuilder object. The resulting builder would
+;;; create an empty GdkContentFormats. Use addition functions to add types to
 ;;; it.
 ;;;
 ;;; Returns :
@@ -641,14 +644,14 @@
 ;;; gdk_content_formats_builder_free_to_formats
 ;;;                                (GdkContentFormatsBuilder *builder);
 ;;;
-;;; Creates a new GdkContentFormats from the current state of the given 
+;;; Creates a new GdkContentFormats from the current state of the given
 ;;; builder , and frees the builder instance.
 ;;;
 ;;; builder :
 ;;;     a GdkContentFormatsBuilder
 ;;;
 ;;; Returns :
-;;;     the newly created GdkContentFormats with all the formats added to 
+;;;     the newly created GdkContentFormats with all the formats added to
 ;;;     builder .
 ;;; ----------------------------------------------------------------------------
 
@@ -660,7 +663,7 @@
 ;;;                                (GdkContentFormatsBuilder *builder,
 ;;;                                 const GdkContentFormats *formats);
 ;;;
-;;; Appends all formats from formats to builder , skipping those that already 
+;;; Appends all formats from formats to builder , skipping those that already
 ;;; exist.
 ;;;
 ;;; builder :
@@ -711,7 +714,7 @@
 ;;;
 ;;; Acquires a reference on the given builder .
 ;;;
-;;; This function is intended primarily for bindings. GdkContentFormatsBuilder 
+;;; This function is intended primarily for bindings. GdkContentFormatsBuilder
 ;;; objects should not be kept around.
 ;;;
 ;;; builder :
@@ -742,17 +745,17 @@
 ;;;
 ;;; Creates a new GdkContentFormats from the given builder .
 ;;;
-;;; The given GdkContentFormatsBuilder is reset once this function returns; you 
+;;; The given GdkContentFormatsBuilder is reset once this function returns; you
 ;;; cannot call this function multiple times on the same builder instance.
 ;;;
-;;; This function is intended primarily for bindings. C code should use 
+;;; This function is intended primarily for bindings. C code should use
 ;;; gdk_content_formats_builder_free_to_formats().
 ;;;
 ;;; builder :
 ;;;     a GdkContentFormatsBuilder
 ;;;
 ;;; Returns :
-;;;     the newly created GdkContentFormats with all the formats added to 
+;;;     the newly created GdkContentFormats with all the formats added to
 ;;;     builder .
 ;;; ----------------------------------------------------------------------------
 

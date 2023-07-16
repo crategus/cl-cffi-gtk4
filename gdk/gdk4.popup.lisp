@@ -65,7 +65,7 @@
 ;;; GdkPopup
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GdkPopup" popup
+(gobject:define-g-interface "GdkPopup" popup
   (:export t
    :type-initializer "gdk_popup_get_type")
   ((autohide
@@ -149,7 +149,7 @@
 ;;; gdk_popup_present ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_present" popup-present) :boolean
+(cffi:defcfun ("gdk_popup_present" popup-present) :boolean
  #+liber-documentation
  "@version{#2023-4-10}
   @argument[popup]{a @class{gdk:popup} object to show}
@@ -191,7 +191,7 @@
 ;;; gdk_popup_get_surface_anchor ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_get_surface_anchor" popup-surface-anchor) gravity
+(cffi:defcfun ("gdk_popup_get_surface_anchor" popup-surface-anchor) gravity
  #+liber-documentation
  "@version{#2023-4-10}
   @argument[popup]{a @class{gdk:popup} object}
@@ -212,7 +212,7 @@
 ;;; gdk_popup_get_rect_anchor ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_get_rect_anchor" popup-rect-anchor) gravity
+(cffi:defcfun ("gdk_popup_get_rect_anchor" popup-rect-anchor) gravity
  "@version{#2023-4-10}
   @argument[popup]{a @class{gdk:popup} object}
   @return{The @symbol{gdk:gravity} value with the current rectangle anchor
@@ -232,7 +232,7 @@
 ;;; gdk_popup_get_position_x ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_get_position_x" popup-position-x) :int
+(cffi:defcfun ("gdk_popup_get_position_x" popup-position-x) :int
  #+liber-documentation
  "@version{#2023-4-10}
   @argument[popup]{a @class{gdk:popup} object}
@@ -247,7 +247,7 @@
 ;;; gdk_popup_get_position_y ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_get_position_y" popup-position-y) :int
+(cffi:defcfun ("gdk_popup_get_position_y" popup-position-y) :int
  #+liber-documentation
  "@version{#2023-4-10}
   @argument[popup]{a @class{gdk:popup} object}

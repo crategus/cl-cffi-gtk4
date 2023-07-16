@@ -95,7 +95,7 @@
 ;;; GdkSurface
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkSurface" surface
+(gobject:define-g-object-class "GdkSurface" surface
   (:superclass g:object
    :export t
    :interfaces nil
@@ -415,7 +415,8 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_new_toplevel ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_new_toplevel" surface-new-toplevel) (g:object surface)
+(cffi:defcfun ("gdk_surface_new_toplevel" surface-new-toplevel)
+    (g:object surface)
  #+liber-documentation
  "@version{#2023-4-8}
   @argument[display]{a @class{gdk:display} object to create the surface on}
@@ -433,7 +434,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_new_popup ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_new_popup" surface-new-popup) (g:object surface)
+(cffi:defcfun ("gdk_surface_new_popup" surface-new-popup) (g:object surface)
  #+liber-documentation
  "@version{#2023-4-8}
   @argument[parent]{a @class{gdk:surface} object with the parent surface to
@@ -456,7 +457,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_destroy ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_destroy" surface-destroy) :void
+(cffi:defcfun ("gdk_surface_destroy" surface-destroy) :void
  #+liber-documentation
  "@version{#2023-4-8}
   @argument[surface]{a @class{gdk:surface} object}
@@ -478,7 +479,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_is_destroyed ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_is_destroyed" surface-is-destroyed) :boolean
+(cffi:defcfun ("gdk_surface_is_destroyed" surface-is-destroyed) :boolean
  #+liber-documentation
  "@version{#2023-4-8}
   @argument[surface]{a @class{gdk:surface} object}
@@ -495,7 +496,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_hide ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_hide" surface-hide) :void
+(cffi:defcfun ("gdk_surface_hide" surface-hide) :void
  #+liber-documentation
  "@version{#2023-4-8}
   @argument[surface]{a @class{gdk:surface} object}
@@ -515,8 +516,8 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_translate_coordinates ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_translate_coordinates" %surface-translate-coordinates)
-    :boolean
+(cffi:defcfun ("gdk_surface_translate_coordinates"
+               %surface-translate-coordinates) :boolean
   (from (g:object surface))
   (to (g:object surface))
   (x (:pointer :int))
@@ -541,7 +542,7 @@ lambda (surface region)    :run-last
   The function returns @code{nil}, if the coordinates were not successfully
   tanslated.
   @see-class{gdk:surface}"
-  (with-foreign-objects ((x :int) (y :int))
+  (cffi:with-foreign-objects ((x :int) (y :int))
     (when (%surface-translate-coordinates from to x y)
       (values x y))))
 
@@ -551,7 +552,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_beep ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_beep" surface-beep) :void
+(cffi:defcfun ("gdk_surface_beep" surface-beep) :void
  #+liber-documentation
  "@version{#2023-4-8}
   @argument[surface]{a toplevel @class{gdk:surface} object}
@@ -575,7 +576,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_set_opaque_region ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_set_opaque_region" %surface-set-opaque-region) :void
+(cffi:defcfun ("gdk_surface_set_opaque_region" %surface-set-opaque-region) :void
   (surface (g:object surface))
   (region (:pointer (:struct cairo:region-t))))
 
@@ -608,7 +609,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_create_gl_context ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_create_gl_context" %surface-create-gl-context)
+(cffi:defcfun ("gdk_surface_create_gl_context" %surface-create-gl-context)
     (g:object gl-context)
   (surface (g:object surface))
   (err :pointer))
@@ -631,7 +632,7 @@ lambda (surface region)    :run-last
   @see-class{gdk:gl-context}
   @see-function{gdk:gl-context-make-current}
   @see-function{gdk:gl-context-realize}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%surface-create-gl-context surface err)))
 
 (export 'surface-create-gl-context)
@@ -640,8 +641,8 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_create_vulkan_context ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_create_vulkan_context" %surface-create-vulkan-context)
-    (g:object vulkan-context)
+(cffi:defcfun ("gdk_surface_create_vulkan_context"
+               %surface-create-vulkan-context) (g:object vulkan-context)
   (surface (g:object surface))
   (err :pointer))
 
@@ -657,7 +658,7 @@ lambda (surface region)    :run-last
   @end{short}
   @see-class{gdk:surface}
   @see-class{gdk:vulkan-context}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%surface-create-vulkan-context surface err)))
 
 (export 'surface-create-vulkan-context)
@@ -666,7 +667,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_create_cairo_context ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_create_cairo_context" surface-create-cairo-context)
+(cffi:defcfun ("gdk_surface_create_cairo_context" surface-create-cairo-context)
     (g:object cairo-context)
  #+liber-documentation
  "@version{#2023-4-8}
@@ -686,7 +687,8 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_create_similar_surface ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_create_similar_surface" surface-create-similar-surface)
+(cffi:defcfun ("gdk_surface_create_similar_surface"
+               surface-create-similar-surface)
     (:pointer (:struct cairo:surface-t))
  #+liber-documentation
  "@version{#2023-4-8}
@@ -730,7 +732,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_queue_render ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_queue_render" surface-queue-render) :void
+(cffi:defcfun ("gdk_surface_queue_render" surface-queue-render) :void
  #+liber-documentation
  "@version{#2023-4-8}
   @argument[surface]{a @class{gdk:surface} object}
@@ -748,7 +750,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_request_layout ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_request_layout" surface-request-layout) :void
+(cffi:defcfun ("gdk_surface_request_layout" surface-request-layout) :void
  #+liber-documentation
  "@version{#2023-4-8}
   @argument[surface]{a @class{gdk:surface} object}
@@ -766,7 +768,7 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_set_input_region ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_set_input_region" surface-set-input-region) :void
+(cffi:defcfun ("gdk_surface_set_input_region" surface-set-input-region) :void
  #+liber-documentation
  "@version{#2023-4-8}
   @argument[surface]{a @class{gdk:surface} object}
@@ -796,7 +798,8 @@ lambda (surface region)    :run-last
 ;;; gdk_surface_get_device_position ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_surface_get_device_position" %surface-device-position) :boolean
+(cffi:defcfun ("gdk_surface_get_device_position" %surface-device-position)
+    :boolean
   (surface (g:object surface))
   (device (g:object device))
   (x (:pointer :double))
@@ -821,7 +824,7 @@ lambda (surface region)    :run-last
   @see-class{gdk:surface}
   @see-class{gdk:device}
   @see-sybmol{gdk:modifier-type}"
-  (with-foreign-objects ((x :double) (y :double) (mask 'modifier-type))
+  (cffi:with-foreign-objects ((x :double) (y :double) (mask 'modifier-type))
     (when (%surface-device-position surface device x y mask))))
 
 (export 'surface-device-position)
@@ -839,7 +842,7 @@ lambda (surface region)    :run-last
                         :void)
   cursor)
 
-(defcfun ("gdk_surface_get_device_cursor" surface-device-cursor)
+(cffi:defcfun ("gdk_surface_get_device_cursor" surface-device-cursor)
     (g:object cursor)
  #+liber-documentation
  "@version{#2023-4-8}

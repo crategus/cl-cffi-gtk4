@@ -58,7 +58,7 @@
 ;;; GdkRGBA
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-cstruct rgba "GdkRGBA"
+(glib:define-g-boxed-cstruct rgba "GdkRGBA"
   (:export t
    :type-initializer "gdk_rgba_get_type")
   (red :float :initform 0.0)
@@ -76,7 +76,7 @@
     color, in a way that is compatible with Cairo's notion of color.
   @end{short}
   @begin{pre}
-(define-g-boxed-cstruct rgba \"GdkRGBA\"
+(glib:define-g-boxed-cstruct rgba \"GdkRGBA\"
   (:export t
    :type-initializer \"gdk_rgba_get_type\")
   (red :float :initform 0.0)
@@ -235,7 +235,7 @@
 ;;; gdk_rgba_is_clear
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rgba_is_clear" rgba-is-clear) :boolean
+(cffi:defcfun ("gdk_rgba_is_clear" rgba-is-clear) :boolean
  #+liber-documentation
  "@version{2023-1-22}
   @argument[rgba]{a @class{gdk:rgba} color}
@@ -253,7 +253,7 @@
 ;;; gdk_rgba_is_opaque
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rgba_is_opaque" rgba-is-opaque) :boolean
+(cffi:defcfun ("gdk_rgba_is_opaque" rgba-is-opaque) :boolean
  #+liber-documentation
  "@version{2023-1-22}
   @argument[rgba]{a @class{gdk:rgba} color}
@@ -272,7 +272,7 @@
 ;;; gdk_rgba_parse
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rgba_parse" %rgba-parse) :boolean
+(cffi:defcfun ("gdk_rgba_parse" %rgba-parse) :boolean
   (rgba (g:boxed rgba :return))
   (str :string))
 
@@ -326,7 +326,7 @@
 ;;; gdk_rgba_hash
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rgba_hash" rgba-hash) :uint
+(cffi:defcfun ("gdk_rgba_hash" rgba-hash) :uint
  #+liber-documentation
  "@version{2023-1-22}
   @argument[color]{a @struct{gdk:rgba} color}
@@ -344,7 +344,7 @@
 ;;; gdk_rgba_equal
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rgba_equal" rgba-equal) :boolean
+(cffi:defcfun ("gdk_rgba_equal" rgba-equal) :boolean
  #+liber-documentation
  "@version{2023-1-22}
   @argument[color1]{a @struct{gdk:rgba} color}
@@ -361,7 +361,7 @@
 ;;; gdk_rgba_to_string
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rgba_to_string" rgba-to-string) :string
+(cffi:defcfun ("gdk_rgba_to_string" rgba-to-string) :string
  #+liber-documentation
  "@version{2023-1-22}
   @argument[color]{a @struct{gdk:rgba} color}

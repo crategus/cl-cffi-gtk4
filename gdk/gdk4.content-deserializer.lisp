@@ -38,20 +38,20 @@
 ;;;
 ;;;     GdkContentDeserializeFunc
 ;;;
-;;;     gdk_content_deserializer_get_mime_type 
-;;;     gdk_content_deserializer_get_gtype 
-;;;     gdk_content_deserializer_get_value 
+;;;     gdk_content_deserializer_get_mime_type
+;;;     gdk_content_deserializer_get_gtype
+;;;     gdk_content_deserializer_get_value
 ;;;     gdk_content_deserializer_get_input_stream
-;;;     gdk_content_deserializer_get_priority 
-;;;     gdk_content_deserializer_get_cancellable 
-;;;     gdk_content_deserializer_get_user_data 
-;;;     gdk_content_deserializer_set_task_data 
-;;;     gdk_content_deserializer_get_task_data 
-;;;     gdk_content_deserializer_return_success 
-;;;     gdk_content_deserializer_return_error 
-;;;     gdk_content_register_deserializer 
-;;;     gdk_content_deserialize_async 
-;;;     gdk_content_deserialize_finish 
+;;;     gdk_content_deserializer_get_priority
+;;;     gdk_content_deserializer_get_cancellable
+;;;     gdk_content_deserializer_get_user_data
+;;;     gdk_content_deserializer_set_task_data
+;;;     gdk_content_deserializer_get_task_data
+;;;     gdk_content_deserializer_return_success
+;;;     gdk_content_deserializer_return_error
+;;;     gdk_content_register_deserializer
+;;;     gdk_content_deserialize_async
+;;;     gdk_content_deserialize_finish
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -70,7 +70,7 @@
 ;;;
 ;;; Should not be accessed directly.
 ;;;
-;;; A GdkContentDeserializer is used to deserialize content received via 
+;;; A GdkContentDeserializer is used to deserialize content received via
 ;;; inter-application data transfers.
 ;;;
 ;;; See Also
@@ -79,14 +79,14 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; GdkContentDeserializeFunc 
+;;; GdkContentDeserializeFunc
 ;;;
 ;;; void
 ;;; (*GdkContentDeserializeFunc) (GdkContentDeserializer *deserializer);
 ;;;
-;;; The type of a function that can be registered with 
-;;; gdk_content_register_deserializer(). When the function gets called to 
-;;; operate on content, it can call functions on the deserializer object to 
+;;; The type of a function that can be registered with
+;;; gdk_content_register_deserializer(). When the function gets called to
+;;; operate on content, it can call functions on the deserializer object to
 ;;; obtain the mime type, input stream, user data, etc. for its operation.
 ;;;
 ;;; deserializer :
@@ -187,7 +187,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_deserializer_get_user_data () 
+;;; gdk_content_deserializer_get_user_data ()
 ;;;
 ;;; gpointer
 ;;; gdk_content_deserializer_get_user_data
@@ -230,7 +230,7 @@
 ;;; gdk_content_deserializer_get_task_data
 ;;;                                (GdkContentDeserializer *deserializer);
 ;;;
-;;; Gets the data that was associated with deserializer via 
+;;; Gets the data that was associated with deserializer via
 ;;; gdk_content_deserializer_set_task_data().
 ;;;
 ;;; deserializer :
@@ -260,7 +260,7 @@
 ;;; gdk_content_deserializer_return_error (GdkContentDeserializer *deserializer,
 ;;;                                        GError *error);
 ;;;
-;;; Indicate that the deserialization has ended with an error. This function 
+;;; Indicate that the deserialization has ended with an error. This function
 ;;; consumes error .
 ;;;
 ;;; deserializer :
@@ -280,7 +280,7 @@
 ;;;                                    gpointer data,
 ;;;                                    GDestroyNotify notify);
 ;;;
-;;; Registers a function to create objects of a given type from a serialized 
+;;; Registers a function to create objects of a given type from a serialized
 ;;; representation with the given mime type.
 ;;;
 ;;; mime_type :
@@ -311,8 +311,8 @@
 ;;;                                GAsyncReadyCallback callback,
 ;;;                                gpointer user_data);
 ;;;
-;;; Read content from the given input stream and deserialize it, asynchronously. 
-;;; When the operation is finished, callback will be called. You can then call 
+;;; Read content from the given input stream and deserialize it, asynchronously.
+;;; When the operation is finished, callback will be called. You can then call
 ;;; gdk_content_deserialize_finish() to get the result of the operation.
 ;;;
 ;;; stream :
@@ -357,7 +357,7 @@
 ;;;     return location for an error
 ;;;
 ;;; Returns :
-;;;     TRUE if the operation was successful. In this case, value is set. FALSE 
+;;;     TRUE if the operation was successful. In this case, value is set. FALSE
 ;;;     if an error occurred. In this case, error is set
 ;;; ----------------------------------------------------------------------------
 

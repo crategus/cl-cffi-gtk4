@@ -70,7 +70,7 @@
 
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GdkAnchorHints" anchor-hints
+(gobject:define-g-flags "GdkAnchorHints" anchor-hints
   (:export t
    :type-initializer "gdk_anchor_hints_get_type")
   (:flip-x #.(ash 1 0))
@@ -105,7 +105,7 @@
   In general, when multiple flags are set, flipping should take precedence over
   sliding, which should take precedence over resizing.
   @begin{pre}
-(define-g-flags \"GdkAnchorHints\" anchor-hints
+(gobejct:define-g-flags \"GdkAnchorHints\" anchor-hints
   (:export t
    :type-initializer \"gdk_anchor_hints_get_type\")
   (:flip-x #.(ash 1 0))
@@ -135,7 +135,7 @@
 ;;; GdkPopupLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque popup-layout "GdkPopupLayout"
+(glib:define-g-boxed-opaque popup-layout "GdkPopupLayout"
   :type-initializer "gdk_popup_layout_get_type"
   :alloc (%popup-layout-new))
 
@@ -286,7 +286,7 @@
 ;;;     a copy of layout .
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_layout_copy" popup-layout-copy) (g:boxed popup-layout)
+(cffi:defcfun ("gdk_popup_layout_copy" popup-layout-copy) (g:boxed popup-layout)
   (layout (g:boxed popup-layout)))
 
 (export 'popup-layout-copy)
@@ -311,7 +311,7 @@
 ;;;     FALSE.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_layout_equal" popup-layout-equal) :boolean
+(cffi:defcfun ("gdk_popup_layout_equal" popup-layout-equal) :boolean
   (layout (g:boxed popup-layout))
   (other (g:boxed popup-layout)))
 
@@ -355,7 +355,7 @@
 ;;;     The anchor rectangle.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_layout_get_anchor_rect" popup-layout-anchor-rect)
+(cffi:defcfun ("gdk_popup_layout_get_anchor_rect" popup-layout-anchor-rect)
     (g:boxed rectangle)
   (layout (g:boxed popup-layout)))
 
@@ -399,7 +399,8 @@
 ;;;     the anchor on the anchor rectangle.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_layout_get_rect_anchor" popup-layout-rect-anchor) gravity
+(cffi:defcfun ("gdk_popup_layout_get_rect_anchor" popup-layout-rect-anchor)
+    gravity
   (layout (g:boxed popup-layout)))
 
 (export 'popup-layout-rect-anchor)
@@ -442,8 +443,8 @@
 ;;;     the anchor on the popup surface.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_layout_get_surface_anchor" popup-layout-surface-anchor)
-    gravity
+(cffi:defcfun ("gdk_popup_layout_get_surface_anchor"
+               popup-layout-surface-anchor) gravity
   (layout (g:boxed popup-layout)))
 
 (export 'popup-layout-surface-anchor)
@@ -491,7 +492,7 @@
 ;;;     the GdkAnchorHints.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_popup_layout_get_anchor_hints" popup-layout-anchor-hints)
+(cffi:defcfun ("gdk_popup_layout_get_anchor_hints" popup-layout-anchor-hints)
     anchor-hints
   (layout (g:boxed popup-layout)))
 

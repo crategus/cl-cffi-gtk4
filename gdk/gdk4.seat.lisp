@@ -71,7 +71,7 @@
 ;;; enum GdkSeatCapabilities
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GdkSeatCapabilities" seat-capabilities
+(gobject:define-g-flags "GdkSeatCapabilities" seat-capabilities
   (:export t
    :type-initializer "gdk_seat_capabilities_get_type")
   (:none 0)
@@ -92,7 +92,7 @@
     Flags describing the seat capabilities.
   @end{short}
   @begin{pre}
-(define-g-flags \"GdkSeatCapabilities\" seat-capabilities
+(gobject:define-g-flags \"GdkSeatCapabilities\" seat-capabilities
   (:export t
    :type-initializer \"gdk_seat_capabilities_get_type\")
   (:none 0)
@@ -120,7 +120,7 @@
 ;;; GdkSeat
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkSeat" seat
+(gobject:define-g-object-class "GdkSeat" seat
   (:superclass g:object
    :export t
    :interfaces nil
@@ -212,7 +212,7 @@ lambda (seat tool)    :run-last
 ;;; gdk_seat_get_capabilities ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_seat_get_capabilities" seat-capabilities) seat-capabilities
+(cffi:defcfun ("gdk_seat_get_capabilities" seat-capabilities) seat-capabilities
  #+liber-documentation
  "@version{2023-4-15}
   @argument[seat]{a @class{gdk:seat} object}
@@ -230,7 +230,7 @@ lambda (seat tool)    :run-last
 ;;; gdk_seat_get_pointer ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_seat_get_pointer" seat-pointer) (g:object device)
+(cffi:defcfun ("gdk_seat_get_pointer" seat-pointer) (g:object device)
  #+liber-documentation
  "@version{2023-4-15}
   @argument[seat]{a @class{gdk:seat} object}
@@ -248,7 +248,7 @@ lambda (seat tool)    :run-last
 ;;; gdk_seat_get_keyboard ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_seat_get_keyboard" seat-keyboard) (g:object device)
+(cffi:defcfun ("gdk_seat_get_keyboard" seat-keyboard) (g:object device)
  #+liber-documentation
  "@version{2023-4-15}
   @argument[seat]{a @class{gdk:seat} object}
@@ -282,7 +282,7 @@ lambda (seat tool)    :run-last
 ;;;     elements are owned by GTK and must not be freed.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_seat_get_devices" seat-devices) (g:list-t (g:object device))
+(cffi:defcfun ("gdk_seat_get_devices" seat-devices) (g:list-t (g:object device))
   (seat (g:object seat))
   (capabilities seat-capabilities))
 
@@ -303,7 +303,8 @@ lambda (seat tool)    :run-last
 ;;;     A list of tools. Free with g_list_free().
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_seat_get_tools" seat-tools) (g:list-t (g:object device-tool))
+(cffi:defcfun ("gdk_seat_get_tools" seat-tools)
+    (g:list-t (g:object device-tool))
   (seat (g:object seat)))
 
 (export 'seat-tools)

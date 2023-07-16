@@ -100,7 +100,7 @@
 ;;; default cursor will be the ultimate fallback.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkCursor" cursor
+(gobject:define-g-object-class "GdkCursor" cursor
   (:superclass g:object
    :export t
    :interfaces nil
@@ -213,7 +213,7 @@
 ;;;     a new GdkCursor.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_cursor_new_from_texture" cursor-new-from-texture)
+(cffi:defcfun ("gdk_cursor_new_from_texture" cursor-new-from-texture)
     (g:object cursor)
   (texture (g:object texture))
   (hotspot-x :int)
@@ -226,7 +226,8 @@
 ;;; gdk_cursor_new_from_name ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_cursor_new_from_name" cursor-new-from-name) (g:object cursor)
+(cffi:defcfun ("gdk_cursor_new_from_name" cursor-new-from-name)
+    (g:object cursor)
  #+liber-documentation
  "@version{#2021-12-11}
   @argument[name]{a string with the name of the cursor}

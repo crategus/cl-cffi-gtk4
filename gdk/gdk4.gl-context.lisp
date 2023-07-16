@@ -116,7 +116,7 @@
 ;;;     The OpenGL ES API.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkGLAPI" gl-api
+(gobject:define-g-enum "GdkGLAPI" gl-api
   (:export t
    :type-initializer "gdk_gl_api_get_type")
   :gl
@@ -182,7 +182,7 @@
 ;;; currently set by calling gdk_gl_context_clear_current().
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkGLContext" gl-context
+(gobject:define-g-object-class "GdkGLContext" gl-context
   (:superclass draw-context
    :export t
    :interfaces nil

@@ -111,7 +111,7 @@
 ;;; enum GdkInputSource
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkInputSource" input-source
+(gobject:define-g-enum "GdkInputSource" input-source
   (:export t
    :type-initializer "gdk_input_source_get_type")
   :mouse
@@ -131,7 +131,7 @@
     An enumeration describing the type of an input device in general terms.
   @end{short}
   @begin{pre}
-(define-g-enum \"GdkInputSource\" input-source
+(gobject:define-g-enum \"GdkInputSource\" input-source
   (:export t
    :type-initializer \"gdk_input_source_get_type\")
   :mouse
@@ -161,7 +161,7 @@
 ;;; enum GdkAxisUse
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkAxisUse" axis-use
+(gobject:define-g-enum "GdkAxisUse" axis-use
   (:export t
    :type-initializer "gdk_axis_use_get_type")
   :ignore
@@ -191,7 +191,7 @@
   location via the x/y members of events regardless. Whether X and Y are present
   as axes depends on the GDK backend.
   @begin{pre}
-(define-g-enum \"GdkAxisUse\" gdk-axis-use
+(gobject:define-g-enum \"GdkAxisUse\" gdk-axis-use
   (:export t
    :type-initializer \"gdk_axis_use_get_type\")
   :ignore
@@ -229,7 +229,7 @@
 ;;; enum GdkAxisFlags
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GdkAxisFlags" axis-flags
+(gobject:define-g-flags "GdkAxisFlags" axis-flags
   (:export t
    :type-initializer "gdk_axis_flags_get_type")
   (:x        #.(ash 1 1))
@@ -253,7 +253,7 @@
     Flags describing the current capabilities of a device/tool.
   @end{short}
   @begin{pre}
-(define-g-flags \"GdkAxisFlags\" axis-flags
+(gobject:define-g-flags \"GdkAxisFlags\" axis-flags
   (:export t
    :type-initializer \"gdk_axis_flags_get_type\")
   (:x        #.(ash 1 1))
@@ -287,7 +287,7 @@
 ;;; enum GdkDeviceToolType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkDeviceToolType" device-tool-type
+(gobject:define-g-enum "GdkDeviceToolType" device-tool-type
   (:export t
    :type-initializer "gdk_device_tool_type_get_type")
   :unknown
@@ -309,7 +309,7 @@
     airbrush, pencil, etc.
   @end{short}
   @begin{pre}
-(define-g-enum \"GdkDeviceToolType\" device-tool-type
+(gobject:define-g-enum \"GdkDeviceToolType\" device-tool-type
   (:export t
    :type-initializer \"gdk_device_tool_type_get_type\")
   :unknown
@@ -337,7 +337,7 @@
 ;;; GdkDeviceTool
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkDeviceTool" device-tool
+(gobject:define-g-object-class "GdkDeviceTool" device-tool
   (:superclass g:object
    :export t
    :interfaces nil
@@ -487,7 +487,7 @@
 ;;; GdkDevice
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkDevice" device
+(gobject:define-g-object-class "GdkDevice" device
   (:superclass g:object
    :export t
    :interfaces nil
@@ -1058,7 +1058,7 @@ get_device_settings (GdkDevice *device)
 ;;;     the GdkSurface under the device position, or NULL.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_device_get_surface_at_position" device-surface-at-position)
+(cffi:defcfun ("gdk_device_get_surface_at_position" device-surface-at-position)
     (g:object surface)
   (device (g:object device))
   (xwin :double)
@@ -1089,7 +1089,7 @@ get_device_settings (GdkDevice *device)
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-2
-(defcfun ("gdk_device_get_timestamp" device-timestamp) :uint32
+(cffi:defcfun ("gdk_device_get_timestamp" device-timestamp) :uint32
   (device (g:object device)))
 
 #+gtk-4-2

@@ -92,7 +92,7 @@
 ;;; GdkDisplay
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkDisplay" display
+(gobject:define-g-object-class "GdkDisplay" display
   (:superclass g:object
    :export t
    :interfaces nil
@@ -290,7 +290,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_open
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_open" display-open) (g:object display)
+(cffi:defcfun ("gdk_display_open" display-open) (g:object display)
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[name]{a string with the name of the display to open}
@@ -311,7 +311,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_default -> display-default
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_get_default" display-default) (g:object display)
+(cffi:defcfun ("gdk_display_get_default" display-default) (g:object display)
  #+liber-documentation
  "@version{#2022-1-8}
   @begin{return}
@@ -334,7 +334,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_name -> display-name
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_get_name" display-name) :string
+(cffi:defcfun ("gdk_display_get_name" display-name) :string
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -349,7 +349,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_device_is_grabbed
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_device_is_grabbed" display-device-is-grabbed)
+(cffi:defcfun ("gdk_display_device_is_grabbed" display-device-is-grabbed)
     :boolean
  #+liber-documentation
  "@version{#2022-1-8}
@@ -372,7 +372,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_beep
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_beep" display-beep) :void
+(cffi:defcfun ("gdk_display_beep" display-beep) :void
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -386,7 +386,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_sync
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_sync" display-sync) :void
+(cffi:defcfun ("gdk_display_sync" display-sync) :void
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -411,7 +411,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_flush
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_flush" display-flush) :void
+(cffi:defcfun ("gdk_display_flush" display-flush) :void
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -435,7 +435,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_close
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_close" display-close) :void
+(cffi:defcfun ("gdk_display_close" display-close) :void
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -452,7 +452,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_is_closed
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_is_closed" display-is-closed) :boolean
+(cffi:defcfun ("gdk_display_is_closed" display-is-closed) :boolean
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -467,7 +467,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_is_rgba
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_is_rgba" display-is-rgba) :boolean
+(cffi:defcfun ("gdk_display_is_rgba" display-is-rgba) :boolean
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -492,7 +492,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_is_composited
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_is_composited" display-is-composited) :boolean
+(cffi:defcfun ("gdk_display_is_composited" display-is-composited) :boolean
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -515,8 +515,8 @@ lambda (display setting)    :run-last
 ;;; gdk_display_supports_input_shapes
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_supports_input_shapes" display-supports-input-shapes)
-    :boolean
+(cffi:defcfun ("gdk_display_supports_input_shapes"
+               display-supports-input-shapes) :boolean
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -537,8 +537,8 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_app_launch_context -> display-app-launch-context
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_get_app_launch_context"
-           display-app-launch-context) (g:object app-launch-context)
+(cffi:defcfun ("gdk_display_get_app_launch_context"
+               display-app-launch-context) (g:object app-launch-context)
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -559,8 +559,8 @@ lambda (display setting)    :run-last
 ;;; gdk_display_notify_startup_complete                    Since 4.10 deprecated
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_notify_startup_complete"
-           display-notify-startup-complete) :void
+(cffi:defcfun ("gdk_display_notify_startup_complete"
+               display-notify-startup-complete) :void
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -586,8 +586,8 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_default_seat -> display-default-seat
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_get_default_seat"
-           display-default-seat) (g:object seat)
+(cffi:defcfun ("gdk_display_get_default_seat"
+               display-default-seat) (g:object seat)
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -607,7 +607,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_list_seats ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_list_seats" display-list-seats)
+(cffi:defcfun ("gdk_display_list_seats" display-list-seats)
     (g:list-t (g:object seat))
  #+liber-documentation
  "@version{#2022-1-8}
@@ -628,7 +628,8 @@ lambda (display setting)    :run-last
 
 ;; TODO: Consider to export the CREATE-GOBJECT-FROM-POINTER function
 
-(defcfun ("gdk_display_get_monitors" %display-monitors) (g:object g:list-model)
+(cffi:defcfun ("gdk_display_get_monitors" %display-monitors)
+    (g:object g:list-model)
   (display (g:object display)))
 
 (defun display-monitors (display)
@@ -661,7 +662,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_monitor_at_surface -> display-monitor-at-surface
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_get_monitor_at_surface" display-monitor-at-surface)
+(cffi:defcfun ("gdk_display_get_monitor_at_surface" display-monitor-at-surface)
     (g:object monitor)
  #+liber-documentation
  "@version{#2022-1-8}
@@ -685,7 +686,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_clipboard -> display-clipboard
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_get_clipboard" display-clipboard)
+(cffi:defcfun ("gdk_display_get_clipboard" display-clipboard)
     (g:object clipboard)
  #+liber-documentation
  "@version{#2022-1-8}
@@ -702,7 +703,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_primary_clipboard -> display-primary-clipboard
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_get_primary_clipboard" display-primary-clipboard)
+(cffi:defcfun ("gdk_display_get_primary_clipboard" display-primary-clipboard)
     (g:object clipboard)
  #+liber-documentation
  "@version{#2022-1-8}
@@ -725,7 +726,7 @@ lambda (display setting)    :run-last
 
 ;; TODO: Do an implementation which returns a gvalue
 
-(defcfun ("gdk_display_get_setting" display-setting) :boolean
+(cffi:defcfun ("gdk_display_get_setting" display-setting) :boolean
  #+liber-documentation
  "@version{#2022-1-21}
   @argument[display]{a @class{gdk:display} object}
@@ -750,8 +751,8 @@ lambda (display setting)    :run-last
 ;;; -> display-startup-notification-id
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_get_startup_notification_id"
-           display-startup-notification-id) :string
+(cffi:defcfun ("gdk_display_get_startup_notification_id"
+               display-startup-notification-id) :string
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -769,7 +770,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_put_event                                  Since 4.10 deprecated
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_put_event" display-put-event) :void
+(cffi:defcfun ("gdk_display_put_event" display-put-event) :void
  #+liber-documentation
  "@version{#2022-1-8}
   @argument[display]{a @class{gdk:display} object}
@@ -828,27 +829,27 @@ lambda (display setting)    :run-last
 ;;;     TRUE if keys were found and returned.
 ;;; ----------------------------------------------------------------------------
 
-(defcstruct %keymap-key
+(cffi:defcstruct %keymap-key
   (keycode :uint)
   (group :int)
   (level :int))
 
-(defcfun ("gdk_display_map_keyval" %display-map-keyval) :boolean
+(cffi:defcfun ("gdk_display_map_keyval" %display-map-keyval) :boolean
   (display (g:object display))
   (keyval :uint)
   (keys :pointer)
   (n-keys (:pointer :int)))
 
 (defun display-map-keyval (display keyval)
-  (with-foreign-objects ((keys-ptr :pointer) (n-keys-ptr :int))
+  (cffi:with-foreign-objects ((keys-ptr :pointer) (n-keys-ptr :int))
     (when (%display-map-keyval display keyval keys-ptr n-keys-ptr)
       (let ((keys (cffi:mem-ref keys-ptr :pointer))
             (n-keys (cffi:mem-ref n-keys-ptr :int)))
         (iter (for i from 0 below n-keys)
               (for key = (cffi:mem-aptr keys '(:struct %keymap-key) i))
-              (collect (with-foreign-slots ((keycode group level)
-                                            key
-                                            (:struct %keymap-key))
+              (collect (cffi:with-foreign-slots ((keycode group level)
+                                                 key
+                                                 (:struct %keymap-key))
                          (list keycode group level)))
               (finally (g:free keys)))))))
 
@@ -896,7 +897,7 @@ lambda (display setting)    :run-last
 ;;;     TRUE if there were any entries.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_map_keycode" %display-map-keycode) :boolean
+(cffi:defcfun ("gdk_display_map_keycode" %display-map-keycode) :boolean
   (display (g:object display))
   (keycode :uint)
   (keys :pointer)
@@ -904,10 +905,9 @@ lambda (display setting)    :run-last
   (n-entries (:pointer :int)))
 
 (defun display-map-keycode (display keycode)
-
-  (with-foreign-objects ((keys-ptr :pointer)
-                         (keyvals-ptr :pointer)
-                         (n-entries-ptr :int))
+  (cffi:with-foreign-objects ((keys-ptr :pointer)
+                              (keyvals-ptr :pointer)
+                              (n-entries-ptr :int))
     (when (%display-map-keycode display
                                 keycode
                                 keys-ptr
@@ -919,9 +919,9 @@ lambda (display setting)    :run-last
         (iter (for i from 0 below n-entries)
               (for keyval = (cffi:mem-aref keyvals :uint i))
               (for key = (cffi:mem-aptr keys '(:struct %keymap-key) i))
-              (collect (with-foreign-slots ((keycode group level)
-                                            key
-                                            (:struct %keymap-key))
+              (collect (cffi:with-foreign-slots ((keycode group level)
+                                                 key
+                                                 (:struct %keymap-key))
                          (list keyval keycode group level)))
               (finally (g:free keys)
                        (g:free keyvals)))))))
@@ -991,7 +991,7 @@ lambda (display setting)    :run-last
 ;;;     TRUE if there was a keyval bound to keycode/state/group.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_display_translate_key" %display-translate-key) :boolean
+(cffi:defcfun ("gdk_display_translate_key" %display-translate-key) :boolean
   (display (g:object display))
   (keycode :uint)
   (state modifier-type)
@@ -1002,10 +1002,10 @@ lambda (display setting)    :run-last
   (consumed (:pointer modifier-type)))
 
 (defun display-translate-key (display keycode state group)
-  (with-foreign-objects ((keyval :uint)
-                         (effective :int)
-                         (level :int)
-                         (consumed 'modifier-type))
+  (cffi:with-foreign-objects ((keyval :uint)
+                              (effective :int)
+                              (level :int)
+                              (consumed 'modifier-type))
     (when (%display-translate-key display
                                   keycode
                                   state
@@ -1049,13 +1049,13 @@ lambda (display setting)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
-(defcfun ("gdk_display_prepare_gl" %display-prepare-gl) :boolean
+(cffi:defcfun ("gdk_display_prepare_gl" %display-prepare-gl) :boolean
   (display (g:object display))
   (err :pointer))
 
 #+gtk-4-4
 (defun display-prepare-gl (display)
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%display-prepare-gl display err)))
 
 #+gtk-4-4
@@ -1066,7 +1066,7 @@ lambda (display setting)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
-(defcfun ("gdk_display_create_gl_context" %display-create-gl-context)
+(cffi:defcfun ("gdk_display_create_gl_context" %display-create-gl-context)
     (g:object gl-context)
   (display (g:object display))
   (err :pointer))
@@ -1093,7 +1093,7 @@ lambda (display setting)    :run-last
   @see-class{gdk:gl-context}
   @see-function{gdk:gl-context-make-current}
   @see-function{gdk:gl-context-realize}"
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%display-create-gl-context display err)))
 
 #+gtk-4-6

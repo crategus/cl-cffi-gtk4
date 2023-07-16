@@ -74,7 +74,7 @@
 ;;; A GdkDrawContext is always associated with a single toplevel surface.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkDrawContext" draw-context
+(gobject:define-g-object-class "GdkDrawContext" draw-context
   (:superclass g:object
    :export t
    :interfaces nil
@@ -189,7 +189,7 @@
 ;;;     minimum region that should be drawn
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_draw_context_begin_frame" draw-context-begin-frame) :void
+(cffi:defcfun ("gdk_draw_context_begin_frame" draw-context-begin-frame) :void
   (context (g:object draw-context))
   (region (:pointer (:struct cairo:region-t))))
 
@@ -213,7 +213,7 @@
 ;;;     a GdkDrawContext
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_draw_context_end_frame" draw-context-end-frame) :void
+(cffi:defcfun ("gdk_draw_context_end_frame" draw-context-end-frame) :void
   (context (g:object draw-context)))
 
 (export 'draw-context-end-frame)
@@ -237,7 +237,7 @@
 ;;;     gdk_draw_context_end_frame() calls.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_draw_context_is_in_frame" draw-context-is-in-frame) :boolean
+(cffi:defcfun ("gdk_draw_context_is_in_frame" draw-context-is-in-frame) :boolean
   (context (g:object draw-context)))
 
 (export 'draw-context-is-in-frame)
@@ -264,7 +264,7 @@
 ;;;     a Cairo region or NULL if not drawing a frame.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_draw_context_get_frame_region" draw-context-frame-region)
+(cffi:defcfun ("gdk_draw_context_get_frame_region" draw-context-frame-region)
     (:pointer (:struct cairo:region-t))
   (context (g:object draw-context)))
 

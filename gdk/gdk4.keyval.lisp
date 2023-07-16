@@ -152,7 +152,7 @@
 ;;; gdk_keyval_name ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_keyval_name" keyval-name) :string
+(cffi:defcfun ("gdk_keyval_name" keyval-name) :string
  #+liber-documentation
  "@version{2023-4-14}
   @argument[keyval]{an unsigned integer with the key value}
@@ -172,7 +172,7 @@
 ;;; gdk_keyval_from_name ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_keyval_from_name" keyval-from-name) :uint
+(cffi:defcfun ("gdk_keyval_from_name" keyval-from-name) :uint
  #+liber-documentation
  "@version{2023-4-14}
   @argument[name]{a string with the key name}
@@ -192,7 +192,7 @@
 ;;; gdk_keyval_convert_case ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_keyval_convert_case" %keyval-convert-case) :void
+(cffi:defcfun ("gdk_keyval_convert_case" %keyval-convert-case) :void
   (keyval :uint)
   (lower (:pointer :uint))
   (upper (:pointer :uint)))
@@ -211,7 +211,7 @@
   @end{short}
   @see-function{gdk:keyval-to-upper}
   @see-function{gdk:keyval-to-lower}"
-  (with-foreign-objects ((lower :uint) (upper :uint))
+  (cffi:with-foreign-objects ((lower :uint) (upper :uint))
     (%keyval-convert-case keyval lower upper)
     (values (cffi:mem-ref lower :uint)
             (cffi:mem-ref upper :uint))))
@@ -222,7 +222,7 @@
 ;;; gdk_keyval_to_upper ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_keyval_to_upper" keyval-to-upper) :uint
+(cffi:defcfun ("gdk_keyval_to_upper" keyval-to-upper) :uint
  #+liber-documentation
  "@version{2023-4-14}
   @argument[keyval]{an unsigned integer with the key value}
@@ -241,7 +241,7 @@
 ;;; gdk_keyval_to_lower ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_keyval_to_lower" keyval-to-lower) :uint
+(cffi:defcfun ("gdk_keyval_to_lower" keyval-to-lower) :uint
  #+liber-documentation
  "@version{2023-4-14}
   @argument[keyval]{an unsigned integer with the key value}
@@ -260,7 +260,7 @@
 ;;; gdk_keyval_is_upper ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_keyval_is_upper" keyval-is-upper) :boolean
+(cffi:defcfun ("gdk_keyval_is_upper" keyval-is-upper) :boolean
  #+liber-documentation
  "@version{2023-4-14}
   @argument[keyval]{an unsigned integer with the key value}
@@ -278,7 +278,7 @@
 ;;; gdk_keyval_is_lower ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_keyval_is_lower" keyval-is-lower) :boolean
+(cffi:defcfun ("gdk_keyval_is_lower" keyval-is-lower) :boolean
  #+liber-documentation
  "@version{2023-4-14}
   @argument[keyval]{an unsigned integer with the key value}
@@ -296,7 +296,7 @@
 ;;; gdk_keyval_to_unicode ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_keyval_to_unicode" keyval-to-unicode) :uint32
+(cffi:defcfun ("gdk_keyval_to_unicode" keyval-to-unicode) :uint32
  #+liber-documentation
  "@version{2023-4-14}
   @argument[keyval]{an unsigned integer with the key value}
@@ -318,7 +318,7 @@
 ;;; gdk_unicode_to_keyval ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_unicode_to_keyval" unicode-to-keyval) :uint
+(cffi:defcfun ("gdk_unicode_to_keyval" unicode-to-keyval) :uint
  #+liber-documentation
  "@version{2023-4-14}
   @argument[unicode]{an unsigned integer with a ISO10646 encoded character}

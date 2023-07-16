@@ -46,7 +46,7 @@
 ;;; GdkCairoContext
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkCairoContext" cairo-context
+(gobject:define-g-object-class "GdkCairoContext" cairo-context
   (:superclass draw-context
    :export t
    :interfaces nil
@@ -71,7 +71,7 @@
 ;;; gdk_cairo_context_cairo_create ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_cairo_context_cairo_create" cairo-context-cairo-create)
+(cffi:defcfun ("gdk_cairo_context_cairo_create" cairo-context-cairo-create)
     (:pointer (:struct cairo:context-t))
  #+liber-documentation
  "@version{2023-4-7}

@@ -62,7 +62,7 @@
 ;;; GdkToplevelLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-opaque toplevel-layout "GdkToplevelLayout"
+(glib:define-g-boxed-opaque toplevel-layout "GdkToplevelLayout"
   :type-initializer "gdk_toplevel_layout_get_type"
   :alloc (%toplevel-layout-new))
 
@@ -84,7 +84,7 @@
 ;;; gdk_toplevel_layout_new ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_layout_new" %toplevel-layout-new) :pointer)
+(cffi:defcfun ("gdk_toplevel_layout_new" %toplevel-layout-new) :pointer)
 
 (defun toplevel-layout-new ()
  #+liber-documentation
@@ -136,7 +136,7 @@
 ;;; gdk_toplevel_layout_copy ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_layout_copy" toplevel-layout-copy)
+(cffi:defcfun ("gdk_toplevel_layout_copy" toplevel-layout-copy)
      (g:boxed toplevel-layout :return)
  #+liber-documentation
  "@version{#2023-4-10}
@@ -155,7 +155,7 @@
 ;;; gdk_toplevel_layout_equal ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_layout_equal" toplevel-layout-equal) :boolean
+(cffi:defcfun ("gdk_toplevel_layout_equal" toplevel-layout-equal) :boolean
  #+liber-documentation
  "@version{#2023-4-10}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
@@ -183,7 +183,7 @@
                         :void)
   maximized)
 
-(defcfun ("gdk_toplevel_layout_get_maximized" %toplevel-layout-maximized)
+(cffi:defcfun ("gdk_toplevel_layout_get_maximized" %toplevel-layout-maximized)
     :boolean
   (layout (g:boxed toplevel-layout))
   (maximized (:pointer :boolean)))
@@ -220,7 +220,7 @@
                         :void)
   fullscreen)
 
-(defcfun ("gdk_toplevel_layout_get_fullscreen" %toplevel-layout-fullscreen)
+(cffi:defcfun ("gdk_toplevel_layout_get_fullscreen" %toplevel-layout-fullscreen)
     :boolean
   (layout (g:boxed toplevel-layout))
   (fullscreen :boolean))
@@ -249,8 +249,8 @@
 ;;; gdk_toplevel_layout_get_fullscreen_monitor ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_layout_get_fullscreen_monitor"
-           toplevel-layout-fullscreen-monitor) (g:object monitor)
+(cffi:defcfun ("gdk_toplevel_layout_get_fullscreen_monitor"
+               toplevel-layout-fullscreen-monitor) (g:object monitor)
  #+liber-documentation
  "@version{#2023-4-10}
   @argument[layout]{a @class{gdk:toplevel-layout} object}
@@ -276,7 +276,7 @@
                         :void)
   resizable)
 
-(defcfun ("gdk_toplevel_layout_get_resizable" toplevel-layout-resizable)
+(cffi:defcfun ("gdk_toplevel_layout_get_resizable" toplevel-layout-resizable)
     :boolean
  #+liber-documentation
  "@version{#2023-4-10}

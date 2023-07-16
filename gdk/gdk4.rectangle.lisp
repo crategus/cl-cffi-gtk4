@@ -49,7 +49,7 @@
 ;;; GdkRectangle
 ;;; ----------------------------------------------------------------------------
 
-(define-g-boxed-cstruct rectangle "GdkRectangle"
+(glib:define-g-boxed-cstruct rectangle "GdkRectangle"
   (:export t
    :type-initializer "gdk_rectangle_get_type")
   (x :int :initform 0)
@@ -81,7 +81,7 @@
   The Graphene library has a number of other data types for regions and volumes
   in 2D and 3D.
   @begin{pre}
-(define-g-boxed-cstruct rectangle \"GdkRectangle\"
+(glib:define-g-boxed-cstruct rectangle \"GdkRectangle\"
   (:export t
    :type-initializer \"gdk_rectangle_get_type\")
   (x :int :initform 0)
@@ -204,7 +204,7 @@
 ;;; gdk_rectangle_contains_point
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rectangle_contains_point" rectangle-contains-point) :boolean
+(cffi:defcfun ("gdk_rectangle_contains_point" rectangle-contains-point) :boolean
  #+liber-documentation
  "@version{2023-4-14}
   @argument[rect]{a @class{gdk:rectangle} instance}
@@ -226,7 +226,7 @@
 ;;; gdk_rectangle_equal
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rectangle_equal" rectangle-equal) :boolean
+(cffi:defcfun ("gdk_rectangle_equal" rectangle-equal) :boolean
  #+liber-documentation
  "@version{2023-4-14}
   @argument[rect1]{a @class{gdk:rectangle} instance}
@@ -245,7 +245,7 @@
 ;;; gdk_rectangle_intersect
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rectangle_intersect" %rectangle-intersect) :boolean
+(cffi:defcfun ("gdk_rectangle_intersect" %rectangle-intersect) :boolean
   (rect1 (g:boxed rectangle))
   (rect2 (g:boxed rectangle))
   (dest  (g:boxed rectangle)))
@@ -273,7 +273,7 @@
 ;;; gdk_rectangle_union
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_rectangle_union" %rectangle-union) :void
+(cffi:defcfun ("gdk_rectangle_union" %rectangle-union) :void
   (rect1 (g:boxed rectangle))
   (rect2 (g:boxed rectangle))
   (dest  (g:boxed rectangle)))

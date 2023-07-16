@@ -33,8 +33,8 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gdk_pango_layout_get_clip_region 
-;;;     gdk_pango_layout_line_get_clip_region 
+;;;     gdk_pango_layout_get_clip_region
+;;;     gdk_pango_layout_line_get_clip_region
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gdk)
@@ -43,7 +43,7 @@
 ;;; gdk_pango_layout_get_clip_region ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_pango_layout_get_clip_region" %pango-layout-clip-region)
+(cffi:defcfun ("gdk_pango_layout_get_clip_region" %pango-layout-clip-region)
     (:pointer (:struct cairo:region-t))
   (layout (g:object pango:layout))
   (xorigin :int)
@@ -55,30 +55,30 @@
  #+liber-documentation
  "@version{#2023-4-14}
   @argument[layout]{a @class{pango:layout} object}
-  @argument[xorigin]{an integer with the x pixel where you intend to draw the 
+  @argument[xorigin]{an integer with the x pixel where you intend to draw the
     layout with this clip }
-  @argument[yorigin]{an integer with the y pixel where you intend to draw the 
+  @argument[yorigin]{an integer with the y pixel where you intend to draw the
     layout with this clip }
-  @argument[ranges]{a list of integer with the byte indexes into the layout, 
+  @argument[ranges]{a list of integer with the byte indexes into the layout,
     where even members of the list are start indexes and elements end indexes}
-  @return{A @symbol{cairo:region-t} instance with the clip region containing 
+  @return{A @symbol{cairo:region-t} instance with the clip region containing
     the given ranges.}
   @begin{short}
-    Obtains a clip region which contains the areas where the given ranges of 
-    text would be drawn. 
+    Obtains a clip region which contains the areas where the given ranges of
+    text would be drawn.
   @end{short}
-  The @arg{xorigin} and @arg{yorigin} arguments are the top left point to center 
-  the layout. The @arg{ranges} argument should contain ranges of bytes in the 
+  The @arg{xorigin} and @arg{yorigin} arguments are the top left point to center
+  the layout. The @arg{ranges} argument should contain ranges of bytes in the
   text of the layout.
 
-  Note that the regions returned correspond to logical extents of the text 
-  ranges, not ink extents. So the drawn layout may in fact touch areas out of 
-  the clip region. The clip region is mainly useful for highlightling parts of 
+  Note that the regions returned correspond to logical extents of the text
+  ranges, not ink extents. So the drawn layout may in fact touch areas out of
+  the clip region. The clip region is mainly useful for highlightling parts of
   text, such as when text is selected.
   @see-class{pango:layout}
   @see-symbol{cairo:region-t}"
   (let ((n (length ranges)))
-    (with-foreign-object (ranges-ar :int n)
+    (cffi:with-foreign-object (ranges-ar :int n)
       (iter (for i from 0 below n)
             (for range in ranges)
             (setf (cffi:mem-aref ranges-ar :int i) range))
@@ -87,10 +87,10 @@
 (export 'pango-layout-clip-region)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_pango_layout_line_get_clip_region () 
+;;; gdk_pango_layout_line_get_clip_region ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_pango_layout_line_clip_region" %pango-layout-line-clip-region)
+(cffi:defcfun ("gdk_pango_layout_line_clip_region" %pango-layout-line-clip-region)
     (:pointer (:struct cairo:region-t))
   (line (g:boxed pango:layout-line))
   (xorigin :int)
@@ -102,34 +102,34 @@
  #+liber-documentation
  "@version{#2023-4-14}
   @argument[line]{a @class{pango:layout-line} instance}
-  @argument[xorigin]{an integer with the x pixel where you intend to draw the 
+  @argument[xorigin]{an integer with the x pixel where you intend to draw the
     layout line with this clip }
-  @argument[yorigin]{an integer with the y pixel where you intend to draw the 
+  @argument[yorigin]{an integer with the y pixel where you intend to draw the
     layout line with this clip }
-  @argument[ranges]{a list of integer with the byte indexes into the layout, 
+  @argument[ranges]{a list of integer with the byte indexes into the layout,
     where even members of the list are start indexes and elements end indexes}
-  @return{A @symbol{cairo:region-t} instance with the clip region containing 
+  @return{A @symbol{cairo:region-t} instance with the clip region containing
     the given ranges.}
   @begin{short}
-    Obtains a clip region which contains the areas where the given ranges of 
-    text would be drawn. 
+    Obtains a clip region which contains the areas where the given ranges of
+    text would be drawn.
   @end{short}
-  The @arg{xorigin} and @arg{yorigin} arguments are the top left position of 
-  the layout. The @arg{ranges} argument should contain ranges of bytes in the 
-  text of the layout. The clip region will include space to the left or right 
-  of the line (to the layout bounding box) if you have indexes above or below   
-  the indexes contained inside the line. This is to draw the selection all the 
-  way to the side of the layout. However, the clip region is in line 
+  The @arg{xorigin} and @arg{yorigin} arguments are the top left position of
+  the layout. The @arg{ranges} argument should contain ranges of bytes in the
+  text of the layout. The clip region will include space to the left or right
+  of the line (to the layout bounding box) if you have indexes above or below
+  the indexes contained inside the line. This is to draw the selection all the
+  way to the side of the layout. However, the clip region is in line
   coordinates, not layout coordinates.
 
-  Note that the regions returned correspond to logical extents of the text 
-  ranges, not ink extents. So the drawn layout may in fact touch areas out of 
-  the clip region. The clip region is mainly useful for highlightling parts of 
+  Note that the regions returned correspond to logical extents of the text
+  ranges, not ink extents. So the drawn layout may in fact touch areas out of
+  the clip region. The clip region is mainly useful for highlightling parts of
   text, such as when text is selected.
   @see-class{pango:layout}
   @see-symbol{cairo:region-t}"
   (let ((n (length ranges)))
-    (with-foreign-object (ranges-ar :int n)
+    (cffi:with-foreign-object (ranges-ar :int n)
       (iter (for i from 0 below n)
             (for range in ranges)
             (setf (cffi:mem-aref ranges-ar :int i) range))

@@ -63,7 +63,7 @@
 ;;; GdkAppLaunchContext
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkAppLaunchContext" app-launch-context
+(gobject:define-g-object-class "GdkAppLaunchContext" app-launch-context
   (:superclass g:app-launch-context
    :export t
    :interfaces nil
@@ -128,8 +128,8 @@
 ;;; gdk_app_launch_context_set_desktop ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_app_launch_context_set_desktop" app-launch-context-set-desktop)
-    :void
+(cffi:defcfun ("gdk_app_launch_context_set_desktop"
+               app-launch-context-set-desktop) :void
  #+liber-documentation
  "@version{2023-4-7}
   @argument[context]{a @class{gdk:app-launch-context} object}
@@ -152,8 +152,8 @@
 ;;; gdk_app_launch_context_set_timestamp ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_app_launch_context_set_timestamp"
-           app-launch-context-set-timestamp) :void
+(cffi:defcfun ("gdk_app_launch_context_set_timestamp"
+               app-launch-context-set-timestamp) :void
  #+liber-documentation
  "@version{2023-4-7}
   @argument[context]{a @class{gdk:app-launch-context} object}
@@ -176,7 +176,8 @@
 ;;; gdk_app_launch_context_set_icon ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_app_launch_context_set_icon" app-launch-context-set-icon) :void
+(cffi:defcfun ("gdk_app_launch_context_set_icon"
+               app-launch-context-set-icon) :void
  #+liber-documentation
  "@version{2023-4-7}
   @argument[context]{a @class{gdk:app-launch-context} object}
@@ -199,8 +200,8 @@
 ;;; gdk_app_launch_context_set_icon_name ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_app_launch_context_set_icon_name"
-           app-launch-context-set-icon-name) :void
+(cffi:defcfun ("gdk_app_launch_context_set_icon_name"
+               app-launch-context-set-icon-name) :void
  #+liber-documentation
  "@version{2023-4-7}
   @argument[context]{a @class{gdk:app-launch-context} object}

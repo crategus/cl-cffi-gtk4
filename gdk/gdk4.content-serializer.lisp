@@ -38,20 +38,20 @@
 ;;;
 ;;;     GdkContentSerializeFunc
 ;;;
-;;;     gdk_content_serializer_get_mime_type 
-;;;     gdk_content_serializer_get_gtype 
-;;;     gdk_content_serializer_get_value 
-;;;     gdk_content_serializer_get_output_stream 
-;;;     gdk_content_serializer_get_priority 
-;;;     gdk_content_serializer_get_cancellable 
-;;;     gdk_content_serializer_get_user_data 
-;;;     gdk_content_serializer_set_task_data 
-;;;     gdk_content_serializer_get_task_data 
-;;;     gdk_content_serializer_return_success 
-;;;     gdk_content_serializer_return_error 
-;;;     gdk_content_register_serializer 
-;;;     gdk_content_serialize_async 
-;;;     gdk_content_serialize_finish 
+;;;     gdk_content_serializer_get_mime_type
+;;;     gdk_content_serializer_get_gtype
+;;;     gdk_content_serializer_get_value
+;;;     gdk_content_serializer_get_output_stream
+;;;     gdk_content_serializer_get_priority
+;;;     gdk_content_serializer_get_cancellable
+;;;     gdk_content_serializer_get_user_data
+;;;     gdk_content_serializer_set_task_data
+;;;     gdk_content_serializer_get_task_data
+;;;     gdk_content_serializer_return_success
+;;;     gdk_content_serializer_return_error
+;;;     gdk_content_register_serializer
+;;;     gdk_content_serialize_async
+;;;     gdk_content_serialize_finish
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -70,7 +70,7 @@
 ;;;
 ;;; Should not be accessed directly.
 ;;;
-;;; A GdkContentSerializer is used to serialize content for inter-application 
+;;; A GdkContentSerializer is used to serialize content for inter-application
 ;;; data transfers.
 ;;;
 ;;; See Also
@@ -84,9 +84,9 @@
 ;;; void
 ;;; (*GdkContentSerializeFunc) (GdkContentSerializer *serializer);
 ;;;
-;;; The type of a function that can be registered with 
-;;; gdk_content_register_serializer(). When the function gets called to operate 
-;;; on content, it can call functions on the serializer object to obtain the 
+;;; The type of a function that can be registered with
+;;; gdk_content_register_serializer(). When the function gets called to operate
+;;; on content, it can call functions on the serializer object to obtain the
 ;;; mime type, output stream, user data, etc. for its operation.
 ;;;
 ;;; serializer :
@@ -139,7 +139,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_serializer_get_output_stream () 
+;;; gdk_content_serializer_get_output_stream ()
 ;;;
 ;;; GOutputStream *
 ;;; gdk_content_serializer_get_output_stream
@@ -155,7 +155,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_serializer_get_priority () 
+;;; gdk_content_serializer_get_priority ()
 ;;;
 ;;; int
 ;;; gdk_content_serializer_get_priority (GdkContentSerializer *serializer);
@@ -226,7 +226,7 @@
 ;;; gpointer
 ;;; gdk_content_serializer_get_task_data (GdkContentSerializer *serializer);
 ;;;
-;;; Gets the data that was associated with serializer via 
+;;; Gets the data that was associated with serializer via
 ;;; gdk_content_serializer_set_task_data().
 ;;;
 ;;; serializer :
@@ -237,7 +237,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_content_serializer_return_success () 
+;;; gdk_content_serializer_return_success ()
 ;;;
 ;;; void
 ;;; gdk_content_serializer_return_success (GdkContentSerializer *serializer);
@@ -255,7 +255,7 @@
 ;;; gdk_content_serializer_return_error (GdkContentSerializer *serializer,
 ;;;                                      GError *error);
 ;;;
-;;; Indicate that the serialization has ended with an error. This function 
+;;; Indicate that the serialization has ended with an error. This function
 ;;; consumes error .
 ;;;
 ;;; serializer :
@@ -275,7 +275,7 @@
 ;;;                                  gpointer data,
 ;;;                                  GDestroyNotify notify);
 ;;;
-;;; Registers a function to convert objects of the given type to a serialized 
+;;; Registers a function to convert objects of the given type to a serialized
 ;;; representation with the given mime type.
 ;;;
 ;;; type :
@@ -306,8 +306,8 @@
 ;;;                              GAsyncReadyCallback callback,
 ;;;                              gpointer user_data);
 ;;;
-;;; Serialize content and write it to the given output stream, asynchronously. 
-;;; When the operation is finished, callback will be called. You can then call 
+;;; Serialize content and write it to the given output stream, asynchronously.
+;;; When the operation is finished, callback will be called. You can then call
 ;;; gdk_content_serialize_finish() to get the result of the operation.
 ;;;
 ;;; stream :
@@ -348,7 +348,7 @@
 ;;;     return location for an error
 ;;;
 ;;; Returns :
-;;;     TRUE if the operation was successful, FALSE if an error occurred. In 
+;;;     TRUE if the operation was successful, FALSE if an error occurred. In
 ;;;     this case, error is set
 ;;; ----------------------------------------------------------------------------
 

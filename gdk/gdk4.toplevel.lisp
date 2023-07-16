@@ -90,7 +90,7 @@
 ;;; enum GdkToplevelState
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GdkToplevelState" toplevel-state
+(gobject:define-g-flags "GdkToplevelState" toplevel-state
   (:export t
    :type-initializer "gdk_toplevel_state_get_type")
   (:minimized #.(ash 1 0))
@@ -123,7 +123,7 @@
   states is set. On platforms that lack that support, the tiled state will give
   an indication of tiledness without any of the per-edge states being set.
   @begin{pre}
-(define-g-flags \"GdkToplevelState\" toplevel-state
+(gobject:define-g-flags \"GdkToplevelState\" toplevel-state
   (:export t
    :type-initializer \"gdk_toplevel_state_get_type\")
   (:minimized #.(ash 1 0))
@@ -168,7 +168,7 @@
 ;;; enum GdkFullscreenMode
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkFullscreenMode" fullscreen-mode
+(gobject:define-g-enum "GdkFullscreenMode" fullscreen-mode
   (:export t
    :type-initializer "gdk_fullscreen_mode_get_type")
   (:on-current-monitor 0)
@@ -184,7 +184,7 @@
     when in fullscreen mode.
   @end{short}
   @begin{pre}
-(define-g-enum \"GdkFullscreenMode\" fullscreen-mode
+(gobject:define-g-enum \"GdkFullscreenMode\" fullscreen-mode
   (:export t
    :type-initializer \"gdk_fullscreen_mode_get_type\")
   (:on-current-monitor 0)
@@ -200,7 +200,7 @@
 ;;; enum GdkSurfaceEdge
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkSurfaceEdge" surface-edge
+(gobject:define-g-enum "GdkSurfaceEdge" surface-edge
   (:export t
    :type-initializer "gdk_surface_edge_get_type")
   (:north-west 0)
@@ -238,7 +238,7 @@
 ;;; GdkTitlebarGesture
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkTitlebarGesture" titlebar-gesture
+(gobject:define-g-enum "GdkTitlebarGesture" titlebar-gesture
   (:export t
    :type-initializer "gdk_titlebar_gesture_get_type")
   (:double-click 0)
@@ -255,7 +255,7 @@
   @end{short}
   Since 4.4
   @begin{pre}
-(define-g-enum \"GdkTitlebarGesture\" titlebar-gesture
+(gobject:define-g-enum \"GdkTitlebarGesture\" titlebar-gesture
   (:export t
    :type-initializer \"gdk_titlebar_gesture_get_type\")
   (:double-click 0)
@@ -274,7 +274,7 @@
 ;;; GdkToplevel
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GdkToplevel" toplevel
+(gobject:define-g-interface "GdkToplevel" toplevel
   (:export t
    :type-initializer "gdk_toplevel_get_type")
   ((decorated
@@ -645,7 +645,7 @@ lambda (toplevel size)    :run-last
 ;;;the GdkToplevelLayout object used to layout
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_present" toplevel-present) :void
+(cffi:defcfun ("gdk_toplevel_present" toplevel-present) :void
   (toplevel (g:object toplevel))
   (layout (g:boxed toplevel-layout)))
 
@@ -671,7 +671,7 @@ lambda (toplevel size)    :run-last
 ;;;TRUE if the surface was minimized
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_minimize" toplevel-minimize) :boolean
+(cffi:defcfun ("gdk_toplevel_minimize" toplevel-minimize) :boolean
   (toplevel (g:object toplevel)))
 
 (export 'toplevel-minimize)
@@ -696,7 +696,7 @@ lambda (toplevel size)    :run-last
 ;;;TRUE if the surface was lowered
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_lower" toplevel-lower) :boolean
+(cffi:defcfun ("gdk_toplevel_lower" toplevel-lower) :boolean
   (toplevel (g:object toplevel)))
 
 (export 'toplevel-lower)
@@ -723,7 +723,7 @@ lambda (toplevel size)    :run-last
 ;;;timestamp of the event triggering the surface focus
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_focus" toplevel-focus) :void
+(cffi:defcfun ("gdk_toplevel_focus" toplevel-focus) :void
   (toplevel (g:object toplevel))
   (timestamp :uint))
 
@@ -755,7 +755,8 @@ lambda (toplevel size)    :run-last
 ;;;TRUE if the window menu was shown and FALSE otherwise.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_show_window_menu" toplevel-show-window-menu) :boolean
+(cffi:defcfun ("gdk_toplevel_show_window_menu" toplevel-show-window-menu)
+    :boolean
   (toplevel (g:object toplevel))
   (event :pointer)) ; for GdkEvent
 
@@ -780,8 +781,8 @@ lambda (toplevel size)    :run-last
 ;;;TRUE if the desktop environment supports tiled window states
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_supports_edge_constraints"
-           toplevel-supports-edge-constraints) :boolean
+(cffi:defcfun ("gdk_toplevel_supports_edge_constraints"
+               toplevel-supports-edge-constraints) :boolean
   (toplevel (g:object toplevel)))
 
 (export 'toplevel-supports-edge-constraints)
@@ -814,8 +815,8 @@ lambda (toplevel size)    :run-last
 ;;;the GdkEvent that is triggering the inhibit request, or NULL if none is available.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_inhibit_system_shortcuts"
-           toplevel-inhibit-system-shortcuts) :void
+(cffi:defcfun ("gdk_toplevel_inhibit_system_shortcuts"
+               toplevel-inhibit-system-shortcuts) :void
   (toplevel (g:object toplevel))
   (event :pointer)) ; TODO: Implement GdkEvent
 
@@ -835,8 +836,8 @@ lambda (toplevel size)    :run-last
 ;;;a GdkToplevel
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_restore_system_shortcuts"
-           toplevel-restore-system-shortcuts) :void
+(cffi:defcfun ("gdk_toplevel_restore_system_shortcuts"
+               toplevel-restore-system-shortcuts) :void
   (toplevel (g:object toplevel)))
 
 (export 'toplevel-restore-system-shortcuts)
@@ -877,7 +878,7 @@ lambda (toplevel size)    :run-last
 ;;;timestamp of mouse click that began the drag (use gdk_event_get_time())
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_begin_resize" toplevel-begin-resize) :void
+(cffi:defcfun ("gdk_toplevel_begin_resize" toplevel-begin-resize) :void
   (toplevel (g:object toplevel))
   (edge surface-edge)
   (device (g:object device))
@@ -932,7 +933,7 @@ lambda (toplevel size)    :run-last
 ;;;timestamp of mouse click that began the drag
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_toplevel_begin_move" toplevel-begin-move) :void
+(cffi:defcfun ("gdk_toplevel_begin_move" toplevel-begin-move) :void
   (toplevel (g:object toplevel))
   (device (g:object device))
   (button :int)
@@ -961,7 +962,8 @@ lambda (toplevel size)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
-(defcfun ("gdk_toplevel_titlebar_gesture" toplevel-titlebar-gesture) :boolean
+(cffi:defcfun ("gdk_toplevel_titlebar_gesture" toplevel-titlebar-gesture)
+    :boolean
   (toplevel (g:object toplevel))
   (gesture titlebar-gesture))
 

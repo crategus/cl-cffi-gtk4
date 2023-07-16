@@ -40,7 +40,7 @@
 ;;; enum GdkGravity
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkGravity" gravity
+(gobject:define-g-enum "GdkGravity" gravity
   (:export t
    :type-initializer "gdk_gravity_get_type")
   (:north-west 0)
@@ -64,7 +64,7 @@
     the @class{gdk:popup-layout} implementation.
   @end{short}
   @begin{pre}
-(define-g-enum \"GdkGravity\" gravity
+(gobject:define-g-enum \"GdkGravity\" gravity
   (:export t
    :type-initializer \"gdk_gravity_get_type\")
   (:north-west 0)
@@ -105,7 +105,7 @@
 ;;; enum GdkModifierType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-flags "GdkModifierType" modifier-type
+(gobject:define-g-flags "GdkModifierType" modifier-type
   (:export t
    :type-initializer "gdk_modifier_type_get_type")
   (:none         0)
@@ -141,7 +141,7 @@
   preserve and ignore them. You can use the @variable{gdk:modifier-mask} value
   to remove all private values.
   @begin{pre}
-(define-g-flags \"GdkModifierType\" modifier-type
+(gobject:define-g-flags \"GdkModifierType\" modifier-type
   (:export t
    :type-initializer \"gdk_modifier_type_get_type\")
   (:none         0)

@@ -82,7 +82,7 @@
 ;;; enum GdkSubpixelLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkSubpixelLayout" subpixel-layout
+(gobject:define-g-enum "GdkSubpixelLayout" subpixel-layout
   (:export t
    :type-initializer "gdk_subpixel_layout_get_type")
   (:unknown 0)
@@ -102,7 +102,7 @@
     physical pixels on an output device are laid out.
   @end{short}
   @begin{pre}
-(define-g-enum \"GdkSubpixelLayout\" subpixel-layout
+(gobject:define-g-enum \"GdkSubpixelLayout\" subpixel-layout
   (:export t
    :type-initializer \"gdk_subpixel_layout_get_type\")
   (:unknown 0)
@@ -126,7 +126,7 @@
 ;;; GdkMonitor
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkMonitor" monitor
+(gobject:define-g-object-class "GdkMonitor" monitor
   (:superclass g:object
    :export t
    :interfaces nil
@@ -518,7 +518,7 @@ lambda (monitor)    :run-first
 ;;; gdk_monitor_is_valid ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_monitor_is_valid" monitor-is-valid) :boolean
+(cffi:defcfun ("gdk_monitor_is_valid" monitor-is-valid) :boolean
  #+liber-documentation
  "@version{#2023-4-11}
   @argument[monitor]{a @class{gdk:monitor} object}

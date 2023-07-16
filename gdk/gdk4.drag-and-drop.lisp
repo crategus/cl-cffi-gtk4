@@ -126,7 +126,7 @@
 ;;;     Unspecified error.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkDragCanelReason" drag-cancel-reason
+(gobject:define-g-enum "GdkDragCanelReason" drag-cancel-reason
   (:export t
    :type-initializer "gdk_drag_cancel_reason_get_type")
   :no-target
@@ -155,7 +155,7 @@
 ;;;     Ask the user what to do with the data.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GdkDragAction" drag-action
+(gobject:define-g-enum "GdkDragAction" drag-action
   (:export t
    :type-initializer "gdk_drag_action_get_type")
   :copy
@@ -182,7 +182,7 @@
 ;;; DND operation.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-interface "GdkDragSurface" drag-surface
+(gobject:define-g-interface "GdkDragSurface" drag-surface
   (:export t
    :type-initializer "gdk_drag_surface_get_type")
   nil)
@@ -279,7 +279,7 @@
 ;;; Flags: Run Last
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkDrag" drag
+(gobject:define-g-object-class "GdkDrag" drag
   (:superclass g:object
    :export t
    :interfaces nil
@@ -537,7 +537,7 @@
 ;;; Drop section of the GTK documentation for more information.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GdkDrop" drop
+(gobject:define-g-object-class "GdkDrop" drop
   (:superclass g:object
    :export t
    :interfaces nil
@@ -900,7 +900,7 @@
 ;;;     FALSE if it failed to be presented, otherwise TRUE.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_drag_surface_present" drag-surface-present) :boolean
+(cffi:defcfun ("gdk_drag_surface_present" drag-surface-present) :boolean
   (surface (g:object drag-surface))
   (width :int)
   (height :int))
