@@ -148,7 +148,7 @@
 ;;; GtkTextTag
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkTextTag" text-tag
+(gobject:define-g-object-class "GtkTextTag" text-tag
   (:superclass g:object
    :export t
    :interfaces nil
@@ -3055,7 +3055,7 @@
                         :void)
   priority)
 
-(defcfun ("gtk_text_tag_get_priority" text-tag-priority) :int
+(cffi:defcfun ("gtk_text_tag_get_priority" text-tag-priority) :int
  #+liber-documentation
  "@version{#2022-1-7}
   @syntax[]{(gtk:text-tag-priority tag) => priority}
@@ -3091,7 +3091,7 @@
 ;;; gtk_text_tag_changed
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_tag_changed" text-tag-changed) :void
+(cffi:defcfun ("gtk_text_tag_changed" text-tag-changed) :void
  #+liber-documentation
  "@version{#2022-1-7}
   @argument[tag]{a @class{gtk:text-tag} object}

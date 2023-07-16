@@ -3824,7 +3824,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_allocated_baseline -> widget-allocated-baseline
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_widget_get_allocated_baseline" widget-allocated-baseline) 
+(cffi:defcfun ("gtk_widget_get_allocated_baseline" widget-allocated-baseline)
     :int
  #+liber-documentation
  "@version{#2021-9-20}
@@ -4442,7 +4442,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_next_sibling -> widget-next-sibling
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_widget_get_next_sibling" widget-next-sibling) 
+(cffi:defcfun ("gtk_widget_get_next_sibling" widget-next-sibling)
     (g:object widget)
  #+liber-documentation
  "@version{2022-11-25}
@@ -4480,7 +4480,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_first_child -> widget-first-child
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_widget_get_first_child" widget-first-child) 
+(cffi:defcfun ("gtk_widget_get_first_child" widget-first-child)
     (g:object widget)
  #+liber-documentation
  "@version{2022-11-25}
@@ -4758,7 +4758,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_get_request_mode -> widget-request-mode
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_widget_get_request_mode" widget-request-mode) 
+(cffi:defcfun ("gtk_widget_get_request_mode" widget-request-mode)
     size-request-mode
  #+liber-documentation
  "@version{#2022-9-7}
@@ -5299,7 +5299,7 @@ lambda (widget)    :run-last
 ;;; gtk_widget_insert_action_group
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_widget_insert_action_group" widget-insert-action-group) 
+(cffi:defcfun ("gtk_widget_insert_action_group" widget-insert-action-group)
     :void
  #+liber-documentation
  "@version{#2023-3-12}

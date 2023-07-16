@@ -68,7 +68,7 @@
 
 ;; TODO: Implement the GtkAccessibleRange interface
 
-(define-g-object-class "GtkVolumeButton" volume-button
+(gobject:define-g-object-class "GtkVolumeButton" volume-button
   (:superclass scale-button
    :export t
    :interfaces ("GtkAccessible"

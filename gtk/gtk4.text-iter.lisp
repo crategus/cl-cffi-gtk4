@@ -257,7 +257,7 @@
 ;;; gtk_text_iter_get_buffer -> text-iter-buffer
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_iter_get_buffer" text-iter-buffer) 
+(cffi:defcfun ("gtk_text_iter_get_buffer" text-iter-buffer)
     (g:object text-buffer)
  #+liber-documentation
  "@version{2023-2-2}
@@ -500,7 +500,7 @@
                         :void)
   index)
 
-(cffi:defcfun ("gtk_text_iter_get_visible_line_index" 
+(cffi:defcfun ("gtk_text_iter_get_visible_line_index"
                text-iter-visible-line-index) :int
  #+liber-documentation
  "@version{2023-2-2}
@@ -534,7 +534,7 @@
                         :void)
   offset)
 
-(cffi:defcfun ("gtk_text_iter_get_visible_line_offset" 
+(cffi:defcfun ("gtk_text_iter_get_visible_line_offset"
                text-iter-visible-line-offset) :int
  #+liber-documentation
  "@version{#2023-2-2}
@@ -1101,7 +1101,7 @@
 ;;; gtk_text_iter_starts_sentence
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_iter_starts_sentence" text-iter-starts-sentence) 
+(cffi:defcfun ("gtk_text_iter_starts_sentence" text-iter-starts-sentence)
     :boolean
  #+liber-documentation
  "@version{#2023-2-2}
@@ -1146,7 +1146,7 @@
 ;;; gtk_text_iter_inside_sentence
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_iter_inside_sentence" text-iter-inside-sentence) 
+(cffi:defcfun ("gtk_text_iter_inside_sentence" text-iter-inside-sentence)
     :boolean
  #+liber-documentation
  "@version{#2023-2-2}
@@ -1784,7 +1784,7 @@
 ;;; gtk_text_iter_backward_word_start                      not exported
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_iter_backward_word_start" 
+(cffi:defcfun ("gtk_text_iter_backward_word_start"
                text-iter-backward-word-start) :boolean
  #+liber-documentation
  "@version{#2021-6-15}
@@ -2282,7 +2282,7 @@
 ;;; gtk_text_iter_forward_to_line_end
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_iter_forward_to_line_end" 
+(cffi:defcfun ("gtk_text_iter_forward_to_line_end"
                text-iter-forward-to-line-end) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
@@ -2308,7 +2308,7 @@
 ;;; gtk_text_iter_forward_to_tag_toggle
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_iter_forward_to_tag_toggle" 
+(cffi:defcfun ("gtk_text_iter_forward_to_tag_toggle"
                text-iter-forward-to-tag-toggle) :boolean
  #+liber-documentation
  "@version{#2023-2-2}
@@ -2566,7 +2566,7 @@ lambda (ch)
 ;;; gtk_text_iter_forward_search                           not exported
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_iter_forward_search" %text-iter-forward-search) 
+(cffi:defcfun ("gtk_text_iter_forward_search" %text-iter-forward-search)
     :boolean
   (iter (g:boxed text-iter))
   (str (:string :free-to-foreign t))

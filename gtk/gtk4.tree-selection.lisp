@@ -84,7 +84,7 @@
 ;;; GtkTreeSelection
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkTreeSelection" tree-selection
+(gobject:define-g-object-class "GtkTreeSelection" tree-selection
   (:superclass g:object
     :export t
     :interfaces ()
@@ -435,7 +435,7 @@ lambda (model path iter)
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_selection_get_selected_rows"
-               %tree-selection-selected-rows) 
+               %tree-selection-selected-rows)
     (g:list-t (g:boxed tree-path :return))
   (selection (g:object tree-selection))
   (model :pointer))
@@ -487,7 +487,7 @@ lambda (model path iter)
 ;;; gtk_tree_selection_select_path
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_selection_select_path" tree-selection-select-path) 
+(cffi:defcfun ("gtk_tree_selection_select_path" tree-selection-select-path)
     :void
  #+liber-documentation
  "@version{#2022-1-23}
@@ -550,7 +550,7 @@ lambda (model path iter)
 ;;; gtk_tree_selection_select_iter
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_selection_select_iter" tree-selection-select-iter) 
+(cffi:defcfun ("gtk_tree_selection_select_iter" tree-selection-select-iter)
     :void
  #+liber-documentation
  "@version{#2022-1-23}

@@ -57,7 +57,7 @@
 ;;; GtkTooltip
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkTooltip" tooltip
+(gobject:define-g-object-class "GtkTooltip" tooltip
   (:superclass g:object
    :export t
    :interfaces nil
@@ -103,7 +103,7 @@
 ;;; gtk_tooltip_set_markup ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tooltip_set_markup" tooltip-set-markup) :void
+(cffi:defcfun ("gtk_tooltip_set_markup" tooltip-set-markup) :void
  #+liber-documentation
  "@version{#2020-6-3}
   @argument[tooltip]{a @class{gtk:tooltip} object}
@@ -124,7 +124,7 @@
 ;;; gtk_tooltip_set_text ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tooltip_set_text" tooltip-set-text) :void
+(cffi:defcfun ("gtk_tooltip_set_text" tooltip-set-text) :void
  #+liber-documentation
  "@version{#2020-6-3}
   @argument[tooltip]{a @class{gtk:tooltip} object}
@@ -145,7 +145,7 @@
 ;;; gtk_tooltip_set_icon ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tooltip_set_icon" tooltip-set-icon) :void
+(cffi:defcfun ("gtk_tooltip_set_icon" tooltip-set-icon) :void
  #+liber-documentation
  "@version{#2022-7-10}
   @argument[tooltip]{a @class{gtk:tooltip} object}
@@ -166,8 +166,8 @@
 ;;; gtk_tooltip_set_icon_from_icon_name ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tooltip_set_icon_from_icon_name"
-           tooltip-set-icon-from-icon-name) :void
+(cffi:defcfun ("gtk_tooltip_set_icon_from_icon_name"
+               tooltip-set-icon-from-icon-name) :void
  #+liber-documentation
  "@version{#2022-7-10}
   @argument[tooltip]{a @class{gtk:tooltip} object}
@@ -187,7 +187,7 @@
 ;;; gtk_tooltip_set_icon_from_gicon ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tooltip_set_icon_from_gicon" tooltip-set-icon-from-gicon)
+(cffi:defcfun ("gtk_tooltip_set_icon_from_gicon" tooltip-set-icon-from-gicon)
     :void
  #+liber-documentation
  "@version{#2022-7-10}
@@ -209,7 +209,7 @@
 ;;; gtk_tooltip_set_custom ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tooltip_set_custom" tooltip-set-custom) :void
+(cffi:defcfun ("gtk_tooltip_set_custom" tooltip-set-custom) :void
  #+liber-documentation
  "@version{#2022-7-10}
   @argument[tooltip]{a @class{gtk:tooltip} object}
@@ -234,7 +234,7 @@
 ;;; gtk_tooltip_set_tip_area ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tooltip_set_tip_area" tooltip-set-tip-area) :void
+(cffi:defcfun ("gtk_tooltip_set_tip_area" tooltip-set-tip-area) :void
  #+liber-documentation
  "@version{#2021-12-11}
   @argument[tooltip]{a @class{gtk:tooltip} object}

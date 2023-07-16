@@ -79,7 +79,7 @@
 ;;; GtkTogleButton
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkToggleButton" toggle-button
+(gobject:define-g-object-class "GtkToggleButton" toggle-button
   (:superclass button
    :export t
    :interfaces ("GtkAccessible"
@@ -398,7 +398,7 @@ lambda (toggle)    :run-first
 ;;; gtk_toggle_button_toggled
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_toggle_button_toggled" toggle-button-toggled) :void
+(cffi:defcfun ("gtk_toggle_button_toggled" toggle-button-toggled) :void
  #+liber-documentation
  "@version{#2023-3-19}
   @argument[button]{a @class{gtk:toggle-button} widget}

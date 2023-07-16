@@ -1234,7 +1234,7 @@ lambda (view)    :action
 ;;; gtk_tree_view_columns_autosize ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_view_columns_autosize" tree-view-columns-autosize) 
+(cffi:defcfun ("gtk_tree_view_columns_autosize" tree-view-columns-autosize)
     :void
  #+liber-documentation
  "@version{#2021-2-25}
@@ -3089,7 +3089,7 @@ lambda (view)    :action
 ;;; gtk_tree_view_set_tooltip_cell ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_view_set_tooltip_cell" tree-view-set-tooltip-cell) 
+(cffi:defcfun ("gtk_tree_view_set_tooltip_cell" tree-view-set-tooltip-cell)
     :void
  #+liber-documentation
  "@version{#2021-2-26}

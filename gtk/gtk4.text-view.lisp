@@ -2090,7 +2090,7 @@ lambda (view)    :action
 ;;; gtk_text_view_add_child_at_anchor
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_view_add_child_at_anchor" 
+(cffi:defcfun ("gtk_text_view_add_child_at_anchor"
                text-view-add-child-at-anchor) :void
  #+liber-documentation
  "@version{#2021-10-16}
@@ -2370,7 +2370,7 @@ lambda (view)    :action
 ;;; gtk_text_view_reset_im_context
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_text_view_reset_im_context" text-view-reset-im-context) 
+(cffi:defcfun ("gtk_text_view_reset_im_context" text-view-reset-im-context)
     :void
  #+liber-documentation
  "@version{#2021-10-16}

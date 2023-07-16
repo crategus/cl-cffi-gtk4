@@ -1332,7 +1332,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_get_path -> tree-model-path
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_model_get_path" tree-model-path) 
+(cffi:defcfun ("gtk_tree_model_get_path" tree-model-path)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{#2021-3-4}
@@ -1413,7 +1413,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_iter_previous
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_model_iter_previous" %tree-model-iter-previous) 
+(cffi:defcfun ("gtk_tree_model_iter_previous" %tree-model-iter-previous)
     :boolean
   (model (g:object tree-model))
   (iter (g:boxed tree-iter)))
@@ -1440,7 +1440,7 @@ lambda (model path iter new-order)    :run-first
 ;;; gtk_tree_model_iter_children
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_model_iter_children" %tree-model-iter-children) 
+(cffi:defcfun ("gtk_tree_model_iter_children" %tree-model-iter-children)
     :boolean
   (model (g:object tree-model))
   (iter (g:boxed tree-iter))

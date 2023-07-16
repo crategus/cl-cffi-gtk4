@@ -583,7 +583,7 @@
 ;;; gtk_tree_model_filter_refilter ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_model_filter_refilter" tree-model-filter-refilter) 
+(cffi:defcfun ("gtk_tree_model_filter_refilter" tree-model-filter-refilter)
     :void
  #+liber-documentation
  "@version{#2021-3-7}
@@ -601,7 +601,7 @@
 ;;; gtk_tree_model_filter_clear_cache ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_model_filter_clear_cache" 
+(cffi:defcfun ("gtk_tree_model_filter_clear_cache"
                tree-model-filter-clear-cache) :void
  #+liber-documentation
  "@version{#2021-3-7}

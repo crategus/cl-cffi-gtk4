@@ -145,7 +145,7 @@
 ;;; struct GtkText
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkText" text
+(gobject:define-g-object-class "GtkText" text
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -1044,7 +1044,7 @@ lambda (entry)    :action
 ;;; gtk_text_unset_invisible_char ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_unset_invisible_char" text-unset-invisible-char) :void
+(cffi:defcfun ("gtk_text_unset_invisible_char" text-unset-invisible-char) :void
  #+liber-documentation
  "@version{#2023-3-12}
   @argument[entry]{a @class{gtk:text} widget}
@@ -1085,8 +1085,8 @@ lambda (entry)    :action
 ;;; gtk_text_grab_focus_without_selecting ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_grab_focus_without_selecting"
-           text-grab-focus-without-selecting) :boolean
+(cffi:defcfun ("gtk_text_grab_focus_without_selecting"
+               text-grab-focus-without-selecting) :boolean
  #+liber-documentation
  "@version{#2023-3-12}
   @argument[entry]{a @class{gtk:text} widget}

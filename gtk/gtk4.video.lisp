@@ -91,7 +91,7 @@
 ;;;      GtkMediaControls
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkVideo" video
+(gobject:define-g-object-class "GtkVideo" video
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -317,7 +317,8 @@
 ;;; gtk_video_new_for_filename ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_video_new_for_filename" %video-new-for-filename) (g:object video)
+(cffi:defcfun ("gtk_video_new_for_filename" %video-new-for-filename)
+    (g:object video)
   (filename :string))
 
 (defun video-new-for-filename (path)
@@ -338,7 +339,8 @@
 ;;; gtk_video_new_for_resource ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_video_new_for_resource" %video-new-for-resource) (g:object video)
+(cffi:defcfun ("gtk_video_new_for_resource" %video-new-for-resource)
+    (g:object video)
   (path :string))
 
 (defun video-new-for-resource (path)
@@ -359,7 +361,7 @@
 ;;; gtk_video_set_filename ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_video_set_filename" %video-set-filename) :void
+(cffi:defcfun ("gtk_video_set_filename" %video-set-filename) :void
   (video (g:object video))
   (filename :string))
 
@@ -382,7 +384,7 @@
 ;;; gtk_video_set_resource ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_video_set_resource" %video-set-resource) :void
+(cffi:defcfun ("gtk_video_set_resource" %video-set-resource) :void
   (video (g:object video))
   (path :string))
 

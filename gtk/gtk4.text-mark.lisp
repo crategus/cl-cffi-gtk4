@@ -65,7 +65,7 @@
 ;;; GtkTextMark
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkTextMark" text-mark
+(gobject:define-g-object-class "GtkTextMark" text-mark
   (:superclass g:object
    :export t
    :interfaces ()
@@ -220,7 +220,7 @@
                         :void)
   visibility)
 
-(defcfun ("gtk_text_mark_get_visible" text-mark-visible) :boolean
+(cffi:defcfun ("gtk_text_mark_get_visible" text-mark-visible) :boolean
  #+liber-documentation
  "@version{#2022-1-23}
   @syntax[]{(gtk:text-mark-visible mark) => visibility}
@@ -249,7 +249,7 @@
 ;;; gtk_text_mark_get_deleted -> text-mark-deleted
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_mark_get_deleted" text-mark-deleted) :boolean
+(cffi:defcfun ("gtk_text_mark_get_deleted" text-mark-deleted) :boolean
  #+liber-documentation
  "@version{#2022-1-23}
   @argument[mark]{a @class{gtk:text-mark} object}
@@ -271,7 +271,8 @@
 ;;; gtk_text_mark_get_buffer -> text-mark-buffer
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_text_mark_get_buffer" text-mark-buffer) (g:object text-buffer)
+(cffi:defcfun ("gtk_text_mark_get_buffer" text-mark-buffer)
+    (g:object text-buffer)
  #+liber-documentation
  "@version{#2022-1-23}
   @argument[mark]{a @class{gtk:text-mark} object}

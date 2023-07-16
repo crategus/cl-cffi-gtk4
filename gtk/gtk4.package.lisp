@@ -31,7 +31,7 @@
 
 (defpackage :gtk
   (:use :iterate :common-lisp)
-  (:import-from :cffi       #:defcfun)
+  (:import-from :cffi)
   (:import-from :glib)
   (:import-from :gobject)
   (:import-from :gdk-pixbuf)

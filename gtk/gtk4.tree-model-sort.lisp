@@ -1,30 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.tree-model-sort.lisp
+;;; gtk4.tree-model-sort.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2009 - 2011 Kalyanov Dmitry
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkTreeModelSort
@@ -72,7 +72,7 @@
 ;;; struct GtkTreeModelSort
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkTreeModelSort" tree-model-sort
+(gobject:define-g-object-class "GtkTreeModelSort" tree-model-sort
   (:superclass g:object
    :export t
    :interfaces ("GtkTreeModel"
@@ -200,8 +200,8 @@
 ;;; gtk_tree_model_sort_convert_child_path_to_path ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_sort_convert_child_path_to_path"
-           tree-model-sort-convert-child-path-to-path)
+(cffi:defcfun ("gtk_tree_model_sort_convert_child_path_to_path"
+               tree-model-sort-convert-child-path-to-path)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{#2021-3-10}
@@ -225,8 +225,8 @@
 ;;; gtk_tree_model_sort_convert_child_iter_to_iter ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_sort_convert_child_iter_to_iter"
-          %tree-model-sort-convert-child-iter-to-iter) :boolean
+(cffi:defcfun ("gtk_tree_model_sort_convert_child_iter_to_iter"
+               %tree-model-sort-convert-child-iter-to-iter) :boolean
   (model (g:object tree-model-sort))
   (sort-iter (g:boxed tree-iter))
   (child-iter (g:boxed tree-iter)))
@@ -259,8 +259,8 @@
 ;;; gtk_tree_model_sort_convert_path_to_child_path ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_sort_convert_path_to_child_path"
-           tree-model-sort-convert-path-to-child-path)
+(cffi:defcfun ("gtk_tree_model_sort_convert_path_to_child_path"
+               tree-model-sort-convert-path-to-child-path)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{#2021-3-10}
@@ -284,8 +284,8 @@
 ;;; gtk_tree_model_sort_convert_iter_to_child_iter ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_sort_convert_iter_to_child_iter"
-          %tree-model-sort-convert-iter-to-child-iter) :void
+(cffi:defcfun ("gtk_tree_model_sort_convert_iter_to_child_iter"
+               %tree-model-sort-convert-iter-to-child-iter) :void
   (model (g:object tree-model-sort))
   (child-iter (g:boxed tree-iter))
   (sorted-iter (g:boxed tree-iter)))
@@ -314,9 +314,8 @@
 ;;; gtk_tree_model_sort_reset_default_sort_func ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_sort_reset_default_sort_func"
-          tree-model-sort-reset-default-sort-func)
-    :void
+(cffi:defcfun ("gtk_tree_model_sort_reset_default_sort_func"
+               tree-model-sort-reset-default-sort-func) :void
  #+liber-documentation
  "@version{#2021-3-10}
   @argument[model]{a @class{gtk:tree-model-sort} object}
@@ -335,7 +334,7 @@
 ;;; gtk_tree_model_sort_clear_cache ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_sort_clear_cache" tree-model-sort-clear-cache)
+(cffi:defcfun ("gtk_tree_model_sort_clear_cache" tree-model-sort-clear-cache)
     :void
  #+liber-documentation
  "@version{#2021-3-10}
@@ -358,8 +357,8 @@
 ;;; gtk_tree_model_sort_iter_is_valid ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_tree_model_sort_iter_is_valid" tree-model-sort-iter-is-valid)
-    :boolean
+(cffi:defcfun ("gtk_tree_model_sort_iter_is_valid"
+               tree-model-sort-iter-is-valid) :boolean
  #+liber-documentation
  "@version{#2021-3-10}
   @argument[model]{a @class{gtk:tree-model-sort} object}
@@ -380,4 +379,4 @@
 
 (export 'tree-model-sort-iter-is-valid)
 
-;;; --- End of file gtk.tree-model-sort.lisp -----------------------------------
+;;; --- End of file gtk4.tree-model-sort.lisp ----------------------------------
