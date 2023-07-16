@@ -33,7 +33,7 @@
   (:use :iterate :common-lisp)
   (:import-from :cffi       #:defcfun)
   (:import-from :glib)
-  (:import-from :gobject    #:define-g-object-class)
+  (:import-from :gobject)
   (:import-from :gdk-pixbuf)
   (:import-from :pango)
   (:export #:cl-cffi-build-info))

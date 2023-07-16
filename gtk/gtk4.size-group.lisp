@@ -68,7 +68,7 @@
 ;;; GtkSizeGroup
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkSizeGroup" size-group
+(gobject:define-g-object-class "GtkSizeGroup" size-group
   (:superclass g:object
     :export t
     :interfaces ("GtkBuildable")
@@ -203,7 +203,7 @@
 ;;; gtk_size_group_add_widget ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_size_group_add_widget" size-group-add-widget) :void
+(cffi:defcfun ("gtk_size_group_add_widget" size-group-add-widget) :void
  #+liber-documentation
  "@version{2023-3-18}
   @argument[group]{a @class{gtk:size-group} object}
@@ -231,7 +231,7 @@
 ;;; gtk_size_group_remove_widget ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_size_group_remove_widget" size-group-remove-widget) :void
+(cffi:defcfun ("gtk_size_group_remove_widget" size-group-remove-widget) :void
  #+liber-documentation
  "@version{2023-3-18}
   @argument[group]{a @class{gtk:size-group} object}
@@ -251,7 +251,7 @@
 ;;; gtk_size_group_get_widgets () -> size-group-widgets
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_size_group_get_widgets" size-group-widgets)
+(cffi:defcfun ("gtk_size_group_get_widgets" size-group-widgets)
     (g:slist-t g:object :free-from-foreign nil)
  #+liber-documentation
  "@version{2023-3-18}

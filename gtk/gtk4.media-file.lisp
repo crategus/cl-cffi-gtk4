@@ -76,7 +76,7 @@
 ;;; GtkMediaFile
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkMediaFile" media-file
+(gobject:define-g-object-class "GtkMediaFile" media-file
   (:superclass media-stream
    :export t
    :interfaces ("GdkPaintable")
@@ -195,7 +195,7 @@
 ;;; gtk_media_file_new_for_filename ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_file_new_for_filename" %media-file-new-for-filename)
+(cffi:defcfun ("gtk_media_file_new_for_filename" %media-file-new-for-filename)
     (g:object media-stream)
   (filename :string))
 
@@ -219,7 +219,7 @@
 ;;; gtk_media_file_new_for_resource ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_file_new_for_resource" %media-file-new-for-resource)
+(cffi:defcfun ("gtk_media_file_new_for_resource" %media-file-new-for-resource)
     (g:object media-stream)
   (path :string))
 
@@ -282,7 +282,7 @@
 ;;;gtk_media_file_clear ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_file_clear" media-file-clear) :void
+(cffi:defcfun ("gtk_media_file_clear" media-file-clear) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[mediafile]{a @class{gtk:media-file} object}
@@ -296,7 +296,7 @@
 ;;; gtk_media_file_set_filename ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_file_set_filename" %media-file-set-filename) :void
+(cffi:defcfun ("gtk_media_file_set_filename" %media-file-set-filename) :void
   (mediafile (g:object media-file))
   (filename :string))
 
@@ -320,7 +320,7 @@
 ;;; gtk_media_file_set_resource ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_file_set_resource" %media-file-set-resource) :void
+(cffi:defcfun ("gtk_media_file_set_resource" %media-file-set-resource) :void
   (mediafile (g:object media-file))
   (path :string))
 

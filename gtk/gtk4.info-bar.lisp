@@ -89,7 +89,7 @@
 ;;; Class GtkInfoBar
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkInfoBar" info-bar
+(gobject:define-g-object-class "GtkInfoBar" info-bar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -338,7 +338,8 @@ lambda (infobar response)    :run-last
 ;;; gtk_info_bar_add_action_widget ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_info_bar_add_action_widget" info-bar-add-action-widget) :void
+(cffi:defcfun ("gtk_info_bar_add_action_widget" info-bar-add-action-widget)
+    :void
  #+liber-documentation
  "@version{#2022-5-27}
   @argument[infobar]{a @class{gtk:info-bar} widget}
@@ -362,8 +363,8 @@ lambda (infobar response)    :run-last
 ;;; gtk_info_bar_remove_action_widget ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_info_bar_remove_action_widget" info-bar-remove-action-widget)
-    :void
+(cffi:defcfun ("gtk_info_bar_remove_action_widget"
+               info-bar-remove-action-widget) :void
  #+liber-documentation
  "@version{#2022-5-27}
   @argument[infobar]{a @class{gtk:info-bar} widget}
@@ -386,8 +387,7 @@ lambda (infobar response)    :run-last
 ;;; gtk_info_bar_add_button ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_info_bar_add_button" info-bar-add-button)
-    (g:object widget)
+(cffi:defcfun ("gtk_info_bar_add_button" info-bar-add-button) (g:object widget)
  #+liber-documentation
  "@version{#2022-5-27}
   @argument[infobar]{a @class{gtk:info-bar} widget}
@@ -435,8 +435,8 @@ lambda (infobar response)    :run-last
 ;;; gtk_info_bar_set_response_sensitive ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_info_bar_set_response_sensitive"
-           info-bar-set-response-sensitive) :void
+(cffi:defcfun ("gtk_info_bar_set_response_sensitive"
+               info-bar-set-response-sensitive) :void
  #+liber-documentation
  "@version{#2022-5-27}
   @argument[infobar]{a @class{gtk:info-bar} widget}
@@ -459,8 +459,8 @@ lambda (infobar response)    :run-last
 ;;; gtk_info_bar_set_default_response ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_info_bar_set_default_response" info-bar-set-default-response)
-    :void
+(cffi:defcfun ("gtk_info_bar_set_default_response"
+               info-bar-set-default-response) :void
  #+liber-documentation
  "@version{#2022-5-27}
   @argument[infobar]{a @class{gtk:info-bar} widget}
@@ -483,7 +483,7 @@ lambda (infobar response)    :run-last
 ;;; gtk_info_bar_response ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_info_bar_response" info-bar-response) :void
+(cffi:defcfun ("gtk_info_bar_response" info-bar-response) :void
  #+liber-documentation
  "@version{#2022-5-27}
   @argument[infobar]{a @class{gtk:info-bar} widget}
@@ -499,7 +499,7 @@ lambda (infobar response)    :run-last
 ;;; gtk_info_bar_add_child ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_info_bar_add_child" info-bar-add-child) :void
+(cffi:defcfun ("gtk_info_bar_add_child" info-bar-add-child) :void
  #+liber-documentation
  "@version{#2022-5-27}
   @argument[infobar]{a @class{gtk:info-bar} widget}
@@ -516,7 +516,7 @@ lambda (infobar response)    :run-last
 ;;; gtk_info_bar_remove_child ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_info_bar_remove_child" info-bar-remove-child) :void
+(cffi:defcfun ("gtk_info_bar_remove_child" info-bar-remove-child) :void
  #+liber-documentation
  "@version{#2022-5-27}
   @argument[infobar]{a @class{gtk:info-bar} widget}

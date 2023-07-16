@@ -70,7 +70,7 @@
 ;;; GtkPopoverMenuBar
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPopoverMenuBar" popover-menu-bar
+(gobject:define-g-object-class "GtkPopoverMenuBar" popover-menu-bar
   (:superclass widget
     :export t
     :interfaces ("GtkAccessible"
@@ -175,7 +175,8 @@ menubar
 ;;; gtk_popover_menu_bar_add_child ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_popover_menu_bar_add_child" popover-menu-bar-add-child) :boolean
+(cffi:defcfun ("gtk_popover_menu_bar_add_child" popover-menu-bar-add-child)
+    :boolean
  #+liber-documentation
  "@version{#2023-3-12}
   @argument[menubar]{a @class{gtk:popover-menu-bar} widget}
@@ -200,8 +201,8 @@ menubar
 ;;; gtk_popover_menu_bar_remove_child ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_popover_menu_bar_remove_child" popover-menu-bar-remove-child)
-    :boolean
+(cffi:defcfun ("gtk_popover_menu_bar_remove_child"
+               popover-menu-bar-remove-child) :boolean
  #+liber-documentation
  "@version{#2023-3-12}
   @argument[menubar]{a @class{gtk:popover-menu-bar} widget}

@@ -68,7 +68,7 @@
 ;;; struct GtkPageSetupUnixDialog
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPageSetupUnixDialog" page-setup-unix-dialog
+(gobject:define-g-object-class "GtkPageSetupUnixDialog" page-setup-unix-dialog
   (:superclass dialog
    :export t
    :interfaces ("GtkAccessible"
@@ -151,8 +151,8 @@
                         :void)
   page-setup)
 
-(defcfun ("gtk_page_setup_unix_dialog_get_page_setup"
-           page-setup-unix-dialog-page-setup) (g:object page-setup)
+(cffi:defcfun ("gtk_page_setup_unix_dialog_get_page_setup"
+               page-setup-unix-dialog-page-setup) (g:object page-setup)
  #+liber-documentation
  "@version{#2021-3-17}
   @syntax[]{(gtk:page-setup-unix-dialog-page-setup dialog) => setup}
@@ -186,8 +186,8 @@
                         :void)
   settings)
 
-(defcfun ("gtk_page_setup_unix_dialog_get_print_settings"
-           page-setup-unix-dialog-print-settings) :void
+(cffi:defcfun ("gtk_page_setup_unix_dialog_get_print_settings"
+               page-setup-unix-dialog-print-settings) :void
  #+liber-documentation
  "@version{#2021-3-17}
   @syntax[]{(gtk:page-setup-unix-dialog-print-settings dialog) => settings}

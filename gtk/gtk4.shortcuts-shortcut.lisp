@@ -1,12 +1,12 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.shortcuts-shortcut.lisp
+;;; gtk4.shortcuts-shortcut.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2022 Dieter Kaiser
+;;; Copyright (C) 2019 - 2023 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -538,4 +538,4 @@
   internally by GTK, and must not be modified by applications.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- End of file gtk.shortcuts-shortcut.lisp --------------------------------
+;;; --- End of file gtk4.shortcuts-shortcut.lisp -------------------------------

@@ -61,7 +61,7 @@
 ;;; GtkPrintContext
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPrintContext" print-context
+(gobject:define-g-object-class "GtkPrintContext" print-context
   (:superclass g:object
    :export t
    :interfaces nil
@@ -131,7 +131,7 @@
 ;;; gtk_print_context_get_cairo_context ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_print_context_get_cairo_context" 
+(cffi:defcfun ("gtk_print_context_get_cairo_context"
                print-context-cairo-context) (:pointer (:struct cairo:context-t))
  #+liber-documentation
  "@version{#2023-3-16}

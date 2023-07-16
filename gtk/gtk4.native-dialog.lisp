@@ -75,7 +75,7 @@
 ;;; GtkNativeDialog
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkNativeDialog" native-dialog
+(gobject:define-g-object-class "GtkNativeDialog" native-dialog
   (:superclass g:object
    :export t
    :interfaces ()
@@ -255,7 +255,7 @@ lambda (dialog response)    :run-last
 ;;; gtk_native_dialog_show ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_native_dialog_show" native-dialog-show) :void
+(cffi:defcfun ("gdk_native_dialog_show" native-dialog-show) :void
  #+liber-documentation
  "@version{#2023-4-16}
   @argument[dialog]{a @class{gtk:native-dialog} widget}
@@ -275,7 +275,7 @@ lambda (dialog response)    :run-last
 ;;; gtk_native_dialog_hide ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_native_dialog_hide" native-dialog-hide) :void
+(cffi:defcfun ("gdk_native_dialog_hide" native-dialog-hide) :void
  #+liber-documentation
  "@version{#2023-4-16}
   @argument[dialog]{a @class{gtk:native-dialog} widget}
@@ -296,7 +296,7 @@ lambda (dialog response)    :run-last
 ;;; gtk_native_dialog_destroy ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gdk_native_dialog_destroy" native-dialog-destroy) :void
+(cffi:defcfun ("gdk_native_dialog_destroy" native-dialog-destroy) :void
  #+liber-documentation
  "@version{#2023-4-16}
   @argument[dialog]{a @class{gtk:native-dialog} widget}

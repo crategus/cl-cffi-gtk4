@@ -105,7 +105,7 @@
 ;;; GtkMediaStream
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkMediaStream" media-stream
+(gobject:define-g-object-class "GtkMediaStream" media-stream
   (:superclass g:object
    :export t
    :interfaces ("GdkPaintable")
@@ -541,7 +541,7 @@
 ;;; gtk_media_stream_is_prepared ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_is_prepared" media-stream-is-prepared) :boolean
+(cffi:defcfun ("gtk_media_stream_is_prepared" media-stream-is-prepared) :boolean
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}
@@ -559,7 +559,7 @@
 ;;; gtk_media_stream_play ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_play" media-stream-play) :void
+(cffi:defcfun ("gtk_media_stream_play" media-stream-play) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}
@@ -576,7 +576,7 @@
 ;;; gtk_media_stream_pause ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_pause" media-stream-pause) :void
+(cffi:defcfun ("gtk_media_stream_pause" media-stream-pause) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}
@@ -593,7 +593,7 @@
 ;;; gtk_media_stream_is_seekable ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_is_seekable" media-stream-is-seekable) :boolean
+(cffi:defcfun ("gtk_media_stream_is_seekable" media-stream-is-seekable) :boolean
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}
@@ -618,7 +618,7 @@
 ;;; gtk_media_stream_is_seeking ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_is_seeking" media-stream-is-seeking) :boolean
+(cffi:defcfun ("gtk_media_stream_is_seeking" media-stream-is-seeking) :boolean
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}
@@ -635,7 +635,7 @@
 ;;; gtk_media_stream_seek ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_seek" media-stream-seek) :void
+(cffi:defcfun ("gtk_media_stream_seek" media-stream-seek) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}
@@ -661,7 +661,7 @@
 ;;; gtk_media_stream_realize ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_realize" media-stream-realize) :void
+(cffi:defcfun ("gtk_media_stream_realize" media-stream-realize) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}
@@ -697,7 +697,7 @@
 ;;; gtk_media_stream_unrealize ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_unrealize" media-stream-unrealize) :void
+(cffi:defcfun ("gtk_media_stream_unrealize" media-stream-unrealize) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object previously realized}
@@ -775,7 +775,7 @@
 ;;; gtk_media_stream_update ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_update" media-stream-update) :void
+(cffi:defcfun ("gtk_media_stream_update" media-stream-update) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}
@@ -811,7 +811,7 @@
 ;;; gtk_media_stream_seek_success ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_seek_success" media-stream-seek-success) :void
+(cffi:defcfun ("gtk_media_stream_seek_success" media-stream-seek-success) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}
@@ -836,7 +836,7 @@
 ;;; gtk_media_stream_seek_failed ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_media_stream_seek_failed" media-stream-seek-failed) :void
+(cffi:defcfun ("gtk_media_stream_seek_failed" media-stream-seek-failed) :void
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @class{gtk:media-stream} object}

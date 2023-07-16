@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.statusbar.lisp
+;;; gtk4.statusbar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
@@ -69,7 +69,7 @@
 ;;; struct GtkStatusbar
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkStatusbar" statusbar
+(gobject:define-g-object-class "GtkStatusbar" statusbar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -168,7 +168,7 @@ lambda (statusbar context text)    :run-last
 ;;; gtk_statusbar_get_context_id () -> statusbar-context-id
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_statusbar_get_context_id" %statusbar-get-context-id) :uint
+(cffi:defcfun ("gtk_statusbar_get_context_id" %statusbar-get-context-id) :uint
   (statusbar (g:object statusbar))
   (context-description :string))
 
@@ -194,7 +194,7 @@ lambda (statusbar context text)    :run-last
 ;;; gtk_statusbar_push ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_statusbar_push" %statusbar-push) :uint
+(cffi:defcfun ("gtk_statusbar_push" %statusbar-push) :uint
   (statusbar (g:object statusbar))
   (context :uint)
   (text :string))
@@ -222,7 +222,7 @@ lambda (statusbar context text)    :run-last
 ;;; gtk_statusbar_pop ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_statusbar_pop" %statusbar-pop) :void
+(cffi:defcfun ("gtk_statusbar_pop" %statusbar-pop) :void
   (statusbar (g:object statusbar))
   (context :uint))
 
@@ -247,7 +247,7 @@ lambda (statusbar context text)    :run-last
 ;;; gtk_statusbar_remove ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_statusbar_remove" %statusbar-remove) :void
+(cffi:defcfun ("gtk_statusbar_remove" %statusbar-remove) :void
   (statusbar (g:object statusbar))
   (context :uint)
   (message :uint))
@@ -275,7 +275,7 @@ lambda (statusbar context text)    :run-last
 ;;; gtk_statusbar_remove_all ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_statusbar_remove_all" %statusbar-remove-all) :void
+(cffi:defcfun ("gtk_statusbar_remove_all" %statusbar-remove-all) :void
   (statusbar (g:object statusbar))
   (conext :uint))
 
@@ -301,7 +301,7 @@ lambda (statusbar context text)    :run-last
 ;; This function is no longer exported from the C API.
 
 #+nil
-(defcfun ("gtk_statusbar_get_message" statusbar-message) :string
+(cffi:defcfun ("gtk_statusbar_get_message" statusbar-message) :string
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
@@ -313,4 +313,4 @@ lambda (statusbar context text)    :run-last
 #+nil
 (export 'statusbar-message)
 
-;;; --- End of file gtk.statusbar.lisp -----------------------------------------
+;;; --- End of file gtk4.statusbar.lisp ----------------------------------------

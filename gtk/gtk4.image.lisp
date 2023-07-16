@@ -519,7 +519,7 @@
 ;;; gtk_image_new_from_file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_new_from_file" %image-new-from-file) (g:object widget)
+(cffi:defcfun ("gtk_image_new_from_file" %image-new-from-file) (g:object widget)
   (filename :string))
 
 (defun image-new-from-file (path)
@@ -552,7 +552,7 @@
 ;;; gtk_image_new_from_resource
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_new_from_resource" image-new-from-resource)
+(cffi:defcfun ("gtk_image_new_from_resource" image-new-from-resource)
     (g:object image)
  #+liber-documentation
  "@version{#2021-12-17}
@@ -587,7 +587,7 @@
 ;;; gtk_image_new_from_pixbuf
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_new_from_pixbuf" image-new-from-pixbuf)
+(cffi:defcfun ("gtk_image_new_from_pixbuf" image-new-from-pixbuf)
     (g:object image)
  #+liber-documentation
  "@version{#2021-12-17}
@@ -611,7 +611,7 @@
 ;;; gtk_image_new_from_paintable ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_new_from_paintable" image-new-from-paintable)
+(cffi:defcfun ("gtk_image_new_from_paintable" image-new-from-paintable)
     (g:object image)
  #+liber-documentation
  "@version{#2022-7-20}
@@ -632,7 +632,7 @@
 ;;; gtk_image_new_from_icon_name
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_new_from_icon_name" image-new-from-icon-name)
+(cffi:defcfun ("gtk_image_new_from_icon_name" image-new-from-icon-name)
     (g:object image)
  #+liber-documentation
  "@version{#2022-7-20}
@@ -654,7 +654,7 @@
 ;;; gtk_image_new_from_gicon ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_new_from_gicon" image-new-from-gicon)
+(cffi:defcfun ("gtk_image_new_from_gicon" image-new-from-gicon)
     (g:object image)
  #+liber-documentation
  "@version{#2022-7-20}
@@ -676,7 +676,7 @@
 ;;; gtk_image_clear
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_clear" image-clear) :void
+(cffi:defcfun ("gtk_image_clear" image-clear) :void
  #+liber-documentation
  "@version{#2021-12-22}
   @argument[image]{a @class{gtk:image} widget}
@@ -690,7 +690,7 @@
 ;;; gtk_image_set_from_file
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_set_from_file" image-set-from-file) :void
+(cffi:defcfun ("gtk_image_set_from_file" image-set-from-file) :void
  #+liber-documentation
  "@version{#2021-12-17}
   @argument[image]{a @class{gtk:image} widget}
@@ -710,7 +710,7 @@
 ;;; gtk_image_set_from_resource
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_set_from_resource" image-set-from-resource) :void
+(cffi:defcfun ("gtk_image_set_from_resource" image-set-from-resource) :void
  #+liber-documentation
  "@version{#2021-12-17}
   @argument[image]{a @class{gtk:image} widget}
@@ -730,7 +730,7 @@
 ;;; gtk_image_set_from_pixbuf
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_set_from_pixbuf" image-set-from-pixbuf) :void
+(cffi:defcfun ("gtk_image_set_from_pixbuf" image-set-from-pixbuf) :void
  #+liber-documentation
  "@version{#2021-12-17}
   @argument[image]{a @class{gtk:image} widget}
@@ -751,7 +751,7 @@
 ;;; gtk_image_set_from_paintable ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_set_from_paintable" image-set-from-paintable) :void
+(cffi:defcfun ("gtk_image_set_from_paintable" image-set-from-paintable) :void
  #+liber-documentation
  "@version{#2022-7-20}
   @argument[image]{a @class{gtk:image} widget}
@@ -772,7 +772,7 @@
 ;;; gtk_image_set_from_icon_name
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_set_from_icon_name" image-set-from-icon-name) :void
+(cffi:defcfun ("gtk_image_set_from_icon_name" image-set-from-icon-name) :void
  #+liber-documentation
  "@version{#2021-12-17}
   @argument[image]{a @class{gtk:image} widget}
@@ -793,7 +793,7 @@
 ;;; gtk_image_set_from_gicon
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_image_set_from_gicon" image-set-from-gicon) :void
+(cffi:defcfun ("gtk_image_set_from_gicon" image-set-from-gicon) :void
  #+liber-documentation
  "@version{#2021-12-17}
   @argument[image]{a @class{gtk:image} widget}

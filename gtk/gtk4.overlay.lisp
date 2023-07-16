@@ -81,7 +81,7 @@
 ;; TODO: The "get-child-position" signal handler has an return location
 ;; of type GdkRectangle. Check the Lisp implementation of a handler.
 
-(define-g-object-class "GtkOverlay" overlay
+(gobject:define-g-object-class "GtkOverlay" overlay
   (:superclass widget
     :export t
     :interfaces ("GtkAccessible"
@@ -202,7 +202,7 @@ lambda (overlay widget allocation)    :run-last
 ;;; gtk_overlay_add_overlay
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_overlay_add_overlay" overlay-add-overlay) :void
+(cffi:defcfun ("gtk_overlay_add_overlay" overlay-add-overlay) :void
  #+liber-documentation
  "@version{#2022-7-31}
   @argument[overlay]{a @class{gtk:overlay} widget}
@@ -227,7 +227,7 @@ lambda (overlay widget allocation)    :run-last
 
 ;;; --- overlay-remove-overlay ---------------------------------------------
 
-(defcfun ("gtk_overlay_remove_overlay" overlay-remove-overlay) :void
+(cffi:defcfun ("gtk_overlay_remove_overlay" overlay-remove-overlay) :void
  #+liber-documentation
  "@version{#2022-7-31}
   @argument[overlay]{a @class{gtk:overlay} widget}
@@ -257,7 +257,7 @@ lambda (overlay widget allocation)    :run-last
                         :void)
   value)
 
-(defcfun ("gtk_overlay_get_measure_overlay" overlay-measure-overlay)
+(cffi:defcfun ("gtk_overlay_get_measure_overlay" overlay-measure-overlay)
     :boolean
  #+liber-documentation
  "@version{#2022-7-31}
@@ -296,7 +296,7 @@ lambda (overlay widget allocation)    :run-last
                         :void)
   value)
 
-(defcfun ("gtk_overlay_get_clip_overlay" overlay-clip-overlay) :boolean
+(cffi:defcfun ("gtk_overlay_get_clip_overlay" overlay-clip-overlay) :boolean
  #+liber-documentation
  "@version{#2022-7-31}
   @syntax[]{(gtk:overlay-clip-overlay overlay widget) => clip}

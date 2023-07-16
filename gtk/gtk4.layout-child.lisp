@@ -61,7 +61,7 @@
 ;;; GtkLayoutChild
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkLayoutChild" layout-child
+(gobject:define-g-object-class "GtkLayoutChild" layout-child
   (:superclass g:object
    :export t
    :interfaces ()

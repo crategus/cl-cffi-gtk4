@@ -1398,7 +1398,7 @@ lambda (operation widget setup settings)    :run-last
 ;;; gtk_print_operation_run ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_print_operation_run" %print-operation-run) 
+(cffi:defcfun ("gtk_print_operation_run" %print-operation-run)
     print-operation-result
   (operation (g:object print-operation))
   (action print-operation-action)

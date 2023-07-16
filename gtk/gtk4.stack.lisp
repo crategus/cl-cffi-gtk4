@@ -866,7 +866,7 @@
 ;;; gtk_stack_add_named
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_stack_add_named" stack-add-named) :void
+(cffi:defcfun ("gtk_stack_add_named" stack-add-named) :void
  #+liber-documentation
  "@version{#2021-12-16}
   @argument[stack]{a @class{gtk:stack} widget}
@@ -888,7 +888,7 @@
 ;;; gtk_stack_add_titled
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_stack_add_titled" stack-add-titled) :void
+(cffi:defcfun ("gtk_stack_add_titled" stack-add-titled) :void
  #+liber-documentation
  "@version{#2021-12-7}
   @argument[stack]{a @class{gtk:stack} widget}
@@ -915,7 +915,7 @@
 ;;;gtk_stack_remove
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_stack_remove" stack-remove) :void
+(cffi:defcfun ("gtk_stack_remove" stack-remove) :void
  #+liber-documentation
  "@version{#2022-2-6}
   @argument[stack]{a @class{gtk:stack} widget}
@@ -932,7 +932,8 @@
 ;;; gtk_stack_get_child_by_name
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_stack_get_child_by_name" stack-child-by-name) (g:object widget)
+(cffi:defcfun ("gtk_stack_get_child_by_name" stack-child-by-name)
+    (g:object widget)
  #+liber-documentation
  "@version{#2021-12-7}
   @argument[stack]{a @class{gtk:stack} widget}
@@ -953,7 +954,7 @@
 ;;;gtk_stack_get_page
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_stack_get_page" stack-page) (g:object stack-page)
+(cffi:defcfun ("gtk_stack_get_page" stack-page) (g:object stack-page)
  #+liber-documentation
  "@version{#2022-2-6}
   @argument[stack]{a @class{gtk:stack} widget}
@@ -972,7 +973,8 @@
 ;;; gtk_stack_set_visible_child_full
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_stack_set_visible_child_full" stack-set-visible-child-full) :void
+(cffi:defcfun ("gtk_stack_set_visible_child_full" stack-set-visible-child-full)
+    :void
  #+liber-documentation
  "@version{#2021-12-7}
   @argument[stack]{a @class{gtk:stack} widget}

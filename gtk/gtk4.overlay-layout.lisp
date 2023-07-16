@@ -67,7 +67,7 @@
 ;;; GtkOverlayLayoutChild
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkOverlayLayoutChild" overlay-layout-child
+(gobject:define-g-object-class "GtkOverlayLayoutChild" overlay-layout-child
   (:superclass layout-child
    :export t
    :interfaces ()
@@ -153,7 +153,7 @@
 ;;; GtkOverlayLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkOverlayLayout" overlay-layout
+(gobject:define-g-object-class "GtkOverlayLayout" overlay-layout
   (:superclass layout-manager
    :export t
    :interfaces ()

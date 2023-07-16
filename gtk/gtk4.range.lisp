@@ -104,7 +104,7 @@
 
 ;; TODO: Implement the GtkAccessibleRange interface
 
-(define-g-object-class "GtkRange" range
+(gobject:define-g-object-class "GtkRange" range
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

@@ -77,7 +77,7 @@
 ;;; GtkPageSetup
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPageSetup" page-setup
+(gobject:define-g-object-class "GtkPageSetup" page-setup
   (:superclass g:object
    :export t
    :interfaces nil
@@ -141,7 +141,7 @@
 ;;; gtk_page_setup_copy ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_copy" page-setup-copy) (g:object page-setup)
+(cffi:defcfun ("gtk_page_setup_copy" page-setup-copy) (g:object page-setup)
  #+liber-documentation
  "@version{#2021-3-17}
   @argument[setup]{the @class{gtk:page-setup} object to copy}
@@ -164,7 +164,7 @@
                         :void)
   orientation)
 
-(defcfun ("gtk_page_setup_get_orientation" page-setup-orientation)
+(cffi:defcfun ("gtk_page_setup_get_orientation" page-setup-orientation)
     page-orientation
  #+liber-documentation
  "@version{#2021-3-17}
@@ -207,7 +207,7 @@
                         :void)
   size)
 
-(defcfun ("gtk_page_setup_get_paper_size" page-setup-paper-size)
+(cffi:defcfun ("gtk_page_setup_get_paper_size" page-setup-paper-size)
     (g:boxed paper-size)
  #+liber-documentation
  "@version{#2021-3-17}
@@ -243,7 +243,7 @@
                         :void)
   margin)
 
-(defcfun ("gtk_page_setup_get_top_margin" page-setup-top-margin) :double
+(cffi:defcfun ("gtk_page_setup_get_top_margin" page-setup-top-margin) :double
  #+liber-documentation
  "@version{#2021-3-17}
   @syntax[]{(gtk:page-setup-top-margin setup unit) => margin}
@@ -278,7 +278,7 @@
                         :void)
   margin)
 
-(defcfun ("gtk_page_setup_get_bottom_margin" page-setup-bottom-margin)
+(cffi:defcfun ("gtk_page_setup_get_bottom_margin" page-setup-bottom-margin)
     :double
  #+liber-documentation
  "@version{#2021-3-17}
@@ -315,7 +315,7 @@
                         :void)
   margin)
 
-(defcfun ("gtk_page_setup_get_left_margin" page-setup-left-margin) :double
+(cffi:defcfun ("gtk_page_setup_get_left_margin" page-setup-left-margin) :double
  #+liber-documentation
  "@version{#2021-3-17}
   @syntax[]{(gtk:page-setup-left-margin setup unit) => margin}
@@ -350,7 +350,8 @@
                         :void)
   margin)
 
-(defcfun ("gtk_page_setup_get_right_margin" page-setup-right-margin) :double
+(cffi:defcfun ("gtk_page_setup_get_right_margin" page-setup-right-margin)
+    :double
  #+liber-documentation
  "@version{#2021-3-17}
   @syntax[]{(gtk:page-setup-right-margin setup unit) => margin}
@@ -376,8 +377,8 @@
 ;;; gtk_page_setup_set_paper_size_and_default_margins ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_set_paper_size_and_default_margins"
-           page-setup-set-paper-size-and-default-margins) :void
+(cffi:defcfun ("gtk_page_setup_set_paper_size_and_default_margins"
+               page-setup-set-paper-size-and-default-margins) :void
  #+liber-documentation
  "@version{#2021-3-17}
   @argument[setup]{a @class{gtk:page-setup} object}
@@ -397,7 +398,7 @@
 ;;; gtk_page_setup_get_paper_width () -> page-setup-paper-width
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_get_paper_width" page-setup-paper-width) :double
+(cffi:defcfun ("gtk_page_setup_get_paper_width" page-setup-paper-width) :double
  #+liber-documentation
  "@version{#2021-3-17}
   @argument[setup]{a @class{gtk:page-setup} object}
@@ -419,7 +420,8 @@
 ;;; gtk_page_setup_get_paper_height () -> page-setup-paper-height
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_get_paper_height" page-setup-paper-height) :double
+(cffi:defcfun ("gtk_page_setup_get_paper_height" page-setup-paper-height)
+    :double
  #+liber-documentation
  "@version{#2021-3-17}
   @argument[setup]{a @class{gtk:page-setup} object}
@@ -441,7 +443,7 @@
 ;;; gtk_page_setup_get_page_width ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_get_page_width" page-setup-page-width) :double
+(cffi:defcfun ("gtk_page_setup_get_page_width" page-setup-page-width) :double
  #+liber-documentation
  "@version{#2021-3-17}
   @argument[setup]{a @class{gtk:page-setup} object}
@@ -463,7 +465,7 @@
 ;;; gtk_page_setup_get_page_height ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_get_page_height" page-setup-page-height) :double
+(cffi:defcfun ("gtk_page_setup_get_page_height" page-setup-page-height) :double
  #+liber-documentation
  "@version{#2021-3-17}
   @argument[setup]{a @class{gtk:page-setup} object}
@@ -485,7 +487,7 @@
 ;;; gtk_page_setup_new_from_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_new_from_file" %page-setup-new-from-file)
+(cffi:defcfun ("gtk_page_setup_new_from_file" %page-setup-new-from-file)
     (g:object page-setup)
   (filename :string)
   (err :pointer))
@@ -513,7 +515,7 @@
 ;;; gtk_page_setup_new_from_key_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_new_from_key_file" %page-setup-new-from-key-file)
+(cffi:defcfun ("gtk_page_setup_new_from_key_file" %page-setup-new-from-key-file)
     (g:object page-setup)
   (keyfile (:pointer (:struct glib:key-file)))
   (groupname :string)
@@ -543,7 +545,7 @@
 ;;; gtk_page_setup_new_from_gvariant ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_new_from_gvariant" page-setup-new-from-gvariant)
+(cffi:defcfun ("gtk_page_setup_new_from_gvariant" page-setup-new-from-gvariant)
     (g:object page-setup)
  #+liber-documentation
  "@version{#2021-3-17}
@@ -564,7 +566,7 @@
 ;;; gtk_page_setup_load_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_load_file" %page-setup-load-file) :boolean
+(cffi:defcfun ("gtk_page_setup_load_file" %page-setup-load-file) :boolean
   (page-setup (g:object page-setup))
   (filename :string)
   (err :pointer))
@@ -591,7 +593,8 @@
 ;;; gtk_page_setup_load_key_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_load_key_file" %page-setup-load-key-file) :boolean
+(cffi:defcfun ("gtk_page_setup_load_key_file" %page-setup-load-key-file)
+    :boolean
   (setup (g:object page-setup))
   (keyfile (:pointer (:struct glib:key-file)))
   (groupname :string)
@@ -620,7 +623,7 @@
 ;;; gtk_page_setup_to_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_to_file" %page-setup-to-file) :boolean
+(cffi:defcfun ("gtk_page_setup_to_file" %page-setup-to-file) :boolean
   (setup (g:object page-setup))
   (filename :string)
   (err :pointer))
@@ -644,7 +647,7 @@
 ;;; gtk_page_setup_to_key_file ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_to_key_file" %page-setup-to-key-file) :void
+(cffi:defcfun ("gtk_page_setup_to_key_file" %page-setup-to-key-file) :void
   (setup (g:object page-setup))
   (keyfile (:pointer (:struct glib:key-file)))
   (groupname :string))
@@ -671,7 +674,7 @@
 ;;; gtk_page_setup_to_gvariant ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_page_setup_to_gvariant" page-setup-to-gvariant)
+(cffi:defcfun ("gtk_page_setup_to_gvariant" page-setup-to-gvariant)
     (:pointer (:struct glib:variant))
  #+liber-documentation
  "@version{#2021-3-17}

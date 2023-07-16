@@ -335,7 +335,7 @@
 ;;; gtk_shortcut_action_to_string ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_shortcut_action_to_string" shortcut-action-to-string) 
+(cffi:defcfun ("gtk_shortcut_action_to_string" shortcut-action-to-string)
     :string
  #+liber-documentation
  "@version{#2022-8-26}

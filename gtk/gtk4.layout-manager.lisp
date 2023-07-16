@@ -221,7 +221,7 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; gtk_layout_manager_get_request_mode ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_layout_manager_get_request_mode" 
+(cffi:defcfun ("gtk_layout_manager_get_request_mode"
                layout-manager-request-mode) size-request-mode
  #+liber-documentation
  "@version{#2023-4-16}
@@ -257,7 +257,7 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; gtk_layout_manager_get_layout_child ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_layout_manager_get_layout_child" 
+(cffi:defcfun ("gtk_layout_manager_get_layout_child"
                layout-manager-layout-child) (g:object layout-child)
  #+liber-documentation
  "@version{#2023-4-16}
@@ -284,7 +284,7 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; gtk_layout_manager_layout_changed ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_layout_manager_layout_changed" 
+(cffi:defcfun ("gtk_layout_manager_layout_changed"
                layout-manager-layout-changed) :void
  #+liber-documentation
  "@version{#2023-4-16}

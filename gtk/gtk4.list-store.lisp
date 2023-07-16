@@ -79,7 +79,7 @@
 ;;; struct GtkListStore
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkListStore" list-store
+(gobject:define-g-object-class "GtkListStore" list-store
   (:superclass g:object
    :export t
    :interfaces ("GtkBuildable"
@@ -289,7 +289,7 @@
 ;;; gtk_list_store_set_column_types ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_set_column_types" %list-store-set-column-types)
+(cffi:defcfun ("gtk_list_store_set_column_types" %list-store-set-column-types)
     :void
   (store (g:object list-store))
   (n-columns :int)
@@ -415,7 +415,7 @@
 ;;; gtk_list_store_set_value ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_set_value" %list-store-set-value) :void
+(cffi:defcfun ("gtk_list_store_set_value" %list-store-set-value) :void
   (store (g:object list-store))
   (iter (g:boxed tree-iter))
   (column :int)
@@ -480,7 +480,7 @@
 
 ;; Only for internal use. Not exported.
 
-(defcfun ("gtk_list_store_set_valuesv" %list-store-set-valuesv) :void
+(cffi:defcfun ("gtk_list_store_set_valuesv" %list-store-set-valuesv) :void
   (store (g:object list-store))
   (iter (g:boxed tree-iter))
   (columns :pointer)
@@ -491,7 +491,7 @@
 ;;; gtk_list_store_remove ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_remove" list-store-remove) :boolean
+(cffi:defcfun ("gtk_list_store_remove" list-store-remove) :boolean
  #+liber-documentation
  "@version{#2021-3-5}
   @argument[store]{a @class{gtk:list-store} object}
@@ -514,7 +514,7 @@
 ;;; gtk_list_store_insert ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_insert" %list-store-insert) :void
+(cffi:defcfun ("gtk_list_store_insert" %list-store-insert) :void
   (store (g:object list-store))
   (iter (g:boxed tree-iter))
   (position :int))
@@ -547,7 +547,7 @@
 ;;; gtk_list_store_insert_before ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_insert_before" %list-store-insert-before) :void
+(cffi:defcfun ("gtk_list_store_insert_before" %list-store-insert-before) :void
   (store (g:object list-store))
   (iter (g:boxed tree-iter))
   (sibling (g:boxed tree-iter)))
@@ -579,7 +579,7 @@
 ;;; gtk_list_store_insert_after ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_insert_after" %list-store-insert-after) :void
+(cffi:defcfun ("gtk_list_store_insert_after" %list-store-insert-after) :void
   (store (g:object list-store))
   (iter (g:boxed tree-iter))
   (sibling (g:boxed tree-iter)))
@@ -704,8 +704,8 @@
 
 ;; Only for internal use. Not exported.
 
-(defcfun ("gtk_list_store_insert_with_valuesv"
-          %list-store-insert-with-valuesv) :void
+(cffi:defcfun ("gtk_list_store_insert_with_valuesv"
+               %list-store-insert-with-valuesv) :void
   (store (g:object list-store))
   (iter (g:boxed tree-iter))
   (position :int)
@@ -717,7 +717,7 @@
 ;;; gtk_list_store_prepend ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_prepend" %list-store-prepend) :void
+(cffi:defcfun ("gtk_list_store_prepend" %list-store-prepend) :void
   (store (g:object list-store))
   (iter (g:boxed tree-iter)))
 
@@ -746,7 +746,7 @@
 ;;; gtk_list_store_append ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_append" %list-store-append) :void
+(cffi:defcfun ("gtk_list_store_append" %list-store-append) :void
   (store (g:object list-store))
   (iter (g:boxed tree-iter)))
 
@@ -775,7 +775,7 @@
 ;;; gtk_list_store_clear ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_clear" list-store-clear) :void
+(cffi:defcfun ("gtk_list_store_clear" list-store-clear) :void
  #+liber-documentation
  "@version{#2021-3-5}
   @argument[store]{a @class{gtk:list-store} object}
@@ -789,7 +789,7 @@
 ;;; gtk_list_store_iter_is_valid ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_iter_is_valid" list-store-iter-is-valid) :boolean
+(cffi:defcfun ("gtk_list_store_iter_is_valid" list-store-iter-is-valid) :boolean
  #+liber-documentation
  "@version{#2021-3-11}
   @argument[store]{a @class{gtk:list-store} object}
@@ -814,7 +814,7 @@
 ;;; gtk_list_store_reorder ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_reorder" %list-store-reorder) :void
+(cffi:defcfun ("gtk_list_store_reorder" %list-store-reorder) :void
   (store (g:object list-store))
   (order :pointer))
 
@@ -842,7 +842,7 @@
 ;;; gtk_list_store_swap ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_swap" list-store-swap) :void
+(cffi:defcfun ("gtk_list_store_swap" list-store-swap) :void
  #+liber-documentation
  "@version{#2021-3-11}
   @argument[store]{a @class{gtk:list-store} object}
@@ -864,7 +864,7 @@
 ;;; gtk_list_store_move_before ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_move_before" list-store-move-before) :void
+(cffi:defcfun ("gtk_list_store_move_before" list-store-move-before) :void
  #+liber-documentation
  "@version{#2021-3-11}
   @argument[store]{a @class{gtk:list-store} object}
@@ -888,7 +888,7 @@
 ;;; gtk_list_store_move_after ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_list_store_move_after" list-store-move-after) :void
+(cffi:defcfun ("gtk_list_store_move_after" list-store-move-after) :void
  #+liber-documentation
  "@version{#2021-3-11}
   @argument[store]{a @class{gtk:list-store} object}

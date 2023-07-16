@@ -88,7 +88,7 @@
 
 ;; TODO: Implement the GtkAccessibleRange interface
 
-(define-g-object-class "GtkProgressBar" progress-bar
+(gobject:define-g-object-class "GtkProgressBar" progress-bar
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -409,7 +409,7 @@ progressbar[.osd]
 ;;; gtk_progress_bar_pulse ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_progress_bar_pulse" progress-bar-pulse) :void
+(cffi:defcfun ("gtk_progress_bar_pulse" progress-bar-pulse) :void
  #+liber-documentation
  "@version{#2021-11-2}
   @argument[bar]{a @class{gtk:progress-bar} widget}

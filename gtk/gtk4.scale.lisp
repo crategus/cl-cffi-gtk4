@@ -87,7 +87,7 @@
 ;;; struct GtkScale
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkScale" scale
+(gobject:define-g-object-class "GtkScale" scale
   (:superclass range
    :export t
    :interfaces ("GtkAccessible"

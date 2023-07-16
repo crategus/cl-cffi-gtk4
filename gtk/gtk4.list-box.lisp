@@ -151,7 +151,7 @@
 
 ;; TODO: Implement missing interfaces
 
-(define-g-object-class "GtkListBoxRow" list-box-row
+(gobject:define-g-object-class "GtkListBoxRow" list-box-row
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -286,7 +286,7 @@ lambda (row)    :action
 ;;; GtkListBox
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkListBox" list-box
+(gobject:define-g-object-class "GtkListBox" list-box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -1039,7 +1039,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_invalidate_filter
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_list_box_invalidate_filter" list-box-invalidate-filter) 
+(cffi:defcfun ("gtk_list_box_invalidate_filter" list-box-invalidate-filter)
     :void
  #+liber-documentation
  "@version{#2021-11-15}
@@ -1258,7 +1258,7 @@ lambda (listbox)    :action
 ;;; gtk_list_box_drag_unhighlight_row
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_list_box_drag_unhighlight_row" 
+(cffi:defcfun ("gtk_list_box_drag_unhighlight_row"
                list-box-drag-unhighlight-row) :void
  #+liber-documentation
  "@version{#2021-11-15}

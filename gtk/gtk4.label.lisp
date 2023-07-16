@@ -142,7 +142,7 @@
 ;;; GtkLabel
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkLabel" label
+(gobject:define-g-object-class "GtkLabel" label
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -1177,7 +1177,7 @@ lambda (label step count extend)    :action
                         :void)
   text)
 
-(defcfun ("gtk_label_get_text" label-text) :string
+(cffi:defcfun ("gtk_label_get_text" label-text) :string
  #+liber-documentation
  "@version{#2023-4-15}
   @syntax[]{(gtk:label-text label) => text}
@@ -1204,7 +1204,7 @@ lambda (label step count extend)    :action
 ;;; gtk_label_set_markup
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_label_set_markup" label-set-markup) :void
+(cffi:defcfun ("gtk_label_set_markup" label-set-markup) :void
  #+liber-documentation
  "@version{#2021-10-31}
   @argument[label]{a @class{gtk:label} widget}
@@ -1225,8 +1225,8 @@ lambda (label step count extend)    :action
 ;;; gtk_label_set_markup_with_mnemonic
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_label_set_markup_with_mnemonic"
-           label-set-markup-with-mnemonic) :void
+(cffi:defcfun ("gtk_label_set_markup_with_mnemonic"
+               label-set-markup-with-mnemonic) :void
  #+liber-documentation
  "@version{#2021-10-31}
   @argument[label]{a @class{gtk:label} widget}
@@ -1251,7 +1251,7 @@ lambda (label step count extend)    :action
 ;;; gtk_label_get_layout_offsets -> label-layout-offsets
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_label_get_layout_offsets" %label-get-layout-offsets) :void
+(cffi:defcfun ("gtk_label_get_layout_offsets" %label-get-layout-offsets) :void
   (label (g:object label))
   (x (:pointer :int))
   (y (:pointer :int)))
@@ -1299,7 +1299,7 @@ lambda (label step count extend)    :action
 
 ;; TODO: Check implementation with make-instance
 
-(defcfun ("gtk_label_new_with_mnemonic" label-new-with-mnemonic)
+(cffi:defcfun ("gtk_label_new_with_mnemonic" label-new-with-mnemonic)
     (g:object widget)
  #+liber-documentation
  "@version{#2021-12-22}
@@ -1332,7 +1332,7 @@ lambda (label step count extend)    :action
 ;;; gtk_label_select_region
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_label_select_region" label-select-region) :void
+(cffi:defcfun ("gtk_label_select_region" label-select-region) :void
  #+liber-documentation
  "@version{#2021-10-31}
   @argument[label]{a @class{gtk:label} widget}
@@ -1356,7 +1356,7 @@ lambda (label step count extend)    :action
 ;;; gtk_label_set_text_with_mnemonic
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_label_set_text_with_mnemonic" label-set-text-with-mnemonic)
+(cffi:defcfun ("gtk_label_set_text_with_mnemonic" label-set-text-with-mnemonic)
     :void
  #+liber-documentation
  "@version{#2021-10-31}
@@ -1380,7 +1380,7 @@ lambda (label step count extend)    :action
 ;;; gtk_label_get_layout -> label-layout
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_label_get_layout" label-layout) (g:object pango:layout)
+(cffi:defcfun ("gtk_label_get_layout" label-layout) (g:object pango:layout)
  #+liber-documentation
  "@version{#2021-10-31}
   @argument[label]{a @class{gtk:label} widget}
@@ -1403,7 +1403,7 @@ lambda (label step count extend)    :action
 ;;; gtk_label_get_selection_bounds -> label-selection-bounds
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_label_get_selection_bounds" %label-get-selection-bounds)
+(cffi:defcfun ("gtk_label_get_selection_bounds" %label-get-selection-bounds)
     :boolean
   (label (g:object label))
   (start (:pointer :int))
@@ -1433,7 +1433,7 @@ lambda (label step count extend)    :action
 ;;; gtk_label_get_current_uri -> label-current-uri
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_label_get_current_uri" label-current-uri) :string
+(cffi:defcfun ("gtk_label_get_current_uri" label-current-uri) :string
  #+liber-documentation
  "@version{#2021-10-31}
   @argument[label]{a @class{gtk:label} widget}

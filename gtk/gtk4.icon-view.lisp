@@ -1448,7 +1448,7 @@ lambda (view path)
 ;;; gtk_icon_view_get_visible_range () -> icon-view-visible-range
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_icon_view_get_visible_range" %icon-view-visible-range) 
+(cffi:defcfun ("gtk_icon_view_get_visible_range" %icon-view-visible-range)
     :boolean
   (view (g:object icon-view))
   (start :pointer)
@@ -1482,7 +1482,7 @@ lambda (view path)
 ;;; gtk_icon_view_set_tooltip_item ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_icon_view_set_tooltip_item" icon-view-set-tooltip-item) 
+(cffi:defcfun ("gtk_icon_view_set_tooltip_item" icon-view-set-tooltip-item)
     :void
  #+liber-documentation
  "@version{#2021-3-9}
@@ -1508,7 +1508,7 @@ lambda (view path)
 ;;; gtk_icon_view_set_tooltip_cell ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_icon_view_set_tooltip_cell" icon-view-set-tooltip-cell) 
+(cffi:defcfun ("gtk_icon_view_set_tooltip_cell" icon-view-set-tooltip-cell)
     :void
  #+liber-documentation
  "@version{#2021-3-9}

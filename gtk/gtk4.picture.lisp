@@ -466,7 +466,8 @@
 ;;; gtk_picture_new_for_pixbuf ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_picture_new_for_pixbuf" picture-new-for-pixbuf) (g:object widget)
+(cffi:defcfun ("gtk_picture_new_for_pixbuf" picture-new-for-pixbuf)
+    (g:object widget)
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
@@ -516,7 +517,7 @@
 ;;; gtk_picture_new_for_filename ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_picture_new_for_filename" picture-new-for-filename)
+(cffi:defcfun ("gtk_picture_new_for_filename" picture-new-for-filename)
     (g:object widget)
  #+liber-documentation
  "@version{#2022-7-29}
@@ -537,7 +538,7 @@
 ;;; gtk_picture_new_for_resource ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_picture_new_for_resource" picture-new-for-resource)
+(cffi:defcfun ("gtk_picture_new_for_resource" picture-new-for-resource)
      (g:object widget)
  #+liber-documentation
  "@version{#2022-7-29}
@@ -558,7 +559,7 @@
 ;;; gtk_picture_set_pixbuf ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_picture_set_pixbuf" picture-set-pixbuf) :void
+(cffi:defcfun ("gtk_picture_set_pixbuf" picture-set-pixbuf) :void
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[picture]{a @class{gtk:picture} widget}
@@ -580,7 +581,7 @@
 ;;; gtk_picture_set_filename ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_picture_set_filename" picture-set-filename) :void
+(cffi:defcfun ("gtk_picture_set_filename" picture-set-filename) :void
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[picture]{a @class{gtk:picture} widget}
@@ -600,7 +601,7 @@
 ;;; gtk_picture_set_resource ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_picture_set_resource" picture-set-resource) :void
+(cffi:defcfun ("gtk_picture_set_resource" picture-set-resource) :void
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[picture]{a @class{gtk:picture} widget}

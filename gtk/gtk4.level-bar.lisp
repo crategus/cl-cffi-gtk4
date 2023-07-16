@@ -489,7 +489,7 @@ lambda (levelbar name)    :detailed
 ;;; gtk_level_bar_add_offset_value ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_level_bar_add_offset_value" %level-bar-add-offset-value)
+(cffi:defcfun ("gtk_level_bar_add_offset_value" %level-bar-add-offset-value)
     :void
   (levelbar (g:object level-bar))
   (name :string)
@@ -523,8 +523,8 @@ lambda (levelbar name)    :detailed
 ;;; gtk_level_bar_remove_offset_value ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_level_bar_remove_offset_value" level-bar-remove-offset-value)
-    :void
+(cffi:defcfun ("gtk_level_bar_remove_offset_value"
+               level-bar-remove-offset-value) :void
  #+liber-documentation
  "@version{#2021-12-22}
   @argument[levelbar]{a @class{gtk:level-bar} widget}
@@ -544,7 +544,8 @@ lambda (levelbar name)    :detailed
 ;;; gtk_level_bar_get_offset_value () -> level-bar-offset-value
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_level_bar_get_offset_value" %level-bar-offset-value) :boolean
+(cffi:defcfun ("gtk_level_bar_get_offset_value" %level-bar-offset-value)
+    :boolean
   (levelbar (g:object level-bar))
   (name :string)
   (value (:pointer :double)))

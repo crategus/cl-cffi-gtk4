@@ -105,7 +105,7 @@
 
 ;; TODO: Implement the GtkAccessibleRange interface
 
-(define-g-object-class "GtkPaned" paned
+(gobject:define-g-object-class "GtkPaned" paned
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

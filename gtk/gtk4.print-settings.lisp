@@ -1150,7 +1150,7 @@ lambda (key value)
                         :void)
   duplex)
 
-(cffi:defcfun ("gtk_print_settings_get_duplex" print-settings-duplex) 
+(cffi:defcfun ("gtk_print_settings_get_duplex" print-settings-duplex)
     print-duplex
  #+liber-documentation
  "@version{#2020-4-5}
@@ -1370,7 +1370,7 @@ lambda (key value)
 ;;; gtk_print_settings_get_resolution_x ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_print_settings_get_resolution_x" 
+(cffi:defcfun ("gtk_print_settings_get_resolution_x"
                print-settings-resolution-x) :int
  #+liber-documentation
  "@version{#2020-4-6}
@@ -1388,7 +1388,7 @@ lambda (key value)
 ;;; gtk_print_settings_get_resolution_y ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_print_settings_get_resolution_y" 
+(cffi:defcfun ("gtk_print_settings_get_resolution_y"
                print-settings-resolution-y) :int
  #+liber-documentation
  "@version{#2020-4-6}
@@ -1876,7 +1876,7 @@ lambda (key value)
 ;;; gtk_print_settings_load_file ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_print_settings_load_file" %print-settings-load-file) 
+(cffi:defcfun ("gtk_print_settings_load_file" %print-settings-load-file)
     :boolean
   (settings (g:object print-settings))
   (filename :string)
@@ -1961,7 +1961,7 @@ lambda (key value)
 ;;; gtk_print_settings_to_key_file ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_print_settings_to_key_file" print-settings-to-key-file) 
+(cffi:defcfun ("gtk_print_settings_to_key_file" print-settings-to-key-file)
     :void
  #+liber-documentation
  "@version{#2022-10-21}

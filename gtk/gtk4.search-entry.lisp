@@ -82,7 +82,7 @@
 ;;; struct GtkSearchEntry
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkSearchEntry" search-entry
+(gobject:define-g-object-class "GtkSearchEntry" search-entry
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -346,8 +346,8 @@ lambda (entry)    :action
                         :void)
   widget)
 
-(defcfun ("gtk_search_entry_get_key_capture_widget"
-           search-entry-key-capture-widget) (g:object widget)
+(cffi:defcfun ("gtk_search_entry_get_key_capture_widget"
+               search-entry-key-capture-widget) (g:object widget)
  #+liber-documentation
  "@version{#2022-7-24}
   @syntax[]{(gtk:search-entry-key-capture-widget entry) => widget}

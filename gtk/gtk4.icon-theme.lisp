@@ -454,7 +454,7 @@ lambda (theme)    :run-last
 ;;; gtk_icon_theme_add_search_path ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_icon_theme_add_search_path" icon-theme-add-search-path) 
+(cffi:defcfun ("gtk_icon_theme_add_search_path" icon-theme-add-search-path)
     :void
  #+liber-documentation
  "@version{#2022-7-3}

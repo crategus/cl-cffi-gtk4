@@ -68,7 +68,7 @@
 ;;; GtkMediaControls
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkMediaControls" media-controls
+(gobject:define-g-object-class "GtkMediaControls" media-controls
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

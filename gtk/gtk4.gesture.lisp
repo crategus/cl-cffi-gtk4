@@ -329,7 +329,7 @@ lambda (gesture sequence)    :run-last
 ;;; gtk_gesture_get_device () -> gesture-device
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_gesture_get_device" gesture-device) (g:object gdk-device)
+(cffi:defcfun ("gtk_gesture_get_device" gesture-device) (g:object gdk-device)
  #+liber-documentation
  "@version{#2022-8-22}
   @argument[gesture]{a @class{gtk:gesture} object}
@@ -347,7 +347,7 @@ lambda (gesture sequence)    :run-last
 ;;; gtk_gesture_is_active ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_gesture_is_active" gesture-is-active) :boolean
+(cffi:defcfun ("gtk_gesture_is_active" gesture-is-active) :boolean
  #+liber-documentation
  "@version{#2022-8-21}
   @argument[gesture]{a @class{gtk:gesture} object}
@@ -366,7 +366,7 @@ lambda (gesture sequence)    :run-last
 ;;; gtk_gesture_is_recognized ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_gesture_is_recognized" gesture-is-recognized) :boolean
+(cffi:defcfun ("gtk_gesture_is_recognized" gesture-is-recognized) :boolean
  #+liber-documentation
  "@version{#2022-8-22}
   @argument[gesture]{a @class{gtk:gesture} object}
@@ -394,7 +394,7 @@ lambda (gesture sequence)    :run-last
                               :boolean)
     value))
 
-(defcfun ("gtk_gesture_get_sequence_state" gesture-sequence-state)
+(cffi:defcfun ("gtk_gesture_get_sequence_state" gesture-sequence-state)
     event-sequence-state
  #+liber-documentation
  "@version{#2022-8-22}
@@ -461,7 +461,7 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 ;;; gtk_gesture_set_state ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_gesture_set_state" gesture-set-state) :boolean
+(cffi:defcfun ("gtk_gesture_set_state" gesture-set-state) :boolean
  #+liber-documentation
  "@version{#2022-8-22}
   @argument[gesture]{a @class{gtk:gesture} object}

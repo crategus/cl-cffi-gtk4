@@ -92,7 +92,7 @@
 ;;; GtkGridLayoutChild
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkGridLayoutChild" grid-layout-child
+(gobject:define-g-object-class "GtkGridLayoutChild" grid-layout-child
   (:superclass layout-child
    :export t
    :interfaces ()
@@ -235,7 +235,7 @@
 ;;; GtkGridLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkGridLayout" grid-layout
+(gobject:define-g-object-class "GtkGridLayout" grid-layout
   (:superclass layout-manager
    :export t
    :interfaces ()
@@ -462,8 +462,8 @@
                         :void)
   position)
 
-(defcfun ("gdk_grid_layout_get_row_baseline_position"
-           grid-layout-row-baseline-position) baseline-position
+(cffi:defcfun ("gdk_grid_layout_get_row_baseline_position"
+               grid-layout-row-baseline-position) baseline-position
  #+liber-documentation
  "@version{#2023-4-19}
   @syntax[]{(gtk:grid-layout-row-baseline-position layout) => position}

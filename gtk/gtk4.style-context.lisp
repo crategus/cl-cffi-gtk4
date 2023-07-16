@@ -410,7 +410,7 @@
 ;;; gtk_style_context_add_provider
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_add_provider" style-context-add-provider) 
+(cffi:defcfun ("gtk_style_context_add_provider" style-context-add-provider)
     :void
  #+liber-documentation
  "@version{2022-11-25}
@@ -654,7 +654,7 @@
 ;;; gtk_style_context_remove_provider
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_remove_provider" 
+(cffi:defcfun ("gtk_style_context_remove_provider"
                style-context-remove-provider) :void
  #+liber-documentation
  "@version{#2022-8-3}
@@ -771,7 +771,7 @@ GtkEntry.entry { ... @}
 ;;; gtk_style_context_remove_class
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_remove_class" style-context-remove-class) 
+(cffi:defcfun ("gtk_style_context_remove_class" style-context-remove-class)
     :void
  #+liber-documentation
  "@version{#2022-8-3}

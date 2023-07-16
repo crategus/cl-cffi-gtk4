@@ -83,7 +83,7 @@
 ;;; struct GtkLinkButton
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkLinkButton" link-button
+(gobject:define-g-object-class "GtkLinkButton" link-button
   (:superclass button
     :export t
     :interfaces ("GtkAccessible"

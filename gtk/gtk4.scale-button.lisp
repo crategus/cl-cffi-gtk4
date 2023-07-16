@@ -89,7 +89,7 @@
 
 ;; TODO: Implement the GtkAccessibleRange interface
 
-(define-g-object-class "GtkScaleButton" scale-button
+(gobject:define-g-object-class "GtkScaleButton" scale-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -335,7 +335,8 @@ lambda (button value)    :run-last
 ;;; gtk_scale_button_get_popup () -> scale-button-popup
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scale_button_get_popup" scale-button-popup) (g:object widget)
+(cffi:defcfun ("gtk_scale_button_get_popup" scale-button-popup)
+    (g:object widget)
  #+liber-documentation
  "@version{#2023-3-25}
   @argument[button]{a @class{gtk:scale-button} widget}
@@ -351,7 +352,7 @@ lambda (button value)    :run-last
 ;;; gtk_scale_button_get_plus_button () -> scale-button-plus-button
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scale_button_get_plus_button" scale-button-plus-button)
+(cffi:defcfun ("gtk_scale_button_get_plus_button" scale-button-plus-button)
     (g:object widget)
  #+liber-documentation
  "@version{#2023-3-25}
@@ -370,7 +371,7 @@ lambda (button value)    :run-last
 ;;; gtk_scale_button_get_minus_button () -> scale-button-minus-button
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scale_button_get_minus_button" scale-button-minus-button)
+(cffi:defcfun ("gtk_scale_button_get_minus_button" scale-button-minus-button)
     (g:object widget)
  #+liber-documentation
  "@version{#2023-3-25}

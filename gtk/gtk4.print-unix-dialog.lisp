@@ -547,8 +547,8 @@
 ;;; gtk_print_unix_dialog_add_custom_tab ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_unix_dialog_add_custom_tab"
-           print-unix-dialog-add-custom-tab) :void
+(cffi:defcfun ("gtk_print_unix_dialog_add_custom_tab"
+               print-unix-dialog-add-custom-tab) :void
  #+liber-documentation
  "@version{#2020-4-10}
   @argument[dialog]{a @class{gtk:print-unix-dialog} widget}
@@ -568,8 +568,8 @@
 ;;; gtk_print_unix_dialog_get_page_setup_set ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_print_unix_dialog_get_page_setup_set"
-           print-unix-dialog-page-setup-set) :boolean
+(cffi:defcfun ("gtk_print_unix_dialog_get_page_setup_set"
+               print-unix-dialog-page-setup-set) :boolean
  #+liber-documentation
  "@version{#2020-4-10}
   @argument[dialog]{a @class{gtk:print-unix-dialog} widget}
@@ -582,4 +582,4 @@
 
 (export 'print-unix-dialog-page-setup-set)
 
-;;; --- End of file gtk.print-unix-dialog.lisp ---------------------------------
+;;; --- End of file gtk4.print-unix-dialog.lisp --------------------------------

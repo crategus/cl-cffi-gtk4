@@ -94,7 +94,7 @@
 ;;; GtkGrid
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkGrid" grid
+(gobject:define-g-object-class "GtkGrid" grid
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -527,9 +527,9 @@
   @end{short}
   @see-class{gtk:grid}
   @see-class{gtk:widget}"
-  (cffi:with-foreign-objects ((column :int) 
-                              (row :int) 
-                              (width :int) 
+  (cffi:with-foreign-objects ((column :int)
+                              (row :int)
+                              (width :int)
                               (height :int))
     (%grid-query-child grid child column row width height)
     (values (cffi:mem-ref column :int)

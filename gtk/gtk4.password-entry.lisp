@@ -78,7 +78,7 @@
 ;;; GtkPasswordEntry
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPasswordEntry" password-entry
+(gobject:define-g-object-class "GtkPasswordEntry" password-entry
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

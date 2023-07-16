@@ -71,7 +71,7 @@
 ;;; struct GtkGestureStylus
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkGestureStylus" gesture-stylus
+(gobject:define-g-object-class "GtkGestureStylus" gesture-stylus
   (:superclass gesture-single
    :export t
    :interfaces nil

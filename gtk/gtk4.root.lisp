@@ -76,7 +76,7 @@
 ;;; gtk_root_get_display -> root-display
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_root_get_display" root-display) (g:object gdk:display)
+(cffi:defcfun ("gtk_root_get_display" root-display) (g:object gdk:display)
  #+liber-documentation
  "@version{#2022-7-11}
   @argument[root]{a @class{gtk:root} widget}
@@ -102,7 +102,7 @@
                         :void)
   value)
 
-(defcfun ("gtk_root_get_focus" root-focus) (g:object widget)
+(cffi:defcfun ("gtk_root_get_focus" root-focus) (g:object widget)
  #+liber-documentation
  "@version{#2022-7-11}
   @syntax[]{(gtk:root-focus root) => widget}
@@ -134,4 +134,4 @@
 
 (export 'root-focus)
 
-;;; --- End of file gtk3.root.lisp ---------------------------------------------
+;;; --- End of file gtk4.root.lisp ---------------------------------------------

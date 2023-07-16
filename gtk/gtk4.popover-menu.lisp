@@ -328,8 +328,8 @@
 ;;; gtk_popover_menu_new_from_model_full ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_popover_menu_new_from_model_full"
-           popover-menu-new-from-model-full) (g:object popover-menu)
+(cffi:defcfun ("gtk_popover_menu_new_from_model_full"
+               popover-menu-new-from-model-full) (g:object popover-menu)
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[model]{a @class{g:menu-model} object, or @code{nil}}
@@ -364,7 +364,7 @@
 ;;; gtk_popover_menu_add_child ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_popover_menu_add_child" popover-menu-add-child) :boolean
+(cffi:defcfun ("gtk_popover_menu_add_child" popover-menu-add-child) :boolean
  #+liber-documentation
  "@version{#2022-7-29}
   @argument[popover]{a @class{gtk:popover-menu} widget}
@@ -389,7 +389,7 @@
 ;;; gtk_popover_menu_remove_child ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_popover_menu_remove_child" popover-menu-remove-child)
+(cffi:defcfun ("gtk_popover_menu_remove_child" popover-menu-remove-child)
     :boolean
  #+liber-documentation
  "@version{#2022-7-29}

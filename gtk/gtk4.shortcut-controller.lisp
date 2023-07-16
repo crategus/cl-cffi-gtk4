@@ -421,7 +421,7 @@
 ;;;     a GtkShortcut.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_shortcut_controller_add_shortcut"
+(cffi:defcfun ("gtk_shortcut_controller_add_shortcut"
            shortcut-controller-add-shortcut) :void
   (controller (g:object shortcut-controller))
   (shortcut (g:object shortcut)))
@@ -448,7 +448,7 @@
 ;;;     a GtkShortcut
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_shortcut_controller_remove_shortcut"
+(cffi:defcfun ("gtk_shortcut_controller_remove_shortcut"
            shortcut-controller-remove-shortcut) :void
   (controller (g:object shortcut-controller))
   (shortcut (g:object shortcut)))

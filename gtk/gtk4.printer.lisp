@@ -101,7 +101,7 @@
 ;;; GtkPrintBackend
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPrintBackend" print-backend
+(gobject:define-g-object-class "GtkPrintBackend" print-backend
   (:superclass g:object
     :export t
     :interfaces nil
@@ -118,7 +118,7 @@
 ;;; struct GtkPrinter
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkPrinter" printer
+(gobject:define-g-object-class "GtkPrinter" printer
   (:superclass g:object
     :export t
     :interfaces nil

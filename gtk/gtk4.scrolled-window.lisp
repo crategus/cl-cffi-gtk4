@@ -924,7 +924,7 @@ lambda (window scroll horizontal)    :action
 ;;; gtk_scrolled_window_get_hscrollbar () -> srolled-window-hscrollbar
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scrolled_window_get_hscrollbar" scrolled-window-hscrollbar)
+(cffi:defcfun ("gtk_scrolled_window_get_hscrollbar" scrolled-window-hscrollbar)
     (g:object widget)
  #+liber-documentation
  "@version{#2021-10-14}
@@ -947,7 +947,7 @@ lambda (window scroll horizontal)    :action
 ;;; gtk_scrolled_window_get_vscrollbar () -> scrolled-window-vscrollbar
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scrolled_window_get_vscrollbar" scrolled-window-vscrollbar)
+(cffi:defcfun ("gtk_scrolled_window_get_vscrollbar" scrolled-window-vscrollbar)
     (g:object widget)
  #+liber-documentation
  "@version{#2021-10-14}
@@ -1066,8 +1066,8 @@ lambda (window scroll horizontal)    :action
 ;;; gtk_scrolled_window_unset_placement ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_scrolled_window_unset_placement"
-           scrolled-window-unset-placement) :void
+(cffi:defcfun ("gtk_scrolled_window_unset_placement"
+               scrolled-window-unset-placement) :void
  #+liber-documentation
  "@version{#2021-10-14}
   @argument[window]{a @class{gtk:scrolled-window} widget}
