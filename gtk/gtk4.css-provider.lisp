@@ -440,7 +440,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_load_from_file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_provider_load_from_file" css-provider-load-from-file) 
+(cffi:defcfun ("gtk_css_provider_load_from_file" css-provider-load-from-file)
     :void
  #+liber-documentation
  "@version{#2022-8-20}
@@ -465,7 +465,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_load_from_path
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_provider_load_from_path" %css-provider-load-from-path) 
+(cffi:defcfun ("gtk_css_provider_load_from_path" %css-provider-load-from-path)
     :void
   (provider (g:object css-provider))
   (path :string))
@@ -491,7 +491,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_provider_load_from_resource
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_provider_load_from_resource" 
+(cffi:defcfun ("gtk_css_provider_load_from_resource"
                css-provider-load-from-resource) :void
  #+liber-documentation
  "@version{#2022-8-20}
@@ -663,7 +663,7 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_section_get_parent  -> css-section-parent
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_section_get_parent" css-section-parent) 
+(cffi:defcfun ("gtk_css_section_get_parent" css-section-parent)
     (g:boxed css-section)
  #+liber-documentation
  "@version{#2022-8-20}

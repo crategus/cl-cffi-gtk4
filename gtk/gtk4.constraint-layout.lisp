@@ -70,7 +70,7 @@
 ;;; GtkConstraintLayoutChild
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkConstraintLayoutChild" constraint-layout-child
+(gobject:define-g-object-class "GtkConstraintLayoutChild" constraint-layout-child
   (:superclass layout-child
    :export t
    :interfaces ()
@@ -90,7 +90,7 @@
 ;;; GtkConstraintLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkConstraintLayout" constraint-layout
+(gobject:define-g-object-class "GtkConstraintLayout" constraint-layout
   (:superclass layout-manager
    :export t
    :interfaces ()
@@ -272,8 +272,8 @@ V:[button1(==button2)]
 ;;; gtk_constraint_layout_add_constraint ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_layout_add_constraint"
-           constraint-layout-add-constraint) :void
+(cffi:defcfun ("gtk_constraint_layout_add_constraint"
+               constraint-layout-add-constraint) :void
  #+liber-documentation
  "@version{#2023-4-20}
   @argument[layout]{a @class{gtk:constraint-layout} object}
@@ -304,8 +304,8 @@ V:[button1(==button2)]
 ;;; gtk_constraint_layout_remove_constraint ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_layout_remove_constraint"
-           constraint-layout-remove-constraint) :void
+(cffi:defcfun ("gtk_constraint_layout_remove_constraint"
+               constraint-layout-remove-constraint) :void
  #+liber-documentation
  "@version{#2023-4-21}
   @argument[layout]{a @class{gtk:constraint-layout} object}
@@ -324,8 +324,8 @@ V:[button1(==button2)]
 ;;; gtk_constraint_layout_remove_all_constraints ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_layout_remove_all_constraints"
-           constraint-layout-remove-all-constraints) :void
+(cffi:defcfun ("gtk_constraint_layout_remove_all_constraints"
+               constraint-layout-remove-all-constraints) :void
  #+liber-documentation
  "@version{#2023-4-21}
   @argument[layout]{a @class{gtk:constraint-layout} object}
@@ -341,7 +341,8 @@ V:[button1(==button2)]
 ;;; gtk_constraint_layout_add_guide ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_layout_add_guide" constraint-layout-add-guide) :void
+(cffi:defcfun ("gtk_constraint_layout_add_guide" constraint-layout-add-guide)
+    :void
  #+liber-documentation
  "@version{#2023-4-21}
   @argument[layout]{a @class{gtk:constraint-layout} object}
@@ -363,8 +364,8 @@ V:[button1(==button2)]
 ;;; gtk_constraint_layout_remove_guide ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_layout_remove_guide" constraint-layout-remove-guide)
-    :void
+(cffi:defcfun ("gtk_constraint_layout_remove_guide"
+               constraint-layout-remove-guide) :void
  #+liber-documentation
  "@version{#2023-4-21}
   @argument[layout]{a @class{gtk:constraint-layout} object}

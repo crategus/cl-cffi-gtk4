@@ -125,7 +125,7 @@
 ;;; struct GtkCellArea
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCellArea" cell-area
+(gobject:define-g-object-class "GtkCellArea" cell-area
   (:superclass g:initially-unowned
    :export t
    :interfaces ("GtkCellLayout"
@@ -914,7 +914,7 @@ lambda (renderer cell background)
 ;;; gtk_cell_area_get_cell_allocation ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_cell_area_get_cell_allocation" %cell-area-cell-allocation) 
+(cffi:defcfun ("gtk_cell_area_get_cell_allocation" %cell-area-cell-allocation)
     :void
   (area (g:object cell-area))
   (context (g:object cell-area-context))
@@ -1322,7 +1322,7 @@ lambda (renderer cell background)
 ;;; gtk_cell_area_apply_attributes ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_cell_area_apply_attributes" cell-area-apply-attributes) 
+(cffi:defcfun ("gtk_cell_area_apply_attributes" cell-area-apply-attributes)
     :void
  #+liber-documentation
  "@version{#2021-12-20}
@@ -1642,7 +1642,7 @@ lambda (renderer cell background)
 ;;; gtk_cell_area_cell_get_property () -> cell-area-cell-property
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_cell_area_cell_set_property" %cell-area-cell-set-property) 
+(cffi:defcfun ("gtk_cell_area_cell_set_property" %cell-area-cell-set-property)
     :void
   (area (g:object cell-area))
   (renderer (g:object cell-renderer))
@@ -1780,7 +1780,7 @@ lambda (renderer cell background)
 ;;; gtk_cell_area_add_focus_sibling ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_cell_area_add_focus_sibling" cell-area-add-focus-sibling) 
+(cffi:defcfun ("gtk_cell_area_add_focus_sibling" cell-area-add-focus-sibling)
     :void
  #+liber-documentation
  "@version{#2021-12-20}
@@ -1833,7 +1833,7 @@ lambda (renderer cell background)
 ;;; gtk_cell_area_is_focus_sibling ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_cell_area_is_focus_sibling" cell-area-is-focus-sibling) 
+(cffi:defcfun ("gtk_cell_area_is_focus_sibling" cell-area-is-focus-sibling)
     :boolean
  #+liber-documentation
  "@version{#2021-12-20}

@@ -197,7 +197,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{constant} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-constant} function retrieves the constant factor 
+  The @sym{gtk:constraint-constant} function retrieves the constant factor
   added to the source attributes' value.
   @see-class{gtk:constraint}
   @see-function{gtk:constraint-source-attribute}")
@@ -226,7 +226,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{multiplier} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-muliplier} function retrieves the multiplication 
+  The @sym{gtk:constraint-muliplier} function retrieves the multiplication
   factor applied to the source attribute's value.
   @see-class{gtk:constraint}
   @see-function{gtk:constraint-source-attribute}")
@@ -254,7 +254,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{relation} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-relation} function the order relation between the 
+  The @sym{gtk:constraint-relation} function the order relation between the
   terms of the constraint.
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-relation}")
@@ -282,11 +282,11 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{source} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-source} function retrieves the 
+  The @sym{gtk:constraint-source} function retrieves the
   @symbol{gtk:constraint-target} value used as the source for the constraint.
 
-  If the @slot[gtk:constraint]{source} property is set to @code{nil}, the 
-  constraint will use the @class{gtk:constraint-layout} object of the widget.   
+  If the @slot[gtk:constraint]{source} property is set to @code{nil}, the
+  constraint will use the @class{gtk:constraint-layout} object of the widget.
   @see-class{gtk:constraint}
   @see-class{gtk:constraint-target}
   @see-function{gtk:constraint-target-attribute}
@@ -317,7 +317,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{source-attribute} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-source-attribute} function retrieves the attribute of 
+  The @sym{gtk:constraint-source-attribute} function retrieves the attribute of
   the source to be read by the constraint.
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-attribute}
@@ -329,8 +329,8 @@ target.target_attr = source.source_attr × multiplier + constant
 (setf (documentation (liber:slot-documentation "strength" 'constraint) t)
  "The @code{strength} property of type @code{:int}
   (Read / Write / Construct only) @br{}
-  The strength of the constraint. The strength can be expressed either using 
-  one of the symbolic values of the @symbol{gtk:constraint-strength} 
+  The strength of the constraint. The strength can be expressed either using
+  one of the symbolic values of the @symbol{gtk:constraint-strength}
   enumeration, or any positive integer value. @br{}
   Allowed values: [0, 1001001000] @br{}
   Default value: 1001001000")
@@ -348,9 +348,9 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{source-attribute} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-strength} function returns the strength of the 
-  constraint. The strength can be expressed either using one of the values of 
-  the @symbol{gtk:constraint-strength} enumeration, or any positive integer 
+  The @sym{gtk:constraint-strength} function returns the strength of the
+  constraint. The strength can be expressed either using one of the values of
+  the @symbol{gtk:constraint-strength} enumeration, or any positive integer
   value.
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-strength}")
@@ -378,9 +378,9 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{target} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-target} function retrieves the 
+  The @sym{gtk:constraint-target} function retrieves the
   @symbol{gtk:constraint-target} value used as the target for the constraint.
-  If the @slot[gtk:constraint]{target} property is set to @code{nil}, the 
+  If the @slot[gtk:constraint]{target} property is set to @code{nil}, the
   constraint will use the @class{gtk:constraint-layout} object of the widget.
   @see-class{gtk:constraint}
   @see-class{gtk:constraint-target}
@@ -412,7 +412,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{target-attribute} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-target} function retrieves the attribute of the 
+  The @sym{gtk:constraint-target} function retrieves the attribute of the
   target to be set by the constraint.
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-attribute}
@@ -422,26 +422,26 @@ target.target_attr = source.source_attr × multiplier + constant
 ;;; gtk_constraint_new ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_new" constraint-new) (g:object constraint)
+(cffi:defcfun ("gtk_constraint_new" constraint-new) (g:object constraint)
  #+liber-documentation
  "@version{#2023-4-21}
   @argument[target]{a @class{gtk:constraint-target} object}
-  @argument[target-attribute]{a @symbol{gtk:constraint-attribute} value with 
+  @argument[target-attribute]{a @symbol{gtk:constraint-attribute} value with
     the attribute of @arg{target} to be set}
-  @argument[relation]{a @symbol{gtk:constraint-relation} value the relation 
+  @argument[relation]{a @symbol{gtk:constraint-relation} value the relation
     equivalence between @arg{target-attribute} and @arg{source-attribute}}
   @argument[source]{a @class{gtk:constraint-target} object}
-  @argument[source-attribute]{a @symbol{gtk:constraint-attribute} value with 
+  @argument[source-attribute]{a @symbol{gtk:constraint-attribute} value with
     the attribute of @arg{source} to be set}
-  @argument[multiplier]{a double float with a multiplication factor to be 
+  @argument[multiplier]{a double float with a multiplication factor to be
     applied to @arg{source-attribute}}
-  @argument[constant]{a double float with a constant factor to be added to 
+  @argument[constant]{a double float with a constant factor to be added to
     @arg{source-attribute}}
   @argument[strength]{a @symbol{gtk:constraint-strength} value with the
     strength of the constraint}
   @return{The newly created @class{gtk:constraint} object.}
   @begin{short}
-    Creates a new @class{gtk:constraint} object representing a relation between 
+    Creates a new @class{gtk:constraint} object representing a relation between
     a layout attribute on a source and a layout attribute on a target.
   @end{short}
   @see-class{gtk:constraint}
@@ -464,22 +464,22 @@ target.target_attr = source.source_attr × multiplier + constant
 ;;; gtk_constraint_new_constant ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_new_constant" constraint-new-constant)
+(cffi:defcfun ("gtk_constraint_new_constant" constraint-new-constant)
     (g:object constraint)
  #+liber-documentation
  "@version{#2023-4-21}
   @argument[target]{a @class{gtk:constraint-target} object}
-  @argument[target-attribute]{a @symbol{gtk:constraint-attribute} value with 
+  @argument[target-attribute]{a @symbol{gtk:constraint-attribute} value with
     the attribute of @arg{target} to be set}
-  @argument[relation]{a @symbol{gtk:constraint-relation} value the relation 
+  @argument[relation]{a @symbol{gtk:constraint-relation} value the relation
     equivalence between @arg{target-attribute} and @arg{source-attribute}}
-  @argument[constant]{a double float with a constant factor to be added to 
+  @argument[constant]{a double float with a constant factor to be added to
     @arg{source-attribute}}
   @argument[strength]{a @symbol{gtk:constraint-strength} value with the
     strength of the constraint}
   @return{The newly created @class{gtk:constraint} object.}
   @begin{short}
-    Creates a new @class{gtk:constraint} object representing a relation between 
+    Creates a new @class{gtk:constraint} object representing a relation between
     a layout attribute on a target and a constant value.
   @end{short}
   @see-class{gtk:constraint}
@@ -499,10 +499,10 @@ target.target_attr = source.source_attr × multiplier + constant
 ;;; gtk_constraint_is_required ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_is_required" constraint-is-required) :boolean
+(cffi:defcfun ("gtk_constraint_is_required" constraint-is-required) :boolean
  #+liber-documentation
  "@version{#2023-4-21}
-  @argument[constraint]{a @class{gtk:constraint} object} 
+  @argument[constraint]{a @class{gtk:constraint} object}
   @return{@em{True} if the constraint is required.}
   @begin{short}
     Checks whether the constraint is a required relation for solving the
@@ -517,10 +517,10 @@ target.target_attr = source.source_attr × multiplier + constant
 ;;; gtk_constraint_is_attached ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_is_attached" constraint-is-attached) :boolean
+(cffi:defcfun ("gtk_constraint_is_attached" constraint-is-attached) :boolean
  #+liber-documentation
  "@version{#2023-4-21}
-  @argument[constraint]{a @class{gtk:constraint} object} 
+  @argument[constraint]{a @class{gtk:constraint} object}
   @return{@em{True} if the constraint is attached.}
   @begin{short}
     Checks whether the constraint is attached to a @class{gtk:constraint-layout}
@@ -535,10 +535,10 @@ target.target_attr = source.source_attr × multiplier + constant
 ;;; gtk_constraint_is_constant ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_constraint_is_constant" constraint-is-constant) :boolean
+(cffi:defcfun ("gtk_constraint_is_constant" constraint-is-constant) :boolean
  #+liber-documentation
  "@version{#2023-4-21}
-  @argument[constraint]{a @class{gtk:constraint} object} 
+  @argument[constraint]{a @class{gtk:constraint} object}
   @return{@em{True} if the constraint is as constant relation.}
   @begin{short}
     Checks whether the constraint describes a relation between an attribute on

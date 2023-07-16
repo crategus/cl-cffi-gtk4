@@ -79,7 +79,7 @@
 ;;; GtkCenterBox
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCenterBox" center-box
+(gobject:define-g-object-class "GtkCenterBox" center-box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -298,7 +298,7 @@
   value)
 
 #-gtk-4-10
-(defcfun ("gtk_center_box_get_center_widget" center-box-center-widget)
+(cffi:defcfun ("gtk_center_box_get_center_widget" center-box-center-widget)
     (g:object widget)
  #+liber-documentation
  "@version{#2022-2-3}
@@ -334,7 +334,7 @@
   value)
 
 #-gtk-4-10
-(defcfun ("gtk_center_box_get_start_widget" center-box-start-widget)
+(cffi:defcfun ("gtk_center_box_get_start_widget" center-box-start-widget)
     (g:object widget)
  #+liber-documentation
  "@version{#2022-2-3}
@@ -370,7 +370,7 @@
   value)
 
 #-gtk-4-10
-(defcfun ("gtk_center_box_get_end_widget" center-box-end-widget)
+(cffi:defcfun ("gtk_center_box_get_end_widget" center-box-end-widget)
     (g:object widget)
  #+liber-documentation
  "@version{#2022-2-3}

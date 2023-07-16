@@ -743,7 +743,7 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_get_aligned_area
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_get_aligned_area" %cell-renderer-aligned-area)
+(cffi:defcfun ("gtk_cell_renderer_get_aligned_area" %cell-renderer-aligned-area)
     :void
   (cell (g:object cell-renderer))
   (widget (g:object widget))
@@ -824,7 +824,7 @@ lambda (renderer editable path)    :run-first
 ;; TODO: Implement GdkEvent
 
 #+nil
-(defcfun ("gtk_cell_renderer_activate" cell-renderer-activate) :boolean
+(cffi:defcfun ("gtk_cell_renderer_activate" cell-renderer-activate) :boolean
  #+liber-documentation
  "@version{#2021-3-7}
   @argument[cell]{a @class{gtk:cell-renderer} object}
@@ -871,7 +871,7 @@ lambda (renderer editable path)    :run-first
 ;; TODO: Implement GdkEvent
 
 #+nil
-(defcfun ("gtk_cell_renderer_start_editing" cell-renderer-start-editing)
+(cffi:defcfun ("gtk_cell_renderer_start_editing" cell-renderer-start-editing)
     (g:object cell-editable)
  #+liber-documentation
  "@version{#2021-3-7}
@@ -914,7 +914,8 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_stop_editing
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_stop_editing" cell-renderer-stop-editing) :void
+(cffi:defcfun ("gtk_cell_renderer_stop_editing" cell-renderer-stop-editing)
+    :void
  #+liber-documentation
  "@version{#2021-3-7}
   @argument[cell]{a @class{gtk:cell-renderer} object}
@@ -949,7 +950,7 @@ lambda (renderer editable path)    :run-first
                           :void)
     (values width height)))
 
-(defcfun ("gtk_cell_renderer_get_fixed_size" %cell-renderer-fixed-size)
+(cffi:defcfun ("gtk_cell_renderer_get_fixed_size" %cell-renderer-fixed-size)
     :void
   (cell (g:object cell-renderer))
   (width (:pointer :int))
@@ -991,7 +992,7 @@ lambda (renderer editable path)    :run-first
                           :void)
      (values xalign yalign)))
 
-(defcfun ("gtk_cell_renderer_get_alignment" %cell-renderer-alignment) :void
+(cffi:defcfun ("gtk_cell_renderer_get_alignment" %cell-renderer-alignment) :void
   (cell (g:object cell-renderer))
   (xalign (:pointer :float))
   (yalign (:pointer :float)))
@@ -1032,7 +1033,7 @@ lambda (renderer editable path)    :run-first
                           :void)
      (values xpad ypad)))
 
-(defcfun ("gtk_cell_renderer_get_padding" %cell-renderer-padding) :void
+(cffi:defcfun ("gtk_cell_renderer_get_padding" %cell-renderer-padding) :void
   (cell (g:object cell-renderer))
   (xpad (:pointer :int))
   (ypad (:pointer :int)))
@@ -1063,8 +1064,7 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_get_state
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_get_state" cell-renderer-state)
-    state-flags
+(cffi:defcfun ("gtk_cell_renderer_get_state" cell-renderer-state) state-flags
  #+liber-documentation
  "@version{#2021-3-7}
   @argument[cell]{a @class{gtk:cell-renderer}, or @code{nil}}
@@ -1091,7 +1091,7 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_is_activatable
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_is_activatable" cell-renderer-is-activatable)
+(cffi:defcfun ("gtk_cell_renderer_is_activatable" cell-renderer-is-activatable)
     :boolean
  #+liber-documentation
  "@version{#2021-3-7}
@@ -1109,8 +1109,8 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_get_preferred_height
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_get_preferred_height"
-          %cell-renderer-preferred-height) :void
+(cffi:defcfun ("gtk_cell_renderer_get_preferred_height"
+               %cell-renderer-preferred-height) :void
   (cell (g:object cell-renderer))
   (widget (g:object widget))
   (minimum-size (:pointer :int))
@@ -1141,8 +1141,8 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_get_preferred_height_for_width
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_get_preferred_height_for_width"
-          %cell-renderer-preferred-height-for-width) :void
+(cffi:defcfun ("gtk_cell_renderer_get_preferred_height_for_width"
+               %cell-renderer-preferred-height-for-width) :void
   (cell (g:object cell-renderer))
   (widget (g:object widget))
   (width :int)
@@ -1181,8 +1181,8 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_get_preferred_size -> cell-renderer-preferred-size
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_get_preferred_size"
-          %cell-renderer-preferred-size) :void
+(cffi:defcfun ("gtk_cell_renderer_get_preferred_size"
+               %cell-renderer-preferred-size) :void
   (cell (g:object cell-renderer))
   (widget (g:object widget))
   (minimum-size (g:boxed requisition))
@@ -1219,8 +1219,8 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_get_preferred_width
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_get_preferred_width"
-          %cell-renderer-preferred-width) :void
+(cffi:defcfun ("gtk_cell_renderer_get_preferred_width"
+               %cell-renderer-preferred-width) :void
   (cell (g:object cell-renderer))
   (widget (g:object widget))
   (minimum-size (:pointer :int))
@@ -1252,8 +1252,8 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_get_preferred_width_for_height
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_get_preferred_width_for_height"
-          %cell-renderer-preferred-width-for-height) :void
+(cffi:defcfun ("gtk_cell_renderer_get_preferred_width_for_height"
+               %cell-renderer-preferred-width-for-height) :void
   (cell (g:object cell-renderer))
   (widget (g:object widget))
   (height :int)
@@ -1292,7 +1292,7 @@ lambda (renderer editable path)    :run-first
 ;;; gtk_cell_renderer_get_request_mode
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_renderer_get_request_mode" cell-renderer-request-mode)
+(cffi:defcfun ("gtk_cell_renderer_get_request_mode" cell-renderer-request-mode)
     size-request-mode
  #+liber-documentation
  "@version{#2021-3-7}

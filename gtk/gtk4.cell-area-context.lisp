@@ -71,7 +71,7 @@
 ;;; GtkCellAreaContext
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCellAreaContext" cell-area-context
+(gobject:define-g-object-class "GtkCellAreaContext" cell-area-context
   (:superclass g:object
    :export t
    :interfaces nil
@@ -297,7 +297,8 @@
 ;;; gtk_cell_area_context_allocate ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_context_allocate" cell-area-context-allocate) :void
+(cffi:defcfun ("gtk_cell_area_context_allocate" cell-area-context-allocate)
+    :void
  #+liber-documentation
  "@version{#2020-6-28}
   @argument[context]{a @class{gtk:cell-area-context} object}
@@ -330,7 +331,7 @@
 ;;; gtk_cell_area_context_reset ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_context_reset" cell-area-context-reset) :void
+(cffi:defcfun ("gtk_cell_area_context_reset" cell-area-context-reset) :void
  #+liber-documentation
  "@version{#2020-6-28}
   @argument[context]{a @class{gtk:cell-area-context} object}
@@ -365,8 +366,8 @@
 ;;; gtk_cell_area_context_get_preferred_width ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_context_get_preferred_width"
-          %cell-area-context-preferred-width) :void
+(cffi:defcfun ("gtk_cell_area_context_get_preferred_width"
+               %cell-area-context-preferred-width) :void
   (context (g:object cell-area-context))
   (minium-width (:pointer :int))
   (natural-width (:pointer :int)))
@@ -404,8 +405,8 @@
 ;;; gtk_cell_area_context_get_preferred_height ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_context_get_preferred_height"
-          %cell-area-context-preferred-height) :void
+(cffi:defcfun ("gtk_cell_area_context_get_preferred_height"
+               %cell-area-context-preferred-height) :void
   (context (g:object cell-area-context))
   (minium-height (:pointer :int))
   (natural-height (:pointer :int)))
@@ -443,8 +444,8 @@
 ;;; gtk_cell_area_context_get_preferred_height_for_width ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_context_get_preferred_height_for_width"
-          %cell-area-context-preferred-height-for-width) :void
+(cffi:defcfun ("gtk_cell_area_context_get_preferred_height_for_width"
+               %cell-area-context-preferred-height-for-width) :void
   (context (g:object cell-area-context))
   (width :int)
   (minium-height (:pointer :int))
@@ -485,8 +486,8 @@
 ;;; gtk_cell_area_context_get_preferred_width_for_height ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_context_get_preferred_width_for_height"
-          %cell-area-context-preferred-width-for-height) :void
+(cffi:defcfun ("gtk_cell_area_context_get_preferred_width_for_height"
+               %cell-area-context-preferred-width-for-height) :void
   (context (g:object cell-area-context))
   (height :int)
   (minium-width (:pointer :int))
@@ -527,8 +528,8 @@
 ;;; gtk_cell_area_context_get_allocation () -> cell-area-context-allocation
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_context_get_allocation"
-          %cell-area-context-allocation) :void
+(cffi:defcfun ("gtk_cell_area_context_get_allocation"
+               %cell-area-context-allocation) :void
   (context (g:object cell-area-context))
   (width (:pointer :int))
   (height (:pointer :int)))
@@ -561,8 +562,8 @@
 ;;; gtk_cell_area_context_push_preferred_width ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_context_push_preferred_width"
-           cell-area-context-push-preferred-width) :void
+(cffi:defcfun ("gtk_cell_area_context_push_preferred_width"
+               cell-area-context-push-preferred-width) :void
  #+liber-documentation
  "@version{#2020-6-28}
   @argument[context]{a @class{gtk:cell-area-context} object}
@@ -592,8 +593,8 @@
 ;;; gtk_cell_area_context_push_preferred_height ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_context_push_preferred_height"
-           cell-area-context-push-preferred-height) :void
+(cffi:defcfun ("gtk_cell_area_context_push_preferred_height"
+               cell-area-context-push-preferred-height) :void
  #+liber-documentation
  "@version{#2020-6-28}
   @argument[context]{a @class{gtk:cell-area-context} object}

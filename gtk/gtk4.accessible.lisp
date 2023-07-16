@@ -415,7 +415,7 @@
 ;;; gtk_accessible_property_init_value
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_accessible_property_init_value" 
+(cffi:defcfun ("gtk_accessible_property_init_value"
                accessible-property-init-value) :void
  #+liber-documentation
  "@version{#2022-1-4}
@@ -437,7 +437,7 @@
 ;;; gtk_accessible_relation_init_value
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_accessible_relation_init_value" 
+(cffi:defcfun ("gtk_accessible_relation_init_value"
                accessible-relation-init-value) :void
  #+liber-documentation
  "@version{#2022-1-4}
@@ -459,7 +459,7 @@
 ;;; gtk_accessible_state_init_value
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_accessible_state_init_value" accessible-state-init-value) 
+(cffi:defcfun ("gtk_accessible_state_init_value" accessible-state-init-value)
     :void
  #+liber-documentation
  "@version{#2022-1-4}

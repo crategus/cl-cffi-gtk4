@@ -149,7 +149,7 @@ lambda (editable)    :run-last
 ;;; gtk_cell_editable_start_editing ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_editable_start_editing" cell-editable-start-editing)
+(cffi:defcfun ("gtk_cell_editable_start_editing" cell-editable-start-editing)
     :void
  #+liber-documentation
  "@version{#2022-7-25}
@@ -184,7 +184,8 @@ lambda (editable)    :run-last
 ;;; gtk_cell_editable_editing_done ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_editable_editing_done" cell-editable-editing-done) :void
+(cffi:defcfun ("gtk_cell_editable_editing_done" cell-editable-editing-done)
+    :void
  #+liber-documentation
  "@version{#2022-7-25}
   @argument[editable]{a @class{gtk:cell-editable} object}
@@ -200,7 +201,7 @@ lambda (editable)    :run-last
 ;;; gtk_cell_editable_remove_widget ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_editable_remove_widget" cell-editable-remove-widget)
+(cffi:defcfun ("gtk_cell_editable_remove_widget" cell-editable-remove-widget)
     :void
  #+liber-documentation
  "@version{#2022-7-25}
@@ -213,4 +214,4 @@ lambda (editable)    :run-last
 
 (export 'cell-editable-remove-widget)
 
-;;; --- End of file gtk.cell-editable.lisp -------------------------------------
+;;; --- End of file gtk4.cell-editable.lisp ------------------------------------

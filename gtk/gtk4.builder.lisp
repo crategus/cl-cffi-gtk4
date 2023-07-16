@@ -540,7 +540,7 @@
 ;;; gtk_builder_new_from_file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_builder_new_from_file" %builder-new-from-file) 
+(cffi:defcfun ("gtk_builder_new_from_file" %builder-new-from-file)
     (g:object builder)
   (filename :string))
 
@@ -761,7 +761,7 @@
 ;;; gtk_builder_add_objects_from_file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_builder_add_objects_from_file" 
+(cffi:defcfun ("gtk_builder_add_objects_from_file"
                %builder-add-objects-from-file) :uint
   (builder (g:object builder))
   (filename :string)

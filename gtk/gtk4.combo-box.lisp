@@ -116,7 +116,7 @@
 ;;; struct GtkComboBox
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkComboBox" combo-box
+(gobject:define-g-object-class "GtkComboBox" combo-box
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -764,7 +764,7 @@ lambda (combo)    :action
                         :void)
   iter)
 
-(defcfun ("gtk_combo_box_get_active_iter" %combo-box-active-iter)
+(cffi:defcfun ("gtk_combo_box_get_active_iter" %combo-box-active-iter)
     :boolean
   (combo (g:object combo-box))
   (iter (g:boxed tree-iter)))
@@ -797,7 +797,7 @@ lambda (combo)    :action
 ;;; gtk_combo_box_popup ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_combo_box_popup" combo-box-popup) :void
+(cffi:defcfun ("gtk_combo_box_popup" combo-box-popup) :void
  #+liber-documentation
  "@version{#2021-3-12}
   @argument[combo]{a @class{gtk:combo-box} widget}
@@ -816,7 +816,8 @@ lambda (combo)    :action
 ;;; gtk_combo_box_popup_for_device ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_combo_box_popup_for_device" combo-box-popup-for-device) :void
+(cffi:defcfun ("gtk_combo_box_popup_for_device" combo-box-popup-for-device)
+    :void
  #+liber-documentation
  "@version{#2021-3-12}
   @argument[combo]{a @class{gtk:combo-box} widget}
@@ -838,7 +839,7 @@ lambda (combo)    :action
 ;;; gtk_combo_box_popdown ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_combo_box_popdown" combo-box-popdown) :void
+(cffi:defcfun ("gtk_combo_box_popdown" combo-box-popdown) :void
  #+liber-documentation
  "@version{#2021-3-12}
   @argument[combo]{a @class{gtk:combo-box} widget}
@@ -859,8 +860,8 @@ lambda (combo)    :action
 
 ;; TODO: Is this function useful in the Lisp implementation?
 
-(defcfun ("gtk_combo_box_get_row_separator_func"
-           combo-box-get-row-separator-func) :pointer
+(cffi:defcfun ("gtk_combo_box_get_row_separator_func"
+               combo-box-get-row-separator-func) :pointer
  #+liber-documentation
  "@version{#2013-10-17}
   @argument[combo-box]{a @class{gtk:combo-box} widget}
@@ -873,8 +874,8 @@ lambda (combo)    :action
 ;;; gtk_combo_box_set_row_separator_func ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_combo_box_set_row_separator_func"
-          %combo-box-set-row-separator-func) :void
+(cffi:defcfun ("gtk_combo_box_set_row_separator_func"
+               %combo-box-set-row-separator-func) :void
   (combo (g:object combo-box))
   (func :pointer)
   (data :pointer)

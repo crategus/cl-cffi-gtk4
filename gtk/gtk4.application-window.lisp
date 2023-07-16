@@ -211,7 +211,7 @@
 ;;; gtk_application_window_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_application_window_new" application-window-new) 
+(cffi:defcfun ("gtk_application_window_new" application-window-new)
     (g:object widget)
  #+liber-documentation
  "@version{2023-3-11}

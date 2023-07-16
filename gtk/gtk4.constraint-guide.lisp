@@ -79,7 +79,7 @@
 ;;; GtkConstraintGuide
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkConstraintGuide" constraint-guide
+(gobject:define-g-object-class "GtkConstraintGuide" constraint-guide
   (:superclass g:object
    :export t
    :interfaces ()

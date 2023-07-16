@@ -84,7 +84,7 @@
 ;;; struct GtkCellView
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCellView" cell-view
+(gobject:define-g-object-class "GtkCellView" cell-view
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"
@@ -373,7 +373,7 @@
 ;;; gtk_cell_view_new_with_text ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_view_new_with_text" cell-view-new-with-text)
+(cffi:defcfun ("gtk_cell_view_new_with_text" cell-view-new-with-text)
     (g:object cell-view)
  #+liber-documentation
  "@version{#2021-5-4}
@@ -393,7 +393,7 @@
 ;;; gtk_cell_view_new_with_markup ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_view_new_with_markup" cell-view-new-with-markup)
+(cffi:defcfun ("gtk_cell_view_new_with_markup" cell-view-new-with-markup)
     (g:object cell-view)
  #+liber-documentation
  "@version{#2021-5-4}
@@ -414,7 +414,7 @@
 ;;; gtk_cell_view_new_with_texture ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_view_new_with_texture" cell-view-new-with-texture)
+(cffi:defcfun ("gtk_cell_view_new_with_texture" cell-view-new-with-texture)
     (g:object cell-view)
   #+liber-documentation
  "@version{#2021-5-4}
@@ -444,7 +444,7 @@
                         :void)
   path)
 
-(defcfun ("gtk_cell_view_get_display_row" cell-view-displayed-row)
+(cffi:defcfun ("gtk_cell_view_get_display_row" cell-view-displayed-row)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{#2023-1-28}

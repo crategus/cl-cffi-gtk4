@@ -56,7 +56,7 @@
 ;;; GtkCustomLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCustomLayout" custom-layout
+(gobject:define-g-object-class "GtkCustomLayout" custom-layout
   (:superclass layout-manager
    :export t
    :interfaces ()

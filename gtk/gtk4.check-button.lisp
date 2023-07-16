@@ -90,7 +90,7 @@
 ;;; GtkCheckButton
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCheckButton" check-button
+(gobject:define-g-object-class "GtkCheckButton" check-button
   (:superclass widget
    :export t
    :interfaces ("GtkAccessible"

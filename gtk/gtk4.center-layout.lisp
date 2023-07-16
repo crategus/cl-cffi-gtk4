@@ -62,7 +62,7 @@
 ;;; GtkCenterLayout
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCenterLayout" center-layout
+(gobject:define-g-object-class "GtkCenterLayout" center-layout
   (:superclass layout-manager
    :export t
    :interfaces ()
@@ -107,7 +107,7 @@
                         :void)
   orientation)
 
-(defcfun ("gdk_center_layout_get_orientation" center-layout-orientation)
+(cffi:defcfun ("gdk_center_layout_get_orientation" center-layout-orientation)
     orientation
  #+liber-documentation
  "@version{#2023-4-19}
@@ -138,8 +138,8 @@
                         :void)
   position)
 
-(defcfun ("gdk_center_layout_get_baseline_position"
-           center-layout-baseline-position) baseline-position
+(cffi:defcfun ("gdk_center_layout_get_baseline_position"
+               center-layout-baseline-position) baseline-position
  #+liber-documentation
  "@version{#2023-4-19}
   @syntax[]{(gtk:center-layout-baseline-position layout) => position}
@@ -172,7 +172,7 @@
 
 (export 'center-layout-start-widget)
 
-(defcfun ("gdk_center_layout_get_start_widget" center-layout-start-widget)
+(cffi:defcfun ("gdk_center_layout_get_start_widget" center-layout-start-widget)
     (g:object widget)
  #+liber-documentation
  "@version{#2023-4-19}
@@ -204,8 +204,8 @@
                         :void)
   widget)
 
-(defcfun ("gtk_center_layout_get_center_widget" center-layout-center-widget)
-    (g:object widget)
+(cffi:defcfun ("gtk_center_layout_get_center_widget"
+               center-layout-center-widget) (g:object widget)
  #+liber-documentation
  "@version{#2023-4-19}
   @syntax[]{(gtk:center-layout-center-widget layout) => widget}
@@ -236,7 +236,7 @@
                         :void)
   widget)
 
-(defcfun ("gtk_center_layout_get_end_widget" center-layout-end-widget)
+(cffi:defcfun ("gtk_center_layout_get_end_widget" center-layout-end-widget)
     (g:object widget)
  #+liber-documentation
  "@version{#2023-4-19}

@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gtk.cell-area-box.lisp
+;;; gtk4.cell-area-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2022 Dieter Kaiser
+;;; Copyright (C) 2012 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; GtkCellAreaBox
@@ -69,7 +70,7 @@
 ;;; struct GtkCellAreaBox
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GtkCellAreaBox" cell-area-box
+(gobject:define-g-object-class "GtkCellAreaBox" cell-area-box
   (:superclass cell-area
    :export t
    :interfaces ("GtkCellLayout"
@@ -161,7 +162,7 @@
 ;;; gtk_cell_area_box_pack_start ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_box_pack_start" %cell-area-box-pack-start) :void
+(cffi:defcfun ("gtk_cell_area_box_pack_start" %cell-area-box-pack-start) :void
   (box (g:object cell-area-box))
   (renderer (g:object cell-renderer))
   (expand :boolean)
@@ -169,7 +170,7 @@
   (fixed :boolean))
 
 (defun cell-area-box-pack-start (box renderer
-                                    &key (expand t) (align t) (fixed t))
+                                 &key (expand t) (align t) (fixed t))
  #+liber-documentation
  "@version{#2020-6-27}
   @argument[box]{a @class{gtk:cell-area-box} widget}
@@ -197,7 +198,7 @@
 ;;; gtk_cell_area_box_pack_end ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gtk_cell_area_box_pack_end" %cell-area-box-pack-end) :void
+(cffi:defcfun ("gtk_cell_area_box_pack_end" %cell-area-box-pack-end) :void
   (box (g:object cell-area-box))
   (renderer (g:object cell-renderer))
   (expand :boolean)
@@ -205,7 +206,7 @@
   (fixed :boolean))
 
 (defun cell-area-box-pack-end (box child
-                                  &key (expand t) (align t) (fixed t))
+                               &key (expand t) (align t) (fixed t))
  #+liber-documentation
  "@version{#2020-6-27}
   @argument[box]{a @class{gtk:cell-area-box} widget}
@@ -230,4 +231,4 @@
 
 (export 'cell-area-box-pack-end)
 
-;;; --- End of file gtk.cell-area-box.lisp -------------------------------------
+;;; --- End of file gtk4.cell-area-box.lisp ------------------------------------
