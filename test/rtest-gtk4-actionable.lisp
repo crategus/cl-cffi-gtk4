@@ -18,7 +18,7 @@
   (is (equal '("action-name" "action-target")
              (list-interface-properties "GtkActionable")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkActionable" GTK-ACTIONABLE
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkActionable" GTK-ACTIONABLE
                        (:EXPORT T
                         :TYPE-INITIALIZER "gtk_actionable_get_type")
                        (ACTION-NAME GTK-ACTIONABLE-ACTION-NAME

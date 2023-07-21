@@ -33,7 +33,7 @@
   (is (equal '("enter-monitor" "event" "layout" "leave-monitor" "render")
              (list-signals "GdkSurface")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GdkSurface" GDK-SURFACE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkSurface" GDK-SURFACE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_surface_get_type")
                        ((CURSOR GDK-SURFACE-CURSOR "cursor" "GdkCursor" T T)

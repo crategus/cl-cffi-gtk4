@@ -21,7 +21,7 @@
              (mapcar #'g:param-spec-name
                      (g:object-interface-list-properties "GtkOrientable"))))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkOrientable"
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkOrientable"
                                   GTK-ORIENTABLE
                                   (:EXPORT T
                                    :TYPE-INITIALIZER "gtk_orientable_get_type")

@@ -33,7 +33,7 @@
                "remove-editable")
              (list-signals "GtkCellArea")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkCellArea" GTK-CELL-AREA
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellArea" GTK-CELL-AREA
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
                         ("GtkBuildable" "GtkCellLayout") :TYPE-INITIALIZER
                         "gtk_cell_area_get_type")

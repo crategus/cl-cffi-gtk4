@@ -4,7 +4,7 @@
 (in-suite gtk-box)
 
 ;; GtkPrinterOptionWidget is a child of GtkBox
-#-win32
+#-windows
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (cffi:foreign-funcall "gtk_printer_option_widget_get_type" :size))
 
@@ -12,7 +12,7 @@
 
 ;;;     GtkBox
 
-(test box-class
+(test gtk-box-class
   ;; Type check
   (is (g:type-is-object "GtkBox"))
   ;; Check the registered name
@@ -28,7 +28,6 @@
   #-windows
   (is (equal '("GtkColorEditor" "GtkPlacesView" "GtkPrinterOptionWidget"
                "GtkShortcutsGroup" "GtkShortcutsSection")
-
              (list-children "GtkBox")))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
@@ -50,7 +49,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:box))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkBox" GTK-BOX
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBox" GTK-BOX
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkOrientable")
@@ -68,7 +67,7 @@
 ;;;     homogeneous
 ;;;     spacing
 
-(test box-properties
+(test gtk-box-properties
   (let ((box (make-instance 'gtk:box :orientation :vertical :spacing 12)))
     (is (eq :vertical (gtk:orientable-orientation box)))
     (is (eq :center (gtk:box-baseline-position box)))
@@ -79,7 +78,7 @@
 
 ;;;     gtk_box_new
 
-(test box-new
+(test gtk-box-new
   ;; Create a box
   (let ((box (gtk:box-new :vertical 12)))
     (is (eq :vertical (gtk:orientable-orientation box)))

@@ -32,7 +32,7 @@
   (is (equal '()
              (list-signals "GtkShortcut")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkShortcut" GTK-SHORTCUT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcut" GTK-SHORTCUT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_shortcut_get_type")
                        ((ACTION GTK-SHORTCUT-ACTION "action"

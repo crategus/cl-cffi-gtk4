@@ -33,7 +33,7 @@
   (is (equal '("im-update" "key-pressed" "key-released" "modifiers")
              (list-signals "GtkEventControllerKey")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkEventControllerKey"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerKey"
                                      GTK-EVENT-CONTROLLER-KEY
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER

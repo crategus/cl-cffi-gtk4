@@ -43,7 +43,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:lock-button))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkLockButton" GTK-LOCK-BUTTON
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLockButton" GTK-LOCK-BUTTON
                        (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
                          "GtkConstraintTarget")

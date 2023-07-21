@@ -36,7 +36,7 @@
   (is (equal '("changed")
              (list-signals "GtkRecentManager")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkRecentManager" GTK-RECENT-MANAGER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRecentManager" GTK-RECENT-MANAGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_recent_manager_get_type")
                        ((FILENAME GTK-RECENT-MANAGER-FILENAME "filename"

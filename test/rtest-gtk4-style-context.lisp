@@ -7,7 +7,7 @@
 
 ;;;     GtkStyleContextPrintFlags
 
-(test style-context-print-flags
+(test gtk-style-context-print-flags
   ;; Check the type
   (is (g:type-is-flags "GtkStyleContextPrintFlags"))
   ;; Check the registered name
@@ -29,7 +29,7 @@
   (is (equal '("none" "recurse" "show-style" "show-change")
              (list-flags-item-nick "GtkStyleContextPrintFlags")))
   ;; Check the flags definition
-  (is (equal '(DEFINE-G-FLAGS "GtkStyleContextPrintFlags"
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkStyleContextPrintFlags"
                               GTK-STYLE-CONTEXT-PRINT-FLAGS
                               (:EXPORT T
                                :TYPE-INITIALIZER
@@ -42,21 +42,21 @@
 
 ;;;     GtkBorder
 
-(test border-struct
+(test gtk-border-struct
   ;; Type check
-  (is (g:type-is-a (g:gtype "GtkBorder") +g-type-boxed+))
+  (is (g:type-is-a (g:gtype "GtkBorder") g:+g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBorder")
           (g:gtype (cffi:foreign-funcall "gtk_border_get_type" :size)))))
 
-(test border-properties
+(test gtk-border-properties
   (let ((border (gtk:border-new)))
     (is (= 0 (gtk:border-left border)))
     (is (= 0 (gtk:border-right border)))
     (is (= 0 (gtk:border-top border)))
     (is (= 0 (gtk:border-bottom border)))))
 
-(test border-new/copy
+(test gtk-border-new/copy
   (let* ((border1 (gtk:border-new :left 10 :right 20 :top 30 :bottom 40))
          (border2 (gtk:border-copy border1)))
     (is (= 10 (gtk:border-left border2)))
@@ -66,7 +66,7 @@
 
 ;;;     GtkStyleContext
 
-(test style-context-class
+(test gtk-style-context-class
   ;; Type check
   (is (g:type-is-object "GtkStyleContext"))
   ;; Check the registered name
@@ -91,7 +91,7 @@
   (is (equal '()
              (list-signals "GtkStyleContext")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkStyleContext" GTK-STYLE-CONTEXT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStyleContext" GTK-STYLE-CONTEXT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_style_context_get_type")
                        ((DISPLAY GTK-STYLE-CONTEXT-DISPLAY "display"
@@ -102,7 +102,7 @@
 
 ;;;     display
 
-(test style-context-properties
+(test gtk-style-context-properties
   (let ((context (gtk:widget-style-context (make-instance 'gtk:box))))
     (is (typep (gtk:style-context-display context) 'gdk:display))))
 
@@ -145,4 +145,4 @@
 ;;;     gtk_render_line
 ;;;     gtk_render_option
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-21 --------------------------------------------------------------

@@ -44,7 +44,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:popover-menu))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkPopoverMenu" GTK-POPOVER-MENU
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPopoverMenu" GTK-POPOVER-MENU
                        (:SUPERCLASS GTK-POPOVER :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkShortcutManager")

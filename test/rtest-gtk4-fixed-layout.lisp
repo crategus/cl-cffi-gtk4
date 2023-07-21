@@ -33,7 +33,7 @@
   (is (equal '()
              (list-signals "GtkFixedLayoutChild")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFixedLayoutChild" GTK-FIXED-LAYOUT-CHILD
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFixedLayoutChild" GTK-FIXED-LAYOUT-CHILD
                        (:SUPERCLASS GTK-LAYOUT-CHILD :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_fixed_layout_child_get_type")
                        ((TRANSFORM GTK-FIXED-LAYOUT-CHILD-TRANSFORM "transform"
@@ -71,7 +71,7 @@
   (is (equal '()
              (list-signals "GtkFixedLayout")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFixedLayout" GTK-FIXED-LAYOUT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFixedLayout" GTK-FIXED-LAYOUT
                        (:SUPERCLASS GTK-LAYOUT-MANAGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_fixed_layout_get_type")
                        NIL)

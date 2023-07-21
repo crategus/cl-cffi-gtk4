@@ -33,7 +33,7 @@
   (is (equal '("enter" "leave")
              (list-signals "GtkEventControllerFocus")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkEventControllerFocus"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerFocus"
                                      GTK-EVENT-CONTROLLER-FOCUS
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER

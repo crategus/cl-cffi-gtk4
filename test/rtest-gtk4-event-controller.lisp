@@ -28,7 +28,7 @@
   (is (equal '("none" "capture" "bubble" "target")
              (list-enum-item-nick "GtkPropagationPhase")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkPropagationPhase"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPropagationPhase"
                              GTK-PROPAGATION-PHASE
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -60,7 +60,7 @@
   (is (equal '("none" "same-native")
              (list-enum-item-nick "GtkPropagationLimit")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkPropagationLimit"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPropagationLimit"
                              GTK-PROPAGATION-LIMIT
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_propagation_limit_get_type")
@@ -99,7 +99,7 @@
   (is (equal '()
              (list-signals "GtkEventController")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkEventController" GTK-EVENT-CONTROLLER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventController" GTK-EVENT-CONTROLLER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_event_controller_get_type")
                        ((NAME GTK-EVENT-CONTROLLER-NAME "name" "gchararray" T

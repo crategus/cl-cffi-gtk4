@@ -42,7 +42,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:link-button))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkLinkButton" GTK-LINK-BUTTON
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLinkButton" GTK-LINK-BUTTON
                        (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
                          "GtkConstraintTarget")

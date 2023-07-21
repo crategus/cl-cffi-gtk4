@@ -46,7 +46,7 @@
                        (make-instance 'gtk:file-chooser-dialog))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFileChooserDialog"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileChooserDialog"
                                      GTK-FILE-CHOOSER-DIALOG
                        (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"

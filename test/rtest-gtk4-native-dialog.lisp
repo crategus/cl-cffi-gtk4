@@ -35,7 +35,7 @@
   (is (equal '("response")
              (list-signals "GtkNativeDialog")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkNativeDialog" GTK-NATIVE-DIALOG
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNativeDialog" GTK-NATIVE-DIALOG
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_native_dialog_get_type")
                        ((MODAL GTK-NATIVE-DIALOG-MODAL "modal" "gboolean" T T)

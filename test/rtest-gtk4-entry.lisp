@@ -27,7 +27,7 @@
   (is (equal '("primary" "secondary")
              (list-enum-item-nick "GtkEntryIconPosition")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkEntryIconPosition"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkEntryIconPosition"
                              GTK-ENTRY-ICON-POSITION
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -91,7 +91,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:entry))
                    :recurse)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkEntry" GTK-ENTRY
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntry" GTK-ENTRY
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkCellEditable"
                          "GtkConstraintTarget" "GtkEditable")

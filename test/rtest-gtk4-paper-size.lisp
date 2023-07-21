@@ -7,7 +7,7 @@
 
 ;;;     GtkUnit
 
-(test unit
+(test gtk-unit
   ;; Check the type
   (is (g:type-is-enum "GtkUnit"))
   ;; Check the type initializer
@@ -26,7 +26,7 @@
   (is (equal '("none" "points" "inch" "mm")
              (list-enum-item-nick "GtkUnit")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkUnit" GTK-UNIT
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkUnit" GTK-UNIT
                 (:EXPORT T :TYPE-INITIALIZER "gtk_unit_get_type")
                 (:NONE 0)
                 (:POINTS 1)
@@ -36,25 +36,25 @@
 
 ;;;     GtkPaperSize
 
-(test paper-size-boxed
+(test gtk-paper-size-boxed
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPaperSize")
           (g:gtype (cffi:foreign-funcall "gtk_paper_size_get_type" :size))))
   ;; Type check
-  (is-true (g:type-is-a (g:gtype "GtkPaperSize") +g-type-boxed+)))
+  (is-true (g:type-is-a (g:gtype "GtkPaperSize") g:+g-type-boxed+)))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk-paper-size-new
 
-(test paper-size-new
+(test gtk-paper-size-new
   (is (eq 'gtk:paper-size (type-of (gtk:paper-size-new))))
   (is (eq 'gtk:paper-size (type-of (gtk:paper-size-new nil))))
   (is (eq 'gtk:paper-size (type-of (gtk:paper-size-new "iso_a4")))))
 
 ;;;     gtk-paper-size-new-from-ppd
 
-(test paper-size-new-from-ppd.1
+(test gtk-paper-size-new-from-ppd.1
   (let ((size (gtk:paper-size-new-from-ppd "A4")))
     (is (eq 'gtk:paper-size (type-of size)))
     (is (string= "iso_a4" (gtk:paper-size-name size)))
@@ -62,7 +62,7 @@
     (is (= 210.0 (gtk:paper-size-width size :mm)))
     (is (= 297.0 (gtk:paper-size-height size :mm)))))
 
-(test paper-size-new-from-ppd.2
+(test gtk-paper-size-new-from-ppd.2
   (let ((paper-size (gtk:paper-size-new-from-ppd "unknown" "myppd" 10 20)))
     (is (eq 'gtk:paper-size (type-of paper-size)))
     (is (string= "ppd_unknown" (gtk:paper-size-name paper-size)))
@@ -70,7 +70,7 @@
     (is (= 10.0 (gtk:paper-size-width paper-size :points)))
     (is (= 20.0 (gtk:paper-size-height paper-size :points)))))
 
-(test paper-size-new-from-ppd.3
+(test gtk-paper-size-new-from-ppd.3
   (let ((paper-size (gtk:paper-size-new-from-ppd "unknown" "myppd")))
     (is (eq 'gtk:paper-size (type-of paper-size)))
     (is (string= "ppd_unknown" (gtk:paper-size-name paper-size)))
@@ -80,7 +80,7 @@
 
 ;;;     gtk-paper-size-new-from-ipp
 
-(test paper-size-new-from-ipp.1
+(test gtk-paper-size-new-from-ipp.1
   (let ((paper-size (gtk:paper-size-new-from-ipp "A4")))
     (is (eq 'gtk:paper-size (type-of paper-size)))
     (is-false (gtk:paper-size-is-ipp paper-size))
@@ -90,7 +90,7 @@
     (is (= 0 (gtk:paper-size-width paper-size :points)))
     (is (= 0 (gtk:paper-size-height paper-size :points)))))
 
-(test paper-size-new-from-ipp.2
+(test gtk-paper-size-new-from-ipp.2
   (let ((paper-size (gtk:paper-size-new-from-ipp "A4" 10 20)))
     (is (eq 'gtk:paper-size (type-of paper-size)))
     (is-false (gtk:paper-size-is-ipp paper-size))
@@ -102,7 +102,7 @@
 
 ;;;     gtk-paper-size-new-custom
 
-(test paper-size-new-custom
+(test gtk-paper-size-new-custom
   (let ((paper-size (gtk:paper-size-new-custom "myPaper"
                                                "myPaper" 10 20 :mm)))
     (is (eq 'gtk:paper-size (type-of paper-size)))
@@ -116,7 +116,7 @@
 ;;;     gtk-paper-size-copy
 ;;;     gtk-paper-size-is-equal
 
-(test papper-size-is-equal
+(test gtk-paper-size-is-equal
   (let ((paper-size-1 (gtk:paper-size-new "iso_a4"))
         (paper-size-2 (gtk:paper-size-new "iso_a4"))
         (paper-size-3 (gtk:paper-size-new "iso_a3")))
@@ -130,12 +130,12 @@
 
 ;;;     gtk-paper-size-paper-sizes
 
-(test paper-size-paper-sizes.1
+(test gtk-paper-size-paper-sizes.1
   (is (member "iso_a4"
               (mapcar #'gtk:paper-size-name (gtk:paper-size-paper-sizes nil))
               :test #'string=)))
 
-(test paper-size-paper-sizes.2
+(test gtk-paper-size-paper-sizes.2
   (is (member "A4"
               (mapcar #'gtk:paper-size-display-name
                       (gtk:paper-size-paper-sizes nil))
@@ -145,13 +145,13 @@
 ;;;     gtk-paper-size-display-name
 ;;;     gtk-paper-size-ppd-name
 
-(test paper-size-name.1
+(test gtk-paper-size-name.1
   (let ((paper-size (gtk:paper-size-new "iso_a4")))
     (is (string= "iso_a4" (gtk:paper-size-name paper-size)))
     (is (string= "A4" (gtk:paper-size-display-name paper-size)))
     (is (string= "A4" (gtk:paper-size-ppd-name paper-size)))))
 
-(test paper-size-name.2
+(test gtk-paper-size-name.2
   (let ((paper-size (gtk:paper-size-new "iso_2a0")))
     (is (string= "iso_2a0" (gtk:paper-size-name paper-size)))
     #-windows ; TODO: There seems a problem with the charset of Windows
@@ -161,7 +161,7 @@
 ;;;     gtk-paper-size-width
 ;;;     gtk-paper-size-height
 
-(test paper-size-width
+(test gtk-paper-size-width
   (let ((paper-size (gtk:paper-size-new "iso_a4")))
     (is (= 210.0 (gtk:paper-size-width paper-size :mm)))
     (is (= 297.0 (gtk:paper-size-height paper-size :mm)))))
@@ -169,7 +169,7 @@
 ;;;     gtk-paper-size-is-ipp
 ;;;     gtk-paper-size-is-custom
 
-(test paper-size-is-ipp
+(test gtk-paper-size-is-ipp
   (let ((paper-size-1 (gtk:paper-size-new "iso_a4"))
         (paper-size-2 (gtk:paper-size-new-custom "myPaper" "myPaper" 0 0 :mm)))
     (is-false (gtk:paper-size-is-ipp paper-size-1))
@@ -179,7 +179,7 @@
 
 ;;;     gtk-paper-size-set-size
 
-(test paper-size-set-size
+(test gtk-paper-size-set-size
   (let ((paper-size (gtk:paper-size-new-custom "myPaper"
                                                "myPaper" 0.0d0 0.0d0 :mm)))
     (is-true (gtk:paper-size-is-custom paper-size))
@@ -198,7 +198,7 @@
 ;;;     gtk-paper-size-default-left-margin
 ;;;     gtk-paper-size-default-right-margin
 
-(test paper-size-default-margins
+(test gtk-paper-size-default-margins
   (let ((paper-size (gtk:paper-size-new "iso_a4")))
     ;; GtkUnit is :points
     (is (= 18 (gtk:paper-size-default-top-margin paper-size :points)))
@@ -213,13 +213,13 @@
 
 ;;;     gtk-paper-size-default
 
-(test paper-size-default
+(test gtk-paper-size-default
   (is (string= "iso_a4" (gtk:paper-size-default))))
 
 ;;;     gtk-paper-size-new-from-key-file
 ;;;     gtk-paper-size-to-key-file
 
-(test paper-size-key-file
+(test gtk-paper-size-key-file
   (let ((key-file (g:key-file-new))
         (paper-size (gtk:paper-size-new "iso_a4")))
     ;; Write paper-size to key-file
@@ -239,7 +239,7 @@ Height=297
 ;;;     gtk-paper-size-new-from-gvariant
 ;;;     gtk-paper-size-to-gvariant
 
-(test paper-size-gvariant
+(test gtk-paper-size-gvariant
   (let* ((paper-size (gtk:paper-size-new "iso_a4"))
          (value (gtk:paper-size-to-gvariant paper-size)))
     ;; Check the value
@@ -249,4 +249,4 @@ Height=297
     (is (eq 'gtk:paper-size (type-of (gtk:paper-size-new-from-gvariant value))))
     (is (string= "iso_a4" (gtk:paper-size-name (gtk:paper-size-new-from-gvariant value))))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-21 --------------------------------------------------------------

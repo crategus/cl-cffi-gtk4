@@ -46,7 +46,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:paned))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkPaned" GTK-PANED
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPaned" GTK-PANED
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
                          "GtkConstraintTarget" "GtkOrientable")

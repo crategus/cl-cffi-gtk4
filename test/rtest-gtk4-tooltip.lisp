@@ -32,7 +32,7 @@
   (is (equal '()
              (list-signals "GtkTooltip")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkTooltip" GTK-TOOLTIP
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTooltip" GTK-TOOLTIP
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_tooltip_get_type")
                        NIL)

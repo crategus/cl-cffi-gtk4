@@ -33,7 +33,7 @@
   (is (equal '("changed" "value-changed")
              (list-signals "GtkAdjustment")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkAdjustment" GTK-ADJUSTMENT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAdjustment" GTK-ADJUSTMENT
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_adjustment_get_type")
                        ((LOWER GTK-ADJUSTMENT-LOWER "lower" "gdouble" T T)

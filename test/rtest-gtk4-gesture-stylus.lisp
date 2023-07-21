@@ -32,7 +32,7 @@
   (is (equal '("down" "motion" "proximity" "up")
              (list-signals "GtkGestureStylus")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGestureStylus" GTK-GESTURE-STYLUS
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureStylus" GTK-GESTURE-STYLUS
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_stylus_get_type")
                        ((STYLUS-ONLY GTK-GESTURE-STYLUS-STYLUS-ONLY

@@ -27,7 +27,7 @@
   (is (equal '("exclusive")
              (list-flags-item-nick "GtkShortcutActionFlags")))
   ;; Check the flags definition
-  (is (equal '(DEFINE-G-FLAGS "GtkShortcutActionFlags"
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkShortcutActionFlags"
                               GTK-SHORTCUT-ACTION-FLAGS
                               (:EXPORT T
                                :TYPE-INITIALIZER
@@ -63,7 +63,7 @@
   (is (equal '()
              (list-signals "GtkShortcutAction")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkShortcutAction" GTK-SHORTCUT-ACTION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutAction" GTK-SHORTCUT-ACTION
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_shortcut_action_get_type")
                        NIL)
@@ -96,7 +96,7 @@
   (is (equal '()
              (list-signals "GtkNothingAction")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkNothingAction" GTK-NOTHING-ACTION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNothingAction" GTK-NOTHING-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_nothing_action_get_type")
                        NIL)
@@ -129,7 +129,7 @@
   (is (equal '()
              (list-signals "GtkCallbackAction")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkCallbackAction" GTK-CALLBACK-ACTION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCallbackAction" GTK-CALLBACK-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_callback_action_get_type")
                        NIL)
@@ -162,7 +162,7 @@
   (is (equal '()
              (list-signals "GtkMnemonicAction")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMnemonicAction" GTK-MNEMONIC-ACTION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMnemonicAction" GTK-MNEMONIC-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_mnemonic_action_get_type")
                        NIL)
@@ -195,7 +195,7 @@
   (is (equal '()
              (list-signals "GtkActivateAction")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkActivateAction" GTK-ACTIVATE-ACTION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkActivateAction" GTK-ACTIVATE-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_activate_action_get_type")
                        NIL)
@@ -228,7 +228,7 @@
   (is (equal '()
              (list-signals "GtkSignalAction")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkSignalAction" GTK-SIGNAL-ACTION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSignalAction" GTK-SIGNAL-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_signal_action_get_type")
                        ((SIGNAL-NAME GTK-SIGNAL-ACTION-SIGNAL-NAME
@@ -270,7 +270,7 @@
                            (g-signal-list-ids "GtkNamedAction"))
                    #'string<)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkNamedAction" GTK-NAMED-ACTION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNamedAction" GTK-NAMED-ACTION
                        (:SUPERCLASS GTK-SHORTCUT-ACTION :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_named_action_get_type")
                        ((ACTION-NAME GTK-NAMED-ACTION-ACTION-NAME "action-name"

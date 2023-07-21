@@ -37,7 +37,7 @@
   (is (equal '()
              (list-signals "GtkFileFilter")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFileFilter" GTK-FILE-FILTER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileFilter" GTK-FILE-FILTER
                        (:SUPERCLASS GTK-FILTER :EXPORT T :INTERFACES
                         ("GtkBuildable") :TYPE-INITIALIZER
                         "gtk_file_filter_get_type")

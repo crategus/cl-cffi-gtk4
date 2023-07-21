@@ -20,7 +20,7 @@
   (is (equal '()
              (list-interface-properties "GtkNative")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkNative"
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkNative"
                                   GTK-NATIVE
                                   (:EXPORT T
                                    :TYPE-INITIALIZER "gtk_native_get_type"))

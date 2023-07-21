@@ -30,7 +30,7 @@
   (is (equal '()
              (list-signals "GtkWidgetPaintable")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkWidgetPaintable" GTK-WIDGET-PAINTABLE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWidgetPaintable" GTK-WIDGET-PAINTABLE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GdkPaintable") :TYPE-INITIALIZER
                         "gtk_widget_paintable_get_type")

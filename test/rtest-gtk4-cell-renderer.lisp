@@ -31,7 +31,7 @@
                "expandable" "expanded")
              (list-flags-item-nick "GtkCellRendererState")))
   ;; Check the flags definition
-  (is (equal '(DEFINE-G-FLAGS "GtkCellRendererState"
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkCellRendererState"
                               GTK-CELL-RENDERER-STATE
                               (:EXPORT T
                                :TYPE-INITIALIZER
@@ -69,7 +69,7 @@
   (is (equal '("inert" "activatable" "editable")
              (list-enum-item-nick "GtkCellRendererMode")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkCellRendererMode"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCellRendererMode"
                              GTK-CELL-RENDERER-MODE
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -110,7 +110,7 @@
   (is (equal '("editing-canceled" "editing-started")
              (list-signals "GtkCellRenderer")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkCellRenderer" GTK-CELL-RENDERER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRenderer" GTK-CELL-RENDERER
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_cell_renderer_get_type")
                        ((CELL-BACKGROUND GTK-CELL-RENDERER-CELL-BACKGROUND

@@ -9,7 +9,7 @@
 
 ;;;     GtkEditable
 
-(test editable-interface
+(test gtk-editable-interface
   ;; Type check
   (is (g:type-is-interface "GtkEditable"))
   ;; Check the registered name
@@ -22,8 +22,11 @@
   (is (equal '("cursor-position" "editable" "enable-undo" "max-width-chars"
                "selection-bound" "text" "width-chars" "xalign")
              (list-interface-properties "GtkEditable")))
+  ;; Check the signals
+  (is (equal '("changed" "delete-text" "insert-text")
+             (list-signals "GtkEditable")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkEditable"
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkEditable"
                                   GTK-EDITABLE
                                   (:EXPORT T
                                    :TYPE-INITIALIZER "gtk_editable_get_type")
@@ -47,7 +50,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test editable-properties
+(test gtk-editable-properties
   (let ((editable (make-instance 'gtk:text)))
     (is (= 0 (gtk:editable-cursor-position editable)))
     (signals (error) (setf (gtk:editable-cursor-position editable) 1))
@@ -71,7 +74,7 @@
 
 ;;;     gtk_editable_get_chars
 
-(test editable-chars
+(test gtk-editable-chars
   (let ((editable (make-instance 'gtk:text
                                  :text "This is some text.")))
     (is (string= "This" (gtk:editable-chars editable :start 0 :end  4)))
@@ -83,7 +86,7 @@
 
 ;;;     gtk_editable_insert_text
 
-(test editable-insert-text
+(test gtk-editable-insert-text
   (let ((editable (make-instance 'gtk:text
                                  :text "This is text.")))
     (is (string= "This is text." (gtk:editable-chars editable)))
@@ -92,7 +95,7 @@
 
 ;;;     gtk_editable_delete_text
 
-(test editable-delete-text
+(test gtk-editable-delete-text
   (let ((editable (make-instance 'gtk:text
                                  :text "This is some text.")))
     (is (string= "This is some text." (gtk:editable-chars editable)))
@@ -107,7 +110,7 @@
 ;;;     gtk_editable_select_region
 ;;;     gtk_editable_delete_selection
 
-(test editable-selection-bound
+(test gtk-editable-selection-bound
   (let ((editable (make-instance 'gtk:text
                                  :text "This is some text.")))
     (is (equal '(nil 0 0)
@@ -132,7 +135,7 @@
 ;;;     gtk_editable_set_position
 ;;;     gtk_editable_get_position
 
-(test editable-position
+(test gtk-editable-position
   (let ((editable (make-instance 'gtk:text
                                  :text "This is some text.")))
     (is (= 0 (gtk:editable-position editable)))
@@ -143,7 +146,7 @@
 ;;;     gtk_editable_set_alignment
 ;;;     gtk_editable_get_alignment
 
-(test editable-alignment
+(test gtk-editable-alignment
   (let ((editable (make-instance 'gtk:text
                                  :text "This is some text.")))
     (is (= 0.0 (gtk:editable-alignment editable)))
@@ -157,4 +160,4 @@
 ;;;     gtk_editable_delegate_set_property
 ;;;     gtk_editable_delegate_get_property
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-16 --------------------------------------------------------------

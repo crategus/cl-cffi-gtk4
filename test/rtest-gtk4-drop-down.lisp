@@ -78,7 +78,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:drop-down))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkDropDown" GTK-DROP-DOWN
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDropDown" GTK-DROP-DOWN
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_drop_down_get_type")

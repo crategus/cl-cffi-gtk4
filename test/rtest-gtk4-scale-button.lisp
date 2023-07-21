@@ -42,7 +42,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:scale-button))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkScaleButton" GTK-SCALE-BUTTON
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScaleButton" GTK-SCALE-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
                          "GtkConstraintTarget" "GtkOrientable")

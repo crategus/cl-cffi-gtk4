@@ -32,7 +32,7 @@
   (is (equal '("drag-begin" "drag-end" "drag-update")
              (list-signals "GtkGestureDrag")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGestureDrag" GTK-GESTURE-DRAG
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureDrag" GTK-GESTURE-DRAG
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_drag_get_type")
                        NIL)

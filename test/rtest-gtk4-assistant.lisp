@@ -29,7 +29,7 @@
   (is (equal '("content" "intro" "confirm" "summary" "progress" "custom")
              (list-enum-item-nick "GtkAssistantPageType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAssistantPageType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAssistantPageType"
                              GTK-ASSISTANT-PAGE-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -69,7 +69,7 @@
   (is (equal '()
              (list-signals "GtkAssistantPage")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkAssistantPage" GTK-ASSISTANT-PAGE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistantPage" GTK-ASSISTANT-PAGE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_assistant_page_get_type")
                        ((CHILD GTK-ASSISTANT-PAGE-CHILD "child" "GtkWidget" T
@@ -131,7 +131,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:assistant))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkAssistant" GTK-ASSISTANT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistant" GTK-ASSISTANT
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkRoot" "GtkShortcutManager")

@@ -32,7 +32,7 @@
   (is (equal '()
              (list-signals "GtkIMMulticontext")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkIMMulticontext" GTK-I-M-MULTICONTEXT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIMMulticontext" GTK-I-M-MULTICONTEXT
                        (:SUPERCLASS GTK-I-M-CONTEXT :EXPORT T :INTERFACES NIL)
                        NIL)
              (gobject:get-g-type-definition "GtkIMMulticontext"))))

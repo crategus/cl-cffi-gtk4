@@ -43,7 +43,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:center-box))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkCenterBox" GTK-CENTER-BOX
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCenterBox" GTK-CENTER-BOX
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkOrientable")

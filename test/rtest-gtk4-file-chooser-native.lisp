@@ -34,7 +34,7 @@
   (is (equal '()
              (list-signals "GtkFileChooserNative")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFileChooserNative" GTK-FILE-CHOOSER-NATIVE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileChooserNative" GTK-FILE-CHOOSER-NATIVE
                        (:SUPERCLASS GTK-NATIVE-DIALOG :EXPORT T :INTERFACES
                         ("GtkFileChooser") :TYPE-INITIALIZER
                         "gtk_file_chooser_native_get_type")

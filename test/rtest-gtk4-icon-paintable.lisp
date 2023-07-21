@@ -20,7 +20,7 @@
   (is (equal '()
              (list-interfaces "GtkSymbolicPaintable")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkSymbolicPaintable" GTK-SYMBOLIC-PAINTABLE
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkSymbolicPaintable" GTK-SYMBOLIC-PAINTABLE
                     (:EXPORT T :TYPE-INITIALIZER
                      "gtk_symbolic_paintable_get_type"))
              (gobject:get-g-type-definition "GtkSymbolicPaintable"))))
@@ -52,7 +52,7 @@
   (is (equal '()
              (list-signals "GtkIconPaintable")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkIconPaintable" GTK-ICON-PAINTABLE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIconPaintable" GTK-ICON-PAINTABLE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GdkPaintable" "GtkSymbolicPaintable")
                         :TYPE-INITIALIZER "gtk_icon_paintable_get_type")

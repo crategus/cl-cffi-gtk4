@@ -20,7 +20,7 @@
   (is (equal '()
              (list-interface-properties "GtkRoot")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkRoot"
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkRoot"
                                   GTK-ROOT
                                   (:EXPORT T
                                    :TYPE-INITIALIZER "gtk_root_get_type"))

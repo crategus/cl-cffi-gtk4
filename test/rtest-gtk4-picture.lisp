@@ -46,7 +46,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:picture))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkPicture" GTK-PICTURE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPicture" GTK-PICTURE
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_picture_get_type")

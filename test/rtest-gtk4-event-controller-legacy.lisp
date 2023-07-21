@@ -33,7 +33,7 @@
   (is (equal '("event")
              (list-signals "GtkEventControllerLegacy")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkEventControllerLegacy"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerLegacy"
                                      GTK-EVENT-CONTROLLER-LEGACY
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER

@@ -28,7 +28,7 @@
   (is (equal '("open" "save" "select-folder")
              (list-enum-item-nick "GtkFileChooserAction")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkFileChooserAction"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkFileChooserAction"
                              GTK-FILE-CHOOSER-ACTION
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_file_chooser_action_get_type")
@@ -56,7 +56,7 @@
                "shortcut-folders")
              (list-interface-properties "GtkFileChooser")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkFileChooser" GTK-FILE-CHOOSER
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkFileChooser" GTK-FILE-CHOOSER
                                   (:EXPORT T
                                    :TYPE-INITIALIZER "gtk_file_chooser_get_type")
                                   (ACTION GTK-FILE-CHOOSER-ACTION

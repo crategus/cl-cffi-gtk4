@@ -36,7 +36,7 @@
   (is (equal '("deleted-text" "inserted-text")
              (list-signals "GtkEntryBuffer")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkEntryBuffer" GTK-ENTRY-BUFFER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryBuffer" GTK-ENTRY-BUFFER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_entry_buffer_get_type")
                        ((LENGTH GTK-ENTRY-BUFFER-LENGTH "length" "guint" T NIL)

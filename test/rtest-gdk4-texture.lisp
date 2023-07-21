@@ -33,7 +33,7 @@
 ;;;     gdk_texture_new_from_resource
 
 (test gdk-texture-new-from-resource
-  (with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let* ((path "/com/crategus/test/ducky.png")
            (texture (gdk:texture-new-from-resource path)))
       (is (typep texture 'gdk:texture))

@@ -68,7 +68,7 @@
 "
                (print-style-context "GtkVideo")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkVideo" GTK-VIDEO
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkVideo" GTK-VIDEO
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_video_get_type")
@@ -129,7 +129,7 @@
 ;;;     gtk_video_new_for_resource
 
 (test gtk-video-new-for-resource
-  (with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let* ((path "/com/crategus/test/gtk-logo.webm")
            (video (gtk:video-new-for-resource path)))
       (is (typep video 'gtk:video))

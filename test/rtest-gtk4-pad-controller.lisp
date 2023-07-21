@@ -27,7 +27,7 @@
   (is (equal '("button" "ring" "strip")
              (list-enum-item-nick "GtkPadActionType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkPadActionType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPadActionType"
                              GTK-PAD-ACTION-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_pad_action_type_get_type")
@@ -63,7 +63,7 @@
   (is (equal '()
              (list-signals "GtkPadController")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkPadController" GTK-PAD-CONTROLLER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPadController" GTK-PAD-CONTROLLER
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_pad_controller_get_type")
                        ((ACTION-GROUP GTK-PAD-CONTROLLER-ACTION-GROUP

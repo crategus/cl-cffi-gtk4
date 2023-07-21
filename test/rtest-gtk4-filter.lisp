@@ -27,7 +27,7 @@
   (is (equal '("some" "none" "all")
              (list-enum-item-nick "GtkFilterMatch")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkFilterMatch" GTK-FILTER-MATCH
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkFilterMatch" GTK-FILTER-MATCH
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_filter_match_get_type")
                              (:SOME 0)
@@ -57,7 +57,7 @@
   (is (equal '("different" "less-strict" "more-strict")
              (list-enum-item-nick "GtkFilterChange")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkFilterChange" GTK-FILTER-CHANGE
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkFilterChange" GTK-FILTER-CHANGE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_filter_change_get_type")
                              (:DIFFERENT 0)
@@ -93,7 +93,7 @@
   (is (equal '("changed")
              (list-signals "GtkFilter")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFilter" GTK-FILTER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFilter" GTK-FILTER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_filter_get_type")
                        NIL)

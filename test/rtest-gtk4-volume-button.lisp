@@ -42,7 +42,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:volume-button))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkVolumeButton" GTK-VOLUME-BUTTON
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkVolumeButton" GTK-VOLUME-BUTTON
                        (:SUPERCLASS GTK-SCALE-BUTTON :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
                          "GtkConstraintTarget" "GtkOrientable")

@@ -27,7 +27,7 @@
   (is (equal '("none" "horizontal" "vertical" "both")
              (list-enum-item-nick "GtkSizeGroupMode")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkSizeGroupMode"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSizeGroupMode"
                              GTK-SIZE-GROUP-MODE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_size_group_mode_get_type")
@@ -64,7 +64,7 @@
   (is (equal '()
              (list-signals "GtkSizeGroup")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkSizeGroup" GTK-SIZE-GROUP
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSizeGroup" GTK-SIZE-GROUP
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GtkBuildable") :TYPE-INITIALIZER
                         "gtk_size_group_get_type")

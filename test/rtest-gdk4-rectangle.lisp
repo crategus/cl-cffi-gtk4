@@ -9,7 +9,7 @@
 
 (test gdk-rectangle-boxed
   ;; Type check
-  (is (g:type-is-a (g:gtype "GdkRectangle") +g-type-boxed+))
+  (is (g:type-is-a (g:gtype "GdkRectangle") g:+g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkRectangle")
           (g:gtype (cffi:foreign-funcall "gdk_rectangle_get_type" :size)))))

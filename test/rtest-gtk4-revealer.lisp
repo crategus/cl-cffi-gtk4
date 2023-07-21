@@ -37,7 +37,7 @@
                "slide-down" "swing-right" "swing-left" "swing-up" "swing-down")
              (list-enum-item-nick "GtkRevealerTransitionType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkRevealerTransitionType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkRevealerTransitionType"
                              GTK-REVEALER-TRANSITION-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -91,7 +91,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:revealer))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkRevealer" GTK-REVEALER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRevealer" GTK-REVEALER
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_revealer_get_type")

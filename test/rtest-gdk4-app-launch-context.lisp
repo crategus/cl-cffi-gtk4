@@ -41,7 +41,8 @@
   (is (equal '()
              (list-signals "GdkAppLaunchContext")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GdkAppLaunchContext" GDK-APP-LAUNCH-CONTEXT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkAppLaunchContext" 
+                                             GDK-APP-LAUNCH-CONTEXT
                        (:SUPERCLASS G-APP-LAUNCH-CONTEXT :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER
                         "gdk_app_launch_context_get_type")
@@ -97,4 +98,4 @@
     (is-false (gdk:app-launch-context-set-icon-name context
                                                     (cffi:null-pointer)))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-16 --------------------------------------------------------------

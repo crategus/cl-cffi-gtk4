@@ -20,7 +20,7 @@
   (is (equal '()
              (list-interface-properties "GtkShortcutManager")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkShortcutManager" GTK-SHORTCUT-MANAGER
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkShortcutManager" GTK-SHORTCUT-MANAGER
                     (:EXPORT T :TYPE-INITIALIZER
                      "gtk_shortcut_manager_get_type"))
              (gobject:get-g-type-definition "GtkShortcutManager"))))

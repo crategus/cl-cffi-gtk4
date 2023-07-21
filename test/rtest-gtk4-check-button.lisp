@@ -43,7 +43,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:check-button))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkCheckButton" GTK-CHECK-BUTTON
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCheckButton" GTK-CHECK-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
                          "GtkConstraintTarget")

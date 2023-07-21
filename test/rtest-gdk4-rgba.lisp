@@ -9,7 +9,7 @@
 
 (test gdk-rgba-boxed
   ;; Type check
-  (is (g:type-is-a (g:gtype "GdkRGBA") +g-type-boxed+))
+  (is (g:type-is-a (g:gtype "GdkRGBA") g:+g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkRGBA")
           (g:gtype (cffi:foreign-funcall "gdk_rgba_get_type" :size)))))
@@ -76,4 +76,4 @@
 (test rgba-to-string
   (is (string= "rgb(255,0,0)" (gdk:rgba-to-string (gdk:rgba-parse "red")))))
 
-;;; --- 2023-1-22 --------------------------------------------------------------
+;;; --- 2023-7-16 --------------------------------------------------------------

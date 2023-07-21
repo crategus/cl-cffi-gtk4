@@ -33,7 +33,7 @@
   (is (equal '()
              (list-signals "GtkFileDialog")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkFileDialog" GTK-FILE-DIALOG
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileDialog" GTK-FILE-DIALOG
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_file_dialog_get_type")
                        ((ACCEPT-LABEL GTK-FILE-DIALOG-ACCEPT-LABEL

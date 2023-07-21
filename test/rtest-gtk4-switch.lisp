@@ -36,7 +36,7 @@
   (is (string= "switch"
                (gtk:widget-class-css-name "GtkSwitch")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkSwitch" GTK-SWITCH
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSwitch" GTK-SWITCH
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
                          "GtkConstraintTarget")

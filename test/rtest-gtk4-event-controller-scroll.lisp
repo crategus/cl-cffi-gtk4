@@ -35,7 +35,7 @@
   (is (equal '("decelerate" "scroll" "scroll-begin" "scroll-end")
              (list-signals "GtkEventControllerScroll")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkEventControllerScroll"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerScroll"
                                      GTK-EVENT-CONTROLLER-SCROLL
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER

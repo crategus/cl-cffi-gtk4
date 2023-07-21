@@ -43,7 +43,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:range))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkRange" GTK-RANGE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRange" GTK-RANGE
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
                          "GtkConstraintTarget" "GtkOrientable")

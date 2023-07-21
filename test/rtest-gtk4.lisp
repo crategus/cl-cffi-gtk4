@@ -1,46 +1,10 @@
 (defpackage :gtk-test
   (:use :fiveam :common-lisp)
   (:export #:run!)
-  (:import-from :gobject #:+g-type-invalid+
-                         #:+g-type-none+
-                         #:+g-type-interface+
-                         #:+g-type-char+
-                         #:+g-type-uchar+
-                         #:+g-type-boolean+
-                         #:+g-type-int+
-                         #:+g-type-uint+
-                         #:+g-type-long+
-                         #:+g-type-ulong+
-                         #:+g-type-int64+
-                         #:+g-type-uint64+
-                         #:+g-type-enum+
-                         #:+g-type-flags+
-                         #:+g-type-float+
-                         #:+g-type-double+
-                         #:+g-type-string+
-                         #:+g-type-pointer+
-                         #:+g-type-boxed+
-                         #:+g-type-param+
-                         #:+g-type-object+
-                         #:+g-type-gtype+
-                         #:+g-type-variant+
-                         #:+g-type-checksum+
-
-                         #:define-g-enum
-                         #:define-g-flags
-                         #:define-g-object-class
-                         #:define-g-interface
-                         )
-  (:import-from :gio     #:with-g-resources)
-  (:import-from :gtk
-                         ;; Symbols from gtk.style-provider.lisp
-                         #:+gtk-priority-fallback+
-                         #:+gtk-priority-theme+
-                         #:+gtk-priority-settings+
-                         #:+gtk-priority-application+
-                         #:+gtk-priority-user+)
-  (:import-from :gdk     #:+gdk-event-propagate+
-                         #:+gdk-event-stop+))
+  (:import-from :gobject)
+  (:import-from :gio)
+  (:import-from :gtk)
+  (:import-from :gdk))
 
 (in-package :gtk-test)
 
@@ -125,4 +89,4 @@
   (mapcar #'gobject:enum-item-value
           (gobject:get-enum-items gtype)))
 
-;;; --- 2023-4-28 --------------------------------------------------------------
+;;; --- 2023-7-21 --------------------------------------------------------------

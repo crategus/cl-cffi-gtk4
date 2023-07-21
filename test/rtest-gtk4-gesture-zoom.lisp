@@ -32,7 +32,7 @@
   (is (equal '("scale-changed")
              (list-signals "GtkGestureZoom")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGestureZoom" GTK-GESTURE-ZOOM
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureZoom" GTK-GESTURE-ZOOM
                        (:SUPERCLASS GTK-GESTURE :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_zoom_get_type")
                        NIL)

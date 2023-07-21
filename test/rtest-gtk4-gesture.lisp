@@ -28,7 +28,7 @@
   (is (equal '("none" "claimed" "denied")
              (list-enum-item-nick "GtkEventSequenceState")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkEventSequenceState"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkEventSequenceState"
                              GTK-EVENT-SEQUENCE-STATE
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -65,7 +65,7 @@
   (is (equal '("begin" "cancel" "end" "sequence-state-changed" "update")
              (list-signals "GtkGesture")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGesture" GTK-GESTURE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGesture" GTK-GESTURE
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_get_type")
                        ((N-POINTS GTK-GESTURE-N-POINTS "n-points" "guint" T

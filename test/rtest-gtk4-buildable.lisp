@@ -40,7 +40,7 @@
   (is (equal '()
              (list-interface-properties "GtkBuildable")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkBuildable" GTK-BUILDABLE
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkBuildable" GTK-BUILDABLE
                     (:EXPORT T :TYPE-INITIALIZER "gtk_buildable_get_type"))
              (gobject:get-g-type-definition "GtkBuildable"))))
 

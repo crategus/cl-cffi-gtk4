@@ -34,7 +34,7 @@
   (is (equal '()
              (list-signals "GtkLayoutManager")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkLayoutManager" GTK-LAYOUT-MANAGER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLayoutManager" GTK-LAYOUT-MANAGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_layout_manager_get_type")
                        NIL)

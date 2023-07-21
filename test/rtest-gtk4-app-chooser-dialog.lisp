@@ -52,7 +52,8 @@
                        (make-instance 'gtk:app-chooser-dialog))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkAppChooserDialog" GTK-APP-CHOOSER-DIALOG
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAppChooserDialog" 
+                                             GTK-APP-CHOOSER-DIALOG
                        (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkAppChooser" "GtkBuildable"
                          "GtkConstraintTarget" "GtkNative" "GtkRoot"

@@ -32,7 +32,7 @@
   (is (equal '("swipe")
              (list-signals "GtkGestureSwipe")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGestureSwipe" GTK-GESTURE-SWIPE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureSwipe" GTK-GESTURE-SWIPE
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_swipe_get_type")
                        NIL)

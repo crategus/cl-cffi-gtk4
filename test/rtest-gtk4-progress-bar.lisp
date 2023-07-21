@@ -43,7 +43,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:progress-bar))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkProgressBar" GTK-PROGRESS-BAR
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkProgressBar" GTK-PROGRESS-BAR
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
                          "GtkConstraintTarget" "GtkOrientable")

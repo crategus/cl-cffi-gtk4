@@ -27,7 +27,7 @@
   (is (equal '("empty" "icon-name" "gicon" "paintable")
              (list-enum-item-nick "GtkImageType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkImageType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkImageType"
                              GTK-IMAGE-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_image_type_get_type")
@@ -74,7 +74,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:image))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkImage" GTK-IMAGE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkImage" GTK-IMAGE
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_image_get_type")
@@ -144,7 +144,7 @@
 ;;;     gtk_image_new_from_resource
 
 (test image-new-from-resource
-  (with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((image (gtk:image-new-from-resource
                      "/com/crategus/test/gtk-logo-24.png")))
       (is-false (gtk:image-file image))

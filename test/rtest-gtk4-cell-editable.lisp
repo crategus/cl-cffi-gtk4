@@ -7,7 +7,7 @@
 
 ;;;     GtkCellEditable
 
-(test cell-editable-interface
+(test gtk-cell-editable-interface
   ;; Type check
   (is (g:type-is-interface "GtkCellEditable"))
   ;; Check the registered name
@@ -20,10 +20,10 @@
   (is (equal '("editing-canceled")
              (list-interface-properties "GtkCellEditable")))
   ;; Check the signals
-  (is (equal '()
+  (is (equal '("editing-done" "remove-widget")
              (list-signals "GtkCellEditable")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkCellEditable" GTK-CELL-EDITABLE
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkCellEditable" GTK-CELL-EDITABLE
                     (:EXPORT T :TYPE-INITIALIZER "gtk_cell_editable_get_type")
                     (EDITING-CANCELED GTK-CELL-EDITABLE-EDITING-CANCELED
                      "editing-canceled" "gboolean" T T))
@@ -44,4 +44,4 @@
 ;;;     gtk_cell_editable_editing_done
 ;;;     gtk_cell_editable_remove_widget
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-16 --------------------------------------------------------------

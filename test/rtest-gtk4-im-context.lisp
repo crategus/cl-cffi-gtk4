@@ -33,7 +33,7 @@
                "preedit-start" "retrieve-surrounding")
              (list-signals "GtkIMContext")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkIMContext" GTK-I-M-CONTEXT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIMContext" GTK-I-M-CONTEXT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL)
                        ((INPUT-HINTS GTK-I-M-CONTEXT-INPUT-HINTS "input-hints"
                          "GtkInputHints" T T)

@@ -28,7 +28,7 @@
                "south-west" "south" "south-east" "static")
              (list-enum-item-nick "GdkGravity")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GdkGravity"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkGravity"
                              GDK-GRAVITY
                              (:EXPORT T
                               :TYPE-INITIALIZER "gdk_gravity_get_type")
@@ -72,7 +72,7 @@
                "super-mask" "hyper-mask" "meta-mask")
              (list-flags-item-nick "GdkModifierType")))
   ;; Check the flags definition
-  (is (equal '(DEFINE-G-FLAGS "GdkModifierType"
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkModifierType"
                               GDK-MODIFIER-TYPE
                               (:EXPORT T
                                :TYPE-INITIALIZER "gdk_modifier_type_get_type")

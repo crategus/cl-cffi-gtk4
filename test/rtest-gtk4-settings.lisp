@@ -10,7 +10,7 @@
 
 ;;;     GtkSettings
 
-(test settings-class
+(test gtk-settings-class
   ;; Type check
   (is (g:type-is-object "GtkSettings"))
   ;; Check the registered name
@@ -58,7 +58,7 @@
   (is (equal '("notify")
              (list-signals "GObject")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkSettings" GTK-SETTINGS
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSettings" GTK-SETTINGS
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GtkStyleProvider") :TYPE-INITIALIZER
                         "gtk_settings_get_type")
@@ -200,7 +200,7 @@
 ;;; --- Properties -------------------------------------------------------------
 
 #-windows
-(test settings-properties
+(test gtk-settings-properties
   (let ((settings (gtk:settings-default)))
     (is-false (gtk:settings-gtk-alternative-button-order settings))
     (is-false (gtk:settings-gtk-alternative-sort-arrows settings))
@@ -260,14 +260,14 @@
 
 ;;;     gtk_settings_get_default
 
-(test settings-default
+(test gtk-settings-default
   (is (typep (gtk:settings-default) 'gtk:settings)))
 
 ;;;     gtk_settings_get_for_display
 
 ;;;     gtk_settings_reset_property
 
-(test settings-reset-property
+(test gtk-settings-reset-property
   (let ((settings (gtk:settings-default)))
     (is-false (gtk:settings-reset-property settings
                                            "gtk-alternative-button-order"))
@@ -302,4 +302,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-21 --------------------------------------------------------------

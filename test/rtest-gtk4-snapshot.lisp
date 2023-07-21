@@ -32,7 +32,7 @@
   (is (equal '()
              (list-signals "GtkSnapshot")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkSnapshot" GTK-SNAPSHOT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSnapshot" GTK-SNAPSHOT
                        (:SUPERCLASS GDK-SNAPSHOT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_snapshot_get_type")
                        NIL)

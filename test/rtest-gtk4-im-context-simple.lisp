@@ -34,7 +34,7 @@
   (is (equal '()
              (list-signals "GtkIMContextSimple")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkIMContextSimple" GTK-I-M-CONTEXT-SIMPLE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIMContextSimple" GTK-I-M-CONTEXT-SIMPLE
                        (:SUPERCLASS GTK-I-M-CONTEXT :EXPORT T :INTERFACES NIL)
                        NIL)
              (gobject:get-g-type-definition "GtkIMContextSimple"))))

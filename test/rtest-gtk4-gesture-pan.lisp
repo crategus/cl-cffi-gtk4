@@ -34,7 +34,7 @@
   (is (equal '("pan")
              (list-signals "GtkGesturePan")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGesturePan" GTK-GESTURE-PAN
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGesturePan" GTK-GESTURE-PAN
                        (:SUPERCLASS GTK-GESTURE-DRAG :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_pan_get_type")
                        ((ORIENTATION GTK-GESTURE-PAN-ORIENTATION "orientation"

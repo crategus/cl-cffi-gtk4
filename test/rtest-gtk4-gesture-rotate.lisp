@@ -32,7 +32,7 @@
   (is (equal '("angle-changed")
              (list-signals "GtkGestureRotate")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGestureRotate" GTK-GESTURE-ROTATE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureRotate" GTK-GESTURE-ROTATE
                        (:SUPERCLASS GTK-GESTURE :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_rotate_get_type")
                        NIL)

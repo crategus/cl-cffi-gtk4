@@ -21,9 +21,10 @@
           (g:type-parent "GdkCairoContext")))
   ;; Check the children
   #-windows
-  (is (equal '("GdkBroadwayCairoContext" "GdkWaylandCairoContext")
+  (is (equal '("GdkBroadwayCairoContext" "GdkWaylandCairoContext"
+               "GdkX11CairoContext")
              (list-children "GdkCairoContext")))
-  #+windows
+  #+WINDOWS
   (is (equal '("GdkWin32CairoContext")
              (list-children "GdkCairoContext")))
   ;; Check the interfaces
@@ -36,7 +37,7 @@
   (is (equal '()
              (list-signals "GdkCairoContext")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GdkCairoContext" GDK-CAIRO-CONTEXT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkCairoContext" GDK-CAIRO-CONTEXT
                        (:SUPERCLASS GDK-DRAW-CONTEXT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_cairo_context_get_type")
                        NIL)
@@ -54,4 +55,4 @@
     ;; TODO: We get a NULL Cairo context. Improve this !?
     (is (cffi:null-pointer-p (gdk:cairo-context-cairo-create context)))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-16 --------------------------------------------------------------

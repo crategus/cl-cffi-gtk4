@@ -37,17 +37,17 @@ dann benutzen Sie es immer noch.")
 
 ;;;   GtkTextIter
 
-(test text-iter-boxed
-  (is-true (g:type-is-a (g:gtype "GtkTextIter") +g-type-boxed+))
+(test gtk-text-iter-boxed
+  (is-true (g:type-is-a (g:gtype "GtkTextIter") g:+g-type-boxed+))
   (is-true (eq 'gtk:text-iter (type-of (make-instance 'gtk:text-iter))))
-  (is (eq 'gobject::boxed-opaque-info
-          (type-of (glib::get-boxed-info 'gtk:text-iter))))
-  (is (eq 'gobject::boxed-opaque-info
-          (type-of (glib::get-boxed-info (g:gtype "GtkTextIter"))))))
+  (is (eq 'glib:boxed-opaque-info
+          (type-of (glib:get-boxed-info 'gtk:text-iter))))
+  (is (eq 'glib:boxed-opaque-info
+          (type-of (glib:get-boxed-info (g:gtype "GtkTextIter"))))))
 
 ;;;     gtk_text_iter_get_buffer
 
-(test text-iter-buffer
+(test gtk-text-iter-buffer
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text "Some sample text for the text buffer."))
          (iter (gtk:text-buffer-start-iter buffer)))
@@ -59,7 +59,7 @@ dann benutzen Sie es immer noch.")
 ;;;     gtk_text_iter_copy
 ;;;     gtk_text_iter_assign
 
-(test text-iter-new/copy/assign
+(test gtk-text-iter-new/copy/assign
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text "Some sample text for the text buffer."))
          (iter1 (gtk:text-buffer-start-iter buffer))
@@ -80,7 +80,7 @@ dann benutzen Sie es immer noch.")
 ;;;     gtk_text_iter_get_offset
 ;;;     gtk_text_iter_set_offset
 
-(test text-iter-offset
+(test gtk-text-iter-offset
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -94,7 +94,7 @@ dann benutzen Sie es immer noch.")
 ;;;     gtk_text_iter_set_line
 
 #-windows
-(test text-iter-line
+(test gtk-text-iter-line
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text *gtk-text-iter-sample-text*))
          (iter (gtk:text-buffer-iter-at-offset buffer 100)))
@@ -106,7 +106,7 @@ dann benutzen Sie es immer noch.")
 ;;;     gtk_text_iter_get_line_offset
 ;;;     gtk_text_iter_set_line_offset
 
-(test text-iter-line-offset
+(test gtk-text-iter-line-offset
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -115,7 +115,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;  gtk_text_iter_get_line_index
 
-(test text-iter-line-index
+(test gtk-text-iter-line-index
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -124,7 +124,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;   gtk_text_iter_get_visible_line_index
 
-(test text-iter-visible-line-index
+(test gtk-text-iter-visible-line-index
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -133,7 +133,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;   gtk_text_iter_get_visible_line_offset
 
-(test text-iter-visible-line-offset
+(test gtk-text-iter-visible-line-offset
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -142,7 +142,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;   gtk_text_iter_get_char
 
-(test text-iter-char
+(test gtk-text-iter-char
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -151,7 +151,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;   gtk_text_iter_get_slice
 
-(test text-iter-slice
+(test gtk-text-iter-slice
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -161,7 +161,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;   gtk_text_iter_get_text
 
-(test text-iter-text
+(test gtk-text-iter-text
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -171,7 +171,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;   gtk_text_iter_get_visible_slice
 
-(test text-iter-visible-slice
+(test gtk-text-iter-visible-slice
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -181,7 +181,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;   gtk_text_iter_get_visible_text
 
-(test text-iter-visible-text
+(test gtk-text-iter-visible-text
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -192,7 +192,7 @@ dann benutzen Sie es immer noch.")
 ;;;   gtk_text_iter_get_paintable
 
 #+nil
-(test text-iter-pixbuf
+(test gtk-text-iter-pixbuf
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -203,7 +203,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;   gtk_text_iter_get_marks
 
-(test text-iter-marks
+(test gtk-text-iter-marks
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -214,7 +214,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;   gtk_text_iter_get_toggled_tags
 
-(test text-iter-toggled-tags
+(test gtk-text-iter-toggled-tags
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -231,7 +231,7 @@ dann benutzen Sie es immer noch.")
 ;;;   gtk_text_iter_get_child_anchor
 
 #+nil
-(test text-iter-child-anchor
+(test gtk-text-iter-child-anchor
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text
                                 "Some sample text for the text buffer."))
@@ -261,7 +261,7 @@ dann benutzen Sie es immer noch.")
 
 ;;;     gtk_text_iter_get_language
 
-(test text-iter-language
+(test gtk-text-iter-language
   (let* ((buffer (make-instance 'gtk:text-buffer
                                 :text "Some sample text for the text buffer."))
          (iter (gtk:text-buffer-start-iter buffer)))
@@ -320,4 +320,4 @@ dann benutzen Sie es immer noch.")
 ;;;     gtk_text_iter_in_range
 ;;;     gtk_text_iter_order
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-21 --------------------------------------------------------------

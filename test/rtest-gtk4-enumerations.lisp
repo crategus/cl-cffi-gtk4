@@ -27,7 +27,7 @@
   (is (equal '("fill" "start" "end" "center" "baseline")
              (list-enum-item-nick "GtkAlign")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAlign"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAlign"
                              GTK-ALIGN
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_align_get_type")
@@ -63,7 +63,7 @@
   (is (equal '("up" "down" "left" "right" "none")
              (list-enum-item-nick "GtkArrowType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkArrowType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkArrowType"
                              GTK-ARROW-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_arrow_type_get_type")
@@ -96,7 +96,7 @@
   (is (equal '("top" "center" "bottom")
              (list-enum-item-nick "GtkBaselinePosition")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkBaselinePosition"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkBaselinePosition"
                              GTK-BASELINE-POSITION
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_baseline_position_get_type")
@@ -130,7 +130,7 @@
                "paragraph-ends" "paragraphs" "whitespace")
              (list-enum-item-nick "GtkDeleteType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkDeleteType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkDeleteType"
                              GTK-DELETE-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_delete_type_get_type")
@@ -174,7 +174,7 @@
   (is (equal '("horizontal" "vertical")
              (list-enum-item-nick "GtkOrientation")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkOrientation"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkOrientation"
                              GTK-ORIENTATION
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_orientation_get_type")
@@ -221,7 +221,7 @@
   (is (equal '("none" "horizontal" "vertical" "both")
              (list-enum-item-nick "GtkSizeGroupMode")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkSizeGroupMode"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSizeGroupMode"
                              GTK-SIZE-GROUP-MODE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_size_group_mode_get_type")
@@ -330,7 +330,7 @@
                "window" "toggle-button")
              (list-enum-item-nick "GtkAccessibleRole")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAccessibleRole"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleRole"
                              GTK-ACCESSIBLE-ROLE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_accessible_role_get_type")
@@ -444,7 +444,7 @@
                "pressed" "selected")
              (list-enum-item-nick "GtkAccessibleState")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAccessibleState"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleState"
                              GTK-ACCESSIBLE-STATE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_accessible_state_get_type")
@@ -501,7 +501,7 @@
                "value-max" "value-min" "value-now" "value-text")
              (list-enum-item-nick "GtkAccessibleProperty")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAccessibleProperty"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleProperty"
                              GTK-ACCESSIBLE-PROPERTY
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -569,7 +569,7 @@
                "row-index" "row-index-text" "row-span" "set-size")
              (list-enum-item-nick "GtkAccessibleRelation")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAccessibleRelation"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleRelation"
                              GTK-ACCESSIBLE-RELATION
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -618,7 +618,7 @@
   (is (equal '("false" "true" "mixed")
              (list-enum-item-nick "GtkAccessibleTristate")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAccessibleTristate"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleTristate"
                              GTK-ACCESSIBLE-TRISTATE
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -653,7 +653,7 @@
   (is (equal '("false" "true" "grammar" "spelling")
              (list-enum-item-nick "GtkAccessibleInvalidState")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAccessibleInvalidState"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleInvalidState"
                              GTK-ACCESSIBLE-INVALID-STATE
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -689,7 +689,7 @@
   (is (equal '("none" "inline" "list" "both")
              (list-enum-item-nick "GtkAccessibleAutocomplete")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAccessibleAutocomplete"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleAutocomplete"
                              GTK-ACCESSIBLE-AUTOCOMPLETE
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -724,7 +724,7 @@
   (is (equal '("none" "ascending" "descending" "other")
              (list-enum-item-nick "GtkAccessibleSort")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkAccessibleSort"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleSort"
                              GTK-ACCESSIBLE-SORT
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_accessible_sort_get_type")

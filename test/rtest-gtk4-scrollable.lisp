@@ -26,7 +26,7 @@
   (is (equal '("minimum" "natural")
              (list-enum-item-nick "GtkScrollablePolicy")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkScrollablePolicy"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkScrollablePolicy"
                              GTK-SCROLLABLE-POLICY
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -50,7 +50,7 @@
   (is (equal '("hadjustment" "hscroll-policy" "vadjustment" "vscroll-policy")
              (list-interface-properties "GtkScrollable")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkScrollable" GTK-SCROLLABLE
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkScrollable" GTK-SCROLLABLE
                     (:EXPORT T :TYPE-INITIALIZER "gtk_scrollable_get_type")
                     (HADJUSTMENT GTK-SCROLLABLE-HADJUSTMENT "hadjustment"
                      "GtkAdjustment" T T)

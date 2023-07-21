@@ -39,7 +39,7 @@
   (is (equal '("parsing-error")
              (list-signals "GtkCssProvider")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkCssProvider" GTK-CSS-PROVIDER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCssProvider" GTK-CSS-PROVIDER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GtkStyleProvider") :TYPE-INITIALIZER
                         "gtk_css_provider_get_type")
@@ -114,7 +114,7 @@
 
 #-windows
 (test css-provider-load-from-resource
-  (with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((provider (gtk:css-provider-new))
           (path "/com/crategus/test/css-accordion.css"))
       (is-false (gtk:css-provider-load-from-resource provider path))

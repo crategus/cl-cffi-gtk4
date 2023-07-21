@@ -27,7 +27,7 @@
   (is (equal '("info" "warning" "question" "error" "other")
              (list-enum-item-nick "GtkMessageType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkMessageType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkMessageType"
                              GTK-MESSAGE-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_message_type_get_type")
@@ -61,7 +61,7 @@
   (is (equal '("none" "ok" "close" "cancel" "yes-no" "ok-cancel")
              (list-enum-item-nick "GtkButtonsType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkButtonsType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkButtonsType"
                              GTK-BUTTONS-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_buttons_type_get_type")
@@ -112,7 +112,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:message-dialog))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMessageDialog" GTK-MESSAGE-DIALOG
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMessageDialog" GTK-MESSAGE-DIALOG
                        (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkRoot" "GtkShortcutManager")

@@ -36,7 +36,7 @@
   (is (equal '("closed" "opened" "seat-added" "seat-removed" "setting-changed")
              (list-signals "GdkDisplay")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GdkDisplay" GDK-DISPLAY
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplay" GDK-DISPLAY
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_display_get_type")
                        ((COMPOSITED GDK-DISPLAY-COMPOSITED "composited"
@@ -72,7 +72,8 @@
 
 #-windows
 (test gdk-display-open
-  (is (typep (gdk:display-open "wayland-0") 'gdk:display)))
+  (let ((name (uiop:getenv "DISPLAY")))
+    (is (typep (gdk:display-open name) 'gdk:display))))
 
 #+windows
 (test gdk-display-open
@@ -87,8 +88,9 @@
 
 #-windows
 (test gdk-display-name
-  (let ((display (gdk:display-default)))
-    (is (string= "wayland-0" (gdk:display-name display)))))
+  (let ((name "wayland-0")
+        (display (gdk:display-default)))
+    (is (string= name (gdk:display-name display)))))
 
 #+windows
 (test gdk-display-name
@@ -217,12 +219,12 @@
 #-windows
 (test gdk-display-map-keycode
   (let ((display (gdk:display-default)))
-    (is (equal '(( 97 38 0 0)
-                 ( 65 38 0 1)
+    (is (equal '((97 38 0 0)
+                 (65 38 0 1)
                  (230 38 0 2)
                  (198 38 0 3)
-                 ( 97 38 1 0)
-                 ( 65 38 1 1)
+                 (97 38 1 0)
+                 (65 38 1 1)
                  (230 38 1 2)
                  (198 38 1 3)) (gdk:display-map-keycode display 38)))))
 
@@ -248,4 +250,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-16 --------------------------------------------------------------

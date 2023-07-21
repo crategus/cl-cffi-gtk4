@@ -12,11 +12,11 @@
 ;;;     GTK_STYLE_PROVIDER_PRIORITY_USER
 
 (test gtk-priority-constants
-  (is (=   1 +gtk-priority-fallback+))
-  (is (= 200 +gtk-priority-theme+))
-  (is (= 400 +gtk-priority-settings+))
-  (is (= 600 +gtk-priority-application+))
-  (is (= 800 +gtk-priority-user+)))
+  (is (=   1 gtk:+gtk-priority-fallback+))
+  (is (= 200 gtk:+gtk-priority-theme+))
+  (is (= 400 gtk:+gtk-priority-settings+))
+  (is (= 600 gtk:+gtk-priority-application+))
+  (is (= 800 gtk:+gtk-priority-user+)))
 
 ;;;     GtkStyleProvider
 
@@ -33,7 +33,7 @@
   (is (equal '()
              (list-interface-properties "GtkStyleProvider")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkStyleProvider" GTK-STYLE-PROVIDER
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkStyleProvider" GTK-STYLE-PROVIDER
                     (:EXPORT T :TYPE-INITIALIZER "gtk_style_provider_get_type"))
              (gobject:get-g-type-definition "GtkStyleProvider"))))
 

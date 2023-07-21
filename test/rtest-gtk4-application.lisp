@@ -24,7 +24,7 @@
   (is (equal '("logout" "switch" "suspend" "idle")
              (list-flags-item-nick "GtkApplicationInhibitFlags")))
   ;; Check the flags definition
-  (is (equal '(DEFINE-G-FLAGS "GtkApplicationInhibitFlags"
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkApplicationInhibitFlags"
                               GTK-APPLICATION-INHIBIT-FLAGS
                               (:EXPORT T
                                :TYPE-INITIALIZER
@@ -64,7 +64,7 @@
   (is (equal '("query-end" "window-added" "window-removed")
              (list-signals "GtkApplication")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkApplication" GTK-APPLICATION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkApplication" GTK-APPLICATION
                        (:SUPERCLASS G-APPLICATION :EXPORT T :INTERFACES
                         ("GActionGroup" "GActionMap") :TYPE-INITIALIZER
                         "gtk_application_get_type")

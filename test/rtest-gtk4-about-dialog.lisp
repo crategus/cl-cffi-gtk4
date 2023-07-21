@@ -36,7 +36,7 @@
                "bsd-3" "apache-2-0" "mpl-2-0")
              (list-enum-item-nick "GtkLicense")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkLicense"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkLicense"
                              GTK-LICENSE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_license_get_type")
@@ -100,7 +100,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:about-dialog))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkAboutDialog" GTK-ABOUT-DIALOG
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAboutDialog" GTK-ABOUT-DIALOG
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkRoot" "GtkShortcutManager")

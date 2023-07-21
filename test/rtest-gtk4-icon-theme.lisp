@@ -41,7 +41,7 @@
   (is (equal '("changed")
              (list-signals "GtkIconTheme")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkIconTheme" GTK-ICON-THEME
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIconTheme" GTK-ICON-THEME
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_icon_theme_get_type")
                        ((DISPLAY GTK-ICON-THEME-DISPLAY "display" "GdkDisplay"

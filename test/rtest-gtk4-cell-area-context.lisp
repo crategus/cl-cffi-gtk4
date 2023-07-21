@@ -34,7 +34,7 @@
   (is (equal '()
              (list-signals "GtkCellAreaContext")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkCellAreaContext" GTK-CELL-AREA-CONTEXT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellAreaContext" GTK-CELL-AREA-CONTEXT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_cell_area_context_get_type")
                        ((AREA GTK-CELL-AREA-CONTEXT-AREA "area" "GtkCellArea" T

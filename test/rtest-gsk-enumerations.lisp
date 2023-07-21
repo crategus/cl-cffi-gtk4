@@ -43,7 +43,7 @@
                "text-node" "blur-node" "debug-node" "gl-shader-node")
              (list-enum-item-nick "GskRenderNodeType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GskRenderNodeType" RENDER-NODE-TYPE
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GskRenderNodeType" RENDER-NODE-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gsk_render_node_type_get_type")
                              (:NOT-A-RENDER-NODE 0)
@@ -104,7 +104,7 @@
   (is (equal '("unknown" "any" "3d" "2d" "2d-affine" "2d-translate" "identity")
              (list-enum-item-nick "GskTransformCategory")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GskTransformCategory" TRANSFORM-CATEGORY
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GskTransformCategory" TRANSFORM-CATEGORY
                              (:EXPORT T
                               :TYPE-INITIALIZER
                               "gsk_transform_category_get_type")

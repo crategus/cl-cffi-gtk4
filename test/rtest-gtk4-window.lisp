@@ -52,7 +52,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:window))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkWindow" GTK-WINDOW
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindow" GTK-WINDOW
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkRoot" "GtkShortcutManager")

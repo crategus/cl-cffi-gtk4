@@ -21,7 +21,7 @@
   (is (equal '()
              (list-interface-properties "GtkPrintOperationPreview")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkPrintOperationPreview"
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkPrintOperationPreview"
                                   GTK-PRINT-OPERATION-PREVIEW
                                   (:EXPORT T
                                    :TYPE-INITIALIZER
@@ -67,7 +67,7 @@
                "pending-issue" "printing" "finished" "finished-aborted")
              (list-enum-item-nick "GtkPrintStatus")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkPrintStatus"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPrintStatus"
                              GTK-PRINT-STATUS
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_print_status_get_type")
@@ -107,7 +107,7 @@
   (is (equal '("print-dialog" "print" "preview" "export")
              (list-enum-item-nick "GtkPrintOperationAction")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkPrintOperationAction"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPrintOperationAction"
                              GTK-PRINT-OPERATION-ACTION
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -143,7 +143,7 @@
   (is (equal '("error" "apply" "cancel" "in-progress")
              (list-enum-item-nick "GtkPrintOperationResult")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkPrintOperationResult"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPrintOperationResult"
                              GTK-PRINT-OPERATION-RESULT
                              (:EXPORT T
                               :TYPE-INITIALIZER
@@ -190,7 +190,8 @@
                "status-changed" "update-custom-widget")
              (list-signals "GtkPrintOperation")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkPrintOperation" GTK-PRINT-OPERATION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintOperation" 
+                                             GTK-PRINT-OPERATION
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GtkPrintOperationPreview") :TYPE-INITIALIZER
                         "gtk_print_operation_get_type")

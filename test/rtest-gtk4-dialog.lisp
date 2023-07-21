@@ -27,7 +27,7 @@
   (is (equal '("modal" "destroy-with-parent" "use-header-bar")
              (list-flags-item-nick "GtkDialogFlags")))
   ;; Check the flags definition
-  (is (equal '(DEFINE-G-FLAGS "GtkDialogFlags"
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkDialogFlags"
                               GTK-DIALOG-FLAGS
                               (:EXPORT T
                                :TYPE-INITIALIZER "gtk_dialog_flags_get_type")
@@ -61,7 +61,7 @@
                "yes" "no" "apply" "help")
              (list-enum-item-nick "GtkResponseType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkResponseType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkResponseType"
                              GTK-RESPONSE-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_response_type_get_type")
@@ -118,7 +118,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:dialog))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkDialog" GTK-DIALOG
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDialog" GTK-DIALOG
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkRoot" "GtkShortcutManager")

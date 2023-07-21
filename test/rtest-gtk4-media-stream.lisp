@@ -33,7 +33,7 @@
   (is (equal '()
              (list-signals "GtkMediaStream")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMediaStream" GTK-MEDIA-STREAM
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMediaStream" GTK-MEDIA-STREAM
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GdkPaintable") :TYPE-INITIALIZER
                         "gtk_media_stream_get_type")

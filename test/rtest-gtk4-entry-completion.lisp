@@ -34,7 +34,7 @@
   (is (equal '("cursor-on-match" "insert-prefix" "match-selected" "no-matches")
              (list-signals "GtkEntryCompletion")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkEntryCompletion" GTK-ENTRY-COMPLETION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryCompletion" GTK-ENTRY-COMPLETION
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GtkBuildable" "GtkCellLayout") :TYPE-INITIALIZER
                         "gtk_entry_completion_get_type")

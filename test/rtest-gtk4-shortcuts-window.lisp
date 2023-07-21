@@ -43,7 +43,8 @@
                        (make-instance 'gtk:shortcuts-window))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkShortcutsWindow" GTK-SHORTCUTS-WINDOW
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsWindow" 
+                                             GTK-SHORTCUTS-WINDOW
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkRoot" "GtkShortcutManager")

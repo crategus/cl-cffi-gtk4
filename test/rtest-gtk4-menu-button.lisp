@@ -27,7 +27,7 @@
   (is (equal '("up" "down" "left" "right" "none")
              (list-enum-item-nick "GtkArrowType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkArrowType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkArrowType"
                              GTK-ARROW-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_arrow_type_get_type")
@@ -76,7 +76,7 @@
                    (gtk:widget-style-context (make-instance 'gtk:menu-button))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMenuButton" GTK-MENU-BUTTON
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMenuButton" GTK-MENU-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_menu_button_get_type")

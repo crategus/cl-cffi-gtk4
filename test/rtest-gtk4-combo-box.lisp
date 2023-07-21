@@ -28,7 +28,7 @@
   (is (equal '("auto" "on" "off")
              (listenum-item-nick "GtkSensitivityType")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GtkSensitivityType"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSensitivityType"
                              GTK-SENSITIVITY-TYPE
                              (:EXPORT T
                               :TYPE-INITIALIZER "gtk_sensitivity_type_get_type")
@@ -85,7 +85,7 @@
                    (gtk-widget-style-context (make-instance 'gtk-combo-box))
                    :none)))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkComboBox" GTK-COMBO-BOX
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkComboBox" GTK-COMBO-BOX
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkCellEditable"
                          "GtkCellLayout" "GtkConstraintTarget")

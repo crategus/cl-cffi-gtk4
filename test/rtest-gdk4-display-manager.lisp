@@ -15,7 +15,8 @@
           (glib:symbol-for-gtype "GdkDisplayManager")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkDisplayManager")
-          (g:gtype (cffi:foreign-funcall "gdk_display_manager_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gdk_display_manager_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkDisplayManager")))
@@ -32,7 +33,8 @@
   (is (equal '("display-opened")
              (list-signals "GdkDisplayManager")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GdkDisplayManager" GDK-DISPLAY-MANAGER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplayManager" 
+                                             GDK-DISPLAY-MANAGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_display_manager_get_type")
                        ((DEFAULT-DISPLAY GDK-DISPLAY-MANAGER-DEFAULT-DISPLAY
@@ -60,7 +62,6 @@
   (is (eq (gdk:display-default)
       (gdk:display-manager-default-display (gdk:display-manager-get)))))
 
-
 ;;;     gdk_display_manager_list_displays
 
 (test gdk-display-manager-list-displays
@@ -72,10 +73,10 @@
 
 #-windows
 (test gdk-display-manager-open-display
-  (let ((manager (gdk:display-manager-get)))
-    (is (typep (gdk:display-manager-open-display manager "wayland-0")
-               'gdk:display))
-    (is-false (gdk:display-manager-open-display manager "xxx"))))
+  (let ((name (uiop:getenv "DISPLAY"))
+        (manager (gdk:display-manager-get)))
+    (is (typep (gdk:display-manager-open-display manager name) 'gdk:display))
+    (is-false (gdk:display-manager-open-display manager "unknown"))))
 
 #+windows
 (test gdk-display-manager-open-display
@@ -86,4 +87,4 @@
 
 ;;;     gdk_set_allowed_backends
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-16 --------------------------------------------------------------

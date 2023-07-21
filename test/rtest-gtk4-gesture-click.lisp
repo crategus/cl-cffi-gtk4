@@ -32,7 +32,7 @@
   (is (equal '("pressed" "released" "stopped" "unpaired-release")
              (list-signals "GtkGestureClick")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGestureClick" GTK-GESTURE-CLICK
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureClick" GTK-GESTURE-CLICK
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_gesture_click_get_type")
                        NIL)

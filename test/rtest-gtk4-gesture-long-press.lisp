@@ -32,7 +32,7 @@
   (is (equal '("cancelled" "pressed")
              (list-signals "GtkGestureLongPress")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGestureLongPress" GTK-GESTURE-LONG-PRESS
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureLongPress" GTK-GESTURE-LONG-PRESS
                        (:SUPERCLASS GTK-GESTURE-SINGLE :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER
                         "gtk_gesture_long_press_get_type")

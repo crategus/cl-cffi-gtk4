@@ -13,8 +13,8 @@
 ;;;     GDK_EVENT_STOP
 
 (test gdk-event-propagate
-  (is-false +gdk-event-propagate+)
-  (is-true +gdk-event-stop+))
+  (is-false gdk:+gdk-event-propagate+)
+  (is-true gdk:+gdk-event-stop+))
 
 ;;;     GDK_BUTTON_PRIMARY
 ;;;     GDK_BUTTON_MIDDLE

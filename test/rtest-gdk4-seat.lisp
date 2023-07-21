@@ -31,7 +31,7 @@
                "all-pointing" "all")
              (list-flags-item-nick "GdkSeatCapabilities")))
   ;; Check the flags definition
-  (is (equal '(DEFINE-G-FLAGS "GdkSeatCapabilities"
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkSeatCapabilities"
                               GDK-SEAT-CAPABILITIES
                               (:EXPORT T
                                :TYPE-INITIALIZER
@@ -77,7 +77,7 @@
   (is (equal '("device-added" "device-removed" "tool-added" "tool-removed")
              (list-signals "GdkSeat")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GdkSeat" GDK-SEAT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkSeat" GDK-SEAT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_seat_get_type")
                        ((DISPLAY GDK-SEAT-DISPLAY "display" "GdkDisplay" T
@@ -114,7 +114,8 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is (typep (gdk:seat-pointer seat) 'gdk:device))
     #-windows
-    (is (string= "Core Pointer" (gdk:device-name (gdk:seat-pointer seat))))
+    (is (string= "Core Pointer"
+                 (gdk:device-name (gdk:seat-pointer seat))))
     #+windows
     (is (string= "Virtual Core Pointer"
                  (gdk:device-name (gdk:seat-pointer seat))))))
@@ -125,7 +126,8 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is (typep (gdk:seat-keyboard seat) 'gdk:device))
     #-windows
-    (is (string= "Core Keyboard" (gdk:device-name (gdk:seat-keyboard seat))))
+    (is (string= "Core Keyboard"
+                 (gdk:device-name (gdk:seat-keyboard seat))))
     #+windows
     (is (string= "Virtual Core Keyboard"
                  (gdk:device-name (gdk:seat-keyboard seat))))))
@@ -143,4 +145,4 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is-false (gdk:seat-tools seat))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-16 --------------------------------------------------------------

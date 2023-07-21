@@ -20,7 +20,7 @@
   (is (equal '("accessible-role")
              (list-interface-properties "GtkAccessible")))
   ;; Get the interface definition
-  (is (equal '(DEFINE-G-INTERFACE "GtkAccessible"
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkAccessible"
                                   GTK-ACCESSIBLE
                                   (:EXPORT T
                                    :TYPE-INITIALIZER "gtk_accessible_get_type")

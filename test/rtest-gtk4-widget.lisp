@@ -7,21 +7,21 @@
 
 ;;;     GtkRequisition
 
-(test requisition
+(test gtk-requisition
   ;; Type check
-  (is-true (g:type-is-a (g:gtype "GtkRequisition") +g-type-boxed+))
+  (is-true (g:type-is-a (g:gtype "GtkRequisition") g:+g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRequisition")
           (g:gtype (cffi:foreign-funcall "gtk_requisition_get_type" :size)))))
 
-(test requisition-new
+(test gtk-requisition-new
   (is (typep (gtk:requisition-new) 'gtk:requisition)))
 
-(test requisition-copy
+(test gtk-requisition-copy
   (let ((requisition (gtk:requisition-new)))
     (is (typep (gtk:requisition-copy requisition) 'gtk:requisition))))
 
-(test requisition-accessors
+(test gtk-requisition-accessors
   (let ((requisition (gtk:requisition-new)))
     (is (= 0 (gtk:requisition-width requisition)))
     (is (= 0 (gtk:requisition-height requisition)))))
@@ -47,26 +47,24 @@
                "GtkCalendar" "GtkCellView" "GtkCenterBox" "GtkCheckButton"
                "GtkColorButton" "GtkColorChooserWidget" "GtkColorPlane"
                "GtkColorSwatch" "GtkColumnView" "GtkColumnViewTitle"
-               "GtkComboBox" "GtkDrawingArea" "GtkDropDown"
-               "GtkEditableLabel" "GtkEntry" "GtkExpander"
+               "GtkComboBox" "GtkDrawingArea" "GtkDropDown" "GtkEditableLabel"
+               "GtkEntry" "GtkExpander" "GtkFileChooserCell"
                "GtkFileChooserErrorStack" "GtkFileChooserWidget"
                "GtkFileThumbnail" "GtkFixed" "GtkFlowBox" "GtkFlowBoxChild"
                "GtkFontButton" "GtkFontChooserWidget" "GtkFrame" "GtkGLArea"
                "GtkGizmo" "GtkGrid" "GtkHeaderBar" "GtkIconView" "GtkImage"
-               "GtkInfoBar" "GtkLabel" "GtkLevelBar" "GtkListBase"
-               "GtkListBox" "GtkListBoxRow" "GtkListItemWidget"
-               "GtkMediaControls" "GtkMenuButton" "GtkModelButton"
-               "GtkNotebook" "GtkOverlay" "GtkPaned" "GtkPanedHandle"
-               "GtkPasswordEntry" "GtkPathBar" "GtkPicture"
-               "GtkPlacesSidebar" "GtkPopover" "GtkPopoverContent"
+               "GtkInfoBar" "GtkLabel" "GtkLevelBar" "GtkListBase" "GtkListBox"
+               "GtkListBoxRow" "GtkListItemWidget" "GtkMediaControls"
+               "GtkMenuButton" "GtkModelButton" "GtkNotebook" "GtkOverlay"
+               "GtkPaned" "GtkPanedHandle" "GtkPasswordEntry" "GtkPathBar"
+               "GtkPicture" "GtkPlacesSidebar" "GtkPopover" "GtkPopoverContent"
                "GtkPopoverMenuBar" "GtkProgressBar" "GtkRange" "GtkRevealer"
                "GtkScaleButton" "GtkScrollbar" "GtkScrolledWindow"
-               "GtkSearchBar" "GtkSearchEntry" "GtkSeparator"
-               "GtkShortcutLabel" "GtkShortcutsShortcut" "GtkSpinButton"
-               "GtkSpinner" "GtkStack" "GtkStackSidebar" "GtkStackSwitcher"
-               "GtkStatusbar" "GtkSwitch" "GtkText" "GtkTextView"
-               "GtkTreeView" "GtkVideo" "GtkViewport" "GtkWindow"
-               "GtkWindowControls" "GtkWindowHandle")
+               "GtkSearchBar" "GtkSearchEntry" "GtkSeparator" "GtkShortcutLabel"
+               "GtkShortcutsShortcut" "GtkSpinButton" "GtkSpinner" "GtkStack"
+               "GtkStackSidebar" "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch"
+               "GtkText" "GtkTextView" "GtkTreeView" "GtkVideo" "GtkViewport"
+               "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
              (list-children "GtkWidget")))
   #+windows
   (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
@@ -114,7 +112,7 @@
   ;; CSS information
   ;; No CSS information for a abstract class
   ;; Get the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkWidget" GTK-WIDGET
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWidget" GTK-WIDGET
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_widget_get_type")
@@ -180,7 +178,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test widget-properties-for-label
+(test gtk-widget-properties-for-label
   (let ((widget (make-instance 'gtk:label)))
     (is-true (gtk:widget-can-focus widget))
     (is-true (gtk:widget-can-target widget))
@@ -403,4 +401,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-21 --------------------------------------------------------------

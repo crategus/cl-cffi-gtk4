@@ -37,7 +37,7 @@
   (is (equal '()
              (list-signals "GtkShortcutController")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkShortcutController"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutController"
                                      GTK-SHORTCUT-CONTROLLER
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         ("GListModel" "GtkBuildable") :TYPE-INITIALIZER

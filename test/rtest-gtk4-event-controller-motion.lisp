@@ -33,7 +33,7 @@
   (is (equal '("enter" "leave" "motion")
              (list-signals "GtkEventControllerMotion")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkEventControllerMotion"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEventControllerMotion"
                                      GTK-EVENT-CONTROLLER-MOTION
                        (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER

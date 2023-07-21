@@ -31,7 +31,7 @@
                "vertical-bgr")
              (list-enum-item-nick "GdkSubpixelLayout")))
   ;; Check the enum definition
-  (is (equal '(DEFINE-G-ENUM "GdkSubpixelLayout"
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkSubpixelLayout"
                              GDK-SUBPIXEL-LAYOUT
                              (:EXPORT T
                               :TYPE-INITIALIZER "gdk_subpixel_layout_get_type")
@@ -59,7 +59,7 @@
           (g:type-parent "GdkMonitor")))
   ;; Check the children
   #-windows
-  (is (equal '("GdkBroadwayMonitor" "GdkWaylandMonitor")
+  (is (equal '("GdkBroadwayMonitor" "GdkWaylandMonitor" "GdkX11Monitor")
              (list-children "GdkMonitor")))
   #+windows
   (is (equal '("GdkWin32Monitor")
@@ -76,7 +76,7 @@
   (is (equal '("invalidate")
              (list-signals "GdkMonitor")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GdkMonitor" GDK-MONITOR
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkMonitor" GDK-MONITOR
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_monitor_get_type")
                        ((CONNECTOR GDK-MONITOR-CONNECTOR "connector"
@@ -109,14 +109,8 @@
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
 
     (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
-    #+crategus
     (is (stringp (gdk:monitor-connector monitor)))
-    #+txlksd1-ws063
-    (is-false (gdk:monitor-connector monitor))
-    #+crategus
-    (is (string= "Iiyama North America 24\"" (gdk:monitor-description monitor)))
-    #+txlksd1-ws063
-    (is-false (gdk:monitor-description monitor))
+    (is (stringp (gdk:monitor-description monitor)))
     (is (typep (gdk:monitor-display monitor) 'gdk:display))
     (is (typep (gdk:monitor-geometry monitor) 'gdk:rectangle))
     (is (integerp (gdk:monitor-height-mm monitor)))
@@ -134,7 +128,8 @@
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
     (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
     (is (string= "DP-1" (gdk:monitor-connector monitor)))
-    (is (string= "Iiyama North America 24\"" (gdk:monitor-description monitor)))
+    (is (string= "Iiyama North America 24\""
+                 (gdk:monitor-description monitor)))
     (is (typep (gdk:monitor-display monitor) 'gdk:display))
     (is (gdk:rectangle-equal (gdk:rectangle-new :width 1920 :height 1080)
                              (gdk:monitor-geometry monitor)))
@@ -176,4 +171,4 @@
 
 ;;;     gdk_monitor_is_valid
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-16 --------------------------------------------------------------

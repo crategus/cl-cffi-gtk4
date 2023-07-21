@@ -33,7 +33,7 @@
   (is (equal '()
              (list-signals "GtkShortcutTrigger")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkShortcutTrigger" GTK-SHORTCUT-TRIGGER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutTrigger" GTK-SHORTCUT-TRIGGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_shortcut_trigger_get_type")
                        NIL)
@@ -66,7 +66,7 @@
   (is (equal '()
              (list-signals "GtkKeyvalTrigger")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkKeyvalTrigger" GTK-KEYVAL-TRIGGER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkKeyvalTrigger" GTK-KEYVAL-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_keyval_trigger_get_type")
                        ((KEYVAL GTK-KEYVAL-TRIGGER-KEYVAL "keyval" "guint" T
@@ -102,7 +102,8 @@
   (is (equal '()
              (list-signals "GtkMnemonicTrigger")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkMnemonicTrigger" GTK-MNEMONIC-TRIGGER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMnemonicTrigger" 
+                                             GTK-MNEMONIC-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_mnemonic_trigger_get_type")
                        ((KEYVAL GTK-MNEMONIC-TRIGGER-KEYVAL "keyval" "guint" T
@@ -137,7 +138,7 @@
   (is (equal '()
              (list-signals "GtkAlternativeTrigger")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkAlternativeTrigger"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAlternativeTrigger"
                                      GTK-ALTERNATIVE-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER
@@ -175,7 +176,7 @@
   (is (equal '()
              (list-signals "GtkNeverTrigger")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkNeverTrigger" GTK-NEVER-TRIGGER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNeverTrigger" GTK-NEVER-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_never_trigger_get_type")
                        NIL)

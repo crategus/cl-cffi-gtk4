@@ -33,7 +33,7 @@
   (is (equal '()
              (list-signals "GtkGestureSingle")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkGestureSingle" GTK-GESTURE-SINGLE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGestureSingle" GTK-GESTURE-SINGLE
                        (:SUPERCLASS GTK-GESTURE :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_gesture_single_get_type")
                        ((BUTTON GTK-GESTURE-SINGLE-BUTTON "button" "guint" T T)

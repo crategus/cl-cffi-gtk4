@@ -42,7 +42,7 @@
                "toggle-overwrite")
              (list-signals "GtkText")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkText" GTK-TEXT
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkText" GTK-TEXT
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkEditable")

@@ -27,7 +27,8 @@
   (is (equal '()
              (list-signals "GtkApplicationWindow")))
   ;; Check the class definition
-  (is (equal '(DEFINE-G-OBJECT-CLASS "GtkApplicationWindow" GTK-APPLICATION-WINDOW
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkApplicationWindow" 
+                                             GTK-APPLICATION-WINDOW
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
                         ("GActionGroup" "GActionMap" "GtkAccessible"
                          "GtkBuildable" "GtkConstraintTarget" "GtkNative"
