@@ -43,11 +43,16 @@
 (unexport 'glib:stable-pointer-destroy-notify :glib)
 (unexport 'glib:get-stable-pointer-value :glib)
 (unexport 'glib:free-stable-pointer :glib)
-(unexport 'glib:set-stable-pointer-value :glib)
 (unexport 'glib:with-stable-pointer :glib)
 (unexport 'glib:with-catching-to-g-error :glib)
 (unexport 'glib:with-g-error :glib)
 (unexport 'glib:with-ignore-g-error :glib)
+
+(unexport 'glib:define-g-boxed-cstruct :glib)
+(unexport 'glib:define-g-boxed-opaque :glib)
+(unexport 'glib:define-g-boxed-variant-cstruct :glib)
+
+(unexport 'glib:gtype :glib)
 
 (unexport 'gobject:*debug-gc* :gobject)
 (unexport 'gobject:*debug-subclass* :gobject)
@@ -55,11 +60,7 @@
 
 (unexport 'gobject:create-fn-ref :gobject)
 (unexport 'gobject:define-foreign-g-object-class :gobject)
-(unexport 'gobject:define-boxed-opaque-accessor :gobject)
 (unexport 'gobject:define-cb-methods :gobject)
-(unexport 'gobject:define-g-boxed-cstruct :gobject)
-(unexport 'gobject:define-g-boxed-opaque :gobject)
-(unexport 'gobject:define-g-boxed-variant-cstruct :gobject)
 (unexport 'gobject:define-g-enum :gobject)
 (unexport 'gobject:define-g-flags :gobject)
 (unexport 'gobject:define-g-interface :gobject)
@@ -77,16 +78,11 @@
 (unexport 'gobject:flags-item-nick :gobject)
 (unexport 'gobject:flags-item-value :gobject)
 (unexport 'gobject:gobject-class :gobject)
-(unexport 'gobject:gobject-class-direct-g-type-name :gobject)
-(unexport 'gobject:gobject-class-g-type-initializer :gobject)
-(unexport 'gobject:gobject-class-g-type-name :gobject)
 (unexport 'gobject:gobject-class-interface-p :gobject)
 (unexport 'gobject:parse-g-value :gobject)
 (unexport 'gobject:set-g-value :gobject)
-(unexport 'gobject:with-foreign-boxed-array :gobject)
 (unexport 'gobject::g-initially-unowned :gobject)
 (unexport 'gobject:lisp-closure :gobject)
-(unexport 'gobject:gtype :gobject)
 
 ;;; ---------------------------------------------------------------------------
 

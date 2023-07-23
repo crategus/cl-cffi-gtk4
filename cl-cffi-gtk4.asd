@@ -24,9 +24,9 @@
 
 (defsystem :cl-cffi-gtk4
   :name "cl-cffi-gtk4"
-  :version "0.2.0"
+  :version "0.3.0"
   :author "Dieter Kaiser"
-  :license "LLGPL"
+  :license "MIT"
   :serial t
   :components
   ((:module gdk
@@ -308,10 +308,11 @@
      (:file "gtk4.paper-size")               ; Support for named paper sizes
      (:file "gtk4.print-settings")           ; GtkPrintSettings
      (:file "gtk4.page-setup")               ; GtkPageSetup
-     (:file "gtk4.page-setup-unix-dialog")   ; GtkPageSetupUnixDialog
-     (:file "gtk4.print-unix-dialog")        ; GtkPrintUnixDialog
-     (:file "gtk4.print-job")                ; GtkPrintJob
-     (:file "gtk4.printer")                  ; GtkPrinter
+
+     (:file "gtk4.page-setup-unix-dialog"  :if-feature (:not :windows))
+     (:file "gtk4.print-unix-dialog"       :if-feature (:not :windows))
+     (:file "gtk4.print-job"               :if-feature (:not :windows))
+     (:file "gtk4.printer"                 :if-feature (:not :windows))
 
      ;; Shortcuts Widgets
      (:file "gtk4.shortcuts-window")      ; GtkShortcutsWindow
@@ -507,10 +508,10 @@
 ;    (:file "gtk4.calendar")                 ; GtkCalendar
 
      ;; Media Support
-     (:file "rtest-gtk4-video")
-     (:file "rtest-gtk4-media-controls")
-     (:file "rtest-gtk4-media-stream")
-     (:file "rtest-gtk4-media-file")
+     (:file "rtest-gtk4-video"          :if-feature (:not :windows))
+     (:file "rtest-gtk4-media-controls" :if-feature (:not :windows))
+     (:file "rtest-gtk4-media-stream"   :if-feature (:not :windows))
+     (:file "rtest-gtk4-media-file"     :if-feature (:not :windows))
 
      ;; Buttons and Toggles
      (:file "rtest-gtk4-button")
@@ -630,8 +631,7 @@
      (:file "rtest-gtk4-paper-size")
 ;    (:file "gtk4.print-settings")            ; GtkPrintSettings
 ;    (:file "gtk4.page-setup")                ; GtkPageSetup
-     #-win32
-     (:file "rtest-gtk4-print-unix-dialog")
+     (:file "rtest-gtk4-print-unix-dialog" :if-feature (:not :windows))
 ;    (:file "gtk4.printer")                   ; GtkPrinter
 
      ;; Shortcuts Widgets

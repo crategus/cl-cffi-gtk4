@@ -27,6 +27,12 @@
 
 (in-package :gtk4-init)
 
+#+sbcl
+(when (and (find-package "SB-EXT")
+           (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT")))
+  (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT"))
+           :traps nil))
+
 (glib-init:at-init ()
   (eval-when (:compile-toplevel :load-toplevel :execute)
     (define-foreign-library gtk4

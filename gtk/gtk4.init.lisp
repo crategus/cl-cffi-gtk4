@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4.init.lisp
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -43,12 +43,11 @@
 
 (finalize-gtk-classes)
 
+;; TODO: Do we need to initialize the main loop at this point.
+;; Because
+
 ;; Initialize the GTK main loop
 (glib-init:at-init ()
-  ;; Possible backend names are x11, win32, quartz, broadway, wayland
-  ;; At this time 2023-6-10 sbcl crashes with the WAYLAND backend. Therefore
-  ;; we use the X11 backend.
-  (gdk:set-allowed-backends "x11")
   (init))
 
 ;;; --- End of file gtk4.init.lisp ---------------------------------------------

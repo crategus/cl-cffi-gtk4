@@ -157,6 +157,14 @@
 
 (in-package :gdk)
 
+#+sbcl
+(when (and (find-package "SB-EXT")
+           (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT")))
+  (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT"))
+           :traps nil))
+
+;;; ----------------------------------------------------------------------------
+
 #+liber-documentation
 (setf (documentation (find-package :gdk) t)
  "GDK is an intermediate layer which isolates GTK from the details of the

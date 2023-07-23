@@ -28,19 +28,20 @@
 ;;; ----------------------------------------------------------------------------
 
 (defpackage :gsk
-  (:use :common-lisp)
-  (:import-from :cffi    #:defcfun
-                         #:defcstruct)
-  (:import-from :glib    #:with-g-error
-                         #:define-g-boxed-opaque
-                         #:define-boxed-opaque-accessor
-                         #:define-g-boxed-cstruct)
-  (:import-from :gobject #:define-g-enum
-                         #:define-g-flags
-                         #:define-g-object-class
-                         #:define-g-interface))
+  (:use :iterate :common-lisp)
+  (:import-from :cffi)
+  (:import-from :glib)
+  (:import-from :gobject))
 
 (in-package :gsk)
+
+#+sbcl
+(when (and (find-package "SB-EXT")
+           (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT")))
+  (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT"))
+           :traps nil))
+
+;;; ----------------------------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (find-package :gsk) t)

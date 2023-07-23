@@ -40,17 +40,17 @@
 
 (in-package :gtk)
 
-(defvar *cl-cffi-gtk-build-time* (multiple-value-list (get-decoded-time)))
-(defvar *cl-cffi-gtk-version* "0.2.0")
-
-(export '*cl-cffi-gtk-build-time*)
-(export '*cl-cffi-gtk-version*)
-
 #+sbcl
 (when (and (find-package "SB-EXT")
            (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT")))
   (funcall (find-symbol "SET-FLOATING-POINT-MODES" (find-package "SB-EXT"))
            :traps nil))
+
+(defvar *cl-cffi-gtk-build-time* (multiple-value-list (get-decoded-time)))
+(defvar *cl-cffi-gtk-version* "0.2.0")
+
+(export '*cl-cffi-gtk-build-time*)
+(export '*cl-cffi-gtk-version*)
 
 #+liber-documentation
 (setf (documentation (find-package :gtk) t)
@@ -2519,6 +2519,7 @@
       @about-generic{file-dialog-initial-name}
       @about-generic{file-dialog-modal}
       @about-generic{file-dialog-title}
+      @about-function{file-dialog-new}
       @about-function{file-dialog-open}
       @about-function{file-dialog-open-finish}
       @about-function{file-dialog-open-multiple}
