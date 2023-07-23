@@ -65,7 +65,6 @@
 
 (test gtk-file-dialog-properties.1
   (let ((dialog (make-instance 'gtk:file-dialog)))
-
     (is-false (gtk:file-dialog-accept-label dialog))
     (is-false (gtk:file-dialog-default-filter dialog))
     (is-false (gtk:file-dialog-filters dialog))
@@ -80,8 +79,10 @@
         (filters (g:list-store-new "GtkFileFilter"))
         (filename (sys-path "rtest-gtk4-file-dialog.lisp")))
     ;; Append two file filter to the list store
-    (g:list-store-append filters (make-instance 'gtk:file-filter :name "filter1"))
-    (g:list-store-append filters (make-instance 'gtk:file-filter :name "filter2"))
+    (g:list-store-append filters 
+                         (make-instance 'gtk:file-filter :name "filter1"))
+    (g:list-store-append filters 
+                         (make-instance 'gtk:file-filter :name "filter2"))
     ;; accept-label
     (is (string= "label" (setf (gtk:file-dialog-accept-label dialog) "label")))
     (is (string= "label" (gtk:file-dialog-accept-label dialog)))
@@ -115,6 +116,11 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
+;;;    gtk_file_dialog_new
+
+(test gtk-file-dialog-new
+  (is (typep (gtk:file-dialog-new) 'gtk:file-dialog)))
+
 ;;;     gtk_file_dialog_open
 ;;;     gtk_file_dialog_open_finish
 ;;;     gtk_file_dialog_open_multiple
@@ -126,4 +132,4 @@
 ;;;     gtk_file_dialog_select_multiple_folders
 ;;;     gtk_file_dialog_select_multiple_folders_finish
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-22 --------------------------------------------------------------
