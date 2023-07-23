@@ -36,7 +36,6 @@
 ;;;     GtkShortcutController
 ;;;     GtkShortcutScope                         -> gtk.enuerations.lisp
 ;;;     GtkShortcutManager                       -> gtk.shortcut-manager.lisp
-;;;     GtkShortcutManagerInterface
 ;;;
 ;;; Accessors
 ;;;
@@ -78,40 +77,7 @@
 ;;; enum GtkShortcutScope
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GtkShortcutScope" shortcut-scope
-  (:export t
-   :type-initializer "gtk_shortcut_scope_get_type")
-  (:local 0)
-  (:managed 1)
-  (:global 2))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'shortcut-scope)
-      "GEnum"
-      (liber:symbol-documentation 'shortcut-scope)
- "@version{#2022-8-24}
-  @begin{short}
-    Describes where @class{gtk:shortcut} objects added to a
-    @class{gtk:shortcut-controller} object get handled.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkShortcutScope\" shortcut-scope
-  (:export t
-   :type-initializer \"gtk_shortcut_scope_get_type\")
-  (:local 0)
-  (:managed 1)
-  (:global 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:local]{Shortcuts are handled inside the widget the controller
-      belongs to.}
-    @entry[:managed]{Shortcuts are handled by the first ancestor that is a
-      @class{gtk:shortcut-manager} object.}
-    @entry[:global]{Shortcuts are handled by the root widget.}
-  @end{table}
-  @see-class{gtk:shortcut}
-  @see-class{gtk:shortcut-controller}
-  @see-class{gtk:shortcut-manager}")
+;; -> gtk4.enumerations.lisp
 
 ;;; ----------------------------------------------------------------------------
 ;;; struct GtkShortcutController
@@ -120,7 +86,8 @@
 (gobject:define-g-object-class "GtkShortcutController" shortcut-controller
   (:superclass event-controller
    :export t
-   :interfaces nil
+   :interfaces ("GtkBuildable"
+                "GListModel")
    :type-initializer "gtk_shortcut_controller_get_type")
   (#+gtk-4-8
    (item-type
@@ -142,30 +109,25 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut-controller 'type)
- "@version{2023-4-15}
+ "@version{2023-7-23}
   @begin{short}
     The @sym{gtk:shortcut-controller} class is an event controller that manages
     shortcuts.
   @end{short}
-
   Most common shortcuts are using this controller implicitly, e.g. by adding a
   mnemonic underline to a @class{gtk:label} widget, or by installing a key
   binding using the @fun{gtk:widget-class-add-binding} function, or by adding
   accelerators to global actions using the
-  @fun{gtk:application-accels-for-action} function.
-
-  But it is possible to create your own shortcut controller, and add shortcuts
-  to it.
+  @fun{gtk:application-accels-for-action} function. But it is possible to
+  create your own shortcut controller, and add shortcuts to it.
 
   The @sym{gtk:shortcut-controller} class implements the @class{g:list-model}
   interface for querying the shortcuts that have been added to it.
 
   @subheading{GtkShortcutController as a GtkBuildable}
-  @sym{gtk:shortcut-controller} objects can be creates in UI files to set up
-  shortcuts in the same place as the widgets.
-
-  An example of a UI definition fragment with a @sym{gtk:shortcut-controller}
-  object:
+  The @sym{gtk:shortcut-controller} object can be created in UI files to set up
+  shortcuts in the same place as the widgets. An example of a UI definition
+  fragment with a @sym{gtk:shortcut-controller} object:
   @begin{pre}
 <object class='GtkButton'>
   <child>
@@ -183,8 +145,8 @@
   @end{pre}
   This example creates a @class{gtk:activate-action} object for triggering the
   activate signal of the @class{gtk:button} widget. See the
-  @fun{gtk:shortcut-action-parse-string} function for the syntax for other kinds
-  of @class{gtk:shortcut-action} objects. See the
+  @fun{gtk:shortcut-action-parse-string} function for the syntax for other
+  kinds of @class{gtk:shortcut-action} objects. See the
   @fun{gtk:shortcut-trigger-parse-string} function to learn more about the
   syntax for triggers.
   @see-constructor{gtk:shortcut-controller-new}
@@ -213,7 +175,7 @@
 (setf (liber:alias-for-function 'shortcut-controller-item-type)
       "Accessor"
       (documentation 'shortcut-controller-item-type 'function)
- "@version{#2023-4-15}
+ "@version{2023-7-23}
   @syntax[]{(gtk:shortcut-controller-item-type object) => gtype)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[gtype]{a @class{g:type-t} item type}
@@ -234,15 +196,15 @@
  "The @code{mnemonic-modifiers} property of type @symbol{gdk:modifier-type}
   (Read / Write) @br{}
   The modifiers that need to be pressed to allow mnemonics activation. @br{}
-  Default value: @code{GDK_ALT_MASK}")
+  Default value: @code{:alt-mask}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcut-controller-mnemonic-modifiers)
       "Accessor"
       (documentation 'shortcut-controller-mnemonic-modifiers 'function)
- "@version{#2022-8-24}
-  @syntax[]{(gtk:shortcut-controller-mnemonic-modifiers object) => modifers)}
-  @syntax[]{(setf (gtk:shortcut-controller-mnemonic-modifiers object) modifies)}
+ "@version{2023-7-23}
+  @syntax[]{(gtk:shortcut-controller-mnemonic-modifiers object) => modifiers)}
+  @syntax[]{(setf (gtk:shortcut-controller-mnemonic-modifiers object) modifiers)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[modifiers]{a @symbol{gdk:modifier-type} value}
   @begin{short}
@@ -255,12 +217,11 @@
   controller to have the given @arg{modifiers}.
 
   The mnemonics modifiers determines which modifiers need to be pressed to
-  allow activation of shortcuts with mnemonics triggers.
-
-  GTK normally uses the @kbd{Alt} modifier for mnemonics, except in
-  @class{gtk:popover-menu} widgets, where mnemonics can be triggered without
-  any modifiers. It should be very rarely necessary to change this, and doing
-  so is likely to interfere with other shortcuts.
+  allow activation of shortcuts with mnemonics triggers. GTK normally uses the
+  @kbd{Alt} modifier for mnemonics, except in @class{gtk:popover-menu} widgets,
+  where mnemonics can be triggered without any modifiers. It should be very
+  rarely necessary to change this, and doing so is likely to interfere with
+  other shortcuts.
 
   This value is only relevant for local shortcut controllers. Global and
   managed shortcut controllers will have their shortcuts activated from other
@@ -280,7 +241,7 @@
 (setf (liber:alias-for-function 'shortcut-controller-model)
       "Accessor"
       (documentation 'shortcut-controller-model 'function)
- "@version{#2022-8-24}
+ "@version{2023-7-23}
   @syntax[]{(gtk:shortcut-controller-model object) => model)}
   @syntax[]{(setf (gtk:shortcut-controller-model object) model)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
@@ -299,17 +260,18 @@
 (setf (documentation (liber:slot-documentation "n-items"
                                                'shortcut-controller) t)
  "The @code{n-items} property of type @symbol{:uint} (Read) @br{}
-  The number of items. Since 4.8 @br{}
+  The number of items in the list model. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'shortcut-controller-n-items)
       "Accessor"
       (documentation 'shortcut-controller-n-items 'function)
- "@version{#2023-4-15}
+ "@version{2023-7-23}
   @syntax[]{(gtk:shortcut-controller-n-items object) => n-items)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
-  @argument[n-items]{an unsigned integer with the number of items}
+  @argument[n-items]{an unsigned integer with the number of items in the
+    list model}
   @begin{short}
     Accessor of the @slot[gtk:shortcut-controller]{n-items} slot of the
     @class{gtk:shortcut-controller} class.
@@ -332,7 +294,7 @@
 (setf (liber:alias-for-function 'shortcut-controller-scope)
       "Accessor"
       (documentation 'shortcut-controller-scope 'function)
- "@version{#2022-8-24}
+ "@version{2023-7-23}
   @syntax[]{(gtk:shortcut-controller-scope object) => scope)}
   @syntax[]{(setf (gtk:shortcut-controller-scope object) scope)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
@@ -357,46 +319,41 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_controller_new ()
-;;;
-;;; GtkEventController *
-;;; gtk_shortcut_controller_new (void);
-;;;
-;;; Creates a new shortcut controller.
-;;;
-;;; Returns :
-;;;     a newly created shortcut controller
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline shortcut-controller-new))
 
 (defun shortcut-controller-new ()
+ #+liber-documentation
+ "@version{2023-7-23}
+  @return{A newly created @class{gtk:shortcut-controller} object.}
+  @short{Creates a new shortcut controller.}
+  @see-class{gtk:shortcut-controller}
+  @see-function{gtk:shortcut-controller-new-for-model}"
   (make-instance 'shortcut-controller))
 
 (export 'shortcut-controller-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_controller_new_for_model ()
-;;;
-;;; GtkEventController *
-;;; gtk_shortcut_controller_new_for_model (GListModel *model);
-;;;
-;;; Creates a new shortcut controller that takes its shortcuts from the given
-;;; list model.
-;;;
-;;; A controller created by this function does not let you add or remove
-;;; individual shortcuts using the shortcut controller api, but you can change
-;;; the contents of the model.
-;;;
-;;; model :
-;;;     a GListModel containing shortcuts
-;;;
-;;; Returns :
-;;;     a newly created shortcut controller
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline shortcut-controller-new-for-model))
 
 (defun shortcut-controller-new-for-model (model)
+  #+liber-documentation
+  "@version{#2023-7-23}
+  @argument[model]{a @class{g:list-model} object containing shortcuts}
+  @return{A newly creaged @class{gtk:shortcut-controller} object.}
+  @begin{short}
+    Creates a new shortcut controller that takes its shortcuts from the given
+    list model.
+  @end{short}
+  A controller created by this function does not let you add or remove
+  individual shortcuts using the shortcut controller API, but you can change
+  the contents of the model.
+  @see-class{gtk:shortcut-controller}
+  @see-class{g:list-model}"
   (make-instance 'shortcut-controller
                  :model model))
 
@@ -404,25 +361,21 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_controller_add_shortcut ()
-;;;
-;;; void
-;;; gtk_shortcut_controller_add_shortcut (GtkShortcutController *self,
-;;;                                       GtkShortcut *shortcut);
-;;;
-;;; Adds shortcut to the list of shortcuts handled by self .
-;;;
-;;; If this controller uses an external shortcut list, this function does
-;;; nothing.
-;;;
-;;; self :
-;;;     the controller
-;;;
-;;; shortcut :
-;;;     a GtkShortcut.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_controller_add_shortcut"
-           shortcut-controller-add-shortcut) :void
+               shortcut-controller-add-shortcut) :void
+ #+liber-documentation
+ "@version{#2023-7-23}
+  @argument[controller]{a @class{gtk:shortcut-controller} object}
+  @argument[shortcut]{a @class{gtk:shortcut} object to add}
+  @begin{short}
+    Adds a shortcut to the list of shortcuts handled by @arg{controller}.
+  @end{short}
+  If this controller uses an external shortcut list, this function does nothing.
+  @see-class{gtk:shortcut-controller}
+  @see-class{gtk:shortcut}
+  @see-function{gtk:shortcut-controller-remove-shortcut}"
   (controller (g:object shortcut-controller))
   (shortcut (g:object shortcut)))
 
@@ -430,26 +383,22 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_controller_remove_shortcut ()
-;;;
-;;; void
-;;; gtk_shortcut_controller_remove_shortcut
-;;;                                (GtkShortcutController *self,
-;;;                                 GtkShortcut *shortcut);
-;;;
-;;; Removes shortcut from the list of shortcuts handled by self .
-;;;
-;;; If shortcut had not been added to controller or this controller uses an
-;;; external shortcut list, this function does nothing.
-;;;
-;;; self :
-;;;     the controller
-;;;
-;;; shortcut :
-;;;     a GtkShortcut
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_controller_remove_shortcut"
-           shortcut-controller-remove-shortcut) :void
+               shortcut-controller-remove-shortcut) :void
+ #+liber-documentation
+ "@version{#2023-7-23}
+  @argument[controller]{a @class{gtk:shortcut-controller} object}
+  @argument[shortcut]{a @class{gtk:shortcut} object to remove}
+  @begin{short}
+    Removes a shortcut from the list of shortcuts handled by @arg{controller}.
+  @end{short}
+  If @arg{shortcut} had not been added to @arg{controller} or this controller
+  uses an external shortcut list, this function does nothing.
+  @see-class{gtk:shortcut-controller}
+  @see-class{gtk:shortcut}
+  @see-function{gtk:shortcut-controller-add-shortcut}"
   (controller (g:object shortcut-controller))
   (shortcut (g:object shortcut)))
 
