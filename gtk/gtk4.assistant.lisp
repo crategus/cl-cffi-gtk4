@@ -408,22 +408,22 @@ lambda (assistant page)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- assistant-pages ----------------------------------------------------
+;;; --- assistant-pages --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pages" 'assistant) t)
- "The @code{pages} property of type @class{g-list-model} (Read) @br{}
+ "The @code{pages} property of type @class{g:list-model} (Read) @br{}
   The pages of the assistant.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'assistant-pages)
       "Accessor"
       (documentation 'assistant-pages 'function)
- "@version{#2022-1-31}
+ "@version{#2023-7-22}
   @syntax[]{(gtk:assistant-pages object) => pages}
   @syntax[]{(setf (gtk:assistant-pages object) pages)}
   @argument[object]{a @class{gtk:assistant} widget}
-  @argument[pages]{a @class{g-list-model} object of the pages}
+  @argument[pages]{a @class{g:list-model} object of the pages}
   @begin{short}
     Accessor of the @slot[gtk:assistant]{pages} slot of the
     @class{gtk:assistant} class.
@@ -431,7 +431,7 @@ lambda (assistant page)    :run-last
   The @sym{gtk:assistant-pages} function gets a list model of the assistant
   pages.
   @see-class{gtk:assistant}
-  @see-class{g-list-model}")
+  @see-class{g:list-model}")
 
 ;;; --- assistant-use-header-bar -------------------------------------------
 

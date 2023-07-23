@@ -1290,9 +1290,9 @@ lambda (listbox)    :action
 (setf (liber:alias-for-symbol 'list-box-create-widget-func)
       "Callback"
       (liber:symbol-documentation 'list-box-create-widget-func)
- "@version{#2022-9-8}
+ "@version{#2023-7-22}
   @begin{short}
-    Called for list boxes that are bound to a @class{g-list-model} object with
+    Called for list boxes that are bound to a @class{g:list-model} object with
     the @fun{gtk:list-box-bind-model} function for each item that gets added to
     the model.
   @end{short}
@@ -1308,7 +1308,7 @@ lambda (item)
     @entry[Returns]{A @class{gtk:widget} object that represents @arg{item}.}
   @end{table}
   @see-class{gtk:list-box}
-  @see-class{g-list-model}
+  @see-class{g:list-model}
   @see-function{gtk:list-box-bind-model}")
 
 (export 'list-box-create-widget-func)
@@ -1317,20 +1317,20 @@ lambda (item)
 ;;; gtk_list_box_bind_model
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Check the implementation for value of NIL for MODEL or FUNC.
+;; TODO: Check the implementation for NIL for MODEL or FUNC.
 
 (cffi:defcfun ("gtk_list_box_bind_model" %list-box-bind-model) :void
   (listbox (g:object list-box))
-  (model (g:object g-list-model))
+  (model (g:object g:list-model))
   (func :pointer)
   (data :pointer)
   (notify :pointer))
 
 (defun list-box-bind-model (listbox model func)
  #+liber-documentation
- "@version{#2022-9-7}
+ "@version{#2023-7-22}
   @argument[listbox]{a @class{gtk:list-box} widget}
-  @argument[model]{a @class{g-list-model} object to be bound to @arg{listbox}}
+  @argument[model]{a @class{g:list-model} object to be bound to @arg{listbox}}
   @argument[func]{a @symbol{gtk:list-box-create-widget-func} callback function
     that creates widgets for items or @code{nil} in case you also passed
     @code{nil} as @arg{model}}
@@ -1352,14 +1352,14 @@ lambda (item)
   functionality in the list box. When using a model, filtering and sorting
   should be implemented by the model.
   @see-class{gtk:list-box}
-  @see-class{g-list-model}
+  @see-class{g:list-model}
   @see-symbol{gtk:list-box-create-widget-func}
   @see-function{gtk:list-box-insert}"
-  (%list-box-bind-model listbox
-          model
-          (cffi:callback list-box-create-widget-func)
-          (glib:allocate-stable-pointer func)
-          (cffi:callback glib:stable-pointer-destroy-notify)))
+  (%list-box-bind-model  listbox
+                         model
+                         (cffi:callback list-box-create-widget-func)
+                         (glib:allocate-stable-pointer func)
+                         (cffi:callback glib:stable-pointer-destroy-notify)))
 
 (export 'list-box-bind-model)
 

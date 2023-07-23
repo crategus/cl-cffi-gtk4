@@ -846,28 +846,27 @@ lambda (notebook page num)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pages" 'notebook) t)
- "The @code{pages} property of type @class{g-list-model} (Read) @br{}
+ "The @code{pages} property of type @class{g:list-model} (Read) @br{}
   The pages of the notebook.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'notebook-pages)
       "Accessor"
       (documentation 'notebook-pages 'function)
- "@version{#2022-1-24}
+ "@version{#2023-7-22}
   @syntax[]{(gtk:notebook-pages object) => pages}
   @syntax[]{(setf (gtk:notebook-pages object) pages)}
   @argument[object]{a @class{gtk:notebook} widget}
-  @argument[pages]{a @class{g-list-model} object with the pages of the notebook}
+  @argument[pages]{a @class{g:list-model} object with the pages of the notebook}
   @begin{short}
     Accessor of the @slot[gtk:notebook]{pages} slot of the @class{gtk:notebook}
     class.
   @end{short}
-
-  The @sym{gtk:notebook-pages} function returns a @class{g-list-model} object
+  The @sym{gtk:notebook-pages} function returns a @class{g:list-model} object
   that contains the pages of the notebook, and can be used to keep an up-to-date
   view.
   @see-class{gtk:notebook}
-  @see-class{g-list-model}")
+  @see-class{g:list-model}")
 
 ;;; --- notebook-scrollable ----------------------------------------------------
 

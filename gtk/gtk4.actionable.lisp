@@ -165,7 +165,7 @@
 (setf (liber:alias-for-function 'actionable-action-target)
       "Accessor"
       (documentation 'actionable-action-target 'function)
- "@version{#2021-9-8}
+ "@version{#2023-7-22}
   @syntax[]{(gtk:actionable-action-target object) => value}
   @syntax[]{(setf (gtk:actionable-action-target object) value)}
   @argument[object]{a @class{gtk:actionable} widget}
@@ -188,7 +188,7 @@
   Second, it is used to determine if the widget should be rendered as \"active\"
   - the widget is active if the state is equal to the given target.
 
-  Consider the example of associating a set of buttons with a @class{g-action}
+  Consider the example of associating a set of buttons with a @class{g:action}
   object with string state in a typical radio button situation. Each button
   will be associated with the same action, but with a different target value for
   that action. Clicking on a particular button will activate the action with
@@ -213,7 +213,7 @@
   @end{dictionary}
   @see-class{gtk:actionable}
   @see-type{glib:variant}
-  @see-class{g-action}")
+  @see-class{g:action}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_actionable_set_action_target ()

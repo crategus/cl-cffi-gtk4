@@ -419,7 +419,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-application)
       "Accessor"
       (documentation 'window-application 'function)
- "@version{#2022-1-6}
+ "@version{#2023-7-22}
   @syntax[]{(gtk:window-application object) => application}
   @syntax[]{(setf (gtk:window-application object) application)}
   @argument[object]{a @class{gtk:window} widget}
@@ -431,7 +431,7 @@ lambda (window)    :run-first
   The @sym{gtk:window-application} function gets the application associated with
   the window. The @sym{(setf gtk:window-application)} function sets or unsets
   the application. The application will be kept alive for at least as long as it
-  has any windows associated with it. See the @fun{g-application-hold} function
+  has any windows associated with it. See the @fun{g:application-hold} function
   for a way to keep it alive without windows.
 
   Normally, the connection between the application and the window will remain
@@ -442,7 +442,7 @@ lambda (window)    :run-first
   relevant.
   @see-class{gtk:window}
   @see-class{gtk:application}
-  @see-function{g-application-hold}
+  @see-function{g:application-hold}
   @see-function{gtk:application-add-window}
   @see-function{gtk:application-remove-window}")
 
@@ -1359,10 +1359,10 @@ lambda (window)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_get_toplevels" window-toplevels)
-    (g:object g-list-model)
+    (g:object g:list-model)
  #+liber-documentation
- "@version{#2022-7-13}
-  @return{A @class{g-list-model} object with the list of toplevel widgets.}
+ "@version{#2023-7-22}
+  @return{A @class{g:list-model} object with the list of toplevel widgets.}
   @begin{short}
     Returns a list of all existing toplevel windows.
   @end{short}
@@ -1370,7 +1370,7 @@ lambda (window)    :run-first
   callbacks that might destroy the widgets or add new ones, be aware that the
   list of toplevels will change and emit the \"items-changed\" signal.
   @see-class{gtk:window}
-  @see-class{g-list-model}
+  @see-class{g:list-model}
   @see-function{gtk:window-list-toplevels}")
 
 (export 'window-toplevels)

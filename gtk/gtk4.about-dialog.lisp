@@ -642,14 +642,14 @@ lambda (dialog uri)    :run-last
                                                'about-dialog) t)
  "The @code{program-name} property of type @code{:string} (Read / Write) @br{}
   The name of the program. If this is not set, it defaults to the return value
-  of the @fun{g-application-name} function. @br{}
+  of the @fun{g:application-name} function. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'about-dialog-program-name)
       "Accessor"
       (documentation 'about-dialog-program-name 'function)
- "@version{#2022-1-13}
+ "@version{#2023-7-22}
   @syntax[]{(gtk:about-dialog-program-name object) => name}
   @syntax[]{(setf (gtk:about-dialog-program-name object) name)}
   @argument[object]{a @class{gtk:about-dialog} widget}
@@ -661,9 +661,9 @@ lambda (dialog uri)    :run-last
   The @sym{gtk:about-dialog-program-name} function returns the program name
   displayed in the about dialog. The @sym{(setf gtk:about-dialog-program-name)}
   function sets the program name. If this is not set, it defaults to the return
-  value of the @fun{g-application-name} function.
+  value of the @fun{g:application-name} function.
   @see-class{gtk:about-dialog}
-  @see-function{g-application-name}")
+  @see-function{g:application-name}")
 
 ;;; --- about-dialog-system-information ------------------------------------
 

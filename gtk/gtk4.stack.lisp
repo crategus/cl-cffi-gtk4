@@ -622,12 +622,12 @@
   duration.
   @see-class{gtk:stack}")
 
-;;; --- stack-pages --------------------------------------------------------
+;;; --- stack-pages ------------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pages" 'stack) t)
  "The @code{pages} property of type @class{gtk:selection-model} (Read) @br{}
-  A selection model with the stacks pages. Returns a @class{g-list-model} object
+  A selection model with the stacks pages. Returns a @class{g:list-model} object
   that contains the pages of the stack, and can be used to keep an up-to-date
   view. The model also implements the @class{gtk:selection-model} object and can
   be used to track and modify the visible page.")
@@ -636,20 +636,19 @@
 (setf (liber:alias-for-function 'stack-pages)
       "Accessor"
       (documentation 'stack-pages 'function)
- "@version{#2022-2-6}
+ "@version{#2023-7-22}
   @syntax[]{(gtk:stack-pages object) => pages}
   @argument[object]{a @class{gtk:stack} widget}
   @argument[pages]{a @class{gtk:selection-model} object with the stacks pages}
   @begin{short}
     Accessor of the @slot[gtk:stack]{pages} slot of the @class{gtk:stack} class.
   @end{short}
-
-  The @sym{gtk:stack-pages} function returns a @class{g-list-model} object
+  The @sym{gtk:stack-pages} function returns a @class{g:list-model} object
   that contains the pages of the stack, and can be used to keep an up-to-date
   view. The model also implements the @class{gtk:selection-model} object and
   can be used to track and modify the visible page.
   @see-class{gtk:stack}
-  @see-class{g-list-model}")
+  @see-class{g:list-model}")
 
 ;;; --- stack-transition-duration ------------------------------------------
 

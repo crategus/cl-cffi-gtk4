@@ -101,12 +101,12 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- font-chooser-widget-tweak-action -----------------------------------
+;;; --- font-chooser-widget-tweak-action ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tweak-action"
                                                'font-chooser-widget) t)
- "The @code{tweak-action} property of type @class{g-action} (Read) @br{}
+ "The @code{tweak-action} property of type @class{g:action} (Read) @br{}
   A toggle action that can be used to switch to the tweak page of the font
   chooser widget, which lets the user tweak the OpenType features and variation
   axes of the selected font. The action will be enabled or disabled depending
@@ -116,21 +116,21 @@
 (setf (liber:alias-for-function 'font-chooser-widget-tweak-action)
       "Accessor"
       (documentation 'font-chooser-widget-tweak-action 'function)
- "@version{#2020-6-6}
-  @syntax[]{(gtk:font-chooser-widget-tweak-action object) => tweak-action}
-  @syntax[]{(setf (gtk:font-chooser-widget-tweak-action object) tweak-action)}
+ "@version{#2023-7-22}
+  @syntax[]{(gtk:font-chooser-widget-tweak-action object) => action}
+  @syntax[]{(setf (gtk:font-chooser-widget-tweak-action object) action)}
   @argument[object]{a @class{gtk:font-chooser-widget} widget}
-  @argument[tweak-action]{a @class{g-action} toggle action}
+  @argument[action]{a @class{g:action} toggle action}
   @begin{short}
     Accessor of the @slot[gtk:font-chooser-widget]{tweak-action} slot of the
     @class{gtk:font-chooser-widget} class.
   @end{short}
-
   A toggle action that can be used to switch to the tweak page of the font
   chooser widget, which lets the user tweak the OpenType features and variation
   axes of the selected font. The action will be enabled or disabled depending
   on whether the selected font has any features or axes.
-  @see-class{gtk:font-chooser-widget}")
+  @see-class{gtk:font-chooser-widget}
+  @see-class{g:action}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_chooser_widget_new ()
