@@ -7,7 +7,7 @@
 
 ;;;     GtkAlign
 
-(test align
+(test gtk-align
   ;; Check the type
   (is (g:type-is-enum "GtkAlign"))
   ;; Check the type initializer
@@ -43,7 +43,7 @@
 ;; Move this to rtest-gtk-menu-button.lisp
 
 #+nil
-(test arrow-type
+(test gtk-arrow-type
   ;; Check the type
   (is (g:type-is-enum "GtkArrowType"))
   ;; Check the type initializer
@@ -76,7 +76,7 @@
 
 ;;;     GtkBaselinePosition
 
-(test baseline-position
+(test gtk-baseline-position
   ;; Check the type
   (is (g:type-is-enum "GtkBaselinePosition"))
   ;; Check the type initializer
@@ -107,7 +107,7 @@
 
 ;;;     GtkDeleteType
 
-(test delete-type
+(test gtk-delete-type
   ;; Check the type
   (is (g:type-is-enum "GtkDeleteType"))
   ;; Check the type initializer
@@ -155,7 +155,7 @@
 
 ;;;     GtkOrientation
 
-(test orientation
+(test gtk-orientation
   ;; Check the type
   (is (g:type-is-enum "GtkOrientation"))
   ;; Check the type initializer
@@ -242,7 +242,39 @@
 ;;;     GtkPropagationLimit
 ;;;     GtkEventSequenceState
 ;;;     GtkPanDirection
+
 ;;;     GtkShortcutScope
+
+(test gtk-shortcut-scope
+  ;; Check the type
+  (is (g:type-is-enum "GtkShortcutScope"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkShortcutScope")
+          (g:gtype (cffi:foreign-funcall "gtk_shortcut_scope_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:shortcut-scope
+          (glib:symbol-for-gtype "GtkShortcutScope")))
+  ;; Check the names
+  (is (equal '("GTK_SHORTCUT_SCOPE_LOCAL" "GTK_SHORTCUT_SCOPE_MANAGED"
+               "GTK_SHORTCUT_SCOPE_GLOBAL")
+             (list-enum-item-name "GtkShortcutScope")))
+  ;; Check the values
+  (is (equal '(0 1 2)
+             (list-enum-item-value "GtkShortcutScope")))
+  ;; Check the nick names
+  (is (equal '("local" "managed" "global")
+             (list-enum-item-nick "GtkShortcutScope")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkShortcutScope"
+                                     GTK-SHORTCUT-SCOPE
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_shortcut_scope_get_type")
+                                     (:LOCAL 0)
+                                     (:MANAGED 1)
+                                     (:GLOBAL 2))
+             (gobject:get-g-type-definition "GtkShortcutScope"))))
+
 ;;;     GtkPickFlags
 ;;;     GtkConstraintRelation
 ;;;     GtkConstraintStrength
@@ -253,7 +285,7 @@
 
 ;;;     GtkAccessibleRole
 
-(test accessible-role
+(test gtk-accessible-role
   ;; Check the type
   (is (g:type-is-enum "GtkAccessibleRole"))
   ;; Check the type initializer
@@ -417,7 +449,7 @@
 
 ;;;     GtkAccessibleState
 
-(test accessible-state
+(test gtk-accessible-state
   ;; Check the type
   (is (g:type-is-enum "GtkAccessibleState"))
   ;; Check the type initializer
@@ -460,7 +492,7 @@
 
 ;;;     GtkAccessibleProperty
 
-(test accessible-property
+(test gtk-accessible-property
   ;; Check the type
   (is (g:type-is-enum "GtkAccessibleProperty"))
   ;; Check the type initializer
@@ -529,7 +561,7 @@
 
 ;;;     GtkAccessibleRelation
 
-(test accessible-relation
+(test gtk-accessible-relation
   ;; Check the type
   (is (g:type-is-enum "GtkAccessibleRelation"))
   ;; Check the type initializer
@@ -596,7 +628,7 @@
 
 ;;;     GtkAccessibleTristate
 
-(test accessible-tristate
+(test gtk-accessible-tristate
   ;; Check the type
   (is (g:type-is-enum "GtkAccessibleTristate"))
   ;; Check the type initializer
@@ -630,7 +662,7 @@
 
 ;;;     GtkAccessibleInvalidState
 
-(test acessible-invalid-state
+(test gtk-acessible-invalid-state
   ;; Check the type
   (is (g:type-is-enum "GtkAccessibleInvalidState"))
   ;; Check the type initializer
@@ -666,7 +698,7 @@
 
 ;;;     GtkAccessibleAutocomplete
 
-(test acessible-autocomplete
+(test gtk-acessible-autocomplete
   ;; Check the type
   (is (g:type-is-enum "GtkAccessibleAutocomplete"))
   ;; Check the type initializer
@@ -702,7 +734,7 @@
 
 ;;;     GtkAccessibleSort
 
-(test acessible-sort
+(test gtk-acessible-sort
   ;; Check the type
   (is (g:type-is-enum "GtkAccessibleSort"))
   ;; Check the type initializer
@@ -734,4 +766,4 @@
                              (:OTHER 3))
              (gobject:get-g-type-definition "GtkAccessibleSort"))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-23 --------------------------------------------------------------

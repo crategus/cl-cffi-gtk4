@@ -6,8 +6,6 @@
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkShortcutScope                         -> gtk.enumerations.lisp
-;;;     GtkShortcutManager                       -> gtk.shortcut-manager.lisp
-;;;     GtkShortcutManagerInterface
 
 ;;;     GtkShortcutController
 
@@ -38,10 +36,11 @@
              (list-signals "GtkShortcutController")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutController"
-                                     GTK-SHORTCUT-CONTROLLER
-                       (:SUPERCLASS GTK-EVENT-CONTROLLER :EXPORT T :INTERFACES
-                        ("GListModel" "GtkBuildable") :TYPE-INITIALIZER
-                        "gtk_shortcut_controller_get_type")
+                                             GTK-SHORTCUT-CONTROLLER
+                       (:SUPERCLASS GTK-EVENT-CONTROLLER
+                        :EXPORT T
+                        :INTERFACES ("GListModel" "GtkBuildable")
+                        :TYPE-INITIALIZER "gtk_shortcut_controller_get_type")
                        ((ITEM-TYPE GTK-SHORTCUT-CONTROLLER-ITEM-TYPE
                          "item-type" "GType" T NIL)
                         (MNEMONIC-MODIFIERS
@@ -63,11 +62,26 @@
 ;;;     n-items
 ;;;     scope
 
+(test gtk-shortcut-controller-properties
+  (let ((controller (make-instance 'gtk:shortcut-controller)))
+    ;; TODO: Returns a pointer? Why? Check this with a list model.
+    (is (cffi:pointerp (gtk:shortcut-controller-item-type controller)))
+    (is (equal '(:ALT-MASK)
+               (gtk:shortcut-controller-mnemonic-modifiers controller)))
+    ;; model is not readable
+    (signals (error) (gtk:shortcut-controller-model controller))
+    (is (= 0 (gtk:shortcut-controller-n-items controller)))
+    (is (eq :local (gtk:shortcut-controller-scope controller)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_shortcut_controller_new
+
+(test gtk-shortcut-controller-new
+  (is (typep (gtk:shortcut-controller-new) 'gtk:shortcut-controller)))
+
 ;;;     gtk_shortcut_controller_new_for_model
 ;;;     gtk_shortcut_controller_add_shortcut
 ;;;     gtk_shortcut_controller_remove_shortcut
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-23 --------------------------------------------------------------

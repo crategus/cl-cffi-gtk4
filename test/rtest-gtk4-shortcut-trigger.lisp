@@ -1,4 +1,4 @@
-(in-package :gtk-testsuite)
+(in-package :gtk-test)
 
 (def-suite gtk-shortcut-trigger :in gtk-suite)
 (in-suite gtk-shortcut-trigger)
@@ -20,7 +20,7 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkShortcutTrigger")))
   ;; Check the children
-  (is (equal '("GtkKeyvalTrigger" "GtkMnemonicTrigger" "GtkAlternativeTrigger"
+  (is (equal '("GtkAlternativeTrigger" "GtkKeyvalTrigger" "GtkMnemonicTrigger"
                "GtkNeverTrigger")
              (list-children "GtkShortcutTrigger")))
   ;; Check the interfaces
@@ -33,7 +33,8 @@
   (is (equal '()
              (list-signals "GtkShortcutTrigger")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutTrigger" GTK-SHORTCUT-TRIGGER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutTrigger"
+                                             GTK-SHORTCUT-TRIGGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_shortcut_trigger_get_type")
                        NIL)
@@ -66,7 +67,8 @@
   (is (equal '()
              (list-signals "GtkKeyvalTrigger")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkKeyvalTrigger" GTK-KEYVAL-TRIGGER
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkKeyvalTrigger"
+                                             GTK-KEYVAL-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_keyval_trigger_get_type")
                        ((KEYVAL GTK-KEYVAL-TRIGGER-KEYVAL "keyval" "guint" T
@@ -102,7 +104,7 @@
   (is (equal '()
              (list-signals "GtkMnemonicTrigger")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMnemonicTrigger" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMnemonicTrigger"
                                              GTK-MNEMONIC-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER "gtk_mnemonic_trigger_get_type")
@@ -123,8 +125,8 @@
           (g:gtype (cffi:foreign-funcall "gtk_alternative_trigger_get_type"
                                          :size))))
   ;; Check the parent
-  (is (eq (gtype "GtkShortcutTrigger")
-          (g-type-parent "GtkAlternativeTrigger")))
+  (is (eq (g:gtype "GtkShortcutTrigger")
+          (g:type-parent "GtkAlternativeTrigger")))
   ;; Check the children
   (is (equal '()
              (list-children "GtkAlternativeTrigger")))
@@ -139,7 +141,7 @@
              (list-signals "GtkAlternativeTrigger")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAlternativeTrigger"
-                                     GTK-ALTERNATIVE-TRIGGER
+                                             GTK-ALTERNATIVE-TRIGGER
                        (:SUPERCLASS GTK-SHORTCUT-TRIGGER :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER
                         "gtk_alternative_trigger_get_type")
@@ -207,4 +209,4 @@
 
 ;;;     gtk_never_trigger_get
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-23 --------------------------------------------------------------
