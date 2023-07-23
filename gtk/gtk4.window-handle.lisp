@@ -2,7 +2,7 @@
 ;;; gtk4.window-handle.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -66,23 +66,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkWindowHandle
-;;;
-;;; GtkWindowHandle is a titlebar area widget. When added into a window, it can
-;;; be dragged to move the window, and handles right click, double click and
-;;; middle click as expected of a titlebar.
-;;;
-;;; CSS nodes
-;;;
-;;; GtkWindowHandle has a single CSS node with the name windowhandle.
-;;;
-;;; Accessibility
-;;;
-;;; GtkWindowHandle uses the GTK_ACCESSIBLE_ROLE_GROUP role.
-;;;
-;;; See Also
-;;;
-;;;     GtkWindow
-;;;     GtkHeaderBar
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkWindowHandle" window-handle
@@ -96,64 +79,69 @@
     window-handle-child
     "child" "GtkWidget" t t)))
 
+#+liber-documentation
+(setf (documentation 'window-handle 'type)
+ "@version{2023-7-23}
+  @begin{short}
+    The @sym{gtk:window-handle} widget is a titlebar area widget.
+  @end{short}
+  When added into a window, it can be dragged to move the window, and handles
+  right click, double click and middle click as expected of a titlebar.
+  @begin[CSS nodes]{dictionary}
+    The @sym{gtk:window-handle} implementation has a single CSS node with the
+    name @code{windowhandle}.
+  @end{dictionary}
+  @begin[Accessibility]{dictionary}
+    The @sym{gtk:window-handle} implementation uses the @code{:group} role of
+    the @symbol{gtk:accessible-role} enumeration.
+  @end{dictionary}
+  @see-class{gtk:window}
+  @see-class{gtk:header-bar}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “child” property
-;;;
-;;;  “child”                    GtkWidget *
-;;;
-;;; The child widget.
-;;;
-;;; Owner: GtkWindowHandle
-;;;
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
+;;; --- window-handle-child ----------------------------------------------------
 
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "child" 'window-handle) t)
+ "The @code{child} property of type @class{gtk:widget} (Read / Write) @br{}
+  The child widget.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'window-handle-child)
+      "Accessor"
+      (documentation 'window-handle-child 'function)
+ "@version{2023-7-23}
+  @syntax[]{(gtk:window-handle-child object) => child}
+  @syntax[]{(setf (gtk:window-handle-child object) child)}
+  @argument[object]{a @class{gtk:window} widget}
+  @argument[child]{a @class{gtk:widget} child widget}
+  @begin{short}
+    Accessor of the @slot[gtk:window-handle]{child} slot of the
+    @class{gtk:window-handle} class.
+  @end{short}
+  The @sym{gtk:window-handle-child} function gets the child widget of the
+  window handle. The @sym{(setf gtk:window-handle-child)} function sets the
+  child widget.
+  @see-class{gtk:window}
+  @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_window_handle_new ()
-;;;
-;;; GtkWidget *
-;;; gtk_window_handle_new (void);
-;;;
-;;; Creates a new GtkWindowHandle.
-;;;
-;;; Returns :
-;;;     a new GtkWindowHandle.
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_window_handle_get_child ()
-;;;
-;;; GtkWidget *
-;;; gtk_window_handle_get_child (GtkWindowHandle *self);
-;;;
-;;; Gets the child widget of self .
-;;;
-;;; self :
-;;;     a GtkWindowHandle
-;;;
-;;; Returns :
-;;;     the child widget of self .
-;;; ----------------------------------------------------------------------------
+(declaim (inline window-handle-new))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_window_handle_set_child ()
-;;;
-;;; void
-;;; gtk_window_handle_set_child (GtkWindowHandle *self,
-;;;                              GtkWidget *child);
-;;;
-;;; Sets the child widget of self .
-;;;
-;;; self :
-;;;     a GtkWindowHandle
-;;;
-;;; child :
-;;;     the child widget.
-;;; ----------------------------------------------------------------------------
+(defun window-handle-new ()
+ #+liber-documentation
+ "@version{2023-7-23}
+  @return{A new @class{gtk:window-handle} widget.}
+  @short{Creates new @class{gtk:window-handle} widget.}
+  @see-class{gtk:window-handle}"
+  (make-instance 'window-handle))
+
+(export 'window-handle-new)
 
 ;;; --- End of file gtk4.window-handle.lisp ------------------------------------
