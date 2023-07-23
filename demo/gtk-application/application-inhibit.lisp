@@ -1,4 +1,4 @@
-;;;; Application Inhibit - 2022-1-18
+;;;; Application Inhibit - 2023-7-16
 
 ;; FIXME: This examples does not work as expected. Try to work out an example
 ;; that demonstrates the gtk:application-inhibit function.
@@ -9,7 +9,7 @@
   (let (;; Create an application
         (app (make-instance 'gtk:application
                             :application-id "com.crategus.application-inhibit"
-                            :flags :none)))
+                            :flags :default-flags)))
     ;; Connect signal "activate" to the applicaton
     (g:signal-connect app "activate"
         (lambda (application)

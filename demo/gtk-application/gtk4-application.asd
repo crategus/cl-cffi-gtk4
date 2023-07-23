@@ -4,7 +4,7 @@
   :author "Dieter Kaiser"
   :license "LLGPL"
   :serial t
-  :depends-on (:cl-cffi-gtk4)
+  :depends-on (:cl-cffi-gtk4 :float-features)
   :components ((:file "gtk4-application")
                (:file "application-command-line")
                (:file "application-inhibit")
@@ -13,4 +13,4 @@
                (:file "application-simple")
               ))
 
-;; 2022-1-21
+;;; --- 2023-7-16 --------------------------------------------------------------

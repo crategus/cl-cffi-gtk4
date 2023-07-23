@@ -1,4 +1,4 @@
-;;; Example Application Menu - 2022-1-13
+;;; Example Application Menu - 2023-6-10
 
 (in-package :gtk4-application)
 
@@ -83,7 +83,7 @@
   (let (;; Create an application
         (app (make-instance 'gtk:application
                             :application-id "com.crategus.application-menu"
-                            :flags :none)))
+                            :flags :default-flags)))
     ;; Connect signal "startup" to the application
     (g:signal-connect app "startup"
         (lambda (application)

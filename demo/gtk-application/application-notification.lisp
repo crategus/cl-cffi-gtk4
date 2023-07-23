@@ -1,4 +1,4 @@
-;;;; Application Notification - 2022-11-25
+;;;; Application Notification - 2023-6-10
 
 ;; FIXME: This examples does not seem to work as expected. Try to work out an
 ;; example that demonstrates the usage of the g:notification class.
@@ -10,7 +10,7 @@
         (app (make-instance 'gtk:application
                             :application-id
                             "com.crategus.application-notification"
-                            :flags :none)))
+                            :flags :default-flags)))
     ;; Connect signal "startup" to the application
     (g:signal-connect app "startup"
         (lambda (application)

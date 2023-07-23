@@ -1,4 +1,4 @@
-;;;; Application Command Line - 2022-1-13
+;;;; Application Command Line - 2023-7-16
 
 (in-package :gtk4-application)
 
@@ -37,7 +37,7 @@
           (format t "        options : ~a~%" options)
           (let ((status -1)) ; Default to continue processing
             (cond ((g:variant-dict-contains options "version")
-                   (format t "~%~a~%" (cl-cffi-gtk-build-info))
+                   (format t "~%~a~%" (gtk:cl-cffi-gtk-build-info))
                    ;; Set status to zero to exit the application
                    (setf status 0))
                   (t
