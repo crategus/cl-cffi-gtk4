@@ -76,7 +76,7 @@
 ;;; scene.
 ;;; ----------------------------------------------------------------------------
 
-(define-g-object-class "GskRenderer" renderer
+(gobject:define-g-object-class "GskRenderer" renderer
   (:superclass g:object
    :export t
    :interfaces ()
@@ -154,13 +154,13 @@
 ;;;     return location for an error
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_renderer_realize" %renderer-realize) :boolean
+(cffi:defcfun ("gsk_renderer_realize" %renderer-realize) :boolean
   (renderer (g:object renderer))
   (surface (g:object gdk:surface))
   (err :pointer))
 
 (defun renderer-realize (renderer surface)
-  (with-g-error (err)
+  (glib:with-g-error (err)
     (%renderer-realize renderer surface err)))
 
 (export 'renderer-realize)
@@ -177,7 +177,7 @@
 ;;;     a GskRenderer
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_renderer_unrealize" renderer-unrealize) :void
+(cffi:defcfun ("gsk_renderer_unrealize" renderer-unrealize) :void
   (renderer (g:object renderer)))
 
 (export 'renderer-unrealize)
@@ -197,7 +197,7 @@
 ;;;     TRUE if the GskRenderer was realized, and FALSE otherwise
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_renderer_is_realized" renderer-is-realized) :boolean
+(cffi:defcfun ("gsk_renderer_is_realized" renderer-is-realized) :boolean
   (renderer (g:object renderer)))
 
 (export 'renderer-is-realized)
@@ -210,15 +210,15 @@
 ;;;                      GskRenderNode *root,
 ;;;                      const cairo_region_t *region);
 ;;;
-;;; Renders the scene graph, described by a tree of GskRenderNode instances, 
+;;; Renders the scene graph, described by a tree of GskRenderNode instances,
 ;;; ensuring that the given region gets redrawn.
 ;;;
-;;; Renderers must ensure that changes of the contents given by the root node as 
-;;; well as the area given by region are redrawn. They are however free to not 
-;;; redraw any pixel outside of region if they can guarantee that it didn't 
+;;; Renderers must ensure that changes of the contents given by the root node as
+;;; well as the area given by region are redrawn. They are however free to not
+;;; redraw any pixel outside of region if they can guarantee that it didn't
 ;;; change.
 ;;;
-;;; The renderer will acquire a reference on the GskRenderNode tree while the 
+;;; The renderer will acquire a reference on the GskRenderNode tree while the
 ;;; rendering is in progress.
 ;;;
 ;;; renderer :
@@ -231,7 +231,7 @@
 ;;;     the cairo_region_t that must be redrawn or NULL for the whole window.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_renderer_render" renderer-render) :void
+(cffi:defcfun ("gsk_renderer_render" renderer-render) :void
   (renderer (g:object renderer))
   (root (g:object render-node))
   (region (:pointer (:struct cairo:region-t))))
@@ -246,13 +246,13 @@
 ;;;                              GskRenderNode *root,
 ;;;                              const graphene_rect_t *viewport);
 ;;;
-;;; Renders the scene graph, described by a tree of GskRenderNode instances, to 
+;;; Renders the scene graph, described by a tree of GskRenderNode instances, to
 ;;; a GdkTexture.
 ;;;
-;;; The renderer will acquire a reference on the GskRenderNode tree while the 
+;;; The renderer will acquire a reference on the GskRenderNode tree while the
 ;;; rendering is in progress.
 ;;;
-;;; If you want to apply any transformations to root , you should put it into a 
+;;; If you want to apply any transformations to root , you should put it into a
 ;;; transform node and pass that node instead.
 ;;;
 ;;; renderer :
@@ -268,7 +268,7 @@
 ;;;     a GdkTexture with the rendered contents of root .
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_renderer_render_texture" renderer-render-texture) 
+(cffi:defcfun ("gsk_renderer_render_texture" renderer-render-texture)
     (g:object gdk:texture)
   (renderer (g:object renderer))
   (root (g:object render-node))
@@ -284,8 +284,8 @@
 ;;;
 ;;; Creates an appropriate GskRenderer instance for the given surface .
 ;;;
-;;; If the GSK_RENDERER environment variable is set, GSK will try that renderer 
-;;; first, before trying the backend-specific default. The ultimate fallback is 
+;;; If the GSK_RENDERER environment variable is set, GSK will try that renderer
+;;; first, before trying the backend-specific default. The ultimate fallback is
 ;;; the cairo renderer.
 ;;;
 ;;; The renderer will be realized before it is returned.
@@ -297,7 +297,7 @@
 ;;;     a GskRenderer.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_renderer_new_for_surface" renderer-new-for-surface) 
+(cffi:defcfun ("gsk_renderer_new_for_surface" renderer-new-for-surface)
     (g:object renderer)
   (surface (g:object gdk:surface)))
 
@@ -309,14 +309,14 @@
 ;;; GskRenderer *
 ;;; gsk_gl_renderer_new (void);
 ;;;
-;;; Creates a new GskRenderer using OpenGL. This is the default renderer used 
+;;; Creates a new GskRenderer using OpenGL. This is the default renderer used
 ;;; by GTK.
 ;;;
 ;;; Returns :
 ;;;     a new GL renderer
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_gl_renderer_new" gl-renderer-new) (g:object renderer))
+(cffi:defcfun ("gsk_gl_renderer_new" gl-renderer-new) (g:object renderer))
 
 (export 'gl-renderer-new)
 
@@ -328,17 +328,17 @@
 ;;;
 ;;; Creates a new Cairo renderer.
 ;;;
-;;; The Cairo renderer is the fallback renderer drawing in ways similar to how 
+;;; The Cairo renderer is the fallback renderer drawing in ways similar to how
 ;;; GTK 3 drew its content. Its primary use is as comparison tool.
 ;;;
-;;; The Cairo renderer is incomplete. It cannot render 3D transformed content 
+;;; The Cairo renderer is incomplete. It cannot render 3D transformed content
 ;;; and will instead render an error marker. Its usage should be avoided.
 ;;;
 ;;; Returns :
 ;;;     a new Cairo renderer.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_cairo_renderer_new" cairo-renderer-new) (g:object renderer))
+(cffi:defcfun ("gsk_cairo_renderer_new" cairo-renderer-new) (g:object renderer))
 
 (export 'cairo-renderer-new)
 
@@ -350,7 +350,7 @@
 ;;;
 ;;; Creates a new Vulkan renderer.
 ;;;
-;;; The Vulkan renderer is a renderer that uses the Vulkan library for 
+;;; The Vulkan renderer is a renderer that uses the Vulkan library for
 ;;; rendering.
 ;;;
 ;;; This function is only available when GTK was compiled with Vulkan support.
@@ -359,7 +359,8 @@
 ;;;     a new Vulkan renderer
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_vulkan_renderer_new" vulkan-renderer-new) (g:object renderer))
+(cffi:defcfun ("gsk_vulkan_renderer_new" vulkan-renderer-new)
+    (g:object renderer))
 
 (export 'vulkan-renderer-new)
 
@@ -371,8 +372,8 @@
 ;;;
 ;;; Creates a new Broadway renderer.
 ;;;
-;;; The Broadway renderer is the default renderer for the broadway backend. It 
-;;; will only work with broadway surfaces, otherwise it will fail the call to 
+;;; The Broadway renderer is the default renderer for the broadway backend. It
+;;; will only work with broadway surfaces, otherwise it will fail the call to
 ;;; gsk_renderer_realize().
 ;;;
 ;;; This function is only available when GTK was compiled with Broadway support.
@@ -381,7 +382,7 @@
 ;;;     a new Broadway renderer.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_broadway_renderer_new" broadway-renderer-new)
+(cffi:defcfun ("gsk_broadway_renderer_new" broadway-renderer-new)
     (g:object renderer))
 
 (export 'broadway-renderer-new)

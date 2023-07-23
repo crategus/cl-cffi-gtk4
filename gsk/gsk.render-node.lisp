@@ -205,7 +205,7 @@
 ;;; enum GskRenderNodeType
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GskRenderNodeType" render-node-type
+(gobject:define-g-enum "GskRenderNodeType" render-node-type
   (:export t
    :type-initializer "gsk_render_node_type_get_type")
   :not-a-render-node
@@ -244,7 +244,7 @@
     The type of a node determines what the node is rendering.
   @end{short}
   @begin{pre}
-(define-g-enum \"GskRenderNodeType\" render-node-type
+(gobject:define-g-enum \"GskRenderNodeType\" render-node-type
   (:export t
    :type-initializer \"gsk_render_node_type_get_type\")
   :not-a-render-node
@@ -490,7 +490,7 @@
 ;;; ----------------------------------------------------------------------------
 
 
-(defcstruct render-node)
+(cffi:defcstruct render-node)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskBlendNode
@@ -500,7 +500,7 @@
 ;;; A render node applying a blending function between its two child nodes.
 ;;; ----------------------------------------------------------------------------
 
-(defcstruct blend-node)
+(cffi:defcstruct blend-node)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskBlurNode

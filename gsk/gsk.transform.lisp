@@ -68,7 +68,7 @@
 ;;; enum GskTransformCategory
 ;;; ----------------------------------------------------------------------------
 
-(define-g-enum "GskTransformCategory" transform-category
+(gobject:define-g-enum "GskTransformCategory" transform-category
   (:export t
    :type-initializer "gsk_transform_category_get_type")
    :unknown
@@ -97,7 +97,7 @@
   not worsen categories. So for the matrix multiplication `C = A * B`,
   `category(C) = MIN (category(A), category(B))`.
   @begin{pre}
-(define-g-enum \"GskTransformCategory\" transform-category
+(gobject:define-g-enum \"GskTransformCategory\" transform-category
   (:export t
    :type-initializer \"gsk_transform_category_get_type\")
    :unknown
@@ -132,9 +132,9 @@
   (cffi:foreign-funcall "gsk_transform_get_type" :size))
 
 ;; gsk_transform_new is not documented but present in the GSK library
-(defcfun ("gsk_transform_new" %transform-new) :pointer)
+(cffi:defcfun ("gsk_transform_new" %transform-new) :pointer)
 
-(define-g-boxed-opaque transform "GskTransform"
+(glib:define-g-boxed-opaque transform "GskTransform"
   :alloc (%transform-new))
 
 #+liber-documentation
@@ -171,7 +171,7 @@
 ;;;     the GskTransform with an additional reference.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_ref" transform-ref)
+(cffi:defcfun ("gsk_transform_ref" transform-ref)
     (g:boxed transform)
   (transform (g:boxed transform)))
 
@@ -206,7 +206,8 @@
 ;;;     The category of the transform
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_get_category" transform-category) transform-category
+(cffi:defcfun ("gsk_transform_get_category" transform-category) 
+    transform-category
   (transform (g:boxed transform)))
 
 (export 'transform-category)
@@ -248,7 +249,7 @@
 ;;;     A new string for self
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_to_string" transform-to-string) :string
+(cffi:defcfun ("gsk_transform_to_string" transform-to-string) :string
   (transform (g:boxed transform)))
 
 (export 'transform-to-string)
@@ -257,7 +258,7 @@
 ;;; gsk_transform_parse ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_parse" %transform-parse) :boolean
+(cffi:defcfun ("gsk_transform_parse" %transform-parse) :boolean
   (str :string)
   (transform (g:boxed transform)))
 
@@ -453,7 +454,7 @@
 ;;;     The inverted transform or NULL if the transform cannot be inverted.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_invert" transform-invert)
+(cffi:defcfun ("gsk_transform_invert" transform-invert)
     (g:boxed transform)
   (transform (g:boxed transform)))
 
@@ -463,7 +464,7 @@
 ;;; gsk_transform_matrix ()
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_matrix" transform-matrix) (g:boxed transform)
+(cffi:defcfun ("gsk_transform_matrix" transform-matrix) (g:boxed transform)
  #+liber-documentation
  "@version{#2022-9-17}
   @argument[transform]{a @class{gsk:transform} instance}
@@ -540,7 +541,7 @@
 ;;;     The new transform
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_rotate" transform-rotate)
+(cffi:defcfun ("gsk_transform_rotate" transform-rotate)
     (g:boxed transform)
   (transform (g:boxed transform))
   (angle :float))
@@ -601,7 +602,7 @@
 ;;;     The new transform
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_scale" transform-scale)
+(cffi:defcfun ("gsk_transform_scale" transform-scale)
     (g:boxed transform)
   (transform (g:boxed transform))
   (xfactor :float)
@@ -666,7 +667,7 @@
 ;;;     The new transform
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_perspective" transform-perspective)
+(cffi:defcfun ("gsk_transform_perspective" transform-perspective)
     (g:boxed transform)
   (transform (g:boxed transform))
   (depth :float))
@@ -692,7 +693,7 @@
 ;;;     TRUE if the two transforms perform the same operation.
 ;;; ----------------------------------------------------------------------------
 
-(defcfun ("gsk_transform_equal" transform-equal) :boolean
+(cffi:defcfun ("gsk_transform_equal" transform-equal) :boolean
   (first (g:boxed transform))
   (second (g:boxed transform)))
 
