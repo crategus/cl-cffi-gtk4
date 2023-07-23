@@ -135,33 +135,45 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GdkDragAction
-;;;
-;;; Used in GdkDrop and GdkDrag to indicate the actions that the destination
-;;; can and should do with the dropped data.
-;;;
-;;; GDK_ACTION_COPY
-;;;     Copy the data.
-;;;
-;;; GDK_ACTION_MOVE
-;;;     Move the data, i.e. first copy it, then delete it from the source using
-;;;     the DELETE target of the X selection protocol.
-;;;
-;;; GDK_ACTION_LINK
-;;;     Add a link to the data. Note that this is only useful if source and
-;;;     destination agree on what it means, and is not supported on all
-;;;     platforms.
-;;;
-;;; GDK_ACTION_ASK
-;;;     Ask the user what to do with the data.
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-enum "GdkDragAction" drag-action
+(gobject:define-g-flags "GdkDragAction" drag-action
   (:export t
    :type-initializer "gdk_drag_action_get_type")
-  :copy
-  :move
-  :link
-  :ask)
+  (:copy #.(ash 1 0))
+  (:move #.(ash 1 1))
+  (:link #.(ash 1 2))
+  (:ask #.(ash 1 3)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'drag-action)
+      "GFlags"
+      (liber:symbol-documentation 'drag-action)
+ "@version{#2023-7-23}
+  @begin{short}
+    Used in @class{gdk:drop} and @class{gdk:drag} objects to indicate the
+    actions that the destination can and should do with the dropped data.
+  @end{short}
+  @begin{pre}
+(gobject:define-g-flags \"GdkDragAction\" drag-action
+  (:export t
+   :type-initializer \"gdk_drag_action_get_type\")
+  (:copy #.(ash 1 0))
+  (:move #.(ash 1 1))
+  (:link #.(ash 1 2))
+  (:ask #.(ash 1 3)))
+  @end{pre}
+  @begin[code]{table}
+    @entry[:copy]{Copy the data.}
+    @entry[:move]{Move the data, i.e. first copy it, then delete it from the
+      source using the @code{DELETE} target of the X selection protocol.}
+    @entry[:link]{Add a link to the data. Note that this is only useful if
+      source and destination agree on what it means, and is not supported on
+      all platforms.}
+    @entry[:ask]{Ask the user what to do with the data.}
+  @end{table}
+  @see-function{gdk:drag}
+  @see-function{gdk:drop}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GDK_ACTION_ALL
