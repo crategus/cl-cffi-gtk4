@@ -2,7 +2,7 @@
 ;;; gtk4.drag-source.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -92,14 +92,14 @@
 
 #+liber-documentation
 (setf (documentation 'drag-source 'type)
- "@version{#2022-7-31}
+ "@version{#2023-7-23}
   @begin{short}
     The @sym{gtk:drag-source} object is an auxiliary object that is used to
     initiate Drag and Drop operations.
   @end{short}
   It can be set up with the necessary ingredients for a DND operation ahead of
   time. This includes the source for the data that is being transferred, in the
-  form of a @class{gdk-content-provider} object, the desired action, and the
+  form of a @class{gdk:content-provider} object, the desired action, and the
   icon to use during the drag operation. After setting it up, the drag source
   must be added to a widget as an event controller, using the
   @fun{gtk:widget-add-controller} function.
@@ -110,14 +110,14 @@
   \"drag-begin\" signals. The \"prepare\" signal is emitted before a drag is
   started, and can be used to set the content provider and actions that the drag
   should be started with. The \"drag-begin\" signal is emitted after the
-  @class{gdk-drag} object has been created, and can be used to set up the drag
+  @class{gdk:drag} object has been created, and can be used to set up the drag
   icon.
 
   During the DND operation, the @sym{gtk:drag-source} object emits signals that
   can be used to obtain updates about the status of the operation, but it is not
-  normally necessary to connect to any signals, except for one case: when the
+  normally necessary to connect to any signals, except for one case. When the
   supported actions include the @code{:move} value of the
-  @symbol{gdk-drag-action} flags, you need to listen for the \"drag-end\" signal
+  @symbol{gdk:drag-action} flags, you need to listen for the \"drag-end\" signal
   and delete the data after it has been transferred.
   @begin[Signal Details]{dictionary}
     @subheading{The \"drag-begin\" signal}
@@ -129,7 +129,7 @@ lambda (source drag)    :run-last
       @fun{gtk:drag-source-set-icon} function.
       @begin[code]{table}
         @entry[source]{A @sym{gtk:drag-source} object.}
-        @entry[drag]{A @class{gdk-drag} object.}
+        @entry[drag]{A @class{gdk:drag} object.}
       @end{table}
     @subheading{The \"drag-cancel\" signal}
       @begin{pre}
@@ -141,8 +141,8 @@ lambda (source drag reason)    :      run-last
       default \"drag operation failed\" animation should not be shown.
       @begin[code]{table}
         @entry[source]{A @sym{gtk:drag-source} object.}
-        @entry[drag]{A @class{gdk-drag} object.}
-        @entry[reason]{A @symbol{gdk-drag-cancel-reason} value with the
+        @entry[drag]{A @class{gdk:drag} object.}
+        @entry[reason]{A @symbol{gdk:drag-cancel-reason} value with the
           information on why the drag failed.}
         @entry[Returns]{@em{True} if the failed drag operation has been already
           handled.}
@@ -156,7 +156,7 @@ lambda (source drag delete)    :run-last
       \"prepare\" or \"drag-begin\" handler.
       @begin[code]{table}
         @entry[source]{A @sym{gtk:drag-source} object.}
-        @entry[drag]{A @class{gdk-drag} object.}
+        @entry[drag]{A @class{gdk:drag} object.}
         @entry[delete]{@em{True} if the drag was performing @code{:move}, and
         the data should be deleted.}
         @entry[Returns]{@em{True} if the failed drag operation has been already
@@ -167,7 +167,7 @@ lambda (source drag delete)    :run-last
 lambda (source x y)    :run-last
       @end{pre}
       The signal is emitted when a drag is about to be initiated. It returns the
-      @class{gdk-content-provider} object to use for the drag that is about to
+      @class{gdk:content-provider} object to use for the drag that is about to
       start. The default handler for this signal returns the value of the
       \"content\" property, so if you set up that property ahead of time, you
       do not need to connect to this signal.
@@ -177,7 +177,7 @@ lambda (source x y)    :run-last
           point.}
         @entry[y]{A double float with the y coordinate of the drag starting
           point.}
-        @entry[Returns]{A @class{gdk-content-provider} object, or @code{nil}.}
+        @entry[Returns]{A @class{gdk:content-provider} object, or @code{nil}.}
       @end{table}
   @end{dictionary}
   @see-slot{gtk:drag-source-actions}
@@ -188,35 +188,81 @@ lambda (source x y)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “actions” property
-;;;
-;;;  “actions”                  GdkDragAction
-;;;
-;;; The actions that are supported by drag operations from the source.
-;;;
-;;; Note that you must handle the “drag-end” signal if the actions include
-;;; GDK_ACTION_MOVE.
-;;;
-;;; Owner: GtkDragSource
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: GDK_ACTION_COPY
-;;; ----------------------------------------------------------------------------
+;;; --- drag-source-actions ----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "actions" 'drag-source) t)
+ "The @code{actions} property of type @symbol{gdk:drag-action} (Read / Write)
+  @br{}
+  The actions that are supported by drag operations from the source. Note that
+  you must handle the \"drag-end\" signal if the actions include @code{:move}.
+  @br{}
+  Default value: @code{:copy}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-source-actions)
+      "Accessor"
+      (documentation 'drag-source-actions 'function)
+ "@version{#2023-7-23}
+  @syntax[]{(gtk:drag-source-actions object) => actions}
+  @syntax[]{(setf (gtk:drag-source-actions object) actions)}
+  @argument[object]{a @class{gtk:drag-source} object}
+  @argument[actions]{a @symbol{gdk:drag-action} value with the actions to offer}
+  @begin{short}
+    Accessor of the @slot[gtk:drag-source]{actions} slot of the
+    @class{gtk:drag-source} class.
+  @end{short}
+  The @sym{gtk:drag-source-actions} function gets the actions that are currently
+  set on the @class{gtk:drag-source} object. The
+  @sym{(setf gtk:drag-source-actions)} function sets the actions.
+
+  During a DND operation, the actions are offered to potential drop targets.
+  If @arg{actions} include @code{:move}, you need to listen to the \"drag-end\"
+  signal and handle the @arg{delete} argument being @em{true}.
+
+  This function can be called before a drag is started, or in a handler for
+  the \"prepare\" signal.
+  @see-class{gtk:drag-source}
+  @see-symbol{gdk:drag-action}")
+
+;;; --- drag-source-content ----------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; The “content” property
-;;;
-;;;  “content”                  GdkContentProvider *
-;;;
-;;; The data that is offered by drag operations from this source, in the form
-;;; of a GdkContentProvider.
-;;;
-;;; Owner: GtkDragSource
-;;;
-;;; Flags: Read / Write
+;;; gtk_drag_source_set_content ()
+;;; gtk_drag_source_get_content ()
 ;;; ----------------------------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "content" 'drag-source) t)
+ "The @code{content} property of type @class{gdk:content-provider}
+  (Read / Write) @br{}
+  The data that is offered by drag operations from this source, in the form
+  of a @class{gdk:content-provider} object.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-source-content)
+      "Accessor"
+      (documentation 'drag-source-content 'function)
+ "@version{#2023-7-23}
+  @syntax[]{(gtk:drag-source-content object) => content}
+  @syntax[]{(setf (gtk:drag-source-content object) content)}
+  @argument[object]{a @class{gtk:drag-source} object}
+  @argument[content]{a @class{gdk:content-provider} object of @arg{source},
+    or @code{nil}}
+  @begin{short}
+    Accessor of the @slot[gtk:drag-source]{content} slot of the
+    @class{gtk:drag-source} class.
+  @end{short}
+  The @sym{gtk:drag-source-content} function gets the current content provider
+  of a @class{gtk:drag-source} object. The @sym{(setf gtk:drag-source-content)}
+  function sets a content provider. When the data is requested in the cause of
+  a DND operation, it will be obtained from the content provider.
+
+  This function can be called before a drag is started, or in a handler for the
+  \"prepare\" signal. You may consider setting the content provider back to
+  @code{nil} in a \"drag-end\" signal handler.
+  @see-class{gtk:drag-source}
+  @see-class{gdk:content-provider}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_source_new ()
@@ -228,85 +274,6 @@ lambda (source x y)    :run-last
 ;;;
 ;;; Returns :
 ;;;     the new GtkDragSource
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drag_source_set_content ()
-;;;
-;;; void
-;;; gtk_drag_source_set_content (GtkDragSource *source,
-;;;                              GdkContentProvider *content);
-;;;
-;;; Sets a content provider on a GtkDragSource.
-;;;
-;;; When the data is requested in the cause of a DND operation, it will be
-;;; obtained from the content provider.
-;;;
-;;; This function can be called before a drag is started, or in a handler for
-;;; the “prepare” signal.
-;;;
-;;; You may consider setting the content provider back to NULL in a “drag-end”
-;;; signal handler.
-;;;
-;;; source :
-;;;     a GtkDragSource
-;;;
-;;; content :
-;;;     a GdkContentProvider, or NULL.
-;;; ----------------------------------------------------------------------------
-
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drag_source_get_content ()
-;;;
-;;; GdkContentProvider *
-;;; gtk_drag_source_get_content (GtkDragSource *source);
-;;;
-;;; Gets the current content provider of a GtkDragSource.
-;;;
-;;; source :
-;;;     a GtkDragSource
-;;;
-;;; Returns :
-;;;     the GdkContentProvider of source .
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drag_source_set_actions ()
-;;;
-;;; void
-;;; gtk_drag_source_set_actions (GtkDragSource *source,
-;;;                              GdkDragAction actions);
-;;;
-;;; Sets the actions on the GtkDragSource.
-;;;
-;;; During a DND operation, the actions are offered to potential drop targets.
-;;; If actions include GDK_ACTION_MOVE, you need to listen to the “drag-end”
-;;; signal and handle delete_data being TRUE.
-;;;
-;;; This function can be called before a drag is started, or in a handler for
-;;; the “prepare” signal.
-;;;
-;;; source :
-;;;     a GtkDragSource
-;;;
-;;; actions :
-;;;     the actions to offer
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drag_source_get_actions ()
-;;;
-;;; GdkDragAction
-;;; gtk_drag_source_get_actions (GtkDragSource *source);
-;;;
-;;; Gets the actions that are currently set on the GtkDragSource.
-;;;
-;;; source :
-;;;     a GtkDragSource
-;;;
-;;; Returns :
-;;;     the actions set on source
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
