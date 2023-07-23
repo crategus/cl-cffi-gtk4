@@ -40,7 +40,7 @@
 ;;;     gtk_drop_controller_motion_new
 ;;;     gtk_drop_controller_motion_contains_pointer
 ;;;     gtk_drop_controller_motion_is_pointer
-;;;     gtk_drop_controller_motion_get_drop ()
+;;;     gtk_drop_controller_motion_get_drop
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)

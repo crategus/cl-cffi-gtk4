@@ -1932,7 +1932,7 @@
 (setf (liber:alias-for-symbol 'shortcut-scope)
       "GEnum"
       (liber:symbol-documentation 'shortcut-scope)
- "@version{#2021-12-28}
+ "@version{2023-7-23}
   @begin{short}
     Describes where @class{gtk:shortcut} objects added to the
     @class{gtk:shortcut-controller} object get handled.
