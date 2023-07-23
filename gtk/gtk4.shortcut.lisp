@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -84,7 +84,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut 'type)
- "@version{#2022-8-22}
+ "@version{2023-7-23}
   @begin{short}
     The @sym{gtk:shortcut} object is the low level object used for managing
     keyboard shortcuts.
@@ -102,11 +102,11 @@
   The @sym{gtk:shortcut} class does provide functionality to make it easy for
   users to work with shortcuts, either by providing informational strings for
   display purposes or by allowing shortcuts to be configured.
+  @see-constructor{gtk:shortcut-new}
+  @see-constructor{gtk:shortcut-new-with-arguments}
   @see-slot{gtk:shortcut-action}
   @see-slot{gtk:shortcut-arguments}
   @see-slot{gtk:shortcut-trigger}
-  @see-constructor{gtk:shortcut-new}
-  @see-constructor{gtk:shortcut-new-with-arguments}
   @see-class{gtk:shortcut-controller}
   @see-class{gtk:shortcut-action}
   @see-class{gtk:shortcut-trigger}")
@@ -127,7 +127,7 @@
 (setf (liber:alias-for-function 'shortcut-action)
       "Accessor"
       (documentation 'shortcut-action 'function)
- "@version{#2022-8-24}
+ "@version{2023-7-23}
   @syntax[]{(gtk:shortcut-action object) => action)}
   @syntax[]{(setf (gtk:shortcut-action object) action)}
   @argument[object]{a @class{gtk:shortcut} object}
@@ -138,7 +138,7 @@
   @end{short}
   The @sym{gtk:shortcut-action} function gets the action that is activated by
   the shortcut. The @sym{(setf gtk:shortcut-action)} function sets the new
-  action. If the action is @code{nil}, the nothing action will be used.
+  action. If @arg{action} is @code{nil}, the nothing action will be used.
   @see-class{gtk:shortcut}
   @see-class{gtk:shortcut-action}")
 
@@ -146,19 +146,19 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "arguments" 'shortcut) t)
- "The @code{arguments} property of type @type{glib:variant} (Read / Write) @br{}
+ "The @code{arguments} property of type @type{g:variant} (Read / Write) @br{}
   Arguments passed to activation. @br{}
-  Default value: @code{nil}")
+  Default value: @code{null-pointer}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcut-arguments)
       "Accessor"
       (documentation 'shortcut-arguments 'function)
- "@version{#2022-8-24}
+ "@version{2023-7-23}
   @syntax[]{(gtk:shortcut-arguments object) => args)}
   @syntax[]{(setf (gtk:shortcut-arguments object) args)}
   @argument[object]{a @class{gtk:shortcut} object}
-  @argument[args]{the @type{glib:variant} arguments to pass when activating the
+  @argument[args]{a @type{g:variant} value to pass when activating the
     shortcut}
   @begin{short}
     Accessor of the @slot[gtk:shortcut]{arguments} slot of the
@@ -168,21 +168,21 @@
   when activating the shortcut. The @sym{(setf gtk:shortcut-arguments)} function
   sets the arguments.
   @see-class{gtk:shortcut}
-  @see-type{glib:variant}")
+  @see-type{g:variant}")
 
 ;;; --- shortcut-trigger ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "trigger" 'shortcut) t)
- "The @code{trigger} property of type @class{GtkShortcutTrigger} (Read / Write)
-  @br{}
+ "The @code{trigger} property of type @class{gtk:shortcut-trigger}
+  (Read / Write) @br{}
   The trigger that triggers the shortcut.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcut-trigger)
       "Accessor"
       (documentation 'shortcut-trigger 'function)
- "@version{#2022-8-24}
+ "@version{2023-7-23}
   @syntax[]{(gtk:shortcut-trigger object) => trigger)}
   @syntax[]{(setf (gtk:shortcut-trigger object) trigger)}
   @argument[object]{a @class{gtk:shortcut} object}
@@ -193,29 +193,36 @@
   @end{short}
   The @sym{gtk:shortcut-trigger} function gets the trigger used to trigger
   the shortcut. The @sym{(setf gtk:shortcut-trigger)} function sets the new
-  trigger. If the trigger is @code{nil}, the never trigger will be used.
+  trigger. If @arg{trigger} is @code{nil}, the never trigger will be used.
   @see-class{gtk:shortcut}
   @see-class{gtk:shortcut-trigger}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_new ()
-;;;
-;;; GtkShortcut *
-;;; gtk_shortcut_new (GtkShortcutTrigger *trigger,
-;;;                   GtkShortcutAction *action);
-;;;
-;;; Creates a new GtkShortcut that is triggered by trigger and then activates
-;;; action .
-;;;
-;;; trigger :
-;;;     The trigger that will trigger the shortcut.
-;;;
-;;; action :
-;;;     The action that will be activated upon triggering.
-;;;
-;;; Returns :
-;;;     a new GtkShortcut
 ;;; ----------------------------------------------------------------------------
+
+(declaim (inline shortcut-new))
+
+(defun shortcut-new (trigger action)
+ #+liber-documentation
+ "@version{#2023-7-23}
+  @argument[trigger]{a @class{gtk:shortcut-trigger} object that will trigger
+    the shortcut}
+  @argument[action]{a @class{gtk:shortcut-action} object that will be
+    activated upon triggering}
+  @return{A new @class{gtk:shortcut} object.}
+  @begin{short}
+    Creates a new shortcut that is triggered by @arg{trigger} and then
+    activates @arg{action}.
+  @end{short}
+  @see-class{gtk:shortcut}
+  @see-class{gtk:shortcut-trigger}
+  @see-class{gtk:shortcut-action}"
+  (make-instance 'shortcut
+                 :trigger trigger
+                 :action action))
+
+(export 'shortcut-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_shortcut_new_with_arguments ()
