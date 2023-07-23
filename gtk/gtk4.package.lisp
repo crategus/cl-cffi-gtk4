@@ -3561,6 +3561,56 @@
       @about-function{shortcut-controller-remove-shortcut}
     @end{subsection}
   @end{section}
+  @begin[Data exchange, Clipboards and Drag-and-Drop]{section}
+    @begin[GtkDragSource]{subsection}
+      Event controller to initiate DND operations.
+      @about-class{drag-source}
+      @about-generic{drag-source-actions}
+      @about-generic{drag-source-content}
+      @about-function{drag-source-new}
+      @about-function{drag-source-set-icon}
+      @about-function{drag-source-drag-cancel}
+      @about-function{drag-source-drag}
+      @about-function{drag-check-threshold}
+    @end{subsection}
+    @begin[GtkDragIcon]{subsection}
+      A toplevel to use as drag icon.
+      @about-class{drag-icon}
+      @about-generic{drag-icon-child}
+      @about-function{drag-icon-get-for-drag}
+      @about-function{drag-icon-set-from-paintable}
+      @about-function{drag-icon-create-widget-for-value}
+    @end{subsection}
+    @begin[GtkDropTarget]{subsection}
+      Event controller to receive DND drops.
+      @about-class{drop-target}
+      @about-generic{drag-target-actions}
+      @about-generic{drag-target-drop}
+      @about-generic{drag-target-formats}
+      @about-generic{drag-target-preload}
+      @about-generic{drag-target-value}
+      @about-function{drop-target-new}
+      @about-function{drop-target-set-gtypes}
+      @about-function{drop-target-get-gtypes}
+      @about-function{drop-target-reject}
+    @end{subsection}
+    @begin[GtkDropTargetAsync]{subsection}
+      Event controller to receive DND drops.
+      @about-class{drop-target-async}
+      @about-generic{drop-target-async-actions}
+      @about-generic{drop-target-async-formats}
+      @about-function{drop-target-async-new}
+      @about-function{drop-target-async-reject-drop}
+    @end{subsection}
+    @begin[GtkDropControllerMotion]{subsection}
+      Event controller for motion events during a drop.
+      @about-class{drop-controller-motion}
+      @about-function{drop-controller-motion-new}
+      @about-function{drop-controller-motion-contains-pointer}
+      @about-function{drop-controller-motion-is-pointer}
+      @about-function{drop-controller-motion-get-drop}
+    @end{subsection}
+  @end{section}
   @begin[Miscellaneous]{section}
     @begin[GtkAdjustment]{subsection}
       A representation of an adjustable bounded value.
@@ -3667,19 +3717,6 @@
       @about-class{window-handle}
       @about-generic{window-handle-child}
       @about-function{window-handle-new}
-    @end{subsection}
-  @end{section}
-  @begin[Data exchange, clipboards and Drag-and-Drop]{section}
-    @begin[GtkDragSource]{subsection}
-      Event controller to initiate DND operations.
-      @about-class{drag-source}
-      @about-generic{drag-source-actions}
-      @about-generic{drag-source-content}
-      @about-function{drag-source-new}
-      @about-function{drag-source-set-icon}
-      @about-function{drag-source-drag-cancel}
-      @about-function{drag-source-drag}
-      @about-function{drag-check-threshold}
     @end{subsection}
   @end{section}
   @begin[GTK Core Reference]{section}
@@ -3824,7 +3861,6 @@
       @about-symbol{input-hints}
       @about-symbol{event-sequence-state}
       @about-symbol{pan-direction}
-      @about-symbol{shortcut-scope}
       @about-symbol{pick-flags}
       @about-symbol{constraint-relation}
       @about-symbol{constraint-strength}

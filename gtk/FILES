@@ -314,7 +314,7 @@ Miscellaneous
   gtk.tooltip.lisp                     GtkTooltip                      GTK 4.0+
   gtk.widget-paintable.lisp            GtkWidgetPaintable              GTK 4.6+
   gtk.window-controls.lisp             GtkWindowControls               GTK 4.0+
-  gtk.window-handle.lisp               GtkWindowHandle                 GTK 4.0+
+  gtk.window-handle.lisp               GtkWindowHandle                 GTK 4.10
 
 Interfaces
 
@@ -358,19 +358,19 @@ Gestures and event handling
   gtk.gesture-stylus.lisp              GtkGestureStylus                GTK 4.10&
 
   gtk.pad-controller.lisp              GtkPadController                GTK 4.10
-  gtk.shortcut-controller.lisp         GtkShortcutController           GTK 4.10+
+  gtk.shortcut-controller.lisp         GtkShortcutController           GTK 4.10
 
 Keyboard shortcuts
 
   gtk.shortcut-manager.lisp            GtkShortcutManager              GTK 4.6+
   gtk.keyboard-accelerators.lisp       Utilities for accelerators      GTK 4.6+
-  gtk.shortcut.lisp                    GtkShortcut                     GTK 4.6+
+  gtk.shortcut.lisp                    GtkShortcut                     GTK 4.10&
   gtk.shortcut-trigger.lisp            GtkShortcutTrigger              GTK 4.6+
   gtk.shortcut-action.lisp             GtkShortcutAction               GTK 4.6+
 
 Data exchange, clipboards and Drag-and-Drop
 
-  gtk.drag-source.lisp                 GtkDragSource                   GTK 4.0+
+  gtk.drag-source.lisp                 GtkDragSource                   GTK 4.10+
   gtk.drag-icon.lisp                   GtkDragIcon                     GTK 4.0+
   gtk.drop-target.lisp                 GtkDropTarget                   GTK 4.0+
   gtk.drop-target-async.lisp           GtkDropTargetAsync              GTK 4.0+

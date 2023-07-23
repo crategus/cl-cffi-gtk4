@@ -682,9 +682,9 @@
 
      ;; Keyboard shortcuts
      (:file "rtest-gtk4-keyboard-accelerators")
-;    (:file "gtk4.shortcut")                      ; GtkShortcut
-;    (:file "gtk4.shortcut-trigger")              ; GtkShortcutTrigger
-;    (:file "gtk4.shortcut-action")               ; GtkShortcutAction
+     (:file "rtest-gtk4-shortcut")
+     (:file "rtest-gtk4-shortcut-trigger")
+     (:file "rtest-gtk4-shortcut-action")
 
      ;; Data exchange, clipboards and Drag-and-Drop
      (:file "rtest-gtk4-drag-source")
@@ -696,11 +696,11 @@
      ;; Miscellaneous
      (:file "rtest-gtk4-adjustment")
      (:file "rtest-gtk4-size-group")
-;    (:file "gtk4.snapshot")                      ; GtkSnapshot
-;    (:file "gtk4.tooltip")                       ; GtkTooltip
-;    (:file "gtk4.widget-paintable")              ; GtkWidgetPaintable
-;    (:file "gtk4.window-controls")               ; GtkWindowControls
-;    (:file "gtk4.window-handle")                 ; GtkWindowHandle
+;    (:file "gtk4.snapshot")
+;    (:file "gtk4.tooltip")
+;    (:file "gtk4.widget-paintable")
+;    (:file "gtk4.window-controls")
+     (:file "rtest-gtk4-window-handle")
 
      ;; Application support
      (:file "rtest-gtk4-application")             ; GtkApplication
