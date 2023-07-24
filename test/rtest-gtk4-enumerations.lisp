@@ -151,6 +151,41 @@
 ;;;     GtkTextDirection
 ;;;     GtkMessageType
 ;;;     GtkMovementStep
+
+;;;     GtkNaturalWrapMode
+
+#+gtk-4-6
+(test gtk-natural-wrap-mode
+  ;; Check the type
+  (is (g:type-is-enum "GtkNaturalWrapMode"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkNaturalWrapMode")
+          (g:gtype (cffi:foreign-funcall "gtk_natural_wrap_mode_get_type"
+                                         :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:natural-wrap-mode
+          (glib:symbol-for-gtype "GtkNaturalWrapMode")))
+  ;; Check the names
+  (is (equal '("GTK_NATURAL_WRAP_INHERIT" "GTK_NATURAL_WRAP_NONE"
+               "GTK_NATURAL_WRAP_WORD")
+             (list-enum-item-name "GtkNaturalWrapMode")))
+  ;; Check the values
+  (is (equal '(0 1 2)
+             (list-enum-item-value "GtkNaturalWrapMode")))
+  ;; Check the nick names
+  (is (equal '("inherit" "none" "word")
+             (list-enum-item-nick "GtkNaturalWrapMode")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkNaturalWrapMode"
+                                     GTK-NATURAL-WRAP-MODE
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_natural_wrap_mode_get_type")
+                                     (:INHERIT 0)
+                                     (:NONE 1)
+                                     (:WORD 2))
+             (gobject:get-g-type-definition "GtkNaturalWrapMode"))))
+
 ;;;     GtkScrollStep
 
 ;;;     GtkOrientation

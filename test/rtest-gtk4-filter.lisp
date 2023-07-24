@@ -7,7 +7,7 @@
 
 ;;;     GtkFilterMatch
 
-(test filter-match
+(test gtk-filter-match
   ;; Check the type
   (is (g:type-is-enum "GtkFilterMatch"))
   ;; Check the type initializer
@@ -37,7 +37,7 @@
 
 ;;;     GtkFilterChange
 
-(test filter-change
+(test gtk-filter-change
   ;; Check the type
   (is (g:type-is-enum "GtkFilterChange"))
   ;; Check the type initializer
@@ -67,7 +67,7 @@
 
 ;;;     GtkFilter
 
-(test filter-class
+(test gtk-filter-class
   ;; Type check
   (is (g:type-is-object "GtkFilter"))
   ;; Check the registered name
@@ -109,4 +109,4 @@
 ;;;     gtk_filter_get_strictness
 ;;;     gtk_filter_changed
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-24 --------------------------------------------------------------
