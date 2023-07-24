@@ -647,6 +647,34 @@
 
 (cffi:defcfun ("gtk_file_chooser_get_file" file-chooser-namestring)
     g:file-as-namestring
+ #+liber-documentation
+ "@version{#2023-7-24}
+  @syntax[]{(gtk:file-chooser-namestring chooser) => namestring}
+  @syntax[]{(setf (gtk:file-chooser-namestring chooser) namestring)}
+  @argument[chooser]{a @class{gtk:file-chooser} widget}
+  @argument[namestring]{a namestring for the file}
+  @begin{short}
+    Accessor of the namestring of the file of the file chooser.
+  @end{short}
+  The @sym{gtk:file-chooser-namestring} function gets the namestring for the
+  currently selected file in the file selector. If multiple files are
+  selected, one of the files will be returned at random. If the file chooser
+  is in folder mode, this function returns the selected folder.
+
+  The @sym{gtk:file-chooser-namestring} function sets @arg{namestring} as the
+  current file for the file chooser, by changing to the file's parent folder and
+  actually selecting the file in list. If the chooser is in @code{:save} mode,
+  the file's base name will also appear in the dialog's file name entry.
+
+  @begin[Lisp implementation]{dictionary}
+   This function corresponds to the @fun{gtk:file-chooser-file} function, but
+   has a Lisp namestring as an argument for the file. The type conversion
+   between a @class{g:file} object and a namestring is automatically done with
+   the @type{g:file-as-namestring} type.
+  @end{dictionary}
+  @see-class{gtk:file-chooser}
+  @see-class{g:file}
+  @see-type{g:file-as-namestring}"
   (chooser (g:object file-chooser)))
 
 (export 'file-chooser-namestring)

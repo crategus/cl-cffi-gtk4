@@ -240,39 +240,37 @@ lambda (manager display)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_set_allowed_backends ()
-;;;
-;;; void
-;;; gdk_set_allowed_backends (const char *backends);
-;;;
-;;; Sets a list of backends that GDK should try to use.
-;;;
-;;; This can be useful if your application does not work with certain GDK
-;;; backends.
-;;;
-;;; By default, GDK tries all included backends.
-;;;
-;;; For example,
-;;;
-;;; gdk_set_allowed_backends ("wayland,quartz,*");
-;;;
-;;; instructs GDK to try the Wayland backend first, followed by the Quartz
-;;; backend, and then all others.
-;;;
-;;; If the GDK_BACKEND environment variable is set, it determines what backends
-;;; are tried in what order, while still respecting the set of allowed backends
-;;; that are specified by this function.
-;;;
-;;; The possible backend names are x11, win32, quartz, broadway, wayland. You
-;;; can also include a * in the list to try all remaining backends.
-;;;
-;;; This call must happen prior to gdk_display_open(), gtk_init(), or
-;;; gtk_init_check() in order to take effect.
-;;;
-;;; backends :
-;;;     a comma-separated list of backends
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_set_allowed_backends" set-allowed-backends) :void
+ #+liber-documentation
+ "@version{#2023-7-24}
+  @argument[backends]{a string with a comma-seprated list of backends}
+  @begin{short}
+    Sets a list of backends that GDK should try to use.
+  @end{short}
+  This can be useful if your application does not work with certain GDK
+  backends. By default, GDK tries all included backends. For example,
+  @begin{pre}
+(gdk:set-allowed-backends \"wayland,quartz,*\")
+  @end{pre}
+  instructs GDK to try the Wayland backend first, followed by the Quartz
+  backend, and then all others.
+
+  If the @code{GDK_BACKEND} environment variable is set, it determines what
+  backends are tried in what order, while still respecting the set of allowed
+  backends that are specified by this function.
+
+  The possible backend names are @code{x11}, @code{win32}, @code{quartz},
+  @code{broadway}, @code{wayland}. You can also include a @code{*} in the list
+  to try all remaining backends.
+
+  This call must happen prior to the @fun{gdk:display-open},
+  @fun{gtk:init}, or @fun{gtk:init-check} functions in order to take effect.
+  @see-class{gdk:display-manager}
+  @see-function{gdk:display-open}
+  @see-function{gtk:init}
+  @see-function{gtk:init-check}"
   (backends :string))
 
 (export 'set-allowed-backends)

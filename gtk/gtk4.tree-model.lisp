@@ -182,7 +182,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (glib:define-g-boxed-cstruct tree-iter "GtkTreeIter"
-  (:export t
+  (:export nil
    :type-initializer "gtk_tree_iter_get_type")
   (stamp :int :initform 0)
   (user-data pointer-as-integer :initform 0)
@@ -217,6 +217,8 @@
   @end{table}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}")
+
+(export 'tree-iter)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTreePath

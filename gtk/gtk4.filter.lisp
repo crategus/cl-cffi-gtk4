@@ -2,7 +2,7 @@
 ;;; gtk4.filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -75,7 +75,7 @@
 (setf (liber:alias-for-symbol 'filter-match)
       "GEnum"
       (liber:symbol-documentation 'filter-match)
- "@version{#2022-11-20}
+ "@version{2023-7-24}
   @begin{short}
     Describes the known strictness of a filter.
   @end{short}
@@ -103,24 +103,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GtkFilterChange
-;;;
-;;; Describes changes in a filter in more detail and allows objects using the
-;;; filter to optimize refiltering items.
-;;;
-;;; If you are writing an implementation and are not sure which value to pass,
-;;; GTK_FILTER_CHANGE_DIFFERENT is always a correct choice.
-;;;
-;;; GTK_FILTER_CHANGE_DIFFERENT :
-;;;     The filter change cannot be described with any of the other enumeration
-;;;     values.
-;;;
-;;; GTK_FILTER_CHANGE_LESS_STRICT :
-;;;     The filter is less strict than it was before: All items that it used to
-;;;     return TRUE for still return TRUE, others now may, too.
-;;;
-;;; GTK_FILTER_CHANGE_MORE_STRICT :
-;;;     The filter is more strict than it was before: All items that it used to
-;;;     return FALSE for still return FALSE, others now may, too.
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkFilterChange" filter-change
@@ -130,58 +112,39 @@
   :less-strict
   :more-strict)
 
+#+liber-documentation
+(setf (liber:alias-for-symbol 'filter-change)
+      "GEnum"
+      (liber:symbol-documentation 'filter-change)
+ "@version{2023-7-24}
+  @begin{short}
+    Describes changes in a filter in more detail and allows objects using the
+    filter to optimize refiltering items.
+  @end{short}
+  If you are writing an implementation and are not sure which value to pass,
+  the @code{:different} value is always a correct choice.
+  @begin{pre}
+(gobject:define-g-enum \"GtkFilterChange\" filter-change
+  (:export t
+   :type-initializer \"gtk_filter_change_get_type\")
+  :different
+  :less-strict
+  :more-strict)
+  @end{pre}
+  @begin[code]{table}
+    @entry[:different]{The filter change cannot be described with any of the
+      other enumeration values.}
+    @entry[:less-strict]{The filter is less strict than it was before: All
+      items that it used to return @em{true} for still return @em{true}, others
+      now may, too.}
+    @entry[:more-strict]{The filter is more strict than it was before: All
+      items that it used to return @em{false} for still return @em{false},
+      others now may, too.}
+  @end{table}
+  @see-class{gtk:filter}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; GtkFilter
-;;;
-;;; A GtkFilter object describes the filtering to be performed by a
-;;; GtkFilterListModel.
-;;;
-;;; The model will use the filter to determine if it should include items or not
-;;; by calling gtk_filter_match() for each item and only keeping the ones that
-;;; the function returns TRUE for.
-;;;
-;;; Filters may change what items they match through their lifetime. In that
-;;; case, they will emit the “changed” signal to notify that previous filter
-;;; results are no longer valid and that items should be checked again via
-;;; gtk_filter_match().
-;;;
-;;; GTK provides various pre-made filter implementations for common filtering
-;;; operations. These filters often include properties that can be linked to
-;;; various widgets to easily allow searches.
-;;;
-;;; However, in particular for large lists or complex search methods, it is also
-;;; possible to subclass GtkFilter and provide one's own filter.
-;;;
-;;; See Also
-;;;     GtkFilterListModel
-;;;
-;;; Signal Details
-;;;
-;;; The “changed” signal
-;;;
-;;; void
-;;; user_function (GtkFilter      *self,
-;;;                GtkFilterChange change,
-;;;                gpointer        user_data)
-;;;
-;;; This signal is emitted whenever the filter changed. Users of the filter
-;;; should then check items again via gtk_filter_match().
-;;;
-;;; GtkFilterListModel handles this signal automatically.
-;;;
-;;; Depending on the change parameter, not all items need to be changed, but
-;;; only some. Refer to the GtkFilterChange documentation for details.
-;;;
-;;; self :
-;;;     The GtkFilter
-;;;
-;;; change :
-;;;     how the filter changed
-;;;
-;;; user_data :
-;;;     user data set when the signal handler was connected.
-;;;
-;;; Flags: Run Last
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkFilter" filter
@@ -191,27 +154,60 @@
    :type-initializer "gtk_filter_get_type")
   nil)
 
+#+liber-documentation
+(setf (documentation 'filter 'type)
+ "@version{2023-7-24}
+  @begin{short}
+    A @sym{gtk:filter} object describes the filtering to be performed by a
+    @class{gtk:filter-list-model} object.
+  @end{short}
+  The model will use the filter to determine if it should include items or not
+  by calling the @fun{gtk:filter-match} function for each item and only keeping
+  the ones that the function returns @em{true} for.
+
+  Filters may change what items they match through their lifetime. In that
+  case, they will emit the \"changed\" signal to notify that previous filter
+  results are no longer valid and that items should be checked again via
+  the @fun{gtk:filter-match} function.
+
+  GTK provides various pre-made filter implementations for common filtering
+  operations. These filters often include properties that can be linked to
+  various widgets to easily allow searches. However, in particular for large
+  lists or complex search methods, it is also possible to subclass the
+  @sym{gtk:filter} class and provide one's own filter.
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"changed\" signal}
+      @begin{pre}
+lambda (filter change)    :run-last
+      @end{pre}
+      The signal is emitted whenever the filter changed. Users of the filter
+      should then check items again via the @fun{gtk:filter-match} function.
+      The @class{gtk:filter-list-model} object handles thie signal
+      automatically. Depending on the @arg{change} parameter, not all items
+      need to be changed, but only some. Refer to the @symbol{gtk:filter-change}
+      documentation for details.
+      @begin[code]{table}
+        @entry[filter]{a @sym{gtk:filter} object}
+        @entry[change]{a @symbol{gtk:filter-change} value}
+      @end{table}
+  @end{dictionary}
+  @see-class{gtk:filter-list-model}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_filter_match ()
-;;;
-;;; gboolean
-;;; gtk_filter_match (GtkFilter *self,
-;;;                   gpointer item);
-;;;
-;;; Checks if the given item is matched by the filter or not.
-;;;
-;;; self :
-;;;     a GtkFilter
-;;;
-;;; item :
-;;;     The item to check.
-;;;
-;;; Returns :
-;;;     TRUE if the filter matches the item and a filter model should keep it,
-;;;     FALSE if not.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_filter_match" filter-match) :boolean
+ #+liber-documentation
+ "@version{#2023-7-24}
+  @argument[filter]{a @class{gtk:filter} object}
+  @argument[item]{a pointer to the item to check}
+  @return{@em{True} if the filter matches the item and a filter model should
+    keep it, @em{false} if not.}
+  @begin{short}
+    Checks if the given @arg{item} is matched by the filter or not.
+  @end{short}
+  @see-class{gtk:filter}"
   (filter (g:object filter))
   (item :pointer))
 
@@ -219,55 +215,50 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_filter_get_strictness ()
-;;;
-;;; GtkFilterMatch
-;;; gtk_filter_get_strictness (GtkFilter *self);
-;;;
-;;; Gets the known strictness of filters . If the strictness is not known,
-;;; GTK_FILTER_MATCH_SOME is returned.
-;;;
-;;; This value may change after emission of the “changed” signal.
-;;;
-;;; This function is meant purely for optimization purposes, filters can choose
-;;; to omit implementing it, but GtkFilterListModel uses it.
-;;;
-;;; self :
-;;;     a GtkFilter
-;;;
-;;; Returns :
-;;;     the strictness of self
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_filter_get_strictness" filter-strictness) filter-match
+ #+liber-documentation
+ "@version{#2023-7-24}
+  @argument[filter]{a @class{gtk:filter} object}
+  @return{A @symbol{gtk:filter-match} value with the strictness of
+    @arg{filter}.}
+  @begin{short}
+    Gets the known strictness of the filter.
+  @end{short}
+  If the strictness is not known, the @code{:match-some} value is returned. The
+  value may change after emission of the \“changed\” signal.
+
+  This function is meant purely for optimization purposes, filters can choose
+  to omit implementing it, but the @class{gtk:filter-list-model} object uses it.
+  @see-class{gtk:filter}
+  @see-symbol{gtk:filter-match}"
   (filter (g:object filter)))
 
 (export 'filter-strictness)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_filter_changed ()
-;;;
-;;; void
-;;; gtk_filter_changed (GtkFilter *self,
-;;;                     GtkFilterChange change);
-;;;
-;;; Emits the “changed” signal to notify all users of the filter that the filter
-;;; changed. Users of the filter should then check items again via
-;;; gtk_filter_match().
-;;;
-;;; Depending on the change parameter, not all items need to be changed, but
-;;; only some. Refer to the GtkFilterChange documentation for details.
-;;;
-;;; This function is intended for implementors of GtkFilter subclasses and
-;;; should not be called from other functions.
-;;;
-;;; self :
-;;;     a GtkFilter
-;;;
-;;; change :
-;;;     How the filter changed
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_filter_changed" filter-changed) :void
+ #+liber-documentation
+ "@version{#2023-7-24}
+  @argument[filter]{a @class{gtk:filter} object}
+  @argument[change]{a @symbol{gtk:filter-change} value}
+  @begin{short}
+    Emits the \"changed\" signal to notify all users of the filter that the
+    filter changed.
+  @end{short}
+  Users of the filter should then check items again via the
+  @fun{gtk:filter-match} function.
+  Depending on the @arg{change} parameter, not all items need to be changed, but
+  only some. Refer to the @symbol{gtk:filter-change} documentation for details.
+
+  This function is intended for implementors of @class{gtk:filter} subclasses
+  and should not be called from other functions.
+  @see-class{gtk:filter}
+  @see-symbol{gtk:filter-change}"
   (filter (g:object filter))
   (change filter-change))
 

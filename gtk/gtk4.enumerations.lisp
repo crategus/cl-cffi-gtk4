@@ -608,11 +608,11 @@
   (:none 1)
   (:word 2))
 
-#+(and gtk-4-6 liber)
+#+(and gtk-4-6 liber-documentation)
 (setf (liber:alias-for-symbol 'natural-wrap-mode)
       "GEnum"
       (liber:symbol-documentation 'natural-wrap-mode)
- "@version{#2022-7-21}
+ "@version{2023-7-24}
   @begin{short}
     Options for selecting a different wrap mode for natural size requests.
   @end{short}
@@ -630,7 +630,7 @@
       should be used with the @code{:char} value of the
       @symbol{pango:wrap-mode} enumeration.}
     @entry[:none]{Try not to wrap the text. This mode is the closest to the
-    behavior of GTK3 but can lead to a wide label leaving lots of empty space
+    behavior of GTK 3 but can lead to a wide label leaving lots of empty space
     below the text.}
     @entry[:word]{Attempt to wrap at word boundaries. This is useful in
       particular when using the @code{:word-char} value of the

@@ -108,7 +108,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkBuilderError" builder-error
-  (:export t
+  (:export nil
    :type-initializer "gtk_builder_error_get_type")
   (:invalid-type-function 0)
   (:unhandled-tag 1)

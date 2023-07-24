@@ -15,7 +15,7 @@ GListModel support
 
   GtkFilterListModel — A list model that filters its items
 
-    gtk.filter.lisp                    GtkFilter                       GTK 4.0+
+    gtk.filter.lisp                    GtkFilter                       GTK 4.10
 
     GtkCustomFilter — Filtering with callbacks
     GtkMultiFilter — Combining multiple filters

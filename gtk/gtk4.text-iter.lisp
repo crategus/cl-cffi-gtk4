@@ -143,21 +143,6 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-
-#|
-(define-foreign-type unichar ()
-  ()
-  (:actual-type :uint32)
-  (:simple-parser unichar))
-
-(defmethod cffi:translate-from-foreign (value (type unichar))
-  (code-char value))
-
-(defmethod cffi:translate-to-foreign (value (type unichar))
-  (char-code value))
-|#
-
-;;; ----------------------------------------------------------------------------
 ;;; GtkTextSearchFlags
 ;;; ----------------------------------------------------------------------------
 

@@ -100,6 +100,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (glib:define-g-boxed-opaque recent-info "GtkRecentInfo"
+  :export t
   :type-initializer "gtk_recent_info_get_type"
   :alloc (error "GtkRecentInfo cannot be created from the Lisp side."))
 
@@ -120,8 +121,6 @@
   :alloc (error \"GtkRecentInfo cannot be created from the Lisp side.\"))
   @end{pre}
   @see-class{gtk:recent-manager}")
-
-(export 'recent-info)
 
 ;;; ----------------------------------------------------------------------------
 ;;; struct GtkRecentData

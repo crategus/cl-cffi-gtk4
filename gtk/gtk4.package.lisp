@@ -35,8 +35,7 @@
   (:import-from :glib)
   (:import-from :gobject)
   (:import-from :gdk-pixbuf)
-  (:import-from :pango)
-  (:export #:cl-cffi-build-info))
+  (:import-from :pango))
 
 (in-package :gtk)
 
@@ -47,10 +46,8 @@
            :traps nil))
 
 (defvar *cl-cffi-gtk-build-time* (multiple-value-list (get-decoded-time)))
-(defvar *cl-cffi-gtk-version* "0.2.0")
-
-(export '*cl-cffi-gtk-build-time*)
-(export '*cl-cffi-gtk-version*)
+(defvar *cl-cffi-gtk-version*
+        (asdf:component-version (asdf:find-system :cl-cffi-gtk4)))
 
 #+liber-documentation
 (setf (documentation (find-package :gtk) t)
@@ -1335,6 +1332,7 @@
       Text buffer iterator.
       @about-symbol{text-search-flags}
       @about-class{text-iter}
+      @about-function{text-iter-new}
       @about-function{text-iter-buffer}
       @about-function{text-iter-copy}
       @about-function{text-iter-assign}
@@ -2002,8 +2000,8 @@
     @end{subsection}
     @begin[GtkTreeSortable]{subsection}
       The interface for sortable models used by GtkTreeView.
-      @about-variable{+tree-sortable-default-sort-column-id+}
-      @about-variable{+tree-sortable-unsorted-sort-column-id+}
+      @about-variable{+gtk-tree-sortable-default-sort-column-id+}
+      @about-variable{+gtk-tree-sortable-unsorted-sort-column-id+}
       @about-class{tree-sortable}
       @about-symbol{GtkTreeSortableIface}
       @about-symbol{tree-iter-compare-func}
@@ -2477,6 +2475,7 @@
       @about-generic{file-chooser-shortcut-folders}
       @about-function{file-chooser-current-name}
       @about-function{file-chooser-file}
+      @about-function{file-chooser-namestring}
       @about-function{file-chooser-files}
       @about-function{file-chooser-current-folder}
       @about-function{file-chooser-add-filter}
@@ -3335,7 +3334,7 @@
       @about-function{recent-manager-move-item}
       @about-function{recent-manager-items}
       @about-function{recent-manager-purge-items}
-      @about-symbol{recent-info}
+      @about-class{recent-info}
       @about-function{recent-info-ref}
       @about-function{recent-info-unref}
       @about-function{recent-info-uri}
@@ -3348,7 +3347,7 @@
       @about-function{recent-info-private-hint}
       @about-function{recent-info-application-info}
       @about-function{recent-info-applications}
-      @about-function{recent-info-last_application}
+      @about-function{recent-info-last-application}
       @about-function{recent-info-has-application}
       @about-function{recent-info-create-app-info}
       @about-function{recent-info-groups}
