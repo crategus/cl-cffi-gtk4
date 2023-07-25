@@ -204,7 +204,7 @@ lambda (seat tool)    :run-last
   @begin{short}
     Accessor of the @slot[gdk:seat]{display} slot of the @class{gdk:seat} class.
   @end{short}
-  The @sym{gdk-seat-display} function returns the display this seat belongs to.
+  The @sym{gdk:seat-display} function returns the display this seat belongs to.
   @see-class{gdk:seat}
   @see-class{gdk:display}")
 
@@ -264,25 +264,20 @@ lambda (seat tool)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_seat_get_devices ()
-;;;
-;;; GList *
-;;; gdk_seat_get_devices (GdkSeat *seat,
-;;;                       GdkSeatCapabilities capabilities);
-;;;
-;;; Returns the devices that match the given capabilities.
-;;;
-;;; seat :
-;;;     a GdkSeat
-;;;
-;;; capabilities :
-;;;     capabilities to get devices for
-;;;
-;;; Returns :
-;;;     A list of GdkDevices. The list must be freed with g_list_free(), the
-;;;     elements are owned by GTK and must not be freed.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_seat_get_devices" seat-devices) (g:list-t (g:object device))
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[seat]{a @class{gdk:seat} object}
+  @argument[capabilities]{a @symbol{gdk:seat-capabilities} value to get the
+    devices for}
+  @return{A list of @class{gdk:device} objects.}
+  @begin{short}
+    Returns the devices that match the given capabilities.
+  @end{short}
+  @see-class{gdk:seat}
+  @see-symbol{gdk:seat-capabilities}"
   (seat (g:object seat))
   (capabilities seat-capabilities))
 
@@ -290,21 +285,20 @@ lambda (seat tool)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_seat_get_tools ()
-;;;
-;;; GList *
-;;; gdk_seat_get_tools (GdkSeat *seat);
-;;;
-;;; Returns all GdkDeviceTools that are known to the application.
-;;;
-;;; seat :
-;;;     A GdkSeat
-;;;
-;;; Returns :
-;;;     A list of tools. Free with g_list_free().
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_seat_get_tools" seat-tools)
     (g:list-t (g:object device-tool))
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[seat]{a @class{gdk:seat} object}
+  @return{A list of @class{gdk:device-tool} objects.}
+  @begin{short}
+    Returns all @class{gdk:device-tools} objects that are known to the
+    application.
+  @end{short}
+  @see-class{gdk:seat}
+  @see-class{gdk:device-tool}"
   (seat (g:object seat)))
 
 (export 'seat-tools)

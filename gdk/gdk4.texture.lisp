@@ -435,13 +435,15 @@
   The file format is detected automatically. The supported formats are PNG,
   JPEG, and TIFF, though more formats might be available.
 
-  This function is threadsafe, so that you can e.g. use @code{GTask} and the
-  @code{g_task_run_in_thread()} function to avoid blocking the main thread
-  while loading a big image.
+  This function is threadsafe, so that you can e.g. use the @class{g:task}
+  object and the @fun{g:task-run-in-thread} function to avoid blocking the main 
+  thread while loading a big image.
 
   Since 4.6
   @see-class{gdk:texture}
-  @see-class{g:bytes}"
+  @see-class{g:bytes}
+  @see-class{g:task}
+  @see-function{g:task-run-in-thread}"
   (glib:with-g-error (err)
     (%texture-new-from-bytes bytes err)))
 
@@ -480,7 +482,8 @@
   (cairo:surface-mark-dirty surface)
     @end{pre}
   @end{dictionary}
-  @see-class{gdk:texture}"
+  @see-class{gdk:texture}
+  @see-symbol{cairo:format-t}"
   (texture (g:object texture))
   (data :pointer)
   (stride :size))
@@ -489,29 +492,22 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_texture_save_to_png ()
-;;;
-;;; gboolean
-;;; gdk_texture_save_to_png (GdkTexture *texture,
-;;;                          const char *filename);
-;;;
-;;; Store the given texture to the filename as a PNG file.
-;;;
-;;; This is a utility function intended for debugging and testing. If you want
-;;; more control over formats, proper error handling or want to store to a GFile
-;;; or other location, you might want to look into using the gdk-pixbuf library.
-;;;
-;;; texture :
-;;;     a GdkTexture
-;;;
-;;; filename :
-;;;     the filename to store to
-;;;
-;;; Returns :
-;;;     TRUE if saving succeeded, FALSE on failure.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_texture_save_to_png" texture-save-to-png) :boolean
-
+ #+liber-documentation
+ "@version{#2023-5-25}
+  @argument[texture]{a @class{gdk:texture} object}
+  @argument[filename]{a string with the filename to store to}  
+  @return{@em{True} if saving succed, @em{false} on failure.}
+  @begin{short}
+    Store the given texture to the filename as a PNG file.
+  @end{short}
+  This is a utility function intended for debugging and testing. If you want
+  more control over formats, proper error handling or want to store to a 
+  @class{g:file} object or other location, you might want to look into using 
+  the GdkPixbuf library.  
+  @see-class{gdk:texture}"
   (texture (g:object texture))
   (filename :string))
 
@@ -524,6 +520,26 @@
 #+gtk-4-6
 (cffi:defcfun ("gdk_texture_save_to_png_bytes" texture-save-to-png-bytes)
     (g:boxed g:bytes)
+ #+liber-documentation
+ "@version{#2023-5-25}
+  @argument[texture]{a @class{gdk:texture} object}
+  @return{A newly allocated @class{g:bytes} instance containing PNG data.}
+  @begin{short}
+    Store the given texture in memory as a PNG file.
+  @end{short}
+  Use the @fun{gdk:texture-new-from-bytes} function to read it back.
+
+  If you want to serialize a texture, this is a convenient and portable way to 
+  do that. If you need more control over the generated image, such as attaching 
+  metadata,  you should look into an image handling library such as the 
+  GdkPixbuf library. If you are dealing with high dynamic range float data, you 
+  might also want to consider the @fun{gdk:texture-save-to-tiff-bytes} function 
+  instead.
+
+  Since 4.6
+  @see-class{gdk:texture}
+  @see-class{g:bytes}
+  @see-function{gdk:texture-save-to-tiff-bytes}"
   (texture (g:object texture)))
 
 #+gtk-4-6
@@ -535,6 +551,18 @@
 
 #+gtk-4-6
 (cffi:defcfun ("gdk_texture_save_to_tiff" texture-save-to-tiff) :boolean
+ #+liber-documentation
+ "@version{#2023-5-25}
+  @argument[texture]{a @class{gdk:texture} object}
+  @argument[filename]{a string with the filename to store to}
+  @return{@em{True} if saving succeeded, @em{false} on failure.}
+  @begin{short}
+    Store the given texture to the filename as a TIFF file.
+  @end{short}
+  GTK will attempt to store data without loss.
+
+  Since 4.6
+  @see-class{gdk:texture}" 
   (texture (g:object texture))
   (filename :string))
 
@@ -548,6 +576,27 @@
 #+gtk-4-6
 (cffi:defcfun ("gdk_texture_save_to_tiff_bytes" texture-save-to-tiff-bytes)
     (g:boxed g:bytes)
+ #+liber-documentation
+ "@version{#2023-5-25}
+  @argument[texture]{a @class{gdk:texture} object}
+  @return{A newly allocated @class{g:bytes} instance containing TIFF data.}
+  @begin{short}
+    Store the given texture in memory as a TIFF file.
+  @end{short} 
+  Use the @fun{gdk:texture-new-from-bytes} function to read it back.
+
+  This function is intended to store a representation of the texture’s data that 
+  is as accurate as possible. This is particularly relevant when working with 
+  high dynamic range images and floating-point texture data.
+
+  If that is not your concern and you are interested in a smaller size and a 
+  more portable format, you might want to use the 
+  @fun{gdk:texture-save-to-png-bytes} function.
+
+  Since 4.6
+  @see-class{gdk:texture}
+  @see-class{g:bytes}
+  @see-function{gdk:texture-new-from-bytes}"
   (texture (g:object texture)))
 
 #+gtk-4-6
@@ -559,6 +608,24 @@
 
 #+gtk-4-10
 (cffi:defcfun ("gdk_texture_get_format" texture-format) memory-format
+ #+liber-documentation
+ "@version{#2023-5-25}
+  @argument[texture]{a @class{gdk:texture} object}
+  @return{A @symbol{gdk:memory-format} value with the preferred format for the
+    data of the texture.}
+  @begin{short}
+    Gets the memory format most closely associated with the data of the texture.
+  @end{short}
+  Note that it may not be an exact match for texture data stored on the GPU or 
+  with compression.
+
+  The format can give an indication about the bit depth and opacity of the 
+  texture and is useful to determine the best format for downloading the 
+  texture.
+
+  Since 4.10
+  @see-class{gdk:texture}
+  @see-symbol{gdk:memory-format}"
   (texture (g:object texture)))
 
 #+gtk-4-10

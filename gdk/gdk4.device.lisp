@@ -1032,64 +1032,61 @@ get_device_settings (GdkDevice *device)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_device_get_surface_at_position ()
-;;;
-;;; GdkSurface *
-;;; gdk_device_get_surface_at_position (GdkDevice *device,
-;;;                                     double *win_x,
-;;;                                     double *win_y);
-;;;
-;;; Obtains the surface underneath device , returning the location of the device
-;;; in win_x and win_y in double precision. Returns NULL if the surface tree
-;;; under device is not known to GDK (for example, belongs to another
-;;; application).
-;;;
-;;; device :
-;;;     pointer GdkDevice to query info to.
-;;;
-;;; win_x :
-;;;     return location for the X coordinate of the device location, relative to
-;;;     the surface origin, or NULL.
-;;;
-;;; win_y :
-;;;     return location for the Y coordinate of the device location, relative to
-;;;     the surface origin, or NULL.
-;;;
-;;; Returns :
-;;;     the GdkSurface under the device position, or NULL.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_device_get_surface_at_position" device-surface-at-position)
+(cffi:defcfun ("gdk_device_get_surface_at_position" %device-surface-at-position)
     (g:object surface)
   (device (g:object device))
   (xwin :double)
   (ywin :double))
 
+(defun device-surface-at-position (device)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[device]{a @class{gdk:device} object}
+  @begin{return}
+    @arg{surface} -a @symbol{gdk:surface} object under the device position @br{}
+    @arg{xwin} - a double float with the x coordinate of the device location
+      @br{}
+    @arg{ywin} - a double float with the y coordinate of the device location
+  @end{return}
+  @begin{short}
+    Obtains the surface underneath @arg{device}, returning the location of the
+    device in @arg{xwin} and @arg{ywin} in double precision.
+  @end{short}
+  Returns @code{nil} if the surface tree under device is not known to GDK, for
+  example, belongs to another application.
+  @see-class{gdk:device}
+  @see-class{gdk:surface}"
+  (cffi:with-foreign-objects ((xwin :double) (ywin :double))
+    (let (surface)
+      (when (setf surface (%device-surface-at-position device xwin ywin))
+        (values surface
+                (cffi:mem-ref xwin :double)
+                (cffi:mem-ref ywin :double))))))
+
 (export 'device-surface-at-position)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_device_get_timestamp ()
-;;;
-;;; guint32
-;;; gdk_device_get_timestamp ( GdkDevice* device )
-;;;
-;;; Returns the timestamp of the last activity for this device.
-;;;
-;;; In practice, this means the timestamp of the last event that was received
-;;; from the OS for this device. (GTK may occasionally produce events for a
-;;; device that are not received from the OS, and will not update the
-;;; timestamp).
-;;;
-;;; Since 4.2
-;;;
-;;; device:
-;;;     a GdkDevice object
-;;;
-;;; Return :
-;;;     The timestamp of the last activity for this device.
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-2
 (cffi:defcfun ("gdk_device_get_timestamp" device-timestamp) :uint32
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[device]{a @class{gdk:device} object}
+  @return{An unsigned integer with the timestamp of the last activity for this
+    device.}
+  @begin{short}
+    Returns the timestamp of the last activity for this device.
+  @end{short}
+  In practice, this means the timestamp of the last event that was received
+  from the OS for this device. GTK may occasionally produce events for a
+  device that are not received from the OS, and will not update the timestamp.
+
+  Since 4.2
+  @see-class{gdk:device}"
   (device (g:object device)))
 
 #+gtk-4-2

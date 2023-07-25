@@ -789,44 +789,6 @@ lambda (display setting)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_map_keyval
-;;;
-;;; gboolean
-;;; gdk_display_map_keyval (GdkDisplay* display,
-;;;                         guint keyval,
-;;;                         GdkKeymapKey** keys,
-;;;                         int* n_keys)
-;;;
-;;; Obtains a list of keycode/group/level combinations that will generate
-;;; keyval.
-;;;
-;;; Groups and levels are two kinds of keyboard mode; in general, the level
-;;; determines whether the top or bottom symbol on a key is used, and the group
-;;; determines whether the left or right symbol is used.
-;;;
-;;; On US keyboards, the shift key changes the keyboard level, and there are no
-;;; groups. A group switch key might convert a keyboard between Hebrew to
-;;; English modes, for example.
-;;;
-;;; GdkEventKey contains a %group field that indicates the active keyboard
-;;; group. The level is computed from the modifier mask.
-;;;
-;;; The returned array should be freed with g_free().
-;;;
-;;; keyval :
-;;;     A keyval, such as %GDK_KEY_a, %GDK_KEY_Up, %GDK_KEY_Return, etc.
-;;;
-;;; keys :
-;;;     Return location for an array of GdkKeymapKey
-;;;     The argument will be set by the function. The length of the array is
-;;;     specified in the n_keys argument. The instance takes ownership of the
-;;;     data, and is responsible for freeing it.
-;;;
-;;; n_keys :
-;;;     Return location for number of elements in returned array.
-;;;     The argument will be set by the function.
-;;;
-;;; Returns :
-;;;     TRUE if keys were found and returned.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcstruct %keymap-key
@@ -841,6 +803,30 @@ lambda (display setting)    :run-last
   (n-keys (:pointer :int)))
 
 (defun display-map-keyval (display keyval)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[display]{a @class{gdk:display} object}
+  @argument[keyval]{an unsigned integer with the keyval}
+  @return{A list of integer with the grouped keycode/group/level combinations,
+    or @code{nil}.}
+  @begin{short}
+    Obtains a list of keycode/group/level combinations that will generate
+    @arg{keyval}.
+  @end{short}
+  Groups and levels are two kinds of keyboard mode. In general, the level
+  determines whether the top or bottom symbol on a key is used, and the group
+  determines whether the left or right symbol is used.
+
+  On US keyboards, the shift key changes the keyboard level, and there are no
+  groups. A group switch key might convert a keyboard between Hebrew to English
+  modes, for example.
+  @begin[Example]{dictionary}
+    @begin{pre}
+(gdk:display-map-keyval (gdk:display-default) (char-code #\a))
+=> ((65 0 0) (65 0 3) (65 0 15) (65 0 2))
+    @end{pre}
+  @end{dictionary}
+  @see-class{gdk:display}"
   (cffi:with-foreign-objects ((keys-ptr :pointer) (n-keys-ptr :int))
     (when (%display-map-keyval display keyval keys-ptr n-keys-ptr)
       (let ((keys (cffi:mem-ref keys-ptr :pointer))
@@ -857,44 +843,6 @@ lambda (display setting)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_map_keycode
-;;;
-;;; gboolean
-;;; gdk_display_map_keycode (GdkDisplay* display,
-;;;                          guint keycode,
-;;;                          GdkKeymapKey** keys,
-;;;                          guint** keyvals,
-;;;                          int* n_entries)
-;;;
-;;; Returns the keyvals bound to keycode.
-;;;
-;;; The Nth GdkKeymapKey in keys is bound to the Nth keyval in keyvals.
-;;;
-;;; When a keycode is pressed by the user, the keyval from this list of entries
-;;; is selected by considering the effective keyboard group and level.
-;;;
-;;; Free the returned arrays with g_free().
-;;;
-;;; keycode :
-;;;     A keycode.
-;;;
-;;; keys :
-;;;     Return location for array of GdkKeymapKey
-;;;     The argument will be set by the function. The argument can be NULL.
-;;;     The length of the array is specified in the n_entries argument. The
-;;;     instance takes ownership of the data, and is responsible for freeing it.
-;;;
-;;; keyvals :
-;;;     Return location for array of keyvals.
-;;;     The argument will be set by the function. The argument can be NULL.
-;;;     The length of the array is specified in the n_entries argument. The
-;;;     instance takes ownership of the data, and is responsible for freeing it.
-;;;
-;;; n_entries :
-;;;     Length of keys and keyvals.
-;;;     The argument will be set by the function.
-;;;
-;;; Returns :
-;;;     TRUE if there were any entries.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_map_keycode" %display-map-keycode) :boolean
@@ -905,6 +853,18 @@ lambda (display setting)    :run-last
   (n-entries (:pointer :int)))
 
 (defun display-map-keycode (display keycode)
+ #+liber-documentation
+ "@version{+2023-7-25}
+  @argument[display]{a @class{gdk:display} object}
+  @argument[keycode]{an unsigned integer with a keycode}
+  @return{A list of keyvals with the corresponding key of the form
+    (keyval keycode group level).}
+  @begin{short}
+    Returns the keyvals bound to @arg{keycode}.
+  @end{short}
+  When a keycode is pressed by the user, the keyval from this list of entries
+  is selected by considering the effective keyboard group and level.
+  @see-class{gdk:display}"
   (cffi:with-foreign-objects ((keys-ptr :pointer)
                               (keyvals-ptr :pointer)
                               (n-entries-ptr :int))
@@ -930,65 +890,6 @@ lambda (display setting)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_translate_key
-;;;
-;;; gboolean
-;;; gdk_display_translate_key (GdkDisplay* display,
-;;;                            guint keycode,
-;;;                            GdkModifierType state,
-;;;                            int group,
-;;;                            guint* keyval,
-;;;                            int* effective_group,
-;;;                            int* level,
-;;;                            GdkModifierType* consumed)
-;;;
-;;; Translates the contents of a GdkEventKey into a keyval, effective group, and
-;;; level.
-;;;
-;;; Modifiers that affected the translation and are thus unavailable for
-;;; application use are returned in consumed_modifiers.
-;;;
-;;; The effective_group is the group that was actually used for the translation;
-;;; some keys such as Enter are not affected by the active keyboard group. The
-;;; level is derived from state.
-;;;
-;;; consumed_modifiers gives modifiers that should be masked out from state when
-;;; comparing this key press to a keyboard shortcut. For instance, on a US
-;;; keyboard, the plus symbol is shifted, so when comparing a key press to a
-;;; <Control>plus accelerator <Shift> should be masked out.
-;;;
-;;; This function should rarely be needed, since GdkEventKey already contains
-;;; the translated keyval. It is exported for the benefit of virtualized test
-;;; environments.
-;;;
-;;; keycode :
-;;;     A keycode.
-;;;
-;;; state :
-;;;     A modifier state.
-;;;
-;;; group :
-;;;     Active keyboard group.
-;;;
-;;; keyval :
-;;;     Return location for keyval.
-;;;     The argument will be set by the function. The argument can be NULL.
-;;;
-;;; effective_group :
-;;;     Return location for effective group.
-;;;     The argument will be set by the function. The argument can be NULL.
-;;;
-;;; level :
-;;;     Return location for level.
-;;;     The argument will be set by the function. The argument can be NULL.
-;;;
-;;; consumed :
-;;;     Return location for modifiers that were used to determine the group or
-;;;     level.
-;;;     The argument will be set by the function. The argument can be NULL. The
-;;;     instance takes ownership of the data, and is responsible for freeing it.
-;;;
-;;; Returns :
-;;;     TRUE if there was a keyval bound to keycode/state/group.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_translate_key" %display-translate-key) :boolean
@@ -1002,6 +903,35 @@ lambda (display setting)    :run-last
   (consumed (:pointer modifier-type)))
 
 (defun display-translate-key (display keycode state group)
+ #+liber-documentation
+ "@version{2023-7-25}
+  @argument[display]{a @class{gdk:display} object}
+  @argument[keycode]{an unsigned integer with the keycoce}
+  @argument[state]{a @symbol{gdk:mofifier-type} state}
+  @argument[group]{an integer with the active keyboard group}
+  @begin{return}
+    @arg{keyval} - an unsigned integer with the keyval @br{}
+    @arg{effective} - an integer with the effective group @br{}
+    @arg{level} - an integer with the level @br{}
+    @arg{consumend} - a @symbol{gdk:modifier-type} value with the modifiers
+      that were used to determine the group or level
+  @end{return}
+  @begin{short}
+    Translates a keycode into a keyval, effective group, and level.
+  @end{short}
+  Modifiers that affected the translation and are thus unavailable for
+  application use are returned in @arg{consumed}.
+
+  The @arg{effective} value is the group that was actually used for the
+  translation. Some keys such as @kbd{Enter} are not affected by the active
+  keyboard group. The @arg{level} value is derived from @arg{state}.
+
+  The @arg{consumed} value gives modifiers that should be masked out from state
+  when comparing this key press to a keyboard shortcut. For instance, on a US
+  keyboard, the @kbd{plus} symbol is shifted, so when comparing a key press to
+  a @kbd{<Control>plus} accelerator @kbd{<Shift>} should be masked out.
+  @see-class{gdk:display}
+  @see-symbol{gdk:modifier-type}"
   (cffi:with-foreign-objects ((keyval :uint)
                               (effective :int)
                               (level :int)
@@ -1023,29 +953,6 @@ lambda (display setting)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_prepare_gl
-;;;
-;;; gboolean
-;;; gdk_display_prepare_gl (GdkDisplay* self
-;;;                         GError** error)
-;;;
-;;; Checks that OpenGL is available for self and ensures that it is properly
-;;; initialized. When this fails, an error will be set describing the error and
-;;; this function returns FALSE.
-;;;
-;;; Note that even if this function succeeds, creating a GdkGLContext may still
-;;; fail.
-;;;
-;;; This function is idempotent. Calling it multiple times will just return the
-;;; same value or error.
-;;;
-;;; You never need to call this function, GDK will call it automatically as
-;;; needed. But you can use it as a check when setting up code that might make
-;;; use of OpenGL.
-;;;
-;;; Since: 4.4
-;;;
-;;; Returns :
-;;;     TRUE if the display supports OpenGL.
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
@@ -1055,6 +962,27 @@ lambda (display setting)    :run-last
 
 #+gtk-4-4
 (defun display-prepare-gl (display)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[display]{a @class{gdk:display} object}
+  @return{@em{True} if the display supports OpenGL}
+  @begin{short}
+    Checks that OpenGL is available for @arg{display} and ensures that it is
+    properly initialized.
+  @end{short}
+  When this fails, an error will be set describing the error and this function
+  returns @em{false}.
+
+  Note that even if this function succeeds, creating a @class{gdk:gl-context}
+  object may still fail. This function is idempotent. Calling it multiple times
+  will just return the same value or error.
+
+  You never need to call this function, GDK will call it automatically as
+  needed. But you can use it as a check when setting up code that might make
+  use of OpenGL.
+  Since 4.4
+  @see-class{gdk:display}
+  @see-class{gdk:gl-context}"
   (glib:with-g-error (err)
     (%display-prepare-gl display err)))
 

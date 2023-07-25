@@ -554,7 +554,7 @@
   :touch-end
   :device-switch)
 
-#+cl-cffi-gtk-documentation
+#+liber-documentation
 (setf (liber:alias-for-symbol 'crossing-mode)
       "GEnum"
       (liber:symbol-documentation 'crossing-mode)
@@ -667,203 +667,290 @@
 ;;;
 ;;; This section describes functions dealing with events from the window system.
 ;;;
-;;; In GTK applications the events are handled automatically by toplevel widgets
-;;; and passed on to the event controllers of appropriate widgets, so these
-;;; functions are rarely needed.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type event-t ()
+(cffi:define-foreign-type event ()
   ()
   (:actual-type :pointer)
   (:simple-parser event))
 
-(defmethod cffi:translate-to-foreign (proxy (type event-t))
+(defmethod cffi:translate-to-foreign (proxy (type event))
   proxy)
 
-(defmethod cffi:translate-from-foreign (native (type event-t))
+(defmethod cffi:translate-from-foreign (native (type event))
   native)
+
+#+liber-documentation
+(setf (liber:alias-for-class 'event)
+      "GdkEvent"
+      (documentation 'event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    The base type of an event.
+  @end{short}
+  In GTK applications the events are handled automatically by toplevel widgets
+  and passed on to the event controllers of appropriate widgets, so these
+ functions are rarely needed.")
 
 (export 'event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkButtonEvent
-;;;
-;;; typedef struct _GdkButtonEvent GdkButtonEvent;
-;;;
-;;; An event related to a button on a pointer device/
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type button-event-t (event-t)
+(cffi:define-foreign-type button-event (event)
   ()
   (:simple-parser button-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'button-event)
+      "GdkEvent"
+      (documentation 'button-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to a button on a pointer device.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'button-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkScrollEvent
-;;;
-;;; typedef struct _GdkScrollEvent GdkScrollEvent;
-;;;
-;;; An event related to a scrolling motion.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type scroll-event-t (event-t)
+(cffi:define-foreign-type scroll-event (event)
   ()
   (:simple-parser sroll-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'scroll-event)
+      "GdkEvent"
+      (documentation 'scroll-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to a scrolling motion.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'scroll-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkMotionEvent
-;;;
-;;; typedef struct _GdkMotionEvent GdkMotionEvent;
-;;;
-;;; An event related to a pointer or touch device motion.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type motion-event-t (event-t)
+(cffi:define-foreign-type motion-event (event)
   ()
   (:simple-parser motion-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'motion-event)
+      "GdkEvent"
+      (documentation 'motion-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to a pointer or touch device motion.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'motion-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkKeyEvent
-;;;
-;;; typedef struct _GdkKeyEvent GdkKeyEvent;
-;;;
-;;; An event related to a key-based device.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type key-event-t (event-t)
+(cffi:define-foreign-type key-event (event)
   ()
   (:simple-parser key-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'key-event)
+      "GdkEvent"
+      (documentation 'key-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to a key-based device.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'key-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkFocusEvent
-;;;
-;;; typedef struct _GdkFocusEvent GdkFocusEvent;
-;;;
-;;; An event related to a focus change.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type focus-event-t (event-t)
+(cffi:define-foreign-type focus-event (event)
   ()
   (:simple-parser focus-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'focus-event)
+      "GdkEvent"
+      (documentation 'focus-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to a focus change.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'focus-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkCrossingEvent
-;;;
-;;; typedef struct _GdkCrossingEvent GdkCrossingEvent;
-;;;
-;;; An event caused by a pointing device moving between surfaces.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type crossing-event-t (event-t)
+(cffi:define-foreign-type crossing-event (event)
   ()
   (:simple-parser crossing-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'crossing-event)
+      "GdkEvent"
+      (documentation 'crossing-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event caused by a pointing device moving between surfaces.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'crossing-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkGrabBrokenEvent
-;;;
-;;; typedef struct _GdkGrabBrokenEvent GdkGrabBrokenEvent;
-;;;
-;;; An event related to a broken windowing system grab.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type grab-broken-event-t (event-t)
+(cffi:define-foreign-type grab-broken-event (event)
   ()
   (:simple-parser grab-broken-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'grab-broken-event)
+      "GdkEvent"
+      (documentation 'grab-broken-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to a broken windowing system grab.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'grab-broken-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkDeleteEvent
-;;;
-;;; typedef struct _GdkDeleteEvent GdkDeleteEvent;
-;;;
-;;; An event related to closing a top-level surface.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type delete-event-t (event-t)
+(cffi:define-foreign-type delete-event (event)
   ()
   (:simple-parser delete-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'delete-event)
+      "GdkEvent"
+      (documentation 'delete-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to closing a toplevel surface.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'delete-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkDNDEvent
-;;;
-;;; typedef struct _GdkDNDEvent GdkDNDEvent;
-;;;
-;;; An event related to drag and drop operations.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type dnd-event-t (event-t)
+(cffi:define-foreign-type dnd-event (event)
   ()
   (:simple-parser dnd-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'dnd-event)
+      "GdkEvent"
+      (documentation 'dnd-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to drag and drop operations.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'dnd-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkTouchEvent
-;;;
-;;; typedef struct _GdkTouchEvent GdkTouchEvent;
-;;;
-;;; An event related to a touch-based device.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type touch-event-t (event-t)
+(cffi:define-foreign-type touch-event (event)
   ()
   (:simple-parser touch-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'touch-event)
+      "GdkEvent"
+      (documentation 'touch-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to a touch-based device.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'touch-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkTouchpadEvent
-;;;
-;;; typedef struct _GdkTouchpadEvent GdkTouchpadEvent;
-;;;
-;;; An event related to a touchpad device.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type touchpad-event-t (event-t)
+(cffi:define-foreign-type touchpad-event (event)
   ()
   (:simple-parser touchpad-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'touchpad-event)
+      "GdkEvent"
+      (documentation 'touchpad-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to a touchpad device.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'touchpad-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkPadEvent
-;;;
-;;; typedef struct _GdkPadEvent GdkPadEvent;
-;;;
-;;; An event related to a pad-based device.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type pad-event-t (event-t)
+(cffi:define-foreign-type pad-event (event)
   ()
   (:simple-parser pad-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'pad-event)
+      "GdkEvent"
+      (documentation 'pad-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to a pad-based device.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'pad-event)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkProximityEvent
-;;;
-;;; typedef struct _GdkProximityEvent GdkProximityEvent;
-;;;
-;;; An event related to the proximity of a tool to a device.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type proximity-event-t (event-t)
+(cffi:define-foreign-type proximity-event (event)
   ()
   (:simple-parser proximity-event))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'proximity-event)
+      "GdkEvent"
+      (documentation 'proximity-event 'type)
+ "@version{#2023-7-25}
+  @begin{short}
+    An event related to the proximity of a tool to a device.
+  @end{short}
+  @see-class{gdk:event}")
 
 (export 'proximity-event)
 
@@ -897,213 +984,170 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_event_type ()
-;;;
-;;; GdkEventType
-;;; gdk_event_get_event_type (GdkEvent *event);
-;;;
-;;; Retrieves the type of the event.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; Returns :
-;;;     a GdkEventType
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_event_type" event-event-type) event-type
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @symbol{gdk:event-type} value.}
+  @short{Retrieves the type of the event.}
+  @see-class{gdk:event}
+  @see-symbol{gdk:event-type}"
   (event event))
 
 (export 'event-event-type)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_surface ()
-;;;
-;;; GdkSurface *
-;;; gdk_event_get_surface (GdkEvent *event);
-;;;
-;;; Extracts the GdkSurface associated with an event.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; Returns :
-;;;     The GdkSurface associated with the event.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_surface" event-surface) (g:object surface)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @class{gdk:surface} object.}
+  @short{Extracts the surface associated with an event.}
+  @see-class{gdk:event}
+  @see-symbol{gdk:surface}"
   (event event))
 
 (export 'event-surface)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_device ()
-;;;
-;;; GdkDevice *
-;;; gdk_event_get_device (GdkEvent *event);
-;;;
-;;; Returns the device of an event.
-;;;
-;;; event :
-;;;     a GdkEvent.
-;;;
-;;; Returns :
-;;;     a GdkDevice.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_device" event-device) (g:object device)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @class{gdk:device} object.}
+  @short{Returns the device of an event.}
+  @see-class{gdk:event}
+  @see-symbol{gdk:device}"
   (event event))
 
 (export 'event-device)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_device_tool ()
-;;;
-;;; GdkDeviceTool *
-;;; gdk_event_get_device_tool (GdkEvent *event);
-;;;
-;;; If the event was generated by a device that supports different tools (eg. a
-;;; tablet), this function will return a GdkDeviceTool representing the tool
-;;; that caused the event. Otherwise, NULL will be returned.
-;;;
-;;; Note: the GdkDeviceTools will be constant during the application lifetime,
-;;; if settings must be stored persistently across runs, see
-;;; gdk_device_tool_get_serial()
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; Returns :
-;;;     The current device tool, or NULL.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_device_tool" event-device-tool)
     (g:object device-tool)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @class{gdk:device-tool} object, or @code{nil}.}
+  @begin{short}
+    If the event was generated by a device that supports different tools, e.g.
+    a tablet, this function will return a @class{gdk:device-tool} object
+    representing the tool that caused the event.
+  @end{short}
+  Otherwise, @code{nil} will be returned.
+
+  Note: The @class{gdk:device-tool} objects will be constant during the
+  application lifetime, if settings must be stored persistently across runs,
+  see the @fun{gdk:device-tool-serial} function.
+  @see-class{gdk:event}
+  @see-symbol{gdk:device-tool}
+  @see-function{gdk:device-tool-serial}"
   (event event))
 
 (export 'event-device-tool)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_time ()
-;;;
-;;; guint32
-;;; gdk_event_get_time (GdkEvent *event);
-;;;
-;;; Returns the time stamp from event , if there is one; otherwise returns
-;;; GDK_CURRENT_TIME.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; Returns :
-;;;     time stamp field from event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_time" event-time) :uint32
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{An unsigned integer with the time stamp field from @arg{event}.}
+  @begin{short}
+    Returns the time stamp from @arg{event}, if there is one, otherwise returns
+    @variable{gdk:+gdk-current-time+}.
+  @end{short}
+  @see-class{gdk:event}
+  @see-variable{gdk:+gdk-current-time+}"
   (event event))
 
 (export 'event-time)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_display ()
-;;;
-;;; GdkDisplay *
-;;; gdk_event_get_display (GdkEvent *event);
-;;;
-;;; Retrieves the GdkDisplay associated to the event .
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; Returns :
-;;;     a GdkDisplay.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_display" event-display) (g:object display)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @class{gdk:display} object.}
+  @short{Retrieves the display associated to the event.}
+  @see-class{gdk:event}
+  @see-variable{gdk:display}"
   (event event))
 
 (export 'event-display)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_seat ()
-;;;
-;;; GdkSeat *
-;;; gdk_event_get_seat (GdkEvent *event);
-;;;
-;;; Returns the seat that originated the event.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; Returns :
-;;;     a GdkSeat.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_seat" event-seat) (g:object seat)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @class{gdk:seat} object.}
+  @short{Returns the seat that originated the event.}
+  @see-class{gdk:event}
+  @see-class{gdk:seat}"
   (event event))
 
 (export 'event-seat)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_event_sequence ()
-;;;
-;;; GdkEventSequence *
-;;; gdk_event_get_event_sequence (GdkEvent *event);
-;;;
-;;; If event is a touch event, returns the GdkEventSequence to which the event
-;;; belongs. Otherwise, return NULL.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; Returns :
-;;;     the event sequence that the event belongs to.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_event_sequence" event-event-sequence)
     (g:boxed event-sequence)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @class{gdk:event-sequence} instance that the event belongs to.}
+  @begin{short}
+    If the event is a touch event, returns the @class{gdk:event-sequence}
+    instance to which the event belongs. Otherwise, return @code{nil}.
+  @end{short}
+  @see-class{gdk:event}
+  @see-class{gdk:event-sequence}"
   (event event))
 
 (export 'event-event-sequence)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_modifier_state ()
-;;;
-;;; GdkModifierType
-;;; gdk_event_get_modifier_state (GdkEvent *event);
-;;;
-;;; Returns the modifier state field of an event.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; Returns :
-;;;     the modifier state of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_modifier_state" event-modifier-state)
     modifier-type
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @symbol{gdk:modifier-type} value with the modifier state of
+    @arg{event}.}
+  @short{Returns the modifier state field of an event.}
+  @see-class{gdk:event}
+  @see-symbol{gdk:modifier-type}"
   (event event))
 
 (export 'event-modifier-state)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_position ()
-;;;
-;;; gboolean
-;;; gdk_event_get_position (GdkEvent *event,
-;;;                         double *x,
-;;;                         double *y);
-;;;
-;;; Extract the event surface relative x/y coordinates from an event.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; x :
-;;;     location to put event surface x coordinate.
-;;;
-;;; y :
-;;;     location to put event surface y coordinate.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_position" %event-position) :boolean
@@ -1112,50 +1156,25 @@
   (y (:pointer :double)))
 
 (defun event-position (event)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @begin{return}
+    @arg{x} - a double float with the event surface x coordinate @br{}
+    @arg{y} - a double float with the event surface y coordinate
+  @end{return}
+  @short{Extract the event surface relative x/y coordinates from an event.}
+  @see-class{gdk:event}"
   (cffi:with-foreign-objects ((x :double) (y :double))
-    (%event-position event x y)
-    (values (cffi:mem-ref x :double)
-            (cffi:mem-ref y :double))))
+    (when (%event-position event x y)
+      (values (cffi:mem-ref x :double)
+              (cffi:mem-ref y :double)))))
 
 (export 'event-position)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_axes ()
-;;;
-;;; gboolean
-;;; gdk_event_get_axes (GdkEvent *event,
-;;;                     double **axes,
-;;;                     guint *n_axes);
-;;;
-;;; Extracts all axis values from an event.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; axes :
-;;;     the array of values for all axes.
-;;;
-;;; n_axes :
-;;;     the length of array.
-;;;
-;;; Returns :
-;;;     TRUE on success, otherwise FALSE
 ;;; ----------------------------------------------------------------------------
-
-#|
-(defun display-map-keyval (display keyval)
-  (cffi:with-foreign-objects ((keys-ptr :pointer) (n-keys-ptr :int))
-    (when (%display-map-keyval display keyval keys-ptr n-keys-ptr)
-      (let ((keys (cffi:mem-ref keys-ptr :pointer))
-            (n-keys (cffi:mem-ref n-keys-ptr :int)))
-        (iter (for i from 0 below n-keys)
-              (for key = (cffi:mem-aptr keys '(:struct %keymap-key) i))
-              (collect (cffi:with-foreign-slots ((keycode group level)
-                                            key
-                                            (:struct %keymap-key))
-                         (list keycode group level)))
-              (finally (g:free keys-ptr)))))))
-|#
 
 (cffi:defcfun ("gdk_event_get_axes" %event-axes) :boolean
   (event event)
@@ -1163,6 +1182,12 @@
   (n-axes (:pointer :int)))
 
 (defun event-axes (event)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A list of double float with the values for all axes.}
+  @short{Extracts all axis values from an event.}
+  @see-class{gdk:event}"
   (cffi:with-foreign-objects ((axes-ptr :pointer) (n-axes-ptr :int))
     (when (%event-axes event axes-ptr n-axes-ptr)
       (let ((axes (cffi:mem-ref axes-ptr :pointer))
@@ -1175,25 +1200,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_axis ()
-;;;
-;;; gboolean
-;;; gdk_event_get_axis (GdkEvent *event,
-;;;                     GdkAxisUse axis_use,
-;;;                     double *value);
-;;;
-;;; Extract the axis value for a particular axis use from an event structure.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; axis_use :
-;;;     the axis use to look for
-;;;
-;;; value :
-;;;     location to store the value found.
-;;;
-;;; Returns :
-;;;     TRUE if the specified axis was found, otherwise FALSE
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_axis" %event-axis) :boolean
@@ -1202,6 +1208,17 @@
   (value (:pointer :double)))
 
 (defun event-axis (event axis-use)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @argument[axis-use]{a @symbol{gdk:axis-use} value with the axis use to look
+    for}
+  @return{A double float with the axis value.}
+  @begin{short}
+    Extract the axis value for a particular axis use from an event instance.
+  @end{short}
+  @see-class{gdk:event}
+  @see-symbol{gdk:axis-use}"
   (cffi:with-foreign-object (value :double)
     (when (%event-axis event axis-use value)
       (cffi:mem-ref value :double))))
@@ -1235,64 +1252,44 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_get_pointer_emulated ()
-;;;
-;;; gboolean
-;;; gdk_event_get_pointer_emulated (GdkEvent *event);
-;;;
-;;; Returns whether this event is an 'emulated' pointer event (typically from a
-;;; touch event), as opposed to a real one.
-;;;
-;;; event :
-;;;     a GdkEvent
-;;;
-;;; Returns :
-;;;     TRUE if this event is emulated
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_pointer_emulated" event-pointer-emulated) :boolean
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{@em{True} if the event is emulated.}
+  @begin{short}
+    Returns whether this event is an emulated pointer event, typically from a
+    touch event, as opposed to a real one.
+  @end{short}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'event-pointer-emulated)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_event_triggers_context_menu ()
-;;;
-;;; gboolean
-;;; gdk_event_triggers_context_menu (GdkEvent *event);
-;;;
-;;; This function returns whether a GdkEvent should trigger a context menu,
-;;; according to platform conventions. The right mouse button always triggers
-;;; context menus.
-;;;
-;;; This function should always be used instead of simply checking for
-;;; event->button == GDK_BUTTON_SECONDARY.
-;;;
-;;; event :
-;;;     a GdkEvent, currently only button events are meaningful values
-;;;
-;;; Returns :
-;;;     TRUE if the event should trigger a context menu.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_triggers_context_menu" event-triggers-context-menu)
     :boolean
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{@em{True} if the event should trigger a context menu.}
+  @begin{short}
+    This function returns whether an event should trigger a context menu,
+    according to platform conventions.
+  @end{short}
+  The right mouse button always triggers context menus.
+  @see-class{gdk:event}"
   (event event))
 
 (export 'event-triggers-context-menu)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_button_event_get_button ()
-;;;
-;;; guint
-;;; gdk_button_event_get_button (GdkEvent *event);
-;;;
-;;; Extract the button number from a button event.
-;;;
-;;; event :
-;;;     a button event.
-;;;
-;;; Returns :
-;;;     the button of event
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: We check for the correct event type. Implement this more general.
@@ -1301,53 +1298,38 @@
   (event event))
 
 (defun button-event-button (event)
-  (let ((type (event-event-type event)))
-    (when (or (eq :button-press type) (eq :button-release type))
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{An unsigned integer with the button of @arg{event}.}
+  @short{Extract the button number from a button event.}
+  @see-class{gdk:event}"
+  (let ((etype (event-event-type event)))
+    (when (or (eq :button-press etype) (eq :button-release etype))
       (%button-event-button event))))
 
 (export 'button-event-button)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_scroll_event_get_direction ()
-;;;
-;;; GdkScrollDirection
-;;; gdk_scroll_event_get_direction (GdkEvent *event);
-;;;
-;;; Extracts the direction of a scroll event.
-;;;
-;;; event :
-;;;     a scroll event.
-;;;
-;;; Returns :
-;;;     the scroll direction of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_scroll_event_get_direction" scroll-event-direction)
     scroll-direction
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @symbol{gdk:scroll-direction} value with the direction of
+    @arg{event}.}
+  @short{Extracts the direction of a scroll event.}
+  @see-class{gdk:event}
+  @see-symbol{gdk:scroll-direction}"
   (event event))
 
 (export 'scroll-event-direction)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_scroll_event_get_deltas ()
-;;;
-;;; void
-;;; gdk_scroll_event_get_deltas (GdkEvent *event,
-;;;                              double *delta_x,
-;;;                              double *delta_y);
-;;;
-;;; Extracts the scroll deltas of a scroll event.
-;;;
-;;; The deltas will be zero unless the scroll direction is GDK_SCROLL_SMOOTH.
-;;;
-;;; event :
-;;;     a scroll event.
-;;;
-;;; delta_x :
-;;;     return location for x scroll delta.
-;;;
-;;; delta_y :
-;;;     return location for y scroll delta.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_scroll_event_get_deltas" %scroll-event-deltas) :void
@@ -1356,6 +1338,20 @@
   (ydelta :double))
 
 (defun scroll-event-deltas (event)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @begin{return}
+    @arg{xdelta} - a double float with the x scroll delta @br{}
+    @arg{ydelta} - a double float with the y scroll delta
+  @end{return}
+  @begin{short}
+    Extracts the scroll deltas of a scroll event.
+  @end{short}
+  The deltas will be zero unless the scroll direction is the @code{:smooth}
+  value of the @symbol{gdk:scroll-direction} enumeration.
+  @see-class{gdk:event}
+  @see-symbol{gdk:scroll-direction}"
   (cffi:with-foreign-objects ((xdelta :double) (ydelta :double))
     (%scroll-event-deltas event xdelta ydelta)
     (values (cffi:mem-ref xdelta :double)
@@ -1365,179 +1361,141 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_scroll_event_is_stop ()
-;;;
-;;; gboolean
-;;; gdk_scroll_event_is_stop (GdkEvent *event);
-;;;
-;;; Check whether a scroll event is a stop scroll event. Scroll sequences with
-;;; smooth scroll information may provide a stop scroll event once the
-;;; interaction with the device finishes, e.g. by lifting a finger. This stop
-;;; scroll event is the signal that a widget may trigger kinetic scrolling based
-;;; on the current velocity.
-;;;
-;;; Stop scroll events always have a delta of 0/0.
-;;;
-;;; event :
-;;;     a scroll event.
-;;;
-;;; Returns
-;;;     TRUE if the event is a scroll stop event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_scroll_event_is_stop" scroll-event-is-stop) :boolean
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{@em{True} if the event is a scroll stop event.}
+  @begin{short}
+    Check whether a scroll event is a stop scroll event.
+  @end{short}
+  Scroll sequences with smooth scroll information may provide a stop scroll
+  event once the interaction with the device finishes, e.g. by lifting a finger.
+  This stop scroll event is the signal that a widget may trigger kinetic
+  scrolling based on the current velocity.
+
+  Stop scroll events always have a delta of 0/0.
+  @see-class{gdk:event}"
   (event event))
 
 (export 'scroll-event-is-stop)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_key_event_get_keyval ()
-;;;
-;;; guint
-;;; gdk_key_event_get_keyval (GdkEvent *event);
-;;;
-;;; Extracts the keyval from a key event.
-;;;
-;;; event :
-;;;     a key event.
-;;;
-;;; Returns :
-;;;     the keyval of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_keyval" key-event-keyval) :uint
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{An unsigned integer with the keyval of @arg{event}.}
+  @short{Extracts the keyval from a key event.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'key-event-keyval)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_key_event_get_keycode ()
-;;;
-;;; guint
-;;; gdk_key_event_get_keycode (GdkEvent *event);
-;;;
-;;; Extracts the keycode from a key event.
-;;;
-;;; event :
-;;;     a key event.
-;;;
-;;; Returns :
-;;;     the keycode of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_keycode" key-event-keycode) :uint
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{An unsigned integer with the keycode of @arg{event}.}
+  @short{Extracts the keycode from a key event.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'key-event-keycode)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_key_event_get_consumed_modifiers ()
-;;;
-;;; GdkModifierType
-;;; gdk_key_event_get_consumed_modifiers (GdkEvent *event);
-;;;
-;;; Extracts the consumed modifiers from a key event.
-;;;
-;;; event :
-;;;     a key event.
-;;;
-;;; Returns :
-;;;     the consumed modifiers or event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_consumed_modifiers"
                key-event-consumed-modifiers) modifier-type
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @symbol{gdk:modifier-type} value.}
+  @short{Extracts the consumed modifiers from a key event.}
+  @see-class{gdk:event}
+  @see-symbol{gdk:modifier-type}"
   (event event))
 
 (export 'key-event-consumed-modifiers)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_key_event_get_layout ()
-;;;
-;;; guint
-;;; gdk_key_event_get_layout (GdkEvent *event);
-;;;
-;;; Extracts the layout from a key event.
-;;;
-;;; event :
-;;;     a key event.
-;;;
-;;; Returns :
-;;;     the layout of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_layout" key-event-layout) :uint
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{An unsigned integer with the layout of @arg{event}.}
+  @short{Extracts the layout from a key event.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'key-event-layout)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_key_event_get_level ()
-;;;
-;;; guint
-;;; gdk_key_event_get_level (GdkEvent *event);
-;;;
-;;; Extracts the shift level from a key event.
-;;;
-;;; event :
-;;;     a key event.
-;;;
-;;; Returns :
-;;;     the shift level of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_level" key-event-level) :uint
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{An unsigned integer with the shift level of @arg{event}.}
+  @short{Extracts the shift level from a key event.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'key-event-level)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_key_event_is_modifier ()
-;;;
-;;; gboolean
-;;; gdk_key_event_is_modifier (GdkEvent *event);
-;;;
-;;; Extracts whether the key event is for a modifier key.
-;;;
-;;; event :
-;;;     a key event.
-;;;
-;;; Returns :
-;;;     TRUE if the event is for a modifier key
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_is_modifier" key-event-is-modifier) :boolean
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{@em{True} if the event is for a modifier key.}
+  @short{Extracts whether the key event is for a modifier key.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'key-event-is-modifier)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_key_event_matches ()
-;;;
-;;; GdkKeyMatch
-;;; gdk_key_event_matches (GdkEvent *event,
-;;;                        guint keyval,
-;;;                        GdkModifierType modifiers);
-;;;
-;;; Matches a key event against a keyboard shortcut that is specified as a
-;;; keyval and modifiers. Partial matches are possible where the combination
-;;; matches if the currently active group is ignored.
-;;;
-;;; Note that we ignore Caps Lock for matching.
-;;;
-;;; event :
-;;;     a key GdkEvent.
-;;;
-;;; keyval :
-;;;     the keyval to match
-;;;
-;;; modifiers :
-;;;     the modifiers to match
-;;;
-;;; Returns :
-;;;     a GdkKeyMatch value describing whether event matches
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_matches" key-event-matches) key-match
+ #+liber-documentation
+ "@version{#2023-7-23}
+  @argument[event]{a @class{gdk:event} instance}
+  @argument[keyval]{an unsigned integer with the keyval to match}
+  @argument[modifiers]{a @symbol{gdk:modifier-type} value to match}
+  @return{A @symbol{gdk:key-match} value describing whether @arg{event}
+    matches.}
+  @begin{short}
+    Matches a key event against a keyboard shortcut that is specified as a
+    keyval and modifiers.
+  @end{short}
+  Partial matches are possible where the combination matches if the currently
+  active group is ignored.
+
+  Note that we ignore the @kbd{Caps Lock} key for matching.
+  @see-class{gdk:event}
+  @see-symbol{gdk:key-match}"
   (event event)
   (keyval :uint)
   (modifiers modifier-type))
@@ -1546,26 +1504,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_key_event_get_match ()
-;;;
-;;; gboolean
-;;; gdk_key_event_get_match (GdkEvent *event,
-;;;                          guint *keyval,
-;;;                          GdkModifierType *modifiers);
-;;;
-;;; Gets a keyval and modifier combination that will cause
-;;; gdk_key_event_matches() to successfully match the given event.
-;;;
-;;; event :
-;;;     a key GdkEvent.
-;;;
-;;; keyval :
-;;;     return location for a keyval.
-;;;
-;;; modifiers :
-;;;     return location for modifiers.
-;;;
-;;; Returns :
-;;;     TRUE on success
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_match" %key-event-match) :boolean
@@ -1574,6 +1512,19 @@
   (modifiers (:pointer modifier-type)))
 
 (defun key-event-match (event)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @begin{return}
+    @arg{keyval} - an unsigned integer with the keyval @br{}
+    @arg{modifiers} - a @symbol{gdk:modifier-type} value
+  @end{return}
+  @begin{short}
+    Gets a keyval and modifier combination that will cause the
+    @fun{gdk:key-event-matches} function to successfully match the given event.
+  @end{short}
+  @see-class{gdk:event}
+  @see-symbol{gdk:modifier-type}"
   (cffi:with-foreign-objects ((keyval :uint)
                               (modifiers 'modifier-type))
     (when (%key-event-match event keyval modifiers)
@@ -1584,226 +1535,172 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_focus_event_get_in ()
-;;;
-;;; gboolean
-;;; gdk_focus_event_get_in (GdkEvent *event);
-;;;
-;;; Extracts whether this event is about focus entering or leaving the surface.
-;;;
-;;; event :
-;;;     a focus change event.
-;;;
-;;; Returns :
-;;;     TRUE of the focus is entering
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_focus_event_get_in" focus-event-in) :boolean
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{@em{True} if the focus is entering.}
+  @begin{short}
+    Extracts whether this event is about focus entering or leaving the surface.
+  @end{short}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'focus-event-in)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_touch_event_get_emulating_pointer ()
-;;;
-;;; gboolean
-;;; gdk_touch_event_get_emulating_pointer (GdkEvent *event);
-;;;
-;;; Extracts whether a touch event is emulating a pointer event.
-;;;
-;;; event :
-;;;     a touch event.
-;;;
-;;; Returns :
-;;;     TRUE if event is emulating
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touch_event_get_emulating_pointer"
                touch-event-emulating-pointer) :boolean
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{@em{True} if @arg{event} is emulating.}
+  @begin{short}
+    Extracts whether a touch event is emulating a pointer event.
+  @end{short}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'touch-event-emulating-pointer)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_crossing_event_get_mode ()
-;;;
-;;; GdkCrossingMode
-;;; gdk_crossing_event_get_mode (GdkEvent *event);
-;;;
-;;; Extracts the crossing mode from a crossing event.
-;;;
-;;; event :
-;;;     a crossing event.
-;;;
-;;; Returns :
-;;;     the mode of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_crossing_event_get_mode" crossing-event-mode) crossing-mode
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @symbol{gdk:crossing-mode} value with the mode of @arg{event}.}
+  @short{Extracts the crossing mode from a crossing event.}
+  @see-class{gdk:event}
+  @see-symbol{gdk:crossing-mode}"
   (event event))
 
 (export 'crossing-event-mode)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_crossing_event_get_detail ()
-;;;
-;;; GdkNotifyType
-;;; gdk_crossing_event_get_detail (GdkEvent *event);
-;;;
-;;; Extracts the notify detail from a crossing event.
-;;;
-;;; event :
-;;;     a crossing event.
-;;;
-;;; Returns :
-;;;     the notify detail of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_crossing_event_get_detail" crossing-event-detail)
     notify-type
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @symbol{gdk:notify-type} value with the detail of @arg{event}.}
+  @short{Extracts the notify detail from a crossing event.}
+  @see-class{gdk:event}
+  @see-symbol{gdk:notify-type}"
   (event event))
 
 (export 'crossing-event-detail)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_crossing_event_get_focus ()
-;;;
-;;; gboolean
-;;; gdk_crossing_event_get_focus (GdkEvent *event);
-;;;
-;;; Checks if the event surface is the focus surface.
-;;;
-;;; event :
-;;;     a crossing event.
-;;;
-;;; Returns ;
-;;;     TRUE if the surface is the focus surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_crossing_event_get_focus" crossing-event-focus) :boolean
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{@em{True} if the surface is the focus surface.}
+  @short{Checks if the event surface is the focus surface.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'crossing-event-focus)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_grab_broken_event_get_grab_surface ()
-;;;
-;;; GdkSurface *
-;;; gdk_grab_broken_event_get_grab_surface (GdkEvent *event);
-;;;
-;;; Extracts the grab surface from a grab broken event.
-;;;
-;;; event :
-;;;     a grab broken event.
-;;;
-;;; Returns :
-;;;     the grab surface of event .
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_grab_broken_event_get_grab_surface"
                grab-broken-event-grab-surface) (g:object surface)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @class{gdk:surface} object with the grab surface of @arg{event}.}
+  @short{Extracts the grab surface from a grab broken event.}
+  @see-class{gdk:event}
+  @see-class{gdk:surface}"
   (event event))
 
 (export 'grab-broken-event-grab-surface)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_grab_broken_event_get_implicit ()
-;;;
-;;; gboolean
-;;; gdk_grab_broken_event_get_implicit (GdkEvent *event);
-;;;
-;;; Checks whether the grab broken event is for an implicit grab.
-;;;
-;;; event :
-;;;     a grab broken event.
-;;;
-;;; Returns :
-;;;     TRUE if the an implicit grab was broken
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_grab_boken_event_get_implicit" grab-broken-event-implicit)
     :boolean
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{@em{True} if the an implicit grab was broken.}
+  @short{Checks whether the grab broken event is for an implicit grab.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'grab-broken-event-implicit)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_dnd_event_get_drop ()
-;;;
-;;; GdkDrop *
-;;; gdk_dnd_event_get_drop (GdkEvent *event);
-;;;
-;;; Gets the GdkDrop from a DND event.
-;;;
-;;; event :
-;;;     a DND event.
-;;;
-;;; Returns :
-;;;     the drop.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_dnd_event_get_drop" dnd-event-drop) (g:object drop)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{The @class{gdk:drop} object.}
+  @short{Gets the @class{gdk:drop} object from a DND event.}
+  @see-class{gdk:event}
+  @see-class{gdk:drop}"
   (event event))
 
 (export 'dnd-event-drop)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_touchpad_event_get_gesture_phase ()
-;;;
-;;; GdkTouchpadGesturePhase
-;;; gdk_touchpad_event_get_gesture_phase (GdkEvent *event);
-;;;
-;;; Extracts the touchpad gesture phase from a touchpad event.
-;;;
-;;; event :
-;;;     a touchpad GdkEvent.
-;;;
-;;; Returns :
-;;;     the gesture phase of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_gesture_phase"
                touchpad-event-gesture-phase) touchpad-gesture-phase
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A @symbol{gdk:touchpad-gesture-phase} value with the gesture phase of
+    @arg{event}.}
+  @short{Extracts the touchpad gesture phase from a touchpad event.}
+  @see-class{gdk:event}
+  @see-symbol{gdk:touchpad-gesture-phase}"
   (event event))
 
 (export 'touchpad-event-gesture-phase)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_touchpad_event_get_n_fingers ()
-;;;
-;;; guint
-;;; gdk_touchpad_event_get_n_fingers (GdkEvent *event);
-;;;
-;;; Extracts the number of fingers from a touchpad event.
-;;;
-;;; event :
-;;;     a touchpad event.
-;;;
-;;; Returns
-;;;     the number of fingers for event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_n_fingers" touchpad-event-n-fingers)
     :uint
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{An unsigned integer with the number of fingers for @arg{event}.}
+  @short{Extracts the number of fingers from a touchpad event.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'touchpad-event-n-fingers)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_touchpad_event_get_deltas ()
-;;;
-;;; void
-;;; gdk_touchpad_event_get_deltas (GdkEvent *event, double *dx, double *dy);
-;;;
-;;; Extracts delta information from a touchpad event.
-;;;
-;;; event :
-;;;     a touchpad event.
-;;;
-;;; dx :
-;;;     return location for x.
-;;;
-;;; dy :
-;;;     return location for y.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_deltas" %touchpad-event-deltas) :void
@@ -1812,6 +1709,15 @@
   (dy (:pointer :double)))
 
 (defun touchpad-event-deltas (event)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @begin{return}
+    @arg{dx} - a double float for dx @br{}
+    @arg{dy} - a double float for dy
+  @end{return}
+  @short{Extracts delta information from a touchpad event.}
+  @see-class{gdk:event}"
   (cffi:with-foreign-objects ((dx :double) (dy :double))
     (%touchpad-event-deltas event dx dy)
     (values (cffi:mem-ref dx :double)
@@ -1821,64 +1727,38 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_touchpad_event_get_pinch_angle_delta ()
-;;;
-;;; double
-;;; gdk_touchpad_event_get_pinch_angle_delta (GdkEvent *event);
-;;;
-;;; Extracts the angle delta from a touchpad pinch event.
-;;;
-;;; event :
-;;;     a touchpad pinch event.
-;;;
-;;; Returns :
-;;;     the angle delta of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_pinch_angle_delta"
                touchpad-event-pinch-angle-delta) :double
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A double float with the angle delta of @arg{event}.}
+  @short{Extracts the angle delta from a touchpad pinch event.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'touchpad-event-pinch-angle-delta)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_touchpad_event_get_pinch_scale ()
-;;;
-;;; double
-;;; gdk_touchpad_event_get_pinch_scale (GdkEvent *event);
-;;;
-;;; Extracts the scale from a touchpad pinch event.
-;;;
-;;; event :
-;;;     a touchpad pinch event.
-;;;
-;;; Returns :
-;;;     the scale of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_pinch_scale" touchpad-event-pinch-scale)
     :double
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A double float with the scale of @arg{event}.}
+  @short{Extracts the scale from a touchpad pinch event.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'touchpad-event-pinch-scale)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_pad_event_get_axis_value ()
-;;;
-;;; void
-;;; gdk_pad_event_get_axis_value (GdkEvent *event,
-;;;                               guint *index,
-;;;                               double *value);
-;;;
-;;; Extracts the information from a pad strip or ring event.
-;;;
-;;; event :
-;;;     a pad strip or ring event.
-;;;
-;;; index :
-;;;     Return location for the axis index.
-;;;
-;;; value :
-;;;     Return location for the axis value.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_pad_event_get_axis_value" %pad-event-axis-value) :void
@@ -1887,6 +1767,15 @@
   (value (:pointer :double)))
 
 (defun pad-event-axis-value (event)
+ #+liber-documentation
+ "@version{#2023-5-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @begin{return}
+    @arg{index} - an unsigned integer with the axis index @br{}
+    @arg{value} - a double float with the axis value
+  @end{return}
+  @short{Extracts the information from a pad strip or ring event.}
+  @see-class{gdk:event}"
   (cffi:with-foreign-objects ((index :uint) (value :double))
     (%pad-event-axis-value event index value)
     (values (cffi:mem-ref index :uint)
@@ -1896,42 +1785,21 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_pad_event_get_button ()
-;;;
-;;; guint
-;;; gdk_pad_event_get_button (GdkEvent *event);
-;;;
-;;; Extracts information about the pressed button from a pad event.
-;;;
-;;; event :
-;;;     a pad button event.
-;;;
-;;; Returns :
-;;;     the button of event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_pad_event_get_button" pad-event-button) :uint
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @return{A unsigned integer with the button of @arg{event}.}
+  @short{Extracts information about the pressed button from a pad event.}
+  @see-class{gdk:event}"
   (event event))
 
 (export 'pad-event-button)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_pad_event_get_group_mode ()
-;;;
-;;; void
-;;; gdk_pad_event_get_group_mode (GdkEvent *event,
-;;;                               guint *group,
-;;;                               guint *mode);
-;;;
-;;; Extracts group and mode information from a pad event.
-;;;
-;;; event :
-;;;     a pad event.
-;;;
-;;; group :
-;;;     return location for the group.
-;;;
-;;; mode :
-;;;     return location for the mode.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_pad_event_get_group_mode" %pad-event-group-mode) :void
@@ -1940,6 +1808,15 @@
   (mode (:pointer :uint)))
 
 (defun pad-event-group-mode (event)
+ #+liber-documentation
+ "@version{#2023-7-25}
+  @argument[event]{a @class{gdk:event} instance}
+  @begin{return}
+    @arg{group} - an unsigned integer with the group @br{}
+    @arg{mode} - an unsigned integer wiht the mode
+  @end{return}
+  @short{Extracts group and mode information from a pad event.}
+  @see-class{gdk:event}"
   (cffi:with-foreign-objects ((group :uint) (mode :uint))
     (%pad-event-group-mode event group mode)
     (values (cffi:mem-ref group :uint)
@@ -1949,28 +1826,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_events_get_angle ()
-;;;
-;;; gboolean
-;;; gdk_events_get_angle (GdkEvent *event1,
-;;;                       GdkEvent *event2,
-;;;                       double *angle);
-;;;
-;;; If both events contain X/Y information, this function will return TRUE and
-;;; return in angle the relative angle from event1 to event2 . The rotation
-;;; direction for positive angles is from the positive X axis towards the
-;;; positive Y axis.
-;;;
-;;; event1 :
-;;;     first GdkEvent
-;;;
-;;; event2 :
-;;;     second GdkEvent
-;;;
-;;; angle :
-;;;     return location for the relative angle between both events.
-;;;
-;;; Returns :
-;;;     TRUE if the angle could be calculated.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_events_get_angle" %events-angle) :boolean
@@ -1979,6 +1834,18 @@
   (angle (:pointer :double)))
 
 (defun events-angle (event1 event2)
+ #+liber-documentation
+ "@version{#2023-5-25}
+  @argument[event1]{a @class{gdk:event} instance}
+  @argument[event2]{a @class{gdk:event} instance}
+  @return{A double float with the relative angle between both events.}
+  @begin{short}
+    If both events contain X/Y information, this function will return the
+    relative angle from @arg{event1} to @arg{event2}.
+  @end{short}
+  The rotation direction for positive angles is from the positive X axis
+  towards the positive Y axis.
+  @see-class{gdk:event}"
   (cffi:with-foreign-object (angle :double)
     (when (%events-angle event1 event2 angle)
       (cffi:mem-ref angle :double))))
@@ -1987,30 +1854,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_events_get_center ()
-;;;
-;;; gboolean
-;;; gdk_events_get_center (GdkEvent *event1,
-;;;                        GdkEvent *event2,
-;;;                        double *x,
-;;;                        double *y);
-;;;
-;;; If both events contain X/Y information, the center of both coordinates will
-;;; be returned in x and y .
-;;;
-;;; event1 :
-;;;     first GdkEvent
-;;;
-;;; event2 :
-;;;     second GdkEvent
-;;;
-;;; x :
-;;;     return location for the X coordinate of the center.
-;;;
-;;; y :
-;;;     return location for the Y coordinate of the center.
-;;;
-;;; Returns :
-;;;     TRUE if the center could be calculated.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_events_get_center" %events-center) :boolean
@@ -2020,6 +1863,19 @@
   (y (:pointer :double)))
 
 (defun events-center (event1 event2)
+ #+liber-documentation
+ "@version{#2023-5-25}
+  @argument[event1]{a @class{gdk:event} instance}
+  @argument[event2]{a @class{gdk:event} instance}
+  @begin{return}
+    @arg{x} - a double float with the x coordinate of the center @br{}
+    @arg{y} - a double float with the y coordinate of the center
+  @end{return}
+  @begin{short}
+    If both events contain X/Y information, the center of both coordinates will
+    be returned in @arg{x} and @arg{y}.
+  @end{short}
+  @see-class{gdk:event}"
   (cffi:with-foreign-objects ((x :double) (y :double))
     (when (%events-center event1 event2 x y)
       (values (cffi:mem-ref x :double)
@@ -2029,26 +1885,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_events_get_distance ()
-;;;
-;;; gboolean
-;;; gdk_events_get_distance (GdkEvent *event1,
-;;;                          GdkEvent *event2,
-;;;                          double *distance);
-;;;
-;;; If both events have X/Y information, the distance between both coordinates
-;;; (as in a straight line going from event1 to event2 ) will be returned.
-;;;
-;;; event1 :
-;;;     first GdkEvent
-;;;
-;;; event2 :
-;;;     second GdkEvent
-;;;
-;;; distance :
-;;;     return location for the distance.
-;;;
-;;; Returns :
-;;;     TRUE if the distance could be calculated.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_events_get_distance" %events-distance) :boolean
@@ -2057,6 +1893,17 @@
   (distance (:pointer :double)))
 
 (defun events-distance (event1 event2)
+ #+liber-documentation
+ "@version{#2023-5-25}
+  @argument[event1]{a @class{gdk:event} instance}
+  @argument[event2]{a @class{gdk:event} instance}
+  @return{A double float with the distance.}
+  @begin{short}
+    If both events have X/Y information, the distance between both coordinates,
+    as in a straight line going from @arg{event1} to @arg{event2}, will be
+    returned.
+  @end{short}
+  @see-class{gdk:event}"
   (cffi:with-foreign-object (distance :double)
     (when (%events-distance event1 event2 distance)
       (cffi:mem-ref distance :double))))
