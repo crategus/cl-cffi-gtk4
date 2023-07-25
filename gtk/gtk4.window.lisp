@@ -1528,10 +1528,10 @@ lambda (window)    :run-first
   It is permitted to call this function before showing a window, in which case
   the window will be minimized before it ever appears onscreen.
 
-  You can track the result of this operation via the @slot[gdk-toplevel]{state}
+  You can track the result of this operation via the @slot[gdk:toplevel]{state}
   property.
   @see-class{gtk:window}
-  @see-function{gdk-toplevel-state}
+  @see-function{gdk:toplevel-state}
   @see-function{gtk:window-maximize}"
   (window (g:object window)))
 
@@ -1554,10 +1554,10 @@ lambda (window)    :run-first
   or there may not be a window manager in which case minimization is not
   possible.
 
-  You can track the result of this operation via the @slot[gdk-toplevel]{state}
+  You can track the result of this operation via the @slot[gdk:toplevel]{state}
   property.
   @see-class{gtk:window}
-  @see-class{gdk-toplevel}
+  @see-class{gdk:toplevel}
   @see-function{gtk:window-maximized}"
   (window (g:object window)))
 
@@ -1581,11 +1581,11 @@ lambda (window)    :run-first
   It is permitted to call this function before showing a window, in which case
   the window will be maximized when it appears onscreen initially.
 
-  You can track the result of this operation via the @slot[gdk-toplevel]{state}
+  You can track the result of this operation via the @slot[gdk:toplevel]{state}
   property, or by listening to notifications on the
   @slot[gtk:window]{maximized} property.
   @see-class{gtk:window}
-  @see-function{gdk-toplevel-state}
+  @see-function{gdk:toplevel-state}
   @see-function{gtk:window-maximized}"
   (window (g:object window)))
 
@@ -1606,11 +1606,11 @@ lambda (window)    :run-first
   afterward, because other entities, e.g. the user or window manager maximize
   it again, and not all window managers honor requests to unmaximize.
 
-  You can track the result of this operation via the @slot[gdk-toplevel]{state}
+  You can track the result of this operation via the @slot[gdk:toplevel]{state}
   property, or by listening to notifications on the @slot[gtk:window]{maximized}
   property.
   @see-class{gtk:window}
-  @see-class{gdk-toplevel}
+  @see-class{gdk:toplevel}
   @see-function{gtk:window-maximized}"
   (window (g:object window)))
 
@@ -1632,11 +1632,11 @@ lambda (window)    :run-first
   unfullscreen it again, and not all window managers honor requests to
   fullscreen windows.
 
-  You can track the result of this operation via the @slot[gdk-toplevel]{state}
+  You can track the result of this operation via the @slot[gdk:toplevel]{state}
   property, or by listening to notifications of the
   @slot[gtk:window]{fullscreened} property.
   @see-class{gtk:window}
-  @see-function{gdk-toplevel-state}
+  @see-function{gdk:toplevel-state}
   @see-function{gtk:window-fullscreened}"
   (window (g:object window)))
 
@@ -1651,23 +1651,23 @@ lambda (window)    :run-first
  #+liber-documentation
  "@version{#2022-1-6}
   @argument[window]{a @class{gtk:window} widget}
-  @argument[monitor]{a @class{gdk-monitor} object to go fullscreen on}
+  @argument[monitor]{a @class{gdk:monitor} object to go fullscreen on}
   @begin{short}
     Asks to place the window in the fullscreen state on the given monitor.
   @end{short}
   Note that you should not assume the window is definitely full screen
-  afterward, or that the windowing system allows fullscreen windows on any given
-  monitor.
+  afterward, or that the windowing system allows fullscreen windows on any
+  given monitor.
 
-  You can track the result of this operation via the @slot[gdk-toplevel]{state}
+  You can track the result of this operation via the @slot[gdk:toplevel]{state}
   property, or by listening to notifications of the
   @slot[gtk:window]{fullscreened} property.
   @see-class{gtk:window}
-  @see-class{gdk-monitor}
-  @see-function{gdk-toplevel-state}
+  @see-class{gdk:monitor}
+  @see-function{gdk:toplevel-state}
   @see-function{gtk:window-fullscreened}"
   (window (g:object window))
-  (monitor (g:object gdk-monitor)))
+  (monitor (g:object gdk:monitor)))
 
 (export 'window-fullscreen-on-monitor)
 
@@ -1688,11 +1688,11 @@ lambda (window)    :run-first
   unfullscreen windows. But normally the window will end up restored to its
   normal state. Just do not write code that crashes if not.
 
-  You can track the result of this operation via the @slot[gdk-toplevel]{state}
+  You can track the result of this operation via the @slot[gdk:toplevel]{state}
   property, or by listening to notifications of the
   @slot[gtk:window]{fullscreened} property.
   @see-class{gtk:window}
-  @see-function{gdk-toplevel-state}
+  @see-function{gdk:toplevel-state}
   @see-function{gtk:window-fullscreened}"
   (window (g:object window)))
 

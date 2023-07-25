@@ -183,7 +183,7 @@
     The @sym{gtk:image} widget displays an image.
   @end{short}
   Various kinds of objects can be displayed as an image. Most typically, you
-  would load a @class{gdk-texture} object from a file, and then display that.
+  would load a @class{gdk:texture} object from a file, and then display that.
 
   @image[image]{Figure: GtkImage}
 
@@ -196,7 +196,7 @@
   If the file is not loaded successfully, the image will contain a
   \"broken image\" icon similar to that used in many web browsers. If you want
   to handle errors in loading the file yourself, for example by displaying an
-  error message, then load the image with the @fun{gdk-texture-new-from-file}
+  error message, then load the image with the @fun{gdk:texture-new-from-file}
   function, then create the @sym{gtk:image} widget with the
   @fun{gtk:image-new-from-paintable} function.
 
@@ -535,14 +535,14 @@
   @code{nil}, it always returns a valid @class{gtk:image} widget.
 
   If you need to detect failures to load the file, use the
-  @fun{gdk-texture-new-from-file} function to load the file yourself, then
+  @fun{gdk:texture-new-from-file} function to load the file yourself, then
   create the @class{gtk:image} widget from the texture.
 
   The storage type, see the @fun{gtk:image-storage-type} function, of the
   returned image is not defined, it will be whatever is appropriate for
   displaying the file.
   @see-class{gtk:image}
-  @see-function{gdk-texture-new-from-file}
+  @see-function{gdk:texture-new-from-file}
   @see-function{gtk:image-storage-type}"
   (%image-new-from-file (namestring path)))
 

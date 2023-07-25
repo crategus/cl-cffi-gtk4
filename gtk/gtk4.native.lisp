@@ -68,11 +68,11 @@
  "@version{#2022-7-11}
   @begin{short}
     The @sym{gtk:native} interface is the interface implemented by all widgets
-    that can provide a @class{gdk-surface} object for widgets to render on.
+    that can provide a @class{gdk:surface} object for widgets to render on.
   @end{short}
   The obvious example of a @sym{gtk:native} widget is the @class{gtk:window}
   widget.
-  @see-class{gdk-surface}
+  @see-class{gdk:surface}
   @see-class{gtk:window}")
 
 ;;; ----------------------------------------------------------------------------
@@ -83,14 +83,14 @@
     (g:object native)
  #+liber-documentation
  "@version{#2022-7-11}
-  @argument[surface]{a @class{gdk-surface} object}
+  @argument[surface]{a @class{gdk:surface} object}
   @return{The @class{gtk:native} widget that is associated with @arg{surface}.}
   @begin{short}
     Finds the native widget associated with the surface.
   @end{short}
   @see-class{gtk:native}
-  @see-class{gdk-surface}"
-  (surface (g:object gdk-surface)))
+  @see-class{gdk:surface}"
+  (surface (g:object gdk:surface)))
 
 (export 'native-for-surface)
 
@@ -102,12 +102,12 @@
  #+liber-documentation
  "@version{#2022-7-11}
   @argument[native]{a @class{gtk:native} widget}
-  @return{The @class{gdk-surface} object of @arg{native}.}
+  @return{The @class{gdk:surface} object of @arg{native}.}
   @begin{short}
     Returns the surface of the native widget.
   @end{short}
   @see-class{gtk:native}
-  @see-class{gdk-surface}"
+  @see-class{gdk:surface}"
   (native (g:object native)))
 
 (export 'native-surface)
