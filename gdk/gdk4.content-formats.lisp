@@ -193,7 +193,7 @@
 ;;; Creates a new GdkContentFormats for a given GType.
 ;;;
 ;;; type :
-;;;     a $GType
+;;;     a GType
 ;;;
 ;;; Returns :
 ;;;     a new GdkContentFormats
@@ -454,25 +454,18 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_formats_contain_gtype ()
-;;;
-;;; gboolean
-;;; gdk_content_formats_contain_gtype (const GdkContentFormats *formats,
-;;;                                    GType type);
-;;;
-;;; Checks if a given GType is part of the given formats .
-;;;
-;;; formats :
-;;;     a GdkContentFormats
-;;;
-;;; type :
-;;;     the GType to search for
-;;;
-;;; Returns :
-;;;     TRUE if the GType was found
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_formats_contain_gtype"
                content-formats-contain-gtype) :boolean
+ #+liber-documentation
+ "@version{2023-7-27}
+  @argument[formats]{a @class{gdk:content-formats} instance}
+  @argument[gtype]{a @class{g:type-t} type}
+  @return{@em{True} if given @arg{gtype} was found.}
+  @short{Checks if a given @arg{gtype} is part of the given @arg{formats}.}
+  @see-class{gdk:content-formats-contain-gtype}
+  @see-class{g:type-t}"
   (formats (g:boxed content-formats))
   (gype g:type-t))
 

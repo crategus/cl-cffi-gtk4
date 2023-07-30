@@ -147,6 +147,12 @@
 ;;;     a new GdkContentProvider
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gdk_content_provider_new_for_value"
+               content-provider-new-for-value) (g:object content-provider)
+  (gvalue (:pointer (:struct g:value))))
+
+(export 'content-provider-new-for-value)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_provider_new_typed ()
 ;;;
