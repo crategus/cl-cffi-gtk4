@@ -313,7 +313,7 @@ lambda (display setting)    :run-last
 
 (cffi:defcfun ("gdk_display_get_default" display-default) (g:object display)
  #+liber-documentation
- "@version{#2022-1-8}
+ "@version{2023-7-29}
   @begin{return}
     A @class{gdk:display} object, or @code{nil} if there is no default display.
   @end{return}
@@ -686,10 +686,10 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_clipboard -> display-clipboard
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_display_get_clipboard" display-clipboard)
+(cffi:defcfun ("gdk_display_get_clipboard" display-clipboard) 
     (g:object clipboard)
  #+liber-documentation
- "@version{#2022-1-8}
+ "@version{2023-7-29}
   @argument[display]{a @class{gdk:display} object}
   @return{A @class{gdk:clipboard} object.}
   @short{Gets the clipboard used for copy/paste operations.}
@@ -706,7 +706,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_primary_clipboard" display-primary-clipboard)
     (g:object clipboard)
  #+liber-documentation
- "@version{#2022-1-8}
+ "@version{2023-7-29}
   @argument[display]{a @class{gdk:display} object}
   @return{A @class{gdk:clipboard} object.}
   @begin{short}

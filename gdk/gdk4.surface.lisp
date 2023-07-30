@@ -670,9 +670,9 @@ lambda (surface region)    :run-last
 (cffi:defcfun ("gdk_surface_create_cairo_context" surface-create-cairo-context)
     (g:object cairo-context)
  #+liber-documentation
- "@version{#2023-4-8}
+ "@version{#2023-7-30}
   @argument[surface]{a @class{gdk:surface} object}
-  @return{The newly created @class{gdk:vulkan-context} object.}
+  @return{The newly created @class{gdk:cairo-context} object.}
   @begin{short}
     Creates a new @class{gdk:cairo-context} object for rendering on
     @arg{surface}.
