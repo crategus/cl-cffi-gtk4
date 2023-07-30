@@ -15,4 +15,10 @@
     <file>brick2.png</file>
     <file>css-multiplebgs.css</file>
   </gresource>
+  <gresource prefix="/images">
+    <file>portland-rose.jpg</file>
+    <file>floppybuddy.gif</file>
+    <file>gtk-logo.png</file>
+    <file>org.gtk.demo4.svg</file>
+  </gresource>
 </gresources>

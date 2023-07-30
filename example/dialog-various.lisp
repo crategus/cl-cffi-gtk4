@@ -92,8 +92,7 @@
                          :website "github.com/crategus/cl-cffi-gtk"
                          :website-label "Project web site"
                          :license (dialog-license-text)
-                         :authors '("Kalyanov Dmitry"
-                                    "Dieter Kaiser")
+                         :authors '("Dieter Kaiser")
                          :documenters '("Dieter Kaiser")
                          :artists '("None")
                          :logo-icon-name "applications-development"

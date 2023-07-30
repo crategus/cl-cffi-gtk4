@@ -1,5 +1,5 @@
 (defpackage :gtk4-example
-  (:use :cffi :split-sequence :common-lisp)
+  (:use :cffi :iterate :split-sequence :common-lisp)
   (:import-from :gtk  #:+gtk-priority-application+
                       #:+gtk-priority-user+)
   (:import-from :gdk  #:+gdk-event-propagate+
@@ -81,6 +81,13 @@
            #:do-color-chooser-widget
            #:do-color-chooser-palette
            #:do-file-chooser-dialog
+
+           #:create-file-dialog-open
+           #:create-file-dialog-open-multiple
+           #:create-file-dialog-save
+           #:create-file-dialog-select-folder
+           #:create-file-dialog-select-multiple-folders
+
            #:do-font-button
            #:do-font-button-label
 
@@ -93,6 +100,9 @@
 
            ;; Scrolling
            #:do-scrolled-window
+
+           ;; Data exchange, Clipboards, Drag and Drop
+           #:do-clipboard
 
            ;; Miscellaneous
            #:do-size-group

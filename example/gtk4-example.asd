@@ -79,6 +79,7 @@
                (:file "color-chooser-palette")
 
                (:file "file-chooser-dialog")
+               (:file "file-dialog-open")
 
                (:file "font-button")
                (:file "font-button-label")
@@ -92,6 +93,9 @@
 
                ;; Scrolling
                (:file "scrolled-window")
+
+               ;; Data exchange, Clipboards, Drag and Drop
+               (:file "clipboard")
 
                ;; Miscellaneous
                (:file "size-group")

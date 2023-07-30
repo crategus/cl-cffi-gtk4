@@ -212,7 +212,8 @@
        ":window"
        "DO-REVEALER-ICON"
        "gtk4-example"
-       "revealer-icon.lisp")
+       "revealer-icon.lisp"
+       "resource/revealer-icon.ui")
       ("Paned Widgets"
        ":window"
        "DO-PANED"
@@ -457,7 +458,15 @@
        "scrolled-window.lisp"))
 
      "Printing"
+     
      "Drag and Drop, Clipboard"
+     (("Clipboard"
+       ":window"
+       "DO-CLIPBOARD"
+       "gtk4-example"
+       "clipboard.lisp"
+       "resource/clipboard.ui")
+     )
 
      ;; Pango demos
      "Pango"
@@ -774,7 +783,7 @@
                          :website
                          "github.com/crategus/cl-cffi-gtk"
                          :website-label "Project web site"
-                         :license "LLGPL"
+                         :license "MIT"
                          :authors '("Dieter Kaiser")
                          :documenters '("Dieter Kaiser")
                          :artists '("None")
