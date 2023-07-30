@@ -49,9 +49,15 @@
   ;; Check the type initializer
   (is (eq (g:gtype "GdkDevicePad")
           (g:gtype (cffi:foreign-funcall "gdk_device_pad_get_type" :size))))
-  ;; Get the names of the interface properties.
+  ;; Check the interface Prerequisites
+  (is (equal '("GdkDevice")
+             (list-interface-prerequisites "GdkDevicePad")))
+  ;; Check the interface properties
   (is (equal '()
              (list-interface-properties "GdkDevicePad")))
+  ;; Check the signals
+  (is (equal '()
+             (list-signals "GdkDevicePad")))
   ;; Get the interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GdkDevicePad" GDK-DEVICE-PAD
                     (:EXPORT T :TYPE-INITIALIZER "gdk_device_pad_get_type"))
@@ -64,4 +70,4 @@
 ;;;     gdk_device_pad_get_n_features
 ;;;     gdk_device_pad_get_feature_group
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-7-30 --------------------------------------------------------------

@@ -56,6 +56,10 @@
   (mapcar #'g:param-spec-name
           (g:object-interface-list-properties gtype)))
 
+(defun list-interface-prerequisites (gtype)
+  (mapcar #'g:type-name 
+          (g:type-interface-prerequisites gtype)))
+
 ;; A sorted list of the signal names of a class
 (defun list-signals (gtype)
   (sort (mapcar #'g:signal-name
