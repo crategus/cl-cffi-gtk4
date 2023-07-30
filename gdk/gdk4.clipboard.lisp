@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.clipboard.lisp
+;;; gdk4.clipboard.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk/>.
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; Clipboards
@@ -37,7 +38,6 @@
 ;;; Accessors
 ;;;
 ;;;     gdk_clipboard_get_content
-;;;     gdk_clipboard_set_content
 ;;;     gdk_clipboard_get_display
 ;;;     gdk_clipboard_get_formats
 ;;;
@@ -54,6 +54,7 @@
 ;;;     gdk_clipboard_read_texture_finish
 ;;;     gdk_clipboard_read_text_async
 ;;;     gdk_clipboard_read_text_finish
+;;;     gdk_clipboard_set_content
 ;;;     gdk_clipboard_set
 ;;;     gdk_clipboard_set_valist
 ;;;     gdk_clipboard_set_value
@@ -81,47 +82,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkClipboard
-;;;
-;;; The GdkClipboard struct contains only private fields and should not be
-;;; accessed directly.
-;;;
-;;; The GdkClipboard object represents a clipboard of data shared between
-;;; different applications or between different parts of the same application.
-;;;
-;;; To get a GdkClipboard object, use gdk_display_get_clipboard() or
-;;; gdk_display_get_primary_clipboard(). You can find out about the data that
-;;; is currently available in a clipboard using gdk_clipboard_get_formats().
-;;;
-;;; To make text or image data available in a clipboard, use
-;;; gdk_clipboard_set_text() or gdk_clipboard_set_texture(). For other data,
-;;; you can use gdk_clipboard_set_content(), which takes a GdkContentProvider
-;;; object.
-;;;
-;;; To read textual or image data from a clipboard, use
-;;; gdk_clipboard_read_text_async() or gdk_clipboard_read_texture_async(). For
-;;; other data, use gdk_clipboard_read_async(), which provides a GInputStream
-;;; object.
-;;;
-;;; See Also
-;;;     GdkContentProvider, GdkContentFormats
-;;;
-;;; Signal Details
-;;;
-;;; The “changed” signal
-;;;
-;;; void
-;;; user_function (GdkClipboard *clipboard,
-;;;                gpointer      user_data)
-;;;
-;;; The ::changed signal is emitted when the clipboard changes ownership.
-;;;
-;;; clipboard :
-;;;     the object on which the signal was emitted
-;;;
-;;; user_data :
-;;;     user data set when the signal handler was connected.
-;;;
-;;; Flags: Run Last
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GdkClipboard" clipboard
@@ -142,189 +102,244 @@
     clipboard-local
     "local" "gboolean" t nil)))
 
-;;; ----------------------------------------------------------------------------
-;;; Property Details
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation 'clipboard 'type)
+ "@version{2023-7-30}
+  @begin{short}
+    The @sym{gdk:clipboard} object represents data shared between applications
+    or inside an application.
+  @end{short}
+
+  To get a @sym{gdk:clipboard} object, use the @fun{gdk:display-clipboard}
+  or @fun{gdk:display-primary-clipboard} functions. You can find out about the
+  data that is currently available in a clipboard using the
+  @fun{gdk:clipboard-formats} function.
+
+  To make text or image data available in a clipboard, use the
+  @fun{gdk:clipboard-set-text} or @fun{gdk:clipboard-set-texture} functions.
+  For other data, you can use the @fun{gdk:clipboard-set-content} function,
+  which takes a @class{gdk:content-provider} object.
+
+  To read textual or image data from a clipboard, use the
+  @fun{gdk:clipboard-read-text-async} or @fun{gdk:clipboard-read-texture-async}
+  functions.
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"changed\" signal}
+      @begin{pre}
+lambda (clipboard)    :run-last
+      @end{pre}
+      The signal is emitted when the clipboard changes ownership.
+      @begin[code]{table}
+       @entry[clipboard]{The @sym{gdk:clipboard} object on which the signal was
+         emitted.}
+      @end{table}
+  @end{dictionary}
+  @see-slot{gdk:clipboard-content}
+  @see-slot{gdk:clipboard-display}
+  @see-slot{gdk:clipboard-formats}
+  @see-slot{gdk:clipboard-local}
+  @see-class{gdk:content-provider}
+  @see-class{gdk:content-formats}")
 
 ;;; ----------------------------------------------------------------------------
-;;; The “content” property
-;;;
-;;;  “content”                  GdkContentProvider *
-;;;
-;;; The GdkContentProvider or NULL if the clipboard is empty or contents are
-;;; provided otherwise.
-;;;
-;;; Owner: GdkClipboard
-;;;
-;;; Flags: Read
+;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “display” property
-;;;
-;;;  “display”                  GdkDisplay *
-;;;
-;;; The GdkDisplay that the clipboard belongs to.
-;;;
-;;; Owner: GdkClipboard
-;;;
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+;;; --- clipboard-content ------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “formats” property
-;;;
-;;;  “formats”                  GdkContentFormats *
-;;;
-;;; The possible formats that the clipboard can provide its data in.
-;;;
-;;; Owner: GdkClipboard
-;;;
-;;; Flags: Read
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "content" 'clipboard) t)
+ "The @code{content} property of type @class{gdk:content-provider} (Read) @br{}
+  The content provider or @code{nil} if the clipboard is empty or contents are
+  provided otherwise.")
 
-;;; ----------------------------------------------------------------------------
-;;; The “local” property
-;;;
-;;;  “local”                    gboolean
-;;;
-;;; TRUE if the contents of the clipboard are owned by this process.
-;;;
-;;; Owner: GdkClipboard
-;;;
-;;; Flags: Read
-;;;
-;;; Default value: TRUE
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'clipboard-content)
+      "Accessor"
+      (documentation 'clipboard-content 'function)
+ "@version{2023-7-30}
+  @syntax[]{(gdk:clipboard-content object) => content}
+  @argument[object]{a @class{gdk:clipboard} object}
+  @argument[content]{a @class{gdk:content-provider} instance}
+  @begin{short}
+    Accessor of the @slot[gdk:clipboard]{content} slot of the
+    @class{gdk:clipboard} class.
+  @end{short}
+  The @sym{gdk:clipboard-content} function returns the
+  @class{gdk:content-provider} object currently set on @arg{clipboard}. If the
+  clipboard is empty or its contents are not owned by the current process,
+  @code{nil} will be returned.
+  @begin[Note]{dictionary}
+    The @slot[gdk:clipboard]{content} property is not writeable. Use the
+    @fun{gdk:clipboard-set-content} function to set the content provider.
+  @end{dictionary}
+  @see-class{gdk:clipboard}
+  @see-class{gdk:content-provider}
+  @see-function{gdk:clipboard-set-content}")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_get_display ()                           Accessor
-;;;
-;;; GdkDisplay *
-;;; gdk_clipboard_get_display (GdkClipboard *clipboard);
-;;;
-;;; Gets the GdkDisplay that the clipboard was created for.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; Returns :
-;;;     a GdkDisplay.
-;;; ----------------------------------------------------------------------------
+;;; --- clipboard-display ------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_get_formats ()                           Accessor
-;;;
-;;; GdkContentFormats *
-;;; gdk_clipboard_get_formats (GdkClipboard *clipboard);
-;;;
-;;; Gets the formats that the clipboard can provide its current contents in.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; Returns :
-;;;     The formats of the clipboard.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "display" 'clipboard) t)
+ "The @code{display} property of type @class{gdk:display}
+  (Read / Write / Construct only) @br{}
+  The display that the clipboard belongs to.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'clipboard-display)
+      "Accessor"
+      (documentation 'clipboard-display 'function)
+ "@version{2023-7-30}
+  @syntax[]{(gdk:clipboard-display object) => display}
+  @argument[object]{a @class{gdk:clipboard} object}
+  @argument[display]{a @class{gdk:display} object}
+  @begin{short}
+    Accessor of the @slot[gdk:clipboard]{display} slot of the
+    @class{gdk:clipboard} class.
+  @end{short}
+  The @sym{gdk:clipboard-display} function returns the display that the
+  clipboard was created for.
+  @see-class{gdk:clipboard}
+  @see-class{gdk:display}")
+
+;;; --- clipboard-formats ------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "formats" 'clipboard) t)
+ "The @code{formats} property of type @class{gdk:content-formats} (Read) @br{}
+  The possible formats that the clipboard can provide its data in.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'clipboard-formats)
+      "Accessor"
+      (documentation 'clipboard-formats 'function)
+ "@version{2023-7-30}
+  @syntax[]{(gdk:clipboard-formats object) => formats}
+  @argument[object]{a @class{gdk:clipboard} object}
+  @argument[formats]{a @class{gdk:content-formats} instance}
+  @begin{short}
+    Accessor of the @slot[gdk:clipboard]{formats} slot of the
+    @class{gdk:clipboard} class.
+  @end{short}
+  The @sym{gdk:clipboard-formats} function gets the formats that the clipboard
+  can provide its current contents in.
+  @see-class{gdk:clipboard}
+  @see-class{gdk:content-formats}")
+
+;;; --- clipboard-local --------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "formats" 'clipboard) t)
+ "The @code{local} property of type @code{:boolean} (Read) @br{}
+  @em{True} if the contents of the clipboard are owned by this process. @br{}
+  Default value: @em{true}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'clipboard-local)
+      "Accessor"
+      (documentation 'clipboard-local 'function)
+ "@version{2023-7-30}
+  @syntax[]{(gdk:clipboard-local object) => local}
+  @argument[object]{a @class{gdk:clipboard} object}
+  @argument[local]{a boolean whether the contents of the clipboard are owned
+    by this process}
+  @begin{short}
+    Accessor of the @slot[gdk:clipboard]{local} slot of the
+    @class{gdk:clipboard} class.
+  @end{short}
+  The @sym{gdk:clipboard-local} function returns whether the clipboard is local.
+  See also the @fun{gdk:clipboard-is-local} function.
+  @see-class{gdk:clipboard}
+  @see-function{gdk:clipboard-is-local}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_is_local ()
-;;;
-;;; gboolean
-;;; gdk_clipboard_is_local (GdkClipboard *clipboard);
-;;;
-;;; Returns if the clipboard is local. A clipboard is considered local if it was
-;;; last claimed by the running application.
-;;;
-;;; Note that gdk_clipboard_get_content() may return NULL even on a local
-;;; clipboard. In this case the clipboard is empty.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; Returns :
-;;;     TRUE if the clipboard is local
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_is_local" clipboard-is-local) :boolean
+ #+liber-documentation
+ "@version{2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @return{@em{True} if the clipboard is local.}
+  @begin{short}
+    Returns if the clipboard is local.
+  @end{short}
+  A clipboard is considered local if it was last claimed by the running
+  application. Note that the @fun{gdk:clipboard-content} function may return
+  @code{nil} even on a local clipboard. In this case the clipboard is empty.
+  @see-class{gdk:clipboard}
+  @see-function{gdk:clipboard-content}"
   (clipboard (g:object clipboard)))
 
 (export 'clipboard-is-local)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_get_content ()                           Accessor
-;;;
-;;; GdkContentProvider *
-;;; gdk_clipboard_get_content (GdkClipboard *clipboard);
-;;;
-;;; Returns the GdkContentProvider currently set on clipboard . If the clipboard
-;;; is empty or its contents are not owned by the current process, NULL will be
-;;; returned.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; Returns :
-;;;     The content of a clipboard or NULL if the clipboard does not maintain
-;;;     any content.
+;;; gdk_clipboard_store_async ()
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_store_async ()
-;;;
-;;; void
-;;; gdk_clipboard_store_async (GdkClipboard *clipboard,
-;;;                            int io_priority,
-;;;                            GCancellable *cancellable,
-;;;                            GAsyncReadyCallback callback,
-;;;                            gpointer user_data);
-;;;
-;;; Asynchronously instructs the clipboard to store its contents remotely to
-;;; preserve them for later usage. If the clipboard is not local, this function
-;;; does nothing but report success.
-;;;
-;;; This function is called automatically when gtk_main() or GtkApplication
-;;; exit, so you likely don't need to call it.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; io_priority :
-;;;     the I/O priority of the request.
-;;;
-;;; cancellable :
-;;;     optional GCancellable object, NULL to ignore.
-;;;
-;;; callback :
-;;;     callback to call when the request is satisfied.
-;;;
-;;; user_data :
-;;;     the data to pass to callback function.
-;;; ----------------------------------------------------------------------------
+(cffi:defcfun ("gdk_clipboard_store_async" %clipboard-store-async) :void
+  (clipboard (g:object clipboard))
+  (priority :int)
+  (cancellable (g:object g:cancellable))
+  (func :pointer)
+  (data :pointer))
+
+(defun clipboard-store-async (clipboard priority cancellable func)
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[priority]{an integer with the I/O priority of the request}
+  @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
+    to ignore}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+    when the request is satisfied}
+  @begin{short}
+    Asynchronously instructs the clipboard to store its contents remotely to
+    preserve them for later usage.
+  @end{short}
+  If the clipboard is not local, this function does nothing but report success.
+
+  This function is called automatically when the @class{gtk:application} object
+  exit, so you likely do not need to call it.
+  @see-class{gdk:clipboard}
+  @see-class{g:cancellable}
+  @see-symbol{g:async-ready-callback}
+  @see-class{gtk:application}"
+  (let ((ptr (glib:allocate-stable-pointer func)))
+    (%clipboard-store-async clipboard
+                            priority
+                            cancellable
+                            (cffi:callback g:async-ready-callback)
+                            ptr)))
+
+(export 'clipboard-store-async)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_store_finish ()
-;;;
-;;; gboolean
-;;; gdk_clipboard_store_finish (GdkClipboard *clipboard,
-;;;                             GAsyncResult *result,
-;;;                             GError **error);
-;;;
-;;; Finishes an asynchronous clipboard store started with
-;;; gdk_clipboard_store_async().
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; result :
-;;;     a GAsyncResult
-;;;
-;;; error :
-;;;     a GError location to store the error occurring, or NULL to ignore.
-;;;
-;;; Returns :
-;;;     TRUE if storing was successful.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_clipoard_store_finish" %clipboard-store-finish) :boolean
+  (clipboard (g:object clipboard))
+  (result (g:object g:async-result))
+  (err :pointer))
+
+(defun clipboard-store-finish (clipboard result)
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[result]{a @class{g:async-result} instance}
+  @return{@em{True} if storing was successful.}
+  @begin{short}
+    Finishes an asynchronous clipboard store started with the
+    @fun{gdk:clipboard-store-async} function.
+  @end{short}
+  @see-class{gdk:clipboard}
+  @see-class{g:async-result}
+  @see-function{gdk:clipboard-store-async}"
+  (glib:with-ignore-g-error (err)
+    (%clipboard-store-finish clipboard result err)))
+
+(export 'clipboard-store-finish)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_read_async ()
@@ -393,222 +408,279 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_read_value_async ()
-;;;
-;;; void
-;;; gdk_clipboard_read_value_async (GdkClipboard *clipboard,
-;;;                                 GType type,
-;;;                                 int io_priority,
-;;;                                 GCancellable *cancellable,
-;;;                                 GAsyncReadyCallback callback,
-;;;                                 gpointer user_data);
-;;;
-;;; Asynchronously request the clipboard contents converted to the given type .
-;;; When the operation is finished callback will be called. You can then call
-;;; gdk_clipboard_read_value_finish() to get the resulting GValue.
-;;;
-;;; For local clipboard contents that are available in the given GType, the
-;;; value will be copied directly. Otherwise, GDK will try to use
-;;; gdk_content_deserialize_async() to convert the clipboard's data.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; type :
-;;;     a GType to read
-;;;
-;;; io_priority :
-;;;     the I/O priority of the request.
-;;;
-;;; cancellable :
-;;;     optional GCancellable object, NULL to ignore.
-;;;
-;;; callback :
-;;;     callback to call when the request is satisfied.
-;;;
-;;; user_data :
-;;;     the data to pass to callback function.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_clipboard_read_value_async" %clipboard-read-value-async)
+    :void
+  (clipboard (g:object clipboard))
+  (gtype g:type-t)
+  (priority :int)
+  (cancellable (g:object g:cancellable))
+  (func :pointer)
+  (data :pointer))
+
+(defun clipboard-read-value-async (clipboard gtype priority cancellable func)
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[gtype]{a @class{g:type-t} type to read}
+  @argument[priority]{an integer with the I/O priority of the request}
+  @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
+    to ignore}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+    when the request is satisfied}
+  @begin{short}
+    Asynchronously request the clipboard contents converted to the given
+    @arg{gtype}.
+  @end{short}
+  When the operation is finished the @arg{func} callback function will be
+  called. You can then call the @fun{gdk:clipboard-read-value-finish} function
+  to get the resulting value.
+
+  For local clipboard contents that are available in the given @arg{gtype}, the
+  value will be copied directly. Otherwise, GDK will try to use the
+  @fun{gdk:content-deserialize-async} function to convert the clipboard's data.
+  @see-class{gdk:clipboard}
+  @see-class{g:cancellable}
+  @see-symbol{g:async-ready-callback}
+  @see-function{gdk:clipboard-read-value-finish}
+  @see-function{gdk:content-deserialize-async}"
+  (let ((ptr (glib:allocate-stable-pointer func)))
+    (%clipboard-read-value-async clipboard
+                                 gtype
+                                 priority
+                                 cancellable
+                                 (cffi:callback g:async-ready-callback)
+                                 ptr)))
+
+(export 'clipboard-read-value-async)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_read_value_finish ()
-;;;
-;;; const GValue *
-;;; gdk_clipboard_read_value_finish (GdkClipboard *clipboard,
-;;;                                  GAsyncResult *result,
-;;;                                  GError **error);
-;;;
-;;; Finishes an asynchronous clipboard read started with
-;;; gdk_clipboard_read_value_async().
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; result :
-;;;     a GAsyncResult
-;;;
-;;; error :
-;;;     a GError location to store the error occurring, or NULL to ignore.
-;;;
-;;; Returns :
-;;;     a GValue containing the result.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_clipboard_read_value_finish" %clipboard-read-value-finish)
+    (:pointer (:struct g:value))
+  (clipboard (g:object clipboard))
+  (result (g:object g:async-result))
+  (err :pointer))
+
+(defun clipboard-read-value-finish (clipboard result)
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[result]{a @class{g:async-result} instance}
+  @return{A @symbol{g:value} instance which holds the value of the content of
+    @arg{clipboard}.}
+  @begin{short}
+    Finishes an asynchronous clipboard read started with the
+    @fun{gdk:clipboard-read-value-async} function.
+  @end{short}
+  @see-class{gdk:clipboard}
+  @see-class{g:async-result}
+  @see-function{gdk:clipboard-read-value-async}"
+  (glib:with-ignore-g-error (err)
+    (%clipboard-read-value-finish clipboard result err)))
+
+(export 'clipboard-read-value-finish)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_read_texture_async ()
-;;;
-;;; void
-;;; gdk_clipboard_read_texture_async (GdkClipboard *clipboard,
-;;;                                   GCancellable *cancellable,
-;;;                                   GAsyncReadyCallback callback,
-;;;                                   gpointer user_data);
-;;;
-;;; Asynchronously request the clipboard contents converted to a GdkPixbuf. When
-;;; the operation is finished callback will be called. You can then call
-;;; gdk_clipboard_read_texture_finish() to get the result.
-;;;
-;;; This is a simple wrapper around gdk_clipboard_read_value_async(). Use that
-;;; function or gdk_clipboard_read_async() directly if you need more control
-;;; over the operation.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; cancellable :
-;;;     optional GCancellable object, NULL to ignore.
-;;;
-;;; callback :
-;;;     callback to call when the request is satisfied.
-;;;
-;;; user_data :
-;;;     the data to pass to callback function.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_clipboard_read_texture_async"
+               %clipboard-read-texture-async) :void
+  (clipboard (g:object clipboard))
+  (cancellable (g:object g:cancellable))
+  (func :pointer)
+  (data :pointer))
+
+(defun clipboard-read-texture-async (clipboard cancellable func)
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
+    to ignore}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+    when the request is satisfied}
+  @begin{short}
+    Asynchronously request the clipboard contents converted to a
+    @class{gdk:pixbuf} object.
+  @end{short}
+  When the operation is finished the @arg{func} callback function will be
+  called. You can then call the @fun{gdk:clipboard-read-texture-finish}
+  function to get the result.
+
+  This is a simple wrapper around the @fun{gdk:clipboard-read-value-async}
+  function. Use that function directly if you need more control over the
+  operation.
+  @see-class{gdk:clipboard}
+  @see-class{g:cancellable}
+  @see-class{gdk:pixbuf}
+  @see-symbol{g:async-ready-callback}
+  @see-function{gdk:clipboard-read-texture-finish}"
+  (let ((ptr (glib:allocate-stable-pointer func)))
+    (%clipboard-read-texture-async clipboard
+                                   cancellable
+                                   (cffi:callback g:async-ready-callback)
+                                   ptr)))
+
+(export 'clipboard-read-texture-async)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_read_texture_finish ()
-;;;
-;;; GdkTexture *
-;;; gdk_clipboard_read_texture_finish (GdkClipboard *clipboard,
-;;;                                    GAsyncResult *result,
-;;;                                    GError **error);
-;;;
-;;; Finishes an asynchronous clipboard read started with
-;;; gdk_clipboard_read_texture_async().
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; result :
-;;;     a GAsyncResult
-;;;
-;;; error :
-;;;     a GError location to store the error occurring, or NULL to ignore.
-;;;
-;;; Returns :
-;;;     a new GdkTexture or NULL on error.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_clipoard_read_texture_finish"
+               %clipboard-read-texture-finish) (g:object texture)
+  (clipboard (g:object clipboard))
+  (result (g:object g:async-result))
+  (err :pointer))
+
+(defun clipboard-read-texture-finish (clipboard result)
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[result]{a @class{g:async-result} instance}
+  @return{A @class{gdk:texture} object which holds the value of the content of
+    @arg{clipboard}.}
+  @begin{short}
+    Finishes an asynchronous clipboard read started with the
+    @fun{gdk:clipboard-read-texture-async} function.
+  @end{short}
+  @see-class{gdk:clipboard}
+  @see-class{g:async-result}
+  @see-function{gdk:clipboard-read-texture-async}"
+  (glib:with-ignore-g-error (err)
+    (%clipboard-read-texture-finish clipboard result err)))
+
+(export 'clipboard-read-texture-finish)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_read_text_async ()
-;;;
-;;; void
-;;; gdk_clipboard_read_text_async (GdkClipboard *clipboard,
-;;;                                GCancellable *cancellable,
-;;;                                GAsyncReadyCallback callback,
-;;;                                gpointer user_data);
-;;;
-;;; Asynchronously request the clipboard contents converted to a string. When
-;;; the operation is finished callback will be called. You can then call
-;;; gdk_clipboard_read_text_finish() to get the result.
-;;;
-;;; This is a simple wrapper around gdk_clipboard_read_value_async(). Use that
-;;; function or gdk_clipboard_read_async() directly if you need more control
-;;; over the operation.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; cancellable :
-;;;     optional GCancellable object, NULL to ignore.
-;;;
-;;; callback :
-;;;     callback to call when the request is satisfied.
-;;;
-;;; user_data :
-;;;     the data to pass to callback function.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_clipboard_read_text_async" %clipboard-read-text-async) :void
+  (clipboard (g:object clipboard))
+  (cancellable (g:object g:cancellable))
+  (func :pointer)
+  (data :pointer))
+
+(defun clipboard-read-text-async (clipboard cancellable func)
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[cancellable]{an optional @class{g:cancellable} instance, @code{nil}
+    to ignore}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+    when the request is satisfied}
+  @begin{short}
+    Asynchronously request the clipboard contents converted to a string.
+  @end{short}
+  When the operation is finished the @arg{func} callback function will be
+  called. You can then call the @fun{gdk:clipboard-read-text-finish} function
+  to get the result.
+
+  This is a simple wrapper around the @fun{gdk:clipboard-read-value-async}
+  function. Use that function directly if you need more control over the
+  operation.
+  @see-class{gdk:clipboard}
+  @see-class{g:cancellable}
+  @see-symbol{g:async-ready-callback}
+  @see-function{gdk:clipboard-read-text-finish}"
+  (let ((ptr (glib:allocate-stable-pointer func)))
+    (%clipboard-read-text-async clipboard
+                                   cancellable
+                                   (cffi:callback g:async-ready-callback)
+                                   ptr)))
+
+(export 'clipboard-read-text-async)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_read_text_finish ()
-;;;
-;;; char *
-;;; gdk_clipboard_read_text_finish (GdkClipboard *clipboard,
-;;;                                 GAsyncResult *result,
-;;;                                 GError **error);
-;;;
-;;; Finishes an asynchronous clipboard read started with
-;;; gdk_clipboard_read_text_async().
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; result :
-;;;     a GAsyncResult
-;;;
-;;; error :
-;;;     a GError location to store the error occurring, or NULL to ignore.
-;;;
-;;; Returns :
-;;;     a new string or NULL on error.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gdk_clipoard_read_text_finish"
+               %clipboard-read-text-finish) :string
+  (clipboard (g:object clipboard))
+  (result (g:object g:async-result))
+  (err :pointer))
+
+(defun clipboard-read-text-finish (clipboard result)
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[result]{a @class{g:async-result} instance}
+  @return{A string which holds the value of the content of @arg{clipboard}.}
+  @begin{short}
+    Finishes an asynchronous clipboard read started with the
+    @fun{gdk:clipboard-read-text-async} function.
+  @end{short}
+  @see-class{gdk:clipboard}
+  @see-class{g:async-result}
+  @see-function{gdk:clipboard-read-text-async}"
+  (glib:with-ignore-g-error (err)
+    (%clipboard-read-text-finish clipboard result err)))
+
+(export 'clipboard-read-text-finish)
+
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_set_content ()                           Accessor
-;;;
-;;; gboolean
-;;; gdk_clipboard_set_content (GdkClipboard *clipboard,
-;;;                            GdkContentProvider *provider);
-;;;
-;;; Sets a new content provider on clipboard . The clipboard will claim the
-;;; GdkDisplay's resources and advertise these new contents to other
-;;; applications.
-;;;
-;;; In the rare case of a failure, this function will return FALSE. The
-;;; clipboard will then continue reporting its old contents and ignore
-;;; provider .
-;;;
-;;; If the contents are read by either an external application or the
-;;; clipboard's read functions, clipboard will select the best format to
-;;; transfer the contents and then request that format from provider .
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; provider :
-;;;     the new contents of clipboard or NULL to clear the clipboard.
-;;;
-;;; Returns :
-;;;     TRUE if setting the clipboard succeeded
+;;; gdk_clipboard_set_content
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_clipboard_set_content" clipboard-set-content) :boolean
+ #+liber-documentation
+ "@version{2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[content]{a new @class{gdk:content-provider} object or @code{nil}
+    to clear the clipboard}
+  @return{@em{True} if setting the clipboard succeeded.}
+  @begin{short}
+    Sets a new content provider on @arg{clipboard}.
+  @end{short}
+  The clipboard will claim the resources of the @class{gdk:display} object and
+  advertise these new contents to other applications.
+
+  In the rare case of a failure, this function will return @em{false}. The
+  clipboard will then continue reporting its old contents and ignore
+  @arg{provider}.
+
+  If the contents are read by either an external application or the read
+  functions of the clipboard, @arg{clipboard} will select the best format to
+  transfer the contents and then request that format from @arg{provider}.
+  @see-class{gdk:clipboard}
+  @see-class{gdk:display}
+  @see-class{gdk:content-provider}"
+  (clipboard (g:object clipboard))
+  (provider (g:object content-provider)))
+
+(export 'clipboard-set-content)
 
 ;;; ----------------------------------------------------------------------------
 ;;;gdk_clipboard_set ()
-;;;
-;;; void
-;;; gdk_clipboard_set (GdkClipboard *clipboard,
-;;;                    GType type,
-;;;                    ...);
-;;;
-;;; Sets the clipboard to contain the value collected from the given varargs.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; type :
-;;;     type of value to set
-;;;
-;;; ... :
-;;;     value contents conforming to type
 ;;; ----------------------------------------------------------------------------
+
+(defun clipboard-set (clipboard gtype value)
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[gtype]{a @class{g:type-t} type of value to set}
+  @argument[value]{a Lisp value to be set}
+  @begin{short}
+    Sets the clipboard to contain the given @arg{value}.
+  @end{short}
+  @begin[Note]{dictionary}
+    This function intializes a @symbol{g:value} instance  of the given
+    @arg{gtype}, stores @arg{value} in the @symbol{g:value} instance and calls
+    the @fun{gdk:clipboard-set-value} function.
+  @end{dictionary}
+  @see-class{gdk:clipboard}
+  @see-class{g:type-t}"
+  (cffi:with-foreign-object (gvalue '(:pointer (:struct g:value)))
+    (g:value-set gvalue value gtype)
+    (clipboard-set-value clipboard gvalue)))
+
+(export 'clipboard-set)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_set_valist ()
@@ -632,50 +704,57 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_set_value ()
-;;;
-;;; void
-;;; gdk_clipboard_set_value (GdkClipboard *clipboard,
-;;;                          const GValue *value);
-;;;
-;;; Sets the clipboard to contain the given value .
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; value :
-;;;     a GValue to set
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_clipboard_set_value" clipboard-set-value) :void
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipoboard]{a @class{gdk:clipboard} object}
+  @argument[gvalue]{a @symbol{g:value} instance}
+  @short{Sets the clipboard to contain the given @arg{gvalue}.}
+  @begin[Note]{dictionary}
+    This function is called from the @fun{gdk:clipboard-set} function to store
+    the @symbol{g:value} instance into the clipboard.
+  @end{dictionary}
+  @see-class{gdk:clipboard}
+  @see-symbol{g:value}
+  @see-function{gdk:clipboard-set}"
+  (clipboard (g:object clipboard))
+  (gvalue (:pointer (:struct g:value))))
+
+(export 'clipboard-set-value)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_set_text ()
-;;;
-;;; void
-;;; gdk_clipboard_set_text (GdkClipboard *clipboard,
-;;;                         const char *text);
-;;;
-;;; Puts the given text into the clipboard.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; text :
-;;;     Text to put into the clipboard
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_clipboard_set_text" clipboard-set-text) :void
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[text]{a string with the text to put into the clipboard}
+  @short{Puts the given @arg{text} into the clipboard.}
+  @see-class{gdk:clipboard}"
+  (clipboard (g:object clipboard))
+  (text :string))
+
+(export 'clipboard-set-text)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_clipboard_set_texture ()
-;;;
-;;; void
-;;; gdk_clipboard_set_texture (GdkClipboard *clipboard,
-;;;                            GdkTexture *texture);
-;;;
-;;; Puts the given texture into the clipboard.
-;;;
-;;; clipboard :
-;;;     a GdkClipboard
-;;;
-;;; texture :
-;;;     a GdkTexture to put into the clipboard
 ;;; ----------------------------------------------------------------------------
 
-;;; --- End of file gdk.clipboard.lisp -----------------------------------------
+(cffi:defcfun ("gdk_clipboard_set_texture" clipboard-set-texture) :void
+ #+liber-documentation
+ "@version{#2023-7-30}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
+  @argument[texture]{a @class{gdk:texture} object to put into the clipboard}
+  @short{Puts the given @arg{texture} into the clipboard.}
+  @see-class{gdk:clipboard}
+  @see-class{gdk:texture}"
+  (clipboard (g:object clipboard))
+  (texture (g:object texture)))
+
+(export 'clipboard-set-texture)
+
+;;; --- End of file gdk4.clipboard.lisp ----------------------------------------
