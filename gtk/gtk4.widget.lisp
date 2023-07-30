@@ -110,8 +110,8 @@
 ;;;
 ;;;     gtk_widget_in_destruction
 ;;;     gtk_widget_unparent
-;;;     gtk_widget_show
-;;;     gtk_widget_hide
+;;;     gtk_widget_show                                    deprecated since 4.10
+;;;     gtk_widget_hide                                    deprecated since 4.10
 ;;;     gtk_widget_map
 ;;;     gtk_widget_unmap
 ;;;     gtk_widget_realize
@@ -1998,11 +1998,11 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-visible)
       "Accessor"
       (documentation 'widget-visible 'function)
- "@version{#2021-12-15}
+ "@version{2023-7-26}
   @syntax[]{(gtk:widget-visible object) => setting}
   @syntax[]{(setf (gtk:widget-visible object) setting)}
   @argument[object]{a @class{gtk:widget} object}
-  @argument[setting]{a boolean whether the widget is visible}
+  @argument[setting]{a boolean whether @arg{widget} is visible}
   @begin{short}
     Accessor of the @slot[gtk:widget]{visible} slot of the @class{gtk:widget}
     class.
@@ -2012,12 +2012,10 @@ lambda (widget)    :run-last
   state. Note that this does not take into account whether the parent of the
   widget is also visible or the widget is obscured in any way.
 
-  This function simply calls the @fun{gtk:widget-show} or @fun{gtk:widget-hide}
-  functions but is nicer to use when the visibility of the widget depends on
-  some condition.
+  If you want to take into account whether the parent of the widget is also
+  marked as visible, use the @fun{gtk:widget-is-visible} function.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-show}
-  @see-function{gtk:widget-hide}")
+  @see-function{gtk:widget-is-visible}")
 
 ;;; --- widget-width-request ---------------------------------------------------
 
@@ -2090,7 +2088,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_show" widget-show) :void
  #+liber-documentation
- "@version{2022-12-4}
+ "@version{2023-7-26}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Flags a widget to be displayed.
@@ -2100,8 +2098,12 @@ lambda (widget)    :run-last
   itself, before it will appear onscreen. When a toplevel container is shown,
   it is immediately realized and mapped. Other shown widgets are realized and
   mapped when their toplevel container is realized and mapped.
+  @begin[Warning]{dictionary}
+    The @sym{gtk:widget-show} function is deprecated since 4.10. Use the
+    @fun{gtk:widget-visible} function instead.
+  @end{dictionary}
   @see-class{gtk:widget}
-  @see-function{gtk:widget-hide}"
+  @see-function{gtk:widget-visible}"
   (widget (g:object widget)))
 
 (export 'widget-show)
@@ -2112,14 +2114,19 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_hide" widget-hide) :void
  #+liber-documentation
- "@version{#2022-9-8}
+ "@version{2023-7-26}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Reverses the effects of the @fun{gtk:widget-show} function.
   @end{short}
   This is causing the widget to be hidden, so it is invisible to the user.
+  @begin[Warning]{dictionary}
+    The @sym{gtk:widget-hide} function is deprecated since 4.10. Use the
+    @fun{gtk:widget-visible} function instead.
+  @end{dictionary}
   @see-class{gtk:widget}
-  @see-function{gtk:widget-show}"
+  @see-function{gtk:widget-show}
+  @see-function{gtk:widget-visible}"
   (widget (g:object widget)))
 
 (export 'widget-hide)
@@ -2821,7 +2828,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_ancestor" widget-ancestor) (g:object widget)
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{2023-7-27}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[gtype]{an ancestor @class{g:type-t} type}
   @return{The @class{gtk:widget} ancestor widget, or @arg{nil} if not found.}
@@ -2829,15 +2836,13 @@ lambda (widget)    :run-last
     Gets the first ancestor of the widget with type @arg{gtype}.
   @end{short}
   For example, the call @code{(gtk:widget-ancestor widget \"GtkBbox\")} gets
-  the first @class{gtk:box} widget that is an ancestor of the widget. See note
-  about checking for a @class{gtk:window} toplevel in the docs for the
-  @fun{gtk:widget-toplevel} function.
+  the first @class{gtk:box} widget that is an ancestor of the widget.
 
   Note that unlike the @fun{gtk:widget-is-ancestor} function, the
   @sym{gtk:widget-ancestor} function considers the widget to be an ancestor of
   itself.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-toplevel}
+  @see-class{g:type-t}
   @see-function{gtk:widget-is-ancestor}"
   (widget (g:object widget))
   (gtype g:type-t))
@@ -3395,9 +3400,9 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_clipboard" widget-clipboard)
     (g:object gdk-clipboard)
  #+liber-documentation
- "@version{#2022-1-12}
+ "@version{2023-7-26}
   @argument[widget]{a @class{gtk:widget} object}
-  @return{The appropriate @class{gtk:clipboard} object.}
+  @return{The appropriate @class{gdk:clipboard} object.}
   @begin{short}
     Gets the clipboard object for the widget.
   @end{short}
@@ -3406,7 +3411,8 @@ lambda (widget)    :run-last
   always works, even when the widget is not realized yet.
   @see-class{gtk:widget}
   @see-class{gdk:clipboard}
-  @see-class{gdk:display}"
+  @see-class{gdk:display}
+  @see-function{gdk:display-clipboard}"
   (widget (g:object widget)))
 
 (export 'widget-clipboard)
@@ -4130,9 +4136,9 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_visible" widget-is-visible) :boolean
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{#2023-7-26}
   @argument[widget]{a @class{gtk:widget} object}
-  @return{@em{True} if the widget and all its parents are visible.}
+  @return{@em{True} if @arg{widget} and all its parents are visible.}
   @begin{short}
     Determines whether the widget and all its parents are marked as visible.
   @end{short}
