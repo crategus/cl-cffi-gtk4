@@ -245,6 +245,9 @@ Selector Widgets and Dialogs
   gtk.color-chooser-widget.lisp        GtkColorChooserWidget           GTK 4.6+
   gtk.color-chooser-dialog.lisp        GtkColorChooserDialog           GTK 4.6+
 
+  gtk.color-dialog.lisp                GtkColorDialog                  GTK 4.10
+  gtk.color-dialog-button.lisp         GtkColorDialogButton            GTK 4.10
+
   gtk.file-chooser.lisp                GtkFileChooser                  GTK 4.10
   gtk.file-chooser-native.lisp         GtkFileChooserNative            GTK 4.10
   gtk.file-chooser-dialog.lisp         GtkFileChooserDialog            GTK 4.0+
@@ -371,7 +374,7 @@ Keyboard shortcuts
 Data exchange, clipboards and Drag-and-Drop
 
   gtk.drag-source.lisp                 GtkDragSource                   GTK 4.10+
-  gtk.drag-icon.lisp                   GtkDragIcon                     GTK 4.0+
+  gtk.drag-icon.lisp                   GtkDragIcon                     GTK 4.10+
   gtk.drop-target.lisp                 GtkDropTarget                   GTK 4.0+
   gtk.drop-target-async.lisp           GtkDropTargetAsync              GTK 4.0+
   gtk.drop-controller-motion.lisp      GtkDropControllerMotion         GTK 4.0+

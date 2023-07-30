@@ -35,48 +35,60 @@
     ((:file "gdk4.package")
 
      ;; General
-     (:file "gdk4.enumerations")          ; Gdk enumerations
-     (:file "gdk4.rectangle")             ; GdkRectangle
-     (:file "gdk4.rgba")                  ; GdkRGBA
-     (:file "gdk4.keyval")                ; Key Values
+     (:file "gdk4.enumerations")
+     (:file "gdk4.rectangle")
+     (:file "gdk4.rgba")
+     (:file "gdk4.keyval")
 
      ;; Display, Seat, Device, Monitor
-     (:file "gdk4.display-manager")       ; GdkDisplayManager
-     (:file "gdk4.display")               ; GdkDisplay
-     (:file "gdk4.device")                ; GdkDevice
-     (:file "gdk4.device-pad")            ; GdkDevicePad
-     (:file "gdk4.monitor")               ; GdkMonitor
-     (:file "gdk4.seat")                  ; GdkSeat
+     (:file "gdk4.display-manager")
+     (:file "gdk4.display")
+     (:file "gdk4.device")
+     (:file "gdk4.device-pad")
+     (:file "gdk4.monitor")
+     (:file "gdk4.seat")
 
-     ;; Events
-     (:file "gdk4.event")                 ; GdkEvent
+     ;; Paintables, Textures
+     (:file "gdk4.paintable")
+     (:file "gdk4.texture")
 
-     ;; Interfaces
-     (:file "gdk4.paintable")             ; GdkPaintable
+     ;; Surfaces, Toplevels, Popups
+     (:file "gdk4.surface")
+     (:file "gdk4.toplevel-layout")
+     (:file "gdk4.toplevel")
+     (:file "gdk4.toplevel-size")
+     (:file "gdk4.popup")
+     (:file "gdk4.popup-layout")
 
-     (:file "gdk4.texture")               ; GdkTexture
-     (:file "gdk4.cursor")                ; GdkCursor
-     (:file "gdk4.surface")               ; GdkSurface
-     (:file "gdk4.toplevel-layout")       ; GdkToplevelLayout
-     (:file "gdk4.toplevel")              ; GdkToplevel
-     (:file "gdk4.toplevel-size")         ; GdkToplevelSize
-     (:file "gdk4.popup")                 ; GdkPopup
-     (:file "gdk4.popup-layout")          ; GdkPopupLayout
-     (:file "gdk4.frame-timings")         ; GdkFrameTimings
-     (:file "gdk4.frame-clock")           ; GdkFrameClock
-     (:file "gdk4.draw-context")          ; GdkDrawContext
-     (:file "gdk4.gl-context")            ; GdkGLContext
-     (:file "gdk4.vulkan-context")        ; GdkVulkanContext
-     (:file "gdk4.cairo-context")         ; Functions to support using Cairo.
-     (:file "gdk4.clipboard")             ; GdkClipboard
-     (:file "gdk4.drag-and-drop")         ; GdkDrag, GdkDrop
-     (:file "gdk4.content-formats")       ; GdkContentFormats
-     (:file "gdk4.content-provider")      ; GdkContentProvider
-     (:file "gdk4.content-serializer")    ; GdkContentSerializer
-     (:file "gdk4.content-deserializer")  ; GdkContentDeserializer
-     (:file "gdk4.pixbuf-interaction")    ; GdkPixbuf interaction
-     (:file "gdk4.cairo-interaction")     ; Cairo interaction
-     (:file "gdk4.app-launch-context")    ; GdkAppLaunchContext
+     ;; Draw Contexts
+     (:file "gdk4.draw-context")
+     (:file "gdk4.gl-context")
+     (:file "gdk4.vulkan-context")
+     (:file "gdk4.cairo-context")
+
+     ;; Clipboard, Drag and Drop
+     (:file "gdk4.content-formats")
+     (:file "gdk4.content-provider")
+     (:file "gdk4.content-serializer")
+     (:file "gdk4.content-deserializer")
+     (:file "gdk4.clipboard")
+     (:file "gdk4.drag")
+     (:file "gdk4.drop")
+     (:file "gdk4.drag-surface")
+
+     ;; Applicationn launching
+     (:file "gdk4.app-launch-context")
+
+     ;; Miscellaneous
+     (:file "gdk4.event")
+     (:file "gdk4.cursor")
+     (:file "gdk4.frame-timings")
+     (:file "gdk4.frame-clock")
+
+     ;; Pixbuf, Pango, Cairo, Backends interaction
+     (:file "gdk4.pixbuf-interaction")
+     (:file "gdk4.pango-interaction")
+     (:file "gdk4.cairo-interaction")
      (:file "gdk4.x11-interaction")
      (:file "gdk4.wayland-interaction")
     ))
@@ -267,6 +279,8 @@
      (:file "gtk4.color-button")          ; GtkColorButton
      (:file "gtk4.color-chooser-widget")  ; GtkColorChooserWidget
      (:file "gtk4.color-chooser-dialog")  ; GtkColorChooserDialog
+     (:file "gtk4.color-dialog" :if-feature :gtk-4-10)
+     (:file "gtk4.color-dialog-button" :if-feature :gtk-4-10)
 
      (:file "gtk4.file-chooser")
      (:file "gtk4.file-chooser-native")
@@ -415,8 +429,48 @@
   ((:module test
     :serial nil
     :components
-    (;; GTK tests
-     (:file "rtest-gtk4")
+    ((:file "rtest-gtk4")
+
+     ;; GDK General
+     (:file "rtest-gdk4-enumerations")
+     (:file "rtest-gdk4-rectangle")
+     (:file "rtest-gdk4-rgba")
+     (:file "rtest-gdk4-keyval")
+
+     ;; Displays, Devices, Monitors, Seats
+     (:file "rtest-gdk4-display-manager")
+     (:file "rtest-gdk4-display")
+     (:file "rtest-gdk4-device")
+     (:file "rtest-gdk4-device-pad")
+     (:file "rtest-gdk4-monitor")
+     (:file "rtest-gdk4-seat")
+
+     ;; Paintables
+     (:file "rtest-gdk4-paintable")
+     (:file "rtest-gdk4-texture")
+
+     ;; Surfaces, Toplevels, Popups
+     (:file "rtest-gdk4-toplevel")
+     (:file "rtest-gdk4-popup")
+
+     ;; Daw contexts
+     (:file "rtest-gdk4-cairo-context")
+
+     ;; Clipboard, Drag and Drop
+     (:file "rtest-gdk4-clipboard")
+     (:file "rtest-gdk4-drag")
+     (:file "rtest-gdk4-drop")
+     (:file "rtest-gdk4-drag-surface")
+
+     ;; Application launching
+     (:file "rtest-gdk4-app-launch-context")
+
+     ;; Miscellaneous
+     (:file "rtest-gdk4-event")
+
+     ;; Pixbuf, Pango, Cairo, Backends interaction
+
+     ;; GSK
 
       ;; GListModel support
 ;      (:file "gtk4.expression")             ; GtkExpression
@@ -591,11 +645,15 @@
 ;     (:file "rtest-gtk4-color-chooser-widget")    ; GtkColorChooserWidget
 ;     (:file "rtest-gtk4-color-chooser-dialog")    ; GtkColorChooserDialog
 
+     (:file "rtest-gtk4-color-dialog"         :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-color-dialog-button"  :if-feature :gtk-4-10)
+
      (:file "rtest-gtk4-file-chooser")
      (:file "rtest-gtk4-file-chooser-native")
      (:file "rtest-gtk4-file-chooser-dialog")
      (:file "rtest-gtk4-file-chooser-widget")
-     (:file "rtest-gtk4-file-dialog" :if-feature :gtk-4-10)
+
+     (:file "rtest-gtk4-file-dialog"          :if-feature :gtk-4-10)
 
 ;    (:file "gtk4.font-chooser")                  ; GtkFontChooser
 ;    (:file "gtk4.font-button")                   ; GtkFontButton
@@ -705,29 +763,6 @@
      ;; Application support
      (:file "rtest-gtk4-application")             ; GtkApplication
      (:file "rtest-gtk4-application-window")      ; GtkApplicationWindow
-
-     ;; GDK General
-     (:file "rtest-gdk4-enumerations")
-     (:file "rtest-gdk4-rectangle")
-     (:file "rtest-gdk4-rgba")
-     (:file "rtest-gdk4-keyval")
-
-     ;; Displays, Devices, Monitors, Seats
-     (:file "rtest-gdk4-display-manager")
-     (:file "rtest-gdk4-display")
-     (:file "rtest-gdk4-device")
-     (:file "rtest-gdk4-device-pad")
-     (:file "rtest-gdk4-monitor")
-     (:file "rtest-gdk4-seat")
-
-     ;; Events
-     (:file "rtest-gdk4-event")
-
-     (:file "rtest-gdk4-app-launch-context")
-     (:file "rtest-gdk4-cairo-context")
-     (:file "rtest-gdk4-texture")
-
-     ;; GSK
 ))))
 
-;;; --- cl-cffi-gtk4.asd -------------------------------------------------------
+;;; --- End of file cl-cffi-gtk4.asd -------------------------------------------

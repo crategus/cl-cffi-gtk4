@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.package.lisp
+;;; gdk4.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
 ;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
@@ -345,168 +345,78 @@
       @about-function{seat-tools}
     @end{subsection}
   @end{section}
-  @begin[Events]{section}
-      Functions for handling events from the window system.
-      @about-variable{+gdk-current-time+}
-      @about-variable{+gdk-priority-events+}
-      @about-variable{+gdk-priority-redraw+}
-      @about-variable{+gdk-event-propagate+}
-      @about-variable{+gdk-event-stop+}
-      @about-variable{+gdk-buton-primary+}
-      @about-variable{+gdk-button-middle+}
-      @about-variable{+gdk-button-secondary+}
-      @about-symbol{event-type}
-      @about-symbol{keymap-key}
-      @about-symbol{key-match}
-      @about-symbol{touchpad-gesture-phase}
-      @about-symbol{scroll-direction}
-      @about-symbol{crossing-mode}
-      @about-symbol{notify-type}
-      @about-class{event-sequence}
-      @about-class{event}
-      @about-class{button-event}
-      @about-class{scroll-event}
-      @about-class{motion-event}
-      @about-class{key-event}
-      @about-class{focus-event}
-      @about-class{crossing-event}
-      @about-class{grab-broken-event}
-      @about-class{delete-event}
-      @about-class{dnd-event}
-      @about-class{touch-event}
-      @about-class{touchpad-event}
-      @about-class{pad-event}
-      @about-class{proximity-event}
-      @about-function{event-ref}
-      @about-function{event-unref}
-      @about-function{event-event-type}
-      @about-function{event-surface}
-      @about-function{event-device}
-      @about-function{event-device-tool}
-      @about-function{event-time}
-      @about-function{event-display}
-      @about-function{event-seat}
-      @about-function{event-event-sequence}
-      @about-function{event-modifier-state}
-      @about-function{event-position}
-      @about-function{event-axes}
-      @about-function{event-axis}
-      @about-function{event-history}
-      @about-function{event-pointer-emulated}
-      @about-function{event-triggers-context-menu}
-      @about-function{button-event-button}
-      @about-function{scroll-event-direction}
-      @about-function{scroll-event-deltas}
-      @about-function{scroll-event-is-stop}
-      @about-function{key-event-keyval}
-      @about-function{key-event-keycode}
-      @about-function{key-event-consumed-modifiers}
-      @about-function{key-event-layout}
-      @about-function{key-event-level}
-      @about-function{key-event-is-modifier}
-      @about-function{key-event-matches}
-      @about-function{key-event-match}
-      @about-function{focus-event-in}
-      @about-function{touch-event-emulating-pointer}
-      @about-function{crossing-event-mode}
-      @about-function{crossing-event-detail}
-      @about-function{crossing-event-focus}
-      @about-function{grab-broken-event-grab-surface}
-      @about-function{grab-broken-event-implicit}
-      @about-function{dnd-event-drop}
-      @about-function{touchpad-event-gesture-phase}
-      @about-function{touchpad-event-n-fingers}
-      @about-function{touchpad-event-deltas}
-      @about-function{touchpad-event-pinch-angle-delta}
-      @about-function{touchpad-event-pinch-scale}
-      @about-function{pad-event-axis-value}
-      @about-function{pad-event-button}
-      @about-function{pad-event-group-mode}
-      @about-function{events-angle}
-      @about-function{events-center}
-      @about-function{events-distance}
+  @begin[Paintables]{section}
+    @begin[GdkPaintable]{subsection}
+      An interface for a paintable region.
+      @about-symbol{paintable-flags}
+      @about-class{snapshot}
+      @about-class{paintable}
+      @about-function{paintable-current-image}
+      @about-function{paintable-snapshot}
+      @about-function{paintable-flags}
+      @about-function{paintable-intrinsic-width}
+      @about-function{paintable-intrinsic-height}
+      @about-function{paintable-intrinsic-aspect-ratio}
+      @about-function{paintable-compute-concrete-size}
+      @about-function{paintable-invalidate-contents}
+      @about-function{paintable-invalidate-size}
+     @about-function{paintable-new-empty}
+    @end{subsection}
+    @begin[GdkTexture]{subsection}
+      Pixel data.
+      @about-symbol{memory-default}
+      @about-symbol{memory-format}
+      @about-class{texture}
+      @about-generic{texture-height}
+      @about-generic{texture-width}
+      @about-function{texture-new-for-pixbuf}
+      @about-function{texture-new-from-resource}
+      @about-function{texture-new-from-file}
+      @about-function{texture-new-from-filename}
+      @about-function{texture-new-from-bytes}
+      @about-function{texture-download}
+      @about-function{texture-save-to-png}
+      @about-function{texture-save-to-png-bytes}
+      @about-function{texture-save-to-tiff}
+      @about-function{texture-save-to-tiff-bytes}
+      @about-function{texture-format}
+      @about-class{memory-texture}
+      @about-function{memory-texture-new}
+      @about-class{gl-texture}
+      @about-function{gl-texture-new}
+      @about-function{gl-texture-release}
+    @end{subsection}
   @end{section}
-  @begin[GdkTexture]{section}
-    Pixel data.
-    @about-symbol{memory-default}
-    @about-symbol{memory-format}
-    @about-class{texture}
-    @about-generic{texture-height}
-    @about-generic{texture-width}
-    @about-function{texture-new-for-pixbuf}
-    @about-function{texture-new-from-resource}
-    @about-function{texture-new-from-file}
-    @about-function{texture-new-from-filename}
-    @about-function{texture-new-from-bytes}
-    @about-function{texture-download}
-    @about-function{texture-save-to-png}
-    @about-function{texture-save-to-png-bytes}
-    @about-function{texture-save-to-tiff}
-    @about-function{texture-save-to-tiff-bytes}
-    @about-function{texture-format}
-    @about-class{memory-texture}
-    @about-function{memory-texture-new}
-    @about-class{gl-texture}
-    @about-function{gl-texture-new}
-    @about-function{gl-texture-release}
-  @end{section}
-  @begin[GdkPaintable]{section}
-    An interface for a paintable region.
-    @about-symbol{paintable-flags}
-    @about-class{snapshot}
-    @about-class{paintable}
-    @about-function{paintable-current-image}
-    @about-function{paintable-snapshot}
-    @about-function{paintable-flags}
-    @about-function{paintable-intrinsic-width}
-    @about-function{paintable-intrinsic-height}
-    @about-function{paintable-intrinsic-aspect-ratio}
-    @about-function{paintable-compute-concrete-size}
-    @about-function{paintable-invalidate-contents}
-    @about-function{paintable-invalidate-size}
-    @about-function{paintable-new-empty}
-  @end{section}
-  @begin[Cursors]{section}
-    Named and texture cursors.
-    @about-class{cursor}
-    @about-generic{cursor-fallback}
-    @about-generic{cursor-hotspot-x}
-    @about-generic{cursor-hotspot-y}
-    @about-generic{cursor-name}
-    @about-generic{cursor-texture}
-    @about-function{cursor-new-from-texture}
-    @about-function{cursor-new-from-name}
-  @end{section}
-  @begin[Surfaces]{section}
-    Onscreen display areas in the target window system.
-    @about-class{surface}
-    @about-generic{surface-cursor}
-    @about-generic{surface-display}
-    @about-generic{surface-frame-clock}
-    @about-generic{surface-height}
-    @about-generic{surface-mapped}
-    @about-generic{surface-scale-factor}
-    @about-generic{surface-width}
-    @about-function{surface-new-toplevel}
-    @about-function{surface-new-popup}
-    @about-function{surface-destroy}
-    @about-function{surface-is-destroyed}
-    @about-function{surface-hide}
-    @about-function{surface-translate-coordinates}
-    @about-function{surface-beep}
-    @about-function{surface-scale}
-    @about-function{surface-set-opaque-region}
-    @about-function{surface-create-gl-context}
-    @about-function{surface-create-vulkan-context}
-    @about-function{surface-create-cairo-context}
-    @about-function{surface-create-similar-surface}
-    @about-function{surface-queue-render}
-    @about-function{surface-request-layout}
-    @about-function{surface-set-input-region}
-    @about-function{surface-device-position}
-    @about-function{surface-device-cursor}
-  @end{section}
-  @begin[Toplevels]{section}
+  @begin[Surfaces, Toplevels, Popups]{section}
+    @begin[Surfaces]{subsection}
+      Onscreen display areas in the target window system.
+      @about-class{surface}
+      @about-generic{surface-cursor}
+      @about-generic{surface-display}
+      @about-generic{surface-frame-clock}
+      @about-generic{surface-height}
+      @about-generic{surface-mapped}
+      @about-generic{surface-scale-factor}
+      @about-generic{surface-width}
+      @about-function{surface-new-toplevel}
+      @about-function{surface-new-popup}
+      @about-function{surface-destroy}
+      @about-function{surface-is-destroyed}
+      @about-function{surface-hide}
+      @about-function{surface-translate-coordinates}
+      @about-function{surface-beep}
+      @about-function{surface-scale}
+      @about-function{surface-set-opaque-region}
+      @about-function{surface-create-gl-context}
+      @about-function{surface-create-vulkan-context}
+      @about-function{surface-create-cairo-context}
+      @about-function{surface-create-similar-surface}
+      @about-function{surface-queue-render}
+      @about-function{surface-request-layout}
+      @about-function{surface-set-input-region}
+      @about-function{surface-device-position}
+      @about-function{surface-device-cursor}
+    @end{subsection}
     @begin[GdkToplevelSize]{subsection}
       Information for computing toplevel size.
       @about-symbol{toplevel-size}
@@ -557,8 +467,6 @@
       @about-function{toplevel-begin-move}
       @about-function{toplevel-titlebar-gesture}
     @end{subsection}
-  @end{section}
-  @begin[Popups]{section}
     @begin[GdkPopupLayout]{subsection}
       Information for presenting popups.
       @about-symbol{anchor-hints}
@@ -584,35 +492,6 @@
       @about-function{popup-rect-anchor}
       @about-function{popup-position-x}
       @about-function{popup-position-y}
-    @end{subsection}
-  @end{section}
-  @begin[Frame clock and frame timings]{section}
-    @begin[GdkFrameTimings]{subsection}
-      Object holding timing information for a single frame.
-      @about-class{frame-timings}
-      @about-function{frame-timings-ref}
-      @about-function{frame-timings-unref}
-      @about-function{frame-timings-frame-counter}
-      @about-function{frame-timings-complete}
-      @about-function{frame-timings-frame-time}
-      @about-function{frame-timings-presentation-time}
-      @about-function{frame-timings-refresh-interval}
-      @about-function{frame-timings-predicted-presentation-time}
-    @end{subsection}
-    @begin[GdkFrameClock]{subsection}
-      Synchronizes painting to a surface.
-      @about-symbol{frame-clock-phase}
-      @about-class{frame-clock}
-      @about-function{frame-clock-frame-time}
-      @about-function{frame-clock-request-phase}
-      @about-function{frame-clock-begin-updating}
-      @about-function{frame-clock-end-updating}
-      @about-function{frame-clock-frame-counter}
-      @about-function{frame-clock-history-start}
-      @about-function{frame-clock-timings}
-      @about-function{frame-clock-current-timings}
-      @about-function{frame-clock-refresh-info}
-      @about-function{frame-clock-fps}
     @end{subsection}
   @end{section}
   @begin[Draw contexts]{section}
@@ -669,63 +548,7 @@
       @about-function{cairo-context-cairo-create}
     @end{subsection}
   @end{section}
-  @begin[Clipboards]{section}
-    Share data between applications for Copy-and-Paste.
-    @about-class{clipboard}
-    @about-generic{clipboard-content}
-    @about-generic{clipboard-display}
-    @about-generic{clipboard-formats}
-    @about-generic{clipboard-local}
-    @about-function{clipboard-is-local}
-    @about-function{clipboard-store-async}
-    @about-function{clipboard-store-finish}
-    @about-function{clipboard-read-async}
-    @about-function{clipboard-read-finish}
-    @about-function{clipboard-read-value-async}
-    @about-function{clipboard-read-value-finish}
-    @about-function{clipboard-read-texture-async}
-    @about-function{clipboard-read-texture-finish}
-    @about-function{clipboard-read-text-async}
-    @about-function{clipboard-read-text-finish}
-    @about-function{clipboard-set}
-    @about-function{clipboard-set-valist}
-    @about-function{clipboard-set-value}
-    @about-function{clipboard-set-text}
-    @about-function{clipboard-set-texture}
-  @end{section}
-  @begin[Drag And Drop]{section}
-    Functions for controlling drag and drop handling.
-    @about-symbol{drag-cancel-reason}
-    @about-symbol{drag-action}
-    @about-class{drag-surface}
-    @about-class{drag}
-    @about-generic{drag-actions}
-    @about-generic{drag-content}
-    @about-generic{drag-device}
-    @about-generic{drag-display}
-    @about-generic{drag-formats}
-    @about-generic{drag-selected-action}
-    @about-generic{drag-surface}
-    @about-function{drag-drop-done}
-    @about-function{drag-begin}
-    @about-function{drag-drag-surface}
-    @about-function{drag-set-hotspot}
-    @about-function{drag-action-is-unique}
-    @about-function{drag-surface-present}
-    @about-class{drop}
-    @about-generic{drop-actions}
-    @about-generic{drop-device}
-    @about-generic{drop-drag}
-    @about-generic{drop-formats}
-    @about-generic{drop-surface}
-    @about-function{drop-status}
-    @about-function{drop-finish}
-    @about-function{drop-read-async}
-    @about-function{drop-read-finish}
-    @about-function{drop-read-value-async}
-    @about-function{drop-read-value-finish}
-  @end{section}
-  @begin[Content Provider, Serializer, and Deserializer]{section}
+  @begin[Clipboard, Drag and Drop]{section}
     @begin[Content Formats]{subsection}
       Advertising and negotiating of content exchange formats.
       @about-class{content-formats}
@@ -811,6 +634,199 @@
       @about-function{content-deserialize-async}
       @about-function{content-deserialize-finish}
     @end{subsection}
+    @begin[Clipboards]{subsection}
+      Share data between applications for Copy-and-Paste.
+      @about-class{clipboard}
+      @about-generic{clipboard-content}
+      @about-generic{clipboard-display}
+      @about-generic{clipboard-formats}
+      @about-generic{clipboard-local}
+      @about-function{clipboard-is-local}
+      @about-function{clipboard-store-async}
+      @about-function{clipboard-store-finish}
+      @about-function{clipboard-read-async}
+      @about-function{clipboard-read-finish}
+      @about-function{clipboard-read-value-async}
+      @about-function{clipboard-read-value-finish}
+      @about-function{clipboard-read-texture-async}
+      @about-function{clipboard-read-texture-finish}
+      @about-function{clipboard-read-text-async}
+      @about-function{clipboard-read-text-finish}
+      @about-function{clipboard-set}
+      @about-function{clipboard-set-valist}
+      @about-function{clipboard-set-value}
+      @about-function{clipboard-set-text}
+      @about-function{clipboard-set-texture}
+    @end{subsection}
+    @begin[GdkDrag]{subsection}
+      Functions for controlling drag and drop handling.
+      @about-symbol{drag-cancel-reason}
+      @about-symbol{drag-action}
+      @about-class{drag}
+      @about-generic{drag-actions}
+      @about-generic{drag-content}
+      @about-generic{drag-device}
+      @about-generic{drag-display}
+      @about-generic{drag-formats}
+      @about-generic{drag-selected-action}
+      @about-generic{drag-surface}
+      @about-function{drag-drop-done}
+      @about-function{drag-begin}
+      @about-function{drag-drag-surface}
+      @about-function{drag-set-hotspot}
+      @about-function{drag-action-is-unique}
+    @end{subsection}
+    @begin[GdkDrop]{subsection}
+      Functions for controlling drag and drop handling.
+      @about-class{drop}
+      @about-generic{drop-actions}
+      @about-generic{drop-device}
+      @about-generic{drop-drag}
+      @about-generic{drop-formats}
+      @about-generic{drop-surface}
+      @about-function{drop-status}
+      @about-function{drop-finish}
+      @about-function{drop-read-async}
+      @about-function{drop-read-finish}
+      @about-function{drop-read-value-async}
+      @about-function{drop-read-value-finish}
+    @end{subsection}
+    @begin[GdkDragSurface]{subsection}
+      @about-class{drag-surface}
+      @about-function{drag-surface-present}
+    @end{subsection}
+  @end{section}
+  @begin[Application launching]{section}
+    @begin[GdkAppLaunchContext]{subsection}
+      Startup notification for applications
+      @about-class{app-launch-context}
+      @about-generic{app-launch-context-display}
+      @about-function{app-launch-context-set-desktop}
+      @about-function{app-launch-context-set-timestamp}
+      @about-function{app-launch-context-set-icon}
+      @about-function{app-launch-context-set-icon-name}
+    @end{subsection}
+  @end{section}
+  @begin[Miscellaneous]{section}
+    @begin[Events]{subsection}
+      Functions for handling events from the window system.
+      @about-variable{+gdk-current-time+}
+      @about-variable{+gdk-priority-events+}
+      @about-variable{+gdk-priority-redraw+}
+      @about-variable{+gdk-event-propagate+}
+      @about-variable{+gdk-event-stop+}
+      @about-variable{+gdk-buton-primary+}
+      @about-variable{+gdk-button-middle+}
+      @about-variable{+gdk-button-secondary+}
+      @about-symbol{event-type}
+      @about-symbol{keymap-key}
+      @about-symbol{key-match}
+      @about-symbol{touchpad-gesture-phase}
+      @about-symbol{scroll-direction}
+      @about-symbol{crossing-mode}
+      @about-symbol{notify-type}
+      @about-class{event-sequence}
+      @about-class{event}
+      @about-class{button-event}
+      @about-class{scroll-event}
+      @about-class{motion-event}
+      @about-class{key-event}
+      @about-class{focus-event}
+      @about-class{crossing-event}
+      @about-class{grab-broken-event}
+      @about-class{delete-event}
+      @about-class{dnd-event}
+      @about-class{touch-event}
+      @about-class{touchpad-event}
+      @about-class{pad-event}
+      @about-class{proximity-event}
+      @about-function{event-ref}
+      @about-function{event-unref}
+      @about-function{event-event-type}
+      @about-function{event-surface}
+      @about-function{event-device}
+      @about-function{event-device-tool}
+      @about-function{event-time}
+      @about-function{event-display}
+      @about-function{event-seat}
+      @about-function{event-event-sequence}
+      @about-function{event-modifier-state}
+      @about-function{event-position}
+      @about-function{event-axes}
+      @about-function{event-axis}
+      @about-function{event-history}
+      @about-function{event-pointer-emulated}
+      @about-function{event-triggers-context-menu}
+      @about-function{button-event-button}
+      @about-function{scroll-event-direction}
+      @about-function{scroll-event-deltas}
+      @about-function{scroll-event-is-stop}
+      @about-function{key-event-keyval}
+      @about-function{key-event-keycode}
+      @about-function{key-event-consumed-modifiers}
+      @about-function{key-event-layout}
+      @about-function{key-event-level}
+      @about-function{key-event-is-modifier}
+      @about-function{key-event-matches}
+      @about-function{key-event-match}
+      @about-function{focus-event-in}
+      @about-function{touch-event-emulating-pointer}
+      @about-function{crossing-event-mode}
+      @about-function{crossing-event-detail}
+      @about-function{crossing-event-focus}
+      @about-function{grab-broken-event-grab-surface}
+      @about-function{grab-broken-event-implicit}
+      @about-function{dnd-event-drop}
+      @about-function{touchpad-event-gesture-phase}
+      @about-function{touchpad-event-n-fingers}
+      @about-function{touchpad-event-deltas}
+      @about-function{touchpad-event-pinch-angle-delta}
+      @about-function{touchpad-event-pinch-scale}
+      @about-function{pad-event-axis-value}
+      @about-function{pad-event-button}
+      @about-function{pad-event-group-mode}
+      @about-function{events-angle}
+      @about-function{events-center}
+      @about-function{events-distance}
+    @end{subsection}
+    @begin[Cursors]{subsection}
+      Named and texture cursors.
+      @about-class{cursor}
+      @about-generic{cursor-fallback}
+      @about-generic{cursor-hotspot-x}
+      @about-generic{cursor-hotspot-y}
+      @about-generic{cursor-name}
+      @about-generic{cursor-texture}
+      @about-function{cursor-new-from-texture}
+      @about-function{cursor-new-from-name}
+    @end{subsection}
+    @begin[GdkFrameTimings]{subsection}
+      Object holding timing information for a single frame.
+      @about-class{frame-timings}
+      @about-function{frame-timings-ref}
+      @about-function{frame-timings-unref}
+      @about-function{frame-timings-frame-counter}
+      @about-function{frame-timings-complete}
+      @about-function{frame-timings-frame-time}
+      @about-function{frame-timings-presentation-time}
+      @about-function{frame-timings-refresh-interval}
+      @about-function{frame-timings-predicted-presentation-time}
+    @end{subsection}
+    @begin[GdkFrameClock]{subsection}
+      Synchronizes painting to a surface.
+      @about-symbol{frame-clock-phase}
+      @about-class{frame-clock}
+      @about-function{frame-clock-frame-time}
+      @about-function{frame-clock-request-phase}
+      @about-function{frame-clock-begin-updating}
+      @about-function{frame-clock-end-updating}
+      @about-function{frame-clock-frame-counter}
+      @about-function{frame-clock-history-start}
+      @about-function{frame-clock-timings}
+      @about-function{frame-clock-current-timings}
+      @about-function{frame-clock-refresh-info}
+      @about-function{frame-clock-fps}
+    @end{subsection}
   @end{section}
   @begin[Pixbuf, Pango, and Backends interaction]{section}
     @begin[GdkPixbuf Interaction]{subsection}
@@ -863,16 +879,6 @@
     @begin[Wayland Interaction]{subsection}
       Wayland backend-specific functions.
     @end{subsection}
-  @end{section}
-  @begin[Application launching]{section}
-    Startup notification for applications
-    @about-class{app-launch-context}
-    @about-generic{app-launch-context-display}
-    @about-function{app-launch-context-set-desktop}
-    @about-function{app-launch-context-set-timestamp}
-    @about-function{app-launch-context-set-icon}
-    @about-function{app-launch-context-set-icon-name}
-  @end{section}
-  ")
+  @end{section}")
 
-;;; --- End of file gdk.package.lisp -------------------------------------------
+;;; --- End of file gdk4.package.lisp ------------------------------------------

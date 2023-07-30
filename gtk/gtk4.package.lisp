@@ -2460,6 +2460,21 @@
       @about-generic{color-chooser-dialog-show-editor}
       @about-function{color-chooser-dialog-new}
     @end{subsection}
+    @begin[GtkColorDialog]{subsection}
+      @about-class{color-dialog}
+      @about-generic{color-dialog-modal}
+      @about-generic{color-dialog-title}
+      @about-generic{color-dialog-with-alpha}
+      @about-function{color-dialog-new}
+      @about-function{color-dialog-choose-rgba}
+      @about-function{color-dialog-choose-rgba-finish}
+    @end{subsection}
+    @begin[GtkColorDialogButton]{subsection}
+      @about-class{color-dialog-button}
+      @about-generic{color-dialog-button-dialog}
+      @about-generic{color-dialog-button-rgba}
+      @about-function{color-dialog-button-new}
+    @end{subsection}
     @begin[GtkFileChooser]{subsection}
       File chooser interface used by GtkFileChooserWidget and
       GtkFileChooserDialog.
@@ -3560,7 +3575,7 @@
       @about-function{shortcut-controller-remove-shortcut}
     @end{subsection}
   @end{section}
-  @begin[Data exchange, Clipboards and Drag-and-Drop]{section}
+  @begin[Data exchange, Clipboards, Drag and Drop]{section}
     @begin[GtkDragSource]{subsection}
       Event controller to initiate DND operations.
       @about-class{drag-source}
@@ -3576,7 +3591,7 @@
       A toplevel to use as drag icon.
       @about-class{drag-icon}
       @about-generic{drag-icon-child}
-      @about-function{drag-icon-get-for-drag}
+      @about-function{drag-icon-for-drag}
       @about-function{drag-icon-set-from-paintable}
       @about-function{drag-icon-create-widget-for-value}
     @end{subsection}
