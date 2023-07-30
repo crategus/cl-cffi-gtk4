@@ -80,15 +80,6 @@
 
 (in-package :gtk)
 
-;; TODO: Search a better place to define the boxed type GError. We need
-;; the boxed type for Lisp callback functions which handles the "parsing-error"
-;; signal.
-
-(glib:define-g-boxed-opaque g-error "GError"
-  :alloc (error "GError cannot be created from the Lisp side."))
-
-(export 'g-error)
-
 ;;; ----------------------------------------------------------------------------
 ;;; GtkCssLocation
 ;;; ----------------------------------------------------------------------------
