@@ -547,7 +547,7 @@
   @see-slot{gtk:stack-transition-type}
   @see-slot{gtk:stack-vhomogeneous}
   @see-slot{gtk:stack-visible-child}
-  @see-slot{gtk:stack-visisble-child-name}
+  @see-slot{gtk:stack-visible-child-name}
   @see-class{gtk:stack-switcher}
   @see-class{gtk:notebook}")
 
@@ -770,7 +770,7 @@
   @see-class{gtk:stack}
   @see-function{gtk:stack-hhomogeneous}")
 
-;;; --- stack-visible-child ------------------------------------------------
+;;; --- stack-visible-child ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "visible-child" 'stack) t)
@@ -782,7 +782,7 @@
 (setf (liber:alias-for-function 'stack-visible-child)
       "Accessor"
       (documentation 'stack-visible-child 'function)
- "@version{#2021-12-7}
+ "@version{2023-7-26}
   @syntax[]{(gtk:stack-visible-child object) => child}
   @syntax[]{(setf (gtk:stack-visible-child object) child)}
   @argument[object]{a @class{gtk:stack} widget}
@@ -791,24 +791,23 @@
     Accessor of the @slot[gtk:stack]{visible-child} slot of the
     @class{gtk:stack} class.
   @end{short}
-
   The @sym{gtk:stack-visible-child} function gets the currently visible child
   widget of the stack, or @code{nil} if there are no visible children. The
   @sym{(setf gtk:stack-visible-child)} function makes the child widget the
   visible child widget of the stack.
 
-  If the child widget is different from the currently visible child widget,
-  the transition between the two will be animated with the current transition
-  type of stack.
+  If @arg{widget} is different from the currently visible child widget, the
+  transition between the two will be animated with the current transition type
+  of stack.
 
   Note that the child widget has to be visible itself, see the
-  @fun{gtk:widget-show} function, in order to become the visible child of the
-  stack.
+  @fun{gtk:widget-visible} function, in order to become the visible child of
+  the stack.
   @see-class{gtk:stack}
   @see-class{gtk:widget}
-  @see-function{gtk:widget-show}")
+  @see-function{gtk:widget-visible}")
 
-;;; --- stack-visible-child-name -------------------------------------------
+;;; --- stack-visible-child-name -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "visible-child-name" 'stack) t)
@@ -821,7 +820,7 @@
 (setf (liber:alias-for-function 'stack-visible-child-name)
       "Accessor"
       (documentation 'stack-visible-child-name 'function)
- "@version{#2021-12-7}
+ "@version{2023-7-26}
   @syntax[]{(gtk:stack-visible-child-name object) => name}
   @syntax[]{(setf (gtk:stack-visible-child-name object) name)}
   @argument[object]{a @class{gtk:stack} widget}
@@ -830,7 +829,6 @@
     Accessor of the @slot[gtk:stack]{visible-child-name} slot of the
     @class{gtk:stack} class.
   @end{short}
-
   The @sym{gtk:stack-visible-child-name} function returns the name of the
   currently visible child of the stack, or @code{nil} if there is no visible
   child. The @sym{(setf gtk:stack-visible-child-name)} function makes the child
@@ -841,10 +839,10 @@
   of stack.
 
   Note that the child widget has to be visible itself, see the
-  @fun{gtk:widget-show} function, in order to become the visible child of the
-  stack.
+  @fun{gtk:widget-visible} function, in order to become the visible child of
+  the stack.
   @see-class{gtk:stack}
-  @see-function{gtk:widget-show}")
+  @see-function{gtk:widget-visible}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_stack_new

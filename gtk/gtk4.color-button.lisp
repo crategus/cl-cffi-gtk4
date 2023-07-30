@@ -107,7 +107,7 @@
   @end{short}
   It is a suitable widget for selecting a color in a preference dialog.
 
-  @image[color-button]{}
+  @image[color-button]{Figure: GtkColorButton}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 colorbutton
@@ -183,7 +183,7 @@ lambda (button)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- color-button-modal -------------------------------------------------
+;;; --- color-button-modal -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'color-button) t)
@@ -195,7 +195,7 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-modal)
       "Accessor"
       (documentation 'color-button-modal 'function)
- "@version{#2022-8-27}
+ "@version{#2023-7-28}
   @syntax[]{(gtk:color-button-modal object) => modal)}
   @syntax[]{(setf (gtk:color-button-modal object) modal)}
   @argument[object]{a @class{gtk:color-button} widget}
@@ -205,7 +205,8 @@ lambda (button)    :run-first
     @class{gtk:color-button} class.
   @end{short}
   The @sym{gtk:color-button-modal} function sets whether the color chooser
-  dialog is modal. The @sym{(setf gtk:color-button)} function sets the property.
+  dialog is modal. The @sym{(setf gtk:color-button-modal)} function sets the 
+  property.
   @see-class{gtk:color-button}")
 
 ;;; --- color-button-show-editor -------------------------------------------

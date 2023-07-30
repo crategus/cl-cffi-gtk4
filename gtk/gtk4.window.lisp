@@ -402,7 +402,7 @@ lambda (window)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- window-application -------------------------------------------------
+;;; --- window-application -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "application" 'window) t)
@@ -419,7 +419,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-application)
       "Accessor"
       (documentation 'window-application 'function)
- "@version{#2023-7-22}
+ "@version{2023-7-26}
   @syntax[]{(gtk:window-application object) => application}
   @syntax[]{(setf (gtk:window-application object) application)}
   @argument[object]{a @class{gtk:window} widget}

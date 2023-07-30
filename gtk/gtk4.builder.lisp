@@ -937,7 +937,7 @@
 
 (cffi:defcfun ("gtk_builder_get_object" builder-object) g:object
  #+liber-documentation
- "@version{#2022-1-10}
+ "@version{2023-7-26}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[name]{a string with the name of the object to get}
   @return{The @class{g:object} instance named @arg{name} or @code{nil} if it

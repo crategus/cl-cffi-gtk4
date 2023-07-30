@@ -442,7 +442,7 @@
 
 (defun file-dialog-open (dialog parent cancellable func)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{2023-7-27}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[parent]{a @class{gtk:window} parent window}
   @argument[cancellable]{a @class{g:cancellable} object to cancel the operation,
@@ -483,7 +483,7 @@
 
 (defun file-dialog-open-finish (dialog result)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{2023-7-27}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
   @return{A @class{g:file} object with the file that was selected, otherwise
@@ -504,7 +504,7 @@
 (export 'file-dialog-open-finish)
 
 ;;; ----------------------------------------------------------------------------
-;;;     gtk_file_dialog_open_multiple
+;;; gtk_file_dialog_open_multiple
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_dialog_open_multiple" %file-dialog-open-multiple) :void
@@ -549,7 +549,7 @@
 (export 'file-dialog-open-multiple)
 
 ;;; ----------------------------------------------------------------------------
-;;;     gtk_file_dialog_open_multiple_finish
+;;; gtk_file_dialog_open_multiple_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_dialog_open_multiple_finish"
@@ -582,7 +582,7 @@
 (export 'file-dialog-open-multiple-finish)
 
 ;;; ----------------------------------------------------------------------------
-;;;     gtk_file_dialog_save
+;;; gtk_file_dialog_save
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_dialog_save" %file-dialog-save) :void
@@ -624,7 +624,7 @@
 (export 'file-dialog-save)
 
 ;;; ----------------------------------------------------------------------------
-;;;     gtk_file_dialog_save_finish
+;;; gtk_file_dialog_save_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_dialog_save_finish" %file-dialog-save-finish)
@@ -656,7 +656,7 @@
 (export 'file-dialog-save-finish)
 
 ;;; ----------------------------------------------------------------------------
-;;;     gtk_file_dialog_select_folder
+;;; gtk_file_dialog_select_folder
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_dialog_select_folder" %file-dialog-select-folder) :void
@@ -701,7 +701,7 @@
 (export 'file-dialog-select-folder)
 
 ;;; ----------------------------------------------------------------------------
-;;;     gtk_file_dialog_select_folder_finish
+;;; gtk_file_dialog_select_folder_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_dialog_select_folder_finish"
@@ -733,7 +733,7 @@
 (export 'file-dialog-select-folder-finish)
 
 ;;; ----------------------------------------------------------------------------
-;;;     gtk_file_dialog_select_multiple_folders
+;;; gtk_file_dialog_select_multiple_folders
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_dialog_select_multiple_folders"
@@ -780,7 +780,7 @@
 (export 'file-dialog-select-multiple-folders)
 
 ;;; ----------------------------------------------------------------------------
-;;;     gtk_file_dialog_select_multiple_folders_finish
+;;; gtk_file_dialog_select_multiple_folders_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_dialog_select_multiple_folders_finish"

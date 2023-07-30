@@ -364,7 +364,7 @@
 (setf (liber:alias-for-function 'image-paintable)
       "Accessor"
       (documentation 'image-paintable 'function)
- "@version{#2022-1-28}
+ "@version{2023-7-27}
   @syntax[]{(gtk:image-paintable object) => paintable}
   @syntax[]{(setf (gtk:image-paintable object) paintable)}
   @argument[object]{a @class{gtk:image} widget}
@@ -373,7 +373,6 @@
     Accessor of the @slot[gtk:image]{paintable} slot of the @class{gtk:image}
     class.
   @end{short}
-
   The @sym{gtk:image-paintable} function gets the paintable being displayed by
   the image. The @sym{(setf gtk:image-paintable)} function sets the paintable.
 
