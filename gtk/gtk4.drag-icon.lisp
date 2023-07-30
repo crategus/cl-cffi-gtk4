@@ -2,7 +2,7 @@
 ;;; gtk4.drag-icon.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,6 +83,18 @@
 ;;; Keep in mind that drag icons do not allow user input.
 ;;; ----------------------------------------------------------------------------
 
+(gobject:define-g-object-class "GtkDragIcon" drag-icon
+  (:superclass widget
+   :export t
+   :interfaces ("GtkAccessible"
+                "GtkBuildable"
+                "GtkConstraintTarget"
+                "GtkNative"
+                "GtkRoot")
+   :type-initializer "gtk_drag_icon_get_type")
+  ((child
+    drag-icon-child
+    "child" "GtkWidget" t t)))
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -149,6 +161,12 @@
 ;;;     the GtkDragIcon.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_drag_icon_get_for_drag" drag-icon-for-drag)
+    (g:object widget)
+  (drag (g:object gdk:drag)))
+
+(export 'drag-icon-for-drag)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_icon_set_from_paintable ()
 ;;;
@@ -175,6 +193,15 @@
 ;;;     Y coordinate of the hotspot
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_drag_icon_set_from_paintable" drag-icon-set-from-paintable)
+    :void
+  (drag (g:object gdk:drag))
+  (paintable (g:object gdk:paintable))
+  (xhot :int)
+  (yhot :int))
+
+(export 'drag-icon-set-from-paintable)
+  
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_icon_create_widget_for_value ()
 ;;;
@@ -196,5 +223,11 @@
 ;;; Returns :
 ;;;     A new GtkWidget for displaying value as a drag icon.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_drag_icon_create_widget_for_value"
+               drag-icon-create-widget-for-value) (g:object widget)
+  (value (:pointer (:struct g:value))))
+
+(export 'drag-icon-create-widget-for-value)
 
 ;;; --- End of file gtk4.drag-icon.lisp ----------------------------------------

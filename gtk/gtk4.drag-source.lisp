@@ -108,17 +108,17 @@
   the data does not change. More commonly, you will want to set them up just in
   time. To do so, the @sym{gtk:drag-source} object has \"prepare\" and
   \"drag-begin\" signals. The \"prepare\" signal is emitted before a drag is
-  started, and can be used to set the content provider and actions that the drag
-  should be started with. The \"drag-begin\" signal is emitted after the
+  started, and can be used to set the content provider and actions that the 
+  drag should be started with. The \"drag-begin\" signal is emitted after the
   @class{gdk:drag} object has been created, and can be used to set up the drag
   icon.
 
   During the DND operation, the @sym{gtk:drag-source} object emits signals that
-  can be used to obtain updates about the status of the operation, but it is not
-  normally necessary to connect to any signals, except for one case. When the
-  supported actions include the @code{:move} value of the
-  @symbol{gdk:drag-action} flags, you need to listen for the \"drag-end\" signal
-  and delete the data after it has been transferred.
+  can be used to obtain updates about the status of the operation, but it is 
+  not normally necessary to connect to any signals, except for one case. When 
+  the supported actions include the @code{:move} value of the
+  @symbol{gdk:drag-action} flags, you need to listen for the \"drag-end\" 
+  signal and delete the data after it has been transferred.
   @begin[Signal Details]{dictionary}
     @subheading{The \"drag-begin\" signal}
       @begin{pre}
@@ -166,9 +166,9 @@ lambda (source drag delete)    :run-last
       @begin{pre}
 lambda (source x y)    :run-last
       @end{pre}
-      The signal is emitted when a drag is about to be initiated. It returns the
-      @class{gdk:content-provider} object to use for the drag that is about to
-      start. The default handler for this signal returns the value of the
+      The signal is emitted when a drag is about to be initiated. It returns 
+      the @class{gdk:content-provider} object to use for the drag that is about 
+      to start. The default handler for this signal returns the value of the
       \"content\" property, so if you set up that property ahead of time, you
       do not need to connect to this signal.
       @begin[code]{table}
@@ -227,11 +227,6 @@ lambda (source x y)    :run-last
 
 ;;; --- drag-source-content ----------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drag_source_set_content ()
-;;; gtk_drag_source_get_content ()
-;;; ----------------------------------------------------------------------------
-
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "content" 'drag-source) t)
  "The @code{content} property of type @class{gdk:content-provider}
@@ -276,6 +271,13 @@ lambda (source x y)    :run-last
 ;;;     the new GtkDragSource
 ;;; ----------------------------------------------------------------------------
 
+(declaim (inline drag-source-new))
+
+(defun drag-source-new ()
+  (make-instance 'drag-source))
+
+(export 'drag-source-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_source_set_icon ()
 ;;;
@@ -308,6 +310,14 @@ lambda (source x y)    :run-last
 ;;;     the hotspot Y coordinate on the icon
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_drag_source_set_icon" drag-source-set-icon) :void
+  (source (g:object drag-source))
+  (paintable (g:object gdk:paintable))
+  (xhot :int)
+  (yhot :int))
+
+(export 'drag-source-set-icon)
+
 ;;; ----------------------------------------------------------------------------
 ;;;gtk_drag_source_drag_cancel ()
 ;;;
@@ -319,6 +329,11 @@ lambda (source x y)    :run-last
 ;;; source :
 ;;;     a GtkDragSource
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_drag_source_drag_cancel" drag-source-drag-cancel) :void
+  (source (g:object drag-source)))
+  
+(export 'drag-source-drag-cancel)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_source_get_drag ()
@@ -334,6 +349,11 @@ lambda (source x y)    :run-last
 ;;; Returns :
 ;;;     the GdkDrag of the current drag operation, or NULL.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_drag_source_get_drag" drag-source-drag) (g:object gdk:drag)
+  (source (g:object drag-source)))
+
+(export 'drag-source-drag)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_check_threshold ()
@@ -367,5 +387,14 @@ lambda (source x y)    :run-last
 ;;; Returns :
 ;;;     TRUE if the drag threshold has been passed.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_drag_check_threshold" drag-check-threshold) :boolean
+  (widget (g:object widget))
+  (xstart :int)
+  (ystart :int)
+  (xcurrent :int)
+  (ycurrent :int))
+
+(export 'drag-check-threshold)
 
 ;;; --- End of file gtk4.drag-source.lisp --------------------------------------

@@ -2,7 +2,7 @@
 ;;; gtk4.drop-target.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -55,7 +55,8 @@
 ;;; Properties
 ;;;
 ;;;     actions
-;;;     drop
+;;;     current-drop                                       Since 4.4
+;;;     drop                                               deprecated Since 4.4
 ;;;     formats
 ;;;     preload
 ;;;     value
@@ -248,7 +249,30 @@
 ;;;      GdkDrop, GtkDropTargetAsync
 ;;; ----------------------------------------------------------------------------
 
-
+(gobject:define-g-object-class "GtkDropTarget" drop-target
+  (:superclass event-controller
+   :export t
+   :interfaces ()
+   :type-initializer "gtk_drop_target_get_type")
+  ((actions
+    drop-target-actions
+    "actions" "GdkDragAction" t t)
+   (current-drop
+    drop-target-current-drop
+    "current-drop" "GdkDrop" t nil)
+   (drop
+    drop-target-drop
+    "drop" "GdkDrop" t nil)
+   (formats
+    drop-target-formats
+    "formats" "GdkContentFormats" t t)
+   (preload
+    drop-target-preload
+    "preload" "gboolean" t t)
+   (value
+    drop-target-value
+    "value" "GValue" t nil)))
+    
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
@@ -297,6 +321,18 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
+;;; The “current-drop” property
+;;;
+;;;   “current-drop”                     GdkDrop *
+;;;
+;;; The GdkDrop that is currently being performed.
+;;;
+;;; Owner: GtkDropTarget
+;;;
+;;; Flags: Read
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
 ;;; The “drop” property
 ;;;
 ;;;   “drop”                     GdkDrop *
@@ -306,6 +342,8 @@
 ;;; Owner: GtkDropTarget
 ;;;
 ;;; Flags: Read
+;;;
+;;; deprecated: 4.4 
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -470,6 +508,12 @@
 ;;;     the new GtkDropTarget
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_drop_target_new" drop-target-new) (g:object drop-target)
+  (gtype g:type-t)
+  (actions (g:object gdk:drag-action)))
+
+(export 'drop-target-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drop_target_set_gtypes ()
 ;;;
@@ -531,5 +575,10 @@
 ;;; self :
 ;;;     a GtkDropTarget
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_drop_target_reject" drop-target-reject) :void
+  (target (g:object drop-target)))
+
+(export 'drop-target-reject)
 
 ;;; --- End of file gtk.drop-target.lisp ---------------------------------------
