@@ -894,10 +894,10 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
 ;;; gtk_show_about_dialog
 ;;; ----------------------------------------------------------------------------
 
-(let ((about-dialog (cffi:null-pointer)))
+(let ((about-dialog nil))
   (defun show-about-dialog (parent &rest args)
    #+liber-documentation
-   "@version{#2022-1-13}
+   "@version{2023-7-30}
     @argument[parent]{a @class{gtk:window} transient parent, or @code{nil}
       for none}
     @argument[args]{pairs of property name and property value}
@@ -911,9 +911,7 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
     (let ((dialog (if parent
                       (g:object-data parent "gtk:about-dialog")
                       about-dialog)))
-      (when (cffi:null-pointer-p (if (cffi:pointerp dialog)
-                                     dialog
-                                     (g:object-pointer dialog)))
+      (unless dialog
         (setf dialog (apply #'make-instance 'about-dialog args))
         (setf (window-hide-on-close dialog) t)
         (g:signal-connect dialog "close-request"
@@ -921,14 +919,14 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
                             ;; TODO: The C implementation calls in addition the
                             ;; function gtk_stack_set_visible_child_name for
                             ;; the field about->stack
-                            (widget-hide widget)))
+                            (setf (widget-visible widget) nil)
+                            t))
         (if parent
             (progn
               (setf (window-modal dialog) t)
               (setf (window-transient-for dialog) parent)
               (setf (window-destroy-with-parent dialog) t)
-              (setf (g:object-data parent "gtk:about-dialog")
-                    (g:object-pointer dialog)))
+              (setf (g:object-data parent "gtk:about-dialog") dialog))
             (setf about-dialog dialog)))
       (window-present dialog))))
 
