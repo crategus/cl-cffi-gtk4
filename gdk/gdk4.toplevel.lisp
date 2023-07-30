@@ -34,7 +34,7 @@
 ;;;     GdkSurfaceEdge
 ;;;     GdkTitlebarGesture                                 Since 4.4
 ;;;
-;;;     GtkToplevel
+;;;     GdkToplevel
 ;;;
 ;;; Accessors
 ;;;
@@ -275,7 +275,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-interface "GdkToplevel" toplevel
-  (:export t
+  (:superclass surface
+   :export t
    :type-initializer "gdk_toplevel_get_type")
   ((decorated
     toplevel-decorated

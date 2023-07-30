@@ -90,7 +90,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-interface "GdkDevicePad" device-pad
-  (:export t
+  (:superclass device
+   :export t
    :type-initializer "gdk_device_pad_get_type")
   nil)
 
@@ -98,7 +99,7 @@
 (setf (liber:alias-for-class 'device-pad)
       "Interface"
       (documentation 'device-pad 'type)
- "@version{2023-4-15}
+ "@version{2023-7-30}
   @begin{short}
     The @sym{gdk:device-pad} interface is an interface implemented by devices
     of @code{:tablet-pad} type.

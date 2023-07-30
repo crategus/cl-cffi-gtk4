@@ -66,7 +66,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-interface "GdkPopup" popup
-  (:export t
+  (:superclass surface
+   :export t
    :type-initializer "gdk_popup_get_type")
   ((autohide
     popup-autohide
