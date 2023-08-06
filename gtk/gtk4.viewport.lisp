@@ -2,7 +2,7 @@
 ;;; gtk4.viewport.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK+ library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -89,7 +89,7 @@
 
 #+liber-documentation
 (setf (documentation 'viewport 'type)
- "@version{#2021-3-19}
+ "@version{2023-8-6}
   @begin{short}
     The @sym{gtk:viewport} widget acts as an adaptor class, implementing
     scrollability for child widgets that lack their own scrolling capabilities.
@@ -128,7 +128,7 @@
 (setf (liber:alias-for-function 'viewport-child)
       "Accessor"
       (documentation 'viewport-child 'function)
- "@version{#2022-2-5}
+ "@version{2023-8-6}
   @syntax[]{(gtk:viewport-child object) => child}
   @syntax[]{(setf (gtk:viewport-child object) child)}
   @argument[object]{a @class{gtk:viewport} widget}
@@ -148,13 +148,13 @@
  "The @code{scroll-to-focus} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether to scroll when the focus changes. @br{}
-  Default value: @em{false}")
+  Default value: @em{true}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'viewport-scroll-to-focus)
       "Accessor"
       (documentation 'viewport-scroll-to-focus 'function)
- "@version{#2022-2-5}
+ "@version{2023-8-6}
   @syntax[]{(gtk:viewport-scroll-to-focus object) => setting}
   @syntax[]{(setf (gtk:viewport-scroll-to-focus object) setting)}
   @argument[object]{a @class{gtk:viewport} widget}
@@ -164,11 +164,10 @@
     Accessor of the @slot[gtk:viewport]{scroll-to-focus} slot of the
     @class{gtk:viewport} class.
   @end{short}
-
   The @sym{gtk:viewport-scroll-to-focus} function gets whether the viewport is
   scrolling to keep the focused child in view. The
-  @sym{gtk:viewport-scroll-to-focus} function sets whether the viewport should
-  automatically scroll to keep the focused child in view.
+  @sym{(setf gtk:viewport-scroll-to-focus)} function sets whether the viewport 
+  should automatically scroll to keep the focused child in view.
   @see-class{gtk:viewport}")
 
 ;;; ----------------------------------------------------------------------------
@@ -179,9 +178,9 @@
 
 (defun viewport-new (&optional (hadjustment nil) (vadjustment nil))
  #+liber-documentation
- "@version{#2021-3-18}
-  @argument[hadjustment]{horizontal @class{gtk:adjustment} object}
-  @argument[vadjustment]{vertical @class{gtk:adjustment} object}
+ "@version{2023-8-6}
+  @argument[hadjustment]{a horizontal @class{gtk:adjustment} object}
+  @argument[vadjustment]{a vertical @class{gtk:adjustment} object}
   @return{A new @class{gtk:viewport} widget.}
   @begin{short}
     Creates a new viewport with the given adjustments, of with default

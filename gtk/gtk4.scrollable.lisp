@@ -2,7 +2,7 @@
 ;;; gtk4.scrollable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -80,7 +80,7 @@
 (setf (liber:alias-for-symbol 'scrollable-policy)
       "GEnum"
       (liber:symbol-documentation 'scrollable-policy)
- "@version{#2021-3-19}
+ "@version{2023-8-6}
   @begin{short}
     Defines the policy to be used in a scrollable widget when updating the
     scrolled window adjustments in a given orientation.
@@ -122,24 +122,23 @@
 (setf (liber:alias-for-class 'scrollable)
       "Interface"
       (documentation 'scrollable 'type)
- "@version{#2021-3-19}
+ "@version{2023-8-6}
   @begin{short}
     The @sym{gtk:scrollable} interface is an interface that is implemented by
     widgets with native scrolling ability.
   @end{short}
-
   To implement this interface you should override the @code{hadjustment}
   and @code{vadjustment} properties.
 
   @subheading{Creating a scrollable widget}
-  All scrollable widgets should do the following.
+  All scrollable widgets should do the following:
   @begin{itemize}
     @begin{item}
-      When a parent widget sets the scrollable child widget’s adjustments,
-      the widget should populate the adjustments’ @slot[adjustment]{lower},
+      When a parent widget sets the adjustments of the scrollable child widget
+      the widget should populate the @slot[gtk:adjustment]{lower},
       @slot[gtk:adjustment]{upper}, @slot[gtk:adjustment]{step-increment},
       @slot[gtk:adjustment]{page-increment} and @slot[gtk:adjustment]{page-size}
-      properties and connect to the \"value-changed\" signal.
+      properties of the adjustment and connect to the \"value-changed\" signal.
     @end{item}
     @begin{item}
       Because its preferred size is the size for a fully expanded widget, the
@@ -149,7 +148,7 @@
     @end{item}
     @begin{item}
       When the parent allocates space to the scrollable child widget, the
-      widget should update the adjustments’ properties with new values.
+      widget should update the properties of the adjustments with new values.
     @end{item}
     @begin{item}
       When any of the adjustments emits the \"value-changed\" signal, the
@@ -180,7 +179,7 @@
 (setf (liber:alias-for-function 'scrollable-hadjustment)
       "Accessor"
       (documentation 'scrollable-hadjustment 'function)
- "@version{#2021-3-19}
+ "@version{2023-8-6}
   @syntax[]{(gtk:scrollable-hadjustment object) => hadjustment}
   @syntax[]{(setf (gtk:scrollable-hadjustment object) hadjustment)}
   @argument[object]{a @class{gtk:scrollable} widget}
@@ -189,11 +188,10 @@
     Accessor of the @slot[gtk:scrollable]{hadjustment} slot of the
     @class{gtk:scrollable} class.
   @end{short}
-
-  The slot access function @sym{gtk:scrollabe-hadjustment} retrieves the
-  adjustment used for horizontal scrolling. The slot access function
-  @sym{(setf gtk:scrollabe-hadjustment)} sets the horizontal adjustment.
-  @see-class{gtk:scrollabe}
+  The @sym{gtk:scrollabe-hadjustment} function retrieves the adjustment used for 
+  horizontal scrolling. The @sym{(setf gtk:scrollabe-hadjustment)} function sets 
+  the horizontal adjustment.
+  @see-class{gtk:scrollable}
   @see-class{gtk:adjustment}
   @see-function{gtk:scrollable-vadjustment}")
 
@@ -212,7 +210,7 @@
 (setf (liber:alias-for-function 'scrollable-hscroll-policy)
       "Accessor"
       (documentation 'scrollable-hscroll-policy 'function)
- "@version{#2021-3-19}
+ "@version{2023-8-6}
   @syntax[]{(gtk:scrollable-hscroll-policy object) => policy}
   @syntax[]{(setf (gtk:scrollable-hscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
@@ -222,7 +220,6 @@
     Accessor of the @slot[gtk:scrollable]{hscroll-policy} slot of the
     @class{gtk:scrollable} class.
   @end{short}
-
   The @sym{gtk:scrollable-hscroll-policy} function gets the horizontal scrolling
   policy which determines whether horizontal scrolling should start below the
   minimum width or below the natural width. The
@@ -245,7 +242,7 @@
 (setf (liber:alias-for-function 'scrollable-vadjustment)
       "Accessor"
       (documentation 'scrollable-vadjustment 'function)
- "@version{#2021-3-19}
+ "@version{2023-8-6}
   @syntax[]{(gtk:scrollable-vadjustment object) => vadjustment}
   @syntax[]{(setf (gtk:scrollable-vadjustment object) vadjustment)}
   @argument[object]{a @class{gtk:scrollable} widget}
@@ -254,7 +251,6 @@
     Accessor of the @slot[gtk:scrollable]{vadjustment} slot of the
     @class{gtk:scrollable} class.
   @end{short}
-
   The @sym{gtk:scrollable-vadjustment} function retrieves the adjustment used
   for vertical scrolling. The @sym{(setf gtk:scrollable-vadjustment)} function
   sets the vertical adjustment.
@@ -277,7 +273,7 @@
 (setf (liber:alias-for-function 'scrollable-vscroll-policy)
       "Accessor"
       (documentation 'scrollable-vscroll-policy 'function)
- "@version{#2021-3-19}
+ "@version{2023-8-6}
   @syntax[]{(gtk:scrollable-vscroll-policy object) => policy}
   @syntax[]{(setf (gtk:scrollable-vscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
@@ -287,7 +283,6 @@
     Accessor of the @slot[gtk:scrollable]{vscroll-policy} slot of the
     @class{gtk:scrollable} class.
   @end{short}
-
   The @sym{gtk:scrollable-vscroll-policy} function gets the vertical scrolling
   policy which determines whether vertical scrolling should start below the
   minimum height or below the natural height. The
@@ -306,21 +301,21 @@
   (border (g:boxed border)))
 
 (defun scrollable-border (scrollable)
- "@version{#2021-3-19}
+ "@version{2023-8-6}
   @argument[scrollable]{a @class{gtk:scrollable} widget}
-  @return{A @class{gtk:border} instance.}
+  @return{A @class{gtk:border} instance or @code{nil}.}
   @begin{short}
     Returns the size of a non-scrolling border around the outside of the
     scrollable.
   @end{short}
-  An example for this would be tree view headers. GTK+ can use this information
+  An example for this would be tree view headers. GTK can use this information
   to display overlayed graphics, like the overshoot indication, at the right
   position.
   @see-class{gtk:scrollable}
   @see-class{gtk:border}"
   (let ((border (border-new)))
-    (%scrollable-border scrollable border)
-    border))
+    (when (%scrollable-border scrollable border)
+      border)))
 
 (export 'scrollable-border)
 

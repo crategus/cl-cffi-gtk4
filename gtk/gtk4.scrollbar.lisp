@@ -2,7 +2,7 @@
 ;;; gtk4.scrollbar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK+ library.
+;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'scrollbar 'type)
- "@version{#2021-12-27}
+ "@version{2023-8-6}
   @begin{short}
     The @sym{gtk:scrollbar} widget is a horizontal or vertical scrollbar,
     depending on the value of the @slot[orientable]{orientation} property.
@@ -94,15 +94,15 @@
   Its position and movement are controlled by the adjustment that is passed to
   or created by the @fun{gtk:scrollbar-new} function. See the
   @class{gtk:adjustment} documentation for more details. The
-  @slot[gtk:adjustment]{value} field sets the position of the thumb and must be
-  between @slot[gtk:adjustment]{lower} and @slot[gtk:adjustment]{upper} -
-  @slot[gtk:adjustment]{page-size}. The @slot[gtk:adjustment]{page-size}
-  represents the size of the visible scrollable area. The fields
+  @slot[gtk:adjustment]{value} property sets the position of the thumb and must 
+  be between the @slot[gtk:adjustment]{lower} and @slot[gtk:adjustment]{upper} -
+  @slot[gtk:adjustment]{page-size} values. The @slot[gtk:adjustment]{page-size}
+  property represents the size of the visible scrollable area. The
   @slot[gtk:adjustment]{step-increment} and
-  @slot[gtk:adjustment]{page-increment} fields are added to or subtracted from
-  the @slot[gtk:adjustment]{value} when the user asks to move by a step, using
-  e.g. the cursor arrow keys, or by a page, using e.g. the @kbd{Page Down}/
-  @kbd{Page Up} keys.
+  @slot[gtk:adjustment]{page-increment} properties are added to or subtracted 
+  from the @slot[gtk:adjustment]{value} property when the user asks to move by 
+  a step, using e.g. the cursor arrow keys, or by a page, using e.g. the 
+  @kbd{Page Down}/@kbd{Page Up} keys.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 scrollbar
@@ -113,21 +113,21 @@ scrollbar
     The @sym{gtk:scrollbar} implementation has a main CSS node with name
     @code{scrollbar} and a subnode for its contents. The main node gets
     the @code{.horizontal} or @code{.vertical} style classes applied, depending
-    on the scrollbar's orientation.
-
-    The range node gets the @code{.fine-tune} style class added when the
-    scrollbar is in 'fine-tuning' mode.
+    on the orientation of the scrollbar. The range node gets the 
+    @code{.fine-tune} style class added when the scrollbar is in 'fine-tuning' 
+    mode.
 
     Other style classes that may be added to scrollbars inside the
-    @class{gtk:scrolled-window} widget include the positional classes
-    @code{.left}, @code{.right}, @code{.top}, @code{.bottom}, and style classes
-    related to overlay scrolling, @code{.overlay-indicator},
-    @code{.dragging}, @code{.hovering}.
+    @class{gtk:scrolled-window} widget include the @code{.left}, @code{.right}, 
+    @code{.top}, @code{.bottom} positional classes and 
+    @code{.overlay-indicator}, @code{.dragging}, @code{.hovering} style classes
+    related to overlay scrolling.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @sym{gtk:scrollbar} implementation uses the @code{:scrollbar} role
     of the @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
+  @see-constructor{gtk:scrollbar-new}
   @see-slot{gtk:scrollbar-adjustment}
   @see-class{gtk:adjustment}
   @see-class{gtk:scrolled-window}")
@@ -136,19 +136,19 @@ scrollbar
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- scrollbar-adjustment -----------------------------------------------
+;;; --- scrollbar-adjustment ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "adjustment" 'scrollbar) t)
  "The @code{adjustment} property of type @class{gtk:adjustment}
-  (Read / Write / Contruct) @br{}
+  (Read / Write / Construct) @br{}
   The adjustment that contains the current value of this scrollbar.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'scrollbar-adjustment)
       "Accessor"
       (documentation 'scrollbar-adjustment 'function)
- "@version{#2022-6-16}
+ "@version{2023-8-6}
   @syntax[]{(gtk:scrollbar-adjustment object) => adjustment}
   @syntax[]{(setf (gtk:scrollbar-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:scrollbar} widget}
@@ -157,10 +157,9 @@ scrollbar
     Accessor of the @slot[gtk:scrollbar]{adjustment} slot of the
     @class{gtk:scrollbar} class.
   @end{short}
-
-  The @sym{gtk:scrolled-window-child} function returns the adjustment of the
-  adjustment. The @sym{(setf gtk:scrolled-window-child)} function makes the
-  scrollbar use the given adjustment.
+  The @sym{gtk:scrollbar-adjustment} function returns the adjustment of the
+  scrollbar. The @sym{(setf gtk:scrollbar-adjustment)} function makes the
+  scrollbar use the given @arg{adjustment}.
   @see-class{gtk:scrollbar}
   @see-class{gtk:adjustment}")
 
@@ -172,7 +171,7 @@ scrollbar
 
 (defun scrollbar-new (orientation &optional (adjustment nil))
  #+liber-documentation
- "@version{#2021-12-27}
+ "@version{2023-8-6}
   @argument[orientation]{a @symbol{gtk:orientation} value for the orientation
     of the scrollbar}
   @argument[adjustment]{an optional @class{gtk:adjustment} object to use,
