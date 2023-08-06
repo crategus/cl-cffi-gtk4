@@ -56,6 +56,10 @@
 ;;; GtkNative
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: Prerequisite of GtkNative is GtkWidget. But we can not implement this,
+;; because, we get cirular dependicies in the class precedence list. Can we
+;; work on this?
+
 (gobject:define-g-interface "GtkNative" native
   (:export t
    :type-initializer "gtk_native_get_type")
