@@ -80,43 +80,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkVulkanContext
-;;;
-;;; typedef struct _GdkVulkanContext GdkVulkanContext;
-;;;
-;;; The GdkVulkanContext struct contains only private fields and should not be
-;;; accessed directly.
-;;;
-;;; Description
-;;;
-;;; GdkVulkanContext is an object representing the platform-specific Vulkan
-;;; draw context.
-;;;
-;;; GdkVulkanContexts are created for a GdkSurface using
-;;; gdk_surface_create_vulkan_context(), and the context will match the the
-;;; characteristics of the surface.
-;;;
-;;; Support for GdkVulkanContext is platform-specific, context creation can
-;;; fail, returning NULL context.
-;;;
-;;; Signal Details
-;;;
-;;; The “images-updated” signal
-;;;
-;;; void
-;;; user_function (GdkVulkanContext *context,
-;;;                gpointer          user_data)
-;;;
-;;; This signal is emitted when the images managed by this context have changed.
-;;; Usually this means that the swapchain had to be recreated, for example in
-;;; response to a change of the surface size.
-;;;
-;;; context :
-;;;     the object on which the signal is emitted
-;;;
-;;; user_data :
-;;;     user data set when the signal handler was connected.
-;;;
-;;; Flags: Run Last
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GdkVulkanContext" vulkan-context
@@ -125,6 +88,34 @@
    :interfaces nil
    :type-initializer "gdk_vulkan_context_get_type")
   nil)
+
+#+liber-documentation
+(setf (documentation 'vulkan-context 'type)
+ "@version{#2023-8-4}
+  @begin{short}
+    The @sym{gdk:vulkan-context} object is an object representing the platform
+    specific Vulkan draw context.
+  @end{short}
+  The @sym{gdk:vulkan-context} object is created for a @class{gdk:surface}
+  object using the @fun{gdk:surface-create-vulkan-context} function, and the
+  Vulkan context will match the characteristics of the surface.
+
+  Support for the @sym{gdk:vulkan-context} object is platform specific, context
+  creation can fail, returning a @code{NULL} context.
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"images-updated\" signal}
+      @begin{pre}
+lambda (context)    :run-last
+      @end{pre}
+      The signal is emitted when the images managed by this context have
+      changed. Usually this means that the swapchain had to be recreated, for
+      example in response to a change of the surface size.
+      @begin[code]{table}
+        @entry[context]{The @sym{gdk:vulkan-context} object on which the signal
+          is emitted.}
+      @end{table}
+  @end{dictionary}
+  @see-class{gdk:draw-context}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_vulkan_context_get_device ()

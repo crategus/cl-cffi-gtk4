@@ -84,17 +84,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GdkDragCancelReason
-;;;
-;;; Used in GdkDrag to the reason of a cancelled DND operation.
-;;;
-;;; GDK_DRAG_CANCEL_NO_TARGET
-;;;     There is no suitable drop target.
-;;;
-;;; GDK_DRAG_CANCEL_USER_CANCELLED
-;;;     Drag cancelled by the user
-;;;
-;;; GDK_DRAG_CANCEL_ERROR
-;;;     Unspecified error.
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkDragCanelReason" drag-cancel-reason
@@ -104,6 +93,30 @@
   :user-cancelled
   :error)
 
+#+liber-documentation
+(setf (liber:alias-for-symbol 'drag-cancel-reason)
+      "GEnum"
+      (liber:symbol-documentation 'drag-cancel-reason)
+ "@version{#2023-8-4}
+  @begin{short}
+    Used in the @class{gdk:drag} object to the reason of a cancelled DND 
+    operation.
+  @end{short}
+  @begin{pre}
+(gobject:define-g-enum \"GdkDragCanelReason\" drag-cancel-reason
+  (:export t
+   :type-initializer \"gdk_drag_cancel_reason_get_type\")
+  :no-target
+  :user-cancelled
+  :error)  
+  @end{pre}
+  @begin[code]{table}
+    @entry[:no-target]{There is no suitable drop target.}
+    @entry[:user-cancelled]{Drag cancelled by the user.}
+    @entry[:error]{Unspecified error.}
+  @end{table}
+  @see-class{gdk:drag}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; enum GdkDragAction
 ;;; ----------------------------------------------------------------------------
@@ -111,6 +124,7 @@
 (gobject:define-g-flags "GdkDragAction" drag-action
   (:export t
    :type-initializer "gdk_drag_action_get_type")
+  (:none 0)
   (:copy #.(ash 1 0))
   (:move #.(ash 1 1))
   (:link #.(ash 1 2))
@@ -129,6 +143,7 @@
 (gobject:define-g-flags \"GdkDragAction\" drag-action
   (:export t
    :type-initializer \"gdk_drag_action_get_type\")
+  (:none 0)
   (:copy #.(ash 1 0))
   (:move #.(ash 1 1))
   (:link #.(ash 1 2))
@@ -157,95 +172,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; GdkDragSurfaceInterface
-;;;
-;;; typedef struct _GdkDragSurfaceInterface GdkDragSurfaceInterface;
-;;;
-;;; The GdkDragSurfaceInterface implementation is private to GDK.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
 ;;; GdkDrag
-;;;
-;;; The GdkDrag struct contains only private fields and should not be accessed
-;;; directly.
-;;;
-;;; These functions provide a low-level interface for drag and drop.
-;;;
-;;; The GdkDrag object represents the source side of an ongoing DND operation.
-;;; It is created when a drag is started, and stays alive for duration of the
-;;; DND operation. After a drag has been started with gdk_drag_begin(), the
-;;; caller gets informed about the status of the ongoing drag operation with
-;;; signals on the GdkDrag object.
-;;;
-;;; The GdkDrop object represents the target side of an ongoing DND operation.
-;;; Possible drop sites get informed about the status of the ongoing drag
-;;; operation with events of type GDK_DRAG_ENTER, GDK_DRAG_LEAVE,
-;;; GDK_DRAG_MOTION and GDK_DROP_START. The GdkDrop object can be obtained from
-;;; these GdkEvents using gdk_dnd_event_get_drop().
-;;;
-;;; The actual data transfer is initiated from the target side via an async
-;;; read, using one of the GdkDrop functions for this purpose:
-;;; gdk_drop_read_async() or gdk_drop_read_value_async().
-;;;
-;;; GTK provides a higher level abstraction based on top of these functions,
-;;; and so they are not normally needed in GTK applications. See the Drag and
-;;; Drop section of the GTK documentation for more information.
-;;;
-;;; Signal Details
-;;;
-;;; The “cancel” signal
-;;;
-;;; void
-;;; user_function (GdkDrag            *drag,
-;;;                GdkDragCancelReason reason,
-;;;                gpointer            user_data)
-;;;
-;;; The drag operation was cancelled.
-;;;
-;;; drag :
-;;;     The object on which the signal is emitted
-;;;
-;;; reason :
-;;;     The reason the drag was cancelled
-;;;
-;;; user_data :
-;;;     user data set when the signal handler was connected.
-;;;
-;;; Flags: Run Last
-;;;
-;;; The “dnd-finished” signal
-;;;
-;;; void
-;;; user_function (GdkDrag *drag,
-;;;                gpointer user_data)
-;;;
-;;; The drag operation was finished, the destination finished reading all data.
-;;; The drag object can now free all miscellaneous data.
-;;;
-;;; drag :
-;;;     The object on which the signal is emitted
-;;;
-;;; user_data :
-;;;     user data set when the signal handler was connected.
-;;;
-;;; Flags: Run Last
-;;;
-;;; The “drop-performed” signal
-;;;
-;;; void
-;;; user_function (GdkDrag *drag,
-;;;                gpointer user_data)
-;;;
-;;; The drag operation was performed on an accepting client.
-;;;
-;;; drag :
-;;;     The object on which the signal is emitted
-;;;
-;;; user_data :
-;;;     user data set when the signal handler was connected.
-;;;
-;;; Flags: Run Last
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GdkDrag" drag
@@ -275,207 +202,242 @@
     drag-surface
     "surface" "GdkSurface" t t)))
 
+#+liber-documentation
+(setf (documentation 'drag 'type)
+ "@version{#2023-8-4}
+  @begin{short}
+    The @class{gdk:drag} object represents the source of an ongoing DND 
+    operation.
+  @end{short}
+  A @class{gdk:drag} object is created when a drag is started, and stays alive 
+  for duration of the DND operation. After a drag has been started with the 
+  @fun{gdk:drag-begin} function, the caller gets informed about the status of 
+  the ongoing drag operation with signals on the @class{gdk:drag} object.
+
+  GTK provides a higher level abstraction based on top of these functions, and 
+  so they are not normally needed in GTK applications. See the \"Drag and Drop\" 
+  section of the GTK documentation for more information.
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"cancel\" signal}
+      @begin{pre}
+lambda (drag reason)    :run-last
+      @end{pre}
+      The drag operation was cancelled.
+      @begin[code]{table}
+        @entry[drag]{The @class{gdk:drag} object on which the signal is 
+          emitted.}
+        @entry[reason]{A @symbol{gdk:drag-cancel-reason} value with the reason 
+        the drag was cancelled.}
+      @end{table}
+    @subheading{The \"dnd-finished\" signal}
+      @begin{pre}
+lambda (drag)    :run-last
+      @end{pre}
+      The drag operation was finished, the destination finished reading all 
+      data. The drag object can now free all miscellaneous data.
+      @begin[code]{table}
+        @entry[drag]{The @class{gdk:drag} object on which the signal is 
+          emitted.}
+      @end{table}
+    @subheading{The \"drop-performed\" signal}
+      @begin{pre}
+lambda (drag)    :run-last
+      @end{pre}
+      The drag operation was performed on an accepting client.
+      @begin[code]{table}
+        @entry[drag]{The @class{gdk:drag} object on which the signal is 
+          emitted.}
+      @end{table}
+  @end{dictionary}  
+  @see-slot{gdk:drag-actions}
+  @see-slot{gdk:drag-content}
+  @see-slot{gdk:drag-device}
+  @see-slot{gdk:drag-display}
+  @see-slot{gdk:drag-formats}
+  @see-slot{gdk:drag-selected-action}
+  @see-slot{gdk:drag-surface}
+  @see-class{gdk:drop}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- drag-actions -----------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “actions” property
-;;;
-;;;  “actions”                  GdkDragAction
-;;;
-;;; The possible actions.
-;;;
-;;; Owner: GdkDrag
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "actions" 'drag) t)
+ "The @code{actions} property of type @symbol{gdk:drag-action} (Read / Write) 
+  @br{}
+  The possible actions of the drag. @br{}
+  Default value: @code{:none}")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drag_get_actions ()
-;;;
-;;; GdkDragAction
-;;; gdk_drag_get_actions (GdkDrag *drag);
-;;;
-;;; Determines the bitmask of possible actions proposed by the source.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; Returns :
-;;;     the GdkDragAction flags
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-actions)
+      "Accessor"
+      (documentation 'drag-actions 'function)
+ "@version{#2023-8-4}
+  @syntax[]{(gdk:drag-actions object) => actions}
+  @argument[object]{a @class{gdk:drag} object}
+  @argument[actions]{a @symbol{gdk:drag-action} value}
+  @begin{short}
+    Accessor of the @slot[gdk:drag]{actions} slot of the @class{gdk:drag}
+    class.
+  @end{short}
+  The @fun{gdk:drag-actions} function determines the possible actions proposed 
+  by the drag source.
+  @see-class{gdk:drag}
+  @see-symbol{gdk:drag-action}")
 
 ;;; --- drag-content -----------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “content” property
-;;;
-;;;  “content”                  GdkContentProvider *
-;;;
-;;; The GdkContentProvider.
-;;;
-;;; Owner: GdkDrag
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "content" 'drag) t)
+ "The @code{content} property of type @class{gdk:content-provider} 
+  (Read / Write / Construct Only) @br{}
+  The content provider.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drag_get_content ()
-;;;
-;;; GdkContentProvider *
-;;; gdk_drag_get_content (GdkDrag *drag);
-;;;
-;;; Returns the GdkContentProvider associated to the GdkDrag object.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; Returns :
-;;;     The GdkContentProvider associated to drag .
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-content)
+      "Accessor"
+      (documentation 'drag-content 'function)
+ "@version{#2023-8-4}
+  @syntax[]{(gdk:drag-content object) => content}
+  @argument[object]{a @class{gdk:drag} object}
+  @argument[content]{a @class{gdk:content-provider} object associated to
+    @arg{object}}
+  @begin{short}
+    Accessor of the @slot[gdk:drag]{content} slot of the @class{gdk:drag}
+    class.
+  @end{short}
+  The @fun{gdk:drag-content} function returns the content provider associated 
+  to the drag object.  
+  @see-class{gdk:drag}
+  @see-class{gdk:content-provider}")
 
 ;;; --- drag-device ------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “device” property
-;;;
-;;;  “device”                   GdkDevice *
-;;;
-;;; The GdkDevice that is performing the drag.
-;;;
-;;; Owner: GdkDrag
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "device" 'drag) t)
+ "The @code{device} property of type @class{gdk:device} 
+  (Read / Write / Construct Only) @br{}
+  The device that is performing the drag.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drag_get_device ()
-;;;
-;;; GdkDevice *
-;;; gdk_drag_get_device (GdkDrag *drag);
-;;;
-;;; Returns the GdkDevice associated to the GdkDrag object.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; Returns :
-;;;     The GdkDevice associated to drag .
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-device)
+      "Accessor"
+      (documentation 'drag-device 'function)
+ "@version{#2023-8-4}
+  @syntax[]{(gdk:drag-device object) => device}
+  @argument[object]{a @class{gdk:drag} object}
+  @argument[device]{a @class{gdk:device} object associated to @arg{object}}
+  @begin{short}
+    Accessor of the @slot[gdk:drag]{device} slot of the @class{gdk:drag}
+    class.
+  @end{short}
+  The @fun{gdk:drag-device} function returns the device associated to the drag 
+  object.  
+  @see-class{gdk:drag}
+  @see-class{gdk:device}")
 
 ;;; --- drag-display -----------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “display” property
-;;;
-;;;  “display”                  GdkDisplay *
-;;;
-;;; The GdkDisplay that the drag belongs to.
-;;;
-;;; Owner: GdkDrag
-;;; Flags: Read
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "display" 'drag) t)
+ "The @code{display} property of type @class{gdk:display} (Read) @br{}
+  The display that the drag belongs to.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drag_get_display ()
-;;;
-;;; GdkDisplay *
-;;; gdk_drag_get_display (GdkDrag *drag);
-;;;
-;;; Gets the GdkDisplay that the drag object was created for.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; Returns :
-;;;     a GdkDisplay.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-display)
+      "Accessor"
+      (documentation 'drag-display 'function)
+ "@version{#2023-8-4}
+  @syntax[]{(gdk:drag-display object) => display}
+  @argument[object]{a @class{gdk:drag} object}
+  @argument[display]{a @class{gdk:display} object}
+  @begin{short}
+    Accessor of the @slot[gdk:drag]{display} slot of the @class{gdk:drag}
+    class.
+  @end{short}
+  The @fun{gdk:drag-display} function returns the display that the drag object
+  was created for. 
+  @see-class{gdk:drag}
+  @see-class{gdk:display}")
 
 ;;; --- drag-formats -----------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “formats” property
-;;;
-;;;  “formats”                  GdkContentFormats *
-;;;
-;;; The possible formats that the drag can provide its data in.
-;;;
-;;; Owner: GdkDrag
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "formats" 'drag) t)
+ "The @code{formats} property of type @class{gdk:content-formats} 
+  (Read / Write / Construct Only) @br{}
+  The possible content formats that the drag can provide its data in.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drag_get_formats ()
-;;;
-;;; GdkContentFormats *
-;;; gdk_drag_get_formats (GdkDrag *drag);
-;;;
-;;; Retrieves the formats supported by this GdkDrag object.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; Returns :
-;;;     a GdkContentFormats.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-formats)
+      "Accessor"
+      (documentation 'drag-formats 'function)
+ "@version{#2023-8-4}
+  @syntax[]{(gdk:drag-formats object) => formats}
+  @argument[object]{a @class{gdk:drag} object}
+  @argument[formats]{a @class{gdk:content-formats} object}
+  @begin{short}
+    Accessor of the @slot[gdk:drag]{formats} slot of the @class{gdk:drag}
+    class.
+  @end{short}
+  The @fun{gdk:drag-formats} function retrieves the formats supported by the 
+  drag object.
+  @see-class{gdk:drag}
+  @see-class{gdk:content-formats}")
 
 ;;; --- drag-selected-action ---------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “selected-action” property
-;;;
-;;;  “selected-action”          GdkDragAction
-;;;
-;;; The currently selected action.
-;;;
-;;; Owner: GdkDrag
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "selected-action" 'drag) t)
+ "The @code{selected-action} property of type @class{gdk:drag-action} 
+  (Read / Write) @br{}
+  The currently selected action of the drag. @br{}
+  Default value: @code{:none}")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drag_get_selected_action ()
-;;;
-;;; GdkDragAction
-;;; gdk_drag_get_selected_action (GdkDrag *drag);
-;;;
-;;; Determines the action chosen by the drag destination.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; Returns :
-;;;     a GdkDragAction value
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-selected-action)
+      "Accessor"
+      (documentation 'drag-selected-action 'function)
+ "@version{#2023-8-4}
+  @syntax[]{(gdk:drag-selected-action object) => action}
+  @argument[object]{a @class{gdk:drag} object}
+  @argument[action]{a @symbol{gdk:drag-action} value}
+  @begin{short}
+    Accessor of the @slot[gdk:drag]{selected-action} slot of the 
+    @class{gdk:drag} class.
+  @end{short}
+  The @fun{gdk:drag-selected-action} function determines the action chosen by 
+  the drag destination.  
+  @see-class{gdk:drag}
+  @see-symbol{gdk:drag-action}")
 
 ;;; --- drag-surface -----------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “surface” property
-;;;
-;;;  “surface”                  GdkSurface *
-;;;
-;;; The surface where the drag originates.
-;;;
-;;; Owner: GdkDrag
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "surface" 'drag) t)
+ "The @code{surface} property of type @class{gdk:surface} 
+  (Read / Write / Construct Only) @br{}
+  The surface where the drag originates.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drag_get_surface ()
-;;;
-;;; GdkSurface *
-;;; gdk_drag_get_surface (GdkDrag *drag);
-;;;
-;;; Returns the GdkSurface where the drag originates.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; Returns :
-;;;     The GdkSurface where the drag originates.
-;;; ----------------------------------------------------------------------------
-
-
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-surface)
+      "Accessor"
+      (documentation 'drag-surface 'function)
+ "@version{#2023-8-4}
+  @syntax[]{(gdk:drag-surface object) => surface}
+  @argument[object]{a @class{gdk:drag} object}
+  @argument[surface]{a @class{gdk:surface} object where the drag originates}
+  @begin{short}
+    Accessor of the @slot[gdk:drag]{surface} slot of the @class{gdk:drag}
+    class.
+  @end{short}
+  The @fun{gdk:drag-surface} function returns the surface where the drag
+  originates. 
+  @see-class{gdk:drag}
+  @see-class{gdk:surface}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_drop_done ()
@@ -500,6 +462,12 @@
 ;;; success :
 ;;;     whether the drag was ultimatively successful
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_drag_drop_done" drag-drop-done) :void
+  (drag (g:object drag))
+  (success :boolean))
+
+(export 'drag-drop-done)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_begin ()
@@ -547,6 +515,16 @@
 ;;;     a newly created GdkDrag or NULL on error.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gdk_drag_begin" drag-begin) (g:object drag)
+  (surface (g:object surface))
+  (device (g:object device))
+  (content (g:object content-provider))
+  (actions drag-action)
+  (dx :double)
+  (dy :double))
+
+(export 'drag-begin)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_get_drag_surface ()
 ;;;
@@ -565,6 +543,11 @@
 ;;; Returns :
 ;;;     the drag surface, or NULL.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_drag_drag_surface" drag-drag-surface) (g:object surface)
+  (drag (g:object drag)))
+
+(export 'drag-drag-surface)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_set_hotspot ()
@@ -588,6 +571,13 @@
 ;;;     y coordinate of the drag surface hotspot
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gdk_drag_set_hotspot" drag-set-hotspot) :void
+  (drag (g:object drag))
+  (xhot :int)
+  (yhot :int))
+
+(export 'drag-set-hot-spot)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_action_is_unique ()
 ;;;
@@ -605,5 +595,10 @@
 ;;; Returns :
 ;;;     TRUE if exactly one action was given
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_drag_action_is_unique" drag-action-is-unique) :boolean
+  (action drag-action))
+
+(export 'drag-action-is-unique)
 
 ;;; --- End of file gdk4.drag.lisp ---------------------------------------------

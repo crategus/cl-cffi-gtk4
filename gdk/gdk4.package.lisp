@@ -360,7 +360,7 @@
       @about-function{paintable-compute-concrete-size}
       @about-function{paintable-invalidate-contents}
       @about-function{paintable-invalidate-size}
-     @about-function{paintable-new-empty}
+      @about-function{paintable-new-empty}
     @end{subsection}
     @begin[GdkTexture]{subsection}
       Pixel data.
@@ -481,6 +481,7 @@
       @about-function{popup-layout-surface-anchor}
       @about-function{popup-layout-anchor-hints}
       @about-function{popup-layout-offset}
+      @about-function{popup-layout-shadow-width}
       @end{subsection}
     @begin[GdkPopup]{subsection}
       Interface for popup surfaces.

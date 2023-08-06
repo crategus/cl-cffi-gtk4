@@ -2,7 +2,7 @@
 ;;; gdk4.content-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,34 +63,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkContentProvider
-;;;
-;;; A GdkContentProvider is used to provide content for the clipboard in a
-;;; number of formats.
-;;;
-;;; To create a GdkContentProvider, use gdk_content_provider_new_for_value() or
-;;; gdk_content_provider_new_for_bytes().
-;;;
-;;; GDK knows how to handle common text and image formats out-of-the-box. See
-;;; GdkContentSerializer and GdkContentDeserializer if you want to add support
-;;; for application-specific data formats.
-;;;
-;;; Signal Details
-;;;
-;;; The “content-changed” signal
-;;;
-;;; void
-;;; user_function (GdkContentProvider *gdkcontentprovider,
-;;;                gpointer            user_data)
-;;;
-;;; Emitted whenever the content provided by this provider has changed.
-;;;
-;;; user_data :
-;;;     user data set when the signal handler was connected.
-;;;
-;;; Flags: Run Last
-;;;
-;;; See Also
-;;;     GdkContentSerializer, GdkContentDeserializer
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GdkContentProvider" content-provider
@@ -105,50 +77,104 @@
     content-provider-storable-formats
     "storeable-formats" "GdkContentFormats" t nil)))
 
-;;; ----------------------------------------------------------------------------
-;;; Property Details
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation 'content-provider 'type)
+ "@version{#2023-8-4}
+  @begin{short}
+    A @sym{gdk:content-provider} object is used to provide content for the
+    clipboard in a number of formats.
+  @end{short}
+  To create a @class{gdk:content-provider} object, use the
+  @fun{gdk:content-provider-new-for-value} or the
+  @fun{gdk:content-provider-new-for-bytes} functions.
+
+  GDK knows how to handle common text and image formats out-of-the-box. See
+  the @class{gdk:content-serializer} and @class{gdk:content-deserializer}
+  objects if you want to add support for application specific data formats.
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"content-changed\" signal}
+      @begin{pre}
+lambda (provider)    :run-last
+      @end{pre}
+      Emitted whenever the content provided by the provider has changed.
+      @begin[code]{table}
+        @entry[provider]{The @class{gdk:content-provider} object.}
+      @end{table}
+  @end{dictionary}
+  @see-class{gdk:content-serializer}
+  @see-class{gdk:content-deserializer}")
 
 ;;; ----------------------------------------------------------------------------
-;;; The “formats” property
-;;;
-;;;  “formats”                  GdkContentFormats *
-;;;
-;;; The possible formats that the provider can provide its data in.
-;;;
-;;; Owner: GdkContentProvider
-;;; Flags: Read
+;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “storable-formats” property
-;;;
-;;;  “storable-formats”         GdkContentFormats *
-;;;
-;;; The subset of formats that clipboard managers should store this provider's
-;;; data in.
-;;;
-;;; Owner: GdkContentProvider
-;;; Flags: Read
-;;; ----------------------------------------------------------------------------
+;;; --- content-provider-formats -----------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "formats" 'content-provider) t)
+ "The @code{formats} property of type @class{gdk:content-formats} (Read) @br{}
+  The possible formats that the provider can provide its data in.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'content-provider-formats)
+      "Accessor"
+      (documentation 'content-provider-formats 'function)
+ "@version{#2023-8-4}
+  @syntax[]{(gdk:content-provider-formats object) => formats}
+  @argument[object]{a @class{gdk:content-provider} object}
+  @argument[formats]{a @class{gdk:conten-formats} instance with the formats of
+    the content provider}
+  @begin{short}
+    Gets the formats that the content provider can provide its current contents
+    in.
+  @end{short}
+  @see-class{gdk:content-provider}
+  @see-class{gdk:content-formats}")
+
+;;; --- content-provider-storable-formats --------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "storable-formats" 
+                                               'content-provider) t)
+ "The @code{storable-formats} property of type @class{gdk:content-formats} 
+  (Read) @br{}
+  The subset of formats that clipboard managers should store the dato of the 
+  content provider in.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'content-provider-storable-formats)
+      "Accessor"
+      (documentation 'content-provider-storable-formats 'function)
+ "@version{#2023-8-4}
+  @syntax[]{(gdk:content-provider-storable-formats object) => formats}
+  @argument[object]{a @class{gdk:content-provider} object}
+  @argument[formats]{a @class{gdk:conten-formats} instance with the storable 
+    formats of the content provider}
+  @begin{short}
+    Gets the formats that the content provider suggests other applications to 
+    store the data in.
+  @end{short}
+  An example of such an application would be a clipboard manager. This can be 
+  assumed to be a subset of @slot[gdk:content-provider]{storable-formats}.   
+  @see-class{gdk:content-provider}
+  @see-class{gdk:content-formats}
+  @see-function{gdk:content-provider-formats}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_provider_new_for_value ()
-;;;
-;;; GdkContentProvider *
-;;; gdk_content_provider_new_for_value (const GValue *value);
-;;;
-;;; Create a content provider that provides the given value .
-;;;
-;;; value :
-;;;     a GValue
-;;;
-;;; Returns :
-;;;     a new GdkContentProvider
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_content_provider_new_for_value"
                content-provider-new-for-value) (g:object content-provider)
+ #+liber-documentation
+ "@version{#2023-8-4}
+  @argument[gvalue]{a @class{g:value} instance}
+  @return{A new @class{gdk:content-provider} object.}
+  @begin{short}
+    Creates a content provider that provides the given @arg{gvalue}.
+  @end{short}
+  @see-class{gdk:content-provider}
+  @see-symbol{g:value}"
   (gvalue (:pointer (:struct g:value))))
 
 (export 'content-provider-new-for-value)
@@ -243,6 +269,8 @@
 ;;; Returns :
 ;;;     The formats of the provider.
 ;;; ----------------------------------------------------------------------------
+
+;; implemented as the gdk:content-provider-formats accessor function
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_content_provider_ref_storable_formats ()
@@ -377,4 +405,4 @@
 ;;;     describe the failure.
 ;;; ----------------------------------------------------------------------------
 
-;;; --- gdk4.content-provider.lisp ---------------------------------------------
+;;; --- End of file gdk4.content-provider.lisp ---------------------------------

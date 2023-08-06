@@ -64,14 +64,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkDrawContext
-;;;
-;;; GdkDrawContext is the base object used by contexts implementing different
-;;; rendering methods, such as GdkGLContext or GdkVulkanContext. It provides
-;;; shared functionality between those contexts.
-;;;
-;;; You will always interact with one of those subclasses.
-;;;
-;;; A GdkDrawContext is always associated with a single toplevel surface.
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GdkDrawContext" draw-context
@@ -86,110 +78,119 @@
     draw-context-surface
     "surface" "GdkSurface" t nil)))
 
+#+liber-documentation
+(setf (documentation 'draw-context 'type)
+ "@version{2023-8-3}
+  @begin{short}
+    The @sym{gdk:draw-context} object is the base object used by contexts
+    implementing different rendering methods, such as @class{gdk:gl-context} or
+    @class{gdk:vulkan-context} contexts.
+  @end{short}
+  It provides shared functionality between those contexts. You will always
+  interact with one of those subclasses.
+
+  A @sym{gdk:draw-context} object is always associated with a single toplevel
+  surface.
+  @see-class{gdk:gl-context}
+  @see-class{gdk:vulkan-context}
+  @see-class{gdk:cairo-context}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; property display: Gdk.Display [ read, write, construct-only ]
-;;;
-;;; The GdkDisplay used to create the GdkDrawContext.
-;;;
-;;; Type:	GdkDisplay
-;;; Getter method	gdk_draw_context_get_display()
-;;;
-;;; Flags
-;;; Readable	yes
-;;; Writable	yes
-;;; Construct	no
-;;; Construct only	yes
-;;; ----------------------------------------------------------------------------
+;;; --- draw-context-display ---------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_draw_context_get_display ()
-;;;
-;;; GdkDisplay *
-;;; gdk_draw_context_get_display (GdkDrawContext *context);
-;;;
-;;; Retrieves the GdkDisplay the context is created for
-;;;
-;;; context :
-;;;     a GdkDrawContext
-;;;
-;;; Returns :
-;;;     a GdkDisplay or NULL.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "display" 'draw-context) t)
+ "The @code{display} property of type @class{gdk:display}
+  (Read / Write / Construct Only) @br{}
+  The display used to create the draw context.")
 
-;;; ----------------------------------------------------------------------------
-;;; property surface: Gdk.Surface [ read, write, construct-only ]
-;;;
-;;; The GdkSurface the context is bound to.
-;;;
-;;; Type:	GdkSurface
-;;; Getter method	gdk_draw_context_get_surface()
-;;;
-;;; Flags
-;;; Readable	yes
-;;; Writable	yes
-;;; Construct	no
-;;; Construct only	yes
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'draw-context-display)
+      "Accessor"
+      (documentation 'draw-context-display 'function)
+ "@version{2023-8-3}
+  @syntax[]{(gdk:draw-context-display object) => display}
+  @argument[object]{a @class{gdk:draw-context} object}
+  @argument[display]{a @class{gdk:display} object or @code{nil}}
+  @begin{short}
+    Accessor of the @code{display} slot of the @class{gdk:draw-context}
+    class.
+  @end{short}
+  The @sym{gdk:draw-context-display} function retrieves the display the draw
+  context is created for.
+  @see-class{gdk:draw-context}
+  @see-class{gdk:display}")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_draw_context_get_surface ()
-;;;
-;;; GdkSurface *
-;;; gdk_draw_context_get_surface (GdkDrawContext *context);
-;;;
-;;; Retrieves the GdkSurface used by the context .
-;;;
-;;; context :
-;;;     a GdkDrawContext
-;;;
-;;; Returns :
-;;;     a GdkSurface or NULL.
-;;; ----------------------------------------------------------------------------
+;;; --- draw-context-surface ---------------------------------------------------
 
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "surface" 'draw-context) t)
+ "The @code{surface} property of type @class{gdk:surface}
+  (Read / Write / Construct Only) @br{}
+  The surface the draw context is bound to.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'draw-context-surface)
+      "Accessor"
+      (documentation 'draw-context-surface 'function)
+ "@version{2023-8-3}
+  @syntax[]{(gdk:draw-context-surface object) => surface}
+  @argument[object]{a @class{gdk:draw-context} object}
+  @argument[surface]{a @class{gdk:surface} object or @code{nil}}
+  @begin{short}
+    Accessor of the @code{surface} slot of the @class{gdk:draw-context}
+    class.
+  @end{short}
+  The @sym{gdk:draw-context-surface} function retrieves the surface used by
+  the draw context.
+  @see-class{gdk:draw-context}
+  @see-class{gdk:surface}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_draw_context_begin_frame ()
-;;;
-;;; void
-;;; gdk_draw_context_begin_frame (GdkDrawContext *context,
-;;;                               const cairo_region_t *region);
-;;;
-;;; Indicates that you are beginning the process of redrawing region on the
-;;; context 's surface.
-;;;
-;;; Calling this function begins a drawing operation using context on the
-;;; surface that context was created from. The actual requirements and
-;;; guarantees for the drawing operation vary for different implementations of
-;;; drawing, so a GdkCairoContext and a GdkGLContext need to be treated
-;;; differently.
-;;;
-;;; A call to this function is a requirement for drawing and must be followed by
-;;; a call to gdk_draw_context_end_frame(), which will complete the drawing
-;;; operation and ensure the contents become visible on screen.
-;;;
-;;; Note that the region passed to this function is the minimum region that
-;;; needs to be drawn and depending on implementation, windowing system and
-;;; hardware in use, it might be necessary to draw a larger region. Drawing
-;;; implementation must use gdk_draw_context_get_frame_region() to query the
-;;; region that must be drawn.
-;;;
-;;; When using GTK, the widget system automatically places calls to
-;;; gdk_draw_context_begin_frame() and gdk_draw_context_end_frame() via the use
-;;; of GskRenderers, so application code does not need to call these functions
-;;; explicitly.
-;;;
-;;; context :
-;;;     the context used to draw the frame
-;;;
-;;; region :
-;;;     minimum region that should be drawn
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_draw_context_begin_frame" draw-context-begin-frame) :void
+ #+liber-documentation
+ "@version{#2023-8-3}
+  @argument[context]{a @class{gdk:draw-context} object used to draw the frame}
+  @argument[region]{a @symbol{cairo:region-t} instance with the minimum region
+    that should be drawn}
+  @begin{short}
+    Indicates that you are beginning the process of redrawing @arg{region} on
+    the surface of @arg{context}.
+  @end{short}
+
+  Calling this function begins a drawing operation using @arg{context} on the
+  surface that context was created from. The actual requirements and guarantees
+  for the drawing operation vary for different implementations of drawing, so a
+  @class{gdk:cairo-context} and a @class{gdk:gl-context} object need to be
+  treated differently.
+
+  A call to this function is a requirement for drawing and must be followed by
+  a call to the @fun{gdk:draw-context-end-frame} function, which will complete
+  the drawing operation and ensure the contents become visible on screen.
+
+  Note that the region passed to this function is the minimum region that needs
+  to be drawn and depending on implementation, windowing system and hardware in
+  use, it might be necessary to draw a larger region. Drawing implementation
+  must use the @fun{gdk:draw-context-frame-region} function to query the region
+  that must be drawn.
+
+  When using GTK, the widget system automatically places calls to the
+  @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
+  functions via the use of @class{gdk:renderer} objects, so application code
+  does not need to call these functions explicitly.
+  @see-class{gdk:draw-context}
+  @see-symbol{cairo:region-t}
+  @see-class{gdk:cairo-context}
+  @see-class{gdk:gl-context}
+  @see-class{gsk:renderer}
+  @see-function{gdk:draw-context-frame-region}
+  @see-function{gdk:draw-context-end-frame}"
   (context (g:object draw-context))
   (region (:pointer (:struct cairo:region-t))))
 
@@ -197,75 +198,76 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_draw_context_end_frame ()
-;;;
-;;; void
-;;; gdk_draw_context_end_frame (GdkDrawContext *context);
-;;;
-;;; Ends a drawing operation started with gdk_draw_context_begin_frame() and
-;;; makes the drawing available on screen. See that function for more details
-;;; about drawing.
-;;;
-;;; When using a GdkGLContext, this function may call glFlush() implicitly
-;;; before returning; it is not recommended to call glFlush() explicitly before
-;;; calling this function.
-;;;
-;;; context :
-;;;     a GdkDrawContext
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_draw_context_end_frame" draw-context-end-frame) :void
+ #+liber-documentation
+ "@version{#2023-8-3}
+  @argument[context]{a @class{gdk:draw-context} object}
+  @begin{short}
+    Ends a drawing operation started with the @fun{gdk:draw-context-begin-frame}
+    function and makes the drawing available on screen.
+  @end{short}
+  See that function for more details about drawing.
+
+  When using a @class{gdk:gl-context} object, this function may call the
+  @code{glFlush()} function implicitly before returning. It is not recommended
+  to call the @code{glFlush()} function explicitly before calling this function.
+  @see-class{gdk:draw-context}
+  @see-function{gdk:draw-context-begin-frame}"
   (context (g:object draw-context)))
 
 (export 'draw-context-end-frame)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_draw_context_is_in_frame ()
-;;;
-;;; gboolean
-;;; gdk_draw_context_is_in_frame (GdkDrawContext *context);
-;;;
-;;; Returns TRUE if context is in the process of drawing to its surface after a
-;;; call to gdk_draw_context_begin_frame() and not yet having called
-;;; gdk_draw_context_end_frame(). In this situation, drawing commands may be
-;;; effecting the contents of a context 's surface.
-;;;
-;;; context :
-;;;     a GdkDrawContext
-;;;
-;;; Returns :
-;;;     TRUE if the context is between gdk_draw_context_begin_frame() and
-;;;     gdk_draw_context_end_frame() calls.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_draw_context_is_in_frame" draw-context-is-in-frame) :boolean
+ #+liber-documentation
+ "@version{#2023-8-3}
+  @argument[context]{a @class{gdk:draw-context} object}
+  @return{@em{True} if the draw context is between the
+  @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
+  function calls.}
+  @begin{short}
+    Returns @em{true} if @arg{context} is in the process of drawing to its
+    surface after a call to the @fun{gdk:draw-context-begin-frame} function and
+    not yet having called the @fun{gdk:draw-context-end-frame} function.
+  @end{short}
+  In this situation, drawing commands may be effecting the contents of a
+  surface of the context.
+  @see-class{gdk:draw-context}
+  @see-function{gdk:draw-context-begin-frame}
+  @see-function{gdk:draw-context-end-frame}"
   (context (g:object draw-context)))
 
 (export 'draw-context-is-in-frame)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_draw_context_get_frame_region ()
-;;;
-;;; const cairo_region_t *
-;;; gdk_draw_context_get_frame_region (GdkDrawContext *context);
-;;;
-;;; Retrieves the region that is currently in the process of being repainted.
-;;;
-;;; After a call to gdk_draw_context_begin_frame() this function will return a
-;;; union of the region passed to that function and the area of the surface that
-;;; the context determined needs to be repainted.
-;;;
-;;; If context is not in between calls to gdk_draw_context_begin_frame() and
-;;; gdk_draw_context_end_frame(), NULL will be returned.
-;;;
-;;; context :
-;;;     a GdkDrawContext
-;;;
-;;; Returns :
-;;;     a Cairo region or NULL if not drawing a frame.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_draw_context_get_frame_region" draw-context-frame-region)
     (:pointer (:struct cairo:region-t))
+ #+liber-documentation
+ "@version{2023-8-3}
+  @argument[context]{a @class{gdk:draw-context} object}
+  @return{A @symbol{cairo:region-t} instance or @code{null-pointer} if not
+    drawing a frame.}
+  @begin{short}
+    Retrieves the region that is currently in the process of being repainted.
+  @end{short}
+
+  After a call to the @fun{gdk:draw-context-begin-frame} function this function
+  will return a union of the region passed to that function and the area of the
+  surface that the draw context determined needs to be repainted.
+
+  If @arg{context} is not in between calls to the
+  @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
+  functions, @code{null-pointer} will be returned.
+  @see-class{gdk:draw-context}
+  @see-symbol{cairo:region-t}"
   (context (g:object draw-context)))
 
 (export 'draw-context-frame-region)

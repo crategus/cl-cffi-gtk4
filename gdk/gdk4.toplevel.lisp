@@ -317,17 +317,16 @@
   @begin{short}
     A @sym{gdk:toplevel} object is a freestanding toplevel surface.
   @end{short}
-
-  The @sym{gdk:toplevel} interface provides useful APIs for interacting with the
-  windowing system, such as controlling maximization and size of the surface,
-  setting icons and transient parents for dialogs.
+  The @sym{gdk:toplevel} interface provides useful APIs for interacting with
+  the windowing system, such as controlling maximization and size of the
+  surface, setting icons and transient parents for dialogs.
   @begin[Signal Details]{dictionary}
     @subheading{The \"compute-size\" signal}
       @begin{pre}
 lambda (toplevel size)    :run-last
       @end{pre}
-      Compute the desired size of the toplevel, given the information passed via
-      the @symbol{gdk:toplevel-size} instance. It will normally be emitted
+      Compute the desired size of the toplevel, given the information passed
+      via the @symbol{gdk:toplevel-size} instance. It will normally be emitted
       during or after the @fun{gdk:toplevel-present} function, depending on the
       configuration received by the windowing system. It may also be emitted at
       any other point in time, in response to the windowing system spontaneously
@@ -624,29 +623,28 @@ lambda (toplevel size)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_present ()
-;;;
-;;; void
-;;; gdk_toplevel_present (GdkToplevel *toplevel,
-;;;                       GdkToplevelLayout *layout);
-;;;
-;;;Present toplevel after having processed the GdkToplevelLayout rules. If the toplevel was previously not showing, it will be showed, otherwise it will change layout according to layout .
-
-;;;GDK may emit the 'compute-size' signal to let the user of this toplevel compute the preferred size of the toplevel surface. See “compute-size” for details.
-
-;;;Presenting is asynchronous and the specified layout parameters are not guaranteed to be respected.
-
-;;;Parameters
-;;;toplevel
-
-;;;the GdkToplevel to show
-
-;;;
-;;;layout
-
-;;;the GdkToplevelLayout object used to layout
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_present" toplevel-present) :void
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object to show}
+  @argument[layout]{a @class{gdk:toplevel-layout} instance used to layout}
+  @begin{short}
+    Present @arg{toplevel} after having processed the
+    @class{gtk:toplevel-layout} rules.
+  @end{short}
+  If the toplevel was previously not showing, it will be showed, otherwise it
+  will change layout according to @arg{layout}.
+
+  GDK may emit the \"compute-size\" signal to let the user of this toplevel
+  compute the preferred size of the toplevel surface. See \"compute-size\" for
+  details.
+
+  Presenting is asynchronous and the specified layout parameters are not
+  guaranteed to be respected.
+  @see-class{gdk:toplevel-present}
+  @see-class{gdk:toplevel-layout}"
   (toplevel (g:object toplevel))
   (layout (g:boxed toplevel-layout)))
 
@@ -654,77 +652,58 @@ lambda (toplevel size)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_minimize ()
-;;;
-;;; gboolean
-;;; gdk_toplevel_minimize (GdkToplevel *toplevel);
-;;;
-;;;Asks to minimize the toplevel .
-
-;;;The windowing system may choose to ignore the request.
-
-;;;Parameters
-;;;toplevel
-
-;;;a GdkToplevel
-
-;;;
-;;;Returns
-;;;TRUE if the surface was minimized
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_minimize" toplevel-minimize) :boolean
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object}
+  @return{@em{True} if the surface was minimized.}
+  @begin{short}
+    Asks to minimize the toplevel.
+  @end{short}
+  The windowing system may choose to ignore the request.
+  @see-class{gdk:toplevel}"
   (toplevel (g:object toplevel)))
 
 (export 'toplevel-minimize)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_lower ()
-;;;
-;;; gboolean
-;;; gdk_toplevel_lower (GdkToplevel *toplevel);
-;;;
-;;;Asks to lower the toplevel below other windows.
-
-;;;The windowing system may choose to ignore the request.
-
-;;;Parameters
-;;;toplevel
-
-;;;a GdkToplevel
-
-;;;
-;;;Returns
-;;;TRUE if the surface was lowered
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_lower" toplevel-lower) :boolean
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object}
+  @return{@em{True} if the surface was lowered.}
+  @begin{short}
+    Asks to lower the toplevel below other windows.
+  @end{short}
+  The windowing system may choose to ignore the request.
+  @see-class{gdk:toplevel}"
   (toplevel (g:object toplevel)))
 
 (export 'toplevel-lower)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_focus ()
-;;;
-;;; void
-;;; gdk_toplevel_focus (GdkToplevel *toplevel,
-;;;                     guint32 timestamp);
-;;;
-;;;Sets keyboard focus to surface .
-
-;;;In most cases, gtk_window_present_with_time() should be used on a GtkWindow, rather than calling this function.
-
-;;;Parameters
-;;;toplevel
-
-;;;a GdkToplevel
-
-;;;
-;;;timestamp
-
-;;;timestamp of the event triggering the surface focus
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_focus" toplevel-focus) :void
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object}
+  @argument[timestamp]{an unsigned integer with the timestamp of the event
+    triggering the surface focus}
+  @begin{short}
+    Sets keyboard focus to surface .
+  @end{short}
+  In most cases, the @fun{gtk:window-present-with-time} function should be used
+  on a @class{gtk:window} widget, rather than calling this function.
+  @see-class{gdk:toplevel}
+  @see-class{gtk:window}
+  @see-function{gtk:window-present-with-time}"
   (toplevel (g:object toplevel))
   (timestamp :uint))
 
@@ -732,154 +711,135 @@ lambda (toplevel size)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_show_window_menu ()
-;;;
-;;; gboolean
-;;; gdk_toplevel_show_window_menu (GdkToplevel *toplevel,
-;;;                                GdkEvent *event);
-;;;
-;;;Asks the windowing system to show the window menu.
-
-;;;The window menu is the menu shown when right-clicking the titlebar on traditional windows managed by the window manager. This is useful for windows using client-side decorations, activating it with a right-click on the window decorations.
-
-;;;Parameters
-;;;toplevel
-
-;;;a GdkToplevel
-
-;;;
-;;;event
-
-;;;a GdkEvent to show the menu for
-
-;;;
-;;;Returns
-;;;TRUE if the window menu was shown and FALSE otherwise.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_show_window_menu" toplevel-show-window-menu)
     :boolean
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object}
+  @argument[event]{a @class{gdk:event} instance to show the menu for}
+  @return{@em{True} if the window menu was shown and @em{false} otherwise.}
+  @begin{short}
+    Asks the windowing system to show the window menu.
+  @end{short}
+  The window menu is the menu shown when right-clicking the titlebar on
+  traditional windows managed by the window manager. This is useful for windows
+  using client-side decorations, activating it with a right-click on the window
+  decorations.
+  @see-class{gdk:toplevel}
+  @see-class{gdk:event}"
   (toplevel (g:object toplevel))
-  (event :pointer)) ; for GdkEvent
+  (event event))
 
 (export 'toplevel-show-window-menu)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_supports_edge_constraints ()
-;;;
-;;; gboolean
-;;; gdk_toplevel_supports_edge_constraints
-;;;                                (GdkToplevel *toplevel);
-;;;
-;;;Returns whether the desktop environment supports tiled window states.
-
-;;;Parameters
-;;;toplevel
-
-;;;a GdkToplevel
-
-;;;
-;;;Returns
-;;;TRUE if the desktop environment supports tiled window states
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_supports_edge_constraints"
                toplevel-supports-edge-constraints) :boolean
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object}
+  @return{@em{True} if the desktop environment supports tiled window states.}
+  @begin{short}
+    Returns whether the desktop environment supports tiled window states.
+  @end{short}
+  @see-class{gdk:toplevel}"
   (toplevel (g:object toplevel)))
 
 (export 'toplevel-supports-edge-constraints)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_inhibit_system_shortcuts ()
-;;;
-;;; void
-;;; gdk_toplevel_inhibit_system_shortcuts (GdkToplevel *toplevel,
-;;;                                        GdkEvent *event);
-;;;
-;;;Requests that the toplevel inhibit the system shortcuts, asking the desktop environment/windowing system to let all keyboard events reach the surface, as long as it is focused, instead of triggering system actions.
-
-;;;If granted, the rerouting remains active until the default shortcuts processing is restored with gdk_toplevel_restore_system_shortcuts(), or the request is revoked by the desktop environment, windowing system or the user.
-
-;;;A typical use case for this API is remote desktop or virtual machine viewers which need to inhibit the default system keyboard shortcuts so that the remote session or virtual host gets those instead of the local environment.
-
-;;;The windowing system or desktop environment may ask the user to grant or deny the request or even choose to ignore the request entirely.
-
-;;;The caller can be notified whenever the request is granted or revoked by listening to the GdkToplevel::shortcuts-inhibited property.
-
-;;;Parameters
-;;;toplevel
-
-;;;the GdkToplevel requesting system keyboard shortcuts
-
-;;;
-;;;event
-
-;;;the GdkEvent that is triggering the inhibit request, or NULL if none is available.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_inhibit_system_shortcuts"
                toplevel-inhibit-system-shortcuts) :void
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object requesting system keyboard
+    shortcuts}
+  @argument[event]{a @class{gdk:event} instance that is triggering the inhibit
+    request, or @code{nil} if none is available}
+  @begin{short}
+    Requests that the toplevel inhibit the system shortcuts, asking the desktop
+    environment/windowing system to let all keyboard events reach the surface,
+    as long as it is focused, instead of triggering system actions.
+  @end{short}
+
+  If granted, the rerouting remains active until the default shortcuts
+  processing is restored with the @fun{gdk:toplevel-restore-system-shortcuts}
+  function, or the request is revoked by the desktop environment, windowing
+  system or the user.
+
+  A typical use case for this API is remote desktop or virtual machine viewers
+  which need to inhibit the default system keyboard shortcuts so that the
+  remote session or virtual host gets those instead of the local environment.
+
+  The windowing system or desktop environment may ask the user to grant or deny
+  the request or even choose to ignore the request entirely.
+
+  The caller can be notified whenever the request is granted or revoked by
+  listening to the @slot[gdk:toplevel]{shortcuts-inhibited} property.
+  @see-class{gdk:toplevel}
+  @see-class{gdk:event}
+  @see-function{gdk:toplevel-restore-system-shortcuts}
+  @see-function{gdk:toplevel-shortcuts-inhibited}"
   (toplevel (g:object toplevel))
-  (event :pointer)) ; TODO: Implement GdkEvent
+  (event event))
 
 (export 'toplevel-inhibit-system-shortcuts)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_restore_system_shortcuts ()
-;;;
-;;; void
-;;; gdk_toplevel_restore_system_shortcuts (GdkToplevel *toplevel);
-;;;
-;;;Restore default system keyboard shortcuts which were previously requested to be inhibited by gdk_toplevel_inhibit_system_shortcuts().
-
-;;;Parameters
-;;;toplevel
-
-;;;a GdkToplevel
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_restore_system_shortcuts"
                toplevel-restore-system-shortcuts) :void
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object}
+  @begin{short}
+    Restore default system keyboard shortcuts which were previously requested
+    to be inhibited by the @fun{gdk:toplevel-inhibit-system-shortcuts}
+    function.
+  @end{short}
+  @see-class{gdk:toplevel}
+  @see-function{gdk:toplevel-inhibit-system-shortcuts}"
   (toplevel (g:object toplevel)))
 
 (export 'toplevel-restore-system-shortcuts)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_begin_resize ()
-;;;
-;;; void
-;;; gdk_toplevel_begin_resize (GdkToplevel *toplevel,
-;;;                            GdkSurfaceEdge edge,
-;;;                            GdkDevice *device,
-;;;                            int button,
-;;;                            double x,
-;;;                            double y,
-;;;                            guint32 timestamp);
-;;;
-;;;Begins an interactive resize operation (for a toplevel surface). You might use this function to implement a “window resize grip.”
-
-;;;toplevel
-;;;a GdkToplevel
-
-;;;edge
-;;;the edge or corner from which the drag is started
-
-;;;device
-;;;the device used for the operation.
-
-;;;button
-;;;the button being used to drag, or 0 for a keyboard-initiated drag
-
-;;;x
-;;;surface X coordinate of mouse click that began the drag
-
-;;;y
-;;;surface Y coordinate of mouse click that began the drag
-
-;;;timestamp
-;;;timestamp of mouse click that began the drag (use gdk_event_get_time())
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_begin_resize" toplevel-begin-resize) :void
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object}
+  @argument[edge]{a @symbol{gdk:surface-edge} value with the edge or corner
+    from which the drag is started}
+  @argument[device]{a @class{gdk:device} object used for the operation}
+  @argument[button]{an integer with the button being used to drag, or 0 for a
+    keyboard-initiated drag}
+  @argument[x]{a double float with the surface x coordinate of mouse click that
+    began the drag}
+  @argument[y]{a double float with the surface y coordinate of mouse click that
+    began the drag}
+  @argument[timestamp]{an unsigned integer with the timestamp of mouse click
+    that began the drag, use the @fun{gdk:event-time} function.}
+  @begin{short}
+    Begins an interactive resize operation, for a toplevel surface.
+  @end{short}
+  You might use this function to implement a window resize grip.
+  @see-class{gdk:toplevel}
+  @see-class{gdk:device}
+  @see-symbol{gdk:surface-edge}
+  @see-function{gdk:event-time}"
   (toplevel (g:object toplevel))
   (edge surface-edge)
   (device (g:object device))
@@ -892,49 +852,28 @@ lambda (toplevel size)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_begin_move ()
-;;;
-;;; void
-;;; gdk_toplevel_begin_move (GdkToplevel *toplevel,
-;;;                          GdkDevice *device,
-;;;                          int button,
-;;;                          double x,
-;;;                          double y,
-;;;                          guint32 timestamp);
-;;;
-;;;Begins an interactive move operation (for a toplevel surface). You might use this function to implement draggable titlebars.
-
-;;;Parameters
-;;;toplevel
-
-;;;a GdkToplevel
-
-;;;
-;;;device
-
-;;;the device used for the operation
-
-;;;
-;;;button
-
-;;;the button being used to drag, or 0 for a keyboard-initiated drag
-
-;;;
-;;;x
-
-;;;surface X coordinate of mouse click that began the drag
-
-;;;
-;;;y
-
-;;;surface Y coordinate of mouse click that began the drag
-
-;;;
-;;;timestamp
-
-;;;timestamp of mouse click that began the drag
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_toplevel_begin_move" toplevel-begin-move) :void
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object}
+  @argument[device]{a @class{gdk:device} object used for the operation}
+  @argument[button]{an integer with the button being used to drag, or 0 for a
+    keyboard-initiated drag}
+  @argument[x]{a double float with the surface x coordinate of mouse click that
+    began the drag}
+  @argument[y]{a double float with the surface y coordinate of mouse click that
+    began the drag}
+  @argument[timestamp]{an unsigned integer with the timestamp of mouse click
+    that began the drag}
+  @begin{short}
+    Begins an interactive move operation, for a toplevel surface.
+  @end{short}
+  You might use this function to implement draggable titlebars.
+  @see-class{gdk:toplevel}
+  @see-class{gdk:device}
+  @see-function{gdk:event-time}"
   (toplevel (g:object toplevel))
   (device (g:object device))
   (button :int)
@@ -946,25 +885,23 @@ lambda (toplevel size)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_titlebar_gesture                          Since 4.4
-;;;
-;;; gboolean
-;;; gdk_toplevel_titlebar_gesture (GdkToplevel* toplevel,
-;;;                                GdkTitlebarGesture gesture)
-;;;
-;;; No description available.
-;;;
-;;; Available since: 4.4
-;;;
-;;; gesture :
-;;;     A GdkTitlebarGesture
-;;;
-;;; Return :
-;;;     No description available.
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
 (cffi:defcfun ("gdk_toplevel_titlebar_gesture" toplevel-titlebar-gesture)
     :boolean
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[toplevel]{a @class{gdk:toplevel} object}
+  @argument[gesture]{a @symbol{gdk:titlebar-gesture} value}
+  @return{A boolean value.}
+  @begin{short}
+    No description available.
+  @end{short}
+
+  Since 4.4
+  @see-class{gdk:toplevel}
+  @see-symbol{gdk:titlebar-gesture}"
   (toplevel (g:object toplevel))
   (gesture titlebar-gesture))
 

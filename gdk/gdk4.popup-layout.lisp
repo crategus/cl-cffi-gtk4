@@ -66,8 +66,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GdkAnchorHints
-;;;
-
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-flags "GdkAnchorHints" anchor-hints
@@ -84,9 +82,9 @@
   (:resize #.(+ (ash 1 4) (ash 1 5))))
 
 #+liber-documentation
-(setf (liber:alias-for-symbol 'toplevel-state)
+(setf (liber:alias-for-symbol 'anchor-hints)
       "GFlags"
-      (liber:symbol-documentation 'toplevel-state)
+      (liber:symbol-documentation 'anchor-hints)
  "@version{#2023-4-10}
   @begin{short}
     Positioning hints for aligning a surface relative to a rectangle.
@@ -105,7 +103,7 @@
   In general, when multiple flags are set, flipping should take precedence over
   sliding, which should take precedence over resizing.
   @begin{pre}
-(gobejct:define-g-flags \"GdkAnchorHints\" anchor-hints
+(gobject:define-g-flags \"GdkAnchorHints\" anchor-hints
   (:export t
    :type-initializer \"gdk_anchor_hints_get_type\")
   (:flip-x #.(ash 1 0))
@@ -152,8 +150,8 @@
   since it depends on external constraints, such as the position of the parent
   surface, and the screen dimensions.
 
-  The basic ingredients are a rectangle on the parent surface, and the anchor on
-  both that rectangle and the popup. The anchors specify a side or corner to
+  The basic ingredients are a rectangle on the parent surface, and the anchor 
+  on both that rectangle and the popup. The anchors specify a side or corner to
   place next to each other.
 
   @image[popup-anchors]{Figure: Popup anchors}
@@ -181,24 +179,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_new ()
-;;;
-;;; GdkPopupLayout *
-;;; gdk_popup_layout_new (const GdkRectangle *anchor_rect,
-;;;                       GdkGravity rect_anchor,
-;;;                       GdkGravity surface_anchor);
-;;;
-;;;
-;;; anchor_rect :
-;;;     the anchor GdkRectangle to align surface with.
-;;;
-;;; rect_anchor :
-;;;
-;;;
-;;; surface_anchor :
-;;;
-;;;
-;;; Returns :
-;;;     newly created instance of GdkPopupLayout.
 ;;; ----------------------------------------------------------------------------
 
 (defun %popup-layout-new ()
@@ -273,64 +253,45 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_copy ()
-;;;
-;;; GdkPopupLayout *
-;;; gdk_popup_layout_copy (GdkPopupLayout *layout);
-;;;
-;;; Create a new GdkPopupLayout and copy the contents of layout into it.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; Returns :
-;;;     a copy of layout .
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_popup_layout_copy" popup-layout-copy) (g:boxed popup-layout)
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[layout]{a @class{gdk:popup-layout} instance}
+  @return{A @class{gdk:popup-layout} instance with the copy of @arg{layout}.}
+  @begin{short}  
+    Create a new popup layout and copy the contents of @arg{layout} into it.
+  @end{short}  
+  @see-class{gdk:popup-layout}"
   (layout (g:boxed popup-layout)))
 
 (export 'popup-layout-copy)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_equal ()
-;;;
-;;; gboolean
-;;; gdk_popup_layout_equal (GdkPopupLayout *layout,
-;;;                         GdkPopupLayout *other);
-;;;
-;;; Check whether layout and other has identical layout properties.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; other :
-;;;     another GdkPopupLayout
-;;;
-;;; Returns :
-;;;     TRUE if layout and other have identical layout properties, otherwise
-;;;     FALSE.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_popup_layout_equal" popup-layout-equal) :boolean
-  (layout (g:boxed popup-layout))
-  (other (g:boxed popup-layout)))
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[layout1]{a @class{gdk:popup-layout} instance}
+  @argument[layout2]{a @class{gdk:popup-layout} instance}
+  @return{@em{True} if @arg{layout1} and @arg{layout2} have identical layout 
+    properties, otherwise @em{false}.}
+  @begin{short}
+    Check whether @arg{layout1} and @arg{layout2} have identical layout 
+    properties.
+  @end{short}
+  @see-class{gdk:popup-layout}"
+  (layout1 (g:boxed popup-layout))
+  (layout2 (g:boxed popup-layout)))
 
 (export 'popup-layout-equal)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_set_anchor_rect ()
-;;;
-;;; void
-;;; gdk_popup_layout_set_anchor_rect (GdkPopupLayout *layout,
-;;;                                   const GdkRectangle *anchor_rect);
-;;;
-;;; Set the anchor rectangle.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; anchor_rect :
-;;;     the new anchor rectangle
+;;; gdk_popup_layout_get_anchor_rect ()
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf popup-layout-anchor-rect) (rect layout)
@@ -340,41 +301,28 @@
                         :void)
   rect)
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_popup_layout_get_anchor_rect ()
-;;;
-;;; const GdkRectangle *
-;;; gdk_popup_layout_get_anchor_rect (GdkPopupLayout *layout);
-;;;
-;;; Get the anchor rectangle.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; Returns :
-;;;     The anchor rectangle.
-;;; ----------------------------------------------------------------------------
-
 (cffi:defcfun ("gdk_popup_layout_get_anchor_rect" popup-layout-anchor-rect)
     (g:boxed rectangle)
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @syntax[]{(gdk:popup-layout-anchor-rect layout) => rect}
+  @syntax[]{(setf (gdk:popup-layout-anchor-rect layout) rect)}
+  @argument[layout]{a @class{gdk:popup-layout} instance}
+  @argument[rect]{a anchor @class{gdk:rectangle} instance}  
+  @begin{short}
+    The @sym{gdk:popup-layout-anchor-rect} function gets the anchor rectangle.
+  @end{short}
+  The @sym{(setf gdk:popup-layout-anchor-rect)} function sets the anchor 
+  rectangle.
+  @see-class{gdk:popup-layout}
+  @see-class{gdk:rectangle}"
   (layout (g:boxed popup-layout)))
 
 (export 'popup-layout-anchor-rect)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_set_rect_anchor ()
-;;;
-;;; void
-;;; gdk_popup_layout_set_rect_anchor (GdkPopupLayout *layout,
-;;;                                   GdkGravity anchor);
-;;;
-;;; Set the anchor on the anchor rectangle.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; anchor :
-;;;     the new rect anchor
+;;; gdk_popup_layout_get_rect_anchor ()
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf popup-layout-rect-anchor) (anchor layout)
@@ -384,41 +332,30 @@
                         :void)
   anchor)
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_popup_layout_get_rect_anchor ()
-;;;
-;;; GdkGravity
-;;; gdk_popup_layout_get_rect_anchor (GdkPopupLayout *layout);
-;;;
-;;; Returns the anchor position on the anchor rectangle.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; Returns :
-;;;     the anchor on the anchor rectangle.
-;;; ----------------------------------------------------------------------------
-
 (cffi:defcfun ("gdk_popup_layout_get_rect_anchor" popup-layout-rect-anchor)
     gravity
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @syntax[]{(gdk:popup-layout-rect-anchor layout) => gravity}
+  @syntax[]{(setf (gdk:popup-layout-rect-anchor layout) gravity)}
+  @argument[layout]{a @class{gdk:popup-layout} instance}
+  @argument[gravity]{a @symbol{gdk:gravity} value with the anchor on the
+    anchor rectangle}
+  @begin{short}
+    The @sym{gdk:popup-layout-rect-anchor} function returns the anchor position 
+    on the anchor rectangle.
+  @end{short}
+  The @sym{(setf gdk:popup-layout-rect-anchor)} function sets the anchor on the 
+  anchor rectangle.
+  @see-class{gdk:popup-layout}
+  @see-symbol{gdk:gravity}"
   (layout (g:boxed popup-layout)))
 
 (export 'popup-layout-rect-anchor)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_set_surface_anchor ()
-;;;
-;;; void
-;;; gdk_popup_layout_set_surface_anchor (GdkPopupLayout *layout,
-;;;                                      GdkGravity anchor);
-;;;
-;;; Set the anchor on the popup surface.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; anchor :
-;;;     the new popup surface anchor
+;;; gdk_popup_layout_get_surface_anchor ()
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf popup-layout-surface-anchor) (anchor layout)
@@ -428,46 +365,30 @@
                         :void)
   anchor)
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_popup_layout_get_surface_anchor ()
-;;;
-;;; GdkGravity
-;;; gdk_popup_layout_get_surface_anchor (GdkPopupLayout *layout);
-;;;
-;;; Returns the anchor position on the popup surface.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; Returns :
-;;;     the anchor on the popup surface.
-;;; ----------------------------------------------------------------------------
-
 (cffi:defcfun ("gdk_popup_layout_get_surface_anchor"
                popup-layout-surface-anchor) gravity
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @syntax[]{(gdk:popup-layout-surface-anchor layout) => gravity}
+  @syntax[]{(setf (gdk:popup-layout-surface-anchor layout) gravity)}
+  @argument[layout]{a @class{gdk:popup-layout} instance}
+  @argument[gravity]{a @symbol{gdk:gravity} value with the anchor on the
+    popup surface}
+  @begin{short}
+    The @sym{gdk:popup-layout-surface-anchor} function returns the anchor 
+    position on the popup surface.
+  @end{short}
+  The @sym{(setf gdk:popup-layout-surface-anchor)} function sets the anchor on 
+  the popup surface.  
+  @see-class{gdk:popup-layout}
+  @see-symbol{gdk:gravity}"
   (layout (g:boxed popup-layout)))
 
 (export 'popup-layout-surface-anchor)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_set_anchor_hints ()
-;;;
-;;; void
-;;; gdk_popup_layout_set_anchor_hints (GdkPopupLayout *layout,
-;;;                                    GdkAnchorHints anchor_hints);
-;;;
-;;; Set new anchor hints.
-;;;
-;;; The set anchor_hints determines how surface will be moved if the anchor
-;;; points cause it to move off-screen. For example, GDK_ANCHOR_FLIP_X will
-;;; replace GDK_GRAVITY_NORTH_WEST with GDK_GRAVITY_NORTH_EAST and vice versa
-;;; if surface extends beyond the left or right edges of the monitor.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; anchor_hints :
-;;;     the new GdkAnchorHints
+;;; gdk_popup_layout_get_anchor_hints ()
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf popup-layout-anchor-hints) (hints layout)
@@ -477,73 +398,128 @@
                         :void)
   hints)
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_popup_layout_get_anchor_hints ()
-;;;
-;;; GdkAnchorHints
-;;; gdk_popup_layout_get_anchor_hints (GdkPopupLayout *layout);
-;;;
-;;; Get the GdkAnchorHints.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; Returns :
-;;;     the GdkAnchorHints.
-;;; ----------------------------------------------------------------------------
-
 (cffi:defcfun ("gdk_popup_layout_get_anchor_hints" popup-layout-anchor-hints)
     anchor-hints
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @syntax[]{(gdk:popup-layout-anchor-hints layout) => hints}
+  @syntax[]{(setf (gdk:popup-layout-anchor-hints layout) hints)}
+  @argument[layout]{a @class{gdk:popup-layout} instance}
+  @argument[hints]{a @symbol{gdk:anchor-hints} value}
+  @begin{short}
+    The @sym{gdk:popup-layout-anchor-hints} function gets the 
+    @symbol{gdk:anchor-hints} value.
+  @end{short}
+  The @sym{(setf gdk:popup-layout-anchor-hints)} function sets new anchor hints.
+
+  The set @arg{hints} determines how surface will be moved if the anchor points 
+  cause it to move off-screen. For example, @code{:flip-x} will replace 
+  @code{:north-west} with @code{:north-east} and vice versa if surface extends 
+  beyond the left or right edges of the monitor.  
+  @see-class{gdk:popup-layout}
+  @see-symbol{gdk:anchor-hints}"
   (layout (g:boxed popup-layout)))
 
 (export 'popup-layout-anchor-hints)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_set_offset ()
-;;;
-;;; void
-;;; gdk_popup_layout_set_offset (GdkPopupLayout *layout,
-;;;                              int dx,
-;;;                              int dy);
-;;;
-;;; Offset the position of the anchor rectangle with the given delta.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; dx :
-;;;     x delta to offset the anchor rectangle with
-;;;
-;;; dy :
-;;;     y delta to offset the anchor rectangle with
+;;; gdk_popup_layout_get_offset ()
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_popup_layout_get_offset ()
-;;;
-;;; void
-;;; gdk_popup_layout_get_offset (GdkPopupLayout *layout,
-;;;                              int *dx,
-;;;                              int *dy);
-;;;
-;;; Retrieves the offset for the anchor rectangle.
-;;;
-;;; layout :
-;;;     a GdkPopupLayout
-;;;
-;;; dx :
-;;;     return location for the delta X coordinate.
-;;;
-;;; dy :
-;;;     return location for the delta Y coordinate.
-;;; ----------------------------------------------------------------------------
+(defun (setf popup-layout-offset) (offset layout)
+  (destructuring-bind (dx dy) offset
+    (cffi:foreign-funcall "gdk_popup_layout_set_offset"
+                          (g:boxed popup-layout) layout
+                          :int dx
+                          :int dy
+                          :void)
+    (values dx dy)))
+
+(cffi:defcfun ("gdk_popup_layout_get_offset" %popup-layout-offset) :void
+  (layout (g:boxed popup-layout))
+  (dx (:pointer :int))
+  (dy (:pointer :int)))
+
+(defun popup-layout-offset (layout)
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @syntax[]{(gdk:popup-layout-offset layout) => dx, dy}
+  @syntax[]{(setf (gdk:popup-layout-offset layout) (list dx dy))}
+  @argument[layout]{a @class{gdk:popup-layout} instance}
+  @argument[dx]{an integer with the delta x coordinate}
+  @argument[dx]{an integer with the delta y coordinate}
+  @begin{short}
+    The @sym{gdk:popup-layout-offset} function retrieves the offset for the 
+    anchor rectangle.    
+  @end{short}
+  The @sym{(setf gdk:popup-layout-offset)} function offset the position of the 
+  anchor rectangle with the given delta.
+  @see-class{gdk:popup-layout}"
+  (cffi:with-foreign-objects ((dx :int) (dy :int))
+    (%popup-layout-offset layout dx dy)
+    (values (cffi:mem-ref dx :int)
+            (cffi:mem-ref dy :int))))
+
+(export 'popup-layout-offset)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_set_shadow_width                      Since 4.2
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_get_shadow_width                      Since 4.2
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-2
+(defun (setf popup-layout-shadow-width) (value layout)
+  (destructuring-bind (left right top bottom) value
+    (cffi:foreign-funcall "gdk_popup_layout_set_shadow_width"
+                          (g:boxed popup-layout) layout
+                          :int left
+                          :int right
+                          :int top
+                          :int bottom
+                          :void)
+    (values left right top bottom)))
+
+#+gtk-4-2
+(cffi:defcfun ("gdk_popup_layout_get_shadow_width" %popup-layout-shadow-width)
+    :void
+  (layout (g:boxed popup-layout))
+  (left (:pointer :int))
+  (right (:pointer :int))
+  (top (:pointer :int))
+  (bottom (:pointer :int)))
+
+#+gtk-4-2
+(defun popup-layout-shadow-width (layout)
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @syntax[]{(gdk:popup-layout-shadow-width layout) => left, right, top, bottom}
+  @syntax[]{(setf (gdk:popup-layout-shadow-width layout) (list left right top bottom))}
+  @argument[layout]{a @class{gdk:popup-layout} instance}
+  @argument[left]{an integer with the left shadow width}
+  @argument[right]{an integer with the right shadow width}
+  @argument[top]{an integer with the top shadow width}
+  @argument[bottom]{an integer with the bottom shadow width}
+  @begin{short}
+    The @sym{gdk:popup-layout-shadow-width} function obtains the shadow widths 
+    of the popup layout.
+  @end{short}
+  The @sym{(setf gdk:popup-layout-shadow-width)} function sets the shadow width 
+  of the popup.
+
+  The shadow width corresponds to the part of the computed surface size that 
+  would consist of the shadow margin surrounding the window, would there be any.
+
+  Since 4.2  
+  @see-class{gdk:popup-layout}"
+  (cffi:with-foreign-objects ((left :int) (right :int) (top :int) (bottom :int))
+    (%popup-layout-shadow-width layout left right top bottom)
+    (values (cffi:mem-ref left :int)
+            (cffi:mem-ref right :int)
+            (cffi:mem-ref top :int)
+            (cffi:mem-ref bottom :int))))
+
+#+gtk-4-2
+(export 'popup-layout-shadow-width)
 
 ;;; --- End of file gdk4.popup-layout.lisp -------------------------------------

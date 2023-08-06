@@ -36,7 +36,7 @@
 ;;;     GdkTexture
 ;;;     GdkMemoryTexture
 ;;;     GdkGLTexture
-;;;     GdkMemoryFormat
+;;;     GdkMemoryFormat                        -> Move to gdk.enumerations.lisp?
 ;;;
 ;;;     GDK_MEMORY_DEFAULT
 ;;;
@@ -61,6 +61,7 @@
 ;;;     gdk_texture_get_format                             Since 4.10
 ;;;
 ;;;     gdk_memory_texture_new
+;;;
 ;;;     gdk_gl_texture_new
 ;;;     gdk_gl_texture_release
 ;;;
@@ -436,7 +437,7 @@
   JPEG, and TIFF, though more formats might be available.
 
   This function is threadsafe, so that you can e.g. use the @class{g:task}
-  object and the @fun{g:task-run-in-thread} function to avoid blocking the main 
+  object and the @fun{g:task-run-in-thread} function to avoid blocking the main
   thread while loading a big image.
 
   Since 4.6
@@ -480,6 +481,7 @@
                         (cairo:image-surface-data surface)
                         (cairo:image-surface-stride surface))
   (cairo:surface-mark-dirty surface)
+  ... )
     @end{pre}
   @end{dictionary}
   @see-class{gdk:texture}
@@ -498,15 +500,15 @@
  #+liber-documentation
  "@version{#2023-5-25}
   @argument[texture]{a @class{gdk:texture} object}
-  @argument[filename]{a string with the filename to store to}  
+  @argument[filename]{a string with the filename to store to}
   @return{@em{True} if saving succed, @em{false} on failure.}
   @begin{short}
     Store the given texture to the filename as a PNG file.
   @end{short}
   This is a utility function intended for debugging and testing. If you want
-  more control over formats, proper error handling or want to store to a 
-  @class{g:file} object or other location, you might want to look into using 
-  the GdkPixbuf library.  
+  more control over formats, proper error handling or want to store to a
+  @class{g:file} object or other location, you might want to look into using
+  the GdkPixbuf library.
   @see-class{gdk:texture}"
   (texture (g:object texture))
   (filename :string))
@@ -529,11 +531,11 @@
   @end{short}
   Use the @fun{gdk:texture-new-from-bytes} function to read it back.
 
-  If you want to serialize a texture, this is a convenient and portable way to 
-  do that. If you need more control over the generated image, such as attaching 
-  metadata,  you should look into an image handling library such as the 
-  GdkPixbuf library. If you are dealing with high dynamic range float data, you 
-  might also want to consider the @fun{gdk:texture-save-to-tiff-bytes} function 
+  If you want to serialize a texture, this is a convenient and portable way to
+  do that. If you need more control over the generated image, such as attaching
+  metadata,  you should look into an image handling library such as the
+  GdkPixbuf library. If you are dealing with high dynamic range float data, you
+  might also want to consider the @fun{gdk:texture-save-to-tiff-bytes} function
   instead.
 
   Since 4.6
@@ -562,7 +564,7 @@
   GTK will attempt to store data without loss.
 
   Since 4.6
-  @see-class{gdk:texture}" 
+  @see-class{gdk:texture}"
   (texture (g:object texture))
   (filename :string))
 
@@ -582,15 +584,15 @@
   @return{A newly allocated @class{g:bytes} instance containing TIFF data.}
   @begin{short}
     Store the given texture in memory as a TIFF file.
-  @end{short} 
+  @end{short}
   Use the @fun{gdk:texture-new-from-bytes} function to read it back.
 
-  This function is intended to store a representation of the texture’s data that 
-  is as accurate as possible. This is particularly relevant when working with 
+  This function is intended to store a representation of the texture’s data that
+  is as accurate as possible. This is particularly relevant when working with
   high dynamic range images and floating-point texture data.
 
-  If that is not your concern and you are interested in a smaller size and a 
-  more portable format, you might want to use the 
+  If that is not your concern and you are interested in a smaller size and a
+  more portable format, you might want to use the
   @fun{gdk:texture-save-to-png-bytes} function.
 
   Since 4.6
@@ -616,11 +618,11 @@
   @begin{short}
     Gets the memory format most closely associated with the data of the texture.
   @end{short}
-  Note that it may not be an exact match for texture data stored on the GPU or 
+  Note that it may not be an exact match for texture data stored on the GPU or
   with compression.
 
-  The format can give an indication about the bit depth and opacity of the 
-  texture and is useful to determine the best format for downloading the 
+  The format can give an indication about the bit depth and opacity of the
+  texture and is useful to determine the best format for downloading the
   texture.
 
   Since 4.10
@@ -633,10 +635,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkMemoryTexture
-;;;
-;;; typedef struct _GdkMemoryTexture GdkMemoryTexture;
-;;;
-;;; A GdkTexture representing image data in memory.
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GdkMemoryTexture" memory-texture
@@ -648,39 +646,38 @@
    :type-initializer "gdk_memory_texture_get_type")
   nil)
 
+#+liber-documentation
+(setf (liber:alias-for-class 'memory-texture)
+      "Class"
+      (documentation 'memory-texture 'type)
+ "@version{#2023-8-1}
+  @begin{short}
+    A @class{gdk:texture} implementation representing image data in memory.
+  @end{short}
+  @see-class{gdk:texture}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_memory_texture_new ()
-;;;
-;;; GdkTexture *
-;;; gdk_memory_texture_new (int width,
-;;;                         int height,
-;;;                         GdkMemoryFormat format,
-;;;                         GBytes *bytes,
-;;;                         gsize stride);
-;;;
-;;; Creates a new texture for a blob of image data. The GBytes must contain
-;;; stride x height pixels in the given format.
-;;;
-;;; width :
-;;;     the width of the texture
-;;;
-;;; height :
-;;;     the height of the texture
-;;;
-;;; format :
-;;;     the format of the data
-;;;
-;;; bytes :
-;;;     the GBytes containing the pixel data
-;;;
-;;; stride :
-;;;     rowstride for the data
-;;;
-;;; Returns :
-;;;     A newly-created GdkTexture
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_memory_texture_new" memory-texture-new) (g:object texture)
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[width]{an integer with the width of the texture}
+  @argument[height]{an integer with the height of the texture}
+  @argument[format]{a @symbol{gdk:memory-format} value with the format of the
+    data}
+  @argument[bytes]{a @class{g:bytes} instance containing the pixel data}
+  @argument[stride]{an integer with the rowstride of the data}
+  @return{A newly created @class{gdk:texture} object.}
+  @begin{short}
+    Creates a new texture for a blob of image data.
+  @end{short}
+  The @class{g:bytes} instance must contain @code{stride x height} pixels in
+  the given @arg{format}.
+  @see-class{gdk:texture}
+  @see-class{g:bytes}
+  @see-symbol{gdk:memory-format}"
   (width :int)
   (height :int)
   (format memory-format)
@@ -691,10 +688,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkGLTexture
-;;;
-;;; typedef struct _GdkGLTexture GdkGLTexture;
-;;;
-;;; A GdkTexture representing a GL texture object.
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GdkGLTexture" gl-texture
@@ -706,46 +699,22 @@
    :type-initializer "gdk_gl_texture_get_type")
   nil)
 
+#+liber-documentation
+(setf (liber:alias-for-class 'gl-texture)
+      "Class"
+      (documentation 'gl-texture 'type)
+ "@version{#2023-8-1}
+  @begin{short}
+    A @class{gdk:texture} implementation representing a GL texture object.
+  @end{short}
+  @see-class{gdk:texture}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_gl_texture_new ()
-;;;
-;;; GdkTexture *
-;;; gdk_gl_texture_new (GdkGLContext *context,
-;;;                     guint id,
-;;;                     int width,
-;;;                     int height,
-;;;                     GDestroyNotify destroy,
-;;;                     gpointer data);
-;;;
-;;; Creates a new texture for an existing GL texture.
-;;;
-;;; Note that the GL texture must not be modified until destroy is called, which
-;;; will happen when the GdkTexture object is finalized, or due to an explicit
-;;; call of gdk_gl_texture_release().
-;;;
-;;; context :
-;;;     a GdkGLContext
-;;;
-;;; id :
-;;;     the ID of a texture that was created with context
-;;;
-;;; width :
-;;;     the nominal width of the texture
-;;;
-;;; height :
-;;;     the nominal height of the texture
-;;;
-;;; destroy :
-;;;     a destroy notify that will be called when the GL resources are released
-;;;
-;;; data :
-;;;     data that gets passed to destroy
-;;;
-;;; Returns :
-;;;     A newly-created GdkTexture.
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: The arguments destroy and data are not implemented.
+;; TODO: The implementation is not complete. The arguments destroy and data are
+;; not implemented.
 
 (cffi:defcfun ("gdk_gl_texture_new" %gl-texture-new) (g:object texture)
   (context (g:object gl-context))
@@ -756,6 +725,27 @@
   (data :pointer))
 
 (defun gl-texture-new (context id width height)
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[context]{a @class{gdk:gl-context} object}
+  @argument[id]{an unsigned integer with the ID of a texture that was created
+    with @arg{context}}
+  @argument[width]{an integer with the nominal width of the texture}
+  @argument[height]{an integer with the nominal height of the texture}
+  @argument[destroy]{a destroy notify that will be called when the GL resources
+    are released, not implemented at this time (2023-8-1)}
+  @argument[data]{data that gets passed to destroy, not implemented at this
+    time (2023-8-1)}
+  @return{A newly created @class{gdk:texture} object.}
+  @begin{short}
+    Creates a new texture for an existing GL texture.
+  @end{short}
+  Note that the GL texture must not be modified until destroy is called, which
+  will happen when the @class{gdk:texture} object is finalized, or due to an
+  explicit call of the @fun{gdk:gl-texture-release} function.
+  @see-class{gdk:texture}
+  @see-class{gdk:gl-context}
+  @see-function{gdk:gl-texture-release}"
   (%gl-texture-new context
                    id
                    width
@@ -767,21 +757,19 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_gl_texture_release ()
-;;;
-;;; void
-;;; gdk_gl_texture_release (GdkGLTexture *self);
-;;;
-;;; Releases the GL resources held by a GdkGLTexture that was created with
-;;; gdk_gl_texture_new().
-;;;
-;;; The texture contents are still available via the gdk_texture_download()
-;;; function, after this function has been called.
-;;;
-;;; self :
-;;;     a GdkTexture wrapping a GL texture
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_gl_texture_release" gl-texture-release) :void
+ #+liber-documentation
+ "@version{#2023-8-1}
+  @argument[texture]{a @class{gdk:gl-texture} object}
+  @begin{short}
+    Releases the GL resources held by a @class{gdk:gl-texture} object that was
+    created with the @fun{gdk:gl-texture-new} function.
+  @end{short}
+  The texture contents are still available via the @fun{gdk:texture-download}
+  function, after this function has been called.
+  @see-class{gdk:gl-texture}"
   (texture (g:object texture)))
 
 (export 'gl-texture-release)
