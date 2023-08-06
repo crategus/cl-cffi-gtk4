@@ -192,16 +192,16 @@
  #+liber-documentation
  "@version{#2022-7-10}
   @argument[tooltip]{a @class{gtk:tooltip} widget}
-  @argument[gicon]{a @class{g-icon} representing the icon, or @code{nil}}
+  @argument[gicon]{a @class{g:icon} representing the icon, or @code{nil}}
   @begin{short}
     Sets the icon of the tooltip, which is in front of the text, to be the
     icon indicated by @arg{gicon}.
   @end{short}
   If @arg{gicon} is @code{nil}, the image will be hidden.
   @see-class{gtk:tooltip}
-  @see-class{g-icon}"
+  @see-class{g:icon}"
   (tooltip (g:object tooltip))
-  (gicon (g:object g-icon)))
+  (gicon (g:object g:icon)))
 
 (export 'tooltip-set-icon-from-gicon)
 

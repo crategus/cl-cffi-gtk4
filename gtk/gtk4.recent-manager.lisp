@@ -962,17 +962,16 @@ lambda (manager)    :run-first
 ;;; gtk_recent_info_get_gicon () -> recent-info-gicon
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_recent_info_get_gicon" recent-info-gicon)
-    (g:object g-icon)
+(cffi:defcfun ("gtk_recent_info_get_gicon" recent-info-gicon) (g:object g:icon)
  #+liber-documentation
  "@version{#2023-1-29}
   @argument[info]{a @class{gtk:recent-info} instance}
-  @return{A @class{g-icon} icon containing the icon, or @code{nil}.}
+  @return{A @class{g:icon} icon containing the icon, or @code{nil}.}
   @begin{short}
     Retrieves the icon associated to the resource MIME type.
   @end{short}
   @see-class{gtk:recent-info}
-  @see-class{g-icon}"
+  @see-class{g:icon}"
   (info (g:boxed recent-info)))
 
 (export 'recent-info-gicon)

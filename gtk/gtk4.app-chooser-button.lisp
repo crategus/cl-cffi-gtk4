@@ -332,7 +332,7 @@ lambda (widget item)    :has-details
   @argument[widget]{a @class{gtk:app-chooser-button} widget}
   @argument[name]{a string with the name of the custom item}
   @argument[label]{a string with the label for the custom item}
-  @argument[icon]{the icon of type @class{g-icon} for the custom item}
+  @argument[icon]{the icon of type @class{g:icon} for the custom item}
   @begin{short}
     Appends a custom item to the list of applications that is shown in the
     popup.
@@ -348,7 +348,7 @@ lambda (widget item)    :has-details
   (widget (g:object app-chooser-button))
   (name :string)
   (label :string)
-  (icon (g:object g-icon)))
+  (icon (g:object g:icon)))
 
 (export 'app-chooser-button-append-custom-item)
 
