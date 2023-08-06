@@ -7,6 +7,9 @@
            #:application-menu
            #:application-notification
            #:application-simple
+           #:application-resources
+           #:application-register
+           #:sunny
   ))
 
 (in-package :gtk4-application)
