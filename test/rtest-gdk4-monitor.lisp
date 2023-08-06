@@ -109,8 +109,14 @@
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
 
     (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
+    #-windows
     (is (stringp (gdk:monitor-connector monitor)))
+    #+windows
+    (is-false (gdk:monitor-connector monitor))
+    #-windows
     (is (stringp (gdk:monitor-description monitor)))
+    #+windows
+    (is-false (gdk:monitor-description monitor))
     (is (typep (gdk:monitor-display monitor) 'gdk:display))
     (is (typep (gdk:monitor-geometry monitor) 'gdk:rectangle))
     (is (integerp (gdk:monitor-height-mm monitor)))
@@ -171,4 +177,4 @@
 
 ;;;     gdk_monitor_is_valid
 
-;;; --- 2023-7-16 --------------------------------------------------------------
+;;; --- 2023-7-31 --------------------------------------------------------------

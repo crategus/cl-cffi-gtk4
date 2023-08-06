@@ -7,12 +7,13 @@
 
 ;;;     GtkScrollablePolicy
 
-(test scrollable-policy
+(test gtk-scrollable-policy
   ;; Check the type
   (is (g:type-is-enum "GtkScrollablePolicy"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkScrollablePolicy")
-          (g:gtype (cffi:foreign-funcall "gtk_scrollable_policy_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_scrollable_policy_get_type" 
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:scrollable-policy
           (glib:symbol-for-gtype "GtkScrollablePolicy")))
@@ -37,7 +38,7 @@
 
 ;;;     GtkScrollable
 
-(test scrollable-interface
+(test gtk-scrollable-interface
   ;; Type check
   (is (g:type-is-interface "GtkScrollable"))
   ;; Check the registered name
@@ -46,9 +47,15 @@
   ;; Check the type initializer
   (is (eq (g:gtype "GtkScrollable")
           (g:gtype (cffi:foreign-funcall "gtk_scrollable_get_type" :size))))
-  ;; Get the names of the interface properties.
+  ;; Check the interface prerequisites
+  (is (equal '("GObject")
+             (list-interface-prerequisites "GtkScrollable")))
+  ;; Check the interface properties.
   (is (equal '("hadjustment" "hscroll-policy" "vadjustment" "vscroll-policy")
              (list-interface-properties "GtkScrollable")))
+  ;; Check the signals
+  (is (equal '()
+             (list-signals "GtkScrollable")))
   ;; Get the interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkScrollable" GTK-SCROLLABLE
                     (:EXPORT T :TYPE-INITIALIZER "gtk_scrollable_get_type")
@@ -69,8 +76,22 @@
 ;;;     vadjustment
 ;;;     vscroll-policy
 
+(test gtk-scrollable-properties
+  (let ((scrollable (make-instance 'gtk:viewport)))  
+    (is (typep (gtk:scrollable-hadjustment scrollable) 'gtk:adjustment))
+    (is (eq :minimum (gtk:scrollable-hscroll-policy scrollable)))
+    (is (typep (gtk:scrollable-vadjustment scrollable) 'gtk:adjustment))
+    (is (eq :minimum (gtk:scrollable-vscroll-policy scrollable)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_scrollable_get_border
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-scrollable-border
+  (let ((scrollable (make-instance 'gtk:icon-view))
+        (border nil))
+    ;; TODO: Can we construct a test different from nil
+    (is-false (setf border 
+                    (gtk:scrollable-border scrollable)))))
+
+;;; --- 2023-8-6 ---------------------------------------------------------------

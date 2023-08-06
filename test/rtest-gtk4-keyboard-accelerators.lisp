@@ -7,14 +7,14 @@
 
 ;;;     gtk_accelerator_valid
 
-(test accelerator-valid
+(test gtk-accelerator-valid
   (is-true (gtk:accelerator-valid (char-code #\a) :shift-mask))
   (is-true (gtk:accelerator-valid (char-code #\a) :control-mask))
   (is-false (gtk:accelerator-valid (char-code #\fullwidth_macron) :none)))
 
 ;;;     gtk_accelerator_parse
 
-(test accelerator-parse
+(test gtk-accelerator-parse
   (is (equal '(97 (:control-mask))
              (multiple-value-list (gtk:accelerator-parse "<Control>a"))))
   (is (equal '(65470 (:shift-mask :alt-mask))
@@ -26,7 +26,7 @@
 
 ;;;     gtk_accelerator_name
 
-(test accelerator-name
+(test gtk-accelerator-name
   (is (string= "<Control>a" (gtk:accelerator-name 97 :control-mask)))
   (is (string= "<Shift><Alt>F1"
                (gtk:accelerator-name 65470 '(:shift-mask :alt-mask))))
@@ -34,7 +34,7 @@
 
 ;;;     gtk_accelerator_get_label
 
-(test gtk:accelerator-name
+(test gtk-accelerator-name
   (is (string= "Strg+A" (gtk:accelerator-label 97 :control-mask)))
   (is (string= "Umschalt+Alt+F1"
                (gtk:accelerator-label 65470 '(:shift-mask :alt-mask))))
@@ -46,9 +46,9 @@
 
 ;;;     gtk_accelerator_get_default_mod_mask
 
-(test accelerator-default-mod-mask
+(test gtk-accelerator-default-mod-mask
   (is (equal '(:SHIFT-MASK :CONTROL-MASK :ALT-MASK :SUPER-MASK :HYPER-MASK
                :META-MASK)
              (gtk:accelerator-default-mod-mask))))
 
-;;; 2022-11-13
+;;; --- 2023-8-4 ---------------------------------------------------------------

@@ -130,13 +130,20 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
-;; FIXME: We get the following error. The application is not run.
-;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown:
-;; The name com.crategus.test was not provided by any .service files
+;; TODO: We get an unhandled memory fault, when setting the REGISTER-SESSION
+;; property to T.
+
+;; --------------------------------
+;; GTK-APPLICATION-SIGNALS in GTK-APPLICATION []: 
+;;      Unexpected Error: #<SB-SYS:MEMORY-FAULT-ERROR {1004EE5173}>
+;; Unhandled memory fault at #x0..
+;; --------------------------------
 
 (test gtk-application-signals
   (let ((message nil)
         (application (make-instance 'gtk:application
+                                    :register-session nil
+                                    :flags :default-flags
                                     :application-id "com.crategus.test")))
     ;; Connect signal "query-end", will not be executed
     (g:signal-connect application "query-end"
@@ -207,10 +214,6 @@
 ;;;     gtk_application_get_windows
 ;;;     gtk_application_remove_window
 
-;; FIXME: We get the following error. The application is not run.
-;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown:
-;; The name com.crategus.test was not provided by any .service files
-
 (test gtk-application-add-window
   (let ((message nil)
         (application (make-instance 'gtk:application
@@ -245,9 +248,9 @@
                           (is (= 1 (setf window-id
                                          (gtk:application-window-id window))))
                           ;; Get the window by ID
-                          (is (equal window
-                                     (gtk:application-window-by-id app
-                                                                   window-id)))
+                          (is (eq window
+                                  (gtk:application-window-by-id app
+                                                                window-id)))
                           ;; Check the list of windows
                           (is-true (member window
                                            (gtk:application-windows app)
@@ -312,4 +315,4 @@
 
 ;;;     gtk_application_uninhibit
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-2 ---------------------------------------------------------------

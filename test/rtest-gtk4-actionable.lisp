@@ -5,7 +5,7 @@
 
 ;;; --- GtkActionable ----------------------------------------------------------
 
-(test actionable-interface
+(test gtk-actionable-interface
   ;; Type check
   (is (g:type-is-interface "GtkActionable"))
   ;; Check the registered name
@@ -29,7 +29,7 @@
 
 ;;; --- Properties and Accessors -----------------------------------------------
 
-(test actionable-properties
+(test gtk-actionable-properties
   (let ((button (make-instance 'gtk:button)))
     ;; Default is false
     (is-false (gtk:actionable-action-name button))
@@ -46,7 +46,7 @@
 
 ;;;     gtk_actionable_set_action_target
 
-(test actionable-action-target
+(test gtk-actionable-action-target
   (let ((button (make-instance 'gtk:button)))
     (is (cffi:null-pointer-p (gtk:actionable-action-target button)))
     (setf (gtk:actionable-action-target button) (g:variant-new-int16 128))
@@ -58,4 +58,4 @@
 
 ;;; See gtk-actionable-properties for an example
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-4 ---------------------------------------------------------------
