@@ -565,11 +565,14 @@
 ;;; gtk_builder_new_from_resource
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_builder_new_from_resource" builder-new-from-resource)
+(cffi:defcfun ("gtk_builder_new_from_resource" %builder-new-from-resource)
     (g:object builder)
+  (namestring :string))
+
+(defun builder-new-from-resource (path)
  #+liber-documentation
- "@version{#2022-1-10}
-  @argument[path]{a string with the @class{g:resource} path}
+ "@version{#2023-8-3}
+  @argument[path]{a path or namestring with the @class{g:resource} path}
   @return{A @class{gtk:builder} object containing the described interface.}
   @begin{short}
     Builds the @class{gtk:builder} UI definition from a resource path.
@@ -581,7 +584,8 @@
   @see-function{gtk:builder-new}
   @see-function{gtk:builder-new-from-file}
   @see-function{gtk:builder-new-from-string}"
-  (path :string))
+  (let ((namestring (namestring path)))
+    (%builder-new-from-resource namestring)))
 
 (export 'builder-new-from-resource)
 
