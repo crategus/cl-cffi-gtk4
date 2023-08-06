@@ -41,6 +41,24 @@
 ;;;     gtk_drop_controller_motion_contains_pointer
 ;;;     gtk_drop_controller_motion_is_pointer
 ;;;     gtk_drop_controller_motion_get_drop
+;;;
+;;; Properties
+;;;
+;;;     contains-pointer
+;;;     drop
+;;;     is-pointer
+;;;
+;;; Signals
+;;;
+;;;     enter
+;;;     leave
+;;;     move
+;;;
+;;; Hierarchy
+;;;
+;;;     GObject
+;;;     ╰── GtkEventController
+;;;         ╰── GtkDropControllerMotion
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)

@@ -92,7 +92,7 @@
 
 #+liber-documentation
 (setf (documentation 'drag-source 'type)
- "@version{#2023-7-23}
+ "@version{2023-7-23}
   @begin{short}
     The @sym{gtk:drag-source} object is an auxiliary object that is used to
     initiate Drag and Drop operations.
@@ -133,7 +133,7 @@ lambda (source drag)    :run-last
       @end{table}
     @subheading{The \"drag-cancel\" signal}
       @begin{pre}
-lambda (source drag reason)    :      run-last
+lambda (source drag reason)    :run-last
       @end{pre}
       The signal is emitted on the drag source when a drag has failed. The
       signal handler may handle a failed drag operation based on the type of
@@ -212,8 +212,8 @@ lambda (source x y)    :run-last
     Accessor of the @slot[gtk:drag-source]{actions} slot of the
     @class{gtk:drag-source} class.
   @end{short}
-  The @sym{gtk:drag-source-actions} function gets the actions that are currently
-  set on the @class{gtk:drag-source} object. The
+  The @sym{gtk:drag-source-actions} function gets the actions that are 
+  currently set on the @class{gtk:drag-source} object. The
   @sym{(setf gtk:drag-source-actions)} function sets the actions.
 
   During a DND operation, the actions are offered to potential drop targets.
@@ -261,56 +261,43 @@ lambda (source x y)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_source_new ()
-;;;
-;;; GtkDragSource *
-;;; gtk_drag_source_new (void);
-;;;
-;;; Creates a new GtkDragSource object.
-;;;
-;;; Returns :
-;;;     the new GtkDragSource
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline drag-source-new))
 
 (defun drag-source-new ()
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @return{The new @class{gkd:drag-source} object}
+  @short{Creates a new drag source.}
+  @see-class{gtk:drag-source}"
   (make-instance 'drag-source))
 
 (export 'drag-source-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_source_set_icon ()
-;;;
-;;; void
-;;; gtk_drag_source_set_icon (GtkDragSource *source,
-;;;                           GdkPaintable *paintable,
-;;;                           int hot_x,
-;;;                           int hot_y);
-;;;
-;;; Sets a paintable to use as icon during DND operations.
-;;;
-;;; The hotspot coordinates determine the point on the icon that gets aligned
-;;; with the hotspot of the cursor.
-;;;
-;;; If paintable is NULL, a default icon is used.
-;;;
-;;; This function can be called before a drag is started, or in a “prepare” or
-;;; “drag-begin” signal handler.
-;;;
-;;; source :
-;;;     a GtkDragSource
-;;;
-;;; paintable :
-;;;     the GdkPaintable to use as icon, or NULL.
-;;;
-;;; hot_x :
-;;;     the hotspot X coordinate on the icon
-;;;
-;;; hot_y :
-;;;     the hotspot Y coordinate on the icon
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_source_set_icon" drag-source-set-icon) :void
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @argument[source]{a @class{gtk:drag-source} object}
+  @argument[paintable]{a @class{gdk:paintable} object to use as icon, or 
+    @code{nil}}
+  @argument[xhot]{an integer with the hotspot x coordinate on the icon}
+  @argument[yhot]{an integer with the hotspot y coordinate on the icon}
+  @begin{short}
+    Sets a paintable to use as icon during DND operations.
+  @end{short}
+  The hotspot coordinates determine the point on the icon that gets aligned
+  with the hotspot of the cursor. If @arg{paintable} is @code{nil}, a default 
+  icon is used.
+
+  This function can be called before a drag is started, or in a \"prepare\" or
+  \"drag-begin\" signal handler.
+  @see-class{gtk:drag-source}
+  @see-class{gdk:paintable}"
   (source (g:object drag-source))
   (paintable (g:object gdk:paintable))
   (xhot :int)
@@ -320,75 +307,54 @@ lambda (source x y)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;;gtk_drag_source_drag_cancel ()
-;;;
-;;; void
-;;; gtk_drag_source_drag_cancel (GtkDragSource *source);
-;;;
-;;; Cancels a currently ongoing drag operation.
-;;;
-;;; source :
-;;;     a GtkDragSource
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_source_drag_cancel" drag-source-drag-cancel) :void
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @argument[source]{a @class{gtk:drag-source} object}
+  @short{Cancels a currently ongoing drag operation.}
+  @see-class{gtk:drag-source}"
   (source (g:object drag-source)))
   
 (export 'drag-source-drag-cancel)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_source_get_drag ()
-;;;
-;;; GdkDrag *
-;;; gtk_drag_source_get_drag (GtkDragSource *source);
-;;;
-;;; Returns the underlying GdkDrag object for an ongoing drag.
-;;;
-;;; source :
-;;;     a GtkDragSource
-;;;
-;;; Returns :
-;;;     the GdkDrag of the current drag operation, or NULL.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_source_get_drag" drag-source-drag) (g:object gdk:drag)
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @argument[source]{a @class{gtk:drag-source} object}
+  @return{The @class{gdk:drag} object of the current drag operation, or
+    @code{nil}.}
+  @short{Returns the underlying @class{gdk:drag} object for an ongoing drag.}
+  @see-class{gtk:drag-source}
+  @see-class{gdk:drag}"
   (source (g:object drag-source)))
 
 (export 'drag-source-drag)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_check_threshold ()
-;;;
-;;; gboolean
-;;; gtk_drag_check_threshold (GtkWidget *widget,
-;;;                           int start_x,
-;;;                           int start_y,
-;;;                           int current_x,
-;;;                           int current_y);
-;;;
-;;; Checks to see if a mouse drag starting at (start_x , start_y ) and ending at
-;;; (current_x , current_y ) has passed the GTK drag threshold, and thus should
-;;; trigger the beginning of a drag-and-drop operation.
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; start_x :
-;;;     X coordinate of start of drag
-;;;
-;;; start_y :
-;;;     Y coordinate of start of drag
-;;;
-;;; current_x :
-;;;     current X coordinate
-;;;
-;;; current_y :
-;;;     current Y coordinate
-;;;
-;;; Returns :
-;;;     TRUE if the drag threshold has been passed.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_check_threshold" drag-check-threshold) :boolean
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @argument[source]{a @class{gtk:drag-source} object}
+  @argument[xstart]{an integer with the x coordinate of start of drag}
+  @argument[ystart]{an integer with the y coordinate of start of drag}
+  @argument[xcurrent]{an integer with the current x coordinate}
+  @argument[ycurrent]{an integer with the current y coordinate}
+  @return{@em{True} if the drag threshold has been passed.}
+  @begin{short}
+    Checks to see if a mouse drag starting at @code{(xstart, ystart)} and 
+    ending at @code{(xcurrent, ycurrent)} has passed the GTK drag threshold, 
+    and thus should trigger the beginning of a drag-and-drop operation.
+  @end{short}
+  @see-class{gtk:drag-source}"
   (widget (g:object widget))
   (xstart :int)
   (ystart :int)

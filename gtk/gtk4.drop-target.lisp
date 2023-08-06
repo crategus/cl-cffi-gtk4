@@ -56,7 +56,7 @@
 ;;;
 ;;;     actions
 ;;;     current-drop                                       Since 4.4
-;;;     drop                                               deprecated Since 4.4
+;;;     drop                                               Deprecated 4.4
 ;;;     formats
 ;;;     preload
 ;;;     value
@@ -80,173 +80,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkDropTarget
-;;;
-;;; GtkDropTarget is an event controller implementing a simple way to receive
-;;; Drag-and-Drop operations.
-;;;
-;;; The most basic way to use a GtkDropTarget to receive drops on a widget is
-;;; to create it via gtk_drop_target_new() passing in the GType of the data you
-;;; want to receive and connect to the GtkDropTarget::drop signal to receive
-;;; the data.
-;;;
-;;; GtkDropTarget supports more options, such as:
-;;;
-;;; rejecting potential drops via the “accept” signal and the
-;;; gtk_drop_target_reject() function to let other drop targets handle the drop
-;;;
-;;; tracking an ongoing drag operation before the drop via the “enter”, “motion”
-;;; and “leave” signals
-;;;
-;;; configuring how to receive data by setting the “preload” property and
-;;; listening for its availability via the “value” property
-;;;
-;;; However, GtkDropTarget is ultimately modeled in a synchronous way and only
-;;; supports data transferred via GType. If you want full control over an
-;;; ongoing drop, the GtkDropTargetAsync object gives you this ability.
-;;;
-;;; While a pointer is dragged over the drop target's widget and the drop has
-;;; not been rejected, that widget will receive the GTK_STATE_FLAG_DROP_ACTIVE
-;;; state, which can be used to style the widget.
-;;;
-;;; Signal Details
-;;;
-;;; The “accept” signal
-;;;
-;;; gboolean
-;;; user_function (GtkDropTarget *self,
-;;;                GdkDrop       *drop,
-;;;                gpointer       user_data)
-;;;
-;;; The ::accept signal is emitted on the drop site when a drop operation is
-;;; about to begin. If the drop is not accepted, FALSE will be returned and the
-;;; drop target will ignore the drop. If TRUE is returned, the drop is accepted
-;;; for now but may be rejected later via a call to gtk_drop_target_reject() or
-;;; ultimately by returning FALSE from GtkDropTarget::drop
-;;;
-;;; The default handler for this signal decides whether to accept the drop based
-;;; on the formats provided by the drop .
-;;;
-;;; If the decision whether the drop will be accepted or rejected needs
-;;; inspecting the data, this function should return TRUE, the
-;;; GtkDropTarget:preload property should be set and the value should be
-;;; inspected via the GObject::notify:value signal and then call
-;;; gtk_drop_target_reject().
-;;;
-;;; self :
-;;;     the GtkDropTarget
-;;;
-;;; drop :
-;;;     the GdkDrop
-;;;
-;;; Returns :
-;;;     TRUE if drop is accepted
-;;;
-;;; Flags: Run Last
-;;;
-;;; The “drop” signal
-;;;
-;;; gboolean
-;;; user_function (GtkDropTarget *self,
-;;;                GValue        *value,
-;;;                double         x,
-;;;                double         y,
-;;;                gpointer       user_data)
-;;;
-;;; The ::drop signal is emitted on the drop site when the user drops the data
-;;; onto the widget. The signal handler must determine whether the pointer
-;;; position is in a drop zone or not. If it is not in a drop zone, it returns
-;;; FALSE and no further processing is necessary.
-;;;
-;;; Otherwise, the handler returns TRUE. In this case, this handler will accept
-;;; the drop. The handler is responsible for rading the given value and
-;;; performing the drop operation.
-;;;
-;;; self :
-;;;     the GtkDropTarget
-;;;
-;;; value :
-;;;     the GValue being dropped
-;;;
-;;; x :
-;;;     the x coordinate of the current pointer position
-;;;
-;;; y :
-;;;     the y coordinate of the current pointer position
-;;;
-;;; Returns :
-;;;     whether the drop was accepted at the given pointer position
-;;;
-;;; Flags: Run Last
-;;;
-;;; The “enter” signal
-;;;
-;;; GdkDragAction
-;;; user_function (GtkDropTarget *self,
-;;;                double         x,
-;;;                double         y,
-;;;                gpointer       user_data)
-;;;
-;;; The ::enter signal is emitted on the drop site when the pointer enters the
-;;; widget. It can be used to set up custom highlighting.
-;;;
-;;; self :
-;;;     the GtkDropTarget
-;;;
-;;; x :
-;;;     the x coordinate of the current pointer position
-;;;
-;;; y :
-;;;     the y coordinate of the current pointer position
-;;;
-;;; Returns :
-;;;     Preferred action for this drag operation or 0 if dropping is not
-;;;     supported at the current x ,y location.
-;;;
-;;; Flags: Run Last
-;;;
-;;; The “leave” signal
-;;;
-;;; void
-;;; user_function (GtkDropTarget *self,
-;;;                gpointer       user_data)
-;;;
-;;; The ::leave signal is emitted on the drop site when the pointer leaves the
-;;; widget. Its main purpose it to undo things done in “enter”.
-;;;
-;;; self :
-;;;     the GtkDropTarget
-;;;
-;;; Flags: Run Last
-;;;
-;;; The “motion” signal
-;;;
-;;; GdkDragAction
-;;; user_function (GtkDropTarget *self,
-;;;                double         x,
-;;;                double         y,
-;;;                gpointer       user_data)
-;;;
-;;; The ::motion signal is emitted while the pointer is moving over the drop
-;;; target.
-;;;
-;;; self :
-;;;     the GtkDropTarget
-;;;
-;;; x :
-;;;     the x coordinate of the current pointer position
-;;;
-;;; y :
-;;;     the y coordinate of the current pointer position
-;;;
-;;; Returns :
-;;;     Preferred action for this drag operation or 0 if dropping is not
-;;;     supported at the current x ,y location.
-;;;
-;;; Flags: Run Last
-;;;
-;;; See Also :
-;;;
-;;;      GdkDrop, GtkDropTargetAsync
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkDropTarget" drop-target
@@ -257,6 +90,7 @@
   ((actions
     drop-target-actions
     "actions" "GdkDragAction" t t)
+   #+gtk-4-4
    (current-drop
     drop-target-current-drop
     "current-drop" "GdkDrop" t nil)
@@ -272,313 +106,403 @@
    (value
     drop-target-value
     "value" "GValue" t nil)))
-    
+
+#+liber-documentation
+(setf (documentation 'drop-target 'type)
+ "@version{2023-7-31}
+  @begin{short}
+    The @sym{gtk:drop-target} object is an event controller implementing a
+    simple way to receive Drag-and-Drop operations.
+  @end{short}
+  The most basic way to use a @sym{gtk:drop-target} object to receive drops on
+  a widget is to create it via the @fun{gtk:drop-target-new} function passing
+  in the @code{GType} of the data you want to receive and connect to the
+  \"current-drop\" signal to receive the data.
+
+  The @sym{gtk:drop-target} object supports more options, such as:
+  @begin{itemize}
+    @item{rejecting potential drops via the \"accept\" signal and the
+      @fun{gtk:drop-target-reject} function to let other drop targets handle
+      the drop}
+    @item{tracking an ongoing drag operation before the drop via the \"enter\",
+      \"motion\" and \"leave\" signals}
+    @item{configuring how to receive data by setting the “preload” property and
+      listening for its availability via the @slot[gdk:drop-target]{value}
+      property}
+  @end{itemize}
+  However, the @sym{gtk:drop-target} object is ultimately modeled in a
+  synchronous way and only supports data transferred via @code{GType}. If you
+  want full control over an ongoing drop, the @class{gtk:drop-target-async}
+  object gives you this ability.
+
+  While a pointer is dragged over the drop target's widget and the drop has
+  not been rejected, that widget will receive the @code{:drop-active} state,
+  which can be used to style the widget.
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"accept\" signal}
+      @begin{pre}
+lambda (target drop)    :run-last
+      @end{pre}
+      The signal is emitted on the drop site when a drop operation is about to
+      begin. If the drop is not accepted, @em{false} will be returned and the
+      drop target will ignore the drop. If @em{true} is returned, the drop is
+      accepted for now but may be rejected later via a call to the
+      @fun{gtk:drop-target-reject} function or ultimately by returning
+      @em{false} from the \"drop\" signal.
+
+      The default handler for this signal decides whether to accept the drop
+      based on the formats provided by @arg{drop}.
+
+      If the decision whether the drop will be accepted or rejected needs
+      inspecting the data, this function should return @em{true}, the
+      @slot[gtk:drop-target]{preload} property should be set and the value
+      should be inspected via the \"notify::value\" signal and then call the
+      @fun{gtk:drop-target-reject} function.
+      @begin[code]{table}
+        @entry[target]{The @sym{gtk:drag-target} object.}
+        @entry[drop]{The @class{gdk:drop} object.}
+        @entry[Returns]{@em{True} if @arg{drop} is accepted.}
+      @end{table}
+    @subheading{The \"drop\" signal}
+      @begin{pre}
+lambda (target value x y)    :run-last
+      @end{pre}
+      The signal is emitted on the drop site when the user drops the data onto
+      the widget. The signal handler must determine whether the pointer position
+      is in a drop zone or not. If it is not in a drop zone, it returns
+      @em{false} and no further processing is necessary. Otherwise, the handler
+      returns @em{true}. In this case, this handler will accept the drop. The
+      handler is responsible for reading the given @arg{value} and performing
+      the drop operation.
+      @begin[code]{table}
+        @entry[target]{The @sym{gtk:drag-target} object.}
+        @entry[value]{The @symbol{g:value} instance being dropped.}
+        @entry[x]{A double float with the x coordinate of the current pointer
+          position.}
+        @entry[y]{A double float with the x coordinate of the current pointer
+          position.}
+        @entry[Returns]{Whether the drop was accepted at the given pointer
+          position.}
+      @end{table}
+    @subheading{The \"enter\" signal}
+      @begin{pre}
+lambda (target x y)    :run-last
+      @end{pre}
+      The signal is emitted on the drop site when the pointer enters the widget.
+      It can be used to set up custom highlighting.
+      @begin[code]{table}
+        @entry[target]{The @sym{gtk:drag-target} object.}
+        @entry[x]{A double float with the x coordinate of the current pointer
+          position.}
+        @entry[y]{A double float with the x coordinate of the current pointer
+          position.}
+        @entry[Returns]{A @symbol{gdk:drag-action} value with the preferred
+          action for this drag operation or 0 if dropping is not supported at
+          the current @code{x,y} location.}
+      @end{table}
+    @subheading{The \"leave\" signal}
+      @begin{pre}
+lambda (target)    :run-last
+      @end{pre}
+      The signal is emitted on the drop site when the pointer leaves the widget.
+      Its main purpose is to undo things done in \"enter\" signal handler.
+      @begin[code]{table}
+        @entry[target]{The @sym{gtk:drag-target} object.}
+      @end{table}
+      @subheading{The \"motion\" signal}
+      @begin{pre}
+lambda (target x y)    :run-last
+      @end{pre}
+      The signal is emitted while the pointer is moving over the drop target.
+      @begin[code]{table}
+        @entry[target]{The @sym{gtk:drag-target} object.}
+        @entry[x]{A double float with the x coordinate of the current pointer
+          position.}
+        @entry[y]{A double float with the x coordinate of the current pointer
+          position.}
+        @entry[Returns]{A @symbol{gdk:drag-action} value with the preferred
+          action for this drag operation or 0 if dropping is not supported at
+          the current @code{x,y} location.}
+      @end{table}
+  @end{dictionary}
+  @see-constructor{gtk:drop-target-new}
+  @see-slot{gtk:drop-target-actions}
+  @see-slot{gtk:drop-target-current-drop}
+  @see-slot{gtk:drop-target-drop}
+  @see-slot{gtk:drop-target-formats}
+  @see-slot{gtk:drop-target-preload}
+  @see-slot{gtk:drop-target-value}
+  @see-class{gdk:drop}
+  @see-class{gdk:drop-target-async}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “actions” property
-;;;
-;;;  “actions”                  GdkDragAction
-;;;
-;;; The GdkDragActions that this drop target supports
-;;;
-;;; Owner: GtkDropTarget
-;;;
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
+;;; --- drop-target-actions ----------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_set_actions ()
-;;;
-;;; void
-;;; gtk_drop_target_set_actions (GtkDropTarget *self,
-;;;                              GdkDragAction actions);
-;;;
-;;; Sets the actions that this drop target supports.
-;;;
-;;; self :
-;;;     a GtkDropTarget
-;;;
-;;; actions :
-;;;     the supported actions
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "actions" 'drop-target) t)
+ "The @code{actions} property of type @symbol{gdk:drag-action} (Read / Write)
+  @br{}
+  The actions that this drop target supports. @br{}
+  Default value: @code{:none}")
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_get_actions ()
-;;;
-;;; GdkDragAction
-;;; gtk_drop_target_get_actions (GtkDropTarget *self);
-;;;
-;;; Gets the actions that this drop target supports.
-;;;
-;;; self :
-;;;     a GtkDropTarget
-;;;
-;;; Returns :
-;;;     the actions that this drop target supports
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-target-actions)
+      "Accessor"
+      (documentation 'drop-target-actions 'function)
+ "@version{#2023-7-31}
+  @syntax[]{(gtk:drop-target-actions object) => actions}
+  @syntax[]{(setf (gtk:drop-target-actions object) actions)}
+  @argument[object]{a @class{gtk:drop-target} object}
+  @argument[actions]{a @symbol{gdk:drag-action} value}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-target]{actions} slot of the
+    @class{gtk:drop-target} class.
+  @end{short}
+  The @sym{gtk:drop-target-actions} function gets the actions that this drop
+  target supports. The @sym{(setf gtk:drop-target-actions)} function sets the
+  actions.
+  @see-class{gtk:drop-target}
+  @see-symbol{gdk:drag-action}")
 
-;;; ----------------------------------------------------------------------------
-;;; The “current-drop” property
-;;;
-;;;   “current-drop”                     GdkDrop *
-;;;
-;;; The GdkDrop that is currently being performed.
-;;;
-;;; Owner: GtkDropTarget
-;;;
-;;; Flags: Read
-;;; ----------------------------------------------------------------------------
+;;; --- drop-target-current-drop -----------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “drop” property
-;;;
-;;;   “drop”                     GdkDrop *
-;;;
-;;; The GdkDrop that is currently being performed
-;;;
-;;; Owner: GtkDropTarget
-;;;
-;;; Flags: Read
-;;;
-;;; deprecated: 4.4 
-;;; ----------------------------------------------------------------------------
+#+(and gtk-4-4 liber-documentation)
+(setf (documentation (liber:slot-documentation "current-drop" 'drop-target) t)
+ "The @code{current-drop} property of type @class{gdk:drop} (Read) @br{}
+  The drop that is currently being performed. Since 4.4")
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_get_drop ()
-;;;
-;;; GdkDrop *
-;;; gtk_drop_target_get_drop (GtkDropTarget *self);
-;;;
-;;; Gets the currently handled drop operation.
-;;;
-;;; If no drop operation is going on, NULL is returned.
-;;;
-;;; self :
-;;;     a GtkDropTarget
-;;;
-;;; Returns :
-;;;     The current drop.
-;;; ----------------------------------------------------------------------------
+#+(and gtk-4-4 liber-documentation)
+(setf (liber:alias-for-function 'drop-target-current-drop)
+      "Accessor"
+      (documentation 'drop-target-current-drop 'function)
+ "@version{#2023-7-31}
+  @syntax[]{(gtk:drop-target-current-drop object) => drop}
+  @argument[object]{a @class{gtk:drop-target} object}
+  @argument[drop]{a @class{gdk:drop} object with the current drop}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-target]{current-drop} slot of the
+    @class{gtk:drop-target} class.
+  @end{short}
+  The @sym{gtk:drop-target-current-drop} function gets the currently handled
+  drop operation. If no drop operation is going on, @code{nil} is returned.
 
-;;; ----------------------------------------------------------------------------
-;;; The “formats” property
-;;;
-;;;  “formats”                  GdkContentFormats *
-;;;
-;;; The GdkContentFormats that determine the supported data formats
-;;;
-;;; Owner: GtkDropTarget
-;;;
-;;; Flags: Read
-;;; ----------------------------------------------------------------------------
+  Since 4.4
+  @see-class{gtk:drop-target}
+  @see-symbol{gdk:drop}")
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_get_formats ()
-;;;
-;;; GdkContentFormats *
-;;; gtk_drop_target_get_formats (GtkDropTarget *self);
-;;;
-;;; Gets the data formats that this drop target accepts.
-;;;
-;;; If the result is NULL, all formats are expected to be supported.
-;;;
-;;; self :
-;;;     a GtkDropTarget
-;;;
-;;; Returns :
-;;;     the supported data formats.
-;;; ----------------------------------------------------------------------------
+;;; --- drop-target-drop -------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “preload” property
-;;;
-;;;  “preload”                  gboolean
-;;;
-;;; Whether the drop data should be preloaded when the pointer is only hovering
-;;; over the widget but has not been released.
-;;;
-;;; Setting this property allows finer grained reaction to an ongoing drop at
-;;; the cost of loading more data.
-;;;
-;;; The default value for this property is FALSE to avoid downloading huge
-;;; amounts of data by accident. For example, if somebody drags a full document
-;;; of gigabytes of text from a text editor across a widget with a preloading
-;;; drop target, this data will be downloaded, even if the data is ultimately
-;;; dropped elsewhere.
-;;;
-;;; For a lot of data formats, the amount of data is very small (like
-;;; GDK_TYPE_RGBA), so enabling this property does not hurt at all. And for
-;;; local-only drag'n'drop operations, no data transfer is done, so enabling it
-;;; there is free.
-;;;
-;;; Owner: GtkDropTarget
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: FALSE
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "drop" 'drop-target) t)
+ "The @code{drop} property of type @class{gdk:drop} (Read) @br{}
+  The drop that is currently being performed. Deprecated 4.4")
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_set_preload ()
-;;;
-;;; void
-;;; gtk_drop_target_set_preload (GtkDropTarget *self,
-;;;                              gboolean preload);
-;;;
-;;; Sets the GtkDropTarget:preload property.
-;;;
-;;; self :
-;;;     a GtkDropTarget
-;;;
-;;; preload :
-;;;     TRUE to preload drop data
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-target-drop)
+      "Accessor"
+      (documentation 'drop-target-drop 'function)
+ "@version{#2023-7-31}
+  @syntax[]{(gtk:drop-target-drop object) => drop}
+  @argument[object]{a @class{gtk:drop-target} object}
+  @argument[drop]{a @class{gdk:drop} object with the current drop}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-target]{drop} slot of the
+    @class{gtk:drop-target} class.
+  @end{short}
+  The @sym{gtk:drop-target-drop} function gets the currently handled drop
+  operation.
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_get_preload ()
-;;;
-;;; gboolean
-;;; gtk_drop_target_get_preload (GtkDropTarget *self);
-;;;
-;;; Gets the value of the GtkDropTarget:preload property.
-;;;
-;;; self :
-;;;     a GtkDropTarget
-;;;
-;;; Returns :
-;;;     TRUE if drop data should be preloaded
-;;; ----------------------------------------------------------------------------
+  Deprecated 4.4
+  @see-class{gtk:drop-target}
+  @see-symbol{gdk:drop}")
 
-;;; ----------------------------------------------------------------------------
-;;; The “value” property
-;;;
-;;;  “value”                    GValue *
-;;;
-;;; The value for this drop operation or NULL if the data has not been loaded
-;;; yet or no drop operation is going on.
-;;;
-;;; Data may be available before the GtkDropTarget::drop signal gets emitted -
-;;; for example when the GtkDropTarget:preload property is set. You can use the
-;;; GObject::notify signal to be notified of available data.
-;;;
-;;; Owner: GtkDropTarget
-;;;
-;;; Flags: Read
-;;; ----------------------------------------------------------------------------
+;;; --- drop-target-formats ----------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_get_value ()
-;;;
-;;; const GValue *
-;;; gtk_drop_target_get_value (GtkDropTarget *self);
-;;;
-;;; Gets the value of the GtkDropTarget:value property.
-;;;
-;;; self :
-;;;     a GtkDropTarget
-;;;
-;;; Returns :
-;;;     The current drop data.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "formats" 'drop-target) t)
+ "The @code{formats} property of type @class{gdk:content-formats} (Read) @br{}
+  The content formats that determine the supported data formats.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-target-formats)
+      "Accessor"
+      (documentation 'drop-target-formats 'function)
+ "@version{#2023-7-31}
+  @syntax[]{(gtk:drop-target-formats object) => formats}
+  @argument[object]{a @class{gtk:drop-target} object}
+  @argument[formats]{a @class{gdk:content-formats} instance with the
+    supported data formats}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-target]{formats} slot of the
+    @class{gtk:drop-target} class.
+  @end{short}
+  The @sym{gtk:drop-target-formats} function gets the data formats that this
+  drop target accepts. If the result is @code{nil}, all formats are expected to
+  be supported.
+  @see-class{gtk:drop-target}
+  @see-class{gdk:content-formats}")
 
+;;; --- drop-target-preload ----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "preload" 'drop-target) t)
+ "The @code{preload} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the drop data should be preloaded when the pointer is only hovering
+  over the widget but has not been released. Setting this property allows finer
+  grained reaction to an ongoing drop at the cost of loading more data. The
+  default value for this property is @em{false} to avoid downloading huge
+  amounts of data by accident. For example, if somebody drags a full document
+  of gigabytes of text from a text editor across a widget with a preloading
+  drop target, this data will be downloaded, even if the data is ultimately
+  dropped elsewhere. For a lot of data formats, the amount of data is very
+  small, like the @class{gdk:rgba} color, so enabling this property does not
+  hurt at all. And for local-only drag'n'drop operations, no data transfer is
+  done, so enabling it there is free. @br{}
+  Default value: @em{false}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-target-preload)
+      "Accessor"
+      (documentation 'drop-target-preload 'function)
+ "@version{#2023-7-31}
+  @syntax[]{(gtk:drop-target-preload object) => preload}
+  @syntax[]{(setf (gtk:drop-target-preload object) preload)}
+  @argument[object]{a @class{gtk:drop-target} object}
+  @argument[preload]{a boolean whether the drop data should be preloaded}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-target]{preload} slot of the
+    @class{gtk:drop-target} class.
+  @end{short}
+  The @sym{gtk:drop-target-preload} function gets the value of the
+  @slot[gtk:drop-target]{preload} property. The
+  @sym{(setf gtk:drop-target-preload)} function sets the property.
+  @see-class{gtk:drop-target}")
+
+;;; --- drop-target-value ------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "value" 'drop-target) t)
+ "The @code{value} property of type @symbol{g:value} (Read) @br{}
+  The value for this drop operation or @code{nil} if the data has not been
+  loaded yet or no drop operation is going on. Data may be available before the
+  \"current-drop\" signal gets emitted - for example when the
+  @slot[gtk:drop-target]{preload} property is set. You can use the \"notify\"
+  signal to be notified of available data.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-target-value)
+      "Accessor"
+      (documentation 'drop-target-value 'function)
+ "@version{#2023-7-31}
+  @syntax[]{(gtk:drop-target-value object) => value}
+  @argument[object]{a @class{gtk:drop-target} object}
+  @argument[value]{a @symbol{g:value} instance with the current drop data}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-target]{value} slot of the
+    @class{gtk:drop-target} class.
+  @end{short}
+  The @sym{gtk:drop-target-value} function gets the value of the
+  @slot[gtk:drop-target]{value} property.
+  @see-class{gtk:drop-target}
+  @see-symbol{g:value}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drop_target_new ()
-;;;
-;;; GtkDropTarget *
-;;; gtk_drop_target_new (GType type,
-;;;                      GdkDragAction actions);
-;;;
-;;; Creates a new GtkDropTarget object.
-;;;
-;;; If the drop target should support more than 1 type, pass G_TYPE_INVALID for
-;;; type and then call gtk_drop_target_set_gtypes().
-;;;
-;;; type :
-;;;     The supported type or G_TYPE_INVALID
-;;;
-;;; actions :
-;;;     the supported actions
-;;;
-;;; Returns :
-;;;     the new GtkDropTarget
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_target_new" drop-target-new) (g:object drop-target)
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @argument[gtype]{a @class{g:type-t} type with the supported type}
+  @argument[actions]{a @symbol{gdk:drag-actions} value with the supported
+    actions}
+  @return{A new @class{gtk:drop-target} object.}
+  @begin{short}
+    Creates a new drop target.
+  @end{short}
+  If the drop target should support more than one type, pass @code{nil} for
+  @arg{gtype} and then call the @fun{gtk:drop-target-gtypes} function.
+  @see-class{gtk:drop-target}
+  @see-class{g:type-t}
+  @see-symbol{gdk:drag-actions}
+  @see-function{gtk:drop-target-gtypes}"
   (gtype g:type-t)
-  (actions (g:object gdk:drag-action)))
+  (actions gdk:drag-action))
 
 (export 'drop-target-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drop_target_set_gtypes ()
-;;;
-;;; void
-;;; gtk_drop_target_set_gtypes (GtkDropTarget *self,
-;;;                             GType *types,
-;;;                             gsize n_types);
-;;;
-;;; Sets the supported GTypes for this drop target.
-;;;
-;;; The GtkDropTarget::drop signal will
-;;;
-;;; self :
-;;;     a GtkDropTarget
-;;;
-;;; types :
-;;;     all supported GTypes that can be dropped.
-;;;
-;;; n_types :
-;;;     number of types
+;;; gtk_drop_target_get_gtypes ()
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_get_gtypes ()
-;;;
-;;; const GType *
-;;; gtk_drop_target_get_gtypes (GtkDropTarget *self,
-;;;                             gsize *n_types);
-;;;
-;;; Gets the list of supported GTypes for self . If no type have been set, NULL
-;;; will be returned.
-;;;
-;;; self :
-;;;     a GtkDropTarget
-;;;
-;;; n_types :
-;;;     optional pointer to take the number of GTypes contained in the return
-;;;     value.
-;;;
-;;; Returns :
-;;;     G_TYPE_INVALID-terminated array of types included in formats or NULL if
-;;;     none.
-;;; ----------------------------------------------------------------------------
+(cffi:defcfun ("gtk_drop_target_set_gtypes" %drop-target-set-gtypes) :void
+  (target (g:object drop-target))
+  (gtypes (:pointer :size))
+  (n-gtypes :size))
+
+(defun (setf drop-target-gtypes) (gtypes target)
+  (let ((n-gtypes (length gtypes))
+        (gtypes (mapcar #'g:gtype gtypes)))
+    (cffi:with-foreign-object (gtypes-ptr 'g:type-t n-gtypes)
+      (iter (for gtype in gtypes)
+            (for count from 0)
+            (setf (cffi:mem-aref gtypes-ptr 'g:type-t count) gtype))
+      (%drop-target-set-gtypes target gtypes-ptr n-gtypes))
+    gtypes))
+
+(cffi:defcfun ("gtk_drop_target_get_gtypes" %drop-target-get-gtypes)
+    (:pointer :size)
+  (target (g:object drop-target))
+  (n-gtypes (:pointer :size)))
+
+(defun drop-target-gtypes (target)
+ #+liber-documentation
+ "@version{2023-7-31}
+  @syntax[]{(gtk:drop-target-gtypes target) => gtypes}
+  @syntax[]{(setf (gtk:drop-target-gtypes target) gtypes)}
+  @argument[target]{a @class{gtk:drop-target} object}
+  @argument[gtypes]{a list of @class{g:type-t} types}
+  @begin{short}
+    The @sym{gtk:drop-target-gtypes} gets the list of supported GTypes for
+    @arg{target}.
+  @end{short}
+  If no type have been set, @code{nil} will be returned. The
+  @sym{(setf gtk:drop-target)} function sets the supported GTypes for the drop
+  target.
+  @see-class{gtk:drop-target}
+  @see-class{g:type-t}"
+  (cffi:with-foreign-object (n-gtypes :size)
+    (let ((ptr (%drop-target-get-gtypes target n-gtypes)))
+      (prog1
+        (iter (for count from 0 below (cffi:mem-ref n-gtypes :size))
+              (collect (cffi:mem-aref ptr 'g:type-t count)))
+        (glib:free ptr)))))
+
+(export 'drop-target-gtypes)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drop_target_reject ()
-;;;
-;;; void
-;;; gtk_drop_target_reject (GtkDropTarget *self);
-;;;
-;;; Rejects the ongoing drop operation.
-;;;
-;;; If no drop operation is ongoing - when GdkDropTarget:drop returns NULL -
-;;; this function does nothing.
-;;;
-;;; This function should be used when delaying the decision on whether to accept
-;;; a drag or not until after reading the data.
-;;;
-;;; self :
-;;;     a GtkDropTarget
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_target_reject" drop-target-reject) :void
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @argument[target]{a @class{gtk:drop-target} object}
+  @begin{short}
+    Rejects the ongoing drop operation.
+  @end{short}
+  If no drop operation is ongoing - when the \"drop-current\" signal returns
+  @code{nil} - this function does nothing.
+
+  This function should be used when delaying the decision on whether to accept
+  a drag or not until after reading the data.
+  @see-class{gtk:drop-target}"
   (target (g:object drop-target)))
 
 (export 'drop-target-reject)
 
-;;; --- End of file gtk.drop-target.lisp ---------------------------------------
+;;; --- End of file gtk4.drop-target.lisp --------------------------------------

@@ -70,17 +70,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkDragIcon
-;;;
-;;; GtkDragIcon is a GtkRoot implementation with the sole purpose to serve as a
-;;; drag icon during DND operations. A drag icon moves with the pointer during
-;;; a drag operation and is destroyed when the drag ends.
-;;;
-;;; To set up a drag icon and associate it with an ongoing drag operation, use
-;;; gtk_drag_icon_get_for_drag() to get the icon for a drag. You can then use
-;;; it like any other widget and use gtk_drag_icon_set_child() to set whatever
-;;; widget should be used for the drag icon.
-;;;
-;;; Keep in mind that drag icons do not allow user input.
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkDragIcon" drag-icon
@@ -96,105 +85,95 @@
     drag-icon-child
     "child" "GtkWidget" t t)))
 
+#+liber-documentation
+(setf (documentation 'drag-icon 'type)
+ "@version{2023-7-31}
+  @begin{short}
+    The @class{gtk:drag-icon} widget is a @class{gtk:root} implementation with 
+    the sole purpose to serve as a drag icon during DND operations. 
+  @end{short}
+  A drag icon moves with the pointer during a drag operation and is destroyed 
+  when the drag ends.
+
+  To set up a drag icon and associate it with an ongoing drag operation, use
+  the @fun{gtk:drag-icon-for-drag} function to get the icon for a drag. You can 
+  then use it like any other widget and use the @fun{gtk:drag-icon-child}
+  function to set whatever widget should be used for the drag icon.
+
+  Keep in mind that drag icons do not allow user input.
+  @see-slot{gtk:drag-icon-child}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “child” property
-;;;
-;;;   “child”                    GtkWidget *
-;;;
-;;; The widget to display as drag icon.
-;;;
-;;; Owner: GtkDragIcon
-;;;
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
+;;; --- drag-icon-child --------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drag_icon_set_child ()
-;;;
-;;; void
-;;; gtk_drag_icon_set_child (GtkDragIcon *self,
-;;;                          GtkWidget *child);
-;;;
-;;; Sets the widget to display as the drag icon.
-;;;
-;;; self :
-;;;     a GtkDragIcon
-;;;
-;;; child :
-;;;     a GtkWidget or NULL.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "child" 'drag-icon) t)
+ "The @code{child} property of type @class{gtk:widget} (Read / Write) @br{}
+  The widget to display as drag icon.")
 
-;;; ----------------------------------------------------------------------------
-;;;    gtk_drag_icon_get_child ()
-;;;
-;;; GtkWidget *
-;;; gtk_drag_icon_get_child (GtkDragIcon *self);
-;;;
-;;; Gets the widget currently used as drag icon.
-;;;
-;;; self :
-;;;     a GtkDragIcon
-;;;
-;;; Returns :
-;;;     The drag icon or NULL if none.
-;;; ----------------------------------------------------------------------------
-
+#+liber-documentation
+(setf (liber:alias-for-function 'drag-icon-child)
+      "Accessor"
+      (documentation 'drag-icon-child 'function)
+ "@version{#2023-7-31}
+  @syntax[]{(gtk:drag-icon-child object) => child}
+  @syntax[]{(setf (gtk:drag-icon-child object) child)}
+  @argument[object]{a @class{gtk:drag-icon} widget}
+  @argument[child]{a @class{gtk:widget} child widget}
+  @begin{short}
+    Accessor of the @slot[gtk:drag-icon]{child} slot of the 
+    @class{gtk:drag-icon} class.
+  @end{short}
+  The @sym{gtk:drag-icon-child} function gets the widget currently used as drag 
+  icon. The @sym{(setf gtk:drag-icon-child)} function sets the widget to display 
+  as the drag icon.
+  @see-class{gtk:drag-icon}
+  @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_icon_get_for_drag ()
-;;;
-;;; GtkWidget *
-;;; gtk_drag_icon_get_for_drag (GdkDrag *drag);
-;;;
-;;; Gets the GtkDragIcon in use with drag .
-;;;
-;;; If no drag icon exists yet, a new one will be created and shown.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; Returns :
-;;;     the GtkDragIcon.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_icon_get_for_drag" drag-icon-for-drag)
     (g:object widget)
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @argument[drag]{a @class{gdk:drag} object}
+  @return{The @class{gtk:widget} widget with the drag icon.}
+  @begin{short}
+    Gets the drag icon in use with @arg{drag}.
+  @end{short}
+  If no drag icon exists yet, a new one will be created and shown.
+  @see-class{gtk:drag-icon}
+  @see-class{gdk:drag}
+  @see-class{gtk:widget}"
   (drag (g:object gdk:drag)))
 
 (export 'drag-icon-for-drag)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_icon_set_from_paintable ()
-;;;
-;;; void
-;;; gtk_drag_icon_set_from_paintable (GdkDrag *drag,
-;;;                                   GdkPaintable *paintable,
-;;;                                   int hot_x,
-;;;                                   int hot_y);
-;;;
-;;; Creates a GtkDragIcon that shows paintable , and associates it with the
-;;; drag operation. The hotspot position on the paintable is aligned with the
-;;; hotspot of the cursor.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; paintable :
-;;;     a GdkPaintable to display
-;;;
-;;; hot_x :
-;;;     X coordinate of the hotspot
-;;;
-;;; hot_y :
-;;;     Y coordinate of the hotspot
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_icon_set_from_paintable" drag-icon-set-from-paintable)
     :void
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @argument[drag]{a @class{gdk:drag} object}
+  @argument[paintable]{a @class{gdk:paintable} object to display}
+  @argument[xhot]{an integer with the x coordinate of the hotspot}
+  @argument[yhot]{an integer with the y coordinate of the hotspot}
+  @begin{short}
+    Creates a drag icon that shows @arg{paintable}, and associates it with the
+    drag operation.
+  @end{short}
+  The hotspot position on the paintable is aligned with the hotspot of the 
+  cursor.
+  @see-class{gtk:drag-icon}
+  @see-class{gdk:paintable}"
   (drag (g:object gdk:drag))
   (paintable (g:object gdk:paintable))
   (xhot :int)
@@ -204,28 +183,29 @@
   
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drag_icon_create_widget_for_value ()
-;;;
-;;; GtkWidget *
-;;; gtk_drag_icon_create_widget_for_value (const GValue *value);
-;;;
-;;; Creates a widget that can be used as a drag icon for the given value .
-;;;
-;;; Supported types include strings, GdkRGBA and GtkTextBuffer. If GTK does not
-;;; know how to create a widget for a given value, it will return NULL.
-;;;
-;;; This method is used to set the default drag icon on drag'n'drop operations
-;;; started by GtkDragSource, so you don't need to set a drag icon using this
-;;; function there.
-;;;
-;;; value :
-;;;     a GValue
-;;;
-;;; Returns :
-;;;     A new GtkWidget for displaying value as a drag icon.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_icon_create_widget_for_value"
                drag-icon-create-widget-for-value) (g:object widget)
+ #+liber-documentation
+ "@version{#2023-7-31}
+  @argument[gvalue]{a @symbol{g:value} instance}
+  @return{A new @class{gtk:widget} widget for displaying @arg{gvalue} as a drag 
+    icon.}
+  @begin{short}
+    Creates a widget that can be used as a drag icon for the given @arg{gvalue}.
+  @end{short}
+  Supported types include strings, @class{gdk:rgba} instances and 
+  @class{gtk:text-buffer} objects. If GTK does not know how to create a widget 
+  for a given value, it will return @code{nil}.
+
+  This method is used to set the default drag icon on drag and drop operations
+  started by the @class{gtk:drag-source} object, so you do not need to set a 
+  drag icon using this function there.
+
+  @see-class{gtk:drag-icon}
+  @see-class{gtk:widget}
+  @see-symbol{g:value}"
   (value (:pointer (:struct g:value))))
 
 (export 'drag-icon-create-widget-for-value)

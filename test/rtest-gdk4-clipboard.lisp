@@ -20,7 +20,11 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkClipboard")))
   ;; Check the children
+  #-windows
   (is (equal '("GdkWaylandClipboard" "GdkWaylandPrimary" "GdkX11Clipboard")
+             (list-children "GdkClipboard")))
+  #+windows
+  (is (equal '("GdkWin32Clipboard")
              (list-children "GdkClipboard")))
   ;; Check the interfaces
   (is (equal '()
@@ -149,4 +153,4 @@
 ;;;     gdk_clipboard_set_text
 ;;;     gdk_clipboard_set_texture
 
-;;; --- 2023-7-29 --------------------------------------------------------------
+;;; --- 2023-7-31 --------------------------------------------------------------
