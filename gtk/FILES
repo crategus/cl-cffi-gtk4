@@ -82,7 +82,7 @@ Tree support
 
 Application support
 
-  gtk4.application.lisp                 GtkApplication                 GTK 4.6+
+  gtk4.application.lisp                 GtkApplication                 GTK 4.10
   gtk4.application-window.lisp          GtkApplicationWindow           GTK 4.10
 
 Interface builder
@@ -273,10 +273,10 @@ Ornaments
 
 Scrolling
 
-  gtk.scrollbar.lisp                   GtkScrollbar                    GTK 4.0+
-  gtk.scrolled-window.lisp             GtkScrolledWindow               GTK 4.6+
-  gtk.scrollable.lisp                  GtkScrollable                   GTk 4.0+
-  gtk.viewport.lisp                    GtkViewport                     GTK 4.0+
+  gtk.scrollbar.lisp                   GtkScrollbar                    GTK 4.10
+  gtk.scrolled-window.lisp             GtkScrolledWindow               GTK 4.10
+  gtk.scrollable.lisp                  GtkScrollable                   GTk 4.10
+  gtk.viewport.lisp                    GtkViewport                     GTK 4.10
 
 Printing
 
@@ -321,7 +321,7 @@ Miscellaneous
 
 Interfaces
 
-  gtk.actionable.lisp                  GtkActionable                   GTK 4.0+
+  gtk.actionable.lisp                  GtkActionable                   GTK 4.10
   gtk.orientable.lisp                  GtkOrientable                   GTK 4.6+
 
 Abstract Base Classes
@@ -366,16 +366,16 @@ Gestures and event handling
 Keyboard shortcuts
 
   gtk.shortcut-manager.lisp            GtkShortcutManager              GTK 4.6+
-  gtk.keyboard-accelerators.lisp       Utilities for accelerators      GTK 4.6+
+  gtk.keyboard-accelerators.lisp       Utilities for accelerators      GTK 4.10&
   gtk.shortcut.lisp                    GtkShortcut                     GTK 4.10&
   gtk.shortcut-trigger.lisp            GtkShortcutTrigger              GTK 4.6+
   gtk.shortcut-action.lisp             GtkShortcutAction               GTK 4.6+
 
 Data exchange, clipboards and Drag-and-Drop
 
-  gtk.drag-source.lisp                 GtkDragSource                   GTK 4.10+
-  gtk.drag-icon.lisp                   GtkDragIcon                     GTK 4.10+
-  gtk.drop-target.lisp                 GtkDropTarget                   GTK 4.0+
+  gtk.drag-source.lisp                 GtkDragSource                   GTK 4.10
+  gtk.drag-icon.lisp                   GtkDragIcon                     GTK 4.10
+  gtk.drop-target.lisp                 GtkDropTarget                   GTK 4.10
   gtk.drop-target-async.lisp           GtkDropTargetAsync              GTK 4.0+
   gtk.drop-controller-motion.lisp      GtkDropControllerMotion         GTK 4.0+
 
@@ -395,4 +395,4 @@ V. Theming in GTK
   gtk.icon-paintable.lisp              GtkIconPaintable                GTK 4.6+
   gtk.icon-theme.lisp                  GtkIconTheme                    GTK 4.0+
 
-2023-4-16
+2023-8-4

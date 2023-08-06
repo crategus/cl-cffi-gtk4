@@ -2689,7 +2689,7 @@
     @begin[Utilities for accelerators]{subsection}
       We have various utility functions to parse and generate textual
       representations of keyboard accelerators. If you want to set up keyboard
-      accelerators for widgets, the @class{shortcut-trigger} object is
+      accelerators for widgets, the @class{gtk:shortcut-trigger} object is
       probably more convenient than the functions in this section.
       @about-function{accelerator-valid}
       @about-function{accelerator-parse}
@@ -3598,14 +3598,14 @@
     @begin[GtkDropTarget]{subsection}
       Event controller to receive DND drops.
       @about-class{drop-target}
-      @about-generic{drag-target-actions}
-      @about-generic{drag-target-drop}
-      @about-generic{drag-target-formats}
-      @about-generic{drag-target-preload}
-      @about-generic{drag-target-value}
+      @about-generic{drop-target-actions}
+      @about-generic{drop-target-current-drop}
+      @about-generic{drop-target-drop}
+      @about-generic{drop-target-formats}
+      @about-generic{drop-target-preload}
+      @about-generic{drop-target-value}
       @about-function{drop-target-new}
-      @about-function{drop-target-set-gtypes}
-      @about-function{drop-target-get-gtypes}
+      @about-function{drop-target-gtypes}
       @about-function{drop-target-reject}
     @end{subsection}
     @begin[GtkDropTargetAsync]{subsection}

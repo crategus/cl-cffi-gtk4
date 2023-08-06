@@ -52,6 +52,9 @@
      (:file "gdk4.paintable")
      (:file "gdk4.texture")
 
+     ;; Events
+     (:file "gdk4.event")
+
      ;; Surfaces, Toplevels, Popups
      (:file "gdk4.surface")
      (:file "gdk4.toplevel-layout")
@@ -80,7 +83,6 @@
      (:file "gdk4.app-launch-context")
 
      ;; Miscellaneous
-     (:file "gdk4.event")
      (:file "gdk4.cursor")
      (:file "gdk4.frame-timings")
      (:file "gdk4.frame-clock")
@@ -381,11 +383,11 @@
      (:file "gtk4.shortcut-action")         ; GtkShortcutAction
 
      ;; Data exchange, clipboards and Drag-and-Drop
-     (:file "gtk4.drag-source")             ; GtkDragSource
-     (:file "gtk4.drag-icon")               ; GtkDragIcon
-     (:file "gtk4.drop-target")             ; GtkDropTarget
-     (:file "gtk4.drop-target-async")       ; GtkDropTargetAsync
-     (:file "gtk4.drop-controller-motion")  ; GtkDropControllerMotion
+     (:file "gtk4.drag-source")
+     (:file "gtk4.drag-icon")
+     (:file "gtk4.drop-target")
+     (:file "gtk4.drop-target-async")
+     (:file "gtk4.drop-controller-motion")
 
      ;; Miscellaneous
      (:file "gtk4.adjustment")              ; GtkAdjustment
@@ -670,9 +672,9 @@
      (:file "rtest-gtk4-separator")
 
      ;; Scrolling
-;    (:file "gtk4.scrollbar")                 ; GtkScrollbar
-;    (:file "gtk4.scrolled-window")           ; GtkScrolledWindow
-;    (:file "gtk4.viewport")                  ; GtkViewport
+     (:file "rtest-gtk4-scrollbar")
+     (:file "rtest-gtk4-scrolled-window")
+     (:file "rtest-gtk4-viewport")
 
      ;; Windows
      (:file "rtest-gtk4-window")
@@ -746,10 +748,10 @@
 
      ;; Data exchange, clipboards and Drag-and-Drop
      (:file "rtest-gtk4-drag-source")
-;    (:file "gtk4.drag-icon")                     ; GtkDragIcon
-;    (:file "gtk4.drop-target")                   ; GtkDropTarget
-;    (:file "gtk4.drop-target-async")             ; GtkDropTargetAsync
-;    (:file "gtk4.drop-controller-motion")        ; GtkDropControllerMotion
+     (:file "rtest-gtk4-drag-icon")
+     (:file "rtest-gtk4-drop-target")
+;    (:file "gtk4.drop-target-async")
+;    (:file "gtk4.drop-controller-motion")
 
      ;; Miscellaneous
      (:file "rtest-gtk4-adjustment")

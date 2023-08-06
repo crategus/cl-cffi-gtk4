@@ -23,29 +23,29 @@ List of files for the GDK 4 Library
 
  Paintables, Textures
 
-  gdk4.paintable.lisp              GdkPaintable, GdkSnapshot           GDK 4.0+
-  gdk4.texture.lisp                GdkTexture                          GDK 4.0+
+  gdk4.paintable.lisp              GdkPaintable, GdkSnapshot           GDK 4.10
+  gdk4.texture.lisp                GdkTexture, GdkMemoryTexture, ...   GDK 4.10&
 
  Surfaces, Toplevels, Popups
 
   gdk4.surface.lisp                GdkSurface                          GDK 4.10
   gdk4.toplevel.lisp               GdkToplevel                         GDK 4.10
-  gdk4.toplevel-layout.lisp        GdkToplevelLayout                   GDK 4.0+
-  gdk4.toplevel-size.lisp          GdkToplevelSize                     GDK 4.0+
-  gdk4.popup.lisp                  GdkPopup                            GDK 4.0+
-  gdk4.popup-layout.lisp           GdkPopupLayout                      GDK 4.0+
+  gdk4.toplevel-layout.lisp        GdkToplevelLayout                   GDK 4.10
+  gdk4.toplevel-size.lisp          GdkToplevelSize                     GDK 4.10
+  gdk4.popup.lisp                  GdkPopup                            GDK 4.10
+  gdk4.popup-layout.lisp           GdkPopupLayout                      GDK 4.10
 
  Draw Contexts
 
-  gdk4.draw-context.lisp           GdkDrawContect                      GDK 4.0+
-  gdk4.gl-context.lisp             GdkGLContext                        GDK 4.0+
-  gdk4.vulkan-context.lisp         GdkVulkanContext                    GDK 4.0+
-  gdk4.cairo-context.lisp          GdkCairoContext                     GDK 4.0+
+  gdk4.draw-context.lisp           GdkDrawContect                      GDK 4.10
+  gdk4.gl-context.lisp             GdkGLContext                        GDK 4.10
+  gdk4.vulkan-context.lisp         GdkVulkanContext                    GDK 4.10&
+  gdk4.cairo-context.lisp          GdkCairoContext                     GDK 4.10
 
  Clipbord, Drag and Drop
 
-  gdk4.content-formats.lisp        GdkContentFormats                   GDK 4.0+
-  gdk4.content-provider.lisp       GdkContentProvider                  GDK 4.0+
+  gdk4.content-formats.lisp        GdkContentFormats                   GDK 4.10&
+  gdk4.content-provider.lisp       GdkContentProvider                  GDK 4.10&
   gdk4.content-serializer.lisp     GdkContentSerializer                GDK 4.0+
   gdk4.content-deserializer.lisp   GdkContentDeserializer              GDK 4.0+
   gdk4.clipboard.lisp              GdkClipboard                        GDK 4.10&
@@ -72,4 +72,4 @@ List of files for the GDK 4 Library
   gdk4.x11-interaction.lisp                                            GDK 4.0+
   gdk4.wayland-interaction.lisp                                        GDK 4.0+
 
-;;; --- 2023-7-30 --------------------------------------------------------------
+;;; --- 2023-8-4 ---------------------------------------------------------------
