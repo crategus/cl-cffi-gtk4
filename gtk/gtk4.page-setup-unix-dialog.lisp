@@ -90,7 +90,7 @@
 
   @image[pagesetupdialog]{}
 
-  It can be used very much like any other GTK+ dialog, at the cost of the
+  It can be used very much like any other GTK dialog, at the cost of the
   portability offered by the high-level printing API.
   @begin[Example]{dictionary}
     @begin{pre}

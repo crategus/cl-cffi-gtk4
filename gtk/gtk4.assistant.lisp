@@ -382,7 +382,7 @@ lambda (assistant)    :run-last
       @begin{pre}
 lambda (assistant)    :action
       @end{pre}
-      No documentation.
+      The action signal for the @kbd{Escape} binding.
       @begin[code]{table}
         @entry[assistant]{The @sym{gtk:assistant} widget which received the
           signal.}

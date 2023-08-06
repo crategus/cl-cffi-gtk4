@@ -2173,7 +2173,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_realize" widget-realize) :void
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{#2023-8-4}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Creates the GDK resources associated with a widget.
@@ -2183,7 +2183,7 @@ lambda (widget)    :run-last
   parent containers, then the widget will be realized and mapped automatically.
 
   Realizing a widget requires all the parent widgets of the widget to be
-  realized. Calling the @sym{gtk:widget-realize} function realizes the parents
+  realized. Calling the @fun{gtk:widget-realize} function realizes the parents
   of the widget in addition to the widget itself. If a widget is not yet
   inside a toplevel window when you realize it, bad things will happen.
 
@@ -2191,10 +2191,10 @@ lambda (widget)    :run-last
   useful otherwise. Many times when you think you might need it, a better
   approach is to connect to a signal that will be called after the widget is
   realized automatically, such as the \"draw\" signal. Or simply use the
-  @fun{g-signal-connect} function with the \"realize\" signal.
+  @fun{g:signal-connect} function with the \"realize\" signal.
   @see-class{gtk:widget}
   @see-function{gtk:widget-unrealize}
-  @see-function{g-signal-connect}"
+  @see-function{g:signal-connect}"
   (widget (g:object widget)))
 
 (export 'widget-realize)
@@ -2224,14 +2224,13 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_queue_draw" widget-queue-draw) :void
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{#2023-8-4}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
-    Equivalent to calling the @fun{gtk:widget-queue-draw-area} function for the
-    entire area of a widget.
+    Schedules the widget to be redrawn in the paint phase of the current or the 
+    next frame.
   @end{short}
-  @see-class{gtk:widget}
-  @see-function{gtk:widget-queue-draw-area}"
+  @see-class{gtk:widget}"
   (widget (g:object widget)))
 
 (export 'widget-queue-draw)

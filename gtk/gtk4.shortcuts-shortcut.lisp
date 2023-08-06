@@ -348,7 +348,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon"
                       'shortcuts-shortcut) t)
- "The @code{icon} property of type @class{g-icon} (Read / Write) @br{}
+ "The @code{icon} property of type @class{g:icon} (Read / Write) @br{}
   An icon to represent the shortcut or gesture. This property is used if
   @code{shortcut-type} is set to @code{:gesture}. For the other predefined
   gesture types, GTK provides an icon on its own.")
@@ -361,7 +361,7 @@
   @syntax[]{(gtk:shortcuts-shortcut-icon object) => icon}
   @syntax[]{(setf (gtk:shortcuts-shortcut-icon object) icon)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
-  @argument[icon]{a @class{g-icon} object}
+  @argument[icon]{a @class{g:icon} object}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-shortcut]{icon} slot of the
     @class{gtk:shortcuts-shortcut} class.

@@ -128,7 +128,7 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "gicon" 'cell-renderer-pixbuf) t)
- "The @code{gicon} property of type @class{g-icon} (Read / Write) @br{}
+ "The @code{gicon} property of type @class{g:icon} (Read / Write) @br{}
   Represents the icon to display. If the icon theme is changed, the image will
   be updated automatically.")
 
@@ -140,16 +140,16 @@
   @syntax[]{(gtk:cell-renderer-pixbuf-gicon object) => icon}
   @syntax[]{(setf (gtk:cell-renderer-pixbuf-gicon object) icon)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
-  @argument[icon]{a @class{g-icon} object}
+  @argument[icon]{a @class{g:icon} object}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{gicon} slot of the
     @class{gtk:cell-renderer-pixbuf} class.
   @end{short}
 
-  The @class{g-icon} object representing the icon to display. If the icon theme
+  The @class{g:icon} object representing the icon to display. If the icon theme
   is changed, the image will be updated automatically.
   @see-class{gtk:cell-renderer-pixbuf}
-  @see-class{g-icon}")
+  @see-class{g:icon}")
 
 ;;; --- cell-renderer-pixbuf-icon-name -----------------------------------------
 

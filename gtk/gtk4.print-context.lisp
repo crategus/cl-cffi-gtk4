@@ -170,7 +170,7 @@
   @end{short}
 
   This function is intended to be used when implementing an internal print
-  preview, it is not needed for printing, since GTK+ itself creates a suitable
+  preview, it is not needed for printing, since GTK itself creates a suitable
   Cairo context in that case.
   @see-class{gtk:print-context}
   @see-symbol{cairo:context-t}

@@ -629,7 +629,7 @@ pango_fc_font_map_set_config (PANGO_FC_FONT_MAP (fontmap), config);
 
 gtk_font_chooser_set_font_map (font_chooser, fontmap);
     @end{pre}
-    Note that other GTK+ widgets will only be able to use the application
+    Note that other GTK widgets will only be able to use the application
     specific font if it is present in the font map they use. The following
     code updates the font map for a @sym{gtk:label} widget with @arg{fontmap}.
     @begin{pre}

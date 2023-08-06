@@ -2,7 +2,7 @@
 ;;; gtk4.keyboard-accelerators.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -37,19 +37,10 @@
 ;;;     gtk_accelerator_parse
 ;;;     gtk_accelerator_name
 ;;;     gtk_accelerator_get_label
-;;;     gtk_accelerator_parse_with_keycode
-;;;     gtk_accelerator_name_with_keycode
-;;;     gtk_accelerator_get_label_with_keycode
+;;;     gtk_accelerator_parse_with_keycode                 not implemented
+;;;     gtk_accelerator_name_with_keycode                  not implemented
+;;;     gtk_accelerator_get_label_with_keycode             not implemented
 ;;;     gtk_accelerator_get_default_mod_mask
-;;;
-;;; Description
-;;;
-;;;     We have various utility functions to parse and generate textual
-;;;     representations of keyboard accelerators.
-;;;
-;;;     If you want to set up keyboard accelerators for widgets,
-;;;     GtkShortcutTrigger is probably more convenient than the functions in
-;;;     this section.
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
@@ -60,17 +51,17 @@
 
 (cffi:defcfun ("gtk_accelerator_valid" accelerator-valid) :boolean
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2023-8-4}
   @argument[keyval]{an unsigned integer with a GDK keyval}
-  @argument[mask]{a value of the @symbol{gdk:modifier-type} flags}
+  @argument[mask]{a @symbol{gdk:modifier-type} value}
   @return{@em{True} if the accelerator is valid.}
   @begin{short}
     Determines whether a given @arg{keyval} and modifier mask constitute a
     valid keyboard accelerator.
   @end{short}
   For example, the @code{GDK_KEY_a} keyval plus @code{GDK_CONTROL_MASK} is
-  valid - this is a \"Ctrl+a\" accelerator. But, you cannot, for instance, use
-  the @code{GDK_KEY_Control_L} keyval as an accelerator.
+  valid - this is a @kbd{Ctrl+a} accelerator. But, you cannot, for instance, 
+  use the @code{GDK_KEY_Control_L} keyval as an accelerator.
   @see-symbol{gdk:modifier-type}"
   (keyval :uint)
   (mask gdk:modifier-type))
@@ -83,7 +74,7 @@
 
 (defun accelerator-parse (accelerator)
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2023-8-4}
   @argument[accelerator]{a string representing an accelerator}
   @begin{return}
     @arg{key}  -- an unsigned integer with an accelerator keyval @br{}
@@ -93,14 +84,14 @@
   @begin{short}
     Parses a string representing an accelerator.
   @end{short}
-  The format looks like \"<Control>a\" or \"<Shift><Alt>F1\" or \"<Release>z\".
-  The last one is for key release.
+  The format looks like @kbd{<Control>a} or @kbd{<Shift><Alt>F1} or 
+  @kbd{<Release>z}. The last one is for key release.
 
   The parser is fairly liberal and allows lower or upper case, and also
-  abbreviations such as \"<Ctl>\" and \"<Ctrl>\". Key names are parsed using
-  the @fun{gdk-keyval-from-name} function. For character keys the name is not
-  the symbol, but the lowercase name, e.g. one would use \"<Ctrl>minus\"
-  instead of \"<Ctrl>-\".
+  abbreviations such as @kbd{<Ctl>} and @kbd{<Ctrl>}. Key names are parsed 
+  using the @fun{gdk:keyval-from-name} function. For character keys the name is 
+  not the symbol, but the lowercase name, e.g. one would use @kbd{<Ctrl>minus}
+  instead of @kbd{<Ctrl>-}.
 
   If the parse fails, the @arg{key} argument will be set to 0.
   @begin[Examples]{dictionary}
@@ -120,7 +111,7 @@
     @end{pre}
   @end{dictionary}
   @see-symbol{gdk:modifier-type}
-  @see-function{gdk-keyval-from-name}"
+  @see-function{gdk:keyval-from-name}"
   (cffi:with-foreign-objects ((key :uint) (mask 'gdk:modifier-type))
     (cffi:foreign-funcall "gtk_accelerator_parse"
                           :string accelerator
@@ -138,15 +129,15 @@
 
 (cffi:defcfun ("gtk_accelerator_name" accelerator-name) :string
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2023-8-4}
   @argument[key]{an unsigned integer with the accelerator keyval}
-  @argument[mask]{a @symbol{gdk:modifier-type} accelerator modifier mask}
+  @argument[mask]{a @symbol{gdk:modifier-type} value with the accelerator 
+    modifier mask}
   @return{A string with the accelerator name.}
   @begin{short}
     Converts an accelerator keyval and modifier mask into a string parseable by
     the @fun{gtk:accelerator-parse} function.
   @end{short}
-
   If you need to display accelerators in the user interface, see the
   @fun{gtk:accelerator-label} function.
   @begin[Example]{dictionary}
@@ -169,9 +160,10 @@
 
 (cffi:defcfun ("gtk_accelerator_get_label" accelerator-label) :string
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2023-8-4}
   @argument[key]{an unsigned integer with the accelerator keyval}
-  @argument[mask]{a @symbol{gdk:modifier-type} accelerator modifier mask}
+  @argument[mask]{a @symbol{gdk:modifier-type} value with the accelerator 
+    modifier mask}
   @return{A string representing the accelerator.}
   @begin{short}
     Converts an accelerator keyval and modifier mask into a string which can be
@@ -183,6 +175,7 @@
 => \"Shift+Alt+F1\"
     @end{pre}
   @end{dictionary}
+  @see-symbol{gdk:modifier-type}
   @see-function{gtk:accelerator-parse}
   @see-function{gtk:accelerator-name}"
   (key :uint)
@@ -303,8 +296,9 @@
 (cffi:defcfun ("gtk_accelerator_get_default_mod_mask"
                accelerator-default-mod-mask) gdk:modifier-type
  #+liber-documentation
- "@version{#2022-11-13}
-  @return{A @symbol{gdk:modifier-type} accelerator modifier mask.}
+ "@version{2023-8-4}
+  @return{A @symbol{gdk:modifier-type} value with the accelerator modifier 
+    mask.}
   @begin{short}
     Gets the default modifier mask.
   @end{short}

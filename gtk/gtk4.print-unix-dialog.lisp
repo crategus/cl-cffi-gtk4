@@ -118,7 +118,7 @@
   @begin{short}
     An enum for specifying which features the print dialog should offer.
   @end{short}
-  If neither @code{:generate-pdf} nor @code{:generate-ps} is specified, GTK+
+  If neither @code{:generate-pdf} nor @code{:generate-ps} is specified, GTK
   assumes that all formats are supported.
   @begin{pre}
 (gobject:define-g-enum \"GtkPrintCapabilities\" print-capabilities
@@ -199,7 +199,7 @@
     @sym{gtk:print-unix-dialog} implements a print dialog for platforms which
     do not provide a native print dialog, like Unix.
   @end{short}
-  It can be used very much like any other GTK+ dialog, at the cost of the
+  It can be used very much like any other GTK dialog, at the cost of the
   portability offered by the high-level printing API.
 
   @image[printdialog]{}

@@ -186,7 +186,7 @@
   unless it is shown by the desktop shell. If @em{false}, the applicaton window
   will not display a menubar, regardless of whether the desktop shell is showing
   it or not. @br{}
-  Default value: @code{true}")
+  Default value: @code{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'application-window-show-menubar)

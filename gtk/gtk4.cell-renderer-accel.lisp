@@ -79,10 +79,10 @@
       (liber:symbol-documentation 'cell-renderer-accel-mode)
  "@version{#2020-6-20}
   @begin{short}
-    Determines if the edited accelerators are GTK+ accelerators.
+    Determines if the edited accelerators are GTK accelerators.
   @end{short}
   If they are, consumed modifiers are suppressed, only accelerators accepted by
-  GTK+ are allowed, and the accelerators are rendered in the same way as they
+  GTK are allowed, and the accelerators are rendered in the same way as they
   are in menus.
   @begin{pre}
 (gobject:define-g-enum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
@@ -92,7 +92,7 @@
   (:other 1))
   @end{pre}
   @begin[code]{table}
-    @entry[:gtk]{GTK+ accelerators mode.}
+    @entry[:gtk]{GTK accelerators mode.}
     @entry[:other]{Other accelerator mode.}
   @end{table}
   @see-class{gtk:cell-renderer-accel}")
@@ -200,8 +200,8 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
                                                'cell-renderer-accel) t)
  "The @code{accel-mode} property of type @symbol{gtk:cell-renderer-accel-mode}
   (Read / Write) @br{}
-  Determines if the edited accelerators are GTK+ accelerators. If they are,
-  consumed modifiers are suppressed, only accelerators accepted by GTK+ are
+  Determines if the edited accelerators are GTK accelerators. If they are,
+  consumed modifiers are suppressed, only accelerators accepted by GTK are
   allowed, and the accelerators are rendered in the same way as they are in
   menus. @br{}
   Default value: @code{:gtk}")
@@ -221,8 +221,8 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
     @class{gtk:cell-renderer-accel} class.
   @end{short}
 
-  Determines if the edited accelerators are GTK+ accelerators. If they are,
-  consumed modifiers are suppressed, only accelerators accepted by GTK+ are
+  Determines if the edited accelerators are GTK accelerators. If they are,
+  consumed modifiers are suppressed, only accelerators accepted by GTK are
   allowed, and the accelerators are rendered in the same way as they are in
   menus.
   @see-class{gtk:cell-renderer-accel}

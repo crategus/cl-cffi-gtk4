@@ -87,7 +87,7 @@
       @begin{pre}
 lambda (provider)    :run-last
       @end{pre}
-      No documentation available.
+      No description available.
       @begin[code]{table}
         @entry[provider]{The @sym{gtk:style-provider} object which received the
           signal.}

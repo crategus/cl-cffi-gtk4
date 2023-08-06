@@ -814,7 +814,7 @@ lambda (operation widget setup settings)    :run-last
  "The @code{custom-tab-label} property of type @code{:string} (Read / Write)
   @br{}
   Used as the label of the tab containing custom widgets. Note that this
-  property may be ignored on some platforms. If this is @code{nil}, GTK+ uses
+  property may be ignored on some platforms. If this is @code{nil}, GTK uses
   a default label. @br{}
   Default value: @code{nil}")
 
@@ -986,7 +986,7 @@ lambda (operation widget setup settings)    :run-last
                                                'print-operation) t)
  "The @code{job-name} property of type @code{:string} (Read / Write) @br{}
   A string used to identify the job, e.g. in monitoring applications like
-  eggcups. If you do not set a job name, GTK+ picks a default one by numbering
+  eggcups. If you do not set a job name, GTK picks a default one by numbering
   successive print jobs. @br{}
   Default value: \"\" ")
 
@@ -1010,7 +1010,7 @@ lambda (operation widget setup settings)    :run-last
   The name is used to identify the job, e.g. in monitoring applications like
   eggcups.
 
-  If you do not set a job name, GTK+ picks a default one by numbering
+  If you do not set a job name, GTK picks a default one by numbering
   successive print jobs.
   @see-class{gtk:print-operation}")
 

@@ -107,7 +107,7 @@
     @end{pre}
     Furthermore for implementations of the @sym{gtk:cell-layout} interface that
     use a @class{gtk:cell-area} object to lay out cells, all
-    @sym{gtk:cell-layout} objects in GTK+ use a @class{gtk:cell-area} object,
+    @sym{gtk:cell-layout} objects in GTK use a @class{gtk:cell-area} object,
     cell properties can also be defined in the format by specifying the custom
     @code{<cell-packing>} attribute which can contain multiple @code{<property>}
     elements defined in the normal way.

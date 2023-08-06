@@ -111,7 +111,7 @@
 #+liber-documentation
 (setf (documentation 'print-backend 'type)
  "@version{#2021-12-25}
-  @short{No documentation available.}
+  @short{No description available.}
   @see-class{gtk:printer}")
 
 ;;; ----------------------------------------------------------------------------
