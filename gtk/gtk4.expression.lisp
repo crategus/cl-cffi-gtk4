@@ -2,7 +2,7 @@
 ;;; gtk4.expression.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -46,9 +46,9 @@
 ;;;     gtk_expression_get_value_type
 ;;;     gtk_expression_is_static
 ;;;     gtk_expression_evaluate
-;;;
 ;;;     gtk_expression_watch
 ;;;     gtk_expression_bind
+;;;
 ;;;     gtk_expression_watch_ref
 ;;;     gtk_expression_watch_unref
 ;;;     gtk_expression_watch_evaluate
@@ -65,6 +65,7 @@
 ;;;
 ;;;     gtk_object_expression_new
 ;;;     gtk_object_expression_get_object
+;;;
 ;;;     gtk_closure_expression_new
 ;;;     gtk_cclosure_expression_new
 ;;;
@@ -86,32 +87,82 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkExpression
-;;;
-;;; The GtkExpression structure contains only private data.
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME : GtkExpression is not derived from GObject. It is a new fundamental
-;; type.
+(cffi:define-foreign-type expression ()
+  ()
+  (:actual-type :pointer)
+  (:simple-parser expression))
 
-(gobject:define-g-object-class "GtkExpression" expression
-  (:superclass g-object
-   :export t
-   :interfaces nil
-   :type-initializer "gtk_expression_get_type")
-  nil)
+(defmethod cffi:translate-to-foreign (proxy (type expression))
+  proxy)
+
+(defmethod cffi:translate-from-foreign (native (type expression))
+  native)
+
+#+liber-documentation
+(setf (liber:alias-for-class 'expression)
+      "GtkExpression"
+      (documentation 'expression 'type)
+ "@version{#2023-8-11}
+  @begin{short}
+    The @type{gtk:expression} type provides a way to describe references to
+    values.
+  @end{short}
+
+An important aspect of expressions is that the value can be obtained from a source that is several steps away. For example, an expression may describe ‘the value of property A of object1 , which is itself the value of a property of object2 ’. And object1 may not even exist yet at the time that the expression is created. This is contrast to GObject property bindings, which can only create direct connections between the properties of two objects that must both exist for the duration of the binding.
+
+An expression needs to be \"evaluated\" to obtain the value that it currently refers to. An evaluation always happens in the context of a current object called this (it mirrors the behavior of object-oriented languages), which may or may not influence the result of the evaluation. Use gtk_expression_evaluate() for evaluating an expression.
+
+Various methods for defining expressions exist, from simple constants via gtk_constant_expression_new() to looking up properties in a GObject (even recursively) via gtk_property_expression_new() or providing custom functions to transform and combine expressions via gtk_closure_expression_new().
+
+Here is an example of a complex expression:
+
+when evaluated with this being a GtkListItem, it will obtain the \"item\" property from the GtkListItem, and then obtain the \"name\" property from the resulting object (which is assumed to be of type GTK_TYPE_COLOR).
+
+A more concise way to describe this would be
+
+The most likely place where you will encounter expressions is in the context of list models and list widgets using them. For example, GtkDropDown is evaluating a GtkExpression to obtain strings from the items in its model that it can then use to match against the contents of its search entry. GtkStringFilter is using a GtkExpression for similar reasons.
+
+By default, expressions are not paying attention to changes and evaluation is just a snapshot of the current state at a given time. To get informed about changes, an expression needs to be \"watched\" via a GtkExpressionWatch, which will cause a callback to be called whenever the value of the expression may have changed. gtk_expression_watch() starts watching an expression, and gtk_expression_watch_unwatch() stops.
+
+Watches can be created for automatically updating the property of an object, similar to GObject's GBinding mechanism, by using gtk_expression_bind().
+
+GtkExpression in GObject properties
+In order to use a GtkExpression as a GObject property, you must use the gtk_param_spec_expression() when creating a GParamSpec to install in the GObject class being defined; for instance:
+
+When implementing the GObjectClass.set_property() and GObjectClass.get_property() virtual functions, you must use gtk_value_get_expression(), to retrieve the stored GtkExpression from the GValue container, and gtk_value_set_expression(), to store the GtkExpression into the GValue; for instance:
+
+GtkExpression in .ui files
+GtkBuilder has support for creating expressions. The syntax here can be used where a GtkExpression object is needed like in a <property> tag for an expression property, or in a <binding> tag to bind a property to an expression.
+
+To create an property expression, use the <lookup> element. It can have a type attribute to specify the object type, and a name attribute to specify the property to look up. The content of <lookup> can either be an element specfiying the expression to use the object, or a string that specifies the name of the object to use.
+
+Example:
+
+To create a constant expression, use the <constant> element. If the type attribute is specified, the element content is interpreted as a value of that type. Otherwise, it is assumed to be an object.
+
+Example:
+
+To create a closure expression, use the <closure> element. The type and function attributes specify what function to use for the closure, the content of the element contains the expressions for the parameters.
+
+Example:
+
+color_expr = gtk_property_expression_new (GTK_TYPE_LIST_ITEM,
+                                          NULL, \"item\");
+expression = gtk_property_expression_new (GTK_TYPE_COLOR,
+                                          color_expr, \"name\");
+
+ ")
+
+
+(export 'expression)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkParamSpecExpression
 ;;;
 ;;; A GParamSpec for properties holding a GtkExpression.
 ;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-object-class "GtkParamSpecExpression" param-spec-expression
-  (:superclass expression
-   :export t
-   :interfaces nil
-   :type-initializer "gtk_param_spec_expression_get_type")
-  nil)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkExpressionWatch
@@ -128,52 +179,11 @@
 (export 'expression-watch)
 
 
-;;;Description
-;;;GtkExpression provides a way to describe references to values.
 
-;;;An important aspect of expressions is that the value can be obtained from a source that is several steps away. For example, an expression may describe ‘the value of property A of object1 , which is itself the value of a property of object2 ’. And object1 may not even exist yet at the time that the expression is created. This is contrast to GObject property bindings, which can only create direct connections between the properties of two objects that must both exist for the duration of the binding.
 
-;;;An expression needs to be "evaluated" to obtain the value that it currently refers to. An evaluation always happens in the context of a current object called this (it mirrors the behavior of object-oriented languages), which may or may not influence the result of the evaluation. Use gtk_expression_evaluate() for evaluating an expression.
 
-;;;Various methods for defining expressions exist, from simple constants via gtk_constant_expression_new() to looking up properties in a GObject (even recursively) via gtk_property_expression_new() or providing custom functions to transform and combine expressions via gtk_closure_expression_new().
-
-;;;Here is an example of a complex expression:
-
-;;;when evaluated with this being a GtkListItem, it will obtain the "item" property from the GtkListItem, and then obtain the "name" property from the resulting object (which is assumed to be of type GTK_TYPE_COLOR).
-
-;;;A more concise way to describe this would be
-
-;;;The most likely place where you will encounter expressions is in the context of list models and list widgets using them. For example, GtkDropDown is evaluating a GtkExpression to obtain strings from the items in its model that it can then use to match against the contents of its search entry. GtkStringFilter is using a GtkExpression for similar reasons.
-
-;;;By default, expressions are not paying attention to changes and evaluation is just a snapshot of the current state at a given time. To get informed about changes, an expression needs to be "watched" via a GtkExpressionWatch, which will cause a callback to be called whenever the value of the expression may have changed. gtk_expression_watch() starts watching an expression, and gtk_expression_watch_unwatch() stops.
-
-;;;Watches can be created for automatically updating the property of an object, similar to GObject's GBinding mechanism, by using gtk_expression_bind().
-
-;;;GtkExpression in GObject properties
-;;;In order to use a GtkExpression as a GObject property, you must use the gtk_param_spec_expression() when creating a GParamSpec to install in the GObject class being defined; for instance:
-
-;;;When implementing the GObjectClass.set_property() and GObjectClass.get_property() virtual functions, you must use gtk_value_get_expression(), to retrieve the stored GtkExpression from the GValue container, and gtk_value_set_expression(), to store the GtkExpression into the GValue; for instance:
-
-;;;GtkExpression in .ui files
-;;;GtkBuilder has support for creating expressions. The syntax here can be used where a GtkExpression object is needed like in a <property> tag for an expression property, or in a <binding> tag to bind a property to an expression.
-
-;;;To create an property expression, use the <lookup> element. It can have a type attribute to specify the object type, and a name attribute to specify the property to look up. The content of <lookup> can either be an element specfiying the expression to use the object, or a string that specifies the name of the object to use.
-
-;;;Example:
-
-;;;To create a constant expression, use the <constant> element. If the type attribute is specified, the element content is interpreted as a value of that type. Otherwise, it is assumed to be an object.
-
-;;;Example:
-
-;;;To create a closure expression, use the <closure> element. The type and function attributes specify what function to use for the closure, the content of the element contains the expressions for the parameters.
-
-;;;Example:
-
-;;;color_expr = gtk_property_expression_new (GTK_TYPE_LIST_ITEM,
-;;;                                          NULL, "item");
-;;;expression = gtk_property_expression_new (GTK_TYPE_COLOR,
-;;;                                          color_expr, "name");
 ;;;Functions
+
 ;;;GtkExpressionNotify ()
 ;;;void
 ;;;(*GtkExpressionNotify) (gpointer user_data);
@@ -750,6 +760,5 @@
 ;;;a newly created property specification.
 
 ;;;[transfer full]
-
 
 ;;; --- End of file gtk4.expression.lisp ---------------------------------------
