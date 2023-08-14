@@ -2,7 +2,7 @@
 
 (asdf:defsystem :gtk4-example
   :author "Dieter Kaiser"
-  :license "LLGPL"
+  :license "MIT"
   :serial t
   :depends-on (:cl-cffi-gtk4
                :split-sequence)
@@ -15,6 +15,7 @@
                (:file "message-dialog-simple")
                (:file "message-dialog-various")
                (:file "assistant")
+               (:file "application-window")
 
                ;; Layout Containers
                (:file "box-append")
@@ -22,6 +23,8 @@
                (:file "grid-spacing")
                (:file "revealer")
                (:file "revealer-icon")
+               (:file "stack")
+               (:file "stack-sidebar")
                (:file "paned")
                (:file "fixed")
 
@@ -33,6 +36,9 @@
                (:file "progress-bar")
                (:file "level-bar")
                (:file "statusbar")
+
+               ;; List-based widgets
+               (:file "listview-applauncher")
 
                ;; Media Support
                (:file "video")

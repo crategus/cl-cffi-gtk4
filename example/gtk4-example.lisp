@@ -18,6 +18,7 @@
            #:do-message-dialog-with-markup
            #:do-message-dialog-with-secondary-markup
            #:do-assistant
+           #:do-application-window
 
            ;; Layout Containers
            #:do-box-append
@@ -25,6 +26,8 @@
            #:do-grid-spacing
            #:do-revealer
            #:do-revealer-icon
+           #:do-stack
+           #:do-stack-sidebar
            #:do-paned
            #:do-fixed
 
@@ -36,6 +39,9 @@
            #:do-progress-bar
            #:do-level-bar
            #:do-statusbar
+
+           ;; List-based widgets
+           #:do-listview-applauncher
 
            ;; Media Support
            #:do-video
