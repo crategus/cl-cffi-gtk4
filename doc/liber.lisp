@@ -84,6 +84,69 @@
 (unexport 'gobject::g-initially-unowned :gobject)
 (unexport 'gobject:lisp-closure :gobject)
 
+;; Unexport the symbols from gdk-pixbuf for the documentation to avoid
+;; duplication of the symbols, these symbols are documented in its own package.
+
+;; Symbols from gdk-pixbuf.structure.lisp
+(unexport 'gdk:colorspace :gdk)
+(unexport 'gdk:pixbuf :gdk)
+(unexport 'gdk:pixbuf-bits-per-sample :gdk)
+(unexport 'gdk:pixbuf-colorspace :gdk)
+(unexport 'gdk:pixbuf-has-alpha :gdk)
+(unexport 'gdk:pixbuf-height :gdk)
+(unexport 'gdk:pixbuf-n-channels :gdk)
+(unexport 'gdk:pixbuf-pixel-bytes :gdk)
+(unexport 'gdk:pixbuf-pixels :gdk)
+(unexport 'gdk:pixbuf-rowstride :gdk)
+(unexport 'gdk:pixbuf-width :gdk)
+(unexport 'gdk:pixbuf-pixels-with-length :gdk)
+(unexport 'gdk:pixbuf-byte-length :gdk)
+(unexport 'gdk:pixbuf-option :gdk)
+(unexport 'gdk:pixbuf-remove-option :gdk)
+(unexport 'gdk:pixbuf-copy-options :gdk)
+(unexport 'gdk:pixbuf-read-pixels :gdk)
+;; Symbols from gdk-pixbuf.load.lisp
+(unexport 'gdk:pixbuf-file-info :gdk)
+(unexport 'gdk:pixbuf-new-from-file :gdk)
+(unexport 'gdk:pixbuf-new-from-file-at-size :gdk)
+(unexport 'gdk:pixbuf-new-from-file-at-scale :gdk)
+(unexport 'gdk:pixbuf-new-from-resource :gdk)
+(unexport 'gdk:pixbuf-new-from-resource-at-scale :gdk)
+;; Symbols from gdk-pixbuf.loader.lisp
+(unexport 'gdk:pixbuf-loader :gdk)
+(unexport 'gdk:pixbuf-loader-new :gdk)
+(unexport 'gdk:pixbuf-loader-write :gdk)
+(unexport 'gdk:pixbuf-loader-set-size :gdk)
+(unexport 'gdk:pixbuf-loader-pixbuf :gdk)
+(unexport 'gdk:pixbuf-loader-animation :gdk)
+(unexport 'gdk:pixbuf-loader-close :gdk)
+;; Symbols from gdk-pixbuf.save.lisp
+(unexport 'gdk:pixbuf-save :gdk)
+;; Symbols from gdk-pixbuf.memory.lisp
+(unexport 'gdk:pixbuf-new :gdk)
+(unexport 'gdk:pixbuf-new-subpixbuf :gdk)
+(unexport 'gdk:pixbuf-copy :gdk)
+;; Symbols from gdk-pixbuf.scaling.lisp
+(unexport 'gdk:pixbuf-interp-type :gdk)
+(unexport 'gdk:pixbuf-rotation :gdk)
+(unexport 'gdk:pixbuf-scale-simple :gdk)
+(unexport 'gdk:pixbuf-scale :gdk)
+(unexport 'gdk:pixbuf-composite-color-simple :gdk)
+(unexport 'gdk:pixbuf-composite :gdk)
+(unexport 'gdk:pixbuf-composite-color :gdk)
+(unexport 'gdk:pixbuf-rotate-simple :gdk)
+(unexport 'gdk:pixbuf-flip :gdk)
+;; Symbols from gdk-pixbuf.utilities.lisp
+(unexport 'gdk:pixbuf-add-alpha :gdk)
+(unexport 'gdk:pixbuf-copy-area :gdk)
+(unexport 'gdk:pixbuf-fill :gdk)
+;; Symbols from gdk-pixbuf.animation.lisp
+(unexport 'gdk:pixbuf-animation :gdk)
+(unexport 'gdk:pixbuf-animation-loop :gdk)
+(unexport 'gdk:pixbuf-animation-new-from-file :gdk)
+(unexport 'gdk:pixbuf-animation-new-from-resource :gdk)
+(unexport 'gdk:pixbuf-animation-static-image :gdk)
+
 ;;; ---------------------------------------------------------------------------
 
 (defun generate-html ()
