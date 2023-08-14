@@ -7,7 +7,7 @@
 
 ;;;     GtkAccessible
 
-(test accessible-interface
+(test gtk-accessible-interface
   ;; Type check
   (is (g:type-is-interface "GtkAccessible"))
   ;; Check the registered name
@@ -16,9 +16,15 @@
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessible")
           (g:gtype (cffi:foreign-funcall "gtk_accessible_get_type" :size))))
-  ;; Get the names of the interface properties.
+  ;; Check the interface prerequisites
+  (is (equal '("GObject")
+             (list-interface-prerequisites "GtkAccessible")))
+  ;; Check the interface properties.
   (is (equal '("accessible-role")
              (list-interface-properties "GtkAccessible")))
+  ;; Check the interface signals
+  (is (equal '()
+             (list-signals "GtkAccessible")))
   ;; Get the interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkAccessible"
                                   GTK-ACCESSIBLE
@@ -33,19 +39,21 @@
 
 ;;;     accessible-role
 
-(test accessible-properties.1
+(test gtk-accessible-properties.1
   (is (eq :button
           (gtk:accessible-accessible-role (make-instance 'gtk:button)))))
 
-(test accessible-properties.2
+(test gtk-accessible-properties.2
   (let ((children (remove nil
                           (mapcar #'glib:symbol-for-gtype
                                   (mapcar #'g:type-name
                                           (g:type-children "GtkWidget"))))))
+     ;; Remove GTK:LIST-BASE. It is an abstract widget class.
+     (setf children (remove 'gtk:list-base children))
      (is (equal '(:BUTTON :CHECKBOX :COMBO-BOX :GRID :GRID-CELL :GROUP :IMG
                   :LABEL :LIST :LIST-ITEM :MENU-BAR :METER :NONE :PROGRESS-BAR
-                  :SCROLLBAR :SEARCH :SEARCH-BOX :SEPARATOR :SPIN-BUTTON :SWITCH
-                  :TAB-LIST :TEXT-BOX :WIDGET :WINDOW)
+                  :SCROLLBAR :SEARCH :SEARCH-BOX :SEPARATOR :SPIN-BUTTON
+                  :SWITCH :TAB-LIST :TEXT-BOX :TREE-GRID :WIDGET :WINDOW)
                 (sort (remove-duplicates
                           (mapcar #'gtk:accessible-accessible-role
                                   (mapcar #'make-instance children))
@@ -67,4 +75,4 @@
 ;;;     gtk_accessible_relation_init_value
 ;;;     gtk_accessible_state_init_value
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-13 --------------------------------------------------------------

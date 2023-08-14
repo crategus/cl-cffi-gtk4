@@ -7,35 +7,6 @@
 
 ;;;     GtkExpression
 
-#+nil
-(test gtk-expression-class
-  ;; Type check
-  (is (g:type-is-object "GtkExpression"))
-  ;; Check the registered name
-  (is (eq 'g:object
-          (glib:symbol-for-gtype "GtkExpression")))
-  ;; Check the type initializer
-  (is (eq (g:gtype "GtkExpression")
-          (g:gtype (cffi:foreign-funcall "gtk_expression_get_type" :size))))
-  ;; Check the parent
-  (is (eq (g:gtype "GObject")
-          (g:type-parent "GtkExpression")))
-  ;; Check the children
-  (is (equal '()
-             (list-children "GtkExpression")))
-  ;; Check the interfaces
-  (is (equal '()
-             (list-interfaces "GtkExpression")))
-  ;; Check the class properties
-  (is (equal '()
-             (list-properties "GtkExpression")))
-  ;; Check the list of signals
-  (is (equal '()
-             (list-signals "GtkExpression")))
-  ;; Check the class definition
-  (is (equal '()
-             (gobject:get-g-type-definition "GtkExpression"))))
-
 ;;;     GtkExpressionWatch
 ;;;     GtkParamSpecExpression
 
@@ -79,4 +50,4 @@
 
 ;;;     gtk_param_spec_expression
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-11 --------------------------------------------------------------

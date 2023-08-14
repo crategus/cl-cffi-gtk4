@@ -42,26 +42,30 @@
           (g:type-parent "GtkWidget")))
   ;; Check the children
   #-windows
-  (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget" "GtkAspectFrame"
- "GtkBox" "GtkBuiltinIcon" "GtkButton" "GtkCalendar" "GtkCellView"
- "GtkCenterBox" "GtkCheckButton" "GtkColorButton" "GtkColorChooserWidget"
- "GtkColorDialogButton" "GtkColorPlane" "GtkColorSwatch" "GtkColumnView"
- "GtkColumnViewTitle" "GtkComboBox" "GtkDragIcon" "GtkDrawingArea"
- "GtkDropDown" "GtkEditableLabel" "GtkEntry" "GtkExpander" "GtkFileChooserCell"
- "GtkFileChooserErrorStack" "GtkFileChooserWidget" "GtkFileThumbnail"
- "GtkFixed" "GtkFlowBox" "GtkFlowBoxChild" "GtkFontButton"
- "GtkFontChooserWidget" "GtkFrame" "GtkGLArea" "GtkGizmo" "GtkGrid"
- "GtkHeaderBar" "GtkIconView" "GtkImage" "GtkInfoBar" "GtkLabel" "GtkLevelBar"
- "GtkListBase" "GtkListBox" "GtkListBoxRow" "GtkListItemWidget"
- "GtkMediaControls" "GtkMenuButton" "GtkModelButton" "GtkNotebook" "GtkOverlay"
- "GtkPaned" "GtkPanedHandle" "GtkPasswordEntry" "GtkPathBar" "GtkPicture"
- "GtkPlacesSidebar" "GtkPopover" "GtkPopoverContent" "GtkPopoverMenuBar"
- "GtkProgressBar" "GtkRange" "GtkRevealer" "GtkScaleButton" "GtkScrollbar"
- "GtkScrolledWindow" "GtkSearchBar" "GtkSearchEntry" "GtkSeparator"
- "GtkShortcutLabel" "GtkShortcutsShortcut" "GtkSpinButton" "GtkSpinner"
- "GtkStack" "GtkStackSidebar" "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch"
- "GtkText" "GtkTextView" "GtkTreeView" "GtkVideo" "GtkViewport" "GtkWindow"
- "GtkWindowControls" "GtkWindowHandle")
+  (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
+               "GtkAspectFrame" "GtkBox" "GtkBuiltinIcon" "GtkButton"
+               "GtkCalendar" "GtkCellView" "GtkCenterBox" "GtkCheckButton"
+               "GtkColorButton" "GtkColorChooserWidget" "GtkColorDialogButton"
+               "GtkColorPlane" "GtkColorSwatch" "GtkColumnView"
+               "GtkColumnViewTitle" "GtkComboBox" "GtkDragIcon" "GtkDrawingArea"
+               "GtkDropDown" "GtkEditableLabel" "GtkEntry" "GtkExpander"
+               "GtkFileChooserCell" "GtkFileChooserErrorStack"
+               "GtkFileChooserWidget" "GtkFileThumbnail" "GtkFixed" "GtkFlowBox"
+               "GtkFlowBoxChild" "GtkFontButton" "GtkFontChooserWidget"
+               "GtkFrame" "GtkGLArea" "GtkGizmo" "GtkGrid" "GtkHeaderBar"
+               "GtkIconView" "GtkImage" "GtkInfoBar" "GtkLabel" "GtkLevelBar"
+               "GtkListBase" "GtkListBox" "GtkListBoxRow" "GtkListItemWidget"
+               "GtkMediaControls" "GtkMenuButton" "GtkModelButton" "GtkNotebook"
+               "GtkOverlay" "GtkPaned" "GtkPanedHandle" "GtkPasswordEntry"
+               "GtkPathBar" "GtkPicture" "GtkPlacesSidebar" "GtkPopover"
+               "GtkPopoverContent" "GtkPopoverMenuBar" "GtkProgressBar"
+               "GtkRange" "GtkRevealer" "GtkScaleButton" "GtkScrollbar"
+               "GtkScrolledWindow" "GtkSearchBar" "GtkSearchEntry"
+               "GtkSeparator" "GtkShortcutLabel" "GtkShortcutsShortcut"
+               "GtkSpinButton" "GtkSpinner" "GtkStack" "GtkStackSidebar"
+               "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch" "GtkText"
+               "GtkTextView" "GtkTreeExpander" "GtkTreeView" "GtkVideo"
+               "GtkViewport" "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
              (list-children "GtkWidget")))
   #+windows
   (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget" "GtkAspectFrame"
@@ -395,4 +399,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; --- 2023-7-21 --------------------------------------------------------------
+;;; --- 2023-8-13 --------------------------------------------------------------

@@ -26,6 +26,14 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkApplicationWindow")))
+  ;; CSS name
+  (is (string= "window"
+               (gtk:widget-class-css-name "GtkApplicationWindow")))
+  ;; CSS style context
+  (is (string=
+"[window.background:dir(ltr)]
+"
+               (print-style-context "GtkApplicationWindow")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkApplicationWindow"
                                              GTK-APPLICATION-WINDOW
@@ -54,11 +62,6 @@
 
 ;;; --- gtk_application_window_new ---------------------------------------------
 
-;; FIXME: We get the following error. The application is not run.
-;; Failed to register: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown:
-;; The name com.crategus.test was not provided by any .service files
-
-#+nil
 (test gtk-application-window-new
   (let ((message nil)
         (application (make-instance 'gtk:application
@@ -106,4 +109,4 @@
     (is (typep (gtk:application-window-help-overlay window)
                'gtk:shortcuts-window))))
 
-;;; --- 2023-8-2 ---------------------------------------------------------------
+;;; --- 2023-8-7 ---------------------------------------------------------------

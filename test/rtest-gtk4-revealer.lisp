@@ -7,7 +7,7 @@
 
 ;;;     GtkRevealerTransitionType
 
-(test revealer-transition-type
+(test gtk-revealer-transition-type
   ;; Check the type
   (is (g:type-is-enum "GtkRevealerTransitionType"))
   ;; Check the type initializer
@@ -56,7 +56,7 @@
 
 ;;;     GtkRevealer
 
-(test revealer-class
+(test gtk-revealer-class
   ;; Type check
   (is (g:type-is-object "GtkRevealer"))
   ;; Check the registered name
@@ -114,8 +114,19 @@
 ;;;     transition-duration
 ;;;     transition-type
 
+(test gtk-revealer-properties
+  (let ((revealer (make-instance 'gtk:revealer)))
+    (is-false (gtk:revealer-child revealer))
+    (is-false (gtk:revealer-child-revealed revealer))
+    (is-false (gtk:revealer-reveal-child revealer))
+    (is (= 250 (gtk:revealer-transition-duration revealer)))
+    (is (eq :slide-down (gtk:revealer-transition-type revealer)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_revealer_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-revealer-new
+  (is (typep (gtk:revealer-new) 'gtk:revealer)))
+
+;;; --- 2023-8-8 ---------------------------------------------------------------
