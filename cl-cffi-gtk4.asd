@@ -98,26 +98,16 @@
     :serial t
     :components
     ((:file "gsk.package")
-     (:file "gsk.renderer")         ; GskRenderer
+     (:file "gsk.renderer")
      (:file "gsk.render-node")
      (:file "gsk.rounded-rect")
-     (:file "gsk.transform")        ; GskTransform
+     (:file "gsk.transform")
      (:file "gsk.gl-shader")
     ))
    (:module gtk
     :serial t
     :components
     ((:file "gtk4.package")
-
-      ;; GListModel support
-;      (:file "gtk4.expression")            ; GtkExpression
-
-     (:file "gtk4.filter")                ; GtkFilter
-;    GtkCustomFilter — Filtering with callbacks
-;    GtkMultiFilter — Combining multiple filters
-;    GtkBoolFilter — Filtering by boolean expressions
-;    GtkStringFilter — Filtering by strings
-     (:file "gtk4.file-filter")           ; GtkFileFilter
 
      ;; GTK Core
      (:file "gtk4.version")               ; Version Information
@@ -149,6 +139,34 @@
      (:file "gtk4.buildable")             ; GtkBuildable
      (:file "gtk4.builder")               ; GtkBuilder
 
+     ;; GListModel support
+     (:file "gtk4.bitset")
+     (:file "gtk4.expression")
+     (:file "gtk4.filter-list-model")
+     (:file "gtk4.filter")
+     (:file "gtk4.custom-filter")
+     (:file "gtk4.multi-filter")
+     (:file "gtk4.bool-filter")
+     (:file "gtk4.string-filter")
+     (:file "gtk4.file-filter")
+     (:file "gtk4.flatten-list-model")
+     (:file "gtk4.map-list-model")
+     (:file "gtk4.slice-list-model")
+     (:file "gtk4.sort-list-model")
+     (:file "gtk4.sorter")
+     (:file "gtk4.custom-sorter")
+     (:file "gtk4.multi-sorter")
+     (:file "gtk4.string-sorter")
+     (:file "gtk4.numeric-sorter")
+     (:file "gtk4.selection-model")
+     (:file "gtk4.no-selection")
+     (:file "gtk4.single-selection")
+     (:file "gtk4.multi-selection")
+     (:file "gtk4.selection-filter-model")
+     (:file "gtk4.bookmark-list")
+     (:file "gtk4.directory-list")
+     (:file "gtk4.string-list")
+
      ;; Layout Managers
      (:file "gtk4.layout-manager")        ; GtkLayoutManager
      (:file "gtk4.layout-child")          ; GtkLayoutChild
@@ -168,6 +186,22 @@
      (:file "gtk4.widget")                ; GtkWidget
      (:file "gtk4.range")                 ; GtkRange
 
+     ;; List-based Widgets
+     (:file "gtk4.list-item")
+     (:file "gtk4.list-item-factory")
+     (:file "gtk4.signal-list-item-factory")
+     (:file "gtk4.builder-list-item-factory")
+     (:file "gtk4.list-view")
+     (:file "gtk4.grid-view")
+     (:file "gtk4.column-view")
+     (:file "gtk4.column-view-column")
+     (:file "gtk4.drop-down")
+
+     ;; Tree support
+     (:file "gtk4.tree-list-model")
+     (:file "gtk4.tree-list-row-sorter")
+     (:file "gtk4.tree-expander")
+
      ;; Layout Containers
      (:file "gtk4.box")                   ; GtkBox
      (:file "gtk4.center-box")            ; GtkCenterBox
@@ -175,9 +209,9 @@
      (:file "gtk4.revealer")              ; GtkRevealer
      (:file "gtk4.list-box")              ; GtkListBox
      (:file "gtk4.flow-box")              ; GtkFlowBox
-     (:file "gtk4.stack")                 ; GtkStack
-     (:file "gtk4.stack-switcher")        ; GtkStackSwitcher
-     (:file "gtk4.stack-sidebar")         ; GtkStackSidebar
+     (:file "gtk4.stack")
+     (:file "gtk4.stack-switcher")
+     (:file "gtk4.stack-sidebar")
      (:file "gtk4.action-bar")            ; GtkActionBar
      (:file "gtk4.header-bar")            ; GtkHeaderBar
      (:file "gtk4.overlay")               ; GtkOverlay
@@ -281,14 +315,14 @@
      (:file "gtk4.color-button")          ; GtkColorButton
      (:file "gtk4.color-chooser-widget")  ; GtkColorChooserWidget
      (:file "gtk4.color-chooser-dialog")  ; GtkColorChooserDialog
-     (:file "gtk4.color-dialog" :if-feature :gtk-4-10)
-     (:file "gtk4.color-dialog-button" :if-feature :gtk-4-10)
+     (:file "gtk4.color-dialog"             :if-feature :gtk-4-10)
+     (:file "gtk4.color-dialog-button"      :if-feature :gtk-4-10)
 
      (:file "gtk4.file-chooser")
      (:file "gtk4.file-chooser-native")
      (:file "gtk4.file-chooser-dialog")
      (:file "gtk4.file-chooser-widget")
-     (:file "gtk4.file-dialog" :if-feature :gtk-4-10)
+     (:file "gtk4.file-dialog"              :if-feature :gtk-4-10)
 
      (:file "gtk4.font-chooser")          ; GtkFontChooser
      (:file "gtk4.font-button")           ; GtkFontButton
@@ -310,13 +344,14 @@
      (:file "gtk4.viewport")              ; GtkViewport
 
      ;; Windows
-     (:file "gtk4.window")                ; GtkWindow
-     (:file "gtk4.dialog")                ; GtkDialog
-     (:file "gtk4.message-dialog")        ; GtkMessageDialog
-     (:file "gtk4.about-dialog")          ; GtkAboutDialog
-     (:file "gtk4.assistant")             ; GtkAssistant
-     (:file "gtk4.window-group")          ; GtkWindowGroup
-     (:file "gtk4.native-dialog")         ; GtkNativeDialog
+     (:file "gtk4.window")
+     (:file "gtk4.dialog")
+     (:file "gtk4.message-dialog")
+     (:file "gtk4.about-dialog")
+     (:file "gtk4.alert-dialog"             :if-feature :gtk-4-10)
+     (:file "gtk4.assistant")
+     (:file "gtk4.window-group")
+     (:file "gtk4.native-dialog")
 
      ;; Printing
      (:file "gtk4.print-operation")          ; GtkPrintOperation
@@ -325,10 +360,10 @@
      (:file "gtk4.print-settings")           ; GtkPrintSettings
      (:file "gtk4.page-setup")               ; GtkPageSetup
 
-     (:file "gtk4.page-setup-unix-dialog"  :if-feature (:not :windows))
-     (:file "gtk4.print-unix-dialog"       :if-feature (:not :windows))
-     (:file "gtk4.print-job"               :if-feature (:not :windows))
-     (:file "gtk4.printer"                 :if-feature (:not :windows))
+     (:file "gtk4.page-setup-unix-dialog"   :if-feature (:not :windows))
+     (:file "gtk4.print-unix-dialog"        :if-feature (:not :windows))
+     (:file "gtk4.print-job"                :if-feature (:not :windows))
+     (:file "gtk4.printer"                  :if-feature (:not :windows))
 
      ;; Shortcuts Widgets
      (:file "gtk4.shortcuts-window")      ; GtkShortcutsWindow
@@ -474,15 +509,40 @@
 
      ;; GSK
 
-      ;; GListModel support
-;      (:file "gtk4.expression")             ; GtkExpression
-
+     ;; GListModel support
+     (:file "rtest-gtk4-bitset")
+     (:file "rtest-gtk4-expression")
+     (:file "rtest-gtk4-filter-list-model")
      (:file "rtest-gtk4-filter")
-;    GtkCustomFilter — Filtering with callbacks
-;    GtkMultiFilter — Combining multiple filters
-;    GtkBoolFilter — Filtering by boolean expressions
-;    GtkStringFilter — Filtering by strings
+     (:file "rtest-gtk4-custom-filter")
+     (:file "rtest-gtk4-multi-filter")
+     (:file "rtest-gtk4-bool-filter")
+     (:file "rtest-gtk4-string-filter")
      (:file "rtest-gtk4-file-filter")
+
+     ;; GtkFlattenListModel
+     ;; GtkMapListModel
+     ;; GtkSliceListModel
+     ;; GtkSortListModel
+     ;; GtkSorter
+     ;; GtkCustomSorter
+     ;; GtkMultiSorter
+     ;; GtkStringSorter
+     ;; GtkNumericSorter
+
+     (:file "rtest-gtk4-selection-model")
+     (:file "rtest-gtk4-no-selection")
+     (:file "rtest-gtk4-single-selection")
+     (:file "rtest-gtk4-multi-selection")
+
+     ;; GtkSelectionFilterModel
+     ;; GtkBookmarkList
+     ;; GtkDirectoryList
+     ;; GtkStringList
+
+     ;; List-based widgets
+     (:file "rtest-gtk4-list-item")
+     (:file "rtest-gtk4-list-item-factory")
 
      ;; GTK Core
      (:file "rtest-gtk4-version")
@@ -540,11 +600,11 @@
      (:file "rtest-gtk4-revealer")
 ;    (:file "gtk4.list-box")                 ; GtkListBox
 ;    (:file "gtk4.flow-box")                 ; GtkFlowBox
-;    (:file "gtk4.stack")                    ; GtkStack
-;    (:file "gtk4.stack-switcher")           ; GtkStackSwitcher
-;    (:file "gtk4.stack-sidebar")            ; GtkStackSidebar
-;    (:file "gtk4.action-bar")               ; GtkActionBar
-;    (:file "gtk4.header-bar")               ; GtkHeaderBar
+     (:file "rtest-gtk4-stack")
+     (:file "rtest-gtk4-stack-switcher")
+     (:file "rtest-gtk4-stack-sidebar")
+     (:file "rtest-gtk4-action-bar")
+     (:file "rtest-gtk4-header-bar")
 ;    (:file "gtk4.overlay")                  ; GtkOverlay
      (:file "rtest-gtk4-paned")
 ;    (:file "gtk4.notebook")                 ; GtkNotebook
@@ -759,7 +819,7 @@
 ;    (:file "gtk4.snapshot")
 ;    (:file "gtk4.tooltip")
 ;    (:file "gtk4.widget-paintable")
-;    (:file "gtk4.window-controls")
+     (:file "rtest-gtk4-window-controls")
      (:file "rtest-gtk4-window-handle")
 
      ;; Application support
