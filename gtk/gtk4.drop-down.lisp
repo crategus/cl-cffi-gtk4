@@ -63,8 +63,10 @@
 ;;;     enable-search
 ;;;     expression
 ;;;     factory
+;;;     header-factory                                     Since 4.12
 ;;;     list-factory
 ;;;     model
+;;;     search-match-mode                                  Since 4.12
 ;;;     selected
 ;;;     selected-item
 ;;;     show-arrow                                         Since 4.6
@@ -109,12 +111,20 @@
    (factory
     drop-down-factory
     "factory" "GtkListItemFactory" t t)
+   #+gtk-4-12
+   (header-factory
+    drop-down-header-factory
+    "header-factory" "GtkListItemFactory" t t)
    (list-factory
     drop-down-list-factory
     "list-factory" "GtkListItemFactory" t t)
    (model
     drop-down-model
     "model" "GListModel" t t)
+   #+gtk-4-12
+   (search-match-mode
+    drop-down-search-match-mode
+    "search-match-mode" "GtkStringFilterMatchMode" t t)
    (selected
     drop-down-selected
     "selected" "guint" t t)
@@ -124,8 +134,7 @@
    #+gtk-4-6
    (show-arrow
     drop-down-show-arrow
-    "show-arrow" "gboolean" t t)
-    ))
+    "show-arrow" "gboolean" t t)))
 
 ;;;Description
 
