@@ -1,4 +1,4 @@
-;;;; Application with Automatic Resources - 2023-8-6
+;;;; Application with Automatic Resources - 2023-8-7
 ;;;;
 ;;;; This application automatically loads a menubar, an icon, and a shortcuts
 ;;;; window from resources.
@@ -22,15 +22,16 @@
             (let* ((theme (gtk:icon-theme-for-display (gdk:display-default)))
                    (icons (gtk:icon-theme-icon-names theme)))
             ;; Print informations about the automatically loaded resources
-            (format t "in STARTUP~%")
-            (format t "Resource path : ~a~%"
+            (format t "   Resource path : ~a~%"
                       (g:application-resource-base-path app))
-            (format t "   Theme path : ~a~%"
+            (format t "      Theme path : ~a~%"
                       (gtk:icon-theme-resource-path
                           (gtk:icon-theme-for-display (gdk:display-default))))
-            (format t "      menubar : ~a~%" 
+            (format t "         menubar : ~a~%"
                       (gtk:application-menubar application))
-            (format t "         icon : ~a~%" 
+            (format t "   menubar by id : ~a~%"
+                      (gtk:application-menu-by-id application "menubar"))
+            (format t "            icon : ~a~%"
                       (first (member "my-gtk-logo" icons :test #'string=))))))
       ;; Connect "activate" signal
       (g:signal-connect app "activate"
@@ -44,6 +45,9 @@
                                          :icon-name "my-gtk-logo"
                                          :default-width 480
                                          :default-height 300)))
+              ;; Get the automatically loaded shortcuts window
+              (format t "Shortcuts window : ~a~%"
+                        (gtk:application-window-help-overlay window))
               ;; Make the window visible
               (setf (gtk:widget-visible window) t)
               (g:application-release application))))
