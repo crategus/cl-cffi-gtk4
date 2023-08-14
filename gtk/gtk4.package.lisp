@@ -2,7 +2,7 @@
 ;;; gtk4.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -59,6 +59,458 @@
   allows for maximum flexibility. Bindings for many other languages have been
   written, including C++, Objective-C, Guile/Scheme, Perl, Python, TOM, Ada95,
   Free Pascal, and Eiffel.
+  @begin[GListModel support]{section}
+    @begin[GtkBitSet]{subsection}
+      Sets of integers.
+      @about-class{bitset}
+      @about-function{bitset-ref}
+      @about-function{bitset-unref}
+      @about-function{bitset-new-empty}
+      @about-function{bitset-new-range}
+      @about-function{bitset-copy}
+      @about-function{bitset-contains}
+      @about-function{bitset-is-empty}
+      @about-function{bitset-equals}
+      @about-function{bitset-minimum}
+      @about-function{bitset-maximum}
+      @about-function{bitset-size}
+      @about-function{bitset-size-in-range}
+      @about-function{bitset-nth}
+      @about-function{bitset-remove-all}
+      @about-function{bitset-add}
+      @about-function{bitset-remove}
+      @about-function{bitset-add-range}
+      @about-function{bitset-remove-range}
+      @about-function{bitset-add-range-closed}
+      @about-function{bitset-remove-range-closed}
+      @about-function{bitset-add-rectangle}
+      @about-function{bitset-remove-rectangle}
+      @about-function{bitset-union}
+      @about-function{bitset-intersect}
+      @about-function{bitset-subtract}
+      @about-function{bitset-difference}
+      @about-function{bitset-shift-left}
+      @about-function{bitset-shift-right}
+      @about-function{bitset-splice}
+      @about-symbol{bitset-iter}
+      @about-function{bitset-iter-init-first}
+      @about-function{bitset-iter-init-last}
+      @about-function{bitset-iter-init-at}
+      @about-function{bitset-iter-next}
+      @about-function{bitset-iter-previous}
+      @about-function{bitset-iter-value}
+      @about-function{bitset-iter-is-valid}
+    @end{subsection}
+    @begin[GtkExpression]{subsection}
+      Expressions to values.
+      @about-class{expression}
+      @about-class{expression-watch}
+      @about-symbol{param-spec-expression}
+      @about-symbol{expression-notify}
+      @about-function{expression-ref}
+      @about-function{expression-unref}
+      @about-function{expression-value-type}
+      @about-function{expression-is-static}
+      @about-function{expression-evaluate}
+      @about-function{expression-watch}
+      @about-function{expression-bind}
+      @about-function{expression-watch-ref}
+      @about-function{expression-watch-unref}
+      @about-function{expression-watch-evaluate}
+      @about-function{expression-watch-unwatch}
+      @about-function{property-expression-new}
+      @about-function{property-expression-new-for-pspec}
+      @about-function{property-expression-expression}
+      @about-function{property-expression-pspec}
+      @about-function{constant-expression-new}
+      @about-function{constant-expression-new-for-value}
+      @about-function{constant-expression-value}
+      @about-function{object-expression-new}
+      @about-function{object-expression-object}
+      @about-function{closure-expression-new}
+      @about-function{cclosure-expression-new}
+      @about-symbol{VALUE_HOLDS_EXPRESSION}
+      @about-function{value-set-expression}
+      @about-function{value-take-expression}
+      @about-function{value-get-expression}
+      @about-function{value-dup-expression}
+      @about-function{param-spec-expression}
+    @end{subsection}
+    @begin[GtkFilterListModel]{subsection}
+      A list model that filters its items.
+      @about-class{filter-list-model}
+      @about-generic{filter-list-model-filter}
+      @about-generic{filter-list-model-incremental}
+      @about-generic{filter-list-model-model}
+      @about-generic{filter-list-model-pending}
+      @about-function{filter-list-model-new}
+    @end{subsection}
+    @begin[GtkFilter]{subsection}
+      Filtering items.
+      @about-symbol{filter-match}
+      @about-symbol{filter-change}
+      @about-class{filter}
+      @about-function{filter-match}
+      @about-function{filter-strictness}
+      @about-function{filter-changed}
+    @end{subsection}
+    @begin[GtkCustomFilter]{subsection}
+      Filtering with callbacks.
+      @about-class{custom-filter}
+      @about-symbol{custom-filter-func}
+      @about-function{custom-filter-new}
+      @about-function{custom-filter-set-filter-func }
+    @end{subsection}
+    @begin[GtkMultiFilter]{subsection}
+      Combining multiple filters.
+      @about-class{multi-filter}
+      @about-class{any-filter}
+      @about-class{every-filter}
+      @about-function{multi-filter-append}
+      @about-function{multi-filter-remove}
+      @about-function{any-filter-new}
+      @about-function{every-filter-new}
+    @end{subsection}
+    @begin[GtkBoolFilter]{subsection}
+      Filtering by boolean expressions.
+      @about-class{bool-filter}
+      @about-generic{bool-filter-expression}
+      @about-generic{bool-filter-invert}
+      @about-function{bool-filter-new}
+    @end{subsection}
+    @begin[GtkStringFilter]{subsection}
+      Filtering by strings.
+      @about-symbol{string-filter-match-mode}
+      @about-class{string-filter}
+      @about-generic{string-filter-expression}
+      @about-generic{string-filter-ignore-case}
+      @about-generic{string-filter-match-mode}
+      @about-generic{string-filter-search}
+      @about-function{string-filter-new}
+    @end{subsection}
+    @begin[GtkFileFilter]{subsection}
+      Filtering files.
+      @about-class{file-filter}
+      @about-generic{file-filter-mime-types}
+      @about-generic{file-filter-name}
+      @about-generic{file-filter-patterns}
+      @about-generic{file-filter-suffixes}
+      @about-function{file-filter-new}
+      @about-function{file-filter-new-from-gvariant}
+      @about-function{file-filter-add-mime-type}
+      @about-function{file-filter-add-pattern}
+      @about-function{file-filter-add-pixbuf-formats}
+      @about-function{file-filter-add-suffix}
+      @about-function{file-filter-attributes}
+      @about-function{file-filter-to-gvariant}
+    @end{subsection}
+    @begin[GtkFlattenListModel]{subsection}
+      A list model that flattens a list of lists.
+      @about-class{flatten-list-model}
+      @about-generic{flatten-list-model-item-type}
+      @about-generic{flatten-list-model-model}
+      @about-generic{flatten-list-model-n-items}
+      @about-function{flatten-list-model-new}
+      @about-function{flatten-list-model-model-for-item}
+    @end{subsection}
+    @begin[GtkMapListModel]{subsection}
+      A list model that transforms its items.
+      @about-class{map-list-model}
+      @about-generic{map-list-model-has-map}
+      @about-generic{map-list-model-item-type}
+      @about-generic{map-list-model-model}
+      @about-generic{map-list-model-n-items}
+      @about-symbol{map-list-model-map-func}
+      @about-function{map-list-model-new}
+      @about-function{map-list-model-set-map-func}
+    @end{subsection}
+    @begin[GtkSliceListModel]{subsection}
+      A list model that presents a slice out of a larger list.
+      @about-class{slice-list-model}
+      @about-generic{slice-list-model-item-type}
+      @about-generic{slice-list-model-model}
+      @about-generic{slice-list-model-n-items}
+      @about-generic{slice-list-model-offset}
+      @about-generic{slice-list-model-size}
+      @about-function{slice-list-model-new}
+    @end{subsection}
+    @begin[GtkSortListModel]{subsection}
+      A list model that sorts its items.
+      @about-class{sort-list-model}
+      @about-generic{sort-list-model-incremental}
+      @about-generic{sort-list-model-item-type}
+      @about-generic{sort-list-model-model}
+      @about-generic{sort-list-model-n-items}
+      @about-generic{sort-list-model-pending}
+      @about-generic{sort-list-model-section-sorter}
+      @about-generic{sort-list-model-sorter}
+      @about-function{sort-list-model-new}
+    @end{subsection}
+    @begin[GtkSorter]{subsection}
+      Sorting items.
+      @about-symbol{sorter-order}
+      @about-symbol{sorter-change}
+      @about-class{sorter}
+      @about-function{sorter-compare}
+      @about-function{sorter-order}
+      @about-function{sorter-changed}
+    @end{subsection}
+    @begin[GtkCustomSorter]{subsection}
+      Sorting with a callbacks.
+      @about-class{custom-sorter}
+      @about-function{custom-sorter-new}
+      @about-function{custom-sorter-set-sort-func}
+    @end{subsection}
+    @begin[GtkMultiSorter]{subsection}
+      Combining multiple sorters.
+      @about-class{multi-sorter}
+      @about-generic{multi-sorter-item-type}
+      @about-generic{multi-sorter-n-items}
+      @about-function{multi-sorter-new}
+      @about-function{multi-sorter-append}
+      @about-function{multi-sorter-remove}
+    @end{subsection}
+    @begin[GtkStringSorter]{subsection}
+      Sort by comparing strings.
+      @about-symbol{collation}
+      @about-class{string-sorter}
+      @about-generic{string-sorter-collation}
+      @about-generic{string-sorter-expression}
+      @about-generic{string-sorter-ignore-case}
+      @about-function{string-sorter-new}
+    @end{subsection}
+    @begin[GtkNumericSorter]{subsection}
+      Sort by comparing numbers.
+      @about-class{numeric-sorter}
+      @about-generic{numeric-sorter-expression}
+      @about-generic{numeric-sorter-sort-order}
+      @about-generic{numeric-sorter-new}
+    @end{subsection}
+    @begin[GtkSelectionModel]{subsection}
+      Extension of the list model interface that handles selections.
+      @about-class{selection-model}
+      @about-function{selection-model-is-selected}
+      @about-function{selection-model-selection}
+      @about-function{selection-model-selection-in-range}
+      @about-function{selection-model-select-item}
+      @about-function{selection-model-unselect-item}
+      @about-function{selection-model-select-range}
+      @about-function{selection-model-unselect-range}
+      @about-function{selection-model-select-all}
+      @about-function{selection-model-unselect-all}
+      @about-function{selection-model-set-selection}
+      @about-function{selection-model-selection-changed}
+    @end{subsection}
+    @begin[GtkNoSelection]{subsection}
+      A selection model that does not allow selecting anything.
+      @about-class{no-selection}
+      @about-generic{no-selection-model}
+      @about-function{no-selection-new}
+    @end{subsection}
+    @begin[GtkSingleSelection]{subsection}
+      A selection model that allows selecting a single item.
+      @about-variable{+gtk-invalid-list-position+}
+      @about-class{single-selection}
+      @about-generic{single-selection-autoselect}
+      @about-generic{single-selection-can-unselect}
+      @about-generic{single-selection-model}
+      @about-generic{single-selection-selected}
+      @about-generic{single-selection-selected-item}
+      @about-function{single-selection-new}
+    @end{subsection}
+    @begin[GtkMultiSelection]{subsection}
+      A selection model that allows selecting multiple items.
+      @about-class{multi-selection}
+      @about-generic{multi-selection-model}
+      @about-function{multi-selection-new}
+    @end{subsection}
+    @begin[GtkSelectionFilterModel]{subsection}
+      A list model that turns a selection in a model.
+      @about-class{selection-filter-model}
+      @about-generic{selection-filter-model-item-type}
+      @about-generic{selection-filter-model-model}
+      @about-generic{selection-filter-model-n-items}
+      @about-function{selection-filter-model-new}
+    @end{subsection}
+    @begin[GtkBookmarkList]{subsection}
+      A list model for recently used files.
+      @about-class{bookmark-list}
+      @about-generic{bookmark-list-attributes}
+      @about-generic{bookmark-list-filename}
+      @about-generic{bookmark-list-io-priority}
+      @about-generic{bookmark-list-item-type}
+      @about-generic{bookmark-list-loading}
+      @about-generic{bookmark-list-n-items}
+      @about-function{bookmark-list-new}
+      @about-function{bookmark-list-is-loading}
+    @end{subsection}
+    @begin[GtkDirectoryList]{subsection}
+      A list model for directory listings.
+      @about-class{directory-list}
+      @about-generic{directory-list-attributes}
+      @about-generic{directory-list-error}
+      @about-generic{directory-list-file}
+      @about-generic{directory-list-io-priority}
+      @about-generic{directory-list-item-type}
+      @about-generic{directory-list-loading}
+      @about-generic{directory-list-monitored}
+      @about-generic{directory-list-n-items}
+      @about-function{directory-list-new}
+      @about-generic{directory-list-is-loading}
+    @end{subsection}
+    @begin[GtkStringList]{subsection}
+      A list model for strings.
+      @about-class{string-object}
+      @about-generic{string-object-string}
+      @about-function{string-object-new}
+      @about-class{string-list}
+      @about-generic{string-list-strings}
+      @about-function{string-list-new}
+      @about-function{string-list-append}
+      @about-function{string-list-take}
+      @about-function{string-list-remove}
+      @about-function{string-list-splice}
+      @about-function{string-list-string}
+    @end{subsection}
+  @end{section}
+  @begin[List-based Widgets]{section}
+    @begin[GtkListItem]{subsection}
+      Object used to represent items of a list model.
+      @about-class{list-item}
+      @about-generic{list-item-activatable}
+      @about-generic{list-item-child}
+      @about-generic{list-item-item}
+      @about-generic{list-item-position}
+      @about-generic{list-item-selectable}
+      @about-generic{list-item-selected}
+    @end{subsection}
+    @begin[GtkListItemFactory]{subsection}
+      Mapping list items to widgets.
+      @about-class{list-item-factory}
+    @end{subsection}
+    @begin[GtkSignalListItemFactory]{subsection}
+      A list item factory providing signals.
+      @about-class{signal-list-item-factory}
+      @about-function{signal-list-item-factory-new}
+    @end{subsection}
+    @begin[GtkBuilderListItemFactory]{subsection}
+      A list item factory using ui files.
+      @about-class{builder-list-item-factory}
+      @about-generic{builder-list-item-factory-bytes}
+      @about-generic{builder-list-item-factory-resource}
+      @about-generic{builder-list-item-factory-scope}
+      @about-function{builder-list-item-factory-new-from-bytes}
+      @about-function{builder-list-item-factory-new-from-resource}
+    @end{subsection}
+    @begin[GtkListView]{subsection}
+      A widget for displaying lists.
+      @about-class{list-base}
+      @about-generic{list-base-orientation}
+      @about-class{list-view}
+      @about-generic{list-view-enable-rubberband}
+      @about-generic{list-view-factory}
+      @about-generic{list-view-model}
+      @about-generic{list-view-show-separators}
+      @about-generic{list-view-single-click-activate}
+      @about-function{list-view-new}
+    @end{subsection}
+    @begin[GtkGridView]{subsection}
+      A widget for displaying grids.
+      @about-class{grid-view}
+      @about-generic{grid-view-enable-rubberband}
+      @about-generic{grid-view-factory}
+      @about-generic{grid-view-max-columns}
+      @about-generic{grid-view-min-columns}
+      @about-generic{grid-view-model}
+      @about-generic{grid-view-single-click-activate}
+      @about-function{grid-view-new}
+    @end{subsection}
+    @begin[GtkColumnView]{subsection}
+      A widget for displaying lists in multiple columns.
+      @about-class{column-view}
+      @about-generic{column-view-columns}
+      @about-generic{column-view-enable-rubberband}
+      @about-generic{column-view-model}
+      @about-generic{column-view-reorderable}
+      @about-generic{column-view-show-column-separators}
+      @about-generic{column-view-show-row-separators}
+      @about-generic{column-view-single-click-activate}
+      @about-generic{column-view-sorter}
+      @about-function{column-view-new}
+      @about-function{column-view-append-column}
+      @about-function{column-view-insert-column}
+      @about-function{column-view-remove-column}
+      @about-function{column-view-sort-by-column}
+    @end{subsection}
+    @begin[GtkColumnViewColumn]{subsection}
+      The column added to GtkColumnView.
+      @about-class{column-view-column}
+      @about-generic{column-view-column-column-view}
+      @about-generic{column-view-column-expand}
+      @about-generic{column-view-column-factory}
+      @about-generic{column-view-column-fixed-width}
+      @about-generic{column-view-column-header-menu}
+      @about-generic{column-view-column-resizable}
+      @about-generic{column-view-column-sorter}
+      @about-generic{column-view-column-title}
+      @about-generic{column-view-column-visible}
+      @about-function{column-view-column-new}
+    @end{subsection}
+    @begin[GtkDropDown]{subsection}
+      Choose an item from a list.
+      @about-class{drop-down}
+      @about-generic{drop-down-enable-search}
+      @about-generic{drop-down-expression}
+      @about-generic{drop-down-factory}
+      @about-generic{drop-down-header-factory}
+      @about-generic{drop-down-list-factory}
+      @about-generic{drop-down-model}
+      @about-generic{drop-down-search-match-mode}
+      @about-generic{drop-down-selected}
+      @about-generic{drop-down-selected-item}
+      @about-generic{drop-down-show-arrow}
+      @about-function{drop-down-new}
+      @about-function{drop-down-new-from-strings}
+    @end{subsection}
+  @end{section}
+  @begin[Tree support]{section}
+    @begin[GtkTreeListModel]{subsection}
+      A list model that can create child models on demand.
+      @about-class{tree-list-row}
+      @about-generic{tree-list-row-children}
+      @about-generic{tree-list-row-depth}
+      @about-generic{tree-list-row-expandable}
+      @about-generic{tree-list-row-expanded}
+      @about-generic{tree-list-row-item}
+      @about-class{tree-list-model}
+      @about-generic{tree-list-model-autoexpand}
+      @about-generic{tree-list-model-item-type}
+      @about-generic{tree-list-model-model}
+      @about-generic{tree-list-model-n-items}
+      @about-generic{tree-list-model-passthrough}
+      @about-symbol{tree-list-model-create-model-func}
+      @about-function{tree-list-model-new}
+      @about-function{tree-list-model-child-row}
+      @about-function{tree-list-model-row}
+    @end{subsection}
+    @begin[GtkTreeListRowSorter]{subsection}
+      Sort trees by levels.
+      @about-class{tree-list-row-sorter}
+      @about-generic{tree-list-row-sorter-sorter}
+      @about-function{tree-list-row-sorter-new}
+    @end{subsection}
+    @begin[GtkTreeExpander]{subsection}
+      An indenting expander button for use in a tree list.
+      @about-class{tree-expander}
+      @about-generic{tree-expander-child}
+      @about-generic{tree-expander-hide-expander}
+      @about-generic{tree-expander-indent-for-depth}
+      @about-generic{tree-expander-indent-for-icon}
+      @about-generic{tree-expander-item}
+      @about-generic{tree-expander-list-row}
+      @about-function{tree-expander-new}
+    @end{subsection}
+  @end{section}
   @begin[Application support]{section}
     @begin[GtkApplication]{subsection}
       Application class.
@@ -91,7 +543,7 @@
   @end{section}
   @begin[Interface builder]{section}
     @begin[GtkBuildable]{subsection}
-      Interface for objects that can be built by a @class{builder} UI
+      Interface for objects that can be built by a @class{gtk:builder} UI
       description.
       @about-class{buildable}
       @about-function{buildable-buildable-id}
@@ -4014,110 +4466,6 @@
       @about-function{icon-theme-lookup-by-gicon}
       @about-function{icon-theme-icon-sizes}
     @end{subsection}
-  @end{section}
-  @begin[GListModel support]{section}
-    @begin[GtkBitSet]{subsection}
-      Sets of integers.
-    @end{subsection}
-    @begin[GtkExpression]{subsection}
-      Expressions to values.
-    @end{subsection}
-    @begin[GtkFilterListModel]{subsection}
-      A list model that filters its items
-    @end{subsection}
-    @begin[GtkFilter]{subsection}
-      Filtering items.
-      @about-symbol{filter-match}
-      @about-symbol{filter-change}
-      @about-class{filter}
-      @about-function{filter-match}
-      @about-function{filter-strictness}
-      @about-function{filter-changed}
-    @end{subsection}
-    @begin[GtkCustomFilter]{subsection}
-      Filtering with callbacks.
-    @end{subsection}
-    @begin[GtkMultiFilter]{subsection}
-      Combining multiple filters
-    @end{subsection}
-    @begin[GtkBoolFilter]{subsection}
-      Filtering by boolean expressions.
-    @end{subsection}
-    @begin[GtkStringFilter]{subsection}
-      Filtering by strings.
-    @end{subsection}
-    @begin[GtkFileFilter]{subsection}
-      Filtering files.
-      @about-class{file-filter}
-      @about-generic{file-filter-mime-types}
-      @about-generic{file-filter-name}
-      @about-generic{file-filter-patterns}
-      @about-generic{file-filter-suffixes}
-      @about-function{file-filter-new}
-      @about-function{file-filter-new-from-gvariant}
-      @about-function{file-filter-add-mime-type}
-      @about-function{file-filter-add-pattern}
-      @about-function{file-filter-add-pixbuf-formats}
-      @about-function{file-filter-add-suffix}
-      @about-function{file-filter-attributes}
-      @about-function{file-filter-to-gvariant}
-    @end{subsection}
-    @begin[GtkFlattenListModel]{subsection}
-      A list model that flattens a list of lists.
-    @end{subsection}
-    @begin[GtkMapListModel]{subsection}
-      A list model that transforms its items.
-    @end{subsection}
-    @begin[GtkSliceListModel]{subsection}
-      A list model that presents a slice out of a larger list.
-    @end{subsection}
-    @begin[GtkSortListModel]{subsection}
-      A list model that sorts its items.
-    @end{subsection}
-    @begin[GtkSorter]{subsection}
-      Sorting items.
-    @end{subsection}
-    @begin[GtkCustomSorter]{subsection}
-      Sorting with a callbacks.
-    @end{subsection}
-    @begin[GtkMultiSorter]{subsection}
-      Combining multiple sorters.
-    @end{subsection}
-    @begin[GtkStringSorter]{subsection}
-      Sort by comparing strings.
-    @end{subsection}
-    @begin[GtkNumericSorter]{subsection}
-      Sort by comparing numbers.
-    @end{subsection}
-    @begin[GtkSelectionModel]{subsection}
-      Extension of the list model interface that handles selections.
-    @end{subsection}
-    @begin[GtkNoSelection]{subsection}
-      A selection model that does not allow selecting anything.
-    @end{subsection}
-    @begin[GtkSingleSelection]{subsection}
-      A selection model that allows selecting a single item.
-    @end{subsection}
-    @begin[GtkMultiSelection]{subsection}
-      A selection model that allows selecting multiple items.
-    @end{subsection}
-    @begin[GtkSelectionFilterModel]{subsection}
-      A list model that turns a selection in a model.
-    @end{subsection}
-    @begin[GtkBookmarkList]{subsection}
-      A list model for recently used files.
-    @end{subsection}
-    @begin[GtkDirectoryList]{subsection}
-      A list model for directory listings.
-    @end{subsection}
-    @begin[GtkStringList]{subsection}
-      A list model for strings.
-    @end{subsection}
-  @end{section}
-  ")
-
-#|
-  @end{section}
-|#
+  @end{section}")
 
 ;;; --- End of file gtk4.package.lisp ------------------------------------------

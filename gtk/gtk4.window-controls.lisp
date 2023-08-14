@@ -2,7 +2,7 @@
 ;;; gtk4.window-controls.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -69,170 +69,198 @@
 
 (in-package :gtk)
 
+;;; ----------------------------------------------------------------------------
+;;; GtkWindowControls
+;;; ----------------------------------------------------------------------------
 
-;;;GtkWindowControls shows window frame controls, such as minimize, maximize and close buttons, and the window icon.
+(gobject:define-g-object-class "GtkWindowControls" window-controls
+  (:superclass widget
+   :export t
+   :interfaces ("GtkAccessible"
+                "GtkBuildable"
+                "GtkConstraintTarget")
+   :type-initializer "gtk_window_controls_get_type")
+  ((decoration-layout
+    window-controls-decoration-layout
+    "decoration-layout" "gchararray" t t)
+   (empty
+    window-controls-empty
+    "empty" "gboolean" t nil)
+   (side
+    window-controls-side
+    "side" "GtkPackType" t t)))
 
-;;;GtkWindowControls only displays start or end side of the controls (see “side”), so it's intended to be always used in pair with another GtkWindowControls using the opposite side, for example:
+#+liber-documentation
+(setf (documentation 'window-controls 'type)
+ "@version{2023-8-9}
+  @begin{short}
+    The @sym{gtk:window-controls} widget shows window frame controls, such as
+    minimize, maximize and close buttons, and the window icon.
+  @end{short}
 
-;;;CSS nodes
-;;;<object class="GtkBox">
-;;;  <child>
-;;;    <object class="GtkWindowControls">
-;;;      <property name="side">start</property>
-;;;    </object>
-;;;  </child>
+  @image[window-controls]{Figure: GtkWindowControls}
 
-;;;  ...
+  The @sym{gtk:window-controls} widget only displays start or end side of the
+  controls, see the @slot[gtk:window-controls]{side} property, so it is
+  intended to be always used in pair with another @sym{gtk:window-controls}
+  widget using the opposite side, for example:
+  @begin{pre}
+<object class=\"GtkBox\">
+  <child>
+    <object class=\"GtkWindowControls\">
+      <property name=\"side\">start</property>
+    </object>
+  </child>
+  ...
+  <child>
+    <object class=\"GtkWindowControls\">
+      <property name=\"side\">end</property>
+    </object>
+  </child>
+</object>
+  @end{pre}
+  @begin[CSS nodes]{dictionary}
+    @begin{pre}
+windowcontrols
+├── [image.icon]
+├── [button.minimize]
+├── [button.maximize]
+╰── [button.close]
+    @end{pre}
+    The @sym{gtk:window-controls} implementation has a CSS node called
+    @code{windowcontrols}. It contains subnodes corresponding to each title
+    button. Which of the title buttons exist and where they are placed exactly
+    depends on the desktop environment and the
+    @slot[gtk:window-controls]{decoration-layout} property. When the
+    @slot[gtk:window-controls]{empty} property is @em{true}, it gets the
+    @code{.empty} style class.
+  @end{dictionary}
+  @begin[Accessibility]{dictionary}
+    The @sym{gtk:window-controls} implementation uses the @code{:group} role.
+  @end{dictionary}
+  @see-constructor{gtk:window-controls-new}
+  @see-slot{gtk:window-controls-decoration-layout}
+  @see-slot{gtk:window-controls-empty}
+  @see-slot{gtk:window-controls-side}
+  @see-class{gtk:header-bar}")
 
-;;;  <child>
-;;;    <object class="GtkWindowControls">
-;;;      <property name="side">end</property>
-;;;    </object>
-;;;  </child>
-;;;</object>
-;;;A GtkWindowControls' CSS node is called windowcontrols. It contains subnodes corresponding to each title button. Which of the title buttons exist and where they are placed exactly depends on the desktop environment and “decoration-layout” value.
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;When “empty” is TRUE, it gets the .empty style class.
+;;; --- window-contols-decoration-layout ---------------------------------------
 
-;;;Accessibility
-;;;GtkWindowHandle uses the GTK_ACCESSIBLE_ROLE_GROUP role.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "decoration-layout"
+                                               'window-controls) t)
+ "The @code{decoration-layout} property of type @code{:string} (Read / Write)
+  @br{}
+  The decoration layout for window buttons. If this property is not set, the
+  @slot[gtk:settings]{gtk-decoration-layout} setting is used. @br{}
+  Default value: @code{nil}")
 
-;;;Functions
-;;;gtk_window_controls_new ()
-;;;GtkWidget *
-;;;gtk_window_controls_new (GtkPackType side);
-;;;Creates a new GtkWindowControls.
+#+liber-documentation
+(setf (liber:alias-for-function 'window-controls-decoration-layout)
+      "Accessor"
+      (documentation 'window-controls-decoration-layout 'function)
+ "@version{2023-8-9}
+  @syntax[]{(gtk:window-controls-decoration-layout object) => layout}
+  @syntax[]{(setf (gtk:window-controls-decoration-layout object) layout)}
+  @argument[object]{a @class{gtk:window-controls} widget}
+  @argument[layout]{a string with the decoration layout, or @code{nil} to unset
+    the decoration layout}
+  @begin{short}
+    Accessor of the @slot[gtk:window-controls]{decoration-layout} slot of the
+    @class{gtk:window-controls} class.
+  @end{short}
+  The @sym{gtk:window-controls-decoration-layout} function gets the decoration
+  layout. The @sym{(setf gtk:window-controls-decoration-layout)} function
+  sets the decoration layout for the title buttons, overriding the
+  @slot[gtk:settings]{gtk-decoration-layout} setting.
 
-;;;Parameters
-;;;side
+  The format of the string is button names, separated by commas. A colon
+  separates the buttons that should appear on the left from those on the right.
+  Recognized button names are minimize, maximize, close and icon (the window
+  icon).
 
-;;;the side
+  For example, \"icon:minimize,maximize,close\" specifies a icon on the left,
+  and minimize, maximize and close buttons on the right.
 
-;;;Returns
-;;;a new GtkWindowControls.
+  If the @slot[gtk:window-controls]{side} property is @code{:start},
+  @arg{object} will display the part before the colon, otherwise after that.
+  @see-class{gtk:window-controls}
+  @see-symbol{gtk:pack-type}")
 
-;;;gtk_window_controls_get_side ()
-;;;GtkPackType
-;;;gtk_window_controls_get_side (GtkWindowControls *self);
-;;;Gets the side set with gtk_window_controls_set_side().
+;;; --- window-contols-empty ---------------------------------------------------
 
-;;;Parameters
-;;;self
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "empty" 'window-controls) t)
+ "The @code{empty} property of type @code{:boolean} (Read) @br{}
+  Whether the widget has any window buttons. @br{}
+  Default value: @em{true}")
 
-;;;a GtkWindowControls
+#+liber-documentation
+(setf (liber:alias-for-function 'window-controls-empty)
+      "Accessor"
+      (documentation 'window-controls-empty 'function)
+ "@version{2023-8-9}
+  @syntax[]{(gtk:window-controls-empty object) => empty}
+  @syntax[]{(setf (gtk:window-controls-empty object) empty)}
+  @argument[object]{a @class{gtk:window-controls} widget}
+  @argument[empty]{@em{true} if the widget has window buttons, otherwise
+    @em{false}}
+  @begin{short}
+    Accessor of the @slot[gtk:window-controls]{empty} slot of the
+    @class{gtk:window-controls} class.
+  @end{short}
+  The @sym{gtk:window-controls-empty} function gets whether the widget has any
+  window buttons.
+  @see-class{gtk:window-controls}")
 
-;;;Returns
-;;;the side
+;;; --- window-contols-side ----------------------------------------------------
 
-;;;gtk_window_controls_set_side ()
-;;;void
-;;;gtk_window_controls_set_side (GtkWindowControls *self,
-;;;                              GtkPackType side);
-;;;Sets the side for self , determining which part of decoration layout it uses.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "side" 'window-controls) t)
+ "The @code{empty} property of type @symbol{gtk:pack-type} (Read / Write) @br{}
+  Whether the widget shows start or end side of the decoration layout. @br{}
+  Default value: @code{:start}")
 
-;;;See gtk_window_controls_set_decoration_layout()
+#+liber-documentation
+(setf (liber:alias-for-function 'window-controls-side)
+      "Accessor"
+      (documentation 'window-controls-side 'function)
+ "@version{2023-8-9}
+  @syntax[]{(gtk:window-controls-side object) => side}
+  @syntax[]{(setf (gtk:window-controls-side object) side)}
+  @argument[object]{a @class{gtk:window-controls} widget}
+  @argument[side]{a @symbol{gtk:pack-type} value}
+  @begin{short}
+    Accessor of the @slot[gtk:window-controls]{side} slot of the
+    @class{gtk:window-controls} class.
+  @end{short}
+  The @sym{gtk:window-controls-side} function gets the side. The
+  @sym{(setf gtk:window-controls-side)} function sets the side for @arg{object},
+  determining which part of decoration layout it uses.
+  @see-class{gtk:window-controls}
+  @see-symbol{gtk:pack-type}")
 
-;;;Parameters
-;;;self
+;;; ----------------------------------------------------------------------------
+;;; gtk_window_controls_new ()
+;;; ----------------------------------------------------------------------------
 
-;;;a GtkWindowControls
+(declaim (inline window-controls-new))
 
-;;;side
+(defun window-controls-new (side)
+ #+liber-documentation
+ "@version{2023-8-9}
+  @argument[side]{a @symbol{gtk:pack-type} value}
+  @return{A new @class{gtk:window-controls} widget.}
+  @short{Creates a new @class{gtk:window-controls} widget.}
+  @see-class{gtk:window-controls}
+  @see-symbol{gtk:pack-type}"
+  (make-instance 'window-controls
+                 :side side))
 
-;;;a side
-
-;;;gtk_window_controls_get_decoration_layout ()
-;;;const char *
-;;;gtk_window_controls_get_decoration_layout
-;;;                               (GtkWindowControls *self);
-;;;Gets the decoration layout set with gtk_window_controls_set_decoration_layout().
-
-;;;Parameters
-;;;self
-
-;;;a GtkWindowControls
-
-;;;Returns
-;;;the decoration layout or NULL if it is unset.
-
-;;;[nullable]
-
-;;;gtk_window_controls_set_decoration_layout ()
-;;;void
-;;;gtk_window_controls_set_decoration_layout
-;;;                               (GtkWindowControls *self,
-;;;                                const char *layout);
-;;;Sets the decoration layout for the title buttons, overriding the “gtk-decoration-layout” setting.
-
-;;;The format of the string is button names, separated by commas. A colon separates the buttons that should appear on the left from those on the right. Recognized button names are minimize, maximize, close and icon (the window icon).
-
-;;;For example, “icon:minimize,maximize,close” specifies a icon on the left, and minimize, maximize and close buttons on the right.
-
-;;;If “side” value is GTK_PACK_START , self will display the part before the colon, otherwise after that.
-
-;;;Parameters
-;;;self
-
-;;;a GtkWindowControls
-
-;;;layout
-
-;;;a decoration layout, or NULL to unset the layout.
-
-;;;[nullable]
-;;;gtk_window_controls_get_empty ()
-;;;gboolean
-;;;gtk_window_controls_get_empty (GtkWindowControls *self);
-;;;Gets whether the widget has any window buttons.
-
-;;;Parameters
-;;;self
-
-;;;a GtkWindowControls
-
-;;;Returns
-;;;TRUE if the widget has window buttons, otherwise FALSE
-
-;;;Types and Values
-;;;GtkWindowControls
-;;;typedef struct _GtkWindowControls GtkWindowControls;
-;;;Property Details
-;;;The “decoration-layout” property
-;;;  “decoration-layout”        char *
-;;;The decoration layout for window buttons. If this property is not set, the “gtk-decoration-layout” setting is used.
-
-;;;See gtk_window_controls_set_decoration_layout() for information about the format of this string.
-
-;;;Owner: GtkWindowControls
-
-;;;Flags: Read / Write
-
-;;;Default value: NULL
-
-;;;The “empty” property
-;;;  “empty”                    gboolean
-;;;Whether the widget has any window buttons.
-
-;;;Owner: GtkWindowControls
-
-;;;Flags: Read
-
-;;;Default value: TRUE
-
-;;;The “side” property
-;;;  “side”                     GtkPackType
-;;;Whether the widget shows start or end side of the decoration layout.
-
-;;;See gtk_window_controls_set_decoration_layout().
-
-;;;Owner: GtkWindowControls
-
-;;;Flags: Read / Write
-
-;;;Default value: GTK_PACK_START
-
-;;;See Also
-;;;GtkHeaderBar
-
+(export 'window-controls-new)
 
 ;;; --- End of file gtk4.window-controls.lisp ----------------------------------

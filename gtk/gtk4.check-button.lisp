@@ -280,7 +280,7 @@ lambda (checkbutton)    :run-first
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "child" 'check-button) t)
- "The @code{child} property of type @class{gkt-widget} (Read / Write) @br{}
+ "The @code{child} property of type @class{gtk:widget} (Read / Write) @br{}
   The child widget. Since 4.8")
 
 #+(and gtk-4-8 liber-documentation)

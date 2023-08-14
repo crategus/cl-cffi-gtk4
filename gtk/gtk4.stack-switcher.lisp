@@ -2,7 +2,7 @@
 ;;; gtk4.stack-switcher.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -81,12 +81,13 @@
 
 #+liber-documentation
 (setf (documentation 'stack-switcher 'type)
- "@version{#2022-2-6}
+ "@version{2023-8-9}
   @begin{short}
     The @sym{gtk:stack-switcher} widget acts as a controller for a
-    @class{gtk:stack} widget. It shows a row of buttons to switch between
-    the various pages of the associated stack widget.
+    @class{gtk:stack} widget.
   @end{short}
+  It shows a row of buttons to switch between the various pages of the
+  associated stack widget.
 
   @image[stack-switcher]{Figure: GtkStackSwitcher}
 
@@ -117,11 +118,10 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- stack-switcher-stack -----------------------------------------------
+;;; --- stack-switcher-stack ---------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "stack"
-                                               'stack-switcher) t)
+(setf (documentation (liber:slot-documentation "stack" 'stack-switcher) t)
  "The @code{stack} property of type @class{gtk:stack} (Read / Write) @br{}
   The stack to control. @br{}")
 
@@ -129,7 +129,7 @@
 (setf (liber:alias-for-function 'stack-switcher-stack)
       "Accessor"
       (documentation 'stack-switcher-stack 'function)
- "@version{#2021-12-8}
+ "@version{2023-8-9}
   @syntax[]{(gtk:stack-switcher-stack object) => stack}
   @syntax[]{(setf (gtk:stack-switcher-stack object) stack)}
   @argument[object]{a @class{gtk:stack-switcher} widget}
@@ -138,7 +138,6 @@
     Accessor of the @slot[gtk:stack-switcher]{stack} slot of the
     @class{gtk:stack-switcher} class.
   @end{short}
-
   The @sym{gtk:stack-switcher-stack} function retrieves the stack. The
   @sym{(setf gtk:stack-switcher-stack)} function sets the stack to control.
   @see-class{gtk:stack-switcher}
@@ -152,7 +151,7 @@
 
 (defun stack-switcher-new ()
  #+liber-documentation
- "@version{#2021-12-8}
+ "@version{2023-8-9}
   @return{The new @class{gtk:stack-switcher} widget.}
   @short{Creates a new stack switcher.}
   @see-class{gtk:stack-switcher}"

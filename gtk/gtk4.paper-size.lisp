@@ -210,6 +210,8 @@
 ;;; gtk_paper_size_new ()
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: The implementation is not correct. See the GBytes implementation.
+
 (cffi:defcfun ("gtk_paper_size_new" %paper-size-new)
     (g:boxed paper-size :return)
   (name :string))

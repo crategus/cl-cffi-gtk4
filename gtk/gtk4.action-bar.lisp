@@ -2,7 +2,7 @@
 ;;; gtk4.action-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -86,7 +86,7 @@
 
 #+liber-documentation
 (setf (documentation 'action-bar 'type)
- "@version{#2022-2-6}
+ "@version{2023-8-9}
   @begin{short}
     The @sym{gtk:action-bar} widget is designed to present contextual actions.
   @end{short}
@@ -99,10 +99,32 @@
   an internal centered box which is centered with respect to the full width of
   the box, even if the children at either side take up different amounts of
   space.
-  @begin[CSS nodes]{dictionary}
-    The @sym{gtk:action-bar} implementation has a single CSS node with name
-    @code{actionbar}.
+  @begin[GtkActionBar as GtkBuildable]{dictionary}
+    The @sym{gtk:action-bar} implementation of the @class{gtk:buildable}
+    interface supports adding children at the start or end sides by specifying
+    \"start\" or \"end\" as the \"type\" attribute of a @code{<child>} element,
+    or setting the center widget by specifying \"center\" value.
   @end{dictionary}
+  @begin[CSS nodes]{dictionary}
+    @begin{pre}
+actionbar
+╰── revealer
+    ╰── box
+        ├── box.start
+        │   ╰── [start children]
+        ├── [center widget]
+        ╰── box.end
+            ╰── [end children]
+    @end{pre}
+    The @sym{gtk:action-bar} implementation has a single CSS node with name
+    @code{actionbar}. It contains a revealer subnode, which contains a box
+    subnode, which contains two box subnodes at the start and end of the action
+    bar, with @code{start} and @code{end} style classes respectively, as well
+    as a center node that represents the center child. Each of the boxes
+    contains children packed for that side.
+  @end{dictionary}
+  @see-constructor{gtk:action-bar-new}
+  @see-slot{gtk:action-bar-revealed}
   @see-class{gtk:box}")
 
 ;;; ----------------------------------------------------------------------------
@@ -119,16 +141,15 @@
 (setf (liber:alias-for-function 'action-bar-revealed)
       "Accessor"
       (documentation 'action-bar-revealed 'function)
- "@version{#2022-2-6}
+ "@version{2023-8-9}
   @syntax[]{(gtk:action-bar-revealed object) => revealed}
   @syntax[]{(setf (gtk:action-bar-revealed object) revealed)}
   @argument[object]{a @class{gtk:action-bar} widget}
-  @argument[position]{a boolean whether the action bar shows its contents}
+  @argument[revealed]{a boolean whether the action bar shows its contents}
   @begin{short}
     Accessor of the @slot[gtk:action-bar]{revealed} slot of the
     @class{gtk:action-bar} class.
   @end{short}
-
   Changing the @slot[gtk:action-bar]{revealed} property will make the action bar
   reveal (@em{true}) or conceal (@em{false}) itself via a sliding transition.
   @begin[Note]{dictionary}
@@ -147,7 +168,7 @@
 
 (defun action-bar-new ()
  #+liber-documentation
- "@version{#2021-12-8}
+ "@version{2023-8-9}
   @return{The new @class{gtk:action-bar} widget.}
   @short{Creates a new action bar.}
   @see-class{gtk:action-bar}"
@@ -161,7 +182,7 @@
 
 (cffi:defcfun ("gtk_action_bar_pack_start" action-bar-pack-start) :void
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{#2023-8-9}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to
   @arg{actionbar}}
@@ -182,7 +203,7 @@
 
 (cffi:defcfun ("gtk_action_bar_pack_end" action-bar-pack-end) :void
  #+liber-documentation
- "@version{#2021-12-8}
+ "@version{#2023-8-9}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to
     @arg{actionbar}}
@@ -203,7 +224,7 @@
 
 (cffi:defcfun ("gtk_action_bar_remove" action-bar-remove) :void
  #+liber-documentation
- "@version{#2022-2-6}
+ "@version{#2023-8-9}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be removed}
   @short{Removes a child widget from the action bar.}
@@ -229,7 +250,7 @@
 (cffi:defcfun ("gtk_action_bar_get_center_widget" action-bar-center-widget)
     (g:object widget)
  #+liber-documentation
- "@version{#2021-12-8}
+ "@version{#2023-8-9}
   @syntax[]{(gtk:action-bar-center-widget actionbar) => widget}
   @syntax[]{(setf (gtk:action-bar-center-widget actionbar) widget)}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
@@ -237,14 +258,13 @@
   @begin{short}
     Accessor of the center widget of the action bar.
   @end{short}
-
-  The @sym{gtk:action-bar-center-widget} function retrieves the center widget of
-  the action bar. The @sym{(setf gtk:action-bar-center-widget)} function sets
-  the center widget for the action bar.
+  The @sym{gtk:action-bar-center-widget} function retrieves the center widget
+  of the action bar. The @sym{(setf gtk:action-bar-center-widget)} function
+  sets the center widget for the action bar.
   @see-class{gtk:action-bar}
   @see-class{gtk:widget}"
   (actionbar (g:object action-bar)))
 
 (export 'action-bar-center-widget)
 
-;;; --- End of file gtk4.action-bar.lisp ----------------------------------------
+;;; --- End of file gtk4.action-bar.lisp ---------------------------------------

@@ -2,7 +2,7 @@
 ;;; gtk4.application-window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -97,7 +97,7 @@
 (setf (documentation 'application-window 'type)
  "@version{2023-3-11}
   @begin{short}
-    The @sym{gtk:application-window} class is a @class{gtk:window} subclass
+    The @class{gtk:application-window} class is a @class{gtk:window} subclass
     that offers some extra functionality for better integration with
     @class{gtk:application} features.
   @end{short}
@@ -117,48 +117,52 @@
 
   The @slot[gtk:settings]{gtk-shell-shows-app-menu} and
   @slot[gtk:settings]{gtk-shell-shows-menubar} settings tell GTK whether the
-  desktop environment is showing the application menu and menubar models outside
-  the application as part of the desktop shell. For instance, on OS X, both
-  menus will be displayed remotely. On Windows neither will be.
+  desktop environment is showing the application menu and menubar models
+  outside the application as part of the desktop shell. For instance, on OS X,
+  both menus will be displayed remotely. On Windows neither will be.
 
   If the desktop environment does not display the menubar, then the application
   window will automatically show a menubar for it. This behaviour can be
-  overridden with the @code{show-menubar} property. If the desktop environment
-  does not display the application menu, then it will automatically be included
-  in the menubar or in the windows client-side decorations.
+  overridden with the @slot[gtk:application-window]{show-menubar} property. If
+  the desktop environment does not display the application menu, then it will
+  automatically be included in the menubar or in the windows client-side
+  decorations.
 
   See the @class{gtk:popover-menu} documentation for information about the XML
   language used by the @class{gtk:builder} object for menu models.
   @begin[Example]{dictionary}
-    An application window with a menubar.
+    Create an application window with a menubar.
     @begin{pre}
-(let ((builder (make-instance 'gtk:builder))
-      (window (make-instance 'gtk:application-window
-                             :application application
-                             :title \"Application Window Menubar\"
-                             :show-menubar t)))
-  ;; Read the menus from a string
-  (gtk:builder-add-from-string
-      builder
-      (format nil
-  \"<interface> ~
-     <menu id='menubar'> ~
-       <submenu> ~
-         <attribute name='label' translatable='yes'>_Edit</attribute> ~
-         <item> ~
-           <attribute name='label' translatable='yes'>_Copy</attribute> ~
-           <attribute name='action'>win.copy</attribute> ~
-         </item> ~
-         <item> ~
-           <attribute name='label' translatable='yes'>_Paste</attribute> ~
-           <attribute name='action'>win.paste</attribute> ~
-         </item> ~
-       </submenu> ~
-     </menu> ~
-   </interface>\"))
-  ;; Set the menubar
-  (setf (gtk:application-menubar application)
-        (gtk:builder-object builder \"menubar\"))
+(defvar *menus*
+        \"<interface>
+           <menu id='menubar'>
+             <submenu>
+               <attribute name='label'>_Edit</attribute>
+               <item>
+                 <attribute name='label'>_Copy</attribute>
+                 <attribute name='action'>win.copy</attribute>
+               </item>
+               <item>
+                 <attribute name='label'>_Paste</attribute>
+                 <attribute name='action'>win.paste</attribute>
+               </item>
+             </submenu>
+           </menu>
+         </interface>\")
+
+(defun do-application-window (&optional (application nil))
+  (let ((builder (make-instance 'gtk:builder))
+        (window (make-instance 'gtk:application-window
+                               :application application
+                               :title \"Application Window\"
+                               :show-menubar t)))
+    ;; Read the menus from a string
+    (gtk:builder-add-from-string builder *menus*)
+    ;; Set the menubar
+    (setf (gtk:application-menubar application)
+          (gtk:builder-object builder \"menubar\"))
+    ;; Show the application window
+    (setf (gtk:widget-visible window) t)))
     @end{pre}
   @end{dictionary}
   @see-slot{gtk:application-window-show-menubar}
@@ -184,8 +188,8 @@
   (Read / Write / Construct) @br{}
   If this property is @em{true}, the application window will display a menubar
   unless it is shown by the desktop shell. If @em{false}, the applicaton window
-  will not display a menubar, regardless of whether the desktop shell is showing
-  it or not. @br{}
+  will not display a menubar, regardless of whether the desktop shell is
+  showing it or not. @br{}
   Default value: @code{false}")
 
 #+liber-documentation
@@ -201,7 +205,7 @@
     Accessor of the @slot[gtk:application-window]{show-menubar} slot of the
     @class{gtk:application-window} class.
   @end{short}
-  The @sym{gtk:application-window-show-menubar} function returns whether the
+  The @fun{gtk:application-window-show-menubar} function returns whether the
   window will display a menubar for the application menu and menubar as needed.
   The @sym{(setf gtk:application-window-show-menubar)} function sets whether
   the window will display a menubar.
@@ -270,7 +274,7 @@
   @begin{short}
     Accessor of the shortcuts window associated with the application window.
   @end{short}
-  The @sym{gtk:application-window-help-overlay} function gets the shortcuts
+  The @fun{gtk:application-window-help-overlay} function gets the shortcuts
   window. The @sym{(setf gtk:applicaton-window-help-overlay)} function
   associates a shortcuts window with the application window, and sets up an
   action with the name \"win.show-help-overlay\" to present it.

@@ -484,7 +484,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-decorated)
       "Accessor"
       (documentation 'window-decorated 'function)
- "@version{#2022-1-6}
+ "@version{#2023-8-8}
   @syntax[]{(gtk:window-decorated object) => setting}
   @syntax[]{(setf (gtk:window-decorated object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -503,12 +503,12 @@ lambda (window)    :run-first
   @em{false} using this function, GTK will do its best to convince the window
   manager not to decorate the window. Depending on the system, this function may
   not have any effect when called on a window that is already visible, so you
-  should call it before calling the @fun{gtk:widget-show} function.
+  should call it before calling the @fun{gtk:widget-visible} function.
 
   On Windows, this function always works, since there is no window manager
   policy involved.
   @see-class{gtk:window}
-  @see-function{gtk:widget-show}")
+  @see-function{gtk:widget-visible}")
 
 ;;; --- window-default-height ----------------------------------------------
 
@@ -625,12 +625,12 @@ lambda (window)    :run-first
   will do its best to convince the window manager not to show a Close button.
   Depending on the system, this function may not have any effect when called on
   a window that is already visible, so you should call it before calling the
-  @fun{gtk:widget-show} function.
+  @fun{gtk:widget-visible} function.
 
   On Windows, this function always works, since there is no window manager
   policy involved.
   @see-class{gtk:window}
-  @see-function{gtk:widget-show}")
+  @see-function{gtk:widget-visible}")
 
 ;;; --- window-destroy-with-parent -----------------------------------------
 
@@ -1119,7 +1119,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-titlebar)
       "Accessor"
       (documentation 'window-titlebar 'function)
- "@version{#2022-7-13}
+ "@version{#2023-8-8}
   @syntax[]{(gtk:window-titlebar window) => widget}
   @syntax[]{(setf (gtk:window-titlebar window) widget)}
   @argument[window]{a @class{gtk:window} widget}
@@ -1138,13 +1138,13 @@ lambda (window)    :run-first
   If you set a custom titlebar, GTK will do its best to convince the window
   manager not to put its own titlebar on the window. Depending on the system,
   this function may not work for a window that is already visible, so you set
-  the titlebar before calling the @fun{gtk:widget-show} function.
+  the titlebar before calling the @fun{gtk:widget-visible} function.
 
   Since 4.6
   @see-class{gtk:window}
   @see-class{gtk:widget}
   @see-class{gtk:header-bar}
-  @see-function{gtk:widget-show}")
+  @see-function{gtk:widget-visible}")
 
 ;;; --- window-transient-for -----------------------------------------------
 

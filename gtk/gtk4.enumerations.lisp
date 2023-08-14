@@ -2361,7 +2361,9 @@
   :widget
   :window
   #+gtk-4-10
-  :toggle-button)
+  :toggle-button
+  #+gtk-4-12
+  :application)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-role)
@@ -2455,7 +2457,9 @@
   :tree-item
   :widget
   :window
-  :toggle-button)
+  #+gtk-4-10
+  :toggle-button
+  #+gtk-4-12)
   @end{pre}
   @begin[code]{table}
     @entry[:alert]{An element with important, and usually time-sensitive,
@@ -2559,6 +2563,8 @@
     @entry[:window]{An application window.}
     @entry[:toggle-button]{A type of push button which stays pressed until
       depressed by a second activation. Since: 4.10}
+    @entry[:application]{A toplevel element of a graphical user interface. This 
+      is the role that GTK uses by default for windows. Since 4.12}
   @end{table}
   @see-class{gtk:accessible}")
 

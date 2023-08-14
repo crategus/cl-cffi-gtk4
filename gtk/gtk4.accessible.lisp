@@ -91,9 +91,9 @@
 (setf (liber:alias-for-class 'accessible)
       "Interface"
       (documentation 'accessible 'type)
- "@version{#2022-1-30}
+ "@version{2023-8-13}
   @begin{short}
-    The @sym{gtk:accessible} interface is an interface for describing UI
+    The @class{gtk:accessible} interface is an interface for describing UI
     elements for Assistive Technologies.
   @end{short}
   Every accessible implementation has:
@@ -108,7 +108,7 @@
       values
     @end{item}
   @end{itemize}
-  The role cannot be changed after instantiating a @sym{gtk:accessible}
+  The role cannot be changed after instantiating a @class{gtk:accessible}
   implementation.
 
   The attributes are updated every time a state of a UI element changes in a
@@ -134,14 +134,14 @@
                                                'accessible) t)
  "The @code{accessible-role} property of type @symbol{gtk:accessible-role}
   (Read / Write) @br{}
-  The accessible role of the given @sym{gtk:accessible} implementation. The
-  accessible role cannot be changed once set.")
+  The accessible role of the given assistive implementation. The accessible 
+  role cannot be changed once set.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'accessible-accessible-role)
       "Accessor"
       (documentation 'accessible-accessible-role 'function)
- "@version{#2022-1-2}
+ "@version{2023-8-13}
   @syntax[]{(gtk:accessible-accessible-role object) => role}
   @syntax[]{(setf (gtk:accessible-accessible-role object) role)}
   @argument[object]{a @class{gtk:accessible} widget}
@@ -150,7 +150,6 @@
     Accessor of the @slot[gtk:accessible]{accessible-role} slot of the
     @class{gtk:accessible} class.
   @end{short}
-
   Retrieves the @symbol{gtk:accessible-role} value for the given
   @class{gtk:accessible} widget.
   @see-class{gtk:accessible}

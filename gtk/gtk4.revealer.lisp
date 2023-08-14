@@ -2,7 +2,7 @@
 ;;; gtk4.revealer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -98,7 +98,7 @@
 (setf (liber:alias-for-symbol 'revealer-transition-type)
       "GEnum"
       (liber:symbol-documentation 'revealer-transition-type)
- "@version{#2022-2-3}
+ "@version{2023-8-8}
   @begin{short}
     These enumeration values describe the possible transitions when the child
     widget of a @class{gtk:revealer} widget is shown or hidden.
@@ -156,12 +156,12 @@
     revealer-transition-duration
     "transition-duration" "guint" t t)
    (transition-type
-    reveaker-transition-type
+    revealer-transition-type
     "transition-type" "GtkRevealerTransitionType" t t)))
 
 #+liber-documentation
 (setf (documentation 'revealer 'type)
- "@version{#2022-2-3}
+ "@version{2023-8-8}
   @begin{short}
     The @sym{gtk:revealer} widget is a container which animates the transition
     of its child widget from invisible to visible.
@@ -182,6 +182,7 @@
     @sym{gtk:revealer} widget, if set, is always available in the accessibility
     tree, regardless of the state of the revealer widget.
   @end{dictionary}
+  @see-constructor{gtk:revealer-new}
   @see-slot{gtk:revealer-child}
   @see-slot{gtk:revealer-child-revealed}
   @see-slot{gtk:revealer-reveal-child}
@@ -193,7 +194,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- revealer-child -----------------------------------------------------
+;;; --- revealer-child ---------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'revealer) t)
@@ -204,7 +205,7 @@
 (setf (liber:alias-for-function 'revealer-child)
       "Accessor"
       (documentation 'revealer-child 'function)
- "@version{#2022-2-3}
+ "@version{2023-8-8}
   @syntax[]{(gtk:revealer-child object) => child}
   @syntax[]{(setf (gtk:revealer-child object) child)}
   @argument[object]{a @class{gtk:revealer} widget}
@@ -213,17 +214,15 @@
     Accessor of the @slot[gtk:revealer]{child} slot of the @class{gtk:revealer}
     class.
   @end{short}
-
   The @sym{gtk:revealer-child} function gets the child widget of the revealer.
   The @sym{(setf gtk:revealer-child)} function sets the child widget.
   @see-class{gtk:revealer}
   @see-class{gtk:widget}")
 
-;;; --- revealer-child-revealed --------------------------------------------
+;;; --- revealer-child-revealed ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "child-revealed"
-                                               'revealer) t)
+(setf (documentation (liber:slot-documentation "child-revealed" 'revealer) t)
  "The @code{child-revealed} property of type @code{:boolean} (Read) @br{}
   Whether the child widget is revealed and the animation target reached. @br{}
   Default value: @em{false}")
@@ -232,7 +231,7 @@
 (setf (liber:alias-for-function 'revealer-child-revealed)
       "Accessor"
       (documentation 'revealer-child-revealed 'function)
- "@version{#2021-11-15}
+ "@version{2023-8-8}
   @syntax[]{(gtk:revealer-child-revealed object) => revealed}
   @argument[object]{a @class{gtk:revealer} widget}
   @argument[revealed]{a boolean whether the child widget is revealed}
@@ -240,17 +239,15 @@
     Accessor of the @slot[gtk:revealer]{child-revealed} slot of the
     @class{gtk:revealer} class.
   @end{short}
-
   The @sym{gtk:revealer-child-revealed} function returns whether the child
   widget is fully revealed, in other words whether the transition to the
   revealed state is completed.
   @see-class{gtk:revealer}")
 
-;;; --- revealer-reveal-child ----------------------------------------------
+;;; --- revealer-reveal-child --------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "reveal-child"
-                                               'revealer) t)
+(setf (documentation (liber:slot-documentation "reveal-child" 'revealer) t)
  "The @code{reveal-child} property of type @code{:boolean} (Read / Write) @br{}
   Whether the container should reveal the child widget. @br{}
   Default value: @em{false}")
@@ -259,7 +256,7 @@
 (setf (liber:alias-for-function 'revealer-reveal-child)
       "Accessor"
       (documentation 'revealer-reveal-child 'function)
- "@version{#2021-11-15}
+ "@version{2023-8-8}
   @syntax[]{(gtk:revealer-reveal-child object) => reveal}
   @syntax[]{(setf (gtk:revealer-reveal-child object) reveal)}
   @argument[object]{a @class{gtk:revealer} widget}
@@ -268,7 +265,6 @@
     Accessor of the @slot[gtk:revealer]{reveal-child} slot of the
     @class{gtk:revealer} class.
   @end{short}
-
   The @sym{gtk:revealer-reveal-child} function returns whether the child widget
   is currently revealed. The @sym{(setf gtk:revealer-reveal-child)} function
   tells the revealer to reveal or conceal its child widget.
@@ -281,7 +277,7 @@
   @see-class{gtk:revealer}
   @see-function{gtk:revealer-child-revealed}")
 
-;;; --- revealer-transition-duration ---------------------------------------
+;;; --- revealer-transition-duration -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "transition-duration"
@@ -295,7 +291,7 @@
 (setf (liber:alias-for-function 'revealer-transition-duration)
       "Accessor"
       (documentation 'revealer-transition-duration 'function)
- "@version{#2021-11-15}
+ "@version{2023-8-8}
   @syntax[]{(gtk:revealer-transition-duration object) => duration}
   @syntax[]{(setf (gtk:revealer-transition-duration object) duration)}
   @argument[object]{a @class{gtk:revealer} widget}
@@ -304,17 +300,15 @@
     Accessor of the @slot[gtk:revealer]{transition-duration} slot of the
     @class{gtk:revealer} class.
   @end{short}
-
   The @sym{gtk:revealer-transition-duration} function returns the amount of
   time in milliseconds that transitions will take. The
   @sym{(setf gtk:revealer-transition-duration)} function sets the duration.
   @see-class{gtk:revealer}")
 
-;;; --- revealer-transition-type -------------------------------------------
+;;; --- revealer-transition-type -----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "transition-type"
-                                               'revealer) t)
+(setf (documentation (liber:slot-documentation "transition-type" 'revealer) t)
  "The @code{transition-type} property of type
   @symbol{gtk:revealer-transition-type} (Read / Write) @br{}
   The type of animation used to transition. @br{}
@@ -324,7 +318,7 @@
 (setf (liber:alias-for-function 'revealer-transition-type)
       "Accessor"
       (documentation 'revealer-transition-type 'function)
- "@version{#2021-11-15}
+ "@version{2023-8-8}
   @syntax[]{(gtk:revealer-transition-type object) => setting}
   @syntax[]{(setf (gtk:revealer-transition-type object) setting)}
   @argument[object]{a @class{gtk:revealer} widget}
@@ -334,7 +328,6 @@
     Accessor of the @slot[gtk:revealer]{transition-type} slot of the
     @class{gtk:revealer} class.
   @end{short}
-
   The @sym{gtk:revealer-transition-type} function gets the type of animation
   that will be used for transitions in the revealer. The
   @sym{(setf gtk:revealer-transition-duration)} function sets the type of
@@ -350,7 +343,7 @@
 
 (defun revealer-new ()
  #+liber-documentation
- "@version{#2021-11-15}
+ "@version{2023-8-8}
   @return{The new @class{gtk:revealer} widget.}
   @short{Creates a new revealer.}
   @see-class{gtk:revealer}"
