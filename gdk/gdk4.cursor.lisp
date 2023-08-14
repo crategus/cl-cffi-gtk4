@@ -1,29 +1,30 @@
 ;;; ----------------------------------------------------------------------------
-;;; gdk.cursor.lisp
+;;; gdk4.cursor.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; Cursors
@@ -65,39 +66,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkCursor
-;;;
-;;; A GdkCursor represents a cursor. Its contents are private.
-;;;
-;;; Cursors are immutable objects, so they can not change after they have been
-;;; constructed.
-;;;
-;;; These functions are used to create and destroy cursors. Cursors are
-;;; immutable objects, so once you created them, there is no way to modify them
-;;; later. Create a new cursor when you want to change something about it.
-;;;
-;;; Cursors by themselves are not very interesting, they must be bound to a
-;;; window for users to see them. This is done with gdk_surface_set_cursor() or
-;;; gdk_surface_set_device_cursor(). Applications will typically use
-;;; higher-level GTK functions such as gtk_widget_set_cursor() instead.
-;;;
-;;; Cursors are not bound to a given GdkDisplay, so they can be shared. However,
-;;; the appearance of cursors may vary when used on different platforms.
-;;;
-;;; There are multiple ways to create cursors. The platform's own cursors can be
-;;; created with gdk_cursor_new_from_name(). That function lists the commonly
-;;; available names that are shared with the CSS specification. Other names may
-;;; be available, depending on the platform in use. On some platforms, what
-;;; images are used for named cursors may be influenced by the cursor theme.
-;;;
-;;; Another option to create a cursor is to use gdk_cursor_new_from_texture()
-;;; and provide an image to use for the cursor.
-;;;
-;;; To ease work with unsupported cursors, a fallback cursor can be provided. If
-;;; a GdkSurface cannot use a cursor because of the reasons mentioned above, it
-;;; will try the fallback cursor. Fallback cursors can themselves have fallback
-;;; cursors again, so it is possible to provide a chain of progressively easier
-;;; to support cursors. If none of the provided cursors can be supported, the
-;;; default cursor will be the ultimate fallback.
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GdkCursor" cursor
@@ -121,100 +89,228 @@
     cursor-texture
     "texture" "GdkTexture" t nil)))
 
+#+liber-documentation
+(setf (documentation 'cursor 'type)
+ "@version{#2023-8-7}
+  @begin{short}
+    A @sym{gdk:cursor} object represents a cursor.
+  @end{short}
+  Cursors are immutable objects, so once you created them, there is no way to
+  modify them later. Create a new cursor when you want to change something
+  about it.
+
+  Cursors by themselves are not very interesting, they must be bound to a
+  window for users to see them. This is done with the @fun{gdk:surface-cursor}
+  or the @fun{gdk:surface-device-cursor} functions. Applications will typically
+  use higher-level GTK functions such as the @fun{gtk:widget-cursor} function
+  instead.
+
+  Cursors are not bound to a given @class{gdk:display} object, so they can be
+  shared. However, the appearance of cursors may vary when used on different
+  platforms.
+
+  There are multiple ways to create cursors. The platform's own cursors can be
+  created with the @fun{gdk:cursor-new-from-name} function. That function lists
+  the commonly available names that are shared with the CSS specification. Other
+  names may be available, depending on the platform in use. On some platforms,
+  what images are used for named cursors may be influenced by the cursor theme.
+
+  Another option to create a cursor is to use the
+  @fun{gdk:cursor-new-from-texture} function and provide an image to use for
+  the cursor.
+
+  To ease work with unsupported cursors, a fallback cursor can be provided. If
+  a @class{gdk:surface} object cannot use a cursor because of the reasons
+  mentioned above, it will try the fallback cursor. Fallback cursors can
+  themselves have fallback cursors again, so it is possible to provide a chain
+  of progressively easier to support cursors. If none of the provided cursors
+  can be supported, the default cursor will be the ultimate fallback.
+  @see-constructor{gdk:cursor-new-from-name}
+  @see-constructor{gdk:cursor-new-from-texture}
+  @see-slot{gdk:cursor-fallback}
+  @see-slot{gdk:cursor-hotspot-x}
+  @see-slot{gdk:cursor-hotspot-y}
+  @see-slot{gdk:cursor-name}
+  @see-slot{gdk:cursor-texture}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “fallback” property
-;;;
-;;;  “fallback”                 GdkCursor *
-;;;
-;;; Cursor image to fall back to if this cursor cannot be displayed.
-;;;
-;;; Owner: GdkCursor
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+;;; --- cursor-fallback --------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “hotspot-x” property
-;;;
-;;;  “hotspot-x”                int
-;;;
-;;; Horizontal offset of the cursor hotspot.
-;;;
-;;; Owner: GdkCursor
-;;; Flags: Read / Write / Construct Only
-;;; Allowed values: >= 0
-;;; Default value: 0
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "fallback" 'cursor) t)
+ "The @code{fallback} property of type @class{gdk:cursor}
+  (Read / Write / Construct only) @br{}
+  Cursor image to fall back to if the cursor cannot be displayed.")
 
-;;; ----------------------------------------------------------------------------
-;;; The “hotspot-y” property
-;;;
-;;;  “hotspot-y”                int
-;;;
-;;; Vertical offset of the cursor hotspot.
-;;;
-;;; Owner: GdkCursor
-;;; Flags: Read / Write / Construct Only
-;;; Allowed values: >= 0
-;;; Default value: 0
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'cursor-fallback)
+      "Accessor"
+      (documentation 'cursor-fallback 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:cursor-fallback object) => fallback}
+  @argument[object]{a @class{gdk:cursor} object}
+  @argument[fallback]{a @class{gdk:cursor} object with the fallback of the
+    cursor or @code{nil} to use the default cursor as fallback}
+  @begin{short}
+    Accessor of the @slot[gdk:cursor]{fallback} slot of the @class{gdk:cursor}
+    class.
+  @end{short}
+  The @sym{gdk:cursor-fallback} function returns the fallback for @arg{cursor}.
+  The fallback will be used if the cursor is not available on a given
+  @class{gdk:display} object.
 
-;;; ----------------------------------------------------------------------------
-;;; The “name” property
-;;;
-;;;  “name”                     char *
-;;;
-;;; Name of this cursor.
-;;;
-;;; Owner: GdkCursor
-;;; Flags: Read / Write / Construct Only
-;;; Default value: NULL
-;;; ----------------------------------------------------------------------------
+  For named cursors, this can happen when using nonstandard names or when using
+  an incomplete cursor theme. For textured cursors, this can happen when the
+  texture is too large or when the @class{gdk:display} object it is used on
+  does not support textured cursors.
+  @see-class{gdk:cursor}
+  @see-class{gdk:display}")
 
-;;; ----------------------------------------------------------------------------
-;;; The “texture” property
-;;;
-;;;  “texture”                  GdkTexture *
-;;;
-;;; The texture displayed by this cursor.
-;;;
-;;; Owner: GdkCursor
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+;;; --- cursor-hotspot-x -------------------------------------------------------
 
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "hotspot-x" 'cursor) t)
+ "The @code{hotspot-x} property of type @code{:int}
+  (Read / Write / Construct only) @br{}
+  Horizontal offset of the cursor hotspot. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'cursor-hotspot-x)
+      "Accessor"
+      (documentation 'cursor-hotspot-x 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:cursor-hotspot-x object) => hotspot-x}
+  @argument[object]{a @class{gdk:cursor} object}
+  @argument[hotspot-x]{an integer with the horizontal offset of the hotspot or
+    0 for named cursors}
+  @begin{short}
+    Accessor of the @slot[gdk:cursor]{hotspot-x} slot of the @class{gdk:cursor}
+    class.
+  @end{short}
+  The @sym{gdk:cursor-hotspot-x} function returns the horizontal offset of the
+  hotspot. The hotspot indicates the pixel that will be directly above the
+  cursor.
+
+  Note that named cursors may have a nonzero hotspot, but this function will
+  only return the hotspot position for cursors created with the
+  @fun{gdk:cursor-new-from-texture} function.
+  @see-class{gdk:cursor}
+  @see-function{gdk:cursor-new-from-texture}
+  @see-function{gdk:cursor-hotspot-y}")
+
+;;; --- cursor-hotspot-y -------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "hotspot-y" 'cursor) t)
+ "The @code{hotspot-y} property of type @code{:int}
+  (Read / Write / Construct only) @br{}
+  Vertical offset of the cursor hotspot. @br{}
+  Allowed values: >= 0 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'cursor-hotspot-y)
+      "Accessor"
+      (documentation 'cursor-hotspot-y 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:cursor-hotspot-y object) => hotspot-y}
+  @argument[object]{a @class{gdk:cursor} object}
+  @argument[hotspot-y]{an integer with the vertical offset of the hotspot or
+    0 for named cursors}
+  @begin{short}
+    Accessor of the @slot[gdk:cursor]{hotspot-y} slot of the @class{gdk:cursor}
+    class.
+  @end{short}
+  The @sym{gdk:cursor-hotspot-y} function returns the vertical offset of the
+  hotspot. The hotspot indicates the pixel that will be directly above the
+  cursor.
+
+  Note that named cursors may have a nonzero hotspot, but this function will
+  only return the hotspot position for cursors created with the
+  @fun{gdk:cursor-new-from-texture} function.
+  @see-class{gdk:cursor}
+  @see-function{gdk:cursor-new-from-texture}
+  @see-function{gdk:cursor-hotspot-x}")
+
+;;; --- cursor-name ------------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "name" 'cursor) t)
+ "The @code{name} property of type @code{:string}
+  (Read / Write / Construct only) @br{}
+  Name of the cursor. @br{}
+  Default value: @code{nil}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'cursor-name)
+      "Accessor"
+      (documentation 'cursor-name 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:cursor-name object) => name}
+  @argument[object]{a @class{gdk:cursor} object}
+  @argument[name]{a string with the name of the cursor or @code{nil} if it is
+    not a named cursor}
+  @begin{short}
+    Accessor of the @slot[gdk:cursor]{name} slot of the @class{gdk:cursor}
+    class.
+  @end{short}
+  The @sym{gdk:cursor-name} function returns the name of the cursor. If the
+  cursor is not a named cursor, @code{nil} will be returned.
+  @see-class{gdk:cursor}")
+
+;;; --- cursor-texture ---------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "texture" 'cursor) t)
+ "The @code{texture} property of type @class{gdk:texture}
+  (Read / Write / Construct only) @br{}
+  The texture displayed by this cursor.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'cursor-texture)
+      "Accessor"
+      (documentation 'cursor-texture 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:cursor-texture object) => texture}
+  @argument[object]{a @class{gdk:cursor} object}
+  @argument[texture]{a @class{gdk:texture} object with the texture for
+  @arg{cursor} or @code{nil} if it is a named cursor}
+  @begin{short}
+    Accessor of the @slot[gdk:cursor]{texture} slot of the @class{gdk:cursor}
+    class.
+  @end{short}
+  The @sym{gdk:cursor-texture} function returns the texture for the cursor. If
+  the cursor is a named cursor, @code{nil} will be returned.
+  @see-class{gdk:cursor}
+  @see-class{gdk:texture}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_cursor_new_from_texture ()
-;;;
-;;; GdkCursor *
-;;; gdk_cursor_new_from_texture (GdkTexture *texture,
-;;;                              int hotspot_x,
-;;;                              int hotspot_y,
-;;;                              GdkCursor *fallback);
-;;;
-;;; Creates a new cursor from a GdkTexture.
-;;;
-;;; texture :
-;;;     the texture providing the pixel data
-;;;
-;;; hotspot_x :
-;;;     the horizontal offset of the “hotspot” of the cursor
-;;;
-;;; hotspot_y :
-;;;     the vertical offset of the “hotspot” of the cursor
-;;;
-;;; fallback :
-;;;     NULL or the GdkCursor to fall back to when this one cannot be supported.
-;;;
-;;; Returns :
-;;;     a new GdkCursor.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_cursor_new_from_texture" cursor-new-from-texture)
     (g:object cursor)
+ #+liber-documentation
+ "@version{#2023-8-7}
+  @argument[texture]{a @class{gdk:texture} object with the texture providing
+    the pixel data}
+  @argument[hotspot-x]{an integer with the horizontal offset of the hotspot of
+    the cursor}
+  @argument[hotspot-y]{an integer with the vertical offset of the hotspot of
+    the cursor}
+  @argument[fallback]{@code{nil} or the @class{gdk:cursor} object to fall back
+    to when this one cannot be supported}
+  @return{A new @class{gdk:cursor} object.}
+  @begin{short}
+    Creates a new cursor from a @class{gdk:texture} object.
+  @end{short}
+  @see-class{gdk:cursor}
+  @see-class{gdk:texture}"
   (texture (g:object texture))
   (hotspot-x :int)
   (hotspot-y :int)
@@ -279,10 +375,8 @@
   @end{table}
   @begin[Examples]{dictionary}
     @begin{pre}
-(gdk-cursor-new-from-name (gdk-display-default) \"wait\")
-=> #<GDK-X11-CURSOR {1001AFE123@}>
-(gdk-cursor-new-from-name (gdk-display-default) \"unknown\")
-=> NIL
+(gdk:cursor-new-from-name \"wait\" nil)
+=> #<GDK:CURSOR {1013383A73@}>
     @end{pre}
   @end{dictionary}
   @see-class{gdk:cursor}"
@@ -291,98 +385,4 @@
 
 (export 'cursor-new-from-name)
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_cursor_get_fallback ()
-;;;
-;;; GdkCursor *
-;;; gdk_cursor_get_fallback (GdkCursor *cursor);
-;;;
-;;; Returns the fallback for this cursor . The fallback will be used if this
-;;; cursor is not available on a given GdkDisplay.
-;;;
-;;; For named cursors, this can happen when using nonstandard names or when
-;;; using an incomplete cursor theme. For textured cursors, this can happen when
-;;; the texture is too large or when the GdkDisplay it is used on does not
-;;; support textured cursors.
-;;;
-;;; cursor :
-;;;     a GdkCursor.
-;;;
-;;; Returns :
-;;;     the fallback of the cursor or NULL to use the default cursor as
-;;;     fallback.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_cursor_get_name ()
-;;;
-;;; const char *
-;;; gdk_cursor_get_name (GdkCursor *cursor);
-;;;
-;;; Returns the name of the cursor. If the cursor is not a named cursor, NULL
-;;; will be returned.
-;;;
-;;; cursor :
-;;;     a GdkCursor.
-;;;
-;;; Returns :
-;;;     the name of the cursor or NULL if it is not a named cursor.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_cursor_get_texture ()
-;;;
-;;; GdkTexture *
-;;; gdk_cursor_get_texture (GdkCursor *cursor);
-;;;
-;;; Returns the texture for the cursor. If the cursor is a named cursor, NULL
-;;; will be returned.
-;;;
-;;; cursor :
-;;;     a GdkCursor.
-;;;
-;;; Returns :
-;;;     the texture for cursor or NULL if it is a named cursor.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_cursor_get_hotspot_x ()
-;;;
-;;; int
-;;; gdk_cursor_get_hotspot_x (GdkCursor *cursor);
-;;;
-;;; Returns the horizontal offset of the hotspot. The hotspot indicates the
-;;; pixel that will be directly above the cursor.
-;;;
-;;; Note that named cursors may have a nonzero hotspot, but this function will
-;;; only return the hotspot position for cursors created with
-;;; gdk_cursor_new_from_texture().
-;;;
-;;; cursor :
-;;;     a GdkCursor.
-;;;
-;;; Returns :
-;;;     the horizontal offset of the hotspot or 0 for named cursors
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gdk_cursor_get_hotspot_y ()
-;;;
-;;; int
-;;; gdk_cursor_get_hotspot_y (GdkCursor *cursor);
-;;;
-;;; Returns the vertical offset of the hotspot. The hotspot indicates the pixel
-;;; that will be directly above the cursor.
-;;;
-;;; Note that named cursors may have a nonzero hotspot, but this function will
-;;; only return the hotspot position for cursors created with
-;;; gdk_cursor_new_from_texture().
-;;;
-;;; cursor :
-;;;     a GdkCursor.
-;;;
-;;; Returns :
-;;;     the vertical offset of the hotspot or 0 for named cursors
-;;; ----------------------------------------------------------------------------
-
-;;; --- End of file gdk.cursor.lisp --------------------------------------------
+;;; --- End of file gdk4.cursor.lisp -------------------------------------------

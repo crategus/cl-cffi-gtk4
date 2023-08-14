@@ -441,9 +441,9 @@
     @begin[GdkToplevel]{subsection}
       Interface for toplevel surfaces.
       @about-symbol{toplevel-state}
-      @about-symbol{full-screen-mode}
+      @about-symbol{fullscreen-mode}
       @about-symbol{surface-edge}
-      @about-symbol{titlebar-edge}
+      @about-symbol{titlebar-gesture}
       @about-class{toplevel}
       @about-generic{toplevel-decorated}
       @about-generic{toplevel-deletable}
@@ -568,7 +568,7 @@
       @about-function{content-formats-match-gtype}
       @about-function{content-formats-match-mime-type}
       @about-function{content-formats-contain-gtype}
-      @about-function{content-formats-mime-type}
+      @about-function{content-formats-contain-mime-type}
       @about-function{content-formats-union-serialize-gtypes}
       @about-function{content-formats-union-deserialize-gtypes}
       @about-function{content-formats-union-serialize-mime-types}
@@ -653,6 +653,7 @@
       @about-function{clipboard-read-texture-finish}
       @about-function{clipboard-read-text-async}
       @about-function{clipboard-read-text-finish}
+      @about-function{clipboard-set-content}
       @about-function{clipboard-set}
       @about-function{clipboard-set-valist}
       @about-function{clipboard-set-value}

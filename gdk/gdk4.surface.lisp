@@ -215,7 +215,7 @@ lambda (surface region)    :run-last
 (setf (liber:alias-for-function 'surface-cursor)
       "Accessor"
       (documentation 'surface-cursor 'function)
- "@version{#2023-4-7}
+ "@version{#2023-8-7}
   @syntax[]{(gdk:surface-cursor object) => cursor}
   @syntax[]{(setf (gdk:surface-cursor object) cursor)}
   @argument[object]{a @class{gdk:surface} object}
@@ -237,7 +237,9 @@ lambda (surface region)    :run-last
   argument means that the surface will use the cursor of its parent surface.
   Most surfaces should use this default.
   @see-class{gdk:surface}
-  @see-class{gdk:cursor}")
+  @see-class{gdk:cursor}
+  @see-function{gdk:cursor-new-from-name}
+  @see-function{gdk:cursor-new-from-texture}")
 
 ;;; --- surface-display --------------------------------------------------------
 

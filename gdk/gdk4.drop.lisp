@@ -8,22 +8,23 @@
 ;;;
 ;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; Types and Values
@@ -67,32 +68,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkDrop
-;;;
-;;; The GdkDrop struct contains only private fields and should not be accessed
-;;; directly.
-;;;
-;;;
-;;; These functions provide a low-level interface for drag and drop.
-;;;
-;;; The GdkDrag object represents the source side of an ongoing DND operation.
-;;; It is created when a drag is started, and stays alive for duration of the
-;;; DND operation. After a drag has been started with gdk_drag_begin(), the
-;;; caller gets informed about the status of the ongoing drag operation with
-;;; signals on the GdkDrag object.
-;;;
-;;; The GdkDrop object represents the target side of an ongoing DND operation.
-;;; Possible drop sites get informed about the status of the ongoing drag
-;;; operation with events of type GDK_DRAG_ENTER, GDK_DRAG_LEAVE,
-;;; GDK_DRAG_MOTION and GDK_DROP_START. The GdkDrop object can be obtained from
-;;; these GdkEvents using gdk_dnd_event_get_drop().
-;;;
-;;; The actual data transfer is initiated from the target side via an async
-;;; read, using one of the GdkDrop functions for this purpose:
-;;; gdk_drop_read_async() or gdk_drop_read_value_async().
-;;;
-;;; GTK provides a higher level abstraction based on top of these functions,
-;;; and so they are not normally needed in GTK applications. See the Drag and
-;;; Drop section of the GTK documentation for more information.
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GdkDrop" drop
@@ -119,244 +94,249 @@
     drop-surface
     "surface" "GdkSurface" t t)))
 
+#+liber-documentation
+(setf (documentation 'drop 'type)
+ "@version{#2023-8-7}
+  @begin{short}
+    The @sym{gdk:drop} object represents the target side of an ongoing DND
+    operation.
+  @end{short}
+  Possible drop sites get informed about the status of the ongoing drag
+  operation with events of @code{:enter}, @code{:leave}, @code{:motion} and
+  @code{:start} type. The @sym{gdk:drop} object can be obtained from these
+  @class{gdk:events} events using the @fun{gdk:dnd-event-drop} function.
+
+  The actual data transfer is initiated from the target side via an async read,
+  using one of the @sym{gdk:drop} functions for this purpose:
+  the @fun{gdk:drop-read-async} or @fun{gdk:drop-read-value-async} functions.
+
+  GTK provides a higher level abstraction based on top of these functions, and
+  so they are not normally needed in GTK applications. See the Drag and Drop
+  section of the GTK documentation for more information.
+  @see-class{gdk:drag}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- drop-actions -----------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “actions” property
-;;;
-;;;  “actions”                  GdkDragAction
-;;;
-;;; The possible actions for this drop
-;;;
-;;; Owner: GdkDrop
-;;; Flags: Read / Write / Construct Only
-;;; Default value: GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "actions" 'drop) t)
+ "The @code{actions} property of type @symbol{gdk:drag-action}
+  (Read / Write / Construct Only) @br{}
+  The possible actions for the drop. @br{}
+  Default value: '(:copy :move :link)")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drop_get_actions ()
-;;;
-;;; GdkDragAction
-;;; gdk_drop_get_actions (GdkDrop *self);
-;;;
-;;; Returns the possible actions for this GdkDrop. If this value contains
-;;; multiple actions - ie gdk_drag_action_is_unique() returns FALSE for the
-;;; result - gdk_drop_finish() must choose the action to use when accepting the
-;;; drop. This will only happen if you passed GDK_ACTION_ASK as one of the
-;;; possible actions in gdk_drop_status(). GDK_ACTION_ASK itself will not be
-;;; included in the actions returned by this function.
-;;;
-;;; This value may change over the lifetime of the GdkDrop both as a response
-;;; to source side actions as well as to calls to gdk_drop_status() or
-;;; gdk_drop_finish(). The source side will not change this value anymore once
-;;; a drop has started.
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; Returns :
-;;;     The possible GdkDragActions
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-actions)
+      "Accessor"
+      (documentation 'drop-actions 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:drop-actions object) => actions}
+  @argument[object]{a @class{gdk:drop} object}
+  @argument[actions]{a @symbol{gdk:drag-action} value}
+  @begin{short}
+    Accessor of the @slot[gdk:drop]{actions} slot of the @class{gdk:drop}
+    class.
+  @end{short}
+  The @sym{gdk:drop-actions} function returns the possible actions for the
+  drop object. If this value contains multiple actions - i.e. the
+  @fun{gdk:drag-action-is-unique} function returns @em{false} for the result -
+  the @fun{gdk:drop-finish} function must choose the action to use when
+  accepting the drop. This will only happen if you passed @code{:ask} as one of
+  the possible actions in the @fun{gdk:drop-status} function. The @code{:ask}
+  value itself will not be included in the actions returned by this function.
+
+  This value may change over the lifetime of the drop object both as a response
+  to source side actions as well as to calls to the @fun{gdk:drop-status}
+  function or the @fun{gdk:drop-finish} function. The source side will not
+  change this value anymore once a drop has started.
+  @see-class{gdk:drop}
+  @see-symbol{gdk:drag-action}
+  @see-function{gdk:drop-status}
+  @see-function{gdk:drop-finish}
+  @see-function{gdk:drag-action-is-unique}")
 
 ;;; --- drop-device ------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “device” property
-;;;
-;;;  “device”                   GdkDevice *
-;;;
-;;; The GdkDevice performing the drop
-;;;
-;;; Owner: GdkDrop
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "device" 'drop) t)
+ "The @code{device} property of type @class{gdk:device}
+  (Read / Write / Construct Only) @br{}
+  The device performing the drop.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drop_get_device ()
-;;;
-;;; GdkDevice *
-;;; gdk_drop_get_device (GdkDrop *self);
-;;;
-;;; Returns the GdkDevice performing the drop.
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; Returns :
-;;;     The GdkDevice performing the drop.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-device)
+      "Accessor"
+      (documentation 'drop-device 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:drop-device object) => device}
+  @argument[object]{a @class{gdk:drop} object}
+  @argument[device]{a @class{gdk:device} object performing the drop}
+  @begin{short}
+    Accessor of the @slot[gdk:drop]{device} slot of the @class{gdk:drop}
+    class.
+  @end{short}
+  The @sym{gdk:drop-device} function returns the device performing the drop.
+  @see-class{gdk:drop}
+  @see-class{gdk:device}")
 
 ;;; --- drop-display -----------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “display” property
-;;;
-;;;  “display”                  GdkDisplay *
-;;;
-;;; The GdkDisplay that the drop belongs to.
-;;;
-;;; Owner: GdkDrop
-;;; Flags: Read
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "display" 'drop) t)
+ "The @code{display} property of type @class{gdk:display} (Read) @br{}
+  The display that the drop object belongs to.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drop_get_display ()
-;;;
-;;; GdkDisplay *
-;;; gdk_drop_get_display (GdkDrop *self);
-;;;
-;;; Gets the GdkDisplay that self was created for.
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; Returns :
-;;;     a GdkDisplay.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-display)
+      "Accessor"
+      (documentation 'drop-display 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:drop-display object) => display}
+  @argument[object]{a @class{gdk:drop} object}
+  @argument[display]{a @class{gdk:display} object}
+  @begin{short}
+    Accessor of the @slot[gdk:drop]{display} slot of the @class{gdk:drop}
+    class.
+  @end{short}
+  The @sym{gdk:drop-display} function gets the display that @arg{drop} was
+  created for.
+  @see-class{gdk:drop}
+  @see-class{gdk:display}")
 
 ;;; --- drop-drag --------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “drag” property
-;;;
-;;;  “drag”                     GdkDrag *
-;;;
-;;; The GdkDrag that initiated this drop
-;;;
-;;; Owner: GdkDrop
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "drag" 'drop) t)
+ "The @code{drag} property of type @class{gdk:drag}
+  (Read / Write / Construct Only) @br{}
+  The drag object that initiated the drop.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drop_get_drag ()
-;;;
-;;; GdkDrag *
-;;; gdk_drop_get_drag (GdkDrop *self);
-;;;
-;;; If this is an in-app drag-and-drop operation, returns the GdkDrag that
-;;; corresponds to this drop.
-;;;
-;;; If it is not, NULL is returned.
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; Returns :
-;;;     the corresponding GdkDrag.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-drag)
+      "Accessor"
+      (documentation 'drop-drag 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:drop-drag object) => drag}
+  @argument[object]{a @class{gdk:drop} object}
+  @argument[drag]{a corresponding @class{gdk:drag} object}
+  @begin{short}
+    Accessor of the @slot[gdk:drop]{drag} slot of the @class{gdk:drop}
+    class.
+  @end{short}
+  If this is an in-app drag-and-drop operation, returns the drag object that
+  corresponds to this drop. If it is not, @code{nil} is returned.
+  @see-class{gdk:drop}
+  @see-class{gdk:drag}")
 
 ;;; --- drop-formats -----------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “formats” property
-;;;
-;;;  “formats”                  GdkContentFormats *
-;;;
-;;; The possible formats that the drop can provide its data in.
-;;;
-;;; Owner: GdkDrop
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "formats" 'drop) t)
+ "The @code{formats} property of type @class{gdk:content-formats}
+  (Read / Write / Construct Only) @br{}
+  The possible formats that the drop object can provide its data in.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drop_get_formats ()
-;;;
-;;; GdkContentFormats *
-;;; gdk_drop_get_formats (GdkDrop *self);
-;;;
-;;; Returns the GdkContentFormats that the drop offers the data to be read in.
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; Returns :
-;;;     The possible GdkContentFormats.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-formats)
+      "Accessor"
+      (documentation 'drop-formats 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:drop-formats object) => formats}
+  @argument[object]{a @class{gdk:drop} object}
+  @argument[formats]{a @class{gdk:content-formats} instance}
+  @begin{short}
+    Accessor of the @slot[gdk:drop]{formats} slot of the @class{gdk:drop}
+    class.
+  @end{short}
+  The @sym{gdk:drop-formats} function returns the content formats that the drop
+  offers the data to be read in.
+  @see-class{gdk:drop}
+  @see-class{gdk:content-formats}")
 
 ;;; --- drop-surface -----------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “surface” property
-;;;
-;;;  “surface”                  GdkSurface *
-;;;
-;;; The GdkSurface the drop happens on
-;;;
-;;; Owner: GdkDrop
-;;; Flags: Read / Write / Construct Only
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "surface" 'drop) t)
+ "The @code{surface} property of type @class{gdk:surface}
+  (Read / Write / Construct Only) @br{}
+  The  surface the drop happens on.")
 
-;;; ----------------------------------------------------------------------------
-;;; gdk_drop_get_surface ()
-;;;
-;;; GdkSurface *
-;;; gdk_drop_get_surface (GdkDrop *self);
-;;;
-;;; Returns the GdkSurface performing the drop.
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; Returns :
-;;;     The GdkSurface performing the drop.
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-surface)
+      "Accessor"
+      (documentation 'drop-surface 'function)
+ "@version{#2023-8-7}
+  @syntax[]{(gdk:drop-surface object) => surface}
+  @argument[object]{a @class{gdk:drop} object}
+  @argument[surface]{a @class{gdk:surface} object performing the drop}
+  @begin{short}
+    Accessor of the @slot[gdk:drop]{surface} slot of the @class{gdk:drop}
+    class.
+  @end{short}
+  The @sym{gdk:drop-surface} function returns the surface performing the drop.
+  @see-class{gdk:drop}
+  @see-class{gdk:surface}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drop_status ()
-;;;
-;;; void
-;;; gdk_drop_status (GdkDrop *self,
-;;;                  GdkDragAction actions,
-;;;                  GdkDragAction preferred);
-;;;
-;;; Selects all actions that are potentially supported by the destination.
-;;;
-;;; When calling this function, do not restrict the passed in actions to the
-;;; ones provided by gdk_drop_get_actions(). Those actions may change in the
-;;; future, even depending on the actions you provide here.
-;;;
-;;; The preferred action is a hint to the drag'n'drop mechanism about which
-;;; action to use when multiple actions are possible.
-;;;
-;;; This function should be called by drag destinations in response to
-;;; GDK_DRAG_ENTER or GDK_DRAG_MOTION events. If the destination does not yet
-;;; know the exact actions it supports, it should set any possible actions first
-;;; and then later call this function again.
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; actions :
-;;;     Supported actions of the destination, or 0 to indicate that a drop will
-;;;     not be accepted
-;;;
-;;; preferred :
-;;;     A unique action that's a member of actions indicating the preferred
-;;;     action.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_drop_status" drop-status) :void
+ #+liber-documentation
+ "@version{#2023-8-7}
+  @argument[drop]{a @class{gdk:drop} object}
+  @argument[actions]{a @symbol{gdk:drag-action} value with the supported
+    actions of the destination, or @code{:none} to indicate that a drop will
+    not be accepted}
+  @argument[preferred]{a @symbol{gdk:drag-action} value with the unique action
+    that is a member of @arg{actions} indicating the preferred action}
+  @begin{short}
+    Selects all actions that are potentially supported by the destination.
+  @end{short}
+  When calling this function, do not restrict the passed in @arg{actions} to
+  the ones provided by the @fun{gdk:drop-actions} function. Those actions may
+  change in the future, even depending on the actions you provide here.
+
+  The preferred action is a hint to the drag'n'drop mechanism about which
+  action to use when multiple actions are possible.
+
+  This function should be called by drag destinations in response to
+  @code{:enter} or @code{:motion} events. If the destination does not yet know
+  the exact actions it supports, it should set any possible actions first and
+  then later call this function again.
+  @see-class{gdk:drop}
+  @see-symbol{gdk:drag-action}
+  @see-function{gdk:drop-actions}"
+  (drop (g:object drop))
+  (actions drag-action)
+  (preferred drag-action))
+
+(export 'drop-status)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drop_finish ()
-;;;
-;;; void
-;;; gdk_drop_finish (GdkDrop *self,
-;;;                  GdkDragAction action);
-;;;
-;;; Ends the drag operation after a drop.
-;;;
-;;; The action must be a single action selected from the actions available via
-;;; gdk_drop_get_actions().
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; action :
-;;;     the action performed by the destination or 0 if the drop failed
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_drop_finish" drop-finish) :void
+ #+liber-documentation
+ "@version{#2023-8-7}
+  @argument[drop]{a @class{gdk:drop} object}
+  @argument[action]{a @symbol{gdk:drag-action} value with the action performed
+    by the destination or @code{:none} if the drop failed}
+  @begin{short}
+    Ends the drag operation after a drop.
+  @end{short}
+  The action must be a single action selected from the actions available via
+  the @fun{gdk:drop-actions} function.
+  @see-class{gdk:drop}
+  @see-function{gdk:drop-actions}"
+  (drop (g:object drop))
+  (action drag-action))
+
+(export 'drop-finish)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drop_read_async ()
@@ -391,6 +371,8 @@
 ;;;     the data to pass to callback .
 ;;; ----------------------------------------------------------------------------
 
+;; We need GInputStream for the implementation.
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drop_read_finish ()
 ;;;
@@ -418,65 +400,79 @@
 ;;;     the GInputStream, or NULL.
 ;;; ----------------------------------------------------------------------------
 
+;; We need GInputStream for the implementation.
+
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drop_read_value_async ()
-;;;
-;;; void
-;;; gdk_drop_read_value_async (GdkDrop *self,
-;;;                            GType type,
-;;;                            int io_priority,
-;;;                            GCancellable *cancellable,
-;;;                            GAsyncReadyCallback callback,
-;;;                            gpointer user_data);
-;;;
-;;; Asynchronously request the drag operation's contents converted to the given
-;;; type . When the operation is finished callback will be called. You can then
-;;; call gdk_drop_read_value_finish() to get the resulting GValue.
-;;;
-;;; For local drag'n'drop operations that are available in the given GType, the
-;;; value will be copied directly. Otherwise, GDK will try to use
-;;; gdk_content_deserialize_async() to convert the data.
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; type :
-;;;     a GType to read
-;;;
-;;; io_priority :
-;;;     the I/O priority of the request.
-;;;
-;;; cancellable :
-;;;     optional GCancellable object, NULL to ignore.
-;;;
-;;; callback :
-;;;     callback to call when the request is satisfied.
-;;;
-;;; user_data :
-;;;     the data to pass to callback function.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_drop_read_async" %drop-read-value-async) :void
+  (drop (g:object drop))
+  (gtype g:type-t)
+  (priority :int)
+  (cancellable (g:object g:cancellable))
+  (func :pointer)
+  (data :pointer))
+
+(defun drop-read-value-async (drop gtype priority cancellable func)
+ #+liber-documentation
+ "@version{#2023-8-7}
+  @argument[drop]{a @class{gdk:drop} object}
+  @argument[gtype]{a @class{g:type-t} type to read}
+  @argument[priority]{an integer with the I/O priority of the request}
+  @argument[cancellable]{an optional @class{g:cancellable} object, @code{nil}
+    to ignore}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+    when the request is satisfied}
+  @begin{short}
+    Asynchronously request the drag operation's contents converted to the given
+    @arg{gtype}.
+  @end{short}
+  When the operation is finished @arg{func} will be called. You can then call
+  the @fun{gdk:drop-read-value-finish} function to get the resulting
+  @symbol{g:value} value.
+
+  For local drag'n'drop operations that are available in the given @arg{gtype},
+  the value will be copied directly. Otherwise, GDK will try to use the
+  @fun{gdk:content-deserialize-async} to convert the data.
+  @see-class{gdk:drop}"
+  (let ((ptr (glib:allocate-stable-pointer func)))
+    (%drop-read-value-async drop
+                            gtype
+                            priority
+                            cancellable
+                            (cffi:callback g:async-ready-callback)
+                            ptr)))
+
+(export 'drop-read-value-async)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drop_read_value_finish ()
-;;;
-;;; const GValue *
-;;; gdk_drop_read_value_finish (GdkDrop *self,
-;;;                             GAsyncResult *result,
-;;;                             GError **error);
-;;;
-;;; Finishes an async drop read started with gdk_drop_read_value_async().
-;;;
-;;; self :
-;;;     a GdkDrop
-;;;
-;;; result :
-;;;     a GAsyncResult
-;;;
-;;; error :
-;;;     a GError location to store the error occurring, or NULL to ignore.
-;;;
-;;; Returns :
-;;;     a GValue containing the result.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gdk_drop_read_value_finish" %drop-read-value-finish)
+    (:pointer (:struct g:value))
+  (drop (g:object drop))
+  (result (g:object g:async-result))
+  (err :pointer))
+
+(defun drop-read-value-finish (drop result)
+ #+liber-documentation
+ "@version{#2023-8-7}
+  @argument[drop]{a @class{gdk:drop} object}
+  @argument[result]{a @class{g:async-result} object}
+  @return{A @symbol{g:value} value containing the result.}
+  @begin{short}
+    Finishes an async drop read started with the @fun{gdk:drop-read-value-async}
+    function.
+  @end{short}
+  @see-class{gdk:drop}
+  @see-class{g:async-result}
+  @see-symbol{g:value}
+  @see-function{gdk:drop-read-value-async}"
+  (glib:with-ignore-g-error (err)
+    (%drop-read-value-finish drop result err)))
+
+(export 'drop-read-value-finish)
 
 ;;; --- End of file gdk4.drop.lisp ---------------------------------------------

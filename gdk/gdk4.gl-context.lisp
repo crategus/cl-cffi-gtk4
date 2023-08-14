@@ -437,40 +437,41 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf gl-context-debug-enabled) (enabled context)
-  (cffi:foreign-funcall "gdk_gl_context_set_enabled"
+  (cffi:foreign-funcall "gdk_gl_context_set_debug_enabled"
                         (g:object gl-context) context
                         :boolean enabled
                         :void)
   enabled)
 
-(cffi:defcfun ("gdk_gl_context_get_enabled" gl-context-enabled) :boolean
+(cffi:defcfun ("gdk_gl_context_get_debug_enabled"
+               gl-context-debug-enabled) :boolean
  #+liber-documentation
  "@version{#2023-8-3}
-  @syntax[]{(gdk:gl-context-enabled object) => enabled}
-  @syntax[]{(setf gdk:gl-context-enabled object) enabled)}
+  @syntax[]{(gdk:gl-context-debug-enabled object) => enabled}
+  @syntax[]{(setf gdk:gl-context-debug-enabled object) enabled)}
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[enabled]{a boolean whether debugging is enabled}
   @begin{short}
-    The @sym{gdk:gl-context-enabled} function retrieves whether debugging is
-    enabled.
+    The @sym{gdk:gl-context-debug-enabled} function retrieves whether debugging
+    is enabled.
   @end{short}
-  The @sym{(setf gdk:gl-context-enabled} function sets whether the GL context
-  should perform extra validations and run time checking. This is useful during
-  development, but has additional overhead.
+  The @sym{(setf gdk:gl-context-debug-enabled} function sets whether the GL
+  context should perform extra validations and run time checking. This is
+  useful during development, but has additional overhead.
 
   The @class{gdk:gl-context} object must not be realized or made current prior
   to calling this function.
   @see-class{gdk:gl-context}"
   (context (g:object gl-context)))
 
-(export 'gl-context-enabled)
+(export 'gl-context-debug-enabled)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_gl_context_set_forward_compatible ()
 ;;; gdk_gl_context_get_forward_compatible ()
 ;;; ----------------------------------------------------------------------------
 
-(defun (setf gl-context-debug-forward-compatible) (setting context)
+(defun (setf gl-context-forward-compatible) (setting context)
   (cffi:foreign-funcall "gdk_gl_context_set_forward_compatible"
                         (g:object gl-context) context
                         :boolean setting
@@ -482,14 +483,14 @@
  #+liber-documentation
  "@version{#2023-8-3}
   @syntax[]{(gdk:gl-context-forward-compatible object) => setting}
-  @@syntax[]{(setf gdk:gl-context-forward-compatible object) setting)}
+  @syntax[]{(setf gdk:gl-context-forward-compatible object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[setting]{a boolean whether @arg{context} is forward compatible}
   @begin{short}
     The @sym{gdk:gl-context-forward-compatible} function returns whether the
     GL context should be forward compatible.
   @end{short}
-  The @sym{(setf gdk:gl-context-forward-compatible} function sets whether the
+  The @sym{(setf gdk:gl-context-forward-compatible)} function sets whether the
   GL context should be forward compatible.
 
   Forward compatible GL contexts must not support OpenGL functionality that has
@@ -502,7 +503,7 @@
   @see-class{gdk:gl-context}"
   (context (g:object gl-context)))
 
-(export 'gl-context-enabled)
+(export 'gl-context-forward-compatible)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_gl_context_set_use_es ()

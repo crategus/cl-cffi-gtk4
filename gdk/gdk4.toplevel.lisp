@@ -238,6 +238,7 @@
 ;;; GdkTitlebarGesture
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-4
 (gobject:define-g-enum "GdkTitlebarGesture" titlebar-gesture
   (:export t
    :type-initializer "gdk_titlebar_gesture_get_type")
@@ -245,10 +246,10 @@
   (:right-click 1)
   (:middle-click 2))
 
-#+liber-documentation
-(setf (liber:alias-for-symbol 'surface-edge)
+#+(and gtk-4-4 liber-documentation)
+(setf (liber:alias-for-symbol 'titlebar-gesture)
       "GEnum"
-      (liber:symbol-documentation 'surface-edge)
+      (liber:symbol-documentation 'titlebar-gesture)
  "@version{#2023-4-9}
   @begin{short}
     No description available.

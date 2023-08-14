@@ -2,7 +2,7 @@
 ;;; gdk4.frame-clock.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -143,8 +143,8 @@
   A frame clock is idle until someone requests a frame with the
   @fun{gdk:frame-clock-request-phase} function. At some later point that makes
   sense for the synchronization being implemented, the clock will process a
-  frame and emit signals for each phase that has been requested. See the signals
-  of the @sym{gdk:frame-clock} class for documentation of the phases.
+  frame and emit signals for each phase that has been requested. See the
+  signals of the @sym{gdk:frame-clock} class for documentation of the phases.
   The @code{:update} value of the @symbol{gdk:frame-clock-phase} enumeration
   and the \"update\" signal are most interesting for application writers, and
   are used to update the animations, using the frame time given by the
@@ -475,23 +475,20 @@ lambda (clock)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_frame_clock_get_fps ()
-;;;
-;;; double
-;;; gdk_frame_clock_get_fps (GdkFrameClock *frame_clock);
-;;;
-;;; Calculates the current frames-per-second, based on the frame timings of
-;;; frame_clock .
-;;;
-;;; frame_clock :
-;;;     a GdkFrameClock
-;;;
-;;; Returns :
-;;;     the current fps, as a double
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_frame_clock_get_fps" frame-clock-fps) :double
+ #+liber-documentation
+ "@version{#2023-8-7}
+  @argument[clock]{a @class{gdk:frame-clock} object}
+  @return{A double float with the current fps}
+  @begin{short}
+    Calculates the current frames-per-second, based on the frame timings of
+    @arg{clock}.
+  @end{short}
+  @see-class{gdk:frame-clock}"
   (clock (g:object frame-clock)))
 
 (export 'frame-clock-fps)
 
-;;; --- End of file gdk.frame-clock.lisp ---------------------------------------
+;;; --- End of file gdk4.frame-clock.lisp --------------------------------------

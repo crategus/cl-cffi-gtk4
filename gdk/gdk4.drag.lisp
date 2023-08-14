@@ -2,28 +2,29 @@
 ;;; gdk4.drag.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
-;;; available from <http://www.crategus.com/books/cl-cffi-gtk/>.
+;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
 ;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
-;;; This program is free software: you can redistribute it and/or modify
-;;; it under the terms of the GNU Lesser General Public License for Lisp
-;;; as published by the Free Software Foundation, either version 3 of the
-;;; License, or (at your option) any later version and with a preamble to
-;;; the GNU Lesser General Public License that clarifies the terms for use
-;;; with Lisp programs and is referred as the LLGPL.
+;;; Permission is hereby granted, free of charge, to any person obtaining a
+;;; copy of this software and associated documentation files (the "Software"),
+;;; to deal in the Software without restriction, including without limitation
+;;; the rights to use, copy, modify, merge, publish, distribute, sublicense,
+;;; and/or sell copies of the Software, and to permit persons to whom the
+;;; Software is furnished to do so, subject to the following conditions:
 ;;;
-;;; This program is distributed in the hope that it will be useful,
-;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;;; GNU Lesser General Public License for more details.
+;;; The above copyright notice and this permission notice shall be included in
+;;; all copies or substantial portions of the Software.
 ;;;
-;;; You should have received a copy of the GNU Lesser General Public
-;;; License along with this program and the preamble to the Gnu Lesser
-;;; General Public License.  If not, see <http://www.gnu.org/licenses/>
-;;; and <http://opensource.franz.com/preamble.html>.
+;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+;;; THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+;;; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+;;; FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 ;;;
 ;;; Drag And Drop
@@ -99,7 +100,7 @@
       (liber:symbol-documentation 'drag-cancel-reason)
  "@version{#2023-8-4}
   @begin{short}
-    Used in the @class{gdk:drag} object to the reason of a cancelled DND 
+    Used in the @class{gdk:drag} object to the reason of a cancelled DND
     operation.
   @end{short}
   @begin{pre}
@@ -108,7 +109,7 @@
    :type-initializer \"gdk_drag_cancel_reason_get_type\")
   :no-target
   :user-cancelled
-  :error)  
+  :error)
   @end{pre}
   @begin[code]{table}
     @entry[:no-target]{There is no suitable drop target.}
@@ -206,16 +207,16 @@
 (setf (documentation 'drag 'type)
  "@version{#2023-8-4}
   @begin{short}
-    The @class{gdk:drag} object represents the source of an ongoing DND 
+    The @class{gdk:drag} object represents the source of an ongoing DND
     operation.
   @end{short}
-  A @class{gdk:drag} object is created when a drag is started, and stays alive 
-  for duration of the DND operation. After a drag has been started with the 
-  @fun{gdk:drag-begin} function, the caller gets informed about the status of 
+  A @class{gdk:drag} object is created when a drag is started, and stays alive
+  for duration of the DND operation. After a drag has been started with the
+  @fun{gdk:drag-begin} function, the caller gets informed about the status of
   the ongoing drag operation with signals on the @class{gdk:drag} object.
 
-  GTK provides a higher level abstraction based on top of these functions, and 
-  so they are not normally needed in GTK applications. See the \"Drag and Drop\" 
+  GTK provides a higher level abstraction based on top of these functions, and
+  so they are not normally needed in GTK applications. See the \"Drag and Drop\"
   section of the GTK documentation for more information.
   @begin[Signal Details]{dictionary}
     @subheading{The \"cancel\" signal}
@@ -224,19 +225,19 @@ lambda (drag reason)    :run-last
       @end{pre}
       The drag operation was cancelled.
       @begin[code]{table}
-        @entry[drag]{The @class{gdk:drag} object on which the signal is 
+        @entry[drag]{The @class{gdk:drag} object on which the signal is
           emitted.}
-        @entry[reason]{A @symbol{gdk:drag-cancel-reason} value with the reason 
+        @entry[reason]{A @symbol{gdk:drag-cancel-reason} value with the reason
         the drag was cancelled.}
       @end{table}
     @subheading{The \"dnd-finished\" signal}
       @begin{pre}
 lambda (drag)    :run-last
       @end{pre}
-      The drag operation was finished, the destination finished reading all 
+      The drag operation was finished, the destination finished reading all
       data. The drag object can now free all miscellaneous data.
       @begin[code]{table}
-        @entry[drag]{The @class{gdk:drag} object on which the signal is 
+        @entry[drag]{The @class{gdk:drag} object on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"drop-performed\" signal}
@@ -245,10 +246,10 @@ lambda (drag)    :run-last
       @end{pre}
       The drag operation was performed on an accepting client.
       @begin[code]{table}
-        @entry[drag]{The @class{gdk:drag} object on which the signal is 
+        @entry[drag]{The @class{gdk:drag} object on which the signal is
           emitted.}
       @end{table}
-  @end{dictionary}  
+  @end{dictionary}
   @see-slot{gdk:drag-actions}
   @see-slot{gdk:drag-content}
   @see-slot{gdk:drag-device}
@@ -266,7 +267,7 @@ lambda (drag)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "actions" 'drag) t)
- "The @code{actions} property of type @symbol{gdk:drag-action} (Read / Write) 
+ "The @code{actions} property of type @symbol{gdk:drag-action} (Read / Write)
   @br{}
   The possible actions of the drag. @br{}
   Default value: @code{:none}")
@@ -283,7 +284,7 @@ lambda (drag)    :run-last
     Accessor of the @slot[gdk:drag]{actions} slot of the @class{gdk:drag}
     class.
   @end{short}
-  The @fun{gdk:drag-actions} function determines the possible actions proposed 
+  The @fun{gdk:drag-actions} function determines the possible actions proposed
   by the drag source.
   @see-class{gdk:drag}
   @see-symbol{gdk:drag-action}")
@@ -292,7 +293,7 @@ lambda (drag)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "content" 'drag) t)
- "The @code{content} property of type @class{gdk:content-provider} 
+ "The @code{content} property of type @class{gdk:content-provider}
   (Read / Write / Construct Only) @br{}
   The content provider.")
 
@@ -309,8 +310,8 @@ lambda (drag)    :run-last
     Accessor of the @slot[gdk:drag]{content} slot of the @class{gdk:drag}
     class.
   @end{short}
-  The @fun{gdk:drag-content} function returns the content provider associated 
-  to the drag object.  
+  The @fun{gdk:drag-content} function returns the content provider associated
+  to the drag object.
   @see-class{gdk:drag}
   @see-class{gdk:content-provider}")
 
@@ -318,7 +319,7 @@ lambda (drag)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "device" 'drag) t)
- "The @code{device} property of type @class{gdk:device} 
+ "The @code{device} property of type @class{gdk:device}
   (Read / Write / Construct Only) @br{}
   The device that is performing the drag.")
 
@@ -334,8 +335,8 @@ lambda (drag)    :run-last
     Accessor of the @slot[gdk:drag]{device} slot of the @class{gdk:drag}
     class.
   @end{short}
-  The @fun{gdk:drag-device} function returns the device associated to the drag 
-  object.  
+  The @fun{gdk:drag-device} function returns the device associated to the drag
+  object.
   @see-class{gdk:drag}
   @see-class{gdk:device}")
 
@@ -359,7 +360,7 @@ lambda (drag)    :run-last
     class.
   @end{short}
   The @fun{gdk:drag-display} function returns the display that the drag object
-  was created for. 
+  was created for.
   @see-class{gdk:drag}
   @see-class{gdk:display}")
 
@@ -367,7 +368,7 @@ lambda (drag)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "formats" 'drag) t)
- "The @code{formats} property of type @class{gdk:content-formats} 
+ "The @code{formats} property of type @class{gdk:content-formats}
   (Read / Write / Construct Only) @br{}
   The possible content formats that the drag can provide its data in.")
 
@@ -383,7 +384,7 @@ lambda (drag)    :run-last
     Accessor of the @slot[gdk:drag]{formats} slot of the @class{gdk:drag}
     class.
   @end{short}
-  The @fun{gdk:drag-formats} function retrieves the formats supported by the 
+  The @fun{gdk:drag-formats} function retrieves the formats supported by the
   drag object.
   @see-class{gdk:drag}
   @see-class{gdk:content-formats}")
@@ -392,7 +393,7 @@ lambda (drag)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selected-action" 'drag) t)
- "The @code{selected-action} property of type @class{gdk:drag-action} 
+ "The @code{selected-action} property of type @class{gdk:drag-action}
   (Read / Write) @br{}
   The currently selected action of the drag. @br{}
   Default value: @code{:none}")
@@ -406,11 +407,11 @@ lambda (drag)    :run-last
   @argument[object]{a @class{gdk:drag} object}
   @argument[action]{a @symbol{gdk:drag-action} value}
   @begin{short}
-    Accessor of the @slot[gdk:drag]{selected-action} slot of the 
+    Accessor of the @slot[gdk:drag]{selected-action} slot of the
     @class{gdk:drag} class.
   @end{short}
-  The @fun{gdk:drag-selected-action} function determines the action chosen by 
-  the drag destination.  
+  The @fun{gdk:drag-selected-action} function determines the action chosen by
+  the drag destination.
   @see-class{gdk:drag}
   @see-symbol{gdk:drag-action}")
 
@@ -418,7 +419,7 @@ lambda (drag)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "surface" 'drag) t)
- "The @code{surface} property of type @class{gdk:surface} 
+ "The @code{surface} property of type @class{gdk:surface}
   (Read / Write / Construct Only) @br{}
   The surface where the drag originates.")
 
@@ -435,35 +436,30 @@ lambda (drag)    :run-last
     class.
   @end{short}
   The @fun{gdk:drag-surface} function returns the surface where the drag
-  originates. 
+  originates.
   @see-class{gdk:drag}
   @see-class{gdk:surface}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_drop_done ()
-;;;
-;;; void
-;;; gdk_drag_drop_done (GdkDrag *drag,
-;;;                     gboolean success);
-;;;
-;;; Inform GDK if the drop ended successfully. Passing FALSE for success may
-;;; trigger a drag cancellation animation.
-;;;
-;;; This function is called by the drag source, and should be the last call
-;;; before dropping the reference to the drag .
-;;;
-;;; The GdkDrag will only take the first gdk_drag_drop_done() call as effective,
-;;; if this function is called multiple times, all subsequent calls will be
-;;; ignored.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; success :
-;;;     whether the drag was ultimatively successful
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_drop_done" drag-drop-done) :void
+ #+liber-documentation
+ "@version{#2023-8-6}
+  @argument[drag]{a @class{gdk:drag} object}
+  @argument[success]{a boolean whether the drag was ultimatively successful}
+  @begin{short}
+    Inform GDK if the drop ended successfully.
+  @end{short}
+  Passing @em{false} for @arg{success} may trigger a drag cancellation
+  animation. This function is called by the drag source, and should be the last
+  call before dropping the reference to the drag object.
+
+  The @class{gdk:drag} object will only take the first
+  @sym{gdk:drag-drop-done} function call as effective, if this function is
+  called multiple times, all subsequent calls will be ignored.
+  @see-class{gdk:frag}"
   (drag (g:object drag))
   (success :boolean))
 
@@ -471,51 +467,42 @@ lambda (drag)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_begin ()
-;;;
-;;; GdkDrag *
-;;; gdk_drag_begin (GdkSurface *surface,
-;;;                 GdkDevice *device,
-;;;                 GdkContentProvider *content,
-;;;                 GdkDragAction actions,
-;;;                 double dx,
-;;;                 double dy);
-;;;
-;;; Starts a drag and creates a new drag context for it.
-;;;
-;;; This function is called by the drag source. After this call, you probably
-;;; want to set up the drag icon using the surface returned by
-;;; gdk_drag_get_drag_surface().
-;;;
-;;; This function returns a reference to the GdkDrag object, but GTK keeps its
-;;; own reference as well, as long as the DND operation is going on.
-;;;
-;;; Note: if actions include GDK_ACTION_MOVE, you need to listen for the “dnd-
-;;; finished” signal and delete the data at the source if
-;;; gdk_drag_get_selected_action() returns GDK_ACTION_MOVE.
-;;;
-;;; surface :
-;;;     the source surface for this drag
-;;;
-;;; device :
-;;;     the device that controls this drag
-;;;
-;;; content :
-;;;     the offered content.
-;;;
-;;; actions :
-;;;     the actions supported by this drag
-;;;
-;;; dx :
-;;;     the x offset to device 's position where the drag nominally started
-;;;
-;;; dy :
-;;;     the y offset to device 's position where the drag nominally started
-;;;
-;;; Returns :
-;;;     a newly created GdkDrag or NULL on error.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_begin" drag-begin) (g:object drag)
+ #+liber-documentation
+ "@version{#2023-8-6}
+  @argument[surface]{a @class{gdk:surface} object for this drag object}
+  @argument[device]{a @class{gdk:device} object that controls the drag object}
+  @argument[content]{a @class{gdk:content-provider} object with the offered
+    content}
+  @argument[actions]{a @symbol{gdk:drag-action} value with the actions
+    supported by this drag object}
+  @argument[dx]{a double float with the x offset to the position of the device
+    where the drag nominally started}
+  @argument[dy]{a double float with the y offset to the position of the device
+    where the drag nominally started}
+  @return{A newly created @class{gdk:drag} object of @code{nil} on error}
+  @begin{short}
+    Starts a drag and creates a new drag context for it.
+  @end{short}
+  This function is called by the drag source. After this call, you probably
+  want to set up the drag icon using the surface returned by the
+  @fun{gdk:drag-drag-surface} function.
+
+  This function returns a reference to the @class{gdk:drag} object, but GTK
+  keeps its own reference as well, as long as the DND operation is going on.
+
+  Note: If @arg{actions} include @code{:move}, you need to listen for the
+  \"dnd-finished\" signal and delete the data at the source if the
+  @fun{gdk:drag-selected-action} function returns @code{:move}.
+  @see-class{gdk:drag}
+  @see-class{gdk:surface}
+  @see-class{gdk:device}
+  @see-class{gdk:content-provider}
+  @see-symbol{gdk:drag-action}
+  @see-function{gdk:drag-drag-surface}
+  @see-function{gdk:drag-selected-action}"
   (surface (g:object surface))
   (device (g:object device))
   (content (g:object content-provider))
@@ -527,76 +514,68 @@ lambda (drag)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_get_drag_surface ()
-;;;
-;;; GdkSurface *
-;;; gdk_drag_get_drag_surface (GdkDrag *drag);
-;;;
-;;; Returns the surface on which the drag icon should be rendered during the
-;;; drag operation. Note that the surface may not be available until the drag
-;;; operation has begun. GDK will move the surface in accordance with the
-;;; ongoing drag operation. The surface is owned by drag and will be destroyed
-;;; when the drag operation is over.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; Returns :
-;;;     the drag surface, or NULL.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_drag_surface" drag-drag-surface) (g:object surface)
+ #+liber-documentation
+ "@version{#2023-8-6}
+  @argument[drag]{a @class{gdk:drag} object}
+  @return{A @class{gdk:surface} object or @code{nil}.}
+  @begin{short}
+    Returns the surface on which the drag icon should be rendered during the
+    drag operation.
+  @end{short}
+  Note that the surface may not be available until the drag operation has begun.
+  GDK will move the surface in accordance with the ongoing drag operation. The
+  surface is owned by @arg{drag} and will be destroyed when the drag operation
+  is over.
+  @see-class{gdk:drag}
+  @see-class{gdk:surface}"
   (drag (g:object drag)))
 
 (export 'drag-drag-surface)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_set_hotspot ()
-;;;
-;;; void
-;;; gdk_drag_set_hotspot (GdkDrag *drag,
-;;;                       int hot_x,
-;;;                       int hot_y);
-;;;
-;;; Sets the position of the drag surface that will be kept under the cursor
-;;; hotspot. Initially, the hotspot is at the top left corner of the drag
-;;; surface.
-;;;
-;;; drag :
-;;;     a GdkDrag
-;;;
-;;; hot_x :
-;;;     x coordinate of the drag surface hotspot
-;;;
-;;; hot_y :
-;;;     y coordinate of the drag surface hotspot
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_set_hotspot" drag-set-hotspot) :void
+ #+liber-documentation
+ "@version{#2023-8-6}
+  @argument[drag]{a @class{gdk:drag} object}
+  @argument[xhotspot]{a double float with the x coordinate of the drag surface
+    hotspot}
+  @argument[yhotspot]{a double float with the y coordinate of the drag surface
+    hotspot}
+  @begin{short}
+    Sets the position of the drag surface that will be kept under the cursor
+    hotspot.
+  @end{short}
+  Initially, the hotspot is at the top left corner of the drag surface.
+  @see-class{gdk:drag}"
   (drag (g:object drag))
-  (xhot :int)
-  (yhot :int))
+  (xhotspot :int)
+  (yhotspot :int))
 
-(export 'drag-set-hot-spot)
+(export 'drag-set-hotspot)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_drag_action_is_unique ()
-;;;
-;;; gboolean
-;;; gdk_drag_action_is_unique (GdkDragAction action);
-;;;
-;;; Checks if action represents a single action or if it includes multiple flags
-;;; that can be selected from.
-;;;
-;;; When action is 0 - ie no action was given, TRUE is returned.
-;;;
-;;; action :
-;;;     a GdkDragAction
-;;;
-;;; Returns :
-;;;     TRUE if exactly one action was given
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_action_is_unique" drag-action-is-unique) :boolean
+ #+liber-documentation
+ "@version{#2023-8-6}
+  @argument[action]{a @symbol{gdk:drag-action} value}
+  @return{@em{True} if exactly one action was given.}
+  @begin{short}
+    Checks if @arg{action} represents a single action or if it includes
+    multiple flags that can be selected from.
+  @end{short}
+  When @arg{action} is @code{:none} - i.e. no action was given, @em{true} is
+  returned.
+  @see-class{gdk:drag}
+  @see-symbol{gdk:drag-action}"
   (action drag-action))
 
 (export 'drag-action-is-unique)
