@@ -2,7 +2,7 @@
 ;;; gtk4.filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -75,7 +75,7 @@
 (setf (liber:alias-for-symbol 'filter-match)
       "GEnum"
       (liber:symbol-documentation 'filter-match)
- "@version{2023-7-24}
+ "@version{2023-8-16}
   @begin{short}
     Describes the known strictness of a filter.
   @end{short}
@@ -116,7 +116,7 @@
 (setf (liber:alias-for-symbol 'filter-change)
       "GEnum"
       (liber:symbol-documentation 'filter-change)
- "@version{2023-7-24}
+ "@version{2023-8-16}
   @begin{short}
     Describes changes in a filter in more detail and allows objects using the
     filter to optimize refiltering items.
@@ -156,9 +156,9 @@
 
 #+liber-documentation
 (setf (documentation 'filter 'type)
- "@version{2023-7-24}
+ "@version{2023-8-16}
   @begin{short}
-    A @sym{gtk:filter} object describes the filtering to be performed by a
+    A @class{gtk:filter} object describes the filtering to be performed by a
     @class{gtk:filter-list-model} object.
   @end{short}
   The model will use the filter to determine if it should include items or not
@@ -174,7 +174,7 @@
   operations. These filters often include properties that can be linked to
   various widgets to easily allow searches. However, in particular for large
   lists or complex search methods, it is also possible to subclass the
-  @sym{gtk:filter} class and provide one's own filter.
+  @class{gtk:filter} class and provide one's own filter.
   @begin[Signal Details]{dictionary}
     @subheading{The \"changed\" signal}
       @begin{pre}
@@ -187,8 +187,8 @@ lambda (filter change)    :run-last
       need to be changed, but only some. Refer to the @symbol{gtk:filter-change}
       documentation for details.
       @begin[code]{table}
-        @entry[filter]{a @sym{gtk:filter} object}
-        @entry[change]{a @symbol{gtk:filter-change} value}
+        @entry[filter]{A @class{gtk:filter} object.}
+        @entry[change]{A @symbol{gtk:filter-change} value.}
       @end{table}
   @end{dictionary}
   @see-class{gtk:filter-list-model}")
@@ -199,7 +199,7 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_match" filter-match) :boolean
  #+liber-documentation
- "@version{#2023-7-24}
+ "@version{#2023-8-16}
   @argument[filter]{a @class{gtk:filter} object}
   @argument[item]{a pointer to the item to check}
   @return{@em{True} if the filter matches the item and a filter model should
@@ -219,7 +219,7 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_get_strictness" filter-strictness) filter-match
  #+liber-documentation
- "@version{#2023-7-24}
+ "@version{#2023-8-16}
   @argument[filter]{a @class{gtk:filter} object}
   @return{A @symbol{gtk:filter-match} value with the strictness of
     @arg{filter}.}
@@ -230,8 +230,9 @@ lambda (filter change)    :run-last
   value may change after emission of the \“changed\” signal.
 
   This function is meant purely for optimization purposes, filters can choose
-  to omit implementing it, but the @class{gtk:filter-list-model} object uses it.
+  to omit implementing it, but the @class{gtk:filter-list-model} class uses it.
   @see-class{gtk:filter}
+  @see-class{gtk:filter-list-model}
   @see-symbol{gtk:filter-match}"
   (filter (g:object filter)))
 
@@ -243,7 +244,7 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_changed" filter-changed) :void
  #+liber-documentation
- "@version{#2023-7-24}
+ "@version{#2023-8-16}
   @argument[filter]{a @class{gtk:filter} object}
   @argument[change]{a @symbol{gtk:filter-change} value}
   @begin{short}
@@ -258,7 +259,8 @@ lambda (filter change)    :run-last
   This function is intended for implementors of @class{gtk:filter} subclasses
   and should not be called from other functions.
   @see-class{gtk:filter}
-  @see-symbol{gtk:filter-change}"
+  @see-symbol{gtk:filter-change}
+  @see-function{gtk:filter-match}"
   (filter (g:object filter))
   (change filter-change))
 

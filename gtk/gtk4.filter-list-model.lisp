@@ -2,7 +2,7 @@
 ;;; gtk4.filter-list-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,9 +35,8 @@
 ;;;
 ;;;     GtkFilterListModel
 ;;;
-;;; Functions
+;;; Accessors
 ;;;
-;;;     gtk_filter_list_model_new
 ;;;     gtk_filter_list_model_set_model
 ;;;     gtk_filter_list_model_get_model
 ;;;     gtk_filter_list_model_set_filter
@@ -46,11 +45,17 @@
 ;;;     gtk_filter_list_model_get_incremental
 ;;;     gtk_filter_list_model_get_pending
 ;;;
+;;; Functions
+;;;
+;;;     gtk_filter_list_model_new
+;;;
 ;;; Properties
 ;;;
 ;;;     filter
 ;;;     incremental
+;;;     item-type                                          Since 4.8
 ;;;     model
+;;;     n-items                                            Since 4.8
 ;;;     pending
 ;;;
 ;;; Hierarchy
@@ -72,7 +77,9 @@
 (gobject:define-g-object-class "GtkFilterListModel" filter-list-model
   (:superclass g:object
    :export t
-   :interfaces ("GListModel")
+   :interfaces ("GListModel"
+                #+gtk-4-12
+                "GtkSectionModel")
    :type-initializer "gtk_filter_list_model_get_type")
   ((filter
     filter-list-model-filter
@@ -82,12 +89,12 @@
     "incremental" "gboolean" t t)
    #+gtk-4-8
    (item-type
-    filter-list-model-item-type
+    %filter-list-model-item-type   ; only internal, not used
     "item-type" "GType" t nil)
    (model
     filter-list-model-model
     "model" "GListModel" t t)
-   #+gkt-4-8
+   #+gtk-4-8
    (n-items
     filter-list-model-n-items
     "n-items" "guint" t nil)
@@ -95,197 +102,254 @@
     filter-list-model-pending
     "pending" "guint" t nil)))
 
+#+liber-documentation
+(setf (documentation 'filter-list-model 'type)
+ "@version{#2023-8-15}
+  @begin{short}
+    The @class{gtk:filter-list-model} object is a list model that filters the
+    elements of the underlying model according to a @class{gtk:filter} object.
+  @end{short}
+  It hides some elements from the other model according to criteria given by a
+  @class{gtk:filter} object.
 
-;;;Description
-;;;GtkFilterListModel is a list model that filters a given other listmodel. It hides some elements from the other model according to criteria given by a GtkFilter.
-
-;;;The model can be set up to do incremental searching, so that filtering long lists doesn't block the UI. See gtk_filter_list_model_set_incremental() for details.
-
-;;;See Also
-;;;GListModel, GtkFilter
+  The model can be set up to do incremental searching, so that filtering long
+  lists does not block the UI. See the @fun{gtk:filter-list-model-incremental}
+  function for details.
+  @see-constructor{gtk:filter-list-model-new}
+  @see-slot{gtk:filter-list-model-filter}
+  @see-slot{gtk:filter-list-model-incremental}
+  @see-slot{gtk:filter-list-model-item-type}
+  @see-slot{gtk:filter-list-model-model}
+  @see-slot{gtk:filter-list-model-n-items}
+  @see-slot{gtk:filter-list-model-pending}
+  @see-class{g:list-model}
+  @see-class{gtk:filter}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;;The “filter” property
-;;;  “filter”                   GtkFilter *
-;;;The filter for this model
+;;; --- filter-list-model-filter -----------------------------------------------
 
-;;;Owner: GtkFilterListModel
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "filter" 'filter-list-model) t)
+ "The @code{filter} property of type @class{gtk:filter}(Read / Write) @br{}
+  The filter for the model.")
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (liber:alias-for-function 'filter-list-model-filter)
+      "Accessor"
+      (documentation 'filter-list-model-filter 'function)
+ "@version{#2023-8-15}
+  @syntax[]{(gtk:filter-list-model-filter object) => filter}
+  @syntax[]{(setf (gtk:filter-list-model-filter object) filter)}
+  @argument[object]{a @class{gtk:filter-list-model} object}
+  @argument[filter]{a @class{gtk:filter} object to use or @code{nil} to not
+    filter items}
+  @begin{short}
+    Accessor of the @slot[gtk:filter-list-model]{filter} slot of the
+    @class{gtk:filter-list-model} class.
+  @end{short}
+  The @fun{gtk:filter-list-model-filter} function gets the filter currently set.
+  The @sym{(setf gtk:filter-list-model-model)} function sets the filter used to
+  filter items.
+  @see-class{gtk:filter-list-model}
+  @see-class{gtk:filter}")
 
-;;;The “incremental” property
-;;;  “incremental”              gboolean
-;;;If the model should filter items incrementally
+;;; --- filter-list-model-incremental ------------------------------------------
 
-;;;Owner: GtkFilterListModel
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "incremental"
+                                               'filter-list-model) t)
+ "The @code{incremental} property of type @code{:boolean}(Read / Write) @br{}
+  Whether the model should filter items incrementally. @br{}
+  Default value: @em{false}")
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (liber:alias-for-function 'filter-list-model-incremental)
+      "Accessor"
+      (documentation 'filter-list-model-incremental 'function)
+ "@version{#2023-8-15}
+  @syntax[]{(gtk:filter-list-model-incremental object) => incremental}
+  @syntax[]{(setf (gtk:filter-list-model-incremental object) incremental)}
+  @argument[object]{a @class{gtk:filter-list-model} object}
+  @argument[incremental]{@em{true} if incremental filtering is enabled}
+  @begin{short}
+    Accessor of the @slot[gtk:filter-list-model]{incremental} slot of the
+    @class{gtk:filter-list-model} class.
+  @end{short}
+  The @fun{gtk:filter-list-model-incremental} function returns whether
+  incremental filtering was enabled. The
+  @sym{(setf gtk:filter-list-model-incremental)} function sets incremental
+  filtering.
 
-;;;Default value: FALSE
+  When incremental filtering is enabled, the @class{gtk:filter-list-model}
+  object will not run filters immediately, but will instead queue an idle
+  handler that incrementally filters the items and adds them to the list. This
+  of course means that items are not instantly added to the list, but only
+  appear incrementally.
 
-;;;The “model” property
-;;;  “model”                    GListModel *
-;;;The model being filtered
+  When your filter blocks the UI while filtering, you might consider turning
+  this on. Depending on your model and filters, this may become interesting
+  around 10,000 to 100,000 items. By default, incremental filtering is disabled.
 
-;;;Owner: GtkFilterListModel
+  See the @fun{gtk:filter-list-model-pending} function for progress information
+  about an ongoing incremental filtering operation.
+  @see-class{gtk:filter-list-model}
+  @see-function{gtk:filter-list-model-pending}")
 
-;;;Flags: Read / Write
+;;; --- filter-list-model-item-type ------------------------------------------
 
-;;;The “pending” property
-;;;  “pending”                  guint
-;;;Number of items not yet filtered
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "item-type"
+                                               'filter-list-model) t)
+ "The @code{item-type} property of type @class{g:type-t}(Read) @br{}
+  The type of items. See the @fun{g:list-model-item-type} function. Since 4.8")
 
-;;;Owner: GtkFilterListModel
+#+gtk-4-8
+(declaim (inline filter-list-model-item-type))
 
-;;;Flags: Read
+#+gtk-4-8
+(defun filter-list-model-item-type (object)
+  (g:list-model-item-type object))
 
-;;;Default value: 0
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'filter-list-model-item-type)
+      "Accessor"
+      (documentation 'filter-list-model-item-type 'function)
+ "@version{#2023-8-15}
+  @syntax[]{(gtk:filter-list-model-item-type object) => gtype}
+  @argument[object]{a @class{gtk:filter-list-model} object}
+  @argument[gtype]{a @class{g:type-t} type}
+  @begin{short}
+    Accessor of the @slot[gtk:filter-list-model]{item-type} slot of the
+    @class{gtk:filter-list-model} class.
+  @end{short}
+  The type of items contained in the list model. Items must be subclasses of
+  the @class{g:object} class.
+  @begin[Note]{dictionary}
+    This function is equivalent to the @fun{g:list-model-item-type} function.
+  @end{dictionary}
+  @see-class{g:list-store}
+  @see-class{g:type-t}
+  @see-class{g:object}
+  @see-function{g:list-model-item-type}")
 
+;;; --- filter-list-model-model ------------------------------------------------
 
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "model" 'filter-list-model) t)
+ "The @code{model} property of type @class{g:list-model}(Read / Write) @br{}
+  The model being filtered.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'filter-list-model-model)
+      "Accessor"
+      (documentation 'filter-list-model-model 'function)
+ "@version{#2023-8-15}
+  @syntax[]{(gtk:filter-list-model-model object) => model}
+  @syntax[]{(setf (gtk:filter-list-model-model object) model)}
+  @argument[object]{a @class{gtk:filter-list-model} object}
+  @argument[model]{a @class{g:list-model} object that gets filtered}
+  @begin{short}
+    Accessor of the @slot[gtk:filter-list-model]{model} slot of the
+    @class{gtk:filter-list-model} class.
+  @end{short}
+  The @fun{gtk:filter-list-model-model} function gets the model currently
+  filtered or @code{nil} if none. The @sym{(setf gtk:filter-list-model-model)}
+  function sets the model to be filtered.
 
-;;;Functions
+  Note that GTK makes no effort to ensure that @arg{model} conforms to the item
+  type of @arg{object}. It assumes that the caller knows what they are doing and
+  have set up an appropriate filter to ensure that item types match.
+  @see-class{gtk:filter-list-model}
+  @see-class{g:list-model}")
 
-;;;gtk_filter_list_model_new ()
-;;;GtkFilterListModel *
-;;;gtk_filter_list_model_new (GListModel *model,
-;;;                           GtkFilter *filter);
-;;;Creates a new GtkFilterListModel that will filter model using the given filter .
+;;; --- filter-list-model-n-items ----------------------------------------------
 
-;;;Parameters
-;;;model
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "n-items" 'filter-list-model) t)
+ "The @code{n-items} property of type @code{:uint}(Read / Write) @br{}
+  The number of items. See the @fun{g:list-model-n-items} function. Since 4.8
+  @br{}
+  Default value: 0")
 
-;;;the model to sort, or NULL.
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'filter-list-model-n-items)
+      "Accessor"
+      (documentation 'filter-list-model-n-items 'function)
+ "@version{#2023-8-15}
+  @syntax[]{(gtk:filter-list-model-n-items object) => n-items}
+  @argument[object]{a @class{gtk:filter-list-model} object}
+  @argument[n-items]{an unsigned integer with the number of items contained in
+    the model}
+  @begin{short}
+    Accessor of the @slot[gtk:filter-list-model]{n-items} slot of the
+    @class{gtk:filter-list-model} class.
+  @end{short}
+  @see-class{g:filter-list-model}
+  @see-function{g:list-model-n-items}")
 
-;;;[allow-none][transfer full]
-;;;filter
+;;; --- filter-list-model-pending ----------------------------------------------
 
-;;;filter or NULL to not filter items.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "pending" 'filter-list-model) t)
+ "The @code{pending} property of type @code{:uint}(Read) @br{}
+  Number of items not yet filtered. @br{}
+  Default value: 0")
 
-;;;[allow-none][transfer full]
-;;;Returns
-;;;a new GtkFilterListModel
+#+liber-documentation
+(setf (liber:alias-for-function 'filter-list-model-pending)
+      "Accessor"
+      (documentation 'filter-list-model-pending 'function)
+ "@version{#2023-8-15}
+  @syntax[]{(gtk:filter-list-model-pending object) => pending}
+  @argument[object]{a @class{gtk:filter-list-model} object}
+  @argument[pending]{An unsigned integer with the number of items not yet
+    filtered.}
+  @begin{short}
+    Accessor of the @slot[gtk:filter-list-model]{pending} slot of the
+    @class{gtk:filter-list-model} class.
+  @end{short}
+  The @fun{gtk:filter-list-model-pending} function returns the number of items
+  that have not been filtered yet.
 
-;;;gtk_filter_list_model_set_model ()
-;;;void
-;;;gtk_filter_list_model_set_model (GtkFilterListModel *self,
-;;;                                 GListModel *model);
-;;;Sets the model to be filtered.
+  You can use this value to check if @arg{object} is busy filtering by comparing
+  the return value to 0 or you can compute the percentage of the filter
+  remaining by dividing the return value by the total number of items in the
+  underlying model:
+  @begin{pre}
+(let ((percentage (/ (gtk:filter-list-model-pending object)
+                     (gtk:filter-list-model-n-items object))))
+  ... )
+  @end{pre}
+  If no filter operation is ongoing - in particular when the
+  @slot[gtk:filter-list-model]{incremental} property is @em{false} - this
+  function returns 0.
+  @see-class{gtk:filter-list-model}
+  @see-function{gtk:filter-list-model-incremental}")
 
-;;;Note that GTK makes no effort to ensure that model conforms to the item type of self . It assumes that the caller knows what they are doing and have set up an appropriate filter to ensure that item types match.
+;;; ----------------------------------------------------------------------------
+;;; gtk_filter_list_model_new ()
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;self
+(declaim (inline filter-list-model-new))
 
-;;;a GtkFilterListModel
+(defun filter-list-model-new (model filter)
+ "@version{#2023-8-15}
+  @argument[model]{a @class{g:list-model} object to sort, or @code{nil}}
+  @argument[filter]{a @class{gtk:filter} object or @code{nil} to not filter
+    items}
+  @begin{short}
+    Creates a new @class{gtk:filter-list-model} object that will filter
+    @arg{model} using the given @arg{filter}.
+  @end{short}
+  @see-class{gtk:filter-list-model}
+  @see-class{gtk:filter}"
+  (make-instance 'filter-list-model
+                 :model model
+                 :filter filter))
 
-;;;model
-
-;;;The model to be filtered.
-
-;;;[allow-none]
-;;;gtk_filter_list_model_get_model ()
-;;;GListModel *
-;;;gtk_filter_list_model_get_model (GtkFilterListModel *self);
-;;;Gets the model currently filtered or NULL if none.
-
-;;;Parameters
-;;;self
-
-;;;a GtkFilterListModel
-
-;;;Returns
-;;;The model that gets filtered.
-
-;;;[nullable][transfer none]
-
-;;;gtk_filter_list_model_set_filter ()
-;;;void
-;;;gtk_filter_list_model_set_filter (GtkFilterListModel *self,
-;;;                                  GtkFilter *filter);
-;;;Sets the filter used to filter items.
-
-;;;Parameters
-;;;self
-
-;;;a GtkFilterListModel
-
-;;;filter
-
-;;;filter to use or NULL to not filter items.
-
-;;;[allow-none][transfer none]
-;;;gtk_filter_list_model_get_filter ()
-;;;GtkFilter *
-;;;gtk_filter_list_model_get_filter (GtkFilterListModel *self);
-;;;Gets the GtkFilter currently set on self .
-
-;;;Parameters
-;;;self
-
-;;;a GtkFilterListModel
-
-;;;Returns
-;;;The filter currently in use or NULL if the list isn't filtered.
-
-;;;[nullable][transfer none]
-
-;;;gtk_filter_list_model_set_incremental ()
-;;;void
-;;;gtk_filter_list_model_set_incremental (GtkFilterListModel *self,
-;;;                                       gboolean incremental);
-;;;When incremental filtering is enabled, the GtkFilterListModel will not run filters immediately, but will instead queue an idle handler that incrementally filters the items and adds them to the list. This of course means that items are not instantly added to the list, but only appear incrementally.
-
-;;;When your filter blocks the UI while filtering, you might consider turning this on. Depending on your model and filters, this may become interesting around 10,000 to 100,000 items.
-
-;;;By default, incremental filtering is disabled.
-
-;;;See gtk_filter_list_model_get_pending() for progress information about an ongoing incremental filtering operation.
-
-;;;Parameters
-;;;self
-
-;;;a GtkFilterListModel
-
-;;;incremental
-
-;;;TRUE to enable incremental filtering
-
-;;;gtk_filter_list_model_get_incremental ()
-;;;gboolean
-;;;gtk_filter_list_model_get_incremental (GtkFilterListModel *self);
-;;;Returns whether incremental filtering was enabled via gtk_filter_list_model_set_incremental().
-
-;;;Parameters
-;;;self
-
-;;;a GtkFilterListModel
-
-;;;Returns
-;;;TRUE if incremental filtering is enabled
-
-;;;gtk_filter_list_model_get_pending ()
-;;;guint
-;;;gtk_filter_list_model_get_pending (GtkFilterListModel *self);
-;;;Returns the number of items that have not been filtered yet.
-
-;;;You can use this value to check if self is busy filtering by comparing the return value to 0 or you can compute the percentage of the filter remaining by dividing the return value by the total number of items in the underlying model:
-
-;;;pending = gtk_filter_list_model_get_pending (self);
-;;;model = gtk_filter_list_model_get_model (self);
-;;;percentage = pending / (double) g_list_model_get_n_items (model);
-;;;If no filter operation is ongoing - in particular when “incremental” is FALSE - this function returns 0.
-
-;;;Parameters
-;;;self
-
-;;;a GtkFilterListModel
-
-;;;Returns
-;;;The number of items not yet filtered
-
+(export 'filter-list-model-new)
 
 ;;; --- End of file gtk4.filter-list-model -------------------------------------

@@ -73,107 +73,94 @@
     bool-filter-invert
     "invert" "gboolean" t t)))
 
+#+liber-documentation
+(setf (documentation 'bool-filter 'type)
+ "@version{#2023-8-16}
+  @begin{short}
+    The @class{gtk:bool-filter} object is a simple filter that takes a boolean
+    @class{gtk:expression} instance to determine whether to include items.
+  @end{short}
+  @see-constructor{gtk:bool-filter-new}
+  @see-slot{gtk:bool-filter-expression}
+  @see-slot{gtk:bool-filter-invert}
+  @see-class{gtk:filter}")
 
-;;;Property Details
-;;;The “expression” property
-;;;  “expression”               GtkExpression *
-;;;The boolean expression to evaluate on item
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;[type GtkExpression]
+;;; --- bool-filter-expression -------------------------------------------------
 
-;;;Owner: GtkBoolFilter
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "expression" 'bool-filter) t)
+ "The @code{expression} property of type @class{gtk:expression} (Read / Write)
+  @br{}
+  The boolean expression to evaluate on item.")
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (liber:alias-for-function 'bool-filter-expression)
+      "Accessor"
+      (documentation 'bool-filter-expression 'function)
+ "@version{#2023-8-16}
+  @syntax[]{(gtk:bool-filter-expression object) => expression}
+  @syntax[]{(setf (gtk:bool-filter-expression object) expression)}
+  @argument[object]{a @class{gtk:bool-filter} object}
+  @argument[expression]{a @class{gtk:expression} instance}
+  @begin{short}
+    Accessor of the @slot[bool-filter]{expression} slot of the
+    @class{gtk:bool-filter} class.
+  @end{short}
+  The @fun{gtk:bool-filter-expression} function gets the expression that the
+  filter uses to evaluate if an item should be filtered. The
+  @sym{(setf gtk:bool-filter-expression)} function sets the expression.The
+  expression must have a value type of @code{G_TYPE_BOOLEAN}.
+  @see-class{gtk:bool-filter}
+  @see-class{gtk:expression}")
 
-;;;The “invert” property
-;;;  “invert”                   gboolean
-;;;If the expression result should be inverted
+;;; --- bool-filter-invert -----------------------------------------------------
 
-;;;Owner: GtkBoolFilter
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "invert" 'bool-filter) t)
+ "The @code{invert} property of type @code{:boolean} (Read / Write) @br{}
+  If the expression result should be inverted. @br{}
+  Default value : @em{false}")
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (liber:alias-for-function 'bool-filter-invert)
+      "Accessor"
+      (documentation 'bool-filter-invert 'function)
+ "@version{#2023-8-16}
+  @syntax[]{(gtk:bool-filter-invert object) => invert}
+  @syntax[]{(setf (gtk:bool-filter-invert object) invert)}
+  @argument[object]{a @class{gtk:bool-filter} object}
+  @argument[expression]{@em{true} to invert}
+  @begin{short}
+    Accessor of the @slot[bool-filter]{invert} slot of the
+    @class{gtk:bool-filter} class.
+  @end{short}
+  The @fun{gtk:bool-filter-invert} function returns whether the filter inverts
+  the expression. The @sym{(setf gtk:bool-filter-expression)} function sets
+  whether the filter should invert the expression.
+  @see-class{gtk:bool-filter}")
 
-;;;Default value: FALSE
+;;; ----------------------------------------------------------------------------
+;;; gtk_bool_filter_new ()
+;;; ----------------------------------------------------------------------------
 
+(declaim (inline bool-filter-new))
 
+(defun bool-filter-new (expression)
+ "@version{#2023-8-16}
+  @argument[expression]{a @class{gtk:expression} instance or @code{nil} for
+    none}
+  @return{A new @class{gtk:bool-filter} object.}
+  @begin{short}
+    Creates a new bool filter.
+  @end{short}
+  @see-class{gtk:bool-filter}"
+  (make-instance 'bool-filter
+                 :expression expression))
 
-;;;Includes
-;;;#include <gtk/gtk.h>
-;;;Description
-;;;GtkBoolFilter is a simple filter that takes a boolean GtkExpression to determine whether to include items.
-
-;;;Functions
-;;;gtk_bool_filter_new ()
-;;;GtkBoolFilter *
-;;;gtk_bool_filter_new (GtkExpression *expression);
-;;;Creates a new bool filter.
-
-;;;Parameters
-;;;expression
-
-;;;The expression to evaluate or NULL for none.
-
-;;;[transfer full][nullable]
-;;;Returns
-;;;a new GtkBoolFilter
-
-;;;gtk_bool_filter_get_expression ()
-;;;GtkExpression *
-;;;gtk_bool_filter_get_expression (GtkBoolFilter *self);
-;;;Gets the expression that the filter uses to evaluate if an item should be filtered.
-
-;;;Parameters
-;;;self
-
-;;;a GtkBoolFilter
-
-;;;Returns
-;;;a GtkExpression.
-
-;;;[transfer none]
-
-;;;gtk_bool_filter_set_expression ()
-;;;void
-;;;gtk_bool_filter_set_expression (GtkBoolFilter *self,
-;;;                                GtkExpression *expression);
-;;;Sets the expression that the filter uses to check if items should be filtered. The expression must have a value type of G_TYPE_BOOLEAN.
-
-;;;Parameters
-;;;self
-
-;;;a GtkBoolFilter
-
-;;;expression
-
-;;;a GtkExpression
-
-;;;gtk_bool_filter_get_invert ()
-;;;gboolean
-;;;gtk_bool_filter_get_invert (GtkBoolFilter *self);
-;;;Returns whether the filter inverts the expression.
-
-;;;Parameters
-;;;self
-
-;;;a GtkBoolFilter
-
-;;;Returns
-;;;TRUE if the filter inverts
-
-;;;gtk_bool_filter_set_invert ()
-;;;void
-;;;gtk_bool_filter_set_invert (GtkBoolFilter *self,
-;;;                            gboolean invert);
-;;;Sets whether the filter should invert the expression.
-
-;;;Parameters
-;;;self
-
-;;;a GtkBoolFilter
-
-;;;invert
-
-;;;TRUE to invert
-
+(export 'bool-filter-new)
 
 ;;; --- End of file gtk4.bool-filter.lisp --------------------------------------

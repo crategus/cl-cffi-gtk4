@@ -2,7 +2,7 @@
 ;;; gtk4.custom-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -61,90 +61,94 @@
    :type-initializer "gtk_custom_filter_get_type")
   nil)
 
-;;;Description
-;;;GtkCustomFilter is a GtkFilter that uses a callback to determine whether to include an item or not.
+#+liber-documentation
+(setf (documentation 'custom-filter 'type)
+ "@version{2023-8-16}
+  @begin{short}
+    The @class{gtk:custom-filter} object is a @class{gtk:filter} object that
+    uses a callback to determine whether to include an item or not.
+  @end{short}
+  @see-constructor{gtk:custom-filter-new}
+  @see-class{gtk:filter}")
 
-;;;Functions
-;;;GtkCustomFilterFunc ()
-;;;gboolean
-;;;(*GtkCustomFilterFunc) (gpointer item,
-;;;                        gpointer user_data);
-;;;User function that is called to determine if the item should be matched. If the filter matches the item, this function must return TRUE. If the item should be filtered out, FALSE must be returned.
+;;; ----------------------------------------------------------------------------
+;;; GtkCustomFilterFunc ()
+;;;
+;;; gboolean
+;;; (*GtkCustomFilterFunc) (gpointer item,
+;;;                         gpointer user_data);
+;;;
+;;; User function that is called to determine if the item should be matched. If
+;;; the filter matches the item, this function must return TRUE. If the item
+;;; should be filtered out, FALSE must be returned.
+;;;
+;;; item :
+;;;     The item to be matched.
+;;;
+;;; user_data :
+;;;     user data
+;;;
+;;; Returns :
+;;;     TRUE to keep the item around
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;item
+;;; ----------------------------------------------------------------------------
+;;; gtk_custom_filter_new ()
+;;;
+;;; GtkCustomFilter *
+;;; gtk_custom_filter_new (GtkCustomFilterFunc match_func,
+;;;                        gpointer user_data,
+;;;                        GDestroyNotify user_destroy);
+;;;
+;;; Creates a new filter using the given match_func to filter items.
+;;;
+;;; If match_func is NULL, the filter matches all items.
+;;;
+;;; If the filter func changes its filtering behavior, gtk_filter_changed()
+;;; needs to be called.
+;;;
+;;; match_func :
+;;;     function to filter items.
+;;;
+;;; user_data :
+;;;     user data to pass to match_func .
+;;;
+;;; user_destroy :
+;;;     destroy notify for user_data
+;;;
+;;; Returns :
+;;;     a new GtkCustomFilter
+;;; ----------------------------------------------------------------------------
 
-;;;The item to be matched.
-
-;;;[type GObject]
-;;;user_data
-
-;;;user data
-
-;;;Returns
-;;;TRUE to keep the item around
-
-;;;gtk_custom_filter_new ()
-;;;GtkCustomFilter *
-;;;gtk_custom_filter_new (GtkCustomFilterFunc match_func,
-;;;                       gpointer user_data,
-;;;                       GDestroyNotify user_destroy);
-;;;Creates a new filter using the given match_func to filter items.
-
-;;;If match_func is NULL, the filter matches all items.
-
-;;;If the filter func changes its filtering behavior, gtk_filter_changed() needs to be called.
-
-;;;Parameters
-;;;match_func
-
-;;;function to filter items.
-
-;;;[nullable]
-;;;user_data
-
-;;;user data to pass to match_func .
-
-;;;[nullable]
-;;;user_destroy
-
-;;;destroy notify for user_data
-
-;;;Returns
-;;;a new GtkCustomFilter
-
-;;;gtk_custom_filter_set_filter_func ()
-;;;void
-;;;gtk_custom_filter_set_filter_func (GtkCustomFilter *self,
-;;;                                   GtkCustomFilterFunc match_func,
-;;;                                   gpointer user_data,
-;;;                                   GDestroyNotify user_destroy);
-;;;Sets (or unsets) the function used for filtering items.
-
-;;;If match_func is NULL, the filter matches all items.
-
-;;;If the filter func changes its filtering behavior, gtk_filter_changed() needs to be called.
-
-;;;If a previous function was set, its user_destroy will be called now.
-
-;;;Parameters
-;;;self
-
-;;;a GtkCustomFilter
-
-;;;match_func
-
-;;;function to filter items.
-
-;;;[nullable]
-;;;user_data
-
-;;;user data to pass to match_func .
-
-;;;[nullable]
-;;;user_destroy
-
-;;;destroy notify for user_data
-
+;;; ----------------------------------------------------------------------------
+;;; gtk_custom_filter_set_filter_func ()
+;;;
+;;; void
+;;; gtk_custom_filter_set_filter_func (GtkCustomFilter *self,
+;;;                                    GtkCustomFilterFunc match_func,
+;;;                                    gpointer user_data,
+;;;                                    GDestroyNotify user_destroy);
+;;;
+;;; Sets (or unsets) the function used for filtering items.
+;;;
+;;; If match_func is NULL, the filter matches all items.
+;;;
+;;; If the filter func changes its filtering behavior, gtk_filter_changed()
+;;; needs to be called.
+;;;
+;;; If a previous function was set, its user_destroy will be called now.
+;;;
+;;; self :
+;;;     a GtkCustomFilter
+;;;
+;;; match_func :
+;;;     function to filter items.
+;;;
+;;; user_data :
+;;;     user data to pass to match_func .
+;;;
+;;; user_destroy :
+;;;     destroy notify for user_data
+;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.custom-filter.lisp ------------------------------------

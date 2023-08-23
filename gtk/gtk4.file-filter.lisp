@@ -2,7 +2,7 @@
 ;;; gtk4.file-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -100,8 +100,8 @@
 (setf (documentation 'file-filter 'type)
  "@version{#2023-5-5}
   @begin{short}
-    A @sym{gtk:file-filter} object can be used to restrict the files being shown
-    in a @class{gtk:file-chooser} widget.
+    A @class{gtk:file-filter} object can be used to restrict the files being
+    shown in a @class{gtk:file-chooser} widget.
   @end{short}
   Files can be filtered based on their name with the
   @fun{gtk:file-filter-add-pattern} function or on their mime type with the
@@ -110,15 +110,16 @@
   Filtering by mime types handles aliasing and subclassing of mime types. E.g.
   a filter for @file{text/plain} also matches a file with mime type
   @file{application/rtf}, since @file{application/rtf} is a subclass of
-  @file{text/plain}. Note that the @sym{gtk:file-filter} object allows wildcards
-  for the subtype of a mime type, so you can e.g. filter for @file{image/*}.
+  @file{text/plain}. Note that the @class{gtk:file-filter} object allows
+  wildcards for the subtype of a mime type, so you can e.g. filter for
+  @file{image/*}.
 
   Normally, file filters are used by adding them to a @class{gtk:file-chooser}
   widget, see the @fun{gtk:file-chooser-add-filter} function, but it is also
   possible to manually use a file filter on any @class{gtk:filter-list-model}
   object containing @class{g:file-info} objects.
   @begin[GtkFileFilter as GtkBuildable]{dictionary}
-    The @sym{gtk:file-filter} implementation of the @class{gtk:buildable}
+    The @class{gtk:file-filter} implementation of the @class{gtk:buildable}
     interface supports adding rules using the @code{<mime-types>} and
     @code{<patterns>} elements and listing the rules within. Specifying a
     @code{<mime-type>} or @code{<pattern>} has the same effect as calling
@@ -126,7 +127,7 @@
     functions.
   @end{dictionary}
   @begin[Example]{dictionary}
-    An example of a UI definition fragment specifying @sym{gtk:file-filter}
+    An example of a UI definition fragment specifying @class{gtk:file-filter}
     rules:
     @begin{pre}
 <object class=\"GtkFileFilter\">
@@ -177,7 +178,7 @@
 (setf (liber:alias-for-function 'file-filter-name)
       "Accessor"
       (documentation 'file-filter-name 'function)
- "@version{#2023-5-5}
+ "@version{2023-8-22}
   @syntax[]{(gtk:file-filter-name object) => name}
   @syntax[]{(setf (gtk:file-filter-name object) name)}
   @argument[object]{a @class{gtk:file-filter} object}
@@ -187,10 +188,10 @@
     Accessor of the @slot[gtk:file-filter]{name} slot of the
     @class{gtk:file-filter} class.
   @end{short}
-  The @sym{gtk:file-filter-name} function gets the human-readable name for the
+  The @fun{gtk:file-filter-name} function gets the human-readable name for the
   filter. The @sym{(setf gtk:file-filter-name)} function sets a human-readable
-  name of the filter. This is the string that will be displayed in the file
-  chooser if there is a selectable list of filters.
+  name. This is the string that will be displayed in the file chooser if there
+  is a selectable list of filters.
   @see-class{gtk:file-filter}")
 
 ;;; --- file-filter-patterns ---------------------------------------------------
@@ -221,22 +222,23 @@
 
 (defun file-filter-new ()
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2023-8-22}
   @return{A new @class{gtk:file-filter} object.}
   @begin{short}
-    Creates a new @class{gtk:file-filter} instance with no rules added to it.
+    Creates a new file filter with no rules added to it.
   @end{short}
-  Such a filter does not accept any files, so is not particularly useful until
-  you add rules with the @fun{gtk:file-filter-add-mime-type}, the
+  Such a file filter does not accept any files, so is not particularly useful
+  until you add rules with the @fun{gtk:file-filter-add-mime-type}, the
   @fun{gtk:file-filter-add-pattern}, or @fun{gtk:file-filter-add-pixbuf-formats}
   functions.
-
-  To create a filter that accepts any file, use:
-  @begin{pre}
+  @begin[Example]{dictionary}
+    To create a file filter that accepts any file, use:
+    @begin{pre}
 (let ((filter (gtk:file-filter-new)))
   (gtk:file-filter-add-pattern filter \"*\")
   ... )
-  @end{pre}
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:file-filter}
   @see-function{gtk:file-filter-add-mime-type}
   @see-function{gtk:file-filter-add-pattern}
@@ -288,10 +290,14 @@
 
 (cffi:defcfun ("gtk_file_filter_add_pattern" file-filter-add-pattern) :void
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2023-8-22}
   @argument[filter]{a @class{gtk:file-filter} object}
   @argument[pattern]{a string with a shell style glob}
-  @short{Adds a rule allowing a shell style glob to a filter.}
+  @begin{short}
+    Adds a rule allowing a shell style glob to a filter.
+  @end{short}
+  Note that it depends on the platform whether pattern matching ignores case or
+  not. On Windows, it does, on other platforms, it does not.
   @see-class{gtk:file-filter}"
   (filter (g:object file-filter))
   (pattern :string))
@@ -305,7 +311,7 @@
 (cffi:defcfun ("gtk_file_filter_add_pixbuf_formats"
                file-filter-add-pixbuf-formats) :void
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2023-8-22}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
     Adds a rule allowing image files in the formats supported by the
