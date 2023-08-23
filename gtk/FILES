@@ -11,13 +11,13 @@ GListModel support
 
   gtk4.bitset.lisp                     GtkBitset                       GTK 4.12+
   gtk4.expression.lisp                 GtkExpression, ...              GTK 4.12+
-  gtk4.filter-list-model.lisp          GtkFilterListModel              GTK 4.0 +
-  gtk4.filter.lisp                     GtkFilter                       GTK 4.10*
-  gtk4.custom-filter.lisp              GtkCustomFilter                 GTK 4.0 +
-  gtk4.multi-filter.lisp               GtkMultiFilter                  GTK 4.0 +
-  gtk4.bool-filter.lisp                GtkBoolFilter                   GTK 4.0 +
-  gtk4.string-filter.lisp              GtkStringFilter                 GTK 4.0 +
-  gtk4.file-filter.lisp                GtkFileFilter                   GTK 4.10*
+  gtk4.filter-list-model.lisp          GtkFilterListModel              GTK 4.12
+  gtk4.filter.lisp                     GtkFilter                       GTK 4.12
+  gtk4.custom-filter.lisp              GtkCustomFilter                 GTK 4.12+
+  gtk4.multi-filter.lisp               GtkMultiFilter                  GTK 4.12
+  gtk4.bool-filter.lisp                GtkBoolFilter                   GTK 4.12+
+  gtk4.string-filter.lisp              GtkStringFilter                 GTK 4.12
+  gtk4.file-filter.lisp                GtkFileFilter                   GTK 4.12
   gtk4.flatten-list-model.lisp         GtkFlattenListModel             GTK 4.0 +
   gtk4.map-list-model.lisp             GtkMapListModel                 GTK 4.0 +
   gtk4.slice-list-model.lisp           GtkSliceListModel               GTK 4.0 +
@@ -68,13 +68,13 @@ Interface builder
 
 Windows
 
-  gtk4.root.lisp                        GtkRoot                        GTK 4.6 +
-  gtk4.native.lisp                      GtkNative                      GTK 4.6 +
-  gtk4.window.lisp                      GtkWindow                      GTK 4.10*
-  gtk4.dialog.lisp                      GtkDialog                      GTK 4.6 +
+  gtk4.root.lisp                        GtkRoot                        GTK 4.12
+  gtk4.native.lisp                      GtkNative                      GTK 4.12
+  gtk4.window.lisp                      GtkWindow                      GTK 4.12
+  gtk4.dialog.lisp                      GtkDialog                      GTK 4.12
   gtk4.message-dialog.lisp              GtkMessageDialog               GTK 4.6 +
   gtk4.about-dialog.lisp                GtkAboutDialog                 GTK 4.6 +
-  gtk4.alert-dialog.lisp                GtkAlertDialog                 GTK 4.12+  
+  gtk4.alert-dialog.lisp                GtkAlertDialog                 GTK 4.12+
   gtk4.assistant.lisp                   GtkAssistant                   GTK 4.6 +
   gtk4.window-group.lisp                GtkWindowGroup                 GTK 4.6 +
   gtk4.native-dialog.lisp               GtkNativeDialog                GTK 4.10*
@@ -215,26 +215,27 @@ Combo Box, Popover
 
 Selector Widgets and Dialogs
 
-  gtk.color-chooser.lisp               GtkColorChooser                 GTK 4.6+
-  gtk.color-button.lisp                GtkColorButton                  GTK 4.6+
-  gtk.color-chooser-widget.lisp        GtkColorChooserWidget           GTK 4.6+
-  gtk.color-chooser-dialog.lisp        GtkColorChooserDialog           GTK 4.6+
+  gtk.color-chooser.lisp               GtkColorChooser                GTK 4.6  +
+  gtk.color-button.lisp                GtkColorButton                 GTK 4.6  +
+  gtk.color-chooser-widget.lisp        GtkColorChooserWidget          GTK 4.6  +
+  gtk.color-chooser-dialog.lisp        GtkColorChooserDialog          GTK 4.6  +
 
-  gtk.color-dialog.lisp                GtkColorDialog                  GTK 4.10*
-  gtk.color-dialog-button.lisp         GtkColorDialogButton            GTK 4.10*
+  gtk.color-dialog.lisp                GtkColorDialog                 GTK 4.10 *
+  gtk.color-dialog-button.lisp         GtkColorDialogButton           GTK 4.10 *
 
-  gtk.file-chooser.lisp                GtkFileChooser                  GTK 4.10*
-  gtk.file-chooser-native.lisp         GtkFileChooserNative            GTK 4.10*
-  gtk.file-chooser-dialog.lisp         GtkFileChooserDialog            GTK 4.0+
-  gtk.file-chooser-widget.lisp         GtkFileChooserWidget            GTK 4.10*
-  gtk.file-dialog.lisp                 GtkFileDialog                   GTK 4.10*
+  gtk.file-chooser.lisp                GtkFileChooser                 GTK 4.12 &
+  gtk.file-chooser-native.lisp         GtkFileChooserNative           GTK 4.10 *
+  gtk.file-chooser-dialog.lisp         GtkFileChooserDialog           GTK 4.0  +
+  gtk.file-chooser-widget.lisp         GtkFileChooserWidget           GTK 4.10 *
 
-  gtk.font-chooser.lisp                GtkFontChooser                  GTK 4.0+
-  gtk.font-button.lisp                 GtkFontButton                   GTK 4.0+
-  gtk.font-chooser-widget.lisp         GtkFontChooserWidget            GTK 4.0+
-  gtk.font-chooser-dialog.lisp         GtkFontChooserDialog            GTK 4.0+
+  gtk.file-dialog.lisp                 GtkFileDialog                  GTK 4.10 *
 
-  gtk.emoji-chooser.lisp               GtkEmojiChooser                 GTK 4.0+
+  gtk.font-chooser.lisp                GtkFontChooser                 GTK 4.0  +
+  gtk.font-button.lisp                 GtkFontButton                  GTK 4.0  +
+  gtk.font-chooser-widget.lisp         GtkFontChooserWidget           GTK 4.0  +
+  gtk.font-chooser-dialog.lisp         GtkFontChooserDialog           GTK 4.0  +
+
+  gtk.emoji-chooser.lisp               GtkEmojiChooser                GTK 4.0  +
 
 Widgets for custom drawing
 

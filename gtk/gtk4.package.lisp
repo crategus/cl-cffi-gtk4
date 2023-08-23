@@ -141,7 +141,9 @@
       @about-class{filter-list-model}
       @about-generic{filter-list-model-filter}
       @about-generic{filter-list-model-incremental}
+      @about-function{filter-list-model-item-type}
       @about-generic{filter-list-model-model}
+      @about-generic{filter-list-model-n-items}
       @about-generic{filter-list-model-pending}
       @about-function{filter-list-model-new}
     @end{subsection}
@@ -164,11 +166,13 @@
     @begin[GtkMultiFilter]{subsection}
       Combining multiple filters.
       @about-class{multi-filter}
-      @about-class{any-filter}
-      @about-class{every-filter}
+      @about-function{multi-filter-item-type}
+      @about-function{multi-filter-n-items}
       @about-function{multi-filter-append}
       @about-function{multi-filter-remove}
+      @about-class{any-filter}
       @about-function{any-filter-new}
+      @about-class{every-filter}
       @about-function{every-filter-new}
     @end{subsection}
     @begin[GtkBoolFilter]{subsection}
@@ -615,6 +619,7 @@
       @about-generic{window-modal}
       @about-generic{window-resizable}
       @about-generic{window-startup-id}
+      @about-generic{window-suspended}
       @about-generic{window-title}
       @about-generic{window-titlebar}
       @about-generic{window-transient-for}
@@ -641,8 +646,8 @@
       @about-function{window-group}
       @about-function{window-has-group}
       @about-function{window-set-auto-startup-notification}
-      @about-function{window-titlebar}
       @about-function{window-set-interactive-debugging}
+      @about-function{window-is-suspended}
     @end{subsection}
     @begin[GtkDialog]{subsection}
       Create popup windows.

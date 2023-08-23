@@ -354,11 +354,11 @@
      (:file "gtk4.native-dialog")
 
      ;; Printing
-     (:file "gtk4.print-operation")          ; GtkPrintOperation
-     (:file "gtk4.print-context")            ; GtkPrintContext
-     (:file "gtk4.paper-size")               ; Support for named paper sizes
-     (:file "gtk4.print-settings")           ; GtkPrintSettings
-     (:file "gtk4.page-setup")               ; GtkPageSetup
+     (:file "gtk4.print-operation")
+     (:file "gtk4.print-context")
+     (:file "gtk4.paper-size")
+     (:file "gtk4.print-settings")
+     (:file "gtk4.page-setup")
 
      (:file "gtk4.page-setup-unix-dialog"   :if-feature (:not :windows))
      (:file "gtk4.print-unix-dialog"        :if-feature (:not :windows))
@@ -825,6 +825,8 @@
      ;; Application support
      (:file "rtest-gtk4-application")             ; GtkApplication
      (:file "rtest-gtk4-application-window")      ; GtkApplicationWindow
+     
+     (:file "rtest-gtk4-finish")
 ))))
 
 ;;; --- End of file cl-cffi-gtk4.asd -------------------------------------------
