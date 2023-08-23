@@ -2,7 +2,7 @@
 ;;; gtk4.window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -52,8 +52,8 @@
 ;;;     gtk_window_set_display
 ;;;     gtk_window_get_focus_visible
 ;;;     gtk_window_set_focus_visible
-;;;     gtk_window_get_handle_menubar_accel
-;;;     gtk_window_set_handle_menubar_accel
+;;;     gtk_window_get_handle_menubar_accel                Since 4.2
+;;;     gtk_window_set_handle_menubar_accel                Since 4.2
 ;;;     gtk_window_get_hide_on_close
 ;;;     gtk_window_set_hide_on_close
 ;;;     gtk_window_get_icon_name
@@ -102,6 +102,7 @@
 ;;;     gtk_window_has_group
 ;;;     gtk_window_set_auto_startup_notification
 ;;;     gtk_window_set_interactive_debugging
+;;;     gtk_window_is_suspended                            Since 4.12
 ;;;
 ;;; Properties
 ;;;
@@ -117,7 +118,7 @@
 ;;;     focus-visible
 ;;;     focus-widget
 ;;;     fullscreened
-;;;     handle-menubar-accel
+;;;     handle-menubar-accel                               Since 4.2
 ;;;     hide-on-close
 ;;;     icon-name
 ;;;     is-active
@@ -126,8 +127,9 @@
 ;;;     modal
 ;;;     resizable
 ;;;     startup-id
+;;;     suspended                                          Since 4.12
 ;;;     title
-;;;     titlebar
+;;;     titlebar                                           Since 4.6
 ;;;     transient-for
 ;;;
 ;;; Signals
@@ -136,7 +138,7 @@
 ;;;     activate-focus
 ;;;     close-request
 ;;;     enable-debugging
-;;;     keys-changed
+;;;     keys-changed                                       Deprecated 4.10
 ;;;
 ;;; Hierarchy
 ;;;
@@ -240,6 +242,10 @@
    (startup-id
     window-startup-id
     "startup-id" "gchararray" nil t)
+   #+gtk-4-12
+   (suspended
+    window-suspended
+    "suspended" "gboolean" t nil)
    (title
     window-title
     "title" "gchararray"  t t)
@@ -253,9 +259,9 @@
 
 #+liber-documentation
 (setf (documentation 'window 'type)
- "@version{2023-4-29}
+ "@version{2023-8-20}
   @begin{short}
-    A @sym{gtk:window} widget is a toplevel window which can contain other
+    A @class{gtk:window} widget is a toplevel window which can contain other
     widgets.
   @end{short}
 
@@ -265,7 +271,7 @@
   system and allow the user to manipulate the window, e.g. to resize it, move
   it, or close it.
   @begin[GtkWindow as GtkBuildable]{dictionary}
-    The @sym{gtk:window} implementation of the @class{gtk:buildable} interface
+    The @class{gtk:window} implementation of the @class{gtk:buildable} interface
     supports setting a child widget as the titlebar by specifying
     @code{titlebar} as the @code{type} attribute of a @code{<child>} element.
   @end{dictionary}
@@ -275,13 +281,13 @@ window.background [.csd / .solid-csd / .ssd] [.maximized / .fullscreen / .tiled]
 ├── <child>
 ╰── <titlebar child>.titlebar [.default-decoration]
     @end{pre}
-    The @sym{gtk:window} implementation has a main CSS node with name
+    The @class{gtk:window} implementation has a main CSS node with name
     @code{window} and @code{.background} style class.
 
     Style classes that are typically used with the main CSS node are
     @code{.csd}, when client-side decorations are in use, @code{.solid-csd},
     for client-side decorations without invisible borders, @code{.ssd}, used by
-    mutter when rendering server-side decorations. The @sym{gtk:window}
+    mutter when rendering server-side decorations. The @class{gtk:window}
     implementation also represents window states with the following style
     classes on the main node: @code{.tiled}, @code{.maximized},
     @code{.fullscreen}. Specialized types of window often add their own
@@ -294,12 +300,12 @@ window.background [.csd / .solid-csd / .ssd] [.maximized / .fullscreen / .tiled]
     for resize drags. In the @code{.csd} case, the shadow area outside of the
     window can be used to resize it.
 
-    The @sym{gtk:window} implementation adds the @code{.titlebar} and
+    The @class{gtk:window} implementation adds the @code{.titlebar} and
     @code{.default-decoration} style classes to the widget that is added as a
     titlebar child.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:window} implementation uses the @code{:window} role of the
+    The @class{gtk:window} implementation uses the @code{:window} role of the
     @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
   @begin[Action Details]{dictionary}
@@ -320,7 +326,7 @@ lambda (window)    :action
       The signal is a keybinding signal which gets emitted when the user
       activates the default widget of the window.
       @begin[code]{table}
-        @entry[window]{The @sym{gtk:window} widget which received the signal.}
+        @entry[window]{The @class{gtk:window} widget which received the signal.}
       @end{table}
     @subheading{The \"activate-focus\" signal}
       @begin{pre}
@@ -329,7 +335,7 @@ lambda (window)    :action
       The signal is a keybinding signal which gets emitted when the user
       activates the currently focused widget of the window.
       @begin[code]{table}
-        @entry[window]{The @sym{gtk:window} widget which received the signal.}
+        @entry[window]{The @class{gtk:window} widget which received the signal.}
       @end{table}
     @subheading{The \"close-request\" signal}
       @begin{pre}
@@ -338,7 +344,7 @@ lambda (window)    :run-last
       The signal is emitted when the user clicks on the close button of the
       window.
       @begin[code]{table}
-        @entry[window]{The @sym{gtk:window} widget on which the signal is
+        @entry[window]{The @class{gtk:window} widget on which the signal is
           emitted.}
         @entry[Returns]{@em{True} to stop other handlers from being invoked
           for the signal.}
@@ -354,7 +360,7 @@ lambda (window toggle)    :action
       The default bindings for this signal are the @kbd{Ctrl-Shift-I} and
       @kbd{Ctrl-Shift-D} keys.
       @begin[code]{table}
-        @entry[window]{The @sym{gtk:window} widget on which the signal is
+        @entry[window]{The @class{gtk:window} widget on which the signal is
           emitted.}
         @entry[toggle]{A boolean which toggles the debugger.}
         @entry[Returns]{A boolean which is @em{true} if the key binding was
@@ -369,7 +375,7 @@ lambda (window)    :run-first
       @em{Warning:} Deprecated since 4.10. Use @class{gtk:shortcut} and
       @class{gtk:event-controller} objects to implement keyboard shortcuts.
       @begin[code]{table}
-        @entry[window]{The @sym{gtk:window} widget which received the signal.}
+        @entry[window]{The @class{gtk:window} widget which received the signal.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:window-new}
@@ -394,6 +400,7 @@ lambda (window)    :run-first
   @see-slot{gtk:window-modal}
   @see-slot{gtk:window-resizable}
   @see-slot{gtk:window-startup-id}
+  @see-slot{gtk:window-suspended}
   @see-slot{gtk:window-title}
   @see-slot{gtk:window-titlebar}
   @see-slot{gtk:window-transient-for}")
@@ -419,7 +426,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-application)
       "Accessor"
       (documentation 'window-application 'function)
- "@version{2023-7-26}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-application object) => application}
   @syntax[]{(setf (gtk:window-application object) application)}
   @argument[object]{a @class{gtk:window} widget}
@@ -428,7 +435,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{application} slot of the
     @class{gtk:window} class.
   @end{short}
-  The @sym{gtk:window-application} function gets the application associated with
+  The @fun{gtk:window-application} function gets the application associated with
   the window. The @sym{(setf gtk:window-application)} function sets or unsets
   the application. The application will be kept alive for at least as long as it
   has any windows associated with it. See the @fun{g:application-hold} function
@@ -446,7 +453,7 @@ lambda (window)    :run-first
   @see-function{gtk:application-add-window}
   @see-function{gtk:application-remove-window}")
 
-;;; --- window-child -------------------------------------------------------
+;;; --- window-child -----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'window) t)
@@ -457,7 +464,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-child)
       "Accessor"
       (documentation 'window-child 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-child object) => child}
   @syntax[]{(setf (gtk:window-child object) child)}
   @argument[object]{a @class{gtk:window} widget}
@@ -466,13 +473,13 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{child} slot of the @class{gtk:window}
     class.
   @end{short}
-  The @sym{gtk:window-child} function gets the child widget of the window. The
+  The @fun{gtk:window-child} function gets the child widget of the window. The
   @sym{(setf gtk:window-child)} function sets the
   child widget.
   @see-class{gtk:window}
   @see-class{gtk:widget}")
 
-;;; --- window-decorated ---------------------------------------------------
+;;; --- window-decorated -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "decorated" 'window) t)
@@ -484,7 +491,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-decorated)
       "Accessor"
       (documentation 'window-decorated 'function)
- "@version{#2023-8-8}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-decorated object) => setting}
   @syntax[]{(setf (gtk:window-decorated object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -493,7 +500,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{decorated} slot of the @class{gtk:window}
     class.
   @end{short}
-  The @sym{gtk:window-decorated} function returns whether the window has been
+  The @fun{gtk:window-decorated} function returns whether the window has been
   set to have decorations. The @sym{(setf gtk:window-decorated)} function sets
   whether the window should be decorated.
 
@@ -510,7 +517,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:widget-visible}")
 
-;;; --- window-default-height ----------------------------------------------
+;;; --- window-default-height --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-height" 'window) t)
@@ -523,7 +530,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-default-height)
       "Accessor"
       (documentation 'window-default-height 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-default-height object) => height}
   @syntax[]{(setf (gtk:window-default-height object) height)}
   @argument[object]{a @class{gtk:window} widget}
@@ -537,7 +544,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:window-default-size}")
 
-;;; --- window-default-widget ----------------------------------------------
+;;; --- window-default-widget --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-widget" 'window) t)
@@ -550,7 +557,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-default-widget)
       "Accessor"
       (documentation 'window-default-widget 'function)
- "@version{#2022-7-13}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-default-widget object) => widget}
   @syntax[]{(setf (gtk:window-default-widget object) widget)}
   @argument[object]{a @class{gtk:window} widget}
@@ -560,14 +567,14 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{default-widget} slot of the
     @class{gtk:window} class.
   @end{short}
-  The @sym{gtk:window-default-widget} function returns the default widget for
+  The @fun{gtk:window-default-widget} function returns the default widget for
   the window. The @sym{(setf gtk:window-default-widget)} function sets or unsets
   the default widget. The default widget is the widget that is activated when
   the user presses the @kbd{Enter} key in a dialog for example.
   @see-class{gtk:window}
   @see-class{gtk:widget}")
 
-;;; --- window-default-width -----------------------------------------------
+;;; --- window-default-width ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-width" 'window) t)
@@ -580,7 +587,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-default-width)
       "Accessor"
       (documentation 'window-default-width 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-default-width object) => width}
   @syntax[]{(setf (gtk:window-default-width object) width)}
   @argument[object]{a @class{gtk:window} widget}
@@ -594,7 +601,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:window-default-size}")
 
-;;; --- window-deletable ---------------------------------------------------
+;;; --- window-deletable -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "deletable" 'window) t)
@@ -606,7 +613,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-deletable)
       "Accessor"
       (documentation 'window-deletable 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-deletable object) => setting}
   @syntax[]{(setf (gtk:window-deletable object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -615,7 +622,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{deletable} slot of the @class{gtk:window}
     class.
   @end{short}
-  The @sym{gtk:window-deletable} function returns whether the window has been
+  The @fun{gtk:window-deletable} function returns whether the window has been
   set to have a Close button. The @sym{(gtk:window-deletable)} function sets
   whether the window should be deletable.
 
@@ -632,7 +639,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:widget-visible}")
 
-;;; --- window-destroy-with-parent -----------------------------------------
+;;; --- window-destroy-with-parent ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "destroy-with-parent"
@@ -646,7 +653,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-destroy-with-parent)
       "Accessor"
       (documentation 'window-destroy-with-parent 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-destroy-with-parent object) => setting}
   @syntax[]{(setf (gtk:window-destroy-with-parent object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -656,7 +663,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{destroy-with-parent} slot of the
     @class{gtk:window} class.
   @end{short}
-  The @sym{gtk:window-destroy-with-parent} function returns whether the window
+  The @fun{gtk:window-destroy-with-parent} function returns whether the window
   will be destroyed with its transient parent. The
   @sym{(setf gtk:window-destroy-with-parent)} function sets whether to destroy
   the window with its transient parent. If the @arg{setting} argument is
@@ -667,7 +674,7 @@ lambda (window)    :run-first
   main window they are associated with.
   @see-class{gtk:window}")
 
-;;; --- window-display -----------------------------------------------------
+;;; --- window-display ---------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "display" 'window) t)
@@ -678,7 +685,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-display)
       "Accessor"
       (documentation 'window-display 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-display object) => display}
   @syntax[]{(setf (gtk:window-display object) display)}
   @argument[object]{a @class{gtk:window} widget}
@@ -687,14 +694,14 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{display} slot of the @class{gtk:window}
     class.
   @end{short}
-  The @sym{gtk:window-display} function returns the display where the window is
+  The @fun{gtk:window-display} function returns the display where the window is
   displayed. The @sym{(setf gtk:window-display)} function sets the display. If
   the window is already mapped, it will be unmapped, and then remapped on the
   new display.
   @see-class{gtk:window}
   @see-class{gdk:display}")
 
-;;; --- window-focus-visible -----------------------------------------------
+;;; --- window-focus-visible ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "focus-visible" 'window) t)
@@ -708,7 +715,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-focus-visible)
       "Accessor"
       (documentation 'window-focus-visible 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-focus-visible object) => setting}
   @syntax[]{(setf (gtk:window-focus-visible object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -723,7 +730,7 @@ lambda (window)    :run-first
   applications.
   @see-class{gtk:window}")
 
-;;; --- window-focus-widget ------------------------------------------------
+;;; --- window-focus-widget ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "focus-widget" 'window) t)
@@ -736,7 +743,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-focus-widget)
       "Accessor"
       (documentation 'window-focus-widget 'function)
- "@version{#2022-7-13}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-focus-widget object) => focus}
   @syntax[]{(setf (gtk:window-focus-widget object) focus)}
   @argument[object]{a @class{gtk:window} widget}
@@ -745,7 +752,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{focus-widget} slot of the
     @class{gtk:window} class.
   @end{short}
-  The @sym{gtk:window-focus-widget} function retrieves the current focused
+  The @fun{gtk:window-focus-widget} function retrieves the current focused
   widget within the window. The @sym{(setf gtk:window-focus-widget)} function
   sets the focus widget.
 
@@ -763,7 +770,7 @@ lambda (window)    :run-first
   @see-function{gtk:widget-has-focus}
   @see-function{gtk:widget-grab-focus}")
 
-;;; --- window-fullscreened ------------------------------------------------
+;;; --- window-fullscreened ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fullscreened" 'window) t)
@@ -775,7 +782,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-fullscreened)
       "Accessor"
       (documentation 'window-fullscreened 'function)
- "@version{#2022-7-13}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-fullscreened object) => setting}
   @syntax[]{(setf (gtk:window-fullscreened object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -784,7 +791,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{fullscreened} slot of the
     @class{gtk:window} class.
   @end{short}
-  The @sym{gtk:window-fullscreened} function retrieves the current fullscreen
+  The @fun{gtk:window-fullscreened} function retrieves the current fullscreen
   state of the window. The @sym{(setf gtk:window-fullscreened)} function sets
   the fullscreen state.
 
@@ -799,7 +806,7 @@ lambda (window)    :run-first
   @see-function{gtk:window-fullscreen}
   @see-function{gtk:window-unfullscreen}")
 
-;;; --- window-handle-menubar-accel ----------------------------------------
+;;; --- window-handle-menubar-accel --------------------------------------------
 
 #+(and gtk-4-2 liber-documentation)
 (setf (documentation (liber:slot-documentation "handle-menubar-accel"
@@ -814,7 +821,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-handle-menubar-accel)
       "Accessor"
       (documentation 'window-handle-menubar-accel 'function)
- "@version{#2022-7-13}
+ "@version{2023-3-20}
   @syntax[]{(gtk:window-handle-menubar-accel object) => setting}
   @syntax[]{(setf (gtk:window-handle-menubar-accel object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -824,14 +831,14 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{handle-menubar-accel} slot of the
     @class{gtk:window} class.
   @end{short}
-  The @sym{gtk:window-handle-menubar-accel} function returns whether the window
+  The @fun{gtk:window-handle-menubar-accel} function returns whether the window
   reacts to the @kbd{F10} key presses by activating a menubar it contains. The
   @sym{(setf gtk:window-handle-menubar-accel)} function sets the property.
 
   Since 4.2
   @see-class{gtk:window}")
 
-;;; --- window-hide-on-close -----------------------------------------------
+;;; --- window-hide-on-close ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "hide-on-close" 'window) t)
@@ -844,7 +851,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-hide-on-close)
       "Accessor"
       (documentation 'window-hide-on-close 'function)
- "@version{#2022-7-13}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-hide-on-close object) => setting}
   @syntax[]{(setf (gtk:window-hide-on-close object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -854,12 +861,12 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{hide-on-close} slot of the
     @class{gtk:window} class.
   @end{short}
-  The @sym{gtk:window-hide-on-close} function returns whether the window will
+  The @fun{gtk:window-hide-on-close} function returns whether the window will
   be hidden and not destroyed when the close button is clicked. The
   @fun{gtk:window-hide-on-close} function sets the property.
   @see-class{gtk:window}")
 
-;;; --- window-icon-name ---------------------------------------------------
+;;; --- window-icon-name -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-name" 'window) t)
@@ -872,7 +879,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-icon-name)
       "Accessor"
       (documentation 'window-icon-name 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-icon-name object) => name}
   @syntax[]{(setf (gtk:window-icon-name object) name)}
   @argument[object]{a @class{gtk:window} widget}
@@ -881,7 +888,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{icon-name} slot of the @class{gtk:window}
     class.
   @end{short}
-  The @sym{gtk:window-icon-name} function returns the name of the themed icon
+  The @fun{gtk:window-icon-name} function returns the name of the themed icon
   for the window. The @sym{(setf gtk:window-icon-name)} function sets the icon
   for the window from a named themed icon. See the @class{gtk:icon-theme}
   documentation for more details. On some platforms, the window icon is not
@@ -892,7 +899,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-class{gtk:icon-theme}")
 
-;;; --- window-is-active ---------------------------------------------------
+;;; --- window-is-active -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "is-active" 'window) t)
@@ -904,7 +911,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-is-active)
       "Accessor"
       (documentation 'window-is-active 'function)
- "@version{#2022-7-13}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-is-active object) => active}
   @syntax[]{(setf (gtk:window-is-active object) active)}
   @argument[object]{a @class{gtk:window} widget}
@@ -920,7 +927,7 @@ lambda (window)    :run-first
   in an inactive window.
   @see-class{gtk:window}")
 
-;;; --- window-maximized ---------------------------------------------------
+;;; --- window-maximized -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "maximized" 'window) t)
@@ -933,7 +940,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-maximized)
       "Accessor"
       (documentation 'window-maximized 'function)
- "@version{#2022-7-13}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-maximized object) => maximized}
   @syntax[]{(setf (gtk:window-maximized object) maximized)}
   @argument[object]{a @class{gtk:window} widget}
@@ -950,7 +957,7 @@ lambda (window)    :run-first
   @see-function{gtk:window-maximize}
   @see-function{gtk:window-unmaximize}")
 
-;;; --- window-mnemonics-visible -------------------------------------------
+;;; --- window-mnemonics-visible -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonics-visible"
@@ -966,7 +973,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-mnemonics-visible)
       "Accessor"
       (documentation 'window-mnemonics-visible 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-mnemonics-visible object) => setting}
   @syntax[]{(setf (gtk:window-mnemonics-visible object) setting)}
   @argument[object]{a @class{gtk:window} widget}
@@ -980,7 +987,7 @@ lambda (window)    :run-first
   maintained by GTK based on user input, and should not be set by applications.
   @see-class{gtk:window}")
 
-;;; --- window-modal -------------------------------------------------------
+;;; --- window-modal -----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'window) t)
@@ -992,7 +999,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-modal)
       "Accessor"
       (documentation 'window-modal 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-modal object) => modal}
   @syntax[]{(setf (gtk:window-modal object) modal)}
   @argument[object]{a @class{gtk:window} widget}
@@ -1001,7 +1008,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{modal} slot of the @class{gtk:window}
     class.
   @end{short}
-  The @sym{gtk:window-modal} function returns @em{true} if the window is set to
+  The @fun{gtk:window-modal} function returns @em{true} if the window is set to
   be modal. The @sym{(setf gtk:window-modal)} function sets a window modal or
   non-modal.
 
@@ -1013,7 +1020,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:window-transient-for}")
 
-;;; --- window-resizable ---------------------------------------------------
+;;; --- window-resizable -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "resizable" 'window) t)
@@ -1025,7 +1032,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-resizable)
       "Accessor"
       (documentation 'window-resizable 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-resizable object) => resizable}
   @syntax[]{(setf (gtk:window-resizable object) resizable)}
   @argument[object]{a @class{gtk:window} widget}
@@ -1038,7 +1045,7 @@ lambda (window)    :run-first
   by default.
   @see-class{gtk:window}")
 
-;;; --- window-startup-id --------------------------------------------------
+;;; --- window-startup-id ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "startup-id" 'window) t)
@@ -1051,7 +1058,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-startup-id)
       "Accessor"
       (documentation 'window-startup-id 'function)
- "@version{#2023-6-10}
+ "@version{2023-8-20}
   @syntax[]{(setf (gtk:window-startup-id object) id)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[id]{a string with the startup ID}
@@ -1059,7 +1066,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{startup-id} slot of the @class{gtk:window}
     class.
   @end{short}
-  The @sym{(setf gtk:window-start-up-id)} function sets a string with the
+  The @fun{(setf gtk:window-start-up-id)} function sets a string with the
   startup notification identifier.
 
   Startup notification identifiers are used by the desktop environment to track
@@ -1076,6 +1083,34 @@ lambda (window)    :run-first
   @see-class{gdk:window}
   @see-function{gtk:window-present}")
 
+;;; --- window-suspended -------------------------------------------------------
+
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "suspended" 'window) t)
+ "The @code{suspended} property of type @code{:boolean} (Read) @br{}
+  Whether the window is suspended. @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'window-suspended)
+      "Accessor"
+      (documentation 'window-title 'suspended)
+ "@version{#2023-8-20}
+  @syntax[]{(gtk:window-suspended object) => suspended}
+  @argument[object]{a @class{gtk:window} widget}
+  @argument[suspended]{a boolean whether the window is suspended}
+  @begin{short}
+    Accessor of the @slot[gtk:window]{suspended} slot of the @class{gtk:window}
+    class.
+  @end{short}
+  The @fun{gtk:window-suspended} function retrieves the current suspended state
+  of @arg{window}. A window being suspended means it is currently not visible to
+  the user, for example by being on a inactive workspace, minimized, obstructed.
+
+  Since 4.12
+  @see-class{gtk:window}
+  @see-function{gtk:window-is-suspended}")
+
 ;;; --- window-title -----------------------------------------------------------
 
 #+liber-documentation
@@ -1088,7 +1123,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-title)
       "Accessor"
       (documentation 'window-title 'function)
- "@version{2023-4-3}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-title object) => title}
   @syntax[]{(setf (gtk:window-title object) title)}
   @argument[object]{a @class{gtk:window} widget}
@@ -1097,7 +1132,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{title} slot of the @class{gtk:window}
     class.
   @end{short}
-  The @sym{gtk:window-title} function retrieves the title of the window. The
+  The @fun{gtk:window-title} function retrieves the title of the window. The
   @sym{(setf gtk:window-title)} function sets the title.
 
   The title of a window will be displayed in the title bar. On the X Window
@@ -1108,7 +1143,7 @@ lambda (window)    :run-first
   document filename.
   @see-class{gtk:window}")
 
-;;; --- window-titlebar ----------------------------------------------------
+;;; --- window-titlebar --------------------------------------------------------
 
 #+(and gtk-4-6 liber-documentation)
 (setf (documentation (liber:slot-documentation "titlebar" 'window) t)
@@ -1119,7 +1154,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-titlebar)
       "Accessor"
       (documentation 'window-titlebar 'function)
- "@version{#2023-8-8}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-titlebar window) => widget}
   @syntax[]{(setf (gtk:window-titlebar window) widget)}
   @argument[window]{a @class{gtk:window} widget}
@@ -1128,7 +1163,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{titlebar} slot of the @class{gtk:window}
     class.
   @end{short}
-  The @sym{gtk:window-titlebar} function returns the custom titlebar for the
+  The @fun{gtk:window-titlebar} function returns the custom titlebar for the
   window. The @sym{(setf gtk:window-titlebar)} function sets a custom titlebar.
 
   A typical widget used here is the @class{gtk:header-bar} widget, as it
@@ -1146,11 +1181,11 @@ lambda (window)    :run-first
   @see-class{gtk:header-bar}
   @see-function{gtk:widget-visible}")
 
-;;; --- window-transient-for -----------------------------------------------
+;;; --- window-transient-for ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "transient-for" 'window) t)
- "The @code{transient-for} property of type @sym{gtk:window}
+ "The @code{transient-for} property of type @class{gtk:window}
   (Read / Write / Construct) @br{}
   The transient parent of the window.")
 
@@ -1158,7 +1193,7 @@ lambda (window)    :run-first
 (setf (liber:alias-for-function 'window-transient-for)
       "Accessor"
       (documentation 'window-transient-for 'function)
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-transient-for object) => parent}
   @syntax[]{(setf (gtk:window-transient-for object) parent)}
   @argument[object]{a @class{gtk:window} widget}
@@ -1167,7 +1202,7 @@ lambda (window)    :run-first
     Accessor of the @slot[gtk:window]{transient-for} slot of the
     @class{gtk:window} class.
   @end{short}
-  The @sym{gtk:window-transient-for} function returns the transient parent for
+  The @fun{gtk:window-transient-for} function returns the transient parent for
   the window, or @code{nil} if no transient parent has been set. The
   @sym{(setf gtk:window-transient-for)} function sets the parent window.
 
@@ -1175,7 +1210,7 @@ lambda (window)    :run-first
   were spawned from. This allows window managers to e.g. keep the dialog on top
   of the main window, or center the dialog over the main window. The
   @fun{gtk:dialog-new-with-buttons} function and other convenience functions
-  in GTK will sometimes call the @sym{gtk:window-transient-for} function on
+  in GTK will sometimes call the @fun{gtk:window-transient-for} function on
   your behalf.
 
   Passing @code{nil} for the @arg{parent} argument unsets the current transient
@@ -1192,17 +1227,15 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_new" window-new) (g:object widget)
  #+liber-documentation
- "@version{#2022-7-13}
+ "@version{2023-8-20}
   @return{A new @class{gtk:window} widget.}
   @begin{short}
     Creates a new toplevel window, which can contain other widgets.
   @end{short}
   To get an undecorated window, no window borders, use the
-  @fun{gtk:window-decorated} function.
-
-  All top-level windows created by the @sym{gtk:window-new} function are stored
-  in an internal top-level window list. This list can be obtained from the
-  @fun{gtk:window-list-toplevels} function.
+  @fun{gtk:window-decorated} function. All top-level windows created by the
+  @fun{gtk:window-new} function are stored in an internal top-level window list.
+  This list can be obtained from the @fun{gtk:window-list-toplevels} function.
 
   To delete a window, call the @fun{gtk:window-destroy} function.
   @see-class{gtk:window}
@@ -1218,7 +1251,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_destroy" window-destroy) :void
  #+liber-documentation
- "@version{2023-3-19}
+ "@version{2023-8-20}
   @argument[window]{a @class{gtk:window} widget to destroy}
   @short{Drop the internal reference GTK holds on toplevel windows.}
   @see-class{gtk:window}"
@@ -1238,7 +1271,7 @@ lambda (window)    :run-first
 
 (defun window-default-size (window)
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @syntax[]{(gtk:window-default-size window) => width, height}
   @syntax[]{(setf (gtk:window-default-size window) (list width height))}
   @argument[window]{a @class{gtk:window} widget}
@@ -1247,15 +1280,12 @@ lambda (window)    :run-first
   @begin{short}
     Accessor of the default size of a @class{gtk:window} widget.
   @end{short}
-
-  The @sym{gtk:window-default-size} function gets the default size of the
+  The @fun{gtk:window-default-size} function gets the default size of the
   window. The @sym{(setf gtk:window-default-size)} function sets the default
   size. A value of -1 for the width or height indicates that a default size has
   not been explicitly set for that dimension, so the \"natural\" size of the
-  window will be used.
-
-  If the \"natural\" size of the window, its size request, is larger than the
-  default, the default will be ignored.
+  window will be used. If the \"natural\" size of the window, its size request,
+  is larger than the default, the default will be ignored.
 
   Unlike the @fun{gtk:widget-size-request} function, which sets a size request
   for a widget and thus would keep users from shrinking the window, this
@@ -1273,7 +1303,7 @@ lambda (window)    :run-first
 
   If you use this function to reestablish a previously saved window size, note
   that the appropriate size to save is the one returned by the
-  @sym{gtk:window-default-size} function. Using the window allocation directly
+  @fun{gtk:window-default-size} function. Using the window allocation directly
   will not work in all circumstances and can lead to growing or shrinking
   windows.
   @begin[Example]{dictionary}
@@ -1305,7 +1335,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_is_maximized" window-is-maximized) :boolean
  #+liber-documentation
- "@version{#2022-7-13}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @return{A boolean whether the window is maximized.}
   @begin{short}
@@ -1332,7 +1362,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_is_fullscreen" window-is-fullscreen) :boolean
  #+liber-documentation
- "@version{#2022-7-13}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @return{A boolean whether the window has a fullscreen state.}
   @begin{short}
@@ -1361,7 +1391,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_toplevels" window-toplevels)
     (g:object g:list-model)
  #+liber-documentation
- "@version{#2023-7-22}
+ "@version{#2023-8-20}
   @return{A @class{g:list-model} object with the list of toplevel widgets.}
   @begin{short}
     Returns a list of all existing toplevel windows.
@@ -1382,8 +1412,8 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_list_toplevels" window-list-toplevels)
     (g:list-t (g:object window))
  #+liber-documentation
- "@version{#2022-7-13}
-  @return{A list of toplevel @class{gtk:widget} objects.}
+ "@version{2023-8-20}
+  @return{A list of toplevel @class{gtk:widget} widgets.}
   @begin{short}
     Returns a list of all existing toplevel windows.
   @end{short}
@@ -1407,7 +1437,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_get_focus" window-focus) (g:object widget)
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @syntax[]{(gtk:window-focus window) => focus}
   @syntax[]{(setf (gtk:window-focus window) focus)}
   @argument[window]{a @class{gtk:window} widget}
@@ -1416,8 +1446,7 @@ lambda (window)    :run-first
   @begin{short}
     Accessor of the focus widget of the window.
   @end{short}
-
-  The @sym{gtk:window-focus} function retrieves the current focused widget
+  The @fun{gtk:window-focus} function retrieves the current focused widget
   within the window. If the @arg{focus} argument is not the current focus
   widget, and is focusable, the @sym{(setf gtk:window-focus)} function sets the
   focus widget.
@@ -1444,7 +1473,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_present" window-present) :void
  #+liber-documentation
- "@version{#2023-6-10}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Presents a window to the user.
@@ -1466,7 +1495,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_present_with_time" window-present-with-time) :void
  #+liber-documentation
- "@version{#2023-6-10}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @argument[timestamp]{an unsigned integer with the timestamp of the user
     interaction, typically a button or key press event, which triggered this
@@ -1497,7 +1526,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_close" window-close) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Requests that the window is closed.
@@ -1515,7 +1544,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_minimize" window-minimize) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to minimize the window.
@@ -1543,7 +1572,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_unminimize" window-unminimize) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to unminimize the window.
@@ -1569,7 +1598,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_maximize" window-maximize) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to maximize the window, so that it becomes full screen.
@@ -1597,7 +1626,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_unmaximize" window-unmaximize) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to unmaximize the window.
@@ -1622,7 +1651,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_fullscreen" window-fullscreen) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to place the window in the fullscreen state.
@@ -1649,7 +1678,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_fullscreen_on_monitor" window-fullscreen-on-monitor)
     :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @argument[monitor]{a @class{gdk:monitor} object to go fullscreen on}
   @begin{short}
@@ -1677,7 +1706,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_unfullscreen" window-unfullscreen) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Asks to toggle off the fullscreen state for the window.
@@ -1712,17 +1741,16 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_default_icon_name" window-default-icon-name)
     :string
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @syntax[]{(gtk:window-default-icon-name) => name}
   @syntax[]{(setf (gtk:window-default-icon-name) name)}
   @argument[name]{a string with the name of the themed icon}
   @begin{short}
     Accessor of the default icon name of the window.
   @end{short}
-
-  The @sym{gtk:window-default-icon-name} function returns the fallback icon name
-  for windows. The @sym{(setf gtk:window-default-icon-name)} function sets an
-  icon to be used as fallback for windows that have not had the
+  The @fun{gtk:window-default-icon-name} function returns the fallback icon
+  name for windows. The @sym{(setf gtk:window-default-icon-name)} function sets
+  an icon to be used as fallback for windows that have not had the
   @fun{gtk:window-icon-name} function called on them.
   @see-class{gtk:window}
   @see-function{gtk:window-icon-name}")
@@ -1736,7 +1764,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_group" window-group)
     (g:object window-group)
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget, or @code{nil}}
   @return{The @class{gtk:window-group} object for the @arg{window} argument or
     the default window group.}
@@ -1756,7 +1784,7 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_has_group" window-has-group) :boolean
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[window]{a @class{gtk:window} widget}
   @return{@em{True} if the @arg{window} argument has an explicit window group.}
   @short{Returns whether the window has an explicit window group.}
@@ -1773,7 +1801,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_set_auto_startup_notification"
                window-set-auto-startup-notification) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[setting]{@em{true} to automatically do startup notification}
   @begin{short}
     Call this function to disable the automatic startup notification.
@@ -1809,7 +1837,7 @@ lambda (window)    :run-first
 #-gtk-4-6
 (cffi:defcfun ("gtk_window_get_titlebar" window-titlebar) (g:object widget)
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @syntax[]{(gtk:window-titlebar window) => widget}
   @syntax[]{(setf (gtk:window-titlebar window) widget)}
   @argument[window]{a @class{gtk:window} widget}
@@ -1817,8 +1845,7 @@ lambda (window)    :run-first
   @begin{short}
     Accessor of the custom titlebar widget of the window.
   @end{short}
-
-  The @sym{gtk:window-titlebar} function returns the custom titlebar for the
+  The @fun{gtk:window-titlebar} function returns the custom titlebar for the
   window. The @sym{(setf gtk:window-titlebar)} function sets a custom titlebar.
 
   A typical widget used here is the @class{gtk:header-bar} widget, as it
@@ -1845,7 +1872,7 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_set_interactive_debugging"
                window-set-interactive-debugging) :void
  #+liber-documentation
- "@version{#2022-1-6}
+ "@version{#2023-8-20}
   @argument[enable]{@em{true} to enable interactice debugging}
   @begin{short}
     Opens or closes the interactive debugger.
@@ -1856,5 +1883,28 @@ lambda (window)    :run-first
   (enable :boolean))
 
 (export 'window-set-interactive-debugging)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_window_is_suspended
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-12
+(cffi:defcfun ("gtk_window_is_suspended" window-is-suspended) :boolean
+ #+liber-documentation
+ "@version{#2023-8-20}
+  @argument[window]{a @class{gtk:window} widget}
+  @return{A boolean whether the window is suspended.}
+  @begin{short}
+    Retrieves the current suspended state of the window.
+  @end{short}
+  A window being suspended means it is currently not visible to the user, for
+  example by being on a inactive workspace, minimized, obstructed.
+
+  Since 4.12
+  @see-class{gtk:window}"
+  (window (g:object window)))
+
+#+gtk-4-12
+(export 'window-is-suspended)
 
 ;;; --- End of file gtk4.window.lisp -------------------------------------------

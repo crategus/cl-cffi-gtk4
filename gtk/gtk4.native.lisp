@@ -2,7 +2,7 @@
 ;;; gtk4.native.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -61,7 +61,8 @@
 ;; work on this?
 
 (gobject:define-g-interface "GtkNative" native
-  (:export t
+  (:superclass g:object
+   :export t
    :type-initializer "gtk_native_get_type")
   nil)
 
@@ -69,15 +70,26 @@
 (setf (liber:alias-for-class 'native)
       "Interface"
       (documentation 'native 'type)
- "@version{#2022-7-11}
+ "@version{2023-8-20}
   @begin{short}
-    The @sym{gtk:native} interface is the interface implemented by all widgets
+    The @class{gtk:native} interface is the interface implemented by all widgets
     that can provide a @class{gdk:surface} object for widgets to render on.
   @end{short}
-  The obvious example of a @sym{gtk:native} widget is the @class{gtk:window}
+  The obvious example of a @class{gtk:native} widget is the @class{gtk:window}
   widget.
+
+  Every widget that is not itself a @class{gtk:native} widget is contained in
+  one, and you can get it with the @fun{gtk:widget-native} function. To get the
+  surface of a @class{gtk:native} widget, use the @fun{gtk:native-surface}
+  function. It is also possible to find the @class{gtk:native} function to
+  which a surface belongs, with the @fun{gtk:native-for-surface} function.
+
+  In addition to a @class{gdk:surface} object, a @class{gtk:native} widget also
+  provides a @class{gsk:renderer} object for rendering on that surface. To get
+  the renderer, use the @fun{gtk:native-renderer} function.
   @see-class{gdk:surface}
-  @see-class{gtk:window}")
+  @see-class{gtk:window}
+  @see-class{gsk:renderer}")
 
 ;;; ----------------------------------------------------------------------------
 ;;;gtk_native_get_for_surface -> native-for-surface
@@ -86,7 +98,7 @@
 (cffi:defcfun ("gtk_native_get_for_surface" native-for-surface)
     (g:object native)
  #+liber-documentation
- "@version{#2022-7-11}
+ "@version{2023-8-20}
   @argument[surface]{a @class{gdk:surface} object}
   @return{The @class{gtk:native} widget that is associated with @arg{surface}.}
   @begin{short}
@@ -104,7 +116,7 @@
 
 (cffi:defcfun ("gtk_native_get_surface" native-surface) (g:object gdk:surface)
  #+liber-documentation
- "@version{#2022-7-11}
+ "@version{2023-8-20}
   @argument[native]{a @class{gtk:native} widget}
   @return{The @class{gdk:surface} object of @arg{native}.}
   @begin{short}
@@ -123,7 +135,7 @@
 (cffi:defcfun ("gtk_native_get_renderer" native-renderer)
     (g:object gsk:renderer)
  #+liber-documentation
- "@version{#2022-7-11}
+ "@version{2023-8-20}
   @argument[native]{a @class{gtk:native} widget}
   @return{The @class{gsk:renderer} object of @arg{native}.}
   @begin{short}
@@ -147,7 +159,8 @@
 
 (defun native-surface-transform (native)
  #+liber-documentation
- "@version{#2022-7-11}
+ "@version{2023-8-20}
+  @syntax[]{(gtk:native-surface-transform native) => x,y}
   @argument[native]{a @class{gtk:native} widget}
   @begin{return}
     @arg{x} -- a double float with the x coordinate @br{}
@@ -172,7 +185,7 @@
 
 (cffi:defcfun ("gtk_native_realize" native-realize) :void
  #+liber-documentation
- "@version{#2022-7-11}
+ "@version{#2023-8-20}
   @argument[native]{a @class{gtk:native} widget}
   @begin{short}
     Realizes the native widget.
@@ -188,7 +201,7 @@
 
 (cffi:defcfun ("gtk_native_unrealize" native-unrealize) :void
  #+liber-documentation
- "@version{#2022-7-11}
+ "@version{#2023-8-20}
   @argument[native]{a @class{gtk:native} widget}
   @begin{short}
     Unrealizes the native widget.

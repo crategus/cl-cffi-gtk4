@@ -2,7 +2,7 @@
 ;;; gtk4.root.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -53,8 +53,13 @@
 ;;; GtkRoot
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: GtkRoot inherits from GtkNative in the C library, but in the Lisp
+;; implementation the inheritance works differently. This will causes problems
+;; Look more carefully into this subject.
+
 (gobject:define-g-interface "GtkRoot" root
-  (:export t
+  (:superclass g:object
+   :export t
    :type-initializer "gtk_root_get_type")
   nil)
 
@@ -62,14 +67,19 @@
 (setf (liber:alias-for-class 'root)
       "Interface"
       (documentation 'root 'type)
- "@version{#2022-7-11}
+ "@version{2023-8-19}
   @begin{short}
-    The @sym{gtk:root} interface is the interface implemented by all widgets
+    The @class{gtk:root} interface is the interface implemented by all widgets
     that can act as a toplevel widget to a hierarchy of widgets.
   @end{short}
   The root widget takes care of providing the connection to the windowing system
   and manages layout, drawing and event delivery for its widget hierarchy. The
-  obvious example of a @sym{gtk:root} widget is the @class{gtk:window} widget.
+  obvious example of a @class{gtk:root} widget is the @class{gtk:window} widget.
+
+  To get the display to which a @class{gtk:root} widget belongs, use the
+  @fun{gtk:root-display} function. The @class{gtk:root} widget also maintains
+  the location of keyboard focus inside its widget hierarchy, with the
+  @fun{gtk:root-focus} function.
   @see-class{gtk:window}")
 
 ;;; ----------------------------------------------------------------------------
@@ -78,7 +88,7 @@
 
 (cffi:defcfun ("gtk_root_get_display" root-display) (g:object gdk:display)
  #+liber-documentation
- "@version{#2022-7-11}
+ "@version{2023-8-19}
   @argument[root]{a @class{gtk:root} widget}
   @return{The @class{gdk:display} object of @arg{root}.}
   @begin{short}
@@ -104,7 +114,7 @@
 
 (cffi:defcfun ("gtk_root_get_focus" root-focus) (g:object widget)
  #+liber-documentation
- "@version{#2022-7-11}
+ "@version{2023-8-19}
   @syntax[]{(gtk:root-focus root) => widget}
   @syntax[]{(setf (gtk:root-focus root) widget)}
   @argument[root]{a @class{gtk:root} widget}
@@ -113,7 +123,7 @@
   @begin{short}
     The accessor function for the focus widget of the root widget.
   @end{short}
-  The @sym{gtk:root-focus} function retrieves the current focused widget within
+  The @fun{gtk:root-focus} function retrieves the current focused widget within
   the root widget. Note that this is the widget that would have the focus if
   the root widget is active. If the root widget is not focused then the
   @fun{gtk:widget-has-focus} function will return @em{false} for the widget.
