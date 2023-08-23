@@ -2,7 +2,7 @@
 
 (asdf:defsystem :gtk4-tutorial
   :author "Dieter Kaiser"
-  :license "LLGPL"
+  :license "MIT"
   :serial t
   :depends-on (:cl-cffi-gtk4)
   :components ((:file "gtk4-tutorial")
