@@ -130,7 +130,19 @@
 ;;;     gtk_style_context_has_class
 ;;;     gtk_style_context_set_scale
 ;;;     gtk_style_context_get_scale
+
 ;;;     gtk_style_context_to_string
+
+(test gtk-style-context-to-string
+  (let ((context (gtk:widget-style-context (make-instance 'gtk:dialog))))  
+    (is (string=
+"[window.background.dialog:dir(ltr)]
+  box.dialog-vbox.vertical:dir(ltr)
+    box.vertical:dir(ltr)
+    box.dialog-action-box.horizontal:dir(ltr)
+      box.dialog-action-area.horizontal:dir(ltr)
+"
+                 (gtk:style-context-to-string context :recurse)))))
 
 ;;;     gtk_render_activity
 ;;;     gtk_render_arrow
@@ -145,4 +157,4 @@
 ;;;     gtk_render_line
 ;;;     gtk_render_option
 
-;;; --- 2023-7-21 --------------------------------------------------------------
+;;; --- 2023-8-21 --------------------------------------------------------------

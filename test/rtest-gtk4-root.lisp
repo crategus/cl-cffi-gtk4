@@ -7,7 +7,7 @@
 
 ;;;     GtkRoot
 
-(test root-interface
+(test gtk-root-interface
   ;; Type check
   (is (g:type-is-interface "GtkRoot"))
   ;; Check the registered name
@@ -16,9 +16,15 @@
   ;; Check the type initializer
   (is (eq (g:gtype "GtkRoot")
           (g:gtype (cffi:foreign-funcall "gtk_root_get_type" :size))))
-  ;; Get the names of the interface properties.
+  ;; Check the interface prerequisites
+  (is (equal '("GtkNative" "GtkWidget")
+             (list-interface-prerequisites "GtkRoot")))
+  ;; Check the interface properties
   (is (equal '()
              (list-interface-properties "GtkRoot")))
+  ;; Check the interface signals
+  (is (equal '()
+             (list-signals "GtkRoot")))
   ;; Get the interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkRoot"
                                   GTK-ROOT
@@ -30,7 +36,7 @@
 
 ;;;     gtk_root_get_display
 
-(test root-display
+(test gtk-root-display
   (let ((window (make-instance 'gtk:window)))
     (is (typep (gtk:root-display window) 'gdk:display))))
 
@@ -39,13 +45,25 @@
 
 ;; Might cause an unexpected error
 
-#+nil
-(test root-focus
+(test gtk-root-focus.1
   (let* ((button (make-instance 'gtk:button))
          (window (make-instance 'gtk:window
                                 :child button)))
     (is-false (gtk:root-focus window))
+    ;; Set the focus on the button
     (is (eq button (setf (gtk:root-focus window) button)))
+    (is (eq button (gtk:root-focus window)))
+    ;; Unset the focus
+    (is-false (setf (gtk:root-focus window) nil))
+    (is-false (gtk:root-focus window))))
+
+(test gtk-root-focus.2
+  (let* ((button (make-instance 'gtk:button))
+         (window (make-instance 'gtk:window
+                                :child button)))
+    (is-false (gtk:root-focus window))
+    ;; Set the focus on the button
+    (is-true (gtk:widget-grab-focus button))
     (is (eq button (gtk:root-focus window)))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-19 --------------------------------------------------------------

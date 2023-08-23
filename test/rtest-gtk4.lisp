@@ -8,13 +8,15 @@
 
 (in-package :gtk-test)
 
+(defvar *first-run-gtk-test* t)
+
 ;; push the hostname on *features*
 (pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)
 
 (def-suite gtk-test)
-(def-suite gtk-suite :in gtk-test)
-(def-suite gdk-suite :in gtk-test)
 (def-suite gsk-suite :in gtk-test)
+(def-suite gdk-suite :in gtk-test)
+(def-suite gtk-suite :in gtk-test)
 
 ;; We set a PRGNAME to avoid side effects when running the tests a second time.
 (setf (g:prgname) "gtk-test")
@@ -57,7 +59,7 @@
           (g:object-interface-list-properties gtype)))
 
 (defun list-interface-prerequisites (gtype)
-  (mapcar #'g:type-name 
+  (mapcar #'g:type-name
           (g:type-interface-prerequisites gtype)))
 
 ;; A sorted list of the signal names of a class
@@ -93,4 +95,4 @@
   (mapcar #'gobject:enum-item-value
           (gobject:get-enum-items gtype)))
 
-;;; --- 2023-7-21 --------------------------------------------------------------
+;;; --- 2023-8-22 --------------------------------------------------------------

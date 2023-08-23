@@ -9,7 +9,7 @@
 
 ;;;     GtkWindow
 
-(test window-class
+(test gtk-window-class
   ;; Type check
   (is (g:type-is-object "GtkWindow"))
   ;; Check the registered name
@@ -105,7 +105,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test window-properties
+(test gtk-window-properties
   (let ((window (make-instance 'gtk:window)))
     (is-false (gtk:window-application window))
     (is-false (gtk:window-child window))
@@ -128,6 +128,8 @@
     (is-false (gtk:window-modal window))
     (is-true  (gtk:window-resizable window))
     (signals (error) (gtk:window-startup-id window)) ; not readable
+    #+gtk-4-12
+    (is-false (gtk:window-suspended window))
     (is-false (gtk:window-title window))
     (is-false (gtk:window-titlebar window))
     (is-false (gtk:window-transient-for window))))
@@ -140,7 +142,7 @@
 ;;;     enable-debugging
 ;;;     keys-changed
 
-(test window-signals
+(test gtk-window-signals
   ;; Query info for "activate-default"
   (let ((query (g:signal-query (g:signal-lookup "activate-default"
                                                 "GtkWindow"))))
@@ -203,48 +205,78 @@
 
 ;;;     gtk_window_new
 
-(test window-new
+(test gtk-window-new
   (is (typep (gtk:window-new) 'gtk:window)))
 
 ;;;     gtk_window_close
 ;;;     gtk_window_destroy
 
-;; TODO: This does not work as expected. The tests are not performed.
-
-#+nil
-(test window-close/destroy
+(test gtk-window-close/destroy.1
   (let ((application (make-instance 'gtk:application
                                     :application-id "com.crategus.test"
-                                    :flags :none
+                                    :flags :default-flags
                                     :register-session nil)))
     ;; Connect signal "activate"
     (g:signal-connect application "activate"
         (lambda (app)
-          (g-application-hold app)
+          (g:application-hold app)
           (when *verbose-gtk-window*
             (format t "~&Signal handler ACTIVATE~%"))
-
           (let ((window (gtk:application-window-new app)))
-
             ;; Connect signal "close-request"
             (g:signal-connect window "close-request"
                 (lambda (window)
+                  (declare (ignore window))
                   (when *verbose-gtk-window*
                     (format t "~&Signal handler CLOSE-REQUEST~%"))
-                  (is-false (gtk:window-destroy window))))
+                  ;; Stop the propagation of the event
+                  gdk:+gdk-event-stop+))
 
             (is (typep window 'gtk:window))
             (is (eq app (gtk:window-application window)))
             (when *verbose-gtk-window*
-              (format t "~&Call function GTK-WINDOW-CLOSE~%"))
-;            (is-false (gtk:window-close window))
+              (format t "~&Emit 'close-request' signal~%"))
             (is-true (g:signal-emit window "close-request"))
-;            (is-false (gtk:window-destroy window))
-            ;; Remove the window, this shut down the application
-            )
-          (g-application-release app)))
+            (when *verbose-gtk-window*
+              (format t "~&Back from signal handler~%"))
+            ;; Destroy the window, this shuts down the application
+            (is-false (gtk:window-destroy window)))
+          (g:application-release app)))
     ;; Run the application
-    (g-application-run application nil)))
+    (g:application-run application nil)))
+
+(test gtk-window-close/destroy.2
+  (let ((application (make-instance 'gtk:application
+                                    :application-id "com.crategus.test"
+                                    :flags :default-flags
+                                    :register-session nil)))
+    ;; Connect signal "activate"
+    (g:signal-connect application "activate"
+        (lambda (app)
+          (g:application-hold app)
+          (when *verbose-gtk-window*
+            (format t "~&Signal handler ACTIVATE~%"))
+          (let ((window (gtk:application-window-new app)))
+            ;; Connect signal "close-request"
+            (g:signal-connect window "close-request"
+                (lambda (window)
+                  (declare (ignore window))
+                  (when *verbose-gtk-window*
+                    (format t "~&Signal handler CLOSE-REQUEST~%"))
+                  ;; Stop the propagation of the event
+                  gdk:+gdk-event-stop+))
+            (is (typep window 'gtk:window))
+            (is (eq app (gtk:window-application window)))
+            (when *verbose-gtk-window*
+              (format t "~&Call function GTK-WINDOW-CLOSE~%"))
+            (is-false (gtk:window-close window))
+            (when *verbose-gtk-window*
+              (format t "~&Back from signal handler~%"))
+            ;; Destroy the window, this shuts down the application
+            (is-false (gtk:window-destroy window)))
+          (g:application-release app)))
+    ;; Run the application
+    (g:application-run application nil)))
 
 ;;;     gtk_window_fullscreen
 ;;;     gtk_window_fullscreen_on_monitor
@@ -252,7 +284,7 @@
 ;;;     gtk_window_get_default_size
 ;;;     gtk_window_set_default_size
 
-(test window-default-size
+(test gtk-window-default-size
   (let ((window (make-instance 'gtk:window)))
     (is (equal '(0 0)
                (multiple-value-list (gtk:window-default-size window))))
@@ -282,11 +314,12 @@
 
 ;;;     gtk_window_list_toplevels
 
-(test window-list-toplevels
+(test gtk-window-list-toplevels
   (is (every (lambda (obj) (typep obj 'gtk:window))
              (gtk:window-list-toplevels))))
 
 ;;;     gtk_window_set_auto_startup_notification
 ;;;     gtk_window_set_interactive_debugging
+;;;     gtk_window_is_suspended                            Since 4.12
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-20 --------------------------------------------------------------

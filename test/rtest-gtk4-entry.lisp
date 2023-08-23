@@ -7,7 +7,7 @@
 
 ;;;     GtkEntryIconPosition
 
-(test entry-icon-position
+(test gtk-entry-icon-position
   ;; Check the type
   (is (g:type-is-enum "GtkEntryIconPosition"))
   ;; Check the type initializer
@@ -38,7 +38,7 @@
 
 ;;;     GtkEntry
 
-(test entry-class
+(test gtk-entry-class
   ;; Type check
   (is (g:type-is-object "GtkEntry"))
   ;; Check the registered name
@@ -51,8 +51,11 @@
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkEntry")))
   ;; Check the children
-  (is (equal '()
-             (list-children "GtkEntry")))
+  (if *first-run-gtk-test*
+      (is (equal '()
+                 (list-children "GtkEntry")))
+      (is (equal '("GtkFileChooserEntry")
+                 (list-children "GtkEntry"))))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable" "GtkCellEditable")

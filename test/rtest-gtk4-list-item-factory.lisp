@@ -19,8 +19,11 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkListItemFactory")))
   ;; Check the children
-  (is (equal '("GtkBuilderListItemFactory" "GtkSignalListItemFactory")
-             (list-children "GtkListItemFactory")))
+  (is (or (equal '("GtkBuilderListItemFactory" "GtkSignalListItemFactory")
+                 (list-children "GtkListItemFactory"))
+          (equal '("GtkBuilderListItemFactory" "GtkColumnListItemFactory"
+                   "GtkSignalListItemFactory")
+                 (list-children "GtkListItemFactory"))))
   ;; Check the interfaces
   (is (equal '()
              (list-interfaces "GtkListItemFactory")))

@@ -7,7 +7,7 @@
 
 ;;;     GtkDialogFlags
 
-(test dialog-flags
+(test gtk-dialog-flags
   ;; Check the type
   (is (g:type-is-flags "GtkDialogFlags"))
   ;; Check the registered name
@@ -38,7 +38,7 @@
 
 ;;;     GtkResponseType
 
-(test response-type
+(test gtk-response-type
   ;; Check the type
   (is (g:type-is-enum "GtkResponseType"))
   ;; Check the type initializer
@@ -80,7 +80,7 @@
 
 ;;;     GtkDialog
 
-(test dialog-class
+(test gtk-dialog-class
   ;; Type check
   (is (g:type-is-object "GtkDialog"))
   ;; Check the registered name
@@ -131,7 +131,7 @@
 
 ;;;     use-header-bar
 
-(test dialog-properties
+(test gtk-dialog-properties
   (let ((dialog (make-instance 'gtk:dialog)))
     ;; The default value is not -1.
     (is (= 0 (gtk:dialog-use-header-bar dialog)))))
@@ -140,7 +140,7 @@
 
 ;;;     close
 
-(test dialog-close-signal
+(test gtk-dialog-close-signal
   (let ((query (g:signal-query (g:signal-lookup "close" "GtkDialog"))))
     (is (string= "close" (g:signal-query-signal-name query)))
     (is (string= "GtkDialog" (g:type-name (g:signal-query-owner-type query))))
@@ -153,7 +153,7 @@
 
 ;;;     response
 
-(test dialog-response-signal
+(test gtk-dialog-response-signal
   (let ((query (g:signal-query (g:signal-lookup "response" "GtkDialog"))))
     (is (string= "response" (g:signal-query-signal-name query)))
     (is (string= "GtkDialog" (g:type-name (g:signal-query-owner-type query))))
@@ -168,12 +168,12 @@
 
 ;;;     gtk_dialog_new
 
-(test dialog-new
+(test gtk-dialog-new
   (is (typep (gtk:dialog-new) 'gtk:dialog)))
 
 ;;;     gtk_dialog_new_with_buttons
 
-(test dialog-new-with-buttons
+(test gtk-dialog-new-with-buttons
   (let* ((parent (gtk:window-new))
          (dialog (gtk:dialog-new-with-buttons "My dialog"
                                               parent
@@ -196,4 +196,4 @@
 ;;;     gtk_dialog_get_content_area
 ;;;     gtk_dialog_get_header_bar
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-21 --------------------------------------------------------------

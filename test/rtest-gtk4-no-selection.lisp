@@ -58,7 +58,7 @@
 
 (test gtk-no-selection-new
   (is (typep (gtk:no-selection-new nil) 'gtk:no-selection))
-  (is (typep (gtk:no-selection-new (g:list-store-new "gint")) 
+  (is (typep (gtk:no-selection-new (g:list-store-new "GtkWidget"))
              'gtk:no-selection)))
 
 ;;; --- 2023-8-10 --------------------------------------------------------------
