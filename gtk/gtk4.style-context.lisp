@@ -842,7 +842,7 @@ GtkEntry.entry { ... @}
 
 (cffi:defcfun ("gtk_style_context_to_string" style-context-to-string) :string
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{2023-8-21}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[flags]{a @symbol{gtk:style-context-print-flags} value that
     determine what to print}
@@ -861,22 +861,16 @@ GtkEntry.entry { ... @}
     @begin{pre}
 (setq context
       (gtk:widget-style-context (make-instance 'gtk:dialog)))
-=> #<GTK-STYLE-CONTEXT {1001C70663@}>
+=> #<GTK:STYLE-CONTEXT {1001C70663@}>
 (gtk:style-context-to-string context :recurse)
 =>
-\"[window.background.csd.dialog.message:dir(ltr)]
+\"[window.background.dialog:dir(ltr)]
   box.dialog-vbox.vertical:dir(ltr)
     box.vertical:dir(ltr)
-      box.horizontal:dir(ltr)
-        box.vertical:dir(ltr)
-          label:dir(ltr)
-          [label:dir(ltr)]
     box.dialog-action-box.horizontal:dir(ltr)
       box.dialog-action-area.horizontal:dir(ltr)
-  box.horizontal.titlebar:dir(ltr)
-    [label.title:dir(ltr)]
 \"
-    @end{pre}
+  @end{pre}
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-symbol{gtk:style-context-print-flags}"

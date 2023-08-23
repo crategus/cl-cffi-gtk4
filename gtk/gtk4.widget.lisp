@@ -1998,7 +1998,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-visible)
       "Accessor"
       (documentation 'widget-visible 'function)
- "@version{2023-7-26}
+ "@version{2023-8-22}
   @syntax[]{(gtk:widget-visible object) => setting}
   @syntax[]{(setf (gtk:widget-visible object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -2007,7 +2007,7 @@ lambda (widget)    :run-last
     Accessor of the @slot[gtk:widget]{visible} slot of the @class{gtk:widget}
     class.
   @end{short}
-  The @sym{gtk:widget-visible} function determines whether the widget is
+  The @fun{gtk:widget-visible} function determines whether the widget is
   visible. The @sym{(setf gtk:widget-visible)} function sets the visibility
   state. Note that this does not take into account whether the parent of the
   widget is also visible or the widget is obscured in any way.
@@ -2227,7 +2227,7 @@ lambda (widget)    :run-last
  "@version{#2023-8-4}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
-    Schedules the widget to be redrawn in the paint phase of the current or the 
+    Schedules the widget to be redrawn in the paint phase of the current or the
     next frame.
   @end{short}
   @see-class{gtk:widget}"
