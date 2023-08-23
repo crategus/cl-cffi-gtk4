@@ -416,8 +416,8 @@
        "gtk4-example"
        "color-chooser-palette.lisp")
       ("File Chooser Dialog"
-       ":window"
-       "DO-FILE-CHOOSER-DIALOG"
+       ":dialog"
+       "CREATE-FILE-CHOOSER-DIALOG"
        "gtk4-example"
        "file-chooser-dialog.lisp")
       ("Font Button"
@@ -735,6 +735,8 @@
          ;; The horizontal pane
          (content (make-instance 'gtk:paned
                                  :orientation :horizontal
+                                 :position 320
+                                 :resize-start-child nil
                                  :start-child scroller
                                  :end-child notebook))
          ;; The application window
@@ -744,8 +746,7 @@
                                 :child content
                                 :show-menubar t
                                 :default-width 1000
-                                :default-height 800))
-         )
+                                :default-height 800)))
 
     (g:signal-connect window "close-request"
         (lambda (window)
@@ -863,8 +864,8 @@
                                  :resource-base-path (cffi:null-pointer))))
     (g:resources-register resource)
     ;; Connect signal handlers to the application
-    (g:signal-connect gtk-demo "activate" #'gtk-demo-activate)
     (g:signal-connect gtk-demo "startup" #'gtk-demo-startup)
+    (g:signal-connect gtk-demo "activate" #'gtk-demo-activate)
     (g:signal-connect gtk-demo "shutdown"
         (lambda (application)
           (declare (ignore application))

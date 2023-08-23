@@ -86,7 +86,8 @@
            #:do-color-chooser-dialog
            #:do-color-chooser-widget
            #:do-color-chooser-palette
-           #:do-file-chooser-dialog
+
+           #:create-file-chooser-dialog
 
            #:create-file-dialog-open
            #:create-file-dialog-open-multiple

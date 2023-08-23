@@ -1,7 +1,4 @@
-;;;; Example File Chooser Dialog - 2022-11-19
-
-;; TODO: Improve this example for usage in the GTK demo.
-;; Show the usage of shortcut folders.
+;;;; Example File Chooser Dialog - 2023-8-22
 
 (in-package :gtk4-example)
 
@@ -16,7 +13,9 @@
     (g:signal-connect dialog "response"
                       (lambda (widget response)
                         (declare (ignore response))
-                        (gtk:window-destroy widget)))
+                        (format t "Selected file is ~a~%"
+                                (gtk:file-chooser-namestring dialog))
+                        (gtk:window-destroy dialog)))
     ;; Add a file filter
     (setf (gtk:file-filter-name filter-all) "All Files")
     (gtk:file-filter-add-pattern filter-all "*")
@@ -26,12 +25,4 @@
     (gtk:file-filter-add-pixbuf-formats filter-picture)
     (gtk:file-chooser-add-filter dialog filter-picture)
     ;; Show the dialog
-    (gtk:widget-show dialog)))
-
-
-(defun do-file-chooser-dialog (&optional application)
-  (let ((parent (make-instance 'gtk:window
-                               :application application
-                               :title "File Chooser Dialog")))
-    (create-file-chooser-dialog parent)
-    (gtk:widget-show parent)))
+    (setf (gtk:widget-visible dialog) t)))
