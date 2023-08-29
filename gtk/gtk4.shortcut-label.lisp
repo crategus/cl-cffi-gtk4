@@ -2,11 +2,11 @@
 ;;; gtk4.shortcut-label.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 Dieter Kaiser
+;;; Copyright (C) 2022 - 2023 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -87,9 +87,9 @@
 
 #+liber-documentation
 (setf (documentation 'shortcut-label 'type)
- "@version{#2022-7-12}
+ "@version{2023-8-28}
   @begin{short}
-    A @sym{gtk:shortcut-label} widget is a widget that represents a single
+    A @class{gtk:shortcut-label} widget is a widget that represents a single
     keyboard shortcut or gesture in the user interface.
   @end{short}
   @see-slot{gtk:shortcut-label-accelerator}
@@ -101,11 +101,10 @@
 ;;; Property and Accesor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- shortcut-label-accelerator -----------------------------------------
+;;; --- shortcut-label-accelerator ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "accelerator"
-                                               'shortcut-label) t)
+(setf (documentation (liber:slot-documentation "accelerator" 'shortcut-label) t)
  "The @code{accelerator} property of type @code{:string} (Read / Write) @br{}
   The accelerator that the shortcut label displays. See the
   @slot[gtk:shortcuts-shortcut]{accelerator} property for the accepted syntax.
@@ -125,12 +124,12 @@
     Accessor of the @slot[gtk:shortcut-label]{accelerator} slot of the
     @class{gtk:shortcut-label} class.
   @end{short}
-  The @sym{gtk:shortcut-label-accelerator} function retrieves the current
+  The @fun{gtk:shortcut-label-accelerator} function retrieves the current
   accelerator of the shortcut label. The
   @sym{(setf gtk:shortcut-label-accelerator)} function sets the accelerator.
   @see-class{gtk:shortcut-label}")
 
-;;; --- shortcut-label-disabled-text ---------------------------------------
+;;; --- shortcut-label-disabled-text -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "disabled-text"
@@ -153,7 +152,7 @@
     Accessor of the @slot[gtk:shortcut-label]{accelerator} slot of the
     @class{gtk:shortcut-label} class.
   @end{short}
-  The @sym{gtk:shortcut-label-disabled-text} function retrieves the text that
+  The @fun{gtk:shortcut-label-disabled-text} function retrieves the text that
   is displayed when no accelerator is set. The
   @sym{(setf gtk:shortcut-label-disabled-text)} function sets the text.
   @see-class{gtk:shortcut-label}")

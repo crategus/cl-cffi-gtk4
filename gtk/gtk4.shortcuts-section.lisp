@@ -2,7 +2,7 @@
 ;;; gtk4.shortcuts-section.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -92,9 +92,9 @@
 
 #+liber-documentation
 (setf (documentation 'shortcuts-section 'type)
- "@version{#2020-9-8}
+ "@version{2023-8-28}
   @begin{short}
-    A @sym{gtk:shortcuts-section} widget collects all the keyboard shortcuts
+    A @class{gtk:shortcuts-section} widget collects all the keyboard shortcuts
     and gestures for a major application mode.
   @end{short}
   If your application needs multiple sections, you should give each section a
@@ -112,7 +112,7 @@
 lambda (shortcutsection arg)    :action
       @end{pre}
       @begin[code]{table}
-        @entry[shortcutswindow]{The @sym{gtk:shortcuts-window} object.}
+        @entry[shortcutswindow]{The @class{gtk:shortcuts-window} object.}
         @entry[arg]{An integer, no description available.}
       @end{table}
   @end{dictionary}
@@ -125,7 +125,7 @@ lambda (shortcutsection arg)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- shortcuts-section-max-height ---------------------------------------
+;;; --- shortcuts-section-max-height -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-height"
@@ -150,13 +150,12 @@ lambda (shortcutsection arg)    :action
     Accessor of the @slot[gtk:shortcuts-section]{max-height} slot of the
     @class{gtk:shortcuts-section} class.
   @end{short}
-
   The maximum number of lines to allow per column. This property can be used to
   influence how the groups in this section are distributed across pages and
   columns. The default value of 15 should work in for most cases.
   @see-class{gtk:shortcuts-section}")
 
-;;; --- shortcuts-section-section-name -------------------------------------
+;;; --- shortcuts-section-section-name -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "section-name"
@@ -181,18 +180,16 @@ lambda (shortcutsection arg)    :action
     Accessor of the @slot[gtk:shortcuts-section]{section-name} slot of the
     @class{gtk:shortcuts-section} class.
   @end{short}
-
   A unique name to identify this section among the sections added to the
   @class{gtk:shortcuts-window} widget. Setting the @code{section-name} property
   to this string will make this section shown in the
   @class{gtk:shortcuts-window} widget.
   @see-class{gtk:shortcuts-section}")
 
-;;; --- shortcuts-section-title --------------------------------------------
+;;; --- shortcuts-section-title ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "title"
-                      'shortcuts-section) t)
+(setf (documentation (liber:slot-documentation "title" 'shortcuts-section) t)
  "The @code{title} property of type @code{:string} (Read / Write) @br{}
   The string to show in the section selector of the @class{gtk:shortcuts-window}
   for this section. If there is only one section, you do not need to set a
@@ -212,13 +209,12 @@ lambda (shortcutsection arg)    :action
     Accessor of the @slot[gtk:shortcuts-section]{title} slot of the
     @class{gtk:shortcuts-section} class.
   @end{short}
-
   The string to show in the section selector of the @class{gtk:shortcuts-window}
   for this section. If there is only one section, you do not need to set a
   title, since the section selector will not be shown in this case.
   @see-class{gtk:shortcuts-section}")
 
-;;; --- shortcuts-section-view-name ----------------------------------------
+;;; --- shortcuts-section-view-name --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "view-name"
@@ -243,7 +239,6 @@ lambda (shortcutsection arg)    :action
     Accessor of the slot @slot[gtk:shortcuts-section]{view-name} of the
     @class{gtk:shortcuts-section} class.
   @end{short}
-
   A view name to filter the groups in this section by. See \"view\".
   Applications are expected to use the @code{view-name} property for this
   purpose.

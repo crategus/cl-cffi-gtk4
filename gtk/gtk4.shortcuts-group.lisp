@@ -2,7 +2,7 @@
 ;;; gtk4.shortcuts-group.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -66,7 +66,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkShortcutsGroup" shortcuts-group
-  (:superclass widget
+  (:superclass box
    :export t
    :interfaces ("GtkAccessible"
                 "GtkBuildable"
@@ -91,10 +91,10 @@
 
 #+liber-documentation
 (setf (documentation 'shortcuts-group 'type)
- "@version{#2020-5-4}
+ "@version{2023-8-28}
   @begin{short}
-    The @sym{gtk:shortcuts-group} widget represents a group of related keyboard
-    shortcuts or gestures.
+    The @class{gtk:shortcuts-group} widget represents a group of related 
+    keyboard shortcuts or gestures.
   @end{short}
   The group has a title. It may optionally be associated with a view of the
   application, which can be used to show only relevant shortcuts depending on
@@ -109,7 +109,7 @@
   @see-slot{gtk:shortcuts-group-view}
   @see-class{gtk:shortcuts-window}")
 
-;;; --- shortcuts-group-accel-size-group -----------------------------------
+;;; --- shortcuts-group-accel-size-group ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accel-size-group"
@@ -132,13 +132,12 @@
     Accessor of the @slot[gtk:shortcuts-group]{accel-size-group} slot of the
     @class{gtk:shortcuts-group} class.
   @end{short}
-
   The size group for the accelerator portion of shortcuts in this group.
   This is used internally by GTK, and must not be modified by applications.
   @see-class{gtk:shortcuts-group}
   @see-class{gtk:size-group}")
 
-;;; --- shortcuts-group-height ---------------------------------------------
+;;; --- shortcuts-group-height -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "height" 'shortcuts-group) t)
@@ -161,12 +160,11 @@
     Accessor of the @slot[gtk:shortcuts-group]{height} slot of the
     @class{gtk:shortcuts-group} class.
   @end{short}
-
   A rough measure for the number of lines in this group. This is used
   internally by GTK, and is not useful for applications.
   @see-class{gtk:shortcuts-group}")
 
-;;; --- shortcuts-group-title ----------------------------------------------
+;;; --- shortcuts-group-title --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title"
@@ -188,11 +186,10 @@
     Accessor of the @slot[gtk:shortcuts-group]{title} slot of the
     @class{gtk:shortcuts-group} class.
   @end{short}
-
   The title for this group of shortcuts.
   @see-class{gtk:shortcuts-group}")
 
-;;; --- shortcuts-group-title-size-group -----------------------------------
+;;; --- shortcuts-group-title-size-group ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title-size-group"
@@ -215,13 +212,12 @@
     Accessor of the @slot[gtk:shortcuts-group]{title-size-group} slot of the
     @class{gtk:shortcuts-group} class.
   @end{short}
-
   The size group for the textual portion of shortcuts in this group. This is
   used internally by GTK, and must not be modified by applications.
   @see-class{gtk:shortcuts-group}
   @see-class{gtk:size-group}")
 
-;;; --- shortcuts-group-view -----------------------------------------------
+;;; --- shortcuts-group-view ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "view"
@@ -246,7 +242,6 @@
     Accessor of the @slot[gtk:shortcuts-group]{view} slot of the
     @class{gtk:shortcuts-group} class.
   @end{short}
-
   An optional view that the shortcuts in this group are relevant for. The group
   will be hidden if the @slot[gtk:shortcuts-window]{view-name} property does not
   match the view of this group. Set this to @code{nil} to make the group always

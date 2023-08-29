@@ -2,7 +2,7 @@
 ;;; gtk4.shortcuts-window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -33,7 +33,7 @@
 ;;;
 ;;; Types and Values
 ;;;
-;;; GtkShortcutsWindow
+;;;     GtkShortcutsWindow
 ;;;
 ;;; Properties
 ;;;
@@ -88,9 +88,9 @@
 
 #+liber-documentation
 (setf (documentation 'shortcuts-window 'type)
- "@version{#2020-9-8}
+ "@version{2023-8-28}
   @begin{short}
-    A @sym{gtk:shortcuts-window} widget shows brief information about the
+    A @class{gtk:shortcuts-window} widget shows brief information about the
     keyboard shortcuts and gestures of an application.
   @end{short}
   The shortcuts can be grouped, and you can have multiple sections in this
@@ -99,11 +99,11 @@
   Additionally, the shortcuts can be filtered by the current view, to avoid
   showing information that is not relevant in the current application context.
 
-  The recommended way to construct a @sym{gtkshortcuts-window} widget is with
-  @class{gtk:builder}, by populating a @sym{gtk:shortcuts-window} widget with
-  one or more @class{gtk:shortcuts-section} objects, which contain
-  @class{gtk:shortcuts-groups} that in turn contain objects of class
-  @class{gtk:shortcuts-shortcut}.
+  The recommended way to construct a shortcuts window is with a 
+  @class{gtk:builder} UI definition, by populating a shortcuts window with one 
+  or more @class{gtk:shortcuts-section} objects, which contain
+  @class{gtk:shortcuts-group} objects that in turn contain objects of the
+  @class{gtk:shortcuts-shortcut} class.
   @begin[Example]{dictionary}
     A simple example:
     This example has as single section. As you can see, the shortcut groups are
@@ -114,15 +114,15 @@
     @image[gedit-shortcuts]{}
 
     An example with multiple views:
-    This example shows a @sym{gtk:shortcuts-window} widget that has been
-    configured to show only the shortcuts relevant to the \"stopwatch\" view.
-    The @code{.ui} file for this example can be found
+    This example shows a shortcuts window that has been configured to show only 
+    the shortcuts relevant to the \"stopwatch\" view. The @code{.ui} file for 
+    this example can be found
     @url[https://gitlab.gnome.org/GNOME/gtk/-/blob/master/demos/gtk-demo/shortcuts-clocks.ui]{here}.
 
     @image[clocks-shortcuts]{}
 
     An example with multiple sections:
-    This example shows a @sym{gtk:shortcuts-window} widget with two sections,
+    This example shows a shortcuts window with two sections, 
     \"Editor Shortcuts\" and \"Terminal Shortcuts\". The @code{.ui} file for
     this example can be found
     @url[https://gitlab.gnome.org/GNOME/gtk/-/blob/master/demos/gtk-demo/shortcuts-builder.ui]{here}.
@@ -138,7 +138,7 @@ lambda (shortcutswindow)    :action
       keybinding to close the window. The default binding for this signal is the
       @kbd{Escape} key.
       @begin[code]{table}
-        @entry[shortcutswindow]{The @sym{gtk:shortcuts-window} object.}
+        @entry[shortcutswindow]{The @class{gtk:shortcuts-window} object.}
       @end{table}
     @subheading{The \"search\" signal}
       @begin{pre}
@@ -148,7 +148,7 @@ lambda (shortcutswindow)    :action
       keybinding to start a search. The default binding for this signal is the
       @kbd{Control-F}.
       @begin[code]{table}
-        @entry[shortcutswindow]{The @sym{gtk:shortcuts-window} object.}
+        @entry[shortcutswindow]{The @class{gtk:shortcuts-window} object.}
       @end{table}
   @end{dictionary}
   @see-slot{gtk:shortcuts-window-section-name}
@@ -158,7 +158,7 @@ lambda (shortcutswindow)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- shortcuts-window-section-name --------------------------------------
+;;; --- shortcuts-window-section-name ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "section-name"
@@ -181,17 +181,15 @@ lambda (shortcutswindow)    :action
     Accessor of the @slot[gtk:shortcuts-window]{section-name} slot of the
     @class{gtk:shortcuts-window} class.
   @end{short}
-
   The name of the section to show. This should be the section name of one of the
   @class{gtk:shortcuts-section} objects that are in this shortcuts window.
   @see-class{gtk:shortcuts-window}
   @see-class{gtk:shortcuts-section}")
 
-;;; --- shortcuts-window-view-name -----------------------------------------
+;;; --- shortcuts-window-view-name ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "view-name"
-                      'shortcuts-window) t)
+(setf (documentation (liber:slot-documentation "view-name" 'shortcuts-window) t)
  "The @code{view-name} property of type @code{:string} (Read / Write) @br{}
   The view name by which to filter the contents. This should correspond to the
   @code{view} property of some of the @class{gtk:shortcuts-group} objects that
@@ -213,7 +211,6 @@ lambda (shortcutswindow)    :action
     Accessor of the @slot[gtk:shortcuts-window]{view-name} slot of the
     @class{gtk:shortcuts-window} class.
   @end{short}
-
   The view name by which to filter the contents. This should correspond to the
   @code{view} property of some of the @class{gtk:shortcuts-group} objects that
   are inside this shortcuts window. Set this to @code{nil} to show all groups.

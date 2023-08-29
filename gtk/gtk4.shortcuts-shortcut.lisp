@@ -2,7 +2,7 @@
 ;;; gtk4.shortcuts-shortcut.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -80,16 +80,18 @@
   :gesture-rotate-conterclockwise
   :gesture-two-finger-swipe-left
   :gesture-two-finger-swipe-right
-  :gesture)
+  :gesture
+  :gesture-swipe-left
+  :gesture-swipe-right)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'shortcut-type)
       "GEnum"
       (liber:symbol-documentation 'shortcut-type)
- "@version{#2020-9-14}
+ "@version{2023-8-28}
   @begin{short}
-    @sym{gtk:shortcut-type} specifies the kind of shortcut that is being
-    described.
+    The @symbol{gtk:shortcut-type} enumeration specifies the kind of shortcut 
+    that is being described.
   @end{short}
   More values may be added to this enumeration over time.
   @begin{pre}
@@ -103,7 +105,9 @@
   :gesture-rotate-conterclockwise
   :gesture-two-finger-swipe-left
   :gesture-two-finger-swipe-right
-  :gesture)
+  :gesture
+  :gesture-swipe-left
+  :gesture-swipe-right)
   @end{pre}
   @begin[code]{table}
     @entry[:accelerator]{The shortcut is a keyboard accelerator. The
@@ -122,6 +126,10 @@
       gesture. GTK provides an icon and subtitle.}
     @entry[:gesture]{The shortcut is a gesture. The @code{icon} property will
       be used.}
+    @entry[:gesture-swipe-left]{The shortcut is a swipe gesture. GTK provides 
+      an icon and subtitle.}
+    @entry[:gesture-swipe-right]{The shortcut is a swipe gesture. GTK provides
+      an icon and subtitle.}
   @end{table}
   @see-class{gtk:shortcuts-shortcut}")
 
@@ -172,12 +180,13 @@
 
 #+liber-documentation
 (setf (documentation 'shortcuts-shortcut 'type)
- "@version{#2020-9-14}
+ "@version{2023-8-28}
   @begin{short}
-    A @sym{gtk:shortcuts-shortcut} represents a single keyboard shortcut or
-    gesture with a short text.
+    A @class{gtk:shortcuts-shortcut} widget represents a single keyboard 
+    shortcut or gesture with a short text.
   @end{short}
-  This widget is only meant to be used with @class{gtk:shortcuts-window}.
+  This widget is only meant to be used with the @class{gtk:shortcuts-window}
+  widget.
   @see-slot{gtk:shortcuts-shortcut-accel-size-group}
   @see-slot{gtk:shortcuts-shortcut-accelerator}
   @see-slot{gtk:shortcuts-shortcut-action-name}
@@ -195,7 +204,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- shortcuts-shortcut-accel-size-group --------------------------------
+;;; --- shortcuts-shortcut-accel-size-group ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accel-size-group"
@@ -218,12 +227,11 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{accel-size-group} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   The size group for the accelerator portion of this shortcut. This is used
   internally by GTK, and must not be modified by applications.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-accelerator -------------------------------------
+;;; --- shortcuts-shortcut-accelerator -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accelerator"
@@ -262,7 +270,6 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{accelerator} of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   The accelerator(s) represented by this object. This property is used if
   \"shortcut-type\" is set to @code{:accelerator}. The syntax of this property
   is (an extension of) the syntax understood by the function
@@ -282,7 +289,7 @@
   Note that <, > and & need to be escaped as <, > and & when used in .ui files.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-action-name -------------------------------------
+;;; --- shortcuts-shortcut-action-name -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "action-name"
@@ -307,14 +314,13 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{action-name} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   A detailed action name. If this is set for a shortcut of type
   @code{:accelerator}, then GTK will use the accelerators that are associated
   with the action via the function @fun{gtk:application-accels-for-action},
   and setting @code{accelerator} is not necessary.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-direction ---------------------------------------
+;;; --- shortcuts-shortcut-direction -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "direction"
@@ -338,16 +344,14 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{direction} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   The text direction for which this shortcut is active. If the shortcut is used
   regardless of the text direction, set this property to @code{:none}.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-icon --------------------------------------------
+;;; --- shortcuts-shortcut-icon ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "icon"
-                      'shortcuts-shortcut) t)
+(setf (documentation (liber:slot-documentation "icon" 'shortcuts-shortcut) t)
  "The @code{icon} property of type @class{g:icon} (Read / Write) @br{}
   An icon to represent the shortcut or gesture. This property is used if
   @code{shortcut-type} is set to @code{:gesture}. For the other predefined
@@ -366,13 +370,12 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{icon} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   An icon to represent the shortcut or gesture. This property is used if
   @code{shortcut-type} is set to @code{:gesture}. For the other predefined
   gesture types, GTK provides an icon on its own.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-icon-set ----------------------------------------
+;;; --- shortcuts-shortcut-icon-set --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-set"
@@ -394,11 +397,10 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{icon-set} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   @em{True} if an icon has been set.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-shortcut-type -----------------------------------
+;;; --- shortcuts-shortcut-shortcut-type ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "shortcut-type"
@@ -421,11 +423,10 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{shortcut-type} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   The type of shortcut that is represented.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-subtitle ----------------------------------------
+;;; --- shortcuts-shortcut-subtitle --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "subtitle"
@@ -449,13 +450,12 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{subtitle} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   The subtitle for the shortcut or gesture. This is typically used for gestures
   and should be a short, one-line text that describes the gesture itself. For
   the predefined gesture types, GTK provides a subtitle on its own.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-subtitle-set ------------------------------------
+;;; --- shortcuts-shortcut-subtitle-set ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "subtitle-set"
@@ -477,11 +477,10 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{subtitle-set} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   @em{True} if a subtitle has been set.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-title -------------------------------------------
+;;; --- shortcuts-shortcut-title -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title"
@@ -505,12 +504,11 @@
     Accessor of the @slot[gtk:shortcuts-shortcut]{title} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   The textual description for the shortcut or gesture represented by this
   object. This should be a short string that can fit in a single line.
   @see-class{gtk:shortcuts-shortcut}")
 
-;;; --- shortcuts-shortcut-title-size-group --------------------------------
+;;; --- shortcuts-shortcut-title-size-group ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title-size-group"
@@ -533,7 +531,6 @@
     Accessor of the slot @slot[gtk:shortcuts-shortcut]{title-size-group} of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
-
   The size group for the textual portion of this shortcut. This is used
   internally by GTK, and must not be modified by applications.
   @see-class{gtk:shortcuts-shortcut}")
