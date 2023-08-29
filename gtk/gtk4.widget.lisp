@@ -1233,20 +1233,17 @@ lambda (widget)    :run-last
 (setf (documentation (liber:slot-documentation "has-tooltip" 'widget) t)
  "The @code{has-tooltip} property of type @code{:boolean} (Read / Write) @br{}
   Enables or disables the emission of the \"query-tooltip\" signal on the
-  widget. A @em{true} value indicates that the widget can have a tooltip, in
-  this case the widget will be queried using the \"query-tooltip\" signal to
-  determine whether it will provide a tooltip or not. Note that setting this
-  property to @em{true} for the first time will change the event masks of the
-  @class{gdk:window} objects of this widget to include \"leave-notify\" and
-  \"motion-notify\" events. This cannot and will not be undone when the property
-  is set to @em{false} again. @br{}
+  widget. Enables or disables the emission of the \"query-tooltip\" signal on
+  the widget. A @em{true} value indicates that the widget can have a tooltip,
+  in this case the widget will be queried using the \"query-tooltip\" signal to
+  determine whether it will provide a tooltip or not. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'widget-has-tooltip)
       "Accessor"
       (documentation 'widget-has-tooltip 'function)
- "@version{#2021-9-15}
+ "@version{#2023-8-29}
   @syntax[]{(gtk:widget-has-tooltip object) => setting}
   @syntax[]{(setf (gtk:widget-has-tooltip object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1259,13 +1256,8 @@ lambda (widget)    :run-last
   Enables or disables the emission of the \"query-tooltip\" signal on the
   widget. A @em{true} value indicates that the widget can have a tooltip, in
   this case the widget will be queried using the \"query-tooltip\" signal to
-  determine whether it will provide a tooltip or not. Note that setting this
-  property to @em{true} for the first time will change the event masks of the
-  @class{gdk:window} objects of this widget to include \"leave-notify\" and
-  \"motion-notify\" events. This cannot and will not be undone when the property
-  is set to @em{false} again.
-  @see-class{gtk:widget}
-  @see-class{gdk:window}")
+  determine whether it will provide a tooltip or not.
+  @see-class{gtk:widget}")
 
 ;;; --- widget-height-request --------------------------------------------------
 
