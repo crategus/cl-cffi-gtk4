@@ -2,7 +2,7 @@
 ;;; gtk4.im-context-simple.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -40,7 +40,7 @@
 ;;; Functions
 ;;;
 ;;;     gtk_im_context_simple_new
-;;;     gtk_im_context_simple_add_table
+;;;     gtk_im_context_simple_add_table                    Deprecated 4.4
 ;;;     gtk_im_context_simple_add_compose_file
 ;;;
 ;;; Object Hierarchy
@@ -73,27 +73,43 @@
 
 #+liber-documentation
 (setf (documentation 'im-context-simple 'type)
- "@version{#2022-7-10}
+ "@version{2023-8-29}
   @begin{short}
-    The @sym{gtk:im-context-simple} object is a simple input method context
+    The @class{gtk:im-context-simple} class is a simple input method context
     supporting table-based input methods.
   @end{short}
-  It has a built-in table of compose sequences that is derived from the X11
-  Compose files.
 
-  The @sym{gtk:im-context-simple} object reads additional compose sequences
-  from the first of the following files that is found:
-  @code{~/.config/gtk-4.0/Compose},
-  @code{~/.XCompose},
-  @code{/usr/share/X11/locale/$locale/Compose},
-  for locales that have a nontrivial Compose file. The syntax of these files is
-  described in the Compose(5) manual page.
+  @subheading{Compose sequences}
+  The @class{gtk:im-context-simple} class reads compose sequences from the
+  first of the following files that is found: @file{~/.config/gtk-4.0/Compose},
+  @file{~/.XCompose}, @file{/usr/share/X11/locale/$locale/Compose} (for locales
+  that have a nontrivial Compose file). A subset of the file syntax described in
+  the Compose(5) manual page is supported. Additionally, include @code{\"L\"}
+  loads GTK’s built-in table of compose sequences rather than the
+  locale-specific one from X11.
+
+  If none of these files is found, the @class{gtk:im-context-simple} class uses
+  a built-in table of compose sequences that is derived from the X11 Compose
+  files.
+
+  Note that compose sequences typically start with the @code{Compose_key}, which
+  is often not available as a dedicated key on keyboards. Keyboard layouts may
+  map this keysym to other keys, such as the right @kbd{Control} key.
 
   @subheading{Unicode characters}
-  The @sym{gtk:im-context-simple} object also supports numeric entry of Unicode
-  characters by typing the @kbd{Ctrl-Shift-u} key, followed by a hexadecimal
-  Unicode codepoint. For example, @kbd{Ctrl-Shift-u 1 2 3 Enter} yields U+0123
-  LATIN SMALL LETTER G WITH CEDILLA, i.e. ģ.
+  The @class{gtk:im-context-simple} class also supports numeric entry of
+  Unicode characters by typing the @kbd{Ctrl-Shift-u} key, followed by a
+  hexadecimal Unicode codepoint. For example, @kbd{Ctrl-Shift-u 1 2 3 Enter}
+  yields @code{U+0123 LATIN SMALL LETTER G WITH CEDILLA}, i.e. ģ.
+
+  @subheading{Dead keys}
+  The @class{gtk:im-context-simple} class supports dead keys. For example,
+  typing
+  @begin{pre}
+dead_acute a
+  @end{pre}
+  yields @code{U+00E! LATIN SMALL LETTER_A WITH ACUTE}, i.e. á. Note that this
+  depends on the keyboard layout including dead keys.
   @see-class{gtk:im-context}")
 
 ;;; ----------------------------------------------------------------------------
@@ -102,7 +118,7 @@
 
 (defun im-context-simple-new ()
  #+liber-documentation
- "@version{#2022-7-10}
+ "@version{2023-8-29}
   @return{A new @class{gtk:im-context-simple} object.}
   @short{Creates a new simple input method.}
   @see-class{gtk:im-context-simple}"
@@ -126,6 +142,8 @@
 ;;;
 ;;; The table must be sorted in dictionary order on the numeric value of the key
 ;;; symbol fields. (Values beyond the length of the sequence should be zero.)
+;;;
+;;; Deprecated 4.4
 ;;;
 ;;; context_simple :
 ;;;     A GtkIMContextSimple

@@ -2,7 +2,7 @@
 ;;; gtk4.im-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -46,9 +46,11 @@
 ;;;     gtk_im_context_set_client_widget
 ;;;     gtk_im_context_set_cursor_location
 ;;;     gtk_im_context_set_use_preedit
-;;;     gtk_im_context_set_surrounding
-;;;     gtk_im_context_get_surrounding
+;;;     gtk_im_context_set_surrounding                     Deprecated 4.2
+;;;     gtk_im_context_get_surrounding                     Deprecated 4.2
 ;;;     gtk_im_context_delete_surrounding
+;;;     gtk_im_context_get_surrounding_with_selection      Since 4.2
+;;;     gtk_im_context_set_surrounding_with_selection      Since 4.2
 ;;;
 ;;; Properties
 ;;;
@@ -92,79 +94,39 @@
 
 #+liber-documentation
 (setf (documentation 'im-context 'type)
- "@version{#2020-9-15}
+ "@version{2023-8-29}
   @begin{short}
-    The @sym{gtk:im-context} object defines the interface for GTK input methods.
+    The @class{gtk:im-context} class defines the interface for GTK input
+    methods.
   @end{short}
-  An input method is used by GTK text input widgets like @class{gtk:entry} to
-  map from key events to Unicode character strings.
+  An input method is used by GTK text input widgets like the @class{gtk:entry}
+  widget to map from key events to Unicode character strings.
 
-  The default input method can be set programmatically via the
-  @slot[gtk:settings]{im-module} property. Alternatively, you may set the
-  @code{GTK_IM_MODULE} environment variable as documented in Running GTK
-  Applications.
+  An input method may consume multiple key events in sequence before finally
+  outputting the composed result. This is called preediting, and an input
+  method may provide feedback about this process by displaying the intermediate
+  composition states as preedit text. To do so, the @class{gtk:im-context}
+  object will emit the \"preedit-start\", \"preedit-changed\" and
+  \"preedit-end\" signals.
 
-  The @slot[gtk:entry]{im-module} and @slot[gtk:text-view]{im-module} properties
-  may also be used to set input methods for specific widget instances. For
-  instance, a certain entry widget might be expected to contain certain
-  characters which would be easier to input with a certain input method.
-
-  An input method may consume multiple key events in sequence and finally
-  output the composed result. This is called preediting, and an input method
-  may provide feedback about this process by displaying the intermediate
-  composition states as preedit text. For instance, the default GTK input
-  method implements the input of arbitrary Unicode code points by holding down
-  the @kbd{Control} and @kbd{Shift} keys and then typing \"U\" followed by the
-  hexadecimal digits of the code point. When releasing the @bdk{Control} and
-  @kbd{Shift} keys, preediting ends and the character is inserted as text.
-  The @kbd{Ctrl+Shift+u20AC} key for example results in the Euro sign.
+  For instance, the built-in GTK @class{gtk:im-context-simple} input method
+  implements the input of arbitrary Unicode code points by holding down the
+  @kbd{Control} and @kbd{Shift} keys and then typing @kbd{u} followed by the
+  hexadecimal digits of the code point. When releasing the @kbd{Control} and
+  @kbd{Shift} keys, preediting ends and the character is inserted as text. For
+  example,
+  @begin{pre}
+Ctrl+Shift+u 2 0 A C
+  @end{pre}
+  results in the € sign.
 
   Additional input methods can be made available for use by GTK widgets as
   loadable modules. An input method module is a small shared library which
-  implements a subclass of @sym{gtk:im-context} or @class{gtk:im-context-simple}
-  and exports these four functions:
-  @begin{pre}
-void im_module_init(<GTKDOCLINK HREF=\"GTypeModule\">
-                      GTypeModule</GTKDOCLINK> *module);
-  @end{pre}
-  This function should register the @class{g:type-t} of the @sym{gtk:im-context}
-  subclass which implements the input method by means of the
-  @code{g_type_module_register_type()} function. Note that the
-  @code{g_type_register_static()} function cannot be used as the type needs to
-  be registered dynamically.
-  @begin{pre}
-void im_module_exit(void);
-  @end{pre}
-  Here goes any cleanup code your input method might require on module unload.
-  @begin{pre}
-void im_module_list(const <a class=\"link\"
-                      href=\"GtkIMContext.html#GtkIMContextInfo\"
-                      title=\"struct GtkIMContextInfo\">GtkIMContextInfo</a>
-                      ***contexts, int *n_contexts)
-{
-  *contexts = info_list;
-  *n_contexts = G_N_ELEMENTS (info_list);
-@}
-  @end{pre}
-  This function returns the list of input methods provided by the module. The
-  example implementation above shows a common solution and simply returns a
-  pointer to statically defined array of @symbol{gtk:im-context-info} items for
-  each provided input method.
-  @begin{pre}
-<a class=\"link\" href=\"GtkIMContext.html\"
-                title=\"GtkIMContext\">GtkIMContext</a> *
-                im_module_create(const <GTKDOCLINK HREF=\"gchar\">
-                                    gchar</GTKDOCLINK> *context_id);
-  @end{pre}
-  This function should return a pointer to a newly created instance of the
-  @sym{gtk:im-context} subclass identified by @code{context-id}. The context ID
-  is the same as specified in the @symbol{gtk:im-context-info} array returned by
-  @code{im_module_list()}.
+  provides a @code{GIOExtension} for the extension point named
+  @file{gtk-im-module}.
 
-  After a new loadable input method module has been installed on the system,
-  the configuration file @code{gtk.immodules} needs to be regenerated by
-  @code{gtk-query-immodules-3.0}, in order for the new input method to become
-  available to GTK applications.
+  To connect a widget to the users preferred input method, you should use the
+  @class{gtk:im-multicontext} class.
   @begin[Signal Details]{dictionary}
     @subheading{The \"commit\" signal}
       @begin{pre}
@@ -174,23 +136,24 @@ lambda (context str)    :run-last
       the user. This can be a single character immediately after a key press or
       the final result of preediting.
       @begin[code]{table}
-        @entry[context]{The @sym{gtk:im-context} object on which the signal is
-          emitted.}
-        @entry[str]{The completed character(s) entered by the user.}
+        @entry[context]{The @class{gtk:im-context} object on which the signal
+          is emitted.}
+        @entry[str]{A string with the completed character(s) entered by the
+          user.}
       @end{table}
     @subheading{The \"delete-surrounding\" signal}
       @begin{pre}
 lambda (context offset n-chars)    :run-last
       @end{pre}
-      The signal is emitted when the input method needs to delete all or part of
-      the context surrounding the cursor.
+      The signal is emitted when the input method needs to delete all or part
+      of the context surrounding the cursor.
       @begin[code]{table}
-        @entry[context]{The @sym{gtk:im-context} object on which the signal is
-          emitted.}
-        @entry[offset]{The character offset from the cursor position of the text
-          to be deleted. A negative value indicates a position before the
-          cursor.}
-        @entry[n-chars]{The number of characters to be deleted.}
+        @entry[context]{The @class{gtk:im-context} object on which the signal
+          is emitted.}
+        @entry[offset]{An integer with the character offset from the cursor
+          position of the text to be deleted. A negative value indicates a
+          position before the cursor.}
+        @entry[n-chars]{An integer with the number of characters to be deleted.}
         @entry[Returns]{@em{True} if the signal was handled.}
       @end{table}
     @subheading{The \"preedit-changed\" signal}
@@ -199,11 +162,11 @@ lambda (context)    :run-last
       @end{pre}
       The signal is emitted whenever the preedit sequence currently being
       entered has changed. It is also emitted at the end of a preedit sequence,
-      in which case the @fun{gtk:im-context-preedit-string} function returns the
-      empty string.
+      in which case the @fun{gtk:im-context-preedit-string} function returns
+      the empty string.
       @begin[code]{table}
-        @entry[context]{The @sym{gtk:im-context} object on which the signal is
-          emitted.}
+        @entry[context]{The @class{gtk:im-context} object on which the signal
+          is emitted.}
       @end{table}
     @subheading{The \"preedit-end\" signal}
       @begin{pre}
@@ -212,8 +175,8 @@ lambda (context)    :run-last
       The signal is emitted when a preediting sequence has been completed or
       canceled.
       @begin[code]{table}
-        @entry[context]{The @sym{gtk:im-context} object on which the signal is
-          emitted.}
+        @entry[context]{The @class{gtk:im-context} object on which the signal
+          is emitted.}
       @end{table}
     @subheading{The \"preedit-start\" signal}
       @begin{pre}
@@ -221,8 +184,8 @@ lambda (context)    :run-last
       @end{pre}
       The signal is emitted when a new preediting sequence starts.
       @begin[code]{table}
-        @entry[context]{The @sym{gtk:im-context} object on which the signal is
-          emitted.}
+        @entry[context]{The @class{gtk:im-context} object on which the signal
+          is emitted.}
       @end{table}
     @subheading{The \"retrieve-surrounding\" signal}
       @begin{pre}
@@ -233,7 +196,8 @@ lambda (context)    :run-last
       surrounding context by calling the @fun{gtk:im-context-surrounding}
       function.
       @begin[code]{table}
-        @entry[context]{The object on which the signal is emitted.}
+        @entry[context]{The @class{gtk:im-context} object on which the signal
+          is emitted.}
         @entry[Returns]{@em{True} if the signal was handled.}
       @end{table}
   @end{dictionary}
@@ -246,7 +210,7 @@ lambda (context)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- im-context-input-hints ---------------------------------------------
+;;; --- im-context-input-hints -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-hints" 'im-context) t)
@@ -258,7 +222,7 @@ lambda (context)    :run-last
 (setf (liber:alias-for-function 'im-context-input-hints)
       "Accessor"
       (documentation 'im-context-input-hints 'function)
- "@version{#2020-9-15}
+ "@version{2023-8-29}
   @syntax[]{(gtk:im-context-input-hints object) => hints}
   @syntax[]{(setf (gtk:im-context-input-hints object) hints)}
   @argument[object]{a @class{gtk:im-context} object}
@@ -267,15 +231,13 @@ lambda (context)    :run-last
     Accessor of the @slot[gtk:im-context]{input-hints} slot of the
     @class{gtk:im-context} class.
   @end{short}
-
   Hints for the text field behaviour.
   @see-class{gtk:im-context}")
 
-;;; --- im-context-input-purpose -------------------------------------------
+;;; --- im-context-input-purpose -----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "input-purpose"
-                                               'im-context) t)
+(setf (documentation (liber:slot-documentation "input-purpose" 'im-context) t)
  "The @code{input-purpose} property of type @symbol{gtk:input-purpose}
   (Read / Write) @br{}
   Purpose of the text field. @br{}
@@ -285,7 +247,7 @@ lambda (context)    :run-last
 (setf (liber:alias-for-function 'im-context-input-purpose)
       "Accessor"
       (documentation 'im-context-input-purpose 'function)
- "@version{#2020-9-15}
+ "@version{2023-8-29}
   @syntax[]{(gtk:im-context-input-purpose object) => purpose}
   @syntax[]{(setf (gtk:im-context-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:im-context} object}
@@ -295,7 +257,6 @@ lambda (context)    :run-last
     Accessor of the @slot[gtk:im-context]{input-purpose} slot of the
     @class{gtk:im-context} class.
   @end{short}
-
   Purpose of the text field.
   @see-class{gtk:im-context}")
 
@@ -450,8 +411,8 @@ lambda (context)    :run-last
 ;;;     a GtkIMContext
 ;;;
 ;;; widget :
-;;;     the client widget. This may be NULL to indicate that the previous client
-;;;     widget no longer exists.
+;;;     the client widget. This may be NULL to indicate that the previous
+;;;     client widget no longer exists.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -479,9 +440,9 @@ lambda (context)    :run-last
 ;;;                                 gboolean use_preedit);
 ;;;
 ;;; Sets whether the IM context should use the preedit string to display
-;;; feedback. If use_preedit is FALSE (default is TRUE), then the IM context may
-;;; use some other method to display feedback, such as displaying it in a child
-;;; of the root window.
+;;; feedback. If use_preedit is FALSE (default is TRUE), then the IM context
+;;; may use some other method to display feedback, such as displaying it in a
+;;; child of the root window.
 ;;;
 ;;; context :
 ;;;     a GtkIMContext
@@ -499,10 +460,13 @@ lambda (context)    :run-last
 ;;;                                 int len,
 ;;;                                 int cursor_index);
 ;;;
-;;; Sets surrounding context around the insertion point and preedit string. This
-;;; function is expected to be called in response to the
-;;; GtkIMContext::retrieve_surrounding signal, and will likely have no effect if
-;;; called at other times.
+;;; Sets surrounding context around the insertion point and preedit string.
+;;; This function is expected to be called in response to the
+;;; GtkIMContext::retrieve_surrounding signal, and will likely have no effect
+;;; if called at other times.
+;;;
+;;; Deprecated since: 4.2
+;;; Use gtk_im_context_set_surrounding_with_selection() instead.
 ;;;
 ;;; context :
 ;;;     a GtkIMContext
@@ -538,6 +502,9 @@ lambda (context)    :run-last
 ;;; that there is no obligation for a widget to respond to
 ;;; the ::retrieve_surrounding signal, so input methods must be prepared to
 ;;; function without context.
+;;;
+;;; Deprecated since: 4.2
+;;; Use gtk_im_context_get_surrounding_with_selection() instead.
 ;;;
 ;;; context :
 ;;;     a GtkIMContext
@@ -591,6 +558,25 @@ lambda (context)    :run-last
 ;;;
 ;;; Returns :
 ;;;     TRUE if the signal was handled.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_im_context_get_surrounding_with_selection
+;;;
+;;; Retrieves context around the insertion point.
+;;;
+;;; Since 4.2
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_im_context_set_surrounding_with_selection
+;;;
+;;; Sets surrounding context around the insertion point and preedit string.
+;;; This function is expected to be called in response to the
+;;; GtkIMContext::retrieve-surrounding signal, and will likely have no effect
+;;; if called at other times.
+;;;
+;;; Since 4.2
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.im-context.lisp ---------------------------------------

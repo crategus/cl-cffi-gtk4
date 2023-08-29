@@ -2,7 +2,7 @@
 ;;; gtk4.im-multicontext.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,14 +63,14 @@
 
 #+liber-documentation
 (setf (documentation 'im-multicontext 'type)
- "@version{#2022-7-10}
+ "@version{2023-8-29}
   @begin{short}
-    The @sym{gtk:im-multicontext} object is an input method context supporting
+    The @class{gtk:im-multicontext} class is an input method context supporting
     multiple, switchable input methods.
   @end{short}
   Text widgets such as @class{gtk:text} or @class{gtk:text-view} widgets use a
-  @sym{gtk:im-multicontext} object to implement their @code{im-module} property
-  for switching between different input methods.
+  @class{gtk:im-multicontext} object to implement their @code{im-module}
+  property for switching between different input methods.
   @see-class{gtk:im-context}
   @see-class{gtk:text}
   @see-class{gtk:text-view}")
@@ -81,10 +81,12 @@
 
 (defun im-multicontext-new ()
  #+liber-documentation
- "@version{#2022-7-10}
+ "@version{2023-8-29}
   @return{A new @class{gtk:im-multicontext} object.}
-  @short{Creates a new input method context supporting multiple, switchable
-    input methods.}
+  @begin{short}
+    Creates a new input method context supporting multiple, switchable
+    input methods.
+  @end{short}
   @see-class{gtk:im-multicontext}"
   (make-instance 'im-multicontext))
 
