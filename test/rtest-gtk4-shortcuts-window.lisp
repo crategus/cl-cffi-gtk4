@@ -7,7 +7,7 @@
 
 ;;; GtkShortcutsWindow
 
-(test shortcuts-window-class
+(test gtk-shortcuts-window-class
   ;; Type check
   (is (g:type-is-object "GtkShortcutsWindow"))
   ;; Check the registered name
@@ -15,7 +15,8 @@
           (glib:symbol-for-gtype "GtkShortcutsWindow")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkShortcutsWindow")
-          (g:gtype (cffi:foreign-funcall "gtk_shortcuts_window_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_shortcuts_window_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWindow")
           (g:type-parent "GtkShortcutsWindow")))
@@ -37,13 +38,73 @@
                (gtk:widget-class-css-name "GtkShortcutsWindow")))
   (is (string=
 "[window.background.csd:dir(ltr)]
+  box.vertical:dir(ltr)
+    searchbar:dir(ltr)
+      revealer:dir(ltr)
+        box:dir(ltr)
+          entry.search:dir(ltr)
+            image:dir(ltr)
+            text:dir(ltr)
+              placeholder:dir(ltr)
+              undershoot.left:dir(ltr)
+              undershoot.right:dir(ltr)
+            image:dir(ltr)
+          [button.close.image-button:dir(ltr)]
+            image:dir(ltr)
+    stack:dir(ltr)
+      scrolledwindow:dir(ltr)
+        viewport:dir(ltr)
+          box.shortcuts-search-results.vertical:dir(ltr)
+            box.vertical:dir(ltr)
+            box.vertical:dir(ltr)
+        scrollbar.bottom.horizontal:dir(ltr)
+          range.horizontal:dir(ltr)
+            trough:dir(ltr)
+              slider:dir(ltr)
+        scrollbar.right.vertical:dir(ltr)
+          range.vertical:dir(ltr)
+            trough:dir(ltr)
+              slider:dir(ltr)
+        overshoot.left:dir(ltr)
+        undershoot.left:dir(ltr)
+        overshoot.right:dir(ltr)
+        undershoot.right:dir(ltr)
+        overshoot.top:dir(ltr)
+        undershoot.top:dir(ltr)
+        overshoot.bottom:dir(ltr)
+        undershoot.bottom:dir(ltr)
+        junction:dir(ltr)
+      grid.dim-label.horizontal:dir(ltr)
+        image:dir(ltr)
+        label:dir(ltr)
+        label:dir(ltr)
+  headerbar.titlebar:dir(ltr)
+    windowhandle:dir(ltr)
+      box:dir(ltr)
+        box.horizontal.start:dir(ltr)
+          [windowcontrols.empty.start:dir(ltr)]
+          button.image-button.toggle:dir(ltr)
+            image:dir(ltr)
+        stack:dir(ltr)
+          label.title:dir(ltr)
+          label.title:dir(ltr)
+          menubutton.flat.popup:dir(ltr)
+            button.image-button.toggle:dir(ltr)
+              arrow.down:dir(ltr)
+            [popover.background:dir(ltr)]
+              contents:dir(ltr)
+                list:dir(ltr)
+              arrow:dir(ltr)
+        box.end.horizontal:dir(ltr)
+          windowcontrols.end:dir(ltr)
+            button.minimize:dir(ltr)
+              image:dir(ltr)
+            button.close:dir(ltr)
+              image:dir(ltr)
 "
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context
-                       (make-instance 'gtk:shortcuts-window))
-                   :none)))
+               (print-style-context "GtkShortcutsWindow")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsWindow" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsWindow"
                                              GTK-SHORTCUTS-WINDOW
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
@@ -65,4 +126,4 @@
 ;;;     close
 ;;;     search
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-28 --------------------------------------------------------------
