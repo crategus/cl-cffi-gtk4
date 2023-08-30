@@ -2,7 +2,7 @@
 ;;; gtk4.style-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -75,7 +75,7 @@
       (documentation 'style-provider 'type)
  "@version{2023-3-26}
   @begin{short}
-    The @sym{gtk:style-provider} interface is an interface used to provide
+    The @class{gtk:style-provider} interface is an interface used to provide
     style information to a @class{gtk:style-context} object.
   @end{short}
   See the @fun{gtk:style-context-add-provider} and
@@ -89,8 +89,8 @@ lambda (provider)    :run-last
       @end{pre}
       No description available.
       @begin[code]{table}
-        @entry[provider]{The @sym{gtk:style-provider} object which received the
-          signal.}
+        @entry[provider]{The @class{gtk:style-provider} object which received
+          the signal.}
       @end{table}
   @end{dictionary}
   @see-class{gtk:style-context}

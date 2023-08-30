@@ -2,7 +2,7 @@
 ;;; gtk4.css-provider.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -44,10 +44,12 @@
 ;;; Functions
 ;;;
 ;;;     gtk_css_provider_load_named
-;;;     gtk_css_provider_load_from_data
+;;;     gtk_css_provider_load_from_data                    Deprecated 4.12
 ;;;     gtk_css_provider_load_from_file
 ;;;     gtk_css_provider_load_from_path
 ;;;     gtk_css_provider_load_from_resource
+;;;     gtk_css_provider_load_from_bytes                   Since 4.12
+;;;     gtk_css_provider_load_from_string                  Since 4.12
 ;;;     gtk_css_provider_new
 ;;;     gtk_css_provider_to_string
 ;;;
@@ -97,7 +99,7 @@
       (liber:symbol-documentation 'css-location)
  "@version{#2022-8-20}
   @begin{short}
-    The @sym{gtk:css-location} structure is used to present a location in a
+    The @class{gtk:css-location} structure is used to present a location in a
     file or other source of data parsed by the CSS engine.
   @end{short}
   The @code{bytes} and @code{line-bytes} offsets are meant to be used to
@@ -140,8 +142,7 @@
 ;;; --- css-location-bytes -----------------------------------------------------
 
 #+liber-documentation
-(setf (liber:alias-for-function 'css-location-bytes)
-      "Accessor")
+(setf (liber:alias-for-function 'css-location-bytes) "Accessor")
 
 (defun css-location-bytes (location)
  #+liber-documentation
@@ -158,8 +159,7 @@
 ;;; --- css-location-chars -----------------------------------------------------
 
 #+liber-documentation
-(setf (liber:alias-for-function 'css-location-chars)
-      "Accessor")
+(setf (liber:alias-for-function 'css-location-chars) "Accessor")
 
 (defun css-location-chars (location)
  #+liber-documentation
@@ -176,8 +176,7 @@
 ;;; --- css-location-lines -----------------------------------------------------
 
 #+liber-documentation
-(setf (liber:alias-for-function 'css-location-lines)
-      "Accessor")
+(setf (liber:alias-for-function 'css-location-lines) "Accessor")
 
 (defun css-location-lines (location)
  #+liber-documentation
@@ -195,8 +194,7 @@
 ;;; --- css-location-line-bytes ------------------------------------------------
 
 #+liber-documentation
-(setf (liber:alias-for-function 'css-location-line-bytes)
-      "Accessor")
+(setf (liber:alias-for-function 'css-location-line-bytes) "Accessor")
 
 (defun css-location-line-bytes (location)
  "@version{2022-12-4}
@@ -212,8 +210,7 @@
 ;;; --- css-location-line-chars ------------------------------------------------
 
 #+liber-documentation
-(setf (liber:alias-for-function 'css-location-line-chars)
-      "Accessor")
+(setf (liber:alias-for-function 'css-location-line-chars) "Accessor")
 
 (defun css-location-line-chars (location)
  "@version{#2022-8-20}
@@ -244,6 +241,7 @@
   @end{short}
   Because sections are nested into one another, you can use the
   @fun{gtk:css-section-parent} function to get the containing region.
+  @see-constructor{gtk:css-section-new}
   @see-class{gtk:css-provider}
   @see-function{gtk:css-section-parent}")
 
@@ -422,6 +420,11 @@ lambda (provider section error)    :run-last
   @end{short}
   To track errors while loading CSS, connect to the \"parsing-error\" signal
   of the @class{gtk:css-provider} object.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.12. Use the
+    @fun{gtk:css-provider-load-from-string} or
+    @fun{gtk:css-provider-load-from-bytes} functions instead.
+  @end{dictionary}
   @see-class{gtk:css-provider}"
   (%css-provider-load-from-data provider data -1))
 
@@ -434,9 +437,9 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_file" css-provider-load-from-file)
     :void
  #+liber-documentation
- "@version{#2022-8-20}
+ "@version{2023-8-30}
   @argument[provider]{a @class{gtk:css-provider} object}
-  @argument[file]{a @class{g-file} object pointing to a file to load}
+  @argument[file]{a @class{g:file} object pointing to a file to load}
   @begin{short}
     Loads the data contained in @arg{file} into the CSS provider, making it
     clear any previously loaded information.
@@ -444,7 +447,7 @@ lambda (provider section error)    :run-last
   To track errors while loading CSS, connect to the \"parsing-error\" signal
   of the @class{gtk:css-provider} object.
   @see-class{gtk:css-provider}
-  @see-class{g-file}"
+  @see-class{g:file}"
   (provider (g:object css-provider))
   (file g:object))
 ;; TODO: Introduce the FILE-AS-NAMESTRING type
@@ -485,7 +488,7 @@ lambda (provider section error)    :run-last
 (cffi:defcfun ("gtk_css_provider_load_from_resource"
                css-provider-load-from-resource) :void
  #+liber-documentation
- "@version{#2022-8-20}
+ "@version{2023-8-30}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[path]{a string with the resource path}
   @begin{short}
@@ -500,6 +503,22 @@ lambda (provider section error)    :run-last
   (path :string))
 
 (export 'css-provider-load-from-resource)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_provider_load_from_bytes
+;;;
+;;; Loads data into css_provider.
+;;;
+;;; Since 4.12
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_provider_load_from_string
+;;;
+;;; Loads string into css_provider.
+;;;
+;;; Since 4.12
+;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_css_provider_new
@@ -544,10 +563,11 @@ lambda (provider section error)    :run-last
 ;;; gtk:css-section-new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_section_new" css-section-new) (g:boxed css-section :return)
+(cffi:defcfun ("gtk_css_section_new" css-section-new)
+    (g:boxed css-section :return)
  #+liber-documentation
- "@version{#2022-8-20}
-  @argument[file]{a @class{g-file} object this section refers to}
+ "@version{#2023-8-30}
+  @argument[file]{a @class{g:file} object this section refers to}
   @argument[start]{a @symbol{gtk:css-location} instance with the start location}
   @argument[end]{a @symbol{gtk:css-location} instance with the end location}
   @begin{short}
@@ -632,11 +652,11 @@ lambda (provider section error)    :run-last
 ;;; gtk_css_section_get_file  -> css-section-file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_css_provider_get_file" css-section-file) (g:object g-file)
+(cffi:defcfun ("gtk_css_provider_get_file" css-section-file) (g:object g:file)
  #+liber-documentation
  "@version{#2022-8-20}
   @argument[section]{a @class{gtk:css-section} instance}
-  @return{The @class{g-file} object that @arg{section} was parsed from or
+  @return{The @class{g:file} object that @arg{section} was parsed from or
   @code{nil} if @arg{section} was parsed from other data.}
   @begin{short}
     Gets the file that the section was parsed from.
@@ -644,7 +664,7 @@ lambda (provider section error)    :run-last
   If no such file exists, for example because the CSS was loaded via the
   @fun{gtk:css-provider-load-from-data} function, then @code{nil} is returned.
   @see-class{gtk:css-section}
-  @see-class{g-file}
+  @see-class{g:file}
   @see-function{gtk:css-provider-load-from-data}"
   (section (g:boxed css-section)))
 
