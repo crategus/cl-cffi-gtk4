@@ -2,11 +2,11 @@
 ;;; gtk4.font-chooser-widget.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2022 Dieter Kaiser
+;;; Copyright (C) 2012 - 2023 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -78,10 +78,10 @@
 
 #+liber-documentation
 (setf (documentation 'font-chooser-widget 'type)
- "@version{#2020-6-6}
+ "@version{2023-8-28}
   @begin{short}
-    The @sym{gtk:font-chooser-widget} widget lists the available fonts, styles
-    and sizes, allowing the user to select a font.
+    The @class{gtk:font-chooser-widget} widget lists the available fonts,
+    styles and sizes, allowing the user to select a font.
   @end{short}
   It is used in the @class{gtk:font-chooser-dialog} widget to provide a dialog
   box for selecting fonts.
@@ -92,8 +92,12 @@
   To change the text which is shown in the preview area, use the
   @fun{gtk:font-chooser-preview-text} function.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:font-chooser-widget} class has a single CSS node with name
+    The @class{gtk:font-chooser-widget} class has a single CSS node with name
     @code{fontchooser}.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:font-chooser-widget} implementation is deprecated since 4.10.
+    Direct use of the @class{gtk:font-chooser-widget} widget is deprecated.
   @end{dictionary}
   @see-class{gtk:font-chooser-dialog}")
 
@@ -116,7 +120,7 @@
 (setf (liber:alias-for-function 'font-chooser-widget-tweak-action)
       "Accessor"
       (documentation 'font-chooser-widget-tweak-action 'function)
- "@version{#2023-7-22}
+ "@version{2023-8-28}
   @syntax[]{(gtk:font-chooser-widget-tweak-action object) => action}
   @syntax[]{(setf (gtk:font-chooser-widget-tweak-action object) action)}
   @argument[object]{a @class{gtk:font-chooser-widget} widget}
@@ -129,6 +133,10 @@
   chooser widget, which lets the user tweak the OpenType features and variation
   axes of the selected font. The action will be enabled or disabled depending
   on whether the selected font has any features or axes.
+  @begin[Warning]{dictionary}
+    The @class{gtk:font-chooser-widget} implementation is deprecated since 4.10.
+    Direct use of the @class{gtk:font-chooser-widget} widget is deprecated.
+  @end{dictionary}
   @see-class{gtk:font-chooser-widget}
   @see-class{g:action}")
 
@@ -140,9 +148,13 @@
 
 (defun font-chooser-widget-new ()
  #+liber-documentation
- "@version{#2020-6-6}
+ "@version{2023-8-28}
   @return{A new @class{gtk:font-chooser-widget} widget.}
   @short{Creates a new font chooser widget.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:font-chooser-widget} implementation is deprecated since 4.10.
+    Direct use of the @class{gtk:font-chooser-widget} widget is deprecated.
+  @end{dictionary}
   @see-class{gtk:font-chooser-widget}"
   (make-instance 'font-chooser-widget))
 

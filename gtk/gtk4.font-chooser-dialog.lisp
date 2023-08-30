@@ -2,11 +2,11 @@
 ;;; gtk4.font-chooser-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2022 Dieter Kaiser
+;;; Copyright (C) 2012 - 2023 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -80,17 +80,25 @@
 
 #+liber-documentation
 (setf (documentation 'font-chooser-dialog 'type)
- "@version{#2021-2-11}
+ "@version{2023-8-28}
   @begin{short}
-    The @sym{gtk:font-chooser-dialog} widget is a dialog for selecting a font.
+    The @class{gtk:font-chooser-dialog} widget is a dialog for selecting a font.
   @end{short}
   It implements the @class{gtk:font-chooser} interface.
 
-  @image[font-chooser-dialog]{}
+  @image[font-chooser-dialog]{Figure: GtkFontChooserDialog}
   @begin[GtkFontChooserDialog as GtkBuildable]{dictionary}
-    The @sym{gtk:font-chooser-dialog} implementation of the
+    The @class{gtk:font-chooser-dialog} implementation of the
     @class{gtk:buildable} interface exposes the buttons with the names
     @code{select_button} and @code{cancel_button}.
+  @end{dictionary}
+  @begin[CSS nodes]{dictionary}
+    The @class{gtk:font-chooser-dialog} implementation has a single CSS node
+    with the name @arg{fontchooser} and @code{.fontchooser} style class.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:font-chooser-dialog} implementation is deprecated since 4.10.
+    Use the @class{gtk:font-dialog} widget instead.
   @end{dictionary}
   @see-class{gtk:font-chooser}
   @see-class{gtk:dialog}")
@@ -103,12 +111,16 @@
 
 (defun font-chooser-dialog-new (title parent)
  #+liber-documentation
- "@version{#2020-6-6}
+ "@version{2023-8-28}
   @argument[title]{a string with the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent of the dialog, or
     @code{nil}}
   @return{A new @class{gtk:font-chooser-dialog} widget.}
   @short{Creates a new font chooser dialog.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:font-chooser-dialog} implementation is deprecated since 4.10.
+    Use the @class{gtk:font-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:font-chooser-dialog}"
   (make-instance 'font-chooser-dialog
                  :title title
