@@ -7,7 +7,7 @@
 
 ;;;     GtkSymbolicPaintable
 
-(test symbolic-paintable-interface
+(test gtk-symbolic-paintable-interface
   ;; Type check
   (is (g:type-is-interface "GtkSymbolicPaintable"))
   ;; Check the registered name
@@ -15,19 +15,21 @@
           (glib:symbol-for-gtype "GtkSymbolicPaintable")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSymbolicPaintable")
-          (g:gtype (cffi:foreign-funcall "gtk_symbolic_paintable_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_symbolic_paintable_get_type"
+                                         :size))))
   ;; Get the names of the interface properties.
   (is (equal '()
              (list-interfaces "GtkSymbolicPaintable")))
   ;; Get the interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkSymbolicPaintable" GTK-SYMBOLIC-PAINTABLE
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkSymbolicPaintable"
+                                          GTK-SYMBOLIC-PAINTABLE
                     (:EXPORT T :TYPE-INITIALIZER
                      "gtk_symbolic_paintable_get_type"))
              (gobject:get-g-type-definition "GtkSymbolicPaintable"))))
 
 ;;;     GtkIconPaintable
 
-(test icon-paintable-class
+(test gtk-icon-paintable-class
   ;; Type check
   (is (g:type-is-object "GtkIconPaintable"))
   ;; Check the registered name
@@ -52,7 +54,8 @@
   (is (equal '()
              (list-signals "GtkIconPaintable")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIconPaintable" GTK-ICON-PAINTABLE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIconPaintable"
+                                             GTK-ICON-PAINTABLE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GdkPaintable" "GtkSymbolicPaintable")
                         :TYPE-INITIALIZER "gtk_icon_paintable_get_type")
@@ -69,7 +72,7 @@
 ;;;     icon-name
 ;;;     is-symbolic
 
-(test icon-paintable-properties
+(test gtk-icon-paintable-properties
   (let ((paintable (make-instance 'gtk:icon-paintable)))
     (is-false (gtk:icon-paintable-file paintable))
     (is-false (gtk:icon-paintable-icon-name paintable))
@@ -79,7 +82,7 @@
 
 ;;;     gtk_icon_paintable_new_for_file
 
-(test icon-paintable-new-for-file
+(test gtk-icon-paintable-new-for-file
   (let* ((file (g:file-new-for-path "gtk-logo-24.png"))
          (paintable (gtk:icon-paintable-new-for-file file 24 1)))
     (is (typep paintable 'gtk:icon-paintable))
@@ -88,4 +91,4 @@
     (is-false (gtk:icon-paintable-icon-name paintable))
     (is-false (gtk:icon-paintable-is-symbolic paintable))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-30 --------------------------------------------------------------

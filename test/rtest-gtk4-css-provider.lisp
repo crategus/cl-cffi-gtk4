@@ -14,7 +14,7 @@
 
 ;;;     GtkCssProvider
 
-(test css-provider-class
+(test gtk-css-provider-class
   ;; Type check
   (is (g:type-is-object "GtkCssProvider"))
   ;; Check the registered name
@@ -79,14 +79,14 @@
 
 ;;;     gtk_css_provider_load_from_data
 
-(test css-provider-load-from-data
+(test gtk-css-provider-load-from-data
   (let ((provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-from-data provider +css-button+))
     (is (= 305 (length (gtk:css-provider-to-string provider))))))
 
 ;;;     gtk_css_provider_load_from_file
 
-(test css-provider-load-from-file
+(test gtk-css-provider-load-from-file
   (let* ((provider (gtk:css-provider-new))
          (path (sys-path "resource/css-accordion.css"))
          (file (g:file-new-for-path path)))
@@ -94,7 +94,7 @@
     (is (= 2716 (length (gtk:css-provider-to-string provider))))))
 
 #+nil
-(test css-provider-load-from-file
+(test gtk-css-provider-load-from-file
   (let* ((provider (gtk:css-provider-new))
          (path (sys-path "resource/css-accordion.css"))
          (file path))
@@ -104,7 +104,7 @@
 
 ;;;     gtk_css_provider_load_from_path
 
-(test css-provider-load-from-path
+(test gtk-css-provider-load-from-path
   (let ((path (sys-path "resource/css-accordion.css"))
         (provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-from-path provider path))
@@ -113,7 +113,7 @@
 ;;;     gtk_css_provider_load_from_resource
 
 #-windows
-(test css-provider-load-from-resource
+(test gtk-css-provider-load-from-resource
   (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((provider (gtk:css-provider-new))
           (path "/com/crategus/test/css-accordion.css"))
@@ -122,12 +122,12 @@
 
 ;;;     gtk_css_provider_new
 
-(test css-provider-new
+(test gtk-css-provider-new
   (is (typep (gtk:css-provider-new) 'gtk:css-provider)))
 
 ;;;     gtk_css_provider_to_string
 
-(test gtk:css-provider-to-string
+(test gtk-css-provider-to-string
   (let ((provider (gtk:css-provider-new)))
     (is (string= "" (gtk:css-provider-to-string provider)))
     (is-false (gtk:css-provider-load-from-data provider +css-button+))
@@ -164,4 +164,4 @@ button:last-child > label {
 ;;;     gtk_css_section_get_start_location
 ;;;     gtk_css_section_get_end_location
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-30 --------------------------------------------------------------

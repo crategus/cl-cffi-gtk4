@@ -20,7 +20,7 @@
 
 ;;;     GtkStyleProvider
 
-(test style-provider-interface
+(test gtk-style-provider-interface
   ;; Type check
   (is (g:type-is-interface "GtkStyleProvider"))
   ;; Check the registered name
@@ -29,7 +29,10 @@
   ;; Check the type initializer
   (is (eq (g:gtype "GtkStyleProvider")
           (g:gtype (cffi:foreign-funcall "gtk_style_provider_get_type" :size))))
-  ;; Get the names of the interface properties.
+  ;; Check the interface prerequisites
+  (is (equal '()
+             (list-interface-prerequisites "GtkStyleProvider")))
+  ;; Get the the interface properties
   (is (equal '()
              (list-interface-properties "GtkStyleProvider")))
   ;; Get the interface definition
@@ -41,4 +44,4 @@
 
 ;;;     gtk-private-changed
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-30 --------------------------------------------------------------

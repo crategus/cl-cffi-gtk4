@@ -47,7 +47,10 @@
   (is (g:type-is-a (g:gtype "GtkBorder") g:+g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBorder")
-          (g:gtype (cffi:foreign-funcall "gtk_border_get_type" :size)))))
+          (g:gtype (cffi:foreign-funcall "gtk_border_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:border
+          (glib:symbol-for-gtype "GtkBorder"))))
 
 (test gtk-border-properties
   (let ((border (gtk:border-new)))
@@ -134,7 +137,7 @@
 ;;;     gtk_style_context_to_string
 
 (test gtk-style-context-to-string
-  (let ((context (gtk:widget-style-context (make-instance 'gtk:dialog))))  
+  (let ((context (gtk:widget-style-context (make-instance 'gtk:dialog))))
     (is (string=
 "[window.background.dialog:dir(ltr)]
   box.dialog-vbox.vertical:dir(ltr)
