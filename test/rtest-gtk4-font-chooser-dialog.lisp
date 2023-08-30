@@ -7,7 +7,7 @@
 
 ;;;     GtkFontChooserDialog
 
-(test font-chooser-dialog-class
+(test gtk-font-chooser-dialog-class
   ;; Type check
   (is (g:type-is-object "GtkFontChooserDialog"))
   ;; Check the registered name
@@ -39,12 +39,9 @@
                (gtk:widget-class-css-name "GtkFontChooserDialog")))
   #-windows
   (is (string=
-"[window.background.csd.dialog:dir(ltr)]
+"fontchooser:dir(ltr)
 "
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context
-                       (make-instance 'gtk:font-chooser-dialog))
-                   :none)))
+               (print-style-context "GtkFontChooserWidget" :none)))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontChooserDialog"
                                      GTK-FONT-CHOOSER-DIALOG
@@ -60,4 +57,8 @@
 
 ;;;     gtk_font_chooser_dialog_new ()
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-font-chooser-dialog-new
+  (is (typep (gtk:font-chooser-dialog-new "title" nil)
+             'gtk:font-chooser-dialog)))
+
+;;; --- 2023-8-28 --------------------------------------------------------------
