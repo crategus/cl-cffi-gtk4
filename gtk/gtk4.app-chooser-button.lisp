@@ -2,7 +2,7 @@
 ;;; gtk4.app-chooser-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -62,6 +62,7 @@
 ;;;
 ;;; Signals
 ;;;
+;;;     activate                                           Since 4.4
 ;;;     changed
 ;;;     custom-item-activated
 ;;;
@@ -109,25 +110,26 @@
 
 #+liber-documentation
 (setf (documentation 'app-chooser-button 'type)
- "@version{#2020-5-21}
+ "@version{2023-8-29}
   @begin{short}
-    The @sym{gtk:app-chooser-button} widget is a widget that lets the user
+    The @class{gtk:app-chooser-button} widget is a widget that lets the user
     select an application.
   @end{short}
   It implements the @class{gtk:app-chooser} interface.
 
   @image[app-chooser-button]{Figure: GtkAppChooserButton}
 
-  Initially, a @sym{gtk:app-chooser-button} selects the first application in
-  its list, which will either be the most-recently used application or, if the
-  @code{show-default-item} property is @em{true}, the default application.
+  Initially, a @class{gtk:app-chooser-button} widget selects the first
+  application in its list, which will either be the most-recently used
+  application or, if the @code{show-default-item} property is @em{true}, the
+  default application.
 
-  The list of applications shown in a @sym{gtk:app-chooser-button} includes
-  the recommended applications for the given content type. When the
-  @code{show-default-item} property is set, the default application is also
-  included. To let the user chooser other applications, you can set the
-  @code{show-dialog-item} property, which allows to open a full
-  @class{gtk:app-chooser-dialog}.
+  The list of applications shown in a @class{gtk:app-chooser-button} widget
+  includes the recommended applications for the given content type. When the
+  @slot[gtk:app-chooser-button]{show-default-item} property is set, the default
+  application is also included. To let the user chooser other applications, you
+  can set the @slot[gtk:app-chooser-button]{show-dialog-item} property, which
+  allows to open a full @class{gtk:app-chooser-dialog} widget.
 
   It is possible to add custom items to the list, using the
   @fun{gtk:app-chooser-button-append-custom-item} function. These items cause
@@ -135,46 +137,61 @@
 
   To track changes in the selected application, use the \"changed\" signal.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:app-chooser-button} implementation has a single CSS node with
-    the name @code{appchooserbutton}.
+    The @class{gtk:app-chooser-button} implementation has a single CSS node
+    with the name @code{appchooserbutton}.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
+    The application selection widgets should be implemented according to the
+    design of each platform and/or application requiring them.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
+    @subheading{The \"activate\" signal}
+      @begin{pre}
+lambda (button)    :run-first
+      @end{pre}
+      Emitted to when the button is activated. The signal is an action signal
+      and emitting it causes the button to pop up its dialog.
+      @begin[code]{table}
+        @entry[button]{The @class{gtk:app-chooser-button} widget which received
+          the signal.}
+      @end{table}
     @subheading{The \"changed\" signal}
       @begin{pre}
-lambda (widget)    :run-last
+lambda (button)    :run-last
       @end{pre}
-      Emitted when the active application on the
-      @sym{gtk:app-chooser-button} widget changes.
+      Emitted when the active application on the @class{gtk:app-chooser-button}
+      widget changes.
       @begin[code]{table}
-        @entry[widget]{The @sym{gtk:app-chooser-button} widget which received
+        @entry[button]{The @class{gtk:app-chooser-button} widget which received
           the signal.}
       @end{table}
     @subheading{The \"custom-item-activated\" signal}
       @begin{pre}
-lambda (widget item)    :has-details
+lambda (button item)    :has-details
       @end{pre}
       Emitted when a custom item, previously added with the
       @fun{gtk:app-chooser-button-append-custom-item} function, is activated
       from the dropdown menu.
       @begin[code]{table}
-        @entry[widget]{The @sym{gtk:app-chooser-button} widget which received
+        @entry[button]{The @class{gtk:app-chooser-button} widget which received
           the signal.}
         @entry[item]{A string with the name of the activated item.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:app-chooser-button-new}
   @see-slot{gtk:app-chooser-button-heading}
   @see-slot{gtk:app-chooser-button-modal}
   @see-slot{gtk:app-chooser-button-show-default-item}
   @see-slot{gtk:app-chooser-button-show-dialog-item}
   @see-class{gtk:app-chooser}
-  @see-class{gtk:app-chooser-dialog}
-  @see-function{gtk:app-chooser-button-append-custom-item}")
+  @see-class{gtk:app-chooser-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- app-chooser-button-heading -----------------------------------------
+;;; --- app-chooser-button-heading ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "heading"
@@ -188,7 +205,7 @@ lambda (widget item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-heading)
       "Accessor"
       (documentation 'app-chooser-button-heading 'function)
- "@version{#2020-5-21}
+ "@version{2023-8-29}
   @syntax[]{(gtk:app-chooser-button-heading object) => heading}
   @syntax[]{(setf (gtk:app-chooser-button-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
@@ -197,15 +214,17 @@ lambda (widget item)    :has-details
     Accessor of the @slot[gtk:app-chooser-button]{heading} slot of the
     @class{gtk:app-chooser-button} class.
   @end{short}
-
-  The @sym{gtk:app-chooser-button-heading} function returns the text to display
+  The @fun{gtk:app-chooser-button-heading} function returns the text to display
   at the top of the dialog. The @sym{(setf gtk:app-chooser-button-heading)}
   function sets the text to display at the top of the dialog.
 
   If the heading is not set, the dialog displays a default text.
+  @begin[Warning]{dictionary}
+    The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
+  @end{dictionary}
   @see-class{gtk:app-chooser-button}")
 
-;;; --- app-chooser-button-modal -------------------------------------------
+;;; --- app-chooser-button-modal -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal"
@@ -218,7 +237,7 @@ lambda (widget item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-modal)
       "Accessor"
       (documentation 'app-chooser-button-modal 'function)
- "@version{#2022-7-11}
+ "@version{2023-8-29}
   @syntax[]{(gtk:app-chooser-button-modal object) => setting}
   @syntax[]{(setf (gtk:app-chooser-button-modal object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
@@ -227,13 +246,15 @@ lambda (widget item)    :has-details
     Accessor of the @slot[gtk:app-chooser-button]{modal} slot of the
     @class{gtk:app-chooser-button} class.
   @end{short}
-
-  The @sym{gtk:app-chooser-button-modal} function gets whether the dialog is
+  The @fun{gtk:app-chooser-button-modal} function gets whether the dialog is
   modal. The @sym{(setf gtk:app-chooser-button-modal)} function sets whether
   the dialog should be modal.
+  @begin[Warning]{dictionary}
+    The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
+  @end{dictionary}
   @see-class{gtk:app-chooser-button}")
 
-;;; --- app-chooser-button-show-default-item -------------------------------
+;;; --- app-chooser-button-show-default-item -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-default-item"
@@ -248,7 +269,7 @@ lambda (widget item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-show-default-item)
       "Accessor"
       (documentation 'app-chooser-button-show-default-item 'function)
- "@version{#2020-5-21}
+ "@version{2023-8-29}
   @syntax[]{(gtk:app-chooser-button-show-default-item object) => setting}
   @syntax[]{(setf (gtk:app-chooser-button-show-default-item object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
@@ -258,15 +279,17 @@ lambda (widget item)    :has-details
     Accessor of the @slot[gtk:app-chooser-button]{show-default-item} slot of
     the @class{gtk:app-chooser-button} class.
   @end{short}
-
-  The @sym{gtk:app-chooser-button-show-default-item} function returns whether
+  The @fun{gtk:app-chooser-button-show-default-item} function returns whether
   the dropdown menu of the button should show the default application. The
   @sym{(setf gtk:app-chooser-button-show-default-item)} function sets whether
   the dropdown menu of the button should show the default application for the
   given content type at top.
+  @begin[Warning]{dictionary}
+    The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
+  @end{dictionary}
   @see-class{gtk:app-chooser-button}")
 
-;;; --- app-chooser-button-show-dialog-item --------------------------------
+;;; --- app-chooser-button-show-dialog-item ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-dialog-item"
@@ -274,14 +297,14 @@ lambda (widget item)    :has-details
  "The @code{show-dialog-item} property of type @code{:boolean}
   (Read / Write / Construct) @br{}
   Whether the dropdown menu should show an item that triggers a
-  @sym{gtk:app-chooser-dialog} widget when clicked. @br{}
+  @class{gtk:app-chooser-dialog} widget when clicked. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'app-chooser-button-show-dialog-item)
       "Accessor"
       (documentation 'app-chooser-button-show-dialog-item 'function)
- "@version{#2020-5-21}
+ "@version{2023-8-29}
   @syntax[]{(gtk:app-chooser-button-show-dialog-item object) => setting}
   @syntax[]{(setf (gtk:app-chooser-button-show-dialog-item object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
@@ -291,12 +314,14 @@ lambda (widget item)    :has-details
     Accessor of the @slot[gtk:app-chooser-button]{show-dialog-item} slot of
     the @class{gtk:app-chooser-button} class.
   @end{short}
-
-  The @sym{gtk:app-chooser-button-show-dialog-item} function returns whether
+  The @fun{gtk:app-chooser-button-show-dialog-item} function returns whether
   the dropdown menu of the button should show an entry to trigger a
   @class{gtk:app-chooser-dialog} widget. The
   @sym{(setf gtk:app-chooser-button-show-dialog-item)} function sets the
   property.
+  @begin[Warning]{dictionary}
+    The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
+  @end{dictionary}
   @see-class{gtk:app-chooser-button}")
 
 ;;; ----------------------------------------------------------------------------
@@ -305,7 +330,7 @@ lambda (widget item)    :has-details
 
 (defun app-chooser-button-new (content-type)
  #+liber-documentation
- "@version{#2020-5-21}
+ "@version{2023-8-29}
   @argument[content-type]{a string with the content type to show applications
     for}
   @return{A newly created @class{gtk:app-chooser-button} widget.}
@@ -313,6 +338,9 @@ lambda (widget item)    :has-details
     Creates a new application chooser button for applications that can handle
     content of the given type.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
+  @end{dictionary}
   @see-class{gtk:app-chooser-button}"
   (make-instance 'app-chooser-button
                  :content-type (if content-type
@@ -337,13 +365,15 @@ lambda (widget item)    :has-details
     Appends a custom item to the list of applications that is shown in the
     popup.
   @end{short}
-  The item name must be unique per-widget.
-
-  Clients can use the provided name as a detail for the
-  \"custom-item-activated\" signal, to add a callback for the activation of a
-  particular custom item in the list. See also the
+  The item name must be unique per-widget. Clients can use the provided name as
+  a detail for the \"custom-item-activated\" signal, to add a callback for the
+  activation of a particular custom item in the list. See also the
   @fun{gtk:app-chooser-button-append-separator} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
+  @end{dictionary}
   @see-class{gtk:app-chooser-button}
+  @see-class{g:icon}
   @see-function{gtk:app-chooser-button-append-separator}"
   (widget (g:object app-chooser-button))
   (name :string)
@@ -364,6 +394,9 @@ lambda (widget item)    :has-details
   @begin{short}
     Appends a separator to the list of applications that is shown in the popup.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
+  @end{dictionary}
   @see-class{gtk:app-chooser-button}"
   (widget (g:object app-chooser-button)))
 
@@ -383,9 +416,11 @@ lambda (widget item)    :has-details
     Selects a custom item previously added with the
     @fun{gtk:app-chooser-button-append-custom-item} function.
   @end{short}
-
   Use the @fun{gtk:app-chooser-refresh} function to bring the selection to its
   initial state.
+  @begin[Warning]{dictionary}
+    The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
+  @end{dictionary}
   @see-class{gtk:app-chooser-button}
   @see-function{gtk:app-chooser-refresh}
   @see-function{gtk:app-chooser-button-append-custom-item}"
