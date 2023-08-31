@@ -2,7 +2,7 @@
 ;;; gtk4.page-setup-unix-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -59,7 +59,7 @@
 ;;;     GtkConstraintTarget
 ;;;     GtkNative
 ;;;     GtkShortcutManager
-;;;     GtkRoot.
+;;;     GtkRoot
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
@@ -82,13 +82,13 @@
 
 #+liber-documentation
 (setf (documentation 'page-setup-unix-dialog 'type)
- "@version{#2021-3-17}
+ "@version{2023-8-28}
   @begin{short}
-    The @sym{page-setup-unix-dialog} widget implements a page setup dialog
+    The @class{page-setup-unix-dialog} widget implements a page setup dialog
     for platforms which do not provide a native page setup dialog, like Unix.
   @end{short}
 
-  @image[pagesetupdialog]{}
+  @image[pagesetupdialog]{Figure: GtkPageSetupUnixDialog}
 
   It can be used very much like any other GTK dialog, at the cost of the
   portability offered by the high-level printing API.
@@ -162,12 +162,10 @@
   @begin{short}
     Accessor for the page setup of the page setup dialog.
   @end{short}
-
-  The function @sym{gtk:page-setup-unix-dialog-page-setup} gets the currently
-  selected page setup from the page setup dialog. The function
-  @sym{(setf gtk:page-setup-unix-dialog-page-setup)} sets the page setup object
-  from which the page setup dialog takes its values.
-
+  The @fun{gtk:page-setup-unix-dialog-page-setup} function gets the currently
+  selected page setup from the page setup dialog. The
+  @sym{(setf gtk:page-setup-unix-dialog-page-setup)} function sets the page 
+  setup object from which the page setup dialog takes its values.
   @see-class{gtk:page-setup-unix-dialog}
   @see-class{gtk:page-setup}"
   (dialog (g:object page-setup-unix-dialog)))
@@ -197,11 +195,10 @@
   @begin{short}
     Accesor for the print settings of the page setup dialog.
   @end{short}
-
-  The function @sym{gtk:page-setup-unix-dialog-print-settings} gets the current
-  print settings from the page setup dialog. The function
-  @sym{(setf gtk:page-setup-unix-dialog-print-settings)} sets the print settings
-  from which the page setup dialog takes its values.
+  The @fun{gtk:page-setup-unix-dialog-print-settings} function gets the current
+  print settings from the page setup dialog. The
+  @sym{(setf gtk:page-setup-unix-dialog-print-settings)} function sets the 
+  print settings from which the page setup dialog takes its values.
   @see-class{gtk:page-setup-unix-dialog}
   @see-class{gtk:print-settings}"
   (dialog (g:object page-setup-unix-dialog)))

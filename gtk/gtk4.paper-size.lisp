@@ -2,7 +2,7 @@
 ;;; gtk4.paper-size.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -54,7 +54,7 @@
 ;;;     gtk_paper_size_new_custom
 ;;;
 ;;;     gtk_paper_size_copy
-;;;     gtk_paper_size_free
+;;;     gtk_paper_size_free                                not needed
 ;;;     gtk_paper_size_is_equal
 ;;;
 ;;;     gtk_paper_size_get_paper_sizes
@@ -86,69 +86,6 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
-
-;;; ----------------------------------------------------------------------------
-;;; enum GtkUnit
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkUnit" unit
-  (:export t
-   :type-initializer "gtk_unit_get_type")
-  (:none 0)
-  (:pixel 0) ; alias for :none
-  (:points 1)
-  (:inch 2)
-  (:mm 3))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'unit)
-      "GEnum"
-      (liber:symbol-documentation 'unit)
- "@version{2023-1-31}
-  @short{Enumeration for dimenstions of paper sizes.}
-  @begin{pre}
-(gobject:define-g-enum \"GtkUnit\" unit
-  (:export t
-   :type-initializer \"gtk_unit_get_type\")
-  (:none 0)
-  (:points 1)
-  (:inch 2)
-  (:mm 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{No units.}
-    @entry[:points]{Dimensions in points.}
-    @entry[:inch]{Dimensions in inches.}
-    @entry[:mm]{Dimensions in millimeters.}
-  @end{table}
-  @see-class{gtk:paper-size}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkPaperSize
-;;; ----------------------------------------------------------------------------
-
-(glib:define-g-boxed-opaque paper-size "GtkPaperSize"
-  :type-initializer "gtk_paper_size_get_type"
-  :alloc (%paper-size-new (cffi:null-pointer)))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'paper-size)
-      "Boxed CStruct"
-      (documentation 'paper-size 'type)
- "@version{2023-1-31}
-  @begin{short}
-    The @sym{gtk:paper-size} instance handles paper sizes.
-  @end{short}
-  It uses the standard called \"PWG 5101.1-2002 PWG: Standard for Media
-  Standardized Names\" to name the paper sizes and to get the data for the page
-  sizes. In addition to standard paper sizes, the @sym{gtk:paper-size} structure
-  allows to construct custom paper sizes with arbitrary dimensions.
-
-  The @sym{gtk:paper-size} structure stores not only the dimensions (width and
-  height) of a paper size and its name, it also provides default print margins.
-  @see-class{gtk:page-setup}")
-
-(export 'paper-size)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GTK_PAPER_NAME_A3
@@ -207,18 +144,87 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
+;;; enum GtkUnit
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-g-enum "GtkUnit" unit
+  (:export t
+   :type-initializer "gtk_unit_get_type")
+  (:none 0)
+  (:pixel 0) ; alias for :none
+  (:points 1)
+  (:inch 2)
+  (:mm 3))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'unit)
+      "GEnum"
+      (liber:symbol-documentation 'unit)
+ "@version{2023-1-31}
+  @short{Enumeration for dimenstions of paper sizes.}
+  @begin{pre}
+(gobject:define-g-enum \"GtkUnit\" unit
+  (:export t
+   :type-initializer \"gtk_unit_get_type\")
+  (:none 0)
+  (:points 1)
+  (:inch 2)
+  (:mm 3))
+  @end{pre}
+  @begin[code]{table}
+    @entry[:none]{No units.}
+    @entry[:points]{Dimensions in points.}
+    @entry[:inch]{Dimensions in inches.}
+    @entry[:mm]{Dimensions in millimeters.}
+  @end{table}
+  @see-class{gtk:paper-size}")
+
+;;; ----------------------------------------------------------------------------
+;;; GtkPaperSize
+;;; ----------------------------------------------------------------------------
+
+(glib:define-g-boxed-opaque paper-size "GtkPaperSize"
+  :type-initializer "gtk_paper_size_get_type"
+  :alloc (cffi:foreign-funcall "gtk_paper_size_new"
+                               :pointer (cffi:null-pointer)
+                               :pointer))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'paper-size)
+      "GBoxed"
+      (documentation 'paper-size 'type)
+ "@version{2023-8-28}
+  @begin{short}
+    The @class{gtk:paper-size} structure handles paper sizes.
+  @end{short}
+  It uses the standard called \"PWG 5101.1-2002 PWG: Standard for Media
+  Standardized Names\" to name the paper sizes and to get the data for the page
+  sizes. In addition to standard paper sizes, the @class{gtk:paper-size} 
+  structure allows to construct custom paper sizes with arbitrary dimensions.
+
+  The @class{gtk:paper-size} instance stores not only the dimensions (width and
+  height) of a paper size and its name, it also provides default print margins.
+  @see-constructor{gtk:paper-size-new}
+  @see-constructor{gtk:paper-size-new-custom}
+  @see-constructor{gtk:paper-size-new-from-gvariant}
+  @see-constructor{gtk:paper-size-new-from-ipp}
+  @see-constructor{gtk:paper-size-new-from-key-file}
+  @see-constructor{gtk:paper-size-new-from-ppd}
+  @see-class{gtk:page-setup}")
+
+(export 'paper-size)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_paper_size_new ()
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: The implementation is not correct. See the GBytes implementation.
-
-(cffi:defcfun ("gtk_paper_size_new" %paper-size-new)
+(cffi:defcfun ("gtk_paper_size_new" %paper-size-new) 
     (g:boxed paper-size :return)
   (name :string))
-
+  
 (defun paper-size-new (&optional name)
  #+liber-documentation
- "@version{2023-1-31}
+ "@version{2023-8-28}
   @argument[name]{a string with the paper size name, or @code{nil}}
   @return{A new @class{gtk:paper-size} instance.}
   @begin{short}
@@ -229,7 +235,8 @@
   see the @fun{gtk:paper-size-default} function.
   @see-class{gtk:paper-size}
   @see-function{gtk:paper-size-default}"
-  (%paper-size-new (if name name (cffi:null-pointer))))
+  (let ((name (if name name (cffi:null-pointer))))
+    (%paper-size-new name)))
 
 (export 'paper-size-new)
 
@@ -361,9 +368,10 @@
 (export 'paper-size-copy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_free ()                                 not exported
+;;; gtk_paper_size_free ()                                 not needed
 ;;; ----------------------------------------------------------------------------
 
+#+nil
 (cffi:defcfun ("gtk_paper_size_free" %paper-size-free) :void
  #+liber-documentation
  "@version{#2013-11-13}
@@ -742,8 +750,6 @@
     Deserialize a paper size from a @code{a{sv@}} variant in the format
     produced by the @fun{gtk:paper-size-to-gvariant} function.
   @end{short}
-
-  Since 3.22
   @see-class{gtk:paper-size}
   @see-type{g:variant}
   @see-function{gtk:paper-size-to-gvariant}"
@@ -759,7 +765,7 @@
  #+liber-documentation
  "@version{2023-1-31}
   @argument[size]{a @class{gtk:paper-size} instance}
-  @argument[keyfile]{the @type{g:key-file} instance to save the paper size to}
+  @argument[keyfile]{a @type{g:key-file} instance to save the paper size to}
   @argument[groupname]{a string with the group name to add the settings to in
     @arg{keyfile}}
   @begin{short}
@@ -786,8 +792,6 @@
   @begin{short}
     Serialize a paper size to a @code{a{sv@}} variant instance.
   @end{short}
-
-  Since 3.22
   @begin[Example]{dictionary}
     @begin{pre}
 (gtk:paper-size-to-gvariant (gtk:paper-size-new))

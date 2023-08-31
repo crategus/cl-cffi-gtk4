@@ -2,7 +2,7 @@
 ;;; gtk4.print-job.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -121,9 +121,9 @@
 
 #+liber-documentation
 (setf (documentation 'print-job 'type)
- "@version{#2021-12-25}
+ "@version{2023-8-28}
   @begin{short}
-    A @sym{gtk:print-job} object represents a job that is sent to a printer.
+    A @class{gtk:print-job} object represents a job that is sent to a printer.
   @end{short}
   You only need to deal directly with print jobs if you use the non-portable
   @class{gtk:print-unix-dialog} API.
@@ -131,20 +131,21 @@
   Use the @fun{gtk:print-job-surface} function to obtain the Cairo surface onto
   which the pages must be drawn. Use the @fun{gtk:print-job-send} function to
   send the finished job to the printer. If you do not use Cairo the
-  @sym{gtk:print-job} object also supports printing of manually generated
+  @class{gtk:print-job} object also supports printing of manually generated
   PostScript, via the @fun{gtk:print-job-set-source-file} function.
   @begin[Signal Details]{dictionary}
     @subheading{The \"status-changed\" signal}
       @begin{pre}
- lambda (job)    :run-last
+lambda (job)    :run-last
       @end{pre}
       Gets emitted when the status of a job changes. The signal handler can use
       the @fun{gtk:print-job-status} function to obtain the new status.
       @begin[code]{table}
-        @entry[job]{The @sym{gtk:print-job} object on which the signal was
+        @entry[job]{The @class{gtk:print-job} object on which the signal was
         emitted.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:print-job-new}
   @see-slot{gtk:print-job-page-setup}
   @see-slot{gtk:print-job-printer}
   @see-slot{gtk:print-job-settings}
@@ -160,7 +161,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- print-job-page-setup -----------------------------------------------
+;;; --- print-job-page-setup ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "page-setup" 'print-job) t)
@@ -183,7 +184,7 @@
   @see-class{gtk:print-job}
   @see-class{gtk:page-setup}")
 
-;;; --- print-job-printer --------------------------------------------------
+;;; --- print-job-printer ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "printer" 'print-job) t)
@@ -207,7 +208,7 @@
   @see-class{gtk:print-job}
   @see-class{gtk:printer}")
 
-;;; --- print-job-settings -------------------------------------------------
+;;; --- print-job-settings -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "settings" 'print-job) t)
@@ -231,7 +232,7 @@
   @see-class{gtk:print-job}
   @see-class{gtk:print-settings}")
 
-;;; --- print-job-title ----------------------------------------------------
+;;; --- print-job-title --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'print-job) t)
@@ -255,7 +256,7 @@
   Gets the job title.
   @see-class{gtk:print-job}")
 
-;;; --- print-job-track-print-status ---------------------------------------
+;;; --- print-job-track-print-status -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "track-print-status"
@@ -279,9 +280,8 @@
     Accessor of the @slot[gtk:print-job]{track-print-status} slot of the
     @class{gtk:print-job} class.
   @end{short}
-
-  The @sym{gtk:print-job-track-print-status} slot access function returns
-  whether jobs will be tracked after printing.
+  The @fun{gtk:print-job-track-print-status} function returns whether jobs will 
+  be tracked after printing.
 
   If @arg{track-status} is @em{true}, the print job will try to continue
   report on the status of the print job in the printer queues and printer.
@@ -498,8 +498,7 @@
   @begin{short}
     Accessor of the page setting for the print job.
   @end{short}
-
-  The @sym{gtk:print-job-pages} function gets the pages setting for the print
+  The @fun{gtk:print-job-pages} function gets the pages setting for the print
   job. The @sym{(setf gtk:print-job-pages)} function sets the pages setting for
   the print job.
   @see-class{gtk:print-job}
@@ -526,8 +525,7 @@
   @begin{short}
     Accessor of the page ranges for the print job.
   @end{short}
-
-  The @sym{gtk:print-job-page-ranges} function gets the page ranges for the
+  The @fun{gtk:print-job-page-ranges} function gets the page ranges for the
   print job. The @sym{(setf gtk:print-job-page-ranges)} function sets the page
   ranges.
   @see-class{gtk:print-job}
@@ -558,8 +556,7 @@
   @begin{short}
     Accessor of the @symbol{gtk:page-set} setting for the print job.
   @end{short}
-
-  The @sym{gtk:print-job-page-set} function gets the setting for the print job.
+  The @fun{gtk:print-job-page-set} function gets the setting for the print job.
   The @sym{(setf gtk:print-job-page-set)} function sets the setting for the
   print job.
   @see-class{gtk:print-job}
@@ -590,8 +587,7 @@
   @begin{short}
     Accessor of the number of copies for the print job.
   @end{short}
-
-  The @sym{gtk:print-job-num-copies} function gets the number of copies of the
+  The @fun{gtk:print-job-num-copies} function gets the number of copies of the
   print job. The @sym{(setf gtk:print-job-num-copies)} function sets the number
   of copies for the print job.
   @see-class{gtk:print-job}"
@@ -621,8 +617,7 @@
   @begin{short}
     Accessor of the scale for the print job.
   @end{short}
-
-  The @sym{gtk:print-job-scale} function gets the scale for the print job,
+  The @fun{gtk:print-job-scale} function gets the scale for the print job,
   where 1.0 means unscaled. The @sym{(setf gtk:print-job-scale)} function sets
   the scale for the print job.
   @see-class{gtk:print-job}"
@@ -652,8 +647,7 @@
   @begin{short}
     Accessor of the n-up setting for the print job.
   @end{short}
-
-  The @sym{gtk:print-job-n-up} function gets the n-up setting for the print
+  The @fun{gtk:print-job-n-up} function gets the n-up setting for the print
   job. The @sym{(setf gtk:print-job-n-up)} function sets the n-up setting for
   the print job.
   @see-class{gtk:print-job}"
@@ -685,8 +679,7 @@
   @begin{short}
     Accessor of the layout setting for the print job.
   @end{short}
-
-  The @sym{gtk:print-job-n-up-layout} function gets the layout setting for the
+  The @fun{gtk:print-job-n-up-layout} function gets the layout setting for the
   print job. The @sym{(setf gtk:print-job-n-up-layout)} function sets the
   layout setting for the print job.
   @see-class{gtk:print-job}"
@@ -716,8 +709,7 @@
   @begin{short}
     Accessor of the rotate setting for the print job.
   @end{short}
-
-  The @sym{gtk:print-job-rotate} function gets whether the job is printed
+  The @fun{gtk:print-job-rotate} function gets whether the job is printed
   rotated. The @sym{(setf gtk:print-job-rotate)} function sets whether the job
   is printed rotated.
   @see-class{gtk:print-job}"
@@ -748,8 +740,7 @@
   @begin{short}
     Accessor of the collate setting of the print job.
   @end{short}
-
-  The @sym{gtk:print-job-collate} function gets whether the job is printed
+  The @fun{gtk:print-job-collate} function gets whether the job is printed
   collated. The @sym{(setf gtk:print-job-collate)} function sets whether the
   job is printed collated.
   @see-class{gtk:print-job}"
@@ -779,8 +770,7 @@
   @begin{short}
     Accessor of the reverse setting of the print job.
   @end{short}
-
-  The @sym{gtk:print-job-reverse} function gets whether the job is printed
+  The @fun{gtk:print-job-reverse} function gets whether the job is printed
   reversed. The @sym{(setf gtk:print-job-reverse)} function sets whether the
   job is printed reversed.
   @see-class{gtk:print-job}"
