@@ -2,7 +2,7 @@
 ;;; gtk4.info-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -108,9 +108,9 @@
 
 #+liber-documentation
 (setf (documentation 'info-bar 'type)
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @begin{short}
-    The @sym{gtk:info-bar} widget can be used to show messages to the user
+    The @class{gtk:info-bar} widget can be used to show messages to the user
     without showing a dialog.
   @end{short}
   It is often temporarily shown at the top or bottom of a document. In contrast
@@ -119,7 +119,7 @@
 
   @image[info-bar]{Figure: GtkInfoBar}
 
-  The API of the @sym{gtk:info-bar} widget is very similar to the
+  The API of the @class{gtk:info-bar} widget is very similar to the
   @class{gtk:dialog} widget, allowing you to add buttons to the action area
   with the @fun{gtk:info-bar-add-button} or @fun{gtk:info-bar-new-with-buttons}
   functions. The sensitivity of action widgets can be controlled with the
@@ -141,7 +141,7 @@
     ;; Add a label with the message to the content of the info bar
     (gtk:info-bar-add-child infobar message)
     ;; Connect a signal handler to the info bar
-    (g-signal-connect infobar \"response\"
+    (g:signal-connect infobar \"response\"
                       (lambda (widget response)
                         (declare (ignore response))
                         (gtk:widget-hide widget)))
@@ -149,22 +149,30 @@
     @end{pre}
   @end{dictionary}
   @begin[GtkInfoBar as GtkBuildable]{dictionary}
-    The @sym{gtk:info-bar} implementation of the @class{gtk:buildable} interface
-    exposes the content area and action area as internal children with the names
-    @code{content_area} and @code{action_area}.
+    The @class{gtk:info-bar} implementation of the @class{gtk:buildable}
+    interface exposes the content area and action area as internal children
+    with the names @code{content_area} and @code{action_area}.
 
-    The @sym{gtk:info-bar} implementation supports a custom
+    The @class{gtk:info-bar} implementation supports a custom
     @code{<action-widgets>} element, which can contain multiple
     @code{<action-widget>} elements. The @code{response} attribute specifies a
     numeric response, and the content of the element is the ID of the widget,
     which should be a child of the dialogs action area.
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:info-bar} implementation has a single CSS node with name
+    The @class{gtk:info-bar} implementation has a single CSS node with name
     @code{infobar}. The node may get one of the @code{.info}, @code{.warning},
     @code{.error} or @code{.question} style classes, depending on the message
     type. If the info bar shows a close button, that button will have the
     @code{.close} style class applied.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code. There is no replacement in GTK for an
+    \"info bar\" widget. You can use the @class{gtk:revealer} widget with a
+    @class{gtk:box} widget containing a @class{gtk:label} widget and an
+    optional @class{gtk:button} widget, according to your design of the
+    application.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"close\" signal}
@@ -175,7 +183,7 @@ lambda (infobar)    :action
       keybinding to dismiss the info bar. The default binding for this signal
       is the @kbd{Escape} key. @br{}
       @begin[code]{table}
-        @entry[infobar]{The @sym{gtk:info-bar} widget on which the signal is
+        @entry[infobar]{The @class{gtk:info-bar} widget on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"response\" signal}
@@ -186,16 +194,16 @@ lambda (infobar response)    :run-last
       calls the @fun{gtk:dialog-response} function. The @arg{response} argument
       depends on which action widget was clicked. @br{}
       @begin[code]{table}
-        @entry[infobar]{The @sym{gtk:info-bar} widget on which the signal is
+        @entry[infobar]{The @class{gtk:info-bar} widget on which the signal is
           emitted.}
         @entry[response]{An integer with the response ID.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:info-bar-new}
+  @see-constructor{gtk:info-bar-new-with-buttons}
   @see-slot{gtk:info-bar-message-type}
   @see-slot{gtk:info-bar-revealed}
   @see-slot{gtk:info-bar-show-close-button}
-  @see-constructor{gtk:info-bar-new}
-  @see-constructor{gtk:info-bar-new-with-buttons}
   @see-class{gtk:statusbar}
   @see-class{gtk:message-dialog}")
 
@@ -203,7 +211,7 @@ lambda (infobar response)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- info-bar-message-type ----------------------------------------------
+;;; --- info-bar-message-type --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "message-type" 'info-bar) t)
@@ -217,7 +225,7 @@ lambda (infobar response)    :run-last
 (setf (liber:alias-for-function 'info-bar-message-type)
       "Accessor"
       (documentation 'info-bar-message-type 'function)
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @syntax[]{(gtk:info-bar-message-type object) => message-type}
   @syntax[]{(setf (gtk:info-bar-message-type object) message-type)}
   @argument[object]{a @class{gtk:info-bar} widget}
@@ -226,15 +234,19 @@ lambda (infobar response)    :run-last
     Accessor of the @slot[gtk:info-bar]{message-type} slot of the
     @class{gtk:info-bar} class.
   @end{short}
-  The @sym{gtk:info-bar-message-type} function returns the message type of the
+  The @fun{gtk:info-bar-message-type} function returns the message type of the
   message area. The @sym{(setf gtk:info-bar-message-type)} function sets the
   message type.
 
   GTK uses the message type to determine how the message is displayed.
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-symbol{gtk:message-type}")
 
-;;; --- info-bar-revealed --------------------------------------------------
+;;; --- info-bar-revealed ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "revealed" 'info-bar) t)
@@ -246,7 +258,7 @@ lambda (infobar response)    :run-last
 (setf (liber:alias-for-function 'info-bar-revealed)
       "Accessor"
       (documentation 'info-bar-revealed 'function)
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @syntax[]{(gtk:info-bar-revealed object) => revealed}
   @syntax[]{(setf (gtk:info-bar-revealed object) revealed)}
   @argument[object]{a @class{gtk:info-bar} widget}
@@ -255,7 +267,7 @@ lambda (infobar response)    :run-last
     Accessor of the @slot[gtk:info-bar]{revealed} slot of the
     @class{gtk:info-bar} class.
   @end{short}
-  The @sym{gtk:info-bar-revealed} function returns whether the info bar is
+  The @fun{gtk:info-bar-revealed} function returns whether the info bar is
   currently revealed. The @sym{(setf gtk:info-bar-revealed)} function sets the
   property.
 
@@ -263,14 +275,17 @@ lambda (infobar response)    :run-last
   transition. Note: this does not show or hide the info bar in the visible
   sense, so revealing has no effect if the @slot[gtk:widget]{visible} property
   is @em{false}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-function{gtk:widget-visible}")
 
-;;; --- info-bar-show-close-button -----------------------------------------
+;;; --- info-bar-show-close-button ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "show-close-button"
-                                               'info-bar) t)
+(setf (documentation (liber:slot-documentation "show-close-button" 'info-bar) t)
  "The @code{show-close-button} property of type @code{:boolean}
   (Read / Write / Construct) @br{}
   Whether to include a standard Close button. @br{}
@@ -280,7 +295,7 @@ lambda (infobar response)    :run-last
 (setf (liber:alias-for-function 'info-bar-show-close-button)
       "Accessor"
       (documentation 'info-bar-show-close-button 'function)
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @syntax[]{(gtk:info-bar-show-close-button object) => setting}
   @syntax[]{(setf (gtk:info-bar-show-close-button object) setting)}
   @argument[object]{a @class{gtk:info-bar} widget}
@@ -289,9 +304,13 @@ lambda (infobar response)    :run-last
     Accessor of the @slot[gtk:info-bar]{show-close-button} slot of the
     @class{gtk:info-bar} class.
   @end{short}
-  The @sym{gtk:info-bar-show-close-button} function returns whether the widget
+  The @fun{gtk:info-bar-show-close-button} function returns whether the widget
   will display a standard Close button. If @em{true}, a standard Close button
   is shown. When clicked it emits the @code{:close} response.
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}")
 
 ;;; ----------------------------------------------------------------------------
@@ -302,9 +321,13 @@ lambda (infobar response)    :run-last
 
 (defun info-bar-new ()
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @return{A new @class{gtk:info-bar} widget.}
   @short{Creates a new info bar.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}"
   (make-instance 'info-bar))
 
@@ -316,16 +339,20 @@ lambda (infobar response)    :run-last
 
 (defun info-bar-new-with-buttons (&rest args)
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @argument[args]{first a string with the text and second an integer with the
     response ID for each button, then more pairs for each button}
   @return{A new @class{gtk:info-bar} widget.}
   @short{Creates a new info bar with buttons.}
   Button text/response ID pairs should be listed. Button text can be some
-  arbitrary text. A response ID can be any positive number, or one of the values
-  in the @symbol{gtk:response-type} enumeration. If the user clicks one of these
-  dialog buttons, the info bar will emit the \"response\" signal with the
-  corresponding response ID.
+  arbitrary text. A response ID can be any positive number, or one of the
+  values in the @symbol{gtk:response-type} enumeration. If the user clicks one
+  of these dialog buttons, the info bar will emit the \"response\" signal with
+  the corresponding response ID.
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-symbol{gtk:response-type}"
   (let ((infobar (make-instance 'info-bar)))
@@ -341,7 +368,7 @@ lambda (infobar response)    :run-last
 (cffi:defcfun ("gtk_info_bar_add_action_widget" info-bar-add-action-widget)
     :void
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[child]{an activatable @class{gtk:widget} child widget}
   @argument[response]{an integer with the response ID for @arg{child}}
@@ -351,6 +378,10 @@ lambda (infobar response)    :run-last
     when the widget is activated.
   @end{short}
   The widget is appended to the end of the message areas action area.
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-class{gtk:widget}"
   (infobar (g:object info-bar))
@@ -366,7 +397,7 @@ lambda (infobar response)    :run-last
 (cffi:defcfun ("gtk_info_bar_remove_action_widget"
                info-bar-remove-action-widget) :void
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[widget]{a @class{gtk:widget} action widget to remove}
   @begin{short}
@@ -374,6 +405,10 @@ lambda (infobar response)    :run-last
     there by a call to the @fun{gtk:info-bar-add-action-widget} or
     @fun{gtk:info-bar-add-button} function.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-class{gtk:widget}
   @see-function{gtk:info-bar-add-action-widget}
@@ -389,7 +424,7 @@ lambda (infobar response)    :run-last
 
 (cffi:defcfun ("gtk_info_bar_add_button" info-bar-add-button) (g:object widget)
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[text]{a string with the text of the button}
   @argument[response]{an integer with the response ID for the button}
@@ -400,12 +435,16 @@ lambda (infobar response)    :run-last
   @end{short}
   The button is appended to the end of the action area of the info bar. The
   button widget is returned, but usually you do not need it.
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-class{gtk:button}
   @see-function{gtk:info-bar-add-buttons}"
   (infobar (g:object info-bar))
   (text :string)
-  (response :int))
+  (response response-type))
 
 (export 'info-bar-add-button)
 
@@ -415,7 +454,7 @@ lambda (infobar response)    :run-last
 
 (defun info-bar-add-buttons (infobar &rest args)
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[args]{first a string with a button text and second an integer with
     a response ID, then more pairs for each button}
@@ -424,10 +463,14 @@ lambda (infobar response)    :run-last
     function repeatedly.
   @end{short}
   Each button must have both text and a response ID.
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-function{gtk:info-bar-add-button}"
-  (loop for (text response) on args by #'cddr
-        do (info-bar-add-button infobar text response)))
+  (iter (for (text response) on args by #'cddr)
+        (info-bar-add-button infobar text response)))
 
 (export 'info-bar-add-buttons)
 
@@ -438,7 +481,7 @@ lambda (infobar response)    :run-last
 (cffi:defcfun ("gtk_info_bar_set_response_sensitive"
                info-bar-set-response-sensitive) :void
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[response]{an integer with a response ID}
   @argument[setting]{@em{true} for sensitive}
@@ -447,6 +490,10 @@ lambda (infobar response)    :run-last
     area of the info bar with the given response ID.
   @end{short}
   A convenient way to sensitize/desensitize dialog buttons.
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-function{gtk:widget-sensitive}"
   (infobar (g:object info-bar))
@@ -462,7 +509,7 @@ lambda (infobar response)    :run-last
 (cffi:defcfun ("gtk_info_bar_set_default_response"
                info-bar-set-default-response) :void
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[response]{an integer with a response ID}
   @begin{short}
@@ -473,6 +520,10 @@ lambda (infobar response)    :run-last
 
   Note that this function currently requires the info bar to be added to a
   widget hierarchy.
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}"
   (infobar (g:object info-bar))
   (response :int))
@@ -485,10 +536,14 @@ lambda (infobar response)    :run-last
 
 (cffi:defcfun ("gtk_info_bar_response" info-bar-response) :void
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[response]{an integer with a response ID}
   @short{Emits the \"response\" signal with the given response ID.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}"
   (infobar (g:object info-bar))
   (response :int))
@@ -501,10 +556,14 @@ lambda (infobar response)    :run-last
 
 (cffi:defcfun ("gtk_info_bar_add_child" info-bar-add-child) :void
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[widget]{a @class{gtk:widget} child widget to be added}
   @short{Adds a widget to the content area of the info bar.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-class{gtk:widget}"
   (infobar (g:object info-bar))
@@ -518,13 +577,17 @@ lambda (infobar response)    :run-last
 
 (cffi:defcfun ("gtk_info_bar_remove_child" info-bar-remove-child) :void
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[widget]{a @class{gtk:widget} child widget to be removed}
   @begin{short}
     Removes a widget from the content area of the info bar, after it has been
     added with the @fun{gtk:info-bar-add-child} function.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
+    use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:info-bar}
   @see-class{gtk:widget}
   @see-function{gtk:info-bar-add-child}"

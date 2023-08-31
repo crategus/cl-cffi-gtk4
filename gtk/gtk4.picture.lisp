@@ -2,7 +2,7 @@
 ;;; gtk4.picture.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -46,8 +46,8 @@
 ;;;     gtk_picture_get_content_fit                        Since 4.8
 ;;;     gtk_picture_set_file
 ;;;     gtk_picture_get_file
-;;;     gtk_picture_set_keep_aspect_ratio
-;;;     gtk_picture_get_keep_aspect_ratio
+;;;     gtk_picture_set_keep_aspect_ratio                  Deprecated 4.8
+;;;     gtk_picture_get_keep_aspect_ratio                  Deprecated 4.8
 ;;;     gtk_picture_set_paintable
 ;;;     gtk_picture_get_paintable
 ;;;
@@ -55,11 +55,11 @@
 ;;;
 ;;;     gtk_picture_new
 ;;;     gtk_picture_new_for_paintable
-;;;     gtk_picture_new_for_pixbuf
+;;;     gtk_picture_new_for_pixbuf                         Deprecated 4.12
 ;;;     gtk_picture_new_for_file
 ;;;     gtk_picture_new_for_filename
 ;;;     gtk_picture_new_for_resource
-;;;     gtk_picture_set_pixbuf
+;;;     gtk_picture_set_pixbuf                             Deprecated 4.12
 ;;;     gtk_picture_set_filename
 ;;;     gtk_picture_set_resource
 ;;;
@@ -69,7 +69,7 @@
 ;;;     can-shrink
 ;;;     content-fit                                        Since 4.8
 ;;;     file
-;;;     keep-aspect-ratio
+;;;     keep-aspect-ratio                                  Deprecated 4.8
 ;;;     paintable
 ;;;
 ;;; Hierarchy
@@ -105,11 +105,10 @@
 (setf (liber:alias-for-symbol 'content-fit)
       "GEnum"
       (liber:symbol-documentation 'content-fit)
- "@version{2023-4-15}
+ "@version{2023-8-31}
   @begin{short}
     Controls how a content should be made to fit inside an allocation.
   @end{short}
-  Since 4.8
   @begin{pre}
 (gobject:define-g-enum \"GtkContentFit\" content-fit
   (:export t
@@ -134,6 +133,7 @@
     @entry[:scale-down]{The content is scaled down to fit the allocation, if
       needed, otherwise its original size is used.}
   @end{table}
+  Since 4.8
   @see-class{gtk:picture}")
 
 ;;; ----------------------------------------------------------------------------
@@ -169,9 +169,9 @@
 
 #+liber-documentation
 (setf (documentation 'picture 'type)
- "@version{2023-4-15}
+ "@version{2023-8-31}
   @begin{short}
-    The @sym{gtk:picture} widget displays a @class{gdk:paintable} object.
+    The @class{gtk:picture} widget displays a @class{gdk:paintable} object.
   @end{short}
 
   @image[picture]{Figure: GtkPicture}
@@ -187,7 +187,7 @@
   image\" icon similar to that used in many web browsers. If you want to handle
   errors in loading the file yourself, for example by displaying an error
   message, then load the image with the @fun{gdk:texture-new-from-file}
-  function, then create the @sym{gtk:picture} widget with the
+  function, then create the @class{gtk:picture} widget with the
   @fun{gtk:picture-new-for-paintable} function.
 
   Sometimes an application will want to avoid depending on external data files,
@@ -196,9 +196,10 @@
   @fun{gtk:picture-set-resource} functions should be used.
 
   @subheading{Sizing the paintable}
-  You can influence how the paintable is displayed inside the @sym{gtk:picture}
-  widget. By turning off the @code{keep-aspect-ratio} property you can allow
-  the paintable to get stretched. The @code{can-shrink} property can be unset
+  You can influence how the paintable is displayed inside the
+  @class{gtk:picture} widget. By turning off the
+  @slot[gtk:picture]{keep-aspect-ratio} property you can allow the paintable to
+  get stretched. The @slot[gtk:picture]{can-shrink} property can be unset
   to make sure that paintables are never made smaller than their ideal size -
   but be careful if you do not know the size of the paintable in use, like when
   displaying user-loaded images. This can easily cause the picture to grow
@@ -207,11 +208,11 @@
   does not fill all available space but is instead displayed at its original
   size.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:picture} implementation has a single CSS node with the name
+    The @class{gtk:picture} implementation has a single CSS node with the name
     @code{picture}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:picture} implementation uses the @code{:img} role of the
+    The @class{gtk:picture} implementation uses the @code{:img} role of the
     @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
   @see-constructor{gtk:picture-new}
@@ -369,14 +370,15 @@
  "The @code{keep-aspect-ratio} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether the picture will render its contents trying to preserve the aspect
-  ratio of the contents. @br{}
+  ratio of the contents. Deprecated 4.8, use the
+  @slot[gtk:picture]{content-fit} property instead. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'picture-keep-aspect-ratio)
       "Accessor"
       (documentation 'picture-keep-aspect-ratio 'function)
- "@version{#2022-7-29}
+ "@version{#2023-8-31}
   @syntax[]{(picture-keep-aspect-ratio object) => setting}
   @syntax[]{(setf (picture-keep-aspect-ratio object) setting)}
   @argument[object]{a @class{gtk:picture} widget}
@@ -391,6 +393,10 @@
   or left/right of the picture. If set to the @em{false} value or if the
   contents provide no aspect ratio, the contents will be stretched over the
   whole area of the picture.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.8. Use the
+    @slot[gtk:picture]{content-fit} property instead.
+  @end{dictionary}
   @see-class{gtk:picture}")
 
 ;;; --- picture-paintable ------------------------------------------------------
@@ -466,23 +472,37 @@
 ;;; gtk_picture_new_for_pixbuf ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_picture_new_for_pixbuf" picture-new-for-pixbuf)
+(declaim (inline picture-new-for-pixbuf))
+
+(cffi:defcfun ("gtk_picture_new_for_pixbuf" %picture-new-for-pixbuf)
     (g:object widget)
+  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+
+(defun picture-new-for-pixbuf (pixbuf)
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2023-8-31}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
   @return{A new @class{gtk:picture} widget}
   @begin{short}
     Creates a new picture displaying @arg{pixbuf}.
   @end{short}
   This is a utility function that calls the @fun{gtk:picture-new-for-paintable}
-  function. See that function for details.
-
-  The pixbuf must not be modified after passing it to this function.
+  function. See that function for details. The pixbuf must not be modified
+  after passing it to this function.
+  @begin{dictionary}
+    This function is deprecated since 4.12. Use the
+    @fun{gtk:picture-new-for-paintable} and @fun{gdk:texture-new-for-pixbuf}
+    functions instead.
+  @end{dictionary}
   @see-class{gtk:picture}
   @see-class{gdk-pixbuf:pixbuf}
-  @see-function{gtk:picture-new-for-paintable}"
-  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+  @see-function{gtk:picture-new-for-paintable}
+  @see-function{gdk:texture-new-for-pixbuf}"
+  #+(and gtk-4-12 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (format *debug-io*
+            "Warning: GTK:PICTURE-NEW-FOR-PIXBUF is deprecated since 4.12.~%"))
+  (%picture-new-for-pixbuf pixbuf))
 
 (export 'picture-new-for-pixbuf)
 
@@ -559,9 +579,15 @@
 ;;; gtk_picture_set_pixbuf ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_picture_set_pixbuf" picture-set-pixbuf) :void
+(declaim (inline picture-set-pixbuf))
+
+(cffi:defcfun ("gtk_picture_set_pixbuf" %picture-set-pixbuf) :void
+  (picture (g:object picture))
+  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+
+(defun picture-set-pixbuf (picture pixbuf)
  #+liber-documentation
- "@version{#2022-7-29}
+ "@version{#2023-8-31}
   @argument[picture]{a @class{gtk:picture} widget}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object, or @code{nil}}
   @begin{short}
@@ -569,11 +595,18 @@
   @end{short}
   This is a utility function that calls the @fun{gtk:picture-paintable}
   function.
+  @begin{dictionary}
+    This function is deprecated since 4.12. Use the
+    @fun{gtk:picture-set-paintable} function instead.
+  @end{dictionary}
   @see-class{gtk:picture}
   @see-function{gtk:picture-new-for-pixbuf}
   @see-function{gtk:picture-paintable}"
-  (picture (g:object picture))
-  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+  #+(and gtk-4-12 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (format *debug-io*
+            "Warning: GTK:PICTURE-SET-PIXBUF is deprecated since 4.12.~%"))
+  (%picture-set-pixbuf picture pixbuf))
 
 (export 'picture-set-pixbuf)
 

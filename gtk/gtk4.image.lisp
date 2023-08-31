@@ -2,7 +2,7 @@
 ;;; gtk4.image.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -52,14 +52,14 @@
 ;;;     gtk_image_new
 ;;;     gtk_image_new_from_file
 ;;;     gtk_image_new_from_resource
-;;;     gtk_image_new_from_pixbuf
+;;;     gtk_image_new_from_pixbuf                          Deprecated 4.12
 ;;;     gtk_image_new_from_paintable
 ;;;     gtk_image_new_from_icon_name
 ;;;     gtk_image_new_from_gicon
 ;;;     gtk_image_clear
 ;;;     gtk_image_set_from_file
 ;;;     gtk_image_set_from_resource
-;;;     gtk_image_set_from_pixbuf
+;;;     gtk_image_set_from_pixbuf                          Deprecated 4.12
 ;;;     gtk_image_set_from_paintable
 ;;;     gtk_image_set_from_icon_name
 ;;;     gtk_image_set_from_gicon
@@ -586,23 +586,38 @@
 ;;; gtk_image_new_from_pixbuf
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_image_new_from_pixbuf" image-new-from-pixbuf)
+(declaim (inline image-new-from-pixbuf))
+
+(cffi:defcfun ("gtk_image_new_from_pixbuf" %image-new-from-pixbuf)
     (g:object image)
+  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+
+(defun image-new-from-pixbuf (pixbuf)
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{2023-8-31}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @return{A new @class{gtk:image} widget.}
   @begin{short}
     Creates an image displaying @arg{pixbuf}.
   @end{short}
-
   Note that this function just creates an image from the pixbuf. The image
   created will not react to state changes. Should you want that, you should use
   the @fun{gtk:image-new-from-icon-name} function.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.12. Use the
+    @fun{gtk:image-new-from-paintable} and @fun{gdk:texture-new-for-pixbuf}
+    functions instead.
+  @end{dictionary}
   @see-class{gtk:image}
   @see-class{gdk-pixbuf:pixbuf}
-  @see-function{gtk:image-new-from-icon-name}"
-  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+  @see-function{gtk:image-new-from-icon-name}
+  @see-function{gtk:image-new-from-paintable}
+  @see-function{gdk:texture-new-for-pixbuf}"
+  #+(and gtk-4-12 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (format *debug-io*
+            "Warning: GTK:IMAGE-NEW-FROM-PIXBUF is deprecated since 4.12.~%"))
+  (%image-new-from-pixbuf pixbuf))
 
 (export 'image-new-from-pixbuf)
 
@@ -729,20 +744,33 @@
 ;;; gtk_image_set_from_pixbuf
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_image_set_from_pixbuf" image-set-from-pixbuf) :void
+(declaim (inline image-set-from-pixbuf))
+
+(cffi:defcfun ("gtk_image_set_from_pixbuf" %image-set-from-pixbuf) :void
+  (image (g:object image))
+  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+
+(defun image-set-from-pixbuf (image pixbuf)
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{2023-8-31}
   @argument[image]{a @class{gtk:image} widget}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
     Sets the image to display @arg{pixbuf}.
   @end{short}
   See the @fun{gtk:image-new-from-pixbuf} function for more details.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.12. Use the
+    @fun{gtk:image-set-from-paintable} function instead.
+  @end{dictionary}
   @see-class{gtk:image}
   @see-class{gdk-pixbuf:pixbuf}
   @see-function{gtk:image-new-from-pixbuf}"
-  (image (g:object image))
-  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+  #+(and gtk-4-12 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (format *debug-io*
+            "Warning: GTK:IMAGE-SET-FROM-PIXBUF is deprecated since 4.12.~%"))
+  (%image-set-from-pixbuf image pixbuf))
 
 (export 'image-set-from-pixbuf)
 

@@ -2,7 +2,7 @@
 ;;; gtk4.spinner.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,9 +83,9 @@
 
 #+liber-documentation
 (setf (documentation 'spinner 'type)
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @begin{short}
-    A @sym{gtk:spinner} widget displays an icon size spinning animation.
+    A @class{gtk:spinner} widget displays an icon size spinning animation.
   @end{short}
 
   @image[spinner]{Figure: GtkSpinner}
@@ -96,15 +96,13 @@
   To start the animation, use the @fun{gtk:spinner-start} function, to stop it
   use the @fun{gtk:spinner-stop} function.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:spinner} implementation has a single CSS node with the name
+    The @class{gtk:spinner} implementation has a single CSS node with the name
     @code{spinner}. When the animation is active, the @code{:checked}
     pseudoclass is added to this node.
   @end{dictionary}
+  @see-constructor{gtk:spinner-new}
   @see-slot{gtk:spinner-spinning}
-  @see-class{gtk:cell-renderer-spinner}
-  @see-class{gtk:progress-bar}
-  @see-function{gtk:spinner-start}
-  @see-function{gtk:spinner-stop}")
+  @see-class{gtk:progress-bar}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -120,7 +118,7 @@
 (setf (liber:alias-for-function 'spinner-spinning)
       "Accessor"
       (documentation 'spinner-spinning 'function)
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @syntax[]{(gtk:spinner-spinning object) => spinning}
   @syntax[]{(setf (gtk:spinner-spinning object) spinning)}
   @argument[object]{a @class{gtk:spinner} widget}
@@ -129,8 +127,7 @@
     Accessor of the @slot[gtk:spinner]{spinning} slot of the @class{gtk:spinner}
     class.
   @end{short}
-
-  The @sym{gtk:spinner-spinning} function returns whether the spinner is
+  The @fun{gtk:spinner-spinning} function returns whether the spinner is
   spinning. The @sym{(setf gtk:spinner-spinning)} function sets the activity
   of the spinner.
   @see-class{gtk:spinner}")
@@ -143,7 +140,7 @@
 
 (defun spinner-new ()
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @return{A new @class{gtk:spinner} widget.}
   @short{Returns a new spinner.}
   Not yet started.
@@ -159,7 +156,7 @@
 
 (cffi:defcfun ("gtk_spinner_start" spinner-start) :void
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @argument[spinner]{a @class{gtk:spinner} widget}
   @short{Starts the animation of the spinner.}
   @see-class{gtk:spinner}
@@ -174,7 +171,7 @@
 
 (cffi:defcfun ("gtk_spinner_stop" spinner-stop) :void
  #+liber-documentation
- "@version{#2022-5-27}
+ "@version{2023-8-24}
   @argument[spinner]{a @class{gtk:spinner} widget}
   @short{Stops the animation of the spinner.}
   @see-class{gtk:spinner}

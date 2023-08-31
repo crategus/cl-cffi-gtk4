@@ -2,7 +2,7 @@
 ;;; gtk4.progress-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -86,12 +86,11 @@
 ;;; struct GtkProgressBar
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Implement the GtkAccessibleRange interface
-
 (gobject:define-g-object-class "GtkProgressBar" progress-bar
   (:superclass widget
    :export t
-   :interfaces ("GtkAccessible"
+   :interfaces ("GtkAccessibleRange"
+                "GtkAccessible"
                 "GtkBuildable"
                 "GtkConstraintTarget"
                 "GtkOrientable")
@@ -143,8 +142,8 @@
 
   There is quite a bit of flexibility provided to control the appearance of
   the progress bar. Functions are provided to control the orientation of the
-  bar, optional text can be displayed along with the bar, and the step size used
-  in activity mode can be set.
+  bar, optional text can be displayed along with the bar, and the step size
+  used in activity mode can be set.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 progressbar[.osd]

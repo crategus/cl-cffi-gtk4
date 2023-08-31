@@ -2,7 +2,7 @@
 ;;; gtk4.label.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -54,12 +54,14 @@
 ;;;     gtk_label_get_mnemonic_keyval
 ;;;     gtk_label_get_mnemonic_widget
 ;;;     gtk_label_set_mnemonic_widget
+;;;     gtk_label_get_natural_wrap_mode                    Since 4.6
+;;;     gtk_label_set_natural_wrap_mode                    Since 4.6
 ;;;     gtk_label_get_selectable
 ;;;     gtk_label_set_selectable
 ;;;     gtk_label_get_single_line_mode
 ;;;     gtk_label_set_single_line_mode
-;;;     gtk_label_get_tabs
-;;;     gtk_label_set_tabs
+;;;     gtk_label_get_tabs                                 Since 4.8
+;;;     gtk_label_set_tabs                                 Since 4.8
 ;;;     gtk_label_get_use_markup
 ;;;     gtk_label_set_use_markup
 ;;;     gtk_label_get_use_underline

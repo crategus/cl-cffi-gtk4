@@ -2,7 +2,7 @@
 ;;; gtk4.statusbar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -80,14 +80,15 @@
 
 #+liber-documentation
 (setf (documentation 'statusbar 'type)
- "@version{#2021-12-22}
+ "@version{2023-8-24}
   @begin{short}
-    A @sym{gtk:statusbar} widget is usually placed along the bottom of the
-    main @class{gtk:window} widget of the application. It may provide a regular
-    commentary of the status of the application as is usually the case in a web
-    browser, for example, or may be used to simply output a message when the
-    status changes, when an upload is complete in an FTP client, for example.
+    A @class{gtk:statusbar} widget is usually placed along the bottom of the
+    main @class{gtk:window} widget of the application.
   @end{short}
+  It may provide a regular commentary of the status of the application as is
+  usually the case in a web browser, for example, or may be used to simply
+  output a message when the status changes, when an upload is complete in an
+  FTP client, for example.
 
   @image[statusbar]{Figure: GtkStatusbar}
 
@@ -115,8 +116,12 @@
   the stack if its message ID was recorded at the time it was added. This is
   done using the @fun{gtk:statusbar-remove} function.
   @begin[CSS node]{dictionary}
-    The @sym{gtk:statusbar} implementation has a single CSS node with name
+    The @class{gtk:statusbar} implementation has a single CSS node with name
     @code{statusbar}.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:statusbar} implementation is deprecated since 4.10. This
+    widget will be removed in GTK 5.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"text-popped\" signal}
@@ -126,7 +131,7 @@ lambda (statusbar context text)    :run-last
       Is emitted whenever a new message is popped off the stack of the status
       bar.
       @begin[code]{table}
-        @entry[statusbar]{The @sym{gtk:statusbar} widget which received the
+        @entry[statusbar]{The @class{gtk:statusbar} widget which received the
           signal.}
         @entry[context]{An unsigned integer with the context ID of the
           relevant message/statusbar.}
@@ -139,7 +144,7 @@ lambda (statusbar context text)    :run-last
       Is emitted whenever a new message gets pushed onto the stack of the status
       bar.
       @begin[code]{table}
-        @entry[statusbar]{The @sym{gtk:statusbar} widget which received the
+        @entry[statusbar]{The @class{gtk:statusbar} widget which received the
           signal.}
         @entry[context]{An unsigned integer with the context ID of the
           relevant message/statusbar.}
@@ -156,9 +161,13 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-new ()
  #+liber-documentation
- "@version{#2021-12-22}
+ "@version{#2023-8-24}
   @return{The new @class{gtk:statusbar} widget.}
   @short{Creates a new statusbar ready for messages.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:statusbar} implementation is deprecated since 4.10. This
+    widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:statusbar}"
   (make-instance 'statusbar))
 
@@ -174,7 +183,7 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-context-id (statusbar context)
  #+liber-documentation
- "@version{#2021-12-22}
+ "@version{#2023-8-24}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
   @argument[context]{a string with the textual description of what context the
     new message is being used in}
@@ -183,6 +192,10 @@ lambda (statusbar context text)    :run-last
     Returns a new context identifier, given a description of the actual context.
   @end{short}
   Note that the description is not shown in the UI.
+  @begin[Warning]{dictionary}
+    The @class{gtk:statusbar} implementation is deprecated since 4.10. This
+    widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:statusbar}"
   (etypecase context
     (integer context)
@@ -211,6 +224,10 @@ lambda (statusbar context text)    :run-last
   @begin{short}
     Pushes a new message onto the stack of the statusbar.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:statusbar} implementation is deprecated since 4.10. This
+    widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:statusbar}
   @see-function{gtk:statusbar-remove}
   @see-function{gtk:statusbar-context-id}"
@@ -237,6 +254,10 @@ lambda (statusbar context text)    :run-last
   @end{short}
   Note that this may not change the displayed message, if the message at the
   top of the stack has a different context ID.
+  @begin[Warning]{dictionary}
+    The @class{gtk:statusbar} implementation is deprecated since 4.10. This
+    widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:statusbar}
   @see-function{gtk:statusbar-push}"
   (%statusbar-pop statusbar (statusbar-context-id statusbar context)))
@@ -254,7 +275,7 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-remove (statusbar context message)
  #+liber-documentation
- "@version{#2021-12-22}
+ "@version{#2023-8-24}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
   @argument[context]{an unsigned integer with a context identifier}
   @argument[message]{an unsigned integer with a message identifier, as returned
@@ -263,11 +284,15 @@ lambda (statusbar context text)    :run-last
     Forces the removal of a message from the stack of the statusbar.
   @end{short}
   The exact @arg{context} and @arg{message} identifier must be specified.
+  @begin[Warning]{dictionary}
+    The @class{gtk:statusbar} implementation is deprecated since 4.10. This
+    widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:statusbar}
   @see-function{gtk:statusbar-push}"
   (%statusbar-remove statusbar
-                         (statusbar-context-id statusbar context)
-                         message))
+                     (statusbar-context-id statusbar context)
+                     message))
 
 (export 'statusbar-remove)
 
@@ -281,36 +306,21 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-remove-all (statusbar context)
  #+liber-documentation
- "@version{#2021-12-22}
+ "@version{#2023-8-24}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
   @argument[context]{an integer with a context identifier}
   @begin{short}
     Forces the removal of all messages from the stack of the statusbar with the
     exact @arg{context} identifier.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:statusbar} implementation is deprecated since 4.10. This
+    widget will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:statusbar}"
   (%statusbar-remove-all statusbar
-                             (statusbar-context-id statusbar context)))
+                         (statusbar-context-id statusbar context)))
 
 (export 'statusbar-remove-all)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_statusbar_get_message () -> statusbar-message
-;;; ----------------------------------------------------------------------------
-
-;; This function is no longer exported from the C API.
-
-#+nil
-(cffi:defcfun ("gtk_statusbar_get_message" statusbar-message) :string
- #+liber-documentation
- "@version{#2022-8-3}
-  @argument[statusbar]{a @class{gtk:statusbar} widget}
-  @return{A string with the contents of the statusbar.}
-  @short{Retrieves the contents of the label in the statusbar.}
-  @see-class{gtk:statusbar}"
-  (statusbar (g:object statusbar)))
-
-#+nil
-(export 'statusbar-message)
 
 ;;; --- End of file gtk4.statusbar.lisp ----------------------------------------
