@@ -7,7 +7,7 @@
 
 ;;;     GtkFileChooserWidget
 
-(test file-chooser-widget-class
+(test gtk-file-chooser-widget-class
   ;; Type check
   (is (g:type-is-object "GtkFileChooserWidget"))
   ;; Check the registered name
@@ -43,10 +43,7 @@
   (is (string=
 "filechooser:dir(ltr)
 "
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context
-                       (make-instance 'gtk:file-chooser-widget))
-                   :none)))
+               (print-style-context "GtkWidget")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileChooserWidget"
                                      GTK-FILE-CHOOSER-WIDGET

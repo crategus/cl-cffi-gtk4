@@ -150,8 +150,7 @@
         (chooser (make-instance 'gtk:file-chooser-widget)))
     (is-false (gtk:file-chooser-current-folder chooser))
     (is (eq path (setf (gtk:file-chooser-current-folder chooser) path)))
-    (is-false (gtk:file-chooser-current-folder chooser))    
-))
+    (is-false (gtk:file-chooser-current-folder chooser))))
 
 ;;;     gtk_file_chooser_add_filter
 ;;;     gtk_file_chooser_remove_filter

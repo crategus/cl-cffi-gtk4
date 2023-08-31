@@ -7,7 +7,7 @@
 
 ;;;     GtkFileChooserDialog
 
-(test file-chooser-dialog-class
+(test gtk-file-chooser-dialog-class
   ;; Type check
   (is (g:type-is-object "GtkFileChooserDialog"))
   ;; Check the registered name
@@ -60,4 +60,4 @@
 
 ;;;     gtk_file_chooser_dialog_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-27 --------------------------------------------------------------
