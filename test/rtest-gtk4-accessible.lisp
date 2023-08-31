@@ -62,17 +62,29 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     gtk_accessible_update_state
-;;;     gtk_accessible_update_state_value
+;;;     gtk_accessible_get_accessible_parent               Since 4.10
+;;;     gtk_accessible_set_accessible_parent               Since 4.10
+;;;     gtk_accessible_get_at_context                      Since 4.10
+;;;     gtk_accessible_get_bounds                          Since 4.10
+;;;     gtk_accessible_get_first_accessible_child          Since 4.10
+;;;     gtk_accessible_get_next_accessible_sibling         Since 4.10
+;;;     gtk_accessible_get_platform_state                  Since 4.10
+;;;
+;;;     gtk_accessible_reset_property
+;;;     gtk_accessible_reset_relation
 ;;;     gtk_accessible_reset_state
+;;;
+;;;     gtk_accessible_update_next_accessible_sibling      Since 4.10
+;;;
 ;;;     gtk_accessible_update_property
 ;;;     gtk_accessible_update_property_value
-;;;     gtk_accessible_reset_property
 ;;;     gtk_accessible_update_relation
 ;;;     gtk_accessible_update_relation_value
-;;;     gtk_accessible_reset_relation
+;;;     gtk_accessible_update_state
+;;;     gtk_accessible_update_state_value
+;;;
 ;;;     gtk_accessible_property_init_value
 ;;;     gtk_accessible_relation_init_value
 ;;;     gtk_accessible_state_init_value
 
-;;; --- 2023-8-13 --------------------------------------------------------------
+;;; --- 2023-8-31 --------------------------------------------------------------

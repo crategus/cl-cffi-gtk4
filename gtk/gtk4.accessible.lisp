@@ -2,7 +2,7 @@
 ;;; gtk4.accessible.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -50,15 +50,26 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gtk_accessible_update_state
-;;;     gtk_accessible_update_state_value
+;;;     gtk_accessible_get_accessible_parent               Since 4.10
+;;;     gtk_accessible_set_accessible_parent               Since 4.10
+;;;     gtk_accessible_get_at_context                      Since 4.10
+;;;     gtk_accessible_get_bounds                          Since 4.10
+;;;     gtk_accessible_get_first_accessible_child          Since 4.10
+;;;     gtk_accessible_get_next_accessible_sibling         Since 4.10
+;;;     gtk_accessible_get_platform_state                  Since 4.10
+;;;
+;;;     gtk_accessible_reset_property
+;;;     gtk_accessible_reset_relation
 ;;;     gtk_accessible_reset_state
+;;;
+;;;     gtk_accessible_update_next_accessible_sibling      Since 4.10
+;;;
 ;;;     gtk_accessible_update_property
 ;;;     gtk_accessible_update_property_value
-;;;     gtk_accessible_reset_property
 ;;;     gtk_accessible_update_relation
 ;;;     gtk_accessible_update_relation_value
-;;;     gtk_accessible_reset_relation
+;;;     gtk_accessible_update_state
+;;;     gtk_accessible_update_state_value
 ;;;
 ;;;     gtk_accessible_property_init_value
 ;;;     gtk_accessible_relation_init_value
@@ -134,7 +145,7 @@
                                                'accessible) t)
  "The @code{accessible-role} property of type @symbol{gtk:accessible-role}
   (Read / Write) @br{}
-  The accessible role of the given assistive implementation. The accessible 
+  The accessible role of the given assistive implementation. The accessible
   role cannot be changed once set.")
 
 #+liber-documentation
@@ -156,64 +167,98 @@
   @see-symbol{gtk:accessible-role}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accessible_update_state ()
+;;; gtk_accessible_get_accessible_parent
 ;;;
-;;; void
-;;; gtk_accessible_update_state (GtkAccessible *self,
-;;;                              GtkAccessibleState first_state,
-;;;                              ...);
+;;; Retrieves the accessible parent for an accessible object.
 ;;;
-;;; Updates a list of accessible states. See the GtkAccessibleState
-;;; documentation for the value types of accessible states.
-;;;
-;;; This function should be called by GtkWidget types whenever an accessible
-;;; state change must be communicated to assistive technologies.
-;;;
-;;; Example:
-;;;
-;;; value = GTK_ACCESSIBLE_TRISTATE_MIXED;
-;;; gtk_accessible_update_state (GTK_ACCESSIBLE (check_button),
-;;;                              GTK_ACCESSIBLE_STATE_CHECKED, value,
-;;;                              -1);
-;;;
-;;; self :
-;;;     a GtkAccessible
-;;;
-;;; first_state :
-;;;     the first GtkAccessibleState
-;;;
-;;; ... :
-;;;     a list of state and value pairs, terminated by -1
+;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accessible_update_state_value ()
+;;; gtk_accessible_set_accessible_parent
 ;;;
-;;; void
-;;; gtk_accessible_update_state_value (GtkAccessible *self,
-;;;                                    int n_states,
-;;;                                    GtkAccessibleState states[],
-;;;                                    const GValue values[]);
+;;; Sets the parent and sibling of an accessible object.
 ;;;
-;;; Updates an array of accessible states.
-;;;
-;;; This function should be called by GtkWidget types whenever an accessible
-;;; state change must be communicated to assistive technologies.
-;;;
-;;; This function is meant to be used by language bindings.
-;;;
-;;; self :
-;;;     a GtkAccessible
-;;;
-;;; n_states :
-;;;     the number of accessible states to set
-;;;
-;;; states :
-;;;     an array of GtkAccessibleState.
-;;;
-;;; values :
-;;;    an array of GValues, one for each state.
+;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_get_at_context
+;;;
+;;; Retrieves the accessible implementation for the given GtkAccessible.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_get_bounds
+;;;
+;;; Queries the coordinates and dimensions of this accessible.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_get_first_accessible_child
+;;;
+;;; Retrieves the first accessible child of an accessible object.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_get_next_accessible_sibling
+;;;
+;;; Retrieves the next accessible sibling of an accessible object.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_get_platform_state
+;;;
+;;; Query a platform state, such as focus.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_reset_property
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_accessible_reset_property" accessible-reset-property) :void
+ #+liber-documentation
+ "@version{#2022-1-4}
+  @argument[accessible]{a @class{gtk:accessible} widget}
+  @argument[property]{a @symbol{gtk:accessible-property} value}
+  @begin{short}
+    Resets the accessible @arg{property} to its default value.
+  @end{short}
+  @see-class{gtk:accessible}
+  @see-symbol{gtk:accessible-property}"
+  (accessible (g:object accessible))
+  (property accessible-property))
+
+(export 'accessible-reset-property)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_reset_relation
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_accessible_reset_relation" accessible-reset-relation) :void
+ #+liber-documentation
+ "@version{#2022-1-4}
+  @argument[accessible]{a @class{gtk:accessible} widget}
+  @argument[relation]{a @symbol{gtk:accessible-relation} value}
+  @begin{short}
+    Resets the accessible @arg{relation} to its default value.
+  @end{short}
+  @see-class{gtk:accessible}
+  @see-symbol{gtk:accessible-relation}"
+  (accessible (g:object accessible))
+  (relation accessible-relation))
+
+(export 'accessible-reset-relation)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_accessible_reset_state
@@ -232,6 +277,14 @@
   (state accessible-state))
 
 (export 'accessible-reset-state)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_update_next_accessible_sibling
+;;;
+;;; Updates the next accessible sibling of self.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_accessible_update_property ()
@@ -313,25 +366,6 @@
 (export 'accessible-update-property-value)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accessible_reset_property
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_accessible_reset_property" accessible-reset-property) :void
- #+liber-documentation
- "@version{#2022-1-4}
-  @argument[accessible]{a @class{gtk:accessible} widget}
-  @argument[property]{a @symbol{gtk:accessible-property} value}
-  @begin{short}
-    Resets the accessible @arg{property} to its default value.
-  @end{short}
-  @see-class{gtk:accessible}
-  @see-symbol{gtk:accessible-property}"
-  (accessible (g:object accessible))
-  (property accessible-property))
-
-(export 'accessible-reset-property)
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_accessible_update_relation ()
 ;;;
 ;;; void
@@ -392,23 +426,64 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accessible_reset_relation
+;;; gtk_accessible_update_state ()
+;;;
+;;; void
+;;; gtk_accessible_update_state (GtkAccessible *self,
+;;;                              GtkAccessibleState first_state,
+;;;                              ...);
+;;;
+;;; Updates a list of accessible states. See the GtkAccessibleState
+;;; documentation for the value types of accessible states.
+;;;
+;;; This function should be called by GtkWidget types whenever an accessible
+;;; state change must be communicated to assistive technologies.
+;;;
+;;; Example:
+;;;
+;;; value = GTK_ACCESSIBLE_TRISTATE_MIXED;
+;;; gtk_accessible_update_state (GTK_ACCESSIBLE (check_button),
+;;;                              GTK_ACCESSIBLE_STATE_CHECKED, value,
+;;;                              -1);
+;;;
+;;; self :
+;;;     a GtkAccessible
+;;;
+;;; first_state :
+;;;     the first GtkAccessibleState
+;;;
+;;; ... :
+;;;     a list of state and value pairs, terminated by -1
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_accessible_reset_relation" accessible-reset-relation) :void
- #+liber-documentation
- "@version{#2022-1-4}
-  @argument[accessible]{a @class{gtk:accessible} widget}
-  @argument[relation]{a @symbol{gtk:accessible-relation} value}
-  @begin{short}
-    Resets the accessible @arg{relation} to its default value.
-  @end{short}
-  @see-class{gtk:accessible}
-  @see-symbol{gtk:accessible-relation}"
-  (accessible (g:object accessible))
-  (relation accessible-relation))
-
-(export 'accessible-reset-relation)
+;;; ----------------------------------------------------------------------------
+;;; gtk_accessible_update_state_value ()
+;;;
+;;; void
+;;; gtk_accessible_update_state_value (GtkAccessible *self,
+;;;                                    int n_states,
+;;;                                    GtkAccessibleState states[],
+;;;                                    const GValue values[]);
+;;;
+;;; Updates an array of accessible states.
+;;;
+;;; This function should be called by GtkWidget types whenever an accessible
+;;; state change must be communicated to assistive technologies.
+;;;
+;;; This function is meant to be used by language bindings.
+;;;
+;;; self :
+;;;     a GtkAccessible
+;;;
+;;; n_states :
+;;;     the number of accessible states to set
+;;;
+;;; states :
+;;;     an array of GtkAccessibleState.
+;;;
+;;; values :
+;;;    an array of GValues, one for each state.
+;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_accessible_property_init_value

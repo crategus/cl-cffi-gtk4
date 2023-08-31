@@ -2,7 +2,7 @@
 ;;; gtk4.at-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,12 +83,12 @@
 
 #+liber-documentation
 (setf (documentation 'at-context 'type)
- "@version{#2023-4-21}
+ "@version{2023-8-31}
   @begin{short}
-    The @sym{gtk-at-context} class is an abstract class provided by GTK to
+    The @class{gtk:at-context} class is an abstract class provided by GTK to
     communicate to platform-specific assistive technologies API.
   @end{short}
-  Each platform supported by GTK implements a @sym{gtk:at-context} subclass,
+  Each platform supported by GTK implements a @class{gtk:at-context} subclass,
   and is responsible for updating the accessible state in response to state
   changes in the @class{gtk:accessible} object.
   @begin[Signal Details]{dictionary}
@@ -96,10 +96,10 @@
       @begin{pre}
 lambda (context)    :run-first
       @end{pre}
-      Emitted when the attributes of the accessible for the @sym{gtk:at-context}
-      instance change.
+      Emitted when the attributes of the accessible for the
+      @class{gtk:at-context} instance change.
       @begin[code]{table}
-        @entry[context]{A @sym{gtk:at-context} object.}
+        @entry[context]{A @class{gtk:at-context} object.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:at-context-create}
@@ -121,7 +121,7 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-accessible)
       "Accessor"
       (documentation 'at-context-accessible 'function)
- "@version{#2023-4-21}
+ "@version{2023-8-31}
   @syntax[]{(gtk:at-context-accessible object) => accessible}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[accessible]{a @class{gtk:accessible} object}
@@ -147,7 +147,7 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-accessible-role)
       "Accessor"
       (documentation 'at-context-accessible-role 'function)
- "@version{#2023-4-21}
+ "@version{2023-8-31}
   @syntax[]{(gtk:at-context-accessible-role object) => role}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[role]{a @symbol{gtk:accessible-role} value}
@@ -170,7 +170,7 @@ lambda (context)    :run-first
 (setf (liber:alias-for-function 'at-context-display)
       "Accessor"
       (documentation 'at-context-display 'function)
- "@version{#2023-4-21}
+ "@version{2023-8-31}
   @syntax[]{(gtk:at-context-display object) => display}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[display]{a @class{gdk:display} object}
@@ -187,10 +187,11 @@ lambda (context)    :run-first
 
 (cffi:defcfun ("gtk_at_context_create" at-context-create) (g:object at-context)
  #+liber-documentation
- "@version{#2023-4-21}
+ "@version{2023-8-31}
   @argument[role]{a @symbol{gtk:accessible-role} value used by the context}
   @argument[accessible]{a @class{gtk:accessible} object using the context}
   @argument[display]{a @class{gdk:display} object used by the context}
+  @return{The new @class{gtk:at-context} object.}
   @begin{short}
     Creates a new @class{gtk:at-context} instance for the given accessible role,
     accessible instance, and display connection.
