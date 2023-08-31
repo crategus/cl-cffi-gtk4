@@ -2,7 +2,7 @@
 ;;; gtk4.file-chooser-native.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,145 +83,98 @@
 
 #+liber-documentation
 (setf (documentation 'file-chooser-native 'type)
- "@version{2023-5-5}
+ "@version{2023-8-30}
   @begin{short}
-    The @sym{gtk:file-chooser-native} class is an abstraction of a dialog box
+    The @class{gtk:file-chooser-native} class is an abstraction of a dialog box
     suitable for use with \"File Open\" or \"File Save as\" commands.
   @end{short}
   By default, this just uses a @class{gtk:file-chooser-dialog} widget to
   implement the actual dialog. However, on certain platforms, such as Windows
   and macOS, the native platform file chooser is used instead. When the
   application is running in a sandboxed environment without direct filesystem
-  access such as Flatpak, the @sym{gtk:file-chooser-native} object may call the
-  proper APIs (portals) to let the user choose a file and make it available to
-  the application.
+  access such as Flatpak, the @class{gtk:file-chooser-native} object may call
+  the proper APIs (portals) to let the user choose a file and make it available
+  to the application.
 
-  While the API of @sym{gtk:file-chooser-native} object closely mirrors the
-  @class{gtk:file-chooser-dialog} widget, the main difference is that there is
-  no access to any @class{gtk:window} or @class{gtk:widget} widget for the
+  While the API of the @class{gtk:file-chooser-native} object closely mirrors
+  the @class{gtk:file-chooser-dialog} widget, the main difference is that there
+  is no access to any @class{gtk:window} or @class{gtk:widget} widget for the
   dialog. This is required, as there may not be one in the case of a platform
   native dialog.
 
   Showing, hiding and running the dialog is handled by the
   @class{gtk:native-dialog} functions.
+  @begin[Response Codes]{dictionary}
+    The @class{gtk:file-chooser-native} class inherits from the
+    @class{gtk:native-dialog} class, which means it will return the
+    @code{:accept} value if the user accepted, and the @code{:cancel} value if
+    the user pressed cancel. It can also return the @code{:delete-event} value
+    if the window was unexpectedly closed.
+  @end{dictionary}
+  @begin[Differences from GtkFileChooserDialog]{dictionary}
+    There are a few things in the @class{gtk:file-chooser} API that are not
+    possible to use with the @class{gtk:file-chooser-native} widget, as such
+    use would prohibit the use of a native dialog.
 
-  @subheading{Typical usage}
-  In the simplest of cases, you can the following code to use the
-  @class{gtk:file-chooser-dialog} widget to select a file for opening:
-  @begin{pre}
-static void
-on_response (GtkNativeDialog *native,
-             int              response)
-{
-  if (response == GTK_RESPONSE_ACCEPT)
-    {
-      GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
-      GFile *file = gtk_file_chooser_get_file (chooser);
+    No operations that change the dialog work while the dialog is visible. Set
+    all the properties that are required before showing the dialog.
 
-      open_file (file);
+    @subheading{Win32 details}
+    On windows the @code{IFileDialog} implementation, added in Windows Vista,
+    is used. It supports many of the features that the
+    @class{gtk:file-chooser-dialog} widget does, but there are some things it
+    does not handle:
+    @begin{itemize}
+      @item{Any GtkFileFilter added using a mimetype.}
+    @end{itemize}
+    If any of these features are used the regular
+    @class{gtk:file-chooser-dialog} widget will be used in place of the native
+    one.
 
-      g_object_unref (file);
-    @}
+    @subheading{Portal details}
+    When the @file{org.freedesktop.portal.FileChooser} portal is available on
+    the session bus, it is used to bring up an out-of-process file chooser.
+    Depending on the kind of session the application is running in, this may or
+    may not be a GTK file chooser.
 
-  g_object_unref (native);
-@}
-
-  // ...
-  GtkFileChooserNative *native;
-  GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
-
-  native = gtk_file_chooser_native_new (\"Open File\",
-                                        parent_window,
-                                        action,
-                                        \"_Open\",
-                                        \"_Cancel\");
-
-  g_signal_connect (native, \"response\", G_CALLBACK (on_response), NULL);
-  gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
-  @end{pre}
-  To use a dialog for saving, you can use this:
-  @begin{pre}
-static void
-on_response (GtkNativeDialog *native,
-             int              response)
-{
-  if (response == GTK_RESPONSE_ACCEPT)
-    {
-      GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
-      GFile *file = gtk_file_chooser_get_file (chooser);
-
-      save_to_file (file);
-
-      g_object_unref (file);
-    @}
-
-  g_object_unref (native);
-@}
-
-  // ...
-  GtkFileChooserNative *native;
-  GtkFileChooser *chooser;
-  GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SAVE;
-
-  native = gtk_file_chooser_native_new (\"Save File\",
-                                        parent_window,
-                                        action,
-                                        \"_Save\",
-                                        \"_Cancel\");
-  chooser = GTK_FILE_CHOOSER (native);
-
-  if (user_edited_a_new_document)
-    gtk_file_chooser_set_current_name (chooser, _(\"Untitled document\"));
-  else
-    gtk_file_chooser_set_file (chooser, existing_file, NULL);
-
-  g_signal_connect (native, \"response\", G_CALLBACK (on_response), NULL);
-  gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
-  @end{pre}
-  For more information on how to best set up a file dialog, see the
-  @class{gtk:file-chooser-dialog} widget.
-
-  @subheading{Response Codes}
-  The @sym{gtk:file-chooser-native} class inherits from the
-  @class{gtk:native-dialog} class, which means it will return the @code{:accept}
-  value if the user accepted, and the @code{:cancel} value if he pressed cancel.
-  It can also return the @code{:delete-event} value if the window was
-  unexpectedly closed.
-
-  @subheading{Differences from GtkFileChooserDialog}
-  There are a few things in the @class{gtk:file-chooser} API that are not
-  possible to use with the @sym{gtk:file-chooser-native} class, as such use
-  would prohibit the use of a native dialog.
-
-  No operations that change the dialog work while the dialog is visible. Set
-  all the properties that are required before showing the dialog.
-
-  @subheading{Win32 details}
-  On windows the @code{IFileDialog} implementation, added in Windows Vista, is
-  used. It supports many of the features that the
-  @class{gtk:file-chooser-dialog} widget does, but there are some things it
-  does not handle:
-  @begin{itemize}
-    @item{Any GtkFileFilter added using a mimetype.}
-  @end{itemize}
-  If any of these features are used the regular @class{gtk:file-chooser-dialog}
-  widget will be used in place of the native one.
-
-  @subheading{Portal details}
-  When the @file{org.freedesktop.portal.FileChooser} portal is available on the
-  session bus, it is used to bring up an out-of-process file chooser. Depending
-  on the kind of session the application is running in, this may or may not be
-  a GTK file chooser.
-
-  @subheading{macOS details}
-  On macOS the @code{NSSavePanel} and @code{NSOpenPanel} classes are used to
-  provide native file chooser dialogs. Some features provided by the
-  @class{gtk:file-chooser-dialog} widget are not supported:
-  @begin{itemize}
-    @item{Shortcut folders.}
-  @end{itemize}
+    @subheading{macOS details}
+    On macOS the @code{NSSavePanel} and @code{NSOpenPanel} classes are used to
+    provide native file chooser dialogs. Some features provided by the
+    @class{gtk:file-chooser-dialog} widget are not supported:
+    @begin{itemize}
+      @item{Shortcut folders.}
+    @end{itemize}
+  @end{dictionary}
+  @begin[Example]{dictionary}
+    In the simplest of cases, you can use the following code to use the
+    @class{gtk:file-chooser-dialog} widget to select a file for opening:
+    @begin{pre}
+(defun create-file-chooser-native (&optional parent)
+  (let ((native (gtk:file-chooser-native-new \"Open File\"
+                                             parent
+                                             :open
+                                             \"_Open\"
+                                             \"_Cancel\")))
+    ;; Connect a signal handler
+    (g:signal-connect native \"response\"
+        (lambda (dialog response)
+          (when (= -3 response) ; -3 for the :accept value
+            (let* ((file (gtk:file-chooser-file dialog))
+                   (launcher (gtk:file-launcher-new file)))
+              ;; Open the file
+              (gtk:file-launcher-launch launcher parent nil
+                  (lambda (source result)
+                    (declare (ignore source result))
+                    (format t \"Opened the file ~a~%\"
+                              (g:file-basename file))))))))
+    ;; Show the native file chooser
+    (gtk:native-dialog-show native)))
+    @end{pre}
+    For more information on how to best set up a file dialog, see the
+    @class{gtk:file-chooser-dialog} widget.
+  @end{dictionary}
   @begin[Warning]{dictionary}
-    The @sym{gtk:file-chooser-native} implementation is deprecated since 4.10.
+    The @class{gtk:file-chooser-native} implementation is deprecated since 4.10.
     Use the @class{gtk:file-dialog} implementation instead.
   @end{dictionary}
   @see-constructor{gtk:file-chooser-native-new}
@@ -229,7 +182,8 @@ on_response (GtkNativeDialog *native,
   @see-slot{gtk:file-chooser-native-cancel-label}
   @see-class{gtk:file-chooser}
   @see-class{gtk:native-dialog}
-  @see-class{gtk:file-chooser-dialog}")
+  @see-class{gtk:file-chooser-dialog}
+  @see-class{gtk:file-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -267,7 +221,12 @@ on_response (GtkNativeDialog *native,
   you need a literal underscore character in a label, use \"__\" (two
   underscores). The first underlined character represents a keyboard accelerator
   called a mnemonic. Pressing @kbd{Alt} and that key activates the button.
-  @see-class{gtk:file-chooser-native}")
+  @begin[Warning]{dictionary}
+    The @class{gtk:file-chooser-native} implementation is deprecated since 4.10.
+    Use the @class{gtk:file-dialog} implementation instead.
+  @end{dictionary}
+  @see-class{gtk:file-chooser-native}
+  @see-class{gtk:file-dialog}")
 
 ;;; --- file-chooser-native-cancel-label ---------------------------------------
 
@@ -301,7 +260,12 @@ on_response (GtkNativeDialog *native,
   you need a literal underscore character in a label, use \"__\" (two
   underscores). The first underlined character represents a keyboard accelerator
   called a mnemonic. Pressing @kbd{Alt} and that key activates the button.
-  @see-class{gtk:file-chooser-native}")
+  @begin[Warning]{dictionary}
+    The @class{gtk:file-chooser-native} implementation is deprecated since 4.10.
+    Use the @class{gtk:file-dialog} implementation instead.
+  @end{dictionary}
+  @see-class{gtk:file-chooser-native}
+  @see-class{gtk:file-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_file_chooser_native_new ()
@@ -320,8 +284,13 @@ on_response (GtkNativeDialog *native,
     or @code{nil} for the default}
   @return{A new @class{gtk:file-chooser-native} object.}
   @short{Creates a new @class{gtk:file-chooser-native} object.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:file-chooser-native} implementation is deprecated since 4.10.
+    Use the @class{gtk:file-dialog} implementation instead.
+  @end{dictionary}
   @see-class{gtk:file-chooser-native}
   @see-class{gtk:window}
+  @see-class{gtk:file-dialog}
   @see-symbol{gtk:file-chooser-action}"
   (title :string)
   (parent (g:object window))

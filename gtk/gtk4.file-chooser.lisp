@@ -154,7 +154,7 @@
 (setf (liber:alias-for-class 'file-chooser)
       "Interface"
       (documentation 'file-chooser 'type)
- "@version{2023-8-22}
+ "@version{2023-8-30}
   @begin{short}
     The @class{gtk:file-chooser} interface is an interface that can be
     implemented by file selection widgets.
@@ -210,7 +210,7 @@
                                              \"open\" :accept
                                              \"cancel\" :cancel)))
     (g:signal-connect dialog \"response\"
-                      (lambda (widget response)
+                      (lambda (dialog response)
                         (declare (ignore response))
                         (format t \"Selected file is ~a~%\"
                                 (gtk:file-chooser-namestring dialog))
@@ -238,7 +238,8 @@
   @see-slot{gtk:file-chooser-select-multiple}
   @see-slot{gtk:file-chooser-shortcut-folders}
   @see-class{gtk:file-chooser-dialog}
-  @see-class{gtk:file-chooser-widget}")
+  @see-class{gtk:file-chooser-widget}
+  @see-class{gtk:file-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -276,6 +277,7 @@
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:file-chooser}
+  @see-class{gtk:file-dialog}
   @see-symbol{gtk:file-chooser-action}")
 
 ;;; --- file-chooser-create-folders --------------------------------------------
@@ -313,6 +315,7 @@
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:file-chooser}
+  @see-class{gtk:file-dialog}
   @see-symbol{gtk:file-chooser-action}")
 
 ;;; --- file-chooser-filter ----------------------------------------------------
@@ -349,7 +352,8 @@
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:file-chooser}
-  @see-class{gtk:file-filter}")
+  @see-class{gtk:file-filter}
+  @see-class{gtk:file-dialog}")
 
 ;;; --- file-chooser-filters ---------------------------------------------------
 
@@ -384,6 +388,7 @@
   @end{dictionary}
   @see-class{gtk:file-chooser}
   @see-class{g:list-model}
+  @see-class{gtk:file-dialog}
   @see-function{gtk:file-chooser-add-filter}
   @see-function{gtk:file-chooser-remove-filter}")
 
@@ -420,6 +425,7 @@
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:file-chooser}
+  @see-class{gtk:file-dialog}
   @see-symbol{gtk:file-chooser-action}")
 
 ;;; --- file-chooser-shortcut-folders ------------------------------------------
@@ -456,6 +462,7 @@
   @see-class{gtk:file-chooser}
   @see-class{g:list-model}
   @see-class{g:file}
+  @see-class{gtk:file-dialog}
   @see-symbol{gtk:file-chooser-add-shortcut-folder}")
 
 ;;; ----------------------------------------------------------------------------
@@ -505,6 +512,7 @@
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:file-chooser}
+  @see-class{gtk:file-dialog}
   @see-function{gtk:file-chooser-file}"
   (chooser (g:object file-chooser)))
 
@@ -514,9 +522,6 @@
 ;;; gtk_file_chooser_get_file ()
 ;;; gtk_file_chooser_set_file () -> file-chooser-file
 ;;; ----------------------------------------------------------------------------
-
-;; TODO: Rework the example. We no longer have the
-;; gtk:file-chooser-current-folder-file function
 
 (defun (setf file-chooser-file) (file chooser)
   (glib:with-g-error (err)
@@ -538,14 +543,15 @@
     Accessor of the file of the file chooser.
   @end{short}
   The @fun{gtk:file-choose-file} function gets the @class{g:file} object for
-  the currently selected file in the file selector. If multiple files are
+  the currently selected file in the file chooser. If multiple files are
   selected, one of the files will be returned at random. If the file chooser
   is in folder mode, this function returns the selected folder.
 
   The @sym{(setf gtk:file-chooser-file)} function sets @arg{file} as the current
-  filename for the file chooser, by changing to the file's parent folder and
-  actually selecting the file in list. If the chooser is in @code{:save} mode,
-  the file's base name will also appear in the dialog's file name entry.
+  filename for the file chooser, by changing to the parent folder of the file
+  and actually selecting the file. If the file chooser is in @code{:save} mode,
+  the base name of the file will also appear in the file name entry of the
+  dialog.
 
   If the file name is not in the current folder of the file chooser, then the
   current folder of the file chooser will be changed to the folder containing
@@ -556,8 +562,8 @@
 
   If you are implementing a save dialog, you should use this function if you
   already have a file name to which the user may save. For example, when the
-  user opens an existing file and then does \"File/Save As...\" on it. If you do
-  not have a file name already - for example, if the user just created a new
+  user opens an existing file and then does \"File/Save As...\" on it. If you
+  do not have a file name already - for example, if the user just created a new
   file and is saving it for the first time, do not call this function. Instead,
   use something similar to this:
   @begin{pre}
@@ -576,7 +582,8 @@
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:file-chooser}
-  @see-class{g:file}"
+  @see-class{g:file}
+  @see-class{gtk:file-dialog}"
   (chooser (g:object file-chooser)))
 
 (export 'file-chooser-file)
@@ -627,6 +634,7 @@
   @end{dictionary}
   @see-class{gtk:file-chooser}
   @see-class{g:file}
+  @see-class{gtk:file-dialog}
   @see-type{g:file-as-namestring}"
   (chooser (g:object file-chooser)))
 
@@ -654,7 +662,8 @@
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:file-chooser}
-  @see-class{g:file}"
+  @see-class{g:file}
+  @see-class{gtk:file-dialog}"
   (chooser (g:object file-chooser)))
 
 (export 'file-chooser-files)
@@ -703,7 +712,8 @@
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
-  @see-class{gtk:file-chooser}"
+  @see-class{gtk:file-chooser}
+  @see-class{gtk:file-dialog}"
   (chooser (g:object file-chooser)))
 
 (export 'file-chooser-current-folder)
@@ -728,6 +738,7 @@
   @end{dictionary}
   @see-class{gtk:file-chooser}
   @see-class{gtk:file-filter}
+  @see-class{gtk:file-dialog}
   @see-function{gtk:file-chooser-remove-filter}"
   (chooser (g:object file-chooser))
   (filter (g:object file-filter)))
@@ -753,6 +764,7 @@
   @end{dictionary}
   @see-class{gtk:file-chooser}
   @see-class{gtk:file-filter}
+  @see-class{gtk:file-dialog}
   @see-function{gtk:file-chooser-add-filter}"
   (chooser (g:object file-chooser))
   (filter (g:object file-filter)))
@@ -788,6 +800,7 @@
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:file-chooser}
+  @see-class{gtk:file-dialog}
   @see-function{gtk:file-chooser-remove-shortcut-folder}"
   (glib:with-g-error (err)
     (%file-chooser-add-shortcut-folder chooser folder err)))
@@ -821,6 +834,7 @@
     the @class{gtk:file-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:file-chooser}
+  @see-class{gtk:file-dialog}
   @see-function{gtk:file-chooser-add-shortcut-folder}"
   (glib:with-g-error (err)
     (%file-chooser-remove-shortcut-folder chooser folder err)))
