@@ -2,7 +2,7 @@
 ;;; gtk4.list-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,6 +63,7 @@
 ;;;     gtk_list_box_append
 ;;;     gtk_list_box_insert
 ;;;     gtk_list_box_remove
+;;;     gtk_list_box_remove_all                            Since 4.12
 ;;;     gtk_list_box_select_row
 ;;;     gtk_list_box_unselect_row
 ;;;     gtk_list_box_select_all
@@ -148,8 +149,6 @@
 ;;; ----------------------------------------------------------------------------
 ;;; GtkListBoxRow
 ;;; ----------------------------------------------------------------------------
-
-;; TODO: Implement missing interfaces
 
 (gobject:define-g-object-class "GtkListBoxRow" list-box-row
   (:superclass widget
@@ -747,16 +746,34 @@ lambda (listbox)    :action
 
 (cffi:defcfun ("gtk_list_box_remove" list-box-remove) :void
  #+liber-documentation
- "@version{#2022-2-3}
+ "@version{#2023-8-31}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to remove}
   @short{Removes a child widget from the list box.}
   @see-class{gtk:list-box}
   @see-class{gtk:widget}"
-  (box (g:object list-box))
+  (listbox (g:object list-box))
   (child (g:object widget)))
 
 (export 'list-box-remove)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_list_box_remove_all
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-12
+(cffi:defcfun ("gtk_list_box_remove_all" list-box-remove-all) :void
+ #+liber-documentation
+ "@version{#2023-8-31}
+  @argument[listbox]{a @class{gtk:list-box} widget}
+  @short{Removes all child widgets from the list box.}
+
+  Since 4.12
+  @see-class{gtk:list-box}"
+  (listbox (g:object list-box)))
+
+#+gtk-4-12
+(export 'list-box-remove-all)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_list_box_select_row

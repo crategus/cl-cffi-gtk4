@@ -2,7 +2,7 @@
 ;;; gtk4.grid.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -198,8 +198,9 @@
     @code{grid}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:grid} implmentation uses the @code{:group} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    Until GTK 4.10, the @class{gtk:grid} implementation used the @code{:group}
+    role of the @symbol{gtk:accessible-role} enumeration. Starting from
+    GTK 4.12, the @class{gtk:box} implementation uses the @code{:generic} role.
   @end{dictionary}
   @see-constructor{gtk:grid-new}
   @see-slot{gtk:grid-baseline-row}

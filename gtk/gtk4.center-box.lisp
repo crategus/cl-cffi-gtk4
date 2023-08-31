@@ -2,7 +2,7 @@
 ;;; gtk4.center-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -45,6 +45,8 @@
 ;;;     gtk_center_box_get_end_widget
 ;;;     gtk_center_box_set_start_widget
 ;;;     gtk_center_box_get_start_widget
+;;;     gtk_center_box_set_shrink_center_last
+;;;     gtk_center_box_get_shrink_center_last
 ;;;
 ;;; Functions
 ;;;
@@ -137,8 +139,10 @@
     bottom.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:center-box} implementation uses the @code{:group} value of the
-    @symbol{gtk:accessible-role} enumeration.
+    Until GTK 4.10, the @class{gtk:center-box} implementation used the
+    @code{:group} role of the @symbol{gtk:accessible-role} enumeration.
+    Starting from GTK 4.12, the @class{gtk:box} implementation uses the
+    @code{:generic} role.
   @end{dictionary}
   @see-constructor{gtk:center-box-new}
   @see-slot{gtk:center-box-baseline-position}
@@ -239,6 +243,46 @@
   @code{nil} if there is none. The @sym{(setf gtk:center-box-end-widget)}
   function sets the end widget. To remove the existing end widget, pass
   @code{nil}.
+  @see-class{gtk:center-box}")
+
+;;; --- center-box-shrink-center-last ------------------------------------------
+
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "shrink-center-last"
+                                               'center-box) t)
+ "The @code{shrink-center-last} property of type @code{:boolean} (Read / Write)
+  @br{}
+  Whether to shrink the center widget after other children. By default, when
+  there is no space to give all three children their natural widths, the start
+  and end widgets start shrinking and the center child keeps natural width until
+  they reach minimum width. If set to @em{false}, start and end widgets keep
+  natural width and the center widget starts shrinking instead. Since 4.12@ br{}
+  Default value: @em{true}")
+
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'center-box-shrink-center-last)
+      "Accessor"
+      (documentation 'center-box-shrink-center-last 'function)
+ "@version{#2023-8-31}
+  @syntax[]{(gtk:center-box-shrink-center-last object) => setting}
+  @syntax[]{(setf (gtk:center-box-shrink-center-last object) setting)}
+  @argument[box]{a @class{gtk:center-box} widget}
+  @argument[setting]{a boolean whether to shrink the center widget after other
+    children}
+  @begin{short}
+    Accessor of the @slot[gtk:center-box]{shrink-center-last} slot of the
+    @class{gtk:center-box} class.
+  @end{short}
+  The @fun{gtk:center-box-shrink-center-last} function gets whether the center
+  box shrinks the center widget after other children. The
+  @sym{(setf gtk:center-box-shrink-center-last)} function sets the property.
+
+  By default, when there is no space to give all three children their natural
+  widths, the start and end widgets start shrinking and the center child keeps
+  natural width until they reach minimum width. If set to @em{false}, start and
+  end widgets keep natural width and the center widget starts shrinking instead.
+
+  Since 4.12
   @see-class{gtk:center-box}")
 
 ;;; --- center-box-start-widget ------------------------------------------------

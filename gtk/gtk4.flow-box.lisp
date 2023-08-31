@@ -2,7 +2,7 @@
 ;;; gtk4.flow-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,6 +63,7 @@
 ;;;     gtk_flow_box_append                                Since 4.6
 ;;;     gtk_flow_box_prepend                               Since 4.6
 ;;;     gtk_flow_box_remove
+;;;     gtk_flow_box_remove_all                            Since 4.12
 ;;;     gtk_flow_box_get_child_at_index
 ;;;     gtk_flow_box_get_child_at_pos
 ;;;     gtk_flow_box_set_hadjustment
@@ -765,6 +766,26 @@ lambda (flowbox)    :action
   (child (g:object widget)))
 
 (export 'flow-box-remove)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_flow_box_remove_all
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-12
+(cffi:defcfun ("gtk_flow_box_remove_all" flow-box-remove-all) :void
+ #+liber-documentation
+ "@version{#2023-8-31}
+  @argument[flowbox]{a @class{gtk:flow-box} widget}
+  @begin{short}
+    Removes all child widgets from the flow box.
+  @end{short}
+
+  Since 4.12
+  @see-class{gtk:flow-box}"
+  (flowbox (g:object flow-box)))
+
+(#+gtk-4-12
+(export 'flow-box-remove-all)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_flow_box_get_child_at_index -> flow-box-child-at-index

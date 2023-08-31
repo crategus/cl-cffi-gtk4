@@ -2,7 +2,7 @@
 ;;; gtk4.box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.9 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -37,6 +37,8 @@
 ;;;
 ;;; Accessors
 ;;;
+;;;     gtk_box_get_baseline_child
+;;;     gtk_box_set_baseline_child
 ;;;     gtk_box_get_baseline_position
 ;;;     gtk_box_set_baseline_position
 ;;;     gtk_box_get_homogeneous
@@ -56,6 +58,7 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     baseline-child                                     Since 4.12
 ;;;     baseline-position
 ;;;     homogeneous
 ;;;     spacing
@@ -91,7 +94,11 @@
                 "GtkConstraintTarget"
                 "GtkOrientable")
    :type-initializer "gtk_box_get_type")
-  ((baseline-position
+  (#+gtk-4-12
+   (baseline-child
+    box-baseline-child
+    "baseline-child" "gint" t t)
+   (baseline-position
     box-baseline-position
     "baseline-position" "GtkBaselinePosition" t t)
    (homogeneous
@@ -103,9 +110,9 @@
 
 #+liber-documentation
 (setf (documentation 'box 'type)
- "@version{2022-11-25}
+ "@version{2023-8-25}
   @begin{short}
-    The @sym{gtk:box} widget arranges child widgets into a single row or
+    The @class{gtk:box} widget arranges child widgets into a single row or
     column.
   @end{short}
 
@@ -131,17 +138,19 @@
   Use the @fun{gtk:box-reorder-child-after} function to move a child widget to
   a different place in the box.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:box} implementation uses a single CSS node with name
+    The @class{gtk:box} implementation uses a single CSS node with name
     @code{box}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:box} implementation uses the @code{:group} role of the
-    @symbol{gtk:accessible-role} enumeration.
+    Until GTK 4.10, the @class{gtk:box} implementation used the @code{:group}
+    role of the @symbol{gtk:accessible-role} enumeration. Starting from
+    GTK 4.12, the @class{gtk:box} implementation uses the @code{:generic} role.
   @end{dictionary}
+  @see-constructor{gtk:box-new}
+  @see-slot{gtk:box-baseline-child}
   @see-slot{gtk:box-baseline-position}
   @see-slot{gtk:box-homogeneous}
   @see-slot{gtk:box-spacing}
-  @see-constructor{gtk:box-new}
   @see-class{gtk:widget}
   @see-class{gtk:orientable}
   @see-symbol{gtk:orientation}
@@ -150,6 +159,35 @@
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
+
+;;; --- box-baseline-child -----------------------------------------------------
+
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "baseline-child" 'box) t)
+ "The @code{baseline-child} property of type @code{:int} (Read / Write) @br{}
+  The position of the child widget that determines the baseline, in vertical
+  orientation. Since 4.12 @br{}
+  Default value: -1")
+
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'box-baseline-child)
+      "Accessor"
+      (documentation 'box-baseline-child 'function)
+ "@version{#2023-8-25}
+  @syntax[]{(gtk:box-baseline-child object) => position}
+  @syntax[]{(setf (gtk:box-baseline-child object) position)}
+  @argument[object]{a @class{gtk:box} widget}
+  @argument[position]{an integer with the position of the baseline child widget}
+  @begin{short}
+    Accessor of the @slot[box]{baseline-child} slot of the @class{gtk:box}
+    class.
+  @end{short}
+  The @fun{gtk:box-baseline-child} function gets the position of the baseline
+  child widget. The @sym{(setf gtk:box-baseline-position)} function sets the
+  position. This affects only vertical boxes.
+
+  Since 4.12
+  @see-class{gtk:box}")
 
 ;;; --- box-baseline-position --------------------------------------------------
 
@@ -164,7 +202,7 @@
 (setf (liber:alias-for-function 'box-baseline-position)
       "Accessor"
       (documentation 'box-baseline-position 'function)
- "@version{#2022-1-14}
+ "@version{2023-8-25}
   @syntax[]{(gtk:box-baseline-position object) => position}
   @syntax[]{(setf (gtk:box-baseline-position object) position)}
   @argument[object]{a @class{gtk:box} widget}
@@ -173,7 +211,7 @@
     Accessor of the @slot[box]{baseline-position} slot of the
     @class{gtk:box} class.
   @end{short}
-  The @sym{gtk:box-baseline-position} function gets the baseline position of a
+  The @fun{gtk:box-baseline-position} function gets the baseline position of a
   box. The @sym{(setf gtk:box-baseline-position)} function sets the baseline
   position.
 
@@ -196,7 +234,7 @@
 (setf (liber:alias-for-function 'box-homogeneous)
       "Accessor"
       (documentation 'box-homogeneous 'function)
- "@version{#2022-1-14}
+ "@version{2023-8-25}
   @syntax[]{(gtk:box-homogeneous object) => homogeneous}
   @syntax[]{(setf (gtk:box-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:box} widget}
@@ -206,7 +244,7 @@
     Accessor of the @slot[box]{homogeneous} slot of the @class{gtk:box}
     class.
   @end{short}
-  The @sym{gtk:box-homogeneous} function returns whether or not all children of
+  The @fun{gtk:box-homogeneous} function returns whether or not all children of
   the box are given equal space in the box. The @sym{(setf gtk:box-homogeneous)}
   function sets the property.
   @see-class{gtk:box}")
@@ -224,7 +262,7 @@
 (setf (liber:alias-for-function 'box-spacing)
       "Accessor"
       (documentation 'box-spacing 'function)
- "@version{#2022-1-14}
+ "@version{2023-8-25}
   @syntax[]{(gtk:box-spacing object) => spacing}
   @syntax[]{(setf (gtk:box-spacing object) spacing)}
   @argument[object]{a @class{gtk:box} widget}
@@ -233,7 +271,7 @@
   @begin{short}
     Accessor of the @slot[gtk:box]{spacing} slot of the @class{gtk:box} class.
   @end{short}
-  The @sym{gtk:box-spacing} function returns the spacing between children. The
+  The @fun{gtk:box-spacing} function returns the spacing between children. The
   @sym{(setf gtk:box-spacing)} function sets the number of pixels to place
   between the children of the box.
   @see-class{gtk:box}")
@@ -246,7 +284,7 @@
 
 (defun box-new (orientation &optional (spacing 0))
  #+liber-documentation
- "@version{#2022-1-14}
+ "@version{2023-8-25}
   @argument[orientation]{an orientation of type @symbol{gtk:orientation}}
   @argument[spacing]{an optional integer with the number of pixels to place by
     default between children}
@@ -271,7 +309,7 @@
 
 (cffi:defcfun ("gtk_box_append" box-append) :void
  #+liber-documentation
- "@version{2022-11-25}
+ "@version{2023-8-25}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @short{Adds a child widget as the last child widget to the box.}
@@ -288,7 +326,7 @@
 
 (cffi:defcfun ("gtk_box_prepend" box-prepend) :void
  #+liber-documentation
- "@version{#2022-1-14}
+ "@version{#2023-8-25}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @short{Adds a child widget as the first child widget to the box.}
@@ -305,7 +343,7 @@
 
 (cffi:defcfun ("gtk_box_remove" box-remove) :void
  #+liber-documentation
- "@version{#2022-1-14}
+ "@version{#2023-8-25}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -329,7 +367,7 @@
 
 (cffi:defcfun ("gtk_box_insert_child_after" box-insert-child-after) :void
  #+liber-documentation
- "@version{#2022-1-14}
+ "@version{#2023-8-25}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @argument[sibling]{a @class{gtk:widget} sibling widget after which to insert
@@ -354,7 +392,7 @@
 
 (cffi:defcfun ("gtk_box_reorder_child_after" box-reorder-child-after) :void
  #+liber-documentation
- "@version{#2022-1-14}
+ "@version{#2023-8-25}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget to move}
   @argument[sibling]{a @class{gtk:widget} sibling widget to move @arg{child}
