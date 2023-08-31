@@ -81,19 +81,21 @@
 
 #+liber-documentation
 (setf (documentation 'window-handle 'type)
- "@version{2023-7-23}
+ "@version{2023-8-31}
   @begin{short}
-    The @sym{gtk:window-handle} widget is a titlebar area widget.
+    The @class{gtk:window-handle} widget is a titlebar area widget.
   @end{short}
   When added into a window, it can be dragged to move the window, and handles
   right click, double click and middle click as expected of a titlebar.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:window-handle} implementation has a single CSS node with the
+    The @class{gtk:window-handle} implementation has a single CSS node with the
     name @code{windowhandle}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:window-handle} implementation uses the @code{:group} role of
-    the @symbol{gtk:accessible-role} enumeration.
+    Until GTK 4.10, the @class{gtk:window-handle} implementation uses the
+    @code{:group} role of the @symbol{gtk:accessible-role} enumeration.
+    Starting from GTK 4.12, the @class{gtk:window-handle} implementation uses
+    the @code{:generic} role.
   @end{dictionary}
   @see-class{gtk:window}
   @see-class{gtk:header-bar}")

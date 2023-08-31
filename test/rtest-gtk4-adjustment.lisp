@@ -7,7 +7,7 @@
 
 ;;;     GtkAdjustment
 
-(test adjustment-class
+(test gtk-adjustment-class
   ;; Type check
   (is (g:type-is-object "GtkAdjustment"))
   ;; Check the registered name
@@ -25,7 +25,7 @@
   ;; Check the interfaces
   (is (equal '()
              (list-interfaces "GtkAdjustment")))
-  ;; Check the class properties
+  ;; Check the properties
   (is (equal '("lower" "page-increment" "page-size" "step-increment" "upper"
                "value")
              (list-properties "GtkAdjustment")))
@@ -112,24 +112,17 @@
 
 ;;;     gtk_adjustment_clamp_page
 
-;; TODO: Find examples to show how the function works
-
-#+nil
 (test adjustment-clamp-page
-  (let ((adjustment (gtk:adjustment-new 10.0 1 20 1/2 3/4 5.0d0)))
-    (is (= 10.00d0 (gtk:adjustment-value adjustment)))
-    (is (=  1.00d0 (gtk:adjustment-lower adjustment)))
-    (is (= 20.00d0 (gtk:adjustment-upper adjustment)))
-
+  (let ((adjustment (gtk:adjustment-new 10 0 20 0 0 0)))
+    (is (= 10 (gtk:adjustment-value adjustment)))
+    (is (=  0 (gtk:adjustment-lower adjustment)))
+    (is (= 20 (gtk:adjustment-upper adjustment)))
     (is-false (gtk:adjustment-clamp-page adjustment 0 20))
-
-    (is (= 10.00d0 (gtk:adjustment-value adjustment)))
-    (is (=  1.00d0 (gtk:adjustment-lower adjustment)))
-    (is (= 20.00d0 (gtk:adjustment-upper adjustment)))
-
-))
+    (is (=  0 (gtk:adjustment-value adjustment)))
+    (is (=  0 (gtk:adjustment-lower adjustment)))
+    (is (= 20 (gtk:adjustment-upper adjustment)))))
 
 ;;;     gtk_adjustment_configure
 ;;;     gtk_adjustment_get_minimum_increment
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-25 --------------------------------------------------------------

@@ -15,7 +15,7 @@
           (glib:symbol-for-gtype "GtkWindowControls")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkWindowControls")
-          (g:gtype (cffi:foreign-funcall "gtk_window_controls_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_window_controls_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
@@ -35,13 +35,10 @@
   ;; CSS name
   (is (string= "windowcontrols"
                (gtk:widget-class-css-name "GtkWindowControls")))
-  ;; CSS style context
-  (is (string=
-"windowcontrols.empty.start:dir(ltr)
-"
-               (print-style-context "GtkWindowControls")))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkWindowControls")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowControls" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowControls"
                                              GTK-WINDOW-CONTROLS
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"

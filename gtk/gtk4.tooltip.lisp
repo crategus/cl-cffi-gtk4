@@ -2,7 +2,7 @@
 ;;; gtk4.tooltip.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -65,11 +65,10 @@
   nil)
 
 (setf (documentation 'tooltip 'type)
- "@version{#2020-6-3}
+ "@version{2023-8-29}
   @short{Add tips to your widgets.}
-
-  Basic tooltips can be realized simply by using the functions
-  @fun{gtk:widget-tooltip-text} or @fun{gtk:widget-tooltip-markup}
+  Basic tooltips can be realized simply by using the
+  @fun{gtk:widget-tooltip-text} or @fun{gtk:widget-tooltip-markup} functions
   without any explicit tooltip object.
 
   When you need a tooltip with a little more fancy contents, like adding an
@@ -77,22 +76,22 @@
   @class{gtk:tree-view} row or cell, you will have to do a little more work:
   @begin{itemize}
     @begin{item}
-      Set the @slot[widget]{has-tooltip} property to @em{true}, this will
+      Set the @slot[gtk:widget]{has-tooltip} property to @em{true}, this will
       make GTK monitor the widget for motion and related events which are
       needed to determine when and where to show a tooltip.
     @end{item}
     @begin{item}
       Connect to the \"query-tooltip\" signal. The signal will be emitted when
       a tooltip is supposed to be shown. One of the arguments passed to the
-      signal handler is a @sym{gtk:tooltip} object. This is the object that we
-      are about to display as a tooltip, and can be manipulated in your callback
-      function using functions like the @fun{gtk:tooltip-set-icon} function.
-      There are functions for setting the markup of the tooltip, setting an
-      image from a stock icon, or even putting in a custom widget.
+      signal handler is a @class{gtk:tooltip} object. This is the object that
+      we are about to display as a tooltip, and can be manipulated in your
+      callback function using functions like the @fun{gtk:tooltip-set-icon}
+      function. There are functions for setting the markup of the tooltip,
+      setting an image from a stock icon, or even putting in a custom widget.
     @end{item}
     @begin{item}
-      Return @em{true} from your query-tooltip handler. This causes the tooltip
-      to be show. If you return @em{false}, it will not be shown.
+      Return @em{true} from your \"query-tooltip\" handler. This causes the
+      tooltip to be show. If you return @em{false}, it will not be shown.
     @end{item}
   @end{itemize}
   @see-function{gtk:widget-tooltip-text}
@@ -132,8 +131,8 @@
   @begin{short}
     Sets the text of the tooltip to be @arg{text}.
   @end{short}
-  If @arg{text} is @code{nil}, the label will be hidden. See also the function
-  @fun{gtk:tooltip-set-markup}.
+  If @arg{text} is @code{nil}, the label will be hidden. See also the
+  @fun{gtk:tooltip-set-markup} function.
   @see-class{gtk:tooltip}
   @see-function{gtk:tooltip-set-markup}"
   (tooltip (g:object tooltip))
@@ -247,8 +246,8 @@
   @class{gtk:tree-view} rows and cells, @class{gtk:icon-view} widgets, etc.
 
   For setting tooltips on the @class{gtk:tree-view} widget, please refer to the
-  convenience functions for this: @fun{gtk:tree-view-set-tooltip-row} and
-  @fun{gtk:tree-view-set-tooltip-cell}.
+  @fun{gtk:tree-view-set-tooltip-row} and @fun{gtk:tree-view-set-tooltip-cell}
+  convenience functions for this.
   @see-class{gtk:tooltip}
   @see-function{gtk:tree-view-set-tooltip-row}
   @see-function{gtk:tree-view-set-tooltip-cell}"

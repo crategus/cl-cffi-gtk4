@@ -2,7 +2,7 @@
 ;;; gtk4.widget-paintable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -51,7 +51,7 @@
 ;;; Object Hierarchy
 ;;;
 ;;;     GObject
-;;;     ╰── GtkTooltip
+;;;     ╰── GtkWidgetPaintable
 ;;;
 ;;; Implemented Interfaces
 ;;;
@@ -74,7 +74,7 @@
     "widget" "GtkWidget" t t)))
 
 (setf (documentation 'widget-paintable 'type)
- "@version{#2022-7-10}
+ "@version{2023-8-31}
   @begin{short}
     The @sym{gtk:widget-paintable} object is an implementation of the
     the @class{gdk:paintable} interface that allows displaying the contents of
@@ -117,7 +117,7 @@
 (setf (liber:alias-for-function 'widget-paintable-widget)
       "Accessor"
       (documentation 'widget-paintable-widget 'function)
- "@version{#2022-7-10}
+ "@version{2023-8-31}
   @syntax[]{(gtk:widget-paintable-widget object) => widget}
   @syntax[]{(setf (gtk:widget-paintable-widget object) widget)}
   @argument[object]{a @class{gtk:widget-paintable} object}
@@ -136,16 +136,16 @@
 ;;; gtk_widget_paintable_new ()
 ;;; ----------------------------------------------------------------------------
 
-(defun widget-paintable-new (widget)
+(cffi:defcfun ("gtk_widget_paintable_new" widget-paintable-new)
+    (g:object gdk:paintable)
  #+liber-documentation
- "@version{#2022-7-10}
+ "@version{2023-8-31}
   @argument[widget]{a @class{gtk:widget} widget or @code{nil}}
   @return{A new @class{gtk:widget-paintable} object.}
   @short{Creates a new paintable widget observing the given @arg{widget}.}
   @see-class{gtk:widget-paintable}
   @see-class{gtk:widget}"
-  (make-instance 'widget-paintable
-                 :widget widget))
+  (widget (g:object widget)))
 
 (export 'widget-paintable-new)
 

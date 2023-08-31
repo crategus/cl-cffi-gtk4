@@ -2,7 +2,7 @@
 ;;; gtk4.adjustment.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -106,9 +106,9 @@
 
 #+liber-documentation
 (setf (documentation 'adjustment 'type)
- "@version{#2022-11-13}
+ "@version{2023-8-25}
   @begin{short}
-    The @sym{gtk:adjustment} object represents a value which has an associated
+    The @class{gtk:adjustment} object represents a value which has an associated
     lower and upper bound, together with step and page increments, and a page
     size.
   @end{short}
@@ -116,8 +116,8 @@
   @class{gtk:viewport}, and @class{gtk:range} widget, which is a base class for
   the @class{gtk:scale} widget.
 
-  The @sym{gtk:adjustment} object does not update the value itself. Instead it
-  is left up to the owner of the @sym{gtk:adjustment} object to control the
+  The @class{gtk:adjustment} object does not update the value itself. Instead it
+  is left up to the owner of the @class{gtk:adjustment} object to control the
   value.
   @begin[Signal Details]{dictionary}
     @subheading{The \"changed\" signal}
@@ -127,7 +127,7 @@ lambda (adjustment)    :no-recurse
       Emitted when one or more of the adjustment properties have been changed,
       other than the @code{value} property.
       @begin[code]{table}
-        @entry[adjustment]{The @sym{gtk:adjustment} object which received the
+        @entry[adjustment]{The @class{gtk:adjustment} object which received the
           signal.}
       @end{table}
     @subheading{The \"value-changed\" signal}
@@ -136,17 +136,17 @@ lambda (adjustment)    :no-recurse
       @end{pre}
       Emitted when the @code{value} property of the adjustment has been changed.
       @begin[code]{table}
-        @entry[adjustment]{The @sym{gtk:adjustment} object which received the
+        @entry[adjustment]{The @class{gtk:adjustment} object which received the
           signal.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:adjustment-new}
   @see-slot{gtk:adjustment-lower}
   @see-slot{gtk:adjustment-page-increment}
   @see-slot{gtk:adjustment-page-size}
   @see-slot{gtk:adjustment-step-increment}
   @see-slot{gtk:adjustment-upper}
   @see-slot{gtk:adjustment-value}
-  @see-constructor{gtk:adjustment-new}
   @see-class{gtk:range}
   @see-class{gtk:viewport}
   @see-class{gtk:spin-button}")
@@ -155,7 +155,7 @@ lambda (adjustment)    :no-recurse
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- adjustment-lower ---------------------------------------------------
+;;; --- adjustment-lower -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "lower" 'adjustment) t)
@@ -167,7 +167,7 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-lower)
       "Accessor"
       (documentation 'adjustment-lower 'function)
- "@version{#2022-11-13}
+ "@version{2023-8-25}
   @syntax[]{(gtk:adjustment-lower object) => lower}
   @syntax[]{(setf (gtk:adjustment-lower object) lower)}
   @argument[object]{a @class{gtk:adjustment} object}
@@ -176,8 +176,7 @@ lambda (adjustment)    :no-recurse
     Accessor of the @slot[gtk:adjustment]{lower} slot of the
     @class{gtk:adjustment} class.
   @end{short}
-
-  The @sym{gtk:adjustment-lower} function retrieves the minimum value of the
+  The @fun{gtk:adjustment-lower} function retrieves the minimum value of the
   adjustment. The @sym{(setf gtk:adjustment-lower)} function sets the minimum
   value of the adjustment.
 
@@ -208,17 +207,16 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-page-increment)
       "Accessor"
       (documentation 'adjustment-page-increment 'function)
- "@version{#2022-11-13}
-  @syntax[]{(gtk:adjustment-page-increment object) => page-increment}
-  @syntax[]{(setf (gtk:adjustment-page-increment object) page-increment)}
+ "@version{2023-8-25}
+  @syntax[]{(gtk:adjustment-page-increment object) => increment}
+  @syntax[]{(setf (gtk:adjustment-page-increment object) increment)}
   @argument[object]{a @class{gtk:adjustment} object}
-  @argument[page-increment]{a double float with the page increment}
+  @argument[increment]{a double float with the page increment}
   @begin{short}
     Accessor of the @slot[gtk:adjustment]{page-increment} slot of the
     @class{gtk:adjustment} class.
   @end{short}
-
-  The @sym{gtk:adjustment-page-increment} function retrieves the page increment
+  The @fun{gtk:adjustment-page-increment} function retrieves the page increment
   of the adjustment. The @sym{(setf gtk:adjustment-page-increment)} function
   sets the page increment of the adjustment.
 
@@ -242,17 +240,16 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-page-size)
       "Accessor"
       (documentation 'adjustment-page-size 'function)
- "@version{#2022-11-13}
-  @syntax[]{(gtk:adjustment-page-size object) => page-size}
-  @syntax[]{(setf (gtk:adjustment-page-size object) page-size)}
+ "@version{2023-8-25}
+  @syntax[]{(gtk:adjustment-page-size object) => size}
+  @syntax[]{(setf (gtk:adjustment-page-size object) size)}
   @argument[object]{a @class{gtk:adjustment} object}
-  @argument[page-size]{a double float with the page size}
+  @argument[size]{a double float with the page size}
   @begin{short}
     Accessor of the @slot[gtk:adjustment]{page-size} slot of the
     @class{gtk:adjustment} class.
   @end{short}
-
-  The @sym{gtk:adjustment-page-size} function retrieves the page size of the
+  The @fun{gtk:adjustment-page-size} function retrieves the page size of the
   adjustment. The @sym{(setf gtk:adjustment-page-size)} function sets the page
   size of the adjustment.
 
@@ -274,17 +271,16 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-step-increment)
       "Accessor"
       (documentation 'adjustment-step-increment 'function)
- "@version{#2022-11-13}
-  @syntax[]{(gtk:adjustment-step-increment object) => step-increment}
-  @syntax[]{(setf (gtk:adjustment-step-increment object) step-increment)}
+ "@version{2023-8-25}
+  @syntax[]{(gtk:adjustment-step-increment object) => increment}
+  @syntax[]{(setf (gtk:adjustment-step-increment object) increment)}
   @argument[object]{a @class{gtk:adjustment} object}
-  @argument[step-increment]{a double float with the step increment}
+  @argument[increment]{a double float with the step increment}
   @begin{short}
     Accessor of the @slot[gtk:adjustment]{step-increment} slot of the
     @class{gtk:adjustment} class.
   @end{short}
-
-  The @sym{gtk:adjustment-step-increment} function retrieves the step increment
+  The @fun{gtk:adjustment-step-increment} function retrieves the step increment
   of the adjustment. The @sym{(setf gtk:adjustment-step-increment)} function
   sets the step increment of the adjustment.
 
@@ -308,7 +304,7 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-upper)
       "Accessor"
       (documentation 'adjustment-upper 'function)
- "@version{#2022-11-13}
+ "@version{2023-8-25}
   @syntax[]{(gtk:adjustment-upper object) => upper}
   @syntax[]{(setf (gtk:adjustment-upper object) upper)}
   @argument[object]{a @class{gtk:adjustment} object}
@@ -317,8 +313,7 @@ lambda (adjustment)    :no-recurse
     Accessor of the @slot[gtk:adjustment]{upper} slot of the
     @class{gtk:adjustment} class.
   @end{short}
-
-  The @sym{gtk:adjustment-upper} function retrieves the maximum value of the
+  The @fun{gtk:adjustment-upper} function retrieves the maximum value of the
   adjustment. The @sym{(setf gtk:adjustment-upper)} function sets the maximum
   value of the adjustment.
 
@@ -346,7 +341,7 @@ lambda (adjustment)    :no-recurse
 (setf (liber:alias-for-function 'adjustment-value)
       "Accessor"
       (documentation 'adjustment-value 'function)
- "@version{#2022-11-13}
+ "@version{2023-8-25}
   @syntax[]{(gtk:adjustment-value object) => value}
   @syntax[]{(setf (gtk:adjustment-value object) value)}
   @argument[object]{a @class{gtk:adjustment} object}
@@ -355,8 +350,7 @@ lambda (adjustment)    :no-recurse
     Accessor of the @slot[gtk:adjustment]{value} slot of the
     @class{gtk:adjustment} class.
   @end{short}
-
-  The @sym{gtk:adjustment-value} function gets the current value of the
+  The @fun{gtk:adjustment-value} function gets the current value of the
   adjustment. The @sym{(setf gtk:adjustment-value)} function sets the adjustment
   value. The value is clamped to lie between the @slot[gtk:adjustment]{lower}
   and @slot[gtk:adjustment]{upper} values.
@@ -366,6 +360,7 @@ lambda (adjustment)    :no-recurse
   @slot[gtk:adjustment]{lower} to @code{(@slot[gtk:adjustment]{upper} -
   @slot[gtk:adjustemnt]{page-size})} values.
   @see-class{gtk:adjustment}
+  @see-class{gtk:scrollbar}
   @see-function{gtk:adjustment-lower}
   @see-function{gtk:adjustment-upper}
   @see-function{gtk:adjustment-page-size}")
@@ -377,10 +372,10 @@ lambda (adjustment)    :no-recurse
 (defun adjustment-new (value lower upper
                        step-increment page-increment page-size)
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2023-8-25}
   @argument[value]{a double float with the initial value}
   @argument[lower]{a double float with the minimum value}
-  @argument[upper]{a double with the maximum value}
+  @argument[upper]{a double float with the maximum value}
   @argument[step-increment]{a double float with the step increment}
   @argument[page-increment]{a double float with the page increment}
   @argument[page-size]{a double float with the page size}
@@ -403,15 +398,9 @@ lambda (adjustment)    :no-recurse
 ;;; gtk_adjustment_clamp_page ()
 ;;; ----------------------------------------------------------------------------
 
-#+nil
-(cffi:defcfun ("gtk_adjustment_clamp_page" adjustment-clamp-page) :void
-  (adjustment (g:object adjustment))
-  (lower :double)
-  (upper :double))
-
 (defun adjustment-clamp-page (adjustment lower upper)
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{2023-8-25}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @argument[lower]{a double float with the lower value}
   @argument[upper]{a double float with the upper value}
@@ -437,7 +426,7 @@ lambda (adjustment)    :no-recurse
 
 (cffi:defcfun ("gtk_adjustment_configure" adjustment-configure) :void
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{#2023-8-25}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @argument[value]{a double float with the new value}
   @argument[lower]{a double float with the new minimum value}
@@ -471,7 +460,7 @@ lambda (adjustment)    :no-recurse
 
 (defun adjustment-minimum-increment (adjustment)
  #+liber-documentation
- "@version{#2022-11-13}
+ "@version{#2023-8-25}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @return{A double float with the minimum increment of the adjustment.}
   @short{Gets the smaller of step increment and page increment.}

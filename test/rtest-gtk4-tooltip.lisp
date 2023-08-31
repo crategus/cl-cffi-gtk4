@@ -1,4 +1,4 @@
-(in-package :gtk-testsuite)
+(in-package :gtk-test)
 
 (def-suite gtk-tooltip :in gtk-suite)
 (in-suite gtk-tooltip)
@@ -48,4 +48,4 @@
 ;;;     gtk_tooltip_set_custom
 ;;;     gtk_tooltip_set_tip_area
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-29 --------------------------------------------------------------

@@ -34,11 +34,8 @@
   ;; CSS name
   (is (string= "windowhandle"
                (gtk:widget-class-css-name "GtkWindowHandle")))
-  ;; CSS style context
-  (is (string=
-"windowhandle:dir(ltr)
-"
-               (print-style-context "GtkWindowHandle")))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkWindowHandle")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowHandle" GTK-WINDOW-HANDLE
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
