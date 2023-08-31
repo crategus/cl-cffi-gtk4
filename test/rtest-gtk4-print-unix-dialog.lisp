@@ -43,12 +43,10 @@
   (is (string=
 "[window.background.csd.dialog.print:dir(ltr)]
 "
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context
-                       (make-instance 'gtk:print-unix-dialog))
-                   :none)))
+               (print-style-context "GtkPrintUnixDialog" :none)))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintUnixDialog" GTK-PRINT-UNIX-DIALOG
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintUnixDialog" 
+                                             GTK-PRINT-UNIX-DIALOG
                        (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                          "GtkNative" "GtkRoot" "GtkShortcutManager")
@@ -94,4 +92,4 @@
 ;;;     gtk_print_unix_dialog_add_custom_tab
 ;;;     gtk_print_unix_dialog_get_page_setup_set
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-28 --------------------------------------------------------------

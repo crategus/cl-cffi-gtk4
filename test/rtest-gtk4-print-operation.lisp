@@ -5,45 +5,9 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
-;;;     GtkPrintOperationPreview
-
-(test print-operation-preview
-  ;; Type check
-  (is (g:type-is-interface "GtkPrintOperationPreview"))
-  ;; Check the registered name
-  (is (eq 'gtk:print-operation-preview
-          (glib:symbol-for-gtype "GtkPrintOperationPreview")))
-  ;; Check the type initializer
-  (is (eq (g:gtype "GtkPrintOperationPreview")
-          (g:gtype (cffi:foreign-funcall "gtk_print_operation_preview_get_type"
-                                         :size))))
-  ;; Get the names of the interface properties.
-  (is (equal '()
-             (list-interface-properties "GtkPrintOperationPreview")))
-  ;; Get the interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkPrintOperationPreview"
-                                  GTK-PRINT-OPERATION-PREVIEW
-                                  (:EXPORT T
-                                   :TYPE-INITIALIZER
-                                   "gtk_print_operation_preview_get_type"))
-             (gobject:get-g-type-definition "GtkPrintOperationPreview"))))
-
-;;; --- Signals ----------------------------------------------------------------
-
-;;;     got-page-size
-;;;     ready
-
-;;; --- Functions --------------------------------------------------------------
-
-;;;     gtk_print_operation_preview_end_preview
-;;;     gtk_print_operation_preview_is_selected
-;;;     gtk_print_operation_preview_render_page
-
-;;; --- Types and Values -------------------------------------------------------
-
 ;;;     GtkPrintStatus
 
-(test print-status
+(test gtk-print-status
   ;; Check the type
   (is (g:type-is-enum "GtkPrintStatus"))
   ;; Check the type initializer
@@ -84,7 +48,7 @@
 
 ;;;     GtkPrintOperationAction
 
-(test print-operaton-action
+(test gtk-print-operaton-action
   ;; Check the type
   (is (g:type-is-enum "GtkPrintOperationAction"))
   ;; Check the type initializer
@@ -120,7 +84,7 @@
 
 ;;;     GtkPrintOperationResult
 
-(test print-operation-result
+(test gtk-print-operation-result
   ;; Check the type
   (is (g:type-is-enum "GtkPrintOperationResult"))
   ;; Check the type initializer
@@ -154,12 +118,9 @@
                              (:IN-PROGRESS 3))
              (gobject:get-g-type-definition "GtkPrintOperationResult"))))
 
-;;;     GtkPrintError
-;;;     GTK_PRINT_ERROR
-
 ;;;     GtkPrintOperation
 
-(test print-operation-class
+(test gtk-print-operation-class
   ;; Type check
   (is (g:type-is-object "GtkPrintOperation"))
   ;; Check the registered name
@@ -256,6 +217,27 @@
 ;;;     unit
 ;;;     use-full-page
 
+(test gtk-print-operation-properties
+  (let ((operation (make-instance 'gtk:print-operation)))
+    (is-false (gtk:print-operation-allow-async operation))
+    (is (= -1 (gtk:print-operation-current-page operation)))
+    (is-false (gtk:print-operation-custom-tab-label operation))
+    (is-false (gtk:print-operation-default-page-setup operation))
+    (is-false (gtk:print-operation-embed-page-setup operation))
+    (is-false (gtk:print-operation-export-filename operation))
+    (is-false (gtk:print-operation-has-selection operation))
+    (is (stringp (gtk:print-operation-job-name operation)))
+    (is (= -1 (gtk:print-operation-n-pages operation)))
+    (is (= -1 (gtk:print-operation-n-pages-to-print operation)))
+    (is-false (gtk:print-operation-print-settings operation))
+    (is-false (gtk:print-operation-show-progress operation))
+    (is (eq :initial (gtk:print-operation-status operation)))
+    (is (string= "" (gtk:print-operation-status-string operation)))
+    (is-false (gtk:print-operation-support-selection operation))
+    (is-false (gtk:print-operation-track-print-status operation))
+    (is (eq :pixel (gtk:print-operation-unit operation)))
+    (is-false (gtk:print-operation-use-full-page operation))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     begin-print
@@ -273,6 +255,10 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_print_operation_new
+
+(test gtk-print-operation-new
+  (is (typep (gtk:print-operation-new) 'gtk:print-operation)))
+
 ;;;     gtk_print_operation_get_error
 ;;;     gtk_print_operation_run
 ;;;     gtk_print_operation_cancel
@@ -285,4 +271,4 @@
 
 ;;;     gtk_print_run_page_setup_dialog_async
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-28 --------------------------------------------------------------
