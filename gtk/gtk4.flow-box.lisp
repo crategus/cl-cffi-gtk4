@@ -784,7 +784,7 @@ lambda (flowbox)    :action
   @see-class{gtk:flow-box}"
   (flowbox (g:object flow-box)))
 
-(#+gtk-4-12
+#+gtk-4-12
 (export 'flow-box-remove-all)
 
 ;;; ----------------------------------------------------------------------------
