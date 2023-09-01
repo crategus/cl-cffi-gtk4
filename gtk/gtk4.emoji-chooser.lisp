@@ -2,7 +2,7 @@
 ;;; gtk4.emoji-chooser.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,16 +83,16 @@
 
 #+liber-documentation
 (setf (documentation 'emoji-chooser 'type)
- "@version{#2022-6-28}
+ "@version{2023-8-28}
   @begin{short}
-    The @sym{gtk:emoji-chooser} popover is used by text widgets such as the
+    The @class{gtk:emoji-chooser} widget is used by text widgets such as the
     @class{gtk:entry} or @class{gtk:text-view} widgets to offer users a
     convenient way to insert Emoji characters.
   @end{short}
 
   @image[emoji-chooser]{Figure: GtkEmojiChooser}
-  The @sym{gtk:emoji-chooser} popover emits the \"emoji-picked\" signal when an
-  Emoji is selected.
+  The @class{gtk:emoji-chooser} widget emits the \"emoji-picked\" signal when
+  an Emoji is selected.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 popover
@@ -103,7 +103,7 @@ popover
     ├── ...
     ╰── button.image-button.emoji-section
     @end{pre}
-    Every @sym{gtk:emoji-chooser} widget consists of a main node called
+    Every @class{gtk:emoji-chooser} widget consists of a main node called
     @code{popover}. The contents of the popover are largely implementation
     defined and supposed to inherit general styles. The top searchbar used to
     search emoji and gets the @code{.emoji-searchbar} style class itself. The
@@ -125,7 +125,7 @@ lambda (chooser text)    :run-last
       @end{pre}
       The signal is emitted when the user selects an Emoji.
       @begin[code]{table}
-        @entry[chooser]{The @sym{gtk:emoji-chooser} widget.}
+        @entry[chooser]{The @class{gtk:emoji-chooser} widget.}
         @entry[text]{A string with the Unicode sequence for the picked Emoji,
           in UTF-8.}
       @end{table}
@@ -140,7 +140,7 @@ lambda (chooser text)    :run-last
 
 (defun emoji-chooser-new ()
  #+liber-documentation
- "@version{#2022-6-28}
+ "@version{2023-8-28}
   @return{A new @class{gtk:emoji-chooser} widget.}
   @short{Creates a new Emoji chooser dialog.}
   @see-class{gtk:emoji-chooser}"

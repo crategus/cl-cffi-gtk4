@@ -2,7 +2,7 @@
 ;;; gtk4.mount-operation.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -46,9 +46,10 @@
 ;;; Functions
 ;;;
 ;;;     gtk_mount_operation_new
-;;;     gtk_show_uri_full
-;;;     gtk_show_uri_full_finish
-;;;     gtk_show_uri
+;;;
+;;;     gtk_show_uri_full                                  Deprecated 4.10
+;;;     gtk_show_uri_full_finish                           Deprecated 4.10
+;;;     gtk_show_uri                                       Deprecated 4.10
 ;;;
 ;;; Properties
 ;;;
@@ -293,7 +294,7 @@
 
 (cffi:defcfun ("gtk_show_uri" show-uri) :void
  #+liber-documentation
- "@version{#2022-1-20}
+ "@version{#2023-8-30}
   @argument[parent]{a @class{gtk:window} widget}
   @argument[uri]{a string with the URI to show}
   @argument[timestamp]{an unsigned integer with the timestamp from the event
@@ -302,6 +303,11 @@
     This function launches the default application for showing a given URI, or
     shows an error dialog if that fails.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @fun{gtk:show-uri} function is deprecated since 4.10. Use the
+    @fun{gtk:file-launcher-launch} or @fun{gtk:uri-launcher-launch} functions
+    instead.
+  @end{dictionary}
   @see-class{gtk:window}"
   (parent (g:object window))
   (uri :string)

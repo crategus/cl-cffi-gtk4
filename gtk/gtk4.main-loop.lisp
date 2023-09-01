@@ -2,7 +2,7 @@
 ;;; gtk4.main-loop.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -193,7 +193,7 @@
 
 (cffi:defcfun ("gtk_is_initialized" is-initialized) :boolean
  #+liber-documentation
- "@version{#2022-1-4}
+ "@version{2023-8-30}
   @return{A boolean with the initialization status.}
   @begin{short}
     Use this function to check if GTK has been initialized with the
@@ -210,12 +210,11 @@
 
 (cffi:defcfun ("gtk_disable_setlocale" disable-setlocale) :void
  #+liber-documentation
- "@version{#2022-1-4}
+ "@version{#2023-8-30}
   @begin{short}
     Prevents the @fun{gtk:init} and @fun{gtk:init-check} functions from
     automatically calling @code{setlocale(LC_ALL, \"\")}.
   @end{short}
-
   You would want to use this function if you wanted to set the locale for your
   program to something other than the locale of the user, or if you wanted to
   set different values for different locale categories.
@@ -232,17 +231,15 @@
 
 (defun default-language ()
  #+liber-documentation
- "@version{#2022-1-4}
+ "@version{2023-8-30}
   @return{The default language as a @class{pango:language} instance.}
   @begin{short}
     Returns the Pango language instance for the default language currently in
     effect.
   @end{short}
-
-  Note that this can change over the life of an application.
-
-  The default language is derived from the current locale. It determines, for
-  example, whether GTK uses the right-to-left or left-to-right text direction.
+  Note that this can change over the life of an application. The default
+  language is derived from the current locale. It determines, for example,
+  whether GTK uses the right-to-left or left-to-right text direction.
 
   This function is equivalent to the @fun{pango:language-default} function. See
   that function for details.
@@ -266,16 +263,15 @@
 
 (cffi:defcfun ("gtk_get_locale_direction" locale-direction) text-direction
  #+liber-documentation
- "@version{#2022-1-4}
+ "@version{2023-8-30}
   @return{The @symbol{gtk:text-direction} value of the current locale.}
   @begin{short}
     Gets the direction of the current locale.
   @end{short}
-  This is the expected reading direction for text and UI.
-
-  This function depends on the current locale being set with the
-  @code{setlocale()} function and will default to setting the @code{:ltr}
-  direction otherwise. The @code{:none} direction will never be returned.
+  This is the expected reading direction for text and UI. This function depends
+  on the current locale being set with the @code{setlocale()} function and will
+  default to setting the @code{:ltr} direction otherwise. The @code{:none}
+  direction will never be returned.
 
   GTK sets the default text direction according to the locale during the
   @fun{gtk:init} function, and you should normally use the
