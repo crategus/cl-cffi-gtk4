@@ -219,6 +219,16 @@
        "DO-PANED"
        "gtk4-example"
        "paned.lisp")
+      ("Expander"
+       ":dialog"
+       "CREATE-EXPANDER"
+       "gtk4-example"
+       "expander.lisp")
+      ("Aspect Frame"
+       ":window"
+       "DO-ASPECT-FRAME"
+       "gtk4-example"
+       "aspect-frame.lisp")
       ("Fixed Container"
        ":window"
        "DO-FIXED"
@@ -260,7 +270,12 @@
        ":window"
        "DO-STATUSBAR"
        "gtk4-example"
-       "statusbar.lisp"))
+       "statusbar.lisp")
+      ("Calendar"
+       ":window"
+       "DO-CALENDAR"
+       "gtk4-example"
+       "calendar.lisp"))
 
      "Media Support"
      (("Video"
@@ -336,7 +351,13 @@
        ":window"
        "DO-SPIN-BUTTON"
        "gtk4-example"
-       "spin-button.lisp"))
+       "spin-button.lisp")
+      ("Search Bar"
+       ":window"
+       "DO-SEARCH-BAR"
+       "gtk4-example"
+       "search-bar.lisp")
+       )
 
      "Multiline Text Editor"
      (("Simple Text View"
@@ -458,7 +479,7 @@
        "scrolled-window.lisp"))
 
      "Printing"
-     
+
      "Drag and Drop, Clipboard"
      (("Clipboard"
        ":window"
@@ -609,7 +630,7 @@
           (declare (ignore widget))
           (funcall drawfunc cr width height)))
     ;; Show the window.
-    (gtk:widget-show window)))
+    (setf (gtk:widget-visible window) t)))
 
 ;;; ----------------------------------------------------------------------------
 
@@ -773,7 +794,7 @@
                            (create-text css-buffer t)
                            (gtk:label-new-with-mnemonic "_CSS Definition"))
     ;; Show the window
-    (gtk:widget-show window)))
+    (setf (gtk:widget-visible window) t)))
 
 (defun activate-about-dialog ()
   (gtk:show-about-dialog nil
