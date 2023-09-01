@@ -8,6 +8,10 @@
   (let* ((vbox (make-instance 'gtk:box
                               :orientation :vertical
                               :homogeneous nil
+                              :margin-top 12
+                              :margin-bottom 12
+                              :margin-start 12
+                              :margin-end 12
                               :spacing 6))
          (window (make-instance 'gtk:window
                                 :title "Example Spin Button"
@@ -15,7 +19,7 @@
                                 :application application
                                 :default-width 300)))
 
-    (multiple-value-bind
+    (multiple-value-bind 
         (second minute hour date month year day daylight-p zone)
         (get-decoded-time)
       (declare (ignore second minute hour day daylight-p zone))

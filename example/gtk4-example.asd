@@ -26,6 +26,8 @@
                (:file "stack")
                (:file "stack-sidebar")
                (:file "paned")
+               (:file "expander")
+               (:file "aspect-frame")
                (:file "fixed")
 
                ;; Display Widgets
@@ -36,6 +38,7 @@
                (:file "progress-bar")
                (:file "level-bar")
                (:file "statusbar")
+               (:file "calendar")
 
                ;; List-based widgets
                (:file "listview-applauncher")
@@ -59,6 +62,7 @@
                (:file "entry-completion")
                (:file "scale-widget")
                (:file "spin-button")
+               (:file "search-bar")
 
                ;; Multiline Text Editor
                (:file "text-view-simple")
@@ -85,10 +89,13 @@
                (:file "color-chooser-palette")
 
                (:file "file-chooser-dialog")
+               (:file "file-chooser-native")
                (:file "file-dialog-open")
 
                (:file "font-button")
                (:file "font-button-label")
+               
+               (:file "pickers")
 
                ;; Ornaments
                (:file "frame")

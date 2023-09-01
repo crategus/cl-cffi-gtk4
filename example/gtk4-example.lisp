@@ -29,6 +29,8 @@
            #:do-stack
            #:do-stack-sidebar
            #:do-paned
+           #:create-expander
+           #:do-aspect-frame
            #:do-fixed
 
            ;; Display Widgets
@@ -39,6 +41,7 @@
            #:do-progress-bar
            #:do-level-bar
            #:do-statusbar
+           #:do-calendar
 
            ;; List-based widgets
            #:do-listview-applauncher
@@ -62,6 +65,7 @@
            #:do-entry-completion
            #:do-scale-widget
            #:do-spin-button
+           #:do-search-bar
 
            ;; Multiline Text Editor
            #:do-text-view-simple
@@ -88,6 +92,7 @@
            #:do-color-chooser-palette
 
            #:create-file-chooser-dialog
+           #:create-file-chooser-native
 
            #:create-file-dialog-open
            #:create-file-dialog-open-multiple
@@ -97,6 +102,8 @@
 
            #:do-font-button
            #:do-font-button-label
+           
+           #:do-pickers
 
            ;; Ornaments
            #:do-frame

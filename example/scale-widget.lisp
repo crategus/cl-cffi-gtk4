@@ -1,23 +1,20 @@
-;;;; Example Scale Widget - 2022-7-26
+;;;; Example Scale Widget - 2023-8-25
 
 (in-package :gtk4-example)
-
-;; TODO: Improve the layout.
 
 (defun do-scale-widget (&optional application)
   (let* ((box1 (make-instance 'gtk:box
                               :orientation :vertical
                               :homogeneous nil
-                              :spacing 0
+                              :spacing 12
                               :margin-top 12
                               :margin-bottom 12
                               :margin-start 12
                               :margin-end 12))
          (window (make-instance 'gtk:window
-                                :title "Example Scale Widget"
+                                :title "Scale Widgets"
                                 :child box1
                                 :application application))
-
          (box2 (make-instance 'gtk:box
                               :orientation :horizontal
                               :homogeneous nil
@@ -50,14 +47,12 @@
          (scrollbar (make-instance 'gtk:scrollbar
                                    :orientation :horizontal
                                    :adjustment adj1)))
-
-    ;; Packing of the global widgets hscale, vscale, and scrollbar
+    ;; Packing the global widgets hscale, vscale, and scrollbar
     (gtk:box-append box1 box2)
     (gtk:box-append box2 vscale)
     (gtk:box-append box2 box3)
     (gtk:box-append box3 hscale)
     (gtk:box-append box3 scrollbar)
-
     ;; A check button to control whether the value is displayed or not.
     (let ((box (make-instance 'gtk:box
                               :orientation :horizontal
@@ -74,7 +69,6 @@
                  (gtk:check-button-active widget))))
       (gtk:box-append box button)
       (gtk:box-append box1 box))
-
     ;; A ComboBox to change the position of the value.
     (let ((box (make-instance 'gtk:box
                               :orientation :horizontal
@@ -90,7 +84,7 @@
          (lambda (widget)
            (let ((pos (gtk:combo-box-text-active-text widget)))
              (format t "type      : ~A~%"
-                       (gobject:type-from-instance (g:object-pointer widget)))
+                       (g:type-from-instance (g:object-pointer widget)))
              (format t "active is : ~A~%"
                        (gtk:combo-box-active widget))
              (setq pos (if pos (intern pos :keyword) :top))
@@ -101,7 +95,6 @@
                                      :label "Scale value position"))
       (gtk:box-append box combo)
       (gtk:box-append box1 box))
-
     ;; Create a scale to change the digits of hscale and vscale.
     (let* ((box (make-instance 'gtk:box
                                :orientation :horizontal
@@ -130,7 +123,6 @@
                                      :label "Scale Digits:"))
       (gtk:box-append box scale)
       (gtk:box-append box1 box))
-
     ;; Another hscale for adjusting the page size of the scrollbar
     (let* ((box (make-instance 'gtk:box
                                :orientation :horizontal
@@ -159,4 +151,4 @@
                                      :label "Scrollbar Page Size:"))
       (gtk:box-append box scale)
       (gtk:box-append box1 box))
-    (gtk:widget-show window)))
+    (setf (gtk:widget-visible window) t)))

@@ -10,8 +10,9 @@
                                              :open
                                              "open" :accept
                                              "cancel" :cancel)))
+    (setf (gtk:window-modal dialog) t)
     (g:signal-connect dialog "response"
-                      (lambda (widget response)
+                      (lambda (dialog response)
                         (declare (ignore response))
                         (format t "Selected file is ~a~%"
                                 (gtk:file-chooser-namestring dialog))

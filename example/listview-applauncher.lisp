@@ -72,6 +72,7 @@
     ;; icon and name, as this is just a simple demo.
     (g:signal-connect factory "setup"
         (lambda (factory item)
+          (declare (ignore factory))
           (let* ((box (gtk:box-new :horizontal 12))
                  (image (make-instance 'gtk:image
                                        :icon-size :large)))
@@ -85,6 +86,7 @@
     ;; grab its icon and display it.
     (g:signal-connect factory "bind"
         (lambda (factory item)
+          (declare (ignore factory))
           (let* ((image (gtk:widget-first-child (gtk:list-item-child item)))
                  (label (gtk:widget-next-sibling image))
                  (appinfo (gtk:list-item-item item)))
