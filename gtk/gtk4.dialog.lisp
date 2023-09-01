@@ -35,7 +35,7 @@
 ;;;
 ;;;     GtkDialog
 ;;;     GtkDialogFlags
-;;;     GtkResponseType
+;;;     GtkResponseType                          -> gtk4.enumerations.lisp
 ;;;
 ;;; Functions
 ;;;
@@ -124,69 +124,6 @@
       instead of an action area.}
   @end{table}
   @see-class{gtk:dialog}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkResponseType
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkResponseType" response-type
-  (:export t
-   :type-initializer "gtk_response_type_get_type")
-  (:none -1)
-  (:reject -2)
-  (:accept -3)
-  (:delete-event -4)
-  (:ok -5)
-  (:cancel -6)
-  (:close -7)
-  (:yes -8)
-  (:no -9)
-  (:apply -10)
-  (:help -11))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'response-type)
-      "GEnum"
-      (liber:symbol-documentation 'response-type)
- "@version{2023-8-21}
-  @begin{short}
-    Predefined values for use as response IDs in the @fun{gtk:dialog-add-button}
-    function.
-  @end{short}
-  All predefined values are negative, GTK leaves positive values for application
-  defined response IDs.
-  @begin{pre}
-(gobject:define-g-enum \"GtkResponseType\" response-type
-  (:export t
-   :type-initializer \"gtk_response_type_get_type\")
-  (:none -1)
-  (:reject -2)
-  (:accept -3)
-  (:delete-event -4)
-  (:ok -5)
-  (:cancel -6)
-  (:close -7)
-  (:yes -8)
-  (:no -9)
-  (:apply -10)
-  (:help -11))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{Returned if an action widget has no response ID, or if the
-      dialog gets programmatically hidden or destroyed.}
-    @entry[:reject]{Generic response ID, not used by GTK dialog.}
-    @entry[:accept]{Generic response ID, not used by GTK dialog.}
-    @entry[:delete-event]{Returned if the dialog is deleted.}
-    @entry[:ok]{Returned by OK buttons in GTK dialog.}
-    @entry[:cancel]{Returned by Cancel buttons in GTK dialog.}
-    @entry[:close]{Returned by Close buttons in GTK dialog.}
-    @entry[:yes]{Returned by Yes buttons in GTK dialog.}
-    @entry[:no]{Returned by No buttons in GTK dialog.}
-    @entry[:apply]{Returned by Apply buttons in GTK dialog.}
-    @entry[:help]{Returned by Help buttons in GTK dialog.}
-  @end{table}
-  @see-class{gtk:dialog}
-  @see-function{gtk:dialog-add-button}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkDialog
@@ -290,10 +227,6 @@
   For the simple dialog in the following example, a @class{gtk:message-dialog}
   widget would save some effort. But you would need to create the dialog
   contents manually if you had more than a simple message in the dialog.
-  @begin[Warning]{dictionary}
-    The @class{gtk:dialog} implementation is deprecated since 4.10. Use the
-    @class{gtk:window} widget instead.
-  @end{dictionary}
   @begin[Examples]{dictionary}
     Simple @class{gtk:dialog} widget usage:
     @begin{pre}
@@ -355,6 +288,10 @@
   @begin[Accessibility]{dictionary}
     The @class{gtk:dialog} implementation uses the @code{:dialog} role of the
     @symbol{gtk:accessible-role} enumeration.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:dialog} implementation is deprecated since 4.10. Use the
+    @class{gtk:window} widget instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"close\" signal}
@@ -505,10 +442,6 @@ lambda (dialog response)    :run-last
   relying on the \"response\" signal when using the @code{:destroy-with-parent}
   flag. Buttons are from left to right, so the first button in the list will be
   the leftmost button in the dialog.
-  @begin[Warning]{dictionary}
-    The @class{gtk:dialog} implementation is deprecated since 4.10. Use the
-    @class{gtk:window} widget instead.
-  @end{dictionary}
   @begin[Examples]{dictionary}
     @begin{pre}
 (let ((dialog (gtk:dialog-new-with-buttons \"My dialog\"
@@ -520,6 +453,10 @@ lambda (dialog response)    :run-last
                                            :reject)))
   ... )
     @end{pre}
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:dialog} implementation is deprecated since 4.10. Use the
+    @class{gtk:window} widget instead.
   @end{dictionary}
   @see-class{gtk:dialog}
   @see-class{gtk:window}
