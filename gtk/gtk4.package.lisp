@@ -2933,11 +2933,9 @@
       @about-function{color-dialog-button-new}
     @end{subsection}
     @begin[GtkFileChooser]{subsection}
-      File chooser interface used by GtkFileChooserWidget and
-      GtkFileChooserDialog.
+      File chooser interface used by the @class{gtk:file-chooser-widget} and
+      @class{gtk:file-chooser-dialog} widgets.
       @about-symbol{file-chooser-action}
-      @about-symbol{GTK_FILE_CHOOSER_ERROR}
-      @about-symbol{file-chooser-error}
       @about-class{file-chooser}
       @about-generic{file-chooser-action}
       @about-generic{file-chooser-create-folders}
@@ -3002,6 +3000,16 @@
       @about-function{file-dialog-select-multiple-folders}
       @about-function{file-dialog-select-multiple-folders-finish}
     @end{subsection}
+    @begin[GtkFileLauncher]{subsection}
+      @about-class{file-launcher}
+      @about-generic{file-launcher-always-ask}
+      @about-generic{file-launcher-file}
+      @about-function{file-launcher-new}
+      @about-function{file-launcher-launch}
+      @about-function{file-launcher-launch-finish}
+      @about-function{file-launcher-open-containing-folder}
+      @about-function{file-launcher-open-containing-folder-finish}
+    @end{subsection}
     @begin[GtkFontChooser]{subsection}
       Interface implemented by widgets displaying fonts.
       @about-symbol{font-chooser-level}
@@ -3040,6 +3048,35 @@
       A dialog for selecting fonts.
       @about-class{font-chooser-dialog}
       @about-function{font-chooser-dialog-new}
+    @end{subsection}
+    @begin[GtkFontDialog]{subsection}
+      @about-class{font-dialog}
+      @about-generic{font-dialog-filter}
+      @about-generic{font-dialog-font-map}
+      @about-generic{font-dialog-language}
+      @about-generic{font-dialog-modal}
+      @about-generic{font-dialog-title}
+      @about-function{font-dialog-new}
+      @about-function{font-dialog-choose-face}
+      @about-function{font-dialog-choose-face-finish}
+      @about-function{font-dialog-choose-family}
+      @about-function{font-dialog-choose-family-finish}
+      @about-function{font-dialog-choose-font}
+      @about-function{font-dialog-choose-font-finish}
+      @about-function{font-dialog-choose-font-and-features}
+      @about-function{font-dialog-choose-font-and-features-finish}
+    @end{subsection}
+    @begin[GtkFontDialogButton]{subsection}
+      @about-symbol{font-level}
+      @about-class{font-dialog-button}
+      @about-generic{font-dialog-button-dialog}
+      @about-generic{font-dialog-button-font-desc}
+      @about-generic{font-dialog-button-font-features}
+      @about-generic{font-dialog-button-language}
+      @about-generic{font-dialog-button-level}
+      @about-generic{font-dialog-button-use-font}
+      @about-generic{font-dialog-button-use-size}
+      @about-function{font-dialog-button-new}
     @end{subsection}
     @begin[GtkEmojiChooser]{subsection}
       A popover to choose an Emoji character.
@@ -4302,7 +4339,6 @@
       @about-symbol{delete-type}
       @about-symbol{direction-type}
       @about-symbol{icon-size}
-      @about-symbol{sensitivity-type}
       @about-symbol{text-direction}
       @about-symbol{justification}
       @about-symbol{movement-step}
@@ -4467,6 +4503,7 @@
       @about-function{icon-theme-add-search-path}
       @about-function{icon-theme-add-resource-path}
       @about-function{icon-theme-has-icon}
+      @about-function{icon-theme-has-gicon}
       @about-function{icon-theme-lookup-icon}
       @about-function{icon-theme-lookup-by-gicon}
       @about-function{icon-theme-icon-sizes}

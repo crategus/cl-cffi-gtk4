@@ -22,10 +22,16 @@
 ;;; DEALINGS IN THE SOFTWARE.
 ;;; ----------------------------------------------------------------------------
 
-(defpackage :gtk4-init
-  (:use :cl :cffi))
+(defpackage :gtk-init
+  (:use :cl :cffi)
+  (:export *gtk-warn-deprecated*))
 
-(in-package :gtk4-init)
+(in-package :gtk-init)
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defvar *gtk-warn-deprecated* t)
+  (when *gtk-warn-deprecated*
+    (pushnew :gtk-warn-deprecated *features*)))
 
 #+sbcl
 (when (and (find-package "SB-EXT")

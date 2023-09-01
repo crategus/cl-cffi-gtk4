@@ -110,34 +110,35 @@
     ((:file "gtk4.package")
 
      ;; GTK Core
-     (:file "gtk4.version")               ; Version Information
-     (:file "gtk4.enumerations")          ; Standard Enumerations
-     (:file "gtk4.main-loop")             ; Main event loop, and events
-     (:file "gtk4.mount-operation")       ; Filesystem utilities
+     (:file "gtk4.version")
+     (:file "gtk4.enumerations")
+     (:file "gtk4.main-loop")
+     (:file "gtk4.mount-operation")
 
      ;; Theming in GTK
-     (:file "gtk4.style-provider")        ; GtkStyleProvider (interface)
-     (:file "gtk4.css-provider")          ; GtkCssProvider
-     (:file "gtk4.style-context")         ; GtkStyleContext
-     (:file "gtk4.icon-paintable")        ; GtkIconPaintable
-     (:file "gtk4.icon-theme")            ; GtkIconTheme
+     (:file "gtk4.style-provider")
+     (:file "gtk4.css-provider")
+     (:file "gtk4.style-context")
+     (:file "gtk4.icon-paintable")
+     (:file "gtk4.icon-theme")
 
      ;; Interfaces
-     (:file "gtk4.accessible")            ; GtkAccessible
-     (:file "gtk4.actionable")            ; GtkActionable
-     (:file "gtk4.cell-editable")         ; GtkCellEditable
-     (:file "gtk4.native")                ; GtkNative
-     (:file "gtk4.orientable")            ; GtkOrientable
-     (:file "gtk4.root")                  ; GtkRoot
-     (:file "gtk4.scrollable")            ; GtkScrollable
-     (:file "gtk4.shortcut-manager")      ; GtkShortcutManager
+     (:file "gtk4.accessible")
+     (:file "gtk4.accessible-range"              :if-feature :gtk-4-10)
+     (:file "gtk4.actionable")
+     (:file "gtk4.cell-editable")
+     (:file "gtk4.native")
+     (:file "gtk4.orientable")
+     (:file "gtk4.root")
+     (:file "gtk4.scrollable")
+     (:file "gtk4.shortcut-manager")
 
      ;; Settings
-     (:file "gtk4.settings")              ; Sharing settings between applications
+     (:file "gtk4.settings")
 
      ;; Interface builder
-     (:file "gtk4.buildable")             ; GtkBuildable
-     (:file "gtk4.builder")               ; GtkBuilder
+     (:file "gtk4.buildable")
+     (:file "gtk4.builder")
 
      ;; GListModel support
      (:file "gtk4.bitset")
@@ -168,23 +169,23 @@
      (:file "gtk4.string-list")
 
      ;; Layout Managers
-     (:file "gtk4.layout-manager")        ; GtkLayoutManager
-     (:file "gtk4.layout-child")          ; GtkLayoutChild
-     (:file "gtk4.bin-layout")            ; GtkBinLayout
-     (:file "gtk4.box-layout")            ; GtkBoxLayout
-     (:file "gtk4.center-layout")         ; GtkCenterLayout
-     (:file "gtk4.fixed-layout")          ; GtkFixedLayout
-     (:file "gtk4.grid-layout")           ; GtkGridLayout
-     (:file "gtk4.overlay-layout")        ; GtkOverlayLayout
-     (:file "gtk4.custom-layout")         ; GtkCustomLayout
-     (:file "gtk4.constraint-layout")     ; GtkConstraintLayout
+     (:file "gtk4.layout-manager")
+     (:file "gtk4.layout-child")
+     (:file "gtk4.bin-layout")
+     (:file "gtk4.box-layout")
+     (:file "gtk4.center-layout")
+     (:file "gtk4.fixed-layout")
+     (:file "gtk4.grid-layout")
+     (:file "gtk4.overlay-layout")
+     (:file "gtk4.custom-layout")
+     (:file "gtk4.constraint-layout")
 
-     (:file "gtk4.constraint")            ; GtkConstraint, GtkConstraintTarget
-     (:file "gtk4.constraint-guide")      ; GtkConstraintGuide
+     (:file "gtk4.constraint")
+     (:file "gtk4.constraint-guide")
 
      ;; Abstract Base Classes
-     (:file "gtk4.widget")                ; GtkWidget
-     (:file "gtk4.range")                 ; GtkRange
+     (:file "gtk4.widget")
+     (:file "gtk4.range")
 
      ;; List-based Widgets
      (:file "gtk4.list-item")
@@ -203,40 +204,40 @@
      (:file "gtk4.tree-expander")
 
      ;; Layout Containers
-     (:file "gtk4.box")                   ; GtkBox
-     (:file "gtk4.center-box")            ; GtkCenterBox
-     (:file "gtk4.grid")                  ; GtkGrid
-     (:file "gtk4.revealer")              ; GtkRevealer
-     (:file "gtk4.list-box")              ; GtkListBox
-     (:file "gtk4.flow-box")              ; GtkFlowBox
+     (:file "gtk4.box")
+     (:file "gtk4.center-box")
+     (:file "gtk4.grid")
+     (:file "gtk4.revealer")
+     (:file "gtk4.list-box")
+     (:file "gtk4.flow-box")
      (:file "gtk4.stack")
      (:file "gtk4.stack-switcher")
      (:file "gtk4.stack-sidebar")
-     (:file "gtk4.action-bar")            ; GtkActionBar
-     (:file "gtk4.header-bar")            ; GtkHeaderBar
-     (:file "gtk4.overlay")               ; GtkOverlay
-     (:file "gtk4.paned")                 ; GtkPaned
-     (:file "gtk4.notebook")              ; GtkNotebook
-     (:file "gtk4.expander")              ; GtkExpander
-     (:file "gtk4.aspect-frame")          ; GtkAspectFrame
-     (:file "gtk4.fixed")                 ; GtkFixed
+     (:file "gtk4.action-bar")
+     (:file "gtk4.header-bar")
+     (:file "gtk4.overlay")
+     (:file "gtk4.paned")
+     (:file "gtk4.notebook")
+     (:file "gtk4.expander")
+     (:file "gtk4.aspect-frame")
+     (:file "gtk4.fixed")
 
      ;; Display Widgets
-     (:file "gtk4.label")                 ; GtkLabel
-     (:file "gtk4.image")                 ; GtkImage
-     (:file "gtk4.picture")               ; GtkPicture
-     (:file "gtk4.spinner")               ; GtkSpinner
-     (:file "gtk4.info-bar")              ; GtkInfoBar
-     (:file "gtk4.progress-bar")          ; GtkProgressBar
-     (:file "gtk4.level-bar")             ; GtkLevelBar
-     (:file "gtk4.statusbar")             ; GtkStatusbar
-     (:file "gtk4.calendar")              ; GtkCalendar
+     (:file "gtk4.label")
+     (:file "gtk4.image")
+     (:file "gtk4.picture")
+     (:file "gtk4.spinner")
+     (:file "gtk4.info-bar")
+     (:file "gtk4.progress-bar")
+     (:file "gtk4.level-bar")
+     (:file "gtk4.statusbar")
+     (:file "gtk4.calendar")
 
      ;; Media Support
-     (:file "gtk4.video")                 ; GtkVideo
-     (:file "gtk4.media-controls")        ; GtkMediaControls
-     (:file "gtk4.media-stream")          ; GtkMediaStream
-     (:file "gtk4.media-file")            ; GtkMediaFile
+     (:file "gtk4.video")
+     (:file "gtk4.media-controls")
+     (:file "gtk4.media-stream")
+     (:file "gtk4.media-file")
 
      ;; Buttons and Toggles
      (:file "gtk4.button")                ; GtkButton
@@ -250,12 +251,12 @@
      (:file "gtk4.switch")                ; GtkSwitch
 
      ;; Multiline Text Editor
-     (:file "gtk4.text-iter")             ; Text buffer iterator
-     (:file "gtk4.text-tag")              ; GtkTextTag
-     (:file "gtk4.text-tag-table")        ; GtkTextTagTable
-     (:file "gtk4.text-mark")             ; GtkTextMark
-     (:file "gtk4.text-buffer")           ; GtkTextBuffer
-     (:file "gtk4.text-view")             ; GtkTextView
+     (:file "gtk4.text-iter")
+     (:file "gtk4.text-tag")
+     (:file "gtk4.text-tag-table")
+     (:file "gtk4.text-mark")
+     (:file "gtk4.text-buffer")
+     (:file "gtk4.text-view")
 
      ;; Tree, List and Icon Grid Widgets
      (:file "gtk4.tree-model")            ; GtkTreeModel, GtkTreeIter, ...
@@ -290,104 +291,111 @@
      (:file "gtk4.tree-store")            ; GtkTreeStore
 
      ;; Numeric and Text Data Entry
-     (:file "gtk4.editable")              ; GtkEditable
-     (:file "gtk4.entry-buffer")          ; Text buffer for GtkEntry
-     (:file "gtk4.text")                  ; GtkText
-     (:file "gtk4.entry")                 ; GtkEntry
-     (:file "gtk4.entry-completion")      ; GtkEntryCompletion
-     (:file "gtk4.password-entry")        ; GtkPasswordEntry
-     (:file "gtk4.scale")                 ; GtkScale
-     (:file "gtk4.spin-button")           ; GtkSpinButton
-     (:file "gtk4.search-entry")          ; GtkSearchEntry
-     (:file "gtk4.search-bar")            ; GtkSearchBar
-     (:file "gtk4.editable-label")        ; GtkEditableLabel
+     (:file "gtk4.editable")
+     (:file "gtk4.entry-buffer")
+     (:file "gtk4.text")
+     (:file "gtk4.entry")
+     (:file "gtk4.entry-completion")
+     (:file "gtk4.password-entry")
+     (:file "gtk4.scale")
+     (:file "gtk4.spin-button")
+     (:file "gtk4.search-entry")
+     (:file "gtk4.search-bar")
+     (:file "gtk4.editable-label")
 
      ;; Combo Box, Popover
-     (:file "gtk4.combo-box")             ; GtkComboBox
-     (:file "gtk4.combo-box-text")        ; GtkComboBoxText
-     (:file "gtk4.popover")               ; GtkPopover
-     (:file "gtk4.popover-menu")          ; GtkPopoverMenu
-     (:file "gtk4.popover-menu-bar")      ; GtkPopoverMenuBar
-;     (:file "gtk4.drop-down")              GtkDropDown
+     (:file "gtk4.combo-box")
+     (:file "gtk4.combo-box-text")
+     (:file "gtk4.popover")
+     (:file "gtk4.popover-menu")
+     (:file "gtk4.popover-menu-bar")
+;     (:file "gtk4.drop-down")
 
      ;; Selector Widgets and Dialogs
-     (:file "gtk4.color-chooser")         ; GtkColorChooser
-     (:file "gtk4.color-button")          ; GtkColorButton
-     (:file "gtk4.color-chooser-widget")  ; GtkColorChooserWidget
-     (:file "gtk4.color-chooser-dialog")  ; GtkColorChooserDialog
-     (:file "gtk4.color-dialog"             :if-feature :gtk-4-10)
-     (:file "gtk4.color-dialog-button"      :if-feature :gtk-4-10)
+     (:file "gtk4.color-chooser")
+     (:file "gtk4.color-button")
+     (:file "gtk4.color-chooser-widget")
+     (:file "gtk4.color-chooser-dialog")
+
+     (:file "gtk4.color-dialog"                  :if-feature :gtk-4-10)
+     (:file "gtk4.color-dialog-button"           :if-feature :gtk-4-10)
 
      (:file "gtk4.file-chooser")
      (:file "gtk4.file-chooser-native")
      (:file "gtk4.file-chooser-dialog")
      (:file "gtk4.file-chooser-widget")
-     (:file "gtk4.file-dialog"              :if-feature :gtk-4-10)
 
-     (:file "gtk4.font-chooser")          ; GtkFontChooser
-     (:file "gtk4.font-button")           ; GtkFontButton
-     (:file "gtk4.font-chooser-widget")   ; GtkFontChooserWidget
-     (:file "gtk4.font-chooser-dialog")   ; GtkFontChooserDialog
-     (:file "gtk4.emoji-chooser")         ; GtkEmojiChooser
+     (:file "gtk4.file-dialog"                   :if-feature :gtk-4-10)
+     (:file "gtk4.file-launcher"                 :if-feature :gtk-4-10)
+
+     (:file "gtk4.font-chooser")
+     (:file "gtk4.font-button")
+     (:file "gtk4.font-chooser-widget")
+     (:file "gtk4.font-chooser-dialog")
+
+     (:file "gtk4.font-dialog"                   :if-feature :gtk-4-10)
+     (:file "gtk4.font-dialog-button"            :if-feature :gtk-4-10)
+
+     (:file "gtk4.emoji-chooser")
 
      ;; Widgets for custom drawing
-     (:file "gtk4.drawing-area")          ; GtkDrawingArea
-     (:file "gtk4.gl-area")               ; GtkGlArea
+     (:file "gtk4.drawing-area")
+     (:file "gtk4.gl-area")
 
      ;; Ornaments
-     (:file "gtk4.frame")                 ; GtkFrame
-     (:file "gtk4.separator")             ; GtkSeparator
+     (:file "gtk4.frame")
+     (:file "gtk4.separator")
 
      ;; Scrolling
-     (:file "gtk4.scrollbar")             ; GtkScrollbar
-     (:file "gtk4.scrolled-window")       ; GtkScrolledWindow
-     (:file "gtk4.viewport")              ; GtkViewport
+     (:file "gtk4.scrollbar")
+     (:file "gtk4.scrolled-window")
+     (:file "gtk4.viewport")
 
      ;; Windows
      (:file "gtk4.window")
      (:file "gtk4.dialog")
      (:file "gtk4.message-dialog")
      (:file "gtk4.about-dialog")
-     (:file "gtk4.alert-dialog"             :if-feature :gtk-4-10)
+     (:file "gtk4.alert-dialog"                  :if-feature :gtk-4-10)
      (:file "gtk4.assistant")
      (:file "gtk4.window-group")
      (:file "gtk4.native-dialog")
 
      ;; Printing
+     (:file "gtk4.print-operation-preview")
      (:file "gtk4.print-operation")
      (:file "gtk4.print-context")
      (:file "gtk4.paper-size")
      (:file "gtk4.print-settings")
      (:file "gtk4.page-setup")
-
-     (:file "gtk4.page-setup-unix-dialog"   :if-feature (:not :windows))
-     (:file "gtk4.print-unix-dialog"        :if-feature (:not :windows))
-     (:file "gtk4.print-job"                :if-feature (:not :windows))
-     (:file "gtk4.printer"                  :if-feature (:not :windows))
+     (:file "gtk4.page-setup-unix-dialog"        :if-feature (:not :windows))
+     (:file "gtk4.print-unix-dialog"             :if-feature (:not :windows))
+     (:file "gtk4.print-job"                     :if-feature (:not :windows))
+     (:file "gtk4.printer"                       :if-feature (:not :windows))
 
      ;; Shortcuts Widgets
-     (:file "gtk4.shortcuts-window")      ; GtkShortcutsWindow
-     (:file "gtk4.shortcuts-section")     ; GtkShortcutsSection
-     (:file "gtk4.shortcuts-group")       ; GtkShortcutsGroup
-     (:file "gtk4.shortcuts-shortcut")    ; GtkShortcutsShortcut
-     (:file "gtk4.shortcut-label")        ; GtkShortcutLabel
+     (:file "gtk4.shortcuts-window")
+     (:file "gtk4.shortcuts-section")
+     (:file "gtk4.shortcuts-group")
+     (:file "gtk4.shortcuts-shortcut")
+     (:file "gtk4.shortcut-label")
 
      ;; Accessibility
-     (:file "gtk4.at-context")            ; GtkATContext
+     (:file "gtk4.at-context")
 
      ;; Input Methods
-     (:file "gtk4.im-context")            ; GtkIMContext
-     (:file "gtk4.im-context-simple")     ; GtkIMContextSimple
-     (:file "gtk4.im-multicontext")       ; GtkIMMulticontext
+     (:file "gtk4.im-context")
+     (:file "gtk4.im-context-simple")
+     (:file "gtk4.im-multicontext")
 
      ;; Recently Used Documents
-     (:file "gtk4.recent-manager")        ; Managing recently used files
+     (:file "gtk4.recent-manager")
 
      ;; Choosing from installed applications
-     (:file "gtk4.app-chooser")             ; GtkAppChooser
-     (:file "gtk4.app-chooser-button")      ; GtkAppChooserButton
-     (:file "gtk4.app-chooser-dialog")      ; GtkAppChooserDialog
-     (:file "gtk4.app-chooser-widget")      ; GtkAppChooserWidget
+     (:file "gtk4.app-chooser")
+     (:file "gtk4.app-chooser-button")
+     (:file "gtk4.app-chooser-dialog")
+     (:file "gtk4.app-chooser-widget")
 
      ;; Gestures and event handling
      (:file "gtk4.event-controller")        ; GtkEventController
@@ -545,10 +553,9 @@
      (:file "rtest-gtk4-list-item-factory")
 
      ;; GTK Core
-     (:file "rtest-gtk4-version")
      (:file "rtest-gtk4-enumerations")
      (:file "rtest-gtk4-main-loop")
-;     (:file "gtk4.mount-operation")         ; Filesystem utilities
+;     (:file "gtk4.mount-operation")
 
      ;; Theming in GTK
      (:file "rtest-gtk4-style-provider")
@@ -559,6 +566,7 @@
 
      ;; Interfaces
      (:file "rtest-gtk4-accessible")
+     (:file "rtest-gtk4-accessible-range"        :if-feature :gtk-4-10)
      (:file "rtest-gtk4-actionable")
      (:file "rtest-gtk4-cell-editable")
      (:file "rtest-gtk4-native")
@@ -575,19 +583,19 @@
      (:file "rtest-gtk4-builder")
 
      ;; Layout Managers
-;    (:file "gtk4.layout-manager")           ; GtkLayoutManager
-;    (:file "gtk4.layout-child")             ; GtkLayoutChild
-;    (:file "gtk4.bin-layout")               ; GtkBinLayout
-;    (:file "gtk4.box-layout")               ; GtkBoxLayout
-;    (:file "gtk4.center-layout")            ; GtkCenterLayout
+;    (:file "gtk4.layout-manager")
+;    (:file "gtk4.layout-child")
+;    (:file "gtk4.bin-layout")
+;    (:file "gtk4.box-layout")
+;    (:file "gtk4.center-layout")
      (:file "rtest-gtk4-fixed-layout")
-;    (:file "gtk4.grid-layout")              ; GtkGridLayout
-;    (:file "gtk4.overlay-layout")           ; GtkOverlayLayout
-;    (:file "gtk4.custom-layout")            ; GtkCustomLayout
-;    (:file "gtk4.constraint-layout")        ; GtkConstraintLayout
+;    (:file "gtk4.grid-layout")
+;    (:file "gtk4.overlay-layout")
+;    (:file "gtk4.custom-layout")
+;    (:file "gtk4.constraint-layout")
 
-;    (:file "gtk4.constraint")               ; GtkConstraint, GtkConstraintTarget
-;    (:file "gtk4.constraint-guide")         ; GtkConstraintGuide
+;    (:file "gtk4.constraint")
+;    (:file "gtk4.constraint-guide")
 
      ;; Abstract Base Classes
      (:file "rtest-gtk4-widget")
@@ -598,36 +606,36 @@
      (:file "rtest-gtk4-center-box")
      (:file "rtest-gtk4-grid")
      (:file "rtest-gtk4-revealer")
-;    (:file "gtk4.list-box")                 ; GtkListBox
-;    (:file "gtk4.flow-box")                 ; GtkFlowBox
+     (:file "rtest-gtk4-list-box")
+     (:file "rtest-gtk4-flow-box")
      (:file "rtest-gtk4-stack")
      (:file "rtest-gtk4-stack-switcher")
      (:file "rtest-gtk4-stack-sidebar")
      (:file "rtest-gtk4-action-bar")
      (:file "rtest-gtk4-header-bar")
-;    (:file "gtk4.overlay")                  ; GtkOverlay
+     (:file "rtest-gtk4-overlay")
      (:file "rtest-gtk4-paned")
-;    (:file "gtk4.notebook")                 ; GtkNotebook
-;    (:file "gtk4.expander")                 ; GtkExpander
-;    (:file "gtk4.aspect-frame")             ; GtkAspectFrame
+     (:file "rtest-gtk4-notebook")
+     (:file "rtest-gtk4-expander")
+     (:file "rtest-gtk4-aspect-frame")
      (:file "rtest-gtk4-fixed")
 
      ;; Display Widgets
      (:file "rtest-gtk4-label")
      (:file "rtest-gtk4-image")
      (:file "rtest-gtk4-picture")
-;    (:file "gtk4.spinner")                  ; GtkSpinner
-;    (:file "gtk4.info-bar")                 ; GtkInfoBar
+     (:file "rtest-gtk4-spinner")
+     (:file "rtest-gtk4-info-bar")
      (:file "rtest-gtk4-progress-bar")
-;    (:file "gtk4.level-bar")                ; GtkLevelBar
-;    (:file "gtk4.statusbar")                ; GtkStatusbar
-;    (:file "gtk4.calendar")                 ; GtkCalendar
+     (:file "rtest-gtk4-level-bar")
+     (:file "rtest-gtk4-statusbar")
+     (:file "rtest-gtk4-calendar")
 
      ;; Media Support
-     (:file "rtest-gtk4-video"          :if-feature (:not :windows))
-     (:file "rtest-gtk4-media-controls" :if-feature (:not :windows))
-     (:file "rtest-gtk4-media-stream"   :if-feature (:not :windows))
-     (:file "rtest-gtk4-media-file"     :if-feature (:not :windows))
+     (:file "rtest-gtk4-video"                   :if-feature (:not :windows))
+     (:file "rtest-gtk4-media-controls"          :if-feature (:not :windows))
+     (:file "rtest-gtk4-media-stream"            :if-feature (:not :windows))
+     (:file "rtest-gtk4-media-file"              :if-feature (:not :windows))
 
      ;; Buttons and Toggles
      (:file "rtest-gtk4-button")
@@ -642,43 +650,43 @@
 
      ;; Multiline Text Editor
      (:file "rtest-gtk4-text-iter")
-;    (:file "gtk4.text-tag")                 ; GtkTextTag
-;    (:file "gtk4.text-tag-table")           ; GtkTextTagTable
-;    (:file "gtk4.text-mark")                ; GtkTextMark
-;    (:file "gtk4.text-buffer")              ; GtkTextBuffer
-;    (:file "gtk4.text-view")                ; GtkTextView
+     (:file "rtest-gtk4-text-tag")
+     (:file "rtest-gtk4-text-tag-table")
+     (:file "rtest-gtk4-text-mark")
+;    (:file "gtk4.text-buffer")
+     (:file "rtest-gtk4-text-view")
 
      ;; Tree, List and Icon Grid Widgets
      (:file "rtest-gtk4-tree-model")
-;    (:file "gtk4.tree-selection")        ; GtkTreeSelection
-;    (:file "gtk4.tree-view-column")      ; GtkTreeViewColumn
-;    (:file "gtk4.tree-view")             ; GtkTreeView
-;    (:file "gtk4.tree-view-dnd")         ; GtkTreeView Drag & Drop
+;    (:file "gtk4.tree-selection")
+;    (:file "gtk4.tree-view-column")
+;    (:file "gtk4.tree-view")
+;    (:file "gtk4.tree-view-dnd")
 
-;    (:file "gtk4.cell-layout")           ; GtkCellLayout
-;    (:file "gtk4.cell-view")             ; GtkCellView
-;    (:file "gtk4.icon-view")             ; GtkIconView
+;    (:file "gtk4.cell-layout")
+;    (:file "gtk4.cell-view")
+;    (:file "gtk4.icon-view")
 
-;    (:file "gtk4.tree-sortable")         ; GtkTreeSortable
-;    (:file "gtk4.tree-model-sort")       ; GtkTreeModelSort
-;    (:file "gtk4.tree-model-filter")     ; GtkTreeModelFilter
+;    (:file "gtk4.tree-sortable")
+;    (:file "gtk4.tree-model-sort")
+;    (:file "gtk4.tree-model-filter")
 
-;    (:file "gtk4.cell-renderer")         ; GtkCellRenderer
-;    (:file "gtk4.cell-renderer-text")    ; GtkCellRendererText
-;    (:file "gtk4.cell-renderer-accel")   ; GtkCellRendererAccel
-;    (:file "gtk4.cell-renderer-combo")   ; GtkCellRendererCombo
-;    (:file "gtk4.cell-renderer-pixbuf")  ; GtkCellRendererPixbuf
-;    (:file "gtk4.cell-renderer-progress"); GtkCellRendererProgress
-;    (:file "gtk4.cell-renderer-spin")    ; GtkCellRendererSpin
-;    (:file "gtk4.cell-renderer-toggle")  ; GtkCellRendererToggle
-;    (:file "gtk4.cell-renderer-spinner") ; GtkCellRendererSpinner
+;    (:file "gtk4.cell-renderer")
+;    (:file "gtk4.cell-renderer-text")
+;    (:file "gtk4.cell-renderer-accel")
+;    (:file "gtk4.cell-renderer-combo")
+;    (:file "gtk4.cell-renderer-pixbuf")
+;    (:file "gtk4.cell-renderer-progress")
+;    (:file "gtk4.cell-renderer-spin")
+;    (:file "gtk4.cell-renderer-toggle")
+;    (:file "gtk4.cell-renderer-spinner")
 
-     (:file "rtest-gtk4-cell-area") ; !!!!!
-;    (:file "gtk4.cell-area-box")         ; GtkCellAreaBox
-;    (:file "gtk4.cell-area-context")     ; GtkCellAreaCenter
+     (:file "rtest-gtk4-cell-area")
+;    (:file "gtk4.cell-area-box")
+;    (:file "gtk4.cell-area-context")
 
-;    (:file "gtk4.list-store")            ; GtkListStore
-;    (:file "gtk4.tree-store")            ; GtkTreeStore
+;    (:file "gtk4.list-store")
+;    (:file "gtk4.tree-store")
 
      ;; Numeric and Text Data Entry
      (:file "rtest-gtk4-editable")
@@ -686,46 +694,51 @@
      (:file "rtest-gtk4-text")
      (:file "rtest-gtk4-entry")
      (:file "rtest-gtk4-entry-completion")
-;    (:file "gtk4.password-entry")                ; GtkPasswordEntry
-;    (:file "gtk4.scale")                         ; GtkScale
-;    (:file "gtk4.spin-button")                   ; GtkSpinButton
-;    (:file "gtk4.search-entry")                  ; GtkSearchEntry
-;    (:file "gtk4.search-bar")                    ; GtkSearchBar
-;    (:file "gtk4.editable-label")                ; GtkEditableLabel
+;    (:file "gtk4.password-entry")
+     (:file "rtest-gtk4-scale")
+;    (:file "gtk4.spin-button")
+     (:file "rtest-gtk4-search-entry")
+     (:file "rtest-gtk4-search-bar")
+;    (:file "gtk4.editable-label")
 
      ;; Combo Box, Popover
-;    (:file "gtk4.combo-box")                 ; GtkComboBox
-;    (:file "gtk4.combo-box-text")            ; GtkComboBoxText
+     (:file "rtest-gtk4-combo-box")
+     (:file "rtest-gtk4-combo-box-text")
      (:file "rtest-gtk4-popover")
      (:file "rtest-gtk4-popover-menu")
-;    (:file "gtk4.popover-menu-bar")          ; GtkPopoverMenuBar
-;    (:file "gtk4.drop-down")                 ; GtkDropDown
+;    (:file "gtk4.popover-menu-bar")
+;    (:file "gtk4.drop-down")
 
      ;; Selector Widgets and Dialogs
-;     (:file "rtest-gtk4-color-chooser")           ; GtkColorChooser
-;     (:file "rtest-gtk4-color-button")            ; GtkColorButton
-;     (:file "rtest-gtk4-color-chooser-widget")    ; GtkColorChooserWidget
-;     (:file "rtest-gtk4-color-chooser-dialog")    ; GtkColorChooserDialog
+;     (:file "rtest-gtk4-color-chooser")
+;     (:file "rtest-gtk4-color-button")
+;     (:file "rtest-gtk4-color-chooser-widget")
+;     (:file "rtest-gtk4-color-chooser-dialog")
 
-     (:file "rtest-gtk4-color-dialog"         :if-feature :gtk-4-10)
-     (:file "rtest-gtk4-color-dialog-button"  :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-color-dialog"            :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-color-dialog-button"     :if-feature :gtk-4-10)
 
      (:file "rtest-gtk4-file-chooser")
      (:file "rtest-gtk4-file-chooser-native")
      (:file "rtest-gtk4-file-chooser-dialog")
      (:file "rtest-gtk4-file-chooser-widget")
 
-     (:file "rtest-gtk4-file-dialog"          :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-file-dialog"             :if-feature :gtk-4-10)
+;    (:file "gtk4.file-launcher"                 :if-feature :gtk-4-10)
 
-;    (:file "gtk4.font-chooser")                  ; GtkFontChooser
-;    (:file "gtk4.font-button")                   ; GtkFontButton
-;    (:file "gtk4.font-chooser-widget")           ; GtkFontChooserWidget
+     (:file "rtest-gtk4-font-chooser")
+     (:file "rtest-gtk4-font-button")
+     (:file "rtest-gtk4-font-chooser-widget")
      (:file "rtest-gtk4-font-chooser-dialog")
-;    (:file "gtk4.emoji-chooser")                 ; GtkEmojiChooser
+
+     (:file "rtest-gtk4-font-dialog"             :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-font-dialog-button"      :if-feature :gtk-4-10)
+
+     (:file "rtest-gtk4-emoji-chooser")
 
      ;; Widgets for custom drawing
-;    (:file "gtk4.drawing-area")              ; GtkDrawingArea
-;    (:file "gtk4.gl-area")                   ; GtkGlArea
+     (:file "rtest-gtk4-drawing-area")
+;    (:file "gtk4.gl-area")
 
      ;; Ornaments
      (:file "rtest-gtk4-frame")
@@ -742,41 +755,44 @@
      (:file "rtest-gtk4-message-dialog")
      (:file "rtest-gtk4-about-dialog")
      (:file "rtest-gtk4-assistant")
-;    (:file "gtk4.window-group")              ; GtkWindowGroup
+;    (:file "gtk4.window-group")
      (:file "rtest-gtk4-native-dialog")
 
      ;; Printing
+     (:file "rtest-gtk4-print-operation-preview")
      (:file "rtest-gtk4-print-operation")
-;    (:file "gtk4.print-context")             ; GtkPrintContext
+;    (:file "gtk4.print-context")
      (:file "rtest-gtk4-paper-size")
-;    (:file "gtk4.print-settings")            ; GtkPrintSettings
-;    (:file "gtk4.page-setup")                ; GtkPageSetup
-     (:file "rtest-gtk4-print-unix-dialog" :if-feature (:not :windows))
-;    (:file "gtk4.printer")                   ; GtkPrinter
+;    (:file "gtk4.print-settings")
+     (:file "rtest-gtk4-page-setup")
+     (:file "rtest-gtk4-page-setup-unix-dialog"  :if-feature (:not :windows))
+     (:file "rtest-gtk4-print-unix-dialog"       :if-feature (:not :windows))
+     (:file "rtest-gtk4-print-job"               :if-feature (:not :windows))
+;    (:file "gtk4.printer"                       :if-feature (:not :windows)))
 
      ;; Shortcuts Widgets
      (:file "rtest-gtk4-shortcuts-window")
-;    (:file "gtk4.shortcuts-section")         ; GtkShortcutsSection
-;    (:file "gtk4.shortcuts-group")           ; GtkShortcutsGroup
-;    (:file "gtk4.shortcuts-shortcut")        ; GtkShortcutsShortcut
-;    (:file "gtk4.shortcut-label")            ; GtkShortcutLabel
+     (:file "rtest-gtk4-shortcuts-section")
+     (:file "rtest-gtk4-shortcuts-group")
+     (:file "rtest-gtk4-shortcuts-shortcut")
+     (:file "rtest-gtk4-shortcut-label")
 
      ;; Accessibility
-;    (:file "gtk4.at-context")                ; GtkATContext
+     (:file "rtest-gtk4-at-context")
 
      ;; Input Methods
-;    (:file "gtk4.im-context")                ; GtkIMContext
-;    (:file "gtk4.im-context-simple")         ; GtkIMContextSimple
-;    (:file "gtk4.im-multicontext")           ; GtkIMMulticontext
+     (:file "rtest-gtk4-im-context")
+     (:file "rtest-gtk4-im-context-simple")
+     (:file "rtest-gtk4-im-multicontext")
 
      ;; Recently Used Documents
      (:file "rtest-gtk4-recent-manager")
 
      ;; Choosing from installed applications
-;    (:file "gtk4.app-chooser")              ; GtkAppChooser
-;    (:file "gtk4.app-chooser-button")       ; GtkAppChooserButton
+     (:file "rtest-gtk4-app-chooser")
+     (:file "rtest-gtk4-app-chooser-button")
      (:file "rtest-gtk4-app-chooser-dialog")
-;    (:file "gtk4.app-chooser-widget")       ; GtkAppChooserWidget
+     (:file "rtest-gtk4-app-chooser-widget")
 
      ;; Gestures and event handling
      (:file "rtest-gtk4-event-controller")
@@ -816,16 +832,16 @@
      ;; Miscellaneous
      (:file "rtest-gtk4-adjustment")
      (:file "rtest-gtk4-size-group")
-;    (:file "gtk4.snapshot")
-;    (:file "gtk4.tooltip")
-;    (:file "gtk4.widget-paintable")
+     (:file "rtest-gtk4-snapshot")
+     (:file "rtest-gtk4-tooltip")
+     (:file "rtest-gtk4-widget-paintable")
      (:file "rtest-gtk4-window-controls")
      (:file "rtest-gtk4-window-handle")
 
      ;; Application support
-     (:file "rtest-gtk4-application")             ; GtkApplication
-     (:file "rtest-gtk4-application-window")      ; GtkApplicationWindow
-     
+     (:file "rtest-gtk4-application")
+     (:file "rtest-gtk4-application-window")
+
      (:file "rtest-gtk4-finish")
 ))))
 
