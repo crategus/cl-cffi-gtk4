@@ -41,6 +41,7 @@
 ;;;     GtkDeleteType
 ;;;     GtkDirectionType
 ;;;     GtkIconSize
+;;;     GtkResponseType                                    <- gtk4.dialog.lisp
 ;;;     GtkSensitivityType
 ;;;     GtkTextDirection
 ;;;     GtkJustification
@@ -117,13 +118,18 @@
   (:start 1)
   (:end 2)
   (:center 3)
-  (:baseline 4))
+  #+gtk-4-12
+  (:baseline-fill 4)
+  #-gtk-4-12
+  (:baseline 4)
+  #+gtk-4-12
+  (:baseline-center 5))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'align)
       "GEnum"
       (liber:symbol-documentation 'align)
- "@version{#2022-9-10}
+ "@version{2023-8-26}
   @begin{short}
     Controls how a widget deals with extra space in a single dimension.
   @end{short}
@@ -138,8 +144,10 @@
   interpreted relative to text direction.
 
   The @code{:baseline} support is optional for containers and widgets, and it
-  is only supported for vertical alignment. When it is not supported by a child
-  widget or a container it is treated as the @code{:fill} value.
+  is only supported for vertical alignment. The @code{:baseline-center} and
+  @code{:baseline-fill} values are treated similar to the @code{:center} and
+  @code{:fill} values, except that it positions the widget to line up the
+  baselines, where that is supported.
   @begin{pre}
 (gobject:define-g-enum \"GtkAlign\" align
   (:export t
@@ -148,7 +156,12 @@
   (:start 1)
   (:end 2)
   (:center 3)
-  (:baseline 4))
+  #+gtk-4-12
+  (:baseline-fill 4)
+  #-gtk-4-12
+  (:baseline 4)
+  #+gtk-4-12
+  (:baseline-center 5))
   @end{pre}
   @begin[code]{table}
     @entry[:fill]{Stretch to fill all space if possible, center if no meaningful
@@ -156,7 +169,11 @@
     @entry[:start]{Snap to left or top side, leaving space on right or bottom.}
     @entry[:end]{Snap to right or bottom side, leaving space on left or top.}
     @entry[:center]{Center natural width of widget inside the allocation.}
-    @entry[:baseline]{Align the widget according to the baseline.}
+    @entry[:baseline-fill]{A different name for @code{baseline}. Since 4.12}
+    @entry[:baseline]{Align the widget according to the baseline. Deprecated
+      4.12: Use @code{:baseline-fill} instead.}
+    @entry[:baseline-center]{Stretch to fill all space, but align the baseline.
+      Since 4.12}
   @end{table}
   @see-class{gtk:widget}
   @see-function{gtk:widget-halign}
@@ -384,6 +401,70 @@
   @see-class{gtk:icon-theme}")
 
 ;;; ----------------------------------------------------------------------------
+;;; GtkResponseType
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-g-enum "GtkResponseType" response-type
+  (:export t
+   :allow-undeclared-values t
+   :type-initializer "gtk_response_type_get_type")
+  (:none -1)
+  (:reject -2)
+  (:accept -3)
+  (:delete-event -4)
+  (:ok -5)
+  (:cancel -6)
+  (:close -7)
+  (:yes -8)
+  (:no -9)
+  (:apply -10)
+  (:help -11))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'response-type)
+      "GEnum"
+      (liber:symbol-documentation 'response-type)
+ "@version{2023-8-21}
+  @begin{short}
+    Predefined values for use as response IDs in the @fun{gtk:dialog-add-button}
+    function.
+  @end{short}
+  All predefined values are negative, GTK leaves positive values for application
+  defined response IDs.
+  @begin{pre}
+(gobject:define-g-enum \"GtkResponseType\" response-type
+  (:export t
+   :type-initializer \"gtk_response_type_get_type\")
+  (:none -1)
+  (:reject -2)
+  (:accept -3)
+  (:delete-event -4)
+  (:ok -5)
+  (:cancel -6)
+  (:close -7)
+  (:yes -8)
+  (:no -9)
+  (:apply -10)
+  (:help -11))
+  @end{pre}
+  @begin[code]{table}
+    @entry[:none]{Returned if an action widget has no response ID, or if the
+      dialog gets programmatically hidden or destroyed.}
+    @entry[:reject]{Generic response ID, not used by GTK dialog.}
+    @entry[:accept]{Generic response ID, not used by GTK dialog.}
+    @entry[:delete-event]{Returned if the dialog is deleted.}
+    @entry[:ok]{Returned by OK buttons in GTK dialog.}
+    @entry[:cancel]{Returned by Cancel buttons in GTK dialog.}
+    @entry[:close]{Returned by Close buttons in GTK dialog.}
+    @entry[:yes]{Returned by Yes buttons in GTK dialog.}
+    @entry[:no]{Returned by No buttons in GTK dialog.}
+    @entry[:apply]{Returned by Apply buttons in GTK dialog.}
+    @entry[:help]{Returned by Help buttons in GTK dialog.}
+  @end{table}
+  @see-class{gtk:dialog}
+  @see-function{gtk:dialog-add-button}")
+
+;;; ----------------------------------------------------------------------------
 ;;; GtkSensitivityType
 ;;; ----------------------------------------------------------------------------
 
@@ -398,7 +479,7 @@
 (setf (liber:alias-for-symbol 'sensitivity-type)
       "GEnum"
       (liber:symbol-documentation 'sensitivity-type)
- "@version{#2021-12-28}
+ "@version{2023-9-1}
   @begin{short}
     Determines how GTK handles the sensitivity of various controls, such as
     combo box buttons.
@@ -412,10 +493,12 @@
   (:off 2))
   @end{pre}
   @begin[code]{table}
-    @entry[:auto]{The control is made insensitive if no action can be triggered.}
+    @entry[:auto]{The control is made insensitive if no action can be 
+      triggered.}
     @entry[:on]{The control is always sensitive.}
     @entry[:off]{The control is always insensitive.}
-  @end{table}")
+  @end{table}
+  @see-class{gtk:combo-box}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTextDirection
@@ -1631,7 +1714,7 @@
 (setf (liber:alias-for-symbol 'input-purpose)
       "GEnum"
       (liber:symbol-documentation 'input-purpose)
- "@version{#2021-12-28}
+ "@version{2023-8-29}
   @begin{short}
     Describes primary purpose of the input widget.
   @end{short}
@@ -1707,7 +1790,7 @@
 (setf (liber:alias-for-symbol 'input-hints)
       "GFlags"
       (liber:symbol-documentation 'input-hints)
- "@version{#2021-11-2}
+ "@version{2023-8-29}
   @begin{short}
     Describes hints that might be taken into account by input methods or
     applications.
@@ -2563,7 +2646,7 @@
     @entry[:window]{An application window.}
     @entry[:toggle-button]{A type of push button which stays pressed until
       depressed by a second activation. Since: 4.10}
-    @entry[:application]{A toplevel element of a graphical user interface. This 
+    @entry[:application]{A toplevel element of a graphical user interface. This
       is the role that GTK uses by default for windows. Since 4.12}
   @end{table}
   @see-class{gtk:accessible}")
