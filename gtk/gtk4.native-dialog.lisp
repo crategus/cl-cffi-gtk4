@@ -2,7 +2,7 @@
 ;;; gtk4.native-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -104,7 +104,7 @@
   same as other native applications and supporting platform specific features.
 
   The @class{gtk:dialog} functions cannot be used on such objects, but we need
-  a similar API in order to drive them. The @sym{gtk:native-dialog} object is
+  a similar API in order to drive them. The @class{gtk:native-dialog} object is
   an API that allows you to do this. It allows you to set various common
   properties on the dialog, as well as show and hide it and get a \"response\"
   signal when the user finished with the dialog.
@@ -118,7 +118,7 @@ lambda (dialog response)    :run-last
       function before the user responds to the dialog this signal will not be
       emitted.
       @begin[code]{table}
-        @entry[dialog]{The @sym{gtk:native-dialog} object on which the signal
+        @entry[dialog]{The @class{gtk:native-dialog} object on which the signal
           is emitted.}
         @entry[response]{An integer with the response ID.}
       @end{table}
@@ -155,7 +155,7 @@ lambda (dialog response)    :run-last
     Accessor of the @slot[gtk:native-dialog]{modal} slot of the
     @class{gtk:native-dialog} class.
   @end{short}
-  The @sym{gtk:native-dialog-modal} function returns whether the dialog is
+  The @fun{gtk:native-dialog-modal} function returns whether the dialog is
   modal. The @sym{(setf gtk:native-dialog-modal)} function sets a dialog modal
   or non-modal.
 
@@ -189,7 +189,7 @@ lambda (dialog response)    :run-last
     Accessor of the @slot[gtk:native-dialog]{title} slot of the
     @class{gtk:native-dialog} class.
   @end{short}
-  The @sym{gtk:native-dialog-title} function gets the title of the dialog. The
+  The @fun{gtk:native-dialog-title} function gets the title of the dialog. The
   @sym{(setf gtk:native-dialog-title)} function sets the title.
   @see-class{gtk:native-dialog}")
 
@@ -215,7 +215,7 @@ lambda (dialog response)    :run-last
     Accessor of the @slot[gtk:native-dialog]{transient-for} slot of the
     @class{gtk:native-dialog} class.
   @end{short}
-  The @sym{gtk:native-dialog-transient-for} function fetches the transient
+  The @fun{gtk:native-dialog-transient-for} function fetches the transient
   parent for the dialog. The @sym{(setf gtk:native-dialog-transient-for)}
   function sets the parent.
 
@@ -255,17 +255,16 @@ lambda (dialog response)    :run-last
 ;;; gtk_native_dialog_show ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_native_dialog_show" native-dialog-show) :void
+(cffi:defcfun ("gtk_native_dialog_show" native-dialog-show) :void
  #+liber-documentation
- "@version{#2023-4-16}
+ "@version{2023-8-30}
   @argument[dialog]{a @class{gtk:native-dialog} widget}
   @begin{short}
     Shows the dialog on the display, allowing the user to interact with it.
   @end{short}
   When the user accepts the state of the dialog the dialog will be automatically
-  hidden and the \"response\" signal will be emitted.
-
-  Multiple calls while the dialog is visible will be ignored.
+  hidden and the \"response\" signal will be emitted. Multiple calls while the
+  dialog is visible will be ignored.
   @see-class{gtk:native-dialog}"
   (dialog (g:object native-dialog)))
 
