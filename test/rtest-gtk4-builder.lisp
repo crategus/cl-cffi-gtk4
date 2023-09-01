@@ -88,7 +88,7 @@
 
 ;;;     GtkBuilder
 
-(test builder-class
+(test gtk-builder-class
   ;; Type check
   (is (g:type-is-object "GtkBuilder"))
   ;; Check the registered name
@@ -125,7 +125,7 @@
 
 ;;; ---  Properties ------------------------------------------------------------
 
-(test builder-properties.1
+(test gtk-builder-properties.1
   (let ((builder (make-instance 'gtk:builder)))
     (is-false (gtk:builder-current-object builder))
     (is (typep (gtk:builder-scope builder) 'g:object))
@@ -135,7 +135,7 @@
     (is (string= "domain"
                  (setf (gtk:builder-translation-domain builder) "domain")))))
 
-(test builder-properties.2
+(test gtk-builder-properties.2
   (let ((builder (make-instance 'gtk:builder :from-string *dialog*)))
     (is-false (gtk:builder-current-object builder))
     (is (typep (gtk:builder-scope builder) 'g:object))
@@ -145,7 +145,7 @@
 
 ;;;     gtk_builder_new
 
-(test builder-new
+(test gtk-builder-new
   ;; gtk:builder-new is implemented with make-instance
   (is (typep (gtk:builder-new) 'gtk:builder))
   ;; Check Lisp extension for initializing builder
@@ -158,32 +158,32 @@
 
 ;;;     gtk_builder_new_from_file
 
-(test builder-new-from-file
+(test gtk-builder-new-from-file
   (is (typep (gtk:builder-new-from-file (sys-path "resource/application.ui") )
              'gtk:builder)))
 
 ;;;     gtk_builder_new_from_resource
 
-(test builder-new-from-resource
+(test gtk-builder-new-from-resource
   (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (is (typep (gtk:builder-new-from-resource "/com/crategus/test/dialog.ui")
                'gtk:builder))))
 
 ;;;     gtk_builder_new_from_string
 
-(test builder-new-from-string
+(test gtk-builder-new-from-string
   (is (typep (gtk:builder-new-from-string *menus*) 'gtk:builder)))
 
 ;;;     gtk_builder_add_from_file
 
-(test builder-add-from-file
+(test gtk-builder-add-from-file
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-from-file builder
                                         (sys-path "resource/application.ui")))))
 
 ;;;     gtk_builder_add_from_resource
 
-(test builder-add-from-resource
+(test gtk-builder-add-from-resource
   (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-from-resource builder
@@ -191,7 +191,7 @@
 
 ;;;     gtk_builder_add_from_string
 
-(test builder-add-from-string
+(test gtk-builder-add-from-string
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-from-string builder *menus*))))
 
@@ -199,7 +199,7 @@
 
 ;;;     gtk_builder_add_objects_from_file
 
-(test builder-add-objects-from-file.1
+(test gtk-builder-add-objects-from-file.1
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-file builder
                                                 (sys-path "resource/dialog.ui")
@@ -208,7 +208,7 @@
     (is (equal '(gtk:dialog gtk:box gtk:box gtk:button)
                (mapcar 'type-of (gtk:builder-objects builder))))))
 
-(test builder-add-objects-from-file.2
+(test gtk-builder-add-objects-from-file.2
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-file builder
                                                 (sys-path "resource/dialog.ui")
@@ -220,7 +220,7 @@
 
 ;;;     gtk_builder_add_objects_from_resource
 
-(test builder-add-objects-from-resource
+(test gtk-builder-add-objects-from-resource
   (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-objects-from-resource builder
@@ -232,14 +232,14 @@
 
 ;;;     gtk_builder_add_objects_from_string
 
-(test builder-add-objects-from-string.1
+(test gtk-builder-add-objects-from-string.1
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-string builder *dialog* "dialog1"))
     (is (typep (gtk:builder-object builder "dialog1") 'gtk:dialog))
     (is (equal '(gtk:dialog gtk:box gtk:box gtk:button)
                (mapcar 'type-of (gtk:builder-objects builder))))))
 
-(test builder-add-objects-from-string.2
+(test gtk-builder-add-objects-from-string.2
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-string builder
                                                   *dialog*
@@ -251,7 +251,7 @@
 
 ;;;     gtk_builder_get_object
 
-(test builder-object
+(test gtk-builder-object
   (let* ((builder (gtk:builder-new-from-string *dialog*))
          (dialog (gtk:builder-object builder "dialog1"))
          (button (gtk:builder-object builder "ok_button")))
@@ -262,7 +262,7 @@
 
 ;;;     gtk_builder_get_objects
 
-(test builder-objects
+(test gtk-builder-objects
   (let ((builder (gtk:builder-new)))
     (is (typep builder 'gtk:builder))
     (is (equal '() (gtk:builder-objects builder)))
@@ -275,7 +275,7 @@
 
 ;;;     gtk_builder_expose_object
 
-(test builder-expose-object
+(test gtk-builder-expose-object
   (let ((builder (gtk:builder-new-from-string *dialog*))
         (button (make-instance 'gtk:check-button)))
     (is-false (gtk:builder-expose-object builder "checkbutton" button))
@@ -285,4 +285,4 @@
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-28 --------------------------------------------------------------

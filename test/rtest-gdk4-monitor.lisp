@@ -129,7 +129,7 @@
     (is-true (gdk:monitor-valid monitor))
     (is (integerp (gdk:monitor-width-mm monitor)))))
 
-#+crategus
+#+nil
 (test gdk-monitor-properties.2
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
     (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
@@ -148,7 +148,7 @@
     (is-true (gdk:monitor-valid monitor))
     (is (= 530 (gdk:monitor-width-mm monitor)))))
 
-#+crategus
+#+nil
 (test gdk-monitor-properties.3
   (let ((monitor (second (gdk:display-monitors (gdk:display-default)))))
     (when monitor

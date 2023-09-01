@@ -7,7 +7,7 @@
 
 ;;;     GtkImageType
 
-(test image-type
+(test gtk-image-type
   ;; Check the type
   (is (g:type-is-enum "GtkImageType"))
   ;; Check the type initializer
@@ -39,7 +39,7 @@
 
 ;;;     GtkImage
 
-(test image-class
+(test gtk-image-class
   ;; Type check
   (is (g:type-is-object "GtkImage"))
   ;; Check the registered name
@@ -67,12 +67,8 @@
   ;; CSS information
   (is (string= "image"
                (gtk:widget-class-css-name "GtkImage")))
-  (is (string=
-"image:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:image))
-                   :none)))
+  ;; Accessible role
+  (is (eq :img (gtk:widget-class-accessible-role "GtkImage")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkImage" GTK-IMAGE
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -98,7 +94,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test image-properties
+(test gtk-image-properties
   (let ((image (make-instance 'gtk:image)))
     (is-false (gtk:image-file image))
     (is-false (gtk:image-gicon image))
@@ -114,7 +110,7 @@
 
 ;;;     gtk_image_new
 
-(test image-new
+(test gtk-image-new
   (let ((image (gtk:image-new)))
     (is-false (gtk:image-file image))
     (is-false (gtk:image-gicon image))
@@ -128,7 +124,7 @@
 
 ;;;     gtk_image_new_from_file
 
-(test image-new-from-file
+(test gtk-image-new-from-file
   (let ((image (gtk:image-new-from-file (sys-path "resource/gtk-logo-24.png"))))
     (is (string= "gtk-logo-24"
                  (pathname-name (gtk:image-file image))))
@@ -143,7 +139,7 @@
 
 ;;;     gtk_image_new_from_resource
 
-(test image-new-from-resource
+(test gtk-image-new-from-resource
   (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((image (gtk:image-new-from-resource
                      "/com/crategus/test/gtk-logo-24.png")))
@@ -160,7 +156,7 @@
 
 ;;;     gtk_image_new_from_pixbuf
 
-(test image-new-from-pixbuf
+(test gtk-image-new-from-pixbuf
   (let* ((pixbuf (gdk:pixbuf-new-from-file
                      (sys-path "resource/gtk-logo-24.png")))
          (image (gtk:image-new-from-pixbuf pixbuf)))
@@ -177,7 +173,7 @@
 
 ;;;     gtk_image_new_from_paintable
 
-(test image-new-from-paintable
+(test gtk-image-new-from-paintable
   (let* ((paintable (gdk:texture-new-from-filename
                         (sys-path "resource/gtk-logo-24.png")))
          (image (gtk:image-new-from-paintable paintable)))
@@ -195,7 +191,7 @@
 
 ;;;     gtk_image_new_from_icon_name
 
-(test image-new-from-icon-name
+(test gtk-image-new-from-icon-name
   (let* ((image (gtk:image-new-from-icon-name "window-close")))
     (is-false (gtk:image-file image))
     (is-false (gtk:image-gicon image))
@@ -209,7 +205,7 @@
 
 ;;;     gtk_image_new_from_gicon
 
-(test image-new-from-gicon
+(test gtk-image-new-from-gicon
   (let* ((gicon (g:icon-new-for-string "window-close"))
          (image (gtk:image-new-from-gicon gicon)))
     (is-false (gtk:image-file image))
@@ -225,9 +221,27 @@
 ;;;     gtk_image_clear
 ;;;     gtk_image_set_from_file
 ;;;     gtk_image_set_from_resource
+
 ;;;     gtk_image_set_from_pixbuf
+
+(test gtk-image-set-from-pixbuf
+  (let* ((pixbuf (gdk:pixbuf-new-from-file
+                     (sys-path "resource/gtk-logo-24.png")))
+         (image (gtk:image-new)))
+    (is-false (gtk:image-set-from-pixbuf image pixbuf))
+    (is (typep pixbuf 'gdk:pixbuf))
+    (is-false (gtk:image-file image))
+    (is-false (gtk:image-gicon image))
+    (is-false (gtk:image-icon-name image))
+    (is (eq :inherit (gtk:image-icon-size image)))
+    (is (typep (gtk:image-paintable image) 'gdk:texture))
+    (is (= -1 (gtk:image-pixel-size image)))
+    (is-false (gtk:image-resource image))
+    (is (eq :paintable (gtk:image-storage-type image)))
+    (is-false (gtk:image-use-fallback image))))
+
 ;;;     gtk_image_set_from_paintable
 ;;;     gtk_image_set_from_icon_name
 ;;;     gtk_image_set_from_gicon
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-31 --------------------------------------------------------------

@@ -36,12 +36,8 @@
   ;; CSS information
   (is (string="button"
                (gtk:widget-class-css-name "GtkButton")))
-  (is (string=
-"button:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:button))
-                   :none)))
+  ;; Accessibility role
+  (is (eq :button (gtk:widget-class-accessible-role "GtkButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkButton" GTK-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

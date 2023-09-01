@@ -24,12 +24,20 @@
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkSpinner")))
-  ;; Check the class properties
+  ;; Check the properties
   (is (equal '("spinning")
              (list-properties "GtkSpinner")))
   ;; Check the list of signals
   (is (equal '()
              (list-signals "GtkSpinner")))
+  ;; CSS name
+  (is (string= "spinner"
+               (gtk:widget-class-css-name "GtkSpinner")))
+  ;; CSS style context
+  (is (string=
+"spinner:dir(ltr)
+"
+               (print-style-context "GtkSpinner")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSpinner" GTK-SPINNER
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -42,27 +50,27 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-spinner-properties
-  (let ((spinner (make-instance 'gtk-spinner)))
-    (is-false (gtk-spinner-spinning spinner))
-    (is-true  (setf (gtk-spinner-spinning spinner) t))
-    (is-true (gtk-spinner-spinning spinner))))
+  (let ((spinner (make-instance 'gtk:spinner)))
+    (is-false (gtk:spinner-spinning spinner))
+    (is-true  (setf (gtk:spinner-spinning spinner) t))
+    (is-true (gtk:spinner-spinning spinner))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_spinner_new
 
 (test gtk-spinner-new
-  (is (typep (gtk-spinner-new) 'gtk-spinner)))
+  (is (typep (gtk:spinner-new) 'gtk:spinner)))
 
 ;;;     gtk_spinner_start
 ;;;     gtk_spinner_stop
 
 (test gtk-spinner-start/stop
-  (let ((spinner (make-instance 'gtk-spinner)))
-    (is-false (gtk-spinner-spinning spinner))
-    (is-false (gtk-spinner-start spinner))
-    (is-true (gtk-spinner-spinning spinner))
-    (is-false (gtk-spinner-stop spinner))
-    (is-false (gtk-spinner-spinning spinner))))
+  (let ((spinner (make-instance 'gtk:spinner)))
+    (is-false (gtk:spinner-spinning spinner))
+    (is-false (gtk:spinner-start spinner))
+    (is-true (gtk:spinner-spinning spinner))
+    (is-false (gtk:spinner-stop spinner))
+    (is-false (gtk:spinner-spinning spinner))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-24 --------------------------------------------------------------

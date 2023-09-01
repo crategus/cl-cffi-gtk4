@@ -67,6 +67,7 @@
   (sort (mapcar #'g:signal-name
                 (g:signal-list-ids gtype)) #'string<))
 
+;; gtk:style-context-to-string is deprecated since 4.10. Remove this test.
 (defun print-style-context (gtype &optional (flags :recurse))
   (let ((widget (make-instance (glib:symbol-for-gtype gtype))))
     (gtk:style-context-to-string (gtk:widget-style-context widget) flags)))

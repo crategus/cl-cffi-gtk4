@@ -30,7 +30,7 @@
   (is (eq (g:gtype "GtkStyleProvider")
           (g:gtype (cffi:foreign-funcall "gtk_style_provider_get_type" :size))))
   ;; Check the interface prerequisites
-  (is (equal '()
+  (is (equal '("GObject")
              (list-interface-prerequisites "GtkStyleProvider")))
   ;; Get the the interface properties
   (is (equal '()

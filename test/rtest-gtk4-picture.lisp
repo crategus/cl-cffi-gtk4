@@ -7,7 +7,35 @@
 
 ;;;     GtkContentFit                                      Since 4.8
 
-
+(test gtk-content-fit
+  ;; Check the type
+  (is (g:type-is-enum "GtkContentFit"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkContentFit")
+          (g:gtype (cffi:foreign-funcall "gtk_content_fit_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:content-fit
+          (glib:symbol-for-gtype "GtkContentFit")))
+  ;; Check the names
+  (is (equal '("GTK_CONTENT_FIT_FILL" "GTK_CONTENT_FIT_CONTAIN" 
+               "GTK_CONTENT_FIT_COVER" "GTK_CONTENT_FIT_SCALE_DOWN")
+             (list-enum-item-name "GtkContentFit")))
+  ;; Check the values
+  (is (equal '(0 1 2 3)
+             (list-enum-item-value "GtkContentFit")))
+  ;; Check the nick names
+  (is (equal '("fill" "contain" "cover" "scale-down")
+             (list-enum-item-nick "GtkContentFit")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkContentFit" GTK-CONTENT-FIT
+                                     (:EXPORT T 
+                                      :TYPE-INITIALIZER 
+                                      "gtk_content_fit_get_type")
+                                     (:FILL 0)
+                                     (:CONTAIN 1)
+                                     (:COVER 2)
+                                     (:SCALE-DOWN 3))
+             (gobject:get-g-type-definition "GtkContentFit"))))
 
 ;;;     GtkPicture
 
@@ -39,12 +67,8 @@
   ;; CSS information
   (is (string= "picture"
                (gtk:widget-class-css-name "GtkPicture")))
-  (is (string=
-"picture:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:picture))
-                   :none)))
+  ;; Accessible role
+  (is (eq :img (gtk:widget-class-accessible-role "GtkPicture")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPicture" GTK-PICTURE
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -69,7 +93,7 @@
 ;;;     can-shrink
 ;;;     content-fit                                        Since 4.8
 ;;;     file
-;;;     keep-aspect-ratio
+;;;     keep-aspect-ratio                                  Deprecated 4.8
 ;;;     paintable
 
 ;;; --- Functions --------------------------------------------------------------

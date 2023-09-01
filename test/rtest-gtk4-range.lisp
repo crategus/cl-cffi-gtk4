@@ -7,7 +7,7 @@
 
 ;;;     GtkRange
 
-(test range-class
+(test gtk-range-class
   ;; Type check
   (is (g:type-is-object "GtkRange"))
   ;; Check the registered name
@@ -71,6 +71,15 @@
 ;;;     round-digits
 ;;;     show-fill-level
 
+(test gtk-range-properties
+  (let ((range (make-instance 'gtk:range)))
+    (is (typep (gtk:range-adjustment range) 'gtk:adjustment))
+    (is (= 1.7976931348623157d308 (gtk:range-fill-level range)))
+    (is-false (gtk:range-inverted range))
+    (is-true (gtk:range-restrict-to-fill-level range))
+    (is (= -1 (gtk:range-round-digits range)))
+    (is-false (gtk:range-show-fill-level range))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     adjust-bounds
@@ -82,6 +91,26 @@
 
 ;;;     gtk_range_get_value
 ;;;     gtk_range_set_value
+
+(test gtk-range-value
+  (let ((range (make-instance 'gtk:range
+                              :adjustment
+                              (make-instance 'gtk:adjustment
+                                             :lower 10.0
+                                             :upper 20.00))))
+    ;; Default value
+    (is (=  0.0 (gtk:range-value range)))
+    (is (=  0.0 (gtk:adjustment-value (gtk:range-adjustment range))))
+    ;; Value in the range of the adjustment
+    (is (= 15.0 (setf (gtk:range-value range) 15.0)))
+    (is (= 15.0 (gtk:range-value range)))
+    ;; Clamp greater value
+    (is (= 30.0 (setf (gtk:range-value range) 30.0)))
+    (is (= 20.0 (gtk:range-value range)))
+    ;; Clamp lower value
+    (is (=  5.0 (setf (gtk:range-value range) 5.0)))
+    (is (= 10.0 (gtk:range-value range)))))
+
 ;;;     gtk_range_set_increments
 ;;;     gtk_range_set_range
 ;;;     gtk_range_get_flippable
@@ -91,4 +120,4 @@
 ;;;     gtk_range_get_slider_size_fixed
 ;;;     gtk_range_set_slider_size_fixed
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-8-24 --------------------------------------------------------------

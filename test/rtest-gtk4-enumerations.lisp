@@ -271,8 +271,100 @@
 ;;;     GtkStateFlags
 ;;;     GtkBorderStyle
 ;;;     GtkLevelBarMode
+
 ;;;     GtkInputPurpose
+
+(test gtk-input-purpose
+  ;; Check the type
+  (is (g:type-is-enum "GtkInputPurpose"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkInputPurpose")
+          (g:gtype (cffi:foreign-funcall "gtk_input_purpose_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:input-purpose
+          (glib:symbol-for-gtype "GtkInputPurpose")))
+  ;; Check the names
+  (is (equal '("GTK_INPUT_PURPOSE_FREE_FORM" "GTK_INPUT_PURPOSE_ALPHA"
+               "GTK_INPUT_PURPOSE_DIGITS" "GTK_INPUT_PURPOSE_NUMBER"
+               "GTK_INPUT_PURPOSE_PHONE" "GTK_INPUT_PURPOSE_URL"
+               "GTK_INPUT_PURPOSE_EMAIL" "GTK_INPUT_PURPOSE_NAME"
+               "GTK_INPUT_PURPOSE_PASSWORD" "GTK_INPUT_PURPOSE_PIN"
+ "GTK_INPUT_PURPOSE_TERMINAL")
+             (list-enum-item-name "GtkInputPurpose")))
+  ;; Check the values
+  (is (equal '(0 1 2 3 4 5 6 7 8 9 10)
+             (list-enum-item-value "GtkInputPurpose")))
+  ;; Check the nick names
+  (is (equal '("free-form" "alpha" "digits" "number" "phone" "url" "email"
+               "name" "password" "pin" "terminal")
+             (list-enum-item-nick "GtkInputPurpose")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkInputPurpose" GTK-INPUT-PURPOSE
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_input_purpose_get_type")
+                                     (:FREE-FORM 0)
+                                     (:ALPHA 1)
+                                     (:DIGITS 2)
+                                     (:NUMBER 3)
+                                     (:PHONE 4)
+                                     (:URL 5)
+                                     (:EMAIL 6)
+                                     (:NAME 7)
+                                     (:PASSWORD 8)
+                                     (:PIN 9)
+                                     (:TERMINAL 10))
+             (gobject:get-g-type-definition "GtkInputPurpose"))))
+
 ;;;     GtkInputHints
+
+(test gtk-input-hints
+  ;; Check the type
+  (is (g:type-is-flags "GtkInputHints"))
+  ;; Check the registered name
+  (is (eq 'gtk:input-hints
+          (glib:symbol-for-gtype "GtkInputHints")))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkInputHints")
+          (g:gtype (cffi:foreign-funcall "gtk_input_hints_get_type" :size))))
+  ;; Check the names
+  (is (equal '("GTK_INPUT_HINT_NONE" "GTK_INPUT_HINT_SPELLCHECK"
+               "GTK_INPUT_HINT_NO_SPELLCHECK" "GTK_INPUT_HINT_WORD_COMPLETION"
+               "GTK_INPUT_HINT_LOWERCASE" "GTK_INPUT_HINT_UPPERCASE_CHARS"
+               "GTK_INPUT_HINT_UPPERCASE_WORDS"
+               "GTK_INPUT_HINT_UPPERCASE_SENTENCES"
+               "GTK_INPUT_HINT_INHIBIT_OSK" "GTK_INPUT_HINT_VERTICAL_WRITING"
+               "GTK_INPUT_HINT_EMOJI" "GTK_INPUT_HINT_NO_EMOJI"
+               "GTK_INPUT_HINT_PRIVATE")
+             (list-flags-item-name "GtkInputHints")))
+  ;; Check the values
+  (is (equal '(0 1 2 4 8 16 32 64 128 256 512 1024 2048)
+             (list-flags-item-value "GtkInputHints")))
+  ;; Check the nick names
+  (is (equal '("none" "spellcheck" "no-spellcheck" "word-completion" "lowercase"
+               "uppercase-chars" "uppercase-words" "uppercase-sentences"
+               "inhibit-osk" "vertical-writing" "emoji" "no-emoji" "private")
+             (list-flags-item-nick "GtkInputHints")))
+  ;; Check the flags definition
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkInputHints" GTK-INPUT-HINTS
+                                      (:EXPORT T
+                                       :TYPE-INITIALIZER
+                                       "gtk_input_hints_get_type")
+                                      (:NONE 0)
+                                      (:SPELLCHECK 1)
+                                      (:NO-SPELLCHECK 2)
+                                      (:WORD-COMPLETION 4)
+                                      (:LOWERCASE 8)
+                                      (:UPPERCASE-CHARS 16)
+                                      (:UPPERCASE-WORDS 32)
+                                      (:UPPERCASE-SENTENCES 64)
+                                      (:INHIBIT-OSK 128)
+                                      (:VERTICAL-WRITING 256)
+                                      (:EMOJI 512)
+                                      (:NO-EMOJI 1024)
+                                      (:PRIVATE 2048))
+             (gobject:get-g-type-definition "GtkInputHints"))))
+
 ;;;     GtkPropagationPhase
 ;;;     GtkPropagationLimit
 ;;;     GtkEventSequenceState

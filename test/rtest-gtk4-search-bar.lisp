@@ -1,0 +1,89 @@
+(in-package :gtk-test)
+
+(def-suite gtk-search-bar :in gtk-suite)
+(in-suite gtk-search-bar)
+
+;;; --- Types and Values -------------------------------------------------------
+
+;;;     GtkSearchBar
+
+(test gtk-search-bar-class
+  ;; Type check
+  (is (g:type-is-object "GtkSearchBar"))
+  ;; Check the registered name
+  (is (eq 'gtk:search-bar
+          (glib:symbol-for-gtype "GtkSearchBar")))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkSearchBar")
+          (g:gtype (cffi:foreign-funcall "gtk_search_bar_get_type" :size))))
+  ;; Check the parent
+  (is (eq (g:gtype "GtkWidget")
+          (g:type-parent "GtkSearchBar")))
+  ;; Check the children
+  (is (equal '()
+             (list-children "GtkSearchBar")))
+  ;; Check the interfaces
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+             (list-interfaces "GtkSearchBar")))
+  ;; Check the properties
+  (is (equal '("child" "key-capture-widget" "search-mode-enabled"
+               "show-close-button")
+             (list-properties "GtkSearchBar")))
+  ;; Check the signals
+  (is (equal '()
+             (list-signals "GtkSearchBar")))
+  ;; CSS name
+  (is (string= "searchbar"
+               (gtk:widget-class-css-name "GtkSearchBar")))
+  ;; CSS style context
+  (is (string=
+"searchbar:dir(ltr)
+  revealer:dir(ltr)
+    box:dir(ltr)
+      [button.close.image-button:dir(ltr)]
+        image:dir(ltr)
+"
+               (print-style-context "GtkSearchBar")))
+  ;; Check the class definition
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSearchBar" GTK-SEARCH-BAR
+                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                                ("GtkAccessible" "GtkBuildable"
+                                 "GtkConstraintTarget")
+                                :TYPE-INITIALIZER "gtk_search_bar_get_type")
+                               ((CHILD GTK-SEARCH-BAR-CHILD "child" "GtkWidget"
+                                 T T)
+                                (KEY-CAPTURE-WIDGET
+                                 GTK-SEARCH-BAR-KEY-CAPTURE-WIDGET
+                                 "key-capture-widget" "GtkWidget" T T)
+                                (SEARCH-MODE-ENABLED
+                                 GTK-SEARCH-BAR-SEARCH-MODE-ENABLED
+                                 "search-mode-enabled" "gboolean" T T)
+                                (SHOW-CLOSE-BUTTON
+                                 GTK-SEARCH-BAR-SHOW-CLOSE-BUTTON
+                                 "show-close-button" "gboolean" T T)))
+             (gobject:get-g-type-definition "GtkSearchBar"))))
+
+;;; --- Properties -------------------------------------------------------------
+
+;;;     child
+;;;     key-capture-widget
+;;;     search-mode-enabled
+;;;     show-close-button
+
+(test gtk-search-bar-properties
+  (let ((searchbar (make-instance 'gtk:search-bar)))
+    (is-false (gtk:search-bar-child searchbar))
+    (is-false (gtk:search-bar-key-capture-widget searchbar))
+    (is-false (gtk:search-bar-search-mode-enabled searchbar))
+    (is-false (gtk:search-bar-show-close-button searchbar))))
+
+;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_search_bar_new
+
+(test gtk-search-bar-new
+  (is (typep (gtk:search-bar-new) 'gtk:search-bar)))
+
+;;;     gtk_search_bar_connect_entry
+
+;;; --- 2023-8-26 --------------------------------------------------------------
