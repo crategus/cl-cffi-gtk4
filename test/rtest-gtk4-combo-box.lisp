@@ -12,13 +12,13 @@
   (is (g:type-is-enum "GtkSensitivityType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSensitivityType")
-          (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type"
+          (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type" 
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:sensitivity-type
           (glib:symbol-for-gtype "GtkSensitivityType")))
   ;; Check the names
-  (is (equal '("GTK_SENSITIVITY_AUTO" "GTK_SENSITIVITY_ON"
+  (is (equal '("GTK_SENSITIVITY_AUTO" "GTK_SENSITIVITY_ON" 
                "GTK_SENSITIVITY_OFF")
              (list-enum-item-name "GtkSensitivityType")))
   ;; Check the values
@@ -26,15 +26,16 @@
              (list-enum-item-value "GtkSensitivityType")))
   ;; Check the nick names
   (is (equal '("auto" "on" "off")
-             (listenum-item-nick "GtkSensitivityType")))
+             (list-enum-item-nick "GtkSensitivityType")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSensitivityType"
-                             GTK-SENSITIVITY-TYPE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_sensitivity_type_get_type")
-                             (:AUTO 0)
-                             (:ON 1)
-                             (:OFF 2))
+                                     GTK-SENSITIVITY-TYPE
+                                     (:EXPORT T 
+                                      :TYPE-INITIALIZER 
+                                      "gtk_sensitivity_type_get_type")
+                                     (:AUTO 0)
+                                     (:ON 1)
+                                     (:OFF 2))
              (gobject:get-g-type-definition "GtkSensitivityType"))))
 
 ;;;     GtkComboBox
@@ -68,22 +69,9 @@
              (list-signals "GtkComboBox")))
   ;; CSS information
   (is (string= "combobox"
-               (gtk-widget-class-css-name "GtkComboBox")))
-  (is (string=
-"combobox:dir(ltr)
-  box.horizontal.linked:dir(ltr)
-    button.combo:dir(ltr)
-      box.horizontal:dir(ltr)
-        cellview:dir(ltr)
-        arrow:dir(ltr)
-  [popover.background.menu:dir(ltr)]
-    contents:dir(ltr)
-      stack:dir(ltr)
-    arrow:dir(ltr)
-"
-               (gtk-style-context-to-string
-                   (gtk-widget-style-context (make-instance 'gtk-combo-box))
-                   :none)))
+               (gtk:widget-class-css-name "GtkComboBox")))
+  ;; Accessible role
+  (is (eq :COMBO-BOX (gtk:widget-class-accessible-role "GtkComboBox")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkComboBox" GTK-COMBO-BOX
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -148,4 +136,4 @@
 ;;;     gtk_combo_box_get_row_separator_func
 ;;;     gtk_combo_box_set_row_separator_func
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-9-1 ---------------------------------------------------------------
