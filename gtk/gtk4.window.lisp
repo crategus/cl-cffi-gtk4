@@ -1473,16 +1473,15 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_present" window-present) :void
  #+liber-documentation
- "@version{#2023-8-20}
+ "@version{2023-8-26}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Presents a window to the user.
   @end{short}
   This may mean raising the window in the stacking order, unminimizing it,
   moving it to the current desktop and/or giving it the keyboard focus, possibly
-  dependent on the user’s platform, window manager and preferences.
-
-  If the window is hidden, this function also makes it visible.
+  dependent on the user’s platform, window manager and preferences. If the
+  window is hidden, this function also makes it visible.
   @see-class{gtk:window}
   @see-function{gtk:window-present-with-time}"
   (window (g:object window)))
