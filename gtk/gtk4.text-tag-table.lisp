@@ -2,7 +2,7 @@
 ;;; gtk4.text-tag-table.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,16 +77,16 @@
 
 #+liber-documentation
 (setf (documentation 'text-tag-table 'type)
- "@version{#2021-11-18}
+ "@version{2023-8-26}
   @begin{short}
     A tag table defines a set of tags that can be used together.
   @end{short}
-  Each tag is stored in a @sym{gtk:text-tag-table} object. Each text buffer has
-  one tag table associated with it. Only tags from that tag table can be used
-  with the text buffer. A single tag table can be shared between multiple text
-  buffers, however.
+  Each tag is stored in a @class{gtk:text-tag-table} object. Each text buffer
+  has one tag table associated with it. Only tags from that tag table can be
+  used with the text buffer. A single tag table can be shared between multiple
+  text buffers, however.
   @begin[GtkTextTagTable as GtkBuildable]{dictionary}
-    The @sym{gtk:text-tag-table} implementation of the @class{gtk:buildable}
+    The @class{gtk:text-tag-table} implementation of the @class{gtk:buildable}
     interface supports adding tags by specifying @code{\"tag\"} as the
     @code{type} attribute of a @code{<child>} element.
 
@@ -105,7 +105,7 @@
 lambda (table tag)    :run-last
       @end{pre}
       @begin[code]{table}
-        @entry[table]{The @sym{gtk:text-tag-table} object which received the
+        @entry[table]{The @class{gtk:text-tag-table} object which received the
           signal.}
         @entry[tag]{The added @class{gtk:text-tag} object.}
       @end{table}
@@ -114,7 +114,7 @@ lambda (table tag)    :run-last
 lambda (table tag changed)    :run-last
       @end{pre}
       @begin[code]{table}
-        @entry[table]{The @sym{gtk:text-tag-table} object which received the
+        @entry[table]{The @class{gtk:text-tag-table} object which received the
           signal.}
         @entry[tag]{The changed @class{gtk:text-tag} object.}
         @entry[changed]{A boolean whether the size has been changed.}
@@ -124,11 +124,12 @@ lambda (table tag changed)    :run-last
 lambda (table tag)    :run-last
       @end{pre}
       @begin[code]{table}
-        @entry[table]{The @sym{gtk:text-tag-table} object which received the
+        @entry[table]{The @class{gtk:text-tag-table} object which received the
           signal.}
         @entry[tag]{The removed @class{gtk:text-tag} object.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:text-tag-table-new}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-tag}")
 
@@ -145,16 +146,16 @@ lambda (table tag)    :run-last
 (setf (liber:alias-for-symbol 'text-tag-table-foreach-func)
       "Callback"
       (liber:symbol-documentation 'text-tag-table-foreach-func)
- "@version{#2021-11-18}
+ "@version{#2023-8-26}
   @begin{short}
-    The type of callback function passed to the @fun{gtk:text-table-foreach}
+    The type of callback function passed to the @fun{gtk:text-tag-table-foreach}
     function.
   @end{short}
   @begin{pre}
 lambda (tag)
   @end{pre}
   @begin[code]{table}
-    @entry[tag]{The @class{gtk:text-trag} object.}
+    @entry[tag]{The @class{gtk:text-tag} object.}
   @end{table}
   @see-class{gtk:text-tag-table}
   @see-function{gtk:text-tag-table-foreach}")
@@ -169,7 +170,7 @@ lambda (tag)
 
 (defun text-tag-table-new ()
  #+liber-documentation
- "@version{#2021-11-18}
+ "@version{2023-8-26}
   @return{A new @class{gtk:text-tag-table} object.}
   @begin{short}
     Creates a new tag table.
@@ -186,7 +187,7 @@ lambda (tag)
 
 (cffi:defcfun ("gtk_text_tag_table_add" text-tag-table-add) :boolean
  #+liber-documentation
- "@version{2022-12-4}
+ "@version{2023-8-26}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @argument[tag]{a @class{gtk:text-tag} object}
   @return{A boolean which is @em{true} on success.}
@@ -209,7 +210,7 @@ lambda (tag)
 
 (cffi:defcfun ("gtk_text_tag_table_remove" text-tag-table-remove) :void
  #+liber-documentation
- "@version{#2021-11-18}
+ "@version{#2023-8-26}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @argument[tag]{a @class{gtk:text-tag} object}
   @begin{short}
@@ -231,7 +232,7 @@ lambda (tag)
 (cffi:defcfun ("gtk_text_tag_table_lookup" text-tag-table-lookup)
     (g:object gtk:text-tag)
  #+liber-documentation
- "@version{#2021-11-18}
+ "@version{#2023-8-26}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @argument[name]{a string with the name of a tag}
   @return{The tag, or @code{nil} if none by that @arg{name} is in the tag
@@ -256,7 +257,7 @@ lambda (tag)
 
 (defun text-tag-table-foreach (table func)
  #+liber-documentation
- "@version{#2021-11-18}
+ "@version{#2023-8-26}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @argument[func]{a @symbol{gtk:text-tag-table-foreach-func} callback function
     to call on each tag}
@@ -280,7 +281,7 @@ lambda (tag)
 
 (cffi:defcfun ("gtk_text_tag_table_get_size" text-tag-table-size) :int
  #+liber-documentation
- "@version{#2021-11-18}
+ "@version{#2023-8-26}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @return{An integer with the number of tags in @arg{table}.}
   @begin{short}

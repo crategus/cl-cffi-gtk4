@@ -2,7 +2,7 @@
 ;;; gtk4.scale.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -47,7 +47,7 @@
 ;;;     gtk_scale_set_value_pos
 ;;;
 ;;; Functions
-
+;;;
 ;;;     GtkScaleFormatValueFunc
 ;;;
 ;;;     gtk_scale_new
@@ -76,6 +76,7 @@
 ;;; Implemented Interfaces
 ;;;
 ;;;     GtkAccessible
+;;;     GtkAceesibleRange                                  Since 4.10
 ;;;     GtkBuildable
 ;;;     GtkConstraintTarget
 ;;;     GtkOrientable
@@ -90,7 +91,9 @@
 (gobject:define-g-object-class "GtkScale" scale
   (:superclass range
    :export t
-   :interfaces ("GtkAccessible"
+   :interfaces (#+gtk-4-10
+                "GtkAccessibleRange"
+                "GtkAccessible"
                 "GtkBuildable"
                 "GtkConstraintTarget"
                 "GtkOrientable")
@@ -110,25 +113,26 @@
 
 #+liber-documentation
 (setf (documentation 'scale 'type)
- "@version{#2021-12-27}
+ "@version{2023-8-25}
   @begin{short}
-    A @sym{gtk:scale} widget is a slider control used to select a numeric value.
+    A @class{gtk:scale} widget is a slider control used to select a numeric
+    value.
   @end{short}
   To use it, you will probably want to investigate the methods on its base
-  @class{gtk:range} class, in addition to the methods for the @sym{gtk:scale}
+  @class{gtk:range} class, in addition to the methods for the @class{gtk:scale}
   class itself. To set the value of a scale, you would normally use the
   @fun{gtk:range-value} function. To detect changes to the value, you would
   normally use the \"value-changed\" signal.
 
-  @image[scale]{}
+  @image[scale]{Figure: GtkScale}
 
-  Note that using the same upper and lower bounds for the @sym{gtk:scale}
+  Note that using the same upper and lower bounds for the @class{gtk:scale}
   widget, through the @class{gtk:range} methods, will hide the slider itself.
   This is useful for applications that want to show an undeterminate value on
   the scale, without changing the layout of the application, such as movie or
   music players.
   @begin[GtkScale as GtkBuildable]{dictionary}
-    The @sym{gtk:scale} widget supports a custom @code{<marks>} element, which
+    The @class{gtk:scale} widget supports a custom @code{<marks>} element, which
     can contain multiple @code{<mark>} elements. The \"value\" and \"position\"
     attributes have the same meaning as the parameters of the
     @fun{gtk:scale-add-mark} function of the same name. If the element is not
@@ -137,26 +141,26 @@
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
- scale[.fine-tune][.marks-before][.marks-after]
- ├── marks.top
- │   ├── mark
- │   ┊    ├── [label]
- │   ┊    ╰── indicator
- ┊   ┊
- │   ╰── mark
- ├── [value]
- ├── contents
- │   ╰── trough
- │       ├── slider
- │       ├── [highlight]
- │       ╰── [fill]
- ╰── marks.bottom
-     ├── mark
-     ┊    ├── indicator
-     ┊    ╰── [label]
-     ╰── mark
+scale[.fine-tune][.marks-before][.marks-after]
+├── [value][.top][.right][.bottom][.left]
+├── marks.top
+│   ├── mark
+│   ┊    ├── [label]
+│   ┊    ╰── indicator
+┊   ┊
+│   ╰── mark
+├── marks.bottom
+│   ├── mark
+│   ┊    ├── indicator
+│   ┊    ╰── [label]
+┊   ┊
+│   ╰── mark
+╰── trough
+    ├── [fill]
+    ├── [highlight]
+    ╰── slider
     @end{pre}
-    The @sym{gtk:scale} implementation has a main CSS node with name
+    The @class{gtk:scale} implementation has a main CSS node with name
     @code{scale} and a subnode for its contents, with subnodes named
     @code{trough} and @code{slider}. The main node gets the @code{.fine-tune}
     style class added when the scale is in 'fine-tuning' mode.
@@ -183,12 +187,15 @@
     style classes added depending on what marks are present.
 
     If the scale is displaying the value, see the @code{draw-value} property,
-    there is subnode with name @code{value}.
+    there is subnode with name @code{value}. This node will get the @code{.top}
+    or @code{.bottom} style classes similar to the marks node.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:scale} implementation uses the @code{:slider} role of the
+    The @class{gtk:scale} implementation uses the @code{:slider} role of the
     @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
+  @see-constructor{gtk:scale-new}
+  @see-constructor{gtk:scale-new-with-range}
   @see-slot{gtk:scale-digits}
   @see-slot{gtk:scale-draw-value}
   @see-slot{gtk:scale-has-origin}
@@ -212,7 +219,7 @@
 (setf (liber:alias-for-function 'scale-digits)
       "Accessor"
       (documentation 'scale-digits 'function)
- "@version{#2021-12-27}
+ "@version{2023-8-25}
   @syntax[]{(gtk:scale-digits object) => digits}
   @syntax[]{(setf (gtk:scale-digits object) digits)}
   @argument[object]{a @class{gtk:scale} widget}
@@ -222,8 +229,7 @@
     Accessor of the @slot[gtk:scale]{digits} slot of the @class{gtk:scale}
     class.
   @end{short}
-
-  The @sym{gtk:scale-digits} function returns the number of decimal places that
+  The @fun{gtk:scale-digits} function returns the number of decimal places that
   are displayed. The @sym{(setf gtk:scale-digits)} function sets the number of
   decimal places that are displayed in the value. Also causes the value of the
   adjustment to be rounded off to this number of @arg{digits}, so the retrieved
@@ -242,7 +248,7 @@
 (setf (liber:alias-for-function 'scale-draw-value)
       "Accessor"
       (documentation 'scale-draw-value 'function)
- "@version{#2021-12-27}
+ "@version{2023-8-25}
   @syntax[]{(gtk:scale-draw-value object) => draw-value}
   @syntax[]{(setf (gtk:scale-digits object) draw-value)}
   @argument[object]{a @class{gtk:scale} widget}
@@ -251,8 +257,7 @@
     Accessor of the @slot[gtk:scale]{draw-value} slot of the @class{gtk:scale}
     class.
   @end{short}
-
-  The @sym{gtk:scale-draw-value} function returns whether the current value is
+  The @fun{gtk:scale-draw-value} function returns whether the current value is
   displayed as a string next to the slider. The
   @sym{(setf gtk:scale-draw-value)} function specifies whether the current
   value is displayed as a string next to the slider.
@@ -270,7 +275,7 @@
 (setf (liber:alias-for-function 'scale-has-origin)
       "Accessor"
       (documentation 'scale-has-origin 'function)
- "@version{#2021-12-27}
+ "@version{2023-8-25}
   @syntax[]{(gtk:scale-has-origin object) => has-origin}
   @syntax[]{(setf (gtk:scale-digits object) has-origin)}
   @argument[object]{a @class{gtk:scale} widget}
@@ -279,8 +284,7 @@
     Accessor of the @slot[gtk:scale]{has-origin} slot of the @class{gtk:scale}
     class.
   @end{short}
-
-  The @sym{gtk:scale-has-origin} function returns whether the scale has an
+  The @fun{gtk:scale-has-origin} function returns whether the scale has an
   origin.
 
   If @arg{has-origin} is set to @em{true}, the default, the scale will
@@ -301,7 +305,7 @@
 (setf (liber:alias-for-function 'scale-value-pos)
       "Accessor"
       (documentation 'scale-value-pos 'function)
- "@version{#2021-12-27}
+ "@version{2023-8-25}
   @syntax[]{(gtk:scale-value-pos object) => pos}
   @syntax[]{(setf (gtk:scale-digits object) pos)}
   @argument[object]{a @class{gtk:scale} widget}
@@ -311,11 +315,11 @@
     Accessor of the @slot[gtk:scale]{value-pos} slot of the @class{gtk:scale}
     class.
   @end{short}
-
-  The @sym{gtk:scale-value-pos} function gets the position in which the current
-  value is displayed. The @sym{gtk:scale-value-pos}  function sets the position
-  in which the current value is displayed.
-  @see-class{gtk:scale}")
+  The @fun{gtk:scale-value-pos} function gets the position in which the current
+  value is displayed. The @sym{(setf gtk:scale-value-pos)} function sets the
+  position in which the current value is displayed.
+  @see-class{gtk:scale}
+  @see-symbol{gtk:position-type}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_scale_new ()
@@ -325,13 +329,15 @@
 
 (defun scale-new (orientation adjustment)
  #+liber-documentation
- "@version{#2021-12-27}
+ "@version{2023-8-25}
   @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
   @argument[adjustment]{a @class{gtk:adjustment} object which sets the range
     of the scale, or @code{nil} to create a new adjustment}
   @return{A new @class{gtk:scale} widget.}
   @short{Creates a new scale widget.}
-  @see-class{gtk:scale}"
+  @see-class{gtk:scale}
+  @see-symbol{gtk:orientation}
+  @see-class{gtk:adjustment}"
   (make-instance 'scale
                  :orientation orientation
                  :adjustment adjustment))
@@ -346,7 +352,7 @@
 
 (defun scale-new-with-range (orientation min max step)
  #+liber-documentation
- "@version{#2021-12-27}
+ "@version{2023-8-25}
   @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
   @argument[min]{a double float with the minimum value}
   @argument[max]{a double float with the maximum value}
@@ -366,6 +372,7 @@
   suitable for your needs, use the @fun{gtk:scale-digits} function to correct
   it.
   @see-class{gtk:scale}
+  @see-symbol{gtk:orientation}
   @see-function{gtk:scale-digits}"
   (make-instance 'scale
                  :orientation orientation
@@ -377,55 +384,77 @@
 (export 'scale-new-with-range)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkScaleFormatValueFunc ()
-;;;
-;;; char *
-;;; (*GtkScaleFormatValueFunc) (GtkScale *scale,
-;;;                             double value,
-;;;                             gpointer user_data);
-;;;
-;;; scale :
-;;;     The GtkScale
-;;;
-;;; value :
-;;;     The numeric value to format
-;;;
-;;; user_data :
-;;;      user data.
-;;;
-;;; Returns :
-;;;     A newly allocated string describing a textual representation of the
-;;;     given numerical value.
+;;; GtkScaleFormatValueFunc
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcallback scale-format-value-func :void
+    ((scale (g:object scale))
+     (value :double)
+     (data :pointer))
+  (let ((ptr (glib:get-stable-pointer-value data)))
+    (funcall ptr scale value)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'scale-format-value-func)
+      "Callback"
+      (liber:symbol-documentation 'scale-format-value-func)
+ "@version{#2023-3-25}
+  @begin{short}
+    A callback function which allows you to change how the scale value is
+    displayed.
+  @end{short}
+  The callback function is set with the @fun{gtk:scale-set-format-value-func}
+  function.
+  @begin{pre}
+lambda (scale value)
+  @end{pre}
+  @begin[code]{table}
+    @entry[scale]{A @class{gtk:scale} widget.}
+    @entry[value]{A double float with the numeric value to format.}
+    @entry[Returns]{A string describing a textual representation of the
+      given numerical value.}
+  @end{table}
+  @see-class{gtk:scale}
+  @see-function{gtk:scale-set-format-value-func}")
+
+(export 'scale-format-value-func)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_scale_set_format_value_func ()
-;;;
-;;; void
-;;; gtk_scale_set_format_value_func (GtkScale *scale,
-;;;                                  GtkScaleFormatValueFunc func,
-;;;                                  gpointer user_data,
-;;;                                  GDestroyNotify destroy_notify);
-;;;
-;;; func allows you to change how the scale value is displayed. The given
-;;; function will return an allocated string representing value . That string
-;;; will then be used to display the scale's value.
-;;;
-;;; If NULL is passed as func , the value will be displayed on its own, rounded
-;;; according to the value of the “digits” property.
-;;;
-;;; scale :
-;;;     a GtkScale
-;;;
-;;; func :
-;;;     function that formats the value.
-;;;
-;;; user_data :
-;;;     user data to pass to func .
-;;;
-;;; destroy_notify :
-;;;     destroy function for user_data .
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_scale_set_format_value_func" %scale-set-format-value-func)
+    :void
+  (scale (g:object scale))
+  (func :pointer)
+  (data :pointer)
+  (notify :pointer))
+
+(defun scale-set-format-value-func (scale func)
+ #+liber-documentation
+ "@version{#2023-8-25}
+  @argument[scale]{a @class{gtk:scale} widget}
+  @argument[func]{a @symbol{gtk:scale-format-value-func} callback function that
+    formats the value}
+  @begin{short}
+    The @arg{func} callback function allows you to change how the scale value
+    is displayed.
+  @end{short}
+  The given function will return a string representing the value. That string
+  will then be used to display the value of the scale.
+
+  If @code{nil} is passed as @arg{func}, the value will be displayed on its own,
+  rounded according to the value of the @slot[gtk:scale]{digits} property.
+  @see-class{gtk:scale}
+  @see-symbol{gtk:scale-format-value-func}
+  @see-function{gtk:scale-digits}"
+  (%scale-set-format-value-func
+          scale
+          (cffi:callback scale-format-value-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
+
+(export 'scale-set-format-value-func)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_scale_get_layout () -> scale-layout
@@ -434,14 +463,16 @@
 (cffi:defcfun ("gtk_scale_get_layout" scale-layout)
     (g:object pango:layout :free-from-foreign nil)
  #+liber-documentation
- "@version{#2021-12-27}
+ "@version{#2023-8-25}
   @argument[scale]{a @class{gtk:scale} widget}
   @begin{return}
     The @class{pango:layout} instance for this scale, or @code{nil} if the
     @slot[gtk:scale]{draw-value} property is @code{nil}.
   @end{return}
   @short{Gets the Pango layout used to display the scale.}
-  @see-class{gtk:scale}"
+  @see-class{gtk:scale}
+  @see-class{pango:layout}
+  @see-function{gtk:scale-draw-value}"
   (scale (g:object scale)))
 
 (export 'scale-layout)
@@ -457,7 +488,7 @@
 
 (defun scale-layout-offsets (scale)
  #+liber-documentation
- "@version{#2021-12-27}
+ "@version{#2023-8-25}
   @argument[scale]{a @class{gtk:scale} widget}
   @begin{return}
     @arg{x} -- an integer with the x offset of layout, or @code{nil} @br{}
@@ -469,11 +500,13 @@
   @end{short}
   Remember when using the @class{pango:layout} functions you need to convert
   to and from pixels using the @fun{pango:pixels} function or the
-  @var{+pango-scale+} constant. If the @slot[gtk:scale]{draw-value} property is
-  @code{nil}, the return values are undefined.
+  @var{pango:+pango-scale+} constant. If the @slot[gtk:scale]{draw-value}
+  property is @code{nil}, the return values are undefined.
   @see-class{gtk:scale}
+  @see-class{pango:layout}
   @see-function{pango:pixels}
-  @see-variable{+pango-scale+}"
+  @see-variable{pango:+pango-scale+}
+  @see-function{gtk:scale-draw-value}"
   (cffi:with-foreign-objects ((x :int) (y :int))
     (%scale-get-layout-offsets scale x y)
     (values (cffi:mem-ref x :int)
@@ -487,7 +520,7 @@
 
 (cffi:defcfun ("gtk_scale_add_mark" scale-add-mark) :void
  #+liber-documentation
- "@version{#2021-12-27}
+ "@version{#2023-8-25}
   @argument[scale]{a @class{gtk:scale} widget}
   @argument[value]{a double float with the value at which the mark is placed,
     must be between the lower and upper limits of the adjustment of the scale}
@@ -505,6 +538,7 @@
 
   To remove marks from a scale, use the @fun{gtk:scale-clear-marks} function.
   @see-class{gtk:scale}
+  @see-symbol{gtk:position-type}
   @see-function{gtk:scale-clear-marks}"
   (scale (g:object scale))
   (value :double)
@@ -519,7 +553,7 @@
 
 (cffi:defcfun ("gtk_scale_clear_marks" scale-clear-marks) :void
  #+liber-documentation
- "@version{#2021-12-27}
+ "@version{#2023-8-25}
   @argument[scale]{a @class{gtk:scale} widget}
   @begin{short}
     Removes any marks that have been added with the @fun{gtk:scale-add-mark}
