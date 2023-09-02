@@ -110,8 +110,8 @@
 ;;;
 ;;;     gtk_widget_in_destruction
 ;;;     gtk_widget_unparent
-;;;     gtk_widget_show                                    deprecated since 4.10
-;;;     gtk_widget_hide                                    deprecated since 4.10
+;;;     gtk_widget_show                                    Deprecated 4.10
+;;;     gtk_widget_hide                                    Deprecated 4.10
 ;;;     gtk_widget_map
 ;;;     gtk_widget_unmap
 ;;;     gtk_widget_realize
@@ -2078,9 +2078,14 @@ lambda (widget)    :run-last
 ;;; gtk_widget_show
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_widget_show" widget-show) :void
+(declaim (inline widget-show))
+
+(cffi:defcfun ("gtk_widget_show" %widget-show) :void
+  (widget (g:object widget)))
+
+(defun widget-show (widget)
  #+liber-documentation
- "@version{2023-7-26}
+ "@version{2023-8-31}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Flags a widget to be displayed.
@@ -2091,12 +2096,16 @@ lambda (widget)    :run-last
   it is immediately realized and mapped. Other shown widgets are realized and
   mapped when their toplevel container is realized and mapped.
   @begin[Warning]{dictionary}
-    The @sym{gtk:widget-show} function is deprecated since 4.10. Use the
-    @fun{gtk:widget-visible} function instead.
+    This function is deprecated since 4.10. Use the @fun{gtk:widget-visible}
+    function instead.
   @end{dictionary}
   @see-class{gtk:widget}
   @see-function{gtk:widget-visible}"
-  (widget (g:object widget)))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (format *debug-io*
+            "Warning: GTK:WIDGET-SHOW is deprecated since 4.10.~%"))
+  (%widget-show widget))
 
 (export 'widget-show)
 
@@ -2104,22 +2113,31 @@ lambda (widget)    :run-last
 ;;; gtk_widget_hide
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_widget_hide" widget-hide) :void
+(declaim (inline widget-hide))
+
+(cffi:defcfun ("gtk_widget_hide" %widget-hide) :void
+  (widget (g:object widget)))
+
+(defun widget-hide (widget)
  #+liber-documentation
- "@version{2023-7-26}
+ "@version{2023-8-31}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Reverses the effects of the @fun{gtk:widget-show} function.
   @end{short}
   This is causing the widget to be hidden, so it is invisible to the user.
   @begin[Warning]{dictionary}
-    The @sym{gtk:widget-hide} function is deprecated since 4.10. Use the
-    @fun{gtk:widget-visible} function instead.
+    This function is deprecated since 4.10. Use the @fun{gtk:widget-visible}
+    function instead.
   @end{dictionary}
   @see-class{gtk:widget}
   @see-function{gtk:widget-show}
   @see-function{gtk:widget-visible}"
-  (widget (g:object widget)))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (format *debug-io*
+            "Warning: GTK:WIDGET-HIDE is deprecated since 4.10.~%"))
+  (%widget-hide widget))
 
 (export 'widget-hide)
 
@@ -3236,43 +3254,47 @@ lambda (widget)    :run-last
 (export 'widget-mnemonic-activate)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_widget_class_get_accessible_role ()
 ;;; gtk_widget_class_set_accessible_role ()
-;;;
-;;; void
-;;; gtk_widget_class_set_accessible_role (GtkWidgetClass *widget_class,
-;;;                                       GtkAccessibleRole accessible_role);
-;;;
-;;; Sets the accessible role used by the given GtkWidget class.
-;;;
-;;; Different accessible roles have different states, and are rendered
-;;; differently by assistive technologies.
-;;;
-;;; widget_class :
-;;;     a GtkWidgetClass
-;;;
-;;; accessible_role :
-;;;     the GtkAccessibleRole used by the widget_class
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_get_accessible_role ()
-;;;
-;;; GtkAccessibleRole
-;;; gtk_widget_class_get_accessible_role (GtkWidgetClass *widget_class);
-;;;
-;;; Retrieves the accessible role used by the given GtkWidget class.
-;;;
-;;; Different accessible roles have different states, and are rendered
-;;; differently by assistive technologies.
-;;;
-;;; See also: gtk_accessible_get_accessible_role()
-;;;
-;;; widget_class :
-;;;     a GtkWidgetClass
-;;;
-;;; Returns :
-;;;     the accessible role for the widget class
-;;; ----------------------------------------------------------------------------
+(defun (setf widget-class-accessible-role) (role gtype)
+  (let ((class (g:type-class-ref gtype)))
+    (unwind-protect
+      (cffi:foreign-funcall "gtk_widget_class_set_accessible_role"
+                            :pointer class
+                            accessible-role role
+                            :void)
+      (g:type-class-unref class))
+    role))
+
+(cffi:defcfun ("gtk_widget_class_get_accessible_role"
+               %widget-class-accessible-role) accessible-role
+  (class :pointer))
+
+(defun widget-class-accessible-role (gtype)
+  #+liber-documentation
+ "@version{2023-8-31}
+  @syntax[]{(gtk:widget-class-accessible-role gtype) => role}
+  @syntax[]{(setf (gtk:widget-class-accessible-role gtype) role)}
+  @argument[gtype]{a @class{g:type-t} type}
+  @argument[role]{a @symbol{gtk:accessible-role} value}
+  @begin{short}
+    Accessor of the accessible role of the widget class.
+  @end{short}
+  The @fun{gtk:widget-class-accessible-role} function gets the accessible role
+  used by the given widget class. The
+  @sym{(setf gtk:widget-class-accessible-role)} function sets the accessible
+  role. Different accessible roles have different states, and are rendered
+  differently by assistive technologies.
+  @see-class{gtk:widget}
+  @see-symbol{gtk:accessible-role}"
+  (let ((class (g:type-class-ref gtype)))
+    (unwind-protect
+      (%widget-class-accessible-role class)
+      (g:type-class-unref class))))
+
+(export 'widget-class-accessible-role)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_child_focus
@@ -4673,20 +4695,19 @@ lambda (widget)    :run-last
 
 (defun widget-class-css-name (gtype)
   #+liber-documentation
- "@version{2023-3-26}
+ "@version{2023-8-31}
   @syntax[]{(gtk:widget-class-css-name gtype) => name}
   @syntax[]{(setf (gtk:widget-class-css-name gtype) name)}
-  @argument[gtype]{a string with the widget class to set the CSS name on}
+  @argument[gtype]{a @class{g:type-t} type}
   @argument[name]{a string with the CSS name}
   @begin{short}
     Accessor of the CSS name of the widget class.
   @end{short}
-  The @sym{gtk:widget-class-css-name} function gets the name used by this class
-  for matching in CSS code. The @sym{(setf gtk:widget-class-css-name)} function
-  sets the name to be used for CSS matching of widgets.
-
-  If this function is not called for a given class, the name of the parent
-  class is used.
+  The @fun{gtk:widget-class-css-name} function gets the name used by this
+  widget class for matching in CSS code. The
+  @sym{(setf gtk:widget-class-css-name)} function sets the name. If this
+  function is not called for a given class, the name of the parent class is
+  used.
   @see-class{gtk:widget}"
   (let ((class (g:type-class-ref gtype)))
     (unwind-protect
