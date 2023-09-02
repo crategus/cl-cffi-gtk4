@@ -43,9 +43,6 @@
 
 (finalize-gtk-classes)
 
-;; TODO: Do we need to initialize the main loop at this point.
-;; Because
-
 ;; Initialize the GTK main loop
 (glib-init:at-init ()
   (init))
