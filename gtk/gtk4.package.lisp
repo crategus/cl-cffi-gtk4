@@ -3010,6 +3010,13 @@
       @about-function{file-launcher-open-containing-folder}
       @about-function{file-launcher-open-containing-folder-finish}
     @end{subsection}
+    @begin[GtkUriLauncher]{subsection}
+      @about-class{uri-launcher}
+      @about-generic{uri-launcher-uri}
+      @about-function{uri-launcher-new}
+      @about-function{uri-launcher-launch}
+      @about-function{uri-launcher-launch-finish}
+    @end{subsection}
     @begin[GtkFontChooser]{subsection}
       Interface implemented by widgets displaying fonts.
       @about-symbol{font-chooser-level}
