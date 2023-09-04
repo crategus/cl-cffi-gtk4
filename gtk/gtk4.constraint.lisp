@@ -2,7 +2,7 @@
 ;;; gtk4.constraint.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -93,7 +93,7 @@
 (setf (liber:alias-for-class 'constraint-target)
       "Interface"
       (documentation 'constraint-target 'type)
- "@version{#2022-1-28}
+ "@version{2023-9-2}
   @begin{short}
     The @class{gtk:constraint-target} interface is implemented by objects that
     can be used as source or target in @class{gtk:constraint} objects.
@@ -140,9 +140,9 @@
 
 #+liber-documentation
 (setf (documentation 'constraint 'type)
- "@version{#2022-1-28}
+ "@version{2023-9-2}
   @begin{short}
-    The @sym{gtk:constraint} class describes a constraint between an attribute
+    The @class{gtk:constraint} class describes a constraint between an attribute
     on a widget and another attribute on another widget, expressed as a linear
     equation.
   @end{short}
@@ -151,12 +151,12 @@
   @begin{pre}
 target.target_attr = source.source_attr × multiplier + constant
   @end{pre}
-  Each @sym{gtk:constraint} object is part of a system that will be solved by
+  Each @class{gtk:constraint} object is part of a system that will be solved by
   a @class{gtk:constraint-layout} object in order to allocate and position each
   child widget.
 
   The source and target widgets, as well as their attributes, of a
-  @sym{gtk:constraint} object are immutable after creation.
+  @class{gtk:constraint} object are immutable after creation.
   @see-constructor{gtk:constraint-new}
   @see-constructor{gtk:constraint-new-constant}
   @see-slot{gtk:constraint-constant}
@@ -197,7 +197,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{constant} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-constant} function retrieves the constant factor
+  The @fun{gtk:constraint-constant} function retrieves the constant factor
   added to the source attributes' value.
   @see-class{gtk:constraint}
   @see-function{gtk:constraint-source-attribute}")
@@ -226,7 +226,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{multiplier} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-muliplier} function retrieves the multiplication
+  The @fun{gtk:constraint-muliplier} function retrieves the multiplication
   factor applied to the source attribute's value.
   @see-class{gtk:constraint}
   @see-function{gtk:constraint-source-attribute}")
@@ -254,7 +254,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{relation} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-relation} function the order relation between the
+  The @fun{gtk:constraint-relation} function the order relation between the
   terms of the constraint.
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-relation}")
@@ -282,7 +282,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{source} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-source} function retrieves the
+  The @fun{gtk:constraint-source} function retrieves the
   @symbol{gtk:constraint-target} value used as the source for the constraint.
 
   If the @slot[gtk:constraint]{source} property is set to @code{nil}, the
@@ -317,7 +317,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{source-attribute} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-source-attribute} function retrieves the attribute of
+  The @fun{gtk:constraint-source-attribute} function retrieves the attribute of
   the source to be read by the constraint.
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-attribute}
@@ -348,7 +348,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{source-attribute} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-strength} function returns the strength of the
+  The @fun{gtk:constraint-strength} function returns the strength of the
   constraint. The strength can be expressed either using one of the values of
   the @symbol{gtk:constraint-strength} enumeration, or any positive integer
   value.
@@ -378,7 +378,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{target} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-target} function retrieves the
+  The @fun{gtk:constraint-target} function retrieves the
   @symbol{gtk:constraint-target} value used as the target for the constraint.
   If the @slot[gtk:constraint]{target} property is set to @code{nil}, the
   constraint will use the @class{gtk:constraint-layout} object of the widget.
@@ -412,7 +412,7 @@ target.target_attr = source.source_attr × multiplier + constant
     Accessor of the @slot[gtk:constraint]{target-attribute} slot of the
     @class{gtk:constraint} class.
   @end{short}
-  The @sym{gtk:constraint-target} function retrieves the attribute of the
+  The @fun{gtk:constraint-target} function retrieves the attribute of the
   target to be set by the constraint.
   @see-class{gtk:constraint}
   @see-symbol{gtk:constraint-attribute}

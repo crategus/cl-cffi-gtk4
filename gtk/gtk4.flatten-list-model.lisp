@@ -2,7 +2,7 @@
 ;;; gtk4.flatten-list-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,11 +35,14 @@
 ;;;
 ;;;     GtkFlattenListModel
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_flatten_list_model_set_model
+;;;     gtk_flatten_list_model_get_model
+;;;
 ;;; Functions
 ;;;
 ;;;     gtk_flatten_list_model_new
-;;;     gtk_flatten_list_model_set_model
-;;;     gtk_flatten_list_model_get_model
 ;;;     gtk_flatten_list_model_get_model_for_item
 ;;;
 ;;; Properties
@@ -67,11 +70,12 @@
 (gobject:define-g-object-class "GtkFlattenListModel" flatten-list-model
   (:superclass g:object
    :export t
-   :interfaces ("GListModel")
+   :interfaces ("GListModel"
+                #+gtk-4-12 "GtkSectionModel")
    :type-initializer "gtk_flatten_list_model_get_type")
   (#+gtk-4-8
    (item-type
-    flatten-list-model-item-type
+    %flatten-list-model-item-type
     "item-type" "GType" t nil)
    (model
     flatten-list-model-model
@@ -81,92 +85,160 @@
     flatten-list-model-n-items
     "n-items" "guint" t nil)))
 
+#+liber-documentation
+(setf (documentation 'flatten-list-model 'type)
+ "@version{#2023-9-3}
+  @begin{short}
+    The @class{gtk:flatten-list-model} object is a list model that takes a list
+    model containing list models and flattens it into a single model.
+  @end{short}
+  Another term for this is concatenation. The @class{gtk:flatten-list-model}
+  object takes a list of lists and concatenates them into a single list.
+  @see-construtor{gtk:flatten-list-model-new}
+  @see-slot{gtk:flatten-list-model-item-type}
+  @see-slot{gtk:flatten-list-model-model}
+  @see-slot{gtk:flatten-list-model-n-items}
+  @see-class{g:list-model}")
 
-;;;Property Details
-;;;The “model” property
-;;;  “model”                    GListModel *
-;;;The model being flattened
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;Owner: GtkFlattenListModel
+;;; --- flatten-list-model-item-type -------------------------------------------
 
-;;;Flags: Read / Write
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "item-type"
+                                               'flatten-list-model) t)
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
+  The type of items. See the @fun{g:list-model-item-type} function. Since 4.8")
 
-;;;See Also
-;;;GListModel
+#+gtk-4-8
+(declaim (inline flatten-list-model-item-type))
 
+#+gtk-4-8
+(defun flatten-list-model-item-type (object)
+  (g:list-model-item-type object))
 
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'flatten-list-model-item-type)
+      "Accessor"
+      (documentation 'flatten-list-model-item-type 'function)
+ "@version{#2023-9-3}
+  @syntax[]{(gtk:flatten-list-model-item-type object) => gtype}
+  @argument[object]{a @class{gtk:flatten-list-model} object}
+  @argument[gtype]{a @class{g:type-t} type}
+  @begin{short}
+    Accessor of the @slot[gtk:flatten-list-model]{item-type} slot of the
+    @class{gtk:flatten-list-model} class.
+  @end{short}
+  The type of items contained in the list model. Items must be subclasses of
+  the @class{g:object} class.
+  @begin[Note]{dictionary}
+    This function is equivalent to the @fun{g:list-model-item-type} function.
+  @end{dictionary}
+  @see-class{gtk:flatten-list-model}
+  @see-class{g:type-t}
+  @see-class{g:object}
+  @see-function{g:list-model-item-type}")
 
-;;;Description
-;;;GtkFlattenListModel is a list model that takes a list model containing list models and flattens it into a single model.
+;;; --- flatten-list-model-model -----------------------------------------------
 
-;;;Another term for this is concatenation: GtkFlattenListModel takes a list of lists and concatenates them into a single list.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "model" 'flatten-list-model) t)
+ "The @code{model} property of type @class{g:list-model} (Read / Write) @br{}
+  The model being flattened.")
 
-;;;Functions
-;;;gtk_flatten_list_model_new ()
-;;;GtkFlattenListModel *
-;;;gtk_flatten_list_model_new (GListModel *model);
-;;;Creates a new GtkFlattenListModel that flattens list .
+#+liber-documentation
+(setf (liber:alias-for-function 'flatten-list-model-model)
+      "Accessor"
+      (documentation 'flatten-list-model-model 'function)
+ "@version{#2023-9-3}
+  @syntax[]{(gtk:flatten-list-model-model object) => model}
+  @syntax[]{(setf (gtk:flatten-list-model-model object) model)}
+  @argument[object]{a @class{gtk:flatten-list-model} object}
+  @argument[model]{a @class{g:list-model} object that gets flattened}
+  @begin{short}
+    Accessor of the @slot[gtk:flatten-list-model]{model} slot of the
+    @class{gtk:flatten-list-model} class.
+  @end{short}
+  The @fun{gtk:flatten-list-model-model} function gets the model currently
+  flattened or @code{nil} if none. The @sym{(setf gtk:flatten-list-model-model)}
+  function sets the model to be flattened.
+  @see-class{gtk:flatten-list-model}
+  @see-class{g:list-model}")
 
-;;;Parameters
-;;;model
+;;; --- flatten-list-model-n-items ---------------------------------------------
 
-;;;the model to be flattened.
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "n-items" 'flatten-list-model) t)
+ "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
+  The number of items. See the @fun{g:list-model-n-items} function. Since 4.8
+  @br{}
+  Default value: 0")
 
-;;;[nullable][transfer full]
-;;;Returns
-;;;a new GtkFlattenListModel
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'flatten-list-model-n-items)
+      "Accessor"
+      (documentation 'flatten-list-model-n-items 'function)
+ "@version{#2023-9-3}
+  @syntax[]{(gtk:flatten-list-model-n-items object) => n-items}
+  @argument[object]{a @class{gtk:flatten-list-model} object}
+  @argument[n-items]{an unsigned integer with the number of items contained in
+    the model}
+  @begin{short}
+    Accessor of the @slot[gtk:flatten-list-model]{n-items} slot of the
+    @class{gtk:flatten-list-model} class.
+  @end{short}
+  @see-class{g:flatten-list-model}
+  @see-function{g:list-model-n-items}")
 
-;;;gtk_flatten_list_model_set_model ()
-;;;void
-;;;gtk_flatten_list_model_set_model (GtkFlattenListModel *self,
-;;;                                  GListModel *model);
-;;;Sets a new model to be flattened.
+;;; ----------------------------------------------------------------------------
+;;; gtk_flatten_list_model_new ()
+;;;
+;;; GtkFlattenListModel *
+;;; gtk_flatten_list_model_new (GListModel *model);
+;;;
+;;; Creates a new GtkFlattenListModel that flattens list .
+;;;
+;;; model :
+;;;     the model to be flattened.
+;;;
+;;; Returns :
+;;;     a new GtkFlattenListModel
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;self
+(declaim (inline flatten-list-model-new))
 
-;;;a GtkFlattenListModel
+(defun flatten-list-model-new (model)
+  (make-instance 'flatten-list-model
+                 :model model))
 
-;;;model
+(export 'flatten-list-model-new)
 
-;;;the new model or NULL.
+;;; ----------------------------------------------------------------------------
+;;; gtk_flatten_list_model_get_model_for_item ()
+;;;
+;;; GListModel *
+;;; gtk_flatten_list_model_get_model_for_item (GtkFlattenListModel *self,
+;;;                                            guint position);
+;;;
+;;; Returns the model containing the item at the given position.
+;;;
+;;; self :
+;;;     a GtkFlattenListModel
+;;;
+;;; position :
+;;;     a position
+;;;
+;;; Returns :
+;;;     the model containing the item at position .
+;;; ----------------------------------------------------------------------------
 
-;;;[nullable][transfer none]
-;;;gtk_flatten_list_model_get_model ()
-;;;GListModel *
-;;;gtk_flatten_list_model_get_model (GtkFlattenListModel *self);
-;;;Gets the model set via gtk_flatten_list_model_set_model().
+(cffi:defcfun ("gtk_flatten_list_model_get_model_for_item"
+               flatten-list-model-model-for-item) (g:object g:list-model)
+  (model (g:object flatten-list-model))
+  (position :uint))
 
-;;;Parameters
-;;;self
-
-;;;a GtkFlattenListModel
-
-;;;Returns
-;;;The model flattened by self .
-
-;;;[nullable][transfer none]
-
-;;;gtk_flatten_list_model_get_model_for_item ()
-;;;GListModel *
-;;;gtk_flatten_list_model_get_model_for_item
-;;;                               (GtkFlattenListModel *self,
-;;;                                guint position);
-;;;Returns the model containing the item at the given position.
-
-;;;Parameters
-;;;self
-
-;;;a GtkFlattenListModel
-
-;;;position
-
-;;;a position
-
-;;;Returns
-;;;the model containing the item at position .
-
-;;;[transfer none]
-
+(export 'flatten-list-model-model-for-item)
 
 ;;; --- End of file gtk4.flatten-list-model.lisp -------------------------------

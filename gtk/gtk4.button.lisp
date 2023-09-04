@@ -2,7 +2,7 @@
 ;;; gtk4.button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -47,6 +47,8 @@
 ;;;     gtk_button_set_label
 ;;;     gtk_button_get_use_underline
 ;;;     gtk_button_set_use_underline
+;;;     gtk_button_get_can_shrink                          Since 4.12
+;;;     gtk_button_set_can_shrink                          Since 4.12
 ;;;
 ;;; Functions
 ;;;
@@ -57,6 +59,7 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     can-shrink                                         Since 4.12
 ;;;     child
 ;;;     has-frame
 ;;;     icon-name
@@ -118,26 +121,26 @@
 
 #+liber-documentation
 (setf (documentation 'button 'type)
- "@version{2023-3-18}
+ "@version{2023-9-2}
   @begin{short}
-    The @sym{gtk:button} widget is generally used to trigger a callback
+    The @class{gtk:button} widget is generally used to trigger a callback
     function that is called when the button is pressed.
   @end{short}
 
   @image[button]{Figure: GtkButton}
 
-  The @sym{gtk:button} widget can hold any valid child widget. That is, it can
+  The @class{gtk:button} widget can hold any valid child widget. That is, it can
   hold almost any other standard @class{gtk:widget} widget. The most commonly
   used child is the @class{gtk:label} widget.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:button} implementation has a single CSS node with name
+    The @class{gtk:button} implementation has a single CSS node with name
     @code{button}. The node will get the @code{.image-button} or
     @code{.text-button} style classes, if the content is just an image or label,
     respectively. It may also receive the @code{.flat} style class. When
     activating a button via the keyboard, the button will temporarily gain
     the @code{.keyboard-activating} style class.
 
-    Other style classes that are commonly used with the @sym{gtk:button}
+    Other style classes that are commonly used with the @class{gtk:button}
     implementation include the @code{.suggested-action} and
     @code{.destructive-action} style classes. In special cases, buttons can be
     made round by adding the @code{.circular} style class.
@@ -147,18 +150,18 @@
     @class{gtk:color-button} or @class{gtk:font-button} widgets use style
     classes such as the @code{.toggle}, @code{.popup}, @code{.scale},
     @code{.lock}, @code{.color} style classes on the button node to
-    differentiate themselves from a plain @sym{gtk:button} widget.
+    differentiate themselves from a plain @class{gtk:button} widget.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"activate\" signal}
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      The signal on the @sym{gtk:button} widget is an action signal and emitting
-      it causes the button to animate press then release. Applications should
-      never connect to this signal, but use the \"clicked\" signal.
+      The signal on the @class{gtk:button} widget is an action signal and
+      emitting it causes the button to animate press then release. Applications
+      should never connect to this signal, but use the \"clicked\" signal.
       @begin[code]{table}
-        @entry[button]{The @sym{gtk:button} widget which received the signal.}
+        @entry[button]{The @class{gtk:button} widget which received the signal.}
       @end{table}
     @subheading{The \"clicked\" signal}
       @begin{pre}
@@ -166,13 +169,14 @@ lambda (button)    :action
       @end{pre}
       Emitted when the button has been activated (pressed and released).
       @begin[code]{table}
-        @entry[button]{The @sym{gtk:button} widget which received the signal.}
+        @entry[button]{The @class{gtk:button} widget which received the signal.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:button-new}
   @see-constructor{gtk:button-new-with-label}
   @see-constructor{gtk:button-new-with-mnemonic}
   @see-constructor{gtk:button-new-from-icon-name}
+  @see-slot{gtk:button-can-shrink}
   @see-slot{gtk:button-child}
   @see-slot{gtk:button-has-frame}
   @see-slot{gtk:button-icon-name}
@@ -184,6 +188,40 @@ lambda (button)    :action
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
+
+;;; --- button-can-shrink ------------------------------------------------------
+
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "can-shrink" 'button) t)
+ "The @code{can-shrink} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the size of the button can be made smaller than the natural size of
+  its contents. For text buttons, setting this property will allow ellipsizing
+  the label. If the contents of a button are an icon or a custom widget, setting
+  this property has no effect. Since 4.12 @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'button-can-shrink)
+      "Accessor"
+      (documentation 'button-can-shrink 'function)
+ "@version{2023-9-2}
+  @syntax[]{(gtk:button-can-shrink object) => setting}
+  @syntax[]{(setf (gtk:button-can-shrink object) setting)}
+  @argument[object]{a @class{gtk:button} widget}
+  @argument[setting]{a boolean whether the button can shrink}
+  @begin{short}
+    Accessor of the @slot[gtk:button]{can-shrink} slot of the @class{gtk:button}
+    class.
+  @end{short}
+  The @fun{gtk:button-can-shrink} function retrieves whether the button can be
+  smaller than the natural size of its contents. The
+  @sym{(setf gtk:button-can-shrink)} function sets whether the button size can
+  be smaller than the natural size of its contents. For text buttons, setting
+  the @slot[gtk:button]{can-shrink} to @em{true} will ellipsize the label. For
+  icons and custom children, this function has no effect.
+
+  Since 4.12
+  @see-class{gtk:button}")
 
 ;;; --- button-child -----------------------------------------------------------
 
@@ -197,7 +235,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-child)
       "Accessor"
       (documentation 'button-child 'function)
- "@version{2023-3-24}
+ "@version{2023-9-2}
   @syntax[]{(gtk:button-child object) => child}
   @syntax[]{(setf (gtk:button-child object) child)}
   @argument[object]{a @class{gtk:button} widget}
@@ -206,7 +244,7 @@ lambda (button)    :action
     Accessor of the @slot[gtk:button]{child} slot of the @class{gtk:button}
     class.
   @end{short}
-  The @sym{gtk:button-child} function gets the child widget of the button. The
+  The @fun{gtk:button-child} function gets the child widget of the button. The
   @sym{(setf gtk:button-child)} function sets the child widget.
 
   Note that by using this API, you take full responsibility for setting up the
@@ -249,7 +287,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-has-frame)
       "Accessor"
       (documentation 'button-has-frame 'function)
- "@version{2023-3-18}
+ "@version{2023-9-2}
   @syntax[]{(gtk:button-has-frame object) => setting}
   @syntax[]{(setf (gtk:button-has-frame object) setting)}
   @argument[object]{a @class{gtk:button} widget}
@@ -258,7 +296,7 @@ lambda (button)    :action
     Accessor of the @slot[gtk:button]{has-frame} slot of the @class{gtk:button}
     class.
   @end{short}
-  The @sym{gtk:button-has-frame} function returns whether the button has a
+  The @fun{gtk:button-has-frame} function returns whether the button has a
   frame. The @sym{(setf gtk:button-has-frame)} function sets the style of the
   button.
 
@@ -277,7 +315,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-icon-name)
       "Accessor"
       (documentation 'button-icon-name 'function)
- "@version{2023-3-18}
+ "@version{2023-9-2}
   @syntax[]{(gtk:button-icon-name object) => name}
   @syntax[]{(setf (gtk:button-icon-name object) name)}
   @argument[object]{a @class{gtk:button} widget}
@@ -286,7 +324,7 @@ lambda (button)    :action
     Accessor of the @slot[gtk:button]{icon-name} slot of the @class{gtk:button}
     class.
   @end{short}
-  The @sym{gtk:button-icon-name} function returns the icon name of the button.
+  The @fun{gtk:button-icon-name} function returns the icon name of the button.
   If the icon name has not been set the return value will be @code{nil}. This
   will be the case if you create an empty button with the @fun{gtk:button-new}
   function to use as a container. The @sym{(setf gtk:button-has-frame)} function
@@ -309,7 +347,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-label)
       "Accessor"
       (documentation 'button-label 'function)
- "@version{2023-3-18}
+ "@version{2023-9-2}
   @syntax[]{(gtk:button-label object) => label}
   @syntax[]{(setf (gtk:button-label object) label)}
   @argument[object]{a @class{gtk:button} widget}
@@ -318,7 +356,7 @@ lambda (button)    :action
     Accessor of the @slot[gtk:button]{label} slot of the @class{gtk:button}
     class.
   @end{short}
-  The @sym{gtk:button-label} function fetches the text from the label of the
+  The @fun{gtk:button-label} function fetches the text from the label of the
   button. The @sym{(setf gtk:button-label)} function sets the text. If the label
   text has not been set the return value will be @code{nil}. This will be the
   case if you create an empty button with the @fun{gtk:button-new} function to
@@ -339,7 +377,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-use-underline)
       "Accessor"
       (documentation 'button-use-underline 'function)
- "@version{2023-3-18}
+ "@version{2023-9-2}
   @syntax[]{(gtk:button-use-underline object) => setting}
   @syntax[]{(setf (gtk:button-use-underline object) setting)}
   @argument[object]{a @class{gtk:button} widget}
@@ -348,7 +386,7 @@ lambda (button)    :action
     Accessor of the @slot[gtk:button]{use-underline} slot of the
     @class{gtk:button} class.
   @end{short}
-  The @sym{gtk:button-use-underline} function gets whether underlines are
+  The @fun{gtk:button-use-underline} function gets whether underlines are
   interpreted as mnemonics. The @sym{(setf gtk:button-user-underline)} function
   sets whether to use underlines as mnemonics. If @em{true}, an underline in the
   text of the button label indicates the next character should be used for the
@@ -363,17 +401,14 @@ lambda (button)    :action
 
 (defun button-new ()
  #+liber-documentation
- "@version{2023-3-18}
+ "@version{2023-9-2}
   @return{The newly created @class{gtk:button} widget.}
   @begin{short}
     Creates a new button.
   @end{short}
   To add a child widget to the button, use the @fun{gtk:button-child} function.
   @see-class{gtk:button}
-  @see-function{gtk:button-child}
-  @see-function{gtk:button-new-with-label}
-  @see-function{gtk:button-new-with-mnemonic}
-  @see-function{gtk:button-new-from-icon-name}"
+  @see-function{gtk:button-child}"
   (make-instance 'button))
 
 (export 'button-new)
@@ -386,7 +421,7 @@ lambda (button)    :action
 
 (defun button-new-with-label (label)
  #+liber-documentation
- "@version{2023-3-18}
+ "@version{2023-9-2}
   @argument[label]{a string with the text you want the @class{gtk:label} child
     widget to hold}
   @return{The newly created @class{gtk:button} widget.}
@@ -394,10 +429,7 @@ lambda (button)    :action
     Creates a button with a label containing the given text in @arg{label}.
   @end{short}
   @see-class{gtk:button}
-  @see-class{gtk:label}
-  @see-function{gtk:button-new}
-  @see-function{gtk:button-new-with-mnemonic}
-  @see-function{gtk:button-new-from-icon-name}"
+  @see-class{gtk:label}"
   (make-instance 'button
                  :label label))
 
@@ -411,7 +443,7 @@ lambda (button)    :action
 
 (defun button-new-with-mnemonic (label)
  #+liber-documentation
- "@version{2023-3-18}
+ "@version{2023-9-2}
   @argument[label]{a string with the text of the button, with an underscore in
     front of the mnemonic character}
   @return{A new @class{gtk:button} widget.}
@@ -423,10 +455,7 @@ lambda (button)    :action
   '__' (two underscores). The first underlined character represents a keyboard
   accelerator called a mnemonic. Pressing @kbd{Alt} and that key activates the
   button.
-  @see-class{gtk:button}
-  @see-function{gtk:button-new}
-  @see-function{gtk:button-new-with-label}
-  @see-function{gtk:button-new-from-icon-name}"
+  @see-class{gtk:button}"
   (make-instance 'button
                  :label label
                  :use-underline t))
@@ -441,7 +470,7 @@ lambda (button)    :action
 
 (defun button-new-from-icon-name (name)
  #+liber-documentation
- "@version{2023-3-18}
+ "@version{2023-9-2}
   @argument[name]{a string with the icon name}
   @return{A new @class{gtk:button} widget displaying the themed icon.}
   @begin{short}
@@ -450,8 +479,7 @@ lambda (button)    :action
   If the icon name is not known, a \"broken image\" icon will be displayed
   instead. If the current icon theme is changed, the icon will be updated
   appropriately.
-  @see-class{gtk:button}
-  @see-function{gtk:button-new}"
+  @see-class{gtk:button}"
   (make-instance 'button
                  :icon-name name))
 

@@ -2,7 +2,7 @@
 ;;; gtk4.actionable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -80,9 +80,9 @@
       (documentation 'actionable 'type)
  "@version{2023-8-4}
   @begin{short}
-    The @sym{gtk:actionable} interface provides a convenient way of associating 
-    widgets with actions on a @class{gtk:application-window} widget or 
-    @class{gtk:application} instance.
+    The @class{gtk:actionable} interface provides a convenient way of
+    associating widgets with actions on a @class{gtk:application-window} widget
+    or @class{gtk:application} instance.
   @end{short}
   It primarily consists of two properties: @code{action-name} and
   @code{action-target}. There are also some convenience APIs for setting
@@ -124,8 +124,8 @@
     Accessor of the @slot[gtk:actionable]{action-name} slot of the
     @class{gtk:actionable} inferface.
   @end{short}
-  The @sym{gtk:actionable-action-name} function gets the action name for
-  @arg{object}, or @code{nil} if none is set. The 
+  The @fun{gtk:actionable-action-name} function gets the action name for
+  @arg{object}, or @code{nil} if none is set. The
   @sym{(setf gtk:actionable-action-name)} function specifies the name of the
   action with which this widget should be associated. If the @arg{name} argument
   is @code{nil} then the widget will be unassociated from any previous action.
@@ -173,9 +173,9 @@
     Accessor of the @slot[gtk:actionable]{action-target} slot of the
     @class{gtk:actionable} inferface.
   @end{short}
-  The @sym{gtk:actionable-action-target} function gets the current target value
+  The @fun{gtk:actionable-action-target} function gets the current target value
   of an actionable widget. The @sym{(setf gtk:actionable-action-target)}
-  function sets the target value. If the @arg{value} argument is a 
+  function sets the target value. If the @arg{value} argument is a
   @code{null-pointer} then the target value is unset.
 
   The target value has two purposes. First, it is used as the parameter to
@@ -204,7 +204,7 @@
     @code{gtk_actionable_get_action_target_value ()} and
     @code{gtk_actionable_set_action_target_value ()} functions. In the Lisp
     implementation these functions are replaced by the
-    @sym{gtk:actionable-action-target} function.
+    @fun{gtk:actionable-action-target} function.
   @end{dictionary}
   @see-class{gtk:actionable}
   @see-type{glib:variant}

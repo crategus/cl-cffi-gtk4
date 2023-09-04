@@ -133,7 +133,7 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "filter" 'filter-list-model) t)
- "The @code{filter} property of type @class{gtk:filter}(Read / Write) @br{}
+ "The @code{filter} property of type @class{gtk:filter} (Read / Write) @br{}
   The filter for the model.")
 
 #+liber-documentation
@@ -161,7 +161,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "incremental"
                                                'filter-list-model) t)
- "The @code{incremental} property of type @code{:boolean}(Read / Write) @br{}
+ "The @code{incremental} property of type @code{:boolean} (Read / Write) @br{}
   Whether the model should filter items incrementally. @br{}
   Default value: @em{false}")
 
@@ -198,12 +198,12 @@
   @see-class{gtk:filter-list-model}
   @see-function{gtk:filter-list-model-pending}")
 
-;;; --- filter-list-model-item-type ------------------------------------------
+;;; --- filter-list-model-item-type --------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type"
                                                'filter-list-model) t)
- "The @code{item-type} property of type @class{g:type-t}(Read) @br{}
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. See the @fun{g:list-model-item-type} function. Since 4.8")
 
 #+gtk-4-8
@@ -239,7 +239,7 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'filter-list-model) t)
- "The @code{model} property of type @class{g:list-model}(Read / Write) @br{}
+ "The @code{model} property of type @class{g:list-model} (Read / Write) @br{}
   The model being filtered.")
 
 #+liber-documentation
@@ -269,7 +269,7 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'filter-list-model) t)
- "The @code{n-items} property of type @code{:uint}(Read / Write) @br{}
+ "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
   The number of items. See the @fun{g:list-model-n-items} function. Since 4.8
   @br{}
   Default value: 0")
@@ -294,7 +294,7 @@
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pending" 'filter-list-model) t)
- "The @code{pending} property of type @code{:uint}(Read) @br{}
+ "The @code{pending} property of type @code{:uint} (Read) @br{}
   Number of items not yet filtered. @br{}
   Default value: 0")
 
