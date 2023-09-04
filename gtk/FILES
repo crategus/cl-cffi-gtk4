@@ -9,17 +9,20 @@ GListModel support
 
   gtk4.bitset.lisp                     GtkBitset                      GTK 4.12 +
   gtk4.expression.lisp                 GtkExpression, ...             GTK 4.12 +
-  gtk4.filter-list-model.lisp          GtkFilterListModel             GTK 4.12
+
   gtk4.filter.lisp                     GtkFilter                      GTK 4.12
   gtk4.custom-filter.lisp              GtkCustomFilter                GTK 4.12 +
   gtk4.multi-filter.lisp               GtkMultiFilter                 GTK 4.12
   gtk4.bool-filter.lisp                GtkBoolFilter                  GTK 4.12 +
   gtk4.string-filter.lisp              GtkStringFilter                GTK 4.12
   gtk4.file-filter.lisp                GtkFileFilter                  GTK 4.12
-  gtk4.flatten-list-model.lisp         GtkFlattenListModel            GTK 4.0  +
-  gtk4.map-list-model.lisp             GtkMapListModel                GTK 4.0  +
-  gtk4.slice-list-model.lisp           GtkSliceListModel              GTK 4.0  +
-  gtk4.sort-list-model.lisp            GtkSortListModel               GTK 4.0  +
+
+  gtk4.filter-list-model.lisp          GtkFilterListModel             GTK 4.12
+  gtk4.flatten-list-model.lisp         GtkFlattenListModel            GTK 4.12 +
+  gtk4.map-list-model.lisp             GtkMapListModel                GTK 4.12 +
+  gtk4.slice-list-model.lisp           GtkSliceListModel              GTK 4.12 +
+  gtk4.sort-list-model.lisp            GtkSortListModel               GTK 4.12 +
+
   gtk4.sorter.lisp                     GtkSorter                      GTK 4.0  +
   gtk4.custom-sorter.lisp              GtkCustomSorter                GTK 4.0  +
   gtk4.multi-sorter.lisp               GtkMultiSorter                 GTK 4.0  +
@@ -110,7 +113,7 @@ Layout Managers
   gtk.custom-layout.lisp               GtkCustomLayout                GTK 4.10 *
   gtk.constraint-layout.lisp           GtkConstraintLayout            GTK 4.10 *
 
-  gtk.constraint.lisp                  GtkConstraint                  GTK 4.10 *
+  gtk.constraint.lisp                  GtkConstraint                  GTK 4.12
   gtk.constraint-guide.lisp            GtkConstraintGuide             GTK 4.10 *
 
 Display Widgets
@@ -134,7 +137,7 @@ Media Support
 
 Buttons and Toggles
 
-  gtk.button.lisp                      GtkButton                      GTK 4.10 *
+  gtk.button.lisp                      GtkButton                      GTK 4.12
   gtk.check-button.lisp                GtkCheckButton                 GTK 4.10 *
   gtk.toggle-button.lisp               GtkToggleButton                GTK 4.10 *
   gtk.menu-button.lisp                 GtkMenuButton                  GTK 4.10 *
@@ -209,7 +212,6 @@ Combo Box, Popover
   gtk.popover.lisp                     GtkPopover                     GTK 4.6  +
   gtk.popover-menu.lisp                GtkPopoverMenu                 GTK 4.6  +
   gtk.popover-menu-bar.lisp            GtkPopoverMenuBar              GTK 4.6  +
-  gtk.drop-down.lisp                   GtkDropDown                    GTK 4.6  +
 
 Selector Widgets and Dialogs
 
@@ -227,6 +229,8 @@ Selector Widgets and Dialogs
   gtk.file-chooser-widget.lisp         GtkFileChooserWidget           GTK 4.12
 
   gtk.file-dialog.lisp                 GtkFileDialog                  GTK 4.10 *
+  gtk.file-launcher.lisp               GtkFileLauncher                GTK 4.12 +
+  gtk.uri-launcher.lisp                GtkUriLauncher                 GTK 4.12 +
 
   gtk.font-chooser.lisp                GtkFontChooser                 GTK 4.12
   gtk.font-button.lisp                 GtkFontButton                  GTK 4.12
