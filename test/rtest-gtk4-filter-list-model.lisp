@@ -78,7 +78,6 @@
 (test gtk-filter-list-model-new
   (let* ((store (g:list-store-new "GtkWidget"))
          (model (gtk:filter-list-model-new store nil)))
-
     ;; The list store
     (is (eq (g:gtype "GtkWidget") (g:list-store-item-type store)))
     (is (= 0 (g:list-store-n-items store)))

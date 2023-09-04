@@ -43,29 +43,29 @@
 ;;;     gtk_window_group_new
 
 (test gtk-window-group-new
-  (is (typep (gtk-window-group-new) 'gtk-window-group)))
+  (is (typep (gtk:window-group-new) 'gtk:window-group)))
 
 ;;;     gtk_window_group_add_window
 ;;;     gtk_window_group_remove_window
 ;;;     gtk_window_group_list_windows
 
 (test gtk-window-group-list-windows
-  (let ((group (gtk-window-group-new))
-        (window (gtk-window-new)))
+  (let ((group (gtk:window-group-new))
+        (window (gtk:window-new)))
     ;; The list is empty
     (is (equal '()
-               (gtk-window-group-list-windows group)))
+               (gtk:window-group-list-windows group)))
     ;; Add a window to the group
-    (is-false (gtk-window-group-add-window group window))
-    (is (equal '(GTK-WINDOw)
-               (mapcar #' type-of (gtk-window-group-list-windows group))))
+    (is-false (gtk:window-group-add-window group window))
+    (is (equal '(GTK:WINDOw)
+               (mapcar #' type-of (gtk:window-group-list-windows group))))
     ;; Add a second window to the group
-    (is-false (gtk-window-group-add-window group (make-instance 'gtk-window)))
-    (is (equal '(GTK-WINDOw GTK-WINDOW)
-               (mapcar #' type-of (gtk-window-group-list-windows group))))
+    (is-false (gtk:window-group-add-window group (make-instance 'gtk:window)))
+    (is (equal '(GTK:WINDOw GTK:WINDOW)
+               (mapcar #' type-of (gtk:window-group-list-windows group))))
     ;; Remove the window from the group
-    (is-false (gtk-window-group-remove-window group window))
-    (is (equal '(GTK-WINDOW)
-               (mapcar #' type-of (gtk-window-group-list-windows group))))))
+    (is-false (gtk:window-group-remove-window group window))
+    (is (equal '(GTK:WINDOW)
+               (mapcar #' type-of (gtk:window-group-list-windows group))))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-9-2 ---------------------------------------------------------------

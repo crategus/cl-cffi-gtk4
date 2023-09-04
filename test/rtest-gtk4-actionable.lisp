@@ -14,6 +14,9 @@
   ;; Check the type initializer
   (is (eq (g:gtype "GtkActionable")
           (g:gtype (cffi:foreign-funcall "gtk_actionable_get_type" :size))))
+  ;; Check the interface prerequisites
+  (is (equal '("GtkWidget")
+             (list-interface-prerequisites "GtkActionable")))
   ;; Get the names of the interface properties.
   (is (equal '("action-name" "action-target")
              (list-interface-properties "GtkActionable")))
@@ -58,4 +61,4 @@
 
 ;;; See gtk-actionable-properties for an example
 
-;;; --- 2023-8-4 ---------------------------------------------------------------
+;;; --- 2023-9-2 ---------------------------------------------------------------

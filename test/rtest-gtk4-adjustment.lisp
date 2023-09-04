@@ -49,7 +49,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test adjustment-properties
+(test gtk-adjustment-properties
   (let ((adjustment (make-instance 'gtk:adjustment)))
     ;; adjustment-lower
     (is (= 0.0d0 (gtk:adjustment-lower adjustment)))
@@ -72,7 +72,7 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
-(test adjustment-changed-signal
+(test gtk-adjustment-changed-signal
   (let ((query (g:signal-query (g:signal-lookup "changed" "GtkAdjustment"))))
     (is (string= "changed" (g:signal-query-signal-name query)))
     (is (string= "GtkAdjustment"
@@ -84,7 +84,7 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
-(test adjustment-value-changed-signal
+(test gtk-adjustment-value-changed-signal
   (let ((query (g:signal-query (g:signal-lookup "value-changed"
                                                 "GtkAdjustment"))))
     (is (string= "value-changed" (g:signal-query-signal-name query)))
@@ -101,7 +101,7 @@
 
 ;;;     gtk_adjustment_new
 
-(test adjustment-new
+(test gtk-adjustment-new
   (let ((adjustment (gtk:adjustment-new 10.0 1 20 1/2 3/4 2.5d0)))
     (is (= 10.00d0 (gtk:adjustment-value adjustment)))
     (is (=  1.00d0 (gtk:adjustment-lower adjustment)))
@@ -112,7 +112,7 @@
 
 ;;;     gtk_adjustment_clamp_page
 
-(test adjustment-clamp-page
+(test gtk-adjustment-clamp-page
   (let ((adjustment (gtk:adjustment-new 10 0 20 0 0 0)))
     (is (= 10 (gtk:adjustment-value adjustment)))
     (is (=  0 (gtk:adjustment-lower adjustment)))
@@ -125,4 +125,4 @@
 ;;;     gtk_adjustment_configure
 ;;;     gtk_adjustment_get_minimum_increment
 
-;;; --- 2023-8-25 --------------------------------------------------------------
+;;; --- 2023-9-2 ---------------------------------------------------------------
