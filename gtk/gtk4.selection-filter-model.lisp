@@ -2,7 +2,7 @@
 ;;; gtk4.selection-filter-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,11 +35,14 @@
 ;;;
 ;;;     GtkSelectionFilterModel
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_selection_filter_model_set_model
+;;;     gtk_selection_filter_model_get_model
+;;;
 ;;; Functions
 ;;;
 ;;;     gtk_selection_filter_model_new
-;;;     gtk_selection_filter_model_set_model
-;;;     gtk_selection_filter_model_get_model
 ;;;
 ;;; Properties
 ;;;
@@ -70,7 +73,7 @@
    :type-initializer "gtk_selection_filter_model_get_type")
   (#+gtk-4-8
    (item-type
-    selection-filter-model-item-type
+    %selection-filter-model-item-type
     "item-type" "GType" t nil)
    (model
     selection-filter-model-model
@@ -80,72 +83,135 @@
     selection-filter-model-n-items
     "n-items" "guint" t nil)))
 
+#+liber-documentation
+(setf (documentation 'selection-filter-model 'type)
+ "@version{2023-9-6}
+  @begin{short}
+    The @class{gtk:selection-filter-model} class is a list model that presents
+    the selected items in a @class{gtk:selection-model} as its own list model.
+  @end{short}
+  @see-constructor{gtk:selection-filter-model-new}
+  @see-class{gtk:selection-model}")
 
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;Property Details
-;;;The “model” property
-;;;  “model”                    GtkSelectionModel *
-;;;The model being filtered
+;;; --- selection-filter-model-item-type ---------------------------------------
 
-;;;Owner: GtkSelectionFilterModel
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "item-type"
+                                               'selection-filter-model) t)
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
+  The type of items. Since 4.8")
 
-;;;Flags: Read / Write
+#+gtk-4-8
+(declaim (inline selection-filter-model-item-type))
 
-;;;See Also
-;;;GtkSelectionModel
+#+gtk-4-8
+(defun selection-filter-model-item-type (object)
+  (g:list-model-item-type object))
 
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'selection-filter-model-item-type)
+      "Accessor"
+      (documentation 'selection-filter-model-item-type 'function)
+ "@version{#2023-9-6}
+  @syntax[]{(gtk:selection-filter-model-item-type object) => gtype}
+  @argument[object]{a @class{gtk:selection-filter-model} object}
+  @argument[gtype]{a @class{g:type-t} type}
+  @begin{short}
+    Accessor of the @slot[gtk:selection-filter-model]{item-type} slot of the
+    @class{gtk:selection-filter-model} class.
+  @end{short}
+  The type of items contained in the list model. Items must be subclasses of
+  the @class{g:object} class.
+  @begin[Note]{dictionary}
+    This function is equivalent to the @fun{g:list-model-item-type} function.
+  @end{dictionary}
+  @see-class{gtk:selection-filter-model}
+  @see-class{g:type-t}
+  @see-class{g:object}
+  @see-function{g:list-model-item-type}")
 
+;;; --- selection-filter-model-model -------------------------------------------
 
-;;;Description
-;;;GtkSelectionFilterModel is a list model that presents the selected items in a GtkSelectionModel as its own list model.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "model"
+                                               'selection-filter-model) t)
+ "The @code{model} property of type @class{g:list-model} (Read / Write) @br{}
+  The model being filtered.")
 
-;;;Functions
-;;;gtk_selection_filter_model_new ()
-;;;GtkSelectionFilterModel *
-;;;gtk_selection_filter_model_new (GtkSelectionModel *model);
-;;;Creates a new GtkSelectionFilterModel that will include the selected items from the underlying selection model.
+#+liber-documentation
+(setf (liber:alias-for-function 'selection-filter-model-model)
+      "Accessor"
+      (documentation 'selection-filter-model-model 'function)
+ "@version{#2023-9-6}
+  @syntax[]{(gtk:selection-filter-model-model object) => model}
+  @syntax[]{(setf (gtk:selection-filter-model-model object) model)}
+  @argument[object]{a @class{gtk:selection-filter-model} object}
+  @argument[model]{a @class{g:list-model} object to wrap}
+  @begin{short}
+    Accessor of the @slot[gtk:selection-filter-model]{model} slot of the
+    @class{gtk:selection-filter-model} class.
+  @end{short}
+  The @fun{gtk:selection-filter-model-model} function gets the model
+  currently filtered or @code{nil} if none. The
+  @sym{(setf gtk:selection-filter-model-model)} function sets the model to be
+  filtered.
 
-;;;Parameters
-;;;model
+  Note that GTK makes no effort to ensure that @arg{model} conforms to the item
+  type of @arg{object}. It assumes that the caller knows what they are doing and
+  have set up an appropriate filter to ensure that item types match.
+  @see-class{gtk:selection-filter-model}
+  @see-class{g:list-model}")
 
-;;;the selection model to filter, or NULL.
+;;; --- selection-filter-model-n-items -----------------------------------------
 
-;;;[allow-none][transfer none]
-;;;Returns
-;;;a new GtkSelectionFilterModel
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "n-items"
+                                               'selection-filter-model) t)
+ "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
+  The number of items. Since 4.8 @br{}
+  Default value: 0")
 
-;;;gtk_selection_filter_model_set_model ()
-;;;void
-;;;gtk_selection_filter_model_set_model (GtkSelectionFilterModel *self,
-;;;                                      GtkSelectionModel *model);
-;;;Sets the model to be filtered.
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'selection-filter-model-n-items)
+      "Accessor"
+      (documentation 'selection-filter-model-n-items 'function)
+ "@version{#2023-9-6}
+  @syntax[]{(gtk:selection-filter-model-n-items object) => n-items}
+  @argument[object]{a @class{gtk:selection-filter-model} object}
+  @argument[n-items]{an unsigned integer with the number of items contained in
+    the model}
+  @begin{short}
+    Accessor of the @slot[gtk:selection-filter-model]{n-items} slot of the
+    @class{gtk:selection-filter-model} class.
+  @end{short}
+  @see-class{g:selection-filter-model}
+  @see-function{g:list-model-n-items}")
 
-;;;Note that GTK makes no effort to ensure that model conforms to the item type of self . It assumes that the caller knows what they are doing and have set up an appropriate filter to ensure that item types match.
+;;; ----------------------------------------------------------------------------
+;;; gtk_selection_filter_model_new ()
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;self
+(declaim (inline selection-filter-model-new))
 
-;;;a GtkSelectionFilterModel
+(defun selection-filter-model-new (model)
+ #+liber-documentation
+ "@version{#2023-9-6}
+  @argument[model]{a @class{gtk:selection-model} object to filter, or
+    @code{nil}}
+  @return{A new @class{gtk:selection-filter-model} object.}
+  @begin{short}
+    Creates a new @class{gtk:selection-filter-model} object that will include
+    the selected items from the underlying selection model.
+  @end{short}
+  @see-class{gtk:selection-filter-model}
+  @see-class{gtk:selection-model}"
+  (make-instance 'selection-filter-model
+                 :model model))
 
-;;;model
-
-;;;The model to be filtered.
-
-;;;[allow-none]
-;;;gtk_selection_filter_model_get_model ()
-;;;GtkSelectionModel *
-;;;gtk_selection_filter_model_get_model (GtkSelectionFilterModel *self);
-;;;Gets the model currently filtered or NULL if none.
-
-;;;Parameters
-;;;self
-
-;;;a GtkSelectionFilterModel
-
-;;;Returns
-;;;The model that gets filtered.
-
-;;;[nullable][transfer none]
-
+(export 'selection-filter-model-new)
 
 ;;; --- End of file gtk4.selection-filter-model.lisp ---------------------------

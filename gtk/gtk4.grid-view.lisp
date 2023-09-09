@@ -2,7 +2,7 @@
 ;;; gtk4.grid-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,21 +35,26 @@
 ;;;
 ;;;     GtkGridView
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_grid_view_get_enable_rubberband
+;;;     gtk_grid_view_set_enable_rubberband
+;;;     gtk_grid_view_get_factory
+;;;     gtk_grid_view_set_factory
+;;;     gtk_grid_view_get_max_columns
+;;;     gtk_grid_view_set_max_columns
+;;;     gtk_grid_view_get_min_columns
+;;;     gtk_grid_view_set_min_columns
+;;;     gtk_grid_view_get_model
+;;;     gtk_grid_view_set_model
+;;;     gtk_grid_view_get_single_click_activate
+;;;     gtk_grid_view_set_single_click_activate
+;;;     gtk_grid_view_get_tab_behavior                     Since 4.12
+;;;     gtk_grid_view_set_tab_behavior                     Since 4.12
+;;;
 ;;; Functions
 ;;;
 ;;;     gtk_grid_view_new
-;;;     gtk_grid_view_set_model
-;;;     gtk_grid_view_get_model
-;;;     gtk_grid_view_set_max_columns
-;;;     gtk_grid_view_get_max_columns
-;;;     gtk_grid_view_set_min_columns
-;;;     gtk_grid_view_get_min_columns
-;;;     gtk_grid_view_set_single_click_activate
-;;;     gtk_grid_view_get_single_click_activate
-;;;     gtk_grid_view_set_enable_rubberband
-;;;     gtk_grid_view_get_enable_rubberband
-;;;     gtk_grid_view_set_factory
-;;;     gtk_grid_view_get_factory
 ;;;
 ;;; Properties
 ;;;
@@ -59,6 +64,7 @@
 ;;;     min-columns
 ;;;     model
 ;;;     single-click-activate
+;;;     tab-behavior                                       Since 4.12
 ;;;
 ;;; Signals
 ;;;
@@ -123,340 +129,310 @@
     grid-view-tab-behavior
     "tab-behavior" "GtkListTabBehavior" t t)))
 
+#+liber-documentation
+(setf (documentation 'grid-view 'type)
+ "@version{#2023-9-8}
+  @begin{short}
+    The @class{gtk:grid-view} widget is a widget to present a view into a large
+    dynamic grid of items.
+  @end{short}
+  The @class{gtk:grid-view} widget uses its factory to generate one child
+  widget for each visible item and shows them in a grid. The orientation of the
+  grid view determines if the grid reflows vertically or horizontally.
 
+  The @class{gtk:grid-view} widget allows the user to select items according to
+  the selection characteristics of the model. For models that allow multiple
+  selected items, it is possible to turn on rubberband selection, using the
+  @slot[gtk:grid-view]{enable-rubberband} property.
 
-;;;GtkGridView is a list widget implementation that arranges its items in a grid.
+  To learn more about the list widget framework, see the overview.
+  @begin[CSS nodes]{dictionary}
+    @begin{pre}
+gridview
+├── child
+│
+├── child
+│
+┊
+╰── [rubberband]
+    @end{pre}
+    The @class{gtk:grid-view} implementation uses a single CSS node with name
+    @code{gridview}. Each child uses a single CSS node with name @code{child}.
+    For rubberband selection, a subnode with name @code{rubberband} is used.
+  @end{dictionary}
+  @begin[Accessibility]{dictionary}
+    The @class{gtk:grid-view} implementation uses the @code{:grid} role, and
+    the items use the @code{:grid-cell} role from the
+    @class{gtk:accessible-role} enumeration.
+  @end{dictionary}
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"activate\" signal}
+      @begin{pre}
+lambda (gridview position)    :run-last
+      @end{pre}
+      The signal is emitted when a cell has been activated by the user, usually
+      via activating the @code{GtkGridView|list.activate-item} action. This
+      allows for a convenient way to handle activation in a gridview. See the
+      @code{GtkListItem:activatable} action for details on how to use this
+      signal.
+      @begin[code]{table}
+        @entry[gridview]{The @class{gtk:grid-view} widget.}
+        @entry[position]{An unsigned integer with the position of the item to
+          activate.}
+      @end{table}
+  @end{dictionary}
+  @see-constructor{gtk:grid-view-new}
+  @see-slot{gtk:grid-view-enable-rubberband}
+  @see-slot{gtk:grid-view-factory}
+  @see-slot{gtk:grid-view-max-columns}
+  @see-slot{gtk:grid-view-min-columns}
+  @see-slot{gtk:grid-view-model}
+  @see-slot{gtk:grid-view-single-click-activate}
+  @see-slot{gtk:grid-view-tab-behavior}
+  @see-class{gtk:selection-model}
+  @see-class{gtk:list-view}
+  @see-class{gtk:column-view}")
 
-;;;Description
-;;;GtkGridView is a widget to present a view into a large dynamic grid of items.
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;GtkGridView uses its factory to generate one child widget for each visible item and shows them in a grid. The orientation of the grid view determines if the grid reflows vertically or horizontally.
+;;; --- grid-view-enable-rubberband --------------------------------------------
 
-;;;GtkGridView allows the user to select items according to the selection characteristics of the model. For models that allow multiple selected items, it is possible to turn on _rubberband selection_, using “enable-rubberband”.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "enable-rubberband"
+                                               'grid-view) t)
+ "The @code{enable-rubberband} property of type @code{:boolean} (Read / Write)
+  @br{}
+  Allow rubberband selection. @br{}
+  Default value: @em{false}")
 
-;;;To learn more about the list widget framework, see the overview.
+#+liber-documentation
+(setf (liber:alias-for-function 'grid-view-enable-rubberband)
+      "Accessor"
+      (documentation 'grid-view-enable-rubberband 'function)
+ "@version{#2023-9-9}
+  @syntax[]{(gtk:grid-view-enable-rubberband object) => setting}
+  @syntax[]{(setf (gtk:grid-view-enable-rubberband object) setting)}
+  @argument[object]{a @class{gtk:grid-view} object}
+  @argument[setting]{@em{true} if rubberband selection is enabled}
+  @begin{short}
+    Accessor of the @slot[gtk:grid-view]{enable-rubberband} slot of the
+    @class{gtk:grid-view} class.
+  @end{short}
+  The @fun{gtk:grid-view-enable-rubberband} function returns whether selections
+  can be selected by dragging with the mouse. The
+  @sym{(setf gtk:grid-view-enable-rubberband)} function sets whether selections
+  can be changed by dragging with the mouse.
+  @see-class{gtk:grid-view}")
 
-;;;CSS nodes
-;;;gridview
-;;;├── child
-;;;│
-;;;├── child
-;;;│
-;;;┊
-;;;╰── [rubberband]
-;;;GtkGridView uses a single CSS node with name gridview. Each child uses a single CSS node with name child. For rubberband selection, a subnode with name rubberband is used.
+;;; --- grid-view-factory ------------------------------------------------------
 
-;;;Accessibility
-;;;GtkGridView uses the GTK_ACCESSIBLE_ROLE_GRID role, and the items use the GTK_ACCESSIBLE_ROLE_GRID_CELL role.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "factory" 'grid-view) t)
+ "The @code{factory} property of type @class{gtk:list-item-factory}
+  (Read / Write) @br{}
+  Factory for populating list items.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'grid-view-factory)
+      "Accessor"
+      (documentation 'grid-view-factory 'function)
+ "@version{#2023-9-6}
+  @syntax[]{(gtk:grid-view-factory object) => factory}
+  @syntax[]{(setf (gtk:grid-view-factory object) factory)}
+  @argument[object]{a @class{gtk:grid-view} object}
+  @argument[factory]{a @class{gtk:list-item-factory} object to use, or
+    @code{nil} for none}
+  @begin{short}
+    Accessor of the @slot[gtk:grid-view]{factory} slot of the
+    @class{gtk:grid-view} class.
+  @end{short}
+  The @fun{gtk:grid-view-factory} function gets the factory that is currently
+  used to populate list items. The @sym{(setf gtk:grid-view-factory)} function
+  sets the factory.
+  @see-class{gtk:grid-view}
+  @see-class{gtk:selection-model}")
 
-;;;Property Details
-;;;The “enable-rubberband” property
-;;;  “enable-rubberband”        gboolean
-;;;Allow rubberband selection
+;;; --- grid-view-max-columns --------------------------------------------------
 
-;;;Owner: GtkGridView
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "max-columns" 'grid-view) t)
+ "The @code{max-columns} property of type @code{:uint} (Read / Write) @br{}
+  If this number is smaller than the @slot[gtk:grid-view]{min-columns} property,
+  that value is used instead. @br{}
+  Allowed values: >= 1 @br{}
+  Default value: 7")
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (liber:alias-for-function 'grid-view-max-columns)
+      "Accessor"
+      (documentation 'grid-view-max-columns 'function)
+ "@version{#2023-9-6}
+  @syntax[]{(gtk:grid-view-max-colums object) => max}
+  @syntax[]{(setf (gtk:grid-view-max-columns object) max)}
+  @argument[object]{a @class{gtk:grid-view} object}
+  @argument[max]{an unsigned integer with the maximum of columns}
+  @begin{short}
+    Accessor of the @slot[gtk:grid-view]{max-columns} slot of the
+    @class{gtk:grid-view} class.
+  @end{short}
+  The @fun{gtk:grid-view-max-columns} function gets the maximum number of
+  columns that the grid will use. The @sym{(setf gtk:grid-view-max-columns)}
+  function sets the maximum number of columns to use. This number must be at
+  least 1. If the @slot[gtk:grid-view]{max-columns} property is smaller than
+  the minimum set via the @fun{gtk:grid-view-min-columns} function, that value
+  is used instead.
+  @see-class{gtk:grid-view}
+  @see-function{gtk:grid-view-min-columns}")
 
-;;;Default value: FALSE
+;;; --- grid-view-min-columns --------------------------------------------------
 
-;;;The “factory” property
-;;;  “factory”                  GtkListItemFactory *
-;;;Factory for populating list items
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "min-columns" 'grid-view) t)
+ "The @code{min-columns} property of type @code{:uint} (Read / Write) @br{}
+  Minimum number of columns per row. @br{}
+  Allowed values: >= 1 @br{}
+  Default value: 1")
 
-;;;Owner: GtkGridView
+#+liber-documentation
+(setf (liber:alias-for-function 'grid-view-min-columns)
+      "Accessor"
+      (documentation 'grid-view-min-columns 'function)
+ "@version{#2023-9-6}
+  @syntax[]{(gtk:grid-view-max-colums object) => min}
+  @syntax[]{(setf (gtk:grid-view-min-columns object) min)}
+  @argument[object]{a @class{gtk:grid-view} object}
+  @argument[min]{an unsigned integer with the minimum of columns}
+  @begin{short}
+    Accessor of the @slot[gtk:grid-view]{min-columns} slot of the
+    @class{gtk:grid-view} class.
+  @end{short}
+  The @fun{gtk:grid-view-min-columns} function gets the minimum number of
+  columns that the grid will use. The @sym{(setf gtk:grid-view-min-columns)}
+  function sets the minimum number of columns to use. This number must be at
+  least 1. If the @slot[gtk:grid-view]{min-columns} property is smaller than
+  the minimum set via the @fun{gtk:grid-view-max-columns} function, that value
+  is ignored.
+  @see-class{gtk:grid-view}
+  @see-function{gtk:grid-view-max-columns}")
 
-;;;Flags: Read / Write
+;;; --- grid-view-model --------------------------------------------------------
 
-;;;The “max-columns” property
-;;;  “max-columns”              guint
-;;;Maximum number of columns per row
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "model" 'grid-view) t)
+ "The @code{model} property of type @class{gtk:selection-model} (Read / Write)
+  @br{}
+  Model for the items displayed.")
 
-;;;If this number is smaller than GtkGridView:min-columns, that value is used instead.
+#+liber-documentation
+(setf (liber:alias-for-function 'grid-view-model)
+      "Accessor"
+      (documentation 'grid-view-model 'function)
+ "@version{#2023-9-6}
+  @syntax[]{(gtk:grid-view-model object) => model}
+  @syntax[]{(setf (gtk:grid-view-model object) model)}
+  @argument[object]{a @class{gtk:grid-view} object}
+  @argument[model]{a @class{gtk:selection-model} object to use}
+  @begin{short}
+    Accessor of the @slot[gtk:grid-view]{model} slot of the
+    @class{gtk:grid-view} class.
+  @end{short}
+  The @fun{gtk:grid-view-model} function gets the model that is currently used
+  to read the items displayed. The @sym{(setf gtk:grid-view-model)} function
+  sets the model to use. This must be a @class{gtk:selection-model} object.
+  @see-class{gtk:grid-view}
+  @see-class{gtk:selection-model}")
 
-;;;Owner: GtkGridView
+;;; --- grid-view-single-click-activate ----------------------------------------
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "single-click-activate"
+                                               'grid-view) t)
+ "The @code{single-click-activate} property of type @code{:boolean}
+  (Read / Write) @br{}
+  Activate rows on single click and select them on hover. @br{}
+  Default value: @em{false}")
 
-;;;Allowed values: >= 1
+#+liber-documentation
+(setf (liber:alias-for-function 'grid-view-single-click-activate)
+      "Accessor"
+      (documentation 'grid-view-single-click-activate 'function)
+ "@version{#2023-9-9}
+  @syntax[]{(gtk:grid-view-single-click-activate object) => setting}
+  @syntax[]{(setf (gtk:grid-view-single-click-activate object) setting)}
+  @argument[object]{a @class{gtk:grid-view} object}
+  @argument[setting]{@em{true} if rows are activated on single click}
+  @begin{short}
+    Accessor of the @slot[gtk:grid-view]{single-click-activate} slot of the
+    @class{gtk:grid-view} class.
+  @end{short}
+  The @fun{gtk:grid-view-single-click-activate} function returns whether rows
+  will be activated on single click and selected on hover. The
+  @sym{(setf gtk:grid-view-single-click-activate)} function sets whether rows
+  should be activated on single click and selected on hover.
+  @see-class{gtk:grid-view}")
 
-;;;Default value: 7
+;;; --- grid-view-tab-behavior -------------------------------------------------
 
-;;;The “min-columns” property
-;;;  “min-columns”              guint
-;;;Minimum number of columns per row
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "tab-behavior" 'grid-view) t)
+ "The @code{tab-beavior} property of type @symbol{gtk:list-tab-behavior}
+  (Read / Write) @br{}
+  Behavior of the @kbd{Tab} key. @br{}
+  Default value: @code{:all}")
 
-;;;Owner: GtkGridView
-
-;;;Flags: Read / Write
-
-;;;Allowed values: >= 1
-
-;;;Default value: 1
-
-;;;The “model” property
-;;;  “model”                    GtkSelectionModel *
-;;;Model for the items displayed
-
-;;;Owner: GtkGridView
-
-;;;Flags: Read / Write
-
-;;;The “single-click-activate” property
-;;;  “single-click-activate”    gboolean
-;;;Activate rows on single click and select them on hover
-
-;;;Owner: GtkGridView
-
-;;;Flags: Read / Write
-
-;;;Default value: FALSE
-
-;;;Signal Details
-;;;The “activate” signal
-;;;void
-;;;user_function (GtkGridView *self,
-;;;               guint        position,
-;;;               gpointer     user_data)
-;;;The ::activate signal is emitted when a cell has been activated by the user, usually via activating the GtkGridView|list.activate-item action.
-
-;;;This allows for a convenient way to handle activation in a gridview. See GtkListItem:activatable for details on how to use this signal.
-
-;;;Parameters
-;;;self
-
-;;;The GtkGridView
-
-;;;position
-
-;;;position of item to activate
-
-;;;user_data
-
-;;;user data set when the signal handler was connected.
-
-;;;Flags: Run Last
-
-;;;Action Details
-;;;The “list.activate-item” action
-;;;Activates the item given in position by emitting the GtkGridView::activate signal.
-
-;;;Parameter type: u
-
-;;;Parameters
-;;;position
-
-;;;position of item to activate
-
-;;;See Also
-;;;GtkSelectionModel, GtkListView, GtkColumnView
-
-
-;;;Functions
-;;;gtk_grid_view_new ()
-;;;GtkWidget *
-;;;gtk_grid_view_new (GtkSelectionModel *model,
-;;;                   GtkListItemFactory *factory);
-;;;Creates a new GtkGridView that uses the given factory for mapping items to widgets.
-
-;;;The function takes ownership of the arguments, so you can write code like
+;;; ----------------------------------------------------------------------------
+;;; gtk_grid_view_new ()
+;;;
+;;; GtkWidget *
+;;; gtk_grid_view_new (GtkSelectionModel *model,
+;;;                    GtkListItemFactory *factory);
+;;;
+;;; Creates a new GtkGridView that uses the given factory for mapping items to
+;;; widgets.
+;;;
+;;; The function takes ownership of the arguments, so you can write code like
+;;;
 ;;;  grid_view = gtk_grid_view_new (create_model(),
 ;;;    gtk_builder_list_item_factory_new_from_resource ("/resource.ui"));
-
-;;;Parameters
-;;;model
-
-;;;the model to use, or NULL.
-
-;;;[allow-none][transfer full]
-;;;factory
-
-;;;The factory to populate items with, or NULL.
-
-;;;[allow-none][transfer full]
-;;;Returns
-;;;a new GtkGridView using the given model and factory
-
-;;;gtk_grid_view_set_model ()
-;;;void
-;;;gtk_grid_view_set_model (GtkGridView *self,
-;;;                         GtkSelectionModel *model);
-;;;Sets the GtkSelectionModel to use for
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;model
-
-;;;the model to use or NULL for none.
-
-;;;[allow-none][transfer none]
-;;;gtk_grid_view_get_model ()
-;;;GtkSelectionModel *
-;;;gtk_grid_view_get_model (GtkGridView *self);
-;;;Gets the model that's currently used to read the items displayed.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;Returns
-;;;The model in use.
-
-;;;[nullable][transfer none]
-
-;;;gtk_grid_view_set_max_columns ()
-;;;void
-;;;gtk_grid_view_set_max_columns (GtkGridView *self,
-;;;                               guint max_columns);
-;;;Sets the maximum number of columns to use. This number must be at least 1.
-
-;;;If max_columns is smaller than the minimum set via gtk_grid_view_set_min_columns(), that value is used instead.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;max_columns
-
-;;;The maximum number of columns
-
-;;;gtk_grid_view_get_max_columns ()
-;;;guint
-;;;gtk_grid_view_get_max_columns (GtkGridView *self);
-;;;Gets the maximum number of columns that the grid will use.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;Returns
-;;;The maximum number of columns
-
-;;;gtk_grid_view_set_min_columns ()
-;;;void
-;;;gtk_grid_view_set_min_columns (GtkGridView *self,
-;;;                               guint min_columns);
-;;;Sets the minimum number of columns to use. This number must be at least 1.
-
-;;;If min_columns is smaller than the minimum set via gtk_grid_view_set_max_columns(), that value is ignored.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;min_columns
-
-;;;The minimum number of columns
-
-;;;gtk_grid_view_get_min_columns ()
-;;;guint
-;;;gtk_grid_view_get_min_columns (GtkGridView *self);
-;;;Gets the minimum number of columns that the grid will use.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;Returns
-;;;The minimum number of columns
-
-;;;gtk_grid_view_set_single_click_activate ()
-;;;void
-;;;gtk_grid_view_set_single_click_activate
-;;;                               (GtkGridView *self,
-;;;                                gboolean single_click_activate);
-;;;Sets whether items should be activated on single click and selected on hover.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;single_click_activate
-
-;;;TRUE to activate items on single click
-
-;;;gtk_grid_view_get_single_click_activate ()
-;;;gboolean
-;;;gtk_grid_view_get_single_click_activate
-;;;                               (GtkGridView *self);
-;;;Returns whether items will be activated on single click and selected on hover.
-
-;;;Parameters
-;;;self
-
-;;;a GtkListView
-
-;;;Returns
-;;;TRUE if items are activated on single click
-
-;;;gtk_grid_view_set_enable_rubberband ()
-;;;void
-;;;gtk_grid_view_set_enable_rubberband (GtkGridView *self,
-;;;                                     gboolean enable_rubberband);
-;;;Sets whether selections can be changed by dragging with the mouse.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;enable_rubberband
-
-;;;TRUE to enable rubberband selection
-
-;;;gtk_grid_view_get_enable_rubberband ()
-;;;gboolean
-;;;gtk_grid_view_get_enable_rubberband (GtkGridView *self);
-;;;Returns whether rows can be selected by dragging with the mouse.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;Returns
-;;;TRUE if rubberband selection is enabled
-
-;;;gtk_grid_view_set_factory ()
-;;;void
-;;;gtk_grid_view_set_factory (GtkGridView *self,
-;;;                           GtkListItemFactory *factory);
-;;;Sets the GtkListItemFactory to use for populating list items.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;factory
-
-;;;the factory to use or NULL for none.
-
-;;;[allow-none][transfer none]
-;;;gtk_grid_view_get_factory ()
-;;;GtkListItemFactory *
-;;;gtk_grid_view_get_factory (GtkGridView *self);
-;;;Gets the factory that's currently used to populate list items.
-
-;;;Parameters
-;;;self
-
-;;;a GtkGridView
-
-;;;Returns
-;;;The factory in use.
-
-;;;[nullable][transfer none]
-
+;;;
+;;; model :
+;;;     the model to use, or NULL.
+;;;
+;;; factory :
+;;;     The factory to populate items with, or NULL.
+;;;
+;;; Returns :
+;;;     a new GtkGridView using the given model and factory
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline grid-view-new))
+
+(defun grid-view-new (model factory)
+  (make-instance 'grid-view
+                 :model model
+                 :factory factory))
+
+(export 'grid-view-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_grid_view_scroll_to
+;;;
+;;; Scrolls to the item at the given position and performs the actions
+;;; specified in flags.
+;;;
+;;; Since 4.12
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-12
+(cffi:defcfun ("gtk_list_view_scroll_to" list-view-scroll-to) :void
+  (gridview (g:object grid-view))
+  (pos :uint)
+  (flags list-scroll-flags)
+  (scroll (g:boxed scroll-info)))
+
+#+gtk-4-12
+(export 'grid-view-scroll-to)
 
 ;;; --- End of file gtk4.grid-view.lisp ----------------------------------------

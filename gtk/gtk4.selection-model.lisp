@@ -2,7 +2,7 @@
 ;;; gtk4.selection-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -39,6 +39,7 @@
 ;;;
 ;;;     gtk_selection_model_is_selected
 ;;;     gtk_selection_model_get_selection
+;;;     gtk_selection_model_set_selection
 ;;;     gtk_selection_model_get_selection_in_range
 ;;;     gtk_selection_model_select_item
 ;;;     gtk_selection_model_unselect_item
@@ -46,7 +47,6 @@
 ;;;     gtk_selection_model_unselect_range
 ;;;     gtk_selection_model_select_all
 ;;;     gtk_selection_model_unselect_all
-;;;     gtk_selection_model_set_selection
 ;;;     gtk_selection_model_selection_changed
 ;;;
 ;;; Signals
@@ -178,6 +178,56 @@ lambda (model position n-items)    :run-last
 ;;;     a GtkBitset containing all the values currently selected in model . If
 ;;;     no items are selected, the bitset is empty. The bitset must not be
 ;;;     modified.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_selection_model_set_selection ()
+;;;
+;;; gboolean
+;;; gtk_selection_model_set_selection (GtkSelectionModel *model,
+;;;                                    GtkBitset *selected,
+;;;                                    GtkBitset *mask);
+;;;
+;;; This is the most advanced selection updating method that allows the most
+;;; fine-grained control over selection changes. If you can, you should try the
+;;; simpler versions, as implementations are more likely to implement support
+;;; for those.
+;;;
+;;; Requests that the selection state of all positions set in mask be updated
+;;; to the respective value in the selected bitmask.
+;;;
+;;; In pseudocode, it would look something like this:
+;;;
+;;; for (i = 0; i < n_items; i++)
+;;;   {
+;;;     // don't change values not in the mask
+;;;     if (!gtk_bitset_contains (mask, i))
+;;;       continue;
+;;;
+;;;     if (gtk_bitset_contains (selected, i))
+;;;       select_item (i);
+;;;     else
+;;;       unselect_item (i);
+;;;   }
+;;;
+;;; gtk_selection_model_selection_changed (model, first_changed_item,
+;;;                                               n_changed_items);
+;;;
+;;; ask and selected must not be modified. They may refer to the same bitset,
+;;; which would mean that every item in the set should be selected.
+;;;
+;;; model :
+;;;     a GtkSelectionModel
+;;;
+;;; selected :
+;;;     bitmask specifying if items should be selected or unselected
+;;;
+;;; mask :
+;;;     bitmask specifying which items should be updated
+;;;
+;;; Returns :
+;;;     TRUE if this action was supported and no fallback should be tried. This
+;;;     does not mean that all items were updated according to the inputs.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -337,56 +387,6 @@ lambda (model position n-items)    :run-last
 ;;; Returns :
 ;;;     TRUE if this action was supported and no fallback should be tried. This
 ;;;     does not mean that all items are now unselected.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_set_selection ()
-;;;
-;;; gboolean
-;;; gtk_selection_model_set_selection (GtkSelectionModel *model,
-;;;                                    GtkBitset *selected,
-;;;                                    GtkBitset *mask);
-;;;
-;;; This is the most advanced selection updating method that allows the most
-;;; fine-grained control over selection changes. If you can, you should try the
-;;; simpler versions, as implementations are more likely to implement support
-;;; for those.
-;;;
-;;; Requests that the selection state of all positions set in mask be updated
-;;; to the respective value in the selected bitmask.
-;;;
-;;; In pseudocode, it would look something like this:
-;;;
-;;; for (i = 0; i < n_items; i++)
-;;;   {
-;;;     // don't change values not in the mask
-;;;     if (!gtk_bitset_contains (mask, i))
-;;;       continue;
-;;;
-;;;     if (gtk_bitset_contains (selected, i))
-;;;       select_item (i);
-;;;     else
-;;;       unselect_item (i);
-;;;   }
-;;;
-;;; gtk_selection_model_selection_changed (model, first_changed_item,
-;;;                                               n_changed_items);
-;;;
-;;; ask and selected must not be modified. They may refer to the same bitset,
-;;; which would mean that every item in the set should be selected.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; selected :
-;;;     bitmask specifying if items should be selected or unselected
-;;;
-;;; mask :
-;;;     bitmask specifying which items should be updated
-;;;
-;;; Returns :
-;;;     TRUE if this action was supported and no fallback should be tried. This
-;;;     does not mean that all items were updated according to the inputs.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------

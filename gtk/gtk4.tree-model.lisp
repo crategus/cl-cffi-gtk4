@@ -2,7 +2,7 @@
 ;;; gtk4.tree-model.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -44,11 +44,10 @@
 ;;;     GtkTreeModelForeachFunc
 ;;;
 ;;;     gtk_tree_path_new
-;;;     gtk_tree_path_new_from_string
+;;;     gtk_tree_path_new_first
 ;;;     gtk_tree_path_new_from_indices
 ;;;     gtk_tree_path_new_from_indicesv
-;;;     gtk_tree_path_to_string
-;;;     gtk_tree_path_new_first
+;;;     gtk_tree_path_new_from_string
 ;;;     gtk_tree_path_append_index
 ;;;     gtk_tree_path_prepend_index
 ;;;     gtk_tree_path_get_depth
@@ -63,6 +62,7 @@
 ;;;     gtk_tree_path_down
 ;;;     gtk_tree_path_is_ancestor
 ;;;     gtk_tree_path_is_descendant
+;;;     gtk_tree_path_to_string
 ;;;
 ;;;     gtk_tree_row_reference_new
 ;;;     gtk_tree_row_reference_new_proxy
@@ -78,6 +78,7 @@
 ;;;     gtk_tree_iter_copy
 ;;;     gtk_tree_iter_free
 ;;;
+;;;     gtk_tree_model_filter_new
 ;;;     gtk_tree_model_get_flags
 ;;;     gtk_tree_model_get_n_columns
 ;;;     gtk_tree_model_get_column_type
@@ -195,8 +196,8 @@
       (documentation 'tree-iter 'type)
  "@version{#2021-3-3}
   @begin{short}
-    The @sym{gtk:tree-iter} structure is the primary structure for accessing a
-    @class{gtk:tree-model} object. Models are expected to put a unique integer
+    The @class{gtk:tree-iter} structure is the primary structure for accessing
+    a @class{gtk:tree-model} object. Models are expected to put a unique integer
     in the @arg{stamp} member, and put model specific data in the three
     @arg{user-data} members.
   @end{short}
@@ -215,6 +216,10 @@
     @entry[user-data-2]{Model specific data.}
     @entry[user-data-3]{Model specific data.}
   @end{table}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-iter} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}")
 
@@ -232,13 +237,18 @@
 (setf (liber:alias-for-class 'tree-path)
       "GBoxed"
       (documentation 'tree-path 'type)
- "@version{#2023-1-27}
+ "@version{#2023-9-5}
   @short{No description available.}
   @begin{pre}
 (glib:define-g-boxed-opaque tree-path \"GtkTreePath\"
   :type-initializer \"gtk_tree_path_get_type\"
   :alloc (%tree-path-new))
   @end{pre}
+  @see-constructor{gtk:tree-path-new}
+  @see-constructor{gtk:tree-path-new-first}
+  @see-constructor{gtk:tree-path-new-from-indices}
+  @see-constructor{gtk:tree-path-new-from-indicesv}
+  @see-constructor{gtk:tree-path-new-from-string}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}")
 
@@ -566,28 +576,19 @@ lambda (model path iter new-order)    :run-first
 (export 'tree-path-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_path_new_from_string
+;;; gtk_tree_path_new_first
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_path_new_from_string" tree-path-new-from-string)
+(cffi:defcfun ("gtk_tree_path_new_first" tree-path-new-first)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{2023-1-27}
-  @argument[pathstr]{a string representation of a path}
-  @return{A newly created @class{gtk:tree-path} instance, or @code{nil}.}
-  @short{Creates a tree path initialized to @arg{pathstr}.}
-  The @arg{pathstr} argument is expected to be a colon separated list of
-  numbers. For example, the string \"10:4:0\" would create a path of depth 3
-  pointing to the 11th child of the root node, the 5th child of that 11th child,
-  and the 1st child of that 5th child. If an invalid path string is passed in,
-  @code{nil} is returned.
-  @see-class{gtk:tree-path}
-  @see-function{gtk:tree-path-new}
-  @see-function{gtk:tree-path-new-from-indices}
-  @see-function{gtk:tree-path-to-string}"
-  (pathstr :string))
+  @return{A new @class{gtk:tree-path} instance.}
+  @short{Creates a new tree path.}
+  The string representation of this tree path is \"0\".
+  @see-class{gtk:tree-path}")
 
-(export 'tree-path-new-from-string)
+(export 'tree-path-new-first)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_path_new_from_indices
@@ -627,37 +628,28 @@ lambda (model path iter new-order)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_path_to_string
+;;; gtk_tree_path_new_from_string
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_path_to_string" tree-path-to-string) :string
- #+liber-documentation
- "@version{2021-3-4}
-  @argument[path]{a @class{gtk:tree-path} instance}
-  @return{A string with the representation of the tree path.}
-  @short{Generates a string representation of the tree path.}
-  This string is a ':' separated list of numbers. For example, \"4:10:0:3\"
-  would be an acceptable return value for this string.
-  @see-class{gtk:tree-path}
-  @see-function{gtk:tree-path-from-string}"
-  (path (g:boxed tree-path)))
-
-(export 'tree-path-to-string)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_tree_path_new_first
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_tree_path_new_first" tree-path-new-first)
+(cffi:defcfun ("gtk_tree_path_new_from_string" tree-path-new-from-string)
     (g:boxed tree-path :return)
  #+liber-documentation
  "@version{2023-1-27}
-  @return{A new @class{gtk:tree-path} instance.}
-  @short{Creates a new tree path.}
-  The string representation of this tree path is \"0\".
-  @see-class{gtk:tree-path}")
+  @argument[pathstr]{a string representation of a path}
+  @return{A newly created @class{gtk:tree-path} instance, or @code{nil}.}
+  @short{Creates a tree path initialized to @arg{pathstr}.}
+  The @arg{pathstr} argument is expected to be a colon separated list of
+  numbers. For example, the string \"10:4:0\" would create a path of depth 3
+  pointing to the 11th child of the root node, the 5th child of that 11th child,
+  and the 1st child of that 5th child. If an invalid path string is passed in,
+  @code{nil} is returned.
+  @see-class{gtk:tree-path}
+  @see-function{gtk:tree-path-new}
+  @see-function{gtk:tree-path-new-from-indices}
+  @see-function{gtk:tree-path-to-string}"
+  (pathstr :string))
 
-(export 'tree-path-new-first)
+(export 'tree-path-new-from-string)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_path_append_index
@@ -951,6 +943,24 @@ lambda (model path iter new-order)    :run-first
 (export 'tree-path-is-descendant)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_tree_path_to_string
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_tree_path_to_string" tree-path-to-string) :string
+ #+liber-documentation
+ "@version{2021-3-4}
+  @argument[path]{a @class{gtk:tree-path} instance}
+  @return{A string with the representation of the tree path.}
+  @short{Generates a string representation of the tree path.}
+  This string is a ':' separated list of numbers. For example, \"4:10:0:3\"
+  would be an acceptable return value for this string.
+  @see-class{gtk:tree-path}
+  @see-function{gtk:tree-path-from-string}"
+  (path (g:boxed tree-path)))
+
+(export 'tree-path-to-string)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_row_reference_new
 ;;; ----------------------------------------------------------------------------
 
@@ -1187,6 +1197,33 @@ lambda (model path iter new-order)    :run-first
 ;;; iter :
 ;;;     a dynamically allocated tree iterator
 ;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_tree_model_filter_new ()
+;;;
+;;; GtkTreeModel*
+;;; gtk_tree_model_filter_new (GtkTreeModel* child_model,
+;;;                            GtkTreePath* root)
+;;;
+;;; Creates a new GtkTreeModel, with child_model as the child_model and root as
+;;; the virtual root.
+;;;
+;;; Deprecated since 4.10
+;;; Please do not use it in newly written code.
+;;;
+;;; root :
+;;;     A GtkTreePath, the argument can be NULL.
+;;;
+;;; Return :
+;;;     A new GtkTreeModel.
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_tree_model_filter-new" tree-model-filter-new)
+    (g:object tree-model)
+  (model (g:object tree-model))
+  (root (g:boxed tree-path)))
+
+(export 'tree-model-filter-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_model_get_flags -> tree-model-flags

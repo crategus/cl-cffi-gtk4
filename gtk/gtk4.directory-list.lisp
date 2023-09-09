@@ -2,7 +2,7 @@
 ;;; gtk4.directory-list.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,9 +35,8 @@
 ;;;
 ;;;     GtkDirectoryList
 ;;;
-;;; Functions
+;;; Accessors
 ;;;
-;;;     gtk_directory_list_new
 ;;;     gtk_directory_list_get_attributes
 ;;;     gtk_directory_list_set_attributes
 ;;;     gtk_directory_list_get_file
@@ -46,8 +45,12 @@
 ;;;     gtk_directory_list_set_io_priority
 ;;;     gtk_directory_list_get_monitored
 ;;;     gtk_directory_list_set_monitored
-;;;     gtk_directory_list_is_loading
 ;;;     gtk_directory_list_get_error
+;;;
+;;; Functions
+;;;
+;;;     gtk_directory_list_new
+;;;     gtk_directory_list_is_loading
 ;;;
 ;;; Properties
 ;;;
@@ -108,265 +111,328 @@
     directory-list-n-items
     "n-items" "guint" t nil)))
 
-
-
-;;;Property Details
-;;;The “attributes” property
-;;;  “attributes”               char *
-;;;The attributes to query
-
-;;;Owner: GtkDirectoryList
-
-;;;Flags: Read / Write
-
-;;;Default value: NULL
-
-;;;The “error” property
-;;;  “error”                    GError *
-;;;Error encountered while loading files
-
-;;;Owner: GtkDirectoryList
-
-;;;Flags: Read
-
-;;;The “file” property
-;;;  “file”                     GFile *
-;;;File to query
-
-;;;Owner: GtkDirectoryList
-
-;;;Flags: Read / Write
-
-;;;The “io-priority” property
-;;;  “io-priority”              int
-;;;Priority used when loading
-
-;;;Owner: GtkDirectoryList
-
-;;;Flags: Read / Write
-
-;;;Allowed values: >= -2147483647
-
-;;;Default value: 0
-
-;;;The “loading” property
-;;;  “loading”                  gboolean
-;;;TRUE if files are being loaded
-
-;;;Owner: GtkDirectoryList
-
-;;;Flags: Read
-
-;;;Default value: FALSE
-
-;;;The “monitored” property
-;;;  “monitored”                gboolean
-;;;TRUE if the directory is monitored for changed
-
-;;;Owner: GtkDirectoryList
-
-;;;Flags: Read / Write
-
-;;;Default value: TRUE
-
-;;;See Also
-;;;GListModel, g_file_enumerate_children()
-
-
-
-;;;Description
-;;;GtkDirectoryList is a list model that wraps g_file_enumerate_children_async(). It presents a GListModel and fills it asynchronously with the GFileInfos returned from that function.
-
-;;;Enumeration will start automatically when a the “file” property is set.
-
-;;;While the GtkDirectoryList is being filled, the “loading” property will be set to TRUE. You can listen to that property if you want to show information like a GtkSpinner or a "Loading..." text.
-
-;;;If loading fails at any point, the “error” property will be set to give more indication about the failure.
-
-;;;The GFileInfos returned from a GtkDirectoryList have the "standard::file" attribute set to the GFile they refer to. This way you can get at the file that is referred to in the same way you would via g_file_enumerator_get_child(). This means you do not need access to the GtkDirectoryList but can access the GFile directly from the GFileInfo when operating with a GtkListView or similar.
-
-;;;Functions
-;;;gtk_directory_list_new ()
-;;;GtkDirectoryList *
-;;;gtk_directory_list_new (const char *attributes,
-;;;                        GFile *file);
-;;;Creates a new GtkDirectoryList querying the given file with the given attributes .
-
-;;;Parameters
-;;;file
-
-;;;The file to query.
-
-;;;[allow-none]
-;;;attributes
-
-;;;The attributes to query with.
-
-;;;[allow-none]
-;;;Returns
-;;;a new GtkDirectoryList
-
-;;;gtk_directory_list_get_attributes ()
-;;;const char *
-;;;gtk_directory_list_get_attributes (GtkDirectoryList *self);
-;;;Gets the attributes queried on the children.
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;Returns
-;;;The queried attributes.
-
-;;;[nullable][transfer none]
-
-;;;gtk_directory_list_set_attributes ()
-;;;void
-;;;gtk_directory_list_set_attributes (GtkDirectoryList *self,
-;;;                                   const char *attributes);
-;;;Sets the attributes to be enumerated and starts the enumeration.
-
-;;;If attributes is NULL, no attributes will be queried, but a list of GFileInfos will still be created.
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;attributes
-
-;;;the attributes to enumerate.
-
-;;;[allow-none]
-;;;gtk_directory_list_get_file ()
-;;;GFile *
-;;;gtk_directory_list_get_file (GtkDirectoryList *self);
-;;;Gets the file whose children are currently enumerated.
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;Returns
-;;;The file whose children are enumerated.
-
-;;;[nullable][transfer none]
-
-;;;gtk_directory_list_set_file ()
-;;;void
-;;;gtk_directory_list_set_file (GtkDirectoryList *self,
-;;;                             GFile *file);
-;;;Sets the file to be enumerated and starts the enumeration.
-
-;;;If file is NULL, the result will be an empty list.
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;file
-
-;;;the GFile to be enumerated.
-
-;;;[allow-none]
-;;;gtk_directory_list_get_io_priority ()
-;;;int
-;;;gtk_directory_list_get_io_priority (GtkDirectoryList *self);
-;;;Gets the IO priority set via gtk_directory_list_set_io_priority().
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;Returns
-;;;The IO priority.
-
-;;;gtk_directory_list_set_io_priority ()
-;;;void
-;;;gtk_directory_list_set_io_priority (GtkDirectoryList *self,
-;;;                                    int io_priority);
-;;;Sets the IO priority to use while loading directories.
-
-;;;Setting the priority while self is loading will reprioritize the ongoing load as soon as possible.
-
-;;;The default IO priority is G_PRIORITY_DEFAULT, which is higher than the GTK redraw priority. If you are loading a lot of directories in parallel, lowering it to something like G_PRIORITY_DEFAULT_IDLE may increase responsiveness.
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;io_priority
-
-;;;IO priority to use
-
-;;;gtk_directory_list_get_monitored ()
-;;;gboolean
-;;;gtk_directory_list_get_monitored (GtkDirectoryList *self);
-;;;Returns whether the directory list is monitoring the directory for changes.
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;Returns
-;;;TRUE if the directory is monitored
-
-;;;gtk_directory_list_set_monitored ()
-;;;void
-;;;gtk_directory_list_set_monitored (GtkDirectoryList *self,
-;;;                                  gboolean monitored);
-;;;Sets whether the directory list will monitor the directory for changes. If monitoring is enabled, the “items-changed” signal will be emitted when the directory contents change.
-
-;;;When monitoring is turned on after the initial creation of the directory list, the directory is reloaded to avoid missing files that appeared between the initial loading and when monitoring was turned on.
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;monitored
-
-;;;TRUE to monitor the directory for changes
-
-;;;gtk_directory_list_is_loading ()
-;;;gboolean
-;;;gtk_directory_list_is_loading (GtkDirectoryList *self);
-;;;Returns TRUE if the children enumeration is currently in progress.
-
-;;;Files will be added to self from time to time while loading is going on. The order in which are added is undefined and may change in between runs.
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;Returns
-;;;TRUE if self is loading
-
-;;;gtk_directory_list_get_error ()
-;;;const GError *
-;;;gtk_directory_list_get_error (GtkDirectoryList *self);
-;;;Gets the loading error, if any.
-
-;;;If an error occurs during the loading process, the loading process will finish and this property allows querying the error that happened. This error will persist until a file is loaded again.
-
-;;;An error being set does not mean that no files were loaded, and all successfully queried files will remain in the list.
-
-;;;Parameters
-;;;self
-
-;;;a GtkDirectoryList
-
-;;;Returns
-;;;The loading error or NULL if loading finished successfully.
-
-;;;[nullable][transfer none]
-
+#+liber-documentation
+(setf (documentation 'directory-list 'type)
+ "@version{2023-9-7}
+  @begin{short}
+    The @class{gtk:directory-list} class is a list model that wraps the
+    requested information from the @fun{g:file-enumerate-children-async}
+    function.
+  @end{short}
+  It presents a @class{g:list-model} object and fills it asynchronously with
+  the @class{g:file-info} objects returned from that function. Enumeration will
+  start automatically when a the @slot[gtk:directory-list]{file} property is
+  set.
+
+  While the @class{gtk:directory-list} object is being filled, the
+  @slot[gtk:directory-list]{loading} property will be set to @em{true}. You can
+  listen to that property if you want to show information like a
+  @class{gtk:spinner} widget or a \"Loading...\" text.
+
+  If loading fails at any point, the @slot[directory-list]{error} property will
+  be set to give more indication about the failure.
+
+  The @class{g:file-info} objects returned from a @class{gtk:directory-list}
+  object have the \"standard::file\" attribute set to the @class{g:file} object
+  they refer to. This way you can get at the file that is referred to in the
+  same way you would via the @fun{g:file-enumerator-child} function. This means
+  you do not need access to the @class{gtk:directory-list} object but can access
+  the @class{g:file} object directly from the @class{g:file-info} object when
+  operating with a @class{gtk:list-view} widget or similar.
+  @see-class{g:list-model}
+  @see-function{g:file-enumerate-children}")
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;; --- directory-list-attributes ----------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "attributes" 'directory-list) t)
+ "The @code{attributes} property of type @code{:string} (Read / Write) @br{}
+  The attributes to query. @br{}
+  Default value: @code{nil}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'directory-list-attributes)
+      "Accessor"
+      (documentation 'directory-list-attributes 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:directory-list-attributes object) => attributes}
+  @syntax[]{(setf gtk:directory-list-attributes object) attributes)}
+  @argument[object]{a @class{gtk:directory-list} object}
+  @argument[attributes]{a string with the attributes}
+  @begin{short}
+    Accessor of the @slot[gtk:directory]{attributes} slot of the
+    @class{gtk:directory-list} class.
+  @end{short}
+  The @fun{gtk:directory-list-attributes} function gets the attributes queried
+  on the children. The @sym{(setf gtk:directory-list-attributes)} function sets
+  the attributes to be enumerated and starts the enumeration.
+
+  If @arg{attributes} is @code{nil}, no attributes will be queried, but a list
+  of @class{g:file-info} objects will still be created.
+  @see-class{gtk:directory-list}
+  @see-class{g:file-info}")
+
+;;; --- directory-list-error ---------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "error" 'directory-list) t)
+ "The @code{error} property of type @class{g:error} (Read) @br{}
+  Error encountered while loading files.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'directory-list-error)
+      "Accessor"
+      (documentation 'directory-list-error 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:directory-list-error object) => error}
+  @argument[object]{a @class{gtk:directory-list} object}
+  @argument[error]{a @class{g:error} instance with the loading error or
+  @code{nil} if loading finished successfully}
+  @begin{short}
+    Accessor of the @slot[gtk:directory-list]{error} slot of the
+    @class{gtk:directory-list} class.
+  @end{short}
+  The @fun{gtk:directory-list-error} function gets the loading error, if any.
+
+  If an error occurs during the loading process, the loading process will finish
+  and this property allows querying the error that happened. This error will
+  persist until a file is loaded again. An error being set does not mean that
+  no files were loaded, and all successfully queried files will remain in the
+  list.
+  @see-class{gtk:directory-list}
+  @see-class{g:error}")
+
+;;; --- directory-list-file ----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "file" 'directory-list) t)
+ "The @code{file} property of type @class{g:file} (Read / Write) @br{}
+  File to query.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'directory-list-file)
+      "Accessor"
+      (documentation 'directory-list-file 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:directory-list-file object) => file}
+  @syntax[]{(setf gtk:directory-list-file object) file)}
+  @argument[object]{a @class{gtk:directory-list} object}
+  @argument[file]{a @class{g:file} object to be enumerated}
+  @begin{short}
+    Accessor of the @slot[gtk:directory]{file} slot of the
+    @class{gtk:directory-list} class.
+  @end{short}
+  The @fun{gtk:directory-list-file} function gets the file whose children are
+  currently enumerated. The @sym{(setf gtk:directory-list-file)} function sets
+  the file to be enumerated and starts the enumeration. If @arg{file} is
+  @code{nil}, the result will be an empty list.
+  @see-class{gtk:directory-list}
+  @see-class{g:file}")
+
+;;; --- directory-list-io-priortiy ---------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "io-priority" 'directory-list) t)
+ "The @code{io-priority} property of type @code{:int} (Read / Write) @br{}
+  Priority used when loading. @br{}
+  Allowed values: >= -2147483647 @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'directory-list-io-priority)
+      "Accessor"
+      (documentation 'directory-list-io-priority 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:directory-list-io-priority object) => priority}
+  @syntax[]{(setf gtk:directory-list-io-priority object) priority)}
+  @argument[object]{a @class{gtk:directory-list} object}
+  @argument[priority]{an integer with the IO priority to use}
+  @begin{short}
+    Accessor of the @slot[gtk:directory]{io-priority} slot of the
+    @class{gtk:directory-list} class.
+  @end{short}
+  The @fun{gtk:directory-list-io-priority} function gets the IO priority. The
+  @sym{(setf gtk:directory-list-io-priority)} function sets the IO priority to
+  use while loading files.
+
+  Setting the priority while @arg{object} is loading will reprioritize the
+  ongoing load as soon as possible. The default IO priority is
+  @variable{g:+g-priority-default+}, which is higher than the GTK redraw
+  priority. If you are loading a lot of directories in parallel, lowering it to
+  something like the @variable{g:+g-priority-default-idle+} value may increase
+  responsiveness.
+  @see-class{gtk:directory-list}
+  @see-variable{g:+g-priority-default}")
+
+;;; --- directory-list-item-type ------------------------------------------------
+
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "item-type" 'directory-list) t)
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
+  The type of items. Since 4.8")
+
+#+gtk-4-8
+(declaim (inline directory-list-item-type))
+
+#+gtk-4-8
+(defun directory-list-item-type (object)
+  (g:list-model-item-type object))
+
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'directory-list-item-type)
+      "Accessor"
+      (documentation 'directory-list-item-type 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:directory-list-item-type object) => gtype}
+  @argument[object]{a @class{gtk:directory-list} object}
+  @argument[gtype]{a @class{g:type-t} type}
+  @begin{short}
+    Accessor of the @slot[gtk:directory]{item-type} slot of the
+    @class{gtk:directory-list} class.
+  @end{short}
+  The type of items contained in the list model. Items must be subclasses of
+  the @class{g:object} class.
+  @begin[Note]{dictionary}
+    This function is equivalent to the @fun{g:list-model-item-type} function.
+  @end{dictionary}
+  @see-class{gtk:directory-list}
+  @see-class{g:type-t}
+  @see-class{g:object}
+  @see-function{g:list-model-item-type}")
+
+;;; --- directory-list-loading -------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "loading" 'directory-list) t)
+ "The @code{loading} property of type @code{:boolean} (Read) @br{}
+  @em{True} if files are being loaded. @br{}
+  Default value: @em{false}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'directory-list-loading)
+      "Accessor"
+      (documentation 'directory-list-loading 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:directory-list-loading object) => loading}
+  @argument[object]{a @class{gtk:directory-list} object}
+  @argument[loading]{@em{true} if files are being loaded}
+  @begin{short}
+    Accessor of the @slot[gtk:directory]{loading} slot of the
+    @class{gtk:directory-list} class.
+  @end{short}
+  @see-class{gtk:directory-list}")
+
+;;; --- directory-list-monitored -----------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "monitored" 'directory-list) t)
+ "The @code{monitored} property of type @code{:boolean} (Read / Write) @br{}
+  @em{True} if the directory is monitored for changed. @br{}
+  Default value: @em{true}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'directory-list-monitored)
+      "Accessor"
+      (documentation 'directory-list-monitored 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:directory-list-monitored object) => monitored}
+  @syntax[]{(setf gtk:directory-list-monitored object) monitored)}
+  @argument[object]{a @class{gtk:directory-list} object}
+  @argument[monitored]{@em{true} to monitor the directory for changes}
+  @begin{short}
+    Accessor of the @slot[gtk:directory]{monitored} slot of the
+    @class{gtk:directory-list} class.
+  @end{short}
+  The @fun{gtk:directory-list-monitored} function returns whether the directory
+  list is monitoring the directory for changes. The
+  @sym{(setf gtk:directory-list-monitored)} function sets whether the directory
+  list will monitor the directory for changes. If monitoring is enabled, the
+  \"items-changed\" signal will be emitted when the directory contents change.
+
+  When monitoring is turned on after the initial creation of the directory list,
+  the directory is reloaded to avoid missing files that appeared between the
+  initial loading and when monitoring was turned on.
+  @see-class{gtk:directory-list}")
+
+;;; --- directory-list-n-items -------------------------------------------------
+
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "n-items" 'directory-list) t)
+ "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
+  The number of items. Since 4.8 @br{}
+  Default value: 0")
+
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'directory-list-n-items)
+      "Accessor"
+      (documentation 'directory-list-n-items 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:directory-list-n-items object) => n-items}
+  @argument[object]{a @class{gtk:directory-list} object}
+  @argument[n-items]{an unsigned integer with the number of items contained in
+    the model}
+  @begin{short}
+    Accessor of the @slot[gtk:directory-list]{n-items} slot of the
+    @class{gtk:directory-list} class.
+  @end{short}
+  @see-class{gtk:directory-list}
+  @see-function{g:list-model-n-items}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_directory_list_new ()
+;;;
+;;; GtkDirectoryList *
+;;; gtk_directory_list_new (const char *attributes,
+;;;                         GFile *file);
+;;;
+;;; Creates a new GtkDirectoryList querying the given file with the given
+;;; attributes .
+;;;
+;;; file :
+;;;     The file to query.
+;;;
+;;; attributes :
+;;;     The attributes to query with.
+;;;
+;;; Returns :
+;;;     a new GtkDirectoryList
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline directory-list-new))
+
+(defun directory-list-new (attributes file)
+  (make-instance 'directory-list
+                 :attributes attributes
+                 :file file))
+
+(export 'directory-list-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_directory_list_is_loading ()
+;;;
+;;; gboolean
+;;; gtk_directory_list_is_loading (GtkDirectoryList *self);
+;;;
+;;; Returns TRUE if the children enumeration is currently in progress.
+;;;
+;;; Files will be added to self from time to time while loading is going on.
+;;; The order in which are added is undefined and may change in between runs.
+;;;
+;;; model :
+;;;     a GtkDirectoryList
+;;;
+;;; Returns :
+;;;     TRUE if self is loading
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_directory_list_is_loading" directory-list-is-loading)
+    :boolean
+  (model (g:object directory-list)))
+
+(export 'directory-list-is-loading)
 
 ;;; --- End of file gtk4.directory-list.lisp -----------------------------------

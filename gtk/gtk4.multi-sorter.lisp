@@ -2,7 +2,7 @@
 ;;; gtk4.multi-sorter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -79,55 +79,155 @@
     multi-sorter-n-items
     "n-items" "guint" t nil)))
 
+#+liber-documentation
+(setf (liber:alias-for-symbol 'sorter-order)
+      "GEnum"
+      (liber:symbol-documentation 'sorter-order)
+ "@version{2023-9-5}
+  @begin{short}
+    The @class{gtk:multi-sorter} object combines multiple sorters by trying
+    them in turn.
+  @end{short}
+  If the first sorter compares two items as equal, the second is tried next,
+  and so on.
+  @see-constructor{gtk:multi-sorter-new}
+  @see-slot{gtk:multi-sorter-item-type}
+  @see-slot{gtk:multi-sorter-n-items}
+  @see-class{gtk:sorter}")
 
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
+;;; --- multi-sorter-item-type -------------------------------------------------
 
-;;;Description
-;;;GtkMultiSorter combines multiple sorters by trying them in turn. If the first sorter compares two items as equal, the second is tried next, and so on.
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "item-type" 'multi-sorter) t)
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
+  The type of items. Since 4.8")
 
-;;;Functions
-;;;gtk_multi_sorter_new ()
-;;;GtkMultiSorter *
-;;;gtk_multi_sorter_new (void);
-;;;Creates a new multi sorter.
+#+gtk-4-8
+(declaim (inline multi-sorter-item-type))
 
-;;;This sorter compares items by trying each of the sorters in turn, until one returns non-zero. In particular, if no sorter has been added to it, it will always compare items as equal.
+#+gtk-4-8
+(defun multi-sorter-item-type (object)
+  (g:list-model-item-type object))
 
-;;;Returns
-;;;a new GtkMultiSorter
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'multi-sorter-item-type)
+      "Accessor"
+      (documentation 'multi-sorter-item-type 'function)
+ "@version{#2023-9-5}
+  @syntax[]{(gtk:multi-sorter-item-type object) => gtype}
+  @argument[object]{a @class{gtk:multi-sorter} object}
+  @argument[gtype]{a @class{g:type-t} type}
+  @begin{short}
+    Accessor of the @slot[gtk:multi-sorter]{item-type} slot of the
+    @class{gtk:multi-sorter} class.
+  @end{short}
+  The type of items contained in the list model. Items must be subclasses of
+  the @class{g:object} class.
+  @begin[Note]{dictionary}
+    This function is equivalent to the @fun{g:list-model-item-type} function.
+  @end{dictionary}
+  @see-class{gtk:multi-sorter}
+  @see-class{g:type-t}
+  @see-class{g:object}
+  @see-function{g:list-model-item-type}")
 
-;;;gtk_multi_sorter_append ()
-;;;void
-;;;gtk_multi_sorter_append (GtkMultiSorter *self,
-;;;                         GtkSorter *sorter);
-;;;Add sorter to self to use for sorting at the end. self will consult all existing sorters before it will sort with the given sorter .
+;;; --- multi-sorter-n-items ---------------------------------------------------
 
-;;;Parameters
-;;;self
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "n-items" 'multi-sorter) t)
+ "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
+  The number of items. Since 4.8 @br{}
+  Default value: 0")
 
-;;;a GtkMultiSorter
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'multi-sorter-n-items)
+      "Accessor"
+      (documentation 'multi-sorter-n-items 'function)
+ "@version{#2023-9-5}
+  @syntax[]{(gtk:multi-sorter-n-items object) => n-items}
+  @argument[object]{a @class{gtk:multi-sorter} object}
+  @argument[n-items]{an unsigned integer with the number of items contained in
+    the model}
+  @begin{short}
+    Accessor of the @slot[gtk:multi-sorter]{n-items} slot of the
+    @class{gtk:multi-sorter} class.
+  @end{short}
+  @see-class{g:multi-sorter}
+  @see-function{g:list-model-n-items}")
 
-;;;sorter
+;;; ----------------------------------------------------------------------------
+;;; gtk_multi_sorter_new ()
+;;;
+;;; GtkMultiSorter *
+;;; gtk_multi_sorter_new (void);
+;;;
+;;; Creates a new multi sorter.
+;;;
+;;; This sorter compares items by trying each of the sorters in turn, until one
+;;; returns non-zero. In particular, if no sorter has been added to it, it will
+;;; always compare items as equal.
+;;;
+;;; Returns :
+;;;     a new GtkMultiSorter
+;;; ----------------------------------------------------------------------------
 
-;;;a sorter to add.
+(declaim (inline multi-sorter-new))
 
-;;;[transfer full]
-;;;gtk_multi_sorter_remove ()
-;;;void
-;;;gtk_multi_sorter_remove (GtkMultiSorter *self,
-;;;                         guint position);
-;;;Removes the sorter at the given position from the list of sorter used by self .
+(defun multi-sorter-new ()
+  (make-instance 'multi-sorter))
 
-;;;If position is larger than the number of sorters, nothing happens.
+(export 'multi-sorter-new)
 
-;;;Parameters
-;;;self
+;;; ----------------------------------------------------------------------------
+;;; gtk_multi_sorter_append ()
+;;;
+;;; void
+;;; gtk_multi_sorter_append (GtkMultiSorter *self,
+;;;                          GtkSorter *sorter);
+;;;
+;;; Add sorter to self to use for sorting at the end. self will consult all
+;;; existing sorters before it will sort with the given sorter .
+;;;
+;;; self :
+;;;     a GtkMultiSorter
+;;;
+;;; sorter :
+;;;     a sorter to add.
+;;; ----------------------------------------------------------------------------
 
-;;;a GtkMultiSorter
+(cffi:defcfun ("gtk_multi_sorter_append" multi-sorter-append) :void
+  (object (g:object multi-sorter))
+  (sorter (g:object sorter)))
 
-;;;position
+(export 'multi-sorter-append)
 
-;;;position of sorter to remove
+;;; ----------------------------------------------------------------------------
+;;; gtk_multi_sorter_remove ()
+;;;
+;;; void
+;;; gtk_multi_sorter_remove (GtkMultiSorter *self,
+;;;                          guint position);
+;;;
+;;; Removes the sorter at the given position from the list of sorter used by
+;;; self .
+;;;
+;;; If position is larger than the number of sorters, nothing happens.
+;;;
+;;; self :
+;;;     a GtkMultiSorter
+;;;
+;;; position :
+;;;     position of sorter to remove
+;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_multi_sorter_remove" multi-sorter-remove) :void
+  (object (g:object multi-sorter))
+  (position :uint))
+
+(export 'multi-sorter-remove)
 
 ;;; --- End of file gtk4.multi-sorter.lisp -------------------------------------

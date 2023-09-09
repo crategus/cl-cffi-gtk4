@@ -2,7 +2,7 @@
 ;;; gtk4.numeric-sorter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,13 +35,16 @@
 ;;;
 ;;;     GtkNumericSorter
 ;;;
-;;; Functions
+;;; Accessors
 ;;;
-;;;     gtk_numeric_sorter_new
 ;;;     gtk_numeric_sorter_get_expression
 ;;;     gtk_numeric_sorter_set_expression
 ;;;     gtk_numeric_sorter_get_sort_order
 ;;;     gtk_numeric_sorter_set_sort_order
+;;;
+;;; Functions
+;;;
+;;;     gtk_numeric_sorter_new
 ;;;
 ;;; Properties
 ;;;
@@ -73,118 +76,109 @@
     numeric-sorter-sort-order
     "sort-order" "GtkSortType" t t)))
 
+#+liber-documentation
+(setf (documentation 'numeric-sorter 'type)
+ "@version{2023-9-5}
+  @begin{short}
+    The @class{gtk:numeric-sorter} object is a @class{gtk:sorter} implementation
+    that compares numbers.
+  @end{short}
+  To obtain the numbers to compare, this sorter evaluates a
+  @class{gtk:expression} instance.
+  @see-constructor{gtk:numeric-sorter-new}
+  @see-slot{gtk:numeric-sorter-expression}
+  @see-slot{gtk:numeric-sorter-sort-order}
+  @see-class{gtk:sorter}
+  @see-class{gtk:expression}")
 
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
+;;; --- numeric-sorter-expression ----------------------------------------------
 
-;;;Property Details
-;;;The “expression” property
-;;;  “expression”               GtkExpression *
-;;;The expression to evaluate on items to get a number to compare with
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "expression" 'numeric-sorter) t)
+ "The @code{expression} property of type @class{gtk:expression} (Read / Write)
+  @br{}
+  The expression to evaluate on items to get a number to compare with.")
 
-;;;[type GtkExpression]
+#+liber-documentation
+(setf (liber:alias-for-function 'numeric-sorter-expression)
+      "Accessor"
+      (documentation 'numeric-sorter-expression 'function)
+ "@version{#2023-9-5}
+  @syntax[]{(gtk:numeric-sorter-expression object) => expression}
+  @syntax[]{(setf (gtk:numeric-sorter-expression object) expression)}
+  @argument[object]{a @class{gtk:numeric-sorter} object}
+  @argument[expression]{a @class{gtk:expression} instance, or @code{nil}}
+  @begin{short}
+    Accessor of the @slot[gtk:numeric-sorter]{expression} slot of the
+    @class{gtk:numeric-sorter} class.
+  @end{short}
+  The @fun{gtk:numeric-sorter-expression} function gets the expression that is
+  evaluated to obtain numbers from items. The
+  @sym{(setf gtk:numeric-sorter-expression)} function sets the expression that
+  is evaluated to obtain numbers from items.
 
-;;;Owner: GtkNumericSorter
+  Unless an expression is set on @arg{object}, the sorter will always compare
+  items as invalid. The expression must have a return type that can be compared
+  numerically, such as @code{:int} or @code{:double}.
+  @see-class{gtk:numeric-sorter}
+  @see-class{gtk:expression}")
 
-;;;Flags: Read / Write
+;;; --- numeric-sorter-sort-order ----------------------------------------------
 
-;;;The “sort-order” property
-;;;  “sort-order”               GtkSortType
-;;;Whether the sorter will sort smaller numbers first
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "sort-order" 'numeric-sorter) t)
+ "The @code{sort-order} property of type @symbol{gtk:sort-type} (Read / Write)
+  @br{}
+  Whether the sorter will sort smaller numbers first. @br{}
+  Default value: @code{:ascending}")
 
-;;;Owner: GtkNumericSorter
+#+liber-documentation
+(setf (liber:alias-for-function 'numeric-sorter-sort-order)
+      "Accessor"
+      (documentation 'numeric-sorter-sort-order 'function)
+ "@version{#2023-9-5}
+  @syntax[]{(gtk:numeric-sorter-sort-order object) => order}
+  @syntax[]{(setf (gtk:numeric-sorter-sort-order object) order)}
+  @argument[object]{a @class{gtk:numeric-sorter} object}
+  @argument[order]{a @symbol{gtk:sort-type} value}
+  @begin{short}
+    Accessor of the @slot[gtk:numeric-sorter]{sort-order} slot of the
+    @class{gtk:numeric-sorter} class.
+  @end{short}
+  The @fun{gtk:numeric-sorter-sort-order} function gets whether this sorter will
+  sort smaller numbers first. The @sym{(setf gtk:numeric-sorter-sort-order)}
+  function sets whether to sort smaller numbers before larger ones.
+  @see-class{gtk:numeric-sorter}
+  @see-symbol{gtk:sort-type}")
 
-;;;Flags: Read / Write
+;;; ----------------------------------------------------------------------------
+;;; gtk_numeric_sorter_new ()
+;;;
+;;; GtkNumericSorter *
+;;; gtk_numeric_sorter_new (GtkExpression *expression);
+;;;
+;;; Creates a new numeric sorter using the given expression .
+;;;
+;;; Smaller numbers will be sorted first. You can call
+;;; gtk_numeric_sorter_set_sort_order() to change this.
+;;;
+;;; expression :
+;;;     The expression to evaluate.
+;;;
+;;; Returns :
+;;;     a new GtkNumericSorter
+;;; ----------------------------------------------------------------------------
 
-;;;Default value: GTK_SORT_ASCENDING
+(declaim (inline numeric-sorter-new))
 
-;;;See Also
-;;;GtkExpression
+(defun numeric-sorter-new (expression)
+  (make-instance 'numeric-sorter
+                 :expression expression))
 
-
-;;;Description
-;;;GtkNumericSorter is a GtkSorter that compares numbers.
-
-;;;To obtain the numbers to compare, this sorter evaluates a GtkExpression.
-
-;;;Functions
-;;;gtk_numeric_sorter_new ()
-;;;GtkNumericSorter *
-;;;gtk_numeric_sorter_new (GtkExpression *expression);
-;;;Creates a new numeric sorter using the given expression .
-
-;;;Smaller numbers will be sorted first. You can call gtk_numeric_sorter_set_sort_order() to change this.
-
-;;;Parameters
-;;;expression
-
-;;;The expression to evaluate.
-
-;;;[transfer full][nullable]
-;;;Returns
-;;;a new GtkNumericSorter
-
-;;;gtk_numeric_sorter_get_expression ()
-;;;GtkExpression *
-;;;gtk_numeric_sorter_get_expression (GtkNumericSorter *self);
-;;;Gets the expression that is evaluated to obtain numbers from items.
-
-;;;Parameters
-;;;self
-
-;;;a GtkNumericSorter
-
-;;;Returns
-;;;a GtkExpression, or NULL.
-
-;;;[transfer none][nullable]
-
-;;;gtk_numeric_sorter_set_expression ()
-;;;void
-;;;gtk_numeric_sorter_set_expression (GtkNumericSorter *self,
-;;;                                   GtkExpression *expression);
-;;;Sets the expression that is evaluated to obtain numbers from items.
-
-;;;Unless an expression is set on self , the sorter will always compare items as invalid.
-
-;;;The expression must have a return type that can be compared numerically, such as G_TYPE_INT or G_TYPE_DOUBLE.
-
-;;;Parameters
-;;;self
-
-;;;a GtkNumericSorter
-
-;;;expression
-
-;;;a GtkExpression, or NULL.
-
-;;;[nullable][transfer none]
-;;;gtk_numeric_sorter_get_sort_order ()
-;;;GtkSortType
-;;;gtk_numeric_sorter_get_sort_order (GtkNumericSorter *self);
-;;;Gets whether this sorter will sort smaller numbers first.
-
-;;;Parameters
-;;;self
-
-;;;a GtkNumericSorter
-
-;;;Returns
-;;;the order of the numbers
-
-;;;gtk_numeric_sorter_set_sort_order ()
-;;;void
-;;;gtk_numeric_sorter_set_sort_order (GtkNumericSorter *self,
-;;;                                   GtkSortType sort_order);
-;;;Sets whether to sort smaller numbers before larger ones.
-
-;;;Parameters
-;;;self
-
-;;;a GtkNumericSorter
-
-;;;sort_order
-
-;;;whether to sort smaller numbers first
-
+(export 'numeric-sorter-new)
 
 ;;; --- End of file gtk4.numeric-sorter.lisp -----------------------------------

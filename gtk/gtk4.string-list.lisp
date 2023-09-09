@@ -2,7 +2,7 @@
 ;;; gtk4.string-list.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -40,7 +40,7 @@
 ;;;
 ;;;     gtk_string_list_new
 ;;;     gtk_string_list_append
-;;;     gtk_string_list_take
+;;;     gtk_string_list_take                               not needed
 ;;;     gtk_string_list_remove
 ;;;     gtk_string_list_splice
 ;;;     gtk_string_list_get_string
@@ -83,6 +83,71 @@
     string-object-string
     "string" "gchararray" t nil)))
 
+#+liber-documentation
+(setf (documentation 'string-object 'type)
+ "@version{2023-9-7}
+  @begin{short}
+    The @class{gtk:string-object} class is the type of items in a
+    @class{gtk:string-list} object.
+  @end{short}
+  A @class{gtk:string-object} object is a wrapper around a string. It has a
+  @slot[gtk:string-object]{string} property.
+  @see-constructor{gtk:string-object-new}
+  @see-slot{gtk:string-object-string}
+  @see-class{gtk:string-list}")
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;; --- string-object-string ---------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "string" 'string-object) t)
+ "The @code{string} property of type @code{:string} (Read) @br{}
+  The string. @br{}
+  Default value: @code{nil}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'string-object-string)
+      "Accessor"
+      (documentation 'string-object-string 'function)
+ "@version{2023-9-7}
+  @syntax[]{(gtk:string-object-string object) => string}
+  @argument[object]{a @class{gtk:string-object} object}
+  @argument[string]{a string}
+  @begin{short}
+    Accessor of the @slot[gtk:string-object]{string} slot of the
+    @class{gtk:string-object} class.
+  @end{short}
+  The @fun{gtk:string-object-string} function returns the string contained in a
+  @class{gtk:string-object} object.
+  @see-class{gtk:string-object}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_string_object_new ()
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline string-object-new))
+
+(cffi:defcfun ("gtk_string_object_new" %string-object-new)
+    (g:object string-object)
+  (string :string))
+
+(defun string-object-new (string)
+ #+liber-documentation
+ "@version{2023-9-7}
+  @argument[string]{a string to wrap, or @code{nil}}
+  @return{A new @class{gtk:string-object} object.}
+  @begin{short}
+    Wraps a string in an object for use with a @class{g:list-model} object.
+  @end{short}
+  @see-class{gtk:string-object}
+  @see-class{g:list-model}"
+  (%string-object-new (if string string (cffi:null-pointer))))
+
+(export 'string-object-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; GtkStringList
 ;;; ----------------------------------------------------------------------------
@@ -90,193 +155,215 @@
 (gobject:define-g-object-class "GtkStringList" string-list
   (:superclass g:object
    :export t
-   :interfaces ()
+   :interfaces ("GListModel"
+                "GtkBuildable")
    :type-initializer "gtk_string_list_get_type")
   (#+gtk-4-10
    (strings
     string-list-strings
     "strings" "GStrv" nil t)))
 
+#+liber-documentation
+(setf (documentation 'string-list 'type)
+ "@version{2023-9-7}
+  @begin{short}
+    The @class{gtk:string-list} class is a list model that wraps an array of
+    strings.
+  @end{short}
+  The objects in the model have a @slot[gtk:string-object]{string} property.
 
-;;;Property Details
-;;;The “string” property
-;;;  “string”                   char *
-;;;String.
+  The @class{gtk:string-list} object is well-suited for any place where you
+  would typically use a string, but need a list model.
 
-;;;Owner: GtkStringObject
+  @subheading{GtkStringList as GtkBuildable}
+  The @class{gtk:string-list} implementation of the @class{gtk:buildable}
+  interface supports adding items directly using the @code{<items>} element and
+  specifying @code{<item>} elements for each item. Each @code{<item>} element
+  supports the regular translation attributes \"translatable\", \"context\" and
+  \"comments\". Here is a UI definition fragment specifying a
+  @class{gtk:string-list} object:
+  @begin{pre}
+<object class=\"GtkStringList\">
+  <items>
+    <item translatable=\"yes\">Factory</item>
+    <item translatable=\"yes\">Home</item>
+    <item translatable=\"yes\">Subway</item>
+  </items>
+</object>
+  @end{pre}
+  @see-constructor{gtk:string-list-new}
+  @see-slot{gtk:string-list-strings}
+  @see-class{gtk:string-object}
+  @see-class{g:list-model}")
 
-;;;Flags: Read
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;Default value: NULL
+;;; --- string-list-strings ----------------------------------------------------
 
-;;;See Also
-;;;GListModel
+#+(and gtk-4-10 liber-documentation)
+(setf (documentation (liber:slot-documentation "strings" 'string-list) t)
+ "The @code{strings} property of type @code{:string} (Write / Construct only)
+  @br{}
+  An array of strings.")
 
+#+(and gtk-4-10 liber-documentation)
+(setf (liber:alias-for-function 'string-list-strings)
+      "Accessor"
+      (documentation 'string-list-strings 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(setf (gtk:string-list-strings object) strings)}
+  @argument[object]{a @class{gtk:string-object} object}
+  @argument[string]{an array of strings}
+  @begin{short}
+    Accessor of the @slot[gtk:string-list]{strings} slot of the
+    @class{gtk:string-list} class.
+  @end{short}
+  @see-class{gtk:string-list}")
 
-;;;Description
-;;;GtkStringList is a list model that wraps an array of strings.
+;;; ----------------------------------------------------------------------------
+;;; gtk_string_list_new ()
+;;; ----------------------------------------------------------------------------
 
-;;;The objects in the model have a "string" property.
+(cffi:defcfun ("gtk_string_list_new" string-list-new) (g:object string-list)
+ #+liber-documentation
+ "@version{2023-9-7}
+  @argument[strings]{a list of strings to put in the model}
+  @return{A new @class{gtk:string-list} object.}
+  @begin{short}
+    Creates a new string list with the given @arg{strings}.
+  @end{short}
+  @see-class{gtk:string-list}"
+  (strings g:strv-t))
 
-;;;GtkStringList is well-suited for any place where you would typically use a char*[], but need a list model.
+(export 'string-list-new)
 
-;;;GtkStringList as GtkBuildable
-;;;The GtkStringList implementation of the GtkBuildable interface supports adding items directly using the <items> element and specifying <item> elements for each item. Each <item> element supports the regular translation attributes “translatable”, “context” and “comments”.
+;;; ----------------------------------------------------------------------------
+;;; gtk_string_list_append ()
+;;; ----------------------------------------------------------------------------
 
-;;;Here is a UI definition fragment specifying a GtkStringList
+(cffi:defcfun ("gtk_string_list_append" string-list-append) :void
+ #+liber-documentation
+ "@version{2023-9-7}
+  @argument[model]{a @class{gtk:string-list} object}
+  @argument[string]{a string to insert}
+  @begin{short}
+    Appends a string to @arg{model}.
+  @end{short}
+  @see-class{gtk:string-list}"
+  (model (g:object string-list))
+  (string :string))
 
-;;;Functions
-;;;gtk_string_list_new ()
-;;;GtkStringList *
-;;;gtk_string_list_new (const char * const *strings);
-;;;Creates a new GtkStringList with the given strings .
+(export 'string-list-append)
 
-;;;Parameters
-;;;strings
+;;; ----------------------------------------------------------------------------
+;;; gtk_string_list_take ()                                not needed
+;;;
+;;; void
+;;; gtk_string_list_take (GtkStringList *self,
+;;;                       char *string);
+;;;
+;;; Adds string to self at the end, and takes ownership of it.
+;;;
+;;; This variant of gtk_string_list_append() is convenient for formatting
+;;; strings:
+;;;
+;;; <object class="GtkStringList">
+;;;   <items>
+;;;     <item translatable="yes">Factory</item>
+;;;     <item translatable="yes">Home</item>
+;;;     <item translatable="yes">Subway</item>
+;;;   </items>
+;;; </object>
+;;;
+;;; self :
+;;;     a GtkStringList
+;;;
+;;; string :
+;;;     the string to insert.
+;;; ----------------------------------------------------------------------------
 
-;;;The strings to put in the model.
+;;; ----------------------------------------------------------------------------
+;;; gtk_string_list_remove ()
+;;; ----------------------------------------------------------------------------
 
-;;;[array zero-terminated=1][nullable]
-;;;Returns
-;;;a new GtkStringList
+(cffi:defcfun ("gtk_string_list_remove" string-list-remove) :void
+ #+liber-documentation
+ "@version{2023-9-7}
+  @argument[model]{a @class{gtk:string-list} object}
+  @argument[position]{an unsigned integer with the position of the string that
+    is to be removed}
+  @begin{short}
+    Removes the string at position from @arg{model}.
+  @end{short}
+  The @arg{position} argument must be smaller than the current length of the
+  list model.
+  @see-class{gtk:string-list}"
+  (model (g:object string-list))
+  (position :uint))
 
-;;;gtk_string_list_append ()
-;;;void
-;;;gtk_string_list_append (GtkStringList *self,
-;;;                        const char *string);
-;;;Appends string to self .
+(export 'string-list-remove)
 
-;;;The string will be copied. See gtk_string_list_take() for a way to avoid that.
+;;; ----------------------------------------------------------------------------
+;;; gtk_string_list_splice ()
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;self
+(cffi:defcfun ("gtk_string_list_splice" %string-list-splice) :void
+  (model (gobject:object string-list))
+  (position :uint)
+  (n-removals :uint)
+  (additions g:strv-t))
 
-;;;a GtkStringList
+(defun string-list-splice (model position n-removals additions)
+ #+liber-documentation
+ "@version{2023-9-7}
+  @argument[model]{a @class{gtk:string-list} object}
+  @argument[position]{an unsigned integer with the position at which to make
+    the change}
+  @argument[n-removals]{an unsigned integer with the number of strings to
+    remove}
+  @argument[additions]{a list of strings to add}
+  @begin{short}
+    Changes @arg{model} by removing @arg{n-removals} strings and adding
+    @arg{additions} to it.
+  @end{short}
+  This function is more efficient than the @fun{gtk:string-list-append}
+  function and the @fun{gtk:string-list-remove} function, because it only emits
+  the \"items-changed\" signal once for the change.
 
-;;;string
+  The @arg{position} and @arg{n-removals} parameters must be correct, i.e
+  @arg{position} + @arg{n-removals} must be less than or equal to the length of
+  the list model at the time this function is called.
+  @see-class{gtk:string-list}
+  @see-function{gtk:string-list-append}
+  @see-function{gtk:string-list-remove}"
+  (%string-list-splice model position n-removals additions))
 
-;;;the string to insert
+(export 'string-list-splice)
 
-;;;gtk_string_list_take ()
-;;;void
-;;;gtk_string_list_take (GtkStringList *self,
-;;;                      char *string);
-;;;Adds string to self at the end, and takes ownership of it.
+;;; ----------------------------------------------------------------------------
+;;; gtk_string_list_get_string ()
+;;; ----------------------------------------------------------------------------
 
-;;;This variant of gtk_string_list_append() is convenient for formatting strings:
+(cffi:defcfun ("gtk_string_list_get_string" string-list-string) :string
+ #+liber-documentation
+ "@version{2023-9-7}
+  @argument[model]{a @class{gtk:string-list} object}
+  @argument[position]{an unsigned integer with the position to get the string
+    for}
+  @return{The string at the given @arg{position}.}
+  @begin{short}
+    Gets the string that is at position in @arg{model}.
+  @end{short}
+  If @arg{model} does not contain @arg{position} items, @code{nil} is returned.
+  This function returns the string. To get the object wrapping it, use the
+  @fun{g:list-model-object} function.
+  @see-class{gtk:string-list}
+  @see-function{g:list-model-object}"
+  (model (g:object string-list))
+  (position :uint))
 
-;;;<object class="GtkStringList">
-;;;  <items>
-;;;    <item translatable="yes">Factory</item>
-;;;    <item translatable="yes">Home</item>
-;;;    <item translatable="yes">Subway</item>
-;;;  </items>
-;;;</object>
-;;;Parameters
-;;;self
-
-;;;a GtkStringList
-
-;;;string
-
-;;;the string to insert.
-
-;;;[transfer full]
-;;;gtk_string_list_remove ()
-;;;void
-;;;gtk_string_list_remove (GtkStringList *self,
-;;;                        guint position);
-;;;Removes the string at position from self . position must be smaller than the current length of the list.
-
-;;;Parameters
-;;;self
-
-;;;a GtkStringList
-
-;;;position
-
-;;;the position of the string that is to be removed
-
-;;;gtk_string_list_splice ()
-;;;void
-;;;gtk_string_list_splice (GtkStringList *self,
-;;;                        guint position,
-;;;                        guint n_removals,
-;;;                        const char * const *additions);
-;;;Changes self by removing n_removals strings and adding additions to it.
-
-;;;This function is more efficient than gtk_string_list_append() and gtk_string_list_remove(), because it only emits “items-changed” once for the change.
-
-;;;This function copies the strings in additions .
-
-;;;The parameters position and n_removals must be correct (ie: position + n_removals must be less than or equal to the length of the list at the time this function is called).
-
-;;;Parameters
-;;;self
-
-;;;a GtkStringList
-
-;;;position
-
-;;;the position at which to make the change
-
-;;;n_removals
-
-;;;the number of strings to remove
-
-;;;additions
-
-;;;The strings to add.
-
-;;;[array zero-terminated=1][nullable]
-;;;gtk_string_list_get_string ()
-;;;const char *
-;;;gtk_string_list_get_string (GtkStringList *self,
-;;;                            guint position);
-;;;Gets the string that is at position in self . If self does not contain position items, NULL is returned.
-
-;;;This function returns the const char *. To get the object wrapping it, use g_list_model_get_item().
-
-;;;Parameters
-;;;self
-
-;;;a GtkStringList
-
-;;;position
-
-;;;the position to get the string for
-
-;;;Returns
-;;;the string at the given position.
-
-;;;[nullable]
-
-;;;gtk_string_object_new ()
-;;;GtkStringObject *
-;;;gtk_string_object_new (const char *string);
-;;;Wraps a string in an object for use with GListModel
-
-;;;Parameters
-;;;string
-
-;;;The string to wrap.
-
-;;;[not nullable]
-;;;Returns
-;;;a new GtkStringObject
-
-;;;gtk_string_object_get_string ()
-;;;const char *
-;;;gtk_string_object_get_string (GtkStringObject *self);
-;;;Returns the string contained in a GtkStringObject.
-
-;;;Parameters
-;;;self
-
-;;;a GtkStringObject
-
-;;;Returns
-;;;the string of self
-
+(export 'string-list-string)
 
 ;;; --- End of file gtk4.string-list.lisp --------------------------------------

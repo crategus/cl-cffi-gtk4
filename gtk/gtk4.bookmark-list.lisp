@@ -2,7 +2,7 @@
 ;;; gtk4.bookmark-list.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,14 +35,18 @@
 ;;;
 ;;;     GtkBookmarkList
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_bookmark_list_get_attributes
+;;;     gtk_bookmark_list_set_attributes
+;;;     gtk_bookmark_list_get_filename
+;;;     gtk_bookmark_list_set_io_priority
+;;;     gtk_bookmark_list_get_io_priority
+
+;;;
 ;;; Functions
 ;;;
 ;;;     gtk_bookmark_list_new
-;;;     gtk_bookmark_list_get_filename
-;;;     gtk_bookmark_list_set_attributes
-;;;     gtk_bookmark_list_get_attributes
-;;;     gtk_bookmark_list_set_io_priority
-;;;     gtk_bookmark_list_get_io_priority
 ;;;     gtk_bookmark_list_is_loading
 ;;;
 ;;; Properties
@@ -86,7 +90,7 @@
     "io-priority" "gint" t t)
    #+gtk-4-8
    (item-type
-    bookmark-list-item-type
+    %bookmark-list-item-type
     "item-type" "GType" t nil)
    (loading
     bookmark-list-loading
@@ -96,173 +100,247 @@
     bookmark-list-n-items
     "n-items" "guint" t nil)))
 
+#+liber-documentation
+(setf (documentation 'bookmark-list 'type)
+ "@version{#2023-9-7}
+  @begin{short}
+    The @class{gtk:bookmark-list} class is a list model that wraps
+    the @class{g:bookmark-file} class.
+  @end{short}
+  It presents a @class{g:list-model} object and fills it asynchronously with
+  the @class{g:file-infos} objects returned from that function.
 
+  The @class{g:file-info} objects in the list have some attributes in the
+  recent namespace added: @code{recent::private (boolean)} and
+  @code{recent:applications (stringv)}.
+  @see-constructor{gtk:bookmark-list-new}
+  @see-slot{gtk:bookmark-list-attributes}
+  @see-slot{gtk:bookmark-list-filename}
+  @see-slot{gtk:bookmark-list-io-priority}
+  @see-slot{gtk:bookmark-list-item-type}
+  @see-slot{gtk:bookmark-list-loading}
+  @see-slot{gtk:bookmark-list-n-items}
+  @see-class{g:list-model}
+  @see-class{g:bookmark-file}")
 
-;;;Property Details
-;;;The “attributes” property
-;;;  “attributes”               char *
-;;;The attributes to query
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;Owner: GtkBookmarkList
+;;; --- bookmark-list-attributes -----------------------------------------------
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "attributes" 'bookmark-list) t)
+ "The @code{attributes} property of type @code{:string} (Read / Write) @br{}
+  The attributes to query. @br{}
+  Default value: @code{nil}")
 
-;;;Default value: NULL
+#+liber-documentation
+(setf (liber:alias-for-function 'bookmark-list-attributes)
+      "Accessor"
+      (documentation 'bookmark-list-attributes 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:bookmark-list-attributes object) => attributes}
+  @syntax[]{(setf gtk:bookmark-list-attributes object) attributes)}
+  @argument[object]{a @class{gtk:bookmark-list} object}
+  @argument[attributes]{a string with the attributes}
+  @begin{short}
+    Accessor of the @slot[gtk:bookmark]{attributes} slot of the
+    @class{gtk:bookmark-list} class.
+  @end{short}
+  The @fun{gtk:bookmark-list-attributes} function gets the attributes queried
+  on the children. The @sym{(setf gtk:bookmark-list-attributes)} function sets
+  the attributes to be enumerated and starts the enumeration.
 
-;;;The “filename” property
-;;;  “filename”                 char *
-;;;Bookmark file to load.
+  If @arg{attributes} is @code{nil}, no attributes will be queried, but a list
+  of @class{g:file-info} objects will still be created.
+  @see-class{gtk:bookmark-list}
+  @see-class{g:file-info}")
 
-;;;Owner: GtkBookmarkList
+;;; --- bookmark-list-filename -------------------------------------------------
 
-;;;Flags: Read / Write / Construct Only
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "filename" 'bookmark-list) t)
+ "The @code{filename} property of type @code{:string}
+  (Read / Write / Construct only) @br{}
+  Bookmark file to load. @br{}
+  Default value: @code{nil}")
 
-;;;Default value: NULL
+#+liber-documentation
+(setf (liber:alias-for-function 'bookmark-list-filename)
+      "Accessor"
+      (documentation 'bookmark-list-filename 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:bookmark-list-filename object) => filename}
+  @argument[object]{a @class{gtk:bookmark-list} object}
+  @argument[filename]{a string with the filename of the @file{.xbel} file}
+  @begin{short}
+    Accessor of the @slot[gtk:bookmark]{filename} slot of the
+    @class{gtk:bookmark-list} class.
+  @end{short}
+  The @fun{gtk:bookmark-list-filename} function returns the filename of the
+  bookmark file that this list is loading.
+  @see-class{gtk:bookmark-list}")
 
-;;;The “io-priority” property
-;;;  “io-priority”              int
-;;;Priority used when loading
+;;; --- bookmark-list-io-priortiy ----------------------------------------------
 
-;;;Owner: GtkBookmarkList
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "io-priority" 'bookmark-list) t)
+ "The @code{io-priority} property of type @code{:int} (Read / Write) @br{}
+  Priority used when loading. @br{}
+  Allowed values: >= -2147483647 @br{}
+  Default value: 0")
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (liber:alias-for-function 'bookmark-list-io-priority)
+      "Accessor"
+      (documentation 'bookmark-list-io-priority 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:bookmark-list-io-priority object) => priority}
+  @syntax[]{(setf gtk:bookmark-list-io-priority object) priority)}
+  @argument[object]{a @class{gtk:bookmark-list} object}
+  @argument[priority]{an integer with the IO priority to use}
+  @begin{short}
+    Accessor of the @slot[gtk:bookmark]{io-priority} slot of the
+    @class{gtk:bookmark-list} class.
+  @end{short}
+  The @fun{gtk:bookmark-list-io-priority} function gets the IO priority. The
+  @sym{(setf gtk:bookmark-list-io-priority)} function sets the IO priority to
+  use while loading files. The default IO priority is
+  @variable{g:+g-priority-default+}.
+  @see-class{gtk:bookmark-list}")
 
-;;;Allowed values: >= -2147483647
+;;; --- bookmark-list-item-type ------------------------------------------------
 
-;;;Default value: 0
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "item-type" 'bookmark-list) t)
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
+  The type of items. Since 4.8")
 
-;;;The “loading” property
-;;;  “loading”                  gboolean
-;;;TRUE if files are being loaded
+#+gtk-4-8
+(declaim (inline bookmark-list-item-type))
 
-;;;Owner: GtkBookmarkList
+#+gtk-4-8
+(defun bookmark-list-item-type (object)
+  (g:list-model-item-type object))
 
-;;;Flags: Read
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'bookmark-list-item-type)
+      "Accessor"
+      (documentation 'bookmark-list-item-type 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:bookmark-list-item-type object) => gtype}
+  @argument[object]{a @class{gtk:bookmark-list} object}
+  @argument[gtype]{a @class{g:type-t} type}
+  @begin{short}
+    Accessor of the @slot[gtk:bookmark]{item-type} slot of the
+    @class{gtk:bookmark-list} class.
+  @end{short}
+  The type of items contained in the list model. Items must be subclasses of
+  the @class{g:object} class.
+  @begin[Note]{dictionary}
+    This function is equivalent to the @fun{g:list-model-item-type} function.
+  @end{dictionary}
+  @see-class{gtk:bookmark-list}
+  @see-class{g:type-t}
+  @see-class{g:object}
+  @see-function{g:list-model-item-type}")
 
-;;;Default value: FALSE
+;;; --- bookmark-list-loading --------------------------------------------------
 
-;;;See Also
-;;;GListModel, GBookmarkFile
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "loading" 'bookmark-list) t)
+ "The @code{loading} property of type @code{:boolean} (Read) @br{}
+  @em{True} if files are being loaded. @br{}
+  Default value: @em{false}")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'bookmark-list-loading)
+      "Accessor"
+      (documentation 'bookmark-list-loading 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:bookmark-list-loading object) => loading}
+  @argument[object]{a @class{gtk:bookmark-list} object}
+  @argument[loading]{@em{true} if files are being loaded}
+  @begin{short}
+    Accessor of the @slot[gtk:bookmark]{loading} slot of the
+    @class{gtk:bookmark-list} class.
+  @end{short}
+  @see-class{gtk:bookmark-list}")
 
+;;; --- bookmark-list-n-items --------------------------------------------------
 
-;;;Description
-;;;GtkBookmarkList is a list model that wraps GBookmarkFile. It presents a GListModel and fills it asynchronously with the GFileInfos returned from that function.
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "n-items" 'bookmark-list) t)
+ "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
+  The number of items. Since 4.8 @br{}
+  Default value: 0")
 
-;;;The GFileInfos in the list have some attributes in the recent namespace added: recent::private (boolean) and recent:applications (stringv).
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'bookmark-list-n-items)
+      "Accessor"
+      (documentation 'bookmark-list-n-items 'function)
+ "@version{#2023-9-7}
+  @syntax[]{(gtk:bookmark-list-n-items object) => n-items}
+  @argument[object]{a @class{gtk:bookmark-list} object}
+  @argument[n-items]{an unsigned integer with the number of items contained in
+    the model}
+  @begin{short}
+    Accessor of the @slot[gtk:bookmark-list]{n-items} slot of the
+    @class{gtk:bookmark-list} class.
+  @end{short}
+  @see-class{gtk:bookmark-list}
+  @see-function{g:list-model-n-items}")
 
-;;;Functions
-;;;gtk_bookmark_list_new ()
-;;;GtkBookmarkList *
-;;;gtk_bookmark_list_new (const char *filename,
-;;;                       const char *attributes);
-;;;Creates a new GtkBookmarkList with the given attributes .
+;;; ----------------------------------------------------------------------------
+;;; gtk_bookmark_list_new ()
+;;;
+;;; GtkBookmarkList *
+;;; gtk_bookmark_list_new (const char *filename,
+;;;                        const char *attributes);
+;;;
+;;; Creates a new GtkBookmarkList with the given attributes .
+;;;
+;;; filename :
+;;;     The bookmark file to load.
+;;;
+;;; attributes :
+;;;     The attributes to query.
+;;;
+;;; Returns :
+;;;     a new GtkBookmarkList
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;filename
+(declaim (inline bookmark-list-new))
 
-;;;The bookmark file to load.
+(defun bookmark-list-new (filename attributes)
+  (make-instance 'bookmark-list
+                 :filename filename
+                 :attributes attributes))
 
-;;;[allow-none]
-;;;attributes
+(export 'bookmark-list-new)
 
-;;;The attributes to query.
+;;; ----------------------------------------------------------------------------
+;;; gtk_bookmark_list_is_loading ()
+;;;
+;;; gboolean
+;;; gtk_bookmark_list_is_loading (GtkBookmarkList *self);
+;;;
+;;; Returns TRUE if the files are currently being loaded.
+;;;
+;;; Files will be added to self from time to time while loading is going on. The
+;;; order in which are added is undefined and may change in between runs.
+;;;
+;;; self :
+;;;     a GtkBookmarkList
+;;;
+;;; Returns :
+;;;     TRUE if self is loading
+;;; ----------------------------------------------------------------------------
 
-;;;[allow-none]
-;;;Returns
-;;;a new GtkBookmarkList
+(cffi:defcfun ("gtk_bookmark_list_is_loading" bookmark-list-is-loading) :boolean
+  (object (g:object bookmark-list)))
 
-;;;gtk_bookmark_list_get_filename ()
-;;;const char *
-;;;gtk_bookmark_list_get_filename (GtkBookmarkList *self);
-;;;Returns the filename of the bookmark file that this list is loading.
-
-;;;Parameters
-;;;self
-
-;;;a GtkBookmarkList
-
-;;;Returns
-;;;the filename of the .xbel file
-
-;;;gtk_bookmark_list_set_attributes ()
-;;;void
-;;;gtk_bookmark_list_set_attributes (GtkBookmarkList *self,
-;;;                                  const char *attributes);
-;;;Sets the attributes to be enumerated and starts the enumeration.
-
-;;;If attributes is NULL, no attributes will be queried, but a list of GFileInfos will still be created.
-
-;;;Parameters
-;;;self
-
-;;;a GtkBookmarkList
-
-;;;attributes
-
-;;;the attributes to enumerate.
-
-;;;[allow-none]
-;;;gtk_bookmark_list_get_attributes ()
-;;;const char *
-;;;gtk_bookmark_list_get_attributes (GtkBookmarkList *self);
-;;;Gets the attributes queried on the children.
-
-;;;Parameters
-;;;self
-
-;;;a GtkBookmarkList
-
-;;;Returns
-;;;The queried attributes.
-
-;;;[nullable][transfer none]
-
-;;;gtk_bookmark_list_set_io_priority ()
-;;;void
-;;;gtk_bookmark_list_set_io_priority (GtkBookmarkList *self,
-;;;                                   int io_priority);
-;;;Sets the IO priority to use while loading files.
-
-;;;The default IO priority is G_PRIORITY_DEFAULT.
-
-;;;Parameters
-;;;self
-
-;;;a GtkBookmarkList
-
-;;;io_priority
-
-;;;IO priority to use
-
-;;;gtk_bookmark_list_get_io_priority ()
-;;;int
-;;;gtk_bookmark_list_get_io_priority (GtkBookmarkList *self);
-;;;Gets the IO priority set via gtk_bookmark_list_set_io_priority().
-
-;;;Parameters
-;;;self
-
-;;;a GtkBookmarkList
-
-;;;Returns
-;;;The IO priority.
-
-;;;gtk_bookmark_list_is_loading ()
-;;;gboolean
-;;;gtk_bookmark_list_is_loading (GtkBookmarkList *self);
-;;;Returns TRUE if the files are currently being loaded.
-
-;;;Files will be added to self from time to time while loading is going on. The order in which are added is undefined and may change in between runs.
-
-;;;Parameters
-;;;self
-
-;;;a GtkBookmarkList
-
-;;;Returns
-;;;TRUE if self is loading
-
-
+(export 'bookmark-list-is-loading)
 
 ;;; --- End of file gtk4.bookmark-list.lisp ------------------------------------

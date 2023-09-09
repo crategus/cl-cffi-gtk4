@@ -2,7 +2,7 @@
 ;;; gtk4.column-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,38 +35,50 @@
 ;;;
 ;;;     GtkColumnView
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_column_view_get_columns
+;;;     gtk_column_view_get_enable_rubberband
+;;;     gtk_column_view_set_enable_rubberband
+;;;     gtk_column_view_get_header_factory                 Since 4.12
+;;;     gtk_column_view_set_header_factory                 Since 4.12
+;;;     gtk_column_view_get_model
+;;;     gtk_column_view_set_model
+;;;     gtk_column_view_get_reorderable
+;;;     gtk_column_view_set_reorderable
+;;;     gtk_column_view_get_row_factory                    Since 4.12
+;;;     gtk_column_view_set_row_factory                    Since 4.12
+;;;     gtk_column_view_get_show_column_separators
+;;;     gtk_column_view_set_show_column_separators
+;;;     gtk_column_view_get_show_row_separators
+;;;     gtk_column_view_set_show_row_separators
+;;;     gtk_column_view_set_single_click_activate
+;;;     gtk_column_view_get_single_click_activate
+;;;     gtk_column_view_get_sorter
+;;;     gtk_column_view_get_tab_behavior                   Since 4.12
+;;;     gtk_column_view_set_tab_behavior                   since 4.12
+;;;
 ;;; Functions
 ;;;
 ;;;     gtk_column_view_new
 ;;;     gtk_column_view_append_column
 ;;;     gtk_column_view_insert_column
 ;;;     gtk_column_view_remove_column
-;;;     gtk_column_view_get_columns
-;;;     gtk_column_view_get_model
-;;;     gtk_column_view_set_model
-;;;     gtk_column_view_get_sorter
-;;;     gtk_column_view_get_show_row_separators
-;;;     gtk_column_view_set_show_row_separators
-;;;     gtk_column_view_get_show_column_separators
-;;;     gtk_column_view_set_show_column_separators
 ;;;     gtk_column_view_sort_by_column
-;;;     gtk_column_view_set_single_click_activate
-;;;     gtk_column_view_get_single_click_activate
-;;;     gtk_column_view_set_reorderable
-;;;     gtk_column_view_get_reorderable
-;;;     gtk_column_view_set_enable_rubberband
-;;;     gtk_column_view_get_enable_rubberband
 ;;;
 ;;; Properties
 ;;;
 ;;;     columns
 ;;;     enable-rubberband
+;;;     header-factory                                     Since 4.12
 ;;;     model
 ;;;     reorderable
+;;;     row-factory                                        Since 4.12
 ;;;     show-column-separators
 ;;;     show-row-separators
 ;;;     single-click-activate
 ;;;     sorter
+;;;     tab-behavior                                       Since 4.12
 ;;;
 ;;; Signals
 ;;;
@@ -135,10 +147,96 @@
     column-view-tab-behavior
     "tab-behavior" "GtkListTabBehavior" t t)))
 
+#+liber-documentation
+(setf (documentation 'column-view 'type)
+ "@version{#2023-9-9}
+  @begin{short}
+    The @class{gtk:column-view} widget is a widget to present a view into a
+    large dynamic list of items using multiple columns with headers.
+  @end{short}
+  The @class{gtk:column-view} widget uses the factories of its columns to
+  generate a cell widget for each column, for each visible item and displays
+  them together as the row for this item. The
+  @slot[gtk:view-column]{show-row-separators} and
+  @slot[gtk:view-column]{show-column-separators} properties offer a simple way
+  to display separators between the rows or columns.
 
-;;;GtkColumnView is the simple list implementation for GTK's list widgets.
+  The @class{gtk:column-view} widget allows the user to select items according
+  to the selection characteristics of the model. For models that allow multiple
+  selected items, it is possible to turn on rubberband selection, using the
+  @slot[gtk:column-view]{enable-rubberband} property.
 
-;;;Property Details
+  The column view supports sorting that can be customized by the user by
+  clicking on column headers. To set this up, the @class{gtk:sorter} object
+  returned by the @fun{gtk:column-view-sorter} function must be attached to a
+  sort model for the data that the view is showing, and the columns must have
+  sorters attached to them by calling @sym{(setf gtk:column-view-column-sorter)}
+  function. The initial sort order can be set with the
+  @fun{gtk:column-view-sort-by-column} function.
+
+  The column view also supports interactive resizing and reordering of columns,
+  via Drag-and-Drop of the column headers. This can be enabled or disabled with
+  the @slot[gtk:column-view]{reorderable} and @slot[gtk:column-view]{resizable}
+  properties.
+
+  To learn more about the list widget framework, see the overview.
+  @begin[CSS nodes]{dictionary}
+    The @class{gtk:column-view} implementation uses a single CSS node named
+    @code{columnview}. It may carry the @code{.column-separators} style class,
+    when @slot[gtk:column-view]{show-column-separators} property is set. Header
+    widets appear below a node with name @code{header}. The rows are contained
+    in a @class{gtk:list-view} widget, so there is a @code{listview} node with
+    the same structure as for a standalone @class{gtk:list-view} widget. If the
+    @slot[gtk:column-view]{show-row-separators} property is set, it will be
+    passed on to the list view, causing its CSS node to carry the
+    @code{.separators} style class. For rubberband selection, a node with name
+    @code{rubberband} is used.
+
+    The main @code{columnview} node may also carry style classes to select the
+    style of list presentation: @code{.rich-list}, @code{.navigation-sidebar}
+    or @code{.data-table}.
+  @end{dictionary}
+  @begin[Accessibility]{dictionary}
+    The @class{gtk:column-view} implementation uses the @code{:tree-grid} role
+    of the @symbol{gtk:accessible-role} enumeration, header title widgets are
+    using the @code{:column-header} role. The row widgets are using the
+    @code{:row} role, and individual cells are using the @code{:grid-cell} role.
+  @end{dictionary}
+  @begin[Signal Details]{dictionary}
+    @subheading{The \"activate\" signal}
+      @begin{pre}
+lambda (columnview position)    :run-last
+      @end{pre}
+      The signal is emitted when a row has been activated by the user, usually
+      via activating the @code{GtkListBase|list.activate-item} action. This
+      allows for a convenient way to handle activation in a columnview. See
+      the @fun{gtk:list-item-activatable} function for details on how to use
+      this signal.
+      @begin[code]{table}
+        @entry[columnview]{The @class{gtk:column-view} widget.}
+        @entry[position]{An unsigned integer with the position of the item to
+          activate.}
+      @end{table}
+  @end{dictionary}
+  @see-constructor{gtk:column-view-new}
+  @see-slot{gtk:column-view-columns}
+  @see-slot{gtk:column-view-enable-rubberband}
+  @see-slot{gtk:column-view-header-factory}
+  @see-slot{gtk:column-view-model}
+  @see-slot{gtk:column-view-reorderable}
+  @see-slot{gtk:column-view-row-factory}
+  @see-slot{gtk:column-view-show-column-separators}
+  @see-slot{gtk:column-view-show-row-separators}
+  @see-slot{gtk:column-view-single-click-activate}
+  @see-slot{gtk:column-view-sorter}
+  @see-slot{gtk:column-view-tab-behavior}
+  @see-class{gtk:column-view-column}
+  @see-class{gtk:tree-view}")
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
 ;;;The “columns” property
 ;;;  “columns”                  GListModel *
 ;;;The list of columns
@@ -213,56 +311,9 @@
 
 ;;;Flags: Read
 
-;;;Signal Details
-;;;The “activate” signal
-;;;void
-;;;user_function (GtkColumnView *self,
-;;;               guint          position,
-;;;               gpointer       user_data)
-;;;The ::activate signal is emitted when a row has been activated by the user, usually via activating the GtkListBase|list.activate-item action.
-
-;;;This allows for a convenient way to handle activation in a columnview. See gtk_list_item_set_activatable() for details on how to use this signal.
-
-;;;Parameters
-;;;self
-
-;;;The GtkColumnView
-
-;;;position
-
-;;;position of item to activate
-
-;;;user_data
-
-;;;user data set when the signal handler was connected.
-
-;;;Flags: Run Last
-
-;;;See Also
-;;;GtkColumnViewColumn, GtkTreeView
 
 
 
-;;;Description
-;;;GtkColumnView is a widget to present a view into a large dynamic list of items using multiple columns with headers.
-
-;;;GtkColumnView uses the factories of its columns to generate a cell widget for each column, for each visible item and displays them together as the row for this item. The “show-row-separators” and “show-column-separators” properties offer a simple way to display separators between the rows or columns.
-
-;;;GtkColumnView allows the user to select items according to the selection characteristics of the model. For models that allow multiple selected items, it is possible to turn on *rubberband selection*, using “enable-rubberband”.
-
-;;;The column view supports sorting that can be customized by the user by clicking on column headers. To set this up, the GtkSorter returned by gtk_column_view_get_sorter() must be attached to a sort model for the data that the view is showing, and the columns must have sorters attached to them by calling gtk_column_view_column_set_sorter(). The initial sort order can be set with gtk_column_view_sort_by_column().
-
-;;;The column view also supports interactive resizing and reordering of columns, via Drag-and-Drop of the column headers. This can be enabled or disabled with the “reorderable” and “resizable” properties.
-
-;;;To learn more about the list widget framework, see the overview.
-
-;;;CSS nodes
-;;;GtkColumnView uses a single CSS node named columnview. It may carry the .column-separators style class, when “show-column-separators” property is set. Header widets appear below a node with name header. The rows are contained in a GtkListView widget, so there is a listview node with the same structure as for a standalone GtkListView widget. If “show-row-separators” is set, it will be passed on to the list view, causing its CSS node to carry the .separators style class. For rubberband selection, a node with name rubberband is used.
-
-;;;The main columnview node may also carry style classes to select the style of list presentation: .rich-list, .navigation-sidebar or .data-table.
-
-;;;Accessibility
-;;;GtkColumnView uses the GTK_ACCESSIBLE_ROLE_TREE_GRID role, header title widgets are using the GTK_ACCESSIBLE_ROLE_COLUMN_HEADER role. The row widgets are using the GTK_ACCESSIBLE_ROLE_ROW role, and individual cells are using the GTK_ACCESSIBLE_ROLE_GRID_CELL role
 
 ;;;Functions
 ;;;gtk_column_view_new ()

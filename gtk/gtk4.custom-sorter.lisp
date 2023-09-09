@@ -2,7 +2,7 @@
 ;;; gtk4.custom-sorter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -60,72 +60,99 @@
    :type-initializer "gtk_custom_sorter_get_type")
   nil)
 
+#+liber-documentation
+(setf (documentation 'custom-sorter 'type)
+ "@version{2023-9-5}
+  @begin{short}
+    The @class{gtk:custom-sorter} object is a @class{gtk:sorter} implementation
+    that sorts via a @symbol{g:compare-data-func} callback function.
+  @end{short}
+  @see-constructor{gtk:custom-sorter-new}
+  @see-class{gtk:sorter}")
 
+;;; ----------------------------------------------------------------------------
+;;; gtk_custom_sorter_new ()
+;;;
+;;; GtkCustomSorter *
+;;; gtk_custom_sorter_new (GCompareDataFunc sort_func,
+;;;                        gpointer user_data,
+;;;                        GDestroyNotify user_destroy);
+;;;
+;;; Creates a new GtkSorter that works by calling sort_func to compare items.
+;;;
+;;; If sort_func is NULL, all items are considered equal.
+;;;
+;;; sort_func :
+;;;     the GCompareDataFunc to use for sorting.
+;;
+;;; user_data :
+;;;     user data to pass to sort_func .
+;;;
+;;; user_destroy :
+;;;     destroy notify for user_data .
+;;;
+;;; Returns :
+;;;     a new GtkCustomSorter
+;;; ----------------------------------------------------------------------------
 
-;;;Description
-;;;GtkCustomSorter is a GtkSorter implementation that sorts via a traditional GCompareDataFunc callback.
+(cffi:defcfun ("gtk_custom_sorter_new" %custom-sorter-new)
+    (g:object custom-sorter)
+  (func :pointer)
+  (data :pointer)
+  (notify :pointer))
 
-;;;Functions
-;;;gtk_custom_sorter_new ()
-;;;GtkCustomSorter *
-;;;gtk_custom_sorter_new (GCompareDataFunc sort_func,
-;;;                       gpointer user_data,
-;;;                       GDestroyNotify user_destroy);
-;;;Creates a new GtkSorter that works by calling sort_func to compare items.
+(defun custom-sorter-new (func)
+  (%custom-sorter-new (cffi:callback g:compare-data-func)
+                      (glib:allocate-stable-pointer func)
+                      (cffi:callback glib:stable-pointer-destroy-notify)))
 
-;;;If sort_func is NULL, all items are considered equal.
+(export 'custom-sorter-new)
 
-;;;Parameters
-;;;sort_func
+;;; ----------------------------------------------------------------------------
+;;; gtk_custom_sorter_set_sort_func ()
+;;;
+;;; void
+;;; gtk_custom_sorter_set_sort_func (GtkCustomSorter *self,
+;;;                                  GCompareDataFunc sort_func,
+;;;                                  gpointer user_data,
+;;;                                  GDestroyNotify user_destroy);
+;;;
+;;; Sets (or unsets) the function used for sorting items.
+;;;
+;;; If sort_func is NULL, all items are considered equal.
+;;;
+;;; If the sort func changes its sorting behavior, gtk_sorter_changed() needs
+;;; to be called.
+;;;
+;;; If a previous function was set, its user_destroy will be called now.
+;;;
+;;; sorter :
+;;;     a GtkCustomSorter
+;;;
+;;; sort_func :
+;;;     function to sort items.
+;;;
+;;; user_data :
+;;;     user data to pass to match_func .
+;;;
+;;; user_destroy :
+;;;     destroy notify for user_data
+;;; ----------------------------------------------------------------------------
 
-;;;the GCompareDataFunc to use for sorting.
+(cffi:defcfun ("gtk_custom_sorter_set_sort_func" %custom-sorter-set-sort-func)
+    :void
+  (sorter (g:object custom-sorter))
+  (func :pointer)
+  (data :pointer)
+  (notify :pointer))
 
-;;;[nullable]
-;;;user_data
+(defun custom-sorter-set-sort-func (sorter func)
+  (%custom-sorter-set-sort-func
+          sorter
+          (cffi:callback g:compare-data-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
 
-;;;user data to pass to sort_func .
-
-;;;[nullable]
-;;;user_destroy
-
-;;;destroy notify for user_data .
-
-;;;[nullable]
-;;;Returns
-;;;a new GtkCustomSorter
-
-;;;gtk_custom_sorter_set_sort_func ()
-;;;void
-;;;gtk_custom_sorter_set_sort_func (GtkCustomSorter *self,
-;;;                                 GCompareDataFunc sort_func,
-;;;                                 gpointer user_data,
-;;;                                 GDestroyNotify user_destroy);
-;;;Sets (or unsets) the function used for sorting items.
-
-;;;If sort_func is NULL, all items are considered equal.
-
-;;;If the sort func changes its sorting behavior, gtk_sorter_changed() needs to be called.
-
-;;;If a previous function was set, its user_destroy will be called now.
-
-;;;Parameters
-;;;self
-
-;;;a GtkCustomSorter
-
-;;;sort_func
-
-;;;function to sort items.
-
-;;;[nullable]
-;;;user_data
-
-;;;user data to pass to match_func .
-
-;;;[nullable]
-;;;user_destroy
-
-;;;destroy notify for user_data
-
+(export 'custom-sorter-set-sort-func)
 
 ;;; --- End of file gtk4.custom-sorter.lisp ------------------------------------

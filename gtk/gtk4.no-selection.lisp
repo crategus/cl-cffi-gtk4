@@ -2,7 +2,7 @@
 ;;; gtk4.no-selection.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,15 +35,20 @@
 ;;;
 ;;;     GtkNoSelection
 ;;;
-;;; Functions
+;;; Accessors
 ;;;
-;;;     gtk_no_selection_new
 ;;;     gtk_no_selection_get_model
 ;;;     gtk_no_selection_set_model
 ;;;
+;;; Functions
+;;;
+;;;     gtk_no_selection_new
+;;;
 ;;; Properties
 ;;;
+;;;     item-type                                          Since 4.8
 ;;;     model
+;;;     n-items                                            Since 4.8
 ;;;
 ;;; Hierarchy
 ;;;
@@ -69,7 +74,7 @@
    :type-initializer "gtk_no_selection_get_type")
   (#+gtk-4-8
    (item-type
-    no-selection-item-type
+    %no-selection-item-type
     "item-type" "GType" t nil)
    (model
     no-selection-model
@@ -79,79 +84,130 @@
     no-selection-n-items
     "n-items" "guint" t nil)))
 
-;;;GtkNoSelection is an implementation of the GtkSelectionModel interface that does not allow selecting anything.
+#+liber-documentation
+(setf (documentation 'no-selection 'type)
+ "@version{2023-9-6}
+  @begin{short}
+    The @class{gtk:no-selection} class is an implementation of the
+    @class{gtk:selection-model} interface that does not allow selecting
+    anything.
+  @end{short}
+  This model is meant to be used as a simple wrapper to @class{g:list-model}
+  objects when a @class{gtk:selection-model} object is required. The
+  @class{gtk:no-selection} object passes through sections from the underlying
+  model.
+  @see-constructor{gtk:no-selection-new}
+  @see-class{gtk:selection-model}")
 
-;;;This model is meant to be used as a simple wrapper to GListModels when a GtkSelectionModel is required.
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
+;;; --- no-selection-item-type -------------------------------------------------
 
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "item-type" 'no-selection) t)
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
+  The type of items. Since 4.8")
 
-;;;typedef struct _GtkNoSelection GtkNoSelection;
-;;;Property Details
-;;;The “model” property
-;;;  “model”                    GListModel *
-;;;The model being managed
+#+gtk-4-8
+(declaim (inline no-selection-item-type))
 
-;;;Owner: GtkNoSelection
+#+gtk-4-8
+(defun no-selection-item-type (object)
+  (g:list-model-item-type object))
 
-;;;Flags: Read / Write
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'no-selection-item-type)
+      "Accessor"
+      (documentation 'no-selection-item-type 'function)
+ "@version{2023-9-6}
+  @syntax[]{(gtk:no-selection-item-type object) => gtype}
+  @argument[object]{a @class{gtk:no-selection} object}
+  @argument[gtype]{a @class{g:type-t} type}
+  @begin{short}
+    Accessor of the @slot[gtk:no-selection]{item-type} slot of the
+    @class{gtk:no-selection} class.
+  @end{short}
+  The type of items contained in the list model. Items must be subclasses of
+  the @class{g:object} class.
+  @begin[Note]{dictionary}
+    This function is equivalent to the @fun{g:list-model-item-type} function.
+  @end{dictionary}
+  @see-class{gtk:no-selection}
+  @see-class{g:type-t}
+  @see-class{g:object}
+  @see-function{g:list-model-item-type}")
 
-;;;See Also
-;;;GtkSelectionModel
+;;; --- no-selection-model -----------------------------------------------------
 
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "model" 'no-selection) t)
+ "The @code{model} property of type @class{g:list-model} (Read / Write) @br{}
+  The model being managed.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'no-selection-model)
+      "Accessor"
+      (documentation 'no-selection-model 'function)
+ "@version{2023-9-6}
+  @syntax[]{(gtk:no-selection-model object) => model}
+  @syntax[]{(setf (gtk:no-selection-model object) model)}
+  @argument[object]{a @class{gtk:no-selection} object}
+  @argument[model]{a @class{g:list-model} object to wrap}
+  @begin{short}
+    Accessor of the @slot[gtk:no-selection]{model} slot of the
+    @class{gtk:no-selection} class.
+  @end{short}
+  The @fun{gtk:no-selection-model} function gets the model that @arg{object}
+  is wrapping. The @sym{(setf gtk:no-selection-model)} function sets the model
+  that @arg{object} should wrap. If @arg{model} is @code{nil}, this model will
+  be empty.
+  @see-class{gtk:no-selection}
+  @see-class{g:list-model}")
+
+;;; --- no-selection-n-items ---------------------------------------------------
+
+#+(and gtk-4-8 liber-documentation)
+(setf (documentation (liber:slot-documentation "n-items" 'no-selection) t)
+ "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
+  The number of items. Since 4.8 @br{}
+  Default value: 0")
+
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-function 'no-selection-n-items)
+      "Accessor"
+      (documentation 'no-selection-n-items 'function)
+ "@version{2023-9-6}
+  @syntax[]{(gtk:no-selection-n-items object) => n-items}
+  @argument[object]{a @class{gtk:no-selection} object}
+  @argument[n-items]{an unsigned integer with the number of items contained in
+    the model}
+  @begin{short}
+    Accessor of the @slot[gtk:no-selection]{n-items} slot of the
+    @class{gtk:no-selection} class.
+  @end{short}
+  @see-class{gtk:no-selection}
+  @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_no_selection_new ()
-;;;
-;;; GtkNoSelection *
-;;; gtk_no_selection_new (GListModel *model);
-;;;
-;;; Creates a new selection to handle model .
-;;;
-;;; model :
-;;;     the GListModel to manage, or NULL.
-;;;
-;;; Returns :
-;;;     a new GtkNoSelection.
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline no-selection-new))
 
 (defun no-selection-new (model)
+ #+liber-documentation
+ "@version{2023-9-6}
+  @argument[model]{a @class{g:list-model} object to manage, or @code{nil}}
+  @return{A new @class{gtk:no-selection} object.}
+  @begin{short}
+    Creates a new selection to handle @arg{model}.
+  @end{short}
+  @see-class{gtk:no-selection}"
   (make-instance 'no-selection
                  :model model))
 
 (export 'no-selection-new)
-
-;;; ----------------------------------------------------------------------------
-;;;gtk_no_selection_get_model ()
-;;;GListModel *
-;;;gtk_no_selection_get_model (GtkNoSelection *self);
-;;;Gets the model that self is wrapping.
-
-;;;Parameters
-;;;self
-
-;;;a GtkNoSelection
-
-;;;Returns
-;;;The model being wrapped.
-
-;;;[transfer none]
-
-;;;gtk_no_selection_set_model ()
-;;;void
-;;;gtk_no_selection_set_model (GtkNoSelection *self,
-;;;                            GListModel *model);
-;;;Sets the model that self should wrap. If model is NULL, this model will be empty.
-
-;;;Parameters
-;;;self
-
-;;;a GtkNoSelection
-
-;;;model
-
-;;;A GListModel to wrap.
 
 ;;; --- End of file gtk4.no-selection.lisp -------------------------------------
