@@ -89,6 +89,10 @@
 ;;; GtkExpression
 ;;; ----------------------------------------------------------------------------
 
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (glib-init:at-init ()
+    (cffi:foreign-funcall "gtk_expression_get_type" :size)))
+
 (cffi:define-foreign-type expression ()
   ()
   (:actual-type :pointer)
@@ -99,6 +103,18 @@
 
 (defmethod cffi:translate-from-foreign (native (type expression))
   native)
+
+(defmethod gobject:parse-g-value-for-type
+    (gvalue (glib:gtype (eql (glib:gtype "GtkExpression"))) kind)
+  (declare (ignore kind))
+  (value-expression gvalue))
+
+(defmethod gobject:set-g-value-for-type
+    (gvalue (glib:gtype (eql (glib:gtype "GtkExpression"))) value)
+  (setf (value-expression gvalue) value))
+
+;(defmethod glib:pointer ((object expression))
+;  (boxed-opaque-pointer object))
 
 #+liber-documentation
 (setf (liber:alias-for-class 'expression)
@@ -308,6 +324,12 @@ case PROP_EXPRESSION:
 ;;; Returns :
 ;;;     The type returned from gtk_expression_evaluate()
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_expression_get_value_type" expression-value-type)
+    g:type-t
+  (expression expression))
+
+(export 'expression-value-type)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_expression_is_static ()
@@ -619,6 +641,12 @@ case PROP_EXPRESSION:
 ;;;     a new GtkExpression
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_constant_expression_new_for_value"
+               constant-expression-new-for-value) expression
+  (value (:pointer (:struct g:value))))
+
+(export 'constant-expression-new-for-value)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constant_expression_get_value ()
 ;;;
@@ -633,6 +661,12 @@ case PROP_EXPRESSION:
 ;;; Returns :
 ;;;     the value.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_constant_expression_get_value" constant-expression-value)
+    (:pointer (:struct g:value))
+  (expression expression))
+
+(export 'constant-expression-value)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_object_expression_new ()
@@ -771,6 +805,33 @@ case PROP_EXPRESSION:
 ;;;     a GtkExpression
 ;;; ----------------------------------------------------------------------------
 
+(defun (setf value-expression) (value gvalue)
+  (cffi:foreign-funcall "gtk_value_set_expression"
+                        (:pointer (:struct g:value)) gvalue
+                        expression value
+                        :void)
+  value)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_value_get_expression ()
+;;;
+;;; GtkExpression *
+;;; gtk_value_get_expression (const GValue *value);
+;;;
+;;; Retrieves the GtkExpression stored inside the given value .
+;;;
+;;; value :
+;;;     a GValue initialized with type GTK_TYPE_EXPRESSION
+;;;
+;;; Returns :
+;;;     a GtkExpression.
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_value_get_expression" value-expression) expression
+  (gvalue (:pointer (:struct g:value))))
+
+(export 'value-expression)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_value_take_expression ()
 ;;;
@@ -786,21 +847,6 @@ case PROP_EXPRESSION:
 ;;;     a GValue initialized with type GTK_TYPE_EXPRESSION
 ;;;
 ;;; expression :
-;;;     a GtkExpression.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_value_get_expression ()
-;;;
-;;; GtkExpression *
-;;; gtk_value_get_expression (const GValue *value);
-;;;
-;;; Retrieves the GtkExpression stored inside the given value .
-;;;
-;;; value :
-;;;     a GValue initialized with type GTK_TYPE_EXPRESSION
-;;;
-;;; Returns :
 ;;;     a GtkExpression.
 ;;; ----------------------------------------------------------------------------
 
