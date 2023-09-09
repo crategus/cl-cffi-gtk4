@@ -540,7 +540,7 @@ lambda (display setting)    :run-last
 (cffi:defcfun ("gdk_display_get_app_launch_context"
                display-app-launch-context) (g:object app-launch-context)
  #+liber-documentation
- "@version{#2022-1-8}
+ "@version{2023-9-2}
   @argument[display]{a @class{gdk:display} object}
   @begin{return}
     A new @class{gdk:app-launch-context} object for @arg{display}.
@@ -686,7 +686,7 @@ lambda (display setting)    :run-last
 ;;; gdk_display_get_clipboard -> display-clipboard
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_display_get_clipboard" display-clipboard) 
+(cffi:defcfun ("gdk_display_get_clipboard" display-clipboard)
     (g:object clipboard)
  #+liber-documentation
  "@version{2023-7-29}
