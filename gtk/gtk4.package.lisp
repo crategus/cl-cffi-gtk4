@@ -136,17 +136,6 @@
       @about-function{value-dup-expression}
       @about-function{param-spec-expression}
     @end{subsection}
-    @begin[GtkFilterListModel]{subsection}
-      A list model that filters its items.
-      @about-class{filter-list-model}
-      @about-generic{filter-list-model-filter}
-      @about-generic{filter-list-model-incremental}
-      @about-function{filter-list-model-item-type}
-      @about-generic{filter-list-model-model}
-      @about-generic{filter-list-model-n-items}
-      @about-generic{filter-list-model-pending}
-      @about-function{filter-list-model-new}
-    @end{subsection}
     @begin[GtkFilter]{subsection}
       Filtering items.
       @about-symbol{filter-match}
@@ -208,48 +197,6 @@
       @about-function{file-filter-attributes}
       @about-function{file-filter-to-gvariant}
     @end{subsection}
-    @begin[GtkFlattenListModel]{subsection}
-      A list model that flattens a list of lists.
-      @about-class{flatten-list-model}
-      @about-generic{flatten-list-model-item-type}
-      @about-generic{flatten-list-model-model}
-      @about-generic{flatten-list-model-n-items}
-      @about-function{flatten-list-model-new}
-      @about-function{flatten-list-model-model-for-item}
-    @end{subsection}
-    @begin[GtkMapListModel]{subsection}
-      A list model that transforms its items.
-      @about-class{map-list-model}
-      @about-generic{map-list-model-has-map}
-      @about-generic{map-list-model-item-type}
-      @about-generic{map-list-model-model}
-      @about-generic{map-list-model-n-items}
-      @about-symbol{map-list-model-map-func}
-      @about-function{map-list-model-new}
-      @about-function{map-list-model-set-map-func}
-    @end{subsection}
-    @begin[GtkSliceListModel]{subsection}
-      A list model that presents a slice out of a larger list.
-      @about-class{slice-list-model}
-      @about-generic{slice-list-model-item-type}
-      @about-generic{slice-list-model-model}
-      @about-generic{slice-list-model-n-items}
-      @about-generic{slice-list-model-offset}
-      @about-generic{slice-list-model-size}
-      @about-function{slice-list-model-new}
-    @end{subsection}
-    @begin[GtkSortListModel]{subsection}
-      A list model that sorts its items.
-      @about-class{sort-list-model}
-      @about-generic{sort-list-model-incremental}
-      @about-generic{sort-list-model-item-type}
-      @about-generic{sort-list-model-model}
-      @about-generic{sort-list-model-n-items}
-      @about-generic{sort-list-model-pending}
-      @about-generic{sort-list-model-section-sorter}
-      @about-generic{sort-list-model-sorter}
-      @about-function{sort-list-model-new}
-    @end{subsection}
     @begin[GtkSorter]{subsection}
       Sorting items.
       @about-symbol{sorter-order}
@@ -258,6 +205,7 @@
       @about-function{sorter-compare}
       @about-function{sorter-order}
       @about-function{sorter-changed}
+      @about-function{ordering-from-cmpfunc}
     @end{subsection}
     @begin[GtkCustomSorter]{subsection}
       Sorting with a callbacks.
@@ -268,7 +216,7 @@
     @begin[GtkMultiSorter]{subsection}
       Combining multiple sorters.
       @about-class{multi-sorter}
-      @about-generic{multi-sorter-item-type}
+      @about-function{multi-sorter-item-type}
       @about-generic{multi-sorter-n-items}
       @about-function{multi-sorter-new}
       @about-function{multi-sorter-append}
@@ -308,7 +256,9 @@
     @begin[GtkNoSelection]{subsection}
       A selection model that does not allow selecting anything.
       @about-class{no-selection}
+      @about-function{no-selection-item-type}
       @about-generic{no-selection-model}
+      @about-generic{no-selection-n-items}
       @about-function{no-selection-new}
     @end{subsection}
     @begin[GtkSingleSelection]{subsection}
@@ -317,7 +267,9 @@
       @about-class{single-selection}
       @about-generic{single-selection-autoselect}
       @about-generic{single-selection-can-unselect}
+      @about-function{single-selection-item-type}
       @about-generic{single-selection-model}
+      @about-generic{single-selection-n-items}
       @about-generic{single-selection-selected}
       @about-generic{single-selection-selected-item}
       @about-function{single-selection-new}
@@ -328,10 +280,63 @@
       @about-generic{multi-selection-model}
       @about-function{multi-selection-new}
     @end{subsection}
+    @begin[GtkFilterListModel]{subsection}
+      A list model that filters its items.
+      @about-class{filter-list-model}
+      @about-generic{filter-list-model-filter}
+      @about-generic{filter-list-model-incremental}
+      @about-function{filter-list-model-item-type}
+      @about-generic{filter-list-model-model}
+      @about-generic{filter-list-model-n-items}
+      @about-generic{filter-list-model-pending}
+      @about-function{filter-list-model-new}
+    @end{subsection}
+    @begin[GtkFlattenListModel]{subsection}
+      A list model that flattens a list of lists.
+      @about-class{flatten-list-model}
+      @about-function{flatten-list-model-item-type}
+      @about-generic{flatten-list-model-model}
+      @about-generic{flatten-list-model-n-items}
+      @about-function{flatten-list-model-new}
+      @about-function{flatten-list-model-model-for-item}
+    @end{subsection}
+    @begin[GtkMapListModel]{subsection}
+      A list model that transforms its items.
+      @about-class{map-list-model}
+      @about-generic{map-list-model-has-map}
+      @about-function{map-list-model-item-type}
+      @about-generic{map-list-model-model}
+      @about-generic{map-list-model-n-items}
+      @about-symbol{map-list-model-map-func}
+      @about-function{map-list-model-new}
+      @about-function{map-list-model-set-map-func}
+    @end{subsection}
+    @begin[GtkSliceListModel]{subsection}
+      A list model that presents a slice out of a larger list.
+      @about-class{slice-list-model}
+      @about-function{slice-list-model-item-type}
+      @about-generic{slice-list-model-model}
+      @about-generic{slice-list-model-n-items}
+      @about-generic{slice-list-model-offset}
+      @about-generic{slice-list-model-size}
+      @about-function{slice-list-model-new}
+    @end{subsection}
+    @begin[GtkSortListModel]{subsection}
+      A list model that sorts its items.
+      @about-class{sort-list-model}
+      @about-generic{sort-list-model-incremental}
+      @about-function{sort-list-model-item-type}
+      @about-generic{sort-list-model-model}
+      @about-generic{sort-list-model-n-items}
+      @about-generic{sort-list-model-pending}
+      @about-generic{sort-list-model-section-sorter}
+      @about-generic{sort-list-model-sorter}
+      @about-function{sort-list-model-new}
+    @end{subsection}
     @begin[GtkSelectionFilterModel]{subsection}
       A list model that turns a selection in a model.
       @about-class{selection-filter-model}
-      @about-generic{selection-filter-model-item-type}
+      @about-function{selection-filter-model-item-type}
       @about-generic{selection-filter-model-model}
       @about-generic{selection-filter-model-n-items}
       @about-function{selection-filter-model-new}
@@ -342,7 +347,7 @@
       @about-generic{bookmark-list-attributes}
       @about-generic{bookmark-list-filename}
       @about-generic{bookmark-list-io-priority}
-      @about-generic{bookmark-list-item-type}
+      @about-function{bookmark-list-item-type}
       @about-generic{bookmark-list-loading}
       @about-generic{bookmark-list-n-items}
       @about-function{bookmark-list-new}
@@ -355,7 +360,7 @@
       @about-generic{directory-list-error}
       @about-generic{directory-list-file}
       @about-generic{directory-list-io-priority}
-      @about-generic{directory-list-item-type}
+      @about-function{directory-list-item-type}
       @about-generic{directory-list-loading}
       @about-generic{directory-list-monitored}
       @about-generic{directory-list-n-items}
@@ -2147,7 +2152,6 @@
       @about-function{tree-path-new-from-string}
       @about-function{tree-path-new-from-indices}
       @about-function{tree-path-new-first}
-      @about-function{tree-path-to-string}
       @about-function{tree-path-append-index}
       @about-function{tree-path-prepend-index}
       @about-function{tree-path-depth}
@@ -2159,6 +2163,7 @@
       @about-function{tree-path-down}
       @about-function{tree-path-is-ancestor}
       @about-function{tree-path-is-descendant}
+      @about-function{tree-path-to-string}
       @about-class{tree-row-reference}
       @about-function{tree-row-reference-new}
       @about-function{tree-row-reference-copy}
@@ -2174,6 +2179,7 @@
       @about-function{tree-iter-free}
       @about-symbol{tree-model-flags}
       @about-class{tree-model}
+      @about-function{tree-model-filter-new}
       @about-function{tree-model-flags}
       @about-function{tree-model-n-columns}
       @about-function{tree-model-column-type}

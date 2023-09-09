@@ -143,27 +143,32 @@
      ;; GListModel support
      (:file "gtk4.bitset")
      (:file "gtk4.expression")
+
      (:file "gtk4.filter")
      (:file "gtk4.custom-filter")
      (:file "gtk4.multi-filter")
      (:file "gtk4.bool-filter")
      (:file "gtk4.string-filter")
      (:file "gtk4.file-filter")
-     (:file "gtk4.filter-list-model")
-     (:file "gtk4.flatten-list-model")
-     (:file "gtk4.map-list-model")
-     (:file "gtk4.slice-list-model")
-     (:file "gtk4.sort-list-model")
+
      (:file "gtk4.sorter")
      (:file "gtk4.custom-sorter")
      (:file "gtk4.multi-sorter")
      (:file "gtk4.string-sorter")
      (:file "gtk4.numeric-sorter")
+
      (:file "gtk4.selection-model")
      (:file "gtk4.no-selection")
      (:file "gtk4.single-selection")
      (:file "gtk4.multi-selection")
+
+     (:file "gtk4.filter-list-model")
+     (:file "gtk4.flatten-list-model")
+     (:file "gtk4.map-list-model")
+     (:file "gtk4.slice-list-model")
+     (:file "gtk4.sort-list-model")
      (:file "gtk4.selection-filter-model")
+
      (:file "gtk4.bookmark-list")
      (:file "gtk4.directory-list")
      (:file "gtk4.string-list")
@@ -465,7 +470,7 @@
 
 (defsystem :cl-cffi-gtk4/test
   :name "cl-cffi-gtk4/test"
-  :depends-on (:cl-cffi-gtk4 :fiveam)
+  :depends-on (:cl-cffi-gtk4 :fiveam :iterate)
   :perform (test-op (o c)
                (uiop:symbol-call :fiveam :run!
                                  (uiop:find-symbol* :gtk-test
@@ -520,6 +525,7 @@
      ;; GListModel support
      (:file "rtest-gtk4-bitset")
      (:file "rtest-gtk4-expression")
+
      (:file "rtest-gtk4-filter")
      (:file "rtest-gtk4-custom-filter")
      (:file "rtest-gtk4-multi-filter")
@@ -527,31 +533,38 @@
      (:file "rtest-gtk4-string-filter")
      (:file "rtest-gtk4-file-filter")
 
-     (:file "rtest-gtk4-filter-list-model")
-     (:file "rtest-gtk4-flatten-list-model")
-     (:file "rtest-gtk4-map-list-model")
-     (:file "rtest-gtk4-slice-list-model")
-     (:file "rtest-gtk4-sort-list-model")
-
-     ;; GtkSorter
-     ;; GtkCustomSorter
-     ;; GtkMultiSorter
-     ;; GtkStringSorter
-     ;; GtkNumericSorter
+     (:file "rtest-gtk4-sorter")
+     (:file "rtest-gtk4-custom-sorter")
+     (:file "rtest-gtk4-multi-sorter")
+     (:file "rtest-gtk4-string-sorter")
+     (:file "rtest-gtk4-numeric-sorter")
 
      (:file "rtest-gtk4-selection-model")
      (:file "rtest-gtk4-no-selection")
      (:file "rtest-gtk4-single-selection")
      (:file "rtest-gtk4-multi-selection")
 
-     ;; GtkSelectionFilterModel
-     ;; GtkBookmarkList
-     ;; GtkDirectoryList
-     ;; GtkStringList
+     (:file "rtest-gtk4-filter-list-model")
+     (:file "rtest-gtk4-flatten-list-model")
+     (:file "rtest-gtk4-map-list-model")
+     (:file "rtest-gtk4-slice-list-model")
+     (:file "rtest-gtk4-sort-list-model")
+     (:file "rtest-gtk4-selection-filter-model")
+
+     (:file "rtest-gtk4-bookmark-list")
+     (:file "rtest-gtk4-directory-list")
+     (:file "rtest-gtk4-string-list")
 
      ;; List-based widgets
      (:file "rtest-gtk4-list-item")
      (:file "rtest-gtk4-list-item-factory")
+;    gtk4.signal-list-item-factory.lisp
+;    gtk4.builder-list-item-factory.lisp
+;    gtk4.list-view.lisp
+;    gtk4.grid-view.lisp
+;    gtk4.column-view.lisp
+;    gtk4.column-view-column.lisp
+;    gtk4.drop-down.lisp
 
      ;; GTK Core
      (:file "rtest-gtk4-enumerations")
