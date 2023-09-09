@@ -45,6 +45,7 @@
 
            ;; List-based widgets
            #:do-listview-applauncher
+           #:do-drop-down
 
            ;; Media Support
            #:do-video

@@ -6,7 +6,7 @@
 ;;;; The launchers let you open files or URIs in applications that
 ;;;; can handle them.
 
-;; TODO: The implementation of opening an URI and drag and drop is missing.
+;; TODO: The implementation of drag and drop is missing.
 
 (in-package :gtk4-example)
 
@@ -32,7 +32,6 @@
       (setf (gtk:label-mnemonic-widget label) picker)
       (gtk:grid-attach grid label 0 0 1 1)
       (gtk:grid-attach grid picker 1 0 1 1))
-
     (let ((label (make-instance 'gtk:label
                                 :label "Font:"
                                 :halign :start
@@ -82,10 +81,27 @@
               (gtk:file-launcher-launch launcher parent nil
                   (lambda (source result)
                     (declare (ignore source result))
-                    (format t "OPEN-APP-DONE~%"))))))
+                    (format t "OPEN APP DONE~%"))))))
       (gtk:grid-attach grid label 0 2 1 1)
       (gtk:box-append picker label1)
       (gtk:box-append picker button)
       (gtk:box-append picker app-picker)
-      (gtk:grid-attach grid picker 1 2 1 1))
+      (gtk:grid-attach grid picker 1 2 1 1))    
+    (let ((label (make-instance 'gtk:label 
+                                :label "URI:"
+                                :halign :start
+                                :valign :center
+                                :hexpand t))
+          (picker (make-instance 'gtk:button
+                                 :label "www.gtk.org")))
+      (g:signal-connect picker "clicked"
+          (lambda (button)
+            (let* ((parent (gtk:widget-root button))
+                   (launcher (gtk:uri-launcher-new "http://www.gtk.org")))
+              (gtk:uri-launcher-launch launcher parent nil
+                  (lambda (source result)
+                    (declare (ignore source result))
+                    (format t "OPEN URI DONE~%"))))))
+      (gtk:grid-attach grid label 0 3 1 1)
+      (gtk:grid-attach grid picker 1 3 1 1))
     (gtk:window-present window)))

@@ -1,27 +1,22 @@
-;;;; Example GdkAppLaunchContext - 2023-8-31
+;;;; Example GdkAppLaunchContext - 2023-9-2
 
 (in-package :gtk4-example)
 
 ;; TODO: This example launches a website with the 
-;; G:APP-INFO-LAUNCH-DEFAULT-for-URI function. The example generates several
-;; warnings:
+;; G:APP-INFO-LAUNCH-DEFAULT-for-URI function. This example generates warnings:
 ;;
-;; (sbcl:20005): GLib-GObject-CRITICAL **: ../../../gobject/gsignal.c:2523: 
-;; signal 'launch' is invalid for instance '0x556060512380' of type 
-;; 'GdkWaylandAppLaunchContext'
+;; GLib-GObject-CRITICAL **: ../../../gobject/gsignal.c:2523: signal 'launch' is 
+;; invalid for instance '0x556060512380' of type 'GdkWaylandAppLaunchContext'
 ;;
-;; Gtk-Message: 01:07:14.667: Not loading module "atk-bridge": The functionality
-;; is provided by GTK natively. Please try to not load it.
+;; Gtk-Message: Not loading module "atk-bridge": The functionality is provided 
+;;; by GTK natively. Please try to not load it.
 ;;
-;; (chrome:22148): Gtk-WARNING **: GTK+ module 
-;; /snap/chromium/2599/gnome-platform/usr/lib/gtk-2.0/modules/libcanberra-gtk-
-;; module.so cannot be loaded.
+;; (chrome:22148): Gtk-WARNING **: GTK+ module /snap/chromium/2599/gnome-
+;; platform/usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so cannot be loaded.
 ;; GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same process is 
 ;; not supported.
 ;;;
 ;; Gtk-Message: 01:07:14.780: Failed to load module "canberra-gtk-module"
-;;
-;; Wird in einer aktuellen Browsersitzung geöffnet.
 
 (defun do-app-launch-context (&optional application)
   (let* ((button (make-instance 'gtk:button

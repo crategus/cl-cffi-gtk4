@@ -42,6 +42,7 @@
 
                ;; List-based widgets
                (:file "listview-applauncher")
+               (:file "drop-down")
 
                ;; Media Support
                (:file "video")
