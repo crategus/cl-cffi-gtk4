@@ -493,7 +493,7 @@
   (:off 2))
   @end{pre}
   @begin[code]{table}
-    @entry[:auto]{The control is made insensitive if no action can be 
+    @entry[:auto]{The control is made insensitive if no action can be
       triggered.}
     @entry[:on]{The control is always sensitive.}
     @entry[:off]{The control is always insensitive.}
@@ -503,8 +503,6 @@
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTextDirection
 ;;; ----------------------------------------------------------------------------
-
-;; TODO: Implement a base-type for defining an enumeration
 
 (gobject:define-g-enum "GtkTextDirection" text-direction
   (:export t
@@ -1059,7 +1057,7 @@
 (setf (liber:alias-for-symbol 'sort-type)
       "GEnum"
       (liber:symbol-documentation 'sort-type)
- "@version{#2021-12-28}
+ "@version{2023-9-5}
   @short{Determines the direction of a sort.}
   @begin{pre}
 (gobject:define-g-enum \"GtkSortType\" sort-type
@@ -1072,8 +1070,7 @@
     @entry[:ascending]{Sorting is in ascending order.}
     @entry[:descending]{Sorting is in descending order.}
   @end{table}
-  @see-class{gtk:tree-sortable}
-  @see-class{gtk:tree-view-column}")
+  @see-class{gtk:numeric-sorter}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkPrintPages
@@ -1216,15 +1213,14 @@
 (setf (liber:alias-for-symbol 'ordering)
       "GEnum"
       (liber:symbol-documentation 'ordering)
- "@version{#2021-12-28}
+ "@version{2023-9-4}
   @begin{short}
     Describes the way two values can be compared.
   @end{short}
-
-  These values can be used with the @symbol{g-compare-func} callback function.
-  However, the @symbol{g-compare-func} function is allowed to return any integer
-  values. For converting such a value to a `GtkOrdering` value, use the
-  @fun{gtk:ordering-from-cmpfunc} function.
+  These values can be used with the @symbol{g:compare-func} callback function.
+  However, the @symbol{g:compare-func} function is allowed to return any
+  integer values. For converting such a value to a @symbol{gtk:ordering} value,
+  use the @fun{gtk:ordering-from-cmpfunc} function.
   @begin{pre}
 (gobject:define-g-enum \"GtkOrdering\" ordering
   (:export t

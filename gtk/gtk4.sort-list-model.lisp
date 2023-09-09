@@ -362,13 +362,10 @@ progress = 1.0 - pending / (double) MAX (1, g_list_model_get_n_items (model));
       "Accessor"
       (documentation 'sort-list-model-sorter 'function)
  "@version{#2023-9-3}
-
   @syntax[]{(gtk:sort-list-model-sorter object) => sorter}
   @syntax[]{(setf (gtk:sort-list-model-sorter object) sorter)}
-
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[sorter]{a @class{gtk:sorter} object to sort @arg{object} with}
-
   @begin{short}
     Accessor of the @slot[gtk:sort-list-model]{sorter} slot of the
     @class{gtk:sort-list-model} class.

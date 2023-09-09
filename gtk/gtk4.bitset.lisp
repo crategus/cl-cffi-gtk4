@@ -101,22 +101,22 @@
       (documentation 'bitset 'type)
  "@version{2023-8-9}
   @begin{short}
-    The @class{gtk:bitset} structure is a data structure for representing a set 
+    The @class{gtk:bitset} structure is a data structure for representing a set
     of unsigned integers.
   @end{short}
-  Another name for this data structure is \"bitmap\". The current implementation 
+  Another name for this data structure is \"bitmap\". The current implementation
   is based on roaring bitmaps.
 
-  A bitset allows adding a set of integers and provides support for set 
+  A bitset allows adding a set of integers and provides support for set
   operations like unions, intersections and checks for equality or if a value
-  is contained in the set. The @class{gtk:bitset} implementation also contains 
-  various functions to query metadata about the bitset, such as the minimum or 
+  is contained in the set. The @class{gtk:bitset} implementation also contains
+  various functions to query metadata about the bitset, such as the minimum or
   maximum values or its size.
 
   The fastest way to iterate values in a bitset is @symbol{gtk:bitset-iter}
   iterator.
 
-  The main use case for the @class{gtk:bitset} structure is implementing 
+  The main use case for the @class{gtk:bitset} structure is implementing
   complex selections for the @class{gtk:selection-model} class.
   @see-class{gtk:selection-model}")
 
@@ -152,18 +152,15 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_bitset_new_empty ()
-;;;
-;;; GtkBitset *
-;;; gtk_bitset_new_empty (void);
-;;;
-;;; Creates a new empty bitset.
-;;;
-;;; Returns :
-;;;     A new empty bitset
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_bitset_new_empty" bitset-new-empty)
-    (g:boxed bitset :return))
+    (g:boxed bitset :return)
+ #+liber-documentation
+ "@version{#2023-8-30}
+  @return{A new empty @class{gtk:bitset} object.}
+  @short{Creates a new empty bitset.}
+  @see-class{gtk:bitset}")
 
 (export 'bitset-new-empty)
 
@@ -531,7 +528,7 @@
   (start :uint)
   (n-items :uint))
 
-(export 'bitset-remove-range)  
+(export 'bitset-remove-range)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_bitset_add_range_closed ()
@@ -582,14 +579,14 @@
 ;;;     last value to remove
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_bitset_remove_range_closed" bitset-remove-range-closed) 
+(cffi:defcfun ("gtk_bitset_remove_range_closed" bitset-remove-range-closed)
     :void
   (bitset (g:boxed bitset))
   (first :uint)
   (last :uint))
 
-(export 'bitset-remove-range-closed) 
- 
+(export 'bitset-remove-range-closed)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_bitset_add_rectangle ()
 ;;;

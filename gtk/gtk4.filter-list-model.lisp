@@ -204,7 +204,7 @@
 (setf (documentation (liber:slot-documentation "item-type"
                                                'filter-list-model) t)
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
-  The type of items. See the @fun{g:list-model-item-type} function. Since 4.8")
+  The type of items. Since 4.8")
 
 #+gtk-4-8
 (declaim (inline filter-list-model-item-type))
@@ -230,7 +230,7 @@
   @begin[Note]{dictionary}
     This function is equivalent to the @fun{g:list-model-item-type} function.
   @end{dictionary}
-  @see-class{g:list-store}
+  @see-class{gtk:filter-list-model}
   @see-class{g:type-t}
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
@@ -270,8 +270,7 @@
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'filter-list-model) t)
  "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. See the @fun{g:list-model-n-items} function. Since 4.8
-  @br{}
+  The number of items. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
@@ -287,7 +286,7 @@
     Accessor of the @slot[gtk:filter-list-model]{n-items} slot of the
     @class{gtk:filter-list-model} class.
   @end{short}
-  @see-class{g:filter-list-model}
+  @see-class{gtk:filter-list-model}
   @see-function{g:list-model-n-items}")
 
 ;;; --- filter-list-model-pending ----------------------------------------------
