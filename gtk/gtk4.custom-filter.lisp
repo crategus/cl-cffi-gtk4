@@ -73,82 +73,98 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkCustomFilterFunc ()
-;;;
-;;; gboolean
-;;; (*GtkCustomFilterFunc) (gpointer item,
-;;;                         gpointer user_data);
-;;;
-;;; User function that is called to determine if the item should be matched. If
-;;; the filter matches the item, this function must return TRUE. If the item
-;;; should be filtered out, FALSE must be returned.
-;;;
-;;; item :
-;;;     The item to be matched.
-;;;
-;;; user_data :
-;;;     user data
-;;;
-;;; Returns :
-;;;     TRUE to keep the item around
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcallback custom-filter-func :boolean
+    ((item :pointer)
+     (data :pointer))
+  (let ((ptr (glib:get-stable-pointer-value data)))
+    (funcall ptr item)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'custom-filter-func)
+      "Callback"
+      (liber:symbol-documentation 'custom-filter-func)
+ "@version{#2023-9-6}
+  @begin{short}
+    User function that is called to determine if the item should be matched.
+  @end{short}
+  If the filter matches the item, this function must return @em{true}. If the
+  item should be filtered out, @em{false} must be returned.
+  @begin{pre}
+lambda (item)
+  @end{pre}
+  @begin[code]{table}
+    @entry[item]{A pointer to the item to be matched.}
+    @entry[Return]{@em{True} to keep the item around.}
+  @end{table}
+  @see-class{gtk:custom-filter}")
+
+(export 'custom-filter-func)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_custom_filter_new ()
-;;;
-;;; GtkCustomFilter *
-;;; gtk_custom_filter_new (GtkCustomFilterFunc match_func,
-;;;                        gpointer user_data,
-;;;                        GDestroyNotify user_destroy);
-;;;
-;;; Creates a new filter using the given match_func to filter items.
-;;;
-;;; If match_func is NULL, the filter matches all items.
-;;;
-;;; If the filter func changes its filtering behavior, gtk_filter_changed()
-;;; needs to be called.
-;;;
-;;; match_func :
-;;;     function to filter items.
-;;;
-;;; user_data :
-;;;     user data to pass to match_func .
-;;;
-;;; user_destroy :
-;;;     destroy notify for user_data
-;;;
-;;; Returns :
-;;;     a new GtkCustomFilter
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_custom_filter_new" %custom-filter-new) :void
+  (func :pointer)
+  (data :pointer)
+  (notify :pointer))
+
+(defun custom-filter-new (func)
+ #+liber-documentation
+ "@version{#2023-9-6}
+  @argument[func]{a @symbol{gtk:custom-filter-func} callback function to filter
+    items}
+  @return{A new @class{gtk:custom-filter} object}
+  @begin{short}
+    Creates a new filter using the given @arg{func} callback function to filter
+    items.
+  @end{short}
+  If @arg{func} is @code{nil}, the filter matches all items.
+
+  If the filter function changes its filtering behavior, the
+  @fun{gtk:filter-changed} function needs to be called.
+  @see-class{gtk:custom-filter}
+  @see-symbol{gtk:custom-filter-func}
+  @see-function{gtk:filter-changed}"
+  (%custom-filter-new (cffi:callback custom-filter-func)
+                      (glib:allocate-stable-pointer func)
+                      (cffi:callback glib:stable-pointer-destroy-notify)))
+
+(export 'custom-filter-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_custom_filter_set_filter_func ()
-;;;
-;;; void
-;;; gtk_custom_filter_set_filter_func (GtkCustomFilter *self,
-;;;                                    GtkCustomFilterFunc match_func,
-;;;                                    gpointer user_data,
-;;;                                    GDestroyNotify user_destroy);
-;;;
-;;; Sets (or unsets) the function used for filtering items.
-;;;
-;;; If match_func is NULL, the filter matches all items.
-;;;
-;;; If the filter func changes its filtering behavior, gtk_filter_changed()
-;;; needs to be called.
-;;;
-;;; If a previous function was set, its user_destroy will be called now.
-;;;
-;;; self :
-;;;     a GtkCustomFilter
-;;;
-;;; match_func :
-;;;     function to filter items.
-;;;
-;;; user_data :
-;;;     user data to pass to match_func .
-;;;
-;;; user_destroy :
-;;;     destroy notify for user_data
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_custom_filter_set_filter_func"
+               %custom-filter-set-filter-func) :void
+  (filter (g:object custom-filter))
+  (func :pointer)
+  (data :pointer)
+  (notify :pointer))
+
+(defun custom-filter-set-filter-func (filter func)
+ #+liber-documentation
+ "@version{#2023-9-6}
+  @argument[filter]{a @class{gtk:custom-filter} object}
+  @argument[func]{a @symbol{gtk:custom-filter-func} callback function to filter
+    items}
+  @begin{short}
+    Sets (or unsets) the function used for filtering items.
+  @end{short}
+  If @arg{func} is @code{nil}, the filter matches all items. If the filter
+  function changes its filtering behavior, the @fun{gtk:filter-changed}
+  function needs to be called.
+  @see-class{gtk:custom-filter}
+  @see-symbol{gtk:custom-filter-func}"
+  (%custom-filter-set-filter-func
+          filter
+          (cffi:callback custom-filter-func)
+          (glib:allocate-stable-pointer func)
+          (cffi:callback glib:stable-pointer-destroy-notify)))
+
+(export 'custom-filter-set-filter-func)
 
 ;;; --- End of file gtk4.custom-filter.lisp ------------------------------------
