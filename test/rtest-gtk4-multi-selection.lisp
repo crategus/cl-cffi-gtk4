@@ -15,7 +15,7 @@
           (glib:symbol-for-gtype "GtkMultiSelection")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkMultiSelection")
-          (g:gtype (cffi:foreign-funcall "gtk_multi_selection_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_multi_selection_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
@@ -33,7 +33,7 @@
   (is (equal '()
              (list-signals "GtkMultiSelection")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMultiSelection" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMultiSelection"
                                              GTK-MULTI-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                                 ("GListModel" "GtkSelectionModel")
@@ -49,10 +49,12 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+;;;     item-type                                          Since 4.8
 ;;;     model
+;;;     n-items                                            Since 4.8
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     gtk_multi_selection_new 
+;;;     gtk_multi_selection_new
 
-;;; --- 2023-8-10 --------------------------------------------------------------
+;;; --- 2023-9-6 ---------------------------------------------------------------

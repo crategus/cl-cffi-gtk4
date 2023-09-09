@@ -1,0 +1,163 @@
+(in-package :gtk-test)
+
+(def-suite gtk-string-list :in gtk-suite)
+(in-suite gtk-string-list)
+
+;;; --- Types and Values -------------------------------------------------------
+
+;;;     GtkStringObject
+
+(test gtk-string-object-class
+  ;; Type check
+  (is (g:type-is-object "GtkStringObject"))
+  ;; Check the registered name
+  (is (eq 'gtk:string-object
+          (glib:symbol-for-gtype "GtkStringObject")))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkStringObject")
+          (g:gtype (cffi:foreign-funcall "gtk_string_object_get_type" :size))))
+  ;; Check the parent
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkStringObject")))
+  ;; Check the children
+  (is (equal '()
+             (list-children "GtkStringObject")))
+  ;; Check the interfaces
+  (is (equal '()
+             (list-interfaces "GtkStringObject")))
+  ;; Check the properties
+  (is (equal '("string")
+             (list-properties "GtkStringObject")))
+  ;; Check the signals
+  (is (equal '()
+             (list-signals "GtkStringObject")))
+  ;; Check the class definition
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStringObject" GTK-STRING-OBJECT
+                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+                                :TYPE-INITIALIZER "gtk_string_object_get_type")
+                               ((STRING GTK-STRING-OBJECT-STRING "string"
+                                        "gchararray" T NIL)))
+             (gobject:get-g-type-definition "GtkStringObject"))))
+
+;;; --- Properties -------------------------------------------------------------
+
+;;;     string
+
+;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_string_object_new
+
+(test gtk-string-object-new
+  (let ((object (gtk:string-object-new "string")))
+    (is (typep object 'gtk:string-object))
+    (is (string= "string" (gtk:string-object-string object)))
+    (is (typep (setf object
+                     (gtk:string-object-new (cffi:null-pointer)))
+               'gtk:string-object))
+    (is-false (gtk:string-object-string object))))
+
+;;; --- Types and Values -------------------------------------------------------
+
+;;;     GtkStringList
+
+(test gtk-string-list-class
+  ;; Type check
+  (is (g:type-is-object "GtkStringList"))
+  ;; Check the registered name
+  (is (eq 'gtk:string-list
+          (glib:symbol-for-gtype "GtkStringList")))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkStringList")
+          (g:gtype (cffi:foreign-funcall "gtk_string_list_get_type" :size))))
+  ;; Check the parent
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkStringList")))
+  ;; Check the children
+  (is (equal '()
+             (list-children "GtkStringList")))
+  ;; Check the interfaces
+  (is (equal '("GtkBuildable" "GListModel")
+             (list-interfaces "GtkStringList")))
+  ;; Check the properties
+  (is (equal '("strings")
+             (list-properties "GtkStringList")))
+  ;; Check the signals
+  (is (equal '()
+             (list-signals "GtkStringList")))
+  ;; Check the class definition
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStringList" GTK-STRING-LIST
+                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
+                                ("GListModel" "GtkBuildable") :TYPE-INITIALIZER
+                                "gtk_string_list_get_type")
+                               ((STRINGS GTK-STRING-LIST-STRINGS "strings"
+                                 "GStrv" NIL NIL)))
+             (gobject:get-g-type-definition "GtkStringList"))))
+
+;;; --- Properties -------------------------------------------------------------
+
+;;;     strings                                            Since 4.10
+
+;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_string_list_new
+;;;     gtk_string_list_get_string
+
+(test gtk-string-list-new.1
+  (let ((object (gtk:string-list-new '())))
+    (is (eq (g:gtype "GObject") (g:list-model-item-type object)))
+    (is (= 0 (g:list-model-n-items object)))
+    (is (typep object 'gtk:string-list))))
+
+(test gtk-string-list-new.2
+  (let ((object (gtk:string-list-new '("Factory" "Home" "Subway"))))
+    (is (typep object 'gtk:string-list))
+    (is (eq (g:gtype "GObject") (g:list-model-item-type object)))
+    (is (= 3 (g:list-model-n-items object)))
+    (is (string= "Factory" (gtk:string-list-string object 0)))
+    (is (string= "Home" (gtk:string-list-string object 1)))
+    (is (string= "Subway" (gtk:string-list-string object 2)))
+    (is (string= "Factory"
+                 (gtk:string-object-string (g:list-model-object object 0))))
+    (is (string= "Home"
+                 (gtk:string-object-string (g:list-model-object object 1))))
+    (is (string= "Subway"
+                 (gtk:string-object-string (g:list-model-object object 2))))))
+
+;;;     gtk_string_list_append
+;;;     gtk_string_list_remove
+
+(test gtk-string-list-append/remove
+  (let ((object (gtk:string-list-new '())))
+    (is-false (gtk:string-list-append object "Factory"))
+    (is-false (gtk:string-list-append object "Home"))
+    (is-false (gtk:string-list-append object "Subway"))
+    (is (= 3 (g:list-model-n-items object)))
+    (is (string= "Factory" (gtk:string-list-string object 0)))
+    (is (string= "Home" (gtk:string-list-string object 1)))
+    (is (string= "Subway" (gtk:string-list-string object 2)))
+    (is-false (gtk:string-list-remove object 0))
+    (is (= 2 (g:list-model-n-items object)))
+    (is (string= "Home" (gtk:string-list-string object 0)))
+    (is (string= "Subway" (gtk:string-list-string object 1)))
+    (is-false (gtk:string-list-remove object 0))
+    (is (= 1 (g:list-model-n-items object)))
+    (is (string= "Subway" (gtk:string-list-string object 0)))))
+
+;;;     gtk_string_list_take                               not needed
+
+;;;     gtk_string_list_splice
+
+(test gtk-string-list-splice
+  (let ((object (gtk:string-list-new '("Factory" "Home" "Subway"))))
+    (is (= 3 (g:list-model-n-items object)))
+    (is (string= "Factory" (gtk:string-list-string object 0)))
+    (is (string= "Home" (gtk:string-list-string object 1)))
+    (is (string= "Subway" (gtk:string-list-string object 2)))
+    (is-false (gtk:string-list-splice object 1 2
+                                      '("Factory" "Home" "Subway")))
+    (is (string= "Factory" (gtk:string-list-string object 0)))
+    (is (string= "Factory" (gtk:string-list-string object 1)))
+    (is (string= "Home" (gtk:string-list-string object 2)))
+    (is (string= "Subway" (gtk:string-list-string object 3)))))
+
+;;; --- 2023-9-7 ---------------------------------------------------------------

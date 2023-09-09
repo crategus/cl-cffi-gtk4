@@ -39,14 +39,12 @@
 
 (test gtk-constant-expression-new-for-value
   (cffi:with-foreign-object (gvalue '(:struct g:value))
-  
+
     (g:value-init gvalue "gchararray")
     (setf (g:value-string gvalue) "string")
     (let ((expression (gtk:constant-expression-new-for-value gvalue)))
-      (is-false (type-of expression))
-      (is-false (g:type-from-instance expression))
       (is (eq (g:gtype "gchararray") (gtk:expression-value-type expression)))
-      (is (string= "string" 
+      (is (string= "string"
                    (g:value-string (gtk:constant-expression-value expression))))
 )))
 
@@ -68,7 +66,8 @@
     (setf (g:value-string gvalue1) "string")
     (let ((expression (gtk:constant-expression-new-for-value gvalue1)))
       (setf (gtk:value-expression gvalue2) expression)
-      (is-false (gtk:value-expression gvalue2))
+      (is (eq (g:gtype "gchararray")
+              (gtk:expression-value-type (gtk:value-expression gvalue2))))
 )))
 
 ;;;     gtk_value_take_expression

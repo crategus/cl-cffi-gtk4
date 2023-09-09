@@ -17,7 +17,7 @@
           (glib:symbol-for-gtype "GtkSingleSelection")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSingleSelection")
-          (g:gtype (cffi:foreign-funcall "gtk_single_selection_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_single_selection_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
@@ -29,14 +29,14 @@
   (is (equal '("GListModel" "GtkSelectionModel")
              (list-interfaces "GtkSingleSelection")))
   ;; Check the properties
-  (is (equal '("autoselect" "can-unselect" "item-type" "model" "n-items" 
+  (is (equal '("autoselect" "can-unselect" "item-type" "model" "n-items"
                "selected" "selected-item")
              (list-properties "GtkSingleSelection")))
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkSingleSelection")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSingleSelection" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSingleSelection"
                                              GTK-SINGLE-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                                 ("GListModel" "GtkSelectionModel")
@@ -63,21 +63,23 @@
 
 ;;;     autoselect
 ;;;     can-unselect
+;;;     item-type                                          Since 4.8
 ;;;     model
+;;;     n-items                                            Since 4.8
 ;;;     selected
 ;;;     selected-item
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     gtk_single_selection_new 
-;;;     gtk_single_selection_get_model 
-;;;     gtk_single_selection_set_model 
-;;;     gtk_single_selection_get_selected 
-;;;     gtk_single_selection_set_selected 
-;;;     gtk_single_selection_get_selected_item 
-;;;     gtk_single_selection_get_autoselect 
-;;;     gtk_single_selection_set_autoselect 
-;;;     gtk_single_selection_get_can_unselect 
-;;;     gtk_single_selection_set_can_unselect 
+;;;     gtk_single_selection_new
+;;;     gtk_single_selection_get_model
+;;;     gtk_single_selection_set_model
+;;;     gtk_single_selection_get_selected
+;;;     gtk_single_selection_set_selected
+;;;     gtk_single_selection_get_selected_item
+;;;     gtk_single_selection_get_autoselect
+;;;     gtk_single_selection_set_autoselect
+;;;     gtk_single_selection_get_can_unselect
+;;;     gtk_single_selection_set_can_unselect
 
 ;;; --- 2023-8-10 --------------------------------------------------------------

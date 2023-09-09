@@ -223,11 +223,70 @@
 ;;;     GtkScrollType
 ;;;     GtkSelectionMode
 ;;;     GtkWrapMode
+
 ;;;     GtkSortType
+
+(test gtk-sort-type
+  ;; Check the type
+  (is (g:type-is-enum "GtkSortType"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkSortType")
+          (g:gtype (cffi:foreign-funcall "gtk_sort_type_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:sort-type
+          (glib:symbol-for-gtype "GtkSortType")))
+  ;; Check the names
+  (is (equal '("GTK_SORT_ASCENDING" "GTK_SORT_DESCENDING")
+             (list-enum-item-name "GtkSortType")))
+  ;; Check the values
+  (is (equal '(0 1)
+             (list-enum-item-value "GtkSortType")))
+  ;; Check the nick names
+  (is (equal '("ascending" "descending")
+             (list-enum-item-nick "GtkSortType")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSortType" GTK-SORT-TYPE
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_sort_type_get_type")
+                                     (:ASCENDING 0)
+                                     (:DESCENDING 1))
+             (gobject:get-g-type-definition "GtkSortType"))))
+
 ;;;     GtkPrintPages
 ;;;     GtkPageSet
 ;;;     GtkNumberUpLayout
+
 ;;;     GtkOrdering
+
+(test gtk-ordering
+  ;; Check the type
+  (is (g:type-is-enum "GtkOrdering"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkOrdering")
+          (g:gtype (cffi:foreign-funcall "gtk_ordering_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:ordering
+          (glib:symbol-for-gtype "GtkOrdering")))
+  ;; Check the names
+  (is (equal '("GTK_ORDERING_SMALLER" "GTK_ORDERING_EQUAL"
+               "GTK_ORDERING_LARGER")
+             (list-enum-item-name "GtkOrdering")))
+  ;; Check the values
+  (is (equal '(-1 0 1)
+             (list-enum-item-value "GtkOrdering")))
+  ;; Check the nick names
+  (is (equal '("smaller" "equal" "larger")
+             (list-enum-item-nick "GtkOrdering")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkOrdering" GTK-ORDERING
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER "gtk_ordering_get_type")
+                                     (:SMALLER -1)
+                                     (:EQUAL 0)
+                                     (:LARGER 1))
+             (gobject:get-g-type-definition "GtkOrdering"))))
+
 ;;;     GtkPageOrientation
 ;;;     GtkPrintQuality
 ;;;     GtkPrintDuplex

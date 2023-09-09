@@ -46,11 +46,15 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+;;;     item-type                                          Since 4.8
 ;;;     model
+;;;     n-items                                            Since 4.8
 
 (test gtk-no-selection-properties
   (let ((selection (make-instance 'gtk:no-selection)))
-    (is-false (gtk:no-selection-model selection))))
+    (is (eq (g:gtype "GObject") (gtk:no-selection-item-type selection)))
+    (is-false (gtk:no-selection-model selection))
+    (is (= 0 (gtk:no-selection-n-items selection)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -61,4 +65,4 @@
   (is (typep (gtk:no-selection-new (g:list-store-new "GtkWidget"))
              'gtk:no-selection)))
 
-;;; --- 2023-8-10 --------------------------------------------------------------
+;;; --- 2023-9-6 ---------------------------------------------------------------

@@ -1,5 +1,5 @@
 (defpackage :gtk-test
-  (:use :fiveam :common-lisp)
+  (:use :fiveam :iterate :common-lisp)
   (:export #:run!)
   (:import-from :gobject)
   (:import-from :gio)
