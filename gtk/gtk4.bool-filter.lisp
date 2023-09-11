@@ -2,7 +2,7 @@
 ;;; gtk4.bool-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,13 +35,16 @@
 ;;;
 ;;;     GtkBoolFilter
 ;;;
-;;; Functions
+;;; Accessors
 ;;;
-;;;     gtk_bool_filter_new
 ;;;     gtk_bool_filter_get_expression
 ;;;     gtk_bool_filter_set_expression
 ;;;     gtk_bool_filter_get_invert
 ;;;     gtk_bool_filter_set_invert
+;;;
+;;; Functions
+;;;
+;;;     gtk_bool_filter_new
 ;;;
 ;;; Properties
 ;;;
@@ -75,7 +78,7 @@
 
 #+liber-documentation
 (setf (documentation 'bool-filter 'type)
- "@version{#2023-8-16}
+ "@version{2023-9-9}
   @begin{short}
     The @class{gtk:bool-filter} object is a simple filter that takes a boolean
     @class{gtk:expression} instance to determine whether to include items.
@@ -101,7 +104,7 @@
 (setf (liber:alias-for-function 'bool-filter-expression)
       "Accessor"
       (documentation 'bool-filter-expression 'function)
- "@version{#2023-8-16}
+ "@version{2023-9-9}
   @syntax[]{(gtk:bool-filter-expression object) => expression}
   @syntax[]{(setf (gtk:bool-filter-expression object) expression)}
   @argument[object]{a @class{gtk:bool-filter} object}
@@ -129,7 +132,7 @@
 (setf (liber:alias-for-function 'bool-filter-invert)
       "Accessor"
       (documentation 'bool-filter-invert 'function)
- "@version{#2023-8-16}
+ "@version{2023-9-9}
   @syntax[]{(gtk:bool-filter-invert object) => invert}
   @syntax[]{(setf (gtk:bool-filter-invert object) invert)}
   @argument[object]{a @class{gtk:bool-filter} object}
@@ -150,7 +153,7 @@
 (declaim (inline bool-filter-new))
 
 (defun bool-filter-new (expression)
- "@version{#2023-8-16}
+ "@version{2023-9-9}
   @argument[expression]{a @class{gtk:expression} instance or @code{nil} for
     none}
   @return{A new @class{gtk:bool-filter} object.}

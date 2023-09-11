@@ -2,7 +2,7 @@
 ;;; gtk4.tree-expander.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,14 +35,23 @@
 ;;;
 ;;;     GtkTreeExpander
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_tree_expander_get_child
+;;;     gtk_tree_expander_set_child
+;;;     gtk_tree_expander_get_hide_expander                Since 4.10
+;;;     gtk_tree_expander_set_hide_expander                Since 4.10
+;;;     gtk_tree_expander_get_indent-for-depth             Since 4.10
+;;;     gtk_tree_expander_set_indent-for-depth             Since 4.10
+;;;     gtk_tree_expander_get_indent-for-icon              Since 4.6
+;;;     gtk_tree_expander_set_indent-for-icon              Since 4.6
+;;;     gtk_tree_expander_get_item
+;;;     gtk_tree_expander_get_list_row
+;;;     gtk_tree_expander_set_list_row
+;;;
 ;;; Functions
 ;;;
-;;;     gtk_tree_expander_new 
-;;;     gtk_tree_expander_get_child 
-;;;     gtk_tree_expander_set_child 
-;;;     gtk_tree_expander_get_item 
-;;;     gtk_tree_expander_get_list_row 
-;;;     gtk_tree_expander_set_list_row 
+;;;     gtk_tree_expander_new
 ;;;
 ;;; Properties
 ;;;
@@ -76,7 +85,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkTreeExpander 
+;;; GtkTreeExpander
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkTreeExpander" tree-expander
@@ -107,72 +116,144 @@
    (list-row
     tree-expander-list-row
     "list-row" "GtkTreeListRow" t t)))
-    
 
-;;;Property Details
-;;;The “child” property
-;;;  “child”                    GtkWidget *
-;;;The child widget with the actual contents
+#+liber-documentation
+(setf (documentation 'tree-expander 'type)
+ "@version{#2023-9-10}
+  @begin{short}
+    The @class{gtk:tree-expander} widget is a widget that provides an expander
+    for a list.
+  @end{short}
+  It is typically placed as a bottommost child into a @class{gtk:list-view}
+  widget to allow users to expand and collapse children in a list with a
+  @class{gtk:tree-list-model} object. The @class{gtk:tree-expander} widget
+  provides the common UI elements, gestures and keybindings for this purpose.
 
-;;;Owner: GtkTreeExpander
+  On top of this, the \"listitem.expand\", \"listitem.collapse\" and
+  \"listitem.toggle-expand\" actions are provided to allow adding custom UI for
+  managing expanded state.
 
-;;;Flags: Read / Write
+  It is important to mention that you want to set the
+  @slot[gkt:list-item]{focusable} property to @em{false} when using this widget,
+  as you want the keyboard focus to be in the treexpander, and not inside the
+  list to make use of the keybindings.
 
-;;;The “item” property
-;;;  “item”                     GObject *
-;;;The item held by this expander's row
+  The @class{gtk:tree-list-model} object must be set to not be passthrough.
+  Then it will provide @class{gtk:tree-list-row} items which can be set via the
+  @fun{gtk:tree-expander-list-row} function on the expander. The expander will
+  then watch that row item automatically. The @fun{gtk:tree-expander-child}
+  function sets the widget that displays the actual row contents.
 
-;;;Owner: GtkTreeExpander
+  The @class{gtk:tree-expander} widget can be modified with properties such as
+  @slot[gtk:tree-expander]{indent-for-icon},
+  @slot[gtk:tree-expander]{indent-for-depth}, and
+  @slot[gtk:tree-expander]{hide-expander} properties to achieve a different
+  appearance. This can even be done to influence individual rows, for example
+  by binding the @slot[gtk:tree-expander]{hide-expander} property to the item
+  count of the model of the treelistrow, to hide the expander for rows without
+  children, even if the row is expandable.
+  @begin[CSS nodes]{dictionary}
+    The @class{gtk:tree-expander} implementation has zero or one CSS nodes with
+    the name @code{expander} that should display the expander icon. The node
+    will be @code{:checked} when it is expanded. If the node is not expandable,
+    an @code{indent} node will be displayed instead. For every level of depth,
+    another @code{indent} node is prepended.
+  @end{dictionary}
+  @begin[Accessibility]{dictionary}
+    Until GTK 4.10, the @class{gtk:tree-expander} implementation used the
+    @code{:group} role. Since GTK 4.12, the @class{gtk:tree-expander}
+    implementation uses the @code{:button} role of the
+    @symbol{gtk:accessible-role} enumeration. Toggling it will change the
+    @code{:expanded} value of the @symbol{gtk:accessible-state} enumeration.
+  @end{dictionary}
+  @see-constructor{gtk:tree-expander-new}
+  @see-slot{gtk:tree-expander-child}
+  @see-slot{gtk:tree-expander-hide-expander}
+  @see-slot{gtk:tree-expander-indent-for-depth}
+  @see-slot{gtk:tree-expander-indent-for-icon}
+  @see-slot{gtk:tree-expander-item}
+  @see-slot{gtk:tree-expander-list-row}
+  @see-class{gtk:tree-list-model}")
 
-;;;Flags: Read
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;The “list-row” property
-;;;  “list-row”                 GtkTreeListRow *
-;;;The list row to track for expander state
+;;; --- tree-expander-child ----------------------------------------------------
 
-;;;Owner: GtkTreeExpander
-
-;;;Flags: Read / Write
-
-;;;Action Details
-;;;The “listitem.toggle-expand” action
-;;;Tries to expand the expander if it was collapsed or collapses it if it was expanded.
-
-;;;The “listitem.collapse” action
-;;;Collapses the expander.
-
-;;;The “listitem.expand” action
-;;;Expands the expander if it can be expanded.
-
-;;;See Also
-;;;GtkTreeListModel
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "child" 'tree-expander) t)
+ "The @code{child} property of type @class{gtk:widget} (Read / Write) @br{}
+  The child widget with the actual contents.")
 
 
-;;;Description
-;;;GtkTreeExpander is a widget that provides an expander for a list.
+;;; --- tree-expander-hide-expander --------------------------------------------
 
-;;;It is typically placed as a bottommost child into a GtkListView to allow users to expand and collapse children in a list with a GtkTreeListModel. It will provide the common UI elements, gestures and keybindings for this purpose.
+#+(and gtk-4-10 liber-documentation)
+(setf (documentation (liber:slot-documentation "hide-expander"
+                                               'tree-expander) t)
+ "The @code{hide-expander} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the expander icon should be hidden in a @class{gtk:tree-list-row}
+  object. Note that this property simply hides the icon. The actions and
+  keybinding (i.e. collapse and expand) are not affected by this property. A
+  common use for this property would be to bind to the number of children in a
+  @class{gtk:tree-list-row} object’s model in order to hide the expander when a
+  row has no children. Since 4.10 @br{}
+  Default value: @em{false}")
 
-;;;On top of this, the "listitem.expand", "listitem.collapse" and "listitem.toggle-expand" actions are provided to allow adding custom UI for managing expanded state.
 
-;;;The GtkTreeListModel must be set to not be passthrough. Then it will provide GtkTreeListRow items which can be set via gtk_tree_expander_set_list_row() on the expander. The expander will then watch that row item automatically. gtk_tree_expander_set_child() sets the widget that displays the actual row contents.
+;;; --- tree-expander-indent-for-depth -----------------------------------------
 
-;;;CSS nodes
-;;;GtkTreeExpander has zero or one CSS nodes with the name "expander" that should display the expander icon. The node will be :checked when it is expanded. If the node is not expandable, an "indent" node will be displayed instead.
+#+(and gtk-4-10 liber-documentation)
+(setf (documentation (liber:slot-documentation "indent-for-depth"
+                                               'tree-expander) t)
+ "The @code{indent-for-depth} property of type @code{:boolean} (Read / Write)
+  @br{}
+  The tree expander indents the child according to its depth. Since 4.10 @br{}
+  Default value: @em{true}")
 
-;;;For every level of depth, another "indent" node is prepended.
 
-;;;Accessibility
-;;;GtkTreeExpander uses the GTK_ACCESSIBLE_ROLE_GROUP role. The expander icon is represented as a GTK_ACCESSIBLE_ROLE_BUTTON, labelled by the expander's child, and toggling it will change the GTK_ACCESSIBLE_STATE_EXPANDED state.
+;;; --- tree-expander-indent-for-icon ------------------------------------------
 
-;;;Functions
-;;;gtk_tree_expander_new ()
-;;;GtkWidget *
-;;;gtk_tree_expander_new (void);
-;;;Creates a new GtkTreeExpander
+#+(and gtk-4-6 liber-documentation)
+(setf (documentation (liber:slot-documentation "indent-for-icon"
+                                               'tree-expander) t)
+ "The @code{indent-for-icon} property of type @code{:boolean} (Read / Write)
+  @br{}
+  The tree expander indents the child by the width of an expander-icon if it is
+  not expandable. Since 4.6 @br{}
+  Default value: @em{true}")
 
-;;;Returns
-;;;a new GtkTreeExpander
+
+;;; --- tree-expander-item -----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "item" 'tree-expander) t)
+ "The @code{item} property of type @class{g:object} (Read) @br{}
+  The item held by this expander’s row.")
+
+
+;;; --- tree-expander-list-row -------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "list-row" 'tree-expander) t)
+ "The @code{list-row} property of type @class{gtk:tree-list-row}
+  (Read / Write) @br{}
+  The list row to track for expander state.")
+
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_tree_expander_new ()
+;;;
+;;; GtkWidget *
+;;; gtk_tree_expander_new (void);
+;;;
+;;; Creates a new GtkTreeExpander
+;;;
+;;; Returns :
+;;;     a new GtkTreeExpander
+;;; ----------------------------------------------------------------------------
+
 
 ;;;gtk_tree_expander_get_child ()
 ;;;GtkWidget *
@@ -187,7 +268,6 @@
 ;;;Returns
 ;;;The child displayed by self .
 
-;;;[nullable][transfer none]
 
 ;;;gtk_tree_expander_set_child ()
 ;;;void
@@ -195,16 +275,13 @@
 ;;;                             GtkWidget *child);
 ;;;Sets the content widget to display.
 
-;;;Parameters
 ;;;self
-
 ;;;a GtkTreeExpander widget
 
 ;;;child
-
 ;;;a GtkWidget, or NULL.
 
-;;;[nullable]
+
 ;;;gtk_tree_expander_get_item ()
 ;;;gpointer
 ;;;gtk_tree_expander_get_item (GtkTreeExpander *self);
@@ -224,22 +301,18 @@
 ;;;Returns
 ;;;The item of the row.
 
-;;;[nullable][transfer full][type GObject]
 
 ;;;gtk_tree_expander_get_list_row ()
 ;;;GtkTreeListRow *
 ;;;gtk_tree_expander_get_list_row (GtkTreeExpander *self);
 ;;;Gets the list row managed by self .
 
-;;;Parameters
 ;;;self
-
 ;;;a GtkTreeExpander
 
 ;;;Returns
 ;;;The list row displayed by self .
 
-;;;[nullable][transfer none]
 
 ;;;gtk_tree_expander_set_list_row ()
 ;;;void
@@ -247,15 +320,11 @@
 ;;;                                GtkTreeListRow *list_row);
 ;;;Sets the tree list row that this expander should manage.
 
-;;;Parameters
 ;;;self
-
 ;;;a GtkTreeExpander widget
 
 ;;;list_row
-
 ;;;a GtkTreeListRow, or NULL.
 
-;;;[nullable]
 
 ;;; --- End of file gtk4.tree-expander.lisp ------------------------------------

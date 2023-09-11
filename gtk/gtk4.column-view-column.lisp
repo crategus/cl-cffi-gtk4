@@ -2,7 +2,7 @@
 ;;; gtk4.column-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,26 +35,31 @@
 ;;;
 ;;;     GtkColumnViewColumn
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_column_view_column_get_column_view
+;;;     gtk_column_view_column_get_expand
+;;;     gtk_column_view_column_set_expand
+;;;     gtk_column_view_column_get_factory
+;;;     gtk_column_view_column_set_factory
+;;;     gtk_column_view_column_get_fixed_width
+;;;     gtk_column_view_column_set_fixed_width
+;;;     gtk_column_view_column_get_header_menu
+;;;     gtk_column_view_column_set_header_menu
+;;;     gtk_column_view_column_get_id                      Since 4.10
+;;;     gtk_column_view_column_set_id                      Since 4.10
+;;;     gtk_column_view_column_get_resizable
+;;;     gtk_column_view_column_set_resizable
+;;;     gtk_column_view_column_get_sorter
+;;;     gtk_column_view_column_set_sorter
+;;;     gtk_column_view_column_get_title
+;;;     gtk_column_view_column_set_title
+;;;     gtk_column_view_column_get_visible
+;;;     gtk_column_view_column_set_visible
+;;;
 ;;; Functions
 ;;;
 ;;;     gtk_column_view_column_new
-;;;     gtk_column_view_column_get_column_view
-;;;     gtk_column_view_column_set_factory
-;;;     gtk_column_view_column_get_factory
-;;;     gtk_column_view_column_set_title
-;;;     gtk_column_view_column_get_title
-;;;     gtk_column_view_column_set_sorter
-;;;     gtk_column_view_column_get_sorter
-;;;     gtk_column_view_column_set_visible
-;;;     gtk_column_view_column_get_visible
-;;;     gtk_column_view_column_set_resizable
-;;;     gtk_column_view_column_get_resizable
-;;;     gtk_column_view_column_set_header_menu
-;;;     gtk_column_view_column_get_header_menu
-;;;     gtk_column_view_column_set_fixed_width
-;;;     gtk_column_view_column_get_fixed_width
-;;;     gtk_column_view_column_set_expand
-;;;     gtk_column_view_column_get_expand
 ;;;
 ;;; Properties
 ;;;
@@ -63,6 +68,7 @@
 ;;;     factory
 ;;;     fixed-width
 ;;;     header-menu
+;;;     id                                                 Since 4.10
 ;;;     resizable
 ;;;     sorter
 ;;;     title
@@ -117,400 +123,360 @@
     column-view-column-visible
     "visible" "gboolean" t t)))
 
+#+liber-documentation
+(setf (documentation 'column-view-column 'type)
+ "@version{#2023-9-9}
+  @begin{short}
+    The @class{gtk:column-view-column} widget represents the columns being
+    added to the @class{gtk:column-view} widget.
+  @end{short}
+  Columns have a title, and can optionally have a header menu set with the
+  @fun{gtk:column-view-column-header-menu} function.
 
+  A sorter can be associated with a column using the
+  @fun{gtk:column-view-column-sorter} function, to let users influence sorting
+  by clicking on the column header.
+  @see-constructor{gtk:column-view-column-new}
+  @see-slot{gtk:column-view-column-column-view}
+  @see-slot{gtk:column-view-column-expand}
+  @see-slot{gtk:column-view-column-factory}
+  @see-slot{gtk:column-view-column-fixed-width}
+  @see-slot{gtk:column-view-column-header-menu}
+  @see-slot{gtk:column-view-column-id}
+  @see-slot{gtk:column-view-column-resizable}
+  @see-slot{gtk:column-view-column-sorter}
+  @see-slot{gtk:column-view-column-title}
+  @see-slot{gtk:column-view-column-visible}
+  @see-class{gtk:column-view}")
 
-;;;GtkColumnViewColumns are added to GtkColumnViews.
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;Property Details
-;;;The “column-view” property
-;;;  “column-view”              GtkColumnView *
-;;;GtkColumnView this column is a part of
+;;; --- column-view-column-column-view -----------------------------------------
 
-;;;Owner: GtkColumnViewColumn
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "column-view"
+                                               'column-view-column) t)
+ "The @code{column-view} property of type @class{gtk:column-view} (Read) @br{}
+  The column view this column is a part of.")
 
-;;;Flags: Read
+#+liber-documentation
+(setf (liber:alias-for-function 'column-view-column-column-view)
+      "Accessor"
+      (documentation 'column-view-column-column-view 'function)
+ "@version{#2023-9-9}
+  @syntax[]{(gtk:column-view-column-column-view object) => columnview}
+  @argument[object]{a @class{gtk:column-view} object}
+  @argument[columnview]{a @class{gtk:column-view} widget displaying
+    @arg{object}}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{column-view} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-column-view} function gets the column view
+  that is currently displaying this column. If @arg{object} has not been added
+  to a column view yet, @code{nil} is returned.
+  @see-class{gtk:column-view}")
 
-;;;The “expand” property
-;;;  “expand”                   gboolean
-;;;Column gets share of extra width allocated to the view
+;;; --- column-view-column-expand ----------------------------------------------
 
-;;;Owner: GtkColumnViewColumn
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "expand" 'column-view-column) t)
+ "The @code{expand} property of type @code{:boolean} (Read) @br{}
+  Column gets share of extra width allocated to the view. @br{}
+  Default value: @em{false}")
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (liber:alias-for-function 'column-view-column-expand)
+      "Accessor"
+      (documentation 'column-view-column-expand 'function)
+ "@version{#2023-9-6}
+  @syntax[]{(gtk:column-view-column-expand object) => expand}
+  @syntax[]{(setf (gtk:column-view-column-expand object) expand)}
+  @argument[object]{a @class{gtk:column-view-column} object}
+  @argument[expand]{@em{true} if this column expands}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{expand} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-expand} function returns whether this column
+  should expand. The @sym{(setf gtk:column-view-column-expand)} function sets
+  the column to take available extra space. The extra space is shared equally
+  amongst all columns that have the expand set to @em{true}.
+  @see-class{gtk:column-view}")
 
-;;;Default value: FALSE
+;;; --- column-view-column-factory ---------------------------------------------
 
-;;;The “factory” property
-;;;  “factory”                  GtkListItemFactory *
-;;;Factory for populating list items
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "factory" 'column-view-column) t)
+ "The @code{factory} property of type @class{gtk:list-item-factory}
+  (Read / Write) @br{}
+  Factory for populating list items.")
 
-;;;Owner: GtkColumnViewColumn
+#+liber-documentation
+(setf (liber:alias-for-function 'column-view-column-factory)
+      "Accessor"
+      (documentation 'column-view-column-factory 'function)
+ "@version{#2023-9-10}
+  @syntax[]{(gtk:column-view-column-factory object) => factory}
+  @syntax[]{(setf (gtk:column-view-column-factory object) factory)}
+  @argument[object]{a @class{gtk:column-view-column} object}
+  @argument[factory]{a @class{gtk:list-item-factory} object to use, or
+    @code{nil} for none}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{factory} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-factory} function gets the factory that is
+  currently used to populate list items. The
+  @sym{(setf gtk:column-view-column-factory)} function sets the factory.
+  @see-class{gtk:column-view-column}
+  @see-class{gtk:list-item-factory}")
 
-;;;Flags: Read / Write
+;;; --- column-view-column-fixed-width -----------------------------------------
 
-;;;The “fixed-width” property
-;;;  “fixed-width”              int
-;;;If not -1, this is the width that the column is allocated, regardless of the size of its content.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "fixed-width"
+                                               'column-view-column) t)
+ "The @code{fixed-width} property of type @code{:int} (Read / Write) @br{}
+  If not -1, this is the width that the column is allocated, regardless of the
+  size of its content. @br{}
+  Allowed values: >= -1 @br{}
+  Default value: -1")
 
-;;;Owner: GtkColumnViewColumn
+#+liber-documentation
+(setf (liber:alias-for-function 'column-view-column-fixed-width)
+      "Accessor"
+      (documentation 'column-view-column-fixed-width 'function)
+ "@version{#2023-9-10}
+  @syntax[]{(gtk:column-view-column-fixed-width object) => width}
+  @syntax[]{(setf (gtk:column-view-column-fixed-width object) width)}
+  @argument[object]{a @class{gtk:column-view-column} object}
+  @argument[width]{an integer with the fixed width of the column}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{fixed-width} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-fixed-width} function gets the fixed width of
+  the column. The @sym{(setf gtk:column-view-column-fixed-width)} function sets
+  the fixed width. If @arg{width} is not -1, sets the fixed width of
+  @arg{object}, otherwise unsets it.
 
-;;;Flags: Read / Write
+  Setting a fixed width overrides the automatically calculated width.
+  Interactive resizing also sets the @slot[gtk:column-view-column]{fixed-width}
+  property.
+  @see-class{gtk:column-view-column}")
 
-;;;Allowed values: >= -1
+;;; --- column-view-column-header-menu -----------------------------------------
 
-;;;Default value: -1
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "header-menu"
+                                               'column-view-column) t)
+ "The @code{header-menu} property of type @class{g:menu-model} (Read / Write)
+  @br{}
+  Menu model used to create the context menu for the column header.")
 
-;;;The “header-menu” property
-;;;  “header-menu”              GMenuModel *
-;;;Menu model used to create the context menu for the column header.
+#+liber-documentation
+(setf (liber:alias-for-function 'column-view-column-header-menu)
+      "Accessor"
+      (documentation 'column-view-column-header-menu 'function)
+ "@version{#2023-9-10}
+  @syntax[]{(gtk:column-view-column-header-menu object) => menu}
+  @syntax[]{(setf (gtk:column-view-column-header-menu object) menu)}
+  @argument[object]{a @class{gtk:column-view-column} object}
+  @argument[menu]{a @class{g:menu-model} object, or @code{nil}}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{header-menu} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-header-menu} function gets the menu model
+  that is used to create the context menu for the column header. The
+  @sym{(setf gtk:column-view-column-header-menu)} function sets the menu model
+  that is used to create the context menu for the column header.
+  @see-class{gtk:column-view-column}
+  @see-class{g:menu-model}")
 
-;;;Owner: GtkColumnViewColumn
+;;; --- column-view-column-id --------------------------------------------------
 
-;;;Flags: Read / Write
+#+(and gtk-4-10 liber-documentation)
+(setf (documentation (liber:slot-documentation "id" 'column-view-column) t)
+ "The @code{id} property of type @code{:string} (Read / Write) @br{}
+  An ID for the column. GTK is not currently using the ID for anything, but it
+  can be used by applications when saving column view configurations. It is up
+  to applications to ensure uniqueness of IDs. @br{}
+  Default value: @code{nil}")
 
-;;;The “resizable” property
-;;;  “resizable”                gboolean
-;;;Whether this column is resizable
+#+(and gtk-4-10 liber-documentation)
+(setf (liber:alias-for-function 'column-view-column-id)
+      "Accessor"
+      (documentation 'column-view-column-id 'function)
+ "@version{#2023-9-10}
+  @syntax[]{(gtk:column-view-column-id object) => id}
+  @syntax[]{(setf (gtk:column-view-column-id object) id)}
+  @argument[object]{a @class{gtk:column-view-column} object}
+  @argument[id]{a string with the ID to use for this column}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{id} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-id} function returns the ID. The
+  @sym{(setf gtk:column-view-column-id)} function sets the ID of this column.
+  GTK makes no use of this, but applications can use it when storing column
+  view configuration. It is up to callers to ensure uniqueness of IDs.
 
-;;;Owner: GtkColumnViewColumn
+  Since 4.10
+  @see-class{gtk:column-view-column}")
 
-;;;Flags: Read / Write
+;;; --- column-view-column-resizable -------------------------------------------
 
-;;;Default value: FALSE
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "resizable"
+                                               'column-view-column) t)
+ "The @code{resizable} property of type @code{:boolean} (Read / Write) @br{}
+  Whether this column is resizable. @br{}
+  Default value: @em{false}")
 
-;;;The “sorter” property
-;;;  “sorter”                   GtkSorter *
-;;;Sorter for sorting items according to this column
+#+liber-documentation
+(setf (liber:alias-for-function 'column-view-column-resizable)
+      "Accessor"
+      (documentation 'column-view-column-resizable 'function)
+ "@version{#2023-9-10}
+  @syntax[]{(gtk:column-view-column-resizable object) => resizable}
+  @syntax[]{(setf (gtk:column-view-column-resizable object) resizable)}
+  @argument[object]{a @class{gtk:column-view-column} object}
+  @argument[resizable]{@em{true} if this column is resizable}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{resizable} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-resizable} function returns whether this
+  column is resizable. The @sym{(setf gtk:column-view-column-resizable)}
+  function sets whether this column should be resizable by dragging.
+  @see-class{gtk:column-view-column}")
 
-;;;Owner: GtkColumnViewColumn
+;;; --- column-view-column-sorter ----------------------------------------------
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "sorter" 'column-view-column) t)
+ "The @code{sorter} property of type @class{gtk:sorter} (Read / Write) @br{}
+  Sorter for sorting items according to this column.")
 
-;;;The “title” property
-;;;  “title”                    char *
-;;;Title displayed in the header
+#+liber-documentation
+(setf (liber:alias-for-function 'column-view-column-sorter)
+      "Accessor"
+      (documentation 'column-view-column-sorter 'function)
+ "@version{#2023-9-10}
+  @syntax[]{(gtk:column-view-column-sorter object) => sorter}
+  @syntax[]{(setf (gtk:column-view-column-sorter object) sorter)}
+  @argument[object]{a @class{gtk:column-view-column} object}
+  @argument[sorter]{a @class{gtk:sorter} object}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{sorter} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-sorter} function returns the sorter that is
+  associated with the column. The @sym{(setf gtk:column-view-column-sorter)}
+  function associates a sorter with the column. If sorter is @code{nil}, the
+  column will not let users change the sorting by clicking on its header. This
+  sorter can be made active by clicking on the column header, or by calling the
+  @fun{gtk:column-view-sort-by-column} function.
 
-;;;Owner: GtkColumnViewColumn
+  See the @fun{gtk:column-view-sorter} function for the necessary steps for
+  setting up customizable sorting for the column view.
+  @see-class{gtk:column-view-column}
+  @see-function{gtk:column-view-sort-by-column}
+  @see-function{gtk:column-view-sorter}")
 
-;;;Flags: Read / Write
+;;; --- column-view-column-title -----------------------------------------------
 
-;;;Default value: NULL
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "title" 'column-view-column) t)
+ "The @code{title} property of type @code{:string} (Read / Write) @br{}
+  Title displayed in the header. @br{}
+  Default value: @code{nil}")
 
-;;;The “visible” property
-;;;  “visible”                  gboolean
-;;;Whether this column is visible
+#+liber-documentation
+(setf (liber:alias-for-function 'column-view-column-title)
+      "Accessor"
+      (documentation 'column-view-column-title 'function)
+ "@version{#2023-9-10}
+  @syntax[]{(gtk:column-view-column-title object) => title}
+  @syntax[]{(setf (gtk:column-view-column-title object) title)}
+  @argument[object]{a @class{gtk:column-view-column} object}
+  @argument[title]{a string with the title of the column}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{title} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-title} function  returns the title. The
+  @sym{(setf gtk:column-view-column-sorter)} function sets the title of this
+  column. The title is displayed in the header of a @class{gtk:column-view}
+  widget for this column and is therefore user-facing text that should be
+  translated.
+  @see-class{gtk:column-view-column}
+  @see-class{gtk:column-view}")
 
-;;;Owner: GtkColumnViewColumn
+;;; --- column-view-column-visible ---------------------------------------------
 
-;;;Flags: Read / Write
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "visible" 'column-view-column) t)
+ "The @code{visible} property of type @code{:boolean} (Read / Write) @br{}
+  Whether this column is visible. @br{}
+  Default value: @em{true}")
 
-;;;Default value: TRUE
+#+liber-documentation
+(setf (liber:alias-for-function 'column-view-column-visible)
+      "Accessor"
+      (documentation 'column-view-column-visible 'function)
+ "@version{#2023-9-10}
+  @syntax[]{(gtk:column-view-column-visible object) => visible}
+  @syntax[]{(setf (gtk:column-view-column-visible object) visible)}
+  @argument[object]{a @class{gtk:column-view-column} object}
+  @argument[visible]{@em{true} if this column is visible}
+  @begin{short}
+    Accessor of the @slot[gtk:column-view-column]{visible} slot of the
+    @class{gtk:column-view-column} class.
+  @end{short}
+  The @fun{gtk:column-view-column-visible} function returns whether this column
+  is visible. The @sym{(setf gtk:column-view-column-visible)} function sets
+  whether this column should be visible in views.
+  @see-class{gtk:column-view-column}")
 
-;;;See Also
-;;;GtkColumnView
-
-
-;;;Description
-;;;GtkColumnViewColumn represents the columns being added to GtkColumnView.
-
-;;;Columns have a title, and can optionally have a header menu set with gtk_column_view_column_set_header_menu().
-
-;;;A sorter can be associated with a column using gtk_column_view_column_set_sorter(), to let users influence sorting by clicking on the column header.
-
-;;;Functions
-;;;gtk_column_view_column_new ()
-;;;GtkColumnViewColumn *
-;;;gtk_column_view_column_new (const char *title,
-;;;                            GtkListItemFactory *factory);
-;;;Creates a new GtkColumnViewColumn that uses the given factory for mapping items to widgets.
-
-;;;You most likely want to call gtk_column_add_column() next.
-
-;;;The function takes ownership of the argument, so you can write code like
+;;; ----------------------------------------------------------------------------
+;;; gtk_column_view_column_new ()
+;;;
+;;; GtkColumnViewColumn *
+;;; gtk_column_view_column_new (const char *title,
+;;;                             GtkListItemFactory *factory);
+;;;
+;;; Creates a new GtkColumnViewColumn that uses the given factory for mapping
+;;; items to widgets.
+;;;
+;;; You most likely want to call gtk_column_add_column() next.
+;;;
+;;; The function takes ownership of the argument, so you can write code like
+;;;
 ;;;  column = gtk_column_view_column_new (_("Name"),
 ;;;    gtk_builder_list_item_factory_new_from_resource ("/name.ui"));
-
-;;;Parameters
-;;;title
-
-;;;Title to use for this column.
-
-;;;[nullable]
-;;;factory
-
-;;;The factory to populate items with.
-
-;;;[transfer full][nullable]
-;;;Returns
-;;;a new GtkColumnViewColumn using the given factory
-
-;;;gtk_column_view_column_get_column_view ()
-;;;GtkColumnView *
-;;;gtk_column_view_column_get_column_view
-;;;                               (GtkColumnViewColumn *self);
-;;;Gets the column view that's currently displaying this column.
-
-;;;If self has not been added to a column view yet, NULL is returned.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;Returns
-;;;The column view displaying self .
-
-;;;[nullable][transfer none]
-
-;;;gtk_column_view_column_set_factory ()
-;;;void
-;;;gtk_column_view_column_set_factory (GtkColumnViewColumn *self,
-;;;                                    GtkListItemFactory *factory);
-;;;Sets the GtkListItemFactory to use for populating list items for this column.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;factory
-
-;;;the factory to use or NULL for none.
-
-;;;[allow-none][transfer none]
-;;;gtk_column_view_column_get_factory ()
-;;;GtkListItemFactory *
-;;;gtk_column_view_column_get_factory (GtkColumnViewColumn *self);
-;;;Gets the factory that's currently used to populate list items for this column.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;Returns
-;;;The factory in use.
-
-;;;[nullable][transfer none]
-
-;;;gtk_column_view_column_set_title ()
-;;;void
-;;;gtk_column_view_column_set_title (GtkColumnViewColumn *self,
-;;;                                  const char *title);
-;;;Sets the title of this column. The title is displayed in the header of a GtkColumnView for this column and is therefore user-facing text that should be translated.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;title
-
-;;;Title to use for this column.
-
-;;;[nullable]
-;;;gtk_column_view_column_get_title ()
-;;;const char *
-;;;gtk_column_view_column_get_title (GtkColumnViewColumn *self);
-;;;Returns the title set with gtk_column_view_column_set_title().
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;Returns
-;;;The column's title.
-
-;;;[nullable]
-
-;;;gtk_column_view_column_set_sorter ()
-;;;void
-;;;gtk_column_view_column_set_sorter (GtkColumnViewColumn *self,
-;;;                                   GtkSorter *sorter);
-;;;Associates a sorter with the column.
-
-;;;If sorter is NULL, the column will not let users change the sorting by clicking on its header.
-
-;;;This sorter can be made active by clicking on the column header, or by calling gtk_column_view_sort_by_column().
-
-;;;See gtk_column_view_get_sorter() for the necessary steps for setting up customizable sorting for GtkColumnView.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;sorter
-
-;;;the GtkSorter to associate with column .
-
-;;;[nullable]
-;;;gtk_column_view_column_get_sorter ()
-;;;GtkSorter *
-;;;gtk_column_view_column_get_sorter (GtkColumnViewColumn *self);
-;;;Returns the sorter that is associated with the column.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;Returns
-;;;the GtkSorter of self .
-
-;;;[nullable][transfer none]
-
-;;;gtk_column_view_column_set_visible ()
-;;;void
-;;;gtk_column_view_column_set_visible (GtkColumnViewColumn *self,
-;;;                                    gboolean visible);
-;;;Sets whether this column should be visible in views.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;visible
-
-;;;whether this column should be visible
-
-;;;gtk_column_view_column_get_visible ()
-;;;gboolean
-;;;gtk_column_view_column_get_visible (GtkColumnViewColumn *self);
-;;;Returns whether this column is visible.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;Returns
-;;;TRUE if this column is visible
-
-;;;gtk_column_view_column_set_resizable ()
-;;;void
-;;;gtk_column_view_column_set_resizable (GtkColumnViewColumn *self,
-;;;                                      gboolean resizable);
-;;;Sets whether this column should be resizable by dragging.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;resizable
-
-;;;whether this column should be resizable
-
-;;;gtk_column_view_column_get_resizable ()
-;;;gboolean
-;;;gtk_column_view_column_get_resizable (GtkColumnViewColumn *self);
-;;;Returns whether this column is resizable.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnView
-
-;;;Returns
-;;;TRUE if this column is resizable
-
-;;;gtk_column_view_column_set_header_menu ()
-;;;void
-;;;gtk_column_view_column_set_header_menu
-;;;                               (GtkColumnViewColumn *self,
-;;;                                GMenuModel *menu);
-;;;Sets the menu model that is used to create the context menu for the column header.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;menu
-
-;;;a GMenuModel, or NULL.
-
-;;;[allow-none]
-;;;gtk_column_view_column_get_header_menu ()
-;;;GMenuModel *
-;;;gtk_column_view_column_get_header_menu
-;;;                               (GtkColumnViewColumn *self);
-;;;Gets the menu model that is used to create the context menu for the column header.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;Returns
-;;;the GMenuModel, or NULL.
-
-;;;[transfer none][nullable]
-
-;;;gtk_column_view_column_set_fixed_width ()
-;;;void
-;;;gtk_column_view_column_set_fixed_width
-;;;                               (GtkColumnViewColumn *self,
-;;;                                int fixed_width);
-;;;If fixed_width is not -1, sets the fixed width of column ; otherwise unsets it.
-
-;;;Setting a fixed width overrides the automatically calculated width. Interactive resizing also sets the “fixed-width” property.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;fixed_width
-
-;;;the new fixed width, or -1
-
-;;;gtk_column_view_column_get_fixed_width ()
-;;;int
-;;;gtk_column_view_column_get_fixed_width
-;;;                               (GtkColumnViewColumn *self);
-;;;Gets the fixed width of the column.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;Returns
-;;;the fixed with of the column
-
-;;;gtk_column_view_column_set_expand ()
-;;;void
-;;;gtk_column_view_column_set_expand (GtkColumnViewColumn *self,
-;;;                                   gboolean expand);
-;;;Sets the column to take available extra space.
-
-;;;The extra space is shared equally amongst all columns that have the expand set to TRUE.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;expand
-
-;;;TRUE if this column should expand to fill available sace
-
-;;;gtk_column_view_column_get_expand ()
-;;;gboolean
-;;;gtk_column_view_column_get_expand (GtkColumnViewColumn *self);
-;;;Returns whether this column should expand.
-
-;;;Parameters
-;;;self
-
-;;;a GtkColumnViewColumn
-
-;;;Returns
-;;;TRUE if this column expands
-
+;;;
+;;; title :
+;;;     Title to use for this column.
+;;;
+;;; factory :
+;;;     The factory to populate items with.
+;;;
+;;; Returns :
+;;;     a new GtkColumnViewColumn using the given factory
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline column-view-column-new))
+
+(defun column-view-column-new (title factory)
+  (make-instance 'column-view-column
+                 :title title
+                 :factory factory))
+
+(export 'column-view-column-new)
 
 ;;; --- End of file gtk4.column-view-column.lisp -------------------------------
