@@ -14,12 +14,12 @@
   (is (g:type-is-a (g:gtype "GtkBitset") g:+g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkBitset")
-          (g:gtype (cffi:foreign-funcall "gtk_bitset_get_type" :size)))))
+          (g:gtype (cffi:foreign-funcall "gtk_bitset_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:bitset
+          (glib:symbol-for-gtype "GtkBitset"))))
 
 ;;; --- Functions --------------------------------------------------------------
-
-;;;     gtk_bitset_ref
-;;;     gtk_bitset_unref
 
 ;;;     gtk_bitset_new_empty
 
@@ -27,17 +27,30 @@
   (is (typep (gtk:bitset-new-empty) 'gtk:bitset)))
 
 ;;;     gtk_bitset_new_range
-
-;;;     gtk_bitset_copy
-
 ;;;     gtk_bitset_contains
 
-(test gtk-bitset-contains
-  (let ((bitset (gtk:bitset-new-range 100 99)))
-    (is-false (gtk:bitset-contains bitset  99))
-    (is-true (gtk:bitset-contains bitset 100))
-    (is-false (gtk:bitset-contains bitset 199))
+(test gtk-bitset-new-range
+  (let ((bitset (gtk:bitset-new-range 100 100)))
+    (is (typep bitset 'gtk:bitset))
+    (is-false (gtk:bitset-contains bitset 99))
+    (is-true  (gtk:bitset-contains bitset 100))
+    (is-true  (gtk:bitset-contains bitset 150))
+    (is-true  (gtk:bitset-contains bitset 199))
     (is-false (gtk:bitset-contains bitset 200))))
+
+;;;     gtk_bitset_copy
+;;;     gtk_bitset_equals
+
+(test gtk-bitset-copy
+  (let* ((bitset1 (gtk:bitset-new-range 100 99))
+         (bitset2 (gtk:bitset-new-range 100 49))
+         (bitset3 (gtk:bitset-copy bitset2)))
+    (is (gtk:bitset-equals bitset1 bitset1))
+    (is (gtk:bitset-equals bitset2 bitset2))
+    (is (gtk:bitset-equals bitset3 bitset3))
+    (is (gtk:bitset-equals bitset2 bitset3))
+    (is (not (gtk:bitset-equals bitset1 bitset2)))
+    (is (not (gtk:bitset-equals bitset1 bitset3)))))
 
 ;;;     gtk_bitset_is_empty
 
@@ -45,7 +58,6 @@
   (is-true (gtk:bitset-is-empty (gtk:bitset-new-empty)))
   (is-false (gtk:bitset-is-empty (gtk:bitset-new-range 100 99))))
 
-;;;     gtk_bitset_equals
 ;;;     gtk_bitset_get_size_in_range
 ;;;     gtk_bitset_remove_all
 
@@ -68,7 +80,7 @@
     (is (= 1 (gtk:bitset-nth bitset 0)))
     (is (= 3 (gtk:bitset-nth bitset 1)))
     (is (= 5 (gtk:bitset-nth bitset 2)))
-    (is (equal '(1 3 5 7 9 11 13 15 16 17 18 19 0 0) 
+    (is (equal '(1 3 5 7 9 11 13 15 16 17 18 19 0 0)
                (mapcar (lambda (x)
                          (gtk:bitset-nth bitset x))
                        '( 0 1 2 3 4 5 6 7 8 9 10 11 12 13))))))
@@ -86,7 +98,7 @@
     (is (= 1 (gtk:bitset-nth bitset 0)))
     (is (= 3 (gtk:bitset-nth bitset 1)))
     (is (= 5 (gtk:bitset-nth bitset 2)))
-    (is (equal '(1 3 5 7 9 11 13 15 16 17 18 19 0 0) 
+    (is (equal '(1 3 5 7 9 11 13 15 16 17 18 19 0 0)
                (mapcar (lambda (x)
                          (gtk:bitset-nth bitset x))
                        '( 0 1 2 3 4 5 6 7 8 9 10 11 12 13))))))
@@ -104,7 +116,7 @@
     (is (= 1 (gtk:bitset-nth bitset 0)))
     (is (= 3 (gtk:bitset-nth bitset 1)))
     (is (= 5 (gtk:bitset-nth bitset 2)))
-    (is (equal '(1 3 5 7 9 11 13 15 16 17 18 19 0 0) 
+    (is (equal '(1 3 5 7 9 11 13 15 16 17 18 19 0 0)
                (mapcar (lambda (x)
                          (gtk:bitset-nth bitset x))
                        '( 0 1 2 3 4 5 6 7 8 9 10 11 12 13))))))
@@ -159,8 +171,7 @@
       (is (= 1 (gtk:bitset-iter-value iter)))
 
       (is-false (gtk:bitset-iter-previous iter value))
-      (is (= 0 (cffi:mem-ref value :uint)))
-)))
+      (is (= 0 (cffi:mem-ref value :uint))))))
 
 ;;;     gtk_bitset_iter_init_last
 
@@ -193,9 +204,7 @@
       (is (= 19 (gtk:bitset-iter-value iter)))
 
       (is-false (gtk:bitset-iter-next iter value))
-      (is (= 0 (cffi:mem-ref value :uint)))
-)))
-
+      (is (= 0 (cffi:mem-ref value :uint))))))
 
 ;;;     gtk_bitset_iter_init_at
 
@@ -228,7 +237,6 @@
       (is (= 11 (gtk:bitset-iter-value iter)))
 
       (is-true (gtk:bitset-iter-previous iter value))
-      (is (= 9 (cffi:mem-ref value :uint)))
-)))
+      (is (= 9 (cffi:mem-ref value :uint))))))
 
-;;; --- 2023-8-11 --------------------------------------------------------------
+;;; --- 2023-9-11 --------------------------------------------------------------
