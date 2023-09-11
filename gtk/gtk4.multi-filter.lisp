@@ -106,7 +106,7 @@
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'multi-filter) t)
  "The @code{item-type} property of type @class{g:type-t}(Read) @br{}
-  The type of items. See the @fun{g:list-model-item-type} function. Since 4.8")
+  The type of items. Since 4.8")
 
 #+gtk-4-8
 (declaim (inline multi-filter-item-type))
@@ -142,8 +142,7 @@
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'multi-filter) t)
  "The @code{n-items} property of type @code{:uint}(Read / Write) @br{}
-  The number of items. See the @fun{g:list-model-n-items} function. Since 4.8
-  @br{}
+  The number of items. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)

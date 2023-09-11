@@ -418,7 +418,7 @@ lambda (listview position)    :run-last
   used to populate list items. The @sym{(setf gtk:list-view-factory)} function
   sets the factory.
   @see-class{gtk:list-view}
-  @see-class{gtk:selection-model}")
+  @see-class{gtk:list-item-factory}")
 
 ;;; --- list-view-header-factory -----------------------------------------------
 
@@ -470,7 +470,7 @@ lambda (listview position)    :run-last
       (documentation 'list-view-show-separators 'function)
  "@version{#2023-9-6}
   @syntax[]{(gtk:list-view-show-separators object) => setting}
-  @syntax[]{(setf (gtk:list-view-separators object) setting)}
+  @syntax[]{(setf (gtk:list-view-show-separators object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[setting]{@em{true} if the list box shows separators}
   @begin{short}
@@ -515,7 +515,7 @@ lambda (listview position)    :run-last
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "tab-behavior" 'list-view) t)
- "The @code{tab-beavior} property of type @symbol{gtk:list-tab-behavior}
+ "The @code{tab-behavior} property of type @symbol{gtk:list-tab-behavior}
   (Read / Write) @br{}
   Behavior of the @kbd{Tab} key. @br{}
   Default value: @code{:all}")

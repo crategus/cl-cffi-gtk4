@@ -7,13 +7,13 @@ GTK 4 files
 
 GListModel support
 
-  gtk4.bitset.lisp                     GtkBitset                      GTK 4.12 +
+  gtk4.bitset.lisp                     GtkBitset                      GTK 4.12
   gtk4.expression.lisp                 GtkExpression, ...             GTK 4.12 +
 
   gtk4.filter.lisp                     GtkFilter                      GTK 4.12
   gtk4.custom-filter.lisp              GtkCustomFilter                GTK 4.12
   gtk4.multi-filter.lisp               GtkMultiFilter                 GTK 4.12
-  gtk4.bool-filter.lisp                GtkBoolFilter                  GTK 4.12 +
+  gtk4.bool-filter.lisp                GtkBoolFilter                  GTK 4.12
   gtk4.string-filter.lisp              GtkStringFilter                GTK 4.12
   gtk4.file-filter.lisp                GtkFileFilter                  GTK 4.12
 
@@ -48,14 +48,14 @@ List-based Widgets
   gtk4.list-view.lisp                  GtkListView                    GTK 4.12 +
   gtk4.grid-view.lisp                  GtkGridView                    GTK 4.12 +
   gtk4.column-view.lisp                GtkColumnView                  GTK 4.12 +
-  gtk4.column-view-column.lisp         GtkColumnViewColumn            GTK 4.0  +
-  gtk4.drop-down.lisp                  GtkDropDown                    GTK 4.0  +
+  gtk4.column-view-column.lisp         GtkColumnViewColumn            GTK 4.12 +
+  gtk4.drop-down.lisp                  GtkDropDown                    GTK 4.12 +
 
 Tree support
 
-  gtk4.tree-list-model.lisp            GtkTreeListModel, ...          GTK 4.0  +
-  gtk4.tree-list-row-sorter.lisp       GtkTreeListRowSorter           GTK 4.0  +
-  gtk4.tree-expander.lisp              GtkTreeExpander                GTK 4.0  +
+  gtk4.tree-list-model.lisp            GtkTreeListModel, ...          GTK 4.12 +
+  gtk4.tree-list-row-sorter.lisp       GtkTreeListRowSorter           GTK 4.12 +
+  gtk4.tree-expander.lisp              GtkTreeExpander                GTK 4.12 +
 
 Application support
 

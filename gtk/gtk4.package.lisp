@@ -491,16 +491,17 @@
       @about-generic{tree-list-row-expandable}
       @about-generic{tree-list-row-expanded}
       @about-generic{tree-list-row-item}
+      @about-function{tree-list-row-is-expandalbe}
       @about-class{tree-list-model}
       @about-generic{tree-list-model-autoexpand}
-      @about-generic{tree-list-model-item-type}
+      @about-function{tree-list-model-item-type}
       @about-generic{tree-list-model-model}
       @about-generic{tree-list-model-n-items}
       @about-generic{tree-list-model-passthrough}
       @about-symbol{tree-list-model-create-model-func}
       @about-function{tree-list-model-new}
-      @about-function{tree-list-model-child-row}
       @about-function{tree-list-model-row}
+      @about-function{tree-list-model-child-row}
     @end{subsection}
     @begin[GtkTreeListRowSorter]{subsection}
       Sort trees by levels.
@@ -2877,19 +2878,6 @@
       @about-function{popover-menu-bar-new-from-model}
       @about-function{popover-menu-bar-add-child}
       @about-function{popover-menu-bar-remove-child}
-    @end{subsection}
-    @begin[GtkDropDown]{subsection}
-      Choose an item from a list
-      @about-class{drop-down}
-      @about-generic{drop-down-enable-search}
-      @about-generic{drop-down-expression}
-      @about-generic{drop-down-factory}
-      @about-generic{drop-down-list-factory}
-      @about-generic{drop-down-model}
-      @about-generic{drop-down-selected}
-      @about-generic{drop-down-selected-item}
-      @about-function{drop-down-new}
-      @about-function{drop-down-new-from-strings}
     @end{subsection}
   @end{section}
   @begin[Selector Widgets and Dialogs]{section}

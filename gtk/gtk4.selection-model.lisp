@@ -159,6 +159,13 @@ lambda (model position n-items)    :run-last
 ;;;     TRUE if the item is selected
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_selection_model_is_selected" selection-model-is-selected)
+    :boolean
+  (model (g:object selection-model))
+  (position :uint))
+
+(export 'selection-model-is-selected)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_get_selection ()
 ;;;
@@ -179,6 +186,12 @@ lambda (model position n-items)    :run-last
 ;;;     no items are selected, the bitset is empty. The bitset must not be
 ;;;     modified.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_selection_model_get_selection" selection-model-selection)
+    (g:object bitset)
+  (model (g:object selection-model)))
+
+(export 'selection-model-selection)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_set_selection ()
@@ -230,6 +243,14 @@ lambda (model position n-items)    :run-last
 ;;;     does not mean that all items were updated according to the inputs.
 ;;; ----------------------------------------------------------------------------
 
+(defun (setf selection-model-selection) (selected model mask)
+  (cffi:foreign-funcall "gtk_selection_model_set_selection"
+                        (g:object selection-model) model
+                        (g:object bitset) selected
+                        (g:object bitset) mask
+                        :boolean)
+  selected)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_get_selection_in_range ()
 ;;;
@@ -261,6 +282,14 @@ lambda (model position n-items)    :run-last
 ;;;     all other values being undefined. The bitset must not be modified.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_selection_model_get_selection_in_range"
+               selection-model-selection-in-range) (g:object bitset)
+  (model (g:object selection-model))
+  (position :uint)
+  (n-items :uint))
+
+(export 'selection-model-selection-in-range)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_select_item ()
 ;;;
@@ -285,6 +314,14 @@ lambda (model position n-items)    :run-last
 ;;;     does not mean the item was selected.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_selection_model_select_item" selection-model-select-item)
+    :boolean
+  (model (g:object selection-model))
+  (position :uint)
+  (unselect-rest :boolean))
+
+(export 'selection-model-select-item)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_unselect_item ()
 ;;;
@@ -304,6 +341,13 @@ lambda (model position n-items)    :run-last
 ;;;     TRUE if this action was supported and no fallback should be tried. This
 ;;;     does not mean the item was unselected.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_selection_model_unselect_item"
+               selection-model-unselect-item) :boolean
+  (model (g:object selection-model))
+  (position :uint))
+
+(export 'selection-model-unselect-item)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_select_range ()
@@ -333,6 +377,15 @@ lambda (model position n-items)    :run-last
 ;;;     does not mean the range was selected.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_selection_model_select_range" selection-model-select-range)
+    :boolean
+  (model (g:object selection-model))
+  (position :uint)
+  (n-items :uint)
+  (unselect-rest :boolean))
+
+(export 'selection-model-select-range)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_unselect_range ()
 ;;;
@@ -357,6 +410,14 @@ lambda (model position n-items)    :run-last
 ;;;     does not mean the range was unselected.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_selection_model_unselect_range"
+               selection-model-unselect-range) :boolean
+  (model (g:object selection-model))
+  (position :uint)
+  (n-items :uint))
+
+(export 'selection-model-unselect-range)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_select_all ()
 ;;;
@@ -373,6 +434,12 @@ lambda (model position n-items)    :run-last
 ;;;     does not mean that all items are now selected.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_selection_model_select_all" selection-model-select-all)
+    :boolean
+  (model (g:object selection-model)))
+
+(export 'selection-model-select-all)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_unselect_all ()
 ;;;
@@ -388,6 +455,12 @@ lambda (model position n-items)    :run-last
 ;;;     TRUE if this action was supported and no fallback should be tried. This
 ;;;     does not mean that all items are now unselected.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_selection_model_unselect_all" selection-model-unselect-all)
+    :boolean
+  (model (g:object selection-model)))
+
+(export 'selection-model-unselect-all)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_selection_changed ()
@@ -409,5 +482,13 @@ lambda (model position n-items)    :run-last
 ;;; n_items :
 ;;;     the number of changed items
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_selection_model_selection_changed"
+               selection-model-selection-changed) :void
+  (model (g:object selection-model))
+  (position :uint)
+  (n-items :uint))
+
+(export 'selection-model-selection-changed)
 
 ;;; --- End of file gtk4.selection-model.lisp ----------------------------------

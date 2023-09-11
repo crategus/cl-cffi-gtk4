@@ -259,6 +259,19 @@
 ;;;     GtkDropTarget
 ;;; ----------------------------------------------------------------------------
 
+(gobject:define-g-object-class "GtkDropTargetAsync" drop-target-async
+  (:superclass event-controller
+   :export t
+   :interfaces ()
+   :type-initializer "gtk_drop_target_async_get_type")
+  ((actions
+    drop-target-async-actions
+    "actions" "GdkDragAction" t t)
+   (formats
+    drop-target-async-formats
+    "formats" "GdkContentFormats" t t)))
+
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------

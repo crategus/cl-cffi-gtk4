@@ -37,21 +37,25 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_drop_down_set_enable_search
 ;;;     gtk_drop_down_get_enable_search
-;;;     gtk_drop_down_set_expression
+;;;     gtk_drop_down_set_enable_search
 ;;;     gtk_drop_down_get_expression
-;;;     gtk_drop_down_set_factory
+;;;     gtk_drop_down_set_expression
 ;;;     gtk_drop_down_get_factory
-;;;     gtk_drop_down_set_list_factory
+;;;     gtk_drop_down_set_factory
+;;;     gtk_drop_down_get_header_factory                   Since 4.12
+;;;     gtk_drop_down_set_header_factory                   Since 4.12
 ;;;     gtk_drop_down_get_list_factory
-;;;     gtk_drop_down_set_model
+;;;     gtk_drop_down_set_list_factory
 ;;;     gtk_drop_down_get_model
-;;;     gtk_drop_down_set_selected
+;;;     gtk_drop_down_set_model
+;;;     gtk_drop_down_get_search_match_mode                Since 4.12
+;;;     gtk_drop_down_set_search_match_mode                Since 4.12
 ;;;     gtk_drop_down_get_selected
+;;;     gtk_drop_down_set_selected
 ;;;     gtk_drop_down_get_selected_item
-;;;     gtk_drop_down_set_show_arrow
-;;;     gtk_drop_down_get_show_arrow
+;;;     gtk_drop_down_get_show_arrow                       Since 4.6
+;;;     gtk_drop_down_set_show_arrow                       Since 4.6
 ;;;
 ;;; Functions
 ;;;
@@ -136,177 +140,159 @@
     drop-down-show-arrow
     "show-arrow" "gboolean" t t)))
 
-;;;Description
+#+liber-documentation
+(setf (documentation 'drop-down 'type)
+ "@version{#2023-9-10}
+  @begin{short}
+    The @class{gtk:drop-down} widget is a widget that allows the user to choose
+    an item from a list of options.
+  @end{short}
+  The @class{gtk:drop-down} widget displays the selected choice.
 
-;;;GtkDropDown is a widget that allows the user to choose an item from a list of options. The GtkDropDown displays the selected choice.
+  The options are given to the @class{gtk:drop-down} widget in the form of a
+  @class{g:list-model} object, and how the individual options are represented
+  is determined by a @class{gtk:list-item-factory} object. The default factory
+  displays simple strings.
 
-;;;The options are given to GtkDropDown in the form of GListModel, and how the individual options are represented is determined by a GtkListItemFactory. The default factory displays simple strings.
+  The @class{gtk:drop-down} widget knows how to obtain strings from the items
+  in a @class{gtk:string-list} object. For other models, you have to provide an
+  expression to find the strings via the @fun{gtk:drop-down-expression}
+  function.
 
-;;;GtkDropDown knows how to obtain strings from the items in a GtkStringList; for other models, you have to provide an expression to find the strings via gtk_drop_down_set_expression().
-
-;;;GtkDropDown can optionally allow search in the popup, which is useful if the list of options is long. To enable the search entry, use gtk_drop_down_set_enable_search().
-
-;;;CSS nodes
-;;;GtkDropDown has a single CSS node with name dropdown, with the button and popover nodes as children.
-
-;;;Accessibility
-;;;GtkDropDown uses the GTK_ACCESSIBLE_ROLE_COMBO_BOX role.
-
-;;; Signals
-
-;;;Gtk
-;;;DropDown
-;;;::activate
-;;;[−]
-
-;;;Declaration
-;;;void
-;;;activate (
-;;;  GtkDropDown* self,
-;;;  gpointer user_data
-;;;)
-
-
-;;;Emitted to when the drop down is activated.
-
-;;;The ::activate signal on GtkDropDown is an action signal and emitting it causes the drop down to pop up its dropdown.
-
-;;;Default handler:
-;;;The default handler is called before the handlers added via g_signal_connect().
-
-;;;The signal can be emitted directly
-;;;Available since:
-
-;;;See Also
-;;;GtkComboBox
-
-
+  The @class{gtk:drop-down} widget can optionally allow search in the popup,
+  which is useful if the list of options is long. To enable the search entry,
+  use the @fun{gtk:drop-down-enable-search} function.
+  @begin[CSS nodes]{dictionary}
+    The @class{gtk:drop-down} implementation has a single CSS node with name
+    @code{dropdown}, with the button and popover nodes as children.
+  @end{dictionary}
+  @begin[Accessibility]{dictionary}
+    The @class{gtk:drop-down} implementation uses the @code{:combo-box} role
+    of the @symbol{gtk:accessible-role} enumeration.
+  @end{dictionary}
+  @begin[Signals]{dictionary}
+    @subheading{The \"activate\" signal}
+      @begin{pre}
+lambda (dropdown)    :action
+      @end{pre}
+      The signal is an action signal and emitting it causes the drop down to
+      pop up its dropdown. The default handler is called before the handlers.
+      Since 4.6
+      @begin[code]{table}
+        @entry[dropdown]{The @class{gtk:drop-down} widget.}
+      @end{table}
+  @end{dictionary}
+  @see-constructor{gtk:drop-down-new}
+  @see-constructor{gtk:drop-down-new-from-strings}
+  @see-slot{gtk:drop-down-enable-search}
+  @see-slot{gtk:drop-down-expression}
+  @see-slot{gtk:drop-down-factory}
+  @see-slot{gtk:drop-down-header-factory}
+  @see-slot{gtk:drop-down-list-factory}
+  @see-slot{gtk:drop-down-model}
+  @see-slot{gtk:drop-down-search-match-mode}
+  @see-slot{gtk:drop-down-selected}
+  @see-slot{gtk:drop-down-selected-item}
+  @see-slot{gtk:drop-down-show-arrow}
+  @see-class{gtk:combo-box}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;;Property
-;;;Gtk
-;;;DropDown
-;;;:show-arrow
-;;;[−]
-;;;Declaration
-;;;property show-arrow: gboolean [ read, write ]
-;;;[−]
-;;;Description
-;;;[src]
-;;;Whether to show an arrow within the GtkDropDown widget.
+;;; --- drop-down-enable-search ------------------------------------------------
 
-;;;Type:	gboolean
-;;;Available since:	4.6
-;;;Getter method	gtk_drop_down_get_show_arrow()
-;;;Setter method	gtk_drop_down_set_show_arrow()
-;;;[−]
-;;;Flags
-;;;Readable	yes
-;;;Writable	yes
-;;;Construct	no
-;;;Construct only	no
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "enable-search" 'drop-down) t)
+ "The @code{enable-search} property of type @code{:boolean} (Read / Write) @br{}
+  Whether to show a search entry in the popup. Note that search requires
+  the @slot[gtk:drop-down]{expression} property to be set. @br{}
+  Default value: @em{false}")
 
 
-;;; ----------------------------------------------------------------------------
-;;;The “enable-search” property
-;;;
-;;;  “enable-search”            gboolean
-;;;
-;;; Whether to show a search entry in the popup.
-;;;
-;;; Note that search requires “expression” to be set.
-;;;
-;;; Owner: GtkDropDown
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: FALSE
-;;; ----------------------------------------------------------------------------
+;;; --- drop-down-expression ---------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “expression” property
-;;;
-;;;  “expression”               GtkExpression *
-;;;
-;;; An expression to evaluate to obtain strings to match against the search term
-;;; (see “enable-search”). If “factory” is not set, the expression is also used
-;;; to bind strings to labels produced by a default factory.
-;;;
-;;;
-;;; Owner: GtkDropDown
-;;;
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; The “factory” property
-;;;
-;;;  “factory”                  GtkListItemFactory *
-;;;
-;;; Factory for populating list items.
-;;;
-;;; Owner: GtkDropDown
-;;;
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; The “list-factory” property
-;;;
-;;;  “list-factory”             GtkListItemFactory *
-;;;
-;;; The factory for populating list items in the popup.
-;;;
-;;; If this is not set, “factory” is used.
-;;;
-;;; Owner: GtkDropDown
-;;;
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; The “model” property
-;;;
-;;;  “model”                    GListModel *
-;;;
-;;; Model for the displayed items.
-;;;
-;;; Owner: GtkDropDown
-;;;
-;;; Flags: Read / Write
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; The “selected” property
-;;;
-;;;  “selected”                 guint
-;;;
-;;; The position of the selected item in “model”, or GTK_INVALID_LIST_POSITION
-;;; if no item is selected.
-;;;
-;;; Owner: GtkDropDown
-;;;
-;;; Flags: Read / Write
-;;;
-;;; Default value: 4294967295
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; The “selected-item” property
-;;;
-;;;  “selected-item”            GObject *
-;;;
-;;; The selected item.
-;;;
-;;; Owner: GtkDropDown
-;;;
-;;; Flags: Read
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "expression" 'drop-down) t)
+ "The @code{expression} property of type @class{gtk:expression} (Read / Write)
+  @br{}
+  An expression to evaluate to obtain strings to match against the search term
+  See the @slot[gkt:drop-down]{enable-search} property. If the
+  @slot[gtk:drop-down]{factory} property is not set, the expression is also
+  used to bind strings to labels produced by a default factory.")
 
 
+;;; --- drop-down-factory ------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "factory" 'drop-down) t)
+ "The @code{factory} property of type @class{gtk:list-item-factory}
+  (Read / Write) @br{}
+  Factory for populating list items.")
+
+
+;;; --- drop-down-header-factory -----------------------------------------------
+
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "header-factory" 'drop-down) t)
+ "The @code{header-factory} property of type @class{gtk:list-item-factory}
+  (Read / Write) @br{}
+  The factory for creating header widgets for the popup. Since 4.12")
+
+
+;;; --- drop-down-list-factory -------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "list-factory" 'drop-down) t)
+ "The @code{list-factory} property of type @class{gtk:list-item-factory}
+  (Read / Write) @br{}
+  The factory for populating list items in the popup. If this is not set, the
+  @slot[gtk:drop-down]{factory} property is used.")
+
+
+;;; --- drop-down-model --------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "model" 'drop-down) t)
+ "The @code{model} property of type @class{g:list-model} (Read / Write) @br{}
+  Model for the displayed items.")
+
+
+;;; --- drop-down-search-match-mode --------------------------------------------
+
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "search-match-mode"
+                                               'drop-down) t)
+ "The @code{search-match-mode} property of type
+  @symbol{gtk:string-filter-match-mode} (Read / Write) @br{}
+  The match mode for the search filter. Since 4.12")
+
+
+;;; --- drop-down-selected -----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "selected" 'drop-down) t)
+ "The @code{selected} property of type @code{:uint} (Read / Write) @br{}
+  The position of the selected item in @slot[gtk:drop-down]{model}, or
+  @variable{gtk:+gtk-invalid-list-position+} if no item is selected. @br{}
+  Default value: 4294967295")
+
+
+;;; --- drop-down-selected-item ------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "selected-item" 'drop-down) t)
+ "The @code{selected-item} property of type @class{g:object} (Read) @br{}
+  The selecte item.")
+
+
+;;; --- drop-down-show-arrow ---------------------------------------------------
+
+#+(and gtk-4-6 liber-documentation)
+(setf (documentation (liber:slot-documentation "show-arrow" 'drop-down) t)
+ "The @code{show-arrow} property of type @code{:boolean} (Read / Write) @br{}
+  Whether to show an arrow within the GtkDropDown widget. Since 4.6 @br{}
+  Default value: @em{true}")
 
 
 ;;; ----------------------------------------------------------------------------
