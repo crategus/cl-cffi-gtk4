@@ -78,7 +78,6 @@
 ;;;     gtk_tree_iter_copy
 ;;;     gtk_tree_iter_free
 ;;;
-;;;     gtk_tree_model_filter_new
 ;;;     gtk_tree_model_get_flags
 ;;;     gtk_tree_model_get_n_columns
 ;;;     gtk_tree_model_get_column_type
@@ -1197,33 +1196,6 @@ lambda (model path iter new-order)    :run-first
 ;;; iter :
 ;;;     a dynamically allocated tree iterator
 ;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_filter_new ()
-;;;
-;;; GtkTreeModel*
-;;; gtk_tree_model_filter_new (GtkTreeModel* child_model,
-;;;                            GtkTreePath* root)
-;;;
-;;; Creates a new GtkTreeModel, with child_model as the child_model and root as
-;;; the virtual root.
-;;;
-;;; Deprecated since 4.10
-;;; Please do not use it in newly written code.
-;;;
-;;; root :
-;;;     A GtkTreePath, the argument can be NULL.
-;;;
-;;; Return :
-;;;     A new GtkTreeModel.
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_tree_model_filter-new" tree-model-filter-new)
-    (g:object tree-model)
-  (model (g:object tree-model))
-  (root (g:boxed tree-path)))
-
-(export 'tree-model-filter-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_model_get_flags -> tree-model-flags
