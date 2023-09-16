@@ -157,25 +157,22 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_numeric_sorter_new ()
-;;;
-;;; GtkNumericSorter *
-;;; gtk_numeric_sorter_new (GtkExpression *expression);
-;;;
-;;; Creates a new numeric sorter using the given expression .
-;;;
-;;; Smaller numbers will be sorted first. You can call
-;;; gtk_numeric_sorter_set_sort_order() to change this.
-;;;
-;;; expression :
-;;;     The expression to evaluate.
-;;;
-;;; Returns :
-;;;     a new GtkNumericSorter
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline numeric-sorter-new))
 
 (defun numeric-sorter-new (expression)
+ #+liber-documentation
+ "@version{#2023-9-13}
+  @argument[expression]{a @class{gtk:expression} instance to evalute}
+  @return{A new @class{gtk:numeric-sorter} object.}
+  @begin{short}
+    Creates a new numeric sorter using the given @arg{expression}.
+  @end{short}
+  Smaller numbers will be sorted first. You can call the
+  @fun{gtk:numeric-sorter-sort-order} function to change this.
+  @see-class{gtk:numeric-sorter}
+  @see-class{gtk:expression}"
   (make-instance 'numeric-sorter
                  :expression expression))
 

@@ -72,7 +72,7 @@
    :type-initializer "gtk_multi_sorter_get_type")
   (#+gtk-4-8
    (item-type
-    multi-sorter-item-type
+    %multi-sorter-item-type
     "item-type" "GType" t nil)
    #+gtk-4-8
    (n-items
@@ -80,10 +80,8 @@
     "n-items" "guint" t nil)))
 
 #+liber-documentation
-(setf (liber:alias-for-symbol 'sorter-order)
-      "GEnum"
-      (liber:symbol-documentation 'sorter-order)
- "@version{2023-9-5}
+(setf (documentation 'multi-sorter 'type)
+ "@version{2023-9-12}
   @begin{short}
     The @class{gtk:multi-sorter} object combines multiple sorters by trying
     them in turn.
@@ -161,70 +159,63 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_multi_sorter_new ()
-;;;
-;;; GtkMultiSorter *
-;;; gtk_multi_sorter_new (void);
-;;;
-;;; Creates a new multi sorter.
-;;;
-;;; This sorter compares items by trying each of the sorters in turn, until one
-;;; returns non-zero. In particular, if no sorter has been added to it, it will
-;;; always compare items as equal.
-;;;
-;;; Returns :
-;;;     a new GtkMultiSorter
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline multi-sorter-new))
 
 (defun multi-sorter-new ()
+ #+liber-documentation
+ "@version{#2023-9-13}
+  @return{A new @class{gtk:multi-sorter} object.}
+  @begin{short}
+    Creates a new multi sorter.
+  @end{short}
+  This sorter compares items by trying each of the sorters in turn, until one
+  returns non-zero. In particular, if no sorter has been added to it, it will
+  always compare items as equal.
+  @see-class{gtk:multi-sorter}"
   (make-instance 'multi-sorter))
 
 (export 'multi-sorter-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_multi_sorter_append ()
-;;;
-;;; void
-;;; gtk_multi_sorter_append (GtkMultiSorter *self,
-;;;                          GtkSorter *sorter);
-;;;
-;;; Add sorter to self to use for sorting at the end. self will consult all
-;;; existing sorters before it will sort with the given sorter .
-;;;
-;;; self :
-;;;     a GtkMultiSorter
-;;;
-;;; sorter :
-;;;     a sorter to add.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_multi_sorter_append" multi-sorter-append) :void
-  (object (g:object multi-sorter))
-  (sorter (g:object sorter)))
+ #+liber-documentation
+ "@version{#2023-9-13}
+  @argument[sorter]{a @class{gtk:multi-sorter} object}
+  @argument[other]{another @class{gtk:sorter} object to add}
+  @begin{short}
+    Add @arg{other} to @arg{sorter} to use for sorting at the end.
+  @end{short}
+  The @arg{sorter} object will consult all existing sorters before it will sort
+  with the given @arg{other}.
+  @see-class{gtk:multi-sorter}
+  @see-class{gtk:sorter}"
+  (sorter (g:object multi-sorter))
+  (other (g:object sorter)))
 
 (export 'multi-sorter-append)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_multi_sorter_remove ()
-;;;
-;;; void
-;;; gtk_multi_sorter_remove (GtkMultiSorter *self,
-;;;                          guint position);
-;;;
-;;; Removes the sorter at the given position from the list of sorter used by
-;;; self .
-;;;
-;;; If position is larger than the number of sorters, nothing happens.
-;;;
-;;; self :
-;;;     a GtkMultiSorter
-;;;
-;;; position :
-;;;     position of sorter to remove
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_multi_sorter_remove" multi-sorter-remove) :void
+ #+liber-documentation
+ "@version{#2023-9-13}
+  @argument[sorter]{a @class{gtk:multi-sorter} object}
+  @argument[position]{an unsigned integer with the position of the sorter
+   to remove}
+  @begin{short}
+    Removes the sorter at the given position from the list of sorter used by
+    @arg{sorter}.
+  @end{short}
+  If the @arg{position} parameter is larger than the number of sorters, nothing
+  happens.
+  @see-class{gtk:multi-sorter}"
   (object (g:object multi-sorter))
   (position :uint))
 

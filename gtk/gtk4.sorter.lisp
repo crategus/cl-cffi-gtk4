@@ -168,7 +168,7 @@
   @begin{short}
     The @class{gtk:sorter} object is the way to describe sorting criteria.
   @end{short}
-  Its primary user is @class{gtk:sort-list-model} object.
+  Its primary user is the @class{gtk:sort-list-model} object.
 
   The model will use a sorter to determine the order in which its items should
   appear by calling the @fun{gtk:sorter-compare} function for pairs of items.
@@ -206,42 +206,34 @@ lambda (sorter change)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_sorter_compare ()
-;;;
-;;; GtkOrdering
-;;; gtk_sorter_compare (GtkSorter *self,
-;;;                     gpointer item1,
-;;;                     gpointer item2);
-;;;
-;;; Compares two given items according to the sort order implemented by the
-;;; sorter.
-;;;
-;;; Sorters implement a partial order:
-;;;
-;;; It is reflexive, ie a = a
-;;;
-;;; It is antisymmetric, ie if a < b and b < a, then a = b
-;;;
-;;; It is transitive, ie given any 3 items with a ≤ b and b ≤ c, then a ≤ c
-;;;
-;;; The sorter may signal it conforms to additional constraints via the return
-;;; value of gtk_sorter_get_order().
-;;;
-;;; self :
-;;;     a GtkSorter
-;;;
-;;; item1 :
-;;;     first item to compare.
-;;;
-;;; item2 :
-;;;     second item to compare.
-;;;
-;;; Returns :
-;;;     GTK_ORDERING_EQUAL if item1 == item2 ,
-;;;     GTK_ORDERING_SMALLER if item1 < item2 ,
-;;;     GTK_ORDERING_LARGER if item1 > item2
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_sorter_compare" sorter-compare) ordering
+ #+liber-documentation
+ "@version{#2023-9-12}
+  @argument[sorter]{a @class{gtk:sorter} object}
+  @argument[item1]{a pointer to the first item to compare}
+  @argument[item2]{a pointer to the second item to compare}
+  @return{A @symbol{gtk:ordering} value with @code{:equal} if @arg{item1} =
+    @arg{item2}, @code{:smaller} if @arg{item1} < @arg{item2}, @code{:larger}
+    if @arg{item1} > @arg{item2}.}
+  @begin{short}
+    Compares two given items according to the sort order implemented by the
+    sorter.
+  @end{short}
+
+  Sorters implement a partial order:
+  @begin{itemize}
+    @item{It is reflexive, i.e. a = a.}
+    @item{It is antisymmetric, i.e. if a < b and b < a, then a = b.}
+    @item{It is transitive, i.e. given any 3 items with a ≤ b and b ≤ c, then
+      a ≤ c.}
+  @end{itemize}
+  The sorter may signal it conforms to additional constraints via the return
+  value of the @fun{gtk:sorter-order} function.
+  @see-class{gtk:sorter}
+  @see-symbol{gtk:ordering}
+  @see-function{gtk:sorter-order}"
   (sorter (g:object sorter))
   (item1 :pointer)
   (item2 :pointer))
@@ -250,53 +242,49 @@ lambda (sorter change)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_sorter_get_order ()
-;;;
-;;; GtkSorterOrder
-;;; gtk_sorter_get_order (GtkSorter *self);
-;;;
-;;; Gets the order that self conforms to. See GtkSorterOrder for details of the
-;;; possible return values.
-;;;
-;;; This function is intended to allow optimizations.
-;;;
-;;; self :
-;;;     a GtkSorter
-;;;
-;;; Returns :
-;;;     The order
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_sorter_get_order" sorter-order) sorter-order
+ #+liber-documentation
+ "@version{#2023-9-12}
+  @argument[sorter]{a @class{gtk:sorter} object}
+  @return{A @symbol{gtk:sorter-order} value.}
+  @begin{short}
+    Gets the order that @arg{sorter} conforms to.
+  @end{short}
+  See the @symbol{gtk:sorter-order} enumeration for details of the possible
+  return values. This function is intended to allow optimizations.
+  @see-class{gtk:sorter}
+  @see-symbol{gtk:sorter-order}"
   (sorter (g:object sorter)))
 
-(export 'sorter-oder)
+(export 'sorter-order)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_sorter_changed ()
-;;;
-;;; void
-;;; gtk_sorter_changed (GtkSorter *self,
-;;;                     GtkSorterChange change);
-;;;
-;;; Emits the “changed” signal to notify all users of the sorter that it has
-;;; changed. Users of the sorter should then update the sort order via
-;;; gtk_sorter_compare().
-;;;
-;;; Depending on the change parameter, it may be possible to update the sort
-;;; order without a full resorting. Refer to the GtkSorterChange documentation
-;;; for details.
-;;;
-;;; This function is intended for implementors of GtkSorter subclasses and
-;;; should not be called from other functions.
-;;;
-;;; self :
-;;;     a GtkSorter
-;;;
-;;; change :
-;;;     How the sorter changed
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_sorter_changed" sorter-changed) :void
+ #+liber-documentation
+ "@version{#2023-9-12}
+  @argument[sorter]{a @class{gtk:sorter} object}
+  @argument[change]{a @symbol{gtk:sorter-change} value}
+  @begin{short}
+    Emits the \"changed\" signal to notify all users of the sorter that it has
+    changed.
+  @end{short}
+  Users of the sorter should then update the sort order via the
+  @fun{gtk:sorter-compare} function.
+
+  Depending on the @arg{change} parameter, it may be possible to update the sort
+  order without a full resorting. Refer to the @symbol{gtk:sorter-change}
+  documentation for details.
+
+  This function is intended for implementors of @class{gtk:sorter} subclasses
+  and should not be called from other functions.
+  @see-class{gtk:sorter}
+  @see-symbol{gtk:sorter-change}
+  @see-function{gtk:sorter-compare}"
   (sorter (g:object sorter))
   (change sorter-change))
 
@@ -304,15 +292,28 @@ lambda (sorter change)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_ordering_from_cmpfunc
-;;;
-;;; Converts the result of a GCompareFunc like strcmp() to a GtkOrdering value.
-;;;
-;;; Since 4.2
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-2
-(cffi:defcfun ("gtk_ordering_from_cmpfunc" ordering-from-cmpfunc) ordering
-  (result :int))
+(defun ordering-from-cmpfunc (result)
+ #+liber-documentation
+ "@version{2023-9-13}
+  @argument[result]{An integer with the result of a comparison function}
+  @return{A @symbol{gtk:ordering} value.}
+  @begin{short}
+    Converts the result of a @symbol{g:compare-data-func} function to a
+    @symbol{gtk:ordering} value.
+  @end{short}
+  @begin[Example]{dictionary}
+    @begin{pre}
+(mapcar #'gtk:ordering-from-cmpfunc '(-1 0 +1))
+=> (:SMALLER :EQUAL :LARGER)
+    @end{pre}
+  @end{dictionary}
+  Since 4.2
+  @see-symbol{gtk:ordering}
+  @see-symbol{g:compare-data-func}"
+  (cffi:foreign-enum-keyword 'ordering result))
 
 #+gtk-4-2
 (export 'ordering-from-cmpfunc)

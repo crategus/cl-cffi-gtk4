@@ -29,7 +29,7 @@
 ;;;
 ;;; GtkCustomSorter
 ;;;
-;;;     Sorting with a callbacks
+;;;     Sorting with a callback function
 ;;;
 ;;; Types and Values
 ;;;
@@ -72,27 +72,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_custom_sorter_new ()
-;;;
-;;; GtkCustomSorter *
-;;; gtk_custom_sorter_new (GCompareDataFunc sort_func,
-;;;                        gpointer user_data,
-;;;                        GDestroyNotify user_destroy);
-;;;
-;;; Creates a new GtkSorter that works by calling sort_func to compare items.
-;;;
-;;; If sort_func is NULL, all items are considered equal.
-;;;
-;;; sort_func :
-;;;     the GCompareDataFunc to use for sorting.
-;;
-;;; user_data :
-;;;     user data to pass to sort_func .
-;;;
-;;; user_destroy :
-;;;     destroy notify for user_data .
-;;;
-;;; Returns :
-;;;     a new GtkCustomSorter
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_custom_sorter_new" %custom-sorter-new)
@@ -101,42 +80,30 @@
   (data :pointer)
   (notify :pointer))
 
-(defun custom-sorter-new (func)
-  (%custom-sorter-new (cffi:callback g:compare-data-func)
-                      (glib:allocate-stable-pointer func)
-                      (cffi:callback glib:stable-pointer-destroy-notify)))
+(defun custom-sorter-new (&optional func)
+ #+liber-documentation
+ "@version{2023-9-13}
+  @argument[func]{a @symbol{g:compare-data-func} callback function to use for
+    sorting}
+  @return{A new @class{gtk:custom-sorter} object.}
+  @begin{short}
+    Creates a new custom sorter that works by calling the @arg{func} callback
+    function to compare items.
+  @end{short}
+  If @arg{func} is @code{nil}, all items are considered equal.
+  @see-class{gtk:custom-sorter}"
+  (if func
+      (%custom-sorter-new (cffi:callback g:compare-data-func)
+                          (glib:allocate-stable-pointer func)
+                          (cffi:callback glib:stable-pointer-destroy-notify))
+      (%custom-sorter-new (cffi:null-pointer)
+                          (cffi:null-pointer)
+                          (cffi:null-pointer))))
 
 (export 'custom-sorter-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_custom_sorter_set_sort_func ()
-;;;
-;;; void
-;;; gtk_custom_sorter_set_sort_func (GtkCustomSorter *self,
-;;;                                  GCompareDataFunc sort_func,
-;;;                                  gpointer user_data,
-;;;                                  GDestroyNotify user_destroy);
-;;;
-;;; Sets (or unsets) the function used for sorting items.
-;;;
-;;; If sort_func is NULL, all items are considered equal.
-;;;
-;;; If the sort func changes its sorting behavior, gtk_sorter_changed() needs
-;;; to be called.
-;;;
-;;; If a previous function was set, its user_destroy will be called now.
-;;;
-;;; sorter :
-;;;     a GtkCustomSorter
-;;;
-;;; sort_func :
-;;;     function to sort items.
-;;;
-;;; user_data :
-;;;     user data to pass to match_func .
-;;;
-;;; user_destroy :
-;;;     destroy notify for user_data
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_custom_sorter_set_sort_func" %custom-sorter-set-sort-func)
@@ -147,11 +114,30 @@
   (notify :pointer))
 
 (defun custom-sorter-set-sort-func (sorter func)
-  (%custom-sorter-set-sort-func
-          sorter
-          (cffi:callback g:compare-data-func)
-          (glib:allocate-stable-pointer func)
-          (cffi:callback glib:stable-pointer-destroy-notify)))
+ #+liber-documentation
+ "@version{2023-9-13}
+  @argument[sorter]{a @class{gtk:custom-sorter} object}
+  @argument[func]{a @symbol{g:compare-data-func} callback function}
+  @begin{short}
+    Sets (or unsets) the callback function used for sorting items.
+  @end{short}
+  If @arg{func} is @code{nil}, all items are considered equal. If the sort
+  function changes its sorting behavior, the @fun{gtk:sorter-changed} function
+  needs to be called.
+  @see-class{gtk:custom-sorter}
+  @see-symbol{g:compare-data-func}
+  @see-function{gtk:sorter-changed}"
+  (if func
+      (%custom-sorter-set-sort-func
+              sorter
+              (cffi:callback g:compare-data-func)
+              (glib:allocate-stable-pointer func)
+              (cffi:callback glib:stable-pointer-destroy-notify))
+      (%custom-sorter-set-sort-func
+              sorter
+              (cffi:null-pointer)
+              (cffi:null-pointer)
+              (cffi:null-pointer))))
 
 (export 'custom-sorter-set-sort-func)
 

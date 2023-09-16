@@ -237,25 +237,23 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_string_sorter_new ()
-;;;
-;;; GtkStringSorter *
-;;; gtk_string_sorter_new (GtkExpression *expression);
-;;;
-;;; Creates a new string sorter that compares items using the given expression .
-;;;
-;;; Unless an expression is set on it, this sorter will always compare items as
-;;; invalid.
-;;;
-;;; expression :
-;;;     The expression to evaluate.
-;;;
-;;; Returns :
-;;;     a new GtkStringSorter
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline string-sorter-new))
 
 (defun string-sorter-new (expression)
+ #+liber-documentation
+ "@version{#2023-9-13}
+  @argument[expression]{a @class{gtk:expression} instance to evaluate}
+  @return{A new @class{gtk:string-sorter} object.}
+  @begin{short}
+    Creates a new string sorter that compares items using the given
+    @arg{expression}.
+  @end{short}
+  Unless an expression is set on it, this sorter will always compare items as
+  invalid.
+  @see-class{gtk:string-sorter}
+  @see-class{gtk:expression}"
   (make-instance 'string-sorter
                  :expression expression))
 
