@@ -7,7 +7,7 @@
 
 ;;;     GtkEntryCompletion
 
-(test entry-completion-class
+(test gtk-entry-completion-class
   ;; Type check
   (is (g:type-is-object "GtkEntryCompletion"))
   ;; Check the registered name
@@ -15,7 +15,8 @@
           (glib:symbol-for-gtype "GtkEntryCompletion")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEntryCompletion")
-          (g:gtype (cffi:foreign-funcall "gtk_entry_completion_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_entry_completion_get_type"
+                                         :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkEntryCompletion")))
@@ -34,7 +35,8 @@
   (is (equal '("cursor-on-match" "insert-prefix" "match-selected" "no-matches")
              (list-signals "GtkEntryCompletion")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryCompletion" GTK-ENTRY-COMPLETION
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryCompletion"
+                                             GTK-ENTRY-COMPLETION
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GtkBuildable" "GtkCellLayout") :TYPE-INITIALIZER
                         "gtk_entry_completion_get_type")
@@ -92,4 +94,4 @@
 ;;;     gtk_entry_completion_get_completion_prefix
 ;;;     gtk_entry_completion_insert_prefix
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-9-16 --------------------------------------------------------------

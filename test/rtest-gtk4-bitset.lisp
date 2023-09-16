@@ -149,29 +149,25 @@
     (dolist (value values)
       (is-true (gtk:bitset-add bitset value)))
 
-    (cffi:with-foreign-objects ((iter 'gtk:bitset-iter) (value :uint))
+    (cffi:with-foreign-object (iter 'gtk:bitset-iter)
 
-      (is-true (gtk:bitset-iter-init-first iter bitset value))
+      (is (= 1 (gtk:bitset-iter-init-first iter bitset)))
       (is-true (gtk:bitset-iter-is-valid iter))
 
-      (is (= 1 (cffi:mem-ref value :uint)))
-      (is (= 1 (gtk:bitset-iter-value iter)))
-      (is-true (gtk:bitset-iter-next iter value))
-      (is (= 3 (cffi:mem-ref value :uint)))
+      (is (= 3  (gtk:bitset-iter-next iter)))
       (is (= 3 (gtk:bitset-iter-value iter)))
-      (is-true (gtk:bitset-iter-next iter value))
-      (is (= 5 (cffi:mem-ref value :uint)))
+
+      (is (= 5 (gtk:bitset-iter-next iter)))
       (is (= 5 (gtk:bitset-iter-value iter)))
 
-      (is-true (gtk:bitset-iter-previous iter value))
-      (is (= 3 (cffi:mem-ref value :uint)))
+      (is (= 3 (gtk:bitset-iter-previous iter)))
       (is (= 3 (gtk:bitset-iter-value iter)))
-      (is-true (gtk:bitset-iter-previous iter value))
-      (is (= 1 (cffi:mem-ref value :uint)))
+
+      (is (= 1 (gtk:bitset-iter-previous iter)))
       (is (= 1 (gtk:bitset-iter-value iter)))
 
-      (is-false (gtk:bitset-iter-previous iter value))
-      (is (= 0 (cffi:mem-ref value :uint))))))
+      (is-false (gtk:bitset-iter-previous iter))
+      (is (= 0 (gtk:bitset-iter-value iter))))))
 
 ;;;     gtk_bitset_iter_init_last
 
@@ -182,29 +178,25 @@
     (dolist (value values)
       (is-true (gtk:bitset-add bitset value)))
 
-    (cffi:with-foreign-objects ((iter 'gtk:bitset-iter) (value :uint))
+    (cffi:with-foreign-object (iter 'gtk:bitset-iter)
 
-      (is-true (gtk:bitset-iter-init-last iter bitset value))
+      (is (= 19 (gtk:bitset-iter-init-last iter bitset)))
       (is-true (gtk:bitset-iter-is-valid iter))
 
-      (is (= 19 (cffi:mem-ref value :uint)))
-      (is (= 19 (gtk:bitset-iter-value iter)))
-      (is-true (gtk:bitset-iter-previous iter value))
-      (is (= 18 (cffi:mem-ref value :uint)))
+      (is (= 18 (gtk:bitset-iter-previous iter)))
       (is (= 18 (gtk:bitset-iter-value iter)))
-      (is-true (gtk:bitset-iter-previous iter value))
-      (is (= 17 (cffi:mem-ref value :uint)))
+
+      (is (= 17 (gtk:bitset-iter-previous iter)))
       (is (= 17 (gtk:bitset-iter-value iter)))
 
-      (is-true (gtk:bitset-iter-next iter value))
-      (is (= 18 (cffi:mem-ref value :uint)))
+      (is (= 18 (gtk:bitset-iter-next iter)))
       (is (= 18 (gtk:bitset-iter-value iter)))
-      (is-true (gtk:bitset-iter-next iter value))
-      (is (= 19 (cffi:mem-ref value :uint)))
+
+      (is (= 19 (gtk:bitset-iter-next iter)))
       (is (= 19 (gtk:bitset-iter-value iter)))
 
-      (is-false (gtk:bitset-iter-next iter value))
-      (is (= 0 (cffi:mem-ref value :uint))))))
+      (is-false (gtk:bitset-iter-next iter))
+      (is (= 0 (gtk:bitset-iter-value iter))))))
 
 ;;;     gtk_bitset_iter_init_at
 
@@ -215,28 +207,23 @@
     (dolist (value values)
       (is-true (gtk:bitset-add bitset value)))
 
-    (cffi:with-foreign-objects ((iter 'gtk:bitset-iter) (value :uint))
+    (cffi:with-foreign-object (iter 'gtk:bitset-iter)
 
-      (is-true (gtk:bitset-iter-init-at iter bitset 10 value))
+      (is (= 11 (gtk:bitset-iter-init-at iter bitset 10)))
       (is-true (gtk:bitset-iter-is-valid iter))
 
-      (is (= 11 (cffi:mem-ref value :uint)))
-      (is (= 11 (gtk:bitset-iter-value iter)))
-      (is-true (gtk:bitset-iter-next iter value))
-      (is (= 13 (cffi:mem-ref value :uint)))
+      (is (= 13 (gtk:bitset-iter-next iter)))
       (is (= 13 (gtk:bitset-iter-value iter)))
-      (is-true (gtk:bitset-iter-next iter value))
-      (is (= 15 (cffi:mem-ref value :uint)))
+
+      (is (= 15 (gtk:bitset-iter-next iter)))
       (is (= 15 (gtk:bitset-iter-value iter)))
 
-      (is-true (gtk:bitset-iter-previous iter value))
-      (is (= 13 (cffi:mem-ref value :uint)))
+      (is (= 13 (gtk:bitset-iter-previous iter)))
       (is (= 13 (gtk:bitset-iter-value iter)))
-      (is-true (gtk:bitset-iter-previous iter value))
-      (is (= 11 (cffi:mem-ref value :uint)))
+
+      (is (= 11 (gtk:bitset-iter-previous iter)))
       (is (= 11 (gtk:bitset-iter-value iter)))
 
-      (is-true (gtk:bitset-iter-previous iter value))
-      (is (= 9 (cffi:mem-ref value :uint))))))
+      (is (= 9 (gtk:bitset-iter-previous iter))))))
 
-;;; --- 2023-9-11 --------------------------------------------------------------
+;;; --- 2023-9-12 --------------------------------------------------------------

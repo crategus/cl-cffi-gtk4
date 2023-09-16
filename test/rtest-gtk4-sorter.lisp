@@ -118,4 +118,9 @@
 
 ;;;     gtk_ordering_from_cmpfunc
 
-;;; --- 2023-9-4 ---------------------------------------------------------------
+(test gtk:ordering-from-cmpfunc
+  (is (eq :smaller (gtk:ordering-from-cmpfunc -1)))
+  (is (eq :equal (gtk:ordering-from-cmpfunc  0)))
+  (is (eq :larger (gtk:ordering-from-cmpfunc  1))))
+
+;;; --- 2023-9-13 --------------------------------------------------------------

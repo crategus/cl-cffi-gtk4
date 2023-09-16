@@ -8,6 +8,18 @@
 ;;;     GtkExpression
 
 ;;;     GtkExpressionWatch
+
+(test gtk-expression-watch-boxed
+  ;; Type check
+  (is (g:type-is-a (g:gtype "GtkExpressionWatch") g:+g-type-boxed+))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkExpressionWatch")
+          (g:gtype (cffi:foreign-funcall "gtk_expression_watch_get_type"
+                                         :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:expression-watch
+          (glib:symbol-for-gtype "GtkExpressionWatch"))))
+
 ;;;     GtkParamSpecExpression
 
 ;;; --- Functions --------------------------------------------------------------
@@ -16,8 +28,19 @@
 
 ;;;     gtk_expression_ref
 ;;;     gtk_expression_unref
+
 ;;;     gtk_expression_get_value_type
 ;;;     gtk_expression_is_static
+
+(test gtk-expression-value-type/is-static
+  (cffi:with-foreign-object (gvalue '(:struct g:value))
+    (g:value-init gvalue "gchararray")
+    (let ((expression (gtk:constant-expression-new-for-value gvalue)))
+      (is (eq (g:gtype "gchararray")
+              (gtk:expression-value-type expression)))
+      (is-true (gtk:expression-is-static expression))
+      (is-false (gtk:expression-unref expression)))))
+
 ;;;     gtk_expression_evaluate
 
 ;;;     gtk_expression_watch
@@ -28,6 +51,55 @@
 ;;;     gtk_expression_watch_unwatch
 
 ;;;     gtk_property_expression_new
+
+(test gtk-property-expression-new.1
+  (let ((label (gtk:label-new "label"))
+        (expression nil))
+    (is (cffi:pointerp (setf expression
+                             (gtk:property-expression-new "GtkLabel"
+                                                          nil
+                                                          "label"))))
+    (is (eq (g:gtype "gchararray")
+            (gtk:expression-value-type expression)))
+    (is (string= "label"
+                 (gtk:expression-evaluate expression label)))
+    (is-false (gtk:expression-unref expression))))
+
+(test gtk-property-expression-new.2
+  (let ((label (gtk:label-new "label"))
+        (expression nil))
+    (is (cffi:pointerp (setf expression
+                             (gtk:property-expression-new "GtkLabel"
+                                                          nil
+                                                          "justify"))))
+    (is (eq (g:gtype "GtkJustification")
+            (gtk:expression-value-type expression)))
+    (is (eq :left
+            (gtk:expression-evaluate expression label)))
+    (is-false (gtk:expression-unref expression))))
+
+#+nil
+(test gtk-property-expression-new.3
+  (let ((button (gtk:button-new-with-label "button"))
+        (expression1 nil)
+        (expression2 nil))
+
+    (setf expression1
+          (gtk:property-expression-new "GtkButton"
+                                       nil
+                                       "child"))
+    (is-false (gtk:expression-value-type expression1))
+
+    (setf expression2
+          (gtk:property-expression-new "GtkLabel"
+                                       expression1
+                                       "label"))
+    (is-false (gtk:expression-value-type expression2))
+
+    (is-false (gtk:expression-evaluate expression1 button))
+
+))
+
 ;;;     gtk_property_expression_new_for_pspec
 ;;;     gtk_property_expression_get_expression
 ;;;     gtk_property_expression_get_pspec
@@ -76,4 +148,4 @@
 
 ;;;     gtk_param_spec_expression
 
-;;; --- 2023-8-11 --------------------------------------------------------------
+;;; --- 2023-9-15 --------------------------------------------------------------

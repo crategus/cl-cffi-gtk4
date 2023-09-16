@@ -677,7 +677,7 @@
 ;    (:file "gtk4.tree-view")
 ;    (:file "gtk4.tree-view-dnd")
 
-;    (:file "gtk4.cell-layout")
+     (:file "rtest-gtk4-cell-layout")
 ;    (:file "gtk4.cell-view")
 ;    (:file "gtk4.icon-view")
 

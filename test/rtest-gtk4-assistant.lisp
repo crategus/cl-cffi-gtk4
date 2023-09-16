@@ -7,7 +7,7 @@
 
 ;;;     GtkAssistantPageType
 
-(test assistant-page-type-enumeration
+(test gtk-assistant-page-type-enumeration
   ;; Check the type
   (is (g:type-is-enum "GtkAssistantPageType"))
   ;; Check the type initializer
@@ -44,7 +44,7 @@
 
 ;;;     GtkAssistantPage
 
-(test assistant-page-class
+(test gtk-assistant-page-class
   ;; Type check
   (is (g:type-is-object "GtkAssistantPage"))
   ;; Check the registered name
@@ -69,7 +69,8 @@
   (is (equal '()
              (list-signals "GtkAssistantPage")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistantPage" GTK-ASSISTANT-PAGE
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistantPage"
+                                             GTK-ASSISTANT-PAGE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_assistant_page_get_type")
                        ((CHILD GTK-ASSISTANT-PAGE-CHILD "child" "GtkWidget" T
@@ -89,13 +90,13 @@
 ;;;     page-type
 ;;;     title
 
-(test assistant-page-properties
+(test gtk-assistant-page-properties
   (let ((page (make-instance 'gtk:assistant-page)))
     (is-false (gtk:assistant-page-child page))))
 
 ;;;     GtkAssistant
 
-(test assistant-class
+(test gtk-assistant-class
   ;; Type check
   (is (g:type-is-object "GtkAssistant"))
   ;; Check the registered name
@@ -123,13 +124,6 @@
   ;; CSS information
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAssistant")))
-  #-windows
-  (is (string=
-"[window.assistant.background.csd:dir(ltr)]
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:assistant))
-                   :none)))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistant" GTK-ASSISTANT
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
@@ -146,12 +140,11 @@
 ;;;     pages
 ;;;     use-header-bar
 
-(test assistant-properties
+(test gtk-assistant-properties
   (let ((assistant (make-instance 'gtk:assistant)))
     (is (typep (gtk:assistant-pages assistant) 'g:object))
     #-windows
-    (is (= 1 (gtk:assistant-use-header-bar assistant)))
-))
+    (is (= 1 (gtk:assistant-use-header-bar assistant)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -164,6 +157,10 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_assistant_new
+
+(test gtk-assistant-new
+  (is (typep (gtk:assistant-new) 'gtk:assistant)))
+
 ;;;     gtk_assistant_get_page
 ;;;     gtk_assistant_get_current_page
 ;;;     gtk_assistant_set_current_page
@@ -184,4 +181,4 @@
 ;;;     gtk_assistant_next_page
 ;;;     gtk_assistant_previous_page
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-9-15 --------------------------------------------------------------

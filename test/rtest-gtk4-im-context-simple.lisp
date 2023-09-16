@@ -23,7 +23,11 @@
   (is (eq (g:gtype "GtkIMContext")
           (g:type-parent "GtkIMContextSimple")))
   ;; Check the children
+  #-windows
   (is (equal '("GtkIMContextBroadway" "GtkIMContextWayland")
+             (list-children "GtkIMContextSimple")))
+  #+windows
+  (is (equal '()
              (list-children "GtkIMContextSimple")))
   ;; Check the interfaces
   (is (equal '()
@@ -54,4 +58,4 @@
 ;;;     gtk_im_context_simple_add_table
 ;;;     gtk_im_context_simple_add_compose_file
 
-;;; --- 2023-8-29 --------------------------------------------------------------
+;;; --- 2023-9-13 --------------------------------------------------------------

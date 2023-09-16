@@ -20,7 +20,11 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkATContext")))
   ;; Check the children
+  #-windows
   (is (equal '("GtkAtSpiContext")
+             (list-children "GtkATContext")))
+  #+windows
+  (is (equal '("GtkTestATContext")
              (list-children "GtkATContext")))
   ;; Check the interfaces
   (is (equal '()
@@ -70,4 +74,4 @@
         (button (make-instance 'gtk:button)))
     (is (typep (gtk:at-context-create :button button display) 'gtk:at-context))))
 
-;;; --- 2023-8-31 --------------------------------------------------------------
+;;; --- 2023-9-13 --------------------------------------------------------------

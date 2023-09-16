@@ -20,7 +20,11 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkIMContext")))
   ;; Check the children
+  #-windows
   (is (equal '("GtkIMContextSimple" "GtkIMMulticontext" "IBusIMContext")
+             (list-children "GtkIMContext")))
+  #+windows
+  (is (equal '("GtkIMContextIME" "GtkIMContextSimple" "GtkIMMulticontext")
              (list-children "GtkIMContext")))
   ;; Check the interfaces
   (is (equal '()
@@ -167,4 +171,4 @@
 ;;;     gtk_im_context_get_surrounding_with_selection      Since 4.2
 ;;;     gtk_im_context_set_surrounding_with_selection      Since 4.2
 
-;;; --- 2023-8-29 --------------------------------------------------------------
+;;; --- 2023-9-13 --------------------------------------------------------------
