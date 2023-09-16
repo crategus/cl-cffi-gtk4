@@ -314,7 +314,7 @@ lambda (checkbutton)    :run-first
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "group" 'check-button) t)
- "The @code{group} property of type @sym{gtk:check-button} (Write) @br{}
+ "The @code{group} property of type @class{gtk:check-button} (Write) @br{}
   The check button whose group this widget belongs to.")
 
 #+liber-documentation

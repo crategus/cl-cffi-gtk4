@@ -1213,14 +1213,14 @@
 (setf (liber:alias-for-symbol 'ordering)
       "GEnum"
       (liber:symbol-documentation 'ordering)
- "@version{2023-9-4}
+ "@version{2023-9-12}
   @begin{short}
     Describes the way two values can be compared.
   @end{short}
-  These values can be used with the @symbol{g:compare-func} callback function.
-  However, the @symbol{g:compare-func} function is allowed to return any
-  integer values. For converting such a value to a @symbol{gtk:ordering} value,
-  use the @fun{gtk:ordering-from-cmpfunc} function.
+  These values can be used with the @symbol{g:compare-data-func} callback
+  function. However, the @symbol{g:compare-data-func} function is allowed to
+  return any integer values. For converting such a value to a
+  @symbol{gtk:ordering} value, use the @fun{gtk:ordering-from-cmpfunc} function.
   @begin{pre}
 (gobject:define-g-enum \"GtkOrdering\" ordering
   (:export t
@@ -1234,6 +1234,7 @@
     @entry[:equal]{The two values are equal.}
     @entry[:larger]{The first value is larger than the second.}
   @end{table}
+  @see-function{g:compare-data-func}
   @see-function{gtk:ordering-from-cmpfunc}")
 
 ;;; ----------------------------------------------------------------------------
