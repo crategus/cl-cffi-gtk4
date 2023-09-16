@@ -118,12 +118,11 @@ lambda (item)
     items}
   @return{A new @class{gtk:custom-filter} object}
   @begin{short}
-    Creates a new filter using the given @arg{func} callback function to filter
-    items.
+    Creates a new custom filter using the given @arg{func} callback function to
+    filter items.
   @end{short}
-  If @arg{func} is @code{nil}, the filter matches all items.
-
-  If the filter function changes its filtering behavior, the
+  If @arg{func} is @code{nil}, the custom filter matches all items. If the
+  custom filter function changes its filtering behavior, the
   @fun{gtk:filter-changed} function needs to be called.
   @see-class{gtk:custom-filter}
   @see-symbol{gtk:custom-filter-func}
@@ -154,9 +153,9 @@ lambda (item)
   @begin{short}
     Sets (or unsets) the function used for filtering items.
   @end{short}
-  If @arg{func} is @code{nil}, the filter matches all items. If the filter
-  function changes its filtering behavior, the @fun{gtk:filter-changed}
-  function needs to be called.
+  If @arg{func} is @code{nil}, the custom filter matches all items. If the
+  custom filter function changes its filtering behavior, the
+  @fun{gtk:filter-changed} function needs to be called.
   @see-class{gtk:custom-filter}
   @see-symbol{gtk:custom-filter-func}"
   (%custom-filter-set-filter-func

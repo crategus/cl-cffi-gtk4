@@ -64,10 +64,6 @@
 
 (in-package :gtk)
 
-;; TODO: This implmementation does not work as expected. We have to define
-;; special functions for the parse-g-value and set-g-value functions to handle
-;; values with a GtkExpression type.
-
 ;;; ----------------------------------------------------------------------------
 ;;; enum GtkStringFilterMatchMode
 ;;; ----------------------------------------------------------------------------
@@ -172,7 +168,7 @@
   The @fun{gtk:string-filter-expression} function gets the expression that the
   string filter uses to obtain strings from items. The
   @sym{(setf gtk:string-filter-expression)} function sets the expression. The
-  expression must have a value type of @code{G_TYPE_STRING}.
+  expression must have a \"gchararray\" value type.
   @see-class{gtk:string-filter}
   @see-class{gtk:expression}")
 

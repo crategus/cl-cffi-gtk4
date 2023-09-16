@@ -110,13 +110,13 @@
   @argument[object]{a @class{gtk:bool-filter} object}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
-    Accessor of the @slot[bool-filter]{expression} slot of the
+    Accessor of the @slot[gtk:bool-filter]{expression} slot of the
     @class{gtk:bool-filter} class.
   @end{short}
   The @fun{gtk:bool-filter-expression} function gets the expression that the
   filter uses to evaluate if an item should be filtered. The
   @sym{(setf gtk:bool-filter-expression)} function sets the expression.The
-  expression must have a value type of @code{G_TYPE_BOOLEAN}.
+  expression must have a \"gboolean\" value type.
   @see-class{gtk:bool-filter}
   @see-class{gtk:expression}")
 
@@ -138,7 +138,7 @@
   @argument[object]{a @class{gtk:bool-filter} object}
   @argument[expression]{@em{true} to invert}
   @begin{short}
-    Accessor of the @slot[bool-filter]{invert} slot of the
+    Accessor of the @slot[gtk:bool-filter]{invert} slot of the
     @class{gtk:bool-filter} class.
   @end{short}
   The @fun{gtk:bool-filter-invert} function returns whether the filter inverts

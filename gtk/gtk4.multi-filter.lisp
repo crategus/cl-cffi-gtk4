@@ -105,7 +105,7 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'multi-filter) t)
- "The @code{item-type} property of type @class{g:type-t}(Read) @br{}
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. Since 4.8")
 
 #+gtk-4-8
@@ -141,7 +141,7 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'multi-filter) t)
- "The @code{n-items} property of type @code{:uint}(Read / Write) @br{}
+ "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
   The number of items. Since 4.8 @br{}
   Default value: 0")
 
@@ -188,14 +188,14 @@
  #+liber-documentation
  "@version{#2023-8-16}
   @argument[object]{a @class{gtk:multi-filter} object}
-  @argument[position]{an unsigned integer with the position of filter to
+  @argument[position]{an unsigned integer with the position of the filter to
     remove}
   @begin{short}
     Removes the filter at the given position from the list of filters used by
     @arg{object}.
   @end{short}
-  If @arg{position} is larger than the number of filters, nothing happens and
-  the function returns.
+  If the @arg{position} parameter is larger than the number of filters, nothing
+  happens and the function returns.
   @see-class{gtk:multi-filter}"
   (object (g:object multi-filter))
   (position :uint))
@@ -222,8 +222,8 @@
     @class{gtk:multi-filter} class that matches an item when at least one of its
     filters matches.
   @end{short}
-  @see-class{gtk:multi-filter}
-  @see-class{gtk:filter}")
+  @see-constructor{gtk:multi-filter-new}
+  @see-class{gtk:multi-filter}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_any_filter_new ()
@@ -237,11 +237,10 @@
   @begin{short}
     Creates a new empty \"any\" filter.
   @end{short}
-  Use the @fun{gtk:multi-filter-append} function to add filters to it.
-
-  This filter matches an item if any of the filters added to it matches the
-  item. In particular, this means that if no filter has been added to it, the
-  filter matches no item.
+  Use the @fun{gtk:multi-filter-append} function to add filters to it. This
+  filter matches an item if any of the filters added to it matches the item. In
+  particular, this means that if no filter has been added to it, the filter
+  matches no item.
   @see-class{gtk:any-filter}
   @see-function{gtk:multi-filter-append}"
   (make-instance 'any-filter))
@@ -268,8 +267,8 @@
     @class{gtk:multi-filter} class that matches an item when each of its
     filters matches.
   @end{short}
-  @see-class{gtk:multi-filter}
-  @see-class{gtk:filter}")
+  @see-constructor{gtk:every-filter-new}
+  @see-class{gtk:multi-filter}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_every_filter_new ()
@@ -281,11 +280,10 @@
   @begin{short}
     Creates a new empty \"every\" filter.
   @end{short}
-  Use the @fun{gtk:multi-filter-append} function to add filters to it.
-
-  This filter matches an item if each of the filters added to it matches the
-  item. In particular, this means that if no filter has been added to it, the
-  filter matches every item.
+  Use the @fun{gtk:multi-filter-append} function to add filters to it. This
+  filter matches an item if each of the filters added to it matches the item. In
+  particular, this means that if no filter has been added to it, the filter
+  matches every item.
   @see-class{gtk:any-filter}
   @see-function{gtk:multi-filter-append}"
   (make-instance 'every-filter))

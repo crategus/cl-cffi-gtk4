@@ -134,10 +134,10 @@
   @begin[code]{table}
     @entry[:different]{The filter change cannot be described with any of the
       other enumeration values.}
-    @entry[:less-strict]{The filter is less strict than it was before: All
+    @entry[:less-strict]{The filter is less strict than it was before. All
       items that it used to return @em{true} for still return @em{true}, others
       now may, too.}
-    @entry[:more-strict]{The filter is more strict than it was before: All
+    @entry[:more-strict]{The filter is more strict than it was before. All
       items that it used to return @em{false} for still return @em{false},
       others now may, too.}
   @end{table}
@@ -182,7 +182,7 @@ lambda (filter change)    :run-last
       @end{pre}
       The signal is emitted whenever the filter changed. Users of the filter
       should then check items again via the @fun{gtk:filter-match} function.
-      The @class{gtk:filter-list-model} object handles thie signal
+      The @class{gtk:filter-list-model} object handles this signal
       automatically. Depending on the @arg{change} parameter, not all items
       need to be changed, but only some. Refer to the @symbol{gtk:filter-change}
       documentation for details.
@@ -227,10 +227,9 @@ lambda (filter change)    :run-last
     Gets the known strictness of the filter.
   @end{short}
   If the strictness is not known, the @code{:match-some} value is returned. The
-  value may change after emission of the \“changed\” signal.
-
-  This function is meant purely for optimization purposes, filters can choose
-  to omit implementing it, but the @class{gtk:filter-list-model} class uses it.
+  value may change after emission of the \“changed\” signal. This function is
+  meant purely for optimization purposes, filters can choose to omit
+  implementing it, but the @class{gtk:filter-list-model} class uses it.
   @see-class{gtk:filter}
   @see-class{gtk:filter-list-model}
   @see-symbol{gtk:filter-match}"
@@ -255,7 +254,6 @@ lambda (filter change)    :run-last
   @fun{gtk:filter-match} function.
   Depending on the @arg{change} parameter, not all items need to be changed, but
   only some. Refer to the @symbol{gtk:filter-change} documentation for details.
-
   This function is intended for implementors of @class{gtk:filter} subclasses
   and should not be called from other functions.
   @see-class{gtk:filter}

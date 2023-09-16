@@ -78,23 +78,23 @@
 (gobject:define-g-object-class "GtkFileFilter" file-filter
   (:superclass filter
    :export t
-   :interfaces nil
+   :interfaces ("GtkBuildable")
    :type-initializer "gtk_file_filter_get_type")
   (#+gtk-4-10
    (mime-types
     file-filter-mime-types
-    "mime-types" "gchararray" nil nil)
+    "mime-types" "GStrv" nil nil)
    (name
     file-filter-name
     "name" "gchararray" t t)
    #+gtk-4-10
    (patterns
     file-filter-patterns
-    "patterns" "gchararray" nil nil)
+    "patterns" "GStrv" nil nil)
    #+gtk-4-10
    (suffixes
     file-filter-suffixes
-    "suffixes" "gchararray" nil nil)))
+    "suffixes" "GStrv" nil nil)))
 
 #+liber-documentation
 (setf (documentation 'file-filter 'type)
@@ -122,9 +122,9 @@
     The @class{gtk:file-filter} implementation of the @class{gtk:buildable}
     interface supports adding rules using the @code{<mime-types>} and
     @code{<patterns>} elements and listing the rules within. Specifying a
-    @code{<mime-type>} or @code{<pattern>} has the same effect as calling
-    the @fun{gtk:file-filter-add-mime-type} or @fun{gtk:file-filter-add-pattern}
-    functions.
+    @code{<mime-type>} or @code{<pattern>} element has the same effect as
+    calling the @fun{gtk:file-filter-add-mime-type} or
+    @fun{gtk:file-filter-add-pattern} functions.
   @end{dictionary}
   @begin[Example]{dictionary}
     An example of a UI definition fragment specifying @class{gtk:file-filter}
@@ -147,8 +147,7 @@
   @end{dictionary}
   @see-constructor{gtk:file-filter-new}
   @see-constructor{gtk:file-filter-new-from-gvariant}
-  @see-slot{gtk:file-filter-name}
-  @see-class{gtk:file-chooser}")
+  @see-slot{gtk:file-filter-name}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -182,16 +181,16 @@
   @syntax[]{(gtk:file-filter-name object) => name}
   @syntax[]{(setf (gtk:file-filter-name object) name)}
   @argument[object]{a @class{gtk:file-filter} object}
-  @argument[name]{a string with the human-readable-name for the filter, or
+  @argument[name]{a string with the human-readable name for the filter, or
     @code{nil} to remove any existing name}
   @begin{short}
     Accessor of the @slot[gtk:file-filter]{name} slot of the
     @class{gtk:file-filter} class.
   @end{short}
   The @fun{gtk:file-filter-name} function gets the human-readable name for the
-  filter. The @sym{(setf gtk:file-filter-name)} function sets a human-readable
-  name. This is the string that will be displayed in the file chooser if there
-  is a selectable list of filters.
+  file filter. The @sym{(setf gtk:file-filter-name)} function sets a
+  human-readable name. This is the string that will be displayed in the file
+  chooser if there is a selectable list of filters.
   @see-class{gtk:file-filter}")
 
 ;;; --- file-filter-patterns ---------------------------------------------------
@@ -276,8 +275,8 @@
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @argument[mime-type]{a string with the name of MIME type}
-  @short{Adds a rule allowing a given mime type to @arg{filter}.}
+  @argument[mime-type]{a string with the name of the MIME type}
+  @short{Adds a rule allowing a given mime type to the file filter.}
   @see-class{gtk:file-filter}"
   (filter (g:object file-filter))
   (mime-type :string))
@@ -294,7 +293,7 @@
   @argument[filter]{a @class{gtk:file-filter} object}
   @argument[pattern]{a string with a shell style glob}
   @begin{short}
-    Adds a rule allowing a shell style glob to a filter.
+    Adds a rule allowing a shell style glob to a file filter.
   @end{short}
   Note that it depends on the platform whether pattern matching ignores case or
   not. On Windows, it does, on other platforms, it does not.
@@ -362,7 +361,7 @@
   @return{A list of strings with the attributes.}
   @begin{short}
     Gets the attributes that need to be filled in for the @class{g:file-info}
-    object passed to this filter.
+    object passed to this file filter.
   @end{short}
   This function will not typically be used by applications. It is intended
   principally for use in the implementation of the @class{gtk:file-chooser}
