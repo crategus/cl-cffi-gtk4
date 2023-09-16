@@ -231,7 +231,7 @@
     "autoexpand" "gboolean" t t)
    #+gtk-4-8
    (item-type
-    tree-list-model-item-type
+    %tree-list-model-item-type
     "item-type" "GType" t nil)
    (model
     tree-list-model-model

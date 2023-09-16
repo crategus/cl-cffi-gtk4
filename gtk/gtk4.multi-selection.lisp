@@ -74,7 +74,7 @@
    :type-initializer "gtk_multi_selection_get_type")
   (#+gtk-4-8
    (item-type
-    multi-selection-item-type
+    %multi-selection-item-type
     "item-type" "GType" t nil)
    (model
     multi-selection-model
@@ -85,7 +85,7 @@
     "n-items" "guint" t nil)))
 
 #+liber-documentation
-(setf (documentation 'single-selection 'type)
+(setf (documentation 'multi-selection 'type)
  "@version{2023-9-6}
   @begin{short}
     The @class{gtk:multi-selection} class is an implementation of the

@@ -244,25 +244,6 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkMapListModelMapFunc ()
-;;;
-;;; gpointer
-;;; (*GtkMapListModelMapFunc) (gpointer item,
-;;;                            gpointer user_data);
-;;;
-;;; User function that is called to map an item of the original model to an item
-;;; expected by the map model.
-;;;
-;;; The returned items must conform to the item type of the model they are used
-;;; with.
-;;;
-;;; item :
-;;;     The item to map.
-;;;
-;;; user_data :
-;;;     user data
-;;;
-;;; Returns :
-;;;     The item to map to. This function may not return NULL.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback map-list-model-map-func :pointer
@@ -271,33 +252,26 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   (let ((ptr (glib:get-stable-pointer-value data)))
     (funcall ptr item)))
 
+#+liber-documentation
+(setf (liber:alias-for-symbol 'map-list-model-map-func)
+      "Callback"
+      (liber:symbol-documentation 'map-list-model-map-func)
+ "@version{#2023-9-15}
+  @argument[item]{a pointer to the item to map}
+  @return{A pointer to the item to map to. This function may not return
+    @code{cffi:null-pointer}.}
+  @begin{short}
+    User function that is called to map an item of the original model to an item
+    expected by the map model.
+  @end{short}
+  The returned items must conform to the item type of the model they are used
+  with.
+  @see-class{gtk:map-list-model}")
+
 (export 'map-list-model-map-func)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_map_list_model_new ()
-;;;
-;;; GtkMapListModel *
-;;; gtk_map_list_model_new (GListModel *model,
-;;;                         GtkMapListModelMapFunc map_func,
-;;;                         gpointer user_data,
-;;;                         GDestroyNotify user_destroy);
-;;;
-;;; Creates a new GtkMapListModel for the given arguments.
-;;;
-;;; model :
-;;;     The model to map or NULL for none.
-;;;
-;;; map_func :
-;;;     map function or NULL to not map items.
-;;;
-;;; user_data :
-;;;     user data passed to map_func .
-;;;
-;;; user_destroy :
-;;;     destroy notifier for user_data
-;;;
-;;; Returns :
-;;;     a new GtkMapListModel
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_map_list_model_new" %map-list-model-new)
@@ -308,6 +282,17 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   (notify :pointer))
 
 (defun map-list-model-new (model func)
+ #+liber-documentation
+ "@version{#2023-9-15}
+  @argument[model]{a @class{g:list-model} object to map or @code{nil} for none}
+  @argument[func]{a @symbol{gkt:map-list-model-map-func} callback function
+    to map items or @code{nil}}
+  @return{A new @class{gtk:map-list-model} object.}
+  @begin{short}
+    Creates a new @class{gtk:map-list-model} object for the given arguments.
+  @end{short}
+  @see-class{gtk:map-list-model}
+  @see-symbol{gtk:map-list-model-map-func}"
   (%map-list-model-new model
                        (cffi:callback map-list-model-map-func)
                        (glib:allocate-stable-pointer func)
@@ -317,39 +302,30 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_map_list_model_set_map_func ()
-;;;
-;;; void
-;;; gtk_map_list_model_set_map_func (GtkMapListModel *self,
-;;;                                  GtkMapListModelMapFunc map_func,
-;;;                                  gpointer user_data,
-;;;                                  GDestroyNotify user_destroy);
-;;;
-;;; Sets the function used to map items. The function will be called whenever an
-;;; item needs to be mapped and must return the item to use for the given input
-;;; item.
-;;;
-;;; Note that GtkMapListModel may call this function multiple times on the same
-;;; item, because it may delete items it doesn't need anymore.
-;;;
-;;; GTK makes no effort to ensure that map_func conforms to the item type of
-;;; self . It assumes that the caller knows what they are doing and the map
-;;; function returns items of the appropriate type.
-;;;
-;;; self :
-;;;     a GtkMapListModel
-;;;
-;;; map_func :
-;;;     map function or NULL to not map items.
-;;;
-;;; user_data :
-;;;     user data passed to map_func .
-;;;
-;;; user_destroy :
-;;;     destroy notifier for user_data
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_map_list_model_set_map_func" %map-list-model-set-map-func)
     :void
+ #+liber-documentation
+ "@version{#2023-9-15}
+  @argument[model]{a @class{gtk:map-list-model} object}
+  @argument[func]{a @symbol{gkt:map-list-model-map-func} callback function
+    to map items or @code{nil}}
+  @begin{short}
+    Sets the function used to map items.
+  @end{short}
+  The function will be called whenever an item needs to be mapped and must
+  return the item to use for the given input item.
+
+  Note that the @class{gtk:map-list-model} object may call this function
+  multiple times on the same item, because it may delete items it does not need
+  anymore.
+
+  GTK makes no effort to ensure that @arg{func} conforms to the item type of
+  @arg{model}. It assumes that the caller knows what they are doing and the map
+  function returns items of the appropriate type.
+  @see-class{gtk:map-list-model}
+  @see-symbol{gtk:map-list-model-map-func}"
   (model (g:object map-list-model))
   (func :pointer)
   (data :pointer)

@@ -110,7 +110,7 @@
 (setf (documentation (liber:slot-documentation "item-type"
                                                'flatten-list-model) t)
  "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
-  The type of items. See the @fun{g:list-model-item-type} function. Since 4.8")
+  The type of items. Since 4.8")
 
 #+gtk-4-8
 (declaim (inline flatten-list-model-item-type))
@@ -172,8 +172,7 @@
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'flatten-list-model) t)
  "The @code{n-items} property of type @code{:uint} (Read / Write) @br{}
-  The number of items. See the @fun{g:list-model-n-items} function. Since 4.8
-  @br{}
+  The number of items. Since 4.8 @br{}
   Default value: 0")
 
 #+(and gtk-4-8 liber-documentation)
@@ -194,22 +193,21 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_flatten_list_model_new ()
-;;;
-;;; GtkFlattenListModel *
-;;; gtk_flatten_list_model_new (GListModel *model);
-;;;
-;;; Creates a new GtkFlattenListModel that flattens list .
-;;;
-;;; model :
-;;;     the model to be flattened.
-;;;
-;;; Returns :
-;;;     a new GtkFlattenListModel
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline flatten-list-model-new))
 
 (defun flatten-list-model-new (model)
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{g:list-model} object to be flattened}
+  @return{A new @class{gtk:flatten-list-model} object.}
+  @begin{short}
+    Creates a new @class{gtk:flatten-list-model} object that flattens
+    @arg{model}.
+  @end{short}
+  @see-class{gtk:flatten-list-model}
+  @see-class{g:list-model}"
   (make-instance 'flatten-list-model
                  :model model))
 
@@ -217,25 +215,21 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_flatten_list_model_get_model_for_item ()
-;;;
-;;; GListModel *
-;;; gtk_flatten_list_model_get_model_for_item (GtkFlattenListModel *self,
-;;;                                            guint position);
-;;;
-;;; Returns the model containing the item at the given position.
-;;;
-;;; self :
-;;;     a GtkFlattenListModel
-;;;
-;;; position :
-;;;     a position
-;;;
-;;; Returns :
-;;;     the model containing the item at position .
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_flatten_list_model_get_model_for_item"
                flatten-list-model-model-for-item) (g:object g:list-model)
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{gtk:flatten-list-model} object}
+  @argument[position]{an unsigned integer with a position}
+  @return{The @class{g:list-model} object containing the item at
+    @arg{position}.}
+  @begin{short}
+    Returns the model containing the item at the given @arg{position}.
+  @end{short}
+  @see-class{gtk:flatten-list-model}
+  @see-class{g:list-model}"
   (model (g:object flatten-list-model))
   (position :uint))
 

@@ -142,25 +142,20 @@ lambda (model position n-items)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_is_selected ()
-;;;
-;;; gboolean
-;;; gtk_selection_model_is_selected (GtkSelectionModel *model,
-;;;                                  guint position);
-;;;
-;;; Checks if the given item is selected.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; position :
-;;;     the position of the item to query
-;;;
-;;; Returns :
-;;;     TRUE if the item is selected
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_is_selected" selection-model-is-selected)
     :boolean
+ #+liber-documentation
+ "@version{#2023-9-13}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @argument[position]{an unsigned integer with the position of the item to
+    query}
+  @return{@em{True} if the item is selected.}
+  @begin{short}
+    Checks if the given item is selected.
+  @end{short}
+  @see-class{gtk:selection-model}"
   (model (g:object selection-model))
   (position :uint))
 
@@ -168,79 +163,7 @@ lambda (model position n-items)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_get_selection ()
-;;;
-;;; GtkBitset *
-;;; gtk_selection_model_get_selection (GtkSelectionModel *model);
-;;;
-;;; Gets the set containing all currently selected items in the model.
-;;;
-;;; This function may be slow, so if you are only interested in single item,
-;;; consider using gtk_selection_model_is_selected() or if you are only
-;;; interested in a few consider gtk_selection_model_get_selection_in_range().
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; Returns :
-;;;     a GtkBitset containing all the values currently selected in model . If
-;;;     no items are selected, the bitset is empty. The bitset must not be
-;;;     modified.
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_selection_model_get_selection" selection-model-selection)
-    (g:object bitset)
-  (model (g:object selection-model)))
-
-(export 'selection-model-selection)
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_set_selection ()
-;;;
-;;; gboolean
-;;; gtk_selection_model_set_selection (GtkSelectionModel *model,
-;;;                                    GtkBitset *selected,
-;;;                                    GtkBitset *mask);
-;;;
-;;; This is the most advanced selection updating method that allows the most
-;;; fine-grained control over selection changes. If you can, you should try the
-;;; simpler versions, as implementations are more likely to implement support
-;;; for those.
-;;;
-;;; Requests that the selection state of all positions set in mask be updated
-;;; to the respective value in the selected bitmask.
-;;;
-;;; In pseudocode, it would look something like this:
-;;;
-;;; for (i = 0; i < n_items; i++)
-;;;   {
-;;;     // don't change values not in the mask
-;;;     if (!gtk_bitset_contains (mask, i))
-;;;       continue;
-;;;
-;;;     if (gtk_bitset_contains (selected, i))
-;;;       select_item (i);
-;;;     else
-;;;       unselect_item (i);
-;;;   }
-;;;
-;;; gtk_selection_model_selection_changed (model, first_changed_item,
-;;;                                               n_changed_items);
-;;;
-;;; ask and selected must not be modified. They may refer to the same bitset,
-;;; which would mean that every item in the set should be selected.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; selected :
-;;;     bitmask specifying if items should be selected or unselected
-;;;
-;;; mask :
-;;;     bitmask specifying which items should be updated
-;;;
-;;; Returns :
-;;;     TRUE if this action was supported and no fallback should be tried. This
-;;;     does not mean that all items were updated according to the inputs.
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf selection-model-selection) (selected model mask)
@@ -251,39 +174,88 @@ lambda (model position n-items)    :run-last
                         :boolean)
   selected)
 
+(cffi:defcfun ("gtk_selection_model_get_selection" selection-model-selection)
+    (g:object bitset)
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @syntax[]{(gtk:selection-model-selection model) => selected}
+  @syntax[]{(setf (gtk:selection-model-selection model mask) selected)}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @argument[selected]{a @class{gtk:bitset} instance specifying the items which
+    are selected or should be selected or unselected}
+  @argument[mask]{a @class{gtk:bitset} instance specifying which items should
+    be updated}
+  @begin{short}
+    The @fun{gtk:selection-model-selection} function gets the bitset containing
+    all currently selected items in the model.
+  @end{short}
+  This function may be slow, so if you are only interested in single item,
+  consider using the @fun{gtk:selection-model-is-selected} function or if you
+  are only interested in a few consider the
+  @fun{gtk:selection-model-selection-in-range} function.
+
+  The @sym{(setf gtk:selection-model-selection)} function is the most advanced
+  selection updating method that allows the most fine-grained control over
+  selection changes. If you can, you should try the simpler versions, as
+  implementations are more likely to implement support for those.
+
+  Requests that the selection state of all positions set in @arg{mask} be
+  updated to the respective value in the selected bitmask. In pseudocode, it
+  would look something like this:
+  @begin{pre}
+for (i = 0; i < n_items; i++)
+  {
+    // don't change values not in the mask
+    if (!gtk_bitset_contains (mask, i))
+      continue;
+
+    if (gtk_bitset_contains (selected, i))
+       select_item (i);
+    else
+       unselect_item (i);
+  @}
+
+gtk_selection_model_selection_changed (model, first_changed_item,
+                                              n_changed_items);
+  @end{pre}
+  The @arg{mask} and @arg{selected} parameters must not be modified. They may
+  refer to the same bitset, which would mean that every item in the set should
+  be selected.
+  @see-class{gtk:selection-model}
+  @see-function{gtk:selection-model-is-selected}
+  @see-function{gtk:selection-model-selection-in-range}"
+  (model (g:object selection-model)))
+
+(export 'selection-model-selection)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_get_selection_in_range ()
-;;;
-;;; GtkBitset *
-;;; gtk_selection_model_get_selection_in_range
-;;;                                (GtkSelectionModel *model,
-;;;                                 guint position,
-;;;                                 guint n_items);
-;;;
-;;; Gets a set containing a set where the values in the range [position,
-;;; position + n_items) match the selected state of the items in that range.
-;;; All values outside that range are undefined.
-;;;
-;;; This function is an optimization for gtk_selection_model_get_selection()
-;;; when you are only interested in part of the model's selected state. A
-;;; common use case is in response to the “selection-changed” signal.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; position :
-;;;     start of the queired range
-;;;
-;;; n_items :
-;;;     number of items in the queried range
-;;;
-;;; Returns :
-;;;     A GtkBitset that matches the selection state for the given state with
-;;;     all other values being undefined. The bitset must not be modified.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_get_selection_in_range"
                selection-model-selection-in-range) (g:object bitset)
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @argument[position]{an unsigned integer with the start of the queried range}
+  @argument[n-items]{an unsigned integer with the number of items in the queried
+    range}
+  @return{A @class{gtk:bitset} instance that matches the selection state for the
+    given state with all other values being undefined. The bitset must not be
+    modified.}
+  @begin{short}
+    Gets a bitset containing a set where the values in the range
+    [@arg{position}, @arg{position} + @arg{n-items}) match the selected state of
+    the items in that range.
+  @end{short}
+  All values outside that range are undefined.
+
+  This function is an optimization for the @fun{gtk:selection-model-selection}
+  function when you are only interested in part of the model's selected state.
+  A common use case is in response to the \"selection-changed\" signal.
+  @see-class{gtk:selection-model}
+  @see-class{gtk:bitset}
+  @see-function{gtk:selection-model-selection}"
   (model (g:object selection-model))
   (position :uint)
   (n-items :uint))
@@ -292,30 +264,23 @@ lambda (model position n-items)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_select_item ()
-;;;
-;;; gboolean
-;;; gtk_selection_model_select_item (GtkSelectionModel *model,
-;;;                                  guint position,
-;;;                                  gboolean unselect_rest);
-;;;
-;;; Requests to select an item in the model.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; position :
-;;;     the position of the item to select
-;;;
-;;; unselect_rest :
-;;;     whether previously selected items should be unselected
-;;;
-;;; Returns :
-;;;     TRUE if this action was supported and no fallback should be tried. This
-;;;     does not mean the item was selected.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_select_item" selection-model-select-item)
     :boolean
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @argument[position]{an unsigned integer with the position to select an item
+    in the model}
+  @argument[unselect-rest]{a boolean whether prviously selected items should
+    be unselected}
+  @return{@em{True} if this action was supported and no fallback should be
+    tried. This does not mean the item was selected.}
+  @begin{short}
+    Requests to select an item in the model.
+  @end{short}
+  @see-class{gtk:selection-model}"
   (model (g:object selection-model))
   (position :uint)
   (unselect-rest :boolean))
@@ -324,26 +289,21 @@ lambda (model position n-items)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_unselect_item ()
-;;;
-;;; gboolean
-;;; gtk_selection_model_unselect_item (GtkSelectionModel *model,
-;;;                                    guint position);
-;;;
-;;; Requests to unselect an item in the model.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; position :
-;;;     the position of the item to unselect
-;;;
-;;; Returns :
-;;;     TRUE if this action was supported and no fallback should be tried. This
-;;;     does not mean the item was unselected.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_unselect_item"
                selection-model-unselect-item) :boolean
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @argument[position]{an unsigned integer with the position of the item to
+    unselect}
+  @return{@em{True} if this action was supported and no fallback should be
+    tried. This does not mean the item was unselected.}
+  @begin{short}
+    Requests to unselect an item in the model.
+  @end{short}
+  @see-class{gtk:selection-model}"
   (model (g:object selection-model))
   (position :uint))
 
@@ -351,34 +311,23 @@ lambda (model position n-items)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_select_range ()
-;;;
-;;; gboolean
-;;; gtk_selection_model_select_range (GtkSelectionModel *model,
-;;;                                   guint position,
-;;;                                   guint n_items,
-;;;                                   gboolean unselect_rest);
-;;;
-;;; Requests to select a range of items in the model.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; position :
-;;;     the first item to select
-;;;
-;;; n_items :
-;;;     the number of items to select
-;;;
-;;; unselect_rest :
-;;;     whether previously selected items should be unselected
-;;;
-;;; Returns :
-;;;     TRUE if this action was supported and no fallback should be tried. This
-;;;     does not mean the range was selected.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_select_range" selection-model-select-range)
     :boolean
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @argument[position]{an unsigned integer with the first item to select}
+  @argument[n-items]{an unsigned integer with the number of items to select}
+  @argument[unselect-rest]{a boolean whether previously selected items should be
+    unselected}
+  @return{@em{True} if this action was supported and no fallback should be
+    tried. This does not mean the range was selected.}
+  @begin{short}
+    Requests to select a range of items in the model.
+  @end{short}
+  @see-class{gtk:selection-model}"
   (model (g:object selection-model))
   (position :uint)
   (n-items :uint)
@@ -388,30 +337,21 @@ lambda (model position n-items)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_unselect_range ()
-;;;
-;;; gboolean
-;;; gtk_selection_model_unselect_range (GtkSelectionModel *model,
-;;;                                     guint position,
-;;;                                     guint n_items);
-;;;
-;;; Requests to unselect a range of items in the model.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; position :
-;;;     the first item to unselect
-;;;
-;;; n_items :
-;;;     the number of items to unselect
-;;;
-;;; Returns :
-;;;     TRUE if this action was supported and no fallback should be tried. This
-;;;     does not mean the range was unselected.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_unselect_range"
                selection-model-unselect-range) :boolean
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @argument[position]{an unsigned integer with the first item to unselect}
+  @argument[n-items]{an unsigned integer with the number of items to unselect}
+  @return{@em{True} if this action was supported and no fallback should be
+    tried. This does not mean the range was unselected.}
+  @begin{short}
+    Requests to unselect a range of items in the model.
+  @end{short}
+  @see-class{gtk:selection-model}"
   (model (g:object selection-model))
   (position :uint)
   (n-items :uint))
@@ -420,71 +360,59 @@ lambda (model position n-items)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_select_all ()
-;;;
-;;; gboolean
-;;; gtk_selection_model_select_all (GtkSelectionModel *model);
-;;;
-;;; Requests to select all items in the model.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; Returns :
-;;;     TRUE if this action was supported and no fallback should be tried. This
-;;;     does not mean that all items are now selected.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_select_all" selection-model-select-all)
     :boolean
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @return{@em{True} if this action was supported and no fallback should be
+    tried. This does not mean that all items are now selected.}
+  @begin{short}
+    Requests to select all items in the model.
+  @end{short}
+  @see-class{gtk:selection-model}"
   (model (g:object selection-model)))
 
 (export 'selection-model-select-all)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_unselect_all ()
-;;;
-;;; gboolean
-;;; gtk_selection_model_unselect_all (GtkSelectionModel *model);
-;;;
-;;; Requests to unselect all items in the model.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; Returns :
-;;;     TRUE if this action was supported and no fallback should be tried. This
-;;;     does not mean that all items are now unselected.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_unselect_all" selection-model-unselect-all)
     :boolean
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @return{@em{True} if this action was supported and no fallback should be
+    tried. This does not mean that all items are now unselected.}
+  @begin{short}
+    Requests to unselect all items in the model.
+  @end{short}
+  @see-class{gtk:selection-model}"
   (model (g:object selection-model)))
 
 (export 'selection-model-unselect-all)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_selection_model_selection_changed ()
-;;;
-;;; void
-;;; gtk_selection_model_selection_changed (GtkSelectionModel *model,
-;;;                                        guint position,
-;;;                                        guint n_items);
-;;;
-;;; Helper function for implementations of GtkSelectionModel. Call this when a
-;;; the selection changes to emit the “selection-changed” signal.
-;;;
-;;; model :
-;;;     a GtkSelectionModel
-;;;
-;;; position :
-;;;     the first changed item
-;;;
-;;; n_items :
-;;;     the number of changed items
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_selection_changed"
                selection-model-selection-changed) :void
+ #+liber-documentation
+ "@version{#2023-9-14}
+  @argument[model]{a @class{gtk:selection-model} object}
+  @argument[position]{an unsigned integer with the first changed item}
+  @argument[n-items]{an unsigned integer with the number of changed items}
+  @begin{short}
+    Helper function for implementations of the @class{gtk:selection-model}
+    class.
+  @end{short}
+  Call this when the selection changes to emit the \"selection-changed\" signal.
+  @see-class{gtk:selection-model}"
   (model (g:object selection-model))
   (position :uint)
   (n-items :uint))

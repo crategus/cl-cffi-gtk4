@@ -98,7 +98,7 @@
     "io-priority" "gint" t t)
    #+gtk-4-8
    (item-type
-    directory-list-item-type
+    %directory-list-item-type
     "item-type" "GType" t nil)
    (loading
     directory-list-loading
