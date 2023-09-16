@@ -104,16 +104,15 @@
     @begin[GtkExpression]{subsection}
       Expressions to values.
       @about-class{expression}
-      @about-class{expression-watch}
-      @about-symbol{param-spec-expression}
-      @about-symbol{expression-notify}
       @about-function{expression-ref}
       @about-function{expression-unref}
       @about-function{expression-value-type}
       @about-function{expression-is-static}
       @about-function{expression-evaluate}
-      @about-function{expression-watch}
       @about-function{expression-bind}
+      @about-symbol{expression-notify}
+      @about-function{expression-watch}
+      @about-class{expression-watch}
       @about-function{expression-watch-ref}
       @about-function{expression-watch-unref}
       @about-function{expression-watch-evaluate}
@@ -130,10 +129,10 @@
       @about-function{closure-expression-new}
       @about-function{cclosure-expression-new}
       @about-symbol{VALUE_HOLDS_EXPRESSION}
-      @about-function{value-set-expression}
+      @about-function{value-expression}
       @about-function{value-take-expression}
-      @about-function{value-get-expression}
       @about-function{value-dup-expression}
+      @about-symbol{param-spec-expression}
       @about-function{param-spec-expression}
     @end{subsection}
     @begin[GtkFilter]{subsection}
@@ -156,7 +155,7 @@
       Combining multiple filters.
       @about-class{multi-filter}
       @about-function{multi-filter-item-type}
-      @about-function{multi-filter-n-items}
+      @about-generic{multi-filter-n-items}
       @about-function{multi-filter-append}
       @about-function{multi-filter-remove}
       @about-class{any-filter}
@@ -208,7 +207,7 @@
       @about-function{ordering-from-cmpfunc}
     @end{subsection}
     @begin[GtkCustomSorter]{subsection}
-      Sorting with a callbacks.
+      Sorting with a callback function.
       @about-class{custom-sorter}
       @about-function{custom-sorter-new}
       @about-function{custom-sorter-set-sort-func}
@@ -236,7 +235,7 @@
       @about-class{numeric-sorter}
       @about-generic{numeric-sorter-expression}
       @about-generic{numeric-sorter-sort-order}
-      @about-generic{numeric-sorter-new}
+      @about-function{numeric-sorter-new}
     @end{subsection}
     @begin[GtkSelectionModel]{subsection}
       Extension of the list model interface that handles selections.
@@ -277,7 +276,9 @@
     @begin[GtkMultiSelection]{subsection}
       A selection model that allows selecting multiple items.
       @about-class{multi-selection}
+      @about-function{multi-selection-item-type}
       @about-generic{multi-selection-model}
+      @about-geneirc{multi-selection-n-items}
       @about-function{multi-selection-new}
     @end{subsection}
     @begin[GtkFilterListModel]{subsection}
@@ -365,7 +366,7 @@
       @about-generic{directory-list-monitored}
       @about-generic{directory-list-n-items}
       @about-function{directory-list-new}
-      @about-generic{directory-list-is-loading}
+      @about-function{directory-list-is-loading}
     @end{subsection}
     @begin[GtkStringList]{subsection}
       A list model for strings.
@@ -714,6 +715,18 @@
       @about-function{about-dialog-new}
       @about-function{about-dialog-add-credit-section}
       @about-function{show-about-dialog}
+    @end{subsection}
+    @begin[GtkAlertDialog]{subsection}
+      @about-class{alert-dialog}
+      @about-generic{alert-dialog-buttons}
+      @about-generic{alert-dialog-cancel-button}
+      @about-generic{alert-dialog-default-button}
+      @about-generic{alert-dialog-detail}
+      @about-generic{alert-dialog-message}
+      @about-function{alert-dialog-new}
+      @about-function{alert-dialog-choose}
+      @about-function{alert-dialog-choose-finish}
+      @about-function{alert-dialog-show}
     @end{subsection}
     @begin[GtkAssistant]{subsection}
       A widget used to guide users through multi-step operations.
@@ -1485,6 +1498,7 @@
       Create widgets with a discrete toggle button.
       @about-class{check-button}
       @about-generic{check-button-active}
+      @about-generic{check-button-child}
       @about-generic{check-button-group}
       @about-generic{check-button-inconsistent}
       @about-generic{check-button-label}
@@ -1693,7 +1707,7 @@
       @about-function{entry-grab-focus-without-selecting}
     @end{subsection}
     @begin[GtkEntryCompletion]{subsection}
-      Completion functionality for the @class{entry} widget.
+      Completion functionality for the @class{gtk:entry} widget.
       @about-class{entry-completion}
       @about-generic{entry-completion-cell-area}
       @about-generic{entry-completion-inline-completion}
@@ -1704,10 +1718,10 @@
       @about-generic{entry-completion-popup-set-width}
       @about-generic{entry-completion-popup-single-match}
       @about-generic{entry-completion-text-column}
-      @about-symbol{entry-completion-match-func}
       @about-function{entry-completion-new}
       @about-function{entry-completion-new-with-area}
       @about-function{entry-completion-entry}
+      @about-symbol{entry-completion-match-func}
       @about-function{entry-completion-set-match-func}
       @about-function{entry-completion-compute-prefix}
       @about-function{entry-completion-complete}
@@ -2380,7 +2394,6 @@
     @begin[GtkCellLayout]{subsection}
       An interface for packing cells.
       @about-class{cell-layout}
-      @about-symbol{cell-layout-data-func}
       @about-function{cell-layout-pack-start}
       @about-function{cell-layout-pack-end}
       @about-function{cell-layout-area}
@@ -2389,7 +2402,7 @@
       @about-function{cell-layout-clear}
       @about-function{cell-layout-set-attributes}
       @about-function{cell-layout-add-attribute}
-      @about-symbol{cell-layout-cell-data-func}
+      @about-symbol{cell-layout-data-func}
       @about-function{cell-layout-set-cell-data-func}
       @about-function{cell-layout-clear-attributes}
     @end{subsection}

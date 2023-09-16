@@ -8,7 +8,7 @@ GTK 4 files
 GListModel support
 
   gtk4.bitset.lisp                     GtkBitset                      GTK 4.12
-  gtk4.expression.lisp                 GtkExpression, ...             GTK 4.12 +
+  gtk4.expression.lisp                 GtkExpression, ...             GTK 4.12 &
 
   gtk4.filter.lisp                     GtkFilter                      GTK 4.12
   gtk4.custom-filter.lisp              GtkCustomFilter                GTK 4.12
@@ -17,20 +17,20 @@ GListModel support
   gtk4.string-filter.lisp              GtkStringFilter                GTK 4.12
   gtk4.file-filter.lisp                GtkFileFilter                  GTK 4.12
 
-  gtk4.sorter.lisp                     GtkSorter                      GTK 4.12 +
-  gtk4.custom-sorter.lisp              GtkCustomSorter                GTK 4.12 +
-  gtk4.multi-sorter.lisp               GtkMultiSorter                 GTK 4.12 +
-  gtk4.string-sorter.lisp              GtkStringSorter                GTK 4.12 +
-  gtk4.numeric-sorter.lisp             GtkNumericSorter               GTK 4.12 +
+  gtk4.sorter.lisp                     GtkSorter                      GTK 4.12
+  gtk4.custom-sorter.lisp              GtkCustomSorter                GTK 4.12
+  gtk4.multi-sorter.lisp               GtkMultiSorter                 GTK 4.12
+  gtk4.string-sorter.lisp              GtkStringSorter                GTK 4.12
+  gtk4.numeric-sorter.lisp             GtkNumericSorter               GTK 4.12
 
-  gtk4.selection-model.lisp            GtkSelectionModel              GTK 4.12 +
+  gtk4.selection-model.lisp            GtkSelectionModel              GTK 4.12
   gtk4.no-selection.lisp               GtkNoSelection                 GTK 4.12
   gtk4.single-selection.lisp           GtkSingleSelection             GTK 4.12
   gtk4.multi-selection.lisp            GtkMultiSelection              GTK 4.12
 
   gtk4.filter-list-model.lisp          GtkFilterListModel             GTK 4.12
-  gtk4.flatten-list-model.lisp         GtkFlattenListModel            GTK 4.12 +
-  gtk4.map-list-model.lisp             GtkMapListModel                GTK 4.12 +
+  gtk4.flatten-list-model.lisp         GtkFlattenListModel            GTK 4.12
+  gtk4.map-list-model.lisp             GtkMapListModel                GTK 4.12
   gtk4.slice-list-model.lisp           GtkSliceListModel              GTK 4.12 +
   gtk4.sort-list-model.lisp            GtkSortListModel               GTK 4.12 +
   gtk4.selection-filter-model.lisp     GtkSelectionFilterModel        GTK 4.12
@@ -78,7 +78,7 @@ Windows
   gtk4.message-dialog.lisp              GtkMessageDialog              GTK 4.6  +
   gtk4.about-dialog.lisp                GtkAboutDialog                GTK 4.6  +
   gtk4.alert-dialog.lisp                GtkAlertDialog                GTK 4.12 +
-  gtk4.assistant.lisp                   GtkAssistant                  GTK 4.6  +
+  gtk4.assistant.lisp                   GtkAssistant                  GTK 4.12
   gtk4.window-group.lisp                GtkWindowGroup                GTK 4.6  +
   gtk4.native-dialog.lisp               GtkNativeDialog               GTK 4.12
 
@@ -155,7 +155,7 @@ Numeric and Text Data Entry
   gtk.entry-buffer.lisp                GtkEntryBuffer                 GTK 4.6  +
   gtk.text.lisp                        GtkText                        GTK 4.6  +
   gtk.entry.lisp                       GtkEntry                       GTK 4.10 *
-  gtk.entry-completion.lisp            GtkEntryCompletion             GTK 4.6  +
+  gtk.entry-completion.lisp            GtkEntryCompletion             GTK 4.12
   gtk.password-entry.lisp              GtkPasswordEntry               GTK 4.6  +
   gtk.scale.lisp                       GtkScale                       GTK 4.12
   gtk.spin-button.lisp                 GtkSpinButton                  GTK 4.6  +
@@ -187,7 +187,7 @@ Tree, List and Icon Grid Widgets
   gtk.tree-model-sort.lisp             GtkTreeModelSort               GTK 4.0  +
   gtk.tree-model-filter.lisp           GtkTreeModelFilter             GTK 4.0  +
 
-  gtk.cell-layout.lisp                 GtkCellLayout                  GTK 4.0  +
+  gtk.cell-layout.lisp                 GtkCellLayout                  GTK 4.12
 
   gtk.cell-area.lisp                   GtkCellArea                    GTK 4.6  +
   gtk.cell-area-box.lisp               GtkCellAreaBox                 GTK 4.0  +
