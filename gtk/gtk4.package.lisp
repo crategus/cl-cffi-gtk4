@@ -308,8 +308,8 @@
       @about-function{map-list-model-item-type}
       @about-generic{map-list-model-model}
       @about-generic{map-list-model-n-items}
-      @about-symbol{map-list-model-map-func}
       @about-function{map-list-model-new}
+      @about-symbol{map-list-model-map-func}
       @about-function{map-list-model-set-map-func}
     @end{subsection}
     @begin[GtkSliceListModel]{subsection}
@@ -3418,6 +3418,7 @@
       @about-function{widget-insert-before}
       @about-function{widget-insert-after}
       @about-function{widget-should-layout}
+      @about-function{widget-color}
       @about-function{widget-add-css-class}
       @about-function{widget-remove-css-class}
       @about-function{widget-has-css-class}
@@ -3781,6 +3782,7 @@
       @about-symbol{accessible-invalid-state}
       @about-symbol{accessible-autocomplete}
       @about-symbol{accessible-sort}
+      @about-symbol{accessible-platform-state}
       @about-class{accessible}
       @about-generic{accessible-accessible-role}
       @about-function{accessible-update-state}

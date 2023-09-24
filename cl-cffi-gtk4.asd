@@ -97,12 +97,12 @@
    (:module gsk
     :serial t
     :components
-    ((:file "gsk.package")
-     (:file "gsk.renderer")
-     (:file "gsk.render-node")
-     (:file "gsk.rounded-rect")
-     (:file "gsk.transform")
-     (:file "gsk.gl-shader")
+    ((:file "gsk4.package")
+     (:file "gsk4.renderer")
+     (:file "gsk4.render-node")
+     (:file "gsk4.rounded-rect")
+     (:file "gsk4.transform")
+     (:file "gsk4.gl-shader")
     ))
    (:module gtk
     :serial t
@@ -521,6 +521,11 @@
      ;; Pixbuf, Pango, Cairo, Backends interaction
 
      ;; GSK
+     (:file "rtest-gsk4-renderer")
+     (:file "rtest-gsk4-render-node")
+     (:file "rtest-gsk4-rounded-rect")
+     (:file "rtest-gsk4-transform")
+     (:file "rtest-gsk4-gl-shader")
 
      ;; GListModel support
      (:file "rtest-gtk4-bitset")
@@ -769,6 +774,7 @@
      (:file "rtest-gtk4-dialog")
      (:file "rtest-gtk4-message-dialog")
      (:file "rtest-gtk4-about-dialog")
+     (:file "rtest-gtk4-alert-dialog"            :if-feature :gtk-4-10)
      (:file "rtest-gtk4-assistant")
      (:file "rtest-gtk4-window-group")
      (:file "rtest-gtk4-native-dialog")
