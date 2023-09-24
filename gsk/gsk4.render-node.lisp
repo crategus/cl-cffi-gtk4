@@ -67,20 +67,21 @@
 ;;;     GskColorStop
 ;;;     GskShadow
 ;;;     GskBlendMode
+;;;     GskMaskMode                                        Since 4.10
 ;;;
 ;;; Functions
+;;;
+;;;     GskParseErrorFunc
 ;;;
 ;;;     gsk_render_node_ref
 ;;;     gsk_render_node_unref
 ;;;     gsk_render_node_get_node_type
 ;;;     gsk_render_node_draw
-
-;;;     GskParseErrorFunc
-
 ;;;     gsk_render_node_serialize
 ;;;     gsk_render_node_deserialize
 ;;;     gsk_render_node_write_to_file
 ;;;     gsk_render_node_get_bounds
+;;;
 ;;;     gsk_color_node_new
 ;;;     gsk_color_node_get_color
 ;;;     gsk_texture_node_new
@@ -234,13 +235,17 @@
   :text-node
   :blur-node
   :debug-node
-  :gl-shader-node)
+  :gl-shader-node
+  #+gtk-4-10
+  :texture-scale-node
+  #+gtk-4-10
+  :mask-node)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'render-node-type)
       "GEnum"
       (liber:symbol-documentation 'render-node-type)
- "@version{#2022-9-13}
+ "@version{2023-9-22}
   @begin{short}
     The type of a node determines what the node is rendering.
   @end{short}
@@ -273,7 +278,11 @@
   :text-node
   :blur-node
   :debug-node
-  :gl-shader-node)
+  :gl-shader-node
+  #+gtk-4-10
+  :texture-scale-node
+  #+gtk-4-10
+  :mask-node)
   @end{pre}
   @begin[code]{table}
     @entry[:not-a-render-node]{Error type. No node will ever have this type.}
@@ -307,7 +316,11 @@
     @entry[:blur-node]{A node that applies a blur.}
     @entry[:debug-node]{Debug information that does not affect the rendering.}
     @entry[:gl-shader-node]{A node that uses OpenGL fragment shaders to render.}
-  @end{table}")
+    @entry[:texture-scale-node]{A node drawing a @class{gdk:texture} object
+      scaled and filtered. Since 4.10}
+    @entry[:mask-node]{A node that masks one child with another. Since 4.10}
+  @end{table}
+  @see-class{gsk:render-node}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GskSerializationError
@@ -371,6 +384,13 @@
 ;;;     linear interpolation along each axis, plus mipmap generation, with
 ;;;     linear interpolation along the mipmap levels
 ;;; ----------------------------------------------------------------------------
+
+(gobject:define-g-enum "GskScalingFilter" scaling-filter
+  (:export t
+   :type-initializer "gsk_scaling_filter_get_type")
+  (:linear 0)
+  (:nearest 1)
+  (:trilinear 2))
 
 ;;; ----------------------------------------------------------------------------
 ;;; struct GskColorStop
@@ -482,6 +502,55 @@
 ;;;     saturation of the destination color
 ;;; ----------------------------------------------------------------------------
 
+(gobject:define-g-enum "GskBlendMode" blend-mode
+  (:export t
+   :type-initializer "gsk_blend_mode_get_type")
+  (:default 0)
+  (:multiply 1)
+  (:screen 2)
+  (:overlay 3)
+  (:darken 4)
+  (:ligthen 5)
+  (:color-dodge 6)
+  (:color-burn 7)
+  (:hard-light 8)
+  (:soft-ligth 9)
+  (:difference 10)
+  (:exclusion 11)
+  (:color 12)
+  (:hue 13)
+  (:saturation 14)
+  (:luminosity 15))
+
+;;; ----------------------------------------------------------------------------
+;;; enum GskMaskMode
+;;;
+;;; The mask modes available for mask nodes.
+;;;
+;;; GSK_MASK_MODE_ALPHA	
+;;;     Use the alpha channel of the mask.
+;;;
+;;; GSK_MASK_MODE_INVERTED_ALPHA	
+;;;     Use the inverted alpha channel of the mask.
+;;;
+;;; GSK_MASK_MODE_LUMINANCE	
+;;;     Use the luminance of the mask, multiplied by mask alpha.
+;;;
+;;; GSK_MASK_MODE_INVERTED_LUMINANCE	
+;;;     Use the inverted luminance of the mask, multiplied by mask alpha.  
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+  
+#+gtk-4-10
+(gobject:define-g-enum "GskMaskMode" mask-mode
+  (:export t
+   :type-initializer "gsk_mask_mode_get_type")
+  (:alpha 0)
+  (:inverted-alpha 1)
+  (:luminance 2)
+  (:inverted-luminace 3))
+
 ;;; ----------------------------------------------------------------------------
 ;;; GskRenderNode
 ;;;
@@ -490,8 +559,20 @@
 ;;; A node in the render tree.
 ;;; ----------------------------------------------------------------------------
 
+;(cffi:defcstruct render-node)
 
-(cffi:defcstruct render-node)
+(cffi:define-foreign-type render-node-type ()
+  ()
+  (:actual-type :pointer)
+  (:simple-parser render-node))
+
+(defmethod cffi:translate-to-foreign (proxy (type render-node-type))
+  proxy)
+
+(defmethod cffi:translate-from-foreign (native (type render-node-type))
+  native)
+
+(export 'render-node)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskBlendNode

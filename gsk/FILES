@@ -1,8 +1,11 @@
 I. API Reference
 
-GskRenderer — Renders a scene
+  gsk4.renderer.lisp            Renders a scene                       GSK 4.12 +
+
 GskRenderNode — Simple scene graph element
-GskRoundedRect — A rounded rectangle
-GskTransform — A description for transform operations
+
+  gsk4.rounded-rect.lisp        Rounded rectangle                     GSK 4.12 +
+  gsk4.transform.lisp           Description for transform operations  GSK 4.12 +
+
 GskGLShader — Fragment shaders for GSK
 

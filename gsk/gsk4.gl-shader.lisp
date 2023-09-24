@@ -84,7 +84,8 @@
 ;;;     GObject
 ;;;     ╰── GskGLShader
 ;;;
-;;;Description
+;;; Description
+;;;
 ;;;A GskGLShader is a snippet of GLSL that is meant to run in the fragment shader of the rendering pipeline. A fragment shader gets the coordinates being rendered as input and produces the pixel values for that particular pixel. Additionally, the shader can declare a set of other input arguments, called uniforms (as they are uniform over all the calls to your shader in each instance of use). A shader can also receive up to 4 textures that it can use as input when producing the pixel data.
 
 ;;;GskGLShader is usually used with gtk_snapshot_push_gl_shader() to produce a GskGLShaderNode in the rendering hierarchy, and then its input textures are constructed by rendering the child nodes to textures before rendering the shader node itself. (You can pass texture nodes as children if you want to directly use a texture as input).
@@ -138,23 +139,113 @@
 
 ;;;  fragColor = position * source1 + (1.0 - position) * source2;
 ;;;}
-;;;Functions
-;;;gsk_gl_shader_new_from_bytes ()
-;;;GskGLShader *
-;;;gsk_gl_shader_new_from_bytes (GBytes *sourcecode);
-;;;Creates a GskGLShader that will render pixels using the specified code.
+;;; ----------------------------------------------------------------------------
 
-;;;Parameters
-;;;sourcecode
+(in-package :gsk)
 
-;;;GLSL sourcecode for the shader, as a GBytes
-
+;;; ----------------------------------------------------------------------------
+;;; enum GskGLUniformType
 ;;;
-;;;Returns
-;;;A new GskGLShader.
+;;; This defines the types of the uniforms that GskGLShaders declare. It defines 
+;;; both what the type is called in the GLSL shader code, and what the 
+;;; corresponding C type is on the Gtk side.
+;;;
+;;; GSK_GL_UNIFORM_TYPE_NONE
+;;;     No type, used for uninitialized or unspecified values.
+;;;
+;;; GSK_GL_UNIFORM_TYPE_FLOAT
+;;;     A float uniform
+;;;
+;;; GSK_GL_UNIFORM_TYPE_INT
+;;;     A GLSL int / gint32 uniform
+;;;
+;;; GSK_GL_UNIFORM_TYPE_UINT
+;;;     A GLSL uint / guint32 uniform
+;;;
+;;; GSK_GL_UNIFORM_TYPE_BOOL
+;;;     A GLSL bool / gboolean uniform
+;;;
+;;; GSK_GL_UNIFORM_TYPE_VEC2
+;;;     A GLSL vec2 / graphene_vec2_t uniform
+;;;
+;;; GSK_GL_UNIFORM_TYPE_VEC3
+;;;     A GLSL vec3 / graphene_vec3_t uniform
+;;;
+;;; GSK_GL_UNIFORM_TYPE_VEC4
+;;;     A GLSL vec4 / graphene_vec4_t uniform
+;;; ----------------------------------------------------------------------------
 
-;;;[transfer full]
+;;; ----------------------------------------------------------------------------
+;;; GskShaderArgsBuilder
+;;;
+;;; typedef struct _GskShaderArgsBuilder GskShaderArgsBuilder;
+;;; An object to build the uniforms data for a GskGLShader.
+;;; ----------------------------------------------------------------------------
 
+(cffi:defcstruct shader-args-builder)
+
+(export 'shader-args-builder)
+
+;;; ----------------------------------------------------------------------------
+;;; GskGLShader
+;;;
+;;; typedef struct _GskGLShader GskGLShader;
+;;; An object representing a GL shader program.
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-g-object-class "GskGLShader" gl-shader
+  (:superclass g:object
+   :export t
+   :interfaces ()
+   :type-initializer "gsk_gl_shader_get_type")
+  ((resource
+    gl-shader-resource
+    "resource" "gchararray" t t)
+   (source
+    gl-shader-source
+    "source" "GBytes" t t)))
+
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;;The “resource” property
+;;;  “resource”                 char *
+;;;Resource containing the source code for the shader.
+
+;;;If the shader source is not coming from a resource, this will be NULL.
+
+;;;Owner: GskGLShader
+
+;;;Flags: Read / Write / Construct Only
+
+;;;Default value: NULL
+
+;;;The “source” property
+;;;  “source”                   GBytes *
+;;;The sourcecode for the shader.
+
+;;;Owner: GskGLShader
+
+;;;Flags: Read / Write / Construct Only
+
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_gl_shader_new_from_bytes ()
+;;;
+;;; GskGLShader *
+;;; gsk_gl_shader_new_from_bytes (GBytes *sourcecode);
+;;;
+;;; Creates a GskGLShader that will render pixels using the specified code.
+;;;
+;;; sourcecode :
+;;;     GLSL sourcecode for the shader, as a GBytes
+;;;
+;;; Returns :
+;;;     A new GskGLShader.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
 ;;;gsk_gl_shader_new_from_resource ()
 ;;;GskGLShader *
 ;;;gsk_gl_shader_new_from_resource (const char *resource_path);
@@ -842,80 +933,5 @@
 ;;;value
 
 ;;;value to set the uniform too
-
-;;;
-;;;Types and Values
-;;;GskGLShader
-;;;typedef struct _GskGLShader GskGLShader;
-;;;An object representing a GL shader program.
-
-;;;enum GskGLUniformType
-;;;This defines the types of the uniforms that GskGLShaders declare. It defines both what the type is called in the GLSL shader code, and what the corresponding C type is on the Gtk side.
-
-;;;Members
-;;;GSK_GL_UNIFORM_TYPE_NONE
-
-;;;No type, used for uninitialized or unspecified values.
-
-;;;
-;;;GSK_GL_UNIFORM_TYPE_FLOAT
-
-;;;A float uniform
-
-;;;
-;;;GSK_GL_UNIFORM_TYPE_INT
-
-;;;A GLSL int / gint32 uniform
-
-;;;
-;;;GSK_GL_UNIFORM_TYPE_UINT
-
-;;;A GLSL uint / guint32 uniform
-
-;;;
-;;;GSK_GL_UNIFORM_TYPE_BOOL
-
-;;;A GLSL bool / gboolean uniform
-
-;;;
-;;;GSK_GL_UNIFORM_TYPE_VEC2
-
-;;;A GLSL vec2 / graphene_vec2_t uniform
-
-;;;
-;;;GSK_GL_UNIFORM_TYPE_VEC3
-
-;;;A GLSL vec3 / graphene_vec3_t uniform
-
-;;;
-;;;GSK_GL_UNIFORM_TYPE_VEC4
-
-;;;A GLSL vec4 / graphene_vec4_t uniform
-
-;;;
-;;;GskShaderArgsBuilder
-;;;typedef struct _GskShaderArgsBuilder GskShaderArgsBuilder;
-;;;An object to build the uniforms data for a GskGLShader.
-
-;;;Property Details
-;;;The “resource” property
-;;;  “resource”                 char *
-;;;Resource containing the source code for the shader.
-
-;;;If the shader source is not coming from a resource, this will be NULL.
-
-;;;Owner: GskGLShader
-
-;;;Flags: Read / Write / Construct Only
-
-;;;Default value: NULL
-
-;;;The “source” property
-;;;  “source”                   GBytes *
-;;;The sourcecode for the shader.
-
-;;;Owner: GskGLShader
-
-;;;Flags: Read / Write / Construct Only
 
 ;;; --- End of file gsk.gl-shader.lisp -----------------------------------------
