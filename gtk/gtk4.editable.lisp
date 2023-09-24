@@ -2,7 +2,7 @@
 ;;; gtk4.editable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.9 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -62,11 +62,14 @@
 ;;;     gtk_editable_set_alignment
 ;;;     gtk_editable_get_alignment
 ;;;     gtk_editable_install_properties
+;;;
 ;;;     gtk_editable_get_delegate
 ;;;     gtk_editable_init_delegate
 ;;;     gtk_editable_finish_delegate
+;;;
 ;;;     gtk_editable_delegate_set_property
 ;;;     gtk_editable_delegate_get_property
+;;;     gtk_editable_delegate_get_accessible_platform_state
 ;;;
 ;;; Properties
 ;;;
@@ -165,9 +168,9 @@
 (setf (liber:alias-for-class 'editable)
       "Interface"
       (documentation 'editable 'type)
- "@version{2022-9-10}
+ "@version{2023-9-16}
   @begin{short}
-    The @sym{gtk:editable} interface is an interface which should be
+    The @class{gtk:editable} interface is an interface which should be
     implemented by text editing widgets, such as the @class{gtk:entry} and
     @class{gtk:spin-button} widgets.
   @end{short}
@@ -199,13 +202,13 @@
 lambda (editable)    :run-last
       @end{pre}
       The signal is emitted at the end of a single user visible operation on the
-      contents of the @sym{gtk:editable}. E.g., a paste operation that replaces
-      the contents of the selection will cause only one signal emission, even
-      though it is implemented by first deleting the selection, then inserting
-      the new content, and may cause multiple \"notify::text\" signals to be
-      emitted.
+      contents of the @class{gtk:editable} widget. E.g., a paste operation that
+      replaces the contents of the selection will cause only one signal
+      emission, even though it is implemented by first deleting the selection,
+      then inserting the new content, and may cause multiple \"notify::text\"
+      signals to be emitted.
       @begin[code]{table}
-        @entry[editable]{The @sym{gtk:editable} widget which received the
+        @entry[editable]{The @class{gtk:editable} widget which received the
           signal.}
       @end{table}
     @subheading{The \"delete-text\" signal}
@@ -220,7 +223,7 @@ lambda (editable start end)    :run-last
       entirely. The @arg{start} and @arg{end} parameters are interpreted as for
       the @fun{gtk:editable-delete-text} function.
       @begin[code]{table}
-        @entry[editable]{The @sym{gtk:editable} widget which received the
+        @entry[editable]{The @class{gtk:editable} widget which received the
           signal.}
         @entry[start]{An integer with the starting position.}
         @entry[end]{An integer with the end position.}
@@ -235,7 +238,7 @@ lambda (editable text length position)    :run-last
       signal with the @fun{g-signal-stop-emission} function, it is possible to
       modify the inserted text, or prevent it from being inserted entirely.
       @begin[code]{table}
-        @entry[editable]{The @sym{gtk:editable} widget which received the
+        @entry[editable]{The @class{gtk:editable} widget which received the
           signal.}
         @entry[text]{A string with the new text to insert.}
         @entry[length]{An integer with the length of the new text, in bytes, or
@@ -291,7 +294,7 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-editable)
       "Accessor"
       (documentation 'editable-editable 'function)
- "@version{2022-9-10}
+ "@version{2023-9-18}
   @syntax[]{(gtk:editable-editable object) => setting}
   @syntax[]{(setf (gtk:editable-editable object) setting)}
   @argument[object]{a @class{gtk:editable} widget}
@@ -301,9 +304,9 @@ lambda (editable text length position)    :run-last
     Accessor of the @slot[gtk:editable]{editable} slot of the
     @class{gtk:editable} class.
   @end{short}
-  The @sym{gtk:editable-editable} function retrieves whether @arg{object} is
-  editable. The @sym{(setf gtk:editable-editable)} function determines if the
-  user can edit the text in the editable widget or not.
+  The @fun{gtk:editable-editable} function retrieves whether @arg{object} is
+  editable. The @setf{gtk:editable-editable} function determines if the user can
+  edit the text in the editable widget or not.
   @see-class{gtk:editable}")
 
 ;;; --- editable-enable-undo ---------------------------------------------------
@@ -318,7 +321,7 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-enable-undo)
       "Accessor"
       (documentation 'editable-enable-undo 'function)
- "@version{2022-6-12}
+ "@version{2023-9-18}
   @syntax[]{(gtk:editable-enable-undo object) => setting}
   @syntax[]{(setf (gtk:editable-enable-undo object) setting)}
   @argument[object]{a @class{gtk:editable} widget}
@@ -327,9 +330,9 @@ lambda (editable text length position)    :run-last
     Accessor of the @slot[gtk:editable]{enable-undo} slot of the
     @class{gtk:editable} class.
   @end{short}
-  The @sym{gtk:editable-enable-undo} function gets if undo/redo actions are
-  enabled for the editable widget. The @sym{(setf gtk:editable-enable-undo)}
-  function sets the property.
+  The @fun{gtk:editable-enable-undo} function gets if undo/redo actions are
+  enabled for the editable widget. The @setf{gtk:editable-enable-undo} function
+  sets the property.
 
   If enabled, changes to editable will be saved for undo/redo actions.
 
@@ -352,7 +355,7 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-max-width-chars)
       "Accessor"
       (documentation 'editable-max-width-chars 'function)
- "@version{2022-6-12}
+ "@version{2023-9-18}
   @syntax[]{(gtk:editable-max-width-chars object) => max}
   @syntax[]{(setf (gtk:editable-max-width-chars object) max)}
   @argument[object]{a @class{gtk:editable} widget}
@@ -361,10 +364,9 @@ lambda (editable text length position)    :run-last
     Accessor of the @slot[gtk:editable]{max-width-chars} slot of the
     @class{gtk:editable} class.
   @end{short}
-  The @sym{gtk:editable-max-width-chars} function retrieves the desired maximum
+  The @fun{gtk:editable-max-width-chars} function retrieves the desired maximum
   width of the editable widget, in characters. The
-  @sym{(setf gtk:editable-max-width-chars)} function sets the desired maximum
-  width.
+  @setf{gtk:editable-max-width-chars} function sets the desired maximum width.
   @see-class{gtk:editable}")
 
 ;;; --- editable-selection-bound -----------------------------------------------
@@ -406,7 +408,7 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-text)
       "Accessor"
       (documentation 'editable-text 'function)
- "@version{2022-9-9}
+ "@version{2023-9-18}
   @syntax[]{(gtk:editable-text object) => text}
   @syntax[]{(setf (gtk:editable-text object) text)}
   @argument[object]{a @class{gtk:editable} widget}
@@ -415,9 +417,9 @@ lambda (editable text length position)    :run-last
     Accessor of the @slot[gtk:editable]{text} slot of the @class{gtk:editable}
     class.
   @end{short}
-  The @sym{gtk:editable-text} function retrieves the contents of the editable.
-  The @sym{(setf gtk:editable-text)} function sets the text in the editable to
-  the given value, replacing the current contents.
+  The @fun{gtk:editable-text} function retrieves the contents of the editable.
+  The @setf{gtk:editable-text} function sets the text in the editable to the
+  given value, replacing the current contents.
   @see-class{gtk:editable}")
 
 ;;; --- editable-width-chars ---------------------------------------------------
@@ -433,7 +435,7 @@ lambda (editable text length position)    :run-last
 (setf (liber:alias-for-function 'editable-width-chars)
       "Accessor"
       (documentation 'editable-width-chars 'function)
- "@version{2022-6-12}
+ "@version{2023-9-18}
   @syntax[]{(gtk:editable-width-chars object) => width}
   @syntax[]{(setf (gtk:editable-width-chars object) width)}
   @argument[object]{a @class{gtk:editable} widget}
@@ -442,9 +444,9 @@ lambda (editable text length position)    :run-last
     Accessor of the @slot[gtk:editable]{width-chars} slot of the
     @class{gtk:editable} class.
   @end{short}
-  The @sym{gtk:editable-width-chars} function gets the value of the width in
-  chars. The @sym{(setf gtk:editable-text)} function changes the size request
-  of the editable to be about the right size for @arg{width} characters.
+  The @fun{gtk:editable-width-chars} function gets the value of the width in
+  chars. The @setf{gtk:editable-text} function changes the size request of the
+  editable to be about the right size for @arg{width} characters.
 
   Note that it changes the size request, the size can still be affected by how
   you pack the widget into containers. If @arg{width} is -1, the size reverts
@@ -665,7 +667,7 @@ lambda (editable text length position)    :run-last
 
 (cffi:defcfun ("gtk_editable_get_position" editable-position) :int
  #+liber-documentation
- "@version{2020-6-1}
+ "@version{2023-9-18}
   @syntax[]{(gtk:editable-position editable) => position}
   @syntax[]{(setf (gtk:editable-position editable) position)}
   @argument[editable]{a @class{gtk:editable} widget}
@@ -673,11 +675,10 @@ lambda (editable text length position)    :run-last
   @begin{short}
     Accessor of the cursor position in the editable.
   @end{short}
-
-  The @sym{gtk:editable-position} function retrieves the current position of
+  The @fun{gtk:editable-position} function retrieves the current position of
   the cursor relative to the start of the content of the editable. The
-  @sym{(setf gtk:editable-position)} function sets the cursor position in
-  the editable to the given value.
+  @setf{gtk:editable-position} function sets the cursor position in the editable
+  to the given value.
 
   The cursor is displayed before the character with the given (base 0) index
   in the contents of the editable. The value must be less than or equal to the
@@ -699,7 +700,7 @@ lambda (editable text length position)    :run-last
 
 (defun editable-alignment (editable)
  #+liber-documentation
- "@version{2022-6-12}
+ "@version{2023-9-18}
   @syntax[]{(gtk:editable-alignment editable) => align}
   @syntax[]{(setf (gtk:editable-alignment editable) align)}
   @argument[editable]{a @class{gtk:editable} widget}
@@ -708,10 +709,9 @@ lambda (editable text length position)    :run-last
   @begin{short}
     Accessor of the horizontal alignment of the editable.
   @end{short}
-
-  The @sym{gtk:editable-alignment} function gets the value of the horizontal
-  alignment of the editable. The @sym{(setf gtk:editable-alignment)} function
-  sets the alignment for the contents of the editable.
+  The @fun{gtk:editable-alignment} function gets the value of the horizontal
+  alignment of the editable. The @setf{gtk:editable-alignment} function sets the
+  alignment for the contents of the editable.
 
   This controls the horizontal positioning of the contents when the displayed
   text is shorter than the width of the editable.
@@ -854,6 +854,46 @@ lambda (editable text length position)    :run-last
 ;;;
 ;;; Returns :
 ;;;     TRUE if the property was found
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_editable_delegate_get_accessible_platform_state
+;;;
+;;; gboolean
+;;; gtk_editable_delegate_get_accessible_platform_state (
+;;;   GtkEditable* editable,
+;;;   GtkAccessiblePlatformState state)
+;;;
+;;; Retrieves the accessible platform state from the editable delegate.
+;;;
+;;; This is an helper function to retrieve the accessible state for GtkEditable
+;;; interface implementations using a delegate pattern.
+;;;
+;;; You should call this function in your editable widget implementation of the
+;;; Gtk.AccessibleInterface.get_platform_state virtual function, for instance:
+;;;
+;;; static void
+;;; accessible_interface_init (GtkAccessibleInterface *iface)
+;;; {
+;;;   iface->get_platform_state = your_editable_get_accessible_platform_state;
+;;; }
+;;;
+;;; static gboolean
+;;; your_editable_get_accessible_platform_state (
+;;;         GtkAccessible *accessible,
+;;;         GtkAccessiblePlatformState state)
+;;; {
+;;;   return gtk_editable_delegate_get_accessible_platform_state (
+;;;           GTK_EDITABLE (accessible), state);
+;;; }
+;;;
+;;; state :
+;;;     What kind of accessible state to retrieve.
+;;;
+;;; Return :
+;;;     No description available
+;;;
+;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.editable.lisp -----------------------------------------

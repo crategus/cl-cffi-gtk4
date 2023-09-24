@@ -2,7 +2,7 @@
 ;;; gtk4.message-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -166,15 +166,21 @@
     message-dialog-use-markup
     "use-markup" "gboolean" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj message-dialog) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:MESSAGE-DIALOG is deprecated since 4.10.")))
+
 #+liber-documentation
 (setf (documentation 'message-dialog 'type)
  "@version{#2022-7-18}
   @begin{short}
-    A @sym{gtk:message-dialog} widget presents a dialog with some message text.
+    A @class{gtk:message-dialog} widget presents a dialog with some message 
+    text.
   @end{short}
   It is simply a convenience widget. You could construct the equivalent of a
   message dialog from a @class{gtk:dialog} widget without too much effort, but
-  the @sym{gtk:message-dialog} widget saves typing.
+  the @class{gtk:message-dialog} widget saves typing.
 
   @image[message-dialog]{Figure: GtkMessageDialog}
 
@@ -194,7 +200,7 @@
                                :text \"Message Dialog\"
                                :secondary-text \"With secondary text\")))
     ;; Handler for the \"response\" signal of the dialog
-    (g-signal-connect dialog \"response\"
+    (g:signal-connect dialog \"response\"
                       (lambda (dialog response)
                         (gtk:window-destroy dialog)))
     (gtk:widget-show dialog)))
@@ -212,32 +218,37 @@
     ;; Set the secondary text
     (setf (gtk:message-dialog-secondary-text dialog) \"With secondary text\")
     ;; Handler for the \"response\" signal of the dialog
-    (g-signal-connect dialog \"response\"
+    (g:signal-connect dialog \"response\"
                       (lambda (dialog response)
                         (gtk:window-destroy dialog)))
     (gtk:widget-show dialog)))
     @end{pre}
   @end{dictionary}
   @begin[GtkMessageDialog as GtkBuildable]{dictionary}
-    The @sym{gtk:message-dialog} implementation of the @class{gtk:buildable}
+    The @class{gtk:message-dialog} implementation of the @class{gtk:buildable}
     interface exposes the message area as an internal child with the name
     @code{message_area}.
   @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}  
+  @see-constructor{gtk:message-dialog-new}
+  @see-constructor{gtk:message-dialog-new-with-markup}
   @see-slot{gtk:message-dialog-message-area}
   @see-slot{gtk:message-dialog-message-type}
   @see-slot{gtk:message-dialog-secondary-text}
   @see-slot{gtk:message-dialog-secondary-use-markup}
   @see-slot{gtk:message-dialog-text}
   @see-slot{gtk:message-dialog-use-markup}
-  @see-constructor{gtk:message-dialog-new}
-  @see-constructor{gtk:message-dialog-new-with-markup}
-  @see-class{gtk:dialog}")
+  @see-class{gtk:dialog}
+  @see-class{gtk:alert-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- message-dialog-buttons ---------------------------------------------
+;;; --- message-dialog-buttons -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "buttons" 'message-dialog) t)
@@ -251,7 +262,7 @@
 ;; We have no accessor. Unexport the symbol.
 (unexport 'message-dialog-buttons)
 
-;;; --- message-dialog-message-area ----------------------------------------
+;;; --- message-dialog-message-area --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "message-area"
@@ -274,7 +285,7 @@
     Accessor of the @slot[gtk:message-dialog]{message-area} slot of the
     @class{gtk:message-dialog} class.
   @end{short}
-  The @sym{gtk:message-dialog-message-area} function returns the @class{gtk:box}
+  The @fun{gtk:message-dialog-message-area} function returns the @class{gtk:box}
   widget with @code{:vertical} orientation corresponding to the \"message area\"
   in the message dialog. This is the box where the primary and secondary labels
   of the message dialog are packed.
@@ -282,12 +293,17 @@
   You can add your own extra content to that box and it will appear below those
   labels. See the @fun{gtk:dialog-content-area} function for the corresponding
   function in the parent @class{gtk:dialog} class.
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:message-dialog}
   @see-class{gtk:box}
   @see-class{gtk:dialog}
+  @see-class{gtk:alert-dialog}
   @see-function{gtk:dialog-content-area}")
 
-;;; --- message-dialog-message-type ----------------------------------------
+;;; --- message-dialog-message-type --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "message-type"
@@ -312,7 +328,12 @@
     @class{gtk:message-dialog} class.
   @end{short}
   The type of the message.
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:message-dialog}
+  @see-class{gtk:alert-dialog}
   @see-symbol{gtk:message-type}")
 
 ;;; --- message-dialog-secondary-text ------------------------------------------
@@ -338,10 +359,15 @@
     @class{gtk:message-dialog} class.
   @end{short}
   The secondary text of the message dialog.
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:message-dialog}
+  @see-class{gtk:alert-dialog}
   @see-function{gtk:message-dialog-format-secondary-text}")
 
-;;; --- message-dialog-secondary-use-markup --------------------------------
+;;; --- message-dialog-secondary-use-markup ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-use-markup"
@@ -366,10 +392,15 @@
     @class{gtk:message-dialog} class.
   @end{short}
   @em{True} if the secondary text of the message dialog includes Pango markup.
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:message-dialog}
+  @see-class{gtk:alert-dialog}
   @see-function{gtk:message-dialog-format-secondary-markup}")
 
-;;; --- message-dialog-text ------------------------------------------------
+;;; --- message-dialog-text ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text" 'message-dialog) t)
@@ -393,9 +424,14 @@
   @end{short}
   The primary text of the message dialog. If the dialog has a secondary text,
   this will appear as the title.
-  @see-class{gtk:message-dialog}")
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
+  @see-class{gtk:message-dialog}
+  @see-class{gtk:alert-dialog}")
 
-;;; --- message-dialog-use-markup ------------------------------------------
+;;; --- message-dialog-use-markup ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-markup"
@@ -419,7 +455,12 @@
     @class{gtk:message-dialog} class.
   @end{short}
   @em{True} if the primary text of the message dialog includes Pango markup.
-  @see-class{gtk:message-dialog}")
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
+  @see-class{gtk:message-dialog}
+  @see-class{gtk:alert-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_message_dialog_new
@@ -445,9 +486,14 @@
   When the user clicks a button a \"response\" signal is emitted with response
   IDs from the @symbol{gtk:response-type} enumeration. See the
   @class{gtk:dialog} widget for more details.
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:message-dialog}
   @see-class{gtk:dialog}
   @see-class{gtk:window}
+  @see-class{gtk:alert-dialog}
   @see-symbol{gtk:dialog-flags}
   @see-symbol{gtk:message-type}
   @see-symbol{gtk:buttons-type}
@@ -509,16 +555,21 @@
                                         :close
                                         \"<b>Error loading file ~s</b>\"
                                         filename)))
-    (g-signal-connect dialog \"response\"
+    (g:signal-connect dialog \"response\"
                       (lambda (dialog response)
                         (declare (ignore response))
                         (gtk:window-destroy dialog)))
     (gtk:widget-show dialog)))
     @end{pre}
   @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:message-dialog}
   @see-class{gtk:window}
   @see-class{gtk:dialog}
+  @see-class{gtk:alert-dialog}
   @see-symbol{gtk:dialog-flags}
   @see-symbol{gtk:message-type}
   @see-symbol{gtk:buttons-type}
@@ -555,7 +606,12 @@
     Sets the text of the message dialog to be @arg{text}, which is marked
     up with the Pango text markup language.
   @end{short}
-  @see-class{gtk:message-dialog}"
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
+  @see-class{gtk:message-dialog}
+  @see-class{gtk:alert-dialog}"
   (setf (message-dialog-use-markup dialog) t
         (message-dialog-text dialog) text))
 
@@ -579,7 +635,12 @@
   @end{short}
   Note that setting a secondary text makes the primary text become bold, unless
   you have provided explicit markup.
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:message-dialog}
+  @see-class{gtk:alert-dialog}
   @see-function{gtk:message-dialog-format-secondary-markup}"
   (setf (message-dialog-secondary-text dialog)
         (apply #'format nil message args)))
@@ -608,7 +669,12 @@
   unless you have provided explicit markup. Due to an oversight in the C
   implementation, this function does not escape special XML characters like the
   @fun{gtk:message-dialog-new-with-markup} function does.
+  @begin[Warning]{dictionary}
+    The @class{gtk:message-dialog} widget is deprecated since 4.10. Use the
+    @class{gtk:alert-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:message-dialog}
+  @see-class{gtk:alert-dialog}
   @see-function{gtk:message-dialog-new-with-markup}
   @see-function{gtk:message-dialog-format-secondary-text}"
   (setf (message-dialog-secondary-use-markup dialog) t

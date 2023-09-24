@@ -2,7 +2,7 @@
 ;;; gtk4.check-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -120,14 +120,14 @@
 
 #+liber-documentation
 (setf (documentation 'check-button 'type)
- "@version{2023-3-20}
+ "@version{2023-9-18}
   @begin{short}
-    A @sym{gtk:check-button} widget places a label next to an indicator.
+    A @class{gtk:check-button} widget places a label next to an indicator.
   @end{short}
 
   @image[check-button]{Figure: GtkCheckButton}
 
-  A @sym{gtk:check-button} widget is created by calling either the
+  A @class{gtk:check-button} widget is created by calling either the
   @fun{gtk:check-button-new} or @fun{gtk:check-button-new-with-label} functions.
 
   The state of a check button can be set specifically using the
@@ -146,8 +146,8 @@
   only one of the buttons can be toggled at a time, and toggling another one
   will switch the currently toggled one off. Grouped check buttons use a
   different indicator, and are commonly referred to as radio buttons. To add a
-  @sym{gtk:check-button} widget to a group, use the @fun{gtk:check-button-group}
-  function.
+  @class{gtk:check-button} widget to a group, use the
+  @fun{gtk:check-button-group} function.
   @begin[Example]{dictionary}
     This examples shows check and radio buttons.
     @begin{pre}
@@ -202,14 +202,14 @@ checkbutton[.text-button]
 ├── check
 ╰── [label]
     @end{pre}
-    The @sym{gtk:check-button} implementation has a main node with name
+    The @class{gtk:check-button} implementation has a main node with name
     @code{checkbutton}. If the @code{label} property is set, it contains a label
     child. The indicator node is named @code{check} when no group is set, and
     @code{radio} if the check button is grouped together with other check
     buttons.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:check-button} implementation uses the @code{:checkbox} role
+    The @class{gtk:check-button} implementation uses the @code{:checkbox} role
     of the @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
@@ -222,7 +222,7 @@ lambda (checkbutton)    :action
       Applications should never connect to this signal, but use the \"toggled\"
       signal. Since 4.2
       @begin[code]{table}
-        @entry[checkbutton]{The @sym{gtk:check-button} widget which received
+        @entry[checkbutton]{The @class{gtk:check-button} widget which received
           the signal.}
       @end{table}
     @subheading{The \"toggled\" signal}
@@ -231,7 +231,7 @@ lambda (checkbutton)    :run-first
       @end{pre}
       Emitted when the @code{active} property of the check button changes.
       @begin[code]{table}
-        @entry[checkbutton]{The @sym{gtk:check-button} widget which received
+        @entry[checkbutton]{The @class{gtk:check-button} widget which received
           the signal.}
       @end{table}
   @end{dictionary}
@@ -296,9 +296,9 @@ lambda (checkbutton)    :run-first
     Accessor of the @slot[gtk:check-button]{child} slot of the
     @class{gtk:check-button} class.
   @end{short}
-  The @sym{gtk:check-button-child} function gets the child widget of the check
+  The @fun{gtk:check-button-child} function gets the child widget of the check
   button or @code{nil} if the @slot[gtk:check-button]{label} property is set.
-  The @sym{(setf gtk:check-button-child)} function sets the child widget.
+  The @setf{gtk:check-button-child} function sets the child widget.
 
   Note that by using this API, you take full responsibility for setting up the
   proper accessibility label and description information for the check button.
