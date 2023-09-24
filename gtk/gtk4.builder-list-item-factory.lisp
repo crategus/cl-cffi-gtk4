@@ -205,25 +205,22 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_builder_list_item_factory_new_from_bytes ()
-;;;
-;;; GtkListItemFactory *
-;;; gtk_builder_list_item_factory_new_from_bytes (GtkBuilderScope *scope,
-;;;                                               GBytes *bytes);
-;;;
-;;; Creates s new GtkBuilderListItemFactory that instantiates widgets using
-;;; bytes as the data to pass to GtkBuilder.
-;;;
-;;; scope :
-;;;     A scope to use when instantiating.
-;;;
-;;; bytes :
-;;;     the bytes containing the ui file to instantiate
-;;;
-;;; Returns :
-;;;     a new GtkBuilderListItemFactory
 ;;; ----------------------------------------------------------------------------
 
 (defun builder-list-item-factory-new-from-bytes (scope bytes)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[scope]{a @class{gtk:builder-scope} object to use when instantiating}
+  @argument[bytes]{a @class{g:bytes} instance  containing the UI file to
+    instantiate}
+  @return{A new @class{gtk:builder-list-item-factory} object.}
+  @begin{short}
+    Creates a new builder list item factory that instantiates widgets using
+    @arg{bytes} as the data to pass to the @class{gtk:builder} object.
+  @end{short}
+  @see-class{gtk:list-item-factory}
+  @see-class{gtk:builder}
+  @see-class{gtk:builder-scope}"
   (make-instance 'builder-list-item-factory
                  :scope scope
                  :bytes bytes))
@@ -232,25 +229,24 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_builder_list_item_factory_new_from_resource ()
-;;;
-;;; GtkListItemFactory *
-;;; gtk_builder_list_item_factory_new_from_resource (GtkBuilderScope *scope,
-;;;                                                  const char *resource_path);
-;;;
-;;; Creates s new GtkBuilderListItemFactory that instantiates widgets using
-;;; data read from the given resource_path to pass to GtkBuilder.
-;;;
-;;; scope :
-;;;     A scope to use when instantiating.
-;;;
-;;; resource_path :
-;;;     valid path to a resource that contains the data
-;;;
-;;; Returns :
-;;;     a new GtkBuilderListItemFactory
 ;;; ----------------------------------------------------------------------------
 
 (defun builder-list-item-factory-new-from-resource (scope path)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[scope]{a @class{gtk:builder-scope} object to use when instantiating}
+  @argument[path]{a string with a valid path to a resource that contains the
+    data}
+  @return{A new @class{gtk:builder-list-item-factory} object.}
+  @begin{short}
+    Creates a new builder list item factory that instantiates widgets using
+    data read from the given resource path to pass to the @class{gtk:builder}
+    object.
+  @end{short}
+  @see-class{gtk:list-item-factory}
+  @see-class{gtk:builder}
+  @see-class{g:resource}
+  @see-class{gtk:builder-scope}"
   (make-instance 'builder-list-item-factory
                  :scope scope
                  :resource (if path path (cffi:null-pointer))))

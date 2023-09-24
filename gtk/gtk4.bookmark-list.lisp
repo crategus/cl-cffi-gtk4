@@ -149,8 +149,8 @@
     @class{gtk:bookmark-list} class.
   @end{short}
   The @fun{gtk:bookmark-list-attributes} function gets the attributes queried
-  on the children. The @sym{(setf gtk:bookmark-list-attributes)} function sets
-  the attributes to be enumerated and starts the enumeration.
+  on the children. The @setf{gtk:bookmark-list-attributes} function sets the 
+  attributes to be enumerated and starts the enumeration.
 
   If @arg{attributes} is @code{nil}, no attributes will be queried, but a list
   of @class{g:file-info} objects will still be created.
@@ -205,8 +205,8 @@
     @class{gtk:bookmark-list} class.
   @end{short}
   The @fun{gtk:bookmark-list-io-priority} function gets the IO priority. The
-  @sym{(setf gtk:bookmark-list-io-priority)} function sets the IO priority to
-  use while loading files. The default IO priority is
+  @setf{gtk:bookmark-list-io-priority} function sets the IO priority to use 
+  while loading files. The default IO priority is 
   @variable{g:+g-priority-default+}.
   @see-class{gtk:bookmark-list}")
 
@@ -294,26 +294,20 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_bookmark_list_new ()
-;;;
-;;; GtkBookmarkList *
-;;; gtk_bookmark_list_new (const char *filename,
-;;;                        const char *attributes);
-;;;
-;;; Creates a new GtkBookmarkList with the given attributes .
-;;;
-;;; filename :
-;;;     The bookmark file to load.
-;;;
-;;; attributes :
-;;;     The attributes to query.
-;;;
-;;; Returns :
-;;;     a new GtkBookmarkList
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline bookmark-list-new))
 
 (defun bookmark-list-new (filename attributes)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[filename]{a string with the bookmark file to load}
+  @argument[attributes]{a string with the attributes to query}
+  @return{A new @class{gtk:bookmark-list} object.}
+  @begin{short}
+    Creates a new bookmark list with the given @arg{attributes}.
+  @end{short}
+  @see-class{gtk:bookmark-list}"
   (make-instance 'bookmark-list
                  :filename filename
                  :attributes attributes))
@@ -322,23 +316,20 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_bookmark_list_is_loading ()
-;;;
-;;; gboolean
-;;; gtk_bookmark_list_is_loading (GtkBookmarkList *self);
-;;;
-;;; Returns TRUE if the files are currently being loaded.
-;;;
-;;; Files will be added to self from time to time while loading is going on. The
-;;; order in which are added is undefined and may change in between runs.
-;;;
-;;; self :
-;;;     a GtkBookmarkList
-;;;
-;;; Returns :
-;;;     TRUE if self is loading
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_bookmark_list_is_loading" bookmark-list-is-loading) :boolean
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[bookmarklist]{a @class{gtk:bookmark-list} object}
+  @return{@em{True} if @arg{bookmarklist} is loading.}
+  @begin{short}
+    Returns @em{true} if the files are currently being loaded.
+  @end{short}
+  Files will be added to @arg{bookmarklist} from time to time while loading is 
+  going on. The order in which are added is undefined and may change in between 
+  runs.
+  @see-class{gtk:bookmark-list}"
   (object (g:object bookmark-list)))
 
 (export 'bookmark-list-is-loading)

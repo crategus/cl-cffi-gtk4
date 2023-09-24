@@ -222,8 +222,8 @@ lambda (gridview position)    :run-last
   @end{short}
   The @fun{gtk:grid-view-enable-rubberband} function returns whether selections
   can be selected by dragging with the mouse. The
-  @sym{(setf gtk:grid-view-enable-rubberband)} function sets whether selections
-  can be changed by dragging with the mouse.
+  @setf{gtk:grid-view-enable-rubberband} function sets whether selections can be 
+  changed by dragging with the mouse.
   @see-class{gtk:grid-view}")
 
 ;;; --- grid-view-factory ------------------------------------------------------
@@ -249,8 +249,8 @@ lambda (gridview position)    :run-last
     @class{gtk:grid-view} class.
   @end{short}
   The @fun{gtk:grid-view-factory} function gets the factory that is currently
-  used to populate list items. The @sym{(setf gtk:grid-view-factory)} function
-  sets the factory.
+  used to populate list items. The @setf{gtk:grid-view-factory} function sets 
+  the factory.
   @see-class{gtk:grid-view}
   @see-class{gtk:selection-model}")
 
@@ -278,11 +278,10 @@ lambda (gridview position)    :run-last
     @class{gtk:grid-view} class.
   @end{short}
   The @fun{gtk:grid-view-max-columns} function gets the maximum number of
-  columns that the grid will use. The @sym{(setf gtk:grid-view-max-columns)}
-  function sets the maximum number of columns to use. This number must be at
-  least 1. If the @slot[gtk:grid-view]{max-columns} property is smaller than
-  the minimum set via the @fun{gtk:grid-view-min-columns} function, that value
-  is used instead.
+  columns that the grid will use. The @setf{gtk:grid-view-max-columns} function 
+  sets the maximum number of columns to use. This number must be at least 1. If 
+  the @slot[gtk:grid-view]{max-columns} property is smaller than the minimum set 
+  via the @fun{gtk:grid-view-min-columns} function, that value is used instead.
   @see-class{gtk:grid-view}
   @see-function{gtk:grid-view-min-columns}")
 
@@ -309,11 +308,10 @@ lambda (gridview position)    :run-last
     @class{gtk:grid-view} class.
   @end{short}
   The @fun{gtk:grid-view-min-columns} function gets the minimum number of
-  columns that the grid will use. The @sym{(setf gtk:grid-view-min-columns)}
-  function sets the minimum number of columns to use. This number must be at
-  least 1. If the @slot[gtk:grid-view]{min-columns} property is smaller than
-  the minimum set via the @fun{gtk:grid-view-max-columns} function, that value
-  is ignored.
+  columns that the grid will use. The @setf{gtk:grid-view-min-columns} function 
+  sets the minimum number of columns to use. This number must be at least 1. If 
+  the @slot[gtk:grid-view]{min-columns} property is smaller than the minimum set 
+  via the @fun{gtk:grid-view-max-columns} function, that value is ignored.
   @see-class{gtk:grid-view}
   @see-function{gtk:grid-view-max-columns}")
 
@@ -339,8 +337,8 @@ lambda (gridview position)    :run-last
     @class{gtk:grid-view} class.
   @end{short}
   The @fun{gtk:grid-view-model} function gets the model that is currently used
-  to read the items displayed. The @sym{(setf gtk:grid-view-model)} function
-  sets the model to use. This must be a @class{gtk:selection-model} object.
+  to read the items displayed. The @setf{gtk:grid-view-model} function sets the 
+  model to use. This must be a @class{gtk:selection-model} object.
   @see-class{gtk:grid-view}
   @see-class{gtk:selection-model}")
 
@@ -369,8 +367,8 @@ lambda (gridview position)    :run-last
   @end{short}
   The @fun{gtk:grid-view-single-click-activate} function returns whether rows
   will be activated on single click and selected on hover. The
-  @sym{(setf gtk:grid-view-single-click-activate)} function sets whether rows
-  should be activated on single click and selected on hover.
+  @setf{gtk:grid-view-single-click-activate)} function sets whether rows should 
+  be activated on single click and selected on hover.
   @see-class{gtk:grid-view}")
 
 ;;; --- grid-view-tab-behavior -------------------------------------------------
@@ -384,32 +382,25 @@ lambda (gridview position)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_grid_view_new ()
-;;;
-;;; GtkWidget *
-;;; gtk_grid_view_new (GtkSelectionModel *model,
-;;;                    GtkListItemFactory *factory);
-;;;
-;;; Creates a new GtkGridView that uses the given factory for mapping items to
-;;; widgets.
-;;;
-;;; The function takes ownership of the arguments, so you can write code like
-;;;
-;;;  grid_view = gtk_grid_view_new (create_model(),
-;;;    gtk_builder_list_item_factory_new_from_resource ("/resource.ui"));
-;;;
-;;; model :
-;;;     the model to use, or NULL.
-;;;
-;;; factory :
-;;;     The factory to populate items with, or NULL.
-;;;
-;;; Returns :
-;;;     a new GtkGridView using the given model and factory
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline grid-view-new))
 
 (defun grid-view-new (model factory)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[model]{a @class{gtk:selection-model} object to use, or @code{nil}}
+  @argument[factory]{a @class{gtk:list-item-factory} object to populate items
+    with or @code{nil}}
+  @return{A new @class{gtk:grid-view} widget using the given @arg{model} and
+    @arg{factory}.} 
+  @begin{short}
+    Creates a new grid view that uses the given @arg{factory} for mapping items 
+    to widgets.
+  @end{short}
+  @see-class{gtk:grid-view}
+  @see-class{gtk:selection-model}
+  @see-class{gtk:list-item-factory}"
   (make-instance 'grid-view
                  :model model
                  :factory factory))

@@ -209,7 +209,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
     @class{gtk:map-list-model} class.
   @end{short}
   The @fun{gtk:map-list-model-model} function gets the model that is currently
-  being mapped or @code{nil} if none. The @sym{(setf gtk:map-list-model-model)}
+  being mapped or @code{nil} if none. The @setf{gtk:map-list-model-model}
   function sets the model to be mapped.
 
   GTK makes no effort to ensure that the model conforms to the item type
@@ -306,6 +306,12 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 
 (cffi:defcfun ("gtk_map_list_model_set_map_func" %map-list-model-set-map-func)
     :void
+  (model (g:object map-list-model))
+  (func :pointer)
+  (data :pointer)
+  (notify :pointer))
+
+(defun map-list-model-set-map-func (model func)
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[model]{a @class{gtk:map-list-model} object}
@@ -326,12 +332,6 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   function returns items of the appropriate type.
   @see-class{gtk:map-list-model}
   @see-symbol{gtk:map-list-model-map-func}"
-  (model (g:object map-list-model))
-  (func :pointer)
-  (data :pointer)
-  (notify :pointer))
-
-(defun map-list-model-set-map-func (model func)
   (%map-list-model-set-map-func
           model
           (cffi:callback map-list-model-map-func)

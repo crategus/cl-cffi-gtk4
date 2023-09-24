@@ -168,8 +168,8 @@
     @class{gtk:directory-list} class.
   @end{short}
   The @fun{gtk:directory-list-attributes} function gets the attributes queried
-  on the children. The @sym{(setf gtk:directory-list-attributes)} function sets
-  the attributes to be enumerated and starts the enumeration.
+  on the children. The @setf{gtk:directory-list-attributes} function sets the
+  attributes to be enumerated and starts the enumeration.
 
   If @arg{attributes} is @code{nil}, no attributes will be queried, but a list
   of @class{g:file-info} objects will still be created.
@@ -227,8 +227,8 @@
     @class{gtk:directory-list} class.
   @end{short}
   The @fun{gtk:directory-list-file} function gets the file whose children are
-  currently enumerated. The @sym{(setf gtk:directory-list-file)} function sets
-  the file to be enumerated and starts the enumeration. If @arg{file} is
+  currently enumerated. The @setf{gtk:directory-list-file} function sets the
+  file to be enumerated and starts the enumeration. If @arg{file} is
   @code{nil}, the result will be an empty list.
   @see-class{gtk:directory-list}
   @see-class{g:file}")
@@ -256,8 +256,8 @@
     @class{gtk:directory-list} class.
   @end{short}
   The @fun{gtk:directory-list-io-priority} function gets the IO priority. The
-  @sym{(setf gtk:directory-list-io-priority)} function sets the IO priority to
-  use while loading files.
+  @setf{gtk:directory-list-io-priority} function sets the IO priority to use
+  while loading files.
 
   Setting the priority while @arg{object} is loading will reprioritize the
   ongoing load as soon as possible. The default IO priority is
@@ -349,8 +349,8 @@
   @end{short}
   The @fun{gtk:directory-list-monitored} function returns whether the directory
   list is monitoring the directory for changes. The
-  @sym{(setf gtk:directory-list-monitored)} function sets whether the directory
-  list will monitor the directory for changes. If monitoring is enabled, the
+  @setf{gtk:directory-list-monitored} function sets whether the directory list
+  will monitor the directory for changes. If monitoring is enabled, the
   \"items-changed\" signal will be emitted when the directory contents change.
 
   When monitoring is turned on after the initial creation of the directory list,
@@ -384,27 +384,21 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_directory_list_new ()
-;;;
-;;; GtkDirectoryList *
-;;; gtk_directory_list_new (const char *attributes,
-;;;                         GFile *file);
-;;;
-;;; Creates a new GtkDirectoryList querying the given file with the given
-;;; attributes .
-;;;
-;;; file :
-;;;     The file to query.
-;;;
-;;; attributes :
-;;;     The attributes to query with.
-;;;
-;;; Returns :
-;;;     a new GtkDirectoryList
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline directory-list-new))
 
 (defun directory-list-new (attributes file)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[attributes]{a string with the attributes to query with}
+  @argument[file]{a @class{g:file} object to query}
+  @return{A @class{gtk:directory-list} object.}
+  @begin{short}
+    Creates a new directory list querying the given @arg{file} with the given
+    @arg{attributes}.
+  @end{short}
+  @see-class{gtk:directory-list}"
   (make-instance 'directory-list
                  :attributes attributes
                  :file file))
@@ -413,24 +407,21 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_directory_list_is_loading ()
-;;;
-;;; gboolean
-;;; gtk_directory_list_is_loading (GtkDirectoryList *self);
-;;;
-;;; Returns TRUE if the children enumeration is currently in progress.
-;;;
-;;; Files will be added to self from time to time while loading is going on.
-;;; The order in which are added is undefined and may change in between runs.
-;;;
-;;; model :
-;;;     a GtkDirectoryList
-;;;
-;;; Returns :
-;;;     TRUE if self is loading
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_directory_list_is_loading" directory-list-is-loading)
     :boolean
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[directorylist]{a @class{gtk:directory-list} object}
+  @return{@em{True} if @arg{directorylist} is loading.}
+  @begin{short}
+    Returns @em{true} if the children enumeration is currently in progress.
+  @end{short}
+  Files will be added to @arg{directorylist} from time to time while loading is
+  going on. The order in which are added is undefined and may change in between
+  runs.
+  @see-class{gtk:directory-list}"
   (model (g:object directory-list)))
 
 (export 'directory-list-is-loading)

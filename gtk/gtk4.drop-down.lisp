@@ -2,7 +2,7 @@
 ;;; gtk4.drop-down.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -209,6 +209,26 @@ lambda (dropdown)    :action
   the @slot[gtk:drop-down]{expression} property to be set. @br{}
   Default value: @em{false}")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-down-enable-search)
+      "Accessor"
+      (documentation 'drop-down-enable-search 'function)
+ "@version{#2023-9-21}
+  @syntax[]{(gtk:drop-down-enable-search object) => setting}
+  @syntax[]{(setf (gtk:drop-down-enable-search object) setting)}
+  @argument[object]{a @class{gtk:drop-down} widget}
+  @argument[setting]{a boolean whether to enable search}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-down]{enable-search} slot of the
+    @class{gtk:drop-down} class.
+  @end{short}
+  The @fun{gtk:drop-down-enable-search} function returns whether search is 
+  enabled. The @setf{drop-down-enable-search} function sets whether a search 
+  entry will be shown in the popup that allows to search for items in the list.
+  Note that the @slot[gtk:drop-down]{expression} property must be set for search 
+  to work.  
+  @see-class{gtk:drop-down}
+  @see-function{gtk:drop-down-expression}")
 
 ;;; --- drop-down-expression ---------------------------------------------------
 
@@ -221,6 +241,25 @@ lambda (dropdown)    :action
   @slot[gtk:drop-down]{factory} property is not set, the expression is also
   used to bind strings to labels produced by a default factory.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-down-expression)
+      "Accessor"
+      (documentation 'drop-down-expression 'function)
+ "@version{#2023-9-21}
+  @syntax[]{(gtk:drop-down-expression object) => expression}
+  @syntax[]{(setf (gtk:drop-down-expression object) expression)}
+  @argument[object]{a @class{gtk:drop-down} widget}
+  @argument[expression]{a @class{gtk:expression} object, or @code{nil}}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-down]{expression} slot of the
+    @class{gtk:drop-down} class.
+  @end{short}
+  The @fun{gtk:drop-down-expression} function gets the expression. The 
+  @setf{drop-down-expression} function sets the expression that gets evaluated 
+  to obtain strings from items when searching in the popup. The expression must 
+  have a value type of \"gchararray\".  
+  @see-class{gtk:drop-down}
+  @see-class{gtk:expression}")
 
 ;;; --- drop-down-factory ------------------------------------------------------
 
@@ -230,6 +269,27 @@ lambda (dropdown)    :action
   (Read / Write) @br{}
   Factory for populating list items.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-down-factory)
+      "Accessor"
+      (documentation 'drop-down-factory 'function)
+ "@version{#2023-9-21}
+  @syntax[]{(gtk:drop-down-factory object) => factory}
+  @syntax[]{(setf (gtk:drop-down-factory object) factory)}
+  @argument[object]{a @class{gtk:drop-down} widget}
+  @argument[factory]{a @class{gtk:list-item-factory} object, or @code{nil}
+    for none}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-down]{factory} slot of the
+    @class{gtk:drop-down} class.
+  @end{short}
+  The @fun{gtk:drop-down-factory} function gets the factory that is currently 
+  used to populate list items. The @setf{drop-down-factory} function sets the 
+  factory to use for populating list items. The factory is always used for the 
+  item in the button. It is also used for items in the popup if 
+  the @slot[gtk:drop-down]{list-factory} property is not set.
+  @see-class{gtk:drop-down}
+  @see-class{gtk:list-item-factory}")
 
 ;;; --- drop-down-header-factory -----------------------------------------------
 
@@ -238,7 +298,6 @@ lambda (dropdown)    :action
  "The @code{header-factory} property of type @class{gtk:list-item-factory}
   (Read / Write) @br{}
   The factory for creating header widgets for the popup. Since 4.12")
-
 
 ;;; --- drop-down-list-factory -------------------------------------------------
 
@@ -249,6 +308,26 @@ lambda (dropdown)    :action
   The factory for populating list items in the popup. If this is not set, the
   @slot[gtk:drop-down]{factory} property is used.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-down-list-factory)
+      "Accessor"
+      (documentation 'drop-down-list-factory 'function)
+ "@version{#2023-9-21}
+  @syntax[]{(gtk:drop-down-list-factory object) => factory}
+  @syntax[]{(setf (gtk:drop-down-list-factory object) factory)}
+  @argument[object]{a @class{gtk:drop-down} widget}
+  @argument[factory]{a @class{gtk:list-item-factory} object, or @code{nil}
+    for none}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-down]{list-factory} slot of the
+    @class{gtk:drop-down} class.
+  @end{short}
+  The @fun{gtk:drop-down-list-factory} function gets the factory that is 
+  currently used to populate list items in the popup. The 
+  @setf{drop-down-list-factory} function sets the factory to use for populating 
+  list items in the popup.  
+  @see-class{gtk:drop-down}
+  @see-class{gtk:list-item-factory}")
 
 ;;; --- drop-down-model --------------------------------------------------------
 
@@ -257,6 +336,23 @@ lambda (dropdown)    :action
  "The @code{model} property of type @class{g:list-model} (Read / Write) @br{}
   Model for the displayed items.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-down-model)
+      "Accessor"
+      (documentation 'drop-down-model 'function)
+ "@version{#2023-9-21}
+  @syntax[]{(gtk:drop-down-model object) => model}
+  @syntax[]{(setf (gtk:drop-down-model object) model)}
+  @argument[object]{a @class{gtk:drop-down} widget}
+  @argument[model]{a @class{g:list-model} object to use, or @code{nil} for none}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-down]{model} slot of the
+    @class{gtk:drop-down} class.
+  @end{short}
+  The @fun{gtk:drop-down-model} function gets the model that provides the 
+  displayed items. The @setf{drop-down-model} function sets the model to use.  
+  @see-class{gtk:drop-down}
+  @see-class{g:list-model}")
 
 ;;; --- drop-down-search-match-mode --------------------------------------------
 
@@ -267,7 +363,6 @@ lambda (dropdown)    :action
   @symbol{gtk:string-filter-match-mode} (Read / Write) @br{}
   The match mode for the search filter. Since 4.12")
 
-
 ;;; --- drop-down-selected -----------------------------------------------------
 
 #+liber-documentation
@@ -277,6 +372,25 @@ lambda (dropdown)    :action
   @variable{gtk:+gtk-invalid-list-position+} if no item is selected. @br{}
   Default value: 4294967295")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-down-selected)
+      "Accessor"
+      (documentation 'drop-down-selected 'function)
+ "@version{#2023-9-21}
+  @syntax[]{(gtk:drop-down-selected object) => selected}
+  @syntax[]{(setf (gtk:drop-down-selected object) selected)}
+  @argument[object]{a @class{gtk:drop-down} widget}
+  @argument[selected]{an unsigned integer with the position of the item to 
+    select, or the @variable{gtk:+gtk-invalid-list-position+} value if no
+    position is selected}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-down]{selected} slot of the
+    @class{gtk:drop-down} class.
+  @end{short}
+  The @fun{gtk:drop-down-selected} function gets the position of the selected 
+  item. The @setf{drop-down-selected} function selects the item at the given 
+  position.
+  @see-class{gtk:drop-down}")
 
 ;;; --- drop-down-selected-item ------------------------------------------------
 
@@ -285,6 +399,21 @@ lambda (dropdown)    :action
  "The @code{selected-item} property of type @class{g:object} (Read) @br{}
   The selecte item.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'drop-down-selected-item)
+      "Accessor"
+      (documentation 'drop-down-selected-item 'function)
+ "@version{#2023-9-21}
+  @syntax[]{(gtk:drop-down-selected-item object) => item}
+  @argument[object]{a @class{gtk:drop-down} widget}
+  @argument[item]{A pointer to the selected item.}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-down]{selected-item} slot of the
+    @class{gtk:drop-down} class.
+  @end{short}
+  The @fun{gtk:drop-down-selected-item} function gets the selected item. If no 
+  item is selected, @code{cffi:null-pointer} is returned.  
+  @see-class{gtk:drop-down}")
 
 ;;; --- drop-down-show-arrow ---------------------------------------------------
 
@@ -294,252 +423,69 @@ lambda (dropdown)    :action
   Whether to show an arrow within the GtkDropDown widget. Since 4.6 @br{}
   Default value: @em{true}")
 
+#+(and gtk-4-6 liber-documentation)
+(setf (liber:alias-for-function 'drop-down-show-arrow)
+      "Accessor"
+      (documentation 'drop-down-show-arrow 'function)
+ "@version{#2023-9-21}
+  @syntax[]{(gtk:drop-down-show-arrow object) => setting}
+  @syntax[]{(setf (gtk:drop-down-show-arrow object) setting)}
+  @argument[object]{a @class{gtk:drop-down} widget}
+  @argument[setting]{a boolean whether to show an arrow within the widget}
+  @begin{short}
+    Accessor of the @slot[gtk:drop-down]{show-arrow} slot of the
+    @class{gtk:drop-down} class.
+  @end{short}
+  The @fun{gtk:drop-down-show-arrow} function returns whether to show an arrow 
+  within the widget. The @setf{drop-down-show-arrow} function sets whether an 
+  arrow will be displayed.
+
+  Since 4.6  
+  @see-class{gtk:drop-down}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drop_down_new ()
-;;;
-;;; GtkWidget *
-;;; gtk_drop_down_new (GListModel *model,
-;;;                    GtkExpression *expression);
-;;;
-;;; Creates a new GtkDropDown.
-;;;
-;;; You may want to call gtk_drop_down_set_factory() to set up a way to map its
-;;; items to widgets.
-;;;
-;;; model :
-;;;     the model to use or NULL for none.
-;;;
-;;; expression :
-;;;     the expression to use or NULL for none.
-;;;
-;;; Returns :
-;;;     a new GtkDropDown
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_drop_down_new" %drop-down-new) (g:object widget)
+  (model (g:object g:list-model))
+  (expression expression))
+
+(defun drop-down-new (model expression)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[model]{a @class{g:list-model} object to use, or @code{nil} for none}
+  @argument[expression]{a @class{gtk:expression} instance to use, or @code{nil}
+    for none}
+  @return{A new @class{gtk:drop-down} widget.}
+  @begin{short}
+    Creates a new @class{gtk:drop-down} widget.
+  @end{short}
+  You may want to call the @setf{gtk:drop-down-factory} function to set up a way 
+  to map its items to widgets.   
+  @see-class{gtk:drop-down}
+  @see-function{gtk:drop-down-factory}"
+  (let ((expression (if expression expression (cffi:null-pointer))))
+    (%drop-down-new model expression)))
+
+(export 'drop-down-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_drop_down_new_from_strings ()
-;;;
-;;; GtkWidget *
-;;; gtk_drop_down_new_from_strings (const char * const *strings);
-;;;
-;;; Creates a new GtkDropDown that is populated with the strings in strings .
-;;;
-;;; strings :
-;;;     The strings to put in the dropdown.
-;;;
-;;; Returns :
-;;;     a new GtkDropDown
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_set_model ()
-;;;
-;;; void
-;;; gtk_drop_down_set_model (GtkDropDown *self,
-;;;                          GListModel *model);
-;;;
-;;; Sets the GListModel to use.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; model :
-;;;     the model to use or NULL for none.
-;;; ----------------------------------------------------------------------------
+(cffi:defcfun ("gtk_drop_down_new_from_strings" drop-down-new-from-strings)
+    (g:object widget)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[strings]{a list of strings to put in the dropdown}
+  @return{A new @class{gtk:drop-down} widget.}
+  @begin{short}
+    Creates a new dropdown that is populated with the strings in @arg{strings}.
+  @end{short}
+  @see-class{gtk:drop-down}"
+  (strings g:strv-t))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_get_model ()
-;;;
-;;; GListModel *
-;;; gtk_drop_down_get_model (GtkDropDown *self);
-;;;
-;;; Gets the model that provides the displayed items.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; Returns :
-;;;     The model in use.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_set_selected ()
-;;;
-;;; void
-;;; gtk_drop_down_set_selected (GtkDropDown *self,
-;;;                             guint position);
-;;;
-;;; Selects the item at the given position.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; position :
-;;;     the position of the item to select, or GTK_INVALID_LIST_POSITION
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_get_selected ()
-;;;
-;;; guint
-;;; gtk_drop_down_get_selected (GtkDropDown *self);
-;;;
-;;; Gets the position of the selected item.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; Returns :
-;;;     the position of the selected item, or GTK_INVALID_LIST_POSITION if not
-;;;     item is selected
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_get_selected_item ()
-;;;
-;;; gpointer
-;;; gtk_drop_down_get_selected_item (GtkDropDown *self);
-;;;
-;;; Gets the selected item. If no item is selected, NULL is returned.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; Returns :
-;;;     The selected item.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_set_factory ()
-;;;
-;;; void
-;;; gtk_drop_down_set_factory (GtkDropDown *self,
-;;;                            GtkListItemFactory *factory);
-;;;
-;;; Sets the GtkListItemFactory to use for populating list items.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; factory :
-;;;     the factory to use or NULL for none.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_get_factory ()
-;;;
-;;; GtkListItemFactory *
-;;; gtk_drop_down_get_factory (GtkDropDown *self);
-;;;
-;;; Gets the factory that's currently used to populate list items.
-;;;
-;;; The factory returned by this function is always used for the item in the
-;;; button. It is also used for items in the popup if “list-factory” is not set.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; Returns :
-;;;     The factory in use.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_set_list_factory ()
-;;;
-;;; void
-;;; gtk_drop_down_set_list_factory (GtkDropDown *self,
-;;;                                 GtkListItemFactory *factory);
-;;;
-;;; Sets the GtkListItemFactory to use for populating list items in the popup.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; factory :
-;;;     the factory to use or NULL for none.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_get_list_factory ()
-;;;
-;;; GtkListItemFactory *
-;;; gtk_drop_down_get_list_factory (GtkDropDown *self);
-;;;
-;;; Gets the factory that's currently used to populate list items in the popup.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; Returns :
-;;;     The factory in use.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_set_expression ()
-;;;
-;;; void
-;;; gtk_drop_down_set_expression (GtkDropDown *self,
-;;;                               GtkExpression *expression);
-;;;
-;;; Sets the expression that gets evaluated to obtain strings from items when
-;;; searching in the popup. The expression must have a value type of
-;;; G_TYPE_STRING.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; expression :
-;;;     a GtkExpression, or NULL.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_get_expression ()
-;;;
-;;; GtkExpression *
-;;; gtk_drop_down_get_expression (GtkDropDown *self);
-;;;
-;;; Gets the expression set with gtk_drop_down_set_expression().
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; Returns :
-;;;     a GtkExpression or NULL.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_set_enable_search ()
-;;;
-;;; void
-;;; gtk_drop_down_set_enable_search (GtkDropDown *self,
-;;;                                  gboolean enable_search);
-;;;
-;;; Sets whether a search entry will be shown in the popup that allows to search
-;;; for items in the list.
-;;;
-;;; Note that “expression” must be set for search to work.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; enable_search :
-;;;     whether to enable search
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_get_enable_search ()
-;;;
-;;; gboolean
-;;; gtk_drop_down_get_enable_search (GtkDropDown *self);
-;;;
-;;; Returns whether search is enabled.
-;;;
-;;; self :
-;;;     a GtkDropDown
-;;;
-;;; Returns :
-;;;     TRUE if the popup includes a search entry
-;;; ----------------------------------------------------------------------------
+(export 'drop-down-new-from-strings)
 
 ;;; --- End of file gtk3.drop-down.lisp ----------------------------------------

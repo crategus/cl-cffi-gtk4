@@ -174,7 +174,7 @@
     @class{gtk:slice-list-model} class.
   @end{short}
   The @fun{gtk:slice-list-model-model} function gets the model that is currently
-  being used or @code{nil} if none. The @sym{(setf gtk:slice-list-model-model)}
+  being used or @code{nil} if none. The @setf{gtk:slice-list-model-model} 
   function sets the model to show a slice of. The item type of @arg{model} must
   conform to the item type of @arg{object}.
   @see-class{gtk:slice-list-model}
@@ -227,9 +227,9 @@
     @class{gtk:slice-list-model} class.
   @end{short}
   The @fun{gtk:slice-list-model-offset} function gets the offset. The
-  @sym{(setf gtk:slice-list-model-offset)} function sets the offset into the
-  original model for this slice. If the offset is too large for the sliced
-  model, @arg{object} will end up empty.
+  @setf{gtk:slice-list-model-offset} function sets the offset into the original 
+  model for this slice. If the offset is too large for the sliced model, 
+  @arg{object} will end up empty.
   @see-class{gtk:slice-list-model}")
 
 ;;; --- slice-list-model-size --------------------------------------------------
@@ -254,39 +254,29 @@
     @class{gtk:slice-list-model} class.
   @end{short}
   The @fun{gtk:slice-list-model-size} function gets the maximum size. The
-  @sym{(setf gtk:slice-list-model-size)} function sets the maximum size.
-  @arg{object} will never have more items than @arg{size}. It can however have
-  fewer items if the offset is too large or the model sliced from does not have
-  enough items.
+  @setf{gtk:slice-list-model-size} function sets the maximum size. @arg{object} 
+  will never have more items than @arg{size}. It can however have fewer items if 
+  the offset is too large or the model sliced from does not have enough items.
   @see-class{gtk:slice-list-model}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_slice_list_model_new ()
-;;;
-;;; GtkSliceListModel *
-;;; gtk_slice_list_model_new (GListModel *model,
-;;;                           guint offset,
-;;;                           guint size);
-;;;
-;;; Creates a new slice model that presents the slice from offset to
-;;; offset + size our of the given model .
-;;;
-;;; model :
-;;;     The model to use, or NULL.
-;;;
-;;; offset :
-;;;     the offset of the slice
-;;;
-;;; size :
-;;;     maximum size of the slice
-;;;
-;;; Returns :
-;;;     A new GtkSliceListModel
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline slice-list-model-new))
 
 (defun slice-list-model-new (model offset size)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[model]{a @class{g:list-model} object to use, or @code{nil}}
+  @argument[offset]{an unsigned integer with the offset of the slize}
+  @argument[size]{an unsigned integer with the maximum size of the slize}
+  @return{A new @class{gtk:slice-list-model} object.}
+  @begin{short}
+    Creates a new slice model that presents the slice from @arg{offset} to
+    @arg{offset} + @arg{size} out of the given @arg{model}.
+  @end{short}
+  @see-class{gtk:slice-list-model}"
   (make-instance 'slice-list-model
                  :model model
                  :offset offset

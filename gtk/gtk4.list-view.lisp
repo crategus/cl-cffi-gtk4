@@ -388,8 +388,8 @@ lambda (listview position)    :run-last
   @end{short}
   The @fun{gtk:list-view-enable-rubberband} function returns whether rows can
   be selected by dragging with the mouse. The
-  @sym{(setf gtk:list-view-enable-rubberband)} function sets whether selections
-  can be changed by dragging with the mouse.
+  @setf{gtk:list-view-enable-rubberband} function sets whether selections can be
+  changed by dragging with the mouse.
   @see-class{gtk:list-view}")
 
 ;;; --- list-view-factory ------------------------------------------------------
@@ -415,8 +415,8 @@ lambda (listview position)    :run-last
     @class{gtk:list-view} class.
   @end{short}
   The @fun{gtk:list-view-factory} function gets the factory that is currently
-  used to populate list items. The @sym{(setf gtk:list-view-factory)} function
-  sets the factory.
+  used to populate list items. The @setf{gtk:list-view-factory} function sets
+  the factory.
   @see-class{gtk:list-view}
   @see-class{gtk:list-item-factory}")
 
@@ -450,8 +450,8 @@ lambda (listview position)    :run-last
     @class{gtk:list-view} class.
   @end{short}
   The @fun{gtk:list-view-model} function gets the model that is currently used
-  to read the items displayed. The @sym{(setf gtk:list-view-model)} function
-  sets the model to use. This must be a @class{gtk:selection-model} object.
+  to read the items displayed. The @setf{gtk:list-view-model} function sets the
+  model to use. This must be a @class{gtk:selection-model} object.
   @see-class{gtk:list-view}
   @see-class{gtk:selection-model}")
 
@@ -478,7 +478,7 @@ lambda (listview position)    :run-last
     @class{gtk:list-view} class.
   @end{short}
   The @fun{gtk:list-view-show-separators} function returns whether the list box
-  should show separators between rows. The @sym{(setf gtk:list-view-separators)}
+  should show separators between rows. The @setf{gtk:list-view-separators}
   function sets whether the list box should show separators between rows.
   @see-class{gtk:list-view}")
 
@@ -507,8 +507,8 @@ lambda (listview position)    :run-last
   @end{short}
   The @fun{gtk:list-view-single-click-activate} function returns whether rows
   will be activated on single click and selected on hover. The
-  @sym{(setf gtk:list-view-single-click-activate)} function sets whether rows
-  should be activated on single click and selected on hover.
+  @setf{gtk:list-view-single-click-activate} function sets whether rows should
+  be activated on single click and selected on hover.
   @see-class{gtk:list-view}")
 
 ;;; --- list-view-tab-behavior -------------------------------------------------
@@ -522,32 +522,24 @@ lambda (listview position)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_list_view_new ()
-;;;
-;;; GtkWidget *
-;;; gtk_list_view_new (GtkSelectionModel *model,
-;;;                    GtkListItemFactory *factory);
-;;;
-;;; Creates a new GtkListView that uses the given factory for mapping items to
-;;; widgets.
-;;;
-;;; The function takes ownership of the arguments, so you can write code like
-;;;
-;;;  list_view = gtk_list_view_new (create_model(),
-;;;    gtk_builder_list_item_factory_new_from_resource ("/resource.ui"));
-;;;
-;;; model :
-;;;     the model to use, or NULL.
-;;;
-;;; factory :
-;;;     The factory to populate items with, or NULL.
-;;;
-;;; Returns :
-;;;     a new GtkListView using the given model and factory
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline list-view-new))
 
 (defun list-view-new (model factory)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[model]{a @class{gtk:selection-model} object to use, or @code{nil}}
+  @argument[factory]{a @class{gtk:list-item-factory} object to populate items
+    with or @code{nil}}
+  @return{A new @class{gtk:list-view} widget using the given @arg{model} and
+    @arg{factory}.} 
+  @begin{short}
+    Creates a new list view that uses the given @arg{factory} for mapping items 
+    to widgets.
+  @end{short}
+  @see-class{gtk:list-view}
+  @see-class{gtk:list-item-factory}"
   (make-instance 'list-view
                  :model model
                  :factory factory))

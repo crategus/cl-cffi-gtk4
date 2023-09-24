@@ -175,8 +175,8 @@
     @class{gtk:sort-list-model} class.
   @end{short}
   The @fun{gtk:sort-list-model-incremental} function returns whether incremental
-  sorting was enabled. The @sym{(setf gtk:slice-list-model-model)} function sets
-  the sort model to do an incremental sort.
+  sorting was enabled. The @setf{gtk:slice-list-model-model} function sets the
+  sort model to do an incremental sort.
 
   When incremental sorting is enabled, the sort list model will not do a
   complete sort immediately, but will instead queue an idle handler that
@@ -251,9 +251,9 @@
     @class{gtk:sort-list-model} class.
   @end{short}
   The @fun{gtk:sort-list-model-model} function gets the model currently sorted
-  or @code{nil} if none. The @sym{(setf gtk:sort-list-model-model)} function
-  sets the model to be sorted. The item type of @arg{model} must conform to the
-  item type of @arg{object}.
+  or @code{nil} if none. The @setf{gtk:sort-list-model-model} function sets the
+  model to be sorted. The item type of @arg{model} must conform to the item type
+  of @arg{object}.
   @see-class{gtk:sort-list-model}
   @see-class{g:list-model}")
 
@@ -345,8 +345,7 @@ progress = 1.0 - pending / (double) MAX (1, g_list_model_get_n_items (model));
   @end{short}
   The @fun{gtk:sort-list-model-section-sorter} function gets the section sorter
   that is used to sort items of the list model into sections. The
-  @sym{(setf gtk:sort-list-model-section-sorter)} function sets a new section
-  sorter.
+  @setf{gtk:sort-list-model-section-sorter} function sets a new section sorter.
   @see-class{gtk:sort-list-model}
   @see-class{gtk:sorter}")
 
@@ -371,33 +370,28 @@ progress = 1.0 - pending / (double) MAX (1, g_list_model_get_n_items (model));
     @class{gtk:sort-list-model} class.
   @end{short}
   The @fun{gtk:sort-list-model-sorter} function gets the sorter that is used to
-  sort @arg{object}. The @sym{(setf gtk:sort-list-model-sorter)} function sets
-  a new sorter.
+  sort @arg{object}. The @setf{gtk:sort-list-model-sorter} function sets a new
+  sorter.
   @see-class{gtk:sort-list-model}
   @see-class{gtk:sorter}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_sort_list_model_new ()
-;;;
-;;; GtkSortListModel *
-;;; gtk_sort_list_model_new (GListModel *model,
-;;;                          GtkSorter *sorter);
-;;;
-;;; Creates a new sort list model that uses the sorter to sort model .
-;;;
-;;; model :
-;;;     the model to sort, or NULL.
-;;;
-;;; sorter :
-;;;     the GtkSorter to sort model with, or NULL.
-;;;
-;;; Returns :
-;;;     a new GtkSortListModel
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline sort-list-model-new))
 
 (defun sort-list-model-new (model sorter)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[model]{a @class{g:list-model} object, or @code{nil}}
+  @argument[sorter]{a @class{gtk:sorter} object to sort @arg{model} with,
+    or @code{nil}}
+  @return{A new @class{gtk:sort-list-model} object.}
+  @begin{short}
+    Creates a new sort list model that uses the sorter to sort @arg{model}.
+  @end{short}
+  @see-class{gtk:sort-list-model}"
   (make-instance 'sort-list-model
                  :model model
                  :sorter sorter))

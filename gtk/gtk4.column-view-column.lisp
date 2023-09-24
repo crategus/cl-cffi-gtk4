@@ -201,8 +201,8 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-expand} function returns whether this column
-  should expand. The @sym{(setf gtk:column-view-column-expand)} function sets
-  the column to take available extra space. The extra space is shared equally
+  should expand. The @setf{gtk:column-view-column-expand} function sets the 
+  column to take available extra space. The extra space is shared equally 
   amongst all columns that have the expand set to @em{true}.
   @see-class{gtk:column-view}")
 
@@ -230,7 +230,7 @@
   @end{short}
   The @fun{gtk:column-view-column-factory} function gets the factory that is
   currently used to populate list items. The
-  @sym{(setf gtk:column-view-column-factory)} function sets the factory.
+  @setf{gtk:column-view-column-factory} function sets the factory.
   @see-class{gtk:column-view-column}
   @see-class{gtk:list-item-factory}")
 
@@ -259,9 +259,9 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-fixed-width} function gets the fixed width of
-  the column. The @sym{(setf gtk:column-view-column-fixed-width)} function sets
-  the fixed width. If @arg{width} is not -1, sets the fixed width of
-  @arg{object}, otherwise unsets it.
+  the column. The @setf{gtk:column-view-column-fixed-width} function sets the 
+  fixed width. If @arg{width} is not -1, sets the fixed width of @arg{object}, 
+  otherwise unsets it.
 
   Setting a fixed width overrides the automatically calculated width.
   Interactive resizing also sets the @slot[gtk:column-view-column]{fixed-width}
@@ -292,8 +292,8 @@
   @end{short}
   The @fun{gtk:column-view-column-header-menu} function gets the menu model
   that is used to create the context menu for the column header. The
-  @sym{(setf gtk:column-view-column-header-menu)} function sets the menu model
-  that is used to create the context menu for the column header.
+  @setf{gtk:column-view-column-header-menu} function sets the menu model that is 
+  used to create the context menu for the column header.
   @see-class{gtk:column-view-column}
   @see-class{g:menu-model}")
 
@@ -321,9 +321,9 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-id} function returns the ID. The
-  @sym{(setf gtk:column-view-column-id)} function sets the ID of this column.
-  GTK makes no use of this, but applications can use it when storing column
-  view configuration. It is up to callers to ensure uniqueness of IDs.
+  @setf{gtk:column-view-column-id} function sets the ID of this column. GTK 
+  makes no use of this, but applications can use it when storing column view 
+  configuration. It is up to callers to ensure uniqueness of IDs.
 
   Since 4.10
   @see-class{gtk:column-view-column}")
@@ -351,8 +351,8 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-resizable} function returns whether this
-  column is resizable. The @sym{(setf gtk:column-view-column-resizable)}
-  function sets whether this column should be resizable by dragging.
+  column is resizable. The @setf{gtk:column-view-column-resizable} function sets 
+  whether this column should be resizable by dragging.
   @see-class{gtk:column-view-column}")
 
 ;;; --- column-view-column-sorter ----------------------------------------------
@@ -376,10 +376,10 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-sorter} function returns the sorter that is
-  associated with the column. The @sym{(setf gtk:column-view-column-sorter)}
-  function associates a sorter with the column. If sorter is @code{nil}, the
-  column will not let users change the sorting by clicking on its header. This
-  sorter can be made active by clicking on the column header, or by calling the
+  associated with the column. The @setf{gtk:column-view-column-sorter} function 
+  associates a sorter with the column. If sorter is @code{nil}, the column will 
+  not let users change the sorting by clicking on its header. This sorter can be 
+  made active by clicking on the column header, or by calling the
   @fun{gtk:column-view-sort-by-column} function.
 
   See the @fun{gtk:column-view-sorter} function for the necessary steps for
@@ -410,10 +410,9 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-title} function  returns the title. The
-  @sym{(setf gtk:column-view-column-sorter)} function sets the title of this
-  column. The title is displayed in the header of a @class{gtk:column-view}
-  widget for this column and is therefore user-facing text that should be
-  translated.
+  @setf{gtk:column-view-column-sorter} function sets the title of this column. 
+  The title is displayed in the header of a @class{gtk:column-view} widget for 
+  this column and is therefore user-facing text that should be translated.
   @see-class{gtk:column-view-column}
   @see-class{gtk:column-view}")
 
@@ -439,40 +438,33 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-visible} function returns whether this column
-  is visible. The @sym{(setf gtk:column-view-column-visible)} function sets
-  whether this column should be visible in views.
+  is visible. The @setf{gtk:column-view-column-visible} function sets whether 
+  this column should be visible in views.
   @see-class{gtk:column-view-column}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_column_view_column_new ()
-;;;
-;;; GtkColumnViewColumn *
-;;; gtk_column_view_column_new (const char *title,
-;;;                             GtkListItemFactory *factory);
-;;;
-;;; Creates a new GtkColumnViewColumn that uses the given factory for mapping
-;;; items to widgets.
-;;;
-;;; You most likely want to call gtk_column_add_column() next.
-;;;
-;;; The function takes ownership of the argument, so you can write code like
-;;;
-;;;  column = gtk_column_view_column_new (_("Name"),
-;;;    gtk_builder_list_item_factory_new_from_resource ("/name.ui"));
-;;;
-;;; title :
-;;;     Title to use for this column.
-;;;
-;;; factory :
-;;;     The factory to populate items with.
-;;;
-;;; Returns :
-;;;     a new GtkColumnViewColumn using the given factory
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline column-view-column-new))
 
 (defun column-view-column-new (title factory)
+ #+liber-documentation
+ "@version{#2023-9-21}
+  @argument[title]{a string with the title to use for this column}
+  @argument[factory]{a @class{gtk:list-item-factory} object to populate items
+    with}
+  @return{A new @class{gtk:column-view-column} object using the given
+    @arg{factory}.}
+  @begin{short}
+    Creates a new column that uses the given @arg{factory} for mapping
+    items to widgets.
+  @end{short}
+  You most likely want to call the @fun{gtk:column-view-append-column} function 
+  next.
+  @see-class{gtk:column-view-column}
+  @see-class{gtk:list-item-factory}
+  @see-function{gtk:column-view-append-column}"
   (make-instance 'column-view-column
                  :title title
                  :factory factory))
