@@ -44,6 +44,8 @@
 ;;;     GtkAccessibleAutocomplete                          gtk.enumerations
 ;;;     GtkAccessibleSort                                  gtk.enumerations
 ;;;
+;;;     GtkAccessiblePlatformState                         Since 4.10
+;;;
 ;;; Accessors
 ;;;
 ;;;     gtk_accessible_get_accessible_role
@@ -86,6 +88,35 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkAccessiblePlatformState
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-10
+(gobject:define-g-enum "GtkAccessiblePlatformState" accessible-platform-state
+  (:export t
+   :type-initializer "gtk_accessible_platform_state_get_type")
+  (:focusable 0)
+  (:focused 1)
+  (:active 2))
+
+#+(and gtk-4-10 liber-documentation)
+(setf (liber:alias-for-symbol 'accessible-platform-state)
+      "GEnum"
+      (liber:symbol-documentation 'accessible-platform-state)
+ "@version{#2023-9-16}
+  @begin{short}
+    The various platform states which can be queried using the
+    @fun{gtk:accessible-platform-state} function.
+  @end{short}
+  @begin[code]{table}
+    @entry[:focusable]{Whether the accessible can be focused.}
+    @entry[:focused]{Whether the accessible has focus.}
+    @entry[:active]{Whether the accessible is active.}
+  @end{table}
+  Since 4.10
+  @see-function{gtk:accessible-platform-state}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkAccessible
