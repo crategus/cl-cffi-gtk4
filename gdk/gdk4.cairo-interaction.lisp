@@ -49,7 +49,7 @@
 
 (cffi:defcfun ("gdk_cairo_set_source_rgba" cairo-set-source-rgba) :void
  #+liber-documentation
- "@version{#2023-2-3}
+ "@version{2023-9-19}
   @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[rgba]{a @class{gdk:rgba} color}
   @begin{short}
@@ -170,7 +170,7 @@
 
 (cffi:defcfun ("gdk_cairo_draw_from_gl" cairo-draw-from-gl) :void
  #+liber-documentation
- "@version{#2023-2-3}
+ "@version{#2023-9-19}
   @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[surface]{a @class{gdk:surface} object we are rendering for,
     not necessarily into}
@@ -205,12 +205,11 @@
 
   Calling this may change the current GL context.
   @begin[Warning]{dictionary}
-    The @sym{gdk:cairo-draw-from-gl} function is depracted since 4.6. The
-    function is overly complex and produces broken output in various
-    combinations of arguments. If you want to draw with GL textures in GTK, use
-    the @fun{gdk:gl-texture-new} function. If you want to use that texture in
-    Cairo, use the @fun{gdk:texture-download} function to download the data into
-    a Cairo image surface.
+    This function is depracted since 4.6. The function is overly complex and
+    produces broken output in various combinations of arguments. If you want to
+    draw with GL textures in GTK, use the @fun{gdk:gl-texture-new} function. If
+    you want to use that texture in Cairo, use the @fun{gdk:texture-download}
+    function to download the data into a Cairo image surface.
   @end{dictionary}
   @see-symbol{cairo:context-t}
   @see-class{gdk:surface}

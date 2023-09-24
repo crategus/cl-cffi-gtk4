@@ -863,7 +863,7 @@
       @about-function{pango-layout-line-clip-region}
     @end{subsection}
     @begin[Cairo Interaction]{subsection}
-      Functions to support using Cairo. GDK does not wrap the cairo API,
+      Functions to support using Cairo. GDK does not wrap the Cairo API,
       instead it allows to create Cairo contexts which can be used to draw on
       GdkSurfaces. Additional functions allow use GdkRectangles with Cairo and
       to use GdkRGBAs, GdkPixbufs and GdkSurfaces as sources for drawing
