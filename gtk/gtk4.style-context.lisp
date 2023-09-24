@@ -322,6 +322,11 @@
     style-context-display
     "display" "GdkDisplay" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj style-context) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT is deprecated since 4.10.")))
+
 #+liber-documentation
 (setf (documentation 'style-context 'type)
  "@version{2023-8-30}
@@ -388,7 +393,7 @@
 (setf (liber:alias-for-function 'style-context-display)
       "Accessor"
       (documentation 'style-context-display 'function)
- "@version{2023-8-30}
+ "@version{2023-9-18}
   @syntax[]{(gtk:style-context-display object) => display}
   @syntax[]{(setf (gtk:style-context-display object) display)}
   @argument[object]{a @class{gtk:style-context} object}
@@ -398,7 +403,7 @@
     @class{gtk:style-context} class.
   @end{short}
   The @fun{gtk:style-context-display} function returns the display to which the
-  style context is attached. The @sym{(setf gtk:style-context-display)} function
+  style context is attached. The @setf{gtk:style-context-display} function 
   attaches the style context to the given display.
 
   The display is used to add style information from 'global' style providers,
@@ -407,8 +412,8 @@
   @fun{gtk:widget-style-context} function, you do not need to call this
   yourself.
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-display} function is deprecated since 4.10.
-    Use the @fun{gtk:widget-display} function instead.
+    This function is deprecated since 4.10. Use the @fun{gtk:widget-display}
+    function instead.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gdk:display}
@@ -420,10 +425,17 @@
 ;;; gtk_style_context_add_provider
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_add_provider" style-context-add-provider)
+(declaim (inline style-context-add-provider))
+
+(cffi:defcfun ("gtk_style_context_add_provider" %style-context-add-provider)
     :void
+  (context (g:object style-context))
+  (provider (g:object style-provider))
+  (priority :uint))
+
+(defun style-context-add-provider (context provider priority)
  #+liber-documentation
- "@version{2022-11-25}
+ "@version{2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @argument[priority]{an unsigned integer with the priority of the style
@@ -434,7 +446,8 @@
   @end{short}
   The lower the priority of the style provider is, the earlier it will be used
   in the style construction. Typically this will be in the range between the
-  @var{+gtk-priority-fallback+} and @var{+gtk-priority-user+} priorities.
+  @var{gtk:+gtk-priority-fallback+} and @var{gtk:+gtk-priority-user+}
+  priorities.
 
   Note that a style provider added by this function only affects the style of
   the widget to which @arg{context} belongs. If you want to affect the style of
@@ -445,16 +458,16 @@
     function takes precedence over another added through the
     @fun{gtk:style-context-add-provider-for-display} function.
   @end{dictionary}
-  @begin[Wanring]{dictionary}
-    The @fun{gtk:style-context-add-provider} function is deprecated since 4.10.
-    Use style classes instead.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.10. Use style classes instead.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:style-provider}
   @see-function{gtk:style-context-add-provider-for-display}"
-  (context (g:object style-context))
-  (provider (g:object style-provider))
-  (priority :uint))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-ADD-PROVIDER is deprecated since 4.10."))
+  (%style-context-add-provider context provider priority))
 
 (export 'style-context-add-provider)
 
@@ -463,13 +476,19 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_style_context_add_provider_for_display"
-               style-context-add-provider-for-display) :void
+               %style-context-add-provider-for-display) :void
+  (display (g:object gdk:display))
+  (provider (g:object style-provider))
+  (priority :uint))
+
+(defun style-context-add-provider-for-display
+    (display provider &optional (priority +gtk-priority-application+))
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{2023-9-17}
   @argument[display]{a @class{gdk:display} object}
   @argument[provider]{a @class{gtk:style-provider} object}
-  @argument[priority]{an unsigned integer with the priority of the style
-    provider}
+  @argument[priority]{an optional unsigned integer with the priority of the
+    style provider, the default value is @var{gtk:+gtk-priority-application+}}
   @begin{short}
     Adds a global style provider to the display, which will be used in style
     construction for all style contexts under the display.
@@ -481,14 +500,11 @@
     @fun{gtk:style-context-add-provider} function takes precedence over another
     added through this function.
   @end{dictionary}
-  @see-class{gtk:style-context}
   @see-class{gdk:display}
   @see-class{gtk:style-provider}
   @see-class{gtk:settings}
   @see-function{gtk:style-context-add-provider}"
-  (display (g:object gdk:display))
-  (provider (g:object style-provider))
-  (priority :uint))
+  (%style-context-add-provider-for-display display provider priority))
 
 (export 'style-context-add-provider-for-display)
 
@@ -504,9 +520,12 @@
                         :void)
   state)
 
-(cffi:defcfun ("gtk_style_context_get_state" style-context-state) state-flags
+(cffi:defcfun ("gtk_style_context_get_state" %style-context-state) state-flags
+  (context (g:object style-context)))
+
+(defun style-context-state (context)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:style-context-state context) => state}
   @syntax[]{(setf (gtk:style-context-state context) state)}
   @argument[context]{a @class{gtk:style-context} object}
@@ -515,23 +534,26 @@
     Accessor of the state used when rendering.
   @end{short}
   The @fun{gtk:style-context-state} function returns the state used for style
-  matching. The @sym{(setf gtk:style-context-state)} function sets the state.
+  matching. The @setf{gtk:style-context-state} function sets the state.
 
-  This function should only be used to retrieve the @symbol{gtk:state-flag}
+  This function should only be used to retrieve the @symbol{gtk:state-flags}
   values to pass to the @class{gtk:style-context} functions, like the
   @fun{gtk:style-context-padding} function. If you need to retrieve the current
   state of a @class{gtk:widget} object, use the @fun{gtk:widget-state-flags}
   function.
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-state} function is deprecated since 4.10. Use
-    the @fun{gtk:widget-state-flags} function instead.
+    This function is deprecated since 4.10. Use the @fun{gtk:widget-state-flags}
+    function instead.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:widget}
   @see-symbol{gtk:state-flags}
   @see-function{gtk:widget-state-flags}
   @see-function{gtk:style-context-padding}"
-  (context (g:object style-context)))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-STATE is deprecated since 4.10."))
+  (%style-context-state context))
 
 (export 'style-context-state)
 
@@ -545,19 +567,22 @@
 
 (defun style-context-color (context)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
-  @return{The @class{gdk:rgba} foreground color.}
+  @return{The @class{gdk:rgba} instance with the foreground color.}
   @begin{short}
     Gets the foreground color for a given state.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-color} function is deprecated since 4.10. Use
-    the @fun{gtk:widget-color} function instead.
+    This function is deprecated since 4.10. Use the @fun{gtk:widget-color}
+    function instead.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gdk:rgba}
   @see-function{gtk:widget-color}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-COLOR is deprecated since 4.10."))
   (let ((color (gdk:rgba-new)))
     (%style-context-color context color)
     color))
@@ -575,7 +600,7 @@
 
 (defun style-context-border (context state)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[state]{a @symbol{gtk:state-flags} value to retrieve the border for}
   @return{Returns border settings as a @class{gtk:border} instance.}
@@ -583,12 +608,14 @@
     Gets the value for the border settings for a given state.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-border} function is deprecated since 4.10. This
-    API will be removed in GTK 5.
+    This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:border}
   @see-symbol{gtk:state-flags}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-BORDER is deprecated since 4.10."))
   (let ((border (border-new)))
     (%style-context-border context state border)
     border))
@@ -606,7 +633,7 @@
 
 (defun style-context-padding (context state)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[state]{a @symbol{gtk:state-flags} value to retrieve the padding for}
   @return{Returns padding settings as a @class{gtk:border} instance.}
@@ -614,12 +641,14 @@
     Gets the value for the padding settings for a given state.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-padding} function is deprecated since 4.10. This
-    API will be removed in GTK 5.
+    This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:border}
   @see-symbol{gtk:state-flags}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-PADDING is deprecated since 4.10."))
   (let ((padding (border-new)))
     (%style-context-padding context state padding)
     padding))
@@ -637,7 +666,7 @@
 
 (defun style-context-margin (context state)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[state]{a @symbol{gtk:state-flags} value to retrieve the margin for}
   @return{Returns margin settings as a @class{gtk:border} instance.}
@@ -645,12 +674,14 @@
     Gets the value for the margin settings for a given state.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-margin} function is deprecated since 4.10. This
-    API will be removed in GTK 5.
+    This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:border}
   @see-symbol{gtk:state-flags}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-MARGIN is deprecated since 4.10."))
   (let ((margin (border-new)))
     (%style-context-margin context state margin)
     margin))
@@ -669,7 +700,7 @@
 
 (defun style-context-lookup-color (context name)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[name]{a string with a color name to lookup}
   @return{The looked up @class{gdk:rgba} color, or @code{nil}.}
@@ -677,11 +708,13 @@
     Looks up and resolves a color name in the style context color map.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-lookup-color} function is deprecated since 4.10.
-    This API will be removed in GTK 5.
+    This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gdk:rgba}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-LOOKUP-COLOR is deprecated since 4.10."))
   (let ((color (gdk:rgba-new)))
     (when (%style-context-lookup-color context name color)
       color)))
@@ -692,10 +725,16 @@
 ;;; gtk_style_context_remove_provider
 ;;; ----------------------------------------------------------------------------
 
+(declaim (inline style-context-remove-provider))
+
 (cffi:defcfun ("gtk_style_context_remove_provider"
-               style-context-remove-provider) :void
+               %style-context-remove-provider) :void
+  (context (g:object style-context))
+  (provider (g:object style-provider)))
+
+(defun style-context-remove-provider (context provider)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @begin{short}
@@ -703,14 +742,16 @@
     context.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-remove-provider} function is deprecated since
-    4.10. Please do not use it in newly written code.
+    This function is deprecated since 4.10. Please do not use it in newly
+    written code.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:style-provider}
   @see-function{gtk:style-context-add-provider}"
-  (context (g:object style-context))
-  (provider (g:object style-provider)))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-REMOVE-PROVIDER is deprecated since 4.10."))
+  (%style-context-remove-provider context provider))
 
 (export 'style-context-remove-provider)
 
@@ -721,7 +762,7 @@
 (cffi:defcfun ("gtk_style_context_remove_provider_for_display"
                style-context-remove-provider-for-display) :void
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{2023-9-17}
   @argument[display]{a @class{gdk:display} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @begin{short}
@@ -740,21 +781,28 @@
 ;;; gtk_style_context_restore
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_restore" style-context-restore) :void
+(declaim (inline style-context-restore))
+
+(cffi:defcfun ("gtk_style_context_restore" %style-context-restore) :void
+  (context (g:object style-context)))
+
+(defun style-context-restore (context)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @begin{short}
     Restores the style context state to a previous stage.
   @end{short}
   See the @fun{gtk:style-context-save} function.
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-restore} function is deprecated since 4.10. This
-    API will be removed in GTK 5.
+    This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-function{gtk:style-context-save}"
-  (context (g:object style-context)))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-RESTORE is deprecated since 4.10."))
+  (%style-context-restore context))
 
 (export 'style-context-restore)
 
@@ -762,9 +810,14 @@
 ;;; gtk_style_context_save
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_save" style-context-save) :void
+(declaim (inline style-context-save))
+
+(cffi:defcfun ("gtk_style_context_save" %style-context-save) :void
+  (context (g:object style-context)))
+
+(defun style-context-save (context)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @begin{short}
     Saves the style context state.
@@ -774,15 +827,17 @@
   functions can be reverted in one go through the
   @fun{gtk:style-context-restore} function.
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-save} function is deprecated since 4.10. This
-    API will be removed in GTK 5.
+    This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-function{gtk:style-context-add-class}
   @see-function{gtk:style-context-remove-class}
   @see-function{gtk:style-context-state}
   @see-function{gtk:style-context-restore}"
-  (context (g:object style-context)))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-SAVE is deprecated since 4.10."))
+  (%style-context-save context))
 
 (export 'style-context-save)
 
@@ -790,9 +845,15 @@
 ;;; gtk_style_context_add_class
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_add_class" style-context-add-class) :void
+(declaim (inline style-context-add-class))
+
+(cffi:defcfun ("gtk_style_context_add_class" %style-context-add-class) :void
+  (context (g:object style-context))
+  (classname :string))
+
+(defun style-context-add-class (context classname)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[classname]{a string with a class name to use in styling}
   @begin{short}
@@ -811,13 +872,15 @@ GtkEntry.entry { ... @}
     @end{pre}
   @end{dictionary}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-add-class} function is deprecated since 4.10.
-    Use the @fun{gtk:widget-add-css-class} function instead.
+    This function is deprecated since 4.10. Use the
+    @fun{gtk:widget-add-css-class} function instead.
   @end{dictionary}
   @see-class{gtk:style-context}
-  @see-function{gtk:style-context-property}"
-  (context (g:object style-context))
-  (classname :string))
+  @see-function{gtk:widget-add-css-class}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-ADD-CLASS is deprecated since 4.10."))
+  (%style-context-add-class context classname))
 
 (export 'style-context-add-class)
 
@@ -825,22 +888,31 @@ GtkEntry.entry { ... @}
 ;;; gtk_style_context_remove_class
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_remove_class" style-context-remove-class)
+(declaim (inline style-context-remove-class))
+
+(cffi:defcfun ("gtk_style_context_remove_class" %style-context-remove-class)
     :void
+  (context (g:object style-context))
+  (classname :string))
+
+(defun style-context-remove-class (context classname)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[classname]{a string with a class name to remove}
   @begin{short}
     Removes a class name from the style context.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-remove-class} function is deprecated since 4.10.
-    Use the @fun{gtk:widget-remove-css-class} function instead.
+    This function is deprecated since 4.10. Use the
+    @fun{gtk:widget-remove-css-class} function instead.
   @end{dictionary}
-  @see-class{gtk:style-context}"
-  (context (g:object style-context))
-  (classname :string))
+  @see-class{gtk:style-context}
+  @see-function{gtk:widget-remove-css-class}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-REMOVE-CLASS is deprecated since 4.10."))
+  (%style-context-remove-class context classname))
 
 (export 'style-context-remove-class)
 
@@ -848,9 +920,15 @@ GtkEntry.entry { ... @}
 ;;; gtk_style_context_has_class
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_has_class" style-context-has-class) :boolean
+(declaim (inline style-context-has-class))
+
+(cffi:defcfun ("gtk_style_context_has_class" %style-context-has-class) :boolean
+  (context (g:object style-context))
+  (classname :string))
+
+(defun style-context-has-class (context classname)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[classname]{a string with a class name}
   @return{@em{True} if the style context has @arg{classname} defined.}
@@ -859,12 +937,15 @@ GtkEntry.entry { ... @}
     class name.
   @end{short}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-has-class} function is deprecated since 4.10.
-    Use the @fun{gtk:widget-has-css-class} function instead.
+    This function is deprecated since 4.10. Use the
+    @fun{gtk:widget-has-css-class} function instead.
   @end{dictionary}
-  @see-class{gtk:style-context}"
-  (context (g:object style-context))
-  (classname :string))
+  @see-class{gtk:style-context}
+  @see-function{gtk:widget-hass-css-class}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-HAS-CLASS is deprecated since 4.10."))
+  (%style-context-has-class context classname))
 
 (export 'style-context-has-class)
 
@@ -880,9 +961,12 @@ GtkEntry.entry { ... @}
                         :void)
   scale)
 
-(cffi:defcfun ("gtk_style_context_get_scale" style-context-scale) :int
+(cffi:defcfun ("gtk_style_context_get_scale" %style-context-scale) :int
+  (context (g:object style-context)))
+
+(defun style-context-scale (context)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:style-context-scale context) => scale}
   @syntax[]{(setf (gtk:style-context-scale context) scale)}
   @argument[context]{a @class{gtk:style-context} object}
@@ -891,14 +975,18 @@ GtkEntry.entry { ... @}
     Accessor of the scale used for image assets for the style context.
   @end{short}
   The @fun{gtk:style-context-scale} function returns the scale to use when
-  getting image assets for the style. The @sym{(setf gtk:style-context-scale)}
+  getting image assets for the style. The @setf{gtk:style-context-scale} 
   function sets the scale.
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-scale} function is deprecated since 4.10. Use
-    the @fun{gtk:widget-scale-factor} function instead.
+    This function is deprecated since 4.10. Use the
+    @fun{gtk:widget-scale-factor} function instead.
   @end{dictionary}
-  @see-class{gtk:style-context}"
-  (context (g:object style-context)))
+  @see-class{gtk:style-context}
+  @see-function{gtk:widget-scale-factor}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-SCALE is deprecated since 4.10."))
+  (%style-context-scale context))
 
 (export 'style-context-scale)
 
@@ -906,9 +994,15 @@ GtkEntry.entry { ... @}
 ;;; gtk_style_context_to_string
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_style_context_to_string" style-context-to-string) :string
+(declaim (inline style-context-to-string))
+
+(cffi:defcfun ("gtk_style_context_to_string" %style-context-to-string) :string
+  (context (g:object style-context))
+  (flags style-context-print-flags))
+
+(defun style-context-to-string (context flags)
  #+liber-documentation
- "@version{2023-8-21}
+ "@version{2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[flags]{a @symbol{gtk:style-context-print-flags} value that
     determine what to print}
@@ -936,16 +1030,17 @@ GtkEntry.entry { ... @}
     box.dialog-action-box.horizontal:dir(ltr)
       box.dialog-action-area.horizontal:dir(ltr)
 \"
-  @end{pre}
+    @end{pre}
   @end{dictionary}
   @begin[Warning]{dictionary}
-    The @fun{gtk:style-context-to-string} function is deprecated since 4.10.
-    This API will be removed in GTK 5.
+    This function is deprecated since 4.10. This API will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-symbol{gtk:style-context-print-flags}"
-  (context (g:object style-context))
-  (flags style-context-print-flags))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STYLE-CONTEXT-TO-STRING is deprecated since 4.10."))
+  (%style-context-to-string context flags))
 
 (export 'style-context-to-string)
 
@@ -963,7 +1058,7 @@ GtkEntry.entry { ... @}
 
 (defun render-activity (context cr x y width height)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x]{a number, coerced to a double float, with the x origin of the
@@ -978,10 +1073,10 @@ GtkEntry.entry { ... @}
     Renders an activity area such as in the @class{gtk:spinner} widget or the
     fill line in the @class{gtk:range} widget.
   @end{short}
-  The @code{:active} state of the @symbol{gtk:stage-flags} flags determines
+  The @code{:active} state of the @symbol{gtk:state-flags} flags determines
   whether there is activity going on.
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
@@ -989,6 +1084,9 @@ GtkEntry.entry { ... @}
   @see-class{gtk:range}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-ACTIVITY is deprecated since 4.10."))
   (%render-activity context cr (coerce x 'double-float)
                                (coerce y 'double-float)
                                (coerce width 'double-float)
@@ -1010,7 +1108,7 @@ GtkEntry.entry { ... @}
 
 (defun render-arrow (context cr angle x y size)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[angle]{a number, coerced to a double float, with an arrow angle
@@ -1027,11 +1125,14 @@ GtkEntry.entry { ... @}
 
   Typical arrow rendering at 0, 1/2 Pi, Pi, and 3/2 Pi: @image[render-arrow]{}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-ARROW is deprecated since 4.10."))
   (%render-arrow context cr (coerce angle 'double-float)
                             (coerce x 'double-float)
                             (coerce y 'double-float)
@@ -1053,7 +1154,7 @@ GtkEntry.entry { ... @}
 
 (defun render-background (context cr x y width height)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x]{a number, coerced to a double float, with the x origin of the
@@ -1076,6 +1177,9 @@ GtkEntry.entry { ... @}
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-BACKGROUND is deprecated since 4.10."))
   (%render-background context cr (coerce x 'double-float)
                                  (coerce y 'double-float)
                                  (coerce width 'double-float)
@@ -1097,7 +1201,7 @@ GtkEntry.entry { ... @}
 
 (defun render-check (context cr x y width height)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x]{a number, coerced to a double float, with the x origin of the
@@ -1110,20 +1214,22 @@ GtkEntry.entry { ... @}
   @begin{short}
     Renders a checkmark as in a @class{gtk:check-button} widget.
   @end{short}
-
   The @code{:checked} state of the @symbol{gtk:state-flags} flags determines
   whether the check is on or off, and the @code{:inconsistent} state determines
   whether it should be marked as undefined.
 
   Typical checkmark rendering: @image[render-check]{}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:check-button}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-CHECK is deprecated since 4.10."))
   (%render-check context cr (coerce x 'double-float)
                             (coerce y 'double-float)
                             (coerce width 'double-float)
@@ -1145,7 +1251,7 @@ GtkEntry.entry { ... @}
 
 (defun render-expander (context cr x y width height)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x]{a number, coerced to a double float, with the x origin of the
@@ -1165,7 +1271,7 @@ GtkEntry.entry { ... @}
 
   Typical expander rendering: @image[render-expander]{}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
@@ -1173,6 +1279,9 @@ GtkEntry.entry { ... @}
   @see-class{gtk:tree-view}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-EXPANDER is deprecated since 4.10."))
   (%render-expander context cr (coerce x 'double-float)
                                (coerce y 'double-float)
                                (coerce width 'double-float)
@@ -1194,7 +1303,7 @@ GtkEntry.entry { ... @}
 
 (defun render-focus (context cr x y width height)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x]{a number, coerced to a double float, with a x origin of the
@@ -1211,11 +1320,14 @@ GtkEntry.entry { ... @}
 
   Typical focus rendering: @image[render-focus]{}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-FOCUS is deprecated since 4.10."))
   (%render-focus context cr (coerce x 'double-float)
                             (coerce y 'double-float)
                             (coerce width 'double-float)
@@ -1237,7 +1349,7 @@ GtkEntry.entry { ... @}
 
 (defun render-frame (context cr x y width height)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x]{a number, coerced to a double float, with the x origin of the
@@ -1257,11 +1369,14 @@ GtkEntry.entry { ... @}
   @code{border-color}, @code{border-width}, @code{border-radius} and
   @code{junctions}: @image[render-frame]{}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-FRAME is deprecated since 4.10."))
   (%render-frame context cr (coerce x 'double-float)
                             (coerce y 'double-float)
                             (coerce width 'double-float)
@@ -1283,7 +1398,7 @@ GtkEntry.entry { ... @}
 
 (defun render-handle (context cr x y width height)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x]{a number, coerced to a double float, with a x origin of the
@@ -1301,12 +1416,15 @@ GtkEntry.entry { ... @}
 
   Handles rendered for the paned and grip classes: @image[render-handle]{}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}  @see-class{gtk:style-context}
   @see-class{gtk:paned}
   @see-class{gtk:window}
   @see-symbol{cairo:context-t}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-HANDLE is deprecated since 4.10."))
   (%render-handle context cr (coerce x 'double-float)
                              (coerce y 'double-float)
                              (coerce width 'double-float)
@@ -1321,16 +1439,16 @@ GtkEntry.entry { ... @}
 (cffi:defcfun ("gtk_render_icon" %render-icon) :void
   (context (g:object style-context))
   (cr (:pointer (:struct cairo:context-t)))
-  (texture (g:object gdk-texture))
+  (texture (g:object gdk:texture))
   (x :double)
   (y :double))
 
 (defun render-icon (context cr texture x y)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
-  @argument[texture]{a @class{gdk-texture} object containing the icon to draw}
+  @argument[texture]{a @class{gdk:texture} object containing the icon to draw}
   @argument[x]{a number, coerced to a double float, with the x position for the
     texture}
   @argument[y]{a number, coerced to a double float, with the y position for the
@@ -1343,14 +1461,17 @@ GtkEntry.entry { ... @}
   of scaling factors, which may not be appropriate when drawing on displays with
   high pixel densities.
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}
-  @see-class{gdk-texture}"
+  @see-class{gdk:texture}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-ICON is deprecated since 4.10."))
   (%render-icon context cr texture (coerce x 'double-float)
-                                       (coerce y 'double-float)))
+                                   (coerce y 'double-float)))
 
 (export 'render-icon)
 
@@ -1367,7 +1488,7 @@ GtkEntry.entry { ... @}
 
 (defun render-layout (context cr x y layout)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x]{a number, coerced to a double float, with the x origin of the
@@ -1379,12 +1500,15 @@ GtkEntry.entry { ... @}
     Renders a Pango layout on the coordinates @arg{x}, @arg{y}.
   @end{short}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}
   @see-symbol{pango:layout}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-LAYOUT is deprecated since 4.10."))
   (%render-layout context cr (coerce x 'double-float)
                              (coerce y 'double-float)
                              layout))
@@ -1405,7 +1529,7 @@ GtkEntry.entry { ... @}
 
 (defun render-line (context cr x0 y0 x1 y1)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x0]{a number, coerced to a double float, with the x coordinate for
@@ -1420,11 +1544,14 @@ GtkEntry.entry { ... @}
     Renders a line from (@arg{x0}, @arg{y0}) to (@arg{x1}, @arg{y1}).
   @end{short}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-symbol{cairo:context-t}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-LINE is deprecated since 4.10."))
   (%render-line context cr (coerce x0 'double-float)
                            (coerce y0 'double-float)
                            (coerce x1 'double-float)
@@ -1446,7 +1573,7 @@ GtkEntry.entry { ... @}
 
 (defun render-option (context cr x y width height)
  #+liber-documentation
- "@version{#2022-8-1}
+ "@version{#2023-9-17}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[cr]{a @symbol{cairo:context-t} context}
   @argument[x]{a number, coerced to a double float, with a x origin of the
@@ -1457,7 +1584,7 @@ GtkEntry.entry { ... @}
   @argument[height]{a number, coerced to a double float, with a rectangle
     height}
   @begin{short}
-    Renders an option mark as in a @class{gtk:radio-button} widget.
+    Renders an option mark as in a @class{gtk:check-button} widget.
   @end{short}
   The @code{:checked} state of the @symbol{gtk:state-flags} flags will determine
   whether the option is on or off, and the @code{:inconsistent} state whether
@@ -1465,13 +1592,16 @@ GtkEntry.entry { ... @}
 
   Typical option mark rendering: @image[render-option]{}
   @begin[Warning]{dictionary}
-    The function is deprecated since 4.10. Please do not use it in newly
+    This function is deprecated since 4.10. Please do not use it in newly
     written code.
   @end{dictionary}
   @see-class{gtk:style-context}
-  @see-class{gtk:radio-button}
+  @see-class{gtk:check-button}
   @see-symbol{cairo:context-t}
   @see-symbol{gtk:state-flags}"
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:RENDER-OPTION is deprecated since 4.10."))
   (%render-option context cr (coerce x 'double-float)
                              (coerce y 'double-float)
                              (coerce width 'double-float)
