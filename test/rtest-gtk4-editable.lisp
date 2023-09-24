@@ -69,7 +69,6 @@
     (is (= 0.0 (gtk:editable-xalign editable)))
     (is (= 0.5 (setf (gtk:editable-xalign editable) 1/2)))))
 
-
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_editable_get_chars

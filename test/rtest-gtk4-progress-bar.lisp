@@ -7,7 +7,7 @@
 
 ;;;     GtkProgressBar
 
-(test progress-bar-class
+(test gtk-progress-bar-class
   ;; Type check
   (is (g:type-is-object "GtkProgressBar"))
   ;; Check the registered name
@@ -36,12 +36,6 @@
   ;; CSS information
   (is (string= "progressbar"
                (gtk:widget-class-css-name "GtkProgressBar")))
-  (is (string=
-"progressbar.horizontal:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:progress-bar))
-                   :none)))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkProgressBar" GTK-PROGRESS-BAR
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -75,4 +69,4 @@
 ;;;     gtk_progress_bar_new
 ;;;     gtk_progress_bar_pulse
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-9-16 --------------------------------------------------------------

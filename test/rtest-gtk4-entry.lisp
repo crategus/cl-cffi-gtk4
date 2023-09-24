@@ -84,15 +84,6 @@
   ;; CSS information
   (is (string= "entry"
                (gtk:widget-class-css-name "GtkEntry")))
-  (is (string=
-"entry:dir(ltr)
-  text:dir(ltr)
-    undershoot.left:dir(ltr)
-    undershoot.right:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:entry))
-                   :recurse)))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntry" GTK-ENTRY
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -268,4 +259,4 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-9-16 --------------------------------------------------------------

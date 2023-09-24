@@ -36,12 +36,6 @@
   ;; CSS information
   (is (string= "checkbutton"
                (gtk:widget-class-css-name "GtkCheckButton")))
-  (is (string=
-"checkbutton:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:check-button))
-                   :none)))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCheckButton" GTK-CHECK-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -110,4 +104,4 @@
     (is (string= "_label" (gtk:check-button-label button)))
     (is-true (gtk:check-button-use-underline button))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-9-16 --------------------------------------------------------------

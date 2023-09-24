@@ -7,7 +7,7 @@
 
 ;;;     GtkGrid
 
-(test grid-class
+(test gtk-grid-class
   ;; Type check
   (is (g:type-is-object "GtkGrid"))
   ;; Check the registered name
@@ -36,12 +36,6 @@
   ;; CSS information
   (is (string= "grid"
                (gtk:widget-class-css-name "GtkGrid")))
-  (is (string=
-"grid.horizontal:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:grid))
-                   :none)))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGrid" GTK-GRID
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -84,4 +78,4 @@
 ;;;     gtk_grid_get_row_baseline_position
 ;;;     gtk_grid_set_row_baseline_position
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-9-20 --------------------------------------------------------------

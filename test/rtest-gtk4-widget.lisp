@@ -344,6 +344,21 @@
 ;;;     gtk_widget_insert_after
 ;;;     gtk_widget_should_layout
 
+;;;     gtk_widget_get_color
+
+(test gtk-widget-color.1
+  (let ((widget (make-instance 'gtk:label)))
+    (is (gdk:rgba-equal (gdk:rgba-new :red 1 :green 1 :blue 1 :alpha 1)
+                        (gtk:widget-color widget)))))
+
+(test gtk-widget-color.2
+  (let ((widget (make-instance 'gtk:window)))
+    (is (gdk:rgba-equal (gdk:rgba-new :red 0.23921569
+                                      :green 0.23921569
+                                      :blue 0.23921569
+                                      :alpha 1)
+                        (gtk:widget-color widget)))))
+
 ;;;     gtk_widget_add_css_class
 ;;;     gtk_widget_remove_css_class
 ;;;     gtk_widget_has_css_class
