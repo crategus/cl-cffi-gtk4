@@ -3,7 +3,6 @@
 (in-package :gtk4-example)
 
 (defun do-calendar (&optional application)
-
     (let* ((calendar (make-instance 'gtk:calendar
                                     :margin-top 12
                                     :margin-bottom 12

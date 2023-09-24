@@ -14,6 +14,7 @@
                (:file "dialog-various")
                (:file "message-dialog-simple")
                (:file "message-dialog-various")
+               (:file "alert-dialog")
                (:file "assistant")
                (:file "application-window")
 
@@ -41,7 +42,8 @@
                (:file "calendar")
 
                ;; List-based widgets
-               (:file "listview-applauncher")
+               (:file "list-view-applauncher")
+;              (:file "grid-view-clocks")
                (:file "drop-down")
 
                ;; Media Support
@@ -95,7 +97,7 @@
 
                (:file "font-button")
                (:file "font-button-label")
-               
+
                (:file "pickers")
 
                ;; Ornaments

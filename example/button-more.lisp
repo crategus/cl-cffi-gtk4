@@ -1,4 +1,4 @@
-;;;; Example More Buttons - 2023-3-18
+;;;; Example More Buttons - 2023-9-19
 
 (in-package :gtk4-example)
 
@@ -14,21 +14,11 @@
                                          (gtk:widget-last-child child))))
                         (t
                          (format nil "Button has no label"))))
-         (dialog (gtk:message-dialog-new parent
-                                         '(:modal)
-                                         :info
-                                         :ok
-                                         message
-                                         nil)))
-    ;; Set secondary text
-    (setf (gtk:message-dialog-secondary-text dialog)
-          "Signal handler for button called.")
-    ;; Handler for the "response" signal of the dialog
-    (g:signal-connect dialog "response"
-                      (lambda (dialog response)
-                        (declare (ignore response))
-                        (gtk:window-destroy dialog)))
-    (gtk:widget-show dialog)))
+         (dialog (make-instance 'gtk:alert-dialog
+                                :message message
+                                :detail "Signal handler for button called."
+                                :modal t)))
+    (gtk:alert-dialog-show dialog parent)))
 
 (defun do-button-more (&optional application)
   (let* ((grid (make-instance 'gtk:grid
@@ -37,7 +27,8 @@
                               :margin-top 12
                               :margin-bottom 12
                               :margin-start 12
-                              :margin-end 12))
+                              :margin-end 12
+                              :halign :center))
          (window (make-instance 'gtk:window
                                 :title "More Buttons"
                                 :child grid
@@ -106,4 +97,4 @@
     (gtk:grid-attach grid button 1 2 1 1)
     ;; Show the window
     (gtk:size-group-add-widget group button)
-    (gtk:widget-show window)))
+    (setf (gtk:widget-visible window) t)))

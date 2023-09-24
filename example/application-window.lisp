@@ -2,8 +2,9 @@
 
 (in-package :gtk4-example)
 
-(defvar *menus*
-        "<interface>
+(defun do-application-window (&optional (application nil))
+  (let ((menus         
+         "<interface>
            <menu id='menubar'> 
              <submenu> 
                <attribute name='label'>_Edit</attribute>
@@ -18,15 +19,13 @@
              </submenu> 
            </menu> 
          </interface>")
-
-(defun do-application-window (&optional (application nil))
-  (let ((builder (make-instance 'gtk:builder))
+        (builder (make-instance 'gtk:builder))
         (window (make-instance 'gtk:application-window
                                :application application
                                :title "Application Window"
                                :show-menubar t)))
     ;; Read the menus from a string
-    (gtk:builder-add-from-string builder *menus*)
+    (gtk:builder-add-from-string builder menus)
     ;; Set the menubar
     (setf (gtk:application-menubar application)
           (gtk:builder-object builder "menubar"))

@@ -1,4 +1,4 @@
-;;;; Example Aspect Frame - 2023-8-23
+;;;; Example Aspect Frame - 2023-9-18
 ;;;;
 ;;;; In this example, we place a drawing area in an aspect frame. Enlarge and
 ;;;; shrink the window to see how the ratio of the drawing area is preserved.
@@ -22,12 +22,11 @@
     ;; Set a drawing function
     (gtk:drawing-area-set-draw-func area
         (lambda (widget cr width height)
-          (let* ((context (gtk:widget-style-context widget))
-                 (color (gtk:style-context-color context)))
+          (let ((color (gtk:widget-color widget)))
             ;; Paint a red background
             (cairo:set-source-rgb cr 1.0 0.0 0.0)
             (cairo:paint cr)
-            ;; Set the color from the style context of the widget
+            ;; Set the color from the current color of the widget
             (gdk:cairo-set-source-rgba cr color)
             ;; Draw and fill a circle on the drawing area
             (cairo:arc cr

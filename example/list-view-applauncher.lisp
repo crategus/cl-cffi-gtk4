@@ -40,7 +40,7 @@
       (g:list-store-append store app))
   store))
 
-(defun do-listview-applauncher (&optional (application nil))
+(defun do-list-view-applauncher (&optional (application nil))
   (let* (;; The GtkListitemFactory is what is used to create GtkListItems
          ;; to display the data from the model. So it is absolutely necessary
          ;; to create one. We will use a GtkSignalListItemFactory because it is 

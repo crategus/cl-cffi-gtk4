@@ -1,4 +1,4 @@
-;;;; Example Drawing area - 2022-11-18
+;;;; Example Drawing area - 2023-9-18
 
 (in-package :gtk4-example)
 
@@ -13,9 +13,7 @@
     ;; Set a drawing function
     (gtk:drawing-area-set-draw-func area
         (lambda (widget cr width height)
-          (let* ((context (gtk:widget-style-context widget))
-                 (color (gtk:style-context-color context)))
-            ;; Set the color from the style context of the widget
+          (let ((color (gtk:widget-color widget)))
             (gdk:cairo-set-source-rgba cr color)
             ;; Draw and fill a circle on the drawing area
             (cairo:arc cr
@@ -26,4 +24,4 @@
                        (* 2.0 pi))
             (cairo:fill cr))))
     ;; Show the window
-    (gtk:widget-show window)))
+    (setf (gtk:widget-visible window) t)))

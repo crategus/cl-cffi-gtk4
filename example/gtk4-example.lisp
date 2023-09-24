@@ -17,6 +17,7 @@
            #:do-message-dialog-new-with-markup
            #:do-message-dialog-with-markup
            #:do-message-dialog-with-secondary-markup
+           #:create-alert-dialog
            #:do-assistant
            #:do-application-window
 
@@ -44,7 +45,8 @@
            #:do-calendar
 
            ;; List-based widgets
-           #:do-listview-applauncher
+           #:do-list-view-applauncher
+;          #:do-grid-view-clocks
            #:do-drop-down
 
            ;; Media Support
@@ -103,7 +105,7 @@
 
            #:do-font-button
            #:do-font-button-label
-           
+
            #:do-pickers
 
            ;; Ornaments
@@ -134,6 +136,7 @@
 
            ;;; Gdk examples
            #:do-app-launch-context
+           #:do-app-launch-context-async
            ))
 
 (in-package :gtk4-example)
@@ -182,7 +185,7 @@ Maecenas sagittis auctor leo a dictum. Sed at auctor."))
           (declare (ignore widget))
           (funcall drawfunc cr width height)))
     ;; Show the window.
-    (gtk:widget-show window)))
+    (setf (gtk:widget-visible window) t)))
 
  ;; A wrapper to run an example
 (defun run-example (func &optional (functype :window) (filename nil))
@@ -208,7 +211,7 @@ Maecenas sagittis auctor leo a dictum. Sed at auctor."))
                                 :title "GTK Example"
                                 :default-width 600
                                 :default-height 400)))
-                   (gtk:widget-show window)
+                   (setf (gtk:widget-visible window) t)
                    (funcall func window)))
                 ((eq :drawfunc functype)
                  (window-draw-func "GTK Example" func application))
@@ -234,4 +237,4 @@ Maecenas sagittis auctor leo a dictum. Sed at auctor."))
        ((not child))
     (apply-css-to-widget provider child)))
 
-;;; --- 2023-5-7 ---------------------------------------------------------------
+;;; --- 2023-9-20 --------------------------------------------------------------

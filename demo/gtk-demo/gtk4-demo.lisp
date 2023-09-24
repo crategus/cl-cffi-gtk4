@@ -181,11 +181,21 @@
        "DO-DIALOG-VARIOUS"
        "gtk4-example"
        "dialog-various.lisp")
+      ("Alert Dialog"
+       ":dialog"
+       "CREATE-ALERT-DIALOG"
+       "gtk4-example"
+       "alert-dialog.lisp")
       ("Assistant"
        ":window"
        "DO-ASSISTANT"
        "gtk4-example"
-       "assistant.lisp"))
+       "assistant.lisp")
+       ("Application Window"
+        ":window"
+        "DO-APPLICATION-WINDOW"
+        "gtk4-example"
+        "application-window.lisp"))
 
      "Layout Containers"
      (("Box Append"
@@ -610,7 +620,17 @@
        ":window"
        "DO-SIZE-GROUP"
        "gtk4-example"
-       "size-group.lisp"))
+       "size-group.lisp")
+      ("GdkAppLaunchContext"
+       ":window"
+       "DO-APP-LAUNCH-CONTEXT"
+       "gtk4-example"
+       "app-launch-context.lisp")
+      ("GdkAppLaunchContext Asyn"
+       ":window"
+       "DO-APP-LAUNCH-CONTEXT-ASYNC"
+       "gtk4-example"
+       "app-launch-context.lisp"))
 ))
 
 ;;; ----------------------------------------------------------------------------
@@ -803,7 +823,7 @@
                          :version "0.9"
                          :copyright "(c) Dieter Kaiser"
                          :website
-                         "github.com/crategus/cl-cffi-gtk"
+                         "github.com/crategus/cl-cffi-gtk4"
                          :website-label "Project web site"
                          :license "MIT"
                          :authors '("Dieter Kaiser")

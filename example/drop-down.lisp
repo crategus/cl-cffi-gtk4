@@ -253,7 +253,7 @@ strings_factory_new (gpointer data, gboolean full)
 |#
 
 (defun selected-item-changed (dropdown pspec item)
-  (declare (ignore dropdown pspec item))
+  (declare (ignore pspec))
   (format t "in SELECTED-ITEM-CHANGED~%")
   (let ((checkmark (g:object-data item "checkmark")))
   
@@ -299,8 +299,8 @@ strings_factory_new (gpointer data, gboolean full)
           
           (let* ((holder (gtk:list-item-item item))
                  (title (g:object-data item "title"))
-                 (image (g:object-data item "image"))
-                 (description (g:object-data item "description"))
+;                 (image (g:object-data item "image"))
+;                 (description (g:object-data item "description"))
                  (checkmark (g:object-data item "checkmark")))
 
             (setf (gtk:label-label title) (string-holder-title holder))

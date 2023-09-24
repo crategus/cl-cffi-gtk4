@@ -1,4 +1,4 @@
-;;;; Example Simple Box - 2022-11-11
+;;;; Example Center Box - 2023-9-19
 ;;;;
 ;;;; The example shows three buttons with colored labels. The red button
 ;;;; shows the start position in the box, the green button the end position,
@@ -9,19 +9,16 @@
 
 (in-package :gtk4-example)
 
-(defparameter +css-button+
-"button {
-   padding: 3px; }
- button > label {
-   color: black;
-   background-color: yellow; }
- button:first-child > label {
-   background-color: red; }
- button:last-child > label {
-   background-color : green; }")
-
 (defun do-box-center (&optional application)
-  (let* (;; Create a center box
+  (let* ((css-button
+          ".centerbox button         { padding: 3px; }
+           .centerbox button > label { color: black;
+                                       background-color: yellow; }
+          .centerbox button:first-child > label {
+                                       background-color: red;}
+          .centerbox button:last-child > label {
+                                       background-color : green; }")
+         ;; Create a center box
          (box (make-instance 'gtk:center-box
                              :orientation :horizontal
                              :homogeneous nil
@@ -55,10 +52,10 @@
                                   :label "END")))
       (setf (gtk:widget-width-request (gtk:button-child button)) 60)
       (setf (gtk:center-box-end-widget box) button))
-
-    ;; Load CSS from data into the provider
-    (gtk:css-provider-load-from-data provider +css-button+)
-    ;; Apply CSS to the widgets
-    (apply-css-to-widget provider box)
+    ;; Load CSS from data into the provider and apply CSS
+    (gtk:css-provider-load-from-data provider css-button)
+    (gtk:widget-add-css-class box "centerbox")
+    (gtk:style-context-add-provider-for-display (gtk:widget-display box)
+                                                provider)
     ;; Show the window.
-    (gtk:widget-show window)))
+    (setf (gtk:widget-visible window) t)))
