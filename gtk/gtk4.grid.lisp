@@ -122,7 +122,7 @@
 (setf (documentation 'grid 'type)
  "@version{2023-3-19}
   @begin{short}
-    The @sym{gtk:grid} widget is a container which arranges its child widgets
+    The @class{gtk:grid} widget is a container which arranges its child widgets
     in rows and columns, with arbitrary positions and horizontal/vertical spans.
   @end{short}
 
@@ -132,10 +132,10 @@
   multiple rows or columns. It is also possible to add a child widget next to
   an existing child widget, using the @fun{gtk:grid-attach-next-to} function.
   To remove a child widget from the grid, use the @fun{gtk:grid-remove}
-  function. The behaviour of the @sym{gtk:grid} widget when several children
+  function. The behaviour of the @class{gtk:grid} widget when several children
   occupy the same grid cell is undefined.
   @begin[GtkGrid as GtkBuildable]{dictionary}
-    Every child in a @sym{gtk:grid} widget has access to a custom
+    Every child in a @class{gtk:grid} widget has access to a custom
     @class{gtk:buildable} element, called @code{<layout>}. It can by used to
     specify a position in the grid and optionally spans. All properties that
     can be used in the @code{<layout>} element are implemented by the
@@ -194,7 +194,7 @@
     property.
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:grid} implementation uses a single CSS node with name
+    The @class{gtk:grid} implementation uses a single CSS node with name
     @code{grid}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
@@ -235,19 +235,17 @@
     Accessor of the @slot[gtk:grid]{baseline-row} slot of the @class{gtk:grid}
     class.
   @end{short}
-
-  The @sym{gtk:grid-baseline-row} function returns which row defines the global
-  baseline of the grid. The @sym{(setf gtk:grid-baseline-row)} function sets
-  which row defines the global baseline for the entire grid. Each row in the
-  grid can have its own local baseline, but only one of those is global, meaning
-  it will be the baseline in the parent of the grid.
+  The @fun{gtk:grid-baseline-row} function returns which row defines the global
+  baseline of the grid. The @setf{gtk:grid-baseline-row} function sets which row
+  defines the global baseline for the entire grid. Each row in the grid can have
+  its own local baseline, but only one of those is global, meaning it will be
+  the baseline in the parent of the grid.
   @see-class{gtk:grid}")
 
 ;;; --- grid-column-homogeneous ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "column-homogeneous"
-                                               'grid) t)
+(setf (documentation (liber:slot-documentation "column-homogeneous" 'grid) t)
  "The @code{column-homogeneous} property of type @code{:boolean} (Read / Write)
   @br{}
   If @em{true}, the columns are all the same width. @br{}
@@ -266,10 +264,9 @@
     Accessor of the @slot[gtk:grid]{column-homogeneous} slot of the
     @class{gtk:grid} class.
   @end{short}
-
-  The @sym{gtk:grid-column-homogeneous} function returns whether all columns of
-  the grid have the same width. The @sym{(setf gtk:grid-column-homogeneous)}
-  function sets whether all columns of the grid will have the same width.
+  The @fun{gtk:grid-column-homogeneous} function returns whether all columns of
+  the grid have the same width. The @setf{gtk:grid-column-homogeneous} function
+  sets whether all columns of the grid will have the same width.
   @see-class{gtk:grid}
   @see-function{gtk:grid-row-homogeneous}")
 
@@ -296,10 +293,9 @@
     Accessor of the @slot[gtk:grid]{column-spacing} slot of the
     @class{gtk:grid} class.
   @end{short}
-
-  The @sym{gtk:grid-column-spacing} function returns the amount of space between
-  the columns of the grid. The @sym{(setf gtk:grid-column-spacing)} function
-  sets the amount of space.
+  The @fun{gtk:grid-column-spacing} function returns the amount of space between
+  the columns of the grid. The @setf{gtk:grid-column-spacing} function sets the
+  amount of space.
   @see-class{gtk:grid}
   @see-function{gtk:grid-row-spacing}")
 
@@ -325,10 +321,9 @@
     Accessor of the @slot[gtk:grid]{row-homogeneous} slot of the
     @class{gtk:grid} class.
   @end{short}
-
-  The @sym{gtk:grid-row-homogeneous} function returns whether all rows of the
-  grid have the same height. The @sym{(setf gtk:grid-row-homogeneous)} function
-  sets whether all rows of the grid will have the same height.
+  The @fun{gtk:grid-row-homogeneous} function returns whether all rows of the
+  grid have the same height. The @setf{gtk:grid-row-homogeneous} function sets
+  whether all rows of the grid will have the same height.
   @see-class{gtk:grid}
   @see-function{gtk:grid-column-homogeneous}")
 
@@ -354,10 +349,9 @@
     Accessor of the @slot[gtk:grid]{row-spacing} slot of the @class{gtk:grid}
     class.
   @end{short}
-
-  The @sym{gtk:grid-row-spacing} function returns the amount of space between
-  the rows of the grid. The @sym{(setf gtk:grid-row-spacing)} function sets the
-  amount of space.
+  The @fun{gtk:grid-row-spacing} function returns the amount of space between
+  the rows of the grid. The @setf{gtk:grid-row-spacing} function sets the amount
+  of space.
   @see-class{gtk:grid}
   @see-function{gtk:grid-column-spacing}")
 
@@ -685,12 +679,11 @@
   @begin{short}
     Accessor of the baseline position of the @class{gtk:grid} widget.
   @end{short}
-
-  The @sym{gtk:grid-row-baseline-position} function returns the baseline
-  position of @arg{row}. The @sym{(setf gtk:grid-row-baseline-position)}
-  function sets how the baseline should be positioned on @arg{row} of the grid,
-  in case that @arg{row} is assigned more space than is requested. The default
-  baseline position is @code{:center}.
+  The @fun{gtk:grid-row-baseline-position} function returns the baseline
+  position of @arg{row}. The @setf{gtk:grid-row-baseline-position} function sets
+  how the baseline should be positioned on @arg{row} of the grid, in case that
+  @arg{row} is assigned more space than is requested. The default baseline
+  position is @code{:center}.
   @see-class{gtk:grid}
   @see-symbol{gtk:position-type}"
   (grid (g:object grid))

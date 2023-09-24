@@ -446,7 +446,7 @@ lambda (calendar)    :run-first
 
 (cffi:defcfun ("gtk_calendar_mark_day" calendar-mark-day) :boolean
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{2023-9-21}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @argument[day]{an unsigned integer with the day to mark between 1 and 31}
   @begin{short}

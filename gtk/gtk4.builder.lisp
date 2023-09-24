@@ -233,23 +233,23 @@
 
 #+liber-documentation
 (setf (documentation 'builder 'type)
- "@version{#2023-8-8}
+ "@version{2023-9-18}
   @begin{short}
-    A @sym{gtk:builder} object reads XML descriptions of a user interface and
+    A @class{gtk:builder} object reads XML descriptions of a user interface and
     instantiates the described objects.
   @end{short}
-  To create a @sym{gtk:builder} object from a user interface description, call
+  To create a @class{gtk:builder} object from a user interface description, call
   the @fun{gtk:builder-new-from-file}, @fun{gtk:builder-new-from-resource} or
   @fun{gtk:builder-new-from-string} function.
 
   In the (unusual) case that you want to add user interface descriptions from
-  multiple sources to the same @sym{gtk:builder} object you can call the
+  multiple sources to the same @class{gtk:builder} object you can call the
   @fun{gtk:builder-new} function to get an empty builder and populate it by
   (multiple) calls to the @fun{gtk:builder-add-from-file},
   @fun{gtk:builder-add-from-resource} or @fun{gtk:builder-add-from-string}
   functions.
 
-  A @sym{gtk:builder} object holds a reference to all objects that it has
+  A @class{gtk:builder} object holds a reference to all objects that it has
   constructed and drops these references when it is finalized. This finalization
   can cause the destruction of non-widget objects or widgets which are not
   contained in a toplevel window. For toplevel windows constructed by a builder,
@@ -268,7 +268,7 @@
   the lifespan of the builder.
 
   @subheading{GtkBuilder UI Definitions}
-  The @sym{gtk:builder} object parses textual descriptions of user interfaces
+  The @class{gtk:builder} object parses textual descriptions of user interfaces
   which are specified in XML format. We refer to these descriptions as
   \"GtkBuilder UI definitions\" or just \"UI definitions\" if the context is
   clear.
@@ -346,7 +346,7 @@
   <property name=\"label\" translatable=\"yes\" context=\"button\">Hello, world</property>
 </object>
   @end{pre}
-  The @sym{gtk:builder} object can parse textual representations for the most
+  The @class{gtk:builder} object can parse textual representations for the most
   common property types:
   @begin{itemize}
     @item{characters}
@@ -409,9 +409,9 @@
   @subheading{Internal children}
   Sometimes it is necessary to refer to widgets which have implicitly been
   constructed by GTK as part of a composite widget, to set properties on them or
-  to add further children, e.g. the content area of a the @class{gdk:dialog}
+  to add further children, e.g. the content area of a the @class{gtk:dialog}
   widget. This can be achieved by setting the \"internal-child\" property of the
-  @code{<child>} element to a true value. Note that the @code{gtk:builder}
+  @code{<child>} element to a true value. Note that the @class{gtk:builder}
   object still requires an @code{<object>} element for the internal child, even
   if it has already been constructed.
 
@@ -496,20 +496,20 @@ hello_button__clicked (GtkButton *button,
   bind children and signal handlers to instance fields and function symbols.
 
   For more information, see the @class{gtk:widget} documentation for details.
+  @see-constructor{gtk:builder-new}
   @see-constructor{gtk:builder-new-from-file}
   @see-constructor{gtk:builder-new-from-resource}
   @see-constructor{gtk:builder-new-from-string}
   @see-slot{gtk:builder-current-object}
   @see-slot{gtk:builder-scope}
   @see-slot{gtk:builder-translation-domain}
-  @see-constructor{gtk:builder-new}
   @see-class{gtk:buildable}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- builder-current-object ---------------------------------------------
+;;; --- builder-current-object -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "current-object" 'builder) t)
@@ -521,7 +521,7 @@ hello_button__clicked (GtkButton *button,
 (setf (liber:alias-for-function 'builder-current-object)
       "Accessor"
       (documentation 'builder-current-object 'function)
- "@version{#2022-9-13}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:builder-current-object object) => current}
   @syntax[]{(setf (gtk:builder-current-object object) current)}
   @argument[object]{a @class{gtk:builder} object}
@@ -530,8 +530,8 @@ hello_button__clicked (GtkButton *button,
     Accessor of the @slot[gtk:builder]{current-object} slot of the
     @class{gtk:builder} class.
   @end{short}
-  The @sym{gtk:builder-current-object} function gets the current object for the
-  builder. The @sym{(setf gtk:builder-current-object)} function sets the current
+  The @fun{gtk:builder-current-object} function gets the current object for the
+  builder. The @setf{gtk:builder-current-object} function sets the current
   object. The current object can be thought of as the this object that the
   builder is working for and will often be used as the default object when an
   object is optional.
@@ -545,7 +545,7 @@ hello_button__clicked (GtkButton *button,
   @see-function{gtk:widget-init-template}
   @see-function{gtk:builder-new-from-resource}")
 
-;;; --- builder-scope ------------------------------------------------------
+;;; --- builder-scope ----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scope" 'builder) t)
@@ -558,7 +558,7 @@ hello_button__clicked (GtkButton *button,
 (setf (liber:alias-for-function 'builder-scope)
       "Accessor"
       (documentation 'builder-scope 'function)
- "@version{#2022-9-13}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:builder-scope object) => scope}
   @syntax[]{(setf (gtk:builder-scope object) scope)}
   @argument[object]{a @class{gtk:builder} object}
@@ -567,26 +567,25 @@ hello_button__clicked (GtkButton *button,
     Accessor of the @slot[gtk:builder]{scope} slot of the @class{gtk:builder}
     class.
   @end{short}
-  The @sym{gtk:builder-scope} function gets the scope in use. The
-  @sym{(setf gtk:builder-scope)} function sets the scope the builder should
-  operate in. If the @arg{scope} argument is @code{nil}, a new
-  @code{GtkBuilderCScope} object will be created.
+  The @fun{gtk:builder-scope} function gets the scope in use. The
+  @setf{gtk:builder-scope} function sets the scope the builder should operate
+  in. If the @arg{scope} argument is @code{nil}, a new @code{GtkBuilderCScope}
+  object will be created.
   @begin[Note]{dictionary}
     @code{GtkBuilderScope} support is currently not implemented in the Lisp
     binding.
   @end{dictionary}
   @see-class{gtk:builder}")
 
-;;; --- builder-translation-domain -----------------------------------------
+;;; --- builder-translation-domain ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "translation-domain"
-                                               'builder) t)
+(setf (documentation (liber:slot-documentation "translation-domain" 'builder) t)
  "The @code{translation-domain} property of type @code{:string} (Read / Write)
   @br{}
   The translation domain used when translating property values that have been
   marked as translatable in interface descriptions. If the translation domain
-  is @code{nil}, the @sym{gtk:builder} object uses GNU gettext, otherwise
+  is @code{nil}, the @class{gtk:builder} object uses GNU gettext, otherwise
   GLIB gettext. @br{}
   Default value: @code{nil}")
 
@@ -594,7 +593,7 @@ hello_button__clicked (GtkButton *button,
 (setf (liber:alias-for-function 'builder-translation-domain)
       "Accessor"
       (documentation 'builder-translation-domain 'function)
- "@version{#2022-9-13}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:builder-translation-domain object) => domain}
   @syntax[]{(setf (gtk:builder-translation-domain object) domain)}
   @argument[object]{a @class{gtk:builder} object}
@@ -603,9 +602,9 @@ hello_button__clicked (GtkButton *button,
     Accessor of the @slot[gtk:builder]{translation-domain} slot of the
     @class{gtk:builder} class.
   @end{short}
-  The @sym{gtk:builder-translation-domain} function gets the translation domain
-  of @arg{object}. The @sym{(setf gtk:builder-translation-domain)} function sets
-  the translation domain.
+  The @fun{gtk:builder-translation-domain} function gets the translation domain
+  of @arg{object}. The @setf{gtk:builder-translation-domain} function sets the
+  translation domain.
 
   The translation domain used when translating property values that have been
   marked as translatable in interface descriptions. If the translation domain
@@ -768,7 +767,7 @@ hello_button__clicked (GtkButton *button,
 
 (defun builder-add-from-file (builder path)
  #+liber-documentation
- "@version{2023-1-29}
+ "@version{2023-9-18}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a pathname or namestring with the name of the file to parse}
   @begin{short}
@@ -777,7 +776,7 @@ hello_button__clicked (GtkButton *button,
   @end{short}
   This function is useful if you need to call the
   @fun{gtk:builder-current-object} function to add user data to callbacks
-  before loading the @sym{gtk:builder} UI definition. Otherwise, you probably
+  before loading the @class{gtk:builder} UI definition. Otherwise, you probably
   want the @fun{gtk:builder-new-from-file} function instead.
 
   If there is an error opening the file or parsing the description then the
@@ -803,7 +802,7 @@ hello_button__clicked (GtkButton *button,
 
 (defun builder-add-from-resource (builder path)
  #+liber-documentation
- "@version{#2022-9-13}
+ "@version{#2023-9-18}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a string with the path of the resouce file to parse}
   @begin{short}
@@ -812,8 +811,8 @@ hello_button__clicked (GtkButton *button,
   @end{short}
   This function is useful if you need to call the
   @fun{gtk:builder-current-object} function to add user data to callbacks before
-  loading the @sym{gtk:builder} UI definition. Otherwise, you probably want the
-  @fun{gtk:builder-new-from-resource} function instead.
+  loading the @class{gtk:builder} UI definition. Otherwise, you probably want
+  the @fun{gtk:builder-new-from-resource} function instead.
 
   If there is an error locating the resource or parsing the description then
   the program will be aborted.
@@ -840,7 +839,7 @@ hello_button__clicked (GtkButton *button,
 
 (defun builder-add-from-string (builder string)
  #+liber-documentation
- "@version{#2022-9-13}
+ "@version{2023-9-18}
   @argument[builder]{a @class{gtk:builder} object}
   @argument[string]{a string to parse}
   @begin{short}
@@ -849,8 +848,8 @@ hello_button__clicked (GtkButton *button,
   @end{short}
   This function is useful if you need to call the
   @fun{gtk:builder-current-object} function to add user data to callbacks before
-  loading the @sym{gtk:builder} UI definition. Otherwise, you probably want the
-  @fun{gtk:builder-new-from-string} function instead.
+  loading the @class{gtk:builder} UI definition. Otherwise, you probably want
+  the @fun{gtk:builder-new-from-string} function instead.
 
   If there is an error parsing the string then the program will be aborted.
   @see-class{gtk:builder}
@@ -974,9 +973,9 @@ hello_button__clicked (GtkButton *button,
 
 (defun builder-add-objects-from-string (builder string &rest args)
  #+liber-documentation
- "@version{#2022-9-13}
+ "@version{#2023-9-18}
   @argument[builder]{a @class{gtk:builder} object}
-  @argument[string]{the string to parse}
+  @argument[string]{a string to parse}
   @argument[args]{strings with the object IDs to build}
   @return{A positive value on success, 0 if an error occurred.}
   @begin{short}

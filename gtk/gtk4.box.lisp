@@ -183,8 +183,8 @@
     class.
   @end{short}
   The @fun{gtk:box-baseline-child} function gets the position of the baseline
-  child widget. The @sym{(setf gtk:box-baseline-position)} function sets the
-  position. This affects only vertical boxes.
+  child widget. The @setf{gtk:box-baseline-position} function sets the position.
+  This affects only vertical boxes.
 
   Since 4.12
   @see-class{gtk:box}")
@@ -212,8 +212,7 @@
     @class{gtk:box} class.
   @end{short}
   The @fun{gtk:box-baseline-position} function gets the baseline position of a
-  box. The @sym{(setf gtk:box-baseline-position)} function sets the baseline
-  position.
+  box. The @setf{gtk:box-baseline-position} function sets the baseline position.
 
   This affects only horizontal boxes with at least one baseline aligned child
   widget. If there is more vertical space available than requested, and the
@@ -245,7 +244,7 @@
     class.
   @end{short}
   The @fun{gtk:box-homogeneous} function returns whether or not all children of
-  the box are given equal space in the box. The @sym{(setf gtk:box-homogeneous)}
+  the box are given equal space in the box. The @setf{gtk:box-homogeneous}
   function sets the property.
   @see-class{gtk:box}")
 
@@ -272,8 +271,8 @@
     Accessor of the @slot[gtk:box]{spacing} slot of the @class{gtk:box} class.
   @end{short}
   The @fun{gtk:box-spacing} function returns the spacing between children. The
-  @sym{(setf gtk:box-spacing)} function sets the number of pixels to place
-  between the children of the box.
+  @setf{gtk:box-spacing} function sets the number of pixels to place between the
+  children of the box.
   @see-class{gtk:box}")
 
 ;;; ----------------------------------------------------------------------------

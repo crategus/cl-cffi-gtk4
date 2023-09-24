@@ -315,7 +315,7 @@
 (setf (documentation 'css-provider 'type)
  "@version{2022-11-25}
   @begin{short}
-    The @sym{gtk:css-provider} object is an object implementing the
+    The @class{gtk:css-provider} object is an object implementing the
     @class{gtk:style-provider} interface.
   @end{short}
   It is able to parse CSS-like input in order to style widgets.
@@ -359,7 +359,7 @@ lambda (provider section error)    :run-last
       opt to defer parsing parts or all of the input to a later time than when
       a loading function was called.
       @begin[code]{table}
-        @entry[provider]{The @sym{gtk:css-provider} object that had a parsing
+        @entry[provider]{The @class{gtk:css-provider} object that had a parsing
           error.}
         @entry[section]{The @class{gtk:css-section} instance the error happened
           in.}
@@ -498,7 +498,7 @@ lambda (provider section error)    :run-last
   To track errors while loading CSS, connect to the \"parsing-error\" signal
   of the @class{gtk:css-provider} object.
   @see-class{gtk:css-provider}
-  @see-class{g-resource}"
+  @see-class{g:resource}"
   (provider (g:object css-provider))
   (path :string))
 

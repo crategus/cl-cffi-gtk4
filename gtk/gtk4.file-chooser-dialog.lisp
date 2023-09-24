@@ -180,7 +180,7 @@
       (let ((filename (gtk:file-chooser-filename dialog)))
         ...
       ))
-    (gtk:widget-destroy dialog)))
+    (gtk:window-destroy dialog)))
     @end{pre}
     To use a dialog for saving, you can use this:
     @begin{pre}
@@ -198,7 +198,7 @@
       (let ((filename (gtk:file-chooser-filename dialog)))
         ...
       ))
-    (gtk:widget-destroy dialog)))
+    (gtk:window-destroy dialog)))
     @end{pre}
   @end{dictionary}
   @begin[CSS nodes]{dictionary}

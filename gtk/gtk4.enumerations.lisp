@@ -237,16 +237,15 @@
 (setf (liber:alias-for-symbol 'baseline-position)
       "GEnum"
       (liber:symbol-documentation 'baseline-position)
- "@version{#2023-4-19}
+ "@version{2023-9-19}
   @begin{short}
     Baseline position in a row of widgets.
   @end{short}
-
   Whenever a container has some form of natural row it may align children in
   that row along a common typographical baseline. If the amount of vertical
   space in the row is taller than the total requested height of the
-  baseline aligned children then it can use a @sym{gtk:baseline-position} value
-  to select where to put the baseline inside the extra available space.
+  baseline aligned children then it can use a @symbol{gtk:baseline-position}
+  value to select where to put the baseline inside the extra available space.
   @begin{pre}
 (gobject:define-g-enum \"GtkBaselinePosition\" baseline-position
   (:export t
@@ -374,14 +373,14 @@
 (setf (liber:alias-for-symbol 'icon-size)
       "GEnum"
       (liber:symbol-documentation 'icon-size)
- "@version{#2022-2-13}
+ "@version{2023-9-20}
   @begin{short}
     Built-in icon sizes.
   @end{short}
   Icon sizes default to being inherited. Where they cannot be inherited, text
   size is the default.
 
-  All widgets which use the @sym{gtk:icon-size} enumeration set the
+  All widgets which use the @symbol{gtk:icon-size} enumeration set the
   @code{.normal-icons} or @code{.large-icons} style classes correspondingly,
   and let themes determine the actual size to be used with the
   @code{-gtk:icon-size} CSS property.

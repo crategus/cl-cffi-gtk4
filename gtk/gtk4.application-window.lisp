@@ -196,7 +196,7 @@
 (setf (liber:alias-for-function 'application-window-show-menubar)
       "Accessor"
       (documentation 'application-window-show-menubar 'function)
- "@version{2023-3-11}
+ "@version{2023-9-18}
   @syntax[]{(gtk:application-window-show-menubar object) => show}
   @syntax[]{(setf (gtk:application-window-show-menubar object) show)}
   @argument[window]{a @class{gtk:application-window} widget}
@@ -207,8 +207,8 @@
   @end{short}
   The @fun{gtk:application-window-show-menubar} function returns whether the
   window will display a menubar for the application menu and menubar as needed.
-  The @sym{(setf gtk:application-window-show-menubar)} function sets whether
-  the window will display a menubar.
+  The @setf{gtk:application-window-show-menubar} function sets whether the
+  window will display a menubar.
   @see-class{gtk:application-window}")
 
 ;;; ----------------------------------------------------------------------------
@@ -266,7 +266,7 @@
 (cffi:defcfun ("gtk_application_window_get_help_overlay"
                application-window-help-overlay) (g:object shortcuts-window)
  #+liber-documentation
- "@version{2023-3-11}
+ "@version{2023-9-18}
   @syntax[]{(gtk:application-window-help-overlay window) => overlay}
   @syntax[]{(setf (gtk:application-window-help-overlay window) overlay)}
   @argument[window]{a @class{gtk:application-window} widget}
@@ -275,9 +275,9 @@
     Accessor of the shortcuts window associated with the application window.
   @end{short}
   The @fun{gtk:application-window-help-overlay} function gets the shortcuts
-  window. The @sym{(setf gtk:applicaton-window-help-overlay)} function
-  associates a shortcuts window with the application window, and sets up an
-  action with the name \"win.show-help-overlay\" to present it.
+  window. The @setf{gtk:applicaton-window-help-overlay} function associates a
+  shortcuts window with the application window, and sets up an action with the 
+  name \"win.show-help-overlay\" to present it.
   @see-class{gtk:application-window}
   @see-class{gtk:shortcuts-window}"
   (window (g:object application-window)))

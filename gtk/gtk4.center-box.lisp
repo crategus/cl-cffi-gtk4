@@ -113,26 +113,26 @@
 (setf (documentation 'center-box 'type)
  "@version{2023-5-2}
   @begin{short}
-    The @sym{gtk:center-box} widget arranges three children in a horizontal or
+    The @class{gtk:center-box} widget arranges three children in a horizontal or
     vertical arrangement, keeping the middle child centered as well as possible.
   @end{short}
 
   @image[centerbox]{Figure: GtkCenterBox}
 
-  To add children to the @sym{gtk:center-box} widget, use the
+  To add children to the @class{gtk:center-box} widget, use the
   @fun{gtk:center-box-start-widget}, @fun{gtk:center-box-center-widget} and
   @fun{gtk:center-box-end-widget} functions. The sizing and positioning of
   children can be influenced with the align and expand properties of the
   children.
   @begin[GtkCenterBox as GtkBuildable]{dictionary}
-    The @sym{gtk:center-box} implementation of the @class{gtk:buildable}
+    The @class{gtk:center-box} implementation of the @class{gtk:buildable}
     interface supports placing children in the 3 positions by specifying
     @code{start}, @code{center} or @code{end} as the @code{type} attribute of a
     @code{<child>} element.
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:center-box} implementation uses a single CSS node with the
-    name @code{box}. The first child of the @sym{gtk:center-box} widet will be
+    The @class{gtk:center-box} implementation uses a single CSS node with the
+    name @code{box}. The first child of the @class{gtk:center-box} widet will be
     allocated depending on the text direction, i.e. in left-to-right layouts it
     will be allocated on the left and in right-to-left layouts on the right. In
     vertical orientation, the nodes of the children are arranged from top to
@@ -178,9 +178,9 @@
     Accessor of the @slot[gtk:box]{baseline-position} slot of the
     @class{gtk:center-box} class.
   @end{short}
-  The @sym{gtk:center-box-baseline-position} function gets the baseline position
-  of a center box. The @sym{(setf gtk:center-box-baseline-position)} function
-  sets the baseline position.
+  The @fun{gtk:center-box-baseline-position} function gets the baseline position
+  of a center box. The @setf{gtk:center-box-baseline-position} function sets the
+  baseline position.
 
   This affects only horizontal boxes with at least one baseline aligned child
   widget. If there is more vertical space available than requested, and the
@@ -210,10 +210,9 @@
     Accessor of the @slot[gtk:center-box]{center-widget} slot of the
     @class{gtk:center-box} class.
   @end{short}
-  The @sym{gtk:center-box-center-widget} function gets the center widget, or
-  @code{nil} if there is none. The @sym{(setf gtk:center-box-center-widget)}
-  function sets the center widget. To remove the existing center widget, pass
-  @code{nil}.
+  The @fun{gtk:center-box-center-widget} function gets the center widget, or
+  @code{nil} if there is none. The @setf{gtk:center-box-center-widget} function
+  sets the center widget. To remove the existing center widget, pass @code{nil}.
   @see-class{gtk:center-box}")
 
 ;;; --- center-box-end-widget --------------------------------------------------
@@ -239,10 +238,9 @@
     Accessor of the @slot[gtk:center-box]{end-widget} slot of the
     @class{gtk:center-box} class.
   @end{short}
-  The @sym{gtk:center-box-end-widget} function gets the end widget, or
-  @code{nil} if there is none. The @sym{(setf gtk:center-box-end-widget)}
-  function sets the end widget. To remove the existing end widget, pass
-  @code{nil}.
+  The @fun{gtk:center-box-end-widget} function gets the end widget, or
+  @code{nil} if there is none. The @setf{gtk:center-box-end-widget} function
+  sets the end widget. To remove the existing end widget, pass @code{nil}.
   @see-class{gtk:center-box}")
 
 ;;; --- center-box-shrink-center-last ------------------------------------------
@@ -275,7 +273,7 @@
   @end{short}
   The @fun{gtk:center-box-shrink-center-last} function gets whether the center
   box shrinks the center widget after other children. The
-  @sym{(setf gtk:center-box-shrink-center-last)} function sets the property.
+  @setf{gtk:center-box-shrink-center-last} function sets the property.
 
   By default, when there is no space to give all three children their natural
   widths, the start and end widgets start shrinking and the center child keeps
@@ -308,10 +306,9 @@
     Accessor of the @slot[gtk:center-box]{start-widget} slot of the
     @class{gtk:center-box} class.
   @end{short}
-  The @sym{gtk:center-box-start-widget} function gets the start widget, or
-  @code{nil} if there is none. The @sym{(setf gtk:center-box-start-widget)}
-  function sets the start widget. To remove the existing start widget, pass
-  @code{nil}.
+  The @fun{gtk:center-box-start-widget} function gets the start widget, or
+  @code{nil} if there is none. The @setf{gtk:center-box-start-widget} function
+  sets the start widget. To remove the existing start widget, pass @code{nil}.
   @see-class{gtk:center-box}")
 
 ;;; ----------------------------------------------------------------------------
@@ -353,11 +350,9 @@
   @begin{short}
     Accessor function of the center widget of the center widget.
   @end{short}
-
-  The @sym{gtk:center-box-center-widget} function gets the center widget, or
-  @code{nil} if there is none. The @sym{(setf gtk:center-box-center-widget)}
-  function sets the center widget. To remove the existing center widget, pass
-  @code{nil}.
+  The @fun{gtk:center-box-center-widget} function gets the center widget, or
+  @code{nil} if there is none. The @setf{gtk:center-box-center-widget} function
+  sets the center widget. To remove the existing center widget, pass @code{nil}.
   @see-class{gtk:center-box}"
   (box (g:object center-box)))
 
@@ -389,11 +384,9 @@
   @begin{short}
     Accessor function of the start widget of the center widget.
   @end{short}
-
-  The @sym{gtk:center-box-start-widget} function gets the start widget, or
-  @code{nil} if there is none. The @sym{(setf gtk:center-box-start-widget)}
-  function sets the start widget. To remove the existing start widget, pass
-  @code{nil}.
+  The @fun{gtk:center-box-start-widget} function gets the start widget, or
+  @code{nil} if there is none. The @setf{gtk:center-box-start-widget} function
+  sets the start widget. To remove the existing start widget, pass @code{nil}.
   @see-class{gtk:center-box}"
   (box (g:object center-box)))
 
@@ -425,11 +418,9 @@
   @begin{short}
     Accessor function of the end widget of the center widget.
   @end{short}
-
-  The @sym{gtk:center-box-end-widget} function gets the end widget, or
-  @code{nil} if there is none. The @sym{(setf gtk:center-box-end-widget)}
-  function sets the end widget. To remove the existing end widget, pass
-  @code{nil}.
+  The @fun{gtk:center-box-end-widget} function gets the end widget, or
+  @code{nil} if there is none. The @setf{gtk:center-box-end-widget} function
+  sets the end widget. To remove the existing end widget, pass @code{nil}.
   @see-class{gtk:center-box}"
   (box (g:object center-box)))
 

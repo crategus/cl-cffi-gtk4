@@ -180,7 +180,7 @@
 (setf (documentation 'image 'type)
  "@version{2023-3-19}
   @begin{short}
-    The @sym{gtk:image} widget displays an image.
+    The @class{gtk:image} widget displays an image.
   @end{short}
   Various kinds of objects can be displayed as an image. Most typically, you
   would load a @class{gdk:texture} object from a file, and then display that.
@@ -197,7 +197,7 @@
   \"broken image\" icon similar to that used in many web browsers. If you want
   to handle errors in loading the file yourself, for example by displaying an
   error message, then load the image with the @fun{gdk:texture-new-from-file}
-  function, then create the @sym{gtk:image} widget with the
+  function, then create the @class{gtk:image} widget with the
   @fun{gtk:image-new-from-paintable} function.
 
   Sometimes an application will want to avoid depending on external data files,
@@ -210,14 +210,21 @@
   is determined by the application. See the @class{gtk:picture} widget if you
   want to show an image at is actual size.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:image} implementation has a single CSS node with the name
+    The @class{gtk:image} implementation has a single CSS node with the name
     @code{image}. The @code{.normal-icons} or @code{.large-icons} style classes
     may appear, depending on the @code{icon-size} property.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:image} implementation uses the @code{:img} role of the
+    The @class{gtk:image} implementation uses the @code{:img} role of the
     @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
+  @see-constructor{gtk:image-new}
+  @see-constructor{gtk:image-new-from-file}
+  @see-constructor{gtk:image-new-from-resource}
+  @see-constructor{gtk:image-new-from-pixbuf}
+  @see-constructor{gtk:image-new-from-paintable}
+  @see-constructor{gtk:image-new-from-icon-name}
+  @see-constructor{gtk:image-new-from-gicon}
   @see-slot{gtk:image-file}
   @see-slot{gtk:image-gicon}
   @see-slot{gtk:image-icon-name}
@@ -227,13 +234,6 @@
   @see-slot{gtk:image-resource}
   @see-slot{gtk:image-storage-type}
   @see-slot{gtk:image-use-fallback}
-  @see-constructor{gtk:image-new}
-  @see-constructor{gtk:image-new-from-file}
-  @see-constructor{gtk:image-new-from-resource}
-  @see-constructor{gtk:image-new-from-pixbuf}
-  @see-constructor{gtk:image-new-from-paintable}
-  @see-constructor{gtk:image-new-from-icon-name}
-  @see-constructor{gtk:image-new-from-gicon}
   @see-class{gdk:paintable}")
 
 ;;; ----------------------------------------------------------------------------
@@ -321,9 +321,6 @@
 
 ;;; --- image-icon-size --------------------------------------------------------
 
-;; TODO: Check the implementation of gtk:icon-size. Can we use an
-;; enumeration value instead of an integer?
-
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-size" 'image) t)
  "The @code{icon-size} property of type @symbol{gtk:icon-size} (Read / Write)
@@ -346,7 +343,7 @@
   The symbolic size to display icons at.
   @begin[Note]{dictionary}
     In C the @code{icon-size} property is implemented as an integer type.
-    Therefore the @sym{gtk:image-icon-size} accessor returns an integer value
+    Therefore the @fun{gtk:image-icon-size} accessor returns an integer value
     and not a keyword value of the @symbol{gtk:icon-size} enumeration.
   @end{dictionary}
   @see-class{gtk:image}
@@ -373,8 +370,8 @@
     Accessor of the @slot[gtk:image]{paintable} slot of the @class{gtk:image}
     class.
   @end{short}
-  The @sym{gtk:image-paintable} function gets the paintable being displayed by
-  the image. The @sym{(setf gtk:image-paintable)} function sets the paintable.
+  The @fun{gtk:image-paintable} function gets the paintable being displayed by
+  the image. The @setf{gtk:image-paintable} function sets the paintable.
 
   The @symbol{gtk:image-type} storage type of the image must be @code{:empty}
   or @code{:paintable}, see the @fun{gtk:image-storage-type} function.
@@ -406,10 +403,9 @@
     Accessor of the @slot[gtk:image]{pixel-size} slot of the @class{gtk:image}
     class.
   @end{short}
-
-  The @sym{gtk:image-pixel-size} function sets the pixel size used for named
-  icons. The @sym{(setf gtk:image-pixel-size)} function sets the pixel size. If
-  the pixel size is set to a value not equal to -1, it is used instead of the
+  The @fun{gtk:image-pixel-size} function sets the pixel size used for named
+  icons. The @setf{gtk:image-pixel-size} function sets the pixel size. If the
+  pixel size is set to a value not equal to -1, it is used instead of the
   @slot[gtk:image]{icon-size} property.
   @see-class{gtk:image}
   @see-function{gtk:image-icon-size}")
@@ -459,10 +455,9 @@
     Accessor of the @slot[gtk:image]{storage-type} slot of the @class{gtk:image}
     class.
   @end{short}
-
-  The @sym{gtk:image-storage-type} function gets the type of representation
+  The @fun{gtk:image-storage-type} function gets the type of representation
   being used by the @class{gtk:image} widget to store image data. The
-  @sym{(setf gtk:image-storage-type)} function sets the image type.
+  @setf{gtk:image-storage-type} function sets the image type.
 
   If the @class{gtk:image} widget has no image data, the return value will be
   @code{:empty}.
@@ -492,8 +487,7 @@
     Accessor of the @slot[gtk:image]{use-fallback} slot of the @class{gtk:image}
     class.
   @end{short}
-
-  Whether the icon displayed in the @sym{gtk:image} widget will use standard
+  Whether the icon displayed in the @fun{gtk:image} widget will use standard
   icon names fallback. The value of this property is only relevant for images
   of @code{:icon-name} and @code{:gicon} type.
   @see-class{gtk:image}")

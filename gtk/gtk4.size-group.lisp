@@ -81,7 +81,7 @@
 (setf (documentation 'size-group 'type)
  "@version{2023-3-18}
   @begin{short}
-    The @sym{gtk:size-group} object provides a mechanism for grouping a number
+    The @class{gtk:size-group} object provides a mechanism for grouping a number
     of widgets together so they all request the same amount of space.
   @end{short}
   This is typically useful when you want a column of widgets to have the same
@@ -125,7 +125,8 @@
     one for each member of the size group. The name attribute gives the ID of
     the widget.
 
-    @b{Example:} A UI definition fragment with the @sym{gtk:size-group} widget.
+    @b{Example:} A UI definition fragment with the @class{gtk:size-group}
+    widget.
     @begin{pre}
 <object class=\"GtkSizeGroup\">
   <property name=\"mode\">GTK_SIZE_GROUP_HORIZONTAL</property>
@@ -168,8 +169,8 @@
     Accessor of the @slot[gtk:size-group]{mode} slot of the
     @class{gtk:size-group} class.
   @end{short}
-  The @sym{gtk:size-group-mode} function gets the current mode of the size
-  group. The @sym{(setf gtk:size-group-mode)} function sets the mode.
+  The @fun{gtk:size-group-mode} function gets the current mode of the size
+  group. The @setf{gtk:size-group-mode} function sets the mode.
 
   The mode of the size group determines whether the widgets in the size group
   should all have the same horizontal requisition, @code{:horizontal}, all have

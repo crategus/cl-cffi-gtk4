@@ -218,7 +218,7 @@
 (setf (documentation 'label 'type)
  "@version{2023-4-15}
   @begin{short}
-    The @sym{gtk:label} widget displays a small amount of text.
+    The @class{gtk:label} widget displays a small amount of text.
   @end{short}
   As the name implies, most labels are used to label another widget such as
   a @class{gtk:button} widget.
@@ -338,7 +338,7 @@
   with the \"activate-link\" signal and the @fun{gtk:label-current-uri}
   function.
   @begin[GtkLabel as GtkBuildable]{dictionary}
-    The @sym{gtk:label} implementation of the @class{gtk:buildable} interface
+    The @class{gtk:label} implementation of the @class{gtk:buildable} interface
     supports a custom @code{<attributes>} element, which supports any number of
     @code{<attribute>} elements. The @code{<attribute>} element has attributes
     named @code{name}, @code{value}, @code{start} and @code{end} and allows you
@@ -367,7 +367,7 @@ label
 ┊
 ╰── [link]
     @end{pre}
-    The @sym{gtk:label} implementation has a single CSS node with the name
+    The @class{gtk:label} implementation has a single CSS node with the name
     @code{label}. A wide variety of style classes may be applied to labels, such
     as the @code{.title}, @code{.subtitle}, @code{.dim-label} style classes. In
     the @class{gtk:shortcuts-window} widget, labels are used wth the
@@ -380,7 +380,7 @@ label
     this case, the label node also gets a @code{.link} style class.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:label} implementation uses the @code{:label} role of the
+    The @class{gtk:label} implementation uses the @code{:label} role of the
     @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
   @begin[Action Details]{dictionary}
@@ -413,7 +413,7 @@ lambda (label)    :action
       programmatically. The default bindings for this signal are all forms of
       the @kbd{Enter} key.
       @begin[code]{table}
-        @entry[label]{The @sym{gtk:label} widget on which the signal was
+        @entry[label]{The @class{gtk:label} widget on which the signal was
           emitted.}
       @end{table}
     @subheading{The \"activate-link\" signal}
@@ -424,7 +424,7 @@ lambda (label uri)    :run-last
       to it to override the default behaviour, which is to call the
       @fun{gtk:show-uri} function.
       @begin[code]{table}
-        @entry[label]{The @sym{gtk:label} widget on which the signal was
+        @entry[label]{The @class{gtk:label} widget on which the signal was
           emitted.}
         @entry[uri]{A string with the URI that is activated.}
         @entry[Returns]{@em{True} if the link has been activated.}
@@ -437,7 +437,7 @@ lambda (label)    :action
       to the clipboard. The default binding for this signal is the @kbd{Ctrl-c}
       key.
       @begin[code]{table}
-        @entry[label]{The @sym{gtk:label} widget which received the signal.}
+        @entry[label]{The @class{gtk:label} widget which received the signal.}
       @end{table}
     @subheading{The \"move-cursor\" signal}
       @begin{pre}
@@ -458,7 +458,7 @@ lambda (label step count extend)    :action
         @item{@kbd{Home}/@kbd{End} keys move to the ends of the buffer.}
       @end{itemize}
       @begin[code]{table}
-        @entry[label]{The @sym{gtk:label} widget which received the signal.}
+        @entry[label]{The @class{gtk:label} widget which received the signal.}
         @entry[step]{The granularity of the move, as a value of the
           @symbol{gtk:movement-step} enumeration.}
         @entry[count]{An integer with the number of step units to move.}
@@ -513,8 +513,8 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{attributes} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-attributes} function gets the attribute list that was set
-  on the label, if any. The @sym{(setf gtk:label-attributes)} function sets a
+  The @fun{gtk:label-attributes} function gets the attribute list that was set
+  on the label, if any. The @setf{gtk:label-attributes} function sets a
   attribute list. The attributes in the list are applied to the label text.
 
   This function does not reflect attributes that come from the labels markup,
@@ -568,10 +568,10 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{ellipsize} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-ellipsize} function returns the ellipsizing position of
-  the label. The @sym{(setf gtk:label-ellipsize)} function sets the mode used
-  to ellipsize, add an ellipsis: \"...\", to the text if there is not enough
-  space to render the entire string.
+  The @fun{gtk:label-ellipsize} function returns the ellipsizing position of
+  the label. The @setf{gtk:label-ellipsize} function sets the mode used to
+  ellipsize, add an ellipsis: \"...\", to the text if there is not enough space
+  to render the entire string.
   @see-class{gtk:label}
   @see-symbol{pango:ellipsize-mode}")
 
@@ -596,8 +596,8 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{extra-menu} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-extra-menu} function gets the menu model. The
-  @sym{(setf gtk:label-extra-menu)} function sets a menu model to add when
+  The @fun{gtk:label-extra-menu} function gets the menu model. The
+  @setf{gtk:label-extra-menu} function sets a menu model to add when
   constructing the context menu for the label.
   @see-class{gtk:label}
   @see-class{g:menu-model}")
@@ -626,14 +626,14 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{justify} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-justify} function returns the justification of the label.
-  The @sym{(setf gtk:label-justify)} function sets the alignment of the lines
-  in the text of the label relative to each other.
+  The @fun{gtk:label-justify} function returns the justification of the label.
+  The @setf{gtk:label-justify} function sets the alignment of the lines in the
+  text of the label relative to each other.
 
   The @code{:left} value is the default value when the widget is first created
   with the @fun{gtk:label-new} function. If you instead want to set the
   alignment of the label as a whole, use the @fun{gtk:widget-halign} function
-  instead. The @sym{(setf gtk:label-justify)} function has no effect on labels
+  instead. The @setf{gtk:label-justify} function has no effect on labels
   containing only a single line.
   @see-class{gtk:label}
   @see-symbol{gtk:justification}
@@ -661,11 +661,11 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{label} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-label} function returns the text of the label widget
+  The @fun{gtk:label-label} function returns the text of the label widget
   including any embedded underlines indicating mnemonics and Pango markup.
-  The @sym{(setf gtk:label-label)} function sets the text of the label. The
-  label is interpreted as including embedded underlines and/or Pango markup
-  depending on the values of the @slot[gtk:label]{use-underline} and
+  The @setf{gtk:label-label} function sets the text of the label. The label is
+  interpreted as including embedded underlines and/or Pango markup depending on
+  the values of the @slot[gtk:label]{use-underline} and
   @slot[gtk:label]{use-markup} properties.
 
   See also the @fun{gtk:label-text} function, which fetches the text from a
@@ -699,8 +699,8 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{lines} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-lines} function gets the number of lines to which an
-  ellipsized, wrapping label should be limited. The @sym{(setf gtk:label-lines)}
+  The @fun{gtk:label-lines} function gets the number of lines to which an
+  ellipsized, wrapping label should be limited. The @setf{gtk:label-lines}
   function sets the number of lines. This has no effect if the label is not
   wrapping or ellipsized. Set this to -1 if you do not want to limit the number
   of lines.
@@ -731,9 +731,9 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{max-width-chars} slot of the
     @class{gtk:label} class.
   @end{short}
-  The @sym{gtk:label-max-width-chars} function returns the maximum width of the
-  label in characters. The @sym{(setf gtk:label-max-width-chars)} function sets
-  the desired maximum width.
+  The @fun{gtk:label-max-width-chars} function returns the maximum width of the
+  label in characters. The @setf{gtk:label-max-width-chars} function sets the
+  desired maximum width.
   @see-class{gtk:label}")
 
 ;;; --- label-mnemonic-keyval --------------------------------------------------
@@ -757,7 +757,7 @@ lambda (label step count extend)    :action
     @class{gtk:label} class.
   @end{short}
   If the label has been set so that it has a mnemonic key the
-  @sym{gtk:label-mnemonic-keyval} function returns the keyval used for the
+  @fun{gtk:label-mnemonic-keyval} function returns the keyval used for the
   mnemonic accelerator. If there is no mnemonic set up it returns
   @code{#xffffff}.
   @begin[Example]{dictionary}
@@ -790,7 +790,7 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{mnemonic-widget} slot of the
     @class{gtk:label} class.
   @end{short}
-  The @sym{gtk:label-mnemonic-widget} function returns the target of the
+  The @fun{gtk:label-mnemonic-widget} function returns the target of the
   mnemonic of the label, or @code{nil} if none has been set and the default
   algorithm will be used.
 
@@ -841,9 +841,9 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{natural-wrap-mode} slot of the
     @class{gtk:label} class.
   @end{short}
-  The @sym{gtk:label-natural-wrap-mode} function returns the line wrap mode used
-  by the label. The @sym{(setf gtk:label-natural-wrap-mode)} function sets the
-  line wrap mode.
+  The @fun{gtk:label-natural-wrap-mode} function returns the line wrap mode used
+  by the label. The @setf{gtk:label-natural-wrap-mode} function sets the line
+  wrap mode.
 
   This only affects the natural size requested, for the actual wrapping used,
   see the @slot[gtk:label]{wrap-mode} property.
@@ -903,9 +903,9 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{single-line-mode} slot of the
     @class{gtk:label} class.
   @end{short}
-  The @sym{gtk:label-single-line-mode} function returns whether the label is in
-  single line mode. The @sym{(setf gtk:label-single-line-mode)} function sets
-  whether the label is in single line mode.
+  The @fun{gtk:label-single-line-mode} function returns whether the label is in
+  single line mode. The @setf{gtk:label-single-line-mode} function sets whether
+  the label is in single line mode.
   @see-class{gtk:label}")
 
 ;;; --- label-tabs -------------------------------------------------------------
@@ -931,9 +931,9 @@ lambda (label step count extend)    :action
   @begin{short}
     Accessor of the @slot[gtk:label]{tabs} slot of the @class{gtk:label} class.
   @end{short}
-  The @sym{gtk:label-tabs} function gets the tabs for the label. The
-  @sym{(setf gtk:label-tabs)} function sets the default tab stops for
-  paragraphs in the label.
+  The @fun{gtk:label-tabs} function gets the tabs for the label. The
+  @setf{gtk:label-tabs} function sets the default tab stops for paragraphs in
+  the label.
 
   The returned array will be @code{nil} if \"standard\" (8-space) tabs are used.
   Free the return value with the @fun{pango:tab-array-free} function.
@@ -964,9 +964,9 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{use-markup} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-use-markup} function returns whether the text of the label
+  The @fun{gtk:label-use-markup} function returns whether the text of the label
   is interpreted as marked up with the Pango text markup language. The
-  @sym{(setf gtk:label-use-markup)} function sets whether the text of the label
+  @setf{gtk:label-use-markup} function sets whether the text of the label
   contains markup. See the @fun{gtk:label-set-markup} function.
   @see-class{gtk:label}
   @see-function{gtk:label-set-markup}")
@@ -993,7 +993,7 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{use-underline} slot of the
     @class{gtk:label} class.
   @end{short}
-  The @sym{gtk:label-use-underline} function returns whether an embedded
+  The @fun{gtk:label-use-underline} function returns whether an embedded
   underline in the label indicates a mnemonic. If @em{true}, an underline in the
   text indicates the next character should be used for the mnemonic accelerator
   key.
@@ -1024,8 +1024,8 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{width-chars} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-width-chars} function retrieves the desired width of the
-  label, in characters. The @sym{(setf gtk:label-width-chars)} function sets the
+  The @fun{gtk:label-width-chars} function retrieves the desired width of the
+  label, in characters. The @setf{gtk:label-width-chars} function sets the
   desired width.
   @see-class{gtk:label}")
 
@@ -1108,8 +1108,8 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{xalign} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-xalign} function sets the @slot[gtk:label]{xalign} property
-  for the label. The @sym{(setf gtk:label-xalign)} function sets the property.
+  The @fun{gtk:label-xalign} function sets the @slot[gtk:label]{xalign} property
+  for the label. The @setf{gtk:label-xalign} function sets the property.
   @see-class{gtk:label}
   @see-function{gtk:label-yalign}
   @see-function{gtk:widget-halign}")
@@ -1140,8 +1140,8 @@ lambda (label step count extend)    :action
     Accessor of the @slot[gtk:label]{yalign} slot of the @class{gtk:label}
     class.
   @end{short}
-  The @sym{gtk:label-yalign} function sets the @slot[gtk:label]{yalign} property
-  for the label. The @sym{(setf gtk:label-yalign)} function sets property.
+  The @fun{gtk:label-yalign} function sets the @slot[gtk:label]{yalign} property
+  for the label. The @setf{gtk:label-yalign} function sets property.
   @see-class{gtk:label}
   @see-function{gtk:label-yalign}
   @see-function{gtk:widget-valign}")
@@ -1189,8 +1189,8 @@ lambda (label step count extend)    :action
   @begin{short}
     Accessor of the text in the label.
   @end{short}
-  The @sym{gtk:label-text} function fetches the text from a label, as displayed
-  on the screen. The @sym{(setf gtk:label-text)} function sets the text.
+  The @fun{gtk:label-text} function fetches the text from a label, as displayed
+  on the screen. The @setf{gtk:label-text} function sets the text.
 
   It overwrites any text that was there before. This will also clear any
   previously set mnemonic accelerators. This does not include any embedded

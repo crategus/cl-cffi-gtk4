@@ -215,10 +215,10 @@ lambda (button)    :action
   @end{short}
   The @fun{gtk:button-can-shrink} function retrieves whether the button can be
   smaller than the natural size of its contents. The
-  @sym{(setf gtk:button-can-shrink)} function sets whether the button size can
-  be smaller than the natural size of its contents. For text buttons, setting
-  the @slot[gtk:button]{can-shrink} to @em{true} will ellipsize the label. For
-  icons and custom children, this function has no effect.
+  @setf{gtk:button-can-shrink} function sets whether the button size can be
+  smaller than the natural size of its contents. For text buttons, setting the
+  @slot[gtk:button]{can-shrink} to @em{true} will ellipsize the label. For icons
+  and custom children, this function has no effect.
 
   Since 4.12
   @see-class{gtk:button}")
@@ -245,7 +245,7 @@ lambda (button)    :action
     class.
   @end{short}
   The @fun{gtk:button-child} function gets the child widget of the button. The
-  @sym{(setf gtk:button-child)} function sets the child widget.
+  @setf{gtk:button-child} function sets the child widget.
 
   Note that by using this API, you take full responsibility for setting up the
   proper accessibility label and description information for the button. Most
@@ -297,8 +297,7 @@ lambda (button)    :action
     class.
   @end{short}
   The @fun{gtk:button-has-frame} function returns whether the button has a
-  frame. The @sym{(setf gtk:button-has-frame)} function sets the style of the
-  button.
+  frame. The @setf{gtk:button-has-frame} function sets the style of the button.
 
   Buttons can have a flat appearance or a frame drawn around them.
   @see-class{gtk:button}")
@@ -327,10 +326,10 @@ lambda (button)    :action
   The @fun{gtk:button-icon-name} function returns the icon name of the button.
   If the icon name has not been set the return value will be @code{nil}. This
   will be the case if you create an empty button with the @fun{gtk:button-new}
-  function to use as a container. The @sym{(setf gtk:button-has-frame)} function
-  adds a @class{gtk:image} widget with the given icon name as a child widget. If
-  the button already contains a child widget, that child widget will be removed
-  and replaced with the image.
+  function to use as a container. The @setf{gtk:button-has-frame} function adds
+  a @class{gtk:image} widget with the given icon name as a child widget. If the
+  button already contains a child widget, that child widget will be removed and
+  replaced with the image.
   @see-class{gtk:button}
   @see-class{gtk:image}
   @see-function{gtk:button-new}")
@@ -357,10 +356,10 @@ lambda (button)    :action
     class.
   @end{short}
   The @fun{gtk:button-label} function fetches the text from the label of the
-  button. The @sym{(setf gtk:button-label)} function sets the text. If the label
-  text has not been set the return value will be @code{nil}. This will be the
-  case if you create an empty button with the @fun{gtk:button-new} function to
-  use as a container.
+  button. The @setf{gtk:button-label} function sets the text. If the label text
+  has not been set the return value will be @code{nil}. This will be the case if
+  you create an empty button with the @fun{gtk:button-new} function to use as a
+  container.
   @see-class{gtk:button}
   @see-function{gtk:button-new}")
 
@@ -387,9 +386,9 @@ lambda (button)    :action
     @class{gtk:button} class.
   @end{short}
   The @fun{gtk:button-use-underline} function gets whether underlines are
-  interpreted as mnemonics. The @sym{(setf gtk:button-user-underline)} function
-  sets whether to use underlines as mnemonics. If @em{true}, an underline in the
-  text of the button label indicates the next character should be used for the
+  interpreted as mnemonics. The @setf{gtk:button-user-underline} function sets
+  whether to use underlines as mnemonics. If @em{true}, an underline in the text
+  of the button label indicates the next character should be used for the
   mnemonic accelerator key.
   @see-class{gtk:button}")
 

@@ -364,7 +364,7 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-menubar)
       "Accessor"
       (documentation 'application-menubar 'function)
- "@version{2023-8-2}
+ "@version{2023-9-18}
   @syntax[]{(gtk:application-menubar object) => menubar}
   @syntax[]{(setf (gtk:application-menubar object) menubar)}
   @argument[object]{a @class{gtk:application} instance}
@@ -374,8 +374,8 @@ lambda (application window)    :run-first
     @class{gtk:application} class.
   @end{short}
   The @fun{gtk:application-menubar} function returns the menubar for windows
-  of the application. The @sym{(setf gtk:application-menubar)} function sets or
-  unsets the menubar.
+  of the application. The @setf{gtk:application-menubar} function sets or unsets
+  the menubar.
 
   This is a menubar in the traditional sense. This can only be done in the
   primary instance of the application, after it has been registered. The

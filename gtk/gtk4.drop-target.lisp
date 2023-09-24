@@ -109,17 +109,17 @@
 
 #+liber-documentation
 (setf (documentation 'drop-target 'type)
- "@version{2023-7-31}
+ "@version{2023-9-18}
   @begin{short}
-    The @sym{gtk:drop-target} object is an event controller implementing a
+    The @class{gtk:drop-target} object is an event controller implementing a
     simple way to receive Drag-and-Drop operations.
   @end{short}
-  The most basic way to use a @sym{gtk:drop-target} object to receive drops on
+  The most basic way to use a @class{gtk:drop-target} object to receive drops on
   a widget is to create it via the @fun{gtk:drop-target-new} function passing
   in the @code{GType} of the data you want to receive and connect to the
   \"current-drop\" signal to receive the data.
 
-  The @sym{gtk:drop-target} object supports more options, such as:
+  The @class{gtk:drop-target} object supports more options, such as:
   @begin{itemize}
     @item{rejecting potential drops via the \"accept\" signal and the
       @fun{gtk:drop-target-reject} function to let other drop targets handle
@@ -130,7 +130,7 @@
       listening for its availability via the @slot[gdk:drop-target]{value}
       property}
   @end{itemize}
-  However, the @sym{gtk:drop-target} object is ultimately modeled in a
+  However, the @class{gtk:drop-target} object is ultimately modeled in a
   synchronous way and only supports data transferred via @code{GType}. If you
   want full control over an ongoing drop, the @class{gtk:drop-target-async}
   object gives you this ability.
@@ -159,7 +159,7 @@ lambda (target drop)    :run-last
       should be inspected via the \"notify::value\" signal and then call the
       @fun{gtk:drop-target-reject} function.
       @begin[code]{table}
-        @entry[target]{The @sym{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drag-target} object.}
         @entry[drop]{The @class{gdk:drop} object.}
         @entry[Returns]{@em{True} if @arg{drop} is accepted.}
       @end{table}
@@ -175,7 +175,7 @@ lambda (target value x y)    :run-last
       handler is responsible for reading the given @arg{value} and performing
       the drop operation.
       @begin[code]{table}
-        @entry[target]{The @sym{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drag-target} object.}
         @entry[value]{The @symbol{g:value} instance being dropped.}
         @entry[x]{A double float with the x coordinate of the current pointer
           position.}
@@ -191,7 +191,7 @@ lambda (target x y)    :run-last
       The signal is emitted on the drop site when the pointer enters the widget.
       It can be used to set up custom highlighting.
       @begin[code]{table}
-        @entry[target]{The @sym{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drag-target} object.}
         @entry[x]{A double float with the x coordinate of the current pointer
           position.}
         @entry[y]{A double float with the x coordinate of the current pointer
@@ -207,7 +207,7 @@ lambda (target)    :run-last
       The signal is emitted on the drop site when the pointer leaves the widget.
       Its main purpose is to undo things done in \"enter\" signal handler.
       @begin[code]{table}
-        @entry[target]{The @sym{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drag-target} object.}
       @end{table}
       @subheading{The \"motion\" signal}
       @begin{pre}
@@ -215,7 +215,7 @@ lambda (target x y)    :run-last
       @end{pre}
       The signal is emitted while the pointer is moving over the drop target.
       @begin[code]{table}
-        @entry[target]{The @sym{gtk:drag-target} object.}
+        @entry[target]{The @class{gtk:drag-target} object.}
         @entry[x]{A double float with the x coordinate of the current pointer
           position.}
         @entry[y]{A double float with the x coordinate of the current pointer
@@ -252,7 +252,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-actions)
       "Accessor"
       (documentation 'drop-target-actions 'function)
- "@version{#2023-7-31}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:drop-target-actions object) => actions}
   @syntax[]{(setf (gtk:drop-target-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target} object}
@@ -261,9 +261,8 @@ lambda (target x y)    :run-last
     Accessor of the @slot[gtk:drop-target]{actions} slot of the
     @class{gtk:drop-target} class.
   @end{short}
-  The @sym{gtk:drop-target-actions} function gets the actions that this drop
-  target supports. The @sym{(setf gtk:drop-target-actions)} function sets the
-  actions.
+  The @fun{gtk:drop-target-actions} function gets the actions that this drop
+  target supports. The @setf{gtk:drop-target-actions} function sets the actions.
   @see-class{gtk:drop-target}
   @see-symbol{gdk:drag-action}")
 
@@ -278,7 +277,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-current-drop)
       "Accessor"
       (documentation 'drop-target-current-drop 'function)
- "@version{#2023-7-31}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:drop-target-current-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object with the current drop}
@@ -286,7 +285,7 @@ lambda (target x y)    :run-last
     Accessor of the @slot[gtk:drop-target]{current-drop} slot of the
     @class{gtk:drop-target} class.
   @end{short}
-  The @sym{gtk:drop-target-current-drop} function gets the currently handled
+  The @fun{gtk:drop-target-current-drop} function gets the currently handled
   drop operation. If no drop operation is going on, @code{nil} is returned.
 
   Since 4.4
@@ -304,7 +303,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-drop)
       "Accessor"
       (documentation 'drop-target-drop 'function)
- "@version{#2023-7-31}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:drop-target-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object with the current drop}
@@ -312,7 +311,7 @@ lambda (target x y)    :run-last
     Accessor of the @slot[gtk:drop-target]{drop} slot of the
     @class{gtk:drop-target} class.
   @end{short}
-  The @sym{gtk:drop-target-drop} function gets the currently handled drop
+  The @fun{gtk:drop-target-drop} function gets the currently handled drop
   operation.
 
   Deprecated 4.4
@@ -330,7 +329,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-formats)
       "Accessor"
       (documentation 'drop-target-formats 'function)
- "@version{#2023-7-31}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:drop-target-formats object) => formats}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[formats]{a @class{gdk:content-formats} instance with the
@@ -339,7 +338,7 @@ lambda (target x y)    :run-last
     Accessor of the @slot[gtk:drop-target]{formats} slot of the
     @class{gtk:drop-target} class.
   @end{short}
-  The @sym{gtk:drop-target-formats} function gets the data formats that this
+  The @fun{gtk:drop-target-formats} function gets the data formats that this
   drop target accepts. If the result is @code{nil}, all formats are expected to
   be supported.
   @see-class{gtk:drop-target}
@@ -367,7 +366,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-preload)
       "Accessor"
       (documentation 'drop-target-preload 'function)
- "@version{#2023-7-31}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:drop-target-preload object) => preload}
   @syntax[]{(setf (gtk:drop-target-preload object) preload)}
   @argument[object]{a @class{gtk:drop-target} object}
@@ -376,9 +375,9 @@ lambda (target x y)    :run-last
     Accessor of the @slot[gtk:drop-target]{preload} slot of the
     @class{gtk:drop-target} class.
   @end{short}
-  The @sym{gtk:drop-target-preload} function gets the value of the
+  The @fun{gtk:drop-target-preload} function gets the value of the
   @slot[gtk:drop-target]{preload} property. The
-  @sym{(setf gtk:drop-target-preload)} function sets the property.
+  @setf{gtk:drop-target-preload} function sets the property.
   @see-class{gtk:drop-target}")
 
 ;;; --- drop-target-value ------------------------------------------------------
@@ -396,7 +395,7 @@ lambda (target x y)    :run-last
 (setf (liber:alias-for-function 'drop-target-value)
       "Accessor"
       (documentation 'drop-target-value 'function)
- "@version{#2023-7-31}
+ "@version{#2023-9-18}
   @syntax[]{(gtk:drop-target-value object) => value}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[value]{a @symbol{g:value} instance with the current drop data}
@@ -404,7 +403,7 @@ lambda (target x y)    :run-last
     Accessor of the @slot[gtk:drop-target]{value} slot of the
     @class{gtk:drop-target} class.
   @end{short}
-  The @sym{gtk:drop-target-value} function gets the value of the
+  The @fun{gtk:drop-target-value} function gets the value of the
   @slot[gtk:drop-target]{value} property.
   @see-class{gtk:drop-target}
   @see-symbol{g:value}")
@@ -415,9 +414,9 @@ lambda (target x y)    :run-last
 
 (cffi:defcfun ("gtk_drop_target_new" drop-target-new) (g:object drop-target)
  #+liber-documentation
- "@version{#2023-7-31}
+ "@version{#2023-9-16}
   @argument[gtype]{a @class{g:type-t} type with the supported type}
-  @argument[actions]{a @symbol{gdk:drag-actions} value with the supported
+  @argument[actions]{a @symbol{gdk:drag-action} value with the supported
     actions}
   @return{A new @class{gtk:drop-target} object.}
   @begin{short}
@@ -427,7 +426,7 @@ lambda (target x y)    :run-last
   @arg{gtype} and then call the @fun{gtk:drop-target-gtypes} function.
   @see-class{gtk:drop-target}
   @see-class{g:type-t}
-  @see-symbol{gdk:drag-actions}
+  @see-symbol{gdk:drag-action}
   @see-function{gtk:drop-target-gtypes}"
   (gtype g:type-t)
   (actions gdk:drag-action))
@@ -461,18 +460,17 @@ lambda (target x y)    :run-last
 
 (defun drop-target-gtypes (target)
  #+liber-documentation
- "@version{2023-7-31}
+ "@version{2023-9-18}
   @syntax[]{(gtk:drop-target-gtypes target) => gtypes}
   @syntax[]{(setf (gtk:drop-target-gtypes target) gtypes)}
   @argument[target]{a @class{gtk:drop-target} object}
   @argument[gtypes]{a list of @class{g:type-t} types}
   @begin{short}
-    The @sym{gtk:drop-target-gtypes} gets the list of supported GTypes for
-    @arg{target}.
+    The @fun{gtk:drop-target-gtypes} function gets the list of supported GTypes
+    for @arg{target}.
   @end{short}
   If no type have been set, @code{nil} will be returned. The
-  @sym{(setf gtk:drop-target)} function sets the supported GTypes for the drop
-  target.
+  @setf{gtk:drop-target} function sets the supported GTypes for the drop target.
   @see-class{gtk:drop-target}
   @see-class{g:type-t}"
   (cffi:with-foreign-object (n-gtypes :size)
