@@ -422,7 +422,7 @@
 
 (cffi:defcfun ("gtk_snapshot_transform" snapshot-transform) :void
   (snapshot (g:object snapshot))
-  (transform (g:boxed transform)))
+  (transform (g:boxed gsk:transform)))
 
 (export 'snapshot-transform)
 
@@ -491,7 +491,7 @@
   (axis (:pointer (:struct graphene:vec3-t))))
 
 (defun snapshot-rotate-3d (snapshot angle axis)
-  (%snapshot-rotate snapshot (coerce angle 'single-float) axis))
+  (%snapshot-rotate-3d snapshot (coerce angle 'single-float) axis))
 
 (export 'snapshot-rotate-3d)
 
@@ -502,7 +502,7 @@
 ;;; factors.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_snapshot_scale" snapshot-scale) :void
+(cffi:defcfun ("gtk_snapshot_scale" %snapshot-scale) :void
   (snapshot (g:object snapshot))
   (xfactor :float)
   (yfactor :float))
@@ -519,16 +519,16 @@
 ;;; Scales snapshot‘s coordinate system by the given factors.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_snapshot_scale_3d" snapshot-scale-3d) :void
+(cffi:defcfun ("gtk_snapshot_scale_3d" %snapshot-scale-3d) :void
   (snapshot (g:object snapshot))
   (xfactor :float)
   (yfactor :float)
   (zfactor :float))
 
-(defun snapshot-scale (snapshot xfactor yfactor zfactor)
-  (%snapshot-scale snapshot (coerce xfactor 'single-float)
-                            (coerce yfactor 'single-float)
-                            (coerce zfactor 'single-float)))
+(defun snapshot-scale-3d (snapshot xfactor yfactor zfactor)
+  (%snapshot-scale-3d snapshot (coerce xfactor 'single-float)
+                               (coerce yfactor 'single-float)
+                               (coerce zfactor 'single-float)))
 
 (export 'snapshot-scale-3d)
 
