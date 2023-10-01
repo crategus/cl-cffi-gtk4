@@ -2,7 +2,7 @@
 ;;; gtk4.popover.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -140,8 +140,8 @@
 (setf (documentation 'popover 'type)
  "@version{#2022-7-29}
   @begin{short}
-    A @sym{gtk:popover} widget is a bubble-like context window, primarily meant
-    to provide context-dependent information or options.
+    A @class{gtk:popover} widget is a bubble-like context window, primarily
+    meant to provide context-dependent information or options.
   @end{short}
   Popovers are attached to a parent widget. By default, they point to the whole
   widget area, although this behavior can be changed with the
@@ -152,7 +152,7 @@
   The position of a popover relative to the widget it is attached to can also
   be changed through the @fun{gtk:popover-position} function.
 
-  By default, the @sym{gtk:popover} widget performs a GTK grab, in order to
+  By default, the @class{gtk:popover} widget performs a GTK grab, in order to
   ensure input events get redirected to it while it is shown, and also so the
   popover is dismissed in the expected situations, clicks outside the popover,
   or the @kbd{Escape} key being pressed. If no such modal behavior is desired
@@ -160,7 +160,7 @@
   tweak its behavior.
 
   @subheading{GtkPopover as menu replacement}
-  The @sym{gtk:popover} widget is often used to replace menus. The best was to
+  The @class{gtk:popover} widget is often used to replace menus. The best was to
   do this is to use the @class{gtk:popover-menu} subclass which supports being
   populated from a @class{g:menu-model} object with the
   @fun{gtk:popover-menu-new-from-model} function.
@@ -218,7 +218,8 @@ lambda (popover)    :action
       The signal is a keybinding signal which gets emitted when the user
       activates the default widget of the popover.
       @begin[code]{table}
-        @entry[popover]{The @sym{gtk:popover} widget which received the signal.}
+        @entry[popover]{The @class{gtk:popover} widget which received the
+          signal.}
       @end{table}
     @subheading{The \"closed\" signal}
       @begin{pre}
@@ -227,9 +228,11 @@ lambda (popover)    :run-last
       The signal is emitted when the popover is dismissed either through API or
       user interaction.
       @begin[code]{table}
-        @entry[popover]{The @sym{gtk:popover} widget which received the signal.}
+        @entry[popover]{The @class{gtk:popover} widget which received the
+          signal.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:popover-new}
   @see-slot{gtk:popover-autohide}
   @see-slot{gtk:popover-cascade-popdown}
   @see-slot{gtk:popover-child}
@@ -238,14 +241,13 @@ lambda (popover)    :run-last
   @see-slot{gtk:popover-mnemonics-visible}
   @see-slot{gtk:popover-pointing-to}
   @see-slot{gtk:popover-position}
-  @see-constructor{gtk:popover-new}
   @see-class{gtk:popover-menu}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- popover-autohide ---------------------------------------------------
+;;; --- popover-autohide -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "autohide" 'popover) t)
@@ -266,8 +268,8 @@ lambda (popover)    :run-last
     Accessor of the @slot[gtk:popover]{autohide} slot of the @class{gtk:popover}
     class.
   @end{short}
-  The @sym{gtk:popover-autohide} function returns whether the popover is modal.
-  The @sym{(setf gtk:popover-autohide)} function sets whether popover is modal.
+  The @fun{gtk:popover-autohide} function returns whether the popover is modal.
+  The @setf{gtk:popover-autohide} function sets whether popover is modal.
 
   A modal popover will grab the keyboard focus on it when being displayed.
   Clicking outside the popover area or pressing the @kbd{Esc} key will dismiss
@@ -277,11 +279,10 @@ lambda (popover)    :run-last
   different from the current one, will cause the popup to be hidden.
   @see-class{gtk:popover}")
 
-;;; --- popover-cascade-popdown --------------------------------------------
+;;; --- popover-cascade-popdown ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "cascade-popdown"
-                                               'popover) t)
+(setf (documentation (liber:slot-documentation "cascade-popdown" 'popover) t)
  "The @code{cascade-popdown} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether the popover pops down after a child popover. @br{}
@@ -301,13 +302,13 @@ lambda (popover)    :run-last
     Accessor of the @slot[gtk:popover]{cascade-popdown} slot of the
     @class{gtk:popover} class.
   @end{short}
-  The @sym{gtk:popover-cascade-popdown} function returns whether the popover
+  The @fun{gtk:popover-cascade-popdown} function returns whether the popover
   will close after a modal child is closed. If @em{true}, the popover will be
   closed when a child modal popover is closed. If @em{false}, the popover will
   stay visible.
   @see-class{gtk:popover}")
 
-;;; --- popover-child ------------------------------------------------------
+;;; --- popover-child ----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'popover) t)
@@ -327,12 +328,12 @@ lambda (popover)    :run-last
     Accessor of the @slot[gtk:popover]{child} slot of the @class{gtk:popover}
     class.
   @end{short}
-  The @sym{gtk:popover-child} function gets the child widget of the popover.
-  The @sym{(setf gtk:popover-child)} function sets the child widget.
+  The @fun{gtk:popover-child} function gets the child widget of the popover.
+  The @setf{gtk:popover-child} function sets the child widget.
   @see-class{gtk:popover}
   @see-class{gtk:widget}")
 
-;;; --- popover-default-widget ---------------------------------------------
+;;; --- popover-default-widget -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-widget" 'popover) t)
@@ -354,16 +355,16 @@ lambda (popover)    :run-last
     Accessor of the @slot[gtk:popover]{default-widget} slot of the
     @class{gtk:popover} class.
   @end{short}
-  The @sym{gtk:popover-default-widget} function gets the default widget of the
-  popover. The @sym{(setf gtk:popover-default-widget)} function sets or unsets
-  the default widget.
+  The @fun{gtk:popover-default-widget} function gets the default widget of the
+  popover. The @setf{gtk:popover-default-widget} function sets or unsets the
+  default widget.
 
   The default widget is the widget that is activated when the user presses the
   @kbd{Enter} key in a dialog, for example.
   @see-class{gtk:popover}
   @see-class{gtk:widget}")
 
-;;; --- popover-has-arrow --------------------------------------------------
+;;; --- popover-has-arrow ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-arrow" 'popover) t)
@@ -384,17 +385,16 @@ lambda (popover)    :run-last
     Accessor of the @slot[gtk:popover]{has-arrow} slot of the
     @class{gtk:popover} class.
   @end{short}
-  The @sym{gtk:popover-has-arrow} function gets whether the popover is showing
+  The @fun{gtk:popover-has-arrow} function gets whether the popover is showing
   an arrow pointing at the widget that it is relative to. The
-  @sym{(setf gtk:popover-has-arrow)} function sets whether the popover should
-  draw an arrow.
+  @setf{gtk:popover-has-arrow} function sets whether the popover should draw an
+  arrow.
   @see-class{gtk:popover}")
 
-;;; --- popover-mnemonics-visible ------------------------------------------
+;;; --- popover-mnemonics-visible ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "mnemonics-visible"
-                                               'popover) t)
+(setf (documentation (liber:slot-documentation "mnemonics-visible" 'popover) t)
  "The @code{mnemonics-visible} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether mnemonics are currently visible in this popover. @br{}
@@ -417,7 +417,7 @@ lambda (popover)    :run-last
   Whether mnemonics are currently visible in this popover.
   @see-class{gtk:popover}")
 
-;;; --- popover-pointing-to ------------------------------------------------
+;;; --- popover-pointing-to ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pointing-to" 'popover) t)
@@ -435,17 +435,16 @@ lambda (popover)    :run-last
   @argument[object]{a @class{gtk:popover} widget}
   @argument[rect]{a @class{gdk:rectangle} instance to point to}
   @begin{short}
-    Accessor of the @slot[gtk:popover]{pointing-to} slot of the
+    Accessor of the @slot[gtk:popover]{pointing-to} slot of the 
     @class{gtk:popover} class.
   @end{short}
-  Sets the rectangle that the popover will point to, in the coordinate space of
-  the widget the popover is attached to, see the @fun{gtk:popover-relative-to}
-  function.
+  The @fun{gtk:popover-pointing-to} function gets the rectangle that the popover 
+  points to. The @setf{gtk:popover-pointing-to} function sets the rectangle that 
+  popover points to. This is in the coordinate space of the popover parent.
   @see-class{gtk:popover}
-  @see-class{gdk:rectangle}
-  @see-function{gtk:popover-relative-to}")
+  @see-class{gdk:rectangle}")
 
-;;; --- popover-position ---------------------------------------------------
+;;; --- popover-position -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "position" 'popover) t)
@@ -468,10 +467,9 @@ lambda (popover)    :run-last
     Accessor of the @slot[gtk:popover]{position} slot of the
     @class{gtk:popover} class.
   @end{short}
-  The @sym{gtk:popover-position} function returns the preferred position of the
-  popover to appear. The @sym{(setf gtk:popover-position)} function sets the
-  preferred position. If the popover is currently visible, it will be
-  immediately updated.
+  The @fun{gtk:popover-position} function returns the preferred position of the
+  popover to appear. The @setf{gtk:popover-position} function sets the preferred
+  position. If the popover is currently visible, it will be immediately updated.
 
   This preference will be respected where possible, although on lack of space,
   e.g. if close to the window edges, the @class{gtk:popover} widget may choose
@@ -558,42 +556,40 @@ lambda (popover)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf popover-offset) (value popover)
-  (destructuring-bind (x-offset y-offset) value
+  (destructuring-bind (xoffset yoffset) value
     (cffi:foreign-funcall "gtk_popover_set_offset"
                           (g:object popover) popover
-                          :int x-offset
-                          :int y-offset
+                          :int xoffset
+                          :int yoffset
                           :void)
-    (values x-offset y-offset)))
+    (values xoffset yoffset)))
 
 (cffi:defcfun ("gtk_popover_get_offset" %popover-get-offset) :void
   (popover (g:object popover))
-  (x-offset (:pointer :int))
-  (y-offset (:pointer :int)))
+  (xoffset (:pointer :int))
+  (yoffset (:pointer :int)))
 
 (defun popover-offset (popover)
  #+liber-documentation
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-offset popover) => x-offset, y-offset}
-  @syntax[]{(setf (gtk:popover-offset popover) '(x-offset y-offset))}
+  @syntax[]{(gtk:popover-offset popover) => xoffset, yoffset}
+  @syntax[]{(setf (gtk:popover-offset popover) '(xoffset yoffset))}
   @argument[popover]{a @class{gtk:popover} widget}
-  @argument[x-offset]{an integer with the x-offset}
-  @argument[y-offset]{an integer with the y-offset}
+  @argument[xoffset]{an integer with the xoffset}
+  @argument[yoffset]{an integer with the yoffset}
   @begin{short}
     Accessor of the offset values for the popover.
   @end{short}
-  The @sym{gtk:popover-offset} function gets the offset to use when calculating
-  the position of the popover. The @sym{(setf gtk:popover-offset} function sets
-  the offset.
-
-  These values are used when preparing the @class{gtk:popup-layout} object for
-  positioning the popover.
+  The @fun{gtk:popover-offset} function gets the offset to use when calculating
+  the position of the popover. The @setf{gtk:popover-offset} function sets the
+  offset. These values are used when preparing the @class{gtk:popup-layout} 
+  object for positioning the popover.
   @see-class{gtk:popover}
   @see-class{gtk:popover-layout}"
-  (cffi:with-foreign-objects ((x-offset :int) (y-offset :int))
-    (%popover-get-offset popover x-offset y-offset)
-    (values (cffi:mem-ref x-offset :int)
-            (cffi:mem-ref y-offset :int))))
+  (cffi:with-foreign-objects ((xoffset :int) (yoffset :int))
+    (%popover-get-offset popover xoffset yoffset)
+    (values (cffi:mem-ref xoffset :int)
+            (cffi:mem-ref yoffset :int))))
 
 (export 'popover-offset)
 

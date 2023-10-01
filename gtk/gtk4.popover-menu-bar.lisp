@@ -2,7 +2,7 @@
 ;;; gtk4.popover-menu-bar.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -85,10 +85,10 @@
 (setf (documentation 'popover-menu-bar 'type)
  "@version{#2023-3-12}
   @begin{short}
-    The @sym{gtk:popover-menu-bar} widget presents a horizontal bar of items
+    The @class{gtk:popover-menu-bar} widget presents a horizontal bar of items
     that pop up popover menus when clicked.
   @end{short}
-  The only way to create instances of the @sym{gtk:popover-menu-bar} widget is
+  The only way to create instances of the @class{gtk:popover-menu-bar} widget is
   from a @class{g:menu-model} object.
 
   @image[popover-menu-bar]{Figure: GtkPopoverMenuBar}
@@ -100,13 +100,13 @@ menubar
 ╰── item
     ╰── popover
     @end{pre}
-    The @sym{gtk:popover-menu-bar} implementation has a single CSS node with
+    The @class{gtk:popover-menu-bar} implementation has a single CSS node with
     name @code{menubar}, below which each item has its CSS node, and below that
     the corresponding popover. The item whose popover is currently open gets
     the @code{.active} style class.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:popover-menu-bar} implementation uses the @code{:menu-bar}
+    The @class{gtk:popover-menu-bar} implementation uses the @code{:menu-bar}
     role of the @symbol{gtk:accessible-role} enumeration. The menu items use
     the @code{:menu-item} role and the menus use the @code{:menu} role.
   @end{dictionary}
@@ -143,9 +143,9 @@ menubar
     Accessor of the @slot[gtk:popover-menu-bar]{menu-model} slot of the
     @class{gtk:popover-menu} class.
   @end{short}
-  The @sym{gtk:popover-menu-bar-menu-model} function returns the model from
+  The @fun{gtk:popover-menu-bar-menu-model} function returns the model from
   which the contents of the menu bar are taken. The
-  @sym{(setf gtk:popover-menu-bar-menu-model)} function sets a menu model.
+  @setf{gtk:popover-menu-bar-menu-model} function sets a menu model.
   @see-class{gtk:popover-menu-bar}
   @see-class{g:menu-model}")
 

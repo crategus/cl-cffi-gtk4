@@ -2,7 +2,7 @@
 ;;; gtk4.popover-menu.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -128,7 +128,7 @@
 (setf (documentation 'popover-menu 'type)
  "@version{#2022-7-29}
   @begin{short}
-    The @sym{gtk:popover-menu} class is a subclass of the @class{gtk:popover}
+    The @class{gtk:popover-menu} class is a subclass of the @class{gtk:popover}
     class that treats its children like menus and allows switching between them.
   @end{short}
   It can open submenus as traditional, nested submenus, or in a more
@@ -136,7 +136,7 @@
 
   @image[popover-menu]{Figure: GtkPopoverMenu}
 
-  The @sym{gtk:popover-menu} widget is meant to be used primarily with menu
+  The @class{gtk:popover-menu} widget is meant to be used primarily with menu
   models, using the @fun{gtk:popover-menu-new-from-model} function. If you need
   to put other widgets such as @class{gtk:spin-button} or @class{gtk:switch}
   widgets into a popover, use a plain @class{gtk:popover} widget.
@@ -214,14 +214,14 @@
   @fun{gtk:widget-class-add-binding-action} or
   @fun{gtk:shortcut-controller-add-shortcut} functions.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:popover-menu} implementation is just a subclass of the
+    The @class{gtk:popover-menu} implementation is just a subclass of the
     @class{gtk:popover} class that adds custom content to it, therefore it has
     the same CSS nodes. It is one of the cases that add a @code{.menu} style
     class to the popover's main node.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:popover-menu} implementation uses the @code{:menu} role of the
-    @symbol{gtk:accessible-role} enumeration, and its items use the
+    The @class{gtk:popover-menu} implementation uses the @code{:menu} role of
+    the @symbol{gtk:accessible-role} enumeration, and its items use the
     @code{:menu-item}, @code{:menu-item-checkbox} role or @code{menu-item-radio}
     roles, depending on the action they are connected to.
   @end{dictionary}
@@ -235,11 +235,10 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- popover-menu-menu-model --------------------------------------------
+;;; --- popover-menu-menu-model ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "menu-model"
-                                               'popover-menu) t)
+(setf (documentation (liber:slot-documentation "menu-model" 'popover-menu) t)
  "The @code{menu-model} property of type @class{g:menu-model} (Read / Write)
   @br{}
   The model from which the menu is made.")
@@ -257,14 +256,14 @@
     Accessor of the @slot[gtk:popover-menu]{menu-model} slot of the
     @class{gtk:popover-menu} class.
   @end{short}
-  The @sym{gtk:popover-menu-menu-model} function returns the menu model used to
-  populate the popover. The @sym{(setf gtk:popover-menu-menu-model)} function
-  sets the menu model. The existing contents of the popover are removed, and
-  the popover is populated with new contents according to the menu model.
+  The @fun{gtk:popover-menu-menu-model} function returns the menu model used to
+  populate the popover. The @setf{gtk:popover-menu-menu-model} function sets the
+  menu model. The existing contents of the popover are removed, and the popover
+  is populated with new contents according to the menu model.
   @see-class{gtk:popover-menu}
   @see-class{g:menu-model}")
 
-;;; --- popover-menu-visible-submenu ---------------------------------------
+;;; --- popover-menu-visible-submenu -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "visible-submenu"
@@ -301,7 +300,6 @@
   @begin{short}
     Creates a popover menu and populates it according to the menu model.
   @end{short}
-
   The created buttons are connected to actions found in the
   @class{gtk:application-window} widget to which the popover belongs -
   typically by means of being attached to a widget that is contained within
@@ -316,7 +314,7 @@
   @see-class{g:menu-model}
   @see-class{gtk:application-window}
   @see-function{gtk:popover-menu-new-from-model-full}
-  @see-function{gtk:widget-inseert-action-group}"
+  @see-function{gtk:widget-insert-action-group}"
   (if model
       (make-instance 'popover-menu
                      :menu-model model)
@@ -339,7 +337,6 @@
   @begin{short}
     Creates a popover menu and populates it according to the menu model.
   @end{short}
-
   The created buttons are connected to actions found in the action groups that
   are accessible from the parent widget. This includes the
   @class{gtk:application-window} widget to which the popover menu belongs.
