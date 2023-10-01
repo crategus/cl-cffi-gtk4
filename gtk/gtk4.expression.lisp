@@ -376,11 +376,15 @@ case PROP_EXPRESSION:
   @see-class{gtk:expression}
   @see-symbol{g:value}
   @see-function{gtk:expression-value-type}"
-  (assert (g:type-is-object (g:type-from-instance this)))
-  (let ((this (gobject:object-pointer this)))
-    (cffi:with-foreign-object (value '(:struct g:value))
-      (when (%expression-evaluate expression this value)
-        (gobject:parse-g-value value)))))
+  (cffi:with-foreign-object (value '(:struct g:value))
+    (if this
+        (progn
+          (assert (g:type-is-object (g:type-from-instance this)))
+          (let ((this (gobject:object-pointer this)))
+            (when (%expression-evaluate expression this value)
+              (gobject:parse-g-value value))))
+        (when (%expression-evaluate expression (cffi:null-pointer) value)
+          (gobject:parse-g-value value)))))
 
 (export 'expression-evaluate)
 
