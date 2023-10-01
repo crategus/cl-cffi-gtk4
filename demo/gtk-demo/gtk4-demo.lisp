@@ -352,6 +352,11 @@
        "DO-ENTRY-COMPLETION"
        "gtk4-example"
        "entry-completion.lisp")
+      ("Password Entry"
+       ":window"
+       "DO-PASSWORD-ENTRY"
+       "gtk4-example"
+       "password-entry.lisp")
       ("Scale Widgets"
        ":window"
        "DO-SCALE-WIDGET"

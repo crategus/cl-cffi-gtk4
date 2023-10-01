@@ -46,7 +46,7 @@
 
            ;; List-based widgets
            #:do-list-view-applauncher
-;          #:do-grid-view-clocks
+           #:do-grid-view-clocks
            #:do-drop-down
 
            ;; Media Support
@@ -66,6 +66,7 @@
            #:do-entry
            #:do-entry-buffer
            #:do-entry-completion
+           #:do-password-entry
            #:do-scale-widget
            #:do-spin-button
            #:do-search-bar

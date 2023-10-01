@@ -43,7 +43,7 @@
 
                ;; List-based widgets
                (:file "list-view-applauncher")
-;              (:file "grid-view-clocks")
+               (:file "grid-view-clocks")
                (:file "drop-down")
 
                ;; Media Support
@@ -63,6 +63,7 @@
                (:file "entry")
                (:file "entry-buffer")
                (:file "entry-completion")
+               (:file "password-entry")
                (:file "scale-widget")
                (:file "spin-button")
                (:file "search-bar")
