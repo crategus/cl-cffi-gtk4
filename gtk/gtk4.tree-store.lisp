@@ -2,7 +2,7 @@
 ;;; gtk4.tree-store.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -87,11 +87,10 @@
   (:superclass g:object
    :export t
    :interfaces ("GtkBuildable"
-;                "GtkTreeDragDest"
-;                "GtkTreeDragSource"
+                "GtkTreeDragDest"
+                "GtkTreeDragSource"
                 "GtkTreeModel"
-;                "GtkTreeSortable"
-                )
+                "GtkTreeSortable")
    :type-initializer "gtk_tree_store_get_type")
   nil)
 
@@ -99,7 +98,7 @@
 (setf (documentation 'tree-store 'type)
  "@version{#2021-3-3}
   @begin{short}
-    The @sym{gtk:tree-store} object is a list model for use with a
+    The @class{gtk:tree-store} object is a list model for use with a
     @class{gtk:tree-view} widget.
   @end{short}
   It implements the @class{gtk:tree-model} interface, and consequentialy, can
@@ -107,7 +106,7 @@
   @class{gtk:tree-sortable} interface so it can be sorted by the tree view.
   Finally, it also implements the tree drag and drop interfaces.
   @begin[GtkTreeStore as GtkBuildable]{dictionary}
-    The @sym{gtk:tree-store} implementation of the @class{gtk:buildable}
+    The @class{gtk:tree-store} implementation of the @class{gtk:buildable}
     interface allows to specify the model columns with a @code{<columns>}
     element that may contain multiple @code{<column>} elements, each specifying
     one model column. The \"type\" attribute specifies the data type for
@@ -124,6 +123,11 @@
 </object>
     @end{pre}
   @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
+  @see-constructor{gtk:tree-store-new}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-sortable}")
@@ -164,6 +168,10 @@
     @begin{pre}
 (gtk:tree-store-new \"gint\" \"gchararray\" \"GdkPixbuf\")
     @end{pre}
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
   @end{dictionary}
   @see-class{g:type-t}
   @see-class{gtk:tree-store}"
@@ -211,6 +219,10 @@
   @end{short}
   It will not function after a row has been added, or a method on a
   @class{gtk:tree-model} object is called.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-model}
   @see-class{g:type-t}"
@@ -245,6 +257,10 @@
     Sets the data in the cell specified by @arg{iter} and @arg{column}.
   @end{short}
   The type of value must be convertible to the type of the column.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-set}"
@@ -300,6 +316,10 @@
     but a list of values. Therefore, it is not possible to set individual
     columns. See the @fun{gtk:tree-store-set-value} function for setting the
     value of single columns.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
   @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
@@ -364,6 +384,10 @@
     for language bindings or in case the number of columns to change is not
     known until run-time.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-function{gtk:tree-store-set}"
   (store (g:object tree-store))
   (iter (g:boxed tree-iter))
@@ -386,6 +410,10 @@
   @end{short}
   After being removed, @arg{iter} is set to the next valid row at that level, or
   invalidated if it previously pointed to the last one in the tree store.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-insert}"
@@ -421,6 +449,10 @@
   this new row. The row will be empty after this function is called. To fill in
   values, you need to call the @fun{gtk:tree-store-set} or
   @fun{gtk:tree-store-set-value} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-remove}
@@ -460,6 +492,10 @@
   The returned iterator point to this new row. The row will be empty after this
   function is called. To fill in values, you need to call the
   @fun{gtk:tree-store-set} or @fun{gtk:tree-store-set-value} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-set}
@@ -498,6 +534,10 @@
   The returned iterator point to this new row. The row will be empty after this
   function is called. To fill in values, you need to call the
   @fun{gtk:tree-store-set} or @fun{gtk:tree-store-set-value} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-set}
@@ -520,11 +560,10 @@
   @argument[position]{an integer with the position to insert the new row, or -1
     to append after existing rows}
   @argument[values]{pairs of column number and value}
-  @return{A @class{gtk:tree-iterator} iterator.}
+  @return{A @class{gtk:tree-iter} iterator.}
   @begin{short}
     Creates a new row at @arg{position}.
   @end{short}
-
   The returned iterator point to this new row. If @arg{position} is -1, or
   larger than the number of rows on the list, then the new row will be appended
   to the list. The row will be filled with the values given to this function.
@@ -539,8 +578,12 @@
   while the latter will emit \"row-inserted\", \"row-changed\" and if the tree
   store is sorted, \"rows-reordered\". Since emitting the \"rows-reordered\"
   signal repeatedly can affect the performance of the program, the
-  @sym{gtk:tree-store-insert-with-values} function should generally be preferred
+  @fun{gtk:tree-store-insert-with-values} function should generally be preferred
   when inserting rows in a sorted tree store.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-insert}
@@ -592,6 +635,10 @@
     values as two arrays, instead of varargs. This function is mainly intended
     for language bindings.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}"
   (store (g:object tree-store))
   (iter (g:boxed tree-iter))
@@ -615,7 +662,7 @@
  "@version{#2021-3-11}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[parent]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
-  @return{A @class{gtk:tree-iterator} iterator.}
+  @return{A @class{gtk:tree-iter} iterator.}
   @begin{short}
     Prepends a new row to @arg{store}.
   @end{short}
@@ -624,6 +671,10 @@
   The returned iterator point to this new row. The row will be empty after this
   function is called. To fill in values, you need to call the
   @fun{gtk:tree-store-set} or @fun{gtk:tree-store-set-value} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-set}
@@ -657,6 +708,10 @@
   The row will be empty after this function is called. To fill in values, you
   need to call the @fun{gtk:tree-store-set} or @fun{gtk:tree-store-set-value}
   functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-set}
@@ -683,6 +738,10 @@
   @end{short}
   That is, @arg{iter} is the parent, or grandparent or great-grandparent,
   of @arg{descendant}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}"
   (store (g:object tree-store))
@@ -706,6 +765,10 @@
   @end{short}
   This will be 0 for anything on the root level, 1 for anything down a level,
   etc.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}"
   (store (g:object tree-store))
@@ -722,6 +785,10 @@
  "@version{#2021-3-5}
   @argument[store]{a @class{gtk:tree-store} object}
   @short{Removes all rows from the tree store.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}"
   (store (g:object tree-store)))
 
@@ -744,6 +811,10 @@
   @end{short}
   @begin[Warning]{dictionary}
     This function is slow. Only use it for debugging and/or testing purposes.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
   @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}"
@@ -773,6 +844,10 @@
     indicated by @arg{order}.
   @end{short}
   Note that this function only works with unsorted stores.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}"
   (let ((n (length order)))
@@ -798,6 +873,10 @@
     Swaps @arg{a} and @arg{b} in the same level of @arg{store}.
   @end{short}
   Note that this function only works with unsorted stores.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}"
   (store (g:object tree-store))
@@ -822,6 +901,10 @@
   @arg{iter} and @arg{position} should be in the same level. Note that this
   function only works with unsorted stores. If @arg{position} is @code{nil},
   @arg{iter} will be moved to the end of the level.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-move-after}"
@@ -847,6 +930,10 @@
   @arg{iter} and @arg{position} should be in the same level. Note that this
   function only works with unsorted stores. If @arg{position} is @code{nil},
   @arg{iter} will be moved to the start of the level.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-store} implementation is deprecated since 4.10.
+    Use the @class{gtk:tree-list-model} object instead.
+  @end{dictionary}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-store-move-before}"

@@ -2,7 +2,7 @@
 ;;; gtk4.list-store.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -94,7 +94,7 @@
 (setf (documentation 'list-store 'type)
  "@version{#2022-9-10}
   @begin{short}
-    The @sym{gtk:list-store} object is a list model for use with a
+    The @class{gtk:list-store} object is a list model for use with a
     @class{gtk:tree-view} widget.
   @end{short}
   It implements the @class{gtk:tree-model} interface, and consequentialy, can
@@ -102,21 +102,21 @@
   @class{gtk:tree-sortable} interface so it can be sorted by the tree view.
   Finally, it also implements the tree drag and drop interfaces.
 
-  The @sym{gtk:list-store} object can accept most GObject types as a column
+  The @class{gtk:list-store} object can accept most GObject types as a column
   type, though it cannot accept all custom types. Internally, it will keep a
   copy of data passed in, such as a string or a boxed pointer. Columns that
-  accept GObjects are handled a little differently. The @sym{gtk:list-store}
+  accept GObjects are handled a little differently. The @class{gtk:list-store}
   object will keep a reference to the object instead of copying the value. As a
   result, if the object is modified, it is up to the application writer to call
-  the function @fun{gtk:tree-model-row-changed} to emit the \"row-changed\"
-  signal. This most commonly affects lists with @class{gdk-texture} objects
+  the @fun{gtk:tree-model-row-changed} function to emit the \"row-changed\"
+  signal. This most commonly affects lists with @class{gdk:texture} objects
   stored.
 
   @subheading{Performance Considerations}
-    Internally, the @sym{gtk:list-store} object was implemented with a linked
+    Internally, the @class{gtk:list-store} object was implemented with a linked
     list with a tail pointer prior to GTK 2.6. As a result, it was fast at
     data insertion and deletion, and not fast at random data access. The
-    @sym{gtk:list-store} object sets the @code{:iters-persist} flag of the
+    @class{gtk:list-store} object sets the @code{:iters-persist} flag of the
     @symbol{gtk:tree-model-flags} flags, which means that @class{gtk:tree-iter}
     iterators can be cached while the row exists. Thus, if access to a
     particular row is needed often and your code is expected to run on older
@@ -127,18 +127,19 @@
     @fun{gtk:list-store-insert-with-values} is atomic, in the sense that the
     row is being appended to the store and the values filled in in a single
     operation with regard to the @class{gtk:tree-model} interface signaling. In
-    contrast, using e.g. the functions @fun{gtk:list-store-append} and then
-    @fun{gtk:list-store-set} will first create a row, which triggers the
-    \"row-inserted\" signal on the @sym{gtk:list-store} object. The row,
-    however, is still empty, and any signal handler connecting to
-    \"row-inserted\" on this particular store should be prepared for the
+    contrast, using e.g. the @fun{gtk:list-store-append} function and then the
+    @fun{gtk:list-store-set} function will first create a row, which triggers 
+    the \"row-inserted\" signal on the @class{gtk:list-store} object. The row,
+    however, is still empty, and any signal handler connecting to the
+    \"row-inserted\" signal on this particular store should be prepared for the
     situation that the row might be empty. This is especially important if you
-    are wrapping the @sym{gtk:list-store} object inside a
-    @class{gtk:tree-model-filter} object and are using a callback function
-    @symbol{gtk:tree-model-filter-visible-func}. Using any of the non-atomic
-    operations to append rows to the @sym{gtk:list-store} object will cause the
-    callback function @symbol{gtk:tree-model-filter-visible-func} to be visited
-    with an empty row first. The function must be prepared for that.
+    are wrapping the @class{gtk:list-store} object inside a
+    @class{gtk:tree-model-filter} object and are using a 
+    @symbol{gtk:tree-model-filter-visible-func} callback function. Using any of 
+    the non-atomic operations to append rows to the @class{gtk:list-store} 
+    object will cause the @symbol{gtk:tree-model-filter-visible-func} callback 
+    function to be visited with an empty row first. The function must be 
+    prepared for that.
   @begin[Example]{dictionary}
     Creating a simple list store.
     @begin{pre}
@@ -168,7 +169,7 @@
     @end{pre}
   @end{dictionary}
   @begin[GtkListStore as GtkBuildable]{dictionary}
-    The @sym{gtk:list-store} implementation of the @class{gtk:buildable}
+    The @class{gtk:list-store} implementation of the @class{gtk:buildable}
     interface allows to specify the model columns with a @code{<columns>}
     element that may contain multiple @code{<column>} elements, each specifying
     one model column. The @code{type} attribute specifies the data type for the
@@ -208,13 +209,17 @@
    </object>
     @end{pre}
   @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-constructor{gtk:list-store-new}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-sortable}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:buildable}
-  @see-class{gdk-texture}
+  @see-class{gdk:texture}
   @see-symbol{gtk:tree-model-flags}")
 
 ;;; ----------------------------------------------------------------------------
@@ -256,6 +261,10 @@
 (make-instance 'gtk:list-store
                :column-types '(\"gint\" \"gchararray\" \"GdkPixbuf\"))
     @end{pre}
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
   @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{g:type-t}"
@@ -320,6 +329,10 @@
    ... )
     @end{pre}
   @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{g:type-t}
   @see-class{gtk:tree-model}
@@ -366,6 +379,10 @@
     value, but a list of values. Therefore, it is not possible to set the values
     of individual columns. See the @fun{gtk:list-store-set-value} function for
     setting the value of single columns.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
   @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
@@ -433,6 +450,10 @@
     Sets the data in the cell specified by @arg{iter} and @arg{column}.
   @end{short}
   The type of @arg{value} must be convertible to the type of the @arg{column}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-set}"
@@ -502,6 +523,10 @@
   @end{short}
   After being removed, @arg{iter} is set to be the next valid row, or
   invalidated if it pointed to the last row in the list store.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-insert}"
@@ -531,8 +556,12 @@
   The returned iterator will point to this new row. If @arg{position} is larger
   than the number of rows on the list, then the new row will be appended to the
   list. The row will be empty after this function is called. To fill in values,
-  you need to call the functions @fun{gtk:list-store-set} or
-  @fun{gtk:list-store-set-value}.
+  you need to call the @fun{gtk:list-store-set} or 
+  @fun{gtk:list-store-set-value} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-set}
@@ -564,7 +593,11 @@
   If @arg{sibling} is @code{nil}, then the row will be appended to the end of
   the list. The returned iterator will point to this new row. The row will be
   empty after this function is called. To fill in values, you need to call the
-  functions @fun{gtk:list-store-set} or @fun{gtk:list-store-set-value}.
+  @fun{gtk:list-store-set} or @fun{gtk:list-store-set-value} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-set}
@@ -596,8 +629,12 @@
   If @arg{sibling} is @code{nil}, then the row will be prepended to the
   beginning of the list. The returned iterator will point to this new row. The
   row will be empty after this function is called. To fill in values, you need
-  to call the functions @fun{gtk:list-store-set} or
-  @fun{gtk:list-store-set-value}.
+  to call the @fun{gtk:list-store-set} or @fun{gtk:list-store-set-value}
+  functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-set}
@@ -627,7 +664,7 @@
   larger than the number of rows in the list, then the new row will be appended
   to the list. The row will be filled with the values given to this function.
 
-  Calling the function @sym{gtk:list-store-insert-with-values} has the same
+  Calling the @fun{gtk:list-store-insert-with-values} function has the same
   effect as calling
   @begin{pre}
  (let ((iter (gtk:list-store-insert list-store position)))
@@ -638,8 +675,12 @@
   while the latter will emit \"row-inserted\", \"row-changed\" and, if the list
   store is sorted, \"rows-reordered\" signals. Since emitting the
   \"rows-reordered\" signal repeatedly can affect the performance of the
-  program, the function @sym{gtk:list-store-insert-with-values} should generally
+  program, the @fun{gtk:list-store-insert-with-values} function should generally
   be preferred when inserting rows in a sorted list store.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-insert}
@@ -730,8 +771,12 @@
     Prepends a new row to @arg{store}.
   @end{short}
   The returned iterator will point to this new row. The row will be empty after
-  this function is called. To fill in values, you need to call the functions
-  @fun{gtk:list-store-set} or @fun{gtk:list-store-set-value}.
+  this function is called. To fill in values, you need to call the
+  @fun{gtk:list-store-set} or @fun{gtk:list-store-set-value} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-set}
@@ -761,6 +806,10 @@
   The returned iterator will point to the new row. The row will be empty after
   this function is called. To fill in values, you need to call the
   @fun{gtk:list-store-set} or @fun{gtk:list-store-set-value} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-set}
@@ -780,6 +829,10 @@
  "@version{#2021-3-5}
   @argument[store]{a @class{gtk:list-store} object}
   @short{Removes all rows from the list store.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}"
   (store (g:object list-store)))
 
@@ -802,6 +855,10 @@
   @end{short}
   @begin[Warning]{dictionary}
     This function is slow. Only use it for debugging and/or testing purposes.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
   @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}"
@@ -828,6 +885,10 @@
     Reorders @arg{store} to follow the order indicated by @arg{order}.
   @end{short}
   Note that this function only works with unsorted stores.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}"
   (let ((n (length order)))
     (cffi:with-foreign-object (order-ar :int n)
@@ -852,6 +913,10 @@
     Swaps @arg{a} and @arg{b} in @arg{store}.
   @end{short}
   Note that this function only works with unsorted stores.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}"
   (store (g:object list-store))
@@ -875,6 +940,10 @@
   @end{short}
   Note that this function only works with unsorted stores. If @arg{position} is
   @code{nil}, @arg{iter} will be moved to the end of the list.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-move-after}"
@@ -899,6 +968,10 @@
   @end{short}
   Note that this function only works with unsorted stores. If @arg{position} is
   @code{nil}, @arg{iter} will be moved to the start of the list.
+  @begin[Warning]{dictionary}
+    The @class{gtk:list-store} implementation is deprecated since 4.10.
+    Use the @class{g:list-store} object instead.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-iter}
   @see-function{gtk:list-store-move-before}"
