@@ -43,6 +43,13 @@
 
 ;;;     string
 
+(test gtk-string-object-string
+  (let ((object (make-instance 'gtk:string-object)))
+    (is-false (gtk:string-object-string object))
+    (is (typep (setf object (gtk:string-object-new "abcdef"))
+               'gtk:string-object))
+    (is (string= "abcdef" (gtk:string-object-string object)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_string_object_new
@@ -54,6 +61,12 @@
     (is (typep (setf object
                      (gtk:string-object-new (cffi:null-pointer)))
                'gtk:string-object))
+    (is-false (gtk:string-object-string object))
+    (is (typep (setf object
+                     (gtk:string-object-new nil)) 'gtk:string-object))
+    (is-false (gtk:string-object-string object))
+    (is (typep (setf object
+                     (gtk:string-object-new)) 'gtk:string-object))
     (is-false (gtk:string-object-string object))))
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -96,6 +109,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 ;;;     strings                                            Since 4.10
+
+;; not readable and not writable, there is no accessor exported
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -160,4 +175,13 @@
     (is (string= "Home" (gtk:string-list-string object 2)))
     (is (string= "Subway" (gtk:string-list-string object 3)))))
 
-;;; --- 2023-9-7 ---------------------------------------------------------------
+;;; Example with a string list of external GTK symbols
+
+(test gtk-string-list-gtk-symbols
+  (let ((model (gtk:string-list-new '())))
+    (do-external-symbols (symbol (find-package "GTK"))
+      (gtk:string-list-append model (string-downcase (format nil "~a" symbol))))
+    (is (g:type-is-object (g:list-model-item-type model)))
+    (is (< 3000 (g:list-model-n-items model)))))
+
+;;; --- 2023-9-28 --------------------------------------------------------------

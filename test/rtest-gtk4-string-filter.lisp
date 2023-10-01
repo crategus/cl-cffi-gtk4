@@ -12,13 +12,13 @@
   (is (g:type-is-enum "GtkStringFilterMatchMode"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkStringFilterMatchMode")
-          (g:gtype (cffi:foreign-funcall "gtk_string_filter_match_mode_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_string_filter_match_mode_get_type"
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:string-filter-match-mode
           (glib:symbol-for-gtype "GtkStringFilterMatchMode")))
   ;; Check the names
-  (is (equal '("GTK_STRING_FILTER_MATCH_MODE_EXACT" 
+  (is (equal '("GTK_STRING_FILTER_MATCH_MODE_EXACT"
                "GTK_STRING_FILTER_MATCH_MODE_SUBSTRING"
                "GTK_STRING_FILTER_MATCH_MODE_PREFIX")
              (list-enum-item-name "GtkStringFilterMatchMode")))
@@ -31,8 +31,8 @@
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkStringFilterMatchMode"
                                      GTK-STRING-FILTER-MATCH-MODE
-                                     (:EXPORT T 
-                                      :TYPE-INITIALIZER 
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
                                       "gtk_string_filter_match_mode_get_type")
                                      (:EXACT 0)
                                      (:SUBSTRING 1)
@@ -87,24 +87,19 @@
 ;;;     match-mode
 ;;;     search
 
-(test gtk-string-filter-properties
-  (let ((filter (make-instance 'gtk:string-filter)))
-;    (is-false (gtk:string-filter-expression filter))
-    (is-true (gtk:string-filter-ignore-case filter))
-    (is-false (gtk:string-filter-search filter))
-))
-
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     gtk_string_filter_new 
+;;;     gtk_string_filter_new
 
-;;;     gtk_string_filter_get_search 
-;;;     gtk_string_filter_set_search 
-;;;     gtk_string_filter_get_expression 
-;;;     gtk_string_filter_set_expression 
-;;;     gtk_string_filter_get_ignore_case 
-;;;     gtk_string_filter_set_ignore_case 
-;;;     gtk_string_filter_get_match_mode 
-;;;     gtk_string_filter_set_match_mode 
+(test gtk-string-filter-new
+  (let* ((expression (gtk:property-expression-new "GtkStringObject"
+                                                  nil "string"))
+         (filter (gtk:string-filter-new expression)))
+    (is (cffi:pointerp (gtk:string-filter-expression filter)))
+    (is-true (gtk:string-filter-ignore-case filter))
+    (is (eq :substring (gtk:string-filter-match-mode filter)))
+    (is (string= "search" (setf (gtk:string-filter-search filter) "search")))
+    (is (string= "search" (gtk:string-filter-search filter)))
+    (is-false (gtk:expression-unref expression))))
 
-;;; --- 2023-9-3 ---------------------------------------------------------------
+;;; --- 2023-9-28 --------------------------------------------------------------

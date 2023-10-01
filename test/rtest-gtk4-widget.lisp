@@ -351,12 +351,22 @@
     (is (gdk:rgba-equal (gdk:rgba-new :red 1 :green 1 :blue 1 :alpha 1)
                         (gtk:widget-color widget)))))
 
+#-windows
 (test gtk-widget-color.2
   (let ((widget (make-instance 'gtk:window)))
     (is (gdk:rgba-equal (gdk:rgba-new :red 0.23921569
                                       :green 0.23921569
                                       :blue 0.23921569
                                       :alpha 1)
+                        (gtk:widget-color widget)))))
+
+#+windows
+(test gtk-widget-color.2
+  (let ((widget (make-instance 'gtk:window)))
+    (is (gdk:rgba-equal (gdk:rgba-new :red 0.18039216
+                                      :green 0.20392157
+                                      :blue 0.21176471
+                                      :alpha 1.0)
                         (gtk:widget-color widget)))))
 
 ;;;     gtk_widget_add_css_class

@@ -43,6 +43,20 @@
 
 ;;;     gtk_expression_evaluate
 
+(test gtk-expression-evaluate
+  (cffi:with-foreign-object (gvalue '(:struct g:value))
+    (g:value-init gvalue "gchararray")
+    (setf (g:value-string gvalue) "string")
+    (let ((expression (gtk:constant-expression-new-for-value gvalue)))
+      (is (eq (g:gtype "gchararray") (gtk:expression-value-type expression)))
+      (is (string= "string"
+                   (g:value-string (gtk:constant-expression-value expression))))
+
+      (is (string= "string" (gtk:expression-evaluate expression nil)))
+
+)))
+
+
 ;;;     gtk_expression_watch
 ;;;     gtk_expression_bind
 ;;;     gtk_expression_watch_ref
@@ -52,53 +66,58 @@
 
 ;;;     gtk_property_expression_new
 
+;; TODO: What is the correct usage of EXPRESSION?
+
 (test gtk-property-expression-new.1
-  (let ((label (gtk:label-new "label"))
-        (expression nil))
-    (is (cffi:pointerp (setf expression
-                             (gtk:property-expression-new "GtkLabel"
-                                                          nil
-                                                          "label"))))
-    (is (eq (g:gtype "gchararray")
-            (gtk:expression-value-type expression)))
-    (is (string= "label"
-                 (gtk:expression-evaluate expression label)))
-    (is-false (gtk:expression-unref expression))))
+  (cffi:with-foreign-object (expression 'gtk:expression)
+    (let ((label (gtk:label-new "label")))
+      (setf expression
+            (gtk:property-expression-new "GtkLabel" nil "label"))
+      (is (eq (g:gtype "gchararray")
+              (gtk:expression-value-type expression)))
+      (is (string= "label"
+                   (gtk:expression-evaluate expression label)))
+      (is-false (gtk:expression-unref expression)))))
+
+;; TODO: What is the correct usage of EXPRESSION?
 
 (test gtk-property-expression-new.2
-  (let ((label (gtk:label-new "label"))
-        (expression nil))
-    (is (cffi:pointerp (setf expression
-                             (gtk:property-expression-new "GtkLabel"
-                                                          nil
-                                                          "justify"))))
-    (is (eq (g:gtype "GtkJustification")
-            (gtk:expression-value-type expression)))
-    (is (eq :left
-            (gtk:expression-evaluate expression label)))
-    (is-false (gtk:expression-unref expression))))
+  (cffi:with-foreign-object (expression 'gtk:expression)
+    (let ((label (gtk:label-new "label")))
+      (setf expression
+            (gtk:property-expression-new "GtkLabel" nil "justify"))
+      (is (eq (g:gtype "GtkJustification")
+              (gtk:expression-value-type expression)))
+      (is (eq :left
+              (gtk:expression-evaluate expression label)))
+      (is-false (gtk:expression-unref expression)))))
+
+;; TODO: What is wrong with this example and the implementation!?
 
 #+nil
 (test gtk-property-expression-new.3
-  (let ((button (gtk:button-new-with-label "button"))
-        (expression1 nil)
-        (expression2 nil))
+  (cffi:with-foreign-objects ((expression1 'gtk:expression)
+                              (expression2 'gtk:expression))
 
-    (setf expression1
-          (gtk:property-expression-new "GtkButton"
-                                       nil
-                                       "child"))
-    (is-false (gtk:expression-value-type expression1))
+    (let ((button (gtk:button-new-with-label "button")))
 
-    (setf expression2
-          (gtk:property-expression-new "GtkLabel"
-                                       expression1
-                                       "label"))
-    (is-false (gtk:expression-value-type expression2))
+      (setf expression1
+            (gtk:property-expression-new "GtkButton" nil "child"))
+      (setf expression2
+            (gtk:property-expression-new "GtkLabel" expression1 "label"))
 
-    (is-false (gtk:expression-evaluate expression1 button))
+      (is (eq (g:gtype "GtkWidget") (gtk:expression-value-type expression1)))
+      (is (eq (g:gtype "gchararray") (gtk:expression-value-type expression2)))
 
-))
+;      (is-false (gtk:expression-evaluate expression1 nil))
+;      (is-false (gtk:expression-evaluate expression2 nil))
+
+      ;; FIXME: We get the :LEFT value. Why?!
+;      (is-false (gtk:expression-evaluate expression1 button))
+      (is (eq :left (gtk:expression-evaluate expression2 button)))
+;
+;      (is-false (gtk:expression-unref expression2))
+    )))
 
 ;;;     gtk_property_expression_new_for_pspec
 ;;;     gtk_property_expression_get_expression
@@ -139,8 +158,7 @@
     (let ((expression (gtk:constant-expression-new-for-value gvalue1)))
       (setf (gtk:value-expression gvalue2) expression)
       (is (eq (g:gtype "gchararray")
-              (gtk:expression-value-type (gtk:value-expression gvalue2))))
-)))
+              (gtk:expression-value-type (gtk:value-expression gvalue2)))))))
 
 ;;;     gtk_value_take_expression
 
@@ -148,4 +166,4 @@
 
 ;;;     gtk_param_spec_expression
 
-;;; --- 2023-9-15 --------------------------------------------------------------
+;;; --- 2023-9-27 --------------------------------------------------------------

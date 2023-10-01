@@ -75,7 +75,7 @@
 
 ;;;     gtk_filter_list_model_new
 
-(test gtk-filter-list-model-new
+(test gtk-filter-list-model-new.1
   (let* ((store (g:list-store-new "GtkWidget"))
          (model (gtk:filter-list-model-new store nil)))
     ;; The list store
@@ -90,4 +90,34 @@
     (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
     (is (= 0 (gtk:filter-list-model-n-items model)))))
 
-;;; --- 2023-8-19 --------------------------------------------------------------
+(test gtk-filter-list-model-new.2
+  (let* ((store (gtk:string-list-new '()))
+         (expression (gtk:property-expression-new "GtkStringObject"
+                                                  nil "string"))
+         (filter (gtk:string-filter-new expression))
+         (model (gtk:filter-list-model-new store filter)))
+    ;; Fill the string list with strings
+    (do-external-symbols (symbol (find-package "GTK"))
+      (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
+
+    (is (eq (g:gtype "GObject") (g:list-model-item-type store)))
+    (is (< 3000 (g:list-model-n-items store)))
+
+    (is (eq (g:gtype "GObject") (g:list-model-item-type model)))
+    (is (< 3000 (g:list-model-n-items model)))
+
+    (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
+    (is (< 3000 (gtk:filter-list-model-n-items model)))
+
+    (setf (gtk:string-filter-search filter) "string-filter")
+
+    (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
+    (is (= 6 (gtk:filter-list-model-n-items model)))
+    (is (equal '("string-filter-match-mode" "string-filter-new" "string-filter"
+                 "string-filter-ignore-case" "string-filter-search"
+                 "string-filter-expression")
+               (iter (for i from 0 below (gtk:filter-list-model-n-items model))
+                     (for object = (g:list-model-object model i))
+                     (collect (gtk:string-object-string object)))))))
+
+;;; --- 2023-9-28 --------------------------------------------------------------
