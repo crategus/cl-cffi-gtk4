@@ -2,7 +2,7 @@
 ;;; gtk4.cell-renderer-progress.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -94,17 +94,23 @@
 (setf (documentation 'cell-renderer-progress 'type)
  "@version{#2020-6-14}
   @begin{short}
-    The @sym{gtk:cell-renderer-progress} class renders a numeric value as a
+    The @class{gtk:cell-renderer-progress} object renders a numeric value as a
     progress par in a cell.
   @end{short}
   Additionally, it can display a text on top of the progress bar.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-progress} implementation is deprecated since
+    4.10. List views use widgets to display their contents. You should use the
+    @class{gtk:progress-bar} widget instead.
+  @end{dictionary}
+  @see-constructor{gtk:cell-renderer-progress-new}
   @see-slot{gtk:cell-renderer-progress-inverted}
   @see-slot{gtk:cell-renderer-progress-pulse}
   @see-slot{gtk:cell-renderer-progress-text}
   @see-slot{gtk:cell-renderer-progress-text-xalign}
   @see-slot{gtk:cell-renderer-progress-text-yalign}
   @see-slot{gtk:cell-renderer-progress-value}
-  @see-constructor{gtk:cell-renderer-progress-new}")
+  @see-class{gtk:cell-renderer}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -133,8 +139,10 @@
     Accessor of the @slot[gtk:cell-renderer-progress]{inverted} slot of the
     @class{gtk:cell-renderer-progress} class.
   @end{short}
-
-  Invert the direction in which the progress bar grows.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-progress} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-progress}")
 
 ;;; --- cell-renderer-progress-pulse -------------------------------------------
@@ -165,14 +173,16 @@
     Accessor of the @slot[gtk:cell-renderer-progress]{pulse} slot of the
     @class{gtk:cell-renderer-progress} class.
   @end{short}
-
   Setting this to a non-negative value causes the cell renderer to enter
   \"activity mode\", where a block bounces back and forth to indicate that some
   progress is made, without specifying exactly how much. Each increment of the
   property causes the block to move by a little bit. To indicate that the
   activity has not started yet, set the property to zero. To indicate
   completion, set the property to @code{G_MAXINT}.
-
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-progress} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-progress}")
 
 ;;; --- cell-renderer-progress-text --------------------------------------------
@@ -200,10 +210,13 @@
     Accessor of the @slot[gtk:cell-renderer-progress]{text} slot of the
     @class{gtk:cell-renderer-progress} class.
   @end{short}
-
   Determines the label which will be drawn over the progress bar. Setting this
   property to @code{nil} causes the default label to be displayed. Setting this
   property to an empty string causes no label to be displayed.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-progress} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-progress}")
 
 ;;; --- cell-renderer-progress-text-xalign -------------------------------------
@@ -225,14 +238,17 @@
   @syntax[]{(gtk:cell-renderer-progress-text-xalign object) => align}
   @syntax[]{(setf (gtk:cell-renderer-progress-text-xalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
-  @argument[align]{a @code{:float} which controls the horizontal alignment}
+  @argument[align]{a single float which controls the horizontal alignment}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-progress]{text-xalign} slot of the
     @class{gtk:cell-renderer-progress} class.
   @end{short}
-
   Controls the horizontal alignment of the text in the progress bar. Valid
   values range from 0 (left) to 1 (right). Reserved for RTL layouts.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-progress} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-progress}")
 
 ;;; --- cell-renderer-progress-text-yalign -------------------------------------
@@ -254,14 +270,17 @@
   @syntax[]{(gtk:cell-renderer-progress-text-yalign object) => align}
   @syntax[]{(setf (gtk:cell-renderer-progress-text-yalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
-  @argument[align]{a @code{:float} which controls the vertical alignment}
+  @argument[align]{a single float which controls the vertical alignment}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-progress]{text-yalign} slot of the
     @class{gtk:cell-renderer-progress} class.
   @end{short}
-
   Controls the vertical alignment of the text in the progress bar. Valid values
   range from 0 (top) to 1 (bottom).
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-progress} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-progress}")
 
 ;;; --- cell-renderer-progress-value -------------------------------------------
@@ -289,8 +308,11 @@
     Accessor of the @slot[gtk:cell-renderer-progress]{value} slot of the
     @class{gtk:cell-renderer-progress} class.
   @end{short}
-
   Determines the percentage to which the progress bar will be \"filled in\".
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-progress} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-progress}")
 
 ;;; ----------------------------------------------------------------------------
@@ -306,6 +328,10 @@
   @begin{short}
     Creates a new cell renderer progress object.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-progress} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-progress}"
   (make-instance 'cell-renderer-progress))
 

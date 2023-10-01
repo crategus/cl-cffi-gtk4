@@ -2,7 +2,7 @@
 ;;; gtk4.cell-renderer-toggle.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -95,28 +95,36 @@
 (setf (documentation 'cell-renderer-toggle 'type)
  "@version{#2020-6-13}
   @begin{short}
-    @sym{gtk:cell-renderer-toggle} renders a toggle button in a cell.
+    The @class{gtk:cell-renderer-toggle} object renders a toggle button in a
+    cell.
   @end{short}
   The button is drawn as a radio button or a check button, depending on the
-  @code{radio} property. When activated, it emits the \"toggled\" signal.
+  @slot[gtk:cell-renderer-toggle]{radio} property. When activated, it emits the
+  \"toggled\" signal.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10. List
+    views use widgets to display their contents. You should use the
+    @class{gtk:toggle-button} widget instead.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"toggled\" signal}
       @begin{pre}
-lambda (cell-renderer path)    :run-last
+lambda (renderer path)    :run-last
       @end{pre}
-      The \"toggled\" signal is emitted when the cell is toggled.
+      The signal is emitted when the cell is toggled.
       @begin[code]{table}
-        @entry[cell-renderer]{The @sym{gtk:cell-renderer-toggle} object which
+        @entry[renderer]{The @class{gtk:cell-renderer-toggle} object which
           received the signal.}
-        @entry[path]{String representation of the @class{gtk:tree-path}
-          structure describing the event location.}
+        @entry[path]{String representation of the @class{gtk:tree-path} instance
+          describing the event location.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:cell-renderer-toggle-new}
   @see-slot{gtk:cell-renderer-toggle-activatable}
   @see-slot{gtk:cell-renderer-toggle-active}
   @see-slot{gtk:cell-renderer-toggle-inconsistent}
   @see-slot{gtk:cell-renderer-toggle-radio}
-  @see-constructor{gtk:cell-renderer-toggle-new}")
+  @see-class{gtk:cell-renderer}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -144,11 +152,13 @@ lambda (cell-renderer path)    :run-last
     Accessor of the @slot[gtk:cell-renderer-toggle]{activatable} slot of the
     @class{gtk:cell-renderer-toggle} class.
   @end{short}
-
-  The slot access function @sym{gtk:cell-renderer-toggle-activatable} returns
-  whether the cell renderer is activatable. The slot access function
-  @sym{(setf gtk:cell-renderer-toggle-activatable)} makes the cell renderer
-  activatable.
+  The @fun{gtk:cell-renderer-toggle-activatable} function returns whether the
+  cell renderer is activatable. The @setf{gtk:cell-renderer-toggle-activatable}
+  function makes the cell renderer activatable.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-toggle}")
 
 ;;; --- cell-renderer-toggle-active --------------------------------------------
@@ -173,11 +183,13 @@ lambda (cell-renderer path)    :run-last
     Accessor of the @slot[gtk:cell-renderer-toggle]{active} slot of the
     @class{gtk:cell-renderer-toggle} class.
   @end{short}
-
-  The slot access function @sym{gtk:cell-renderer-toggle-active} returns
-  whether the cell renderer is active. The slot access function
-  @sym{(setf gtk:cell-renderer-toggle-active)} activates or deactivates a cell
-  renderer.
+  The @fun{gtk:cell-renderer-toggle-active} function returns whether the cell
+  renderer is active. The @setf{gtk:cell-renderer-toggle-active} function
+  activates or deactivates a cell renderer.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-toggle}")
 
 ;;; --- cell-renderer-toggle-inconsistent --------------------------------------
@@ -202,15 +214,17 @@ lambda (cell-renderer path)    :run-last
     Accessor of the @slot[gtk:cell-renderer-toggle]{inconsistent} slot of the
     @class{gtk:cell-renderer-toggle} class.
   @end{short}
-
   The inconsistent state of the button.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-toggle}")
 
 ;;; --- cell-renderer-toggle-radio ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "radio"
-                                               'cell-renderer-toggle) t)
+(setf (documentation (liber:slot-documentation "radio" 'cell-renderer-toggle) t)
  "The @code{radio} property of type @code{:boolean} (Read / Write) @br{}
   Draw the toggle button as a radio button. @br{}
   Default value: @em{false}")
@@ -228,15 +242,18 @@ lambda (cell-renderer path)    :run-last
     Accessor of the @slot[gtk:cell-renderer-toggle]{radio} slot of the
     @class{gtk:cell-renderer-toggle} class.
   @end{short}
-
   If @arg{radio} is @em{true}, the cell renderer renders a radio toggle, i.e.
   a toggle in a group of mutually-exclusive toggles. If @em{false}, it renders
   a check toggle, a standalone boolean option.
 
   This can be set globally for the cell renderer, or changed just before
-  rendering each cell in the model, for @class{gtk:tree-view}, you set up a
-  per-row setting using @class{gtk:tree-view-column} to associate model columns
-  with cell renderer properties.
+  rendering each cell in the model, for the @class{gtk:tree-view} widget, you
+  set up a per-row setting using @class{gtk:tree-view-column} object to
+  associate model columns with cell renderer properties.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-toggle}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-view-column}")
@@ -255,12 +272,16 @@ lambda (cell-renderer path)    :run-last
     Creates a new cell renderer toggle.
   @end{short}
   Adjust rendering parameters using object properties. Object properties can
-  be set globally, with the function @fun{g:object-property}. Also, with
-  @class{gtk:tree-view-column}, you can bind a property to a value in a
-  @class{gtk:tree-model}. For example, you can bind the
+  be set globally, with the @fun{g:object-property} function. Also, with the
+  @class{gtk:tree-view-column} object, you can bind a property to a value in a
+  @class{gtk:tree-model} object. For example, you can bind the
   @slot[gtk:cell-renderer-toggle]{active} property on the cell renderer to
   a boolean value in the model, thus causing the check button to reflect the
   state of the model.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-toggle} object is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-toggle}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:tree-model}

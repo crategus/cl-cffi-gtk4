@@ -2,7 +2,7 @@
 ;;; gtk4.cell-area.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -145,7 +145,7 @@
 (setf (documentation 'cell-area 'type)
  "@version{2023-5-13}
   @begin{short}
-    The @sym{gtk:cell-area} class is an abstract class for
+    The @class{gtk:cell-area} class is an abstract class for
     @class{gtk:cell-layout} widgets, also referred to as \"layouting widgets\",
     to interface with an arbitrary number of @class{gtk:cell-renderer} objects
     and interact with the user for a given @class{gtk:tree-model} row.
@@ -154,13 +154,13 @@
   The cell area handles events, focus navigation, drawing and size requests
   and allocations for a given row of data.
 
-  Usually users do not have to interact with the @sym{gtk:cell-area} object
+  Usually users do not have to interact with the @class{gtk:cell-area} object
   directly unless they are implementing a cell-layouting widget themselves.
 
   @subheading{Requesting area sizes}
   As outlined in the @class{gtk:widget} geometry management section, GTK uses a
   height-for-width geometry management system to compute the sizes of widgets
-  and user interfaces. The @sym{gtk:cell-area} object uses the same semantics
+  and user interfaces. The @class{gtk:cell-area} object uses the same semantics
   to calculate the size of an area for an arbitrary number of
   @class{gtk:tree-model} rows.
 
@@ -174,13 +174,13 @@
   It is also important for areas to maintain some cell alignments with areas
   rendered for adjacent rows, cells can appear \"columnized\" inside an area
   even when the size of cells are different in each row. For this reason the
-  @sym{gtk:cell-area} object uses a @class{gtk:cell-area-context} object to
+  @class{gtk:cell-area} object uses a @class{gtk:cell-area-context} object to
   store the alignments and sizes along the way, as well as the overall largest
   minimum and natural size for all the rows which have been calculated with the
   said context.
 
   The @class{gtk:cell-area-context} object is an opaque object specific to the
-  @sym{gtk:cell-area} object which created it, see the
+  @class{gtk:cell-area} object which created it, see the
   @fun{gtk:cell-area-create-context} function. The owning cell-layouting widget
   can create as many contexts as it wishes to calculate sizes of rows which
   should receive the same size in at least one orientation, horizontally or
@@ -254,7 +254,7 @@ foo_get_preferred_width (GtkWidget       *widget,
   store the data, actually, it does not know how much space the layouting widget
   plans to allocate it for every row. It is up to the layouting widget to render
   each row of data with the appropriate height and width which was requested by
-  the @sym{gtk:cell-area} object.
+  the @class{gtk:cell-area} object.
 
   In order to request the height for width of all the rows at the root level
   of a @class{gtk:tree-model} object one would do the following:
@@ -347,15 +347,15 @@ while (valid)
   @subheading{Handling Events and Driving Keyboard Focus}
   Passing events to the area is as simple as handling events on any normal
   widget and then passing them to the the @fun{gtk:cell-area-event} function
-  API as they come in. Usually the @sym{gtk:cell-area} object is only interested
-  in button events, however some customized derived areas can be implemented who
-  are interested in handling other events. Handling an event can trigger the
-  \"focus-changed\" signal to fire. As well as \"add-editable\" in the case
-  that an editable cell was clicked and needs to start editing. You can call
-  the @fun{gtk:cell-area-stop-editing} function at any time to cancel any cell
-  editing that is currently in progress.
+  API as they come in. Usually the @class{gtk:cell-area} object is only
+  interested in button events, however some customized derived areas can be
+  implemented who are interested in handling other events. Handling an event can
+  trigger the \"focus-changed\" signal to fire. As well as \"add-editable\" in
+  the case that an editable cell was clicked and needs to start editing. You can
+  call the @fun{gtk:cell-area-stop-editing} function at any time to cancel any
+  cell editing that is currently in progress.
 
-  The @sym{gtk:cell-area} object drives keyboard focus from cell to cell in a
+  The @class{gtk:cell-area} object drives keyboard focus from cell to cell in a
   way similar to @class{gtk:widget} object. For layouting widgets that support
   giving focus to cells it is important to remember to pass the
   @code{GTK_CELL_RENDERER_FOCUSED} value to the area functions for the row that
@@ -365,7 +365,7 @@ while (valid)
   @code{focus()} virtual method. The layouting widget is always responsible
   for knowing where @class{gtk:tree-model} rows are rendered inside the
   widget, so at @code{focus()} time the layouting widget should use the
-  @sym{gtk:cell-area} methods to navigate focus inside the area and then
+  @class{gtk:cell-area} methods to navigate focus inside the area and then
   observe the @symbol{gtk:direction-type} value to pass the focus to adjacent
   rows and areas.
 
@@ -438,7 +438,7 @@ foo_focus (GtkWidget       *widget,
   @symbol{gtk:direction-type} values to the way it lays out its cells.
 
   @subheading{Cell Properties}
-  The @sym{gtk:cell-area} class introduces cell properties for
+  The @class{gtk:cell-area} class introduces cell properties for
   @class{gtk:cell-renderer} objects. This provides some general interfaces for
   defining the relationship cell areas have with their cells. For instance in a
   @class{gtk:cell-area-box} object a cell might \"expand\" and receive extra
@@ -455,6 +455,10 @@ foo_focus (GtkWidget       *widget,
   To set or get the value of a cell property, use the
   @fun{gtk:cell-area-cell-property}, @fun{gtk:cell-area-cell-get}, and
   @fun{gtk:cell-area-cell-set} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"add-editable\" signal}
       @begin{pre}
@@ -464,7 +468,7 @@ lambda (area renderer editable cell-area path)    :run-first
       @arg{editable} should be added to the owning cell-layouting widget at
       @arg{cell-area}.
       @begin[code]{table}
-        @entry[area]{The @sym{gtk:cell-area} object where editing started.}
+        @entry[area]{The @class{gtk:cell-area} object where editing started.}
         @entry[renderer]{The @class{gtk:cell-renderer} object that started the
           edited.}
         @entry[editable]{The @class{gtk:cell-editable} widget to add.}
@@ -481,7 +485,8 @@ lambda (area model iter is-expander is-expanded)    :run-first
       The signal is emitted whenever applying attributes to the cell area from
       the model.
       @begin[code]{table}
-        @entry[area]{The @sym{gtk:cell-area} object to apply the attributes to.}
+        @entry[area]{The @class{gtk:cell-area} object to apply the attributes
+          to.}
         @entry[model]{The @class{gtk:tree-model} object to apply the attributes
           from.}
         @entry[iter]{The @class{gtk:tree-iter} instance indicating which row to
@@ -500,7 +505,7 @@ lambda (area renderer path)    :run-first
       change, this is because focus may change to the same renderer in the same
       cell area for a different row of data.
       @begin[code]{table}
-        @entry[area]{The @sym{gtk:cell-area} object where focus changed.}
+        @entry[area]{The @class{gtk:cell-area} object where focus changed.}
         @entry[renderer]{The @class{gtk:cell-renderer} object that has focus.}
         @entry[path]{The current @class{gtk:tree-path} string set for area.}
       @end{table}
@@ -511,7 +516,7 @@ lambda (area renderer editable)    :run-first
       Indicates that editing finished on @arg{renderer} and that @arg{editable}
       should be removed from the owning cell-layouting widget.
       @begin[code]{table}
-        @entry[area]{The @sym{gtk:cell-area} object where editing finished.}
+        @entry[area]{The @class{gtk:cell-area} object where editing finished.}
         @entry[renderer]{The @class{gtk:cell-renderer} object that finished
           editeding.}
         @entry[editable]{The @class{gtk:cell-editable} widget to remove.}
@@ -547,8 +552,12 @@ lambda (area renderer editable)    :run-first
     Accessor of the @slot[gtk:cell-area]{edit-widget} slot of the
     @class{gtk:cell-area} class.
   @end{short}
-  The @sym{gtk:cell-area-edit-widget} function gets the widget currently used
+  The @fun{gtk:cell-area-edit-widget} function gets the widget currently used
   to edit the currently edited cell.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-editable}")
 
@@ -573,8 +582,12 @@ lambda (area renderer editable)    :run-first
     Accessor of the @slot[gtk:cell-area]{edited-cell} slot of the
     @class{gtk:cell-area} class.
   @end{short}
-  The @sym{gtk:cell-area-edited-cell} function gets the
+  The @fun{gtk:cell-area-edited-cell} function gets the
   @class{gtk:cell-renderer} object in the area that is currently being edited.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}")
 
@@ -599,14 +612,18 @@ lambda (area renderer editable)    :run-first
     Accessor of the @slot[gtk:cell-area]{focus-cell} slot of the
     @class{gtk:cell-area} class.
   @end{short}
-  The @sym{gtk:cell-area-focus-cell} function retrieves the currently focused
-  cell for the area. The @sym{(setf gtk:cell-area-focus-cell)} function
-  explicitly sets the currently focused cell to @arg{renderer}.
+  The @fun{gtk:cell-area-focus-cell} function retrieves the currently focused
+  cell for the area. The @setf{gtk:cell-area-focus-cell} function explicitly
+  sets the currently focused cell to @arg{renderer}.
 
   This is generally called by implementations of the
   @code{GtkCellAreaClass.focus()} or @code{GtkCellAreaClass.event()} functions,
   however it can also be used to implement functions such as the
   @fun{gtk:tree-view-set-cursor-on-cell} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:tree-view-set-cursor-on-cell}")
@@ -644,6 +661,10 @@ lambda (area renderer editable)    :run-first
     Adds a cell renderer to the cell area with the default child cell
     properties.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (area (g:object cell-area))
@@ -661,6 +682,10 @@ lambda (area renderer editable)    :run-first
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to remove from area}
   @short{Removes a cell renderer from the cell area.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (area (g:object cell-area))
@@ -679,6 +704,10 @@ lambda (area renderer editable)    :run-first
   @argument[renderer]{a @class{gtk:cell-renderer} object to check}
   @return{@em{True} if @arg{renderer} is in the @arg{area}.}
   @short{Checks if the cell area contains @arg{renderer}.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (area (g:object cell-area))
@@ -736,6 +765,10 @@ lambda (renderer)
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[func]{a @symbol{gtk:cell-callback} callback function to call}
   @short{Calls a callback function for every cell renderer in the cell area.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-symbol{gtk:cell-callback}"
   (glib:with-stable-pointer (ptr func)
@@ -817,6 +850,10 @@ lambda (renderer cell background)
     Calls the callback function for every @class{gtk:cell-renderer} object in
     the cell area with the allocated rectangle inside @arg{cell}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:widget}
@@ -853,6 +890,10 @@ lambda (renderer cell background)
   @begin{short}
     Delegates event handling to a cell area.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:widget}
@@ -940,6 +981,10 @@ lambda (renderer cell background)
     Derives the allocation of the cell renderer inside the cell area if
     @arg{cell} were to be renderered in @arg{area}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}"
   (let ((allocation (gdk:rectangle-new)))
     (%cell-area-cell-allocation area
@@ -986,6 +1031,10 @@ lambda (renderer cell background)
     Gets the @class{gtk:cell-renderer} object at x and y coordinates inside
     @arg{area} and the full cell allocation for it inside @arg{cell}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}"
   (let* ((alloc (gdk:rectangle-new))
          (renderer (%cell-area-cell-at-position area
@@ -1017,6 +1066,10 @@ lambda (renderer cell background)
   same row ofc data at all times, i.e. one should render and handle events with
   the same @class{gtk:cell-area-context} object which was used to request the
   size of those rows of data.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-context}"
   (area (g:object cell-area)))
@@ -1046,6 +1099,10 @@ lambda (renderer cell background)
   The @class{gtk:icon-view} widget uses this to request the heights of each row
   based on a context which was already used to request all the row widths that
   are to be displayed.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-context}"
   (area (g:object cell-area))
@@ -1067,6 +1124,10 @@ lambda (renderer cell background)
     Gets whether the area prefers a height-for-width layout or a
     width-for-height layout.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}"
   (area (g:object cell-area)))
 
@@ -1106,6 +1167,10 @@ lambda (renderer cell background)
   @arg{natural-width} of this call but rather to consult the
   @fun{gtk:cell-area-context-preferred-width} function after a series of
   requests.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:widget}
@@ -1158,13 +1223,17 @@ lambda (renderer cell background)
   along  the way while calling the @fun{gtk:cell-area-preferred-width} function.
   It is important to perform a series of @fun{gtk:cell-area-preferred-width}
   requests with @arg{context} first and then call the
-  @sym{gtk:cell-area-preferred-height-for-width} function on each cell area
+  @fun{gtk:cell-area-preferred-height-for-width} function on each cell area
   individually to get the height for width of each fully requested row.
 
   If at some point, the width of a single row changes, it should be requested
   with the @fun{gtk:cell-area-preferred-width} function again and then the full
   width of the requested rows checked again with the
   @fun{gtk:cell-area-context-preferred-width} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtkcell-area-context}
   @see-class{gtk:widget}
@@ -1216,6 +1285,10 @@ lambda (renderer cell background)
   @arg{natural-height} of this call but rather to consult the
   @fun{gtk:cell-area-context-preferred-height} function after a series of
   requests.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:widget}
@@ -1268,7 +1341,7 @@ lambda (renderer cell background)
   along the way while calling the @fun{gtk:cell-area-preferred-height} function.
   It is important to perform a series of the
   @fun{gtk:cell-area-preferred-height} function requests with @arg{context}
-  first and then call the @sym{gtk:cell-area-preferred-width-for-height}
+  first and then call the @fun{gtk:cell-area-preferred-width-for-height}
   function on each cell area individually to get the height for width of each
   fully requested row.
 
@@ -1276,6 +1349,10 @@ lambda (renderer cell background)
   with the @fun{gtk:cell-area-preferred-height} function again and then the full
   height of the requested rows checked again with the
   @fun{gtk:cell-area-context-preferred-height} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-arrea}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:widget}
@@ -1311,6 +1388,10 @@ lambda (renderer cell background)
   This is implicitly updated when the @fun{gtk:cell-area-apply-attributes}
   function is called and can be used to interact with renderers from
   @class{gtk:cell-area} subclasses.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:tree-path}
   @see-function{gtk:cell-area-apply-attributes}"
@@ -1337,6 +1418,10 @@ lambda (renderer cell background)
     Applies any connected attributes to the renderers in the cell area by
     pulling the values from the tree model.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
@@ -1366,6 +1451,10 @@ lambda (renderer cell background)
     Connects an attribute to apply values from @arg{column} for the tree model
     in use.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (area (g:object cell-area))
@@ -1391,6 +1480,10 @@ lambda (renderer cell background)
     Disconnects @arg{attribute} for the renderer in the cell area so that
     @arg{attribute} will no longer be updated with values from the model.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (area (g:object cell-area))
@@ -1415,6 +1508,10 @@ lambda (renderer cell background)
     Returns the model column that an attribute has been mapped to, or -1 if the
     attribute is not mapped.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (area (g:object cell-area))
@@ -1467,6 +1564,10 @@ lambda (renderer cell background)
   @begin{short}
     Finds a cell property of a cell area type by name.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-symbol{g:type-t}
   @see-symbol{g:param-spec}"
@@ -1497,6 +1598,10 @@ lambda (renderer cell background)
   @begin[Note]{dictionary}
     In the Lisp binding we pass the type of a cell area class and not
     a pointer to the cell area class as argument to the function.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
   @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{g:type-t}
@@ -1530,6 +1635,10 @@ lambda (renderer cell background)
   @end{short}
   See the @fun{gtk:cell-area-add} and @fun{gtk:cell-area-cell-set} functions
   for more details.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-ara}
   @see-function{gtk:cell-area-add}
   @see-function{gtk:cell-area-cell-set}"
@@ -1552,6 +1661,10 @@ lambda (renderer cell background)
   @begin{short}
     Sets one or more cell properties for the cell in the cell area.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-area-cell-get}
@@ -1578,6 +1691,10 @@ lambda (renderer cell background)
     Gets the values of one or more cell properties for the cell renderer in
     the cell area.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-area-cell-set}
@@ -1680,6 +1797,10 @@ lambda (renderer cell background)
     Gets or sets the value of a cell property for the cell renderer inside
     the cell area.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (let ((gtype (gobject:param-spec-value-type
@@ -1708,6 +1829,10 @@ lambda (renderer cell background)
     Returns whether the cell area can do anything when activated, after applying
      new attributes to @arg{area}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}"
   (area (g:object cell-area)))
 
@@ -1736,6 +1861,10 @@ lambda (renderer cell background)
     however some subclasses which embed widgets in the area can also activate
     a widget if it currently has the focus.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:widget}
@@ -1769,6 +1898,10 @@ lambda (renderer cell background)
 
   Implementing @class{gtk:cell-area} classes should implement this method to
   receive and navigate focus in its own way particular to how it lays out cells.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-symbol{gtk:direction-type}"
   (area (g:object cell-area))
@@ -1796,6 +1929,10 @@ lambda (renderer cell background)
 
   Events handled by focus siblings can also activate the given focusable
   @arg{renderer}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (area (g:object cell-area))
@@ -1820,6 +1957,10 @@ lambda (renderer cell background)
     Removes @arg{sibling} from the focus sibling list of the cell renderer.
   @end{short}
   See the @fun{gtk:cell-area-add-focus-sibling} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-area-add-focus-sibling}"
@@ -1847,6 +1988,10 @@ lambda (renderer cell background)
     renderer.
   @end{short}
   See the @fun{gtk:cell-area-add-focus-sibling} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-area-add-focus-sibling}"
@@ -1870,6 +2015,10 @@ lambda (renderer cell background)
   @begin{short}
     Gets the focus sibling cell renderers for @arg{renderer}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (area (g:object cell-area))
@@ -1897,6 +2046,10 @@ lambda (renderer cell background)
   This is handy for @class{gtk:cell-area} subclasses when handling events, after
   determining the cell renderer at the event location it can then chose to
   activate the focus cell for which the event cell may have been a sibling.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}"
   (area (g:object cell-area))
@@ -1929,6 +2082,10 @@ lambda (renderer cell background)
     keyboard events for free in its own @code{GtkCellArea->activate()}
     implementation.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:widget}
   @see-class{gtk:cell-renderer}
@@ -1962,6 +2119,10 @@ lambda (renderer cell background)
 
   See the @fun{gtk:cell-area-edited-cell} and @fun{gtk:cell-area-edit-widget}
   functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-edited-cell}
   @see-function{gtk:cell-area-edit-widget}"
@@ -1996,6 +2157,10 @@ lambda (renderer cell background)
   @end{short}
   It removes any padding previously added by the
   @fun{gtk:cell-area-request-renderer} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-request-renderer}"
   (let ((inner (gdk:rectangle-new)))
@@ -2044,6 +2209,10 @@ lambda (renderer cell background)
   It is important to use this function to request size and then use the
   @fun{gtk:cell-area-inner-cell-area} function at render and event time since
   this function will add padding around the cell for focus painting.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:widget}

@@ -2,7 +2,7 @@
 ;;; gtk4.cell-area-box.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -85,25 +85,29 @@
 (setf (documentation 'cell-area-box 'type)
  "@version{#2020-6-27}
   @begin{short}
-    The @sym{gtk:cell-area-box} renders cell renderers into a row or a column
-    depending on its @symbol{gtk:orientation}.
+    The @class{gtk:cell-area-box} object renders cell renderers into a row or a
+    column depending on its @symbol{gtk:orientation}.
   @end{short}
+  The @class{gtk:cell-area-box} implementation uses a notion of packing. Packing
+  refers to adding cell renderers with reference to a particular position in a
+  @class{gtk:cell-area-box} object. There are two reference positions: the start
+  and the end of the box. When the @class{gtk:cell-area-box} object is oriented
+  in the @code{:vertical} orientation, the start is defined as the top of the
+  box and the end is defined as the bottom. In the @code{:horizontal}
+  orientation start is defined as the left side and the end is defined as the
+  right side.
 
-  @sym{gtk:cell-area-box} uses a notion of packing. Packing refers to adding
-  cell renderers with reference to a particular position in a
-  @sym{gtk:cell-area-box}. There are two reference positions: the start and the
-  end of the box. When the @sym{gtk:cell-area-box} is oriented in the
-  @code{:vertical} orientation, the start is defined as the top of the box and
-  the end is defined as the bottom. In the @code{:horizontal} orientation start
-  is defined as the left side and the end is defined as the right side.
-
-  Alignments of @class{gtk:cell-renderer}s rendered in adjacent rows can be
-  configured by configuring the @code{align} child cell property with the
+  Alignments of @class{gtk:cell-renderer} objects rendered in adjacent rows can
+  be configured by configuring the @code{align} child cell property with the
   @fun{gtk:cell-area-cell-set-property} function or by specifying the
-  @arg{align} argument to the functions @fun{gtk:cell-area-box-pack-start} and
-  @fun{gtk:cell-area-box-pack-end}.
-  @see-slot{gtk:cell-area-box-spacing}
+  @arg{align} argument to the @fun{gtk:cell-area-box-pack-start} and
+  @fun{gtk:cell-area-box-pack-end} functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-box} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-constructor{gtk:cell-area-box-new}
+  @see-slot{gtk:cell-area-box-spacing}
   @see-class{gtk:cell-renderer}
   @see-symbol{gtk:orientation}
   @see-function{gtk:cell-area-cell-set-property}
@@ -128,18 +132,20 @@
  "@version{#2020-6-27}
   @syntax[]{(gtk:cell-area-box-spacing object) => spacing}
   @syntax[]{(setf (gtk:cell-area-box-spacing object) spacing)}
-  @argument[object]{a @class{gtk:cell-area-box} widget}
+  @argument[object]{a @class{gtk:cell-area-box} object}
   @argument[spacing]{an integer with the space to add between
-    @class{gtk:cell-renderer}s.}
+    @class{gtk:cell-renderer} objects}
   @begin{short}
     Accessor of the @slot[gtk:cell-area-box]{spacing} slot of the
     @class{gtk:cell-area-box} class.
   @end{short}
-
-  The slot access function @sym{gtk:cell-area-box-spacing} gets the spacing
-  added between cell renderers. The slot access function
-  @sym{(setf gtk:cell-area-box-spacing)} sets the spacing to add between cell
-  renderers in @arg{box}.
+  The @fun{gtk:cell-area-box-spacing} function gets the spacing added between
+  cell renderers. The @setf{gtk:cell-area-box-spacing} function sets the spacing
+  to add between cell renderers in @arg{box}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-box} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area-box}")
 
 ;;; ----------------------------------------------------------------------------
@@ -153,6 +159,10 @@
  "@version{#2020-6-27}
   @return{A newly created @class{gtk:cell-area-box} object.}
   @short{Creates a new cell area box.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-box} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area-box}"
   (make-instance 'cell-area-box))
 
@@ -174,7 +184,7 @@
  #+liber-documentation
  "@version{#2020-6-27}
   @argument[box]{a @class{gtk:cell-area-box} widget}
-  @argument[renderer]{the @class{gtk:cell-renderer} to add}
+  @argument[renderer]{a @class{gtk:cell-renderer} object to add}
   @argument[expand]{a boolean whether @arg{renderer} should receive extra space
     when the area receives more than its natural size}
   @argument[align]{a boolean whether @arg{renderer} should be aligned in
@@ -185,9 +195,12 @@
     Adds a renderer to the cell area box, packed with reference to the start of
     the box.
   @end{short}
-
-  The renderer is packed after any other @class{gtk:cell-renderer} packed with
-  reference to the start of the box.
+  The renderer is packed after any other @class{gtk:cell-renderer} object packed
+  with reference to the start of the box.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-box} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area-box}
   @see-class{gtk:cell-renderer}"
   (%cell-area-box-pack-start box renderer expand align fixed))
@@ -210,7 +223,7 @@
  #+liber-documentation
  "@version{#2020-6-27}
   @argument[box]{a @class{gtk:cell-area-box} widget}
-  @argument[renderer]{the @class{gtk:cell-renderer} to add}
+  @argument[renderer]{a @class{gtk:cell-renderer} object to add}
   @argument[expand]{a boolean whether @arg{renderer} should receive extra space
     when the area receives more than its natural size}
   @argument[align]{a boolean whether @arg{renderer} should be aligned in
@@ -223,7 +236,11 @@
   @end{short}
 
   The renderer is packed after, away from end of, any other
-  @class{gtk:cell-renderer} packed with reference to the end of the box.
+  @class{gtk:cell-renderer} object packed with reference to the end of the box.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-box} implementation is deprecated since 4.10. List
+    views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-area-box}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-area-box-pack-start}"

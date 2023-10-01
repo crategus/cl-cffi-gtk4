@@ -2,7 +2,7 @@
 ;;; gtk4.cell-area-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -96,19 +96,23 @@
 (setf (documentation 'cell-area-context 'type)
  "@version{#2020-6-28}
   @begin{short}
-    The @sym{gtk:cell-area-context} object is created by a given
+    The @class{gtk:cell-area-context} object is created by a given
     @class{gtk:cell-area} implementation via its @code{create_context()} virtual
     method and is used to store cell sizes and alignments for a series of
     @class{gtk:tree-model} rows that are requested and rendered in the same
     context.
   @end{short}
 
-  @class{gtk:cell-layout} widgets can create any number of contexts in which to
-  request and render groups of data rows. However its important that the same
+  The @class{gtk:cell-layout} widget can create any number of contexts in which
+  to request and render groups of data rows. However its important that the same
   context which was used to request sizes for a given @class{gtk:tree-model} row
   also be used for the same row when calling other @class{gtk:cell-area} APIs
-  such as the @fun{gtk:cell-area-render} and @fun{gtk:cell-area-event}
+  such as the @code{gtk:cell-renderer-*} and @fun{gtk:cell-area-event}
   functions.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-slot{gtk:cell-area-context-area}
   @see-slot{gtk:cell-area-context-minimum-height}
   @see-slot{gtk:cell-area-context-minimum-width}
@@ -116,18 +120,16 @@
   @see-slot{gtk:cell-area-context-natural-width}
   @see-class{gtk:cell-area}
   @see-class{gtk:tree-model}
-  @see-class{gtk:cell-layout}
-  @see-function{gtk:cell-area-render}")
+  @see-class{gtk:cell-layout}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- cell-area-context-area ---------------------------------------------
+;;; --- cell-area-context-area -------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "area"
-                                               'cell-area-context) t)
+(setf (documentation (liber:slot-documentation "area" 'cell-area-context) t)
  "The @code{area} property of type @class{gtk:cell-area}
   (Read / Write / Construct) @br{}
   The cell area this context was created by.")
@@ -144,26 +146,29 @@
     Accessor of the @slot[gtk:cell-area-context]{area} slot of the
     @class{gtk:cell-area-context} class.
   @end{short}
-
-  The @sym{gtk:cell-area-context-area} function fetches the
-  @class{gtk:cell-area} object the context was created by.
+  The @fun{gtk:cell-area-context-area} function fetches the cell area the
+  context was created by.
 
   This is generally unneeded by layouting widgets. However it is important for
   the context implementation itself to fetch information about the area it is
   being used for. For instance at @code{GtkCellAreaContextClass.allocate()}
-  time its important to know details about any cell spacing that the
-  @class{gtk:cell-area} is configured with in order to compute a proper
+  time its important to know details about any cell spacing that the cell area
+  is configured with in order to compute a proper
   allocation.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}")
 
-;;; --- cell-area-context-minimum-height -----------------------------------
+;;; --- cell-area-context-minimum-height ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "minimum-height"
                                                'cell-area-context) t)
  "The @code{minimum-height} property of type @code{:int} (Read) @br{}
-  The minimum height for the @class{gtk:cell-area} in this context for all
+  The minimum height for the cell area in this context for all
   @class{gtk:tree-model} rows that this context was requested for using the
   @fun{gtk:cell-area-preferred-height} function. @br{}
   Allowed values: >= -1 @br{}
@@ -182,22 +187,25 @@
     Accessor of the @slot[gtk:cell-area-context]{minimum-height} slot of the
     @class{gtk:cell-area-context} class.
   @end{short}
-
-  The minimum height for the @class{gtk:cell-area} in this context for all
+  The minimum height for the cell area in this context for all
   @class{gtk:tree-model} rows that this context was requested for using the
   @fun{gtk:cell-area-preferred-height} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-height}")
 
-;;; --- cell-area-context-minimum-width ------------------------------------
+;;; --- cell-area-context-minimum-width ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "minimum-width"
                                                'cell-area-context) t)
  "The @code{minimum-width} property of type @code{:int} (Read) @br{}
-  The minimum width for the @class{gtk:cell-area} in this context for all
+  The minimum width for the cell area in this context for all
   @class{gtk:tree-model} rows that this context was requested for using the
   @fun{gtk:cell-area-preferred-width} function. @br{}
   Allowed values: >= -1 @br{}
@@ -216,22 +224,25 @@
     Accessor of the @slot[gtk:cell-area-context]{minimum-width} slot of the
     @class{gtk:cell-area-context} class.
   @end{short}
-
-  The minimum width for the @class{gtk:cell-area} in this context for all
+  The minimum width for the cell area in this context for all
   @class{gtk:tree-model} rows that this context was requested for using the
   @fun{gtk:cell-area-preferred-width} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-width}")
 
-;;; --- cell-area-context-natural-height -----------------------------------
+;;; --- cell-area-context-natural-height ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "natural-height"
                                                'cell-area-context) t)
  "The @code{natural-height} property of type @code{:int} (Read) @br{}
-  The natural height for the @class{gtk:cell-area} in this context for all
+  The natural height for the cell area in this context for all
   @class{gtk:tree-model} rows that this context was requested for using the
   @fun{gtk:cell-area-preferred-height} function. @br{}
   Allowed values: >= -1 @br{}
@@ -250,22 +261,25 @@
     Accessor of the @slot[gtk:cell-area-context]{natural-height} slot of the
     @class{gtk:cell-area-context} class.
   @end{short}
-
-  The natural height for the @class{gtk:cell-area} in this context for all
+  The natural height for the cell area in this context for all
   @class{gtk:tree-model} rows that this context was requested for using the
   @fun{gtk:cell-area-preferred-height} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-height}")
 
-;;; --- cell-area-context-natural-width ------------------------------------
+;;; --- cell-area-context-natural-width ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "natural-width"
                                                'cell-area-context) t)
  "The @code{natural-width} property of type @code{:int} (Read) @br{}
-  The natural width for the @class{gtk:cell-area} in this context for all
+  The natural width for the cell area in this context for all
   @class{gtk:tree-model} rows that this context was requested for using the
   @fun{gtk:cell-area-preferred-width} function. @br{}
   Allowed values: >= -1 @br{}
@@ -284,10 +298,13 @@
     Accessor of the @slot[gtk:cell-area-context]{natural-width} slot of the
     @class{gtk:cell-area-context} class.
   @end{short}
-
-  The natural width for the @class{gtk:cell-area} in this context for all
+  The natural width for the cell area in this context for all
   @class{gtk:tree-model} rows that this context was requested for using the
   @fun{gtk:cell-area-preferred-width} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-class{gtk:tree-model}
@@ -310,7 +327,6 @@
     Allocates a width and/or a height for all rows which are to be rendered
     with @arg{context}.
   @end{short}
-
   Usually allocation is performed only horizontally or sometimes vertically
   since a group of rows are usually rendered side by side vertically or
   horizontally and share either the same width or the same height. Sometimes
@@ -318,6 +334,10 @@
   homogeneous effect of the rows. This is generally the case for
   @class{gtk:tree-view} when the @slot[gtk:tree-view]{fixed-height-mode}
   property is enabled.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-view}"
@@ -338,7 +358,6 @@
   @begin{short}
     Resets any previously cached request and allocation data.
   @end{short}
-
   When underlying @class{gtk:tree-model} data changes its important to reset the
   context if the content size is allowed to shrink. If the content size is only
   allowed to grow, this is usually an option for views rendering large data
@@ -354,6 +373,10 @@
   bottom then a change in the allocated width necessitates a recalculation of
   all the displayed row heights using the
   @fun{gtk:cell-area-preferred-height-for-width} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-width}
@@ -385,10 +408,12 @@
     Gets the accumulative preferred width for all rows which have been requested
     with this context.
   @end{short}
-
   After the @fun{gtk:cell-area-context-reset} function is called and/or before
-  ever requesting the size of a @class{gtk:cell-area}, the returned values
-  are 0.
+  ever requesting the size of a cell area, the returned values are 0.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
@@ -424,10 +449,13 @@
     Gets the accumulative preferred height for all rows which have been
     requested with this context.
   @end{short}
-
   After the @fun{gtk:cell-area-context-reset} function is called and/or before
-  ever requesting the size of a @class{gtk:cell-area}, the returned values
+  ever requesting the size of a cell area, the returned values
   are 0.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
@@ -465,10 +493,13 @@
     Gets the accumulative preferred height for @arg{width} for all rows which
     have been requested for the same said width with this context.
   @end{short}
-
   After the @fun{gtk:cell-area-context-reset} function is called and/or before
-  ever requesting the size of a @class{gtk:cell-area}, the returned values
+  ever requesting the size of a cell area, the returned values
   are -1.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
@@ -507,10 +538,13 @@
     Gets the accumulative preferred width for @arg{height} for all rows which
     have been requested for the same said height with this context.
   @end{short}
-
   After the @fun{gtk:cell-area-context-reset} function is called and/or before
-  ever requesting the size of a @class{gtk:cell-area}, the returned values
+  ever requesting the size of a cell area, the returned values
   are -1.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
@@ -545,10 +579,13 @@
   @begin{short}
     Fetches the current allocation size for @arg{context}.
   @end{short}
-
   If the context was not allocated in @arg{width} or @arg{height}, or if the
   context was recently reset with the @fun{gtk:cell-area-context-reset}
   function, the returned value will be -1.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-function{gtk:cell-area-context-reset}"
   (cffi:with-foreign-objects ((width :int) (height :int))
@@ -575,11 +612,14 @@
     Causes the minimum and/or natural width to grow if the new proposed sizes
     exceed the current minimum and natural width.
   @end{short}
-
   This is used by @class{gtk:cell-area-context} implementations during the
   request process over a series of @class{gtk:tree-model} rows to progressively
   push the requested width over a series of the
   @fun{gtk:cell-area-preferred-width} requests function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-width}"
@@ -606,11 +646,14 @@
     Causes the minimum and/or natural height to grow if the new proposed sizes
     exceed the current minimum and natural height.
   @end{short}
-
   This is used by @class{gtk:cell-area-context} implementations during the
   request process over a series of @class{gtk:tree-model} rows to progressively
   push the requested height over a series of the
   @fun{gtk:cell-area-preferred-height} function requests.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-area-context} implementation is deprecated since 4.10.
+    This object will be removed in GTK 5.
+  @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-height}"

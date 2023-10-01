@@ -2,11 +2,11 @@
 ;;; gtk4.cell-renderer-pixbuf.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -94,21 +94,29 @@
 (setf (documentation 'cell-renderer-pixbuf 'type)
  "@version{#2021-3-13}
   @begin{short}
-    A @sym{gtk:cell-renderer-pixbuf} object can be used to render an image in
+    A @class{gtk:cell-renderer-pixbuf} object can be used to render an image in
     a cell.
   @end{short}
   It allows to render either a given @class{gdk-pixbuf:pixbuf} object, set via
-  the @code{pixbuf} property, or a named icon, set via the @code{icon-name}
-  property.
+  the @slot[gtk:cell-renderer-pixbuf]{pixbuf} property, or a named icon, set via
+  the @slot[gtk:cell-renderer-pixbuf]{icon-name} property.
 
-  To support the tree view, the @sym{gtk:cell-renderer-pixbuf} object also
+  To support the tree view, the @class{gtk:cell-renderer-pixbuf} object also
   supports rendering two alternative pixbufs, when the
   @slot[gtk:cell-renderer]{is-expander} property is @em{true}. If the
   @slot[gtk:cell-renderer]{is-expanded} property is @em{true} and the
-  @code{pixbuf-expander-open} property is set to a pixbuf, it renders that
-  pixbuf, if the @slot[gtk:cell-renderer]{is-expanded} property is @em{false}
-  and the @code{pixbuf-expander-closed} property is set to a pixbuf, it renders
-  that one.
+  @slot[gtk:cell-renderer-pixbuf]{pixbuf-expander-open} property is set to a
+  pixbuf, it renders that pixbuf, if the @slot[gtk:cell-renderer]{is-expanded}
+  property is @em{false} and the
+  @slot[gtk:cell-renderer-pixbuf]{pixbuf-expander-closed} property is  set to a
+  pixbuf, it renders that one.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
+    4.10. List views use widgets to display their contents. You should use
+    the @class{gtk:image} widget for icons, and the @class{gtk:picture} widget
+    for images.
+  @end{dictionary}
+  @see-constructor{gtk:cell-renderer-pixbuf-new}
   @see-slot{gtk:cell-renderer-pixbuf-gicon}
   @see-slot{gtk:cell-renderer-pixbuf-icon-name}
   @see-slot{gtk:cell-renderer-pixbuf-icon-size}
@@ -116,7 +124,6 @@
   @see-slot{gtk:cell-renderer-pixbuf-pixbuf-expander-closed}
   @see-slot{gtk:cell-renderer-pixbuf-pixbuf-expander-open}
   @see-slot{gtk:cell-renderer-pixbuf-texture}
-  @see-constructor{gtk:cell-renderer-pixbuf-new}
   @see-class{gtk:cell-renderer}
   @see-class{gdk-pixbuf:pixbuf}")
 
@@ -145,9 +152,12 @@
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{gicon} slot of the
     @class{gtk:cell-renderer-pixbuf} class.
   @end{short}
-
   The @class{g:icon} object representing the icon to display. If the icon theme
   is changed, the image will be updated automatically.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-pixbuf}
   @see-class{g:icon}")
 
@@ -158,7 +168,7 @@
                                                'cell-renderer-pixbuf) t)
  "The @code{icon-name} property of type @code{:string} (Read / Write) @br{}
   The name of the themed icon to display. This property only has an effect if
-  not overridden by the @code{stock-id} or @code{pixbuf} properties. @br{}
+  not overridden by the @slot[gtk:cell-renderer-pixbuf]{pixbuf} property. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -174,9 +184,12 @@
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{icon-name} slot of the
     @class{gtk:cell-renderer-pixbuf} class.
   @end{short}
-
   The name of the themed icon to display. This property only has an effect if
-  not overridden by the @code{stock-id} or @code{pixbuf} properties.
+  not overridden by the @slot[gtk:cell-renderer-pixbuf]{pixbuf} property.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-pixbuf}")
 
 ;;; --- cell-renderer-pixbuf-icon-size -----------------------------------------
@@ -186,8 +199,7 @@
                                                'cell-renderer-pixbuf) t)
  "The @code{icon-size} property of type @symbol{gtk:icon-size} (Read / Write)
   @br{}
-  The @symbol{gtk:icon-size} value that specifies the size of the rendered icon.
-  @br{}
+  Specifies the icon size of the rendered icon. @br{}
   Default value: @code{:inherit}")
 
 #+liber-documentation
@@ -204,6 +216,10 @@
     @class{gtk:cell-renderer-pixbuf} class.
   @end{short}
   The @symbol{gtk:icon-size} value that specifies the size of the rendered icon.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-pixbuf}
   @see-symbol{gtk:icon-size}")
 
@@ -229,8 +245,10 @@
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{pixbuf} slot of the
     @class{gtk:cell-renderer-pixbuf} class.
   @end{short}
-
-  The pixbuf to render.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-pixbuf}
   @see-class{gdk-pixbuf:pixbuf}")
 
@@ -244,8 +262,7 @@
   Pixbuf for closed expander.")
 
 #+liber-documentation
-(setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-closed
-              )
+(setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-closed)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-closed 'function)
  "@version{#2021-3-13}
@@ -257,8 +274,10 @@
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{pixbuf-expander-closed}
     slot of the @class{gtk:cell-renderer-pixbuf} class.
   @end{short}
-
-  Pixbuf for closed expander.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-pixbuf}
   @see-class{gdk-pixbuf:pixbuf}")
 
@@ -272,21 +291,22 @@
   Pixbuf for open expander.")
 
 #+liber-documentation
-(setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-open
-              )
+(setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-open)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-open 'function)
  "@version{#2021-3-13}
   @syntax[]{(gtk:cell-renderer-pixbuf-pixbuf-expander-open object) => pixbuf}
   @syntax[]{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-open object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
-  @argument[pixbuf]{a @class{gdk-pixbuf} object}
+  @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{pixbuf-expander-open} slot
     of the @class{gtk:cell-renderer-pixbuf} class.
   @end{short}
-
-  The pixbuf for open expander.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-pixbuf}
   @see-class{gdk-pixbuf:pixbuf}")
 
@@ -295,7 +315,7 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "texture"
                                                'cell-renderer-pixbuf) t)
- "The @code{texture} property of type @class{GdkTexture} (Read / Write) @br{}
+ "The @code{texture} property of type @class{gdk:texture} (Read / Write) @br{}
   The texture to render. @br{}")
 
 #+liber-documentation
@@ -306,14 +326,17 @@
   @syntax[]{(gtk:cell-renderer-pixbuf-texture object) => texture}
   @syntax[]{(setf (gtk:cell-renderer-pixbuf-texture object) texture)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
-  @argument[texture]{a @class{gdk-texture} instance to render}
+  @argument[texture]{a @class{gdk:texture} instance to render}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{texture} slot of the
     @class{gtk:cell-renderer-pixbuf} class.
   @end{short}
-  The texture to render.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-pixbuf}
-  @see-class{gdk-texture}")
+  @see-class{gdk:texture}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_cell_renderer_pixbuf_new ()
@@ -329,12 +352,16 @@
     Creates a new cell renderer pixbuf.
   @end{short}
   Adjust rendering parameters using object properties. Object properties can
-  be set globally with the function @fun{g:object-property}. Also, with the
+  be set globally with the @fun{g:object-property} function. Also, with the
   @class{gtk:tree-view-column} widget, you can bind a property to a value in a
   @class{gtk:tree-model} widget. For example, you can bind the
   @slot[gtk:cell-renderer-pixbuf]{pixbuf} property on the cell renderer to a
   pixbuf value in the model, thus rendering a different image in each row of
   the @class{gtk:tree-view} widget.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-pixbuf} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-pixbuf}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-view-column}

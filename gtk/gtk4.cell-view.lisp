@@ -2,7 +2,7 @@
 ;;; gtk4.cell-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -113,7 +113,7 @@
 (setf (documentation 'cell-view 'type)
  "@version{#2021-5-4}
   @begin{short}
-    A @sym{gtk:cell-view} widget displays a single row of a
+    A @class{gtk:cell-view} widget displays a single row of a
     @class{gtk:tree-model} object using a @class{gtk:cell-area} object and
     @class{gtk:cell-area-context} object.
   @end{short}
@@ -123,17 +123,27 @@
   displayed will be properly aligned with each other like the aligned cells in
   the menus of a @class{gtk:combo-box} widget.
 
-  The @sym{gtk:cell-view} widget is a @class{gtk:orientable} widget in order to
-  decide in which orientation the underlying @class{gtk:cell-area-context}
+  The @class{gtk:cell-view} widget is a @class{gtk:orientable} widget in order
+  to decide in which orientation the underlying @class{gtk:cell-area-context}
   object should be allocated. Taking the @class{gtk:combo-box} menu as an
   example, cell views should be oriented horizontally if the menus are listed
   top-to-bottom and thus all share the same width but may have separate
   individual heights (left-to-right menus should be allocated vertically since
   they all share the same height but may have variable widths).
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:cell-view} widget has a single CSS node with name
+    The @class{gtk:cell-view} widget has a single CSS node with name
     @code{cellview}.
   @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10. List
+    views use widgets to display their contents. You can use the @class{gtk:box}
+    widget instead.
+  @end{dictionary}
+  @see-constructor{gtk:cell-view-new}
+  @see-constructor{gtk:cell-view-new-with-context}
+  @see-constructor{gtk:cell-view-new-with-text}
+  @see-constructor{gtk:cell-view-new-with-markup}
+  @see-constructor{gtk:cell-view-new-with-texture}
   @see-slot{gtk:cell-view-cell-area}
   @see-slot{gtk:cell-view-cell-area-context}
   @see-slot{gtk:cell-view-draw-sensitive}
@@ -174,6 +184,10 @@
   The cell area rendering cells. If no cell area is specified when creating the
   cell view with the @fun{gtk:cell-view-new-with-context} function a
   horizontally oriented @class{gtk:cell-area-box} object will be used.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-box}
@@ -215,6 +229,10 @@
   views in the menu items for a single menu, each submenu creates its own
   context since the size of each submenu does not depend on parent or sibling
   menus.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
   @see-class{gtk:combo-box}
   @see-class{gtk:cell-area-context}")
@@ -245,15 +263,18 @@
     Accessor of the @slot[gtk:tree-view]{draw-sensitive} slot of the
     @class{gtk:cell-view} class.
   @end{short}
-
-  The @sym{gtk:cell-view-draw-sensitive} function gets whether the cell view is
+  The @fun{gtk:cell-view-draw-sensitive} function gets whether the cell view is
   configured to draw all of its cells in a sensitive state. The
-  @sym{(setf gtk:cell-view-draw-sensitive)} function sets whether cell view
-  should draw all of its cells in a sensitive state.
+  @setf{gtk:cell-view-draw-sensitive} function sets whether cell view should
+  draw all of its cells in a sensitive state.
 
   This is used by @class{gtk:combo-box} menus to ensure that rows with
   insensitive cells that contain children appear sensitive in the parent menu
   item.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
   @see-class{gtk:combo-box}")
 
@@ -282,13 +303,17 @@
     @class{gtk:cell-view} class.
   @end{short}
 
-  The @sym{gtk:cell-view-fit-model} function gets whether the cell view is
+  The @fun{gtk:cell-view-fit-model} function gets whether the cell view is
   configured to request space to fit the entire @class{gtk:tree-model}
-  object. The @sym{(setf gtk:cell-view-fit-model)} function sets the property.
+  object. The @setf{gtk:cell-view-fit-model} function sets the property.
 
   This is used by @class{gtk:combo-box} widgets to ensure that the cell view
   displayed on the combo box's button always gets enough space and does not
   resize when selection changes.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
   @see-class{gtk:combo-box}")
 
@@ -313,11 +338,15 @@
     @class{gtk:cell-view} class.
   @end{short}
 
-  The @sym{gtk:cell-view-model} function returns the model for the cell view. If
-  no model is used @code{nil} is returned. The @sym{(setf gtk:cell-view-model)}
+  The @fun{gtk:cell-view-model} function returns the model for the cell view. If
+  no model is used @code{nil} is returned. The @setf{gtk:cell-view-model}
   function sets the model. If the cell view already has a model set, it will
   remove it before setting the new model. If @arg{model} is @code{nil}, then it
   will unset the old model.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
   @see-class{gtk:tree-model}")
 
@@ -334,6 +363,10 @@
   @begin{short}
     Creates a new cell view.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}"
   (make-instance 'cell-view))
 
@@ -360,6 +393,10 @@
   Specifying the same context for a handfull of cells lets the underlying area
   synchronize the geometry for those cells, in this way alignments with cell
   views for other rows are possible.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-context}"
@@ -383,6 +420,10 @@
     Creates a new cell view, adds a @class{gtk:cell-renderer-text} object to it,
     and makes its show text.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
   @see-class{gtk:cell-renderer-text}"
   (text :string))
@@ -404,6 +445,10 @@
     and makes it show markup.
   @end{short}
   The text can be marked up with the Pango text markup language.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
   @see-class{gtk:cell-renderer-text}"
   (markup :string))
@@ -418,15 +463,19 @@
     (g:object cell-view)
   #+liber-documentation
  "@version{#2021-5-4}
-  @argument[texture]{a @class{gdk-texture} object with the image to display in
+  @argument[texture]{a @class{gdk:texture} object with the image to display in
     the cell view}
   @return{A newly created @class{gtk:cell-view} widget.}
   @begin{short}
     Creates a new cell view, adds a @class{gtk:cell-renderer-pixbuf} object to
     it, and makes its show @arg{texture}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
-  @see-class{gdk-texture}
+  @see-class{gdk:texture}
   @see-class{gtk:cell-renderer-pixbuf}"
   (pixbuf (g:object gdk-pixbuf:pixbuf)))
 
@@ -453,16 +502,20 @@
   @argument[cellview]{a @class{gtk:cell-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance or @code{nil} to unset}
   @begin{short}
-    The @sym{gtk:cell-view-display-row} function returns a @class{gtk:tree-path}
+    The @fun{gtk:cell-view-display-row} function returns a @class{gtk:tree-path}
     instance referring to the currently displayed row.
   @end{short}
   If no row is currently displayed, @code{nil} is returned.
 
-  The @sym{(setf gtk:cell-view-display-row)} function sets the row of the model
-  that is currently displayed by the cell view. If the path is unset, then the
+  The @setf{gtk:cell-view-display-row} function sets the row of the model that
+  is currently displayed by the cell view. If the path is unset, then the
   contents of the cell view \"stick\" at their last value. This is not normally
   a desired result, but may be a needed intermediate state if say, the model
   for the cell view becomes temporarily empty.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-view} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-view}
   @see-class{gtk:tree-path}"
   (cellview (g:object cell-view)))

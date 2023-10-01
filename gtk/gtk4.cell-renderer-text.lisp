@@ -2,7 +2,7 @@
 ;;; gtk4.cell-renderer-text.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -258,30 +258,35 @@
 (setf (documentation 'cell-renderer-text 'type)
  "@version{#2021-3-9}
   @begin{short}
-    A @sym{gtk:cell-renderer-text} object renders a given text in its cell,
+    The @class{gtk:cell-renderer-text} object renders a given text in its cell,
     using the font, color and style information provided by its properties.
   @end{short}
-  The text will be ellipsized if it is too long and the @code{ellipsize}
-  property allows it.
-
-  If the @code{mode} property is @code{:editable}, the
-  @sym{gtk:cell-renderer-text} allows to edit its text using a @class{gtk:entry}
-  widget.
+  The text will be ellipsized if it is too long and the
+  @slot[gtk:cell-renderer-text]{ellipsize} property allows it. If the
+  @slot[gtk:cell-renderer]{mode} property is @code{:editable}, the
+  @class{gtk:cell-renderer-text} object allows to edit its text using a
+  @class{gtk:entry} widget.
   @begin[Signal Details]{dictionary}
     @subheading{The \"edited\" signal}
       @begin{pre}
- lambda (renderer path text)    :run-last
+lambda (renderer path text)    :run-last
       @end{pre}
       The signal is emitted after @arg{renderer} has been edited. It is the
       responsibility of the application to update the model and store @arg{text}
       at the position indicated by @arg{path}.
       @begin[code]{table}
-        @entry[renderer]{The @sym{gtk:cell-renderer-text} object which received
-          the signal.}
+        @entry[renderer]{The @class{gtk:cell-renderer-text} object which
+          received the signal.}
         @entry[path]{A string with the path identifying the edited cell.}
         @entry[text]{A string with the new text.}
       @end{table}
   @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    List views use widgets to display their contents. You should use the
+    @class{gtk:inscription} or @class{gtk:label} widgets instead.
+  @end{dictionary}
+  @see-constructor{gtk:cell-renderer-text-new}
   @see-slot{gtk:cell-renderer-text-align-set}
   @see-slot{gtk:cell-renderer-text-alignment}
   @see-slot{gtk:cell-renderer-text-attributes}
@@ -356,8 +361,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{align-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the alignment mode.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-alignment -------------------------------------------
@@ -369,8 +376,8 @@
   @br{}
   Specifies how to align the lines of text with respect to each other. Note that
   this property describes how to align the lines of text in case there are
-  several of them. The @code{xalign} property of @class{gtk:cell-renderer}, on
-  the other hand, sets the horizontal alignment of the whole text. @br{}
+  several of them. The @slot[gtk:cell-renderer]{xalign} property, on the other
+  hand, sets the horizontal alignment of the whole text. @br{}
   Default value: @code{:left}")
 
 #+liber-documentation
@@ -386,11 +393,14 @@
     Accessor of the @slot[gtk:cell-renderer-text]{alignment} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   Specifies how to align the lines of text with respect to each other. Note that
   this property describes how to align the lines of text in case there are
-  several of them. The @code{xalign} property of @class{gtk:cell-renderer}, on
-  the other hand, sets the horizontal alignment of the whole text.
+  several of them. The @slot[gtk:cell-renderer]{xalign} property, on the other
+  hand, sets the horizontal alignment of the whole text.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-attributes ------------------------------------------
@@ -415,8 +425,11 @@
     Accessor of the @slot[gtk:cell-renderer]{attributes} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   A list of style attributes to apply to the text of the renderer.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-background ------------------------------------------
@@ -441,8 +454,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{background} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Background color as a string.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-background-rgba -------------------------------------
@@ -467,8 +482,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{background-rgba} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  The @class{gdk:rgba} background color.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-background-set --------------------------------------
@@ -494,7 +511,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{background-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-  Whether this tag affects the background color.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-editable --------------------------------------------
@@ -519,8 +539,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{editable} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether the text can be modified by the user.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-editable-set ----------------------------------------
@@ -545,8 +567,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{editable-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects text editability.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-ellipsize -------------------------------------------
@@ -558,8 +582,9 @@
   (Read / Write) @br{}
   Specifies the preferred place to ellipsize the string, if the cell renderer
   does not have enough room to display the entire string. Setting it to
-  @code{:none} turns off ellipsizing. See the @code{wrap-width} property for
-  another way of making the text fit into a given width. @br{}
+  @code{:none} turns off ellipsizing. See the
+  @slot[gtk:cell-renderer-text]{wrap-width} property for another way of making
+  the text fit into a given width. @br{}
   Default value: @code{:none}")
 
 #+liber-documentation
@@ -575,11 +600,15 @@
     Accessor of the @slot[gtk:cell-renderer-text]{ellipsize} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   Specifies the preferred place to ellipsize the string, if the cell renderer
   does not have enough room to display the entire string. Setting it to
-  @code{:none} turns off ellipsizing. See the @code{wrap-width} property for
-  another way of making the text fit into a given width.
+  @code{:none} turns off ellipsizing. See the
+  @slot[gtk:cell-renderer-text]{wrap-width} property for another way of making
+  the text fit into a given width.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-ellipsize-set ---------------------------------------
@@ -604,8 +633,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{ellipsize-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the ellipsize mode.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-family ----------------------------------------------
@@ -630,8 +661,11 @@
     Accessor of the @slot[gtk:cell-renderer-text]{family} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   Name of the font family, e.g. Sans, Helvetica, Times, Monospace.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-family-set ------------------------------------------
@@ -656,8 +690,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{family-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the font family.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}
   @see-function{gtk:cell-renderer-text-family}")
 
@@ -683,8 +719,11 @@
     Accessor of the @slot[gtk:cell-renderer-text]{font} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   Font description as a string, e.g. \"Sans Italic 12\".
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-font-desc -------------------------------------------
@@ -709,8 +748,11 @@
     Accessor of the @slot[gtk:cell-renderer-text]{font-desc} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   A Pango font description.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}
   @see-class{pango:font-description}")
 
@@ -736,8 +778,10 @@
     Accessor of the slot @slot[gtk:cell-renderer-text]{foreground} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Foreground color as a string.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-foreground-rgba -------------------------------------
@@ -762,9 +806,13 @@
     Accessor of the @slot[gtk:cell-renderer-text]{foreground-rgba} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   The @class{gdk:rgba} foreground color.
-  @see-class{gtk:cell-renderer-text}")
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-renderer-text}
+  @see-class{gdk:rgba}")
 
 ;;; --- cell-renderer-text-foreground-set --------------------------------------
 
@@ -789,8 +837,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{foreground-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the foreground color.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-language --------------------------------------------
@@ -817,10 +867,13 @@
     Accessor of the @slot[gtk:cell-renderer-text]{language} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   The language this text is in, as an ISO code. Pango can use this as a hint
   when rendering the text. If you do not understand this parameter, you
   probably do not need it.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-language-set ----------------------------------------
@@ -845,8 +898,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{language-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the language the text is rendered as.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-markup ----------------------------------------------
@@ -871,8 +926,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{markup} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Marked up text to render.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-max-width-chars -------------------------------------
@@ -885,8 +942,8 @@
   set to -1, the width will be calculated automatically. For cell renderers that
   ellipsize or wrap text. This property controls the maximum reported width of
   the cell. The cell should not receive any greater allocation unless it is set
-  to expand in its @class{gtk:cell-layout} and all of the cell's siblings have
-  received their natural width. @br{}
+  to expand in its @class{gtk:cell-layout} object and all of the cell's siblings
+  have received their natural width. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -903,14 +960,18 @@
     Accessor of the @slot[gtk:cell-renderer-text]{max-width-chars} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   The desired maximum width of the cell, in characters. If this property is
   set to -1, the width will be calculated automatically. For cell renderers that
   ellipsize or wrap text. This property controls the maximum reported width of
   the cell. The cell should not receive any greater allocation unless it is set
-  to expand in its @class{gtk:cell-layout} and all of the cell's siblings have
-  received their natural width.
-  @see-class{gtk:cell-renderer-text}")
+  to expand in its @class{gtk:cell-layout} object and all of the cell's siblings
+  have received their natural width.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-renderer-text}
+  @see-class{gtk:cell-layout}")
 
 ;;; --- cell-renderer-text-placeholder-text ------------------------------------
 
@@ -919,8 +980,9 @@
                                                'cell-renderer-text) t)
  "The @code{placeholder-text} property of type @code{:string} (Read / Write)
   @br{}
-  The text that will be displayed in the @class{gtk:cell-renderer} if
-  @code{editable} is @em{true} and the cell is empty. @br{}
+  The text that will be displayed in the @class{gtk:cell-renderer} object if the
+  @slot[gtk:cell-renderer-text]{editable} property is @em{true} and the cell is
+  empty. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -936,18 +998,22 @@
     Accessor of the @slot[gtk:cell-renderer-text]{placeholder-text} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  The text that will be displayed in the @class{gtk:cell-renderer} if
-  @code{editable} is @em{true} and the cell is empty.
-  @see-class{gtk:cell-renderer-text}")
+  The text that will be displayed in the @class{gtk:cell-renderer} object if
+  the @slot[gtk:cell-renderer-text]{editable} property is @em{true} and the cell
+  is empty.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-renderer-text}
+  @see-class{gtk:cell-renderer}")
 
 ;;; --- cell-renderer-text-rise ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "rise"
-                                               'cell-renderer-text) t)
+(setf (documentation (liber:slot-documentation "rise" 'cell-renderer-text) t)
  "The @code{rise} property of type @code{:int} (Read / Write) @br{}
-  Offset of text above the baseline, below the baseline if @code{rise} is
+  Offset of text above the baseline, below the baseline if this property is
   negative. @br{}
   Allowed values: >= -2147483647 @br{}
   Default value: 0")
@@ -965,9 +1031,12 @@
     Accessor of the @slot[gtk:cell-renderer-text]{rise} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Offset of text above the baseline, below the baseline if @code{rise} is
-  negative.
+  Offset of text above the baseline, below the baseline if the
+  @slot[gtk:cell-renderer-text]{rise} property is negative.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-rise-set --------------------------------------------
@@ -992,8 +1061,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{rise-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the rise.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-scale -----------------------------------------------
@@ -1014,13 +1085,15 @@
   @syntax[]{(gtk:cell-renderer-text-scale object) => scale}
   @syntax[]{(setf (gtk:cell-renderer-text-scale object) scale)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[scale]{a @code{:double} with the font scaling factor}
+  @argument[scale]{a double float with the font scaling factor}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{scale} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Font scaling factor.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-scale-set -------------------------------------------
@@ -1046,8 +1119,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{scale-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag scales the font size by a factor.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-single-paragraph-mode -------------------------------
@@ -1073,15 +1148,16 @@
     Accessor of the @slot[gtk:cell-renderer-text]{single-paragraph-mode} slot
     of the @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether to keep all text in a single paragraph.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-size ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "size"
-                                               'cell-renderer-text) t)
+(setf (documentation (liber:slot-documentation "size" 'cell-renderer-text) t)
  "The @code{size} property of type @code{:int} (Read / Write) @br{}
   Font size. @br{}
   Allowed values: >= 0 @br{}
@@ -1100,8 +1176,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{size} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Font size.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-size-points -----------------------------------------
@@ -1122,13 +1200,15 @@
   @syntax[]{(gtk:cell-renderer-text-size-points object) => size}
   @syntax[]{(setf (gtk:cell-renderer-text-size-points object) size)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[size]{a @code{:double} with the font size in points}
+  @argument[size]{a double float with the font size in points}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{size-points} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Font size in points.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-size-set --------------------------------------------
@@ -1153,8 +1233,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{size-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the font size.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-stretch ---------------------------------------------
@@ -1175,14 +1257,17 @@
   @syntax[]{(gtk:cell-renderer-text-stretch object) => stretch}
   @syntax[]{(setf (gtk:cell-renderer-text-stretch object) stretch)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[stretch]{a @symbol{pango:stretch} value}
+  @argument[stretch]{a @symbol{pango:stretch} value with the font stretch}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{stretch} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Font stretch.
-  @see-class{gtk:cell-renderer-text}")
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-renderer-text}
+  @see-symbol{pango:stretch}")
 
 ;;; --- cell-renderer-text-stretch-set -----------------------------------------
 
@@ -1206,8 +1291,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{stretch-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the font stretch.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-strikethrough ---------------------------------------
@@ -1232,8 +1319,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{strikethrough} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether to strike through the text.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-strikethrough-set -----------------------------------
@@ -1259,8 +1348,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{strikethrough-set} slot of
     the @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects strikethrough.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-style -----------------------------------------------
@@ -1280,14 +1371,17 @@
   @syntax[]{(gtk:cell-renderer-text-style object) => style}
   @syntax[]{(setf (gtk:cell-renderer-text-style object) style)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[style]{a @symbol{pango:style} value}
+  @argument[style]{a @symbol{pango:style} value with the font style}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{style} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Font style.
-  @see-class{gtk:cell-renderer-text}")
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-renderer-text}
+  @see-symbol{pango:style}")
 
 ;;; --- cell-renderer-text-style-set -------------------------------------------
 
@@ -1306,13 +1400,15 @@
   @syntax[]{(gtk:cell-renderer-text-style-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-style-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[setting]{a @symbol{pango:style} value}
+  @argument[setting]{a boolean whether this tag affects the font style}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{style-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the font style.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-text ------------------------------------------------
@@ -1337,8 +1433,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{text} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Text to render.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-underline -------------------------------------------
@@ -1359,14 +1457,18 @@
   @syntax[]{(gtk:cell-renderer-text-underline object) => underline}
   @syntax[]{(setf (gtk:cell-renderer-text-underline object) underline)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[underline]{a @symbol{pango:underline} value}
+  @argument[underline]{a @symbol{pango:underline} value with the style of
+    underline for this text}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{underline} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Style of underline for this text.
-  @see-class{gtk:cell-renderer-text}")
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-renderer-text}
+  @see-symbol{pango:underline}")
 
 ;;; --- cell-renderer-text-underline-set ---------------------------------------
 
@@ -1390,8 +1492,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{underline-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects underlining.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-variant ---------------------------------------------
@@ -1412,14 +1516,17 @@
   @syntax[]{(gtk:cell-renderer-text-variant object) => variant}
   @syntax[]{(setf (gtk:cell-renderer-text-variant object) variant)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[variant]{a @symbol{pango:variant} value}
+  @argument[variant]{a @symbol{pango:variant} value with the font variant}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{variant} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Font variant.
-  @see-class{gtk:cell-renderer-text}")
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-renderer-text}
+  @see-symbol{pango:variant}")
 
 ;;; --- cell-renderer-text-variant-set -----------------------------------------
 
@@ -1443,8 +1550,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{variant-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the font variant.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-weight ----------------------------------------------
@@ -1470,8 +1579,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{weight} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Font weight.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-weight-set ------------------------------------------
@@ -1496,8 +1607,10 @@
     Accessor of the @slot[gtk:cell-renderer-text]{weight-set} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
-  Whether this tag affects the font weight.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-width-chars -----------------------------------------
@@ -1525,10 +1638,13 @@
     Accessor of the @slot[gtk:cell-renderer-text]{width-chars} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   The desired width of the cell, in characters. If this property is set to -1,
   the width will be calculated automatically, otherwise the cell will request
   either 3 characters or the property value, whichever is greater.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; --- cell-renderer-text-wrap-mode -------------------------------------------
@@ -1540,7 +1656,8 @@
   @br{}
   Specifies how to break the string into multiple lines, if the cell renderer
   does not have enough room to display the entire string. This property has no
-  effect unless the @code{wrap-width} property is set. @br{}
+  effect unless the @slot[gtk:cell-renderer-text]{wrap-width} property is set.
+  @br{}
   Default value: @code{:char}")
 
 #+liber-documentation
@@ -1556,11 +1673,15 @@
     Accessor of the @slot[gtk:cell-renderer-text]{wrap-mode} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   Specifies how to break the string into multiple lines, if the cell renderer
   does not have enough room to display the entire string. This property has no
-  effect unless the @code{wrap-width} property is set.
-  @see-class{gtk:cell-renderer-text}")
+  effect unless the @slot[gtk:cell-renderer-text]{wrap-width} property is set.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
+  @see-class{gtk:cell-renderer-text}
+  @see-symbol{pango:wrap-mode}")
 
 ;;; --- cell-renderer-text-wrap-width ------------------------------------------
 
@@ -1568,10 +1689,9 @@
 (setf (documentation (liber:slot-documentation "wrap-width"
                                                'cell-renderer-text) t)
  "The @code{wrap-width} property of type @code{:int} (Read / Write) @br{}
-  Specifies the minimum width at which the text is wrapped. The
-  @code{wrap-mode} property can be used to influence at what character
-  positions the line breaks can be placed. Setting @code{wrap-width} to -1
-  turns wrapping off. @br{}
+  Specifies the minimum width at which the text is wrapped. This property can be
+  used to influence at what character positions the line breaks can be placed.
+  Setting this property to -1 turns wrapping off. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -1583,16 +1703,19 @@
   @syntax[]{(gtk:cell-renderer-text-wrap-width object) => width}
   @syntax[]{(setf (gtk:cell-renderer-text-wrap-width object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[width]{an integer with the minimum width at which text is wrapped}0
+  @argument[width]{an integer with the minimum width at which text is wrapped}
   @begin{short}
-    Accessor of the slot @code{wrap-width} slot of the
+    Accessor of the @slot[gtk:cell-renderer-text]{wrap-width} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-
   Specifies the minimum width at which the text is wrapped. The
-  @code{wrap-mode} property can be used to influence at what character
-  positions the line breaks can be placed. Setting @code{wrap-width} to -1
-  turns wrapping off.
+  @slot[gtk:cell-renderer-text]{wrap-mode} property can be used to influence at
+  what character positions the line breaks can be placed. Setting the
+  @arg{width} argument to -1 turns wrapping off.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
 ;;; ----------------------------------------------------------------------------
@@ -1609,12 +1732,16 @@
     Creates a new cell renderer text.
   @end{short}
   Adjust how text is drawn using object properties. Object properties can be
-  set globally, with the function @fun{g:object-property}. Also, with the
+  set globally, with the @fun{g:object-property} function. Also, with the
   @class{gtk:tree-view-column} object, you can bind a property to a value in a
   @class{gtk:tree-model} object. For example, you can bind the
   @slot[gtk:cell-renderer-text]{text} property on the cell renderer to a string
   value in the model, thus rendering a different string in each row of the
   @class{gtk:tree-view} widget.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-view-column}
@@ -1645,6 +1772,10 @@
   is too slow, i.e., a massive number of cells displayed. If
   @arg{number-of-rows} is -1, then the fixed height is unset, and the height is
   determined by the properties again.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-text}"
   (renderer (g:object cell-renderer-text))
   (number-of-rows :int))

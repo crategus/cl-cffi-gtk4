@@ -2,11 +2,11 @@
 ;;; gtk4.cell-renderer-accel.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -123,11 +123,16 @@
 (setf (documentation 'cell-renderer-accel 'type)
  "@version{#2020-6-20}
   @begin{short}
-    @sym{gtk:cell-renderer-accel} displays a keyboard accelerator, i.e. a key
-    combination like @code{Control+a}.
+    The @class{gtk:cell-renderer-accel} object displays a keyboard accelerator,
+    i.e. a key combination like @kbd{Control+a}.
   @end{short}
   If the cell renderer is editable, the accelerator can be changed by simply
   typing the new combination.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
+    Applications editing keyboard accelerators should provide their own
+    implementation according to platform design guidelines.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"accel-cleared\" signal}
       @begin{pre}
@@ -135,7 +140,7 @@ lambda (accel path)    :run-last
       @end{pre}
       Gets emitted when the user has removed the accelerator.
       @begin[code]{table}
-        @entry[accel]{The @sym{gtk:cell-renderer-accel} object reveiving the
+        @entry[accel]{The @class{gtk:cell-renderer-accel} object reveiving the
           signal.}
         @entry[path]{A string with the path identifying the row of the edited
           cell.}
@@ -146,7 +151,7 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
       @end{pre}
       Gets emitted when the user has selected a new accelerator.
       @begin[code]{table}
-        @entry[accel]{The @sym{gtk:cell-renderer-accel} object reveiving the
+        @entry[accel]{The @class{gtk:cell-renderer-accel} object reveiving the
           signal.}
         @entry[path]{A string with the path identifying the row of the edited
           cell.}
@@ -157,10 +162,12 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
           new accelerator.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:cell-renderer-accel-new}
   @see-slot{gtk:cell-renderer-accel-accel-key}
   @see-slot{gtk:cell-renderer-accel-accel-mode}
   @see-slot{gtk:cell-renderer-accel-accel-mods}
-  @see-slot{gtk:cell-renderer-accel-keycode}")
+  @see-slot{gtk:cell-renderer-accel-keycode}
+  @see-class{gtk:cell-renderer}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -189,8 +196,10 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
     Accessor of the @slot[gtk:cell-renderer]{accel-key} slot of the
     @class{gtk:cell-renderer-accel} class.
   @end{short}
-
-  The keyval of the accelerator.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-accel}")
 
 ;;; --- cell-renderer-accel-accel-mode -----------------------------------------
@@ -220,11 +229,14 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
     Accessor of the @slot[gtk:cell-renderer-accel]{accel-mode} slot of the
     @class{gtk:cell-renderer-accel} class.
   @end{short}
-
   Determines if the edited accelerators are GTK accelerators. If they are,
   consumed modifiers are suppressed, only accelerators accepted by GTK are
   allowed, and the accelerators are rendered in the same way as they are in
   menus.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-accel}
   @see-symbol{gtk:cell-renderer-accel-mode}")
 
@@ -245,15 +257,18 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
   @syntax[]{(gtk:cell-renderer-accel-accel-mods object) => accel-mods}
   @syntax[]{(setf (gtk:cell-renderer-accel-accel-mods object) accel-mods)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
-  @argument[accel-mode]{a @symbol{gtk:modifier-type} value}
+  @argument[accel-mode]{a @symbol{gdk:modifier-type} value with the modifier
+    mask of the accelerator}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-accel]{accel-mods} slot of the
     @class{gtk:cell-renderer-accel} class.
   @end{short}
-
-  The modifier mask of the accelerator.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-accel}
-  @see-symbol{gtk:modifier-type}")
+  @see-symbol{gdk:modifier-type}")
 
 ;;; --- cell-renderer-accel-keycode --------------------------------------------
 
@@ -281,10 +296,13 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
     Accessor of the @slot[gtk:cell-renderer-accel]{keycode} slot of the
     @class{gtk:cell-renderer-accel} class.
   @end{short}
-
   The hardware keycode of the accelerator. Note that the hardware keycode is
   only relevant if the key does not have a keyval. Normally, the keyboard
   configuration should assign keyvals to all keys.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-accel}")
 
 ;;; ----------------------------------------------------------------------------
@@ -296,8 +314,12 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
 (defun cell-renderer-accel-new ()
  #+liber-documentation
  "@version{#2020-6-20}
-  @returns{The new @class{gtk:cell-renderer-accel} object.}
+  @return{The new @class{gtk:cell-renderer-accel} object.}
   @short{Creates a new cell renderer accel object.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-accel} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-accel}"
   (make-instance 'cell-renderer-accel))
 
