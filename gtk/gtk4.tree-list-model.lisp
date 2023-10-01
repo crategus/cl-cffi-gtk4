@@ -157,6 +157,26 @@
  "The @code{children} property of type @class{g:list-model} (Read) @br{}
   The model holding the children of the row.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'tree-list-row-children)
+      "Accessor"
+      (documentation 'tree-list-row-children 'function)
+ "@version{#2023-9-25}
+  @syntax[]{(gtk:tree-list-row-children object) => autoexpand}
+  @argument[object]{a @class{gtk:tree-list-row} object}
+  @argument[children]{a @class{g:list-model} object containing the children}
+  @begin{short}
+    Accessor of the @slot[gtk:tree-list-row]{children} slot of the
+    @class{gtk:tree-list-row} class.
+  @end{short}
+  If the row is expanded, the @fun{gtk:tree-list-row-children} function gets the
+  model holding the children of @arg{model}. This model is the model created by
+  the @symbol{gtk:tree-list-model-create-model-func} callback function and
+  contains the original items, no matter what value the
+  @slot[gtk:tree-list-model]{passthrough} property is set to.
+  @see-class{gtk:tree-list-row}
+  @see-class{g:list-model}
+  @see-function{gtk:tree-list-model-passthrough}")
 
 ;;; --- tree-list-row-depth ----------------------------------------------------
 
@@ -166,53 +186,115 @@
   The depth in the tree of this row. @br{}
   Default value: 0")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'tree-list-row-depth)
+      "Accessor"
+      (documentation 'tree-list-row-depth 'function)
+ "@version{#2023-9-25}
+  @syntax[]{(gtk:tree-list-row-depth object) => depth}
+  @argument[object]{a @class{gtk:tree-list-row} object}
+  @argument[depth]{an unsigned integer with the depth of the row}
+  @begin{short}
+    Accessor of the @slot[gtk:tree-list-row]{depth} slot of the
+    @class{gtk:tree-list-row} class.
+  @end{short}
+  The @fun{gtk:tree-list-row-depth} function gets the depth of the row. Rows
+  that correspond to items in the root model have a depth of zero, rows
+  corresponding to items of models of direct children of the root model have a
+  depth of 1 and so on. The depth of a row never changes until the row is
+  removed from its model at which point it will forever return 0.
+  @see-class{gtk:tree-list-row}")
 
 ;;; --- tree-list-row-expandable -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "expandable" 'tree-list-row) t)
  "The @code{expandable} property of type @code{:boolean} (Read) @br{}
-  If this row can ever be expanded. @br{}
+  Whether the row can ever be expanded. @br{}
   Default value: @em{false}")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'tree-list-row-expandable)
+      "Accessor"
+      (documentation 'tree-list-row-expandable 'function)
+ "@version{#2023-9-25}
+  @syntax[]{(gtk:tree-list-row-expandable object) => expandable}
+  @argument[object]{a @class{gtk:tree-list-row} object}
+  @argument[expandable]{a boolean whether the row can ever be expanded}
+  @begin{short}
+    Accessor of the @slot[gtk:tree-list-row]{expandable} slot of the
+    @class{gtk:tree-list-row} class.
+  @end{short}
+  The @fun{gtk:tree-list-row-expandable} function gets whether the row can
+  ever be expanded.
+  @see-class{gtk:tree-list-row}")
 
 ;;; --- tree-list-row-expanded -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "expanded" 'tree-list-row) t)
  "The @code{expanded} property of type @code{:boolean} (Read / Write) @br{}
-  If this row is currently expanded. @br{}
+  Whether the row is currently expanded. @br{}
   Default value: @em{false}")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'tree-list-row-expanded)
+      "Accessor"
+      (documentation 'tree-list-row-expanded 'function)
+ "@version{#2023-9-25}
+  @syntax[]{(gtk:tree-list-row-expanded object) => expanded}
+  @argument[object]{a @class{gtk:tree-list-row} object}
+  @argument[expanded]{a boolean whether the row is currently expanded}
+  @begin{short}
+    Accessor of the @slot[gtk:tree-list-row]{expanded} slot of the
+    @class{gtk:tree-list-row} class.
+  @end{short}
+  The @fun{gtk:tree-list-row-expanded} function gets if a row is currently
+  expanded.
+  @see-class{gtk:tree-list-row}")
 
 ;;; --- tree-list-row-item -----------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "expanded" 'tree-list-row) t)
+(setf (documentation (liber:slot-documentation "item" 'tree-list-row) t)
  "The @code{item} property of type @class{g:object} (Read) @br{}
   The item held in this row.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'tree-list-row-item)
+      "Accessor"
+      (documentation 'tree-list-row-item 'function)
+ "@version{#2023-9-25}
+  @syntax[]{(gtk:tree-list-row-item object) => item}
+  @argument[object]{a @class{gtk:tree-list-row} object}
+  @argument[item]{a @class{g:object} object with the item held in this row}
+  @begin{short}
+    Accessor of the @slot[gtk:tree-list-row]{item} slot of the
+    @class{gtk:tree-list-row} class.
+  @end{short}
+  The @fun{gtk:tree-list-row-item} function gets the item corresponding to this
+  row.
+  @see-class{gtk:tree-list-row}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_list_row_is_expandle
-;;;
-;;; gboolean
-;;; gtk_tree_list_row_is_expandable (GtkTreeListRow* self)
-;;;
-;;; Checks if a row can be expanded.
-;;;
-;;; This does not mean that the row is actually expanded, this can be checked
-;;; with gtk_tree_list_row_get_expanded().
-;;;
-;;; If a row is expandable never changes until the row is removed from its model
-;;; at which point it will forever return FALSE.
-;;;
-;;; Return :
-;;;     TRUE if the row is expandable.
+;;; gtk_tree_list_row_is_expandable
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_list_row_is_expandable" tree-list-row-is-expandable)
     :boolean
+ #+liber-documentation
+ "@version{#2023-9-26}
+  @argument[row]{a @class{gtk:tree-list-row} object}
+  @return{@em{True} if the row is expandable.}
+  @begin{short}
+    Checks if a row can be expanded.
+  @end{short}
+  This does not mean that the row is actually expanded, this can be checked
+  with the @fun{gtk:tree-list-row-expanded} function. If a row is expandable
+  never changes until the row is removed from its model at which point it will
+  forever return @em{false}.
+  @see-class{gtk:tree-list-row}
+  @see-function{gtk:tree-list-row-expanded}"
   (row (g:object tree-list-row)))
 
 (export 'tree-list-row-is-expandable)
@@ -287,10 +369,10 @@
   The @fun{gtk:tree-list-model-autoexpand} function gets whether the model is
   set to automatically expand new rows that get added.
 
-  If set to @em{true} with the @sym{(setf gtk:tree-list-model-autoexpand}
-  function, the model will recursively expand all rows that get added to the
-  model.  This can be either rows added by changes to the underlying models or
-  via the @fun{gtk:tree-list-row-expanded} function.
+  If set to @em{true} with the @setf{gtk:tree-list-model-autoexpand} function,
+  the model will recursively expand all rows that get added to the model.  This
+  can be either rows added by changes to the underlying models or via the
+  @fun{gtk:tree-list-row-expanded} function.
   @see-class{gtk:tree-list-model}
   @see-function{gtk:tree-list-row-expanded}")
 
@@ -298,7 +380,7 @@
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'tree-list-model) t)
- "The @code{item-type} property of type @class{g:type-t}(Read) @br{}
+ "The @code{item-type} property of type @class{g:type-t} (Read) @br{}
   The type of items. Since 4.8")
 
 #+gtk-4-8
@@ -415,100 +497,110 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTreeListModelCreateModelFunc ()
-;;;
-;;; GListModel *
-;;; (*GtkTreeListModelCreateModelFunc) (gpointer item,
-;;;                                     gpointer user_data);
-;;;
-;;; Prototype of the function called to create new child models when
-;;; gtk_tree_list_row_set_expanded() is called.
-;;;
-;;; This function can return NULL to indicate that item is guaranteed to be a
-;;; leaf node and will never have children. If it does not have children but may
-;;; get children later, it should return an empty model that is filled once
-;;; children arrive.
-;;;
-;;; item :
-;;;     The item that is being expanded.
-;;;
-;;; user_data :
-;;;     User data passed when registering the function
-;;;
-;;; Returns :
-;;;     The model tracking the children of item or NULL if item can never have
-;;;     children.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcallback tree-list-model-create-model-func (g:object g:list-model)
+    ((item :pointer)
+     (data :pointer))
+  (let ((ptr (glib:get-stable-pointer-value data)))
+    (funcall ptr item)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'tree-list-model-create-model-func)
+      "Callback"
+      (liber:symbol-documentation 'tree-list-model-create-model-func)
+ "@version{#2023-9-24}
+  @begin{short}
+    Prototype of the function called to create new child models when the
+    @fun{gtk:tree-list-row-expanded} function is called.
+  @end{short}
+  This function can return @code{nil} to indicate that @arg{item} is guaranteed
+  to be a leaf node and will never have children. If it does not have children
+  but may get children later, it should return an empty model that is filled
+  once children arrive.
+  @begin{pre}
+lambda (item)
+  @end{pre}
+  @begin[code]{table}
+    @entry[item]{A pointer to the item that is being expanded.}
+    @entry[Returns]{The @class{g:list-model} object tracking the children of
+      @arg{item} or @code{nil} if @arg{item} can never have children.}
+  @end{table}
+  @see-class{gtk:tree-list-model}
+  @see-class{g:list-model}
+  @see-function{gtk:tree-list-model-new}
+  @see-function{gtk:tree-list-row-expanded}")
+
+(export 'tree-list-model-create-model-func)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_list_model_new ()
-;;;
-;;; GtkTreeListModel *
-;;; gtk_tree_list_model_new (GListModel *root,
-;;;                          gboolean passthrough,
-;;;                          gboolean autoexpand,
-;;;                          GtkTreeListModelCreateModelFunc create_func,
-;;;                          gpointer user_data,
-;;;                          GDestroyNotify user_destroy);
-;;;
-;;; Creates a new empty GtkTreeListModel displaying root with all rows
-;;; collapsed.
-;;;
-;;; root :
-;;;     The GListModel to use as root.
-;;;
-;;; passthrough :
-;;;     TRUE to pass through items from the models
-;;;
-;;; autoexpand :
-;;;     TRUE to set the autoexpand property and expand the root model
-;;;
-;;; create_func :
-;;;     Function to call to create the GListModel for the children of an item
-;;;
-;;; user_data :
-;;;     Data to pass to create_func .
-;;;
-;;; user_destroy :
-;;;     Function to call to free user_data
-;;;
-;;; Returns :
-;;;     a newly created GtkTreeListModel.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_tree_list_model_new" %tree-list-model-new)
+    (g:object tree-list-model)
+  (root (g:object g:list-model))
+  (passthrough :boolean)
+  (autoexpand :boolean)
+  (func :pointer)
+  (data :pointer)
+  (notify :pointer))
+
+(defun tree-list-model-new (root passthrough autoexpand func)
+ #+liber-documentation
+ "@version{#2023-9-24}
+  @argument[root]{a @class{g:list-model} object to use as root}
+  @argument[passthrough]{@em{true} to pass through items from the models}
+  @argument[autoexpand]{@em{true} to set the
+    @slot[gtk:tree-list-model]{autoexpand} property and expand the root model}
+  @argument[func]{a @symbol{gtk:tree-list-model-create-model-func} callback
+    function to create the @class{g:list-model} object for the children of an
+    item}
+  @begin{short}
+    Creates a new empty @class{gtk:tree-list-model} object displaying @arg{root}
+    with all rows collapsed.
+  @end{short}
+  @see-class{gtk:tree-list-model}
+  @see-class{g:list-model}
+  @see-symbol{gtk:tree-list-model-create-model-func}
+  @see-function{gtk:tree-list-model-autoexpand}"
+  (%tree-list-model-new root
+                        passthrough
+                        autoexpand
+                        (cffi:callback tree-list-model-create-model-func)
+                        (glib:allocate-stable-pointer func)
+                        (cffi:callback glib:stable-pointer-destroy-notify)))
+
+(export 'tree-list-model-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_list_model_get_row ()
-;;;
-;;; GtkTreeListRow *
-;;; gtk_tree_list_model_get_row (GtkTreeListModel *self,
-;;;                              guint position);
-;;;
-;;; Gets the row object for the given row. If position is greater than the
-;;; number of items in self , NULL is returned.
-;;;
-;;; The row object can be used to expand and collapse rows as well as to inspect
-;;; its position in the tree. See its documentation for details.
-;;;
-;;; This row object is persistent and will refer to the current item as long as
-;;; the row is present in self , independent of other rows being added or
-;;; removed.
-;;;
-;;; If self is set to not be passthrough, this function is equivalent to calling
-;;; g_list_model_get_item().
-;;;
-;;; Do not confuse this function with gtk_tree_list_model_get_child_row().
-;;;
-;;; self :
-;;;     a GtkTreeListModel
-;;;
-;;; position :
-;;;     the position of the row to fetch
-;;;
-;;; Returns :
-;;;     The row item.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_list_model_get_row" tree-list-model-row)
     (g:object tree-list-row)
+ #+liber-documentation
+ "@version{#2023-9-24}
+  @argument[model]{a @class{gtk:tree-list-model} object}
+  @argument[position]{an unsigned integer with the position of the row to fetch}
+  @return{The @class{gtk:tree-list-row} object with the row item.}
+  @begin{short}
+    Gets the row object for the given row.
+  @end{short}
+  If @arg{position} is greater than the number of items in @arg{model},
+  @code{nil} is returned. The row object can be used to expand and collapse rows
+  as well as to inspect its position in the tree. See its documentation for
+  details.
+
+  This row object is persistent and will refer to the current item as long as
+  the row is present in @arg{model}, independent of other rows being added or
+  removed. If @arg{model} is set to not be passthrough, this function is
+  equivalent to calling the @fun{g:list-model-item} function. Do not confuse
+  this function with the @fun{gtk:tree-list-model-child-row} function.
+  @see-class{gtk:tree-list-model}
+  @see-class{gtk:tree-list-row}
+  @see-function{g:list-model-item}
+  @see-function{gtk:tree-list-model-child-row}"
   (model (g:object tree-list-model))
   (position :uint))
 
@@ -516,31 +608,26 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_list_model_get_child_row ()
-;;;
-;;; GtkTreeListRow *
-;;; gtk_tree_list_model_get_child_row (GtkTreeListModel *self,
-;;;                                    guint position);
-;;;
-;;; Gets the row item corresponding to the child at index position for self 's
-;;; root model.
-;;;
-;;; If position is greater than the number of children in the root model, NULL
-;;; is returned.
-;;;
-;;; Do not confuse this function with gtk_tree_list_model_get_row().
-;;;
-;;; self :
-;;;     a GtkTreeListModel
-;;;
-;;; position :
-;;;     position of the child to get
-;;;
-;;; Returns :
-;;;     the child in position .
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_list_model_get_child_row" tree-list-model-child-row)
     (g:object tree-list-row)
+ #+liber-documentation
+ "@version{#2023-9-24}
+  @argument[model]{a @class{gtk:tree-list-model} object}
+  @argument[position]{an unsigned integer with the position of the child to get}
+  @return{The @class{gtk:tree-list-row} object with the child in
+    @arg{position}.}
+  @begin{short}
+    Gets the row item corresponding to the child at index @arg{position} for
+    @arg{model}'s root model.
+  @end{short}
+  If @arg{position} is greater than the number of children in the root model,
+  @code{nil} is returned. Do not confuse this function with the
+  @fun{gtk:tree-list-model-row} function.
+  @see-class{gtk:tree-list-model}
+  @see-class{gtk:tree-list-row}
+  @see-function{gtk:tree-list-model-row}"
   (model (g:object tree-list-model))
   (position :uint))
 

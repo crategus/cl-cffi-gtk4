@@ -128,26 +128,27 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_list_row_sorter_new ()
-;;;
-;;; GtkTreeListRowSorter *
-;;; gtk_tree_list_row_sorter_new (GtkSorter *sorter);
-;;;
-;;; Create a special-purpose sorter that applies the sorting of sorter to the
-;;; levels of a GtkTreeListModel.
-;;;
-;;; Note that this sorter relies on “passthrough” being FALSE as it can only
-;;; sort GtkTreeListRows.
-;;;
-;;; sorter :
-;;;     a GtkSorter, or NULL.
-;;;
-;;; Returns :
-;;;     a new GtkTreeListRowSorter
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline tree-list-row-sorter-new))
 
 (defun tree-list-row-sorter-new (sorter)
+ #+liber-documentation
+ "@version{#2023-9-26}
+  @argument[sorter]{a @class{gtk:sorter} object}
+  @return{A new @class{gtk:tree-list-row-sorter} object.}
+  @begin{short}
+    Create a special-purpose sorter that applies the sorting of sorter to the
+    levels of a @class{gtk:tree-list-model} object.
+  @end{short}
+  Note that this sorter relies on the @slot[gtk:tree-list-model]{passthrough}
+  property being @em{false} as it can only sort @class{gtk:tree-list-row}
+  objects.
+  @see-class{gtk:tree-list-sorter}
+  @see-class{gtk:sorter}
+  @see-class{gtk:tree-list-model}
+  @see-class{gtk:tree-list-row}
+  @see-function{gtk:tree-list-model-passthrough}"
   (make-instance 'tree-list-row-sorter
                  :sorter sorter))
 
