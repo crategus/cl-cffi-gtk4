@@ -2,7 +2,7 @@
 ;;; gtk4.text-buffer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -197,7 +197,7 @@ lambda (buffer tag start end)    :run-last
       runs before the default handler it must not invalidate the @arg{start} and
       @arg{end} iterators, or has to revalidate them.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
         @entry[tag]{The @class{gtk:text-tag} applied tag.}
         @entry[start]{The @class{gtk:text-iter} start iterator of the range
@@ -212,7 +212,7 @@ lambda (buffer)    :run-last
       The signal is emitted at the beginning of a single user visible operation
       on a text buffer.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
       @end{table}
     @subheading{The \"changed\" signal}
@@ -221,7 +221,7 @@ lambda (buffer)    :run-last
       @end{pre}
       The signal is emitted when the content of a text buffer has changed.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
       @end{table}
     @subheading{The \"delete-range\" signal}
@@ -235,7 +235,7 @@ lambda (buffer start end)    :run-last
       to both point to the location where text was deleted. Handlers which run
       after the default handler do not have access to the deleted text.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
         @entry[start]{The @class{gtk:text-iter} start iterator of the range
           to be deleted.}
@@ -249,7 +249,7 @@ lambda (buffer)    :run-last
       The signal is emitted at the end of a single user visible operation on
       the text buffer.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
       @end{table}
     @subheading{The \"insert-child-anchor\" signal}
@@ -263,7 +263,7 @@ lambda (buffer location anchor)    :run-last
       default signal handler revalidates it to be placed after the inserted
       @arg{anchor}.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
         @entry[location]{The @class{gtk:text-iter} position to insert
           @arg{anchor} in @arg{buffer}.}
@@ -279,7 +279,7 @@ lambda (buffer location paintable)    :run-last
       @arg{location} iterator, or has to revalidate it. The default signal
       handler revalidates it to be placed after the inserted @arg{paintable}.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
         @entry[location]{The @class{gtk:text-iter} position to insert
           @arg{paintable} in @arg{buffer}.}
@@ -295,7 +295,7 @@ lambda (buffer location text len)    :run-last
       to revalidate it. The default signal handler revalidates it to point to
       the end of the inserted text.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
         @entry[location]{The @class{gtk:text-iter} position to insert @arg{text}
           in @arg{buffer}.}
@@ -309,7 +309,7 @@ lambda (buffer mark)    :run-last
       The signal is emitted as notification after a @class{gtk:text-mark}
       object is deleted.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
         @entry[mark]{The @class{gtk:text-mark} object that was deleted.}
       @end{table}
@@ -320,7 +320,7 @@ lambda (buffer location mark)    :run-last
       The signal is emitted as notification after a @class{gtk:text-mark}
       object is set.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
         @entry[location]{The @class{gtk:text-iter} location of @arg{mark} in
           @arg{buffer}.}
@@ -332,7 +332,7 @@ lambda (buffer)    :run-last
       @end{pre}
       The signal is emitted when the modified bit of a text buffer flips.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
       @end{table}
     @subheading{The \"paste-done\" signal}
@@ -342,7 +342,7 @@ lambda (buffer clipboard)    :run-last
       The signal is emitted after paste operation has been completed. This is
       useful to properly scroll the view to the end of the pasted text.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
         @entry[clipboard]{The @class{gdk:clipboard} object.}
       @end{table}
@@ -353,7 +353,7 @@ lambda (buffer)    :run-last
       The signal is emitted when a request has been made to redo the previously
       undone operation.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
       @end{table}
     @subheading{The \"remove-tag\" signal}
@@ -366,7 +366,7 @@ lambda (buffer tag start end)    :run-last
       invalidate the @arg{start} and @arg{end} iterators, or has to revalidate
       them.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
         @entry[tag]{The @class{gtk:text-tag} object to be removed.}
         @entry[start]{The @class{gtk:text-iter} start iterator of the range
@@ -381,10 +381,11 @@ lambda (buffer)    :run-last
       The signal is emitted when a request has been made to undo the previous
       operation or set of operations that have been grouped together.
       @begin[code]{table}
-        @entry[buffer]{The @sym{gtk:text-buffer} object which received the
+        @entry[buffer]{The @class{gtk:text-buffer} object which received the
           signal.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:text-buffer-new}
   @see-slot{gtk:text-buffer-can-redo}
   @see-slot{gtk:text-buffer-can-undow}
   @see-slot{gtk:text-buffer-cursor-position}
@@ -392,7 +393,6 @@ lambda (buffer)    :run-last
   @see-slot{gtk:text-buffer-has-selection}
   @see-slot{gtk:text-buffer-tag-table}
   @see-slot{gtk:text-buffer-text}
-  @see-constructor{gtk:text-buffer-new}
   @see-class{gtk:text-view}
   @see-class{gtk:text-iter}
   @see-class{gtk:text-mark}
@@ -404,7 +404,7 @@ lambda (buffer)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- text-buffer-can-redo -----------------------------------------------
+;;; --- text-buffer-can-redo ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "can-redo" 'text-buffer) t)
@@ -425,12 +425,11 @@ lambda (buffer)    :run-last
     Accessor of the @slot[gtk:text-buffer]{can-redo} slot of the
     @class{gtk:text-buffer} class.
   @end{short}
-
-  The @sym{gtk:text-buffer-can-redo} function gets whether there is a redoable
+  The @fun{gtk:text-buffer-can-redo} function gets whether there is a redoable
   action in the history.
   @see-class{gtk:text-buffer}")
 
-;;; --- text-buffer-can-undo -----------------------------------------------
+;;; --- text-buffer-can-undo ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "can-undo" 'text-buffer) t)
@@ -451,12 +450,11 @@ lambda (buffer)    :run-last
     Accessor of the @slot[gtk:text-buffer]{can-undo} slot of the
     @class{gtk:text-buffer} class.
   @end{short}
-
-  The @sym{gtk:text-buffer-can-undo} function gets whether there is a undoable
+  The @fun{gtk:text-buffer-can-undo} function gets whether there is a undoable
   action in the history.
   @see-class{gtk:text-buffer}")
 
-;;; --- text-buffer-cursor-position ----------------------------------------
+;;; --- text-buffer-cursor-position --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "cursor-position"
@@ -479,16 +477,14 @@ lambda (buffer)    :run-last
     Accessor of the @slot[gtk:text-buffer]{cursor-position} slot of the
     @class{gtk:text-buffer} class.
   @end{short}
-
   The position of the insert mark, as offset from the beginning of the text
   buffer. It is useful for getting notified when the cursor moves.
   @see-class{gtk:text-buffer}")
 
-;;; --- text-buffer-enable-undo --------------------------------------------
+;;; --- text-buffer-enable-undo ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "enable-undo"
-                                               'text-buffer) t)
+(setf (documentation (liber:slot-documentation "enable-undo" 'text-buffer) t)
  "The @code{enable-undow} property of type @code{:boolean} (Read / Write) @br{}
   The property denotes if support for undoing and redoing changes to the text
   buffer is allowed. @br{}
@@ -507,13 +503,11 @@ lambda (buffer)    :run-last
     Accessor of the @slot[gtk:text-buffer]{enable-undo} slot of the
     @class{gtk:text-buffer} class.
   @end{short}
-
-  The @sym{gtk:text-buffer-enable-undo} function gets whether the text buffer is
+  The @fun{gtk:text-buffer-enable-undo} function gets whether the text buffer is
   saving modifications to the text buffer to allow for undo and redo actions.
-  The @sym{(setf gtk:text-buffer-enable-undo)} sets whether or not to enable
-  undoable actions in the text buffer. If enabled, the user will be able to undo
-  the last number of actions up to the @fun{gtk:text-buffer-max-undo-levels}
-  value.
+  The @setf{gtk:text-buffer-enable-undo} sets whether or not to enable undoable
+  actions in the text buffer. If enabled, the user will be able to undo the last
+  number of actions up to the @fun{gtk:text-buffer-max-undo-levels} value.
 
   See the @fun{gtk:text-buffer-begin-irreversible-action} and
   @fun{gtk:text-buffer-end-irreversible-action} functions to create changes to
@@ -523,11 +517,10 @@ lambda (buffer)    :run-last
   @see-function{gtk:text-buffer-begin-irreversible-action}
   @see-function{gtk:text-buffer-end-irreversible-action}")
 
-;;; --- text-buffer-has-selection ------------------------------------------
+;;; --- text-buffer-has-selection ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "has-selection"
-                                               'text-buffer) t)
+(setf (documentation (liber:slot-documentation "has-selection" 'text-buffer) t)
  "The @code{has-selection} property of type @code{:boolean} (Read) @br{}
   Whether the text buffer has some text currently selected. @br{}
   Default value: @em{false}")
@@ -544,7 +537,6 @@ lambda (buffer)    :run-last
     Accessor of the @slot[gtk:text-buffer]{has-selection} slot of the
     @class{gtk:text-buffer} class.
   @end{short}
-
   Indicates whether the text buffer has some text currently selected.
   @see-class{gtk:text-buffer}")
 
@@ -593,10 +585,10 @@ lambda (buffer)    :run-last
     Accessor of the @slot[gtk:text-buffer]{text} slot of the
     @class{gtk:text-buffer} class.
   @end{short}
-  The @sym{gtk:text-buffer} function retrieves the text of the text buffer,
-  without child widgets and images. The @sym{(setf gtk:text-buffer-text)}
-  function deletes current contents of the text buffer, and inserts @arg{text}
-  instead. The text must be valid UTF-8.
+  The @fun{gtk:text-buffer} function retrieves the text of the text buffer,
+  without child widgets and images. The @setf{gtk:text-buffer-text} function
+  deletes current contents of the text buffer, and inserts @arg{text} instead.
+  The text must be valid UTF-8.
   @begin[Note]{dictionary}
     Use the @fun{gtk:text-buffer-get-text} function to retrieve a range of text
     from the text buffer and the @fun{gtk:text-buffer-get-slice} function to
@@ -718,13 +710,13 @@ lambda (buffer)    :run-last
   because the text buffer contents change, but the default signal handler
   revalidates it to point to the end of the inserted text.
   @begin[Note]{dictionary}
-    The @sym{gtk:text-buffer-insert} function combines the
+    The @fun{gtk:text-buffer-insert} function combines the
     @code{gtk_text_buffer_insert()}, @code{gtk_text_buffer_insert_at_cursor()},
     @code{gtk_text_buffer_insert_interactive()}, and
     @code{gtk_text_buffer_insert_interactive_at_cursor()} functions into one
     function using the @arg{position}, @arg{interactive}, and @arg{editable}
     keyword arguments. The corresponding Lisp functions except for the
-    @sym{gtk:text-buffer-insert} function are not exported in the Lisp
+    @fun{gtk:text-buffer-insert} function are not exported in the Lisp
     implementation.
   @end{dictionary}
   @see-class{gtk:text-buffer}
@@ -734,14 +726,14 @@ lambda (buffer)    :run-last
   (if interactive
       (if (eq position :cursor)
           (%text-buffer-insert-interactive-at-cursor buffer
-                                                         text
-                                                         -1
-                                                         editable)
+                                                     text
+                                                     -1
+                                                     editable)
           (%text-buffer-insert-interactive buffer
-                                               position
-                                               text
-                                               -1
-                                               editable))
+                                           position
+                                           text
+                                           -1
+                                           editable))
       (progn
         (if (eq position :cursor)
             (%text-buffer-insert-at-cursor buffer text -1)
@@ -933,8 +925,8 @@ lambda (buffer)    :run-last
   iterator if no tags enclosing the iterator affect editability. Typically the
   result of the function @fun{gtk:text-view-editable} is appropriate here.
   @begin[Note]{dictionary}
-    The function @sym{gtk:text-buffer-insert-range-interactive} is called from
-    the function @fun{gtk:text-buffer-insert-range}.
+    The @fun{gtk:text-buffer-insert-range-interactive} function is called from
+    the @fun{gtk:text-buffer-insert-range} function.
   @end{dictionary}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-iter}
@@ -965,7 +957,7 @@ lambda (buffer)    :run-last
 
   Equivalent to calling the @fun{gtk:text-buffer-insert} function, then the
   @fun{gtk:text-buffer-apply-tag} function on the inserted text. The
-  @sym{gtk:text-buffer-insert-with-tags} function is just a convenience
+  @fun{gtk:text-buffer-insert-with-tags} function is just a convenience
   function.
   @begin[Note]{dictionary}
     The Lisp implementation does not call the
@@ -1049,6 +1041,14 @@ lambda (buffer)    :run-last
 ;;;     a GdkPaintable
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_text_buffer_insert_paintable" text-buffer-insert-paintable)
+    :void
+  (buffer (g:object text-buffer))
+  (iter (g:boxed text-iter))
+  (paintable (g:object gdk:paintable)))
+
+(export 'text-buffer-insert-paintable)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_delete
 ;;; ----------------------------------------------------------------------------
@@ -1076,7 +1076,7 @@ lambda (buffer)    :run-last
     Deletes text between the @arg{start} and @arg{end} iterators.
   @end{short}
   The order of the @arg{start} and @arg{end} iterators is not actually relevant.
-  The @sym{gtk:text-buffer-delete} function will reorder them. This function
+  The @fun{gtk:text-buffer-delete} function will reorder them. This function
   actually emits the \"delete-range\" signal, and the default handler of that
   signal deletes the text. Because the text buffer is modified, all outstanding
   iterators become invalid after calling this function. However, the @arg{start}
@@ -2141,16 +2141,15 @@ lambda (buffer)    :run-last
   @begin{short}
     Returns @em{true} if the text buffer has been modified.
   @end{short}
-
-  The @sym{gtk:text-buffer-modified} function indicates whether the text buffer
-  has been modified since the last call to the
-  @sym{(setf gtk:text-buffer-modified)} function.
+  The @fun{gtk:text-buffer-modified} function indicates whether the text buffer
+  has been modified since the last call to the @setf{gtk:text-buffer-modified}
+  function.
 
   Used to keep track of whether the text buffer has been modified since the last
   time it was saved. Whenever the text buffer is saved to disk, call the
-  @sym{(setf gtk:text-buffer-modified)} function with the @em{false} value.
-  When the text buffer is modified, it will automatically toggle on the
-  modified bit again. When the modified bit flips, the text buffer emits a
+  @setf{gtk:text-buffer-modified} function with the @em{false} value. When the
+  text buffer is modified, it will automatically toggle on the modified bit
+  again. When the modified bit flips, the text buffer emits a
   \"modified-changed\" signal.
   @see-class{gtk:text-buffer}"
   (buffer (g:object text-buffer)))
@@ -2193,7 +2192,7 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_paste_clipboard" %text-buffer-paste-clipboard)
     :void
   (buffer (g:object text-buffer))
-  (clipboard (g:object gdk-clipboard))
+  (clipboard (g:object gdk:clipboard))
   (override (g:boxed text-iter))
   (editable :boolean))
 
@@ -2201,7 +2200,7 @@ lambda (buffer)    :run-last
  #+liber-documentation
  "@version{#2022-1-12}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @argument[clipboard]{a @class{gdk-clipboard} object to paste from}
+  @argument[clipboard]{a @class{gdk:clipboard} object to paste from}
   @argument[override]{a @class{gtk:text-iter} location to insert pasted text,
     or @code{nil} to insert at the cursor}
   @argument[editable]{a boolean whether the text buffer is editable by default}
@@ -2217,7 +2216,7 @@ lambda (buffer)    :run-last
     inserted.
   @end{dictionary}
   @see-class{gtk:text-buffer}
-  @see-class{gdk-clipboard}
+  @see-class{gdk:clipboard}
   @see-class{gtk:text-iter}"
   (%text-buffer-paste-clipboard buffer clipboard override editable))
 
@@ -2232,14 +2231,14 @@ lambda (buffer)    :run-last
  #+liber-documentation
  "@version{#2022-1-12}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @argument[clipboard]{a @class{gdk-clipboard} object to copy to}
+  @argument[clipboard]{a @class{gdk:clipboard} object to copy to}
   @begin{short}
     Copies the currently selected text to the clipboard.
   @end{short}
   @see-class{gtk:text-buffer}
-  @see-class{gdk-clipboard}"
+  @see-class{gdk:clipboard}"
   (buffer (g:object text-buffer))
-  (clipboard (g:object gdk-clipboard)))
+  (clipboard (g:object gdk:clipboard)))
 
 (export 'text-buffer-copy-clipboard)
 
@@ -2251,16 +2250,16 @@ lambda (buffer)    :run-last
  #+liber-documentation
  "@version{#2021-11-16}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @argument[clipboard]{a @class{gdk-clipboard} object to cut to}
+  @argument[clipboard]{a @class{gdk:clipboard} object to cut to}
   @argument[editable]{a boolean whether the text buffer is editable by default}
   @begin{short}
     Copies the currently selected text to a clipboard, then deletes the text
     if it is editable.
   @end{short}
   @see-class{gtk:text-buffer}
-  @see-class{gdk-clipboard}"
+  @see-class{gdk:clipboard}"
   (buffer (g:object text-buffer))
-  (clipboard (g:object gdk-clipboard))
+  (clipboard (g:object gdk:clipboard))
   (editable :boolean))
 
 (export 'text-buffer-cut-clipboard)
@@ -2317,6 +2316,12 @@ lambda (buffer)    :run-last
 ;;;     a new GdkContentProvider.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_text_buffer_get_selection_content"
+               text-buffer-selection-content) (g:object gdk:content-provider)
+  (buffer (g:object text-buffer)))
+
+(export 'text-buffer-selection-content)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_begin_user_action
 ;;; ----------------------------------------------------------------------------
@@ -2343,10 +2348,10 @@ lambda (buffer)    :run-last
     to the @fun{gtk:text-buffer-end-user-action} function are part of a single
     user visible operation.
   @end{short}
-  The operations between the @sym{gtk:text-buffer-begin-user-action} and
+  The operations between the @fun{gtk:text-buffer-begin-user-action} and
   @fun{gtk:text-buffer-end-user-action} functions can then be grouped when
   creating an undo stack. The text buffer maintains a count of calls to the
-  @sym{gtk:text-buffer-begin-user-action} function that have not been closed
+  @fun{gtk:text-buffer-begin-user-action} function that have not been closed
   with a call to the @fun{gtk:text-buffer-end-user-action} function, and emits
   the \"begin-user-action\" and \"end-user-action\" signals only for the
   outermost pair of calls. This allows you to build user actions from other
@@ -2391,7 +2396,7 @@ lambda (buffer)    :run-last
  #+liber-documentation
  "@version{#2021-11-16}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @argument[clipboard]{a @class{gdk-clipboard} object}
+  @argument[clipboard]{a @class{gdk:clipboard} object}
   @begin{short}
     Adds a clipboard to the list of clipboards in which the selection contents
     of the text buffer are available.
@@ -2399,9 +2404,9 @@ lambda (buffer)    :run-last
   In most cases, the clipboard will be of type \"PRIMARY\" for a view of the
   text buffer.
   @see-class{gtk:text-buffer}
-  @see-class{gdk-clipboard}"
+  @see-class{gdk:clipboard}"
   (buffer (g:object text-buffer))
-  (clipboard (g:object gdk-clipboard)))
+  (clipboard (g:object gdk:clipboard)))
 
 (export 'text-buffer-add-selection-clipboard)
 
@@ -2414,33 +2419,18 @@ lambda (buffer)    :run-last
  #+liber-documentation
  "@version{#2021-11-16}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @argument[clipboard]{a @class{gdk-clipboard} object added to the text buffer}
+  @argument[clipboard]{a @class{gdk:clipboard} object added to the text buffer}
   @begin{short}
     Removes a clipboard added with the
     @fun{gtk:text-buffer-add-selection-clipboard} function.
   @end{short}
   @see-class{gtk:text-buffer}
-  @see-class{gdk-clipboard}
+  @see-class{gdk:clipboard}
   @see-function{gtk:text-buffer-add-selection-clipboard}"
   (buffer (g:object text-buffer))
-  (clipboard (g:object gdk-clipboard)))
+  (clipboard (g:object gdk:clipboard)))
 
 (export 'text-buffer-remove-selection-clipboard)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_max_undo_levels ()
-;;;
-;;; guint
-;;; gtk_text_buffer_get_max_undo_levels (GtkTextBuffer *buffer);
-;;;
-;;; Gets the maximum number of undo levels to perform. If 0, unlimited undo
-;;; actions may be performed. Note that this may have a memory usage impact as
-;;; it requires storing an additional copy of the inserted or removed text
-;;; within the text buffer.
-;;;
-;;; buffer :
-;;;     a GtkTextBuffer
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_set_max_undo_levels ()
@@ -2461,6 +2451,34 @@ lambda (buffer)    :run-last
 ;;;     the maximum number of undo actions to perform
 ;;; ----------------------------------------------------------------------------
 
+(defun (setf text-buffer-max-undo-levels) (value buffer)
+  (cffi:foreign-funcall "gtk_text_buffer_set_max_undo_levels"
+                        (g:object text-buffer) buffer
+                        :uint value
+                        :void)
+  value)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_text_buffer_get_max_undo_levels ()
+;;;
+;;; guint
+;;; gtk_text_buffer_get_max_undo_levels (GtkTextBuffer *buffer);
+;;;
+;;; Gets the maximum number of undo levels to perform. If 0, unlimited undo
+;;; actions may be performed. Note that this may have a memory usage impact as
+;;; it requires storing an additional copy of the inserted or removed text
+;;; within the text buffer.
+;;;
+;;; buffer :
+;;;     a GtkTextBuffer
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_text_buffer_get_max_undo_levels"
+               text-buffer-max-undo-levels) :uint
+  (buffer (g:object text-buffer)))
+
+(export 'text-buffer-max-undo-levels)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_undo ()
 ;;;
@@ -2473,6 +2491,11 @@ lambda (buffer)    :run-last
 ;;;     a GtkTextBuffer
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_text_buffer_undo" text-buffer-undo) :void
+  (buffer (g:object text-buffer)))
+
+(export 'text-buffer-undo)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_redo ()
 ;;;
@@ -2484,6 +2507,11 @@ lambda (buffer)    :run-last
 ;;; buffer :
 ;;;     a GtkTextBuffer
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_text_buffer_redo" text-buffer-redo) :void
+  (buffer (g:object text-buffer)))
+
+(export 'text-buffer-redo)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_begin_irreversible_action ()
@@ -2506,6 +2534,12 @@ lambda (buffer)    :run-last
 ;;;     a GtkTextBuffer
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_text_buffer_begin_irreversible_action"
+               text-buffer-begin-irreversible-action) :void
+  (buffer (g:object text-buffer)))
+
+(export 'text-buffer-begin-irreversible-action)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_end_irreversible_action ()
 ;;;
@@ -2524,5 +2558,11 @@ lambda (buffer)    :run-last
 ;;; buffer :
 ;;;     a GtkTextBuffer
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_text_buffer_end_irreversible_action"
+               text-buffer-end-irreversible-action) :void
+  (buffer (g:object text-buffer)))
+
+(export 'text-buffer-end-irreversible-action)
 
 ;;; --- End of file gtk4.text-buffer.lisp --------------------------------------

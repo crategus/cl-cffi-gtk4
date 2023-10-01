@@ -2,7 +2,7 @@
 ;;; gtk4.about-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -271,8 +271,9 @@
 (setf (documentation 'about-dialog 'type)
  "@version{#2022-7-16}
   @begin{short}
-    The @sym{gtk:about-dialog} widget offers a simple way to display information
-    about a program like its logo, name, copyright, website and license.
+    The @class{gtk:about-dialog} widget offers a simple way to display
+    information about a program like its logo, name, copyright, website and
+    license.
   @end{short}
   It is also possible to give credits to the authors, documenters, translators
   and artists who have worked on the program. The about dialog is typically
@@ -297,7 +298,7 @@
   Note that GTK sets a default title of \"About @code{%s}\" on the about dialog
   window where @code{%s} is replaced by the name of the application, but in
   order to ensure proper translation of the title, applications should set the
-  title property explicitly when constructing a @sym{gtk:about-dialog} widget,
+  title property explicitly when constructing a @class{gtk:about-dialog} widget,
   as shown in the following example:
   @begin{pre}
 (gtk:show-about-dialog nil
@@ -318,12 +319,13 @@ lambda (dialog uri)    :run-last
       override the default behaviour, which is to call the @fun{gtk:show-uri}
       function.
       @begin[code]{table}
-        @entry[dialog]{The @sym{gtk:about-dialog} widget on which the signal
+        @entry[dialog]{The @class{gtk:about-dialog} widget on which the signal
           was emitted.}
         @entry[uri]{A string with the URI that is activated.}
         @entry[Returns]{@em{True} if the link has been activated.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:about-dialog-new}
   @see-slot{gtk:about-dialog-artists}
   @see-slot{gtk:about-dialog-authors}
   @see-slot{gtk:about-dialog-comments}
@@ -340,7 +342,6 @@ lambda (dialog uri)    :run-last
   @see-slot{gtk:about-dialog-website}
   @see-slot{gtk:about-dialog-website-label}
   @see-slot{gtk:about-dialog-wrap-license}
-  @see-constructor{gtk:about-dialog-new}
   @see-class{gtk:dialog}
   @see-symbol{gtk:license}")
 
@@ -348,7 +349,7 @@ lambda (dialog uri)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- about-dialog-artists -----------------------------------------------
+;;; --- about-dialog-artists ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "artists" 'about-dialog) t)
@@ -371,12 +372,12 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{artists} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-artists} function returns the strings which are
-  displayed in the credits page. The @sym{(setf gtk:about-dialog-artists)}
-  function sets the strings.
+  The @fun{gtk:about-dialog-artists} function returns the strings which are
+  displayed in the credits page. The @setf{gtk:about-dialog-artists} function
+  sets the strings.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-authors -----------------------------------------------
+;;; --- about-dialog-authors ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "authors" 'about-dialog) t)
@@ -397,10 +398,10 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{authors} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-authors} function returns the strings which are
-  displayed in the credits page. The @sym{(setf gtk:about-dialog-authors)}
-  function sets the strings. Each string may contain email addresses and URLs,
-  which will be displayed as links.
+  The @fun{gtk:about-dialog-authors} function returns the strings which are
+  displayed in the credits page. The @setf{gtk:about-dialog-authors} function
+  sets the strings. Each string may contain email addresses and URLs, which will
+  be displayed as links.
   @begin[Examples]{dictionary}
     @begin{pre}
 (setq about (make-instance 'gtk:about-dialog))
@@ -414,7 +415,7 @@ lambda (dialog uri)    :run-last
   @end{dictionary}
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-comments ----------------------------------------------
+;;; --- about-dialog-comments --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "comments" 'about-dialog) t)
@@ -437,18 +438,17 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{comments} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-comments} function returns the comments string. The
-  @sym{(setf gtk:about-dialog-comments)} function sets the comments string to
-  display in the about dialog. The string is displayed in a label in the main
-  dialog, thus it should be a short explanation of the main purpose of the
-  program, not a detailed list of features.
+  The @fun{gtk:about-dialog-comments} function returns the comments string. The
+  @setf{gtk:about-dialog-comments} function sets the comments string to display
+  in the about dialog. The string is displayed in a label in the main dialog,
+  thus it should be a short explanation of the main purpose of the program, not
+  a detailed list of features.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-copyright ---------------------------------------------
+;;; --- about-dialog-copyright -------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "copyright"
-                                               'about-dialog) t)
+(setf (documentation (liber:slot-documentation "copyright" 'about-dialog) t)
  "The @code{copyright} property of type @code{:string} (Read / Write) @br{}
   Copyright information for the program. @br{}
   Default value: @code{nil}")
@@ -466,17 +466,16 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{copyright} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-copyright} function returns the copyright
-  information for the program. The @sym{(setf gtk:about-dialog-copyright)}
-  function sets the copyright information. This should be a short string of one
-  or two lines.
+  The @fun{gtk:about-dialog-copyright} function returns the copyright
+  information for the program. The @setf{gtk:about-dialog-copyright} function
+  sets the copyright information. This should be a short string of one or two
+  lines.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-documenters -------------------------------------------
+;;; --- about-dialog-documenters -----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "documenters"
-                                               'about-dialog) t)
+(setf (documentation (liber:slot-documentation "documenters" 'about-dialog) t)
  "The @code{documenters} property of type @type{glib:strv-t} (Read / Write)
   @br{}
   The people documenting the program, as a list of strings. Each string may
@@ -495,13 +494,13 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{documenters} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-documenters} function returns the strings which are
+  The @fun{gtk:about-dialog-documenters} function returns the strings which are
   displayed in the documenters credits page. The
-  @sym{(setf gtk:about-dialog-documenters)} function sets the strings. Each
-  string may contain email addresses and URLs, which will be displayed as links.
+  @setf{gtk:about-dialog-documenters} function sets the strings. Each string may
+  contain email addresses and URLs, which will be displayed as links.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-license -----------------------------------------------
+;;; --- about-dialog-license ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "license" 'about-dialog) t)
@@ -528,21 +527,20 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{license} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-license} function returns the license information.
-  The @sym{(setf gtk:about-dialog-license)} function sets the license
-  information to be displayed in the secondary license dialog. If the
-  @arg{license} argument is @code{nil}, the license page is hidden.
+  The @fun{gtk:about-dialog-license} function returns the license information.
+  The @setf{gtk:about-dialog-license} function sets the license information to
+  be displayed in the secondary license dialog. If the @arg{license} argument is
+  @code{nil}, the license page is hidden.
 
   The text may contain links in this format \"<http://www.some.place/>\" and
   email references in the form \"<mail-to@@some.body>\", and these will be
   converted into clickable links.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-license-type ------------------------------------------
+;;; --- about-dialog-license-type ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "license-type"
-                                               'about-dialog) t)
+(setf (documentation (liber:slot-documentation "license-type" 'about-dialog) t)
  "The @code{license-type} property of type @symbol{gtk:license} (Read / Write)
   @br{}
   The license of the program, as a value of the @symbol{gtk:license}
@@ -568,8 +566,8 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{license-type} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-license-type} function retrieves the license type
-  of type @symbol{gtk:license}. The @sym{(setf gtk:about-dialog-license-type)}
+  The @fun{gtk:about-dialog-license-type} function retrieves the license type
+  of type @symbol{gtk:license}. The @setf{gtk:about-dialog-license-type}
   function sets the license of of the application showing the about dialog from
   a list of known licenses. This function overrides the license set using the
   @fun{gtk:about-dialog-license} function.
@@ -577,7 +575,7 @@ lambda (dialog uri)    :run-last
   @see-symbol{gtk:license}
   @see-function{gtk:about-dialog-license}")
 
-;;; --- about-dialog-logo --------------------------------------------------
+;;; --- about-dialog-logo ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "logo" 'about-dialog) t)
@@ -598,15 +596,15 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{logo} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-logo} function returns the paintable displayed as
-  logo in the about dialog. The @sym{(setf gtk:about-dialog-logo)} function
-  sets the paintable. If it is @code{nil}, the default window icon set with the
+  The @fun{gtk:about-dialog-logo} function returns the paintable displayed as
+  logo in the about dialog. The @setf{gtk:about-dialog-logo} function sets the
+  paintable. If it is @code{nil}, the default window icon set with the
   @fun{gtk:window-default-icon-name} function will be used.
   @see-class{gtk:about-dialog}
   @see-class{gdk:paintable}
   @see-function{gtk:window-default-icon-name}")
 
-;;; --- about-dialog-logo-icon-name ----------------------------------------
+;;; --- about-dialog-logo-icon-name --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "logo-icon-name"
@@ -629,17 +627,16 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{logo-icon-name} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-logo-icon-name} function returns the icon name
+  The @fun{gtk:about-dialog-logo-icon-name} function returns the icon name
   displayed as logo in the about dialog. The
-  @sym{(setf gtk:about-dialog-logo-icon-name)} function sets the icon name.
+  @setf{gtk:about-dialog-logo-icon-name} function sets the icon name.
   @see-class{gtk:about-dialog}
   @see-function{gtk:window-default-icon-name}")
 
-;;; --- about-dialog-program-name ------------------------------------------
+;;; --- about-dialog-program-name ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "program-name"
-                                               'about-dialog) t)
+(setf (documentation (liber:slot-documentation "program-name" 'about-dialog) t)
  "The @code{program-name} property of type @code{:string} (Read / Write) @br{}
   The name of the program. If this is not set, it defaults to the return value
   of the @fun{g:application-name} function. @br{}
@@ -658,14 +655,14 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{program-name} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-program-name} function returns the program name
-  displayed in the about dialog. The @sym{(setf gtk:about-dialog-program-name)}
+  The @fun{gtk:about-dialog-program-name} function returns the program name
+  displayed in the about dialog. The @setf{gtk:about-dialog-program-name}
   function sets the program name. If this is not set, it defaults to the return
   value of the @fun{g:application-name} function.
   @see-class{gtk:about-dialog}
   @see-function{g:application-name}")
 
-;;; --- about-dialog-system-information ------------------------------------
+;;; --- about-dialog-system-information ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "system-information"
@@ -694,13 +691,12 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{system-information} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-system-information} function returns the system
+  The @fun{gtk:about-dialog-system-information} function returns the system
   information which is shown in the about dialog. The
-  @sym{(setf gtk:about-dialog-program-name)} function sets the system
-  information.
+  @setf{gtk:about-dialog-program-name} function sets the system information.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-translator-credits ------------------------------------
+;;; --- about-dialog-translator-credits ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "translator-credits"
@@ -725,9 +721,9 @@ lambda (dialog uri)    :run-last
     Accessor of the @slot[gtk:about-dialog]{translator-credits} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-translator-credits} function returns the translator
+  The @fun{gtk:about-dialog-translator-credits} function returns the translator
   credits string which is displayed in the credits page. The
-  @sym{(setf gtk:about-dialog-translator-credits)} function sets the translator
+  @setf{gtk:about-dialog-translator-credits} function sets the translator
   credits.
 
   The intended use for this string is to display the translator of the language
@@ -742,7 +738,7 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
   \"translator-credits\" property is untranslated and hide the tab.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-version -----------------------------------------------
+;;; --- about-dialog-version ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "version" 'about-dialog) t)
@@ -763,12 +759,12 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
     Accessor of the @slot[gtk:about-dialog]{version} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-version} function returns the version string. The
-  @sym{(gtk:about-dialog-version)} function sets the version string to display
+  The @fun{gtk:about-dialog-version} function returns the version string. The
+  @setf{gtk:about-dialog-version} function sets the version string to display
   in the about dialog.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-website -----------------------------------------------
+;;; --- about-dialog-website ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "website" 'about-dialog) t)
@@ -791,16 +787,15 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
     Accessor of the @slot[gtk:about-dialog]{website} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-website} function returns the website URL. The
-  @sym{(setf gtk:about-dialog-website)} function sets the URL string starting
-  with \"http://\" to use for the website link.
+  The @setf{gtk:about-dialog-website} function returns the website URL. The
+  @setf{gtk:about-dialog-website} function sets the URL string starting with
+  \"http://\" to use for the website link.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-website-label -----------------------------------------
+;;; --- about-dialog-website-label ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "website-label"
-                                               'about-dialog) t)
+(setf (documentation (liber:slot-documentation "website-label" 'about-dialog) t)
  "The @code{website-label} property of type @code{:string} (Read / Write) @br{}
   The label for the link to the website of the program. @br{}
   Default value: @code{nil}")
@@ -819,16 +814,14 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
     Accessor of the @slot[gtk:about-dialog]{website-label} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-website-label} function returns the URL to use for
-  the website. The @sym{(setf gtk:about-dialog-website-label)} function sets the
-  URL.
+  The @fun{gtk:about-dialog-website-label} function returns the URL to use for
+  the website. The @setf{gtk:about-dialog-website-label} function sets the URL.
   @see-class{gtk:about-dialog}")
 
-;;; --- about-dialog-wrap-license ------------------------------------------
+;;; --- about-dialog-wrap-license ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "wrap-license"
-                                               'about-dialog) t)
+(setf (documentation (liber:slot-documentation "wrap-license" 'about-dialog) t)
  "The @code{wrap-license} property of type @code{:boolean} (Read / Write) @br{}
   Whether to wrap the text in the license dialog. @br{}
   Default value: @em{false}")
@@ -846,9 +839,9 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
     Accessor of the @slot[gtk:about-dialog]{wrap-license} slot of the
     @class{gtk:about-dialog} class.
   @end{short}
-  The @sym{gtk:about-dialog-wrap-license} function returns whether the license
+  The @fun{gtk:about-dialog-wrap-license} function returns whether the license
   text in the about dialog is automatically wrapped. The
-  @sym{(setf gtk:about-dialog-wrap-license)} function sets the property.
+  @setf{gtk:about-dialog-wrap-license} function sets the property.
   @see-class{gtk:about-dialog}")
 
 ;;; ----------------------------------------------------------------------------
@@ -880,9 +873,7 @@ gtk_about_dialog_set_translator_credits (about, _(\"translator-credits\"));
   @argument[about]{a @class{gtk:about-dialog} widget}
   @argument[section]{a string with the name of the section}
   @argument[people]{a list of strings of the people who belong to that section}
-  @begin{short}
-    Creates a new section in the credits page.
-  @end{short}
+  @short{Creates a new section in the credits page.}
   @see-class{gtk:about-dialog}"
   (about (g:object about-dialog))
   (section :string)

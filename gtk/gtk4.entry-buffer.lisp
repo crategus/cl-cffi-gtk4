@@ -2,7 +2,7 @@
 ;;; gtk4.entry-buffer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -94,14 +94,14 @@
 (setf (documentation 'entry-buffer 'type)
  "@version{2023-1-30}
   @begin{short}
-    The @sym{gtk:entry-buffer} object contains the actual text displayed in a
+    The @class{gtk:entry-buffer} object contains the actual text displayed in a
     @class{gtk:entry} widget.
   @end{short}
-  A single @sym{gtk:entry-buffer} object can be shared by multiple
+  A single @class{gtk:entry-buffer} object can be shared by multiple
   @class{gtk:entry} widgets which will then share the same text content, but
   not the cursor position, visibility attributes, icon etc.
 
-  The @sym{gtk:entry-buffer} class may be derived from. Such a derived class
+  The @class{gtk:entry-buffer} class may be derived from. Such a derived class
   might allow text to be stored in an alternate location, such as non-pageable
   memory, useful in the case of important passwords. Or a derived class could
   integrate with an application's concept of undo/redo.
@@ -112,7 +112,7 @@ lambda (buffer position n-chars)    :run-first
       @end{pre}
       The signal is emitted after text is deleted from the entry buffer.
       @begin[code]{table}
-        @entry[buffer]{A @sym{gtk:entry-buffer} object.}
+        @entry[buffer]{A @class{gtk:entry-buffer} object.}
         @entry[position]{An integer with the position the text was deleted at.}
         @entry[n-chars]{An integer with the number of characters that were
           deleted.}
@@ -123,7 +123,7 @@ lambda (buffer position chars n-chars)    :run-first
       @end{pre}
       The signal is emitted after text is inserted into the entry buffer.
       @begin[code]{table}
-        @entry[buffer]{A @sym{gtk:entry-buffer} object.}
+        @entry[buffer]{A @class{gtk:entry-buffer} object.}
         @entry[position]{An integer with the position the text was inserted at.}
         @entry[chars]{A string with the text that was inserted.}
         @entry[n-chars]{An integer with the number of characters that were
@@ -162,7 +162,7 @@ lambda (buffer position chars n-chars)    :run-first
     Accessor of the @slot[gtk:entry-buffer]{length} slot of the
     @class{gtk:entry-buffer} class.
   @end{short}
-  The @sym{gtk:entry-buffer-length} function retrieves the length in characters
+  The @fun{gtk:entry-buffer-length} function retrieves the length in characters
   of the entry buffer.
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-bytes}")
@@ -191,11 +191,11 @@ lambda (buffer position chars n-chars)    :run-first
     Accessor of the @slot[gtk:entry-buffer]{max-length} slot of the
     @class{gtk:entry-buffer} class.
   @end{short}
-  The @sym{gtk:entry-buffer-max-length} function returns the maximum allowed
+  The @fun{gtk:entry-buffer-max-length} function returns the maximum allowed
   number of characters in a entry buffer, or 0 if there is no maximum. The
-  @sym{(setf gtk:entry-buffer-max-length)} function sets the maximum allowed
-  length of the contents of the entry buffer. If the current contents are
-  longer than the given length, then they will be truncated to fit.
+  @setf{gtk:entry-buffer-max-length} function sets the maximum allowed length of
+  the contents of the entry buffer. If the current contents are longer than the
+  given length, then they will be truncated to fit.
   @see-class{gtk:entry-buffer}")
 
 ;;; --- entry-buffer-text ------------------------------------------------------
@@ -219,11 +219,10 @@ lambda (buffer position chars n-chars)    :run-first
     Accessor of the @slot[gtk:entry-buffer]{text} slot of the
     @class{gtk:entry-buffer} class.
   @end{short}
-  The @sym{gtk:entry-buffer-text} function retrieves the contents of the entry
-  buffer. The @sym{(setf gtk:entry-buffer-text} function sets the text.
-
-  This is roughly equivalent to calling the @fun{gtk:entry-buffer-delete-text}
-  and @fun{gtk:entry-buffer-insert-text} functions.
+  The @fun{gtk:entry-buffer-text} function retrieves the contents of the entry
+  buffer. The @setf{gtk:entry-buffer-text} function sets the text. This is
+  roughly equivalent to calling the @fun{gtk:entry-buffer-delete-text} and
+  @fun{gtk:entry-buffer-insert-text} functions.
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-delete-text}
   @see-function{gtk:entry-buffer-insert-text}")
@@ -288,7 +287,6 @@ lambda (buffer position chars n-chars)    :run-first
   @begin{short}
     Inserts text into the contents of the entry buffer, at the given position.
   @end{short}
-
   If the @arg{position} argument or the length of the text are out of bounds,
   or the maximum buffer text length is exceeded, then they are coerced to sane
   values. Note that the position is in characters, not in bytes.

@@ -2,7 +2,7 @@
 ;;; gtk4.text.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -75,6 +75,7 @@
 ;;;     gtk_text_unset_invisible_char
 ;;;     gtk_text_get_text_length
 ;;;     gtk_text_grab_focus_without_selecting
+;;;     gtk_text_compute_cursor_extents                    Since 4.4
 ;;;
 ;;; Properties
 ;;;
@@ -212,7 +213,7 @@
 (setf (documentation 'text 'type)
  "@version{#2023-3-12}
   @begin{short}
-    The @sym{gtk:text} widget is a single line text entry widget.
+    The @class{gtk:text} widget is a single line text entry widget.
   @end{short}
   A fairly large set of key bindings are supported by default. If the entered
   text is longer than the allocation of the widget, the widget will scroll so
@@ -241,7 +242,7 @@ text[.read-only]
 ├── [block-cursor]
 ╰── [window.popup]
     @end{pre}
-    The @sym{gtk:text} implementation has a main node with the name text.
+    The @class{gtk:text} implementation has a main node with the name text.
     Depending on the properties of the widget, the @code{.read-only} style class
     may appear.
 
@@ -265,11 +266,11 @@ text[.read-only]
     the @code{.insertion-cursor} style class.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:text} implementation uses the @code{:none} role of the
+    The @class{gtk:text} implementation uses the @code{:none} role of the
     @symbol{gtk:accessible-role}, which causes it to be skipped for
-    accessibility. This is because the @sym{gtk:text} implementation is expected
-    to be used as a delegate for a @class{gtk:editable} implementation that will
-    be represented to accessibility.
+    accessibility. This is because the @class{gtk:text} implementation is
+    expected to be used as a delegate for a @class{gtk:editable} implementation
+    that will be represented to accessibility.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"activate\" signal}
@@ -279,7 +280,8 @@ lambda (entry)    :action
       The signal is emitted when the user hits the @kbd{Enter} key. The default
       bindings for this signal are all forms of the @kbd{Enter} key.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget on which the signal is emitted.}
+        @entry[entry]{The @class{gtk:text} widget on which the signal is
+          emitted.}
       @end{table}
     @subheading{The \"backspace\" signal}
       @begin{pre}
@@ -289,7 +291,7 @@ lambda (entry)    :action
       for it. The default bindings for this signal are the @kbd{Backspace} and
       @kbd{Shift-Backspace} keys.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
     @subheading{The \"copy-clipboard\" signal}
       @begin{pre}
@@ -299,7 +301,7 @@ lambda (entry)    :action
       to the clipboard. The default bindings for this signal are the
       @kbd{Ctrl-c} and @kbd{Ctrl-Insert} keys.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
     @subheading{The \"cut-clipboard\" signal}
       @begin{pre}
@@ -309,7 +311,7 @@ lambda (entry)    :action
       to the clipboard. The default bindings for this signal are the
       @kbd{Ctrl-x} and @kbd{Shift-Delete} keys.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
     @subheading{The \"delete-from-cursor\" signal}
       @begin{pre}
@@ -322,7 +324,7 @@ lambda (entry type count)    :action
       the @kbd{Delete} key for deleting a character and the @kbd{Ctrl-Delete}
       key for deleting a word.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
         @entry[type]{The granularity of the deletion, as a value of the
           @symbol{gtk:delete-type} enumeration.}
         @entry[count]{An integer with the number of type units to delete.}
@@ -335,7 +337,7 @@ lambda (entry string)    :action
       initiates the insertion of a fixed string at the cursor. This signal has
       no default bindings.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
         @entry[string]{The string to insert.}
       @end{table}
     @subheading{The \"insert-emoji\" signal}
@@ -346,7 +348,7 @@ lambda (entry)    :action
       chooser for the text entry field. The default bindings for this signal are
       the @kbd{Ctrl-.} and @kbd{Ctrl-;} keys.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
     @subheading{The \"move-cursor\" signal}
       @begin{pre}
@@ -365,7 +367,7 @@ lambda (entry step count extend)    :action
       words/paragraphs. @kbd{Home}/@kbd{End} keys move to the ends of the
       buffer.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
         @entry[step]{The granularity of the move, as a value of the
         @symbol{gtk:movement-step} enumeration.}
         @entry[count]{An integer with the number of step units to move.}
@@ -379,7 +381,7 @@ lambda (entry)    :action
       of the clipboard into the text view. The default bindings for this signal
       are the @kbd{Ctrl-v} and @kbd{Shift-Insert} keys.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
     @subheading{The \"preedit-changed\" signal}
       @begin{pre}
@@ -389,7 +391,7 @@ lambda (entry preedit)    :action
       committed to the buffer. So if you are interested in the text, connect to
       this signal.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
         @entry[preedit]{The current preedit string.}
       @end{table}
     @subheading{The \"toggle-overwrite\" signal}
@@ -400,7 +402,7 @@ lambda (entry)    :action
       overwrite mode of the text entry field. The default bindings for this
       signal is the @kbd{Insert} key.
       @begin[code]{table}
-        @entry[entry]{The @sym{gtk:text} widget which received the signal.}
+        @entry[entry]{The @class{gtk:text} widget which received the signal.}
       @end{table}
   @end{dictionary}
   @begin[Action Details]{dictionary}
@@ -517,9 +519,9 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{attributes} slot of the @class{gtk:text}
     class.
   @end{short}
-  The @sym{gtk:text-attributes} function gets the attribute list that was set on
-  the text entry field, if any. The @sym{(setf gtk:text-attributes)} function
-  sets a attribute list. The attributes in the list are applied to the text.
+  The @fun{gtk:text-attributes} function gets the attribute list that was set on
+  the text entry field, if any. The @setf{gtk:text-attributes} function sets a
+  attribute list. The attributes in the list are applied to the text.
   @see-class{gtk:text}
   @see-class{pango:attr-list}")
 
@@ -543,10 +545,9 @@ lambda (entry)    :action
   @begin{short}
     Accessor of the @slot[gtk:text]{buffer} slot of the @class{gtk:text} class.
   @end{short}
-  The @sym{gtk:text-buffer} function gets the @class{gtk:entry-buffer} object
-  which holds the text for the text entry field. The
-  @sym{(setf gtk:text-buffer)} function sets the @class{gtk:entry-buffer}
-  object.
+  The @fun{gtk:text-buffer} function gets the @class{gtk:entry-buffer} object
+  which holds the text for the text entry field. The @setf{gtk:text-buffer}
+  function sets the @class{gtk:entry-buffer} object.
   @see-class{gtk:text}
   @see-class{gtk:entry-buffer}")
 
@@ -573,11 +574,11 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{enable-emoji-completion} slot of the
     @class{gtk:text} class.
   @end{short}
-  The @sym{gtk:text-enable-emoji-completion} function returns whether Emoji
+  The @fun{gtk:text-enable-emoji-completion} function returns whether Emoji
   completion is enabled for text entry field. The
-  @sym{(setf gtk:text-enable-emoji-completion)} function sets whether Emoji
-  completion is enabled. If it is, typing ':', followed by a recognized keyword,
-  will pop up a window with suggested Emojis matching the keyword.
+  @setf{gtk:text-enable-emoji-completion} function sets whether Emoji completion
+  is enabled. If it is, typing ':', followed by a recognized keyword, will pop
+  up a window with suggested Emojis matching the keyword.
   @see-class{gtk:text}")
 
 ;;; --- text-extra-menu --------------------------------------------------------
@@ -601,9 +602,9 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{extra-menu} slot of the @class{gtk:text}
     class.
   @end{short}
-  The @sym{gtk:text-extra-menu} function gets the menu model. The
-  @sym{(setf gtk:text-extra-menu)} function sets a menu model to add when
-  constructing the context menu for the text entry field.
+  The @fun{gtk:text-extra-menu} function gets the menu model. The
+  @setf{gtk:text-extra-menu} function sets a menu model to add when constructing
+  the context menu for the text entry field.
   @see-class{gtk:text}
   @see-class{g:menu-model}")
 
@@ -661,10 +662,9 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{input-hints} slot of the @class{gtk:text}
     class.
   @end{short}
-  The @sym{gtk:text-input-hints} function gets the value of the
+  The @fun{gtk:text-input-hints} function gets the value of the
   @slot[gtk:text]{input-hints} property, which allows input methods to fine-tune
-  their behaviour. The @sym{(setf gtk:text-input-hints)} function sets the
-  property.
+  their behaviour. The @setf{gtk:text-input-hints} function sets the property.
   @see-class{gtk:text}
   @see-symbol{gtk:input-hints}")
 
@@ -693,10 +693,10 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{input-purpose} slot of the @class{gtk:text}
     class.
   @end{short}
-  The @sym{gtk:text-input-purpose} function gets the value of the
+  The @fun{gtk:text-input-purpose} function gets the value of the
   @slot[gtk:text]{input-purpose} property, which can be used by on-screen
   keyboards and other input methods to adjust their behaviour. The
-  @sym{(setf gtk:text-input-purpose)} function sets the property.
+  @setf{gtk:text-input-purpose} function sets the property.
   @see-class{gtk:text}
   @see-symbol{gtk:input-purpose}")
 
@@ -722,11 +722,11 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{invisible-char} slot of the @class{gtk:text}
     class.
   @end{short}
-  The @sym{gtk:text-invisible-char} function retrieves the character displayed
+  The @fun{gtk:text-invisible-char} function retrieves the character displayed
   in place of the real characters for entries with visibility set to false. Note
   that GTK does not compute this value unless it needs it, so the value returned
   by this function is not very useful unless it has been explicitly set. The
-  @sym{(setf gtk:text-invisible-char)} function sets the character.
+  @setf{gtk:text-invisible-char} function sets the character.
 
   By default, GTK picks the best invisible char available in the current font.
   If you set the invisible char to 0, then the user will get no feedback at all.
@@ -783,16 +783,16 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{max-length} slot of the @class{gtk:text}
     class.
   @end{short}
-  The @sym{gtk:text-max-length} function retrieves the maximum allowed length
+  The @fun{gtk:text-max-length} function retrieves the maximum allowed length
   of the text in the text entry field. This is equivalent to getting the
   @class{gtk:entry-buffer} object of the text entry field and calling the
   @fun{gtk:entry-buffer-max-length} function on it.
 
-  The @sym{(setf gtk:text-max-length)} function sets the maximum allowed length.
-  If the current contents are longer than the given length, then they will be
+  The @setf{gtk:text-max-length} function sets the maximum allowed length. If
+  the current contents are longer than the given length, then they will be
   truncated to fit. This is equivalent to getting the @class{gtk:entry-buffer}
   object of the text entry field and calling the
-  @sym{(setf gtk:entry-buffer-max-length)} function on it.
+  @setf{gtk:entry-buffer-max-length} function on it.
   @see-class{gtk:text}
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-max-length}")
@@ -819,9 +819,9 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{overwrite-mode} slot of the @class{gtk:text}
     class.
   @end{short}
-  The @sym{gtk:text-overwrite-mode} function gets the value of the property. The
-  @sym{(setf gtk:text-max-length)} function sets whether the text is overwritten
-  when typing in the text entry field.
+  The @fun{gtk:text-overwrite-mode} function gets the value of the property. The
+  @setf{gtk:text-max-length} function sets whether the text is overwritten when
+  typing in the text entry field.
   @see-class{gtk:text}")
 
 ;;; --- text-placeholder-text --------------------------------------------------
@@ -848,11 +848,11 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{placeholder-text} slot of the
     @class{gtk:text} class.
   @end{short}
-  The @sym{gtk:text-placeholder-text} function retrieves the text that will be
+  The @fun{gtk:text-placeholder-text} function retrieves the text that will be
   displayed when the text entry field is empty and unfocused. The
-  @sym{(setf gtk:text-placeholder-text)} function sets text to be displayed.
-  This can be used to give a visual hint of the expected contents of the text
-  entry field.
+  @setf{gtk:text-placeholder-text} function sets text to be displayed. This can
+  be used to give a visual hint of the expected contents of the text entry
+  field.
   @see-class{gtk:text}")
 
 ;;; --- text-propagate-text-width ----------------------------------------------
@@ -878,14 +878,13 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{propagate-text-width} slot of the
     @class{gtk:text} class.
   @end{short}
-
-  The @sym{gtk:text-propagate-text-width} function returns whether the text
+  The @fun{gtk:text-propagate-text-width} function returns whether the text
   entry field will grow and shrink with the content. The
-  @sym{(setf gtk:text-propagate-text-width)} function sets whether the text
-  entry field will grow and shrink with the content.
+  @setf{gtk:text-propagate-text-width} function sets whether the text entry
+  field will grow and shrink with the content.
   @see-class{gtk:text}")
 
-;;; --- text-scroll-offset -------------------------------------------------
+;;; --- text-scroll-offset -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scroll-offset" 'text) t)
@@ -931,8 +930,8 @@ lambda (entry)    :action
   @begin{short}
     Accessor of the @slot[gtk:text]{tabs} slot of the @class{gtk:text} class.
   @end{short}
-  The @sym{gtk:text-tabs} function gets the tabstops that were set on the text
-  entry field, if any. The @sym{(setf gtk:text-tabs)} function sets a
+  The @fun{gtk:text-tabs} function gets the tabstops that were set on the text
+  entry field, if any. The @setf{gtk:text-tabs} function sets a
   @class{pango:tab-array} instance. The tabstops in the array are applied to
   the text in the text entry field.
   @see-class{gtk:text}
@@ -961,10 +960,10 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{truncate-multiline} slot of the
     @class{gtk:text} class.
   @end{short}
-  The @sym{gtk:text-truncate-multiline} function returns whether the text
+  The @fun{gtk:text-truncate-multiline} function returns whether the text
   entry field will truncate multi-line text that is pasted into the widget. The
-  @sym{(setf gtk:text-truncate-multiline)} function sets whether the text entry
-  field should truncate multi-line text.
+  @setf{gtk:text-truncate-multiline} function sets whether the text entry field
+  should truncate multi-line text.
   @see-class{gtk:text}")
 
 ;;; --- text-visibility --------------------------------------------------------
@@ -989,9 +988,9 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:text]{visibility} slot of the @class{gtk:text}
     class.
   @end{short}
-  The @sym{gtk:text-visibility} function retrieves whether the text in the
-  text entry field is visible. The @sym{(setf gtk:text-visibility)} function
-  sets whether the contents of the text entry field are visible or not. When
+  The @fun{gtk:text-visibility} function retrieves whether the text in the
+  text entry field is visible. The @setf{gtk:text-visibility} function sets
+  whether the contents of the text entry field are visible or not. When
   visibility is set to @em{false}, characters are displayed as the invisible
   char, and will also appear that way when the text in the text entry field is
   copied to the clipboard.
@@ -1103,5 +1102,44 @@ lambda (entry)    :action
   (entry (g:object text)))
 
 (export 'text-grab-focus-without-selecting)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_text_compute_cursor_extents ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_text_compute_cursor_extents" %text-compute-cursor-extents)
+    :void
+  (entry (g:object text))
+  (position :size)
+  (strong (:pointer (:struct graphene:rect-t)))
+  (weak (:pointer (:struct graphene:rect-t))))
+
+(defun text-compute-cursor-extents (entry position strong weak)
+ #+liber-documentation
+ "@version{#2023-9-26}
+  @argument[entry]{a @class{gtk:text} widget}
+  @argument[position]{an integer with the character position}
+  @argument[strong]{a @symbol{graphene:rect-t} instance to store the strong
+    cursor position, the argument can be @code{nil}}
+  @argument[weak]{a @symbol{graphene:rect-t} instance to store the weak cursor
+    position, the argument can be @code{nil}}
+  @begin{short}
+    Determine the positions of the strong and weak cursors if the insertion
+    point in the layout is at @arg{position}.
+  @end{short}
+  The position of each cursor is stored as a zero-width rectangle. The strong
+  cursor location is the location where characters of the directionality equal
+  to the base direction are inserted. The weak cursor location is the location
+  where characters of the directionality opposite to the base direction are
+  inserted. The rectangle positions are in widget coordinates.
+
+  Since 4.4
+  @see-class{gtk:text}
+  @see-symbol{graphene:rect-t}"
+  (let ((strong (if strong strong (cffi:null-pointer)))
+        (weak (if weak weak (cffi:null-pointer))))
+    (%text-compute-cursor-extents entry position strong weak)))
+
+(export 'text-compute-cursor-extents)
 
 ;;; --- End of file gtk4.text.lisp ---------------------------------------------

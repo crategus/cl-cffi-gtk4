@@ -2,7 +2,7 @@
 ;;; gtk4.text-iter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -221,11 +221,11 @@
  "@version{2023-2-2}
   @begin{short}
     Most text manipulation is accomplished with iterators, represented by a
-    @sym{gtk:text-iter} instance.
+    @class{gtk:text-iter} instance.
   @end{short}
   An iterator represents a position between two characters in the text buffer.
 
-  The @sym{gtk:text-iter} structure is designed to be allocated on the stack.
+  The @class{gtk:text-iter} structure is designed to be allocated on the stack.
   It is guaranteed to be copiable by value and never contain any heap-allocated
   data. Iterators are not valid indefinitely. Whenever the text buffer is
   modified in a way that affects the number of characters in the text buffer,
@@ -343,9 +343,9 @@
   @begin{short}
     Accessor of the character offset of the iterator.
   @end{short}
-  The @sym{gtk:text-iter-offset} function returns the character offset of an
-  iterator. The @sym{(setf gtk:text-iter-offset)} function sets the iterator
-  to point to the character offset.
+  The @fun{gtk:text-iter-offset} function returns the character offset of an
+  iterator. The @setf{gtk:text-iter-offset} function sets the iterator to point
+  to the character offset.
 
   Each character in a text buffer has an offset, starting with 0 for the first
   character in the text buffer. Use the @fun{gtk:text-buffer-iter-at-offset}
@@ -379,9 +379,9 @@
   @begin{short}
     Accessor of the line number containing the iterator.
   @end{short}
-  The @sym{gtk:text-iter-line} function returns the line number containing the
-  iterator. The @sym{(setf gtk:text-iter-line)} function moves the iterator
-  to the start of the given line number.
+  The @fun{gtk:text-iter-line} function returns the line number containing the
+  iterator. The @setf{gtk:text-iter-line} function moves the iterator to the
+  start of the given line number.
 
   Lines in a text buffer are numbered beginning with 0 for the first line in
   the text buffer. If the line number is negative or larger than the number of
@@ -417,10 +417,10 @@
     Accessor of the character offset relative to the start of the current line
     of the iterator.
   @end{short}
-  The @sym{gtk:text-iter-line-offset} function returns the character offset of
+  The @fun{gtk:text-iter-line-offset} function returns the character offset of
   the iterator, counting from the start of a newline-terminated line. The
-  @sym{(setf gtk:text-iter-line-offset)} function moves the iterator within a
-  line, to a new character offset.
+  @setf{gtk:text-iter-line-offset} function moves the iterator within a line, to
+  a new character offset.
 
   The first character on the line has offset 0. The given character offset must
   be less than or equal to the number of characters in the line. If equal, the
@@ -458,9 +458,9 @@
     Accessor of the byte offset relative to the start of the current line
     of the iterator.
   @end{short}
-  The @sym{gtk:text-iter-line-index} function returns the byte index of the
+  The @fun{gtk:text-iter-line-index} function returns the byte index of the
   iterator, counting from the start of a newline-terminated line. The
-  @sym{(setf gtk:text-iter-line-index)} function sets the byte index.
+  @setf{gtk:text-iter-line-index} function sets the byte index.
 
   Remember that the text buffer encodes text in UTF-8, and that characters can
   require a variable number of bytes to represent. The given byte index must be
@@ -497,7 +497,7 @@
     Accessor of the byte index relative to the start of the current line
     of the iterator.
   @end{short}
-  The @sym{gtk:text-iter-visible-line-index} function returns the number of
+  The @fun{gtk:text-iter-visible-line-index} function returns the number of
   bytes from the start of the line to the given iterator, not counting bytes
   that are invisible due to tags with the \"invisible\" flag toggled on.
   @see-class{gtk:text-iter}
@@ -531,7 +531,7 @@
     Accessor of the character offset relative to the start of the current line
     of the iterator.
   @end{short}
-  The @sym{gtk:text-iter-visible-line-offset} function returns the offset in
+  The @fun{gtk:text-iter-visible-line-offset} function returns the offset in
   characters from the start of the line to the given iterator, not counting
   characters that are invisible due to tags with the \"invisible\" flag toggled
   on.
@@ -732,7 +732,6 @@
   @begin{short}
     Returns a list of tags that are toggled on or off at this point.
   @end{short}
-
   If @arg{toggled} is @em{true}, the list contains tags that are toggled on.
   If a tag is toggled on at the iterator, then some non-empty range of
   characters following the iterator has that tag applied to it. If a tag is
@@ -784,11 +783,11 @@
   If @arg{tag} is @code{nil}, returns @em{true} if any tag is toggled on at
   this point.
 
-  Note that if the @sym{gtk:text-iter-starts-tag} function returns @em{true},
+  Note that if the @fun{gtk:text-iter-starts-tag} function returns @em{true},
   it means that the iterator is at the beginning of the tagged range, and that
   the character at the iterator is inside the tagged range. In other words,
   unlike the @fun{gtk:text-iter-ends-tag} function, if the
-  @sym{gtk:text-iter-starts-tag} function returns @em{true}, the
+  @fun{gtk:text-iter-starts-tag} function returns @em{true}, the
   @fun{gtk:text-iter-has-tag} function will also return @em{true} for the same
   parameters.
   @see-class{gtk:text-iter}
@@ -816,7 +815,7 @@
     Returns @em{true} if @arg{tag} is toggled off at exactly this point.
   @end{short}
   If @arg{tag} is @code{nil}, returns @em{true} if any tag is toggled off at
-  this point. Note that the @sym{gtk:text-iter-ends-tag} function returns
+  this point. Note that the @fun{gtk:text-iter-ends-tag} function returns
   @em{true} if the iterator is the end of the tagged range. The
   @fun{gtk:text-iter-has-tag} function tells you whether an iterator is within
   a tagged range.
@@ -918,9 +917,8 @@
     of text.
   @end{short}
   Non-editable text is \"locked\" and cannot be changed by the user via the
-  @class{gtk:text-view} widget. This function is simply a convenience wrapper
-  around the @fun{gtk:text-iter-attributes} function. If no tags applied to
-  this text affect editability, @arg{setting} will be returned.
+  @class{gtk:text-view} widget. If no tags applied to this text affect
+  editability, @arg{setting} will be returned.
 
   You do not want to use this function to decide whether text can be inserted
   at the iterator, because for insertion you do not want to know whether the
@@ -930,7 +928,6 @@
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-view}
-  @see-function{gtk:text-iter-attributes}
   @see-function{gtk:text-iter-can-insert}"
   (iter (g:boxed text-iter))
   (setting :boolean))
@@ -1164,15 +1161,15 @@
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{@em{True} if the cursor can be placed at the iterator.}
   @begin{short}
-    See the @fun{gtk:text-iter-forward-cursor-position} function, the
-    @symbol{pango-log-attr} structure or the @fun{pango-default-break} function
-    for details on what a cursor position is.
+    See the @fun{gtk:text-iter-move} function, the @symbol{pango:log-attr}
+    structure or the @fun{pango:default-break} function for details on what a
+    cursor position is.
   @end{short}
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
-  @see-symbol{pango-log-attr}
-  @see-function{pango-default-break}
-  @see-function{gtk:text-iter-forward-cursor-position}"
+  @see-symbol{pango:log-attr}
+  @see-function{pango:default-break}
+  @see-function{gtk:text-iter-move}"
   (iter (g:boxed text-iter)))
 
 (export 'text-iter-is-cursor-position)
@@ -1226,18 +1223,16 @@
  #+liber-documentation
  "@version{2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @return{A @class{pange-language} instance with the language in effect at
+  @return{A @class{pange:language} instance with the language in effect at
     the iterator.}
   @begin{short}
-    A convenience wrapper around the @fun{gtk:text-iter-attributes} function,
-    which returns the language in effect at the iterator.
+    Returns the language in effect at the iterator.
   @end{short}
   If no tags affecting language apply to the iterator, the return value is
   identical to that of the @fun{gtk:default-language} function.
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-class{pango:language}
-  @see-function{gtk:text-iter-attributes}
   @see-function{gtk:default-language}"
   (iter (g:boxed text-iter)))
 
@@ -1256,7 +1251,7 @@
     Returns @em{true} if the iterator is the end iterator, i.e. one past the
     last dereferenceable iterator in the text buffer.
   @end{short}
-  The @sym{gtk:text-iter-is-end} function is the most efficient way to check
+  The @fun{gtk:text-iter-is-end} function is the most efficient way to check
   whether an iterator is the end iterator.
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
@@ -1514,10 +1509,10 @@
   @end{short}
 
   Note that images embedded in the text buffer occupy 1 character slot, so the
-  @sym{gtk:text-iter-forward-char} function may actually move onto an image
+  @fun{gtk:text-iter-forward-char} function may actually move onto an image
   instead of a character, if you have images in your text buffer. If the
   iterator is the end iterator or one character before it, the iterator will now
-  point at the end iterator, and the @sym{gtk:text-iter-forward-char} function
+  point at the end iterator, and the @fun{gtk:text-iter-forward-char} function
   returns @em{false} for convenience when writing loops.
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
@@ -1538,7 +1533,7 @@
   @end{short}
 
   Returns @em{true} if movement was possible. If the iterator was the first in
-  the text buffer, character offset 0, the @sym{gtk:text-iter-backward-char}
+  the text buffer, character offset 0, the @fun{gtk:text-iter-backward-char}
   function returns @em{false} for convenience when writing loops.
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
@@ -2028,7 +2023,6 @@
   @begin{short}
     Moves forward to the next visible word end.
   @end{short}
-
   If the iterator is currently on a word end, moves forward to the next one
   after that. Word breaks are determined by Pango and should be correct for
   nearly any language. If not, the correct fix would be to the Pango word break
@@ -2051,7 +2045,6 @@
   @begin{short}
     Moves backward to the previous visible word start.
   @end{short}
-
   If the iterator is currently on a word start, moves backward to the next one
   after that. Word breaks are determined by Pango and should be correct for
   nearly any language. If not, the correct fix would be to the Pango word break
@@ -2175,7 +2168,6 @@
   @begin{short}
     Moves the iterator to the start of the previous visible line.
   @end{short}
-
   Returns @em{true} if the iterator could be moved. I.e. if the iterator was at
   character offset 0, this function returns @em{false}. Therefore if the
   iterator was already on line 0, but not at the start of the line, the iterator
@@ -2229,7 +2221,6 @@
   @begin{short}
     Moves @arg{count} visible lines backward, if possible.
   @end{short}
-
   If @arg{count} would move past the start or end of the text buffer, moves to
   the start or end of the text buffer. The return value indicates whether the
   iterator moved onto a dereferenceable position; if the iterator did not move,
@@ -2381,7 +2372,7 @@ lambda (ch)
  #+liber-documentation
  "@version{#2023-2-2}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @argument[pred]{a @sym{gtk:text-char-predicate} callback function to be
+  @argument[pred]{a @symbol{gtk:text-char-predicate} callback function to be
     called on each character}
   @argument[limit]{a @class{gtk:text-iter} instance with a search limit, or
     @code{nil} for none}
@@ -2390,8 +2381,9 @@ lambda (ch)
   @return{A boolean whether a match was found.}
   @begin{short}
     This is a convenience function of the Lisp implementation which combines
-    the @fun{gtk:text-iter-forward-find-char} and
-  @fun{gtk:text-iter-backward-find-char} functions into one single function.
+    the @code{gtk_text_iter_forward_find_char()} and
+    @code{gtk_text_iter_backward_find_char()} functions into one single
+    function.
   @end{short}
 
   The direction of the search is indicated with the keyword argument
@@ -2402,9 +2394,7 @@ lambda (ch)
   In addition the argument @arg{limit} is a keyword argument with the default
   value @code{nil}.
   @see-class{gtk:text-iter}
-  @see-class{gtk:text-buffer}
-  @see-function{gtk:text-iter-forward-find-char}
-  @see-function{gtk:text-iter-backward-find-char}"
+  @see-class{gtk:text-buffer}"
   (assert (typep direction '(member :forward :backward)))
   (glib:with-stable-pointer (ptr predicate)
     (if (eq direction :forward)
@@ -2434,7 +2424,7 @@ lambda (ch)
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @argument[pred]{a @sym{gtk:text-char-predicate} callback function to be
+  @argument[pred]{a @symbol{gtk:text-char-predicate} callback function to be
     called on each character}
   @argument[limit]{a @class{gtk:text-iter} instance with the search limit, or
     @code{nil} for none}
@@ -2450,9 +2440,9 @@ lambda (ch)
   @see-class{gtk:text-buffer}
   @see-function{gtk:text-iter-backward-find-char}"
   (text-iter-find-char iter
-                           pred
-                           :limit limit
-                           :direction :forward))
+                       pred
+                       :limit limit
+                       :direction :forward))
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_iter_backward_find_char                       not exported
@@ -2469,7 +2459,7 @@ lambda (ch)
  #+liber-documentation
  "@version{#2021-6-15}
   @argument[iter]{a @class{gtk:text-iter} instance}
-  @argument[pred]{a @sym{gtk:text-char-predicate} callback function to be
+  @argument[pred]{a @symbol{gtk:text-char-predicate} callback function to be
     called on each character}
   @argument[limit]{a @class{gtk:text-iter} instance with a search limit, or
     @code{nil} for none}
@@ -2482,9 +2472,9 @@ lambda (ch)
   @see-class{gtk:text-buffer}
   @see-function{gtk:text-iter-forward-find-char}"
   (text-iter-find-char iter
-                           pred
-                           :limit limit
-                           :direction :backward))
+                       pred
+                       :limit limit
+                       :direction :backward))
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_iter_search
@@ -2510,8 +2500,8 @@ lambda (ch)
   @end{return}
   @begin{short}
     This is a convenience function of the Lisp implementation which combines
-    the @fun{gtk:text-iter-forward-search} and
-    @fun{gtk:text-iter-backward-search} functions into one single function.
+    the @code{gtk_text_iter_forward_search()} and
+    @code{gtk_text_iter_backward_search()} functions into one single function.
   @end{short}
 
   The direction of the search is indicated with the keyword argument
@@ -2523,9 +2513,7 @@ lambda (ch)
   with a default value @code{nil}.
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
-  @see-symbol{gtk:text-search-flags}
-  @see-function{gtk:text-iter-forward-search}
-  @see-function{gtk:text-iter-backward-search}"
+  @see-symbol{gtk:text-search-flags}"
   (assert (typep direction '(member :forward :backward)))
   (let ((match-start (make-instance 'text-iter))
         (match-end (make-instance 'text-iter)))
