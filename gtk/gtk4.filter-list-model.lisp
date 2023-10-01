@@ -104,7 +104,7 @@
 
 #+liber-documentation
 (setf (documentation 'filter-list-model 'type)
- "@version{#2023-8-15}
+ "@version{2023-9-28}
   @begin{short}
     The @class{gtk:filter-list-model} object is a list model that filters the
     elements of the underlying model according to a @class{gtk:filter} object.
@@ -140,7 +140,7 @@
 (setf (liber:alias-for-function 'filter-list-model-filter)
       "Accessor"
       (documentation 'filter-list-model-filter 'function)
- "@version{#2023-8-15}
+ "@version{2023-9-28}
   @syntax[]{(gtk:filter-list-model-filter object) => filter}
   @syntax[]{(setf (gtk:filter-list-model-filter object) filter)}
   @argument[object]{a @class{gtk:filter-list-model} object}
@@ -151,8 +151,8 @@
     @class{gtk:filter-list-model} class.
   @end{short}
   The @fun{gtk:filter-list-model-filter} function gets the filter currently set.
-  The @sym{(setf gtk:filter-list-model-model)} function sets the filter used to
-  filter items.
+  The @setf{gtk:filter-list-model-model} function sets the filter used to filter
+  items.
   @see-class{gtk:filter-list-model}
   @see-class{gtk:filter}")
 
@@ -169,7 +169,7 @@
 (setf (liber:alias-for-function 'filter-list-model-incremental)
       "Accessor"
       (documentation 'filter-list-model-incremental 'function)
- "@version{#2023-8-15}
+ "@version{2023-9-28}
   @syntax[]{(gtk:filter-list-model-incremental object) => incremental}
   @syntax[]{(setf (gtk:filter-list-model-incremental object) incremental)}
   @argument[object]{a @class{gtk:filter-list-model} object}
@@ -180,8 +180,7 @@
   @end{short}
   The @fun{gtk:filter-list-model-incremental} function returns whether
   incremental filtering was enabled. The
-  @sym{(setf gtk:filter-list-model-incremental)} function sets incremental
-  filtering.
+  @setf{gtk:filter-list-model-incremental} function sets incremental filtering.
 
   When incremental filtering is enabled, the @class{gtk:filter-list-model}
   object will not run filters immediately, but will instead queue an idle
@@ -217,7 +216,7 @@
 (setf (liber:alias-for-function 'filter-list-model-item-type)
       "Accessor"
       (documentation 'filter-list-model-item-type 'function)
- "@version{#2023-8-15}
+ "@version{2023-9-28}
   @syntax[]{(gtk:filter-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[gtype]{a @class{g:type-t} type}
@@ -246,7 +245,7 @@
 (setf (liber:alias-for-function 'filter-list-model-model)
       "Accessor"
       (documentation 'filter-list-model-model 'function)
- "@version{#2023-8-15}
+ "@version{2023-9-28}
   @syntax[]{(gtk:filter-list-model-model object) => model}
   @syntax[]{(setf (gtk:filter-list-model-model object) model)}
   @argument[object]{a @class{gtk:filter-list-model} object}
@@ -256,7 +255,7 @@
     @class{gtk:filter-list-model} class.
   @end{short}
   The @fun{gtk:filter-list-model-model} function gets the model currently
-  filtered or @code{nil} if none. The @sym{(setf gtk:filter-list-model-model)}
+  filtered or @code{nil} if none. The @setf{gtk:filter-list-model-model}
   function sets the model to be filtered.
 
   Note that GTK makes no effort to ensure that @arg{model} conforms to the item
@@ -277,7 +276,7 @@
 (setf (liber:alias-for-function 'filter-list-model-n-items)
       "Accessor"
       (documentation 'filter-list-model-n-items 'function)
- "@version{#2023-8-15}
+ "@version{2023-9-28}
   @syntax[]{(gtk:filter-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
@@ -301,10 +300,10 @@
 (setf (liber:alias-for-function 'filter-list-model-pending)
       "Accessor"
       (documentation 'filter-list-model-pending 'function)
- "@version{#2023-8-15}
+ "@version{2023-9-28}
   @syntax[]{(gtk:filter-list-model-pending object) => pending}
   @argument[object]{a @class{gtk:filter-list-model} object}
-  @argument[pending]{An unsigned integer with the number of items not yet
+  @argument[pending]{an unsigned integer with the number of items not yet
     filtered.}
   @begin{short}
     Accessor of the @slot[gtk:filter-list-model]{pending} slot of the
@@ -335,7 +334,7 @@
 (declaim (inline filter-list-model-new))
 
 (defun filter-list-model-new (model filter)
- "@version{#2023-8-15}
+ "@version{2023-9-28}
   @argument[model]{a @class{g:list-model} object to sort, or @code{nil}}
   @argument[filter]{a @class{gtk:filter} object or @code{nil} to not filter
     items}

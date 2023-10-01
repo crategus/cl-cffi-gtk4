@@ -123,16 +123,14 @@
 
 #+liber-documentation
 (setf (documentation 'string-filter 'type)
- "@version{#2023-8-17}
+ "@version{2023-9-28}
   @begin{short}
     The @class{gtk:string-filter} object determines whether to include items by
     looking at strings and comparing them to a fixed search term.
   @end{short}
   The strings are obtained from the items by evaluating a @class{gtk:expression}
-  instance.
-
-  The @class{gtk:string-filter} object has several different modes of comparison
-  - it can match the whole string, just a prefix, or any substring.
+  instance. The @class{gtk:string-filter} object has several different modes of
+  comparison - it can match the whole string, just a prefix, or any substring.
   @see-constructor{gtk:string-filter-new}
   @see-slot{gtk:string-filter-expression}
   @see-slot{gtk:string-filter-ignore-case}
@@ -156,9 +154,9 @@
 (setf (liber:alias-for-function 'string-filter-expression)
       "Accessor"
       (documentation 'string-filter-expression 'function)
- "@version{#2023-8-17}
+ "@version{2023-9-28}
   @syntax[]{(gtk:string-filter-expression object) => expression}
-  @syntax[]{(setf (gtk:stringt-filter-expression object) expression)}
+  @syntax[]{(setf (gtk:string-filter-expression object) expression)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
@@ -167,7 +165,7 @@
   @end{short}
   The @fun{gtk:string-filter-expression} function gets the expression that the
   string filter uses to obtain strings from items. The
-  @sym{(setf gtk:string-filter-expression)} function sets the expression. The
+  @setf{gtk:string-filter-expression} function sets the expression. The
   expression must have a \"gchararray\" value type.
   @see-class{gtk:string-filter}
   @see-class{gtk:expression}")
@@ -184,7 +182,7 @@
 (setf (liber:alias-for-function 'string-filter-ignore-case)
       "Accessor"
       (documentation 'string-filter-ignore-case 'function)
- "@version{#2023-8-17}
+ "@version{2023-9-28}
   @syntax[]{(gtk:string-filter-ignore-case object) => ignore}
   @syntax[]{(setf (gtk:stringt-filter-ignore-case object) ignore)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -194,8 +192,8 @@
     @class{gtk:string-filter} class.
   @end{short}
   The @fun{gtk:string-filter-ignore-case} function returns whether the filter
-  ignores case differences. The @sym{(setf gtk:string-filter-ignore-case)}
-  function sets whether the filter ignores case differences.
+  ignores case differences. The @setf{gtk:string-filter-ignore-case} function
+  sets whether the filter ignores case differences.
   @see-class{gtk:string-filter}")
 
 ;;; --- string-filter-match-mode -----------------------------------------------
@@ -211,7 +209,7 @@
 (setf (liber:alias-for-function 'string-filter-match-mode)
       "Accessor"
       (documentation 'string-filter-match-mode 'function)
- "@version{#2023-8-17}
+ "@version{2023-9-28}
   @syntax[]{(gtk:string-filter-match-mode object) => mode}
   @syntax[]{(setf (gtk:stringt-filter-match-mode object) mode)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -221,8 +219,8 @@
     @class{gtk:string-filter} class.
   @end{short}
   The @fun{gtk:string-filter-match-mode} function returns the match mode that
-  the filter is using. The @sym{(setf gtk:string-filter-match-mode)} function
-  sets the match mode for the filter.
+  the filter is using. The @setf{gtk:string-filter-match-mode} function sets the
+  match mode for the filter.
   @see-class{gtk:string-filter}
   @see-symbol{gtk:string-filter-match-mode}")
 
@@ -238,7 +236,7 @@
 (setf (liber:alias-for-function 'string-filter-search)
       "Accessor"
       (documentation 'string-filter-search 'function)
- "@version{#2023-8-17}
+ "@version{2023-9-28}
   @syntax[]{(gtk:string-filter-search object) => search}
   @syntax[]{(setf (gtk:stringt-filter-search object) search)}
   @argument[object]{a @class{gtk:string-filter} object}
@@ -248,7 +246,7 @@
     @class{gtk:string-filter} class.
   @end{short}
   The @fun{gtk:string-filter-search} function gets the search string. The
-  @sym{(setf gtk:string-filter-search)} function sets the string to search for.
+  @setf{gtk:string-filter-search} function sets the string to search for.
   @see-class{gtk:string-filter}")
 
 ;;; ----------------------------------------------------------------------------
@@ -258,7 +256,7 @@
 (declaim (inline string-filter-new))
 
 (defun string-filter-new (expression)
- "@version{#2023-8-17}
+ "@version{2023-9-28}
   @argument[expression]{a @class{gtk:expression} instance with the expression
     to evaluate or @code{nil} for none}
   @return{A new @class{gtk:string-filter} object.}

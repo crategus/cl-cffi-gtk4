@@ -1731,7 +1731,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-root)
       "Accessor"
       (documentation 'widget-root 'function)
- "@version{#2023-9-18}
+ "@version{2023-9-30}
   @syntax[]{(gtk:widget-root object) => root}
   @argument[object]{a @class{gtk:widget} object}
   @argument[root]{a @class{gtk:root} root widget}
@@ -1741,9 +1741,12 @@ lambda (widget)    :run-last
   @end{short}
   This function will return @code{nil} if the widget is not contained inside a
   widget tree with a root widget. The @class{gtk:root} widgets will return
-  themselves here.
+  themselves here. See the @fun{gtk:window-destroy} function for an example
+  of how this function can be used in a signal handler to get the toplevel
+  window.
   @see-class{gtk:widget}
-  @see-class{gtk:root}")
+  @see-class{gtk:root}
+  @see-function{gtk:window-destroy}")
 
 ;;; --- widget-scale-factor ----------------------------------------------------
 
@@ -1783,7 +1786,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-sensitive)
       "Accessor"
       (documentation 'widget-sensitive 'function)
- "@version{#2023-9-18}
+ "@version{2023-9-30}
   @syntax[]{(gtk:widget-sensitive object) => setting}
   @syntax[]{(setf (gtk:widget-sensitive object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -4692,7 +4695,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_add_css_class" widget-add-css-class) :void
  #+liber-documentation
- "@version{2023-3-26}
+ "@version{2023-9-30}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[class]{a string with the style class to add, without the leading
     \".\" used for notation of style classes}
@@ -4701,7 +4704,23 @@ lambda (widget)    :run-last
   @end{short}
   After calling this function, the style of the widget will match for
   @arg{class}, after the CSS matching rules.
-  @see-class{gtk:widget}"
+  @begin[Example]{dictionary}
+    Get the CSS style classes, add and remove a CSS style class:
+    @begin{pre}
+(defvar dialog (make-instance 'gtk:about-dialog)) => DIALOG
+(gtk:widget-css-classes dialog) 
+=> (\"background\" \"csd\" \"aboutdialog\")
+(gtk:widget-add-css-class dialog \"mystyle\")
+(gtk:widget-css-classes dialog) 
+=> (\"background\" \"csd\" \"aboutdialog\" \"mystyle\")
+(gtk:widget-remove-css-class dialog \"mystyle\")
+(gtk:widget-css-classes dialog) 
+=> (\"background\" \"csd\" \"aboutdialog\")
+    @end{pre}
+  @end{dictionary}
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-remove-css-class}
+  @see-function{gtk:widget-css-classes}"
   (widget (g:object widget))
   (class :string))
 

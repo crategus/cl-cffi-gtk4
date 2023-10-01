@@ -317,7 +317,7 @@
 
 (cffi:defcfun ("gtk_bitset_get_size_in_range" bitset-size-in-range) :uint64
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[first]{an unsigned integer with the first element to include}
   @argument[last]{an unsigned integer with the last element to include}
@@ -366,7 +366,7 @@
 
 (cffi:defcfun ("gtk_bitset_remove_all" bitset-remove-all) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @begin{short}
     Removes all values from the bitset so that it is empty again.
@@ -402,7 +402,7 @@
 
 (cffi:defcfun ("gtk_bitset_remove" bitset-remove) :boolean
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[value]{an unsigned integer with the value to remove}
   @return{@em{True} if @arg{value} was part of @arg{bitset} and @arg{bitset}
@@ -422,7 +422,7 @@
 
 (cffi:defcfun ("gtk_bitset_add_range" bitset-add-range) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[start]{an unsigned integer with the first value to add}
   @argument[n-items]{an unsigned integer with the number of consecutive values
@@ -444,7 +444,7 @@
 
 (cffi:defcfun ("gtk_bitset_remove_range" bitset-remove-range) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[start]{an unsigned integer with the first value to remove}
   @argument[n-items]{an unsigned integer with the number of consecutive values
@@ -466,7 +466,7 @@
 
 (cffi:defcfun ("gtk_bitset_add_range_closed" bitset-add-range-closed) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[first]{an unsigned integer with the first value to add}
   @argument[last]{an unsigned integer with the last value to add}
@@ -489,7 +489,7 @@
 (cffi:defcfun ("gtk_bitset_remove_range_closed" bitset-remove-range-closed)
     :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[first]{an unsigned integer with the first value to remove}
   @argument[last]{an unsigned integer with the last value to remove}
@@ -511,7 +511,7 @@
 
 (cffi:defcfun ("gtk_bitset_add_rectangle" bitset-add-rectangle) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[start]{an unsigned integer with the first value to add}
   @argument[width]{an unsigned integer with the width of the rectangle}
@@ -522,7 +522,15 @@
     @arg{stride} and inside that grid, adds a rectangle with the given
     @arg{width} and @arg{height}.
   @end{short}
-  @see-class{gtk:bitset}"
+  @begin[Note]{dictionary}
+    This funtion is equivalent to:
+    @begin{pre}
+(dotimes (i height)
+  (gtk:bitset-add-range bitset (+ (* i stride) start) width))
+    @end{pre}
+  @end{dictionary}
+  @see-class{gtk:bitset}
+  @see-function{gtk:bitset-add-range}"
   (bitset (g:boxed bitset))
   (start :uint)
   (width :uint)
@@ -537,7 +545,7 @@
 
 (cffi:defcfun ("gtk_bitset_remove_rectangle" bitset-remove-rectangle) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[start]{an unsigned integer with the first value to remove}
   @argument[width]{an unsigned integer with the width of the rectangle}
@@ -548,7 +556,15 @@
     @arg{stride} and inside that grid, removes a rectangle with the given
     @arg{width} and @arg{height}.
   @end{short}
-  @see-class{gtk:bitset}"
+  @begin[Note]{dictionary}
+    This funtion is equivalent to:
+    @begin{pre}
+(dotimes (i height)
+  (gtk:bitset-remove-range bitset (+ (* i stride) start) width))
+    @end{pre}
+  @end{dictionary}
+  @see-class{gtk:bitset}
+  @see-function{gtk:bitset-remove-range}"
   (bitset (g:boxed bitset))
   (start :uint)
   (width :uint)
@@ -563,7 +579,7 @@
 
 (cffi:defcfun ("gtk_bitset_union" bitset-union) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[other]{a @class{gtk:bitset} instance to union with}
   @begin{short}
@@ -584,7 +600,7 @@
 
 (cffi:defcfun ("gtk_bitset_intersect" bitset-intersect) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[other]{a @class{gtk:bitset} instance to intersect with}
   @begin{short}
@@ -606,7 +622,7 @@
 
 (cffi:defcfun ("gtk_bitset_subtract" bitset-subtract) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[other]{a @class{gtk:bitset} instance to subtract}
   @begin{short}
@@ -627,7 +643,7 @@
 
 (cffi:defcfun ("gtk_bitset_difference" bitset-difference) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[other]{a @class{gtk:bitset} instance to compute the difference from}
   @begin{short}
@@ -650,7 +666,7 @@
 
 (cffi:defcfun ("gtk_bitset_shift_left" bitset-shift-left) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[amount]{an unsigned integer with the amount to shift all values to
     left}
@@ -670,7 +686,7 @@
 
 (cffi:defcfun ("gtk_bitset_shift_right" bitset-shift-right) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[amount]{an unsigned integer with the amount to shift all values to
     right}
@@ -690,7 +706,7 @@
 
 (cffi:defcfun ("gtk_bitset_splice" bitset-splice) :void
  #+liber-documentation
- "@version{#2023-9-11}
+ "@version{2023-9-27}
   @argument[bitset]{a @class{gtk:bitset} instance}
   @argument[position]{an unsigned integer with the position at which to slice}
   @argument[removed]{an unsigned integer with the number of values to remove}

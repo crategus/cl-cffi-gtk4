@@ -233,7 +233,7 @@ lambda (target x y)    :run-last
   @see-slot{gtk:drop-target-preload}
   @see-slot{gtk:drop-target-value}
   @see-class{gdk:drop}
-  @see-class{gdk:drop-target-async}")
+  @see-class{gtk:drop-target-async}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details

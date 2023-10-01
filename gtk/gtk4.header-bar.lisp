@@ -96,9 +96,9 @@
 
 #+liber-documentation
 (setf (documentation 'header-bar 'type)
- "@version{2023-8-9}
+ "@version{2023-9-30}
   @begin{short}
-    The @sym{gtk:header-bar} widget is similar to a horizontal @class{gtk:box}
+    The @class{gtk:header-bar} widget is similar to a horizontal @class{gtk:box}
     widget. It allows children to be placed at the start or the end. In
     addition, it allows a title and subtitle to be displayed.
   @end{short}
@@ -108,20 +108,21 @@
   The title will be centered with respect to the width of the box, even if the
   children at either side take up different amounts of space.
 
-  The @sym{gtk:header-bar} widget can add typical window frame controls, such
+  The @class{gtk:header-bar} widget can add typical window frame controls, such
   as Minimize, Maximize and Close buttons, or the window icon.
 
-  For these reasons, the @sym{gtk:header-bar} widget is the natural choice for
+  For these reasons, the @class{gtk:header-bar} widget is the natural choice for
   use as the custom titlebar widget of a @class{gtk:window} widget, see the
   @fun{gtk:window-titlebar} function, as it gives features typical of titlebars
   while allowing the addition of child widgets.
   @begin[GtkHeaderBar as GtkBuildable]{dictionary}
-    The @sym{gtk:header-bar} widget implementation of the @class{gtk:buildable}
-    interface supports adding children at the start or end sides by specifying
-    @code{start} or @code{end} as the @code{type} attribute of a @code{<child>}
-    element, or setting the title widget by specifying @code{title} value.
+    The @class{gtk:header-bar} widget implementation of the
+    @class{gtk:buildable} interface supports adding children at the start or end
+    sides by specifying @code{start} or @code{end} as the @code{type} attribute
+    of a @code{<child>} element, or setting the title widget by specifying
+    @code{title} value.
 
-    By default the @sym{gtk:header-bar} widget uses a @class{gtk:label} widget
+    By default the @class{gtk:header-bar} widget uses a @class{gtk:label} widget
     displaying the title of the window it is contained in as the title widget,
     equivalent to the following UI definition:
     @begin{pre}
@@ -153,7 +154,7 @@ headerbar
             ├── [other children]
             ╰── windowcontrols.end
     @end{pre}
-    The @sym{gtk:header-bar} implementation has a CSS node with the name
+    The @class{gtk:header-bar} implementation has a CSS node with the name
     @code{headerbar}. It contains a @code{windowhandle} subnode, which contains
     a @code{box} subnode, which contains two @code{box} subnodes at the start
     and end of the header bar, as well as a @code{center} node that represents
@@ -204,8 +205,8 @@ headerbar
     Accessor of the @slot[gtk:header-bar]{decoration-layout} slot of the
     @class{gtk:header-bar} class.
   @end{short}
-  The @sym{gtk:header-bar-decoration-layout} function gets the decoration
-  layout. The @sym{(setf gtk:header-bar-decoration-layout)} function sets the
+  The @fun{gtk:header-bar-decoration-layout} function gets the decoration
+  layout. The @setf{gtk:header-bar-decoration-layout} function sets the
   decoration layout for the header bar, overriding the
   @slot[gtk:settings]{gtk-decoration-layout} setting.
 
@@ -251,11 +252,11 @@ headerbar
     Accessor of the @slot[gtk:header-bar]{show-title-buttons} slot of the
     @class{gtk:header-bar} class.
   @end{short}
-  The @sym{gtk:header-bar-show-title-buttons} function returns whether the
+  The @fun{gtk:header-bar-show-title-buttons} function returns whether the
   header bar shows the standard window title buttons. The
-  @sym{(setf gtk:header-bar-show-title-buttons)} function sets whether the
-  header bar shows the standard window title buttons including Close, Maximize,
-  and Minimize.
+  @setf{gtk:header-bar-show-title-buttons} function sets whether the header bar
+  shows the standard window title buttons including Close, Maximize, and
+  Minimize.
   @see-class{gtk:header-bar}")
 
 ;;; --- header-bar-title-widget ------------------------------------------------
@@ -279,9 +280,9 @@ headerbar
     Accessor of the @slot[gtk:header-bar]{title-widget} slot of the
     @class{gtk:header-bar} class.
   @end{short}
-  The @sym{gtk:header-bar-title-widget} function retrieves the title widget of
-  the header bar. The @sym{(setf gtk:header-bar-title-widget)} function sets
-  the title widget.
+  The @fun{gtk:header-bar-title-widget} function retrieves the title widget of
+  the header bar. The @setf{gtk:header-bar-title-widget} function sets the title
+  widget.
 
   When set to @code{nil}, the header bar will display the title of the window
   it is contained in. The title should help a user identify the current view.
@@ -301,9 +302,7 @@ headerbar
  #+liber-documentation
  "@version{2023-8-9}
   @return{A new @class{gtk:header-bar} widget.}
-  @begin{short}
-    Creates a new header bar.
-  @end{short}
+  @short{Creates a new header bar.}
   @see-class{gtk:header-bar}"
   (make-instance 'header-bar))
 
@@ -315,7 +314,7 @@ headerbar
 
 (cffi:defcfun ("gtk_header_bar_pack_start" header-bar-pack-start) :void
  #+liber-documentation
- "@version{#2023-8-9}
+ "@version{2023-9-30}
   @argument[header]{a @class{gtk:header-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to the
     header bar}
@@ -323,6 +322,28 @@ headerbar
     Adds a child widget to the header bar, packed with reference to the start
     of the header bar.
   @end{short}
+  @begin[Example]{dictionary}
+    Code fragment for a header bar with two buttons. The cancel button is
+    placed on the left side and the done button on the right side of the header
+    bar.
+    @begin{pre}
+(let (...
+      (header (make-instance 'gtk:header-bar
+                             :show-title-buttons nil))
+      (button (make-instance 'gtk:button
+                             :label \"_Done\"
+                             :use-underline t
+                             :sensitive nil))
+      (cancel (make-instance 'gtk:button
+                             :label \"_Cancel\"
+                             :use-underline t))
+      ...)
+  ...
+  (gtk:header-bar-pack-start header cancel)
+  (gtk:header-bar-pack-end header button)
+  ... )
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:header-bar}
   @see-class{gtk:widget}
   @see-function{gtk:header-bar-pack-end}"
@@ -337,7 +358,7 @@ headerbar
 
 (cffi:defcfun ("gtk_header_bar_pack_end" header-bar-pack-end) :void
  #+liber-documentation
- "@version{#2023-8-9}
+ "@version{2023-9-30}
   @argument[header]{a @class{gtk:header-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to the
     header bar}
@@ -345,6 +366,7 @@ headerbar
     Adds a child widget to the header bar, packed with reference to the end of
     the header bar.
   @end{short}
+  See the @fun{gtk:header-bar-pack-start} function for an example.
   @see-class{gtk:header-bar}
   @see-class{gtk:widget}
   @see-function{gtk:header-bar-pack-start}"

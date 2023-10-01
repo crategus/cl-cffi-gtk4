@@ -134,14 +134,23 @@
     (g:object string-object)
   (string :string))
 
-(defun string-object-new (string)
+(defun string-object-new (&optional string)
  #+liber-documentation
- "@version{2023-9-7}
+ "@version{2023-9-28}
   @argument[string]{a string to wrap, or @code{nil}}
   @return{A new @class{gtk:string-object} object.}
   @begin{short}
     Wraps a string in an object for use with a @class{g:list-model} object.
   @end{short}
+  @begin[Examples]{dictionary}
+    Create string objects:
+    @begin{pre}
+(gtk:string-object-new \"abcdef\") => #<GTK:STRING-OBJECT {1003E79813@}>
+(gtk:string-object-string *) => \"abcdef\"
+(gtk:string-object-new nil) => #<GTK:STRING-OBJECT {1003E79813@}>
+(gtk:string-object-string *) => nil
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:string-object}
   @see-class{g:list-model}"
   (%string-object-new (if string string (cffi:null-pointer))))
@@ -160,29 +169,27 @@
    :type-initializer "gtk_string_list_get_type")
   (#+gtk-4-10
    (strings
-    string-list-strings
-    "strings" "GStrv" nil t)))
+    %string-list-strings
+    "strings" "GStrv" nil nil)))
 
 #+liber-documentation
 (setf (documentation 'string-list 'type)
- "@version{2023-9-7}
+ "@version{2023-9-28}
   @begin{short}
     The @class{gtk:string-list} class is a list model that wraps an array of
     strings.
   @end{short}
-  The objects in the model have a @slot[gtk:string-object]{string} property.
-
-  The @class{gtk:string-list} object is well-suited for any place where you
-  would typically use a string, but need a list model.
-
-  @subheading{GtkStringList as GtkBuildable}
-  The @class{gtk:string-list} implementation of the @class{gtk:buildable}
-  interface supports adding items directly using the @code{<items>} element and
-  specifying @code{<item>} elements for each item. Each @code{<item>} element
-  supports the regular translation attributes \"translatable\", \"context\" and
-  \"comments\". Here is a UI definition fragment specifying a
-  @class{gtk:string-list} object:
-  @begin{pre}
+  The objects in the model have a @slot[gtk:string-object]{string} property. The
+  @class{gtk:string-list} object is well-suited for any place where you would
+  typically use a string, but need a list model.
+  @begin[GtkStringList as GtkBuildable]{dictionary}
+    The @class{gtk:string-list} implementation of the @class{gtk:buildable}
+    interface supports adding items directly using the @code{<items>} element
+    and specifying @code{<item>} elements for each item. Each @code{<item>}
+    element supports the regular translation attributes \"translatable\",
+    \"context\" and \"comments\". Here is a UI definition fragment specifying a
+    @class{gtk:string-list} object:
+    @begin{pre}
 <object class=\"GtkStringList\">
   <items>
     <item translatable=\"yes\">Factory</item>
@@ -190,9 +197,20 @@
     <item translatable=\"yes\">Subway</item>
   </items>
 </object>
-  @end{pre}
+    @end{pre}
+  @end{dictionary}
+  @begin[Example]{dictionary}
+    Create a list of strings with the external symbols of the GTK library:
+    @begin{pre}
+(create-list-of-gtk-symbols ()
+  (let ((model (gtk:string-list-new '())))
+    (do-external-symbols (symbol (find-package \"GTK\"))
+      (gtk:string-list-append model
+                              (string-downcase (format nil \"~a\" symbol))))
+    ...))
+    @end{pre}
+  @end{dictionary}
   @see-constructor{gtk:string-list-new}
-  @see-slot{gtk:string-list-strings}
   @see-class{gtk:string-object}
   @see-class{g:list-model}")
 
@@ -204,23 +222,15 @@
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "strings" 'string-list) t)
- "The @code{strings} property of type @code{:string} (Write / Construct only)
-  @br{}
-  An array of strings.")
+ "The @code{strings} property of type @code{:string} (Construct only) @br{}
+  An array of strings. Since 4.10 @br{}
+  @em{Note:} This property is not readable and not writable. You cannot
+  initialize it in a @code{make-instance} method. Therefore, no accessor is
+  exported.")
 
-#+(and gtk-4-10 liber-documentation)
-(setf (liber:alias-for-function 'string-list-strings)
-      "Accessor"
-      (documentation 'string-list-strings 'function)
- "@version{#2023-9-7}
-  @syntax[]{(setf (gtk:string-list-strings object) strings)}
-  @argument[object]{a @class{gtk:string-object} object}
-  @argument[string]{an array of strings}
-  @begin{short}
-    Accessor of the @slot[gtk:string-list]{strings} slot of the
-    @class{gtk:string-list} class.
-  @end{short}
-  @see-class{gtk:string-list}")
+;; no accessor exported
+
+(unexport 'string-list-strings)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_string_list_new ()
@@ -228,12 +238,19 @@
 
 (cffi:defcfun ("gtk_string_list_new" string-list-new) (g:object string-list)
  #+liber-documentation
- "@version{2023-9-7}
+ "@version{2023-9-28}
   @argument[strings]{a list of strings to put in the model}
   @return{A new @class{gtk:string-list} object.}
   @begin{short}
     Creates a new string list with the given @arg{strings}.
   @end{short}
+  @begin[Example]{dictionary}
+    @begin{pre}
+(gtk:string-list-new '(\"Factory\" \"Home\" \"Subway\"))
+=> #<GTK:STRING-LIST {1003E7BC63@}>
+(gtk:string-list-string * 0) => \"Factory\"
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:string-list}"
   (strings g:strv-t))
 
@@ -249,7 +266,7 @@
   @argument[model]{a @class{gtk:string-list} object}
   @argument[string]{a string to insert}
   @begin{short}
-    Appends a string to @arg{model}.
+    Appends a string to the string list.
   @end{short}
   @see-class{gtk:string-list}"
   (model (g:object string-list))
@@ -295,7 +312,7 @@
   @argument[position]{an unsigned integer with the position of the string that
     is to be removed}
   @begin{short}
-    Removes the string at position from @arg{model}.
+    Removes the string at @arg{position} from the string list.
   @end{short}
   The @arg{position} argument must be smaller than the current length of the
   list model.
@@ -325,7 +342,7 @@
     remove}
   @argument[additions]{a list of strings to add}
   @begin{short}
-    Changes @arg{model} by removing @arg{n-removals} strings and adding
+    Changes the string list by removing @arg{n-removals} strings and adding
     @arg{additions} to it.
   @end{short}
   This function is more efficient than the @fun{gtk:string-list-append}
@@ -348,17 +365,17 @@
 
 (cffi:defcfun ("gtk_string_list_get_string" string-list-string) :string
  #+liber-documentation
- "@version{2023-9-7}
+ "@version{2023-9-28}
   @argument[model]{a @class{gtk:string-list} object}
   @argument[position]{an unsigned integer with the position to get the string
     for}
   @return{The string at the given @arg{position}.}
   @begin{short}
-    Gets the string that is at position in @arg{model}.
+    Gets the string that is at position in the string list.
   @end{short}
-  If @arg{model} does not contain @arg{position} items, @code{nil} is returned.
-  This function returns the string. To get the object wrapping it, use the
-  @fun{g:list-model-object} function.
+  If the string list does not contain @arg{position} items, @code{nil} is
+  returned. This function returns the string. To get the object wrapping it,
+  use the @fun{g:list-model-object} function.
   @see-class{gtk:string-list}
   @see-function{g:list-model-object}"
   (model (g:object string-list))

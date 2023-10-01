@@ -2,11 +2,11 @@
 ;;; gtk4.window-group.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2023 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -65,8 +65,8 @@
 (setf (documentation 'window-group 'type)
  "@version{#2021-11-2}
   @begin{short}
-    A @sym{gtk:window-group} object restricts the effect of grabs to windows in
-    the same group, thereby making window groups almost behave like separate
+    A @class{gtk:window-group} object restricts the effect of grabs to windows
+    in the same group, thereby making window groups almost behave like separate
     applications.
   @end{short}
 

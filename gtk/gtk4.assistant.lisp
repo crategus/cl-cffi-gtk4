@@ -913,7 +913,7 @@ lambda (current)
                         :void)
   value)
 
-(cffi:defcfun ("gtk_assistant_get_page_title" %assistant-page-title) :string
+(cffi:defcfun ("gtk_assistant_get_page_title" %assistant-get-page-title) :string
   (assistant (g:object assistant))
   (page (g:object widget)))
 
@@ -941,7 +941,7 @@ lambda (current)
   #+(and gtk-4-10 gtk-warn-deprecated)
   (when gtk-init:*gtk-warn-deprecated*
     (warn "GTK:ASSISTANT-PAGE-TITLE is deprecated since 4.10."))
-  (%assistant-page-title assistant page))
+  (%assistant-get-page-title assistant page))
 
 (export 'assistant-page-title)
 
@@ -958,7 +958,7 @@ lambda (current)
                         :void)
   value)
 
-(cffi:defcfun ("gtk_assistant_get_page_complete" %assistant-page-complete)
+(cffi:defcfun ("gtk_assistant_get_page_complete" %assistant-get-page-complete)
     :boolean
   (assistant (g:object assistant))
   (page (g:object widget)))
@@ -987,7 +987,7 @@ lambda (current)
   #+(and gtk-4-10 gtk-warn-deprecated)
   (when gtk-init:*gtk-warn-deprecated*
     (warn "GTK:ASSISTANT-PAGE-COMPLETE is deprecated since 4.10."))
-  (%assistant-page-complete assistant page))
+  (%assistant-get-page-complete assistant page))
 
 (export 'assistant-page-complete)
 

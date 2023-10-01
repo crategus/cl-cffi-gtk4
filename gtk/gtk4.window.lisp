@@ -1249,10 +1249,21 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_destroy" window-destroy) :void
  #+liber-documentation
- "@version{2023-8-20}
+ "@version{2023-9-30}
   @argument[window]{a @class{gtk:window} widget to destroy}
   @short{Drop the internal reference GTK holds on toplevel windows.}
-  @see-class{gtk:window}"
+  @begin[Example]{dictionary}
+    Signal handler for a cancel button that gets the toplevel window and 
+    destroys it to quit the window.
+    @begin{pre}
+(g:signal-connect cancelbutton \"clicked\"
+                  (lambda (button)
+                    (let ((toplevel (gtk:widget-root button)))
+                      (gtk:window-destroy toplevel))))
+    @end{pre}
+  @end{dictionary}
+  @see-class{gtk:window}
+  @see-function{gtk:widget-root}"
   (window (g:object window)))
 
 (export 'window-destroy)
