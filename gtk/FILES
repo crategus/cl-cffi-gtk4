@@ -8,7 +8,7 @@ GTK 4 files
 GListModel support
 
   gtk4.bitset.lisp                     GtkBitset                      GTK 4.12
-  gtk4.expression.lisp                 GtkExpression, ...             GTK 4.12 &
+  gtk4.expression.lisp                 GtkExpression, ...             GTK 4.12 +
 
   gtk4.filter.lisp                     GtkFilter                      GTK 4.12
   gtk4.custom-filter.lisp              GtkCustomFilter                GTK 4.12
@@ -53,9 +53,9 @@ List-based Widgets
 
 Tree support
 
-  gtk4.tree-list-model.lisp            GtkTreeListModel, ...          GTK 4.12 +
-  gtk4.tree-list-row-sorter.lisp       GtkTreeListRowSorter           GTK 4.12 +
-  gtk4.tree-expander.lisp              GtkTreeExpander                GTK 4.12 +
+  gtk4.tree-list-model.lisp            GtkTreeListModel, ...          GTK 4.12
+  gtk4.tree-list-row-sorter.lisp       GtkTreeListRowSorter           GTK 4.12
+  gtk4.tree-expander.lisp              GtkTreeExpander                GTK 4.12
 
 Application support
 
@@ -74,12 +74,9 @@ Windows
   gtk4.root.lisp                        GtkRoot                       GTK 4.12
   gtk4.native.lisp                      GtkNative                     GTK 4.12
   gtk4.window.lisp                      GtkWindow                     GTK 4.12
-  gtk4.dialog.lisp                      GtkDialog                     GTK 4.12
-  gtk4.message-dialog.lisp              GtkMessageDialog              GTK 4.12
-  gtk4.about-dialog.lisp                GtkAboutDialog                GTK 4.6  +
+  gtk4.about-dialog.lisp                GtkAboutDialog                GTK 4.12
   gtk4.alert-dialog.lisp                GtkAlertDialog                GTK 4.12
-  gtk4.assistant.lisp                   GtkAssistant                  GTK 4.12
-  gtk4.window-group.lisp                GtkWindowGroup                GTK 4.6  +
+  gtk4.window-group.lisp                GtkWindowGroup                GTK 4.12
   gtk4.native-dialog.lisp               GtkNativeDialog               GTK 4.12
 
 Layout Containers
@@ -114,7 +111,6 @@ Layout Managers
   gtk4.overlay-layout.lisp             GtkOverlayLayout               GTK 4.10 *
   gtk4.custom-layout.lisp              GtkCustomLayout                GTK 4.10 *
   gtk4.constraint-layout.lisp          GtkConstraintLayout            GTK 4.10 *
-
   gtk4.constraint.lisp                 GtkConstraint                  GTK 4.12
   gtk4.constraint-guide.lisp           GtkConstraintGuide             GTK 4.10 *
 
@@ -124,10 +120,8 @@ Display Widgets
   gtk4.image.lisp                      GtkImage                       GTK 4.12
   gtk4.picture.lisp                    GtkPicture                     GTK 4.12
   gtk4.spinner.lisp                    GtkSpinner                     GTK 4.12
-  gtk4.info-bar.lisp                   GtkInfoBar                     GTK 4.12
   gtk4.progress-bar.lisp               GtkProgressBar                 GTK 4.12
   gtk4.level-bar.lisp                  GtkLevelBar                    GTK 4.12
-  gtk4.statusbar.lisp                  GtkStatusbar                   GTK 4.12
   gtk4.calendar.lisp                   GtkCalendar                    GTK 4.12
 
 Media Support
@@ -144,104 +138,46 @@ Buttons and Toggles
   gtk4.toggle-button.lisp              GtkToggleButton                GTK 4.10 *
   gtk4.menu-button.lisp                GtkMenuButton                  GTK 4.10 *
   gtk4.link-button.lisp                GtkLinkButton                  GTK 4.10 *
-  gtk4.lock-button.lisp                GtkLockButton                  GTK 4.10 *
   gtk4.scale-button.lisp               GtkScaleButton                 GTK 4.10 *
-  gtk4.volume-button.lisp              GtkVolumeButton                GTK 4.10 *
   gtk4.switch.lisp                     GtkSwitch                      GTK 4.10 *
 
 Numeric and Text Data Entry
 
   gtk4.editable.lisp                   GtkEditable                    GTK 4.12 &
-  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.6  +
-  gtk4.text.lisp                       GtkText                        GTK 4.6  +
+  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.12
+  gtk4.text.lisp                       GtkText                        GTK 4.12
   gtk4.entry.lisp                      GtkEntry                       GTK 4.12
-  gtk4.entry-completion.lisp           GtkEntryCompletion             GTK 4.12
-  gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.6  +
+  gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.12
   gtk4.scale.lisp                      GtkScale                       GTK 4.12
-  gtk4.spin-button.lisp                GtkSpinButton                  GTK 4.6  +
+  gtk4.spin-button.lisp                GtkSpinButton                  GTK 4.12
   gtk4.search-entry.lisp               GtkSearchEntry                 GTK 4.12
   gtk4.search-bar.lisp                 GtkSearchBar                   GTK 4.12
   gtk4.editable-label.lisp             GtkEditableLabel               GTK 4.10 *
 
 Multiline Text Editor
 
-  gtk4.text-iter.lisp                  GtkTextIter                    GTK 4.6  +
+  gtk4.text-iter.lisp                  GtkTextIter                    GTK 4.12
   gtk4.text-tag.lisp                   GtkTextTag                     GTK 4.12
   gtk4.text-tag-table.lisp             GtkTextTagTable                GTK 4.12
   gtk4.text-mark.lisp                  GtkTextMark                    GTK 4.12
-  gtk4.text-buffer.lisp                GtkTextBuffer                  GTK 4.6  +
+  gtk4.text-buffer.lisp                GtkTextBuffer                  GTK 4.12 +
   gtk4.text-view.lisp                  GtkTextView                    GTK 4.12 &
-
-Tree, List and Icon Grid Widgets
-
-  gtk4.tree-model.lisp                 GtkTreeModel                   GTK 4.12 +
-  gtk4.tree-selection.lisp             GtkTreeSelection               GTK 4.0  +
-  gtk4.tree-view-column.lisp           GtkTreeViewColumn              GTK 4.6  +
-  gtk4.tree-view.lisp                  GtkTreeView                    GTK 4.6  +
-  gtk4.tree-view-dnd.lisp              GtkTreeView Drag & Drop        GTK 4.0  +
-
-  gtk4.cell-view.lisp                  GtkCellView                    GTK 4.0  +
-  gtk4.icon-view.lisp                  GtkIconView                    GTK 4.6  +
-
-  gtk4.tree-sortable.lisp              GtkTreeSortable                GTK 4.0  +
-  gtk4.tree-model-sort.lisp            GtkTreeModelSort               GTK 4.0  +
-  gtk4.tree-model-filter.lisp          GtkTreeModelFilter             GTK 4.0  +
-
-  gtk4.cell-layout.lisp                GtkCellLayout                  GTK 4.12
-
-  gtk4.cell-area.lisp                  GtkCellArea                    GTK 4.6  +
-  gtk4.cell-area-box.lisp              GtkCellAreaBox                 GTK 4.0  +
-  gtk4.cell-area-context.lisp          GtkCellAreaContext             GTK 4.6  +
-
-  gtk4.cell-editable.lisp              GtkCellEditable                GTK 4.6  +
-  gtk4.cell-renderer.lisp              GtkCellRenderer                GTK 4.6  +
-  gtk4.cell-renderer-text.lisp         GtkCellRendererText            GTK 4.0  +
-  gtk4.cell-renderer-accel.lisp        GtkCellRendererAccel           GTK 4.0  +
-  gtk4.cell-renderer-combo.lisp        GtkCellRendererCombo           GTK 4.0  +
-  gtk4.cell-renderer-pixbuf.lisp       GtkCellRendererPixbuf          GTK 4.0  +
-  gtk4.cell-renderer-progress.lisp     GtkCellRendererProgress        GTK 4.0  +
-  gtk4.cell-renderer-spin.lisp         GtkCellRendererSpin            GTK 4.0  +
-  gtk4.cell-renderer-toggle.lisp       GtkCellRendererToggle          GTK 4.0  +
-  gtk4.cell-renderer-spinner.lisp      GtkCellRendererSpinner         GTK 4.6  +
-
-  gtk4.list-store.lisp                 GtkListStore                   GTK 4.6  +
-  gtk4.tree-store.lisp                 GtkTreeStore                   GTK 4.0  +
 
 Combo Box, Popover
 
-  gtk4.combo-box.lisp                  GtkComboBox                    GTK 4.12
-  gtk4.combo-box-text.lisp             GtkComboBoxText                GTK 4.12
-  gtk4.popover.lisp                    GtkPopover                     GTK 4.6  +
-  gtk4.popover-menu.lisp               GtkPopoverMenu                 GTK 4.6  +
-  gtk4.popover-menu-bar.lisp           GtkPopoverMenuBar              GTK 4.6  +
+  gtk4.popover.lisp                    GtkPopover                     GTK 4.12
+  gtk4.popover-menu.lisp               GtkPopoverMenu                 GTK 4.12
+  gtk4.popover-menu-bar.lisp           GtkPopoverMenuBar              GTK 4.12
 
 Selector Widgets and Dialogs
 
-  gtk4.color-chooser.lisp              GtkColorChooser                GTK 4.6  +
-  gtk4.color-button.lisp               GtkColorButton                 GTK 4.6  +
-  gtk4.color-chooser-widget.lisp       GtkColorChooserWidget          GTK 4.6  +
-  gtk4.color-chooser-dialog.lisp       GtkColorChooserDialog          GTK 4.6  +
-
   gtk4.color-dialog.lisp               GtkColorDialog                 GTK 4.10 *
   gtk4.color-dialog-button.lisp        GtkColorDialogButton           GTK 4.10 *
-
-  gtk4.file-chooser.lisp               GtkFileChooser                 GTK 4.12 &
-  gtk4.file-chooser-native.lisp        GtkFileChooserNative           GTK 4.12
-  gtk4.file-chooser-dialog.lisp        GtkFileChooserDialog           GTK 4.12
-  gtk4.file-chooser-widget.lisp        GtkFileChooserWidget           GTK 4.12
-
   gtk4.file-dialog.lisp                GtkFileDialog                  GTK 4.10 *
   gtk4.file-launcher.lisp              GtkFileLauncher                GTK 4.12 +
   gtk4.uri-launcher.lisp               GtkUriLauncher                 GTK 4.12 +
-
-  gtk4.font-chooser.lisp               GtkFontChooser                 GTK 4.12
-  gtk4.font-button.lisp                GtkFontButton                  GTK 4.12
-  gtk4.font-chooser-widget.lisp        GtkFontChooserWidget           GTK 4.12
-  gtk4.font-chooser-dialog.lisp        GtkFontChooserDialog           GTK 4.12
-
   gtk4.font-dialog.lisp                GtkFontDialog                  GTK 4.12 +
   gtk4.font-dialog-button.lisp         GtkFontDialogButton            GTK 4.12 +
-
   gtk4.emoji-chooser.lisp              GtkEmojiChooser                GTK 4.12
 
 Widgets for custom drawing
@@ -298,7 +234,7 @@ Miscellaneous
 
   gtk4.adjustment.lisp                 GtkAdjustment                  GTK 4.12
   gtk4.size-group.lisp                 GtkSizeGroup                   GTK 4.12
-  gtk4.snapshot.lisp                   GtkSnapshot                    GTK 4.12 &
+  gtk4.snapshot.lisp                   GtkSnapshot                    GTK 4.12 +
   gtk4.tooltip.lisp                    GtkTooltip                     GTK 4.12
   gtk4.widget-paintable.lisp           GtkWidgetPaintable             GTK 4.12
   gtk4.window-controls.lisp            GtkWindowControls              GTK 4.12
@@ -317,13 +253,6 @@ Abstract Base Classes
 Recently Used Documents
 
   gtk4.recent-manager.lisp             GtkRecentManager               GTK 4.12
-
-Choosing from installed applications
-
-  gtk4.app-chooser.lisp                GtkAppChooser                  GTK 4.12
-  gtk4.app-chooser-button.lisp         GtkAppChooserButton            GTK 4.12
-  gtk4.app-chooser-dialog.lisp         GtkAppChooserDialog            GTK 4.12
-  gtk4.app-chooser-widget.lisp         GtkAppChooserWidget            GTK 4.12
 
 Gestures and event handling
 
@@ -361,8 +290,8 @@ Data exchange, clipboards and Drag-and-Drop
   gtk4.drag-source.lisp                GtkDragSource                  GTK 4.10 *
   gtk4.drag-icon.lisp                  GtkDragIcon                    GTK 4.10 *
   gtk4.drop-target.lisp                GtkDropTarget                  GTK 4.10 *
-  gtk4.drop-target-async.lisp          GtkDropTargetAsync             GTK 4.0  +
-  gtk4.drop-controller-motion.lisp     GtkDropControllerMotion        GTK 4.0  +
+  gtk4.drop-target-async.lisp          GtkDropTargetAsync             GTK 4.12
+  gtk4.drop-controller-motion.lisp     GtkDropControllerMotion        GTK 4.12
 
 GTK Core Reference
 
@@ -374,10 +303,83 @@ GTK Core Reference
 
 Theming in GTK
 
-  gtk4.style-context.lisp              GtkStyleContext                GTK 4.12
   gtk4.css-provider.lisp               GtkCssProvider                 GTK 4.12 &
   gtk4.style-provider.lisp             GtkStyleProvider               GTK 4.12
   gtk4.icon-paintable.lisp             GtkIconPaintable               GTK 4.12 &
   gtk4.icon-theme.lisp                 GtkIconTheme                   GTK 4.12
 
-2023-9-17
+Deprecated
+
+  Deprecated since GTK 4.10
+
+  gtk4.dialog.lisp                      GtkDialog                     GTK 4.12
+  gtk4.message-dialog.lisp              GtkMessageDialog              GTK 4.12
+  gtk4.assistant.lisp                   GtkAssistant                  GTK 4.12
+
+  gtk4.info-bar.lisp                   GtkInfoBar                     GTK 4.12
+  gtk4.statusbar.lisp                  GtkStatusbar                   GTK 4.12
+
+  gtk4.lock-button.lisp                GtkLockButton                  GTK 4.10 *
+  gtk4.volume-button.lisp              GtkVolumeButton                GTK 4.10 *
+
+  gtk4.entry-completion.lisp           GtkEntryCompletion             GTK 4.12
+
+  gtk4.tree-model.lisp                 GtkTreeModel                   GTK 4.12 &
+  gtk4.tree-selection.lisp             GtkTreeSelection               GTK 4.12
+  gtk4.tree-view-column.lisp           GtkTreeViewColumn              GTK 4.12
+  gtk4.tree-view.lisp                  GtkTreeView                    GTK 4.12 &
+  gtk4.tree-view-dnd.lisp              GtkTreeView Drag & Drop        GTK 4.12
+
+  gtk4.cell-view.lisp                  GtkCellView                    GTK 4.12
+  gtk4.icon-view.lisp                  GtkIconView                    GTK 4.12 &
+
+  gtk4.tree-sortable.lisp              GtkTreeSortable                GTK 4.12
+  gtk4.tree-model-sort.lisp            GtkTreeModelSort               GTK 4.12
+  gtk4.tree-model-filter.lisp          GtkTreeModelFilter             GTK 4.12
+
+  gtk4.cell-layout.lisp                GtkCellLayout                  GTK 4.12
+
+  gtk4.cell-area.lisp                  GtkCellArea                    GTK 4.12 &
+  gtk4.cell-area-box.lisp              GtkCellAreaBox                 GTK 4.12
+  gtk4.cell-area-context.lisp          GtkCellAreaContext             GTK 4.12
+
+  gtk4.cell-editable.lisp              GtkCellEditable                GTK 4.6  +
+  gtk4.cell-renderer.lisp              GtkCellRenderer                GTK 4.6  +
+  gtk4.cell-renderer-text.lisp         GtkCellRendererText            GTK 4.12
+  gtk4.cell-renderer-accel.lisp        GtkCellRendererAccel           GTK 4.12
+  gtk4.cell-renderer-combo.lisp        GtkCellRendererCombo           GTK 4.12
+  gtk4.cell-renderer-pixbuf.lisp       GtkCellRendererPixbuf          GTK 4.12
+  gtk4.cell-renderer-progress.lisp     GtkCellRendererProgress        GTK 4.12
+  gtk4.cell-renderer-spin.lisp         GtkCellRendererSpin            GTK 4.12
+  gtk4.cell-renderer-toggle.lisp       GtkCellRendererToggle          GTK 4.12
+  gtk4.cell-renderer-spinner.lisp      GtkCellRendererSpinner         GTK 4.6  +
+
+  gtk4.list-store.lisp                 GtkListStore                   GTK 4.12
+  gtk4.tree-store.lisp                 GtkTreeStore                   GTK 4.12
+
+  gtk4.combo-box.lisp                  GtkComboBox                    GTK 4.12
+  gtk4.combo-box-text.lisp             GtkComboBoxText                GTK 4.12
+
+  gtk4.app-chooser.lisp                GtkAppChooser                  GTK 4.12
+  gtk4.app-chooser-button.lisp         GtkAppChooserButton            GTK 4.12
+  gtk4.app-chooser-dialog.lisp         GtkAppChooserDialog            GTK 4.12
+  gtk4.app-chooser-widget.lisp         GtkAppChooserWidget            GTK 4.12
+
+  gtk4.color-chooser.lisp              GtkColorChooser                GTK 4.6  +
+  gtk4.color-button.lisp               GtkColorButton                 GTK 4.6  +
+  gtk4.color-chooser-widget.lisp       GtkColorChooserWidget          GTK 4.6  +
+  gtk4.color-chooser-dialog.lisp       GtkColorChooserDialog          GTK 4.6  +
+
+  gtk4.file-chooser.lisp               GtkFileChooser                 GTK 4.12 &
+  gtk4.file-chooser-native.lisp        GtkFileChooserNative           GTK 4.12
+  gtk4.file-chooser-dialog.lisp        GtkFileChooserDialog           GTK 4.12
+  gtk4.file-chooser-widget.lisp        GtkFileChooserWidget           GTK 4.12
+
+  gtk4.font-chooser.lisp               GtkFontChooser                 GTK 4.12
+  gtk4.font-button.lisp                GtkFontButton                  GTK 4.12
+  gtk4.font-chooser-widget.lisp        GtkFontChooserWidget           GTK 4.12
+  gtk4.font-chooser-dialog.lisp        GtkFontChooserDialog           GTK 4.12
+
+  gtk4.style-context.lisp              GtkStyleContext                GTK 4.12
+
+2023-10-1

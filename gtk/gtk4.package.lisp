@@ -492,7 +492,7 @@
       @about-generic{tree-list-row-expandable}
       @about-generic{tree-list-row-expanded}
       @about-generic{tree-list-row-item}
-      @about-function{tree-list-row-is-expandalbe}
+      @about-function{tree-list-row-is-expandable}
       @about-class{tree-list-model}
       @about-generic{tree-list-model-autoexpand}
       @about-function{tree-list-model-item-type}
@@ -656,43 +656,6 @@
       @about-function{window-set-interactive-debugging}
       @about-function{window-is-suspended}
     @end{subsection}
-    @begin[GtkDialog]{subsection}
-      Create popup windows.
-      @about-symbol{dialog-flags}
-      @about-symbol{response-type}
-      @about-class{dialog}
-      @about-generic{dialog-use-header-bar}
-      @about-function{dialog-new}
-      @about-function{dialog-new-with-buttons}
-      @about-function{dialog-response}
-      @about-function{dialog-add-button}
-      @about-function{dialog-add-buttons}
-      @about-function{dialog-add-action-widget}
-      @about-function{dialog-set-default-response}
-      @about-function{dialog-set-response-sensitive}
-      @about-function{dialog-response-for-widget}
-      @about-function{dialog-widget-for-response}
-      @about-function{dialog-content-area}
-      @about-function{dialog-header-bar}
-    @end{subsection}
-    @begin[GtkMessageDialog]{subsection}
-      A convenient message window.
-      @about-symbol{message-type}
-      @about-symbol{buttons-type}
-      @about-class{message-dialog}
-      @about-generic{message-dialog-buttons}
-      @about-generic{message-dialog-message-area}
-      @about-generic{message-dialog-message-type}
-      @about-generic{message-dialog-secondary-text}
-      @about-generic{message-dialog-secondary-use-markup}
-      @about-generic{message-dialog-text}
-      @about-generic{message-dialog-use-markup}
-      @about-function{message-dialog-new}
-      @about-function{message-dialog-new-with-markup}
-      @about-function{message-dialog-set-markup}
-      @about-function{message-dialog-format-secondary-text}
-      @about-function{message-dialog-format-secondary-markup}
-    @end{subsection}
     @begin[GtkAboutDialog]{subsection}
       Display information about an application.
       @about-symbol{license}
@@ -727,38 +690,6 @@
       @about-function{alert-dialog-choose}
       @about-function{alert-dialog-choose-finish}
       @about-function{alert-dialog-show}
-    @end{subsection}
-    @begin[GtkAssistant]{subsection}
-      A widget used to guide users through multi-step operations.
-      @about-symbol{assistant-page-type}
-      @about-class{assistant-page}
-      @about-generic{assistant-page-child}
-      @about-generic{assistant-page-complete}
-      @about-generic{assistant-page-page-type}
-      @about-generic{assistant-page-title}
-      @about-class{assistant}
-      @about-generic{assistant-pages}
-      @about-generic{assistant-use-header-bar}
-      @about-function{assistant-new}
-      @about-function{assistant-page}
-      @about-function{assistant-current-page}
-      @about-function{assistant-n-pages}
-      @about-function{assistant-nth-page}
-      @about-function{assistant-prepend-page}
-      @about-function{assistant-append-page}
-      @about-function{assistant-insert-page}
-      @about-function{assistant-remove-page}
-      @about-symbol{assistant-page-func}
-      @about-function{assistant-set-forward-page-func}
-      @about-function{assistant-page-complete}
-      @about-function{assistant-page-type}
-      @about-function{assistant-page-title}
-      @about-function{assistant-add-action-widget}
-      @about-function{assistant-remove-action-widget}
-      @about-function{assistant-update-buttons-state}
-      @about-function{assistant-commit}
-      @about-function{assistant-next-page}
-      @about-function{assistant-previous-page}
     @end{subsection}
     @begin[GtkWindowGroup]{subsection}
       Limit the effect of grabs.
@@ -1323,24 +1254,6 @@
       @about-function{spinner-start}
       @about-function{spinner-stop}
     @end{subsection}
-    @begin[GtkInfoBar]{subsection}
-      Report important messages to the user.
-      @about-class{info-bar}
-      @about-generic{info-bar-message-type}
-      @about-generic{info-bar-revealed}
-      @about-generic{info-bar-show-close-button}
-      @about-function{info-bar-new}
-      @about-function{info-bar-new-with-buttons}
-      @about-function{info-bar-add-action-widget}
-      @about-function{info-bar-remove-action-widget}
-      @about-function{info-bar-add-button}
-      @about-function{info-bar-add-buttons}
-      @about-function{info-bar-set-response-sensitive}
-      @about-function{info-bar-set-default-response}
-      @about-function{info-bar-response}
-      @about-function{info-bar-add-child}
-      @about-function{info-bar-remove-child}
-    @end{subsection}
     @begin[GtkProgressBar]{subsection}
       A widget which indicates progress visually
       @about-class{progress-bar}
@@ -1367,17 +1280,6 @@
       @about-function{level-bar-add-offset-value}
       @about-function{level-bar-remove-offset-value}
       @about-function{level-bar-offset-value}
-    @end{subsection}
-    @begin[GtkStatusbar]{subsection}
-      Report messages of minor importance to the user.
-      @about-class{statusbar}
-      @about-function{statusbar-new}
-      @about-function{statusbar-context-id}
-      @about-function{statusbar-push}
-      @about-function{statusbar-pop}
-      @about-function{statusbar-remove}
-      @about-function{statusbar-remove-all}
-      @about-function{statusbar-message}
     @end{subsection}
     @begin[GtkCalendar]{subsection}
       Displays a calendar and allows the user to select a date.
@@ -1537,17 +1439,6 @@
       @about-function{link-button-new}
       @about-function{link-button-new-with-label}
     @end{subsection}
-    @begin[GtkLockButton]{subsection}
-      A widget to unlock or lock privileged operations.
-      @about-class{lock-button}
-      @about-generic{lock-button-permission}
-      @about-generic{lock-button-text-lock}
-      @about-generic{lock-button-text-unlock}
-      @about-generic{lock-button-tooltip-lock}
-      @about-generic{lock-button-tooltip-not-authorized}
-      @about-generic{lock-button-tooltip-unlock}
-      @about-function{lock-button-new}
-    @end{subsection}
     @begin[GtkScaleButton]{subsection}
       A button which pops up a scale.
       @about-class{scale-button}
@@ -1558,12 +1449,6 @@
       @about-function{scale-button-popup}
       @about-function{scale-button-plus-button}
       @about-function{scale-button-minus-button}
-    @end{subsection}
-    @begin[GtkVolumeButton]{subsection}
-      A button which pops up a volume control.
-      @about-class{volume-button}
-      @about-generic{volume-button-use-symbolic}
-      @about-function{volume-button-new}
     @end{subsection}
     @begin[GtkSwitch]{subsection}
       A \"light switch\" style toggle.
@@ -1705,28 +1590,6 @@
       @about-function{entry-current-icon-drag-source}
       @about-function{entry-icon-area}
       @about-function{entry-grab-focus-without-selecting}
-    @end{subsection}
-    @begin[GtkEntryCompletion]{subsection}
-      Completion functionality for the @class{gtk:entry} widget.
-      @about-class{entry-completion}
-      @about-generic{entry-completion-cell-area}
-      @about-generic{entry-completion-inline-completion}
-      @about-generic{entry-completion-inline-selection}
-      @about-generic{entry-completion-minimum-key-length}
-      @about-generic{entry-completion-model}
-      @about-generic{entry-completion-popup-completion}
-      @about-generic{entry-completion-popup-set-width}
-      @about-generic{entry-completion-popup-single-match}
-      @about-generic{entry-completion-text-column}
-      @about-function{entry-completion-new}
-      @about-function{entry-completion-new-with-area}
-      @about-function{entry-completion-entry}
-      @about-symbol{entry-completion-match-func}
-      @about-function{entry-completion-set-match-func}
-      @about-function{entry-completion-compute-prefix}
-      @about-function{entry-completion-complete}
-      @about-function{entry-completion-completion-prefix}
-      @about-function{entry-completion-insert-prefix}
     @end{subsection}
     @begin[GtkPasswordEntry]{subsection}
       An entry for secrets.
@@ -2158,704 +2021,7 @@
       @about-function{text-view-reset-im-context}
     @end{subsection}
   @end{section}
-  @begin[Tree, List and Icon Grid Widgets]{section}
-    @begin[GtkTreeModel]{subsection}
-      The tree interface used by the @class{gtk:tree-view} widget.
-      @about-class{tree-path}
-      @about-function{tree-path-new}
-      @about-function{tree-path-copy}
-      @about-function{tree-path-new-from-string}
-      @about-function{tree-path-new-from-indices}
-      @about-function{tree-path-new-first}
-      @about-function{tree-path-append-index}
-      @about-function{tree-path-prepend-index}
-      @about-function{tree-path-depth}
-      @about-function{tree-path-indices}
-      @about-function{tree-path-compare}
-      @about-function{tree-path-next}
-      @about-function{tree-path-prev}
-      @about-function{tree-path-up}
-      @about-function{tree-path-down}
-      @about-function{tree-path-is-ancestor}
-      @about-function{tree-path-is-descendant}
-      @about-function{tree-path-to-string}
-      @about-class{tree-row-reference}
-      @about-function{tree-row-reference-new}
-      @about-function{tree-row-reference-copy}
-      @about-function{tree-row-reference-new-proxy}
-      @about-function{tree-row-reference-model}
-      @about-function{tree-row-reference-path}
-      @about-function{tree-row-reference-valid}
-      @about-function{tree-row-reference-inserted}
-      @about-function{tree-row-reference-deleted}
-      @about-function{tree-row-reference-reordered}
-      @about-struct{tree-iter}
-      @about-function{tree-iter-copy}
-      @about-function{tree-iter-free}
-      @about-symbol{tree-model-flags}
-      @about-class{tree-model}
-      @about-function{tree-model-filter-new}
-      @about-function{tree-model-flags}
-      @about-function{tree-model-n-columns}
-      @about-function{tree-model-column-type}
-      @about-function{tree-model-iter}
-      @about-function{tree-model-iter-from-string}
-      @about-function{tree-model-iter-first}
-      @about-function{tree-model-path}
-      @about-function{tree-model-value}
-      @about-function{tree-model-iter-next}
-      @about-function{tree-model-iter-previous}
-      @about-function{tree-model-iter-children}
-      @about-function{tree-model-iter-has-child}
-      @about-function{tree-model-iter-n-children}
-      @about-function{tree-model-iter-nth-child}
-      @about-function{tree-model-iter-parent}
-      @about-function{tree-model-string-from-iter}
-      @about-function{tree-model-ref-node}
-      @about-function{tree-model-unref-node}
-      @about-function{tree-model-get}
-      @about-function{tree-model-get-valist}
-      @about-symbol{tree-model-foreach-func}
-      @about-function{tree-model-foreach}
-      @about-function{tree-model-row-changed}
-      @about-function{tree-model-row-inserted}
-      @about-function{tree-model-row-has-child-toggled}
-      @about-function{tree-model-row-deleted}
-      @about-function{tree-model-rows-reordered}
-      @about-function{tree-model-rows-reordered-with-length}
-    @end{subsection}
-    @begin[GtkTreeSelection]{subsection}
-      The selection object for the @class{tree-view} widget.
-      @about-class{tree-selection}
-      @about-generic{tree-selection-mode}
-      @about-symbol{tree-selection-func}
-      @about-symbol{tree-selection-foreach-func}
-      @about-function{tree-selection-set-select-function}
-      @about-function{tree-selection-get-select-function}
-      @about-function{tree-selection-user-data}
-      @about-function{tree-selection-tree-view}
-      @about-function{tree-selection-selected}
-      @about-function{tree-selection-selected-foreach}
-      @about-function{tree-selection-selected-rows}
-      @about-function{tree-selection-count-selected-rows}
-      @about-function{tree-selection-select-path}
-      @about-function{tree-selection-unselect-path}
-      @about-function{tree-selection-path-is-selected}
-      @about-function{tree-selection-select-iter}
-      @about-function{tree-selection-unselect-iter}
-      @about-function{tree-selection-iter-is-selected}
-      @about-function{tree-selection-select-all}
-      @about-function{tree-selection-unselect-all}
-      @about-function{tree-selection-select-range}
-      @about-function{tree-selection-unselect-range}
-    @end{subsection}
-    @begin[GtkTreeViewColumn]{subsection}
-      A visible column in a @class{tree-view} widget.
-      @about-symbol{tree-view-column-sizing}
-      @about-class{tree-view-column}
-      @about-generic{tree-view-column-alignment}
-      @about-generic{tree-view-column-cell-area}
-      @about-generic{tree-view-column-clickable}
-      @about-generic{tree-view-column-expand}
-      @about-generic{tree-view-column-fixed-width}
-      @about-generic{tree-view-column-max-width}
-      @about-generic{tree-view-column-min-width}
-      @about-generic{tree-view-column-reorderable}
-      @about-generic{tree-view-column-resizable}
-      @about-generic{tree-view-column-sizing}
-      @about-generic{tree-view-column-sort-column-id}
-      @about-generic{tree-view-column-sort-indicator}
-      @about-generic{tree-view-column-sort-order}
-      @about-generic{tree-view-column-spacing}
-      @about-generic{tree-view-column-title}
-      @about-generic{tree-view-column-visible}
-      @about-generic{tree-view-column-widget}
-      @about-generic{tree-view-column-width}
-      @about-generic{tree-view-column-x-offset}
-      @about-function{tree-view-column-new}
-      @about-function{tree-view-column-new-with-area}
-      @about-function{tree-view-column-new-with-attributes}
-      @about-function{tree-view-column-pack-start}
-      @about-function{tree-view-column-pack-end}
-      @about-function{tree-view-column-clear}
-      @about-function{tree-view-column-add-attribute}
-      @about-function{tree-view-column-set-attributes}
-      @about-symbol{tree-cell-data-func}
-      @about-function{tree-view-column-set-cell-data-func}
-      @about-function{tree-view-column-clear-attributes}
-      @about-function{tree-view-column-clicked}
-      @about-function{tree-view-column-button}
-      @about-function{tree-view-column-cell-set-cell-data}
-      @about-function{tree-view-column-cell-size}
-      @about-function{tree-view-column-cell-position}
-      @about-function{tree-view-column-cell-is-visible}
-      @about-function{tree-view-column-focus-cell}
-      @about-function{tree-view-column-queue-resize}
-      @about-function{tree-view-column-tree-view}
-    @end{subsection}
-    @begin[GtkTreeView]{subsection}
-      A widget for displaying both trees and lists.
-      @about-symbol{tree-view-drop-position}
-      @about-symbol{tree-view-grid-lines}
-      @about-class{tree-view}
-      @about-generic{tree-view-activate-on-single-click}
-      @about-generic{tree-view-enable-grid-lines}
-      @about-generic{tree-view-enable-search}
-      @about-generic{tree-view-enable-tree-lines}
-      @about-generic{tree-view-expander-column}
-      @about-generic{tree-view-fixed-height-mode}
-      @about-generic{tree-view-headers-clickable}
-      @about-generic{tree-view-headers-visible}
-      @about-generic{tree-view-hover-expand}
-      @about-generic{tree-view-hover-selection}
-      @about-generic{tree-view-level-indentation}
-      @about-generic{tree-view-model}
-      @about-generic{tree-view-reorderable}
-      @about-generic{tree-view-rubber-banding}
-      @about-generic{tree-view-search-column}
-      @about-generic{tree-view-show-expanders}
-      @about-generic{tree-view-tooltip-column}
-      @about-function{tree-view-new}
-      @about-function{tree-view-new-with-model}
-      @about-function{tree-view-selection}
-      @about-function{tree-view-columns-autosize}
-      @about-function{tree-view-append-column}
-      @about-function{tree-view-remove-column}
-      @about-function{tree-view-insert-column}
-      @about-function{tree-view-insert-column-with-attributes}
-      @about-function{tree-view-insert-column-with-data-func}
-      @about-function{tree-view-n-columns}
-      @about-function{tree-view-column}
-      @about-function{tree-view-columns}
-      @about-function{tree-view-move-column-after}
-      @about-symbol{tree-view-column-drop-func}
-      @about-function{tree-view-set-column-drag-function}
-      @about-function{tree-view-scroll-to-point}
-      @about-function{tree-view-scroll-to-cell}
-      @about-function{tree-view-set-cursor}
-      @about-function{tree-view-set-cursor-on-cell}
-      @about-function{tree-view-get-cursor}
-      @about-function{tree-view-row-activated}
-      @about-function{tree-view-expand-all}
-      @about-function{tree-view-collapse-all}
-      @about-function{tree-view-expand-to-path}
-      @about-function{tree-view-expand-row}
-      @about-function{tree-view-collapse-row}
-      @about-symbol{tree-view-mapping-func}
-      @about-function{tree-view-map-expanded-rows}
-      @about-function{tree-view-row-expanded}
-      @about-function{tree-view-path-at-pos}
-      @about-function{tree-view-is-blank-at-pos}
-      @about-function{tree-view-cell-area}
-      @about-function{tree-view-background-area}
-      @about-function{tree-view-visible-rect}
-      @about-function{tree-view-visible-range}
-      @about-function{tree-view-convert-bin-window-to-tree-coords}
-      @about-function{tree-view-convert-bin-window-to-widget-coords}
-      @about-function{tree-view-convert-tree-to-bin-window-coords}
-      @about-function{tree-view-convert-tree-to-widget-coords}
-      @about-function{tree-view-convert-widget-to-bin-window-coords}
-      @about-function{tree-view-convert-widget-to-tree-coords}
-      @about-function{tree-view-enable-model-drag-dest}
-      @about-function{tree-view-enable-model-drag-source}
-      @about-function{tree-view-unset-rows-drag-source}
-      @about-function{tree-view-unset-rows-drag-dest}
-      @about-function{tree-view-set-drag-dest-row}
-      @about-function{tree-view-get-drag-dest-row}
-      @about-function{tree-view-get-dest-row-at-pos}
-      @about-function{tree-view-create-row-drag-icon}
-      @about-symbol{tree-view-search-equal-func}
-      @about-function{tree-view-get-search-equal-func}
-      @about-function{tree-view-set-search-equal-func}
-      @about-function{tree-view-search-entry}
-      @about-symbol{tree-view-row-separator-func}
-      @about-function{tree-view-get-row-separator-func}
-      @about-function{tree-view-set-row-separator-func}
-      @about-function{tree-view-is-rubber-banding-active}
-      @about-function{tree-view-grid-lines}
-      @about-function{tree-view-set-tooltip-row}
-      @about-function{tree-view-set-tooltip-cell}
-      @about-function{tree-view-tooltip-context}
-    @end{subsection}
-    @begin[GtkTreeView Drag & Drop]{subsection}
-      @about-class{tree-drag-source}
-      @about-symbol{GtkTreeDragSourceIface}
-      @about-class{tree-drag-dest}
-      @about-symbol{GtkTreeDragDestIface}
-      @about-symbol{GTK_TYPE_TREE_ROW_DATA}
-      @about-function{tree-drag-source-drag-data-delete}
-      @about-function{tree-drag-source-drag-data-get}
-      @about-function{tree-drag-source-row-draggable}
-      @about-function{tree-drag-dest-drag-data-received}
-      @about-function{tree-drag-dest-row-drop-possible}
-      @about-function{tree-create-row-drag-content}
-      @about-function{tree-get-row-drag-data}
-    @end{subsection}
-    @begin[GtkCellLayout]{subsection}
-      An interface for packing cells.
-      @about-class{cell-layout}
-      @about-function{cell-layout-pack-start}
-      @about-function{cell-layout-pack-end}
-      @about-function{cell-layout-area}
-      @about-function{cell-layout-cells}
-      @about-function{cell-layout-reorder}
-      @about-function{cell-layout-clear}
-      @about-function{cell-layout-set-attributes}
-      @about-function{cell-layout-add-attribute}
-      @about-symbol{cell-layout-data-func}
-      @about-function{cell-layout-set-cell-data-func}
-      @about-function{cell-layout-clear-attributes}
-    @end{subsection}
-    @begin[GtkCellView]{subsection}
-      A widget displaying a single row of a GtkTreeModel.
-      @about-class{cell-view}
-      @about-generic{cell-view-cell-area}
-      @about-generic{cell-view-cell-area-context}
-      @about-generic{cell-view-draw-sensitive}
-      @about-generic{cell-view-fit-model}
-      @about-generic{cell-view-model}
-      @about-function{cell-view-new}
-      @about-function{cell-view-new-with-context}
-      @about-function{cell-view-new-with-text}
-      @about-function{cell-view-new-with-markup}
-      @about-function{cell-view-new-with-texture}
-      @about-function{cell-view-displayed-row}
-    @end{subsection}
-    @begin[GtkIconView]{subsection}
-      A widget which displays a list of icons in a grid.
-      @about-symbol{icon-view-drop-position}
-      @about-class{icon-view}
-      @about-generic{icon-view-activate-on-single-click}
-      @about-generic{icon-view-cell-area}
-      @about-generic{icon-view-column-spacing}
-      @about-generic{icon-view-columns}
-      @about-generic{icon-view-item-orientation}
-      @about-generic{icon-view-item-padding}
-      @about-generic{icon-view-item-width}
-      @about-generic{icon-view-margin}
-      @about-generic{icon-view-markup-column}
-      @about-generic{icon-view-model}
-      @about-generic{icon-view-pixbuf-column}
-      @about-generic{icon-view-reorderable}
-      @about-generic{icon-view-row-spacing}
-      @about-generic{icon-view-selection-mode}
-      @about-generic{icon-view-spacing}
-      @about-generic{icon-view-text-column}
-      @about-generic{icon-view-tooltip-column}
-      @about-symbol{icon-view-foreach-func}
-      @about-function{icon-view-new}
-      @about-function{icon-view-new-with-area}
-      @about-function{icon-view-new-with-model}
-      @about-function{icon-view-path-at-pos}
-      @about-function{icon-view-item-at-pos}
-      @about-function{icon-view-set-cursor}
-      @about-function{icon-view-get-cursor}
-      @about-function{icon-view-selected-foreach}
-      @about-function{icon-view-cell-rect}
-      @about-function{icon-view-select-path}
-      @about-function{icon-view-unselect-path}
-      @about-function{icon-view-path-is-selected}
-      @about-function{icon-view-selected-items}
-      @about-function{icon-view-select-all}
-      @about-function{icon-view-unselect-all}
-      @about-function{icon-view-item-activated}
-      @about-function{icon-view-scroll-to-path}
-      @about-function{icon-view-visible-range}
-      @about-function{icon-view-set-tooltip-item}
-      @about-function{icon-view-set-tooltip-cell}
-      @about-function{icon-view-tooltip-context}
-      @about-function{icon-view-item-row}
-      @about-function{icon-view-item-column}
-      @about-function{icon-view-enable-model-drag-source}
-      @about-function{icon-view-enable-model-drag-dest}
-      @about-function{icon-view-unset-model-drag-source}
-      @about-function{icon-view-unset-model-drag-dest}
-      @about-function{icon-view-set-drag-dest-item}
-      @about-function{icon-view-get-drag-dest-item}
-      @about-function{icon-view-dest-item-at-pos}
-      @about-function{icon-view-create-drag-icon}
-    @end{subsection}
-    @begin[GtkTreeSortable]{subsection}
-      The interface for sortable models used by GtkTreeView.
-      @about-variable{+gtk-tree-sortable-default-sort-column-id+}
-      @about-variable{+gtk-tree-sortable-unsorted-sort-column-id+}
-      @about-class{tree-sortable}
-      @about-symbol{GtkTreeSortableIface}
-      @about-symbol{tree-iter-compare-func}
-      @about-function{tree-sortable-sort-column-changed}
-      @about-function{tree-sortable-sort-column-id}
-      @about-function{tree-sortable-set-sort-func}
-      @about-function{tree-sortable-set-default-sort-func}
-      @about-function{tree-sortable-has-default-sort-func}
-    @end{subsection}
-    @begin[GtkTreeModelSort]{subsection}
-      A GtkTreeModel which makes an underlying tree model sortable.
-      @about-class{tree-model-sort}
-      @about-generic{tree-model-sort-model}
-      @about-function{tree-model-sort-new-with-model}
-      @about-function{tree-model-sort-convert-child-path-to-path}
-      @about-function{tree-model-sort-convert-child-iter-to-iter}
-      @about-function{tree-model-sort-convert-path-to-child-path}
-      @about-function{tree-model-sort-convert-iter-to-child-iter}
-      @about-function{tree-model-sort-reset-default-sort-func}
-      @about-function{tree-model-sort-clear-cache}
-      @about-function{tree-model-sort-iter-is-valid}
-    @end{subsection}
-    @begin[GtkTreeModelFilter]{subsection}
-      A GtkTreeModel which hides parts of an underlying tree model.
-      @about-class{tree-model-filter}
-      @about-generic{tree-model-filter-child-model}
-      @about-generic{tree-model-filter-virtual-root}
-      @about-function{tree-model-filter-new}
-      @about-symbol{tree-model-filter-visible-func}
-      @about-function{tree-model-filter-set-visible-func}
-      @about-symbol{tree-model-filter-modify-func}
-      @about-function{tree-model-filter-set-modify-func}
-      @about-function{tree-model-filter-set-visible-column}
-      @about-function{tree-model-filter-model}
-      @about-function{tree-model-filter-convert-child-iter-to-iter}
-      @about-function{tree-model-filter-convert-iter-to-child-iter}
-      @about-function{tree-model-filter-convert-child-path-to-path}
-      @about-function{tree-model-filter-convert-path-to-child-path}
-      @about-function{tree-model-filter-refilter}
-      @about-function{tree-model-filter-clear-cache}
-    @end{subsection}
-    @begin[GtkCellArea]{subsection}
-      An abstract class for laying out GtkCellRenderers.
-      @about-class{cell-area}
-      @about-generic{cell-area-edit-widget}
-      @about-generic{cell-area-edited-cell}
-      @about-generic{cell-area-focus-cell}
-      @about-symbol{GTK_CELL_AREA_WARN_INVALID_CELL_PROPERTY_ID}
-      @about-function{cell-area-add}
-      @about-function{cell-area-remove}
-      @about-function{cell-area-has-renderer}
-      @about-symbol{cell-callback}
-      @about-function{cell-area-foreach}
-      @about-symbol{cell-alloc-callback}
-      @about-function{cell-area-foreach-alloc}
-      @about-function{cell-area-event}
-      @about-function{cell-area-snapshot}
-      @about-function{cell-area-cell-allocation}
-      @about-function{cell-area-cell-at-position}
-      @about-function{cell-area-create-context}
-      @about-function{cell-area-copy-context}
-      @about-function{cell-area-request-mode}
-      @about-function{cell-area-preferred-width}
-      @about-function{cell-area-preferred-height-for-width}
-      @about-function{cell-area-preferred-height}
-      @about-function{cell-area-preferred-width-for-height}
-      @about-function{cell-area-current-path-string}
-      @about-function{cell-area-apply-attributes}
-      @about-function{cell-area-attribute-connect}
-      @about-function{cell-area-attribute-disconnect}
-      @about-function{cell-area-attribute-column}
-      @about-function{cell-area-class-install-cell-property}
-      @about-function{cell-area-class-find-cell-property}
-      @about-function{cell-area-class-list-cell-properties}
-      @about-function{cell-area-add-with-properties}
-      @about-function{cell-area-cell-set}
-      @about-function{cell-area-cell-get}
-      @about-function{cell-area-valist}
-      @about-function{cell-area-cell-property}
-      @about-function{cell-area-is-activatable}
-      @about-function{cell-area-activate}
-      @about-function{cell-area-focus}
-      @about-function{cell-area-add-focus-sibling}
-      @about-function{cell-area-remove-focus-sibling}
-      @about-function{cell-area-is-focus-sibling}
-      @about-function{cell-area-focus-siblings}
-      @about-function{cell-area-focus-from-sibling}
-      @about-function{cell-area-activate-cell}
-      @about-function{cell-area-stop-editing}
-      @about-function{cell-area-inner-cell-area}
-      @about-function{cell-area-request-renderer}
-    @end{subsection}
-    @begin[GtkCellAreaBox]{subsection}
-      A cell area that renders GtkCellRenderers into a row or a column.
-      @about-class{cell-area-box}
-      @about-generic{cell-area-box-spacing}
-      @about-function{cell-area-box-new}
-      @about-function{cell-area-box-pack-start}
-      @about-function{cell-area-box-pack-end}
-    @end{subsection}
-    @begin[GtkCellAreaContext]{subsection}
-      Stores geometrical information for a series of rows in a GtkCellArea.
-      @about-class{cell-area-context}
-      @about-generic{cell-area-context-area}
-      @about-generic{cell-area-context-minimum-height}
-      @about-generic{cell-area-context-minimum-width}
-      @about-generic{cell-area-context-natural-height}
-      @about-generic{cell-area-context-natural-width}
-      @about-function{cell-area-context-allocate}
-      @about-function{cell-area-context-reset}
-      @about-function{cell-area-context-preferred-width}
-      @about-function{cell-area-context-preferred-height}
-      @about-function{cell-area-context-preferred-height-for-width}
-      @about-function{cell-area-context-preferred-width-for-height}
-      @about-function{cell-area-context-allocation}
-      @about-function{cell-area-context-push-preferred-width}
-      @about-function{cell-area-context-push-preferred-height}
-    @end{subsection}
-    @begin[GtkCellEditable]{subsection}
-      Interface for widgets that can be used for editing cells.
-      @about-class{cell-editable}
-      @about-generic{cell-editable-editing-canceled}
-      @about-function{cell-editable-start-editing}
-      @about-function{cell-editable-editing-done}
-      @about-function{cell-editable-remove-widget}
-    @end{subsection}
-    @begin[GtkCellRenderer]{subsection}
-      An object for rendering a single cell.
-      @about-symbol{cell-renderer-state}
-      @about-symbol{cell-renderer-mode}
-      @about-class{cell-renderer}
-      @about-generic{cell-renderer-cell-background}
-      @about-generic{cell-renderer-cell-background-rgba}
-      @about-generic{cell-renderer-cell-background-set}
-      @about-generic{cell-renderer-editing}
-      @about-generic{cell-renderer-height}
-      @about-generic{cell-renderer-is-expanded}
-      @about-generic{cell-renderer-is-expander}
-      @about-generic{cell-renderer-mode}
-      @about-generic{cell-renderer-sensitive}
-      @about-generic{cell-renderer-visible}
-      @about-generic{cell-renderer-width}
-      @about-generic{cell-renderer-xalign}
-      @about-generic{cell-renderer-xpad}
-      @about-generic{cell-renderer-yalign}
-      @about-generic{cell-renderer-ypad}
-      @about-function{cell-renderer-aligned-area}
-      @about-function{cell-renderer-snapshot}
-      @about-function{cell-renderer-activate}
-      @about-function{cell-renderer-start-editing}
-      @about-function{cell-renderer-stop-editing}
-      @about-function{cell-renderer-fixed-size}
-      @about-function{cell-renderer-alignment}
-      @about-function{cell-renderer-padding}
-      @about-function{cell-renderer-state}
-      @about-function{cell-renderer-is-activatable}
-      @about-function{cell-renderer-preferred-height}
-      @about-function{cell-renderer-preferred-height-for-width}
-      @about-function{cell-renderer-preferred-size}
-      @about-function{cell-renderer-preferred-width}
-      @about-function{cell-renderer-preferred-width-for-height}
-      @about-function{cell-renderer-request-mode}
-    @end{subsection}
-    @begin[GtkCellRendererText]{subsection}
-      Renders text in a cell.
-      @about-class{cell-renderer-text}
-      @about-generic{cell-renderer-text-align-set}
-      @about-generic{cell-renderer-text-alignment}
-      @about-generic{cell-renderer-text-attributes}
-      @about-generic{cell-renderer-text-background}
-      @about-generic{cell-renderer-text-background-rgba}
-      @about-generic{cell-renderer-text-background-set}
-      @about-generic{cell-renderer-text-editable}
-      @about-generic{cell-renderer-text-editable-set}
-      @about-generic{cell-renderer-text-ellipsize}
-      @about-generic{cell-renderer-text-ellipsize-set}
-      @about-generic{cell-renderer-text-family}
-      @about-generic{cell-renderer-text-family-set}
-      @about-generic{cell-renderer-text-font}
-      @about-generic{cell-renderer-text-font-desc}
-      @about-generic{cell-renderer-text-foreground}
-      @about-generic{cell-renderer-text-foreground-rgba}
-      @about-generic{cell-renderer-text-foreground-set}
-      @about-generic{cell-renderer-text-language}
-      @about-generic{cell-renderer-text-language-set}
-      @about-generic{cell-renderer-text-markup}
-      @about-generic{cell-renderer-text-max-width-chars}
-      @about-generic{cell-renderer-text-placeholder-text}
-      @about-generic{cell-renderer-text-rise}
-      @about-generic{cell-renderer-text-rise-set}
-      @about-generic{cell-renderer-text-scale}
-      @about-generic{cell-renderer-text-scale-set}
-      @about-generic{cell-renderer-text-single-paragraph-mode}
-      @about-generic{cell-renderer-text-size}
-      @about-generic{cell-renderer-text-size-points}
-      @about-generic{cell-renderer-text-size-set}
-      @about-generic{cell-renderer-text-stretch}
-      @about-generic{cell-renderer-text-stretch-set}
-      @about-generic{cell-renderer-text-strikethrough}
-      @about-generic{cell-renderer-text-strikethrough-set}
-      @about-generic{cell-renderer-text-style}
-      @about-generic{cell-renderer-text-style-set}
-      @about-generic{cell-renderer-text-text}
-      @about-generic{cell-renderer-text-underline}
-      @about-generic{cell-renderer-text-underline-set}
-      @about-generic{cell-renderer-text-variant}
-      @about-generic{cell-renderer-text-variant-set}
-      @about-generic{cell-renderer-text-weight}
-      @about-generic{cell-renderer-text-weight-set}
-      @about-generic{cell-renderer-text-width-chars}
-      @about-generic{cell-renderer-text-wrap-mode}
-      @about-generic{cell-renderer-text-wrap-width}
-      @about-function{cell-renderer-text-new}
-      @about-function{cell-renderer-text-set-fixed-height-from-font}
-    @end{subsection}
-    @begin[GtkCellRendererAccel]{subsection}
-      Renders a keyboard accelerator in a cell.
-      @about-symbol{cell-renderer-accel-mode}
-      @about-class{cell-renderer-accel}
-      @about-generic{cell-renderer-accel-accel-key}
-      @about-generic{cell-renderer-accel-accel-mode}
-      @about-generic{cell-renderer-accel-accel-mods}
-      @about-generic{cell-renderer-accel-keycode}
-      @about-function{cell-renderer-accel-new}
-    @end{subsection}
-    @begin[GtkCellRendererCombo]{subsection}
-      Renders a combobox in a cell.
-      @about-class{cell-renderer-combo}
-      @about-generic{cell-renderer-combo-has-entry}
-      @about-generic{cell-renderer-combo-model}
-      @about-generic{cell-renderer-combo-text-column}
-      @about-function{cell-renderer-combo-new}
-    @end{subsection}
-    @begin[GtkCellRendererPixbuf]{subsection}
-      Renders a pixbuf in a cell.
-      @about-class{cell-renderer-pixbuf}
-      @about-generic{cell-renderer-pixbuf-gicon}
-      @about-generic{cell-renderer-pixbuf-icon-name}
-      @about-generic{cell-renderer-pixbuf-icon-size}
-      @about-generic{cell-renderer-pixbuf-pixbuf}
-      @about-generic{cell-renderer-pixbuf-pixbuf-expander-closed}
-      @about-generic{cell-renderer-pixbuf-pixbuf-expander-open}
-      @about-generic{cell-renderer-pixbuf-texture}
-      @about-function{cell-renderer-pixbuf-new}
-    @end{subsection}
-    @begin[GtkCellRendererProgress]{subsection}
-      Renders numbers as progress bars.
-      @about-class{cell-renderer-progress}
-      @about-generic{cell-renderer-progress-inverted}
-      @about-generic{cell-renderer-progress-pulse}
-      @about-generic{cell-renderer-progress-text}
-      @about-generic{cell-renderer-progress-text-xalign}
-      @about-generic{cell-renderer-progress-text-yalign}
-      @about-generic{cell-renderer-progress-value}
-      @about-function{cell-renderer-progress-new}
-    @end{subsection}
-    @begin[GtkCellRendererSpin]{subsection}
-      Renders a spin button in a cell.
-      @about-class{cell-renderer-spin}
-      @about-generic{cell-renderer-spin-adjustment}
-      @about-generic{cell-renderer-spin-climb-rate}
-      @about-generic{cell-renderer-spin-digits}
-      @about-function{cell-renderer-spin-new}
-    @end{subsection}
-    @begin[GtkCellRendererToggle]{subsection}
-      Renders a toggle button in a cell.
-      @about-class{cell-renderer-toggle}
-      @about-generic{cell-renderer-toggle-activatable}
-      @about-generic{cell-renderer-toggle-active}
-      @about-generic{cell-renderer-toggle-inconsistent}
-      @about-generic{cell-renderer-toggle-radio}
-      @about-function{cell-renderer-toggle-new}
-    @end{subsection}
-    @begin[GtkCellRendererSpinner]{subsection}
-      Renders a spinning animation in a cell.
-      @about-class{cell-renderer-spinner}
-      @about-generic{cell-renderer-spinner-active}
-      @about-generic{cell-renderer-spinner-pulse}
-      @about-generic{cell-renderer-spinner-size}
-      @about-function{cell-renderer-spinner-new}
-    @end{subsection}
-    @begin[GtkListStore]{subsection}
-      A list-like data structure that can be used with the GtkTreeView.
-      @about-class{list-store}
-      @about-function{list-store-new}
-      @about-function{list-store-newv}
-      @about-function{list-store-set-column-types}
-      @about-function{list-store-set}
-      @about-function{list-store-set-valist}
-      @about-function{list-store-set-value}
-      @about-function{list-store-set-valuesv}
-      @about-function{list-store-remove}
-      @about-function{list-store-insert}
-      @about-function{list-store-insert-before}
-      @about-function{list-store-insert-after}
-      @about-function{list-store-insert-with-values}
-      @about-function{list-store-insert-with-valuesv}
-      @about-function{list-store-prepend}
-      @about-function{list-store-append}
-      @about-function{list-store-clear}
-      @about-function{list-store-iter-is-valid}
-      @about-function{list-store-reorder}
-      @about-function{list-store-swap}
-      @about-function{list-store-move-before}
-      @about-function{list-store-move-after}
-    @end{subsection}
-    @begin[GtkTreeStore]{subsection}
-      A tree-like data structure that can be used with the @class{tree-view}
-      widget.
-      @about-class{tree-store}
-      @about-function{tree-store-new}
-      @about-function{tree-store-newv}
-      @about-function{tree-store-set-column-types}
-      @about-function{tree-store-set-value}
-      @about-function{tree-store-set}
-      @about-function{tree-store-set-valist}
-      @about-function{tree-store-set-valuesv}
-      @about-function{tree-store-remove}
-      @about-function{tree-store-insert}
-      @about-function{tree-store-insert-before}
-      @about-function{tree-store-insert-after}
-      @about-function{tree-store-insert-with-values}
-      @about-function{tree-store-insert-with-valuesv}
-      @about-function{tree-store-prepend}
-      @about-function{tree-store-append}
-      @about-function{tree-store-is-ancestor}
-      @about-function{tree-store-iter-depth}
-      @about-function{tree-store-clear}
-      @about-function{tree-store-iter-is-valid}
-      @about-function{tree-store-reorder}
-      @about-function{tree-store-swap}
-      @about-function{tree-store-move-before}
-      @about-function{tree-store-move-after}
-    @end{subsection}
-  @end{section}
   @begin[Combo Box, Popovers]{section}
-    @begin[GtkComboBox]{subsection}
-      A widget used to choose from a list of items.
-      @about-symbol{sensitivity-type}
-      @about-class{combo-box}
-      @about-generic{combo-box-active}
-      @about-generic{combo-box-active-id}
-      @about-generic{combo-box-button-sensitivity}
-      @about-generic{combo-box-child}
-      @about-generic{combo-box-entry-text-column}
-      @about-generic{combo-box-has-entry}
-      @about-generic{combo-box-has-frame}
-      @about-generic{combo-box-id-column}
-      @about-generic{combo-box-model}
-      @about-generic{combo-box-popup-fixed-width}
-      @about-generic{combo-box-popup-shown}
-      @about-function{combo-box-new}
-      @about-function{combo-box-new-with-entry}
-      @about-function{combo-box-new-with-model}
-      @about-function{combo-box-new-with-model-and-entry}
-      @about-function{combo-box-active-iter}
-      @about-function{combo-box-popup}
-      @about-function{combo-box-popup-for-device}
-      @about-function{combo-box-popdown}
-      @about-function{combo-box-get-row-separator-func}
-      @about-function{combo-box-set-row-separator-func}
-    @end{subsection}
-    @begin[GtkComboBoxText]{subsection}
-      A simple, text-only combo box.
-      @about-class{combo-box-text}
-      @about-function{combo-box-text-new}
-      @about-function{combo-box-text-new-with-entry}
-      @about-function{combo-box-text-append}
-      @about-function{combo-box-text-prepend}
-      @about-function{combo-box-text-insert}
-      @about-function{combo-box-text-append-text}
-      @about-function{combo-box-text-prepend-text}
-      @about-function{combo-box-text-insert-text}
-      @about-function{combo-box-text-remove}
-      @about-function{combo-box-text-remove-all}
-      @about-function{combo-box-text-active-text}
-    @end{subsection}
     @begin[GtkPopover]{subsection}
       Context dependent bubbles.
       @about-class{popover}
@@ -2894,36 +2060,6 @@
     @end{subsection}
   @end{section}
   @begin[Selector Widgets and Dialogs]{section}
-    @begin[GtkColorChooser]{subsection}
-      Interface implemented by widgets for choosing colors.
-      @about-class{color-chooser}
-      @about-generic{color-chooser-rgba}
-      @about-generic{color-chooser-use-alpha}
-      @about-function{color-chooser-add-palette}
-      @about-function{hsv-to-rgb}
-      @about-function{rgb-to-hsv}
-    @end{subsection}
-    @begin[GtkColorButton]{subsection}
-      A button to launch a color chooser dialog.
-      @about-class{color-button}
-      @about-generic{color-button-modal}
-      @about-generic{color-button-show-editor}
-      @about-generic{color-button-title}
-      @about-function{color-button-new}
-      @about-function{color-button-new-with-rgba}
-    @end{subsection}
-    @begin[GtkColorChooserWidget]{subsection}
-      A widget for choosing colors.
-      @about-class{color-chooser-widget}
-      @about-generic{color-chooser-widget-show-editor}
-      @about-function{color-chooser-widget-new}
-    @end{subsection}
-    @begin[GtkColorChooserDialog]{subsection}
-      A dialog for choosing colors.
-      @about-class{color-chooser-dialog}
-      @about-generic{color-chooser-dialog-show-editor}
-      @about-function{color-chooser-dialog-new}
-    @end{subsection}
     @begin[GtkColorDialog]{subsection}
       @about-class{color-dialog}
       @about-generic{color-dialog-modal}
@@ -2938,52 +2074,6 @@
       @about-generic{color-dialog-button-dialog}
       @about-generic{color-dialog-button-rgba}
       @about-function{color-dialog-button-new}
-    @end{subsection}
-    @begin[GtkFileChooser]{subsection}
-      File chooser interface used by the @class{gtk:file-chooser-widget} and
-      @class{gtk:file-chooser-dialog} widgets.
-      @about-symbol{file-chooser-action}
-      @about-class{file-chooser}
-      @about-generic{file-chooser-action}
-      @about-generic{file-chooser-create-folders}
-      @about-generic{file-chooser-filter}
-      @about-generic{file-chooser-filters}
-      @about-generic{file-chooser-select-multiple}
-      @about-generic{file-chooser-shortcut-folders}
-      @about-function{file-chooser-current-name}
-      @about-function{file-chooser-file}
-      @about-function{file-chooser-namestring}
-      @about-function{file-chooser-files}
-      @about-function{file-chooser-current-folder}
-      @about-function{file-chooser-add-filter}
-      @about-function{file-chooser-remove-filter}
-      @about-function{file-chooser-add-shortcut-folder}
-      @about-function{file-chooser-remove-shortcut-folder}
-      @about-function{file-chooser-add-choice}
-      @about-function{file-chooser-remove-choice}
-      @about-function{file-chooser-choice}
-    @end{subsection}
-    @begin[GtkFileChooserNative]{subsection}
-      A native file chooser dialog, suitable for \"File Open\" or \"File Save\"
-      commands.
-      @about-class{file-chooser-native}
-      @about-generic{file-chooser-native-accept-label}
-      @about-generic{file-chooser-native-cancel-label}
-      @about-function{file-chooser-native-new}
-    @end{subsection}
-    @begin[GtkFileChooserDialog]{subsection}
-      A file chooser dialog, suitable for \"File Open\" or \"File Save\"
-      commands.
-      @about-class{file-chooser-dialog}
-      @about-function{file-chooser-dialog-new}
-    @end{subsection}
-    @begin[GtkFileChooserWidget]{subsection}
-      A file chooser widget.
-      @about-class{file-chooser-widget}
-      @about-generic{file-chooser-widget-search-mode}
-      @about-generic{file-chooser-widget-show-time}
-      @about-generic{file-chooser-widget-subtitle}
-      @about-function{file-chooser-widget-new}
     @end{subsection}
     @begin[GtkFileDialog]{subsection}
       @about-class{file-dialog}
@@ -3023,45 +2113,6 @@
       @about-function{uri-launcher-new}
       @about-function{uri-launcher-launch}
       @about-function{uri-launcher-launch-finish}
-    @end{subsection}
-    @begin[GtkFontChooser]{subsection}
-      Interface implemented by widgets displaying fonts.
-      @about-symbol{font-chooser-level}
-      @about-class{font-chooser}
-      @about-generic{font-chooser-font}
-      @about-generic{font-chooser-font-desc}
-      @about-generic{font-chooser-font-features}
-      @about-generic{font-chooser-language}
-      @about-generic{font-chooser-level}
-      @about-generic{font-chooser-preview-text}
-      @about-generic{font-chooser-show-preview-entry}
-      @about-function{font-chooser-font-family}
-      @about-function{font-chooser-font-face}
-      @about-function{font-chooser-font-size}
-      @about-symbol{font-filter-func}
-      @about-function{font-chooser-set-filter-func}
-      @about-function{font-chooser-font-map}
-    @end{subsection}
-    @begin[GtkFontButton]{subsection}
-      A button to launch a font chooser dialog.
-      @about-class{font-button}
-      @about-generic{font-button-modal}
-      @about-generic{font-button-title}
-      @about-generic{font-button-use-font}
-      @about-generic{font-button-use-size}
-      @about-function{font-button-new}
-      @about-function{font-button-new-with-font}
-    @end{subsection}
-    @begin[GtkFontChooserWidget]{subsection}
-      A widget for selecting fonts.
-      @about-class{font-chooser-widget}
-      @about-generic{font-chooser-widget-tweak-action}
-      @about-function{font-chooser-widget-new}
-    @end{subsection}
-    @begin[GtkChooserDialog]{subsection}
-      A dialog for selecting fonts.
-      @about-class{font-chooser-dialog}
-      @about-function{font-chooser-dialog-new}
     @end{subsection}
     @begin[GtkFontDialog]{subsection}
       @about-class{font-dialog}
@@ -3886,47 +2937,6 @@
       @about-function{recent-info-match}
     @end{subsection}
   @end{section}
-  @begin[Choosing from installed applications]{section}
-    @begin{subsection}
-      Interface implemented by widgets for choosing an application.
-      @about-class{app-chooser}
-      @about-generic{app-chooser-content-type}
-      @about-function{app-chooser-app-info}
-      @about-function{app-chooser-refresh}
-    @end{subsection}
-    @begin[GtkAppChooserButton]{subsection}
-      A button to launch an application chooser dialog.
-      @about-class{app-chooser-button}
-      @about-generic{app-chooser-button-heading}
-      @about-generic{app-chooser-button-modal}
-      @about-generic{app-chooser-button-show-default-item}
-      @about-generic{app-chooser-button-show-dialog-item}
-      @about-function{app-chooser-button-new}
-      @about-function{app-chooser-button-append-custom-item}
-      @about-function{app-chooser-button-append-separator}
-      @about-function{app-chooser-button-set-active-custom-item}
-    @end{subsection}
-    @begin[GtkAppChooserDialog]{subsection}
-      An application chooser dialog.
-      @about-class{app-chooser-dialog}
-      @about-generic{app-chooser-dialog-gfile}
-      @about-generic{app-chooser-dialog-heading}
-      @about-function{app-chooser-dialog-new}
-      @about-function{app-chooser-dialog-new-for-content-type}
-      @about-function{app-chooser-dialog-widget}
-    @end{subsection}
-    @begin[GtkAppChooserWidget]{subsection}
-      Application chooser widget that can be embedded in other widgets.
-      @about-class{app-chooser-widget}
-      @about-generic{app-chooser-widget-default-text}
-      @about-generic{app-chooser-widget-show-all}
-      @about-generic{app-chooser-widget-show-default}
-      @about-generic{app-chooser-widget-show-fallback}
-      @about-generic{app-chooser-widget-show-other}
-      @about-generic{app-chooser-widget-show-recommended}
-      @about-function{app-chooser-widget-new}
-    @end{subsection}
-  @end{section}
   @begin[Gestures and event handling]{section}
     @begin[GtkEventController]{subsection}
       Self-contained handler of series of events.
@@ -4129,10 +3139,10 @@
     @begin[GtkDropControllerMotion]{subsection}
       Event controller for motion events during a drop.
       @about-class{drop-controller-motion}
+      @about-generic{drop-controller-motion-contains-pointer}
+      @about-generic{drop-controller-motion-drop}
+      @about-generic{drop-controller-motion-is-pointer}
       @about-function{drop-controller-motion-new}
-      @about-function{drop-controller-motion-contains-pointer}
-      @about-function{drop-controller-motion-is-pointer}
-      @about-function{drop-controller-motion-get-drop}
     @end{subsection}
   @end{section}
   @begin[Miscellaneous]{section}
@@ -4413,49 +3423,6 @@
     @end{subsection}
   @end{section}
   @begin[Theming in GTK]{section}
-    @begin[GtkStyleContext]{subsection}
-      Stores styling information affecting a widget.
-      @about-symbol{style-context-print-flags}
-      @about-class{style-context}
-      @about-generic{style-context-display}
-      @about-function{style-context-add-provider}
-      @about-function{style-context-add-provider-for-display}
-      @about-function{style-context-state}
-      @about-function{style-context-color}
-      @about-function{style-context-border}
-      @about-function{style-context-padding}
-      @about-function{style-context-margin}
-      @about-function{style-context-lookup-color}
-      @about-function{style-context-remove-provider}
-      @about-function{style-context-remove-provider-for-display}
-      @about-function{style-context-restore}
-      @about-function{style-context-save}
-      @about-function{style-context-add-class}
-      @about-function{style-context-remove-class}
-      @about-function{style-context-has-class}
-      @about-function{style-context-scale}
-      @about-function{style-context-to-string}
-      @about-symbol{border-style}
-      @about-struct{border}
-      @about-function{border-left}
-      @about-function{border-right}
-      @about-function{border-top}
-      @about-function{border-bottom}
-      @about-function{border-new}
-      @about-function{border-copy}
-      @about-function{render-activity}
-      @about-function{render-arrow}
-      @about-function{render-background}
-      @about-function{render-check}
-      @about-function{render-expander}
-      @about-function{render-focus}
-      @about-function{render-frame}
-      @about-function{render-handle}
-      @about-function{render-icon}
-      @about-function{render-layout}
-      @about-function{render-line}
-      @about-function{render-option}
-    @end{subsection}
     @begin[GtkStyleProvider]{subsection}
       Interface to provide style information to a @class{gtk:style-context}
       object.
@@ -4523,6 +3490,1037 @@
       @about-function{icon-theme-lookup-icon}
       @about-function{icon-theme-lookup-by-gicon}
       @about-function{icon-theme-icon-sizes}
+    @end{subsection}
+  @end{section}
+  @begin[Deprecated]{section}
+    @begin[Deprecated since GTK 4.10]{subsection}@end{subsection}
+    @begin[GtkDialog]{subsection}
+      Create popup windows.
+      @about-symbol{dialog-flags}
+      @about-symbol{response-type}
+      @about-class{dialog}
+      @about-generic{dialog-use-header-bar}
+      @about-function{dialog-new}
+      @about-function{dialog-new-with-buttons}
+      @about-function{dialog-response}
+      @about-function{dialog-add-button}
+      @about-function{dialog-add-buttons}
+      @about-function{dialog-add-action-widget}
+      @about-function{dialog-set-default-response}
+      @about-function{dialog-set-response-sensitive}
+      @about-function{dialog-response-for-widget}
+      @about-function{dialog-widget-for-response}
+      @about-function{dialog-content-area}
+      @about-function{dialog-header-bar}
+    @end{subsection}
+    @begin[GtkMessageDialog]{subsection}
+      A convenient message window.
+      @about-symbol{message-type}
+      @about-symbol{buttons-type}
+      @about-class{message-dialog}
+      @about-generic{message-dialog-buttons}
+      @about-generic{message-dialog-message-area}
+      @about-generic{message-dialog-message-type}
+      @about-generic{message-dialog-secondary-text}
+      @about-generic{message-dialog-secondary-use-markup}
+      @about-generic{message-dialog-text}
+      @about-generic{message-dialog-use-markup}
+      @about-function{message-dialog-new}
+      @about-function{message-dialog-new-with-markup}
+      @about-function{message-dialog-set-markup}
+      @about-function{message-dialog-format-secondary-text}
+      @about-function{message-dialog-format-secondary-markup}
+    @end{subsection}
+    @begin[GtkAssistant]{subsection}
+      A widget used to guide users through multi-step operations.
+      @about-symbol{assistant-page-type}
+      @about-class{assistant-page}
+      @about-generic{assistant-page-child}
+      @about-generic{assistant-page-complete}
+      @about-generic{assistant-page-page-type}
+      @about-generic{assistant-page-title}
+      @about-class{assistant}
+      @about-generic{assistant-pages}
+      @about-generic{assistant-use-header-bar}
+      @about-function{assistant-new}
+      @about-function{assistant-page}
+      @about-function{assistant-current-page}
+      @about-function{assistant-n-pages}
+      @about-function{assistant-nth-page}
+      @about-function{assistant-prepend-page}
+      @about-function{assistant-append-page}
+      @about-function{assistant-insert-page}
+      @about-function{assistant-remove-page}
+      @about-symbol{assistant-page-func}
+      @about-function{assistant-set-forward-page-func}
+      @about-function{assistant-page-complete}
+      @about-function{assistant-page-type}
+      @about-function{assistant-page-title}
+      @about-function{assistant-add-action-widget}
+      @about-function{assistant-remove-action-widget}
+      @about-function{assistant-update-buttons-state}
+      @about-function{assistant-commit}
+      @about-function{assistant-next-page}
+      @about-function{assistant-previous-page}
+    @end{subsection}
+    @begin[GtkInfoBar]{subsection}
+      Report important messages to the user.
+      @about-class{info-bar}
+      @about-generic{info-bar-message-type}
+      @about-generic{info-bar-revealed}
+      @about-generic{info-bar-show-close-button}
+      @about-function{info-bar-new}
+      @about-function{info-bar-new-with-buttons}
+      @about-function{info-bar-add-action-widget}
+      @about-function{info-bar-remove-action-widget}
+      @about-function{info-bar-add-button}
+      @about-function{info-bar-add-buttons}
+      @about-function{info-bar-set-response-sensitive}
+      @about-function{info-bar-set-default-response}
+      @about-function{info-bar-response}
+      @about-function{info-bar-add-child}
+      @about-function{info-bar-remove-child}
+    @end{subsection}
+    @begin[GtkStatusbar]{subsection}
+      Report messages of minor importance to the user.
+      @about-class{statusbar}
+      @about-function{statusbar-new}
+      @about-function{statusbar-context-id}
+      @about-function{statusbar-push}
+      @about-function{statusbar-pop}
+      @about-function{statusbar-remove}
+      @about-function{statusbar-remove-all}
+      @about-function{statusbar-message}
+    @end{subsection}
+    @begin[GtkLockButton]{subsection}
+      A widget to unlock or lock privileged operations.
+      @about-class{lock-button}
+      @about-generic{lock-button-permission}
+      @about-generic{lock-button-text-lock}
+      @about-generic{lock-button-text-unlock}
+      @about-generic{lock-button-tooltip-lock}
+      @about-generic{lock-button-tooltip-not-authorized}
+      @about-generic{lock-button-tooltip-unlock}
+      @about-function{lock-button-new}
+    @end{subsection}
+    @begin[GtkVolumeButton]{subsection}
+      A button which pops up a volume control.
+      @about-class{volume-button}
+      @about-generic{volume-button-use-symbolic}
+      @about-function{volume-button-new}
+    @end{subsection}
+    @begin[GtkEntryCompletion]{subsection}
+      Completion functionality for the @class{gtk:entry} widget.
+      @about-class{entry-completion}
+      @about-generic{entry-completion-cell-area}
+      @about-generic{entry-completion-inline-completion}
+      @about-generic{entry-completion-inline-selection}
+      @about-generic{entry-completion-minimum-key-length}
+      @about-generic{entry-completion-model}
+      @about-generic{entry-completion-popup-completion}
+      @about-generic{entry-completion-popup-set-width}
+      @about-generic{entry-completion-popup-single-match}
+      @about-generic{entry-completion-text-column}
+      @about-function{entry-completion-new}
+      @about-function{entry-completion-new-with-area}
+      @about-function{entry-completion-entry}
+      @about-symbol{entry-completion-match-func}
+      @about-function{entry-completion-set-match-func}
+      @about-function{entry-completion-compute-prefix}
+      @about-function{entry-completion-complete}
+      @about-function{entry-completion-completion-prefix}
+      @about-function{entry-completion-insert-prefix}
+    @end{subsection}
+    @begin[GtkTreeModel]{subsection}
+      The tree interface used by the @class{gtk:tree-view} widget.
+      @about-class{tree-path}
+      @about-function{tree-path-new}
+      @about-function{tree-path-copy}
+      @about-function{tree-path-new-from-string}
+      @about-function{tree-path-new-from-indices}
+      @about-function{tree-path-new-first}
+      @about-function{tree-path-append-index}
+      @about-function{tree-path-prepend-index}
+      @about-function{tree-path-depth}
+      @about-function{tree-path-indices}
+      @about-function{tree-path-compare}
+      @about-function{tree-path-next}
+      @about-function{tree-path-prev}
+      @about-function{tree-path-up}
+      @about-function{tree-path-down}
+      @about-function{tree-path-is-ancestor}
+      @about-function{tree-path-is-descendant}
+      @about-function{tree-path-to-string}
+      @about-class{tree-row-reference}
+      @about-function{tree-row-reference-new}
+      @about-function{tree-row-reference-copy}
+      @about-function{tree-row-reference-new-proxy}
+      @about-function{tree-row-reference-model}
+      @about-function{tree-row-reference-path}
+      @about-function{tree-row-reference-valid}
+      @about-function{tree-row-reference-inserted}
+      @about-function{tree-row-reference-deleted}
+      @about-function{tree-row-reference-reordered}
+      @about-struct{tree-iter}
+      @about-function{tree-iter-copy}
+      @about-function{tree-iter-free}
+      @about-symbol{tree-model-flags}
+      @about-class{tree-model}
+      @about-function{tree-model-flags}
+      @about-function{tree-model-n-columns}
+      @about-function{tree-model-column-type}
+      @about-function{tree-model-iter}
+      @about-function{tree-model-iter-from-string}
+      @about-function{tree-model-iter-first}
+      @about-function{tree-model-path}
+      @about-function{tree-model-value}
+      @about-function{tree-model-iter-next}
+      @about-function{tree-model-iter-previous}
+      @about-function{tree-model-iter-children}
+      @about-function{tree-model-iter-has-child}
+      @about-function{tree-model-iter-n-children}
+      @about-function{tree-model-iter-nth-child}
+      @about-function{tree-model-iter-parent}
+      @about-function{tree-model-string-from-iter}
+      @about-function{tree-model-ref-node}
+      @about-function{tree-model-unref-node}
+      @about-function{tree-model-get}
+      @about-function{tree-model-get-valist}
+      @about-symbol{tree-model-foreach-func}
+      @about-function{tree-model-foreach}
+      @about-function{tree-model-row-changed}
+      @about-function{tree-model-row-inserted}
+      @about-function{tree-model-row-has-child-toggled}
+      @about-function{tree-model-row-deleted}
+      @about-function{tree-model-rows-reordered}
+      @about-function{tree-model-rows-reordered-with-length}
+    @end{subsection}
+    @begin[GtkTreeSelection]{subsection}
+      The selection object for the @class{tree-view} widget.
+      @about-class{tree-selection}
+      @about-generic{tree-selection-mode}
+      @about-symbol{tree-selection-func}
+      @about-symbol{tree-selection-foreach-func}
+      @about-function{tree-selection-set-select-function}
+      @about-function{tree-selection-get-select-function}
+      @about-function{tree-selection-user-data}
+      @about-function{tree-selection-tree-view}
+      @about-function{tree-selection-selected}
+      @about-function{tree-selection-selected-foreach}
+      @about-function{tree-selection-selected-rows}
+      @about-function{tree-selection-count-selected-rows}
+      @about-function{tree-selection-select-path}
+      @about-function{tree-selection-unselect-path}
+      @about-function{tree-selection-path-is-selected}
+      @about-function{tree-selection-select-iter}
+      @about-function{tree-selection-unselect-iter}
+      @about-function{tree-selection-iter-is-selected}
+      @about-function{tree-selection-select-all}
+      @about-function{tree-selection-unselect-all}
+      @about-function{tree-selection-select-range}
+      @about-function{tree-selection-unselect-range}
+    @end{subsection}
+    @begin[GtkTreeViewColumn]{subsection}
+      A visible column in a @class{tree-view} widget.
+      @about-symbol{tree-view-column-sizing}
+      @about-class{tree-view-column}
+      @about-generic{tree-view-column-alignment}
+      @about-generic{tree-view-column-cell-area}
+      @about-generic{tree-view-column-clickable}
+      @about-generic{tree-view-column-expand}
+      @about-generic{tree-view-column-fixed-width}
+      @about-generic{tree-view-column-max-width}
+      @about-generic{tree-view-column-min-width}
+      @about-generic{tree-view-column-reorderable}
+      @about-generic{tree-view-column-resizable}
+      @about-generic{tree-view-column-sizing}
+      @about-generic{tree-view-column-sort-column-id}
+      @about-generic{tree-view-column-sort-indicator}
+      @about-generic{tree-view-column-sort-order}
+      @about-generic{tree-view-column-spacing}
+      @about-generic{tree-view-column-title}
+      @about-generic{tree-view-column-visible}
+      @about-generic{tree-view-column-widget}
+      @about-generic{tree-view-column-width}
+      @about-generic{tree-view-column-x-offset}
+      @about-function{tree-view-column-new}
+      @about-function{tree-view-column-new-with-area}
+      @about-function{tree-view-column-new-with-attributes}
+      @about-function{tree-view-column-pack-start}
+      @about-function{tree-view-column-pack-end}
+      @about-function{tree-view-column-clear}
+      @about-function{tree-view-column-add-attribute}
+      @about-function{tree-view-column-set-attributes}
+      @about-symbol{tree-cell-data-func}
+      @about-function{tree-view-column-set-cell-data-func}
+      @about-function{tree-view-column-clear-attributes}
+      @about-function{tree-view-column-clicked}
+      @about-function{tree-view-column-button}
+      @about-function{tree-view-column-cell-set-cell-data}
+      @about-function{tree-view-column-cell-size}
+      @about-function{tree-view-column-cell-position}
+      @about-function{tree-view-column-cell-is-visible}
+      @about-function{tree-view-column-focus-cell}
+      @about-function{tree-view-column-queue-resize}
+      @about-function{tree-view-column-tree-view}
+    @end{subsection}
+    @begin[GtkTreeView]{subsection}
+      A widget for displaying both trees and lists.
+      @about-symbol{tree-view-drop-position}
+      @about-symbol{tree-view-grid-lines}
+      @about-class{tree-view}
+      @about-generic{tree-view-activate-on-single-click}
+      @about-generic{tree-view-enable-grid-lines}
+      @about-generic{tree-view-enable-search}
+      @about-generic{tree-view-enable-tree-lines}
+      @about-generic{tree-view-expander-column}
+      @about-generic{tree-view-fixed-height-mode}
+      @about-generic{tree-view-headers-clickable}
+      @about-generic{tree-view-headers-visible}
+      @about-generic{tree-view-hover-expand}
+      @about-generic{tree-view-hover-selection}
+      @about-generic{tree-view-level-indentation}
+      @about-generic{tree-view-model}
+      @about-generic{tree-view-reorderable}
+      @about-generic{tree-view-rubber-banding}
+      @about-generic{tree-view-search-column}
+      @about-generic{tree-view-show-expanders}
+      @about-generic{tree-view-tooltip-column}
+      @about-function{tree-view-new}
+      @about-function{tree-view-new-with-model}
+      @about-function{tree-view-selection}
+      @about-function{tree-view-columns-autosize}
+      @about-function{tree-view-append-column}
+      @about-function{tree-view-remove-column}
+      @about-function{tree-view-insert-column}
+      @about-function{tree-view-insert-column-with-attributes}
+      @about-function{tree-view-insert-column-with-data-func}
+      @about-function{tree-view-n-columns}
+      @about-function{tree-view-column}
+      @about-function{tree-view-columns}
+      @about-function{tree-view-move-column-after}
+      @about-symbol{tree-view-column-drop-func}
+      @about-function{tree-view-set-column-drag-function}
+      @about-function{tree-view-scroll-to-point}
+      @about-function{tree-view-scroll-to-cell}
+      @about-function{tree-view-set-cursor}
+      @about-function{tree-view-set-cursor-on-cell}
+      @about-function{tree-view-get-cursor}
+      @about-function{tree-view-row-activated}
+      @about-function{tree-view-expand-all}
+      @about-function{tree-view-collapse-all}
+      @about-function{tree-view-expand-to-path}
+      @about-function{tree-view-expand-row}
+      @about-function{tree-view-collapse-row}
+      @about-symbol{tree-view-mapping-func}
+      @about-function{tree-view-map-expanded-rows}
+      @about-function{tree-view-row-expanded}
+      @about-function{tree-view-path-at-pos}
+      @about-function{tree-view-is-blank-at-pos}
+      @about-function{tree-view-cell-area}
+      @about-function{tree-view-background-area}
+      @about-function{tree-view-visible-rect}
+      @about-function{tree-view-visible-range}
+      @about-function{tree-view-convert-bin-window-to-tree-coords}
+      @about-function{tree-view-convert-bin-window-to-widget-coords}
+      @about-function{tree-view-convert-tree-to-bin-window-coords}
+      @about-function{tree-view-convert-tree-to-widget-coords}
+      @about-function{tree-view-convert-widget-to-bin-window-coords}
+      @about-function{tree-view-convert-widget-to-tree-coords}
+      @about-function{tree-view-enable-model-drag-dest}
+      @about-function{tree-view-enable-model-drag-source}
+      @about-function{tree-view-unset-rows-drag-source}
+      @about-function{tree-view-unset-rows-drag-dest}
+      @about-function{tree-view-set-drag-dest-row}
+      @about-function{tree-view-get-drag-dest-row}
+      @about-function{tree-view-get-dest-row-at-pos}
+      @about-function{tree-view-create-row-drag-icon}
+      @about-symbol{tree-view-search-equal-func}
+      @about-function{tree-view-get-search-equal-func}
+      @about-function{tree-view-set-search-equal-func}
+      @about-function{tree-view-search-entry}
+      @about-symbol{tree-view-row-separator-func}
+      @about-function{tree-view-get-row-separator-func}
+      @about-function{tree-view-set-row-separator-func}
+      @about-function{tree-view-is-rubber-banding-active}
+      @about-function{tree-view-grid-lines}
+      @about-function{tree-view-set-tooltip-row}
+      @about-function{tree-view-set-tooltip-cell}
+      @about-function{tree-view-tooltip-context}
+    @end{subsection}
+    @begin[GtkTreeView Drag & Drop]{subsection}
+      @about-class{tree-drag-source}
+      @about-symbol{GtkTreeDragSourceIface}
+      @about-class{tree-drag-dest}
+      @about-symbol{GtkTreeDragDestIface}
+      @about-symbol{GTK_TYPE_TREE_ROW_DATA}
+      @about-function{tree-drag-source-drag-data-delete}
+      @about-function{tree-drag-source-drag-data-get}
+      @about-function{tree-drag-source-row-draggable}
+      @about-function{tree-drag-dest-drag-data-received}
+      @about-function{tree-drag-dest-row-drop-possible}
+      @about-function{tree-create-row-drag-content}
+      @about-function{tree-get-row-drag-data}
+    @end{subsection}
+    @begin[GtkCellLayout]{subsection}
+      An interface for packing cells.
+      @about-class{cell-layout}
+      @about-function{cell-layout-pack-start}
+      @about-function{cell-layout-pack-end}
+      @about-function{cell-layout-area}
+      @about-function{cell-layout-cells}
+      @about-function{cell-layout-reorder}
+      @about-function{cell-layout-clear}
+      @about-function{cell-layout-set-attributes}
+      @about-function{cell-layout-add-attribute}
+      @about-symbol{cell-layout-data-func}
+      @about-function{cell-layout-set-cell-data-func}
+      @about-function{cell-layout-clear-attributes}
+    @end{subsection}
+    @begin[GtkCellView]{subsection}
+      A widget displaying a single row of a GtkTreeModel.
+      @about-class{cell-view}
+      @about-generic{cell-view-cell-area}
+      @about-generic{cell-view-cell-area-context}
+      @about-generic{cell-view-draw-sensitive}
+      @about-generic{cell-view-fit-model}
+      @about-generic{cell-view-model}
+      @about-function{cell-view-new}
+      @about-function{cell-view-new-with-context}
+      @about-function{cell-view-new-with-text}
+      @about-function{cell-view-new-with-markup}
+      @about-function{cell-view-new-with-texture}
+      @about-function{cell-view-displayed-row}
+    @end{subsection}
+    @begin[GtkIconView]{subsection}
+      A widget which displays a list of icons in a grid.
+      @about-symbol{icon-view-drop-position}
+      @about-class{icon-view}
+      @about-generic{icon-view-activate-on-single-click}
+      @about-generic{icon-view-cell-area}
+      @about-generic{icon-view-column-spacing}
+      @about-generic{icon-view-columns}
+      @about-generic{icon-view-item-orientation}
+      @about-generic{icon-view-item-padding}
+      @about-generic{icon-view-item-width}
+      @about-generic{icon-view-margin}
+      @about-generic{icon-view-markup-column}
+      @about-generic{icon-view-model}
+      @about-generic{icon-view-pixbuf-column}
+      @about-generic{icon-view-reorderable}
+      @about-generic{icon-view-row-spacing}
+      @about-generic{icon-view-selection-mode}
+      @about-generic{icon-view-spacing}
+      @about-generic{icon-view-text-column}
+      @about-generic{icon-view-tooltip-column}
+      @about-symbol{icon-view-foreach-func}
+      @about-function{icon-view-new}
+      @about-function{icon-view-new-with-area}
+      @about-function{icon-view-new-with-model}
+      @about-function{icon-view-path-at-pos}
+      @about-function{icon-view-item-at-pos}
+      @about-function{icon-view-set-cursor}
+      @about-function{icon-view-get-cursor}
+      @about-function{icon-view-selected-foreach}
+      @about-function{icon-view-cell-rect}
+      @about-function{icon-view-select-path}
+      @about-function{icon-view-unselect-path}
+      @about-function{icon-view-path-is-selected}
+      @about-function{icon-view-selected-items}
+      @about-function{icon-view-select-all}
+      @about-function{icon-view-unselect-all}
+      @about-function{icon-view-item-activated}
+      @about-function{icon-view-scroll-to-path}
+      @about-function{icon-view-visible-range}
+      @about-function{icon-view-set-tooltip-item}
+      @about-function{icon-view-set-tooltip-cell}
+      @about-function{icon-view-tooltip-context}
+      @about-function{icon-view-item-row}
+      @about-function{icon-view-item-column}
+      @about-function{icon-view-enable-model-drag-source}
+      @about-function{icon-view-enable-model-drag-dest}
+      @about-function{icon-view-unset-model-drag-source}
+      @about-function{icon-view-unset-model-drag-dest}
+      @about-function{icon-view-set-drag-dest-item}
+      @about-function{icon-view-get-drag-dest-item}
+      @about-function{icon-view-dest-item-at-pos}
+      @about-function{icon-view-create-drag-icon}
+    @end{subsection}
+    @begin[GtkTreeSortable]{subsection}
+      The interface for sortable models used by GtkTreeView.
+      @about-variable{+gtk-tree-sortable-default-sort-column-id+}
+      @about-variable{+gtk-tree-sortable-unsorted-sort-column-id+}
+      @about-class{tree-sortable}
+      @about-symbol{GtkTreeSortableIface}
+      @about-symbol{tree-iter-compare-func}
+      @about-function{tree-sortable-sort-column-changed}
+      @about-function{tree-sortable-sort-column-id}
+      @about-function{tree-sortable-set-sort-func}
+      @about-function{tree-sortable-set-default-sort-func}
+      @about-function{tree-sortable-has-default-sort-func}
+    @end{subsection}
+    @begin[GtkTreeModelSort]{subsection}
+      A GtkTreeModel which makes an underlying tree model sortable.
+      @about-class{tree-model-sort}
+      @about-generic{tree-model-sort-model}
+      @about-function{tree-model-sort-new-with-model}
+      @about-function{tree-model-sort-convert-child-path-to-path}
+      @about-function{tree-model-sort-convert-child-iter-to-iter}
+      @about-function{tree-model-sort-convert-path-to-child-path}
+      @about-function{tree-model-sort-convert-iter-to-child-iter}
+      @about-function{tree-model-sort-reset-default-sort-func}
+      @about-function{tree-model-sort-clear-cache}
+      @about-function{tree-model-sort-iter-is-valid}
+    @end{subsection}
+    @begin[GtkTreeModelFilter]{subsection}
+      A GtkTreeModel which hides parts of an underlying tree model.
+      @about-class{tree-model-filter}
+      @about-generic{tree-model-filter-child-model}
+      @about-generic{tree-model-filter-virtual-root}
+      @about-function{tree-model-filter-new}
+      @about-symbol{tree-model-filter-visible-func}
+      @about-function{tree-model-filter-set-visible-func}
+      @about-symbol{tree-model-filter-modify-func}
+      @about-function{tree-model-filter-set-modify-func}
+      @about-function{tree-model-filter-set-visible-column}
+      @about-function{tree-model-filter-model}
+      @about-function{tree-model-filter-convert-child-iter-to-iter}
+      @about-function{tree-model-filter-convert-iter-to-child-iter}
+      @about-function{tree-model-filter-convert-child-path-to-path}
+      @about-function{tree-model-filter-convert-path-to-child-path}
+      @about-function{tree-model-filter-refilter}
+      @about-function{tree-model-filter-clear-cache}
+    @end{subsection}
+    @begin[GtkCellArea]{subsection}
+      An abstract class for laying out GtkCellRenderers.
+      @about-class{cell-area}
+      @about-generic{cell-area-edit-widget}
+      @about-generic{cell-area-edited-cell}
+      @about-generic{cell-area-focus-cell}
+      @about-symbol{GTK_CELL_AREA_WARN_INVALID_CELL_PROPERTY_ID}
+      @about-function{cell-area-add}
+      @about-function{cell-area-remove}
+      @about-function{cell-area-has-renderer}
+      @about-symbol{cell-callback}
+      @about-function{cell-area-foreach}
+      @about-symbol{cell-alloc-callback}
+      @about-function{cell-area-foreach-alloc}
+      @about-function{cell-area-event}
+      @about-function{cell-area-snapshot}
+      @about-function{cell-area-cell-allocation}
+      @about-function{cell-area-cell-at-position}
+      @about-function{cell-area-create-context}
+      @about-function{cell-area-copy-context}
+      @about-function{cell-area-request-mode}
+      @about-function{cell-area-preferred-width}
+      @about-function{cell-area-preferred-height-for-width}
+      @about-function{cell-area-preferred-height}
+      @about-function{cell-area-preferred-width-for-height}
+      @about-function{cell-area-current-path-string}
+      @about-function{cell-area-apply-attributes}
+      @about-function{cell-area-attribute-connect}
+      @about-function{cell-area-attribute-disconnect}
+      @about-function{cell-area-attribute-column}
+      @about-function{cell-area-class-install-cell-property}
+      @about-function{cell-area-class-find-cell-property}
+      @about-function{cell-area-class-list-cell-properties}
+      @about-function{cell-area-add-with-properties}
+      @about-function{cell-area-cell-set}
+      @about-function{cell-area-cell-get}
+      @about-function{cell-area-valist}
+      @about-function{cell-area-cell-property}
+      @about-function{cell-area-is-activatable}
+      @about-function{cell-area-activate}
+      @about-function{cell-area-focus}
+      @about-function{cell-area-add-focus-sibling}
+      @about-function{cell-area-remove-focus-sibling}
+      @about-function{cell-area-is-focus-sibling}
+      @about-function{cell-area-focus-siblings}
+      @about-function{cell-area-focus-from-sibling}
+      @about-function{cell-area-activate-cell}
+      @about-function{cell-area-stop-editing}
+      @about-function{cell-area-inner-cell-area}
+      @about-function{cell-area-request-renderer}
+    @end{subsection}
+    @begin[GtkCellAreaBox]{subsection}
+      A cell area that renders GtkCellRenderers into a row or a column.
+      @about-class{cell-area-box}
+      @about-generic{cell-area-box-spacing}
+      @about-function{cell-area-box-new}
+      @about-function{cell-area-box-pack-start}
+      @about-function{cell-area-box-pack-end}
+    @end{subsection}
+    @begin[GtkCellAreaContext]{subsection}
+      Stores geometrical information for a series of rows in a GtkCellArea.
+      @about-class{cell-area-context}
+      @about-generic{cell-area-context-area}
+      @about-generic{cell-area-context-minimum-height}
+      @about-generic{cell-area-context-minimum-width}
+      @about-generic{cell-area-context-natural-height}
+      @about-generic{cell-area-context-natural-width}
+      @about-function{cell-area-context-allocate}
+      @about-function{cell-area-context-reset}
+      @about-function{cell-area-context-preferred-width}
+      @about-function{cell-area-context-preferred-height}
+      @about-function{cell-area-context-preferred-height-for-width}
+      @about-function{cell-area-context-preferred-width-for-height}
+      @about-function{cell-area-context-allocation}
+      @about-function{cell-area-context-push-preferred-width}
+      @about-function{cell-area-context-push-preferred-height}
+    @end{subsection}
+    @begin[GtkCellEditable]{subsection}
+      Interface for widgets that can be used for editing cells.
+      @about-class{cell-editable}
+      @about-generic{cell-editable-editing-canceled}
+      @about-function{cell-editable-start-editing}
+      @about-function{cell-editable-editing-done}
+      @about-function{cell-editable-remove-widget}
+    @end{subsection}
+    @begin[GtkCellRenderer]{subsection}
+      An object for rendering a single cell.
+      @about-symbol{cell-renderer-state}
+      @about-symbol{cell-renderer-mode}
+      @about-class{cell-renderer}
+      @about-generic{cell-renderer-cell-background}
+      @about-generic{cell-renderer-cell-background-rgba}
+      @about-generic{cell-renderer-cell-background-set}
+      @about-generic{cell-renderer-editing}
+      @about-generic{cell-renderer-height}
+      @about-generic{cell-renderer-is-expanded}
+      @about-generic{cell-renderer-is-expander}
+      @about-generic{cell-renderer-mode}
+      @about-generic{cell-renderer-sensitive}
+      @about-generic{cell-renderer-visible}
+      @about-generic{cell-renderer-width}
+      @about-generic{cell-renderer-xalign}
+      @about-generic{cell-renderer-xpad}
+      @about-generic{cell-renderer-yalign}
+      @about-generic{cell-renderer-ypad}
+      @about-function{cell-renderer-aligned-area}
+      @about-function{cell-renderer-snapshot}
+      @about-function{cell-renderer-activate}
+      @about-function{cell-renderer-start-editing}
+      @about-function{cell-renderer-stop-editing}
+      @about-function{cell-renderer-fixed-size}
+      @about-function{cell-renderer-alignment}
+      @about-function{cell-renderer-padding}
+      @about-function{cell-renderer-state}
+      @about-function{cell-renderer-is-activatable}
+      @about-function{cell-renderer-preferred-height}
+      @about-function{cell-renderer-preferred-height-for-width}
+      @about-function{cell-renderer-preferred-size}
+      @about-function{cell-renderer-preferred-width}
+      @about-function{cell-renderer-preferred-width-for-height}
+      @about-function{cell-renderer-request-mode}
+    @end{subsection}
+    @begin[GtkCellRendererText]{subsection}
+      Renders text in a cell.
+      @about-class{cell-renderer-text}
+      @about-generic{cell-renderer-text-align-set}
+      @about-generic{cell-renderer-text-alignment}
+      @about-generic{cell-renderer-text-attributes}
+      @about-generic{cell-renderer-text-background}
+      @about-generic{cell-renderer-text-background-rgba}
+      @about-generic{cell-renderer-text-background-set}
+      @about-generic{cell-renderer-text-editable}
+      @about-generic{cell-renderer-text-editable-set}
+      @about-generic{cell-renderer-text-ellipsize}
+      @about-generic{cell-renderer-text-ellipsize-set}
+      @about-generic{cell-renderer-text-family}
+      @about-generic{cell-renderer-text-family-set}
+      @about-generic{cell-renderer-text-font}
+      @about-generic{cell-renderer-text-font-desc}
+      @about-generic{cell-renderer-text-foreground}
+      @about-generic{cell-renderer-text-foreground-rgba}
+      @about-generic{cell-renderer-text-foreground-set}
+      @about-generic{cell-renderer-text-language}
+      @about-generic{cell-renderer-text-language-set}
+      @about-generic{cell-renderer-text-markup}
+      @about-generic{cell-renderer-text-max-width-chars}
+      @about-generic{cell-renderer-text-placeholder-text}
+      @about-generic{cell-renderer-text-rise}
+      @about-generic{cell-renderer-text-rise-set}
+      @about-generic{cell-renderer-text-scale}
+      @about-generic{cell-renderer-text-scale-set}
+      @about-generic{cell-renderer-text-single-paragraph-mode}
+      @about-generic{cell-renderer-text-size}
+      @about-generic{cell-renderer-text-size-points}
+      @about-generic{cell-renderer-text-size-set}
+      @about-generic{cell-renderer-text-stretch}
+      @about-generic{cell-renderer-text-stretch-set}
+      @about-generic{cell-renderer-text-strikethrough}
+      @about-generic{cell-renderer-text-strikethrough-set}
+      @about-generic{cell-renderer-text-style}
+      @about-generic{cell-renderer-text-style-set}
+      @about-generic{cell-renderer-text-text}
+      @about-generic{cell-renderer-text-underline}
+      @about-generic{cell-renderer-text-underline-set}
+      @about-generic{cell-renderer-text-variant}
+      @about-generic{cell-renderer-text-variant-set}
+      @about-generic{cell-renderer-text-weight}
+      @about-generic{cell-renderer-text-weight-set}
+      @about-generic{cell-renderer-text-width-chars}
+      @about-generic{cell-renderer-text-wrap-mode}
+      @about-generic{cell-renderer-text-wrap-width}
+      @about-function{cell-renderer-text-new}
+      @about-function{cell-renderer-text-set-fixed-height-from-font}
+    @end{subsection}
+    @begin[GtkCellRendererAccel]{subsection}
+      Renders a keyboard accelerator in a cell.
+      @about-symbol{cell-renderer-accel-mode}
+      @about-class{cell-renderer-accel}
+      @about-generic{cell-renderer-accel-accel-key}
+      @about-generic{cell-renderer-accel-accel-mode}
+      @about-generic{cell-renderer-accel-accel-mods}
+      @about-generic{cell-renderer-accel-keycode}
+      @about-function{cell-renderer-accel-new}
+    @end{subsection}
+    @begin[GtkCellRendererCombo]{subsection}
+      Renders a combobox in a cell.
+      @about-class{cell-renderer-combo}
+      @about-generic{cell-renderer-combo-has-entry}
+      @about-generic{cell-renderer-combo-model}
+      @about-generic{cell-renderer-combo-text-column}
+      @about-function{cell-renderer-combo-new}
+    @end{subsection}
+    @begin[GtkCellRendererPixbuf]{subsection}
+      Renders a pixbuf in a cell.
+      @about-class{cell-renderer-pixbuf}
+      @about-generic{cell-renderer-pixbuf-gicon}
+      @about-generic{cell-renderer-pixbuf-icon-name}
+      @about-generic{cell-renderer-pixbuf-icon-size}
+      @about-generic{cell-renderer-pixbuf-pixbuf}
+      @about-generic{cell-renderer-pixbuf-pixbuf-expander-closed}
+      @about-generic{cell-renderer-pixbuf-pixbuf-expander-open}
+      @about-generic{cell-renderer-pixbuf-texture}
+      @about-function{cell-renderer-pixbuf-new}
+    @end{subsection}
+    @begin[GtkCellRendererProgress]{subsection}
+      Renders numbers as progress bars.
+      @about-class{cell-renderer-progress}
+      @about-generic{cell-renderer-progress-inverted}
+      @about-generic{cell-renderer-progress-pulse}
+      @about-generic{cell-renderer-progress-text}
+      @about-generic{cell-renderer-progress-text-xalign}
+      @about-generic{cell-renderer-progress-text-yalign}
+      @about-generic{cell-renderer-progress-value}
+      @about-function{cell-renderer-progress-new}
+    @end{subsection}
+    @begin[GtkCellRendererSpin]{subsection}
+      Renders a spin button in a cell.
+      @about-class{cell-renderer-spin}
+      @about-generic{cell-renderer-spin-adjustment}
+      @about-generic{cell-renderer-spin-climb-rate}
+      @about-generic{cell-renderer-spin-digits}
+      @about-function{cell-renderer-spin-new}
+    @end{subsection}
+    @begin[GtkCellRendererToggle]{subsection}
+      Renders a toggle button in a cell.
+      @about-class{cell-renderer-toggle}
+      @about-generic{cell-renderer-toggle-activatable}
+      @about-generic{cell-renderer-toggle-active}
+      @about-generic{cell-renderer-toggle-inconsistent}
+      @about-generic{cell-renderer-toggle-radio}
+      @about-function{cell-renderer-toggle-new}
+    @end{subsection}
+    @begin[GtkCellRendererSpinner]{subsection}
+      Renders a spinning animation in a cell.
+      @about-class{cell-renderer-spinner}
+      @about-generic{cell-renderer-spinner-active}
+      @about-generic{cell-renderer-spinner-pulse}
+      @about-generic{cell-renderer-spinner-size}
+      @about-function{cell-renderer-spinner-new}
+    @end{subsection}
+    @begin[GtkListStore]{subsection}
+      A list-like data structure that can be used with the GtkTreeView.
+      @about-class{list-store}
+      @about-function{list-store-new}
+      @about-function{list-store-newv}
+      @about-function{list-store-set-column-types}
+      @about-function{list-store-set}
+      @about-function{list-store-set-valist}
+      @about-function{list-store-set-value}
+      @about-function{list-store-set-valuesv}
+      @about-function{list-store-remove}
+      @about-function{list-store-insert}
+      @about-function{list-store-insert-before}
+      @about-function{list-store-insert-after}
+      @about-function{list-store-insert-with-values}
+      @about-function{list-store-insert-with-valuesv}
+      @about-function{list-store-prepend}
+      @about-function{list-store-append}
+      @about-function{list-store-clear}
+      @about-function{list-store-iter-is-valid}
+      @about-function{list-store-reorder}
+      @about-function{list-store-swap}
+      @about-function{list-store-move-before}
+      @about-function{list-store-move-after}
+    @end{subsection}
+    @begin[GtkTreeStore]{subsection}
+      A tree-like data structure that can be used with the @class{gtk:tree-view}
+      widget.
+      @about-class{tree-store}
+      @about-function{tree-store-new}
+      @about-function{tree-store-newv}
+      @about-function{tree-store-set-column-types}
+      @about-function{tree-store-set-value}
+      @about-function{tree-store-set}
+      @about-function{tree-store-set-valist}
+      @about-function{tree-store-set-valuesv}
+      @about-function{tree-store-remove}
+      @about-function{tree-store-insert}
+      @about-function{tree-store-insert-before}
+      @about-function{tree-store-insert-after}
+      @about-function{tree-store-insert-with-values}
+      @about-function{tree-store-insert-with-valuesv}
+      @about-function{tree-store-prepend}
+      @about-function{tree-store-append}
+      @about-function{tree-store-is-ancestor}
+      @about-function{tree-store-iter-depth}
+      @about-function{tree-store-clear}
+      @about-function{tree-store-iter-is-valid}
+      @about-function{tree-store-reorder}
+      @about-function{tree-store-swap}
+      @about-function{tree-store-move-before}
+      @about-function{tree-store-move-after}
+    @end{subsection}
+    @begin[GtkComboBox]{subsection}
+      A widget used to choose from a list of items.
+      @about-symbol{sensitivity-type}
+      @about-class{combo-box}
+      @about-generic{combo-box-active}
+      @about-generic{combo-box-active-id}
+      @about-generic{combo-box-button-sensitivity}
+      @about-generic{combo-box-child}
+      @about-generic{combo-box-entry-text-column}
+      @about-generic{combo-box-has-entry}
+      @about-generic{combo-box-has-frame}
+      @about-generic{combo-box-id-column}
+      @about-generic{combo-box-model}
+      @about-generic{combo-box-popup-fixed-width}
+      @about-generic{combo-box-popup-shown}
+      @about-function{combo-box-new}
+      @about-function{combo-box-new-with-entry}
+      @about-function{combo-box-new-with-model}
+      @about-function{combo-box-new-with-model-and-entry}
+      @about-function{combo-box-active-iter}
+      @about-function{combo-box-popup}
+      @about-function{combo-box-popup-for-device}
+      @about-function{combo-box-popdown}
+      @about-function{combo-box-get-row-separator-func}
+      @about-function{combo-box-set-row-separator-func}
+    @end{subsection}
+    @begin[GtkComboBoxText]{subsection}
+      A simple, text-only combo box.
+      @about-class{combo-box-text}
+      @about-function{combo-box-text-new}
+      @about-function{combo-box-text-new-with-entry}
+      @about-function{combo-box-text-append}
+      @about-function{combo-box-text-prepend}
+      @about-function{combo-box-text-insert}
+      @about-function{combo-box-text-append-text}
+      @about-function{combo-box-text-prepend-text}
+      @about-function{combo-box-text-insert-text}
+      @about-function{combo-box-text-remove}
+      @about-function{combo-box-text-remove-all}
+      @about-function{combo-box-text-active-text}
+    @end{subsection}
+    @begin[GtkAppChooser]{subsection}
+      Interface implemented by widgets for choosing an application.
+      @about-class{app-chooser}
+      @about-generic{app-chooser-content-type}
+      @about-function{app-chooser-app-info}
+      @about-function{app-chooser-refresh}
+    @end{subsection}
+    @begin[GtkAppChooserButton]{subsection}
+      A button to launch an application chooser dialog.
+      @about-class{app-chooser-button}
+      @about-generic{app-chooser-button-heading}
+      @about-generic{app-chooser-button-modal}
+      @about-generic{app-chooser-button-show-default-item}
+      @about-generic{app-chooser-button-show-dialog-item}
+      @about-function{app-chooser-button-new}
+      @about-function{app-chooser-button-append-custom-item}
+      @about-function{app-chooser-button-append-separator}
+      @about-function{app-chooser-button-set-active-custom-item}
+    @end{subsection}
+    @begin[GtkAppChooserDialog]{subsection}
+      An application chooser dialog.
+      @about-class{app-chooser-dialog}
+      @about-generic{app-chooser-dialog-gfile}
+      @about-generic{app-chooser-dialog-heading}
+      @about-function{app-chooser-dialog-new}
+      @about-function{app-chooser-dialog-new-for-content-type}
+      @about-function{app-chooser-dialog-widget}
+    @end{subsection}
+    @begin[GtkAppChooserWidget]{subsection}
+      Application chooser widget that can be embedded in other widgets.
+      @about-class{app-chooser-widget}
+      @about-generic{app-chooser-widget-default-text}
+      @about-generic{app-chooser-widget-show-all}
+      @about-generic{app-chooser-widget-show-default}
+      @about-generic{app-chooser-widget-show-fallback}
+      @about-generic{app-chooser-widget-show-other}
+      @about-generic{app-chooser-widget-show-recommended}
+      @about-function{app-chooser-widget-new}
+    @end{subsection}
+    @begin[GtkColorChooser]{subsection}
+      Interface implemented by widgets for choosing colors.
+      @about-class{color-chooser}
+      @about-generic{color-chooser-rgba}
+      @about-generic{color-chooser-use-alpha}
+      @about-function{color-chooser-add-palette}
+      @about-function{hsv-to-rgb}
+      @about-function{rgb-to-hsv}
+    @end{subsection}
+    @begin[GtkColorButton]{subsection}
+      A button to launch a color chooser dialog.
+      @about-class{color-button}
+      @about-generic{color-button-modal}
+      @about-generic{color-button-show-editor}
+      @about-generic{color-button-title}
+      @about-function{color-button-new}
+      @about-function{color-button-new-with-rgba}
+    @end{subsection}
+    @begin[GtkColorChooserWidget]{subsection}
+      A widget for choosing colors.
+      @about-class{color-chooser-widget}
+      @about-generic{color-chooser-widget-show-editor}
+      @about-function{color-chooser-widget-new}
+    @end{subsection}
+    @begin[GtkColorChooserDialog]{subsection}
+      A dialog for choosing colors.
+      @about-class{color-chooser-dialog}
+      @about-generic{color-chooser-dialog-show-editor}
+      @about-function{color-chooser-dialog-new}
+    @end{subsection}
+    @begin[GtkFileChooser]{subsection}
+      File chooser interface used by the @class{gtk:file-chooser-widget} and
+      @class{gtk:file-chooser-dialog} widgets.
+      @about-symbol{file-chooser-action}
+      @about-class{file-chooser}
+      @about-generic{file-chooser-action}
+      @about-generic{file-chooser-create-folders}
+      @about-generic{file-chooser-filter}
+      @about-generic{file-chooser-filters}
+      @about-generic{file-chooser-select-multiple}
+      @about-generic{file-chooser-shortcut-folders}
+      @about-function{file-chooser-current-name}
+      @about-function{file-chooser-file}
+      @about-function{file-chooser-namestring}
+      @about-function{file-chooser-files}
+      @about-function{file-chooser-current-folder}
+      @about-function{file-chooser-add-filter}
+      @about-function{file-chooser-remove-filter}
+      @about-function{file-chooser-add-shortcut-folder}
+      @about-function{file-chooser-remove-shortcut-folder}
+      @about-function{file-chooser-add-choice}
+      @about-function{file-chooser-remove-choice}
+      @about-function{file-chooser-choice}
+    @end{subsection}
+    @begin[GtkFileChooserNative]{subsection}
+      A native file chooser dialog, suitable for \"File Open\" or \"File Save\"
+      commands.
+      @about-class{file-chooser-native}
+      @about-generic{file-chooser-native-accept-label}
+      @about-generic{file-chooser-native-cancel-label}
+      @about-function{file-chooser-native-new}
+    @end{subsection}
+    @begin[GtkFileChooserDialog]{subsection}
+      A file chooser dialog, suitable for \"File Open\" or \"File Save\"
+      commands.
+      @about-class{file-chooser-dialog}
+      @about-function{file-chooser-dialog-new}
+    @end{subsection}
+    @begin[GtkFileChooserWidget]{subsection}
+      A file chooser widget.
+      @about-class{file-chooser-widget}
+      @about-generic{file-chooser-widget-search-mode}
+      @about-generic{file-chooser-widget-show-time}
+      @about-generic{file-chooser-widget-subtitle}
+      @about-function{file-chooser-widget-new}
+    @end{subsection}
+    @begin[GtkFontChooser]{subsection}
+      Interface implemented by widgets displaying fonts.
+      @about-symbol{font-chooser-level}
+      @about-class{font-chooser}
+      @about-generic{font-chooser-font}
+      @about-generic{font-chooser-font-desc}
+      @about-generic{font-chooser-font-features}
+      @about-generic{font-chooser-language}
+      @about-generic{font-chooser-level}
+      @about-generic{font-chooser-preview-text}
+      @about-generic{font-chooser-show-preview-entry}
+      @about-function{font-chooser-font-family}
+      @about-function{font-chooser-font-face}
+      @about-function{font-chooser-font-size}
+      @about-symbol{font-filter-func}
+      @about-function{font-chooser-set-filter-func}
+      @about-function{font-chooser-font-map}
+    @end{subsection}
+    @begin[GtkFontButton]{subsection}
+      A button to launch a font chooser dialog.
+      @about-class{font-button}
+      @about-generic{font-button-modal}
+      @about-generic{font-button-title}
+      @about-generic{font-button-use-font}
+      @about-generic{font-button-use-size}
+      @about-function{font-button-new}
+      @about-function{font-button-new-with-font}
+    @end{subsection}
+    @begin[GtkFontChooserWidget]{subsection}
+      A widget for selecting fonts.
+      @about-class{font-chooser-widget}
+      @about-generic{font-chooser-widget-tweak-action}
+      @about-function{font-chooser-widget-new}
+    @end{subsection}
+    @begin[GtkFontChooserDialog]{subsection}
+      A dialog for selecting fonts.
+      @about-class{font-chooser-dialog}
+      @about-function{font-chooser-dialog-new}
+    @end{subsection}
+    @begin[GtkStyleContext]{subsection}
+      Stores styling information affecting a widget.
+      @about-symbol{style-context-print-flags}
+      @about-class{style-context}
+      @about-generic{style-context-display}
+      @about-function{style-context-add-provider}
+      @about-function{style-context-add-provider-for-display}
+      @about-function{style-context-state}
+      @about-function{style-context-color}
+      @about-function{style-context-border}
+      @about-function{style-context-padding}
+      @about-function{style-context-margin}
+      @about-function{style-context-lookup-color}
+      @about-function{style-context-remove-provider}
+      @about-function{style-context-remove-provider-for-display}
+      @about-function{style-context-restore}
+      @about-function{style-context-save}
+      @about-function{style-context-add-class}
+      @about-function{style-context-remove-class}
+      @about-function{style-context-has-class}
+      @about-function{style-context-scale}
+      @about-function{style-context-to-string}
+      @about-symbol{border-style}
+      @about-struct{border}
+      @about-function{border-left}
+      @about-function{border-right}
+      @about-function{border-top}
+      @about-function{border-bottom}
+      @about-function{border-new}
+      @about-function{border-copy}
+      @about-function{render-activity}
+      @about-function{render-arrow}
+      @about-function{render-background}
+      @about-function{render-check}
+      @about-function{render-expander}
+      @about-function{render-focus}
+      @about-function{render-frame}
+      @about-function{render-handle}
+      @about-function{render-icon}
+      @about-function{render-layout}
+      @about-function{render-line}
+      @about-function{render-option}
     @end{subsection}
   @end{section}")
 
