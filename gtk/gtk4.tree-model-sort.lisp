@@ -2,7 +2,7 @@
 ;;; gtk4.tree-model-sort.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -87,24 +87,24 @@
 (setf (documentation 'tree-model-sort 'type)
  "@version{#2021-3-10}
   @begin{short}
-    The @sym{gtk:tree-model-sort} object is a model which implements the
+    The @class{gtk:tree-model-sort} object is a model which implements the
     @class{gtk:tree-sortable} interface.
   @end{short}
   It does not hold any data itself, but rather is created with a child model
   and proxies its data. It has identical column types to this child model, and
   the changes in the child are propagated. The primary purpose of this model is
   to provide a way to sort a different model without modifying it. Note that
-  the sort function used by the @sym{gtk:tree-model-sort} object is not
+  the sort function used by the @class{gtk:tree-model-sort} object is not
   guaranteed to be stable.
 
   The use of this is best demonstrated through an example. In the following
   sample code we create two @class{gtk:tree-view} widgets each with a view of
-  the same data. As the model is wrapped here by a @sym{gtk:tree-model-sort}
+  the same data. As the model is wrapped here by a @class{gtk:tree-model-sort}
   object, the two @class{gtk:tree-view} widgets can each sort their view of the
   data without affecting the other. By contrast, if we simply put the same
   model in each widget, then sorting the first would sort the second.
 
-  @b{Example:} Using a @sym{gtk:tree-model-sort} object
+  @b{Example:} Using a @class{gtk:tree-model-sort} object
   @begin{pre}
 (let* (;; Get the child model
        (child-model (gtk:my-model()))
@@ -142,6 +142,10 @@
     ;; Change the value of the row in the child model
     (gtk:list-store-set-value model iter col-1 new-value)))
   @end{pre}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
+  @end{dictionary}
   @see-slot{gtk:tree-model-sort-model}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-sortable}")
@@ -169,9 +173,12 @@
     Accessor of the @slot[gtk:tree-model-sort]{model} slot of the
     @class{gtk:tree-model-sort} class.
   @end{short}
-
-  The slot access function @sym{gtk:tree-model-sort-model} returns the model
-  the @class{gtk:tree-model-sort} object is sorting.
+  The @fun{gtk:tree-model-sort-model} function returns the model the
+  @class{gtk:tree-model-sort} object is sorting.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-model-sort}")
 
@@ -189,6 +196,10 @@
   @begin{short}
     Creates a new tree model, with @arg{model} as the child model.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-model-sort}"
   (make-instance 'tree-model-sort
@@ -214,6 +225,10 @@
   That is, @arg{path} points to a path in the child model. The returned path
   will point to the same row in the sorted model. If @arg{path} is not a valid
   path on the child model, then @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-sort}
   @see-class{gtk:tree-path}"
   (model (g:object tree-model-sort))
@@ -245,6 +260,10 @@
     Returns the iterator to the row in @arg{model} that corresponds to the row
     pointed at by @arg{iter}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-sort}
   @see-class{gtk:tree-iter}"
   (let ((sort-iter (make-tree-iter)))
@@ -273,6 +292,10 @@
   That is, @arg{path} points to a location in @arg{model}. The returned path
   will point to the same location in the model not being sorted. If @arg{path}
   does not point to a location in the child model, @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-sort}
   @see-class{gtk:tree-path}"
   (model (g:object tree-model-sort))
@@ -302,6 +325,10 @@
   @begin{short}
   Converts @arg{iter} to point to a row on @arg{model}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-sort}
   @see-class{gtk:tree-iter}"
   (let ((child-iter (make-tree-iter)))
@@ -325,6 +352,10 @@
   That is, it is in the same order as the child model. It will re-sort the
   model to be in the same order as the child model only if the
   @class{gtk:tree-model-sort} object is in 'unsorted' state.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-sort}"
   (model (g:object tree-model-sort)))
 
@@ -347,6 +378,10 @@
   This might be useful if the child model being sorted is static (and does not
   change often) and there has been a lot of unreffed access to nodes. As a side
   effect of this function, all unreffed iters will be invalid.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-sort}
   @see-function{gtk:tree-model-ref-node}"
   (model (g:object tree-model-sort)))
@@ -369,8 +404,12 @@
     Checks if the given @arg{iter} is a valid iter for this
     @class{gtk:tree-model-sort} object.
   @end{short}
-  @begin[Warning]{dictionary}
+  @begin[Note]{dictionary}
     This function is slow. Only use it for debugging and/or testing purposes.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
+    Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
   @see-class{gtk:tree-model-sort}
   @see-class{gtk:tree-iter}"

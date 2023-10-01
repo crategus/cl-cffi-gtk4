@@ -2,7 +2,7 @@
 ;;; gtk4.tree-selection.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -97,17 +97,17 @@
 (setf (documentation 'tree-selection 'type)
  "@version{#2021-2-27}
   @begin{short}
-    The @sym{gtk:tree-selection} object is a helper object to manage the
+    The @class{gtk:tree-selection} object is a helper object to manage the
     selection for a @class{gtk:tree-view} widget.
   @end{short}
-  The @sym{gtk:tree-selection} object is automatically created when a new
+  The @class{gtk:tree-selection} object is automatically created when a new
   @class{gtk:tree-view} widget is created, and cannot exist independentally of
-  this widget. The primary reason the @sym{gtk:tree-selection} objects exists
+  this widget. The primary reason the @class{gtk:tree-selection} objects exists
   is for cleanliness of code and API. That is, there is no conceptual reason
   all these functions could not be methods on the @class{gtk:tree-view} widget
   instead of a separate function.
 
-  The @sym{gtk:tree-selection} object is gotten from a @class{gtk:tree-view}
+  The @class{gtk:tree-selection} object is gotten from a @class{gtk:tree-view}
   widget by calling the @fun{gtk:tree-view-selection} function. It can be
   manipulated to check the selection status of the tree view, as well as select
   and deselect individual rows. Selection is done completely tree view side. As
@@ -120,6 +120,10 @@
   tree view is that the \"changed\" signal is mostly a hint. That is, it may
   only emit one signal when a range of rows is selected. Additionally, it may
   on occasion emit a \"changed\" signal.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"changed\" signal}
       @begin{pre}
@@ -130,7 +134,7 @@ lambda (selection)    :run-first
       rows are selected, and it may occasionally be emitted when nothing has
       happened.
       @begin[code]{table}
-        @entry[selection]{The @sym{gtk:tree-selection} object which received
+        @entry[selection]{The @class{gtk:tree-selection} object which received
         the signal.}
       @end{table}
   @end{dictionary}
@@ -162,11 +166,14 @@ lambda (selection)    :run-first
     Accessor of the @slot[gtk:tree-selection]{mode} slot of the
     @class{gtk:tree-selection} class.
   @end{short}
-
-  The @sym{gtk:tree-selection-mode} function gets the current selection mode of
-  the selection. The @sym{(setf gtk:tree-selection-mode)} function sets the
-  selection mode. If the previous type was @code{:multiple}, then the anchor is
-  kept selected, if it was previously selected.
+  The @fun{gtk:tree-selection-mode} function gets the current selection mode of
+  the selection. The @setf{gtk:tree-selection-mode} function sets the selection
+  mode. If the previous type was @code{:multiple}, then the anchor is kept
+  selected, if it was previously selected.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-symbol{gtk:selection-mode}")
 
@@ -273,6 +280,10 @@ lambda (model path iter)
   giving some control over which nodes are selected. The select function
   should return @em{true} if the state of the node may be toggled, and
   @em{false} if the state of the node should be left unchanged.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-symbol{gtk:tree-selection-func}"
   (%tree-selection-set-select-function
@@ -295,6 +306,10 @@ lambda (model path iter)
   @argument[selection]{a @class{gtk:tree-selection} object}
   @return{The @symbol{gtk:tree-selection-func} callback function.}
   @short{Returns the current selection function.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-symbol{gtk:tree-selection-func}"
   (let ((ptr (%tree-selection-get-user-data selection)))
@@ -337,6 +352,10 @@ lambda (model path iter)
   @begin{short}
     Returns the tree view associated with @arg{selection}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}"
   (selection (g:object tree-selection)))
 
@@ -386,6 +405,10 @@ lambda (model path iter)
   ... )
     @end{pre}
   @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-iter}
   @see-symbol{gtk:selection-mode}
@@ -419,6 +442,10 @@ lambda (model path iter)
   Note that you cannot modify the tree view or selection from within this
   function. As a result, the @fun{gtk:tree-selection-selected-rows} function
   might be more useful.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-symbol{gtk:tree-selection-foreach-func}
   @see-function{gtk:tree-selection-selected-rows}"
@@ -459,6 +486,10 @@ lambda (model path iter)
     @fun{gtk:tree-selection-tree-view} and @fun{gtk:tree-view-model} functions
     instead to get the model.
   @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-row-reference}
   @see-function{gtk:tree-row-reference-new}"
@@ -477,6 +508,10 @@ lambda (model path iter)
   @argument[selection]{a @class{gtk:tree-selection} object}
   @return{An integer with the number of rows selected.}
   @short{Returns the number of rows that have been selected in the tree.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-function{gtk:tree-selection-selected-rows}"
   (selection (g:object tree-selection)))
@@ -494,6 +529,10 @@ lambda (model path iter)
   @argument[selection]{a @class{gtk:tree-selection} object}
   @argument[path]{a @class{gtk:tree-path} instance to be selected}
   @short{Select the row at @arg{path}.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-selection-select-iter}
@@ -515,6 +554,10 @@ lambda (model path iter)
   @argument[selection]{a @class{gtk:tree-selection} object}
   @argument[path]{a @class{gtk:tree-path} instance to be unselected}
   @short{Unselects the row at @arg{path}.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-selection-select-path}"
@@ -538,6 +581,10 @@ lambda (model path iter)
     Returns @em{true} if the row pointed to by @arg{path} is currently selected.
   @end{short}
   If @arg{path} does not point to a valid location, @em{false} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-selection-iter-is-selected}"
@@ -557,6 +604,10 @@ lambda (model path iter)
   @argument[selection]{a @class{gtk:tree-selection} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator to be selected}
   @short{Selects the specified iterator.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-selection-select-path}
@@ -578,6 +629,10 @@ lambda (model path iter)
   @argument[selection]{a @class{gtk:tree-selection} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator to be unselected}
   @short{Unselects the specified iterator.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-selection-select-iter}"
@@ -600,6 +655,10 @@ lambda (model path iter)
   @begin{short}
     Returns @em{true} if the row at @arg{iter} is currently selected.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-selection-path-is-selected}"
@@ -620,6 +679,10 @@ lambda (model path iter)
     Selects all the nodes.
   @end{short}
   The @arg{selection} argument must be set to @code{:multiple} mode.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-function{gtk:tree-selection-unselect-all}"
   (selection (g:object tree-selection)))
@@ -636,6 +699,10 @@ lambda (model path iter)
  "@version{#2022-1-23}
   @argument[selection]{a @class{gtk:tree-selection} object}
   @short{Unselects all the nodes.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-function{gtk:tree-selection-select-all}"
   (selection (g:object tree-selection)))
@@ -657,6 +724,10 @@ lambda (model path iter)
     Selects a range of nodes, determined by @arg{start} and @arg{end} inclusive.
   @end{short}
   The @arg{selection} argument must be set to @code{:multiple} mode.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-path}"
   (selection (g:object tree-selection))
@@ -669,8 +740,8 @@ lambda (model path iter)
 ;;; gtk_tree_selection_unselect_range
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_tree_selection_unselect_range" tree-selection-unselect-range)
-    :void
+(cffi:defcfun ("gtk_tree_selection_unselect_range"
+               tree-selection-unselect-range) :void
  #+liber-documentation
  "@version{#2022-1-23}
   @argument[selection]{a @class{gtk:tree-selection} object}
@@ -680,6 +751,10 @@ lambda (model path iter)
     Unselects a range of nodes, determined by @arg{start} and @arg{end}
     inclusive.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-selection} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-selection}
   @see-class{gtk:tree-path}"
   (selection (g:object tree-selection))

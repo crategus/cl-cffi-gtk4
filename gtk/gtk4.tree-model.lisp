@@ -243,6 +243,10 @@
   :type-initializer \"gtk_tree_path_get_type\"
   :alloc (%tree-path-new))
   @end{pre}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-constructor{gtk:tree-path-new}
   @see-constructor{gtk:tree-path-new-first}
   @see-constructor{gtk:tree-path-new-from-indices}
@@ -267,17 +271,21 @@
       (documentation 'tree-row-reference 'type)
  "@version{2023-1-27}
   @begin{short}
-    A @sym{gtk:tree-row-reference} instance tracks model changes so that it
+    A @class{gtk:tree-row-reference} instance tracks model changes so that it
     always refers to the same row, a @class{gtk:tree-path} instance refers to a
     position, not a fixed row.
   @end{short}
-  Create a new @sym{gtk:tree-row-reference} instance with the
+  Create a new @class{gtk:tree-row-reference} instance with the
     @fun{gtk:tree-row-reference-new} function.
   @begin{pre}
 (glib:define-g-boxed-opaque gtk:tree-row-reference \"GtkTreeRowReference\"
   :type-initializer \"gtk_tree_row_reference_get_type\"
   :alloc (error \"GtkTreeRowReference cannot be created from the Lisp side.\"))
   @end{pre}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-row-reference} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-row-reference-new}")
 
@@ -298,8 +306,8 @@
       (documentation 'tree-model 'type)
  "@version{#2021-2-3}
   @begin{short}
-    The @sym{gtk:tree-model} interface defines a generic tree interface for use
-    by the @class{gtk:tree-view} widget.
+    The @class{gtk:tree-model} interface defines a generic tree interface for
+    use by the @class{gtk:tree-view} widget.
   @end{short}
   It is an abstract interface, and is designed to be usable with any appropriate
   data structure. The programmer just has to implement this interface on their
@@ -438,6 +446,10 @@
       always referenced when any view is attached).
     @end{item}
   @end{itemize}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"row-changed\" signal}
       @begin{pre}
@@ -445,7 +457,7 @@ lambda (model path iter)    :run-last
       @end{pre}
       The signal is emitted when a row in the model has changed.
       @begin[code]{table}
-        @entry[model]{The @sym{gtk:tree-model} object on which the signal
+        @entry[model]{The @class{gtk:tree-model} object on which the signal
           is emitted.}
         @entry[path]{A @class{gtk:tree-path} instance identifying the changed
           row.}
@@ -462,7 +474,7 @@ lambda (model path)    :run-first
       pointed to by path should be the location that the row previously was at.
       It may not be a valid location anymore.
       @begin[code]{table}
-        @entry[model]{The @sym{gtk:tree-model} object on which the signal
+        @entry[model]{The @class{gtk:tree-model} object on which the signal
           is emitted.}
         @entry[path]{A @class{gtk:tree-path} instance identifying the row.}
       @end{table}
@@ -473,7 +485,7 @@ lambda (model path iter)    :run-last
       The signal is emitted when a row has gotten the first child row or lost
       its last child row.
       @begin[code]{table}
-        @entry[model]{The @sym{gtk:tree-model} object on which the signal
+        @entry[model]{The @class{gtk:tree-model} object on which the signal
           is emitted.}
         @entry[path]{A @class{gtk:tree-path} instance identifying the row.}
         @entry[iter]{A valid @class{gtk:tree-iter} iterator pointing to the
@@ -488,7 +500,7 @@ lambda (model path iter)    :run-first
       pattern to first insert an empty row, and then fill it with the desired
       values.
       @begin[code]{table}
-        @entry[model]{The @sym{gtk:tree-model} object on which the signal is
+        @entry[model]{The @class{gtk:tree-model} object on which the signal is
           emitted.}
         @entry[path]{A @class{gtk:tree-path} instance identifying the new row.}
         @entry[iter]{A valid @class{gtk:tree-iter} iterator pointing to the new
@@ -503,7 +515,7 @@ lambda (model path iter new-order)    :run-first
       is not emitted when rows are reordered by DND, since this is implemented
       by removing and then reinserting the row.
       @begin[code]{table}
-        @entry[model]{The @sym{gtk:tree-model} object on which the signal
+        @entry[model]{The @class{gtk:tree-model} object on which the signal
           is emitted.}
         @entry[path]{A @class{gtk:tree-path} instance identifying the tree node
           whose children have been reordered.}
@@ -570,6 +582,10 @@ lambda (model path iter new-order)    :run-first
  "@version{2023-1-27}
   @return{A newly created @class{gtk:tree-path} instance.}
   @short{Creates a new  tree path.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}")
 
 (export 'tree-path-new)
@@ -585,6 +601,10 @@ lambda (model path iter new-order)    :run-first
   @return{A new @class{gtk:tree-path} instance.}
   @short{Creates a new tree path.}
   The string representation of this tree path is \"0\".
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}")
 
 (export 'tree-path-new-first)
@@ -601,6 +621,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Creates a new tree path with @arg{indices} as indices.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}"
   (tree-path-new-from-string
       (string-right-trim ":" (format nil "~{~D:~}" indices))))
@@ -642,6 +666,10 @@ lambda (model path iter new-order)    :run-first
   pointing to the 11th child of the root node, the 5th child of that 11th child,
   and the 1st child of that 5th child. If an invalid path string is passed in,
   @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-new}
   @see-function{gtk:tree-path-new-from-indices}
@@ -668,6 +696,10 @@ lambda (model path iter new-order)    :run-first
   @return{The @class{gtk:tree-path} instance.}
   @short{Appends a new index to the tree path.}
   As a result, the depth of @arg{path} is increased.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}"
   (let ((path (tree-path-copy path)))
     (%tree-path-append-index path index)
@@ -693,6 +725,10 @@ lambda (model path iter new-order)    :run-first
   @return{The @class{gtk:tree-path} instance.}
   @short{Prepends a new index to the tree path.}
   As a result, the depth of @arg{path} is increased.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}"
   (let ((path (tree-path-copy path)))
     (%tree-path-prepend-index path index)
@@ -710,6 +746,10 @@ lambda (model path iter new-order)    :run-first
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{An integer with the depth of @arg{path}.}
   @short{Returns the current depth of the tree path.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}"
   (path (g:boxed tree-path)))
 
@@ -730,6 +770,10 @@ lambda (model path iter new-order)    :run-first
   @short{Returns the current indices of the tree path.}
   This is a list of integers, each representing a node in a tree. The length of
   the list can be obtained with the @fun{gtk:tree-path-depth} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-depth}"
   (let ((n (tree-path-depth path))
@@ -784,6 +828,10 @@ lambda (model path iter new-order)    :run-first
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{A new @class{gtk:tree-path} instance.}
   @short{Creates a new tree path as a copy of @arg{path}.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}"
   (path (g:boxed tree-path)))
 
@@ -803,6 +851,10 @@ lambda (model path iter new-order)    :run-first
   If @arg{path1} appears before @arg{path2} in a tree, then -1 is returned. If
   @arg{path2} appears before @arg{path1}, then 1 is returned. If the two nodes
   are equal, then 0 is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}"
   (path1 (g:boxed tree-path))
   (path2 (g:boxed tree-path)))
@@ -822,6 +874,10 @@ lambda (model path iter new-order)    :run-first
   @argument[path]{a @class{gtk:tree-path} instance}
   @return{The new @class{gtk:tree-path} instance.}
   @short{Moves @arg{path} to point to the next node at the current depth.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-prev}"
   (let ((path (tree-path-copy path)))
@@ -847,6 +903,10 @@ lambda (model path iter new-order)    :run-first
     Moves the tree path to point to the previous node at the current depth,
     if it exists.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-next}"
   (let ((path (tree-path-copy path)))
@@ -871,6 +931,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Moves the tree path to point to its parent node, if it has a parent.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-down}"
   (let ((path (tree-path-copy path)))
@@ -893,6 +957,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Moves @arg{path} to point to the first child of the current tree path.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-up}"
   (let ((path (tree-path-copy path)))
@@ -914,6 +982,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Returns @em{true} if @arg{descendant} is a descendant of @arg{path}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-is-descendant}"
   (path (g:boxed tree-path))
@@ -934,6 +1006,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Returns @em{true} if @arg{path} is a descendant of @arg{ancestor}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-is-ancestor}"
   (path (g:boxed tree-path))
@@ -953,6 +1029,10 @@ lambda (model path iter new-order)    :run-first
   @short{Generates a string representation of the tree path.}
   This string is a ':' separated list of numbers. For example, \"4:10:0:3\"
   would be an acceptable return value for this string.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-path} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-path-from-string}"
   (path (g:boxed tree-path)))
@@ -976,6 +1056,10 @@ lambda (model path iter new-order)    :run-first
   long as it exists. Any changes that occur on @arg{model} are propagated, and
   @arg{path} is updated appropriately. If @arg{path} is not a valid path in
   @arg{model}, then @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-row-reference} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-row-reference}"
@@ -1038,6 +1122,10 @@ lambda (model path iter new-order)    :run-first
   @argument[reference]{a @class{gtk:tree-row-reference} instance}
   @return{The @class{gtk:tree-model} object.}
   @short{Returns the model that the row reference is monitoring.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-row-reference} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-row-reference}
   @see-class{gtk:tree-model}"
   (reference (g:boxed tree-row-reference)))
@@ -1058,6 +1146,10 @@ lambda (model path iter new-order)    :run-first
     Returns a path that the row reference currently points to, or @code{nil} if
     the path pointed to is no longer valid.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-row-reference} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-row-reference}
   @see-class{gtk:tree-path}"
   (reference (g:boxed tree-path)))
@@ -1077,6 +1169,10 @@ lambda (model path iter new-order)    :run-first
     Returns @em{true} if @arg{reference} is non-@code{nil} and refers to a
     current valid path.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-row-reference} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-row-reference}"
   (reference (g:boxed tree-row-reference)))
 
@@ -1106,6 +1202,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Copies a tree row reference.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-row-reference} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-row-reference}"
   (reference (g:boxed tree-row-reference)))
 
@@ -1211,6 +1311,10 @@ lambda (model path iter new-order)    :run-first
   @end{short}
   The flags are a bitwise combination of @symbol{gtk:tree-model-flags} flags.
   The flags supported should not change during the lifetime of the model.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-symbol{gtk:tree-model-flags}"
   (model (g:object tree-model)))
@@ -1229,6 +1333,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Returns the number of columns supported by @arg{model}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-function{gtk:tree-model-column-type}"
   (model (g:object tree-model)))
@@ -1248,6 +1356,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Returns the type of the column.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-function{gtk:tree-model-n-columns}"
   (model (g:object tree-model))
@@ -1275,6 +1387,10 @@ lambda (model path iter new-order)    :run-first
     Returns a valid iterator pointing to @arg{path}.
   @end{short}
   If @arg{path} does not exist, @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-class{gtk:tree-path}"
@@ -1304,6 +1420,10 @@ lambda (model path iter new-order)    :run-first
     Returns a valid iterator pointing to @arg{pathstr}, if it exists.
   @end{short}
   Otherwise, @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-class{gtk:tree-path}"
@@ -1330,6 +1450,10 @@ lambda (model path iter new-order)    :run-first
     Returns the first iterator in the tree, the one at the path \"0\".
   @end{short}
   Returns @code{nil} if the tree is empty.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-model-iter-next}"
@@ -1353,6 +1477,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Returns a tree path referenced by the given iterator.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-class{gtk:tree-path}"
@@ -1381,6 +1509,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Returns the value at @arg{column}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
   (cffi:with-foreign-object (value '(:struct g:value))
@@ -1410,6 +1542,10 @@ lambda (model path iter new-order)    :run-first
     Returns the iterator to the node following @arg{iter} at the current level.
   @end{short}
   If there is no next iterator, @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-model-iter-first}
@@ -1439,6 +1575,10 @@ lambda (model path iter new-order)    :run-first
     Returns the iterator to the previous node at the current level.
   @end{short}
   If there is no previous iterator, @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-function{gtk:tree-model-iter-next}"
   (let ((prev (copy-tree-iter iter)))
@@ -1473,6 +1613,10 @@ lambda (model path iter new-order)    :run-first
   @begin{pre}
 (gtk:tree-model-iter-first model)
   @end{pre}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-model-iter-parent}
@@ -1498,6 +1642,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Returns @em{true} if @arg{iter} has children, @code{nil} otherwise.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
   (model (g:object tree-model))
@@ -1520,6 +1668,10 @@ lambda (model path iter new-order)    :run-first
   @end{short}
   As a special case, if @arg{iter} is @code{nil}, then the number of toplevel
   nodes is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
   (model (g:object tree-model))
@@ -1553,6 +1705,10 @@ lambda (model path iter new-order)    :run-first
   @code{nil} is returned. The @arg{parent} iterator will remain a valid node
   after this function has been called. As a special case, if @arg{parent} is
   @code{nil}, then the nth root node is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
   (let ((child (make-tree-iter)))
@@ -1582,6 +1738,10 @@ lambda (model path iter new-order)    :run-first
   If @arg{child} is at the toplevel, and does not have a parent, then
   @code{nil} is returned. The @arg{child} iterator will remain a valid node
   after this function has been called.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-model-iter-children}"
@@ -1607,6 +1767,10 @@ lambda (model path iter new-order)    :run-first
   @end{short}
   This string is a ':' separated list of numbers. For example, \"4:10:0:3\"
   would be an acceptable return value for this string.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
   (model (g:object tree-model))
@@ -1640,6 +1804,10 @@ lambda (model path iter new-order)    :run-first
 
   A model should be expected to be able to get an iter independent of its
   reffed state.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
   (model (g:object tree-model))
@@ -1664,6 +1832,10 @@ lambda (model path iter new-order)    :run-first
   @fun{gtk:tree-model-ref-node} function.
 
   Please note that nodes that are deleted are not unreffed.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-model-ref-node}"
@@ -1692,6 +1864,10 @@ lambda (model path iter new-order)    :run-first
   @begin{pre}
 (gtk:tree-model-get model iter 1 3)
   @end{pre}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-model-value}"
@@ -1746,7 +1922,11 @@ lambda (model path iter new-order)    :run-first
     Calls @arg{func} on each node in @arg{model} in a depth-first fashion.
   @end{short}
   If @arg{func} returns @em{true}, then the tree ceases to be walked, and the
-  @sym{gtk:tree-model-foreach} function returns.
+  @fun{gtk:tree-model-foreach} function returns.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-symbol{gtk:tree-model-foreach-func}"
   (glib:with-stable-pointer (ptr func)
@@ -1770,6 +1950,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Emits the \"row-changed\" signal on @arg{model}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-iter}"
@@ -1793,6 +1977,10 @@ lambda (model path iter new-order)    :run-first
   @begin{short}
     Emits the \"row-inserted\" signal on @arg{model}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-iter}"
@@ -1818,6 +2006,10 @@ lambda (model path iter new-order)    :run-first
     Emits the \"row-has-child-toggled\" signal on @arg{model}.
   @end{short}
   This should be called by models after the child state of a node changes.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-iter}"
@@ -1847,6 +2039,10 @@ lambda (model path iter new-order)    :run-first
 
   Nodes that are deleted are not unreffed, this means that any outstanding
   references on the deleted node should not be released.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}"
   (model (g:object tree-model))
@@ -1880,6 +2076,10 @@ lambda (model path iter new-order)    :run-first
     Emits the \"rows-reordered\" signal on @arg{model}.
   @end{short}
   This should be called by models when their rows have been reordered.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
+    do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-iter}"

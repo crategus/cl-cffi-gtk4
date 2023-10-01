@@ -2,7 +2,7 @@
 ;;; gtk4.tree-model-filter.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -91,10 +91,10 @@
 (setf (documentation 'tree-model-filter 'type)
  "@version{#2021-3-7}
   @begin{short}
-    A @sym{gtk:tree-model-filter} object is a tree model which wraps another
+    A @class{gtk:tree-model-filter} object is a tree model which wraps another
     tree model.
   @end{short}
-  The @sym{gtk:tree-model-filter} object can do the following things:
+  The @class{gtk:tree-model-filter} object can do the following things:
   @begin{itemize}
     @begin{item}
       Filter specific rows, based on data from a \"visible column\", a column
@@ -117,17 +117,17 @@
   The basic API is similar to the @class{gtk:tree-model-sort} object. For an
   example on its usage, see the @class{gtk:tree-model-sort} documentation.
 
-  When using the @sym{gtk:tree-model-filter} object, it is important to realize
-  that the @sym{gtk:tree-model-filter} object maintains an internal cache of all
-  nodes which are visible in its clients. The cache is likely to be a subtree of
-  the tree exposed by the child model. The @sym{gtk:tree-model-filter} object
-  will not cache the entire child model when unnecessary to not compromise the
-  caching mechanism that is exposed by the reference counting scheme. If the
-  child model implements reference counting, unnecessary signals may not be
-  emitted because of reference counting rule 3, see the @class{gtk:tree-model}
-  documentation. Note that e.g. the @class{gtk:tree-store} object does not
-  implement reference counting and will always emit all signals, even when the
-  receiving node is not visible.
+  When using the @class{gtk:tree-model-filter} object, it is important to
+  realize that the @class{gtk:tree-model-filter} object maintains an internal
+  cache of all nodes which are visible in its clients. The cache is likely to be
+  a subtree of the tree exposed by the child model. The
+  @class{gtk:tree-model-filter} object will not cache the entire child model
+  when unnecessary to not compromise the caching mechanism that is exposed by
+  the reference counting scheme. If the child model implements reference
+  counting, unnecessary signals may not be emitted because of reference counting
+  rule 3, see the @class{gtk:tree-model} documentation. Note that e.g. the
+  @class{gtk:tree-store} object does not implement reference counting and will
+  always emit all signals, even when the receiving node is not visible.
 
   Because of this, limitations for possible visible functions do apply. In
   general, visible functions should only use data or properties from the node
@@ -139,20 +139,20 @@
 
   Determining the visibility state of a given node based on the state of its
   child nodes is a frequently occurring use case. Therefore, the
-  @sym{gtk:tree-model-filter} object explicitly supports this. For example, when
-  a node does not have any children, you might not want the node to be visible.
-  As soon as the first row is added to the node's child level, or the last row
-  removed, the node's visibility should be updated.
+  @class{gtk:tree-model-filter} object explicitly supports this. For example,
+  when a node does not have any children, you might not want the node to be
+  visible. As soon as the first row is added to the node's child level, or the
+  last row removed, the node's visibility should be updated.
 
   This introduces a dependency from the node on its child nodes. In order to
-  accommodate this, the @sym{gtk:tree-model-filter} object must make sure the
+  accommodate this, the @class{gtk:tree-model-filter} object must make sure the
   necesary signals are received from the child model. This is achieved by
   building, for all nodes which are exposed as visible nodes to
-  the @sym{gtk:tree-model-filter} objects clients, the child level (if any) and
-  take a reference on the first node in this level. Furthermore, for every
+  the @class{gtk:tree-model-filter} objects clients, the child level (if any)
+  and take a reference on the first node in this level. Furthermore, for every
   \"row-inserted\", \"row-changed\" or \"row-deleted\" signal, also these which
   were not handled because the node was not cached, the
-  @sym{gtk:tree-model-filter} oject will check if the visibility state of
+  @class{gtk:tree-model-filter} oject will check if the visibility state of
   any parent node has changed.
 
   Beware, however, that this explicit support is limited to these two cases.
@@ -162,6 +162,10 @@
   because it does not implement reference counting, or for models that do
   implement reference counting, obtain references on these child levels
   yourself.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-slot{gtk:tree-model-filter-child-model}
   @see-slot{gtk:tree-model-filter-virtual-root}
   @see-class{gtk:tree-model}
@@ -193,8 +197,11 @@
     Accessor of the @slot[gtk:tree-model-filter]{child-model} slot of the
     @class{gtk:tree-model-filter} class.
   @end{short}
-
   The model for the filter model to filter.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-model}")
 
@@ -220,8 +227,11 @@
     Accessor of the @slot[gtk:tree-model-filter]{virtual-root} slot of the
     @class{gtk:tree-model-filter} class.
   @end{short}
-
   The virtual root, relative to the child model, for this filter model.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-path}")
 
@@ -240,6 +250,10 @@
     Creates a new @class{gtk:tree-model} object, with @arg{child} as the child
     model and @arg{root} as the virtual root.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-path}"
   (child (g:object tree-model))
@@ -316,6 +330,10 @@
   Note that @arg{func} is called whenever a row is inserted, when it may still
   be empty. The visible function should therefore take special care of empty
   rows.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-symbol{gtk:tree-model-filter-visible-func}
   @see-function{gtk:tree-model-filter-refilter}"
@@ -401,6 +419,10 @@
   will get called for each data access, the goal of the modify function is to
   return the data which should be displayed at the location specified using the
   parameters of the modify function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-symbol{gtk:tree-model-filter-modify-func}"
   (let ((n (length column-types)))
@@ -435,6 +457,10 @@
   @end{short}
   The column should be of type \"gboolean\", where @em{true} means that a row
   is visible, and @em{false} if not.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}"
   (filter (g:object tree-model-filter))
   (column :int))
@@ -454,6 +480,10 @@
   @begin{short}
     Returns the child model of the filter.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-model}"
   (filter (g:object tree-model-filter)))
@@ -485,6 +515,10 @@
     to the row pointed at by @arg{child-iter}.
   @end{short}
   If the iterator was not set, @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-iter}"
   (let ((filter-iter (make-instance 'tree-iter)))
@@ -517,6 +551,10 @@
   @begin{short}
     Returns the iterator to point to the row pointed to by @arg{filter-iter}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-iter}"
   (let ((child-iter (make-instance 'tree-iter)))
@@ -546,6 +584,10 @@
   path will point to the same row in the filtered model. If @arg{child-path} is
   not a valid path on the child model or points to a row which is not visible in
   @arg{filter}, then @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-path}"
   (filter (g:object tree-model-sort))
@@ -572,6 +614,10 @@
   path will point to the same location in the model not being filtered. If
   @arg{filter-path} does not point to a location in the child model, @code{nil}
   is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-class{gtk:tree-path}"
   (filter (g:object tree-model-sort))
@@ -592,6 +638,10 @@
     Emits the signal \"row_changed\" for each row in the child model, which
     causes the filter to re-evaluate whether a row is visible or not.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}"
   (filter (g:object tree-model-filter)))
 
@@ -615,6 +665,10 @@
   This might be useful if the child model being filtered is static, does not
   change often, and there has been a lot of unreffed access to nodes. As a side
   effect of this function, all unreffed iterators will be invalid.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-model-filter} implementation is deprecated since 4.10.
+    Use the @class{gtk:filter-list-model} implementation instead.
+  @end{dictionary}
   @see-class{gtk:tree-model-filter}
   @see-function{gtk:tree-model-ref-node}"
   (filter (g:object tree-model-filter)))

@@ -2,7 +2,7 @@
 ;;; gtk4.icon-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -268,26 +268,30 @@
 (setf (documentation 'icon-view 'type)
  "@version{#2021-3-9}
   @begin{short}
-    The @sym{gtk:icon-view} widget provides an alternative view on a
+    The @class{gtk:icon-view} widget provides an alternative view on a
     @class{gtk:tree-model} object.
   @end{short}
   It displays the model as a grid of icons with labels. Like the
   @class{gtk:tree-view} widget, it allows to select one or multiple items,
   depending on the selection mode, see the @fun{gtk:icon-view-selection-mode}
   function. In addition to selection with the arrow keys, the
-  @sym{gtk:icon-view} class supports rubberband selection, which is controlled
+  @class{gtk:icon-view} class supports rubberband selection, which is controlled
   by dragging the pointer.
 
   @image[icon-view]{}
 
   Note that if the tree model is backed by an actual tree store, as opposed to
-  a flat list where the mapping to icons is obvious, the @sym{gtk:icon-view}
+  a flat list where the mapping to icons is obvious, the @class{gtk:icon-view}
   widget will only display the first level of the tree and ignore the tree's
   branches.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:icon-view} implementation has a single CSS node with name
+    The @class{gtk:icon-view} implementation has a single CSS node with name
     @code{iconview} and @code{.view} style class. For rubberband selection, a
     subnode with name @code{rubberband} is used.
+  @end{dictionary}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"activate-cursor-item\" signal}
@@ -300,7 +304,7 @@ lambda (view)    :action
       activation programmatically. The default bindings for this signal are the
       @kbd{Space}, @kbd{Return} and @kbd{Enter} keys.
       @begin[code]{table}
-        @entry[view]{The @sym{gtk:icon-view} widget on which the signal is
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"item-activated\" signal}
@@ -312,7 +316,7 @@ lambda (view path)    :run-last
       non-editable item is selected and one of the @kbd{Space}, @kbd{Return} or
       @kbd{Enter} keys is pressed.
       @begin[code]{table}
-        @entry[view]{The @sym{gtk:icon-view} widget on which the signal is
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
           emitted.}
         @entry[path]{The @class{gtk:tree-path} instance for the activated item.}
       @end{table}
@@ -332,7 +336,8 @@ lambda (view step count extent modify)    :action
       All of these will extend the selection when combined with the @kbd{Shift}
       modifier.
       @begin[code]{table}
-        @entry[view]{The @sym{gtk:icon-view} widget which received the signal.}
+        @entry[view]{The @class{gtk:icon-view} widget which received the
+          signal.}
         @entry[step]{The granularity of the move, as a value of the
           @symbol{gtk:movement-step} enumeration.}
         @entry[count]{An integer with the number of step units to move.}
@@ -349,7 +354,7 @@ lambda (view)    :action
       programmatically. The default binding for this signal is the @kbd{Ctrl-a}
       key.
       @begin[code]{table}
-        @entry[view]{The @sym{gtk:icon-view} widget on which the signal is
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"select-cursor-item\" signal}
@@ -361,7 +366,7 @@ lambda (view)    :action
       it with the @fun{g-signal-emit} function if they need to control selection
       programmatically. There is no default binding for this signal.
       @begin[code]{table}
-        @entry[view]{The @sym{gtk:icon-view} widget on which the signal is
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"selection-changed\" signal}
@@ -371,7 +376,7 @@ lambda (view)    :run-first
      The signal is emitted when the selection changes, i.e. the set of selected
      items.
      @begin[code]{table}
-       @entry[view]{The @sym{gtk:icon-view} widget on which the signal is
+       @entry[view]{The @class{gtk:icon-view} widget on which the signal is
          emitted.}
      @end{table}
     @subheading{The \"toggle-cursor-item\" signal}
@@ -385,7 +390,7 @@ lambda (view)    :action
       programmatically. The default binding for this signal is the
       @kbd{Ctrl-Space} key.
       @begin[code]{table}
-        @entry[view]{The @sym{gtk:icon-view} widget on which the signal is
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"unselect-all\" signal}
@@ -398,11 +403,14 @@ lambda (view)    :action
       programmatically. The default binding for this signal is the
       @kbd{Ctrl-Shift-a} key.
       @begin[code]{table}
-        @entry[view]{The @sym{gtk:icon-view} widget on which the signal is
+        @entry[view]{The @class{gtk:icon-view} widget on which the signal is
           emitted.}
       @end{table}
   @end{dictionary}
-  @see-slot{gzk-icon-view-activate-on-single-click}
+  @see-constructor{gtk:icon-view-new}
+  @see-constructor{gtk:icon-view-new-with-area}
+  @see-constructor{gtk:icon-view-new-with-model}
+  @see-slot{gtk:icon-view-activate-on-single-click}
   @see-slot{gtk:icon-view-cell-area}
   @see-slot{gtk:icon-view-column-spacing}
   @see-slot{gtk:icon-view-columns}
@@ -419,9 +427,6 @@ lambda (view)    :action
   @see-slot{gtk:icon-view-spacing}
   @see-slot{gtk:icon-view-text-column}
   @see-slot{gtk:icon-view-tooltip-column}
-  @see-constructor{gtk:icon-view-new}
-  @see-constructor{gtk:icon-view-new-with-area}
-  @see-constructor{gtk:icon-view-new-with-model}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-view}")
 
@@ -456,6 +461,10 @@ lambda (view)    :action
   @end{short}
   Causes the \"item-activated\" signal to be emitted on a single click instead
   of a double click.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; --- icon-view-cell-area ----------------------------------------------------
@@ -484,6 +493,10 @@ lambda (view)    :action
   If no area is specified when creating the icon view with the
   @fun{gtk:icon-view-new-with-area} function a @class{gtk:cell-area-box} object
   will be used.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-area-box}
@@ -514,6 +527,10 @@ lambda (view)    :action
     @class{gtk:icon-view} class.
   @end{short}
   Specifies the space which is inserted between the columns of the icon view.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; --- icon-ciew-columns ------------------------------------------------------
@@ -542,6 +559,10 @@ lambda (view)    :action
   @end{short}
   Determines in how many columns the icons are arranged. If columns is -1, the
   number of columns will be chosen automatically to fill the available area.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; --- icon-view-item-orientation ---------------------------------------------
@@ -570,6 +591,10 @@ lambda (view)    :action
     @class{gtk:icon-view} class.
   @end{short}
   Determines whether the labels are drawn beside the icons instead of below.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-symbol{gtk:orientation}")
 
@@ -597,6 +622,10 @@ lambda (view)    :action
     @class{gtk:icon-view} class.
   @end{short}
   Specifies the padding around each of the icon view's items.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; --- icon-view-item-width ---------------------------------------------------
@@ -624,6 +653,10 @@ lambda (view)    :action
   @end{short}
   Specifies the width to use for each item. If it is set to -1, the icon view
   will automatically determine a suitable item size.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; --- icon-view-margin -------------------------------------------------------
@@ -650,6 +683,10 @@ lambda (view)    :action
   @end{short}
   Specifies the space which is inserted at the top, bottom, left and right of
   the icon view.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; --- icon-view-markup-column ------------------------------------------------
@@ -680,13 +717,17 @@ lambda (view)    :action
     Accessor of the @slot[gtk:icon-view]{markup-column} slot of
     the @class{gtk:icon-view} class.
   @end{short}
-  The @sym{gtk:icon-view-markup-column} function returns the column with markup
-  text for the icon view. The @sym{(setf gtk:icon-view-markup-column)} function
-  sets the column with markup information.
+  The @fun{gtk:icon-view-markup-column} function returns the column with markup
+  text for the icon view. The @setf{gtk:icon-view-markup-column} function sets
+  the column with markup information.
 
   The markup column must be of type \"gchararray\". If the markup column
   is set to something, it overrides the text column set by the
   @fun{gtk:icon-view-text-column} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:icon-view-text-column}")
 
@@ -710,12 +751,16 @@ lambda (view)    :action
     Accessor of the @slot[gtk:icon-view]{model} slot of the
     @class{gtk:icon-view} class.
   @end{short}
-  The @sym{gtk:icon-view-model} function returns the model the
+  The @fun{gtk:icon-view-model} function returns the model the
   @class{gtk:icon-view} widget is based on. Returns @code{nil} if the model is
-  unset. The @sym{(setf gtk:icon-view-model)} function sets the model.
+  unset. The @setf{gtk:icon-view-model} function sets the model.
 
   If the icon view already has a model set, it will remove it before setting
   the new model. If @arg{model} is @code{nil}, then it will unset the old model.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-model}")
 
@@ -745,11 +790,15 @@ lambda (view)    :action
     Accessor of the @slot[gtk:icon-view]{pixbuf-column} slot of the
     @class{gtk:icon-view} class.
   @end{short}
-  The @sym{gtk:icon-view-pixbuf-column} function returns the column with pixbufs
-  for the icon view. The @sym{(setf gtk:icon-view-pixbuf-column} function sets
-  the column with pixbufs.
+  The @fun{gtk:icon-view-pixbuf-column} function returns the column with pixbufs
+  for the icon view. The @setf{gtk:icon-view-pixbuf-column} function sets the
+  column with pixbufs.
 
   The pixbuf column must be of type \"GdkPixbuf\".
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gdk-pixbuf:pixbuf}")
 
@@ -774,8 +823,8 @@ lambda (view)    :action
     Accessor of the @slot[gtk:icon-view]{reorderable} slot of the
     @class{gtk:icon-view} class.
   @end{short}
-  The @sym{gtk:icon-view-reorderable} function retrieves whether the user can
-  reorder the list via drag and drop. The @sym{(setf gtk:icon-view-reorderable)}
+  The @fun{gtk:icon-view-reorderable} function retrieves whether the user can
+  reorder the list via drag and drop. The @setf{gtk:icon-view-reorderable}
   function sets whether the user can reorder the list. This function is a
   convenience function to allow you to reorder models that support the
   @class{gtk:tree-drag-source} and the @class{gtk:tree-drag-dest} interfaces.
@@ -791,6 +840,10 @@ lambda (view)    :action
   This function does not give you any degree of control over the order - any
   reordering is allowed. If more control is needed, you should probably handle
   drag and drop manually.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-drag-source}
   @see-class{gtk:tree-drag-dest}
@@ -820,13 +873,16 @@ lambda (view)    :action
     @class{gtk:icon-view} class.
   @end{short}
   Specifies the space which is inserted between the rows of the icon view.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; --- icon-view-selection-mode -----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "selection-mode"
-                                               'icon-view) t)
+(setf (documentation (liber:slot-documentation "selection-mode" 'icon-view) t)
  "The @code{selection-mode} property of type @symbol{gtk:selection-mode}
   (Read / Write) @br{}
   Specifies the selection mode of an icon view. If the mode is @code{:multiple},
@@ -847,9 +903,13 @@ lambda (view)    :action
     Accessor of the @slot[gtk:icon-view]{selection-mode} slot of the
     @class{gtk:icon-view} class.
   @end{short}
-  The @sym{gtk:icon-view-selection-mode} function gets the selection mode of the
-  icon view. The @sym{(setf gtk:icon-view-selection-mode)} function sets the
-  selection mode.
+  The @fun{gtk:icon-view-selection-mode} function gets the selection mode of the
+  icon view. The @setf{gtk:icon-view-selection-mode} function sets the selection
+  mode.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-symbol{gtk:selection-mode}")
 
@@ -878,6 +938,10 @@ lambda (view)    :action
   @end{short}
   Specifies the space which is inserted between the cells, i.e. the icon and
   the text, of an item.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; --- icon-view-text-column --------------------------------------------------
@@ -906,16 +970,19 @@ lambda (view)    :action
     Accessor of the @slot[gtk:icon-view]{text-column} slot of the
     @class{gtk:icon-view} class.
   @end{short}
-  The @sym{gtk:icon-view-text-column} function returns the column with text for
-  the icon view. The @sym{(setf gtk:icon-view-text-column)} function sets the
-  column. The text column must be of type \"gchararray\".
+  The @fun{gtk:icon-view-text-column} function returns the column with text for
+  the icon view. The @setf{gtk:icon-view-text-column} function sets the column.
+  The text column must be of type \"gchararray\".
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}")
 
 ;;; --- icon-view-tooltip-column -----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "tooltip-column"
-                                               'icon-view) t)
+(setf (documentation (liber:slot-documentation "tooltip-column" 'icon-view) t)
  "The @code{tooltip-column} property of type @code{:int} (Read / Write) @br{}
   The column in the model containing the tooltip texts for the items. @br{}
   Allowed values: >= -1 @br{}
@@ -935,9 +1002,9 @@ lambda (view)    :action
     Accessor of the @slot[gtk:icon-view]{tooltip-column} slot of the
     @class{gtk:icon-view} class.
   @end{short}
-  The @sym{gtk:icon-view-tooltip-column} function returns the column of the icon
+  The @fun{gtk:icon-view-tooltip-column} function returns the column of the icon
   view's model which is being used for displaying tooltips on the icon view's
-  rows. The @sym{(setf gtk:icon-view-tooltip-column)} function sets the column.
+  rows. The @setf{gtk:icon-view-tooltip-column} function sets the column.
 
   If you only plan to have simple (text-only) tooltips on full items, you can
   use this function to have the @class{gtk:icon-view} widget handle these
@@ -950,6 +1017,10 @@ lambda (view)    :action
   Note that the signal handler sets the text with the
   @fun{gtk:tooltip-set-markup} function, so &, <, etc have to be escaped in the
   text.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:tooltip-set-markup}")
 
@@ -966,6 +1037,10 @@ lambda (view)    :action
   @begin{short}
     Creates a new icon view.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:icon-view-new-with-area}
   @see-function{gtk:icon-view-new-with-model}"
@@ -988,6 +1063,10 @@ lambda (view)    :action
     Creates a new icon view using the specified area to layout cells inside
     the icons.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:cell-area}
   @see-function{gtk:icon-view-new}
@@ -1011,6 +1090,10 @@ lambda (view)    :action
   @begin{short}
     Creates a new icon view with the model @arg{model}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-model}
   @see-function{gtk:icon-view-new}
@@ -1042,6 +1125,10 @@ lambda (view)    :action
   interested in the cell at the specified position. See the
   @fun{gtk:icon-view-convert-widget-to-bin-window-coords} function for
   converting widget coordinates to bin window coordinates.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-function{gtk:icon-view-item-at-pos}
@@ -1070,8 +1157,8 @@ lambda (view)    :action
   @argument[x]{an integer with the x position to be identified}
   @argument[y]{an integer with the y position to be identified}
   @begin{return}
-    @code{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
-    @code{cell} -- a @class{gtk:cell-renderer} object responsible for the
+    @arg{path} -- a @class{gtk:tree-path} instance, or @code{nil} @br{}
+    @arg{cell} -- a @class{gtk:cell-renderer} object responsible for the
     cell at (x, y), or @code{nil} if no item exists at the specified position
   @end{return}
   @begin{short}
@@ -1081,6 +1168,10 @@ lambda (view)    :action
   also obtains the cell at the specified position. See the
   @fun{gtk:icon-view-convert-widget-to-bin-window-coords} function for
   converting widget coordinates to bin window coordinates.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:icon-view-path-at-pos}
   @see-function{gtk:icon-view-convert-widget-to-bin-window-coords}"
@@ -1114,6 +1205,10 @@ lambda (view)    :action
   This function is often followed by a call of the @fun{gtk:widget-grab-focus}
   function in order to give keyboard focus to the widget. Please note that
   editing can only happen when the widget is realized.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-class{gtk:cell-renderer}
@@ -1140,9 +1235,9 @@ lambda (view)    :action
  "@version{#2023-1-28}
   @argument[view]{a @class{gtk:icon-view} widget}
   @begin{return}
-    @code{path} -- a current @class{gtk:tree-path} cursor path, or @code{nil}
+    @arg{path} -- a current @class{gtk:tree-path} cursor path, or @code{nil}
     @br{}
-    @code{cell} -- a current @class{gtk:cell-renderer} focus cell,
+    @arg{cell} -- a current @class{gtk:cell-renderer} focus cell,
     or @code{nil} if the cursor is not set
   @end{return}
   @begin{short}
@@ -1150,6 +1245,10 @@ lambda (view)    :action
   @end{short}
   If the cursor is not currently set, then @arg{path} will be @code{nil}. If no
   cell currently has focus, then @arg{cell} will be @code{nil}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-class{gtk:cell-renderer}
@@ -1216,6 +1315,10 @@ lambda (view path)
     Calls a function for each selected icon.
   @end{short}
   Note that the model or selection cannot be modified from within this function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-symbol{gtk:icon-view-foreach-func}"
   (glib:with-stable-pointer (ptr func)
@@ -1249,6 +1352,10 @@ lambda (view path)
   @end{short}
   If @arg{cell} is @code{nil} the main cell area is used. This function is only
   valid if @arg{view} is realized.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-class{gtk:cell-renderer}
@@ -1269,6 +1376,10 @@ lambda (view path)
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance to be selected}
   @short{Selects the row at @arg{path}.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}"
   (view (g:object icon-view))
@@ -1286,6 +1397,10 @@ lambda (view path)
   @argument[view]{a @class{gtk:icon-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance to be unselected}
   @short{Unselects the row at @arg{path}.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}"
   (view (g:object icon-view))
@@ -1309,6 +1424,10 @@ lambda (view path)
     selected.
   @end{short}
   If @arg{path} does not point to a valid location, @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}"
   (view (g:object icon-view))
@@ -1334,6 +1453,10 @@ lambda (view path)
   function, you may want to convert the returned list into a list of
   @class{gtk:tree-row-reference} instances. To do this, you can use the
   @fun{gtk:tree-row-reference-new} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-row-reference}
@@ -1355,6 +1478,10 @@ lambda (view path)
   @end{short}
   The icon view must have its selection mode set to the value @code{:multiple}
   of the @symbol{gtk:selection-mode} enumeration.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-symbol{gtk:selection-mode}"
   (view (g:object icon-view)))
@@ -1370,6 +1497,10 @@ lambda (view path)
  "@version{#2021-3-9}
   @argument[view]{a @class{gtk:icon-view} widget}
   @short{Unselects all the icons.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}"
   (view (g:object icon-view)))
 
@@ -1387,6 +1518,10 @@ lambda (view path)
   @begin{short}
     Activates the item determined by @arg{path}.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}"
   (view (g:object icon-view))
@@ -1434,6 +1569,10 @@ lambda (view path)
   This function only works if the model is set, and @arg{path} is a valid row
   on the model. If the model changes before the @arg{view} is realized, the
   centered @arg{path} will be modified to reflect this change.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}"
   (%icon-view-scroll-to-path view
@@ -1469,6 +1608,10 @@ lambda (view path)
   @end{short}
   Returns @code{nil} if valid paths were not returned in @arg{start} and
   @arg{end}. Note that there may be invisible paths in between.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}"
   (cffi:with-foreign-objects ((start :pointer) (end :pointer))
@@ -1495,6 +1638,10 @@ lambda (view path)
   @end{short}
   See also the @fun{gtk:icon-view-set-tooltip-column} function for a simpler
   alternative. See also the @fun{gtk:tooltip-set-tip-area} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:icon-view-set-tooltip-column}
   @see-function{gtk:tooltip-set-tip-area}"
@@ -1524,6 +1671,10 @@ lambda (view path)
 
   See also the @fun{gtk:icon-view-set-tooltip-column} function for a simpler
   alternative.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:tooltip-set-tip-area}
   @see-function{gtk:icon-view-set-tooltip-column}"
@@ -1577,6 +1728,10 @@ lambda (view path)
   of @arg{model}, @arg{path} and @arg{iter} will be set to point to that row
   and the corresponding model. @arg{x} and @arg{y} will always be converted to
   be relative to the bin window of @arg{view} if @arg{tip} is @em{false}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}
@@ -1617,6 +1772,10 @@ lambda (view path)
     Gets the row in which the item path is currently displayed.
   @end{short}
   Row numbers start at 0.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:icon-view-item-column}"
   (view (g:object icon-view))
@@ -1638,6 +1797,10 @@ lambda (view path)
     Gets the column in which the item path is currently displayed.
   @end{short}
   Column numbers start at 0.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:icon-view-item-row}"
   (view (g:object icon-view))
@@ -1675,6 +1838,10 @@ lambda (view path)
   @end{short}
   Calling this method sets the @slot[gtk:icon-view]{reorderable} property to
   the @em{false} value.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-symbol{gdk:modifier-type}
   @see-symbol{gdk-drag-action}"
@@ -1726,6 +1893,10 @@ lambda (view path)
   @end{short}
   Calling this method sets the @slot[gtk:icon-view]{reorderable} property to
   the @em{false} value.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-symbol{gdk-drag-action}"
   (let ((n-targets (length targets)))
@@ -1764,6 +1935,10 @@ lambda (view path)
   @end{short}
   Calling this method sets the @slot[gtk:icon-view]{reorderable} property to
   @em{false}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:icon-view-enable-model-drag-source}"
   (view (g:object icon-view)))
@@ -1787,6 +1962,10 @@ lambda (view path)
   @end{short}
   Calling this method sets the @slot[gtk:icon-view]{reorderable} property to
   @em{false}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-function{gtk:icon-view-enable-model-drag-dest}"
   (view (g:object icon-view)))
@@ -1811,6 +1990,10 @@ lambda (view path)
   @begin{short}
     Sets the item that is highlighted for feedback.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-symbol{gtk:icon-view-drop-position}
   @see-function{gtk:icon-view-get-drag-dest-item}"
@@ -1846,6 +2029,10 @@ lambda (view path)
   @begin{short}
     Gets information about the item that is highlighted for feedback.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-symbol{gtk:icon-view-drop-position}
@@ -1887,6 +2074,10 @@ lambda (view path)
   @begin{short}
     Determines the destination item for a given position.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-symbol{gtk:icon-view-drop-position}"
@@ -1914,6 +2105,10 @@ lambda (view path)
     Creates a @symbol{cairo:surface-t} representation of the item at @arg{path}.
   @end{short}
   This image is used for a drag icon.
+  @begin[Warning]{dictionary}
+    The @class{gtk:icon-view} implementation is deprecated since 4.10.
+    Use the @class{gtk:grid-view} implementation instead.
+  @end{dictionary}
   @see-class{gtk:icon-view}
   @see-class{gtk:tree-path}
   @see-symbol{cairo:surface-t}"

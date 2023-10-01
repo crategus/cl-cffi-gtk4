@@ -95,6 +95,11 @@
   bookkeeping of rows is done for you, as well as things like hover-to-open
   and auto-scroll, but your models have to implement the
   @class{gtk:tree-drag-source} and @class{gtk:tree-drag-dest} interfaces.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-drag-source} implementation is deprecated since 4.10.
+    List views use widgets to display their contents. You can use the
+    @class{gtk:drag-source} implementation to implement a drag source.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-model-filter}
@@ -151,6 +156,10 @@
   Returns @em{false} if the deletion fails because @arg{path} no longer exists,
   or for some model-specific reason. Should robustly handle a path no longer
   found in the model.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-drag-source} implementation is deprecated since 4.10.
+    Use list models instead.
+  @end{dictionary}
   @see-class{gtk:tree-drag-source}
   @see-class{gtk:tree-path}"
   (source (g:object tree-drag-source))
@@ -175,6 +184,10 @@
     @class{gdk-content-provider} object representing the row at @arg{path}.
   @end{short}
   Should robustly handle a @arg{path} no longer found in the model.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-drag-source} implementation is deprecated since 4.10.
+    Use list models instead.
+  @end{dictionary}
   @see-class{gtk:tree-drag-source}
   @see-class{gtk:tree-path}
   @see-class{gdk-content-provider}"
@@ -200,6 +213,10 @@
     be used as the source of a DND operation.
   @end{short}
   If the source does not implement this interface, the row is assumed draggable.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-drag-source} implementation is deprecated since 4.10.
+    Use list models instead.
+  @end{dictionary}
   @see-class{gtk:tree-drag-source}
   @see-class{gtk:tree-path}"
   (source (g:object tree-drag-source))
@@ -240,6 +257,11 @@
   bookkeeping of rows is done for you, as well as things like hover-to-open
   and auto-scroll, but your models have to implement the
   @class{gtk:tree-drag-source} and @class{gtk:tree-drag-dest} interfaces.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-drag-dest} implementation is deprecated since 4.10.
+    List views use widgets to display their contents. You can use the
+    @class{gtk:drop-rarget} implementation to implement a drop destination.
+  @end{dictionary}
   @see-class{gtk:list-store}
   @see-class{gtk:tree-store}")
 
@@ -294,6 +316,10 @@
   @em{false} will be returned. Also, @em{false} may be returned if the new row
   is not created for some model-specific reason. Should robustly handle a dest
   no longer found in the model.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-drag-dest} implementation is deprecated since 4.10.
+    Use list models instead.
+  @end{dictionary}
   @see-class{gtk:tree-drag-dest}
   @see-class{gtk:tree-path}
   @see-symol{g:value}"
@@ -322,6 +348,10 @@
   I.e., can we drop the data in @arg{data} at that location. The argument
   @arg{dest} does not have to exist. The return value will almost certainly be
   @em{false} if the parent of @arg{dest} does not exist, though.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-drag-dest} implementation is deprecated since 4.10.
+    Use list models instead.
+  @end{dictionary}
   @see-class{gtk:tree-drag-dest}
   @see-class{gtk:tree-path}
   @see-symbol{g:value}"
@@ -372,6 +402,9 @@
   you are not in the same process, then you will get memory corruption. In the
   @code{drag_data_received} handler, you can assume that selection data of type
   @code{GTK_TREE_MODEL_ROW} is in from the current process.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.10. Use list models instead.
+  @end{dictionary}
   @see-class{gtk:selection-data}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-path}"

@@ -253,7 +253,7 @@
 (setf (documentation 'tree-view-column 'type)
  "@version{#2022-1-24}
   @begin{short}
-    The @sym{gtk:tree-view-column} object represents a visible column in a
+    The @class{gtk:tree-view-column} object represents a visible column in a
     @class{gtk:tree-view} widget.
   @end{short}
   It allows to set properties of the tree view column header, and functions as
@@ -263,6 +263,10 @@
   Please refer to the tree view widget conceptual overview for an overview of
   all the objects and data types related to the tree view and how they work
   together.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"clicked\" signal}
       @begin{pre}
@@ -274,6 +278,9 @@ lambda (column)    :run-last
         emitted the signal.}
     @end{table}
   @end{dictionary}
+  @see-constructor{gtk:tree-view-column-new}
+  @see-constructor{gtk:tree-view-column-new-with-area}
+    @see-constructor{gtk:tree-view-column-new-with-attributes}
   @see-slot{gtk:tree-view-column-alignment}
   @see-slot{gtk:tree-view-column-cell-area}
   @see-slot{gtk:tree-view-column-clickable}
@@ -324,11 +331,15 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{alignment} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-alignment} function returns the current
+  The @fun{gtk:tree-view-column-alignment} function returns the current
   alignment of the title or custom widget inside the tree view column header.
-  The @sym{(setf gtk:tree-view-column-alignment)} function sets the alignment.
-  The alignment determines the location inside the header button, 0.0 for left,
-  0.5 for center, 1.0 for right alignment.
+  The @setf{gtk:tree-view-column-alignment} function sets the alignment. The
+  alignment determines the location inside the header button, 0.0 for left, 0.5
+  for center, 1.0 for right alignment.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}")
 
 ;;; --- tree-view-column-cell-area ---------------------------------------------
@@ -358,6 +369,10 @@ lambda (column)    :run-last
   The cell area used to layout cell renderers for this tree view column. If no
   cell area is specified when creating the tree view column a horizontally
   oriented @class{gtk:cell-area-box} object will be used.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}")
 
 ;;; --- tree-view-column-clickable ---------------------------------------------
@@ -382,11 +397,15 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{clickable} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-clickable} function returns @em{true} if the
+  The @fun{gtk:tree-view-column-clickable} function returns @em{true} if the
   user can click on the header for the tree view column. The
-  @sym{(setf gtk:tree-view-column-clickable)} function sets the header to be
-  active if clickable is @em{true}. When the header is active, then it can take
-  keyboard focus, and can be clicked.
+  @setf{gtk:tree-view-column-clickable} function sets the header to be active if
+  clickable is @em{true}. When the header is active, then it can take keyboard
+  focus, and can be clicked.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}")
 
 ;;; --- tree-view-column-expand ------------------------------------------------
@@ -412,13 +431,17 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{expand} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-expand} function returns @em{true} if the tree
+  The @fun{gtk:tree-view-column-expand} function returns @em{true} if the tree
   view column expands to take any available space. The
-  @sym{(setf gtk:tree-view-column-expand)} function sets the tree view column
-  to take available extra space. This space is shared equally amongst all
-  tree view columns that have the expand set to @em{true}. If no column has this
-  option set, then the last column gets all extra space. By default, every
-  column is created with this @em{false}.
+  @setf{gtk:tree-view-column-expand} function sets the tree view column to take
+  available extra space. This space is shared equally amongst all tree view
+  columns that have the expand set to @em{true}. If no column has this option
+  set, then the last column gets all extra space. By default, every column is
+  created with this @em{false}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}")
 
 ;;; --- tree-view-column-fixed-width -------------------------------------------
@@ -445,14 +468,18 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{fixed-width} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-fixed-width} function gets the fixed width of
-  the tree view column in pixels. The
-  @sym{(setf gtk:tree-view-column-fixed-width)} function sets the size. This is
-  meaningful only if the @slot[gtk:tree-view-column]{sizing} property is
-  @code{:fixed}. The size of the tree view column is clamped to the min/max
-  width for the column. Please note that the min/max width of the column does
-  not actually affect the @slot[gtk:tree-view-column]{fixed-width} property of
-  the widget, just the actual size when displayed.
+  The @fun{gtk:tree-view-column-fixed-width} function gets the fixed width of
+  the tree view column in pixels. The @setf{gtk:tree-view-column-fixed-width}
+  function sets the size. This is meaningful only if the
+  @slot[gtk:tree-view-column]{sizing} property is @code{:fixed}. The size of the
+  tree view column is clamped to the min/max width for the column. Please note
+  that the min/max width of the column does not actually affect the
+  @slot[gtk:tree-view-column]{fixed-width} property of the widget, just the
+  actual size when displayed.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-sizing}
   @see-function{gtk:tree-view-column-max-width}
@@ -461,8 +488,7 @@ lambda (column)    :run-last
 ;;; --- tree-view-column-max-width ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "max-width"
-                                               'tree-view-column) t)
+(setf (documentation (liber:slot-documentation "max-width" 'tree-view-column) t)
  "The @code{max-width} property of type @code{:int} (Read / Write) @br{}
   Maximum allowed width of the tree view column. @br{}
   Allowed values: >= -1 @br{}
@@ -482,12 +508,16 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{max-width} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-max-width} function returns the maximum width in
+  The @fun{gtk:tree-view-column-max-width} function returns the maximum width in
   pixels of the tree view column, or -1 if no maximum width is set. The
-  @sym{(setf gtk:tree-view-column-max-width)} function sets the maximum width.
-  If @arg{max-width} is -1, then the maximum width is unset. Note, the tree view
+  @setf{gtk:tree-view-column-max-width} function sets the maximum width. If
+  @arg{max-width} is -1, then the maximum width is unset. Note, the tree view
   column can actually be wider than max width if it is the last column in a tree
   view. In this case, the column expands to fill any extra space.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-min-width}")
 
@@ -515,10 +545,14 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{min-width} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-min-width} function returns the minimum width in
+  The @fun{gtk:tree-view-column-min-width} function returns the minimum width in
   pixels of the tree view column, or -1 if no minimum width is set. The
-  @sym{(setf gtk:tree-view-column-min-width)} function sets the minimum width.
-  If @arg{min-width} is -1, then the minimum width is unset.
+  @setf{gtk:tree-view-column-min-width} function sets the minimum width. If
+  @arg{min-width} is -1, then the minimum width is unset.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-max-width}")
 
@@ -546,6 +580,10 @@ lambda (column)    :run-last
   @end{short}
   If @code{reorderable} is @em{true}, then the tree view column can be
   reordered by the user dragging the header.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-resizable}")
 
@@ -571,13 +609,17 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{resizable} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-resizable} function returns @em{true} if the
+  The @fun{gtk:tree-view-column-resizable} function returns @em{true} if the
   tree view column can be resized by the user.
 
   If @code{resizable} is @em{true}, then the user can explicitly resize the
   tree view column by grabbing the outer edge of the column button. If
   @code{resizable} is @em{true} and the sizing mode of the tree view column is
   @code{:autosize}, then the sizing mode is changed to @code{:grow-only}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-sizing}
   @see-function{gtk:tree-view-column-reorderable}")
@@ -606,9 +648,13 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{sizing} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-sizing} function returns the current sizing type
-  of the tree view column. The @sym{(setf gtk:tree-view-column-sizing)} sets the
+  The @fun{gtk:tree-view-column-sizing} function returns the current sizing type
+  of the tree view column. The @setf{gtk:tree-view-column-sizing} sets the
   sizing type.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-resizable}")
 
@@ -638,11 +684,14 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{sort-column-id} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-sort-column-id} function gets the logical sort
+  The @fun{gtk:tree-view-column-sort-column-id} function gets the logical sort
   column ID that the model sorts on when this tree view column is selected for
-  sorting. The @sym{(setf gtk:tree-view-column-sort-column-id)} function sets
-  the logical sort column ID. Doing so makes the tree view column header
-  clickable.
+  sorting. The @setf{gtk:tree-view-column-sort-column-id} function sets the
+  logical sort column ID. Doing so makes the tree view column header clickable.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-sort-indicator}
   @see-function{gtk:tree-view-column-sort-order}")
@@ -675,6 +724,10 @@ lambda (column)    :run-last
   header button indicating the tree view column is sorted. Call the
   @fun{gtk:tree-view-column-sort-order} function to change the direction of the
   arrow.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-sort-order}
   @see-function{gtk:tree-view-column-sort-column-id}")
@@ -712,6 +765,10 @@ lambda (column)    :run-last
   sort. Note that you must have the sort indicator enabled to see anything
   when calling this function. See the @fun{gtk:tree-view-column-sort-indicator}
   function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-symbol{gtk:sort-type}
   @see-function{gtk:tree-view-column-sort-column-id}
@@ -742,11 +799,14 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{spacing} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-spacing} function returns the spacing of the
+  The @fun{gtk:tree-view-column-spacing} function returns the spacing of the
   tree view column, which is the number of pixels to place between cell
-  renderers packed into it. The @sym{(setf gtk:tree-view-column-spacing)}
-  function sets the spacing field of the tree
-  view column.
+  renderers packed into it. The @setf{gtk:tree-view-column-spacing} function
+  sets the spacing field of the tree view column.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}")
 
 ;;; --- tree-view-column-title -------------------------------------------------
@@ -771,9 +831,13 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{title} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-title} function returns the title of the the
-  tree view column. The @sym{(setf gtk:tree-view-column-spacing)} function sets
-  the title. If a custom widget has been set, then this value is ignored.
+  The @fun{gtk:tree-view-column-title} function returns the title of the the
+  tree view column. The @setf{gtk:tree-view-column-spacing} function sets the
+  title. If a custom widget has been set, then this value is ignored.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-widget}")
 
@@ -799,10 +863,14 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{visible} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-visible} function returns whether the tree view
+  The @fun{gtk:tree-view-column-visible} function returns whether the tree view
   column is visible or not. If it is visible, then the tree will show the
-  column. The @sym{(setf gtk:tree-view-column-visible)} function sets the
-  visibility of the tree view column.
+  column. The @setf{gtk:tree-view-column-visible} function sets the visibility
+  of the tree view column.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}")
 
 ;;; --- tree-view-column-widget ------------------------------------------------
@@ -826,12 +894,16 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{widget} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-widget}v function returns the child widget in
+  The @fun{gtk:tree-view-column-widget} function returns the child widget in
   the button on the tree view column header. If a custom widget has not been set
-  then @code{nil} is returned. The  @sym{(setf gtk:tree-view-column-widget)}
-  function sets the child widget. If the child widget is @code{nil}, then the
-  header button is set with a @class{gtk:label} widget set to the title of the
-  tree view column.
+  then @code{nil} is returned. The  @setf{gtk:tree-view-column-widget} function
+  sets the child widget. If the child widget is @code{nil}, then the header
+  button is set with a @class{gtk:label} widget set to the title of the tree
+  view column.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:label}
   @see-function{gtk:tree-view-column-title}")
@@ -858,8 +930,12 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{width} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-width} function returns the current size of the
+  The @fun{gtk:tree-view-column-width} function returns the current size of the
   tree view column in pixels.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}")
 
 ;;; --- tree-view-column-x-offset ----------------------------------------------
@@ -883,8 +959,12 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{x-offset} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @sym{gtk:tree-view-column-width} function returns the current x offset of
+  The @fun{gtk:tree-view-column-width} function returns the current x offset of
   the tree view column in pixels.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}")
 
 ;;; ----------------------------------------------------------------------------
@@ -898,6 +978,10 @@ lambda (column)    :run-last
   @begin{short}
     Creates a new tree view column.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-new-with-area}
   @see-function{gtk:tree-view-column-new-with-attributes}"
@@ -920,6 +1004,10 @@ lambda (column)    :run-last
   @begin{short}
     Creates a new tree view column using @arg{area} to render its cells.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-area}
   @see-function{gtk:tree-view-column-new}
@@ -958,6 +1046,10 @@ lambda (column)    :run-last
                                                          \"foreground\" 1)))
   ... )
   @end{pre}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:tree-view-column-title}
@@ -994,6 +1086,10 @@ lambda (column)    :run-last
   If @arg{expand} is @em{false}, then the cell renderer is allocated no more
   space than it needs. Any unused space is divided evenly between cell
   renderers for which @arg{expand} is @em{true}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:tree-view-column-pack-end}"
@@ -1023,6 +1119,10 @@ lambda (column)    :run-last
   If @arg{expand} is @em{false}, then the cell renderer is allocated no more
   space than it needs. Any unused space is divided evenly between cell
   renderers for which expand is @em{true}.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:tree-view-column-pack-start}"
@@ -1041,6 +1141,10 @@ lambda (column)    :run-last
   @begin{short}
     Unsets all the mappings on all cell renderers on the tree view column.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}"
   (column (g:object tree-view-column)))
 
@@ -1067,6 +1171,10 @@ lambda (column)    :run-last
   So for example if column 2 of the model contains strings, you could have the
   \"text\" attribute of a @class{gtk:cell-renderer-text} get its values from
   column 2.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:cell-renderer-text}
@@ -1095,6 +1203,10 @@ lambda (column)    :run-last
   The attributes should be in attribute/column order, as in the
   @fun{gtk:tree-view-column-add-attribute} function. All existing attributes are
   removed, and replaced with the new attributes.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:tree-view-column-add-attribute}"
@@ -1170,6 +1282,10 @@ lambda (column)    :run-last
   This function is used instead of the standard attributes mapping for setting
   the column value, and should set the value of the tree view column cell
   renderer as appropriate. @arg{func} may be @code{nil} to remove an older one.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}
   @see-symbol{gtk:tree-cell-data-func}"
@@ -1197,6 +1313,10 @@ lambda (column)    :run-last
     Clears all existing attributes previously set e.g. with the
     @fun{gtk:tree-view-column-set-attributes} function.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-set-attributes}"
   (column (g:object tree-view-column))
@@ -1216,6 +1336,10 @@ lambda (column)    :run-last
     Emits the \"clicked\" signal on the tree view column.
   @end{short}
   This function will only work if the tree view column is clickable.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}"
   (column (g:object tree-view-column)))
 
@@ -1234,6 +1358,10 @@ lambda (column)    :run-last
   @begin{short}
     Returns the button used in the tree view column header.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}"
   (column (g:object tree-view-column)))
 
@@ -1260,6 +1388,10 @@ lambda (column)    :run-last
   That is, for every attribute mapping in the tree view column, it will get a
   value from the set column on the @arg{iter}, and use that value to set the
   attribute on the cell renderer. This is used primarily by the tree view.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}"
@@ -1302,6 +1434,10 @@ lambda (column)    :run-last
     Obtains the width and height needed to render the column.
   @end{short}
   This is used primarily by the tree view.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gdk:rectangle}"
   (cffi:with-foreign-objects ((x-offset :int)
@@ -1346,6 +1482,10 @@ lambda (column)    :run-last
     Obtains the horizontal position and size of a cell in a tree view column.
   @end{short}
   If the cell is not found in the column, @code{nil} is returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}"
   (cffi:with-foreign-objects ((x-offset :int) (width :int))
@@ -1377,6 +1517,10 @@ lambda (column)    :run-last
   @end{short}
   For this to be meaningful, you must first initialize the cells with the
   @fun{gtk:tree-view-column-cell-set-cell-data} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-function{gtk:tree-view-column-cell-set-cell-data}"
   (column (g:object tree-view-column)))
@@ -1397,6 +1541,10 @@ lambda (column)    :run-last
     Sets the current keyboard focus to be at cell, if the column contains 2 or
     more editable and activatable cells.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:cell-renderer}"
   (column (g:object tree-view-column))
@@ -1417,6 +1565,10 @@ lambda (column)    :run-last
     Flags the tree view column, and the cell renderers added to this column, to
     have their sizes renegotiated.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}"
   (column (g:object tree-view-column)))
 
@@ -1440,6 +1592,10 @@ lambda (column)    :run-last
   @end{short}
   If the column is currently not inserted in any tree view, @code{nil} is
   returned.
+  @begin[Warning]{dictionary}
+    The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
+    Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:tree-view}"
   (column (g:object tree-view-column)))
