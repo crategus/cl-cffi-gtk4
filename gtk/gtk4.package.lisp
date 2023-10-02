@@ -2979,6 +2979,7 @@
       @about-class{event-controller-scroll}
       @about-generic{event-controller-scroll-flags}
       @about-function{event-controller-scroll-new}
+      @about-function{event-controller-scroll-unit}
     @end{subsection}
     @begin[GtkEventControllerMotion]{subsection}
       Event controller for motion events.

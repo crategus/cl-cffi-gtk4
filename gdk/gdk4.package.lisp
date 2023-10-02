@@ -726,6 +726,7 @@
       @about-symbol{touchpad-gesture-phase}
       @about-symbol{scroll-direction}
       @about-symbol{crossing-mode}
+      @about-symbol{scroll-unit}
       @about-symbol{notify-type}
       @about-class{event-sequence}
       @about-class{event}

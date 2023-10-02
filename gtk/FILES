@@ -183,12 +183,12 @@ Selector Widgets and Dialogs
 Widgets for custom drawing
 
   gtk4.drawing-area.lisp               GtkDrawingArea                 GTK 4.12
-  gtk4.gl-area.lisp                    GtkGlArea                      GTK 4.6  +
+  gtk4.gl-area.lisp                    GtkGlArea                      GTK 4.12 +
 
 Ornaments
 
-  gtk4.frame.lisp                      GtkFrame                       GTK 4.6  +
-  gtk4.separator.lisp                  GtkSeparator                   GTK 4.6  +
+  gtk4.frame.lisp                      GtkFrame                       GTK 4.12
+  gtk4.separator.lisp                  GtkSeparator                   GTK 4.12
 
 Scrolling
 
@@ -201,11 +201,11 @@ Printing
 
   gtk4.print-operation-preview.lisp    GtkPrintOperationPreview       GTK 4.12
   gtk4.print-operation.lisp            GtkPrintOperation              GTK 4.12
-  gtk4.print-context.lisp              GtkPrintContext                GTK 4.6  +
-  gtk4.print-settings.lisp             GtkPrintSettings               GTK 4.6  +
+  gtk4.print-context.lisp              GtkPrintContext                GTK 4.12
+  gtk4.print-settings.lisp             GtkPrintSettings               GTK 4.12
   gtk4.paper-size.lisp                 GtkPaperSize                   GTK 4.12
   gtk4.page-setup.lisp                 GtkPageSetup                   GTK 4.12
-  gtk4.printer.lisp                    GtkPrinter                     GTK 4.6  +
+  gtk4.printer.lisp                    GtkPrinter                     GTK 4.12
   gtk4.print-job.lisp                  GtkPrintJob                    GTK 4.12
   gtk4.print-unix-dialog.lisp          GtkPrintUnixDialog             GTK 4.12
   gtk4.page-setup-unix-dialog.lisp     GtkPageSetupUnixDialog         GTK 4.12
@@ -242,8 +242,8 @@ Miscellaneous
 
 Interfaces
 
-  gtk4.actionable.lisp                 GtkActionable                  GTK 4.10 *
-  gtk4.orientable.lisp                 GtkOrientable                  GTK 4.6  +
+  gtk4.actionable.lisp                 GtkActionable                  GTK 4.12
+  gtk4.orientable.lisp                 GtkOrientable                  GTK 4.12
 
 Abstract Base Classes
 
@@ -256,26 +256,26 @@ Recently Used Documents
 
 Gestures and event handling
 
-  gtk4.event-controller.lisp           GtkEventController             GTK 4.6  +
-  gtk4.event-controller-key.lisp       GtkEventControllerKey          GTK 4.6  +
-  gtk4.event-controller-focus.lisp     GtkEventControllerFocus        GTK 4.6  +
-  gtk4.event-controller-legacy.lisp    GtkEventControllerLegacy       GTK 4.6  +
-  gtk4.event-controller-scroll.lisp    GtkEventControllerScroll       GTK 4.6  +
-  gtk4.event-controller-motion.lisp    GtkEventControllerMotion       GTK 4.6  +
+  gtk4.event-controller.lisp           GtkEventController             GTK 4.12
+  gtk4.event-controller-key.lisp       GtkEventControllerKey          GTK 4.12
+  gtk4.event-controller-focus.lisp     GtkEventControllerFocus        GTK 4.12
+  gtk4.event-controller-legacy.lisp    GtkEventControllerLegacy       GTK 4.12
+  gtk4.event-controller-scroll.lisp    GtkEventControllerScroll       GTK 4.12
+  gtk4.event-controller-motion.lisp    GtkEventControllerMotion       GTK 4.12
 
-  gtk4.gesture.lisp                    GtkGesture                     GTK 4.6  +
-  gtk4.gesture-single.lisp             GtkGestureSingle               GTK 4.6  +
-  gtk4.gesture-drag.lisp               GtkGestureDrag                 GTK 4.6  +
-  gtk4.gesture-long-press.lisp         GtkGestureLongPress            GTK 4.6  +
-  gtk4.gesture-click.lisp              GtkGestureClick                GTK 4.6  +
-  gtk4.gesture-pan.lisp                GtkGesturePan                  GTK 4.6  +
-  gtk4.gesture-swipe.lisp              GtkGestureSwipe                GTK 4.6  +
-  gtk4.gesture-rotate.lisp             GtkGestureRotate               GTK 4.6  +
-  gtk4.gesture-zoom.lisp               GtkGestureZoom                 GTK 4.6  +
-  gtk4.gesture-stylus.lisp             GtkGestureStylus               GTK 4.10 *
+  gtk4.gesture.lisp                    GtkGesture                     GTK 4.12 +
+  gtk4.gesture-single.lisp             GtkGestureSingle               GTK 4.12
+  gtk4.gesture-drag.lisp               GtkGestureDrag                 GTK 4.12
+  gtk4.gesture-long-press.lisp         GtkGestureLongPress            GTK 4.12
+  gtk4.gesture-click.lisp              GtkGestureClick                GTK 4.12
+  gtk4.gesture-pan.lisp                GtkGesturePan                  GTK 4.12
+  gtk4.gesture-swipe.lisp              GtkGestureSwipe                GTK 4.12
+  gtk4.gesture-rotate.lisp             GtkGestureRotate               GTK 4.12
+  gtk4.gesture-zoom.lisp               GtkGestureZoom                 GTK 4.12
+  gtk4.gesture-stylus.lisp             GtkGestureStylus               GTK 4.12 &
 
-  gtk4.pad-controller.lisp             GtkPadController               GTK 4.10 *
-  gtk4.shortcut-controller.lisp        GtkShortcutController          GTK 4.10 *
+  gtk4.pad-controller.lisp             GtkPadController               GTK 4.12
+  gtk4.shortcut-controller.lisp        GtkShortcutController          GTK 4.12
 
 Keyboard shortcuts
 
@@ -365,7 +365,7 @@ Deprecated
   gtk4.app-chooser-dialog.lisp         GtkAppChooserDialog            GTK 4.12
   gtk4.app-chooser-widget.lisp         GtkAppChooserWidget            GTK 4.12
 
-  gtk4.color-chooser.lisp              GtkColorChooser                GTK 4.6  +
+  gtk4.color-chooser.lisp              GtkColorChooser                GTK 4.12
   gtk4.color-button.lisp               GtkColorButton                 GTK 4.6  +
   gtk4.color-chooser-widget.lisp       GtkColorChooserWidget          GTK 4.6  +
   gtk4.color-chooser-dialog.lisp       GtkColorChooserDialog          GTK 4.6  +
