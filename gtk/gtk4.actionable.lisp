@@ -126,9 +126,9 @@
   @end{short}
   The @fun{gtk:actionable-action-name} function gets the action name for
   @arg{object}, or @code{nil} if none is set. The
-  @sym{(setf gtk:actionable-action-name)} function specifies the name of the
-  action with which this widget should be associated. If the @arg{name} argument
-  is @code{nil} then the widget will be unassociated from any previous action.
+  @setf{gtk:actionable-action-name} function specifies the name of the action
+  with which this widget should be associated. If the @arg{name} argument is
+  @code{nil} then the widget will be unassociated from any previous action.
   Usually this function is used when the widget is located, or will be located,
   within the hierarchy of a @class{gtk:application-window} widget.
 
@@ -174,9 +174,9 @@
     @class{gtk:actionable} inferface.
   @end{short}
   The @fun{gtk:actionable-action-target} function gets the current target value
-  of an actionable widget. The @sym{(setf gtk:actionable-action-target)}
-  function sets the target value. If the @arg{value} argument is a
-  @code{null-pointer} then the target value is unset.
+  of an actionable widget. The @setf{gtk:actionable-action-target} function sets
+  the target value. If the @arg{value} argument is a @code{null-pointer} then
+  the target value is unset.
 
   The target value has two purposes. First, it is used as the parameter to
   activation of the action associated with the @class{gtk:actionable} widget.

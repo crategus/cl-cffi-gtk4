@@ -2,7 +2,7 @@
 ;;; gtk4.orientable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -71,9 +71,8 @@
   @begin{short}
     An interface for flippable widgets.
   @end{short}
-
-  The @sym{gtk:orientable} interface is implemented by all widgets that can be
-  oriented horizontally or vertically. A @sym{gtk:orientable} widget is more
+  The @class{gtk:orientable} interface is implemented by all widgets that can be
+  oriented horizontally or vertically. A @class{gtk:orientable} widget is more
   flexible in that it allows the orientation to be changed at runtime, allowing
   the widget to \"flip\".
   @see-slot{gtk:orientable-orientation}
@@ -105,9 +104,9 @@
     Accessor of the @slot[gtk:orientable]{orientation} slot of the
     @class{gtk:orientable} interface.
   @end{short}
-  The @sym{gtk:orientable-orientation} function returns the orientation of the
-  orientable widget. The @sym{(setf gtk:orientable-orientation)} function sets
-  the orientation.
+  The @fun{gtk:orientable-orientation} function returns the orientation of the
+  orientable widget. The @setf{gtk:orientable-orientation} function sets the
+  orientation.
   @see-class{gtk:orientable}
   @see-symbol{gtk:orientation}")
 
