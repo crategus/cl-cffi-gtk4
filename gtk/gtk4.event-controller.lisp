@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -54,6 +54,7 @@
 ;;;     gtk_event_controller_get_current_event_device
 ;;;     gtk_event_controller_get_current_event_state
 ;;;     gtk_event_controller_get_current_event_time
+;;;     gtk_event_contoller_set_static_name                Since 4.8
 ;;;
 ;;; Properties
 ;;;
@@ -186,7 +187,7 @@
 (setf (documentation 'event-controller 'type)
  "@version{#2022-8-22}
   @begin{short}
-    The @sym{gtk:event-controller} class is the base class for event
+    The @class{gtk:event-controller} class is the base class for event
     controllers.
   @end{short}
   These are ancillary objects associated to widgets, which react to
@@ -209,7 +210,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- event-controller-name ----------------------------------------------
+;;; --- event-controller-name --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "name" 'event-controller) t)
@@ -230,12 +231,12 @@
     Accessor of the @slot[gtk:event-controller]{name} slot of the
     @class{gtk:event-controller} class.
   @end{short}
-  The @sym{gtk:event-controller-name} function gets the name of the event
-  controller. The @sym{(setf gtk:event-controller-name)} function sets a name.
-  The name can be used for debugging purposes.
+  The @fun{gtk:event-controller-name} function gets the name of the event
+  controller. The @setf{gtk:event-controller-name} function sets a name. The
+  name can be used for debugging purposes.
   @see-class{gtk:event-controller}")
 
-;;; --- event-controller-propagation-limit ---------------------------------
+;;; --- event-controller-propagation-limit -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "propagation-limit"
@@ -258,9 +259,9 @@
     Accessor of the @slot[gtk:event-controller]{propagation-limit} slot of the
     @class{gtk:event-controller} class.
   @end{short}
-  The @sym{gtk:event-controller-propagation-limit} function gets the propagation
+  The @fun{gtk:event-controller-propagation-limit} function gets the propagation
   limit of the event controller. The
-  @sym{(setf gtk:event-controller-propagation-limit)} function sets the event
+  @setf{gtk:event-controller-propagation-limit} function sets the event
   propagation limit.
 
   If the limit is set to @code{:same-native}, the controller will not handle
@@ -268,7 +269,7 @@
   @see-class{gtk:event-controller}
   @see-symbol{gtk:propagation-limit}")
 
-;;; --- event-controller-propagation-phase ---------------------------------
+;;; --- event-controller-propagation-phase -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "propagation-phase"
@@ -291,9 +292,9 @@
     Accessor of the @slot[gtk:event-controller]{propagation-phase} slot of the
     @class{gtk:event-controller} class.
   @end{short}
-  The @sym{gtk:event-controller-propagation-phase} function gets the
+  The @fun{gtk:event-controller-propagation-phase} function gets the
   propagation phase at which controller handles events. The
-  @sym{(setf gtk:event-controller-propagation-phase)} sets the propagation
+  @setf{gtk:event-controller-propagation-phase} function sets the propagation
   phase.
 
   If @arg{phase} is @code{:none}, no automatic event handling will be performed,
@@ -301,11 +302,10 @@
   @see-class{gtk:event-controller}
   @see-symbol{gtk:propagation-phase}")
 
-;;; --- event-controller-widget --------------------------------------------
+;;; --- event-controller-widget ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "widget"
-                                               'event-controller) t)
+(setf (documentation (liber:slot-documentation "widget" 'event-controller) t)
  "The @code{widget} property of type @class{gtk:widget} (Read) @br{}
   The widget receiving the @class{gdk:event} events that the controller will
   handle.")
@@ -323,7 +323,7 @@
     Accessor of the @slot[gtk:event-controller]{widget} slot of the
     @class{gtk:event-controller} class.
   @end{short}
-  The @sym{gtk:event-controller-widget} function returns the @class{gtk:widget}
+  The @fun{gtk:event-controller-widget} function returns the @class{gtk:widget}
   the event controller relates to.
   @see-class{gtk:event-controller}
   @see-class{gtk:widget}")
@@ -374,18 +374,18 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_event_controller_get_current_event_device"
-               event-controller-current-event-device) (g:object gdk-device)
+               event-controller-current-event-device) (g:object gdk:device)
  #+liber-documentation
  "@version{#2022-8-22}
   @argument[controller]{a @class{gtk:event-controller} object}
-  @return{The @class{gdk-device} object that is currently handled by
+  @return{The @class{gdk:device} object that is currently handled by
     @arg{controller}.}
   @begin{short}
     Returns the device of the event that is currently being handled by the
     controller, and @code{nil} otherwise.
   @end{short}
   @see-class{gtk:event-controller}
-  @see-class{gdk-device}"
+  @see-class{gdk:device}"
   (controller (g:object event-controller)))
 
 (export 'event-controller-current-event-device)
@@ -430,5 +430,13 @@
   (controller (g:object event-controller)))
 
 (export 'event-controller-current-event-time)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_event_controller_set_static_name
+;;;
+;;; Sets a name on the controller that can be used for debugging.
+;;;
+;;; Since 4.8
+;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.event-controller.lisp ---------------------------------

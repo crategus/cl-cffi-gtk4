@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-motion.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -68,7 +68,8 @@
 ;;; struct GtkEventControllerMotion
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEventControllerMotion" event-controller-motion
+(gobject:define-g-object-class "GtkEventControllerMotion" 
+                               event-controller-motion
   (:superclass event-controller
    :export t
    :interfaces nil
@@ -84,7 +85,7 @@
 (setf (documentation 'event-controller-motion 'type)
  "@version{#2022-8-23}
   @begin{short}
-    The @sym{gtk:event-controller-motion} object is an event controller
+    The @class{gtk:event-controller-motion} object is an event controller
     tracking the pointer position.
   @end{short}
   The event controller offers \"enter\" and \"leave\" signals, as well as
@@ -97,7 +98,7 @@ lambda (controller x y)    :run-first
       @end{pre}
       Signals that the pointer has entered the widget.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-motion} object which
+        @entry[controller]{The @class{gtk:event-controller-motion} object which
           received the signal.}
         @entry[x]{a double float with the x coordinate}
         @entry[y]{a double float with the y coordinate}
@@ -108,7 +109,7 @@ lambda (controller)    :run-first
       @end{pre}
       Signals that the pointer has left the widget.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-motion} object which
+        @entry[controller]{The @class{gtk:event-controller-motion} object which
           received the signal.}
       @end{table}
     @subheading{The \"motion\" signal}
@@ -117,7 +118,7 @@ lambda (controller x y)    :run-first
       @end{pre}
       Emitted when the pointer moves inside the widget.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-motion} object which
+        @entry[controller]{The @class{gtk:event-controller-motion} object which
           received the signal.}
         @entry[x]{a double float with the x coordinate}
         @entry[y]{a double float with the y coordinate}
@@ -152,7 +153,7 @@ lambda (controller x y)    :run-first
     Accessor of the @slot[gtk:event-controller-motion]{contains-pointer} slot
     of the @class{gtk:event-controller-motion} class.
   @end{short}
-  The @sym{gtk:event-controller-motion-contains-pointer} function returns
+  The @fun{gtk:event-controller-motion-contains-pointer} function returns
   @em{true} if the pointer is within the controllers widget or one of its
   children.
   @see-class{gtk:event-controller-motion}")
@@ -181,7 +182,7 @@ lambda (controller x y)    :run-first
     Accessor of the @slot[gtk:event-controller-motion]{is-pointer} slot of the
     @class{gtk:event-controller-motion} class.
   @end{short}
-  The @sym{gtk:event-controller-motion-is-pointer} function returns @em{true}
+  The @fun{gtk:event-controller-motion-is-pointer} function returns @em{true}
   if the pointer is within the controllers widget but not one of its children.
   @see-class{gtk:event-controller-motion}")
 

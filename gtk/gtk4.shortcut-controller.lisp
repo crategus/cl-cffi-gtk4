@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -111,8 +111,8 @@
 (setf (documentation 'shortcut-controller 'type)
  "@version{2023-7-23}
   @begin{short}
-    The @sym{gtk:shortcut-controller} class is an event controller that manages
-    shortcuts.
+    The @class{gtk:shortcut-controller} class is an event controller that
+    manages shortcuts.
   @end{short}
   Most common shortcuts are using this controller implicitly, e.g. by adding a
   mnemonic underline to a @class{gtk:label} widget, or by installing a key
@@ -121,13 +121,13 @@
   @fun{gtk:application-accels-for-action} function. But it is possible to
   create your own shortcut controller, and add shortcuts to it.
 
-  The @sym{gtk:shortcut-controller} class implements the @class{g:list-model}
+  The @class{gtk:shortcut-controller} class implements the @class{g:list-model}
   interface for querying the shortcuts that have been added to it.
 
   @subheading{GtkShortcutController as a GtkBuildable}
-  The @sym{gtk:shortcut-controller} object can be created in UI files to set up
+  The @class{gtk:shortcut-controller} object can be created in UI files to set up
   shortcuts in the same place as the widgets. An example of a UI definition
-  fragment with a @sym{gtk:shortcut-controller} object:
+  fragment with a @class{gtk:shortcut-controller} object:
   @begin{pre}
 <object class='GtkButton'>
   <child>
@@ -211,10 +211,10 @@
     Accessor of the @slot[gtk:shortcut-controller]{mnemonic-modifiers} slot of
     the @class{gtk:shortcut-controller} class.
   @end{short}
-  The @sym{gtk:shortcut-controller-mnemonic-modifiers} function gets the
+  The @fun{gtk:shortcut-controller-mnemonic-modifiers} function gets the
   mnemonics modifiers for when this controller activates its shortcuts. The
-  @sym{(setf gtk:shortcut-controller-mnemonic-modifiers)} function sets the
-  controller to have the given @arg{modifiers}.
+  @setf{gtk:shortcut-controller-mnemonic-modifiers} function sets the controller
+  to have the given @arg{modifiers}.
 
   The mnemonics modifiers determines which modifiers need to be pressed to
   allow activation of shortcuts with mnemonics triggers. GTK normally uses the
@@ -303,10 +303,9 @@
     Accessor of the @slot[gtk:shortcut-controller]{scope} slot of the
     @class{gtk:shortcut-controller} class.
   @end{short}
-  The @sym{gtk:shortcut-controller-scope} function gets the scope for when the
-  controller activates its shortcuts. The
-  @sym{(setf gtk:shortcut-controller-scope)} function sets the controller to
-  have the given @arg{scrope}.
+  The @fun{gtk:shortcut-controller-scope} function gets the scope for when the
+  controller activates its shortcuts. The @setf{gtk:shortcut-controller-scope}
+  function sets the controller to have the given @arg{scrope}.
 
   The scope allows shortcuts to be activated outside of the normal event
   propagation. In particular, it allows installing global keyboard shortcuts

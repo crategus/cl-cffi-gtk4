@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-legacy.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -67,7 +67,7 @@
 (setf (documentation 'event-controller-legacy 'type)
  "@version{#2022-8-23}
   @begin{short}
-    The @sym{gtk:event-controller-legacy} object is an event controller that
+    The @class{gtk:event-controller-legacy} object is an event controller that
     gives you direct access to the event stream.
   @end{short}
   It should only be used as a last resort if none of the other event controllers
@@ -79,7 +79,7 @@ lambda (controller event)    :run-last
       @end{pre}
       The signal is emitted for each GDK event delivered to @arg{controller}.
       @begin{table}
-        @entry[controller]{The @sym{gtk:event-controller-legacy} object which
+        @entry[controller]{The @class{gtk:event-controller-legacy} object which
           received the signal.}
         @entry[event]{The @class{gdk:event} event which triggered the signal.}
         @entry[Returns]{@em{True} to stop other handlers from being invoked for

@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-focus.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,7 +83,7 @@
 (setf (documentation 'event-controller-focus 'type)
  "@version{#2022-8-23}
   @begin{short}
-    The @sym{gtk:event-controller-focus} class is an event controller to keep
+    The @class{gtk:event-controller-focus} class is an event controller to keep
     track of keyboard focus.
   @end{short}
 
@@ -103,7 +103,7 @@ lambda (controller)    :run-last
       itself). If you are interested in these cases, you can monitor the
       @code{is-focus} property for changes.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-focus} object which
+        @entry[controller]{The @class{gtk:event-controller-focus} object which
           received the signal.}
       @end{table}
     @subheading{The \"leave\" signal}
@@ -117,7 +117,7 @@ lambda (controller)    :run-last
       widget to a descendent). If you are interested in these cases, you can
       monitor the @code{is-focus} property for changes.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-focus} object which
+        @entry[controller]{The @class{gtk:event-controller-focus} object which
           received the signal.}
       @end{table}
   @end{dictionary}
@@ -130,7 +130,7 @@ lambda (controller)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- event-controller-focus-contains-focus ------------------------------
+;;; --- event-controller-focus-contains-focus ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "contains-focus"
@@ -154,11 +154,11 @@ lambda (controller)    :run-last
     Accessor of the @slot[gtk:event-controller-focus]{contains-focus} slot of
     the @class{gtk:event-controller-focus} class.
   @end{short}
-  The @sym{gtk:event-controller-focus-contains-focus} function returns @em{true}
+  The @fun{gtk:event-controller-focus-contains-focus} function returns @em{true}
   if focus is within the controllers widget or one of its children.
   @see-class{gtk:event-controller-focus}")
 
-;;; --- event-controller-focus-is-focus ------------------------------------
+;;; --- event-controller-focus-is-focus ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "is-focus"
@@ -182,7 +182,7 @@ lambda (controller)    :run-last
     Accessor of the @slot[gtk:event-controller-focus]{is-focus} slot of the
     @class{gtk:event-controller-focus} class.
   @end{short}
-  The @sym{gtk:event-controller-focus-is-focus} function returns @em{true} if
+  The @fun{gtk:event-controller-focus-is-focus} function returns @em{true} if
   focus is within the controllers widget, but not one of its children.
   @see-class{gtk:event-controller-focus}")
 

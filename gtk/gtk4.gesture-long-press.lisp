@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-long-press.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -81,7 +81,7 @@
 (setf (documentation 'gesture-long-press 'type)
  "@version{#2020-9-11}
   @begin{short}
-    The @sym{gtk:gesture-long-press} object is a gesture for long presses.
+    The @class{gtk:gesture-long-press} object is a gesture for long presses.
   @end{short}
   This gesture is also known as \"Press and Hold\".
 
@@ -102,7 +102,7 @@ lambda (gesture)    :run-last
       The signal is emitted whenever a press moved too far, or was released
       before the \"pressed\" signal happened.
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-long-press} object which received
+        @entry[gesture]{The @class{gtk:gesture-long-press} object which received
           the signal.}
       @end{table}
     @subheading{The \"pressed\" signal}
@@ -112,7 +112,7 @@ lambda (gesture x y)    :run-last
       The signal is emitted whenever a press goes unmoved/unreleased longer
       than what the GTK defaults tell.
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-long-press} object which received
+        @entry[gesture]{The @class{gtk:gesture-long-press} object which received
           the signal.}
         @entry[x]{A double float with the x coordinate where the press happened,
           relative to the widget allocation.}
@@ -128,11 +128,11 @@ lambda (gesture x y)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- gesture-long-press-delay-factor ------------------------------------
+;;; --- gesture-long-press-delay-factor ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "delay-factor"
-                      'gesture-long-press) t)
+                                               'gesture-long-press) t)
  "The @code{delay-factor} property of type @code{:double} (Read / Write) @br{}
   Factor by which to modify the default timeout. @br{}
   Allowed values: [0.5d0, 2.0d0] @br{}

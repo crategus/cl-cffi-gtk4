@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-stylus.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,6 +35,11 @@
 ;;;
 ;;;     GtkGestureStylus
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_gesture_stylus_get_stylus_only                 Since 4.10
+;;;     gtk_gesture_stylus_set_stylus_only                 Since 4.10
+;;;
 ;;; Functions
 ;;;
 ;;;     gtk_gesture_stylus_new
@@ -42,8 +47,6 @@
 ;;;     gtk_gesture_stylus_get_axes
 ;;;     gtk_gesture_stylus_get_backlog
 ;;;     gtk_gesture_stylus_get_device_tool
-;;;     gtk_gesture_stylus_get_stylus_only
-;;;     gtk_gesture_stylus_set_stylus_only
 ;;;
 ;;; Properties
 ;;;
@@ -85,7 +88,7 @@
 (setf (documentation 'gesture-stylus 'type)
  "@version{#2020-9-11}
   @begin{short}
-    The @sym{gtk:gesture-stylus} class is a @class{gtk:gesture} implementation
+    The @class{gtk:gesture-stylus} class is a @class{gtk:gesture} implementation
     specific to stylus input.
   @end{short}
   The provided signals just provide the basic information of the stylus events.
@@ -95,8 +98,8 @@
 lambda (gesture x y)    :run-last
       @end{pre}
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-stylus} object on which the signal
-          is emitted.}
+        @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
+          signal is emitted.}
         @entry[x]{A double float with the x coordinate of the stylus event.}
         @entry[y]{A double float with the y coordinate of the stylus event.}
       @end{table}
@@ -105,8 +108,8 @@ lambda (gesture x y)    :run-last
 lambda (gesture x y)    :run-last
       @end{pre}
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-stylus} object on which the signal
-          is emitted.}
+        @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
+          signal is emitted.}
         @entry[x]{A double float with the x coordinate of the stylus event.}
         @entry[y]{A double float with the y coordinate of the stylus event.}
       @end{table}
@@ -115,8 +118,8 @@ lambda (gesture x y)    :run-last
 lambda (gesture x y)    :run-last
       @end{pre}
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-stylus} object on which the signal
-          is emitted.}
+        @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
+          signal is emitted.}
         @entry[x]{A double float with the x coordinate of the stylus event.}
         @entry[y]{A double float with the y coordinate of the stylus event.}
       @end{table}
@@ -125,8 +128,8 @@ lambda (gesture x y)    :run-last
 lambda (gesture x y)    :run-last
       @end{pre}
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-stylus} object on which the signal
-          is emitted.}
+        @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
+          signal is emitted.}
         @entry[x]{A double float with the x coordinate of the stylus event.}
         @entry[y]{A double float with the y coordinate of the stylus event.}
       @end{table}
@@ -142,31 +145,7 @@ lambda (gesture x y)    :run-last
 
 ;;; --- gesture-stylus-stylus-only ---------------------------------------------
 
-#|
-GestureStylus
-:stylus-only
-since: 4.10
-
-Declaration
-property stylus-only: gboolean [ read, write, construct ]
-
-Description
-
-
-Type:	gboolean
-Available since:	4.10
-Default value	TRUE
-Getter method	gtk_gesture_stylus_get_stylus_only()
-Setter method	gtk_gesture_stylus_set_stylus_only()
-
-Flags
-Readable	yes
-Writable	yes
-Construct	yes
-Construct only	no
-|#
-
-#+liber-documentation
+#+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "stylus-only" 'gesture-stylus) t)
  "The @code{stylus-only} property of type @code{:boolean}
   (Read / Write / Construct) @br{}
@@ -174,7 +153,7 @@ Construct only	no
   @br{}
   Default value: @em{true}")
 
-#+liber-documentation
+#+(and gtk-4-10 liber-documentation)
 (setf (liber:alias-for-function 'gesture-stylus-stylus-only)
       "Accessor"
       (documentation 'gesture-stylus-stylus-only 'function)
@@ -188,10 +167,10 @@ Construct only	no
     Accessor of the @slot[gtk:gesture-stylus]{stylus-only} slot of the
     @class{gtk:gesture-stylus} class.
   @end{short}
-  The @sym{gtk:gesture-stylus-stylus-only} function checks whether the gesture
+  The @fun{gtk:gesture-stylus-stylus-only} function checks whether the gesture
   handle events from stylus input devices, otherwise it will handle events from
-  any pointing device. The @sym{(setf gtk:gesture-stylus-stylus-only)} function
-  sets the state of the property.
+  any pointing device. The @setf{gtk:gesture-stylus-stylus-only} function sets
+  the state of the property.
 
   Since 4.10
   @see-class{gtk:gesture-stylus}")
@@ -300,18 +279,18 @@ Construct only	no
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_stylus_get_device_tool" gesture-stylus-device-tool)
-    (g:object gdk-device-tool)
+    (g:object gdk:device-tool)
  #+liber-documentation
  "@version{#2022-8-3}
   @argument[gesture]{a @class{gtk:gesture-stylus} object}
-  @return{The current @class{gdk-device-tool} object.}
+  @return{The current @class{gdk:device-tool} object.}
   @begin{short}
     Returns the device tool currently driving input through this gesture.
   @end{short}
   This function must be called from either the \"down\", \"motion\", \"up\" or
   \"proximity\" signal handlers.
   @see-class{gtk:gesture-stylus}
-  @see-class{gdk-device-tool}"
+  @see-class{gdk:device-tool}"
   (gesture (g:object gesture-stylus)))
 
 (export 'gesture-stylus-device-tool)

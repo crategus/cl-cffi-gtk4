@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-key.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -74,7 +74,7 @@
 (setf (documentation 'event-controller-key 'type)
  "@version{#2022-8-23}
   @begin{short}
-    The @sym{gtk:event-controller-key} object is an event controller meant for
+    The @class{gtk:event-controller-key} object is an event controller meant for
     situations where you need access to key events.
   @end{short}
   @begin[Signal Details]{dictionary}
@@ -87,7 +87,7 @@ lambda (controller)    :run-last
       @fun{gtk:event-controller-key-im-context} and
       @fun{gtk:im-context-filter-keypress} functions.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-key} object which
+        @entry[controller]{The @class{gtk:event-controller-key} object which
           received the signal.}
       @end{table}
     @subheading{The \"key-pressed\" signal}
@@ -96,7 +96,7 @@ lambda (controller keyval keycode state)    :run-last
       @end{pre}
       The signal is emitted whenever a key is pressed.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-key} object which
+        @entry[controller]{The @class{gtk:event-controller-key} object which
           received the signal.}
         @entry[keyval]{An unsigned integer with the pressed key.}
         @entry[keycode]{An unsigned integer with the raw code of the pressed
@@ -112,7 +112,7 @@ lambda (controller keyval keycode state)    :run-last
       @end{pre}
       The signal is emitted whenever a key is released.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-key} object which
+        @entry[controller]{The @class{gtk:event-controller-key} object which
           received the signal.}
         @entry[keyval]{An unsigned integer with the released key.}
         @entry[keycode]{An unsigned integer with the raw code of the released
@@ -127,7 +127,7 @@ lambda (controller state)    :run-last
       This signal is emitted whenever the state of modifier keys and pointer
       buttons change.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-key} object on
+        @entry[controller]{The @class{gtk:event-controller-key} object on
           which received the signal.}
         @entry[state]{The @symbol{gdk:modifier-type} bitmask, representing the
           state of modifier keys and pointer buttons.}
@@ -177,10 +177,9 @@ lambda (controller state)    :run-last
   @begin{short}
     Accessor of the input method context of the key controller.
   @end{short}
-  The @sym{gtk:event-controller-key-im-context} function gets the input method
-  context of the key controller. The
-  @sym{(setf gtk:event-controller-key-im-context)} function sets the input
-  method context.
+  The @fun{gtk:event-controller-key-im-context} function gets the input method
+  context of the key controller. The @setf{gtk:event-controller-key-im-context}
+  function sets the input method context.
   @see-class{gtk:event-controller-key}
   @see-class{gtk:im-context}"
   (controller (g:object event-controller-key)))

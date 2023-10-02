@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-click.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -72,7 +72,7 @@
 (setf (documentation 'gesture-click 'type)
  "@version{#2022-8-23}
   @begin{short}
-    The @sym{gtk:gesture-click} object is a @class{gtk:gesture} implementation
+    The @class{gtk:gesture-click} object is a @class{gtk:gesture} implementation
     for clicks.
   @end{short}
   It is able to recognize multiple clicks on a nearby zone, which can be
@@ -86,7 +86,7 @@ lambda (gesture n x y)    :run-last
       @end{pre}
       The signal is emitted whenever a button or touch press happens.
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-click} object which received the
+        @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
         @entry[n]{An integer with how many touch/button press happened with
           this one.}
@@ -104,7 +104,7 @@ lambda (gesture n x y)    :run-last
       note that the \"stopped\" signal may have been emitted between the press
       and its release, @arg{n} will only start over at the next press.
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-click} object which received the
+        @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
         @entry[n]{An integer with the number of presses that is paired with
           this release.}
@@ -120,7 +120,7 @@ lambda (gesture)    :run-last
       The signal is emitted whenever any time/distance threshold has been
       exceeded.
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-click} object which received the
+        @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
       @end{table}
     @subheading{The \"unpaired-release\" signal}
@@ -132,7 +132,7 @@ lambda (gesture x y button sequence)    :run-last
       happen on situations where input is grabbed elsewhere mid-press or the
       pressed widget voluntarily relinquishes its implicit grab.
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-click} object which received the
+        @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
         @entry[x]{A double float with the X coordinate of the event.}
         @entry[y]{A double float with the Y coordinate of the event.}

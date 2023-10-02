@@ -2,7 +2,7 @@
 ;;; gtk4.event-controller-scroll.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -129,16 +129,14 @@
 (setf (documentation 'event-controller-scroll 'type)
  "@version{#2022-8-23}
   @begin{short}
-    The @sym{gtk:event-controller-scroll} object is an event controller is an
+    The @class{gtk:event-controller-scroll} object is an event controller is an
     event controller that handles scroll events.
   @end{short}
   It is capable of handling both discrete and continuous scroll events,
   abstracting them both with the \"scroll\" signal. Deltas in the discrete case
-  are multiples of 1.
-
-  In the case of continuous scroll events, the @sym{gtk:event-controller-scroll}
-  object encloses all \"scroll\" events between two \"scroll-begin\" and
-  \"scroll-end\" signals.
+  are multiples of 1. In the case of continuous scroll events, the 
+  @class{gtk:event-controller-scroll} object encloses all \"scroll\" events 
+  between two \"scroll-begin\" and \"scroll-end\" signals.
 
   The behavior of the event controller can be modified by the flags given at
   creation time, or modified at a later point through the
@@ -161,17 +159,17 @@
   @begin[Signal Details]{dictionary}
     @subheading{The \"decelerate\" signal}
       @begin{pre}
-lambda (controller vel-x vel-y)    :run-first
+lambda (controller xvel yvel)    :run-first
       @end{pre}
       Emitted after scroll is finished if the @code{:kinetic} flag is set.
-      @code{vel-x} and @code{vel-y} express the initial velocity that was
-      imprinted by the scroll events. @code{vel-x} and @code{vel-y} are
+      @code{xvel} and @code{yvel} express the initial velocity that was
+      imprinted by the scroll events. @code{xvel} and @code{yvel} are
       expressed in pixels/ms.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-scroll} object which
+        @entry[controller]{The @class{gtk:event-controller-scroll} object which
           received the signal.}
-        @entry[vel-x]{a double float with the x velocity}
-        @entry[vel-y]{a double float with the y velocity}
+        @entry[xvel]{a double float with the x velocity}
+        @entry[yvel]{a double float with the y velocity}
       @end{table}
     @subheading{The \"scroll\" signal}
       @begin{pre}
@@ -180,7 +178,7 @@ lambda (controller dx dy)    :run-first
       Signals that the widget should scroll by the amount specified by
       @code{dx} and @code{dy}.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-scroll} object which
+        @entry[controller]{The @class{gtk:event-controller-scroll} object which
           received the signal.}
         @entry[dx]{a double float with the x delta}
         @entry[dy]{a double float with the y delta}
@@ -192,7 +190,7 @@ lambda (controller)    :run-first
       Signals that a new scrolling operation has begun. It will only be emitted
       on devices capable of it.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-scroll} object which
+        @entry[controller]{The @class{gtk:event-controller-scroll} object which
           received the signal.}
       @end{table}
     @subheading{The \"scroll-end\" signal}
@@ -202,7 +200,7 @@ lambda (controller)    :run-first
       Signals that a new scrolling operation has finished. It will only be
       emitted on devices capable of it.
       @begin[code]{table}
-        @entry[controller]{The @sym{gtk:event-controller-scroll} object which
+        @entry[controller]{The @class{gtk:event-controller-scroll} object which
           received the signal.}
       @end{table}
   @end{dictionary}
@@ -214,7 +212,7 @@ lambda (controller)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- event-controller-scroll-flags --------------------------------------
+;;; --- event-controller-scroll-flags ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "flags"
@@ -236,9 +234,9 @@ lambda (controller)    :run-first
     Accessor of the @slot[gtk:event-controller-scroll]{flags} slot of the
     @class{gtk:event-controller-scroll} class.
   @end{short}
-  The @sym{gtk:event-controller-scroll-flags} function gets the flags
+  The @fun{gtk:event-controller-scroll-flags} function gets the flags
   conditioning the scroll controller behavior. The
-  @sym{(setf gtk:event-controller-scroll-flags)} function sets the flags.
+  @setf{gtk:event-controller-scroll-flags} function sets the flags.
   @see-class{gtk:event-controller-scroll}
   @see-symbol{gtk:event-controller-scroll-flags}")
 
@@ -284,5 +282,11 @@ lambda (controller)    :run-first
 ;;; Returns :
 ;;;     The scroll unit.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_event_controller_scroll_get_unit"
+                event-controller-scroll-unit) gdk:scroll-unit
+  (scroll (g:object event-controller-scroll)))
+
+(export 'event-controller-scroll-unit)
 
 ;;; --- End of file gtk4.event-controller-scroll.lisp --------------------------

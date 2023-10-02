@@ -2,7 +2,7 @@
 ;;; gtk4.separator.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -74,20 +74,22 @@
 (setf (documentation 'separator 'type)
  "@version{#2022-9-9}
   @begin{short}
-    The @sym{gtk:separator} widget is a horizontal or vertical separator widget.
+    The @class{gtk:separator} widget is a horizontal or vertical separator
+    widget.
   @end{short}
 
   @image[separator]{Figure: GtkSeparator}
 
-  A @sym{gtk:separator} widget can be used to group the widgets within a window.
-  It displays a line with a shadow to make it appear sunken into the interface.
+  A @class{gtk:separator} widget can be used to group the widgets within a
+  window. It displays a line with a shadow to make it appear sunken into the
+  interface.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:separator} implementation has a single CSS node with name
+    The @class{gtk:separator} implementation has a single CSS node with name
     @code{separator}. The node gets one of the @code{.horizontal} or
     @code{.vertical} style classes.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:separator} implementation uses the @code{:separator} role of
+    The @class{gtk:separator} implementation uses the @code{:separator} role of
     the @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
   @see-class{gtk:orientable}")

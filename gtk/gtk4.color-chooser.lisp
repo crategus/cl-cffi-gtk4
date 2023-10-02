@@ -2,7 +2,7 @@
 ;;; gtk4.color-chooser.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -86,14 +86,20 @@
       (documentation 'color-chooser 'type)
  "@version{#2022-8-27}
   @begin{short}
-    The @sym{gtk:color-chooser} interface is an interface that is implemented
+    The @class{gtk:color-chooser} interface is an interface that is implemented
     by widgets for choosing colors.
   @end{short}
   Depending on the situation, colors may be allowed to have alpha
   (translucency).
 
-  The main widgets that implement this interface are @class{gtk:color-button},
-  @class{gtk:color-chooser-widget}, and @class{gtk:color-chooser-dialog}.
+  The main widgets that implement this interface are the
+  @class{gtk:color-button}, @class{gtk:color-chooser-widget}, and
+  @class{gtk:color-chooser-dialog} widgets.
+  @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser} implementation is deprecated since 4.10.
+    Use the @class{gtk:color-dialog} and @class{gtk:color-dialog-button} widgets
+    instead.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"color-activated\" signal}
       @begin{pre}
@@ -104,7 +110,7 @@ lambda (chooser color)    :run-first
       the user presses one of the @kbd{Space}, @kbd{Shift+Space}, @kbd{Return}
       or @kbd{Enter} keys.
       @begin[code]{table}
-        @entry[chooser]{The @sym{gtk:color-chooser} widget which received
+        @entry[chooser]{The @class{gtk:color-chooser} widget which received
           the signal.}
         @entry[color]{The @struct{gdk:rgba} color.}
       @end{table}
@@ -141,8 +147,12 @@ lambda (chooser color)    :run-first
     Accessor of the @slot[gtk:color-chooser]{rgba} slot of the
     @class{gtk:color-chooser} class.
   @end{short}
-  The @sym{gtk:color-chooser-rgba} function gets the currently selected color.
-  The @sym{(setf gtk:color-chooser-rgba)} function sets the color.
+  The @class{gtk:color-chooser-rgba} function gets the currently selected color.
+  The @setf{gtk:color-chooser-rgba} function sets the color.
+  @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser} implementation is deprecated since 4.10.
+    Use the @class{gtk:color-dialog} widget instead.
+  @end{dictionary}
   @see-struct{gdk:rgba}
   @see-class{gtk:color-chooser}")
 
@@ -172,9 +182,13 @@ lambda (chooser color)    :run-first
     Accessor of the @slot[gtk:color-chooser]{use-alpha} slot of the
     @class{gtk:color-chooser} class.
   @end{short}
-  The @sym{gtk:color-chooser-use-alpha} function returns whether the color
-  chooser shows the alpha channel. The @sym{(setf gtk:color-chooser-use-alpha)}
+  The @fun{gtk:color-chooser-use-alpha} function returns whether the color
+  chooser shows the alpha channel. The @setf{gtk:color-chooser-use-alpha}
   function sets the property.
+  @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser} implementation is deprecated since 4.10.
+    Use the @class{gtk:color-dialog} widget instead.
+  @end{dictionary}
   @see-class{gtk:color-chooser}")
 
 ;;; ----------------------------------------------------------------------------
@@ -189,9 +203,9 @@ lambda (chooser color)    :run-first
   (colors :pointer))
 
 (defun color-chooser-add-palette (chooser
-                                      orientation
-                                      colors-per-line
-                                      colors)
+                                  orientation
+                                  colors-per-line
+                                  colors)
  #+liber-documentation
  "@version{#2022-8-27}
   @argument[chooser]{a @class{gtk:color-chooser} widget}
@@ -214,21 +228,25 @@ lambda (chooser color)    :run-first
   Calling this function for the first time has the side effect of removing the
   default color and gray palettes from the color chooser. If @arg{colors} is
   @code{nil}, removes all previously added palettes.
+  @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser} implementation is deprecated since 4.10.
+    Use the @class{gtk:color-dialog} widget instead.
+  @end{dictionary}
   @see-struct{gdk:rgba}
   @see-class{gtk:color-chooser}
   @see-symbol{gtk:orientation}"
   (if colors
       (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba colors)
         (%color-chooser-add-palette chooser
-                                        orientation
-                                        colors-per-line
-                                        n-colors
-                                        colors-ptr))
+                                    orientation
+                                    colors-per-line
+                                    n-colors
+                                    colors-ptr))
       (%color-chooser-add-palette chooser
-                                      orientation
-                                      colors-per-line
-                                      0
-                                      (cffi:null-pointer))))
+                                  orientation
+                                  colors-per-line
+                                  0
+                                  (cffi:null-pointer))))
 
 (export 'color-chooser-add-palette)
 

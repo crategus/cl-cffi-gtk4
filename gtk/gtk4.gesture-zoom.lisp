@@ -2,7 +2,7 @@
 ;;; gtk4.gesture-zoom.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -69,7 +69,7 @@
 (setf (documentation 'gesture-zoom 'type)
  "@version{#2020-9-11}
   @begin{short}
-    The @sym{gtk:gesture-zoom} class is a @class{gtk:gesture} implementation
+    The @class{gtk:gesture-zoom} class is a @class{gtk:gesture} implementation
     for 2-finger pinch/zoom gestures.
   @end{short}
   Whenever the distance between both tracked sequences changes, the
@@ -82,7 +82,7 @@ lambda (gesture scale)    :run-first
       The signal is emitted whenever the distance between both tracked sequences
       changes.
       @begin[code]{table}
-        @entry[gesture]{The @sym{gtk:gesture-zoom} object on which the signal
+        @entry[gesture]{The @class{gtk:gesture-zoom} object on which the signal
           is emitted.}
         @entry[scale]{A double float with the scale delta, taking the initial
           state as 1:1.}

@@ -2,7 +2,7 @@
 ;;; gtk4.printer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -161,29 +161,30 @@
 (setf (documentation 'printer 'type)
  "@version{#2021-12-25}
   @begin{short}
-    A @sym{gtk:printer} object represents a printer.
+    The @class{gtk:printer} object represents a printer.
   @end{short}
   You only need to deal directly with printers if you use the non-portable
   @class{gtk:print-unix-dialog} API.
 
-  A @sym{gtk:printer} object allows to get status information about the printer,
-  such as its description, its location, the number of queued jobs, etc. Most
-  importantly, a @sym{gtk:printer} object can be used to create a
+  A @class{gtk:printer} object allows to get status information about the
+  printer, such as its description, its location, the number of queued jobs,
+  etc. Most importantly, a @class{gtk:printer} object can be used to create a
   @class{gtk:print-job} object, which lets you print to the printer.
   @begin[Signal Details]{dictionary}
     @subheading{The \"details-acquired\" signal}
       @begin{pre}
- lambda (printer success)    :run-last
+lambda (printer success)    :run-last
       @end{pre}
       Gets emitted in response to a request for detailed information about a
       printer from the print backend. The success parameter indicates if the
       information was actually obtained.
       @begin[code]{table}
-        @entry[printer]{The @sym{gtk:printer} object on which the signal is
+        @entry[printer]{The @class{gtk:printer} object on which the signal is
           emitted.}
         @entry[success]{@em{True} if the details were successfully acquired.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:printer-new}
   @see-slot{gtk:printer-accepting-jobs}
   @see-slot{gtk:printer-accepts-pdf}
   @see-slot{gtk:printer-accepts-ps}
@@ -203,7 +204,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- printer-accepting-jobs ---------------------------------------------
+;;; --- printer-accepting-jobs -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accepting-jobs" 'printer) t)
@@ -226,7 +227,7 @@
   @see-class{gtk:printer}
   @see-function{gtk:printer-is-accepting-jobs}")
 
-;;; --- printer-accepts-pdf ------------------------------------------------
+;;; --- printer-accepts-pdf ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accepts-pdf" 'printer) t)
@@ -250,7 +251,7 @@
   Returns whether the printer accepts input in PDF format.
   @see-class{gtk:printer}")
 
-;;; --- printer-accepts-ps -------------------------------------------------
+;;; --- printer-accepts-ps -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accepts-ps" 'printer) t)
@@ -299,7 +300,7 @@
   @see-class{gtk:printer}
   @see-class{gtk:print-backend}")
 
-;;; --- printer-icon-name --------------------------------------------------
+;;; --- printer-icon-name ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-name" 'printer) t)
@@ -322,7 +323,7 @@
   Gets the name of the icon to use for the printer.
   @see-class{gtk:printer}")
 
-;;; --- printer-is-virtual -------------------------------------------------
+;;; --- printer-is-virtual -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "is-virtual" 'printer) t)
@@ -347,7 +348,7 @@
   printer hardware, but something like a CUPS class.
   @see-class{gtk:printer}")
 
-;;; --- printer-job-count --------------------------------------------------
+;;; --- printer-job-count ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "job-count" 'printer) t)
@@ -371,7 +372,7 @@
   Gets the number of jobs currently queued on the printer.
   @see-class{gtk:printer}")
 
-;;; --- printer-location ---------------------------------------------------
+;;; --- printer-location -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "location" 'printer) t)
@@ -394,7 +395,7 @@
   Returns a description of the location of the printer.
   @see-class{gtk:printer}")
 
-;;; --- printer-name -------------------------------------------------------
+;;; --- printer-name -----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "name" 'printer) t)
@@ -418,7 +419,7 @@
   Returns the name of the printer.
   @see-class{gtk:printer}")
 
-;;; --- printer-paused -----------------------------------------------------
+;;; --- printer-paused ---------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "paused" 'printer) t)
@@ -442,7 +443,7 @@
   @see-class{gtk:printer}
   @see-function{gtk:printer-is-paused}")
 
-;;; --- printer-state-message ----------------------------------------------
+;;; --- printer-state-message --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "state-message" 'printer) t)

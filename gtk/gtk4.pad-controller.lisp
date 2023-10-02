@@ -2,7 +2,7 @@
 ;;; gtk4.pad-controller.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -156,7 +156,7 @@
 (setf (documentation 'pad-controller 'type)
  "@version{2023-3-11}
   @begin{short}
-    The @sym{gtk:pad-controller} object is an event controller for the pads
+    The @class{gtk:pad-controller} object is an event controller for the pads
     found in drawing tablets.
   @end{short}
   Pads are the collection of buttons and tactile sensors often found around the
@@ -181,8 +181,8 @@
   @class{g:action-group} object and activated whenever the specified input
   element and mode are triggered.
 
-  A simple example of @sym{gtk:pad-controller} usage, assigning button 1 in all
-  modes and pad devices to an \"invert-selection\" action:
+  A simple example of @class{gtk:pad-controller} usage, assigning button 1 in
+  all modes and pad devices to an \"invert-selection\" action:
   @begin{pre}
 GtkPadActionEntry *pad_actions = {
   { GTK_PAD_ACTION_BUTTON, 1, -1, \"Invert selection\", \"pad-actions.invert-selection\" @},

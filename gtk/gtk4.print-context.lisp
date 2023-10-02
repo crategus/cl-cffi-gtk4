@@ -2,7 +2,7 @@
 ;;; gtk4.print-context.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -72,18 +72,18 @@
 (setf (documentation 'print-context 'type)
  "@version{#2020-4-9}
   @begin{short}
-    A @sym{gtk:print-context} encapsulates context information that is required
-    when drawing pages for printing, such as the Cairo context and important
-    parameters like page size and resolution.
+    A @class{gtk:print-context} encapsulates context information that is
+    required when drawing pages for printing, such as the Cairo context and
+    important parameters like page size and resolution.
   @end{short}
   It also lets you easily create @class{pango:layout} and @class{pango:context}
   objects that match the font metrics of the cairo surface.
 
-  @sym{gtk:print-context} objects gets passed to the \"begin-print\",
+  The @class{gtk:print-context} object gets passed to the \"begin-print\",
   \"end-print\", \"request-page-setup\" and \"draw-page\" signals on the print
   operation.
   @begin[Example]{dictionary}
-    Using @sym{gtk:print-context} in a \"draw-page\" callback.
+    Using @class{gtk:print-context} in a \"draw-page\" callback.
     @begin{pre}
 (defun draw-page (operation context page-nr)
   (declare (ignore operation page-nr))
