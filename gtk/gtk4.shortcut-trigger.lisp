@@ -174,7 +174,7 @@
  "@version{#2022-8-26}
   @syntax[]{(gtk:keyval-trigger-modifiers object) => modifiers)}
   @argument[object]{a @class{gtk:keyval-trigger} object}
-  @argument[modifiers]{a @symbol{gdk-modifiers-type} value}
+  @argument[modifiers]{a @symbol{gdk:modifiers-type} value}
   @begin{short}
     Accessor of the @slot[gtk:keyval-trigger]{modifiers} slot of the
     @class{gtk:keyval-trigger} class.

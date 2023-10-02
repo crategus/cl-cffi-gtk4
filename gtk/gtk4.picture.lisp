@@ -489,7 +489,7 @@
   This is a utility function that calls the @fun{gtk:picture-new-for-paintable}
   function. See that function for details. The pixbuf must not be modified
   after passing it to this function.
-  @begin{dictionary}
+  @begin[Warning]{dictionary}
     This function is deprecated since 4.12. Use the
     @fun{gtk:picture-new-for-paintable} and @fun{gdk:texture-new-for-pixbuf}
     functions instead.

@@ -1018,22 +1018,20 @@
 ;;; --- settings-gtk-error-bell ------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "gtk-error-bell"
-                                               'settings) t)
+(setf (documentation (liber:slot-documentation "gtk-error-bell" 'settings) t)
  "The @code{gtk-error-bell} property of type @code{:boolean} (Read / Write)
   @br{}
   When @em{true}, keyboard navigation and other input-related errors will cause
-  a beep. Since the error bell is implemented using the function
-  @fun{gdk-window-beep}, the windowing system may offer ways to configure the
-  error bell in many ways, such as flashing the window or similar visual
-  effects. @br{}
+  a beep. Since the error bell is implemented using the @fun{gdk:surface-beep}
+  function, the windowing system may offer ways to configure the error bell in 
+  many ways, such as flashing the window or similar visual effects. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'settings-gtk-error-bell)
       "Accessor"
       (documentation 'settings-gtk-error-bell 'function)
- "@version{2023-8-30}
+ "@version{2023-10-2}
   @syntax[]{(gtk:settings-gtk-error-bell object) => setting}
   @syntax[]{(setf (gtk:settings-gtk-error-bell object) setting)}
   @argument[object]{a @class{gtk:settings} object}
@@ -1043,12 +1041,11 @@
     @class{gtk:settings} class.
   @end{short}
   When @em{true}, keyboard navigation and other input-related errors will cause
-  a beep. Since the error bell is implemented using the function
-  @fun{gdk-window-beep}, the windowing system may offer ways to configure the
-  error bell in many ways, such as flashing the window or similar visual
-  effects.
+  a beep. Since the error bell is implemented using the @fun{gdk:surface-beep}
+  function, the windowing system may offer ways to configure the error bell in 
+  many ways, such as flashing the window or similar visual effects.
   @see-class{gtk:settings}
-  @see-function{gdk-window-beep}")
+  @see-function{gdk:surface-beep}")
 
 ;;; --- settings-gtk-font-name -------------------------------------------------
 

@@ -2193,7 +2193,7 @@ lambda (entry pos)    :run-last
   @argument[entry]{a @class{gtk:entry} widget}
   @argument[pos]{an icon position of type @symbol{gtk:entry-icon-position}}
   @argument[provider]{a @class{gdk:content-provider} object}
-  @argument[actions]{a @symbol{gdk-drag-action} bitmask of the allowed drag
+  @argument[actions]{a @symbol{gdk:drag-action} bitmask of the allowed drag
     actions}
   @begin{short}
     Sets up the icon at the given position so that GTK will start a drag
