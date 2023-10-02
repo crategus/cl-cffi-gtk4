@@ -48,6 +48,7 @@
 ;;;     GdkTouchpadGesturePhase
 ;;;     GdkScrollDirection
 ;;;     GdkCrossingMode
+;;;     GDKScrollUnit                                      Since 4.8
 ;;;     GdkNotifyType
 ;;;
 ;;;     GdkEventSequence
@@ -294,7 +295,7 @@
       "GEnum"
       (liber:symbol-documentation 'event-type)
  "@version{#2021-12-13}
-  @short{Specifies the type of a @class{gdk-event} instance.}
+  @short{Specifies the type of a @class{gdk:event} instance.}
   @begin{pre}
 (gobject:define-g-enum \"GdkEventType\" event-type
   (:export t
@@ -531,7 +532,7 @@
     @entry[:left]{The window is scrolled to the left.}
     @entry[:right]{The window is scrolled to the right.}
     @entry[:smooth]{The scrolling is determined by the delta values in the
-      @class{gdk-event-scroll} event. See the @fun{gdk:event-scroll-deltas}
+      @class{gdk:event-scroll} event. See the @fun{gdk:event-scroll-deltas}
       function.}
   @end{table}
   @see-class{gdk:event-scroll}
@@ -591,6 +592,54 @@
       synthetic as the pointer did not leave the window.}
   @end{table}
   @see-class{gdk:crossing-event}")
+
+;;; ----------------------------------------------------------------------------
+;;; enum GdkScrollUnit
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-8
+(gobject:define-g-enum "GdkScrollUnit" scroll-unit
+  (:export t
+   :type-initializer "gdk_scroll_unit_get_type")
+  :wheel
+  :surface)
+
+#+(and gtk-4-8 liber-documentation)
+(setf (liber:alias-for-symbol 'scroll-unit)
+      "GEnum"
+      (liber:symbol-documentation 'scroll-unit)
+ "@version{#2023-10-2}
+  @begin{short}
+    Specifies the unit of scroll deltas.
+  @end{short}
+  When you get the @code{:wheel} value, a delta of 1.0 means 1 wheel detent 
+  click in the south direction, 2.0 means 2 wheel detent clicks in the south 
+  direction. This is the same logic for negative values but in the north 
+  direction.
+
+  If you get the @code{:surface} value, are managing a scrollable view and get 
+  a value of 123, you have to scroll 123 surface logical pixels right if it is 
+  @code{delta_x} or down if it is @code{delta_y}. This is the same logic for 
+  negative values but you have to scroll left instead of right if it is 
+  @code{delta_x} and up instead of down if it is @code{delta_y}.
+
+  1 surface logical pixel is equal to 1 real screen pixel multiplied by the 
+  final scale factor of your graphical interface, the product of the desktop 
+  scale factor and eventually a custom scale factor in your application.
+  @begin{pre}
+(gobject:define-g-enum \"GdkScrollUnit\" scroll-unit
+  (:export t
+   :type-initializer \"gdk_scroll_unit_get_type\")
+  :wheel
+  :surface)
+  @end{pre}
+  @begin[code]{table}
+    @entry[:wheel]{The delta is in number of wheel clicks.}
+    @entry[:surface]{The delta is in surface pixels to scroll directly on 
+      screen.}
+  @end{table}
+  Since 4.8
+  @see-function{gtk:event-controller-scroll-unit}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GdkNotifyType
