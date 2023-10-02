@@ -152,7 +152,7 @@ Numeric and Text Data Entry
   gtk4.spin-button.lisp                GtkSpinButton                  GTK 4.12
   gtk4.search-entry.lisp               GtkSearchEntry                 GTK 4.12
   gtk4.search-bar.lisp                 GtkSearchBar                   GTK 4.12
-  gtk4.editable-label.lisp             GtkEditableLabel               GTK 4.10 *
+  gtk4.editable-label.lisp             GtkEditableLabel               GTK 4.12
 
 Multiline Text Editor
 
@@ -171,9 +171,9 @@ Combo Box, Popover
 
 Selector Widgets and Dialogs
 
-  gtk4.color-dialog.lisp               GtkColorDialog                 GTK 4.10 *
-  gtk4.color-dialog-button.lisp        GtkColorDialogButton           GTK 4.10 *
-  gtk4.file-dialog.lisp                GtkFileDialog                  GTK 4.10 *
+  gtk4.color-dialog.lisp               GtkColorDialog                 GTK 4.12
+  gtk4.color-dialog-button.lisp        GtkColorDialogButton           GTK 4.12
+  gtk4.file-dialog.lisp                GtkFileDialog                  GTK 4.12
   gtk4.file-launcher.lisp              GtkFileLauncher                GTK 4.12 +
   gtk4.uri-launcher.lisp               GtkUriLauncher                 GTK 4.12 +
   gtk4.font-dialog.lisp                GtkFontDialog                  GTK 4.12 +
@@ -193,9 +193,9 @@ Ornaments
 Scrolling
 
   gtk4.scrollbar.lisp                  GtkScrollbar                   GTK 4.12
-  gtk4.scrolled-window.lisp            GtkScrolledWindow              GTK 4.10 *
-  gtk4.scrollable.lisp                 GtkScrollable                  GTk 4.10 *
-  gtk4.viewport.lisp                   GtkViewport                    GTK 4.10 *
+  gtk4.scrolled-window.lisp            GtkScrolledWindow              GTK 4.12
+  gtk4.scrollable.lisp                 GtkScrollable                  GTk 4.12
+  gtk4.viewport.lisp                   GtkViewport                    GTK 4.12 &
 
 Printing
 
@@ -279,11 +279,11 @@ Gestures and event handling
 
 Keyboard shortcuts
 
-  gtk4.shortcut-manager.lisp           GtkShortcutManager             GTK 4.6  +
-  gtk4.keyboard-accelerators.lisp      Utilities for accelerators     GTK 4.10 *
-  gtk4.shortcut.lisp                   GtkShortcut                    GTK 4.10 *
-  gtk4.shortcut-trigger.lisp           GtkShortcutTrigger             GTK 4.6  +
-  gtk4.shortcut-action.lisp            GtkShortcutAction              GTK 4.6  +
+  gtk4.shortcut-manager.lisp           GtkShortcutManager             GTK 4.12
+  gtk4.keyboard-accelerators.lisp      Utilities for accelerators     GTK 4.12 &
+  gtk4.shortcut.lisp                   GtkShortcut                    GTK 4.12 &
+  gtk4.shortcut-trigger.lisp           GtkShortcutTrigger             GTK 4.12 &
+  gtk4.shortcut-action.lisp            GtkShortcutAction              GTK 4.12
 
 Data exchange, clipboards and Drag-and-Drop
 
@@ -319,8 +319,8 @@ Deprecated
   gtk4.info-bar.lisp                   GtkInfoBar                     GTK 4.12
   gtk4.statusbar.lisp                  GtkStatusbar                   GTK 4.12
 
-  gtk4.lock-button.lisp                GtkLockButton                  GTK 4.10 *
-  gtk4.volume-button.lisp              GtkVolumeButton                GTK 4.10 *
+  gtk4.lock-button.lisp                GtkLockButton                  GTK 4.12
+  gtk4.volume-button.lisp              GtkVolumeButton                GTK 4.12
 
   gtk4.entry-completion.lisp           GtkEntryCompletion             GTK 4.12
 
@@ -343,8 +343,8 @@ Deprecated
   gtk4.cell-area-box.lisp              GtkCellAreaBox                 GTK 4.12
   gtk4.cell-area-context.lisp          GtkCellAreaContext             GTK 4.12
 
-  gtk4.cell-editable.lisp              GtkCellEditable                GTK 4.6  +
-  gtk4.cell-renderer.lisp              GtkCellRenderer                GTK 4.6  +
+  gtk4.cell-editable.lisp              GtkCellEditable                GTK 4.12
+  gtk4.cell-renderer.lisp              GtkCellRenderer                GTK 4.12 &
   gtk4.cell-renderer-text.lisp         GtkCellRendererText            GTK 4.12
   gtk4.cell-renderer-accel.lisp        GtkCellRendererAccel           GTK 4.12
   gtk4.cell-renderer-combo.lisp        GtkCellRendererCombo           GTK 4.12
@@ -352,7 +352,7 @@ Deprecated
   gtk4.cell-renderer-progress.lisp     GtkCellRendererProgress        GTK 4.12
   gtk4.cell-renderer-spin.lisp         GtkCellRendererSpin            GTK 4.12
   gtk4.cell-renderer-toggle.lisp       GtkCellRendererToggle          GTK 4.12
-  gtk4.cell-renderer-spinner.lisp      GtkCellRendererSpinner         GTK 4.6  +
+  gtk4.cell-renderer-spinner.lisp      GtkCellRendererSpinner         GTK 4.12
 
   gtk4.list-store.lisp                 GtkListStore                   GTK 4.12
   gtk4.tree-store.lisp                 GtkTreeStore                   GTK 4.12
@@ -366,9 +366,9 @@ Deprecated
   gtk4.app-chooser-widget.lisp         GtkAppChooserWidget            GTK 4.12
 
   gtk4.color-chooser.lisp              GtkColorChooser                GTK 4.12
-  gtk4.color-button.lisp               GtkColorButton                 GTK 4.6  +
-  gtk4.color-chooser-widget.lisp       GtkColorChooserWidget          GTK 4.6  +
-  gtk4.color-chooser-dialog.lisp       GtkColorChooserDialog          GTK 4.6  +
+  gtk4.color-button.lisp               GtkColorButton                 GTK 4.12
+  gtk4.color-chooser-widget.lisp       GtkColorChooserWidget          GTK 4.12
+  gtk4.color-chooser-dialog.lisp       GtkColorChooserDialog          GTK 4.12
 
   gtk4.file-chooser.lisp               GtkFileChooser                 GTK 4.12 &
   gtk4.file-chooser-native.lisp        GtkFileChooserNative           GTK 4.12
@@ -382,4 +382,4 @@ Deprecated
 
   gtk4.style-context.lisp              GtkStyleContext                GTK 4.12
 
-2023-10-1
+2023-10-2

@@ -2242,6 +2242,7 @@
       @about-generic{viewport-child}
       @about-generic{viewport-scroll-to-focus}
       @about-function{viewport-new}
+      @about-function{viewport-scroll-to}
     @end{subsection}
   @end{section}
   @begin[Keyboard shortcuts]{section}
