@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-trigger.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -42,9 +42,9 @@
 ;;; Functions
 ;;;
 ;;;     gtk_shortcut_trigger_trigger
-;;;     gtk_shortcut_trigger_hash
-;;;     gtk_shortcut_trigger_equal
-;;;     gtk_shortcut_trigger_compare
+;;;     gtk_shortcut_trigger_hash                          not implemented
+;;;     gtk_shortcut_trigger_equal                         not implemented
+;;;     gtk_shortcut_trigger_compare                       not implemented
 ;;;     gtk_shortcut_trigger_to_string
 ;;;     gtk_shortcut_trigger_print
 ;;;     gtk_shortcut_trigger_to_label
@@ -97,10 +97,10 @@
   @fun{gtk:shortcut-trigger-trigger} function can be called on a
   @class{gdk:event} event.
 
-  The @sym{gtk:shortcut-trigger} implementation contain functions that allow
+  The @class{gtk:shortcut-trigger} implementation contain functions that allow
   easy presentation to end users as well as being printed for debugging.
 
-  All @sym{gtk:shortcut-trigger} objects are immutable, you can only specify
+  All @class{gtk:shortcut-trigger} objects are immutable, you can only specify
   their properties during construction. If you want to change a trigger, you
   have to replace it with a new one.
   @see-class{gtk:shortcut-action}
@@ -154,7 +154,7 @@
     Accessor of the @slot[gtk:keyval-trigger]{keyval} slot of the
     @class{gtk:keyval-trigger} class.
   @end{short}
-  The @sym{gtk:keyval-trigger-keyval} function returns the keyval that must be
+  The @fun{gtk:keyval-trigger-keyval} function returns the keyval that must be
   pressed to succed triggering @arg{object}.
   @see-class{gtk:keyval-trigger}")
 
@@ -179,7 +179,7 @@
     Accessor of the @slot[gtk:keyval-trigger]{modifiers} slot of the
     @class{gtk:keyval-trigger} class.
   @end{short}
-  The @sym{gtk:keyval-trigger-modifiers} function returns the modifiers that
+  The @fun{gtk:keyval-trigger-modifiers} function returns the modifiers that
   must be present to succed triggering @arg{object}.
   @see-class{gtk:keyval-trigger}")
 
@@ -228,7 +228,7 @@
     Accessor of the @slot[gtk:mnemonic-trigger]{keyval} slot of the
     @class{gtk:mnemonic-trigger} class.
   @end{short}
-  The @sym{gtk:mnemonic-trigger-keyval} function returns the keyval that must
+  The @fun{gtk:mnemonic-trigger-keyval} function returns the keyval that must
   be pressed to succed triggering @arg{object}.
   @see-class{gtk:mnemonic-trigger}")
 
@@ -281,7 +281,7 @@
     Accessor of the @slot[gtk:alternative-trigger]{first} slot of the
     @class{gtk:alternative-trigger} class.
   @end{short}
-  The @sym{gtk:alternative-trigger-first} function gets the first of the two
+  The @fun{gtk:alternative-trigger-first} function gets the first of the two
   alternative triggers that may trigger @arg{shortcut}. The
   @fun{gtk:alternative-trigger-second} function will return the other one.
   @see-class{gtk:alternative-trigger}
@@ -308,7 +308,7 @@
     Accessor of the @slot[gtk:alternative-trigger]{second} slot of the
     @class{gtk:alternative-trigger} class.
   @end{short}
-  The @sym{gtk:alternative-trigger-second} function gets the second of the two
+  The @fun{gtk:alternative-trigger-second} function gets the second of the two
   alternative triggers that may trigger @arg{shortcut}. The
   @fun{gtk:alternative-trigger-first} function will return the other one.
   @see-class{gtk:alternative-trigger}

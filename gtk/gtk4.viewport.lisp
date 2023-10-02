@@ -2,7 +2,7 @@
 ;;; gtk4.viewport.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -45,6 +45,7 @@
 ;;; Functions
 ;;;
 ;;;     gtk_viewport_new
+;;;     gtk_viewport_scroll_to                             Since 4.12
 ;;;
 ;;; Properties
 ;;;
@@ -91,20 +92,20 @@
 (setf (documentation 'viewport 'type)
  "@version{2023-8-6}
   @begin{short}
-    The @sym{gtk:viewport} widget acts as an adaptor class, implementing
+    The @class{gtk:viewport} widget acts as an adaptor class, implementing
     scrollability for child widgets that lack their own scrolling capabilities.
   @end{short}
-  Use the @sym{gtk:viewport} widget to scroll child widgets such as the widgets
-  @class{gtk:grid}, @class{gtk:box}, and so on.
+  Use the @class{gtk:viewport} widget to scroll child widgets such as the
+  widgets @class{gtk:grid}, @class{gtk:box}, and so on.
 
-  The @sym{gtk:viewport} widget will start scrolling content only if allocated
+  The @class{gtk:viewport} widget will start scrolling content only if allocated
   less than the minimum size of the child widget in a given orientation.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:viewport} widget has a single CSS node with name
+    The @class{gtk:viewport} widget has a single CSS node with name
     @code{viewport}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:viewport} implementation uses the @code{:group} role of the
+    The @class{gtk:viewport} implementation uses the @code{:group} role of the
     @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
   @see-slot{gtk:viewport-child}
@@ -164,10 +165,10 @@
     Accessor of the @slot[gtk:viewport]{scroll-to-focus} slot of the
     @class{gtk:viewport} class.
   @end{short}
-  The @sym{gtk:viewport-scroll-to-focus} function gets whether the viewport is
+  The @fun{gtk:viewport-scroll-to-focus} function gets whether the viewport is
   scrolling to keep the focused child in view. The
-  @sym{(setf gtk:viewport-scroll-to-focus)} function sets whether the viewport 
-  should automatically scroll to keep the focused child in view.
+  @setf{gtk:viewport-scroll-to-focus} function sets whether the viewport should
+  automatically scroll to keep the focused child in view.
   @see-class{gtk:viewport}")
 
 ;;; ----------------------------------------------------------------------------
@@ -193,5 +194,13 @@
                  :vadjustment vadjustment))
 
 (export 'viewport-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_viewport_scroll_to
+;;;
+;;; Scrolls a descendant of the viewport into view.
+;;;
+;;; Since 4.12
+;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.viewport.lisp -----------------------------------------

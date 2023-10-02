@@ -2,7 +2,7 @@
 ;;; gtk4.color-chooser-widget.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -85,7 +85,7 @@
 (setf (documentation 'color-chooser-widget 'type)
  "@version{#2021-1-23}
   @begin{short}
-    The @sym{gtk:color-chooser-widget} widget lets the user select a color.
+    The @class{gtk:color-chooser-widget} widget lets the user select a color.
   @end{short}
   By default, the chooser presents a prefined palette of colors, plus a small
   number of settable custom colors. It is also possible to select a different
@@ -97,11 +97,11 @@
   colors. To change the initially selected color or to get the selected color
   use the @fun{gtk:color-chooser-rgba} function.
 
-  The @sym{gtk:color-chooser-widget} widget is used in the
+  The @class{gtk:color-chooser-widget} widget is used in the
   @class{gtk:color-chooser-dialog} widget to provide a dialog for selecting
   colors.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:color-chooser-widget} class has a single CSS node with name
+    The @class{gtk:color-chooser-widget} class has a single CSS node with name
     @code{colorchooser}.
   @end{dictionary}
   @begin[Action details]{dictionary}
@@ -134,13 +134,16 @@
                                  :title \"Example Color Chooser Widget\"
                                  :border-width 12
                                  :default-width 400)))
-    (g-signal-connect color-chooser \"color-activated\"
+    (g:signal-connect color-chooser \"color-activated\"
         (lambda (chooser color)
           (declare (ignore chooser))
           (format t \"Selected color is ~a~%\" (gdk:rgba-to-string color))))
     (gtk:widget-show window)))
     @end{pre}
   @end{dictionary}
+  @begin[Warning]{dictionary}
+  @end{dictionary}
+  @see-constructor{gtk:color-chooser-widget-new}
   @see-slot{gtk:color-chooser-widget-show-editor}
   @see-class{gtk:color-chooser}
   @see-class{gtk:color-chooser-dialog}")

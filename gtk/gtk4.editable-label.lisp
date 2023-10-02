@@ -2,7 +2,7 @@
 ;;; gtk4.editable-label.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -91,13 +91,13 @@
 (setf (documentation 'editable-label 'type)
  "@version{#2022-6-12}
   @begin{short}
-    A @sym{gtk:editable-label} widget is a @class{gtk:label} widget that allows
+    A @class{gtk:editable-label} widget is a @class{gtk:label} widget that allows
     users to edit the text by switching the widget to an \"edit mode\".
   @end{short}
 
   @image[editable-label]{Figure: GtkEditableLabel}
 
-  The @sym{gtk:editable-label} widget does not have API of its own, but it
+  The @class{gtk:editable-label} widget does not have API of its own, but it
   implements the @class{gtk:editable} interface.
 
   The default bindings for activating the edit mode is to click or press the
@@ -111,7 +111,7 @@ editablelabel[.editing]
     ├── label
     ╰── text
     @end{pre}
-    The @sym{gtk:editable-label} implementation has a main node with the name
+    The @class{gtk:editable-label} implementation has a main node with the name
     @code{editablelabel}. When the entry is in editing mode, it gets the
     @code{.editing} style class. For all the subnodes added to the text node in
     various situations, see the @class{gtk:text} documentation.
@@ -163,7 +163,7 @@ editablelabel[.editing]
     Accessor of the @slot[gtk:editable-label]{editing} slot of the
     @class{gtk:editable-label} class.
   @end{short}
-  The @sym{gtk:editable-label-editing} function returns whether the label is
+  The @fun{gtk:editable-label-editing} function returns whether the label is
   currently in editing mode.
   @see-class{gtk:editable-label}")
 

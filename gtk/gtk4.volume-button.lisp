@@ -2,7 +2,7 @@
 ;;; gtk4.volume-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -84,14 +84,14 @@
 (setf (documentation 'volume-button 'type)
  "@version{2023-3-26}
   @begin{short}
-    The @sym{gtk:volume-button} class is a subclass of the
+    The @class{gtk:volume-button} class is a subclass of the
     @class{gtk:scale-button} class that has been tailored for use as a volume
     control widget with suitable icons, tooltips and accessible labels.
   @end{short}
 
   @image[volume-button]{Figure: GtkVolumeButton}
   @begin[Warning]{dictionary}
-    The @sym{gtk:volume-button} implementation has been deprecated since
+    The @class{gtk:volume-button} implementation has been deprecated since
     version 4.10 and should not be used in newly written code. This widget will
     be removed in GTK 5.
   @end{dictionary}
@@ -128,7 +128,7 @@
   are not available in your installed theme, then the normal, potentially
   colorful icons will be used.
   @begin[Warning]{dictionary}
-    The @sym{gtk:volume-button} implementation has been deprecated since
+    The @class{gtk:volume-button} implementation has been deprecated since
     version 4.10 and should not be used in newly written code. This widget will
     be removed in GTK 5.
   @end{dictionary}
@@ -151,7 +151,7 @@
   Volume values can be obtained and modified using the functions from
   the @class{gtk:scale-button} class.
   @begin[Warning]{dictionary}
-    The @sym{gtk:volume-button} implementation has been deprecated since
+    The @class{gtk:volume-button} implementation has been deprecated since
     version 4.10 and should not be used in newly written code. This widget will
     be removed in GTK 5.
   @end{dictionary}

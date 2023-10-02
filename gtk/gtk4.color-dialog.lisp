@@ -2,7 +2,7 @@
 ;;; gtk4.color-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,7 +83,7 @@
 (setf (documentation 'color-dialog 'type)
  "@version{2023-7-28}
   @begin{short}
-    A @sym{gtk:color-dialog} object collects the arguments that are needed to
+    A @class{gtk:color-dialog} object collects the arguments that are needed to
     present a color chooser dialog to the user, such as a title for the dialog
     and whether it should be modal.
   @end{short}
@@ -93,7 +93,7 @@
   the @fun{gtk:color-dialog-choose-rgba-finish} function.
 
   See the @class{gtk:color-dialog-button} widget for a convenient control that
-  uses the @sym{gtk:color-dialog} object and presents the results.
+  uses the @class{gtk:color-dialog} object and presents the results.
 
   Since 4.10
   @see-constructor{gtk:color-dialog-new}
@@ -127,9 +127,9 @@
     Accessor of the @slot[gtk:color-dialog]{modal} slot of the
     @class{gtk:color-dialog} class.
   @end{short}
-  The @sym{gtk:color-dialog-modal} function returns whether the color chooser
+  The @fun{gtk:color-dialog-modal} function returns whether the color chooser
   dialog blocks interaction with the parent window while it is presented. The
-  @sym{(setf gtk:color-dialog-modal)} function sets the property.
+  @setf{gtk:color-dialog-modal} function sets the property.
 
   Since 4.10
   @see-class{gtk:color-dialog}")
@@ -156,8 +156,8 @@
     Accessor of the @slot[gtk:color-dialog]{title} slot of the
     @class{gtk:color-dialog} class.
   @end{short}
-  The @sym{gtk:color-dialog-title} function returns the title that will be shown
-  on the color chooser dialog. The @sym{(setf gtk:color-dialog-title)} function
+  The @class{gtk:color-dialog-title} function returns the title that will be
+  shown on the color chooser dialog. The @setf{gtk:color-dialog-title} function
   sets the title.
 
   Since 4.10
@@ -186,9 +186,8 @@
     Accessor of the @slot[gtk:color-dialog]{with-alpha} slot of the
     @class{gtk:color-dialog} class.
   @end{short}
-  The @sym{gtk:color-dialog-with-alpha} function returns whether colors may have
-  alpha. The @sym{(setf gtk:color-dialog-with-alpha)} function sets the
-  property.
+  The @fun{gtk:color-dialog-with-alpha} function returns whether colors may have
+  alpha. The @setf{gtk:color-dialog-with-alpha} function sets the property.
 
   Since 4.10
   @see-class{gtk:color-dialog}")
@@ -204,6 +203,8 @@
  "@version{2023-7-28}
   @return{A new @class{gtk:color-dialog} object.}
   @short{Creates a new @class{gtk:color-dialog} object.}
+
+  Since 4.10
   @see-class{gtk:color-dialog}"
   (make-instance 'color-dialog))
 

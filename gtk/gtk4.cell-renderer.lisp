@@ -2,7 +2,7 @@
 ;;; gtk4.cell-renderer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -246,27 +246,27 @@
 (setf (documentation 'cell-renderer 'type)
  "@version{#2021-3-2}
   @begin{short}
-    The @sym{gtk:cell-renderer} class is a base class of a set of objects used
+    The @class{gtk:cell-renderer} class is a base class of a set of objects used
     for rendering a cell to a @symbol{cairo:context-t} context.
   @end{short}
   These objects are used primarily by the @class{gtk:tree-view} widget, though
   they are not tied to them in any specific way. It is worth noting that the
-  @sym{gtk:cell-renderer} object is not a @class{gtk:widget} object and cannot
+  @class{gtk:cell-renderer} object is not a @class{gtk:widget} object and cannot
   be treated as such.
 
-  The primary use of a @sym{gtk:cell-renderer} object is for drawing a certain
+  The primary use of a @class{gtk:cell-renderer} object is for drawing a certain
   graphical elements on a Cairo context. Typically, one cell renderer is used
   to draw many cells on the screen. To this extent, it is not expected that a
-  @sym{gtk:cell-renderer} object keep any permanent state around. Instead, any
+  @class{gtk:cell-renderer} object keep any permanent state around. Instead, any
   state is set just prior to use using GObjects property system. Then, the cell
   is measured using the @fun{gtk:cell-renderer-preferred-size} function.
   Finally, the cell is rendered in the correct location using the
   @fun{gtk:cell-renderer-render} function.
 
   There are a number of rules that must be followed when writing a new
-  @sym{gtk:cell-renderer}. First and formost, its important that a certain set
+  @class{gtk:cell-renderer}. First and formost, its important that a certain set
   of properties will always yield a cell renderer of the same size, barring a
-  @code{GtkStyle} change. The @sym{gtk:cell-renderer} also has a number of
+  @code{GtkStyle} change. The @class{gtk:cell-renderer} also has a number of
   generic properties that are expected to be honored by all children.
 
   Beyond merely rendering a cell, cell renderers can optionally provide active
@@ -278,10 +278,14 @@
   editable, you have to implement the @code{GtkCellRendererClass.activate} or
   @code{GtkCellRendererClass.start_editing} virtual functions, respectively.
 
-  Many properties of the @sym{gtk:cell-renderer} class and its subclasses have
+  Many properties of the @class{gtk:cell-renderer} class and its subclasses have
   a corresponding @code{set} property, e.g. @code{cell-background-set}
   corresponds to @code{cell-background}. These @code{set} properties reflect
   whether a property has been set or not. You should not set them independently.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"editing-canceled\" signal}
       @begin{pre}
@@ -292,7 +296,7 @@ lambda (renderer)    :run-first
       editing when the user presses the @kbd{Escape} key. See also the
       @fun{gtk:cell-renderer-stop-editing} function.
       @begin[code]{table}
-        @entry[renderer]{The @sym{gtk:cell-renderer} object which received the
+        @entry[renderer]{The @class{gtk:cell-renderer} object which received the
           signal.}
       @end{table}
     @subheading{The \"editing-started\" signal}
@@ -307,7 +311,7 @@ lambda (renderer editable path)    :run-first
       future releases, therefore you should check the type of the @arg{editable}
       argument before doing any specific setup.
       @begin[code]{table}
-        @entry[renderer]{The @sym{gtk:cell-renderer} object which received the
+        @entry[renderer]{The @class{gtk:cell-renderer} object which received the
           signal.}
         @entry[editable]{The @class{gtk:cell-editable} widget.}
         @entry[path]{A string with the path identifying the edited cell.}
@@ -359,6 +363,10 @@ lambda (renderer editable path)    :run-first
   Cell background color as a string. This property is not readable. After
   setting the background color is readable with the
   @fun{gtk:cell-renderer-cell-background-rgba} function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-renderer-cell-background-rgba}")
 
@@ -386,6 +394,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   Cell background RGBA color.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-renderer-cell-background-set}")
 
@@ -415,6 +427,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   Whether this tag affects the cell background color.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-renderer-cell-background}
   @see-function{gtk:cell-renderer-cell-background-rgba}")
@@ -441,6 +457,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   Whether the cell renderer is currently in editing mode.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}")
 
 ;;; --- cell-renderer-height ---------------------------------------------------
@@ -467,6 +487,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   The fixed height.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-renderer-width}")
 
@@ -494,6 +518,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   Row is an expander row, and is expanded.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}")
 
 ;;; --- cell-renderer-is-expander ----------------------------------------------
@@ -520,6 +548,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   Row has children.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}")
 
 ;;; --- cell-renderer-mode -----------------------------------------------------
@@ -546,6 +578,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   Editable mode of the cell renderer.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-sybmol{gtk:cell-renderer-mode}")
 
@@ -572,9 +608,13 @@ lambda (renderer editable path)    :run-first
     @class{gtk:cell-renderer} class.
   @end{short}
 
-  The @sym{gtk:cell-renderer-sensitive} function returns the cell sensitivity
-  of the renderer. The @sym{(setf gtk:cell-renderer-sensitive)} function sets
-  the sensitivity.
+  The @fun{gtk:cell-renderer-sensitive} function returns the cell sensitivity
+  of the renderer. The @setf{gtk:cell-renderer-sensitive} function sets the
+  sensitivity.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}")
 
 ;;; --- cell-renderer-visible --------------------------------------------------
@@ -599,9 +639,13 @@ lambda (renderer editable path)    :run-first
     @class{gtk:cell-renderer} class.
   @end{short}
 
-  The @sym{gtk:cell-renderer-sensitive} function returns the cell visibility of
-  the renderer. The @sym{(setf gtk:cell-renderer-sensitive)} function sets the
+  The @fun{gtk:cell-renderer-sensitive} function returns the cell visibility of
+  the renderer. The @setf{gtk:cell-renderer-sensitive} function sets the
   visibility.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}")
 
 ;;; --- cell-renderer-width ----------------------------------------------------
@@ -628,6 +672,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   The fixed width.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-renderer-height}")
 
@@ -657,6 +705,10 @@ lambda (renderer editable path)    :run-first
 
   The horizontal alignment, from 0.0 (left) to 1.0 (right). Reversed for RTL
   layouts.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-renderer-yalign}")
 
@@ -683,6 +735,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   The amount of space to add on the left and right, in pixels.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-renderer-ypad}")
 
@@ -710,6 +766,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   The vertical alignment, from 0.0 (top) to 1.0 (bottom).
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-renderer-xalign}")
 
@@ -736,6 +796,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
 
   The amount of space to add on the top and bottom, in pixels.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-renderer-xpad}")
 
@@ -768,6 +832,10 @@ lambda (renderer editable path)    :run-first
     Gets the aligned area used by @arg{cell} inside @arg{area}.
   @end{short}
   Used for finding the appropriate edit and focus rectangle.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:widget}
   @see-class{gdk:rectangle}
@@ -844,6 +912,10 @@ lambda (renderer editable path)    :run-first
   @end{short}
   Some cell renderers may use events. For example, the
   @class{gtk:cell-renderer-toggle} object toggles when it gets a mouse click.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:cell-renderer-toggle}
   @see-class{gtk:tree-view}
@@ -890,6 +962,10 @@ lambda (renderer editable path)    :run-first
   @begin{short}
     Passes an activate event to the cell renderer for possible processing.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:widget}
   @see-class{gdk:event}
@@ -928,6 +1004,10 @@ lambda (renderer editable path)    :run-first
 
   This function should be called by cell renderer implementations in response
   to the \"editing-done\" signal of the @class{gtk:cell-editable} widget.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:cell-editable}
   @see-function{gtk:cell-renderer-start-editing}"
@@ -965,11 +1045,15 @@ lambda (renderer editable path)    :run-first
   @argument[width]{an integer with the width of the cell renderer, or -1}
   @argument[height]{an integer with the height of the cell renderer, or -1}
   @begin{short}
-    The @sym{gtk:cell-renderer-fixed-size} function returns @arg{width} and
+    The @fun{gtk:cell-renderer-fixed-size} function returns @arg{width} and
     @arg{height} with the appropriate size of @arg{cell}.
   @end{short}
-  The @sym{(setf gtk:cell-renderer-fixed-size)} function sets the renderer size
-  to be explicit, independent of the properties set.
+  The @setf{gtk:cell-renderer-fixed-size} function sets the renderer size to be
+  explicit, independent of the properties set.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}"
   (cffi:with-foreign-objects ((width :int) (height :int))
     (%cell-renderer-fixed-size cell width height)
@@ -1006,11 +1090,15 @@ lambda (renderer editable path)    :run-first
   @argument[xalign]{a float with the x alignment of the cell renderer}
   @argument[yalign]{a float with the y alignment of the cell renderer}
   @begin{short}
-    The @sym{gtk:cell-renderer-alignment} function returns the appropriate
+    The @fun{gtk:cell-renderer-alignment} function returns the appropriate
     @arg{xalign} and @arg{yalign} of @arg{cell}.
   @end{short}
-  The @sym{(setf gtk:cell-renderer-alignment)} function sets the cell alignment
-  of the renderer within its available space.
+  The @setf{gtk:cell-renderer-alignment} function sets the cell alignment of the
+  renderer within its available space.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}"
   (cffi:with-foreign-objects ((xalign :float) (yalign :float))
     (%cell-renderer-alignment cell xalign yalign)
@@ -1047,11 +1135,15 @@ lambda (renderer editable path)    :run-first
   @argument[xpad]{an integer with the x padding of the cell renderer}
   @argument[ypad]{an integer with the y padding of the cell renderer}
   @begin{short}
-    The @sym{gtk:cell-renderer-padding} function returns the appropriate
+    The @fun{gtk:cell-renderer-padding} function returns the appropriate
     @arg{xpad} and @arg{ypad} of the cell renderer.
   @end{short}
-  The @sym{(setf gtk:cell-renderer-padding)} function sets the cell renderer's
+  The @setf{gtk:cell-renderer-padding} function sets the cell renderer's
   padding.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}"
   (cffi:with-foreign-objects ((xpad :int) (ypad :int))
     (%cell-renderer-padding cell xpad ypad)
@@ -1077,6 +1169,10 @@ lambda (renderer editable path)    :run-first
     based on the cell renderer and widget sensitivity, and the given
     @symbol{gtk:cell-renderer-state} flags.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:widget}
   @see-symbol{gtk:state-flags}
@@ -1100,6 +1196,10 @@ lambda (renderer editable path)    :run-first
   @begin{short}
     Checks whether the cell renderer can do something when activated.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}"
   (cell (g:object cell-renderer)))
 
@@ -1129,6 +1229,10 @@ lambda (renderer editable path)    :run-first
   @begin{short}
     Retreives a cell renderer's natural size when rendered to widget.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}"
   (cffi:with-foreign-objects ((minimum-size :int) (natural-size :int))
     (%cell-renderer-preferred-height cell widget minimum-size natural-size)
@@ -1164,6 +1268,10 @@ lambda (renderer editable path)    :run-first
     Retreives a cell renderers's minimum and natural height if it were rendered
     to @arg{widget} with the specified width.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:widget}"
   (cffi:with-foreign-objects ((minimum-height :int) (natural-height :int))
@@ -1204,6 +1312,10 @@ lambda (renderer editable path)    :run-first
     Retrieves the minimum and natural size of a cell renderer taking into
     account the widget's preference for height-for-width management.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:widget}
   @see-class{gtk:requisition}"
@@ -1239,6 +1351,10 @@ lambda (renderer editable path)    :run-first
   @begin{short}
     Retreives a cell renderer's natural size when rendered to widget.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:widget}"
   (cffi:with-foreign-objects ((minimum-size :int) (natural-size :int))
@@ -1275,6 +1391,10 @@ lambda (renderer editable path)    :run-first
     Retreives a cell renderers's minimum and natural width if it were rendered
     to @arg{widget} with the specified height.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-class{gtk:widget}"
   (cffi:with-foreign-objects ((minimum-width :int) (natural-width :int))
@@ -1303,6 +1423,10 @@ lambda (renderer editable path)    :run-first
     Gets whether the cell renderer prefers a height-for-width layout or a
     width-for-height layout.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer} implementation is deprecated since 4.10.
+    List views use widgets for displaying their contents.
+  @end{dictionary}
   @see-class{gtk:cell-renderer}
   @see-symbol{gtk:size-request-mode}"
   (cell (g:object cell-renderer)))

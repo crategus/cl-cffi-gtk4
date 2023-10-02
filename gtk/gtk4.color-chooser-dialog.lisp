@@ -2,7 +2,7 @@
 ;;; gtk4.color-chooser-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -88,14 +88,15 @@
 (setf (documentation 'color-chooser-dialog 'type)
  "@version{#2022-8-28}
   @begin{short}
-    The @sym{gtk:color-chooser-dialog} widget is a dialog for choosing a color.
+    The @class{gtk:color-chooser-dialog} widget is a dialog for choosing a 
+    color.
   @end{short}
   It implements the @class{gtk:color-chooser} interface and does not provide
   much API of its own.
 
   @image[color-chooser-dialog]{Figure: GtkColorChooserDialog}
 
-  To create a @sym{gtk:color-chooser-dialog} widget, use the
+  To create a @class{gtk:color-chooser-dialog} widget, use the
   @fun{gtk:color-chooser-dialog-new} function. To get or change the initially
   selected color, use the @fun{gtk:color-chooser-rgba} function.
   @begin[Example]{dictionary}
@@ -180,7 +181,12 @@
       ;; Show the window
       (gtk:widget-show window))))
     @end{pre}
+  @end{dictionary}  
+  @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser-dialog} implementation is deprecated since 
+    4.10. Use the @class{gtk:color-dialog} object instead.
   @end{dictionary}
+  @see-constructor{gtk:color-chooser-dialog-new}
   @see-slot{gtk:color-chooser-dialog-show-editor}
   @see-class{gtk:color-chooser}
   @see-class{gtk:color-button}
@@ -213,6 +219,10 @@
   @end{short}
   @em{True} when the color chooser dialog is showing the single-color editor.
   It can be set to switch the color chooser into single-color editing mode.
+  @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser-dialog} implementation is deprecated since 
+    4.10. Use the @class{gtk:color-dialog} object instead.
+  @end{dictionary}
   @see-class{gtk:color-chooser-dialog}")
 
 ;;; ----------------------------------------------------------------------------
@@ -227,6 +237,10 @@
     or @code{nil}}
   @return{A new @class{gtk:color-chooser-dialog} widget.}
   @short{Creates a new color chooser dialog.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser-dialog} implementation is deprecated since 
+    4.10. Use the @class{gtk:color-dialog} object instead.
+  @end{dictionary}
   @see-class{gtk:window}
   @see-class{gtk:color-chooser-dialog}"
   (make-instance 'color-chooser-dialog

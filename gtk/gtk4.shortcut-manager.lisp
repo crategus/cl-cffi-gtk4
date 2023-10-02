@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-manager.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -59,19 +59,19 @@
       (documentation 'shortcut-manager 'type)
  "@version{#2022-2-1}
   @begin{short}
-    The @sym{gtk:shortcut-manager} interface is used to implement shortcut
+    The @class{gtk:shortcut-manager} interface is used to implement shortcut
     scopes.
   @end{short}
   This is important for @class{gtk:native} widgets that have their own surface,
   since the event controllers that are used to implement managed and global
   scopes are limited to the same native.
 
-  Every widget that implements the @sym{gtk:shortcut-manager} interface will be
-  used with the @code{:managed} value of the @symbol{gtk:shortcut-scope}
+  Every widget that implements the @class{gtk:shortcut-manager} interface will 
+  be used with the @code{:managed} value of the @symbol{gtk:shortcut-scope}
   enumeration.
 
-  Examples for widgets implementing the @sym{gtk:shortcut-manager} interface are
-  the @class{gtk:window} and @class{gtk:popover} widgets.
+  Examples for widgets implementing the @class{gtk:shortcut-manager} interface 
+  are the @class{gtk:window} and @class{gtk:popover} widgets.
   @see-class{gtk:shortcut-scopes}
   @see-class{gtk:native}
   @see-class{gtk:window}

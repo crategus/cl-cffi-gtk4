@@ -2,7 +2,7 @@
 ;;; gtk4.file-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -123,7 +123,7 @@
 (setf (documentation 'file-dialog 'type)
  "@version{2023-7-22}
   @begin{short}
-    A @sym{gtk:file-dialog} object collects the arguments that are needed to
+    A @class{gtk:file-dialog} object collects the arguments that are needed to
     present a file chooser dialog to the user, such as a title for the dialog
     and whether it should be modal.
   @end{short}
@@ -170,9 +170,9 @@
     Accessor of the @slot[gtk:file-dialog]{accept-label} slot of the
     @class{gtk:file-dialog} class.
   @end{short}
-  The @sym{gtk:file-dialog-accept-label} function gets the label shown on the
+  The @fun{gtk:file-dialog-accept-label} function gets the label shown on the
   accept button of the file chooser dialog. The
-  @sym{(setf gtk:file-dialog-accept-label)} function sets the label.
+  @setf{gtk:file-dialog-accept-label} function sets the label.
 
   Leaving the accept label unset or setting it as @code{nil} will fall back to
   a default label, depending on what API is used to launch the file chooser
@@ -208,9 +208,9 @@
     Accessor of the @slot[file-dialog]{default-filter} slot of the
     @class{gtk:file-dialog} class.
   @end{short}
-  The @sym{gtk:file-dialog-default-filter} function gets the filter that will
+  The @class{gtk:file-dialog-default-filter} function gets the filter that will
   be selected by default in the file chooser dialog. The
-  @sym{(setf gtk:file-dialog-default-filter)} function sets the filter.
+  @setf{gtk:file-dialog-default-filter} function sets the filter.
 
   If set to @code{nil}, the first item in @slot[gtk:file-dialog]{filters} will
   be used as the default filter. If that list is empty, the dialog will be
@@ -242,9 +242,9 @@
     Accessor of the @slot[file-dialog]{filters} slot of the
     @class{gtk:file-dialog} class.
   @end{short}
-  The @sym{gtk:file-dialog-filters} function gets the filters that will be
+  The @fun{gtk:file-dialog-filters} function gets the filters that will be
   offered to the user in the file chooser dialog. The
-  @sym{(setf gtk:file-dialog-filters)} function sets the filters.
+  @setf{gtk:file-dialog-filters} function sets the filters.
 
   Since 4.10
   @see-class{gtk:file-dialog}
@@ -275,9 +275,9 @@
     Accessor of the @slot[file-dialog]{initial-file} slot of the
     @class{gtk:file-dialog} class.
   @end{short}
-  The @sym{gtk:file-dialog-initial-file} function gets the file that will be
+  The @fun{gtk:file-dialog-initial-file} function gets the file that will be
   initially selected in the file chooser dialog. The
-  @sym{(setf gtk:file-dialog-initial-file)} function sets the file.
+  @setf{gtk:file-dialog-initial-file} function sets the file.
 
   This function is a shortcut for calling both the
   @fun{gtk:file-dialog-initial-folder} and @fun{gtk:file-dialog-initial-name}
@@ -310,9 +310,9 @@
     Accessor of the @slot[file-dialog]{initial-folder} slot of the
     @class{gtk:file-dialog} class.
   @end{short}
-  The @sym{gtk:file-dialog-initial-folder} function gets the folder that will
+  The @fun{gtk:file-dialog-initial-folder} function gets the folder that will
   be set as the initial folder in the file chooser dialog. The
-  @sym{(setf gtk:file-dialog-initial-folder)} function sets the folder.
+  @setf{gtk:file-dialog-initial-folder} function sets the folder.
 
   Since 4.10
   @see-class{gtk:file-dialog}
@@ -339,10 +339,10 @@
     Accessor of the @slot[file-dialog]{initial-name} slot of the
     @class{gtk:file-dialog} class.
   @end{short}
-  The @sym{gtk:file-dialog-initial-name} function gets the name for the file
-  that should be initially set. The @sym{(setf gtk:file-dialog-initial-name)}
-  function sets the name. For saving dialogs, this will usually be pre-entered
-  into the name field.
+  The @fun{gtk:file-dialog-initial-name} function gets the name for the file
+  that should be initially set. The @setf{gtk:file-dialog-initial-name} function 
+  sets the name. For saving dialogs, this will usually be pre-entered into the 
+  name field.
 
   If a file with this name already exists in the directory set via the
   @slot[gtk:file-dialog]{initial-folder} property, the dialog should preselect
@@ -373,9 +373,9 @@
     Accessor of the @slot[file-dialog]{modal} slot of the
     @class{gtk:file-dialog} class.
   @end{short}
-  The @sym{gtk:file-dialog-modal} function returns whether the file chooser
+  The @fun{gtk:file-dialog-modal} function returns whether the file chooser
   dialog blocks interaction with the parent window while it is presented.
-  The @sym{(setf gtk:file-dialog-modal)} function sets the property.
+  The @setf{gtk:file-dialog-modal} function sets the property.
 
   Since 4.10
   @see-class{gtk:file-dialog}")
@@ -401,9 +401,9 @@
     Accessor of the @slot[file-dialog]{title} slot of the
     @class{gtk:file-dialog} class.
   @end{short}
-  The @sym{gtk:file-dialog-title} function returns the title that will be shown
-  on the file chooser dialog. The @sym{(setf gtk:file-dialog-title)} function
-  sets the title.
+  The @fun{gtk:file-dialog-title} function returns the title that will be shown
+  on the file chooser dialog. The @setf{gtk:file-dialog-title} function sets the 
+  title.
 
   Since 4.10
   @see-class{gtk:file-dialog}")

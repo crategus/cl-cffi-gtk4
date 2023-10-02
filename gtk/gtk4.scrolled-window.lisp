@@ -2,7 +2,7 @@
 ;;; gtk4.scrolled-window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -263,7 +263,7 @@
 (setf (documentation 'scrolled-window 'type)
  "@version{2023-8-6}
   @begin{short}
-    The @sym{gtk:scrolled-window} widget is a container that accepts a single
+    The @class{gtk:scrolled-window} widget is a container that accepts a single
     child widget, makes that child scrollable using either internally added
     scrollbars or externally associated adjustments, and optionally draws a
     frame around the child.
@@ -283,7 +283,7 @@
   If the @fun{gtk:scrolled-window-child} function has added a
   @class{gtk:viewport} widget for you, you can remove both your added child
   widget from the @class{gtk:viewport} widget, and the @class{gtk:viewport}
-  widget from the @sym{gtk:scrolled-window} widget, like this:
+  widget from the @class{gtk:scrolled-window} widget, like this:
   @begin{pre}
 (let ((window (make-instance 'gtk:scrolled-window))
       (child (make-instance 'gtk:button)))
@@ -303,23 +303,23 @@
   adds internal @class{gtk:scrollbar} widgets around its child. The scroll
   position of the child, and if applicable the scrollbars, is controlled by the
   @code{hadjustment} and @code{vadjustment} properties that are associated with
-  the @sym{gtk:scrolled-window} widget. See the docs on the
+  the @class{gtk:scrolled-window} widget. See the docs on the
   @class{gtk:scrollbar} widget for the details, but note that the
   @code{step-increment} and @code{page-increment} properties are only effective
   if the policy causes scrollbars to be present.
 
-  If a @sym{gtk:scrolled-window} widget does not behave quite as you would like,
-  or does not have exactly the right layout, it is very possible to set up your
-  own scrolling with the @class{gtk:scrollbar} widget and for example a
+  If a @class{gtk:scrolled-window} widget does not behave quite as you would
+  like, or does not have exactly the right layout, it is very possible to set up
+  your own scrolling with the @class{gtk:scrollbar} widget and for example a
   @class{gtk:grid} widget.
 
   @subheading{Touch support}
-  The @sym{gtk:scrolled-window} widget has built-in support for touch devices.
+  The @class{gtk:scrolled-window} widget has built-in support for touch devices.
   When a touchscreen is used, swiping will move the scrolled window, and will
   expose 'kinetic' behavior. This can be turned off with the
   @code{kinetic-scrolling} property if it is undesired.
 
-  The @sym{gtk:scrolled-window} widget also displays visual 'overshoot'
+  The @class{gtk:scrolled-window} widget also displays visual 'overshoot'
   indication when the content is pulled beyond the end, and this situation can
   be captured with the @code{edge-overshot} signal.
 
@@ -328,15 +328,15 @@
   desired although no mouse is present, this behaviour can be turned off with
   the @code{overlay-scrolling} property.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:scrolled-window} implementation has a main CSS node with name
+    The @class{gtk:scrolled-window} implementation has a main CSS node with name
     @code{scrolledwindow}. It uses subnodes with names @code{overshoot} and
     @code{undershoot} to draw the overflow and underflow indications. These
     nodes get the @code{.left}, @code{.right}, @code{.top} or @code{.bottom}
     style class added depending on where the indication is drawn.
 
-    The @sym{gtk:scrolled-window} implementation also sets the @code{.left}, 
-    @code{.right}, @code{.top}, @code{.bottom}  positional style classes and 
-    @code{.overlay-indicator}, @code{.dragging}, @code{.hovering} style classes 
+    The @class{gtk:scrolled-window} implementation also sets the @code{.left},
+    @code{.right}, @code{.top}, @code{.bottom}  positional style classes and
+    @code{.overlay-indicator}, @code{.dragging}, @code{.hovering} style classes
     related to overlay scrolling on its scrollbars.
 
     If both scrollbars are visible, the area where they meet is drawn with a
@@ -354,7 +354,7 @@ lambda (window pos)    :run-last
       Note: The @arg{pos} argument is LTR/RTL aware, so callers should be aware
       too if intending to provide behavior on horizontal edges.
       @begin[code]{table}
-        @entry[window]{The @sym{gtk:scrolled-window} widget which received the
+        @entry[window]{The @class{gtk:scrolled-window} widget which received the
           signal.}
         @entry[pos]{Edge side as a value of the @symbol{gtk:position-type}
           enumeration that was hit.}
@@ -370,7 +370,7 @@ lambda (window pos)    :run-last
       Note: The @arg{pos} argument is LTR/RTL aware, so callers should be aware
       too if intending to provide behavior on horizontal edges.
       @begin[code]{table}
-        @entry[window]{The @sym{gtk:scrolled-window} widget which received the
+        @entry[window]{The @class{gtk:scrolled-window} widget which received the
           signal.}
         @entry[pos]{Edge side as a value of the @symbol{gtk:position-type}
           enumeration that was hit.}
@@ -385,7 +385,7 @@ lambda (window direction)    :action
       toplevel parent in the container hierarchy. The default bindings for this
       signal are the @kbd{Tab+Ctrl} and @kbd{Tab+Ctrl+Shift} keys.
       @begin[code]{table}
-        @entry[window]{The @sym{gtk:scrolled-window} widget which received the
+        @entry[window]{The @class{gtk:scrolled-window} widget which received the
           signal.}
         @entry[direction]{Either the @code{:tab-forward} or @code{:tab-backward}
           value of the @symbol{gtk:direction-type} enumeration.}
@@ -399,7 +399,7 @@ lambda (window scroll horizontal)    :action
         updated which triggers a signal that the scrolled windows child may
         listen to and scroll itself.
         @begin[code]{table}
-          @entry[window]{The @sym{gtk:scrolled-window} widget which received
+          @entry[window]{The @class{gtk:scrolled-window} widget which received
             the signal.}
           @entry[scroll]{A value of the @symbol{gtk:scroll-type} enumeration
             describing how much to scroll.}
@@ -407,6 +407,7 @@ lambda (window scroll horizontal)    :action
             horizontally or not.}
         @end{table}
   @end{dictionary}
+  @see-constructor{gtk:scrolled-window-new}
   @see-slot{gtk:scrolled-window-child}
   @see-slot{gtk:scrolled-window-hadjustment}
   @see-slot{gtk:scrolled-window-has-frame}
@@ -422,7 +423,6 @@ lambda (window scroll horizontal)    :action
   @see-slot{gtk:scrolled-window-vadjustment}
   @see-slot{gtk:scrolled-window-vscrollbar-policy}
   @see-slot{gtk:scrolled-window-window-placement}
-  @see-constructor{gtk:scrolled-window-new}
   @see-class{gtk:scrollable}
   @see-class{gtk:viewport}
   @see-class{gtk:adjustment}")
@@ -451,9 +451,8 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{child} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-child} function gets the child widget of the
-  scrolled window. The @sym{(setf gtk:scrolled-window-child)} sets the child
-  widget.
+  The @fun{gtk:scrolled-window-child} function gets the child widget of the
+  scrolled window. The @setf{gtk:scrolled-window-child} sets the child widget.
   @see-class{gtk:scrolled-window}
   @see-class{gtk:widget}")
 
@@ -480,11 +479,11 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{hadjustment} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-hadjustment} function returns the horizontal
+  The @fun{gtk:scrolled-window-hadjustment} function returns the horizontal
   adjustment of the scrollbar, used to connect the horizontal scrollbar to the
   horizontal scroll functionality of the child widget. The
-  @sym{(setf gtk:scrolled-window-hadjustment)} function sets the adjustment for
-  the horizontal scrollbar.
+  @setf{gtk:scrolled-window-hadjustment} function sets the adjustment for the
+  horizontal scrollbar.
   @see-class{gtk:scrolled-window}
   @see-class{gtk:adjustment}
   @see-function{gtk:scrolled-window-vadjustment}")
@@ -511,8 +510,8 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{has-frame} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-has-frame} function gets whether the scrolled
-  window draws a frame. The @sym{(setf gtk:scrolled-window-has-frame)} function
+  The @fun{gtk:scrolled-window-has-frame} function gets whether the scrolled
+  window draws a frame. The @setf{gtk:scrolled-window-has-frame} function
   changes the frame drawn around the contents of the scrolled window.
   @see-class{gtk:scrolled-window}")
 
@@ -567,10 +566,10 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{kinetic-scrolling} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-kinetic-scrolling} function returns the
+  The @fun{gtk:scrolled-window-kinetic-scrolling} function returns the
   specified kinetic scrolling behavior. The
-  @sym{(setf gtk:scrolled-window-kinetic-scrolling)} function turns kinetic
-  scrolling on or off.
+  @setf{gtk:scrolled-window-kinetic-scrolling} function turns kinetic scrolling
+  on or off.
 
   Kinetic scrolling only applies to input devices of @code{:touchscreen} type.
   @see-class{gtk:scrolled-window}")
@@ -598,10 +597,10 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{max-content-height} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-max-content-height} function returns the maximum
+  The @fun{gtk:scrolled-window-max-content-height} function returns the maximum
   content height that the scrolled window should keep visible. The scrolled
   window will grow up to this height before it starts scrolling the content. The
-  @sym{(setf gtk:scrolled-window-max-content-height)} function sets the maximum
+  @setf{gtk:scrolled-window-max-content-height} function sets the maximum
   height.
 
   It is a programming error to set the maximum content height to a value
@@ -632,11 +631,10 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{max-content-width} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-max-content-width} function returns the maximum
+  The @fun{gtk:scrolled-window-max-content-width} function returns the maximum
   content width that the scrolled window should keep visible. The scrolled
   window will grow up to this width before it starts scrolling the content. The
-  @sym{(setf gtk:scrolled-window-max-content-width)} function sets the maximum
-  width.
+  @setf{gtk:scrolled-window-max-content-width} function sets the maximum width.
 
   It is a programming error to set the maximum content width to a value
   smaller than the @slot[gtk:scrolled-window]{min-content-width} value.
@@ -667,10 +665,10 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{min-content-height} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-min-content-height} function gets the minimal
+  The @fun{gtk:scrolled-window-min-content-height} function gets the minimal
   content height of the scrolled window that the scrolled window should keep
   visible. Note that this can and, usually will, be smaller than the minimum
-  size of the content. The @sym{(setf gtk:scrolled-window-min-content-heigth)}
+  size of the content. The @setf{gtk:scrolled-window-min-content-heigth}
   function sets the minimum height.
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-max-content-height}")
@@ -698,11 +696,11 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{min-content-width} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-min-content-width} function gets the minimum
+  The @fun{gtk:scrolled-window-min-content-width} function gets the minimum
   content width of the scrolled window that the scrolled window should keep
   visible. Note that this can and, usually will, be smaller than the minimum
-  size of the content. The @sym{(setf gtk:scrolled-window-min-content-width)}
-  function sets the minimum width.
+  size of the content. The @setf{gtk:scrolled-window-min-content-width} function
+  sets the minimum width.
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-max-content-width}")
 
@@ -731,10 +729,10 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{overlay-scrolling} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-overlay-scrolling} function returns whether
+  The @fun{gtk:scrolled-window-overlay-scrolling} function returns whether
   overlay scrolling is enabled for this scrolled window. The
-  @sym{(setf gtk:scrolled-window-overlay-scrolling)} function enables or
-  disables overlay scrolling.
+  @setf{gtk:scrolled-window-overlay-scrolling} function enables or disables
+  overlay scrolling.
   @see-class{gtk:scrolled-window}")
 
 ;;; --- scrolled-window-propagate-natural-height -------------------------------
@@ -763,10 +761,10 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{propagate-natural-height} slot
     of the @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-propagate-natural-height} function reports
+  The @fun{gtk:scrolled-window-propagate-natural-height} function reports
   whether the natural height of the child will be calculated and propagated
   through the requested natural height of the scrolled window. The
-  @sym{(setf gtk:scrolled-window-propagate-natural-height)} function sets the
+  @setf{gtk:scrolled-window-propagate-natural-height} function sets the
   property.
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-propagate-natural-width}")
@@ -797,11 +795,10 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{propagate-natural-width} slot
     of the @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-propagate-natural-width} function reports whether
+  The @fun{gtk:scrolled-window-propagate-natural-width} function reports whether
   the natural width of the child will be calculated and propagated through the
   requested natural width of the scrolled window. The
-  @sym{(setf gtk:scrolled-window-propagate-natural-width)} function sets the
-  property.
+  @setf{gtk:scrolled-window-propagate-natural-width} function sets the property.
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-propagate-natural-height}")
 
@@ -828,11 +825,11 @@ lambda (window scroll horizontal)    :action
     Accessor of the @slot[gtk:scrolled-window]{vadjustment} slot of the
     @class{gtk:scrolled-window} class.
   @end{short}
-  The @sym{gtk:scrolled-window-vadjustment} function returns the vertical
+  The @fun{gtk:scrolled-window-vadjustment} function returns the vertical
   adjustment of the scrollbar, used to connect the vertical scrollbar to the
   vertical scroll functionality of the child widget. The
-  @sym{(setf gtk:scrolled-window-vadjustment)} function sets the adjusment for
-  the vertical scrollbar.
+  @setf{gtk:scrolled-window-vadjustment} function sets the adjusment for the
+  vertical scrollbar.
   @see-class{gtk:scrolled-window}
   @see-class{gtk:adjustment}
   @see-function{gtk:scrolled-window-hadjustment}")
@@ -994,10 +991,9 @@ lambda (window scroll horizontal)    :action
   @begin{short}
     Accessor of the policy values of the srolled window.
   @end{short}
-
-  The @sym{gtk:scrolled-window-policy} function retrieves the current policy
+  The @fun{gtk:scrolled-window-policy} function retrieves the current policy
   values for the horizontal and vertical scrollbars. The
-  @sym{(setf gtk:scrolled-window-policy)} function sets the scrollbar policy.
+  @setf{gtk:scrolled-window-policy} function sets the scrollbar policy.
 
   The policy determines when the scrollbar should appear. It is a value from
   the @symbol{gtk:policy-type} enumeration. If @code{:always}, the scrollbar is
@@ -1039,10 +1035,9 @@ lambda (window scroll horizontal)    :action
     Accessor of the placement of the contents with respect to the scrollbars
     for the scrolled window.
   @end{short}
-
-  The @sym{gtk:scrolled-window-placement} function gets the placement of the
+  The @fun{gtk:scrolled-window-placement} function gets the placement of the
   contents with respect to the scrollbars for the scrolled window. The
-  @sym{(setf gtk:scrolled-window-placement)} function sets the placement of the
+  @setf{gtk:scrolled-window-placement} function sets the placement of the
   contents.
 
   The default is @code{:left}, meaning the child is in the top left, with the
@@ -1053,7 +1048,7 @@ lambda (window scroll horizontal)    :action
   See also the @fun{gtk:scrolled-window-unset-placement} function.
   @begin[Note]{dictionary}
     In contrast to the @fun{gtk:scrolled-window-window-placement} function the
-    @sym{gtk:scrolled-window-placement} function updates the scrolled window
+    @fun{gtk:scrolled-window-placement} function updates the scrolled window
     after setting the new value for the window placement.
   @end{dictionary}
   @see-class{gtk:scrolled-window}

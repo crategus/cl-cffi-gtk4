@@ -2,7 +2,7 @@
 ;;; gtk4.shortcut-action.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -122,16 +122,16 @@
 (setf (documentation 'shortcut-action 'type)
  "@version{#2022-8-25}
   @begin{short}
-    The @sym{gtk:shortcut-action} object is the object used to describe what a
+    The @class{gtk:shortcut-action} object is the object used to describe what a
     @class{gtk:shortcut} object should do when triggered.
   @end{short}
-  To activate a @sym{gtk:shortcut-action} object manually, the
+  To activate a @class{gtk:shortcut-action} object manually, the
   @fun{gtk:shortcut-action-activate} function can be called.
 
-  The @sym{gtk:shortcut-action} implementation contain functions that allow
+  The @class{gtk:shortcut-action} implementation contain functions that allow
   easy presentation to end users as well as being printed for debugging.
 
-  All @sym{gtk:shortcut-action} objects are immutable, you can only specify
+  All @class{gtk:shortcut-action} objects are immutable, you can only specify
   their properties during construction. If you want to change an action, you
   have to replace it with a new one. If you need to pass arguments to an action,
   these are specified by the higher-level @class{gtk:shortcut} object.
@@ -278,7 +278,7 @@
     Accessor of the @slot[gtk:signal-action]{signal-name} slot of the
     @class{gtk:signal-action} class.
   @end{short}
-  The @sym{gtk:signal-action-signal-name} function returns the name of the
+  The @fun{gtk:signal-action-signal-name} function returns the name of the
   signal that will be emitted.
   @see-class{gtk:signal-action}")
 
@@ -327,7 +327,7 @@
     Accessor of the @slot[gtk:named-action]{action-name} slot of the
     @class{gtk:named-action} class.
   @end{short}
-  The @sym{gtk:named-action-action-name} function returns the name of the
+  The @fun{gtk:named-action-action-name} function returns the name of the
   action that will be activated.
   @see-class{gtk:named-action}")
 

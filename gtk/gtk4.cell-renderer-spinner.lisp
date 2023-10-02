@@ -2,7 +2,7 @@
 ;;; gtk4.cell-renderer-spinner.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.6 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -78,8 +78,8 @@
 (setf (documentation 'cell-renderer-spinner 'type)
  "@version{#2020-6-13}
   @begin{short}
-    The @sym{gtk:cell-renderer-spinner} class renders a spinning animation in a
-    cell, very similar to the @class{gtk:spinner} widget.
+    The @class{gtk:cell-renderer-spinner} class renders a spinning animation in
+    a cell, very similar to the @class{gtk:spinner} widget.
   @end{short}
   It can often be used as an alternative to a the
   @class{gtk:cell-renderer-progress} object for displaying indefinite activity,
@@ -90,6 +90,11 @@
   set the cell renderer properties for each cell is to bind them to columns in
   your tree model using e.g. the @fun{gtk:tree-view-column-add-attribute}
   function.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-spinner} implementation is deprecated since
+    4.10. List views use widgets to display their contents. You should use
+    the @class{gtk:spinner} widget instead.
+  @end{dictionary}
   @see-slot{gtk:cell-renderer-spinner-active}
   @see-slot{gtk:cell-renderer-spinner-pulse}
   @see-slot{gtk:cell-renderer-spinner-size}
@@ -124,6 +129,10 @@
     @class{gtk:cell-renderer-spinner} class.
   @end{short}
   Whether the spinner is active, i.e. shown, in the cell.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-spinner} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-spinner}")
 
 ;;; --- cell-renderer-spinner-pulse --------------------------------------------
@@ -155,6 +164,10 @@
   spinner animation. Usually, you would update this value in a timeout. By
   default, the @class{gtk:spinner} widget draws one full cycle of the animation,
   consisting of 12 frames, in 750 milliseconds.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-spinner} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-spinner}")
 
 ;;; --- cell-renderer-spinner-size ---------------------------------------------
@@ -180,6 +193,10 @@
     @class{gtk:cell-renderer-spinner} class.
   @end{short}
   The icon size that specifies the size of the rendered spinner.
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-spinner} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-spinner}")
 
 ;;; ----------------------------------------------------------------------------
@@ -195,6 +212,10 @@
   @begin{short}
     Returns a new cell renderer which will show a spinner to indicate activity.
   @end{short}
+  @begin[Warning]{dictionary}
+    The @class{gtk:cell-renderer-spinner} implementation is deprecated since
+    4.10. Please do not use it in newly written code.
+  @end{dictionary}
   @see-class{gtk:cell-renderer-spinner}"
   (make-instance 'cell-renderer-spinner))
 

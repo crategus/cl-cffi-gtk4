@@ -2,7 +2,7 @@
 ;;; gtk4.lock-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -106,7 +106,7 @@
 (setf (documentation 'lock-button 'type)
  "@version{2023-3-25}
   @begin{short}
-    The @sym{gtk:lock-button} widget is a widget that can be used in control
+    The @class{gtk:lock-button} widget is a widget that can be used in control
     panels or preference dialogs to allow users to obtain and revoke
     authorizations needed to operate the controls.
   @end{short}
@@ -141,7 +141,7 @@
   with the @code{text-lock}, @code{text-unlock}, @code{tooltip-lock},
   @code{tooltip-unlock} and @code{tooltip-not-authorized} properties.
   @begin[Warning]{dictionary}
-    The @sym{gtk:lock-button} implementation has been deprecated since version
+    The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
     removed in GTK 5.
   @end{dictionary}
@@ -179,11 +179,11 @@
     Accessor of the @slot[gtk:lock-button]{permission} slot of the
     @class{gtk:lock-button} class.
   @end{short}
-  The @sym{gtk:lock-button-permission} function obtains the permission that
-  controls the lock button. The @sym{(setf gtk:lock-button-permission)} function
-  sets the permission.
+  The @fun{gtk:lock-button-permission} function obtains the permission that
+  controls the lock button. The @setf{gtk:lock-button-permission} function sets
+  the permission.
   @begin[Warning]{dictionary}
-    The @sym{gtk:lock-button} implementation has been deprecated since version
+    The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
     removed in GTK 5.
   @end{dictionary}
@@ -214,7 +214,7 @@
   @end{short}
   The text to display when prompting the user to lock.
   @begin[Warning]{dictionary}
-    The @sym{gtk:lock-button} implementation has been deprecated since version
+    The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
     removed in GTK 5.
   @end{dictionary}
@@ -244,7 +244,7 @@
   @end{short}
   The text to display when prompting the user to unlock.
   @begin[Warning]{dictionary}
-    The @sym{gtk:lock-button} implementation has been deprecated since version
+    The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
     removed in GTK 5.
   @end{dictionary}
@@ -274,7 +274,7 @@
   @end{short}
   The tooltip to display when prompting the user to lock.
   @begin[Warning]{dictionary}
-    The @sym{gtk:lock-button} implementation has been deprecated since version
+    The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
     removed in GTK 5.
   @end{dictionary}
@@ -307,7 +307,7 @@
   @end{short}
   The tooltip to display when prompting the user cannot obtain authorization.
   @begin[Warning]{dictionary}
-    The @sym{gtk:lock-button} implementation has been deprecated since version
+    The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
     removed in GTK 5.
   @end{dictionary}
@@ -337,7 +337,7 @@
   @end{short}
   The tooltip to display when prompting the user to unlock.
   @begin[Warning]{dictionary}
-    The @sym{gtk:lock-button} implementation has been deprecated since version
+    The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
     removed in GTK 5.
   @end{dictionary}
@@ -354,7 +354,7 @@
   @return{A new @class{gtk:lock-button} widget.}
   @short{Creates a new lock button which reflects the permission.}
   @begin[Warning]{dictionary}
-    The @sym{gtk:lock-button} implementation has been deprecated since version
+    The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
     removed in GTK 5.
   @end{dictionary}

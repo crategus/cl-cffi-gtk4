@@ -2,7 +2,7 @@
 ;;; gtk4.scrollable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -124,7 +124,7 @@
       (documentation 'scrollable 'type)
  "@version{2023-8-6}
   @begin{short}
-    The @sym{gtk:scrollable} interface is an interface that is implemented by
+    The @class{gtk:scrollable} interface is an interface that is implemented by
     widgets with native scrolling ability.
   @end{short}
   To implement this interface you should override the @code{hadjustment}
@@ -188,9 +188,9 @@
     Accessor of the @slot[gtk:scrollable]{hadjustment} slot of the
     @class{gtk:scrollable} class.
   @end{short}
-  The @sym{gtk:scrollabe-hadjustment} function retrieves the adjustment used for 
-  horizontal scrolling. The @sym{(setf gtk:scrollabe-hadjustment)} function sets 
-  the horizontal adjustment.
+  The @fun{gtk:scrollabe-hadjustment} function retrieves the adjustment used for
+  horizontal scrolling. The @setf{gtk:scrollabe-hadjustment} function sets the
+  horizontal adjustment.
   @see-class{gtk:scrollable}
   @see-class{gtk:adjustment}
   @see-function{gtk:scrollable-vadjustment}")
@@ -220,11 +220,11 @@
     Accessor of the @slot[gtk:scrollable]{hscroll-policy} slot of the
     @class{gtk:scrollable} class.
   @end{short}
-  The @sym{gtk:scrollable-hscroll-policy} function gets the horizontal scrolling
+  The @fun{gtk:scrollable-hscroll-policy} function gets the horizontal scrolling
   policy which determines whether horizontal scrolling should start below the
   minimum width or below the natural width. The
-  @sym{(setf gtk:scrollable-hscroll-policy)} function sets the horizontal
-  scrolling policy.
+  @setf{gtk:scrollable-hscroll-policy} function sets the horizontal scrolling
+  policy.
   @see-class{gtk:scrollable}
   @see-symbol{gtk:scrollable-policy}
   @see-function{gtk:scrollable-vscroll-policy}")
@@ -251,9 +251,9 @@
     Accessor of the @slot[gtk:scrollable]{vadjustment} slot of the
     @class{gtk:scrollable} class.
   @end{short}
-  The @sym{gtk:scrollable-vadjustment} function retrieves the adjustment used
-  for vertical scrolling. The @sym{(setf gtk:scrollable-vadjustment)} function
-  sets the vertical adjustment.
+  The @fun{gtk:scrollable-vadjustment} function retrieves the adjustment used
+  for vertical scrolling. The @setf{gtk:scrollable-vadjustment} function sets
+  the vertical adjustment.
   @see-class{gtk:scrollable}
   @see-class{gtk:adjustment}
   @see-function{gtk:scrollable-hadjustment}")
@@ -283,11 +283,11 @@
     Accessor of the @slot[gtk:scrollable]{vscroll-policy} slot of the
     @class{gtk:scrollable} class.
   @end{short}
-  The @sym{gtk:scrollable-vscroll-policy} function gets the vertical scrolling
+  The @fun{gtk:scrollable-vscroll-policy} function gets the vertical scrolling
   policy which determines whether vertical scrolling should start below the
   minimum height or below the natural height. The
-  @sym{(setf gtk:scrollable-hscroll-policy)} function sets the vertical
-  scrolling policy.
+  @setf{gtk:scrollable-hscroll-policy} function sets the vertical scrolling
+  policy.
   @see-class{gtk:scrollable}
   @see-symbol{gtk:scrollable-policy}
   @see-function{gtk:scrollable-hscroll-policy}")

@@ -2,7 +2,7 @@
 ;;; gtk4.color-dialog-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -85,8 +85,8 @@
 (setf (documentation 'color-dialog-button 'type)
  "@version{2023-7-28}
   @begin{short}
-    The @sym{gtk:color-dialog-button} widget is a wrapped around a 
-    @class{gtk:color-dialog} object and allows to open a color chooser dialog 
+    The @class{gtk:color-dialog-button} widget is a wrapped around a
+    @class{gtk:color-dialog} object and allows to open a color chooser dialog
     to change the color.
   @end{short}
 
@@ -99,9 +99,9 @@ colorbutton
 ╰── button.color
     ╰── [content]
     @end{pre}
-    The @sym{gtk:color-dialog-button} implementation has a single CSS node with 
-    name @code{colorbutton} which contains a button node. To differentiate it 
-    from a plain @class{gtk:button} widget, it gets the @code{.color} style 
+    The @class{gtk:color-dialog-button} implementation has a single CSS node
+    with name @code{colorbutton} which contains a button node. To differentiate
+    it from a plain @class{gtk:button} widget, it gets the @code{.color} style
     class.
   @end{dictionary}
   Since 4.10
@@ -115,9 +115,9 @@ colorbutton
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "dialog" 'color-dialog-button) t)
- "The @code{dialog} property of type @class{gtk:color-dialog} (Read / Write) 
+ "The @code{dialog} property of type @class{gtk:color-dialog} (Read / Write)
   @br{}
-  The @class{gtk:color-dialog} object that contains parameters for the color 
+  The @class{gtk:color-dialog} object that contains parameters for the color
   chooser dialog.")
 
 #+liber-documentation
@@ -133,11 +133,10 @@ colorbutton
     Accessor of the @slot[color-dialog-button]{dialog} slot of the
     @class{gtk:color-dialog-button} class.
   @end{short}
-  The @sym{gtk:color-dialog-button-dialog} function returns the 
-  @class{gtk:color-dialog} object. The 
-  @sym{(setf gtk:color-dialog-button-dialog)} function sets a 
-  @class{gtk:color-dialog} object to use for creating the color chooser dialog 
-  that is presented when the user clicks the button.
+  The @fun{gtk:color-dialog-button-dialog} function returns the
+  @class{gtk:color-dialog} object. The @setf{gtk:color-dialog-button-dialog}
+  function sets a @class{gtk:color-dialog} object to use for creating the color
+  chooser dialog that is presented when the user clicks the button.
 
   Since 4.10
   @see-class{gtk:color-dialog-button}
@@ -167,8 +166,8 @@ colorbutton
     Accessor of the @slot[color-dialog-button]{rgba} slot of the
     @class{gtk:color-dialog-button} class.
   @end{short}
-  The @sym{gtk:color-dialog-button-rgba} function returns the color of the
-  button. The @sym{(setf gtk:color-dialog-button-rgba)} function sets the color.
+  The @fun{gtk:color-dialog-button-rgba} function returns the color of the
+  button. The @setf{gtk:color-dialog-button-rgba} function sets the color.
 
   This function is what should be used to obtain the color that was chosen by
   the user. To get informed about changes, listen to \"notify::color\" signal.
@@ -188,12 +187,12 @@ colorbutton
  "@version{2023-7-28}
   @argument[dialog]{an optional @class{gtk:color-dialog} object to use}
   @return{A new @class{gtk:color-dialog-button} widget.}
-  @begin{short}    
-    Creates a new @class{gtk:color-dialog-button} widget with the given 
+  @begin{short}
+    Creates a new @class{gtk:color-dialog-button} widget with the given
     @arg{dialog}.
   @end{short}
   You can pass @code{nil} to this function and set a @class{gtk:color-dialog}
-  object later. The button will be insensitive until that happens.  
+  object later. The button will be insensitive until that happens.
   @see-class{gtk:color-dialog-button}
   @see-class{gtk:color-dialog}"
   (if dialog
