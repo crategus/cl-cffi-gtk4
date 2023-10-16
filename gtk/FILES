@@ -22,6 +22,7 @@ GListModel support
   gtk4.multi-sorter.lisp               GtkMultiSorter                 GTK 4.12
   gtk4.string-sorter.lisp              GtkStringSorter                GTK 4.12
   gtk4.numeric-sorter.lisp             GtkNumericSorter               GTK 4.12
+  gtk4.column-view-sorter.lisp         GtkColumnViewSorter            GTK 4.12
 
   gtk4.selection-model.lisp            GtkSelectionModel              GTK 4.12
   gtk4.no-selection.lisp               GtkNoSelection                 GTK 4.12
@@ -101,22 +102,23 @@ Layout Containers
 
 Layout Managers
 
-  gtk4.layout-manager.lisp             GtkLayoutManager               GTK 4.10 *
-  gtk4.layout-child.lisp               GtkLayoutChild                 GTK 4.10 *
-  gtk4.bin-layout.lisp                 GtkBinLayout                   GTK 4.10 *
-  gtk4.box-layout.lisp                 GtkBoxLayout                   GTK 4.10 *
-  gtk4.center-layout.lisp              GtkCenterLayout                GTK 4.10 *
-  gtk4.fixed-layout.lisp               GtkFixedLayout                 GTK 4.10 *
-  gtk4.grid-layout.lisp                GtkGridLayout                  GTK 4.10 *
-  gtk4.overlay-layout.lisp             GtkOverlayLayout               GTK 4.10 *
-  gtk4.custom-layout.lisp              GtkCustomLayout                GTK 4.10 *
-  gtk4.constraint-layout.lisp          GtkConstraintLayout            GTK 4.10 *
+  gtk4.layout-manager.lisp             GtkLayoutManager               GTK 4.12
+  gtk4.layout-child.lisp               GtkLayoutChild                 GTK 4.12
+  gtk4.bin-layout.lisp                 GtkBinLayout                   GTK 4.12
+  gtk4.box-layout.lisp                 GtkBoxLayout                   GTK 4.12 &
+  gtk4.center-layout.lisp              GtkCenterLayout                GTK 4.12 &
+  gtk4.fixed-layout.lisp               GtkFixedLayout                 GTK 4.12
+  gtk4.grid-layout.lisp                GtkGridLayout                  GTK 4.12
+  gtk4.overlay-layout.lisp             GtkOverlayLayout               GTK 4.12
+  gtk4.custom-layout.lisp              GtkCustomLayout                GTK 4.12 &
+  gtk4.constraint-layout.lisp          GtkConstraintLayout            GTK 4.12 &
   gtk4.constraint.lisp                 GtkConstraint                  GTK 4.12
-  gtk4.constraint-guide.lisp           GtkConstraintGuide             GTK 4.10 *
+  gtk4.constraint-guide.lisp           GtkConstraintGuide             GTK 4.12
 
 Display Widgets
 
   gtk4.label.lisp                      GtkLabel                       GTK 4.12
+  gtk4.inscription.lisp                GtkInscription                 GTK 4.12 +
   gtk4.image.lisp                      GtkImage                       GTK 4.12
   gtk4.picture.lisp                    GtkPicture                     GTK 4.12
   gtk4.spinner.lisp                    GtkSpinner                     GTK 4.12
@@ -126,20 +128,20 @@ Display Widgets
 
 Media Support
 
-  gtk4.video.lisp                      GtkVideo                       GTK 4.10 *
-  gtk4.media-controls.lisp             GtkMediaControls               GTK 4.10 *
-  gtk4.media-stream.lisp               GtkMediaStream                 GTK 4.10 *
-  gtk4.media-file.lisp                 GtkMediaFile                   GTK 4.10 *
+  gtk4.video.lisp                      GtkVideo                       GTK 4.12
+  gtk4.media-controls.lisp             GtkMediaControls               GTK 4.12
+  gtk4.media-stream.lisp               GtkMediaStream                 GTK 4.12 &
+  gtk4.media-file.lisp                 GtkMediaFile                   GTK 4.12
 
 Buttons and Toggles
 
   gtk4.button.lisp                     GtkButton                      GTK 4.12
   gtk4.check-button.lisp               GtkCheckButton                 GTK 4.12
-  gtk4.toggle-button.lisp              GtkToggleButton                GTK 4.10 *
-  gtk4.menu-button.lisp                GtkMenuButton                  GTK 4.10 *
-  gtk4.link-button.lisp                GtkLinkButton                  GTK 4.10 *
-  gtk4.scale-button.lisp               GtkScaleButton                 GTK 4.10 *
-  gtk4.switch.lisp                     GtkSwitch                      GTK 4.10 *
+  gtk4.toggle-button.lisp              GtkToggleButton                GTK 4.12
+  gtk4.menu-button.lisp                GtkMenuButton                  GTK 4.12 &
+  gtk4.link-button.lisp                GtkLinkButton                  GTK 4.12
+  gtk4.scale-button.lisp               GtkScaleButton                 GTK 4.12
+  gtk4.switch.lisp                     GtkSwitch                      GTK 4.12
 
 Numeric and Text Data Entry
 
@@ -161,7 +163,7 @@ Multiline Text Editor
   gtk4.text-tag-table.lisp             GtkTextTagTable                GTK 4.12
   gtk4.text-mark.lisp                  GtkTextMark                    GTK 4.12
   gtk4.text-buffer.lisp                GtkTextBuffer                  GTK 4.12 +
-  gtk4.text-view.lisp                  GtkTextView                    GTK 4.12 &
+  gtk4.text-view.lisp                  GtkTextView                    GTK 4.12
 
 Combo Box, Popover
 
@@ -287,9 +289,9 @@ Keyboard shortcuts
 
 Data exchange, clipboards and Drag-and-Drop
 
-  gtk4.drag-source.lisp                GtkDragSource                  GTK 4.10 *
-  gtk4.drag-icon.lisp                  GtkDragIcon                    GTK 4.10 *
-  gtk4.drop-target.lisp                GtkDropTarget                  GTK 4.10 *
+  gtk4.drag-source.lisp                GtkDragSource                  GTK 4.12
+  gtk4.drag-icon.lisp                  GtkDragIcon                    GTK 4.12
+  gtk4.drop-target.lisp                GtkDropTarget                  GTK 4.12
   gtk4.drop-target-async.lisp          GtkDropTargetAsync             GTK 4.12
   gtk4.drop-controller-motion.lisp     GtkDropControllerMotion        GTK 4.12
 
@@ -298,7 +300,7 @@ GTK Core Reference
   gtk4.main-loop.lisp                  Initialization                 GTK 4.12
   gtk4.version.lisp                    Version Information            GTK 4.12
   gtk4.settings.lisp                   GtkSettings                    Gtk 4.12
-  gtk4.enumerations.lisp               Standard Enumerations          GTK 4.10 *
+  gtk4.enumerations.lisp               Standard Enumerations          GTK 4.12 &
   gtk4.mount-operation.lisp            Filesystem utilities           GTK 4.12 %
 
 Theming in GTK

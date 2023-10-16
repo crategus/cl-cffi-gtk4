@@ -237,6 +237,13 @@
       @about-generic{numeric-sorter-sort-order}
       @about-function{numeric-sorter-new}
     @end{subsection}
+    @begin[GtkColumnViewSorter]{subsection}
+      @about-class{column-view-sorter}
+      @about-generic{column-view-sorter-primary-sort-column}
+      @about-generic{column-view-sorter-primary-sort-order}
+      @about-function{column-view-sorter-n-sort-columns}
+      @about-function{column-view-sorter-nth-sort-column}      
+    @end{subsection}
     @begin[GtkSelectionModel]{subsection}
       Extension of the list model interface that handles selections.
       @about-class{selection-model}
@@ -1199,6 +1206,22 @@
       @about-function{label-selection-bounds}
       @about-function{label-current-uri}
     @end{subsection}
+    @begin[GtkInscription]{subsection}
+      @about-symbol{inscription-overflow}
+      @about-class{inscription}
+      @about-generic{inscription-attributes}
+      @about-generic{inscription-markup}
+      @about-generic{inscription-min-chars}
+      @about-generic{inscription-min-lines}
+      @about-generic{inscription-nat-chars}
+      @about-generic{inscription-nat-lines}
+      @about-generic{inscription-text}
+      @about-generic{inscription-text-overflow}
+      @about-generic{inscription-wrap-mode}
+      @about-generic{inscription-xalign}
+      @about-generic{inscription-yalign}
+      @about-function{inscription-new}
+    @end{subsection}
     @begin[GtkImage]{subsection}
       A widget displaying an image.
       @about-symbol{image-type}
@@ -1593,6 +1616,8 @@
     @end{subsection}
     @begin[GtkPasswordEntry]{subsection}
       An entry for secrets.
+      @about-class{password-entry-buffer}
+      @about-function{password-entry-buffer-new}
       @about-class{password-entry}
       @about-generic{password-entry-activates-default}
       @about-generic{password-entry-extra-menu}
@@ -1958,6 +1983,10 @@
       @about-symbol{text-window-type}
       @about-symbol{text-extend-selection}
       @about-class{text-child-anchor}
+      @about-function{text-child-anchor-new}
+      @about-function{text-child-anchor-new-with-replacement}
+      @about-function{text-child-anchor-widgets}
+      @about-function{text-child-anchor-deleted}
       @about-function{TEXT-VIEW-PRIORITY-VALIDATE}
       @about-class{text-view}
       @about-generic{text-view-accepts-tab}
@@ -2007,18 +2036,14 @@
       @about-function{text-view-move-visually}
       @about-function{text-view-add-child-at-anchor}
       @about-function{text-view-remove}
-      @about-function{text-child-anchor-new}
-      @about-function{text-child-anchor-widgets}
-      @about-function{text-child-anchor-deleted}
       @about-function{text-view-gutter}
       @about-function{text-view-add-overlay}
       @about-function{text-view-move-overlay}
       @about-function{text-view-reset-cursor-blink}
       @about-function{text-view-im-context-filter-keypress}
       @about-function{text-view-reset-im-context}
-      @about-function{text-view-reset-cursor-blink}
-      @about-function{text-view-im-context-filter-keypress}
-      @about-function{text-view-reset-im-context}
+      @about-function{text-view-ltr-context}
+      @about-function{text-view-rtl-context}
     @end{subsection}
   @end{section}
   @begin[Combo Box, Popovers]{section}

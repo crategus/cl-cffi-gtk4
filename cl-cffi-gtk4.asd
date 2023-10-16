@@ -156,6 +156,7 @@
      (:file "gtk4.multi-sorter")
      (:file "gtk4.string-sorter")
      (:file "gtk4.numeric-sorter")
+     (:file "gtk4.column-view-sorter"            :if-feature :gtk-4-10)
 
      (:file "gtk4.selection-model")
      (:file "gtk4.no-selection")
@@ -229,6 +230,7 @@
 
      ;; Display Widgets
      (:file "gtk4.label")
+     (:file "gtk4.inscription"                   :if-feature :gtk-4-8)
      (:file "gtk4.image")
      (:file "gtk4.picture")
      (:file "gtk4.spinner")
@@ -543,6 +545,7 @@
      (:file "rtest-gtk4-multi-sorter")
      (:file "rtest-gtk4-string-sorter")
      (:file "rtest-gtk4-numeric-sorter")
+     (:file "rtest-gtk4-column-view-sorter"      :if-feature :gtk-4-10)
 
      (:file "rtest-gtk4-selection-model")
      (:file "rtest-gtk4-no-selection")
@@ -672,7 +675,7 @@
      (:file "rtest-gtk4-text-tag")
      (:file "rtest-gtk4-text-tag-table")
      (:file "rtest-gtk4-text-mark")
-;    (:file "gtk4.text-buffer")
+     (:file "rtest-gtk4-text-buffer")
      (:file "rtest-gtk4-text-view")
 
      ;; Tree, List and Icon Grid Widgets
