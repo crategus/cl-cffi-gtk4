@@ -310,6 +310,13 @@ lambda (context)    :run-last
 ;;;     TRUE if the input method handled the key event.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_im_context_filter-keypress" im-context-filter-keypress)
+    :boolean
+  (context (g:object im-context))
+  (event gdk:event))
+
+(export 'im-context-filter-keypress)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_im_context_filter_key ()
 ;;;
