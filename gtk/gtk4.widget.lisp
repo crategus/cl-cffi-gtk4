@@ -1563,7 +1563,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-name)
       "Accessor"
       (documentation 'widget-name 'function)
- "@version{#2023-9-18}
+ "@version{2023-10-5}
   @syntax[]{(gtk:widget-name object) => name}
   @syntax[]{(setf (gtk:widget-name object) name)}
   @argument[object]{a @class{gtk:widget} object}
@@ -3232,6 +3232,17 @@ lambda (widget)    :run-last
 ;;;     The name of the cursor or NULL to use the default cursor.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_widget_set_cursor_from_name" %widget-set-cursor-from-name)
+    :void
+  (widget (g:object widget))
+  (name :string))
+
+(defun widget-set-cursor-from-name (widget name)
+  (%widget-set-cursor-from-name widget
+                                (if name name (cffi:null-pointer))))
+
+(export 'widget-set-cursor-from-name)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_mnemonic_activate
 ;;; ----------------------------------------------------------------------------
@@ -4708,13 +4719,13 @@ lambda (widget)    :run-last
     Get the CSS style classes, add and remove a CSS style class:
     @begin{pre}
 (defvar dialog (make-instance 'gtk:about-dialog)) => DIALOG
-(gtk:widget-css-classes dialog) 
+(gtk:widget-css-classes dialog)
 => (\"background\" \"csd\" \"aboutdialog\")
 (gtk:widget-add-css-class dialog \"mystyle\")
-(gtk:widget-css-classes dialog) 
+(gtk:widget-css-classes dialog)
 => (\"background\" \"csd\" \"aboutdialog\" \"mystyle\")
 (gtk:widget-remove-css-class dialog \"mystyle\")
-(gtk:widget-css-classes dialog) 
+(gtk:widget-css-classes dialog)
 => (\"background\" \"csd\" \"aboutdialog\")
     @end{pre}
   @end{dictionary}
