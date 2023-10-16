@@ -888,7 +888,7 @@
 (cffi:defcfun ("gtk_text_iter_get_tags" text-iter-tags)
     (g:slist-t (g:object text-tag))
  #+liber-documentation
- "@version{#2023-2-2}
+ "@version{2023-10-5}
   @argument[iter]{a @class{gtk:text-iter} instance}
   @return{List of @class{gtk:text-tag} objects.}
   @begin{short}
@@ -2482,35 +2482,46 @@ lambda (ch)
 
 (defun text-iter-search (iter str &key flags limit (direction :forward))
  #+liber-documentation
- "@version{#2023-2-22}
-  @argument[iter]{a @class{gtk:text-iter} with the start of search}
+ "@version{2023-10-5}
+  @argument[iter]{a @class{gtk:text-iter} iterator with the start of search}
   @argument[str]{a search string}
-  @argument[flags]{the @symbol{gtk:text-search-flags} flags affecting how
-    the search is done}
-  @argument[limit]{a @class{gtk:text-iter} instance with the bound for the
+  @argument[flags]{a @symbol{gtk:text-search-flags} value with the flags
+    affecting how the search is done}
+  @argument[limit]{a @class{gtk:text-iter} iterator with the bound for the
     search, or @code{nil} for the end of the text buffer}
-  @argument[direction]{the value @code{:forward} indicates forward search and
-    the value @code{:backward} backward search}
+  @argument[direction]{a @code{:forward} value indicates forward search and
+    a @code{:backward} value backward search}
   @begin{return}
     @code{search-p} -- a boolean whether a match was found @br{}
-    @code{match-start} -- a @class{gtk:text-iter} instance with the start of
+    @code{match-start} -- a @class{gtk:text-iter} iterator with the start of
       match, or @code{nil} @br{}
-    @code{match-end} -- a @class{gtk:text-iter} instance with the end of match,
+    @code{match-end} -- a @class{gtk:text-iter} iterator with the end of match,
       or @code{nil}
   @end{return}
   @begin{short}
-    This is a convenience function of the Lisp implementation which combines
-    the @code{gtk_text_iter_forward_search()} and
-    @code{gtk_text_iter_backward_search()} functions into one single function.
+    Searches for @arg{str}.
   @end{short}
+  The direction of the search is indicated with the @arg{direction} keyword
+  argument which has a @code{:forward} default value for forward
+  search. For backward search the @arg{direction} takes the @code{:backward}
+  value. The @arg{flags} and @arg{limit} arguments are keyword arguments
+  with a @code{nil} default value.
 
-  The direction of the search is indicated with the keyword argument
-  @arg{direction} which has a default value of @code{:forward} for forward
-  search. For backward search the @arg{direction} takes the value
-  @code{:backward}.
+  Any match is returned by returning @arg{match-start} to the first character
+  of the match and @arg{match-end} to the first character after the match. The
+  search will not continue past @arg{limit}. Note that a search is a linear or
+  O(n) operation, so you may wish to use @arg{limit} to avoid locking up your
+  UI on large text buffers.
 
-  In addition the arguments @arg{flags} and @arg{limit} are keyword arguments
-  with a default value @code{nil}.
+  The @arg{match-start} value will never be set to an iterator located before
+  @arg{iter}, even if there is a possible @arg{match-end} after or at
+  @arg{iter}.
+  @begin[Warning]{dictionary}
+    In the Lisp implementation, this function combines the two
+    @code{gtk_text_iter_forward_search()} and
+    @code{gtk_text_iter_backward_search()} functions into one single function.
+    These functions are not exported.
+  @end{dictionary}
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
   @see-symbol{gtk:text-search-flags}"
@@ -2548,50 +2559,6 @@ lambda (ch)
   (match-end (g:boxed text-iter))
   (limit (g:boxed text-iter)))
 
-(defun text-iter-forward-search (iter str flags limit)
- #+liber-documentation
- "@version{#2021-6-15}
-  @argument[iter]{a @class{gtk:text-iter} instance with the start of search}
-  @argument[str]{a search string}
-  @argument[flags]{the @symbol{gtk:text-search-flags} flags affecting how
-    the search is done}
-  @argument[limit]{a @class{gtk:text-iter} instance which is the bound for the
-    search, or @code{nil} for the end of the text buffer}
-  @begin{return}
-    @arg{search-p} -- a boolean whether a match was found @br{}
-    @arg{match-start} -- a @class{gtk:text-iter} instance with the start of
-      match, or @code{nil} @br{}
-    @arg{match-end} -- a @class{gtk:text-iter} instance with the end of match,
-      or @code{nil}
-  @end{return}
-  @begin{short}
-    Searches forward for @arg{str}.
-  @end{short}
-  Any match is returned by setting @arg{match-start} to the first character of
-  the match and @arg{match-end} to the first character after the match. The
-  search will not continue past @arg{limit}. Note that a search is a linear or
-  O(n) operation, so you may wish to use @arg{limit} to avoid locking up your
-  UI on large text buffers.
-
-  If the @code{:visible-only} flag is present, the match may have
-  invisible text interspersed in @arg{str}, i.e. @arg{str} will be a
-  possibly-noncontiguous subsequence of the matched range. Similarly, if you
-  specify @code{:text-only}, the match may have paintables or child widgets
-  mixed inside the matched range. If these flags are not given, the match must
-  be exact; the special @code{0xFFFC} character in @arg{str} will match embedded
-  paintables or child widgets. If you specify the @code{:case-insensitive} flag,
-  the text will be matched regardless of what case it is in.
-  @see-class{gtk:text-iter}
-  @see-class{gtk:text-buffer}
-  @see-symbol{gtk:text-search-flags}
-  @see-function{gtk:text-iter-search}
-  @see-function{gtk:text-iter-backward-search}"
-  (text-iter-search iter
-                        str
-                        :flags flags
-                        :limit limit
-                        :direction :forward))
-
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_iter_backward_search                          not exported
 ;;; ----------------------------------------------------------------------------
@@ -2604,36 +2571,6 @@ lambda (ch)
   (match-start (g:boxed text-iter))
   (match-end (g:boxed text-iter))
   (limit (g:boxed text-iter)))
-
-(defun text-iter-backward-search (iter str flags limit)
- #+liber-documentation
- "@version{#2021-6-15}
-  @argument[iter]{a @class{gtk:text-iter} instance where the search begins}
-  @argument[str]{a search string}
-  @argument[flags]{the @symbol{gtk:text-search-flags} flags affecting the
-    search}
-  @argument[limit]{a @class{gtk:text-iter} instance with the location of last
-    possible @arg{match-start}, or @code{nil} for start of the text buffer}
-  @begin{return}
-    @arg{search-p} -- a boolean whether a match was found @br{}
-    @arg{match-start} -- a @class{gtk:text-iter} instance with the start of
-      match, or @code{nil} @br{}
-    @arg{match-end} -- a @class{gtk:text-iter} instance with the end of match,
-      or @code{nil}
-  @end{return}
-  @begin{short}
-    Same as the @fun{gtk:text-iter-forward-search} function, but moves backward.
-  @end{short}
-  @see-class{gtk:text-iter}
-  @see-class{gtk:text-buffer}
-  @see-symbol{gtk:text-search-flags}
-  @see-function{gtk:text-iter-search}
-  @see-function{gtk:text-iter-forward-search}"
-  (text-iter-search iter
-                        str
-                        :flags flags
-                        :limit limit
-                        :direction :backward))
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_iter_equal
