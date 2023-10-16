@@ -34,6 +34,7 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkPasswordEntry
+;;;     GtkPasswordEntryBuffer
 ;;;
 ;;; Accessors
 ;;;
@@ -45,6 +46,8 @@
 ;;; Functions
 ;;;
 ;;;     gtk_password_entry_new
+;;;
+;;;     gtk_password_entry_buffer_new
 ;;;
 ;;; Properties
 ;;;
@@ -73,6 +76,28 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkPasswordEntryBuffer
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-g-object-class "GtkPasswordEntryBuffer" password-entry-buffer
+  (:superclass entry-buffer
+   :export t
+   :interfaces ()
+   :type-initializer "gtk_password_entry_buffer_get_type")
+  nil)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_password_entry_buffer_new ()
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline password-entry-buffer))
+
+(defun password-entry-buffer-new ()
+  (make-instance 'password-entry-buffer))
+
+(export 'password-entry-buffer-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkPasswordEntry
