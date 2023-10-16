@@ -101,7 +101,7 @@
 (setf (liber:alias-for-symbol 'icon-lookup-flags)
       "GFlags"
       (liber:symbol-documentation 'icon-lookup-flags)
- "@version{2023-8-30}
+ "@version{2023-10-3}
   @begin{short}
     Used to specify options for the @fun{gtk:icon-theme-lookup-icon} function.
   @end{short}
@@ -109,11 +109,13 @@
 (gobject:define-g-flags \"GtkIconLookupFlags\" icon-lookup-flags
   (:export t
    :type-initializer \"gtk_icon_lookup_flags_get_type\")
+  (:none 0)
   (:force-regular  #.(ash 1 0))
   (:force-symbolic #.(ash 1 1))
   (:preload        #.(ash 1 2)))
    @end{pre}
   @begin[code]{table}
+    @entry[:none]{No flags set.}
     @entry[:force-regular]{Try to always load regular icons, even when symbolic
       icon names are given.}
     @entry[:force-symbolic]{Try to always load symbolic icons, even when regular

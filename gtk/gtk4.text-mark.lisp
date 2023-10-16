@@ -102,8 +102,8 @@
   buffer, a text mark is essentially useless.
 
   Text marks optionally have names. These can be convenient to avoid passing
-  the @sym{gtk:text-mark} object around. Text marks are typically created using
-  the @fun{gtk:text-buffer-create-mark} function.
+  the @class{gtk:text-mark} object around. Text marks are typically created
+  using the @fun{gtk:text-buffer-create-mark} function.
   @see-constructor{gtk:text-mark-new}
   @see-slot{gtk:text-mark-left-gravity}
   @see-slot{gtk:text-mark-name}
@@ -227,9 +227,9 @@
   @begin{short}
     Accessor for the visibility of a text mark.
   @end{short}
-  The @sym{gtk:text-mark-visible} function returns @em{true} if the text mark
+  The @fun{gtk:text-mark-visible} function returns @em{true} if the text mark
   is visible, i.e. a cursor is displayed for it. The
-  @sym{(setf gtk:text-mark-visible)} function sets the visibility.
+  @setf{gtk:text-mark-visible} function sets the visibility.
 
   The insertion point is normally visible, i.e. you can see it as a vertical
   bar. Also, the text widget uses a visible text mark to indicate where a drop

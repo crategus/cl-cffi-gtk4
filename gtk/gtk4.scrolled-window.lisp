@@ -321,7 +321,7 @@
 
   The @class{gtk:scrolled-window} widget also displays visual 'overshoot'
   indication when the content is pulled beyond the end, and this situation can
-  be captured with the @code{edge-overshot} signal.
+  be captured with the @code{\"edge-overshot\"} signal.
 
   If no mouse device is present, the scrollbars will overlayed as narrow,
   auto-hiding indicators over the content. If traditional scrollbars are
@@ -350,7 +350,7 @@ lambda (window pos)    :run-last
       The signal is emitted whenever user initiated scrolling makes the scrolled
       window firmly surpass, i.e. with some edge resistance, the lower or upper
       limits defined by the adjustment in that orientation. A similar behavior
-      without edge resistance is provided by the \"edge-reached\" signal.
+      without edge resistance is provided by the @code{\"edge-reached\"} signal.
       Note: The @arg{pos} argument is LTR/RTL aware, so callers should be aware
       too if intending to provide behavior on horizontal edges.
       @begin[code]{table}
@@ -380,8 +380,8 @@ lambda (window pos)    :run-last
 lambda (window direction)    :action
       @end{pre}
       The signal is a keybinding signal which gets emitted when focus is moved
-      away from the scrolled window by a keybinding. The \"move-focus\" signal
-      is emitted with the @arg{direction} value on this scrolled windows
+      away from the scrolled window by a keybinding. The @code{\"move-focus\"}
+      signal is emitted with the @arg{direction} value on this scrolled windows
       toplevel parent in the container hierarchy. The default bindings for this
       signal are the @kbd{Tab+Ctrl} and @kbd{Tab+Ctrl+Shift} keys.
       @begin[code]{table}
@@ -491,8 +491,7 @@ lambda (window scroll horizontal)    :action
 ;;; --- scrolled-window-has-frame ----------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "has-frame"
-                                               'scrolled-window) t)
+(setf (documentation (liber:slot-documentation "has-frame" 'scrolled-window) t)
  "The @code{has-frame} property of type @code{:boolean} (Read / Write) @br{}
   Whether to draw a frame around the contents. @br{}
   Default value: @em{false}")
@@ -599,8 +598,8 @@ lambda (window scroll horizontal)    :action
   @end{short}
   The @fun{gtk:scrolled-window-max-content-height} function returns the maximum
   content height that the scrolled window should keep visible. The scrolled
-  window will grow up to this height before it starts scrolling the content. The
-  @setf{gtk:scrolled-window-max-content-height} function sets the maximum
+  window will grow up to this height before it starts scrolling the content.
+  The @setf{gtk:scrolled-window-max-content-height} function sets the maximum
   height.
 
   It is a programming error to set the maximum content height to a value

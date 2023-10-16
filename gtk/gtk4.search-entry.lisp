@@ -122,10 +122,12 @@
   To make filtering appear more reactive, it is a good idea to not react to
   every change in the search entry text immediately, but only after a short
   delay. To support this, the @class{gtk:search-entry} widget emits the
-  \"search-changed\" signal which can be used instead of the \"changed\" signal.
+  @code{\"search-changed\"} signal which can be used instead of the
+  @code{\"changed\"} signal.
 
-  The \"previous-match\", \"next-match\" and \"stop-search\" signals can be used
-  to implement moving between search results and ending the search.
+  The @code{\"previous-match\"}, @code{\"next-match\"} and
+  @code{\"stop-search\"} signals can be used to implement moving between search
+  results and ending the search.
 
   Often, the @class{gtk:search-entry} widget will be fed events by means of
   being placed inside a @class{gtk:search-bar} widget. If that is not the case,
@@ -149,7 +151,7 @@ entry.search
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      The signal is forwarded from the \"activated\" signal, which is a
+      The signal is forwarded from the @code{\"activated\"} signal, which is a
       keybinding signal for all forms of the @kbd{Enter} key.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
@@ -274,9 +276,8 @@ lambda (entry)    :action
   @end{short}
   The @fun{gtk:search-entry-placeholder-text} function retrieves the text that
   will be displayed when the search entry is empty and unfocused. The
-  @sym{(setf gtk:search-entry-placeholder-text)} function sets the text. This
-  can be used to give a visual hint of the expected contents of the search
-  entry.
+  @setf{gtk:search-entry-placeholder-text} function sets the text. This can be
+  used to give a visual hint of the expected contents of the search entry.
 
   Note that since the placeholder text gets removed when the search entry
   received focus, using this feature is a bit problematic if the search entry
@@ -309,8 +310,9 @@ lambda (entry)    :action
     @class{gtk:search-entry} class.
   @end{short}
   The @fun{gtk:search-entry-search-delay} function gest the delay to be used
-  between the last keypress and the \"search-changed\" signal being emitted.
-  The @sym{(setf gtk:search-entry-search-delay)} function sets the search delay.
+  between the last keypress and the @code{\"search-changed\"} signal being
+  emitted. The @setf{gtk:search-entry-search-delay} function sets the search
+  delay.
 
   Since 4.8
   @see-class{gtk:search-entry}")
@@ -360,8 +362,8 @@ lambda (entry)    :action
   @end{short}
   The @fun{gtk:search-entry-key-capture-widget} function gets the widget that
   the search entry is capturing key events from. The
-  @sym{(setf gtk:search-entry-key-capture-widget)} function sets @arg{widget}
-  as the widget that the search entry will capture key events from.
+  @setf{gtk:search-entry-key-capture-widget} function sets @arg{widget} as the
+  widget that the search entry will capture key events from.
 
   Key events are consumed by the search entry to start or continue a search.
 

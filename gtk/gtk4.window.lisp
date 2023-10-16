@@ -797,7 +797,8 @@ lambda (window)    :run-first
   Setting this property is the equivalent of calling the
   @fun{gtk:window-fullscreen} or @fun{gtk:window-unfullscreen} functions. Either
   operation is asynchronous, which means you will need to connect to the
-  \"notify\" signal in order to know whether the operation was successful.
+  @code{\"notify\"} signal in order to know whether the operation was
+  successful.
 
   If the window is not yet mapped, the value returned will show whether the
   initial requested state is fullscreen.
@@ -950,7 +951,8 @@ lambda (window)    :run-first
   Setting this property is the equivalent of calling the
   @fun{gtk:window-maximize} or @fun{gtk:window-unmaximize} functions. Either
   operation is asynchronous, which means you will need to connect to the
-  \"notify\" signal in order to know whether the operation was successful.
+  @code{\"notify\"} signal in order to know whether the operation was
+  successful.
   @see-class{gtk:window}
   @see-function{gtk:window-maximize}
   @see-function{gtk:window-unmaximize}")
@@ -1253,7 +1255,7 @@ lambda (window)    :run-first
   @argument[window]{a @class{gtk:window} widget to destroy}
   @short{Drop the internal reference GTK holds on toplevel windows.}
   @begin[Example]{dictionary}
-    Signal handler for a cancel button that gets the toplevel window and 
+    Signal handler for a cancel button that gets the toplevel window and
     destroys it to quit the window.
     @begin{pre}
 (g:signal-connect cancelbutton \"clicked\"
@@ -1407,7 +1409,7 @@ lambda (window)    :run-first
   @end{short}
   If you want to iterate through the list and perform actions involving
   callbacks that might destroy the widgets or add new ones, be aware that the
-  list of toplevels will change and emit the \"items-changed\" signal.
+  list of toplevels will change and emit the @code{\"items-changed\"} signal.
   @see-class{gtk:window}
   @see-class{g:list-model}
   @see-function{gtk:window-list-toplevels}")

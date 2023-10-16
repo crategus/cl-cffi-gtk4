@@ -403,7 +403,7 @@
     @class{gtk:style-context} class.
   @end{short}
   The @fun{gtk:style-context-display} function returns the display to which the
-  style context is attached. The @setf{gtk:style-context-display} function 
+  style context is attached. The @setf{gtk:style-context-display} function
   attaches the style context to the given display.
 
   The display is used to add style information from 'global' style providers,
@@ -459,7 +459,9 @@
     @fun{gtk:style-context-add-provider-for-display} function.
   @end{dictionary}
   @begin[Warning]{dictionary}
-    This function is deprecated since 4.10. Use style classes instead.
+    This function is deprecated since 4.10. Use style classes instead. See
+    the @fun{gtk:style-context-add-provider-for-display} documentation for an
+    example.
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:style-provider}
@@ -484,7 +486,7 @@
 (defun style-context-add-provider-for-display
     (display provider &optional (priority +gtk-priority-application+))
  #+liber-documentation
- "@version{2023-9-17}
+ "@version{2023-10-4}
   @argument[display]{a @class{gdk:display} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @argument[priority]{an optional unsigned integer with the priority of the
@@ -495,6 +497,22 @@
   @end{short}
   GTK uses this to make styling information from the @class{gtk:settings}
   object available.
+  @begin[Example]{dictionary}
+    Change the color and the font in a text view: Create a provider, load CSS
+    into the provider, add the style class and the provider to the parent
+    window.
+    @begin{pre}
+(let ((provider (gtk:css-provider-new)))
+  (gtk:css-provider-load-from-data provider
+                                   \".viewstyle textview {
+                                      color : Green;
+                                      font : 20px Purisa; @}\")
+  (gtk:widget-add-css-class window \"viewstyle\")
+  (gtk:style-context-add-provider-for-display (gtk:widget-display window)
+                                              provider)
+  ... )
+    @end{pre}
+  @end{dictionary}
   @begin[Note]{dictionary}
     If both priorities are the same, a style provider object added through the
     @fun{gtk:style-context-add-provider} function takes precedence over another
@@ -975,7 +993,7 @@ GtkEntry.entry { ... @}
     Accessor of the scale used for image assets for the style context.
   @end{short}
   The @fun{gtk:style-context-scale} function returns the scale to use when
-  getting image assets for the style. The @setf{gtk:style-context-scale} 
+  getting image assets for the style. The @setf{gtk:style-context-scale}
   function sets the scale.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.10. Use the

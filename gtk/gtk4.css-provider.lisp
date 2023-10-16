@@ -342,7 +342,8 @@
   @code{VERSION} is the GTK version number. If no file is found for the current
   version, GTK tries older versions all the way back to 4.0.
 
-  To track errors while loading CSS, connect to the \"parsing-error\" signal.
+  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
+  signal.
   @begin[Signal Details]{dictionary}
     @subheading{The \"parsing-error\" signal}
       @begin{pre}
@@ -411,15 +412,15 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-load-from-data (provider data)
  #+liber-documentation
- "@version{2022-12-4}
+ "@version{2023-10-4}
   @argument[provider]{a @class{gtk:css-provider} object}
   @argument[data]{a string with the CSS data}
   @begin{short}
     Loads data into the CSS provider, making it clear any previously loaded
     information.
   @end{short}
-  To track errors while loading CSS, connect to the \"parsing-error\" signal
-  of the @class{gtk:css-provider} object.
+  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
+  signal of the @class{gtk:css-provider} object.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.12. Use the
     @fun{gtk:css-provider-load-from-string} or
@@ -444,8 +445,8 @@ lambda (provider section error)    :run-last
     Loads the data contained in @arg{file} into the CSS provider, making it
     clear any previously loaded information.
   @end{short}
-  To track errors while loading CSS, connect to the \"parsing-error\" signal
-  of the @class{gtk:css-provider} object.
+  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
+  signal of the @class{gtk:css-provider} object.
   @see-class{gtk:css-provider}
   @see-class{g:file}"
   (provider (g:object css-provider))
@@ -474,8 +475,8 @@ lambda (provider section error)    :run-last
     Loads the data contained in @arg{path} into the CSS provider, making it
     clear any previously loaded information.
   @end{short}
-  To track errors while loading CSS, connect to the \"parsing-error\" signal
-  of the @class{gtk:css-provider} object.
+  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
+  signal of the @class{gtk:css-provider} object.
   @see-class{gtk:css-provider}"
   (%css-provider-load-from-path provider (namestring path)))
 
@@ -495,8 +496,8 @@ lambda (provider section error)    :run-last
     Loads the data contained in the resource at @arg{path} into the CSS
     provider, clearing any previously loaded information.
   @end{short}
-  To track errors while loading CSS, connect to the \"parsing-error\" signal
-  of the @class{gtk:css-provider} object.
+  To track errors while loading CSS, connect to the @code{\"parsing-error\"}
+  signal of the @class{gtk:css-provider} object.
   @see-class{gtk:css-provider}
   @see-class{g:resource}"
   (provider (g:object css-provider))

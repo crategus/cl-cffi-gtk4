@@ -410,6 +410,8 @@
     "variant-set" "gboolean" t t)
    (weight
     text-tag-weight
+    ;; TODO: It is not possible to use the PangoWeight enumeration for the type
+    ;; at this place. Is there a way to improve this?!
     "weight" "gint" t t)
    (weight-set
     text-tag-weight-set
@@ -1563,7 +1565,7 @@
 (setf (liber:alias-for-function 'text-tag-name)
       "Accessor"
       (documentation 'text-tag-name 'function)
- "@version{#2023-8-26}
+ "@version{2023-10-5}
   @syntax[]{(gtk:text-tag-name object) => name}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[name]{a string with the name of the text tag}
@@ -2961,7 +2963,7 @@
     Accessor for the priority of a @class{gtk:text-tag} object.
   @end{short}
   The @fun{gtk:text-tag-priority} function gets the tag priority. The
-  @sym{(setf gtk:text-tag-priority)} function sets the priority.
+  @setf{gtk:text-tag-priority} function sets the priority.
 
   Valid priorities are start at 0 and go to one less than the value of the
   result of the @fun{gtk:text-tag-table-size} function. Each tag in a tag table
@@ -2992,8 +2994,8 @@
   @argument[changed]{a boolean whether the change affects the
     @class{gtk:text-view} layout}
   @begin{short}
-    Emits the \"tag-changed\" signal on the @class{gtk:text-tag-table} object
-    where the tag is included.
+    Emits the @code{\"tag-changed\"} signal on the @class{gtk:text-tag-table}
+    object where the tag is included.
   @end{short}
   The signal is already emitted when setting a @class{gtk:text-tag} property.
   This function is useful for a @class{gtk:text-tag} subclass.

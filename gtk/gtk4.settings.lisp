@@ -297,7 +297,7 @@
 (setf (documentation 'settings 'type)
  "@version{2023-8-30}
   @begin{short}
-    The @sym{gtk:settings} object provide a mechanism to share global settings
+    The @class{gtk:settings} object provide a mechanism to share global settings
     between applications.
   @end{short}
 
@@ -316,7 +316,7 @@
 
   Applications can override system-wide settings with the accessor functions
   of the slots. This should be restricted to special cases though. The
-  @sym{gtk:settings} settings are not meant as an application configuration
+  @class{gtk:settings} settings are not meant as an application configuration
   facility.
 
   There is one @class{gtk:settings} instance per display. It can be obtained
@@ -652,7 +652,7 @@
   when they are meaningful. E.g. a menu button only appears when the desktop
   shell does not show the application menu, and a Close button only appears on
   a window that can be closed. Also note that the setting can be overridden
-  with the @slot[gtk-header-bar]{decoration-layout} property of the header bar.
+  with the @slot[gtk:header-bar]{decoration-layout} property of the header bar.
   @br{}
   Default value: \"menu:minimize,maximize,close\"")
 
@@ -686,10 +686,10 @@
   Close button only appears on a window that can be closed.
 
   Also note that the setting can be overridden with the
-  @slot[gtk-header-bar]{decoration-layout} property of the header bar.
+  @slot[gtk:header-bar]{decoration-layout} property of the header bar.
   @see-class{gtk:settings}
-  @see-class{gtk-header-bar}
-  @see-function{gtk-header-bar-decoration-layout}")
+  @see-class{gtk:header-bar}
+  @see-function{gtk:header-bar-decoration-layout}")
 
 ;;; --- settings-gtk-dialogs-use-header ----------------------------------------
 
@@ -701,7 +701,7 @@
   Whether built-in GTK dialogs such as the file chooser, the color chooser or
   the font chooser will use a header bar at the top to show action widgets, or
   an action area at the bottom. This setting does not affect custom dialogs
-  using the @class{gtk-dialog} widget directly, or message dialogs. @br{}
+  using the @class{gtk:dialog} widget directly, or message dialogs. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -720,9 +720,9 @@
   Whether built-in GTK dialogs such as the file chooser, the color chooser or
   the font chooser will use a header bar at the top to show action widgets, or
   an action area at the bottom. This setting does not affect custom dialogs
-  using the @class{gtk-dialog} widget directly, or message dialogs.
+  using the @class{gtk:dialog} widget directly, or message dialogs.
   @see-class{gtk:settings}
-  @see-class{gtk-dialog}")
+  @see-class{gtk:dialog}")
 
 ;;; --- settings-gtk-dnd-drag-threshold ----------------------------------------
 
@@ -1161,7 +1161,7 @@
   method that will be used if the user has not explicitly chosen another input
   method from the IM context menu. This also can be a colon-separated list of
   input methods, which GTK will try in turn until it finds one available on
-  the system. See the @class{gtk-im-context} class and the
+  the system. See the @class{gtk:im-context} class and the
   @code{gtk-show-input-method-menu} setting. @br{}
   Default value: @code{nil}")
 
@@ -1182,10 +1182,10 @@
   method that will be used if the user has not explicitly chosen another input
   method from the IM context menu. This also can be a colon-separated list of
   input methods, which GTK will try in turn until it finds one available on
-  the system. See the @class{gtk-im-context} class and the
+  the system. See the @class{gtk:im-context} class and the
   @slot[gtk:settings]{gtk-show-input-method-menu} setting.
   @see-class{gtk:settings}
-  @see-class{gtk-im-context}
+  @see-class{gtk:im-context}
   @see-function{gtk:settings-gtk-show-input-method-menu}")
 
 ;;; --- settings-gtk-keynav-use-caret ------------------------------------------
@@ -1308,7 +1308,7 @@
                                                'settings) t)
  "The @code{gtk-primary-button-warps-slider} property of type @code{:boolean}
   (Read / Write) @br{}
-  Whether a click in a @class{gtk-range} widget trough should scroll to the
+  Whether a click in a @class{gtk:range} widget trough should scroll to the
   click position or scroll by a single page in the respective direction. @br{}
   Default value: @em{true}")
 
@@ -1326,10 +1326,10 @@
     Accessor of the @slot[gtk:settings]{gtk-primary-buton-warps-slider} slot of
     the @class{gtk:settings} class.
   @end{short}
-  Whether a click in a @class{gtk-range} widget trough should scroll to the
+  Whether a click in a @class{gtk:range} widget trough should scroll to the
   click position or scroll by a single page in the respective direction.
   @see-class{gtk:settings}
-  @see-class{gtk-range}")
+  @see-class{gtk:range}")
 
 ;;; --- settings-gtk-print-backends --------------------------------------------
 
@@ -1372,7 +1372,7 @@
   contain a @code{f} placeholder, which will get replaced by the path to the
   PDF file. The command may also contain a @code{s} placeholder, which will get
   replaced by the path to a file containing the print settings in the format
-  produced by the function @fun{gtk-print-settings-to-file}. The preview
+  produced by the @fun{gtk:print-settings-to-file} function. The preview
   application is responsible for removing the PDF file and the print settings
   file when it is done. @br{}
   Default value:
@@ -1396,11 +1396,11 @@
   contain a @code{f} placeholder, which will get replaced by the path to the
   PDF file. The command may also contain a @code{s} placeholder, which will get
   replaced by the path to a file containing the print settings in the format
-  produced by the function @fun{gtk-print-settings-to-file}. The preview
+  produced by the @fun{gtk:print-settings-to-file} function. The preview
   application is responsible for removing the PDF file and the print settings
   file when it is done.
   @see-class{gtk:settings}
-  @see-function{gtk-print-settings-to-file}")
+  @see-function{gtk:print-settings-to-file}")
 
 ;;; --- settings-gtk-recent-files-enabled --------------------------------------
 
@@ -1870,7 +1870,7 @@
     Gets the @class{gtk:settings} object for the default GDK display, creating
     it if necessary.
   @end{short}
-  See the function @fun{gtk:settings-for-display}.
+  See the @fun{gtk:settings-for-display} function.
   @see-class{gtk:settings}
   @see-function{gtk:settings-for-display}")
 
