@@ -84,8 +84,8 @@
           (g:type-parent "GtkSorter")))
   ;; Check the children
   (if *first-run-gtk-test*
-      (is (equal '("GtkCustomSorter" "GtkMultiSorter" "GtkNumericSorter"
-                   "GtkStringSorter" "GtkTreeListRowSorter")
+      (is (equal '("GtkColumnViewSorter" "GtkCustomSorter" "GtkMultiSorter"
+                   "GtkNumericSorter" "GtkStringSorter" "GtkTreeListRowSorter")
                  (list-children "GtkSorter")))
       (is (equal '("GtkColumnViewSorter" "GtkCustomSorter" "GtkMultiSorter"
                    "GtkNumericSorter" "GtkStringSorter" "GtkTreeListRowSorter")

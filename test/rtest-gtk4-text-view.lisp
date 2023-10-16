@@ -6,10 +6,113 @@
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkTextViewLayer
+
 ;;;     GtkTextWindowType
+
+(test gtk-text-window-type
+  ;; Check the type
+  (is (g:type-is-enum "GtkTextWindowType"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkTextWindowType")
+          (g:gtype (cffi:foreign-funcall "gtk_text_window_type_get_type" 
+                                         :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:text-window-type
+          (glib:symbol-for-gtype "GtkTextWindowType")))
+  ;; Check the names
+  (is (equal '("GTK_TEXT_WINDOW_WIDGET" "GTK_TEXT_WINDOW_TEXT" 
+               "GTK_TEXT_WINDOW_LEFT" "GTK_TEXT_WINDOW_RIGHT" 
+               "GTK_TEXT_WINDOW_TOP" "GTK_TEXT_WINDOW_BOTTOM")
+             (list-enum-item-name "GtkTextWindowType")))
+  ;; Check the values
+  (is (equal '(1 2 3 4 5 6)
+             (list-enum-item-value "GtkTextWindowType")))
+  ;; Check the nick names
+  (is (equal '("widget" "text" "left" "right" "top" "bottom")
+             (list-enum-item-nick "GtkTextWindowType")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTextWindowType"
+                                     GTK-TEXT-WINDOW-TYPE
+                                     (:EXPORT T 
+                                      :TYPE-INITIALIZER 
+                                      "gtk_text_window_type_get_type")
+                                     (:WIDGET 1)
+                                     (:TEXT 2)
+                                     (:LEFT 3)
+                                     (:RIGHT 4)
+                                     (:TOP 5)
+                                     (:BOTTOM 6))
+             (gobject:get-g-type-definition "GtkTextWindowType"))))
+
 ;;;     GtkTextExtendSelection
+
+(test gtk-text-extend-selection
+  ;; Check the type
+  (is (g:type-is-enum "GtkTextExtendSelection"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkTextExtendSelection")
+          (g:gtype (cffi:foreign-funcall "gtk_text_extend_selection_get_type" 
+                                         :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:text-extend-selection
+          (glib:symbol-for-gtype "GtkTextExtendSelection")))
+  ;; Check the names
+  (is (equal '("GTK_TEXT_EXTEND_SELECTION_WORD" 
+               "GTK_TEXT_EXTEND_SELECTION_LINE")
+             (list-enum-item-name "GtkTextExtendSelection")))
+  ;; Check the values
+  (is (equal '(0 1)
+             (list-enum-item-value "GtkTextExtendSelection")))
+  ;; Check the nick names
+  (is (equal '("word" "line")
+             (list-enum-item-nick "GtkTextExtendSelection")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTextExtendSelection"
+                                     GTK-TEXT-EXTEND-SELECTION
+                                     (:EXPORT T 
+                                      :TYPE-INITIALIZER 
+                                      "gtk_text_extend_selection_get_type")
+                                     (:WORD 0)
+                                     (:LINE 1))
+             (gobject:get-g-type-definition "GtkTextExtendSelection"))))
+
 ;;;     GtkWrapMode                                        gtk.enumerations.lisp
+
 ;;;     GtkTextChildAnchor
+
+(test gtk-text-child-anchor-class
+  ;; Type check
+  (is (g:type-is-object "GtkTextChildAnchor"))
+  ;; Check the registered name
+  (is (eq 'gtk:text-child-anchor
+          (glib:symbol-for-gtype "GtkTextChildAnchor")))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkTextChildAnchor")
+          (g:gtype (cffi:foreign-funcall "gtk_text_child_anchor_get_type" 
+                                         :size))))
+  ;; Check the parent
+  (is (eq (g:gtype "GObject")
+          (g:type-parent "GtkTextChildAnchor")))
+  ;; Check the children
+  (is (equal '()
+             (list-children "GtkTextChildAnchor")))
+  ;; Check the interfaces
+  (is (equal '()
+             (list-interfaces "GtkTextChildAnchor")))
+  ;; Check the properties
+  (is (equal '()
+             (list-properties "GtkTextChildAnchor")))
+  ;; Check the signals
+  (is (equal '()
+             (list-signals "GtkTextChildAnchor")))
+  ;; Check the class definition
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTextChildAnchor" 
+                                             GTK-TEXT-CHILD-ANCHOR
+                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+                                :TYPE-INITIALIZER
+                                "gtk_text_child_anchor_get_type")
+                               NIL)
+             (gobject:get-g-type-definition "GtkTextChildAnchor"))))
 
 ;;;     GTK_TEXT_VIEW_PRIORITY_VALIDATE
 
@@ -53,6 +156,9 @@
   ;; CSS name
   (is (string= "textview"
                (gtk:widget-class-css-name "GtkTextView")))
+  ;; CSS classes
+  (is (equal '("view")
+             (gtk:widget-css-classes (make-instance 'gtk:text-view))))
   ;; Accessible role
   (is (eq :TEXT-BOX (gtk:widget-class-accessible-role "GtkTextView")))
   ;; Check the class definition
@@ -132,6 +238,30 @@
 ;;;     top-margin
 ;;;     wrap-mode
 
+(test gtk-text-view-properties
+  (let ((view (make-instance 'gtk:text-view)))
+    (is-true (gtk:text-view-accepts-tab view))
+    (is (= 0 (gtk:text-view-bottom-margin view)))
+    (is (typep (gtk:text-view-buffer view) 'gtk:text-buffer))
+    (is-true (gtk:text-view-cursor-visible view))
+    (is-true (gtk:text-view-editable view))
+    (is-false (gtk:text-view-extra-menu view))
+    (is-false (gtk:text-view-im-module view))
+    (is (= 0 (gtk:text-view-indent view)))
+    (is-false (gtk:text-view-input-hints view))
+    (is (eq :free-form (gtk:text-view-input-purpose view)))
+    (is (eq :left (gtk:text-view-justification view)))
+    (is (= 0 (gtk:text-view-left-margin view)))
+    (is-false (gtk:text-view-monospace view))
+    (is-false (gtk:text-view-overwrite view))
+    (is (= 0 (gtk:text-view-pixels-above-lines view)))
+    (is (= 0 (gtk:text-view-pixels-below-lines view)))
+    (is (= 0 (gtk:text-view-pixels-inside-wrap view)))
+    (is (= 0 (gtk:text-view-right-margin view)))
+    (is-false (gtk:text-view-tabs view))
+    (is (= 0 (gtk:text-view-top-margin view)))
+    (is (eq :none (gtk:text-view-wrap-mode view)))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     backspace
@@ -150,11 +280,22 @@
 ;;;     toggle-cursor-visible
 ;;;     toggle-overwrite
 
-;;;
-;;; Functions
-;;;
+;;; --- Functions --------------------------------------------------------------
+
 ;;;     gtk_text_view_new
+
+(test gtk-text-view-new
+  (is (typep (gtk:text-view-new) 'gtk:text-view)))
+
 ;;;     gtk_text_view_new_with_buffer
+
+(test gtk-text-view-new-with-buffer
+  (let ((buffer (gtk:text-buffer-new))
+        (view nil))
+    (is (typep (setf view
+                     (gtk:text-view-new-with-buffer buffer)) 'gtk:text-view))
+    (is (eq buffer (gtk:text-view-buffer view)))))
+
 ;;;     gtk_text_view_scroll_to_mark
 ;;;     gtk_text_view_scroll_to_iter
 ;;;     gtk_text_view_scroll_mark_onscreen
@@ -177,9 +318,16 @@
 ;;;     gtk_text_view_move_visually
 ;;;     gtk_text_view_add_child_at_anchor
 ;;;     gtk_text_view_remove
+
 ;;;     gtk_text_child_anchor_new
+
+(test gtk-text-child-anchor-new
+  (is (typep (gtk:text-child-anchor-new) 'gtk:text-child-anchor)))
+
+;;;     gtk_text_child_anchor_new_with_replacement         Since 4.6
 ;;;     gtk_text_child_anchor_get_widgets
 ;;;     gtk_text_child_anchor_get_deleted
+
 ;;;     gtk_text_view_get_gutter
 ;;;     gtk_text_view_set_gutter
 ;;;     gtk_text_view_add_overlay

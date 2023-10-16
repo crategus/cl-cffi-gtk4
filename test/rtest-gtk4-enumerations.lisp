@@ -222,7 +222,39 @@
 ;;;     GtkPositionType
 ;;;     GtkScrollType
 ;;;     GtkSelectionMode
+
 ;;;     GtkWrapMode
+
+(test gtk-wrap-mode
+  ;; Check the type
+  (is (g:type-is-enum "GtkWrapMode"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkWrapMode")
+          (g:gtype (cffi:foreign-funcall "gtk_wrap_mode_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:wrap-mode
+          (glib:symbol-for-gtype "GtkWrapMode")))
+  ;; Check the names
+  (is (equal '("GTK_WRAP_NONE" "GTK_WRAP_CHAR" "GTK_WRAP_WORD" 
+               "GTK_WRAP_WORD_CHAR")
+             (list-enum-item-name "GtkWrapMode")))
+  ;; Check the values
+  (is (equal '(0 1 2 3)
+             (list-enum-item-value "GtkWrapMode")))
+  ;; Check the nick names
+  (is (equal '("none" "char" "word" "word-char")
+             (list-enum-item-nick "GtkWrapMode")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkWrapMode"
+                                     GTK-WRAP-MODE
+                                     (:EXPORT T 
+                                      :TYPE-INITIALIZER 
+                                      "gtk_wrap_mode_get_type")
+                                     (:NONE 0)
+                                     (:CHAR 1)
+                                     (:WORD 2)
+                                     (:WORD-CHAR 3))
+             (gobject:get-g-type-definition "GtkWrapMode"))))
 
 ;;;     GtkSortType
 
@@ -640,7 +672,8 @@
   (is (g:type-is-enum "GtkAccessibleState"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleState")
-          (g:gtype (cffi:foreign-funcall "gtk_accessible_state_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_state_get_type" 
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-state
           (glib:symbol-for-gtype "GtkAccessibleState")))
@@ -925,7 +958,8 @@
   (is (g:type-is-enum "GtkAccessibleSort"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleSort")
-          (g:gtype (cffi:foreign-funcall "gtk_accessible_sort_get_type" :size))))
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_sort_get_type" 
+                                         :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-sort
           (glib:symbol-for-gtype "GtkAccessibleSort")))
@@ -952,4 +986,4 @@
                              (:OTHER 3))
              (gobject:get-g-type-definition "GtkAccessibleSort"))))
 
-;;; --- 2023-7-23 --------------------------------------------------------------
+;;; --- 2023-10-4 --------------------------------------------------------------

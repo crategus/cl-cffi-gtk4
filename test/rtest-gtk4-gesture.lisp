@@ -109,7 +109,15 @@
 ;;;     gtk_gesture_get_sequence_state
 ;;;     gtk_gesture_set_sequence_state
 ;;;     gtk_gesture_set_state
+
 ;;;     gtk_gesture_get_sequences
+
+(test gtk-gesture-sequences
+  (let ((gesture (make-instance 'gtk:gesture-click)))
+  
+    (is-false (gtk:gesture-sequences gesture))
+))
+
 ;;;     gtk_gesture_handles_sequence
 ;;;     gtk_gesture_get_last_updated_sequence
 ;;;     gtk_gesture_get_last_event
@@ -121,4 +129,4 @@
 ;;;     gtk_gesture_get_group
 ;;;     gtk_gesture_is_grouped_with
 
-;; --- 2023-5-29 ---------------------------------------------------------------
+;; --- 2023-10-2 ---------------------------------------------------------------
