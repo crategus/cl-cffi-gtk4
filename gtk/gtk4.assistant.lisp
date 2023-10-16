@@ -506,9 +506,6 @@ lambda (assistant page)    :run-last
     widget will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:assistant}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-NEW is deprecated since 4.10."))
   (make-instance 'assistant))
 
 (export 'assistant-new)
@@ -517,12 +514,8 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_get_page -> assistant-page
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_get_page" %assistant-page)
+(cffi:defcfun ("gtk_assistant_get_page" assistant-page)
     (g:object assistant-page)
-  (assistant (g:object assistant))
-  (child (g:object widget)))
-
-(defun assistant-page (assistant child)
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -537,10 +530,8 @@ lambda (assistant page)    :run-last
   @see-class{gtk:assistant}
   @see-class{gtk:assistant-page}
   @see-class{gtk:widget}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-PAGE is deprecated since 4.10."))
-  (%assistant-page assistant child))
+  (assistant (g:object assistant))
+  (child (g:object widget)))
 
 (export 'assistant-page)
 
@@ -556,10 +547,7 @@ lambda (assistant page)    :run-last
                         :void)
   index)
 
-(cffi:defcfun ("gtk_assistant_get_current_page" %assistant-current-page) :int
-  (assistant (g:object assistant)))
-
-(defun assistant-current-page (assistant)
+(cffi:defcfun ("gtk_assistant_get_current_page" assistant-current-page) :int
  #+liber-documentation
  "@version{2023-9-15}
   @syntax[]{(gtk:assistant-current-page assistant) => index}
@@ -582,10 +570,7 @@ lambda (assistant page)    :run-last
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-function{gtk:assistant-set-forward-page-func}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-CURRENT-PAGE is deprecated since 4.10."))
-  (%assistant-current-page assistant))
+  (assistant (g:object assistant)))
 
 (export 'assistant-current-page)
 
@@ -593,10 +578,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_get_n_pages -> assistant-n-pages
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_get_n_pages" %assistant-n-pages) :int
-  (assistant (g:object assistant)))
-
-(defun assistant-n-pages (assistant)
+(cffi:defcfun ("gtk_assistant_get_n_pages" assistant-n-pages) :int
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -609,10 +591,7 @@ lambda (assistant page)    :run-last
     widget will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:assistant}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-N-PAGES is deprecated since 4.10."))
-  (%assistant-n-pages assistant))
+  (assistant (g:object assistant)))
 
 (export 'assistant-n-pages)
 
@@ -620,12 +599,8 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_get_nth_page -> assistant-nth-page
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_get_nth_page" %assistant-nth-page)
+(cffi:defcfun ("gtk_assistant_get_nth_page" assistant-nth-page)
     (g:object widget)
-  (assistant (g:object assistant))
-  (index :int))
-
-(defun assistant-nth-page (assistant index)
  #+liber-documentation
  "@version{2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -643,10 +618,8 @@ lambda (assistant page)    :run-last
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-class{gtk:widget}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-NTH-PAGE is deprecated since 4.10."))
-  (%assistant-nth-page assistant index))
+  (assistant (g:object assistant))
+  (index :int))
 
 (export 'assistant-nth-page)
 
@@ -654,11 +627,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_prepend_page
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_prepend_page" %assistant-prepend-page) :int
-  (assistant (g:object assistant))
-  (page (g:object widget)))
-
-(defun assistant-prepend-page (assistant page)
+(cffi:defcfun ("gtk_assistant_prepend_page" assistant-prepend-page) :int
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -673,10 +642,8 @@ lambda (assistant page)    :run-last
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-class{gtk:widget}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-PREPEND-PAGE is deprecated since 4.10."))
-  (%assistant-prepend-page assistant page))
+  (assistant (g:object assistant))
+  (page (g:object widget)))
 
 (export 'assistant-prepend-page)
 
@@ -684,11 +651,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_append_page
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_append_page" %assistant-append-page) :int
-  (assistant (g:object assistant))
-  (page (g:object widget)))
-
-(defun assistant-append-page (assistant page)
+(cffi:defcfun ("gtk_assistant_append_page" assistant-append-page) :int
  #+liber-documentation
  "@version{2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -703,10 +666,8 @@ lambda (assistant page)    :run-last
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-class{gtk:widget}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-APPEND-PAGE is deprecated since 4.10."))
-  (%assistant-append-page assistant page))
+  (assistant (g:object assistant))
+  (page (g:object widget)))
 
 (export 'assistant-append-page)
 
@@ -714,12 +675,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_insert_page
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_insert_page" %assistant-insert-page) :int
-  (assistant (g:object assistant))
-  (page (g:object widget))
-  (position :int))
-
-(defun assistant-insert-page (assistant page position)
+(cffi:defcfun ("gtk_assistant_insert_page" assistant-insert-page) :int
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -736,10 +692,9 @@ lambda (assistant page)    :run-last
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-class{gtk:widget}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-INSERT-PAGE is deprecated since 4.10."))
-  (%assistant-insert-page assistant page position))
+  (assistant (g:object assistant))
+  (page (g:object widget))
+  (position :int))
 
 (export 'assistant-insert-page)
 
@@ -747,11 +702,7 @@ lambda (assistant page)    :run-last
 ;;; gtk_assistant_remove_page
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_remove_page" %assistant-remove-page) :void
-  (assistant (g:object assistant))
-  (index :int))
-
-(defun assistant-remove-page (assistant index)
+(cffi:defcfun ("gtk_assistant_remove_page" assistant-remove-page) :void
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -765,10 +716,8 @@ lambda (assistant page)    :run-last
     widget will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:assistant}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-REMOVE-PAGE is deprecated since 4.10."))
-  (%assistant-remove-page assistant index))
+  (assistant (g:object assistant))
+  (index :int))
 
 (export 'assistant-remove-page)
 
@@ -840,9 +789,6 @@ lambda (current)
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-symbol{gtk:assistant-page-func}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-SET-FORWARD-PAGE-FUNC is deprecated since 4.10."))
   (if func
       (%assistant-set-forward-page-func
               assistant
@@ -869,12 +815,8 @@ lambda (current)
                         :void)
   value)
 
-(cffi:defcfun ("gtk_assistant_get_page_type" %assistant-page-type)
+(cffi:defcfun ("gtk_assistant_get_page_type" assistant-page-type)
     assistant-page-type
-  (assistant (g:object assistant))
-  (page (g:object widget)))
-
-(defun assistant-page-type (assistant page)
  #+liber-documentation
  "@version{2023-9-15}
   @syntax[]{(gtk:assistant-page-type assistant page) => ptype}
@@ -893,10 +835,8 @@ lambda (current)
   @see-class{gtk:assistant}
   @see-class{gtk:widget}
   @see-symbol{gtk:assistant-page-type}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-PAGE-TYPE is deprecated since 4.10."))
-  (%assistant-page-type assistant page))
+  (assistant (g:object assistant))
+  (page (g:object widget)))
 
 (export 'assistant-page-type)
 
@@ -913,11 +853,7 @@ lambda (current)
                         :void)
   value)
 
-(cffi:defcfun ("gtk_assistant_get_page_title" %assistant-get-page-title) :string
-  (assistant (g:object assistant))
-  (page (g:object widget)))
-
-(defun assistant-page-title (assistant page)
+(cffi:defcfun ("gtk_assistant_get_page_title" assistant-page-title) :string
  #+liber-documentation
  "@version{2023-9-15}
   @syntax[]{(gtk:assistant-page-title assistant page) => title}
@@ -938,10 +874,8 @@ lambda (current)
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-class{gtk:widget}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-PAGE-TITLE is deprecated since 4.10."))
-  (%assistant-get-page-title assistant page))
+  (assistant (g:object assistant))
+  (page (g:object widget)))
 
 (export 'assistant-page-title)
 
@@ -958,12 +892,8 @@ lambda (current)
                         :void)
   value)
 
-(cffi:defcfun ("gtk_assistant_get_page_complete" %assistant-get-page-complete)
+(cffi:defcfun ("gtk_assistant_get_page_complete" assistant-page-complete)
     :boolean
-  (assistant (g:object assistant))
-  (page (g:object widget)))
-
-(defun assistant-page-complete (assistant page)
  #+liber-documentation
  "@version{2023-9-15}
   @syntax[]{(gtk:assistant-page-complete assistant page) => complete}
@@ -984,10 +914,8 @@ lambda (current)
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-class{gtk:widget}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-PAGE-COMPLETE is deprecated since 4.10."))
-  (%assistant-get-page-complete assistant page))
+  (assistant (g:object assistant))
+  (page (g:object widget)))
 
 (export 'assistant-page-complete)
 
@@ -995,12 +923,8 @@ lambda (current)
 ;;; gtk_assistant_add_action_widget
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_add_action_widget" %assistant-add-action-widget)
+(cffi:defcfun ("gtk_assistant_add_action_widget" assistant-add-action-widget)
     :void
-  (assistant (g:object assistant))
-  (child (g:object widget)))
-
-(defun assistant-add-action-widget (assistant child)
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -1014,10 +938,8 @@ lambda (current)
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-class{gtk:widget}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-ADD-ACTION-WIDGET is deprecated since 4.10."))
-  (%assistant-add-action-widget assistant child))
+  (assistant (g:object assistant))
+  (child (g:object widget)))
 
 (export 'assistant-add-action-widget)
 
@@ -1026,12 +948,7 @@ lambda (current)
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_assistant_remove_action_widget"
-               %assistant-remove-action-widget) :void
-  (assistant (g:object assistant))
-  (child (g:object widget)))
-
-(defun assistant-remove-action-widget (assistant child)
- #+liber-documentation
+               assistant-remove-action-widget) :void
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
   @argument[child]{a @class{gtk:widget} child widget}
@@ -1044,10 +961,8 @@ lambda (current)
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-class{gtk:widget}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-REMOVE-ACTION-WIDGET is deprecated since 4.10."))
-  (%assistant-remove-action-widget assistant child))
+  (assistant (g:object assistant))
+  (child (g:object widget)))
 
 (export 'assistant-remove-action-widget)
 
@@ -1056,10 +971,7 @@ lambda (current)
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_assistant_update_buttons_state"
-               %assistant-update-buttons-state) :void
-  (assistant (g:object assistant)))
-
-(defun assistant-update-buttons-state (assistant)
+               assistant-update-buttons-state) :void
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -1076,10 +988,7 @@ lambda (current)
     widget will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:assistant}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-UDATE-BUTTONS-STATE is deprecated since 4.10."))
-  (%assistant-update-buttons-state assistant))
+  (assistant (g:object assistant)))
 
 (export 'assistant-update-buttons-state)
 
@@ -1087,10 +996,7 @@ lambda (current)
 ;;; gtk_assistant_commit
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_commit" %assistant-commit) :void
-  (assistant (g:object assistant)))
-
-(defun assistant-commit (assistant)
+(cffi:defcfun ("gtk_assistant_commit" assistant-commit) :void
  #+liber-documentation
  "@version{2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -1107,10 +1013,7 @@ lambda (current)
     widget will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:assistant}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-COMMIT is deprecated since 4.10."))
-  (%assistant-commit assistant))
+  (assistant (g:object assistant)))
 
 (export 'assistant-commit)
 
@@ -1118,10 +1021,7 @@ lambda (current)
 ;;; gtk_assistant_next_page
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_next_page" %assistant-next-page) :void
-  (assistant (g:object assistant)))
-
-(defun assistant-next-page (assistant)
+(cffi:defcfun ("gtk_assistant_next_page" assistant-next-page) :void
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -1137,10 +1037,7 @@ lambda (current)
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-symbol{gtk:assistant-page-type}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-NEXT-PAGE is deprecated since 4.10."))
-  (%assistant-next-page assistant))
+  (assistant (g:object assistant)))
 
 (export 'assistant-next-page)
 
@@ -1148,10 +1045,7 @@ lambda (current)
 ;;; gtk_assistant_previous_page
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_assistant_previous_page" %assistant-previous-page) :void
-  (assistant (g:object assistant)))
-
-(defun assistant-previous-page (assistant)
+(cffi:defcfun ("gtk_assistant_previous_page" assistant-previous-page) :void
  #+liber-documentation
  "@version{#2023-9-15}
   @argument[assistant]{a @class{gtk:assistant} widget}
@@ -1167,10 +1061,7 @@ lambda (current)
   @end{dictionary}
   @see-class{gtk:assistant}
   @see-symbol{gtk:assistant-page-type}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:ASSISTANT-PREVIOUS-PAGE is deprecated since 4.10."))
-  (%assistant-previous-page assistant))
+  (assistant (g:object assistant)))
 
 (export 'assistant-previous-page)
 

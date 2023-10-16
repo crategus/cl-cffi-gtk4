@@ -179,6 +179,11 @@
     dialog-use-header-bar
     "use-header-bar" "gint" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj dialog) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:DIALOG is deprecated since 4.10.")))
+
 #+liber-documentation
 (setf (documentation 'dialog 'type)
  "@version{2023-8-21}
@@ -212,7 +217,7 @@
   to positive response IDs. These are entirely user-defined. But for
   convenience, you can use the response IDs in the @symbol{gtk:response-type}
   enumeration, these all have values less than zero. If a dialog receives a
-  delete event, the \"response\" signal will be emitted with the
+  delete event, the @code{\"response\"} signal will be emitted with the
   @code{:delete-event} response ID.
 
   Dialogs are created with a call to the @fun{gtk:dialog-new} function or the
@@ -237,7 +242,7 @@
                                              '(:destroy-with-parent)
                                              \"OK\"
                                              :none)))
-    (g-signal-connect dialog \"response\"
+    (g:signal-connect dialog \"response\"
                       (lambda (widget response)
                         (declare (ignore response))
                         (gtk:window-destroy widget)))
@@ -330,7 +335,7 @@ lambda (dialog response)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- dialog-use-header-bar ----------------------------------------------
+;;; --- dialog-use-header-bar --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-header-bar" 'dialog) t)
@@ -435,13 +440,13 @@ lambda (dialog response)    :run-last
   listed. Button text can be arbitrary text. A response ID can be any positive
   number, or one of the values in the @symbol{gtk:response-type} enumeration.
   If the user clicks one of these dialog buttons, the @class{gtk:dialog} widget
-  will emit the \"response\" signal with the corresponding response ID. If a
-  @class{gtk:dialog} widget receives the \"delete-event\" signal, it will emit
-  the \"response\" signal with a @code{:delete-event} response ID. However,
-  destroying a dialog does not emit the \"response\" signal. So be careful
-  relying on the \"response\" signal when using the @code{:destroy-with-parent}
-  flag. Buttons are from left to right, so the first button in the list will be
-  the leftmost button in the dialog.
+  will emit the @code{\"response\"} signal with the corresponding response ID.
+  If a @class{gtk:dialog} widget receives the @code{\"delete-event\"} signal, it
+  will emit the @code{\"response\"} signal with a @code{:delete-event} response
+  ID. However, destroying a dialog does not emit the @code{\"response\"}
+  signal. So be careful relying on the @code{\"response\"} signal when using the
+  @code{:destroy-with-parent} flag. Buttons are from left to right, so the first
+  button in the list will be the leftmost button in the dialog.
   @begin[Examples]{dictionary}
     @begin{pre}
 (let ((dialog (gtk:dialog-new-with-buttons \"My dialog\"
@@ -491,7 +496,7 @@ lambda (dialog response)    :run-last
   @argument[response]{a response ID, which is a positive integer or a value of
     the @symbol{gtk:response-type} enumeration}
   @begin{short}
-    Emits the \"response\" signal with the given response ID.
+    Emits the @code{\"response\"} signal with the given response ID.
   @end{short}
   Used to indicate that the user has responded to the dialog in some way.
   @begin[Warning]{dictionary}
@@ -520,8 +525,8 @@ lambda (dialog response)    :run-last
   @return{The @class{gtk:button} widget that was added.}
   @begin{short}
     Adds a button with the given text and sets things up so that clicking the
-    button will emit the \"response\" signal with the given @arg{response}
-    value.
+    button will emit the @code{\"response\"} signal with the given
+    @arg{response} value.
   @end{short}
   The button is appended to the end of the action area of the dialog.
   @begin[Warning]{dictionary}
@@ -588,8 +593,8 @@ lambda (dialog response)    :run-last
     integer or a value of the @symbol{gtk:response-type} enumeration}
   @begin{short}
     Adds an activatable child widget to the action area of the dialog,
-    connecting a signal handler that will emit the \"response\" signal on the
-    dialog when the child widget is activated.
+    connecting a signal handler that will emit the @code{\"response\"} signal
+    on the dialog when the child widget is activated.
   @end{short}
   The child widget is appended to the end of the action area of the dialog. If
   you want to add a non-activatable widget, simply pack it into the action area
@@ -759,8 +764,7 @@ lambda (dialog response)    :run-last
 ;;; gtk_dialog_get_header_bar -> dialog-header-bar
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_dialog_get_header_bar" dialog-header-bar)
-    (g:object widget)
+(cffi:defcfun ("gtk_dialog_get_header_bar" dialog-header-bar) (g:object widget)
  #+liber-documentation
  "@version{#2023-8-22}
   @argument[dialog]{a @class{gtk:dialog} widget}
