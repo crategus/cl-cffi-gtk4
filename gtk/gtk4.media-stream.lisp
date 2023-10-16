@@ -2,7 +2,7 @@
 ;;; gtk4.media-stream.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -62,15 +62,19 @@
 ;;;     gtk_media_stream_seek
 ;;;     gtk_media_stream_realize
 ;;;     gtk_media_stream_unrealize
-;;;     gtk_media_stream_prepared
-;;;     gtk_media_stream_unprepared
+;;;     gtk_media_stream_prepared                          Deprecated 4.4
+;;;     gtk_media_stream_unprepared                        Deprecated 4.4
 ;;;     gtk_media_stream_update
-;;;     gtk_media_stream_ended
+;;;     gtk_media_stream_ended                             Deprecated 4.4
 ;;;     gtk_media_stream_seek_success
 ;;;     gtk_media_stream_seek_failed
 ;;;     gtk_media_stream_gerror
 ;;;     gtk_media_stream_error
 ;;;     gtk_media_stream_error_valist
+;;;
+;;;     gtk_media_stream_stream_ended                      Since 4.4
+;;;     gtk_media_stream_stream_prepared                   Since 4.4
+;;;     gtk_media_stream_stream_unprepared                 Since 4.4
 ;;;
 ;;; Properties
 ;;;
@@ -154,14 +158,14 @@
 (setf (documentation 'media-stream 'type)
  "@version{#2023-5-2}
   @begin{short}
-    The @sym{gtk:media-stream} object is the integration point for media
+    The @class{gtk:media-stream} object is the integration point for media
     playback inside GTK.
   @end{short}
-  GTK provides an implementation of the @sym{gtk:media-stream} interface that
+  GTK provides an implementation of the @class{gtk:media-stream} interface that
   is called the @class{gtk:media-file} object.
 
   Apart from application-facing API for stream playback, the
-  @sym{gtk:media-stream} object has a number of APIs that are only useful for
+  @class{gtk:media-stream} object has a number of APIs that are only useful for
   implementations and should not be used in applications:
   @fun{gtk:media-stream-prepared}, @fun{gtk:media-stream-unprepared},
   @fun{gtk.media-stream-update}, @fun{gtk:media-stream-ended},
@@ -209,7 +213,7 @@
     Accessor of the @slot[gtk:media-stream]{duration} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  The @sym{gtk:media-stream-duration} function gets the duration of the stream.
+  The @fun{gtk:media-stream-duration} function gets the duration of the stream.
   If the duration is not known, 0 will be returned.
   @see-class{gtk:media-stream}")
 
@@ -233,7 +237,7 @@
     Accessor of the @slot[gtk:media-stream]{ended} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  The @sym{gtk:media-stream-ended} function returns whether the streams
+  The @fun{gtk:media-stream-ended} function returns whether the streams
   playback is finished.
   @see-class{gtk:media-stream}")
 
@@ -258,7 +262,7 @@
     Accessor of the @slot[gtk:media-stream]{error} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  If the stream is in an error state, the @sym{gtk:media-stream-error} function
+  If the stream is in an error state, the @fun{gtk:media-stream-error} function
   returns the @code{GError} explaining that state. Any type of error can be
   reported here depending on the implementation of the media stream.
 
@@ -266,7 +270,7 @@
   @fun{gtk:media-stream-play} or @fun{gtk:media-stream-seek} functions will not
   have any effect.
 
-  The @sym{gtk:media-stream} object itself does not provide a way to unset an
+  The @class{gtk:media-stream} object itself does not provide a way to unset an
   error, but implementations may provide options. For example, a
   @class{gtk:media-file} object will unset errors when a new source is set with
   i.e. the @fun{gtk:media-file-set-file} function.
@@ -293,7 +297,7 @@
     Accessor of the @slot[gtk:media-stream]{has-audio} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  The @sym{gtk:media-stream-has-audio} function returns whether the stream has
+  The @fun{gtk:media-stream-has-audio} function returns whether the stream has
   audio.
   @see-class{gtk:media-stream}")
 
@@ -317,7 +321,7 @@
     Accessor of the @slot[gtk:media-stream]{has-video} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  The @sym{gtk:media-stream-has-video} function returns whether the stream has
+  The @fun{gtk:media-stream-has-video} function returns whether the stream has
   video.
   @see-class{gtk:media-stream}")
 
@@ -342,10 +346,9 @@
     Accessor of the @slot[gtk:media-stream]{loop} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  The @sym{gtk:media-stream-loop} function returns whether the stream is set to
-  loop. The @sym{(setf gtk:media-stream-loop)} function sets whether the stream
-  should loop, i.e. restart playback from the beginning instead of stopping at
-  the end.
+  The @fun{gtk:media-stream-loop} function returns whether the stream is set to
+  loop. The @setf{gtk:media-stream-loop} function sets whether the stream should
+  loop, i.e. restart playback from the beginning instead of stopping at the end.
 
   Not all streams may support looping, in particular non-seekable streams.
   Those streams will ignore the loop setting and just end.
@@ -372,9 +375,9 @@
     Accessor of the @slot[gtk:media-stream]{muted} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  The @sym{gtk:media-stream-muted} function returns whether the audio for the
-  stream is muted. The @sym{(setf gtk:media-stream-muted)} function sets whether
-  the audio stream should be muted. Muting a stream will cause no audio to be
+  The @fun{gtk:media-stream-muted} function returns whether the audio for the
+  stream is muted. The @setf{gtk:media-stream-muted} function sets whether the
+  audio stream should be muted. Muting a stream will cause no audio to be
   played, but it does not modify the volume. This means that muting and then
   unmuting the stream will restore the volume settings.
 
@@ -403,9 +406,9 @@
     Accessor of the @slot[gtk:media-stream]{playing} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  The @sym{gtk:media-stream-playing} function returns whether the stream is
-  currently playing. The @sym{(setf gtk:media-stream-playing)} function
-  starts or pauses playback of the stream.
+  The @fun{gtk:media-stream-playing} function returns whether the stream is
+  currently playing. The @setf{gtk:media-stream-playing} function starts or
+  pauses playback of the stream.
   @see-class{gtk:media-stream}")
 
 ;;; --- media-stream-prepared --------------------------------------------------
@@ -498,7 +501,7 @@
     Accessor of the @slot[gtk:media-stream]{timestamp} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  The @sym{gtk:media-stream-timestamp} function returns the current presentation
+  The @fun{gtk:media-stream-timestamp} function returns the current presentation
   timestamp in microseconds.
   @see-class{gtk:media-stream}")
 
@@ -525,9 +528,9 @@
     Accessor of the @slot[gtk:media-stream]{volume} slot of the
     @class{gtk:media-stream} class.
   @end{short}
-  The @sym{gtk:media-stream-volume} function returns the volume of the audio for
-  the stream. The @sym{(setf gtk:media-stream-volume)} function sets the volume
-  of the audio stream. This function call will work even if the stream is muted.
+  The @fun{gtk:media-stream-volume} function returns the volume of the audio for
+  the stream. The @setf{gtk:media-stream-volume} function sets the volume of the
+  audio stream. This function call will work even if the stream is muted.
 
   The given volume should range from 0.0 for silence to 1.0 for as loud as
   possible. Values outside of this range will be clamped to the nearest value.
@@ -648,7 +651,7 @@
   Seek operations may not finish instantly. While a seek operation is in
   process, the @slot[gtk:media-stream]{seeking} property will be set.
 
-  When calling @sym{gtk:media-stream-seek} function during an ongoing seek
+  When calling @fun{gtk:media-stream-seek} function during an ongoing seek
   operation, the new seek will override any pending seek.
   @see-class{gtk:media-stream}
   @see-function{gtk:media-stream-seeking}"
@@ -948,5 +951,30 @@
 ;;; ----------------------------------------------------------------------------
 
 ;; not implemented
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_stream_stream_ended
+;;;
+;;; Pauses the media stream and marks it as ended.
+;;;
+;;; Since 4.4
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_stream_stream_prepared
+;;;
+;;; Called by GtkMediaStream implementations to advertise the stream being ready
+;;; to play and providing details about the stream.
+;;;
+;;; Since 4.4
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_media_stream_stream_unprepared
+;;;
+;;; Resets a given media stream implementation.
+;;;
+;;; Since: 4.4
+;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gtk4.media-stream.lisp -------------------------------------

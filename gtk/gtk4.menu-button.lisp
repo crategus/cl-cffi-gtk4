@@ -2,7 +2,7 @@
 ;;; gtk4.menu-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -164,6 +164,10 @@
    (always-show-arrow
     menu-button-always-show-arrow
     "always-show-arrow" "gboolean" t t)
+    #+gtk-4-12
+   (can-shrink
+    menu-button-can-shrink
+    "can-shrink" "gboolean" t t)
    #+gtk-4-6
    (child
     menu-button-child
@@ -198,14 +202,15 @@
 (setf (documentation 'menu-button 'type)
  "@version{2023-3-24}
   @begin{short}
-    The @sym{gtk:menu-button} widget is used to display a popup when clicked on.
+    The @class{gtk:menu-button} widget is used to display a popup when clicked
+    on.
   @end{short}
   This popup can be provided either as a @class{gtk:popover} widget or as an
   abstract @class{g:menu-model} object.
 
   @image[menu-button]{Figure: GtkMenuButton}
 
-  The @sym{gtk:menu-button} widget can show either an icon, set with the
+  The @class{gtk:menu-button} widget can show either an icon, set with the
   @code{icon-name} property, or a label, set with the @code{label} property. If
   neither is explicitly set, a @class{gtk:image} widget is automatically
   created, using an arrow image oriented according to \"direction\" or the
@@ -229,7 +234,7 @@
      ╰── <content>
           ╰── [arrow]
     @end{pre}
-    The @sym{gtk:menu-button} implementation has a single CSS node with name
+    The @class{gtk:menu-button} implementation has a single CSS node with name
     @code{menubutton} which contains a button node with a @code{.toggle} style
     class.
 
@@ -248,7 +253,7 @@
     class to request a round appearance.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:menu-button} implementation uses the @code{:button} role of
+    The @class{gtk:menu-button} implementation uses the @code{:button} role of
     the @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
@@ -256,10 +261,10 @@
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      The signal on the @sym{gtk:menu-button} widget is an action signal and
+      The signal on the @class{gtk:menu-button} widget is an action signal and
       emitting it causes the button to pop up its menu. Since 4.4
       @begin[code]{table}
-        @entry[button]{The @sym{gtk:button} widget which received the signal.}
+        @entry[button]{The @class{gtk:button} widget which received the signal.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:menu-button-new}
@@ -302,8 +307,8 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{active} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-active} function returns whether the menu button is
-  active. The @sym{(setf gtk:menu-button-active)} function sets the property.
+  The @fun{gtk:menu-button-active} function returns whether the menu button is
+  active. The @setf{gtk:menu-button-active} function sets the property.
 
   Since 4.10
   @see-class{gtk:menu-button}")
@@ -331,12 +336,41 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{always-show-arrow} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-always-show-arrow} function gets whether to show a
+  The @fun{gtk:menu-button-always-show-arrow} function gets whether to show a
   dropdown arrow even when using an icon. The
-  @sym{(setf gtk:menu-button-always-show-arrow)} function sets the property.
+  @setf{gtk:menu-button-always-show-arrow} function sets the property.
 
   Since 4.4
   @see-class{gtk:menu-button}")
+
+;;; --- menu-button-can-shrink -------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; Gtk.MenuButton:can-shrink
+;;;
+;;; Whether the size of the button can be made smaller than the natural size of
+;;; its contents.
+;;;
+;;; Since 4.12
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_menu_button_get_can_shrink
+;;;
+;;; Retrieves whether the button can be smaller than the natural size of its
+;;; contents.
+;;;
+;;; Since 4.12
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_menu_button_set_can_shrink
+;;;
+;;; Sets whether the button size can be smaller than the natural size of its
+;;; contents.
+;;;
+;;; Since 4.12
+;;; ----------------------------------------------------------------------------
 
 ;;; --- menu-button-child ------------------------------------------------------
 
@@ -358,8 +392,8 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{child} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-child} function gets the child widget. The
-  @sym{(setf gtk:menu-button-child)} function sets the child widget.
+  The @fun{gtk:menu-button-child} function gets the child widget. The
+  @setf{gtk:menu-button-child} function sets the child widget.
 
   Setting a child widget resets the @slot[gtk:menu-button]{label} and
   @slot[gtk:menu-button]{icon-name} properties. If the
@@ -399,8 +433,8 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{direction} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-direction} function returns the direction the popup
-  will be pointing at when popped up. The @sym{(setf gtk:menu-button-direction)}
+  The @fun{gtk:menu-button-direction} function returns the direction the popup
+  will be pointing at when popped up. The @setf{gtk:menu-button-direction}
   function sets the direction in which the popup will be popped up, as well as
   changing the direction of the arrow. The child widget will not be changed to
   an arrow if it was customized.
@@ -434,9 +468,9 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{has-frame} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-has-frame} function returns whether the button
-  has a frame. The @sym{(setf gtk:menu-button-has-frame)} function sets the
-  style of the button.
+  The @fun{gtk:menu-button-has-frame} function returns whether the button
+  has a frame. The @setf{gtk:menu-button-has-frame} function sets the style of
+  the button.
   @see-class{gtk:menu-button}")
 
 ;;; --- menu-button-icon-name --------------------------------------------------
@@ -460,9 +494,9 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{icon-name} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-icon-name} function gets the name of the icon shown
-  in the button. The @sym{(setf gtk:menu-button-icon-name)} function sets the
-  name of the icon.
+  The @fun{gtk:menu-button-icon-name} function gets the name of the icon shown
+  in the button. The @setf{gtk:menu-button-icon-name} function sets the name of
+  the icon.
   @see-class{gtk:menu-button}
   @see-function{gtk:menu-button-label}")
 
@@ -487,8 +521,8 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{label} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-label} function gets the label shown in the button.
-  The @sym{(setf gtk:menu-button-label)} function sets the label.
+  The @fun{gtk:menu-button-label} function gets the label shown in the button.
+  The @setf{gtk:menu-button-label} function sets the label.
   @see-class{gtk:menu-button}
   @see-function{gtk:menu-button-icon-name}")
 
@@ -518,9 +552,9 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{menu-model} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-menu-model} function returns the menu model used to
-  generate the popup. The @sym{(setf gtk:menu-button-menu-model)} function sets
-  the menu model from which the popup will be constructed, or @code{nil} to
+  The @fun{gtk:menu-button-menu-model} function returns the menu model used to
+  generate the popup. The @setf{gtk:menu-button-menu-model} function sets the
+  menu model from which the popup will be constructed, or @code{nil} to
   dissociate any existing menu model and disable the button.
 
   A @class{gtk:popover} widget will be created from the menu model with the
@@ -555,11 +589,11 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{popover} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-popover} function returns the popover that pops out
+  The @fun{gtk:menu-button-popover} function returns the popover that pops out
   of the button. If the button is not using a popover, this function returns
-  @code{nil}. The @sym{(setf gtk:menu-button-popover)} function sets the popover
-  that will be popped up when the menu button is clicked, or @code{nil} to
-  dissociate any existing popover and disable the button.
+  @code{nil}. The @setf{gtk:menu-button-popover} function sets the popover that
+  will be popped up when the menu button is clicked, or @code{nil} to dissociate
+  any existing popover and disable the button.
 
   If the @slot[gtk:menu-button]{menu-model} property is set, the menu model is
   dissociated from the menu button, and the property is set to @code{nil}.
@@ -588,10 +622,10 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{primary} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-primary} function returns whether the menu button
-  acts as a primary menu. The @sym{(setf gtk:menu-button-primary)} function
-  sets whether menu button acts as a primary menu. Primary menus can be opened
-  with the @kbd{F10} key.
+  The @fun{gtk:menu-button-primary} function returns whether the menu button
+  acts as a primary menu. The @setf{gtk:menu-button-primary} function sets
+  whether menu button acts as a primary menu. Primary menus can be opened with
+  the @kbd{F10} key.
 
   Since 4.4
   @see-class{gtk:menu-button}")
@@ -618,9 +652,9 @@ lambda (button)    :action
     Accessor of the @slot[gtk:menu-button]{use-underline} slot of the
     @class{gtk:menu-button} class.
   @end{short}
-  The @sym{gtk:menu-button-use-underline} function returns whether an embedded
+  The @fun{gtk:menu-button-use-underline} function returns whether an embedded
   underline in the text indicates a mnemonic. The
-  @sym{(setf gtk:menu-button-use-underline)} function sets the property.
+  @setf{gtk:menu-button-use-underline} function sets the property.
   @see-class{gtk:menu-button}")
 
 ;;; ----------------------------------------------------------------------------

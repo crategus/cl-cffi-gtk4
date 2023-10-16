@@ -2,7 +2,7 @@
 ;;; gtk4.media-file.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -92,12 +92,12 @@
 (setf (documentation 'media-file 'type)
  "@version{#2023-5-3}
   @begin{short}
-    The @sym{gtk:media-file} class is the implementation for media file usage
+    The @class{gtk:media-file} class is the implementation for media file usage
     with the @class{gtk:media-stream} class.
   @end{short}
   This provides a simple way to play back video files with GTK.
 
-  GTK provides a GIO extension point for @sym{gtk:media-file} implementations
+  GTK provides a GIO extension point for @class{gtk:media-file} implementations
   to allow for external implementations using various media frameworks. GTK
   itself includes implementations using @code{GStreamer} and @code{ffmpeg}.
   @see-constructor{gtk:media-file-new}
@@ -134,12 +134,12 @@
     Accessor of the @slot[gtk:media-file]{file} slot of the
     @class{gtk:media-file} class.
   @end{short}
-  The @sym{gtk:media-file-file} function returns the file that @arg{object} is
+  The @fun{gtk:media-file-file} function returns the file that @arg{object} is
   currently playing from. When @arg{object} is not playing or not playing from
   a file, @code{nil} is returned.
 
-  The @sym{(setf gtk:media-file-file)} function sets the file. If any file is
-  still playing, stop playing it. Then start playing the given @arg{file}.
+  The @setf{gtk:media-file-file} function sets the file. If any file is still
+  playing, stop playing it. Then start playing the given @arg{file}.
   @see-class{gtk:media-file}
   @see-class{g:file}")
 
@@ -165,14 +165,14 @@
     Accessor of the @slot[gtk:media-file]{input-stream} slot of the
     @class{gtk:media-file} class.
   @end{short}
-  The @sym{gtk:media-file-input-stream} function returns the stream that
+  The @fun{gtk:media-file-input-stream} function returns the stream that
   @arg{object} is currently playing from. When @arg{object} is not playing or
   not playing from a stream, @code{nil} is returned.
 
-  The @sym{(setf gtk:media-file-input-stream)} function sets the stream. If
-  anything is still playing, stop playing it. Then start playing the given
-  @arg{stream}. Full control about the stream is assumed for the duration of
-  playback. The stream will not bt be closed.
+  The @setf{gtk:media-file-input-stream} function sets the stream. If anything
+  is still playing, stop playing it. Then start playing the given @arg{stream}.
+  Full control about the stream is assumed for the duration of playback. The
+  stream will not bt be closed.
   @see-class{gtk:media-file}")
 
 ;;; ----------------------------------------------------------------------------

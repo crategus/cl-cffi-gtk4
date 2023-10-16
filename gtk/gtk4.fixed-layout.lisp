@@ -2,7 +2,7 @@
 ;;; gtk4.fixed-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -71,7 +71,7 @@
 (setf (documentation 'fixed-layout-child 'type)
  "@version{#2023-4-16}
   @begin{short}
-    The @sym{gtk:layout-child} subclass for children in a
+    The @class{gtk:layout-child} subclass for children in a
     @class{gtk:fixed-layout} class.
   @end{short}
   @see-class{gtk:fixed-layout}
@@ -102,9 +102,9 @@
     Accessor of the @slot[gtk:fixed-layout-child]{transform} slot of the
     @class{gtk:fixed-layout-child} class.
   @end{short}
-  The @sym{gtk:fixed-layout-child-transform} function retrieves the
+  The @fun{gtk:fixed-layout-child-transform} function retrieves the
   transformation of the child widget of a @class{gtk:fixed-layout} object.
-  The @sym{(setf gtk:fixed-layout-child-transform)} function sets the transform.
+  The @setf{gtk:fixed-layout-child-transform} function sets the transform.
   @see-class{gtk:fixed-layout-child}
   @see-class{gsk:transform}")
 
@@ -123,8 +123,8 @@
 (setf (documentation 'fixed-layout 'type)
  "@version{#2023-4-16}
   @begin{short}
-    The @sym{gtk:fixed-layout} object is a layout manager which can place child
-    widgets at fixed positions, and with fixed sizes.
+    The @class{gtk:fixed-layout} object is a layout manager which can place
+    child widgets at fixed positions, and with fixed sizes.
   @end{short}
 
   Most applications should never use this layout manager. Fixed positioning and
@@ -147,12 +147,12 @@
       of non-English text will use a different font in many cases.
     @end{item}
   @end{itemize}
-  In addition, the @sym{gtk:fixed-layout} object does not pay attention to text
-  direction and thus may produce unwanted results if your app is run under
+  In addition, the @class{gtk:fixed-layout} object does not pay attention to
+  text direction and thus may produce unwanted results if your app is run under
   right-to-left languages such as Hebrew or Arabic. That is: normally GTK will
   order containers appropriately depending on the text direction, e.g. to put
   labels to the right of the thing they label when using an RTL language. The
-  @sym{gtk:fixed-layout} object will not be able to do that for you.
+  @class{gtk:fixed-layout} object will not be able to do that for you.
 
   Finally, fixed positioning makes it kind of annoying to add/remove GUI
   elements, since you have to reposition all the other elements. This is a

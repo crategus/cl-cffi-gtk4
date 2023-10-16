@@ -2,7 +2,7 @@
 ;;; gtk4.constraint-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -81,7 +81,7 @@
 (setf (documentation 'constraint-layout-child 'type)
  "@version{#2023-4-20}
   @begin{short}
-    The @sym{gtk:constraint-layout-child} subclass for children in a
+    The @class{gtk:constraint-layout-child} subclass for children in a
     @class{gtk:constraint-layout} object.
   @end{short}
   @see-class{gtk:constraint-layout}")
@@ -101,7 +101,7 @@
 (setf (documentation 'constraint-layout 'type)
  "@version{#2023-4-20}
   @begin{short}
-    The @sym{gtk:constraint-layout} object is a layout manager that uses
+    The @class{gtk:constraint-layout} object is a layout manager that uses
     relations between widget attributes, expressed via @class{gtk:constraint}
     instances, to measure and allocate widgets.
   @end{short}
@@ -111,7 +111,7 @@
     have a more in depth definition.
 
     By taking multiple constraints and applying them to the children of a
-    widget using the @sym{gtk:constraint-layout} object, it is possible to
+    widget using the @class{gtk:constraint-layout} object, it is possible to
     describe complex layout policies. Each constraint applied to a child or to
     the parent widgets contributes to the full description of the layout, in
     terms of parameters for resolving the value of each attribute.
@@ -136,7 +136,7 @@
     a solution.
   @end{dictionary}
   @begin[GtkConstraintLayout as GtkBuildable]{dictionary}
-    The @sym{gtk:constraint-layout} class implements the @class{gtk:buildable}
+    The @class{gtk:constraint-layout} class implements the @class{gtk:buildable}
     interface and has a custom @code{constraints} element which allows
     describing constraints in a @class{gtk:builder} object.
 
@@ -157,7 +157,7 @@
 </object>
     @end{pre}
     The definition above will add two constraints to the
-    @sym{gtk:constraint-layout} object:
+    @class{gtk:constraint-layout} object:
     @begin{itemize}
       @item{a required constraint between the leading edge of \"button\" and
         the leading edge of the widget using the constraint layout, plus 12
@@ -179,7 +179,7 @@
 
     The \"source\" and \"target\" attributes can be set to \"super\" to
     indicate that the constraint target is the widget using the
-    @sym{gtk:constraint-layout} object.
+    @class{gtk:constraint-layout} object.
 
     There can be \"constant\" and \"multiplier\" attributes.
 

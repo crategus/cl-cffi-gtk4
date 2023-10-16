@@ -2,7 +2,7 @@
 ;;; gtk4.media-controls.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,13 +83,13 @@
 (setf (documentation 'media-controls 'type)
  "@version{#2023-4-29}
   @begin{short}
-    The @sym{gtk:media-controls} widget is a widget to show controls for a
+    The @class{gtk:media-controls} widget is a widget to show controls for a
     @class{gtk:media-stream} object and giving users a way to use it.
   @end{short}
 
   @image[media-controls]{Figure: GtkMediaControls}
 
-  Usually, the @sym{gtk:media-controls} widget is used as part of the
+  Usually, the @class{gtk:media-controls} widget is used as part of the
   @class{gtk:video} widget.
   @see-class{gtk:media-stream}
   @see-class{gtk:video}")
@@ -118,9 +118,9 @@
     Accessor of the @slot[gtk:media-controls]{media-stream} slot of the
     @class{gtk:media-controls} class.
   @end{short}
-  The @sym{gtk:media-controls-media-stream} function gets the media stream
+  The @fun{gtk:media-controls-media-stream} function gets the media stream
   managed by the media controls or @code{nil} if none. The
-  @sym{(setf gtk:media-controls-media-stream)} function sets the media stream.
+  @setf{gtk:media-controls-media-stream} function sets the media stream.
   @see-class{gtk:media-controls}
   @see-class{gtk:media-stream}")
 

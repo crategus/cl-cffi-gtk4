@@ -2,7 +2,7 @@
 ;;; gtk4.switch.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -96,7 +96,7 @@
 (setf (documentation 'switch 'type)
  "@version{2023-3-26}
   @begin{short}
-    The @sym{gtk:switch} widget is a widget that has two states: on or off.
+    The @class{gtk:switch} widget is a widget that has two states: on or off.
   @end{short}
 
   @image[switch]{Figure: GtkSwitch}
@@ -104,7 +104,7 @@
   The user can control which state should be active by clicking the switch,
   or by dragging the handle.
 
-  The @sym{gtk:switch} widget can also handle situations where the underlying
+  The @class{gtk:switch} widget can also handle situations where the underlying
   state changes with a delay. See the \"state-set\" signal for details.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
@@ -113,12 +113,12 @@
  ├── label
  ╰── slider
     @end{pre}
-    The @sym{gtk:switch} implementation has four CSS nodes, the main node with
+    The @class{gtk:switch} implementation has four CSS nodes, the main node with
     the name @code{switch} and subnodes for the slider and the on and off
     labels. Neither of them is using any style classes.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:switch} implementation uses the @code{:switch} role of the
+    The @class{gtk:switch} implementation uses the @code{:switch} role of the
     @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
@@ -130,7 +130,7 @@ lambda (widget)    :action
       switch to animate. Applications should never connect to this signal, but
       use the \"notify::active\" signal.
       @begin[code]{table}
-        @entry[widget]{The @sym{gtk:switch} widget which received the signal.}
+        @entry[widget]{The @class{gtk:switch} widget which received the signal.}
       @end{table}
     @subheading{The \"state-set\" signal}
       @begin{pre}
@@ -150,7 +150,7 @@ lambda (widget state)    :run-last
       switch, while the @code{active} property is represented by the position
       of the switch.
       @begin[code]{table}
-        @entry[widget]{The @sym{gtk:switch} widget which received the signal.}
+        @entry[widget]{The @class{gtk:switch} widget which received the signal.}
         @entry[state]{A boolean with the state of the switch.}
         @entry[Returns]{@em{True} to stop the signal emission.}
       @end{table}
@@ -186,9 +186,9 @@ lambda (widget state)    :run-last
     Accessor of the @slot[gtk:switch]{active} slot of the @class{gtk:switch}
     class.
   @end{short}
-  The @sym{gtk:switch-active} function gets whether the switch is in its \"on\"
-  or \"off\" state. The @sym{(setf gtk:switch-active)} function changes the
-  state of the switch to the desired one.
+  The @fun{gtk:switch-active} function gets whether the switch is in its \"on\"
+  or \"off\" state. The @setf{gtk:switch-active} function changes the state of
+  the switch to the desired one.
   @see-class{gtk:switch}")
 
 ;;; --- switch-state -----------------------------------------------------------
@@ -213,8 +213,8 @@ lambda (widget state)    :run-last
     Accessor of the @slot[gtk:switch]{state} slot of the @class{gtk:switch}
     class.
   @end{short}
-  The @sym{gtk:switch-active} function gets the underlying state of the switch.
-  The @sym{(setf gtk:switch-active)} function sets the underlying state.
+  The @fun{gtk:switch-active} function gets the underlying state of the switch.
+  The @setf{gtk:switch-active} function sets the underlying state.
 
   Normally, this is the same as the @slot[gtk:switch]{active} property, unless
   the switch is set up for delayed state changes. This function is typically

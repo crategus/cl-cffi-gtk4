@@ -2,7 +2,7 @@
 ;;; gtk4.box-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -37,12 +37,14 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_box_layout_set_homogeneous
 ;;;     gtk_box_layout_get_homogeneous
-;;;     gtk_box_layout_set_spacing
+;;;     gtk_box_layout_set_homogeneous
 ;;;     gtk_box_layout_get_spacing
-;;;     gtk_box_layout_set_baseline_position
+;;;     gtk_box_layout_set_spacing
 ;;;     gtk_box_layout_get_baseline_position
+;;;     gtk_box_layout_set_baseline_position
+;;;     gtk_box_layout_get_baseline_child                  Since 4.12
+;;;     gtk_box_layout_set_baseline_child                  Since 4.12
 ;;;
 ;;; Functions
 ;;;
@@ -50,6 +52,7 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     baseline-child                                     Since 4.12
 ;;;     baseline-position
 ;;;     homogeneous
 ;;;     spacing
@@ -76,7 +79,11 @@
    :export t
    :interfaces ("GtkOrientable")
    :type-initializer "gtk_box_layout_get_type")
-  ((baseline-position
+  (#+gtk-4-12
+   (baseline-child
+    box-layout-baseline-child
+    "baseline-child" "gint" t t)
+   (baseline-position
     box-layout-baseline-position
     "baseline-position" "GtkBaselinePosition" t t)
    (homogeneous
@@ -90,12 +97,12 @@
 (setf (documentation 'box-layout 'type)
  "@version{#2023-4-18}
   @begin{short}
-    A @sym{gtk:box-layout} class is a layout manager that arranges the children
-    of any widget using it into a single row or column.
+    A @class{gtk:box-layout} class is a layout manager that arranges the
+    children of any widget using it into a single row or column.
   @end{short}
   Whether it is a row or column depends on the value of its
   @slot[gtk:orientable]{orientation} property. Within the other dimension all
-  children all allocated the same size. The @sym{gtk:box-layout} object will
+  children all allocated the same size. The @class{gtk:box-layout} object will
   respect the @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties
   of each child widget.
 
@@ -109,6 +116,30 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; Gtk.BoxLayout:baseline-child
+;;;
+;;; The child that determines the baseline of the box in vertical layout.
+;;;
+;;; Since 4.12
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_box_layout_get_baseline_child
+;;;
+;;; Gets the value set by gtk_box_layout_set_baseline_child().
+;;;
+;;; Since 4.12
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_box_layout_set_baseline_child
+;;;
+;;; Sets the index of the child that determines the baseline in vertical layout.
+;;;
+;;; Since 4.12
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- box-layout-baseline-position -------------------------------------------
@@ -137,8 +168,8 @@
     Accessor of the @slot[box-layout]{baseline-position} slot of the
     @class{gtk:box-layout} class.
   @end{short}
-  The @sym{gtk:box-layout-baseline-position} function gets the baseline
-  position. The @sym{(setf gtk:box-layout-baseline-position)} function sets the
+  The @fun{gtk:box-layout-baseline-position} function gets the baseline
+  position. The @setf{gtk:box-layout-baseline-position} function sets the
   baseline position of a box layout.
 
   The baseline position affects only horizontal boxes with at least one
@@ -170,9 +201,9 @@
     Accessor of the @slot[box-layout]{homogeneous} slot of the
     @class{gtk:box-layout} class.
   @end{short}
-  The @sym{gtk:box-layout-homogeneous} function returns whether the box layout
+  The @fun{gtk:box-layout-homogeneous} function returns whether the box layout
   will allocate the same size to all children. The
-  @sym{(setf gtk:box-layout-homogeneous)} function sets the property.
+  @setf{gtk:box-layout-homogeneous} function sets the property.
   @see-class{gtk:box-layout}")
 
 ;;; --- box-layout-spacing -----------------------------------------------------
@@ -198,9 +229,9 @@
     Accessor of the @slot[box-layout]{spacing} slot of the
     @class{gtk:box-layout} class.
   @end{short}
-  The @sym{gtk:box-layout-spacing} function returns the space that the box
-  layout puts between children. The @sym{(setf gtk:box-layout-spacing)} function
-  sets the spacing.
+  The @fun{gtk:box-layout-spacing} function returns the space that the box
+  layout puts between children. The @setf{gtk:box-layout-spacing} function sets
+  the spacing.
   @see-class{gtk:box-layout}")
 
 ;;; ----------------------------------------------------------------------------

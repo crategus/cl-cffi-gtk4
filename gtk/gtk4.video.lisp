@@ -2,7 +2,7 @@
 ;;; gtk4.video.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -115,7 +115,7 @@
 (setf (documentation 'video 'type)
  "@version{#2023-4-21}
   @begin{short}
-    The @sym{gtk:video} widget is a widget to show a @class{gtk:media-stream}
+    The @class{gtk:video} widget is a widget to show a @class{gtk:media-stream}
     object with media controls.
   @end{short}
 
@@ -125,12 +125,12 @@
   If you just want to display a video without controls, you can treat it like
   any other paintable and for example put it into a @class{gtk:picture} widget.
 
-  The @sym{gtk:video} widget aims to cover use cases such as previews, embedded
-  animations, etc. It supports autoplay, looping, and simple media controls. It
-  does not have support for video overlays, multichannel audio, device
-  selection, or input. If you are writing a full-fledged video player, you may
-  want to use the @class{gdk:paintable} API and a media framework such as
-  @code{Gstreamer} directly.
+  The @class{gtk:video} widget aims to cover use cases such as previews,
+  embedded animations, etc. It supports autoplay, looping, and simple media
+  controls. It does not have support for video overlays, multichannel audio,
+  device selection, or input. If you are writing a full-fledged video player,
+  you may want to use the @class{gdk:paintable} API and a media framework such
+  as @code{Gstreamer} directly.
   @see-constructor{gtk:video-new}
   @see-constructor{gtk:video-new-for-file}
   @see-constructor{gtk:video-new-for-filename}
@@ -168,10 +168,10 @@
     Accessor of the @slot[gtk:video]{autoplay} slot of the @class{gtk:video}
     class.
   @end{short}
-  The @sym{gtk:video-autoplay} function returns @em{true} if videos have been
+  The @fun{gtk:video-autoplay} function returns @em{true} if videos have been
   set to loop via the @fun{gtk:video-loop} function. The
-  @sym{(setf gtk:video-autoplay)} function sets whether self automatically
-  starts playback when it becomes visible or when a new file gets loaded.
+  @setf{gtk:video-autoplay} function sets whether self automatically starts
+  playback when it becomes visible or when a new file gets loaded.
   @see-class{gtk:video}
   @see-function{gtk:video-loop}")
 
@@ -194,9 +194,9 @@
   @begin{short}
     Accessor of the @slot[gtk:video]{file} slot of the @class{gtk:video} class.
   @end{short}
-  The @sym{gtk:video-file} function gets the file played by @arg{object} or
-  @code{nil} if not playing back a file. The @sym{(setf gtk:video-file)}
-  function makes @arg{object} play the given @arg{file}.
+  The @fun{gtk:video-file} function gets the file played by @arg{object} or
+  @code{nil} if not playing back a file. The @setf{gtk:video-file} function
+  makes @arg{object} play the given @arg{file}.
   @see-class{gtk:video}
   @see-class{g:file}")
 
@@ -220,9 +220,9 @@
   @begin{short}
     Accessor of the @slot[gtk:video]{loop} slot of the @class{gtk:video} class.
   @end{short}
-  The @sym{gtk:video-loop} function returns @em{true} if videos have been set
-  to loop. The @sym{(setf gtk:video-loop)} function sets whether new files
-  loaded by @arg{object} should be set to loop.
+  The @fun{gtk:video-loop} function returns @em{true} if videos have been set
+  to loop. The @setf{gtk:video-loop} function sets whether new files loaded by
+  @arg{object} should be set to loop.
   @see-class{gtk:video}")
 
 ;;; --- video-media-stream -----------------------------------------------------
@@ -247,11 +247,11 @@
     Accessor of the @slot[gtk:video]{media-stream} slot of the @class{gtk:video}
     class.
   @end{short}
-  The @sym{gtk:video-media-stream} function gets the media stream managed by
-  @arg{object} or @code{nil} if none. The @sym{(setf gtk:video-media-steam)}
-  function sets the media stream to be played back. @arg{object} will take full
-  control of managing the media stream. If you want to manage a media stream
-  yourself, consider using a @class{gtk:image} widget for display.
+  The @fun{gtk:video-media-stream} function gets the media stream managed by
+  @arg{object} or @code{nil} if none. The @setf{gtk:video-media-steam} function
+  sets the media stream to be played back. @arg{object} will take full control
+  of managing the media stream. If you want to manage a media stream yourself,
+  consider using a @class{gtk:image} widget for display.
 
   If you want to display a file, consider using the @fun{gtk:video-file}
   function instead.

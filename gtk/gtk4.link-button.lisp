@@ -2,7 +2,7 @@
 ;;; gtk4.link-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -102,7 +102,7 @@
 (setf (documentation 'link-button 'type)
  "@version{2023-3-18}
   @begin{short}
-    A @sym{gtk:link-button} widget is a @class{gtk:button} widget with a
+    A @class{gtk:link-button} widget is a @class{gtk:button} widget with a
     hyperlink, similar to the one used by web browsers, which triggers an
     action when clicked. It is useful to show quick links to resources.
   @end{short}
@@ -112,15 +112,15 @@
 
   @image[link-button]{Figure: GtkLinkButton}
 
-  The URI bound to a @sym{gtk:link-button} widget can be set specifically or
+  The URI bound to a @class{gtk:link-button} widget can be set specifically or
   retrieved using the @fun{gtk:link-button-uri} function.
 
-  By default, the @sym{gtk:link-button} widget calls the @fun{gtk:show-uri}
+  By default, the @class{gtk:link-button} widget calls the @fun{gtk:show-uri}
   function when the button is clicked. This behaviour can be overridden by
   connecting to the \"activate-link\" signal and returning @em{true} from the
   signal handler.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:link-button} implemenation has a single CSS node with name
+    The @class{gtk:link-button} implemenation has a single CSS node with name
     @code{button}. To differentiate it from a plain @class{gtk:button} widget,
     it gets the @code{.link} style class.
   @end{dictionary}
@@ -139,7 +139,7 @@ lambda (button)    :run-last
       you can connect to the \"activate-link\" signal and stop the propagation
       of the signal by returning @em{true} from your handler.
       @begin[code]{table}
-        @entry[button]{The @sym{gtk:link-button} widget that emitted the
+        @entry[button]{The @class{gtk:link-button} widget that emitted the
           signal.}
       @end{table}
   @end{dictionary}
@@ -174,8 +174,8 @@ lambda (button)    :run-last
     Accessor of the @slot[gtk:link-button]{uri} slot of the
     @class{gtk:link-button} class.
   @end{short}
-  The @sym{gtk:link-button-uri} function retrieves the URI. The
-  @sym{gtk:link-button-uri} function sets @arg{uri} as the URI where the link
+  The @fun{gtk:link-button-uri} function retrieves the URI. The
+  @setf{gtk:link-button-uri} function sets @arg{uri} as the URI where the link
   button points. As a side-effect this unsets the visited state of the button.
   @see-class{gtk:link-button}")
 
@@ -201,8 +201,8 @@ lambda (button)    :run-last
     Accessor of the @slot[gtk:link-button]{visited} slot of the
     @class{gtk:link-button} class.
   @end{short}
-  The @sym{gtk:link-button-visited} function retrieves the \"visited\" state of
-  the URI where the link button points. The @sym{(setf gtk:link-button-visited)}
+  The @fun{gtk:link-button-visited} function retrieves the \"visited\" state of
+  the URI where the link button points. The @setf{gtk:link-button-visited}
   function sets the \"visited\" state of the URI.
 
   The button becomes visited when it is clicked. If the URI is changed on the

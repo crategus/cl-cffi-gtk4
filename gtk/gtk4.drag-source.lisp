@@ -2,7 +2,7 @@
 ;;; gtk4.drag-source.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -94,7 +94,7 @@
 (setf (documentation 'drag-source 'type)
  "@version{2023-7-23}
   @begin{short}
-    The @sym{gtk:drag-source} object is an auxiliary object that is used to
+    The @class{gtk:drag-source} object is an auxiliary object that is used to
     initiate Drag and Drop operations.
   @end{short}
   It can be set up with the necessary ingredients for a DND operation ahead of
@@ -106,18 +106,18 @@
 
   Setting up the content provider and icon ahead of time only makes sense when
   the data does not change. More commonly, you will want to set them up just in
-  time. To do so, the @sym{gtk:drag-source} object has \"prepare\" and
+  time. To do so, the @class{gtk:drag-source} object has \"prepare\" and
   \"drag-begin\" signals. The \"prepare\" signal is emitted before a drag is
-  started, and can be used to set the content provider and actions that the 
+  started, and can be used to set the content provider and actions that the
   drag should be started with. The \"drag-begin\" signal is emitted after the
   @class{gdk:drag} object has been created, and can be used to set up the drag
   icon.
 
-  During the DND operation, the @sym{gtk:drag-source} object emits signals that
-  can be used to obtain updates about the status of the operation, but it is 
-  not normally necessary to connect to any signals, except for one case. When 
-  the supported actions include the @code{:move} value of the
-  @symbol{gdk:drag-action} flags, you need to listen for the \"drag-end\" 
+  During the DND operation, the @class{gtk:drag-source} object emits signals
+  that can be used to obtain updates about the status of the operation, but it
+  is not normally necessary to connect to any signals, except for one case.
+  When the supported actions include the @code{:move} value of the
+  @symbol{gdk:drag-action} flags, you need to listen for the \"drag-end\"
   signal and delete the data after it has been transferred.
   @begin[Signal Details]{dictionary}
     @subheading{The \"drag-begin\" signal}
@@ -128,7 +128,7 @@ lambda (source drag)    :run-last
       be used to e.g. set a custom drag icon with the
       @fun{gtk:drag-source-set-icon} function.
       @begin[code]{table}
-        @entry[source]{A @sym{gtk:drag-source} object.}
+        @entry[source]{A @class{gtk:drag-source} object.}
         @entry[drag]{A @class{gdk:drag} object.}
       @end{table}
     @subheading{The \"drag-cancel\" signal}
@@ -140,7 +140,7 @@ lambda (source drag reason)    :run-last
       error. It should return @em{true} if the failure has been handled and the
       default \"drag operation failed\" animation should not be shown.
       @begin[code]{table}
-        @entry[source]{A @sym{gtk:drag-source} object.}
+        @entry[source]{A @class{gtk:drag-source} object.}
         @entry[drag]{A @class{gdk:drag} object.}
         @entry[reason]{A @symbol{gdk:drag-cancel-reason} value with the
           information on why the drag failed.}
@@ -155,7 +155,7 @@ lambda (source drag delete)    :run-last
       typical reason to connect to this signal is to undo things done in the
       \"prepare\" or \"drag-begin\" handler.
       @begin[code]{table}
-        @entry[source]{A @sym{gtk:drag-source} object.}
+        @entry[source]{A @class{gtk:drag-source} object.}
         @entry[drag]{A @class{gdk:drag} object.}
         @entry[delete]{@em{True} if the drag was performing @code{:move}, and
         the data should be deleted.}
@@ -166,13 +166,13 @@ lambda (source drag delete)    :run-last
       @begin{pre}
 lambda (source x y)    :run-last
       @end{pre}
-      The signal is emitted when a drag is about to be initiated. It returns 
-      the @class{gdk:content-provider} object to use for the drag that is about 
+      The signal is emitted when a drag is about to be initiated. It returns
+      the @class{gdk:content-provider} object to use for the drag that is about
       to start. The default handler for this signal returns the value of the
       \"content\" property, so if you set up that property ahead of time, you
       do not need to connect to this signal.
       @begin[code]{table}
-        @entry[source]{A @sym{gtk:drag-source} object.}
+        @entry[source]{A @class{gtk:drag-source} object.}
         @entry[x]{A double float with the x coordinate of the drag starting
           point.}
         @entry[y]{A double float with the y coordinate of the drag starting
@@ -212,9 +212,9 @@ lambda (source x y)    :run-last
     Accessor of the @slot[gtk:drag-source]{actions} slot of the
     @class{gtk:drag-source} class.
   @end{short}
-  The @sym{gtk:drag-source-actions} function gets the actions that are 
+  The @fun{gtk:drag-source-actions} function gets the actions that are
   currently set on the @class{gtk:drag-source} object. The
-  @sym{(setf gtk:drag-source-actions)} function sets the actions.
+  @setf{gtk:drag-source-actions} function sets the actions.
 
   During a DND operation, the actions are offered to potential drop targets.
   If @arg{actions} include @code{:move}, you need to listen to the \"drag-end\"
@@ -248,8 +248,8 @@ lambda (source x y)    :run-last
     Accessor of the @slot[gtk:drag-source]{content} slot of the
     @class{gtk:drag-source} class.
   @end{short}
-  The @sym{gtk:drag-source-content} function gets the current content provider
-  of a @class{gtk:drag-source} object. The @sym{(setf gtk:drag-source-content)}
+  The @fun{gtk:drag-source-content} function gets the current content provider
+  of a @class{gtk:drag-source} object. The @setf{gtk:drag-source-content}
   function sets a content provider. When the data is requested in the cause of
   a DND operation, it will be obtained from the content provider.
 
@@ -283,7 +283,7 @@ lambda (source x y)    :run-last
  #+liber-documentation
  "@version{#2023-7-31}
   @argument[source]{a @class{gtk:drag-source} object}
-  @argument[paintable]{a @class{gdk:paintable} object to use as icon, or 
+  @argument[paintable]{a @class{gdk:paintable} object to use as icon, or
     @code{nil}}
   @argument[xhot]{an integer with the hotspot x coordinate on the icon}
   @argument[yhot]{an integer with the hotspot y coordinate on the icon}
@@ -291,7 +291,7 @@ lambda (source x y)    :run-last
     Sets a paintable to use as icon during DND operations.
   @end{short}
   The hotspot coordinates determine the point on the icon that gets aligned
-  with the hotspot of the cursor. If @arg{paintable} is @code{nil}, a default 
+  with the hotspot of the cursor. If @arg{paintable} is @code{nil}, a default
   icon is used.
 
   This function can be called before a drag is started, or in a \"prepare\" or
@@ -316,7 +316,7 @@ lambda (source x y)    :run-last
   @short{Cancels a currently ongoing drag operation.}
   @see-class{gtk:drag-source}"
   (source (g:object drag-source)))
-  
+
 (export 'drag-source-drag-cancel)
 
 ;;; ----------------------------------------------------------------------------
@@ -350,8 +350,8 @@ lambda (source x y)    :run-last
   @argument[ycurrent]{an integer with the current y coordinate}
   @return{@em{True} if the drag threshold has been passed.}
   @begin{short}
-    Checks to see if a mouse drag starting at @code{(xstart, ystart)} and 
-    ending at @code{(xcurrent, ycurrent)} has passed the GTK drag threshold, 
+    Checks to see if a mouse drag starting at @code{(xstart, ystart)} and
+    ending at @code{(xcurrent, ycurrent)} has passed the GTK drag threshold,
     and thus should trigger the beginning of a drag-and-drop operation.
   @end{short}
   @see-class{gtk:drag-source}"

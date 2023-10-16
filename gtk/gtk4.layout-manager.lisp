@@ -2,7 +2,7 @@
 ;;; gtk4.layout-manager.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -78,11 +78,11 @@
     allocation of a container widget.
   @end{short}
 
-  You typically subclass the @sym{gtk:layout-manager} class if you want to
+  You typically subclass the @class{gtk:layout-manager} class if you want to
   implement a layout policy for the children of a widget, or if you want to
   determine the size of a widget depending on its contents.
 
-  Each @class{gtk:widget} widget can only have a @sym{gtk:layout-manager}
+  Each @class{gtk:widget} widget can only have a @class{gtk:layout-manager}
   instance associated to it at any given time. It is possible, though, to
   replace the layout manager instance using the @fun{gtk:widget-layout-manager}
   function.
@@ -113,12 +113,12 @@ create_layout_child (GtkLayoutManager *manager,
   @end{pre}
   The @slot[gtk:layout-child]{layout-manager} and
   @slot[gtk:layout-child]{child-widget} properties on the newly created
-  @class{gtk:layout-child} instance are mandatory. The @sym{gtk:layout-manager}
-  instance will cache the newly created @class{gtk:layout-child} instance until
-  the widget is removed from its parent, or the parent removes the layout
-  manager.
+  @class{gtk:layout-child} instance are mandatory. The
+  @class{gtk:layout-manager} instance will cache the newly created
+  @class{gtk:layout-child} instance until the widget is removed from its parent,
+  or the parent removes the layout manager.
 
-  Each @sym{gtk:-ayout-manager} instance creating a @class{gtk:layout-child}
+  Each @class{gtk:-ayout-manager} instance creating a @class{gtk:layout-child}
   instance should use the @fun{gtk:layout-manager-layout-child} function every
   time it needs to query the layout properties. Each @class{gtk:layout-child}
   instance should call the @fun{gtk:layout-manager-layout-changed} function

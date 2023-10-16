@@ -2,7 +2,7 @@
 ;;; gtk4.toggle-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.11 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -98,7 +98,7 @@
 (setf (documentation 'toggle-button 'type)
  "@version{2023-3-19}
   @begin{short}
-    A @sym{gtk:toggle-button} widget is a @class{gtk:button} widget which will
+    A @class{gtk:toggle-button} widget is a @class{gtk:button} widget which will
     remain \"pressed-in\" when clicked.
   @end{short}
   Clicking again will cause the toggle button to return to its normal state.
@@ -111,7 +111,7 @@
   @class{gtk:image} widget, into the container of the toggle button. See the
   @class{gtk:button} documentation for more information.
 
-  The state of a @sym{gtk:toggle-button} widget can be set and retrieved using
+  The state of a @class{gtk:toggle-button} widget can be set and retrieved using
   the @fun{gtk:toggle-button-active} function. To simply switch the state of a
   toggle button, use the @fun{gtk:toggle-button-toggled} function.
 
@@ -121,7 +121,7 @@
   will switch the currently toggled one off. To add a toggle button to a group,
   use the @fun{gtk:toggle-button-group} function.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:toggle-button} implementation has a single CSS node with name
+    The @class{gtk:toggle-button} implementation has a single CSS node with name
     @code{button}. To differentiate it from a plain button, it gets the
     @code{.toggle} style class.
   @end{dictionary}
@@ -248,7 +248,7 @@ lambda (toggle)    :run-first
       Should be connected if you wish to perform an action whenever the state
       of the toggle button is changed.
       @begin[code]{table}
-        @entry[toggle]{The @sym{gtk:toggle-button} widget which received the
+        @entry[toggle]{The @class{gtk:toggle-button} widget which received the
           signal.}
       @end{table}
   @end{dictionary}
@@ -275,7 +275,7 @@ lambda (toggle)    :run-first
 (setf (liber:alias-for-function 'toggle-button-active)
       "Accessor"
       (documentation 'toggle-button-active 'function)
- "@version{2023-3-19}
+ "@version{2023-10-5}
   @syntax[]{(gtk:toggle-button-active object) => active}
   @syntax[]{(setf (gtk:toggle-button-active object) active)}
   @argument[object]{a @class{gtk:toggle-button} widget}
@@ -284,20 +284,20 @@ lambda (toggle)    :run-first
     Accessor of the @slot[gtk:toggle-button]{active} slot of the
     @class{gtk:toggle-button} class.
   @end{short}
-  The @sym{gtk:toggle-button-active} function queries a toggle button and
+  The @fun{gtk:toggle-button-active} function queries a toggle button and
   returns its current state. Returns @em{true} if the toggle button is pressed
-  in and @em{false} if it is raised. The @sym{(setf gtk:toggle-button-active)}
+  in and @em{false} if it is raised. The @setf{gtk:toggle-button-active}
   function sets the status of the toggle button.
 
-  If the status of the toggle button changes, this action causes the \"toggled\"
-  signal to be emitted.
+  If the status of the toggle button changes, this action causes the
+  @code{\"toggled\"} signal to be emitted.
   @see-class{gtk:toggle-button}")
 
 ;;; --- toggle-button-group ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "group" 'toggle-button) t)
- "The @code{group} property of type @sym{gtk:toggle-button} (Write) @br{}
+ "The @code{group} property of type @class{gtk:toggle-button} (Write) @br{}
   The toggle button whose group this widget belongs to.")
 
 #+liber-documentation
@@ -313,9 +313,9 @@ lambda (toggle)    :run-first
     Accessor of the @slot[gtk:toggle-button]{group} slot of the
     @class{gtk:toggle-button} class.
   @end{short}
-  The @sym{(setf gtk:toggle-button-group)} function adds @arg{object} to the
-  group of @arg{group}. In a group of multiple toggle buttons, only one button
-  can be active at a time.
+  The @setf{gtk:toggle-button-group} function adds @arg{object} to the group of
+  @arg{group}. In a group of multiple toggle buttons, only one button can be
+  active at a time.
 
   Note that the same effect can be achieved via the @class{gtk:actionable} API,
   by using the same action with parameter type and \"s\" state type for all
@@ -398,16 +398,27 @@ lambda (toggle)    :run-first
 ;;; gtk_toggle_button_toggled
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_toggle_button_toggled" toggle-button-toggled) :void
+(declaim (inline toggle-button-toggled))
+
+(cffi:defcfun ("gtk_toggle_button_toggled" %toggle-button-toggled) :void
+  (button (g:object toggle-button)))
+
+(defun toggle-button-toggled (button)
  #+liber-documentation
- "@version{#2023-3-19}
+ "@version{#2023-10-5}
   @argument[button]{a @class{gtk:toggle-button} widget}
   @begin{short}
-    Emits the \"toggled\" signal on the toggle button.
+    Emits the @code{\"toggled\"} signal on the toggle button.
   @end{short}
-  There is no good reason for an application ever to call this function.
+  @begin[Warning]{dictionary}
+    The @fun{gtk:toggle-button-toggled} function is deprecated since 4.10.
+    There is no good reason for an application ever to call this function.
+  @end{dictionary}
   @see-class{gtk:toggle-button}"
-  (button (g:object toggle-button)))
+  #+(and gtk-4-10 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:TOGGLE-BUTTON-TOGGLED is deprecated since 4.10."))
+  (%toggle-button-toggled button))
 
 (export 'toggle-button-toggled)
 

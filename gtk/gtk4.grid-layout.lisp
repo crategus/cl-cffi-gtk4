@@ -2,7 +2,7 @@
 ;;; gtk4.grid-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -114,7 +114,7 @@
 (setf (documentation 'grid-layout-child 'type)
  "@version{#2023-4-19}
   @begin{short}
-    The @sym{gtk:layout-child} subclass for children in a
+    The @class{gtk:layout-child} subclass for children in a
     @class{gtk:grid-layout} object.
   @end{short}
   @see-class{gtk:grid-layout}")
@@ -144,9 +144,9 @@
     Accessor of the @slot[gtk:grid-layout-child]{column} slot of the
     @class{gtk:grid-layout-child} class.
   @end{short}
-  The @sym{gtk:grid-layout-child-column} function retrieves the column number
+  The @fun{gtk:grid-layout-child-column} function retrieves the column number
   to which child attaches its left side. The
-  @sym{(setf gtk:grid-layout-child-column)} function sets the column number.
+  @setf{gtk:grid-layout-child-column} function sets the column number.
   @see-class{gtk:grid-layout-child}")
 
 ;;; --- grid-layout-child-column-span ------------------------------------------
@@ -172,10 +172,9 @@
     Accessor of the @slot[gtk:grid-layout-child]{column-span} slot of the
     @class{gtk:grid-layout-child} class.
   @end{short}
-  The @sym{gtk:grid-layout-child-column-span} function retrieves the number of
+  The @fun{gtk:grid-layout-child-column-span} function retrieves the number of
   columns that the child widget spans to. The
-  @sym{(setf gtk:grid-layout-child-column-span)} function sets the number of
-  columns.
+  @setf{gtk:grid-layout-child-column-span} function sets the number of columns.
   @see-class{gtk:grid-layout-child}")
 
 ;;; --- grid-layout-child-row --------------------------------------------------
@@ -199,9 +198,9 @@
     Accessor of the @slot[gtk:grid-layout-child]{row} slot of the
     @class{gtk:grid-layout-child} class.
   @end{short}
-  The @sym{gtk:grid-layout-child-row} function retrieves the row number to
+  The @fun{gtk:grid-layout-child-row} function retrieves the row number to
   which child attaches its top side. The
-  @sym{(setf gtk:grid-layout-child-row)} function sets the row number.
+  @setf{gtk:grid-layout-child-row} function sets the row number.
   @see-class{gtk:grid-layout-child}")
 
 ;;; --- grid-layout-child-row-span ---------------------------------------------
@@ -226,9 +225,9 @@
     Accessor of the @slot[gtk:grid-layout-child]{row-span} slot of the
     @class{gtk:grid-layout-child} class.
   @end{short}
-  The @sym{gtk:grid-layout-child-row-span} function retrieves the number of
-  rows that the child widget spans to. The
-  @sym{(setf gtk:grid-layout-child-row-span)} function sets the number of rows.
+  The @fun{gtk:grid-layout-child-row-span} function retrieves the number of
+  rows that the child widget spans to. The @setf{gtk:grid-layout-child-row-span}
+  function sets the number of rows.
   @see-class{gtk:grid-layout-child}")
 
 ;;; ----------------------------------------------------------------------------
@@ -262,7 +261,7 @@
   @begin{short}
     Layout manager for grid like widgets.
   @end{short}
-  The @sym{gtk:grid-layout} object is a layout manager which arranges child
+  The @class{gtk:grid-layout} object is a layout manager which arranges child
   widgets in rows and columns, with arbitrary positions and horizontal/vertical
   spans.
 
@@ -274,7 +273,7 @@
   The behaviour of the @class{gtk:grid} widget when several children occupy the
   same grid cell is undefined.
 
-  The @sym{gtk:grid-layout} object can be used like a @class{gtk:box-layout}
+  The @class{gtk:grid-layout} object can be used like a @class{gtk:box-layout}
   object if all children are attached to the same row or column. However, if
   you only ever need a single row or column, you should consider using the
   @class{gtk:box-layout} object.
@@ -309,9 +308,9 @@
     Accessor of the @slot[gtk:grid-layout]{baseline-row} slot of the
     @class{gtk:grid-layout} class.
   @end{short}
-  The @sym{gtk:grid-layout-baseline-row} function retrieves the baseline row.
-  The @sym{(setf gtk:grid-layout-baseline-row)} function sets which row defines
-  the global baseline for the entire grid.
+  The @fun{gtk:grid-layout-baseline-row} function retrieves the baseline row.
+  The @setf{gtk:grid-layout-baseline-row} function sets which row defines the
+  global baseline for the entire grid.
 
   Each row in the grid can have its own local baseline, but only one of those
   is global, meaning it will be the baseline in the parent of the grid widget.
@@ -341,10 +340,10 @@
     Accessor of the @slot[gtk:grid-layout]{column-homogeneous} slot of the
     @class{gtk:grid-layout} class.
   @end{short}
-  The @sym{gtk:grid-layout-column-homogeneous} function checks whether all
+  The @fun{gtk:grid-layout-column-homogeneous} function checks whether all
   columns of the grid should have the same width. The
-  @sym{(setf gtk:grid-layout-column-homogeneous)} function sets whether all
-  columns of the grid should have the same width.
+  @setf{gtk:grid-layout-column-homogeneous} function sets whether all columns
+  of the grid should have the same width.
   @see-class{gtk:grid-layout}")
 
 ;;; --- grid-layout-column-spacing ---------------------------------------------
@@ -370,9 +369,9 @@
     Accessor of the @slot[gtk:grid-layout]{column-spacing} slot of the
     @class{gtk:grid-layout} class.
   @end{short}
-  The @sym{gtk:grid-layout-column-spacing} function retrieves the amount of
+  The @fun{gtk:grid-layout-column-spacing} function retrieves the amount of
   space to insert between consecutive columns. The
-  @sym{(setf gtk:grid-layout-column-spacing)} function sets the spacing.
+  @setf{gtk:grid-layout-column-spacing} function sets the spacing.
   @see-class{gtk:grid-layout}")
 
 ;;; --- grid-layout-row-homogeneous --------------------------------------------
@@ -399,10 +398,10 @@
     Accessor of the @slot[gtk:grid-layout]{row-homogeneous} slot of the
     @class{gtk:grid-layout} class.
   @end{short}
-  The @sym{gtk:grid-layout-row-homogeneous} function checks whether all
+  The @fun{gtk:grid-layout-row-homogeneous} function checks whether all
   rows of the grid should have the same height. The
-  @sym{(setf gtk:grid-layout-row-homogeneous)} function sets whether all
-  rows of the grid should have the same height.
+  @setf{gtk:grid-layout-row-homogeneous} function sets whether all rows of the
+  grid should have the same height.
   @see-class{gtk:grid-layout}")
 
 ;;; --- grid-layout-row-spacing ------------------------------------------------
@@ -428,9 +427,9 @@
     Accessor of the @slot[gtk:grid-layout]{row-spacing} slot of the
     @class{gtk:grid-layout} class.
   @end{short}
-  The @sym{gtk:grid-layout-row-spacing} function retrieves the amount of space
-  to insert between consecutive rows. The
-  @sym{(setf gtk:grid-layout-row-spacing)} function sets the spacing.
+  The @fun{gtk:grid-layout-row-spacing} function retrieves the amount of space
+  to insert between consecutive rows. The @setf{gtk:grid-layout-row-spacing}
+  function sets the spacing.
   @see-class{gtk:grid-layout}")
 
 ;;; ----------------------------------------------------------------------------
@@ -472,10 +471,10 @@
   @argument[row]{an integer with the row index}
   @argument[position]{a @symbol{gtk:baseline-position} value}
   @begin{short}
-    The @sym{gtk:grid-layout-row-baseline-position} function returns the
+    The @fun{gtk:grid-layout-row-baseline-position} function returns the
     baseline position of @arg{row}.
   @end{short}
-  The @sym{(setf gtk:grid-layout-row-baseline-position)} function sets how the
+  The @setf{gtk:grid-layout-row-baseline-position} function sets how the
   baseline should be positioned on @arg{row} of the grid, in case that @arg{row}
   is assigned more space than is requested. The default value is the
   @code{:center} value of the @symbol{gtk:baseline-position} enumeration.

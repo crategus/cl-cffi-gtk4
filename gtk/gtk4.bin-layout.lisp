@@ -2,7 +2,7 @@
 ;;; gtk4.bin-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -63,10 +63,10 @@
 (setf (documentation 'bin-layout 'type)
  "@version{#2023-4-17}
   @begin{short}
-    The @sym{gtk:bin-layout} class is a @class{gtk:layout-manager} subclass
+    The @class{gtk:bin-layout} class is a @class{gtk:layout-manager} subclass
     useful for create \"bins\" of widgets.
   @end{short}
-  The @sym{gtk:bin-layout} object will stack each child of a widget on top of
+  The @class{gtk:bin-layout} object will stack each child of a widget on top of
   each other, using the @slot[gtk:widget]{hexpand}, @slot[gtk:widget]{vexpand},
   @slot[gtk:widget]{halign}, and @slot[gtk:widget]{valign} properties of each
   child widget to determine where they should be positioned.

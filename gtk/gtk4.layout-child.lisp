@@ -2,7 +2,7 @@
 ;;; gtk4.layout-child.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -77,15 +77,15 @@
 (setf (documentation 'layout-child 'type)
  "@version{2023-4-15}
   @begin{short}
-    The @sym{gtk:layout-child} class is the base class for objects that are
+    The @class{gtk:layout-child} class is the base class for objects that are
     meant to hold layout properties.
   @end{short}
   If a @class{gtk:layout-manager} object has per-child properties, like their
   packing type, or the horizontal and vertical span, or the icon name, then
-  the layout manager should use a @sym{gtk:layout-child} implementation to
+  the layout manager should use a @class{gtk:layout-child} implementation to
   store those properties.
 
-  A @sym{gtk:layout-child} instance is only ever valid while a widget is part
+  A @class{gtk:layout-child} instance is only ever valid while a widget is part
   of a layout.
   @see-class{gtk:layout-child}
   @see-class{gtk:layout-manager}")
@@ -100,7 +100,7 @@
 (setf (documentation (liber:slot-documentation "child-widget" 'layout-child) t)
  "The @code{child-widget} property of type @class{gtk:widget}
  (Read / Write / Construct only) @br{}
- The widget that is associated to the @sym{gtk:layout-child} object.")
+ The widget that is associated to the @class{gtk:layout-child} object.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'layout-child-child-widget)
@@ -124,7 +124,7 @@
                                                'layout-child) t)
  "The @code{layout-manager} property of type @class{gtk:layout-manager}
  (Read / Write / Construct only) @br{}
- The layout manager that created the @sym{gtk:layout-child} object.")
+ The layout manager that created the @class{gtk:layout-child} object.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'layout-child-layout-manager)

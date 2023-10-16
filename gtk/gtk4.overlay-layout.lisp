@@ -2,7 +2,7 @@
 ;;; gtk4.overlay-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -83,7 +83,7 @@
 (setf (documentation 'overlay-layout-child 'type)
  "@version{#2023-4-19}
   @begin{short}
-    The @sym{gtk:overlay-layout-child} subclass for children in a
+    The @class{gtk:overlay-layout-child} subclass for children in a
     @class{gtk:overlay-layout} object.
   @end{short}
   @see-class{gtk:overlay-layout}")
@@ -115,10 +115,10 @@
     Accessor of the @slot[gtk:overlay-layout-child]{clip-overlay} slot of the
     @class{gtk:overlay-layout-child} class.
   @end{short}
-  The @sym{gtk:overlay-layout-child-clip-region} function retrieves whether the
+  The @fun{gtk:overlay-layout-child-clip-region} function retrieves whether the
   child widget is clipped. The
-  @sym{(setf gtk:overlay-layout-child-clip-overlay)} function sets whether to
-  clip the child widget.
+  @setf{gtk:overlay-layout-child-clip-overlay} function sets whether to clip
+  the child widget.
   @see-class{gtk:overlay-layout-child}")
 
 ;;; --- overlay-layout-child-measure -------------------------------------------
@@ -144,9 +144,9 @@
     Accessor of the @slot[gtk:overlay-layout-child]{measure} slot of the
     @class{gtk:overlay-layout-child} class.
   @end{short}
-  The @sym{gtk:overlay-layout-child-measure} function retrieves whether the
-  child widget is measured. The @sym{(setf gtk:overlay-layout-child-measure)}
-  function sets whether to measure the child widget.
+  The @fun{gtk:overlay-layout-child-measure} function retrieves whether the
+  child widget is measured. The @setf{gtk:overlay-layout-child-measure} function
+  sets whether to measure the child widget.
   @see-class{gtk:overlay-layout-child}")
 
 ;;; ----------------------------------------------------------------------------
@@ -164,7 +164,7 @@
 (setf (documentation 'overlay-layout 'type)
  "@version{#2023-4-19}
   @begin{short}
-    The @sym{gtk:overlay-layout} object is the layout manager used by
+    The @class{gtk:overlay-layout} object is the layout manager used by
     the @class{gtk:overlay} widget.
   @end{short}
   It places widgets as overlays on top of the main child.

@@ -2,7 +2,7 @@
 ;;; gtk4.constraint-guide.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -257,9 +257,9 @@
     Accessor of the @slot[gtk:constraint-guide]{name} slot of the
     @class{gtk:constraint-guide} class.
   @end{short}
-  The @sym{gtk:constraint-guide-name} function retrieves the name for the
-  constraint guide. The @sym{(setf gtk:constraint-guide-name)} function sets a
-  name. The name is useful for debugging purposes.
+  The @fun{gtk:constraint-guide-name} function retrieves the name for the
+  constraint guide. The @setf{gtk:constraint-guide-name} function sets a name.
+  The name is useful for debugging purposes.
   @see-class{gtk:constraint-guide}")
 
 ;;; --- constraint-guide-nat-height --------------------------------------------
@@ -337,10 +337,10 @@
     Accessor of the @slot[gtk:constraint-guide]{strength} slot of the
     @class{gtk:constraint-guide} class.
   @end{short}
-  The @sym{gtk:constraint-guide-strength} function retrieves the strength of
+  The @fun{gtk:constraint-guide-strength} function retrieves the strength of
   the constraint on the natural size of the given @arg{guide}. The
-  @sym{(setf gtk:constraint-guide-strength)} function sets the strength of
-  the constraint.
+  @setf{gtk:constraint-guide-strength} function sets the strength of the
+  constraint.
   @see-class{gtk:constraint-guide}
   @see-symbol{gtk:constraint-strength}")
 
@@ -359,146 +359,5 @@
   (make-instance 'conatraint-guide))
 
 (export 'constraint-guide-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_set_min_size ()
-;;;
-;;; void
-;;; gtk_constraint_guide_set_min_size (GtkConstraintGuide *guide,
-;;;                                    int width,
-;;;                                    int height);
-;;;
-;;; Sets the minimum size of guide .
-;;;
-;;; If guide is attached to a GtkConstraintLayout, the constraints will be
-;;; updated to reflect the new size.
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide object
-;;;
-;;; width :
-;;;     the new minimum width, or -1 to not change it
-;;;
-;;; height :
-;;;     the new minimum height, or -1 to not change it
-;;; ----------------------------------------------------------------------------
-
-;; not implemented, see the corresponding accessor functions
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_get_min_size ()
-;;;
-;;; void
-;;; gtk_constraint_guide_get_min_size (GtkConstraintGuide *guide,
-;;;                                    int *width,
-;;;                                    int *height);
-;;;
-;;; Gets the minimum size of guide .
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide object
-;;;
-;;; width :
-;;;     return location for the minimum width, or NULL.
-;;;
-;;; height :
-;;;     return location for the minimum height, or NULL.
-;;; ----------------------------------------------------------------------------
-
-;; not implemented, see the corresponding accessor functions
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_set_nat_size ()
-;;;
-;;; void
-;;; gtk_constraint_guide_set_nat_size (GtkConstraintGuide *guide,
-;;;                                    int width,
-;;;                                    int height);
-;;;
-;;; Sets the natural size of guide .
-;;;
-;;; If guide is attached to a GtkConstraintLayout, the constraints will be
-;;; updated to reflect the new size.
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide object
-;;;
-;;; width :
-;;;     the new natural width, or -1 to not change it
-;;;
-;;; height :
-;;;     the new natural height, or -1 to not change it
-;;; ----------------------------------------------------------------------------
-
-;; not implemented, see the corresponding accessor functions
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_get_nat_size ()
-;;;
-;;; void
-;;; gtk_constraint_guide_get_nat_size (GtkConstraintGuide *guide,
-;;;                                    int *width,
-;;;                                    int *height);
-;;;
-;;; Gets the natural size of guide .
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide object
-;;;
-;;; width :
-;;;     return location for the natural width, or NULL.
-;;;
-;;; height :
-;;;     return location for the natural height, or NULL.
-;;; ----------------------------------------------------------------------------
-
-;; not implemented, see the corresponding accessor functions
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_set_max_size ()
-;;;
-;;; void
-;;; gtk_constraint_guide_set_max_size (GtkConstraintGuide *guide,
-;;;                                    int width,
-;;;                                    int height);
-;;;
-;;; Sets the maximum size of guide .
-;;;
-;;; If guide is attached to a GtkConstraintLayout, the constraints will be
-;;; updated to reflect the new size.
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide object
-;;;
-;;; width :
-;;;     the new maximum width, or -1 to not change it
-;;;
-;;; height :
-;;;     the new maximum height, or -1 to not change it
-;;; ----------------------------------------------------------------------------
-
-;; not implemented, see the corresponding accessor functions
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_guide_get_max_size ()
-;;;
-;;; void
-;;; gtk_constraint_guide_get_max_size (GtkConstraintGuide *guide,
-;;;                                    int *width,
-;;;                                    int *height);
-;;;
-;;; Gets the maximum size of guide .
-;;;
-;;; guide :
-;;;     a GtkConstraintGuide object
-;;;
-;;; width :
-;;;     return location for the maximum width, or NULL.
-;;;
-;;; height :
-;;;     return location for the maximum height, or NULL.
-;;; ----------------------------------------------------------------------------
-
-;; not implemented, see the corresponding accessor functions
 
 ;;; --- End of file gtk4.constraint-guide.lisp ---------------------------------

@@ -2,7 +2,7 @@
 ;;; gtk4.enumerations.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -38,13 +38,22 @@
 ;;;     GtkAlign
 ;;;     GtkArrowType
 ;;;     GtkBaselinePosition
+
+;;;     GtkContentFit                                      --> gtk4.picture.lisp
+
 ;;;     GtkDeleteType
 ;;;     GtkDirectionType
 ;;;     GtkIconSize
-;;;     GtkResponseType                                    <- gtk4.dialog.lisp
+
+;;;     GtkResponseType                                    <-- gtk4.dialog.lisp
+
 ;;;     GtkSensitivityType
 ;;;     GtkTextDirection
 ;;;     GtkJustification
+
+;;;     GtkListTabBehavior                                 Since 4.12
+;;;     GtkListScrollFlags                                 Since 4.12
+
 ;;;     GtkMessageType
 ;;;     GtkMovementStep
 ;;;     GtkNaturalWrapMode
@@ -578,6 +587,45 @@
   @see-class{gtk:label}")
 
 ;;; ----------------------------------------------------------------------------
+;;; enum GtkListTabBehavior                                Since 4.12
+;;;
+;;; Used to configure the focus behavior in the GTK_DIR_TAB_FORWARD and
+;;; GTK_DIR_TAB_BACKWARD direction, like the Tab key in a GtkListView.
+;;;
+;;; Since 4.12
+;;;
+;;; GTK_LIST_TAB_ALL
+;;;     Cycle through all focusable items of the list.
+;;;
+;;; GTK_LIST_TAB_ITEM	
+;;;     Cycle through a single list element, then move focus out of the list.
+;;;     Moving focus between items needs to be done with the arrow keys.
+;;;
+;;; GTK_LIST_TAB_CELL	
+;;;     Cycle only through a single cell, then move focus out of the list.
+;;;     Moving focus between cells needs to be done with the arrow keys. This
+;;;     is only relevant for cell-based widgets like GtkColumnView, otherwise
+;;;     it behaves like GTK_LIST_TAB_ITEM.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; enum GtkListScrollFlags                                Since 4.12
+;;;
+;;; List of actions to perform when scrolling to items in a list widget.
+;;;
+;;; Since 4.12
+;;;
+;;; GTK_LIST_SCROLL_NONE	
+;;;     Don’t do anything extra.
+;;;
+;;; GTK_LIST_SCROLL_FOCUS	
+;;;     Focus the target item.
+;;;
+;;; GTK_LIST_SCROLL_SELECT	
+;;;     Select the target item and unselect all other items.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
 ;;; GtkMessageType
 ;;; ----------------------------------------------------------------------------
 
@@ -1018,7 +1066,7 @@
 (setf (liber:alias-for-symbol 'wrap-mode)
       "GEnum"
       (liber:symbol-documentation 'wrap-mode)
- "@version{#2021-12-28}
+ "@version{2023-10-4}
   @short{Describes a type of line wrapping.}
   @begin{pre}
 (gobject:define-g-enum \"GtkWrapMode\" wrap-mode
