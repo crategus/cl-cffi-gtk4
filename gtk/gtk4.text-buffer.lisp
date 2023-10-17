@@ -698,9 +698,8 @@ lambda (buffer)    :run-last
   (len :int)
   (editable :boolean))
 
-(defun text-buffer-insert (buffer text &key (position :cursor)
-                                            (interactive nil)
-                                            (editable t))
+(defun text-buffer-insert (buffer position text
+                                  &key (interactive nil) (editable t))
  #+liber-documentation
  "@version{2023-10-2}
   @syntax[]{(gtk:text-buffer-insert buffer text) => t}
@@ -880,7 +879,7 @@ lambda (buffer)    :run-last
   @see-function{gtk:text-buffer-apply-tag}"
   (let ((offset (text-iter-offset iter)))
     (prog1
-      (text-buffer-insert buffer text :position iter)
+      (text-buffer-insert buffer iter text)
       (let ((start (text-buffer-iter-at-offset buffer offset)))
         (dolist (tag tags)
           (text-buffer-apply-tag buffer tag start iter))))))
