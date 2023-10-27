@@ -176,10 +176,10 @@ Selector Widgets and Dialogs
   gtk4.color-dialog.lisp               GtkColorDialog                 GTK 4.12
   gtk4.color-dialog-button.lisp        GtkColorDialogButton           GTK 4.12
   gtk4.file-dialog.lisp                GtkFileDialog                  GTK 4.12
-  gtk4.file-launcher.lisp              GtkFileLauncher                GTK 4.12 +
-  gtk4.uri-launcher.lisp               GtkUriLauncher                 GTK 4.12 +
-  gtk4.font-dialog.lisp                GtkFontDialog                  GTK 4.12 +
-  gtk4.font-dialog-button.lisp         GtkFontDialogButton            GTK 4.12 +
+  gtk4.file-launcher.lisp              GtkFileLauncher                GTK 4.12 &
+  gtk4.uri-launcher.lisp               GtkUriLauncher                 GTK 4.12
+  gtk4.font-dialog.lisp                GtkFontDialog                  GTK 4.12
+  gtk4.font-dialog-button.lisp         GtkFontDialogButton            GTK 4.12
   gtk4.emoji-chooser.lisp              GtkEmojiChooser                GTK 4.12
 
 Widgets for custom drawing
@@ -236,7 +236,7 @@ Miscellaneous
 
   gtk4.adjustment.lisp                 GtkAdjustment                  GTK 4.12
   gtk4.size-group.lisp                 GtkSizeGroup                   GTK 4.12
-  gtk4.snapshot.lisp                   GtkSnapshot                    GTK 4.12 +
+  gtk4.snapshot.lisp                   GtkSnapshot                    GTK 4.12 &
   gtk4.tooltip.lisp                    GtkTooltip                     GTK 4.12
   gtk4.widget-paintable.lisp           GtkWidgetPaintable             GTK 4.12
   gtk4.window-controls.lisp            GtkWindowControls              GTK 4.12
@@ -265,7 +265,7 @@ Gestures and event handling
   gtk4.event-controller-scroll.lisp    GtkEventControllerScroll       GTK 4.12
   gtk4.event-controller-motion.lisp    GtkEventControllerMotion       GTK 4.12
 
-  gtk4.gesture.lisp                    GtkGesture                     GTK 4.12 +
+  gtk4.gesture.lisp                    GtkGesture                     GTK 4.12
   gtk4.gesture-single.lisp             GtkGestureSingle               GTK 4.12
   gtk4.gesture-drag.lisp               GtkGestureDrag                 GTK 4.12
   gtk4.gesture-long-press.lisp         GtkGestureLongPress            GTK 4.12

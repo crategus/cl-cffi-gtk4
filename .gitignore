@@ -3,3 +3,4 @@
 *.ini
 TODO
 test/rtest-templates.lisp
+test/out/*

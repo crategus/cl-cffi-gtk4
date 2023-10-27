@@ -242,7 +242,7 @@
       @about-generic{column-view-sorter-primary-sort-column}
       @about-generic{column-view-sorter-primary-sort-order}
       @about-function{column-view-sorter-n-sort-columns}
-      @about-function{column-view-sorter-nth-sort-column}      
+      @about-function{column-view-sorter-nth-sort-column}
     @end{subsection}
     @begin[GtkSelectionModel]{subsection}
       Extension of the list model interface that handles selections.
@@ -1547,6 +1547,7 @@
       @about-function{text-unset-invisible-char}
       @about-function{text-text-length}
       @about-function{text-grab-focus-without-selecting}
+      @about-function{text-compute-cursor-extents}
     @end{subsection}
     @begin[GtkEntry]{subsection}
       A single line text entry field.
@@ -2860,6 +2861,7 @@
       @about-symbol{accessible-autocomplete}
       @about-symbol{accessible-sort}
       @about-symbol{accessible-platform-state}
+      @about-class{accessible-range}
       @about-class{accessible}
       @about-generic{accessible-accessible-role}
       @about-function{accessible-update-state}
@@ -3216,6 +3218,9 @@
       @about-function{snapshot-push-shadow}
       @about-function{snapshot-push-debug}
       @about-function{snapshot-push-gl-shader}
+      @about-function{snapshot-push-mask}
+      @about-function{snapshot-push-fill}
+      @about-function{snapshot-push-stroke}
       @about-function{snapshot-pop}
       @about-function{snapshot-gl-shader-pop-texture}
       @about-function{snapshot-save}
@@ -3242,6 +3247,9 @@
       @about-function{snapshot-append-outset-shadow}
       @about-function{snapshot-append-radial-gradient}
       @about-function{snapshot-append-repeating-radial-gradient}
+      @about-function{snapshot-append-scaled-texture}
+      @about-function{snapshot-append-fill}
+      @about-function{snapshot-append-stroke}
       @about-function{snapshot-render-insertion-cursor}
       @about-function{snapshot-render-background}
       @about-function{snapshot-render-frame}

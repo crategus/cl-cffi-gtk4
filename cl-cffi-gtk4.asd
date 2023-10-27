@@ -99,9 +99,9 @@
     :components
     ((:file "gsk4.package")
      (:file "gsk4.renderer")
-     (:file "gsk4.render-node")
-     (:file "gsk4.rounded-rect")
      (:file "gsk4.transform")
+     (:file "gsk4.rounded-rect")
+     (:file "gsk4.render-node")
      (:file "gsk4.gl-shader")
     ))
    (:module gtk
@@ -524,9 +524,9 @@
 
      ;; GSK
      (:file "rtest-gsk4-renderer")
+     (:file "rtest-gsk4-transform")
      (:file "rtest-gsk4-render-node")
      (:file "rtest-gsk4-rounded-rect")
-     (:file "rtest-gsk4-transform")
      (:file "rtest-gsk4-gl-shader")
 
      ;; GListModel support
@@ -644,6 +644,7 @@
 
      ;; Display Widgets
      (:file "rtest-gtk4-label")
+     (:file "rtest-gtk4-inscription"             :if-feature :gtk-4-8)
      (:file "rtest-gtk4-image")
      (:file "rtest-gtk4-picture")
      (:file "rtest-gtk4-spinner")
