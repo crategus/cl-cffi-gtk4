@@ -134,8 +134,8 @@
   @end{short}
   It is capable of handling both discrete and continuous scroll events,
   abstracting them both with the \"scroll\" signal. Deltas in the discrete case
-  are multiples of 1. In the case of continuous scroll events, the 
-  @class{gtk:event-controller-scroll} object encloses all \"scroll\" events 
+  are multiples of 1. In the case of continuous scroll events, the
+  @class{gtk:event-controller-scroll} object encloses all \"scroll\" events
   between two \"scroll-begin\" and \"scroll-end\" signals.
 
   The behavior of the event controller can be modified by the flags given at
@@ -264,29 +264,25 @@ lambda (controller)    :run-first
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_event_controller_scroll_get_unit ()
-;;;
-;;; GdkScrollUnit
-;;; gtk_event_controller_scroll_get_unit (GtkEventControllerScroll* scroll)
-;;;
-;;; Gets the scroll unit of the last GtkEventControllerScroll::scroll signal
-;;; received.
-;;;
-;;; Always returns GDK_SCROLL_UNIT_WHEEL if the
-;;; GTK_EVENT_CONTROLLER_SCROLL_DISCRETE flag is set.
-;;;
-;;; Available since: 4.8
-;;;
-;;; scroll :
-;;;     a GtkEventControllerScroll object
-;;;
-;;; Returns :
-;;;     The scroll unit.
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-8
 (cffi:defcfun ("gtk_event_controller_scroll_get_unit"
                 event-controller-scroll-unit) gdk:scroll-unit
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[scroll]{a @class{gtk:event-controller-scroll} object}
+  @return{A @symbol{gdk:scroll-unit} value with the scroll unit.}
+  @begin{short}
+    Gets the scroll unit of the last @code{\"scroll\"} signal received.
+  @end{short}
+  Always returns @code{:wheel} if the @code{:discrete} flag is set.
+
+  Since 4.8
+  @see-class{gtk:event-controller-scroll}"
   (scroll (g:object event-controller-scroll)))
 
+#+gtk-4-8
 (export 'event-controller-scroll-unit)
 
 ;;; --- End of file gtk4.event-controller-scroll.lisp --------------------------

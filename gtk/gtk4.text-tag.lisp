@@ -640,8 +640,7 @@
 (setf (liber:alias-for-function 'text-tag-background)
       "Accessor"
       (documentation 'text-tag-background 'function)
- "@version{2023-8-26}
-  @syntax[]{(gtk:text-tag-background object) => background}
+ "@version{2023-10-24}
   @syntax[]{(setf (gtk:text-tag-background object) background)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[background]{a string with the background color}
@@ -649,7 +648,15 @@
     Accessor of the @slot[gtk:text-tag]{background} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  The background color as a string.
+  @begin[Note]{dictionary}
+    The @slot[gtk:text-tag]{background} property is not readable, but writable.
+    @begin{pre}
+(defvar tag (gtk:text-tag-new nil)) => TAG
+(setf (gtk:text-tag-background tag) \"red\") => \"red\"
+(gtk:text-tag-background-rgba tag)
+=> #S(GDK:RGBA :RED 1.0 :GREEN 0.0 :BLUE 0.0 :ALPHA 1.0)
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-background-rgba}
   @see-function{gtk:text-tag-background-set}")
@@ -880,7 +887,7 @@
 (setf (liber:alias-for-function 'text-tag-fallback-set)
       "Accessor"
       (documentation 'text-tag-fallback-set 'function)
- "@version{#202023-8-26}
+ "@version{#2023-8-26}
   @syntax[]{(gtk:text-tag-fallback-set object) => setting}
   @syntax[]{(setf (gtk:text-tag-fallback-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
@@ -1060,8 +1067,7 @@
 (setf (liber:alias-for-function 'text-tag-foreground)
       "Accessor"
       (documentation 'text-tag-foreground 'function)
- "@version{#2023-8-26}
-  @syntax[]{(gtk:text-tag-foreground object) => color}
+ "@version{2023-10-24}
   @syntax[]{(setf (gtk:text-tag-foreground object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a string with the foreground color}
@@ -1069,7 +1075,15 @@
     Accessor of the @slot[gtk:text-tag]{foreground} slot of the
     @class{gtk:text-tag} class.
   @end{short}
-  Foreground color as a string.
+  @begin[Note]{dictionary}
+    The @slot[gtk:text-tag]{foreground} property is not readable, but writable.
+    @begin{pre}
+(defvar tag (gtk:text-tag-new nil)) => TAG
+(setf (gtk:text-tag-foreground tag) \"red\") => \"red\"
+(gtk:text-tag-foreground-rgba tag)
+=> #S(GDK:RGBA :RED 1.0 :GREEN 0.0 :BLUE 0.0 :ALPHA 1.0)
+    @end{pre}
+  @end{dictionary}
   @see-class{gtk:text-tag}
   @see-function{gtk:text-tag-foreground-rgba}
   @see-function{gtk:text-tag-foreground-set}")
@@ -2921,7 +2935,7 @@
 
 (defun text-tag-new (name &rest args)
  #+liber-documentation
- "@version{2023-8-26}
+ "@version{2023-10-24}
   @argument[name]{a string with the tag name, or @code{nil}}
   @argument[args]{list of property keywords and values}
   @return{A new @class{gtk:text-tag} object.}
@@ -2936,7 +2950,9 @@
     @end{pre}
   @end{dictionary}
   @see-class{gtk:text-tag}"
-  (apply #'make-instance 'text-tag :name name args))
+  (if name
+      (apply #'make-instance 'text-tag :name name args)
+      (apply #'make-instance 'text-tag args)))
 
 (export 'text-tag-new)
 
@@ -2954,7 +2970,7 @@
 
 (cffi:defcfun ("gtk_text_tag_get_priority" text-tag-priority) :int
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2023-10-24}
   @syntax[]{(gtk:text-tag-priority tag) => priority}
   @syntax[]{(setf (gtk:text-tag-priority tag) priority)}
   @argument[tag]{a @class{gtk:text-tag} object}
@@ -2965,16 +2981,16 @@
   The @fun{gtk:text-tag-priority} function gets the tag priority. The
   @setf{gtk:text-tag-priority} function sets the priority.
 
-  Valid priorities are start at 0 and go to one less than the value of the
-  result of the @fun{gtk:text-tag-table-size} function. Each tag in a tag table
-  has a unique priority. Setting the priority of one tag shifts the priorities
-  of all the other tags in the tag table to maintain a unique priority for each
-  tag. Higher priority tags \"win\" if two tags both set the same text
-  attribute. When adding a tag to a tag table, it will be assigned the highest
-  priority in the tag table by default. So normally the precedence of a set of
-  tags is the order in which they were added to the tag table, or created with
-  the @fun{gtk:text-buffer-create-tag} function, which adds the tag to the tag
-  table of the text buffer automatically.
+  Valid priorities start at 0 and go to one less than the value of the result
+  of the @fun{gtk:text-tag-table-size} function. Each tag in a
+  @class{gt:tag-table} object has a unique priority. Setting the priority of one
+  tag shifts the priorities of all the other tags in the tag table to maintain a
+  unique priority for each tag. Higher priority tags \"win\" if two tags both
+  set the same text attribute. When adding a tag to a tag table, it will be
+  assigned the highest priority in the tag table by default. So normally the
+  precedence of a set of tags is the order in which they were added to the tag
+  table, or created with the @fun{gtk:text-buffer-create-tag} function, which
+  adds the tag to the tag table of the text buffer automatically.
   @see-class{gtk:text-tag}
   @see-class{gtk:text-tag-table}
   @see-function{gtk:text-tag-table-size}
@@ -2989,7 +3005,7 @@
 
 (cffi:defcfun ("gtk_text_tag_changed" text-tag-changed) :void
  #+liber-documentation
- "@version{#2023-8-26}
+ "@version{2023-10-24}
   @argument[tag]{a @class{gtk:text-tag} object}
   @argument[changed]{a boolean whether the change affects the
     @class{gtk:text-view} layout}
@@ -2998,9 +3014,9 @@
     object where the tag is included.
   @end{short}
   The signal is already emitted when setting a @class{gtk:text-tag} property.
-  This function is useful for a @class{gtk:text-tag} subclass.
   @see-class{gtk:text-tag}
-  @see-class{gtk:text-tag-table}"
+  @see-class{gtk:text-tag-table}
+  @see-class{gtk:text-view}"
   (tag (g:object text-tag))
   (changed :boolean))
 

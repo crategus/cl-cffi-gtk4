@@ -34,7 +34,7 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkPasswordEntry
-;;;     GtkPasswordEntryBuffer
+;;;     GtkPasswordEntryBuffer                             Since 4.4
 ;;;
 ;;; Accessors
 ;;;
@@ -47,7 +47,7 @@
 ;;;
 ;;;     gtk_password_entry_new
 ;;;
-;;;     gtk_password_entry_buffer_new
+;;;     gtk_password_entry_buffer_new                      Since 4.4
 ;;;
 ;;; Properties
 ;;;
@@ -81,6 +81,7 @@
 ;;; GtkPasswordEntryBuffer
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-4
 (gobject:define-g-object-class "GtkPasswordEntryBuffer" password-entry-buffer
   (:superclass entry-buffer
    :export t
@@ -88,15 +89,41 @@
    :type-initializer "gtk_password_entry_buffer_get_type")
   nil)
 
+#+(and gtk-4-4 liber-documentation)
+(setf (documentation 'password-entry-buffer 'type)
+ "@version{2023-10-18}
+  @begin{short}
+    A @class{gtk:entry-buffer} object that locks the underlying memory to
+    prevent it from being swapped to disk.
+  @end{short}
+  The @class{gtk:password-entry} widget uses a the
+  @class{gtk:password-entry-buffer} object.
+
+  Since 4.4
+  @see-class{gtk:password-entry}
+  @see-class{gtk:entry-buffer}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_password_entry_buffer_new ()
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-4
 (declaim (inline password-entry-buffer))
 
+#+gtk-4-4
 (defun password-entry-buffer-new ()
+ #+liber-documentation
+ "@version{2023-10-18}
+  @return{The newly created @class{gtk:password-entry-buffer} object.}
+  @begin{short}
+    Creates a new @class{gtk:entry-buffer} object using secure memory
+    allocations.
+  @end{short}
+  @see-class{gtk:password-entry-buffer}
+  @see-class{gtk:entry-buffer}"
   (make-instance 'password-entry-buffer))
 
+#+gtk-4-4
 (export 'password-entry-buffer-new)
 
 ;;; ----------------------------------------------------------------------------

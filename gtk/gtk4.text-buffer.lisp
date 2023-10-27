@@ -701,15 +701,14 @@ lambda (buffer)    :run-last
 (defun text-buffer-insert (buffer position text
                                   &key (interactive nil) (editable t))
  #+liber-documentation
- "@version{2023-10-2}
-  @syntax[]{(gtk:text-buffer-insert buffer text) => t}
-  @syntax[]{(gtk:text-buffer-insert buffer text :position position) => t}
-  @syntax[]{(gtk:text-buffer-insert buffer text :interactive t) => t}
-  @syntax[]{(gtk:text-buffer-insert buffer text :interactive t :editable nil) => t}
+ "@version{2023-10-18}
+  @syntax[]{(gtk:text-buffer-insert buffer position text) => t}
+  @syntax[]{(gtk:text-buffer-insert buffer position text :interactive t) => t}
+  @syntax[]{(gtk:text-buffer-insert buffer position text :interactive t :editable nil) => t}
   @argument[buffer]{a @class{gtk:text-buffer} object}
+  @argument[position]{a @class{gtk:text-iter} iterator or the @code{:cursor}
+    value}
   @argument[text]{a string with the text in UTF-8 format}
-  @argument[position]{a @class{gtk:text-iter} iterator or the default value
-    @code{:cursor}}
   @argument[interactive]{a boolean whether the deletion is caused by user
     interaction, the default value is @em{false}}
   @argument[editable]{a boolean whether @arg{buffer} is editable by default,
@@ -718,10 +717,8 @@ lambda (buffer)    :run-last
   @begin{short}
     Inserts text in the text buffer.
   @end{short}
-
-  If the @arg{position} keyword argument has the @code{:cursor} value, the
-  default, inserts the text using the current cursor position as the insertion
-  point.
+  If the @arg{position} argument has the @code{:cursor} value, inserts the text
+  using the current cursor position as the insertion point.
 
   If the @arg{interactive} keyword argument is @em{true}, the insertion will
   not occur if the iterator is at a non-editable location in the text buffer.
@@ -741,10 +738,9 @@ lambda (buffer)    :run-last
     @code{gtk_text_buffer_insert()}, @code{gtk_text_buffer_insert_at_cursor()},
     @code{gtk_text_buffer_insert_interactive()}, and
     @code{gtk_text_buffer_insert_interactive_at_cursor()} functions into one
-    function using the @arg{position}, @arg{interactive}, and @arg{editable}
-    keyword arguments. The corresponding Lisp functions except for the
-    @fun{gtk:text-buffer-insert} function are not exported in the Lisp
-    implementation.
+    function using the @arg{interactive}, and @arg{editable} keyword arguments.
+    The corresponding Lisp functions except for the @fun{gtk:text-buffer-insert}
+    function are not exported in the Lisp implementation.
   @end{dictionary}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-iter}
@@ -850,17 +846,16 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-insert-with-tags (buffer iter text &rest tags)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2023-10-17}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[iter]{a @class{gtk:text-iter} iterator in the text buffer}
   @argument[text]{a string with the UTF-8 text}
-  @argument[tags]{the @class{gtk:text-tag} objects or strings with the tag
-    names to apply to @arg{text}}
+  @argument[tags]{a list with @class{gtk:text-tag} objects or strings with the
+    tag names to apply to @arg{text}}
   @begin{short}
     Inserts text into the text buffer at the position @arg{iter}, applying the
     list of tags to the newly inserted text.
   @end{short}
-
   Equivalent to calling the @fun{gtk:text-buffer-insert} function, then the
   @fun{gtk:text-buffer-apply-tag} function on the inserted text. The
   @fun{gtk:text-buffer-insert-with-tags} function is just a convenience
@@ -929,7 +924,7 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_insert_paintable" text-buffer-insert-paintable)
     :void
  #+liber-documentation
- "@version{#2023-10-2}
+ "@version{2023-10-17}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[iter]{a @class{gtk:text-iter} iterator with the location to insert
     the paintable}
@@ -1156,18 +1151,19 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_insert_child_anchor"
                %text-buffer-insert-child-anchor) :void
   (buffer (g:object text-buffer))
-  (iter (g:boxed text-iter))
+  (position (g:boxed text-iter))
   (anchor (g:object text-child-anchor)))
 
 (defun text-buffer-insert-child-anchor (buffer position &optional anchor)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2023-10-18}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @argument[iter]{a @class{gtk:text-iter} location to insert the anchor}
+  @argument[position]{a @class{gtk:text-iter} iterator with the position to
+    insert the anchor}
   @argument[anchor]{an optional @class{gtk:text-child-anchor} object}
   @return{A @class{gtk:text-child-anchor} child widget anchor.}
   @begin{short}
-    Inserts a child widget anchor into the text buffer at @arg{iter}.
+    Inserts a child widget anchor into the text buffer at @arg{position}.
   @end{short}
   The anchor will be counted as one character in character counts, and when
   obtaining the buffer contents as a string, will be represented by the Unicode
@@ -1204,7 +1200,7 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_create_child_anchor"
                text-buffer-create-child-anchor) (g:object text-child-anchor)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2023-10-17}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[iter]{a @class{gtk:text-iter} location in the text buffer}
   @return{The created @class{gtk:text-child-anchor} anchor.}
@@ -1215,6 +1211,7 @@ lambda (buffer)    :run-last
   @end{short}
   The new anchor is owned by the text buffer.
   @see-class{gtk:text-buffer}
+  @see-class{gtk:text-iter}
   @see-class{gtk:text-child-anchor}
   @see-function{gtk:text-child-anchor-new}
   @see-function{gtk:text-buffer-insert-child-anchor}"
@@ -1279,12 +1276,12 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-move-mark (buffer mark pos)
  #+liber-documentation
- "@version{#2021-8-17}
+ "@version{2023-10-18}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[mark]{a @class{gtk:text-mark} object, or a string with the name
     of the mark}
-  @argument[pos]{new @class{gtk:text-iter} location for @arg{mark} in the
-    text buffer}
+  @argument[pos]{a @class{gtk:text-iter} iterator with the new position for
+    @arg{mark} in the text buffer}
   @begin{short}
     Moves the mark to the new location @arg{pos}.
   @end{short}
@@ -1360,7 +1357,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-delete-mark (buffer mark)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2023-10-18}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[mark]{a @class{gtk:text-mark} object, or a string with the name
     of a mark in the text buffer}
@@ -1375,7 +1372,7 @@ lambda (buffer)    :run-last
   @code{\"mark-deleted\"} signal will be emitted as notification after the mark
   is deleted.
   @begin[Note]{dictionary}
-    The @code{gtk_text_buffer_delete_mark_by_name} function is included in
+    The @code{gtk_text_buffer_delete_mark_by_name()} function is included in
     this function and not exported in the Lisp library.
   @end{dictionary}
   @see-class{gtk:text-buffer}
@@ -2384,13 +2381,12 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_begin_irreversible_action"
                text-buffer-begin-irreversible-action) :void
  #+liber-documentation
- "@version{#2023-10-11}
+ "@version{2023-10-17}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @begin{short}
     Denotes the beginning of an action that may not be undone.
   @end{short}
   This will cause any previous operations in the undo/redo queue to be cleared.
-
   This should be paired with a call to the
   @fun{gtk:text-buffer-end-irreversible-action} function after the irreversible
   action has completed.
@@ -2410,13 +2406,12 @@ lambda (buffer)    :run-last
 (cffi:defcfun ("gtk_text_buffer_end_irreversible_action"
                text-buffer-end-irreversible-action) :void
  #+liber-documentation
- "@version{#2023-10-11}
+ "@version{2023-10-17}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @begin{short}
     Denotes the end of an action that may not be undone.
   @end{short}
   This will cause any previous operations in the undo/redo queue to be cleared.
-
   This should be called after completing modifications to the text buffer
   after the @fun{gtk:text-buffer-begin-irreversible-action} function was called.
 

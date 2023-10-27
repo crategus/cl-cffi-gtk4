@@ -151,7 +151,7 @@ lambda (gesture x y button sequence)    :run-last
 
 (defun gesture-click-new ()
  #+liber-documentation
- "@version{#2022-8-23}
+ "@version{2023-10-18}
   @return{A newly created @class{gtk:gesture-click} object.}
   @begin{short}
     Returns a newly created gesture that recognizes single and multiple presses.

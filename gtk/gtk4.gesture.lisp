@@ -175,7 +175,7 @@
 
   Within a widget, gestures can be grouped through the @fun{gtk:gesture-group}
   function, grouped gestures synchronize the state of sequences, so calling the
-  @fun{gtk:gesture-set-state} function on one will effectively propagate the 
+  @fun{gtk:gesture-set-state} function on one will effectively propagate the
   state throughout the group.
 
   By default, all sequences start out in the @code{:none} state, sequences in
@@ -204,7 +204,7 @@
   coherence is preserved before event propagation is unstopped again.
 
   Sequence states can not be changed freely, see the
-  @fun{gtk:gesture-set-state} function to know about the possible lifetimes of 
+  @fun{gtk:gesture-set-state} function to know about the possible lifetimes of
   a @class{gdk:event-sequence} instance.
 
   @subheading{Touchpad gestures}
@@ -228,7 +228,7 @@ lambda (gesture sequence)    :run-last
       that situation sequence will not pertain to the current set of active
       touches, so do not rely on this being true.
       @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the 
+        @entry[gesture]{The @class{gtk:gesture} object which received the
           signal.}
         @entry[sequence]{The @class{gdk;event-sequence} event that made the
           gesture to be recognized.}
@@ -245,7 +245,7 @@ lambda (gesture sequence)    :run-last
       argument must forget everything about @arg{sequence} as a reaction to the
       signal.
       @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the 
+        @entry[gesture]{The @class{gtk:gesture} object which received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} event that was
           cancelled.}
@@ -263,7 +263,7 @@ lambda (gesture sequence)    :run-last
       This situation may be detected by checking through the
       @fun{gtk:gesture-handles-sequence} function.
       @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the 
+        @entry[gesture]{The @class{gtk:gesture} object which received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} that made gesture
           recognition to finish.}
@@ -276,7 +276,7 @@ lambda (gesture sequence state)    :run-last
       @fun{gtk:gesture-set-sequence-state} function to know more about the
       expectable sequence lifetimes.
       @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the 
+        @entry[gesture]{The @class{gtk:gesture} object which received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} event that was
           cancelled.}
@@ -290,7 +290,7 @@ lambda (gesture sequence)    :run-last
       recognized. The @arg{sequence} argument is guaranteed to pertain to the
       set of active touches.
       @begin[code]{table}
-        @entry[gesture]{The @class{gtk:gesture} object which received the 
+        @entry[gesture]{The @class{gtk:gesture} object which received the
           signal.}
         @entry[sequence]{The @class{gdk:event-sequence} event that was updated.}
       @end{table}
@@ -410,7 +410,7 @@ lambda (gesture sequence)    :run-last
     Accessor of the sequence state of the gesture.
   @end{short}
   The @fun{gtk:gesture-sequence-state} function returns the sequence state, as
-  seen by the gesture. The @setf{gtk:gesture-sequence-state} function sets the 
+  seen by the gesture. The @setf{gtk:gesture-sequence-state} function sets the
   state of @arg{sequence} in the gesture.
   @begin[Warning]{dictionary}
     The @setf{gtk:gesture-sequence-state} function is deprecated since 4.10.
@@ -488,99 +488,84 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_get_sequences ()
-;;;
-;;; GList *
-;;; gtk_gesture_get_sequences (GtkGesture *gesture);
-;;;
-;;; Returns the list of GdkEventSequences currently being interpreted by
-;;; gesture .
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; Returns :
-;;;     A list of GdkEventSequences, the list elements are owned by GTK and must
-;;;     not be freed or modified, the list itself must be deleted through
-;;;     g_list_free().
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_gesture_get_sequences" gesture-sequences) 
+(cffi:defcfun ("gtk_gesture_get_sequences" gesture-sequences)
     (g:list-t (g:boxed gdk:event-sequence))
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @return{A list of @class{gdk:event-sequences} instances.}
+  @begin{short}
+    Returns the list of @class{gdk:event-sequence} instances currently being
+    interpreted by @arg{gesture}.
+  @end{short}
+  @see-class{gtk:gesture}
+  @see-class{gdk:event-sequence}"
   (gesture (g:object gesture)))
 
 (export 'gesture-sequences)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_handles_sequence ()
-;;;
-;;; gboolean
-;;; gtk_gesture_handles_sequence (GtkGesture *gesture,
-;;;                               GdkEventSequence *sequence);
-;;;
-;;; Returns TRUE if gesture is currently handling events corresponding to
-;;; sequence .
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; sequence :
-;;;     a GdkEventSequence or NULL.
-;;;
-;;; Returns :
-;;;     TRUE if gesture is handling sequence , FALSE otherwise
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_handles_sequence" gesture-handles-sequence) :boolean
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @argument[sequence]{a @class{gdk:event-sequence} instance, or @code{nil}}
+  @return{@em{True} if @arg{gesture} is handling @arg{sequence}, @em{false}
+    otherwise.}
+  @begin{short}
+    Returns @em{true} if @arg{gesture} is currently handling events
+    corresponding to @arg{sequence}.
+  @end{short}
+  @see-class{gtk:gesture}
+  @see-class{gdk:event-sequence}"
   (gesture (g:object gesture))
   (sequence (g:boxed gdk:event-sequence)))
 
-(export 'gesture-handles-sequence)  
+(export 'gesture-handles-sequence)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_get_last_updated_sequence ()
-;;;
-;;; GdkEventSequence *
-;;; gtk_gesture_get_last_updated_sequence (GtkGesture *gesture);
-;;;
-;;; Returns the GdkEventSequence that was last updated on gesture .
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; Returns :
-;;;     The last updated sequence.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_gesture_get_last_updated_sequence" 
+(cffi:defcfun ("gtk_gesture_get_last_updated_sequence"
                gesture-last-updated-sequence) (g:boxed gdk:event-sequence)
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @return{The last updated @class{gdk:event-sequence} instance.}
+  @begin{short}
+    Returns the @class{gdk:event-sequence} instance that was last updated on
+    @arg{gesture}.
+  @end{short}
+  @see-class{gtk:gesture}
+  @see-class{gdk:event-sequence}"
   (gesture (g:object gesture)))
 
 (export 'gesture-last-updated-sequence)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_get_last_event ()
-;;;
-;;; GdkEvent *
-;;; gtk_gesture_get_last_event (GtkGesture *gesture,
-;;;                             GdkEventSequence *sequence);
-;;;
-;;; Returns the last event that was processed for sequence .
-;;;
-;;; Note that the returned pointer is only valid as long as the sequence is
-;;; still interpreted by the gesture . If in doubt, you should make a copy of
-;;; the event.
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; sequence :
-;;;     a GdkEventSequence.
-;;;
-;;; Returns :
-;;;     The last event from sequence .
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_get_last_event" gesture-last-event) gdk:event
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @argument[sequence]{a @class{gdk:event-sequence} instance}
+  @return{The last @class{gdk:event} instance from @arg{sequence}.}
+  @begin{short}
+    Returns the last event that was processed for @arg{sequence}.
+  @end{short}
+  Note that the returned pointer is only valid as long as the sequence is still
+  interpreted by the gesture. If in doubt, you should make a copy of the event.
+  @see-class{gtk:gesture}
+  @see-class{gdk:event}
+  @see-class{gdk:event-sequence}"
   (gesture (g:object gesture))
   (sequence (g:boxed gdk:event-sequence)))
 
@@ -588,32 +573,6 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_get_point ()
-;;;
-;;; gboolean
-;;; gtk_gesture_get_point (GtkGesture *gesture,
-;;;                        GdkEventSequence *sequence,
-;;;                        double *x,
-;;;                        double *y);
-;;;
-;;; If sequence is currently being interpreted by gesture , this function
-;;; returns TRUE and fills in x and y with the last coordinates stored for that
-;;; event sequence. The coordinates are always relative to the widget
-;;; allocation.
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; sequence :
-;;;     a GdkEventSequence, or NULL for pointer events.
-;;;
-;;; x :
-;;;     return location for X axis of the sequence coordinates.
-;;;
-;;; y :
-;;;     return location for Y axis of the sequence coordinates.
-;;;
-;;; Returns :
-;;;     TRUE if sequence is currently interpreted
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_get-point" %gesture-point) :boolean
@@ -623,6 +582,23 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
   (y (:pointer :double)))
 
 (defun gesture-point (gesture sequence)
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @argument[sequence]{a @class{gdk:event-sequence} instance, or @code{nil}
+    for pointer events}
+  @begin{return}
+    @arg{x} -- a double float with the x axis of the sequence coordinates @br{}
+    @arg{y} -- a double float with the y axis of the sequence coordinates
+  @end{return}
+  @begin{short}
+    If @arg{sequence} is currently being interpreted by @arg{gesture}, this
+    function returns x and y with the last coordinates stored for that event
+    sequence.
+  @end{short}
+  The coordinates are always relative to the widget allocation.
+  @see-class{gtk:gesture}
+  @see-class{gdk:event-sequence}"
   (cffi:with-foreign-objects ((x :double) (y :double))
     (when (%gesture-point gesture sequence x y)
       (values (cffi:mem-ref x :double)
@@ -632,28 +608,6 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_get_bounding_box ()
-;;;
-;;; gboolean
-;;; gtk_gesture_get_bounding_box (GtkGesture *gesture,
-;;;                               GdkRectangle *rect);
-;;;
-;;; If there are touch sequences being currently handled by gesture , this
-;;; function returns TRUE and fills in rect with the bounding box containing all
-;;; active touches. Otherwise, FALSE will be returned.
-;;;
-;;; Note: This function will yield unexpected results on touchpad gestures.
-;;; Since there is no correlation between physical and pixel distances, these
-;;; will look as if constrained in an infinitely small area, rect width and
-;;; height will thus be 0 regardless of the number of touchpoints.
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; rect :
-;;;     bounding box containing all active touches.
-;;;
-;;; Returns :
-;;;     TRUE if there are active touches, FALSE otherwise
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_get_bounding_box" %gesture-bounding-box) :boolean
@@ -661,6 +615,23 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
   (rect (g:boxed gdk:rectangle)))
 
 (defun gesture-bounding-box (gesture)
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @return{A @class{gdk:rectangle} instance with the bounding box containing
+    all active touches.}
+  @begin{short}
+    If there are touch sequences being currently handled by @arg{gesture}, this
+    function returns the bounding box containing all active touches.
+  @end{short}
+  Otherwise, @em{false} will be returned.
+
+  Note: This function will yield unexpected results on touchpad gestures. Since
+  there is no correlation between physical and pixel distances, these will look
+  as if constrained in an infinitely small area, rect width and height will thus
+  be 0 regardless of the number of touchpoints.
+  @see-class{gtk:gesture}
+  @see-class{gdk:rectangle}"
   (let ((rect (gdk:rectangle-new)))
     (when (%gesture-bounding-box gesture rect)
       rect)))
@@ -669,36 +640,30 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_get_bounding_box_center ()
-;;;
-;;; gboolean
-;;; gtk_gesture_get_bounding_box_center (GtkGesture *gesture,
-;;;                                      double *x,
-;;;                                      double *y);
-;;;
-;;; If there are touch sequences being currently handled by gesture , this
-;;; function returns TRUE and fills in x and y with the center of the bounding
-;;; box containing all active touches. Otherwise, FALSE will be returned.
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; x :
-;;;     X coordinate for the bounding box center.
-;;;
-;;; y :
-;;;     Y coordinate for the bounding box center.
-;;;
-;;; Returns :
-;;;     FALSE if no active touches are present, TRUE otherwise
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_gesture_get_bounding_box_center" 
+(cffi:defcfun ("gtk_gesture_get_bounding_box_center"
                %gesture-bounding-box-center) :boolean
   (gesture (g:object gesture))
   (x (:pointer :double))
   (y (:pointer :double)))
 
 (defun gesture-bounding-box-center (gesture)
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @begin{return}
+    @arg{x} -- a double float with the x coordinate for the bounding box center
+    @br{}
+    @arg{y} -- a double float with the y coordinate for the bounding box center
+  @end{return}
+  @begin{short}
+    If there are touch sequences being currently handled by @arg{gesture}, this
+    function returns in x and y the center of the bounding box containing all
+    active touches.
+  @end{short}
+  Otherwise, @em{false} will be returned.
+  @see-class{gtk:gesture}"
   (cffi:with-foreign-objects ((x :double) (y :double))
     (when (%gesture-bounding-box-center gesture x y)
       (values (cffi:mem-ref x :double)
@@ -708,34 +673,31 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_group ()
-;;;
-;;; void
-;;; gtk_gesture_group (GtkGesture *group_gesture,
-;;;                    GtkGesture *gesture);
-;;;
-;;; Adds gesture to the same group than group_gesture . Gestures are by default
-;;; isolated in their own groups.
-;;;
-;;; Both gestures must have been added to the same widget before they can be
-;;; grouped.
-;;;
-;;; When gestures are grouped, the state of GdkEventSequences is kept in sync
-;;; for all of those, so calling gtk_gesture_set_sequence_state(), on one will
-;;; transfer the same value to the others.
-;;;
-;;; Groups also perform an "implicit grabbing" of sequences, if a
-;;; GdkEventSequence state is set to GTK_EVENT_SEQUENCE_CLAIMED on one group,
-;;; every other gesture group attached to the same GtkWidget will switch the
-;;; state for that sequence to GTK_EVENT_SEQUENCE_DENIED.
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; group_gesture :
-;;;     GtkGesture to group gesture with
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_group" gesture-group) :void
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[group]{a @class{gtk:gesture} object to group @arg{gesture} with}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @begin{short}
+    Adds @arg{gesture} to the same group than @arg{group}.
+  @end{short}
+  Gestures are by default isolated in their own groups.
+
+  Both gestures must have been added to the same widget before they can be
+  grouped.
+
+  When gestures are grouped, the state of the @class{gdk:event-sequence}
+  instances is kept in sync for all of those, so calling the
+  @fun{gtk:gesture-sequence-state} function, on one will transfer the same value
+  to the others.
+
+  Groups also perform an  \"implicit grabbing\" of sequences, if a
+  @class{gdk:event-sequence} state is set to @code{:claimed} on one group,
+  every other gesture group attached to the same @class{gtk:widget} widget will
+  switch the state for that sequence to @code{:denied}.
+  @see-class{gtk:gesture}"
   (group (g:object gesture))
   (gesture (g:object gesture)))
 
@@ -743,62 +705,47 @@ second_gesture_begin_cb (GtkGesture       *second_gesture,
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_ungroup ()
-;;;
-;;; void
-;;; gtk_gesture_ungroup (GtkGesture *gesture);
-;;;
-;;; Separates gesture into an isolated group.
-;;;
-;;; gesture :
-;;;     a GtkGesture
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_ungroup" gesture-ungroup) :void
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @short{Separates @arg{gesture} into an isolated group.}
+  @see-class{gtk:gesture}"
   (gesture (g:object gesture)))
 
 (export 'gesture-ungroup)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_get_group ()
-;;;
-;;; GList *
-;;; gtk_gesture_get_group (GtkGesture *gesture);
-;;;
-;;; Returns all gestures in the group of gesture
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; Returns :
-;;;     The list of GtkGestures, free with g_list_free().
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_get_group" gesture-get-group)
     (g:list-t (g:object gesture))
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @return{A list of all @class{gtk:gesture} objects in the group of
+    @arg{gesture}.}
+  @short{Returns all gestures in the group of @arg{gesture}.}
+  @see-class{gtk:gesture}"
   (gesture (g:object gesture)))
 
 (export 'gesture-get-group)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gesture_is_grouped_with ()
-;;;
-;;; gboolean
-;;; gtk_gesture_is_grouped_with (GtkGesture *gesture,
-;;;                              GtkGesture *other);
-;;;
-;;; Returns TRUE if both gestures pertain to the same group.
-;;;
-;;; gesture :
-;;;     a GtkGesture
-;;;
-;;; other :
-;;;     another GtkGesture
-;;;
-;;; Returns :
-;;;     whether the gestures are grouped
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_is_grouped_with" gesture-is-grouped-with) :boolean
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[gesture]{a @class{gtk:gesture} object}
+  @argument[other]{another @class{gtk:gesture} object}
+  @return{A boolean whether the gestures are grouped.}
+  @short{Returns @em{true} if both gestures pertain to the same group.}
+  @see-class{gtk:gesture}"
   (gesture (g:object gesture))
   (other (g:object gesture)))
 

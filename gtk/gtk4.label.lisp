@@ -126,6 +126,7 @@
 ;;;     menu.popup
 ;;;
 ;;; Hierarchy
+;;;
 ;;;     GObject
 ;;;     ╰── GInitiallyUnowned
 ;;;         ╰── GtkWidget
@@ -1152,7 +1153,7 @@ lambda (label step count extend)    :action
 
 (defun label-new (text)
  #+liber-documentation
- "@version{#2021-12-22}
+ "@version{2023-10-18}
   @argument[text]{a string with the text of the label}
   @return{The new @class{gtk:label} widget.}
   @begin{short}

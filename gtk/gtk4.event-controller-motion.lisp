@@ -68,7 +68,7 @@
 ;;; struct GtkEventControllerMotion
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkEventControllerMotion" 
+(gobject:define-g-object-class "GtkEventControllerMotion"
                                event-controller-motion
   (:superclass event-controller
    :export t
@@ -194,11 +194,9 @@ lambda (controller x y)    :run-first
 
 (defun event-controller-motion-new ()
  #+liber-documentation
- "@version{#2022-8-23}
+ "@version{2023-10-18}
   @return{The new @class{gtk:event-controller-motion} object.}
-  @begin{short}
-    Creates a new event controller that will handle motion events.
-  @end{short}
+  @short{Creates a new event controller that will handle motion events.}
   @see-class{gtk:event-controller-motion}"
   (make-instance 'event-controller-motion))
 

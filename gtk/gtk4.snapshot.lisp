@@ -138,43 +138,65 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_new ()
-;;;
-;;; GtkSnapshot *
-;;; gtk_snapshot_new (void);
-;;;
-;;; Creates a new GtkSnapshot.
-;;;
-;;; Returns :
-;;;     a newly-allocated GtkSnapshot
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline snapshot-new))
 
 (defun snapshot-new ()
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @return{A newly allocated @class{gtk:snapshot} object.}
+  @short{Creates a new @class{gtk:snapshot} object.}
+  @see-class{gtk:snapshot}"
   (make-instance 'snapshot))
 
 (export 'snapshot-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_to_node
-;;;
-;;; Returns the render node that was constructed by snapshot.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_to_node" snapshot-to-node) gsk:render-node
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @return{The constructed @class{gsk:render-node} instance or @code{nil} if
+    there are no nodes to render.}
+  @begin{short}
+    Returns the render node that was constructed by @arg{snapshot}.
+  @end{short}
+  Note that this function may return @code{nil} if nothing has been added to the
+  snapshot or if its content does not produce pixels to be rendered.
+
+  After calling this function, it is no longer possible to add more nodes to
+  snapshot.
+  @see-class{gtk:snapshot}
+  @see-class{gsk:render-node}"
   (snapshot (g:object snapshot)))
 
 (export 'snapshot-to-node)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_to_paintable
-;;;
-;;; Returns a paintable encapsulating the render node that was constructed by
-;;; snapshot.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_to_paintable" snapshot-to-paintable)
     (g:object gdk:paintable)
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[size]{a @symbol{graphene:size-t} instance with the size of the
+    resulting paintable or @code{nil} to use the bounds of the snapshot}
+  @return{A new @class{gdk:paintable} object.}
+  @begin{short}
+    Returns a paintable encapsulating the render node that was constructed by
+    @arg{snapshot}.
+  @end{short}
+  After calling this function, it is no longer possible to add more nodes to the
+  snapshot.
+  @see-class{gtk:snapshot}
+  @see-class{gdk:paintable}
+  @see-symbol{graphene:size-t}"
   (snapshot (g:object snapshot))
   (size (:pointer (:struct graphene:size-t))))
 
@@ -186,10 +208,12 @@
 ;;; Returns the node that was constructed by snapshot and frees snapshot.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_snapshot_free_to_node" snapshot-free-to-node) 
+#+nil
+(cffi:defcfun ("gtk_snapshot_free_to_node" snapshot-free-to-node)
     gsk:render-node
-  (snapshot (g:object snapshot)))    
+  (snapshot (g:object snapshot)))
 
+#+nil
 (export 'snapshot-free-to-node)
 
 ;;; ----------------------------------------------------------------------------
@@ -199,20 +223,31 @@
 ;;; snapshot.
 ;;; ----------------------------------------------------------------------------
 
+#+nil
 (cffi:defcfun ("gtk_snapshot_free_to_paintable" snapshot-free-to-paintable)
     (g:object gdk:paintable)
   (snapshot (g:object snapshot))
   (size (:pointer (:struct graphene:size-t))))
 
+#+nil
 (export 'snapshot-free-to-paintable)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_push_opacity
-;;;
-;;; Modifies the opacity of an image.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_push_opacity" snapshot-push-opacity) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[opacity]{a double float with the opacity to use}
+  @begin{short}
+    Modifies the opacity of an image.
+  @end{short}
+  The image is recorded until the next call to the @fun{gtk:snapshot-pop}
+  function.
+  @see-class{gtk:snapshot}
+  @see-function{gtk:snapshot-pop}"
   (snapshot (g:object snapshot))
   (opacity :double))
 
@@ -220,26 +255,60 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_push_color_matrix
-;;;
-;;; Modifies the colors of an image by applying an affine transformation in RGB
-;;; space.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_snapshot_push_color_matrix" snapshot-push-color-matrix) 
+(cffi:defcfun ("gtk_snapshot_push_color_matrix" snapshot-push-color-matrix)
     :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[matrix]{a @symbol{graphene:matrix-t} instance with the color matrix
+    to use}
+  @argument[offset]{a @symbol{graphene:vec4-t} instance with the color offset
+    to use}
+  @begin{short}
+    Modifies the colors of an image by applying an affine transformation in RGB
+    space.
+  @end{short}
+  In particular, the colors will be transformed by applying
+  @begin{pre}
+pixel = transpose(matrix) * pixel + offset
+  @end{pre}
+  for every pixel. The transformation operates on unpremultiplied colors, with
+  color components ordered R, G, B, A.
+
+  The image is recorded until the next call to the @fun{gtk:snapshot-pop}
+  function.
+  @see-class{gtk:snapshot}
+  @see-symbol{graphene:matrix-t}
+  @see-symbol{graphene:vec4-t}
+  @see-function{gtk:snapshot-pop}"
   (snapshot (g:object snapshot))
-  (color-matrix (:pointer (:struct graphene:matrix-t)))
-  (color-offset (:pointer (:struct graphene:vec4-t))))
+  (matrix (:pointer (:struct graphene:matrix-t)))
+  (offset (:pointer (:struct graphene:vec4-t))))
 
 (export 'snapshot-push-color-matrix)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_push_repeat
-;;;
-;;; Creates a node that repeats the child node.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_push_repeat" snapshot-push-repeat) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds within
+    which to repeat}
+  @argument[child-bounds]{a @symbol{graphene:rect-t} instance with the bounds
+    of the child or @code{nil} to use the full size of the collected child node}
+  @begin{short}
+    Creates a node that repeats the child node.
+  @end{short}
+  The child is recorded until the next call to the @fun{gtk:snapshot-pop}
+  function.
+  @see-class{gtk:snapshot}
+  @see-symbol{graphene:rect-t}
+  @see-function{gtk:snapshot-pop}"
   (snapshot (g:object snapshot))
   (bounds (:pointer (:struct graphene:rect-t)))
   (child-bounds (:pointer (:struct graphene:rect-t))))
@@ -248,11 +317,22 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_push_clip
-;;;
-;;; Clips an image to a rectangle.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_push_clip" snapshot-push-clip) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle to
+    clip to}
+  @begin{short}
+    Clips an image to a rectangle.
+  @end{short}
+  The image is recorded until the next call to the @fun{gtk:snapshot-pop}
+  function.
+  @see-class{gtk:snapshot}
+  @see-symbol{graphene:rect-t}
+  @see-function{gtk:snapshot-pop}"
   (snapshot (g:object snapshot))
   (bounds (:pointer (:struct graphene:rect-t))))
 
@@ -260,12 +340,23 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_push_rounded_clip
-;;;
-;;; Clips an image to a rounded rectangle.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_snapshot_push_rounded_clip" snapshot-push-rounded-clip) 
+(cffi:defcfun ("gtk_snapshot_push_rounded_clip" snapshot-push-rounded-clip)
     :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @symbol{gsk:rounded-rect} instance with the rounded
+    rectangle to clip to}
+  @begin{short}
+    Clips an image to a rounded rectangle.
+  @end{short}
+  The image is recorded until the next call to the @fun{gtk:snapshot-pop}
+  function.
+  @see-class{gtk:snapshot}
+  @see-symbol{gsk:rounded-rect}
+  @see-function{gtk:snapshot-pop}"
   (snapshot (g:object snapshot))
   (bounds (:pointer (:struct gsk:rounded-rect))))
 
@@ -273,11 +364,24 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_push_cross_fade
-;;;
-;;; Snapshots a cross-fade operation between two images with the given progress.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_push_cross_fade" snapshot-push-cross-fade) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[progress]{a double float with the progress between to 0.0 and 1.0}
+  @begin{short}
+    Snapshots a cross-fade operation between two images with the given progress.
+  @end{short}
+  Until the first call to the @fun{gtk:snapshot-pop} function, the start image
+  will be @arg{snapshot}. After that call, the end image will be recorded until
+  the second call to the @fun{gtk:snapshot-pop} function.
+
+  Calling this function requires two subsequent calls to the
+  @fun{gtk:snapshot-pop} function.
+  @see-class{gtk:snapshot}
+  @see-function{gtk:snapshot-pop}"
   (snapshot (g:object snapshot))
   (progress :double))
 
@@ -285,11 +389,26 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_push_blend
-;;;
-;;; Blends together two images with the given blend mode.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_push_blend" snapshot-push-blend) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[blend-mode]{a @symbol{gsk:blend-mode} value to use}
+  @begin{short}
+    Blends together two images with the given blend mode.
+  @end{short}
+  Until the first call to the @fun{gtk:snapshot-pop} function, the bottom image
+  for the blend operation will be recorded. After that call, the top image to be
+  blended will be recorded until the second call to the @fun{gtk:snapshot-pop}
+  function.
+
+  Calling this function requires two subsequent calls to the
+  @fun{gtk:snapshot-pop} function.
+  @see-class{gtk:snapshot}
+  @see-symbol{gsk:blend-mode}
+  @see-function{gtk:snapshot-pop}"
   (snapshot (g:object snapshot))
   (blend-mode gsk:blend-mode))
 
@@ -297,11 +416,20 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_push_blur
-;;;
-;;; Blurs an image.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_push_blur" snapshot-push-blur) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[radius]{a double float with the blur radius to use, must be postive}
+  @begin{short}
+    Blurs an image.
+  @end{short}
+  The image is recorded until the next call to the @fun{gtk:snapshot-pop}
+  function.
+  @see-class{gtk:snapshot}
+  @see-function{gtk:snapshot-pop}"
   (snapshot (g:object snapshot))
   (radius :double))
 
@@ -326,6 +454,54 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_push_gl_shader" snapshot-push-gl-shader) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[shader]{a @class{gsk:gl-shader} object  with the code to run}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle to
+    render into}
+  @argument[take-args]{a @class{g:bytes} instance with the data block with
+    arguments for the shader}
+  @begin{short}
+    Push a @class{gsk:gl-shader-node} instance.
+  @end{short}
+  The node uses the given @class{gsk:gl-shader} instance and uniform values.
+  Additionally this takes a list of @arg{n_children} other nodes which will be
+  passed to the @class{gsk:gl-shader-node} instance.
+
+  The @arg{take_args} argument is a block of data to use for uniform arguments,
+  as per types and offsets defined by the shader. Normally this is generated by
+  the @fun{gsk:gl-shader-format-args} function or the
+  @class{gsk:shader-args-builder} instance.
+
+  The snapshotter takes ownership of @arg{take_args}, so the caller should not
+  free it after this.
+
+  If the renderer does not support GL shaders, or if there is any problem when
+  compiling the shader, then the node will draw pink. You should use the
+  @fun{gsk:gl-shader-compile} function to ensure the shader will work for the
+  renderer before using it.
+
+  If the shader requires textures (see the @fun{gsk:gl-shader-n-textures}
+  function), then it is expected that you call the
+  @fun{gtk:snapshot-gl-shader-pop-texture} function the number of times that are
+  required. Each of these calls will generate a node that is added as a child to
+  the @class{gsk:gl-shader-node} instance, which in turn will render these
+  offscreen and pass as a texture to the shader.
+
+  Once all textures (if any) are pop:ed, you must call the regular the
+  @fun{gtk:snapshot-pop} function.
+
+  If you want to use pre-existing textures as input to the shader rather than
+  rendering new ones, use the @fun{gtk:snapshot-append-texture} function to push
+  a texture node. These will be used directly rather than being re-rendered.
+
+  For details on how to write shaders, see the @class{gsk:gl-shader}
+  documentation.
+  @see-class{gtk:snapshot}
+  @see-class{gsk:gl-shader}
+  @see-symbol{graphene:rect-t}
+  @see-class{g:bytes}"
   (snapshot (g:object snapshot))
   (shader (g:object gsk:gl-shader))
   (bounds (:pointer (:struct graphene:rect-t)))
@@ -335,17 +511,31 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_push_mask
-;;;
-;;; Until the first call to gtk_snapshot_pop(), the mask image for the mask
-;;; operation will be recorded.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-10
 (cffi:defcfun ("gtk_snapshot_push_mask" snapshot-push-mask) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[mask-mode]{a @symbol{maks-mode} value to use}
+  @begin{short}
+    Until the first call to the @fun{gtk:snapshot-pop} function, the mask image
+    for the mask operation will be recorded.
+  @end{short}
+  After that call, the source image will be recorded until the second call to
+  the @fun{gtk:snapshot-pop} function.
+
+  Calling this function requires 2 subsequent calls to the
+  @fun{gtk:snapshot-pop} function.
+
+  Since 4.10
+  @see-class{gtk:snapshot}
+  @see-symbol{gsk:mask-mode}"
   (snapshot (g:object snapshot))
   (mask-mode gsk:mask-mode))
 
+#+gtk-4-10
 (export 'snapshot-push-mask)
 
 ;;; ----------------------------------------------------------------------------
@@ -367,60 +557,102 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_pop
-;;;
-;;; Removes the top element from the stack of render nodes, and appends it to
-;;; the node underneath it.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_pop" snapshot-pop) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @begin{short}
+    Removes the top element from the stack of render nodes, and appends it to
+    the node underneath it.
+  @end{short}
+  @see-class{gtk:snapshot}"
   (snapshot (g:object snapshot)))
 
 (export 'snapshot-pop)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_gl_shader_pop_texture
-;;;
-;;; Removes the top element from the stack of render nodes and adds it to the
-;;; nearest GskGLShaderNode below it.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_gl_shader_pop_texture"
                snapshot-gl-shader-pop-texture) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @begin{short}
+    Removes the top element from the stack of render nodes and adds it to the
+    nearest @class{gsk:gl-shader-node} instance below it.
+  @end{short}
+  This must be called the same number of times as the number of textures is
+  needed for the shader in the @fun{gtk:snapshot-push-gl-shader} function.
+  @see-class{gtk:snapshot}
+  @see-class{gsk:gl-shader-node}
+  @see-function{gtk:snapshot-gl-shader}"
   (snapshot (g:object snapshot)))
 
 (export 'snapshot-gl-shader-pop-texture)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_save
-;;;
-;;; Makes a copy of the current state of snapshot and saves it on an internal
-;;; stack.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_save" snapshot-save) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @begin{short}
+    Makes a copy of the current state of @arg{snapshot} and saves it on an
+    internal stack.
+  @end{short}
+  When the @fun{gtk:snapshot-restore} function is called, snapshot will be
+  restored to the saved state. Multiple calls to the @fun{gtk:snapshot-save}
+  function and the @fun{gtk:snapshot-resotre} function can be nested; each call
+  to the @fun{gtk:snapshot-restore} function restores the state from the
+  matching paired @fun{gtk:snapshot-save} function.
+
+  It is necessary to clear all saved states with corresponding calls to the
+  @fun{gtk:snapshot-restore} function.
+  @see-class{gtk:snapshot}
+  @see-function{gtk:snapshot-restore}"
   (snapshot (g:object snapshot)))
 
 (export 'snapshot-save)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_restore
-;;;
-;;; Restores snapshot to the state saved by a preceding call to
-;;; gtk_snapshot_save() and removes that state from the stack of saved states.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_restore" snapshot-restore) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @begin{short}
+    Restores snapshot to the state saved by a preceding call to the
+    @fun{gtk:snapshot-save} function and removes that state from the stack of
+    saved states.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-function{gtk:snapshot-save}"
   (snapshot (g:object snapshot)))
 
 (export 'snapshot-restore)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_transform
-;;;
-;;; Transforms snapshot‘s coordinate system with the given transform.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_transform" snapshot-transform) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @begin{short}
+    Transforms snapshot‘s coordinate system with the given transform.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-class{gsk:transform}"
   (snapshot (g:object snapshot))
   (transform (g:boxed gsk:transform)))
 
@@ -428,11 +660,19 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_transform_matrix
-;;;
-;;; Transforms snapshot‘s coordinate system with the given matrix.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_transform_matrix" snapshot-transform-matrix) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[matrix]{a @symbol{graphene:matrix-t} instance with the matrix
+    to muliply the transform with}
+  @begin{short}
+    Transforms snapshot‘s coordinate system with the given matrix.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-symbol{graphene:matrix-t}"
   (snapshot (g:object snapshot))
   (matrix (:pointer (:struct graphene:matrix-t))))
 
@@ -440,11 +680,20 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_translate
-;;;
-;;; Translates snapshot‘s coordinate system by point in 2-dimensional space.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_translate" snapshot-translate) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[point]{a @symbol{graphene:point-t} instance with the point to
+    translate the snapshot by}
+  @begin{short}
+    Translates snapshot‘s coordinate system by @arg{point} in 2-dimensional
+    space.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-symobl{graphene:point-t}"
   (snapshot (g:object snapshot))
   (point (:pointer (:struct graphene:point-t))))
 
@@ -452,11 +701,19 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_translate_3d
-;;;
-;;; Translates snapshot‘s coordinate system by point.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_translate_3d" snapshot-translate-3d) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[point]{a @symbol{graphene:point3d-t} instance with the point to
+    translate the snapshot by}
+  @begin{short}
+    Translates snapshot‘s coordinate system by @arg{point}.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-symobl{graphene:point-t}"
   (snapshot (g:object snapshot))
   (point (:pointer (:struct graphene:point3d-t))))
 
@@ -464,10 +721,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_rotate
-;;;
-;;; Rotates @snapshot‘s coordinate system by angle degrees in 2D space - or in
-;;; 3D speak, rotates around the Z axis. The rotation happens around the origin
-;;; point of (0, 0) in the snapshot‘s current coordinate system.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_rotate" %snapshot-rotate) :void
@@ -475,14 +728,28 @@
   (angle :float))
 
 (defun snapshot-rotate (snapshot angle)
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[angle]{a number coerced to a single float with rotation angle,
+    in degrees (clockwise)}
+  @begin{short}
+    Rotates snapshot‘s coordinate system by angle degrees in 2D space - or in
+    3D speak, rotates around the Z axis.
+  @end{short}
+  The rotation happens around the origin point of (0, 0) in the snapshot‘s
+  current coordinate system.
+
+  To rotate around axes other than the Z axis, use the
+  @fun{gsk:transform-rotate-3d} function.
+  @see-class{gtk:snapshot}
+  @see-function{gtk:snapshot-rotate-3d}"
   (%snapshot-rotate snapshot (coerce angle 'single-float)))
 
 (export 'snapshot-rotate)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_rotate_3d
-;;;
-;;; Rotates snapshot‘s coordinate system by angle degrees around axis.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_rotate_3d" %snapshot-rotate-3d) :void
@@ -491,15 +758,26 @@
   (axis (:pointer (:struct graphene:vec3-t))))
 
 (defun snapshot-rotate-3d (snapshot angle axis)
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[angle]{a number coerced to a single float with rotation angle,
+    in degrees (clockwise)}
+  @argument[axis]{a @symbol{graphene:vec3-t} instance with the rotation axis}
+  @begin{short}
+    Rotates snapshot‘s coordinate system by @arg{angle} degrees around
+    @arg{axis}.
+  @end{short}
+  For a rotation in 2D space, use the @fun{gtk:snapshot-rotate} function.
+  @see-class{gtk:snapshot}
+  @see-symbol{graphene:vec3-t}
+  @see-function{gtk:snapshot-rotate}"
   (%snapshot-rotate-3d snapshot (coerce angle 'single-float) axis))
 
 (export 'snapshot-rotate-3d)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_scale
-;;;
-;;; Scales snapshot‘s coordinate system in 2-dimensional space by the given
-;;; factors.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_scale" %snapshot-scale) :void
@@ -508,6 +786,20 @@
   (yfactor :float))
 
 (defun snapshot-scale (snapshot xfactor yfactor)
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[xfactor]{a number coerced to a single float with the scaling
+    factor on the X axis}
+  @argument[yfactor]{a number coerced to a single float with the scaling
+    factor on the Y axis}
+  @begin{short}
+    Scales snapshot‘s coordinate system in 2-dimensional space by the given
+    factors.
+  @end{short}
+  Use the @fun{gtk:snapshot-scale-3d} function to scale in all 3 dimensions.
+  @see-class{gtk:snapshot}
+  @see-function{gtk:snapshot-scale-3d}"
   (%snapshot-scale snapshot (coerce xfactor 'single-float)
                             (coerce yfactor 'single-float)))
 
@@ -515,8 +807,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_scale_3d
-;;;
-;;; Scales snapshot‘s coordinate system by the given factors.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_scale_3d" %snapshot-scale-3d) :void
@@ -526,6 +816,21 @@
   (zfactor :float))
 
 (defun snapshot-scale-3d (snapshot xfactor yfactor zfactor)
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[xfactor]{a number coerced to a single float with the scaling
+    factor on the X axis}
+  @argument[yfactor]{a number coerced to a single float with the scaling
+    factor on the Y axis}
+  @argument[zfactor]{a number coerced to a single float with the scaling
+    factor on the Z axis}
+  @begin{short}
+    Scales snapshot‘s coordinate system by the given factors.
+  @end{short}
+  Use the @fun{gtk:snapshot-scale-3d} function to scale in all 3 dimensions.
+  @see-class{gtk:snapshot}
+  @see-function{gtk:snapshot-scale}"
   (%snapshot-scale-3d snapshot (coerce xfactor 'single-float)
                                (coerce yfactor 'single-float)
                                (coerce zfactor 'single-float)))
@@ -534,24 +839,46 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_perspective
-;;;
-;;; Applies a perspective projection transform.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_snapshot_perspective" snapshot-perspective) :void
+(cffi:defcfun ("gtk_snapshot_perspective" %snapshot-perspective) :void
   (snapshot (g:object snapshot))
   (depth :float))
+
+(defun snapshot-perspective (snapshot depth)
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[depth]{a number coerced to a single float with the distance of
+    z=0 plane}
+  @begin{short}
+    Applies a perspective projection transform.
+  @end{short}
+  See the @fun{gsk:transform-perspective} function for a discussion on the
+  details.
+  @see-class{gtk:snapshot}
+  @see-function{gsk:transform-perspective}"
+  (%snapshot-perspective snapshot (coerce depth 'single-float)))
 
 (export 'snapshot-perspective)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_node
-;;;
-;;; Appends node to the current render node of snapshot, without changing the
-;;; current node.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_append_node" snapshot-append-node) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[node]{a @class{gsk:render-node} instance}
+  @begin{short}
+    Appends @arg{node} to the current render node of @arg{snapshot}, without
+    changing the current node.
+  @end{short}
+  If @arg{snapshot} does not have a current node yet, node will become the
+  initial node.
+  @see-class{gtk:snapshot}
+  @see-class{gsk-render-node}"
   (snapshot (g:object snapshot))
   (node gsk:render-node))
 
@@ -559,26 +886,50 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_cairo
-;;;
-;;; Creates a new GskCairoNode and appends it to the current render node of
-;;; snapshot, without changing the current node.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_append_cairo" snapshot-append-cairo)
     (:pointer (:struct cairo:context-t))
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds for the
+    new node}
+  @return{A @symbol{cairo:context-t} instance suitable for drawing the contents
+    of the newly created render node.}
+  @begin{short}
+    Creates a new @class{gsk:cairo-node} instance and appends it to the current
+    render node of @arg{snapshot}, without changing the current node.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-symbol{graphene:rect-t}"
   (snapshot (g:object snapshot))
   (bounds (:pointer (:struct graphene:rect-t))))
-  
+
 (export 'snapshot-append-cairo)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_texture
-;;;
-;;; Creates a new render node drawing the texture into the given bounds and
-;;; appends it to the current render node of snapshot.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_append_texture" snapshot-append-texture) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[texture]{a @class{gdk:texture} object with the texture to render}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds for the
+    new node}
+  @begin{short}
+    Creates a new render node drawing the texture into the given bounds and
+    appends it to the current render node of @arg{snapshot}.
+  @end{short}
+  If the texture needs to be scaled to fill bounds, linear filtering is used.
+  See the @fun{gtk:snapshot-append-scaled-texture} function if you need other
+  filtering, such as nearest-neighbour.
+  @see-class{gtk:snapshot}
+  @see-class{gdk:texture}
+  @see-symbol{graphene:rect-t}
+  @see-function{gtk:snapshot-append-scaled-texture}"
   (snapshot (g:object snapshot))
   (texture (g:object gdk:texture))
   (bounds (:pointer (:struct graphene:rect-t))))
@@ -587,12 +938,23 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_color
-;;;
-;;; Creates a new render node drawing the color into the given bounds and
-;;; appends it to the current render node of snapshot.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_append_color" snapshot-append-color) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[color]{a @class{gdk:rgba} instance with the color to draw}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds for the
+    node}
+  @begin{short}
+    Creates a new render node drawing the color into the given bounds and
+    appends it to the current render node of @arg{snapshot}.
+  @end{short}
+  You should try to avoid calling this function if @arg{color} is transparent.
+  @see-class{gtk:snapshot}
+  @see-class{gdk:rgba}
+  @see-symbol{graphene:rect-t}"
   (snapshot (g:object snapshot))
   (color (g:boxed gdk:rgba))
   (bounds (:pointer (:struct graphene:rect-t))))
@@ -601,11 +963,18 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_layout
-;;;
-;;; No description available.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_append_layout" snapshot-append-layout) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[layout]{a @class{pango:layout} instance}
+  @argument[color]{a @class{gdk:rgba} instance}
+  @short{No description available.}
+  @see-class{gtk:snapshot}
+  @see-class{pango:layout}
+  @see-class{gdk:rgba}"
   (snapshot (g:object snapshot))
   (layout (g:object pango:layout))
   (color (g:boxed gdk:rgba)))
@@ -632,22 +1001,35 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_border
-;;;
-;;; Appends a stroked border rectangle inside the given outline.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_append_border" %snapshot-append-border) :void
   (snapshot (g:object snapshot))
   (outline (:pointer (:struct gsk:rounded-rect)))
-  (border-width (:pointer :float))
-  (border-color :pointer))
+  (width (:pointer :float))
+  (color :pointer))
 
-(defun snapshot-append-border (snapshot outline border-width border-color)
+(defun snapshot-append-border (snapshot outline width color)
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[outline]{a @class{gsk:rounded-rect} instance with the outline of
+    the border}
+  @argument[width]{a list of 4 single float with the stroke width of the border
+    on the top, right, bottom, and left side respectivly}
+  @argument[color]{a list of 4 @class{gdk:rgba} instances with the color used
+    on the top, right, bottom, and left side}
+  @begin{short}
+    Appends a stroked border rectangle inside the given outline.
+  @end{short}
+  The four sides of the border can have different widths and colors.
+  @see-class{gtk:snapshot}
+  @see-class{gsk:rounded-rect}"
   (cffi:with-foreign-object (width-ptr :float 4)
     (iter (for i from 0 below 4)
-          (for width in border-width)
-          (setf (cffi:mem-aref width-ptr :float i) width))   
-    (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba border-color)
+          (for borderwidth in width)
+          (setf (cffi:mem-aref width-ptr :float i) borderwidth))
+    (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba color)
       (%snapshot-append-border snapshot
                                outline
                                width-ptr
@@ -657,12 +1039,28 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_inset_shadow
-;;;
-;;; Appends an inset shadow into the box given by outline.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_append_inset_shadow" snapshot-append-inset-shadow)
     :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[outline]{a @class{gsk:rounded-rect} instance with the outline of
+    the border}
+  @argument[color]{a @class{gdk:rgba} instance with the color of the method}
+  @argument[dx]{a single float with the horizontal offset of shadow}
+  @argument[dy]{a single float with the vertical offset of shadow}
+  @argument[spread]{a single float value how far the shadow spreads towards
+    the inside}
+  @argument[blur-radius]{a single float value how much blur to apply to the
+    shadow}
+  @begin{short}
+    Appends an inset shadow into the box given by @arg{outline}.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-class{gsk:rounded-rect}
+  @see-class{gdk:rgba}"
   (snapshot (g:object snapshot))
   (outline (:pointer (:struct gsk:rounded-rect)))
   (color (g:boxed gdk:rgba))
@@ -675,12 +1073,28 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_outset_shadow
-;;;
-;;; Appends an outset shadow node around the box given by outline.
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_snapshot_append_outset_shadow" 
+(cffi:defcfun ("gtk_snapshot_append_outset_shadow"
                snapshot-append-outset-shadow) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[outline]{a @class{gsk:rounded-rect} instance with the outline of
+    the region surrounded by the shadow}
+  @argument[color]{a @class{gdk:rgba} instance with the color of the shadow}
+  @argument[dx]{a single float with the horizontal offset of shadow}
+  @argument[dy]{a single float with the vertical offset of shadow}
+  @argument[spread]{a single float value how far the shadow spreads towards
+    the outside}
+  @argument[blur-radius]{a single float value how much blur to apply to the
+    shadow}
+  @begin{short}
+    Appends an outset shadow node around the box given by @arg{outline}.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-class{gsk:rounded-rect}
+  @see-class{gdk:rgba}"
   (snapshot (g:object snapshot))
   (outline (:pointer (:struct gsk:rounded-rect)))
   (color (g:boxed gdk:rgba))
@@ -705,16 +1119,32 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_snapshot_append_scaled_texture
-;;;
-;;; Creates a new render node drawing the texture into the given bounds and
-;;; appends it to the current render node of snapshot.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
 (cffi:defcfun ("gtk_snapshot_append_scaled_texture"
                snapshot-append-scaled-texture) :void
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[texture]{a @class{gdk:texture} instance with the texture to render}
+  @argument[filter]{a @class{gsk:scaling-filter} instance with the filter to
+    use}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds for the
+    new node}
+  @begin{short}
+    Creates a new render node drawing the texture into the given bounds and
+    appends it to the current render node of @arg{snapshot}.
+  @end{short}
+  In contrast to the @fun{gtk:snapshot-append-texture} function, this function
+  provides control about how the filter that is used when scaling.
+
+  Since 4.10
+  @see-class{gtk:snapshot}
+  @see-class{gdk:texture}
+  @see-class{gsk:scaling-filter}
+  @see-symbol{graphene:rect-t}
+  @see-function{gtk:snapshot-append-texture}"
   (snapshot (g:object snapshot))
   (texture (g:object gdk:texture))
   (filter gsk:scaling-filter)

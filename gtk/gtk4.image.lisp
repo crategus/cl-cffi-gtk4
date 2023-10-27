@@ -643,7 +643,7 @@
 (cffi:defcfun ("gtk_image_new_from_icon_name" image-new-from-icon-name)
     (g:object image)
  #+liber-documentation
- "@version{#2022-7-20}
+ "@version{2023-10-18}
   @argument[name]{a string with an icon name}
   @return{A new @class{gtk:image} widget displaying the themed icon.}
   @begin{short}
@@ -795,18 +795,17 @@
 
 (cffi:defcfun ("gtk_image_set_from_icon_name" image-set-from-icon-name) :void
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{#2023-10-18}
   @argument[image]{a @class{gtk:image} widget}
-  @argument[icon-name]{a string with an icon name}
+  @argument[name]{a string with an icon name}
   @begin{short}
-    Sets the image to display @arg{icon-name}.
+    Sets the image to display @arg{name}.
   @end{short}
   See the @fun{gtk:image-new-from-icon-name} function for details.
   @see-class{gtk:image}
   @see-function{gtk:image-new-from-icon-name}"
   (image (g:object image))
-  (icon-name :string)
-  (icon-size icon-size))
+  (name :string))
 
 (export 'image-set-from-icon-name)
 
@@ -816,21 +815,18 @@
 
 (cffi:defcfun ("gtk_image_set_from_gicon" image-set-from-gicon) :void
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{#2023-10-18}
   @argument[image]{a @class{gtk:image} widget}
   @argument[icon]{a @class{g:icon} icon}
-  @argument[size]{a value of the @symbol{gtk:icon-size} enumeration}
   @begin{short}
     Sets the image to display @arg{icon}.
   @end{short}
   See the @fun{gtk:image-new-from-gicon} function for details.
   @see-class{gtk:image}
   @see-class{g:icon}
-  @see-symbol{gtk:icon-size}
   @see-function{gtk:image-new-from-gicon}"
   (image (g:object image))
-  (icon (g:object g:icon))
-  (size icon-size))
+  (icon (g:object g:icon)))
 
 (export 'image-set-from-gicon)
 

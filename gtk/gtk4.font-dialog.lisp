@@ -98,58 +98,203 @@
     font-dialog-title
     "title" "gchararray" t t)))
 
+#+liber-documentation
+(setf (documentation 'font-dialog 'type)
+ "@version{#2023-10-19}
+  @begin{short}
+    A @class{gtk:font-dialog} object collects the arguments that are needed to
+    present a font chooser dialog to the user, such as a title for the dialog
+    and whether it should be modal.
+  @end{short}
+
+  The dialog is shown with the @fun{gtk:font-dialog-choose-font} function or its
+  variants. This API follows the GIO async pattern, and the result can be
+  obtained by calling the corresponding finish function, such as the
+  @fun{gtk:font-dialog-choose-font-finish} function.
+
+  See the @class{gtk:font-dialog-button} widget for a convenient control that
+  uses the @class{gtk:font-dialog} object and presents the results.
+
+  Since 4.10
+  @see-constructor{gtk:font-dialog-new}
+  @see-slot{gtk:font-dialog-filter}
+  @see-slot{gtk:font-dialog-font-map}
+  @see-slot{gtk:font-dialog-language}
+  @see-slot{gtk:font-dialog-modal}
+  @see-slot{gtk:font-dialog-title}
+  @see-class{gtk:font-dialog-button}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;;Gtk.FontDialog:filter
-;;;Sets a filter to restrict what fonts are shown in the font chooser dialog.
+;;; --- font-dialog-filter -----------------------------------------------------
 
-;;;since: 4.10
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "filter" 'font-dialog) t)
+ "The @code{filter} property of type @class{gtk:filter} (Read / Write) @br{}
+  Sets a filter to restrict what fonts are shown in the font chooser dialog.")
 
-;;;Gtk.FontDialog:font-map
-;;;Sets a custom font map to select fonts from.
+#+liber-documentation
+(setf (liber:alias-for-function 'font-dialog-filter)
+      "Accessor"
+      (documentation 'font-dialog-filter 'function)
+ "@version{#2023-10-19}
+  @syntax[]{(gtk:font-dialog-filter object) => filter}
+  @syntax[]{(setf (gtk:font-dialog-filter object) filter)}
+  @argument[object]{a @class{gtk:font-dialog} object}
+  @argument[filter]{a @class{gtk:filter} object}
+  @begin{short}
+    Accessor of the @slot[gtk:font-dialog]{filter} slot of the
+    @class{gtk:font-dialog} class.
+  @end{short}
+  The @fun{gtk:font-dialog-filter} function returns the filter that decides
+  which fonts to display in the font chooser dialog. The
+  @setf{gtk:font-dialog-filter} function adds a filter.
 
-;;;since: 4.10
+  The @class{gtk:filter} object must be able to handle both
+  @class{pango:font-family} and @class{pango:font-face} objects.
 
-;;;Gtk.FontDialog:language
-;;;The language for which the font features are selected.
+  Since 4.10
+  @see-class{gtk:font-dialog}")
 
-;;;since: 4.10
+;;; --- font-dialog-font-map ---------------------------------------------------
 
-;;;Gtk.FontDialog:modal
-;;;Whether the font chooser dialog is modal.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "font-map" 'font-dialog) t)
+ "The @code{font-map} property of type @class{pango:font-map} (Read / Write)
+  @br{}
+  Sets a custom font map to select fonts from. A custom font map can be used to
+  present application specific fonts instead of or in addition to the normal
+  system fonts.")
 
-;;;since: 4.10
+#+liber-documentation
+(setf (liber:alias-for-function 'font-dialog-font-map)
+      "Accessor"
+      (documentation 'font-dialog-font-map 'function)
+ "@version{#2023-10-19}
+  @syntax[]{(gtk:font-dialog-font-map object) => fontmap}
+  @syntax[]{(setf (gtk:font-dialog-font-map object) fontmap)}
+  @argument[object]{a @class{gtk:font-dialog} object}
+  @argument[fontmap]{a @class{pango:font-map} object}
+  @begin{short}
+    Accessor of the @slot[gtk:font-dialog]{font-map} slot of the
+    @class{gtk:font-dialog} class.
+  @end{short}
+  The @fun{gtk:font-dialog-font-map} function returns the fontmap from which
+  fonts are selected, or @code{nil} for the default fontmap. The
+  @setf{gtk:font-dialog-font-map} function sets the fontmap from which fonts
+  are selected. If @arg{fontmap} is @code{nil}, the default fontmap is used.
 
-;;;Gtk.FontDialog:title
-;;;A title that may be shown on the font chooser dialog that is presented by gtk_font_dialog_choose_font().
+  Since 4.10
+  @see-class{gtk:font-dialog}")
 
-;;;since: 4.10
+;;; --- font-dialog-language ---------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "language" 'font-dialog) t)
+ "The @code{language} property of type @class{pango:language} (Read / Write)
+  @br{}
+  The language for which the font features are selected.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'font-dialog-language)
+      "Accessor"
+      (documentation 'font-dialog-language 'function)
+ "@version{#2023-10-19}
+  @syntax[]{(gtk:font-dialog-language object) => language}
+  @syntax[]{(setf (gtk:font-dialog-language object) language)}
+  @argument[object]{a @class{gtk:font-dialog} object}
+  @argument[fontmap]{a @class{pango:language} object}
+  @begin{short}
+    Accessor of the @slot[gtk:font-dialog]{language} slot of the
+    @class{gtk:font-dialog} class.
+  @end{short}
+  The @fun{gtk:font-dialog-language} function returns the language for which
+  font features are applied. The @setf{gtk:font-dialog-language} function sets
+  the language.
+
+  Since 4.10
+  @see-class{gtk:font-dialog}")
+
+;;; --- font-dialog-modal ------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "modal" 'font-dialog) t)
+ "The @code{modal} property of type @code{:boolean} (Read / Write) @br{}
+  Whether the font chooser dialog is modal. @br{}
+  Default value: @em{true}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'font-dialog-modal)
+      "Accessor"
+      (documentation 'font-dialog-modal 'function)
+ "@version{#2023-10-19}
+  @syntax[]{(gtk:font-dialog-modal object) => modal}
+  @syntax[]{(setf (gtk:font-dialog-modal object) modal)}
+  @argument[object]{a @class{gtk:font-dialog} object}
+  @argument[modal]{a boolean whether the font chooser dialog is modal}
+  @begin{short}
+    Accessor of the @slot[gtk:font-dialog]{modal} slot of the
+    @class{gtk:font-dialog} class.
+  @end{short}
+  The @fun{gtk:font-dialog-modal} function returns whether the font chooser
+  dialog blocks interaction with the parent window while it is presented. The
+  @setf{gtk:font-dialog-modal} function sets whether the font chooser dialog
+  blocks interaction with the parent window while it is presented.
+
+  Since 4.10
+  @see-class{gtk:font-dialog}")
+
+;;; --- font-dialog-title ------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "title" 'font-dialog) t)
+ "The @code{title} property of type @code{:string} (Read / Write) @br{}
+  A title that may be shown on the font chooser dialog that is presented by
+  the @fun{gtk:font-dialog-choose-font} function. @br{}
+  Default value: @code{nil}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'font-dialog-title)
+      "Accessor"
+      (documentation 'font-dialog-title 'function)
+ "@version{#2023-10-19}
+  @syntax[]{(gtk:font-dialog-title object) => title}
+  @syntax[]{(setf (gtk:font-dialog-title object) title)}
+  @argument[object]{a @class{gtk:font-dialog} object}
+  @argument[title]{a string with the title}
+  @begin{short}
+    Accessor of the @slot[gtk:font-dialog]{title} slot of the
+    @class{gtk:font-dialog} class.
+  @end{short}
+  The @fun{gtk:font-dialog-title} function returns the title that will be shown
+  on the font chooser dialog. The @setf{gtk:font-dialog-title} function sets the
+  title.
+
+  Since 4.10
+  @see-class{gtk:font-dialog}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_dialog_new
-;;;
-;;; Creates a new GtkFontDialog object.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline font-dialog-new))
 
 (defun font-dialog-new ()
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @return{The new @class{gtk:font-dialog} object.}
+  @short{Creates a new @class{gtk:font-dialog} object.}
+
+  Since 4.10
+  @see-class{gtk:font-dialog}"
   (make-instance 'font-dialog))
 
 (export 'font-dialog-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_dialog_choose_face
-;;;
-;;; This function initiates a font selection operation by presenting a dialog to
-;;; the user for selecting a font face (i.e. a font family and style, but not a
-;;; specific font size).
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_dialog_choose_face" %font-dialog-choose-face) :void
@@ -161,6 +306,25 @@
   (data :pointer))
 
 (defun font-dialog-choose-face (dialog parent face cancellable func)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[dialog]{a @class{gtk:font-dialog} object}
+  @argument[parent]{a parent @class{gtk:window} widget}
+  @argument[face]{a @class{pango:font-face} object}
+  @argument[canellable]{a @class{g:cancellable} object to cancel the operation}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+   when the operation is complete}
+  @begin{short}
+    This function initiates a font selection operation by presenting a dialog to
+    the user for selecting a font face, i.e. a font family and style, but not a
+    specific font size.
+  @end{short}
+  The callback will be called when the dialog is dismissed. It should call the
+  @fun{gtk:font-dialog-choose-face-finish} function to obtain the result.
+
+  Since 4.10
+  @see-class{gtk:font-dialog}
+  @see-function{gtk:font-dialog-choose-face-finish}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%font-dialog-choose-face dialog
                               parent
@@ -173,11 +337,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_dialog_choose_face_finish
-;;;
-;;; Finishes the gtk_font_dialog_choose_face() call and returns the resulting
-;;; font face.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_dialog_choose_face_finish"
@@ -187,6 +346,18 @@
   (err :pointer))
 
 (defun font-dialog-choose-face-finish (dialog result)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[dialog]{a @class{gtk:font-dialog} object}
+  @argument[result]{a @class{g:async-result} object}
+  @begin{short}
+    Finishes the the @fun{gtk:font-dialog-choose-face} function call and returns
+    the resulting font face.
+  @end{short}
+
+  Since 4.10
+  @see-class{gtk:font-dialog}
+  @see-function{gtk:font-dialog-choose-face}"
   (glib:with-ignore-g-error (err)
     (%font-dialog-choose-face-finish dialog result err)))
 
@@ -194,11 +365,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_dialog_choose_family
-;;;
-;;; This function initiates a font selection operation by presenting a dialog to
-;;; the user for selecting a font family.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_dialog_choose_family" %font-dialog-choose-family) :void
@@ -210,6 +376,24 @@
   (data :pointer))
 
 (defun font-dialog-choose-family (dialog parent family cancellable func)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[dialog]{a @class{gtk:font-dialog} object}
+  @argument[parent]{a parent @class{gtk:window} widget}
+  @argument[family]{a @class{pango:font-family} object}
+  @argument[canellable]{a @class{g:cancellable} object to cancel the operation}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+   when the operation is complete}
+  @begin{short}
+    This function initiates a font selection operation by presenting a dialog to
+    the user for selecting a font family.
+  @end{short}
+  The callback will be called when the dialog is dismissed. It should call the
+  @fun{gtk:font-dialog-choose-family-finish} function to obtain the result.
+
+  Since 4.10
+  @see-class{gtk:font-dialog}
+  @see-function{gtk:font-dialog-choose-family-finish}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%font-dialog-choose-family dialog
                                 parent
@@ -222,11 +406,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_dialog_choose_family_finish
-;;;
-;;; Finishes the gtk_font_dialog_choose_family() call and returns the resulting
-;;; family.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_dialog_choose_family_finish"
@@ -236,6 +415,21 @@
   (err :pointer))
 
 (defun font-dialog-choose-family-finish (dialog result)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[dialog]{a @class{gtk:font-dialog} object}
+  @argument[result]{a @class{g:async-result} object}
+  @begin{short}
+    Finishes the the @fun{gtk:font-dialog-choose-family} function call and
+    returns the resulting font family.
+  @end{short}
+  This function never returns an error. If the operation is not finished
+  successfully, the value passed as @arg{family} to the
+  @fun{gtk:font-dialog-choose-family} function is returned.
+
+  Since 4.10
+  @see-class{gtk:font-dialog}
+  @see-function{gtk:font-dialog-choose-family}"
   (glib:with-ignore-g-error (err)
     (%font-dialog-choose-family-finish dialog result err)))
 
@@ -243,11 +437,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_dialog_choose_font
-;;;
-;;; This function initiates a font selection operation by presenting a dialog to
-;;; the user for selecting a font.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_dialog_choose_font" %font-dialog-choose-font) :void
@@ -259,6 +448,27 @@
   (data :pointer))
 
 (defun font-dialog-choose-font (dialog parent desc cancellable func)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[dialog]{a @class{gtk:font-dialog} object}
+  @argument[parent]{a parent @class{gtk:window} widget}
+  @argument[desc]{a @class{pango:font-description} object}
+  @argument[canellable]{a @class{g:cancellable} object to cancel the operation}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+   when the operation is complete}
+  @begin{short}
+    This function initiates a font selection operation by presenting a dialog to
+    the user for selecting a font.
+  @end{short}
+  The callback will be called when the dialog is dismissed. It should call the
+  @fun{gtk:font-dialog-choose-font-finish} function to obtain the result.
+
+  If you want to let the user select font features as well, use the
+  @fun{gtk:font-dialog-choose-font-and-features} function instead.
+
+  Since 4.10
+  @see-class{gtk:font-dialog}
+  @see-function{gtk:font-dialog-choose-font-finish}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%font-dialog-choose-font dialog
                               parent
@@ -271,11 +481,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_dialog_choose_font_finish
-;;;
-;;; Finishes the gtk_font_dialog_choose_font() call and returns the resulting
-;;; font description.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_dialog_choose_font_finish"
@@ -286,6 +491,19 @@
   (err :pointer))
 
 (defun font-dialog-choose-font-finish (dialog result)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[dialog]{a @class{gtk:font-dialog} object}
+  @argument[result]{a @class{g:async-result} object}
+  @return{A @class{pango:font-description} object with the selected font.}
+  @begin{short}
+    Finishes the the @fun{gtk:font-dialog-choose-font} function call and
+    returns the resulting font description.
+  @end{short}
+
+  Since 4.10
+  @see-class{gtk:font-dialog}
+  @see-function{gtk:font-dialog-choose-family}"
   (glib:with-ignore-g-error (err)
     (%font-dialog-choose-font-finish dialog result err)))
 
@@ -293,11 +511,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_dialog_choose_font_and_features
-;;;
-;;; This function initiates a font selection operation by presenting a dialog to
-;;; the user for selecting a font and font features.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_dialog_choose_font_and_features"
@@ -311,6 +524,28 @@
 
 (defun font-dialog-choose-font-and-features (dialog
                                              parent desc cancellable func)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[dialog]{a @class{gtk:font-dialog} object}
+  @argument[parent]{a parent @class{gtk:window} widget}
+  @argument[desc]{a @class{pango:font-description} object}
+  @argument[canellable]{a @class{g:cancellable} object to cancel the operation}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+   when the operation is complete}
+  @begin{short}
+    This function initiates a font selection operation by presenting a dialog to
+    the user for selecting a font and font features.
+  @end{short}
+  Font features affect how the font is rendered, for example enabling glyph
+  variants or ligatures.
+
+  The callback will be called when the dialog is dismissed. It should call the
+  @fun{gtk:font-dialog-choose-font-and-features-finish} function to obtain the
+  result.
+
+  Since 4.10
+  @see-class{gtk:font-dialog}
+  @see-function{gtk:font-dialog-choose-font-and-features-finish}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%font-dialog-choose-font-and-features
             dialog
@@ -324,25 +559,35 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_font_dialog_choose_font_and_features_finish
-;;;
-;;; Finishes the gtk_font_dialog_choose_font_and_features() call and returns the
-;;; resulting font description and font features.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
-
-;; TODO: Check this implementation carefully.
 
 (cffi:defcfun ("gtk_font_dialog_choose_font_and_features_finish"
                %font-dialog-choose-font-and-features-finish) :boolean
   (dialog (g:object font-dialog))
   (result (g:object g:async-result))
-  (desc :pointer)
-  (features :string)
-  (language :pointer)
+  (desc (g:boxed pango:font-description))
+  (features (:pointer :string))
+  (language (g:boxed pango:language))
   (err :pointer))
 
 (defun font-dialog-choose-font-and-features-finish (dialog result)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[dialog]{a @class{gtk:font-dialog} object}
+  @argument[result]{a @class{g:async-result} object}
+  @begin{return}
+    @arg{desc} -- a @class{pango:font-description} object @br{}
+    @arg{features} -- a string with the font features @br{}
+    @arg{language} -- a @class{pango:language} object
+  @end{return}
+  @begin{short}
+    Finishes the the @fun{gtk:font-dialog-choose-font} function call and
+    returns the resulting font description.
+  @end{short}
+
+  Since 4.10
+  @see-class{gtk:font-dialog}
+  @see-function{gtk:font-dialog-choose-font-and-features}"
   (let ((desc (pango:font-description-new))
         (features nil)
         (language (pango:language-default)))
@@ -356,56 +601,5 @@
         (values desc features language))))
 
 (export 'font-dialog-choose-font-and-features-finish)
-
-
-;;;gtk_font_dialog_get_filter
-;;;Returns the filter that decides which fonts to display in the font chooser dialog.
-
-;;;since: 4.10
-
-;;;gtk_font_dialog_get_font_map
-;;;Returns the fontmap from which fonts are selected, or NULL for the default fontmap.
-
-;;;since: 4.10
-
-;;;gtk_font_dialog_get_language
-;;;Returns the language for which font features are applied.
-
-;;;since: 4.10
-
-;;;gtk_font_dialog_get_modal
-;;;Returns whether the font chooser dialog blocks interaction with the parent window while it is presented.
-
-;;;since: 4.10
-
-;;;gtk_font_dialog_get_title
-;;;Returns the title that will be shown on the font chooser dialog.
-
-;;;since: 4.10
-
-;;;gtk_font_dialog_set_filter
-;;;Adds a filter that decides which fonts to display in the font chooser dialog.
-
-;;;since: 4.10
-
-;;;gtk_font_dialog_set_font_map
-;;;Sets the fontmap from which fonts are selected.
-
-;;;since: 4.10
-
-;;;gtk_font_dialog_set_language
-;;;Sets the language for which font features are applied.
-
-;;;since: 4.10
-
-;;;gtk_font_dialog_set_modal
-;;;Sets whether the font chooser dialog blocks interaction with the parent window while it is presented.
-
-;;;since: 4.10
-
-;;;gtk_font_dialog_set_title
-;;;Sets the title that will be shown on the font chooser dialog.
-
-;;;since: 4.10
 
 ;;; --- End of file gtk4.font-dialog.lisp --------------------------------------

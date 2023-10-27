@@ -346,9 +346,9 @@
                text-child-anchor-new-with-replacement)
     (g:object text-child-anchor)
  #+liber-documentation
- "@version{#2023-10-11}
+ "@version{2023-10-18}
   @argument[character]{a string with a replacement character}
-  @return{A new @class{gtk:text-child-anchor} object}
+  @return{A new @class{gtk:text-child-anchor} object.}
   @begin{short}
     Creates a new @class{gtk:text-child-anchor} object with the given
     replacement character.
@@ -358,6 +358,7 @@
 
   Since 4.6
   @see-class{gtk:text-child-anchor}
+  @see-class{gtk:text-buffer}
   @see-function{gtk:text-buffer-insert-child-anchor}"
   (char :string))
 
@@ -1818,7 +1819,7 @@ lambda (view)    :action
 
 (defun text-view-iter-at-location (view x y)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{2023-10-17}
   @argument[view]{a @class{gtk:text-view} widget}
   @argument[x]{an integer with the x position, in text buffer coordinates}
   @argument[y]{an integer with the y position, in text buffer coordinates}
@@ -1902,10 +1903,10 @@ lambda (view)    :action
 
 (defun text-view-buffer-to-window-coords (view wtype xbuffer ybuffer)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{#2023-10-17}
   @argument[view]{a @class{gtk:text-view} widget}
-  @argument[wtype]{a value of the @symbol{gtk:text-window-type} enumeration,
-    except @code{:private}}
+  @argument[wtype]{a @symbol{gtk:text-window-type} value, except
+    @code{:private}}
   @argument[xbuffer]{an integer with the text buffer x coordinate}
   @argument[ybuffer]{an integer with the text buffer y coordinate}
   @begin{return}
@@ -1913,16 +1914,10 @@ lambda (view)    :action
     @arg{ywindow} -- an integer with the window y coordinate
   @end{return}
   @begin{short}
-    Converts the text buffer coordinates (@arg{xbuffer}, @arg{ybuffer}) to
-    window coordinates (@arg{xwindow}, @arg{ywindow}) for the text view
-    window of type @arg{wtype}.
+    Converts the text buffer coordinates to window coordinates.
   @end{short}
-
-  Note that you cannot convert coordinates for a nonexisting window, see the
-  @fun{gtk:text-view-border-window-size} function.
   @see-class{gtk:text-view}
-  @see-symbol{gtk:text-window-type}
-  @see-function{gtk:text-view-border-window-size}"
+  @see-symbol{gtk:text-window-type}"
   (cffi:with-foreign-objects ((xwindow :int) (ywindow :int))
     (%text-view-buffer-to-window-coords view
                                         wtype
@@ -1948,10 +1943,10 @@ lambda (view)    :action
 
 (defun text-view-window-to-buffer-coords (view wtype xwindow ywindow)
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{2023-10-17}
   @argument[view]{a @class{gtk:text-view} widget}
-  @argument[wtype]{a value of the @symbol{gtk:text-window-type} enumeration,
-    except @code{:private}}
+  @argument[wtype]{a @symbol{gtk:text-window-type} value, except
+    @code{:private}}
   @argument[xwindow]{an integer with the window x coordinate}
   @argument[ywindow]{an integer with the window y coordinate}
   @begin{return}
@@ -1959,16 +1954,11 @@ lambda (view)    :action
     @arg{ybuffer} -- an integer with the text buffer y coordinate
   @end{return}
   @begin{short}
-    Converts window coordinates (@arg{xwindow}, @arg{ywindow}) on the text
-    view window identified by @arg{wtype} to text buffer coordinates
-    (@arg{xbuffer}, @arg{ybuffer}).
+    Converts coordinates on the window identified by @arg{wtype} to
+    text buffer coordinates.
   @end{short}
-
-  Note that you cannot convert coordinates for a nonexisting window, see the
-  @fun{gtk:text-view-border-window-size} function.
   @see-class{gtk:text-view}
-  @see-symbol{gtk:text-view-window-type}
-  @see-function{gtk:text-view-border-window-size}"
+  @see-symbol{gtk:text-window-type}"
   (cffi:with-foreign-objects ((xbuffer :int) (ybuffer :int))
     (%text-view-window-to-buffer-coords view
                                         wtype
@@ -2193,9 +2183,9 @@ lambda (view)    :action
 (cffi:defcfun ("gtk_text_view_add_child_at_anchor"
                text-view-add-child-at-anchor) :void
  #+liber-documentation
- "@version{#2021-10-16}
+ "@version{2023-10-18}
   @argument[view]{a @class{gtk:text-view} widget}
-  @argument[child]{a @class{gtk:widget} object}
+  @argument[child]{a @class{gtk:widget} widget}
   @argument[anchor]{a @class{gtk:text-child-anchor} object in the text buffer
     for @arg{view}}
   @begin{short}

@@ -296,9 +296,6 @@ lambda (context)    :run-last
 ;;; gtk_im_context_filter_keypress (GtkIMContext *context,
 ;;;                                 GdkEvent *event);
 ;;;
-;;; Allow an input method to internally handle key press and release events. If
-;;; this function returns TRUE, then no further processing should be done for
-;;; this key event.
 ;;;
 ;;; context :
 ;;;     a GtkIMContext
@@ -307,11 +304,23 @@ lambda (context)    :run-last
 ;;;     the key event
 ;;;
 ;;; Returns :
-;;;     TRUE if the input method handled the key event.
+;;;
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_im_context_filter-keypress" im-context-filter-keypress)
     :boolean
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[context]{a @class{gtk:im-context} object}
+  @argument[event]{a @class{gdk:event} instance with the key event}
+  @return{@em{True} if the input method handled the key event.}
+  @begin{short}
+    Allow an input method to internally handle key press and release events.
+  @end{short}
+  If this function returns @em{true}, then no further processing should be done
+  for this key event.
+  @see-class{gtk:im-context}
+  @see-class{gdk:event}"
   (context (g:object im-context))
   (event gdk:event))
 

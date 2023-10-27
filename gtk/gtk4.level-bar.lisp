@@ -282,7 +282,7 @@ lambda (levelbar name)    :detailed
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:level-bar-new}
-  @see-constructor{gtl:level-bar-new-for-interval}
+  @see-constructor{gtk:level-bar-new-for-interval}
   @see-slot{gtk:level-bar-inverted}
   @see-slot{gtk:level-bar-max-value}
   @see-slot{gtk:level-bar-min-value}
@@ -317,8 +317,8 @@ lambda (levelbar name)    :detailed
     @class{gtk:level-bar} class.
   @end{short}
   The @fun{gtk:level-bar-inverted} function returns @em{true} if the level bar
-  is inverted. The @sym{(setf gtk:level-bar-inverted)} function sets the value
-  of the property.
+  is inverted. The @setf{gtk:level-bar-inverted} function sets the value of the
+  property.
   @see-class{gtk:level-bar}")
 
 ;;; --- level-bar-max-value ----------------------------------------------------
@@ -346,7 +346,7 @@ lambda (levelbar name)    :detailed
   @end{short}
   The @fun{gtk:level-bar-max-value} function returns the value of the
   @slot[gtk:level-bar]{max-value} property. The
-  @sym{(setf gtk:level-bar-max-value)} function sets the value.
+  @setf{gtk:level-bar-max-value} function sets the value.
   @see-class{gtk:level-bar}
   @see-function{gtk:level-bar-min-value}")
 
@@ -375,7 +375,7 @@ lambda (levelbar name)    :detailed
   @end{short}
   The @fun{gtk:level-bar-min-value} function returns the value of the
   @slot[gtk:level-bar]{min-value} property. The
-  @sym{(setf gtk:level-bar-min-value)} function sets the value.
+  @setf{gtk:level-bar-min-value} function sets the value.
   @see-class{gtk:level-bar}
   @see-function{gtk:level-bar-max-value}")
 
@@ -408,8 +408,8 @@ lambda (levelbar name)    :detailed
     @class{gtk:level-bar} class.
   @end{short}
   The @fun{gtk:level-bar-mode} function returns the value of the
-  @slot[gtk:level-bar]{mode} property. The @sym{(setf gtk:level-bar-mode)}
-  function sets the value.
+  @slot[gtk:level-bar]{mode} property. The @setf{gtk:level-bar-mode} function
+  sets the value.
   @see-class{gtk:level-bar}
   @see-symbol{gtk:level-bar-mode}")
 
@@ -438,8 +438,8 @@ lambda (levelbar name)    :detailed
   @end{short}
   The @fun{gtk:level-bar-value} function gets the value of the level bar in the
   interval between the @slot[gtk:level-bar]{min-value} and
-  @slot[gtk:level-bar]{max-value} values. The @sym{(setf gtk:level-bar-value)}
-  funtion sets the value.
+  @slot[gtk:level-bar]{max-value} values. The @setf{gtk:level-bar-value}
+  function sets the value.
   @see-class{gtk:level-bar}
   @see-function{gtk:level-bar-min-value}
   @see-function{gtk:level-bar-max-value}")

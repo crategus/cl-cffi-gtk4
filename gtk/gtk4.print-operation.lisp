@@ -386,7 +386,7 @@
   Then you start the print operation by calling the
   @fun{gtk:print-operation-run} function. It will then show a dialog, let the
   user select a printer and options. When the user finished the dialog various
-  signals will be emitted on the @class{gtk:print-operation} object, the main 
+  signals will be emitted on the @class{gtk:print-operation} object, the main
   one being the \"draw-page\" signal, which you are supposed to catch and render
   the page on the provided the @class{gtk:print-context} object using Cairo.
 
@@ -1196,7 +1196,7 @@ lambda (operation widget setup settings)    :run-last
 (setf (documentation (liber:slot-documentation "unit" 'print-operation) t)
  "The @code{unit} property of type @symbol{gtk:unit} (Read / Write) @br{}
   The transformation for the Cairo context obtained from the
-  @class{gtk:print-context} object is set up in such a way that distances are 
+  @class{gtk:print-context} object is set up in such a way that distances are
   measured in units of a value of the @symbol{gtk:unit} enumeration. @br{}
   Default value: @code{:pixel}")
 
@@ -1226,7 +1226,7 @@ lambda (operation widget setup settings)    :run-last
                                                'print-operation) t)
  "The @code{use-full-page} property of type @code{:boolean} (Read / Write) @br{}
   If @em{true}, the transformation for the Cairo context obtained from the
-  @class{gtk:print-context} object puts the origin at the top left corner of the 
+  @class{gtk:print-context} object puts the origin at the top left corner of the
   page, which may not be the top left corner of the sheet, depending on page
   orientation and the number of pages per sheet. Otherwise, the origin is at
   the top left corner of the imageable area, i.e. inside the margins. @br{}
@@ -1240,17 +1240,17 @@ lambda (operation widget setup settings)    :run-last
   @syntax[]{(gtk:print-operation-use-full-page object) => full-page}
   @syntax[]{(setf (gtk:print-operation-use-full-page object) full-page)}
   @argument[object]{a @class{gtk:print-operation} object}
-  @argument[full-page]{@em{true} to set up the @class{gtk:print-context} object 
+  @argument[full-page]{@em{true} to set up the @class{gtk:print-context} object
     for the full page}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{use-full-page} of the
     @class{gtk:print-operation} class.
   @end{short}
   If @arg{full-page} is @em{true}, the transformation for the Cairo context
-  obtained from the @class{gtk:print-context} object puts the origin at the top 
-  left corner of the page, which may not be the top left corner of the sheet, 
-  depending on page orientation and the number of pages per sheet. Otherwise, 
-  the origin is at the top left corner of the imageable area, i.e. inside the 
+  obtained from the @class{gtk:print-context} object puts the origin at the top
+  left corner of the page, which may not be the top left corner of the sheet,
+  depending on page orientation and the number of pages per sheet. Otherwise,
+  the origin is at the top left corner of the imageable area, i.e. inside the
   margins.
   @see-class{gtk:print-operation}")
 
@@ -1486,23 +1486,6 @@ lambda (operation widget setup settings)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkPageSetupDoneFunc ()
-;;;
-;;; void
-;;; (*GtkPageSetupDoneFunc) (GtkPageSetup *page_setup,
-;;;                          gpointer data);
-;;;
-;;; The type of function that is passed to
-;;; gtk_print_run_page_setup_dialog_async().
-;;;
-;;; This function will be called when the page setup dialog is dismissed, and
-;;; also serves as destroy notify for data .
-;;;
-;;; page_setup :
-;;;     the GtkPageSetup that has been
-;;;
-;;; data :
-;;;     user data that has been passed to
-;;;     gtk_print_run_page_setup_dialog_async().
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback page-setup-done-func :void
@@ -1510,6 +1493,25 @@ lambda (operation widget setup settings)    :run-last
      (data :pointer))
   (let ((fn (glib:get-stable-pointer-value data)))
     (funcall fn page-setup)))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'page-setup-done-func)
+      "Callback"
+      (liber:symbol-documentation 'page-setup-done-func)
+ "@version{#2023-10-21}
+  @begin{short}
+    The type of function that is passed to the
+    @fun{gtk:print-run-page-setup-dialog-async} function.
+  @end{short}
+  This function will be called when the page setup dialog is dismissed.
+  @begin{pre}
+lambda (pagesetup)
+  @end{pre}
+  @begin[code]{table}
+    @entry[pagesetup]{A @class{gtk:page-setup} object.}
+  @end{table}
+  @see-class{gtk:page-setup}
+  @see-function{gtk:print-run-page-setup-dialog-async}")
 
 (export 'page-setup-done-func)
 

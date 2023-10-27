@@ -129,7 +129,7 @@
 (setf (liber:alias-for-function 'gesture-single-button)
       "Accessor"
       (documentation 'gesture-single-button 'function)
- "@version{#2020-9-11}
+ "@version{2023-10-18}
   @syntax[]{(gtk:gesture-single-button object) => button)}
   @syntax[]{(setf (gtk:gesture-single-button object) button)}
   @argument[object]{a @class{gtk:gesture-single} object}

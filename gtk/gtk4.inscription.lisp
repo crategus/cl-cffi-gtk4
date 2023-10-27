@@ -68,21 +68,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GtkInscriptionOverflow
-;;;
-;;;
-;;; Since 4.8
-;;;
-;;; GTK_INSCRIPTION_OVERFLOW_CLIP
-;;;     
-;;;
-;;; GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_START
-;;;     
-;;;
-;;; GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_MIDDLE
-;;;     
-;;;
-;;; GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_END
-;;;     
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkInscriptionOverflow" inscription-overflow
@@ -99,7 +84,7 @@
       (liber:symbol-documentation 'inscription-overflow)
  "@version{2023-10-13}
   @begin{short}
-    The different methods to handle text in the @class{gtk:inscription} widget 
+    The different methods to handle text in the @class{gtk:inscription} widget
     when it does not fit the available space.
   @end{short}
   @begin{pre}
@@ -118,7 +103,7 @@
     @entry[:ellipsize-end]{Omit characters at the end of the text.}
   @end{table}
   Since 4.8
-  @see-class{gtk:message-dialog}")
+  @see-class{gtk:inscription}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Class GtkInscription
@@ -153,7 +138,7 @@
     inscription-text
     "text" "gchararray" t t)
    (text-overflow
-    inscription-text-over-flow
+    inscription-text-overflow
     "text-overflow" "GtkInscriptionOverflow" t t)
    (wrap-mode
     inscription-wrap-mode
@@ -165,211 +150,384 @@
     inscription-yalign
     "yalign" "gfloat" t t)))
 
+#+liber-documentation
+(setf (documentation 'inscription 'type)
+ "@version{2023-10-18}
+  @begin{short}
+    The @class{gtk:inscription} widget is a widget to show text in a predefined
+    area.
+  @end{short}
+  You likely want to use the @class{gtk:label} widget instead as this widget is
+  intended only for a small subset of use cases. The main scenario envisaged is
+  inside lists such as the @class{gtk:column-view} widget.
 
+  While a @class{gtk:label} widget sizes itself depending on the text that is
+  displayed, the @class{gtk:inscription} widget is given a size and inscribes
+  the given text into that space as well as it can.
 
+  Users of this widget should take care to plan behaviour for the common case
+  where the text does not fit exactly in the allocated space.
 
-;;;Description
+  Since 4.8
+  @see-constructor{gtk:inscription-new}
+  @see-slot{gtk:inscription-attributes}
+  @see-slot{gtk:inscription-markup}
+  @see-slot{gtk:inscription-min-chars}
+  @see-slot{gtk:inscription-min-lines}
+  @see-slot{gtk:inscription-nat-chars}
+  @see-slot{gtk:inscription-nat-lines}
+  @see-slot{gtk:inscription-text}
+  @see-slot{gtk:inscription-text-overflow}
+  @see-slot{gtk:inscription-wrap-mode}
+  @see-slot{gtk:inscription-xalign}
+  @see-slot{gtk:inscription-yalign}
+  @see-class{gtk:label}
+  @see-class{gtk:column-view}")
 
-;;;final class Gtk.Inscription : Gtk.Widget
-;;;  implements Gtk.Accessible, Gtk.Buildable, Gtk.ConstraintTarget {
-;;;  /* No available fields */
-;;;}
-;;;GtkInscription is a widget to show text in a predefined area.
+;;; ----------------------------------------------------------------------------
+;;; Property and Accessor Details
+;;; ----------------------------------------------------------------------------
 
-;;;You likely want to use GtkLabel instead as this widget is intended only for a small subset of use cases. The main scenario envisaged is inside lists such as GtkColumnView.
+;;; --- inscription-attributes -------------------------------------------------
 
-;;;While a GtkLabel sizes itself depending on the text that is displayed, GtkInscription is given a size and inscribes the given text into that space as well as it can.
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "attributes" 'inscription) t)
+ "The @code{attributes} property of type @class{pango:attr-list} (Read / Write)
+  @br{}
+  A list of style attributes to apply to the text of the inscription.")
 
-;;;Users of this widget should take care to plan behaviour for the common case where the text doesn’t fit exactly in the allocated space.
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-attributes)
+      "Accessor"
+      (documentation 'inscription-attributes 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-attributes object) => attrs}
+  @syntax[]{(setf (gtk:inscription-attributes object) attrs)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[attrs]{a @class{pango:attr-list} instance}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{attributes} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+  The @fun{gtk:inscription-attributes} function gets the attribute list of the
+  inscription. The @setf{gtk:inscription-attributes} function applies attributes
+  to the inscription text. These attributes will not be evaluated for sizing the
+  inscription.
 
-;;;Available since: 4.8
+  Since 4.8
+  @see-class{gtk:inscription}
+  @see-class{pango:attr-list}")
 
+;;; --- inscription-markup -----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "markup" 'inscription) t)
+ "The @code{markup} property of type @code{:string} (Write) @br{}
+  Utility property that sets both the @slot[gtk:inscription]{text} and
+  @slot[gtk:inscription]{attributes} properties, mainly intended for use in
+  @class{gtk:builder} UI files to ease translation support and bindings. This
+  function uses the @fun{pango:parse-markup} function to parse the markup into
+  text and attributes. The markup must be valid. If you cannot ensure that,
+  consider using the @fun{pango:parse-markup} function and setting the two
+  properties yourself.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-markup)
+      "Accessor"
+      (documentation 'inscription-markup 'function)
+ "@version{2023-10-18}
+  @syntax[]{(setf (gtk:inscription-markup object) attrs)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[markup]{a string with the markup to display}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{markup} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+  The @setf{gtk:inscription-markup} function is an utility function to set the
+  text and attributes to be displayed.
+
+  Since 4.8
+  @see-class{gtk:inscription}")
+
+;;; --- inscription-min-chars --------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "min-chars" 'inscription) t)
+ "The @code{min-chars} property of type @code{:uint} (Read / Write) @br{}
+  The number of characters that should fit into the inscription at minimum. This
+  influences the requested width, not the width actually given to the widget,
+  which might turn out to be larger. Note that this is an approximate character
+  width, so some characters might be wider and some might be thinner, so do not
+  expect the number of characters to exactly match. If you set this property to
+  0, the inscription will not request any width at all and its width will be
+  determined entirely by its surroundings. @br{}
+  Default value: 3")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-min-chars)
+      "Accessor"
+      (documentation 'inscription-min-chars 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-min-chars object) => chars}
+  @syntax[]{(setf (gtk:inscription-min-chars object) chars)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[chars]{an integer with the minimum number of characters that should
+    fit, approximately}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{min-chars} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}")
+
+;;; --- inscription-min-lines --------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "min-lines" 'inscription) t)
+ "The @code{min-lines} property of type @code{:uint} (Read / Write) @br{}
+  The number of lines that should fit into the inscription at minimum. This
+  influences the requested height, not the height actually given to the widget,
+  which might turn out to be larger. Note that this is an approximate line
+  height, so if the text uses things like fancy Unicode or attribute that
+  influence the height, the text might not fit. If you set this property to 0,
+  the inscription will not request any height at all and its height will be
+  determined entirely by its surroundings. @br{}
+  Default value: 1")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-min-lines)
+      "Accessor"
+      (documentation 'inscription-min-lines 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-min-lines object) => lines}
+  @syntax[]{(setf (gtk:inscription-min-lines object) lines)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[lines]{an integer with the minimum number of lines that should fit,
+    approximately}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{min-lines} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}")
+
+;;; --- inscription-nat-chars --------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "nat-chars" 'inscription) t)
+ "The @code{nat-chars} property of type @code{:uint} (Read / Write) @br{}
+  The number of characters that should ideally fit into the inscription. This
+  influences the requested width, not the width actually given to the widget.
+  The widget might turn out larger as well as smaller. If this property is set
+  to a value smaller than the @slot[gtk:inscription]{min-chars} property, that
+  value will be used. In particular, for the default value of 0, this will
+  always be the case. @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-nat-chars)
+      "Accessor"
+      (documentation 'inscription-nat-chars 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-nat-chars object) => chars}
+  @syntax[]{(setf (gtk:inscription-nat-chars object) chars)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[chars]{an integer with the number of characters that should ideally
+    fit}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{nat-chars} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}")
+
+;;; --- inscription-nat-lines --------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "nat-lines" 'inscription) t)
+ "The @code{nat-lines} property of type @code{:uint} (Read / Write) @br{}
+  The number of lines that should ideally fit into the inscription. This
+  influences the requested height, not the height actually given to the widget.
+  The widget might turn out larger as well as smaller. If this property is set
+  to a value smaller than the @slot[gtk:inscription]{min-lines} property, that
+  value will be used. In particular, for the default value of 0, this will
+  always be the case. @br{}
+  Default value: 0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-nat-lines)
+      "Accessor"
+      (documentation 'inscription-nat-lines 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-nat-lines object) => lines}
+  @syntax[]{(setf (gtk:inscription-nat-lines object) lines)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[lines]{an integer with the number of lines that should ideally fit}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{nat-lines} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}")
+
+;;; --- inscription-text -------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "text" 'inscription) t)
+ "The @code{text} property of type @code{:string} (Read / Write) @br{}
+  The displayed text. @br{}
+  Default value: @code{nil}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-text)
+      "Accessor"
+      (documentation 'inscription-text 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-text object) => text}
+  @syntax[]{(setf (gtk:inscription-text object) text)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[lines]{a string with the text to display}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{text} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}")
+
+;;; --- inscription-text-overflow ----------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "text-overflow" 'inscription) t)
+ "The @code{text-overflow} property of type @symbol{gtk:inscription-overflow}
+  (Read / Write) @br{}
+  The overflow method to use for the text. @br{}
+  Default value: @code{:clip}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-text-overflow)
+      "Accessor"
+      (documentation 'inscription-text-overflow 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-text-overflow object) => setting}
+  @syntax[]{(setf (gtk:inscription-text-overflow object) setting)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[setting]{a @symbol{gtk:inscription-overflow} value}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{text-overflow} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}
+  @see-symbol{gtk:inscription-overflow}")
+
+;;; --- inscription-wrap-mode --------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "wrap-mode" 'inscription) t)
+ "The @code{wrap-mode} property of type @symbol{pango:wrap-mode} (Read / Write)
+  @br{}
+  Controls how the line wrapping is done. Note that unlike the @class{gtk:label}
+  widget, the default here is the @code{:word-char} value. @br{}
+  Default value: @code{:word-char}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-wrap-mode)
+      "Accessor"
+      (documentation 'inscription-wrap-mode 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-wrap-mode object) => mode}
+  @syntax[]{(setf (gtk:inscription-wrap-mode object) mode)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[mode]{a @symbol{pango:wrap-mode} value}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{wrap-mode} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}
+  @see-symbol{pango:wrap-mode}")
+
+;;; --- inscription-xalign -----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "xalign" 'inscription) t)
+ "The @code{xalign} property of type @code{:float} (Read / Write) @br{}
+  The horizontal alignment of the text inside the allocated size. Compare this
+  to the @slot[gtk:widget]{halign} property, which determines how the
+  size allocation of the inscription is positioned in the available space. @br{}
+  Default value: 0.0")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-xalign)
+      "Accessor"
+      (documentation 'inscription-xalign 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-xalign object) => xalign}
+  @syntax[]{(setf (gtk:inscription-xalign object) xalign)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[xalign]{a single float with the xalign value, between 0 and 1}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{xalign} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}")
+
+;;; --- inscription-yalign -----------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "yalign" 'inscription) t)
+ "The @code{yalign} property of type @code{:float} (Read / Write) @br{}
+  The vertical alignment of the text inside the allocated size. Compare this
+  to the @slot[gtk:widget]{valign} property, which determines how the
+  size allocation of the inscription is positioned in the available space. @br{}
+  Default value: 0.5")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'inscription-yalign)
+      "Accessor"
+      (documentation 'inscription-yalign 'function)
+ "@version{2023-10-18}
+  @syntax[]{(gtk:inscription-yalign object) => yalign}
+  @syntax[]{(setf (gtk:inscription-yalign object) yalign)}
+  @argument[object]{a @class{gtk:inscription} widget}
+  @argument[yalign]{a single float with the yalign value, between 0 and 1}
+  @begin{short}
+    Accessor of the @slot[gtk:inscription]{yalign} slot of the
+    @class{gtk:inscription} class.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_inscription_new
-;;;
-;;; Creates a new GtkInscription with the given text.
-;;;
-;;; Since 4.8
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline inscription-new))
 
 (defun inscription-new (text)
+ #+liber-documentation
+ "@version{2023-10-18}
+  @argument[text]{a string with the text to display}
+  @return{A new @class{gtk:inscription} widget.}
+  @begin{short}
+    Creates a new @class{gtk:inscription} widget with the given text.
+  @end{short}
+
+  Since 4.8
+  @see-class{gtk:inscription}"
   (make-instance 'inscription
                  :text (if text text (cffi:null-pointer))))
 
 (export 'inscription-new)
 
-;;;Instance methods
-;;;gtk_inscription_get_attributes
-;;;Gets the inscription’s attribute list.
-
-;;;since: 4.8
-
-;;;gtk_inscription_get_min_chars
-;;;Gets the min-chars of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_get_min_lines
-;;;Gets the min-lines of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_get_nat_chars
-;;;Gets the nat-chars of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_get_nat_lines
-;;;Gets the nat-lines of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_get_text
-;;;Gets the text that is displayed.
-
-;;;since: 4.8
-
-;;;gtk_inscription_get_text_overflow
-;;;Gets the inscription’s overflow method.
-
-;;;since: 4.8
-
-;;;gtk_inscription_get_wrap_mode
-;;;Returns line wrap mode used by the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_get_xalign
-;;;Gets the xalign of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_get_yalign
-;;;Gets the yalign of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_attributes
-;;;Apply attributes to the inscription text.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_markup
-;;;Utility function to set the text and attributes to be displayed.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_min_chars
-;;;Sets the min-chars of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_min_lines
-;;;Sets the min-lines of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_nat_chars
-;;;Sets the nat-chars of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_nat_lines
-;;;Sets the nat-lines of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_text
-;;;Sets the text to be displayed.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_text_overflow
-;;;Sets what to do when the text doesn’t fit.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_wrap_mode
-;;;Controls how line wrapping is done.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_xalign
-;;;Sets the xalign of the inscription.
-
-;;;since: 4.8
-
-;;;gtk_inscription_set_yalign
-;;;Sets the yalign of the inscription.
-
-;;;since: 4.8
-
-;;;[+]
-;;;Methods inherited from GtkWidget (162)
-;;;[+]
-;;;Methods inherited from GObject (43)
-;;;[+]
-;;;Methods inherited from GtkAccessible (18)
-;;;[+]
-;;;Methods inherited from GtkBuildable (1)
-;;;[−]
-;;;Properties
-;;;Gtk.Inscription:attributes
-;;;A list of style attributes to apply to the text of the inscription.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:markup
-;;;Utility property that sets both the GtkInscription:text and GtkInscription:attributes properties, mainly intended for use in GtkBuilder ui files to ease translation support and bindings.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:min-chars
-;;;The number of characters that should fit into the inscription at minimum.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:min-lines
-;;;The number of lines that should fit into the inscription at minimum.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:nat-chars
-;;;The number of characters that should ideally fit into the inscription.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:nat-lines
-;;;The number of lines that should ideally fit into the inscription.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:text
-;;;The displayed text.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:text-overflow
-;;;The overflow method to use for the text.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:wrap-mode
-;;;Controls how the line wrapping is done.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:xalign
-;;;The horizontal alignment of the text inside the allocated size.
-
-;;;since: 4.8
-
-;;;Gtk.Inscription:yalign
-;;;The vertical alignment of the text inside the allocated size.
-
-;;;since: 4.8
-
-;;; --- gtk4.inscription.lisp --------------------------------------------------
+;;; --- End of file gtk4.inscription.lisp --------------------------------------

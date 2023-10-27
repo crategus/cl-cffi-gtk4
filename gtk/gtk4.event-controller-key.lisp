@@ -145,7 +145,7 @@ lambda (controller state)    :run-last
 
 (defun event-controller-key-new ()
  #+liber-documentation
- "@version{#2022-8-23}
+ "@version{2023-10-18}
   @return{The new @class{gtk:event-controller-key} object.}
   @short{Creates a new event controller that will handle key events.}
   @see-class{gtk:event-controller-key}"

@@ -56,20 +56,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkUriLauncher
-
-;;;final class Gtk.UriLauncher : GObject.Object
-;;;{
-;;;  /* No available fields */
-;;;}
-;;;A GtkUriLauncher object collects the arguments that are needed to open a uri with an application.
-
-;;;Depending on system configuration, user preferences and available APIs, this may or may not show an app chooser dialog or launch the default application right away.
-
-;;;The operation is started with the gtk_uri_launcher_launch() function. This API follows the GIO async pattern, and the result can be obtained by calling gtk_uri_launcher_launch_finish().
-
-;;;To launch a file, use GtkFileLauncher.
-
-;;;Available since: 4.10
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkUriLauncher" uri-launcher
@@ -81,54 +67,71 @@
     uri-launcher-uri
     "uri" "gchararray" t t)))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_uri_launcher_set_uri
-;;;
-;;; Sets the uri that will be opened.
-;;;
-;;; Since 4.10
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation 'uri-launcher 'type)
+ "@version{#2023-10-19}
+  @begin{short}
+    A @class{gtk:uri-launcher} object collects the arguments that are needed to
+    open a URI with an application.
+  @end{short}
+  Depending on system configuration, user preferences and available APIs, this
+  may or may not show an app chooser dialog or launch the default application
+  right away.
+
+  The operation is started with the @fun{gtk:uri-launcher-launch} function. This
+  API follows the GIO async pattern, and the result can be obtained by calling
+  the @fun{gtk:uri-launcher-launch-finish} function.
+
+  To launch a file, use the @class{gtk:file-launcher} object.
+
+  Since 4.10
+  @see-class{gtk:file-launcher}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
-;;; ---------------------------------------------------------------------------- 
-
-;;; ----------------------------------------------------------------------------
-;;; Gtk.UriLauncher:uri
-;;;
-;;; The uri to launch.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_uri_launcher_get_uri
-;;;
-;;; Gets the uri that will be opened.
-;;;
-;;; Since 4.10
-;;; ----------------------------------------------------------------------------
+;;; --- uri-launcher-uri -------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_uri_launcher_set_uri
-;;;
-;;; Sets the uri that will be opened.
-;;;
-;;; Since 4.10
-;;; ----------------------------------------------------------------------------
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "uri" 'uri-launcher) t)
+ "The @code{uri} property of type @code{:string} (Read / Write) @br{}
+  The URI to launch.")
 
+#+liber-documentation
+(setf (liber:alias-for-function 'uri-launcher-uri)
+      "Accessor"
+      (documentation 'uri-launcher-uri 'function)
+ "@version{#2023-10-12}
+  @syntax[]{(gtk:uri-launcher-uri object) => uri}
+  @syntax[]{(setf (gtk:uri-launcher-uri object) uri)}
+  @argument[object]{a @class{gtk:uri-launcher} object}
+  @argument[uri]{a string with the URI}
+  @begin{short}
+    Accessor of the @slot[gtk:uri-launcher]{uri} slot of the
+    @class{gtk:uri-launcher} class.
+  @end{short}
+  The @fun{gtk:uri-launcher-uri} function gets the URI that will be opened.
+  The @setf{gtk:uri-launcher-uri} function sets the URI.
+
+  Since 4.10
+  @see-class{gtk:uri-launcher}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_uri_launcher_new
-;;;
-;;; Creates a new GtkUriLauncher object.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline uri-launcher-new))
 
 (defun uri-launcher-new (uri)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[uri]{a string with the URI to open}
+  @return{The new @class{gtk:uri-launcher} object.}
+  @short{Creates a new @class{gtk:uri-launcher} object.}
+
+  Since 4.10
+  @see-class{gtk:uri-launcher}"
   (make-instance 'uri-launcher
                  :uri uri))
 
@@ -136,10 +139,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_uri_launcher_launch
-;;;
-;;; Launch an application to open the uri.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_uri_launcher_launch" %uri-launcher-launch) :void
@@ -150,6 +149,27 @@
   (data :pointer))
 
 (defun uri-launcher-launch (launcher parent cancellable func)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[launcher]{a @class{gtk:uri-launcher} object}
+  @argument[parent]{a parent @class{gtk:window} widget}
+  @argument[cancellable]{a @class{g:cancellable} object to cancel the operation}
+  @argument[func]{a @symbol{g:async-ready-callback} callback function to call
+    when the operation is complete}
+  @begin{short}
+    Launch an application to open the URI.
+  @end{short}
+  This may present an app chooser dialog to the user.
+
+  The callback will be called when the operation is completed. It should call
+  the @fun{gtk:uri-launcher-launch-finish} function to obtain the result.
+
+  Since 4.10
+  @see-class{gtk:uri-launcher}
+  @see-class{gtk:window}
+  @see-class{g:cancellable}
+  @see-symbol{g:async-ready-callback}
+  @see-function{gtk:uri-launcher-launch-finish}"
   (let ((ptr (glib:allocate-stable-pointer func)))
     (%uri-launcher-launch launcher
                           parent
@@ -161,10 +181,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_uri_launcher_launch_finish
-;;;
-;;; Finishes the gtk_uri_launcher_launch() call and returns the result.
-;;;
-;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_uri_launcher_launch-finish" %uri-launcher-launch-finish)
@@ -174,6 +190,20 @@
   (err :pointer))
 
 (defun uri-launcher-launch-finish (launcher result)
+ #+liber-documentation
+ "@version{#2023-10-19}
+  @argument[launcher]{a @class{gtk:uri-launcher} object}
+  @argument[result]{a @class{g:async-result} object with the result}
+  @return{@em{True} if an application was launched, or @em{false} on error}
+  @begin{short}
+    Finishes the the @fun{gtk:uri-launcher-launch} function call and returns
+    the result.
+  @end{short}
+
+  Since 4.10
+  @see-class{gtk:uri-launcher}
+  @see-class{g:async-result}
+  @see-function{gtk:uri-launcher-launch}"
   (glib:with-ignore-g-error (err)
     (%uri-launcher-launch-finish launcher result err)))
 

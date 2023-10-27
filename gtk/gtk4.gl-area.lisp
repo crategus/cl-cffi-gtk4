@@ -508,63 +508,61 @@ lambda (area width height)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gl_area_make_current ()
-;;;
-;;; void
-;;; gtk_gl_area_make_current (GtkGLArea *area);
-;;;
-;;; Ensures that the GdkGLContext used by area is associated with the GtkGLArea.
-;;;
-;;; This function is automatically called before emitting the “render” signal,
-;;; and doesn't normally need to be called by application code.
-;;;
-;;; area :
-;;;     a GtkGLArea
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gl_area_make_current" gl-area-make-current) :void
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[area]{a @class{gtk:gl-area} object}
+  @begin{short}
+    Ensures that the @class{gdk:gl-context} object used by @arg{area} is
+    associated with the the @class{gtk:gl-area} object.
+  @end{short}
+  This function is automatically called before emitting the @code{\"render\"}
+  signal, and does not normally need to be called by application code.
+  @see-class{gtk:gl-area}"
   (area (g:object gl-area)))
 
 (export 'gl-area-make-current)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gl_area_queue_render ()
-;;;
-;;; void
-;;; gtk_gl_area_queue_render (GtkGLArea *area);
-;;;
-;;; Marks the currently rendered data (if any) as invalid, and queues a redraw
-;;; of the widget, ensuring that the “render” signal is emitted during the draw.
-;;;
-;;; This is only needed when the gtk_gl_area_set_auto_render() has been called
-;;; with a FALSE value. The default behaviour is to emit “render” on each draw.
-;;;
-;;; area :
-;;;     a GtkGLArea
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gl_area_queue_render" gl-area-queue-render) :void
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[area]{a @class{gtk:gl-area} object}
+  @begin{short}
+    Marks the currently rendered data (if any) as invalid, and queues a redraw
+    of the widget, ensuring that the @code{\"render\"} signal is emitted during
+    the draw.
+  @end{short}
+  This is only needed when the @fun{gtk:gl-area-auto-render} function has been
+  called with a @em{false} value. The default behaviour is to emit the
+  @code{\"render\"} signal on each draw.
+  @see-class{gtk:gl-area}
+  @see-function{gtk:gl-area-auto-render}"
   (area (g:object gl-area)))
 
 (export 'gl-area-queue-render)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_gl_area_attach_buffers ()
-;;;
-;;; void
-;;; gtk_gl_area_attach_buffers (GtkGLArea *area);
-;;;
-;;; Ensures that the area framebuffer object is made the current draw and read
-;;; target, and that all the required buffers for the area are created and bound
-;;; to the framebuffer.
-;;;
-;;; This function is automatically called before emitting the “render” signal,
-;;; and doesn't normally need to be called by application code.
-;;;
-;;; area :
-;;;     a GtkGLArea
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gl_area_attach_buffers" gl-area-attach-buffers) :void
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @argument[area]{a @class{gtk:gl-area} object}
+  @begin{short}
+    Ensures that the area framebuffer object is made the current draw and read
+    target, and that all the required buffers for the area are created and bound
+    to the framebuffer.
+  @end{short}
+  This function is automatically called before emitting the @code{\"render\"}
+  signal, and does not normally need to be called by application code.
+  @see-class{gtk:gl-area}"
   (area (g:object gl-area)))
 
 (export 'gl-area-attach-buffers)
@@ -613,29 +611,12 @@ lambda (area width height)    :run-last
 (cffi:defcfun ("gtk_gl_area_get_error" gl-area-error) (g:boxed g:error)
   (area (g:object gl-area)))
 
+#+nil
 (export 'gl-area-error)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_gl_area_get_required_version ()
 ;;; gtk_gl_area_set_required_version ()
-;;;
-;;; void
-;;; gtk_gl_area_set_required_version (GtkGLArea *area,
-;;;                                   int major,
-;;;                                   int minor);
-;;;
-;;; Sets the required version of OpenGL to be used when creating the context for
-;;; the widget.
-;;;
-;;; This function must be called before the area has been realized.
-;;;
-;;; area :
-;;;     a GtkGLArea
-;;;
-;;; major :
-;;;     the major version
-;;;
-;;; minor :
-;;;     the minor version
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf gl-area-required-version) (value area)
@@ -646,27 +627,6 @@ lambda (area width height)    :run-last
                           :int minor)
     (values major minor)))
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_gl_area_get_required_version ()
-;;;
-;;; void
-;;; gtk_gl_area_get_required_version (GtkGLArea *area,
-;;;                                   int *major,
-;;;                                   int *minor);
-;;;
-;;; Retrieves the required version of OpenGL set using
-;;; gtk_gl_area_set_required_version().
-;;;
-;;; area :
-;;;     a GtkGLArea
-;;;
-;;; major :
-;;;     return location for the required major version.
-;;;
-;;; minor :
-;;;     return location for the required minor version.
-;;; ----------------------------------------------------------------------------
-
 (cffi:defcfun ("gtk_gl_area_get_required_version" %gl-area-required-version)
     :void
   (area (g:object gl-area))
@@ -674,6 +634,21 @@ lambda (area width height)    :run-last
   (minor (:pointer :int)))
 
 (defun gl-area-required-version (area)
+ #+liber-documentation
+ "@version{#2023-10-21}
+  @syntax[]{(gtk:gl-area-required-version area) => major, minor}
+  @syntax[]{(setf (gtk:gl-area-required-version area) '(major minor))}
+  @argument[area]{a @class{gtk:gl-area} object}
+  @argument[major]{an integer with the required major version}
+  @argument[minor]{an integer with the required minor version}
+  @begin{short}
+    The @fun{gtk:gl-area-required-version} function retrieves the required
+    version of OpenGL.
+  @end{short}
+  The @setf{gtk:gl-area-required-version} function sets the required version of
+  OpenGL to be used when creating the context for the widget. This function must
+  be called before the area has been realized.
+  @see-class{gtk:gl-area}"
   (cffi:with-foreign-objects ((major :int) (minor :int))
     (%gl-area-required-version area major minor)
     (values (cffi:mem-ref major :int) (cffi:mem-ref minor :int))))
