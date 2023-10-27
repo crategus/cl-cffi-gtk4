@@ -1,5 +1,5 @@
 ;;; ----------------------------------------------------------------------------
-;;; gsk.renderer.lisp
+;;; gsk4.renderer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GSK 4 Reference Manual
 ;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
@@ -64,17 +64,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskRenderer
-;;;
-;;; GskRenderer is a class that renders a scene graph defined via a tree of
-;;; GskRenderNode instances.
-;;;
-;;; Typically you will use a GskRenderer instance to repeatedly call
-;;; gsk_renderer_render() to update the contents of its associated GdkSurface.
-;;;
-;;; It is necessary to realize a GskRenderer instance using
-;;; gsk_renderer_realize() before calling gsk_renderer_render(), in order to
-;;; create the appropriate windowing system resources needed to render the
-;;; scene.
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GskRenderer" renderer
@@ -89,70 +78,141 @@
     renderer-surface
     "surface" "GdkSurface" t nil)))
 
+#+liber-documentation
+(setf (documentation 'renderer 'type)
+ "@version{#2023-10-22}
+  @begin{short}
+    The @class{gsk:renderer} class is a class that renders a scene graph
+    defined via a tree of @class{gsk:render-node} instances.
+  @end{short}
+  Typically you will use a @class{gsk:renderer} instance to repeatedly call the
+  @fun{gsk:renderer-render} function to update the contents of its associated
+  @class{gdk:surface} object.
+
+  It is necessary to realize a @class{gsk:renderer} instance using the
+  @fun{gsk:renderer-realize} function before calling the
+  @fun{gsk:renderer-render} function, in order to create the appropriate
+  windowing system resources needed to render the scene.
+  @see-constructor{gsk:renderer-new-for-surface}
+  @see-slot{gsk:renderer-realized}
+  @see-slot{gsk:renderer-surface}
+  @see-class{gdk:surface}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; The “realized” property
-;;;
-;;;  “realized”                 gboolean
-;;;
-;;; The renderer has been associated with a surface.
-;;;
-;;; Owner: GskRenderer
-;;;
-;;; Flags: Read
-;;;
-;;; Default value: FALSE
-;;; ----------------------------------------------------------------------------
+;;; --- renderer-realized ------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "realized" 'renderer) t)
+ "The @code{realized} property of type @code{:boolean} (Read) @br{}
+  Whether the renderer has been associated with a surface or draw context. @br{}
+  Default value : @em{false}")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'renderer-realized)
+      "Accessor"
+      (documentation 'renderer-realized 'function)
+ "@version{#2023-10-22}
+  @syntax[]{(gsk:renderer-realized object) => realized}
+  @argument[object]{a @class{gsk:renderer} instance}
+  @argument[realized]{a boolean whether the renderer has been associated with
+    a surface or draw context}
+  @begin{short}
+    Accessor of the @slot[gsk:renderer]{realized} slot of the
+    @class{gsk:renderer} class.
+  @end{short}
+  @see-class{gsk:renderer}")
+
+;;; --- renderer-surface -------------------------------------------------------
+
+#+liber-documentation
+(setf (documentation (liber:slot-documentation "surface" 'renderer) t)
+ "The @code{surface} property of type @class{gdk:surface} (Read) @br{}
+  The surface associated with renderer.")
+
+#+liber-documentation
+(setf (liber:alias-for-function 'renderer-surface)
+      "Accessor"
+      (documentation 'renderer-surface 'function)
+ "@version{#2023-10-22}
+  @syntax[]{(gsk:renderer-surface object) => surface}
+  @argument[object]{a @class{gsk:renderer} instance}
+  @argument[surface]{a @class{gdk:surface} object}
+  @begin{short}
+    Accessor of the @slot[gsk:renderer]{surface} slot of the
+    @class{gsk:renderer} class.
+  @end{short}
+  The @fun{gsk:renderer-surface} function retrieves the @class{gdk:surface}
+  object set using the @fun{gsk:renderer-realize} function. If the renderer has
+  not been realized yet, @code{nil} will be returned.
+  @see-class{gsk:renderer}
+  @see-class{gdk:surface}")
 
 ;;; ----------------------------------------------------------------------------
-;;; The “surface” property
-;;;
-;;;  “surface”                  GdkSurface *
-;;;
-;;; The surface associated to the renderer.
-;;;
-;;; Owner: GskRenderer
-;;;
-;;; Flags: Read
+;;; gsk_renderer_new_for_surface ()
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_renderer_new_for_surface" renderer-new-for-surface)
+    (g:object renderer)
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[surface]{a @class{gdk:surface} object}
+  @return{A new @class{gsk:renderer} instance.}
+  @begin{short}
+    Creates an appropriate @class{gsk:renderer} instance for the given
+    @arg{surface}.
+  @end{short}
+  If the @code{GSK_RENDERER} environment variable is set, GSK will try that
+  renderer first, before trying the backend-specific default. The ultimate
+  fallback is the Cairo renderer.
+
+  The renderer will be realized before it is returned.
+  @see-class{gsk:renderer}
+  @see-class{gdk:surface}"
+  (surface (g:object gdk:surface)))
+
+(export 'renderer-new-for-surface)
+
 ;;; ----------------------------------------------------------------------------
-;;; gsk_renderer_get_surface ()
-;;;
-;;; GdkSurface *
-;;; gsk_renderer_get_surface (GskRenderer *renderer);
-;;;
-;;; Retrieves the GdkSurface set using gsk_renderer_realize(). If the renderer
-;;; has not been realized yet, NULL will be returned.
-;;;
-;;; renderer :
-;;;     a GskRenderer
-;;;
-;;; Returns :
-;;;     a GdkSurface.
+;;; gsk_gl_renderer_new ()
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_gl_renderer_new" gl-renderer-new) (g:object renderer)
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @return{A new GL @class{gsk:renderer} instance.}
+  @begin{short}
+    Creates a new @class{gsk:renderer} instance using OpenGL.
+  @end{short}
+  This is the default renderer used by GTK.
+  @see-class{gsk:renderer}")
+
+(export 'gl-renderer-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_cairo_renderer_new ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_cairo_renderer_new" cairo-renderer-new) (g:object renderer)
+ #+liber-documentation
+ "@version{#2023-10-23}
+  @return{A new Cairo @class{gsk:renderer} instance.}
+  @begin{short}
+    Creates a new @class{gsk:renderer} instance using Cairo.
+  @end{short}
+  The Cairo renderer is the fallback renderer drawing in ways similar to how
+  GTK 3 drew its content. Its primary use is as comparison tool.
+
+  The Cairo renderer is incomplete. It cannot render 3D transformed content and
+  will instead render an error marker. Its usage should be avoided.
+  @see-class{gsk:renderer}")
+
+(export 'cairo-renderer-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_renderer_realize ()
-;;;
-;;; gboolean
-;;; gsk_renderer_realize (GskRenderer *renderer,
-;;;                       GdkSurface *surface,
-;;;                       GError **error);
-;;;
-;;; Creates the resources needed by the renderer to render the scene graph.
-;;;
-;;; renderer :
-;;;     a GskRenderer
-;;;
-;;; surface :
-;;;     the GdkSurface renderer will be used on
-;;;
-;;; error :
-;;;     return location for an error
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_renderer_realize" %renderer-realize) :boolean
@@ -161,6 +221,15 @@
   (err :pointer))
 
 (defun renderer-realize (renderer surface)
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[renderer]{a @class{gsk:renderer} instance}
+  @argument[surface]{a @class{gdk:surface} object}
+  @begin{short}
+    Creates the resources needed by the renderer to render the scene graph.
+  @end{short}
+  @see-class{gsk:renderer}
+  @see-class{gdk:surface}"
   (glib:with-g-error (err)
     (%renderer-realize renderer surface err)))
 
@@ -168,71 +237,62 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_renderer_unrealize ()
-;;;
-;;; void
-;;; gsk_renderer_unrealize (GskRenderer *renderer);
-;;;
-;;; Releases all the resources created by gsk_renderer_realize().
-;;;
-;;; renderer :
-;;;     a GskRenderer
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_renderer_unrealize" renderer-unrealize) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[renderer]{a @class{gsk:renderer} instance}
+  @begin{short}
+    Releases all the resources created by the @fun{gsk:renderer-realize}
+    function.
+  @end{short}
+  @see-class{gsk:renderer}
+  @see-function{gsk:renderer-realize}"
   (renderer (g:object renderer)))
 
 (export 'renderer-unrealize)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_renderer_is_realized ()
-;;;
-;;; gboolean
-;;; gsk_renderer_is_realized (GskRenderer *renderer);
-;;;
-;;; Checks whether the renderer is realized or not.
-;;;
-;;; renderer :
-;;;     a GskRenderer
-;;;
-;;; Returns :
-;;;     TRUE if the GskRenderer was realized, and FALSE otherwise
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_renderer_is_realized" renderer-is-realized) :boolean
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[renderer]{a @class{gsk:renderer} instance}
+  @return{@em{True} if @arg{renderer} was realized, and @em{false} otherwise.}
+  @short{Checks whether the renderer is realized or not.}
+  @see-class{gsk:renderer}"
   (renderer (g:object renderer)))
 
 (export 'renderer-is-realized)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_renderer_render ()
-;;;
-;;; void
-;;; gsk_renderer_render (GskRenderer *renderer,
-;;;                      GskRenderNode *root,
-;;;                      const cairo_region_t *region);
-;;;
-;;; Renders the scene graph, described by a tree of GskRenderNode instances,
-;;; ensuring that the given region gets redrawn.
-;;;
-;;; Renderers must ensure that changes of the contents given by the root node as
-;;; well as the area given by region are redrawn. They are however free to not
-;;; redraw any pixel outside of region if they can guarantee that it didn't
-;;; change.
-;;;
-;;; The renderer will acquire a reference on the GskRenderNode tree while the
-;;; rendering is in progress.
-;;;
-;;; renderer :
-;;;     a GskRenderer
-;;;
-;;; root :
-;;;     a GskRenderNode
-;;;
-;;; region :
-;;;     the cairo_region_t that must be redrawn or NULL for the whole window.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_renderer_render" renderer-render) :void
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[renderer]{a @class{gsk:renderer} instance}
+  @argument[root]{a @class{gsk:render-node} instance}
+  @argument[region]{a @symbol{cairo:context-t} instance with the region that
+    must be redrawn or @code{nil} for the whole window}
+  @begin{short}
+    Renders the scene graph, described by a tree of @class{gsk:render-node}
+    instances, ensuring that the given region gets redrawn.
+  @end{short}
+  Renderers must ensure that changes of the contents given by the root node as
+  well as the area given by @arg{region} are redrawn. They are however free to
+  not redraw any pixel outside of region if they can guarantee that it did not
+  change.
+
+  The renderer will acquire a reference on the @class{gsk:render-node} tree
+  while the rendering is in progress.
+  @see-class{gsk:renderer}
+  @see-class{gsk:render-node}
+  @see-symbol{cairo:region-t}"
   (renderer (g:object renderer))
   (root (g:object render-node))
   (region (:pointer (:struct cairo:region-t))))
@@ -241,107 +301,36 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_renderer_render_texture ()
-;;;
-;;; GdkTexture *
-;;; gsk_renderer_render_texture (GskRenderer *renderer,
-;;;                              GskRenderNode *root,
-;;;                              const graphene_rect_t *viewport);
-;;;
-;;; Renders the scene graph, described by a tree of GskRenderNode instances, to
-;;; a GdkTexture.
-;;;
-;;; The renderer will acquire a reference on the GskRenderNode tree while the
-;;; rendering is in progress.
-;;;
-;;; If you want to apply any transformations to root , you should put it into a
-;;; transform node and pass that node instead.
-;;;
-;;; renderer :
-;;;     a realized GskRenderer
-;;;
-;;; root :
-;;;     a GskRenderNode
-;;;
-;;; viewport :
-;;;     the section to draw or NULL to use root 's bounds.
-;;;
-;;; Returns :
-;;;     a GdkTexture with the rendered contents of root .
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_renderer_render_texture" renderer-render-texture)
     (g:object gdk:texture)
+ #+liber-documentation
+ "@version{#2023-10-22}
+  @argument[renderer]{a @class{gsk:renderer} instance}
+  @argument[root]{a @class{gsk:render-node} instance}
+  @argument[viewport]{a @symbol{graphene:rect-t} instance with the section to
+    draw or @code{nil} to use the bounds of @arg{root}}
+  @return{A @class{gdk:texture} instance with the rendered contents of
+    @arg{root}.}
+  @begin{short}
+    Renders the scene graph, described by a tree of @class{gsk:render-node}
+    instances, to a @class{gdk:texture} instance.
+  @end{short}
+  The renderer will acquire a reference on the @class{gsk:render-node} tree
+  while the rendering is in progress.
+
+  If you want to apply any transformations to @arg{root}, you should put it
+  into a transform node and pass that node instead.
+  @see-class{gsk:renderer}
+  @see-class{gsk:render-node}
+  @see-class{gdk:texture}
+  @see-symbol{graphene:rect-t}"
   (renderer (g:object renderer))
   (root (g:object render-node))
   (viewport (:pointer (:struct graphene:rect-t))))
 
 (export 'renderer-render-texture)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_renderer_new_for_surface ()
-;;;
-;;; GskRenderer *
-;;; gsk_renderer_new_for_surface (GdkSurface *surface);
-;;;
-;;; Creates an appropriate GskRenderer instance for the given surface .
-;;;
-;;; If the GSK_RENDERER environment variable is set, GSK will try that renderer
-;;; first, before trying the backend-specific default. The ultimate fallback is
-;;; the cairo renderer.
-;;;
-;;; The renderer will be realized before it is returned.
-;;;
-;;; surface :
-;;;     a GdkSurface
-;;;
-;;; Returns :
-;;;     a GskRenderer.
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_renderer_new_for_surface" renderer-new-for-surface)
-    (g:object renderer)
-  (surface (g:object gdk:surface)))
-
-(export 'renderer-new-for-surface)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_gl_renderer_new ()
-;;;
-;;; GskRenderer *
-;;; gsk_gl_renderer_new (void);
-;;;
-;;; Creates a new GskRenderer using OpenGL. This is the default renderer used
-;;; by GTK.
-;;;
-;;; Returns :
-;;;     a new GL renderer
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_gl_renderer_new" gl-renderer-new) (g:object renderer))
-
-(export 'gl-renderer-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_cairo_renderer_new ()
-;;;
-;;; GskRenderer *
-;;; gsk_cairo_renderer_new (void);
-;;;
-;;; Creates a new Cairo renderer.
-;;;
-;;; The Cairo renderer is the fallback renderer drawing in ways similar to how
-;;; GTK 3 drew its content. Its primary use is as comparison tool.
-;;;
-;;; The Cairo renderer is incomplete. It cannot render 3D transformed content
-;;; and will instead render an error marker. Its usage should be avoided.
-;;;
-;;; Returns :
-;;;     a new Cairo renderer.
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_cairo_renderer_new" cairo-renderer-new) (g:object renderer))
-
-(export 'cairo-renderer-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_vulkan_renderer_new ()
@@ -360,9 +349,11 @@
 ;;;     a new Vulkan renderer
 ;;; ----------------------------------------------------------------------------
 
+#+nil
 (cffi:defcfun ("gsk_vulkan_renderer_new" vulkan-renderer-new)
     (g:object renderer))
 
+#+nil
 (export 'vulkan-renderer-new)
 
 ;;; ----------------------------------------------------------------------------
@@ -383,9 +374,11 @@
 ;;;     a new Broadway renderer.
 ;;; ----------------------------------------------------------------------------
 
+#+nil
 (cffi:defcfun ("gsk_broadway_renderer_new" broadway-renderer-new)
     (g:object renderer))
 
+#+nil
 (export 'broadway-renderer-new)
 
-;;; --- End of file gsk.renderer.lisp ------------------------------------------
+;;; --- End of file gsk4.renderer.lisp -----------------------------------------

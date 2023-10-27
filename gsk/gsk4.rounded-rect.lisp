@@ -66,27 +66,40 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GskCorner
-;;;
-;;; The corner indices used by GskRoundedRect.
-;;;
-;;; GSK_CORNER_TOP_LEFT
-;;;     The top left corner
-;;;
-;;; GSK_CORNER_TOP_RIGHT
-;;;     The top right corner
-;;;
-;;; GSK_CORNER_BOTTOM_RIGHT
-;;;     The bottom right corner
-;;;
-;;; GSK_CORNER_BOTTOM_LEFT
-;;;     The bottom left corner
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcenum corner
-  :top-left
-  :top-right
-  :bottom-right
-  :bottom-left)
+(gobject:define-g-enum "GskCorner" corner
+  (:export t
+   :type-initializer "gsk_corner_get_type")
+  (:top-left 0)
+  (:top-right 1)
+  (:bottom-right 2)
+  (:bottom-left 3))
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'corner)
+      "GEnum"
+      (liber:symbol-documentation 'corner)
+ "@version{2023-10-27}
+  @begin{short}
+    The corner indices used by the @symbol{gsk:rounded-rect} instance.
+  @end{short}
+  @begin{pre}
+(gobject:define-g-enum \"GskCorner\" corner
+  (:export t
+   :type-initializer \"gsk_corner_get_type\")
+  (:top-left 0)
+  (:top-right 1)
+  (:bottom-right 2)
+  (:bottom-left 3))
+  @end{pre}
+  @begin[code]{table}
+    @entry[:top-left]{The top left corner.}
+    @entry[:top-right]{The top right corner.}
+    @entry[:bottom-right]{The bottom right corner.}
+    @entry[:bottom-left]{The bottom left corner.}
+  @end{table}
+  @see-symbol{gsk:rounded-rect}")
 
 (export 'corner)
 
@@ -109,17 +122,53 @@
 ;;; returning a GskRoundedRect will always return a normalized one.
 ;;;
 ;;; graphene_rect_t bounds;
-;;;     the bounds of the rectangle
+;;;
 ;;;
 ;;; graphene_size_t corner[4];
-;;;     the size of the 4 rounded corners
+;;;
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcstruct rounded-rect
   (bounds (:struct graphene:rect-t))
   (corner (:struct graphene:size-t) :count 4))
 
+#+liber-documentation
+(setf (liber:alias-for-symbol 'rounded-rect)
+      "CStruct"
+      (liber:symbol-documentation 'rounded-rect)
+ "@version{2023-10-27}
+  @begin{short}
+    A rectangular region with rounded corners.
+  @end{short}
+  Application code should normalize rectangles using the
+  @fun{gsk:rounded-rect-normalize} function. This function will ensure that the
+  bounds of the rectangle are normalized and ensure that the corner values are
+  positive and the corners do not overlap.
+
+  All functions taking a @symbol{gsk:rounded-rect} instance as an argument will
+  internally operate on a normalized copy. All functions returning a
+  @symbol{gsk:rounded-rect} instance will always return a normalized one.
+
+  The algorithm used for normalizing corner sizes is described in the
+  @url[https://drafts.csswg.org/css-backgrounds-3/#border-radius]{CSS specification}.
+  @begin{pre}
+(cffi:defcstruct rounded-rect
+  (bounds (:struct graphene:rect-t))
+  (corner (:struct graphene:size-t) :count 4))
+  @end{pre}
+  @begin[code]{table}
+    @entry[bounds]{A @symbol{graphene:rect-t} instance with the bounds of the
+      rectangle.}
+    @entry[corner]{An array of @symbol{graphene:size-t} instances with the size
+      of the 4 rounded corners.}
+  @end{table}
+  @see-slot{gsk:rounded-rect-bounds}
+  @see-slot{gsk:rounded-rect-corner}
+  @see-function{gsk:rounded-rect-normalize}")
+
 (export 'rounded-rect)
+
+;;; ----------------------------------------------------------------------------
 
 (defun rounded-rect-bounds (rect)
   (cffi:foreign-slot-pointer rect '(:struct rounded-rect) 'bounds))
