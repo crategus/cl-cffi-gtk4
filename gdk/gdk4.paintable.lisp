@@ -233,16 +233,11 @@ lambda (paintable)    :run-last
 ;;; gdk_paintable_snapshot ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_paintable_snapshot" %paintable-snapshot) :void
-  (paintable (g:object paintable))
-  (snapshot (g:object snapshot))
-  (width :double)
-  (height :double))
-
-(defun paintable-snapshot (paintable width height)
+(cffi:defcfun ("gdk_paintable_snapshot" paintable-snapshot) :void
  #+liber-documentation
  "@version{#2023-8-1}
   @argument[paintable]{a @class{gdk:paintable} object}
+  @argument[snapshot]{a @class{gdk:snapshot} object}
   @argument[width]{a double float with the width to snapshot in}
   @argument[height]{a double float with the height to snapshot in}
   @return{A @class{gdk:snapshot} object to snapshot to}
@@ -254,9 +249,14 @@ lambda (paintable)    :run-last
   do nothing.
   @see-class{gdk:paintable}
   @see-class{gdk:snapshot}"
-  (let ((snapshot (make-instance 'snapshot)))
-    (%paintable-snapshot paintable snapshot width height)
-    snapshot))
+  (paintable (g:object paintable))
+  (snapshot (g:object snapshot))
+  (width :double)
+  (height :double))
+
+;(defun paintable-snapshot (paintable snaphot width height)
+;  (%paintable-snapshot paintable snapshot width height)
+;    snapshot))
 
 (export 'paintable-snapshot)
 
