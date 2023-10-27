@@ -73,7 +73,12 @@
                (:file "text-view-attributes")
                (:file "text-view-tags")
                (:file "text-view-search")
-;               (:file "text-view-tooltip")
+               (:file "text-view-hypertext")
+               (:file "text-view-markup")
+               (:file "text-view-tabs")
+               (:file "text-view-multiple")
+               (:file "text-view-undo")
+               (:file "text-view-scroll")
 
                ;; Tree, List and Icon Grid Widgets
                (:file "tree-view-simple")
@@ -129,6 +134,9 @@
 
                ;; GDK examples
                (:file "app-launch-context")
+
+               ;; Paintable, Texture
+               (:file "paintable-simple")
               ))
 
-;;; --- 2023-3-11 --------------------------------------------------------------
+;;; --- 2023-10-24 -------------------------------------------------------------

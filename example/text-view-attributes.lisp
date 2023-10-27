@@ -1,4 +1,8 @@
-;;;;  Text View Attributes - 2022-9-2
+;;;;  Text View Attributes - 2023-10-4
+;;;;
+;;;; This examples uses a tag to change the color for just one word in the
+;;;; text view. CSS data is also loaded to change the font and the color
+;;;; for the text view.
 
 (in-package :gtk4-example)
 
@@ -17,14 +21,14 @@
          (provider (gtk:css-provider-new))
          (buffer (gtk:text-view-buffer textview)))
     (setf (gtk:text-buffer-text buffer) "Hello, this is some text.")
-    ;; Change default font and color throughout the text view
+    ;; Load CSS from data into the provider and apply CSS
     (gtk:css-provider-load-from-data provider
-                                     "textview, text {
+                                     ".viewstyle textview {
                                         color : Green;
                                         font : 20px Purisa; }")
-    (gtk:style-context-add-provider (gtk:widget-style-context textview)
-                                    provider
-                                    +gtk-priority-application+)
+    (gtk:widget-add-css-class window "viewstyle")
+    (gtk:style-context-add-provider-for-display (gtk:widget-display window)
+                                                provider)
     ;; Use a tag to change the color for just one part of the text view
     (let ((tag (gtk:text-buffer-create-tag buffer
                                            "blue_foreground"
@@ -34,4 +38,4 @@
       ;; Apply the tag to a region of the text in the buffer
       (gtk:text-buffer-apply-tag buffer tag start end))
     ;; Show the window
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

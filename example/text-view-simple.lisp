@@ -1,4 +1,4 @@
-;;;; Simple Text View - 2022-9-2
+;;;; Simple Text View - 2023-10-4
 
 (in-package :gtk4-example)
 
@@ -19,7 +19,6 @@
     (g:signal-connect window "close-request"
         (lambda (widget)
           (declare (ignore widget))
-          (format t "in DESTROY signal~%")
           (let ((start (gtk:text-buffer-start-iter buffer))
                 (end (gtk:text-buffer-end-iter buffer))
                 (include-hidden-chars t))
@@ -29,4 +28,4 @@
                                              include-hidden-chars))
             (terpri))))
     (setf (gtk:text-buffer-text buffer) *lorem-ipsum-short*)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

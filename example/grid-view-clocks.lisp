@@ -2,20 +2,20 @@
 ;;;;
 ;;;; This demo displays the time in different timezones.
 ;;;;
-;;;; The goal is to show how to set up expressions that track changes in objects 
-;;;; and make them update widgets. For that, we create a clock object that 
-;;;; updates its time every second and then use various ways to display that 
+;;;; The goal is to show how to set up expressions that track changes in objects
+;;;; and make them update widgets. For that, we create a clock object that
+;;;; updates its time every second and then use various ways to display that
 ;;;; time.
 ;;;;
-;;;; Typically, this will be done using GtkBuilder .ui files with the help of 
+;;;; Typically, this will be done using GtkBuilder .ui files with the help of
 ;;;; the <binding> tag, but this demo shows the code that runs behind that.
 
 (in-package :gtk4-example)
 
 (defclass clock (g:object)
-  ((location :initform ""
+  ((location :initform "local"
              :accessor clock-location)
-   (timezone :initform local-time:*default-timezone*
+   (timezone :initform "local"
          :accessor clock-timezone))
   (:gname . "GtkClock")
   (:metaclass gobject:gobject-class))
@@ -160,11 +160,12 @@ gtk_clock_snapshot (GdkPaintable *paintable,
 }
 |#
 
-(defun clock-snapshot (paintable snapshot width height)  
+(defun clock-snapshot (paintable snapshot width height)
 
+(cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
 ;  time = gtk_clock_get_time (self);
 
-  ;; save/restore() is necessary so we can undo the transforms we start 
+  ;; save/restore() is necessary so we can undo the transforms we start
   ;; out with.
   (gtk:snapshot-save snapshot)
 
@@ -186,18 +187,19 @@ gtk_clock_snapshot (GdkPaintable *paintable,
 
   ;; First, draw a circle. This is a neat little trick to draw a circle
   ;; without requiring Cairo.
-  gsk_rounded_rect_init_from_rect (&outline, &GRAPHENE_RECT_INIT(-50, -50, 100, 100), 50);
-  gtk_snapshot_append_border (snapshot,
-                              &outline,
-                              (float[4]) { 4, 4, 4, 4 },
-                              (GdkRGBA [4]) { BLACK, BLACK, BLACK, BLACK });
-
   (graphene:with-graphene-rect (rect -50 -50 100 100)
-    (gsk:rounded-rect-init-from-rect outline rect))
+    (gsk:rounded-rect-init-from-rect outline rect 50)
+    (gtk:snapshot-append-border snapshot
+                                outline
+                                (list 4 4 4 4)
+                                (list (gdk:rgba-new)
+                                      (gdk:rgba-new)
+                                      (gdk:rgba-new)))
+    )
 
-                              
-    
-)
+  (gtk:snapshot-restore snapshot)
+
+))
 
 
 
@@ -442,7 +444,17 @@ create_clocks_model (void)
 
   return G_LIST_MODEL (result);
 }
+|#
 
+(defun create-clocks-model ()
+  (let ((store (g:list-store-new "GtkClock")))
+
+    ;; local time */
+    (g:list-store-append store (make-instance 'clock
+                                              :location "local"))
+    store))
+
+#|
 static char *
 convert_time_to_string (GObject   *image,
                         GDateTime *time,
@@ -514,63 +526,12 @@ setup_listitem_cb (GtkListItemFactory *factory,
   gtk_expression_unref (clock_expression);
 }
 
-static GtkWidget *window = NULL;
-
-GtkWidget *
-do_listview_clocks (GtkWidget *do_widget)
-{
-  if (window == NULL)
-    {
-      GtkWidget *gridview, *sw;
-      GtkListItemFactory *factory;
-      GtkSelectionModel *model;
-
-      /* This is the normal window setup code every demo does */
-      window = gtk_window_new ();
-      gtk_window_set_title (GTK_WINDOW (window), "Clocks");
-      gtk_window_set_default_size (GTK_WINDOW (window), 600, 400);
-      gtk_window_set_display (GTK_WINDOW (window),
-                              gtk_widget_get_display (do_widget));
-      g_object_add_weak_pointer (G_OBJECT (window), (gpointer *) &window);
-
-      /* List widgets go into a scrolled window. Always. */
-      sw = gtk_scrolled_window_new ();
-      gtk_window_set_child (GTK_WINDOW (window), sw);
-
-      /* Create the factory that creates the listitems. Because we
-       * used bindings above during setup, we only need to connect
-       * to the setup signal.
-       * The bindings take care of the bind step.
-       */
-      factory = gtk_signal_list_item_factory_new ();
-      g_signal_connect (factory, "setup", G_CALLBACK (setup_listitem_cb), NULL);
-
-      model = GTK_SELECTION_MODEL (gtk_no_selection_new (create_clocks_model ()));
-      gridview = gtk_grid_view_new (model, factory);
-      gtk_scrollable_set_hscroll_policy (GTK_SCROLLABLE (gridview), GTK_SCROLL_NATURAL);
-      gtk_scrollable_set_vscroll_policy (GTK_SCROLLABLE (gridview), GTK_SCROLL_NATURAL);
-
-      gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (sw), gridview);
-    }
-
-  if (!gtk_widget_get_visible (window))
-    gtk_widget_set_visible (window, TRUE);
-  else
-    gtk_window_destroy (GTK_WINDOW (window));
-
-  return window;
-}
-
 |#
-
-(defun create-clocks-model ()
-  (g:list-store-new "GObject")
-)
 
 (defun do-grid-view-clocks (&optional application)
   (let* (
-          ;; Create the factory that creates the listitems. Because we used 
-          ;; bindings above during setup, we only need to connect to the setup 
+          ;; Create the factory that creates the listitems. Because we used
+          ;; bindings above during setup, we only need to connect to the setup
           ;; signal. The bindings take care of the bind step.
           (factory (make-instance 'gtk:signal-list-item-factory))
           (model (gtk:no-selection-new (create-clocks-model)))
@@ -582,7 +543,7 @@ do_listview_clocks (GtkWidget *do_widget)
          ;; List widgets go into a scrolled window. Always.
          (scrolled (make-instance 'gtk:scrolled-window
                                   :child gridview))
-                        
+
          (window (make-instance 'gtk:window
                         :application application
                         :title "Clocks"

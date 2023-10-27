@@ -55,15 +55,15 @@
         ((or (null line)
              (not (>= (length line) 4))
              (not (string= line ";;;;" :start1 0 :end1 4))))
-      (gtk:text-buffer-insert info-buffer (string-left-trim ";" line))
-      (gtk:text-buffer-insert info-buffer (format nil "~%")))
+      (gtk:text-buffer-insert info-buffer :cursor (string-left-trim ";" line))
+      (gtk:text-buffer-insert info-buffer :cursor (format nil "~%")))
     ;; Read the source code of the file
     (clear-buffer source-buffer)
     (do ((line (read-line stream nil)
                (read-line stream nil)))
         ((null line))
-      (gtk:text-buffer-insert source-buffer line)
-      (gtk:text-buffer-insert source-buffer (format nil "~%")))))
+      (gtk:text-buffer-insert source-buffer :cursor line)
+      (gtk:text-buffer-insert source-buffer :cursor (format nil "~%")))))
 
 (defun load-file-buffer (buffer filename)
   (with-open-file (stream filename)
@@ -71,8 +71,8 @@
     (do ((line (read-line stream nil)
                (read-line stream nil)))
         ((null line))
-      (gtk:text-buffer-insert buffer line)
-      (gtk:text-buffer-insert buffer (format nil "~%")))))
+      (gtk:text-buffer-insert buffer :cursor line)
+      (gtk:text-buffer-insert buffer :cursor (format nil "~%")))))
 
 (defun read-file (filename)
   (with-open-file (instream filename :direction :input :if-does-not-exist nil)
@@ -394,7 +394,37 @@
        ":window"
        "DO-TEXT-VIEW-SEARCH"
        "gtk4-example"
-       "text-view-search.lisp"))
+       "text-view-search.lisp")
+      ("Hypertext"
+       ":window"
+       "DO-TEXT-VIEW-HYPERTEXT"
+       "gtk4-example"
+       "text-view-hypertext.lisp")
+      ("Markup"
+       ":window"
+       "DO-TEXT-VIEW-MARKUP"
+       "gtk4-example"
+       "text-view-markup.lisp")
+      ("Tabulator"
+       ":window"
+       "DO-TEXT-VIEW-TABS"
+       "gtk4-example"
+       "text-view-tabs.lisp")
+      ("Multiple"
+       ":window"
+       "DO-TEXT-VIEW-MULTIPLE"
+       "gtk4-example"
+       "text-view-multiple.lisp")
+      ("Undo and Redo"
+       ":window"
+       "DO-TEXT-VIEW-undo"
+       "gtk4-example"
+       "text-view-undo.lisp")
+      ("Scrolling"
+       ":window"
+       "DO-TEXT-VIEW-SCROLL"
+       "gtk4-example"
+       "text-view-scroll.lisp"))
 
      "Tree, List and Icon Grid Widgets"
      (("Simple Tree View"
