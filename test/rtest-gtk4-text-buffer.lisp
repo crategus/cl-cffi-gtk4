@@ -115,9 +115,9 @@
 
 (test gtk-text-buffer-insert
   (let ((buffer (gtk:text-buffer-new)))
-    (is-true (gtk:text-buffer-insert buffer "First"))
+    (is-true (gtk:text-buffer-insert buffer :cursor "First"))
     (is (string= "First" (gtk:text-buffer-text buffer)))
-    (is-true (gtk:text-buffer-insert buffer " Second"))
+    (is-true (gtk:text-buffer-insert buffer :cursor " Second"))
     (is (string= "First Second" (gtk:text-buffer-text buffer)))))
 
 ;;;     gtk_text_buffer_insert_range
@@ -188,4 +188,4 @@
 ;;;     gtk_text_buffer_begin_irreversible_action
 ;;;     gtk_text_buffer_end_irreversible_action
 
-;;; --- 2023-10-3 --------------------------------------------------------------
+;;; --- 2023-10-17 -------------------------------------------------------------

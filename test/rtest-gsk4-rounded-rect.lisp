@@ -7,6 +7,35 @@
 
 ;;;     GskCorner
 
+(test gsk-corner
+  ;; Check the type
+  (is (g:type-is-enum "GskCorner"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GskCorner")
+          (g:gtype (cffi:foreign-funcall "gsk_corner_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gsk:corner
+          (glib:symbol-for-gtype "GskCorner")))
+  ;; Check the names
+  (is (equal '("GSK_CORNER_TOP_LEFT" "GSK_CORNER_TOP_RIGHT"
+               "GSK_CORNER_BOTTOM_RIGHT" "GSK_CORNER_BOTTOM_LEFT")
+             (list-enum-item-name "GskCorner")))
+  ;; Check the values
+  (is (equal '(0 1 2 3)
+             (list-enum-item-value "GskCorner")))
+  ;; Check the nick names
+  (is (equal '("top-left" "top-right" "bottom-right" "bottom-left")
+             (list-enum-item-nick "GskCorner")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GskCorner" GSK-CORNER
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER "gsk_corner_get_type")
+                                     (:TOP-LEFT 0)
+                                     (:TOP-RIGHT 1)
+                                     (:BOTTOM-RIGHT 2)
+                                     (:BOTTOM-LEFT 3))
+             (gobject:get-g-type-definition "GskCorner"))))
+
 ;;;     GskRoundedRect
 
 (test gsk-rounded-rect-structure

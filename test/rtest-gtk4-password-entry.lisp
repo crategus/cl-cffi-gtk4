@@ -5,6 +5,47 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GtkPasswordEntryBuffer                             Since 4.4
+
+(test gtk-password-entry-buffer-class
+  ;; Type check
+  (is (g:type-is-object "GtkPasswordEntryBuffer"))
+  ;; Check the registered name
+  (is (eq 'gtk:password-entry-buffer
+          (glib:symbol-for-gtype "GtkPasswordEntryBuffer")))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkPasswordEntryBuffer")
+          (g:gtype (cffi:foreign-funcall "gtk_password_entry_buffer_get_type"
+                                         :size))))
+  ;; Check the parent
+  (is (eq (g:gtype "GtkEntryBuffer")
+          (g:type-parent "GtkPasswordEntryBuffer")))
+  ;; Check the children
+  (is (equal '()
+             (list-children "GtkPasswordEntryBuffer")))
+  ;; Check the interfaces
+  (is (equal '()
+             (list-interfaces "GtkPasswordEntryBuffer")))
+  ;; Check the properties
+  (is (equal '()
+             (list-properties "GtkPasswordEntryBuffer")))
+  ;; Check the signals
+  (is (equal '()
+             (list-signals "GtkPasswordEntryBuffer")))
+  ;; Check the class definition
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPasswordEntryBuffer"
+                               GTK-PASSWORD-ENTRY-BUFFER
+                               (:SUPERCLASS GTK-ENTRY-BUFFER :EXPORT T
+                                :INTERFACES NIL :TYPE-INITIALIZER
+                                "gtk_password_entry_buffer_get_type")
+                               NIL)
+             (gobject:get-g-type-definition "GtkPasswordEntryBuffer"))))
+
+;;;     gtk_password_entry_buffer_new                      Since 4.4
+
+(test gtk-password-entry-buffer-new
+  (is (typep (gtk:password-entry-buffer-new) 'gtk:password-entry-buffer)))
+
 ;;;     GtkPasswordEntry
 
 (test gtk-password-entry-class

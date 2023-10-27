@@ -37,40 +37,11 @@
   ;; CSS name
   (is (string= "appchooserbutton"
                (gtk:widget-class-css-name "GtkAppChooserButton")))
-  ;; CSS style context
-  (is (string=
-"appchooserbutton:dir(ltr)
-  combobox:dir(ltr)
-    box.horizontal.linked:dir(ltr)
-      button.combo:disabled:dir(ltr)
-        box.horizontal:disabled:dir(ltr)
-          cellview:disabled:dir(ltr)
-          arrow:disabled:dir(ltr)
-    [popover.background.menu:dir(ltr)]
-      contents:dir(ltr)
-        scrolledwindow:dir(ltr)
-          viewport:dir(ltr)
-            stack:dir(ltr)
-          scrollbar.bottom.horizontal:dir(ltr)
-            range.horizontal:dir(ltr)
-              trough:dir(ltr)
-                slider:dir(ltr)
-          scrollbar.right.vertical:dir(ltr)
-            range.vertical:dir(ltr)
-              trough:dir(ltr)
-                slider:dir(ltr)
-          overshoot.left:dir(ltr)
-          undershoot.left:dir(ltr)
-          overshoot.right:dir(ltr)
-          undershoot.right:dir(ltr)
-          overshoot.top:dir(ltr)
-          undershoot.top:dir(ltr)
-          overshoot.bottom:dir(ltr)
-          undershoot.bottom:dir(ltr)
-          junction:dir(ltr)
-      arrow:dir(ltr)
-"
-               (print-style-context "GtkAppChooserButton")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:app-chooser-button))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkAppChooserButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAppChooserButton"
                                              GTK-APP-CHOOSER-BUTTON
@@ -124,4 +95,4 @@
 ;;;     gtk_app_chooser_button_append_separator
 ;;;     gtk_app_chooser_button_set_active_custom_item
 
-;;; --- 2023-8-29 --------------------------------------------------------------
+;;; --- 2023-10-16 -------------------------------------------------------------

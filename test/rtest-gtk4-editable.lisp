@@ -18,6 +18,9 @@
   ;; Check the type initializer
   (is (eq (g:gtype "GtkEditable")
           (g:gtype (cffi:foreign-funcall "gtk_editable_get_type" :size))))
+  ;; Check the interface prerequisites
+  (is (equal '("GtkWidget")
+             (list-interface-prerequisites "GtkEditable")))
   ;; Get the names of the interface properties.
   (is (equal '("cursor-position" "editable" "enable-undo" "max-width-chars"
                "selection-bound" "text" "width-chars" "xalign")
@@ -50,7 +53,26 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test gtk-editable-properties
+(test gtk-editable-properties.1
+  (let ((editable (make-instance 'gtk:editable-label)))
+    (is (= 0 (gtk:editable-cursor-position editable)))
+    (signals (error) (setf (gtk:editable-cursor-position editable) 1))
+    (is-true (gtk:editable-editable editable))
+    (is-false (setf (gtk:editable-editable editable) nil))
+    (is-true (gtk:editable-enable-undo editable))
+    (is-false (setf (gtk:editable-enable-undo editable) nil))
+    (is (= -1 (gtk:editable-max-width-chars editable)))
+    (is (= 10 (setf (gtk:editable-max-width-chars editable) 10)))
+    (is (= 0 (gtk:editable-selection-bound editable)))
+    (signals (error) (setf (gtk:editable-selection-bound editable) 10))
+    (is (string= "" (gtk:editable-text editable)))
+    (is (string= "text" (setf (gtk:editable-text editable) "text")))
+    (is (= -1 (gtk:editable-width-chars editable)))
+    (is (= 10 (setf (gtk:editable-width-chars editable) 10)))
+    (is (= 0.0 (gtk:editable-xalign editable)))
+    (is (= 0.5 (setf (gtk:editable-xalign editable) 1/2)))))
+
+(test gtk-editable-properties.2
   (let ((editable (make-instance 'gtk:text)))
     (is (= 0 (gtk:editable-cursor-position editable)))
     (signals (error) (setf (gtk:editable-cursor-position editable) 1))
@@ -109,24 +131,23 @@
 ;;;     gtk_editable_select_region
 ;;;     gtk_editable_delete_selection
 
-(test gtk-editable-selection-bound
+(test gtk-editable-selection-bounds
   (let ((editable (make-instance 'gtk:text
                                  :text "This is some text.")))
-    (is (equal '(nil 0 0)
-               (multiple-value-list (gtk:editable-selection-bounds editable))))
+    (is-false (gtk:editable-selection-bounds editable))
     (is-false (gtk:editable-select-region editable :start 8 :end 13))
-    (is (equal '(t 8 13)
+    (is (equal '(8 13)
                (multiple-value-list (gtk:editable-selection-bounds editable))))
     (is-false (gtk:editable-delete-selection editable))
     (is (string= "This is text." (gtk:editable-chars editable)))
     (is-false (gtk:editable-select-region editable :start 7))
-    (is (equal '(t 7 13)
+    (is (equal '(7 13)
                (multiple-value-list (gtk:editable-selection-bounds editable))))
     (is-false (gtk:editable-delete-selection editable))
     (is (string= "This is" (gtk:editable-chars editable)))
 
     (is-false (gtk:editable-select-region editable :end 5))
-    (is (equal '(t 0 5)
+    (is (equal '(0 5)
                (multiple-value-list (gtk:editable-selection-bounds editable))))
     (is-false (gtk:editable-delete-selection editable))
     (is (string= "is" (gtk:editable-chars editable)))))
@@ -159,4 +180,4 @@
 ;;;     gtk_editable_delegate_set_property
 ;;;     gtk_editable_delegate_get_property
 
-;;; --- 2023-7-16 --------------------------------------------------------------
+;;; --- 2023-10-24 -------------------------------------------------------------

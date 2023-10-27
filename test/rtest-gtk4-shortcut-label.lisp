@@ -34,11 +34,11 @@
   ;; CSS name
   (is (string= "shortcut"
                (gtk:widget-class-css-name "GtkShortcutLabel")))
-  ;; CSS style context
-  (is (string=
-"shortcut:dir(ltr)
-"
-               (print-style-context "GtkShortcutLabel")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:shortcut-label))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkShortcutLabel")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutLabel"
                                              GTK-SHORTCUT-LABEL
@@ -62,4 +62,4 @@
 
 ;;;     gtk_shortcut_label_new
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; --- 2023-10-16 -------------------------------------------------------------

@@ -15,7 +15,7 @@
           (glib:symbol-for-gtype "GtkPageSetupUnixDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPageSetupUnixDialog")
-          (g:gtype (cffi:foreign-funcall "gtk_page_setup_unix_dialog_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_page_setup_unix_dialog_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkDialog")
@@ -36,150 +36,12 @@
   ;; CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkPageSetupUnixDialog")))
-  ;; CSS style context
-  (is (string=
-"[window.background.csd.dialog:dir(ltr)]
-  box.dialog-vbox.vertical:dir(ltr)
-    box.vertical:dir(ltr)
-      grid.horizontal:dir(ltr)
-        label:dir(ltr)
-        dropdown:dir(ltr)
-          button.toggle:dir(ltr)
-            box.horizontal:dir(ltr)
-              stack:dir(ltr)
-                label:dir(ltr)
-                row.activatable:dir(ltr)
-                  label:dir(ltr)
-              arrow:dir(ltr)
-          [popover.background.menu:dir(ltr)]
-            contents:dir(ltr)
-              box.vertical:dir(ltr)
-                [box.dropdown-searchbar.horizontal:dir(ltr)]
-                  entry.search:dir(ltr)
-                    image:dir(ltr)
-                    text:dir(ltr)
-                      placeholder:dir(ltr)
-                      undershoot.left:dir(ltr)
-                      undershoot.right:dir(ltr)
-                    image:dir(ltr)
-                scrolledwindow:dir(ltr)
-                  listview.view:dir(ltr)
-                    row.activatable:selected:dir(ltr)
-                      label:dir(ltr)
-                  scrollbar.bottom.horizontal:dir(ltr)
-                    range.horizontal:dir(ltr)
-                      trough:dir(ltr)
-                        slider:dir(ltr)
-                  scrollbar.right.vertical:dir(ltr)
-                    range.vertical:dir(ltr)
-                      trough:dir(ltr)
-                        slider:dir(ltr)
-                  overshoot.left:dir(ltr)
-                  undershoot.left:dir(ltr)
-                  overshoot.right:dir(ltr)
-                  undershoot.right:dir(ltr)
-                  overshoot.top:dir(ltr)
-                  undershoot.top:dir(ltr)
-                  overshoot.bottom:dir(ltr)
-                  undershoot.bottom:dir(ltr)
-                  junction:dir(ltr)
-            arrow:dir(ltr)
-        label:dir(ltr)
-        dropdown:dir(ltr)
-          button.toggle:dir(ltr)
-            box.horizontal:dir(ltr)
-              stack:dir(ltr)
-                label:dir(ltr)
-                row.activatable:dir(ltr)
-                  label:dir(ltr)
-              arrow:dir(ltr)
-          [popover.background.menu:dir(ltr)]
-            contents:dir(ltr)
-              box.vertical:dir(ltr)
-                [box.dropdown-searchbar.horizontal:dir(ltr)]
-                  entry.search:dir(ltr)
-                    image:dir(ltr)
-                    text:dir(ltr)
-                      placeholder:dir(ltr)
-                      undershoot.left:dir(ltr)
-                      undershoot.right:dir(ltr)
-                    image:dir(ltr)
-                scrolledwindow:dir(ltr)
-                  listview.view:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:selected:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable.separator:dir(ltr)
-                      label:dir(ltr)
-                    row.activatable.separator:dir(ltr)
-                      label:dir(ltr)
-                  scrollbar.bottom.horizontal:dir(ltr)
-                    range.horizontal:dir(ltr)
-                      trough:dir(ltr)
-                        slider:dir(ltr)
-                  scrollbar.right.vertical:dir(ltr)
-                    range.vertical:dir(ltr)
-                      trough:dir(ltr)
-                        slider:dir(ltr)
-                  overshoot.left:dir(ltr)
-                  undershoot.left:dir(ltr)
-                  overshoot.right:dir(ltr)
-                  undershoot.right:dir(ltr)
-                  overshoot.top:dir(ltr)
-                  undershoot.top:dir(ltr)
-                  overshoot.bottom:dir(ltr)
-                  undershoot.bottom:dir(ltr)
-                  junction:dir(ltr)
-            arrow:dir(ltr)
-        label:dir(ltr)
-        label:dir(ltr)
-        checkbutton.text-button:dir(ltr):checked
-          radio:dir(ltr):checked
-          label:dir(ltr)
-        checkbutton.text-button:dir(ltr):checked
-          radio:dir(ltr):checked
-          label:dir(ltr)
-        checkbutton.text-button:dir(ltr):checked
-          radio:dir(ltr):checked
-          label:dir(ltr)
-        checkbutton.text-button:dir(ltr)
-          radio:dir(ltr)
-          label:dir(ltr)
-    [box.dialog-action-box.horizontal:dir(ltr)]
-      box.dialog-action-area.horizontal:dir(ltr)
-  headerbar.titlebar:dir(ltr)
-    windowhandle:dir(ltr)
-      box:dir(ltr)
-        box.horizontal.start:dir(ltr)
-          button.text-button:dir(ltr)
-            label:dir(ltr)
-        label.title:dir(ltr)
-        box.end.horizontal:dir(ltr)
-          button.default.suggested-action.text-button:dir(ltr)
-            label:dir(ltr)
-"
-               (print-style-context "GtkPageSetupUnixDialog")))
+  ;; CSS classes
+  (is (equal '("background" "csd" "dialog")
+             (gtk:widget-css-classes
+                 (make-instance 'gtk:page-setup-unix-dialog))))
+  ;; Accessible role
+  (is (eq :dialog (gtk:widget-class-accessible-role "GtkPageSetupUnixDialog")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPageSetupUnixDialog"
                                GTK-PAGE-SETUP-UNIX-DIALOG
@@ -200,4 +62,4 @@
 ;;;     gtk_page_setup_unix_dialog_set_print_settings
 ;;;     gtk_page_setup_unix_dialog_get_print_settings
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; --- 2023-10-16 -------------------------------------------------------------

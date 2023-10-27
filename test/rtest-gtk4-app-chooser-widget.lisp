@@ -37,40 +37,11 @@
   ;; CSS name
   (is (string= "appchooser"
                (gtk:widget-class-css-name "GtkAppChooserWidget")))
-  ;; CSS style context
-  (is (string=
-"appchooser:dir(ltr)
-  overlay:dir(ltr)
-    scrolledwindow.frame:dir(ltr)
-      treeview.view:dir(ltr)
-        header:dir(ltr)
-          button:dir(ltr)
-            box.horizontal:dir(ltr)
-              box.horizontal:dir(ltr)
-                label:dir(ltr)
-              sort-indicator:dir(ltr)
-      scrollbar.bottom.horizontal:dir(ltr)
-        range.horizontal:dir(ltr)
-          trough:dir(ltr)
-            slider:dir(ltr)
-      scrollbar.right.vertical:dir(ltr)
-        range.vertical:dir(ltr)
-          trough:dir(ltr)
-            slider:dir(ltr)
-      overshoot.left:dir(ltr)
-      undershoot.left:dir(ltr)
-      overshoot.right:dir(ltr)
-      undershoot.right:dir(ltr)
-      overshoot.top:dir(ltr)
-      undershoot.top:dir(ltr)
-      overshoot.bottom:dir(ltr)
-      undershoot.bottom:dir(ltr)
-      junction:dir(ltr)
-    box.vertical:dir(ltr)
-      image.dim-label:dir(ltr)
-      label.dim-label:dir(ltr)
-"
-               (print-style-context "GtkAppChooserWidget")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:app-chooser-widget))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkAppChooserWidget")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAppChooserWidget"
                                              GTK-APP-CHOOSER-WIDGET
@@ -115,4 +86,4 @@
 
 ;;;     gtk_app_chooser_widget_new
 
-;;; --- 2023-8-29 --------------------------------------------------------------
+;;; --- 2023-10-16 -------------------------------------------------------------

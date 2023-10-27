@@ -86,17 +86,11 @@
   ;; CSS name
   (is (string= "shortcut"
                (gtk:widget-class-css-name "GtkShortcutsShortcut")))
-  ;; CSS style context
-  (is (string=
-"shortcut:dir(ltr)
-  box.horizontal:dir(ltr)
-    [image:dir(ltr)]
-    shortcut:dir(ltr)
-    box.vertical:dir(ltr)
-      label:dir(ltr)
-      [label.dim-label:dir(ltr)]
-"
-               (print-style-context "GtkShortcutsShortcut")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:shortcuts-shortcut))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkShortcutsShortcut")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsShortcut"
                                              GTK-SHORTCUTS-SHORTCUT
@@ -147,4 +141,4 @@
 ;;;     title
 ;;;     title-size-group
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; --- 2023-10-16 -------------------------------------------------------------

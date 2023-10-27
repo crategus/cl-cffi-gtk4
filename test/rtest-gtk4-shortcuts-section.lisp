@@ -36,16 +36,11 @@
   ;; CSS name
   (is (string= "shortcuts-section"
                (gtk:widget-class-css-name "GtkShortcutsSection")))
-  ;; CSS style context
-  (is (string=
-"shortcuts-section.vertical:dir(ltr)
-  stack:dir(ltr)
-  box:dir(ltr)
-    [stackswitcher:dir(ltr)]
-    [button.text-button:dir(ltr)]
-      label:dir(ltr)
-"
-               (print-style-context "GtkShortcutsSection")))
+  ;; CSS classes
+  (is (equal '("vertical")
+             (gtk:widget-css-classes (make-instance 'gtk:shortcuts-section))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkShortcutsSection")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsSection"
                                              GTK-SHORTCUTS-SECTION
@@ -76,4 +71,4 @@
 
 ;;;     change-current-page
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; --- 2023-10-16 -------------------------------------------------------------

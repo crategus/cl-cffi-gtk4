@@ -82,13 +82,105 @@
              (gobject:get-g-type-definition "GskRenderNodeType"))))
 
 ;;;     GskRenderNode
+
+;;;     gsk_render_node_ref
+;;;     gsk_render_node_unref
+;;;     gsk_render_node_get_node_type
+
+(test gsk-render-node-ref/unref
+  (graphene:with-graphene-rect (rect 0 0 10 20)
+    (let* ((color (gdk:rgba-parse "red"))
+           (node (gsk:color-node-new color rect)))
+      (is (eq :color-node (gsk:render-node-node-type node)))
+      (is (eq :color-node
+              (gsk:render-node-node-type (gsk:render-node-ref node))))
+      (is-false (gsk:render-node-unref node))
+      (is (eq :color-node (gsk:render-node-node-type node)))
+      (is-false (gsk:render-node-unref node)))))
+
+;;;     gsk_render_node_draw
+
+(test gsk-render-node-draw
+  (graphene:with-graphene-rect (rect 20 30 50 60)
+    (let* ((color (gdk:rgba-parse "blue"))
+           (node (gsk:color-node-new color rect))
+           (path (sys-path "out/render-node-draw.pdf"))
+           (width 100) (height 150)
+           (surface (cairo:pdf-surface-create path width height))
+           (context (cairo:create surface)))
+      (cairo:save context)
+      ;; Clear surface
+      (cairo:set-source-rgb context 1.0 1.0 1.0)
+      (cairo:paint context)
+      ;; Draw the render node
+      (gsk:render-node-draw node context)
+      (cairo:stroke context)
+      (cairo:restore context)
+      (cairo:show-page context)
+      ;; Clean the resources.
+      (cairo:surface-destroy surface)
+      (cairo:destroy context)
+      (gsk:render-node-unref node))))
+
+;;;     GskParseErrorFunc
+
+;;;     gsk_render_node_serialize
+;;;     gsk_render_node_deserialize
+
+(test gsk-render-node-serialize/deserialize
+  (graphene:with-graphene-rect (rect 0 0 10 20)
+    (let* ((color (gdk:rgba-parse "red"))
+           (node (gsk:color-node-new color rect))
+           (bytes nil))
+      (is (eq :color-node (gsk:render-node-node-type node)))
+      (is (typep (setf bytes (gsk:render-node-serialize node)) 'g:bytes))
+      (setf node (gsk:render-node-deserialize bytes))
+      (is (eq :color-node (gsk:render-node-node-type node)))
+)))
+
+;;;     gsk_render_node_write_to_file
+
+(test gsk-render-node-write-to-file
+  (graphene:with-graphene-rect (rect 0 0 10 20)
+    (let* ((color (gdk:rgba-parse "red"))
+           (node (gsk:color-node-new color rect))
+           (filename  (sys-path "out/render-node-to-file.txt")))
+      (gsk:render-node-write-to-file node filename)
+)))
+
+;;;     gsk_render_node_get_bounds
+
+(test gsk-render-node-bounds
+  (graphene:with-graphene-rects ((rect1 0 0 10 20) (rect2 0 0 0 0))
+    (let* ((color (gdk:rgba-parse "red"))
+           (node (gsk:color-node-new color rect1)))
+      (is (eq :color-node (gsk:render-node-node-type node)))
+      (is (graphene:rect-equal rect1
+                               (gsk:render-node-bounds node rect2))))))
+
 ;;;     GskBlendNode
 ;;;     GskBlurNode
 ;;;     GskBorderNode
 ;;;     GskCairoNode
 ;;;     GskClipNode
 ;;;     GskColorMatrixNode
+
 ;;;     GskColorNode
+
+;;;     gsk_color_node_new
+;;;     gsk_color_node_get_color
+
+(test gsk-color-node-new
+  (let ((color (gdk:rgba-parse "red"))
+        (node nil))
+    (graphene:with-graphene-rect (rect 0 0 1 10)
+      (is (eq (g:gtype "GskColorNode")
+              (g:type-from-instance (setf node
+                                          (gsk:color-node-new color rect)))))
+    (is (gdk:rgba-equal (gdk:rgba-new :red 1 :alpha 1)
+                        (gsk:color-node-color node)))
+)))
+
 ;;;     GskConicGradientNode
 ;;;     GskContainerNode
 ;;;     GskCrossFadeNode
@@ -116,19 +208,7 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
-;;;     gsk_render_node_ref
-;;;     gsk_render_node_unref
-;;;     gsk_render_node_get_node_type
-;;;     gsk_render_node_draw
 
-;;;     GskParseErrorFunc
-
-;;;     gsk_render_node_serialize
-;;;     gsk_render_node_deserialize
-;;;     gsk_render_node_write_to_file
-;;;     gsk_render_node_get_bounds
-;;;     gsk_color_node_new
-;;;     gsk_color_node_get_color
 ;;;     gsk_texture_node_new
 ;;;     gsk_texture_node_get_texture
 ;;;     gsk_linear_gradient_node_new
@@ -225,4 +305,4 @@
 ;;;     gsk_gl_shader_node_get_args
 ;;;     gsk_gl_shader_node_get_shader
 
-;;; --- 2023-9-22 --------------------------------------------------------------
+;;; --- 2023-10-26 -------------------------------------------------------------

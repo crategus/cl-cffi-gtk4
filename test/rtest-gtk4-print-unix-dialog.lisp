@@ -17,7 +17,7 @@
           (glib:symbol-for-gtype "GtkPrintUnixDialog")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkPrintUnixDialog")
-          (g:gtype (cffi:foreign-funcall "gtk_print_unix_dialog_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_print_unix_dialog_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkDialog")
@@ -37,15 +37,16 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkPrintUnixDialog")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkPrintUnixDialog")))
-  (is (string=
-"[window.background.csd.dialog.print:dir(ltr)]
-"
-               (print-style-context "GtkPrintUnixDialog" :none)))
+  ;; CSS classes
+  (is (equal '("background" "csd" "dialog" "print")
+             (gtk:widget-css-classes (make-instance 'gtk:print-unix-dialog))))
+  ;; Accessible role
+  (is (eq :dialog (gtk:widget-class-accessible-role "GtkPrintUnixDialog")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintUnixDialog" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintUnixDialog"
                                              GTK-PRINT-UNIX-DIALOG
                        (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
@@ -92,4 +93,4 @@
 ;;;     gtk_print_unix_dialog_add_custom_tab
 ;;;     gtk_print_unix_dialog_get_page_setup_set
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; --- 2023-10-16 -------------------------------------------------------------

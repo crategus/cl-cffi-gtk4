@@ -348,7 +348,17 @@
 ;;;     gtk_widget_is_drawable
 ;;;     gtk_widget_get_realized
 ;;;     gtk_widget_get_mapped
+
 ;;;     gtk_widget_measure
+
+(test gtk-widget-measure
+  (is (equal '(33 33 -1 -1)
+             (multiple-value-list
+                 (gtk:widget-measure (gtk:label-new "label") :horizontal -1))))
+  (is (equal '(17 17 14 14)
+             (multiple-value-list
+                 (gtk:widget-measure (gtk:label-new "label") :vertical -1)))))
+
 ;;;     gtk_widget_snapshot_child
 ;;;     gtk_widget_get_next_sibling
 ;;;     gtk_widget_get_prev_sibling

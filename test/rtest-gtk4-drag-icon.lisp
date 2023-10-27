@@ -35,11 +35,11 @@
   ;; CSS name
   (is (string= "dnd"
                (gtk:widget-class-css-name "GtkDragIcon")))
-  ;; CSS style context
-  (is (string=
-"[dnd:dir(ltr)]
-"
-               (print-style-context "GtkDragIcon")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:drag-icon))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkDragIcon")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDragIcon" GTK-DRAG-ICON
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -60,4 +60,4 @@
 ;;;     gtk_drag_icon_set_from_paintable
 ;;;     gtk_drag_icon_create_widget_for_value
 
-;;; --- 2023-7-31 --------------------------------------------------------------
+;;; --- 2023-10-16 -------------------------------------------------------------

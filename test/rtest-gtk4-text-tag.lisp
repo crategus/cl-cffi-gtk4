@@ -260,11 +260,105 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+(test gtk-text-tag-properties
+  (let ((tag (make-instance 'gtk:text-tag)))
+    (is-false (gtk:text-tag-accumulative-margin tag))
+    (is-true (gtk:text-tag-allow-breaks tag))
+    (is-false (gtk:text-tag-allow-breaks-set tag))
+    (signals (error) (gtk:text-tag-background tag))
+    (is-false (gtk:text-tag-background-full-height tag))
+    (is-false (gtk:text-tag-background-full-height-set tag))
+    (is-false (gtk:text-tag-background-rgba tag))
+    (is-false (gtk:text-tag-background-set tag))
+    (is (eq :none (gtk:text-tag-direction tag)))
+    (is-true (gtk:text-tag-editable tag))
+    (is-false (gtk:text-tag-editable-set tag))
+    (is-true (gtk:text-tag-fallback tag))
+    (is-false (gtk:text-tag-fallback-set tag))
+    (is-false (gtk:text-tag-family tag))
+    (is-false (gtk:text-tag-family-set tag))
+    (is (string= "Normal" (gtk:text-tag-font tag)))
+    (is (typep (gtk:text-tag-font-desc tag) 'pango:font-description))
+    (is-false (gtk:text-tag-font-features tag))
+    (is-false (gtk:text-tag-font-features-set tag))
+    (signals (error) (gtk:text-tag-foreground tag))
+    (is-false (gtk:text-tag-foreground-rgba tag))
+    (is-false (gtk:text-tag-foreground-set tag))
+;;;     indent
+;;;     indent-set
+;;;     insert-hyphens
+;;;     insert-hyphens-set
+;;;     invisible
+;;;     invisible-set
+;;;     justification
+;;;     justification-set
+;;;     language
+;;;     language-set
+;;;     left-margin
+;;;     left-margin-set
+;;;     letter-spacing
+;;;     letter-spacing-set
+;;;     line-height                                        Since 4.6
+;;;     line-height-set                                    Since 4.6
+;;;     name
+;;;     overline
+;;;     overline-rgba
+;;;     overline-set
+;;;     paragraph-background
+;;;     paragraph-background-rgba
+;;;     paragraph-background-set
+;;;     pixels-above-lines
+;;;     pixels-above-lines-set
+;;;     pixels-below-lines
+;;;     pixels-below-lines-set
+;;;     pixels-inside-wrap
+;;;     pixels-inside-wrap-set
+;;;     right-margin
+;;;     right-margin-set
+;;;     rise
+;;;     rise-set
+;;;     scale
+;;;     scale-set
+;;;     sentence                                           Since 4.6
+;;;     sentence-set                                       Since 4.6
+;;;     show-spaces
+;;;     show-spaces-set
+;;;     size
+;;;     size-points
+;;;     size-set
+;;;     stretch
+;;;     stretch-set
+;;;     strikethrough
+;;;     strikethrough-rgba
+;;;     strikethrough-rgba-set
+;;;     strikethrough-set
+;;;     style
+;;;     style-set
+;;;     tabs
+;;;     tabs-set
+;;;     text-transform                                     Since 4,6
+;;;     text-transform-set                                 Since 4.6
+;;;     underline
+;;;     underline-rgba
+;;;     underline-rgba-set
+;;;     underline-set
+;;;     variant
+;;;     variant-set
+;;;     weight
+;;;     weight-set
+;;;     word                                               Since 4.6
+;;;     word-set                                           Since 4.6
+;;;     wrap-mode
+;;;     wrap-mode-set
+))
+
 ;;;     accumulative-margin
 
 (test gtk-text-tag-accumulative-margin
   (let ((tag (gtk:text-tag-new "margin" :accumulative-margin t)))
-    (is-true (gtk:text-tag-accumulative-margin tag))))
+    (is-true (gtk:text-tag-accumulative-margin tag))
+    (is-false (setf (gtk:text-tag-accumulative-margin tag) nil))
+    (is-false (gtk:text-tag-accumulative-margin tag))))
 
 ;;;     allow-breaks
 ;;;     allow-breaks-set
@@ -272,6 +366,8 @@
 (test gtk-text-tag-allow-breaks
   (let ((tag (gtk:text-tag-new "allow-breaks" :allow-breaks t)))
     (is-true (gtk:text-tag-allow-breaks tag))
+    (is-true (gtk:text-tag-allow-breaks-set tag))
+    (is-false (setf (gtk:text-tag-allow-breaks tag) nil))
     (is-true (gtk:text-tag-allow-breaks-set tag))))
 
 ;;;     background
@@ -376,8 +472,59 @@
 ;;; ---  Functions -------------------------------------------------------------
 
 ;;;     gtk_text_tag_new
+
+(test gtk-text-tag-new
+  (is (typep (gtk:text-tag-new nil) 'gtk:text-tag))
+  (is (typep (gtk:text-tag-new "name") 'gtk:text-tag))
+  (is (typep (gtk:text-tag-new nil :indent 10 :direction :ltr) 'gtk:text-tag)))
+
 ;;;     gtk_text_tag_get_priority
 ;;;     gtk_text_tag_set_priority
+
+(test gtk-text-tag-priority
+  (let ((table (gtk:text-tag-table-new)))
+    (is-true (gtk:text-tag-table-add table
+                                     (gtk:text-tag-new "direction"
+                                                       :direction :ltr)))
+    (is-true (gtk:text-tag-table-add table
+                                     (gtk:text-tag-new "monospace"
+                                                       :family "monospace")))
+    (is-true (gtk:text-tag-table-add table
+                                     (gtk:text-tag-new "indent"
+                                                       :indent 10)))
+
+    (is (= 0 (gtk:text-tag-priority
+                 (gtk:text-tag-table-lookup table "direction"))))
+    (is (= 1 (gtk:text-tag-priority
+                 (gtk:text-tag-table-lookup table "monospace"))))
+    (is (= 2 (gtk:text-tag-priority
+                 (gtk:text-tag-table-lookup table "indent"))))
+
+    (let ((tag (gtk:text-tag-table-lookup table "direction")))
+      (is (= 1 (setf (gtk:text-tag-priority tag) 1)))
+      (is (= 1 (gtk:text-tag-priority
+                   (gtk:text-tag-table-lookup table "direction"))))
+      (is (= 0 (gtk:text-tag-priority
+                   (gtk:text-tag-table-lookup table "monospace"))))
+      (is (= 2 (gtk:text-tag-priority
+                   (gtk:text-tag-table-lookup table "indent")))))))
+
 ;;;     gtk_text_tag_changed
 
-;;; --- 2023-8-26 --------------------------------------------------------------
+(test gtk:text-tag-changed
+  (let ((table (gtk:text-tag-table-new))
+        (tag (gtk:text-tag-new "indent" :indent 10))
+        (message nil))
+
+    (g:signal-connect table "tag-changed"
+                      (lambda (table tag size-changed)
+                        (declare (ignore table size-changed))
+                        (push (gtk:text-tag-name tag) message)))
+
+    (is-true (gtk:text-tag-table-add table tag))
+    (is-false (gtk:text-tag-changed tag t))
+    (is (equal '("indent") message))
+    (is (= 20 (setf (gtk:text-tag-indent tag) 20)))
+    (is (equal '("indent" "indent") message))))
+
+;;; --- 2023-10-24 -------------------------------------------------------------
