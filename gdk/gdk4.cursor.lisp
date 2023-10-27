@@ -93,7 +93,7 @@
 (setf (documentation 'cursor 'type)
  "@version{#2023-8-7}
   @begin{short}
-    A @sym{gdk:cursor} object represents a cursor.
+    A @class{gdk:cursor} object represents a cursor.
   @end{short}
   Cursors are immutable objects, so once you created them, there is no way to
   modify them later. Create a new cursor when you want to change something
@@ -158,7 +158,7 @@
     Accessor of the @slot[gdk:cursor]{fallback} slot of the @class{gdk:cursor}
     class.
   @end{short}
-  The @sym{gdk:cursor-fallback} function returns the fallback for @arg{cursor}.
+  The @fun{gdk:cursor-fallback} function returns the fallback for @arg{cursor}.
   The fallback will be used if the cursor is not available on a given
   @class{gdk:display} object.
 
@@ -192,7 +192,7 @@
     Accessor of the @slot[gdk:cursor]{hotspot-x} slot of the @class{gdk:cursor}
     class.
   @end{short}
-  The @sym{gdk:cursor-hotspot-x} function returns the horizontal offset of the
+  The @fun{gdk:cursor-hotspot-x} function returns the horizontal offset of the
   hotspot. The hotspot indicates the pixel that will be directly above the
   cursor.
 
@@ -226,7 +226,7 @@
     Accessor of the @slot[gdk:cursor]{hotspot-y} slot of the @class{gdk:cursor}
     class.
   @end{short}
-  The @sym{gdk:cursor-hotspot-y} function returns the vertical offset of the
+  The @fun{gdk:cursor-hotspot-y} function returns the vertical offset of the
   hotspot. The hotspot indicates the pixel that will be directly above the
   cursor.
 
@@ -259,7 +259,7 @@
     Accessor of the @slot[gdk:cursor]{name} slot of the @class{gdk:cursor}
     class.
   @end{short}
-  The @sym{gdk:cursor-name} function returns the name of the cursor. If the
+  The @fun{gdk:cursor-name} function returns the name of the cursor. If the
   cursor is not a named cursor, @code{nil} will be returned.
   @see-class{gdk:cursor}")
 
@@ -284,7 +284,7 @@
     Accessor of the @slot[gdk:cursor]{texture} slot of the @class{gdk:cursor}
     class.
   @end{short}
-  The @sym{gdk:cursor-texture} function returns the texture for the cursor. If
+  The @fun{gdk:cursor-texture} function returns the texture for the cursor. If
   the cursor is a named cursor, @code{nil} will be returned.
   @see-class{gdk:cursor}
   @see-class{gdk:texture}")
@@ -329,7 +329,7 @@
   @argument[name]{a string with the name of the cursor}
   @argument[fallback]{@code{nil} or a @class{gdk:cursor} object to fall back to
     when this one cannot be supported}
-  @return{A new @class{gdk-cursor} object, or @code{nil} if there is no cursor
+  @return{A new @class{gdk:cursor} object, or @code{nil} if there is no cursor
     with the given @arg{name}.}
   @begin{short}
     Creates a new cursor by looking up @arg{name} in the current cursor theme.

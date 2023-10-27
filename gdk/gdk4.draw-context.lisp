@@ -155,7 +155,7 @@
 
 (cffi:defcfun ("gdk_draw_context_begin_frame" draw-context-begin-frame) :void
  #+liber-documentation
- "@version{#2023-8-3}
+ "@version{#2023-10-26}
   @argument[context]{a @class{gdk:draw-context} object used to draw the frame}
   @argument[region]{a @symbol{cairo:region-t} instance with the minimum region
     that should be drawn}
@@ -164,11 +164,11 @@
     the surface of @arg{context}.
   @end{short}
 
-  Calling this function begins a drawing operation using @arg{context} on the
-  surface that context was created from. The actual requirements and guarantees
-  for the drawing operation vary for different implementations of drawing, so a
-  @class{gdk:cairo-context} and a @class{gdk:gl-context} object need to be
-  treated differently.
+  Calling this function begins a drawing operation using the context on the
+  surface that the context was created from. The actual requirements and
+  guarantees for the drawing operation vary for different implementations of
+  drawing, so a @class{gdk:cairo-context} and a @class{gdk:gl-context} object
+  need to be treated differently.
 
   A call to this function is a requirement for drawing and must be followed by
   a call to the @fun{gdk:draw-context-end-frame} function, which will complete
@@ -182,7 +182,7 @@
 
   When using GTK, the widget system automatically places calls to the
   @fun{gdk:draw-context-begin-frame} and @fun{gdk:draw-context-end-frame}
-  functions via the use of @class{gdk:renderer} objects, so application code
+  functions via the use of @class{gsk:renderer} objects, so application code
   does not need to call these functions explicitly.
   @see-class{gdk:draw-context}
   @see-symbol{cairo:region-t}

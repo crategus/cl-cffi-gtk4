@@ -173,22 +173,17 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; GDK_EVENT_PROPAGATE
-;;;
-;;; #define GDK_EVENT_PROPAGATE     (FALSE)
-;;;
-;;; Use this macro as the return value for continuing the propagation of an
-;;; event handler.
 ;;; ----------------------------------------------------------------------------
 
 (defconstant +gdk-event-propagate+ nil
  #+liber-documentation
- "@version{#2021-12-13}
+ "@version{2023-10-17}
   @variable-value{@em{false}}
   @begin{short}
     Use this value as the return value for continuing the propagation of an
     event handler.
   @end{short}
-  @see-variable{+gdk-event-stop+}")
+  @see-variable{gdk:+gdk-event-stop+}")
 
 #+liber-documentation
 (setf (liber:alias-for-variable '+gdk-event-propagate+) "Constant")
@@ -201,23 +196,23 @@
 
 (defconstant +gdk-event-stop+ t
  #+liber-documentation
- "@version{#2021-12-13}
+ "@version{#2023-10-17}
   @variable-value{@em{true}}
   @begin{short}
     Use this value as the return value for stopping the propagation of an event
     handler.
   @end{short}
   @begin[Example]{dictionary}
-    This event handler for the \"close-request\" signal of a window stops the
-    propagation of the event and the window is not closed.
+    This event handler for the @code{\"close-request\"} signal of a window
+    stops the propagation of the event and the window is not closed.
     @begin{pre}
 (g:signal-connect window \"close-request\"
                   (lambda (widget event)
                     (declare (ignore widget event))
-                    +gdk-event-stop+))
+                    gdk:+gdk-event-stop+))
     @end{pre}
   @end{dictionary}
-  @see-variable{+gdk-event-propagate+}")
+  @see-variable{gdk:+gdk-event-propagate+}")
 
 #+liber-documentation
 (setf (liber:alias-for-variable '+gdk-event-stop+) "Constant")
@@ -373,7 +368,8 @@
     @entry[:pad-group-mode]{A tablet pad group mode change.}
     @entry[:touchpad-hold]{A touchpad hold gesture event, the current state is
       determined by its phase field. Since 4.6}
-    @entry[:event-last]{Marks the end of the @sym{gdk:event-type} enumeration.}
+    @entry[:event-last]{Marks the end of the @symbol{gdk:event-type}
+      enumeration.}
   @end{table}
   @see-class{gdk:event}")
 
@@ -463,7 +459,7 @@
       (liber:symbol-documentation 'touchpad-gesture-phase)
  "@version{#2021-12-13}
   @begin{short}
-    The @sym{gdk:touchpad-gesture-phase} enumeration specifies the current
+    The @symbol{gdk:touchpad-gesture-phase} enumeration specifies the current
     state of a touchpad gesture.
   @end{short}
   All gestures are guaranteed to begin with an event with @code{:begin}
@@ -612,19 +608,19 @@
   @begin{short}
     Specifies the unit of scroll deltas.
   @end{short}
-  When you get the @code{:wheel} value, a delta of 1.0 means 1 wheel detent 
-  click in the south direction, 2.0 means 2 wheel detent clicks in the south 
-  direction. This is the same logic for negative values but in the north 
+  When you get the @code{:wheel} value, a delta of 1.0 means 1 wheel detent
+  click in the south direction, 2.0 means 2 wheel detent clicks in the south
+  direction. This is the same logic for negative values but in the north
   direction.
 
-  If you get the @code{:surface} value, are managing a scrollable view and get 
-  a value of 123, you have to scroll 123 surface logical pixels right if it is 
-  @code{delta_x} or down if it is @code{delta_y}. This is the same logic for 
-  negative values but you have to scroll left instead of right if it is 
+  If you get the @code{:surface} value, are managing a scrollable view and get
+  a value of 123, you have to scroll 123 surface logical pixels right if it is
+  @code{delta_x} or down if it is @code{delta_y}. This is the same logic for
+  negative values but you have to scroll left instead of right if it is
   @code{delta_x} and up instead of down if it is @code{delta_y}.
 
-  1 surface logical pixel is equal to 1 real screen pixel multiplied by the 
-  final scale factor of your graphical interface, the product of the desktop 
+  1 surface logical pixel is equal to 1 real screen pixel multiplied by the
+  final scale factor of your graphical interface, the product of the desktop
   scale factor and eventually a custom scale factor in your application.
   @begin{pre}
 (gobject:define-g-enum \"GdkScrollUnit\" scroll-unit
@@ -635,7 +631,7 @@
   @end{pre}
   @begin[code]{table}
     @entry[:wheel]{The delta is in number of wheel clicks.}
-    @entry[:surface]{The delta is in surface pixels to scroll directly on 
+    @entry[:surface]{The delta is in surface pixels to scroll directly on
       screen.}
   @end{table}
   Since 4.8
@@ -703,8 +699,8 @@
       (documentation 'event-sequence 'type)
  "@version{#2022-7-21}
   @begin{short}
-    The @sym{event-sequence} structure is an opaque type representing a sequence
-    of related touch events.
+    The @class{gdk:event-sequence} structure is an opaque type representing a
+    sequence of related touch events.
   @end{short}
   See the @fun{gdk:event-event-sequence} function.
   @see-function{gdk:event-event-sequence}")
