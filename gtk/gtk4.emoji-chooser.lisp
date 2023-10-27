@@ -91,6 +91,7 @@
   @end{short}
 
   @image[emoji-chooser]{Figure: GtkEmojiChooser}
+
   The @class{gtk:emoji-chooser} widget emits the \"emoji-picked\" signal when
   an Emoji is selected.
   @begin[CSS nodes]{dictionary}
