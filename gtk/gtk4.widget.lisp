@@ -2935,7 +2935,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_add_controller" widget-add-controller) :void
  #+liber-documentation
- "@version{#2022-7-21}
+ "@version{2023-10-18}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[controller]{a @class{gtk:event-controller} object that has not
     added to a widget yet}
@@ -3211,25 +3211,6 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_set_cursor_from_name ()
-;;;
-;;; void
-;;; gtk_widget_set_cursor_from_name (GtkWidget *widget,
-;;;                                  const char *name);
-;;;
-;;; Sets a named cursor to be shown when pointer devices point towards widget .
-;;;
-;;; This is a utility function that creates a cursor via
-;;; gdk_cursor_new_from_name() and then sets it on widget with
-;;; gtk_widget_set_cursor(). See those 2 functions for details.
-;;;
-;;; On top of that, this function allows name to be NULL, which will do the same
-;;; as calling gtk_widget_set_cursor() with a NULL cursor.
-;;;
-;;; widget :
-;;;     a GtkWidget
-;;;
-;;; name :
-;;;     The name of the cursor or NULL to use the default cursor.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_set_cursor_from_name" %widget-set-cursor-from-name)
@@ -3238,6 +3219,25 @@ lambda (widget)    :run-last
   (name :string))
 
 (defun widget-set-cursor-from-name (widget name)
+ #+liber-documentation
+ "@version{2023-10-17}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[name]{a string with the name of the cursor or @code{nil} to use
+    the default cursor}
+  @begin{short}
+    Sets a named cursor to be shown when pointer devices point towards
+    @arg{widget}.
+  @end{short}
+  This is a utility function that creates a cursor via the
+  @fun{gdk:cursor-new-from-name} function and then sets it on @arg{widget} with
+  the @fun{gtk:widget-cursor} function. See those two functions for details.
+
+  On top of that, this function allows @arg{name} to be @code{nil}, which will
+  do the same as calling the @fun{gtk:widget-cursor} function with a @code{nil}
+  cursor.
+  @see-class{gtk:widget}
+  @see-function{gdk:cursor-new-from-name}
+  @see-function{gtk:widget-cursor}"
   (%widget-set-cursor-from-name widget
                                 (if name name (cffi:null-pointer))))
 
@@ -3502,7 +3502,7 @@ lambda (widget)    :run-last
 
 (defun widget-size-request (widget)
  #+liber-documentation
- "@version{#2023-9-18}
+ "@version{2023-10-18}
   @syntax[]{(gtk:widget-size-request object) => width, height}
   @syntax[]{(setf (gtk:widget-size-request object) (list width height))}
   @argument[object]{a @class{gtk:widget} object}
@@ -3514,7 +3514,7 @@ lambda (widget)    :run-last
   A value of -1 returned in @arg{width} or @arg{height} indicates that that
   dimension has not been set explicitly and the natural requisition of the
   widget will be used instead. To get the size a widget will actually request,
-  call the @fun{gtk:widget-preferred-size} function instead of this function.
+  call the @fun{gtk:widget-measure} function instead of this function.
 
   The @setf{gtk:widget-size-request} function sets the minimum size of a widget.
   That is, the size request of the widget will be @arg{width} by @arg{height}.
@@ -3524,9 +3524,7 @@ lambda (widget)    :run-last
   In most cases, the @fun{gtk:window-default-size} function is a better choice
   for toplevel windows than this function. Setting the default size will still
   allow users to shrink the window. Setting the size request will force them to
-  leave the window at least as large as the size request. When dealing with
-  window sizes, the @fun{gtk:window-set-geometry-hints} function can be a
-  useful function as well.
+  leave the window at least as large as the size request.
 
   Note the inherent danger of setting any fixed size - themes, translations
   into other languages, different fonts, and user action can all change the
@@ -3541,18 +3539,14 @@ lambda (widget)    :run-last
   If the size request in a given direction is -1 (unset), then the \"natural\"
   size request of the widget will be used instead.
 
-  Widgets cannot actually be allocated a size less than 1 by 1, but you can
-  pass 0 by 0 to this function to mean \"as small as possible\".
-
   The size request set here does not include any margin from the
   @slot[gtk:widget]{margin-start}, @slot[gtk:widget]{margin-end},
   @slot[gtk:widget]{margin-top}, and @slot[gtk:widget]{margin-bottom}
   properties, but it does include pretty much all other padding or border
   properties set by any subclass of the @class{gtk:widget} class.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-preferred-size}
+  @see-function{gtk:widget-measure}
   @see-function{gtk:window-default-size}
-  @see-function{gtk:window-set-geometry-hints}
   @see-function{gtk:widget-margin-start}
   @see-function{gtk:widget-margin-end}
   @see-function{gtk:widget-margin-top}
@@ -4439,49 +4433,62 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_measure ()
-;;;
-;;; void
-;;; gtk_widget_measure (GtkWidget *widget,
-;;;                     GtkOrientation orientation,
-;;;                     int for_size,
-;;;                     int *minimum,
-;;;                     int *natural,
-;;;                     int *minimum_baseline,
-;;;                     int *natural_baseline);
-;;;
-;;; Measures widget in the orientation orientation and for the given for_size .
-;;; As an example, if orientation is GTK_ORIENTATION_HORIZONTAL and for_size is
-;;; 300, this functions will compute the minimum and natural width of widget if
-;;; it is allocated at a height of 300 pixels.
-;;;
-;;; See GtkWidget’s geometry management section for a more details on
-;;; implementing GtkWidgetClass.measure().
-;;;
-;;; widget :
-;;;     A GtkWidget instance
-;;;
-;;; orientation :
-;;;     the orientation to measure
-;;;
-;;; for_size :
-;;;     Size for the opposite of orientation , i.e. if orientation is
-;;;     GTK_ORIENTATION_HORIZONTAL, this is the height the widget should be
-;;;     measured with. The GTK_ORIENTATION_VERTICAL case is analogous. This way,
-;;;     both height-for-width and width-for-height requests can be implemented.
-;;;     If no size is known, -1 can be passed.
-;;;
-;;; minimum :
-;;;     location to store the minimum size, or NULL.
-;;;
-;;; natural :
-;;;     location to store the natural size, or NULL.
-;;;
-;;; minimum_baseline :
-;;;     location to store the baseline position for the minimum size, or NULL.
-;;;
-;;; natural_baseline :
-;;;     location to store the baseline position for the natural size, or NULL.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_measure" %widget-measure) :void
+  (widget (g:object widget))
+  (orientation orientation)
+  (for-size :int)
+  (minimum (:pointer :int))
+  (natural (:pointer :int))
+  (minimum-baseline (:pointer :int))
+  (natural-baseline (:pointer :int)))
+
+(defun widget-measure (widget orientation for-size)
+ #+liber-documentation
+ "@version{2023-10-18}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[orientation]{a @symbol{gtk:orientation} value with the orientation
+    to measure}
+  @argument[for-size]{an integer with the size for the opposite of
+    @arg{orientation}, i.e. if @arg{orientation} is @code{:horizontal}, this is
+    the height the widget should be measured with. The @code{:vertical} case is
+    analogous. This way, both height-for-width and width-for-height requests
+    can be implemented. If no size is known, -1 can be passed.}
+  @begin{return}
+    @arg{minimum} -- an integer with the minimum size @br{}
+    @arg{natural} -- an integer with the natural size @br{}
+    @arg{minimum-baseline} -- an integer with the baseline position for the
+      minimum size @br{}
+    @arg{natural-baseline} -- an integer with the baseline position for the
+      natural size
+  @end{return}
+  @begin{short}
+    Measures @arg{widget} in the orientation @arg{orientation} and for the
+    given @arg{for-size}.
+  @end{short}
+  As an example, if @arg{orientation} is @code{:horizontal} and @arg{for-size}
+  is 300, this functions will compute the minimum and natural width of
+  @arg{widget} if it is allocated at a height of 300 pixels.
+  @see-class{gtk:widget}
+  @see-symbol{gtk:orientation}"
+  (cffi:with-foreign-objects ((minimum :int)
+                              (natural :int)
+                              (minimum-baseline :int)
+                              (natural-baseline :int))
+    (%widget-measure widget
+                     orientation
+                     for-size
+                     minimum
+                     natural
+                     minimum-baseline
+                     natural-baseline)
+    (values (cffi:mem-ref minimum :int)
+            (cffi:mem-ref natural :int)
+            (cffi:mem-ref minimum-baseline :int)
+            (cffi:mem-ref natural-baseline :int))))
+
+(export 'widget-measure)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_snapshot_child ()
@@ -4920,7 +4927,7 @@ lambda (widget)    :run-last
 
 (defun widget-preferred-size (widget)
  #+liber-documentation
- "@version{#2021-9-21}
+ "@version{#2023-10-18}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{return}
     @arg{minimum-size} -- a @class{gtk:requisition} instance with the minimum
@@ -4936,7 +4943,10 @@ lambda (widget)    :run-last
   This is used to retrieve a suitable size by container widgets which do not
   impose any restrictions on the child placement. It can be used to deduce
   toplevel window and menu sizes as well as child widgets in free-form
-  containers such as @class{gtk:layout} widget.
+  containers such as the @class{gtk:fixed} widget.
+
+  Use the @fun{gtk:widget-measure} function if you want to support baseline
+  alignment.
   @begin[Note]{dictionary}
     Handle with care. Note that the natural height of a height-for-width widget
     will generally be a smaller size than the minimum height, since the required
@@ -4944,9 +4954,10 @@ lambda (widget)    :run-last
     for the minimum width.
   @end{dictionary}
   @see-class{gtk:widget}
-  @see-class{gtk:requisition}"
- (let ((minimum-size (make-requisition))
-       (natural-size (make-requisition)))
+  @see-class{gtk:requisition}
+  @see-function{gtk:widget-measure}"
+ (let ((minimum-size (requisition-new))
+       (natural-size (requisition-new)))
     (%widget-preferred-size widget minimum-size natural-size)
     (values minimum-size
             natural-size)))
