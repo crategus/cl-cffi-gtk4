@@ -2,7 +2,7 @@
 ;;; gdk4.paintable.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -94,10 +94,10 @@
   (:static-contents #.(ash 1 1)))
   @end{pre}
   @begin[code]{table}
-    @entry[:static-size]{The size is immutable. The \"invalidate-size\" signal
-      will never be emitted.}
-    @entry[:static-contents]{The content is immutable. The \"invalidate-contents\"
-      signal will never be emitted.}
+    @entry[:static-size]{The size is immutable. The @code{\"invalidate-size\"}
+    signal will never be emitted.}
+    @entry[:static-contents]{The content is immutable. The
+      @code{\"invalidate-contents\"} signal will never be emitted.}
   @end{table}
   @see-class{gdk:paintable}")
 
@@ -118,7 +118,7 @@
   @begin{short}
     Base type for snapshot operations.
   @end{short}
-  The subclass of the @sym{gdk:snapshot} class used by GTK is the
+  The subclass of the @class{gdk:snapshot} class used by GTK is the
   @class{gtk:snapshot} class.
   @see-class{gtk:snapshot}")
 
@@ -135,31 +135,31 @@
 (setf (documentation 'paintable 'type)
  "@version{2023-7-30}
   @begin{short}
-    The @sym{gdk:paintable} interface is a simple interface used by GDK and GTK
-    to represent objects that can be painted anywhere at any size without
+    The @class{gdk:paintable} interface is a simple interface used by GDK and
+    GTK to represent objects that can be painted anywhere at any size without
     requiring any sort of layout.
   @end{short}
   The interface is inspired by similar concepts elsewhere, such as
   @code{ClutterContent}, HTML/CSS Paint Sources, or SVG Paint Servers.
 
-  A @sym{gdk:paintable} object can be snapshot at any time and size using the
+  A @class{gdk:paintable} object can be snapshot at any time and size using the
   @fun{gdk:paintable-snapshot} function. How the paintable interprets that size
   and if it scales or centers itself into the given rectangle is implementation
-  defined, though if you are implementing a @sym{gdk:paintable} object and
+  defined, though if you are implementing a @class{gdk:paintable} object and
   do not know what to do, it is suggested that you scale your paintable
   ignoring any potential aspect ratio.
 
-  The contents that a @sym{gdk:paintable} object produces may depend on the
+  The contents that a @class{gdk:paintable} object produces may depend on the
   @class{gdk:snapshot} object passed to it. For example, paintables may decide
   to use more detailed images on higher resolution screens or when OpenGL is
-  available. A @sym{gdk:paintable} object will however always produce the same
-  output for the same snapshot.
+  available. A @class{gdk:paintable} object will however always produce the
+  same output for the same snapshot.
 
-  A @sym{gdk:paintable} object may change its contents, meaning that it will
+  A @class{gdk:paintable} object may change its contents, meaning that it will
   now produce a different output with the same snapshot. Once that happens, it
   will call the @fun{gdk:paintable-invalidate-contents} function which will
-  emit the \"invalidate-contents\" signal. If a paintable is known to never
-  change its contents, it will set the @code{:static-contents} flag. If a
+  emit the @code{\"invalidate-contents\"} signal. If a paintable is known to
+  never change its contents, it will set the @code{:static-contents} flag. If a
   consumer cannot deal with changing contents, it may call the
   @fun{gdk:paintable-current-image} function which will return a static
   paintable and use that.
@@ -169,8 +169,8 @@
   interface can use this information to layout thepaintable appropriately. Just
   like the contents, the size of a paintable can change. A paintable will
   indicate this by calling the @fun{gdk:paintable-invalidate-size} function
-  which will emit the \"invalidate-size\" signal. And just like for contents,
-  if a paintable is known to never change its size, it will set the
+  which will emit the @code{\"invalidate-size\"} signal. And just like for
+  contents, if a paintable is known to never change its size, it will set the
   @code{:static-size} flag.
 
   Besides API for applications, there are some functions that are only useful
@@ -205,6 +205,74 @@ lambda (paintable)    :run-last
   @see-class{gdk:texture}
   @see-class{gtk:image}
   @see-class{gtk:snapshot}")
+
+;;; ----------------------------------------------------------------------------
+;;; GdkPaintable Inferface
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-vtable ("GdkPaintable" paintable)
+  (:skip parent-instance (:struct g:type-interface))
+  ;; Methods of the GdkPaintable interface
+  (snapshot (:void (paintable (g:object paintable))
+                   (snapshot (g:object snapshot))
+                   (width :double)
+                   (height :double)))
+  (get-current-image ((g:object paintable) (paintable (g:object paintable))))
+  (get-flags (paintable-flags (paintable (g:object paintable))))
+  (get-intrinsic-width (:int (paintable (g:object paintable))))
+  (get-intrinsic-height (:int (paintable (g:object paintable))))
+  (get-intrinsic-aspect-ratio (:double (paintable (g:object paintable)))))
+
+;;; ----------------------------------------------------------------------------
+
+;; Define default methods for the virtual functions of the interface.
+;; The default functions of the C library are not available, therefor we
+;; define the equivalent functionality in Lisp.
+
+(defmethod paintable-snapshot-impl ((paintable paintable) snapshot width height)
+  (error "Paintable of type ~a  does not implement GdkPaintable:snapshot."
+         (g:type-name (g:type-from-instance paintable))))
+
+(defmethod paintable-get-current-image-impl ((paintable paintable))
+  (if (not (set-difference '(:static-size :static-contents)
+                           (paintable-get-flags-impl paintable)))
+      ;; Paintable is immutable, return it
+      paintable
+      ;; Create a new paintable object
+      (let ((width (paintable-get-intrinsic-width-impl paintable))
+            (height (paintable-get-intrinsic-height-impl paintable)))
+        (if (or (<= width 0) (<= height 0))
+          (paintable-new-empty width height)
+          (let ((snapshot (g:object-new "GtkSnapshot")))
+            (paintable-snapshot paintable snapshot width height)
+            ;; The GTK package is not availabe at this point. We call the
+            ;; C function directly.
+            (cffi:foreign-funcall "gtk_snapshot_free_to_paintable"
+                                  (g:object snapshot) snapshot
+                                  :pointer (cffi:null-pointer)))))))
+
+(defmethod paintable-get-flags-impl ((paintable paintable))
+  '())
+
+(defmethod paintable-get-intrinsic-width-impl ((paintable paintable))
+  0)
+
+(defmethod paintable-get-intrinsic-height-impl ((paintable paintable))
+  0)
+
+(defmethod paintable-get-intrinsic-aspect-ratio-impl ((paintable paintable))
+  (let ((width (paintable-get-intrinsic-width-impl paintable))
+        (height (paintable-get-intrinsic-height-impl paintable)))
+    (if (or (<= width 0) (<= height 0))
+        0.0d0
+        (coerce (/ width height) 'double-float))))
+
+(export 'paintable-snapshot-impl)
+(export 'paintable-get-current-image-impl)
+(export 'paintable-get-flags-impl)
+(export 'paintable-get-intrinsic-width-impl)
+(export 'paintable-get-intrinsic-height-impl)
+(export 'paintable-get-intrinsic-aspect-ratio-impl)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_paintable_get_current_image ()
@@ -253,10 +321,6 @@ lambda (paintable)    :run-last
   (snapshot (g:object snapshot))
   (width :double)
   (height :double))
-
-;(defun paintable-snapshot (paintable snaphot width height)
-;  (%paintable-snapshot paintable snapshot width height)
-;    snapshot))
 
 (export 'paintable-snapshot)
 
@@ -438,8 +502,9 @@ lambda (paintable)    :run-last
   multiple calls of the @fun{gdk:paintable-snapshot} function produce the same
   output.
 
-  This function will emit the \"invalidate-contents\" signal. If a paintable
-  reports the @code{:static-contents} flag, it must not call this function.
+  This function will emit the @code{\"invalidate-contents\"} signal. If a
+  paintable reports the @code{:static-contents} flag, it must not call this
+  function.
   @see-class{gdk:paintable}
   @see-class{gdk:snapshot}
   @see-symbol{gdk:paintable-flags}"
@@ -462,9 +527,8 @@ lambda (paintable)    :run-last
   As long as the size is not invalidated, @arg{paintable} must return the same
   values for its intrinsic width, height and aspect ratio.
 
-  This function will emit the \"invalidate-size\" signal. If a paintable reports
-  the @code{:static-size} flag, it must not call this function.
-
+  This function will emit the @code{\"invalidate-size\"} signal. If a paintable
+  reports the @code{:static-size} flag, it must not call this function.
   @see-class{gdk:paintable}
   @see-symbol{gdk:paintable-flags}"
   (paintable (g:object paintable)))
