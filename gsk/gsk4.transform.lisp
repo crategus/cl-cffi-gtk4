@@ -95,7 +95,6 @@
   @begin{short}
     The categories of matrices relevant for GSK and GTK.
   @end{short}
-
   Note that any category includes matrices of all later categories. So if you
   want to for example check if a matrix is a 2D matrix, `category >=
   GSK_TRANSFORM_CATEGORY_2D` is the way to do this.
@@ -151,13 +150,14 @@
       (documentation 'transform 'type)
  "@version{#2022-2-7}
   @begin{short}
-    The @sym{gsk:transform} object is an object to describe transform matrices.
+    The @class{gsk:transform} structure is a structure to describe transform
+    matrices.
   @end{short}
-  Unlike the @symbol{graphene:matrix-t} structure, the @sym{transform} object
-  retains the steps in how a transform was constructed, and allows inspecting
-  them. It is modeled after the way CSS describes transforms.
+  Unlike the @symbol{graphene:matrix-t} structure, the @class{gsk:transform} 
+  structure retains the steps in how a transform was constructed, and allows 
+  inspecting them. It is modeled after the way CSS describes transforms.
 
-  The @sym{transform} objects are immutable and cannot be changed after
+  The @class{gsk:transform} instances are immutable and cannot be changed after
   creation. This means code can safely expose them as properties of objects
   without having to worry about others changing them.
   @see-symbol{graphene:matrix-t}")
@@ -169,6 +169,11 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun transform-new ()
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @return{A new @class{gsk:transform} instance.}
+  @short{Creates a new transform matrix.}
+  @see-class{gsk:transform}"
   (make-instance 'transform))
 
 (export 'transform-new)
@@ -284,7 +289,7 @@
 (defun transform-parse (str)
  "@version{#2022-10-2}
   @argument[str]{a string to parse}
-  @return{A @class{transform} object with the transform}
+  @return{A @class{gsk:transform} instance with the transform}
   @begin{short}
     Parses the given string into a transform.
   @end{short}

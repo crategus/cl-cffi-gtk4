@@ -50,16 +50,6 @@
 ;;;     gsk_rounded_rect_contains_point
 ;;;     gsk_rounded_rect_contains_rect
 ;;;     gsk_rounded_rect_intersects_rect
-;;;
-;;; Description
-;;;
-;;; GskRoundedRect defines a rectangle with rounded corners, as is commonly
-;;; used in drawing.
-;;;
-;;; Operations on a GskRoundedRect will normalize the rectangle, to ensure that
-;;; the bounds are normalized and that the corner sizes don't exceed the size of
-;;; the rectangle. The algorithm used for normalizing corner sizes is described
-;;; in the CSS specification.
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gsk)
@@ -105,27 +95,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; struct GskRoundedRect
-;;;
-;;; struct GskRoundedRect {
-;;;   graphene_rect_t bounds;
-;;;
-;;;   graphene_size_t corner[4];
-;;; };
-;;;
-;;; A rectangular region with rounded corners.
-;;;
-;;; Application code should normalize rectangles using
-;;; gsk_rounded_rect_normalize(); this function will ensure that the bounds of
-;;; the rectangle are normalized and ensure that the corner values are positive
-;;; and the corners do not overlap. All functions taking a GskRoundedRect as an
-;;; argument will internally operate on a normalized copy; all functions
-;;; returning a GskRoundedRect will always return a normalized one.
-;;;
-;;; graphene_rect_t bounds;
-;;;
-;;;
-;;; graphene_size_t corner[4];
-;;;
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcstruct rounded-rect
@@ -140,10 +109,10 @@
   @begin{short}
     A rectangular region with rounded corners.
   @end{short}
-  Application code should normalize rectangles using the
+  Application code should normalize rounded rectangles using the
   @fun{gsk:rounded-rect-normalize} function. This function will ensure that the
-  bounds of the rectangle are normalized and ensure that the corner values are
-  positive and the corners do not overlap.
+  bounds of the rounded rectangle are normalized and ensure that the corner
+  values are positive and the corners do not overlap.
 
   All functions taking a @symbol{gsk:rounded-rect} instance as an argument will
   internally operate on a normalized copy. All functions returning a
@@ -158,7 +127,7 @@
   @end{pre}
   @begin[code]{table}
     @entry[bounds]{A @symbol{graphene:rect-t} instance with the bounds of the
-      rectangle.}
+      rounded rectangle.}
     @entry[corner]{An array of @symbol{graphene:size-t} instances with the size
       of the 4 rounded corners.}
   @end{table}
@@ -171,11 +140,29 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun rounded-rect-bounds (rect)
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @syntax[]{(gsk:rounded-rect-bounds rect) => bounds}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance}
+  @short{Accessor of the bounds of the rounded rectangle.}
+  @see-symbol{gsk:rounded-rect}
+  @see-symbol{graphene:rect-t}"
   (cffi:foreign-slot-pointer rect '(:struct rounded-rect) 'bounds))
 
 (export 'rounded-rect-bounds)
 
 (defun rounded-rect-corner (rect nth)
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @syntax[]{(gsk:rounded-rect-corner rect nth) => corner}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @argument[nth]{an integer with the number of the corner to retrieve}
+  @argument[corner]{a @symbol{graphene:size-t} instance with the size of
+    the @arg{nth} corner}
+  @short{Accessor of the @arg{nth} corner of the rounded rectangle.}
+  @see-symbol{gsk:rounded-rect}
+  @see-symbol{graphene:size-t}"
   (let ((ptr (cffi:foreign-slot-pointer rect '(:struct rounded-rect) 'corner)))
     (cffi:mem-aptr ptr '(:struct graphene:size-t) nth)))
 
@@ -204,43 +191,31 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_init ()
-;;;
-;;; GskRoundedRect *
-;;; gsk_rounded_rect_init (GskRoundedRect *self,
-;;;                        const graphene_rect_t *bounds,
-;;;                        const graphene_size_t *top_left,
-;;;                        const graphene_size_t *top_right,
-;;;                        const graphene_size_t *bottom_right,
-;;;                        const graphene_size_t *bottom_left);
-;;;
-;;; Initializes the given GskRoundedRect with the given values.
-;;;
-;;; This function will implicitly normalize the GskRoundedRect before returning.
-;;;
-;;; self :
-;;;     The GskRoundedRect to initialize
-;;;
-;;; bounds :
-;;;     a graphene_rect_t describing the bounds
-;;;
-;;; top_left :
-;;;     the rounding radius of the top left corner
-;;;
-;;; top_right :
-;;;     the rounding radius of the top right corner
-;;;
-;;; bottom_right :
-;;;     the rounding radius of the bottom right corner
-;;;
-;;; bottom_left :
-;;;     the rounding radius of the bottom left corner
-;;;
-;;; Returns :
-;;;     the initialized rectangle.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_init" rounded-rect-init)
     (:pointer (:struct rounded-rect))
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance to initialize}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance describing the bounds}
+  @argument[top-left]{a @symbol{graphene:size-t} instance with the rounding
+    radius of the top left corner}
+  @argument[top-right]{a @symbol{graphene:size-t} instance with the rounding
+    radius of the top right corner}
+  @argument[bottom-right]{a @symbol{graphene:size-t} instance with the rounding
+    radius of the bottom right corner}
+  @argument[bottom-left]{a @symbol{graphene:size-t} instance with the rounding
+    radius of the bottom left corner}
+  @return{A initialized @symbol{gsk:rounded-rect} instance.}
+  @begin{short}
+    Initializes the given @arg{rect} with the given values.
+  @end{short}
+  This function will implicitly normalize the rounded rectangle before
+  returning.
+  @see-symbol{gsk:rounded-rect}
+  @see-symbol{graphene:rect-t}
+  @see-symbol{graphene:size-t}"
   (rect (:pointer (:struct rounded-rect)))
   (bounds (:pointer (:struct graphene:rect-t)))
   (top-left (:pointer (:struct graphene:size-t)))
@@ -252,28 +227,21 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_init_copy ()
-;;;
-;;; GskRoundedRect *
-;;; gsk_rounded_rect_init_copy (GskRoundedRect *self,
-;;;                             const GskRoundedRect *src);
-;;;
-;;; Initializes self using the given src rectangle.
-;;;
-;;; This function will not normalize the GskRoundedRect, so make sure the source
-;;; is normalized.
-;;;
-;;; self :
-;;;     a GskRoundedRect
-;;;
-;;; src :
-;;;     a GskRoundedRect
-;;;
-;;; Returns :
-;;;     the initialized rectangle.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_init_copy" rounded-rect-init-copy)
     (:pointer (:struct rounded-rect))
+ #+liber-documentation
+ "@version{#2023-10-27}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @argument[src]{a @symbol{gsk:rounded-rect} instance}
+  @return{A initialized @symbol{gsk:rounden-rect} instance.}
+  @begin{short}
+    Initializes @arg{rect} using the given @arg{src} rounded rectangle.
+  @end{short}
+  This function will not normalize the rounded rectangle, so make sure the
+  source rounded rectangle is normalized.
+  @see-symbol{gsk:rounded-rect}"
   (rect (:pointer (:struct rounded-rect)))
   (src (:pointer (:struct rounded-rect))))
 
@@ -281,26 +249,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_init_from_rect ()
-;;;
-;;; GskRoundedRect *
-;;; gsk_rounded_rect_init_from_rect (GskRoundedRect *self,
-;;;                                  const graphene_rect_t *bounds,
-;;;                                  float radius);
-;;;
-;;; Initializes self to the given bounds and sets the radius of all four corners
-;;; to radius .
-;;;
-;;; self :
-;;;     a GskRoundedRect
-;;;
-;;; bounds :
-;;;     a graphene_rect_t
-;;;
-;;; radius :
-;;;     the border radius
-;;;
-;;; Returns :
-;;;     the initialized rectangle.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_init_from_rect" %rounded-rect-init-from-rect)
@@ -310,6 +258,18 @@
   (radius :float))
 
 (defun rounded-rect-init-from-rect (rect bounds radius)
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance}
+  @argument[radius]{a number coerced to a single float with the border radius}
+  @return{The initialized @symbol{gsk:rounded-rect} instance.}
+  @begin{short}
+    Initializes @arg{rect} to the given @arg{bounds} and sets the radius of all
+    four corners to @arg{radius}.
+  @end{short}
+  @see-symbol{gsk:rounded-rect}
+  @see-symbol{graphene:rect-t}"
   (let ((radius (coerce radius 'single-float)))
     (%rounded-rect-init-from-rect rect bounds radius)))
 
@@ -317,52 +277,27 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_normalize ()
-;;;
-;;; GskRoundedRect *
-;;; gsk_rounded_rect_normalize (GskRoundedRect *self);
-;;;
-;;; Normalizes the passed rectangle.
-;;;
-;;; this function will ensure that the bounds of the rectangle are normalized
-;;; and ensure that the corner values are positive and the corners do not
-;;; overlap.
-;;;
-;;; self :
-;;;     a GskRoundedRect
-;;;
-;;; Returns :
-;;;     the normalized rectangle.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_normalize" rounded-rect-normalize)
     (:pointer (:struct rounded-rect))
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @return{The normalized @symbol{gsk:rounded-rect} instance.}
+  @begin{short}
+    Normalizes the passed rounded rectangle.
+  @end{short}
+  This function will ensure that the bounds of the rounded rectangle are
+  normalized and ensure that the corner values are positive and the corners do
+  not overlap.
+  @see-class{gsk:rounded-rect}"
   (rect (:pointer (:struct rounded-rect))))
 
 (export 'rounded-rect-normalize)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_offset ()
-;;;
-;;; GskRoundedRect *
-;;; gsk_rounded_rect_offset (GskRoundedRect *self,
-;;;                          float dx,
-;;;                          float dy);
-;;;
-;;; Offsets the bound's origin by dx and dy .
-;;;
-;;; The size and corners of the rectangle are unchanged.
-;;;
-;;; self :
-;;;     a GskRoundedRect
-;;;
-;;; dx :
-;;;     the horizontal offset
-;;;
-;;; dy :
-;;;     the vertical offset
-;;;
-;;; Returns :
-;;;     the offset rectangle.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_offset" %rounded-rect-offset)
@@ -372,6 +307,15 @@
   (dy :float))
 
 (defun rounded-rect-offset (rect dx dy)
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @return{The offst @symbol{gsk:rounded-rect} instance.}
+  @begin{short}
+    Offsets the origin of the bound by @arg{dx} and @arg{dy}.
+  @end{short}
+  The size and corners of the rounded rectangle are unchanged.
+  @see-symbol{gsk:rounded-rect}"
   (let ((dx (coerce dx 'single-float))
         (dy (coerce dy 'single-float)))
     (%rounded-rect-offset rect dx dy)))
@@ -380,34 +324,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_shrink ()
-;;;
-;;;GskRoundedRect *
-;;;gsk_rounded_rect_shrink (GskRoundedRect *self,
-;;;                         float top,
-;;;                         float right,
-;;;                         float bottom,
-;;;                         float left);
-;;;Shrinks (or grows) the given rectangle by moving the 4 sides according to the offsets given. The corner radii will be changed in a way that tries to keep the center of the corner circle intact. This emulates CSS behavior.
-
-;;;This function also works for growing rectangles if you pass negative values for the top , right , bottom or left .
-
-;;;self
-;;;The GskRoundedRect to shrink or grow
-
-;;;top
-;;;How far to move the top side downwards
-
-;;;right
-;;;How far to move the right side to the left
-
-;;;bottom
-;;;How far to move the bottom side upwards
-
-;;;left
-;;;How far to move the left side to the right
-
-;;;Returns
-;;;the resized GskRoundedRect.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_shrink" %rounded-rect-shrink)
@@ -419,6 +335,28 @@
   (left :float))
 
 (defun rounded-rect-shrink (rect top right bottom left)
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @argument[top]{a number coerced to a single float how far to move the top
+    side downwards}
+  @argument[right]{a number coerced to a single float how far to move the right
+    side to the left}
+  @argument[bottom]{a number coerced to a single float how far to move the
+    bottom side upwards}
+  @argument[left]{a number coerced to a single float how far to move the left
+    side to the right}
+  @return{The resized @symbol{gsk:rounded-rect} instance.}
+  @begin{short}
+    Shrinks (or grows) the given rounded rectangle by moving the 4 sides
+    according to the offsets given.
+  @end{short}
+  The corner radii will be changed in a way that tries to keep the center of
+  the corner circle intact. This emulates CSS behavior.
+
+  This function also works for growing rounded rectangles if you pass negative
+  values for the arguments.
+  @see-symbol{gsk:rounded-rect}"
   (%rounded-rect-shrink rect
                         (coerce top 'single-float)
                         (coerce right 'single-float)
@@ -429,45 +367,42 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_is_rectilinear ()
-;;;
-;;;gboolean
-;;;gsk_rounded_rect_is_rectilinear (const GskRoundedRect *self);
-;;;Checks if all corners of self are right angles and the rectangle covers all of its bounds.
-
-;;;This information can be used to decide if gsk_clip_node_new() or gsk_rounded_clip_node_new() should be called.
-
-;;;self
-;;;the GskRoundedRect to check
-
-;;;Returns
-;;;TRUE if the rectangle is rectilinear
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gsk_rounded_rect_is_rectilinear" rounded-rect-ist-rectilinear)
+(cffi:defcfun ("gsk_rounded_rect_is_rectilinear" rounded-rect-is-rectilinear)
     :boolean
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance to check}
+  @return{@em{True} if the rounded rectangle is rectilinear.}
+  @begin{short}
+    Checks if all corners of @arg{rect} are right angles and the rounded
+    rectangle covers all of its bounds.
+  @end{short}
+  This information can be used to decide if the @fun{gsk:clip-node-new}
+  or the @fun{gsk:rounded-clip-node-new} function should be called.
+  @see-symbol{gsk:rounded-rect}"
   (rect (:pointer (:struct rounded-rect))))
 
 (export 'rounded-rect-is-rectilinear)
 
 ;;; ----------------------------------------------------------------------------
 ;;;gsk_rounded_rect_contains_point ()
-;;;gboolean
-;;;gsk_rounded_rect_contains_point (const GskRoundedRect *self,
-;;;                                 const graphene_point_t *point);
-;;;Checks if the given point is inside the rounded rectangle. This function returns FALSE if the point is in the rounded corner areas.
-
-;;;self
-;;;a GskRoundedRect
-
-;;;point
-;;;the point to check
-
-;;;Returns
-;;;TRUE if the point is inside the rounded rectangle
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_contains_point" rounded-rect-contains-point)
     :boolean
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @argument[point]{a @symbol{graphene:point-t} instance with the point to check}
+  @return{@em{True} if the point is inside the rounded rectangle.}
+  @begin{short}
+    Checks if the given point is inside the rounded rectangle.
+  @end{short}
+  This function returns @em{false} if the point is in the rounded corner areas.
+  @see-symbol{gsk:rounded-rect}
+  @see-symbol{graphene:point-t}"
   (rect (:pointer (:struct rounded-rect)))
   (point (:pointer (:struct graphene:point-t))))
 
@@ -475,24 +410,24 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_contains_rect ()
-;;;
-;;;gboolean
-;;;gsk_rounded_rect_contains_rect (const GskRoundedRect *self,
-;;;                                const graphene_rect_t *rect);
-;;;Checks if the given rect is contained inside the rounded rectangle. This function returns FALSE if rect extends into one of the rounded corner areas.
-
-;;;self
-;;;a GskRoundedRect
-
-;;;rect
-;;;the rectangle to check
-
-;;;Returns
-;;;TRUE if the rect is fully contained inside the rounded rectangle
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_contains_rect" rounded-rect-contains-rect)
     :boolean
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @argument[other]{a @symbol{graphene:rect-t} instance with the rectangle to
+    check}
+  @return{@em{True} if @arg{other} is fully contained inside the rounded
+    rectangle.}
+  @begin{short}
+    Checks if the given @arg{other} is contained inside the rounded rectangle.
+  @end{short}
+  This function returns @em{false} if @arg{other} extends into one of the
+  rounded corner areas.
+  @see-symbol{gsk:rounded-rect}
+  @see-symbol{graphene:rect-t}"
   (rect (:pointer (:struct rounded-rect)))
   (other (:pointer (:struct graphene:rect-t))))
 
@@ -500,24 +435,23 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_intersects_rect ()
-;;;
-;;;gboolean
-;;;gsk_rounded_rect_intersects_rect (const GskRoundedRect *self,
-;;;                                  const graphene_rect_t *rect);
-;;;Checks if part of the given rect is contained inside the rounded rectangle. This function returns FALSE if rect only extends into one of the rounded corner areas but not into the rounded rectangle itself.
-
-;;;self
-;;;a GskRoundedRect
-
-;;;rect
-;;;the rectangle to check
-
-;;;Returns
-;;;TRUE if the rect intersects with the rounded rectangle
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_intersects_rect" rounded-rect-intersects-rect)
     :boolean
+ #+liber-documentation
+ "@version{#2023-10-28}
+  @argument[rect]{a @symbol{gsk:rounded-rect} instance}
+  @argument[other]{a @symbol{graphene:rect-t} instance to check}
+  @return{@em{True} if @arg{other} intersects with the rounded rectangle.}
+  @begin{short}
+    Checks if part of the given @arg{other} is contained inside the rounded
+    rectangle.
+  @end{short}
+  This function returns @em{false} if @arg{other} only extends into one of the
+  rounded corner areas but not into the rounded rectangle itself.
+  @see-symbol{gsk:rounded-rect}
+  @see-symbol{graphene:rect-t}"
   (rect (:pointer (:struct rounded-rect)))
   (other (:pointer (:struct graphene:rect-t))))
 

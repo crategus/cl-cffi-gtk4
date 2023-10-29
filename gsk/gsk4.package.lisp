@@ -213,6 +213,8 @@
     A rounded rectangle.
     @about-symbol{corner}
     @about-symbol{rounded-rect}
+    @about-function{rounded-rect-bounds}
+    @about-function{rounded-rect-corner}
     @about-function{rounded-rect-init}
     @about-function{rounded-rect-init-copy}
     @about-function{rounded-rect-init-from-rect}
@@ -228,6 +230,7 @@
     A description for transform operations.
     @about-symbol{transform-category}
     @about-class{transform}
+    @about-function{transform-new}
     @about-function{transform-ref}
     @about-function{transform-unref}
     @about-function{transform-category}
