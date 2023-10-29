@@ -23,7 +23,7 @@ List of files for the GDK 4 Library
 
  Paintables, Textures
 
-  gdk4.paintable.lisp              GdkPaintable, GdkSnapshot          GDK 4.10
+  gdk4.paintable.lisp              GdkPaintable, GdkSnapshot          GDK 4.12
   gdk4.texture.lisp                GdkTexture, GdkMemoryTexture, ...  GDK 4.10 &
 
  Surfaces, Toplevels, Popups
