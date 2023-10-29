@@ -24,7 +24,7 @@
 
 (defsystem :cl-cffi-gtk4
   :name "cl-cffi-gtk4"
-  :version "0.3.0"
+  :version "0.4.0"
   :author "Dieter Kaiser"
   :license "MIT"
   :serial t
