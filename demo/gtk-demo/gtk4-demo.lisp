@@ -533,6 +533,30 @@
        "clipboard.lisp"
        "resource/clipboard.ui")
      )
+     
+     "Paintable"
+     (("Nuclear Icon"
+       ":window"
+       "DO-PAINTABLE-SIMPLE"
+       "gtk4-example"
+       "paintable-simple.lisp")
+      ("Nuclear Animation"
+       ":window"
+       "DO-PAINTABLE-ANIMATION"
+       "gtk4-example"
+       "paintable-animation.lisp")
+      ("Emblemed Icons"
+       ":window"
+       "DO-PAINTABLE-EMBLEM"
+       "gtk4-example"
+       "paintable-emblem.lisp"))
+
+     "Subclassing"
+     (("GtkFigure subclass"
+       ":window"
+       "DO-SUBCLASSING-FIGURE"
+       "gtk4-example"
+       "subclassing-figure.lisp"))
 
      ;; Pango demos
      "Pango"

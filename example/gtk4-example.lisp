@@ -139,12 +139,18 @@
            #:do-css-multiplebgs
            #:do-css-pixbufs
            #:do-css-shadows
+           
+           ;; Subclassing
+           #:do-sublclassing-figure
+           #:do-subclassing-tree-model
 
            ;;; Gdk examples
            #:do-app-launch-context
            #:do-app-launch-context-async
 
            #:do-paintable-simple
+           #:do-paintable-animation
+           #:do-paintable-emblem
            ))
 
 (in-package :gtk4-example)

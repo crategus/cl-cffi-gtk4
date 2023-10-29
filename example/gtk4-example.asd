@@ -132,11 +132,17 @@
                (:file "css-pixbufs")
                (:file "css-shadows")
 
+               ;; Subclassing
+               (:file "subclassing-figure")
+               (:file "subclassing-tree-model")
+
                ;; GDK examples
                (:file "app-launch-context")
 
                ;; Paintable, Texture
                (:file "paintable-simple")
+               (:file "paintable-animation")
+               (:file "paintable-emblem")
               ))
 
 ;;; --- 2023-10-24 -------------------------------------------------------------
