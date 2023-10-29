@@ -108,7 +108,7 @@
                                                bottom-right
                                                bottom-left))
 
-      (is (= 00.0 (graphene:rect-x (gsk:rounded-rect-bounds rect))))
+      (is (=  0.0 (graphene:rect-x (gsk:rounded-rect-bounds rect))))
       (is (= 10.0 (graphene:rect-y (gsk:rounded-rect-bounds rect))))
       (is (= 20.0 (graphene:rect-width (gsk:rounded-rect-bounds rect))))
       (is (= 30.0 (graphene:rect-height (gsk:rounded-rect-bounds rect))))
@@ -137,4 +137,4 @@
 ;;;     gsk_rounded_rect_contains_rect
 ;;;     gsk_rounded_rect_intersects_rect
 
-;;; --- 2023-9-22 --------------------------------------------------------------
+;;; --- 2023-10-28 -------------------------------------------------------------

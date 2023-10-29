@@ -499,6 +499,7 @@
 
      ;; Paintables
      (:file "rtest-gdk4-paintable")
+     (:file "rtest-gdk4-paintable-subclassing")
      (:file "rtest-gdk4-texture")
 
      ;; Surfaces, Toplevels, Popups
@@ -681,6 +682,7 @@
 
      ;; Tree, List and Icon Grid Widgets
      (:file "rtest-gtk4-tree-model")
+     (:file "rtest-gtk4-tree-model-subclassing")
 ;    (:file "gtk4.tree-selection")
 ;    (:file "gtk4.tree-view-column")
 ;    (:file "gtk4.tree-view")
