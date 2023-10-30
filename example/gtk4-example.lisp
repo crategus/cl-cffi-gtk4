@@ -142,7 +142,6 @@
            
            ;; Subclassing
            #:do-sublclassing-figure
-           #:do-subclassing-tree-model
 
            ;;; Gdk examples
            #:do-app-launch-context

@@ -5,7 +5,8 @@
   :license "MIT"
   :serial t
   :depends-on (:cl-cffi-gtk4
-               :split-sequence)
+               :split-sequence
+               :local-time)
   :components ((:file "gtk4-example")
 
                ;; Windows
@@ -134,7 +135,6 @@
 
                ;; Subclassing
                (:file "subclassing-figure")
-               (:file "subclassing-tree-model")
 
                ;; GDK examples
                (:file "app-launch-context")
