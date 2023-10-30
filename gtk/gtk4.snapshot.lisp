@@ -1028,7 +1028,8 @@ pixel = transpose(matrix) * pixel + offset
   (cffi:with-foreign-object (width-ptr :float 4)
     (iter (for i from 0 below 4)
           (for borderwidth in width)
-          (setf (cffi:mem-aref width-ptr :float i) borderwidth))
+          (setf (cffi:mem-aref width-ptr :float i) 
+                (coerce borderwidth 'single-float)))
     (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba color)
       (%snapshot-append-border snapshot
                                outline
