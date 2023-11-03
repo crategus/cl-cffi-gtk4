@@ -156,7 +156,7 @@
 
 #+liber-documentation
 (setf (documentation 'filter 'type)
- "@version{2023-8-16}
+ "@version{2023-11-3}
   @begin{short}
     A @class{gtk:filter} object describes the filtering to be performed by a
     @class{gtk:filter-list-model} object.
@@ -166,8 +166,8 @@
   the ones that the function returns @em{true} for.
 
   Filters may change what items they match through their lifetime. In that
-  case, they will emit the \"changed\" signal to notify that previous filter
-  results are no longer valid and that items should be checked again via
+  case, they will emit the @code{\"changed\"} signal to notify that previous
+  filter results are no longer valid and that items should be checked again via
   the @fun{gtk:filter-match} function.
 
   GTK provides various pre-made filter implementations for common filtering
@@ -197,19 +197,30 @@ lambda (filter change)    :run-last
 ;;; gtk_filter_match ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_filter_match" filter-match) :boolean
+(cffi:defcfun ("gtk_filter_match" %filter-match) :boolean
+  (filter (g:object filter))
+  (item :pointer))
+
+(defun filter-match (filter item)
  #+liber-documentation
- "@version{#2023-8-16}
+ "@version{#2023-11-3}
   @argument[filter]{a @class{gtk:filter} object}
-  @argument[item]{a pointer to the item to check}
+  @argument[item]{a @class{g:object} object with or a pointer to the item to
+    check}
   @return{@em{True} if the filter matches the item and a filter model should
     keep it, @em{false} if not.}
   @begin{short}
     Checks if the given @arg{item} is matched by the filter or not.
   @end{short}
+  @begin[Note]{dictionary}
+    The C library takes a pointer as an @arg{item} argument. In the Lisp
+    implementation the function is generalized to take an object. The pointer
+    is retrieved from the object with the @fun{gobject:object-poiner} function.
+  @end{dictionary}
   @see-class{gtk:filter}"
-  (filter (g:object filter))
-  (item :pointer))
+  (%filter-match filter (if (cffi:pointerp item)
+                            item
+                            (gobject:object-pointer item))))
 
 (export 'filter-match)
 
@@ -219,7 +230,7 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_get_strictness" filter-strictness) filter-match
  #+liber-documentation
- "@version{#2023-8-16}
+ "@version{2023-11-3}
   @argument[filter]{a @class{gtk:filter} object}
   @return{A @symbol{gtk:filter-match} value with the strictness of
     @arg{filter}.}
@@ -227,9 +238,9 @@ lambda (filter change)    :run-last
     Gets the known strictness of the filter.
   @end{short}
   If the strictness is not known, the @code{:match-some} value is returned. The
-  value may change after emission of the \“changed\” signal. This function is
-  meant purely for optimization purposes, filters can choose to omit
-  implementing it, but the @class{gtk:filter-list-model} class uses it.
+  value may change after emission of the @code{\"changed\"} signal. This
+  function is meant purely for optimization purposes, filters can choose to
+  omit implementing it, but the @class{gtk:filter-list-model} class uses it.
   @see-class{gtk:filter}
   @see-class{gtk:filter-list-model}
   @see-symbol{gtk:filter-match}"
@@ -243,12 +254,12 @@ lambda (filter change)    :run-last
 
 (cffi:defcfun ("gtk_filter_changed" filter-changed) :void
  #+liber-documentation
- "@version{#2023-8-16}
+ "@version{2023-11-3}
   @argument[filter]{a @class{gtk:filter} object}
   @argument[change]{a @symbol{gtk:filter-change} value}
   @begin{short}
-    Emits the \"changed\" signal to notify all users of the filter that the
-    filter changed.
+    Emits the @code{\"changed\"} signal to notify all users of the filter that
+    the filter changed.
   @end{short}
   Users of the filter should then check items again via the
   @fun{gtk:filter-match} function.
