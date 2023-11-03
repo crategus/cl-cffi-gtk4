@@ -221,11 +221,11 @@
 
 (defun file-chooser-dialog-new (title parent action &rest buttons)
  #+liber-documentation
- "@version{2023-8-22}
+ "@version{2023-11-3}
   @argument[title]{a string with the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent window of the dialog,
     or @code{nil}}
-  @argument[action]{a value of the @symbol{gtk:file-chooser-action} enumeration}
+  @argument[action]{a @symbol{gtk:file-chooser-action} value}
   @argument[buttons]{pairs with a button text and the response ID of type
     @symbol{gtk:response-type} for the button}
   @return{A new @class{gtk:file-chooser-dialog} widget.}
@@ -241,7 +241,7 @@
   @see-class{gtk:window}
   @see-class{gtk:file-dialog}
   @see-symbol{gtk:file-chooser-action}
-  @see-symbol{gtk:resonse-type}
+  @see-symbol{gtk:response-type}
   @see-function{gtk:dialog-new-with-buttons}"
   (let ((dialog (make-instance 'file-chooser-dialog
                                :title title
