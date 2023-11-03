@@ -107,9 +107,8 @@
 ;;; gtk_font_chooser_dialog_new ()
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline font-chooser-dialog-new))
-
-(defun font-chooser-dialog-new (title parent)
+(cffi:defcfun ("gtk_font_chooser_dialog_new" font-chooser-dialog-new)
+    (g:object widget)
  #+liber-documentation
  "@version{2023-8-28}
   @argument[title]{a string with the title of the dialog, or @code{nil}}
@@ -122,9 +121,8 @@
     Use the @class{gtk:font-dialog} widget instead.
   @end{dictionary}
   @see-class{gtk:font-chooser-dialog}"
-  (make-instance 'font-chooser-dialog
-                 :title title
-                 :parent parent))
+  (title :string)
+  (parent (g:object window)))
 
 (export 'font-chooser-dialog-new)
 
