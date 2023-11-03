@@ -87,6 +87,14 @@
 ;;;     match-mode
 ;;;     search
 
+(test gtk-string-filter-properties
+  (let ((filter (make-instance 'gtk:string-filter)))
+    (is (cffi:pointer-eq (cffi:null-pointer)
+                         (gtk:string-filter-expression filter)))
+    (is-true (gtk:string-filter-ignore-case filter))
+    (is (eq :substring (gtk:string-filter-match-mode filter)))
+    (is-false (gtk:string-filter-search filter))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_string_filter_new
@@ -102,4 +110,4 @@
     (is (string= "search" (gtk:string-filter-search filter)))
     (is-false (gtk:expression-unref expression))))
 
-;;; --- 2023-9-28 --------------------------------------------------------------
+;;; --- 2023-11-3 --------------------------------------------------------------

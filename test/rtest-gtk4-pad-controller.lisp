@@ -7,7 +7,7 @@
 
 ;;;     GtkPadActionType
 
-(test pad-action-type
+(test gtk-pad-action-type
   ;; Check the type
   (is (g:type-is-enum "GtkPadActionType"))
   ;; Check the type initializer
@@ -38,7 +38,7 @@
 
 ;;;     GtkPadController
 
-(test pad-controller-class
+(test gtk-pad-controller-class
   ;; Type check
   (is (g:type-is-object "GtkPadController"))
   ;; Check the registered name
@@ -73,7 +73,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test pad-controller-properties
+(test gtk-pad-controller-properties
   (let* ((group (g:simple-action-group-new))
          (controller (gtk:pad-controller-new group nil)))
     (is (typep (gtk:pad-controller-action-group controller)
@@ -84,14 +84,14 @@
 
 ;;;     gtk_pad_controller_new
 
-(test pad-controller-new
+(test gtk-pad-controller-new
   (let ((group (g:simple-action-group-new)))
   (is (typep group 'g:simple-action-group))
   (is (typep (gtk:pad-controller-new group nil) 'gtk:pad-controller))))
 
 ;;;     gtk_pad_controller_set_action_entries
 
-(test pad-controller-set-action-entries
+(test gtk-pad-controller-set-action-entries
   (let* ((group (make-instance 'g:simple-action-group))
          (controller (gtk:pad-controller-new group nil))
          (entries '((:button 1 -1 "Action 1" "action1")
@@ -107,7 +107,7 @@
 
 ;;;     gtk_pad_controller_set_action
 
-(test pad-controller-set-action
+(test gtk-pad-controller-set-action
   (let* ((group (make-instance 'g:simple-action-group))
          (controller (gtk:pad-controller-new group nil)))
     (is-false (gtk:pad-controller-set-action controller
@@ -120,4 +120,4 @@
     (is-false (g:action-map-lookup-action group "action"))
 ))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

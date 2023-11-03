@@ -38,16 +38,11 @@
   ;; CSS name
   (is (string= "entry"
                (gtk:widget-class-css-name "GtkSearchEntry")))
-  ;; CSS style context
-  (is (string=
-"entry.search:dir(ltr)
-  image:dir(ltr)
-  text:dir(ltr)
-    undershoot.left:dir(ltr)
-    undershoot.right:dir(ltr)
-  image:dir(ltr)
-"
-               (print-style-context "GtkSearchEntry")))
+  ;; CSS classes
+  (is (equal '("search")
+             (gtk:widget-css-classes (make-instance 'gtk:search-entry))))
+  ;; Accessible role
+  (is (eq :search-box (gtk:widget-class-accessible-role "GtkSearchEntry")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSearchEntry" GTK-SEARCH-ENTRY
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -91,4 +86,4 @@
 ;;;     gtk_search_entry_set_key_capture_widget
 ;;;     gtk_search_entry_get_key_capture_widget
 
-;;; --- 2023-8-26 --------------------------------------------------------------
+;;; --- 2023-11-2 --------------------------------------------------------------

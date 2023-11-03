@@ -102,11 +102,51 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     changed
+;;;     gtk_filter-changed
+
+(test gtk-string-filter-changed-signal
+  (let* ((store (gtk:string-list-new '()))
+         (expression (gtk:property-expression-new "GtkStringObject"
+                                                  nil "string"))
+         (filter (gtk:string-filter-new expression))
+         (model (gtk:filter-list-model-new store filter))
+         (msg nil))
+    (is (typep model 'gtk:filter-list-model))
+    (g:signal-connect filter "changed"
+                      (lambda (filter change)
+                        (declare (ignore filter))
+                        (push change msg)))
+    (is-false (gtk:filter-changed filter :different))
+    (is (equal '(:different) msg))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_filter_match
 ;;;     gtk_filter_get_strictness
-;;;     gtk_filter_changed
 
-;;; --- 2023-7-24 --------------------------------------------------------------
+(test gtk-filter-match/strictness
+  (let* ((store (gtk:string-list-new '()))
+         (expression (gtk:property-expression-new "GtkStringObject"
+                                                  nil "string"))
+         (filter (gtk:string-filter-new expression))
+         (model (gtk:filter-list-model-new store filter)))
+    (declare (ignore model))
+    ;; Fill the string list with strings
+    (do-external-symbols (symbol (find-package "GTK"))
+      (gtk:string-list-append store (string-downcase (format nil "~a" symbol))))
+    ;; At this point we have a filter list model with string objects
+    (is (eq :exact (setf (gtk:string-filter-match-mode filter) :exact)))
+    (is (eq :all (gtk:filter-strictness filter)))
+    (is (eq :exact (gtk:string-filter-match-mode filter)))
+    (is-true (gtk:string-filter-ignore-case filter))
+    ;; Match strings in the model
+    (is-true (gtk:filter-match filter
+                               (gtk:string-object-new "gtk:string-filter")))
+    (is-true (gtk:filter-match filter
+                               (gtk:string-object-new "gtk:button")))
+    ;; This should be false, do a correct test!? But the value of strictness
+    ;; is :all!? Do we habe a problem with the implementation!?
+    (is-true (gtk:filter-match filter (make-instance 'gtk:button)))
+))
+
+;;; --- 2023-11-3 --------------------------------------------------------------

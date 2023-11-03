@@ -36,15 +36,14 @@
   (is (equal '("accept-position" "cancel-position" "cycle-child-focus"
                "cycle-handle-focus" "move-handle" "toggle-handle-focus")
              (list-signals "GtkPaned")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "paned"
                (gtk:widget-class-css-name "GtkPaned")))
-  (is (string=
-"paned.horizontal:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:paned))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("horizontal")
+             (gtk:widget-css-classes (make-instance 'gtk:paned))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkPaned")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPaned" GTK-PANED
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

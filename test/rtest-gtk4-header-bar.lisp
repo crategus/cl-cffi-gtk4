@@ -34,18 +34,11 @@
   ;; CSS name
   (is (string= "headerbar"
                (gtk:widget-class-css-name "GtkHeaderBar")))
-  ;; CSS style context
-  (is (string=
-"headerbar:dir(ltr)
-  windowhandle:dir(ltr)
-    box:dir(ltr)
-      box.horizontal.start:dir(ltr)
-        [windowcontrols.empty.start:dir(ltr)]
-      label.title:dir(ltr)
-      box.end.horizontal:dir(ltr)
-        [windowcontrols.empty.end:dir(ltr)]
-"
-               (print-style-context "GtkHeaderBar")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:header-bar))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkHeaderBar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkHeaderBar" GTK-HEADER-BAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

@@ -23,11 +23,11 @@
   (is (equal '()
              (list-children "GtkViewport")))
   ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkScrollable")
              (list-interfaces "GtkViewport")))
   ;; Check the properties
-  (is (equal '("child" "hadjustment" "hscroll-policy" "scroll-to-focus" 
+  (is (equal '("child" "hadjustment" "hscroll-policy" "scroll-to-focus"
                "vadjustment" "vscroll-policy")
              (list-properties "GtkViewport")))
   ;; Check the signals
@@ -36,11 +36,11 @@
   ;; CSS name
   (is (string= "viewport"
                (gtk:widget-class-css-name "GtkViewport")))
-  ;; CSS style context
-  (is (string=
-"viewport:dir(ltr)
-"
-               (print-style-context "GtkViewport")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:viewport))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkViewport")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkViewport" GTK-VIEWPORT
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -59,10 +59,10 @@
 ;;;     scroll-to-focus
 
 (test gtk-viewport-properties
-  (let ((viewport (make-instance 'gtk:viewport)))  
+  (let ((viewport (make-instance 'gtk:viewport)))
     (is-false (gtk:viewport-child viewport))
     (is-true (gtk:viewport-scroll-to-focus viewport))))
-    
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_viewport_new
@@ -73,4 +73,4 @@
   (is (typep (gtk:viewport-new (make-instance 'gtk:adjustment)
                                (make-instance 'gtk:adjustment)) 'gtk:viewport)))
 
-;;; --- 2023-8-6 ---------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

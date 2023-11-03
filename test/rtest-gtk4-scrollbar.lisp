@@ -23,7 +23,7 @@
   (is (equal '()
              (list-children "GtkScrollbar")))
   ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
              (list-interfaces "GtkScrollbar")))
   ;; Check the properties
@@ -35,14 +35,11 @@
   ;; CSS name
   (is (string= "scrollbar"
                (gtk:widget-class-css-name "GtkScrollbar")))
-  ;; CSS style context
-  (is (string=
-"scrollbar.horizontal:dir(ltr)
-  range.horizontal:dir(ltr)
-    trough:dir(ltr)
-      slider:dir(ltr)
-"
-               (print-style-context "GtkScrollbar")))
+  ;; CSS classes
+  (is (equal '("horizontal")
+             (gtk:widget-css-classes (make-instance 'gtk:scrollbar))))
+  ;; Accessible role
+  (is (eq :scrollbar (gtk:widget-class-accessible-role "GtkScrollbar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScrollbar" GTK-SCROLLBAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -70,4 +67,4 @@
   (is (typep (gtk:scrollbar-new :vertical (make-instance 'gtk:adjustment))
              'gtk:scrollbar)))
 
-;;; --- 2023-8-6 ---------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

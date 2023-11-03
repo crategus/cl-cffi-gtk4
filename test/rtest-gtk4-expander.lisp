@@ -35,14 +35,11 @@
   ;; CSS name
   (is (string= "expander-widget"
                (gtk:widget-class-css-name "GtkExpander")))
-  ;; CSS style context
-  (is (string=
-"expander-widget:dir(ltr)
-  box.vertical:dir(ltr)
-    title.horizontal:dir(ltr)
-      expander.horizontal:dir(ltr)
-"
-               (print-style-context "GtkExpander")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:expander))))
+  ;; Accessible role
+  (is (eq :button (gtk:widget-class-accessible-role "GtkExpander")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkExpander" GTK-EXPANDER
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

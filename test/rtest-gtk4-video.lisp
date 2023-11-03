@@ -30,43 +30,14 @@
   ;; Check the list of signals
   (is (equal '()
              (list-signals "GtkVideo")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "video"
                (gtk:widget-class-css-name "GtkVideo")))
-  (is (string=
-"video:dir(ltr)
-  overlay:dir(ltr)
-    picture:dir(ltr)
-    image.circular.large-icons.osd:dir(ltr)
-    revealer:dir(ltr)
-      controls.bottom.osd:dir(ltr)
-        box.horizontal:disabled:dir(ltr)
-          button.flat.image-button:disabled:dir(ltr)
-            image:disabled:dir(ltr)
-          box.horizontal:disabled:dir(ltr)
-            label:disabled:dir(ltr)
-            scale.horizontal:disabled:dir(ltr)
-              trough:disabled:dir(ltr)
-                highlight.top:disabled:dir(ltr)
-                slider:disabled:dir(ltr)
-            label:disabled:dir(ltr)
-          scalebutton.scale:disabled:dir(ltr)
-            button.flat.image-button.toggle:disabled:dir(ltr)
-              image:disabled:dir(ltr)
-            [popover.background.scale-popup:disabled:dir(ltr)]
-              contents:disabled:dir(ltr)
-                box.vertical:disabled:dir(ltr)
-                  button.flat.image-button:disabled:dir(ltr)
-                    image:disabled:dir(ltr)
-                  scale.vertical:disabled:dir(ltr)
-                    trough:disabled:dir(ltr)
-                      highlight.bottom:disabled:dir(ltr)
-                      slider:disabled:dir(ltr)
-                  button.flat.image-button:disabled:dir(ltr)
-                    image:disabled:dir(ltr)
-              arrow:dir(ltr)
-"
-               (print-style-context "GtkVideo")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:video))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkVideo")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkVideo" GTK-VIDEO
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

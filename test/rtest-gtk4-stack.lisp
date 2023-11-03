@@ -192,11 +192,11 @@
   ;; CSS name
   (is (string= "stack"
                (gtk:widget-class-css-name "GtkStack")))
-  ;; CSS style context
-  (is (string=
-"stack:dir(ltr)
-"
-               (print-style-context "GtkStack")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:stack))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkStack")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStack" GTK-STACK
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

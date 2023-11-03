@@ -30,38 +30,14 @@
   ;; Check the list of signals
   (is (equal '()
              (list-signals "GtkMediaControls")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "controls"
                (gtk:widget-class-css-name "GtkMediaControls")))
-  (is (string=
-"controls:dir(ltr)
-  box.horizontal:disabled:dir(ltr)
-    button.flat.image-button:disabled:dir(ltr)
-      image:disabled:dir(ltr)
-    box.horizontal:disabled:dir(ltr)
-      label:disabled:dir(ltr)
-      scale.horizontal:disabled:dir(ltr)
-        trough:disabled:dir(ltr)
-          highlight.top:disabled:dir(ltr)
-          slider:disabled:dir(ltr)
-      label:disabled:dir(ltr)
-    scalebutton.scale:disabled:dir(ltr)
-      button.flat.image-button.toggle:disabled:dir(ltr)
-        image:disabled:dir(ltr)
-      [popover.background.scale-popup:disabled:dir(ltr)]
-        contents:disabled:dir(ltr)
-          box.vertical:disabled:dir(ltr)
-            button.flat.image-button:disabled:dir(ltr)
-              image:disabled:dir(ltr)
-            scale.vertical:disabled:dir(ltr)
-              trough:disabled:dir(ltr)
-                highlight.bottom:disabled:dir(ltr)
-                slider:disabled:dir(ltr)
-            button.flat.image-button:disabled:dir(ltr)
-              image:disabled:dir(ltr)
-        arrow:dir(ltr)
-"
-               (print-style-context "GtkMediaControls")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:media-controls))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkMediaControls")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMediaControls" GTK-MEDIA-CONTROLS
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -83,4 +59,4 @@
 
 ;;;     gtk_media_controls_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-3 --------------------------------------------------------------

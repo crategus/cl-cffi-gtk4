@@ -21,8 +21,7 @@
           (g:type-parent "GdkCairoContext")))
   ;; Check the children
   #-windows
-  (is (equal '("GdkBroadwayCairoContext" "GdkWaylandCairoContext"
-               "GdkX11CairoContext")
+  (is (equal '("GdkWaylandCairoContext" "GdkX11CairoContext")
              (list-children "GdkCairoContext")))
   #+WINDOWS
   (is (equal '("GdkWin32CairoContext")
@@ -50,7 +49,7 @@
 (test gdk-cairo-context-cairo-create
   (let* ((surface (gdk:surface-new-toplevel (gdk:display-default)))
          (context nil))
-    ;; FIXME: This test fails, when we define GdkSurface as prerequiste for 
+    ;; FIXME: This test fails, when we define GdkSurface as prerequiste for
     ;; GdkDragSurface. Why?
     (is (typep (setf context (gdk:surface-create-cairo-context surface))
                'gdk:cairo-context))

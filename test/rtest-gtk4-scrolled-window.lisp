@@ -29,8 +29,8 @@
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPolicyType"
                                      GTK-POLICY-TYPE
-                                     (:EXPORT T 
-                                      :TYPE-INITIALIZER 
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
                                       "gtk_policy_type_get_type")
                                      (:ALWAYS 0)
                                      (:AUTOMATIC 1)
@@ -50,7 +50,7 @@
   (is (eq 'gtk:corner-type
           (glib:symbol-for-gtype "GtkCornerType")))
   ;; Check the names
-  (is (equal '("GTK_CORNER_TOP_LEFT" "GTK_CORNER_BOTTOM_LEFT" 
+  (is (equal '("GTK_CORNER_TOP_LEFT" "GTK_CORNER_BOTTOM_LEFT"
                "GTK_CORNER_TOP_RIGHT" "GTK_CORNER_BOTTOM_RIGHT")
              (list-enum-item-name "GtkCornerType")))
   ;; Check the values
@@ -62,8 +62,8 @@
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCornerType"
                                      GTK-CORNER-TYPE
-                                     (:EXPORT T 
-                                      :TYPE-INITIALIZER 
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
                                       "gtk_corner_type_get_type")
                                      (:TOP-LEFT 0)
                                      (:BOTTOM-LEFT 1)
@@ -81,7 +81,7 @@
           (glib:symbol-for-gtype "GtkScrolledWindow")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkScrolledWindow")
-          (g:gtype (cffi:foreign-funcall "gtk_scrolled_window_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_scrolled_window_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
@@ -93,10 +93,10 @@
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkScrolledWindow")))
   ;; Check the properties
-  (is (equal '("child" "hadjustment" "has-frame" "hscrollbar-policy" 
-               "kinetic-scrolling" "max-content-height" "max-content-width" 
-               "min-content-height" "min-content-width" "overlay-scrolling" 
-               "propagate-natural-height" "propagate-natural-width" 
+  (is (equal '("child" "hadjustment" "has-frame" "hscrollbar-policy"
+               "kinetic-scrolling" "max-content-height" "max-content-width"
+               "min-content-height" "min-content-width" "overlay-scrolling"
+               "propagate-natural-height" "propagate-natural-width"
                "vadjustment" "vscrollbar-policy" "window-placement")
              (list-properties "GtkScrolledWindow")))
   ;; Check the signals
@@ -105,28 +105,11 @@
   ;; CSS name
   (is (string= "scrolledwindow"
                (gtk:widget-class-css-name "GtkScrolledWindow")))
-  ;; CSS style context
-  (is (string=
-"scrolledwindow:dir(ltr)
-  scrollbar.bottom.horizontal:dir(ltr)
-    range.horizontal:dir(ltr)
-      trough:dir(ltr)
-        slider:dir(ltr)
-  scrollbar.right.vertical:dir(ltr)
-    range.vertical:dir(ltr)
-      trough:dir(ltr)
-        slider:dir(ltr)
-  overshoot.left:dir(ltr)
-  undershoot.left:dir(ltr)
-  overshoot.right:dir(ltr)
-  undershoot.right:dir(ltr)
-  overshoot.top:dir(ltr)
-  undershoot.top:dir(ltr)
-  overshoot.bottom:dir(ltr)
-  undershoot.bottom:dir(ltr)
-  junction:dir(ltr)
-"
-               (print-style-context "GtkScrolledWindow")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:scrolled-window))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkScrolledWindow")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScrolledWindow" GTK-SCROLLED-WINDOW
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -226,7 +209,7 @@
 
 (test gtk-scrolled-window-new
   (is (typep (gtk:scrolled-window-new) 'gtk:scrolled-window))
-  (is (typep (gtk:scrolled-window-new (make-instance 'gtk:adjustment)) 
+  (is (typep (gtk:scrolled-window-new (make-instance 'gtk:adjustment))
              'gtk:scrolled-window))
   (is (typep (gtk:scrolled-window-new (make-instance 'gtk:adjustment)
                                       (make-instance 'gtk:adjustment))

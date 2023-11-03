@@ -1,6 +1,7 @@
 (defpackage :gtk-test
   (:use :fiveam :iterate :common-lisp)
   (:export #:run!)
+  (:import-from :gtk-init *gtk-warn-deprecated*)
   (:import-from :gobject)
   (:import-from :gio)
   (:import-from :gtk)

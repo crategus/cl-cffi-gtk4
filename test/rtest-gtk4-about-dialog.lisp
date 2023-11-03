@@ -7,7 +7,7 @@
 
 ;;;     GtkLicense
 
-(test license
+(test gtk-license
   ;; Check the type
   (is (g:type-is-enum "GtkLicense"))
   ;; Check the type initializer
@@ -62,7 +62,7 @@
 
 ;;;     GtkAboutDialog
 
-(test about-dialog-class
+(test gtk-about-dialog-class
   ;; Type check
   (is (g:type-is-object "GtkAboutDialog"))
   ;; Check the registered name
@@ -90,15 +90,14 @@
   ;; Check the list of signals
   (is (equal '("activate-link")
              (list-signals "GtkAboutDialog")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAboutDialog")))
-  (is (string=
-"[window.aboutdialog.background.csd:dir(ltr)]
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:about-dialog))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("background" "csd" "aboutdialog")
+             (gtk:widget-css-classes (make-instance 'gtk:about-dialog))))
+  ;; Accessible role
+  (is (eq :window (gtk:widget-class-accessible-role "GtkAboutDialog")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAboutDialog" GTK-ABOUT-DIALOG
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
@@ -142,7 +141,7 @@
 
 ;;;     activate-link
 
-(test about-dialog-activate-link-signal
+(test gtk-about-dialog-activate-link-signal
   (let ((query (g:signal-query (g:signal-lookup "activate-link"
                                                 "GtkAboutDialog"))))
     (is (string= "activate-link" (g:signal-query-signal-name query)))
@@ -174,7 +173,7 @@
 ;;;     website-label
 ;;;     wrap-license
 
-(test about-dialog-properties
+(test gtk-about-dialog-properties
   (let ((dialog (make-instance 'gtk:about-dialog)))
     (is-false (gtk:about-dialog-artists dialog))
     (is-false (gtk:about-dialog-authors dialog))
@@ -197,10 +196,10 @@
 
 ;;;     gtk_about_dialog_new
 
-(test about-dialog-new
+(test gtk-about-dialog-new
   (is (typep (gtk:about-dialog-new) 'gtk:about-dialog)))
 
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

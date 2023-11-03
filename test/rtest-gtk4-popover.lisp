@@ -7,7 +7,7 @@
 
 ;;;     GtkPopover
 
-(test popover-class
+(test gtk-popover-class
   ;; Type check
   (is (g:type-is-object "GtkPopover"))
   ;; Check the registered name
@@ -33,15 +33,14 @@
   ;; Check the signals
   (is (equal '("activate-default" "closed")
              (list-signals "GtkPopover")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "popover"
                (gtk:widget-class-css-name "GtkPopover")))
-  (is (string=
-"[popover.background:dir(ltr)]
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:popover))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("background")
+             (gtk:widget-css-classes (make-instance 'gtk:popover))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkPopover")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPopover" GTK-POPOVER
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -90,4 +89,4 @@
 ;;;     gtk_popover_set_offset
 ;;;     gtk_popover_get_offset
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-2 --------------------------------------------------------------

@@ -32,15 +32,14 @@
   ;; Check the signals
   (is (equal '("activate-link")
              (list-signals "GtkLinkButton")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkLinkButton")))
-  (is (string=
-"button.flat.link:dir(ltr):link
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:link-button))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("flat" "link")
+             (gtk:widget-css-classes (make-instance 'gtk:link-button))))
+  ;; Accessible role
+  (is (eq :link (gtk:widget-class-accessible-role "GtkLinkButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLinkButton" GTK-LINK-BUTTON
                        (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES

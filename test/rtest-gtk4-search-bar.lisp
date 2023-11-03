@@ -35,15 +35,11 @@
   ;; CSS name
   (is (string= "searchbar"
                (gtk:widget-class-css-name "GtkSearchBar")))
-  ;; CSS style context
-  (is (string=
-"searchbar:dir(ltr)
-  revealer:dir(ltr)
-    box:dir(ltr)
-      [button.close.image-button:dir(ltr)]
-        image:dir(ltr)
-"
-               (print-style-context "GtkSearchBar")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:search-bar))))
+  ;; Accessible role
+  (is (eq :search (gtk:widget-class-accessible-role "GtkSearchBar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSearchBar" GTK-SEARCH-BAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -86,4 +82,4 @@
 
 ;;;     gtk_search_bar_connect_entry
 
-;;; --- 2023-8-26 --------------------------------------------------------------
+;;; --- 2023-11-2 --------------------------------------------------------------

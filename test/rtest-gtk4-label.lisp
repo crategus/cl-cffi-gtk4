@@ -36,15 +36,14 @@
   (is (equal '("activate-current-link" "activate-link" "copy-clipboard"
                "move-cursor")
              (list-signals "GtkLabel")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "label"
                (gtk:widget-class-css-name "GtkLabel")))
-  (is (string=
-"label:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:label))
-                   :none)))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:label))))
+  ;; Accessible role
+  (is (eq :label (gtk:widget-class-accessible-role "GtkLabel")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLabel" GTK-LABEL
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

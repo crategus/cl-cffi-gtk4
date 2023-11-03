@@ -33,15 +33,14 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkLockButton")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkLockButton")))
-  (is (string=
-"[button.lock:dir(ltr)]
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:lock-button))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("lock")
+             (gtk:widget-css-classes (make-instance 'gtk:lock-button))))
+  ;; Accessible role
+  (is (eq :button (gtk:widget-class-accessible-role "GtkLockButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLockButton" GTK-LOCK-BUTTON
                        (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES
@@ -76,4 +75,4 @@
 
 ;;;     gtk_lock_button_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-2 --------------------------------------------------------------

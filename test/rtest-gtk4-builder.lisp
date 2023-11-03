@@ -136,7 +136,7 @@
                  (setf (gtk:builder-translation-domain builder) "domain")))))
 
 (test gtk-builder-properties.2
-  (let ((builder (make-instance 'gtk:builder :from-string *dialog*)))
+  (let ((builder (make-instance 'gtk:builder :from-string *stack-ui*)))
     (is-false (gtk:builder-current-object builder))
     (is (typep (gtk:builder-scope builder) 'g:object))
     (is-false (gtk:builder-translation-domain builder))))
@@ -149,8 +149,8 @@
   ;; gtk:builder-new is implemented with make-instance
   (is (typep (gtk:builder-new) 'gtk:builder))
   ;; Check Lisp extension for initializing builder
-  (let ((builder (make-instance 'gtk:builder :from-string *dialog*)))
-    (is (typep (gtk:builder-object builder "dialog1") 'gtk:dialog)))
+  (let ((builder (make-instance 'gtk:builder :from-string *stack-ui*)))
+    (is (typep (gtk:builder-object builder "stack") 'gtk:stack)))
   (let ((builder (make-instance 'gtk:builder
                                 :from-file
                                 (sys-path "resource/application.ui"))))
@@ -166,7 +166,7 @@
 
 (test gtk-builder-new-from-resource
   (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
-    (is (typep (gtk:builder-new-from-resource "/com/crategus/test/dialog.ui")
+    (is (typep (gtk:builder-new-from-resource "/com/crategus/test/stack.ui")
                'gtk:builder))))
 
 ;;;     gtk_builder_new_from_string
@@ -187,7 +187,7 @@
   (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-from-resource builder
-                                              "/com/crategus/test/dialog.ui")))))
+                                              "/com/crategus/test/stack.ui")))))
 
 ;;;     gtk_builder_add_from_string
 
@@ -202,20 +202,24 @@
 (test gtk-builder-add-objects-from-file.1
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-file builder
-                                                (sys-path "resource/dialog.ui")
-                                                "dialog1"))
-    (is (typep (gtk:builder-object builder "dialog1") 'gtk:dialog))
-    (is (equal '(gtk:dialog gtk:box gtk:box gtk:button)
+                                                (sys-path "resource/stack.ui")
+                                                "window1"))
+    (is (typep (gtk:builder-object builder "window1") 'gtk:window))
+    (is (equal '(GTK:STACK-PAGE GTK:GRID GTK:CHECK-BUTTON GTK:STACK-SWITCHER
+                 GTK:STACK-PAGE GTK:STACK-PAGE GTK:WINDOW GTK:IMAGE GTK:STACK
+                 GTK:SPINNER)
                (mapcar 'type-of (gtk:builder-objects builder))))))
 
 (test gtk-builder-add-objects-from-file.2
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-file builder
-                                                (sys-path "resource/dialog.ui")
-                                                "dialog1"
-                                                "ok_button"))
-    (is (typep (gtk:builder-object builder "dialog1") 'gtk:dialog))
-    (is (equal '(gtk:dialog gtk:box gtk:box gtk:button)
+                                                (sys-path "resource/stack.ui")
+                                                "window1"
+                                                "stack"))
+    (is (typep (gtk:builder-object builder "window1") 'gtk:window))
+    (is (equal '(GTK:STACK-PAGE GTK:GRID GTK:CHECK-BUTTON GTK:STACK-SWITCHER
+                 GTK:STACK-PAGE GTK:STACK-PAGE GTK:WINDOW GTK:IMAGE GTK:STACK
+                 GTK:SPINNER)
                (mapcar 'type-of (gtk:builder-objects builder))))))
 
 ;;;     gtk_builder_add_objects_from_resource
@@ -224,27 +228,31 @@
   (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-objects-from-resource builder
-                            "/com/crategus/test/dialog.ui"
-                            "dialog1"))
-      (is (typep (gtk:builder-object builder "dialog1") 'gtk:dialog))
-      (is (equal '(gtk:dialog gtk:box gtk:box gtk:button)
+                            "/com/crategus/test/stack.ui"
+                            "window1"))
+      (is (typep (gtk:builder-object builder "window1") 'gtk:window))
+      (is (equal '(GTK:STACK-PAGE GTK:GRID GTK:CHECK-BUTTON GTK:STACK-SWITCHER
+                   GTK:STACK-PAGE GTK:STACK-PAGE GTK:WINDOW GTK:IMAGE GTK:STACK
+                   GTK:SPINNER)
                  (mapcar 'type-of (gtk:builder-objects builder)))))))
 
 ;;;     gtk_builder_add_objects_from_string
 
 (test gtk-builder-add-objects-from-string.1
   (let ((builder (gtk:builder-new)))
-    (is-true (gtk:builder-add-objects-from-string builder *dialog* "dialog1"))
-    (is (typep (gtk:builder-object builder "dialog1") 'gtk:dialog))
-    (is (equal '(gtk:dialog gtk:box gtk:box gtk:button)
+    (is-true (gtk:builder-add-objects-from-string builder *stack-ui* "stack"))
+    (is (typep (gtk:builder-object builder "stack") 'gtk:stack))
+    (is (equal '(GTK:IMAGE GTK:CHECK-BUTTON GTK:STACK-PAGE GTK:STACK
+                 GTK:SPINNER GTK:STACK-PAGE GTK:STACK-PAGE)
                (mapcar 'type-of (gtk:builder-objects builder))))))
 
 (test gtk-builder-add-objects-from-string.2
   (let ((builder (gtk:builder-new)))
     (is-true (gtk:builder-add-objects-from-string builder
-                                                  *dialog*
-                                                  "ok_button" "hbuttonbox1"))
-    (is (equal '(gtk:box gtk:button)
+                                                  *stack-ui*
+                                                  "stack" "image"))
+    (is (equal '(GTK:IMAGE GTK:CHECK-BUTTON GTK:STACK-PAGE GTK:STACK
+                 GTK:SPINNER GTK:STACK-PAGE GTK:STACK-PAGE)
                (mapcar 'type-of (gtk:builder-objects builder))))))
 
 ;;;     gtk_builder_extend_with_template
@@ -252,13 +260,13 @@
 ;;;     gtk_builder_get_object
 
 (test gtk-builder-object
-  (let* ((builder (gtk:builder-new-from-string *dialog*))
-         (dialog (gtk:builder-object builder "dialog1"))
-         (button (gtk:builder-object builder "ok_button")))
-    (is (typep dialog 'gtk:dialog))
-    (is (string= "dialog1" (gtk:buildable-buildable-id dialog)))
-    (is (typep button 'gtk:button))
-    (is (string= "ok_button" (gtk:buildable-buildable-id button)))))
+  (let* ((builder (gtk:builder-new-from-string *stack-ui*))
+         (window (gtk:builder-object builder "window1"))
+         (stack (gtk:builder-object builder "stack")))
+    (is (typep window 'gtk:window))
+    (is (string= "window1" (gtk:buildable-buildable-id window)))
+    (is (typep stack 'gtk:stack))
+    (is (string= "stack" (gtk:buildable-buildable-id stack)))))
 
 ;;;     gtk_builder_get_objects
 
@@ -269,20 +277,22 @@
     (is-true (gtk:builder-add-from-string builder *menus*))
     (is (equal '(gio:menu gio:menu)
                (mapcar 'type-of (gtk:builder-objects builder))))
-    (is-true (gtk:builder-add-from-string builder *dialog*))
-    (is (equal '(gtk:dialog gio:menu gio:menu gtk:box gtk:box gtk:button)
+    (is-true (gtk:builder-add-from-string builder *stack-ui*))
+    (is (equal '(GIO:MENU GTK:GRID GTK:CHECK-BUTTON GTK:STACK-PAGE
+                 GTK:STACK-SWITCHER GIO:MENU GTK:STACK-PAGE GTK:IMAGE
+                 GTK:WINDOW GTK:STACK GTK:STACK-PAGE GTK:SPINNER)
                (mapcar #'type-of (gtk:builder-objects builder))))))
 
 ;;;     gtk_builder_expose_object
 
 (test gtk-builder-expose-object
-  (let ((builder (gtk:builder-new-from-string *dialog*))
-        (button (make-instance 'gtk:check-button)))
-    (is-false (gtk:builder-expose-object builder "checkbutton" button))
-    (is (eq button (gtk:builder-object builder "checkbutton")))))
+  (let ((builder (gtk:builder-new-from-string *stack-ui*))
+        (image (make-instance 'gtk:image)))
+    (is-false (gtk:builder-expose-object builder "image1" image))
+    (is (eq image (gtk:builder-object builder "image1")))))
 
 ;;;     gtk_builder_get_type_from_name
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; --- 2023-11-2 --------------------------------------------------------------

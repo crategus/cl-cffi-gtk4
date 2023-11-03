@@ -94,19 +94,20 @@
 ;;;     show-preview-entry
 
 (test gtk-font-chooser-properties
-  (let ((chooser (make-instance 'gtk:font-chooser-dialog)))
-    (is-false (gtk:font-chooser-font chooser))
-    (is-false (gtk:font-chooser-font-desc chooser))
-    (is (string= "" (gtk:font-chooser-font-features chooser)))
-    (is (string= "de-de" (gtk:font-chooser-language chooser)))
-    (is (equal '(:style :size) (gtk:font-chooser-level chooser)))
-    #-windows
-    (is (string= "The quick brown fox jumps over the lazy dog."
-                 (gtk:font-chooser-preview-text chooser)))
-    #+windows
-    (is (string= "Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich."
-                 (gtk:font-chooser-preview-text chooser)))
-    (is-true (gtk:font-chooser-show-preview-entry chooser))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((chooser (make-instance 'gtk:font-chooser-dialog)))
+      (is-false (gtk:font-chooser-font chooser))
+      (is-false (gtk:font-chooser-font-desc chooser))
+      (is (string= "" (gtk:font-chooser-font-features chooser)))
+      (is (string= "de-de" (gtk:font-chooser-language chooser)))
+      (is (equal '(:style :size) (gtk:font-chooser-level chooser)))
+      #-windows
+      (is (string= "The quick brown fox jumps over the lazy dog."
+                   (gtk:font-chooser-preview-text chooser)))
+      #+windows
+      (is (string= "Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich."
+                   (gtk:font-chooser-preview-text chooser)))
+      (is-true (gtk:font-chooser-show-preview-entry chooser)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 

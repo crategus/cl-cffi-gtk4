@@ -34,13 +34,11 @@
   ;; CSS name
   (is (string= "statusbar"
                (gtk:widget-class-css-name "GtkStatusbar")))
-  ;; CSS style context
-  (is (string=
-"statusbar:dir(ltr)
-  box.horizontal:dir(ltr)
-    label:dir(ltr)
-"
-               (print-style-context "GtkStatusbar")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:statusbar))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkStatusbar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStatusbar" GTK-STATUSBAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

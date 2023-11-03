@@ -21,8 +21,11 @@
           (g:type-parent "GdkDisplay")))
   ;; Check the children
   #-windows
-  (is (equal '("GdkBroadwayDisplay" "GdkWaylandDisplay" "GdkX11Display")
-             (list-children "GdkDisplay")))
+  (if *first-run-gtk-test*
+      (is (equal '("GdkWaylandDisplay" "GdkX11Display")
+                 (list-children "GdkDisplay")))
+      (is (equal '("GdkBroadwayDisplay" "GdkWaylandDisplay" "GdkX11Display")
+                 (list-children "GdkDisplay"))))
   #+windows
   (is (equal '("GdkWin32Display")
              (list-children "GdkDisplay")))

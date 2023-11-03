@@ -47,32 +47,275 @@
 
 ;;;     GskTransform
 
-#+nil
-(test gsk-transform-class
+(test gsk-transform-boxed
   ;; Type check
-  (is (g:type-is-a (gtype "GskTransform") +g-type-boxed+))
+  (is (g:type-is-a (g:gtype "GskTransform") g:+g-type-boxed+))
   ;; Check the type initializer
   (is (eq (g:gtype "GskTransform")
-          (g:gtype (cffi:foreign-funcall "gsk_transform_get_type" :size)))))
+          (g:gtype (cffi:foreign-funcall "gsk_transform_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gsk:transform
+          (glib:symbol-for-gtype "GskTransform"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gsk_transform_new
 
 (test gsk-transform-new
-  (is (typep (gsk:transform-new) 'gsk:transform)))
+  (is (typep (gsk:transform-new) 'gsk:transform))
+  (is (string= "none" (gsk:transform-to-string (gsk:transform-new)))))
+
+;;;     gsk_transform_ref
+;;;     gsk_transform_unref
+
+;;;     gsk_transform_get_category
+
+(test gsk-transform-category.1
+  (graphene:with-graphene-point (point 10 20)
+    (let* ((transform1 (gsk:transform-new))
+           (transform2 (gsk:transform-translate transform1 point))
+           (transform3 (gsk:transform-rotate transform1 10)))
+      (is (eq :identity (gsk:transform-category transform1)))
+      (is (eq :2d-translate (gsk:transform-category transform2)))
+      (is (eq :2d (gsk:transform-category transform3)))
+)))
+
+(test gsk-transform-category.2
+  (graphene:with-graphene-point (point 10 20)
+    (let* ((transform (gsk:transform-new)))
+      (is (eq :identity (gsk:transform-category transform)))
+      (setf transform (gsk:transform-translate transform point))
+      (is (eq :2d-translate (gsk:transform-category transform)))
+      (setf transform (gsk:transform-rotate transform 10))
+      (is (eq :2d (gsk:transform-category transform)))
+)))
+
+;;;     gsk_transform_print
+;;;     gsk_transform_to_string
+
+(test gsk-transform-to-string
+  (graphene:with-graphene-point (point 10 20)
+    (let ((transform (gsk:transform-new)))
+      (is (string= "none" (gsk:transform-to-string transform)))
+      (setf transform (gsk:transform-translate transform point))
+      (is (string= "translate(10, 20)" (gsk:transform-to-string transform)))
+      (setf transform (gsk:transform-rotate transform 10))
+      (is (string= "translate(10, 20) rotate(10)"
+                   (gsk:transform-to-string transform))))))
 
 ;;;     gsk_transform_parse
+
+;; FIXME: The implementation of gsk:transform-parse does not work!?
 
 #+nil
 (test gsk-transform-parse
 
-  (is-false (gsk:transform-parse ""))
-  (is (typep (gsk:transform-parse "translate(10,20)") 'gsk:transform))
-  (is (typep (gsk:transform-parse "rotate(10)") 'gsk:transform))
+  (trace cffi:translate-to-foreign)
+  (trace cffi:translate-from-foreign)
+  (trace glib::make-boxed-type)
+  (trace gsk:transform-parse)
+  (trace gsk::%transform-parse)
+  (trace gsk:transform-to-string)
+
+  (let ((transform nil))
+    (is (typep (setf transform (gsk:transform-parse "none")) 'gsk:transform))
+    (is-false transform)
+    ;; This works
+    (is-false (gsk:transform-category transform))
+    ;; This crashes with: Unhandled memory fault at #x38..
+    (is-false (gsk:transform-to-string transform))
+  )
+
+  (untrace cffi:translate-to-foreign)
+  (untrace cffi:translate-from-foreign)
+  (untrace glib::make-boxed-info)
+  (untrace gsk:transform-parse)
+  (untrace gsk::%transform-parse)
+  (untrace gsk:transform-to-string)
 
 )
 
+;;;     gsk_transform_to_matrix
+
+(test gsk-transform-to-matrix
+  (graphene:with-graphene-point (point 3 4)
+    (graphene:with-graphene-matrix (matrix)
+      (let ((transform (gsk:transform-new)))
+        (is (cffi:pointer-eq matrix
+                             (gsk:transform-to-matrix transform matrix)))
+        (is (equal '(1.0 0.0 0.0 0.0
+                     0.0 1.0 0.0 0.0
+                     0.0 0.0 1.0 0.0
+                     0.0 0.0 0.0 1.0)
+                   (graphene:matrix-to-float matrix)))
+        (setf transform (gsk:transform-translate transform point))
+        (is (cffi:pointer-eq matrix
+                             (gsk:transform-to-matrix transform matrix)))
+        (is (equal '(1.0 0.0 0.0 0.0
+                     0.0 1.0 0.0 0.0
+                     0.0 0.0 1.0 0.0
+                     3.0 4.0 0.0 1.0)
+                   (graphene:matrix-to-float matrix)))))))
+
+;;;     gsk_transform_to_2d
+
+(test gsk-transform-to-2d
+  (graphene:with-graphene-point (point 3 4)
+    (let ((transform (gsk:transform-new)))
+      (is (equal '(1.0 0.0 0.0 1.0 0.0 0.0)
+                 (gsk:transform-to-2d transform)))
+      (setf transform (gsk:transform-translate transform point))
+      (is (equal '(1.0 0.0 0.0 1.0 3.0 4.0)
+                 (gsk:transform-to-2d transform))))))
+
+;;;     gsk_transform_to_2d_components                     Since 4.6
+
+(test gsk-transform-to-2-components
+  (graphene:with-graphene-point (point 5 6)
+    (let ((transform (gsk:transform-new)))
+      (is (equal '(0.0 0.0 1.0 1.0 0.0 0.0 0.0)
+                 (gsk:transform-to-2d-components transform)))
+      (setf transform (gsk:transform-translate transform point))
+      (is (equal '(0.0 0.0 1.0 1.0 0.0 5.0 6.0)
+                 (gsk:transform-to-2d-components transform)))
+      (setf transform (gsk:transform-rotate transform 90))
+      (is (equal '(0.0 0.0 1.0 1.0 90.0 5.0 6.0)
+                 (gsk:transform-to-2d-components transform))))))
+
+;;;     gsk_transform_to_affine
+
+(test gsk-transform-to-affine
+  (graphene:with-graphene-point (point 5 6)
+    (let ((transform (gsk:transform-new)))
+      (is (equal '(1.0 1.0 0.0 0.0)
+                 (gsk:transform-to-affine transform)))
+      (setf transform (gsk:transform-translate transform point))
+      (is (equal '(1.0 1.0 5.0 6.0)
+                 (gsk:transform-to-affine transform))))))
+
+;;;     gsk_transform_to_translate
+
+(test gsk-transform-to-translate
+  (graphene:with-graphene-point (point 5 6)
+    (let ((transform (gsk:transform-new)))
+      (is (equal '(0.0 0.0)
+                 (gsk:transform-to-translate transform)))
+      (setf transform (gsk:transform-translate transform point))
+      (is (equal '(5.0 6.0)
+                 (gsk:transform-to-translate transform))))))
+
+;;;     gsk_transform_transform
+
+(test gsk-transform-transform
+  (graphene:with-graphene-point (point 2 3)
+    (let ((transform (gsk:transform-new))
+          (other (gsk:transform-new))
+          (result nil))
+    (setf other (gsk:transform-translate other point))
+    (setf result (gsk:transform-transform transform other))
+    (is (equal '(2.0 3.0)
+               (gsk:transform-to-translate result))))))
+
+;;;     gsk_transform_invert
+
+(test gsk-transform-invert
+  (graphene:with-graphene-point (point 2 3)
+    (let ((transform (gsk:transform-new))
+          (other (gsk:transform-new))
+          (result nil))
+    (setf other (gsk:transform-translate other point))
+    (setf result (gsk:transform-transform transform other))
+    (is (equal '(2.0 3.0)
+               (gsk:transform-to-translate result)))
+    (is (equal '(-2.0 -3.0)
+               (gsk:transform-to-translate (gsk:transform-invert result)))))))
+
+;;;     gsk_transform_matrix
+
+(test gsk-transform-matrix
+  (graphene:with-graphene-matrix (matrix)
+    (let ((transform (gsk:transform-new)))
+      (graphene:matrix-init-scale matrix 1 2 3)
+      (setf transform (gsk:transform-matrix transform matrix))
+      (is (equal '(1.0 0.0 0.0 0.0
+                   0.0 2.0 0.0 0.0
+                   0.0 0.0 3.0 0.0
+                   0.0 0.0 0.0 1.0)
+                 (graphene:matrix-to-float
+                     (gsk:transform-to-matrix transform matrix)))))))
+
+;;;     gsk_transform_translate
+;;;     gsk_transform_translate_3d
+
+;;;     gsk_transform_rotate
+
+(test gsk-transform-rotate
+  (let ((transform (gsk:transform-new)))
+    (is (typep (setf transform (gsk:transform-rotate transform 10))
+               'gsk:transform))
+    (is (string= "rotate(10)" (gsk:transform-to-string transform)))
+    (is (typep (setf transform (gsk:transform-rotate transform 10))
+               'gsk:transform))
+    (is (string= "rotate(20)" (gsk:transform-to-string transform)))
+    (is (typep (setf transform (gsk:transform-rotate transform 0.5))
+               'gsk:transform))
+    (is (string= "rotate(20.5)" (gsk:transform-to-string transform)))
+    (is (typep (setf transform (gsk:transform-rotate transform -1/2))
+               'gsk:transform))
+    (is (string= "rotate(20)" (gsk:transform-to-string transform)))))
+
+;;;     gsk_transform_rotate_3d
+
+(test gsk-transform-rotate-3d.z
+  (graphene:with-graphene-vec3 (vec 0 0 1)
+    (let ((transform (gsk:transform-new)))
+      (is (string= "none" (gsk:transform-to-string transform)))
+      (is (string= "rotate(10)"
+                   (gsk:transform-to-string
+                     (gsk:transform-rotate-3d transform 10 vec))))
+      (is (string= "none" (gsk:transform-to-string transform))))))
+
+(test gsk-transform-rotate-3d.x
+  (graphene:with-graphene-vec3 (vec 1 0 0)
+    (let ((transform (gsk:transform-new)))
+      (is (string= "rotate3d(1, 0, 0, 10)"
+                   (gsk:transform-to-string
+                     (gsk:transform-rotate-3d transform 10 vec)))))))
+
+(test gsk-transform-rotate-3d.y
+  (graphene:with-graphene-vec3 (vec 0 1 0)
+    (let ((transform (gsk:transform-new)))
+      (is (string= "rotate3d(0, 1, 0, 10)"
+                   (gsk:transform-to-string
+                     (gsk:transform-rotate-3d transform 10 vec)))))))
+
+;;;     gsk_transform_scale
+
+(test gsk-transform-scale
+  (let ((transform (gsk:transform-new)))
+    (is (string= "scale(2.5, 0.4)"
+                 (gsk:transform-to-string
+                   (setf transform (gsk:transform-scale transform 5/2 2/5)))))
+    (is (string= "none"
+                 (gsk:transform-to-string
+                   (setf transform (gsk:transform-scale transform 2/5 5/2)))))))
+
+;;;     gsk_transform_scale_3d
+
+(test gsk-transform-scale-3d
+  (let ((transform (gsk:transform-new)))
+    (is (string= "scale3d(2.5, 0.4, 0.5)"
+                 (gsk:transform-to-string
+                   (setf transform
+                         (gsk:transform-scale-3d transform 5/2 2/5 1/2)))))
+    (is (string= "none"
+                 (gsk:transform-to-string
+                   (setf transform
+                         (gsk:transform-scale-3d transform 2/5 5/2 2)))))))
+
+;;;     gsk_transform_skew                                 Since 4.6
+
+;;;     gsk_transform_perspective
 
 ;;;     gsk_transform_equal
 
@@ -88,50 +331,7 @@
 
 ))
 
-;;;     gsk_transform_get_category
-
-#+nil
-(test gsk-transform-category
-
-  (is (eq :identity (gsk:transform-category (gsk:transform-new))))
-
-  (is (eq :identity
-          (gsk:transform-category (gsk:transform-parse "translate(10,20)"))))
-
-  (is (eq :identity
-          (gsk:transform-category (gsk:transform-parse "rotate(10deg)"))))
-)
-
-
-;;;     gsk_transform_invert
-;;;     gsk_transform_matrix
-;;;     gsk_transform_perspective
-;;;     gsk_transform_print
-
-;;;     gsk_transform_ref
-
-#+nil
-(test gsk-transform-ref
-  (is (typep (gsk:transform-ref (gsk:transform-new)) 'gsk:transform)))
-
-;;;     gsk_transform_rotate
-;;;     gsk_transform_rotate_3d
-;;;     gsk_transform_scale
-;;;     gsk_transform_scale_3d
-;;;     gsk_transform_skew
-;;;     gsk_transform_to_2d
-;;;     gsk_transform_to_2d_components
-;;;     gsk_transform_to_affine
-;;;     gsk_transform_to_matrix
-
-;;;     gsk_transform_to_string
-
-;;;     gsk_transform_to_translate
-;;;     gsk_transform_transform
 ;;;     gsk_transform_transform_bounds
 ;;;     gsk_transform_transform_point
-;;;     gsk_transform_translate
-;;;     gsk_transform_translate_3d
-;;;     gsk_transform_unref
 
-;;; --- 2023-9-22 --------------------------------------------------------------
+;;; --- 2023-10-31 -------------------------------------------------------------

@@ -7,7 +7,7 @@
 
 ;;;     GtkSeparator
 
-(test separator-class
+(test gtk-separator-class
   ;; Type check
   (is (g:type-is-object "GtkSeparator"))
   ;; Check the registered name
@@ -32,15 +32,14 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkSeparator")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "separator"
                (gtk:widget-class-css-name "GtkSeparator")))
-  (is (string=
-"separator.horizontal:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:separator))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("horizontal")
+             (gtk:widget-css-classes (make-instance 'gtk:separator))))
+  ;; Accessible role
+  (is (eq :separator (gtk:widget-class-accessible-role "GtkSeparator")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSeparator" GTK-SEPARATOR
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

@@ -34,11 +34,11 @@
   ;; CSS name
   (is (string= "widget"
                (gtk:widget-class-css-name "GtkDrawingArea")))
-  ;; CSS style context
-  (is (string=
-"widget:dir(ltr)
-"
-               (print-style-context "GtkDrawingArea")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:drawing-area))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkDrawingArea")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDrawingArea" GTK-DRAWING-AREA
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -79,4 +79,4 @@
 
 ;;;     gtk_drawing_area_set_draw_func
 
-;;; --- 2023-8-23 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

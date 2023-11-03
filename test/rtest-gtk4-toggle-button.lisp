@@ -32,15 +32,14 @@
   ;; Check the signals
   (is (equal '("toggled")
              (list-signals "GtkToggleButton")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkToggleButton")))
-  (is (string=
-"button.toggle:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:toggle-button))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("toggle")
+             (gtk:widget-css-classes (make-instance 'gtk:toggle-button))))
+  ;; Accessible role
+  (is (eq :toggle-button (gtk:widget-class-accessible-role "GtkToggleButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkToggleButton" GTK-TOGGLE-BUTTON
                        (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES

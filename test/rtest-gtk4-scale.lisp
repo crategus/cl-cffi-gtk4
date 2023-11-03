@@ -35,14 +35,11 @@
   ;; CSS name
   (is (string= "scale"
                (gtk:widget-class-css-name "GtkScale")))
-  ;; CSS style context
-  (is (string=
-"scale.horizontal:dir(ltr)
-  trough:dir(ltr)
-    highlight.top:dir(ltr)
-    [slider:dir(ltr)]
-"
-               (print-style-context "GtkScale")))
+  ;; CSS classes
+  (is (equal '("horizontal")
+             (gtk:widget-css-classes (make-instance 'gtk:scale))))
+  ;; Accessible role
+  (is (eq :slider (gtk:widget-class-accessible-role "GtkScale")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScale" GTK-SCALE
                                (:SUPERCLASS GTK-RANGE :EXPORT T :INTERFACES

@@ -32,15 +32,14 @@
   ;; Check the signals
   (is (equal '("popdown" "popup" "value-changed")
              (list-signals "GtkScaleButton")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "scalebutton"
                (gtk:widget-class-css-name "GtkScaleButton")))
-  (is (string=
-"scalebutton.scale:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:scale-button))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("scale")
+             (gtk:widget-css-classes (make-instance 'gtk:scale-button))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkScaleButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScaleButton" GTK-SCALE-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -75,4 +74,4 @@
 ;;;     gtk_scale_button_get_plus_button
 ;;;     gtk_scale_button_get_minus_button
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-2 --------------------------------------------------------------

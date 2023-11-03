@@ -33,15 +33,14 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkCenterBox")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "box"
                (gtk:widget-class-css-name "GtkCenterBox")))
-  (is (string=
-"box:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:center-box))
-                   :none)))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:center-box))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkCenterBox")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCenterBox" GTK-CENTER-BOX
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -91,4 +90,4 @@
 (test gtk-center-box-new
   (is (typep (gtk:center-box-new) 'gtk:center-box)))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

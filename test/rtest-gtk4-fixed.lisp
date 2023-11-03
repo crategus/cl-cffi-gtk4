@@ -31,15 +31,14 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkFixed")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "widget"
                (gtk:widget-class-css-name "GtkFixed")))
-  (is (string=
-"widget:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:fixed))
-                   :none)))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:fixed))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkFixed")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFixed" GTK-FIXED
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

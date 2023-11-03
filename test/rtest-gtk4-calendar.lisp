@@ -35,11 +35,11 @@
   ;; CSS name
   (is (string= "calendar"
                (gtk:widget-class-css-name "GtkCalendar")))
-  ;; CSS style context
-  (is (string=
-"calendar.view:dir(ltr)
-"
-               (print-style-context "GtkCalendar" :none)))
+  ;; CSS classes
+  (is (equal '("view")
+             (gtk:widget-css-classes (make-instance 'gtk:calendar))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkCalendar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCalendar" GTK-CALENDAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

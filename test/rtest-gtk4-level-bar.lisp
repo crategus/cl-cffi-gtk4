@@ -69,14 +69,11 @@
   ;; CSS name
   (is (string= "levelbar"
                (gtk:widget-class-css-name "GtkLevelBar")))
-  ;; CSS style context
-  (is (string=
-"levelbar.continuous.horizontal:dir(ltr)
-  trough:dir(ltr)
-    block.filled.low:dir(ltr)
-    block.empty:dir(ltr)
-"
-               (print-style-context "GtkLevelBar")))
+  ;; CSS classes
+  (is (equal '("horizontal" "continuous")
+             (gtk:widget-css-classes (make-instance 'gtk:level-bar))))
+  ;; Accessible role
+  (is (eq :meter (gtk:widget-class-accessible-role "GtkLevelBar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLevelBar" GTK-LEVEL-BAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

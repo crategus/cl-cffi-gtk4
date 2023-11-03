@@ -34,11 +34,11 @@
   ;; CSS name
   (is (string= "aspectframe"
                (gtk:widget-class-css-name "GtkAspectFrame")))
-  ;; CSS style context
-  (is (string=
-"aspectframe:dir(ltr)
-"
-               (print-style-context "GtkAspectFrame")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:aspect-frame))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkAspectFrame")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAspectFrame" GTK-ASPECT-FRAME
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

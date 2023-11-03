@@ -11,7 +11,7 @@
 
 ;;;     GtkRecentManager
 
-(test recent-manager-class
+(test gtk-recent-manager-class
   ;; Type check
   (is (g:type-is-object "GtkRecentManager"))
   ;; Check the registered name
@@ -46,7 +46,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test recent-manager-properties
+(test gtk-recent-manager-properties
   (let ((manager (gtk:recent-manager-default)))
     (is (stringp (gtk:recent-manager-filename manager)))
     (is (integerp (gtk:recent-manager-size manager)))))
@@ -61,14 +61,14 @@
 
 ;;;     gtk_recent_manager_get_default
 
-(test recent-manager-default
+(test gtk-recent-manager-default
   (is (typep (gtk:recent-manager-default) 'gtk:recent-manager)))
 
 ;;;     gtk_recent_manager_add_item
 ;;;     gtk_recent_manager_has_item
 ;;;     gtk_recent_manager_lookup_item
 
-(test recent-manager-add-item
+(test gtk-recent-manager-add-item
   (let* ((recent (gtk:recent-manager-default))
          (filename (namestring (sys-path "rtest-gtk4-recent-manager.lisp")))
          (uri (concatenate 'string "file://" filename)))
@@ -84,7 +84,7 @@
 
 ;;;     gtk_recent_manager_get_items
 
-(test recent-manager-items
+(test gtk-recent-manager-items
   (is (every (lambda (x) (typep x 'gtk:recent-info))
              (gtk:recent-manager-items (gtk:recent-manager-default)))))
 
@@ -127,7 +127,7 @@
 ;;;     gtk_recent_info_last_application
 ;;;     gtk_recent_info_has_application
 
-(test recent-info-application
+(test gtk-recent-info-application
   (let* ((recent (gtk:recent-manager-default))
          (filename (namestring (sys-path "rtest-gtk4-recent-manager.lisp")))
          (uri (concatenate 'string "file://" filename))
@@ -155,4 +155,4 @@
 ;;;     gtk_recent_info_exists
 ;;;     gtk_recent_info_match
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

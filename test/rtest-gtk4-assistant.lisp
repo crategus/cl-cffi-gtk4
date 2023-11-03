@@ -91,49 +91,60 @@
 ;;;     title
 
 (test gtk-assistant-page-properties
-  (let ((page (make-instance 'gtk:assistant-page)))
-    (is-false (gtk:assistant-page-child page))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((page (make-instance 'gtk:assistant-page)))
+      (is-false (gtk:assistant-page-child page)))))
 
 ;;;     GtkAssistant
 
 (test gtk-assistant-class
-  ;; Type check
-  (is (g:type-is-object "GtkAssistant"))
-  ;; Check the registered name
-  (is (eq 'gtk:assistant
-          (glib:symbol-for-gtype "GtkAssistant")))
-  ;; Check the type initializer
-  (is (eq (g:gtype "GtkAssistant")
-          (g:gtype (cffi:foreign-funcall "gtk_assistant_get_type" :size))))
-  ;; Check the parent
-  (is (eq (g:gtype "GtkWindow")
-          (g:type-parent "GtkAssistant")))
-  ;; Check the children
-  (is (equal '()
-             (list-children "GtkAssistant")))
-  ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
-               "GtkShortcutManager" "GtkRoot")
-             (list-interfaces "GtkAssistant")))
-  ;; Check the class properties
-  (is (equal '("pages" "use-header-bar")
-             (list-properties "GtkAssistant")))
-  ;; Check the list of signals
-  (is (equal '("apply" "cancel" "close" "escape" "prepare")
-             (list-signals "GtkAssistant")))
-  ;; CSS information
-  (is (string= "window"
-               (gtk:widget-class-css-name "GtkAssistant")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistant" GTK-ASSISTANT
-                       (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkNative" "GtkRoot" "GtkShortcutManager")
-                        :TYPE-INITIALIZER "gtk_assistant_get_type")
-                       ((PAGES GTK-ASSISTANT-PAGES "pages" "GListModel" T NIL)
-                        (USE-HEADER-BAR GTK-ASSISTANT-USE-HEADER-BAR
-                         "use-header-bar" "gint" T NIL)))
-             (gobject:get-g-type-definition "GtkAssistant"))))
+  (let ((*gtk-warn-deprecated* nil))
+    ;; Type check
+    (is (g:type-is-object "GtkAssistant"))
+    ;; Check the registered name
+    (is (eq 'gtk:assistant
+            (glib:symbol-for-gtype "GtkAssistant")))
+    ;; Check the type initializer
+    (is (eq (g:gtype "GtkAssistant")
+            (g:gtype (cffi:foreign-funcall "gtk_assistant_get_type" :size))))
+    ;; Check the parent
+    (is (eq (g:gtype "GtkWindow")
+            (g:type-parent "GtkAssistant")))
+    ;; Check the children
+    (is (equal '()
+               (list-children "GtkAssistant")))
+    ;; Check the interfaces
+    (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                 "GtkNative" "GtkShortcutManager" "GtkRoot")
+               (list-interfaces "GtkAssistant")))
+    ;; Check the class properties
+    (is (equal '("pages" "use-header-bar")
+               (list-properties "GtkAssistant")))
+    ;; Check the list of signals
+    (is (equal '("apply" "cancel" "close" "escape" "prepare")
+               (list-signals "GtkAssistant")))
+    ;; CSS name
+    (is (string= "window"
+                 (gtk:widget-class-css-name "GtkAssistant")))
+    ;; CSS classes
+    #-windows
+    (is (equal '("background" "assistant" "csd")
+               (gtk:widget-css-classes (make-instance 'gtk:assistant))))
+    #+windows
+    (is (equal '("background" "assistant")
+               (gtk:widget-css-classes (make-instance 'gtk:assistant))))
+    ;; Accessible role
+    (is (eq :window (gtk:widget-class-accessible-role "GtkAssistant")))
+    ;; Check the class definition
+    (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistant" GTK-ASSISTANT
+                         (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
+                          ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                           "GtkNative" "GtkRoot" "GtkShortcutManager")
+                          :TYPE-INITIALIZER "gtk_assistant_get_type")
+                         ((PAGES GTK-ASSISTANT-PAGES "pages" "GListModel" T NIL)
+                          (USE-HEADER-BAR GTK-ASSISTANT-USE-HEADER-BAR
+                           "use-header-bar" "gint" T NIL)))
+               (gobject:get-g-type-definition "GtkAssistant")))))
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -141,10 +152,11 @@
 ;;;     use-header-bar
 
 (test gtk-assistant-properties
-  (let ((assistant (make-instance 'gtk:assistant)))
-    (is (typep (gtk:assistant-pages assistant) 'g:object))
-    #-windows
-    (is (= 1 (gtk:assistant-use-header-bar assistant)))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((assistant (make-instance 'gtk:assistant)))
+      (is (typep (gtk:assistant-pages assistant) 'g:object))
+      #-windows
+      (is (= 1 (gtk:assistant-use-header-bar assistant))))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -159,7 +171,8 @@
 ;;;     gtk_assistant_new
 
 (test gtk-assistant-new
-  (is (typep (gtk:assistant-new) 'gtk:assistant)))
+  (let ((*gtk-warn-deprecated* nil))
+    (is (typep (gtk:assistant-new) 'gtk:assistant))))
 
 ;;;     gtk_assistant_get_page
 ;;;     gtk_assistant_get_current_page
@@ -181,4 +194,4 @@
 ;;;     gtk_assistant_next_page
 ;;;     gtk_assistant_previous_page
 
-;;; --- 2023-9-15 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

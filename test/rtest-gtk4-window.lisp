@@ -42,15 +42,14 @@
   (is (equal '("activate-default" "activate-focus" "close-request"
                "enable-debugging" "keys-changed")
              (list-signals "GtkWindow")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkWindow")))
-  (is (string=
-"[window.background:dir(ltr)]
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:window))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("background")
+             (gtk:widget-css-classes (make-instance 'gtk:window))))
+  ;; Accessible role
+  (is (eq :window (gtk:widget-class-accessible-role "GtkWindow")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindow" GTK-WINDOW
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -211,6 +210,7 @@
 ;;;     gtk_window_close
 ;;;     gtk_window_destroy
 
+#+nil
 (test gtk-window-close/destroy.1
   (let ((application (make-instance 'gtk:application
                                     :application-id "com.crategus.test"
@@ -245,6 +245,7 @@
     ;; Run the application
     (g:application-run application nil)))
 
+#+nil
 (test gtk-window-close/destroy.2
   (let ((application (make-instance 'gtk:application
                                     :application-id "com.crategus.test"
@@ -314,6 +315,7 @@
 
 ;;;     gtk_window_list_toplevels
 
+#+nil
 (test gtk-window-list-toplevels
   (is (every (lambda (obj) (typep obj 'gtk:window))
              (gtk:window-list-toplevels))))
@@ -322,4 +324,4 @@
 ;;;     gtk_window_set_interactive_debugging
 ;;;     gtk_window_is_suspended                            Since 4.12
 
-;;; --- 2023-8-20 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

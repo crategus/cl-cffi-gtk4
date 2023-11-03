@@ -33,15 +33,14 @@
   ;; Check the signals
   (is (equal '("adjust-bounds" "change-value" "move-slider" "value-changed")
              (list-signals "GtkRange")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "range"
                (gtk:widget-class-css-name "GtkRange")))
-  (is (string=
-"range.horizontal:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:range))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("horizontal")
+             (gtk:widget-css-classes (make-instance 'gtk:range))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkRange")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRange" GTK-RANGE
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

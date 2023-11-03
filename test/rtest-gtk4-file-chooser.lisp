@@ -89,13 +89,14 @@
 ;;;     shortcut-folders
 
 (test gtk-file-chooser-properties
-  (let ((chooser (make-instance 'gtk:file-chooser-dialog)))
-    (is (eq :open (gtk:file-chooser-action chooser)))
-    (is-true (gtk:file-chooser-create-folders chooser))
-    (is-false (gtk:file-chooser-filter chooser))
-    (is (typep (gtk:file-chooser-filters chooser) 'g:list-model))
-    (is-false (gtk:file-chooser-select-multiple chooser))
-    (is (typep (gtk:file-chooser-shortcut-folders chooser) 'g:list-model))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((chooser (make-instance 'gtk:file-chooser-dialog)))
+      (is (eq :open (gtk:file-chooser-action chooser)))
+      (is-true (gtk:file-chooser-create-folders chooser))
+      (is-false (gtk:file-chooser-filter chooser))
+      (is (typep (gtk:file-chooser-filters chooser) 'g:list-model))
+      (is-false (gtk:file-chooser-select-multiple chooser))
+      (is (typep (gtk:file-chooser-shortcut-folders chooser) 'g:list-model)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -103,14 +104,14 @@
 ;;;     gtk_file_chooser_get_current_name
 
 (test gtk-file-chooser-current-name
-  (let ((chooser (make-instance 'gtk:file-chooser-dialog
-                                :action :save)))
-
-    (is (string= "" (gtk:file-chooser-current-name chooser)))
-    (is (string= "New name"
-                 (setf (gtk:file-chooser-current-name chooser) "New name")))
-    (is (string= "New name"
-                 (gtk:file-chooser-current-name chooser)))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((chooser (make-instance 'gtk:file-chooser-dialog
+                                  :action :save)))
+      (is (string= "" (gtk:file-chooser-current-name chooser)))
+      (is (string= "New name"
+                   (setf (gtk:file-chooser-current-name chooser) "New name")))
+      (is (string= "New name"
+                   (gtk:file-chooser-current-name chooser))))))
 
 ;;;     gtk_file_chooser_get_file
 ;;;     gtk_file_chooser_set_file

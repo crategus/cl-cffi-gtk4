@@ -34,31 +34,11 @@
   ;; CSS name
   (is (string= "stacksidebar"
                (gtk:widget-class-css-name "GtkStackSidebar")))
-  ;; CSS style context
-  (is (string=
-"stacksidebar.sidebar:dir(ltr)
-  scrolledwindow:dir(ltr)
-    viewport:dir(ltr)
-      list.navigation-sidebar:dir(ltr)
-    scrollbar.bottom.horizontal:dir(ltr)
-      range.horizontal:dir(ltr)
-        trough:dir(ltr)
-          slider:dir(ltr)
-    scrollbar.right.vertical:dir(ltr)
-      range.vertical:dir(ltr)
-        trough:dir(ltr)
-          slider:dir(ltr)
-    overshoot.left:dir(ltr)
-    undershoot.left:dir(ltr)
-    overshoot.right:dir(ltr)
-    undershoot.right:dir(ltr)
-    overshoot.top:dir(ltr)
-    undershoot.top:dir(ltr)
-    overshoot.bottom:dir(ltr)
-    undershoot.bottom:dir(ltr)
-    junction:dir(ltr)
-"
-               (print-style-context "GtkStackSidebar")))
+  ;; CSS classes
+  (is (equal '("sidebar")
+             (gtk:widget-css-classes (make-instance 'gtk:stack-sidebar))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkStackSidebar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStackSidebar" GTK-STACK-SIDEBAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

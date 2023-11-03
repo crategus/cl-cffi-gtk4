@@ -111,17 +111,18 @@
  "GtkFileChooserErrorStack" "GtkFileChooserWidget" "GtkFileThumbnail"
  "GtkFixed" "GtkFlowBox" "GtkFlowBoxChild" "GtkFontButton"
  "GtkFontChooserWidget" "GtkFontDialogButton" "GtkFrame" "GtkGLArea" "GtkGizmo"
- "GtkGrid" "GtkHeaderBar" "GtkIconView" "GtkImage" "GtkInfoBar" "GtkLabel"
- "GtkLevelBar" "GtkListBase" "GtkListBox" "GtkListBoxRow" "GtkListItemWidget"
- "GtkMediaControls" "GtkMenuButton" "GtkModelButton" "GtkNotebook" "GtkOverlay"
- "GtkPaned" "GtkPanedHandle" "GtkPasswordEntry" "GtkPathBar" "GtkPicture"
- "GtkPlacesSidebar" "GtkPopover" "GtkPopoverContent" "GtkPopoverMenuBar"
- "GtkProgressBar" "GtkRange" "GtkRevealer" "GtkScaleButton" "GtkScrollbar"
- "GtkScrolledWindow" "GtkSearchBar" "GtkSearchEntry" "GtkSeparator"
- "GtkShortcutLabel" "GtkShortcutsShortcut" "GtkSpinButton" "GtkSpinner"
- "GtkStack" "GtkStackSidebar" "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch"
- "GtkText" "GtkTextView" "GtkTreeExpander" "GtkTreeView" "GtkVideo"
- "GtkViewport" "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
+ "GtkGrid" "GtkHeaderBar" "GtkIconView" "GtkImage" "GtkInfoBar"
+ "GtkInscription" "GtkLabel" "GtkLevelBar" "GtkListBase" "GtkListBox"
+ "GtkListBoxRow" "GtkListItemWidget" "GtkMediaControls" "GtkMenuButton"
+ "GtkModelButton" "GtkNotebook" "GtkOverlay" "GtkPaned" "GtkPanedHandle"
+ "GtkPasswordEntry" "GtkPathBar" "GtkPicture" "GtkPlacesSidebar" "GtkPopover"
+ "GtkPopoverContent" "GtkPopoverMenuBar" "GtkProgressBar" "GtkRange"
+ "GtkRevealer" "GtkScaleButton" "GtkScrollbar" "GtkScrolledWindow"
+ "GtkSearchBar" "GtkSearchEntry" "GtkSeparator" "GtkShortcutLabel"
+ "GtkShortcutsShortcut" "GtkSpinButton" "GtkSpinner" "GtkStack"
+ "GtkStackSidebar" "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch" "GtkText"
+ "GtkTextView" "GtkTreeExpander" "GtkTreeView" "GtkVideo" "GtkViewport"
+ "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
                  (list-children "GtkWidget"))))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
@@ -351,11 +352,21 @@
 
 ;;;     gtk_widget_measure
 
+#-windows
 (test gtk-widget-measure
   (is (equal '(33 33 -1 -1)
              (multiple-value-list
                  (gtk:widget-measure (gtk:label-new "label") :horizontal -1))))
   (is (equal '(17 17 14 14)
+             (multiple-value-list
+                 (gtk:widget-measure (gtk:label-new "label") :vertical -1)))))
+
+#+windows
+(test gtk-widget-measure
+  (is (equal '(25 25 -1 -1)
+             (multiple-value-list
+                 (gtk:widget-measure (gtk:label-new "label") :horizontal -1))))
+  (is (equal '(17 17 13 13)
              (multiple-value-list
                  (gtk:widget-measure (gtk:label-new "label") :vertical -1)))))
 

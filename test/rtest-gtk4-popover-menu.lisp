@@ -9,7 +9,7 @@
 
 ;;;     GtkPopoverMenu
 
-(test popover-menu-class
+(test gtk-popover-menu-class
   ;; Type check
   (is (g:type-is-object "GtkPopoverMenu"))
   ;; Check the registered name
@@ -34,15 +34,14 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkPopoverMenu")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "popover"
                (gtk:widget-class-css-name "GtkPopoverMenu")))
-  (is (string=
-"[popover.background.menu:dir(ltr)]
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:popover-menu))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("background" "menu")
+             (gtk:widget-css-classes (make-instance 'gtk:popover-menu))))
+  ;; Accessible role
+  (is (eq :menu (gtk:widget-class-accessible-role "GtkPopoverMenu")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPopoverMenu" GTK-POPOVER-MENU
                        (:SUPERCLASS GTK-POPOVER :EXPORT T :INTERFACES
@@ -67,4 +66,4 @@
 ;;;     gtk_popover_menu_add_child
 ;;;     gtk_popover_menu_remove_child
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-2 --------------------------------------------------------------

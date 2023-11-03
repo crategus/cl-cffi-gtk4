@@ -29,6 +29,10 @@
   (is (equal '("GtkColorEditor" "GtkPlacesView" "GtkPrinterOptionWidget"
                "GtkShortcutsGroup" "GtkShortcutsSection")
              (list-children "GtkBox")))
+  #+windows
+  (is (equal '("GtkColorEditor" "GtkPlacesView" "GtkShortcutsGroup"
+               "GtkShortcutsSection")
+             (list-children "GtkBox")))
   ;; Check the interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
@@ -39,15 +43,14 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkBox")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "box"
                (gtk:widget-class-css-name "GtkBox")))
-  (is (string=
-"box.horizontal:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:box))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("horizontal")
+             (gtk:widget-css-classes (make-instance 'gtk:box))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkBox")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBox" GTK-BOX
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

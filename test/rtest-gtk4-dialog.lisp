@@ -81,60 +81,62 @@
 ;;;     GtkDialog
 
 (test gtk-dialog-class
-  ;; Type check
-  (is (g:type-is-object "GtkDialog"))
-  ;; Check the registered name
-  (is (eq 'gtk:dialog
-          (glib:symbol-for-gtype "GtkDialog")))
-  ;; Check the type initializer
-  (is (eq (g:gtype "GtkDialog")
-          (g:gtype (cffi:foreign-funcall "gtk_dialog_get_type" :size))))
-  ;; Check the parent
-  (is (eq (g:gtype "GtkWindow")
-          (g:type-parent "GtkDialog")))
-  ;; Check the children
-  #-windows
-  (is (equal '("GtkAppChooserDialog" "GtkColorChooserDialog"
-               "GtkFileChooserDialog" "GtkFontChooserDialog" "GtkMessageDialog"
-               "GtkPageSetupUnixDialog" "GtkPrintUnixDialog")
-             (list-children "GtkDialog")))
-  ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
-               "GtkShortcutManager" "GtkRoot")
-             (list-interfaces "GtkDialog")))
-  ;; Check the class properties
-  (is (equal '("use-header-bar")
-             (list-properties "GtkDialog")))
-  ;; Check the list of signals
-  (is (equal '("close" "response")
-             (list-signals "GtkDialog")))
-  ;; CSS information
-  (is (string= "window"
-               (gtk:widget-class-css-name "GtkDialog")))
-  (is (string=
-"[window.background.dialog:dir(ltr)]
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:dialog))
-                   :none)))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDialog" GTK-DIALOG
-                       (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkNative" "GtkRoot" "GtkShortcutManager")
-                        :TYPE-INITIALIZER "gtk_dialog_get_type")
-                       ((USE-HEADER-BAR GTK-DIALOG-USE-HEADER-BAR
-                         "use-header-bar" "gint" T NIL)))
-             (gobject:get-g-type-definition "GtkDialog"))))
+  (let ((*gtk-warn-deprecated* nil))
+    ;; Type check
+    (is (g:type-is-object "GtkDialog"))
+    ;; Check the registered name
+    (is (eq 'gtk:dialog
+            (glib:symbol-for-gtype "GtkDialog")))
+    ;; Check the type initializer
+    (is (eq (g:gtype "GtkDialog")
+            (g:gtype (cffi:foreign-funcall "gtk_dialog_get_type" :size))))
+    ;; Check the parent
+    (is (eq (g:gtype "GtkWindow")
+            (g:type-parent "GtkDialog")))
+    ;; Check the children
+    #-windows
+    (is (equal '("GtkAppChooserDialog" "GtkColorChooserDialog"
+                 "GtkFileChooserDialog" "GtkFontChooserDialog"
+                 "GtkMessageDialog" "GtkPageSetupUnixDialog"
+                 "GtkPrintUnixDialog")
+               (list-children "GtkDialog")))
+    ;; Check the interfaces
+    (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                 "GtkNative" "GtkShortcutManager" "GtkRoot")
+               (list-interfaces "GtkDialog")))
+    ;; Check the class properties
+    (is (equal '("use-header-bar")
+               (list-properties "GtkDialog")))
+    ;; Check the list of signals
+    (is (equal '("close" "response")
+               (list-signals "GtkDialog")))
+    ;; CSS name
+    (is (string= "window"
+                 (gtk:widget-class-css-name "GtkDialog")))
+    ;; CSS classes
+    (is (equal '("background" "dialog")
+               (gtk:widget-css-classes (make-instance 'gtk:dialog))))
+    ;; Accessible role
+    (is (eq :dialog (gtk:widget-class-accessible-role "GtkDialog")))
+    ;; Check the class definition
+    (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDialog" GTK-DIALOG
+                         (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
+                          ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+                           "GtkNative" "GtkRoot" "GtkShortcutManager")
+                          :TYPE-INITIALIZER "gtk_dialog_get_type")
+                         ((USE-HEADER-BAR GTK-DIALOG-USE-HEADER-BAR
+                           "use-header-bar" "gint" T NIL)))
+               (gobject:get-g-type-definition "GtkDialog")))))
 
 ;;; --- Properties -------------------------------------------------------------
 
 ;;;     use-header-bar
 
 (test gtk-dialog-properties
-  (let ((dialog (make-instance 'gtk:dialog)))
-    ;; The default value is not -1.
-    (is (= 0 (gtk:dialog-use-header-bar dialog)))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((dialog (make-instance 'gtk:dialog)))
+      ;; The default value is not -1.
+      (is (= 0 (gtk:dialog-use-header-bar dialog))))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -169,21 +171,23 @@
 ;;;     gtk_dialog_new
 
 (test gtk-dialog-new
-  (is (typep (gtk:dialog-new) 'gtk:dialog)))
+  (let ((*gtk-warn-deprecated* nil))
+    (is (typep (gtk:dialog-new) 'gtk:dialog))))
 
 ;;;     gtk_dialog_new_with_buttons
 
 (test gtk-dialog-new-with-buttons
-  (let* ((parent (gtk:window-new))
-         (dialog (gtk:dialog-new-with-buttons "My dialog"
-                                              parent
-                                              '(:modal :destroy-with-parent)
-                                              "_OK"
-                                              :accept
-                                              "_Cancel"
-                                              :reject)))
-    (is (typep dialog 'gtk:dialog))
-    (is (string= "My dialog" (gtk:window-title dialog)))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let* ((parent (gtk:window-new))
+           (dialog (gtk:dialog-new-with-buttons "My dialog"
+                                                parent
+                                                '(:modal :destroy-with-parent)
+                                                "_OK"
+                                                :accept
+                                                "_Cancel"
+                                                :reject)))
+      (is (typep dialog 'gtk:dialog))
+      (is (string= "My dialog" (gtk:window-title dialog))))))
 
 ;;;     gtk_dialog_response
 ;;;     gtk_dialog_add_button
@@ -196,4 +200,4 @@
 ;;;     gtk_dialog_get_content_area
 ;;;     gtk_dialog_get_header_bar
 
-;;; --- 2023-8-21 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

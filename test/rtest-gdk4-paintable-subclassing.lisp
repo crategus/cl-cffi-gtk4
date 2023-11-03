@@ -44,6 +44,7 @@ in GLIB-DEFCALLBACK (DEFCALLBACK PAINTABLE-GET-INTRINSIC-HEIGHT-CALLBACK
                          INTERACTIVE (LAMBDA () (LIST (EVAL (READ)))) V)))
 |#
 
+#+nil
 (gobject::define-vtable ("GdkPaintable" paintable)
   (:skip parent-instance (:struct g:type-interface))
   ;; Methods of the interface

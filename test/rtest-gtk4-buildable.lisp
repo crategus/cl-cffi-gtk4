@@ -3,19 +3,70 @@
 (def-suite gtk-buildable :in gtk-suite)
 (in-suite gtk-buildable)
 
-(defvar *dialog*
+(defvar *stack-ui*
 "<interface>
-  <object class='GtkDialog' id='dialog1'>
-    <child internal-child='content_area'>
-      <object class='GtkBox' id='vbox1'>
-        <child internal-child='action_area'>
-          <object class='GtkBox' id='hbuttonbox1'>
+  <object class='GtkWindow' id='window1'>
+    <property name='title' translatable='yes'>Stack</property>
+    <property name='resizable'>0</property>
+    <child>
+      <object class='GtkGrid'>
+        <child>
+          <object class='GtkStackSwitcher'>
+            <property name='stack'>stack</property>
+            <property name='halign'>center</property>
+            <layout>
+              <property name='column'>0</property>
+              <property name='row'>0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class='GtkStack' id='stack'>
+            <property name='transition-type'>crossfade</property>
             <child>
-              <object class='GtkButton' id='ok_button'>
-                <property name='label' translatable='yes'>_Ok</property>
-                <property name='use-underline'>True</property>
+              <object class='GtkStackPage'>
+                <property name='name'>page1</property>
+                <property name='title' translatable='yes'>Page 1</property>
+                <property name='child'>
+                  <object class='GtkImage' id='image'>
+                    <property name='margin-top'>20</property>
+                    <property name='margin-bottom'>20</property>
+                    <property name='pixel-size'>100</property>
+                    <property name='icon-name'>org.gtk.Demo4</property>
+                  </object>
+                </property>
               </object>
             </child>
+            <child>
+              <object class='GtkStackPage'>
+                <property name='name'>page2</property>
+                <property name='title' translatable='yes'>Page 2</property>
+                <property name='child'>
+                  <object class='GtkCheckButton' id='checkbutton'>
+                    <property name='label' translatable='yes'>Page 2</property>
+                    <property name='halign'>center</property>
+                    <property name='valign'>center</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class='GtkStackPage'>
+                <property name='name'>page3</property>
+                <property name='icon-name'>face-laugh-symbolic</property>
+                <property name='child'>
+                  <object class='GtkSpinner' id='spinner'>
+                    <property name='halign'>center</property>
+                    <property name='valign'>center</property>
+                    <property name='spinning'>1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <layout>
+              <property name='column'>0</property>
+              <property name='row'>1</property>
+            </layout>
           </object>
         </child>
       </object>
@@ -55,11 +106,17 @@
 ;;;     gtk_buildable_get_buildable_id
 
 (test gtk-buildable-buildable-id
-  (let* ((builder (gtk:builder-new-from-string *dialog*))
-         (dialog (gtk:builder-object builder "dialog1"))
-         (button (gtk:builder-object builder "ok_button")))
-    (is (string= "dialog1" (gtk:buildable-buildable-id dialog)))
-    (is (string= "ok_button" (gtk:buildable-buildable-id button)))))
+  (let* ((builder (gtk:builder-new-from-string *stack-ui*))
+         (window (gtk:builder-object builder "window1"))
+         (stack (gtk:builder-object builder "stack"))
+         (image (gtk:builder-object builder "image"))
+         (checkbutton (gtk:builder-object builder "checkbutton"))
+         (spinner (gtk:builder-object builder "spinner")))
+    (is (string= "window1" (gtk:buildable-buildable-id window)))
+    (is (string= "stack" (gtk:buildable-buildable-id stack)))
+    (is (string= "image" (gtk:buildable-buildable-id image)))
+    (is (string= "checkbutton" (gtk:buildable-buildable-id checkbutton)))
+    (is (string= "spinner" (gtk:buildable-buildable-id spinner)))))
 
 ;;;     GtkBuildableParser                                 not implemented
 ;;;     gtk_buildable_parse_context_get_element            not implemented
@@ -68,4 +125,4 @@
 ;;;     gtk_buildable_parse_context_pop                    not implemented
 ;;;     gtk_buildable_parse_context_push                   not implemented
 
-;;; --- 2023-8-7 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------

@@ -35,11 +35,11 @@
   ;; CSS name
   (is (string= "stackswitcher"
                (gtk:widget-class-css-name "GtkStackSwitcher")))
-  ;; CSS style context
-  (is (string=
-"stackswitcher.linked:dir(ltr)
-"
-               (print-style-context "GtkStackSwitcher")))
+  ;; CSS classes
+  (is (equal '("linked")
+             (gtk:widget-css-classes (make-instance 'gtk:stack-switcher))))
+  ;; Accessible role
+  (is (eq :tab-list (gtk:widget-class-accessible-role "GtkStackSwitcher")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStackSwitcher"
                                              GTK-STACK-SWITCHER

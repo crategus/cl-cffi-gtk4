@@ -37,17 +37,11 @@
   ;; CSS name
   (is (string= "fontbutton"
                (gtk:widget-class-css-name "GtkFontButton")))
-  ;; CSS style context
-  (is (string=
-"fontbutton:dir(ltr)
-  button.font:dir(ltr)
-    box.horizontal:dir(ltr)
-      label:dir(ltr)
-      box.horizontal:dir(ltr)
-        separator.vertical:dir(ltr)
-        label:dir(ltr)
-"
-               (print-style-context "GtkFontButton")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:font-button))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkFontButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontButton" GTK-FONT-BUTTON
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

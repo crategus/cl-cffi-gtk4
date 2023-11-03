@@ -34,17 +34,11 @@
   ;; CSS name
   (is (string= "infobar"
                (gtk:widget-class-css-name "GtkInfoBar")))
-  ;; CSS style context
-  (is (string=
-"infobar.info:dir(ltr)
-  revealer:dir(ltr)
-    box.horizontal:dir(ltr)
-      box.horizontal:dir(ltr)
-      box.horizontal:dir(ltr)
-      [button.close.image-button:dir(ltr)]
-        image:dir(ltr)
-"
-               (print-style-context "GtkInfoBar")))
+  ;; CSS classes
+  (is (equal '("info")
+             (gtk:widget-css-classes (make-instance 'gtk:info-bar))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkInfoBar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkInfoBar" GTK-INFO-BAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

@@ -34,15 +34,11 @@
   ;; CSS name
   (is (string= "actionbar"
                (gtk:widget-class-css-name "GtkActionBar")))
-  ;; CSS style context
-  (is (string=
-"actionbar:dir(ltr)
-  revealer:dir(ltr)
-    box:dir(ltr)
-      box.horizontal.start:dir(ltr)
-      box.end.horizontal:dir(ltr)
-"
-               (print-style-context "GtkActionBar")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:action-bar))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkActionBar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkActionBar" GTK-ACTION-BAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

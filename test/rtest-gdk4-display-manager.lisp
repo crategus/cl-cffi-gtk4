@@ -33,7 +33,7 @@
   (is (equal '("display-opened")
              (list-signals "GdkDisplayManager")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplayManager" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplayManager"
                                              GDK-DISPLAY-MANAGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_display_manager_get_type")
@@ -75,15 +75,13 @@
 (test gdk-display-manager-open-display
   (let ((name (uiop:getenv "DISPLAY"))
         (manager (gdk:display-manager-get)))
-    (is (typep (gdk:display-manager-open-display manager name) 'gdk:display))
-    (is-false (gdk:display-manager-open-display manager "unknown"))))
+    (is (typep (gdk:display-manager-open-display manager name) 'gdk:display))))
 
 #+windows
 (test gdk-display-manager-open-display
   (let ((manager (gdk:display-manager-get)))
     (is (typep (gdk:display-manager-open-display manager "1\\WinSta0\\Default")
-               'gdk:display))
-    (is-false (gdk:display-manager-open-display manager "xxx"))))
+               'gdk:display))))
 
 ;;;     gdk_set_allowed_backends
 

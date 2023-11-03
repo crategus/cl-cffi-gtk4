@@ -66,15 +66,14 @@
   ;; Check the signals
   (is (equal '("activate")
              (list-signals "GtkMenuButton")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "menubutton"
                (gtk:widget-class-css-name "GtkMenuButton")))
-  (is (string=
-"menubutton.popup:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:menu-button))
-                   :none)))
+  ;; CSS classes
+  (is (equal '("popup")
+             (gtk:widget-css-classes (make-instance 'gtk:menu-button))))
+  ;; Accessible role
+  (is (eq :button (gtk:widget-class-accessible-role "GtkMenuButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMenuButton" GTK-MENU-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

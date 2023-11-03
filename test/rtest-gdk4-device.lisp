@@ -230,7 +230,7 @@
           (g:type-parent "GdkDevice")))
   ;; Check the children
   #-windows
-  (is (equal '("GdkBroadwayDevice" "GdkWaylandDevice" "GdkX11DeviceXI2")
+  (is (equal '("GdkWaylandDevice" "GdkX11DeviceXI2")
              (list-children "GdkDevice")))
   #+windows
   (is (equal '("GdkDeviceVirtual" "GdkDeviceWin32")

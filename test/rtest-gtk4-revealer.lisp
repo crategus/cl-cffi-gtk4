@@ -81,15 +81,14 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkRevealer")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "revealer"
                (gtk:widget-class-css-name "GtkRevealer")))
-  (is (string=
-"revealer:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:revealer))
-                   :none)))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:revealer))))
+  ;; Accessible role
+  (is (eq :group (gtk:widget-class-accessible-role "GtkRevealer")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRevealer" GTK-REVEALER
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

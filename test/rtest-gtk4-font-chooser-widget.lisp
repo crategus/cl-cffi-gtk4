@@ -37,11 +37,11 @@
   ;; CSS name
   (is (string= "fontchooser"
                (gtk:widget-class-css-name "GtkFontChooserWidget")))
-  ;; CSS style context
-  (is (string=
-"fontchooser:dir(ltr)
-"
-               (print-style-context "GtkFontChooserWidget" :none)))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:font-chooser-widget))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkFontChooserWidget")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontChooserWidget"
                                              GTK-FONT-CHOOSER-WIDGET

@@ -33,11 +33,11 @@
   ;; CSS name
   (is (string= "spinner"
                (gtk:widget-class-css-name "GtkSpinner")))
-  ;; CSS style context
-  (is (string=
-"spinner:dir(ltr)
-"
-               (print-style-context "GtkSpinner")))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:spinner))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkSpinner")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSpinner" GTK-SPINNER
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES

@@ -7,7 +7,7 @@
 
 ;;;     GtkFrame
 
-(test frame-class
+(test gtk-frame-class
   ;; Type check
   (is (g:type-is-object "GtkFrame"))
   ;; Check the registered name
@@ -31,15 +31,14 @@
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkFrame")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "frame"
                (gtk:widget-class-css-name "GtkFrame")))
-  (is (string=
-"frame:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:frame))
-                   :none)))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:frame))))
+  ;; Accessible role
+  (is (eq :widget (gtk:widget-class-accessible-role "GtkFrame")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFrame" GTK-FRAME
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -55,7 +54,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test frame-properties.1
+(test gtk-frame-properties.1
   (let ((frame (make-instance 'gtk:frame
                               :child (make-instance 'gtk:button))))
     (is (typep (gtk:frame-child frame) 'gtk:button))
@@ -63,7 +62,7 @@
     (is-false (gtk:frame-label-widget frame))
     (is (= 0.0 (gtk:frame-label-xalign frame)))))
 
-(test frame-properties.2
+(test gtk-frame-properties.2
   (let ((frame (gtk:frame-new "label")))
     (is (string= "label" (gtk:frame-label frame)))
     (is (typep (gtk:frame-label-widget frame) 'gtk:label))
@@ -73,9 +72,9 @@
 
 ;;;     gtk_frame_new
 
-(test frame-new
+(test gtk-frame-new
   (is (typep (gtk:frame-new) 'gtk:frame))
   (is (typep (gtk:frame-new nil) 'gtk:frame))
   (is (typep (gtk:frame-new "label") 'gtk:frame)))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-1 --------------------------------------------------------------
