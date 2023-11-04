@@ -107,7 +107,8 @@
 (gobject:define-g-object-class "GtkSingleSelection" single-selection
   (:superclass g:object
    :export t
-   :interfaces ("GtkSelectionModel")
+   :interfaces ("GtkSelectionModel"
+                #+gtk-4-12 "GtkSectionModel")
    :type-initializer "gtk_single_selection_get_type")
   ((autoselect
     single-selection-autoselect

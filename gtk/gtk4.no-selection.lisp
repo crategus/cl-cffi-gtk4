@@ -70,7 +70,8 @@
 (gobject:define-g-object-class "GtkNoSelection" no-selection
   (:superclass g:object
    :export t
-   :interfaces ("GtkSelectionModel")
+   :interfaces ("GtkSelectionModel"
+                #+gtk-4-12 "GtkSectionModel")
    :type-initializer "gtk_no_selection_get_type")
   (#+gtk-4-8
    (item-type

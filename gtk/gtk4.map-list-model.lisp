@@ -71,7 +71,8 @@
 (gobject:define-g-object-class "GtkMapListModel" map-list-model
   (:superclass g:object
    :export t
-   :interfaces ("GListModel")
+   :interfaces ("GListModel" 
+                #+gtk-4-12 "GtkSectionModel")
    :type-initializer "gtk_map_list_model_get_type")
   ((has-map
     map-list-model-has-map

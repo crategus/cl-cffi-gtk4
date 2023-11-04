@@ -70,7 +70,8 @@
 (gobject:define-g-object-class "GtkMultiSelection" multi-selection
   (:superclass g:object
    :export t
-   :interfaces ("GtkSelectionModel")
+   :interfaces ("GtkSelectionModel"
+                #+gtk-4-12 "GtkSectionModel")
    :type-initializer "gtk_multi_selection_get_type")
   (#+gtk-4-8
    (item-type
