@@ -103,7 +103,11 @@
                 "GtkConstraintTarget"
                 "GtkActionable")
    :type-initializer "gtk_button_get_type")
-  ((child
+  (#+gtk-4-12
+   (can-shrink
+    button-can-shrink
+    "can-shrink" "gboolean" t t)
+   (child
     button-child
     "child" "GtkWidget" t t)
    (has-frame
