@@ -374,7 +374,7 @@
   This function can be used to convert between a @class{gsk:transform} instance
   and a matrix type from other 2D drawing libraries, in particular Cairo.
   @see-class{gsk:transform}
-  @see-functon{gsk:transform-category}"
+  @see-function{gsk:transform-category}"
   (cffi:with-foreign-objects ((xx :float) (yx :float)
                               (xy :float) (yy :float)
                               (dx :float) (dy :float))
@@ -387,12 +387,9 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_to_2d_components ()
-;;;
-;;; Converts a GskTransform to 2D transformation factors.
-;;;
-;;; Since 4.6
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-6
 (cffi:defcfun ("gsk_transform_to_2d_components" %transform-to-2d-components)
     :void
   (transform (g:boxed transform))
@@ -404,7 +401,33 @@
   (dx (:pointer :float))
   (dy (:pointer :float)))
 
+#+gtk-4-6
 (defun transform-to-2d-components (transform)
+ #+liber-documentation
+ "@version{#2023-11-3}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @return{A @code{(xskew yskew xscale yscale angle dx dy)} list with
+    single float values for the 2D transformation factors}
+  @begin{short}
+    Converts a @class{gsk:transform} instance to 2D transformation factors.
+  @end{short}
+  To recreate an equivalent transform from the factors returned by this
+  function, use
+  @begin{pre}
+gsk_transform_skew (
+    gsk_transform_scale (
+        gsk_transform_rotate (
+            gsk_transform_translate (NULL, &GRAPHENE_POINT_T (dx, dy)),
+            angle),
+        scale_x, scale_y),
+    skew_x, skew_y)
+  @end{pre}
+  The @arg{transform} parameter must be a 2D transformation. If you are not
+  sure, use the @fun{gsk:transform-category} function to check.
+
+  Since 4.6
+  @see-class{gsk:transform}
+  @see-function{gsk:transform-category}"
   (cffi:with-foreign-objects ((xskew :float)  (yskew :float)
                               (xscale :float) (yscale :float)
                               (angle :float)  (dx :float) (dy :float))
@@ -415,36 +438,11 @@
           (cffi:mem-ref angle :float)
           (cffi:mem-ref dx :float) (cffi:mem-ref dy :float))))
 
+#+gtk-4-6
 (export 'transform-to-2d-components)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_to_affine ()
-;;;
-;;; void
-;;; gsk_transform_to_affine (GskTransform *self,
-;;;                          float *out_scale_x,
-;;;                          float *out_scale_y,
-;;;                          float *out_dx,
-;;;                          float *out_dy);
-;;;
-;;; Converts a GskTransform to 2D affine transformation factors. self must be a
-;;; 2D transformation. If you are not sure, use gsk_transform_get_category() >=
-;;; GSK_TRANSFORM_CATEGORY_2D_AFFINE to check.
-;;;
-;;; self :
-;;;     a GskTransform
-;;;
-;;; out_scale_x :
-;;;     return location for the scale factor in the x direction.
-;;;
-;;; out_scale_y :
-;;;     return location for the scale factor in the y direction.
-;;;
-;;; out_dx :
-;;;     return location for the translation in the x direction.
-;;;
-;;; out_dy :
-;;;     return location for the translation in the y direction.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_to_affine" %transform-to-affine) :void
@@ -455,6 +453,19 @@
   (dy (:pointer :float)))
 
 (defun transform-to-affine (transform)
+ #+liber-documentation
+ "@version{#2023-11-3}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @return{A @code{(xscale yscale dx dy)} list of single float values with the
+    2D affine transformation factors}
+  @begin{short}
+    Converts a @class{gsk:transform} instance to 2D affine transformation
+    factors.
+  @end{short}
+  The @arg{transform} parameter must be a 2D transformation. If you are not
+  sure, use the @fun{gsk:transform-category} function to check.
+  @see-class{gsk:transform}
+  @see-function{gsk:transform-check}"
   (cffi:with-foreign-objects ((xscale :float) (yscale :float)
                               (dx :float) (dy :float))
     (%transform-to-affine transform xscale yscale dx dy)
@@ -465,24 +476,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_to_translate ()
-;;;
-;;; void
-;;; gsk_transform_to_translate (GskTransform *self,
-;;;                             float *out_dx,
-;;;                             float *out_dy);
-;;;
-;;; Converts a GskTransform to a translation operation. self must be a 2D
-;;; transformation. If you are not sure, use gsk_transform_get_category() >=
-;;; GSK_TRANSFORM_CATEGORY_2D_TRANSLATE to check.
-;;;
-;;; self :
-;;;     a GskTransform
-;;;
-;;; out_dx :
-;;;     return location for the translation in the x direction.
-;;;
-;;; out_dy :
-;;;     return location for the translation in the y direction.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_to_translate" %transform-to-translate) :void
@@ -491,6 +484,18 @@
   (dy (:pointer :float)))
 
 (defun transform-to-translate (transform)
+ #+liber-documentation
+ "@version{#2023-11-3}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @return{A @code{(dx dy)} list with single float values for a translation
+    operation.}
+  @begin{short}
+    Converts a @class{gsk:transform} instance to a translation operation.
+  @end{short}
+  The @arg{transform} parameter must be a 2D transformation. If you are not
+  sure, use the @fun{gsk:transform-category} function to check.
+  @see-class{gsk:transform}
+  @see-function{gsk:transform-category}"
   (cffi:with-foreign-objects ((dx :float) (dy :float))
     (%transform-to-translate transform dx dy)
     (list (cffi:mem-ref dx :float) (cffi:mem-ref dy :float))))
@@ -499,21 +504,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_transform ()
-;;;
-;;; GskTransform *
-;;; gsk_transform_transform (GskTransform *next,
-;;;                          GskTransform *other);
-;;;
-;;; Applies all the operations from other to next .
-;;;
-;;; next :
-;;;     Transform to apply other to.
-;;;
-;;; other :
-;;;     Transform to apply.
-;;;
-;;; Returns :
-;;;     The new transform
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_transform" %transform-transform)
@@ -522,6 +512,13 @@
   (other (g:boxed transform)))
 
 (defun transform-transform (transform other)
+ #+liber-documentation
+ "@version{#2023-11-3}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @argument[other]{a @class{gsk:transform} instance}
+  @return{A new @class{gsk:transform} instance.}
+  @short{Applies all the operations from @arg{other} to @arg{transform}.}
+  @see-class{gsk:transform}"
   (%transform-transform (%transform-ref transform)
                         (%transform-ref other)))
 
@@ -581,21 +578,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_translate ()
-;;;
-;;; GskTransform *
-;;; gsk_transform_translate (GskTransform *next,
-;;;                          const graphene_point_t *point);
-;;;
-;;; Translates next in 2dimensional space by point .
-;;;
-;;; next :
-;;;     the next transform.
-;;;
-;;; point :
-;;;     the point to translate the transform by
-;;;
-;;; Returns :
-;;;     The new transform
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_translate" %transform-translate)
@@ -604,27 +586,23 @@
   (point (:pointer (:struct graphene:point-t))))
 
 (defun transform-translate (transform point)
-    (%transform-translate (%transform-ref transform) point))
+ #+liber-documentation
+ "@version{#2023-11-3}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @argument[point]{a @symbol{graphene:point-t} instance with the point to
+    translate the transform by}
+  @return{The new @class{gsk:transform} instance.}
+  @begin{short}
+    Translates @arg{transform} in 2dimensional space by @arg{point}.
+  @end{short}
+  @see-class{gsk:transform}
+  @see-symbol{graphene:point-t}"
+  (%transform-translate (%transform-ref transform) point))
 
 (export 'transform-translate)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_translate_3d ()
-;;;
-;;; GskTransform *
-;;; gsk_transform_translate_3d (GskTransform *next,
-;;;                             const graphene_point3d_t *point);
-;;;
-;;; Translates next by point .
-;;;
-;;; next :
-;;;     the next transform.
-;;;
-;;; point :
-;;;     the point to translate the transform by
-;;;
-;;; Returns :
-;;;     The new transform
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_translate_3d" %transform-translate-3d)
@@ -633,6 +611,17 @@
   (point (:pointer (:struct graphene:point3d-t))))
 
 (defun transform-translate-3d (transform point)
+ #+liber-documentation
+ "@version{#2023-11-3}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @argument[point]{a @symbol{graphene:point3d-t} instance with the point to
+    translate the transform by}
+  @return{The new @class{gsk:transform} instance.}
+  @begin{short}
+    Translates @arg{transform} by @arg{point}.
+  @end{short}
+  @see-class{gsk:transform}
+  @see-symbol{graphene:point3d-t}"
   (%transform-translate-3d (%transform-ref transform) point))
 
 (export 'transform-translate-3d)
@@ -757,44 +746,37 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_skew
-;;;
-;;; Applies a skew transform.
-;;;
-;;; Since 4.6
 ;;; ----------------------------------------------------------------------------
 
+#+gtk-4-6
 (cffi:defcfun ("gsk_transform_skew" %transform-skew) (g:boxed transform :return)
   (transform (g:boxed transform :return))
   (xskew :float)
   (yskew :float))
 
+#+gtk-4-6
 (defun transform-skew (transform xskew yskew)
+ #+liber-documentation
+ "@version{#2023-11-3}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @argument[xskew]{a number coerced to a single float with the skew factor
+    on the x axis, in degrees}
+  @argument[yskew]{a number coerced to a single float with the skew factor
+    on the y axis, in degrees}
+  @return{The new @class{gsk:transform} instance.}
+  @short{Applies a skew transform.}
+
+  Since 4.6
+  @see-class{gsk:transform}"
   (%transform-skew (%transform-ref transform )
                    (coerce xskew 'single-float)
                    (coerce yskew 'single-float)))
 
+#+gtk-4-6
 (export 'transform-skew)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_perspective ()
-;;;
-;;; GskTransform *
-;;; gsk_transform_perspective (GskTransform *next,
-;;;                            float depth);
-;;;
-;;; Applies a perspective projection transform. This transform scales points in
-;;; X and Y based on their Z value, scaling points with positive Z values away
-;;; from the origin, and those with negative Z values towards the origin. Points
-;;; on the z=0 plane are unchanged.
-;;;
-;;; next :
-;;;     the next transform.
-;;;
-;;; depth :
-;;;
-;;;
-;;; Returns :
-;;;     The new transform
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_perspective" %transform-perspective)
@@ -841,23 +823,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_transform_bounds ()
-;;;
-;;; void
-;;; gsk_transform_transform_bounds (GskTransform *self,
-;;;                                 const graphene_rect_t *rect,
-;;;                                 graphene_rect_t *out_rect);
-;;;
-;;; Transforms a graphene_rect_t using the given transform self . The result is
-;;; the bounding box containing the coplanar quad.
-;;;
-;;; self :
-;;;     a GskTransform
-;;;
-;;; rect :
-;;;     a graphene_rect_t
-;;;
-;;; out_rect :
-;;;     return location for the bounds of the transformed rectangle.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_transform_bounds" %transform-transform-bounds)
@@ -867,6 +832,20 @@
   (bounds (:pointer (:struct graphene:rect-t))))
 
 (defun transform-transform-bounds (transform rect out)
+ #+liber-documentation
+ "@version{#2023-11-3}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @argument[rect]{a @symbol{graphene:rect-t} instance}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of
+    the transformed rectangle}
+  @return{A @symbol{graphene:rect-t} instance with the bounds}
+  @begin{short}
+    Transforms a @symbol{graphene:rect-t} instance using the given transform
+    @arg{transform}.
+  @end{short}
+  The result is the bounding box containing the coplanar quad.
+  @see-class{gsk:transform}
+  @see-symbol{graphene:rect-t}"
   (%transform-transform-bounds transform rect out)
   out)
 
@@ -874,22 +853,6 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_transform_transform_point ()
-;;;
-;;; void
-;;; gsk_transform_transform_point (GskTransform *self,
-;;;                                const graphene_point_t *point,
-;;;                                graphene_point_t *out_point);
-;;;
-;;; Transforms a graphene_point_t using the given transform self .
-;;;
-;;; self :
-;;;     a GskTransform
-;;;
-;;; point :
-;;;     a graphene_point_t
-;;;
-;;; out_point :
-;;;     return location for the transformed point.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_transform_point" %transform-transform-point) :void
@@ -898,9 +861,21 @@
   (out (:pointer (:struct graphene:point-t))))
 
 (defun transform-transform-point (transform point out)
+ #+liber-documentation
+ "@version{#2023-11-3}
+  @argument[transform]{a @class{gsk:transform} instance}
+  @argument[point]{a @symbol{graphene:point-t} instance}
+  @argument[out]{a @symbol{graphene:point-t} instance for the transformed point}
+  @return{A @symbol{graphene:point-t} instance with the transformed point.}
+  @begin{short}
+    Transforms a @symbol{graphene:point-t} instance using the given transform
+    @arg{transform}.
+  @end{short}
+  @see-class{gsk:transform}
+  @see-symbol{graphene:point-t}"
   (%transform-transform-point transform point out)
   out)
 
 (export 'transform-transform-point)
 
-;;; --- End of file gsk.transform.lisp -----------------------------------------
+;;; --- End of file gsk4.transform.lisp ----------------------------------------
