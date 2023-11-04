@@ -227,10 +227,10 @@ lambda (fontchooser fontname)    :run-first
     @class{gtk:font-chooser} class.
   @end{short}
   The @fun{gtk:font-chooser-font} function gets the currently selected font
-  name. The @sym{(setf gtk:font-chooser-font)} function sets the font name.
+  name. The @setf{gtk:font-chooser-font} function sets the font name.
 
   Note that this can be a different string than what you set with the
-  @sym{(setf gtk:font-chooser-font)} function, as the font chooser widget may
+  @setf{gtk:font-chooser-font} function, as the font chooser widget may 
   normalize the font names and thus return a string with a different structure.
   For example, \"Helvetica Italic Bold 12\" could be normalized to
   \"Helvetica Bold Italic 12\".
@@ -267,7 +267,7 @@ lambda (fontchooser fontname)    :run-first
     @class{gtk:font-chooser} class.
   @end{short}
   The @fun{gtk:font-chooser-font-desc} function gets the Pango font description
-  for the currently selected font. The @sym{(setf gtk:font-chooser-font-desc)}
+  for the currently selected font. The @setf{gtk:font-chooser-font-desc} 
   function sets the currently selected font.
 
   Use the @fun{pango:font-description-equal} function if you want to compare
@@ -304,8 +304,8 @@ lambda (fontchooser fontname)    :run-first
   @end{short}
   The @fun{gtk:font-chooser-font-features} function gets the currently selected
   font features, in a format that is compatible with CSS and with Pango
-  attributes. The @sym{(setf gtk:font-chooser-font-features)} function sets the
-  font features.
+  attributes. The @setf{gtk:font-chooser-font-features} function sets the font 
+  features.
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog} and @class{gtk:font-dialog-button} widgets
@@ -335,8 +335,8 @@ lambda (fontchooser fontname)    :run-first
     @class{gtk:font-chooser} class.
   @end{short}
   The @fun{gtk:font-chooser-language} function gets the language that is used
-  for font features. The @sym{(setf gtk:font-chooser-language)} function sets
-  the language. See the @fun{pango:language-to-string} function.
+  for font features. The @setf{gtk:font-chooser-language} function sets the 
+  language. See the @fun{pango:language-to-string} function.
   @begin[Example]{dictionary}
     @begin{pre}
 (gtk:font-chooser-language (make-instance 'gtk:font-button)) => \"de-de\"
@@ -374,8 +374,8 @@ lambda (fontchooser fontname)    :run-first
     @class{gtk:font-chooser} class.
   @end{short}
   The @fun{gtk:font-chooser-level} function returns the current level of
-  granularity for selecting fonts. The @sym{(setf gtk:font-chooser-level)}
-  function sets the desired level of granularity for selecting fonts.
+  granularity for selecting fonts. The @setf{gtk:font-chooser-level} function 
+  sets the desired level of granularity for selecting fonts.
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog} and @class{gtk:font-dialog-button} widgets
@@ -406,9 +406,9 @@ lambda (fontchooser fontname)    :run-first
     @class{gtk:font-chooser} class.
   @end{short}
   The @fun{gtk:font-chooser-preview-text} function gets the text displayed in
-  the preview area. The @sym{(setf gtk:font-chooser-preview-text)} function
-  sets the text displayed in the preview area. The text is used to show how the
-  selected font looks. See the @fun{pango:language-sample-string} function.
+  the preview area. The @setf{gtk:font-chooser-preview-text} function sets the 
+  text displayed in the preview area. The text is used to show how the selected 
+  font looks. See the @fun{pango:language-sample-string} function.
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog} and @class{gtk:font-dialog-button} widgets
@@ -659,10 +659,9 @@ lambda (fontchooser fontname)    :run-first
   @end{short}
   The @fun{gtk:font-chooser-font-map} function gets the custom font map of the
   font chooser widget, or @code{nil} if it does not have one. The
-  @sym{(setf gtk:font-chooser-font-map)} function sets a custom font map to use
-  for the font chooser widget. A custom font map can be used to present
-  application specific fonts instead of or in addition to the normal system
-  fonts.
+  @setf{gtk:font-chooser-font-map} function sets a custom font map to use for 
+  the font chooser widget. A custom font map can be used to present application 
+  specific fonts instead of or in addition to the normal system fonts.
   @begin[Example]{dictionary}
     The example from the C documentation uses the @code{Fontconfig} library for
     configuring and customizing font access. This library is not available

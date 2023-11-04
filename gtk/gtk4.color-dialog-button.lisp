@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'color-dialog-button 'type)
- "@version{2023-7-28}
+ "@version{2023-11-4}
   @begin{short}
     The @class{gtk:color-dialog-button} widget is a wrapped around a
     @class{gtk:color-dialog} object and allows to open a color chooser dialog
@@ -93,6 +93,8 @@
   @image[color-button]{Figure: GtkColorDialogButton}
 
   It is a suitable widget for selecting a color in a preference dialog.
+  
+  Since 4.10
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 colorbutton
@@ -104,7 +106,15 @@ colorbutton
     it from a plain @class{gtk:button} widget, it gets the @code{.color} style
     class.
   @end{dictionary}
-  Since 4.10
+  @begin[Signals]{dictionary}
+    @subheading{The \"activate\" signal}
+      @begin{pre}
+lambda (button)    :action
+      @end{pre}
+      Emitted when the color dialog button is activated. The signal is an action 
+      signal and emitting it causes the button to pop up its dialog. The signal 
+      can be directly emitted on objects from user code. Since 4.12
+  @end{dictionary}
   @see-class{gtk:color-dialog}")
 
 ;;; ----------------------------------------------------------------------------

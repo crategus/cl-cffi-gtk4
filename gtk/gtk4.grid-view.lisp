@@ -222,7 +222,7 @@ lambda (gridview position)    :run-last
   @end{short}
   The @fun{gtk:grid-view-enable-rubberband} function returns whether selections
   can be selected by dragging with the mouse. The
-  @setf{gtk:grid-view-enable-rubberband} function sets whether selections can be 
+  @setf{gtk:grid-view-enable-rubberband} function sets whether selections can be
   changed by dragging with the mouse.
   @see-class{gtk:grid-view}")
 
@@ -249,7 +249,7 @@ lambda (gridview position)    :run-last
     @class{gtk:grid-view} class.
   @end{short}
   The @fun{gtk:grid-view-factory} function gets the factory that is currently
-  used to populate list items. The @setf{gtk:grid-view-factory} function sets 
+  used to populate list items. The @setf{gtk:grid-view-factory} function sets
   the factory.
   @see-class{gtk:grid-view}
   @see-class{gtk:selection-model}")
@@ -278,9 +278,9 @@ lambda (gridview position)    :run-last
     @class{gtk:grid-view} class.
   @end{short}
   The @fun{gtk:grid-view-max-columns} function gets the maximum number of
-  columns that the grid will use. The @setf{gtk:grid-view-max-columns} function 
-  sets the maximum number of columns to use. This number must be at least 1. If 
-  the @slot[gtk:grid-view]{max-columns} property is smaller than the minimum set 
+  columns that the grid will use. The @setf{gtk:grid-view-max-columns} function
+  sets the maximum number of columns to use. This number must be at least 1. If
+  the @slot[gtk:grid-view]{max-columns} property is smaller than the minimum set
   via the @fun{gtk:grid-view-min-columns} function, that value is used instead.
   @see-class{gtk:grid-view}
   @see-function{gtk:grid-view-min-columns}")
@@ -308,9 +308,9 @@ lambda (gridview position)    :run-last
     @class{gtk:grid-view} class.
   @end{short}
   The @fun{gtk:grid-view-min-columns} function gets the minimum number of
-  columns that the grid will use. The @setf{gtk:grid-view-min-columns} function 
-  sets the minimum number of columns to use. This number must be at least 1. If 
-  the @slot[gtk:grid-view]{min-columns} property is smaller than the minimum set 
+  columns that the grid will use. The @setf{gtk:grid-view-min-columns} function
+  sets the minimum number of columns to use. This number must be at least 1. If
+  the @slot[gtk:grid-view]{min-columns} property is smaller than the minimum set
   via the @fun{gtk:grid-view-max-columns} function, that value is ignored.
   @see-class{gtk:grid-view}
   @see-function{gtk:grid-view-max-columns}")
@@ -337,7 +337,7 @@ lambda (gridview position)    :run-last
     @class{gtk:grid-view} class.
   @end{short}
   The @fun{gtk:grid-view-model} function gets the model that is currently used
-  to read the items displayed. The @setf{gtk:grid-view-model} function sets the 
+  to read the items displayed. The @setf{gtk:grid-view-model} function sets the
   model to use. This must be a @class{gtk:selection-model} object.
   @see-class{gtk:grid-view}
   @see-class{gtk:selection-model}")
@@ -367,7 +367,7 @@ lambda (gridview position)    :run-last
   @end{short}
   The @fun{gtk:grid-view-single-click-activate} function returns whether rows
   will be activated on single click and selected on hover. The
-  @setf{gtk:grid-view-single-click-activate)} function sets whether rows should 
+  @setf{gtk:grid-view-single-click-activate)} function sets whether rows should
   be activated on single click and selected on hover.
   @see-class{gtk:grid-view}")
 
@@ -393,9 +393,9 @@ lambda (gridview position)    :run-last
   @argument[factory]{a @class{gtk:list-item-factory} object to populate items
     with or @code{nil}}
   @return{A new @class{gtk:grid-view} widget using the given @arg{model} and
-    @arg{factory}.} 
+    @arg{factory}.}
   @begin{short}
-    Creates a new grid view that uses the given @arg{factory} for mapping items 
+    Creates a new grid view that uses the given @arg{factory} for mapping items
     to widgets.
   @end{short}
   @see-class{gtk:grid-view}
@@ -417,7 +417,7 @@ lambda (gridview position)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-12
-(cffi:defcfun ("gtk_list_view_scroll_to" list-view-scroll-to) :void
+(cffi:defcfun ("gtk_list_view_scroll_to" grid-view-scroll-to) :void
   (gridview (g:object grid-view))
   (pos :uint)
   (flags list-scroll-flags)

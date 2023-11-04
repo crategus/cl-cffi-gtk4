@@ -815,11 +815,11 @@
 
 (cffi:defcfun ("gtk_image_set_from_gicon" image-set-from-gicon) :void
  #+liber-documentation
- "@version{#2023-10-18}
+ "@version{2023-11-4}
   @argument[image]{a @class{gtk:image} widget}
-  @argument[icon]{a @class{g:icon} icon}
+  @argument[icon]{a @class{g:icon} object with the themed icon}
   @begin{short}
-    Sets the image to display @arg{icon}.
+    Sets the image to display the themed icon.
   @end{short}
   See the @fun{gtk:image-new-from-gicon} function for details.
   @see-class{gtk:image}

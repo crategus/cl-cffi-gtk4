@@ -174,7 +174,7 @@
     @class{gtk:slice-list-model} class.
   @end{short}
   The @fun{gtk:slice-list-model-model} function gets the model that is currently
-  being used or @code{nil} if none. The @setf{gtk:slice-list-model-model} 
+  being used or @code{nil} if none. The @setf{gtk:slice-list-model-model}
   function sets the model to show a slice of. The item type of @arg{model} must
   conform to the item type of @arg{object}.
   @see-class{gtk:slice-list-model}
@@ -227,8 +227,8 @@
     @class{gtk:slice-list-model} class.
   @end{short}
   The @fun{gtk:slice-list-model-offset} function gets the offset. The
-  @setf{gtk:slice-list-model-offset} function sets the offset into the original 
-  model for this slice. If the offset is too large for the sliced model, 
+  @setf{gtk:slice-list-model-offset} function sets the offset into the original
+  model for this slice. If the offset is too large for the sliced model,
   @arg{object} will end up empty.
   @see-class{gtk:slice-list-model}")
 
@@ -254,8 +254,8 @@
     @class{gtk:slice-list-model} class.
   @end{short}
   The @fun{gtk:slice-list-model-size} function gets the maximum size. The
-  @setf{gtk:slice-list-model-size} function sets the maximum size. @arg{object} 
-  will never have more items than @arg{size}. It can however have fewer items if 
+  @setf{gtk:slice-list-model-size} function sets the maximum size. @arg{object}
+  will never have more items than @arg{size}. It can however have fewer items if
   the offset is too large or the model sliced from does not have enough items.
   @see-class{gtk:slice-list-model}")
 

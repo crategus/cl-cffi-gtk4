@@ -254,7 +254,7 @@
   there is no space to give all three children their natural widths, the start
   and end widgets start shrinking and the center child keeps natural width until
   they reach minimum width. If set to @em{false}, start and end widgets keep
-  natural width and the center widget starts shrinking instead. Since 4.12@ br{}
+  natural width and the center widget starts shrinking instead. Since 4.12 @br{}
   Default value: @em{true}")
 
 #+(and gtk-4-12 liber-documentation)

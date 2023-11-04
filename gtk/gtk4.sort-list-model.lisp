@@ -340,7 +340,7 @@ progress = 1.0 - pending / (double) MAX (1, g_list_model_get_n_items (model));
   @argument[object]{a @class{gtk:sort-list-model} object}
   @argument[sorter]{a @class{gtk:sorter} object to sort @arg{object} with}
   @begin{short}
-    Accessor of the @slot[gtk:sort-list-model]section-sorter} slot of the
+    Accessor of the @slot[gtk:sort-list-model]{section-sorter} slot of the
     @class{gtk:sort-list-model} class.
   @end{short}
   The @fun{gtk:sort-list-model-section-sorter} function gets the section sorter

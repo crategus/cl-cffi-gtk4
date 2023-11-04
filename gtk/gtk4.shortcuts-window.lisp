@@ -99,8 +99,8 @@
   Additionally, the shortcuts can be filtered by the current view, to avoid
   showing information that is not relevant in the current application context.
 
-  The recommended way to construct a shortcuts window is with a 
-  @class{gtk:builder} UI definition, by populating a shortcuts window with one 
+  The recommended way to construct a shortcuts window is with a
+  @class{gtk:builder} UI definition, by populating a shortcuts window with one
   or more @class{gtk:shortcuts-section} objects, which contain
   @class{gtk:shortcuts-group} objects that in turn contain objects of the
   @class{gtk:shortcuts-shortcut} class.
@@ -114,15 +114,15 @@
     @image[gedit-shortcuts]{}
 
     An example with multiple views:
-    This example shows a shortcuts window that has been configured to show only 
-    the shortcuts relevant to the \"stopwatch\" view. The @code{.ui} file for 
+    This example shows a shortcuts window that has been configured to show only
+    the shortcuts relevant to the \"stopwatch\" view. The @code{.ui} file for
     this example can be found
     @url[https://gitlab.gnome.org/GNOME/gtk/-/blob/master/demos/gtk-demo/shortcuts-clocks.ui]{here}.
 
     @image[clocks-shortcuts]{}
 
     An example with multiple sections:
-    This example shows a shortcuts window with two sections, 
+    This example shows a shortcuts window with two sections,
     \"Editor Shortcuts\" and \"Terminal Shortcuts\". The @code{.ui} file for
     this example can be found
     @url[https://gitlab.gnome.org/GNOME/gtk/-/blob/master/demos/gtk-demo/shortcuts-builder.ui]{here}.
