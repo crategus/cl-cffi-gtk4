@@ -694,6 +694,8 @@
       @about-function{drop-read-value-finish}
     @end{subsection}
     @begin[GdkDragSurface]{subsection}
+      @about-symbol{drag-surface-size}
+      @about-function{drag-surface-size-set-size}
       @about-class{drag-surface}
       @about-function{drag-surface-present}
     @end{subsection}

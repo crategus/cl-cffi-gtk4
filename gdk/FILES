@@ -51,7 +51,7 @@ List of files for the GDK 4 Library
   gdk4.clipboard.lisp              GdkClipboard                       GDK 4.10 &
   gdk4.drag.lisp                   GdkDrag                            GDK 4.10
   gdk4.drop.lisp                   GdkDrop                            GDK 4.10
-  gdk4.drag-surface.lisp           GdkDragSurface                     GDK 4.10
+  gdk4.drag-surface.lisp           GdkDragSurface                     GDK 4.12
 
  Application launching
 
