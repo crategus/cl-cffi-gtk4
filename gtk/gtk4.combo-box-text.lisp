@@ -83,6 +83,11 @@
    :type-initializer "gtk_combo_box_text_get_type")
   nil)
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj combo-box-text) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:COMBO-BOX-TEXT is deprecated since 4.10.")))
+
 #+liber-documentation
 (setf (documentation 'combo-box-text 'type)
  "@version{2023-9-1}
@@ -172,10 +177,6 @@
   @see-class{gtk:combo-box-text}
   @see-class{gtk:combo-box}
   @see-class{gtk:drop-down}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-NEW is deprecated since 4.10.~%"))
   (make-instance 'combo-box-text))
 
 (export 'combo-box-text-new)
@@ -202,11 +203,6 @@
   @see-class{gtk:combo-box-text}
   @see-class{gtk:combo-box}
   @see-class{gtk:drop-down}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-NEW-WITH-ENTRY is deprecated since ~
-             4.10.~%"))
   (make-instance 'combo-box-text
                  :has-entry t))
 
@@ -241,10 +237,6 @@
   @see-class{gtk:drop-down}
   @see-function{gtk:combo-box-text-insert}
   @see-function{gtk:combo-box-text-prepend}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-APPEND is deprecated since 4.10.~%"))
   (%combo-box-text-append combo
                           (if id id (cffi:null-pointer))
                           text))
@@ -279,10 +271,6 @@
   @see-class{gtk:combo-box-text}
   @see-class{gtk:drop-down}
   @see-function{gtk:combo-box-text-insert}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-PREPEND is deprecated since 4.10.~%"))
   (%combo-box-text-prepend combo
                            (if id id (cffi:null-pointer))
                            text))
@@ -320,10 +308,6 @@
   @see-class{gtk:combo-box-text}
   @see-class{gtk:drop-down}
   @see-function{gtk:combo-box-id-column}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-INSERT is deprecated since 4.10.~%"))
   (%combo-box-text-insert combo
                           position
                           (if id id (cffi:null-pointer))
@@ -335,16 +319,10 @@
 ;;; gtk_combo_box_text_append_text ()
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline combo-box-text-append-text))
-
-(cffi:defcfun ("gtk_combo_box_text_append_text" %combo-box-text-append-text)
+(cffi:defcfun ("gtk_combo_box_text_append_text" combo-box-text-append-text)
     :void
-  (combo (g:object combo-box-text))
-  (text :string))
-
-(defun combo-box-text-append-text (combo text)
  #+liber-documentation
- "@version{2023-9-1}
+ "@version{2023-11-4}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
   @argument[text]{a string with the text}
   @begin{short}
@@ -360,12 +338,8 @@
   @see-class{gtk:drop-down}
   @see-function{gtk:combo-box-text-insert-text}
   @see-function{gtk:combo-box-text-prepend}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-APPEND-TEXT is deprecated since ~
-             4.10.~%"))
-  (%combo-box-text-append-text combo text))
+  (combo (g:object combo-box-text))
+  (text :string))
 
 (export 'combo-box-text-append-text)
 
@@ -373,16 +347,10 @@
 ;;; gtk_combo_box_text_prepend_text ()
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline combo-box-text-prepend-text))
-
-(cffi:defcfun ("gtk_combo_box_text_prepend_text" %combo-box-text-prepend-text)
+(cffi:defcfun ("gtk_combo_box_text_prepend_text" combo-box-text-prepend-text)
     :void
-  (combo (g:object combo-box-text))
-  (text :string))
-
-(defun combo-box-text-prepend-text (combo text)
  #+liber-documentation
- "@version{#2023-9-1}
+ "@version{#2023-11-4}
   @argument[combo]{a @class{gtk:combo-box} widget}
   @argument[text]{a string with the text}
   @begin{short}
@@ -398,12 +366,8 @@
   @see-class{gtk:drop-down}
   @see-function{gtk:combo-box-text-insert-text}
   @see-function{gtk:combo-box-text-append-text}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-PREPEND-TEXT is deprecated since ~
-             4.10.~%"))
-  (%combo-box-text-prepend-text combo text))
+  (combo (g:object combo-box-text))
+  (text :string))
 
 (export 'combo-box-text-prepend-text)
 
@@ -411,17 +375,10 @@
 ;;; gtk_combo_box_text_insert_text ()
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline combo-box-text-insert-text))
-
-(cffi:defcfun ("gtk_combo_box_text_insert_text" %combo-box-text-insert-text)
+(cffi:defcfun ("gtk_combo_box_text_insert_text" combo-box-text-insert-text)
     :void
-  (combo (g:object combo-box-text))
-  (position :int)
-  (text :string))
-
-(defun combo-box-text-insert-text (combo position text)
  #+liber-documentation
- "@version{#2023-9-1}
+ "@version{#2023-11-4}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
   @argument[position]{an integer with an index to insert text}
   @argument[text]{a string with the text}
@@ -439,12 +396,9 @@
   @see-class{gtk:combo-box-text}
   @see-class{gtk:drop-down}
   @see-function{gtk:combo-box-text-insert}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-INSERT-TEXT is deprecated since ~
-             4.10.~%"))
-  (%combo-box-text-insert-text combo position text))
+  (combo (g:object combo-box-text))
+  (position :int)
+  (text :string))
 
 (export 'combo-box-text-insert-text)
 
@@ -452,15 +406,9 @@
 ;;; gtk_combo_box_text_remove ()
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline combo-box-text-remove))
-
-(cffi:defcfun ("gtk_combo_box_text_remove" %combo-box-text-remove) :void
-  (combo (g:object combo-box-text))
-  (position :int))
-
-(defun combo-box-text-remove (combo position)
+(cffi:defcfun ("gtk_combo_box_text_remove" combo-box-text-remove) :void
  #+liber-documentation
- "@version{#2023-9-1}
+ "@version{#2023-11-4}
   @argument[combo]{a @class{gtk:combo-box} widget}
   @argument[position]{an integer with index of the item to remove}
   @begin{short}
@@ -473,11 +421,8 @@
   @see-class{gtk:combo-box-text}
   @see-class{gtk:drop-down}
   @see-function{gtk:combo-box-text-remove-all}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-REMOVE is deprecated since 4.10.~%"))
-  (%combo-box-text-remove combo position))
+  (combo (g:object combo-box-text))
+  (position :int))
 
 (export 'combo-box-text-remove)
 
@@ -485,14 +430,9 @@
 ;;; gtk_combo_box_text_remove_all ()
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline combo-box-text-remove-all))
-
 (cffi:defcfun ("gtk_combo_box_text_remove_all" %combo-box-text-remove-all) :void
-  (combo (g:object combo-box-text)))
-
-(defun combo-box-text-remove-all (combo)
  #+liber-documentation
- "@version{#2023-9-1}
+ "@version{#2023-11-4}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
   @begin{short}
     Removes all the text entries from the combo box.
@@ -504,11 +444,7 @@
   @see-class{gtk:combo-box-text}
   @see-class{gtk:drop-down}
   @see-function{gtk:combo-box-text-remove}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-REMOVE-ALL is deprecated since 4.10.~%"))
-  (%combo-box-text-remove-all combo))
+  (combo (g:object combo-box-text)))
 
 (export 'combo-box-text-remove-all)
 
@@ -516,15 +452,10 @@
 ;;; gtk_combo_box_text_get_active_text () -> combo-box-text-active-text
 ;;; ----------------------------------------------------------------------------
 
-(declaim (inline combo-box-text-active-text))
-
 (cffi:defcfun ("gtk_combo_box_text_get_active_text"
-               %combo-box-text-active-text) :string
-  (combo (g:object combo-box-text)))
-
-(defun combo-box-text-active-text (combo)
+               combo-box-text-active-text) :string
  #+liber-documentation
- "@version{2023-9-1}
+ "@version{2023-11-4}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
   @begin{return}
     A string containing the currently active text.
@@ -541,12 +472,7 @@
   @end{dictionary}
   @see-class{gtk:combo-box-text}
   @see-class{gtk:drop-down}"
-  #+(and gtk-4-10 gtk-warn-deprecated)
-  (when gtk-init:*gtk-warn-deprecated*
-    (format *debug-io*
-            "Warning: GTK:COMBO-BOX-TEXT-ACTIVE-TEXT is deprecated since ~
-             4.10.~%"))
-  (%combo-box-text-active-text combo))
+  (combo (g:object combo-box-text)))
 
 (export 'combo-box-text-active-text)
 
