@@ -421,6 +421,8 @@
     @end{subsection}
     @begin[GtkListView]{subsection}
       A widget for displaying lists.
+      @about-symbol{list-tab-behavior}
+      @about-symbol{list-scroll-flags}
       @about-class{list-base}
       @about-generic{list-base-orientation}
       @about-class{list-view}
@@ -430,6 +432,7 @@
       @about-generic{list-view-show-separators}
       @about-generic{list-view-single-click-activate}
       @about-function{list-view-new}
+      @about-function{list-view-scroll-to}
     @end{subsection}
     @begin[GtkGridView]{subsection}
       A widget for displaying grids.
@@ -441,6 +444,7 @@
       @about-generic{grid-view-model}
       @about-generic{grid-view-single-click-activate}
       @about-function{grid-view-new}
+      @about-function{grid-view-scroll-to}
     @end{subsection}
     @begin[GtkColumnView]{subsection}
       A widget for displaying lists in multiple columns.
@@ -723,6 +727,7 @@
       The @class{gtk:box} widget arranges child widgets into a single row or
       column.
       @about-class{box}
+      @about-generic{box-baseline-child}
       @about-generic{box-baseline-position}
       @about-generic{box-homogeneous}
       @about-generic{box-spacing}
