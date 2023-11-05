@@ -96,47 +96,55 @@
   class.
 
   Since 4.10
+  @see-constructor{gtk:file-launcher-new}
+  @see-slot{gtk:file-launcher-always-ask}
+  @see-slot{gtk:file-launcher-file}
   @see-class{gtk:uri-launcher}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; Gtk.FileLauncher:always-ask
-;;;
-;;; Whether to ask the user to choose an app for opening the file. If FALSE,
-;;; the file might be opened with a default app or the previous choice.
-;;;
-;;; Since 4.12
-;;; ----------------------------------------------------------------------------
+;;; --- file-launcher-always-ask -----------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_file_launcher_get_always_ask
-;;;
-;;; Returns whether to ask the user to choose an app for opening the file.
-;;;
-;;; Since 4.12
-;;; ----------------------------------------------------------------------------
+#+(and gtk-4-12 liber-documentation)
+(setf (documentation (liber:slot-documentation "always-ask" 'file-launcher) t)
+ "The @code{always-ask} property of type @code{:boolean} (Read / Write) @br{}
+  Whether to ask the user to choose an application for opening the file. If 
+  @em{false}, the file might be opened with a default application or the 
+  previous choice. Since 4.12 @br{}
+  Default value: @em{false}")
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_file_launcher_set_always_ask
-;;;
-;;; Sets whether to awlays ask the user to choose an app for opening the file.
-;;; If FALSE, the file might be opened with a default app or the previous
-;;; choice.
-;;;
-;;; Since 4.12
-;;; ----------------------------------------------------------------------------
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'file-launcher-always-ask)
+      "Accessor"
+      (documentation 'file-launcher-always-ask 'function)
+ "@version{#2023-11-4}
+  @syntax[]{(gtk:file-launcher-always-ask object) => setting}
+  @syntax[]{(setf (gtk:file-launcher-always-ask object) setting)}
+  @argument[object]{a @class{gtk:file-launcher} object}
+  @argument[setting]{a boolean whether to always ask the user}
+  @begin{short}
+    Accessor of the @slot[gtk:file-launcher]{always-ask} slot of the
+    @class{gtk:file-launcher} class.
+  @end{short}
+  The @fun{gtk:file-launcher-always-ask} function returns whether to ask the 
+  user to choose an application for opening the file. The 
+  @setf{gtk:file-launcher-always-ask} function sets whether to always ask the 
+  user. If @em{false}, the file might be opened with a default application or 
+  the previous choice.
 
-;;; --- file-dialog-file -------------------------------------------------------
+  Since 4.12
+  @see-class{gtk:file-launcher}")
 
-#+liber-documentation
+;;; --- file-launcher-file -----------------------------------------------------
+
+#+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "file" 'file-launcher) t)
  "The @code{file} property of type @class{g:file} (Read / Write) @br{}
-  The file to launch.")
+  The file to launch. Since 4.10")
 
-#+liber-documentation
+#+(and gtk-4-10 liber-documentation)
 (setf (liber:alias-for-function 'file-launcher-file)
       "Accessor"
       (documentation 'file-launcher-file 'function)
