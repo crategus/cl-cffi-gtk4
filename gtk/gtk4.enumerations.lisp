@@ -2586,7 +2586,8 @@
   :window
   #+gtk-4-10
   :toggle-button
-  #+gtk-4-12)
+  #+gtk-4-12
+  :application)
   @end{pre}
   @begin[code]{table}
     @entry[:alert]{An element with important, and usually time-sensitive,
@@ -2709,13 +2710,15 @@
    :hidden
    :invalid
    :pressed
-   :selected)
+   :selected
+   #+gtk-4-12
+   :visited)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-state)
- "@version{#2022-1-3}
+ "@version{2023-11-4}
   @begin{short}
     The possible accessible states of a @class{gtk:accessible} widget.
   @end{short}
@@ -2730,7 +2733,9 @@
    :hidden
    :invalid
    :pressed
-   :selected)
+   :selected
+   #+gtk-4-12
+   :visited)
   @end{pre}
   @begin[code]{table}
     @entry[:busy]{A \"busy\" state. This state has boolean values.}
@@ -2756,6 +2761,8 @@
       Value type: @symbol{gtk:accessible-tristate} enumeration}
     @entry[:selected]{A \"selected\" state. Set when a widget is selected.
       Value type: boolean or undefined}
+    @entry[:visited]{Indicates that a widget with the @code{:link} role has 
+      been visited. Value type: boolean. Since 4.12}
   @end{table}
   @see-class{gtk:accessible}")
 
