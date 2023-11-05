@@ -10,287 +10,138 @@
 ;;;; Typically, this will be done using GtkBuilder .ui files with the help of
 ;;;; the <binding> tag, but this demo shows the code that runs behind that.
 
-(in-package :gtk4-example)
+(in-package :gtk)
 
-(defclass clock (g:object)
-  ((location :initform "local"
-             :accessor clock-location)
-   (timezone :initform "local"
-         :accessor clock-timezone))
+;; This is our object. It's just a timezone
+;;
+;; Finally, we define the type. The important part is adding the
+;; paintable interface, so GTK knows that this object can indeed
+;; be drawn.
+;;
+;; Initialize the paintable interface. This way we turn our clocks
+;; into objects that can be drawn. There are more functions to this
+;; interface to define desired size, but this is enough.
+(defclass clock (gdk:paintable)
+  (;; Initialize with the UTC timezone
+   (timezone :initform local-time:+utc-zone+
+             :accessor clock-timezone)
+   ;; Initialize with the name of the UTC timezone
+   (location :initform "UTC"
+             :accessor clock-location))
   (:gname . "GtkClock")
   (:metaclass gobject:gobject-class))
 
-(gobject::register-object-type-implementation "GtkClock"   ; name
-                                              clock        ; class
-                                              "GObject"    ; parent
-                                              nil          ; interfaces
-                                              nil)         ; properties
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (export 'clock)
+  (export 'clock-location)
+  (export 'clock-timezone))
+
+(gobject:register-object-type-implementation "GtkClock"        ; name
+                                             clock             ; class
+                                             "GObject"         ; parent
+                                             ("GdkPaintable")  ; interfaces
+                                             nil)              ; properties
+
+(defmethod initialize-instance :after ((obj clock) &rest initargs)
+  ;; Set the slot values from initargs
+  (iter (for (slot value) on initargs by #'cddr)
+        (cond ((eq slot :timezone)
+               (setf (clock-timezone obj) value))
+              ((eq slot :location)
+               (setf (clock-location obj) value)))))
+
+(defmethod gdk:paintable-snapshot-impl ((paintable clock) snapshot width height)
+  (let ((black (gdk:rgba-new :red 0 :green 0 :blue 0 :alpha 1)))
+
+    ;; save/restore is necessary so we can undo the transforms we start out with
+    (gtk:snapshot-save snapshot)
+
+    ;; First, we move the (0, 0) point to the center of the area so
+    ;; we can draw everything relative to it.
+    (graphene:with-graphene-point (point (/ width 2.0) (/ height 2))
+      (gtk:snapshot-translate snapshot point))
+
+    ;; Next we scale it, so that we can pretend that the clock is
+    ;; 100px in size. That way, we don't need to do any complicated
+    ;; math later. We use MIN() here so that we use the smaller
+    ;; dimension for sizing. That way we don't overdraw but keep
+    ;; the aspect ratio.
+    (gtk:snapshot-scale snapshot (/ (min width height) 100.0)
+                                 (/ (min width height) 100.0))
+
+    ;; Now we have a circle with diameter 100px (and radius 50px) that
+    ;; has its (0, 0) point at the center. Let's draw a simple clock into it.
+
+    ;; First, draw a circle. This is a neat little trick to draw a circle
+    ;; without requiring Cairo.
+    ;; Improve the implementation of GskRoundedRect to avoid foreign objects
+    (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
+      (graphene:with-graphene-rect (rect -50 -50 100 100)
+        (gsk:rounded-rect-init-from-rect outline rect 50)
+        (gtk:snapshot-append-border snapshot
+                                    outline
+                                    '(4 4 4 4)
+                                    (list black black black black))))
+
+    ;; Next, draw the hour hand.
+    ;; We do this using transforms again: Instead of computing where the angle
+    ;; points to, we just rotate everything and then draw the hand as if it
+    ;; was :00. We don't even need to care about am/pm here because rotations
+    ;; just work.
+    (let* ((zone (gtk:clock-timezone paintable))
+           ;; Create a timestamp with the actuell time
+           (time (local-time:now))
+           (hour (local-time:timestamp-hour time :timezone zone))
+           (minute (local-time:timestamp-minute time :timezone zone))
+           (second (local-time:timestamp-second time :timezone zone)))
+      (gtk:snapshot-save snapshot)
+      (gtk:snapshot-rotate snapshot (+ (* 30 hour) (* 0.5 minute)))
+      (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
+        (graphene:with-graphene-rect (rect -2 -23 4 25)
+          (gsk:rounded-rect-init-from-rect outline rect 2.0)
+          (gtk:snapshot-push-rounded-clip snapshot outline)
+          (gtk:snapshot-append-color snapshot 
+                                     black
+                                     (gsk:rounded-rect-bounds outline))
+          (gtk:snapshot-pop snapshot)
+          (gtk:snapshot-restore snapshot)
+
+          ;; And the same as above for the minute hand. Just make this one 
+          ;;; longer so people can tell the hands apart.
+          (gtk:snapshot-save snapshot)
+          (gtk:snapshot-rotate snapshot (* 6 minute))
+          (graphene:rect-init rect -2 -43 4 45)
+          (gsk:rounded-rect-init-from-rect outline rect 2)
+          (gtk:snapshot-push-rounded-clip snapshot outline)
+          (gtk:snapshot-append-color snapshot 
+                                     black
+                                     (gsk:rounded-rect-bounds outline))
+          (gtk:snapshot-pop snapshot)
+          (gtk:snapshot-restore snapshot)
+
+          ;; and finally, the second indicator.
+          (gtk:snapshot-save snapshot)
+          (gtk:snapshot-rotate snapshot (* 6 second))
+          (graphene:rect-init rect -2 -43 4 10)
+          (gsk:rounded-rect-init-from-rect outline rect 2)
+          (gtk:snapshot-push-rounded-clip snapshot outline)
+          (gtk:snapshot-append-color snapshot
+                                     black
+                                     (gsk:rounded-rect-bounds outline))
+          (gtk:snapshot-pop snapshot)
+          (gtk:snapshot-restore snapshot))))
+
+  ;; And finally, don't forget to restore the initial save() that
+  ;; we did for the initial transformations.
+  (gtk:snapshot-restore snapshot)))
+
+;; Our desired size is 100px. That sounds okay for an analog clock
+(defmethod gdk:paintable-get-intrinsic-width-impl ((paintable clock))
+  100)
+(defmethod gdk:paintable-get-intrinsic-height-impl ((paintable clock))
+  100)
 
 #|
-
-#define GTK_TYPE_CLOCK (gtk_clock_get_type ())
-G_DECLARE_FINAL_TYPE (GtkClock, gtk_clock, GTK, CLOCK, GObject)
-
-/* This is our object. It's just a timezone */
-typedef struct _GtkClock GtkClock;
-struct _GtkClock
-{
-  GObject parent_instance;
-
-  /* We allow this to be NULL for the local timezone */
-  GTimeZone *timezone;
-  /* Name of the location we're displaying time for */
-  char *location;
-};
-
-enum {
-  PROP_0,
-  PROP_LOCATION,
-  PROP_TIME,
-  PROP_TIMEZONE,
-
-  N_PROPS
-};
-
-/* This function returns the current time in the clock's timezone.
- * Note that this returns a new object every time, so we need to
- * remember to unref it after use.
- */
-static GDateTime *
-gtk_clock_get_time (GtkClock *clock)
-{
-  if (clock->timezone)
-    return g_date_time_new_now (clock->timezone);
-  else
-    return g_date_time_new_now_local ();
-}
-
-|#
-
-#|
-/* Here, we implement the functionality required by the GdkPaintable
- * interface. This way we have a trivial way to display an analog clock.
- * It also allows demonstrating how to directly use objects in the
- * listview later by making this object do something interesting.
- */
-static void
-gtk_clock_snapshot (GdkPaintable *paintable,
-                    GdkSnapshot  *snapshot,
-                    double        width,
-                    double        height)
-{
-  GtkClock *self = GTK_CLOCK (paintable);
-  GDateTime *time;
-  GskRoundedRect outline;
-
-#define BLACK ((GdkRGBA) { 0, 0, 0, 1 })
-
-  /* save/restore() is necessary so we can undo the transforms we start
-   * out with.
-   */
-  gtk_snapshot_save (snapshot);
-
-  /* First, we move the (0, 0) point to the center of the area so
-   * we can draw everything relative to it.
-   */
-  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (width / 2, height / 2));
-
-  /* Next we scale it, so that we can pretend that the clock is
-   * 100px in size. That way, we don't need to do any complicated
-   * math later. We use MIN() here so that we use the smaller
-   * dimension for sizing. That way we don't overdraw but keep
-   * the aspect ratio.
-   */
-  gtk_snapshot_scale (snapshot, MIN (width, height) / 100.0, MIN (width, height) / 100.0);
-
-  /* Now we have a circle with diameter 100px (and radius 50px) that
-   * has its (0, 0) point at the center. Let's draw a simple clock into it.
-   */
-  time = gtk_clock_get_time (self);
-
-  /* First, draw a circle. This is a neat little trick to draw a circle
-   * without requiring Cairo.
-   */
-  gsk_rounded_rect_init_from_rect (&outline, &GRAPHENE_RECT_INIT(-50, -50, 100, 100), 50);
-  gtk_snapshot_append_border (snapshot,
-                              &outline,
-                              (float[4]) { 4, 4, 4, 4 },
-                              (GdkRGBA [4]) { BLACK, BLACK, BLACK, BLACK });
-
-  /* Next, draw the hour hand.
-   * We do this using transforms again: Instead of computing where the angle
-   * points to, we just rotate everything and then draw the hand as if it
-   * was :00. We don't even need to care about am/pm here because rotations
-   * just work.
-   */
-  gtk_snapshot_save (snapshot);
-  gtk_snapshot_rotate (snapshot, 30 * g_date_time_get_hour (time) + 0.5 * g_date_time_get_minute (time));
-  gsk_rounded_rect_init_from_rect (&outline, &GRAPHENE_RECT_INIT(-2, -23, 4, 25), 2);
-  gtk_snapshot_push_rounded_clip (snapshot, &outline);
-  gtk_snapshot_append_color (snapshot, &BLACK, &outline.bounds);
-  gtk_snapshot_pop (snapshot);
-  gtk_snapshot_restore (snapshot);
-
-  /* And the same as above for the minute hand. Just make this one longer
-   * so people can tell the hands apart.
-   */
-  gtk_snapshot_save (snapshot);
-  gtk_snapshot_rotate (snapshot, 6 * g_date_time_get_minute (time));
-  gsk_rounded_rect_init_from_rect (&outline, &GRAPHENE_RECT_INIT(-2, -43, 4, 45), 2);
-  gtk_snapshot_push_rounded_clip (snapshot, &outline);
-  gtk_snapshot_append_color (snapshot, &BLACK, &outline.bounds);
-  gtk_snapshot_pop (snapshot);
-  gtk_snapshot_restore (snapshot);
-
-  /* and finally, the second indicator. */
-  gtk_snapshot_save (snapshot);
-  gtk_snapshot_rotate (snapshot, 6 * g_date_time_get_second (time));
-  gsk_rounded_rect_init_from_rect (&outline, &GRAPHENE_RECT_INIT(-2, -43, 4, 10), 2);
-  gtk_snapshot_push_rounded_clip (snapshot, &outline);
-  gtk_snapshot_append_color (snapshot, &BLACK, &outline.bounds);
-  gtk_snapshot_pop (snapshot);
-  gtk_snapshot_restore (snapshot);
-
-  /* And finally, don't forget to restore the initial save() that
-   * we did for the initial transformations.
-   */
-  gtk_snapshot_restore (snapshot);
-
-  g_date_time_unref (time);
-}
-|#
-
-(defun clock-snapshot (paintable snapshot width height)
-
-(cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
-;  time = gtk_clock_get_time (self);
-
-  ;; save/restore() is necessary so we can undo the transforms we start
-  ;; out with.
-  (gtk:snapshot-save snapshot)
-
-  ;; First, we move the (0, 0) point to the center of the area so
-  ;; we can draw everything relative to it.
-  (graphene:with-graphene-point (point (/ width 2) (/ height 2))
-    (gtk:snapshot-translate snapshot point))
-
-  ;; Next we scale it, so that we can pretend that the clock is
-  ;; 100px in size. That way, we don't need to do any complicated
-  ;; math later. We use MIN() here so that we use the smaller
-  ;; dimension for sizing. That way we don't overdraw but keep
-  ;; the aspect ratio.
-  (gtk:snapshot-scale snapshot (/ (min width height) 100)
-                               (/ (min width height) 100))
-
-  ;; Now we have a circle with diameter 100px (and radius 50px) that
-  ;; has its (0, 0) point at the center. Let's draw a simple clock into it.
-
-  ;; First, draw a circle. This is a neat little trick to draw a circle
-  ;; without requiring Cairo.
-  (graphene:with-graphene-rect (rect -50 -50 100 100)
-    (gsk:rounded-rect-init-from-rect outline rect 50)
-    (gtk:snapshot-append-border snapshot
-                                outline
-                                (list 4 4 4 4)
-                                (list (gdk:rgba-new)
-                                      (gdk:rgba-new)
-                                      (gdk:rgba-new)))
-    )
-
-  (gtk:snapshot-restore snapshot)
-
-))
-
-
-
-
-#|
-/* Our desired size is 100px. That sounds okay for an analog clock */
-static int
-gtk_clock_get_intrinsic_width (GdkPaintable *paintable)
-{
-  return 100;
-}
-
-static int
-gtk_clock_get_intrinsic_height (GdkPaintable *paintable)
-{
-  return 100;
-}
-
-/* Initialize the paintable interface. This way we turn our clocks
- * into objects that can be drawn. There are more functions to this
- * interface to define desired size, but this is enough.
- */
-static void
-gtk_clock_paintable_init (GdkPaintableInterface *iface)
-{
-  iface->snapshot = gtk_clock_snapshot;
-  iface->get_intrinsic_width = gtk_clock_get_intrinsic_width;
-  iface->get_intrinsic_height = gtk_clock_get_intrinsic_height;
-}
-
-/* Finally, we define the type. The important part is adding the
- * paintable interface, so GTK knows that this object can indeed
- * be drawn.
- */
-G_DEFINE_TYPE_WITH_CODE (GtkClock, gtk_clock, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (GDK_TYPE_PAINTABLE,
-                                                gtk_clock_paintable_init))
-
-static GParamSpec *properties[N_PROPS] = { NULL, };
-
-static void
-gtk_clock_get_property (GObject    *object,
-                        guint       property_id,
-                        GValue     *value,
-                        GParamSpec *pspec)
-{
-  GtkClock *self = GTK_CLOCK (object);
-
-  switch (property_id)
-    {
-    case PROP_LOCATION:
-      g_value_set_string (value, self->location);
-      break;
-
-    case PROP_TIME:
-      g_value_take_boxed (value, gtk_clock_get_time (self));
-      break;
-
-    case PROP_TIMEZONE:
-      g_value_set_boxed (value, self->timezone);
-      break;
-
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
-    }
-}
-
-static void
-gtk_clock_set_property (GObject      *object,
-                        guint         property_id,
-                        const GValue *value,
-                        GParamSpec   *pspec)
-{
-  GtkClock *self = GTK_CLOCK (object);
-
-  switch (property_id)
-    {
-    case PROP_LOCATION:
-      self->location = g_value_dup_string (value);
-      break;
-
-    case PROP_TIMEZONE:
-      self->timezone = g_value_dup_boxed (value);
-      break;
-
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
-    }
-}
 
 /* This is the list of all the ticking clocks */
 static GSList *ticking_clocks = NULL;
@@ -399,7 +250,9 @@ gtk_clock_new (const char *location,
 
   return result;
 }
+|#
 
+#|
 static GListModel *
 create_clocks_model (void)
 {
@@ -446,13 +299,13 @@ create_clocks_model (void)
 }
 |#
 
+(in-package :gtk4-example)
+
 (defun create-clocks-model ()
   (let ((store (g:list-store-new "GtkClock")))
+    store
+))
 
-    ;; local time */
-    (g:list-store-append store (make-instance 'clock
-                                              :location "local"))
-    store))
 
 #|
 static char *
@@ -462,7 +315,10 @@ convert_time_to_string (GObject   *image,
 {
   return g_date_time_format (time, "%x\n%X");
 }
+|#
 
+
+#|
 /* And this function is the crux for this whole demo.
  * It shows how to use expressions to set up bindings.
  */
@@ -525,36 +381,47 @@ setup_listitem_cb (GtkListItemFactory *factory,
 
   gtk_expression_unref (clock_expression);
 }
-
 |#
 
+(defun setup-listitem-cb (factory item)
+  (declare (ignore factory item))
+)
+
+
 (defun do-grid-view-clocks (&optional application)
-  (let* (
-          ;; Create the factory that creates the listitems. Because we used
-          ;; bindings above during setup, we only need to connect to the setup
-          ;; signal. The bindings take care of the bind step.
-          (factory (make-instance 'gtk:signal-list-item-factory))
-          (model (gtk:no-selection-new (create-clocks-model)))
-          (gridview (make-instance 'gtk:grid-view
-                                   :model model
-                                   :factory factory
-                                   :hscroll-policy :natural
-                                   :vscroll-policy :natural))
+  (let* ((clock (make-instance 'gtk:clock))
+         (image (gtk:image-new-from-paintable clock))
+         (vbox (make-instance 'gtk:box :orientation :vertical
+                                       :homogeneous t))
+         ;; Create the factory that creates the listitems. Because we used
+         ;; bindings above during setup, we only need to connect to the setup
+         ;; signal. The bindings take care of the bind step.
+         (factory (make-instance 'gtk:signal-list-item-factory))
+         (model (gtk:no-selection-new (create-clocks-model)))
+         (gridview (make-instance 'gtk:grid-view
+                                  :model model
+                                  :factory factory
+                                  :hscroll-policy :natural
+                                  :vscroll-policy :natural))
          ;; List widgets go into a scrolled window. Always.
          (scrolled (make-instance 'gtk:scrolled-window
                                   :child gridview))
-
+         ;; This is the normal window setup code every demo does
          (window (make-instance 'gtk:window
                         :application application
                         :title "Clocks"
-                        :child scrolled
+                        :child vbox
                         :default-width 600
-                        :defalut-height 400))
-         )
+                        :defalut-height 400)))
+
+    (setf (gtk:widget-hexpand image) t)
+    (setf (gtk:widget-vexpand image) t)
 
     (g:signal-connect factory "setup"
                       (lambda (factory item)
-                        (format t "in SETUP for ~a ~a~%" factory item)))
+                        (format t "in SETUP for ~a ~a~%" factory item)
+                        (setup-listitem-cb factory item)))
 
-    (setf (gtk:widget-visible window) t)
-))
+    (gtk:box-append vbox image)
+    (gtk:box-append vbox scrolled)
+    (gtk:window-present window)))

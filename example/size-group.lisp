@@ -1,4 +1,4 @@
-;;;; Size Groups - 2022-7-29
+;;;; Size Groups
 ;;;;
 ;;;; GtkSizeGroup provides a mechanism for grouping a number of widgets together
 ;;;; so they all request the same amount of space. This is typically useful when
@@ -11,6 +11,13 @@
 ;;;; way that they get the size they request and not more. For example, if you
 ;;;; are packing your widgets into a table, you would not include the GTK_FILL
 ;;;; flag.
+;;;;
+;;;; TODO:
+;;;;
+;;;; The GtkComboBoxText widget is deprectated since 4.10.
+;;;; Replace it with the GtkDropDown widget.
+;;;;
+;;;; 2023-11-4
 
 (in-package :gtk4-example)
 
@@ -52,7 +59,7 @@
                                   :mnemonic-widget combo1
                                   :use-underline t
                                   :halign :start
-                                  :valign :baseline
+                                  :valign :baseline-fill
                                   :hexpand t))
            (combo2 (create-combo-box-text '("Red" "Green" "Blue")))
            (label2 (make-instance 'gtk:label
@@ -60,7 +67,7 @@
                                   :mnemonic-widget combo2
                                   :use-underline t
                                   :halign :start
-                                  :valign :baseline
+                                  :valign :baseline-fill
                                   :hexpand t)))
       (gtk:box-append vbox frame)
       (gtk:grid-attach grid label1 0 0 1 1)
@@ -85,7 +92,7 @@
                                   :mnemonic-widget combo1
                                   :use-underline t
                                   :halign :start
-                                  :valign :baseline
+                                  :valign :baseline-fill
                                   :hexpand t))
            (combo2 (create-combo-box-text '("Square" "Round" "Double Arrow")))
            (label2 (make-instance 'gtk:label
@@ -93,7 +100,7 @@
                                   :mnemonic-widget combo2
                                   :use-underline t
                                   :halign :start
-                                  :valign :baseline
+                                  :valign :baseline-fill
                                   :hexpand t)))
       (gtk:box-append vbox frame)
       (gtk:grid-attach grid label1 0 0 1 1)
@@ -112,4 +119,4 @@
                               (setf (gtk:size-group-mode group) :horizontal)
                               (setf (gtk:size-group-mode group) :none))))
       (gtk:box-append vbox button))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

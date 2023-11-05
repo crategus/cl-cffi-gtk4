@@ -1,7 +1,9 @@
-;;;; Application launcher - 2023-8-14
+;;;; Application launcher
 ;;;
 ;;;; This demo uses the GtkListView widget as a fancy application launcher.
 ;;;; It is also a very small introduction to listviews.
+;;;;
+;;;; 2023-8-14
 
 (in-package :gtk4-example)
 
@@ -91,7 +93,7 @@
                  (label (gtk:widget-next-sibling image))
                  (appinfo (gtk:list-item-item item)))
 
-            (gtk:image-set-from-gicon image (g:app-info-icon appinfo) :large)
+            (gtk:image-set-from-gicon image (g:app-info-icon appinfo))
             (setf (gtk:label-label label)
                   (g:app-info-display-name appinfo)))))
     ;; Create the list widget here.
