@@ -36,6 +36,7 @@
 ;;;     GtkListBase
 ;;;     GtkListView
 ;;;     GtkListTabBehavior
+;;;     GtkListScrollFlags
 ;;;
 ;;; Accessors
 ;;;
@@ -143,6 +144,43 @@
   Since 4.12
   @see-class{gtk:list-view}
   @see-class{gtk:column-view}")
+
+;;; ----------------------------------------------------------------------------
+;;;Enumeration
+;;;GtkListScrollFlags
+;;;since: 4.12
+
+;;;[−]
+;;;Declaration
+;;;flags Gtk.ListScrollFlags
+;;;[−]
+;;;Description
+;;;[src]
+;;;List of actions to perform when scrolling to items in a list widget.
+
+;;;Available since: 4.12
+
+;;;[−]
+;;;Members
+;;;Name	Description
+;;;GTK_LIST_SCROLL_NONE	
+;;;Don’t do anything extra.
+
+;;;GTK_LIST_SCROLL_FOCUS	
+;;;Focus the target item.
+
+;;;GTK_LIST_SCROLL_SELECT	
+;;;Select the target item and unselect all other items.
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-12
+(gobject:define-g-flags "GtkListScrollFlags" list-scroll-flags
+  (:export t
+   :type-initializer "gtk_list_scroll_flags_get_type")
+  (:none 0)
+  (:focus #.(ash 1 0))
+  (:select #.(ash 1 1)))
+
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkListBase
@@ -533,9 +571,9 @@ lambda (listview position)    :run-last
   @argument[factory]{a @class{gtk:list-item-factory} object to populate items
     with or @code{nil}}
   @return{A new @class{gtk:list-view} widget using the given @arg{model} and
-    @arg{factory}.} 
+    @arg{factory}.}
   @begin{short}
-    Creates a new list view that uses the given @arg{factory} for mapping items 
+    Creates a new list view that uses the given @arg{factory} for mapping items
     to widgets.
   @end{short}
   @see-class{gtk:list-view}
