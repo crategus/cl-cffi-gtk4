@@ -24,7 +24,7 @@
 
 (defsystem :cl-cffi-gtk4
   :name "cl-cffi-gtk4"
-  :version "0.4.0"
+  :version "0.5.0"
   :author "Dieter Kaiser"
   :license "MIT"
   :serial t
@@ -474,6 +474,9 @@
 
 (defsystem :cl-cffi-gtk4/test
   :name "cl-cffi-gtk4/test"
+  :version "0.5.0"
+  :author "Dieter Kaiser"
+  :license "MIT"
   :depends-on (:cl-cffi-gtk4 :fiveam :iterate)
   :perform (test-op (o c)
                (uiop:symbol-call :fiveam :run!
