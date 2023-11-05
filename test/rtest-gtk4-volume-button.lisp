@@ -39,7 +39,7 @@
   (is (equal '("scale")
              (gtk:widget-css-classes (make-instance 'gtk:volume-button))))
   ;; Accessible role
-  (is (eq :widget (gtk:widget-class-accessible-role "GtkVolumeButton")))
+  (is (eq :group (gtk:widget-class-accessible-role "GtkVolumeButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkVolumeButton" GTK-VOLUME-BUTTON
                        (:SUPERCLASS GTK-SCALE-BUTTON :EXPORT T :INTERFACES
@@ -71,4 +71,4 @@
     (is (= 0.02d0 (gtk:adjustment-step-increment
                       (gtk:scale-button-adjustment button))))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

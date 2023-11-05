@@ -97,7 +97,7 @@
   (is (equal '("background" "csd" "aboutdialog")
              (gtk:widget-css-classes (make-instance 'gtk:about-dialog))))
   ;; Accessible role
-  (is (eq :window (gtk:widget-class-accessible-role "GtkAboutDialog")))
+  (is (eq :application (gtk:widget-class-accessible-role "GtkAboutDialog")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAboutDialog" GTK-ABOUT-DIALOG
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
@@ -202,4 +202,4 @@
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

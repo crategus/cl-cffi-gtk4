@@ -38,7 +38,8 @@
                "GtkOrientable")
              (list-interfaces "GtkBox")))
   ;; Check the properties
-  (is (equal '("baseline-position" "homogeneous" "orientation" "spacing")
+  (is (equal '("baseline-child" "baseline-position" "homogeneous" "orientation"
+               "spacing")
              (list-properties "GtkBox")))
   ;; Check the signals
   (is (equal '()
@@ -50,18 +51,20 @@
   (is (equal '("horizontal")
              (gtk:widget-css-classes (make-instance 'gtk:box))))
   ;; Accessible role
-  (is (eq :group (gtk:widget-class-accessible-role "GtkBox")))
+  (is (eq :generic (gtk:widget-class-accessible-role "GtkBox")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBox" GTK-BOX
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_box_get_type")
-                       ((BASELINE-POSITION GTK-BOX-BASELINE-POSITION
-                         "baseline-position" "GtkBaselinePosition" T T)
-                        (HOMOGENEOUS GTK-BOX-HOMOGENEOUS "homogeneous"
-                         "gboolean" T T)
-                        (SPACING GTK-BOX-SPACING "spacing" "gint" T T)))
+                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                                ("GtkAccessible" "GtkBuildable"
+                                 "GtkConstraintTarget" "GtkOrientable")
+                                :TYPE-INITIALIZER "gtk_box_get_type")
+                               ((BASELINE-CHILD GTK-BOX-BASELINE-CHILD
+                                 "baseline-child" "gint" T T)
+                                (BASELINE-POSITION GTK-BOX-BASELINE-POSITION
+                                 "baseline-position" "GtkBaselinePosition" T T)
+                                (HOMOGENEOUS GTK-BOX-HOMOGENEOUS "homogeneous"
+                                 "gboolean" T T)
+                                (SPACING GTK-BOX-SPACING "spacing" "gint" T T)))
              (gobject:get-g-type-definition "GtkBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -118,4 +121,4 @@
 ;;;     gtk_box_insert_child_after
 ;;;     gtk_box_reorder_child_after
 
-;;; --- 2023-8-25 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

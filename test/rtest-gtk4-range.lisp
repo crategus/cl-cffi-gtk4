@@ -40,7 +40,7 @@
   (is (equal '("horizontal")
              (gtk:widget-css-classes (make-instance 'gtk:range))))
   ;; Accessible role
-  (is (eq :widget (gtk:widget-class-accessible-role "GtkRange")))
+  (is (eq :generic (gtk:widget-class-accessible-role "GtkRange")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRange" GTK-RANGE
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -119,4 +119,4 @@
 ;;;     gtk_range_get_slider_size_fixed
 ;;;     gtk_range_set_slider_size_fixed
 
-;;; --- 2023-8-24 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

@@ -28,7 +28,7 @@
              (list-interfaces "GtkCenterBox")))
   ;; Check the properties
   (is (equal '("baseline-position" "center-widget" "end-widget" "orientation"
-               "start-widget")
+               "shrink-center-last" "start-widget")
              (list-properties "GtkCenterBox")))
   ;; Check the signals
   (is (equal '()
@@ -40,21 +40,25 @@
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:center-box))))
   ;; Accessible role
-  (is (eq :group (gtk:widget-class-accessible-role "GtkCenterBox")))
+  (is (eq :generic (gtk:widget-class-accessible-role "GtkCenterBox")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCenterBox" GTK-CENTER-BOX
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkOrientable")
-                        :TYPE-INITIALIZER "gtk_center_box_get_type")
-                       ((BASELINE-POSITION GTK-CENTER-BOX-BASELINE-POSITION
-                         "baseline-position" "GtkBaselinePosition" T T)
-                        (CENTER-WIDGET GTK-CENTER-BOX-CENTER-WIDGET
-                         "center-widget" "GtkWidget" T T)
-                        (END-WIDGET GTK-CENTER-BOX-END-WIDGET "end-widget"
-                         "GtkWidget" T T)
-                        (START-WIDGET GTK-CENTER-BOX-START-WIDGET
-                         "start-widget" "GtkWidget" T T)))
+                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                                ("GtkAccessible" "GtkBuildable"
+                                 "GtkConstraintTarget" "GtkOrientable")
+                                :TYPE-INITIALIZER "gtk_center_box_get_type")
+                               ((BASELINE-POSITION
+                                 GTK-CENTER-BOX-BASELINE-POSITION
+                                 "baseline-position" "GtkBaselinePosition" T T)
+                                (CENTER-WIDGET GTK-CENTER-BOX-CENTER-WIDGET
+                                 "center-widget" "GtkWidget" T T)
+                                (END-WIDGET GTK-CENTER-BOX-END-WIDGET
+                                 "end-widget" "GtkWidget" T T)
+                                (SHRINK-CENTER-LAST
+                                 GTK-CENTER-BOX-SHRINK-CENTER-LAST
+                                 "shrink-center-last" "gboolean" T T)
+                                (START-WIDGET GTK-CENTER-BOX-START-WIDGET
+                                 "start-widget" "GtkWidget" T T)))
              (gobject:get-g-type-definition "GtkCenterBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -62,6 +66,7 @@
 ;;;     baseline-position
 ;;;     center-widget                                      Since 4.10
 ;;;     end-widget                                         Since 4.10
+;;;     shrink-center-last                                 Since 4.12
 ;;;     start-widget                                       Since 4.10
 
 (test gtk-center-box-properties.1
@@ -69,19 +74,22 @@
     (is (eq :center (gtk:center-box-baseline-position box)))
     (is-false (gtk:center-box-center-widget box))
     (is-false (gtk:center-box-end-widget box))
+    (is-true (gtk:center-box-shrink-center-last box))
     (is-false (gtk:center-box-start-widget box))))
 
 (test gtk-center-box-properties.2
   (let ((box (gtk:center-box-new))
-        (button (gtk:button-new)))
+        (center (gtk:button-new))
+        (start (gtk:button-new))
+        (end (gtk:button-new)))
     (is (eq :top (setf (gtk:center-box-baseline-position box) :top)))
     (is (eq :top (gtk:center-box-baseline-position box)))
-    (is (typep (setf (gtk:center-box-center-widget box) button) 'gtk:button))
-    (is (eq button (gtk:center-box-center-widget box)))
-    (is (typep (setf (gtk:center-box-end-widget box) button) 'gtk:button))
-    (is (eq button (gtk:center-box-end-widget box)))
-    (is (typep (setf (gtk:center-box-start-widget box) button) 'gtk:button))
-    (is (eq button (gtk:center-box-start-widget box)))))
+    (is (typep (setf (gtk:center-box-center-widget box) center) 'gtk:button))
+    (is (eq center (gtk:center-box-center-widget box)))
+    (is (typep (setf (gtk:center-box-end-widget box) end) 'gtk:button))
+    (is (eq end (gtk:center-box-end-widget box)))
+    (is (typep (setf (gtk:center-box-start-widget box) start) 'gtk:button))
+    (is (eq start (gtk:center-box-start-widget box)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -90,4 +98,4 @@
 (test gtk-center-box-new
   (is (typep (gtk:center-box-new) 'gtk:center-box)))
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

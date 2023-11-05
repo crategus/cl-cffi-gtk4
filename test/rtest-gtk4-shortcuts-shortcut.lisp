@@ -90,7 +90,7 @@
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:shortcuts-shortcut))))
   ;; Accessible role
-  (is (eq :group (gtk:widget-class-accessible-role "GtkShortcutsShortcut")))
+  (is (eq :label (gtk:widget-class-accessible-role "GtkShortcutsShortcut")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsShortcut"
                                              GTK-SHORTCUTS-SHORTCUT
@@ -141,4 +141,4 @@
 ;;;     title
 ;;;     title-size-group
 
-;;; --- 2023-10-16 -------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

@@ -234,7 +234,7 @@
     (is (= 500 (gtk:settings-gtk-long-press-time settings)))
     (is-true (gtk:settings-gtk-overlay-scrolling settings))
     (is-true (gtk:settings-gtk-primary-button-warps-slider settings))
-    (is (string= "cups,file" (gtk:settings-gtk-print-backends settings)))
+    (is (string= "cpdb,file" (gtk:settings-gtk-print-backends settings)))
     (is (string= "evince --unlink-tempfile --preview --print-settings %s %f"
                  (gtk:settings-gtk-print-preview-command settings)))
     ;; FIXME: Signals an error: null-pointer in parse-g-param-spec.
@@ -302,4 +302,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; --- 2023-7-21 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

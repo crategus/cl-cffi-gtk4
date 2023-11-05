@@ -24,7 +24,7 @@
   (is (equal '()
              (list-children "GtkMultiSelection")))
   ;; Check the interfaces
-  (is (equal '("GListModel" "GtkSelectionModel")
+  (is (equal '("GListModel" "GtkSectionModel" "GtkSelectionModel")
              (list-interfaces "GtkMultiSelection")))
   ;; Check the properties
   (is (equal '("item-type" "model" "n-items")
@@ -33,10 +33,11 @@
   (is (equal '()
              (list-signals "GtkMultiSelection")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMultiSelection"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMultiSelection"  
                                              GTK-MULTI-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel" "GtkSelectionModel")
+                                ("GListModel" "GtkSectionModel"
+                                 "GtkSelectionModel")
                                 :TYPE-INITIALIZER
                                 "gtk_multi_selection_get_type")
                                ((ITEM-TYPE GTK-MULTI-SELECTION-ITEM-TYPE
@@ -57,4 +58,4 @@
 
 ;;;     gtk_multi_selection_new
 
-;;; --- 2023-9-6 ---------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

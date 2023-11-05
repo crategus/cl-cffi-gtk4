@@ -40,7 +40,7 @@
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:viewport))))
   ;; Accessible role
-  (is (eq :group (gtk:widget-class-accessible-role "GtkViewport")))
+  (is (eq :generic (gtk:widget-class-accessible-role "GtkViewport")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkViewport" GTK-VIEWPORT
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -73,4 +73,4 @@
   (is (typep (gtk:viewport-new (make-instance 'gtk:adjustment)
                                (make-instance 'gtk:adjustment)) 'gtk:viewport)))
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

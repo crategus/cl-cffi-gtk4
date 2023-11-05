@@ -109,9 +109,10 @@
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:scrolled-window))))
   ;; Accessible role
-  (is (eq :group (gtk:widget-class-accessible-role "GtkScrolledWindow")))
+  (is (eq :generic (gtk:widget-class-accessible-role "GtkScrolledWindow")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScrolledWindow" GTK-SCROLLED-WINDOW
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScrolledWindow"
+                                             GTK-SCROLLED-WINDOW
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
                                  "GtkConstraintTarget")
@@ -223,4 +224,4 @@
 ;;;     gtk_scrolled_window_set_placement
 ;;;     gtk_scrolled_window_unset_placement
 
-;;; --- 2023-8-6 ---------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

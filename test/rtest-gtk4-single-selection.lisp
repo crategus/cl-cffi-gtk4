@@ -26,7 +26,7 @@
   (is (equal '()
              (list-children "GtkSingleSelection")))
   ;; Check the interfaces
-  (is (equal '("GListModel" "GtkSelectionModel")
+  (is (equal '("GListModel" "GtkSectionModel" "GtkSelectionModel")
              (list-interfaces "GtkSingleSelection")))
   ;; Check the properties
   (is (equal '("autoselect" "can-unselect" "item-type" "model" "n-items"
@@ -36,10 +36,11 @@
   (is (equal '()
              (list-signals "GtkSingleSelection")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSingleSelection"
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSingleSelection" 
                                              GTK-SINGLE-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel" "GtkSelectionModel")
+                                ("GListModel" "GtkSectionModel"
+                                 "GtkSelectionModel")
                                 :TYPE-INITIALIZER
                                 "gtk_single_selection_get_type")
                                ((AUTOSELECT GTK-SINGLE-SELECTION-AUTOSELECT
@@ -82,4 +83,4 @@
 ;;;     gtk_single_selection_get_can_unselect
 ;;;     gtk_single_selection_set_can_unselect
 
-;;; --- 2023-8-10 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

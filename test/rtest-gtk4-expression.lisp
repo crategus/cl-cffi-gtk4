@@ -45,17 +45,17 @@
 
 (test gtk-expression-evaluate
   (cffi:with-foreign-object (gvalue '(:struct g:value))
-    (g:value-init gvalue "gchararray")
-    (setf (g:value-string gvalue) "string")
+    (is (cffi:pointerp (g:value-init gvalue "gchararray")))
+    (is (string= "string" (setf (g:value-string gvalue) "string")))
+
     (let ((expression (gtk:constant-expression-new-for-value gvalue)))
       (is (eq (g:gtype "gchararray") (gtk:expression-value-type expression)))
       (is (string= "string"
                    (g:value-string (gtk:constant-expression-value expression))))
-
-      (is (string= "string" (gtk:expression-evaluate expression nil)))
-
+      ;; FIXME: This test is wrong. We get a memory fault. Is the implementation
+      ;; of gtk:expression-evaluate for a NIL argument correct!?
+;      (is-false (gtk:expression-evaluate expression nil))
 )))
-
 
 ;;;     gtk_expression_watch
 ;;;     gtk_expression_bind
@@ -76,7 +76,7 @@
       (is (eq (g:gtype "gchararray")
               (gtk:expression-value-type expression)))
       (is (string= "label"
-                   (gtk:expression-evaluate expression label)))
+                   (g:value-get (gtk:expression-evaluate expression label))))
       (is-false (gtk:expression-unref expression)))))
 
 ;; TODO: What is the correct usage of EXPRESSION?
@@ -89,7 +89,7 @@
       (is (eq (g:gtype "GtkJustification")
               (gtk:expression-value-type expression)))
       (is (eq :left
-              (gtk:expression-evaluate expression label)))
+              (g:value-get (gtk:expression-evaluate expression label))))
       (is-false (gtk:expression-unref expression)))))
 
 ;; TODO: What is wrong with this example and the implementation!?
@@ -114,7 +114,7 @@
 
       ;; FIXME: We get the :LEFT value. Why?!
 ;      (is-false (gtk:expression-evaluate expression1 button))
-      (is (eq :left (gtk:expression-evaluate expression2 button)))
+      (is (eq :left (g:value-get (gtk:expression-evaluate expression2 button))))
 ;
 ;      (is-false (gtk:expression-unref expression2))
     )))

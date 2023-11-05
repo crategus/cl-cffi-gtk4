@@ -24,7 +24,7 @@
   (is (equal '()
              (list-children "GtkFlattenListModel")))
   ;; Check the interfaces
-  (is (equal '("GListModel")
+  (is (equal '("GListModel" "GtkSectionModel")
              (list-interfaces "GtkFlattenListModel")))
   ;; Check the properties
   (is (equal '("item-type" "model" "n-items")
@@ -36,7 +36,8 @@
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFlattenListModel" 
                                              GTK-FLATTEN-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel") :TYPE-INITIALIZER
+                                ("GListModel" "GtkSectionModel")
+                                :TYPE-INITIALIZER
                                 "gtk_flatten_list_model_get_type")
                                ((ITEM-TYPE GTK-FLATTEN-LIST-MODEL-ITEM-TYPE
                                  "item-type" "GType" T NIL)
@@ -57,4 +58,4 @@
 ;;;     gtk_flatten_list_model_new
 ;;;     gtk_flatten_list_model_get_model_for_item
 
-;;; --- 2023-9-3 ---------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

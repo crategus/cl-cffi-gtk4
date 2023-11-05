@@ -157,19 +157,20 @@
 ;;;     gtk_image_new_from_pixbuf
 
 (test gtk-image-new-from-pixbuf
-  (let* ((pixbuf (gdk:pixbuf-new-from-file
-                     (sys-path "resource/gtk-logo-24.png")))
-         (image (gtk:image-new-from-pixbuf pixbuf)))
-    (is (typep pixbuf 'gdk:pixbuf))
-    (is-false (gtk:image-file image))
-    (is-false (gtk:image-gicon image))
-    (is-false (gtk:image-icon-name image))
-    (is (eq :inherit (gtk:image-icon-size image)))
-    (is (typep (gtk:image-paintable image) 'gdk:texture))
-    (is (= -1 (gtk:image-pixel-size image)))
-    (is-false (gtk:image-resource image))
-    (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let* ((pixbuf (gdk:pixbuf-new-from-file
+                       (sys-path "resource/gtk-logo-24.png")))
+           (image (gtk:image-new-from-pixbuf pixbuf)))
+      (is (typep pixbuf 'gdk:pixbuf))
+      (is-false (gtk:image-file image))
+      (is-false (gtk:image-gicon image))
+      (is-false (gtk:image-icon-name image))
+      (is (eq :inherit (gtk:image-icon-size image)))
+      (is (typep (gtk:image-paintable image) 'gdk:texture))
+      (is (= -1 (gtk:image-pixel-size image)))
+      (is-false (gtk:image-resource image))
+      (is (eq :paintable (gtk:image-storage-type image)))
+      (is-false (gtk:image-use-fallback image)))))
 
 ;;;     gtk_image_new_from_paintable
 
@@ -225,23 +226,24 @@
 ;;;     gtk_image_set_from_pixbuf
 
 (test gtk-image-set-from-pixbuf
-  (let* ((pixbuf (gdk:pixbuf-new-from-file
-                     (sys-path "resource/gtk-logo-24.png")))
-         (image (gtk:image-new)))
-    (is-false (gtk:image-set-from-pixbuf image pixbuf))
-    (is (typep pixbuf 'gdk:pixbuf))
-    (is-false (gtk:image-file image))
-    (is-false (gtk:image-gicon image))
-    (is-false (gtk:image-icon-name image))
-    (is (eq :inherit (gtk:image-icon-size image)))
-    (is (typep (gtk:image-paintable image) 'gdk:texture))
-    (is (= -1 (gtk:image-pixel-size image)))
-    (is-false (gtk:image-resource image))
-    (is (eq :paintable (gtk:image-storage-type image)))
-    (is-false (gtk:image-use-fallback image))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let* ((pixbuf (gdk:pixbuf-new-from-file
+                       (sys-path "resource/gtk-logo-24.png")))
+           (image (gtk:image-new)))
+      (is-false (gtk:image-set-from-pixbuf image pixbuf))
+      (is (typep pixbuf 'gdk:pixbuf))
+      (is-false (gtk:image-file image))
+      (is-false (gtk:image-gicon image))
+      (is-false (gtk:image-icon-name image))
+      (is (eq :inherit (gtk:image-icon-size image)))
+      (is (typep (gtk:image-paintable image) 'gdk:texture))
+      (is (= -1 (gtk:image-pixel-size image)))
+      (is-false (gtk:image-resource image))
+      (is (eq :paintable (gtk:image-storage-type image)))
+      (is-false (gtk:image-use-fallback image)))))
 
 ;;;     gtk_image_set_from_paintable
 ;;;     gtk_image_set_from_icon_name
 ;;;     gtk_image_set_from_gicon
 
-;;; --- 2023-8-31 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

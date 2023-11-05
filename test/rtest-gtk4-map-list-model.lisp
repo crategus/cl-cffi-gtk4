@@ -23,7 +23,7 @@
   (is (equal '()
              (list-children "GtkMapListModel")))
   ;; Check the interfaces
-  (is (equal '("GListModel")
+  (is (equal '("GListModel" "GtkSectionModel")
              (list-interfaces "GtkMapListModel")))
   ;; Check the properties
   (is (equal '("has-map" "item-type" "model" "n-items")
@@ -32,9 +32,11 @@
   (is (equal '()
              (list-signals "GtkMapListModel")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMapListModel" GTK-MAP-LIST-MODEL
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMapListModel"
+                                             GTK-MAP-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel") :TYPE-INITIALIZER
+                                ("GListModel" "GtkSectionModel")
+                                :TYPE-INITIALIZER
                                 "gtk_map_list_model_get_type")
                                ((HAS-MAP GTK-MAP-LIST-MODEL-HAS-MAP "has-map"
                                  "gboolean" T NIL)

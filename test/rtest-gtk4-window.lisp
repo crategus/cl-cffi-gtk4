@@ -35,8 +35,8 @@
                "destroy-with-parent" "display" "focus-visible"
                "focus-widget" "fullscreened" "handle-menubar-accel"
                "hide-on-close" "icon-name" "is-active" "maximized"
-               "mnemonics-visible" "modal" "resizable" "startup-id" "title"
-               "titlebar" "transient-for")
+               "mnemonics-visible" "modal" "resizable" "startup-id" "suspended"
+               "title" "titlebar" "transient-for")
              (list-properties "GtkWindow")))
   ;; Check the list of signals
   (is (equal '("activate-default" "activate-focus" "close-request"
@@ -49,57 +49,65 @@
   (is (equal '("background")
              (gtk:widget-css-classes (make-instance 'gtk:window))))
   ;; Accessible role
-  (is (eq :window (gtk:widget-class-accessible-role "GtkWindow")))
+  (is (eq :application (gtk:widget-class-accessible-role "GtkWindow")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindow" GTK-WINDOW
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkNative" "GtkRoot" "GtkShortcutManager")
-                        :TYPE-INITIALIZER "gtk_window_get_type")
-                       ((APPLICATION GTK-WINDOW-APPLICATION "application"
-                         "GtkApplication" T T)
-                        (CHILD GTK-WINDOW-CHILD "child" "GtkWidget" T T)
-                        (DECORATED GTK-WINDOW-DECORATED "decorated" "gboolean"
-                         T T)
-                        (DEFAULT-HEIGHT GTK-WINDOW-DEFAULT-HEIGHT
-                         "default-height" "gint" T T)
-                        (DEFAULT-WIDGET GTK-WINDOW-DEFAULT-WIDGET
-                         "default-widget" "GtkWidget" T T)
-                        (DEFAULT-WIDTH GTK-WINDOW-DEFAULT-WIDTH "default-width"
-                         "gint" T T)
-                        (DELETABLE GTK-WINDOW-DELETABLE "deletable" "gboolean"
-                         T T)
-                        (DESTROY-WITH-PARENT GTK-WINDOW-DESTROY-WITH-PARENT
-                         "destroy-with-parent" "gboolean" T T)
-                        (DISPLAY GTK-WINDOW-DISPLAY "display" "GdkDisplay" T T)
-                        (FOCUS-VISIBLE GTK-WINDOW-FOCUS-VISIBLE "focus-visible"
-                         "gboolean" T T)
-                        (FOCUS-WIDGET GTK-WINDOW-FOCUS-WIDGET "focus-widget"
-                         "GtkWidget" T T)
-                        (FULLSCREENED GTK-WINDOW-FULLSCREENED "fullscreened"
-                         "gboolean" T T)
-                        (HANDLE-MENUBAR-ACCEL GTK-WINDOW-HANDLE-MENUBAR-ACCEL
-                         "handle-menubar-accel" "gboolean" T T)
-                        (HIDE-ON-CLOSE GTK-WINDOW-HIDE-ON-CLOSE "hide-on-close"
-                         "gboolean" T T)
-                        (ICON-NAME GTK-WINDOW-ICON-NAME "icon-name"
-                         "gchararray" T T)
-                        (IS-ACTIVE GTK-WINDOW-IS-ACTIVE "is-active" "gboolean"
-                         T NIL)
-                        (MAXIMIZED GTK-WINDOW-MAXIMIZED "maximized" "gboolean"
-                         T T)
-                        (MNEMONICS-VISIBLE GTK-WINDOW-MNEMONICS-VISIBLE
-                         "mnemonics-visible" "gboolean" T T)
-                        (MODAL GTK-WINDOW-MODAL "modal" "gboolean" T T)
-                        (RESIZABLE GTK-WINDOW-RESIZABLE "resizable" "gboolean"
-                         T T)
-                        (STARTUP-ID GTK-WINDOW-STARTUP-ID "startup-id"
-                         "gchararray" NIL T)
-                        (TITLE GTK-WINDOW-TITLE "title" "gchararray" T T)
-                        (TITLEBAR GTK-WINDOW-TITLEBAR "titlebar" "GtkWidget"
-                         T T)
-                        (TRANSIENT-FOR GTK-WINDOW-TRANSIENT-FOR "transient-for"
-                         "GtkWindow" T T)))
+                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                                ("GtkAccessible" "GtkBuildable"
+                                 "GtkConstraintTarget" "GtkNative" "GtkRoot"
+                                 "GtkShortcutManager")
+                                :TYPE-INITIALIZER "gtk_window_get_type")
+                               ((APPLICATION GTK-WINDOW-APPLICATION
+                                 "application" "GtkApplication" T T)
+                                (CHILD GTK-WINDOW-CHILD "child" "GtkWidget" T
+                                 T)
+                                (DECORATED GTK-WINDOW-DECORATED "decorated"
+                                 "gboolean" T T)
+                                (DEFAULT-HEIGHT GTK-WINDOW-DEFAULT-HEIGHT
+                                 "default-height" "gint" T T)
+                                (DEFAULT-WIDGET GTK-WINDOW-DEFAULT-WIDGET
+                                 "default-widget" "GtkWidget" T T)
+                                (DEFAULT-WIDTH GTK-WINDOW-DEFAULT-WIDTH
+                                 "default-width" "gint" T T)
+                                (DELETABLE GTK-WINDOW-DELETABLE "deletable"
+                                 "gboolean" T T)
+                                (DESTROY-WITH-PARENT
+                                 GTK-WINDOW-DESTROY-WITH-PARENT
+                                 "destroy-with-parent" "gboolean" T T)
+                                (DISPLAY GTK-WINDOW-DISPLAY "display"
+                                 "GdkDisplay" T T)
+                                (FOCUS-VISIBLE GTK-WINDOW-FOCUS-VISIBLE
+                                 "focus-visible" "gboolean" T T)
+                                (FOCUS-WIDGET GTK-WINDOW-FOCUS-WIDGET
+                                 "focus-widget" "GtkWidget" T T)
+                                (FULLSCREENED GTK-WINDOW-FULLSCREENED
+                                 "fullscreened" "gboolean" T T)
+                                (HANDLE-MENUBAR-ACCEL
+                                 GTK-WINDOW-HANDLE-MENUBAR-ACCEL
+                                 "handle-menubar-accel" "gboolean" T T)
+                                (HIDE-ON-CLOSE GTK-WINDOW-HIDE-ON-CLOSE
+                                 "hide-on-close" "gboolean" T T)
+                                (ICON-NAME GTK-WINDOW-ICON-NAME "icon-name"
+                                 "gchararray" T T)
+                                (IS-ACTIVE GTK-WINDOW-IS-ACTIVE "is-active"
+                                 "gboolean" T NIL)
+                                (MAXIMIZED GTK-WINDOW-MAXIMIZED "maximized"
+                                 "gboolean" T T)
+                                (MNEMONICS-VISIBLE GTK-WINDOW-MNEMONICS-VISIBLE
+                                 "mnemonics-visible" "gboolean" T T)
+                                (MODAL GTK-WINDOW-MODAL "modal" "gboolean" T T)
+                                (RESIZABLE GTK-WINDOW-RESIZABLE "resizable"
+                                 "gboolean" T T)
+                                (STARTUP-ID GTK-WINDOW-STARTUP-ID "startup-id"
+                                 "gchararray" NIL T)
+                                (SUSPENDED GTK-WINDOW-SUSPENDED "suspended"
+                                 "gboolean" T NIL)
+                                (TITLE GTK-WINDOW-TITLE "title" "gchararray" T
+                                 T)
+                                (TITLEBAR GTK-WINDOW-TITLEBAR "titlebar"
+                                 "GtkWidget" T T)
+                                (TRANSIENT-FOR GTK-WINDOW-TRANSIENT-FOR
+                                 "transient-for" "GtkWindow" T T)))
              (gobject:get-g-type-definition "GtkWindow"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -324,4 +332,4 @@
 ;;;     gtk_window_set_interactive_debugging
 ;;;     gtk_window_is_suspended                            Since 4.12
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

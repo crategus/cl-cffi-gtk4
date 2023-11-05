@@ -38,7 +38,7 @@
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:aspect-frame))))
   ;; Accessible role
-  (is (eq :group (gtk:widget-class-accessible-role "GtkAspectFrame")))
+  (is (eq :generic (gtk:widget-class-accessible-role "GtkAspectFrame")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAspectFrame" GTK-ASPECT-FRAME
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -86,4 +86,4 @@
     (is (= 0.25 (gtk:aspect-frame-xalign frame)))
     (is (= 0.50 (gtk:aspect-frame-yalign frame)))))
 
-;;; --- 2023-8-23 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

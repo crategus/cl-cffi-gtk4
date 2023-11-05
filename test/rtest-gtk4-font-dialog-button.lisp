@@ -63,7 +63,7 @@
                "use-font" "use-size")
              (list-properties "GtkFontDialogButton")))
   ;; Check the signals
-  (is (equal '()
+  (is (equal '("activate")
              (list-signals "GtkFontDialogButton")))
   ;; CSS name
   (is (string= "fontbutton"
@@ -72,7 +72,7 @@
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:font-dialog-button))))
   ;; Accessible role
-  (is (eq :widget (gtk:widget-class-accessible-role "GtkFontDialogButton")))
+  (is (eq :group (gtk:widget-class-accessible-role "GtkFontDialogButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontDialogButton"
                                              GTK-FONT-DIALOG-BUTTON
@@ -112,8 +112,21 @@
 
 ;;;     activate
 
+(test gtk-font-dialog-button-activate-signal
+  (let ((query (g:signal-query (g:signal-lookup "activate" 
+                                                "GtkFontDialogButton"))))
+    (is (string= "activate" (g:signal-query-signal-name query)))
+    (is (string= "GtkFontDialogButton" 
+                 (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_font_dialog_button_new
 
-;;; --- 2023-10-19 -------------------------------------------------------------
+;;; --- 2023-11-4 -------------------------------------------------------------

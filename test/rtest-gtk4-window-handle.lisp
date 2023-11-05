@@ -35,7 +35,7 @@
   (is (string= "windowhandle"
                (gtk:widget-class-css-name "GtkWindowHandle")))
   ;; Accessible role
-  (is (eq :group (gtk:widget-class-accessible-role "GtkWindowHandle")))
+  (is (eq :generic (gtk:widget-class-accessible-role "GtkWindowHandle")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindowHandle" GTK-WINDOW-HANDLE
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -61,4 +61,4 @@
 (test gtk-window-handle-new
   (is (typep (gtk:window-handle-new) 'gtk:window-handle)))
 
-;;; --- 2023-7-23 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

@@ -69,13 +69,13 @@
 (test gtk-css-provider-load-named.1
   (let ((provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-named provider "Yaru"))
-    (is (= 405137 (length (gtk:css-provider-to-string provider))))))
+    (is (= 414375 (length (gtk:css-provider-to-string provider))))))
 
 #+crategus
 (test gtk-css-provider-load-named.2
   (let ((provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-named provider "Yaru" "dark"))
-    (is (= 400248 (length (gtk:css-provider-to-string provider))))))
+    (is (= 409387 (length (gtk:css-provider-to-string provider))))))
 
 ;;;     gtk_css_provider_load_from_data
 
@@ -164,4 +164,4 @@ button:last-child > label {
 ;;;     gtk_css_section_get_start_location
 ;;;     gtk_css_section_get_end_location
 
-;;; --- 2023-8-30 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

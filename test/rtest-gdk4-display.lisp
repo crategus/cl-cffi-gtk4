@@ -21,11 +21,8 @@
           (g:type-parent "GdkDisplay")))
   ;; Check the children
   #-windows
-  (if *first-run-gtk-test*
-      (is (equal '("GdkWaylandDisplay" "GdkX11Display")
-                 (list-children "GdkDisplay")))
-      (is (equal '("GdkBroadwayDisplay" "GdkWaylandDisplay" "GdkX11Display")
-                 (list-children "GdkDisplay"))))
+  (is (equal '("GdkWaylandDisplay" "GdkX11Display")
+             (list-children "GdkDisplay")))
   #+windows
   (is (equal '("GdkWin32Display")
              (list-children "GdkDisplay")))
@@ -253,4 +250,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; --- 2023-7-16 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

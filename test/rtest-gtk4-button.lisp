@@ -27,8 +27,8 @@
                "GtkActionable")
              (list-interfaces "GtkButton")))
   ;; Check the class properties
-  (is (equal '("action-name" "action-target" "child" "has-frame" "icon-name"
-               "label" "use-underline")
+  (is (equal '("action-name" "action-target" "can-shrink" "child" "has-frame"
+               "icon-name" "label" "use-underline")
              (list-properties "GtkButton")))
   ;; Check the signals
   (is (equal '("activate" "clicked")
@@ -40,18 +40,22 @@
   (is (eq :button (gtk:widget-class-accessible-role "GtkButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkButton" GTK-BUTTON
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkActionable" "GtkBuildable"
-                         "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_button_get_type")
-                       ((CHILD GTK-BUTTON-CHILD "child" "GtkWidget" T T)
-                        (HAS-FRAME GTK-BUTTON-HAS-FRAME "has-frame" "gboolean"
-                         T T)
-                        (ICON-NAME GTK-BUTTON-ICON-NAME "icon-name"
-                         "gchararray" T T)
-                        (LABEL GTK-BUTTON-LABEL "label" "gchararray" T T)
-                        (USE-UNDERLINE GTK-BUTTON-USE-UNDERLINE "use-underline"
-                         "gboolean" T T)))
+                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                                ("GtkAccessible" "GtkActionable" "GtkBuildable"
+                                 "GtkConstraintTarget")
+                                :TYPE-INITIALIZER "gtk_button_get_type")
+                               ((CAN-SHRINK GTK-BUTTON-CAN-SHRINK "can-shrink"
+                                 "gboolean" T T)
+                                (CHILD GTK-BUTTON-CHILD "child" "GtkWidget" T
+                                 T)
+                                (HAS-FRAME GTK-BUTTON-HAS-FRAME "has-frame"
+                                 "gboolean" T T)
+                                (ICON-NAME GTK-BUTTON-ICON-NAME "icon-name"
+                                 "gchararray" T T)
+                                (LABEL GTK-BUTTON-LABEL "label" "gchararray" T
+                                 T)
+                                (USE-UNDERLINE GTK-BUTTON-USE-UNDERLINE
+                                 "use-underline" "gboolean" T T)))
              (gobject:get-g-type-definition "GtkButton"))))
 
 ;;; --- Properties -------------------------------------------------------------

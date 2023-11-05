@@ -33,7 +33,8 @@
   (is (equal '("background")
              (gtk:widget-css-classes (make-instance 'gtk:application-window))))
   ;; Accessible role
-  (is (eq :window (gtk:widget-class-accessible-role "GtkApplicationWindow")))
+  (is (eq :application
+          (gtk:widget-class-accessible-role "GtkApplicationWindow")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkApplicationWindow"
                                              GTK-APPLICATION-WINDOW
@@ -109,4 +110,4 @@
     (is (typep (gtk:application-window-help-overlay window)
                'gtk:shortcuts-window))))
 
-;;; --- 2023-10-16 -------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

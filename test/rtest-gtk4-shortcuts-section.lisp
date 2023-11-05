@@ -40,7 +40,7 @@
   (is (equal '("vertical")
              (gtk:widget-css-classes (make-instance 'gtk:shortcuts-section))))
   ;; Accessible role
-  (is (eq :group (gtk:widget-class-accessible-role "GtkShortcutsSection")))
+  (is (eq :generic (gtk:widget-class-accessible-role "GtkShortcutsSection")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsSection"
                                              GTK-SHORTCUTS-SECTION

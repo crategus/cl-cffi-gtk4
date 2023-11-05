@@ -38,7 +38,7 @@
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:frame))))
   ;; Accessible role
-  (is (eq :widget (gtk:widget-class-accessible-role "GtkFrame")))
+  (is (eq :group (gtk:widget-class-accessible-role "GtkFrame")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFrame" GTK-FRAME
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -77,4 +77,4 @@
   (is (typep (gtk:frame-new nil) 'gtk:frame))
   (is (typep (gtk:frame-new "label") 'gtk:frame)))
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

@@ -59,8 +59,8 @@
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkMenuButton")))
   ;; Check the properties
-  (is (equal '("active" "always-show-arrow" "child" "direction" "has-frame"
-               "icon-name" "label" "menu-model" "popover" "primary"
+  (is (equal '("active" "always-show-arrow" "can-shrink" "child" "direction"
+               "has-frame" "icon-name" "label" "menu-model" "popover" "primary"
                "use-underline")
              (list-properties "GtkMenuButton")))
   ;; Check the signals
@@ -76,28 +76,35 @@
   (is (eq :button (gtk:widget-class-accessible-role "GtkMenuButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMenuButton" GTK-MENU-BUTTON
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_menu_button_get_type")
-                       ((ACTIVE GTK-MENU-BUTTON-ACTIVE "active" "gboolean" T T)
-                        (ALWAYS-SHOW-ARROW GTK-MENU-BUTTON-ALWAYS-SHOW-ARROW
-                         "always-show-arrow" "gboolean" T T)
-                        (CHILD GTK-MENU-BUTTON-CHILD "child" "GtkWidget" T T)
-                        (DIRECTION GTK-MENU-BUTTON-DIRECTION "direction"
-                         "GtkArrowType" T T)
-                        (HAS-FRAME GTK-MENU-BUTTON-HAS-FRAME "has-frame"
-                         "gboolean" T T)
-                        (ICON-NAME GTK-MENU-BUTTON-ICON-NAME "icon-name"
-                         "gchararray" T T)
-                        (LABEL GTK-MENU-BUTTON-LABEL "label" "gchararray" T T)
-                        (MENU-MODEL GTK-MENU-BUTTON-MENU-MODEL "menu-model"
-                         "GMenuModel" T T)
-                        (POPOVER GTK-MENU-BUTTON-POPOVER "popover" "GtkPopover"
-                         T T)
-                        (PRIMARY GTK-MENU-BUTTON-PRIMARY "primary" "gboolean" T
-                         T)
-                        (USE-UNDERLINE GTK-MENU-BUTTON-USE-UNDERLINE
-                         "use-underline" "gboolean" T T)))
+                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                                ("GtkAccessible" "GtkBuildable"
+                                 "GtkConstraintTarget")
+                                :TYPE-INITIALIZER "gtk_menu_button_get_type")
+                               ((ACTIVE GTK-MENU-BUTTON-ACTIVE "active"
+                                 "gboolean" T T)
+                                (ALWAYS-SHOW-ARROW
+                                 GTK-MENU-BUTTON-ALWAYS-SHOW-ARROW
+                                 "always-show-arrow" "gboolean" T T)
+                                (CAN-SHRINK GTK-MENU-BUTTON-CAN-SHRINK
+                                 "can-shrink" "gboolean" T T)
+                                (CHILD GTK-MENU-BUTTON-CHILD "child"
+                                 "GtkWidget" T T)
+                                (DIRECTION GTK-MENU-BUTTON-DIRECTION
+                                 "direction" "GtkArrowType" T T)
+                                (HAS-FRAME GTK-MENU-BUTTON-HAS-FRAME
+                                 "has-frame" "gboolean" T T)
+                                (ICON-NAME GTK-MENU-BUTTON-ICON-NAME
+                                 "icon-name" "gchararray" T T)
+                                (LABEL GTK-MENU-BUTTON-LABEL "label"
+                                 "gchararray" T T)
+                                (MENU-MODEL GTK-MENU-BUTTON-MENU-MODEL
+                                 "menu-model" "GMenuModel" T T)
+                                (POPOVER GTK-MENU-BUTTON-POPOVER "popover"
+                                 "GtkPopover" T T)
+                                (PRIMARY GTK-MENU-BUTTON-PRIMARY "primary"
+                                 "gboolean" T T)
+                                (USE-UNDERLINE GTK-MENU-BUTTON-USE-UNDERLINE
+                                 "use-underline" "gboolean" T T)))
              (gobject:get-g-type-definition "GtkMenuButton"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -146,4 +153,4 @@
 ;;;     GtkMenuButtonCreatePopupFunc
 ;;;     gtk_menu_button_set_create_popup_func
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

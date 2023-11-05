@@ -15,7 +15,7 @@
           (glib:symbol-for-gtype "GtkSortListModel")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSortListModel")
-          (g:gtype (cffi:foreign-funcall "gtk_sort_list_model_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_sort_list_model_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
@@ -24,19 +24,21 @@
   (is (equal '()
              (list-children "GtkSortListModel")))
   ;; Check the interfaces
-  (is (equal '("GListModel")
+  (is (equal '("GListModel" "GtkSectionModel")
              (list-interfaces "GtkSortListModel")))
   ;; Check the properties
-  (is (equal '("incremental" "item-type" "model" "n-items" "pending" "sorter")
+  (is (equal '("incremental" "item-type" "model" "n-items" "pending"
+               "section-sorter" "sorter")
              (list-properties "GtkSortListModel")))
   ;; Check the signals
   (is (equal '()
              (list-signals "GtkSortListModel")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSortListModel" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSortListModel"
                                              GTK-SORT-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel") :TYPE-INITIALIZER
+                                ("GListModel" "GtkSectionModel")
+                                :TYPE-INITIALIZER
                                 "gtk_sort_list_model_get_type")
                                ((INCREMENTAL GTK-SORT-LIST-MODEL-INCREMENTAL
                                  "incremental" "gboolean" T T)
@@ -48,6 +50,9 @@
                                  "guint" T NIL)
                                 (PENDING GTK-SORT-LIST-MODEL-PENDING "pending"
                                  "guint" T NIL)
+                                (SECTION-SORTER
+                                 GTK-SORT-LIST-MODEL-SECTION-SORTER
+                                 "section-sorter" "GtkSorter" T T)
                                 (SORTER GTK-SORT-LIST-MODEL-SORTER "sorter"
                                  "GtkSorter" T T)))
              (gobject:get-g-type-definition "GtkSortListModel"))))

@@ -5,9 +5,11 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GdkDragSurfaceSize
+
 ;;;     GdkDragSurface
 
-(test drag-surface-interface
+(test gdk-drag-surface-interface
   ;; Type check
   (is (g:type-is-interface "GdkDragSurface"))
   ;; Check the registered name
@@ -23,7 +25,7 @@
   (is (equal '()
              (list-interface-properties "GdkDragSurface")))
   ;; Check the signals
-  (is (equal '()
+  (is (equal '("compute-size")
              (list-signals "GdkDragSurface")))
   ;; Get the interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GdkDragSurface" GDK-DRAG-SURFACE
@@ -31,8 +33,26 @@
                              "gdk_drag_surface_get_type"))
              (gobject:get-g-type-definition "GdkDragSurface"))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     compute-size
+
+(test gtk-drag-surface-compute-size-signal
+  (let ((query (g:signal-query (g:signal-lookup "compute-size"
+                                                "GdkDragSurface"))))
+    (is (string= "compute-size" (g:signal-query-signal-name query)))
+    (is (string= "GdkDragSurface"
+                 (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '("GdkDragSurfaceSize")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_drag_surface_present
+;;;     gdk_drag_surface_size_set_size
 
-;;; --- 2023-7-30 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

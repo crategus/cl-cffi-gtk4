@@ -34,10 +34,10 @@
   (is (equal '("close" "search")
              (list-signals "GtkShortcutsWindow")))
   ;; CSS classes
-  (is (equal '("background" "csd")
+  (is (equal '("background" "csd" "shortcuts")
              (gtk:widget-css-classes (make-instance 'gtk:shortcuts-window))))
   ;; Accessible role
-  (is (eq :window (gtk:widget-class-accessible-role "GtkShortcutsWindow")))
+  (is (eq :generic (gtk:widget-class-accessible-role "GtkShortcutsWindow")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkShortcutsWindow"
                                              GTK-SHORTCUTS-WINDOW

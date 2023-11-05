@@ -15,7 +15,7 @@
           (glib:symbol-for-gtype "GtkColorDialogButton")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkColorDialogButton")
-          (g:gtype (cffi:foreign-funcall "gtk_color_dialog_button_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_color_dialog_button_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkWidget")
@@ -30,10 +30,10 @@
   (is (equal '("dialog" "rgba")
              (list-properties "GtkColorDialogButton")))
   ;; Check the signals
-  (is (equal '()
+  (is (equal '("activate")
              (list-signals "GtkColorDialogButton")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorDialogButton" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorDialogButton"
                                              GTK-COLOR-DIALOG-BUTTON
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -56,6 +56,23 @@
     (is-false (gtk:color-dialog-button-dialog button))
     (is (typep (gtk:color-dialog-button-rgba button) 'gdk:rgba))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     activate
+
+(test gtk-color-dialog-button-activate-signal
+  (let ((query (g:signal-query (g:signal-lookup "activate"
+                                                "GtkColorDialogButton"))))
+    (is (string= "activate" (g:signal-query-signal-name query)))
+    (is (string= "GtkColorDialogButton"
+                 (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_color_dialog_button_new
@@ -65,4 +82,4 @@
   (let ((dialog (make-instance 'gtk:color-dialog)))
     (is (typep (gtk:color-dialog-button-new dialog) 'gtk:color-dialog-button))))
 
-;;; --- 2023-7-28 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

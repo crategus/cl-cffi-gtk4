@@ -50,10 +50,11 @@
                                           (g:type-children "GtkWidget"))))))
      ;; Remove GTK:LIST-BASE. It is an abstract widget class.
      (setf children (remove 'gtk:list-base children))
-     (is (equal '(:BUTTON :CHECKBOX :COMBO-BOX :GRID :GRID-CELL :GROUP :IMG
-                  :LABEL :LIST :LIST-ITEM :MENU-BAR :METER :NONE :PROGRESS-BAR
-                  :SCROLLBAR :SEARCH :SEARCH-BOX :SEPARATOR :SPIN-BUTTON
-                  :SWITCH :TAB-LIST :TEXT-BOX :TREE-GRID :WIDGET :WINDOW)
+     (is (equal '(:APPLICATION :BUTTON :CHECKBOX :COMBO-BOX :GENERIC :GRID
+                  :GRID-CELL :GROUP :IMG :LABEL :LIST :LIST-ITEM
+                  :MENU-BAR :METER :NONE :PROGRESS-BAR :SCROLLBAR
+                  :SEARCH :SEARCH-BOX :SEPARATOR :SPIN-BUTTON :SWITCH
+                  :TAB-LIST :TEXT-BOX :TREE-GRID)
                 (sort (remove-duplicates
                           (mapcar #'gtk:accessible-accessible-role
                                   (mapcar #'make-instance children))
@@ -87,4 +88,4 @@
 ;;;     gtk_accessible_relation_init_value
 ;;;     gtk_accessible_state_init_value
 
-;;; --- 2023-8-31 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

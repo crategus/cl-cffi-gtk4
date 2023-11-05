@@ -23,7 +23,7 @@
   (is (equal '()
              (list-children "GtkNoSelection")))
   ;; Check the interfaces
-  (is (equal '("GListModel" "GtkSelectionModel")
+  (is (equal '("GListModel" "GtkSectionModel" "GtkSelectionModel")
              (list-interfaces "GtkNoSelection")))
   ;; Check the properties
   (is (equal '("item-type" "model" "n-items")
@@ -34,7 +34,8 @@
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNoSelection" GTK-NO-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel" "GtkSelectionModel")
+                                ("GListModel" "GtkSectionModel"
+                                 "GtkSelectionModel")
                                 :TYPE-INITIALIZER "gtk_no_selection_get_type")
                                ((ITEM-TYPE GTK-NO-SELECTION-ITEM-TYPE
                                  "item-type" "GType" T NIL)
@@ -65,4 +66,4 @@
   (is (typep (gtk:no-selection-new (g:list-store-new "GtkWidget"))
              'gtk:no-selection)))
 
-;;; --- 2023-9-6 ---------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

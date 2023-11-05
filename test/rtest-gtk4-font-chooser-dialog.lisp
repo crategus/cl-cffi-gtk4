@@ -40,7 +40,7 @@
                  (gtk:widget-class-css-name "GtkFontChooserDialog")))
     ;; CSS classes
     #-windows
-    (is (equal '("background" "csd" "dialog")
+    (is (equal '("background" "csd" "dialog" "fontchooser")
                (gtk:widget-css-classes
                    (make-instance 'gtk:font-chooser-dialog))))
     #+windows

@@ -15,7 +15,7 @@
           (glib:symbol-for-gtype "GtkSliceListModel")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSliceListModel")
-          (g:gtype (cffi:foreign-funcall "gtk_slice_list_model_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_slice_list_model_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
@@ -24,7 +24,7 @@
   (is (equal '()
              (list-children "GtkSliceListModel")))
   ;; Check the interfaces
-  (is (equal '("GListModel")
+  (is (equal '("GListModel" "GtkSectionModel")
              (list-interfaces "GtkSliceListModel")))
   ;; Check the properties
   (is (equal '("item-type" "model" "n-items" "offset" "size")
@@ -33,10 +33,11 @@
   (is (equal '()
              (list-signals "GtkSliceListModel")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSliceListModel" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSliceListModel"
                                              GTK-SLICE-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel") :TYPE-INITIALIZER
+                                ("GListModel" "GtkSectionModel")
+                                :TYPE-INITIALIZER
                                 "gtk_slice_list_model_get_type")
                                ((ITEM-TYPE GTK-SLICE-LIST-MODEL-ITEM-TYPE
                                  "item-type" "GType" T NIL)
@@ -49,7 +50,6 @@
                                 (SIZE GTK-SLICE-LIST-MODEL-SIZE "size" "guint"
                                  T T)))
              (gobject:get-g-type-definition "GtkSliceListModel"))))
-
 
 ;;; --- Properties -------------------------------------------------------------
 
@@ -69,4 +69,4 @@
 ;;;     gtk_slice_list_model_set_size
 ;;;     gtk_slice_list_model_get_size
 
-;;; --- 2023-9-3 ---------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

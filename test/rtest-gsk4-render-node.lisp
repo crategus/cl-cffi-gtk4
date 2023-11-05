@@ -182,7 +182,30 @@
 )))
 
 ;;;     GskConicGradientNode
+
 ;;;     GskContainerNode
+
+;;;     gsk_container_node_new
+;;;     gsk_container_node_get_n_children
+;;;     gsk_container_node_get_child
+
+(test gsk-container-node-new
+  (graphene:with-graphene-rect (rect 0 0 10 20)
+    (let* ((color1 (gsk:color-node-new (gdk:rgba-new :red 1 :alpha 1) rect))
+           (color2 (gsk:color-node-new (gdk:rgba-new :green 1 :alpha 1) rect))
+           (color3 (gsk:color-node-new (gdk:rgba-new :blue 1 :alpha 1) rect))
+           (node (gsk:container-node-new (list color1 color2 color3))))
+      (is (eq :container-node
+              (gsk:render-node-node-type node)))
+      (is (= 3 (gsk:container-node-n-children node)))
+      (is (typep (gsk:color-node-color (gsk:container-node-child node 0))
+                 'gdk:rgba))
+      (is (typep (gsk:color-node-color (gsk:container-node-child node 1))
+                 'gdk:rgba))
+      (is (typep (gsk:color-node-color (gsk:container-node-child node 2))
+                 'gdk:rgba))
+      (is-false (gsk:render-node-unref node)))))
+
 ;;;     GskCrossFadeNode
 ;;;     GskDebugNode
 ;;;     GskInsetShadowNode
@@ -207,7 +230,6 @@
 ;;;     GskBlendMode
 
 ;;; --- Functions --------------------------------------------------------------
-
 
 ;;;     gsk_texture_node_new
 ;;;     gsk_texture_node_get_texture
@@ -252,9 +274,6 @@
 ;;;     gsk_cairo_node_new
 ;;;     gsk_cairo_node_get_draw_context
 ;;;     gsk_cairo_node_get_surface
-;;;     gsk_container_node_new
-;;;     gsk_container_node_get_n_children
-;;;     gsk_container_node_get_child
 ;;;     gsk_transform_node_new
 ;;;     gsk_transform_node_get_child
 ;;;     gsk_transform_node_get_transform
@@ -305,4 +324,4 @@
 ;;;     gsk_gl_shader_node_get_args
 ;;;     gsk_gl_shader_node_get_shader
 
-;;; --- 2023-10-26 -------------------------------------------------------------
+;;; --- 2023-11-3 --------------------------------------------------------------

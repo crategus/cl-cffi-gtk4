@@ -20,13 +20,17 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkListItem")))
   ;; Check the children
-  (is (equal '()
-             (list-children "GtkListItem")))
+  (if *first-run-gtk-test*
+      (is (equal '()
+                 (list-children "GtkListItem")))
+      (is (equal '("GtkColumnViewCell")
+                 (list-children "GtkListItem"))))
   ;; Check the interfaces
   (is (equal '()
              (list-interfaces "GtkListItem")))
   ;; Check the properties
-  (is (equal '("activatable" "child" "item" "position" "selectable" "selected")
+  (is (equal '("accessible-description" "accessible-label" "activatable"
+               "child" "focusable" "item" "position" "selectable" "selected")
              (list-properties "GtkListItem")))
   ;; Check the signals
   (is (equal '()
@@ -35,10 +39,18 @@
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListItem" GTK-LIST-ITEM
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_list_item_get_type")
-                               ((ACTIVATABLE GTK-LIST-ITEM-ACTIVATABLE
+                               ((ACCESSIBLE-DESCRIPTION
+                                 GTK-LIST-ITEM-ACCESSIBLE-DESCRIPTION
+                                 "accessible-description" "gchararray" T T)
+                                (ACCESSIBLE-LABEL
+                                 GTK-LIST-ITEM-ACCESSIBLE-LABEL
+                                 "accessible-label" "gchararray" T T)
+                                (ACTIVATABLE GTK-LIST-ITEM-ACTIVATABLE
                                  "activatable" "gboolean" T T)
                                 (CHILD GTK-LIST-ITEM-CHILD "child" "GtkWidget"
                                  T T)
+                                (FOCUSABLE GTK-LIST-ITEM-FOCUSABLE "focusable"
+                                 "gboolean" T T)
                                 (ITEM GTK-LIST-ITEM-ITEM "item" "GObject" T
                                  NIL)
                                 (POSITION GTK-LIST-ITEM-POSITION "position"
@@ -67,4 +79,4 @@
     (is-true (gtk:list-item-selectable item))
     (is-false (gtk:list-item-selected item))))
 
-;;; --- 2023-8-13 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

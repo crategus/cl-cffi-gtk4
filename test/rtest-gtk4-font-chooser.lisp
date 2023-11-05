@@ -102,7 +102,7 @@
       (is (string= "de-de" (gtk:font-chooser-language chooser)))
       (is (equal '(:style :size) (gtk:font-chooser-level chooser)))
       #-windows
-      (is (string= "The quick brown fox jumps over the lazy dog."
+      (is (string= "Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich."
                    (gtk:font-chooser-preview-text chooser)))
       #+windows
       (is (string= "Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich."
@@ -123,4 +123,4 @@
 ;;;     gtk_font_chooser_set_font_map
 ;;;     gtk_font_chooser_get_font_map
 
-;;; --- 2023-9-13 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

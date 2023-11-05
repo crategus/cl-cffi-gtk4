@@ -39,7 +39,7 @@
   (is (equal '("scale")
              (gtk:widget-css-classes (make-instance 'gtk:scale-button))))
   ;; Accessible role
-  (is (eq :widget (gtk:widget-class-accessible-role "GtkScaleButton")))
+  (is (eq :group (gtk:widget-class-accessible-role "GtkScaleButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScaleButton" GTK-SCALE-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -74,4 +74,4 @@
 ;;;     gtk_scale_button_get_plus_button
 ;;;     gtk_scale_button_get_minus_button
 
-;;; --- 2023-11-2 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

@@ -18,24 +18,27 @@
           (glib:symbol-for-gtype "GtkAlign")))
   ;; Check the names
   (is (equal '("GTK_ALIGN_FILL" "GTK_ALIGN_START" "GTK_ALIGN_END"
-               "GTK_ALIGN_CENTER" "GTK_ALIGN_BASELINE")
+               "GTK_ALIGN_CENTER" "GTK_ALIGN_BASELINE_FILL" "GTK_ALIGN_BASELINE"
+               "GTK_ALIGN_BASELINE_CENTER")
              (list-enum-item-name "GtkAlign")))
   ;; Check the values
-  (is (equal '(0 1 2 3 4)
+  (is (equal '(0 1 2 3 4 4 5)
              (list-enum-item-value "GtkAlign")))
   ;; Check the nick names
-  (is (equal '("fill" "start" "end" "center" "baseline")
+  (is (equal '("fill" "start" "end" "center" "baseline-fill" "baseline"
+               "baseline-center")
              (list-enum-item-nick "GtkAlign")))
   ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAlign"
-                             GTK-ALIGN
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_align_get_type")
-                             (:FILL 0)
-                             (:START 1)
-                             (:END 2)
-                             (:CENTER 3)
-                             (:BASELINE 4))
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAlign" GTK-ALIGN
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER "gtk_align_get_type")
+                                     (:FILL 0)
+                                     (:START 1)
+                                     (:END 2)
+                                     (:CENTER 3)
+                                     (:BASELINE-FILL 4)
+                                     (:BASELINE 4)
+                                     (:BASELINE-CENTER 5))
              (gobject:get-g-type-definition "GtkAlign"))))
 
 ;;;     GtkArrowType
@@ -235,7 +238,7 @@
   (is (eq 'gtk:wrap-mode
           (glib:symbol-for-gtype "GtkWrapMode")))
   ;; Check the names
-  (is (equal '("GTK_WRAP_NONE" "GTK_WRAP_CHAR" "GTK_WRAP_WORD" 
+  (is (equal '("GTK_WRAP_NONE" "GTK_WRAP_CHAR" "GTK_WRAP_WORD"
                "GTK_WRAP_WORD_CHAR")
              (list-enum-item-name "GtkWrapMode")))
   ;; Check the values
@@ -247,8 +250,8 @@
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkWrapMode"
                                      GTK-WRAP-MODE
-                                     (:EXPORT T 
-                                      :TYPE-INITIALIZER 
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
                                       "gtk_wrap_mode_get_type")
                                      (:NONE 0)
                                      (:CHAR 1)
@@ -555,13 +558,14 @@
                "GTK_ACCESSIBLE_ROLE_TOOLTIP" "GTK_ACCESSIBLE_ROLE_TREE"
                "GTK_ACCESSIBLE_ROLE_TREE_GRID" "GTK_ACCESSIBLE_ROLE_TREE_ITEM"
                "GTK_ACCESSIBLE_ROLE_WIDGET" "GTK_ACCESSIBLE_ROLE_WINDOW"
-               "GTK_ACCESSIBLE_ROLE_TOGGLE_BUTTON")
+               "GTK_ACCESSIBLE_ROLE_TOGGLE_BUTTON"
+               "GTK_ACCESSIBLE_ROLE_APPLICATION")
              (list-enum-item-name "GtkAccessibleRole")))
   ;; Check the values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
                25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
                47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
-               69 70 71 72 73 74 75 76 77 78)
+               69 70 71 72 73 74 75 76 77 78 79)
              (list-enum-item-value "GtkAccessibleRole")))
   ;; Check the nick names
   (is (equal '("alert" "alert-dialog" "banner" "button" "caption" "cell"
@@ -577,7 +581,7 @@
                "slider" "spin-button" "status" "structure" "switch" "tab"
                "table" "tab-list" "tab-panel" "text-box" "time" "timer"
                "toolbar" "tooltip" "tree" "tree-grid" "tree-item" "widget"
-               "window" "toggle-button")
+               "window" "toggle-button" "application")
              (list-enum-item-nick "GtkAccessibleRole")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleRole"
@@ -662,7 +666,8 @@
                              (:TREE-ITEM 75)
                              (:WIDGET 76)
                              (:WINDOW 77)
-                             (:TOGGLE-BUTTON 78))
+                             (:TOGGLE-BUTTON 78)
+                             (:APPLICATION 79))
              (gobject:get-g-type-definition "GtkAccessibleRole"))))
 
 ;;;     GtkAccessibleState
@@ -672,7 +677,7 @@
   (is (g:type-is-enum "GtkAccessibleState"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleState")
-          (g:gtype (cffi:foreign-funcall "gtk_accessible_state_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_state_get_type"
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-state
@@ -685,14 +690,15 @@
                "GTK_ACCESSIBLE_STATE_HIDDEN"
                "GTK_ACCESSIBLE_STATE_INVALID"
                "GTK_ACCESSIBLE_STATE_PRESSED"
-               "GTK_ACCESSIBLE_STATE_SELECTED")
+               "GTK_ACCESSIBLE_STATE_SELECTED"
+               "GTK_ACCESSIBLE_STATE_VISITED")
              (list-enum-item-name "GtkAccessibleState")))
   ;; Check the values
-  (is (equal '(0 1 2 3 4 5 6 7)
+  (is (equal '(0 1 2 3 4 5 6 7 8)
              (list-enum-item-value "GtkAccessibleState")))
   ;; Check the nick names
   (is (equal '("busy" "checked" "disabled" "expanded" "hidden" "invalid"
-               "pressed" "selected")
+               "pressed" "selected" "visited")
              (list-enum-item-nick "GtkAccessibleState")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleState"
@@ -706,7 +712,8 @@
                              (:HIDDEN 4)
                              (:INVALID 5)
                              (:PRESSED 6)
-                             (:SELECTED 7))
+                             (:SELECTED 7)
+                             (:VISITED 8))
              (gobject:get-g-type-definition "GtkAccessibleState"))))
 
 ;;;     GtkAccessibleProperty
@@ -958,7 +965,7 @@
   (is (g:type-is-enum "GtkAccessibleSort"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkAccessibleSort")
-          (g:gtype (cffi:foreign-funcall "gtk_accessible_sort_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_sort_get_type"
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:accessible-sort

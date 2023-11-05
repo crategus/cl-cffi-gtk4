@@ -34,11 +34,11 @@
 
 ;;;     gtk_accelerator_get_label
 
-(test gtk-accelerator-name
-  (is (string= "Strg+A" (gtk:accelerator-label 97 :control-mask)))
-  (is (string= "Umschalt+Alt+F1"
+(test gtk-accelerator-label
+  (is (string= "Ctrl+A" (gtk:accelerator-label 97 :control-mask)))
+  (is (string= "Shift+Alt+F1"
                (gtk:accelerator-label 65470 '(:shift-mask :alt-mask))))
-  (is (string= "Strg+-" (gtk:accelerator-label 45 :control-mask))))
+  (is (string= "Ctrl+-" (gtk:accelerator-label 45 :control-mask))))
 
 ;;;     gtk_accelerator_parse_with_keycode
 ;;;     gtk_accelerator_name_with_keycode
@@ -51,4 +51,4 @@
                :META-MASK)
              (gtk:accelerator-default-mod-mask))))
 
-;;; --- 2023-8-4 ---------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

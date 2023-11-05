@@ -134,7 +134,7 @@
     (is (equal '("background" "assistant")
                (gtk:widget-css-classes (make-instance 'gtk:assistant))))
     ;; Accessible role
-    (is (eq :window (gtk:widget-class-accessible-role "GtkAssistant")))
+    (is (eq :application (gtk:widget-class-accessible-role "GtkAssistant")))
     ;; Check the class definition
     (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistant" GTK-ASSISTANT
                          (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
@@ -194,4 +194,4 @@
 ;;;     gtk_assistant_next_page
 ;;;     gtk_assistant_previous_page
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

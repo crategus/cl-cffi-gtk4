@@ -26,7 +26,7 @@
   (is (equal '()
              (list-interfaces "GtkFileLauncher")))
   ;; Check the properties
-  (is (equal '("file")
+  (is (equal '("always-ask" "file")
              (list-properties "GtkFileLauncher")))
   ;; Check the signals
   (is (equal '()
@@ -35,7 +35,9 @@
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileLauncher" GTK-FILE-LAUNCHER
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_file_launcher_get_type")
-                               ((FILE GTK-FILE-LAUNCHER-FILE "file" "GFile" T
+                               ((ALWAYS-ASK GTK-FILE-LAUNCHER-ALWAYS-ASK
+                                 "always-ask" "gboolean" T T)
+                                (FILE GTK-FILE-LAUNCHER-FILE "file" "GFile" T
                                  T)))
              (gobject:get-g-type-definition "GtkFileLauncher"))))
 
@@ -53,4 +55,4 @@
 ;;;     gtk_file_launcher_open_containing_folder
 ;;;     gtk_file_launcher_open_containing_folder_finish
 
-;;; --- 2023-9-2 ---------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------

@@ -24,7 +24,7 @@
   (is (equal '()
              (list-children "GtkFilterListModel")))
   ;; Check the interfaces
-  (is (equal '("GListModel")
+  (is (equal '("GListModel" "GtkSectionModel")
              (list-interfaces "GtkFilterListModel")))
   ;; Check the properties
   (is (equal '("filter" "incremental" "item-type" "model" "n-items" "pending")
@@ -36,7 +36,8 @@
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFilterListModel"
                                              GTK-FILTER-LIST-MODEL
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
-                                ("GListModel") :TYPE-INITIALIZER
+                                ("GListModel" "GtkSectionModel")
+                                :TYPE-INITIALIZER
                                 "gtk_filter_list_model_get_type")
                                ((FILTER GTK-FILTER-LIST-MODEL-FILTER "filter"
                                  "GtkFilter" T T)
@@ -120,4 +121,4 @@
                      (for object = (g:list-model-object model i))
                      (collect (gtk:string-object-string object)))))))
 
-;;; --- 2023-9-28 --------------------------------------------------------------
+;;; --- 2023-11-4 --------------------------------------------------------------
