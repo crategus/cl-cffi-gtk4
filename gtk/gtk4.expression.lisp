@@ -350,41 +350,45 @@ case PROP_EXPRESSION:
 ;;; gtk_expression_evaluate ()
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Check this implementation more carefully.
+;; FIXME: Check this implementation more carefully.
+;; We get a memory fault with a NIL argument for the OBJECT argument.
 
 (cffi:defcfun ("gtk_expression_evaluate" %expression-evaluate) :boolean
   (expression expression)
-  (this :pointer)
+  (object :pointer)
   (value (:pointer (:struct g:value))))
 
-(defun expression-evaluate (expression this)
+;; TODO: The C function needs a pointer, we retrieve the pointer from the
+;; instance. Can we pass the GObject to simplify the implementation!?
+
+(defun expression-evaluate (expression object)
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{#2023-11-4}
   @argument[expression]{a @class{gtk:expression} instance}
-  @argument[this]{a pointer to the argument for the evaluation}
+  @argument[object]{a @class{g:object} instance for the evaluation}
   @return{The @symbol{g:value} instance.}
   @begin{short}
     Evaluates the given @arg{expression} and on success returns the result as
-    @symbol{g:value} instance.
+    a @symbol{g:value} instance.
   @end{short}
   The GType of the returned value will be the type given by the
   @fun{gtk:expression-value-type} function.
 
   It is possible that expressions cannot be evaluated - for example when the
-  expression references objects that have been destroyed or set to @code{nil}.
-  In that case @code{nil} will be returned.
+  expression references objects that have been destroyed. In that case
+  @code{nil} will be returned.
   @see-class{gtk:expression}
   @see-symbol{g:value}
   @see-function{gtk:expression-value-type}"
   (cffi:with-foreign-object (value '(:struct g:value))
-    (if this
+    (if object
         (progn
-          (assert (g:type-is-object (g:type-from-instance this)))
-          (let ((this (gobject:object-pointer this)))
-            (when (%expression-evaluate expression this value)
-              (gobject:parse-g-value value))))
+          (assert (g:type-is-object (g:type-from-instance object)))
+          (let ((object (gobject:object-pointer object)))
+            (when (%expression-evaluate expression object value)
+              value)))
         (when (%expression-evaluate expression (cffi:null-pointer) value)
-          (gobject:parse-g-value value)))))
+          value))))
 
 (export 'expression-evaluate)
 
