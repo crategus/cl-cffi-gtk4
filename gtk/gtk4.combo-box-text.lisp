@@ -430,7 +430,7 @@
 ;;; gtk_combo_box_text_remove_all ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_combo_box_text_remove_all" %combo-box-text-remove-all) :void
+(cffi:defcfun ("gtk_combo_box_text_remove_all" combo-box-text-remove-all) :void
  #+liber-documentation
  "@version{#2023-11-4}
   @argument[combo]{a @class{gtk:combo-box-text} widget}
