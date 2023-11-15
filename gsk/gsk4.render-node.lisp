@@ -1464,31 +1464,23 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_container_node_new ()
-;;;
-;;; GskRenderNode *
-;;; gsk_container_node_new (GskRenderNode **children,
-;;;                         guint n_children);
-;;;
-;;; Creates a new GskRenderNode instance for holding the given children . The
-;;; new node will acquire a reference to each of the children.
-;;;
-;;; children
-;;;     The children of the node.
-;;;
-;;; n_children
-;;;     Number of children in the children array
-;;;
-;;; Returns
-;;;     the new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
-
-;; TODO: Finish the implementation
 
 (cffi:defcfun ("gsk_container_node_new" %container-node-new) render-node
   (children :pointer)
   (n-children :uint))
 
 (defun container-node-new (children)
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[children]{a list of @class{gsk:render-node} instances with the
+    children of the render node}
+  @return{The new @class{gsk:container-node} instance.}
+  @begin{short}
+    Creates a new container node for holding the given @arg{children}.
+  @end{short}
+  The new render node will acquire a reference to each of the children.
+  @see-class{gsk:container-node}"
   (let ((n-children (length children)))
     (cffi:with-foreign-object (children-ptr :pointer n-children)
       (iter (for i from 0 below n-children)
@@ -1500,45 +1492,34 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_container_node_get_n_children ()
-;;;
-;;; guint
-;;; gsk_container_node_get_n_children (GskRenderNode *node);
-;;;
-;;; Retrieves the number of direct children of node .
-;;;
-;;; node
-;;;     a container GskRenderNode.
-;;;
-;;; Returns
-;;;     the number of children of the GskRenderNode
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_container_node_get_n_children" container-node-n-children)
     :uint
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:container-node} instance}
+  @return{An unsigned integer with the number of children of @arg{node}.}
+  @begin{short}
+    Retrieves the number of direct children of @arg{node}.
+  @end{short}
+  @see-class{gsk:container-node}"
   (node render-node))
 
 (export 'container-node-n-children)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_container_node_get_child ()
-;;;
-;;; GskRenderNode *
-;;; gsk_container_node_get_child (GskRenderNode *node,
-;;;                               guint idx);
-;;;
-;;; Gets one of the children of container .
-;;;
-;;; node
-;;;     a container GskRenderNode.
-;;;
-;;; idx
-;;;     the position of the child to get
-;;;
-;;; Returns
-;;;     the idx 'th child of container .
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_container_node_get_child" container-node-child) render-node
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:container-node} instance}
+  @argument[index]{an unsigned integer with the position of the child to get}
+  @return{The @arg{index}'th child of @arg{node}.}
+  @short{Gets one of the children of the container node.}
+  @see-class{gsk:container-node}"
   (node render-node)
   (index :uint))
 
@@ -1566,29 +1547,24 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_cross_fade_node_new ()
-;;;
-;;; GskRenderNode *
-;;; gsk_cross_fade_node_new (GskRenderNode *start,
-;;;                          GskRenderNode *end,
-;;;                          float progress);
-;;;
-;;; Creates a GskRenderNode that will do a cross-fade between start and end .
-;;;
-;;; start
-;;;     The start node to be drawn
-;;;
-;;; end
-;;;     The node to be cross_fadeed onto the start node
-;;;
-;;; progress
-;;;     How far the fade has progressed from start to end. The value will be
-;;;     clamped to the range [0 ... 1]
-;;;
-;;; Returns
-;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cross_fade_node_new" cross-fade-new) render-node
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[start]{a @class{gsk:render-node} instance with the start render
+    node to be drawn}
+  @argument[end]{a @class{gsk:render-node} instance with the render node to be
+    cross-fadeed onto the start node}
+  @argument[progress]{a single float how far the fade has progressed from start
+    to end. The value will be clamped to the range [0 ... 1]}
+  @return{A new @class{gsk:cross-fade-node} instance.}
+  @begin{short}
+    Creates a render node that will do a cross-fade between @arg{start} and
+    @arg{end}.
+  @end{short}
+  @see-class{gsk:cross-fade-node}
+  @see-class{gsk:render-node}"
   (start render-node)
   (end render-node)
   (progress :float))
@@ -1597,63 +1573,54 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_cross_fade_node_get_start_child ()
-;;;
-;;; GskRenderNode *
-;;; gsk_cross_fade_node_get_start_child (GskRenderNode *node);
-;;;
-;;; Retrieves the child GskRenderNode at the beginning of the cross-fade.
-;;;
-;;; node
-;;;     a cross-fading GskRenderNode.
-;;;
-;;; Returns
-;;;     a GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cross_fade_node_get_start_child"
                cross-fade-node-start-child) render-node
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:cross-fade-node} instance}
+  @return{A @class{gsk:render-node} instance.}
+  @begin{short}
+    Retrieves the child render node at the beginning of the cross-fade.
+  @end{short}
+  @see-class{gsk:cross-fade-node}
+  @see-class{gsk:render-node}"
   (node render-node))
 
 (export 'cross-fade-start-child)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_cross_fade_node_get_end_child ()
-;;;
-;;; GskRenderNode *
-;;; gsk_cross_fade_node_get_end_child (GskRenderNode *node);
-;;;
-;;; Retrieves the child GskRenderNode at the end of the cross-fade.
-;;;
-;;; node
-;;;     a cross-fading GskRenderNode.
-;;;
-;;; Returns
-;;;     a GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cross_fade_node_get_end_child"
                cross-fade-node-end-child) render-node
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:cross-fade-node} instance}
+  @return{A @class{gsk:render-node} instance.}
+  @begin{short}
+    Retrieves the child render node at the end of the cross-fade.
+  @end{short}
+  @see-class{gsk:cross-fade-node}
+  @see-class{gsk:render-node}"
   (node render-node))
 
 (export 'cross-fade-node-end-child)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_cross_fade_node_get_progress ()
-;;;
-;;; float
-;;; gsk_cross_fade_node_get_progress (GskRenderNode *node);
-;;;
-;;; Retrieves the progress value of the cross fade.
-;;;
-;;; node
-;;;     a cross-fading GskRenderNode.
-;;;
-;;; Returns
-;;;     the progress value, between 0 and 1
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cross_fade_node_get_progress" cross-fade-node-progress)
     :float
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:cross-fade-node} instance}
+  @return{A single float with the progress value, between 0 and 1.}
+  @short{Retrieves the progress value of the cross fade node.}
+  @see-class{gsk:cross-fade-node}"
   (node render-node))
 
 (export 'cross-fade-node-progress)
