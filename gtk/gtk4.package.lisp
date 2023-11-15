@@ -428,9 +428,11 @@
       @about-class{list-view}
       @about-generic{list-view-enable-rubberband}
       @about-generic{list-view-factory}
+      @about-generic{list-view-header-factory}
       @about-generic{list-view-model}
       @about-generic{list-view-show-separators}
       @about-generic{list-view-single-click-activate}
+      @about-generic{list-view-tab-behavior}
       @about-function{list-view-new}
       @about-function{list-view-scroll-to}
     @end{subsection}
