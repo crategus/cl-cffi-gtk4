@@ -146,31 +146,7 @@
   @see-class{gtk:column-view}")
 
 ;;; ----------------------------------------------------------------------------
-;;;Enumeration
-;;;GtkListScrollFlags
-;;;since: 4.12
-
-;;;[−]
-;;;Declaration
-;;;flags Gtk.ListScrollFlags
-;;;[−]
-;;;Description
-;;;[src]
-;;;List of actions to perform when scrolling to items in a list widget.
-
-;;;Available since: 4.12
-
-;;;[−]
-;;;Members
-;;;Name	Description
-;;;GTK_LIST_SCROLL_NONE	
-;;;Don’t do anything extra.
-
-;;;GTK_LIST_SCROLL_FOCUS	
-;;;Focus the target item.
-
-;;;GTK_LIST_SCROLL_SELECT	
-;;;Select the target item and unselect all other items.
+;;; GtkListScrollFlags
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-12
@@ -181,6 +157,29 @@
   (:focus #.(ash 1 0))
   (:select #.(ash 1 1)))
 
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-symbol 'list-scroll-flags)
+      "GFlags"
+      (liber:symbol-documentation 'list-scroll-flags)
+ "@version{#2023-11-5}
+  @begin{short}
+    List of actions to perform when scrolling to items in a list widget.
+  @end{short}
+  @begin{pre}
+(gobject:define-g-flags \"GtkListScrollFlags\" list-scroll-flags
+  (:export t
+   :type-initializer \"gtk_list_scroll_flags_get_type\")
+  (:none 0)
+  (:focus #.(ash 1 0))
+  (:select #.(ash 1 1)))
+  @end{pre}
+  @begin[code]{table}
+    @entry[:none]{Do not do anything extra.}
+    @entry[:focus]{Focus the target item.}
+    @entry[:select]{Select the target item and unselect all other items.}
+  @end{table}
+  Since 4.12
+  @see-class{gtk:list-view}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkListBase
@@ -466,6 +465,30 @@ lambda (listview position)    :run-last
   (Read / Write) @br{}
   Factory for creating header widgets. Since 4.12")
 
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'list-view-header-factory)
+      "Accessor"
+      (documentation 'list-view-header-factory 'function)
+ "@version{#2023-11-5}
+  @syntax[]{(gtk:list-view-header-factory object) => factory}
+  @syntax[]{(setf (gtk:list-view-header-factory object) factory)}
+  @argument[object]{a @class{gtk:list-view} object}
+  @argument[factory]{a @class{gtk:list-item-factory} object to use}
+  @begin{short}
+    Accessor of the @slot[gtk:list-view]{header-factory} slot of the
+    @class{gtk:list-view} class.
+  @end{short}
+  The @fun{gtk:list-view-header-factory} function gets the factory that is
+  currently used to populate section headers. The
+  @setf{gtk:list-view-header-factory} function sets the factory to use for
+  populating the @class{gtk:list-header} objects used in section headers. If
+  this factory is set to @code{nil}, the list will not show section headers.
+
+  Since 4.12
+  @see-class{gtk:list-view}
+  @see-class{gtk:list-item-factory}
+  @see-class{gtk:list-header}")
+
 ;;; --- list-view-model --------------------------------------------------------
 
 #+liber-documentation
@@ -558,6 +581,27 @@ lambda (listview position)    :run-last
   Behavior of the @kbd{Tab} key. @br{}
   Default value: @code{:all}")
 
+#+(and gtk-4-12 liber-documentation)
+(setf (liber:alias-for-function 'list-view-tab-behavior)
+      "Accessor"
+      (documentation 'list-view-tab-behavior 'function)
+ "@version{#2023-11-5}
+  @syntax[]{(gtk:list-view-tab-behavior object) => setting}
+  @syntax[]{(setf (gtk:list-view-tab-behavior object) setting)}
+  @argument[object]{a @class{gtk:list-view} object}
+  @argument[setting]{a @symbol{gtk:list-tab-behavior} value}
+  @begin{short}
+    Accessor of the @slot[gtk:list-view]{tab-behavior} slot of the
+    @class{gtk:list-view} class.
+  @end{short}
+  The @fun{gtk:list-view-tab-behavior} function gets the behavior set for the
+  @kbd{Tab} key. The @setf{gtk:list-view-tab-behavior} function sets the
+  behavior of the @kbd{Tab} and @kbd{Shift+Tab} keys.
+
+  Since 4.12
+  @see-class{gtk:list-view}
+  @see-symbol{gtk:list-tab-behavior}")
+
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_list_view_new ()
 ;;; ----------------------------------------------------------------------------
@@ -586,15 +630,28 @@ lambda (listview position)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_list_view_scroll_to
-;;;
-;;; Scrolls to the item at the given position and performs the actions
-;;; specified in flags.
-;;;
-;;; Since 4.12
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-12
 (cffi:defcfun ("gtk_list_view_scroll_to" list-view-scroll-to) :void
+ #+liber-documentation
+ "@version{#2023-11-5}
+  @argument[listview]{a @class{gtk:list-view} widget}
+  @argument[pos]{an unsigned integer with the position of the item}
+  @argument[flags]{a @symbol{gtk:list-scroll-flags} value with the actions
+    to perform}
+  @argument[scroll]{a @class{gtk:scroll-info} instance with the details of how
+    to perform the scroll operation or @code{nil} to scroll into the list view.}
+  @begin{short}
+    Scrolls to the item at the given position and performs the actions
+    specified in flags.
+  @end{short}
+  This function works no matter if the list view is shown or focused. If it
+  is not, then the changes will take effect once that happens.
+
+  Since 4.12
+  @see-class{gtk:list-view}
+  @see-class{gtk:scroll-info}"
   (listview (g:object list-view))
   (pos :uint)
   (flags list-scroll-flags)
