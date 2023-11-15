@@ -2,7 +2,7 @@
 ;;; gdk4.content-formats.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -91,13 +91,13 @@
 (setf (liber:alias-for-class 'content-formats)
       "GBoxed"
       (documentation 'content-formats 'type)
- "@version{2023-8-3}
+ "@version{2023-11-5}
   @begin{short}
-    The @sym{gdk:content-formats} structure is used to advertise and negotiate
+    The @class{gdk:content-formats} structure is used to advertise and negotiate
     the format of content.
   @end{short}
-  You will encounter @sym{gdk:content-formats} instances when interacting with
-  objects controlling operations that pass data between different widgets,
+  You will encounter @class{gdk:content-formats} instances when interacting
+  with objects controlling operations that pass data between different widgets,
   window or application, like @class{gdk:drag}, @class{gdk:drop},
   @class{gdk:clipboard} or @class{gdk:content-provider} objects.
 
@@ -108,7 +108,7 @@
   transform between the two forms, the @class{gdk:content-serializer} and
   @class{gdk:content-deserializer} objects are used.
 
-  A @sym{gdk:content-formats} instance describes a set of possible formats
+  A @class{gdk:content-formats} instance describes a set of possible formats
   content can be exchanged in. It is assumed that this set is ordered. GTypes
   are more important than mime types. Order between different GTypes or mime
   types is the order they were added in, most important first. Functions that
@@ -121,9 +121,9 @@
   exists. It will print a comma-separated list of formats from most important
   to least important.
 
-  The @sym{gdk:content-formats} structure is an immutable structure. After
+  The @class{gdk:content-formats} structure is an immutable structure. After
   creation, you cannot change the types it represents. Instead, new
-  @sym{gdk:content-formats} instances have to be created. The
+  @class{gdk:content-formats} instances have to be created. The
   @class{gdk:content-formats-builder} structure is meant to help in this
   endeavor.
   @see-constructor{gdk:content-formats-new}
@@ -418,12 +418,12 @@
 (cffi:defcfun ("gdk_content_formats_contain_gtype"
                content-formats-contain-gtype) :boolean
  #+liber-documentation
- "@version{2023-7-27}
+ "@version{2023-11-5}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @argument[gtype]{a @class{g:type-t} type}
   @return{@em{True} if given @arg{gtype} was found.}
   @short{Checks if a given @arg{gtype} is part of the given @arg{formats}.}
-  @see-class{gdk:content-formats-contain-gtype}
+  @see-class{gdk:content-formats}
   @see-class{g:type-t}"
   (formats (g:boxed content-formats))
   (gype g:type-t))
@@ -437,12 +437,12 @@
 (cffi:defcfun ("gdk_content_formats_contain_mime_type"
                content-formats-contain-mime-type) :boolean
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{#2023-11-5}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @argument[mime-type]{a string with the mime type to search for}
   @return{@em{True} if given @arg{mime-type} was found.}
   @short{Checks if a given mime type is part of the given @arg{formats}.}
-  @see-class{gdk:content-formats-contain-gtype}"
+  @see-class{gdk:content-formats}"
   (formats (g:boxed content-formats))
   (mime-type :string))
 

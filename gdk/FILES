@@ -44,7 +44,7 @@ List of files for the GDK 4 Library
 
  Clipbord, Drag and Drop
 
-  gdk4.content-formats.lisp        GdkContentFormats                  GDK 4.10 &
+  gdk4.content-formats.lisp        GdkContentFormats                  GDK 4.12 &
   gdk4.content-provider.lisp       GdkContentProvider                 GDK 4.10 &
   gdk4.content-serializer.lisp     GdkContentSerializer               GDK 4.0  +
   gdk4.content-deserializer.lisp   GdkContentDeserializer             GDK 4.0  +
