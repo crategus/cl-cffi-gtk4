@@ -98,7 +98,7 @@
 (setf (liber:alias-for-class 'expression-watch)
       "GBoxed"
       (documentation 'expression-watch 'type)
- "@version{#2023-9-14}
+ "@version{2023-11-6}
   @begin{short}
     An opaque structure representing a watched @class{gtk:expression} instance.
   @end{short}
@@ -132,14 +132,11 @@
     (gvalue (glib:gtype (eql (glib:gtype "GtkExpression"))) value)
   (setf (value-expression gvalue) value))
 
-;(defmethod glib:pointer ((object expression))
-;  (boxed-opaque-pointer object))
-
 #+liber-documentation
 (setf (liber:alias-for-class 'expression)
       "GtkExpression"
       (documentation 'expression 'type)
- "@version{#2023-8-11}
+ "@version{2023-11-6}
   @begin{short}
     The @type{gtk:expression} type provides a way to describe references to
     values.
@@ -172,10 +169,10 @@ color_expr = gtk_property_expression_new (GTK_TYPE_LIST_ITEM,
 expression = gtk_property_expression_new (GTK_TYPE_COLOR,
                                           color_expr, \"name\");
   @end{pre}
-  when evaluated with this being a @class{gtk:list-item} object, it will obtain
-  the @slot[gtk:list-item]{item} property from the @class{gtk:list-item} object,
-  and then obtain the @code{name} property from the resulting object (which is
-  assumed to be of type GTK_TYPE_COLOR).
+  when evaluated with @code{this} being a @class{gtk:list-item} object, it will
+  obtain the @slot[gtk:list-item]{item} property from the @class{gtk:list-item}
+  object, and then obtain the @code{name} property from the resulting object
+  (which is assumed to be of type GTK_TYPE_COLOR).
 
   A more concise way to describe this would be
   @begin{pre}
@@ -219,7 +216,7 @@ obj_props[PROP_EXPRESSION] =
   @fun{gtk:value-get-expression} function, to retrieve the stored
   @class{gtk:expression} instance from the @code{GValue} container, and
   the @fun{gtk:value-set-expression}, to store the
-  @class{gtk:expression} instance into the @code{GValue};  for instance:
+  @class{gtk:expression} instance into the @code{GValue}; for instance:
   @begin{pre}
 // in set_property()...
 case PROP_EXPRESSION:
@@ -272,7 +269,7 @@ case PROP_EXPRESSION:
 
 (cffi:defcfun ("gtk_expression_ref" expression-ref) expression
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2023-11-6}
   @argument[expression]{a @class{gtk:expression} instance}
   @return{The @class{gtk:expression} instance with an additional reference.}
   @begin{short}
@@ -289,7 +286,7 @@ case PROP_EXPRESSION:
 
 (cffi:defcfun ("gtk_expression_unref" expression-unref) :void
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2023-11-6}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
     Releases a reference on the given @class{gtk:expression} instance.
@@ -305,13 +302,12 @@ case PROP_EXPRESSION:
 ;;; gtk_expression_get_value_type ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_expression_get_value_type" expression-value-type)
-    g:type-t
+(cffi:defcfun ("gtk_expression_get_value_type" expression-value-type) g:type-t
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2023-11-6}
   @argument[expression]{a @class{gtk:expression} instance}
   @return{The @class{g:type-t} type returned from the
-    @fun{gtk:expression-evaluate} function.}
+  @fun{gtk:expression-evaluate} function.}
   @begin{short}
     Gets the GType that this expression evaluates to.
   @end{short}
@@ -329,16 +325,16 @@ case PROP_EXPRESSION:
 
 (cffi:defcfun ("gtk_expression_is_static" expression-is-static) :boolean
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2023-11-6}
   @argument[expresson]{a @class{gtk:expression} instance}
-  @return{@em{True} if the expression is static.}
+  @return{@em{True} if @arg{expression} is static.}
   @begin{short}
     Checks if the expression is static.
   @end{short}
   A static expression will never change its result when the
   @fun{gtk:expression-evaluate} function is called on it with the same
-  arguments. That means a call to the @fun{gtk:expression-watch} funtion is not
-  necessary because it will never trigger a notify.
+  arguments. That means a call to the @fun{gtk:expression-watch} function is
+  not necessary because it will never trigger a notify.
   @see-class{gtk:expression}
   @see-function{gtk:expression-evaluate}
   @see-function{gtk:expression-watch}"
@@ -350,47 +346,56 @@ case PROP_EXPRESSION:
 ;;; gtk_expression_evaluate ()
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: Check this implementation more carefully.
-;; We get a memory fault with a NIL argument for the OBJECT argument.
-
 (cffi:defcfun ("gtk_expression_evaluate" %expression-evaluate) :boolean
   (expression expression)
   (object :pointer)
   (value (:pointer (:struct g:value))))
 
-;; TODO: The C function needs a pointer, we retrieve the pointer from the
-;; instance. Can we pass the GObject to simplify the implementation!?
-
-(defun expression-evaluate (expression object)
+(defun expression-evaluate (expression object value)
  #+liber-documentation
- "@version{#2023-11-4}
+ "@version{2023-11-6}
   @argument[expression]{a @class{gtk:expression} instance}
   @argument[object]{a @class{g:object} instance for the evaluation}
-  @return{The @symbol{g:value} instance.}
+  @argument[gvalue]{an initialized @symbol{g:value} instance}
+  @return{@em{True} if the expression could be evaluated.}
   @begin{short}
-    Evaluates the given @arg{expression} and on success returns the result as
-    a @symbol{g:value} instance.
+    Evaluates the given @arg{expression} and on success stores the result as
+    a @symbol{g:value} instance in @arg{gvalue}.
   @end{short}
   The GType of the returned value will be the type given by the
   @fun{gtk:expression-value-type} function.
 
   It is possible that expressions cannot be evaluated - for example when the
   expression references objects that have been destroyed. In that case
-  @code{nil} will be returned.
+  @em{false} will be returned.
   @see-class{gtk:expression}
   @see-symbol{g:value}
   @see-function{gtk:expression-value-type}"
-  (cffi:with-foreign-object (value '(:struct g:value))
+  (if object
+      (progn
+        (assert (g:type-is-object (g:type-from-instance object)))
+        (let ((object (gobject:object-pointer object)))
+          (%expression-evaluate expression object value)))
+      (%expression-evaluate expression (cffi:null-pointer) value)))
+
+(export 'expression-evaluate)
+
+;; TODO: A Lisp extension which returns the value of the g:value instance.
+;; Document the function.
+
+(defun expression-evaluate-value (expression object)
+  (cffi:with-foreign-object (gvalue '(:struct g:value))
+    (g:value-init gvalue)
     (if object
         (progn
           (assert (g:type-is-object (g:type-from-instance object)))
           (let ((object (gobject:object-pointer object)))
-            (when (%expression-evaluate expression object value)
-              value)))
-        (when (%expression-evaluate expression (cffi:null-pointer) value)
-          value))))
+            (when (%expression-evaluate expression object gvalue)
+              (g:value-get gvalue))))
+        (when (%expression-evaluate expression (cffi:null-pointer) gvalue)
+          (g:value-get gvalue)))))
 
-(export 'expression-evaluate)
+(export 'expression-evaluate-value)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_expression_bind ()
@@ -530,6 +535,8 @@ lambda ()
 ;;; gtk_expression_watch_evaluate ()
 ;;; ----------------------------------------------------------------------------
 
+;; FIXME: This implementation is wrong.
+
 (cffi:defcfun ("gtk_expression_watch_evaluate" %expression-watch-evaluate)
     :boolean
   (watch (g:boxed expression-watch))
@@ -583,21 +590,19 @@ lambda ()
 
 (defun property-expression-new (gtype expression property)
  #+liber-documentation
- "@version{#2023-9-15}
-  @argument[gtype]{a @class{g:type-t} type to expect for the this type}
+ "@version{2023-11-6}
+  @argument[gtype]{a @class{g:type-t} type to expect for the @arg{this} type}
   @argument[expression]{a @class{gtk:expression} instance to evaluate to get
     the object to query or @code{nil} to query the @arg{this} object}
   @argument[property]{a string with the name of the property}
   @return{A new @class{gtk:expression} instance.}
   @begin{short}
     Creates an expression that looks up a property via the given expression or
-    the @arg{this} argument when expression is @code{nil}.
+    the @arg{this} argument when @arg{expression} is @code{nil}.
   @end{short}
   If the resulting object conforms to @arg{gtype}, its property named
   @arg{property} will be queried. Otherwise, this expression's evaluation will
-  fail.
-
-  The given @arg{gtype} must have a property with @arg{property}.
+  fail. The given @arg{gtype} must have a property with @arg{property}.
   @see-class{gtk:expression}"
   (let ((expression (if expression expression (cffi:null-pointer))))
     (%property-expression-new gtype expression property)))
@@ -609,11 +614,15 @@ lambda ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_property_expression_new_for_pspec"
-               property-expression-new-for-pspec) expression
+               %property-expression-new-for-pspec) expression
+  (expression expression)
+  (pspec (:pointer (:struct g:param-spec))))
+
+(defun property-expression-new-for-pspec (expression pspec)
  #+liber-documentation
- "@version{2023-9-15}
-  @argument[expression]{a @class{gtk:expression} instance to evaluate to get the
-    object to query or @code{nil} to query the @arg{this} object}
+ "@version{2023-11-6}
+  @argument[expression]{a @class{gtk:expression} instance to evaluate to get
+    the object to query or @code{nil} to query the @arg{this} object}
   @argument[pspec]{a @symbol{g:param-spec} instance for the property to query}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}
@@ -625,8 +634,8 @@ lambda ()
   fail.
   @see-class{gtk:expression}
   @see-symbol{g:param-spec}"
-  (expression expression)
-  (pspec (:pointer (:struct g:param-spec))))
+  (let ((expression (if expression expression (cffi:null-pointer))))
+    (%property-expression-new-for-pspec expression pspec)))
 
 (export 'property-expression-new-for-pspec)
 
@@ -635,16 +644,20 @@ lambda ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_property_expression_get_expression"
-               property-expression-expression) expression
+               %property-expression-expression) expression
+  (expression expression))
+
+(defun property-expression-expression (expression)
  #+liber-documentation
- "@version{#2023-9-15}
+ "@version{2023-11-6}
   @argument[expression]{a property @class{gtk:expression} instance}
-  @return{The object @class{gtk:expression} instance}
+  @return{The object @class{gtk:expression} instance.}
   @begin{short}
     Gets the expression specifying the object of a property expression.
   @end{short}
   @see-class{gtk:expression}"
-  (expression expression))
+  (let ((value (%property-expression-expression expression)))
+    (when (not (cffi:null-pointer-p value)) value)))
 
 (export 'property-expression-expression)
 
@@ -655,7 +668,7 @@ lambda ()
 (cffi:defcfun ("gtk_property_expression_get_pspec" property-expression-pspec)
     (:pointer (:struct g:param-spec))
  #+liber-documentation
- "@version{#2023-9-15}
+ "@version{2023-11-6}
   @argument[expression]{a @class{gtk:expression} instance}
   @return{The @symbol{g:param-spec} instance.}
   @begin{short}
@@ -670,22 +683,31 @@ lambda ()
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constant_expression_new ()
-;;;
-;;; GtkExpression *
-;;; gtk_constant_expression_new (GType value_type,
-;;;                              ...);
-;;;
-;;; Creates a GtkExpression that evaluates to the object given by the arguments.
-;;;
-;;; value_type :
-;;;     The type of the object
-;;;
-;;; ... :
-;;;     arguments to create the object from
-;;;
-;;; Returns
-;;;     a new GtkExpression
 ;;; ----------------------------------------------------------------------------
+
+(defun constant-expression-new (gtype value)
+ #+liber-documentation
+ "@version{2023-11-7}
+  @argument[gtype]{a @symbol{g:type-t} type}
+  @argument[value]{a value corresponding to @arg{gtype}}
+  @return{A new @class{gtk:expression} instance.}
+  @begin{short}
+    Creates an expression that evaluates to the object given by the arguments.
+  @end{short}
+  @begin[Example]{dictionary}
+    @begin{pre}
+(let ((expr (gtk:constant-expression-new \"gint\" 100)))
+  (prog1
+    (g:value-int (gtk:constant-expression-value expr))
+    (gtk:expression-unref expr)))
+=> 100
+    @end{pre}
+  @end{dictionary}
+  @see-class{gtk:expression}"
+  (gobject:with-g-value (gvalue gtype value)
+    (constant-expression-new-for-value gvalue)))
+
+(export 'constant-expression-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_constant_expression_new_for_value ()
@@ -694,7 +716,7 @@ lambda ()
 (cffi:defcfun ("gtk_constant_expression_new_for_value"
                constant-expression-new-for-value) expression
  #+liber-documentation
- "@version{#2023-9-15}
+ "@version{2023-11-6}
   @argument[value]{a @symbol{g:value} instance}
   @return{A new @class{gtk:expression} instance.}
   @begin{short}
@@ -713,7 +735,7 @@ lambda ()
 (cffi:defcfun ("gtk_constant_expression_get_value" constant-expression-value)
     (:pointer (:struct g:value))
  #+liber-documentation
- "@version{#2023-9-15}
+ "@version{2023-11-6}
   @argument[expression]{a constant @class{gtk:expression} instance}
   @return{The @symbol{g:value} value.}
   @begin{short}
@@ -730,7 +752,7 @@ lambda ()
 
 (cffi:defcfun ("gtk_object_expression_new" object-expression-new) expression
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2023-11-6}
   @argument[object]{a @class{g:object} object to watch}
   @return{The new @class{gtk:expression} instance.}
   @begin{short}
@@ -754,7 +776,7 @@ lambda ()
 (cffi:defcfun ("gtk_object-expression_get_object" object-expression-object)
     g:object
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2023-11-6}
   @argument[expression]{a @class{gtk:expression} instance for an object}
   @return{The @class{g:object} object, or @code{nil}.}
   @short{Gets the object that the expression evaluates to.}
@@ -860,7 +882,7 @@ lambda ()
 
 (cffi:defcfun ("gtk_value_get_expression" value-expression) expression
  #+liber-documentation
- "@version{#2023-9-14}
+ "@version{2023-11-6}
   @syntax[]{(gtk:value-expression value) => expression}
   @syntax[]{(setf (gtk:value-expression value) expression)}
   @argument[value]{a @symbol{g:value} instance initialized with the
