@@ -7,84 +7,33 @@
 
 (in-package :gdk)
 
-#|
-GdkPaintable #S(VTABLE-DESCRIPTION
-                :TYPE-NAME GdkPaintable
-                :CSTRUCT-NAME PAINTABLE-VTABLE
-                :METHODS (#S(VTABLE-METHOD-INFO
-                             :SLOT-NAME GET-FLAGS
-                             :NAME PAINTABLE-GET-FLAGS-IMPL
-                             :RETURN-TYPE PAINTABLE-FLAGS
-                             :ARGS ((PAINTABLE (OBJECT PAINTABLE)))
-                             :CALLBACK-NAME PAINTABLE-GET-FLAGS-CALLBACK
-                             :IMPL-CALL NIL)
-                          #S(VTABLE-METHOD-INFO
-                             :SLOT-NAME GET-INTRINSIC-HEIGHT
-                             :NAME PAINTABLE-GET-INTRINSIC-HEIGHT-IMPL
-                             :RETURN-TYPE INT
-                             :ARGS ((PAINTABLE (OBJECT PAINTABLE)))
-                             :CALLBACK-NAME PAINTABLE-GET-INTRINSIC-HEIGHT-CALLBACK
-                             :IMPL-CALL NIL)))
-
-in GLIB-DEFCALLBACK (DEFCALLBACK PAINTABLE-GET-FLAGS-CALLBACK
-                        PAINTABLE-FLAGS
-                        ((PAINTABLE (OBJECT PAINTABLE)))
-                      (RESTART-CASE (PROGN
-                                     (FORMAT T ~&in IMPL-CALL~%)
-                                     (PAINTABLE-GET-FLAGS-IMPL PAINTABLE))
-                        (RETURN-FROM-INTERFACE-METHOD-IMPLEMENTATION (V)
-                         INTERACTIVE (LAMBDA () (LIST (EVAL (READ)))) V)))
-
-in GLIB-DEFCALLBACK (DEFCALLBACK PAINTABLE-GET-INTRINSIC-HEIGHT-CALLBACK
-                        INT
-                        ((PAINTABLE (OBJECT PAINTABLE)))
-                      (RESTART-CASE (PAINTABLE-GET-INTRINSIC-HEIGHT-IMPL
-                                     PAINTABLE)
-                        (RETURN-FROM-INTERFACE-METHOD-IMPLEMENTATION (V)
-                         INTERACTIVE (LAMBDA () (LIST (EVAL (READ)))) V)))
-|#
+;;; Subclass of the GObject class and the GdkPaintable interface
 
 #+nil
-(gobject::define-vtable ("GdkPaintable" paintable)
-  (:skip parent-instance (:struct g:type-interface))
-  ;; Methods of the interface
-  (:skip snapshot :pointer)
-  (:skip get-current-image :pointer)
-  (get-flags (paintable-flags (paintable g:object))
-             :impl-call
-             ((paintable)
-              (paintable-get-flags-impl paintable)))
-  (get-intrinsic-width (:int (paintable (g:object paintable))))
-  (get-intrinsic-height (:int (paintable g:object)))
-  (:skip get-intrinsic-aspect-ratio :pointer))
+(gobject:define-g-object-subclass "GdkNuclearIcon" nuclear-icon
+  (:superclass g:object
+   :export t
+   :interfaces ("GdkPaintable"))
+  ((rotation
+    nuclear-icon-rotation
+    "rotation" "gdouble" t t)))
 
-(defclass nuclear-icon (paintable)
-  ((rotation :initform 0.0d0
-             :accessor nuclear-icon-rotation))
-  (:gname . "GdkNuclearIcon")
-  (:metaclass gobject:gobject-class))
+;;; Define the virtual methodes for GdkNuclearIcon
 
-(gobject::register-object-type-implementation "GdkNuclearIcon"  ; name
-                                              nuclear-icon      ; class
-                                              "GObject"         ; parent
-                                              ("GdkPaintable")  ; interfaces
-                                              nil)              ; properties
-
-(defmethod initialize-instance :after ((obj nuclear-icon) &rest initargs)
-  ;; Set the slot values from initargs
-  (iter (for (slot value) on initargs by #'cddr)
-        (cond ((eq slot :rotation)
-               (setf (nuclear-icon-rotation obj) value)))))
-
+#+nil
 (defmethod paintable-get-flags-impl ((paintable nuclear-icon))
   (list :static-contents :static-size))
 
+#+nil
 (defmethod paintable-get-intrinsic-width-impl ((paintable nuclear-icon))
   36)
 
+#+nil
 (defmethod paintable-get-intrinsic-height-impl ((paintable nuclear-icon))
   12)
 
+;; To get access to the symbols in the same file below.
+#+nil
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (export 'nuclear-icon)
   (export 'nuclear-icon-rotation))
@@ -93,13 +42,14 @@ in GLIB-DEFCALLBACK (DEFCALLBACK PAINTABLE-GET-INTRINSIC-HEIGHT-CALLBACK
 
 (in-package :gtk-test)
 
+#+nil
 (test gdk-nuclear-icon-class
   ;; Type check
   (is (g:type-is-object "GdkNuclearIcon"))
   ;; Check the registered name
   (is (eq 'gdk:nuclear-icon
           (glib:symbol-for-gtype "GdkNuclearIcon")))
-  ;; Check the type initializer
+  ;; We have no type initializer
 ;  (is (eq (g:gtype "GObject")
 ;          (g:gtype (cffi:foreign-funcall "g_object_get_type" :size))))
   ;; Check the parent
@@ -112,7 +62,7 @@ in GLIB-DEFCALLBACK (DEFCALLBACK PAINTABLE-GET-INTRINSIC-HEIGHT-CALLBACK
   (is (equal '("GdkPaintable")
              (list-interfaces "GdkNuclearIcon")))
   ;; Check the properties
-  (is (equal '()
+  (is (equal '("rotation")
              (list-properties "GdkNuclearIcon")))
   ;; Check the signals
   (is (equal '()
@@ -121,10 +71,20 @@ in GLIB-DEFCALLBACK (DEFCALLBACK PAINTABLE-GET-INTRINSIC-HEIGHT-CALLBACK
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkNuclearIcon" GDK-NUCLEAR-ICON
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                                 ("GdkPaintable"))
-                               NIL)
+                               ((ROTATION GDK-NUCLEAR-ICON-ROTATION "rotation"
+                                 "gdouble" T T)))
              (gobject:get-g-type-definition "GdkNuclearIcon"))))
 
-(test gdk-nuclear-icon-new
+;; Some tests which demonstrate the functionality of the new Lisp subclass
+
+;; Check initialization of a default value for the slot :rotation
+#+nil
+(test gdk-nuclear-icon-new.1
+  (let ((icon (make-instance 'gdk:nuclear-icon)))
+    (is (= 0.0d0 (gdk:nuclear-icon-rotation icon)))))
+
+#+nil
+(test gdk-nuclear-icon-new.2
   (let ((icon (make-instance 'gdk:nuclear-icon
                              :rotation 90)))
     ;; Check initialization and the accessor
@@ -135,7 +95,36 @@ in GLIB-DEFCALLBACK (DEFCALLBACK PAINTABLE-GET-INTRINSIC-HEIGHT-CALLBACK
     (is (equal '(:static-size :static-contents) (gdk:paintable-flags icon)))
     (is (= 36 (gdk:paintable-intrinsic-width icon)))
     (is (= 12 (gdk:paintable-intrinsic-height icon)))
-    (is (= 3.0d0 (gdk:paintable-intrinsic-aspect-ratio icon)))
-))
+    (is (= 3.0d0 (gdk:paintable-intrinsic-aspect-ratio icon)))))
 
-;;; --- 2023-10-28 -------------------------------------------------------------
+#+nil
+(test gdk-nuclear-icon-new.3
+  (let ((icon (make-instance 'gdk:nuclear-icon
+                             :rotation 90)))
+    ;; Check the g:object-property accessor
+    (is (=  90 (g:object-property icon "rotation")))
+    (is (= 180 (setf (g:object-property icon "rotation") 180)))
+    (is (= 180 (g:object-property icon "rotation")))))
+
+#+nil
+(test gdk-nuclear-icon-new.4
+  (let ((icon (g:object-new "GdkNuclearIcon" :rotation 90)))
+    ;; Check the g:object-property accessor
+    (is (=  90 (g:object-property icon "rotation")))
+    (is (= 180 (setf (g:object-property icon "rotation") 180)))
+    (is (= 180 (g:object-property icon "rotation")))))
+
+#+nil
+(test gdk-nuclear-icon-notify-signal
+  (let* ((message nil)
+         (icon (make-instance 'gdk:nuclear-icon :rotation 90))
+         (handler (g:signal-connect icon "notify::rotation"
+                                    (lambda (object pspec)
+                                      (declare (ignore object pspec))
+                                      (setf message
+                                            "Signal notify::rotation")))))
+    (is (integerp handler))
+    (is-false (g:object-notify icon "rotation"))
+    (is (string= "Signal notify::rotation" message))))
+
+;;; --- 2023-11-8 --------------------------------------------------------------

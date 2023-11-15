@@ -74,6 +74,7 @@
     (is (eq :center (gtk:center-box-baseline-position box)))
     (is-false (gtk:center-box-center-widget box))
     (is-false (gtk:center-box-end-widget box))
+    #+gtk-4-12
     (is-true (gtk:center-box-shrink-center-last box))
     (is-false (gtk:center-box-start-widget box))))
 
