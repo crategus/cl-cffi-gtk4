@@ -21,6 +21,7 @@
 ;; Initialize the paintable interface. This way we turn our clocks
 ;; into objects that can be drawn. There are more functions to this
 ;; interface to define desired size, but this is enough.
+#+nil
 (defclass clock (gdk:paintable)
   (;; Initialize with the UTC timezone
    (timezone :initform local-time:+utc-zone+
@@ -31,17 +32,30 @@
   (:gname . "GtkClock")
   (:metaclass gobject:gobject-class))
 
+(gobject:define-g-object-subclass "GtkClock" clock
+  (:superclass g:object
+   :export t
+   :interfaces ("GdkPaintable"))
+  ((timezone
+    clock-timezone
+    "timezone" "guint" t t)
+   (location
+    clock-location
+    "location" "gchararray" t t)))
+
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (export 'clock)
   (export 'clock-location)
   (export 'clock-timezone))
 
+#+nil
 (gobject:register-object-type-implementation "GtkClock"        ; name
                                              clock             ; class
                                              "GObject"         ; parent
                                              ("GdkPaintable")  ; interfaces
                                              nil)              ; properties
 
+#+nil
 (defmethod initialize-instance :after ((obj clock) &rest initargs)
   ;; Set the slot values from initargs
   (iter (for (slot value) on initargs by #'cddr)
@@ -100,20 +114,20 @@
         (graphene:with-graphene-rect (rect -2 -23 4 25)
           (gsk:rounded-rect-init-from-rect outline rect 2.0)
           (gtk:snapshot-push-rounded-clip snapshot outline)
-          (gtk:snapshot-append-color snapshot 
+          (gtk:snapshot-append-color snapshot
                                      black
                                      (gsk:rounded-rect-bounds outline))
           (gtk:snapshot-pop snapshot)
           (gtk:snapshot-restore snapshot)
 
-          ;; And the same as above for the minute hand. Just make this one 
+          ;; And the same as above for the minute hand. Just make this one
           ;;; longer so people can tell the hands apart.
           (gtk:snapshot-save snapshot)
           (gtk:snapshot-rotate snapshot (* 6 minute))
           (graphene:rect-init rect -2 -43 4 45)
           (gsk:rounded-rect-init-from-rect outline rect 2)
           (gtk:snapshot-push-rounded-clip snapshot outline)
-          (gtk:snapshot-append-color snapshot 
+          (gtk:snapshot-append-color snapshot
                                      black
                                      (gsk:rounded-rect-bounds outline))
           (gtk:snapshot-pop snapshot)
@@ -389,7 +403,9 @@ setup_listitem_cb (GtkListItemFactory *factory,
 
 
 (defun do-grid-view-clocks (&optional application)
-  (let* ((clock (make-instance 'gtk:clock))
+  (let* ((clock (make-instance 'gtk:clock
+                               :timezone local-time:+utc-zone+
+                               :location "UTC"))
          (image (gtk:image-new-from-paintable clock))
          (vbox (make-instance 'gtk:box :orientation :vertical
                                        :homogeneous t))

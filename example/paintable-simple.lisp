@@ -7,30 +7,17 @@
 ;;;; Paintables can be used in many places inside GTK widgets, but the most
 ;;;; common usage is inside GtkImage and that's what we're going to do here.
 ;;;;
-;;;; 2023-10-29
+;;;; 2023-11-4
 
 (in-package :gdk)
 
-(defclass nuclear-icon (paintable)
-  ((rotation :initform 0.0d0
-             :accessor nuclear-icon-rotation))
-  (:gname . "GdkNuclearIcon")
-  (:metaclass gobject:gobject-class))
-
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (export 'nuclear-icon))
-
-(gobject:register-object-type-implementation "GdkNuclearIcon"  ; name
-                                             nuclear-icon      ; class
-                                             "GObject"         ; parent
-                                             ("GdkPaintable")  ; interfaces
-                                             nil)              ; properties
-
-(defmethod initialize-instance :after ((obj nuclear-icon) &rest initargs)
-  ;; Set the slot values from initargs
-  (iter (for (slot value) on initargs by #'cddr)
-        (cond ((eq slot :rotation)
-               (setf (nuclear-icon-rotation obj) value)))))
+(gobject:define-g-object-subclass "GdkNuclearIcon" nuclear-icon
+  (:superclass g:object
+   :export t
+   :interfaces ("GdkPaintable"))
+  ((rotation
+    nuclear-icon-rotation
+    "rotation" "gdouble" t t)))
 
 ;; This is the function that draws the actual icon. We make it a custom function
 ;; and define it in the paintable.h header so that it can be called from all the
@@ -71,6 +58,10 @@
 
 (defmethod paintable-get-flags-impl ((paintable nuclear-icon))
   (list :static-contents :static-size))
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (export 'nuclear-icon)
+  (export 'nuclear-icon-rotation))
 
 ;;; ----------------------------------------------------------------------------
 
