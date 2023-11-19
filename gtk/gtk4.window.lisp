@@ -1094,8 +1094,8 @@ lambda (window)    :run-first
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'window-suspended)
       "Accessor"
-      (documentation 'window-title 'suspended)
- "@version{#2023-8-20}
+      (documentation 'window-suspended 'function)
+ "@version{#2023-11-16}
   @syntax[]{(gtk:window-suspended object) => suspended}
   @argument[object]{a @class{gtk:window} widget}
   @argument[suspended]{a boolean whether the window is suspended}
@@ -1105,7 +1105,8 @@ lambda (window)    :run-first
   @end{short}
   The @fun{gtk:window-suspended} function retrieves the current suspended state
   of @arg{window}. A window being suspended means it is currently not visible to
-  the user, for example by being on a inactive workspace, minimized, obstructed.
+  the user, for example by being on an inactive workspace, minimized, or
+  obstructed.
 
   Since 4.12
   @see-class{gtk:window}
