@@ -33,36 +33,6 @@
 ;;;
 ;;; Types and Values
 ;;;
-;;;     GskRenderNode
-;;;     GskBlendNode
-;;;     GskBlurNode
-;;;     GskBorderNode
-;;;     GskCairoNode
-;;;     GskClipNode
-;;;     GskColorNode
-;;;     GskColorMatrixNode
-
-
-
-;;;     GskConicGradientNode
-;;;     GskContainerNode
-;;;     GskCrossFadeNode
-;;;     GskDebugNode
-;;;     GskInsetShadowNode
-;;;     GskLinearGradientNode
-;;;     GskRadialGradientNode
-;;;     GskOpacityNode
-;;;     GskOutsetShadowNode
-;;;     GskRepeatingLinearGradientNode
-;;;     GskRepeatingRadialGradientNode
-;;;     GskRepeatNode
-;;;     GskRoundedClipNode
-;;;     GskShadowNode
-;;;     GskTextNode
-;;;     GskTextureNode
-;;;     GskTransformNode
-;;;     GskGLShaderNode
-;;;
 ;;;     GskRenderNodeType
 ;;;     GskSerializationError
 ;;;     GskParseLocation
@@ -71,6 +41,35 @@
 ;;;     GskShadow
 ;;;     GskBlendMode
 ;;;     GskMaskMode                                        Since 4.10
+;;;
+;;;     GskRenderNode
+;;;     GskContainerNode
+;;;     GskCairoNode
+;;;     GskColorNode
+;;;     GskLinearGradientNode
+;;;     GskRepeatingLinearGradientNode
+;;;     GskRadialGradientNode
+;;;     GskRepeatingRadialGradientNode
+;;;     GskConicGradientNode
+;;;     GskBorderNode
+;;;     GskTextureNode
+;;;     GskInsetShadowNode
+;;;     GskOutsetShadowNode
+;;;     GskTransformNode
+;;;     GskOpacityNode
+;;;     GskColorMatrixNode
+;;;     GskRepeatNode
+;;;     GskClipNode
+;;;     GskRoundedClipNode
+;;;     GskShadowNode
+;;;     GskBlendNode
+;;;     GskCrossFadeNode
+;;;     GskTextNode
+;;;     GskBlurNode
+;;;     GskDebugNode
+;;;     GskGLShaderNode
+;;;     GskTextureScaleNode                                Since 4.10
+;;;     GskMaskNode                                        Since 4.10
 ;;;
 ;;; Functions
 ;;;
@@ -85,18 +84,21 @@
 ;;;     gsk_render_node_write_to_file
 ;;;     gsk_render_node_get_bounds
 ;;;
+;;;     gsk_container_node_new
+;;;     gsk_container_node_get_n_children
+;;;     gsk_container_node_get_child
+;;;     gsk_cairo_node_new
+;;;     gsk_cairo_node_get_draw_context
+;;;     gsk_cairo_node_get_surface
 ;;;     gsk_color_node_new
 ;;;     gsk_color_node_get_color
-;;;     gsk_texture_node_new
-;;;     gsk_texture_node_get_texture
 ;;;     gsk_linear_gradient_node_new
-;;;     gsk_repeating_linear_gradient_node_new
 ;;;     gsk_linear_gradient_node_get_start
 ;;;     gsk_linear_gradient_node_get_end
 ;;;     gsk_linear_gradient_node_get_n_color_stops
 ;;;     gsk_linear_gradient_node_get_color_stops
+;;;     gsk_repeating_linear_gradient_node_new
 ;;;     gsk_radial_gradient_node_new
-;;;     gsk_repeating_radial_gradient_node_new
 ;;;     gsk_radial_gradient_node_get_n_color_stops
 ;;;     gsk_radial_gradient_node_get_color_stops
 ;;;     gsk_radial_gradient_node_get_start
@@ -104,6 +106,7 @@
 ;;;     gsk_radial_gradient_node_get_hradius
 ;;;     gsk_radial_gradient_node_get_vradius
 ;;;     gsk_radial_gradient_node_get_center
+;;;     gsk_repeating_radial_gradient_node_new
 ;;;     gsk_conic_gradient_node_new
 ;;;     gsk_conic_gradient_node_get_n_color_stops
 ;;;     gsk_conic_gradient_node_get_color_stops
@@ -113,6 +116,8 @@
 ;;;     gsk_border_node_get_outline
 ;;;     gsk_border_node_get_widths
 ;;;     gsk_border_node_get_colors
+;;;     gsk_texture_node_new
+;;;     gsk_texture_node_get_texture
 ;;;     gsk_inset_shadow_node_new
 ;;;     gsk_inset_shadow_node_get_outline
 ;;;     gsk_inset_shadow_node_get_color
@@ -127,12 +132,6 @@
 ;;;     gsk_outset_shadow_node_get_dy
 ;;;     gsk_outset_shadow_node_get_spread
 ;;;     gsk_outset_shadow_node_get_blur_radius
-;;;     gsk_cairo_node_new
-;;;     gsk_cairo_node_get_draw_context
-;;;     gsk_cairo_node_get_surface
-;;;     gsk_container_node_new
-;;;     gsk_container_node_get_n_children
-;;;     gsk_container_node_get_child
 ;;;     gsk_transform_node_new
 ;;;     gsk_transform_node_get_child
 ;;;     gsk_transform_node_get_transform
@@ -182,6 +181,13 @@
 ;;;     gsk_gl_shader_node_get_child
 ;;;     gsk_gl_shader_node_get_args
 ;;;     gsk_gl_shader_node_get_shader
+;;;     gsk_texture_scale_node_new
+;;;     gsk_texture_scale_node_get_filter
+;;;     gsk_texture_scale_node_get_texture
+;;;     gsk_mask_node_new
+;;;     gsk_mask_node_get_mask
+;;;     gsk_mask_node_get_mask_mode
+;;;     gsk_mask_node_get_source
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -405,6 +411,27 @@
       generation, with linear interpolation along the mipmap levels.}
   @end{table}
   @see-class{gsk:render-node}")
+
+;;; ----------------------------------------------------------------------------
+;;; struct GskColorStop
+;;;
+;;; struct GskColorStop {
+;;;   float offset;
+;;;   GdkRGBA color;
+;;; };
+;;;
+;;; A color stop in a gradient node.
+;;;
+;;; float offset;
+;;;     the offset of the color stop
+;;;
+;;; GdkRGBA color;
+;;;     the color at the given offset
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcstruct %color-stop
+  (offset :float)
+  (color (g:boxed gdk:rgba)))
 
 ;;; ----------------------------------------------------------------------------
 ;;; struct GskShadow
@@ -812,303 +839,87 @@ color {
 (export 'render-node-bounds)
 
 ;;; ----------------------------------------------------------------------------
-;;; GskBlendNode
+;;; GskContainerNode
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type blend-node (render-node)
+(cffi:define-foreign-type container-node (render-node)
   ()
-  (:simple-parser blend-node))
+  (:simple-parser container-node))
 
 #+liber-documentation
-(setf (liber:alias-for-class 'blend-node)
+(setf (liber:alias-for-class 'container-node)
       "GskRenderNode"
-      (documentation 'blend-node 'type)
- "@version{2023-10-25}
+      (documentation 'container-node 'type)
+ "@version{#2023-10-27}
   @begin{short}
-    A render node applying a blending function between its two child nodes.
+    A render node that can contain other render nodes.
   @end{short}
   @see-class{gsk:render-node}")
 
-(export 'blend-node)
+(export 'container-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blend_node_new ()
+;;; gsk_container_node_new ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gsk_blend_node_new" blend-node-new) render-node
+(cffi:defcfun ("gsk_container_node_new" %container-node-new) render-node
+  (children :pointer)
+  (n-children :uint))
+
+(defun container-node-new (children)
  #+liber-documentation
- "@version{#2023-10-26}
-  @argument[bottom]{a @class{gsk:render-node} instance with the bottom node to
-    be drawn}
-  @argument[top]{a @class{gsk:render-node} instance with the top node to
-    be blended onto the bottom node}
-  @argument[mode]{a @symbol{gsk:blend-mode} value with the blend mode to use}
-  @return{A new @class{gsk:blend-node} instance.}
+ "@version{#2023-11-6}
+  @argument[children]{a list of @class{gsk:render-node} instances with the
+    children of the render node}
+  @return{The new @class{gsk:container-node} instance.}
   @begin{short}
-    Creates a render node that will use @arg{mode} to blend the top node onto
-    the bottom node.
+    Creates a new container node for holding the given @arg{children}.
   @end{short}
-  @see-class{gsk:blend-node}
-  @see-class{gsk:render-node}"
-  (bottom render-node)
-  (top render-node)
-  (mode blend-mode))
+  The new render node will acquire a reference to each of the children.
+  @see-class{gsk:container-node}"
+  (let ((n-children (length children)))
+    (cffi:with-foreign-object (children-ptr :pointer n-children)
+      (iter (for i from 0 below n-children)
+            (for child in children)
+            (setf (cffi:mem-aref children-ptr :pointer i) child))
+      (%container-node-new children-ptr n-children))))
 
-(export 'blend-node-new)
+(export 'container-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blend_node_get_bottom_child ()
+;;; gsk_container_node_get_n_children ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gsk_blend_node_get_bottom_child" blend-node-bottom-child)
-    render-node
+(cffi:defcfun ("gsk_container_node_get_n_children" container-node-n-children)
+    :uint
  #+liber-documentation
- "@version{#2023-10-26}
-  @argument[node]{a @class{gsk:blend-node} instance}
-  @return{A @class{gsk:render-node} instance with the bottom child node}
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:container-node} instance}
+  @return{An unsigned integer with the number of children of @arg{node}.}
   @begin{short}
-    Retrieves the bottom render node child of @arg{node}.
+    Retrieves the number of direct children of @arg{node}.
   @end{short}
-  @see-class{gsk:blend-mode}
-  @see-class{gsk:render-node}"
+  @see-class{gsk:container-node}"
   (node render-node))
 
-(export 'blend-node-bottom-child)
+(export 'container-node-n-children)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blend_node_get_top_child ()
+;;; gsk_container_node_get_child ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gsk_blend_node_get_top_child" blend-node-top-child) render-node
+(cffi:defcfun ("gsk_container_node_get_child" container-node-child) render-node
  #+liber-documentation
- "@version{#2023-10-26}
-  @argument[node]{a @class{gsk:blend-node} instance}
-  @return{A @class{gsk:render-node} instance with the top child node}
-  @begin{short}
-    Retrieves the top render node child of @arg{node}.
-  @end{short}
-  @see-class{gsk:blend-mode}
-  @see-class{gsk:render-node}"
-  (node render-node))
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:container-node} instance}
+  @argument[index]{an unsigned integer with the position of the child to get}
+  @return{The @arg{index}'th child of @arg{node}.}
+  @short{Gets one of the children of the container node.}
+  @see-class{gsk:container-node}"
+  (node render-node)
+  (index :uint))
 
-(export 'blend-node-top-child)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_blend_node_get_blend_mode ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_blend_node_get_blend_mode" blend-node-blend-mode) blend-mode
- #+liber-documentation
- "@version{#2023-10-26}
-  @argument[node]{a @class{gsk:blend-node} instance}
-  @return{A @symbol{gsk:blend-mode} value with the blend mode.}
-  @begin{short}
-    Retrieves the blend mode used by @arg{node}.
-  @end{short}
-  @see-class{gsk:blend-node}
-  @see-symbol{gsk:blend-mode}"
-  (node render-node))
-
-(export 'blend-node-blend-mode)
-
-;;; ----------------------------------------------------------------------------
-;;; GskBlurNode
-;;; ----------------------------------------------------------------------------
-
-(cffi:define-foreign-type blur-node (render-node)
-  ()
-  (:simple-parser blur-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'blur-node)
-      "GskRenderNode"
-      (documentation 'blur-node 'type)
- "@version{2023-10-26}
-  @begin{short}
-    A render node applying a blur effect between its single child node.
-  @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'blur-node)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_blur_node_new ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_blur_node_new" blur-node-new) render-node
- #+liber-documentation
- "@version{#2023-10-26}
-  @argument[child]{a @class{gsk:render-node} instance with the child to blur}
-  @argument[radius]{a single float with the blur radius}
-  @return{A new @class{gsk:blur-node} instance.}
-  @begin{short}
-    Creates a render node that blurs the child render node.
-  @end{short}
-  @see-class{gsk:blur-node}
-  @see-class{gsk:render-node}"
-  (child render-node)
-  (radius :float))
-
-(export 'blur-node-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_blur_node_get_child ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_blur_node_get_child" blur-node-child) render-node
- #+liber-documentation
- "@version{#2023-10-26}
-  @argument[node]{a @class{gsk:blur-node} instance}
-  @return{A @class{gsk:render-node} instance with the blurred child render
-    node.}
-  @begin{short}
-    Retrieves the child render node of the blur render node.
-  @end{short}
-  @see-class{gsk:blur-node}
-  @see-class{gsk:render-node}"
-  (node blur-node))
-
-(export 'blur-node-child)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_blur_node_get_radius ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_blur_node_get_radius" blur-node-radius) :float
- #+liber-documentation
- "@version{#2023-10-26}
-  @argument[node]{a @class{gsk:blur-node} instance}
-  @return{A single float with the blur radius.}
-  @begin{short}
-    Retrieves the blur radius of the blur render node.
-  @end{short}
-  @see-class{gsk:blur-node}"
-  (node blur-node))
-
-(export 'blur-node-radius)
-
-;;; ----------------------------------------------------------------------------
-;;; GskBorderNode
-;;; ----------------------------------------------------------------------------
-
-(cffi:define-foreign-type border-node (render-node)
-  ()
-  (:simple-parser border-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'border-node)
-      "GskRenderNode"
-      (documentation 'border-node 'type)
- "@version{2023-10-26}
-  @begin{short}
-    A render node for a border.
-  @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'border-node)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_border_node_new ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_border_node_new" %border-node-new) render-node
-  (outline (:pointer (:struct rounded-rect)))
-  (width (:pointer :float))
-  (color :pointer))
-
-(defun border-node-new (outline widths colors)
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[outline]{a @symbol{gsk:bounded-rect} instance describing the
-    outline of the border}
-  @argument[widths]{a list with 4 single values with the stroke width of the
-    border on the top, right, bottom, and left side respectively}
-  @argument[colors]{a list with 4 @class{gdk:rgba} instance with the color
-    used on the top, right, bottom, and left side}
-  @return{A @class{gsk:border-node} instance.}
-  @begin{short}
-    Creates a border render node that will stroke a border rectangle inside the
-    given @arg{outline}.
-  @end{short}
-  The 4 sides of the border can have different widths and colors.
-  @see-class{gsk:border-node}
-  @see-class{gdk:rgba}
-  @see-symbol{gsk:rounded-rect}"
-  (cffi:with-foreign-object (widths-ptr :float 4)
-    (iter (for i from 0 below 4)
-          (for width in widths)
-          (setf (cffi:mem-aref widths-ptr :float i) width))
-    (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba colors)
-      (%border-node-new outline widths-ptr colors-ptr))))
-
-(export 'border-node-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_border_node_get_outline ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_border_node_get_outline" border-node-outline)
-    (:pointer (:struct rounded-rect))
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[node]{a @class{gsk:border-node} instance}
-  @return{A @symbol{gsk:bounded-rect} instance with the outline of the border}
-  @begin{short}
-    Retrieves the outline of the border.
-  @end{short}
-  @see-class{gsk:border-node}
-  @see-symbol{gsk:rounded-rect}"
-  (node border-node))
-
-(export 'border-node-outline)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_border_node_get_widths ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_border_node_get_widths" %border-node-widths)
-    (:pointer :float)
-  (node border-node))
-
-(defun border-node-widths (node)
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[node]{a @class{gsk:border-node} instance for a border}
-  @return{A list with 4 single float values for the top, right, bottom, and
-    left strok width of the border, respectively.}
-  @begin{short}
-    Retrieves the stroke widths of the border.
-  @end{short}
-  @see-class{gsk:border-node}"
-  (let ((widths-ptr (%border-node-widths node)))
-    (iter (for i from 0 below 4)
-          (collect (cffi:mem-aref widths-ptr :float i)))))
-
-(export 'border-node-widths)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_border_node_get_colors ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_border_node_get_colors" %border-node-colors) :pointer
-  (node border-node))
-
-(defun border-node-colors (node)
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[node]{a @class{gsk:border-node} instance for a border}
-  @return{A list with 4 @class{gdk:rgba} instances for the top, right, bottom,
-    and left color of the border}
-  @begin{short}
-    Retrieves the colors of the border.
-  @end{short}
-  @see-class{gsk:border-node}
-  @see-class{gdk:rgba}"
-  (let ((colors-ptr (%border-node-colors node)))
-    (iter (for i from 0 below 4)
-          (collect (cffi:mem-aref colors-ptr '(g:boxed gdk:rgba) i)))))
-
-(export 'border-node-colors)
+(export 'container-node-child)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskCairoNode
@@ -1195,86 +1006,6 @@ color {
 (export 'cairo-node-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; GskClipNode
-;;; ----------------------------------------------------------------------------
-
-(cffi:define-foreign-type clip-node (render-node)
-  ()
-  (:simple-parser clip-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'clip-node)
-      "GskRenderNode"
-      (documentation 'clip-node 'type)
- "@version{2023-10-27}
-  @begin{short}
-    A render node applying a rectangular clip to its single child render node.
-  @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'clip-node)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_clip_node_new ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_clip_node_new" clip-node-new) render-node
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[child]{a @class{gsk:render-node} instance with the render node to
-    draw}
-  @argument[clip]{a @symbol{graphene:rect-t} instance with the clip to apply}
-  @return{A new @class{gsk:render-node} instance.}
-  @begin{short}
-    Creates a render node that will clip the child render node to the area
-    given by @arg{clip}.
-  @end{short}
-  @see-class{gsk:clip-node}
-  @see-class{gsk:render-node}"
-  (child render-node)
-  (clip (:pointer (:struct graphene:rect-t))))
-
-(export 'clip-node-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_clip_node_get_child ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_clip_node_get_child" clip-node-child) render-node
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[node]{a @class{gsk:clip-node} instance}
-  @return{A @class{gsk:render-node} instance with the child render node that
-    is getting clipped.}
-  @begin{short}
-    Gets the child render node that is getting clipped by the given @arg{node}.
-  @end{short}
-  @see-class{gsk:clip-node}
-  @see-class{gsk:render-node}"
-  (node render-node))
-
-(export 'clip-node-child)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_clip_node_get_clip ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_clip_node_get_clip" clip-node-clip)
-    (:pointer (:struct graphene:rect-t))
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[node]{a @class{gsk:clip-node} instance}
-  @return{A @symbol{graphene:rect-t} instance with a clip rectangle.}
-  @begin{short}
-    Retrieves the clip rectangle for @arg{node}.
-  @end{short}
-  @see-class{gsk:clip-node}
-  @see-symbol{graphene:rect-t}"
-  (node render-node))
-
-(export 'clip-node-clip)
-
-;;; ----------------------------------------------------------------------------
 ;;; GskColorNode
 ;;; ----------------------------------------------------------------------------
 
@@ -1332,387 +1063,6 @@ color {
   (node render-node))
 
 (export 'color-node-color)
-
-;;; ----------------------------------------------------------------------------
-;;; GskColorMatrixNode
-;;; ----------------------------------------------------------------------------
-
-(cffi:define-foreign-type color-matrix-node (render-node)
-  ()
-  (:simple-parser color-matrix-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'color-matrix-node)
-      "GskRenderNode"
-      (documentation 'color-matrix-node 'type)
- "@version{2023-10-27}
-  @begin{short}
-    A render node controlling the color matrix of its single child render node.
-  @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'color-matrix-node)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_color_matrix_node_new ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_color_matrix_node_new" color-matrix-node-new) render-node
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[child]{a @class{gsk:render-node} instance with the child render
-    node to draw}
-  @argument[matrix]{a @symbol{graphene:matrix-t} instance with the matrix to
-    apply}
-  @argument[offset]{a @symbol{graphene:vec4-t} instance with the values to add
-    to the color}
-  @return{A new @class{gsk:rende-node} instance.}
-  @begin{short}
-    Creates a render node that will draw the child render node with reduced
-    @arg{matrix}.
-  @end{short}
-  @see-class{gsk:color-matrix-node}
-  @see-class{gsk:render-node}
-  @see-symbol{graphene:matrix-t}
-  @see-symbol{graphene:vec4-t}"
-  (child render-node)
-  (matrix (:pointer (:struct graphene:matrix-t)))
-  (offset (:pointer (:struct graphene:vec4-t))))
-
-(export 'color-matrix-node-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_color_matrix_node_get_child ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_color_matrix_node_get_child" color-matrix-node-child)
-    render-node
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[node]{a @class{gsk:color-matrix-node} instance}
-  @return{A @class{gsk:render-node} instance with the child render node that
-    is getting its colors modified.}
-  @begin{short}
-    Gets the child render node that is getting its colors modified by the given
-    @arg{node}.
-  @end{short}
-  @see-class{gsk:color-matrix-node}
-  @see-class{gsk:render-node}"
-  (node render-node))
-
-(export 'color-matrix-node-child)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_color_matrix_node_get_color_matrix ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_color_matrix_node_get_color-matrix"
-               color-matrix-node-color-matrix)
-    (:pointer (:struct graphene:matrix-t))
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[node]{a @class{gsk:color-matrix-node} instance}
-  @return{A @symbol{graphene:matrix-t} instance with a 4x4 color matrix.}
-  @begin{short}
-    Retrieves the color matrix used by @arg{node}.
-  @end{short}
-  @see-class{gsk:colr-matrix-node}
-  @see-symbol{graphene:matrix-t}"
-  (node render-node))
-
-(export 'color-matrix-node-color-matrix)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_color_matrix_node_get_color_offset ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_color_matrix_node_get_color_offset"
-               color-matrix-node-color-offset)
-    (:pointer (:struct graphene:vec4-t))
- #+liber-documentation
- "@version{#2023-10-27}
-  @argument[node]{a @class{gsk:color-matrix-node} instance}
-  @return{A @symbol{graphene:vec4-t} instance with a color vector}
-  @begin{short}
-    Retrieves the color offset used by @arg{node}.
-  @end{short}
-  @see-class{gsk:color-matrix-node}
-  @see-symbol{graphene:vec4-t}"
-  (node render-node))
-
-(export 'color-matrix-node-color-offset)
-
-;;; ----------------------------------------------------------------------------
-;;; GskContainerNode
-;;; ----------------------------------------------------------------------------
-
-(cffi:define-foreign-type container-node (render-node)
-  ()
-  (:simple-parser container-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'container-node)
-      "GskRenderNode"
-      (documentation 'container-node 'type)
- "@version{#2023-10-27}
-  @begin{short}
-    A render node that can contain other render nodes.
-  @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'container-node)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_container_node_new ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_container_node_new" %container-node-new) render-node
-  (children :pointer)
-  (n-children :uint))
-
-(defun container-node-new (children)
- #+liber-documentation
- "@version{#2023-11-6}
-  @argument[children]{a list of @class{gsk:render-node} instances with the
-    children of the render node}
-  @return{The new @class{gsk:container-node} instance.}
-  @begin{short}
-    Creates a new container node for holding the given @arg{children}.
-  @end{short}
-  The new render node will acquire a reference to each of the children.
-  @see-class{gsk:container-node}"
-  (let ((n-children (length children)))
-    (cffi:with-foreign-object (children-ptr :pointer n-children)
-      (iter (for i from 0 below n-children)
-            (for child in children)
-            (setf (cffi:mem-aref children-ptr :pointer i) child))
-      (%container-node-new children-ptr n-children))))
-
-(export 'container-node-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_container_node_get_n_children ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_container_node_get_n_children" container-node-n-children)
-    :uint
- #+liber-documentation
- "@version{#2023-11-6}
-  @argument[node]{a @class{gsk:container-node} instance}
-  @return{An unsigned integer with the number of children of @arg{node}.}
-  @begin{short}
-    Retrieves the number of direct children of @arg{node}.
-  @end{short}
-  @see-class{gsk:container-node}"
-  (node render-node))
-
-(export 'container-node-n-children)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_container_node_get_child ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_container_node_get_child" container-node-child) render-node
- #+liber-documentation
- "@version{#2023-11-6}
-  @argument[node]{a @class{gsk:container-node} instance}
-  @argument[index]{an unsigned integer with the position of the child to get}
-  @return{The @arg{index}'th child of @arg{node}.}
-  @short{Gets one of the children of the container node.}
-  @see-class{gsk:container-node}"
-  (node render-node)
-  (index :uint))
-
-(export 'container-node-child)
-
-;;; ----------------------------------------------------------------------------
-;;; GskCrossFadeNode
-;;; ----------------------------------------------------------------------------
-
-(cffi:define-foreign-type cross-fade-node (render-node)
-  ()
-  (:simple-parser cross-fade-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'cross-fade-node)
-      "GskRenderNode"
-      (documentation 'cross-fade-node 'type)
- "@version{#2023-10-27}
-  @begin{short}
-    A render node cross fading between two child render nodes.
-  @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'cross-fade-node)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_cross_fade_node_new ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_cross_fade_node_new" cross-fade-new) render-node
- #+liber-documentation
- "@version{#2023-11-6}
-  @argument[start]{a @class{gsk:render-node} instance with the start render
-    node to be drawn}
-  @argument[end]{a @class{gsk:render-node} instance with the render node to be
-    cross-fadeed onto the start node}
-  @argument[progress]{a single float how far the fade has progressed from start
-    to end. The value will be clamped to the range [0 ... 1]}
-  @return{A new @class{gsk:cross-fade-node} instance.}
-  @begin{short}
-    Creates a render node that will do a cross-fade between @arg{start} and
-    @arg{end}.
-  @end{short}
-  @see-class{gsk:cross-fade-node}
-  @see-class{gsk:render-node}"
-  (start render-node)
-  (end render-node)
-  (progress :float))
-
-(export 'cross-fade-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_cross_fade_node_get_start_child ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_cross_fade_node_get_start_child"
-               cross-fade-node-start-child) render-node
- #+liber-documentation
- "@version{#2023-11-6}
-  @argument[node]{a @class{gsk:cross-fade-node} instance}
-  @return{A @class{gsk:render-node} instance.}
-  @begin{short}
-    Retrieves the child render node at the beginning of the cross-fade.
-  @end{short}
-  @see-class{gsk:cross-fade-node}
-  @see-class{gsk:render-node}"
-  (node render-node))
-
-(export 'cross-fade-start-child)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_cross_fade_node_get_end_child ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_cross_fade_node_get_end_child"
-               cross-fade-node-end-child) render-node
- #+liber-documentation
- "@version{#2023-11-6}
-  @argument[node]{a @class{gsk:cross-fade-node} instance}
-  @return{A @class{gsk:render-node} instance.}
-  @begin{short}
-    Retrieves the child render node at the end of the cross-fade.
-  @end{short}
-  @see-class{gsk:cross-fade-node}
-  @see-class{gsk:render-node}"
-  (node render-node))
-
-(export 'cross-fade-node-end-child)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_cross_fade_node_get_progress ()
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_cross_fade_node_get_progress" cross-fade-node-progress)
-    :float
- #+liber-documentation
- "@version{#2023-11-6}
-  @argument[node]{a @class{gsk:cross-fade-node} instance}
-  @return{A single float with the progress value, between 0 and 1.}
-  @short{Retrieves the progress value of the cross fade node.}
-  @see-class{gsk:cross-fade-node}"
-  (node render-node))
-
-(export 'cross-fade-node-progress)
-
-;;; ----------------------------------------------------------------------------
-;;; GskDebugNode
-;;; ----------------------------------------------------------------------------
-
-(cffi:define-foreign-type debug-node (render-node)
-  ()
-  (:simple-parser debug-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'debug-node)
-      "GskRenderNode"
-      (documentation 'debug-node 'type)
- "@version{#2023-10-27}
-  @begin{short}
-    A render node that emits a debugging message when drawing its child
-    render node.
-  @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'debug-node)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_debug_node_new ()
-;;;
-;;; GskRenderNode *
-;;; gsk_debug_node_new (GskRenderNode *child,
-;;;                     char *message);
-;;;
-;;; Creates a GskRenderNode that will add debug information about the given
-;;; child .
-;;;
-;;; Adding this node has no visual effect.
-;;;
-;;; child
-;;;     The child to add debug info for
-;;;
-;;; message
-;;;     The debug message.
-;;;
-;;; Returns
-;;;     A new GskRenderNode.
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_debug_node_new" debug-node-new) render-node
-  (child render-node)
-  (message :string))
-
-(export 'debug-node-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_debug_node_get_child ()
-;;;
-;;; GskRenderNode *
-;;; gsk_debug_node_get_child (GskRenderNode *node);
-;;;
-;;; Gets the child node that is getting drawn by the given node .
-;;;
-;;; node
-;;;     a debug GskRenderNode.
-;;;
-;;; Returns
-;;;     the child GskRenderNode.
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_debug_node_get_child" debug-node-child) render-node
-  (node render-node))
-
-(export 'debug-node-child)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_debug_node_get_message ()
-;;;
-;;; const char *
-;;; gsk_debug_node_get_message (GskRenderNode *node);
-;;;
-;;; Gets the debug message that was set on this node
-;;;
-;;; node
-;;;     a debug GskRenderNode.
-;;;
-;;; Returns
-;;;     The debug message.
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gsk_debug_node_get_message" debug-node-message) :string
-  (node render-node))
-
-(export 'debug-node-message)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskLinearGradientNode
@@ -1893,7 +1243,6 @@ color {
 ;;; Returns :
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
-
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskRadialGradientNode
@@ -2230,27 +1579,6 @@ color {
 (export 'conic-gradient-node-n-color-stops)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GskColorStop
-;;;
-;;; struct GskColorStop {
-;;;   float offset;
-;;;   GdkRGBA color;
-;;; };
-;;;
-;;; A color stop in a gradient node.
-;;;
-;;; float offset;
-;;;     the offset of the color stop
-;;;
-;;; GdkRGBA color;
-;;;     the color at the given offset
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcstruct %color-stop
-  (offset :float)
-  (color (g:boxed gdk:rgba)))
-
-;;; ----------------------------------------------------------------------------
 ;;; gsk_conic_gradient_node_get_color_stops ()
 ;;;
 ;;; const GskColorStop *
@@ -2327,829 +1655,133 @@ color {
 
 (export 'conic-gradient-node-rotation)
 
-
 ;;; ----------------------------------------------------------------------------
-;;; GskShadowNode
+;;; GskBorderNode
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type shadow-node (render-node)
+(cffi:define-foreign-type border-node (render-node)
   ()
-  (:simple-parser shadow-node))
+  (:simple-parser border-node))
 
 #+liber-documentation
-(setf (liber:alias-for-class 'shadow-node)
+(setf (liber:alias-for-class 'border-node)
       "GskRenderNode"
-      (documentation 'shadow-node 'type)
- "@version{#2023-10-27}
+      (documentation 'border-node 'type)
+ "@version{2023-10-26}
   @begin{short}
-    A render node drawing one or more shadows behind its single child render
-    node.
+    A render node for a border.
   @end{short}
   @see-class{gsk:render-node}")
 
-(export 'shadow-node)
-
-
-;;;gsk_shadow_node_new ()
-;;;GskRenderNode *
-;;;gsk_shadow_node_new (GskRenderNode *child,
-;;;                     const GskShadow *shadows,
-;;;                     gsize n_shadows);
-;;;Creates a GskRenderNode that will draw a child with the given shadows below it.
-
-;;;Parameters
-;;;child
-
-;;;The node to draw
-
-;;;
-;;;shadows
-
-;;;The shadows to apply.
-
-;;;[array length=n_shadows]
-;;;n_shadows
-
-;;;number of entries in the shadows array
-
-;;;
-;;;Returns
-;;;A new GskRenderNode.
-
-;;;[transfer full][type GskShadowNode]
-
-;;;gsk_shadow_node_get_shadow ()
-;;;const GskShadow *
-;;;gsk_shadow_node_get_shadow (GskRenderNode *node,
-;;;                            gsize i);
-;;;Retrieves the shadow data at the given index i .
-
-;;;Parameters
-;;;node
-
-;;;a shadow GskRenderNode.
-
-;;;[type GskShadowNode]
-;;;i
-
-;;;the given index
-
-;;;
-;;;Returns
-;;;the shadow data.
-
-;;;[transfer none]
-
-;;;gsk_shadow_node_get_n_shadows ()
-;;;gsize
-;;;gsk_shadow_node_get_n_shadows (GskRenderNode *node);
-;;;Retrieves the number of shadows in the node .
-
-;;;Parameters
-;;;node
-
-;;;a shadow GskRenderNode.
-
-;;;[type GskShadowNode]
-;;;Returns
-;;;the number of shadows.
-
-;;;gsk_shadow_node_get_child ()
-;;;GskRenderNode *
-;;;gsk_shadow_node_get_child (GskRenderNode *node);
-;;;Retrieves the child GskRenderNode of the shadow node .
-
-;;;Parameters
-;;;node
-
-;;;a shadow GskRenderNode.
-
-;;;[type GskShadowNode]
-;;;Returns
-;;;the child render node.
-
-;;;[transfer none]
-
+(export 'border-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; GskInsetShadowNode
+;;; gsk_border_node_new ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type inset-shadow-node (render-node)
-  ()
-  (:simple-parser inset-shadow-node))
+(cffi:defcfun ("gsk_border_node_new" %border-node-new) render-node
+  (outline (:pointer (:struct rounded-rect)))
+  (width (:pointer :float))
+  (color :pointer))
 
-#+liber-documentation
-(setf (liber:alias-for-class 'inset-shadow-node)
-      "GskRenderNode"
-      (documentation 'inset-shadow-node 'type)
- "@version{#2023-10-27}
+(defun border-node-new (outline widths colors)
+ #+liber-documentation
+ "@version{2023-11-19}
+  @argument[outline]{a @symbol{gsk:rounded-rect} instance describing the
+    outline of the border}
+  @argument[widths]{a list with 4 single values with the stroke width of the
+    border on the top, right, bottom, and left side respectively}
+  @argument[colors]{a list with 4 @class{gdk:rgba} instance with the color
+    used on the top, right, bottom, and left side}
+  @return{A @class{gsk:border-node} instance.}
   @begin{short}
-    A render node for an inset shadow.
+    Creates a border render node that will stroke a border rectangle inside the
+    given @arg{outline}.
   @end{short}
-  @see-class{gsk:render-node}")
+  The 4 sides of the border can have different widths and colors.
+  @see-class{gsk:border-node}
+  @see-class{gdk:rgba}
+  @see-symbol{gsk:rounded-rect}"
+  (cffi:with-foreign-object (widths-ptr :float 4)
+    (iter (for i from 0 below 4)
+          (for width in widths)
+          (setf (cffi:mem-aref widths-ptr :float i) 
+                (coerce width 'single-float)))
+    (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba colors)
+      (%border-node-new outline widths-ptr colors-ptr))))
 
-(export 'inset-shadow-node)
-
-;;;gsk_inset_shadow_node_new ()
-;;;GskRenderNode *
-;;;gsk_inset_shadow_node_new (const GskRoundedRect *outline,
-;;;                           const GdkRGBA *color,
-;;;                           float dx,
-;;;                           float dy,
-;;;                           float spread,
-;;;                           float blur_radius);
-;;;Creates a GskRenderNode that will render an inset shadow into the box given by outline .
-
-;;;Parameters
-;;;outline
-
-;;;outline of the region containing the shadow
-
-;;;
-;;;color
-
-;;;color of the shadow
-
-;;;
-;;;dx
-
-;;;horizontal offset of shadow
-
-;;;
-;;;dy
-
-;;;vertical offset of shadow
-
-;;;
-;;;spread
-
-;;;how far the shadow spreads towards the inside
-
-;;;
-;;;blur_radius
-
-;;;how much blur to apply to the shadow
-
-;;;
-;;;Returns
-;;;A new GskRenderNode.
-
-;;;[transfer full][type GskInsetShadowNode]
-
-;;;gsk_inset_shadow_node_get_outline ()
-;;;const GskRoundedRect *
-;;;gsk_inset_shadow_node_get_outline (GskRenderNode *node);
-;;;Retrieves the outline rectangle of the inset shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an inset shadow.
-
-;;;[type GskInsetShadowNode]
-;;;Returns
-;;;a rounded rectangle.
-
-;;;[transfer none]
-
-;;;gsk_inset_shadow_node_get_color ()
-;;;const GdkRGBA *
-;;;gsk_inset_shadow_node_get_color (GskRenderNode *node);
-;;;Retrieves the color of the inset shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an inset shadow.
-
-;;;[type GskInsetShadowNode]
-;;;Returns
-;;;the color of the shadow.
-
-;;;[transfer none]
-
-;;;gsk_inset_shadow_node_get_dx ()
-;;;float
-;;;gsk_inset_shadow_node_get_dx (GskRenderNode *node);
-;;;Retrieves the horizontal offset of the inset shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an inset shadow.
-
-;;;[type GskInsetShadowNode]
-;;;Returns
-;;;an offset, in pixels
-
-;;;gsk_inset_shadow_node_get_dy ()
-;;;float
-;;;gsk_inset_shadow_node_get_dy (GskRenderNode *node);
-;;;Retrieves the vertical offset of the inset shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an inset shadow.
-
-;;;[type GskInsetShadowNode]
-;;;Returns
-;;;an offset, in pixels
-
-;;;gsk_inset_shadow_node_get_spread ()
-;;;float
-;;;gsk_inset_shadow_node_get_spread (GskRenderNode *node);
-;;;Retrieves how much the shadow spreads inwards.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an inset shadow.
-
-;;;[type GskInsetShadowNode]
-;;;Returns
-;;;the size of the shadow, in pixels
-
-;;;gsk_inset_shadow_node_get_blur_radius ()
-;;;float
-;;;gsk_inset_shadow_node_get_blur_radius (GskRenderNode *node);
-;;;Retrieves the blur radius to apply to the shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an inset shadow.
-
-;;;[type GskInsetShadowNode]
-;;;Returns
-;;;the blur radius, in pixels
+(export 'border-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; GskOutsetShadowNode
-;;;
-;;; typedef struct _GskOutsetShadowNode GskOutsetShadowNode;
-;;;
-;;; A render node for an outset shadow.
+;;; gsk_border_node_get_outline ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type outset-shadow-node (render-node)
-  ()
-  (:simple-parser outset-shadow-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'outset-shadow-node)
-      "GskRenderNode"
-      (documentation 'outset-shadow-node 'type)
- "@version{#2023-10-27}
+(cffi:defcfun ("gsk_border_node_get_outline" border-node-outline)
+    (:pointer (:struct rounded-rect))
+ #+liber-documentation
+ "@version{2023-11-19}
+  @argument[node]{a @class{gsk:border-node} instance}
+  @return{A @symbol{gsk:rounded-rect} instance with the outline of the border}
   @begin{short}
-    A render node for an outset shadow.
+    Retrieves the outline of the border.
   @end{short}
-  @see-class{gsk:render-node}")
+  @see-class{gsk:border-node}
+  @see-symbol{gsk:rounded-rect}"
+  (node border-node))
 
-(export 'outset-shadow-node)
-
-
-;;;gsk_outset_shadow_node_new ()
-;;;GskRenderNode *
-;;;gsk_outset_shadow_node_new (const GskRoundedRect *outline,
-;;;                            const GdkRGBA *color,
-;;;                            float dx,
-;;;                            float dy,
-;;;                            float spread,
-;;;                            float blur_radius);
-;;;Creates a GskRenderNode that will render an outset shadow around the box given by outline .
-
-;;;Parameters
-;;;outline
-
-;;;outline of the region surrounded by shadow
-
-;;;
-;;;color
-
-;;;color of the shadow
-
-;;;
-;;;dx
-
-;;;horizontal offset of shadow
-
-;;;
-;;;dy
-
-;;;vertical offset of shadow
-
-;;;
-;;;spread
-
-;;;how far the shadow spreads towards the inside
-
-;;;
-;;;blur_radius
-
-;;;how much blur to apply to the shadow
-
-;;;
-;;;Returns
-;;;A new GskRenderNode.
-
-;;;[transfer full][type GskOutsetShadowNode]
-
-;;;gsk_outset_shadow_node_get_outline ()
-;;;const GskRoundedRect *
-;;;gsk_outset_shadow_node_get_outline (GskRenderNode *node);
-;;;Retrieves the outline rectangle of the outset shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an outset shadow.
-
-;;;[type GskOutsetShadowNode]
-;;;Returns
-;;;a rounded rectangle.
-
-;;;[transfer none]
-
-;;;gsk_outset_shadow_node_get_color ()
-;;;const GdkRGBA *
-;;;gsk_outset_shadow_node_get_color (GskRenderNode *node);
-;;;Retrieves the color of the outset shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an outset shadow.
-
-;;;[type GskOutsetShadowNode]
-;;;Returns
-;;;a color.
-
-;;;[transfer none]
-
-;;;gsk_outset_shadow_node_get_dx ()
-;;;float
-;;;gsk_outset_shadow_node_get_dx (GskRenderNode *node);
-;;;Retrieves the horizontal offset of the outset shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an outset shadow.
-
-;;;[type GskOutsetShadowNode]
-;;;Returns
-;;;an offset, in pixels
-
-;;;gsk_outset_shadow_node_get_dy ()
-;;;float
-;;;gsk_outset_shadow_node_get_dy (GskRenderNode *node);
-;;;Retrieves the vertical offset of the outset shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an outset shadow.
-
-;;;[type GskOutsetShadowNode]
-;;;Returns
-;;;an offset, in pixels
-
-;;;gsk_outset_shadow_node_get_spread ()
-;;;float
-;;;gsk_outset_shadow_node_get_spread (GskRenderNode *node);
-;;;Retrieves how much the shadow spreads outwards.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an outset shadow.
-
-;;;[type GskOutsetShadowNode]
-;;;Returns
-;;;the size of the shadow, in pixels
-
-;;;gsk_outset_shadow_node_get_blur_radius ()
-;;;float
-;;;gsk_outset_shadow_node_get_blur_radius
-;;;                               (GskRenderNode *node);
-;;;Retrieves the blur radius of the shadow.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an outset shadow.
-
-;;;[type GskOutsetShadowNode]
-;;;Returns
-;;;the blur radius, in pixels
-
-
-
-
-
-
-
+(export 'border-node-outline)
 
 ;;; ----------------------------------------------------------------------------
-;;; GskOpacityNode
-;;;
-;;; typedef struct _GskOpacityNode GskOpacityNode;
-;;;
-;;; A render node controlling the opacity of its single child node.
+;;; gsk_border_node_get_widths ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type opacity-node (render-node)
-  ()
-  (:simple-parser opacity-node))
+(cffi:defcfun ("gsk_border_node_get_widths" %border-node-widths) 
+    (:pointer :float)
+  (node border-node))
 
-#+liber-documentation
-(setf (liber:alias-for-class 'opacity-node)
-      "GskRenderNode"
-      (documentation 'opacity-node 'type)
- "@version{#2023-10-27}
+(defun border-node-widths (node)
+ #+liber-documentation
+ "@version{2023-11-19}
+  @argument[node]{a @class{gsk:border-node} instance for a border}
+  @return{A list with 4 single float values for the top, right, bottom, and
+    left stroke width of the border, respectively.}
   @begin{short}
-    A render node controlling the opacity of its single child render node.
+    Retrieves the stroke widths of the border.
   @end{short}
-  @see-class{gsk:render-node}")
+  @see-class{gsk:border-node}"
+  (let ((widths-ptr (%border-node-widths node)))
+    (iter (for i from 0 below 4)
+          (collect (cffi:mem-aref widths-ptr :float i)))))
 
-(export 'opacity-node)
-
-;;;gsk_opacity_node_new ()
-;;;GskRenderNode *
-;;;gsk_opacity_node_new (GskRenderNode *child,
-;;;                      float opacity);
-;;;Creates a GskRenderNode that will drawn the child with reduced opacity .
-
-;;;Parameters
-;;;child
-
-;;;The node to draw
-
-;;;
-;;;opacity
-
-;;;The opacity to apply
-
-;;;
-;;;Returns
-;;;A new GskRenderNode.
-
-;;;[transfer full][type GskOpacityNode]
-
-;;;gsk_opacity_node_get_child ()
-;;;GskRenderNode *
-;;;gsk_opacity_node_get_child (GskRenderNode *node);
-;;;Gets the child node that is getting opacityed by the given node .
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an opacity.
-
-;;;[type GskOpacityNode]
-;;;Returns
-;;;The child that is getting opacityed.
-
-;;;[transfer none]
-
-;;;gsk_opacity_node_get_opacity ()
-;;;float
-;;;gsk_opacity_node_get_opacity (GskRenderNode *node);
-;;;Gets the transparency factor for an opacity node.
-
-;;;Parameters
-;;;node
-
-;;;a GskRenderNode for an opacity.
-
-;;;[type GskOpacityNode]
-;;;Returns
-;;;the opacity factor
-
-
-
-
-
-
-
-
-
-
+(export 'border-node-widths)
 
 ;;; ----------------------------------------------------------------------------
-;;; GskRepeatNode
-;;;
-;;; typedef struct _GskRepeatNode GskRepeatNode;
-;;;
-;;; A render node repeating its single child node.
+;;; gsk_border_node_get_colors ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:define-foreign-type repeat-node (render-node)
-  ()
-  (:simple-parser repeat-node))
+;; FIXME: This implementation is wrong. We need code to translate an array
+;; of boxed values.
 
-#+liber-documentation
-(setf (liber:alias-for-class 'repeat-node)
-      "GskRenderNode"
-      (documentation 'repeat-node 'type)
+(cffi:defcfun ("gsk_border_node_get_colors" %border-node-colors) :pointer
+  (node border-node))
+
+#+nil
+(defun border-node-colors (node)
+ #+liber-documentation
  "@version{#2023-10-27}
+  @argument[node]{a @class{gsk:border-node} instance for a border}
+  @return{A list with 4 @class{gdk:rgba} instances for the top, right, bottom,
+    and left color of the border}
   @begin{short}
-    A render node repeating its single child render node.
+    Retrieves the colors of the border.
   @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'repeat-node)
-
-;;;gsk_repeat_node_new ()
-;;;GskRenderNode *
-;;;gsk_repeat_node_new (const graphene_rect_t *bounds,
-;;;                     GskRenderNode *child,
-;;;                     const graphene_rect_t *child_bounds);
-;;;Creates a GskRenderNode that will repeat the drawing of child across the given bounds .
-
-;;;Parameters
-;;;bounds
-
-;;;The bounds of the area to be painted
-
-;;;
-;;;child
-
-;;;The child to repeat
-
-;;;
-;;;child_bounds
-
-;;;The area of the child to repeat or NULL to use the child's bounds.
-
-;;;[allow-none]
-;;;Returns
-;;;A new GskRenderNode.
-
-;;;[transfer full][type GskRepeatNode]
-
-;;;gsk_repeat_node_get_child ()
-;;;GskRenderNode *
-;;;gsk_repeat_node_get_child (GskRenderNode *node);
-;;;Retrieves the child of node .
-
-;;;Parameters
-;;;node
-
-;;;a repeat GskRenderNode.
-
-;;;[type GskRepeatNode]
-;;;Returns
-;;;a GskRenderNode.
-
-;;;[transfer none]
-
-;;;gsk_repeat_node_get_child_bounds ()
-;;;const graphene_rect_t *
-;;;gsk_repeat_node_get_child_bounds (GskRenderNode *node);
-;;;Retrieves the bounding rectangle of the child of node .
-
-;;;Parameters
-;;;node
-
-;;;a repeat GskRenderNode.
-
-;;;[type GskRepeatNode]
-;;;Returns
-;;;a bounding rectangle.
-
-;;;[transfer none]
-
-;;; ----------------------------------------------------------------------------
-;;; GskRoundedClipNode
-;;; ----------------------------------------------------------------------------
-
-(cffi:define-foreign-type rounded-clip-node (render-node)
-  ()
-  (:simple-parser rounded-clip-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'rounded-clip-node)
-      "GskRenderNode"
-      (documentation 'rounded-clip-node 'type)
- "@version{#2023-10-27}
-  @begin{short}
-    A render node applying a rounded rectangle clip to its single child
-    render node.
-  @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'rounded-clip-node)
-
-;;;gsk_rounded_clip_node_new ()
-;;;GskRenderNode *
-;;;gsk_rounded_clip_node_new (GskRenderNode *child,
-;;;                           const GskRoundedRect *clip);
-;;;Creates a GskRenderNode that will clip the child to the area given by clip .
-
-;;;Parameters
-;;;child
-
-;;;The node to draw
-
-;;;
-;;;clip
-
-;;;The clip to apply
-
-;;;
-;;;Returns
-;;;A new GskRenderNode.
-
-;;;[transfer none][type GskRoundedClipNode]
-
-;;;gsk_rounded_clip_node_get_child ()
-;;;GskRenderNode *
-;;;gsk_rounded_clip_node_get_child (GskRenderNode *node);
-;;;Gets the child node that is getting clipped by the given node .
-
-;;;Parameters
-;;;node
-
-;;;a rounded clip GskRenderNode.
-
-;;;[type GskRoundedClipNode]
-;;;Returns
-;;;The child that is getting clipped.
-
-;;;[transfer none]
-
-;;;gsk_rounded_clip_node_get_clip ()
-;;;const GskRoundedRect *
-;;;gsk_rounded_clip_node_get_clip (GskRenderNode *node);
-;;;Retrievs the rounded rectangle used to clip the contents of the node .
-
-;;;Parameters
-;;;node
-
-;;;a rounded clip GskRenderNode.
-
-;;;[type GskRoundedClipNode]
-;;;Returns
-;;;a rounded rectangle.
-
-;;;[transfer none]
-
-
-
-;;; ----------------------------------------------------------------------------
-;;; GskTextNode
-;;; ----------------------------------------------------------------------------
-
-(cffi:define-foreign-type text-node (render-node)
-  ()
-  (:simple-parser text-node))
-
-#+liber-documentation
-(setf (liber:alias-for-class 'text-node)
-      "GskRenderNode"
-      (documentation 'text-node 'type)
- "@version{#2023-10-27}
-  @begin{short}
-    A render node drawing a set of glyphs.
-  @end{short}
-  @see-class{gsk:render-node}")
-
-(export 'text-node)
-
-;;;gsk_text_node_new ()
-;;;GskRenderNode *
-;;;gsk_text_node_new (PangoFont *font,
-;;;                   PangoGlyphString *glyphs,
-;;;                   const GdkRGBA *color,
-;;;                   const graphene_point_t *offset);
-;;;Creates a render node that renders the given glyphs, Note that color may not be used if the font contains color glyphs.
-
-;;;Parameters
-;;;font
-
-;;;the PangoFont containing the glyphs
-
-;;;
-;;;glyphs
-
-;;;the PangoGlyphString to render
-
-;;;
-;;;color
-
-;;;the foreground color to render with
-
-;;;
-;;;offset
-
-;;;offset of the baseline
-
-;;;
-;;;Returns
-;;;a new GskRenderNode.
-
-;;;[nullable][transfer full][type GskTextNode]
-
-;;;gsk_text_node_get_font ()
-;;;PangoFont *
-;;;gsk_text_node_get_font (GskRenderNode *node);
-;;;Returns the font used by the text node .
-
-;;;Parameters
-;;;node
-
-;;;The GskRenderNode.
-
-;;;[type GskTextNode]
-;;;Returns
-;;;the font.
-
-;;;[transfer none]
-
-;;;gsk_text_node_get_glyphs ()
-;;;const PangoGlyphInfo *
-;;;gsk_text_node_get_glyphs (GskRenderNode *node,
-;;;                          guint *n_glyphs);
-;;;Retrieves the glyph information in the node .
-
-;;;Parameters
-;;;node
-
-;;;a text GskRenderNode.
-
-;;;[type GskTextNode]
-;;;n_glyphs
-
-;;;the number of glyphs returned.
-
-;;;[out][optional]
-;;;Returns
-;;;the glyph information.
-
-;;;[transfer none][array length=n_glyphs]
-
-;;;gsk_text_node_get_color ()
-;;;const GdkRGBA *
-;;;gsk_text_node_get_color (GskRenderNode *node);
-;;;Retrieves the color used by the text node .
-
-;;;Parameters
-;;;node
-
-;;;a text GskRenderNode.
-
-;;;[type GskTextNode]
-;;;Returns
-;;;the text color.
-
-;;;[transfer none]
-
-;;;gsk_text_node_has_color_glyphs ()
-;;;gboolean
-;;;gsk_text_node_has_color_glyphs (GskRenderNode *node);
-;;;Checks whether the text node has color glyphs.
-
-;;;Parameters
-;;;node
-
-;;;a text GskRenderNode.
-
-;;;[type GskTextNode]
-;;;Returns
-;;;TRUE if the text node has color glyphs
-
-;;;gsk_text_node_get_num_glyphs ()
-;;;guint
-;;;gsk_text_node_get_num_glyphs (GskRenderNode *node);
-;;;Retrieves the number of glyphs in the text node.
-
-;;;Parameters
-;;;node
-
-;;;a text GskRenderNode.
-
-;;;[type GskTextNode]
-;;;Returns
-;;;the number of glyphs
-
-;;;gsk_text_node_get_offset ()
-;;;const graphene_point_t *
-;;;gsk_text_node_get_offset (GskRenderNode *node);
-;;;Retrieves the offset applied to the text.
-
-;;;Parameters
-;;;node
-
-;;;a text GskRenderNode.
-
-;;;[type GskTextNode]
-;;;Returns
-;;;a point with the horizontal and vertical offsets.
-
-;;;[transfer none]
+  @see-class{gsk:border-node}
+  @see-class{gdk:rgba}"
+  (let ((colors-ptr (%border-node-colors node)))
+    (iter (for i from 0 below 4)
+          (collect (cffi:mem-aref colors-ptr '(g:boxed gdk:rgba) i)))))
+#+nil
+(export 'border-node-colors)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskTextureNode
@@ -3205,6 +1837,302 @@ color {
 ;;;
 ;;; Returns :
 ;;;     the GdkTexture.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskInsetShadowNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type inset-shadow-node (render-node)
+  ()
+  (:simple-parser inset-shadow-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'inset-shadow-node)
+      "GskRenderNode"
+      (documentation 'inset-shadow-node 'type)
+ "@version{#2023-10-27}
+  @begin{short}
+    A render node for an inset shadow.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'inset-shadow-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_inset_shadow_node_new ()
+;;;
+;;; GskRenderNode *
+;;; gsk_inset_shadow_node_new (const GskRoundedRect *outline,
+;;;                            const GdkRGBA *color,
+;;;                            float dx,
+;;;                            float dy,
+;;;                            float spread,
+;;;                            float blur_radius);
+;;;
+;;; Creates a GskRenderNode that will render an inset shadow into the box given
+;;; by outline .
+;;;
+;;; outline
+;;;     outline of the region containing the shadow
+;;;
+;;; color
+;;;     color of the shadow
+;;;
+;;; dx
+;;;     horizontal offset of shadow
+;;;
+;;; dy
+;;;     vertical offset of shadow
+;;;
+;;; spread
+;;;     how far the shadow spreads towards the inside
+;;;
+;;; blur_radius
+;;;     how much blur to apply to the shadow
+;;;
+;;; Returns
+;;;     A new GskRenderNode.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_inset_shadow_node_get_outline ()
+;;;
+;;; const GskRoundedRect *
+;;; gsk_inset_shadow_node_get_outline (GskRenderNode *node);
+;;;
+;;; Retrieves the outline rectangle of the inset shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an inset shadow.
+;;;
+;;; Returns
+;;;     a rounded rectangle.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_inset_shadow_node_get_color ()
+;;;
+;;; const GdkRGBA *
+;;; gsk_inset_shadow_node_get_color (GskRenderNode *node);
+;;;
+;;; Retrieves the color of the inset shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an inset shadow.
+;;;
+;;; Returns
+;;;     the color of the shadow.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_inset_shadow_node_get_dx ()
+;;;
+;;; float
+;;; gsk_inset_shadow_node_get_dx (GskRenderNode *node);
+;;;
+;;; Retrieves the horizontal offset of the inset shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an inset shadow.
+;;;
+;;; Returns
+;;;     an offset, in pixels
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_inset_shadow_node_get_dy ()
+;;;
+;;; float
+;;; gsk_inset_shadow_node_get_dy (GskRenderNode *node);
+;;;
+;;; Retrieves the vertical offset of the inset shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an inset shadow.
+;;;
+;;; Returns
+;;;     an offset, in pixels
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_inset_shadow_node_get_spread ()
+;;;
+;;; float
+;;; gsk_inset_shadow_node_get_spread (GskRenderNode *node);
+;;;
+;;; Retrieves how much the shadow spreads inwards.
+;;;
+;;; node
+;;;     a GskRenderNode for an inset shadow.
+;;;
+;;; Returns
+;;;     the size of the shadow, in pixels
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_inset_shadow_node_get_blur_radius ()
+;;;
+;;; float
+;;; gsk_inset_shadow_node_get_blur_radius (GskRenderNode *node);
+;;;
+;;; Retrieves the blur radius to apply to the shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an inset shadow.
+;;;
+;;; Returns
+;;;     the blur radius, in pixels
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskOutsetShadowNode
+;;;
+;;; typedef struct _GskOutsetShadowNode GskOutsetShadowNode;
+;;;
+;;; A render node for an outset shadow.
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type outset-shadow-node (render-node)
+  ()
+  (:simple-parser outset-shadow-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'outset-shadow-node)
+      "GskRenderNode"
+      (documentation 'outset-shadow-node 'type)
+ "@version{#2023-10-27}
+  @begin{short}
+    A render node for an outset shadow.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'outset-shadow-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_outset_shadow_node_new ()
+;;;
+;;; GskRenderNode *
+;;; gsk_outset_shadow_node_new (const GskRoundedRect *outline,
+;;;                             const GdkRGBA *color,
+;;;                             float dx,
+;;;                             float dy,
+;;;                             float spread,
+;;;                             float blur_radius);
+;;;
+;;; Creates a GskRenderNode that will render an outset shadow around the box
+;;; given by outline .
+;;;
+;;; outline
+;;;     outline of the region surrounded by shadow
+;;;
+;;; color
+;;;     color of the shadow
+;;;
+;;; dx
+;;;     horizontal offset of shadow
+;;;
+;;; dy
+;;;     vertical offset of shadow
+;;;
+;;; spread
+;;;     how far the shadow spreads towards the inside
+;;;
+;;; blur_radius
+;;;     how much blur to apply to the shadow
+;;;
+;;; Returns
+;;;     A new GskRenderNode.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_outset_shadow_node_get_outline ()
+;;;
+;;; const GskRoundedRect *
+;;; gsk_outset_shadow_node_get_outline (GskRenderNode *node);
+;;;
+;;; Retrieves the outline rectangle of the outset shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an outset shadow.
+;;;
+;;; Returns
+;;;     a rounded rectangle.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_outset_shadow_node_get_color ()
+;;;
+;;; const GdkRGBA *
+;;; gsk_outset_shadow_node_get_color (GskRenderNode *node);
+;;;
+;;; Retrieves the color of the outset shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an outset shadow.
+;;;
+;;; Returns
+;;;     a color.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_outset_shadow_node_get_dx ()
+;;;
+;;; float
+;;; gsk_outset_shadow_node_get_dx (GskRenderNode *node);
+;;;
+;;; Retrieves the horizontal offset of the outset shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an outset shadow.
+;;;
+;;; Returns
+;;;     an offset, in pixels
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_outset_shadow_node_get_dy ()
+;;;
+;;; float
+;;; gsk_outset_shadow_node_get_dy (GskRenderNode *node);
+;;;
+;;; Retrieves the vertical offset of the outset shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an outset shadow.
+;;;
+;;; Returns
+;;;     an offset, in pixels
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_outset_shadow_node_get_spread ()
+;;;
+;;; float
+;;; gsk_outset_shadow_node_get_spread (GskRenderNode *node);
+;;;
+;;; Retrieves how much the shadow spreads outwards.
+;;;
+;;; node
+;;;     a GskRenderNode for an outset shadow.
+;;;
+;;; Returns
+;;;     the size of the shadow, in pixels
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_outset_shadow_node_get_blur_radius ()
+;;;
+;;; float
+;;; gsk_outset_shadow_node_get_blur_radius (GskRenderNode *node);
+;;;
+;;; Retrieves the blur radius of the shadow.
+;;;
+;;; node
+;;;     a GskRenderNode for an outset shadow.
+;;;
+;;; Returns
+;;;     the blur radius, in pixels
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
@@ -3291,6 +2219,1007 @@ color {
   (node render-node))
 
 (export 'transform-node-transform)
+
+;;; ----------------------------------------------------------------------------
+;;; GskOpacityNode
+;;;
+;;; typedef struct _GskOpacityNode GskOpacityNode;
+;;;
+;;; A render node controlling the opacity of its single child node.
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type opacity-node (render-node)
+  ()
+  (:simple-parser opacity-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'opacity-node)
+      "GskRenderNode"
+      (documentation 'opacity-node 'type)
+ "@version{#2023-10-27}
+  @begin{short}
+    A render node controlling the opacity of its single child render node.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'opacity-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_opacity_node_new ()
+;;;
+;;; GskRenderNode *
+;;; gsk_opacity_node_new (GskRenderNode *child,
+;;;                       float opacity);
+;;;
+;;; Creates a GskRenderNode that will drawn the child with reduced opacity .
+;;;
+;;; child
+;;;     The node to draw
+;;;
+;;; opacity
+;;;     The opacity to apply
+;;;
+;;; Returns
+;;;     A new GskRenderNode.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_opacity_node_get_child ()
+;;;
+;;; GskRenderNode *
+;;; gsk_opacity_node_get_child (GskRenderNode *node);
+;;;
+;;; Gets the child node that is getting opacityed by the given node .
+;;;
+;;; node
+;;;     a GskRenderNode for an opacity.
+;;;
+;;; Returns
+;;;     The child that is getting opacityed.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_opacity_node_get_opacity ()
+;;;
+;;; float
+;;; gsk_opacity_node_get_opacity (GskRenderNode *node);
+;;;
+;;; Gets the transparency factor for an opacity node.
+;;;
+;;; node
+;;;     a GskRenderNode for an opacity.
+;;;
+;;; Returns
+;;;     the opacity factor
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskColorMatrixNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type color-matrix-node (render-node)
+  ()
+  (:simple-parser color-matrix-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'color-matrix-node)
+      "GskRenderNode"
+      (documentation 'color-matrix-node 'type)
+ "@version{2023-10-27}
+  @begin{short}
+    A render node controlling the color matrix of its single child render node.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'color-matrix-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_color_matrix_node_new ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_color_matrix_node_new" color-matrix-node-new) render-node
+ #+liber-documentation
+ "@version{#2023-10-27}
+  @argument[child]{a @class{gsk:render-node} instance with the child render
+    node to draw}
+  @argument[matrix]{a @symbol{graphene:matrix-t} instance with the matrix to
+    apply}
+  @argument[offset]{a @symbol{graphene:vec4-t} instance with the values to add
+    to the color}
+  @return{A new @class{gsk:rende-node} instance.}
+  @begin{short}
+    Creates a render node that will draw the child render node with reduced
+    @arg{matrix}.
+  @end{short}
+  @see-class{gsk:color-matrix-node}
+  @see-class{gsk:render-node}
+  @see-symbol{graphene:matrix-t}
+  @see-symbol{graphene:vec4-t}"
+  (child render-node)
+  (matrix (:pointer (:struct graphene:matrix-t)))
+  (offset (:pointer (:struct graphene:vec4-t))))
+
+(export 'color-matrix-node-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_color_matrix_node_get_child ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_color_matrix_node_get_child" color-matrix-node-child)
+    render-node
+ #+liber-documentation
+ "@version{#2023-10-27}
+  @argument[node]{a @class{gsk:color-matrix-node} instance}
+  @return{A @class{gsk:render-node} instance with the child render node that
+    is getting its colors modified.}
+  @begin{short}
+    Gets the child render node that is getting its colors modified by the given
+    @arg{node}.
+  @end{short}
+  @see-class{gsk:color-matrix-node}
+  @see-class{gsk:render-node}"
+  (node render-node))
+
+(export 'color-matrix-node-child)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_color_matrix_node_get_color_matrix ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_color_matrix_node_get_color-matrix"
+               color-matrix-node-color-matrix)
+    (:pointer (:struct graphene:matrix-t))
+ #+liber-documentation
+ "@version{#2023-10-27}
+  @argument[node]{a @class{gsk:color-matrix-node} instance}
+  @return{A @symbol{graphene:matrix-t} instance with a 4x4 color matrix.}
+  @begin{short}
+    Retrieves the color matrix used by @arg{node}.
+  @end{short}
+  @see-class{gsk:colr-matrix-node}
+  @see-symbol{graphene:matrix-t}"
+  (node render-node))
+
+(export 'color-matrix-node-color-matrix)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_color_matrix_node_get_color_offset ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_color_matrix_node_get_color_offset"
+               color-matrix-node-color-offset)
+    (:pointer (:struct graphene:vec4-t))
+ #+liber-documentation
+ "@version{#2023-10-27}
+  @argument[node]{a @class{gsk:color-matrix-node} instance}
+  @return{A @symbol{graphene:vec4-t} instance with a color vector}
+  @begin{short}
+    Retrieves the color offset used by @arg{node}.
+  @end{short}
+  @see-class{gsk:color-matrix-node}
+  @see-symbol{graphene:vec4-t}"
+  (node render-node))
+
+(export 'color-matrix-node-color-offset)
+
+;;; ----------------------------------------------------------------------------
+;;; GskRepeatNode
+;;;
+;;; typedef struct _GskRepeatNode GskRepeatNode;
+;;;
+;;; A render node repeating its single child node.
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type repeat-node (render-node)
+  ()
+  (:simple-parser repeat-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'repeat-node)
+      "GskRenderNode"
+      (documentation 'repeat-node 'type)
+ "@version{#2023-10-27}
+  @begin{short}
+    A render node repeating its single child render node.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'repeat-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_repeat_node_new ()
+;;;
+;;; GskRenderNode *
+;;; gsk_repeat_node_new (const graphene_rect_t *bounds,
+;;;                      GskRenderNode *child,
+;;;                      const graphene_rect_t *child_bounds);
+;;;
+;;; Creates a GskRenderNode that will repeat the drawing of child across the
+;;; given bounds .
+;;;
+;;; bounds
+;;;     The bounds of the area to be painted
+;;;
+;;; child
+;;;     The child to repeat
+;;;
+;;; child_bounds
+;;;     The area of the child to repeat or NULL to use the child's bounds.
+;;;
+;;; Returns
+;;;     A new GskRenderNode.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_repeat_node_get_child ()
+;;;
+;;; GskRenderNode *
+;;; gsk_repeat_node_get_child (GskRenderNode *node);
+;;;
+;;; Retrieves the child of node .
+;;;
+;;; node
+;;;     a repeat GskRenderNode.
+;;;
+;;; Returns
+;;;     a GskRenderNode.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_repeat_node_get_child_bounds ()
+;;;
+;;; const graphene_rect_t *
+;;; gsk_repeat_node_get_child_bounds (GskRenderNode *node);
+;;;
+;;; Retrieves the bounding rectangle of the child of node .
+;;;
+;;; node
+;;;     a repeat GskRenderNode.
+;;;
+;;; Returns
+;;;     a bounding rectangle.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskClipNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type clip-node (render-node)
+  ()
+  (:simple-parser clip-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'clip-node)
+      "GskRenderNode"
+      (documentation 'clip-node 'type)
+ "@version{2023-10-27}
+  @begin{short}
+    A render node applying a rectangular clip to its single child render node.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'clip-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_clip_node_new ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_clip_node_new" clip-node-new) render-node
+ #+liber-documentation
+ "@version{#2023-10-27}
+  @argument[child]{a @class{gsk:render-node} instance with the render node to
+    draw}
+  @argument[clip]{a @symbol{graphene:rect-t} instance with the clip to apply}
+  @return{A new @class{gsk:render-node} instance.}
+  @begin{short}
+    Creates a render node that will clip the child render node to the area
+    given by @arg{clip}.
+  @end{short}
+  @see-class{gsk:clip-node}
+  @see-class{gsk:render-node}"
+  (child render-node)
+  (clip (:pointer (:struct graphene:rect-t))))
+
+(export 'clip-node-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_clip_node_get_child ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_clip_node_get_child" clip-node-child) render-node
+ #+liber-documentation
+ "@version{#2023-10-27}
+  @argument[node]{a @class{gsk:clip-node} instance}
+  @return{A @class{gsk:render-node} instance with the child render node that
+    is getting clipped.}
+  @begin{short}
+    Gets the child render node that is getting clipped by the given @arg{node}.
+  @end{short}
+  @see-class{gsk:clip-node}
+  @see-class{gsk:render-node}"
+  (node render-node))
+
+(export 'clip-node-child)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_clip_node_get_clip ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_clip_node_get_clip" clip-node-clip)
+    (:pointer (:struct graphene:rect-t))
+ #+liber-documentation
+ "@version{#2023-10-27}
+  @argument[node]{a @class{gsk:clip-node} instance}
+  @return{A @symbol{graphene:rect-t} instance with a clip rectangle.}
+  @begin{short}
+    Retrieves the clip rectangle for @arg{node}.
+  @end{short}
+  @see-class{gsk:clip-node}
+  @see-symbol{graphene:rect-t}"
+  (node render-node))
+
+(export 'clip-node-clip)
+
+;;; ----------------------------------------------------------------------------
+;;; GskRoundedClipNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type rounded-clip-node (render-node)
+  ()
+  (:simple-parser rounded-clip-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'rounded-clip-node)
+      "GskRenderNode"
+      (documentation 'rounded-clip-node 'type)
+ "@version{#2023-10-27}
+  @begin{short}
+    A render node applying a rounded rectangle clip to its single child
+    render node.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'rounded-clip-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_rounded_clip_node_new ()
+;;;
+;;; GskRenderNode *
+;;; gsk_rounded_clip_node_new (GskRenderNode *child,
+;;;                            const GskRoundedRect *clip);
+;;;
+;;; Creates a GskRenderNode that will clip the child to the area given by clip .
+;;;
+;;; child
+;;;     The node to draw
+;;;
+;;; clip
+;;;     The clip to apply
+;;;
+;;; Returns
+;;;     A new GskRenderNode.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_rounded_clip_node_get_child ()
+;;;
+;;; GskRenderNode *
+;;; gsk_rounded_clip_node_get_child (GskRenderNode *node);
+;;;
+;;; Gets the child node that is getting clipped by the given node .
+;;;
+;;; node
+;;;     a rounded clip GskRenderNode.
+;;;
+;;; Returns
+;;;     The child that is getting clipped.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_rounded_clip_node_get_clip ()
+;;;
+;;; const GskRoundedRect *
+;;; gsk_rounded_clip_node_get_clip (GskRenderNode *node);
+;;;
+;;; Retrievs the rounded rectangle used to clip the contents of the node .
+;;;
+;;; node
+;;;     a rounded clip GskRenderNode.
+;;;
+;;; Returns
+;;;     a rounded rectangle.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskShadowNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type shadow-node (render-node)
+  ()
+  (:simple-parser shadow-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'shadow-node)
+      "GskRenderNode"
+      (documentation 'shadow-node 'type)
+ "@version{#2023-10-27}
+  @begin{short}
+    A render node drawing one or more shadows behind its single child render
+    node.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'shadow-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_shadow_node_new ()
+;;;
+;;; GskRenderNode *
+;;; gsk_shadow_node_new (GskRenderNode *child,
+;;;                      const GskShadow *shadows,
+;;;                      gsize n_shadows);
+;;;
+;;; Creates a GskRenderNode that will draw a child with the given shadows below
+;;; it.
+;;;
+;;; child
+;;;     The node to draw
+;;;
+;;; shadows
+;;;     The shadows to apply.
+;;;
+;;; n_shadows
+;;;     number of entries in the shadows array
+;;;
+;;; Returns
+;;;     A new GskRenderNode.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_shadow_node_get_shadow ()
+;;;
+;;; const GskShadow *
+;;; gsk_shadow_node_get_shadow (GskRenderNode *node,
+;;;                             gsize i);
+;;;
+;;; Retrieves the shadow data at the given index i .
+;;;
+;;; node
+;;;     a shadow GskRenderNode.
+;;;
+;;; i
+;;;     the given index
+;;;
+;;; Returns
+;;;     the shadow data.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_shadow_node_get_n_shadows ()
+;;;
+;;; gsize
+;;; gsk_shadow_node_get_n_shadows (GskRenderNode *node);
+;;;
+;;; Retrieves the number of shadows in the node .
+;;;
+;;; node
+;;;     a shadow GskRenderNode.
+;;;
+;;; Returns
+;;;     the number of shadows.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_shadow_node_get_child ()
+;;;
+;;; GskRenderNode *
+;;; gsk_shadow_node_get_child (GskRenderNode *node);
+;;;
+;;; Retrieves the child GskRenderNode of the shadow node .
+;;;
+;;; node
+;;;     a shadow GskRenderNode.
+;;;
+;;; Returns
+;;;     the child render node.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskBlendNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type blend-node (render-node)
+  ()
+  (:simple-parser blend-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'blend-node)
+      "GskRenderNode"
+      (documentation 'blend-node 'type)
+ "@version{2023-10-25}
+  @begin{short}
+    A render node applying a blending function between its two child nodes.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'blend-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_blend_node_new ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_blend_node_new" blend-node-new) render-node
+ #+liber-documentation
+ "@version{#2023-10-26}
+  @argument[bottom]{a @class{gsk:render-node} instance with the bottom node to
+    be drawn}
+  @argument[top]{a @class{gsk:render-node} instance with the top node to
+    be blended onto the bottom node}
+  @argument[mode]{a @symbol{gsk:blend-mode} value with the blend mode to use}
+  @return{A new @class{gsk:blend-node} instance.}
+  @begin{short}
+    Creates a render node that will use @arg{mode} to blend the top node onto
+    the bottom node.
+  @end{short}
+  @see-class{gsk:blend-node}
+  @see-class{gsk:render-node}"
+  (bottom render-node)
+  (top render-node)
+  (mode blend-mode))
+
+(export 'blend-node-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_blend_node_get_bottom_child ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_blend_node_get_bottom_child" blend-node-bottom-child)
+    render-node
+ #+liber-documentation
+ "@version{#2023-10-26}
+  @argument[node]{a @class{gsk:blend-node} instance}
+  @return{A @class{gsk:render-node} instance with the bottom child node}
+  @begin{short}
+    Retrieves the bottom render node child of @arg{node}.
+  @end{short}
+  @see-class{gsk:blend-mode}
+  @see-class{gsk:render-node}"
+  (node render-node))
+
+(export 'blend-node-bottom-child)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_blend_node_get_top_child ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_blend_node_get_top_child" blend-node-top-child) render-node
+ #+liber-documentation
+ "@version{#2023-10-26}
+  @argument[node]{a @class{gsk:blend-node} instance}
+  @return{A @class{gsk:render-node} instance with the top child node}
+  @begin{short}
+    Retrieves the top render node child of @arg{node}.
+  @end{short}
+  @see-class{gsk:blend-mode}
+  @see-class{gsk:render-node}"
+  (node render-node))
+
+(export 'blend-node-top-child)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_blend_node_get_blend_mode ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_blend_node_get_blend_mode" blend-node-blend-mode) blend-mode
+ #+liber-documentation
+ "@version{#2023-10-26}
+  @argument[node]{a @class{gsk:blend-node} instance}
+  @return{A @symbol{gsk:blend-mode} value with the blend mode.}
+  @begin{short}
+    Retrieves the blend mode used by @arg{node}.
+  @end{short}
+  @see-class{gsk:blend-node}
+  @see-symbol{gsk:blend-mode}"
+  (node render-node))
+
+(export 'blend-node-blend-mode)
+
+;;; ----------------------------------------------------------------------------
+;;; GskCrossFadeNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type cross-fade-node (render-node)
+  ()
+  (:simple-parser cross-fade-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'cross-fade-node)
+      "GskRenderNode"
+      (documentation 'cross-fade-node 'type)
+ "@version{#2023-10-27}
+  @begin{short}
+    A render node cross fading between two child render nodes.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'cross-fade-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_cross_fade_node_new ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_cross_fade_node_new" cross-fade-node-new) render-node
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[start]{a @class{gsk:render-node} instance with the start render
+    node to be drawn}
+  @argument[end]{a @class{gsk:render-node} instance with the render node to be
+    cross-fadeed onto the start node}
+  @argument[progress]{a single float how far the fade has progressed from start
+    to end. The value will be clamped to the range [0 ... 1]}
+  @return{A new @class{gsk:cross-fade-node} instance.}
+  @begin{short}
+    Creates a render node that will do a cross-fade between @arg{start} and
+    @arg{end}.
+  @end{short}
+  @see-class{gsk:cross-fade-node}
+  @see-class{gsk:render-node}"
+  (start render-node)
+  (end render-node)
+  (progress :float))
+
+(export 'cross-fade-node-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_cross_fade_node_get_start_child ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_cross_fade_node_get_start_child"
+               cross-fade-node-start-child) render-node
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:cross-fade-node} instance}
+  @return{A @class{gsk:render-node} instance.}
+  @begin{short}
+    Retrieves the child render node at the beginning of the cross-fade.
+  @end{short}
+  @see-class{gsk:cross-fade-node}
+  @see-class{gsk:render-node}"
+  (node render-node))
+
+(export 'cross-fade-start-child)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_cross_fade_node_get_end_child ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_cross_fade_node_get_end_child"
+               cross-fade-node-end-child) render-node
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:cross-fade-node} instance}
+  @return{A @class{gsk:render-node} instance.}
+  @begin{short}
+    Retrieves the child render node at the end of the cross-fade.
+  @end{short}
+  @see-class{gsk:cross-fade-node}
+  @see-class{gsk:render-node}"
+  (node render-node))
+
+(export 'cross-fade-node-end-child)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_cross_fade_node_get_progress ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_cross_fade_node_get_progress" cross-fade-node-progress)
+    :float
+ #+liber-documentation
+ "@version{#2023-11-6}
+  @argument[node]{a @class{gsk:cross-fade-node} instance}
+  @return{A single float with the progress value, between 0 and 1.}
+  @short{Retrieves the progress value of the cross fade node.}
+  @see-class{gsk:cross-fade-node}"
+  (node render-node))
+
+(export 'cross-fade-node-progress)
+
+;;; ----------------------------------------------------------------------------
+;;; GskTextNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type text-node (render-node)
+  ()
+  (:simple-parser text-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'text-node)
+      "GskRenderNode"
+      (documentation 'text-node 'type)
+ "@version{#2023-10-27}
+  @begin{short}
+    A render node drawing a set of glyphs.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'text-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_text_node_new ()
+;;;
+;;; GskRenderNode *
+;;; gsk_text_node_new (PangoFont *font,
+;;;                    PangoGlyphString *glyphs,
+;;;                    const GdkRGBA *color,
+;;;                    const graphene_point_t *offset);
+;;;
+;;; Creates a render node that renders the given glyphs, Note that color may
+;;; not be used if the font contains color glyphs.
+;;;
+;;; font
+;;;     the PangoFont containing the glyphs
+;;;
+;;; glyphs
+;;;     the PangoGlyphString to render
+;;;
+;;; color
+;;;     the foreground color to render with
+;;;
+;;; offset
+;;;     offset of the baseline
+;;;
+;;; Returns
+;;;     a new GskRenderNode.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_text_node_get_font ()
+;;;
+;;; PangoFont *
+;;; gsk_text_node_get_font (GskRenderNode *node);
+;;;
+;;; Returns the font used by the text node .
+;;;
+;;; node
+;;;     The GskRenderNode.
+;;;
+;;; Returns
+;;;     the font.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_text_node_get_glyphs ()
+;;;
+;;; const PangoGlyphInfo *
+;;; gsk_text_node_get_glyphs (GskRenderNode *node,
+;;;                           guint *n_glyphs);
+;;;
+;;; Retrieves the glyph information in the node .
+;;;
+;;; node
+;;;     a text GskRenderNode.
+;;;
+;;; n_glyphs
+;;;     the number of glyphs returned.
+;;;
+;;; Returns
+;;;     the glyph information.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_text_node_get_color ()
+;;;
+;;; const GdkRGBA *
+;;; gsk_text_node_get_color (GskRenderNode *node);
+;;;
+;;; Retrieves the color used by the text node .
+;;;
+;;; node
+;;;     a text GskRenderNode.
+;;;
+;;; Returns
+;;;     the text color.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_text_node_has_color_glyphs ()
+;;;
+;;; gboolean
+;;; gsk_text_node_has_color_glyphs (GskRenderNode *node);
+;;;
+;;; Checks whether the text node has color glyphs.
+;;;
+;;; node
+;;;     a text GskRenderNode.
+;;;
+;;; Returns
+;;;     TRUE if the text node has color glyphs
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_text_node_get_num_glyphs ()
+;;;
+;;; guint
+;;; gsk_text_node_get_num_glyphs (GskRenderNode *node);
+;;;
+;;; Retrieves the number of glyphs in the text node.
+;;;
+;;; node
+;;;     a text GskRenderNode.
+;;;
+;;; Returns
+;;;     the number of glyphs
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_text_node_get_offset ()
+;;;
+;;; const graphene_point_t *
+;;; gsk_text_node_get_offset (GskRenderNode *node);
+;;;
+;;; Retrieves the offset applied to the text.
+;;;
+;;; node
+;;;     a text GskRenderNode.
+;;;
+;;; Returns
+;;;     a point with the horizontal and vertical offsets.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskBlurNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type blur-node (render-node)
+  ()
+  (:simple-parser blur-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'blur-node)
+      "GskRenderNode"
+      (documentation 'blur-node 'type)
+ "@version{2023-10-26}
+  @begin{short}
+    A render node applying a blur effect between its single child node.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'blur-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_blur_node_new ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_blur_node_new" blur-node-new) render-node
+ #+liber-documentation
+ "@version{#2023-10-26}
+  @argument[child]{a @class{gsk:render-node} instance with the child to blur}
+  @argument[radius]{a single float with the blur radius}
+  @return{A new @class{gsk:blur-node} instance.}
+  @begin{short}
+    Creates a render node that blurs the child render node.
+  @end{short}
+  @see-class{gsk:blur-node}
+  @see-class{gsk:render-node}"
+  (child render-node)
+  (radius :float))
+
+(export 'blur-node-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_blur_node_get_child ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_blur_node_get_child" blur-node-child) render-node
+ #+liber-documentation
+ "@version{#2023-10-26}
+  @argument[node]{a @class{gsk:blur-node} instance}
+  @return{A @class{gsk:render-node} instance with the blurred child render
+    node.}
+  @begin{short}
+    Retrieves the child render node of the blur render node.
+  @end{short}
+  @see-class{gsk:blur-node}
+  @see-class{gsk:render-node}"
+  (node blur-node))
+
+(export 'blur-node-child)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_blur_node_get_radius ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_blur_node_get_radius" blur-node-radius) :float
+ #+liber-documentation
+ "@version{#2023-10-26}
+  @argument[node]{a @class{gsk:blur-node} instance}
+  @return{A single float with the blur radius.}
+  @begin{short}
+    Retrieves the blur radius of the blur render node.
+  @end{short}
+  @see-class{gsk:blur-node}"
+  (node blur-node))
+
+(export 'blur-node-radius)
+
+;;; ----------------------------------------------------------------------------
+;;; GskDebugNode
+;;; ----------------------------------------------------------------------------
+
+(cffi:define-foreign-type debug-node (render-node)
+  ()
+  (:simple-parser debug-node))
+
+#+liber-documentation
+(setf (liber:alias-for-class 'debug-node)
+      "GskRenderNode"
+      (documentation 'debug-node 'type)
+ "@version{#2023-10-27}
+  @begin{short}
+    A render node that emits a debugging message when drawing its child
+    render node.
+  @end{short}
+  @see-class{gsk:render-node}")
+
+(export 'debug-node)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_debug_node_new ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_debug_node_new" debug-node-new) render-node
+ #+liber-documentation
+ "@version{#2023-11-16}
+  @argument[child]{a @class{gsk:render-node} instance with the child to add
+    debug info for}
+  @argument[message]{a string with the debug message}
+  @return{The new @class{gsk:debug-node} instance.}
+  @begin{short}
+    Creates a render node that will add debug information about the given
+    @arg{child}.
+  @end{short}
+  Adding this node has no visual effect.
+  @see-class{gsk:debug-node}
+  @see-class{gsk:rendernode}"
+  (child render-node)
+  (message :string))
+
+(export 'debug-node-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_debug_node_get_child ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_debug_node_get_child" debug-node-child) render-node
+ #+liber-documentation
+ "@version{#2023-11-16}
+  @argument[node]{a debug @class{gsk:debug-node} instance}
+  @return{The child @class{gsk:render-node} instance.}
+  @begin{short}
+    Gets the child node that is getting drawn by the given @arg{node}.
+  @end{short}
+  @see-class{gsk:debug-node}
+  @see-class{gsk:render-node}"
+  (node render-node))
+
+(export 'debug-node-child)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_debug_node_get_message ()
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_debug_node_get_message" debug-node-message) :string
+ #+liber-documentation
+ "@version{#2023-11-16}
+  @argument[node]{a @class{gsk:debug-node} instance}
+  @return{A string with the debug message.}
+  @begin{short}
+    Gets the debug message that was set on this render node.
+  @end{short}
+  @see-class{gsk:debug-node}"
+  (node render-node))
+
+(export 'debug-node-message)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskGLShaderNode
@@ -3420,6 +3349,89 @@ color {
 ;;;
 ;;; Returns
 ;;;     the GskGLShader shader.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskTextureScaleNode
+;;;
+;;; final class Gsk.TextureScaleNode : GObject.TypeInstance
+;;; {
+;;;   /* No available fields */
+;;; }
+;;;
+;;; A render node for a GdkTexture.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_texture_scale_node_new
+;;;
+;;; Creates a node that scales the texture to the size given by the bounds
+;;; using the filter and then places it at the bounds’ position.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_texture_scale_node_get_filter
+;;;
+;;; Retrieves the GskScalingFilter used when creating this GskRenderNode.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_texture_scale_node_get_texture
+;;;
+;;; Retrieves the GdkTexture used when creating this GskRenderNode.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; GskMaskNode
+;;;
+;;; final class Gsk.MaskNode : GObject.TypeInstance
+;;; {
+;;;   /* No available fields */
+;;; }
+;;;
+;;; A render node masking one child node with another.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_mask_node_new
+;;;
+;;; Creates a GskRenderNode that will mask a given node by another.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_mask_node_get_mask
+;;;
+;;; Retrieves the mask GskRenderNode child of the node.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_mask_node_get_mask_mode
+;;;
+;;; Retrieves the mask mode used by node.
+;;;
+;;; Since 4.10
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_mask_node_get_source
+;;;
+;;; Retrieves the source GskRenderNode child of the node.
+;;;
+;;; Since 4.10
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- End of file gsk4.render-node.lis ---------------------------------------

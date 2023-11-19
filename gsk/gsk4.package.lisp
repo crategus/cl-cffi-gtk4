@@ -86,50 +86,17 @@
     @about-function{render-node-deserialize}
     @about-function{render-node-write-to-file}
     @about-function{render-node-bounds}
-    @about-class{blend-node}
-    @about-function{blend-node-new}
-    @about-function{blend-node-bottom-child}
-    @about-function{blend-node-top-child}
-    @about-function{blend-node-blend-mode}
-    @about-class{blur-node}
-    @about-function{blur-node-new}
-    @about-function{blur-node-child}
-    @about-function{blur-node-radius}
-    @about-class{border-node}
-    @about-function{border-node-new}
-    @about-function{border-node-outline}
-    @about-function{border-node-widths}
-    @about-function{border-node-colors}
-    @about-class{cairo-node}
-    @about-function{cairo-node-new}
-    @about-function{cairo-node-draw-context}
-    @about-function{cairo-node-surface}
-    @about-class{clip-node}
-    @about-function{clip-node-new}
-    @about-function{clip-node-child}
-    @about-function{clip-node-clip}
-    @about-class{color-node}
-    @about-function{color-node-new}
-    @about-function{color-node-color}
-    @about-class{color-matrix-node}
-    @about-function{color-matrix-node-new}
-    @about-function{color-matrix-node-child}
-    @about-function{color-matrix-node-color-matrix}
-    @about-function{color-matrix-node-color-offset}
     @about-class{container-node}
     @about-function{container-node-new}
     @about-function{container-node-n-children}
     @about-function{container-node-child}
-    @about-class{cross-fade-node}
-    @about-function{cross-fade-node-new}
-    @about-function{cross-fade-node-start-child}
-    @about-function{cross-fade-node-end-child}
-    @about-function{cross-fade-node-progress}
-    @about-class{debug-node}
-    @about-function{debug-node-new}
-    @about-function{debug-node-child}
-    @about-function{debug-node-message}
-
+    @about-class{cairo-node}
+    @about-function{cairo-node-new}
+    @about-function{cairo-node-draw-context}
+    @about-function{cairo-node-surface}
+    @about-class{color-node}
+    @about-function{color-node-new}
+    @about-function{color-node-color}
     @about-class{linear-gradient-node}
     @about-function{linear-gradient-node-new}
     @about-function{linear-gradient-node-start}
@@ -155,13 +122,14 @@
     @about-function{conic-gradient-node-color-stops}
     @about-function{conic-gradient-node-center}
     @about-function{conic-gradient-node-rotation}
-
-    @about-class{shadow-node}
-    @about-function{shadow-node-new}
-    @about-function{shadow-node-shadow}
-    @about-function{shadow-node-n-shadows}
-    @about-function{shadow-node-child}
-
+    @about-class{border-node}
+    @about-function{border-node-new}
+    @about-function{border-node-outline}
+    @about-function{border-node-widths}
+    @about-function{border-node-colors}
+    @about-class{texture-node}
+    @about-function{texture-node-new}
+    @about-function{texture-node-texture}
     @about-class{inset-shadow-node}
     @about-function{inset-shadow-node-new}
     @about-function{inset-shadow-node-outline}
@@ -170,7 +138,6 @@
     @about-function{inset-shadow-node-dy}
     @about-function{inset-shadow-node-spread}
     @about-function{inset-shadow-node-blur-radius}
-
     @about-class{outset-shadow-node}
     @about-function{outset-shadow-node-new}
     @about-function{outset-shadow-node-outline}
@@ -179,23 +146,46 @@
     @about-function{outset-shadow-node-dy}
     @about-function{outset-shadow-node-spread}
     @about-function{outset-shadow-node-blur-radius}
-
-
-
+    @about-class{transform-node}
+    @about-function{transform-node-new}
+    @about-function{transform-node-child}
+    @about-function{transform-node-transform}
     @about-class{opacity-node}
     @about-function{opacity-node-new}
     @about-function{opacity-node-child}
     @about-function{opacity-node-opacity}
-
+    @about-class{color-matrix-node}
+    @about-function{color-matrix-node-new}
+    @about-function{color-matrix-node-child}
+    @about-function{color-matrix-node-color-matrix}
+    @about-function{color-matrix-node-color-offset}
     @about-class{repeat-node}
     @about-function{repeat-node-new}
     @about-function{repeat-node-child}
     @about-function{repeat-node-child-bounds}
+    @about-class{clip-node}
+    @about-function{clip-node-new}
+    @about-function{clip-node-child}
+    @about-function{clip-node-clip}
     @about-class{rounded-clip-node}
     @about-function{rounded-clip-node-new}
     @about-function{rounded-clip-node-child}
     @about-function{rounded-clip-node-clip}
-
+    @about-class{shadow-node}
+    @about-function{shadow-node-new}
+    @about-function{shadow-node-shadow}
+    @about-function{shadow-node-n-shadows}
+    @about-function{shadow-node-child}
+    @about-class{blend-node}
+    @about-function{blend-node-new}
+    @about-function{blend-node-bottom-child}
+    @about-function{blend-node-top-child}
+    @about-function{blend-node-blend-mode}
+    @about-class{cross-fade-node}
+    @about-function{cross-fade-node-new}
+    @about-function{cross-fade-node-start-child}
+    @about-function{cross-fade-node-end-child}
+    @about-function{cross-fade-node-progress}
     @about-class{text-node}
     @about-function{text-node-new}
     @about-function{text-node-font}
@@ -204,13 +194,14 @@
     @about-function{text-node-has-color-glyphs}
     @about-function{text-node-num-glyphs}
     @about-function{text-node-offset}
-    @about-class{texture-node}
-    @about-function{texture-node-new}
-    @about-function{texture-node-texture}
-    @about-class{transform-node}
-    @about-function{transform-node-new}
-    @about-function{transform-node-child}
-    @about-function{transform-node-transform}
+    @about-class{blur-node}
+    @about-function{blur-node-new}
+    @about-function{blur-node-child}
+    @about-function{blur-node-radius}
+    @about-class{debug-node}
+    @about-function{debug-node-new}
+    @about-function{debug-node-child}
+    @about-function{debug-node-message}
     @about-class{gl-shader-node}
     @about-function{gl-shader-node-new}
     @about-function{gl-shader-node-n-children}
