@@ -24,6 +24,7 @@ GListModel support
   gtk4.numeric-sorter.lisp             GtkNumericSorter               GTK 4.12
   gtk4.column-view-sorter.lisp         GtkColumnViewSorter            GTK 4.12
 
+  gtk4.section-model.lisp              GtkSectionModel                GTK 4.12 +
   gtk4.selection-model.lisp            GtkSelectionModel              GTK 4.12
   gtk4.no-selection.lisp               GtkNoSelection                 GTK 4.12
   gtk4.single-selection.lisp           GtkSingleSelection             GTK 4.12
@@ -46,6 +47,7 @@ List-based Widgets
   gtk4.list-item-factory.lisp          GtkListItemFactory             GTK 4.12
   gtk4.signal-list-item-factory.lisp   GtkSignalListItemFactory       GTK 4.12
   gtk4.builder-list-item-factory.lisp  GtkBuilderListItemFactory      GTK 4.12
+  gtk4.scroll-info.lisp                GtkScrollInfo                  GTK 4.12
   gtk4.list-view.lisp                  GtkListView                    GTK 4.12
   gtk4.grid-view.lisp                  GtkGridView                    GTK 4.12
   gtk4.column-view.lisp                GtkColumnView                  GTK 4.12

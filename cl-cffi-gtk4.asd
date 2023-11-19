@@ -200,6 +200,7 @@
      (:file "gtk4.signal-list-item-factory")
      (:file "gtk4.builder-list-item-factory")
      (:file "gtk4.scroll-info"                   :if-feature :gtk-4-12)
+     (:file "gtk4.list-header"                   :if-feature :gtk-4-12)
      (:file "gtk4.list-view")
      (:file "gtk4.grid-view")
      (:file "gtk4.column-view")
@@ -575,7 +576,7 @@
      (:file "rtest-gtk4-list-item-factory")
 ;    gtk4.signal-list-item-factory.lisp
 ;    gtk4.builder-list-item-factory.lisp
-;    (:file "gtk4.scroll-info"                   :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-scroll-info"             :if-feature :gtk-4-12)
 ;    gtk4.list-view.lisp
 ;    gtk4.grid-view.lisp
 ;    gtk4.column-view.lisp

@@ -109,6 +109,7 @@
       @about-function{expression-value-type}
       @about-function{expression-is-static}
       @about-function{expression-evaluate}
+      @about-function{expression-evaluate-value}
       @about-function{expression-bind}
       @about-symbol{expression-notify}
       @about-function{expression-watch}
@@ -243,6 +244,11 @@
       @about-generic{column-view-sorter-primary-sort-order}
       @about-function{column-view-sorter-n-sort-columns}
       @about-function{column-view-sorter-nth-sort-column}
+    @end{subsection}
+    @begin[GtkSectionModel]{subsection}
+      @about-class{section-model}
+      @about-function{section-model-section}
+      @about-function{section-model-sections-changed}
     @end{subsection}
     @begin[GtkSelectionModel]{subsection}
       Extension of the list model interface that handles selections.
@@ -418,6 +424,12 @@
       @about-generic{builder-list-item-factory-scope}
       @about-function{builder-list-item-factory-new-from-bytes}
       @about-function{builder-list-item-factory-new-from-resource}
+    @end{subsection}
+    @begin[GtkScrollInfo]{subsection}
+      @about-class{scroll-info}
+      @about-function{scroll-info-new}
+      @about-function{scroll-info-enable-horizontal}
+      @about-function{scroll-info-enable-vertical}
     @end{subsection}
     @begin[GtkListView]{subsection}
       A widget for displaying lists.
