@@ -409,15 +409,29 @@ lambda (gridview position)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_grid_view_scroll_to
-;;;
-;;; Scrolls to the item at the given position and performs the actions
-;;; specified in flags.
-;;;
-;;; Since 4.12
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-12
 (cffi:defcfun ("gtk_list_view_scroll_to" grid-view-scroll-to) :void
+ #+liber-documentation
+ "@version{#2023-11-16}
+  @argument[gridview]{a @class{gtk:grid-view} widget}
+  @argument[pos]{an unsigned integer with the position of the item}
+  @argument[flags]{a @symbol{gtk:list-scroll-flags} value with the actions to
+    perform}
+  @argument[scroll]{a @class{gtk:scroll-info} with the details of how to perform
+    the scroll operation of @code{nil} to scroll into the grid view}
+  @begin{short}
+    Scrolls to the item at the given position and performs the actions specified
+    in @arg{flags}.
+  @end{short}
+  This function works no matter if the grid view is shown or focused. If it is
+  not, then the changes will take effect once that happens.
+
+  Since 4.12
+  @see-class{gtk:grid-view}
+  @see-class{gtk:scroll-info}
+  @see-symbol{gtk:list-scroll-flags}"
   (gridview (g:object grid-view))
   (pos :uint)
   (flags list-scroll-flags)

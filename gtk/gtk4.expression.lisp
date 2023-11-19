@@ -368,6 +368,9 @@ case PROP_EXPRESSION:
   It is possible that expressions cannot be evaluated - for example when the
   expression references objects that have been destroyed. In that case
   @em{false} will be returned.
+
+  See the @fun{gtk:expression-evaluate-value} function for a variant that does
+  not need an @symbol{g:value} instance, but returns the value.
   @see-class{gtk:expression}
   @see-symbol{g:value}
   @see-function{gtk:expression-value-type}"
@@ -384,6 +387,18 @@ case PROP_EXPRESSION:
 ;; Document the function.
 
 (defun expression-evaluate-value (expression object)
+ #+liber-documentation
+ "@version{#2023-11-16}
+  @argument[expression]{a @class{gtk:expression} instance}
+  @argument[object]{a @class{g:object} instance for the evaluation}
+  @return{The evaluated value of the expression.}
+  @begin{short}
+    Evaluates the given @arg{expression} and on success returns the result.
+  @end{short}
+  This is a variant of the @fun{gtk:expression-evaluate} function that avoids
+  the usage of a @symbol{g:value} instance to get the value of the expression.
+  @see-class{gtk:expression}
+  @see-function{gtk:expression-evaluate}"
   (cffi:with-foreign-object (gvalue '(:struct g:value))
     (g:value-init gvalue)
     (if object
@@ -429,9 +444,9 @@ case PROP_EXPRESSION:
   @see-class{gtk:expression-watch}
   @see-function{g:object-set}"
   (expression expression)
-  (target :pointer)
+  (target g:object)
   (property :string)
-  (this :pointer))
+  (this g:object))
 
 (export 'expression-bind)
 
