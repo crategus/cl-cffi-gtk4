@@ -431,7 +431,7 @@
 
 (cffi:defcstruct %color-stop
   (offset :float)
-  (color (g:boxed gdk:rgba)))
+  (color (:struct gdk::rgba-cstruct)))
 
 ;;; ----------------------------------------------------------------------------
 ;;; struct GskShadow
@@ -457,6 +457,12 @@
 ;;; float radius;
 ;;;     the radius of the shadow
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcstruct %shadow
+  (color (:struct gdk::rgba-cstruct))
+  (dx :float)
+  (dy :float)
+  (radius :float))
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GskBlendMode
@@ -1118,6 +1124,31 @@ color {
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_linear_gradient_node_new" %linear-gradient-node-new)
+    render-node
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (start (:pointer (:struct graphene:point-t)))
+  (end (:pointer (:struct graphene:point-t)))
+  (color-stops :pointer)
+  (n-stops :size))
+
+(defun linear-gradient-node-new (bounds start end color-stops)
+  (let ((n-stops (length color-stops)))
+    (cffi:with-foreign-object (color-stops-ptr '(:struct %color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in color-stops)
+            (for ptr = (cffi:mem-aptr color-stops-ptr
+                                      '(:struct %color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr
+                                  (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%linear-gradient-node-new bounds start end color-stops-ptr n-stops))))
+
+(export 'linear-gradient-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_linear_gradient_node_get_start ()
 ;;;
@@ -1132,6 +1163,12 @@ color {
 ;;; Returns :
 ;;;     the initial point.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_linear_gradient_node_get_start" linear-gradient-node-start)
+    (:pointer (:struct graphene:point-t))
+  (node render-node))
+
+(export 'linear-gradient-node-start)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_linear_gradient_node_get_end ()
@@ -1148,6 +1185,12 @@ color {
 ;;;     the final point.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_linear_gradient_node_get_end" linear-gradient-node-end)
+    (:pointer (:struct graphene:point-t))
+  (node render-node))
+
+(export 'linear-gradient-node-end)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_linear_gradient_node_get_n_color_stops ()
 ;;;
@@ -1163,6 +1206,12 @@ color {
 ;;; Returns
 ;;;     the number of color stops
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_linear_gradient_node_get_n_color_stops"
+               linear-gradient-node-n-color-stops) :size
+  (node render-node))
+
+(export 'linear-gradient-node-n-color-stops)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_linear_gradient_node_get_color_stops ()
@@ -1182,6 +1231,25 @@ color {
 ;;; Returns
 ;;;     the color stops in the gradient.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_linear_gradient_node_get_color_stops"
+               %linear-gradient-node-color-stops) :pointer
+  (node render-node)
+  (n-stops (:pointer :size)))
+
+(defun linear-gradient-node-color-stops (node)
+  (cffi:with-foreign-object (n-stops :size)
+    (let ((color-stops-ptr (%linear-gradient-node-color-stops node n-stops)))
+      (iter (for i from 0 below (cffi:mem-ref n-stops :size))
+            (for ptr = (cffi:mem-aptr color-stops-ptr
+                                      '(:struct %color-stop) i))
+            (collect (list (cffi:mem-ref ptr :float)
+                           (cffi:convert-from-foreign
+                             (cffi:inc-pointer ptr
+                                               (cffi:foreign-type-size :float))
+                             '(g:boxed gdk:rgba))))))))
+
+(export 'linear-gradient-node-color-stops)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskRepeatingLinearGradientNode
@@ -1243,6 +1311,32 @@ color {
 ;;; Returns :
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_repeating_linear_gradient_node_new"
+               %repeating-linear-gradient-node-new) render-node
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (start (:pointer (:struct graphene:point-t)))
+  (end (:pointer (:struct graphene:point-t)))
+  (color-stops :pointer)
+  (n-stops :size))
+
+(defun repeating-linear-gradient-node-new (bounds start end color-stops)
+  (let ((n-stops (length color-stops)))
+    (cffi:with-foreign-object (color-stops-ptr '(:struct %color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in color-stops)
+            (for ptr = (cffi:mem-aptr color-stops-ptr
+                                      '(:struct %color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr
+                                  (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%repeating-linear-gradient-node-new bounds
+                                           start end color-stops-ptr n-stops))))
+
+(export 'repeating-linear-gradient-node-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskRadialGradientNode
@@ -1315,12 +1409,50 @@ color {
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_radial_gradient_node_new" %radial-gradient-node-new)
+    render-node
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (center (:pointer (:struct graphene:point-t)))
+  (hradius :float)
+  (vradius :float)
+  (start :float)
+  (end :float)
+  (color-stops :pointer)
+  (n-stops :size))
+
+(defun radial-gradient-node-new (bounds
+                                 center
+                                 hradius vradius
+                                 start end
+                                 color-stops)
+  (let ((n-stops (length color-stops)))
+    (cffi:with-foreign-object (color-stops-ptr '(:struct %color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in color-stops)
+            (for ptr = (cffi:mem-aptr color-stops-ptr
+                                      '(:struct %color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr
+                                  (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%radial-gradient-node-new bounds
+                                 center
+                                 (coerce hradius 'single-float)
+                                 (coerce vradius 'single-float)
+                                 (coerce start 'single-float)
+                                 (coerce end 'single-float)
+                                 color-stops-ptr
+                                 n-stops))))
+
+(export 'radial-gradient-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_radial_gradient_node_get_n_color_stops ()
 ;;;
 ;;; gsize
-;;; gsk_radial_gradient_node_get_n_color_stops
-;;;                                (GskRenderNode *node);
+;;; gsk_radial_gradient_node_get_n_color_stops (GskRenderNode *node);
 ;;;
 ;;; Retrieves the number of color stops in the gradient.
 ;;;
@@ -1330,6 +1462,12 @@ color {
 ;;; Returns
 ;;;     the number of color stops
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_radial_gradient_node_get_n_color_stops"
+               radial-gradient-node-n-color-stops) :size
+  (node render-node))
+
+(export 'radial-gradient-node-n-color-stops)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_radial_gradient_node_get_color_stops ()
@@ -1351,6 +1489,25 @@ color {
 ;;;     the color stops in the gradient.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_radial_gradient_node_get_color_stops"
+               %radial-gradient-node-color-stops) :pointer
+  (node render-node)
+  (n-stops (:pointer :size)))
+
+(defun radial-gradient-node-color-stops (node)
+  (cffi:with-foreign-object (n-stops :size)
+    (let ((color-stops-ptr (%radial-gradient-node-color-stops node n-stops)))
+      (iter (for i from 0 below (cffi:mem-ref n-stops :size))
+            (for ptr = (cffi:mem-aptr color-stops-ptr
+                                      '(:struct %color-stop) i))
+            (collect (list (cffi:mem-ref ptr :float)
+                           (cffi:convert-from-foreign
+                             (cffi:inc-pointer ptr
+                                               (cffi:foreign-type-size :float))
+                             '(g:boxed gdk:rgba))))))))
+
+(export 'radial-gradient-node-color-stops)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_radial_gradient_node_get_start ()
 ;;;
@@ -1365,6 +1522,12 @@ color {
 ;;; Returns
 ;;;     the start value for the gradient
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_radial_gradient_node_get_start" radial-gradient-node-start)
+    :float
+  (node render-node))
+
+(export 'radial-gradient-node-start)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_radial_gradient_node_get_end ()
@@ -1381,6 +1544,12 @@ color {
 ;;;     the end value for the gradient
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_radial_gradient_node_get_end" radial-gradient-node-end)
+    :float
+  (node render-node))
+
+(export 'radial-gradient-node-end)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_radial_gradient_node_get_hradius ()
 ;;;
@@ -1395,6 +1564,12 @@ color {
 ;;; Returns
 ;;;     the horizontal radius for the gradient
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_radial_gradient_node_get_hradius"
+               radial-gradient-node-hradius) :float
+  (node render-node))
+
+(export 'radial-gradient-node-hradius)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_radial_gradient_node_get_vradius ()
@@ -1411,6 +1586,12 @@ color {
 ;;;     the vertical radius for the gradient
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_radial_gradient_node_get_vradius"
+               radial-gradient-node-vradius) :float
+  (node render-node))
+
+(export 'radial-gradient-node-vradius)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_radial_gradient_node_get_center ()
 ;;;
@@ -1425,6 +1606,13 @@ color {
 ;;; Returns
 ;;;     the center point for the gradient
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_radial_gradient_node_get_center"
+               radial-gradient-node-center)
+    (:pointer (:struct graphene:point-t))
+  (node render-node))
+
+(export 'radial-gradient-node-center)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskRepeatingRadialGradientNode
@@ -1494,6 +1682,45 @@ color {
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_repeating_radial_gradient_node_new"
+               %repeating-radial-gradient-node-new) render-node
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (center (:pointer (:struct graphene:point-t)))
+  (hradius :float)
+  (vradius :float)
+  (start :float)
+  (end :float)
+  (color-stops :pointer)
+  (n-stops :size))
+
+(defun repeating-radial-gradient-node-new (bounds
+                                           center
+                                           hradius vradius
+                                           start end
+                                           color-stops)
+  (let ((n-stops (length color-stops)))
+    (cffi:with-foreign-object (color-stops-ptr '(:struct %color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in color-stops)
+            (for ptr = (cffi:mem-aptr color-stops-ptr
+                                      '(:struct %color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr
+                                  (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%repeating-radial-gradient-node-new bounds
+                                           center
+                                           (coerce hradius 'single-float)
+                                           (coerce vradius 'single-float)
+                                           (coerce start 'single-float)
+                                           (coerce end 'single-float)
+                                           color-stops-ptr
+                                           n-stops))))
+
+(export 'repeating-radial-gradient-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; GskConicGradientNode
 ;;; ----------------------------------------------------------------------------
@@ -1518,12 +1745,17 @@ color {
 ;;; gsk_conic_gradient_node_new ()
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Finish the implementation and pass the arrays as a list of values
-
-(cffi:defcfun ("gsk_conic_gradient_node_new" conic-gradient-node-new)
+(cffi:defcfun ("gsk_conic_gradient_node_new" %conic-gradient-node-new)
     render-node
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (center (:pointer (:struct graphene:point-t)))
+  (rotation :float)
+  (stops :pointer)
+  (n-stops :size))
+
+(defun conic-gradient-node-new (bounds center rotation color-stops)
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{#2023-11-24}
   @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds of the
     render node}
   @argument[center]{a @symbol{graphene:point-t} instance with the center of the
@@ -1545,36 +1777,40 @@ color {
   @see-class{gsk:render-node}
   @see-symbol{graphene:rect-t}
   @see-symbol{graphene:point-t}"
-  (bounds (:pointer (:struct graphene:rect-t)))
-  (center (:pointer (:struct graphene:point-t)))
-  (rotation :float)
-  (stops :pointer)
-  (n-stops :size))
+  (let ((n-stops (length color-stops)))
+    (cffi:with-foreign-object (color-stops-ptr '(:struct %color-stop) n-stops)
+      (iter (for i from 0 below n-stops)
+            (for (offset color) in color-stops)
+            (for ptr = (cffi:mem-aptr color-stops-ptr
+                                      '(:struct %color-stop) i))
+            (setf (cffi:mem-ref ptr :float) (coerce offset 'single-float))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                (cffi:inc-pointer ptr
+                                  (cffi:foreign-type-size :float))
+                'gdk:rgba))
+      (%conic-gradient-node-new bounds
+                                center
+                                (coerce rotation 'single-float)
+                                color-stops-ptr
+                                n-stops))))
 
 (export 'conic-gradient-node-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_conic_gradient_node_get_n_color_stops ()
-;;;
-;;; gsize
-;;; gsk_conic_gradient_node_get_n_color_stops
-;;;                                (GskRenderNode *node);
-;;;
-;;; Retrieves the number of color stops in the gradient.
-;;;
-;;; node :
-;;;     a GskRenderNode for a conic gradient.
-;;;
-;;; Returns
-;;;     the number of color stops
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_conic_gradient_node_get_n_color_stops"
-               %conic-gradient-node-n-color-stops) :size
+               conic-gradient-node-n-color-stops) :size
+ #+liber-documentation
+ "@version{#2023-11-23}
+  @argument[node]{a @class{gsk:conic-gradient-node} instance for a conic
+    gradient}
+  @return{The unsigned integer with the number of color stops.}
+  @short{Retrieves the number of color stops in the conic gradient.}
+  @see-class{gsk:conic-gradient-node}"
   (node render-node))
-
-(defun conic-gradient-node-n-color-stops (node)
-  (%conic-gradient-node-n-color-stops node))
 
 (export 'conic-gradient-node-n-color-stops)
 
@@ -1598,59 +1834,58 @@ color {
 ;;;     the color stops in the gradient.
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: Finish the implementation
-
 (cffi:defcfun ("gsk_conic_gradient_node_get_color_stops"
                %conic-gradient-node-color-stops) :pointer
   (node render-node)
-  (n-stops :size))
+  (n-stops (:pointer :size)))
 
 (defun conic-gradient-node-color-stops (node)
-  (let* ((n-stops (conic-gradient-node-n-color-stops node))
-         (stops-ptr (%conic-gradient-node-color-stops node n-stops)))
-    (iter (for i from 0 below n-stops)
-          (collect (cffi:mem-aref stops-ptr :pointer i)))))
+  (cffi:with-foreign-object (n-stops :size)
+    (let ((color-stops-ptr (%conic-gradient-node-color-stops node n-stops)))
+      (iter (for i from 0 below (cffi:mem-ref n-stops :size))
+            (for ptr = (cffi:mem-aptr color-stops-ptr
+                                      '(:struct %color-stop) i))
+            (collect (list (cffi:mem-ref ptr :float)
+                           (cffi:convert-from-foreign
+                             (cffi:inc-pointer ptr
+                                               (cffi:foreign-type-size :float))
+                             '(g:boxed gdk:rgba))))))))
 
 (export 'conic-gradient-node-color-stops)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_conic_gradient_node_get_center ()
-;;;
-;;; const graphene_point_t *
-;;; gsk_conic_gradient_node_get_center (GskRenderNode *node);
-;;;
-;;; Retrieves the center pointer for the gradient.
-;;;
-;;; node
-;;;     a GskRenderNode for a conic gradient.
-;;;
-;;; Returns
-;;;     the center point for the gradient
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_conic_gradient_node_get_center"
                conic-gradient-node-center) (:pointer (:struct graphene:point-t))
+ #+liber-documentation
+ "@version{#2023-11-23}
+  @argument[node]{a @class{gsk:conic-gradient-node} instance for a conic
+    gradient}
+  @return{The @symbol{graphene:point-t} instance with the center point for the
+    gradient.}
+  @begin{short}
+    Retrieves the center pointer for the gradient.
+  @end{short}
+  @see-class{gsk:conic-gradient-node}
+  @see-symbol{graphene:point-t}"
   (node render-node))
 
 (export 'conic-gradient-node-center)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_conic_gradient_node_get_rotation ()
-;;;
-;;; float
-;;; gsk_conic_gradient_node_get_rotation (GskRenderNode *node);
-;;;
-;;; Retrieves the rotation for the gradient in degrees.
-;;;
-;;; node
-;;;     a GskRenderNode for a conic gradient.
-;;;
-;;; Returns
-;;;     the rotation for the gradient
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_conic_gradient_node_get_rotation"
-               %conic-gradient-node-rotation) :float
+               conic-gradient-node-rotation) :float
+ #+liber-documentation
+ "@version{#2023-11-23}
+  @argument[node]{a @symbol{gsk:conic-gradient-node} instance}
+  @return{The single float with the rotation for the conic gradient.}
+  @short{Retrieves the rotation for the conic gradient in degrees.}
+  @see-class{gsk:conic-gradient-node}"
   (node render-node))
 
 (export 'conic-gradient-node-rotation)
@@ -1705,9 +1940,9 @@ color {
   (cffi:with-foreign-object (widths-ptr :float 4)
     (iter (for i from 0 below 4)
           (for width in widths)
-          (setf (cffi:mem-aref widths-ptr :float i) 
+          (setf (cffi:mem-aref widths-ptr :float i)
                 (coerce width 'single-float)))
-    (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba colors)
+    (glib:with-g-boxed-array (n-colors colors-ptr gdk:rgba colors)
       (%border-node-new outline widths-ptr colors-ptr))))
 
 (export 'border-node-new)
@@ -1735,7 +1970,7 @@ color {
 ;;; gsk_border_node_get_widths ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gsk_border_node_get_widths" %border-node-widths) 
+(cffi:defcfun ("gsk_border_node_get_widths" %border-node-widths)
     (:pointer :float)
   (node border-node))
 
@@ -1759,19 +1994,15 @@ color {
 ;;; gsk_border_node_get_colors ()
 ;;; ----------------------------------------------------------------------------
 
-;; FIXME: This implementation is wrong. We need code to translate an array
-;; of boxed values.
-
 (cffi:defcfun ("gsk_border_node_get_colors" %border-node-colors) :pointer
   (node border-node))
 
-#+nil
 (defun border-node-colors (node)
  #+liber-documentation
  "@version{#2023-10-27}
   @argument[node]{a @class{gsk:border-node} instance for a border}
   @return{A list with 4 @class{gdk:rgba} instances for the top, right, bottom,
-    and left color of the border}
+    and left color of the border.}
   @begin{short}
     Retrieves the colors of the border.
   @end{short}
@@ -1779,8 +2010,10 @@ color {
   @see-class{gdk:rgba}"
   (let ((colors-ptr (%border-node-colors node)))
     (iter (for i from 0 below 4)
-          (collect (cffi:mem-aref colors-ptr '(g:boxed gdk:rgba) i)))))
-#+nil
+          (for ptr = (cffi:mem-aptr colors-ptr '(:struct gdk::rgba-cstruct) i))
+          (collect (cffi:convert-from-foreign ptr
+                                              '(g:boxed gdk:rgba))))))
+
 (export 'border-node-colors)
 
 ;;; ----------------------------------------------------------------------------
@@ -1806,38 +2039,43 @@ color {
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_texture_node_new ()
-;;;
-;;; GskRenderNode *
-;;; gsk_texture_node_new (GdkTexture *texture,
-;;;                       const graphene_rect_t *bounds);
-;;;
-;;; Creates a GskRenderNode that will render the given texture into the area
-;;; given by bounds .
-;;;
-;;; texture :
-;;;     the GdkTexture
-;;;
-;;; bounds :
-;;;     the rectangle to render the texture into
-;;;
-;;; Returns :
-;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_texture_node_new" texture-node-new) render-node
+ #+liber-documentation
+ "@version{#2023-11-23}
+  @argument[texture]{a @class{gdk:texture} object}
+  @argument[bounds]{a @symbol{graphene:rect-t} instance with the rectangle
+    to render the texture into}
+  @return{The new @symbol{gsk:texure-node} instance.}
+  @begin{short}
+    Creates a render node that will render the given texture into the area
+    given by @arg{bounds}.
+  @end{short}
+  @see-class{gsk:texture-node}
+  @see-class{gdk:texture}
+  @see-symbol{graphene:rect-t}"
+  (texture (g:object gdk:texture))
+  (bounds (:pointer (:struct graphene:rect-t))))
+
+(export 'texture-node-new)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_texture_node_get_texture ()
-;;;
-;;; GdkTexture *
-;;; gsk_texture_node_get_texture (GskRenderNode *node);
-;;;
-;;; Retrieves the GdkTexture used when creating this GskRenderNode.
-;;;
-;;; node :
-;;;     a GskRenderNode of type GSK_TEXTURE_NODE.
-;;;
-;;; Returns :
-;;;     the GdkTexture.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_texture_node_get_texture" texture-node-texture)
+    (g:object gdk:texture)
+ #+liber-documentation
+ "@version{#2023-11-23}
+  @argument[node]{a @class{gsk:texture-node} instance}
+  @return{The @class{gdk:texture} object.}
+  @short{Retrieves the texture used when creating this render node.}
+  @see-class{gsk:texture-node}
+  @see-class{gdk:texture}"
+  (node render-node))
+
+(export 'texture-node-texture)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskInsetShadowNode
@@ -1895,6 +2133,16 @@ color {
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_inset_shadow_node_new" inset-shadow-node-new) render-node
+  (outline (:pointer (:struct rounded-rect)))
+  (color (g:boxed gdk:rgba))
+  (dx :float)
+  (dy :float)
+  (spread :float)
+  (radius :float))
+
+(export 'inset-shadow-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_inset_shadow_node_get_outline ()
 ;;;
@@ -1909,6 +2157,12 @@ color {
 ;;; Returns
 ;;;     a rounded rectangle.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_inset_shadow_node_get_outline" inset-shadow-node-outline)
+    (:pointer (:struct rounded-rect))
+  (node render-node))
+
+(export 'inset-shadow-node-outline)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_inset_shadow_node_get_color ()
@@ -1925,6 +2179,12 @@ color {
 ;;;     the color of the shadow.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_inset_shadow_node_get_color" inset-shadow-node-color)
+    (g:boxed gdk:rgba)
+  (node render-node))
+
+(export 'inset-shadow-node-color)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_inset_shadow_node_get_dx ()
 ;;;
@@ -1939,6 +2199,11 @@ color {
 ;;; Returns
 ;;;     an offset, in pixels
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_inset_shadow_node_get_dx" inset-shadow-node-dx) :float
+  (node render-node))
+
+(export 'inset-shadow-node-dx)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_inset_shadow_node_get_dy ()
@@ -1955,6 +2220,11 @@ color {
 ;;;     an offset, in pixels
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_inset_shadow_node_get_dy" inset-shadow-node-dy) :float
+  (node render-node))
+
+(export 'inset-shadow-node-dy)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_inset_shadow_node_get_spread ()
 ;;;
@@ -1970,6 +2240,12 @@ color {
 ;;;     the size of the shadow, in pixels
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_inset_shadow_node_get_spread" inset-shadow-node-spread)
+    :float
+  (node render-node))
+
+(export 'inset-shadow-node-spread)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_inset_shadow_node_get_blur_radius ()
 ;;;
@@ -1984,6 +2260,12 @@ color {
 ;;; Returns
 ;;;     the blur radius, in pixels
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_inset_shadow_node_get_blur_radius"
+               inset-shadow-node-blur-radius) :float
+  (node render-node))
+
+(export 'inset-shadow-node-blur-radius)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskOutsetShadowNode
@@ -2045,6 +2327,16 @@ color {
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_outset_shadow_node_new" outset-shadow-node-new) render-node
+  (outline (:pointer (:struct rounded-rect)))
+  (color (g:boxed gdk:rgba))
+  (dx :float)
+  (dy :float)
+  (spread :float)
+  (radius :float))
+
+(export 'outset-shadow-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_outset_shadow_node_get_outline ()
 ;;;
@@ -2059,6 +2351,12 @@ color {
 ;;; Returns
 ;;;     a rounded rectangle.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_outset_shadow_node_get_outline" outset-shadow-node-outline)
+    (:pointer (:struct rounded-rect))
+  (node render-node))
+
+(export 'outset-shadow-node-outline)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_outset_shadow_node_get_color ()
@@ -2075,6 +2373,12 @@ color {
 ;;;     a color.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_outset_shadow_node_get_color" outset-shadow-node-color)
+    (g:boxed gdk:rgba)
+  (node render-node))
+
+(export 'outset-shadow-node-color)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_outset_shadow_node_get_dx ()
 ;;;
@@ -2089,6 +2393,11 @@ color {
 ;;; Returns
 ;;;     an offset, in pixels
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_outset_shadow_node_get_dx" outset-shadow-node-dx) :float
+  (node render-node))
+
+(export 'outset-shadow-node-dx)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_outset_shadow_node_get_dy ()
@@ -2105,6 +2414,11 @@ color {
 ;;;     an offset, in pixels
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_outset_shadow_node_get_dy" outset-shadow-node-dy) :float
+  (node render-node))
+
+(export 'outset-shadow-node-dy)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_outset_shadow_node_get_spread ()
 ;;;
@@ -2120,6 +2434,12 @@ color {
 ;;;     the size of the shadow, in pixels
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_outset_shadow_node_get_spread" outset-shadow-node-spread)
+    :float
+  (node render-node))
+
+(export 'outset-shadow-node-spread)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_outset_shadow_node_get_blur_radius ()
 ;;;
@@ -2134,6 +2454,12 @@ color {
 ;;; Returns
 ;;;     the blur radius, in pixels
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_outset_shadow_node_get_blur_radius"
+               outset-shadow-node-blur-radius) :float
+  (node render-node))
+
+(export 'outset-shadow-node-blur-radius)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskTransformNode
@@ -2263,6 +2589,12 @@ color {
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_opacity_node_new" opacity-node-new) render-node
+  (child render-node)
+  (opacity :float))
+
+(export 'opacity-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_opacity_node_get_child ()
 ;;;
@@ -2278,6 +2610,11 @@ color {
 ;;;     The child that is getting opacityed.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_opacity_node_get_child" opacity-node-child) render-node
+  (node render-node))
+
+(export 'opacity-node-child)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_opacity_node_get_opacity ()
 ;;;
@@ -2292,6 +2629,11 @@ color {
 ;;; Returns
 ;;;     the opacity factor
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_opacity_node_get_opacity" opacity-node-opacity) :float
+  (node render-node))
+
+(export 'opacity-node-opacity)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskColorMatrixNode
@@ -2450,6 +2792,13 @@ color {
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_repeat_node_new" repeat-node-new) render-node
+  (bounds (:pointer (:struct graphene:rect-t)))
+  (child render-node)
+  (child-bounds (:pointer (:struct graphene:rect-t))))
+
+(export 'repeat-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_repeat_node_get_child ()
 ;;;
@@ -2465,6 +2814,11 @@ color {
 ;;;     a GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_repeat_node_get_child" repeat-node-child) render-node
+  (node render-node))
+
+(export 'repeat-node-child)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_repeat_node_get_child_bounds ()
 ;;;
@@ -2479,6 +2833,12 @@ color {
 ;;; Returns
 ;;;     a bounding rectangle.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_repeat_node_get_child_bounds" repeat-node-child-bounds)
+    (:pointer (:struct graphene:rect-t))
+  (node render-node))
+
+(export 'repeat-node-child-bounds)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskClipNode
@@ -2600,6 +2960,12 @@ color {
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_rounded_clip_node_new" rounded-clip-node-new) render-node
+  (child render-node)
+  (clip (:pointer (:struct rounded-rect))))
+
+(export 'rounded-clip-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_clip_node_get_child ()
 ;;;
@@ -2615,6 +2981,12 @@ color {
 ;;;     The child that is getting clipped.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_rounded_clip_node_get_child" rounded-clip-node-child)
+    render-node
+  (node render-node))
+
+(export 'rounded-clip-node-child)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_clip_node_get_clip ()
 ;;;
@@ -2629,6 +3001,12 @@ color {
 ;;; Returns
 ;;;     a rounded rectangle.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_rounded_clip_node_get_clip" rounded-clip-node-clip)
+    (:pointer (:struct rounded-rect))
+  (node render-node))
+
+(export 'rounded-clip-node-clip)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskShadowNode
@@ -2675,6 +3053,33 @@ color {
 ;;;     A new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_shadow_node_new" %shadow-node-new) render-node
+  (child render-node)
+  (shadows :pointer)
+  (n-shadows :size))
+
+(defun shadow-node-new (child shadows)
+  (let ((n-shadows (length shadows))
+        (cstruct-size (cffi:foreign-type-size '(:struct gdk::rgba-cstruct))))
+    (cffi:with-foreign-object (shadows-ptr '(:struct %shadow) n-shadows)
+      (iter (for i from 0 below n-shadows)
+            (for (color dx dy radius) in shadows)
+            (for ptr = (cffi:mem-aptr shadows-ptr
+                                      '(:struct %shadow) i))
+            (glib::copy-boxed-slots-to-foreign
+                color
+                ptr
+                'gdk:rgba)
+            (cffi:incf-pointer ptr cstruct-size)
+            (setf (cffi:mem-ref ptr :float) (coerce dx 'single-float))
+            (cffi:incf-pointer ptr (cffi:foreign-type-size :float))
+            (setf (cffi:mem-ref ptr :float) (coerce dy 'single-float))
+            (cffi:incf-pointer ptr (cffi:foreign-type-size :float))
+            (setf (cffi:mem-ref ptr :float) (coerce radius 'single-float)))
+      (%shadow-node-new child shadows-ptr n-shadows))))
+
+(export 'shadow-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_shadow_node_get_shadow ()
 ;;;
@@ -2694,6 +3099,21 @@ color {
 ;;;     the shadow data.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_shadow_node_get_shadow" %shadow-node-shadow) :pointer
+  (node render-node)
+  (index :size))
+
+(defun shadow-node-shadow (node index)
+  (let ((ptr (%shadow-node-shadow node index))
+        (cstruct-size (cffi:foreign-type-size '(:struct gdk::rgba-cstruct)))
+        (float-size (cffi:foreign-type-size :float)))
+    (list (cffi:convert-from-foreign ptr '(g:boxed gdk:rgba))
+          (cffi:mem-ref (cffi:incf-pointer ptr cstruct-size) :float)
+          (cffi:mem-ref (cffi:incf-pointer ptr float-size) :float)
+          (cffi:mem-ref (cffi:incf-pointer ptr float-size) :float))))
+
+(export 'shadow-node-shadow)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_shadow_node_get_n_shadows ()
 ;;;
@@ -2709,6 +3129,11 @@ color {
 ;;;     the number of shadows.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_shadow_node_get_n_shadows" shadow-node-n-shadows) :size
+  (node render-node))
+
+(export 'shadow-node-n-shadows)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_shadow_node_get_child ()
 ;;;
@@ -2723,6 +3148,11 @@ color {
 ;;; Returns
 ;;;     the child render node.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_shadow_node_get_child" shadow-node-child) render-node
+  (node render-node))
+
+(export 'shadow-node-child)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskBlendNode
@@ -2887,7 +3317,7 @@ color {
   @see-class{gsk:render-node}"
   (node render-node))
 
-(export 'cross-fade-start-child)
+(export 'cross-fade-node-start-child)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_cross_fade_node_get_end_child ()
@@ -2972,6 +3402,14 @@ color {
 ;;;     a new GskRenderNode.
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_text_node_new" text-node-new) render-node
+  (font (g:object pango:font))
+  (glyphs (g:boxed pango:glyph-string))
+  (color (g:boxed gdk:rgba))
+  (offset (:pointer (:struct graphene:point-t))))
+
+(export 'text-node-new)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_text_node_get_font ()
 ;;;
@@ -2986,6 +3424,11 @@ color {
 ;;; Returns
 ;;;     the font.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_text_node_get_font" text-node-font) (g:object pango:font)
+  (node render-node))
+
+(export 'text-node-font)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_text_node_get_glyphs ()
@@ -3006,6 +3449,15 @@ color {
 ;;;     the glyph information.
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: The PangoGlyphInfo structure is not implemented. We return the pointer
+;; to the instance.
+
+(cffi:defcfun ("gsk_text_node_get_glyphs" text-node-glyphs) :pointer
+  (node render-node)
+  (n-glyphs :uint))
+
+(export 'text-node-glyphs)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_text_node_get_color ()
 ;;;
@@ -3020,6 +3472,11 @@ color {
 ;;; Returns
 ;;;     the text color.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_text_node_get_color" text-node-color) (g:boxed gdk:rgba)
+  (node render-node))
+
+(export 'text-node-color)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_text_node_has_color_glyphs ()
@@ -3036,6 +3493,12 @@ color {
 ;;;     TRUE if the text node has color glyphs
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_text_node_has_color_glyphs" text-node-has-color-glyphs)
+    :boolean
+  (node render-node))
+
+(export 'text-node-has-color-glyphs)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_text_node_get_num_glyphs ()
 ;;;
@@ -3051,6 +3514,11 @@ color {
 ;;;     the number of glyphs
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gsk_text_node_get_num_glyphs" text-node-num-glyphs) :uint
+  (node render-node))
+
+(export 'text-node-num-glyphs)
+
 ;;; ----------------------------------------------------------------------------
 ;;; gsk_text_node_get_offset ()
 ;;;
@@ -3065,6 +3533,12 @@ color {
 ;;; Returns
 ;;;     a point with the horizontal and vertical offsets.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_text_node_get_offset" text-node-offset)
+    (:pointer (:struct graphene:point-t))
+  (node render-node))
+
+(export 'text-node-offset)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GskBlurNode
