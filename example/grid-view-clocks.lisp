@@ -1,4 +1,4 @@
-;;;; Clocks - 2023-11-17
+;;;; Clocks
 ;;;;
 ;;;; This demo displays the time in different timezones.
 ;;;;
@@ -9,6 +9,8 @@
 ;;;;
 ;;;; Typically, this will be done using GtkBuilder .ui files with the help of
 ;;;; the <binding> tag, but this demo shows the code that runs behind that.
+;;;;
+;;;; 2023-11-25
 
 (in-package :gtk)
 
@@ -47,9 +49,9 @@
       (setf (clock-location obj) "UTC"))
       ;; Set the string with the actual time for the clock
       (setf (clock-time obj)
-            (local-time:format-timestring nil 
-                                          (local-time:now) 
-                                          :format '(:hour ":" :min) 
+            (local-time:format-timestring nil
+                                          (local-time:now)
+                                          :format '(:hour ":" :min)
                                           :timezone (clock-timezone obj)))))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
@@ -80,7 +82,7 @@
 
     ;; First, draw a circle. This is a neat little trick to draw a circle
     ;; without requiring Cairo.
-    ;; TODO:Improve the implementation of GskRoundedRect to avoid foreign 
+    ;; TODO:Improve the implementation of GskRoundedRect to avoid foreign
     ;; objects
     (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
       (graphene:with-graphene-rect (rect -50 -50 100 100)
@@ -153,7 +155,7 @@
 
 (let (;; This is the list of all the ticking clocks
       (clocks nil)
-      ;; This is the ID of the timeout source that is updating all 
+      ;; This is the ID of the timeout source that is updating all
       ;; ticking clocks.
       (ticking-clock-id 0))
 
@@ -166,8 +168,8 @@
       (setf (clock-time clock)
             (local-time:format-timestring nil
                                           (local-time:now)
-                                          :format '(:hour ":" 
-                                                    (:min 2) ":" 
+                                          :format '(:hour ":"
+                                                    (:min 2) ":"
                                                     (:sec 2))
                                           :timezone (clock-timezone clock)))
       (g:object-notify clock "time")
@@ -206,21 +208,21 @@
 (defun create-clocks-model ()
   (let ((store (g:list-store-new "GtkClock"))
         ;; A bunch of timezones with GTK hackers
-        (timezones '("America/Los_Angeles" 
+        (timezones '("America/Los_Angeles"
                      "America/Mexico_City"
-                     "America/New_York" 
-                     "Europe/London" 
+                     "America/New_York"
+                     "Europe/London"
                      "Europe/Berlin"
                      "Europe/Moscow"
                      "Asia/Kolkata"
-                     "Asia/Shanghai")))                     
+                     "Asia/Shanghai")))
     (dolist (timezone timezones)
       (let ((clock (make-instance 'gtk:clock :location timezone)))
         (gtk:clock-start-ticking clock)
         (g:list-store-append store clock)))
     store))
 
-;; And this function is the crux for this whole demo. It shows how to use 
+;; And this function is the crux for this whole demo. It shows how to use
 ;; expressions to set up bindings.
 (defun setup-listitem-cb (factory item)
   (declare (ignore factory))
@@ -235,9 +237,9 @@
     ;; First, we create an expression that gets us the clock from the listitem:
     ;;  1. Create an expression that gets the list item.
     ;;  2. Use that expression's "item" property to get the clock
-    (setf expression 
+    (setf expression
           (gtk:constant-expression-new "GtkListItem" item))
-    (setf clock-expression 
+    (setf clock-expression
           (gtk:property-expression-new "GtkListItem" expression "item"))
 
     ;; Bind the clock's location to a label.
@@ -247,7 +249,7 @@
                                        (gtk:expression-ref clock-expression)
                                        "location"))
 
-    ;; Now create the label and bind the expression to it. 
+    ;; Now create the label and bind the expression to it.
     (gtk:expression-bind expression label-location "label" label-location)
     (gtk:box-append box label-location)
 
@@ -256,8 +258,8 @@
     (setf expression (gtk:expression-ref clock-expression))
     ;; Now create the widget and bind the expression to it.
     (gtk:expression-bind expression picture "paintable" picture)
-    (gtk:box-append box picture)   
- 
+    (gtk:box-append box picture)
+
     ;; And finally, everything comes together.
     ;; We create a label for displaying the time as text.
     ;; For that, we need to transform the "GDateTime" of the
@@ -265,8 +267,8 @@
     (setf expression
           (gtk:property-expression-new "GtkClock"
                                        (gtk:expression-ref clock-expression)
-                                       "time")) 
-    ;; Now create the label and bind the expression to it. 
+                                       "time"))
+    ;; Now create the label and bind the expression to it.
     (gtk:expression-bind expression label-time "label" label-time)
     (gtk:box-append box label-time)))
 

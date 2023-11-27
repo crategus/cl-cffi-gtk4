@@ -45,6 +45,7 @@
                ;; List-based widgets
                (:file "list-view-applauncher")
                (:file "grid-view-clocks")
+               (:file "grid-view-colors")
                (:file "drop-down")
 
                ;; Media Support

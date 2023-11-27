@@ -47,6 +47,7 @@
            ;; List-based widgets
            #:do-list-view-applauncher
            #:do-grid-view-clocks
+           #:do-grid-view-colors
            #:do-drop-down
 
            ;; Media Support

@@ -287,6 +287,28 @@
        "gtk4-example"
        "calendar.lisp"))
 
+     "List-based widgets"
+     (("Application Launcher"
+       ":window"
+       "DO-LIST-VIEW-APPLAUNCHER"
+       "gtk4-example"
+       "list-view-applauncher.lisp")
+      ("World Clocks"
+       ":window"
+       "DO-GRID-VIEW-CLOCKS"
+       "gtk4-example"
+       "grid-view-clocks.lisp")
+      ("Colors"
+       ":window"
+       "DO-GRID-VIEW-COLORS"
+       "gtk4-example"
+       "grid-view-colors.lisp")
+      ("Drop Down"
+       ":window"
+       "DO-DROP-DOWN"
+       "gtk4-example"
+       "drop-down.lisp"))
+
      "Media Support"
      (("Video"
        ":window"
