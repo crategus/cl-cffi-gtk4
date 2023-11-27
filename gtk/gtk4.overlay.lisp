@@ -96,7 +96,7 @@
 (setf (documentation 'overlay 'type)
  "@version{#2022-7-31}
   @begin{short}
-    The @sym{gtk:overlay} widget is a container which contains a single main
+    The @class{gtk:overlay} widget is a container which contains a single main
     widget, on top of which it can place overlay widgets.
   @end{short}
 
@@ -113,15 +113,15 @@
   values.
 
   More complicated placement of overlays is possible by connecting to the
-  \"get-child-position\" signal.
+  @code{\"get-child-position\"} signal.
   @begin[GtkOverlay as GtkBuildable]{dictionary}
-    The @sym{gtk:overlay} implementation of the @class{gtk:buildable} interface
-    supports placing a child widget as an overlay by specifying
+    The @class{gtk:overlay} implementation of the @class{gtk:buildable}
+    interface supports placing a child widget as an overlay by specifying
     @code{\"overlay\"} as the @code{\"type\"} attribute of a @code{<child>}
     element.
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:overlay} implementation has a single CSS node with the name
+    The @class{gtk:overlay} implementation has a single CSS node with the name
     @code{overlay}. Overlay children whose alignments cause them to be
     positioned at an edge get the @code{.left}, @code{.right}, @code{.top},
     and/or @code{.bottom} style classes according to their position.
@@ -141,7 +141,8 @@ lambda (overlay widget allocation)    :run-last
       full-width/height. If the main child is a @class{gtk:scrolled-window}
       widget, the overlays are placed relative to its contents.
       @begin[code]{table}
-        @entry[overlay]{The @sym{gtk:overlay} widget which emitted the signal.}
+        @entry[overlay]{The @class{gtk:overlay} widget which emitted the
+          signal.}
         @entry[widget]{The @class{gtk:widget} child widget to position.}
         @entry[allocation]{Return location of type @class{gdk:rectangle} for
           the allocation.}
@@ -175,8 +176,8 @@ lambda (overlay widget allocation)    :run-last
     Accessor of the @slot[gtk:overlay]{child} slot of the @class{gtk:overlay}
     class.
   @end{short}
-  The @sym{gtk:overlay-child} function gets the child widget of the overlay.
-  The @sym{(setf gtk:overlay-child)} function sets the child widget.
+  The @fun{gtk:overlay-child} function gets the child widget of the overlay.
+  The @setf{gtk:overlay-child} function sets the child widget.
   @see-class{gtk:paned}
   @see-class{gtk:widget}")
 
@@ -267,11 +268,11 @@ lambda (overlay widget allocation)    :run-last
   @argument[widget]{a @class{gtk:widget} child widget}
   @argument[measure]{a boolean whether the child widget should be measured}
   @begin{short}
-    The @sym{gtk:overlay-measure-overlay} function gets whether the size of the
+    The @fun{gtk:overlay-measure-overlay} function gets whether the size of the
     child widget is included in the measurement of the overlay.
   @end{short}
-  The @sym{(setf gtk:overlay-measure-overlay)} function sets whether the child
-  widget is included in the measured size of the overlay.
+  The @setf{gtk:overlay-measure-overlay} function sets whether the child widget
+  is included in the measured size of the overlay.
 
   The overlay will request the size of the largest child that has this property
   set to @em{true}. Children who are not included may be drawn outside of
@@ -305,10 +306,10 @@ lambda (overlay widget allocation)    :run-last
   @argument[widget]{a @class{gtk:widget} child widget}
   @argument[clip]{a boolean whether the child widget should be clipped}
   @begin{short}
-    The @sym{gtk:overlay-clip-overlay} function gets whether the child widget
+    The @fun{gtk:overlay-clip-overlay} function gets whether the child widget
     should be clipped within the parent.
   @end{short}
-  The @sym{(setf gtk:overlay-clip-overlay)} sets whether the child widget
+  The @setf{gtk:overlay-clip-overlay} function sets whether the child widget
   should be clipped within the parent.
   @see-class{gtk:overlay}
   @see-class{gtk:widget}"

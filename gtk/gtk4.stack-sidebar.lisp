@@ -83,20 +83,20 @@
 (setf (documentation 'stack-sidebar 'type)
  "@version{2023-8-9}
   @begin{short}
-    A @sym{gtk:stack-sidebar} widget enables you to quickly and easily provide
+    A @class{gtk:stack-sidebar} widget enables you to quickly and easily provide
     a consistent \"sidebar\" object for your user interface.
   @end{short}
 
   @image[stack-sidebar]{Figure: GtkStackSidebar}
 
-  In order to use a @sym{gtk:stack-sidebar} widget, you simply use a
+  In order to use a @class{gtk:stack-sidebar} widget, you simply use a
   @class{gtk:stack} widget to organize your UI flow, and add the sidebar to
   your sidebar area. You can use the @fun{gtk:stack-sidebar-stack} function to
-  connect the @sym{gtk:stack-sidebar} widget to the @class{gtk:stack} widget.
+  connect the @class{gtk:stack-sidebar} widget to the @class{gtk:stack} widget.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:stack-sidebar} implementation has a single CSS node with name
+    The @class{gtk:stack-sidebar} implementation has a single CSS node with name
     stacksidebar and @code{.sidebar} style class. When circumstances require it,
-    the @sym{gtk:stack-sidebar} widget adds the @code{.needs-attention} style
+    the @class{gtk:stack-sidebar} widget adds the @code{.needs-attention} style
     class to the widgets representing the stack pages.
   @end{dictionary}
   @see-constructor{gtk:stack-sidebar-new}
@@ -127,9 +127,9 @@
     Accessor of the @slot[gtk:stack-sidebar]{stack} slot of the
     @class{gtk:stack-sidebar} class.
   @end{short}
-  The @sym{gtk:stack-sidebar-stack} function retrieves the stack. The
-  @sym{(setf gtk:stack-sidebar-stack)} function sets the stack associated with
-  this stack sidebar.
+  The @fun{gtk:stack-sidebar-stack} function retrieves the stack. The
+  @setf{gtk:stack-sidebar-stack} function sets the stack associated with this
+  stack sidebar.
 
   The stack sidebar will automatically update according to the order (packing)
   and items within the given stack.

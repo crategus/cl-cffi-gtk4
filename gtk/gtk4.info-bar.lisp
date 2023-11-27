@@ -235,8 +235,8 @@ lambda (infobar response)    :run-last
     @class{gtk:info-bar} class.
   @end{short}
   The @fun{gtk:info-bar-message-type} function returns the message type of the
-  message area. The @sym{(setf gtk:info-bar-message-type)} function sets the
-  message type.
+  message area. The @setf{gtk:info-bar-message-type} function sets the message
+  type.
 
   GTK uses the message type to determine how the message is displayed.
   @begin[Warning]{dictionary}
@@ -268,7 +268,7 @@ lambda (infobar response)    :run-last
     @class{gtk:info-bar} class.
   @end{short}
   The @fun{gtk:info-bar-revealed} function returns whether the info bar is
-  currently revealed. The @sym{(setf gtk:info-bar-revealed)} function sets the
+  currently revealed. The @setf{gtk:info-bar-revealed} function sets the
   property.
 
   Changing this will make the info bar reveal or conceal itself via a sliding
@@ -347,8 +347,8 @@ lambda (infobar response)    :run-last
   Button text/response ID pairs should be listed. Button text can be some
   arbitrary text. A response ID can be any positive number, or one of the
   values in the @symbol{gtk:response-type} enumeration. If the user clicks one
-  of these dialog buttons, the info bar will emit the \"response\" signal with
-  the corresponding response ID.
+  of these dialog buttons, the info bar will emit the @code{\"response\"}
+  signal with the corresponding response ID.
   @begin[Warning]{dictionary}
     The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
     use it in newly written code.
@@ -374,8 +374,8 @@ lambda (infobar response)    :run-last
   @argument[response]{an integer with the response ID for @arg{child}}
   @begin{short}
     Add an activatable widget to the action area of an info bar, connecting a
-    signal handler that will emit the \"response\" signal on the message area
-    when the widget is activated.
+    signal handler that will emit the @code{\"response\"} signal on the message
+    area when the widget is activated.
   @end{short}
   The widget is appended to the end of the message areas action area.
   @begin[Warning]{dictionary}
@@ -431,7 +431,7 @@ lambda (infobar response)    :run-last
   @return{The @class{gtk:button} widget that was added.}
   @begin{short}
     Adds a button with the given text, and sets things up so that clicking the
-    button will emit the \"response\" signal with the given response ID.
+    button will emit the @code{\"response\"} signal with the given response ID.
   @end{short}
   The button is appended to the end of the action area of the info bar. The
   button widget is returned, but usually you do not need it.
@@ -539,7 +539,7 @@ lambda (infobar response)    :run-last
  "@version{#2023-8-24}
   @argument[infobar]{a @class{gtk:info-bar} widget}
   @argument[response]{an integer with a response ID}
-  @short{Emits the \"response\" signal with the given response ID.}
+  @short{Emits the @code{\"response\"} signal with the given response ID.}
   @begin[Warning]{dictionary}
     The @class{gtk:info-bar} implementation is deprecated since 4.10. Do not
     use it in newly written code.

@@ -413,8 +413,8 @@ lambda (dropdown)    :action
 (setf (documentation (liber:slot-documentation "selected" 'drop-down) t)
  "The @code{selected} property of type @code{:uint} (Read / Write) @br{}
   The position of the selected item in @slot[gtk:drop-down]{model}, or
-  @variable{gtk:+gtk-invalid-list-position+} if no item is selected. @br{}
-  Default value: 4294967295")
+  @var{+gtk-invalid-list-position+} if no item is selected. @br{}
+  Default value: @var{+gtk-invalid-list-position+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'drop-down-selected)
@@ -425,8 +425,8 @@ lambda (dropdown)    :action
   @syntax[]{(setf (gtk:drop-down-selected object) selected)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[selected]{an unsigned integer with the position of the item to
-    select, or the @variable{gtk:+gtk-invalid-list-position+} value if no
-    position is selected}
+    select, or the @var{+gtk-invalid-list-position+} value if no position is 
+    selected}
   @begin{short}
     Accessor of the @slot[gtk:drop-down]{selected} slot of the
     @class{gtk:drop-down} class.

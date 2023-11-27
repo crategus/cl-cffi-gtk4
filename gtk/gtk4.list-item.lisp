@@ -186,8 +186,8 @@
     @class{gtk:list-item} class.
   @end{short}
   The @fun{gtk:list-item-activatable} function checks if a list item has been
-  set to be activatable. The @sym{(setf gtk:list-item-activatable)} function
-  sets @arg{object} to be activatable.
+  set to be activatable. The @setf{gtk:list-item-activatable} function sets
+  @arg{object} to be activatable.
 
   If an item is activatable, double-clicking on the item, using the @kbd{Return}
   key or calling the @fun{gtk:widget-activate} function will activate the item.
@@ -221,8 +221,8 @@
     @class{gtk:list-item} class.
   @end{short}
   The @fun{gtk:list-item-child} function gets the child widget or @code{nil}
-  if none was set. The @sym{(setf gtk:list-item-child)} function sets the child
-  widget to be used for this list item.
+  if none was set. The @setf{gtk:list-item-child} function sets the child widget
+  to be used for this list item.
 
   This function is typically called by applications when setting up a list item
   so that the widget can be reused when binding it multiple times.
@@ -309,7 +309,7 @@
     @class{gtk:list-item} class.
   @end{short}
   The @fun{gtk:list-item-selectable} function checks if a list item has been
-  set to be selectable. The @sym{(setf gtk:list-item-selectable)} function sets
+  set to be selectable. The @setf{gtk:list-item-selectable} function sets
   @arg{object} to be selectable. If an item is selectable, clicking on the item
   or using the keyboard will try to select or unselect the item. If this
   succeeds is up to the model to determine, as it is managing the selected

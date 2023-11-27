@@ -115,7 +115,7 @@
   If you do not need to wait for a button to be clicked, you can use the
   @fun{gtk:alert-dialog-show} function.
   @begin[Example]{dictionary}
-    Create an alert dialog with a @class{g:cancellable} object:
+    Create an alert dialog with a @class{g:cancellable} object.
     @begin{pre}
 (defun create-alert-dialog (parent)
   (let ((dialog (make-instance 'gtk:alert-dialog
@@ -184,10 +184,11 @@
  "The @code{cancel-button} property of type @code{:int} (Read / Write) @br{}
   This property determines what happens when the @kbd{Escape} key is pressed
   while the alert dialog is shown. If this property holds the index of a button
-  in the @slot[gtk:alert-dialog]{buttons} property, then pressing @kbd{Escape}
-  is treated as if that button was pressed. If it is -1 or not a valid index for
-  the buttons array, then an error is returned. If buttons is @code{nil}, then
-  the automatically created Close button is treated as both Cancel and Default
+  in the @slot[gtk:alert-dialog]{buttons} property, then pressing the
+  @kbd{Escape} key is treated as if that button was pressed. If it is -1 or not
+  a valid index for the buttons array, then an error is returned. If the
+  @slot[gtk:alert-dialog]{buttons} property is @code{nil}, then the
+  automatically created Close button is treated as both Cancel and Default
   button, so 0 is returned. @br{}
   Default value: -1")
 
@@ -220,11 +221,12 @@
  "The @code{default-button} property of type @code{:int} (Read / Write) @br{}
   This property determines what happens when the @kbd{Return} key is pressed
   while the alert dialog is shown. If this property holds the index of a button
-  in the @slot[gtk:alert-dialog]{buttons} property, then pressing @kbd{Return}
-  is treated as if that button was pressed. If it is -1 or not a valid index for
-  the buttons array, then nothing happens. If buttons is @code{nil}, then the
-  automatically created Close button is treated as both Cancel and Default
-  button, so 0 is returned. @br{}
+  in the @slot[gtk:alert-dialog]{buttons} property, then pressing the
+  @kbd{Return} key is treated as if that button was pressed. If it is -1 or not
+  a valid index for the buttons list, then nothing happens. If the
+  @slot[gtk:alert-dialog]{buttons} property is @code{nil}, then the
+  automatically created Close button is treated as both
+  Cancel and Default button, so 0 is returned. @br{}
   Default value: -1")
 
 #+liber-documentation

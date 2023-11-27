@@ -161,9 +161,9 @@
     @class{gtk:no-selection} class.
   @end{short}
   The @fun{gtk:no-selection-model} function gets the model that @arg{object}
-  is wrapping. The @sym{(setf gtk:no-selection-model)} function sets the model
-  that @arg{object} should wrap. If @arg{model} is @code{nil}, this model will
-  be empty.
+  is wrapping. The @setf{gtk:no-selection-model} function sets the model that
+  @arg{object} should wrap. If @arg{model} is @code{nil}, this model will be
+  empty.
   @see-class{gtk:no-selection}
   @see-class{g:list-model}")
 

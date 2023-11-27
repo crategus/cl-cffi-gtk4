@@ -268,10 +268,10 @@
     @class{gtk:file-chooser} interface.
   @end{short}
   The @fun{gtk:file-chooser-action} function gets the type of operation that
-  the file chooser is performing. The @sym{(setf gtk:file-chooser-action)}
-  function sets the type of operation. The user interface is adapted to suit
-  the selected action. For example, an option to create a new folder might be
-  shown if the action is @code{:save} but not if the action is @code{:open}.
+  the file chooser is performing. The @setf{gtk:file-chooser-action} function
+  sets the type of operation. The user interface is adapted to suit the selected
+  action. For example, an option to create a new folder might be shown if the
+  action is @code{:save} but not if the action is @code{:open}.
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
@@ -307,9 +307,9 @@
   @end{short}
   The @fun{gtk:file-chooser-create-folders} function gets whether the file
   chooser will offer to create new folders. The
-  @sym{(setf gtk:file-chooser-create-folders)} function sets whether the file
-  chooser will offer to create new folders. This is only relevant if the action
-  of the file chooser is not set to be in @code{:open} mode.
+  @setf{gtk:file-chooser-create-folders} function sets whether the file chooser
+  will offer to create new folders. This is only relevant if the action of the
+  file chooser is not set to be in @code{:open} mode.
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
@@ -340,8 +340,8 @@
     @class{gtk:file-chooser} interface.
   @end{short}
   The @fun{gtk:file-chooser-filter} function gets the current filter. The
-  @sym{(setf gtk:file-chooser-filter)} function sets the current filter. Only
-  the files that pass the filter will be displayed.
+  @setf{gtk:file-chooser-filter} function sets the current filter. Only the
+  files that pass the filter will be displayed.
 
   If the user selectable list of filters is non-empty, then the filter should
   be one of the filters in that list. Setting the current filter when the list
@@ -417,9 +417,9 @@
   @end{short}
   The @fun{gtk:file-chooser-select-multiple} function gets whether multiple
   files can be selected in the file selector. The
-  @sym{(setf gtk:file-chooser-select-multiple)} function sets whether multiple
-  files can be selected. This is only relevant if the action of the file chooser
-  is set to be in @code{:open} or @code{:select-folder} mode.
+  @setf{gtk:file-chooser-select-multiple} function sets whether multiple files
+  can be selected. This is only relevant if the action of the file chooser is
+  set to be in @code{:open} or @code{:select-folder} mode.
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:file-dialog} object instead.
@@ -490,7 +490,7 @@
   @end{short}
   The @fun{gtk:file-chooser-current-name} function gets the current name in the
   file selector, as entered by the user in the text entry for \"Name\". The
-  @sym{(setf gtk:file-chooser-current-name)} function sets the current name.
+  @setf{gtk:file-chooser-current-name} function sets the current name.
 
   This is meant to be used in save dialogs, to get the currently typed filename
   when the file itself does not exist yet. For example, an application that adds
@@ -547,7 +547,7 @@
   selected, one of the files will be returned at random. If the file chooser
   is in folder mode, this function returns the selected folder.
 
-  The @sym{(setf gtk:file-chooser-file)} function sets @arg{file} as the current
+  The @setf{gtk:file-chooser-file} function sets @arg{file} as the current
   filename for the file chooser, by changing to the parent folder of the file
   and actually selecting the file. If the file chooser is in @code{:save} mode,
   the base name of the file will also appear in the file name entry of the
@@ -617,8 +617,8 @@
   selected, one of the files will be returned at random. If the file chooser
   is in folder mode, this function returns the selected folder.
 
-  The @sym{(setf gtk:file-chooser-namestring)} function sets @arg{namestring} as
-  the current file for the file chooser, by changing to the file's parent folder
+  The @setf{gtk:file-chooser-namestring} function sets @arg{namestring} as the
+  current file for the file chooser, by changing to the file's parent folder
   and actually selecting the file in list. If the chooser is in @code{:save}
   mode, the file's base name will also appear in the dialog's file name entry.
 
@@ -696,7 +696,7 @@
   @end{short}
   The @fun{gtk:file-chooser-current-folder} function gets the current folder
   of the file chooser as a local filename. The
-  @sym{(setf gtk:file-chooser-current-folder)} function sets the current folder.
+  @setf{gtk:file-chooser-current-folder} function sets the current folder.
 
   The user will be shown the full contents of the current folder, plus user
   interface elements for navigating to other folders.

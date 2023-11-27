@@ -194,7 +194,7 @@ searchbar
     @class{gtk:search-bar} class.
   @end{short}
   The @fun{gtk:search-bar-child} function gets the child widget of the search
-  bar. The @sym{(setf gtk:search-bar-child)} sets the child widget.
+  bar. The @setf{gtk:search-bar-child} function sets the child widget.
   @see-class{gtk:search-bar}
   @see-class{gtk:widget}")
 
@@ -222,7 +222,7 @@ searchbar
   @end{short}
   The @fun{gtk:search-bar-key-capture-widget} function gets the widget that the
   search bar is capturing key events from. The
-  @sym{(setf gtk:search-bar-key-capture-widget)} function sets @arg{widget} as
+  @setf{gtk:search-bar-key-capture-widget} function sets @arg{widget} as
   the widget that the search bar will capture key events from.
 
   If key events are handled by the search bar, the search bar will be shown,
@@ -280,8 +280,8 @@ searchbar
     @class{gtk:search-bar} class.
   @end{short}
   The @fun{gtk:search-bar-show-close-button} function returns whether the Close
-  button is shown. The @sym{(setf gtk:search-bar-show-close-button} function
-  shows or hides the Close button.
+  button is shown. The @setf{gtk:search-bar-show-close-button} function shows
+  or hides the Close button.
 
   Applications that already have a \"search\" toggle button should not show a
   Close button in their search bar, as it duplicates the role of the toggle

@@ -259,13 +259,13 @@
     Accessor of the @slot[gtk:picture]{alternative-text} slot of the
     @class{gtk:picture} class.
   @end{short}
-  The @sym{gtk:picture-alternative-text} function gets the alternative textual
+  The @fun{gtk:picture-alternative-text} function gets the alternative textual
   description of the picture or returns @code{nil} if the picture cannot be
-  described textually. The @sym{(setf gtk:picture-alternative-text)} function
-  sets an alternative textual description. It is equivalent to the \"alt\"
-  attribute for images on websites. This text will be made available to
-  accessibility tools. If the picture cannot be described textually, set this
-  property to @code{null-pointer}.
+  described textually. The @setf{gtk:picture-alternative-text} function sets an
+  alternative textual description. It is equivalent to the \"alt\" attribute for
+  images on websites. This text will be made available to accessibility tools.
+  If the picture cannot be described textually, set this property to
+  @code{null-pointer}.
   @see-class{gtk:picture}")
 
 ;;; --- picture-can-shrink -----------------------------------------------------
@@ -324,9 +324,9 @@
     Accessor of the @slot[gtk:picture]{content-fit} slot of the
     @class{gtk:picture} class.
   @end{short}
-  The @sym{gtk:picture-content-fit} function returns the fit mode for the
-  content of the picture. The @sym{(setf gtk:picture-content-fit)} function
-  sets how the content should be resized to fit the picture.
+  The @fun{gtk:picture-content-fit} function returns the fit mode for the
+  content of the picture. The @setf{gtk:picture-content-fit} function sets how
+  the content should be resized to fit the picture.
 
   Since 4.8
   @see-class{gtk:picture}
@@ -353,10 +353,10 @@
     Accessor of the @slot[gtk:picture]{file} slot of the @class{gtk:picture}
     class.
   @end{short}
-  The @sym{gtk:picture-file} function gets the file currently displayed if
+  The @fun{gtk:picture-file} function gets the file currently displayed if
   the picture is displaying a file. If the picture is not displaying a file,
   for example when the @fun{gtk:picture-paintable} function was used, then
-  @code{nil} is returned. The @sym{(setf gtk:picture-file)} function makes the
+  @code{nil} is returned. The @setf{gtk:picture-file} function makes the
   picture load and display @arg{file}. See the @fun{gtk:picture-new-for-file}
   documentation for more details.
   @see-class{gtk:picture}
@@ -420,8 +420,8 @@
     Accessor of the @slot[gtk:picture]{paintable} slot of the
     @class{gtk:picture} class.
   @end{short}
-  The @sym{gtk:picture-paintable} function gets the paintable being displayed by
-  the picture. The @sym{(setf gtk:picture-paintable)} function makes the picture
+  The @fun{gtk:picture-paintable} function gets the paintable being displayed
+  by the picture. The @setf{gtk:picture-paintable} function makes the picture
   display the given paintable. If the paintable is @code{nil}, nothing will be
   displayed. See the @fun{gtk:picture-new-for-paintable} documentation for more
   details.

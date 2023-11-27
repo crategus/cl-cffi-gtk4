@@ -162,7 +162,7 @@
     @class{gtk:flatten-list-model} class.
   @end{short}
   The @fun{gtk:flatten-list-model-model} function gets the model currently
-  flattened or @code{nil} if none. The @sym{(setf gtk:flatten-list-model-model)}
+  flattened or @code{nil} if none. The @setf{gtk:flatten-list-model-model}
   function sets the model to be flattened.
   @see-class{gtk:flatten-list-model}
   @see-class{g:list-model}")

@@ -158,19 +158,20 @@
 
   When the user selects a completion, the content of the entry is updated. By
   default, the content of the entry is replaced by the text column of the
-  model, but this can be overridden by connecting to the \"match-selected\"
-  signal and updating the entry in the signal handler. Note that you should
-  return @em{true} from the signal handler to suppress the default behaviour.
+  model, but this can be overridden by connecting to the
+  @code{\"match-selected\"} signal and updating the entry in the signal handler.
+  Note that you should return @em{true} from the signal handler to suppress the
+  default behaviour.
 
   To add completion functionality to an entry, use the
   @fun{gtk:entry-completion} function.
 
   The @class{gtk:entry-completion} object uses a @class{gtk:tree-model-filter}
   model to represent the subset of the entire model that is currently matching.
-  While the @class{gtk:entry-completion} widget signals \"match-selected\" and
-  \"cursor-on-match\" take the original model and an iterator pointing to that
-  model as arguments, other callbacks and signals, such as a
-  @symbol{gtk:cell-layout-data-func} function or the \"apply-attributes\"
+  While the @class{gtk:entry-completion} widget @code{\"match-selected\"} and
+  @code{\"cursor-on-match\"} signals take the original model and an iterator
+  pointing to that model as arguments, other callbacks and signals, such as a
+  @symbol{gtk:cell-layout-data-func} function or the @code{\"apply-attributes\"}
   signal, will generally take the filter model as argument. As long as you are
   only calling the @fun{gtk:tree-model-get} function, this will make no
   difference to you. If for some reason, you need the original model, use the
@@ -324,9 +325,9 @@ lambda (widget)    :run-last
   @end{short}
   The @fun{gtk:entry-completion-inline-completion} function returns whether the
   common prefix of the possible completions should be automatically inserted in
-  the entry. The @sym{(setf gtk:entry-completion-inline-completion)} function
-  sets whether the common prefix of the possible completions should be
-  automatically inserted in the entry.
+  the entry. The @setf{gtk:entry-completion-inline-completion} function sets
+  whether the common prefix of the possible completions should be automatically
+  inserted in the entry.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -359,8 +360,8 @@ lambda (widget)    :run-last
   @end{short}
   The @fun{gtk:entry-completion-inline-selection} function returns @em{true} if
   inline selection mode is turned on. The
-  @sym{(setf gtk:entry-completion-inline-selection)} function sets whether it
-  is possible to cycle through the possible completions inside the entry.
+  @setf{gtk:entry-completion-inline-selection} function sets whether it is
+  possible to cycle through the possible completions inside the entry.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -394,8 +395,8 @@ lambda (widget)    :run-last
   @end{short}
   The @fun{gtk:entry-completion-minimum-key-length} function returns the minimum
   key length as set for the entry completion. The
-  @sym{(setf gtk:entry-completion-minimum-key-length)} function sets the length
-  of the search key for completion to be at least @arg{length}.
+  @setf{gtk:entry-completion-minimum-key-length} function sets the length of
+  the search key for completion to be at least @arg{length}.
 
   This is useful for long lists, where completing using a small key takes a
   lot of time and will come up with meaningless results anyway, i.e., a too
@@ -428,10 +429,10 @@ lambda (widget)    :run-last
   @end{short}
   The @fun{gtk:entry-completion-model} function returns the
   @class{gtk:tree-model} object, or @code{nil} if none is currently being used.
-  The @sym{(setf gtk:entry-completion-model)} function sets the model for a
-  entry completion. If the entry completion already has a model set, it will
-  remove it before setting the new model. If @arg{model} is @code{nil}, then it
-  will unset the model.
+  The @setf{gtk:entry-completion-model} function sets the model for a entry
+  completion. If the entry completion already has a model set, it will remove it
+  before setting the new model. If @arg{model} is @code{nil}, then it will unset
+  the model.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -465,7 +466,7 @@ lambda (widget)    :run-last
   @end{short}
   The @fun{gtk:entry-completion-popup-completion} function returns whether the
   completions should be presented in a popup window. The
-  @sym{(setf gtk:entry-completion-popup-completion)} function sets whether the
+  @setf{gtk:entry-completion-popup-completion} function sets whether the
   completions should be presented in a popup window.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
@@ -500,7 +501,7 @@ lambda (widget)    :run-last
   @end{short}
   The @fun{gtk:entry-completion-popup-set-width} function returns whether the
   completion popup window will be resized to the width of the entry. The
-  @sym{(setf gtk:entry-completion-popup-set-width)} function sets whether the
+  @setf{gtk:entry-completion-popup-set-width} function sets whether the
   completion popup window will be resized to be the same width as the entry.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
@@ -536,9 +537,9 @@ lambda (widget)    :run-last
   @end{short}
   The @fun{gtk:entry-completion-popup-single-match} function returns @em{true}
   if the popup window will appear regardless of the number of matches. The
-  @sym{(setf gtk:entry-completion-popup-single-match)} function sets whether
-  the completion popup window will appear even if there is only a single match.
-  You may want to set this to @em{false} if you are using inline completion.
+  @setf{gtk:entry-completion-popup-single-match} function sets whether the
+  completion popup window will appear even if there is only a single match. You
+  may want to set this to @em{false} if you are using inline completion.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -572,9 +573,8 @@ lambda (widget)    :run-last
   @end{short}
   The @fun{gtk:entry-completion-text-column} function returns the column in the
   model of the completion to get strings from. The
-  @sym{(setf gtk:entry-completion-text-column)} function is a convenience
-  function for setting up the most used case: a completion list with just
-  strings.
+  @setf{gtk:entry-completion-text-column} function is a convenience function
+  for setting up the most used case: a completion list with just strings.
 
   This function will set up completion to have a list displaying all, and just,
   strings in the completion list, and to get those strings from column in the

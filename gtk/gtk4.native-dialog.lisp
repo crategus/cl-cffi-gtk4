@@ -106,8 +106,8 @@
   The @class{gtk:dialog} functions cannot be used on such objects, but we need
   a similar API in order to drive them. The @class{gtk:native-dialog} object is
   an API that allows you to do this. It allows you to set various common
-  properties on the dialog, as well as show and hide it and get a \"response\"
-  signal when the user finished with the dialog.
+  properties on the dialog, as well as show and hide it and get a
+  @code{\"response\"} signal when the user finished with the dialog.
   @begin[Signal Details]{dictionary}
     @subheading{The \"response\" signal}
       @begin{pre}
@@ -156,8 +156,8 @@ lambda (dialog response)    :run-last
     @class{gtk:native-dialog} class.
   @end{short}
   The @fun{gtk:native-dialog-modal} function returns whether the dialog is
-  modal. The @sym{(setf gtk:native-dialog-modal)} function sets a dialog modal
-  or non-modal.
+  modal. The @setf{gtk:native-dialog-modal} function sets a dialog modal or
+  non-modal.
 
   Modal dialogs prevent interaction with other windows in the same application.
   To keep modal dialogs on top of main application windows, use the
@@ -190,7 +190,7 @@ lambda (dialog response)    :run-last
     @class{gtk:native-dialog} class.
   @end{short}
   The @fun{gtk:native-dialog-title} function gets the title of the dialog. The
-  @sym{(setf gtk:native-dialog-title)} function sets the title.
+  @setf{gtk:native-dialog-title} function sets the title.
   @see-class{gtk:native-dialog}")
 
 ;;; --- native-dialog-transient-for --------------------------------------------
@@ -216,8 +216,8 @@ lambda (dialog response)    :run-last
     @class{gtk:native-dialog} class.
   @end{short}
   The @fun{gtk:native-dialog-transient-for} function fetches the transient
-  parent for the dialog. The @sym{(setf gtk:native-dialog-transient-for)}
-  function sets the parent.
+  parent for the dialog. The @setf{gtk:native-dialog-transient-for} function
+  sets the parent.
 
   Dialog windows should be set transient for the main application window they
   were spawned from. This allows window managers to e.g. keep the dialog on
@@ -263,8 +263,8 @@ lambda (dialog response)    :run-last
     Shows the dialog on the display, allowing the user to interact with it.
   @end{short}
   When the user accepts the state of the dialog the dialog will be automatically
-  hidden and the \"response\" signal will be emitted. Multiple calls while the
-  dialog is visible will be ignored.
+  hidden and the @code{\"response\"} signal will be emitted. Multiple calls
+  while the dialog is visible will be ignored.
   @see-class{gtk:native-dialog}"
   (dialog (g:object native-dialog)))
 
@@ -281,8 +281,8 @@ lambda (dialog response)    :run-last
   @begin{short}
     Hides the dialog if it is visilbe, aborting any interaction.
   @end{short}
-  Once this is called the \"response\" signal will not be emitted until after
-  the next call to the @fun{gtk:native-dialog-show} function.
+  Once this is called the @code{\"response\"} signal will not be emitted until
+  after the next call to the @fun{gtk:native-dialog-show} function.
 
   If the dialog is not visible this does nothing.
   @see-class{gtk:native-dialog}

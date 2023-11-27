@@ -160,9 +160,9 @@
     @class{gtk:multi-selection} class.
   @end{short}
   The @fun{gtk:multi-selection-model} function returns the underlying model of
-  @arg{object}. The @sym{(setf gtk:multi-selection-model)} function sets the
-  model that @arg{object} should wrap. If @arg{model} is @code{nil},
-  @arg{object} will be empty.
+  @arg{object}. The @setf{gtk:multi-selection-model} function sets the model
+  that @arg{object} should wrap. If @arg{model} is @code{nil}, @arg{object}
+  will be empty.
   @see-class{gtk:multi-selection}
   @see-class{g:list-model}")
 

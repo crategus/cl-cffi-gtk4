@@ -94,15 +94,15 @@
 (setf (documentation 'window-controls 'type)
  "@version{2023-8-9}
   @begin{short}
-    The @sym{gtk:window-controls} widget shows window frame controls, such as
+    The @class{gtk:window-controls} widget shows window frame controls, such as
     minimize, maximize and close buttons, and the window icon.
   @end{short}
 
   @image[window-controls]{Figure: GtkWindowControls}
 
-  The @sym{gtk:window-controls} widget only displays start or end side of the
+  The @class{gtk:window-controls} widget only displays start or end side of the
   controls, see the @slot[gtk:window-controls]{side} property, so it is
-  intended to be always used in pair with another @sym{gtk:window-controls}
+  intended to be always used in pair with another @class{gtk:window-controls}
   widget using the opposite side, for example:
   @begin{pre}
 <object class=\"GtkBox\">
@@ -127,7 +127,7 @@ windowcontrols
 ├── [button.maximize]
 ╰── [button.close]
     @end{pre}
-    The @sym{gtk:window-controls} implementation has a CSS node called
+    The @class{gtk:window-controls} implementation has a CSS node called
     @code{windowcontrols}. It contains subnodes corresponding to each title
     button. Which of the title buttons exist and where they are placed exactly
     depends on the desktop environment and the
@@ -136,7 +136,7 @@ windowcontrols
     @code{.empty} style class.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:window-controls} implementation uses the @code{:group} role.
+    The @class{gtk:window-controls} implementation uses the @code{:group} role.
   @end{dictionary}
   @see-constructor{gtk:window-controls-new}
   @see-slot{gtk:window-controls-decoration-layout}
@@ -173,9 +173,9 @@ windowcontrols
     Accessor of the @slot[gtk:window-controls]{decoration-layout} slot of the
     @class{gtk:window-controls} class.
   @end{short}
-  The @sym{gtk:window-controls-decoration-layout} function gets the decoration
-  layout. The @sym{(setf gtk:window-controls-decoration-layout)} function
-  sets the decoration layout for the title buttons, overriding the
+  The @fun{gtk:window-controls-decoration-layout} function gets the decoration
+  layout. The @setf{gtk:window-controls-decoration-layout} function sets the
+  decoration layout for the title buttons, overriding the
   @slot[gtk:settings]{gtk-decoration-layout} setting.
 
   The format of the string is button names, separated by commas. A colon
@@ -213,7 +213,7 @@ windowcontrols
     Accessor of the @slot[gtk:window-controls]{empty} slot of the
     @class{gtk:window-controls} class.
   @end{short}
-  The @sym{gtk:window-controls-empty} function gets whether the widget has any
+  The @fun{gtk:window-controls-empty} function gets whether the widget has any
   window buttons.
   @see-class{gtk:window-controls}")
 
@@ -238,8 +238,8 @@ windowcontrols
     Accessor of the @slot[gtk:window-controls]{side} slot of the
     @class{gtk:window-controls} class.
   @end{short}
-  The @sym{gtk:window-controls-side} function gets the side. The
-  @sym{(setf gtk:window-controls-side)} function sets the side for @arg{object},
+  The @fun{gtk:window-controls-side} function gets the side. The
+  @setf{gtk:window-controls-side} function sets the side for @arg{object},
   determining which part of decoration layout it uses.
   @see-class{gtk:window-controls}
   @see-symbol{gtk:pack-type}")

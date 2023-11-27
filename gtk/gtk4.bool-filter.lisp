@@ -115,8 +115,8 @@
   @end{short}
   The @fun{gtk:bool-filter-expression} function gets the expression that the
   filter uses to evaluate if an item should be filtered. The
-  @sym{(setf gtk:bool-filter-expression)} function sets the expression.The
-  expression must have a \"gboolean\" value type.
+  @setf{gtk:bool-filter-expression} function sets the expression. The expression
+  must have a @code{\"gboolean\"} value type.
   @see-class{gtk:bool-filter}
   @see-class{gtk:expression}")
 
@@ -142,8 +142,8 @@
     @class{gtk:bool-filter} class.
   @end{short}
   The @fun{gtk:bool-filter-invert} function returns whether the filter inverts
-  the expression. The @sym{(setf gtk:bool-filter-expression)} function sets
-  whether the filter should invert the expression.
+  the expression. The @setf{gtk:bool-filter-expression} function sets whether
+  the filter should invert the expression.
   @see-class{gtk:bool-filter}")
 
 ;;; ----------------------------------------------------------------------------

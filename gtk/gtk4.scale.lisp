@@ -122,7 +122,7 @@
   @class{gtk:range} class, in addition to the methods for the @class{gtk:scale}
   class itself. To set the value of a scale, you would normally use the
   @fun{gtk:range-value} function. To detect changes to the value, you would
-  normally use the \"value-changed\" signal.
+  normally use the @code{\"value-changed\"} signal.
 
   @image[scale]{Figure: GtkScale}
 
@@ -230,7 +230,7 @@ scale[.fine-tune][.marks-before][.marks-after]
     class.
   @end{short}
   The @fun{gtk:scale-digits} function returns the number of decimal places that
-  are displayed. The @sym{(setf gtk:scale-digits)} function sets the number of
+  are displayed. The @setf{gtk:scale-digits} function sets the number of
   decimal places that are displayed in the value. Also causes the value of the
   adjustment to be rounded off to this number of @arg{digits}, so the retrieved
   value matches the value the user saw.
@@ -259,8 +259,8 @@ scale[.fine-tune][.marks-before][.marks-after]
   @end{short}
   The @fun{gtk:scale-draw-value} function returns whether the current value is
   displayed as a string next to the slider. The
-  @sym{(setf gtk:scale-draw-value)} function specifies whether the current
-  value is displayed as a string next to the slider.
+  @setf{gtk:scale-draw-value} function specifies whether the current value is
+  displayed as a string next to the slider.
   @see-class{gtk:scale}")
 
 ;;; --- scale-has-origin -------------------------------------------------------
@@ -316,8 +316,8 @@ scale[.fine-tune][.marks-before][.marks-after]
     class.
   @end{short}
   The @fun{gtk:scale-value-pos} function gets the position in which the current
-  value is displayed. The @sym{(setf gtk:scale-value-pos)} function sets the
-  position in which the current value is displayed.
+  value is displayed. The @setf{gtk:scale-value-pos} function sets the position
+  in which the current value is displayed.
   @see-class{gtk:scale}
   @see-symbol{gtk:position-type}")
 

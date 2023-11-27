@@ -208,8 +208,8 @@ lambda (widget application)    :run-first
   @end{short}
   The @fun{gtk:app-chooser-widger-default-text} function returns the text that
   is shown if there are not applications that can handle the content type. The
-  @sym{(setf gtk:app-chooser-widget-default-text)} function sets the text that
-  is shown if there are not applications that can handle the content type.
+  @setf{gtk:app-chooser-widget-default-text} function sets the text that is
+  shown if there are not applications that can handle the content type.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-widget} implementation is deprecated since 4.10.
   @end{dictionary}
@@ -243,8 +243,8 @@ lambda (widget application)    :run-first
   @end{short}
   The @fun{gtk:app-chooser-widget-show-all} function sets whether the
   application chooser should show all applications in a flat list. The
-  @sym{(setf gtk:app-chooser-widget-show-all)} function sets whether the
-  application chooser should show all applications in a flat list.
+  @setf{gtk:app-chooser-widget-show-all} function sets whether the application
+  chooser should show all applications in a flat list.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-widget} implementation is deprecated since 4.10.
   @end{dictionary}
@@ -278,8 +278,8 @@ lambda (widget application)    :run-first
   @end{short}
   The @fun{gtk:app-chooser-widget-show-default} function returns whether the
   application chooser should the default handler for the content type in a
-  separate section. The @sym{(setf gtk:app-chooser-widget-show-default)}
-  function sets whether the application chooser should show the default handler.
+  separate section. The @setf{gtk:app-chooser-widget-show-default} function
+  sets whether the application chooser should show the default handler.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-widget} implementation is deprecated since 4.10.
   @end{dictionary}
@@ -313,7 +313,7 @@ lambda (widget application)    :run-first
   @end{short}
   The @fun{gtk:app-chooser-widget-show-fallback} function returns whether the
   application chooser should show a section for fallback applications. The
-  @sym{(setf gtk:app-chooser-widget-show-fallback)} function sets whether the
+  @setf{gtk:app-chooser-widget-show-fallback} function sets whether the
   application chooser should show related applications for the content type in
   a separate section.
   @begin[Warning]{dictionary}
@@ -348,7 +348,7 @@ lambda (widget application)    :run-first
   @end{short}
   The @fun{gtk:app-chooser-widget-show-other} function returns whether the
   application chooser should show a section for other applications. The
-  @sym{(gtk:app-chooser-widget-show-other)} function sets whether the
+  @setf{gtk:app-chooser-widget-show-other} function sets whether the
   application chooser should show applications which are unrelated to the
   content type.
   @begin[Warning]{dictionary}
@@ -384,9 +384,9 @@ lambda (widget application)    :run-first
   @end{short}
   The @fun{gtk:app-chooser-widget-show-recommended} function returns whether
   the application chooser should recommended applications. The
-  @sym{(setf gtk:app-chooser-widget-show-recommended)} function sets whether
-  the application chooser should show recommended applications for the content
-  type in a separate section.
+  @setf{gtk:app-chooser-widget-show-recommended} function sets whether the
+  application chooser should show recommended applications for the content type
+  in a separate section.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-widget} implementation is deprecated since 4.10.
   @end{dictionary}

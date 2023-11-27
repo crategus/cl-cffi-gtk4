@@ -95,16 +95,17 @@
   A @class{gtk:selection-model} object supports a single boolean per item
   indicating if an item is selected or not. This can be queried via the
   @fun{gtk:selection-model-is-selected} function. When the selected state of
-  one or more items changes, the model will emit the \"selection-changed\"
-  signal by calling the the @fun{gtk:selection-model-selection-changed}
-  function. The positions given in that signal may have their selection state
-  changed, though that is not a requirement. If new items added to the model
-  via the \"items-changed\" signal are selected or not is up to the
-  implementation.
+  one or more items changes, the model will emit the
+  @code{\"selection-changed\"} signal by calling the the
+  @fun{gtk:selection-model-selection-changed} function. The positions given in
+  that signal may have their selection state changed, though that is not a
+  requirement. If new items added to the model via the @code{\"items-changed\"}
+  signal are selected or not is up to the implementation.
 
-  Note that items added via the \"items-changed\" signal may already be selected
-  and no \"selection-changed\" signal will be emitted for them. So to track
-  which items are selected, it is necessary to listen to both signals.
+  Note that items added via the @code{\"items-changed\"} signal may already be
+  selected and no @code{\"selection-changed\"} signal will be emitted for them.
+  So to track which items are selected, it is necessary to listen to both
+  signals.
 
   Additionally, the interface can expose functionality to select and unselect
   items. If these functions are implemented, list widgets will allow users to
@@ -194,7 +195,7 @@ lambda (model position n-items)    :run-last
   are only interested in a few consider the
   @fun{gtk:selection-model-selection-in-range} function.
 
-  The @sym{(setf gtk:selection-model-selection)} function is the most advanced
+  The @setf{gtk:selection-model-selection} function is the most advanced
   selection updating method that allows the most fine-grained control over
   selection changes. If you can, you should try the simpler versions, as
   implementations are more likely to implement support for those.
@@ -252,7 +253,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 
   This function is an optimization for the @fun{gtk:selection-model-selection}
   function when you are only interested in part of the model's selected state.
-  A common use case is in response to the \"selection-changed\" signal.
+  A common use case is in response to the @code{\"selection-changed\"} signal.
   @see-class{gtk:selection-model}
   @see-class{gtk:bitset}
   @see-function{gtk:selection-model-selection}"
@@ -411,7 +412,8 @@ gtk_selection_model_selection_changed (model, first_changed_item,
     Helper function for implementations of the @class{gtk:selection-model}
     class.
   @end{short}
-  Call this when the selection changes to emit the \"selection-changed\" signal.
+  Call this when the selection changes to emit the @code{\"selection-changed\"}
+  signal.
   @see-class{gtk:selection-model}"
   (model (g:object selection-model))
   (position :uint)

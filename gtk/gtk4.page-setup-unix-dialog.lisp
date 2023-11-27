@@ -164,8 +164,8 @@
   @end{short}
   The @fun{gtk:page-setup-unix-dialog-page-setup} function gets the currently
   selected page setup from the page setup dialog. The
-  @sym{(setf gtk:page-setup-unix-dialog-page-setup)} function sets the page 
-  setup object from which the page setup dialog takes its values.
+  @setf{gtk:page-setup-unix-dialog-page-setup} function sets the page setup
+  object from which the page setup dialog takes its values.
   @see-class{gtk:page-setup-unix-dialog}
   @see-class{gtk:page-setup}"
   (dialog (g:object page-setup-unix-dialog)))
@@ -197,8 +197,8 @@
   @end{short}
   The @fun{gtk:page-setup-unix-dialog-print-settings} function gets the current
   print settings from the page setup dialog. The
-  @sym{(setf gtk:page-setup-unix-dialog-print-settings)} function sets the 
-  print settings from which the page setup dialog takes its values.
+  @setf{gtk:page-setup-unix-dialog-print-settings} function sets the print
+  settings from which the page setup dialog takes its values.
   @see-class{gtk:page-setup-unix-dialog}
   @see-class{gtk:print-settings}"
   (dialog (g:object page-setup-unix-dialog)))

@@ -83,7 +83,7 @@
 (setf (documentation 'stack-switcher 'type)
  "@version{2023-8-9}
   @begin{short}
-    The @sym{gtk:stack-switcher} widget acts as a controller for a
+    The @class{gtk:stack-switcher} widget acts as a controller for a
     @class{gtk:stack} widget.
   @end{short}
   It shows a row of buttons to switch between the various pages of the
@@ -92,21 +92,21 @@
   @image[stack-switcher]{Figure: GtkStackSwitcher}
 
   All the content for the buttons comes from the child properties of the
-  @class{gtk:stack} widget. The button visibility in a @sym{gtk:stack-switcher}
-  widget is controlled by the visibility of the child widget in the
-  @class{gtk:stack} widget.
+  @class{gtk:stack} widget. The button visibility in a
+  @class{gtk:stack-switcher} widget is controlled by the visibility of the
+  child widget in the @class{gtk:stack} widget.
 
-  It is possible to associate multiple @sym{gtk:stack-switcher} widgets with
+  It is possible to associate multiple @class{gtk:stack-switcher} widgets with
   the same @class{gtk:stack} widget.
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:stack-switcher} implementation has a single CSS node named
+    The @class{gtk:stack-switcher} implementation has a single CSS node named
     @code{stackswitcher} and @code{.stack-switcher} style class. When
-    circumstances require it, the @sym{gtk:stack-switcher} widget adds the
+    circumstances require it, the @class{gtk:stack-switcher} widget adds the
     @code{.needs-attention} style class to the widgets representing the stack
     pages.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:stack-switcher} implementation uses the @code{:tab-list} role
+    The @class{gtk:stack-switcher} implementation uses the @code{:tab-list} role
     and uses the @code{:tab} role of the @symbol{gtk:accessible-role}
     enumeration for its buttons.
   @end{dictionary}
@@ -138,8 +138,8 @@
     Accessor of the @slot[gtk:stack-switcher]{stack} slot of the
     @class{gtk:stack-switcher} class.
   @end{short}
-  The @sym{gtk:stack-switcher-stack} function retrieves the stack. The
-  @sym{(setf gtk:stack-switcher-stack)} function sets the stack to control.
+  The @fun{gtk:stack-switcher-stack} function retrieves the stack. The
+  @setf{gtk:stack-switcher-stack} function sets the stack to control.
   @see-class{gtk:stack-switcher}
   @see-class{gtk:stack}")
 

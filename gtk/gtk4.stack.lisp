@@ -264,7 +264,7 @@
 (setf (documentation 'stack-page 'type)
  "@version{2023-8-8}
   @begin{short}
-    The @sym{gtk:stack-page} class is an auxiliary class used by the
+    The @class{gtk:stack-page} class is an auxiliary class used by the
     @class{gtk:stack} class.
   @end{short}
   @see-slot{gtk:stack-page-child}
@@ -300,7 +300,7 @@
     Accessor of the @slot[gtk:stack-page]{child} slot of the
     @class{gtk:stack-page} class.
   @end{short}
-  The @sym{gtk:stack-page-child} function returns the child widget of the page.
+  The @fun{gtk:stack-page-child} function returns the child widget of the page.
   @see-class{gtk:stack-page}
   @see-class{gtk:widget}")
 
@@ -325,9 +325,8 @@
     Accessor of the @slot[gtk:stack-page]{icon-name} slot of the
     @class{gtk:stack-page} class.
   @end{short}
-  The @sym{gtk:stack-page-icon-name} function returns the icon name of the
-  child page. The @sym{(setf gtk:stack-page-icon-name)} function sets the icon
-  name.
+  The @fun{gtk:stack-page-icon-name} function returns the icon name of the
+  child page. The @setf{gtk:stack-page-icon-name} function sets the icon name.
   @see-class{gtk:stack-page}")
 
 ;;; --- stack-page-name --------------------------------------------------------
@@ -351,8 +350,8 @@
     Accessor of the @slot[gtk:stack-page]{name} slot of the
     @class{gtk:stack-page} class.
   @end{short}
-  The @sym{gtk:stack-page-name} function returns the name of the page. The
-  @sym{(setf gtk:stack-page-name)} function sets the name.
+  The @fun{gtk:stack-page-name} function returns the name of the page. The
+  @setf{gtk:stack-page-name} function sets the name.
   @see-class{gtk:stack-page}")
 
 ;;; --- stack-page-needs-attention ---------------------------------------------
@@ -380,8 +379,8 @@
     Accessor of the @slot[gtk:stack-page]{needs-attention} slot of the
     @class{gtk:stack-page} class.
   @end{short}
-  The @sym{gtk:stack-page-needs-attention} function returns whether the page is
-  marked as \"needs attention\". The @sym{(setf gtk:stack-page-needs-attention)}
+  The @fun{gtk:stack-page-needs-attention} function returns whether the page is
+  marked as \"needs attention\". The @setf{gtk:stack-page-needs-attention}
   function sets sets a flag specifying whether the page requires the user
   attention.
 
@@ -412,8 +411,8 @@
     Accessor of the @slot[gtk:stack-page]{title} slot of the
     @class{gtk:stack-page} class.
   @end{short}
-  The @sym{gtk:stack-page-title} function gets the page title. The
-  @sym{(setf gtk:stack-page-title)} function sets the page title.
+  The @fun{gtk:stack-page-title} function gets the page title. The
+  @setf{gtk:stack-page-title} function sets the page title.
   @see-class{gtk:stack-page}")
 
 ;;; --- stack-page-use-underline -----------------------------------------------
@@ -439,8 +438,8 @@
     Accessor of the @slot[gtk:stack-page]{use-underline} slot of the
     @class{gtk:stack-page} class.
   @end{short}
-  The @sym{gtk:stack-page-use-underline} function gets whether underlines in the
-  page title indicate mnemonics. The @sym{(setf gtk:stack-page-use-underline)}
+  The @fun{gtk:stack-page-use-underline} function gets whether underlines in the
+  page title indicate mnemonics. The @setf{gtk:stack-page-use-underline}
   function sets the property.
   @see-class{gtk:stack-page}")
 
@@ -465,10 +464,10 @@
     Accessor of the @slot[gtk:stack-page]{visible} slot of the
     @class{gtk:stack-page} class.
   @end{short}
-  The @sym{gtk:stack-page-visible} function returns whether the page is visible
-  in its stack. The @sym{(setf gtk:stack-page-visible)} function sets the
-  property. This is independent from the @slot[gtk:widget]{visible} property of
-  its widget.
+  The @fun{gtk:stack-page-visible} function returns whether the page is visible
+  in its stack. The @setf{gtk:stack-page-visible} function sets the property.
+  This is independent from the @slot[gtk:widget]{visible} property of its
+  widget.
   @see-class{gtk:stack-page}
   @see-function{gtk:widget-visible}")
 
@@ -515,13 +514,13 @@
 (setf (documentation 'stack 'type)
  "@version{2023-8-8}
   @begin{short}
-    The @sym{gtk:stack} widget is a container which only shows one of its
+    The @class{gtk:stack} widget is a container which only shows one of its
     children at a time.
   @end{short}
-  In contrast to the @class{gtk:notebook} widget, the @sym{gtk:stack} widget
+  In contrast to the @class{gtk:notebook} widget, the @class{gtk:stack} widget
   does not provide a means for users to change the visible child. Instead, the
-  @class{gtk:stack-switcher} widget can be used with the @sym{gtk:stack} widget
-  to provide this functionality.
+  @class{gtk:stack-switcher} widget can be used with the @class{gtk:stack}
+  widget to provide this functionality.
 
   @image[stack]{Figure: GtkStack}
 
@@ -529,9 +528,9 @@
   controlled with the @fun{gtk:stack-transition-type} function. These animations
   respect the @slot[gtk:settings]{gtk-enable-animations} setting.
 
-  The @sym{gtk:stack} widget maintains a @class{gtk:stack-page} object for each
-  added child widget, which holds additional per-child properties. You obtain
-  the @class{gtk:stack-page} object for a child widget with the
+  The @class{gtk:stack} widget maintains a @class{gtk:stack-page} object for
+  each added child widget, which holds additional per-child properties. You
+  obtain the @class{gtk:stack-page} object for a child widget with the
   @fun{gtk:stack-page} function.
   @begin[GtkStack as GtkBuildable]{dictionary}
     To set child-specific properties in a @file{.ui} file, create
@@ -553,10 +552,11 @@
     @end{pre}
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
-    The @sym{gtk:stack} implementation has a single CSS node named @code{stack}.
+    The @class{gtk:stack} implementation has a single CSS node named
+    @code{stack}.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
-    The @sym{gtk:stack} implementation uses the @code{:tab-panel} role of the
+    The @class{gtk:stack} implementation uses the @code{:tab-panel} role of the
     @symbol{gtk:accessible-role} enumeration for the stack pages, which are the
     accessible parent objects of the child widgets.
   @end{dictionary}
@@ -599,9 +599,9 @@
     Accessor of the @slot[gtk:stack]{hhomogeneous} slot of the @class{gtk:stack}
     class.
   @end{short}
-  The @sym{gtk:stack-hhomogeneous} function gets whether the stack is
-  horizontally homogeneous. The @sym{(setf gtk:stack-hhomogeneous)} function
-  sets the stack to be horizontally homogeneous or not.
+  The @fun{gtk:stack-hhomogeneous} function gets whether the stack is
+  horizontally homogeneous. The @setf{gtk:stack-hhomogeneous} function sets the
+  stack to be horizontally homogeneous or not.
 
   If the stack is homogeneous, the stack will request the same width for all its
   children. If it is not, the stack may change width when a different child
@@ -632,10 +632,10 @@
     Accessor of the @slot[gtk:stack]{interpolate-size} slot of the
     @class{gtk:stack} class.
   @end{short}
-  The @sym{gtk:stack-interpolate-size} function returns whether the stack is
+  The @fun{gtk:stack-interpolate-size} function returns whether the stack is
   set up to interpolate between the sizes of children on page switch. The
-  @sym{(setf gtk:stack-interpolate-size)} function sets whether or not stack
-  will interpolate its size when changing the visible child.
+  @setf{gtk:stack-interpolate-size} function sets whether or not stack will
+  interpolate its size when changing the visible child.
 
   If the @slot[gtk:stack]{interpolate-size} property is set to @em{true}, the
   stack will interpolate its size between the current one and the one it will
@@ -664,7 +664,7 @@
   @begin{short}
     Accessor of the @slot[gtk:stack]{pages} slot of the @class{gtk:stack} class.
   @end{short}
-  The @sym{gtk:stack-pages} function returns a @class{g:list-model} object
+  The @fun{gtk:stack-pages} function returns a @class{g:list-model} object
   that contains the pages of the stack, and can be used to keep an up-to-date
   view. The model also implements the @class{gtk:selection-model} object and
   can be used to track and modify the visible page.
@@ -694,9 +694,9 @@
     Accessor of the @slot[gtk:stack]{transition-duration} slot of the
     @class{gtk:stack} class.
   @end{short}
-  The @sym{gtk:stack-transition-duration} function returns the amount of time
+  The @fun{gtk:stack-transition-duration} function returns the amount of time
   in milliseconds that transitions between pages in the stack will take. The
-  @sym{(setf gtk:stack-transition-duration)} function sets the duration.
+  @setf{gtk:stack-transition-duration} function sets the duration.
   @see-class{gtk:stack}")
 
 ;;; --- stack-transition-running -----------------------------------------------
@@ -718,7 +718,7 @@
     Accessor of the @slot[gtk:stack]{transition-running} slot of the
     @class{gtk:stack} class.
   @end{short}
-  The @sym{gtk:stack-transition-running} function returns whether the stack is
+  The @fun{gtk:stack-transition-running} function returns whether the stack is
   currently in a transition from one page to another.
   @see-class{gtk:stack}")
 
@@ -745,11 +745,11 @@
     Accessor of the @slot[gtk:stack]{transition-type} slot of the
     @class{gtk:stack} class.
   @end{short}
-  The @sym{gtk:stack-transition-type} function gets the type of animation that
+  The @fun{gtk:stack-transition-type} function gets the type of animation that
   will be used for transitions between pages in the stack. The
-  @sym{(setf gtk:stack-transition-type)} function sets the type of animation
-  that will be used for transitions between pages in the stack. Available types
-  include various kinds of fades and slides.
+  @setf{gtk:stack-transition-type} function sets the type of animation that will
+  be used for transitions between pages in the stack. Available types include
+  various kinds of fades and slides.
 
   The transition type can be changed without problems at runtime, so it is
   possible to change the animation based on the page that is about to become
@@ -778,9 +778,9 @@
     Accessor of the @slot[gtk:stack]{vhomogeneous} slot of the
     @class{gtk:stack} class.
   @end{short}
-  The @sym{gtk:stack-vhomogeneous} function gets whether the stack is vertically
-  homogeneous. The @sym{(setf gtk:stack-vhomogeneous)} function sets the stack
-  to be vertically homogeneous or not.
+  The @fun{gtk:stack-vhomogeneous} function gets whether the stack is vertically
+  homogeneous. The @setf{gtk:stack-vhomogeneous} function sets the stack to be
+  vertically homogeneous or not.
 
   If the stack is homogeneous, the stack will request the same height for all
   its children. If it is not, the stack may change height when a different
@@ -809,10 +809,10 @@
     Accessor of the @slot[gtk:stack]{visible-child} slot of the
     @class{gtk:stack} class.
   @end{short}
-  The @sym{gtk:stack-visible-child} function gets the currently visible child
+  The @fun{gtk:stack-visible-child} function gets the currently visible child
   widget of the stack, or @code{nil} if there are no visible children. The
-  @sym{(setf gtk:stack-visible-child)} function makes the child widget the
-  visible child widget of the stack.
+  @setf{gtk:stack-visible-child} function makes the child widget the visible
+  child widget of the stack.
 
   If @arg{widget} is different from the currently visible child widget, the
   transition between the two will be animated with the current transition type
@@ -847,9 +847,9 @@
     Accessor of the @slot[gtk:stack]{visible-child-name} slot of the
     @class{gtk:stack} class.
   @end{short}
-  The @sym{gtk:stack-visible-child-name} function returns the name of the
+  The @fun{gtk:stack-visible-child-name} function returns the name of the
   currently visible child of the stack, or @code{nil} if there is no visible
-  child. The @sym{(setf gtk:stack-visible-child-name)} function makes the child
+  child. The @setf{gtk:stack-visible-child-name} function makes the child
   widget with the given name visible.
 
   If the child widget is different from the currently visible child, the

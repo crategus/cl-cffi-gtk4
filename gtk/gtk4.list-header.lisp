@@ -68,6 +68,27 @@
 ;;; Since 4.12
 ;;; ----------------------------------------------------------------------------
 
+(gobject:define-g-object-class "GtkListHeader" list-header
+  (:superclass g:object
+   :export t
+   :interfaces ()
+   :type-initializer "gtk_list_header_get_type")
+  ((child
+    list-header-child
+    "child" "GtkWidget" t t)
+   (end
+    list-header-end
+    "end" "guint" t nil)
+   (item
+    list-header-item
+    "item" "GObject" t nil)
+   (n-items
+    list-header-n-items
+    "n-items" "gunit" t nil)
+   (start
+    list-header-start
+    "start" "guint" t nil)))
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------

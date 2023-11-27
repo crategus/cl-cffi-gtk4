@@ -146,7 +146,7 @@
   It will initialize everything needed to operate the toolkit.
 
   If you are using the @class{gtk:application} class, you do not have to call
-  the @sym{gtk:init} or @fun{gtk:init-check} functions. The
+  the @fun{gtk:init} or @fun{gtk:init-check} functions. The
   \"GApplication::startup\" handler does it for you.
 
   This function will terminate your program if it was unable to initialize the
@@ -156,7 +156,7 @@
   GTK calls @code{signal(SIGPIPE, SIG_IGN)} during initialization, to ignore
   @code{SIGPIPE} signals, since these are almost never wanted in graphical
   applications. If you do need to handle @code{SIGPIPE} for some reason, reset
-  the handler after the @sym{gtk:init} call, but notice that other libraries,
+  the handler after the @fun{gtk:init} call, but notice that other libraries,
   e.g. libdbus or gvfs, might do similar things.
   @see-class{gtk:application}
   @see-function{gtk:init-check}")
@@ -281,7 +281,7 @@
   This function is only needed rare cases when the locale is changed after GTK
   has already been initialized.
   @begin[Example]{dictionary}
-    You can use the @sym{gtk:locale-direction} function to update the default
+    You can use the @fun{gtk:locale-direction} function to update the default
     text direction as follows:
     @begin{pre}
 (setf (gtk:widget-default-direction) (gtk:locale-direction))

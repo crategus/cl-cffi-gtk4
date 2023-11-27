@@ -136,7 +136,7 @@
 
 #+liber-documentation
 (setf (documentation 'single-selection 'type)
- "@version{2023-9-6}
+ "@version{2023-11-26}
   @begin{short}
     The @class{gtk:single-selection} class is an implementation of the
     @class{gtk:selection-model} interface that allows selecting a single
@@ -145,9 +145,9 @@
   It is the default selection method used by list widgets in GTK.
 
   Note that the selection is *persistent* -- if the selected item is removed
-  and re-added in the same \"items-changed\" signal emission, it stays selected.
-  In particular, this means that changing the sort order of an underlying sort
-  model will preserve the selection.
+  and re-added in the same @code{\"items-changed\"} signal emission, it stays
+  selected. In particular, this means that changing the sort order of an
+  underlying sort model will preserve the selection.
   @see-constructor{gtk:single-selection-new}
   @see-class{gtk:selection-model}")
 
@@ -168,7 +168,7 @@
 (setf (liber:alias-for-function 'single-selection-autoselect)
       "Accessor"
       (documentation 'single-selection-autoselect 'function)
- "@version{#2023-9-6}
+ "@version{2023-11-26}
   @syntax[]{(gtk:single-selection-autoselect object) => autoselect}
   @syntax[]{(setf (gtk:single-selection-autoselect object) autoselect)}
   @argument[object]{a @class{gtk:single-selection} object}
@@ -178,8 +178,8 @@
     @class{gtk:single-selection} class.
   @end{short}
   The @fun{gtk:single-selection-autoselect} function checks if autoselect has
-  been enabled or disabled. The @sym{(setf gtk:single-selection-autoselect)}
-  function sets the property.
+  been enabled or disabled. The @setf{gtk:single-selection-autoselect} function
+  sets the property.
 
   If @arg{autoselect} is @em{true}, @arg{object} will enforce that an item is
   always selected. It will select a new item when the currently selected item
@@ -199,7 +199,7 @@
 (setf (liber:alias-for-function 'single-selection-can-unselect)
       "Accessor"
       (documentation 'single-selection-can-unselect 'function)
- "@version{#2023-9-6}
+ "@version{2023-11-26}
   @syntax[]{(gtk:single-selection-can-unselect object) => setting}
   @syntax[]{(setf (gtk:single-selection-can-unselect object) setting)}
   @argument[object]{a @class{gtk:single-selection} object}
@@ -272,9 +272,9 @@
     @class{gtk:single-selection} class.
   @end{short}
   The @fun{gtk:single-selection-model} function gets the model that @arg{object}
-  is wrapping. The @sym{(setf gtk:single-selection-model)} function sets the
-  model that @arg{object} should wrap. If @arg{model} is @code{nil},
-  @arg{object} will be empty.
+  is wrapping. The @setf{gtk:single-selection-model} function sets the model
+  that @arg{object} should wrap. If @arg{model} is @code{nil}, @arg{object} will
+  be empty.
   @see-class{gtk:single-selection}
   @see-class{g:list-model}")
 
@@ -308,18 +308,18 @@
 (setf (documentation (liber:slot-documentation "selected" 'single-selection) t)
  "The @code{selected} property of type @code{:uint} (Read / Write) @br{}
   Position of the selected item. @br{}
-  Default value: 4294967295")
+  Default value: @var{+gtk-invalid-list-position+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'single-selection-selected)
       "Accessor"
       (documentation 'single-selection-selected 'function)
- "@version{#2023-9-6}
+ "@version{2023-11-26}
   @syntax[]{(gtk:single-selection-selected object) => position}
   @syntax[]{(setf (gtk:single-selection-selected object) position)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[position]{an unsigned integer with the item to select or the
-    @variable{gtk:+gtk-invalid-list-position+} value}
+    @var{+gtk-invalid-list-position+} value}
   @begin{short}
     Accessor of the @slot[gtk:single-selection]{selected} slot of the
     @class{gtk:single-selection} class.
@@ -327,16 +327,16 @@
   The @fun{gtk:single-selection-selected} function gets the position of the
   selected item. If no item is selected, the
   @variable{gtk:invalid-list-position+} is returned. The
-  @sym{(setf gtk:single-selection-selected)} function selects the item at the
-  given @arg{position}.
+  @setf{gtk:single-selection-selected} function selects the item at the given
+  @arg{position}.
 
   If the list does not have an item at @arg{position} or the
-  @variable{gtk:+gtk-invalid-list-position+} value is given, the behavior
-  depends on the value of the @slot[gtk:single-selection]{autoselect} property.
-  If it is set, no change will occur and the old item will stay selected. If it
-  is unset, the selection will be unset and no item will be selected.
+  @var{+gtk-invalid-list-position+} value is given, the behavior depends on
+  the value of the @slot[gtk:single-selection]{autoselect} property. If it is
+  set, no change will occur and the old item will stay selected. If it is unset,
+  the selection will be unset and no item will be selected.
   @see-class{gtk:single-selection}
-  @see-variable{gtk:+gtk-invalid-list-position+}")
+  @see-variable{+gtk-invalid-list-position+}")
 
 ;;; --- single-selection-selected-item -----------------------------------------
 
@@ -350,7 +350,7 @@
 (setf (liber:alias-for-function 'single-selection-selected-item)
       "Accessor"
       (documentation 'single-selection-selected-item 'function)
- "@version{#2023-9-6}
+ "@version{2023-9-6}
   @syntax[]{(gtk:single-selection-selected object) => item}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[item]{a @code{:pointer} to the selected item}
@@ -368,14 +368,13 @@
 
 (declaim (inline single-selection-new))
 
-(defun single-selection-new (model)
+(defun single-selection-new (&optional model)
  #+liber-documentation
- "@version{#2023-9-6}
-  @argument[model]{a @class{g:list-model} object to manage, or @code{nil}}
-  @return{A new @class{gtk:single-selection} object.}
-  @begin{short}
-    Creates a new selection to handle @arg{model}.
-  @end{short}
+ "@version{2023-11-26}
+  @argument[model]{an optional @class{g:list-model} object to manage, the
+    default is @code{nil}}
+  @return{The new @class{gtk:single-selection} object.}
+  @short{Creates a new selection to handle @arg{model}.}
   @see-class{gtk:single-selection}
   @see-class{g:list-model}"
   (make-instance 'single-selection

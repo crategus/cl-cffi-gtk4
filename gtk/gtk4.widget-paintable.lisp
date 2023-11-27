@@ -76,22 +76,23 @@
 (setf (documentation 'widget-paintable 'type)
  "@version{2023-8-31}
   @begin{short}
-    The @sym{gtk:widget-paintable} object is an implementation of the
+    The @class{gtk:widget-paintable} object is an implementation of the
     the @class{gdk:paintable} interface that allows displaying the contents of
     a @class{gtk:widget} widget.
   @end{short}
 
-  The @sym{gtk:widget-paintable} object will also take care of the widget not
+  The @class{gtk:widget-paintable} object will also take care of the widget not
   being in a state where it can be drawn, like when it is not shown, and just
   draw nothing or where it does not have a size, like when it is hidden, and
   report no size in that case.
 
-  Of course, the @sym{gtk:widget-paintable} object allows you to monitor widgets
-  for size changes by emitting the \"invalidate-size\" signal whenever the size
-  of the widget changes as well as for visual changes by emitting the
-  \"invalidate-contents\" signal whenever the widget changes.
+  Of course, the @class{gtk:widget-paintable} object allows you to monitor
+  widgets for size changes by emitting the @code{\"invalidate-size\"} signal
+  whenever the size of the widget changes as well as for visual changes by
+  emitting the @code{\"invalidate-contents\"} signal whenever the widget
+  changes.
 
-  You can of course use a @sym{gtk:widget-paintable} object everywhere a
+  You can of course use a @class{gtk:widget-paintable} object everywhere a
   @class{gdk:paintable} object is allowed, including using it on a
   @class{gtk:picture} widget, or one of its parents, that it was set on itself
   via the @fun{gtk:picture-paintable} function. The paintable will take care of
@@ -126,9 +127,8 @@
     Accessor of the @slot[gtk:widget-paintable]{widget} slot of the
     @class{gtk:widget-paintable} object.
   @end{short}
-
-  The @sym{gtk:widget-paintable-widget} function returns the widget that is
-  observed or @code{nil} if none. The @sym{(setf gtk:widget-paintable-widget)}
+  The @fun{gtk:widget-paintable-widget} function returns the widget that is
+  observed or @code{nil} if none. The @setf{gtk:widget-paintable-widget}
   function sets the widget that should be observed.
   @see-class{gtk:widget-paintable}")
 

@@ -184,8 +184,8 @@ lambda (fontbutton)    :run-first
     @class{gtk:font-button} class.
   @end{short}
   The @fun{gtk:font-button-modal} function gets whether the dialog is modal.
-  The @sym{(setf gtk:font-button-modal)} funtion sets whether the dialog should
-  be modal.
+  The @setf{gtk:font-button-modal} funtion sets whether the dialog should be
+  modal.
   @begin[Warning]{dictionary}
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.
@@ -214,8 +214,8 @@ lambda (fontbutton)    :run-first
     @class{gtk:font-button} class.
   @end{short}
   The @fun{gtk:font-button-title} function retrieves the title of the font
-  chooser dialog. The @sym{(setf gtk:font-button-title)} function sets the
-  title for the font chooser dialog.
+  chooser dialog. The @setf{gtk:font-button-title} function sets the title for
+  the font chooser dialog.
   @begin[Warning]{dictionary}
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog-button} widget instead.

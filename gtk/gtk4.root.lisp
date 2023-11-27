@@ -129,9 +129,9 @@
   @fun{gtk:widget-has-focus} function will return @em{false} for the widget.
 
   If the @arg{widget} argument is not the current focus widget, and is
-  focusable, the @sym{(setf gtk:root-focus)} function sets it as the focus
-  widget for the root widget. If the @arg{widget} argument is @code{nil},
-  unsets the focus widget for the root widget.
+  focusable, the @setf{gtk:root-focus} function sets it as the focus widget for
+  the root widget. If the @arg{widget} argument is @code{nil}, unsets the focus
+  widget for the root widget.
 
   To set the focus to a particular widget in the root widget, it is usually
   more convenient to use the @fun{gtk:widget-grab-focus} function instead of

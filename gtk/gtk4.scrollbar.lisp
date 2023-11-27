@@ -158,8 +158,8 @@ scrollbar
     @class{gtk:scrollbar} class.
   @end{short}
   The @fun{gtk:scrollbar-adjustment} function returns the adjustment of the
-  scrollbar. The @sym{(setf gtk:scrollbar-adjustment)} function makes the
-  scrollbar use the given @arg{adjustment}.
+  scrollbar. The @setf{gtk:scrollbar-adjustment} function makes the scrollbar
+  use the given @arg{adjustment}.
   @see-class{gtk:scrollbar}
   @see-class{gtk:adjustment}")
 

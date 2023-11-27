@@ -126,7 +126,7 @@
   @end{short}
   The @fun{gtk:shortcut-label-accelerator} function retrieves the current
   accelerator of the shortcut label. The
-  @sym{(setf gtk:shortcut-label-accelerator)} function sets the accelerator.
+  @setf{gtk:shortcut-label-accelerator} function sets the accelerator.
   @see-class{gtk:shortcut-label}")
 
 ;;; --- shortcut-label-disabled-text -------------------------------------------
@@ -154,7 +154,7 @@
   @end{short}
   The @fun{gtk:shortcut-label-disabled-text} function retrieves the text that
   is displayed when no accelerator is set. The
-  @sym{(setf gtk:shortcut-label-disabled-text)} function sets the text.
+  @setf{gtk:shortcut-label-disabled-text} function sets the text.
   @see-class{gtk:shortcut-label}")
 
 ;;; ----------------------------------------------------------------------------

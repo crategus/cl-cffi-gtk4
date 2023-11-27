@@ -290,7 +290,7 @@ lambda (expander)   :action
   @end{short}
   The @fun{gtk:expander-label} function fetches the text from a label widget
   including any embedded underlines indicating mnemonics and Pango markup, as
-  set by the @sym{(setf gtk:expander-label)} function.
+  set by the @setf{gtk:expander-label} function.
 
   If the label text has not been set the return value will be @code{nil}. This
   will be the case if you create an empty button with the @fun{gtk:button-new}
@@ -320,7 +320,7 @@ lambda (expander)   :action
     @class{gtk:expander} class.
   @end{short}
   The @fun{gtk:expander-label-widget} function retrieves the label widget for
-  the frame. The @sym{(setf gtk:expander-label-widget)} function sets the label
+  the frame. The @setf{gtk:expander-label-widget} function sets the label
   widget for the expander.
 
   This is the widget that will appear embedded alongside the expander arrow.
@@ -352,8 +352,8 @@ lambda (expander)   :action
   @end{short}
   The @fun{gtk:expander-resize-toplevel} function returns whether the expander
   will resize the toplevel widget containing the expander upon resizing and
-  collpasing. The @sym{(setf gtk:expander-resize-toplevel)} function sets
-  whether the expander will resize.
+  collpasing. The @setf{gtk:expander-resize-toplevel} function sets whether the
+  expander will resize.
   @see-class{gtk:expander}")
 
 ;;; --- expander-use-markup ----------------------------------------------------
@@ -381,8 +381,8 @@ lambda (expander)   :action
   @end{short}
   The @fun{gtk:expander-use-markup} function returns whether the text of the
   label is interpreted as marked up with the Pango text markup language. The
-  @sym{(setf gtk:expander-use-markup)} function sets whether the text of the
-  label contains markup.
+  @setf{gtk:expander-use-markup} function sets whether the text of the label
+  contains markup.
   @see-class{gtk:expander}
   @see-function{gtk:label-set-markup}")
 

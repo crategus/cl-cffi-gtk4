@@ -336,7 +336,7 @@
                                    <a>GTK website</a></span> for more...\")
   @end{pre}
   It is possible to implement custom handling for links and their tooltips
-  with the \"activate-link\" signal and the @fun{gtk:label-current-uri}
+  with the @code{\"activate-link\"} signal and the @fun{gtk:label-current-uri}
   function.
   @begin[GtkLabel as GtkBuildable]{dictionary}
     The @class{gtk:label} implementation of the @class{gtk:buildable} interface
@@ -806,10 +806,10 @@ lambda (label step count extend)    :action
   widget, but sometimes, i.e. when the target is a @class{gtk:entry} widget
   next to the label, you need to set it explicitly using this function.
 
-  The target widget will be accelerated by emitting the \"mnemonic-activate\"
-  signal on it. The default handler for this signal will activate the widget if
-  there are no mnemonic collisions and toggle focus between the colliding
-  widgets otherwise.
+  The target widget will be accelerated by emitting the
+  @code{\"mnemonic-activate\"} signal on it. The default handler for this signal
+  will activate the widget if there are no mnemonic collisions and toggle focus
+  between the colliding widgets otherwise.
   @see-class{gtk:label}
   @see-class{gtk:widget}
   @see-function{gtk:label-set-markup-with-mnemonic}
@@ -1449,8 +1449,8 @@ lambda (label step count extend)    :action
   The active link is the one under the mouse pointer or, in a selectable label,
   the link in which the text cursor is currently positioned.
 
-  This function is intended for use in a \"activate-link\" signal handler or
-  for use in a \"query-tooltip\" signal handler.
+  This function is intended for use in a @code{\"activate-link\"} signal handler
+  or for use in a @code{\"query-tooltip\"} signal handler.
   @see-class{gtk:label}"
   (label (g:object label)))
 

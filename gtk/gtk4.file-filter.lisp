@@ -188,9 +188,9 @@
     @class{gtk:file-filter} class.
   @end{short}
   The @fun{gtk:file-filter-name} function gets the human-readable name for the
-  file filter. The @sym{(setf gtk:file-filter-name)} function sets a
-  human-readable name. This is the string that will be displayed in the file
-  chooser if there is a selectable list of filters.
+  file filter. The @setf{gtk:file-filter-name} function sets a human-readable
+  name. This is the string that will be displayed in the file chooser if there
+  is a selectable list of filters.
   @see-class{gtk:file-filter}")
 
 ;;; --- file-filter-patterns ---------------------------------------------------

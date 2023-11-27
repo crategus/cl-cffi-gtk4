@@ -133,9 +133,11 @@
 
   It is possible to add custom items to the list, using the
   @fun{gtk:app-chooser-button-append-custom-item} function. These items cause
-  the \"custom-item-activated\" signal to be emitted when they are selected.
+  the @code{\"custom-item-activated\"} signal to be emitted when they are
+  selected.
 
-  To track changes in the selected application, use the \"changed\" signal.
+  To track changes in the selected application, use the @code{\"changed\"}
+  signal.
   @begin[CSS nodes]{dictionary}
     The @class{gtk:app-chooser-button} implementation has a single CSS node
     with the name @code{appchooserbutton}.
@@ -215,8 +217,8 @@ lambda (button item)    :has-details
     @class{gtk:app-chooser-button} class.
   @end{short}
   The @fun{gtk:app-chooser-button-heading} function returns the text to display
-  at the top of the dialog. The @sym{(setf gtk:app-chooser-button-heading)}
-  function sets the text to display at the top of the dialog.
+  at the top of the dialog. The @setf{gtk:app-chooser-button-heading} function
+  sets the text to display at the top of the dialog.
 
   If the heading is not set, the dialog displays a default text.
   @begin[Warning]{dictionary}
@@ -247,7 +249,7 @@ lambda (button item)    :has-details
     @class{gtk:app-chooser-button} class.
   @end{short}
   The @fun{gtk:app-chooser-button-modal} function gets whether the dialog is
-  modal. The @sym{(setf gtk:app-chooser-button-modal)} function sets whether
+  modal. The @setf{gtk:app-chooser-button-modal} function sets whether
   the dialog should be modal.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
@@ -281,9 +283,9 @@ lambda (button item)    :has-details
   @end{short}
   The @fun{gtk:app-chooser-button-show-default-item} function returns whether
   the dropdown menu of the button should show the default application. The
-  @sym{(setf gtk:app-chooser-button-show-default-item)} function sets whether
-  the dropdown menu of the button should show the default application for the
-  given content type at top.
+  @setf{gtk:app-chooser-button-show-default-item} function sets whether the
+  dropdown menu of the button should show the default application for the given
+  content type at top.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
   @end{dictionary}
@@ -317,8 +319,7 @@ lambda (button item)    :has-details
   The @fun{gtk:app-chooser-button-show-dialog-item} function returns whether
   the dropdown menu of the button should show an entry to trigger a
   @class{gtk:app-chooser-dialog} widget. The
-  @sym{(setf gtk:app-chooser-button-show-dialog-item)} function sets the
-  property.
+  @setf{gtk:app-chooser-button-show-dialog-item} function sets the property.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.
   @end{dictionary}
@@ -366,8 +367,8 @@ lambda (button item)    :has-details
     popup.
   @end{short}
   The item name must be unique per-widget. Clients can use the provided name as
-  a detail for the \"custom-item-activated\" signal, to add a callback for the
-  activation of a particular custom item in the list. See also the
+  a detail for the @code{\"custom-item-activated\"} signal, to add a callback
+  for the activation of a particular custom item in the list. See also the
   @fun{gtk:app-chooser-button-append-separator} function.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-button} implementation is deprecated since 4.10.

@@ -212,10 +212,10 @@
     Accessor of the @slot[gtk:file-chooser-native]{accept-label} slot of the
     @class{gtk:file-chooser-native} interface.
   @end{short}
-  The @sym{gtk:file-chooser-navtive-accept-label} function retrieves the custom
+  The @fun{gtk:file-chooser-navtive-accept-label} function retrieves the custom
   label text for the accept button. The
-  @sym{(setf gtk:file-chooser-native-accept-label)} function sets the custom
-  label text.
+  @setf{gtk:file-chooser-native-accept-label} function sets the custom label
+  text.
 
   If characters in label are preceded by an underscore, they are underlined. If
   you need a literal underscore character in a label, use \"__\" (two
@@ -251,10 +251,10 @@
     Accessor of the @slot[gtk:file-chooser-native]{cancel-label} slot of the
     @class{gtk:file-chooser-native} interface.
   @end{short}
-  The @sym{gtk:file-chooser-navtive-accept-label} function retrieves the custom
+  The @fun{gtk:file-chooser-navtive-accept-label} function retrieves the custom
   label text for the cancel button. The
-  @sym{(setf gtk:file-chooser-native-accept-label)} function sets the custom
-  label text.
+  @setf{gtk:file-chooser-native-accept-label} function sets the custom label
+  text.
 
   If characters in label are preceded by an underscore, they are underlined. If
   you need a literal underscore character in a label, use \"__\" (two

@@ -117,7 +117,7 @@
 (setf (liber:alias-for-symbol 'list-tab-behavior)
       "GEnum"
       (liber:symbol-documentation 'list-tab-behavior)
- "@version{#2023-9-8}
+ "@version{2023-11-25}
   @begin{short}
     Used to configure the focus behavior in the @code{:forward} and
     @code{:backward} direction, like the @kbd{Tab} key in a
@@ -161,7 +161,7 @@
 (setf (liber:alias-for-symbol 'list-scroll-flags)
       "GFlags"
       (liber:symbol-documentation 'list-scroll-flags)
- "@version{#2023-11-5}
+ "@version{2023-11-25}
   @begin{short}
     List of actions to perform when scrolling to items in a list widget.
   @end{short}
@@ -200,12 +200,14 @@
 
 #+liber-documentation
 (setf (documentation 'list-base 'type)
- "@version{#2023-9-8}
+ "@version{2023-11-25}
   @begin{short}
-    The @class{gtk:list-base} class is the abstract base class for GTK’s list
+    The @class{gtk:list-base} class is the abstract base class for the GTK list
     widgets.
   @end{short}
-  @see-class{gtk:list-view}")
+  @see-slot{gtk:list-base-orientation}
+  @see-class{gtk:list-view}
+  @see-class{gtk:grid-view}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -217,14 +219,14 @@
 (setf (documentation (liber:slot-documentation "orientation" 'list-base) t)
  "The @code{orientation} property of type @symbol{gtk:orientation}
   (Read / Write) @br{}
-  The orientation of the list. @br{}
+  The orientation of the list widget. @br{}
   Default value: @code{:vertical}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-base-orientation)
       "Accessor"
       (documentation 'list-base-orientation 'function)
- "@version{#2023-9-8}
+ "@version{2023-11-25}
   @syntax[]{(gtk:list-base-orientation object) => orientation}
   @syntax[]{(setf (gtk:list-base-orientation object) orientation)}
   @argument[object]{a @class{gtk:list-base} widget}
@@ -233,8 +235,9 @@
     Accessor of the @slot[gtk:list-base]{orientation} slot of the
     @class{gtk:list-base} class.
   @end{short}
-  @see-slot{gtk:list-base-orientation}
-  @see-class{gtk:list-view}")
+  @see-class{gtk:list-base}
+  @see-class{gtk:orientable}
+  @see-symbol{gtk:orientation}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkListView
@@ -271,7 +274,7 @@
 
 #+liber-documentation
 (setf (documentation 'list-view 'type)
- "@version{#2023-9-8}
+ "@version{2023-11-25}
   @begin{short}
     The @class{gtk:list-view} widget is a widget to present a view into a large
     dynamic list of items.
@@ -289,58 +292,70 @@
   If you need multiple columns with headers, see the @class{gtk:column-view}
   widget.
 
-  To learn more about the list widget framework, see the overview.
+  To learn more about the list widget framework, see the List Widget Overview
+  section.
   @begin[Example]{dictionary}
-    An example of using the @class{gtk:list-view} widget:
+    This is a complete example of how to use the @class{gtk:list-view} widget.
+    The example is included in the GTK 4 demo, which comes with the GTK library.
     @begin{pre}
-static void
-setup_listitem_cb (GtkListItemFactory *factory,
-                   GtkListItem        *list_item)
-{
-  GtkWidget *image;
+(defun activate-cb (listview position)
+  (let* ((model (gtk:list-view-model listview))
+         (appinfo (g:list-model-object model position))
+         (display (gtk:widget-display listview))
+         (context (gdk:display-app-launch-context display)))
+    (unless (g:app-info-launch appinfo nil context)
+      (let* ((message (format nil \"Could not launch ~a\"
+                                  (g:app-info-display-name appinfo)))
+             (dialog (make-instance 'gtk:alert-dialog
+                                    :message message)))
+          (gtk:alert-dialog-show dialog (gtk:widget-root listview))))))
 
-  image = gtk_image_new ();
-  gtk_image_set_icon_size (GTK_IMAGE (image), GTK_ICON_SIZE_LARGE);
-  gtk_list_item_set_child (list_item, image);
-@}
+(defun create-application-list ()
+  (let ((store (g:list-store-new \"GAppInfo\"))
+        (apps (g:app-info-all)))
+    (dolist (app apps)
+      (g:list-store-append store app))
+  store))
 
-static void
-bind_listitem_cb (GtkListItemFactory *factory,
-                  GtkListItem        *list_item)
-{
-  GtkWidget *image;
-  GAppInfo *app_info;
-
-  image = gtk_list_item_get_child (list_item);
-  app_info = gtk_list_item_get_item (list_item);
-  gtk_image_set_from_gicon (GTK_IMAGE (image), g_app_info_get_icon (app_info));
-@}
-
-static void
-activate_cb (GtkListView  *list,
-             guint         position,
-             gpointer      unused)
-{
-  GAppInfo *app_info;
-
-  app_info = g_list_model_get_item (G_LIST_MODEL (gtk_list_view_get_model (list)), position);
-  g_app_info_launch (app_info, NULL, NULL, NULL);
-  g_object_unref (app_info);
-@}
-
-...
-
-  model = create_application_list ();
-
-  factory = gtk_signal_list_item_factory_new ();
-  g_signal_connect (factory, \"setup\", G_CALLBACK (setup_listitem_cb), NULL);
-  g_signal_connect (factory, \"bind\", G_CALLBACK (bind_listitem_cb), NULL);
-
-  list = gtk_list_view_new (GTK_SELECTION_MODEL (gtk_single_selection_new (model)), factory);
-
-  g_signal_connect (list, \"activate\", G_CALLBACK (activate_cb), NULL);
-
-  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (sw), list);
+(defun do-list-view-applauncher (&optional (application nil))
+  (let* ((factory (gtk:signal-list-item-factory-new))
+         (model (create-application-list))
+         (listview nil)
+         (scrolled (make-instance 'gtk:scrolled-window
+                                  :margin-start 12
+                                  :margin-top 12))
+         (window (make-instance 'gtk:window
+                                :title \"Application launcher\"
+                                :application application
+                                :child scrolled
+                                :default-width 640
+                                :default-height 320
+                                :margin-start 24
+                                :margin-top 6
+                                :margin-bottom 6)))
+    (g:signal-connect factory \"setup\"
+        (lambda (factory item)
+          (declare (ignore factory))
+          (let* ((box (gtk:box-new :horizontal 12))
+                 (image (make-instance 'gtk:image
+                                       :icon-size :large)))
+            (gtk:box-append box image)
+            (gtk:box-append box (gtk:label-new \"\"))
+            (setf (gtk:list-item-child item) box))))
+    (g:signal-connect factory \"bind\"
+        (lambda (factory item)
+          (declare (ignore factory))
+          (let* ((image (gtk:widget-first-child (gtk:list-item-child item)))
+                 (label (gtk:widget-next-sibling image))
+                 (appinfo (gtk:list-item-item item)))
+            (gtk:image-set-from-gicon image (g:app-info-icon appinfo))
+            (setf (gtk:label-label label)
+                  (g:app-info-display-name appinfo)))))
+    (setf listview
+          (gtk:list-view-new (gtk:single-selection-new model) factory))
+    (g:signal-connect listview \"activate\" #'activate-cb)
+    (setf (gtk:scrolled-window-child scrolled) listview)
+    (gtk:window-present window)))
     @end{pre}
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
@@ -414,7 +429,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-enable-rubberband)
       "Accessor"
       (documentation 'list-view-enable-rubberband 'function)
- "@version{#2023-9-9}
+ "@version{2023-11-25}
   @syntax[]{(gtk:list-view-enable-rubberband object) => setting}
   @syntax[]{(setf (gtk:list-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -441,7 +456,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-factory)
       "Accessor"
       (documentation 'list-view-factory 'function)
- "@version{#2023-9-6}
+ "@version{2023-11-25}
   @syntax[]{(gtk:list-view-factory object) => factory}
   @syntax[]{(setf (gtk:list-view-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -469,7 +484,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-header-factory)
       "Accessor"
       (documentation 'list-view-header-factory 'function)
- "@version{#2023-11-5}
+ "@version{2023-11-25}
   @syntax[]{(gtk:list-view-header-factory object) => factory}
   @syntax[]{(setf (gtk:list-view-header-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -501,7 +516,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-model)
       "Accessor"
       (documentation 'list-view-model 'function)
- "@version{#2023-9-6}
+ "@version{2023-11-25}
   @syntax[]{(gtk:list-view-model object) => model}
   @syntax[]{(setf (gtk:list-view-model object) model)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -529,7 +544,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-show-separators)
       "Accessor"
       (documentation 'list-view-show-separators 'function)
- "@version{#2023-9-6}
+ "@version{2023-11-25}
   @syntax[]{(gtk:list-view-show-separators object) => setting}
   @syntax[]{(setf (gtk:list-view-show-separators object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -539,7 +554,7 @@ lambda (listview position)    :run-last
     @class{gtk:list-view} class.
   @end{short}
   The @fun{gtk:list-view-show-separators} function returns whether the list box
-  should show separators between rows. The @setf{gtk:list-view-separators}
+  should show separators between rows. The @setf{gtk:list-view-show-separators}
   function sets whether the list box should show separators between rows.
   @see-class{gtk:list-view}")
 
@@ -557,7 +572,7 @@ lambda (listview position)    :run-last
 (setf (liber:alias-for-function 'list-view-single-click-activate)
       "Accessor"
       (documentation 'list-view-single-click-activate 'function)
- "@version{#2023-9-9}
+ "@version{2023-11-25}
   @syntax[]{(gtk:list-view-single-click-activate object) => setting}
   @syntax[]{(setf (gtk:list-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -578,14 +593,14 @@ lambda (listview position)    :run-last
 (setf (documentation (liber:slot-documentation "tab-behavior" 'list-view) t)
  "The @code{tab-behavior} property of type @symbol{gtk:list-tab-behavior}
   (Read / Write) @br{}
-  Behavior of the @kbd{Tab} key. @br{}
+  Behavior of the @kbd{Tab} key. Since 4.12 @br{}
   Default value: @code{:all}")
 
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'list-view-tab-behavior)
       "Accessor"
       (documentation 'list-view-tab-behavior 'function)
- "@version{#2023-11-5}
+ "@version{2023-11-25}
   @syntax[]{(gtk:list-view-tab-behavior object) => setting}
   @syntax[]{(setf (gtk:list-view-tab-behavior object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
@@ -610,17 +625,18 @@ lambda (listview position)    :run-last
 
 (defun list-view-new (model factory)
  #+liber-documentation
- "@version{#2023-9-21}
+ "@version{2023-11-25}
   @argument[model]{a @class{gtk:selection-model} object to use, or @code{nil}}
   @argument[factory]{a @class{gtk:list-item-factory} object to populate items
     with or @code{nil}}
-  @return{A new @class{gtk:list-view} widget using the given @arg{model} and
+  @return{The new @class{gtk:list-view} widget using the given @arg{model} and
     @arg{factory}.}
   @begin{short}
     Creates a new list view that uses the given @arg{factory} for mapping items
     to widgets.
   @end{short}
   @see-class{gtk:list-view}
+  @see-class{gtk:selection-model}
   @see-class{gtk:list-item-factory}"
   (make-instance 'list-view
                  :model model
@@ -631,6 +647,8 @@ lambda (listview position)    :run-last
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_list_view_scroll_to
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: We need an example to check this function.
 
 #+gtk-4-12
 (cffi:defcfun ("gtk_list_view_scroll_to" list-view-scroll-to) :void
@@ -651,7 +669,8 @@ lambda (listview position)    :run-last
 
   Since 4.12
   @see-class{gtk:list-view}
-  @see-class{gtk:scroll-info}"
+  @see-class{gtk:scroll-info}
+  @see-symbol{gtk:list-scroll-flags}"
   (listview (g:object list-view))
   (pos :uint)
   (flags list-scroll-flags)

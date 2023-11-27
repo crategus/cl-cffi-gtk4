@@ -83,7 +83,7 @@
     @class{gtk:cell-renderer-text} object from which it is derived.
   @end{short}
   But while the @class{gtk:cell-renderer-text} object offers a simple entry to
-  edit the text, the @sym{gtk:cell-renderer-spin} object offers a
+  edit the text, the @class{gtk:cell-renderer-spin} object offers a
   @class{gtk:spin-button} widget. Of course, that means that the text has to be
   parseable as a floating point number.
 

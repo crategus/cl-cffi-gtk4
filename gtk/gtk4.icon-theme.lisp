@@ -262,7 +262,7 @@ lambda (theme)    :run-last
   @end{short}
   The @fun{gtk:icon-theme-display} function returns the display that the
   @class{gtk:icon-theme} object was created for. The
-  @sym{(setf gtk:icon-theme-display)} function sets the display.
+  @setf{gtk:icon-theme-display} function sets the display.
   @see-class{gtk:icon-theme}
   @see-class{gdk:display}")
 
@@ -316,8 +316,8 @@ lambda (theme)    :run-last
     @class{gtk:icon-theme} class.
   @end{short}
   The @fun{gtk:icon-theme-resource-path} function gets the current resource
-  paths. The @sym{(setf gtk:icon-theme-resource-path)} sets the resource paths
-  that will be looked at when looking for icons, similar to search paths.
+  paths. The @setf{gtk:icon-theme-resource-path} function sets the resource
+  paths that will be looked at when looking for icons, similar to search paths.
 
   The resources are considered as part of the hicolor icon theme and must be
   located in subdirectories that are defined in the hicolor icon theme, such as
@@ -354,9 +354,9 @@ lambda (theme)    :run-last
     @class{gtk:icon-theme} class.
   @end{short}
   The @fun{gtk:icon-theme-search-path} function gets the current search path.
-  The @sym{(setf gtk:icon-theme-resource-path)} function sets the search path
-  for the icon theme object. When looking for an icon theme, GTK will search for
-  a subdirectory of one or more of the directories in path with the same name as
+  The @setf{gtk:icon-theme-resource-path} function sets the search path for the
+  icon theme object. When looking for an icon theme, GTK will search for a
+  subdirectory of one or more of the directories in path with the same name as
   the icon theme containing an @file{index.theme} file. Themes from multiple of
   the path elements are combined to allow themes to be extended by adding icons
   in the home directory of the user.
@@ -394,8 +394,8 @@ lambda (theme)    :run-last
     @class{gtk:icon-theme} class.
   @end{short}
   The @fun{gtk:icon-theme-theme-name} function gets the current icon theme name.
-  The @sym{(setf gtk:icon-theme-resource-path)} function sets the name of the
-  icon theme that the @class{gtk:icon-theme} object uses overriding system
+  The @setf{gtk:icon-theme-resource-path} function sets the name of the icon
+  theme that the @class{gtk:icon-theme} object uses overriding system
   configuration. This function cannot be called on the icon theme objects
   returned from the @fun{gtk:icon-theme-for-display} function.
   @see-class{gtk:icon-theme}

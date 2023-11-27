@@ -157,7 +157,7 @@
   @end{short}
   The @fun{gtk:selection-filter-model-model} function gets the model
   currently filtered or @code{nil} if none. The
-  @sym{(setf gtk:selection-filter-model-model)} function sets the model to be
+  @setf{gtk:selection-filter-model-model} function sets the model to be
   filtered.
 
   Note that GTK makes no effort to ensure that @arg{model} conforms to the item

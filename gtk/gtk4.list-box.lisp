@@ -172,13 +172,13 @@
 (setf (documentation 'list-box-row 'type)
  "@version{#2021-11-30}
   @begin{short}
-    The @sym{gtk:list-box-row} widget is a child widget for the
+    The @class{gtk:list-box-row} widget is a child widget for the
     @class{gtk:list-box} widget.
   @end{short}
-  The @sym{gtk:list-box-row} widget can be marked as activatable or selectable.
-  If a row is activatable, the \"row-activated\" signal will be emitted for it
-  when the user tries to activate it. If it is selectable, the row will be
-  marked as selected when the user tries to select it.
+  The @class{gtk:list-box-row} widget can be marked as activatable or
+  selectable. If a row is activatable, the @code{\"row-activated\"} signal will
+  be emitted for it when the user tries to activate it. If it is selectable,
+  the row will be marked as selected when the user tries to select it.
   @begin[Signal Details]{dictionary}
     @subheading{The \"activate\" signal}
       @begin{pre}
@@ -186,10 +186,10 @@ lambda (row)    :action
       @end{pre}
       This is a keybinding signal, which will cause this row to be activated.
       If you want to be notified when the user activates a row (by key or not),
-      use the \"row-activated\" signal on the parent @class{gtk:list-box}
+      use the @code{\"row-activated\"} signal on the parent @class{gtk:list-box}
       widget of the row.
       @begin[code]{table}
-        @entry[row]{The @sym{gtk:list-box-row} widget on which the signal is
+        @entry[row]{The @class{gtk:list-box-row} widget on which the signal is
           emitted.}
       @end{table}
   @end{dictionary}
@@ -209,8 +209,8 @@ lambda (row)    :action
 (setf (documentation (liber:slot-documentation "activatable"
                                                'list-box-row) t)
  "The @code{activatable} property of type @code{:boolean} (Read / Write) @br{}
-  Determines whether the \"row-activated\" signal will be emitted for this row.
-  @br{}
+  Determines whether the @code{\"row-activated\"} signal will be emitted for
+  this row. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -226,9 +226,9 @@ lambda (row)    :action
     Accessor of the @slot[gtk:list-box-row]{activatable} slot of the
     @class{gtk:list-box-row} class.
   @end{short}
-  The @sym{gtk:list-box-row-activatable} function gets the value of the
+  The @fun{gtk:list-box-row-activatable} function gets the value of the
   @slot[gtk:list-box-row]{activatable} property for this row. The
-  @sym{(setf gtk:list-box-row-activatable)} function sets the property.
+  @setf{gtk:list-box-row-activatable} function sets the property.
   @see-class{gtk:list-box-row}")
 
 ;;; --- list-box-row-child -------------------------------------------------
@@ -276,9 +276,9 @@ lambda (row)    :action
     Accessor of the @slot[gtk:list-box-row]{selectable} slot of the
     @class{gtk:list-box} class.
   @end{short}
-  The @sym{gtk:list-box-row-selectable} function gets the value of the
+  The @fun{gtk:list-box-row-selectable} function gets the value of the
   @slot[gtk:list-box-row]{selectable} property for this row. The
-  @sym{(setf gtk:list-box-row-selectable)} function sets the property.
+  @setf{gtk:list-box-row-selectable} function sets the property.
   @see-class{gtk:list-box-row}")
 
 ;;; ----------------------------------------------------------------------------
@@ -309,7 +309,7 @@ lambda (row)    :action
 (setf (documentation 'list-box 'type)
  "@version{#2022-9-7}
   @begin{short}
-    The @sym{gtk:list-box} widget is a vertical list box that contains
+    The @class{gtk:list-box} widget is a vertical list box that contains
     @class{gtk:list-box-row} children.
   @end{short}
   These rows can by dynamically sorted and filtered, and headers can be added
@@ -318,27 +318,27 @@ lambda (row)    :action
 
   @image[list-box]{Figure: GtkListBox}
 
-  Using the @sym{gtk:list-box} widget is often an alternative to the
+  Using the @class{gtk:list-box} widget is often an alternative to the
   @class{gtk:tree-view} widget, especially when the list contents has a more
   complicated layout than what is allowed by a @class{gtk:cell-renderer}
   object, or when the contents is interactive, i.e. has a button in it.
 
-  Although a @sym{gtk:list-box} widget must have only @class{gtk:list-box-row}
+  Although a @class{gtk:list-box} widget must have only @class{gtk:list-box-row}
   children you can add any kind of widget to it via the
   @fun{gtk:list-box-prepend}, @fun{gtk:list-box-append}, and
   @fun{gtk:list-box-insert} functions, and a @class{gtk:list-box-row} widget
   will automatically be inserted between the list and the widget.
 
   The @class{gtk:list-box-row} widget can be marked as activatable or
-  selectable. If a row is activatable, the \"row-activated\" signal will be
-  emitted for it when the user tries to activate it. If it is selectable, the
-  row will be marked as selected when the user tries to select it.
+  selectable. If a row is activatable, the @code{\"row-activated\"} signal will
+  be emitted for it when the user tries to activate it. If it is selectable,
+  the row will be marked as selected when the user tries to select it.
   @begin[CSS Nodes]{dictionary}
     @begin{pre}
 list
  ╰── row[.activatable]
     @end{pre}
-    The @sym{gtk:list-box} implementation uses a single CSS node named
+    The @class{gtk:list-box} implementation uses a single CSS node named
     @code{list}. Each @class{gtk:list-box-row} widget uses a single CSS node
     named @code{row}. The row nodes get the @code{.activatable} style class
     added when appropriate.
@@ -349,7 +349,7 @@ list
 lambda (listbox)    :action
       @end{pre}
       @begin[code]{table}
-        @entry[listbox]{The @sym{gtk:list-box} widget on which the signal is
+        @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"move-cursor\" signal}
@@ -357,7 +357,7 @@ lambda (listbox)    :action
 lambda (listbox step count)    :action
       @end{pre}
       @begin[code]{table}
-        @entry[listbox]{The @sym{gtk:list-box} widget on which the signal is
+        @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
         @entry[step]{A value of the @symbol{gtk:movement-step} enumeration.}
         @entry[count]{An integer.}
@@ -368,7 +368,7 @@ lambda (listbox row)    :run-last
       @end{pre}
       The signal is emitted when a row has been activated by the user.
       @begin[code]{table}
-        @entry[listbox]{The @sym{gtk:list-box} widget on which the signal is
+        @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
         @entry[row]{The activated @class{gtk:list-box-row} widget.}
       @end{table}
@@ -379,9 +379,9 @@ lambda (listbox row)    :run-last
       The signal is emitted when a new row is selected, or when the selection
       is cleared. When the list box is using the @code{:multiple} selection
       mode, this signal will not give you the full picture of selection changes,
-      and you should use the \"selected-rows-changed\" signal instead.
+      and you should use the @code{\"selected-rows-changed\"} signal instead.
       @begin[code]{table}
-        @entry[listbox]{The @sym{gtk:list-box} widget on which the signal is
+        @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
         @entry[row]{The selected @class{gtk:list-box-row} widget.}
       @end{table}
@@ -393,7 +393,7 @@ lambda (listbox)    :action
       children of the list box, if the selection mode permits it. The default
       bindings for this signal is the @kbd{Ctrl-a} key.
       @begin[code]{table}
-        @entry[listbox]{The @sym{gtk:list-box} widget on which the signal is
+        @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"selected-rows-changed\" signal}
@@ -402,7 +402,7 @@ lambda (listbox)    :run-first
       @end{pre}
       The signal is emitted when the set of selected rows changes.
       @begin[code]{table}
-        @entry[listbox]{The @sym{gtk:list-box} widget on which the signal is
+        @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"toggle-cursor-row\" signal}
@@ -410,7 +410,7 @@ lambda (listbox)    :run-first
 lambda (listbox)    :action
       @end{pre}
       @begin[code]{table}
-        @entry[listbox]{The @sym{gtk:list-box} widget on which the signal is
+        @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
       @end{table}
     @subheading{The \"unselect-all\" signal}
@@ -421,7 +421,7 @@ lambda (listbox)    :action
         children of the list box, if the selection mode permits it. The default
         bindings for this signal is the @kbd{Ctrl-Shift-a} key.
       @begin[code]{table}
-        @entry[listbox]{The @sym{gtk:list-box} widget on which the signal is
+        @entry[listbox]{The @class{gtk:list-box} widget on which the signal is
           emitted.}
       @end{table}
   @end{dictionary}
@@ -485,9 +485,9 @@ lambda (listbox)    :action
     Accessor of the @slot[gtk:list-box]{activate-on-single-click} slot of the
     @class{gtk:list-box} class.
   @end{short}
-  The @sym{gtk:list-box-activate-on-single-click} function returns whether rows
+  The @fun{gtk:list-box-activate-on-single-click} function returns whether rows
   activate on single clicks. The
-  @sym{(setf gtk:list-box-activate-on-single-click)} function sets whether rows
+  @setf{gtk:list-box-activate-on-single-click} function sets whether rows
   activate on single clicks.
 
   If the @arg{setting} argument is @em{true}, rows will be activated when you
@@ -516,9 +516,9 @@ lambda (listbox)    :action
     Accessor of the @slot[gtk:list-box]{selection-mode} slot of the
     @class{gtk:list-box} class.
   @end{short}
-  The @sym{gtk:list-box-selection-mode} function gets the selection mode of the
-  list box. The @sym{(setf gtk:list-box-selection-mode)} function sets the
-  selection mode. See the @symbol{gtk:selection-mode} enumeration for details.
+  The @fun{gtk:list-box-selection-mode} function gets the selection mode of the
+  list box. The @setf{gtk:list-box-selection-mode} function sets the selection
+  mode. See the @symbol{gtk:selection-mode} enumeration for details.
   @see-class{gtk:list-box}
   @see-symbol{gtk:selection-mode}")
 
@@ -544,10 +544,9 @@ lambda (listbox)    :action
     Accessor of the @slot[gtk:list-box]{show-separators} slot of the
     @class{gtk:list-box} class.
   @end{short}
-  The @sym{gtk:list-box-show-separators} function returns whether the list box
-  should show separators between rows. The
-  @sym{(setf gtk:list-box-show-separators)} function sets whether the list box
-  should show separators.
+  The @fun{gtk:list-box-show-separators} function returns whether the list box
+  should show separators between rows. The @setf{gtk:list-box-show-separators}
+  function sets whether the list box should show separators.
   @see-class{gtk:list-box}")
 
 ;;; ----------------------------------------------------------------------------
@@ -973,9 +972,9 @@ lambda (listbox)    :action
     Accessor of the adjustment the list box uses for vertical scrolling.
   @end{short}
 
-  The @sym{gtk:list-box-adjustment} function gets the adjustment (if any) that
-  the list box uses for vertical scrolling. The
-  @sym{(setf gtk:list-box-adjustment)} function sets the adjustment.
+  The @fun{gtk:list-box-adjustment} function gets the adjustment (if any) that
+  the list box uses for vertical scrolling. The @setf{gtk:list-box-adjustment}
+  function sets the adjustment.
 
   For instance, this is used to get the page size for @kbd{PageUp/Down} key
   handling. In the normal case when the list box is packed inside a
@@ -1180,9 +1179,8 @@ lambda (listbox)    :action
 
   The @arg{func} callback function can look at the current header widget using
   the @fun{gtk:list-box-row-header} function and either update the state of the
-  widget as needed, or set a new one using the
-  @sym{(setf gtk:list-box-row-header)} function. If no header is needed, set
-  the header to @code{nil}.
+  widget as needed, or set a new one using the @setf{gtk:list-box-row-header}
+  function. If no header is needed, set the header to @code{nil}.
 
   Note that you may get many calls of the @arg{func} callback function to this
   for a particular row when e.g. changing things that do not affect the header.
@@ -1416,15 +1414,15 @@ lambda (item)
   Note that calls to this method must be in sync with the data used for the row
   functions. For instance, if the list box is mirroring some external data set,
   and *two* rows changed in the external data set then when you call the
-  @sym{gtk:list-box-row-changed} function on the first row the sort function
+  @fun{gtk:list-box-row-changed} function on the first row the sort function
   must only read the new data for the first of the two changed rows, otherwise
   the resorting of the rows will be wrong.
 
   This generally means that if you do not fully control the data model you have
   to duplicate the data that affects the list box row functions into the row
   widgets themselves. Another alternative is to call the
-  @fun{gtk:list-box-row-invalidate-sort} function on any model change, but that is
-  more expensive.
+  @fun{gtk:list-box-row-invalidate-sort} function on any model change, but that
+  is more expensive.
   @see-class{gtk:list-box-row}
   @see-class{gtk:list-box-row}
   @see-function{gtk:list-box-row-invalidate-sort}"
@@ -1473,14 +1471,13 @@ lambda (item)
   @begin{short}
     Accessor of the header widget of a list box row.
   @end{short}
-
-  The @sym{gtk:list-box-row-header} function returns the current header of the
+  The @fun{gtk:list-box-row-header} function returns the current header of the
   list box row. This can be used in a @symbol{gtk:list-box-update-header-func}
   callback function to see if there is a header set already, and if so to update
   the state of it.
 
-  The @sym{(setf gtk:list-box-row-header)} function sets the current header of
-  the list box row. This is only allowed to be called from a
+  The @setf{gtk:list-box-row-header} function sets the current header of the
+  list box row. This is only allowed to be called from a
   @symbol{gtk:list-box-update-header-func} callback function. It will replace
   any existing header in the row, and be shown in front of the row in the list
   box.

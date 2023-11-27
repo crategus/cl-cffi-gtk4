@@ -128,8 +128,8 @@
     class.
   @end{short}
   The @fun{gtk:spinner-spinning} function returns whether the spinner is
-  spinning. The @sym{(setf gtk:spinner-spinning)} function sets the activity
-  of the spinner.
+  spinning. The @setf{gtk:spinner-spinning} function sets the activity of the
+  spinner.
   @see-class{gtk:spinner}")
 
 ;;; ----------------------------------------------------------------------------

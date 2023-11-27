@@ -69,13 +69,13 @@
       (documentation 'buildable 'type)
  "@version{2023-8-7}
   @begin{short}
-    The @sym{gtk:buildable} interface allows objects to extend and customize
+    The @class{gtk:buildable} interface allows objects to extend and customize
     their deserialization from @class{gtk:builder} UI descriptions.
   @end{short}
   The interface includes methods for setting names and properties of objects,
   parsing custom tags and constructing child objects.
 
-  The @sym{gtk:buildable} interface is implemented by all widgets and many of
+  The @class{gtk:buildable} interface is implemented by all widgets and many of
   the non-widget objects that are provided by GTK. The main user of this
   interface is the @class{gtk:builder} class. There should be very little need
   for applications to call any of these functions directly.

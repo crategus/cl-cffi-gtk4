@@ -180,8 +180,8 @@
     @class{gtk:app-chooser-dialog} class.
   @end{short}
   The @fun{gtk:app-chooser-dialog-heading} function returns the text to display
-  at the top of the dialog. The @sym{(setf gtk:app-chooser-dialog-heading)}
-  function sets the text to display at the top of the dialog.
+  at the top of the dialog. The @setf{gtk:app-chooser-dialog-heading} function
+  sets the text to display at the top of the dialog.
 
   If the heading is not set, the dialog displays a default text.
   @begin[Warning]{dictionary}

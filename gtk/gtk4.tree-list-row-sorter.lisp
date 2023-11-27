@@ -119,10 +119,9 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
     @class{gtk:tree-list-row-sorter} class.
   @end{short}
   The @fun{gtk:tree-list-row-sorter-sorter} function returns the sorter used by
-  @arg{object}. The @sym{(setf gtk:tree-list-row-sorter-sorter)} function sets
-  the sorter to use for items with the same parent. This sorter will be passed
-  the @slot[gtk:tree-list-row]{item} of the tree list rows passed to
-  @arg{object}.
+  @arg{object}. The @setf{gtk:tree-list-row-sorter-sorter} function sets the
+  sorter to use for items with the same parent. This sorter will be passed the
+  @slot[gtk:tree-list-row]{item} of the tree list rows passed to @arg{object}.
   @see-class{gtk:tree-list-row-sorter}
   @see-function{gtk:tree-list-row-item}")
 

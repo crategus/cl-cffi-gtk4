@@ -165,10 +165,11 @@ lambda (range scroll value)    :run-last
       and return @em{true} to prevent further processing. Or, by returning
       @em{false}, it can pass the event to other handlers until the default GTK
       handler is reached. The value parameter is unrounded. An application that
-      overrides the \"change-value\" signal is responsible for clamping the
-      value to the desired number of decimal digits. The default GTK handler
+      overrides the @code{\"change-value\"} signal is responsible for clamping
+      the value to the desired number of decimal digits. The default GTK handler
       clamps the value based on \"round-digits\". It is not possible to use
-      delayed update policies in an overridden \"change-value\" handler.
+      delayed update policies in an overridden @code{\"change-value\"} signal
+      handler.
       @begin[code]{table}
         @entry[range]{The @class{gtk:range} widget that received the signal.}
         @entry[scroll]{The @symbol{gtk:scroll-type} value of scroll action that
@@ -230,8 +231,8 @@ lambda (range)    :run-last
     class.
   @end{short}
   The @fun{gtk:range-adjustment} function gets the adjustment which is the
-  \"model\" object for the range. The @sym{(setf gtk:range-adjustment)}
-  function sets the adjustment.
+  \"model\" object for the range. The @setf{gtk:range-adjustment} function sets
+  the adjustment.
 
   The adjustment indicates the current range value, the minimum and maximum
   range values, the step/page increments used for keybindings and scrolling,
@@ -265,8 +266,8 @@ lambda (range)    :run-last
     class.
   @end{short}
   The @fun{gtk:range-fill-level} function gets the current position of the fill
-  level indicator. The @sym{(setf gtk:range-fill-level)} function sets the
-  position of the fill level indicator.
+  level indicator. The @setf{gtk:range-fill-level} function sets the position
+  of the fill level indicator.
 
   The \"fill level\" is probably best described by its most prominent use case,
   which is an indicator for the amount of pre-buffering in a streaming media
@@ -339,10 +340,10 @@ lambda (range)    :run-last
     @class{gtk:range} class.
   @end{short}
   The @fun{gtk:range-restrict-to-fill-level} function gets whether the range is
-  restricted to the fill level. The
-  @sym{(setf gtk:range-restrict-to-fill-level)} function sets whether the slider
-  is restricted to the fill level. See the @fun{gtk:range-fill-level} function
-  for a general description of the fill level concept.
+  restricted to the fill level. The @setf{gtk:range-restrict-to-fill-level}
+  function sets whether the slider is restricted to the fill level. See the
+  @fun{gtk:range-fill-level} function for a general description of the fill
+  level concept.
   @see-class{gtk:range}
   @see-function{gtk:range-fill-level}")
 
@@ -352,7 +353,7 @@ lambda (range)    :run-last
 (setf (documentation (liber:slot-documentation "round-digits" 'range) t)
  "The @code{round-digits} property of type @code{:int} (Read / Write) @br{}
   The number of digits to round the value to when it changes, or -1. See the
-  \"change-value\" signal. @br{}
+  @code{\"change-value\"} signal. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -370,9 +371,9 @@ lambda (range)    :run-last
     class.
   @end{short}
   The @fun{gtk:range-round-digits} function gets the number of digits to round
-  the value to when it changes. The @sym{(setf gtk:range-round-digits)} function
-  sets the number of digits to round the value to when it changes. See the
-  \"change-value\" signal.
+  the value to when it changes. The @setf{gtk:range-round-digits} function sets
+  the number of digits to round the value to when it changes. See the
+  @code{\"change-value\"} signal.
   @see-class{gtk:range}")
 
 ;;; --- range-show-fill-level --------------------------------------------------
@@ -400,8 +401,8 @@ lambda (range)    :run-last
     @class{gtk:range} class.
   @end{short}
   The @fun{gtk:range-show-fill-level} function gets whether the range displays
-  the fill level graphically. The @sym{(setf gtk:range-show-fill-level)}
-  function sets whether a graphical fill level is show on the trough. See the
+  the fill level graphically. The @setf{gtk:range-show-fill-level} function
+  sets whether a graphical fill level is show on the trough. See the
   @fun{gtk:range-fill-level} function for a general description of the fill
   level concept.
   @see-class{gtk:range}
@@ -426,11 +427,11 @@ lambda (range)    :run-last
     Accessor of the value of the range.
   @end{short}
   The @fun{gtk:range-value} function gets the current value of the range. The
-  @sym{(setf gtk:range-value)} function sets the current value of the range.
+  @setf{gtk:range-value} function sets the current value of the range.
 
   If the value is outside the minimum or maximum range values, it will be
-  clamped to fit inside them. The range emits the \"value-changed\" signal if
-  the value changes.
+  clamped to fit inside them. The range emits the @code{\"value-changed\"}
+  signal if the value changes.
   @see-class{gtk:range}"
   (adjustment-value (range-adjustment range)))
 

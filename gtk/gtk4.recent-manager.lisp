@@ -110,11 +110,11 @@
       (documentation 'recent-info 'type)
  "@version{2023-1-29}
   @begin{short}
-    The @sym{gtk:recent-info} structure constains all the meta-data associated
-    with an entry in the recently used files list.
+    The @class{gtk:recent-info} structure constains all the meta-data
+    associated with an entry in the recently used files list.
   @end{short}
-  The @sym{gtk:recent-info} structure is an opaque data structure whose members
-  can only be accessed using the provided API.
+  The @class{gtk:recent-info} structure is an opaque data structure whose
+  members can only be accessed using the provided API.
   @begin{pre}
 (glib:define-g-boxed-opaque gtk:recent-info \"GtkRecentInfo\"
   :type-initializer \"gtk_recent_info_get_type\"
@@ -225,8 +225,8 @@
 (setf (documentation 'recent-manager 'type)
  "@version{2023-1-29}
   @begin{short}
-    The @sym{gtk:recent-manager} object provides a facility for adding, removing
-    and looking up recently used files.
+    The @class{gtk:recent-manager} object provides a facility for adding,
+    removing and looking up recently used files.
   @end{short}
   Each recently used file is identified by its URI, and has meta-data associated
   to it, like the names and command lines of the applications that have
@@ -235,8 +235,8 @@
   by the applications that have registered it. The recently used files list is
   per user.
 
-  The @sym{gtk:recent-manager} object acts like a database of all the recently
-  used files. You can create new @sym{gtk:recent-manager} objects, but it is
+  The @class{gtk:recent-manager} object acts like a database of all the recently
+  used files. You can create new @class{gtk:recent-manager} objects, but it is
   more efficient to use the default manager created by GTK. Adding a new
   recently used file is as simple as:
   @begin{pre}
@@ -245,7 +245,7 @@
   (gtk:recent-manager-add-item manager uri)
   ... )
   @end{pre}
-  The @sym{gtk:recent-manager} will try to gather all the needed information
+  The @class{gtk:recent-manager} will try to gather all the needed information
   from the file itself through GIO. Looking up the meta-data associated with a
   recently used file given its URI requires calling the
   @fun{gtk:recent-manager-lookup-item} function:
@@ -259,7 +259,7 @@
   @end{pre}
   In order to retrieve the list of recently used files, you can use the
   @fun{gtk:recent-manager-items} function, which returns a list of
-  @class{gtk:recent-info} instances. A @sym{gtk:recent-manager} object is the
+  @class{gtk:recent-info} instances. A @class{gtk:recent-manager} object is the
   model used to populate the contents of one, or more @class{gtk:recent-chooser}
   implementations. The maximum age of the recently used files list is
   controllable through the @slot[gtk:settings]{gtk-recent-files-max-age}
@@ -273,8 +273,8 @@ lambda (manager)    :run-first
       contents, either by calling the @fun{gtk:recent-manager-add-item} function
       or by another application.
       @begin[code]{table}
-        @entry[manager]{The @sym{gtk:recent-manager} object which received the
-          signal.}
+        @entry[manager]{The @class{gtk:recent-manager} object which received
+          the signal.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:recent-manager-new}
@@ -353,7 +353,8 @@ lambda (manager)    :run-first
   @end{short}
   Recent manager objects are used to handle the list of recently used resources.
   A @class{gtk:recent-manager} object monitors the recently used resources list,
-  and emits the \"changed\" signal each time something inside the list changes.
+  and emits the @code{\"changed\"} signal each time something inside the list
+  changes.
 
   The @class{gtk:recent-manager} object is expensive: be sure to create it
   only when needed. You should use the @fun{gtk:recent-manager-default} function

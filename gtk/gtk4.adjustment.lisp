@@ -177,16 +177,16 @@ lambda (adjustment)    :no-recurse
     @class{gtk:adjustment} class.
   @end{short}
   The @fun{gtk:adjustment-lower} function retrieves the minimum value of the
-  adjustment. The @sym{(setf gtk:adjustment-lower)} function sets the minimum
-  value of the adjustment.
+  adjustment. The @setf{gtk:adjustment-lower} function sets the minimum value
+  of the adjustment.
 
   When setting multiple adjustment properties via their individual setters,
-  multiple \"changed\" signals will be emitted. However, since the emission of
-  the \"changed\" signal is tied to the emission of the \"notify\" signals of
-  the changed properties, it is possible to compress the \"changed\"
-  signals into one by calling the @fun{g:object-freeze-notify} and
-  @fun{g:object-thaw-notify} functions around the calls to the individual
-  setters.
+  multiple @code{\"changed\"} signals will be emitted. However, since the
+  emission of the @code{\"changed\"} signal is tied to the emission of the
+  @code{\"notify\"} signals of the changed properties, it is possible to
+  compress the @code{\"changed\"} signals into one by calling the
+  @fun{g:object-freeze-notify} and @fun{g:object-thaw-notify} functions around
+  the calls to the individual setters.
 
   Alternatively, using the @fun{gtk:adjustment-configure} function has the same
   effect of compressing \"changed\" emissions.
@@ -217,11 +217,11 @@ lambda (adjustment)    :no-recurse
     @class{gtk:adjustment} class.
   @end{short}
   The @fun{gtk:adjustment-page-increment} function retrieves the page increment
-  of the adjustment. The @sym{(setf gtk:adjustment-page-increment)} function
-  sets the page increment of the adjustment.
+  of the adjustment. The @setf{gtk:adjustment-page-increment} function sets the
+  page increment of the adjustment.
 
   See the @fun{gtk:adjustment-lower} function about how to compress multiple
-  emissions of the \"changed\" signal when setting multiple adjustment
+  emissions of the @code{\"changed\"} signal when setting multiple adjustment
   properties.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}")
@@ -250,11 +250,11 @@ lambda (adjustment)    :no-recurse
     @class{gtk:adjustment} class.
   @end{short}
   The @fun{gtk:adjustment-page-size} function retrieves the page size of the
-  adjustment. The @sym{(setf gtk:adjustment-page-size)} function sets the page
-  size of the adjustment.
+  adjustment. The @setf{gtk:adjustment-page-size} function sets the page size
+  of the adjustment.
 
   See the @fun{gtk:adjustment-lower} function about how to compress multiple
-  emissions of the \"changed\" signal when setting multiple adjustment
+  emissions of the @code{\"changed\"} signal when setting multiple adjustment
   properties.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}")
@@ -281,11 +281,11 @@ lambda (adjustment)    :no-recurse
     @class{gtk:adjustment} class.
   @end{short}
   The @fun{gtk:adjustment-step-increment} function retrieves the step increment
-  of the adjustment. The @sym{(setf gtk:adjustment-step-increment)} function
-  sets the step increment of the adjustment.
+  of the adjustment. The @setf{gtk:adjustment-step-increment} function sets the
+  step increment of the adjustment.
 
   See the @fun{gtk:adjustment-lower} function about how to compress multiple
-  emissions of the \"changed\" signal when setting multiple adjustment
+  emissions of the @code{\"changed\"} signal when setting multiple adjustment
   properties.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}")
@@ -314,15 +314,15 @@ lambda (adjustment)    :no-recurse
     @class{gtk:adjustment} class.
   @end{short}
   The @fun{gtk:adjustment-upper} function retrieves the maximum value of the
-  adjustment. The @sym{(setf gtk:adjustment-upper)} function sets the maximum
-  value of the adjustment.
+  adjustment. The @setf{gtk:adjustment-upper} function sets the maximum value
+  of the adjustment.
 
   Note that values will be restricted by the @code{(@slot[gtk:adjustment]{upper}
   - @slot[gtk:adjustment]{page-size})} value if the
   @slot[gtk:adjustment]{page-size} value is nonzero.
 
   See the @fun{gtk:adjustment-lower} function about how to compress multiple
-  emissions of the \"changed\" signal when setting multiple adjustment
+  emissions of the @code{\"changed\"} signal when setting multiple adjustment
   properties.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}
@@ -351,7 +351,7 @@ lambda (adjustment)    :no-recurse
     @class{gtk:adjustment} class.
   @end{short}
   The @fun{gtk:adjustment-value} function gets the current value of the
-  adjustment. The @sym{(setf gtk:adjustment-value)} function sets the adjustment
+  adjustment. The @setf{gtk:adjustment-value} function sets the adjustment
   value. The value is clamped to lie between the @slot[gtk:adjustment]{lower}
   and @slot[gtk:adjustment]{upper} values.
 
@@ -409,8 +409,8 @@ lambda (adjustment)    :no-recurse
     and @code{upper} is in the current page.
   @end{short}
   If the range is larger than the page size, then only the start of it will be
-  in the current page. A \"changed\" signal will be emitted if the value is
-  changed.
+  in the current page. A @code{\"changed\"} signal will be emitted if the value
+  is changed.
   @see-class{gtk:adjustment}"
   (cffi:foreign-funcall "gtk_adjustment_clamp_page"
                         (g:object adjustment) adjustment
@@ -437,9 +437,9 @@ lambda (adjustment)    :no-recurse
   @begin{short}
     Sets all properties of the adjustment at once.
   @end{short}
-  Use this function to avoid multiple emissions of the \"changed\" signal. See
-  the @fun{gtk:adjustment-lower} function for an alternative way of compressing
-  multiple emissions of \"changed\" signals into one.
+  Use this function to avoid multiple emissions of the @code{\"changed\"}
+  signal. See the @fun{gtk:adjustment-lower} function for an alternative way of
+  compressing multiple emissions of @code{\"changed\"} signals into one.
   @see-class{gtk:adjustment}
   @see-function{gtk:adjustment-lower}"
   (adjustment (g:object adjustment))

@@ -907,7 +907,7 @@ lambda ()
     The @fun{gtk:value-expression} function retrieves the @class{gtk:expression}
     instance stored inside the given @arg{value}.
   @end{short}
-  The @sym{(setf gtk:value-expression)} function stores the given
+  The @setf{gtk:value-expression} function stores the given
   @class{gtk:expression} instance inside @arg{value}. The @symbol{g:value}
   instance will acquire a reference to the expression.
   @see-class{gtk:expression}

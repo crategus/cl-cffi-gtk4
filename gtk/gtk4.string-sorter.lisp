@@ -173,8 +173,8 @@
     @class{gtk:string-sorter} class.
   @end{short}
   The @fun{gtk:string-sorter-collation} function gets which collation method
-  the sorter uses. The @sym{(setf gtk:string-sorter-collation)} function sets
-  the collation method to use for sorting.
+  the sorter uses. The @setf{gtk:string-sorter-collation} function sets the
+  collation method to use for sorting.
 
   Since 4.10
   @see-class{gtk:string-sorter}
@@ -203,9 +203,9 @@
   @end{short}
   The @fun{gtk:string-sorter-expression} function gets the expression that is
   evaluated to obtain strings from items. The
-  @sym{(setf gtk:string-sorter-expression)} function sets the expression that
-  is evaluated to obtain strings from items. The expression must have the
-  @code{gchararray} type.
+  @setf{gtk:string-sorter-expression} function sets the expression that is
+  evaluated to obtain strings from items. The expression must have the
+  @code{\"gchararray\"} type.
   @see-class{gtk:string-sorter}
   @see-class{gtk:expression}")
 
@@ -231,8 +231,8 @@
     @class{gtk:string-sorter} class.
   @end{short}
   The @fun{gtk:string-sorter-ignore-case} function gets whether the sorter
-  ignores case differences. The @sym{(setf gtk:string-sorter-ignore-case)}
-  function sets whether the sorter will ignore case differences.
+  ignores case differences. The @setf{gtk:string-sorter-ignore-case} function
+  sets whether the sorter will ignore case differences.
   @see-class{gtk:string-sorter}")
 
 ;;; ----------------------------------------------------------------------------

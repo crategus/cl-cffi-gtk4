@@ -88,7 +88,7 @@
 (setf (documentation 'action-bar 'type)
  "@version{2023-8-9}
   @begin{short}
-    The @sym{gtk:action-bar} widget is designed to present contextual actions.
+    The @class{gtk:action-bar} widget is designed to present contextual actions.
   @end{short}
   It is expected to be displayed below the content and expand horizontally to
   fill the area.
@@ -100,7 +100,7 @@
   the box, even if the children at either side take up different amounts of
   space.
   @begin[GtkActionBar as GtkBuildable]{dictionary}
-    The @sym{gtk:action-bar} implementation of the @class{gtk:buildable}
+    The @class{gtk:action-bar} implementation of the @class{gtk:buildable}
     interface supports adding children at the start or end sides by specifying
     \"start\" or \"end\" as the \"type\" attribute of a @code{<child>} element,
     or setting the center widget by specifying \"center\" value.
@@ -116,7 +116,7 @@ actionbar
         ╰── box.end
             ╰── [end children]
     @end{pre}
-    The @sym{gtk:action-bar} implementation has a single CSS node with name
+    The @class{gtk:action-bar} implementation has a single CSS node with name
     @code{actionbar}. It contains a revealer subnode, which contains a box
     subnode, which contains two box subnodes at the start and end of the action
     bar, with @code{start} and @code{end} style classes respectively, as well
@@ -258,9 +258,9 @@ actionbar
   @begin{short}
     Accessor of the center widget of the action bar.
   @end{short}
-  The @sym{gtk:action-bar-center-widget} function retrieves the center widget
-  of the action bar. The @sym{(setf gtk:action-bar-center-widget)} function
-  sets the center widget for the action bar.
+  The @fun{gtk:action-bar-center-widget} function retrieves the center widget
+  of the action bar. The @setf{gtk:action-bar-center-widget} function sets the
+  center widget for the action bar.
   @see-class{gtk:action-bar}
   @see-class{gtk:widget}"
   (actionbar (g:object action-bar)))

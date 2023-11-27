@@ -118,8 +118,8 @@
   @end{short}
   The @fun{gtk:numeric-sorter-expression} function gets the expression that is
   evaluated to obtain numbers from items. The
-  @sym{(setf gtk:numeric-sorter-expression)} function sets the expression that
-  is evaluated to obtain numbers from items.
+  @setf{gtk:numeric-sorter-expression} function sets the expression that is
+  evaluated to obtain numbers from items.
 
   Unless an expression is set on @arg{object}, the sorter will always compare
   items as invalid. The expression must have a return type that can be compared
@@ -150,8 +150,8 @@
     @class{gtk:numeric-sorter} class.
   @end{short}
   The @fun{gtk:numeric-sorter-sort-order} function gets whether this sorter will
-  sort smaller numbers first. The @sym{(setf gtk:numeric-sorter-sort-order)}
-  function sets whether to sort smaller numbers before larger ones.
+  sort smaller numbers first. The @setf{gtk:numeric-sorter-sort-order} function
+  sets whether to sort smaller numbers before larger ones.
   @see-class{gtk:numeric-sorter}
   @see-symbol{gtk:sort-type}")
 

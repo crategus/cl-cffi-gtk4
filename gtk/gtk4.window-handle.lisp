@@ -124,9 +124,9 @@
     Accessor of the @slot[gtk:window-handle]{child} slot of the
     @class{gtk:window-handle} class.
   @end{short}
-  The @sym{gtk:window-handle-child} function gets the child widget of the
-  window handle. The @sym{(setf gtk:window-handle-child)} function sets the
-  child widget.
+  The @fun{gtk:window-handle-child} function gets the child widget of the
+  window handle. The @setf{gtk:window-handle-child} function sets the child
+  widget.
   @see-class{gtk:window}
   @see-class{gtk:widget}")
 

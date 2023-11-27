@@ -78,14 +78,14 @@
 (setf (documentation 'fixed 'type)
  "@version{2023-4-16}
   @begin{short}
-    The @sym{gtk:fixed} widget is a container which can place child widgets at
-    fixed positions and with fixed sizes, given in pixels.
+    The @class{gtk:fixed} widget is a container which can place child widgets
+    at fixed positions and with fixed sizes, given in pixels.
   @end{short}
   The fixed widget performs no automatic layout management.
 
   For most applications, you should not use this container. It keeps you from
   having to learn about the other GTK containers, but it results in broken
-  applications. With the @sym{gtk:fixed} widget, the following things will
+  applications. With the @class{gtk:fixed} widget, the following things will
   result in truncated text, overlapping widgets, and other display bugs:
   @begin{itemize}
     @begin{item}
@@ -106,7 +106,7 @@
   languages such as Hebrew and Arabic. That is, normally GTK will order
   containers appropriately for the text direction, e.g. to put labels to the
   right of the thing they label when using an RTL language, but it cannot do
-  that with the @sym{gtk:fixed} widget. So if you need to reorder widgets
+  that with the @class{gtk:fixed} widget. So if you need to reorder widgets
   depending on the text direction, you would need to manually detect it and
   adjust child positions accordingly.
 
@@ -115,7 +115,7 @@
   long-term maintenance problem for your application.
 
   If you know none of these things are an issue for your application, and
-  prefer the simplicity of the @sym{gtk:fixed} widget, by all means use the
+  prefer the simplicity of the @class{gtk:fixed} widget, by all means use the
   fixed widget. But you should be aware of the tradeoffs.")
 
 ;;; ----------------------------------------------------------------------------
@@ -279,11 +279,11 @@
   @argument[transform]{a @class{gsk:transform} instance with the transformation
     assigned to the child widget}
   @begin{short}
-    The @sym{gtk:fixed-child-transform} function retrieves the transformation
+    The @fun{gtk:fixed-child-transform} function retrieves the transformation
     for @arg{child}.
   @end{short}
-  The @sym{(setf gtk:fixed-child-transform)} function sets the transformation
-  for @arg{child}. This is a convenience function that retrieves the
+  The @setf{gtk:fixed-child-transform} function sets the transformation for
+  @arg{child}. This is a convenience function that retrieves the
   @class{gtk:fixed-layout-child} instance associated to @arg{child} and calls
   the @fun{gtk:fixed-layout-child-transform} function.
   @see-class{gtk:fixed}"

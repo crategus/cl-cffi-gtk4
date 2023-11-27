@@ -190,7 +190,7 @@
     Accessor of the @slot[gtk:icon-paintable]{icon-name} slot of the
     @class{gtk:icon-paintable} class.
   @end{short}
-  The @sym{gtk:icon-paintable-icon-name} function gets the icon name being used
+  The @fun{gtk:icon-paintable-icon-name} function gets the icon name being used
   for this icon.
 
   When an icon looked up in the icon theme was not available, the icon theme
