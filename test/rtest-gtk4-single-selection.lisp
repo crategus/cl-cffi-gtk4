@@ -7,6 +7,9 @@
 
 ;;;     GTK_INVALID_LIST_POSITION
 
+(test gtk-invalid-list-position
+  (is (= 4294967295 gtk:+gtk-invalid-list-position+)))
+
 ;;;     GtkSingleSelection
 
 (test gtk-single-selection-class
@@ -70,17 +73,26 @@
 ;;;     selected
 ;;;     selected-item
 
+(test gtk-single-selection-properties
+  (let ((selection (gtk:single-selection-new (g:list-store-new "GObject"))))
+    (is-true (gtk:single-selection-autoselect selection))
+    (is-false (gtk:single-selection-can-unselect selection))
+    (is (eq (g:gtype "GObject") 
+            (gtk:single-selection-item-type selection)))
+    (is (typep (gtk:single-selection-model selection) 'g:list-store))
+    (is (= 0 (gtk:single-selection-n-items selection)))
+    (is (= gtk:+gtk-invalid-list-position+ 
+           (gtk:single-selection-selected selection)))
+    (is-false (gtk:single-selection-selected-item selection))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_single_selection_new
-;;;     gtk_single_selection_get_model
-;;;     gtk_single_selection_set_model
-;;;     gtk_single_selection_get_selected
-;;;     gtk_single_selection_set_selected
-;;;     gtk_single_selection_get_selected_item
-;;;     gtk_single_selection_get_autoselect
-;;;     gtk_single_selection_set_autoselect
-;;;     gtk_single_selection_get_can_unselect
-;;;     gtk_single_selection_set_can_unselect
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+(test gtk-single-selection-new
+  (is (typep (gtk:single-selection-new) 'gtk:single-selection))
+  (is (typep (gtk:single-selection-new nil) 'gtk:single-selection))
+  (is (typep (gtk:single-selection-new (g:list-store-new "GObject")) 
+             'gtk:single-selection)))
+
+;;; --- 2023-11-26 -------------------------------------------------------------

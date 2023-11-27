@@ -577,7 +577,8 @@
 ;    gtk4.signal-list-item-factory.lisp
 ;    gtk4.builder-list-item-factory.lisp
      (:file "rtest-gtk4-scroll-info"             :if-feature :gtk-4-12)
-;    gtk4.list-view.lisp
+;    (:file "gtk4.list-header"                   :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-list-view")
 ;    gtk4.grid-view.lisp
 ;    gtk4.column-view.lisp
 ;    gtk4.column-view-column.lisp
