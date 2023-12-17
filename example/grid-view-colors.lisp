@@ -15,472 +15,79 @@
 
 (in-package :gtk)
 
+;(eval-when (:compile-toplevel :load-toplevel :execute)
+
+(gobject:define-g-object-subclass "GtkColor" color
+  (:superclass g:object
+   :export t
+   :interfaces ("GdkPaintable"))
+  ((name
+    color-name
+    "name" "gchararray" t t)
+   (rgba
+    color-rgba
+    "rgba" "GdkRGBA" t t)
+   (hue
+    color-hue
+    "hue" "gint" t t)
+   (saturation
+    color-saturation
+    "saturation" "gint" t t)
+   (value
+    color-value
+    "value" "gint" t t)))
+;)
+
+(defmethod initialize-instance :after ((obj color) &key)
+  (let* ((rgba (color-rgba obj))
+         (red (gdk:rgba-red rgba))
+         (green (gdk:rgba-green rgba))
+         (blue (gdk:rgba-blue rgba)))
+    (multiple-value-bind (hue saturation value)
+        (gtk:rgb-to-hsv red green blue)
+      (setf (color-hue obj) (round (* 360 hue)))
+      (setf (color-saturation obj) (round (* 100 saturation)))
+      (setf (color-value obj) (round (* 100 value))))))
+
+(defmethod (setf color-rgba) :before (value (obj color))
+  (let* ((red (gdk:rgba-red value))
+         (green (gdk:rgba-green value))
+         (blue (gdk:rgba-blue value)))
+    (multiple-value-bind (hue saturation value)
+        (gtk:rgb-to-hsv red green blue)
+      (setf (color-hue obj) (round (* 360 hue)))
+      (setf (color-saturation obj) (round (* 100 saturation)))
+      (setf (color-value obj) (round (* 100 value))))))
+
+(defmethod paintable-snapshot-impl ((paintable color) snapshot width height)
+  (graphene:with-rect (bounds 0 0 width height)
+    (gtk:snapshot-append-color snapshot (color-rgba paintable) bounds)))
+
+(defmethod paintable-get-flags-impl ((paintable color))
+  (list :static-contents :static-size))
+
+(defmethod paintable-get-intrinsic-width ((paintable color))
+  32)
+
+(defmethod paintable-get-intrinsic-height ((paintable color))
+  32)
+
+(defun color-new (name red green blue)
+  (make-instance 'color
+                 :name name
+                 :rgba (make-instance 'gdk:rgba
+                                      :red red
+                                      :green green
+                                      :blue blue
+                                      :alpha 1.0)))
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (export 'color)
+  (export 'color-new)
+  (export 'color-name)
+  (export 'color-rgba))
+
 #|
-#define GTK_TYPE_COLOR (gtk_color_get_type ())
-G_DECLARE_FINAL_TYPE (GtkColor, gtk_color, GTK, COLOR, GObject)
-
-/* This is our object. It's just a color */
-typedef struct _GtkColor GtkColor;
-struct _GtkColor
-{
-  GObject parent_instance;
-
-  char *name;
-  GdkRGBA color;
-  int h, s, v;
-};
-
-enum {
-  PROP_0,
-  PROP_NAME,
-  PROP_COLOR,
-  PROP_RED,
-  PROP_GREEN,
-  PROP_BLUE,
-  PROP_HUE,
-  PROP_SATURATION,
-  PROP_VALUE,
-
-  N_COLOR_PROPS
-};
-
-static void
-gtk_color_snapshot (GdkPaintable *paintable,
-                    GdkSnapshot  *snapshot,
-                    double        width,
-                    double        height)
-{
-  GtkColor *self = GTK_COLOR (paintable);
-
-  gtk_snapshot_append_color (snapshot, &self->color, &GRAPHENE_RECT_INIT (0, 0, width, height));
-}
-
-static int
-gtk_color_get_intrinsic_width (GdkPaintable *paintable)
-{
-  return 32;
-}
-
-static int
-gtk_color_get_intrinsic_height (GdkPaintable *paintable)
-{
-  return 32;
-}
-
-static void
-gtk_color_paintable_init (GdkPaintableInterface *iface)
-{
-  iface->snapshot = gtk_color_snapshot;
-  iface->get_intrinsic_width = gtk_color_get_intrinsic_width;
-  iface->get_intrinsic_height = gtk_color_get_intrinsic_height;
-}
-
-/*
- * Finally, we define the type. The important part is adding the paintable
- * interface, so GTK knows that this object can indeed be drawn.
- */
-G_DEFINE_TYPE_WITH_CODE (GtkColor, gtk_color, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (GDK_TYPE_PAINTABLE,
-                                                gtk_color_paintable_init))
-
-static GParamSpec *color_properties[N_COLOR_PROPS] = { NULL, };
-
-static void
-rgb_to_hsv (GdkRGBA *rgba,
-            double  *h_out,
-            double  *s_out,
-            double  *v_out)
-{
-  double red, green, blue;
-  double h, s, v;
-  double min, max;
-  double delta;
-
-  red = rgba->red;
-  green = rgba->green;
-  blue = rgba->blue;
-
-  h = 0.0;
-
-  if (red > green)
-    {
-      if (red > blue)
-        max = red;
-      else
-        max = blue;
-
-      if (green < blue)
-        min = green;
-      else
-        min = blue;
-    }
-  else
-    {
-      if (green > blue)
-        max = green;
-      else
-        max = blue;
-
-      if (red < blue)
-        min = red;
-      else
-        min = blue;
-    }
-
-  v = max;
-
-  if (max != 0.0)
-    s = (max - min) / max;
-  else
-    s = 0.0;
-
-  if (s == 0.0)
-    h = 0.0;
-  else
-    {
-      delta = max - min;
-
-      if (red == max)
-        h = (green - blue) / delta;
-      else if (green == max)
-        h = 2 + (blue - red) / delta;
-      else if (blue == max)
-        h = 4 + (red - green) / delta;
-
-      h /= 6.0;
-
-      if (h < 0.0)
-        h += 1.0;
-      else if (h > 1.0)
-        h -= 1.0;
-    }
-
-  *h_out = h;
-  *s_out = s;
-  *v_out = v;
-}
-
-static void
-gtk_color_get_property (GObject    *object,
-                        guint       property_id,
-                        GValue     *value,
-                        GParamSpec *pspec)
-{
-  GtkColor *self = GTK_COLOR (object);
-
-  switch (property_id)
-    {
-    case PROP_NAME:
-      g_value_set_string (value, self->name);
-      break;
-
-    case PROP_COLOR:
-      g_value_set_boxed (value, &self->color);
-      break;
-
-    case PROP_RED:
-      g_value_set_float (value, self->color.red);
-      break;
-
-    case PROP_GREEN:
-      g_value_set_float (value, self->color.green);
-      break;
-
-    case PROP_BLUE:
-      g_value_set_float (value, self->color.blue);
-      break;
-
-    case PROP_HUE:
-      g_value_set_int (value, self->h);
-      break;
-
-    case PROP_SATURATION:
-      g_value_set_int (value, self->s);
-      break;
-
-    case PROP_VALUE:
-      g_value_set_int (value, self->v);
-      break;
-
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
-    }
-}
-
-static void
-gtk_color_set_property (GObject      *object,
-                        guint         property_id,
-                        const GValue *value,
-                        GParamSpec   *pspec)
-{
-  GtkColor *self = GTK_COLOR (object);
-  double h, s, v;
-
-  switch (property_id)
-    {
-    case PROP_NAME:
-      self->name = g_value_dup_string (value);
-      break;
-
-    case PROP_COLOR:
-      self->color = *(GdkRGBA *) g_value_get_boxed (value);
-      rgb_to_hsv (&self->color, &h, &s, &v);
-      self->h = round (360 * h);
-      self->s = round (100 * s);
-      self->v = round (100 * v);
-      break;
-
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
-    }
-}
-
-static void
-gtk_color_finalize (GObject *object)
-{
-  GtkColor *self = GTK_COLOR (object);
-
-  g_free (self->name);
-
-  G_OBJECT_CLASS (gtk_color_parent_class)->finalize (object);
-}
-
-static void
-gtk_color_class_init (GtkColorClass *klass)
-{
-  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-
-  gobject_class->get_property = gtk_color_get_property;
-  gobject_class->set_property = gtk_color_set_property;
-  gobject_class->finalize = gtk_color_finalize;
-
-  color_properties[PROP_NAME] =
-    g_param_spec_string ("name", NULL, NULL, NULL, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
-  color_properties[PROP_COLOR] =
-    g_param_spec_boxed ("color", NULL, NULL, GDK_TYPE_RGBA, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
-  color_properties[PROP_RED] =
-    g_param_spec_float ("red", NULL, NULL, 0, 1, 0, G_PARAM_READABLE);
-  color_properties[PROP_GREEN] =
-    g_param_spec_float ("green", NULL, NULL, 0, 1, 0, G_PARAM_READABLE);
-  color_properties[PROP_BLUE] =
-    g_param_spec_float ("blue", NULL, NULL, 0, 1, 0, G_PARAM_READABLE);
-  color_properties[PROP_HUE] =
-    g_param_spec_int ("hue", NULL, NULL, 0, 360, 0, G_PARAM_READABLE);
-  color_properties[PROP_SATURATION] =
-    g_param_spec_int ("saturation", NULL, NULL, 0, 100, 0, G_PARAM_READABLE);
-  color_properties[PROP_VALUE] =
-    g_param_spec_int ("value", NULL, NULL, 0, 100, 0, G_PARAM_READABLE);
-
-  g_object_class_install_properties (gobject_class, N_COLOR_PROPS, color_properties);
-}
-
-static void
-gtk_color_init (GtkColor *self)
-{
-}
-
-static GtkColor *
-gtk_color_new (const char *name,
-               float r, float g, float b)
-{
-  GtkColor *result;
-  GdkRGBA color = { r, g, b, 1.0 };
-
-  result = g_object_new (GTK_TYPE_COLOR,
-                         "name", name,
-                         "color", &color,
-                         NULL);
-
-  return result;
-}
-
-#define N_COLORS (256 * 256 * 256)
-
-#define GTK_TYPE_COLOR_LIST (gtk_color_list_get_type ())
-G_DECLARE_FINAL_TYPE (GtkColorList, gtk_color_list, GTK, COLOR_LIST, GObject)
-
-enum {
-  LIST_PROP_0,
-  LIST_PROP_SIZE,
-
-  N_LIST_PROPS
-};
-
-typedef struct _GtkColorList GtkColorList;
-struct _GtkColorList
-{
-  GObject parent_instance;
-
-  GtkColor **colors; /* Always N_COLORS */
-
-  guint size; /* How many colors we allow */
-};
-
-static GType
-gtk_color_list_get_item_type (GListModel *list)
-{
-  return GTK_TYPE_COLOR;
-}
-
-static guint
-gtk_color_list_get_n_items (GListModel *list)
-{
-  GtkColorList *self = GTK_COLOR_LIST (list);
-
-  return self->size;
-}
-
-static guint
-position_to_color (guint position)
-{
-  static guint map[] = {
-    0xFF0000, 0x00FF00, 0x0000FF,
-    0x7F0000, 0x007F00, 0x00007F,
-    0x3F0000, 0x003F00, 0x00003F,
-    0x1F0000, 0x001F00, 0x00001F,
-    0x0F0000, 0x000F00, 0x00000F,
-    0x070000, 0x000700, 0x000007,
-    0x030000, 0x000300, 0x000003,
-    0x010000, 0x000100, 0x000001
-  };
-  guint result, i;
-
-  result = 0;
-
-  for (i = 0; i < G_N_ELEMENTS (map); i++)
-    {
-      if (position & (1 << i))
-        result ^= map[i];
-    }
-
-  return result;
-}
-
-static gpointer
-gtk_color_list_get_item (GListModel *list,
-                         guint       position)
-{
-  GtkColorList *self = GTK_COLOR_LIST (list);
-
-  if (position >= self->size)
-    return NULL;
-
-  position = position_to_color (position);
-
-  if (self->colors[position] == NULL)
-    {
-      guint red, green, blue;
-
-      red = (position >> 16) & 0xFF;
-      green = (position >> 8) & 0xFF;
-      blue = position & 0xFF;
-
-      self->colors[position] = gtk_color_new ("", red / 255., green / 255., blue / 255.);
-    }
-
-  return g_object_ref (self->colors[position]);
-}
-
-static void
-gtk_color_list_model_init (GListModelInterface *iface)
-{
-  iface->get_item_type = gtk_color_list_get_item_type;
-  iface->get_n_items = gtk_color_list_get_n_items;
-  iface->get_item = gtk_color_list_get_item;
-}
-
-G_DEFINE_TYPE_WITH_CODE (GtkColorList, gtk_color_list, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (G_TYPE_LIST_MODEL,
-                                                gtk_color_list_model_init))
-
-static GParamSpec *list_properties[N_LIST_PROPS] = { NULL, };
-
-static void
-gtk_color_list_get_property (GObject    *object,
-                             guint       property_id,
-                             GValue     *value,
-                             GParamSpec *pspec)
-{
-  GtkColorList *self = GTK_COLOR_LIST (object);
-
-  switch (property_id)
-    {
-    case LIST_PROP_SIZE:
-      g_value_set_uint (value, self->size);
-      break;
-
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
-    }
-}
-
-static void
-gtk_color_list_set_size (GtkColorList *self,
-                         guint         size)
-{
-  guint old_size = self->size;
-
-  self->size = size;
-  if (self->size > old_size)
-    g_list_model_items_changed (G_LIST_MODEL (self), old_size, 0, self->size - old_size);
-  else if (old_size > self->size)
-    g_list_model_items_changed (G_LIST_MODEL (self), self->size, old_size - self->size, 0);
-
-  g_object_notify_by_pspec (G_OBJECT (self), list_properties[LIST_PROP_SIZE]);
-}
-
-static void
-gtk_color_list_set_property (GObject      *object,
-                             guint         property_id,
-                             const GValue *value,
-                             GParamSpec   *pspec)
-{
-  GtkColorList *self = GTK_COLOR_LIST (object);
-
-  switch (property_id)
-    {
-    case LIST_PROP_SIZE:
-      gtk_color_list_set_size (self, g_value_get_uint (value));
-      break;
-
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
-    }
-}
-
-static void
-gtk_color_list_dispose (GObject *object)
-{
-  GtkColorList *self = GTK_COLOR_LIST (object);
-  guint i;
-
-  for (i = 0; i < N_COLORS; i++)
-    {
-      g_clear_object (&self->colors[i]);
-    }
-  g_free (self->colors);
-
-  G_OBJECT_CLASS (gtk_color_parent_class)->finalize (object);
-}
-
-static void
-gtk_color_list_class_init (GtkColorListClass *klass)
-{
-  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-
-  gobject_class->get_property = gtk_color_list_get_property;
-  gobject_class->set_property = gtk_color_list_set_property;
-  gobject_class->dispose = gtk_color_list_dispose;
-
-  list_properties[LIST_PROP_SIZE] =
-    g_param_spec_uint ("size", NULL, NULL, 0, N_COLORS, 0, G_PARAM_READWRITE);
-
-  g_object_class_install_properties (gobject_class, N_LIST_PROPS, list_properties);
-}
 
 static void
 gtk_color_list_init (GtkColorList *self)
@@ -520,15 +127,9 @@ gtk_color_list_init (GtkColorList *self)
 
   g_bytes_unref (data);
 }
+|#
 
-GListModel *
-gtk_color_list_new (guint size)
-{
-  return g_object_new (GTK_TYPE_COLOR_LIST,
-                       "size", size,
-                       NULL);
-}
-
+#|
 static char *
 get_rgb_markup (gpointer this,
                 GtkColor *color)
@@ -554,24 +155,9 @@ get_hsv_markup (gpointer this,
                           color->s,
                           color->v);
 }
+|#
 
-static void
-setup_simple_listitem_cb (GtkListItemFactory *factory,
-                          GtkListItem        *list_item)
-{
-  GtkWidget *picture;
-  GtkExpression *color_expression, *expression;
-
-  expression = gtk_constant_expression_new (GTK_TYPE_LIST_ITEM, list_item);
-  color_expression = gtk_property_expression_new (GTK_TYPE_LIST_ITEM, expression, "item");
-
-  picture = gtk_picture_new ();
-  gtk_widget_set_size_request (picture, 32, 32);
-  gtk_expression_bind (color_expression, picture, "paintable", NULL);
-
-  gtk_list_item_set_child (list_item, picture);
-}
-
+#|
 static void
 setup_listitem_cb (GtkListItemFactory *factory,
                    GtkListItem        *list_item)
@@ -656,93 +242,81 @@ add_colors (GtkWidget     *widget,
   else
     return G_SOURCE_CONTINUE;
 }
-
-
-static void
-limit_changed_cb (GtkDropDown  *dropdown,
-                  GParamSpec   *pspec,
-                  GtkColorList *colors)
-{
-  guint new_limit, old_limit;
-
-  old_limit = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (colors), "limit"));
-  new_limit = 1 << (3 * (gtk_drop_down_get_selected (dropdown) + 1));
-
-  g_object_set_data (G_OBJECT (colors), "limit", GUINT_TO_POINTER (new_limit));
-
-  if (old_limit == colors->size)
-    gtk_color_list_set_size (colors, new_limit);
-}
-
-static void
-limit_changed_cb2 (GtkDropDown  *dropdown,
-                   GParamSpec   *pspec,
-                   GtkLabel     *label)
-{
-  char *string;
-  int len;
-  guint limit;
-
-  limit = 1 << (3 * (gtk_drop_down_get_selected (dropdown) + 1));
-
-  string = g_strdup_printf ("%'u", limit);
-  len = g_utf8_strlen (string, -1);
-  g_free (string);
-
-  gtk_label_set_width_chars (label, len + 2); /* for " /" */
-}
-
-static void
-items_changed_cb (GListModel *model,
-                  guint       position,
-                  guint       removed,
-                  guint       added,
-                  GtkWidget  *label)
-{
-  guint n = g_list_model_get_n_items (model);
-  char *text;
-
-  text = g_strdup_printf ("%'u /", n);
-  gtk_label_set_label (GTK_LABEL (label), text);
-  g_free (text);
-}
-
-static void
-setup_number_item (GtkSignalListItemFactory *factory,
-                   GtkListItem              *item)
-{
-  GtkWidget *label;
-  PangoAttrList *attrs;
-
-  label = gtk_label_new ("");
-  gtk_label_set_xalign (GTK_LABEL (label), 1);
-
-  attrs = pango_attr_list_new ();
-  pango_attr_list_insert (attrs, pango_attr_font_features_new ("tnum"));
-  gtk_label_set_attributes (GTK_LABEL (label), attrs);
-  pango_attr_list_unref (attrs);
-
-  gtk_list_item_set_child (item, label);
-}
-
-static void
-bind_number_item (GtkSignalListItemFactory *factory,
-                  GtkListItem              *item)
-{
-  GtkWidget *label;
-  guint limit;
-  char *string;
-
-  label = gtk_list_item_get_child (item);
-
-  limit = 1 << (3 * (gtk_list_item_get_position (item) + 1));
-  string = g_strdup_printf ("%'u", limit);
-  gtk_label_set_label (GTK_LABEL (label), string);
-  g_free (string);
-}
 |#
 
+(gobject:define-g-object-subclass "GtkColorList" color-list
+  (:superclass g:object
+   :export t
+   :interfaces ("GListModel"))
+  ((:cl colors ; We do not register the slot for GTK
+        :accessor color-list-colors)
+   (size
+    color-list-size
+    "size" "guint" t t)))
 
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (export 'color-list)
+  (export 'color-list-size))
+
+(defmethod initialize-instance :after ((obj color-list) &key)
+  (format t "in INITIAlIZE-INSTANCE~%")
+  (format t "   size : ~a~%" (color-list-size obj))
+  (setf (color-list-colors obj)
+        (make-array (* 256 256 256)
+                    :initial-element nil)))
+
+(defmethod (setf color-list-size) :before (value (obj color-list))
+  (let ((oldsize (color-list-size obj)))
+    (format t "in SETF COLOR-LIST-SIZE :after ~a~%" obj)
+    (format t "    oldsize : ~a~%" oldsize)
+    (format t "    newsize : ~a~%" value)
+    (if (> value oldsize)
+        (g:list-model-items-changed obj oldsize 0 (- value oldsize))
+        (g:list-model-items-changed obj value (- oldsize value) 0))
+    (g:object-notify obj "size")))
+
+(defmethod gio:list-model-get-item-type-impl ((model color-list))
+  (g:gtype "GtkColor"))
+
+(defmethod gio:list-model-get-n-items-impl ((model color-list))
+  (color-list-size model))
+
+(defparameter *map*
+  (make-array 24
+              :initial-contents
+              '(#xff0000 #x00ff00 #x0000ff
+                #x7F0000 #x007F00 #x00007F
+                #x3F0000 #x003F00 #x00003F
+                #x1F0000 #x001F00 #x00001F
+                #x0F0000 #x000F00 #x00000F
+                #x070000 #x000700 #x000007
+                #x030000 #x000300 #x000003
+                #x010000 #x000100 #x000001)))
+
+(defun position-to-color (position)
+  (let ((result 0))
+    (dotimes (i 24)
+      (unless (= 0 (logand position (ash 1 i)))
+        (setf result (logxor result (aref *map* i)))))
+     result))
+
+(defmethod gio:list-model-get-item-impl ((model color-list) position)
+  (unless (>= position (color-list-size model))
+    (let ((pos (position-to-color position)))
+      (format t "   pos : ~a ~a~%" pos (aref (color-list-colors model) pos))
+      (unless (aref (color-list-colors model) pos)
+        (let ((red (logand (ash pos -16) #xff))
+              (green (logand (ash pos -8) #xff))
+              (blue (logand pos #xff)))
+        (format t "Create a color at ~a~%" pos)
+        (setf (aref (color-list-colors model) pos)
+              (make-instance 'color
+                             :name ""
+                             :rgba (gdk:rgba-new :red (/ red 255.0)
+                                                 :green (/ green 255.0)
+                                                 :blue (/ blue 255.0))))
+        (format t "   new color is ~a~%" (aref (color-list-colors model) pos))))
+      (aref (color-list-colors model) pos))))
 
 #|
 GtkWidget *
@@ -856,30 +430,6 @@ do_listview_colors (GtkWidget *do_widget)
 
       g_object_bind_property (dropdown, "selected-item", sort_model, "sorter", G_BINDING_SYNC_CREATE);
 
-      factories = g_list_store_new (GTK_TYPE_LIST_ITEM_FACTORY);
-
-      factory = gtk_signal_list_item_factory_new ();
-      g_signal_connect (factory, "setup", G_CALLBACK (setup_simple_listitem_cb), NULL);
-      set_title (factory, "Colors");
-      g_list_store_append (factories, factory);
-
-      factory = gtk_signal_list_item_factory_new ();
-      g_signal_connect (factory, "setup", G_CALLBACK (setup_listitem_cb), NULL);
-      set_title (factory, "Everything");
-      g_list_store_append (factories, factory);
-
-      expression = gtk_cclosure_expression_new (G_TYPE_STRING,
-                                                NULL,
-                                                0, NULL,
-                                                (GCallback)get_title,
-                                                NULL, NULL);
-      dropdown = gtk_drop_down_new (G_LIST_MODEL (factories), expression);
-      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-      gtk_box_append (GTK_BOX (box), gtk_label_new ("Show:"));
-      gtk_box_append (GTK_BOX (box), dropdown);
-      gtk_header_bar_pack_end (GTK_HEADER_BAR (header), box);
-
-      g_object_bind_property (dropdown, "selected-item", gridview, "factory", G_BINDING_SYNC_CREATE);
 
       g_object_unref (selection);
     }
@@ -887,8 +437,8 @@ do_listview_colors (GtkWidget *do_widget)
 |#
 
 (defun color-list-new (size)
-  (declare (ignore size))
-  (gio:list-store-new "GObject"))
+  (make-instance 'color-list
+                 :size size))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (export 'color-list-new))
@@ -964,8 +514,55 @@ create_color_grid (void)
 }
 |#
 
+#|
+static void
+setup_simple_listitem_cb (GtkListItemFactory *factory,
+                          GtkListItem        *list_item)
+{
+  GtkWidget *picture;
+  GtkExpression *color_expression, *expression;
+
+  expression = gtk_constant_expression_new (GTK_TYPE_LIST_ITEM, list_item);
+  color_expression = gtk_property_expression_new (GTK_TYPE_LIST_ITEM, expression, "item");
+
+  picture = gtk_picture_new ();
+  gtk_widget_set_size_request (picture, 32, 32);
+  gtk_expression_bind (color_expression, picture, "paintable", NULL);
+
+  gtk_list_item_set_child (list_item, picture);
+}
+|#
+
+(defun setup-simple-listitem-cb (factory listitem)
+  (declare (ignore factory))
+  (format t "in SETUP-SIMPLE-LISTITEM-CB for ~a~%" listitem)
+  (let ((picture (make-instance 'gtk:picture
+                                :width-request 32
+                                :height-request 32))
+        expression color-expression)
+    (setf expression
+          (gtk:constant-expression-new "GtkListItem" listitem))
+    (setf color-expression
+          (gtk:property-expression-new "GtkListItem" expression "item"))
+    (gtk:expression-bind color-expression picture "paintable" nil)
+    (setf (gtk:list-item-child listitem) picture)))
+
+;; Replace this later with the correct implementation
+(declaim (notinline setup-listitem-cb))
+(defun setup-listitem-cb (factory listitem)
+  (setup-simple-listitem-cb factory listitem))
+
 (defun create-color-grid (model)
-  (gtk:grid-view-new model nil))
+  (let* ((factory (gtk:signal-list-item-factory-new))
+         (gridview (make-instance 'gtk:grid-view
+                                  :factory factory
+                                  :model model
+                                  :max-columns 24
+                                  :enable-rubberband t
+                                  :hscroll-policy :natural
+                                  :vscroll-policy :natural)))
+    (g:signal-connect factory "setup" #'setup-simple-listitem-cb)
+    gridview))
 
 #|
 static void
@@ -1037,7 +634,8 @@ refill (GtkWidget    *button,
 (defun do-grid-view-colors (&optional application)
   (let* (
          (sort-model (make-instance 'gtk:sort-list-model
-                                    :model (gtk:color-list-new 0)
+                                    ;; FIXME: a size of 0 causes an error
+                                    :model (gtk:color-list-new 1)
                                     :sorter nil
                                     :incremental t))
          (selection (make-instance 'gtk:multi-selection
@@ -1065,7 +663,7 @@ refill (GtkWidget    *button,
                                                :tooltip-text
                                                "Show selection info"))
 
-         (selection-size-label (gtk:label-new "0"))
+         (selection-size-label (gtk:label-new "4.096"))
          (selection-average-picture (gtk:picture-new))
 
          (selection-view (make-instance
@@ -1090,15 +688,16 @@ refill (GtkWidget    *button,
                                 :default-width 600
                                 :default-height 400))
 
-         (provider (gtk:css-provider-new))
          (label nil) (scrolled nil)
         )
+
     ;; Add CSS for application specific style information
-    (gtk:css-provider-load-from-data provider
-                                     ".view.compact > child { padding: 1px; }")
-    (gtk:style-context-add-provider-for-display (gdk:display-default)
-                                                provider
-                                                gtk:+gtk-priority-user+)
+    (let ((provider (gtk:css-provider-new)))
+      (gtk:css-provider-load-from-data provider
+                                       ".view.compact > child {padding: 1px;}")
+      (gtk:style-context-add-provider-for-display (gdk:display-default)
+                                                  provider
+                                                  gtk:+gtk-priority-user+))
 
     (g:signal-connect sort-model "notify::pending" #'update-progress-cb)
     (gtk:overlay-add-overlay overlay progress)
@@ -1163,7 +762,12 @@ refill (GtkWidget    *button,
     (let* ((label (gtk:label-new "0 /"))
            (attrs (pango:attr-list-new))
            (str (format nil "~,,'.:d" 4096))
-           (len (length str)))
+           (len (length str))
+           (strings '("8" "64" "512" "4096"
+                      "32768" "262144" "2097152" "16777216"))
+           (dropdown (gtk:drop-down-new-from-strings strings))
+           (factory (gtk:signal-list-item-factory-new)))
+
       (pango:attr-list-insert attrs
                               (pango:attr-font-features-new "tnum"))
 ;     FIXME: Causes a memory fault. What is the problem?
@@ -1171,14 +775,17 @@ refill (GtkWidget    *button,
       (setf (gtk:label-width-chars label) (+ len 2))
       (setf (gtk:label-xalign label) 1)
 
-;      g_signal_connect (selection, "items-changed", G_CALLBACK (items_changed_cb), label);
+       ;; Update the text of the label
+       (g:signal-connect selection "items-changed"
+                         (lambda (model position removed added)
+                           (declare (ignore position removed added))
+                           (let ((n (g:list-model-n-items model)))
+                             (setf (gtk:label-label label)
+                                   (format nil "~,,'.:d" n)))))
 
        (gtk:header-bar-pack-start header label)
 
-      )
-
 #|
-
       dropdown = gtk_drop_down_new_from_strings  ((const char * const[]) { "8", "64", "512", "4096", "32768", "262144", "2097152", "16777216", NULL });
 
       g_signal_connect (dropdown, "notify::selected",
@@ -1197,11 +804,147 @@ refill (GtkWidget    *button,
       gtk_header_bar_pack_start (GTK_HEADER_BAR (header), dropdown);
 |#
 
-    (let* ((strings '("8" "64" "512" "4096"
-                      "32768" "262144" "2097152" "16777216"))
-           (dropdown (gtk:drop-down-new-from-strings strings)))
+#|
+static void
+limit_changed_cb (GtkDropDown  *dropdown,
+                  GParamSpec   *pspec,
+                  GtkColorList *colors)
+{
+  guint new_limit, old_limit;
+
+  old_limit = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (colors), "limit"));
+  new_limit = 1 << (3 * (gtk_drop_down_get_selected (dropdown) + 1));
+
+  g_object_set_data (G_OBJECT (colors), "limit", GUINT_TO_POINTER (new_limit));
+
+  if (old_limit == colors->size)
+    gtk_color_list_set_size (colors, new_limit);
+}
+|#
+      (g:signal-connect dropdown "notify::selected"
+          (lambda (dropdown pspec)
+            (declare (ignore pspec))
+            (let* ((colors (gtk:sort-list-model-model sort-model))
+                   (oldlimit (g:object-data colors "limit"))
+                   (newlimit (ash 1
+                                  (* 3
+                                     (+ 1
+                                        (gtk:drop-down-selected dropdown))))))
+              (setf (g:object-data colors "limit") newlimit)
+              (when (= oldlimit (gtk:color-list-size colors))
+                (setf (gtk:color-list-size colors) newlimit)))))
+
+
+#|
+static void
+limit_changed_cb2 (GtkDropDown  *dropdown,
+                   GParamSpec   *pspec,
+                   GtkLabel     *label)
+{
+  char *string;
+  int len;
+  guint limit;
+
+  limit = 1 << (3 * (gtk_drop_down_get_selected (dropdown) + 1));
+
+  string = g_strdup_printf ("%'u", limit);
+  len = g_utf8_strlen (string, -1);
+  g_free (string);
+
+  gtk_label_set_width_chars (label, len + 2); /* for " /" */
+}
+|#
+
+      (g:signal-connect dropdown "notify::selected"
+          (lambda (dropdown pspec)
+            (declare (ignore pspec))
+            (let ((limit (ash 1
+                              (* 3 (+ 1 (gtk:drop-down-selected dropdown))))))
+              (setf (gtk:label-width-chars label)
+                    (+ 2 (length (format nil "~,,'.:d" limit)))))))
+
+
+
+
+      (g:signal-connect factory "setup"
+          (lambda (factory item)
+            (declare (ignore factory))
+            (let ((label (make-instance 'gtk:label
+                                        :label ""
+                                        :xalign 1.0)))
+              (pango:attr-list-insert attrs
+                                      (pango:attr-font-features-new "tnum"))
+; FIXME: Causes a memory fault
+;              (setf (gtk:label-attributes label) attrs)
+              (setf (gtk:list-item-child item) label))))
+
+      (g:signal-connect factory "bind"
+          (lambda (factory item)
+            (declare (ignore factory))
+            (let ((label (gtk:list-item-child item))
+                  (limit (ash 1 (* 3 (+ 1 (gtk:list-item-position item))))))
+              (setf (gtk:label-label label) (format nil "~,,'.:d" limit)))))
+
+      (setf (gtk:drop-down-factory dropdown) factory)
+      (setf (gtk:drop-down-selected dropdown) 3)
+      (gtk:header-bar-pack-start header dropdown)
     )
 
+
+#|
+      factories = g_list_store_new (GTK_TYPE_LIST_ITEM_FACTORY);
+
+      factory = gtk_signal_list_item_factory_new ();
+      g_signal_connect (factory, "setup", G_CALLBACK (setup_simple_listitem_cb), NULL);
+      set_title (factory, "Colors");
+      g_list_store_append (factories, factory);
+
+      factory = gtk_signal_list_item_factory_new ();
+      g_signal_connect (factory, "setup", G_CALLBACK (setup_listitem_cb), NULL);
+      set_title (factory, "Everything");
+      g_list_store_append (factories, factory);
+
+      expression = gtk_cclosure_expression_new (G_TYPE_STRING,
+                                                NULL,
+                                                0, NULL,
+                                                (GCallback)get_title,
+                                                NULL, NULL);
+
+      dropdown = gtk_drop_down_new (G_LIST_MODEL (factories), expression);
+      box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
+      gtk_box_append (GTK_BOX (box), gtk_label_new ("Show:"));
+      gtk_box_append (GTK_BOX (box), dropdown);
+      gtk_header_bar_pack_end (GTK_HEADER_BAR (header), box);
+
+      g_object_bind_property (dropdown, "selected-item", gridview, "factory", G_BINDING_SYNC_CREATE);
+|#
+
+    (let ((factories (g:list-store-new "GtkListItemFactory"))
+          factory dropdown box expression)
+      (setf factory (gtk:signal-list-item-factory-new))
+      (setf (g:object-data factory "title") "Colors")
+      (g:list-store-append factories factory)
+      (g:signal-connect factory "setup" #'setup-simple-listitem-cb)
+
+      (setf factory (gtk:signal-list-item-factory-new))
+      (setf (g:object-data factory "title") "Evertything")
+      (g:list-store-append factories factory)
+      (g:signal-connect factory "setup" #'setup-listitem-cb)
+
+      ;; Replacement for missing gtk_cclosure_expression_new
+      (setf expression (gtk:constant-expression-new "gchararray" "Colors"))
+
+      (setf dropdown (gtk:drop-down-new factories expression))
+
+      (setf box (gtk:box-new :horizontal 10))
+      (gtk:box-append box (gtk:label-new "Show"))
+      (gtk:box-append box dropdown)
+      (gtk:header-bar-pack-end header box)
+
+      (g:object-bind-property dropdown "selected-item"
+                              gridview "factory"
+                              :sync-create)
+    )
 
     (gtk:window-present window)
 ))

@@ -3,17 +3,17 @@
  * it up, nothing might be visible anymore.
  */
 
-textview {
+.demo * {
   color: blue;
   font-family: monospace;
-  border: 2px solid;
+  border: 1px solid;
 }
 
-window *  {
+.demo textview {
   background-color: yellow;
 }
 
-selection {
-  background-color: darkGreen;
+.demo selection {
+  background-color: orange;
   color: black;
 }

@@ -35,7 +35,7 @@
 
 (defmethod gdk:paintable-snapshot-impl ((paintable emblemed-icon)
                                         snapshot width height)
-  (graphene:with-graphene-point (point (* 0.5 width) 0)
+  (graphene:with-point (point (* 0.5 width) 0)
     (gdk:paintable-snapshot (emblemed-icon-icon paintable)
                             snapshot
                             width

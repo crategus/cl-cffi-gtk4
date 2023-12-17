@@ -1,6 +1,8 @@
-;;;; CSS Accordion - 2022-11-18
+;;;; CSS Accordion
 ;;;;
 ;;;; An accordion demo written using CSS transitions and multiple backgrounds.
+;;;;
+;;;; 2023-12-16
 
 (in-package :gtk4-example)
 
@@ -9,14 +11,28 @@
                              :orientation :horizontal
                              :halign :center
                              :valign :center))
+         (frame (make-instance 'gtk:frame
+                               :child box))
          (window (make-instance 'gtk:window
                                 :application application
                                 :title "CSS Accordion"
-                                :child box
+                                :child frame
                                 :default-height 300
                                 :default-width 600))
          (provider (make-instance 'gtk:css-provider))
-         (csspath (sys-path "resource/css-accordion.css")))
+         (path (sys-path "resource/css-accordion.css")))
+    ;; Load and install the CSS for the accordion
+    (gtk:css-provider-load-from-path provider path)
+    (gtk:style-context-add-provider-for-display (gdk:display-default)
+                                                provider
+                                                gtk:+gtk-priority-user+)
+    (gtk:widget-add-css-class frame "accordion")
+    ;; Remove the provider when destroying the window
+    (g:signal-connect window "destroy"
+        (lambda (widget)
+          (declare (ignore widget))
+          (gtk:style-context-remove-provider-for-display (gdk:display-default)
+                                                         provider)))
     ;; Add the buttons to the box
     (gtk:box-append box
                     (gtk:button-new-with-label "This"))
@@ -30,9 +46,5 @@
                     (gtk:button-new-with-label "Accordion"))
     (gtk:box-append box
                     (gtk:button-new-with-label "."))
-    ;; Load CSS from file into the provider
-    (gtk:css-provider-load-from-path provider csspath)
-    ;; Apply CSS to the widgets
-    (apply-css-to-widget provider window)
-    ;; Show the window
-    (gtk:widget-show window)))
+    ;; Present the window
+    (gtk:window-present window)))

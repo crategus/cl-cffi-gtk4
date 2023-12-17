@@ -66,7 +66,7 @@
 
     ;; First, we move the (0, 0) point to the center of the area so
     ;; we can draw everything relative to it.
-    (graphene:with-graphene-point (point (/ width 2.0) (/ height 2))
+    (graphene:with-point (point (/ width 2.0) (/ height 2))
       (gtk:snapshot-translate snapshot point))
 
     ;; Next we scale it, so that we can pretend that the clock is
@@ -85,7 +85,7 @@
     ;; TODO:Improve the implementation of GskRoundedRect to avoid foreign
     ;; objects
     (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
-      (graphene:with-graphene-rect (rect -50 -50 100 100)
+      (graphene:with-rect (rect -50 -50 100 100)
         (gsk:rounded-rect-init-from-rect outline rect 50)
         (gtk:snapshot-append-border snapshot
                                     outline
@@ -106,7 +106,7 @@
       (gtk:snapshot-save snapshot)
       (gtk:snapshot-rotate snapshot (+ (* 30 hour) (* 0.5 minute)))
       (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
-        (graphene:with-graphene-rect (rect -2 -23 4 25)
+        (graphene:with-rect (rect -2 -23 4 25)
           (gsk:rounded-rect-init-from-rect outline rect 2.0)
           (gtk:snapshot-push-rounded-clip snapshot outline)
           (gtk:snapshot-append-color snapshot
@@ -160,10 +160,7 @@
       (ticking-clock-id 0))
 
   (defun clock-tick ()
-    (format t "  in CLOCK-TICK~a~%" clocks)
     (dolist (clock clocks)
-      (format t "     for clock : ~a~%" clock)
-
       ;; Update the time of the clock
       (setf (clock-time clock)
             (local-time:format-timestring nil
@@ -224,7 +221,7 @@
 
 ;; And this function is the crux for this whole demo. It shows how to use
 ;; expressions to set up bindings.
-(defun setup-listitem-cb (factory item)
+(defun clocks-setup-listitem-cb (factory item)
   (declare (ignore factory))
   (let ((box (make-instance 'gtk:box :orientation :vertical))
         (label-location (make-instance 'gtk:label))
@@ -312,7 +309,7 @@
     (g:signal-connect factory "setup"
                       (lambda (factory item)
                         (format t "in SETUP for ~a ~a~%" factory item)
-                        (setup-listitem-cb factory item)))
+                        (clocks-setup-listitem-cb factory item)))
 
     (gtk:box-append vbox image)
     (gtk:box-append vbox scrolled)
