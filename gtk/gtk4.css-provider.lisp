@@ -54,9 +54,9 @@
 ;;;     gtk_css_provider_to_string
 ;;;
 ;;;     gtk_css_section_new
-;;;     gtk_css_section_ref                                not implemented
-;;;     gtk_css_section_unref                              not implemented
-;;;     gtk_css_section_print                              not implemented
+;;;     gtk_css_section_ref                                not needed
+;;;     gtk_css_section_unref                              not needed
+;;;     gtk_css_section_print                              not needed
 ;;;     gtk_css_section_to_string
 ;;;     gtk_css_section_get_file
 ;;;     gtk_css_section_get_parent
@@ -139,8 +139,7 @@
 ;;; Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- css-location-bytes -----------------------------------------------------
-
+;;; --- gtk:css-location-bytes -------------------------------------------------
 #+liber-documentation
 (setf (liber:alias-for-function 'css-location-bytes) "Accessor")
 
@@ -156,7 +155,7 @@
 
 (export 'css-location-bytes)
 
-;;; --- css-location-chars -----------------------------------------------------
+;;; --- gtk:css-location-chars -------------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'css-location-chars) "Accessor")
@@ -173,7 +172,7 @@
 
 (export 'css-location-chars)
 
-;;; --- css-location-lines -----------------------------------------------------
+;;; --- gtk:css-location-lines -------------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'css-location-lines) "Accessor")
@@ -191,7 +190,7 @@
 
 (export 'css-location-lines)
 
-;;; --- css-location-line-bytes ------------------------------------------------
+;;; --- gtk:css-location-line-bytes --------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'css-location-line-bytes) "Accessor")
@@ -207,7 +206,7 @@
 
 (export 'css-location-line-bytes)
 
-;;; --- css-location-line-chars ------------------------------------------------
+;;; --- gtk:css-location-line-chars --------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'css-location-line-chars) "Accessor")
@@ -373,6 +372,22 @@ lambda (provider section error)    :run-last
   @see-class{gtk:css-section}")
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_css_provider_new
+;;; ----------------------------------------------------------------------------
+
+(declaim (inline css-provider-new))
+
+(defun css-provider-new ()
+ #+liber-documentation
+ "@version{2023-4-15}
+  @return{A new @class{gtk:css-provider} object.}
+  @short{Returns a newly created CSS provider object.}
+  @see-class{gtk:css-provider}"
+  (make-instance 'css-provider))
+
+(export 'css-provider-new)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_css_provider_load_named
 ;;; ----------------------------------------------------------------------------
 
@@ -408,7 +423,7 @@ lambda (provider section error)    :run-last
     :void
   (provider (g:object css-provider))
   (data :string)
-  (length :ssize))
+  (len :ssize))
 
 (defun css-provider-load-from-data (provider data)
  #+liber-documentation
@@ -427,6 +442,9 @@ lambda (provider section error)    :run-last
     @fun{gtk:css-provider-load-from-bytes} functions instead.
   @end{dictionary}
   @see-class{gtk:css-provider}"
+  #+(and gtk-4-12 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:CSS-PROVIDER-LOAD-FROM-DATA is deprecated since 4.12."))
   (%css-provider-load-from-data provider data -1))
 
 (export 'css-provider-load-from-data)
@@ -507,35 +525,51 @@ lambda (provider section error)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_css_provider_load_from_bytes
-;;;
-;;; Loads data into css_provider.
-;;;
-;;; Since 4.12
 ;;; ----------------------------------------------------------------------------
+
+#+gtk-4-12
+(cffi:defcfun ("gtk_css_provider_load_from_bytes" css-provider-load-from-bytes)
+    :void
+ #+liber-documentation
+ "@version{2023-12-16}
+  @argument[provider]{a @class{gtk:css-provider} object}
+  @argument[data]{a @class{g:bytes} instance containing the CSS data to load}
+  @begin{short}
+    Loads data into the CSS provider.
+  @end{short}
+  This clears any previously loaded information.
+
+  Since 4.12
+  @see-class{gtk:css-provider}"
+  (provider (g:object css-provider))
+  (data (g:boxed g:bytes)))
+
+#+gtk-4-12
+(export 'css-provider-load-from-bytes)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_css_provider_load_from_string
-;;;
-;;; Loads string into css_provider.
-;;;
-;;; Since 4.12
 ;;; ----------------------------------------------------------------------------
 
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_provider_new
-;;; ----------------------------------------------------------------------------
-
-(declaim (inline css-provider-new))
-
-(defun css-provider-new ()
+#+gtk-4-12
+(cffi:defcfun ("gtk_css_provider_load_from_string"
+               css-provider-load-from-string) :void
  #+liber-documentation
- "@version{2023-4-15}
-  @return{A new @class{gtk:css-provider} object.}
-  @short{Returns a newly created CSS provider object.}
-  @see-class{gtk:css-provider}"
-  (make-instance 'css-provider))
+ "@version{2023-12-16}
+  @argument[provider]{a @class{gtk:css-provider} object}
+  @argument[str]{a string with the CSS data to load}
+  @begin{short}
+    Loads data into the CSS provider.
+  @end{short}
+  This clears any previously loaded information.
 
-(export 'css-provider-new)
+  Since 4.12
+  @see-class{gtk:css-provider}"
+  (provider (g:object css-provider))
+  (str :string))
+
+#+gtk-4-12
+(export 'css-provider-load-from-string)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_css_provider_to_string
