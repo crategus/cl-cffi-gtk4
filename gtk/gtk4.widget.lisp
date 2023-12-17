@@ -1111,40 +1111,44 @@ lambda (widget)    :run-last
   do not want the keyboard focus removed from the main area of the application.
   @see-class{gtk:widget}")
 
-;;; --- widget-focusable -------------------------------------------------------
+;;; --- gtk:widget-focusable ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "focusable" 'widget) t)
  "The @code{focusable} property of type @code{:boolean} (Read / Write) @br{}
-  Whether this widget itself will accept the input focus.")
+  Whether the widget itself will accept the input focus.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'widget-focusable)
       "Accessor"
       (documentation 'widget-focusable 'function)
- "@version{#2023-9-18}
+ "@version{2023-11-27}
   @syntax[]{(gtk:widget-focusable object) => setting}
   @syntax[]{(setf (gtk:widget-focusable object) setting)}
   @argument[object]{a @class{gtk:widget} object}
-  @argument[setting]{a boolean whether the widget itself will accept the input
-    focus}
+  @argument[setting]{a boolean whether @arg{object} itself will accept the
+    input focus}
   @begin{short}
     Accessor of the @slot[gtk:widget]{focusable} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @fun{gtk:widget-focusable} function determines whether the widget can own
   the input focus. The @setf{gtk:widget-focusable} function specifies whether
-  widget can own the input focus.
+  the widget can own the input focus.
 
   Widget implementations should set the @slot[gtk:widget]{focusable} property to
   @em{true} in their init function if they want to receive keyboard input. Note
   that having the @slot[gtk:widget]{focusable} property be @em{true} is only one
-  of the necessary conditions for being focusable. A widget must also be
-  sensitive and can-focus and not have an ancestor that is marked as not
-  can-focus in order to receive input focus. See the @fun{gtk:widget-grab-focus}
-  function for actually setting the input focus on a widget.
+  of the necessary conditions for being focusable. A widget must also have the
+  @slot[gtk:widget]{sensitive} and @slot[gtk:widget]{can-focus} properties be
+  @em{true} and not have an ancestor that has the @slot[gtk:widget]{can-focus}
+  property set to @em{false} in order to receive input focus. See the
+  @fun{gtk:widget-grab-focus} function for actually setting the input focus on
+  a widget.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-grab-focus}")
+  @see-function{gtk:widget-grab-focus}
+  @see-function{gtk:widget-can-focus}
+  @see-function{gtk:widget-sensitive}")
 
 ;;; --- widget-halign ----------------------------------------------------------
 
@@ -2750,7 +2754,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_activate" widget-activate) :boolean
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{2023-11-27}
   @argument[widget]{a @class{gtk:widget} object that is activatable}
   @return{@em{True} if the widget was activatable.}
   @begin{short}
@@ -4805,10 +4809,10 @@ lambda (widget)    :run-last
 
 (defun widget-class-css-name (gtype)
   #+liber-documentation
- "@version{2023-9-18}
+ "@version{2023-12-2}
   @syntax[]{(gtk:widget-class-css-name gtype) => name}
   @syntax[]{(setf (gtk:widget-class-css-name gtype) name)}
-  @argument[gtype]{a @class{g:type-t} type}
+  @argument[gtype]{a @class{g:type-t} type ID}
   @argument[name]{a string with the CSS name}
   @begin{short}
     Accessor of the CSS name of the widget class.
@@ -4817,7 +4821,8 @@ lambda (widget)    :run-last
   widget class for matching in CSS code. The @setf{gtk:widget-class-css-name}
   function sets the name. If this function is not called for a given class, the
   name of the parent class is used.
-  @see-class{gtk:widget}"
+  @see-class{gtk:widget}
+  @see-class{g:type-t}"
   (let ((class (g:type-class-ref gtype)))
     (unwind-protect
       (%widget-class-css-name class)

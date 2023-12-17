@@ -193,7 +193,7 @@ lambda (button)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- button-can-shrink ------------------------------------------------------
+;;; --- gtk:button-can-shrink --------------------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "can-shrink" 'button) t)
@@ -227,7 +227,7 @@ lambda (button)    :action
   Since 4.12
   @see-class{gtk:button}")
 
-;;; --- button-child -----------------------------------------------------------
+;;; --- gtk:button-child -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'button) t)
@@ -279,7 +279,7 @@ lambda (button)    :action
   @see-class{gtk:button}
   @see-class{gtk:widget}")
 
-;;; --- button-has-frame -------------------------------------------------------
+;;; --- gtk:button-has-frame ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-frame" 'button) t)
@@ -306,7 +306,7 @@ lambda (button)    :action
   Buttons can have a flat appearance or a frame drawn around them.
   @see-class{gtk:button}")
 
-;;; --- button-icon-name -------------------------------------------------------
+;;; --- gtk:button-icon-name ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-name" 'button) t)
@@ -338,7 +338,7 @@ lambda (button)    :action
   @see-class{gtk:image}
   @see-function{gtk:button-new}")
 
-;;; --- button-label -----------------------------------------------------------
+;;; --- gtk:button-label -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "label" 'button) t)
@@ -367,7 +367,7 @@ lambda (button)    :action
   @see-class{gtk:button}
   @see-function{gtk:button-new}")
 
-;;; --- button-use-underline ---------------------------------------------------
+;;; --- gtk:button-use-underline -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-underline" 'button) t)
@@ -380,7 +380,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-use-underline)
       "Accessor"
       (documentation 'button-use-underline 'function)
- "@version{2023-9-2}
+ "@version{2023-12-16}
   @syntax[]{(gtk:button-use-underline object) => setting}
   @syntax[]{(setf (gtk:button-use-underline object) setting)}
   @argument[object]{a @class{gtk:button} widget}
@@ -390,9 +390,9 @@ lambda (button)    :action
     @class{gtk:button} class.
   @end{short}
   The @fun{gtk:button-use-underline} function gets whether underlines are
-  interpreted as mnemonics. The @setf{gtk:button-user-underline} function sets
-  whether to use underlines as mnemonics. If @em{true}, an underline in the text
-  of the button label indicates the next character should be used for the
+  interpreted as mnemonics. The @setf{gtk:button-use-underline} function sets
+  whether to use underlines as mnemonics. If @em{true}, an underline in the
+  text of the button label indicates the next character should be used for the
   mnemonic accelerator key.
   @see-class{gtk:button}")
 

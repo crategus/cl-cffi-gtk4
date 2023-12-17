@@ -173,7 +173,7 @@
   clicking on column headers. To set this up, the @class{gtk:sorter} object
   returned by the @fun{gtk:column-view-sorter} function must be attached to a
   sort model for the data that the view is showing, and the columns must have
-  sorters attached to them by calling @setf{gtk:column-view-column-sorter} 
+  sorters attached to them by calling @setf{gtk:column-view-column-sorter}
   function. The initial sort order can be set with the
   @fun{gtk:column-view-sort-by-column} function.
 
@@ -263,7 +263,7 @@ lambda (columnview position)    :run-last
   The @fun{gtk:column-view-columns} function gets the list of columns in this
   column view. This list is constant over the lifetime of self and can be used
   to monitor changes to the columns of self by connecting to the
-  \"items-changed\" signal.
+  @code{\"items-changed\"} signal.
   @see-class{gtk:column-view}")
 
 ;;; --- column-view-enable-rubberband ------------------------------------------
@@ -290,8 +290,8 @@ lambda (columnview position)    :run-last
     @class{gtk:column-view} class.
   @end{short}
   The @fun{gtk:column-view-enable-rubberband} function returns whether rows can
-  be selected by dragging with the mouse. The 
-  @setf{gtk:column-view-enable-rubberband} function sets whether selections can 
+  be selected by dragging with the mouse. The
+  @setf{gtk:column-view-enable-rubberband} function sets whether selections can
   be changed by dragging with the mouse.
   @see-class{gtk:column-view}")
 
@@ -326,7 +326,7 @@ lambda (columnview position)    :run-last
     @class{gtk:column-view} class.
   @end{short}
   The @fun{gtk:column-view-model} function gets the model that is currently used
-  to read the items displayed. The @setf{gtk:column-view-model} function sets 
+  to read the items displayed. The @setf{gtk:column-view-model} function sets
   the model to use. This must be a @class{gtk:selection-model} object.
   @see-class{gtk:column-view}
   @see-class{gtk:selection-model}")
@@ -353,7 +353,7 @@ lambda (columnview position)    :run-last
     @class{gtk:column-view} class.
   @end{short}
   The @fun{gtk:column-view-reorderable} function returns whether columns are
-  reorderable. The @setf{gtk:column-view-reorderable} function sets whether 
+  reorderable. The @setf{gtk:column-view-reorderable} function sets whether
   columns should be reorderable by dragging.
   @see-class{gtk:column-view}")
 
@@ -390,7 +390,7 @@ lambda (columnview position)    :run-last
   @end{short}
   The @fun{gtk:column-view-show-column-separators} function returns whether the
   list should show separators between columns. The
-  @setf{gtk:column-view-show-column-separators} function sets whether the list 
+  @setf{gtk:column-view-show-column-separators} function sets whether the list
   should show separators between columns.
   @see-class{gtk:column-view}")
 
@@ -419,7 +419,7 @@ lambda (columnview position)    :run-last
   @end{short}
   The @fun{gtk:column-view-show-row-separators} function returns whether the
   list should show separators between rows. The
-  @setf{gtk:column-view-show-row-separators} function sets whether the list 
+  @setf{gtk:column-view-show-row-separators} function sets whether the list
   should show separators between rows.
   @see-class{gtk:column-view}")
 
@@ -448,7 +448,7 @@ lambda (columnview position)    :run-last
   @end{short}
   The @fun{gtk:column-view-single-click-activate} function returns whether rows
   will be activated on single click and selected on hover. The
-  @setf{gtk:column-view-single-click-activate} function sets whether rows should 
+  @setf{gtk:column-view-single-click-activate} function sets whether rows should
   be activated on single click and selected on hover.
   @see-class{gtk:column-view}")
 
@@ -514,8 +514,8 @@ gtk_column_view_set_model (view, selection);
   @begin{short}
     Creates a new @class{gtk:column-view} widget.
   @end{short}
-  You most likely want to call the @fun{gtk:column-view-append-column} function 
-  to add columns next. 
+  You most likely want to call the @fun{gtk:column-view-append-column} function
+  to add columns next.
   @see-class{gtk:column-view}
   @see-class{gtk:selection-model}
   @see-function{gtk:column-view-append-column}"
@@ -536,7 +536,7 @@ gtk_column_view_set_model (view, selection);
     added to column view yet}
   @begin{short}
     Appends the column to the end of the columns in @arg{columnview}.
-  @end{short} 
+  @end{short}
   @see-class{gtk:column-view}
   @see-class{gtk:column-view-column}"
   (columnview (g:object column-view))
@@ -552,15 +552,15 @@ gtk_column_view_set_model (view, selection);
  #+liber-documentation
  "@version{#2023-9-21}
   @argument[columnview]{a @class{gtk:column-view} widget}
-  @argument[position]{an unsigned integer with the position to insert 
+  @argument[position]{an unsigned integer with the position to insert
     @arg{column} at}
-  @argument[column]{a @class{gtk:column-view-column} object to insert} 
+  @argument[column]{a @class{gtk:column-view-column} object to insert}
   @begin{short}
-    Inserts a column at the given @arg{position} in the columns of 
+    Inserts a column at the given @arg{position} in the columns of
     @arg{columview}.
   @end{short}
-  If @arg{column} is already a column of @arg{columnview}, it will be 
-  repositioned.      
+  If @arg{column} is already a column of @arg{columnview}, it will be
+  repositioned.
   @see-class{gtk:column-view}
   @see-class{gtk:column-view-column}"
   (columnview (g:object column-view))
@@ -577,12 +577,12 @@ gtk_column_view_set_model (view, selection);
  #+liber-documentation
  "@version{#2023-9-21}
   @argument[columnview]{a @class{gtk:column-view} widget}
-  @argument[column]{a @class{gtk:column-view-column} object to remove} 
+  @argument[column]{a @class{gtk:column-view-column} object to remove}
   @begin{short}
     Removes the column from the list of columns of @arg{columnview}.
   @end{short}
   @see-class{gtk:column-view}
-  @see-class{gtk:column-view-column}" 
+  @see-class{gtk:column-view-column}"
   (columnview (g:object column-view))
   (column (g:object column-view-column)))
 
@@ -592,24 +592,24 @@ gtk_column_view_set_model (view, selection);
 ;;; gtk_column_view_sort_by_column ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_column_view_sort_by_column" column-view-sort-by-column) 
+(cffi:defcfun ("gtk_column_view_sort_by_column" column-view-sort-by-column)
     :void
- #+liber-documentation 
+ #+liber-documentation
  "@version{#2023-9-21}
   @argument[columnview]{a @class{gtk:column-view} widget}
   @argument[column]{a @class{gtk:column-view-column} object to sort by,
     or @code{nil}}
   @argument[direction]{a @symbol{gtk:sort-type} value with the direction to sort
-    in} 
+    in}
   @begin{short}
     Sets the sorting of the column view.
   @end{short}
-  This function should be used to set up the initial sorting. At runtime, users 
+  This function should be used to set up the initial sorting. At runtime, users
   can change the sorting of a column view by clicking on the list headers.
 
   This call only has an effect if the sorter returned by the
   @fun{gtk:column-view-sorter} function is set on a sort model, and the
-  @setf{gtk:column-view-column-sorter} function has been called on column to 
+  @setf{gtk:column-view-column-sorter} function has been called on column to
   associate a sorter with the column.
 
   If @arg{column} is @code{nil}, the column view will be unsorted.

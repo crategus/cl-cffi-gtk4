@@ -96,7 +96,7 @@
 
 #+liber-documentation
 (setf (documentation 'drawing-area 'type)
- "@version{2023-9-18}
+ "@version{2023-11-27}
   @begin{short}
     The @class{gtk:drawing-area} widget is a widget that allows drawing with
     Cairo.
@@ -134,8 +134,8 @@
 
   To receive mouse events on a drawing area, you will need to use event
   controllers. To receive keyboard events, you will need to set the
-  \"can-focus\" property on the drawing area, and you should probably draw some
-  user-visible indication that the drawing area is focused.
+  @slot[gtk:widget]{can-focus} property on the drawing area, and you should
+  probably draw some user-visible indication that the drawing area is focused.
 
   If you need more complex control over your widget, you should consider
   creating your own GtkWidget subclass.
@@ -216,7 +216,7 @@ lambda (area width height)    :run-last
     @class{gtk:drawing-area} class.
   @end{short}
   The @fun{gtk:drawing-area-content-height} function retrieves the content
-  height of the drawing area. The @setf{gtk:drawing-area-content-height} 
+  height of the drawing area. The @setf{gtk:drawing-area-content-height}
   function sets the desired height of the contents.
 
   Note that because widgets may be allocated larger sizes than they requested,
@@ -253,7 +253,7 @@ lambda (area width height)    :run-last
     @class{gtk:drawing-area} class.
   @end{short}
   The @fun{gtk:drawing-area-content-width} function retrieves the content
-  width of the drawing area. The @setf{gtk:drawing-area-content-width} function 
+  width of the drawing area. The @setf{gtk:drawing-area-content-width} function
   sets the desired width of the contents.
 
   Note that because widgets may be allocated larger sizes than they requested,

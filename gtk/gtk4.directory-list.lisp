@@ -351,7 +351,8 @@
   list is monitoring the directory for changes. The
   @setf{gtk:directory-list-monitored} function sets whether the directory list
   will monitor the directory for changes. If monitoring is enabled, the
-  \"items-changed\" signal will be emitted when the directory contents change.
+  @code{\"items-changed\"} signal will be emitted when the directory contents
+  change.
 
   When monitoring is turned on after the initial creation of the directory list,
   the directory is reloaded to avoid missing files that appeared between the

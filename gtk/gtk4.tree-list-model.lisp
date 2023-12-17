@@ -426,7 +426,7 @@
  "@version{#2023-9-10}
   @syntax[]{(gtk:tree-list-model-model object) => model}
   @argument[object]{a @class{gtk:tree-list-model} object}
-  @argument[model]{a @class{gtk:list-model} object root model}
+  @argument[model]{a @class{g:list-model} object root model}
   @begin{short}
     Accessor of the @slot[gtk:tree-list-model]{model} slot of the
     @class{gtk:tree-list-model} class.

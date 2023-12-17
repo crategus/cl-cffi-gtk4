@@ -90,7 +90,7 @@
     @item{The @code{\"unbind\"} signal is emitted to undo everything done in
       step 2. Usually this means disconnecting signal handlers. Once this signal
       has been called, the list item will no longer be used in a list widget.}
-    @item{The  @code{\"bind\"} and @code{\"unbind\"} signals may be emitted
+    @item{The @code{\"bind\"} and @code{\"unbind\"} signals may be emitted
       multiple times again to bind the list item for use with new items. By
       reusing list items, potentially costly setup can be avoided. However, it
       means code needs to make sure to properly clean up the list item in step

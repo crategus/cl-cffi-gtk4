@@ -347,7 +347,7 @@
   @end{short}
   This function is more efficient than the @fun{gtk:string-list-append}
   function and the @fun{gtk:string-list-remove} function, because it only emits
-  the \"items-changed\" signal once for the change.
+  the @code{\"items-changed\"} signal once for the change.
 
   The @arg{position} and @arg{n-removals} parameters must be correct, i.e
   @arg{position} + @arg{n-removals} must be less than or equal to the length of

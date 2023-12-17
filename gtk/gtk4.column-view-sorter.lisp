@@ -115,7 +115,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- column-view-sorter-primary-sort-column ---------------------------------
+;;; --- gtk:column-view-sorter-primary-sort-column -----------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-sort-column"
@@ -132,7 +132,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
  "@version{2023-10-13}
   @syntax[]{(gtk:column-view-sorter-primary-sort-column object) => column}
   @argument[object]{a @class{gtk:column-view-sorter} object}
-  @argument[column]{a @class{gtk:column-view-column} widget with the primary
+  @argument[column]{a @class{gtk:column-view-column} object with the primary
     sort column}
   @begin{short}
     Accessor of the @slot[gtk:column-view-sorter]{primary-sort-column} slot of
@@ -145,7 +145,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
   @see-class{gtk:column-view-sorter}
   @see-class{gtk:column-view-column}")
 
-;;; --- column-view-sorter-primary-sort-order ----------------------------------
+;;; --- gtk:column-view-sorter-primary-sort-order ------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-sort-order"
@@ -218,7 +218,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
   @argument[position]{an unsigned integer with the position of the sort column
     to retrieve, 0 for the primary sort column}
   @begin{return}
-    @arg{column} -- a @class{gtk:column-view-column} widget @br{}
+    @arg{column} -- a @class{gtk:column-view-column} object @br{}
     @arg{order} -- a @symbol{gtk:sort-type} value with the sort order
   @end{return}
   @begin{short}

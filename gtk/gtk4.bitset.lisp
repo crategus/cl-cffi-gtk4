@@ -713,7 +713,7 @@
   @argument[added]{an unsigned integer with the number of values to add}
   @begin{short}
     This is a support function for @class{g:list-model} handling, by mirroring
-    the \"items-changed\" signal.
+    the @code{\"items-changed\"} signal.
   @end{short}
   First, it \"cuts\" the values from @arg{position} to be removed from the
   bitset. That is, it removes all those values and shifts all larger values to
