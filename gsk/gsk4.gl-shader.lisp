@@ -228,8 +228,10 @@
 ;;; An object to build the uniforms data for a GskGLShader.
 ;;; ----------------------------------------------------------------------------
 
+#+nil
 (cffi:defcstruct shader-args-builder)
 
+#+nil
 (export 'shader-args-builder)
 
 ;;; ----------------------------------------------------------------------------
@@ -239,6 +241,7 @@
 ;;; An object representing a GL shader program.
 ;;; ----------------------------------------------------------------------------
 
+#+nil
 (gobject:define-g-object-class "GskGLShader" gl-shader
   (:superclass g:object
    :export t

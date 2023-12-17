@@ -38,8 +38,6 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     GSK_ROUNDED_RECT_INIT()
-;;;
 ;;;     gsk_rounded_rect_init
 ;;;     gsk_rounded_rect_init_copy
 ;;;     gsk_rounded_rect_init_from_rect
@@ -53,6 +51,8 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gsk)
+
+;; TODO: Implement a gsk:with-rounded-rect macro
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GskCorner
@@ -141,11 +141,11 @@
 
 (defun rounded-rect-bounds (rect)
  #+liber-documentation
- "@version{#2023-10-28}
+ "@version{2023-12-4}
   @syntax[]{(gsk:rounded-rect-bounds rect) => bounds}
   @argument[rect]{a @symbol{gsk:rounded-rect} instance}
   @argument[bounds]{a @symbol{graphene:rect-t} instance}
-  @short{Accessor of the bounds of the rounded rectangle.}
+  @short{Accessor of the @arg{bounds} slot of the rounded rectangle.}
   @see-symbol{gsk:rounded-rect}
   @see-symbol{graphene:rect-t}"
   (cffi:foreign-slot-pointer rect '(:struct rounded-rect) 'bounds))
@@ -154,7 +154,7 @@
 
 (defun rounded-rect-corner (rect nth)
  #+liber-documentation
- "@version{#2023-10-28}
+ "@version{2023-12-4}
   @syntax[]{(gsk:rounded-rect-corner rect nth) => corner}
   @argument[rect]{a @symbol{gsk:rounded-rect} instance}
   @argument[nth]{an integer with the number of the corner to retrieve}
@@ -169,34 +169,13 @@
 (export 'rounded-rect-corner)
 
 ;;; ----------------------------------------------------------------------------
-;;; GSK_ROUNDED_RECT_INIT()
-;;;
-;;; #define             GSK_ROUNDED_RECT_INIT(_x,_y,_w,_h)
-;;;
-;;; Initializes a GskRoundedRect when declaring it. All corner sizes will be
-;;; initialized to 0.
-;;;
-;;; _x :
-;;;     the X coordinate of the origin
-;;;
-;;; _y :
-;;;     the Y coordinate of the origin
-;;;
-;;; _w :
-;;;     the width
-;;;
-;;; _h :
-;;;     the height
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
 ;;; gsk_rounded_rect_init ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_rect_init" rounded-rect-init)
     (:pointer (:struct rounded-rect))
  #+liber-documentation
- "@version{#2023-10-28}
+ "@version{2023-12-4}
   @argument[rect]{a @symbol{gsk:rounded-rect} instance to initialize}
   @argument[bounds]{a @symbol{graphene:rect-t} instance describing the bounds}
   @argument[top-left]{a @symbol{graphene:size-t} instance with the rounding
@@ -207,7 +186,7 @@
     radius of the bottom right corner}
   @argument[bottom-left]{a @symbol{graphene:size-t} instance with the rounding
     radius of the bottom left corner}
-  @return{A initialized @symbol{gsk:rounded-rect} instance.}
+  @return{The initialized @symbol{gsk:rounded-rect} instance.}
   @begin{short}
     Initializes the given @arg{rect} with the given values.
   @end{short}
@@ -232,10 +211,10 @@
 (cffi:defcfun ("gsk_rounded_rect_init_copy" rounded-rect-init-copy)
     (:pointer (:struct rounded-rect))
  #+liber-documentation
- "@version{#2023-10-27}
+ "@version{2023-12-4}
   @argument[rect]{a @symbol{gsk:rounded-rect} instance}
   @argument[src]{a @symbol{gsk:rounded-rect} instance}
-  @return{A initialized @symbol{gsk:rounden-rect} instance.}
+  @return{The initialized @symbol{gsk:rounden-rect} instance.}
   @begin{short}
     Initializes @arg{rect} using the given @arg{src} rounded rectangle.
   @end{short}
@@ -259,10 +238,10 @@
 
 (defun rounded-rect-init-from-rect (rect bounds radius)
  #+liber-documentation
- "@version{#2023-10-28}
+ "@version{2023-12-4}
   @argument[rect]{a @symbol{gsk:rounded-rect} instance}
   @argument[bounds]{a @symbol{graphene:rect-t} instance}
-  @argument[radius]{a number coerced to a single float with the border radius}
+  @argument[radius]{a number coerced to a float with the border radius}
   @return{The initialized @symbol{gsk:rounded-rect} instance.}
   @begin{short}
     Initializes @arg{rect} to the given @arg{bounds} and sets the radius of all
@@ -338,14 +317,14 @@
  #+liber-documentation
  "@version{#2023-10-28}
   @argument[rect]{a @symbol{gsk:rounded-rect} instance}
-  @argument[top]{a number coerced to a single float how far to move the top
-    side downwards}
-  @argument[right]{a number coerced to a single float how far to move the right
-    side to the left}
-  @argument[bottom]{a number coerced to a single float how far to move the
-    bottom side upwards}
-  @argument[left]{a number coerced to a single float how far to move the left
-    side to the right}
+  @argument[top]{a number coerced to a float how far to move the top side
+    downwards}
+  @argument[right]{a number coerced to a float how far to move the right side
+    to the left}
+  @argument[bottom]{a number coerced to a float how far to move the bottom
+    side upwards}
+  @argument[left]{a number coerced to a float how far to move the left side
+    to the right}
   @return{The resized @symbol{gsk:rounded-rect} instance.}
   @begin{short}
     Shrinks (or grows) the given rounded rectangle by moving the 4 sides
