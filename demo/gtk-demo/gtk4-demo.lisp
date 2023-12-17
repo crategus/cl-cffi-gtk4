@@ -298,11 +298,12 @@
        "DO-GRID-VIEW-CLOCKS"
        "gtk4-example"
        "grid-view-clocks.lisp")
-      ("Colors"
-       ":window"
-       "DO-GRID-VIEW-COLORS"
-       "gtk4-example"
-       "grid-view-colors.lisp")
+; TODO: The example is not finished
+;      ("Colors"
+;       ":window"
+;       "DO-GRID-VIEW-COLORS"
+;       "gtk4-example"
+;       "grid-view-colors.lisp")
       ("Drop Down"
        ":window"
        "DO-DROP-DOWN"
@@ -555,7 +556,7 @@
        "clipboard.lisp"
        "resource/clipboard.ui")
      )
-     
+
      "Paintable"
      (("Nuclear Icon"
        ":window"
