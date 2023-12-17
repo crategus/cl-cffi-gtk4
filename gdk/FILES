@@ -9,7 +9,7 @@ List of files for the GDK 4 Library
 
   gdk4.enumerations.lisp           GdkGravity, GdkModifierType, ...   GDK 4.10
   gdk4.rectangle.lisp              GdkRectangle                       GDK 4.10
-  gdk4.rgba.lisp                   GdkRGBA                            GDK 4.10
+  gdk4.rgba.lisp                   GdkRGBA                            GDK 4.12
   gdk4.keyval.lisp                 Key Values                         GDK 4.10
 
  Displays, Devices, Monitors, Seats
@@ -72,4 +72,4 @@ List of files for the GDK 4 Library
   gdk4.x11-interaction.lisp                                           GDK 4.0  +
   gdk4.wayland-interaction.lisp                                       GDK 4.0  +
 
-;;; --- 2023-8-7 ---------------------------------------------------------------
+2023-12-2

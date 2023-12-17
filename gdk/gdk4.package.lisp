@@ -351,6 +351,12 @@
       @about-symbol{paintable-flags}
       @about-class{snapshot}
       @about-class{paintable}
+      @about-generic{paintable-snapshot-impl}
+      @about-generic{paintable-get-current-image-impl}
+      @about-generic{paintable-get-flags-impl}
+      @about-generic{paintable-get-intrinsic-width-impl}
+      @about-generic{paintable-get-intrinsic-height-impl}
+      @about-generic{paintable-get-intrinsic-aspect-ratio-impl}
       @about-function{paintable-current-image}
       @about-function{paintable-snapshot}
       @about-function{paintable-flags}
