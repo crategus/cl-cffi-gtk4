@@ -54,12 +54,12 @@
 ;;;     gtk_snapshot_push_blur
 ;;;     gtk_snapshot_push_shadow
 ;;;     gtk_snapshot_push_debug
-;;;     gtk_snapshot_push_gl_shader
+;;;     gtk_snapshot_push_gl_shader                        not implemented
 ;;;     gtk_snapshot_push_mask                             Since 4.10
 ;;;     gtk_snapshot_push_fill                             Since 4.14 unstable
 ;;;     gtk_snapshot_push_stroke                           Since 4.14 unstable
 ;;;     gtk_snapshot_pop
-;;;     gtk_snapshot_gl_shader_pop_texture
+;;;     gtk_snapshot_gl_shader_pop_texture                 not implemented
 ;;;
 ;;;     gtk_snapshot_save
 ;;;     gtk_snapshot_restore
@@ -345,7 +345,7 @@ pixel = transpose(matrix) * pixel + offset
 (cffi:defcfun ("gtk_snapshot_push_rounded_clip" snapshot-push-rounded-clip)
     :void
  #+liber-documentation
- "@version{#2023-10-22}
+ "@version{2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[bounds]{a @symbol{gsk:rounded-rect} instance with the rounded
     rectangle to clip to}
@@ -448,11 +448,12 @@ pixel = transpose(matrix) * pixel + offset
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_push_gl_shader
-;;;
-;;; Push a GskGLShaderNode.
+;;; gtk_snapshot_push_gl_shader                            not implemented
 ;;; ----------------------------------------------------------------------------
 
+;;; No OpenGl support implemented.
+
+#+nil
 (cffi:defcfun ("gtk_snapshot_push_gl_shader" snapshot-push-gl-shader) :void
  #+liber-documentation
  "@version{#2023-10-22}
@@ -507,6 +508,7 @@ pixel = transpose(matrix) * pixel + offset
   (bounds (:pointer (:struct graphene:rect-t)))
   (take-args (g:boxed g:bytes)))
 
+#+nil
 (export 'snapshot-push-gl-shader)
 
 ;;; ----------------------------------------------------------------------------
@@ -561,7 +563,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_pop" snapshot-pop) :void
  #+liber-documentation
- "@version{#2023-10-22}
+ "@version{2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{short}
     Removes the top element from the stack of render nodes, and appends it to
@@ -573,9 +575,12 @@ pixel = transpose(matrix) * pixel + offset
 (export 'snapshot-pop)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_gl_shader_pop_texture
+;;; gtk_snapshot_gl_shader_pop_texture                     not implemented
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: No OpenGL support implemented.
+
+#+nil
 (cffi:defcfun ("gtk_snapshot_gl_shader_pop_texture"
                snapshot-gl-shader-pop-texture) :void
  #+liber-documentation
@@ -592,6 +597,7 @@ pixel = transpose(matrix) * pixel + offset
   @see-function{gtk:snapshot-gl-shader}"
   (snapshot (g:object snapshot)))
 
+#+nil
 (export 'snapshot-gl-shader-pop-texture)
 
 ;;; ----------------------------------------------------------------------------
@@ -600,15 +606,15 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_save" snapshot-save) :void
  #+liber-documentation
- "@version{#2023-10-22}
+ "@version{2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{short}
     Makes a copy of the current state of @arg{snapshot} and saves it on an
     internal stack.
   @end{short}
-  When the @fun{gtk:snapshot-restore} function is called, snapshot will be
+  When the @fun{gtk:snapshot-restore} function is called, the snapshot will be
   restored to the saved state. Multiple calls to the @fun{gtk:snapshot-save}
-  function and the @fun{gtk:snapshot-resotre} function can be nested; each call
+  function and the @fun{gtk:snapshot-restore} function can be nested. Each call
   to the @fun{gtk:snapshot-restore} function restores the state from the
   matching paired @fun{gtk:snapshot-save} function.
 
@@ -626,7 +632,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_restore" snapshot-restore) :void
  #+liber-documentation
- "@version{#2023-10-22}
+ "@version{2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @begin{short}
     Restores snapshot to the state saved by a preceding call to the
@@ -684,13 +690,13 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_translate" snapshot-translate) :void
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[point]{a @symbol{graphene:point-t} instance with the point to
     translate the snapshot by}
   @begin{short}
-    Translates snapshot‘s coordinate system by @arg{point} in 2-dimensional
-    space.
+    Translates the coordinate system of the snapshot by @arg{point} in
+    2-dimensional space.
   @end{short}
   @see-class{gtk:snapshot}
   @see-symobl{graphene:point-t}"
@@ -729,18 +735,18 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-rotate (snapshot angle)
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[angle]{a number coerced to a single float with rotation angle,
-    in degrees (clockwise)}
+  @argument[angle]{a number coerced to a float with rotation angle, in degrees
+    (clockwise)}
   @begin{short}
-    Rotates snapshot‘s coordinate system by angle degrees in 2D space - or in
-    3D speak, rotates around the Z axis.
+    Rotates the coordinate system of the snapshot by @arg{angle} degrees in 2D
+    space - or in 3D speak, rotates around the z axis.
   @end{short}
-  The rotation happens around the origin point of (0, 0) in the snapshot‘s
-  current coordinate system.
+  The rotation happens around the origin point of (0, 0) in the  current
+  coordinate system of the snapshot.
 
-  To rotate around axes other than the Z axis, use the
+  To rotate around axes other than the z axis, use the
   @fun{gsk:transform-rotate-3d} function.
   @see-class{gtk:snapshot}
   @see-function{gtk:snapshot-rotate-3d}"
@@ -759,13 +765,13 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-rotate-3d (snapshot angle axis)
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{#2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[angle]{a number coerced to a single float with rotation angle,
-    in degrees (clockwise)}
+  @argument[angle]{a number coerced to a float with rotation angle, in degrees
+    (clockwise)}
   @argument[axis]{a @symbol{graphene:vec3-t} instance with the rotation axis}
   @begin{short}
-    Rotates snapshot‘s coordinate system by @arg{angle} degrees around
+    Rotates the coordinate system of the snapshot by @arg{angle} degrees around
     @arg{axis}.
   @end{short}
   For a rotation in 2D space, use the @fun{gtk:snapshot-rotate} function.
@@ -787,15 +793,15 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-scale (snapshot xfactor yfactor)
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{2023-2-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[xfactor]{a number coerced to a single float with the scaling
-    factor on the X axis}
-  @argument[yfactor]{a number coerced to a single float with the scaling
-    factor on the Y axis}
+  @argument[xfactor]{a number coerced to a float with the scaling factor on
+    the x axis}
+  @argument[yfactor]{a number coerced to a float with the scaling factor on
+    the y axis}
   @begin{short}
-    Scales snapshot‘s coordinate system in 2-dimensional space by the given
-    factors.
+    Scales the coordinate system of the snapshot in 2-dimensional space by the
+    given factors.
   @end{short}
   Use the @fun{gtk:snapshot-scale-3d} function to scale in all 3 dimensions.
   @see-class{gtk:snapshot}
@@ -817,18 +823,18 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-scale-3d (snapshot xfactor yfactor zfactor)
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{#2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[xfactor]{a number coerced to a single float with the scaling
-    factor on the X axis}
-  @argument[yfactor]{a number coerced to a single float with the scaling
-    factor on the Y axis}
-  @argument[zfactor]{a number coerced to a single float with the scaling
-    factor on the Z axis}
+  @argument[xfactor]{a number coerced to a float with the scaling factor on
+    the x axis}
+  @argument[yfactor]{a number coerced to a float with the scaling factor on
+    the y axis}
+  @argument[zfactor]{a number coerced to a float with the scaling factor on
+    the z axis}
   @begin{short}
-    Scales snapshot‘s coordinate system by the given factors.
+    Scales the coordinate system of the snapshot by the given factors.
   @end{short}
-  Use the @fun{gtk:snapshot-scale-3d} function to scale in all 3 dimensions.
+  Use the @fun{gtk:snapshot-scale} function to scale in 2-dimensional space.
   @see-class{gtk:snapshot}
   @see-function{gtk:snapshot-scale}"
   (%snapshot-scale-3d snapshot (coerce xfactor 'single-float)
@@ -847,10 +853,9 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-perspective (snapshot depth)
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{#2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[depth]{a number coerced to a single float with the distance of
-    z=0 plane}
+  @argument[depth]{a number coerced to a float with the distance of z=0 plane}
   @begin{short}
     Applies a perspective projection transform.
   @end{short}
@@ -942,7 +947,7 @@ pixel = transpose(matrix) * pixel + offset
 
 (cffi:defcfun ("gtk_snapshot_append_color" snapshot-append-color) :void
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[color]{a @class{gdk:rgba} instance with the color to draw}
   @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds for the
@@ -1011,12 +1016,12 @@ pixel = transpose(matrix) * pixel + offset
 
 (defun snapshot-append-border (snapshot outline width color)
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[outline]{a @class{gsk:rounded-rect} instance with the outline of
+  @argument[outline]{a @symbol{gsk:rounded-rect} instance with the outline of
     the border}
-  @argument[width]{a list of 4 single float with the stroke width of the border
-    on the top, right, bottom, and left side respectivly}
+  @argument[width]{a list of 4 float with the stroke width of the border on
+    the top, right, bottom, and left side respectivly}
   @argument[color]{a list of 4 @class{gdk:rgba} instances with the color used
     on the top, right, bottom, and left side}
   @begin{short}
@@ -1024,11 +1029,12 @@ pixel = transpose(matrix) * pixel + offset
   @end{short}
   The four sides of the border can have different widths and colors.
   @see-class{gtk:snapshot}
-  @see-class{gsk:rounded-rect}"
+  @see-symbol{gsk:rounded-rect}
+  @see-class{gdk:rgba}"
   (cffi:with-foreign-object (width-ptr :float 4)
     (iter (for i from 0 below 4)
           (for borderwidth in width)
-          (setf (cffi:mem-aref width-ptr :float i) 
+          (setf (cffi:mem-aref width-ptr :float i)
                 (coerce borderwidth 'single-float)))
     (glib:with-foreign-boxed-array (n-colors colors-ptr gdk:rgba color)
       (%snapshot-append-border snapshot
@@ -1042,33 +1048,40 @@ pixel = transpose(matrix) * pixel + offset
 ;;; gtk_snapshot_append_inset_shadow
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_snapshot_append_inset_shadow" snapshot-append-inset-shadow)
+(cffi:defcfun ("gtk_snapshot_append_inset_shadow" %snapshot-append-inset-shadow)
     :void
- #+liber-documentation
- "@version{#2023-10-23}
-  @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[outline]{a @class{gsk:rounded-rect} instance with the outline of
-    the border}
-  @argument[color]{a @class{gdk:rgba} instance with the color of the method}
-  @argument[dx]{a single float with the horizontal offset of shadow}
-  @argument[dy]{a single float with the vertical offset of shadow}
-  @argument[spread]{a single float value how far the shadow spreads towards
-    the inside}
-  @argument[blur-radius]{a single float value how much blur to apply to the
-    shadow}
-  @begin{short}
-    Appends an inset shadow into the box given by @arg{outline}.
-  @end{short}
-  @see-class{gtk:snapshot}
-  @see-class{gsk:rounded-rect}
-  @see-class{gdk:rgba}"
   (snapshot (g:object snapshot))
   (outline (:pointer (:struct gsk:rounded-rect)))
   (color (g:boxed gdk:rgba))
   (dx :float)
   (dy :float)
   (spread :float)
-  (blur-radius :float))
+  (radius :float))
+
+(defun snapshot-append-inset-shadow (snapshot outline color dx dy spread radius)
+ #+liber-documentation
+ "@version{#2023-12-2}
+  @argument[snapshot]{a @class{gtk:snapshot} object}
+  @argument[outline]{a @symbol{gsk:rounded-rect} instance with the outline of
+    the border}
+  @argument[color]{a @class{gdk:rgba} instance with the color of the method}
+  @argument[dx]{a float with the horizontal offset of shadow}
+  @argument[dy]{a float with the vertical offset of shadow}
+  @argument[spread]{a float value how far the shadow spreads towards the inside}
+  @argument[radius]{a float value how much blur to apply to the shadow}
+  @begin{short}
+    Appends an inset shadow into the box given by @arg{outline}.
+  @end{short}
+  @see-class{gtk:snapshot}
+  @see-symbol{gsk:rounded-rect}
+  @see-class{gdk:rgba}"
+  (%snapshot-append-inset-shadow snapshot
+                                 outline
+                                 color
+                                 (coerce dx 'single-float)
+                                 (coerce dy 'single-float)
+                                 (coerce spread 'single-float)
+                                 (coerce radius 'single-float)))
 
 (export 'snapshot-append-inset-shadow)
 
@@ -1077,24 +1090,23 @@ pixel = transpose(matrix) * pixel + offset
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_snapshot_append_outset_shadow"
-               snapshot-append-outset-shadow) :void
+               %snapshot-append-outset-shadow) :void
  #+liber-documentation
- "@version{#2023-10-23}
+ "@version{#2023-12-2}
   @argument[snapshot]{a @class{gtk:snapshot} object}
-  @argument[outline]{a @class{gsk:rounded-rect} instance with the outline of
+  @argument[outline]{a @symbol{gsk:rounded-rect} instance with the outline of
     the region surrounded by the shadow}
   @argument[color]{a @class{gdk:rgba} instance with the color of the shadow}
-  @argument[dx]{a single float with the horizontal offset of shadow}
-  @argument[dy]{a single float with the vertical offset of shadow}
-  @argument[spread]{a single float value how far the shadow spreads towards
-    the outside}
-  @argument[blur-radius]{a single float value how much blur to apply to the
-    shadow}
+  @argument[dx]{a float with the horizontal offset of shadow}
+  @argument[dy]{a float with the vertical offset of shadow}
+  @argument[spread]{a float value how far the shadow spreads towards the
+    outside}
+  @argument[radius]{a float value how much blur to apply to the shadow}
   @begin{short}
     Appends an outset shadow node around the box given by @arg{outline}.
   @end{short}
   @see-class{gtk:snapshot}
-  @see-class{gsk:rounded-rect}
+  @see-symbol{gsk:rounded-rect}
   @see-class{gdk:rgba}"
   (snapshot (g:object snapshot))
   (outline (:pointer (:struct gsk:rounded-rect)))
@@ -1102,7 +1114,20 @@ pixel = transpose(matrix) * pixel + offset
   (dx :float)
   (dy :float)
   (spread :float)
-  (blur-radius :float))
+  (radius :float))
+
+(defun snapshot-append-outset-shadow (snapshot
+                                      outline
+                                      color
+                                      dx dy
+                                      spread radius)
+  (%snapshot-append-outset-shadow snapshot
+                                  outline
+                                  color
+                                  (coerce dx 'single-float)
+                                  (coerce dy 'single-float)
+                                  (coerce spread 'single-float)
+                                  (coerce radius 'single-float)))
 
 (export 'snapshot-append-outset-shadow)
 
