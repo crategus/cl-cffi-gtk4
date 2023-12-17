@@ -132,7 +132,9 @@
   nil)
 
 #+liber-documentation
-(setf (documentation 'paintable 'type)
+(setf (liber:alias-for-class 'paintable)
+      "Interface"
+      (documentation 'paintable 'type)
  "@version{2023-7-30}
   @begin{short}
     The @class{gdk:paintable} interface is a simple interface used by GDK and
@@ -177,6 +179,95 @@
   for implementing subclasses and should not be used by applications:
   @fun{gdk:paintable-invalidate-contents}, @fun{gdk:paintable-invalidate-size},
   @fun{gdk:paintable-new-empty}.
+  @begin[Interface structure]{dictionary}
+    @begin{pre}
+(gobject:define-vtable (\"GdkPaintable\" paintable)
+  (:skip parent-instance (:struct g:type-interface))
+  ;; Methods of the GdkPaintable interface
+  (snapshot (:void (paintable (g:object paintable))
+                   (snapshot (g:object snapshot))
+                   (width :double)
+                   (height :double)))
+  (get-current-image ((g:object paintable) (paintable (g:object paintable))))
+  (get-flags (paintable-flags (paintable (g:object paintable))))
+  (get-intrinsic-width (:int (paintable (g:object paintable))))
+  (get-intrinsic-height (:int (paintable (g:object paintable))))
+  (get-intrinsic-aspect-ratio (:double (paintable (g:object paintable)))))
+    @end{pre}
+    The list of functions that can be implemented for the @class{gdk:paintable}
+    interface. The following methods are provided and can be specialized
+    for a subclass which derives from the @class{gdk:paintable} interface:
+    @begin[code]{table}
+      @entry[gdk:paintable-snapshot-impl]{Method called from the
+        @fun{gdk:paintable-snapshot} function.}
+      @entry[gdk:paintable-get-current-image-impl]{Method called from the
+        @fun{gdk:paintable-current-image} function.}
+      @entry[gdk:paintable-get-flags-impl]{Method called from the
+        @fun{gdk:paintable-flags} function.}
+      @entry[gdk:paintable-get-intrinsic-width-impl]{Method called from the
+        @fun{gdk:paintable-intrinsic-with} function.}
+      @entry[gdk:paintable-get-intrinsic-height-impl]{Method called from the
+        @fun{gdk:paintable-intrinsic-height} function.}
+      @entry[gdk:paintable-get-intrinsic-aspect-ratio-impl]{Method called from
+        the @fun{gdk:paintable-intrinsic-aspect-ratio} function.}
+    @end{table}
+    Note that apart from the @fun{gdk:paintable-snapshot-impl} method, no
+    method of this interface is mandatory to implement, though it is a good
+    idea to implement the @fun{gdk:paintable-get-current-image-impl} method for
+    non-static paintables and the @fun{gdk:paintable-get-flags-impl} method if
+    the paintable is not dynamic as the default implementation returns no flags
+    and that will make the implementation likely quite slow.
+  @end{dictionary}
+  @begin[Example]{dictionary}
+    This is a complete example for the implementation of a subclass which
+    implements the @class{gdk:paintable} interface.
+    @begin{pre}
+;; Implementation of a NUCLEAR-ICON subclass
+(gobject:define-g-object-subclass \"GdkNuclearIcon\" nuclear-icon
+  (:superclass g:object
+   :export t
+   :interfaces (\"GdkPaintable\"))
+  ((rotation
+    nuclear-icon-rotation
+    \"rotation\" \"gdouble\" t t)))
+
+;; This is the function that draws the actual icon
+(defun nuclear-snapshot (snapshot foreground background width height rotation)
+  (let ((size (min width height))
+        (radius 0.3)
+        (cr nil))
+    (graphene:with-rects ((rect1 0 0 width height)
+                          (rect2 (/ (- width size) 2.0)
+                                 (/ (- height size) 2.0)
+                                 size size))
+      (gtk:snapshot-append-color snapshot background rect1)
+      (setf cr (gtk:snapshot-append-cairo snapshot rect2))
+      (cairo-set-source-rgba cr foreground)
+      (cairo:translate cr (/ width 2.0) (/ height 2.0))
+      (cairo:scale cr size size)
+      (cairo:rotate cr rotation)
+      (cairo:arc cr 0 0 0.1 (- pi) pi)
+      (cairo:fill cr)
+      (setf (cairo:line-width cr) radius)
+      (setf (cairo:dash cr 0.0) (list (/ (* radius pi) 3)))
+      (cairo:arc cr 0 0 radius (- pi) pi)
+      (cairo:stroke cr)
+      (cairo:destroy cr))))
+
+;; Here, we implement the methods required by the GdkPaintable interface
+(defmethod paintable-snapshot-impl ((paintable nuclear-icon)
+                                    snapshot width height)
+  (nuclear-snapshot snapshot
+                    (rgba-new :red 0 :green 0 :blue 0 :alpha 1)
+                    (rgba-new :red 0.9 :green 0.75 :blue 0.15 :alpha 1)
+                    width
+                    height
+                    (nuclear-icon-rotation paintable)))
+
+(defmethod paintable-get-flags-impl ((paintable nuclear-icon))
+  (list :static-contents :static-size))
+    @end{pre}
+  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"invalidate-contents\" signal}
       @begin{pre}
@@ -207,7 +298,7 @@ lambda (paintable)    :run-last
   @see-class{gtk:snapshot}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GdkPaintable Inferface
+;;; GdkPaintable Inferface vtable
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-vtable ("GdkPaintable" paintable)
@@ -229,9 +320,38 @@ lambda (paintable)    :run-last
 ;; The default functions of the C library are not available, therefor we
 ;; define the equivalent functionality in Lisp.
 
+;;; --- gdk:paintable-snapshot-impl --------------------------------------------
+
 (defmethod paintable-snapshot-impl ((paintable paintable) snapshot width height)
-  (error "Paintable of type ~a  does not implement GdkPaintable:snapshot."
+  (error "Paintable of type ~a  does not implement GDK:PAINTABLE-SNAPSHOT-IMPL"
          (g:type-name (g:type-from-instance paintable))))
+
+#+liber-documentation
+(setf (liber:alias-for-function 'paintable-snapshot-impl)
+      "Method"
+      (documentation 'paintable-snapshot-impl 'function)
+ "@version{2023-12-2}
+  @begin{short}
+    Method called from the @fun{gdk:paintable-snapshot} function.
+  @end{short}
+  @begin[Default methode]{dictionary}
+    @begin{pre}
+(defmethod paintable-snapshot-impl ((paintable paintable) snapshot width height)
+  (error \"Paintable of type ~a  does not implement GDK:PAINTABLE-SNAPSHOT-IMPL\"
+         (g:type-name (g:type-from-instance paintable))))
+    @end{pre}
+    This method must be implemented for a subclass which implements the
+    @class{gdk:paintable} interface. The default implementation signals an
+    error. See the @fun{gdk:paintable-snapshot} function for the syntax. The
+    @class{gdk:paintable} documentation shows a complete example of implementing
+    the interface.
+  @end{dictionary}
+  @see-class{gdk:paintable}
+  @see-function{gdk:paintable-snapshot}")
+
+(export 'paintable-snapshot-impl)
+
+;;; --- gdk:paintable-get-current-image-impl -----------------------------------
 
 (defmethod paintable-get-current-image-impl ((paintable paintable))
   (if (not (set-difference '(:static-size :static-contents)
@@ -251,14 +371,120 @@ lambda (paintable)    :run-last
                                   (g:object snapshot) snapshot
                                   :pointer (cffi:null-pointer)))))))
 
+#+liber-documentation
+(setf (liber:alias-for-function 'paintable-get-current-image-impl)
+      "Method"
+      (documentation 'paintable-get-current-image-impl 'function)
+ "@version{2023-12-2}
+  @begin{short}
+    Method called from the @fun{gdk:paintable-current-image} function.
+  @end{short}
+  @begin[Default method]{dictionary}
+    @begin{pre}
+(defmethod paintable-get-current-image-impl ((paintable paintable))
+  (if (not (set-difference '(:static-size :static-contents)
+                           (paintable-get-flags-impl paintable)))
+      ;; Paintable is immutable, return it
+      paintable
+      ;; Create a new paintable object
+      (let ((width (paintable-get-intrinsic-width-impl paintable))
+            (height (paintable-get-intrinsic-height-impl paintable)))
+        (if (or (<= width 0) (<= height 0))
+          (paintable-new-empty width height)
+          (let ((snapshot (g:object-new \"GtkSnapshot\")))
+            (paintable-snapshot paintable snapshot width height)
+            ;; The GTK package is not availabe at this point. We call the
+            ;; C function directly.
+            (cffi:foreign-funcall \"gtk_snapshot_free_to_paintable\"
+                                  (g:object snapshot) snapshot
+                                  :pointer (cffi:null-pointer)))))))
+    @end{pre}
+    The implementation of this method is not mandatory. The default
+    implementation returns the paintable itself, when it is a static paintable.
+    Otherwise, the default method returns an empty paintable or creates a
+    paintable for the intrinsic width and height.
+  @end{dictionary}
+  @see-class{gdk:paintable}
+  @see-function{gdk:paintable-current-image}")
+
+(export 'paintable-get-current-image-impl)
+
+;;; --- gdk:paintable-get-flags-impl -------------------------------------------
+
 (defmethod paintable-get-flags-impl ((paintable paintable))
   '())
+
+#+liber-documentation
+(setf (liber:alias-for-function 'paintable-get-flags-impl)
+      "Method"
+      (documentation 'paintable-get-flags-impl 'function)
+ "@version{2023-12-2}
+  @begin{short}
+    Method called from the @fun{gdk:paintable-flags} function.
+  @end{short}
+  @begin[Default method]{dictionary}
+    @begin{pre}
+(defmethod paintable-get-flags-impl ((paintable paintable))
+  '())
+    @end{pre}
+  The default method returns no flags set.
+  @end{dictionary}
+  @see-class{gdk:paintable}
+  @see-function{gdk:paintable-flags}")
+
+(export 'paintable-get-flags-impl)
+
+;;; --- gdk:paintable-get-intrinsic-width-impl ---------------------------------
 
 (defmethod paintable-get-intrinsic-width-impl ((paintable paintable))
   0)
 
+#+liber-documentation
+(setf (liber:alias-for-function 'paintable-get-intrinsic-width-impl)
+      "Method"
+      (documentation 'paintable-get-intrinsic-width-impl 'function)
+ "@version{2023-12-2}
+  @begin{short}
+    Method called from the @fun{gdk:paintable-intrinsic-width} function.
+  @end{short}
+  @begin[Default method]{dictionary}
+    @begin{pre}
+(defmethod paintable-get-intrinsic-width-impl ((paintable paintable))
+  0)
+    @end{pre}
+  The default method returns 0 for the intrinsic width.
+  @end{dictionary}
+  @see-class{gdk:paintable}
+  @see-function{gdk:paintable-intrinsic-width}")
+
+(export 'paintable-get-intrinsic-width-impl)
+
+;;; --- gdk:paintable-get-intrinsic-height-impl --------------------------------
+
 (defmethod paintable-get-intrinsic-height-impl ((paintable paintable))
   0)
+
+#+liber-documentation
+(setf (liber:alias-for-function 'paintable-get-intrinsic-height-impl)
+      "Method"
+      (documentation 'paintable-get-intrinsic-height-impl 'function)
+ "@version{2023-12-2}
+  @begin{short}
+    Method called from the @fun{gdk:paintable-intrinsic-height} function.
+  @end{short}
+  @begin[Default method]{dictionary}
+    @begin{pre}
+(defmethod paintable-get-intrinsic-height-impl ((paintable paintable))
+  0)
+    @end{pre}
+  The default method returns 0 for the intrinsic height.
+  @end{dictionary}
+  @see-class{gdk:paintable}
+  @see-function{gdk:paintable-intrinsic-height}")
+
+(export 'paintable-get-intrinsic-height-impl)
+
+;;; --- gdk:paintable-get-intrinsic-aspect-ration-impl -------------------------
 
 (defmethod paintable-get-intrinsic-aspect-ratio-impl ((paintable paintable))
   (let ((width (paintable-get-intrinsic-width-impl paintable))
@@ -267,11 +493,29 @@ lambda (paintable)    :run-last
         0.0d0
         (coerce (/ width height) 'double-float))))
 
-(export 'paintable-snapshot-impl)
-(export 'paintable-get-current-image-impl)
-(export 'paintable-get-flags-impl)
-(export 'paintable-get-intrinsic-width-impl)
-(export 'paintable-get-intrinsic-height-impl)
+#+liber-documentation
+(setf (liber:alias-for-function 'paintable-get-intrinsic-aspect-ratio-impl)
+      "Method"
+      (documentation 'paintable-get-intrinsic-aspect-ratio-impl 'function)
+ "@version{2023-12-2}
+  @begin{short}
+    Method called from the @fun{gdk:paintable-intrinsic-aspect-ratio} function.
+  @end{short}
+  @begin[Default method]{dictionary}
+    @begin{pre}
+(defmethod paintable-get-intrinsic-aspect-ratio-impl ((paintable paintable))
+  (let ((width (paintable-get-intrinsic-width-impl paintable))
+        (height (paintable-get-intrinsic-height-impl paintable)))
+    (if (or (<= width 0) (<= height 0))
+        0.0d0
+        (coerce (/ width height) 'double-float))))
+    @end{pre}
+  The default method returns 0.0d0 or the width to height ratio as a double
+  float.
+  @end{dictionary}
+  @see-class{gdk:paintable}
+  @see-function{gdk:paintable-intrinsic-aspect-ratio}")
+
 (export 'paintable-get-intrinsic-aspect-ratio-impl)
 
 ;;; ----------------------------------------------------------------------------
