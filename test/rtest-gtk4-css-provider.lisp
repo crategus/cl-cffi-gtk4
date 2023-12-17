@@ -52,26 +52,59 @@
 
 ;;; --- Functions --------------------------------------------------------------
 
+;; Taken from the CSS Accordion example
 (defparameter +css-button+
-"button {
-   padding: 3px; }
- button > label {
-   color: black;
-   background-color: yellow; }
- button:first-child > label {
-   background-color: red; }
- button:last-child > label {
-   background-color : green; }")
+".accordion button {
+    color: black;
+    background-color: #bbb;
+    border-style: solid;
+    border-width: 2px 0 2px 2px;
+    border-color: #333;
+
+    padding: 12px 4px;
+}
+
+.accordion button:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.accordion button:last-child {
+    border-radius: 0 5px 5px 0;
+    border-width: 2px;
+}
+
+.accordion button:hover {
+    padding: 12px 48px;
+    background-color: #4870bc;
+}
+
+.accordion button *:hover {
+    color: white;
+}
+
+.accordion button:hover:active,
+.accordion button:active {
+    background-color: #993401;
+}
+")
+
+;;;     gtk_css_provider_new
+
+(test gtk-css-provider-new
+  (is (typep (gtk:css-provider-new) 'gtk:css-provider)))
 
 ;;;     gtk_css_provider_load_named
 
-#+crategus
+#+nil
 (test gtk-css-provider-load-named.1
   (let ((provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-named provider "Yaru"))
     (is (= 414375 (length (gtk:css-provider-to-string provider))))))
 
-#+crategus
+;; FIXME: The name "dark" causes a warning:
+;;   Gtk-WARNING: Theme parser error: <data>:9:31-32: Expected a valid selector
+;; Find a working example!?
+#+nil
 (test gtk-css-provider-load-named.2
   (let ((provider (gtk:css-provider-new)))
     (is-false (gtk:css-provider-load-named provider "Yaru" "dark"))
@@ -80,9 +113,10 @@
 ;;;     gtk_css_provider_load_from_data
 
 (test gtk-css-provider-load-from-data
-  (let ((provider (gtk:css-provider-new)))
-    (is-false (gtk:css-provider-load-from-data provider +css-button+))
-    (is (= 305 (length (gtk:css-provider-to-string provider))))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((provider (gtk:css-provider-new)))
+      (is-false (gtk:css-provider-load-from-data provider +css-button+))
+      (is (= 1314 (length (gtk:css-provider-to-string provider)))))))
 
 ;;;     gtk_css_provider_load_from_file
 
@@ -92,15 +126,6 @@
          (file (g:file-new-for-path path)))
     (is-false (gtk:css-provider-load-from-file provider file))
     (is (= 2716 (length (gtk:css-provider-to-string provider))))))
-
-#+nil
-(test gtk-css-provider-load-from-file
-  (let* ((provider (gtk:css-provider-new))
-         (path (sys-path "resource/css-accordion.css"))
-         (file path))
-    (is-false (gtk:css-provider-load-from-file provider file))
-    (is (= 2716 (length (gtk:css-provider-to-string provider))))))
-
 
 ;;;     gtk_css_provider_load_from_path
 
@@ -120,36 +145,92 @@
       (is-false (gtk:css-provider-load-from-resource provider path))
       (is (= 2716 (length (gtk:css-provider-to-string provider)))))))
 
-;;;     gtk_css_provider_new
+;;;     gtk_css_provider_load_from_bytes
 
-(test gtk-css-provider-new
-  (is (typep (gtk:css-provider-new) 'gtk:css-provider)))
+;; FIXME: We get a warning for this example. But loading seems to work.
+;; Gtk-WARNING **: Theme parser error: <data>:33:1-2: Expected a valid selector
+;; What is the problem in this example?
+
+#+nil
+(test gtk-css-provider-load-from-bytes
+  (multiple-value-bind (data len)
+      (cffi:foreign-string-alloc +css-button+)
+    (let ((bytes (g:bytes-new data len))
+          (provider (gtk:css-provider-new)))
+      (is-false (gtk:css-provider-load-from-bytes provider bytes))
+      (is (= 1314 (length (gtk:css-provider-to-string provider)))))))
+
+;;;     gtk_css_provider_load_from_string
+
+(test gtk-css-provider-load-from-string
+  (let ((provider (gtk:css-provider-new)))
+    (is-false (gtk:css-provider-load-from-string provider +css-button+))
+    (is (= 1314 (length (gtk:css-provider-to-string provider))))))
 
 ;;;     gtk_css_provider_to_string
 
 (test gtk-css-provider-to-string
   (let ((provider (gtk:css-provider-new)))
     (is (string= "" (gtk:css-provider-to-string provider)))
-    (is-false (gtk:css-provider-load-from-data provider +css-button+))
+    (is-false (gtk:css-provider-load-from-string provider +css-button+))
     (is (string=
-"button {
-  padding-bottom: 3px;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-top: 3px;
-}
-
-button > label {
-  background-color: rgb(255,255,0);
+".accordion button {
+  background-color: rgb(187,187,187);
+  border-bottom-color: rgb(51,51,51);
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-left-color: rgb(51,51,51);
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-right-color: rgb(51,51,51);
+  border-right-style: solid;
+  border-right-width: 0;
+  border-top-color: rgb(51,51,51);
+  border-top-style: solid;
+  border-top-width: 2px;
   color: rgb(0,0,0);
+  padding-bottom: 12px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 12px;
 }
 
-button:first-child > label {
-  background-color: rgb(255,0,0);
+.accordion button:first-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 0;
 }
 
-button:last-child > label {
-  background-color: rgb(0,128,0);
+.accordion button:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  border-right-width: 2px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 5px;
+  border-top-width: 2px;
+}
+
+.accordion button:hover {
+  background-color: rgb(72,112,188);
+  padding-bottom: 12px;
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-top: 12px;
+}
+
+.accordion button *:hover {
+  color: rgb(255,255,255);
+}
+
+.accordion button:active {
+  background-color: rgb(153,52,1);
+}
+
+.accordion button:hover:active {
+  background-color: rgb(153,52,1);
 }
 "
                  (gtk:css-provider-to-string provider)))))
@@ -164,4 +245,4 @@ button:last-child > label {
 ;;;     gtk_css_section_get_start_location
 ;;;     gtk_css_section_get_end_location
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2023-12-16

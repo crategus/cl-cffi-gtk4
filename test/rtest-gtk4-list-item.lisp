@@ -20,11 +20,8 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkListItem")))
   ;; Check the children
-  (if *first-run-gtk-test*
-      (is (equal '()
-                 (list-children "GtkListItem")))
-      (is (equal '("GtkColumnViewCell")
-                 (list-children "GtkListItem"))))
+  (is (equal '("GtkColumnViewCell")
+             (list-children "GtkListItem")))
   ;; Check the interfaces
   (is (equal '()
              (list-interfaces "GtkListItem")))

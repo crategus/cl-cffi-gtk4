@@ -88,7 +88,7 @@
 ;;;     gsk_render_node_get_node_type
 
 (test gsk-render-node-ref/unref
-  (graphene:with-graphene-rect (rect 0 0 10 20)
+  (graphene:with-rect (rect 0 0 10 20)
     (let* ((color (gdk:rgba-parse "red"))
            (node (gsk:color-node-new color rect)))
       (is (eq :color-node (gsk:render-node-node-type node)))
@@ -122,7 +122,7 @@
     (gsk:render-node-unref node)))
 
 (test gsk-render-node-draw.1
-  (graphene:with-graphene-rect (rect 20 20 60 60)
+  (graphene:with-rect (rect 20 20 60 60)
     (let* ((color (gdk:rgba-parse "blue"))
            (node (gsk:color-node-new color rect))
            (path (sys-path "out/render-node.1.pdf"))
@@ -144,7 +144,7 @@
       (gsk:render-node-unref node))))
 
 (test gsk-render-node-draw.2
-  (graphene:with-graphene-rect (rect 20 20 60 60)
+  (graphene:with-rect (rect 20 20 60 60)
     (let* ((color (gdk:rgba-parse "red"))
            (node (gsk:color-node-new color rect))
            (filename "out/render-node.2.pdf")
@@ -158,7 +158,7 @@
 ;;;     gsk_render_node_deserialize
 
 (test gsk-render-node-serialize/deserialize
-  (graphene:with-graphene-rect (rect 0 0 10 20)
+  (graphene:with-rect (rect 0 0 10 20)
     (let* ((color (gdk:rgba-parse "red"))
            (node (gsk:color-node-new color rect))
            (bytes nil))
@@ -170,7 +170,7 @@
 ;;;     gsk_render_node_write_to_file
 
 (test gsk-render-node-write-to-file
-  (graphene:with-graphene-rect (rect 0 0 10 20)
+  (graphene:with-rect (rect 0 0 10 20)
     (let* ((color (gdk:rgba-parse "red"))
            (node (gsk:color-node-new color rect))
            (filename  (sys-path "out/render-node-to-file.txt")))
@@ -179,7 +179,7 @@
 ;;;     gsk_render_node_get_bounds
 
 (test gsk-render-node-bounds
-  (graphene:with-graphene-rects ((rect1 0 0 10 20) (rect2 0 0 0 0))
+  (graphene:with-rects ((rect1 0 0 10 20) (rect2 0 0 0 0))
     (let* ((color (gdk:rgba-parse "red"))
            (node (gsk:color-node-new color rect1)))
       (is (eq :color-node (gsk:render-node-node-type node)))
@@ -193,7 +193,7 @@
 ;;;     gsk_container_node_get_child
 
 (test gsk-container-node-new
-  (graphene:with-graphene-rect (rect 0 0 10 20)
+  (graphene:with-rect (rect 0 0 10 20)
     (let* ((color1 (gsk:color-node-new (gdk:rgba-new :red 1 :alpha 1) rect))
            (color2 (gsk:color-node-new (gdk:rgba-new :green 1 :alpha 1) rect))
            (color3 (gsk:color-node-new (gdk:rgba-new :blue 1 :alpha 1) rect))
@@ -210,7 +210,7 @@
       (is-false (gsk:render-node-unref node)))))
 
 (test gsk-container-node-draw
-  (graphene:with-graphene-rects ((rect1 10 10 80 80)
+  (graphene:with-rects ((rect1 10 10 80 80)
                                  (rect2 20 20 60 60)
                                  (rect3 30 30 40 40))
     (let* ((filename  (sys-path "out/render-node-to-file.txt"))
@@ -232,7 +232,7 @@
 (test gsk-color-node-new
   (let ((color (gdk:rgba-parse "red"))
         (node nil))
-    (graphene:with-graphene-rect (rect 0 0 1 10)
+    (graphene:with-rect (rect 0 0 1 10)
       (is (eq (g:gtype "GskColorNode")
               (g:type-from-instance (setf node
                                           (gsk:color-node-new color rect)))))
@@ -251,8 +251,8 @@
   (let ((color-stops (list (list 0 (gdk:rgba-parse "red"))
                            (list 1 (gdk:rgba-parse "blue"))))
         node)
-    (graphene:with-graphene-rect (bounds 0 0 100 100)
-      (graphene:with-graphene-points ((start 10 10) (end 90 90))
+    (graphene:with-rect (bounds 0 0 100 100)
+      (graphene:with-points ((start 10 10) (end 90 90))
         (is (cffi:pointerp (setf node
                                  (gsk:linear-gradient-node-new bounds
                                                                start end
@@ -273,8 +273,8 @@
                            (list 1.0 (gdk:rgba-parse "blue"))))
         (filename (sys-path "out/render-node-to-file.txt"))
         node)
-    (graphene:with-graphene-rect (bounds 0 0 100 100)
-      (graphene:with-graphene-points ((start 0 0) (end 100 100))
+    (graphene:with-rect (bounds 0 0 100 100)
+      (graphene:with-points ((start 0 0) (end 100 100))
 
         (setf node (gsk:linear-gradient-node-new bounds
                                                  start end color-stops))
@@ -289,8 +289,8 @@
                            (list 1.0 (gdk:rgba-parse "blue"))))
         (filename (sys-path "out/render-node-to-file.txt"))
         node)
-    (graphene:with-graphene-rect (bounds 0 0 100 100)
-      (graphene:with-graphene-points ((start 0 0) (end 30 30))
+    (graphene:with-rect (bounds 0 0 100 100)
+      (graphene:with-points ((start 0 0) (end 30 30))
 
         (setf node (gsk:repeating-linear-gradient-node-new bounds
                                                            start end
@@ -314,8 +314,8 @@
                            (list 1.0 (gdk:rgba-parse "blue"))))
         (filename (sys-path "out/render-node-to-file.txt"))
         node)
-    (graphene:with-graphene-rect (bounds 0 0 100 100)
-      (graphene:with-graphene-point (center 50 50)
+    (graphene:with-rect (bounds 0 0 100 100)
+      (graphene:with-point (center 50 50)
 
         (setf node
               (gsk:radial-gradient-node-new bounds
@@ -334,8 +334,8 @@
                            (list 1.0 (gdk:rgba-parse "blue"))))
         (filename (sys-path "out/render-node-to-file.txt"))
         node)
-    (graphene:with-graphene-rect (bounds 0 0 100 100)
-      (graphene:with-graphene-point (center 50 50)
+    (graphene:with-rect (bounds 0 0 100 100)
+      (graphene:with-point (center 50 50)
 
         (setf node
               (gsk:repeating-radial-gradient-node-new bounds
@@ -358,8 +358,8 @@
                            (list 1.0 (gdk:rgba-parse "blue"))))
         (filename (sys-path "out/render-node-to-file.txt"))
         node)
-    (graphene:with-graphene-rect (bounds 0 0 100 100)
-      (graphene:with-graphene-point (center 50 50)
+    (graphene:with-rect (bounds 0 0 100 100)
+      (graphene:with-point (center 50 50)
 
         (setf node
               (gsk:conic-gradient-node-new bounds center 360 color-stops))
@@ -375,7 +375,7 @@
 (test gsk-border-node-new
   ;; TODO: Simplify the usage with the implementation of macros
   (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
-    (graphene:with-graphene-rects ((rect -50 -50 100 100) bounds)
+    (graphene:with-rects ((rect -50 -50 100 100) bounds)
       (gsk:rounded-rect-init-from-rect outline rect 50)
       (let* ((widths (list 2.0 2 2.0d0 1/2))
              (black (gdk:rgba-parse "black"))
@@ -418,7 +418,7 @@
 (test gsk-border-node-draw
   ;; TODO: Simplify the usage with the implementation of macros
   (cffi:with-foreign-object (outline '(:struct gsk:rounded-rect))
-    (graphene:with-graphene-rects ((rect 10 10 80 80) bounds)
+    (graphene:with-rects ((rect 10 10 80 80) bounds)
       (gsk:rounded-rect-init-from-rect outline rect 10)
       (let* ((filename (sys-path "out/render-node-to-file.txt"))
              (widths (list 6.0 4.0 2.0 1/2))
@@ -452,7 +452,7 @@
 ;;;     gsk_shadow_node_get_child
 
 (test gsk-shadow-node-new
-  (graphene:with-graphene-rect (bounds 0 0 100 100)
+  (graphene:with-rect (bounds 0 0 100 100)
     (let* ((blue (gdk:rgba-parse "blue"))
            (green (gdk:rgba-parse "green"))
            (black (gdk:rgba-parse "black"))

@@ -71,7 +71,7 @@
 ;;;     gsk_transform_get_category
 
 (test gsk-transform-category.1
-  (graphene:with-graphene-point (point 10 20)
+  (graphene:with-point (point 10 20)
     (let* ((transform1 (gsk:transform-new))
            (transform2 (gsk:transform-translate transform1 point))
            (transform3 (gsk:transform-rotate transform1 10)))
@@ -81,7 +81,7 @@
 )))
 
 (test gsk-transform-category.2
-  (graphene:with-graphene-point (point 10 20)
+  (graphene:with-point (point 10 20)
     (let* ((transform (gsk:transform-new)))
       (is (eq :identity (gsk:transform-category transform)))
       (setf transform (gsk:transform-translate transform point))
@@ -94,7 +94,7 @@
 ;;;     gsk_transform_to_string
 
 (test gsk-transform-to-string
-  (graphene:with-graphene-point (point 10 20)
+  (graphene:with-point (point 10 20)
     (let ((transform (gsk:transform-new)))
       (is (string= "none" (gsk:transform-to-string transform)))
       (setf transform (gsk:transform-translate transform point))
@@ -138,8 +138,8 @@
 ;;;     gsk_transform_to_matrix
 
 (test gsk-transform-to-matrix
-  (graphene:with-graphene-point (point 3 4)
-    (graphene:with-graphene-matrix (matrix)
+  (graphene:with-point (point 3 4)
+    (graphene:with-matrix (matrix)
       (let ((transform (gsk:transform-new)))
         (is (cffi:pointer-eq matrix
                              (gsk:transform-to-matrix transform matrix)))
@@ -160,7 +160,7 @@
 ;;;     gsk_transform_to_2d
 
 (test gsk-transform-to-2d
-  (graphene:with-graphene-point (point 3 4)
+  (graphene:with-point (point 3 4)
     (let ((transform (gsk:transform-new)))
       (is (equal '(1.0 0.0 0.0 1.0 0.0 0.0)
                  (gsk:transform-to-2d transform)))
@@ -171,7 +171,7 @@
 ;;;     gsk_transform_to_2d_components                     Since 4.6
 
 (test gsk-transform-to-2-components
-  (graphene:with-graphene-point (point 5 6)
+  (graphene:with-point (point 5 6)
     (let ((transform (gsk:transform-new)))
       (is (equal '(0.0 0.0 1.0 1.0 0.0 0.0 0.0)
                  (gsk:transform-to-2d-components transform)))
@@ -185,7 +185,7 @@
 ;;;     gsk_transform_to_affine
 
 (test gsk-transform-to-affine
-  (graphene:with-graphene-point (point 5 6)
+  (graphene:with-point (point 5 6)
     (let ((transform (gsk:transform-new)))
       (is (equal '(1.0 1.0 0.0 0.0)
                  (gsk:transform-to-affine transform)))
@@ -196,7 +196,7 @@
 ;;;     gsk_transform_to_translate
 
 (test gsk-transform-to-translate
-  (graphene:with-graphene-point (point 5 6)
+  (graphene:with-point (point 5 6)
     (let ((transform (gsk:transform-new)))
       (is (equal '(0.0 0.0)
                  (gsk:transform-to-translate transform)))
@@ -207,7 +207,7 @@
 ;;;     gsk_transform_transform
 
 (test gsk-transform-transform
-  (graphene:with-graphene-point (point 2 3)
+  (graphene:with-point (point 2 3)
     (let ((transform (gsk:transform-new))
           (other (gsk:transform-new))
           (result nil))
@@ -219,7 +219,7 @@
 ;;;     gsk_transform_invert
 
 (test gsk-transform-invert
-  (graphene:with-graphene-point (point 2 3)
+  (graphene:with-point (point 2 3)
     (let ((transform (gsk:transform-new))
           (other (gsk:transform-new))
           (result nil))
@@ -233,7 +233,7 @@
 ;;;     gsk_transform_matrix
 
 (test gsk-transform-matrix
-  (graphene:with-graphene-matrix (matrix)
+  (graphene:with-matrix (matrix)
     (let ((transform (gsk:transform-new)))
       (graphene:matrix-init-scale matrix 1 2 3)
       (setf transform (gsk:transform-matrix transform matrix))
@@ -267,7 +267,7 @@
 ;;;     gsk_transform_rotate_3d
 
 (test gsk-transform-rotate-3d.z
-  (graphene:with-graphene-vec3 (vec 0 0 1)
+  (graphene:with-vec3 (vec 0 0 1)
     (let ((transform (gsk:transform-new)))
       (is (string= "none" (gsk:transform-to-string transform)))
       (is (string= "rotate(10)"
@@ -276,14 +276,14 @@
       (is (string= "none" (gsk:transform-to-string transform))))))
 
 (test gsk-transform-rotate-3d.x
-  (graphene:with-graphene-vec3 (vec 1 0 0)
+  (graphene:with-vec3 (vec 1 0 0)
     (let ((transform (gsk:transform-new)))
       (is (string= "rotate3d(1, 0, 0, 10)"
                    (gsk:transform-to-string
                      (gsk:transform-rotate-3d transform 10 vec)))))))
 
 (test gsk-transform-rotate-3d.y
-  (graphene:with-graphene-vec3 (vec 0 1 0)
+  (graphene:with-vec3 (vec 0 1 0)
     (let ((transform (gsk:transform-new)))
       (is (string= "rotate3d(0, 1, 0, 10)"
                    (gsk:transform-to-string

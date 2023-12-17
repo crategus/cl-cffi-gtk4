@@ -265,7 +265,19 @@
 ;;;     gtk_widget_class_set_activate_signal_from_name
 ;;;     gtk_widget_class_get_activate_signal
 ;;;     gtk_widget_class_set_activate_signal
+
 ;;;     gtk_widget_activate
+
+(test gtk-widget-activate
+  (let ((button (make-instance 'gtk:button))
+        (message nil))
+    (g:signal-connect button "activate"
+                      (lambda (button)
+                        (declare (ignore button))
+                        (setf message "Button is activated")))
+    (is-true (gtk:widget-activate button))
+    (is (string= "Button is activated" message))))
+
 ;;;     gtk_widget_is_focus
 ;;;     gtk_widget_grab_focus
 ;;;     gtk_widget_get_native
@@ -475,4 +487,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; --- 2023-9-13 --------------------------------------------------------------
+;;; --- 2023-11-27 -------------------------------------------------------------

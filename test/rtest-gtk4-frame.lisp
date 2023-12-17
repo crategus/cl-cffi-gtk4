@@ -68,6 +68,40 @@
     (is (typep (gtk:frame-label-widget frame) 'gtk:label))
     (is (string= "label" (gtk:label-label (gtk:frame-label-widget frame))))))
 
+(test gtk-frame-properties.3
+  (let ((frame (gtk:frame-new "label")))
+    ;; The default value is 0.0
+    (is (= 0.0 (gtk:frame-label-xalign frame)))
+    ;; Set float value
+    (is (= 1.0 (setf (gtk:frame-label-xalign frame) 1.0)))
+    (is (= 1.0 (gtk:frame-label-xalign frame)))
+    ;; Set integer value
+    (is (= 1.0 (setf (gtk:frame-label-xalign frame) 1)))
+    (is (= 1.0 (gtk:frame-label-xalign frame)))
+    ;; Set rational value
+    (is (= 0.5 (setf (gtk:frame-label-xalign frame) 1/2)))
+    (is (= 0.5 (gtk:frame-label-xalign frame)))
+    ;; Set double float value
+    (is (= 0.3d0 (setf (gtk:frame-label-xalign frame) 0.3d0)))
+    (is (= 0.3 (gtk:frame-label-xalign frame)))))
+
+(test gtk-frame-properties.4
+  ;; Initalize the label-xalign property with different types for the value
+  (is (= 0.0 (gtk:frame-label-xalign (make-instance 'gtk:frame))))
+  (is (= 1.0 (gtk:frame-label-xalign (make-instance 'gtk:frame
+                                                    :label-xalign 1.0))))
+  (is (= 1.0 (gtk:frame-label-xalign (make-instance 'gtk:frame
+                                                    :label-xalign 1))))
+  (is (= 1.0 (gtk:frame-label-xalign (make-instance 'gtk:frame
+                                                    :label-xalign 1.0d0))))
+  (is (= 0.5 (gtk:frame-label-xalign (make-instance 'gtk:frame
+                                                    :label-xalign 1/2))))
+  ;; Invalid label-xalign value does not change the default value
+  (is (= 0.0 (gtk:frame-label-xalign (make-instance 'gtk:frame
+                                                    :label-xalign 10))))
+  (is (= 0.0 (gtk:frame-label-xalign (make-instance 'gtk:frame
+                                                    :label-xalign -10)))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_frame_new
@@ -77,4 +111,24 @@
   (is (typep (gtk:frame-new nil) 'gtk:frame))
   (is (typep (gtk:frame-new "label") 'gtk:frame)))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;;     gtk_frame_get_align
+;;;     gtk_frame_set_align
+
+(test gtk-frame-label-align
+  (let ((frame (gtk:frame-new "label")))
+    (is (= 0.0 (gtk:frame-label-align frame)))
+    (is (= 1.0 (setf (gtk:frame-label-align frame) 1.0)))
+    (is (= 1.0 (gtk:frame-label-align frame)))
+    (is (= 1.0 (setf (gtk:frame-label-align frame) 1)))
+    (is (= 1.0 (gtk:frame-label-align frame)))
+    (is (= 0.5 (setf (gtk:frame-label-align frame) 1/2)))
+    (is (= 0.5 (gtk:frame-label-align frame)))
+    (is (= 0.3d0 (setf (gtk:frame-label-align frame) 0.3d0)))
+    (is (= 0.3 (gtk:frame-label-align frame)))
+    ;; The value is not in the range [0.0, 1.0], the property is not changed
+    (is (= -10 (setf (gtk:frame-label-align frame) -10)))
+    (is (= 0.3 (gtk:frame-label-align frame)))
+    (is (= 10 (setf (gtk:frame-label-align frame) +10)))
+    (is (= 0.3 (gtk:frame-label-align frame)))))
+
+;;; --- 2023-12-16 --------------------------------------------------------------

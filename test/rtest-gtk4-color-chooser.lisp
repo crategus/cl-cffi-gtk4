@@ -7,7 +7,7 @@
 
 ;;;     GtkColorChooser
 
-(test color-chooser-interface
+(test gtk-color-chooser-interface
   ;; Type check
   (is (g:type-is-interface "GtkColorChooser"))
   ;; Check the registered name
@@ -32,7 +32,7 @@
 ;;;     rgba
 ;;;     use-alpha
 
-(test color-chooser-properties
+(test gtk-color-chooser-properties
   (let ((chooser (make-instance 'gtk:color-button)))
     (is (typep (gtk:color-chooser-rgba chooser) 'gdk:rgba))
     (is (typep (setf (gtk:color-chooser-rgba chooser) (gdk:rgba-parse "Blue"))
@@ -44,7 +44,7 @@
 
 ;;;     color-activated
 
-(test color-chooser-color-activated-signal
+(test gtk-color-chooser-color-activated-signal
   (let ((query (g:signal-query (g:signal-lookup "color-activated"
                                                 "GtkColorChooser"))))
     (is (string= "color-activated" (g:signal-query-signal-name query)))
@@ -63,7 +63,7 @@
 
 ;;;     gtk_hsv_to_rgb
 
-(test hsv-to-rgb
+(test gtk-hsv-to-rgb
   (is (equal '(0.0 0.0 0.0) (multiple-value-list (gtk:hsv-to-rgb 1 0 0))))
   (is (equal '(0.0 0.0 0.0) (multiple-value-list (gtk:hsv-to-rgb 0.5 0 0))))
   (is (equal '(1.0 0.0 0.0) (multiple-value-list (gtk:hsv-to-rgb 1 1 1))))
@@ -71,10 +71,10 @@
 
 ;;;     gtk_rgb_to_hsv
 
-(test rgb-to-hsv
+(test gtk-rgb-to-hsv
   (is (equal '(0.0 1.0 1.0) (multiple-value-list (gtk:rgb-to-hsv 1 0 0))))
   (is (equal '(0.0 1.0 0.5) (multiple-value-list (gtk:rgb-to-hsv 0.5 0 0))))
   (is (equal '(0.0 0.0 1.0) (multiple-value-list (gtk:rgb-to-hsv 1 1 1))))
   (is (equal '(0.0 0.0 0.5) (multiple-value-list (gtk:rgb-to-hsv 0.5 0.5 0.5)))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; --- 2023-12-3 --------------------------------------------------------------
