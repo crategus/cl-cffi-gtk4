@@ -2,7 +2,7 @@
 ;;; gdk4.rgba.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -72,7 +72,7 @@
       (documentation 'rgba 'type)
  "@version{2023-1-22}
   @begin{short}
-    The @sym{gdk:rgba} structure is used to represent a (possibly translucent)
+    The @class{gdk:rgba} structure is used to represent a (possibly translucent)
     color, in a way that is compatible with Cairo's notion of color.
   @end{short}
   @begin{pre}
@@ -196,10 +196,10 @@
   @end{dictionary}
   @see-struct{gdk:rgba}
   @see-function{gdk:rgba-copy}"
-  (make-rgba :red (coerce red 'float)
-             :green (coerce green 'float)
-             :blue (coerce blue 'float)
-             :alpha (coerce alpha 'float)))
+  (make-rgba :red (coerce red 'single-float)
+             :green (coerce green 'single-float)
+             :blue (coerce blue 'single-float)
+             :alpha (coerce alpha 'single-float)))
 
 (export 'rgba-new)
 
