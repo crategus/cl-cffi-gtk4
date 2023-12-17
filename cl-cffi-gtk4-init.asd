@@ -24,7 +24,7 @@
 
 (defsystem :cl-cffi-gtk4-init
   :name "cl-cffi-gtk4-init"
-  :version "0.5.0"
+  :version "0.6.0"
   :author "Dieter Kaiser"
   :license "MIT"
   :serial t

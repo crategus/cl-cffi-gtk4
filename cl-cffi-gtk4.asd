@@ -24,7 +24,7 @@
 
 (defsystem :cl-cffi-gtk4
   :name "cl-cffi-gtk4"
-  :version "0.5.0"
+  :version "0.6.0"
   :author "Dieter Kaiser"
   :license "MIT"
   :serial t
@@ -205,6 +205,8 @@
      (:file "gtk4.grid-view")
      (:file "gtk4.column-view")
      (:file "gtk4.column-view-column")
+     (:file "gtk4.column-view-cell"              :if-feature :gtk-4-12)
+     (:file "gtk4.column-view-row"               :if-feature :gtk-4-12)
      (:file "gtk4.drop-down")
 
      ;; Tree support
@@ -475,7 +477,7 @@
 
 (defsystem :cl-cffi-gtk4/test
   :name "cl-cffi-gtk4/test"
-  :version "0.5.0"
+  :version "0.6.0"
   :author "Dieter Kaiser"
   :license "MIT"
   :depends-on (:cl-cffi-gtk4 :fiveam :iterate)
@@ -534,7 +536,8 @@
      (:file "rtest-gsk4-transform")
      (:file "rtest-gsk4-render-node")
      (:file "rtest-gsk4-rounded-rect")
-     (:file "rtest-gsk4-gl-shader")
+; TODO: No OpenGL support implemented
+;    (:file "rtest-gsk4-gl-shader")
 
      ;; GListModel support
      (:file "rtest-gtk4-bitset")
@@ -577,11 +580,13 @@
 ;    gtk4.signal-list-item-factory.lisp
 ;    gtk4.builder-list-item-factory.lisp
      (:file "rtest-gtk4-scroll-info"             :if-feature :gtk-4-12)
-;    (:file "gtk4.list-header"                   :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-list-header"             :if-feature :gtk-4-12)
      (:file "rtest-gtk4-list-view")
 ;    gtk4.grid-view.lisp
 ;    gtk4.column-view.lisp
 ;    gtk4.column-view-column.lisp
+     (:file "rtest-gtk4-column-view-cell"        :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-column-view-row"         :if-feature :gtk-4-12)
 ;    gtk4.drop-down.lisp
 
      ;; GTK Core
@@ -705,7 +710,7 @@
 ;    (:file "gtk4.tree-model-sort")
 ;    (:file "gtk4.tree-model-filter")
 
-;    (:file "gtk4.cell-renderer")
+     (:file "rtest-gtk4-cell-renderer")
 ;    (:file "gtk4.cell-renderer-text")
 ;    (:file "gtk4.cell-renderer-accel")
 ;    (:file "gtk4.cell-renderer-combo")
@@ -744,10 +749,10 @@
 ;    (:file "gtk4.drop-down")
 
      ;; Selector Widgets and Dialogs
-;     (:file "rtest-gtk4-color-chooser")
-;     (:file "rtest-gtk4-color-button")
-;     (:file "rtest-gtk4-color-chooser-widget")
-;     (:file "rtest-gtk4-color-chooser-dialog")
+     (:file "rtest-gtk4-color-chooser")
+;    (:file "rtest-gtk4-color-button")
+;    (:file "rtest-gtk4-color-chooser-widget")
+;    (:file "rtest-gtk4-color-chooser-dialog")
 
      (:file "rtest-gtk4-color-dialog"            :if-feature :gtk-4-10)
      (:file "rtest-gtk4-color-dialog-button"     :if-feature :gtk-4-10)

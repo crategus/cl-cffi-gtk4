@@ -307,7 +307,7 @@ GTK Core Reference
 
 Theming in GTK
 
-  gtk4.css-provider.lisp               GtkCssProvider                 GTK 4.12 &
+  gtk4.css-provider.lisp               GtkCssProvider                 GTK 4.12
   gtk4.style-provider.lisp             GtkStyleProvider               GTK 4.12
   gtk4.icon-paintable.lisp             GtkIconPaintable               GTK 4.12 &
   gtk4.icon-theme.lisp                 GtkIconTheme                   GTK 4.12

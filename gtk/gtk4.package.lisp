@@ -778,6 +778,25 @@ GtkCellRenderer         GtkWidget
       @about-generic{column-view-column-visible}
       @about-function{column-view-column-new}
     @end{subsection}
+    @begin[GtkColumnViewCell]{subsection}
+      @about-class{column-view-cell}
+      @about-generic{column-view-cell-child}
+      @about-generic{column-view-cell-focusable}
+      @about-generic{column-view-cell-item}
+      @about-generic{column-view-cell-position}
+      @about-generic{column-view-cell-selected}
+    @end{subsection}
+    @begin[GtkColumnViewRow]{subsection}
+      @about-class{column-view-row}
+      @about-generic{column-view-row-accessible-description}
+      @about-generic{column-view-row-accessible-label}
+      @about-generic{column-view-row-activatable}
+      @about-generic{column-view-row-focusable}
+      @about-generic{column-view-row-item}
+      @about-generic{column-view-row-position}
+      @about-generic{column-view-row-selectable}
+      @about-generic{column-view-row-selected}
+    @end{subsection}
     @begin[GtkDropDown]{subsection}
       Choose an item from a list.
       @about-class{drop-down}
@@ -1104,6 +1123,7 @@ GtkCellRenderer         GtkWidget
       @about-function{list-box-append}
       @about-function{list-box-insert}
       @about-function{list-box-remove}
+      @about-function{list-box-remove-all}
       @about-function{list-box-select-row}
       @about-function{list-box-unselect-row}
       @about-function{list-box-select-all}
@@ -1149,6 +1169,7 @@ GtkCellRenderer         GtkWidget
       @about-function{flow-box-append}
       @about-function{flow-box-prepend}
       @about-function{flow-box-remove}
+      @about-function{flow-box-remove-all}
       @about-function{flow-box-child-at-index}
       @about-function{flow-box-child-at-pos}
       @about-function{flow-box-set-hadjustment}
@@ -2509,7 +2530,7 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Ornaments]{section}
     @begin[GtkFrame]{subsection}
-      A widget with a decorative frame and optional label.
+      A widget with a frame and an optional label.
       @about-class{frame}
       @about-generic{frame-child}
       @about-generic{frame-label}
@@ -3792,11 +3813,13 @@ GtkCellRenderer         GtkWidget
       @about-function{css-section-end-location}
       @about-class{css-provider}
       @about-function{css-provider-new}
+      @about-function{css-provider-load-named}
+      @about-function{css-provider-load-from-bytes}
       @about-function{css-provider-load-from-data}
       @about-function{css-provider-load-from-file}
       @about-function{css-provider-load-from-path}
       @about-function{css-provider-load-from-resource}
-      @about-function{css-provider-load-named}
+      @about-function{css-provider-load-from-string}
       @about-function{css-provider-to-string}
     @end{subsection}
     @begin[GtkIconPaintable]{subsection}
