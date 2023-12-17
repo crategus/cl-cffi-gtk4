@@ -254,8 +254,6 @@ lambda (chooser color)    :run-first
 ;;; gtk_hsv_to_rgb ()
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Check the implementation for the GTK3 library
-
 (cffi:defcfun ("gtk_hsv_to_rgb" %hsv-to-rgb) :void
   (h :float)
   (s :float)
@@ -266,10 +264,10 @@ lambda (chooser color)    :run-first
 
 (defun hsv-to-rgb (h s v)
  #+liber-documentation
- "@version{#2022-8-27}
-  @argument[h]{a float with the hue component}
-  @argument[s]{a float with the saturation component}
-  @argument[v]{a float with the value component}
+ "@version{2023-12-3}
+  @argument[h]{a number coerced to a float with the hue component}
+  @argument[s]{a number coerced to a float with the saturation component}
+  @argument[v]{a number coerced to a float with the value component}
   @begin{return}
     @arg{r} -- a float with the red component @br{}
     @arg{g} -- a float with the green component @br{}
@@ -282,9 +280,9 @@ lambda (chooser color)    :run-first
   @see-class{gtk:hsv}
   @see-function{gtk:rgb-to-hsv}"
   (cffi:with-foreign-objects ((r :float) (g :float) (b :float))
-    (%hsv-to-rgb (coerce h 'float)
-                 (coerce s 'float)
-                 (coerce v 'float)
+    (%hsv-to-rgb (coerce h 'single-float)
+                 (coerce s 'single-float)
+                 (coerce v 'single-float)
                  r g b)
     (values (cffi:mem-ref r :float)
             (cffi:mem-ref g :float)
@@ -308,10 +306,10 @@ lambda (chooser color)    :run-first
 
 (defun rgb-to-hsv (r g b)
  #+liber-documentation
- "@version{#2022-8-27}
-  @argument[r]{a float with the red component}
-  @argument[g]{a float with the green component}
-  @argument[b]{a float with the blue component}
+ "@version{2023-12-3}
+  @argument[r]{a number coerced to a float with the red component}
+  @argument[g]{a number coerced to a float with the green component}
+  @argument[b]{a number coerced to a float with the blue component}
   @begin{return}
     @arg{h} -- a float with the hue component @br{}
     @arg{s} -- a float with the saturation component @br{}
@@ -324,9 +322,9 @@ lambda (chooser color)    :run-first
   @see-class{gtk:hsv}
   @see-function{gtk:hsv-to-rgb}"
   (cffi:with-foreign-objects ((h :float) (s :float) (v :float))
-    (%rgb-to-hsv (coerce r 'float)
-                 (coerce g 'float)
-                 (coerce b 'float)
+    (%rgb-to-hsv (coerce r 'single-float)
+                 (coerce g 'single-float)
+                 (coerce b 'single-float)
                  h s v)
     (values (cffi:mem-ref h :float)
             (cffi:mem-ref s :float)
