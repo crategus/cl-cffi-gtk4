@@ -25,6 +25,7 @@ List of files for the GDK 4 Library
 
   gdk4.paintable.lisp              GdkPaintable, GdkSnapshot          GDK 4.12
   gdk4.texture.lisp                GdkTexture, GdkMemoryTexture, ...  GDK 4.10 &
+  gdk4.texture-downloader.lisp     GdkTextureDownloader               GDK 4.12 +
 
  Surfaces, Toplevels, Popups
 
@@ -66,10 +67,10 @@ List of files for the GDK 4 Library
 
  Pixbuf, Pango, Cairo and Backends interaction
 
-  gdk4.pixbuf-interaction.lisp     GdkPixbuf interaction              GDK 4.0  +
+  gdk4.pixbuf-interaction.lisp     GdkPixbuf interaction              GDK 4.12
   gdk4.pango-interaction.lisp      Pango interaction                  GDK 4.0  +
   gdk4.cairo-interaction.lisp      Cairo interaction                  GDK 4.10
   gdk4.x11-interaction.lisp                                           GDK 4.0  +
   gdk4.wayland-interaction.lisp                                       GDK 4.0  +
 
-2023-12-2
+2023-12-17
