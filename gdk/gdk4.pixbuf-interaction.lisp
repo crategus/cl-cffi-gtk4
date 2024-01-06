@@ -2,11 +2,11 @@
 ;;; gdk4.pixbuf-interaction.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -43,16 +43,23 @@
 ;;; gdk_pixbuf_get_from_surface ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_pixbuf_get_from_surface" pixbuf-from-surface)
+(cffi:defcfun ("gdk_pixbuf_get_from_surface" %pixbuf-from-surface)
     (g:object gdk-pixbuf:pixbuf)
+  (surface (:pointer (:struct cairo:surface-t)))
+  (xsrc :int)
+  (ysrc :int)
+  (width :int)
+  (height :int))
+
+(defun pixbuf-from-surface (surface xsrc ysrc width height)
  #+liber-documentation
- "@version{#2023-4-14}
+ "@version{2023-12-17}
   @argument[surface]{a @symbol{cairo:surface-t} instance to copy from}
   @argument[xsrc]{an integer with the source x coordinate within @arg{surface}}
   @argument[ysrc]{an integer with the source y coordinate within @arg{surface}}
   @argument[width]{an integer with the width in pixels of region to get}
   @argument[height]{an integer with the height in pixels of region to get}
-  @return{A newly created @class{gdk-pixbuf:pixbuf} object, or @code{nil} on
+  @return{The newly created @class{gdk-pixbuf:pixbuf} object, or @code{nil} on
     error.}
   @begin{short}
     Transfers image data from a @symbol{cairo:surface-t} instance and converts
@@ -62,13 +69,17 @@
 
   This function will create an RGB pixbuf with 8 bits per channel. The pixbuf
   will contain an alpha channel if the surface contains one.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.12. Use the @class{gdk:texture} class
+    and subclasses instead Cairo surfaces and pixbufs.
+  @end{dictionary}
   @see-class{gdk-pixbuf:pixbuf}
+  @see-class{gdk:texture}
   @see-symbol{cairo:surface-t}"
-  (surface (:pointer (:struct cairo:surface-t)))
-  (xsrc :int)
-  (ysrc :int)
-  (width :int)
-  (height :int))
+  #+(and gtk-4-12 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:PIXBUF-FROM-SURFACE is deprecated since 4.12."))
+  (%pixbuf-from-surface surface xsrc ysrc width height))
 
 (export 'pixbuf-from-surface)
 
@@ -76,20 +87,30 @@
 ;;; gdk_pixbuf_get_from_texture ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_pixbuf_get_from_texture" pixbuf-from-texture)
+(cffi:defcfun ("gdk_pixbuf_get_from_texture" %pixbuf-from-texture)
     (g:object gdk-pixbuf:pixbuf)
+  (texture (g:object texture)))
+
+(defun pixbuf-from-texture (texture)
  #+liber-documentation
- "@version{#2023-4-14}
+ "@version{2023-12-17}
   @argument[texture]{a @class{gdk:texture} object}
-  @return{A new @class{gdk-pixbuf:pixbuf} object, or @code{nil} on error.}
+  @return{The new @class{gdk-pixbuf:pixbuf} object, or @code{nil} on error.}
   @begin{short}
     Creates a new @class{gdk-pixbuf:pixbuf} object from @arg{texture}.
   @end{short}
   This should generally not be used in newly written code as later stages will
   almost certainly convert the pixbuf back into a texture to draw it on screen.
+  @begin[Warning]{dictionary}
+    This function is deprecated since 4.12. Use the @class{gdk:texture} class
+    and subclasses instead Cairo surfaces and pixbufs.
+  @end{dictionary}
   @see-class{gdk:texture}
   @see-class{gdk-pixbuf:pixbuf}"
-  (texture (g:object texture)))
+  #+(and gtk-4-12 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:PIXBUF-FROM-TEXTURE is deprecated since 4.12."))
+  (%pixbuf-from-texture texture))
 
 (export 'pixbuf-from-texture)
 
