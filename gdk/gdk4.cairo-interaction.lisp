@@ -2,11 +2,11 @@
 ;;; gdk4.cairo-interaction.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -168,9 +168,20 @@
 ;;; gdk_cairo_draw_from_gl ()                              Since 4.6 deprecated
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_cairo_draw_from_gl" cairo-draw-from-gl) :void
+(cffi:defcfun ("gdk_cairo_draw_from_gl" %cairo-draw-from-gl) :void
+  (cr (:pointer (:struct cairo:context-t)))
+  (surface (g:object gdk:surface))
+  (source :int)
+  (type :int)
+  (scale :int)
+  (x :int)
+  (y :int)
+  (width :int)
+  (height :int))
+
+(defun cairo-draw-from-gl (cr surface source type scale x y width height)
  #+liber-documentation
- "@version{#2023-9-19}
+ "@version{2023-12-17}
   @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[surface]{a @class{gdk:surface} object we are rendering for,
     not necessarily into}
@@ -215,15 +226,10 @@
   @see-class{gdk:surface}
   @see-function{gdk:gl-texture-new}
   @see-function{gdk:texture-download}"
-  (cr (:pointer (:struct cairo:context-t)))
-  (surface (g:object gdk:surface))
-  (source :int)
-  (type :int)
-  (scale :int)
-  (x :int)
-  (y :int)
-  (width :int)
-  (height :int))
+  #+(and gtk-4-6 gtk-warn-deprecated)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GDK:CAIRO-DRAW-FROM-GL is deprecated since 4.6."))
+  (%cairo-draw-from-gl cr surface source type scale x y width height))
 
 (export 'cairo-draw-from-gl)
 
