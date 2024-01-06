@@ -392,6 +392,16 @@
       @about-function{gl-texture-new}
       @about-function{gl-texture-release}
     @end{subsection}
+    @begin[GdkTextureDownloader]{subsection}
+      @about-symbol{texture-downloader}
+      @about-function{texture-downloader-new}
+      @about-function{texture-downloader-copy}
+      @about-function{texture-downloader-download-bytes}
+      @about-function{texture-downloader-download-into}
+      @about-function{texture-downloader-free}
+      @about-function{texture-downloader-format}
+      @about-function{texture-downloader-texture}
+    @end{subsection}
   @end{section}
   @begin[Surfaces, Toplevels, Popups]{section}
     @begin[Surfaces]{subsection}
