@@ -48,7 +48,7 @@
                     "libgtk-4.dylib"
                     "libgtk-x11-4.0.0.dylib"
                     "libgtk-x11-4.0.dylib"))
-      (:windows (:or "libgtk-4-1.dll" "libgtk-win32-4.0-0.dll"))
+      (:windows (:or "libgtk-4-1.dll" "libgtk-4.dll"))
       (t "libgtk-4-0"))
     ;; push the hostname on *features*
     (pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)

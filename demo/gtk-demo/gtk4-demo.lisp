@@ -943,7 +943,7 @@
   ;; Load the application menu
   (let ((builder (make-instance 'gtk:builder)))
     (gtk:builder-add-from-string builder *gtk4-demo-menu*)
-    ;; TODO: Improve the implemenation of the menubar.
+    ;; TODO: Improve the implementation of the menubar.
     (setf (gtk:application-menubar application)
           (gtk:builder-object builder "appmenu")))
   ;; Add action "inspector" to the application

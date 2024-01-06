@@ -51,6 +51,7 @@
      ;; Paintables, Textures
      (:file "gdk4.paintable")
      (:file "gdk4.texture")
+     (:file "gdk4.texture-downloader"            :if-feature :gtk-4-10)
 
      ;; Events
      (:file "gdk4.event")
