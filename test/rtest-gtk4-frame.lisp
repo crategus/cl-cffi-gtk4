@@ -125,10 +125,12 @@
     (is (= 0.5 (gtk:frame-label-align frame)))
     (is (= 0.3d0 (setf (gtk:frame-label-align frame) 0.3d0)))
     (is (= 0.3 (gtk:frame-label-align frame)))
+    ;; These tests generates warnings
     ;; The value is not in the range [0.0, 1.0], the property is not changed
-    (is (= -10 (setf (gtk:frame-label-align frame) -10)))
-    (is (= 0.3 (gtk:frame-label-align frame)))
-    (is (= 10 (setf (gtk:frame-label-align frame) +10)))
-    (is (= 0.3 (gtk:frame-label-align frame)))))
+;    (is (= -10 (setf (gtk:frame-label-align frame) -10)))
+;    (is (= 0.3 (gtk:frame-label-align frame)))
+;    (is (= 10 (setf (gtk:frame-label-align frame) +10)))
+;    (is (= 0.3 (gtk:frame-label-align frame)))
+))
 
-;;; --- 2023-12-16 --------------------------------------------------------------
+;;; 2024-1-6
