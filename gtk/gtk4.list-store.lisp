@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -108,9 +108,9 @@
   accept GObjects are handled a little differently. The @class{gtk:list-store}
   object will keep a reference to the object instead of copying the value. As a
   result, if the object is modified, it is up to the application writer to call
-  the @fun{gtk:tree-model-row-changed} function to emit the \"row-changed\"
-  signal. This most commonly affects lists with @class{gdk:texture} objects
-  stored.
+  the @fun{gtk:tree-model-row-changed} function to emit the
+  @code{\"row-changed\"} signal. This most commonly affects lists with
+  @class{gdk:texture} objects stored.
 
   @subheading{Performance Considerations}
     Internally, the @class{gtk:list-store} object was implemented with a linked
@@ -128,17 +128,17 @@
     row is being appended to the store and the values filled in in a single
     operation with regard to the @class{gtk:tree-model} interface signaling. In
     contrast, using e.g. the @fun{gtk:list-store-append} function and then the
-    @fun{gtk:list-store-set} function will first create a row, which triggers 
-    the \"row-inserted\" signal on the @class{gtk:list-store} object. The row,
-    however, is still empty, and any signal handler connecting to the
-    \"row-inserted\" signal on this particular store should be prepared for the
-    situation that the row might be empty. This is especially important if you
-    are wrapping the @class{gtk:list-store} object inside a
-    @class{gtk:tree-model-filter} object and are using a 
-    @symbol{gtk:tree-model-filter-visible-func} callback function. Using any of 
-    the non-atomic operations to append rows to the @class{gtk:list-store} 
-    object will cause the @symbol{gtk:tree-model-filter-visible-func} callback 
-    function to be visited with an empty row first. The function must be 
+    @fun{gtk:list-store-set} function will first create a row, which triggers
+    the @code{\"row-inserted\"} signal on the @class{gtk:list-store} object.
+    The row, however, is still empty, and any signal handler connecting to the
+    @code{\"row-inserted\"} signal on this particular store should be prepared
+    for the situation that the row might be empty. This is especially important
+    if you are wrapping the @class{gtk:list-store} object inside a
+    @class{gtk:tree-model-filter} object and are using a
+    @symbol{gtk:tree-model-filter-visible-func} callback function. Using any of
+    the non-atomic operations to append rows to the @class{gtk:list-store}
+    object will cause the @symbol{gtk:tree-model-filter-visible-func} callback
+    function to be visited with an empty row first. The function must be
     prepared for that.
   @begin[Example]{dictionary}
     Creating a simple list store.
@@ -244,7 +244,7 @@
  "@version{#2021-4-21}
   @argument[column-types]{all @class{g:type-t} types for the columns, from first
     to last}
-  @return{A new @class{gtk:list-store} object.}
+  @return{The new @class{gtk:list-store} object.}
   @begin{short}
     Creates a new list store as with each of the types passed in.
   @end{short}
@@ -351,7 +351,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;; The Lisp implementation does not support pairs of an index and a value.
-;; Consider to change the implemenation.
+;; Consider to change the implementation.
 
 (defun list-store-set (store iter &rest values)
  #+liber-documentation
@@ -375,7 +375,7 @@
     @end{pre}
   @end{dictionary}
   @begin[Note]{dictionary}
-    The Lisp implemenation does not support pairs of a column index and a
+    The Lisp implementation does not support pairs of a column index and a
     value, but a list of values. Therefore, it is not possible to set the values
     of individual columns. See the @fun{gtk:list-store-set-value} function for
     setting the value of single columns.
@@ -549,14 +549,14 @@
  "@version{#2021-3-11}
   @argument[store]{a @class{gtk:list-store} object}
   @argument[position]{an integer with the position to insert the new row}
-  @return{A @class{gtk:tree-iter} iterator of the new row.}
+  @return{The @class{gtk:tree-iter} iterator of the new row.}
   @begin{short}
     Creates a new row at @arg{position}.
   @end{short}
   The returned iterator will point to this new row. If @arg{position} is larger
   than the number of rows on the list, then the new row will be appended to the
   list. The row will be empty after this function is called. To fill in values,
-  you need to call the @fun{gtk:list-store-set} or 
+  you need to call the @fun{gtk:list-store-set} or
   @fun{gtk:list-store-set-value} functions.
   @begin[Warning]{dictionary}
     The @class{gtk:list-store} implementation is deprecated since 4.10.
@@ -586,7 +586,7 @@
  "@version{#2021-3-11}
   @argument[store]{a @class{gtk:list-store} object}
   @argument[sibling]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
-  @return{A @class{gtk:tree-iter} iterator to the new row.}
+  @return{The @class{gtk:tree-iter} iterator to the new row.}
   @begin{short}
     Inserts a new row before @arg{sibling}.
   @end{short}
@@ -622,7 +622,7 @@
  "@version{#2021-3-11}
   @argument[store]{a @class{gtk:list-store} object}
   @argument[sibling]{a valid @class{gtk:tree-iter}, or @code{nil}}
-  @return{A @class{gtk:tree-iter} iterator to the new row.}
+  @return{The @class{gtk:tree-iter} iterator to the new row.}
   @begin{short}
     Inserts a new row after @arg{sibling}.
   @end{short}
@@ -656,7 +656,7 @@
   @argument[position]{an integer with the position to insert the new row,
     or -1 to append after existing rows}
   @argument[values]{values to store in @arg{store}}
-  @return{A @class{gtk:tree-iter} iterator to the new row.}
+  @return{The @class{gtk:tree-iter} iterator to the new row.}
   @begin{short}
     Creates a new row at @arg{position}.
   @end{short}
@@ -671,10 +671,11 @@
    (gtk:list-store-set list-store iter  ...)
  )
   @end{pre}
-  with the difference that the former will only emit a \"row-inserted\" signal,
-  while the latter will emit \"row-inserted\", \"row-changed\" and, if the list
-  store is sorted, \"rows-reordered\" signals. Since emitting the
-  \"rows-reordered\" signal repeatedly can affect the performance of the
+  with the difference that the former will only emit a @code{\"row-inserted\"}
+  signal, while the latter will emit @code{\"row-inserted\"},
+  @code{\"row-changed\"} and, if the list store is sorted,
+  @code{\"rows-reordered\"} signals. Since emitting the
+  @code{\"rows-reordered\"} signal repeatedly can affect the performance of the
   program, the @fun{gtk:list-store-insert-with-values} function should generally
   be preferred when inserting rows in a sorted list store.
   @begin[Warning]{dictionary}
@@ -766,7 +767,7 @@
  #+liber-documentation
  "@version{#2021-3-11}
   @argument[store]{a @class{gtk:list-store} object}
-  @return{A @class{gtk:tree-iter} iterator to the prepended row.}
+  @return{The @class{gtk:tree-iter} iterator to the prepended row.}
   @begin{short}
     Prepends a new row to @arg{store}.
   @end{short}
@@ -799,7 +800,7 @@
  #+liber-documentation
  "@version{#2022-9-10}
   @argument[store]{a @class{gtk:list-store} object}
-  @return{A @class{gtk:tree-iter} iterator to the appended row.}
+  @return{The @class{gtk:tree-iter} iterator to the appended row.}
   @begin{short}
     Appends a new row to the list store.
   @end{short}
