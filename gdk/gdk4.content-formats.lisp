@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -34,17 +34,23 @@
 ;;; Types and Values
 ;;;
 ;;;     GdkContentFormats
-;;;     GdkContentFormatsBuilder                           not implemented
+;;;     GdkContentFormatsBuilder                            not implemented
+;;;
+;;;     GdkFileList                                         Since 4.6
 ;;;
 ;;; Functions
+;;;
+;;;     gdk_file_list_new_from_list                         Since 4.8
+;;;     gdk_file_list_new_from_array                        Since 4.8
+;;;     gdk_file_list_get_files                             Since 4.6
 ;;;
 ;;;     gdk_intern_mime_type
 ;;;
 ;;;     gdk_content_formats_new
 ;;;     gdk_content_formats_new_for_gtype
-;;;     gdk_content_formats_ref                            not implemented
-;;;     gdk_content_formats_unref                          not needed
-;;;     gdk_content_formats_print                          not needed
+;;;     gdk_content_formats_ref                             not implemented
+;;;     gdk_content_formats_unref                           not needed
+;;;     gdk_content_formats_print                           not needed
 ;;;     gdk_content_formats_to_string
 ;;;     gdk_content_formats_get_gtypes
 ;;;     gdk_content_formats_get_mime_types
@@ -58,7 +64,7 @@
 ;;;     gdk_content_formats_union_deserialize_gtypes
 ;;;     gdk_content_formats_union_serialize_mime_types
 ;;;     gdk_content_formats_union_deserialize_mime_types
-;;;     gdk_content_formats_parse                          Since 4.4
+;;;     gdk_content_formats_parse                           Since 4.4
 ;;;
 ;;;     gdk_content_formats_builder_new
 ;;;     gdk_content_formats_builder_free_to_formats
@@ -76,6 +82,43 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gdk)
+
+;;; ----------------------------------------------------------------------------
+;;; Struct GdkFileList
+;;;
+;;; struct GdkFileList {
+;;;   /* No available fields */
+;;; }
+;;;
+;;; An opaque type representing a list of files.
+;;;
+;;; Since 4.6
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_file_list_new_from_array
+;;;
+;;; Creates a new GdkFileList for the given array of files.
+;;;
+;;; Since 4.8
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_file_list_new_from_list
+;;;
+;;; Creates a new files list container from a singly linked list of GFile
+;;; instances.
+;;;
+;;; Since 4.8
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gdk_file_list_get_files
+;;;
+;;; Retrieves the list of files inside a GdkFileList.
+;;;
+;;; Since 4.6
+;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; GdkContentFormats
@@ -262,7 +305,7 @@
  #+liber-documentation
  "@version{#2023-8-4}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{A string with the content formats.}
+  @return{The string with the content formats.}
   @begin{short}
     Prints the given @arg{formats} into a human-readable string.
   @end{short}
@@ -284,7 +327,7 @@
  #+liber-documentation
  "@version{#2023-8-4}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{A list with the @class{g:type-t} types included in @arg{formats}}
+  @return{The list with the @class{g:type-t} types included in @arg{formats}}
   @begin{short}
     Gets the @class{g:type-t} types included in @arg{formats}.
   @end{short}
@@ -314,7 +357,7 @@
  #+liber-documentation
  "@version{#2023-8-4}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{A list of strings with the mime types included in @arg{formats}.}
+  @return{The list of strings with the mime types included in @arg{formats}.}
   @begin{short}
     Gets the mime types included in @arg{formats}.
   @end{short}
@@ -335,7 +378,7 @@
  "@version{#2023-8-4}
   @argument[first]{a @class{gdk:content-formats} instance to merge into}
   @argument[second]{a @class{gdk:content-formats} instance to merge from}
-  @return{A new @class{gdk:content-formats} instance}
+  @return{The new @class{gdk:content-formats} instance}
   @begin{short}
     Append all missing types from @arg{second} to @arg{first}, in the order
     they had in @arg{second}.
@@ -398,7 +441,8 @@
  "@version{#2023-8-4}
   @argument[first]{a @class{gdk:content-formats} instance to intersect}
   @argument[second]{a @class{gdk:content-formats} instance to intersect with}
-  @return{A string with the first common mime type type or @code{nil} if none.}
+  @return{The string with the first common mime type type or @code{nil} if
+    none.}
   @begin{short}
     Finds the first mime type from @arg{first} that is also contained in
     @arg{second}.
@@ -457,7 +501,7 @@
  #+liber-documentation
  "@version{#2023-8-4}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{A new @class{gdk:content-formats} instance}
+  @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
     Add @class{g:type-t} types for the mime types in formats for which
     serializers are registered.
@@ -478,7 +522,7 @@
  #+liber-documentation
  "@version{#2023-8-4}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{A new @class{gdk:content-formats} instance}
+  @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
     Add @class{g:type-t} types for the mime types in formats for which
     deserializers are registered.
@@ -499,7 +543,7 @@
  #+liber-documentation
  "@version{#2023-8-4}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{A new @class{gdk:content-formats} instance}
+  @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
     Add mime types for @class{g:type-t} types in formats for which serializers
     are registered.
@@ -520,7 +564,7 @@
  #+liber-documentation
  "@version{#2023-8-4}
   @argument[formats]{a @class{gdk:content-formats} instance}
-  @return{A new @class{gdk:content-formats} instance}
+  @return{The new @class{gdk:content-formats} instance.}
   @begin{short}
     Add mime types for @class{g:type-t} types in formats for which deserializers
     are registered.
@@ -541,7 +585,7 @@
  #+liber-documentation
  "@version{#2023-4-14}
   @argument[str]{a string to parse}
-  @return{A @class{gdk:content-formats} instance with the content formats if
+  @return{The @class{gdk:content-formats} instance with the content formats if
     @arg{str} is valid.}
   @begin{short}
     Parses the given @arg{str} into a @class{gdk:content-formats} instance and

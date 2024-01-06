@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -143,7 +143,7 @@
 
 (defconstant +gdk-current-time+ 0
  #+liber-documentation
- "@version{#2023-4-7}
+ "@version{2023-12-17}
   @begin{short}
     Represents the current time, and can be used anywhere a time is expected.
   @end{short}")
@@ -196,7 +196,7 @@
 
 (defconstant +gdk-event-stop+ t
  #+liber-documentation
- "@version{#2023-10-17}
+ "@version{2023-12-17}
   @variable-value{@em{true}}
   @begin{short}
     Use this value as the return value for stopping the propagation of an event
@@ -289,7 +289,7 @@
 (setf (liber:alias-for-symbol 'event-type)
       "GEnum"
       (liber:symbol-documentation 'event-type)
- "@version{#2021-12-13}
+ "@version{2023-12-17}
   @short{Specifies the type of a @class{gdk:event} instance.}
   @begin{pre}
 (gobject:define-g-enum \"GdkEventType\" event-type
@@ -418,7 +418,7 @@
 (setf (liber:alias-for-symbol 'key-match)
       "GEnum"
       (liber:symbol-documentation 'key-match)
- "@version{#2022-11-26}
+ "@version{2023-12-17}
   @begin{short}
     Describes how well an event matches a given keyval and modifiers.
   @end{short}
@@ -457,7 +457,7 @@
 (setf (liber:alias-for-symbol 'touchpad-gesture-phase)
       "GEnum"
       (liber:symbol-documentation 'touchpad-gesture-phase)
- "@version{#2021-12-13}
+ "@version{2023-12-17}
   @begin{short}
     The @symbol{gdk:touchpad-gesture-phase} enumeration specifies the current
     state of a touchpad gesture.
@@ -491,7 +491,7 @@
       applied.}
     @entry[:cancel]{The gesture was cancelled, all changes should be undone.}
   @end{table}
-  @see-class{gdk:touchpad-pad-event}")
+  @see-class{gdk:touchpad-event}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GdkScrollDirection
@@ -510,8 +510,8 @@
 (setf (liber:alias-for-symbol 'scroll-direction)
       "GEnum"
       (liber:symbol-documentation 'scroll-direction)
- "@version{#2021-12-13}
-  @short{Specifies the direction for a @class{gdk:event-scroll} event.}
+ "@version{2023-12-17}
+  @short{Specifies the direction for a @class{gdk:scroll-event} event.}
   @begin{pre}
 (gobject:define-g-enum \"GdkScrollDirection\" scroll-direction
   (:export t
@@ -528,11 +528,11 @@
     @entry[:left]{The window is scrolled to the left.}
     @entry[:right]{The window is scrolled to the right.}
     @entry[:smooth]{The scrolling is determined by the delta values in the
-      @class{gdk:event-scroll} event. See the @fun{gdk:event-scroll-deltas}
+      @class{gdk:scroll-event} event. See the @fun{gdk:scroll-event-deltas}
       function.}
   @end{table}
-  @see-class{gdk:event-scroll}
-  @see-function{gdk:event-scroll-deltas}")
+  @see-class{gdk:scroll-event}
+  @see-function{gdk:scroll-event-deltas}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; enum GdkCrossingMode
@@ -555,7 +555,7 @@
 (setf (liber:alias-for-symbol 'crossing-mode)
       "GEnum"
       (liber:symbol-documentation 'crossing-mode)
- "@version{#2021-12-13}
+ "@version{2023-12-17}
   @short{Specifies the crossing mode for enter and leave events.}
   @begin{pre}
 (gobject:define-g-enum \"GdkCrosssingMode\" crossing-mode
@@ -604,7 +604,7 @@
 (setf (liber:alias-for-symbol 'scroll-unit)
       "GEnum"
       (liber:symbol-documentation 'scroll-unit)
- "@version{#2023-10-2}
+ "@version{2023-12-17}
   @begin{short}
     Specifies the unit of scroll deltas.
   @end{short}
@@ -655,7 +655,7 @@
 (setf (liber:alias-for-symbol 'notify-type)
       "GEnum"
       (liber:symbol-documentation 'notify-type)
- "@version{#2021-12-13}
+ "@version{2023-12-17}
   @short{Specifies the kind of crossing for enter and leave events.}
   See the X11 protocol specification of @code{LeaveNotify} for full details of
   crossing event generation.
@@ -691,13 +691,15 @@
 ;;; ----------------------------------------------------------------------------
 
 (glib:define-g-boxed-opaque event-sequence "GdkEventSequence"
+  :export t
+  :type-initializer "gdk_event_sequence_get_type"
   :alloc (error "GdkEventSequence cannot be created from the Lisp side."))
 
 #+liber-documentation
 (setf (liber:alias-for-class 'event-sequence)
       "GBoxed"
       (documentation 'event-sequence 'type)
- "@version{#2022-7-21}
+ "@version{2023-12-17}
   @begin{short}
     The @class{gdk:event-sequence} structure is an opaque type representing a
     sequence of related touch events.
@@ -1035,7 +1037,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @symbol{gdk:event-type} value.}
+  @return{The @symbol{gdk:event-type} value.}
   @short{Retrieves the type of the event.}
   @see-class{gdk:event}
   @see-symbol{gdk:event-type}"
@@ -1051,7 +1053,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @class{gdk:surface} object.}
+  @return{The @class{gdk:surface} object.}
   @short{Extracts the surface associated with an event.}
   @see-class{gdk:event}
   @see-symbol{gdk:surface}"
@@ -1067,7 +1069,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @class{gdk:device} object.}
+  @return{The @class{gdk:device} object.}
   @short{Returns the device of an event.}
   @see-class{gdk:event}
   @see-symbol{gdk:device}"
@@ -1084,7 +1086,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @class{gdk:device-tool} object, or @code{nil}.}
+  @return{The @class{gdk:device-tool} object, or @code{nil}.}
   @begin{short}
     If the event was generated by a device that supports different tools, e.g.
     a tablet, this function will return a @class{gdk:device-tool} object
@@ -1110,7 +1112,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{An unsigned integer with the time stamp field from @arg{event}.}
+  @return{The unsigned integer with the time stamp field from @arg{event}.}
   @begin{short}
     Returns the time stamp from @arg{event}, if there is one, otherwise returns
     @variable{gdk:+gdk-current-time+}.
@@ -1129,7 +1131,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @class{gdk:display} object.}
+  @return{The @class{gdk:display} object.}
   @short{Retrieves the display associated to the event.}
   @see-class{gdk:event}
   @see-variable{gdk:display}"
@@ -1145,7 +1147,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @class{gdk:seat} object.}
+  @return{The @class{gdk:seat} object.}
   @short{Returns the seat that originated the event.}
   @see-class{gdk:event}
   @see-class{gdk:seat}"
@@ -1162,7 +1164,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @class{gdk:event-sequence} instance that the event belongs to.}
+  @return{The @class{gdk:event-sequence} instance that the event belongs to.}
   @begin{short}
     If the event is a touch event, returns the @class{gdk:event-sequence}
     instance to which the event belongs. Otherwise, return @code{nil}.
@@ -1182,7 +1184,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @symbol{gdk:modifier-type} value with the modifier state of
+  @return{The @symbol{gdk:modifier-type} value with the modifier state of
     @arg{event}.}
   @short{Returns the modifier state field of an event.}
   @see-class{gdk:event}
@@ -1230,7 +1232,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A list of double float with the values for all axes.}
+  @return{The list of double float with the values for all axes.}
   @short{Extracts all axis values from an event.}
   @see-class{gdk:event}"
   (cffi:with-foreign-objects ((axes-ptr :pointer) (n-axes-ptr :int))
@@ -1258,7 +1260,7 @@
   @argument[event]{a @class{gdk:event} instance}
   @argument[axis-use]{a @symbol{gdk:axis-use} value with the axis use to look
     for}
-  @return{A double float with the axis value.}
+  @return{The double float with the axis value.}
   @begin{short}
     Extract the axis value for a particular axis use from an event instance.
   @end{short}
@@ -1346,7 +1348,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{An unsigned integer with the button of @arg{event}.}
+  @return{The unsigned integer with the button of @arg{event}.}
   @short{Extract the button number from a button event.}
   @see-class{gdk:event}"
   (let ((etype (event-event-type event)))
@@ -1364,7 +1366,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @symbol{gdk:scroll-direction} value with the direction of
+  @return{The @symbol{gdk:scroll-direction} value with the direction of
     @arg{event}.}
   @short{Extracts the direction of a scroll event.}
   @see-class{gdk:event}
@@ -1435,7 +1437,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{An unsigned integer with the keyval of @arg{event}.}
+  @return{The unsigned integer with the keyval of @arg{event}.}
   @short{Extracts the keyval from a key event.}
   @see-class{gdk:event}"
   (event event))
@@ -1450,7 +1452,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{An unsigned integer with the keycode of @arg{event}.}
+  @return{The unsigned integer with the keycode of @arg{event}.}
   @short{Extracts the keycode from a key event.}
   @see-class{gdk:event}"
   (event event))
@@ -1466,7 +1468,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @symbol{gdk:modifier-type} value.}
+  @return{The @symbol{gdk:modifier-type} value.}
   @short{Extracts the consumed modifiers from a key event.}
   @see-class{gdk:event}
   @see-symbol{gdk:modifier-type}"
@@ -1482,7 +1484,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{An unsigned integer with the layout of @arg{event}.}
+  @return{The unsigned integer with the layout of @arg{event}.}
   @short{Extracts the layout from a key event.}
   @see-class{gdk:event}"
   (event event))
@@ -1497,7 +1499,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{An unsigned integer with the shift level of @arg{event}.}
+  @return{The unsigned integer with the shift level of @arg{event}.}
   @short{Extracts the shift level from a key event.}
   @see-class{gdk:event}"
   (event event))
@@ -1529,7 +1531,7 @@
   @argument[event]{a @class{gdk:event} instance}
   @argument[keyval]{an unsigned integer with the keyval to match}
   @argument[modifiers]{a @symbol{gdk:modifier-type} value to match}
-  @return{A @symbol{gdk:key-match} value describing whether @arg{event}
+  @return{The @symbol{gdk:key-match} value describing whether @arg{event}
     matches.}
   @begin{short}
     Matches a key event against a keyboard shortcut that is specified as a
@@ -1621,7 +1623,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @symbol{gdk:crossing-mode} value with the mode of @arg{event}.}
+  @return{The @symbol{gdk:crossing-mode} value with the mode of @arg{event}.}
   @short{Extracts the crossing mode from a crossing event.}
   @see-class{gdk:event}
   @see-symbol{gdk:crossing-mode}"
@@ -1638,7 +1640,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @symbol{gdk:notify-type} value with the detail of @arg{event}.}
+  @return{The @symbol{gdk:notify-type} value with the detail of @arg{event}.}
   @short{Extracts the notify detail from a crossing event.}
   @see-class{gdk:event}
   @see-symbol{gdk:notify-type}"
@@ -1670,7 +1672,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @class{gdk:surface} object with the grab surface of @arg{event}.}
+  @return{The @class{gdk:surface} object with the grab surface of @arg{event}.}
   @short{Extracts the grab surface from a grab broken event.}
   @see-class{gdk:event}
   @see-class{gdk:surface}"
@@ -1719,8 +1721,8 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A @symbol{gdk:touchpad-gesture-phase} value with the gesture phase of
-    @arg{event}.}
+  @return{The @symbol{gdk:touchpad-gesture-phase} value with the gesture phase
+    of @arg{event}.}
   @short{Extracts the touchpad gesture phase from a touchpad event.}
   @see-class{gdk:event}
   @see-symbol{gdk:touchpad-gesture-phase}"
@@ -1737,7 +1739,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{An unsigned integer with the number of fingers for @arg{event}.}
+  @return{The unsigned integer with the number of fingers for @arg{event}.}
   @short{Extracts the number of fingers from a touchpad event.}
   @see-class{gdk:event}"
   (event event))
@@ -1779,7 +1781,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A double float with the angle delta of @arg{event}.}
+  @return{The double float with the angle delta of @arg{event}.}
   @short{Extracts the angle delta from a touchpad pinch event.}
   @see-class{gdk:event}"
   (event event))
@@ -1795,7 +1797,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A double float with the scale of @arg{event}.}
+  @return{The double float with the scale of @arg{event}.}
   @short{Extracts the scale from a touchpad pinch event.}
   @see-class{gdk:event}"
   (event event))
@@ -1836,7 +1838,7 @@
  #+liber-documentation
  "@version{#2023-7-25}
   @argument[event]{a @class{gdk:event} instance}
-  @return{A unsigned integer with the button of @arg{event}.}
+  @return{The unsigned integer with the button of @arg{event}.}
   @short{Extracts information about the pressed button from a pad event.}
   @see-class{gdk:event}"
   (event event))
@@ -1883,7 +1885,7 @@
  "@version{#2023-5-25}
   @argument[event1]{a @class{gdk:event} instance}
   @argument[event2]{a @class{gdk:event} instance}
-  @return{A double float with the relative angle between both events.}
+  @return{The double float with the relative angle between both events.}
   @begin{short}
     If both events contain X/Y information, this function will return the
     relative angle from @arg{event1} to @arg{event2}.
@@ -1942,7 +1944,7 @@
  "@version{#2023-5-25}
   @argument[event1]{a @class{gdk:event} instance}
   @argument[event2]{a @class{gdk:event} instance}
-  @return{A double float with the distance.}
+  @return{The double float with the distance.}
   @begin{short}
     If both events have X/Y information, the distance between both coordinates,
     as in a straight line going from @arg{event1} to @arg{event2}, will be

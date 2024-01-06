@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -123,8 +123,6 @@
     The list of the different APIs that a @class{gdk:gl-context} object can
     potentially support.
   @end{short}
-
-  Since 4.6
   @begin{pre}
 (gobject:define-g-flags \"GdkGLAPI\" gl-api
   (:export t
@@ -138,6 +136,7 @@
     @entry[:gl]{The OpenGL API.}
     @entry[:gles]{The OpenGL ES API.}
   @end{table}
+  Since 4.6
   @see-class{gdk:gl-context}")
 
 ;;; ----------------------------------------------------------------------------
@@ -165,14 +164,14 @@
 (setf (documentation 'gl-context 'type)
  "@version{#2023-8-3}
   @begin{short}
-    The @sym{gdk:gl-context} object is an object representing the platform
+    The @class{gdk:gl-context} object is an object representing the platform
     specific OpenGL draw context.
   @end{short}
-  A @sym{gdk:gl-context} object is created for a @class{gdk:surface} object
+  A @class{gdk:gl-context} object is created for a @class{gdk:surface} object
   using the @fun{gdk:surface-create-gl-context} function, and the context will
   match the the characteristics of the surface.
 
-  A @sym{gdk:gl-context} object is not tied to any particular normal
+  A @class{gdk:gl-context} object is not tied to any particular normal
   framebuffer. For instance, it cannot draw to the @class{gdk:surface} back
   buffer. The GDK repaint system is in full control of the painting to that.
   Instead, you can create render buffers or textures and use
@@ -180,29 +179,29 @@
   to draw them. Then GDK will handle the integration of your rendering with
   that of other widgets.
 
-  Support for the @sym{gdk:gl-context} object is platform specific, context
+  Support for the @class{gdk:gl-context} object is platform specific, context
   creation can fail, returning a @code{NULL} context.
 
-  A @sym{gdk:gl-context} object has to be made \"current\" in order to start
+  A @class{gdk:gl-context} object has to be made \"current\" in order to start
   using it, otherwise any OpenGL call will be ignored.
 
   @subheading{Creating a new OpenGL context}
-  In order to create a new @sym{gdk:gl-context} object you need a
+  In order to create a new @class{gdk:gl-context} object you need a
   @class{gdk:surface} object, which you typically get during the realize call
   of a widget.
 
-  A @sym{gdk:gl-context} object is not realized until either the
+  A @class{gdk:gl-context} object is not realized until either the
   @fun{gdk:gl-context-make-current} function, or until it is realized using
   the @fun{gdk:gl-context-realize} function. It is possible to specify details
   of the GL context like the OpenGL version to be used, or whether the GL
   context should have extra state validation enabled after calling the
   @fun{gdk:surface-create-gl-context} function by calling the
   @fun{gdk:gl-context-realize} function. If the realization fails you have the
-  option to change the settings of the @sym{gdk:gl-context} object and try
+  option to change the settings of the @class{gdk:gl-context} object and try
   again.
 
   @subheading{Using a GdkGLContext}
-  You will need to make the @sym{gdk:gl-ontext} object the current context
+  You will need to make the @class{gdk:gl-ontext} object the current context
   before issuing OpenGL calls. The system sends OpenGL commands to whichever
   context is current. It is possible to have multiple contexts, so you always
   need to ensure that the one which you want to draw with is the current one
@@ -212,9 +211,9 @@
   @end{pre}
   You can now perform your drawing using OpenGL commands.
 
-  You can check which @sym{gdk:gl-context} object is the current one by using
+  You can check which @class{gdk:gl-context} object is the current one by using
   the @fun{gdk:gl-context-current} function. You can also unset any
-  @sym{gdk:gl-context} object that is currently set by calling the
+  @class{gdk:gl-context} object that is currently set by calling the
   @fun{gdk:gl-context-clear-current} function.
   @see-slot{gdk:gl-context-allowed-apis}
   @see-slot{gdk:gl-context-api}
@@ -247,10 +246,10 @@
     Accessor of the @slot[gdk:gl-context]{allowed-apis} slot of the
     @class{gdk:gl-context} class.
   @end{short}
-  The @sym{gdk:gl-context-allowed-apis} function gets the allowed APIs. The
-  @sym{(setf gdk:gl-context-allowed-apis)} function sets the allowed APIs. When
-  the @fun{gdk:gl-context-realize} function is called, only the allowed APIs
-  will be tried. If you set this to @code{:none}, realizing will always fail.
+  The @fun{gdk:gl-context-allowed-apis} function gets the allowed APIs. The
+  @setf{gdk:gl-context-allowed-apis} function sets the allowed APIs. When the
+  @fun{gdk:gl-context-realize} function is called, only the allowed APIs will
+  be tried. If you set this to @code{:none}, realizing will always fail.
 
   If you set it on a realized context, the property will not have any effect.
   It is only relevant during the @fun{gdk:gl-context-realize} function.
@@ -282,7 +281,7 @@
     Accessor of the @slot[gdk:gl-context]{api} slot of the
     @class{gdk:gl-context} class.
   @end{short}
-  The @sym{gdk:gl-context-api} function gets the API currently in use. If the
+  The @fun{gdk:gl-context-api} function gets the API currently in use. If the
   renderer has not been realized yet, @code{:none} is returned.
 
   Since 4.6
@@ -310,7 +309,7 @@
     Accessor of the @slot[gdk:gl-context]{shared-context} slot of the
     @class{gdk:gl-context} class.
   @end{short}
-  The @sym{gdk:gl-context-shared-context} function retrieves the GL context
+  The @fun{gdk:gl-context-shared-context} function retrieves the GL context
   that this context share data with.
 
   Deprecated since 4.6
@@ -325,7 +324,7 @@
  #+liber-documentation
  "@version{#2023-8-3}
   @argument[context]{a @class{gdk:gl-context} object}
-  @return{A @class{gdk:display} object or @code{nil}.}
+  @return{The @class{gdk:display} object or @code{nil}.}
   @begin{short}
     Retrieves the display the GL context is created for.
   @end{short}
@@ -344,7 +343,7 @@
  #+liber-documentation
  "@version{#2023-8-3}
   @argument[context]{a @class{gdk:gl-context} object}
-  @return{A @class{gdk:surface} object or @code{nil}.}
+  @return{The @class{gdk:surface} object or @code{nil}.}
   @begin{short}
     Retrieves the surface used by the GL context.
   @end{short}
@@ -414,12 +413,12 @@
     @arg{minor} - an integer with the minor version to request
   @end{return}
   @begin{short}
-    The @sym{gdk:gl-context-required-version} function retrieves the major and
+    The @fun{gdk:gl-context-required-version} function retrieves the major and
     minor version of OpenGL to request.
   @end{short}
-  The @sym{(setf gdk:gl-context-required-version)} function sets the major and
-  minor version to request. Setting @arg{major} and @arg{minor} to zero will
-  use the default values.
+  The @setf{gdk:gl-context-required-version} function sets the major and minor
+  version to request. Setting @arg{major} and @arg{minor} to zero will use the
+  default values.
 
   The @class{gdk:gl-context} object must not be realized or made current prior
   to calling this function.
@@ -452,12 +451,12 @@
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[enabled]{a boolean whether debugging is enabled}
   @begin{short}
-    The @sym{gdk:gl-context-debug-enabled} function retrieves whether debugging
+    The @fun{gdk:gl-context-debug-enabled} function retrieves whether debugging
     is enabled.
   @end{short}
-  The @sym{(setf gdk:gl-context-debug-enabled} function sets whether the GL
-  context should perform extra validations and run time checking. This is
-  useful during development, but has additional overhead.
+  The @setf{gdk:gl-context-debug-enabled} function sets whether the GL context
+  should perform extra validations and run time checking. This is useful during
+  development, but has additional overhead.
 
   The @class{gdk:gl-context} object must not be realized or made current prior
   to calling this function.
@@ -487,11 +486,11 @@
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[setting]{a boolean whether @arg{context} is forward compatible}
   @begin{short}
-    The @sym{gdk:gl-context-forward-compatible} function returns whether the
+    The @fun{gdk:gl-context-forward-compatible} function returns whether the
     GL context should be forward compatible.
   @end{short}
-  The @sym{(setf gdk:gl-context-forward-compatible)} function sets whether the
-  GL context should be forward compatible.
+  The @setf{gdk:gl-context-forward-compatible} function sets whether the GL
+  context should be forward compatible.
 
   Forward compatible GL contexts must not support OpenGL functionality that has
   been marked as deprecated in the requested version. Non-forward compatible
@@ -527,17 +526,17 @@
   @argument[setting]{An integer whether the context uses OpenGL instead of
     OpenGL, or -1 to allow auto-detection.}
   @begin{short}
-    The @sym{gdk:gl-context-uses-es} function checks whether the context is
+    The @fun{gdk:gl-context-uses-es} function checks whether the context is
     using an OpenGL or OpenGL ES profile.
   @end{short}
-  The @sym{gdk:gl-context-uses-es} function requests that GDK create an OpenGL
+  The @fun{gdk:gl-context-uses-es} function requests that GDK create an OpenGL
   ES context instead of an OpenGL one, if the platform and windowing system
   allows it. The context must not have been realized.
 
   By default, GDK will attempt to automatically detect whether the underlying
   GL implementation is OpenGL or OpenGL ES once the context is realized.
 
-  You should check the return value of the @sym{gdk:gl-context-use-es} function
+  You should check the return value of the @fun{gdk:gl-context-use-es} function
   after calling the @fun{gdk:gl-context-realize} function to decide whether to
   use the OpenGL or OpenGL ES API, extensions, or shaders.
   @see-class{gdk:gl-context}
