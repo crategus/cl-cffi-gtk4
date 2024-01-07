@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; cl-cffi-gtk4.asd
 ;;;
-;;; Copyright (C) 2021 - 2023 Dieter Kaiser
+;;; Copyright (C) 2021 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -43,6 +43,7 @@
      ;; Display, Seat, Device, Monitor
      (:file "gdk4.display-manager")
      (:file "gdk4.display")
+     (:file "gdk4.device-tool")
      (:file "gdk4.device")
      (:file "gdk4.device-pad")
      (:file "gdk4.monitor")
@@ -501,6 +502,7 @@
      ;; Displays, Devices, Monitors, Seats
      (:file "rtest-gdk4-display-manager")
      (:file "rtest-gdk4-display")
+     (:file "rtest-gdk4-device-tool")
      (:file "rtest-gdk4-device")
      (:file "rtest-gdk4-device-pad")
      (:file "rtest-gdk4-monitor")

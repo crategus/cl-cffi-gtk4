@@ -129,91 +129,6 @@
                               (:SLIDER 2048))
              (gobject:get-g-type-definition "GdkAxisFlags"))))
 
-;;;     GdkDeviceToolType
-
-(test gdk-device-tool-type
-  ;; Check the type
-  (is (g:type-is-enum "GdkDeviceToolType"))
-  ;; Check the type initializer
-  (is (eq (g:gtype "GdkDeviceToolType")
-          (g:gtype (cffi:foreign-funcall "gdk_device_tool_type_get_type" :size))))
-  ;; Check the registered name
-  (is (eq 'gdk:device-tool-type
-          (glib:symbol-for-gtype "GdkDeviceToolType")))
-  ;; Check the names
-  (is (equal '("GDK_DEVICE_TOOL_TYPE_UNKNOWN" "GDK_DEVICE_TOOL_TYPE_PEN"
-               "GDK_DEVICE_TOOL_TYPE_ERASER" "GDK_DEVICE_TOOL_TYPE_BRUSH"
-               "GDK_DEVICE_TOOL_TYPE_PENCIL" "GDK_DEVICE_TOOL_TYPE_AIRBRUSH"
-               "GDK_DEVICE_TOOL_TYPE_MOUSE" "GDK_DEVICE_TOOL_TYPE_LENS")
-             (list-enum-item-name "GdkDeviceToolType")))
-  ;; Check the values
-  (is (equal '(0 1 2 3 4 5 6 7)
-             (list-enum-item-value "GdkDeviceToolType")))
-  ;; Check the nick names
-  (is (equal '("unknown" "pen" "eraser" "brush" "pencil" "airbrush" "mouse"
-               "lens")
-             (list-enum-item-nick "GdkDeviceToolType")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkDeviceToolType"
-                             GDK-DEVICE-TOOL-TYPE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gdk_device_tool_type_get_type")
-                             (:UNKNOWN 0)
-                             (:PEN 1)
-                             (:ERASER 2)
-                             (:BRUSH 3)
-                             (:PENCIL 4)
-                             (:AIRBRUSH 5)
-                             (:MOUSE 6)
-                             (:LENS 7))
-             (gobject:get-g-type-definition "GdkDeviceToolType"))))
-
-;;;     GdkDeviceTool
-
-(test gdk-device-tool-class
-  ;; Type check
-  (is (g:type-is-object "GdkDeviceTool"))
-  ;; Check the registered name
-  (is (eq 'gdk:device-tool
-          (glib:symbol-for-gtype "GdkDeviceTool")))
-  ;; Check the type initializer
-  (is (eq (g:gtype "GdkDeviceTool")
-          (g:gtype (cffi:foreign-funcall "gdk_device_tool_get_type" :size))))
-  ;; Check the parent
-  (is (eq (g:gtype "GObject")
-          (g:type-parent "GdkDeviceTool")))
-  ;; Check the children
-  (is (equal '()
-             (list-children "GdkDeviceTool")))
-  ;; Check the interfaces
-  (is (equal '()
-             (list-interfaces "GdkDeviceTool")))
-  ;; Check the properties
-  (is (equal '("axes" "hardware-id" "serial" "tool-type")
-             (list-properties "GdkDeviceTool")))
-  ;; Check the signals
-  (is (equal '()
-             (list-signals "GdkDeviceTool")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDeviceTool" GDK-DEVICE-TOOL
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_device_tool_get_type")
-                       ((AXES GDK-DEVICE-TOOL-AXES "axes" "GdkAxisFlags" T NIL)
-                        (HARDWARE-ID GDK-DEVICE-TOOL-HARDWARE-ID "hardware-id"
-                         "guint64" T NIL)
-                        (SERIAL GDK-DEVICE-TOOL-SERIAL "serial" "guint64" T
-                         NIL)
-                        (TOOL-TYPE GDK-DEVICE-TOOL-TOOL-TYPE "tool-type"
-                         "GdkDeviceToolType" T NIL)))
-             (gobject:get-g-type-definition "GdkDeviceTool"))))
-
-;;; --- Properties -------------------------------------------------------------
-
-;;;     axes
-;;;     hardware-id
-;;;     serial
-;;;     tool-type
-
 ;;;     GdkDevice
 
 (test gdk-device-class
@@ -300,14 +215,93 @@
 ;;;     tool
 ;;;     vendor-id
 
+(test gdk-device-properties.1
+  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+         (device (gdk:seat-pointer seat)))
+    (is-false (gdk:device-caps-lock-state device))
+    (is (eq :neutral (gdk:device-direction device)))
+    (is (eq (gdk:display-default) (gdk:device-display device)))
+    (is-false (gdk:device-has-bidi-layouts device))
+    (is-true (gdk:device-has-cursor device))
+    (is-false (gdk:device-modifier-state device))
+    (is (= 2 (gdk:device-n-axes device)))
+    (is (string= "Core Pointer" (gdk:device-name device)))
+    (is-false (gdk:device-num-lock-state device))
+    (is (= 0 (gdk:device-num-touches device)))
+    (is-false (gdk:device-product-id device))
+    (is-false (gdk:device-scroll-lock-state device))
+    (is (eq seat (gdk:device-seat device)))
+    (is (eq :mouse (gdk:device-source device)))
+    (is-false (gdk:device-tool device))
+    (is-false (gdk:device-vendor-id device))))
+
+(test gdk-device-properties.2
+  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+         (device (gdk:seat-keyboard seat)))
+    (is-false (gdk:device-caps-lock-state device))
+    (is (eq :ltr (gdk:device-direction device)))
+    (is (eq (gdk:display-default) (gdk:device-display device)))
+    (is-false (gdk:device-has-bidi-layouts device))
+    (is-false (gdk:device-has-cursor device))
+    (is-false (gdk:device-modifier-state device))
+    (is (= 0 (gdk:device-n-axes device)))
+    (is (string= "Core Keyboard" (gdk:device-name device)))
+    (is-false (gdk:device-num-lock-state device))
+    (is (= 0 (gdk:device-num-touches device)))
+    (is-false (gdk:device-product-id device))
+    (is-false (gdk:device-scroll-lock-state device))
+    (is (eq seat (gdk:device-seat device)))
+    (is (eq :keyboard (gdk:device-source device)))
+    (is-false (gdk:device-tool device))
+    (is-false (gdk:device-vendor-id device))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     changed
+
+(test gdk-device-changed-signal
+  (let ((query (g:signal-query (g:signal-lookup "changed" "GdkDevice"))))
+    (is (string= "changed" (g:signal-query-signal-name query)))
+    (is (string= "GdkDevice" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;;     tool-changed
+
+(test gdk-device-tool-changed-signal
+  (let ((query (g:signal-query (g:signal-lookup "tool-changed" "GdkDevice"))))
+    (is (string= "tool-changed" (g:signal-query-signal-name query)))
+    (is (string= "GdkDevice" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '("GdkDeviceTool")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_device_get_surface_at_position
+
+(test gdk-device-surface-at-position
+  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+         (device (gdk:seat-pointer seat)))
+    (is-false (gdk:device-surface-at-position device))))
+
 ;;;     gdk_device_get_timestamp                           Since 4.2
 
-;;; --- 2023-7-16 --------------------------------------------------------------
+(test gdk-device-timestamp.1
+  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+         (device (gdk:seat-pointer seat)))
+    (is (= 0 (gdk:device-timestamp device)))))
+
+(test gdk-device-timestamp.2
+  (let* ((seat (gdk:display-default-seat (gdk:display-default)))
+         (device (gdk:seat-keyboard seat)))
+    (is (= 0 (gdk:device-timestamp device)))))
+
+;;; 2024-1-7

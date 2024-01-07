@@ -273,12 +273,19 @@
       @about-function{display-prepare-gl}
       @about-function{display-create-gl-context}
     @end{subsection}
+    @begin[GdkDeviceTool]{subsection}
+      @about-symbol{device-tool-type}
+      @about-class{device-tool}
+      @about-generic{device-tool-axes}
+      @about-generic{device-tool-hardware-id}
+      @about-generic{device-tool-serial}
+      @about-generic{device-tool-tool-type}
+    @end{subsection}
     @begin[GdkDevice]{subsection}
       Object representing an input device.
       @about-symbol{input-source}
       @about-symbol{axis-use}
       @about-symbol{axis-flags}
-      @about-symbol{device-tool-type}
       @about-class{device}
       @about-generic{device-caps-lock-state}
       @about-generic{device-direction}
@@ -301,11 +308,6 @@
       @about-function{device-has-bidi-layouts}
       @about-function{device-surface-at-position}
       @about-function{device-timestamp}
-      @about-class{device-tool}
-      @about-generic{device-tool-axes}
-      @about-generic{device-tool-hardware-id}
-      @about-generic{device-tool-serial}
-      @about-generic{device-tool-tool-type}
     @end{subsection}
     @begin[GdkDevicePad]{subsection}
       Pad device interface.
