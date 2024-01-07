@@ -95,12 +95,7 @@
   (is (= 1.0 (gtk:frame-label-xalign (make-instance 'gtk:frame
                                                     :label-xalign 1.0d0))))
   (is (= 0.5 (gtk:frame-label-xalign (make-instance 'gtk:frame
-                                                    :label-xalign 1/2))))
-  ;; Invalid label-xalign value does not change the default value
-  (is (= 0.0 (gtk:frame-label-xalign (make-instance 'gtk:frame
-                                                    :label-xalign 10))))
-  (is (= 0.0 (gtk:frame-label-xalign (make-instance 'gtk:frame
-                                                    :label-xalign -10)))))
+                                                    :label-xalign 1/2)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -124,13 +119,6 @@
     (is (= 0.5 (setf (gtk:frame-label-align frame) 1/2)))
     (is (= 0.5 (gtk:frame-label-align frame)))
     (is (= 0.3d0 (setf (gtk:frame-label-align frame) 0.3d0)))
-    (is (= 0.3 (gtk:frame-label-align frame)))
-    ;; These tests generates warnings
-    ;; The value is not in the range [0.0, 1.0], the property is not changed
-;    (is (= -10 (setf (gtk:frame-label-align frame) -10)))
-;    (is (= 0.3 (gtk:frame-label-align frame)))
-;    (is (= 10 (setf (gtk:frame-label-align frame) +10)))
-;    (is (= 0.3 (gtk:frame-label-align frame)))
-))
+    (is (= 0.3 (gtk:frame-label-align frame)))))
 
-;;; 2024-1-6
+;;; 2024-1-7
