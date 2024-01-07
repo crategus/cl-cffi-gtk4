@@ -15,8 +15,9 @@ List of files for the GDK 4 Library
  Displays, Devices, Monitors, Seats
 
   gdk4.display-manager.lisp        GdkDisplayManager                  GDK 4.10
-  gdk4.display.lisp                GdkDisplay                         GDK 4.10
-  gdk4.device.lisp                 GdkDevice                          GDK 4.10
+  gdk4.display.lisp                GdkDisplay                         GDK 4.12
+  gdk4.device-tool.lisp            GdkDeviceTool                      GDK 4.12
+  gdk4.device.lisp                 GdkDevice                          GDK 4.12
   gdk4.device-pad.lisp             GdkDevicePad                       GDK 4.10
   gdk4.monitor.lisp                GdkMonitor                         GDK 4.10
   gdk4.seat.lisp                   GdkSeat                            GDK 4.10
@@ -50,7 +51,7 @@ List of files for the GDK 4 Library
   gdk4.content-serializer.lisp     GdkContentSerializer               GDK 4.0  +
   gdk4.content-deserializer.lisp   GdkContentDeserializer             GDK 4.0  +
   gdk4.clipboard.lisp              GdkClipboard                       GDK 4.10 &
-  gdk4.drag.lisp                   GdkDrag                            GDK 4.10
+  gdk4.drag.lisp                   GdkDrag                            GDK 4.12
   gdk4.drop.lisp                   GdkDrop                            GDK 4.10
   gdk4.drag-surface.lisp           GdkDragSurface                     GDK 4.12
 
@@ -73,4 +74,4 @@ List of files for the GDK 4 Library
   gdk4.x11-interaction.lisp                                           GDK 4.0  +
   gdk4.wayland-interaction.lisp                                       GDK 4.0  +
 
-2023-12-17
+2024-1-7
