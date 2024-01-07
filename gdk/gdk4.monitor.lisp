@@ -2,11 +2,11 @@
 ;;; gdk4.monitor.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -200,7 +200,7 @@ lambda (monitor)    :run-first
 ;;; Property and Accesor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- monitor-connector ------------------------------------------------------
+;;; --- gdk:monitor-connector --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "connector" 'monitor) t)
@@ -220,11 +220,11 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{connector} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-connector} function gets the name of the monitor's
+  The @fun{gdk:monitor-connector} function gets the name of the monitor's
   connector, if available.
   @see-class{gdk:monitor}")
 
-;;; --- monitor-description ----------------------------------------------------
+;;; --- gdk:monitor-description ------------------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "description" 'monitor) t)
@@ -237,7 +237,7 @@ lambda (monitor)    :run-first
 (setf (liber:alias-for-function 'monitor-description)
       "Accessor"
       (documentation 'monitor-description 'function)
- "@version{#2023-4-11}
+ "@version{2024-1-7}
   @syntax[]{(gdk:monitor-description object) => description}
   @argument[object]{a @class{gdk:monitor} object}
   @argument[description]{a string with the monitor description}
@@ -245,13 +245,13 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{description} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-description} function gets a string describing the
+  The @fun{gdk:monitor-description} function gets a string describing the
   monitor, if available. This can be used to identify a monitor in the UI.
 
   Since 4.10
   @see-class{gdk:monitor}")
 
-;;; --- monitor-display --------------------------------------------------------
+;;; --- gdk:monitor-display ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "display" 'monitor) t)
@@ -272,17 +272,17 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{display} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-display} function gets the display that this monitor
+  The @fun{gdk:monitor-display} function gets the display that this monitor
   belongs to.
   @see-class{gdk:monitor}
   @see-class{gdk:display}
   @see-function{gdk:monitor}")
 
-;;; --- monitor-geometry -------------------------------------------------------
+;;; --- gdk:monitor-geometry ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "geometry" 'monitor) t)
- "The @code{geomtry} property of type @class{gdk:rectangle} (Read) @br{}
+ "The @code{geometry} property of type @class{gdk:rectangle} (Read) @br{}
   The geometry of the monitor.")
 
 #+liber-documentation
@@ -298,7 +298,7 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{geometry} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-geometry} function retrieves the size and position of an
+  The @fun{gdk:monitor-geometry} function retrieves the size and position of an
   individual monitor within the display coordinate space. The returned geometry
   is in \"application pixels\", not in \"device pixels\". See the
   @fun{gdk:monitor-scale-factor} function.
@@ -306,7 +306,7 @@ lambda (monitor)    :run-first
   @see-class{gdk:rectangle}
   @see-function{gdk:monitor-scale-factor}")
 
-;;; --- monitor-height-mm ------------------------------------------------------
+;;; --- gdk:monitor-height-mm --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "height-mm" 'monitor) t)
@@ -327,11 +327,11 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{height-mm} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-height-mm} function gets the height in millimeters of
+  The @fun{gdk:monitor-height-mm} function gets the height in millimeters of
   the monitor.
   @see-class{gdk:monitor}")
 
-;;; --- monitor-manufacturer ---------------------------------------------------
+;;; --- gdk:monitor-manufacturer -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "manufacturer" 'monitor) t)
@@ -352,13 +352,13 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{manufacturer} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-manufacturer} function gets the name or PNP ID of the
+  The @fun{gdk:monitor-manufacturer} function gets the name or PNP ID of the
   monitor's manufacturer, if available. Note that this value might also vary
   depending on actual display backend. PNP ID registry is located at
   @file{https://uefi.org/pnp_id_list}.
   @see-class{gdk:monitor}")
 
-;;; --- monitor-model ----------------------------------------------------------
+;;; --- gdk:monitor-model ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'monitor) t)
@@ -378,11 +378,11 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{model} slot of the @class{gdk:monitor}
     class.
   @end{short}
-  The @sym{gdk:monitor-model} function gets the string identifying the monitor
+  The @fun{gdk:monitor-model} function gets the string identifying the monitor
   model, if available.
   @see-class{gdk:monitor}")
 
-;;; --- monitor-refresh-rate ---------------------------------------------------
+;;; --- gdk:monitor-refresh-rate -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "refresh-rate" 'monitor) t)
@@ -403,12 +403,12 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{refresh-rate} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-refresh-rate} function gets the refresh rate of the
+  The @fun{gdk:monitor-refresh-rate} function gets the refresh rate of the
   monitor, if available. The value is in milli-Hertz, so a refresh rate of 60Hz
   is returned as 60000.
   @see-class{gdk:monitor}")
 
-;;; --- monitor-scale-factor ---------------------------------------------------
+;;; --- gdk:monitor-scale-factor -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scale-factor" 'monitor) t)
@@ -429,7 +429,7 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{scale-factor} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-scale-factor} function gets the internal scale factor
+  The @fun{gdk:monitor-scale-factor} function gets the internal scale factor
   that maps from monitor coordinates to the actual device pixels. On traditional
   systems this is 1, but on very high density outputs this can be a higher value
   (often 2).
@@ -440,7 +440,7 @@ lambda (monitor)    :run-first
   @see-class{gdk:monitor}
   @see-function{gdk:surface-scale-factor}")
 
-;;; --- monitor-subpixel-layout ------------------------------------------------
+;;; --- gdk:monitor-subpixel-layout --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "subpixel-layout" 'monitor) t)
@@ -461,13 +461,13 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{subpixel-layout} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-subpixel-layout} function gets information about the
+  The @fun{gdk:monitor-subpixel-layout} function gets information about the
   layout of red, green and blue primaries for each pixel in this monitor, if
   available.
   @see-class{gdk:monitor}
   @see-symbol{gdk:subpixel-layout}")
 
-;;; --- monitor-valid ----------------------------------------------------------
+;;; --- gdk:monitor-valid ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "valid" 'monitor) t)
@@ -489,7 +489,7 @@ lambda (monitor)    :run-first
   @end{short}
   @see-class{gdk:monitor}")
 
-;;; --- monitor-width-mm -------------------------------------------------------
+;;; --- gdk:monitor-width-mm ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "width-mm" 'monitor) t)
@@ -510,7 +510,7 @@ lambda (monitor)    :run-first
     Accessor of the @slot[gdk:monitor]{width-mm} slot of the
     @class{gdk:monitor} class.
   @end{short}
-  The @sym{gdk:monitor-width-mm} function gets the width in millimeters of
+  The @fun{gdk:monitor-width-mm} function gets the width in millimeters of
   the monitor.
   @see-class{gdk:monitor}")
 
@@ -520,7 +520,7 @@ lambda (monitor)    :run-first
 
 (cffi:defcfun ("gdk_monitor_is_valid" monitor-is-valid) :boolean
  #+liber-documentation
- "@version{#2023-4-11}
+ "@version{2024-1-7}
   @argument[monitor]{a @class{gdk:monitor} object}
   @begin{short}
     Returns @em{true} if the monitor object corresponds to a physical monitor.

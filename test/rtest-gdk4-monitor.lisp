@@ -107,7 +107,6 @@
 
 (test gdk-monitor-properties.1
   (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
-
     (is (g:type-is-a (g:type-from-instance monitor) "GdkMonitor"))
     #-windows
     (is (stringp (gdk:monitor-connector monitor)))
@@ -173,8 +172,23 @@
 
 ;;;     invalidate
 
+(test gdk-monitor-invalidate-signal
+  (let ((query (g:signal-query (g:signal-lookup "invalidate" "GdkMonitor"))))
+    (is (string= "invalidate" (g:signal-query-signal-name query)))
+    (is (string= "GdkMonitor" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gdk_monitor_is_valid
+
+(test gdk-monitor-is-valid
+  (let ((monitor (first (gdk:display-monitors (gdk:display-default)))))
+    (is-true (gdk:monitor-is-valid monitor))))
 
 ;;; --- 2023-7-31 --------------------------------------------------------------
