@@ -61,10 +61,69 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     closed
+
+(test gdk-display-closed-signal
+  (let ((query (g:signal-query (g:signal-lookup "closed" "GdkDisplay"))))
+    (is (string= "closed" (g:signal-query-signal-name query)))
+    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '("gboolean")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;;     opened
+
+(test gdk-display-opened-signal
+  (let ((query (g:signal-query (g:signal-lookup "opened" "GdkDisplay"))))
+    (is (string= "opened" (g:signal-query-signal-name query)))
+    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;;     seat-added
+
+(test gdk-display-seat-added-signal
+  (let ((query (g:signal-query (g:signal-lookup "seat-added" "GdkDisplay"))))
+    (is (string= "seat-added" (g:signal-query-signal-name query)))
+    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '("GdkSeat")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;;     seat-removed
+
+(test gdk-display-seat-removed-signal
+  (let ((query (g:signal-query (g:signal-lookup "seat-removed" "GdkDisplay"))))
+    (is (string= "seat-removed" (g:signal-query-signal-name query)))
+    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '("GdkSeat")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;;     setting-changed
+
+(test gdk-display-setting-changed-signal
+  (let ((query (g:signal-query (g:signal-lookup "setting-changed" "GdkDisplay"))))
+    (is (string= "setting-changed" (g:signal-query-signal-name query)))
+    (is (string= "GdkDisplay" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '("gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -142,7 +201,7 @@
     (is (typep (gdk:display-app-launch-context display)
                'gdk:app-launch-context))))
 
-;;;     gdk_display_notify_startup_complete                Since 4.10 deprecated
+;;;     gdk_display_notify_startup_complete                Deprecated 4.10
 
 ;;;     gdk_display_get_default_seat
 
@@ -182,15 +241,17 @@
 
 (test gdk-display-setting
   (let ((display (gdk:display-default)))
-    (cffi:with-foreign-object (gvalue '(:struct g:value))
-      (g:value-init gvalue "gint")
-      (is-true (gdk:display-setting display "gtk-double-click-time" gvalue))
-      (is (= (gtk:settings-gtk-double-click-time (gtk:settings-default))
-             (gobject:parse-g-value gvalue)))
-      (g:value-unset gvalue))))
+    (is (= (gtk:settings-gtk-double-click-time (gtk:settings-default))
+           (gdk:display-setting display "gtk-double-click-time" "gint")))))
 
-;;;     gdk_display_get_startup_notification_id            Since 4.10 deprecated
-;;;     gdk_display_put_event                              Since 4.10 deprecated
+;;;     gdk_display_get_startup_notification_id            Deprecated 4.10
+
+#+nil
+(test gdk-display-startup-notification-id
+  (let ((display (gdk:display-default)))
+    (is-false (gdk:display-startup-notification-id display))))
+
+;;;     gdk_display_put_event                              Deprecated 4.10
 
 ;;;     gdk_display_map_keyval
 
@@ -250,4 +311,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-1-7
