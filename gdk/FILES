@@ -30,7 +30,7 @@ List of files for the GDK 4 Library
 
  Surfaces, Toplevels, Popups
 
-  gdk4.surface.lisp                GdkSurface                         GDK 4.10
+  gdk4.surface.lisp                GdkSurface                         GDK 4.12
   gdk4.toplevel.lisp               GdkToplevel                        GDK 4.10
   gdk4.toplevel-layout.lisp        GdkToplevelLayout                  GDK 4.10
   gdk4.toplevel-size.lisp          GdkToplevelSize                    GDK 4.10

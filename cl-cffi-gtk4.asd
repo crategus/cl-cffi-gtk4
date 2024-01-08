@@ -81,7 +81,7 @@
      (:file "gdk4.drop")
      (:file "gdk4.drag-surface")
 
-     ;; Applicationn launching
+     ;; Application launching
      (:file "gdk4.app-launch-context")
 
      ;; Miscellaneous
@@ -508,19 +508,34 @@
      (:file "rtest-gdk4-monitor")
      (:file "rtest-gdk4-seat")
 
-     ;; Paintables
+     ;; Paintables, Textures
      (:file "rtest-gdk4-paintable")
      (:file "rtest-gdk4-paintable-subclassing")
      (:file "rtest-gdk4-texture")
+;    (:file "rtest-gdk4-texture-downloader"      :if-feature :gtk4-10)
+
+     ;; Events
+     (:file "rtest-gdk4-event")
 
      ;; Surfaces, Toplevels, Popups
+     (:file "rtest-gdk4-surface")
+;    (:file "rtest-gdk4-toplevel-layout")
      (:file "rtest-gdk4-toplevel")
+;    (:file "rtest-gdk4-toplevel-size")
      (:file "rtest-gdk4-popup")
+;    (:file "rtest-gdk4-popup-layout")
 
      ;; Daw contexts
+;    (:file "rtest-gdk4-draw-context")
+;    (:file "rtest-gdk4-gl-context")
+;    (:file "rtest-gdk4-vulkan-context")
      (:file "rtest-gdk4-cairo-context")
 
      ;; Clipboard, Drag and Drop
+;    (:file "rtest-gdk4-content-formats")
+;    (:file "rtest-gdk4-content-provider")
+;    (:file "rtest-gdk4-content-serializer")
+;    (:file "rtest-gdk4-content-deserializer")
      (:file "rtest-gdk4-clipboard")
      (:file "rtest-gdk4-drag")
      (:file "rtest-gdk4-drop")
@@ -530,9 +545,16 @@
      (:file "rtest-gdk4-app-launch-context")
 
      ;; Miscellaneous
-     (:file "rtest-gdk4-event")
+;    (:file "rtest-gdk4-cursor")
+;    (:file "rtest-gdk4-frame-timings")
+;    (:file "rtest-gdk4-frame-clock")
 
      ;; Pixbuf, Pango, Cairo, Backends interaction
+;    (:file "rtest-gdk4-pixbuf-interaction")
+;    (:file "rtest-gdk4-pango-interaction")
+;    (:file "rtest-gdk4-cairo-interaction")
+;    (:file "rtest-gdk4-x11-interaction")
+;    (:file "rtest-gdk4-wayland-interaction")
 
      ;; GSK
      (:file "rtest-gsk4-renderer")
