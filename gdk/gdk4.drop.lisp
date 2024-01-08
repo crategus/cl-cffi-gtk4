@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -98,16 +98,16 @@
 (setf (documentation 'drop 'type)
  "@version{#2023-8-7}
   @begin{short}
-    The @sym{gdk:drop} object represents the target side of an ongoing DND
+    The @class{gdk:drop} object represents the target side of an ongoing DND
     operation.
   @end{short}
   Possible drop sites get informed about the status of the ongoing drag
   operation with events of @code{:enter}, @code{:leave}, @code{:motion} and
-  @code{:start} type. The @sym{gdk:drop} object can be obtained from these
+  @code{:start} type. The @class{gdk:drop} object can be obtained from these
   @class{gdk:events} events using the @fun{gdk:dnd-event-drop} function.
 
   The actual data transfer is initiated from the target side via an async read,
-  using one of the @sym{gdk:drop} functions for this purpose:
+  using one of the @class{gdk:drop} functions for this purpose:
   the @fun{gdk:drop-read-async} or @fun{gdk:drop-read-value-async} functions.
 
   GTK provides a higher level abstraction based on top of these functions, and
@@ -119,7 +119,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- drop-actions -----------------------------------------------------------
+;;; --- gdk:drop-actions -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "actions" 'drop) t)
@@ -140,7 +140,7 @@
     Accessor of the @slot[gdk:drop]{actions} slot of the @class{gdk:drop}
     class.
   @end{short}
-  The @sym{gdk:drop-actions} function returns the possible actions for the
+  The @fun{gdk:drop-actions} function returns the possible actions for the
   drop object. If this value contains multiple actions - i.e. the
   @fun{gdk:drag-action-is-unique} function returns @em{false} for the result -
   the @fun{gdk:drop-finish} function must choose the action to use when
@@ -158,7 +158,7 @@
   @see-function{gdk:drop-finish}
   @see-function{gdk:drag-action-is-unique}")
 
-;;; --- drop-device ------------------------------------------------------------
+;;; --- gdk:drop-device --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "device" 'drop) t)
@@ -178,11 +178,11 @@
     Accessor of the @slot[gdk:drop]{device} slot of the @class{gdk:drop}
     class.
   @end{short}
-  The @sym{gdk:drop-device} function returns the device performing the drop.
+  The @fun{gdk:drop-device} function returns the device performing the drop.
   @see-class{gdk:drop}
   @see-class{gdk:device}")
 
-;;; --- drop-display -----------------------------------------------------------
+;;; --- gdk:drop-display -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "display" 'drop) t)
@@ -201,12 +201,12 @@
     Accessor of the @slot[gdk:drop]{display} slot of the @class{gdk:drop}
     class.
   @end{short}
-  The @sym{gdk:drop-display} function gets the display that @arg{drop} was
+  The @fun{gdk:drop-display} function gets the display that @arg{drop} was
   created for.
   @see-class{gdk:drop}
   @see-class{gdk:display}")
 
-;;; --- drop-drag --------------------------------------------------------------
+;;; --- gdk:drop-drag ----------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "drag" 'drop) t)
@@ -231,7 +231,7 @@
   @see-class{gdk:drop}
   @see-class{gdk:drag}")
 
-;;; --- drop-formats -----------------------------------------------------------
+;;; --- gdk:drop-formats -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "formats" 'drop) t)
@@ -251,12 +251,12 @@
     Accessor of the @slot[gdk:drop]{formats} slot of the @class{gdk:drop}
     class.
   @end{short}
-  The @sym{gdk:drop-formats} function returns the content formats that the drop
+  The @fun{gdk:drop-formats} function returns the content formats that the drop
   offers the data to be read in.
   @see-class{gdk:drop}
   @see-class{gdk:content-formats}")
 
-;;; --- drop-surface -----------------------------------------------------------
+;;; --- gdk:drop-surface -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "surface" 'drop) t)
@@ -276,7 +276,7 @@
     Accessor of the @slot[gdk:drop]{surface} slot of the @class{gdk:drop}
     class.
   @end{short}
-  The @sym{gdk:drop-surface} function returns the surface performing the drop.
+  The @fun{gdk:drop-surface} function returns the surface performing the drop.
   @see-class{gdk:drop}
   @see-class{gdk:surface}")
 
@@ -461,7 +461,7 @@
  "@version{#2023-8-7}
   @argument[drop]{a @class{gdk:drop} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{A @symbol{g:value} value containing the result.}
+  @return{The @symbol{g:value} value containing the result.}
   @begin{short}
     Finishes an async drop read started with the @fun{gdk:drop-read-value-async}
     function.

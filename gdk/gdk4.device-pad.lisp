@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -101,7 +101,7 @@
       (documentation 'device-pad 'type)
  "@version{2023-7-30}
   @begin{short}
-    The @sym{gdk:device-pad} interface is an interface implemented by devices
+    The @class{gdk:device-pad} interface is an interface implemented by devices
     of @code{:tablet-pad} type.
   @end{short}
   It allows querying the features provided by the pad device
@@ -129,7 +129,7 @@
  #+liber-documentation
  "@version{#2023-3-11}
   @argument[pad]{a @class{gdk:device-pad} object}
-  @return{An integer with the number of button/ring/strip groups in the pad.}
+  @return{The integer with the number of button/ring/strip groups in the pad.}
   @begin{short}
     Returns the number of groups this pad device has.
   @end{short}
@@ -150,7 +150,7 @@
   @argument[pad]{a @class{gdk:device-pad} object}
   @argument[index]{an integer with the group to get the number of available
     modes from}
-  @return{An integer with the number of modes available in the group,}
+  @return{The integer with the number of modes available in the group,}
   @begin{short}
     Returns the number of modes that the group may have.
   @end{short}
@@ -170,7 +170,7 @@
   @argument[pad]{a @class{gdk:device-pad} object}
   @argument[feature]{a @symbol{gdk:device-pad-feature} value with the pad
     feature}
-  @return{An integer with the amount of elements of type feature that this pad
+  @return{The integer with the amount of elements of type feature that this pad
     has.}
   @begin{short}
     Returns the number of features a tablet pad has.
@@ -194,7 +194,7 @@
     feature to get the group from}
   @argument[index]{an integer with the index of the feature to get the
     group from}
-  @return{An integer with the group number of the queried pad feature.}
+  @return{The integer with the group number of the queried pad feature.}
   @begin{short}
     Returns the group the given feature and @arg{index} belong to, or -1 if
     feature/index do not exist in pad .

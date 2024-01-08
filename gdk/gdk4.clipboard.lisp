@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -106,11 +106,11 @@
 (setf (documentation 'clipboard 'type)
  "@version{2023-7-30}
   @begin{short}
-    The @sym{gdk:clipboard} object represents data shared between applications
+    The @class{gdk:clipboard} object represents data shared between applications
     or inside an application.
   @end{short}
 
-  To get a @sym{gdk:clipboard} object, use the @fun{gdk:display-clipboard}
+  To get a @class{gdk:clipboard} object, use the @fun{gdk:display-clipboard}
   or @fun{gdk:display-primary-clipboard} functions. You can find out about the
   data that is currently available in a clipboard using the
   @fun{gdk:clipboard-formats} function.
@@ -130,8 +130,8 @@ lambda (clipboard)    :run-last
       @end{pre}
       The signal is emitted when the clipboard changes ownership.
       @begin[code]{table}
-       @entry[clipboard]{The @sym{gdk:clipboard} object on which the signal was
-         emitted.}
+       @entry[clipboard]{The @class{gdk:clipboard} object on which the signal
+         was emitted.}
       @end{table}
   @end{dictionary}
   @see-slot{gdk:clipboard-content}
@@ -145,7 +145,7 @@ lambda (clipboard)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- clipboard-content ------------------------------------------------------
+;;; --- gdk:clipboard-content --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "content" 'clipboard) t)
@@ -165,7 +165,7 @@ lambda (clipboard)    :run-last
     Accessor of the @slot[gdk:clipboard]{content} slot of the
     @class{gdk:clipboard} class.
   @end{short}
-  The @sym{gdk:clipboard-content} function returns the
+  The @fun{gdk:clipboard-content} function returns the
   @class{gdk:content-provider} object currently set on @arg{clipboard}. If the
   clipboard is empty or its contents are not owned by the current process,
   @code{nil} will be returned.
@@ -177,7 +177,7 @@ lambda (clipboard)    :run-last
   @see-class{gdk:content-provider}
   @see-function{gdk:clipboard-set-content}")
 
-;;; --- clipboard-display ------------------------------------------------------
+;;; --- gdk:clipboard-display --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "display" 'clipboard) t)
@@ -197,12 +197,12 @@ lambda (clipboard)    :run-last
     Accessor of the @slot[gdk:clipboard]{display} slot of the
     @class{gdk:clipboard} class.
   @end{short}
-  The @sym{gdk:clipboard-display} function returns the display that the
+  The @fun{gdk:clipboard-display} function returns the display that the
   clipboard was created for.
   @see-class{gdk:clipboard}
   @see-class{gdk:display}")
 
-;;; --- clipboard-formats ------------------------------------------------------
+;;; --- gdk:clipboard-formats --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "formats" 'clipboard) t)
@@ -221,12 +221,12 @@ lambda (clipboard)    :run-last
     Accessor of the @slot[gdk:clipboard]{formats} slot of the
     @class{gdk:clipboard} class.
   @end{short}
-  The @sym{gdk:clipboard-formats} function gets the formats that the clipboard
+  The @fun{gdk:clipboard-formats} function gets the formats that the clipboard
   can provide its current contents in.
   @see-class{gdk:clipboard}
   @see-class{gdk:content-formats}")
 
-;;; --- clipboard-local --------------------------------------------------------
+;;; --- gdk:clipboard-local ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "formats" 'clipboard) t)
@@ -247,7 +247,7 @@ lambda (clipboard)    :run-last
     Accessor of the @slot[gdk:clipboard]{local} slot of the
     @class{gdk:clipboard} class.
   @end{short}
-  The @sym{gdk:clipboard-local} function returns whether the clipboard is local.
+  The @fun{gdk:clipboard-local} function returns whether the clipboard is local.
   See also the @fun{gdk:clipboard-is-local} function.
   @see-class{gdk:clipboard}
   @see-function{gdk:clipboard-is-local}")
@@ -470,7 +470,7 @@ lambda (clipboard)    :run-last
  "@version{#2023-7-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
-  @return{A @symbol{g:value} instance which holds the value of the content of
+  @return{The @symbol{g:value} instance which holds the value of the content of
     @arg{clipboard}.}
   @begin{short}
     Finishes an asynchronous clipboard read started with the
@@ -542,7 +542,7 @@ lambda (clipboard)    :run-last
  "@version{#2023-7-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
-  @return{A @class{gdk:texture} object which holds the value of the content of
+  @return{The @class{gdk:texture} object which holds the value of the content of
     @arg{clipboard}.}
   @begin{short}
     Finishes an asynchronous clipboard read started with the
@@ -611,7 +611,7 @@ lambda (clipboard)    :run-last
  "@version{#2023-7-30}
   @argument[clipboard]{a @class{gdk:clipboard} object}
   @argument[result]{a @class{g:async-result} instance}
-  @return{A string which holds the value of the content of @arg{clipboard}.}
+  @return{The string which holds the value of the content of @arg{clipboard}.}
   @begin{short}
     Finishes an asynchronous clipboard read started with the
     @fun{gdk:clipboard-read-text-async} function.

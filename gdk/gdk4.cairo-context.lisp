@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -57,10 +57,10 @@
 (setf (documentation 'cairo-context 'type)
  "@version{2023-4-7}
   @begin{short}
-    The @sym{gdk:cairo-context} object is an object representing the platform
+    The @class{gdk:cairo-context} object is an object representing the platform
     specific draw context.
   @end{short}
-  The @sym{gdk:cairo-context} objects are created for a @class{gdk:display}
+  The @class{gdk:cairo-context} objects are created for a @class{gdk:display}
   object using the @fun{gdk:surface-create-cairo-context} function, and the
   context can then be used to draw on that @class{gdk:surface} object.
   @see-class{gdk:display}

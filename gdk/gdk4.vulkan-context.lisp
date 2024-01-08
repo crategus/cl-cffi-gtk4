@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -93,15 +93,15 @@
 (setf (documentation 'vulkan-context 'type)
  "@version{#2023-8-4}
   @begin{short}
-    The @sym{gdk:vulkan-context} object is an object representing the platform
+    The @class{gdk:vulkan-context} object is an object representing the platform
     specific Vulkan draw context.
   @end{short}
   The @sym{gdk:vulkan-context} object is created for a @class{gdk:surface}
   object using the @fun{gdk:surface-create-vulkan-context} function, and the
   Vulkan context will match the characteristics of the surface.
 
-  Support for the @sym{gdk:vulkan-context} object is platform specific, context
-  creation can fail, returning a @code{NULL} context.
+  Support for the @class{gdk:vulkan-context} object is platform specific,
+  context creation can fail, returning a @code{NULL} context.
   @begin[Signal Details]{dictionary}
     @subheading{The \"images-updated\" signal}
       @begin{pre}
@@ -111,8 +111,8 @@ lambda (context)    :run-last
       changed. Usually this means that the swapchain had to be recreated, for
       example in response to a change of the surface size.
       @begin[code]{table}
-        @entry[context]{The @sym{gdk:vulkan-context} object on which the signal
-          is emitted.}
+        @entry[context]{The @class{gdk:vulkan-context} object on which the
+          signal is emitted.}
       @end{table}
   @end{dictionary}
   @see-class{gdk:draw-context}")

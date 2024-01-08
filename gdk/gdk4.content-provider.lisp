@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,7 +81,7 @@
 (setf (documentation 'content-provider 'type)
  "@version{#2023-8-4}
   @begin{short}
-    A @sym{gdk:content-provider} object is used to provide content for the
+    A @class{gdk:content-provider} object is used to provide content for the
     clipboard in a number of formats.
   @end{short}
   To create a @class{gdk:content-provider} object, use the
@@ -134,11 +134,11 @@ lambda (provider)    :run-last
 ;;; --- content-provider-storable-formats --------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "storable-formats" 
+(setf (documentation (liber:slot-documentation "storable-formats"
                                                'content-provider) t)
- "The @code{storable-formats} property of type @class{gdk:content-formats} 
+ "The @code{storable-formats} property of type @class{gdk:content-formats}
   (Read) @br{}
-  The subset of formats that clipboard managers should store the dato of the 
+  The subset of formats that clipboard managers should store the dato of the
   content provider in.")
 
 #+liber-documentation
@@ -148,14 +148,14 @@ lambda (provider)    :run-last
  "@version{#2023-8-4}
   @syntax[]{(gdk:content-provider-storable-formats object) => formats}
   @argument[object]{a @class{gdk:content-provider} object}
-  @argument[formats]{a @class{gdk:conten-formats} instance with the storable 
+  @argument[formats]{a @class{gdk:conten-formats} instance with the storable
     formats of the content provider}
   @begin{short}
-    Gets the formats that the content provider suggests other applications to 
+    Gets the formats that the content provider suggests other applications to
     store the data in.
   @end{short}
-  An example of such an application would be a clipboard manager. This can be 
-  assumed to be a subset of @slot[gdk:content-provider]{storable-formats}.   
+  An example of such an application would be a clipboard manager. This can be
+  assumed to be a subset of @slot[gdk:content-provider]{storable-formats}.
   @see-class{gdk:content-provider}
   @see-class{gdk:content-formats}
   @see-function{gdk:content-provider-formats}")
@@ -169,7 +169,7 @@ lambda (provider)    :run-last
  #+liber-documentation
  "@version{#2023-8-4}
   @argument[gvalue]{a @class{g:value} instance}
-  @return{A new @class{gdk:content-provider} object.}
+  @return{The new @class{gdk:content-provider} object.}
   @begin{short}
     Creates a content provider that provides the given @arg{gvalue}.
   @end{short}

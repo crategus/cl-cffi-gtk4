@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -80,18 +80,18 @@
 (setf (documentation 'display-manager 'type)
  "@version{2023-4-14}
   @begin{short}
-    The purpose of the @sym{gdk:display-manager} singleton object is to offer
+    The purpose of the @class{gdk:display-manager} singleton object is to offer
     notification when displays appear or disappear or the default display
     changes.
   @end{short}
 
   You can use the @fun{gdk:display-manager-get} function to obtain the
-  @sym{gdk:display-manager} singleton, but that should be rarely necessary.
+  @class{gdk:display-manager} singleton, but that should be rarely necessary.
   Typically, initializing GTK opens a display that you can work with without
-  ever accessing the @sym{gdk:display-manager} object.
+  ever accessing the @class{gdk:display-manager} object.
 
   The GDK library can be built with support for multiple backends. The
-  @sym{gdk:display-manager} object determines which backend is used at runtime.
+  @class{gdk:display-manager} object determines which backend is used at runtime.
 
   When writing backend specific code that is supposed to work with multiple
   GDK backends, you have to consider both compile time and runtime. At compile
@@ -126,7 +126,7 @@ lambda (manager display)    :run-last
       @end{pre}
       The signal is emitted when a display is opened.
       @begin[code]{table}
-        @entry[manager]{The @sym{gdk:display-manager} object on which the
+        @entry[manager]{The @class{gdk:display-manager} object on which the
           signal is emitted.}
         @entry[display]{The opened @class{gdk:display} object.}
       @end{table}
@@ -139,7 +139,7 @@ lambda (manager display)    :run-last
 ;;; Property and Accesor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- display-manager-default-display ----------------------------------------
+;;; --- gdk:display-manager-default-display ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-display"
@@ -161,9 +161,9 @@ lambda (manager display)    :run-last
     Accessor of the @slot[gdk:display-manager]{default-display} slot of the
     @class{gdk:display-manager} class.
   @end{short}
-  The @sym{gdk:display-manager-default-display} function gets the default
+  The @fun{gdk:display-manager-default-display} function gets the default
   @class{gdk:display} object, or @code{nil} if there is no default display. The
-  @sym{(setf gdk:display-manager-default-display)} function sets @arg{display}
+  @setf{gdk:display-manager-default-display} function sets @arg{display}
   as the default display.
   @begin[Example]{dictionary}
     @begin{pre}

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -76,7 +76,7 @@
 (setf (documentation 'app-launch-context 'type)
  "@version{2023-4-7}
   @begin{short}
-    The @sym{gdk:app-launch-context} object is an implementation of the
+    The @class{gdk:app-launch-context} object is an implementation of the
     @class{g:app-launch-context} object that handles launching an application
     in a graphical context.
   @end{short}
@@ -98,7 +98,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- app-launch-context-display ---------------------------------------------
+;;; --- gdk:app-launch-context-display -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "display" 'app-launch-context) t)
@@ -119,8 +119,8 @@
     Accessor of the @code{display} slot of the @class{gdk:app-launch-context}
     class.
   @end{short}
-  The @sym{(setf gdk:app-launch-context-display)} function gets the display
-  that the launch context is for.
+  The @setf{gdk:app-launch-context-display} function gets the display that the
+  launch context is for.
   @see-class{gdk:app-launch-context}
   @see-class{gdk:display}")
 

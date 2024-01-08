@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -82,14 +82,14 @@
 (setf (documentation 'draw-context 'type)
  "@version{2023-8-3}
   @begin{short}
-    The @sym{gdk:draw-context} object is the base object used by contexts
+    The @class{gdk:draw-context} object is the base object used by contexts
     implementing different rendering methods, such as @class{gdk:gl-context} or
     @class{gdk:vulkan-context} contexts.
   @end{short}
   It provides shared functionality between those contexts. You will always
   interact with one of those subclasses.
 
-  A @sym{gdk:draw-context} object is always associated with a single toplevel
+  A @class{gdk:draw-context} object is always associated with a single toplevel
   surface.
   @see-class{gdk:gl-context}
   @see-class{gdk:vulkan-context}
@@ -99,7 +99,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- draw-context-display ---------------------------------------------------
+;;; --- gdk:draw-context-display -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "display" 'draw-context) t)
@@ -119,12 +119,12 @@
     Accessor of the @code{display} slot of the @class{gdk:draw-context}
     class.
   @end{short}
-  The @sym{gdk:draw-context-display} function retrieves the display the draw
+  The @fun{gdk:draw-context-display} function retrieves the display the draw
   context is created for.
   @see-class{gdk:draw-context}
   @see-class{gdk:display}")
 
-;;; --- draw-context-surface ---------------------------------------------------
+;;; --- gdk:draw-context-surface -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "surface" 'draw-context) t)
@@ -144,7 +144,7 @@
     Accessor of the @code{surface} slot of the @class{gdk:draw-context}
     class.
   @end{short}
-  The @sym{gdk:draw-context-surface} function retrieves the surface used by
+  The @fun{gdk:draw-context-surface} function retrieves the surface used by
   the draw context.
   @see-class{gdk:draw-context}
   @see-class{gdk:surface}")
@@ -253,7 +253,7 @@
  #+liber-documentation
  "@version{2023-8-3}
   @argument[context]{a @class{gdk:draw-context} object}
-  @return{A @symbol{cairo:region-t} instance or @code{null-pointer} if not
+  @return{The @symbol{cairo:region-t} instance or @code{null-pointer} if not
     drawing a frame.}
   @begin{short}
     Retrieves the region that is currently in the process of being repainted.
