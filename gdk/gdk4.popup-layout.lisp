@@ -2,11 +2,11 @@
 ;;; gdk4.popup-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -85,20 +85,20 @@
 (setf (liber:alias-for-symbol 'anchor-hints)
       "GFlags"
       (liber:symbol-documentation 'anchor-hints)
- "@version{#2023-4-10}
+ "@version{2024-2-17}
   @begin{short}
     Positioning hints for aligning a surface relative to a rectangle.
   @end{short}
   These hints determine how the surface should be positioned in the case that
   the surface would fall off-screen if placed in its ideal position.
 
-  For example, @code{:flip-x} will replace the @code{:north-west} gravity with
-  the @code{:north-east} gravity and vice versa if the surface extends beyond
-  the left or right edges of the monitor.
+  For example, the @code{:flip-x} value will replace the @code{:north-west}
+  gravity with the @code{:north-east} gravity and vice versa if the surface
+  extends beyond the left or right edges of the monitor.
 
-  If @code{:slide-x} is set, the surface can be shifted horizontally to fit
-  on-screen. If @code{:resize-x} is set, the surface can be shrunken
-  horizontally to fit.
+  If the @code{:slide-x} value is set, the surface can be shifted horizontally
+  to fit on-screen. If the @code{:resize-x} value is set, the surface can be
+  shrunken horizontally to fit.
 
   In general, when multiple flags are set, flipping should take precedence over
   sliding, which should take precedence over resizing.
@@ -141,7 +141,7 @@
 (setf (liber:alias-for-class 'popup-layout)
       "GBoxed"
       (documentation 'popup-layout 'type)
- "@version{#2023-4-10}
+ "@version{2024-2-17}
   @begin{short}
     Popups are positioned relative to their parent surface.
   @end{short}
@@ -150,7 +150,7 @@
   since it depends on external constraints, such as the position of the parent
   surface, and the screen dimensions.
 
-  The basic ingredients are a rectangle on the parent surface, and the anchor 
+  The basic ingredients are a rectangle on the parent surface, and the anchor
   on both that rectangle and the popup. The anchors specify a side or corner to
   place next to each other.
 
@@ -159,13 +159,12 @@
   For cases where placing the anchors next to each other would make the popup
   extend offscreen, the layout includes some hints for how to resolve this
   problem. The hints may suggest to flip the anchor position to the other side,
-  or to 'slide' the popup along a side, or to resize it.
+  or to 'slide' the popup along a side, or to resize it. These hints may be
+  combined.
 
   @image[popup-flip]{Figure: Flipping popups}
 
   @image[popup-slide]{Figure: Sliding popups}
-
-  These hints may be combined.
 
   Ultimatively, it is up to the windowing system to determine the position and
   size of the popup. You can learn about the result by calling the
@@ -175,7 +174,14 @@
   For example, the @class{gtk:popover} object changes its arrow position
   accordingly. But you have to be careful avoid changing the size of the
   popover, or it has to be presented again.
-  @see-class{gdk:popup}")
+  @see-constructor{gdk:popup-layout-new}
+  @see-constructor{gdk:popup-layout-copy}
+  @see-class{gdk:popup}
+  @see-class{gtk:popover}
+  @see-function{gdk:popup-position-x}
+  @see-function{gdk:popup-position-y}
+  @see-function{gdk:popup-rect-anchor}
+  @see-function{gdk:popup-surface-anchor}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_popup_layout_new ()
@@ -190,12 +196,12 @@
 
 (defun popup-layout-new (rect rect-anchor surface-anchor)
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{2024-2-17}
   @argument[rect]{a @class{gdk:rectangle} instance with the anchor rectangle
     to align surface with}
-  @argument[rect-anchor]{a @symbol{gdk:anchor-hints} value with the point on
-    @arg{rect} to align with the anchor point of the surface}
-  @argument[surface-anchor]{a @symbol{gdk:anchor-hints} value with the point on
+  @argument[rect-anchor]{a @symbol{gdk:gravity} value with the point on
+  @arg{rect} to align with the anchor point of the surface}
+  @argument[surface-anchor]{a @symbol{gdk:gravity} value with the point on
     surface to align with the anchor point of @arg{rect}}
   @return{The newly created @class{gdk:popup-layout} instance.}
   @begin{short}
@@ -204,16 +210,16 @@
   Used together with the @fun{gdk:popup-present} function to describe how a
   popup surface should be placed and behave on-screen.
 
-  The @arg{rect} value is relative to the top-left corner of the
-  surface's parent. The @arg{rect-anchor} and @arg{surface-anchor} values
-  determine anchor points on @arg{rect} and surface to pin together.
+  The rectangle is relative to the top-left corner of the parent of the surface.
+  The @arg{rect-anchor} and @arg{surface-anchor} values determine anchor points
+  on the rectangle and surface to pin together.
 
-  The position of @arg{rect}'s anchor point can optionally be offset using the
-  @fun{gdk:popup-layout-offset} function, which is equivalent to offsetting the
-  position of surface.
+  The position of the anchor point of the rectangle can optionally be offset
+  using the @fun{gdk:popup-layout-offset} function, which is equivalent to
+  offsetting the position of surface.
   @see-class{gdk:popup-layout}
   @see-class{gdk:rectangle}
-  @see-symbol{gdk:anchor-hints}
+  @see-symbol{gdk:gravity}
   @see-function{gdk:popup-present}
   @see-function{gdk:popup-layout-offset}"
   (let ((layout (make-instance 'popup-layout)))
@@ -255,14 +261,15 @@
 ;;; gdk_popup_layout_copy ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_popup_layout_copy" popup-layout-copy) (g:boxed popup-layout)
+(cffi:defcfun ("gdk_popup_layout_copy" popup-layout-copy)
+    (g:boxed popup-layout :return)
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{2024-2-17}
   @argument[layout]{a @class{gdk:popup-layout} instance}
-  @return{A @class{gdk:popup-layout} instance with the copy of @arg{layout}.}
-  @begin{short}  
+  @return{The @class{gdk:popup-layout} instance with the copy of @arg{layout}.}
+  @begin{short}
     Create a new popup layout and copy the contents of @arg{layout} into it.
-  @end{short}  
+  @end{short}
   @see-class{gdk:popup-layout}"
   (layout (g:boxed popup-layout)))
 
@@ -274,13 +281,13 @@
 
 (cffi:defcfun ("gdk_popup_layout_equal" popup-layout-equal) :boolean
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{2024-2-17}
   @argument[layout1]{a @class{gdk:popup-layout} instance}
   @argument[layout2]{a @class{gdk:popup-layout} instance}
-  @return{@em{True} if @arg{layout1} and @arg{layout2} have identical layout 
+  @return{@em{True} if @arg{layout1} and @arg{layout2} have identical layout
     properties, otherwise @em{false}.}
   @begin{short}
-    Check whether @arg{layout1} and @arg{layout2} have identical layout 
+    Check whether @arg{layout1} and @arg{layout2} have identical layout
     properties.
   @end{short}
   @see-class{gdk:popup-layout}"
@@ -304,16 +311,15 @@
 (cffi:defcfun ("gdk_popup_layout_get_anchor_rect" popup-layout-anchor-rect)
     (g:boxed rectangle)
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{2024-2-17}
   @syntax[]{(gdk:popup-layout-anchor-rect layout) => rect}
   @syntax[]{(setf (gdk:popup-layout-anchor-rect layout) rect)}
   @argument[layout]{a @class{gdk:popup-layout} instance}
-  @argument[rect]{a anchor @class{gdk:rectangle} instance}  
+  @argument[rect]{an anchor @class{gdk:rectangle} instance}
   @begin{short}
-    The @sym{gdk:popup-layout-anchor-rect} function gets the anchor rectangle.
+    The @fun{gdk:popup-layout-anchor-rect} function gets the anchor rectangle.
   @end{short}
-  The @sym{(setf gdk:popup-layout-anchor-rect)} function sets the anchor 
-  rectangle.
+  The @setf{gdk:popup-layout-anchor-rect} function sets the anchor rectangle.
   @see-class{gdk:popup-layout}
   @see-class{gdk:rectangle}"
   (layout (g:boxed popup-layout)))
@@ -335,17 +341,17 @@
 (cffi:defcfun ("gdk_popup_layout_get_rect_anchor" popup-layout-rect-anchor)
     gravity
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{2024-2-17}
   @syntax[]{(gdk:popup-layout-rect-anchor layout) => gravity}
   @syntax[]{(setf (gdk:popup-layout-rect-anchor layout) gravity)}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[gravity]{a @symbol{gdk:gravity} value with the anchor on the
     anchor rectangle}
   @begin{short}
-    The @sym{gdk:popup-layout-rect-anchor} function returns the anchor position 
+    The @fun{gdk:popup-layout-rect-anchor} function returns the anchor position
     on the anchor rectangle.
   @end{short}
-  The @sym{(setf gdk:popup-layout-rect-anchor)} function sets the anchor on the 
+  The @setf{gdk:popup-layout-rect-anchor} function sets the anchor on the
   anchor rectangle.
   @see-class{gdk:popup-layout}
   @see-symbol{gdk:gravity}"
@@ -368,18 +374,18 @@
 (cffi:defcfun ("gdk_popup_layout_get_surface_anchor"
                popup-layout-surface-anchor) gravity
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{2024-2-17}
   @syntax[]{(gdk:popup-layout-surface-anchor layout) => gravity}
   @syntax[]{(setf (gdk:popup-layout-surface-anchor layout) gravity)}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[gravity]{a @symbol{gdk:gravity} value with the anchor on the
     popup surface}
   @begin{short}
-    The @sym{gdk:popup-layout-surface-anchor} function returns the anchor 
+    The @fun{gdk:popup-layout-surface-anchor} function returns the anchor
     position on the popup surface.
   @end{short}
-  The @sym{(setf gdk:popup-layout-surface-anchor)} function sets the anchor on 
-  the popup surface.  
+  The @setf{gdk:popup-layout-surface-anchor} function sets the anchor on the
+  popup surface.
   @see-class{gdk:popup-layout}
   @see-symbol{gdk:gravity}"
   (layout (g:boxed popup-layout)))
@@ -401,21 +407,21 @@
 (cffi:defcfun ("gdk_popup_layout_get_anchor_hints" popup-layout-anchor-hints)
     anchor-hints
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{2024-2-17}
   @syntax[]{(gdk:popup-layout-anchor-hints layout) => hints}
   @syntax[]{(setf (gdk:popup-layout-anchor-hints layout) hints)}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[hints]{a @symbol{gdk:anchor-hints} value}
   @begin{short}
-    The @sym{gdk:popup-layout-anchor-hints} function gets the 
-    @symbol{gdk:anchor-hints} value.
+    The @fun{gdk:popup-layout-anchor-hints} function gets the anchor hints.
   @end{short}
-  The @sym{(setf gdk:popup-layout-anchor-hints)} function sets new anchor hints.
+  The @setf{gdk:popup-layout-anchor-hints} function sets new anchor hints.
 
-  The set @arg{hints} determines how surface will be moved if the anchor points 
-  cause it to move off-screen. For example, @code{:flip-x} will replace 
-  @code{:north-west} with @code{:north-east} and vice versa if surface extends 
-  beyond the left or right edges of the monitor.  
+  The anchor hints determines how surface will be moved if the anchor points
+  cause it to move off-screen. For example, the @code{:flip-x} value will
+  replace the @code{:north-west} gravity with the @code{:north-east} gravity
+  and vice versa if surface extends beyond the left or right edges of the
+  monitor.
   @see-class{gdk:popup-layout}
   @see-symbol{gdk:anchor-hints}"
   (layout (g:boxed popup-layout)))
@@ -443,18 +449,18 @@
 
 (defun popup-layout-offset (layout)
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{2024-2-17}
   @syntax[]{(gdk:popup-layout-offset layout) => dx, dy}
   @syntax[]{(setf (gdk:popup-layout-offset layout) (list dx dy))}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[dx]{an integer with the delta x coordinate}
   @argument[dx]{an integer with the delta y coordinate}
   @begin{short}
-    The @sym{gdk:popup-layout-offset} function retrieves the offset for the 
-    anchor rectangle.    
+    The @fun{gdk:popup-layout-offset} function retrieves the offset for the
+    anchor rectangle.
   @end{short}
-  The @sym{(setf gdk:popup-layout-offset)} function offset the position of the 
-  anchor rectangle with the given delta.
+  The @setf{gdk:popup-layout-offset} function offset the position of the anchor
+  rectangle with the given delta.
   @see-class{gdk:popup-layout}"
   (cffi:with-foreign-objects ((dx :int) (dy :int))
     (%popup-layout-offset layout dx dy)
@@ -492,25 +498,25 @@
 #+gtk-4-2
 (defun popup-layout-shadow-width (layout)
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{2024-2-17}
   @syntax[]{(gdk:popup-layout-shadow-width layout) => left, right, top, bottom}
-  @syntax[]{(setf (gdk:popup-layout-shadow-width layout) (list left right top bottom))}
+  @syntax[]{(setf (gdk:popup-layout-shadow-width layout)
+    (list left right top bottom))}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[left]{an integer with the left shadow width}
   @argument[right]{an integer with the right shadow width}
   @argument[top]{an integer with the top shadow width}
   @argument[bottom]{an integer with the bottom shadow width}
   @begin{short}
-    The @sym{gdk:popup-layout-shadow-width} function obtains the shadow widths 
+    The @fun{gdk:popup-layout-shadow-width} function obtains the shadow widths
     of the popup layout.
   @end{short}
-  The @sym{(setf gdk:popup-layout-shadow-width)} function sets the shadow width 
-  of the popup.
+  The @setf{gdk:popup-layout-shadow-width} function sets the shadow width.
 
-  The shadow width corresponds to the part of the computed surface size that 
+  The shadow width corresponds to the part of the computed surface size that
   would consist of the shadow margin surrounding the window, would there be any.
 
-  Since 4.2  
+  Since 4.2
   @see-class{gdk:popup-layout}"
   (cffi:with-foreign-objects ((left :int) (right :int) (top :int) (bottom :int))
     (%popup-layout-shadow-width layout left right top bottom)

@@ -2,11 +2,11 @@
 ;;; gdk4.toplevel-size.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -66,7 +66,7 @@
       (liber:symbol-documentation 'toplevel-size)
  "@version{#2023-4-10}
   @begin{short}
-    The @sym{gdk:toplevel-size} structure contains information that may be
+    The @class{gdk:toplevel-size} structure contains information that may be
     useful for users of @class{gdk:toplevel} objects to compute a surface size.
   @end{short}
   It also carries information back with the computational result.

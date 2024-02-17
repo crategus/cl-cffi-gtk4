@@ -2,11 +2,11 @@
 ;;; gdk4.toplevel-layout.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -70,13 +70,15 @@
 (setf (liber:alias-for-class 'toplevel-layout)
       "GBoxed"
       (documentation 'toplevel-layout 'type)
- "@version{#2023-4-10}
+ "@version{2024-1-9}
   @begin{short}
     Toplevel surfaces are sovereign windows that can be presented to the user
     in various states (maximized, on all workspaces, etc).
   @end{short}
-  The @sym{gdk:toplevel-layout} structure contains information that is necessary
-  to do so, and is passed to the @fun{gdk:toplevel-present} function.
+  The @class{gdk:toplevel-layout} structure contains information that is
+  necessary to do so, and is passed to the @fun{gdk:toplevel-present} function.
+  @see-constructor{gdk:toplevel-layout-new}
+  @see-constructor{gdk:toplevel-layout-copy}
   @see-class{gdk:toplevel}
   @see-function{gdk:toplevel-present}")
 
@@ -88,7 +90,7 @@
 
 (defun toplevel-layout-new ()
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{2024-1-9}
   @return{The newly created @class{gdk:toplevel-layout} instance.}
   @begin{short}
     Create a toplevel layout description.
@@ -139,12 +141,13 @@
 (cffi:defcfun ("gdk_toplevel_layout_copy" toplevel-layout-copy)
      (g:boxed toplevel-layout :return)
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{2024-1-9}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
-  @return{A @class{gdk:toplevel-layout} instance with the copy of @arg{layout}.}
+  @return{The @class{gdk:toplevel-layout} instance with the copy of
+    @arg{layout}.}
   @begin{short}
     Create a new @class{gdk:toplevel-layout} instance and copy the contents of
-    layout into it.
+    @arg{layout} into it.
   @end{short}
   @see-class{gdk:toplevel-layout}"
   (layout (g:boxed toplevel-layout)))
@@ -157,24 +160,27 @@
 
 (cffi:defcfun ("gdk_toplevel_layout_equal" toplevel-layout-equal) :boolean
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{2024-1-9}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[other]{another @class{gdk:toplevel-layout} instance}
   @return{@em{True} if @arg{layout} and @arg{other} have identical layout
     properties, otherwise @em{false}.}
   @begin{short}
-    Check whether @arg{layout} and @arg{other} has identical layout properties.
+    Check whether @arg{layout} and @arg{other} have identical layout properties.
   @end{short}
   @see-class{gdk:toplevel-layout}"
   (layout (g:boxed toplevel-layout))
   (other (g:boxed toplevel-layout)))
 
-(export 'toplevel-layout-copy)
+(export 'toplevel-layout-equal)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_toplevel_layout_set_maximized ()
 ;;; gdk_toplevel_layout_get_maximized ()
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: The implementation is not quiet correct. The return value specifies
+;; whether the layout specifies the maximized state for the toplevel.
 
 (defun (setf toplevel-layout-maximized) (maximized layout)
   (cffi:foreign-funcall "gdk_toplevel_layout_set_maximized"
@@ -190,13 +196,13 @@
 
 (defun toplevel-layout-maximized (layout)
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{2024-1-9}
   @syntax[]{(gdk:toplevel-layout-maximized layout) => maximized}
   @syntax[]{(setf (gdk:toplevel-layout-maximized layout) maximized)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[maximized]{a boolean whether the toplevel should be maximized}
   @begin{short}
-    If the layout specifies whether to the toplevel should go maximized, the
+    If the layout specifies whether the toplevel should go maximized, the
     @arg{maximized} argument is set to @em{true} if it should go fullscreen, or
     @em{false}, if it should go unmaximized.
   @end{short}
@@ -212,29 +218,32 @@
 ;;; gdk_toplevel_layout_set_fullscreen ()
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: The implementation is not quiet correct. The return value specifies
+;; whether the layout specifies the fullscreen state for the toplevel.
+
 (defun (setf toplevel-layout-fullscreen) (fullscreen layout monitor)
   (cffi:foreign-funcall "gdk_toplevel_layout_set_fullscreen"
                         (g:boxed toplevel-layout) layout
-                        (g:object monitor) monitor
                         :boolean fullscreen
+                        (g:object monitor) monitor
                         :void)
   fullscreen)
 
 (cffi:defcfun ("gdk_toplevel_layout_get_fullscreen" %toplevel-layout-fullscreen)
     :boolean
   (layout (g:boxed toplevel-layout))
-  (fullscreen :boolean))
+  (fullscreen (:pointer :boolean)))
 
 (defun toplevel-layout-fullscreen (layout)
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{2024-1-9}
   @syntax[]{(gdk:toplevel-layout-fullscreen layout) => fullscreen}
   @syntax[]{(setf (gdk:toplevel-layout-fullscreen layout) fullscreen)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[fullscreen]{a boolean whether the layout specifies the fullscreen
     state for the toplevel}
   @begin{short}
-    If the layout specifies whether to the toplevel should go fullscreen, the
+    If the layout specifies whether the toplevel should go fullscreen, the
     @arg{fullscreen} value is set to @em{true} if it should go fullscreen, or
     @em{false}, if it should go unfullscreen.
   @end{short}
@@ -252,7 +261,7 @@
 (cffi:defcfun ("gdk_toplevel_layout_get_fullscreen_monitor"
                toplevel-layout-fullscreen-monitor) (g:object monitor)
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{2024-1-9}
   @argument[layout]{a @class{gdk:toplevel-layout} object}
   @return{The @class{gdk:monitor} object on which @arg{layout} fullscreens.}
   @begin{short}
@@ -279,16 +288,16 @@
 (cffi:defcfun ("gdk_toplevel_layout_get_resizable" toplevel-layout-resizable)
     :boolean
  #+liber-documentation
- "@version{#2023-4-10}
+ "@version{2024-1-9}
   @syntax[]{(gdk:toplevel-layout-resizable layout) => resizable}
   @syntax[]{(setf (gdk:toplevel-layout-resizable layout) resizable)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[resizable]{@em{true} if the layout is resizable}
   @begin{short}
-    The @sym{gdk:toplevel-layout-resizable} function returns whether the layout
+    The @fun{gdk:toplevel-layout-resizable} function returns whether the layout
     should allow the user to resize the surface.
   @end{short}
-  The @sym{(setf gdk:toplevel-layout-resizable} function sets whether the layout
+  The @setf{gdk:toplevel-layout-resizable} function sets whether the layout
   should allow the user to resize the surface after it has been presented.
   @see-class{gdk:toplevel-layout}"
   (layout (g:boxed toplevel-layout)))

@@ -2,11 +2,11 @@
 ;;; gdk4.toplevel.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -114,7 +114,7 @@
 (setf (liber:alias-for-symbol 'toplevel-state)
       "GFlags"
       (liber:symbol-documentation 'toplevel-state)
- "@version{#2023-4-8}
+ "@version{2024-1-9}
   @begin{short}
     Specifies the state of a toplevel surface.
   @end{short}
@@ -178,7 +178,7 @@
 (setf (liber:alias-for-symbol 'fullscreen-mode)
       "GEnum"
       (liber:symbol-documentation 'fullscreen-mode)
- "@version{#2023-4-8}
+ "@version{2024-1-9}
   @begin{short}
     Indicates which monitor (in a multi-head setup) a surface should span over
     when in fullscreen mode.
@@ -216,7 +216,7 @@
 (setf (liber:alias-for-symbol 'surface-edge)
       "GEnum"
       (liber:symbol-documentation 'surface-edge)
- "@version{#2023-4-8}
+ "@version{2024-1-9}
   @begin{short}
     Determines a surface edge or corner.
   @end{short}
@@ -250,7 +250,7 @@
 (setf (liber:alias-for-symbol 'titlebar-gesture)
       "GEnum"
       (liber:symbol-documentation 'titlebar-gesture)
- "@version{#2023-4-9}
+ "@version{2024-1-9}
   @begin{short}
     No description available.
   @end{short}
@@ -274,6 +274,8 @@
 ;;; ----------------------------------------------------------------------------
 ;;; GdkToplevel
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: Is it correct to derive the interface from GDK:SURFACE?!
 
 (gobject:define-g-interface "GdkToplevel" toplevel
   (:superclass surface
@@ -314,11 +316,11 @@
 (setf (liber:alias-for-class 'toplevel)
       "Interface"
       (documentation 'toplevel 'type)
- "@version{#2023-4-8}
+ "@version{2014-1-9}
   @begin{short}
-    A @sym{gdk:toplevel} object is a freestanding toplevel surface.
+    A @class{gdk:toplevel} object is a freestanding toplevel surface.
   @end{short}
-  The @sym{gdk:toplevel} interface provides useful APIs for interacting with
+  The @class{gdk:toplevel} interface provides useful APIs for interacting with
   the windowing system, such as controlling maximization and size of the
   surface, setting icons and transient parents for dialogs.
   @begin[Signal Details]{dictionary}
@@ -356,7 +358,7 @@ lambda (toplevel size)    :run-last
 ;;;Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- toplevel-decorated -----------------------------------------------------
+;;; --- gdk:toplevel-decorated -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "decorated" 'toplevel) t)
@@ -382,7 +384,7 @@ lambda (toplevel size)    :run-last
   decorations added.
   @see-class{gdk:toplevel}")
 
-;;; --- toplevel-deletable -----------------------------------------------------
+;;; --- gdk:toplevel-deletable -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "deletable" 'toplevel) t)
@@ -407,7 +409,7 @@ lambda (toplevel size)    :run-last
   should offer the user a way to close the surface.
   @see-class{gdk:toplevel}")
 
-;;; --- toplevel-fullscreen-mode -----------------------------------------------
+;;; --- gdk:toplevel-fullscreen-mode -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fullscreen-mode" 'toplevel) t)
@@ -431,7 +433,7 @@ lambda (toplevel size)    :run-last
   @end{short}
   @see-class{gdk:toplevel}")
 
-;;; --- toplevel-icon-list -----------------------------------------------------
+;;; --- gdk:toplevel-icon-list -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-list" 'toplevel) t)
@@ -451,7 +453,7 @@ lambda (toplevel size)    :run-last
     Accessor of the @slot[gdk:toplevel]{icon-list} slot of the
     @class{gdk:toplevel} class.
   @end{short}
-  The @sym{(setf gdk:toplevel-icon-list)} function sets a list of icons for the
+  The @setf{gdk:toplevel-icon-list} function sets a list of icons for the
   surface. One of these will be used to represent the surface in iconic form.
   The icon may be shown in window lists or task bars. Which icon size is shown
   depends on the window manager. The window manager can scale the icon but
@@ -460,7 +462,7 @@ lambda (toplevel size)    :run-last
   Note that some platforms do not support surface icons.
   @see-class{gdk:toplevel}")
 
-;;; --- toplevel-modal ---------------------------------------------------------
+;;; --- gdk:toplevel-modal -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'toplevel) t)
@@ -490,7 +492,7 @@ lambda (toplevel size)    :run-last
   @see-class{gdk:toplevel}
   @see-function{gdk:toplevel-transient-for}")
 
-;;; --- toplevel-shortcuts-inhibited -------------------------------------------
+;;; --- gdk:toplevel-shortcuts-inhibited ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "shortcuts-inhibited"
@@ -515,7 +517,7 @@ lambda (toplevel size)    :run-last
   @end{short}
   @see-class{gdk:toplevel}")
 
-;;; --- toplevel-startup-id ----------------------------------------------------
+;;; --- gdk:toplevel-startup-id ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "startup-id" 'toplevel) t)
@@ -541,7 +543,7 @@ lambda (toplevel size)    :run-last
   @see-class{gdk:toplevel}
   @see-function{gtk:window-startup-id}")
 
-;;; --- toplevel-state ---------------------------------------------------------
+;;; --- gdk:toplevel-state -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "state" 'toplevel) t)
@@ -566,7 +568,7 @@ lambda (toplevel size)    :run-last
   @see-class{gdk:toplevel}
   @see-symbol{gdk:toplevel-state}")
 
-;;; --- toplevel-title ---------------------------------------------------------
+;;; --- gdk:toplevel-title -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'toplevel) t)
@@ -591,7 +593,7 @@ lambda (toplevel size)    :run-last
   lists of windows, etc.
   @see-class{gdk:toplevel}")
 
-;;; --- toplevel-transient-for -------------------------------------------------
+;;; --- gdk:toplevel-transient-for ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "transient-for" 'toplevel) t)
@@ -638,9 +640,9 @@ lambda (toplevel size)    :run-last
   If the toplevel was previously not showing, it will be showed, otherwise it
   will change layout according to @arg{layout}.
 
-  GDK may emit the \"compute-size\" signal to let the user of this toplevel
-  compute the preferred size of the toplevel surface. See \"compute-size\" for
-  details.
+  GDK may emit the @code{\"compute-size\"} signal to let the user of this
+  toplevel compute the preferred size of the toplevel surface. See
+  @code{\"compute-size\"} signal for details.
 
   Presenting is asynchronous and the specified layout parameters are not
   guaranteed to be respected.
@@ -895,7 +897,7 @@ lambda (toplevel size)    :run-last
  "@version{#2023-8-1}
   @argument[toplevel]{a @class{gdk:toplevel} object}
   @argument[gesture]{a @symbol{gdk:titlebar-gesture} value}
-  @return{A boolean value.}
+  @return{The boolean value.}
   @begin{short}
     No description available.
   @end{short}

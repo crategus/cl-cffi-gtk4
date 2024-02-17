@@ -2,11 +2,11 @@
 ;;; gdk4.enumerations.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -43,40 +43,40 @@
 (gobject:define-g-enum "GdkGravity" gravity
   (:export t
    :type-initializer "gdk_gravity_get_type")
-  (:north-west 0)
-  (:north 1)
-  (:north-east 2)
-  (:west 3)
-  (:center 4)
-  (:east 5)
-  (:south-west 6)
-  (:south 7)
-  (:south-east 8)
-  (:static 9))
+  (:north-west 1)
+  (:north 2)
+  (:north-east 3)
+  (:west 4)
+  (:center 5)
+  (:east 6)
+  (:south-west 7)
+  (:south 8)
+  (:south-east 9)
+  (:static 10))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'gravity)
       "GEnum"
       (liber:symbol-documentation 'gravity)
- "@version{2023-4-9}
+ "@version{2024-2-17}
   @begin{short}
-    Defines the reference point of a surface and is used in
-    the @class{gdk:popup-layout} implementation.
+    Defines the reference point of a surface and is used in the
+    @class{gdk:popup-layout} implementation.
   @end{short}
   @begin{pre}
 (gobject:define-g-enum \"GdkGravity\" gravity
   (:export t
    :type-initializer \"gdk_gravity_get_type\")
-  (:north-west 0)
+  (:north-west 1)
   (:north 1)
-  (:north-east 2)
-  (:west 3)
-  (:center 4)
-  (:east 5)
-  (:south-west 6)
-  (:south 7)
-  (:south-east 8)
-  (:static 9))
+  (:north-east 3)
+  (:west 4)
+  (:center 5)
+  (:east 6)
+  (:south-west 7)
+  (:south 8)
+  (:south-east 9)
+  (:static 10))
   @end{pre}
   @begin[code]{table}
     @entry[:north-west]{The reference point is at the top left corner.}

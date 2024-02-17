@@ -20,7 +20,11 @@
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkSurface")))
   ;; Check the children
+  #-windows
   (is (equal '("GdkWaylandSurface" "GdkX11Surface")
+             (list-children "GdkSurface")))
+  #+windows
+  (is (equal '("GdkWin32Surface")
              (list-children "GdkSurface")))
   ;; Check the interfaces
   (is (equal '()
