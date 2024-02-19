@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -88,7 +88,7 @@
 
 #+liber-documentation
 (setf (documentation 'shortcuts-window 'type)
- "@version{2023-8-28}
+ "@version{2024-2-18}
   @begin{short}
     A @class{gtk:shortcuts-window} widget shows brief information about the
     keyboard shortcuts and gestures of an application.
@@ -146,19 +146,22 @@ lambda (shortcutswindow)    :action
       @end{pre}
       The signal is a keybinding signal which gets emitted when the user uses a
       keybinding to start a search. The default binding for this signal is the
-      @kbd{Control-F}.
+      @kbd{Control-F} key.
       @begin[code]{table}
         @entry[shortcutswindow]{The @class{gtk:shortcuts-window} object.}
       @end{table}
   @end{dictionary}
   @see-slot{gtk:shortcuts-window-section-name}
-  @see-slot{gtk:shortcuts-window-view-name}")
+  @see-slot{gtk:shortcuts-window-view-name}
+  @see-class{gtk:shortcuts-section}
+  @see-class{gtk:shortcuts-group}
+  @see-class{gtk:shortcuts-shortcut}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- shortcuts-window-section-name ------------------------------------------
+;;; --- gtk:shortcuts-window-section-name --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "section-name"
@@ -172,11 +175,11 @@ lambda (shortcutswindow)    :action
 (setf (liber:alias-for-function 'shortcuts-window-section-name)
       "Accessor"
       (documentation 'shortcuts-window-section-name 'function)
- "@version{#2020-9-8}
-  @syntax[]{(gtk:shortcuts-window-section-name object) => section-name}
-  @syntax[]{(setf (gtk:shortcuts-window-section-name object) section-name)}
+ "@version{2024-2-18}
+  @syntax[]{(gtk:shortcuts-window-section-name object) => name}
+  @syntax[]{(setf (gtk:shortcuts-window-section-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-window} widget}
-  @argument[section-name]{a @code{:string} with a name of the section to show}
+  @argument[name]{a string with a name of the section to show}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-window]{section-name} slot of the
     @class{gtk:shortcuts-window} class.
@@ -186,34 +189,35 @@ lambda (shortcutswindow)    :action
   @see-class{gtk:shortcuts-window}
   @see-class{gtk:shortcuts-section}")
 
-;;; --- shortcuts-window-view-name ---------------------------------------------
+;;; --- gtk:shortcuts-window-view-name -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "view-name" 'shortcuts-window) t)
  "The @code{view-name} property of type @code{:string} (Read / Write) @br{}
   The view name by which to filter the contents. This should correspond to the
-  @code{view} property of some of the @class{gtk:shortcuts-group} objects that
-  are inside this shortcuts window. Set this to @code{nil} to show all groups.
-  @br{}
+  @slot[gtk:shortcuts-group]{view} property of some of the
+  @class{gtk:shortcuts-group} objects that are inside this shortcuts window.
+  Set this to @code{nil} to show all groups. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'shortcuts-window-view-name)
       "Accessor"
       (documentation 'shortcuts-window-view-name 'function)
- "@version{#2020-9-8}
-  @syntax[]{(gtk:shortcuts-window-view-name object) => view-name}
-  @syntax[]{(setf (gtk:shortcuts-window-view-name object) view-name)}
+ "@version{2024-2-18}
+  @syntax[]{(gtk:shortcuts-window-view-name object) => name}
+  @syntax[]{(setf (gtk:shortcuts-window-view-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-window} widget}
-  @argument[view-name]{a @code{:string} with the view name by which to filter
-    the contents}
+  @argument[name]{a string with the view name by which to filter the contents}
   @begin{short}
     Accessor of the @slot[gtk:shortcuts-window]{view-name} slot of the
     @class{gtk:shortcuts-window} class.
   @end{short}
   The view name by which to filter the contents. This should correspond to the
-  @code{view} property of some of the @class{gtk:shortcuts-group} objects that
-  are inside this shortcuts window. Set this to @code{nil} to show all groups.
-  @see-class{gtk:shortcuts-window}")
+  @slot[gtk:shortcuts-group]{view} property of some of the
+  @class{gtk:shortcuts-group} objects that are inside this shortcuts window.
+  Set this to @code{nil} to show all groups.
+  @see-class{gtk:shortcuts-window}
+  @see-class{gtk:shortcuts-group}")
 
 ;;; --- End of file gtk4.shortcuts-window.lisp ---------------------------------

@@ -141,4 +141,18 @@
 ;;;     title
 ;;;     title-size-group
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+(test gtk-shortcuts-shortcut
+ (let ((shortcut (make-instance 'gtk:shortcuts-shortcut)))
+    (signals (error) (gtk:shortcuts-shortcut-accel-size-group shortcut))
+    (is-false (gtk:shortcuts-shortcut-accelerator shortcut))
+    (is-false (gtk:shortcuts-shortcut-action-name shortcut))
+    (is (eq :none (gtk:shortcuts-shortcut-direction shortcut)))
+    (is-false (gtk:shortcuts-shortcut-icon shortcut))
+    (is-false (gtk:shortcuts-shortcut-icon-set shortcut))
+    (is (eq :accelerator (gtk:shortcuts-shortcut-shortcut-type shortcut)))
+    (is (string= "" (gtk:shortcuts-shortcut-subtitle shortcut)))
+    (is-false (gtk:shortcuts-shortcut-subtitle-set shortcut))
+    (is (string= "" (gtk:shortcuts-shortcut-title shortcut)))
+    (signals (error) (gtk:shortcuts-shortcut-title-size-group shortcut))))
+
+;;; 2024-2-18

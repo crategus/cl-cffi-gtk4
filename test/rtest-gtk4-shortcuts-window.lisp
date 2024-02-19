@@ -56,9 +56,40 @@
 ;;;     section-name
 ;;;     view-name
 
+(test gtk-shortcuts-window-properties
+  (let ((shortcuts (make-instance 'gtk:shortcuts-window)))
+    (is (string= "internal-search"
+                 (gtk:shortcuts-window-section-name shortcuts)))
+    (is-false (gtk:shortcuts-window-view-name shortcuts))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     close
+
+(test gtk-shortcuts-window-close-signal
+  (let ((query (g:signal-query (g:signal-lookup "close" "GtkShortcutsWindow"))))
+    (is (string= "close" (g:signal-query-signal-name query)))
+    (is (string= "GtkShortcutsWindow"
+                 (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:ACTION :RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;;     search
 
-;;; --- 2023-10-16 -------------------------------------------------------------
+(test gtk-shortcuts-window-search-signal
+  (let ((query (g:signal-query (g:signal-lookup "search" "GtkShortcutsWindow"))))
+    (is (string= "search" (g:signal-query-signal-name query)))
+    (is (string= "GtkShortcutsWindow"
+                 (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:ACTION :RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
+;;; 2024-2-18
