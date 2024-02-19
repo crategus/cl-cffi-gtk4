@@ -43,7 +43,8 @@
   ;; Check the children
   #-windows
   (if *first-run-gtk-test*
-      (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget" "GtkAspectFrame"
+      (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
+                   "GtkAspectFrame"
  "GtkBox" "GtkBuiltinIcon" "GtkButton" "GtkCalendar" "GtkCellView"
  "GtkCenterBox" "GtkCheckButton" "GtkColorButton" "GtkColorChooserWidget"
  "GtkColorDialogButton" "GtkColorPlane" "GtkColorSwatch" "GtkColumnView"
@@ -65,7 +66,8 @@
  "GtkTextView" "GtkTreeExpander" "GtkTreeView" "GtkVideo" "GtkViewport"
  "GtkWindow" "GtkWindowControls" "GtkWindowHandle")
                  (list-children "GtkWidget")))
-      (is  (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget" "GtkAspectFrame"
+      (is  (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
+                    "GtkAspectFrame"
  "GtkBox" "GtkBuiltinIcon" "GtkButton" "GtkCalendar" "GtkCellView"
  "GtkCenterBox" "GtkCheckButton" "GtkColorButton" "GtkColorChooserWidget"
  "GtkColorDialogButton" "GtkColorPlane" "GtkColorSwatch" "GtkColumnView"
@@ -89,7 +91,8 @@
                  (list-children "GtkWidget"))))
   #+windows
   (if *first-run-gtk-test*
-      (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget" "GtkAspectFrame"
+      (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
+                   "GtkAspectFrame"
  "GtkBox" "GtkBuiltinIcon" "GtkButton" "GtkCalendar" "GtkCellView"
  "GtkCenterBox" "GtkCheckButton" "GtkColorButton" "GtkColorChooserWidget"
  "GtkColorDialogButton" "GtkColorPlane" "GtkColorSwatch" "GtkColumnView"
@@ -100,7 +103,7 @@
  "GtkFontChooserWidget" "GtkFontDialogButton" "GtkFrame" "GtkGLArea" "GtkGizmo"
  "GtkGrid" "GtkHeaderBar" "GtkIconView" "GtkImage" "GtkInfoBar"
  "GtkInscription" "GtkLabel" "GtkLevelBar" "GtkListBase" "GtkListBox"
- "GtkListBoxRow" "GtkListItemWidget" "GtkMediaControls" "GtkMenuButton"
+ "GtkListBoxRow" "GtkListItemBase" "GtkMediaControls" "GtkMenuButton"
  "GtkModelButton" "GtkNotebook" "GtkOverlay" "GtkPaned" "GtkPanedHandle"
  "GtkPasswordEntry" "GtkPathBar" "GtkPicture" "GtkPlacesSidebar" "GtkPopover"
  "GtkPopoverContent" "GtkPopoverMenuBar" "GtkProgressBar" "GtkRange"
@@ -209,7 +212,11 @@
     (is-false (gtk:widget-focusable widget))
     (is (eq :fill (gtk:widget-halign widget)))
     (is-false (gtk:widget-has-default widget))
+    ;; has-default is not writable
+    (signals (error) (setf (gtk:widget-has-default widget) t))
     (is-false (gtk:widget-has-focus widget))
+    ;; has-focus is not writable
+    (signals (error) (setf (gtk:widget-has-focus widget) t))
     (is-false (gtk:widget-has-tooltip widget))
     (is (= -1 (gtk:widget-height-request widget)))
     (is-false (gtk:widget-hexpand widget))
@@ -279,6 +286,11 @@
     (is (string= "Button is activated" message))))
 
 ;;;     gtk_widget_is_focus
+
+(test gtk-widget-is-focus
+  (let ((button (make-instance 'gtk:button)))
+    (is-false (gtk:widget-is-focus button))))
+
 ;;;     gtk_widget_grab_focus
 ;;;     gtk_widget_get_native
 ;;;     gtk_widget_get_ancestor
@@ -344,7 +356,13 @@
 ;;;     gtk_widget_get_state_flags
 ;;;     gtk_widget_set_state_flags
 ;;;     gtk_widget_unset_state_flags
+
 ;;;     gtk_widget_has_visible_focus
+
+(test gtk-widget-has-visible-focus
+  (let ((button (make-instance 'gtk:button)))
+    (is-false (gtk:widget-has-visible-focus button))))
+
 ;;;     gtk_widget_is_drawable
 ;;;     gtk_widget_get_realized
 ;;;     gtk_widget_get_mapped
@@ -487,4 +505,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; --- 2023-11-27 -------------------------------------------------------------
+;;; 2024-1-9
