@@ -7,6 +7,49 @@
 
 ;;;     GtkPrintCapabilities
 
+(test gtk-print-capabilities
+  ;; Check the type
+  (is (g:type-is-flags "GtkPrintCapabilities"))
+  ;; Check the registered name
+  (is (eq 'gtk:print-capabilities
+          (glib:symbol-for-gtype "GtkPrintCapabilities")))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkPrintCapabilities")
+          (g:gtype (cffi:foreign-funcall "gtk_print_capabilities_get_type"
+                                         :size))))
+  ;; Check the names
+  (is (equal '("GTK_PRINT_CAPABILITY_PAGE_SET" "GTK_PRINT_CAPABILITY_COPIES"
+               "GTK_PRINT_CAPABILITY_COLLATE" "GTK_PRINT_CAPABILITY_REVERSE"
+               "GTK_PRINT_CAPABILITY_SCALE" "GTK_PRINT_CAPABILITY_GENERATE_PDF"
+               "GTK_PRINT_CAPABILITY_GENERATE_PS" "GTK_PRINT_CAPABILITY_PREVIEW"
+               "GTK_PRINT_CAPABILITY_NUMBER_UP"
+               "GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT")
+             (list-flags-item-name "GtkPrintCapabilities")))
+  ;; Check the values
+  (is (equal '(1 2 4 8 16 32 64 128 256 512)
+             (list-flags-item-value "GtkPrintCapabilities")))
+  ;; Check the nick names
+  (is (equal '("page-set" "copies" "collate" "reverse" "scale" "generate-pdf"
+               "generate-ps" "preview" "number-up" "number-up-layout")
+             (list-flags-item-nick "GtkPrintCapabilities")))
+  ;; Check the flags definition
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkPrintCapabilities"
+                                      GTK-PRINT-CAPABILITIES
+                                      (:EXPORT T
+                                       :TYPE-INITIALIZER
+                                       "gtk_print_capabilities_get_type")
+                                      (:PAGE-SET 1)
+                                      (:COPIES 2)
+                                      (:COLLATE 4)
+                                      (:REVERSE 8)
+                                      (:SCALE 16)
+                                      (:GENERATE-PDF 32)
+                                      (:GENERATE-PS 64)
+                                      (:PREVIEW 128)
+                                      (:NUMBER-UP 256)
+                                      (:NUMBER-UP-LAYOUT 512))
+             (gobject:get-g-type-definition "GtkPrintCapabilities"))))
+
 ;;;     GtkPrintUnixDialog
 
 (test gtk-print-unix-dialog-class
@@ -89,12 +132,46 @@
 ;;;     selected-printer
 ;;;     support-selection
 
+(test gtk-print-unix-dialog-properties
+  (let* ((*gtk-warn-deprecated* nil)
+         (dialog (make-instance 'gtk:print-unix-dialog)))
+    (is (= -1 (gtk:print-unix-dialog-current-page dialog)))
+    (is-false (gtk:print-unix-dialog-embed-page-setup dialog))
+    (is-false (gtk:print-unix-dialog-has-selection dialog))
+    (is-false (gtk:print-unix-dialog-manual-capabilities dialog))
+    (is (typep (gtk:print-unix-dialog-page-setup dialog) 'gtk:page-setup))
+    (is (typep (gtk:print-unix-dialog-print-settings dialog) 'gtk:print-settings))
+    (is-false (gtk:print-unix-dialog-selected-printer dialog))
+    (is-false (gtk:print-unix-dialog-support-selection dialog))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_print_unix_dialog_new
+
+(test gtk-print-unix-dialog-new
+  (let* ((*gtk-warn-deprecated* nil)
+         (dialog (gtk:print-unix-dialog-new "Title" nil)))
+    (is (typep dialog 'gtk:print-unix-dialog))
+    (is (= -1 (gtk:print-unix-dialog-current-page dialog)))
+    (is-false (gtk:print-unix-dialog-embed-page-setup dialog))
+    (is-false (gtk:print-unix-dialog-has-selection dialog))
+    (is-false (gtk:print-unix-dialog-manual-capabilities dialog))
+    (is (typep (gtk:print-unix-dialog-page-setup dialog) 'gtk:page-setup))
+    (is (typep (gtk:print-unix-dialog-print-settings dialog) 'gtk:print-settings))
+    (is-false (gtk:print-unix-dialog-selected-printer dialog))
+    (is-false (gtk:print-unix-dialog-support-selection dialog))))
+
 ;;;     gtk_print_unix_dialog_set_settings
 ;;;     gtk_print_unix_dialog_get_settings
+
+(test gtk-print-unix-dialog-settings
+  (let* ((*gtk-warn-deprecated* nil)
+         (dialog (gtk:print-unix-dialog-new "Title" nil)))
+    (is (typep (setf (gtk:print-unix-dialog-settings dialog)
+                     (gtk:print-settings-new)) 'gtk:print-settings))
+    (is (typep (gtk:print-unix-dialog-settings dialog) 'gtk:print-settings))))
+
 ;;;     gtk_print_unix_dialog_add_custom_tab
 ;;;     gtk_print_unix_dialog_get_page_setup_set
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; 2024-2-18

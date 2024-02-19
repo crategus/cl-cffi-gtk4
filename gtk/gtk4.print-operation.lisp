@@ -925,17 +925,17 @@ lambda (operation widget setup settings)    :run-last
   successive print jobs.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-n-pages ------------------------------------------------
+;;; --- gtk:print-operation-n-pages --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "n-pages" 'print-operation) t)
  "The @code{n-pages} property of type @code{:int} (Read / Write) @br{}
   The number of pages in the document. This must be set to a positive number
   before the rendering starts. It may be set in a @code{\"begin-print\"} signal
-  hander. Note that the page numbers passed to the @code{\"request-page-setup\"}
-  and @code{\"draw-page\"} signals are 0-based, i.e. if the user chooses to
-  print all pages, the last @code{\"draw-page\"} signal will be for page
-  @code{n-pages} - 1 @br{}
+  handler. Note that the page numbers passed to the
+  @code{\"request-page-setup\"} and @code{\"draw-page\"} signal handlers are
+  0-based, i.e. if the user chooses to print all pages, the last
+  @code{\"draw-page\"} signal will be for page @code{n-pages} - 1 @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -943,40 +943,40 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-n-pages)
       "Accessor"
       (documentation 'print-operation-n-pages 'function)
- "@version{#2020-4-8}
-  @syntax[]{(gtk:print-operation-n-pages object) => n-pages}
-  @syntax[]{(setf (gtk:print-operation-n-pages object) n-pages)}
+ "@version{2024-2-16}
+  @syntax[]{(gtk:print-operation-n-pages object) => npages}
+  @syntax[]{(setf (gtk:print-operation-n-pages object) npages)}
   @argument[object]{a @class{gtk:print-operation} object}
-  @argument[n-pages]{an integer with the number of pages}
+  @argument[npages]{an integer with the number of pages}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{n-pages} slot of the
     @class{gtk:print-operation} class.
   @end{short}
-  The @fun{(setf gtk:print-operation-n-pages)} function sets the number of pages
-  in the document.
+  The @fun{gtk:print-operation-n-pages} function gets the number of pages in
+  the document. The @setf{gtk:print-operation-n-pages} function sets the number
+  of pages.
 
   This must be set to a positive number before the rendering starts. It may be
-  set in a @code{\"begin-print\"} signal handler.
+  set in a @code{\"begin-print\"} signal handler. Note that the page numbers
+  passed to the @code{\"request-page-setup\"} and @code{\"draw-page\"} signal
+  handlers are 0-based, i.e. if the user chooses to print all pages, the last
+  @code{\"draw-page\"} signal will be for page @arg{npages} - 1.
+  @see-class{gtk:print-operation}
+  @see-function{gtk:print-operation-n-pages-to-print}")
 
-  Note that the page numbers passed to the @code{\"request-page-setup\"} and
-  @code{\"draw-page\"} signals are 0-based, i.e. if the user chooses to print
-  all pages, the last @code{\"draw-page\"} signal will be for page @arg{n-pages}
-  - 1.
-  @see-class{gtk:print-operation}")
-
-;;; --- print-operation-n-pages-to-print ---------------------------------------
+;;; --- gtk:print-operation-n-pages-to-print -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "n-pages-to-print"
                                                'print-operation) t)
  "The @code{n-pages-to-print} property of type @code{:int} (Read) @br{}
   The number of pages that will be printed. Note that this value is set during
-  print preparation phase @code{:preparing}, so this value should never be get
-  before the data generation phase @code{:generating-data}. You can connect to
-  the @code{\"status-changed\"} signal and call the
-  @fun{gtk:print-operation-n-pages-to-print} function when print status is
-  @code{:generating-data}. This is typically used to track the progress of
-  print operation. @br{}
+  the print preparation @code{:preparing} phase, so this value should never be
+  get before the data generation @code{:generating-data} phase. You can connect
+  to the @code{\"status-changed\"} signal and call the
+  @fun{gtk:print-operation-n-pages-to-print} function when the print status is
+  in the @code{:generating-data} phase. This is typically used to track the
+  progress of print operation. @br{}
   Allowed values: >= -1 @br{}
   Default value: -1")
 
@@ -984,24 +984,26 @@ lambda (operation widget setup settings)    :run-last
 (setf (liber:alias-for-function 'print-operation-n-pages-to-print)
       "Accessor"
       (documentation 'print-operation-n-pages-to-print 'function)
- "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-n-pages-to-print object) => n-pages}
+ "@version{2024-2-16}
+  @syntax[]{(gtk:print-operation-n-pages-to-print object) => npages}
   @argument[object]{a @class{gtk:print-operation} object}
-  @argument[n-pages]{the number of pages to print}
+  @argument[npages]{an integer with the number of pages to print}
   @begin{short}
-    Accessor of the @code{n-pages-to-print} slot of the
+    Accessor of the @slot[gtk:print-operation]{n-pages-to-print} slot of the
     @class{gtk:print-operation} class.
   @end{short}
-  The @fun{gtk:print-operation-n-pages} function returns the number of pages
-  that will be printed.
+  The @fun{gtk:print-operation-n-pages-to-print} function returns the number of
+  pages that will be printed.
 
-  Note that this value is set during print preparation phase @code{:preparing},
-  so this function should never be called before the data generation phase
-  @code{:generating-data}. You can connect to the @code{\"status-changed\"}
-  signal and call the @fun{gtk:print-operation-n-pages-to-print} function when
-  print status is @code{:generating-data}. This is typically used to track the
+  Note that this value is set during the print preparation @code{:preparing}
+  phase, so this function should never be called before the data generation
+  @code{:generating-data} phase. You can connect to the
+  @code{\"status-changed\"} signal and call the
+  @fun{gtk:print-operation-n-pages-to-print} function when the print status is
+  in the @code{:generating-data} phase. This is typically used to track the
   progress of print operation.
-  @see-class{gtk:print-operation}")
+  @see-class{gtk:print-operation}
+  @see-function{gtk:print-operation-n-pages}")
 
 ;;; --- print-operation-print-settings -----------------------------------------
 

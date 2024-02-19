@@ -151,7 +151,7 @@
                "status-changed" "update-custom-widget")
              (list-signals "GtkPrintOperation")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintOperation" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintOperation"
                                              GTK-PRINT-OPERATION
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                         ("GtkPrintOperationPreview") :TYPE-INITIALIZER
@@ -227,8 +227,14 @@
     (is-false (gtk:print-operation-export-filename operation))
     (is-false (gtk:print-operation-has-selection operation))
     (is (stringp (gtk:print-operation-job-name operation)))
+
+    ;; n-pages
     (is (= -1 (gtk:print-operation-n-pages operation)))
+    (is (= 10 (setf (gtk:print-operation-n-pages operation) 10)))
+    (is (= 10 (gtk:print-operation-n-pages operation)))
+    ;; n-pages-to-print
     (is (= -1 (gtk:print-operation-n-pages-to-print operation)))
+
     (is-false (gtk:print-operation-print-settings operation))
     (is-false (gtk:print-operation-show-progress operation))
     (is (eq :initial (gtk:print-operation-status operation)))
@@ -271,4 +277,4 @@
 
 ;;;     gtk_print_run_page_setup_dialog_async
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; 2024-2-16
