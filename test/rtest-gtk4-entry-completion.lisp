@@ -75,6 +75,19 @@
 ;;;     popup-single-match
 ;;;     text-column
 
+(test gtk-entry-completion-properties
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((entry (make-instance 'gtk:entry-completion)))
+      (is (typep (gtk:entry-completion-cell-area entry) 'gtk:cell-area-box))
+      (is-false (gtk:entry-completion-inline-completion entry))
+      (is-false (gtk:entry-completion-inline-selection entry))
+      (is (= 1 (gtk:entry-completion-minimum-key-length entry)))
+      (is-false (gtk:entry-completion-model entry))
+      (is-true (gtk:entry-completion-popup-completion entry))
+      (is-true (gtk:entry-completion-popup-set-width entry))
+      (is-true (gtk:entry-completion-popup-single-match entry))
+      (is (= -1 (gtk:entry-completion-text-column entry))))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     cursor-on-match
@@ -85,8 +98,21 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     GtkEntryCompletionMatchFunc
+
 ;;;     gtk_entry_completion_new
+
 ;;;     gtk_entry_completion_new_with_area
+
+(test gtk-entry-completion-new-with-area
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((area (gtk:cell-area-box-new))
+          entry)
+    (is (typep (setf entry
+                     (gtk:entry-completion-new-with-area area))
+               'gtk:entry-completion))
+    (is (eq area
+            (gtk:entry-completion-cell-area entry))))))
+
 ;;;     gtk_entry_completion_get_entry
 ;;;     gtk_entry_completion_set_match_func
 ;;;     gtk_entry_completion_compute_prefix
@@ -94,4 +120,4 @@
 ;;;     gtk_entry_completion_get_completion_prefix
 ;;;     gtk_entry_completion_insert_prefix
 
-;;; --- 2023-9-16 --------------------------------------------------------------
+;;; 2024-2-19

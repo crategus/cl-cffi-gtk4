@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -136,9 +136,14 @@
     entry-completion-text-column
     "text-column" "gint" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj entry-completion) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:ENTRY-COMPLETION is deprecated since 4.10.")))
+
 #+liber-documentation
 (setf (documentation 'entry-completion 'type)
- "@version{2023-9-16}
+ "@version{2024-2-19}
   @begin{short}
     The @class{gtk:entry-completion} object is an auxiliary object to be used in
     conjunction with the @class{gtk:entry} widget to provide the completion
@@ -196,7 +201,7 @@ lambda (widget model iter)    :run-last
         @entry[widget]{The @class{gtk:entry-completion} object which received
           the signal.}
         @entry[model]{The @class{gtk:tree-model} object containing the matches.}
-        @entry[iter]{A @class{gtk:tree-iter} instance positioned at the
+        @entry[iter]{The @class{gtk:tree-iter} instance positioned at the
           selected match.}
         @entry[Returns]{@em{True} if the signal has been handled.}
       @end{table}
@@ -207,7 +212,7 @@ lambda (widget prefix)    :run-last
       Gets emitted when the inline autocompletion is triggered. The default
       behaviour is to make the entry display the whole prefix and select the
       newly inserted part. Applications may connect to this signal in order to
-      insert only a smaller part of the prefix into the entry - e.g. the entry
+      insert only a smaller part of the prefix into the entry, e.g. the entry
       used in the @class{gtk:file-chooser} widget inserts only the part of the
       prefix up to the next '/'.
       @begin[code]{table}
@@ -229,7 +234,7 @@ lambda (widget model iter)    :run-last
         @entry[widget]{The @class{gtk:entry-completion} object which received
           the signal.}
         @entry[model]{The @class{gtk:tree-model} object containing the matches.}
-        @entry[iter]{A @class{gtk:tree-iter} instance positioned at the
+        @entry[iter]{The @class{gtk:tree-iter} instance positioned at the
           selected match.}
         @entry[Returns]{@em{True} if the signal has been handled.}
       @end{table}
@@ -263,14 +268,14 @@ lambda (widget)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- entry-completion-cell-area ---------------------------------------------
+;;; --- gtk:entry-completion-cell-area -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "cell-area" 'entry-completion) t)
  "The @code{cell-area} property of type @class{gtk:cell-area}
   (Read / Write / Construct) @br{}
-  The cell area used to layout cell renderers in the treeview column. If no area
-  is specified when creating the entry completion with the
+  The cell area used to layout cell renderers in the tree view column. If no
+  area is specified when creating the entry completion with the
   @fun{gtk:entry-completion-new-with-area} function a horizontally oriented
   @class{gtk:cell-area-box} object will be used.")
 
@@ -278,26 +283,28 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-cell-area)
       "Accessor"
       (documentation 'entry-completion-cell-area 'function)
- "@version{#2023-9-16}
-  @syntax[]{(gtk:entry-completion-cell-area object) => cell-area}
-  @syntax[]{(setf (gtk:entry-completion-cell-area object) cell-area)}
+ "@version{2024-2-19}
+  @syntax[]{(gtk:entry-completion-cell-area object) => area}
+  @syntax[]{(setf (gtk:entry-completion-cell-area object) area)}
   @argument[object]{a @class{gtk:entry-completion} object}
-  @argument[cell-area]{a @class{gtk:cell-area} object}
+  @argument[area]{a @class{gtk:cell-area} object}
   @begin{short}
     Accessor of the @slot[gtk:entry-completion]{cell-area} slot of the
     @class{gtk:entry-completion} class.
   @end{short}
-  The cell area used to layout cell renderers in the treeview column. If no area
-  is specified when creating the entry completion with the
+  The cell area used to layout cell renderers in the tree view column. If no
+  area is specified when creating the entry completion with the
   @fun{gtk:entry-completion-new-with-area} function a horizontally oriented
   @class{gtk:cell-area-box} object will be used.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
   @end{dictionary}
-  @see-class{gtk:entry-completion}")
+  @see-class{gtk:entry-completion}
+  @see-class{gtk:cell-area-box}
+  @see-function{gtk:entry-completion-new-with-area}")
 
-;;; --- entry-completion-inline-completion -------------------------------------
+;;; --- gtk:entry-completion-inline-completion ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "inline-completion"
@@ -314,7 +321,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-inline-completion)
       "Accessor"
       (documentation 'entry-completion-inline-completion 'function)
- "@version{#2023-9-16}
+ "@version{2024-2-19}
   @syntax[]{(gtk:entry-completion-inline-completion object) => setting}
   @syntax[]{(setf (gtk:entry-completion-inline-completion object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -334,7 +341,7 @@ lambda (widget)    :run-last
   @end{dictionary}
   @see-class{gtk:entry-completion}")
 
-;;; --- entry-completion-inline-selection --------------------------------------
+;;; --- gtk:entry-completion-inline-selection ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "inline-selection"
@@ -349,7 +356,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-inline-selection)
       "Accessor"
       (documentation 'entry-completion-inline-selection 'function)
- "@version{#2023-9-16}
+ "@version{2024-2-19}
   @syntax[]{(gtk:entry-completion-inline-selection object) => setting}
   @syntax[]{(setf (gtk:entry-completion-inline-selection object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -368,7 +375,7 @@ lambda (widget)    :run-last
   @end{dictionary}
   @see-class{gtk:entry-completion}")
 
-;;; --- entry-completion-minimum-key-length ------------------------------------
+;;; --- gtk:entry-completion-minimum-key-length --------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "minimum-key-length"
@@ -383,7 +390,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-minimum-key-length)
       "Accessor"
       (documentation 'entry-completion-minimum-key-length 'function)
- "@version{#2023-9-16}
+ "@version{2024-2-19}
   @syntax[]{(gtk:entry-completion-minimum-key-length object) => length}
   @syntax[]{(setf (gtk:entry-completion-minimum-key-length object) length)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -407,7 +414,7 @@ lambda (widget)    :run-last
   @end{dictionary}
   @see-class{gtk:entry-completion}")
 
-;;; --- entry-completion-model -------------------------------------------------
+;;; --- gtk:entry-completion-model ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'entry-completion) t)
@@ -418,11 +425,11 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-model)
       "Accessor"
       (documentation 'entry-completion-model 'function)
- "@version{#2023-9-16}
+ "@version{2024-2-19}
   @syntax[]{(gtk:entry-completion-model object) => model}
   @syntax[]{(setf (gtk:entry-completion-model object) model)}
   @argument[object]{a @class{gtk:entry-completion} object}
-  @argument[model]{the @class{gtk:tree-model} object}
+  @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
     Accessor of the @slot[gtk:entry-completion]{model} slot of the
     @class{gtk:entry-completion} class.
@@ -440,7 +447,7 @@ lambda (widget)    :run-last
   @see-class{gtk:entry-completion}
   @see-class{gtk:tree-model}")
 
-;;; --- entry-completion-popup-completion --------------------------------------
+;;; --- gtk:entry-completion-popup-completion ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "popup-completion"
@@ -455,7 +462,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-completion)
       "Accessor"
       (documentation 'entry-completion-popup-completion 'function)
- "@version{#2023-9-16}
+ "@version{2024-2-19}
   @syntax[]{(gtk:entry-completion-popup object) => setting}
   @syntax[]{(setf (gtk:entry-completion-popup object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -474,7 +481,7 @@ lambda (widget)    :run-last
   @end{dictionary}
   @see-class{gtk:entry-completion}")
 
-;;; --- entry-completion-popup-set-width ---------------------------------------
+;;; --- gtk:entry-completion-popup-set-width -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "popup-set-width"
@@ -489,7 +496,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-set-width)
       "Accessor"
       (documentation 'entry-completion-popup-set-width 'function)
- "@version{#2023-9-16}
+ "@version{2024-2-19}
   @syntax[]{(gtk:entry-completion-popup-set-width object) => setting}
   @syntax[]{(setf (gtk:entry-completion-popup-set-width object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -509,7 +516,7 @@ lambda (widget)    :run-last
   @end{dictionary}
   @see-class{gtk:entry-completion}")
 
-;;; --- entry-completion-popup-single-match ------------------------------------
+;;; --- gtk:entry-completion-popup-single-match --------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "popup-single-match"
@@ -525,7 +532,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-popup-single-match)
       "Accessor"
       (documentation 'entry-completion-popup-single-match 'function)
- "@version{#2023-9-16}
+ "@version{2024-2-19}
   @syntax[]{(gtk:entry-completion-popup-single-match object) => setting}
   @syntax[]{(setf (gtk:entry-completion-popup-single-match object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -546,7 +553,7 @@ lambda (widget)    :run-last
   @end{dictionary}
   @see-class{gtk:entry-completion}")
 
-;;; --- entry-completion-text-column -------------------------------------------
+;;; --- gtk:entry-completion-text-column ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text-column"
@@ -561,7 +568,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'entry-completion-text-column)
       "Accessor"
       (documentation 'entry-completion-text-column 'function)
- "@version{#2023-9-16}
+ "@version{2024-2-19}
   @syntax[]{(gtk:entry-completion-text-column) => column}
   @syntax[]{(setf (gtk:entry-completion-text-column object) column)}
   @argument[object]{a @class{gtk:entry-completion} object}
@@ -590,8 +597,7 @@ lambda (widget)    :run-last
   @end{dictionary}
   @see-class{gtk:entry-completion}
   @see-class{gtk:cell-renderer-text}
-  @see-function{g:object-property}
-  @see-function{gtk:entry-completion-inline-completion}")
+  @see-function{g:object-property}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_entry_completion_new ()
@@ -621,12 +627,12 @@ lambda (widget)    :run-last
 
 (defun entry-completion-new-with-area (area)
  #+liber-documentation
- "@version{#2023-9-16}
-  @argument[area]{the @class{gtk:cell-area} used to layout cells}
-  @return{A newly created @class{gtk:entry-completion} object.}
+ "@version{2024-2-19}
+  @argument[area]{a @class{gtk:cell-area} object used to layout cells}
+  @return{The newly created @class{gtk:entry-completion} object.}
   @begin{short}
     Creates a new entry completion using the specified area to layout cells in
-    the underlying @class{gtk:tree-view-column} for the drop-down menu.
+    the underlying @class{gtk:tree-view-column} object for the drop-down menu.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
@@ -641,7 +647,7 @@ lambda (widget)    :run-last
 (export 'entry-completion-new-with-area)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_entry_completion_get_entry () -> entry-completion-entry
+;;; gtk_entry_completion_get_entry ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_entry_completion_get_entry" entry-completion-entry)
@@ -805,7 +811,6 @@ lambda (completion key iter)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_entry_completion_get_completion_prefix ()
-;;; -> entry-completion-completion-prefix
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_entry_completion_get_completion_prefix"

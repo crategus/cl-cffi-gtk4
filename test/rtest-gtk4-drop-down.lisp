@@ -25,78 +25,47 @@
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkDropDown")))
   ;; Check the class properties
-  (is (equal '("enable-search" "expression" "factory" "list-factory" "model"
-               "selected" "selected-item" "show-arrow")
+  (is (equal '("enable-search" "expression" "factory" "header-factory"
+               "list-factory" "model" "search-match-mode" "selected"
+               "selected-item" "show-arrow")
              (list-properties "GtkDropDown")))
   ;; Check the list of signals
   (is (equal '("activate")
              (list-signals "GtkDropDown")))
-  ;; CSS information
+  ;; CSS name
   (is (string= "dropdown"
                (gtk:widget-class-css-name "GtkDropDown")))
-  (is (string=
-"dropdown:dir(ltr)
-  button.toggle:dir(ltr)
-    box.horizontal:dir(ltr)
-      stack:dir(ltr)
-        label:dir(ltr)
-        row:dir(ltr)
-      arrow:dir(ltr)
-  [popover.background.menu:dir(ltr)]
-    contents:dir(ltr)
-      box.vertical:dir(ltr)
-        [box.dropdown-searchbar.horizontal:dir(ltr)]
-          entry.search:dir(ltr)
-            image:dir(ltr)
-            text:dir(ltr)
-              placeholder:dir(ltr)
-              undershoot.left:dir(ltr)
-              undershoot.right:dir(ltr)
-            image:dir(ltr)
-        scrolledwindow:dir(ltr)
-          listview.view:dir(ltr)
-          scrollbar.bottom.horizontal:dir(ltr)
-            range.horizontal:dir(ltr)
-              trough:dir(ltr)
-                slider:dir(ltr)
-          scrollbar.right.vertical:dir(ltr)
-            range.vertical:dir(ltr)
-              trough:dir(ltr)
-                slider:dir(ltr)
-          overshoot.left:dir(ltr)
-          undershoot.left:dir(ltr)
-          overshoot.right:dir(ltr)
-          undershoot.right:dir(ltr)
-          overshoot.top:dir(ltr)
-          undershoot.top:dir(ltr)
-          overshoot.bottom:dir(ltr)
-          undershoot.bottom:dir(ltr)
-          junction:dir(ltr)
-    arrow:dir(ltr)
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context (make-instance 'gtk:drop-down))
-                   :none)))
+  ;; CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:drop-down))))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkDropDown" GTK-DROP-DOWN
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_drop_down_get_type")
-                       ((ENABLE-SEARCH GTK-DROP-DOWN-ENABLE-SEARCH
-                         "enable-search" "gboolean" T T)
-                        (EXPRESSION GTK-DROP-DOWN-EXPRESSION "expression"
-                         "GtkExpression" T T)
-                        (FACTORY GTK-DROP-DOWN-FACTORY "factory"
-                         "GtkListItemFactory" T T)
-                        (LIST-FACTORY GTK-DROP-DOWN-LIST-FACTORY "list-factory"
-                         "GtkListItemFactory" T T)
-                        (MODEL GTK-DROP-DOWN-MODEL "model" "GListModel" T T)
-                        (SELECTED GTK-DROP-DOWN-SELECTED "selected" "guint" T
-                         T)
-                        (SELECTED-ITEM GTK-DROP-DOWN-SELECTED-ITEM
-                         "selected-item" "GObject" T NIL)
-                        (SHOW-ARROW GTK-DROP-DOWN-SHOW-ARROW "show-arrow"
-                         "gboolean" T T)))
+                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                                ("GtkAccessible" "GtkBuildable"
+                                 "GtkConstraintTarget")
+                                :TYPE-INITIALIZER "gtk_drop_down_get_type")
+                               ((ENABLE-SEARCH GTK-DROP-DOWN-ENABLE-SEARCH
+                                 "enable-search" "gboolean" T T)
+                                (EXPRESSION GTK-DROP-DOWN-EXPRESSION
+                                 "expression" "GtkExpression" T T)
+                                (FACTORY GTK-DROP-DOWN-FACTORY "factory"
+                                 "GtkListItemFactory" T T)
+                                (HEADER-FACTORY GTK-DROP-DOWN-HEADER-FACTORY
+                                 "header-factory" "GtkListItemFactory" T T)
+                                (LIST-FACTORY GTK-DROP-DOWN-LIST-FACTORY
+                                 "list-factory" "GtkListItemFactory" T T)
+                                (MODEL GTK-DROP-DOWN-MODEL "model" "GListModel"
+                                 T T)
+                                (SEARCH-MATCH-MODE
+                                 GTK-DROP-DOWN-SEARCH-MATCH-MODE
+                                 "search-match-mode" "GtkStringFilterMatchMode"
+                                 T T)
+                                (SELECTED GTK-DROP-DOWN-SELECTED "selected"
+                                 "guint" T T)
+                                (SELECTED-ITEM GTK-DROP-DOWN-SELECTED-ITEM
+                                 "selected-item" "GObject" T NIL)
+                                (SHOW-ARROW GTK-DROP-DOWN-SHOW-ARROW
+                                 "show-arrow" "gboolean" T T)))
              (gobject:get-g-type-definition "GtkDropDown"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -110,26 +79,43 @@
 ;;;     selected-item
 ;;;     show-arrow
 
-#+nil
 (test gtk-drop-down-properties
-  (let ((dropdown (make-instance 'gtk-drop-down)))
-    (is-false (gtk-drop-down-enable-search dropdown))
-    (is-false (gtk-drop-down-expression dropdown))
-    (is-false (gtk-drop-down-factory dropdown))
-    (is-false (gtk-drop-down-list-factory dropdown))
-    (is-false (gtk-drop-down-model dropdown))
-    (is-false (gtk-drop-down-selected dropdown))
-    (is-false (gtk-drop-down-selected-item dropdown))
-    (is-false (gtk-drop-down-show-arrow dropdown))
-))
+  (let ((dropdown (make-instance 'gtk:drop-down)))
+    (is-false (gtk:drop-down-enable-search dropdown))
+    (is (cffi:null-pointer-p (gtk:drop-down-expression dropdown)))
+    (is (typep (gtk:drop-down-factory dropdown) 'gtk:list-item-factory))
+    (is-false (gtk:drop-down-list-factory dropdown))
+    (is-false (gtk:drop-down-model dropdown))
+    (is (= gtk:+gtk-invalid-list-position+ (gtk:drop-down-selected dropdown)))
+    (is-false (gtk:drop-down-selected-item dropdown))
+    (is-true (gtk:drop-down-show-arrow dropdown))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     activate
 
+(test gtk-drop-down-signal
+  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkDropDown"))))
+    (is (string= "activate" (g:signal-query-signal-name query)))
+    (is (string= "GtkDropDown" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_drop_down_new
+
+(test gtk-drop-down-new
+  (is (typep (gtk:drop-down-new nil nil) 'gtk:drop-down)))
+
 ;;;     gtk_drop_down_new_from_strings
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-drop-down-new-from-strings
+  (is (typep (gtk:drop-down-new-from-strings '("string1" "string2" "string3"))
+             'gtk:drop-down)))
+
+;;; 2024-1-10
