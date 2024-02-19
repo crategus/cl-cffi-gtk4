@@ -39,7 +39,12 @@
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkFileChooserDialog")))
     ;; CSS classes
+    #-windows
     (is (equal '("background" "csd" "dialog" "filechooser")
+               (gtk:widget-css-classes
+                   (make-instance 'gtk:file-chooser-dialog))))
+    #+windows
+    (is (equal '("background" "dialog" "filechooser")
                (gtk:widget-css-classes
                    (make-instance 'gtk:file-chooser-dialog))))
     ;; Accessible role
@@ -59,4 +64,4 @@
 
 ;;;     gtk_file_chooser_dialog_new
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-1-9

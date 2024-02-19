@@ -44,7 +44,7 @@
                (gtk:widget-css-classes
                    (make-instance 'gtk:font-chooser-dialog))))
     #+windows
-    (is (equal '("background" "dialog")
+    (is (equal '("background" "dialog" "fontchooser")
                (gtk:widget-css-classes
                    (make-instance 'gtk:font-chooser-dialog))))
     ;; Accessible role
@@ -69,4 +69,4 @@
     (is (typep (gtk:font-chooser-dialog-new "title" nil)
                'gtk:font-chooser-dialog))))
 
-;;; --- 2023-11-2 --------------------------------------------------------------
+;;; 2024-1-9

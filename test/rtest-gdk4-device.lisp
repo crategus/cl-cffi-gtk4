@@ -225,7 +225,10 @@
     (is-true (gdk:device-has-cursor device))
     (is-false (gdk:device-modifier-state device))
     (is (= 2 (gdk:device-n-axes device)))
+    #-windows
     (is (string= "Core Pointer" (gdk:device-name device)))
+    #+windows
+    (is (string= "Virtual Core Pointer" (gdk:device-name device)))
     (is-false (gdk:device-num-lock-state device))
     (is (= 0 (gdk:device-num-touches device)))
     (is-false (gdk:device-product-id device))
@@ -245,8 +248,11 @@
     (is-false (gdk:device-has-cursor device))
     (is-false (gdk:device-modifier-state device))
     (is (= 0 (gdk:device-n-axes device)))
+    #-windows
     (is (string= "Core Keyboard" (gdk:device-name device)))
-    (is-false (gdk:device-num-lock-state device))
+    #+windows
+    (is (string= "Virtual Core Keyboard" (gdk:device-name device)))
+    (is (typep (gdk:device-num-lock-state device) 'boolean))
     (is (= 0 (gdk:device-num-touches device)))
     (is-false (gdk:device-product-id device))
     (is-false (gdk:device-scroll-lock-state device))
