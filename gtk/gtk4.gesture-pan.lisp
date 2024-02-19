@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,7 +81,7 @@
 (setf (liber:alias-for-symbol 'pan-direction)
       "GEnum"
       (liber:symbol-documentation 'pan-direction)
- "@version{#2020-9-11}
+ "@version{2024-2-19}
   @begin{short}
     Describes the panning direction of a @class{gtk:gesture-pan} object.
   @end{short}
@@ -117,7 +117,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-pan 'type)
- "@version{#2020-9-11}
+ "@version{2024-2-19}
   @begin{short}
     The @class{gtk:gesture-pan} class is a @class{gtk:gesture} implementation
     for pan gestures.
@@ -126,15 +126,12 @@
 
   The axis that a @class{gtk:gesture-pan} object handles is defined at construct
   time, and can be changed through the @fun{gtk:gesture-pan-orientation}
-  function.
-
-  When the gesture starts to be recognized, the @class{gtk:gesture-pan} object
-  will attempt to determine as early as possible whether the sequence is moving
-  in the expected direction, and denying the sequence if this does not happen.
-
-  Once a panning gesture along the expected axis is recognized, the \"pan\"
-  signal will be emitted as input events are received, containing the offset in
-  the given axis.
+  function. When the gesture starts to be recognized, the
+  @class{gtk:gesture-pan} object will attempt to determine as early as possible
+  whether the sequence is moving in the expected direction, and denying the
+  sequence if this does not happen. Once a panning gesture along the expected
+  axis is recognized, the @code{\"pan\"} signal will be emitted as input events
+  are received, containing the offset in the given axis.
   @begin[Signal Details]{dictionary}
     @subheading{The \"pan\" signal}
     @begin{pre}
@@ -151,8 +148,8 @@ lambda (gesture direction offset)    :run-last
         orientation.}
     @end{table}
   @end{dictionary}
-  @see-slot{gtk:gesture-pan-orientation}
   @see-constructor{gtk:gesture-pan-new}
+  @see-slot{gtk:gesture-pan-orientation}
   @see-class{gtk:gesture}
   @see-symbol{gtk:pan-direction}")
 
@@ -160,7 +157,7 @@ lambda (gesture direction offset)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- gesture-pan-orientation ------------------------------------------------
+;;; --- gtk:gesture-pan-orientation --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "orientation" 'gesture-pan) t)
@@ -173,7 +170,7 @@ lambda (gesture direction offset)    :run-last
 (setf (liber:alias-for-function 'gesture-pan-orientation)
       "Accessor"
       (documentation 'gesture-pan-orientation 'function)
- "@version{#2020-9-11}
+ "@version{2024-2-19}
   @syntax[]{(gtk:gesture-pan-orientation object) => orientation)}
   @syntax[]{(setf (gtk:gesture-pan-orientation object) orientation)}
   @argument[object]{a @class{gtk:gesture} object}
@@ -196,10 +193,9 @@ lambda (gesture direction offset)    :run-last
 
 (defun gesture-pan-new (orientation)
  #+liber-documentation
- "@version{#2020-9-1}
-  @argument[widget]{a @class{gtk:widget}}
+ "@version{2024-2-19}
   @argument[orientation]{a @symbol{gtk:orientation} value}
-  @return{A newly created @class{gtk:gesture-pan}.}
+  @return{The newly created @class{gtk:gesture-pan} object.}
   @begin{short}
     Returns a newly created gesture that recognizes pan gestures.
   @end{short}

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -79,28 +79,26 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-long-press 'type)
- "@version{#2020-9-11}
+ "@version{2024-2-19}
   @begin{short}
     The @class{gtk:gesture-long-press} object is a gesture for long presses.
   @end{short}
   This gesture is also known as \"Press and Hold\".
 
-  When the timeout is exceeded, the gesture is triggering the \"pressed\"
-  signal.
-
-  If the touchpoint is lifted before the timeout passes, or if it drifts too far
-  of the initial press point, the \"cancelled\" signal will be emitted.
-
-  How long the timeout is before the \"pressed\" signal gets emitted is
-  determined by the @slot[gtk:settings]{gtk-long-press-time} setting. It can be
-  modified by the @code{delay-factor} property.
+  When the timeout is exceeded, the gesture is triggering the @code{\"pressed\"}
+  signal. If the touchpoint is lifted before the timeout passes, or if it drifts
+  too far of the initial press point, the @code{\"cancelled\"} signal will be
+  emitted. How long the timeout is before the @code{\"pressed\"} signal gets
+  emitted is determined by the @slot[gtk:settings]{gtk-long-press-time} setting.
+  It can be modified by the @slot[gtk:gesture-long-press]{delay-factor}
+  property.
   @begin[Signal Details]{dictionary}
     @subheading{The \"cancelled\" signal}
       @begin{pre}
 lambda (gesture)    :run-last
       @end{pre}
       The signal is emitted whenever a press moved too far, or was released
-      before the \"pressed\" signal happened.
+      before the @code{\"pressed\"} signal happened.
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-long-press} object which received
           the signal.}
@@ -128,7 +126,7 @@ lambda (gesture x y)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- gesture-long-press-delay-factor ----------------------------------------
+;;; --- gtk:gesture-long-press-delay-factor ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "delay-factor"
@@ -142,11 +140,11 @@ lambda (gesture x y)    :run-last
 (setf (liber:alias-for-function 'gesture-long-press-delay-factor)
       "Accessor"
       (documentation 'gesture-long-press-delay-factor 'function)
- "@version{#2020-9-11}
-  @syntax[]{(gtk:gesture-long-press-delay-factor object) => delay-factor)}
-  @syntax[]{(setf (gtk:gesture-long-press-delay-factor object) delay-factor)}
+ "@version{2024-2-19}
+  @syntax[]{(gtk:gesture-long-press-delay-factor object) => factor)}
+  @syntax[]{(setf (gtk:gesture-long-press-delay-factor object) factor)}
   @argument[object]{a @class{gtk:gesture-long-press} object}
-  @argument[delay-factor]{a double float with the factor by which to modify
+  @argument[factor]{a double float with the factor by which to modify
     the default timeout}
   @begin{short}
     Accessor of the @slot[gtk:gesture-long-press]{delay-factor} slot of the
@@ -162,9 +160,8 @@ lambda (gesture x y)    :run-last
 
 (defun gesture-long-press-new ()
  #+liber-documentation
- "@version{#2020-9-11}
-  @argument[widget]{a @class{gtk:widget} object}
-  @return{A newly created @class{gtk:gesture-long-press} object.}
+ "@version{2024-2-19}
+  @return{The newly created @class{gtk:gesture-long-press} object.}
   @begin{short}
     Returns a newly created gesture that recognizes long presses.
   @end{short}

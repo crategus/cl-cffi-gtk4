@@ -7,7 +7,7 @@
 
 ;;;     GtkGestureSingle
 
-(test gesture-single-class
+(test gtk-gesture-single-class
   ;; Type check
   (is (g:type-is-object "GtkGestureSingle"))
   ;; Check the registered name
@@ -49,9 +49,24 @@
 ;;;     exclusive
 ;;;     touch-only
 
+(test gtk-gesture-single-properties
+  (let ((gesture (make-instance 'gtk:gesture-single)))
+    (is (= 1 (gtk:gesture-single-button gesture)))
+    (is-false (gtk:gesture-single-exclusive gesture))
+    (is-false (gtk:gesture-single-touch-only gesture))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_single_get_current_button
+
+(test gtk-gesture-single-current-button
+  (let ((gesture (make-instance 'gtk:gesture-single)))
+    (is (= 0 (gtk:gesture-single-current-button gesture)))))
+
 ;;;     gtk_gesture_single_get_current_sequence
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-gesture-single-current-sequence
+  (let ((gesture (make-instance 'gtk:gesture-single)))
+    (is-false (gtk:gesture-single-current-sequence gesture))))
+
+;;; 2024-2-19

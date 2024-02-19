@@ -42,9 +42,29 @@
 
 ;;;     swipe
 
+(test gtk-gesture-swipe-swipe-signal
+  (let ((query (g:signal-query (g:signal-lookup "swipe" "GtkGestureSwipe"))))
+    (is (string= "swipe" (g:signal-query-signal-name query)))
+    (is (string= "GtkGestureSwipe"
+                 (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '("gdouble" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_swipe_new
+
+(test gtk-gesture-swipe-new
+  (is (typep (gtk:gesture-swipe-new) 'gtk:gesture-swipe)))
+
 ;;;     gtk_gesture_swipe_get_velocity
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-gesture-swipe-velocity
+  (let ((gesture (gtk:gesture-swipe-new)))
+    (is-false (gtk:gesture-swipe-velocity gesture))))
+
+;;; 2024-2-19

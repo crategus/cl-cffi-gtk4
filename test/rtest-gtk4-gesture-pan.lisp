@@ -7,6 +7,36 @@
 
 ;;;     GtkPanDirection
 
+(test gtk-pan-direction
+  ;; Check the type
+  (is (g:type-is-enum "GtkPanDirection"))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkPanDirection")
+          (g:gtype (cffi:foreign-funcall "gtk_pan_direction_get_type" :size))))
+  ;; Check the registered name
+  (is (eq 'gtk:pan-direction
+          (glib:symbol-for-gtype "GtkPanDirection")))
+  ;; Check the names
+  (is (equal '("GTK_PAN_DIRECTION_LEFT" "GTK_PAN_DIRECTION_RIGHT"
+               "GTK_PAN_DIRECTION_UP" "GTK_PAN_DIRECTION_DOWN")
+             (list-enum-item-name "GtkPanDirection")))
+  ;; Check the values
+  (is (equal '(0 1 2 3)
+             (list-enum-item-value "GtkPanDirection")))
+  ;; Check the nick names
+  (is (equal '("left" "right" "up" "down")
+             (list-enum-item-nick "GtkPanDirection")))
+  ;; Check the enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkPanDirection" GTK-PAN-DIRECTION
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_pan_direction_get_type")
+                                     (:LEFT 0)
+                                     (:RIGHT 1)
+                                     (:UP 2)
+                                     (:DOWN 3))
+             (gobject:get-g-type-definition "GtkPanDirection"))))
+
 ;;;     GtkGesturePan
 
 (test gesture-pan-class
@@ -45,12 +75,32 @@
 
 ;;;     orientation
 
+(test gtk-gesture-pan-properties
+  (let ((gesture (make-instance 'gtk:gesture-pan)))
+    (is (eq :horizontal (gtk:gesture-pan-orientation gesture)))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     pan
+
+(test gtk-gesture-pan-pan-signal
+  (let ((query (g:signal-query (g:signal-lookup "pan" "GtkGesturePan"))))
+    (is (string= "pan" (g:signal-query-signal-name query)))
+    (is (string= "GtkGesturePan"
+                 (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '("GtkPanDirection" "gdouble")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_pan_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-gesture-pan-new
+  (is (typep (gtk:gesture-pan-new :horizontal) 'gtk:gesture-pan))
+  (is (typep (gtk:gesture-pan-new :vertical) 'gtk:gesture-pan)))
+
+;;; 2024-2-19

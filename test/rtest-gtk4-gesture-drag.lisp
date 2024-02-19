@@ -47,7 +47,20 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_drag_new
+
+(test gtk-gesture-drag-new
+  (is (typep (gtk:gesture-drag-new) 'gtk:gesture-drag)))
+
 ;;;     gtk_gesture_drag_get_start_point
+
+(test gtk-gesture-drag-start-point
+  (let ((gesture (gtk:gesture-drag-new)))
+    (is-false (gtk:gesture-drag-start-point gesture))))
+
 ;;;     gtk_gesture_drag_get_offset
+
+(test gtk-gesture-drag-offset
+  (let ((gesture (gtk:gesture-drag-new)))
+    (is-false (gtk:gesture-drag-offset gesture))))
 
 ;;; --- 2023-5-29 --------------------------------------------------------------
