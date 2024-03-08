@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -36,24 +36,14 @@
 ;;;     GTK_ACCESSIBLE_VALUE_UNDEFINED
 ;;;
 ;;;     GtkAlign
-;;;     GtkArrowType
 ;;;     GtkBaselinePosition
-
-;;;     GtkContentFit                                      --> gtk4.picture.lisp
-
 ;;;     GtkDeleteType
 ;;;     GtkDirectionType
 ;;;     GtkIconSize
-
-;;;     GtkResponseType                                    <-- gtk4.dialog.lisp
-
+;;;     GtkResponseType
 ;;;     GtkSensitivityType
 ;;;     GtkTextDirection
 ;;;     GtkJustification
-
-;;;     GtkListTabBehavior                                 Since 4.12
-;;;     GtkListScrollFlags                                 Since 4.12
-
 ;;;     GtkMessageType
 ;;;     GtkMovementStep
 ;;;     GtkNaturalWrapMode
@@ -66,34 +56,18 @@
 ;;;     GtkSelectionMode
 ;;;     GtkWrapMode
 ;;;     GtkSortType
-;;;     GtkPrintPages
-;;;     GtkPageSet
-;;;     GtkNumberUpLayout
 ;;;     GtkOrdering
-;;;     GtkPageOrientation
-;;;     GtkPrintQuality
-;;;     GtkPrintDuplex
-;;;     GtkUnit
-;;;     GtkTreeViewGridLines
 ;;;     GtkSizeGroupMode
 ;;;     GtkSizeRequestMode
-;;;     GtkScrollablePolicy
 ;;;     GtkStateFlags
 ;;;     GtkBorderStyle
-;;;     GtkLevelBarMode
 ;;;     GtkInputPurpose
 ;;;     GtkInputHints
-;;;     GtkPropagationPhase
-;;;     GtkPropagationLimit
-;;;     GtkEventSequenceState
-;;;     GtkPanDirection
-;;;     GtkShortcutScope
 ;;;     GtkPickFlags
 ;;;     GtkConstraintRelation
 ;;;     GtkConstraintStrength
 ;;;     GtkConstraintAttribute
 ;;;     GtkConstraintVflParserError
-;;;     GtkSystemSetting
 ;;;     GtkSymbolicColor
 ;;;     GtkAccessibleRole
 ;;;     GtkAccessibleState
@@ -106,15 +80,6 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_ACCESSIBLE_VALUE_UNDEFINED
-;;;
-;;; An undefined value. The accessible attribute is either unset, or its
-;;; value is undefined.
-;;;
-;;; #define GTK_ACCESSIBLE_VALUE_UNDEFINED  (-1)
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkAlign
@@ -189,49 +154,6 @@
   @see-function{gtk:widget-valign}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkArrowType
-;;; ----------------------------------------------------------------------------
-
-;; Defined in gtk.menu-button.lisp
-
-#|
-(gobject:define-g-enum "GtkArrowType" arrow-type
-  (:export t
-   :type-initializer "gtk_arrow_type_get_type")
-  (:up 0)
-  (:down 1)
-  (:left 2)
-  (:right 3)
-  (:none 4))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'arrow-type)
-      "GEnum"
-      (liber:symbol-documentation 'arrow-type)
- "@version{#2021-12-28}
-  @begin{short}
-    Used to indicate the direction in which an arrow should point.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkArrowType\" arrow-type
-  (:export t
-   :type-initializer \"gtk_arrow_type_get_type\")
-  (:up 0)
-  (:down 1)
-  (:left 2)
-  (:right 3)
-  (:none 4))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:up]{Represents an upward pointing arrow.}
-    @entry[:down]{Represents a downward pointing arrow.}
-    @entry[:left]{Represents a left pointing arrow.}
-    @entry[:right]{Represents a right pointing arrow.}
-    @entry[:none]{No arrow.}
-  @end{table}")
-|#
-
-;;; ----------------------------------------------------------------------------
 ;;; GtkBaselinePosition
 ;;; ----------------------------------------------------------------------------
 
@@ -291,7 +213,7 @@
 (setf (liber:alias-for-symbol 'delete-type)
       "GEnum"
       (liber:symbol-documentation 'delete-type)
- "@version{#2021-12-28}
+ "@version{2024-3-7}
   @begin{short}
     The values of this enumeration are passed as an argument to various
     keybinding signals for deleting text.
@@ -345,7 +267,7 @@
 (setf (liber:alias-for-symbol 'direction-type)
       "GEnum"
       (liber:symbol-documentation 'direction-type)
- "@version{#2021-12-28}
+ "@version{2024-3-7}
   @short{Focus movement types.}
   @begin{pre}
 (gobject:define-g-enum \"GtkDirectionType\" direction-type
@@ -515,7 +437,6 @@
 (gobject:define-g-enum "GtkTextDirection" text-direction
   (:export t
    :type-initializer "gtk_text_direction_get_type")
-  (:dummy -1) ; Workaround to ensure the base-type is :int for the enumeration
   (:none 0)
   (:ltr 1)
   (:rtl 2))
@@ -524,7 +445,7 @@
 (setf (liber:alias-for-symbol 'text-direction)
       "GEnum"
       (liber:symbol-documentation 'text-direction)
- "@version{#2021-9-8}
+ "@version{2024-3-7}
   @begin{short}
     Reading directions for text.
   @end{short}
@@ -548,12 +469,9 @@
 ;;; GtkJustification
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Implement a base-type for defining an enumeration
-
 (gobject:define-g-enum "GtkJustification" justification
   (:export t
    :type-initializer "gtk_justification_get_type")
-  (:dummy1 -1)  ; Workaround to ensure the base-type is :int for the enumeration
   (:left 0)
   (:right 1)
   (:center 2)
@@ -563,11 +481,11 @@
 (setf (liber:alias-for-symbol 'justification)
       "GEnum"
       (liber:symbol-documentation 'justification)
- "@version{#2021-12-22}
+ "@version{2024-3-7}
   @begin{short}
     Used for justifying the text inside a @class{gtk:label} widget.
   @end{short}
-  See also the @class{gtk:alignment} widget.
+  See the @slot[gtk:label]{justify} property.
   @begin{pre}
 (gobject:define-g-enum \"GtkJustification\" justification
   (:export t
@@ -581,49 +499,10 @@
     @entry[:left]{The text is placed at the left edge of the label.}
     @entry[:right]{The text is placed at the right edge of the label.}
     @entry[:center]{The text is placed in the center of the label.}
-    @entry[:fill]{The text is placed is distributed across the label.}
+    @entry[:fill]{The text is distributed across the label.}
   @end{table}
-  @see-class{gtk:alignment}
-  @see-class{gtk:label}")
-
-;;; ----------------------------------------------------------------------------
-;;; enum GtkListTabBehavior                                Since 4.12
-;;;
-;;; Used to configure the focus behavior in the GTK_DIR_TAB_FORWARD and
-;;; GTK_DIR_TAB_BACKWARD direction, like the Tab key in a GtkListView.
-;;;
-;;; Since 4.12
-;;;
-;;; GTK_LIST_TAB_ALL
-;;;     Cycle through all focusable items of the list.
-;;;
-;;; GTK_LIST_TAB_ITEM	
-;;;     Cycle through a single list element, then move focus out of the list.
-;;;     Moving focus between items needs to be done with the arrow keys.
-;;;
-;;; GTK_LIST_TAB_CELL	
-;;;     Cycle only through a single cell, then move focus out of the list.
-;;;     Moving focus between cells needs to be done with the arrow keys. This
-;;;     is only relevant for cell-based widgets like GtkColumnView, otherwise
-;;;     it behaves like GTK_LIST_TAB_ITEM.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; enum GtkListScrollFlags                                Since 4.12
-;;;
-;;; List of actions to perform when scrolling to items in a list widget.
-;;;
-;;; Since 4.12
-;;;
-;;; GTK_LIST_SCROLL_NONE	
-;;;     Don’t do anything extra.
-;;;
-;;; GTK_LIST_SCROLL_FOCUS	
-;;;     Focus the target item.
-;;;
-;;; GTK_LIST_SCROLL_SELECT	
-;;;     Select the target item and unselect all other items.
-;;; ----------------------------------------------------------------------------
+  @see-class{gtk:label}
+  @see-function{gtk:label-justify}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkMessageType
@@ -687,7 +566,7 @@
 (setf (liber:alias-for-symbol 'movement-step)
       "GEnum"
       (liber:symbol-documentation 'movement-step)
- "@version{#2021-12-28}
+ "@version{2024-3-7}
   @begin{short}
     The values of this enumeration are passed to various keybinding signals for
     moving the cursor position.
@@ -720,7 +599,6 @@
     @entry[:horizontal-pages]{Move horizontally by pages.}
   @end{table}
   @see-class{gtk:entry}
-  @see-class{gtk:tree-view}
   @see-class{gtk:list-box}
   @see-class{gtk:flow-box}")
 
@@ -768,13 +646,14 @@
   @see-function{gtk:label-natural-wrap-mode}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkScrollStep
+;;; GtkScrollStep                                          not exported
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: This enumeration is not in use in the cl-cffi-gtk implementation.
+;; This enumeration is not in use in the cl-cffi-gtk4 implementation.
+;; We do not export the implementation.
 
 (gobject:define-g-enum "GtkScrollStep" scroll-step
-  (:export t
+  (:export nil
    :type-initializer "gtk_scroll_step_get_type")
   (:steps 0)
   (:pages 1)
@@ -787,7 +666,7 @@
 (setf (liber:alias-for-symbol 'scroll-step)
       "GEnum"
       (liber:symbol-documentation 'scroll-step)
- "@version{#2021-12-28}
+ "@version{2024-3-7}
   @short{Passed as argument to various keybinding signals.}
   @begin{pre}
 (gobject:define-g-enum \"GtkScrollStep\" scroll-step
@@ -851,11 +730,10 @@
 (setf (liber:alias-for-symbol 'overflow)
       "GEnum"
       (liber:symbol-documentation 'overflow)
- "@version{#2021-12-28}
+ "@version{2024-3-7}
   @begin{short}
     Defines how content overflowing a given area should be handled.
   @end{short}
-
   This is used in the @fun{gtk:widget-overflow} function. The
   @slot[gtk:widget]{overflow} property is modeled after the CSS overflow
   property, but implements it only partially.
@@ -888,7 +766,7 @@
 (setf (liber:alias-for-symbol 'pack-type)
       "GEnum"
       (liber:symbol-documentation 'pack-type)
- "@version{#2021-12-28}
+ "@version{2024-3-7}
   @begin{short}
     Represents the packing location of the child widget in its parent.
   @end{short}
@@ -922,7 +800,7 @@
 (setf (liber:alias-for-symbol 'position-type)
       "GEnum"
       (liber:symbol-documentation 'position-type)
- "@version{#2021-12-28}
+ "@version{2024-3-7}
   @begin{short}
     Describes which edge of a widget a certain feature is positioned at.
   @end{short}
@@ -974,11 +852,11 @@
 (setf (liber:alias-for-symbol 'scroll-type)
       "GEnum"
       (liber:symbol-documentation 'scroll-type)
- "@version{#2021-12-28}
+ "@version{2024-3-7}
   @begin{short}
     The scrolling types of this enumeration are a parameter for signal
-    handlers in various widgets such as @class{gtk:spin-button},
-    @class{gtk:scrolled-window}, or @class{gtk:combo-box}.
+    handlers in various widgets such as the @class{gtk:spin-button},
+    @class{gtk:scrolled-window}, or @class{gtk:combo-box} widget.
   @end{short}
   @begin{pre}
 (gobject:define-g-enum \"GtkScrollType\" scroll-type
@@ -1021,7 +899,7 @@
 (setf (liber:alias-for-symbol 'selection-mode)
       "GEnum"
       (liber:symbol-documentation 'selection-mode)
- "@version{#2021-12-28}
+ "@version{2024-3-7}
   @short{Used to control what selections users are allowed to make.}
   @begin{pre}
 (gobject:define-g-enum \"GtkSelectionMode\" gtk:selection-mode
@@ -1120,132 +998,6 @@
   @see-class{gtk:numeric-sorter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkPrintPages
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkPrintPages" print-pages
-  (:export t
-   :type-initializer "gtk_print_pages_get_type")
-  (:all 0)
-  (:current 1)
-  (:ranges 2)
-  (:selection 3))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'print-pages)
-      "GEnum"
-      (liber:symbol-documentation 'print-pages)
- "@version{#2021-12-28}
-  @begin{short}
-    See the @fun{gtk:print-job-pages} and @fun{gtk:print-settings-print-pages}
-    functions.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkPrintPages\" print-pages
-  (:export t
-   :type-initializer \"gtk_print_pages_get_type\")
-  (:all 0)
-  (:current 1)
-  (:ranges 2)
-  (:selection 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:all]{All pages.}
-    @entry[:current]{Current page.}
-    @entry[:ranges]{Range of pages.}
-    @entry[:selection]{Selected pages.}
-  @end{table}
-  @see-class{gtk:print-settings}
-  @see-function{gtk:print-settings-print-pages}
-  @see-function{gtk:print-job-pages}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkPageSet
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkPageSet" page-set
-  (:export t
-   :type-initializer "gtk_page_set_get_type")
-  (:all 0)
-  (:even 1)
-  (:odd 2))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'page-set)
-      "GEnum"
-      (liber:symbol-documentation 'page-set)
- "@version{#2021-12-28}
-  @short{See the @fun{gtk:print-job-page-set} function.}
-  @begin{pre}
-(gobject:define-g-enum \"GtkPageSet\" page-set
-  (:export t
-   :type-initializer \"gtk_page_set_get_type\")
-  (:all 0)
-  (:even 1)
-  (:odd 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:all]{All pages.}
-    @entry[:even]{Even pages.}
-    @entry[:odd]{Odd pages.}
-  @end{table}
-  @see-class{gtk:print-settings}
-  @see-function{gtk:print-job-page-set}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkNumberUpLayout
-;;; ----------------------------------------------------------------------------
-
-;; TODO: Change the nick names to the short form
-
-(gobject:define-g-enum "GtkNumberUpLayout" number-up-layout
-  (:export t
-   :type-initializer "gtk_number_up_layout_get_type")
-  (:left-to-right-top-to-bottom 0)
-  (:left-to-right-bottom-to-top 1)
-  (:right-to-left-bottom-to-top 2)
-  (:right-to-left-top-to-bottom 3)
-  (:top-to-bottom-left-to-right 4)
-  (:top-to-bottom-right-to-left 5)
-  (:bottom-to-top-left-to-right 6)
-  (:bottom-to-top-right-to-left 7))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'number-up-layout)
-      "GEnum"
-      (liber:symbol-documentation 'number-up-layout)
- "@version{#2021-12-28}
-  @begin{short}
-    Used to determine the layout of pages on a sheet when printing multiple
-    pages per sheet.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkNubmerUpLayout\" number-up-layout
-  (:export t
-   :type-initializer \"gtk_number_up_layout_get_type\")
-  (:left-to-right-top-to-bottom 0)
-  (:left-to-right-bottom-to-top 1)
-  (:right-to-left-bottom-to-top 2)
-  (:right-to-left-top-to-bottom 3)
-  (:top-to-bottom-left-to-right 4)
-  (:top-to-bottom-right-to-left 5)
-  (:bottom-to-top-left-to-right 6)
-  (:bottom-to-top-right-to-left 7))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:left-to-right-top-to-bottom]{@image[layout-lrtb]{}}
-    @entry[:left-to-right-bottom-to-top]{@image[layout-lrbt]{}}
-    @entry[:right-to-left-bottom-to-top]{@image[layout-rlbt]{}}
-    @entry[:right-to-left-top-to-bottom]{@image[layout-rltb]{}}
-    @entry[:top-to-bottom-left-to-right]{@image[layout-tblr]{}}
-    @entry[:top-to-bottom-right-to-left]{@image[layout-tbrl]{}}
-    @entry[:bottom-to-top-left-to-right]{@image[layout-btlr]{}}
-    @entry[:bottom-to-top-right-to-left]{@image[layout-btrl]{}}
-  @end{table}
-  @see-class{gtk:print-settings}
-  @see-function{gtk:print-settings-number-up-layout}")
-
-;;; ----------------------------------------------------------------------------
 ;;; GtkOrdering
 ;;; ----------------------------------------------------------------------------
 
@@ -1283,184 +1035,6 @@
   @end{table}
   @see-function{g:compare-data-func}
   @see-function{gtk:ordering-from-cmpfunc}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkPageOrientation
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkPageOrientation" page-orientation
-  (:export t
-   :type-initializer "gtk_page_orientation_get_type")
-  :portrait
-  :landscape
-  :reverse-portrait
-  :reverse-landscape)
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'page-orientation)
-      "GEnum"
-      (liber:symbol-documentation 'page-orientation)
- "@version{#2021-12-28}
-  @short{See the @fun{gtk:print-settings-orientation} function.}
-  @begin{pre}
-(gobject:define-g-enum \"GtkPageOrienation\" page-orientation
-  (:export t
-   :type-initializer \"gtk_page_orientation_get_type\")
-  :portrait
-  :landscape
-  :reverse-portrait
-  :reverse-landscape)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:portrait]{Portrait mode.}
-    @entry[:landscape]{Landscape mode.}
-    @entry[:reverse-portrait]{Reverse portrait mode.}
-    @entry[:reverse-landscape]{Reverse landscape mode.}
-  @end{table}
-  @see-class{gtk:print-settings}
-  @see-function{gtk:print-settings-orientation}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkPrintQuality
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkPrintQuality" print-quality
-  (:export t
-   :type-initializer "gtk_print_quality_get_type")
-  :low
-  :normal
-  :high
-  :draft)
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'print-quality)
-      "GEnum"
-      (liber:symbol-documentation 'print-quality)
- "@version{#2021-12-28}
-  @short{See the @fun{gtk:print-settings-quality} function.}
-  @begin{pre}
-(gobject:define-g-enum \"GtkPrintQuality\" print-quality
-  (:export t
-   :type-initializer \"gtk_print_quality_get_type\")
-  :low
-  :normal
-  :high
-  :draft)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:low]{Low quality.}
-    @entry[:normal]{Normal quality.}
-    @entry[:high]{High quality.}
-    @entry[:draft]{Draft quality.}
-  @end{table}
-  @see-class{gtk:print-settings}
-  @see-function{gtk:print-settings-quality}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkPrintDuplex
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkPrintDuplex" print-duplex
-  (:export t
-   :type-initializer "gtk_print_duplex_get_type")
-  :simplex
-  :horizontal
-  :vertical)
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'print-duplex)
-      "GEnum"
-      (liber:symbol-documentation 'print-duplex)
- "@version{#2021-12-28}
-  @short{See the @fun{gtk:print-settings-duplex} function.}
-  @begin{pre}
-(gobject:define-g-enum \"GtkPrintDuplex\" print-duplex
-  (:export t
-   :type-initializer \"gtk_print_duplex_get_type\")
-  :simplex
-  :horizontal
-  :vertical)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:simplex]{No duplex.}
-    @entry[:horizontal]{Horizontal duplex.}
-    @entry[:vertical]{Vertical duplex.}
-  @end{table}
-  @see-class{gtk:print-settings}
-  @see-function{gtk:print-settings-duplex}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkUnit
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkUnit" unit
-  (:export t
-   :type-initializer "gtk_unit_get_type")
-  (:none 0)
-  (:pixel 0) ; alias for :none
-  (:points 1)
-  (:inch 2)
-  (:mm 3))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'unit)
-      "GEnum"
-      (liber:symbol-documentation 'unit)
- "@version{#2021-12-28}
-  @short{Enumeration for dimensions of paper sizes.}
-  @begin{pre}
-(gobject:define-g-enum \"GtkUnit\" unit
-  (:export t
-   :type-initializer \"gtk_unit_get_type\")
-  (:none 0)
-  (:points 1)
-  (:inch 2)
-  (:mm 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{No units.}
-    @entry[:points]{Dimensions in points.}
-    @entry[:inch]{Dimensions in inches.}
-    @entry[:mm]{Dimensions in millimeters.}
-  @end{table}
-  @see-class{gtk:paper-size}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkTreeViewGridLines
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkTreeViewGridLines" tree-view-grid-lines
-  (:export t
-   :type-initializer "gtk_tree_view_grid_lines_get_type")
-  (:none 0)
-  (:horizontal 1)
-  (:vertical 2)
-  (:both 3))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'tree-view-grid-lines)
-      "GEnum"
-      (liber:symbol-documentation 'tree-view-grid-lines)
- "@version{#2021-12-28}
-  @begin{short}
-    Used to indicate which grid lines to draw in a tree view.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkTreeViewGridLines\" tree-view-grid-lines
-  (:export t
-   :type-initializer \"gtk_tree_view_grid_lines_get_type\")
-  (:none 0)
-  (:horizontal 1)
-  (:vertical 2)
-  (:both 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{No grid lines.}
-    @entry[:horizontal]{Horizontal grid lines.}
-    @entry[:vertical]{Vertical grid lines.}
-    @entry[:both]{Horizontal and vertical grid lines.}
-  @end{table}
-  @see-class{gtk:tree-view}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkSizeGroupMode
@@ -1516,7 +1090,7 @@
 (setf (liber:alias-for-symbol 'size-request-mode)
       "GEnum"
       (liber:symbol-documentation 'size-request-mode)
- "@version{#2021-12-28}
+ "@version{2024-3-8}
   @begin{short}
     Specifies a preference for height-for-width or width-for-height geometry
     management.
@@ -1537,38 +1111,6 @@
   @end{table}
   @see-class{gtk:widget}
   @see-function{gtk:widget-request-mode}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkScrollablePolicy
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkScrollablePolicy" scrollable-policy
-  (:export t
-   :type-initializer "gtk_scrollable_policy_get_type")
-  (:minimum 0)
-  (:natural 1))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'scrollable-policy)
-      "GEnum"
-      (liber:symbol-documentation 'scrollable-policy)
- "@version{#2021-12-28}
-  @begin{short}
-    Defines the policy to be used in a scrollable widget when updating the
-    scrolled window adjustments in a given orientation.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkScrollablePolicy\" scrollable-policy
-  (:export t
-   :type-initializer \"gtk_scrollable_policy_get_type\")
-  (:minimum 0)
-  (:natural 1))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:minimum]{Scrollable adjustments are based on the minimum size.}
-    @entry[:natural]{Scrollable adjustments are based on the natural size.}
-  @end{table}
-  @see-class{gtk:scrollable}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkStateFlags
@@ -1598,7 +1140,7 @@
 (setf (liber:alias-for-symbol 'state-flags)
       "GFlags"
       (liber:symbol-documentation 'state-flags)
- "@version{#2021-12-28}
+ "@version{2024-3-8}
   @begin{short}
     Describes a widget state.
   @end{short}
@@ -1669,7 +1211,7 @@
 (setf (liber:alias-for-symbol 'border-style)
       "GEnum"
       (liber:symbol-documentation 'border-style)
- "@version{#2021-12-28}
+ "@version{2024-3-8}
   @begin{short}
     Describes how the border of a UI element should be rendered.
   @end{short}
@@ -1701,39 +1243,6 @@
     @entry[:ridge]{Looks as if it were coming out of the canvas.}
   @end{table}
   @see-class{gtk:style-context}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkLevelBarMode
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkLevelBarMode" level-bar-mode
-  (:export t
-   :type-initializer "gtk_level_bar_mode_get_type")
-  (:continuous 0)
-  (:discrete 1))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'level-bar-mode)
-      "GEnum"
-      (liber:symbol-documentation 'level-bar-mode)
- "@version{#2021-12-28}
-  @begin{short}
-    Describes how the @class{gtk:level-bar} widget contents should be rendered.
-  @end{short}
-  Note that this enumeration could be extended with additional modes in the
-  future.
-  @begin{pre}
-(gobject:define-g-enum \"GtkLevelBarMode\" level-bar-mode
-  (:export t
-   :type-initializer \"gtk_level_bar_mode_get_type\")
-  (:continuous 0)
-  (:discrete 1))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:continuous]{The level bar has a continuous mode.}
-    @entry[:discrete]{The level bar has a discrete mode.}
-  @end{table}
-  @see-class{gtk:level-bar}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkInputPurpose
@@ -1888,201 +1397,6 @@
   @see-symbol{gtk:input-purpose}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkPropagationPhase
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkPropagationPhase" propagation-phase
-  (:export t
-   :type-initializer "gtk_propagation_phase_get_type")
-  (:phase-none 0)
-  (:phase-capture 1)
-  (:phase-bubble 2)
-  (:phase-target 3))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'propagation-phase)
-      "GEnum"
-      (liber:symbol-documentation 'propagation-phase)
- "@version{#2021-12-28}
-  @begin{short}
-    Describes the stage at which events are fed into a
-    @class{gtk:event-controller} object.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkPropagationPhase\" propagation-phase
-  (:export t
-   :type-initializer \"gtk_propagation_phase_get_type\")
-  (:phase-none 0)
-  (:phase-capture 1)
-  (:phase-bubble 2)
-  (:phase-target 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:phase-none]{Events are not delivered automatically. Those can be
-      manually fed through the function @fun{gtk:event-controller-handle-event}.
-      This should only be used when full control about when, or whether the
-      controller handles the event is needed.}
-    @entry[:phase-capture]{Events are delivered in the capture phase. The
-      capture phase happens before the bubble phase, runs from the toplevel down
-      to the event widget. This option should only be used on containers that
-      might possibly handle events before their children do.}
-    @entry[:phase-bubble]{Events are delivered in the bubble phase. The bubble
-      phase happens after the capture phase, and before the default handlers are
-      run. This phase runs from the event widget, up to the toplevel.}
-    @entry[:phase-target]{Events are delivered in the default widget event
-      handlers, note that widget implementations must chain up on button,
-      motion, touch and grab broken handlers for controllers in this phase to
-      be run.}
-  @end{table}
-  @see-class{gtk:event-controller}
-  @see-function{gtk:event-controller-handle-event}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkPropagationLimit
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkPropagationLimit" propagation-limit
-  (:export t
-   :type-initializer "gtk_propagation_limit_get_type")
-  :none
-  :native)
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'propagation-limit)
-      "GEnum"
-      (liber:symbol-documentation 'propagation-limit)
- "@version{#2021-12-28}
-  @begin{short}
-    Describes limits of a @class{gtk:event-controller} object for handling
-    events targeting other widgets.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkPropagationLimit\" propagation-limit
-  (:export t
-   :type-initializer \"gtk_propagation_limit_get_type\")
-  :none
-  :native)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{Events are handled regardless of what their target is.}
-    @entry[:native]{Events are only handled if their target is in the same
-      @class{gtk:native} widget as the event controllers widget. Note that some
-      event types have two targets (origin and destination).}
-  @end{table}
-  @see-class{gtk:native}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkEventSequenceState
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkEventSequenceState" event-sequence-state
-  (:export t
-   :type-initializer "gtk_event_sequence_state_get_type")
-  (:none 0)
-  (:claimed 1)
-  (:denied 2))
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'event-sequence-state)
-      "GEnum"
-      (liber:symbol-documentation 'event-sequence-state)
- "@version{#2021-12-28}
-  @begin{short}
-    Describes the state of a @class{gdk:event-sequence} event in a
-    @class{gtk:gesture} object.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkEventSequenceState\" event-sequence-state
-  (:export t
-   :type-initializer \"gtk_event_sequence_state_get_type\")
-  (:none 0)
-  (:claimed 1)
-  (:denied 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{The sequence is handled, but not grabbed.}
-    @entry[:claimed]{The sequence is handled and grabbed.}
-    @entry[:denied]{The sequence is denied.}
-  @end{table}
-  @see-class{gtk:gesture}
-  @see-class{gdk:event-sequence}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkPanDirection
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkPanDirection" pan-direction
-  (:export t
-   :type-initializer "gtk_pan_direction_get_type")
-  :left
-  :right
-  :up
-  :down)
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'pan-direction)
-      "GEnum"
-      (liber:symbol-documentation 'pan-direction)
- "@version{#2021-12-28}
-  @begin{short}
-    Describes the panning direction of a @class{gtk:gesture-pan} object.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkPanDirection\" pan-direction
-  (:export t
-   :type-initializer \"gtk_pan_direction_get_type\")
-  :left
-  :right
-  :up
-  :down)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:left]{Panned towards the left.}
-    @entry[:right]{Panned towards the right.}
-    @entry[:up]{Panned upwards.}
-    @entry[:down]{Panned downwards.}
-  @end{table}
-  @see-class{gtk:gesture-pan}")
-
-;;; ----------------------------------------------------------------------------
-;;; GtkShortcutScope
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkShortcutScope" shortcut-scope
-  (:export t
-   :type-initializer "gtk_shortcut_scope_get_type")
-  :local
-  :managed
-  :global)
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'shortcut-scope)
-      "GEnum"
-      (liber:symbol-documentation 'shortcut-scope)
- "@version{2023-7-23}
-  @begin{short}
-    Describes where @class{gtk:shortcut} objects added to the
-    @class{gtk:shortcut-controller} object get handled.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GtkShortcutScope\" shortcut-scope
-  (:export t
-   :type-initializer \"gtk_shortcut_scope_get_type\")
-  :local
-  :managed
-  :global)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:local]{Shortcuts are handled inside the widget the controller
-      belongs to.}
-    @entry[:managed]{Shortcuts are handled by the first ancestor that is a
-      @class{gtk:shortcut-manager} object.}
-    @entry[:global]{Shortcuts are handled by the root widget.}
-  @end{table}
-  @see-class{gtk:shortcut}
-  @see-class{gtk:shortcut-manager}")
-
-;;; ----------------------------------------------------------------------------
 ;;; GtkPickFlags
 ;;; ----------------------------------------------------------------------------
 
@@ -2097,7 +1411,7 @@
 (setf (liber:alias-for-symbol 'pick-flags)
       "GFlags"
       (liber:symbol-documentation 'pick-flags)
- "@version{#2021-12-28}
+ "@version{2024-3-8}
   @begin{short}
     Flags that influence the behavior of the @fun{gtk:widget-pick} function.
   @end{short}
@@ -2117,7 +1431,7 @@
       See the @slot[gtk:widget]{can-target} property.}
   @end{table}
   @see-function{gtk:widget-pick}
-  @see-function{gtk:wiget-can-target}")
+  @see-function{gtk:widget-can-target}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkConstraintRelation
@@ -2134,7 +1448,7 @@
 (setf (liber:alias-for-symbol 'constraint-relation)
       "GEnum"
       (liber:symbol-documentation 'constraint-relation)
- "@version{#2021-12-28}
+ "@version{2024-3-8}
   @begin{short}
     The relation between two terms of a constraint.
   @end{short}
@@ -2168,7 +1482,7 @@
 (setf (liber:alias-for-symbol 'constraint-strength)
       "GEnum"
       (liber:symbol-documentation 'constraint-strength)
- "@version{#2021-12-30}
+ "@version{2024-3-8}
   @begin{short}
     The strength of a constraint, expressed as a symbolic constant.
   @end{short}
@@ -2215,7 +1529,7 @@
 (setf (liber:alias-for-symbol 'constraint-attribute)
       "GEnum"
       (liber:symbol-documentation 'constraint-attribute)
- "@version{#2021-12-30}
+ "@version{2024-3-8}
   @begin{short}
     The widget attributes that can be used when creating a
     @class{gtk:constraint} widget.
@@ -2275,7 +1589,7 @@
 (setf (liber:alias-for-symbol 'constraint-vfl-parser-error)
       "GEnum"
       (liber:symbol-documentation 'constraint-vfl-parser-error)
- "@version{#2021-12-30}
+ "@version{2024-3-8}
   @begin{short}
     Domain for VFL parsing errors.
   @end{short}
@@ -2300,71 +1614,10 @@
   @end{table}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkSystemSetting
-;;; ----------------------------------------------------------------------------
-
-(gobject:define-g-enum "GtkSystemSetting" system-setting
-  (:export t
-   :type-initializer "gtk_system_setting_get_type")
-  :dpi
-  :font-name
-  :font-config
-  :display
-  :icon-theme)
-
-#+liber-documentation
-(setf (liber:alias-for-symbol 'system-setting)
-      "GEnum"
-      (liber:symbol-documentation 'system-setting)
- "@version{#2021-12-30}
-  @begin{short}
-    Values that can be passed to the @code{GtkWidget::system_setting_changed}
-    virtual function.
-  @end{short}
-
-  The values indicate which system setting has changed. Widgets may need to drop
-  caches, or react otherwise.
-
-  Most of the values correspond to @class{gtk:settings} properties.
-
-  More values may be added over time.
-  @begin{pre}
-(gobject:define-g-enum \"GtkSystemSetting\" system-setting
-  (:export t
-   :type-initializer \"gtk_system_setting_get_type\")
-  :dpi
-  :font-name
-  :font-config
-  :display
-  :icon-theme)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:dpi]{The @slot[gtk:settings]{gtk-xft-dpi} setting has changed.}
-    @entry[:font-name]{The @slot[gtk:settings]{gtk-font-name} setting has
-      changed.}
-    @entry[:font-config]{The font configuration has changed in a way that
-      requires text to be redrawn. This can be any of the
-      @slot[gtk:settings]{gtk-xft-antialias},
-      @slot[gtk:settings]{gtk-xft-hinting},
-      @slot[gtk:settings]{gtk-xft-hintstyle}
-      @slot[gtk:settings]{gtk-xft-rgba} or
-      @slot[gtk:settings]{gtk-fontconfig-timestamp} settings.}
-    @entry[:display]{The display has changed.}
-    @entry[:icon-theme]{The icon theme has changed in a way that requires icons
-      to be looked up again.}
-  @end{table}
-  @see-class{gtk:settings}
-  @see-function{gtk:settings-gtk-xft-dpi}
-  @see-function{gtk:settings-gtk-font-name}
-  @see-function{gtk:settings-gtk-xft-antialias}
-  @see-function{gtk:settings-gtk-xft-hinting}
-  @see-function{gtk:settings-gtk-xft-hintstyle}
-  @see-function{gtk:settings-gtk-xft-rgba}
-  @see-function{gtk:settings-gtk-fontconfig-timestamp}")
-
-;;; ----------------------------------------------------------------------------
 ;;; GtkSymbolicColor
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: Consider to remove the implementation.
 
 #+gtk-4-6
 (gobject:define-g-enum "GtkSymbolicColor" symbolic-color
@@ -2379,12 +1632,11 @@
 (setf (liber:alias-for-symbol 'symbolic-color)
       "GEnum"
       (liber:symbol-documentation 'symbolic-color)
- "@version{#2021-12-30}
+ "@version{2024-3-8}
   @begin{short}
     The indexes of colors passed to symbolic color rendering, such as the
     @code{GtkSymbolicPaintable::snapshot_symbolic} virtual function.
   @end{short}
-  More values may be added over time.
   @begin{pre}
 (gobject:define-g-enum \"GtkSymbolicColor\" symbolic-color
   (:export t
@@ -2496,7 +1748,7 @@
 (setf (liber:alias-for-symbol 'accessible-role)
       "GEnum"
       (liber:symbol-documentation 'accessible-role)
- "@version{#2021-12-30}
+ "@version{2024-3-8}
   @begin{short}
     The accessible role for a @class{gtk:accessible} implementation.
   @end{short}
@@ -2718,7 +1970,7 @@
 (setf (liber:alias-for-symbol 'accessible-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-state)
- "@version{2023-11-4}
+ "@version{2024-3-8}
   @begin{short}
     The possible accessible states of a @class{gtk:accessible} widget.
   @end{short}
@@ -2761,10 +2013,12 @@
       Value type: @symbol{gtk:accessible-tristate} enumeration}
     @entry[:selected]{A \"selected\" state. Set when a widget is selected.
       Value type: boolean or undefined}
-    @entry[:visited]{Indicates that a widget with the @code{:link} role has 
+    @entry[:visited]{Indicates that a widget with the @code{:link} role has
       been visited. Value type: boolean. Since 4.12}
   @end{table}
-  @see-class{gtk:accessible}")
+  @see-class{gtk:accessible}
+  @see-symbol{gtk:accessible-tristate}
+  @see-symbol{gtk:accessible-invalid-state}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkAccessibleProperty
@@ -2797,7 +2051,7 @@
 (setf (liber:alias-for-symbol 'accessible-property)
       "GEnum"
       (liber:symbol-documentation 'accessible-property)
- "@version{#2022-1-3}
+ "@version{2024-3-8}
   @begin{short}
     The possible accessible properties of a @class{gtk:accessible} widget.
   @end{short}
@@ -2873,7 +2127,9 @@
     @entry[:value-text]{Defines the human readable text alternative of
       aria-valuenow for a range widget. Value type: string}
   @end{table}
-  @see-class{gtk:accessible}")
+  @see-class{gtk:accessible}
+  @see-symbol{gtk:accessible-autocomplete}
+  @see-symbol{gtk:accessible-sort}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkAccessibleRelation
@@ -2905,7 +2161,7 @@
 (setf (liber:alias-for-symbol 'accessible-relation)
       "GEnum"
       (liber:symbol-documentation 'accessible-relation)
- "@version{#2022-1-3}
+ "@version{2024-3-8}
   @begin{short}
     The possible accessible relations of a @class{gtk:accessible} widget.
   @end{short}
@@ -2995,7 +2251,7 @@
 (setf (liber:alias-for-symbol 'accessible-tristate)
       "GEnum"
       (liber:symbol-documentation 'accessible-tristate)
- "@version{#2022-1-3}
+ "@version{2024-3-8}
   @begin{short}
     The possible values for the @code{:pressed} accessible state.
   @end{short}
@@ -3014,6 +2270,7 @@
     @entry[:true]{The state is \"true\".}
     @entry[:mixed]{The state is \"mixed\".}
   @end{table}
+  @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-state}")
 
 ;;; ----------------------------------------------------------------------------
@@ -3032,7 +2289,7 @@
 (setf (liber:alias-for-symbol 'accessible-invalid-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-invalid-state)
- "@version{#2022-1-3}
+ "@version{2024-3-8}
   @begin{short}
     The possible values for the @code{:invalid} accessible state.
   @end{short}
@@ -3053,6 +2310,7 @@
     @entry[:grammar]{A grammatical error was detected.}
     @entry[:spelling]{A spelling error was detected.}
   @end{table}
+  @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-state}")
 
 ;;; ----------------------------------------------------------------------------
@@ -3071,7 +2329,7 @@
 (setf (liber:alias-for-symbol 'accessible-autocomplete)
       "GEnum"
       (liber:symbol-documentation 'accessible-autocomplete)
- "@version{#2022-1-3}
+ "@version{2024-3-8}
   @begin{short}
     The possible values for the @code{:autocomplete} accessible property.
   @end{short}
@@ -3097,6 +2355,7 @@
       selected, and the text needed to complete the automatically selected value
       appears after the caret in the input.}
   @end{table}
+  @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-property}")
 
 ;;; ----------------------------------------------------------------------------
@@ -3115,7 +2374,7 @@
 (setf (liber:alias-for-symbol 'accessible-sort)
       "GEnum"
       (liber:symbol-documentation 'accessible-sort)
- "@version{#2022-1-3}
+ "@version{2024-3-8}
   @begin{short}
     The possible values for the @code{:sort} accessible property.
   @end{short}
@@ -3135,6 +2394,7 @@
     @entry[:other]{A sort algorithm other than ascending or descending has been
       applied.}
   @end{table}
+  @see-class{gtk:accessible}
   @see-symbol{gtk:accessible-property}")
 
 ;;; --- End of file gtk4.enumerations.lisp -------------------------------------
