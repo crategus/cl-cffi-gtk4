@@ -77,7 +77,43 @@
 ;;; enum GtkShortcutScope
 ;;; ----------------------------------------------------------------------------
 
-;; -> gtk4.enumerations.lisp
+;;; ----------------------------------------------------------------------------
+;;; GtkShortcutScope
+;;; ----------------------------------------------------------------------------
+
+(gobject:define-g-enum "GtkShortcutScope" shortcut-scope
+  (:export t
+   :type-initializer "gtk_shortcut_scope_get_type")
+  :local
+  :managed
+  :global)
+
+#+liber-documentation
+(setf (liber:alias-for-symbol 'shortcut-scope)
+      "GEnum"
+      (liber:symbol-documentation 'shortcut-scope)
+ "@version{2023-7-23}
+  @begin{short}
+    Describes where @class{gtk:shortcut} objects added to the
+    @class{gtk:shortcut-controller} object get handled.
+  @end{short}
+  @begin{pre}
+(gobject:define-g-enum \"GtkShortcutScope\" shortcut-scope
+  (:export t
+   :type-initializer \"gtk_shortcut_scope_get_type\")
+  :local
+  :managed
+  :global)
+  @end{pre}
+  @begin[code]{table}
+    @entry[:local]{Shortcuts are handled inside the widget the controller
+      belongs to.}
+    @entry[:managed]{Shortcuts are handled by the first ancestor that is a
+      @class{gtk:shortcut-manager} object.}
+    @entry[:global]{Shortcuts are handled by the root widget.}
+  @end{table}
+  @see-class{gtk:shortcut}
+  @see-class{gtk:shortcut-manager}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; struct GtkShortcutController
