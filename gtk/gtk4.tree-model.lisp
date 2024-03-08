@@ -299,11 +299,16 @@
    :type-initializer "gtk_tree_model_get_type")
   nil)
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj tree-model) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:TREE-MODEL is deprecated since 4.10.")))
+
 #+liber-documentation
 (setf (liber:alias-for-class 'tree-model)
       "Interface"
       (documentation 'tree-model 'type)
- "@version{#2021-2-3}
+ "@version{2024-3-8}
   @begin{short}
     The @class{gtk:tree-model} interface defines a generic tree interface for
     use by the @class{gtk:tree-view} widget.
@@ -316,10 +321,10 @@
   data. In other words, the model can be seen as a tree where every node has
   different values depending on which column is being queried. The type of
   data found in a column is determined by using the GType system (i.e.
-  \"gint\", \"GtkButton\", \"gpointer\", etc). The types are homogeneous per
-  column across all nodes. It is important to note that this interface only
-  provides a way of examining a model and observing changes. The implementation
-  of each individual model decides how and if changes are made.
+  @code{\"gint\"}, @code{\"GtkButton\"}, @code{\"gpointer\"}, etc). The types
+  are homogeneous per column across all nodes. It is important to note that this
+  interface only provides a way of examining a model and observing changes. The
+  implementation of each individual model decides how and if changes are made.
 
   In order to make life simpler for programmers who do not need to write their
   own specialized model, two generic models are provided - the
@@ -341,8 +346,8 @@
   @class{gtk:tree-path} structure can be converted into either an array of
   unsigned integers or a string. The string form is a list of numbers separated
   by a colon. Each number refers to the offset at that level. Thus, the path
-  '0' refers to the root node and the path '2:4' refers to the fifth child of
-  the third node.
+  @code{'0'} refers to the root node and the path @code{'2:4'} refers to the
+  fifth child of the third node.
 
   By contrast, a @class{gtk:tree-iter} iterator is a reference to a specific
   node on a specific model. It is a generic structure with an integer and three
@@ -376,8 +381,8 @@
 
   To show some common operation of a model, some examples are provided. The
   first example shows three ways of getting the iterator at the location
-  '3:2:5'. While the first method shown is easier, the second is much more
-  common, as you often get paths from callbacks.
+  @code{'3:2:5'}. While the first method shown is easier, the second is much
+  more common, as you often get paths from callbacks.
 
   @b{Example:} Acquiring a @class{gtk:tree-iter} iterator
   @begin{pre}
@@ -399,7 +404,7 @@
   The second example shows a quick way of iterating through a list and
   getting a value from each row.
 
-  @b{Example:} Reading data from a @class{gtk:tree-model}
+  @b{Example:} Reading data from a @class{gtk:tree-model} object
   @begin{pre}
 (do* ((model (gtk:tree-view-model view))             ; get the model
       (iter (gtk:tree-model-iter-first model)        ; get first iter
@@ -411,40 +416,6 @@
                                        col-yearborn
                                        (1+ value))))
   @end{pre}
-  The @class{gtk:tree-model} interface contains two methods for reference
-  counting: @fun{gtk:tree-model-ref-node} and @fun{gtk:tree-model-unref-node}.
-  These two methods are optional to implement. The reference counting is meant
-  as a way for views to let models know when nodes are being displayed. The
-  @class{gtk:tree-view} widget will take a reference on a node when it is
-  visible, which means the node is either in the toplevel or expanded. Being
-  displayed does not mean that the node is currently directly visible to the
-  user in the viewport. Based on this reference counting scheme a caching model,
-  for example, can decide whether or not to cache a node based on the reference
-  count. A file-system based model would not want to keep the entire file
-  hierarchy in memory, but just the folders that are currently expanded in
-  every current view.
-
-  When working with reference counting, the following rules must be taken into
-  account:
-  @begin{itemize}
-    @begin{item}
-      Never take a reference on a node without owning a reference on its
-      parent. This means that all parent nodes of a referenced node must be
-      referenced as well.
-    @end{item}
-    @begin{item}
-      Outstanding references on a deleted node are not released. This is not
-      possible because the node has already been deleted by the time the
-      row-deleted signal is received.
-    @end{item}
-    @begin{item}
-      Models are not obligated to emit a signal on rows of which none of its
-      siblings are referenced. To phrase this differently, signals are only
-      required for levels in which nodes are referenced. For the root level
-      however, signals must be emitted at all times (however the root level is
-      always referenced when any view is attached).
-    @end{item}
-  @end{itemize}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -1297,14 +1268,14 @@ lambda (model path iter new-order)    :run-first
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_get_flags -> tree-model-flags
+;;; gtk_tree_model_get_flags ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_get_flags" tree-model-flags) tree-model-flags
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2024-3-8}
   @argument[model]{a @class{gtk:tree-model} object}
-  @return{The @symbol{gtk:model-flags} flags supported by this interface.}
+  @return{The @symbol{gtk:tree-model-flags} flags supported by this interface.}
   @begin{short}
     Returns a set of flags supported by this interface.
   @end{short}
@@ -1321,12 +1292,12 @@ lambda (model path iter new-order)    :run-first
 (export 'tree-model-flags)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_get_n_columns -> tree-model-n-columns
+;;; gtk_tree_model_get_n_columns ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_get_n_columns" tree-model-n-columns) :int
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2024-3-8}
   @argument[model]{a @class{gtk:tree-model} object}
   @return{An integer with the number of columns.}
   @begin{short}
@@ -1343,12 +1314,12 @@ lambda (model path iter new-order)    :run-first
 (export 'tree-model-n-columns)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_get_column_type -> tree-model-column-type
+;;; gtk_tree_model_get_column_type ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_get_column_type" tree-model-column-type) g:type-t
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2024-3-8}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[index]{an integer with the column index}
   @return{The @class{g:type-t} type of the column.}
@@ -1367,7 +1338,7 @@ lambda (model path iter new-order)    :run-first
 (export 'tree-model-column-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_get_iter -> tree-model-iter
+;;; gtk_tree_model_get_iter ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_get_iter" %tree-model-iter) :boolean
@@ -1377,9 +1348,9 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-model-iter (model path)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2024-3-8}
   @argument[model]{a @class{gtk:tree-model} object}
-  @argument[path]{the @class{gtk:tree-path} instance}
+  @argument[path]{a @class{gtk:tree-path} instance}
   @return{The @class{gtk:tree-iter} iterator or @code{nil}, if the iterator is
     not set.}
   @begin{short}
@@ -1400,7 +1371,7 @@ lambda (model path iter new-order)    :run-first
 (export 'tree-model-iter)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_get_iter_from_string -> tree-model-iter-from-string
+;;; gtk_tree_model_get_iter_from_string ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_get_iter_from_string"
@@ -1411,7 +1382,7 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-model-iter-from-string (model pathstr)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2024-3-8}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[pathstr]{a string representation of a @class{gtk:tree-path} object}
   @return{The @class{gtk:tree-iter} iterator.}
@@ -1433,7 +1404,7 @@ lambda (model path iter new-order)    :run-first
 (export 'tree-model-iter-from-string)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_get_iter_first -> tree-model-iter-first
+;;; gtk_tree_model_get_iter_first ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_get_iter_first" %tree-model-iter-first) :boolean
@@ -1442,11 +1413,11 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-model-iter-first (model)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2024-3-8}
   @argument[model]{a @class{gtk:tree-model} object}
-  @return{A @class{gtk:tree-iter} iterator.}
+  @return{The @class{gtk:tree-iter} iterator.}
   @begin{short}
-    Returns the first iterator in the tree, the one at the path \"0\".
+    Returns the first iterator in the tree, the one at the path @code{\"0\"}.
   @end{short}
   Returns @code{nil} if the tree is empty.
   @begin[Warning]{dictionary}
@@ -1463,13 +1434,13 @@ lambda (model path iter new-order)    :run-first
 (export 'tree-model-iter-first)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_get_path -> tree-model-path
+;;; gtk_tree_model_get_path ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_get_path" tree-model-path)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2021-3-4}
+ "@version{2024-3-8}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
   @return{A newly created @class{gtk:tree-path} instance.}
@@ -1489,7 +1460,7 @@ lambda (model path iter new-order)    :run-first
 (export 'tree-model-path)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_get_value -> tree-model-value
+;;; gtk_tree_model_get_value ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_get_value" %tree-model-value) :void
@@ -1500,9 +1471,9 @@ lambda (model path iter new-order)    :run-first
 
 (defun tree-model-value (model iter column)
  #+liber-documentation
- "@version{#2021-3-13}
+ "@version{2024-3-8}
   @argument[model]{a @class{gtk:tree-model} object}
-  @argument[iter]{the @class{gtk:tree-iter} iterator}
+  @argument[iter]{a @class{gtk:tree-iter} iterator}
   @argument[column]{an integer with the column to lookup the value at}
   @return{The value at @arg{column}.}
   @begin{short}

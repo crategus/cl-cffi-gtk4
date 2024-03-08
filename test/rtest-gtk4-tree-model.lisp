@@ -4,7 +4,7 @@
 (in-suite gtk-tree-model)
 
 (defun create-and-fill-list-store ()
-  (let ((listdata '("Name1" "Name2" "Name3" "Name4" "Name5"))
+  (let ((listdata '("Name0" "Name1" "Name2" "Name3" "Name4"))
         ;; Create a new list store with three columns
         (liststore (make-instance 'gtk:list-store
                                   :column-types
@@ -59,12 +59,37 @@
                                       (:LIST-ONLY 2))
              (gobject:get-g-type-definition "GtkTreeModelFlags"))))
 
-;;;     GtkTreeModel
 ;;;     GtkTreeIter
 ;;;     GtkTreePath
 ;;;     GtkTreeRowReference
 ;;;     GtkTreeModelIface
 
+;;;     GtkTreeModel
+
+(test gtk-tree-model-interface
+  ;; Type check
+  (is (g:type-is-interface "GtkTreeModel"))
+  ;; Check the registered name
+  (is (eq 'gtk:tree-model
+          (glib:symbol-for-gtype "GtkTreeModel")))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkTreeModel")
+          (g:gtype (cffi:foreign-funcall "gtk_tree_model_get_type" :size))))
+  ;; Check the interface prerequisites
+  (is (equal '("GObject")
+             (list-interface-prerequisites "GtkTreeModel")))
+  ;; Check the interface properties
+  (is (equal '()
+             (list-interface-properties "GtkTreeModel")))
+  ;; Check the interface signals
+  (is (equal '("row-changed" "row-deleted" "row-has-child-toggled"
+               "row-inserted" "rows-reordered")
+             (list-signals "GtkTreeModel")))
+  ;; Get the interface definition
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkTreeModel" GTK-TREE-MODEL
+                            (:EXPORT T :TYPE-INITIALIZER
+                             "gtk_tree_model_get_type"))
+             (gobject:get-g-type-definition "GtkTreeModel"))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -221,20 +246,23 @@
     (is-false (gtk:tree-path-is-descendant path-1 path-2))
     (is-true (gtk:tree-path-is-descendant path-2 path-1))))
 
+;;; ----------------------------------------------------------------------------
+
 ;;;     gtk_tree_row_reference_new
 ;;;     gtk_tree_row_reference_get_model
 ;;;     gtk_tree_row_reference_get_path
 ;;;     gtk_tree_row_reference_valid
 
 (test gtk-tree-row-reference-new
-  (let ((model (create-and-fill-list-store))
-        (path (gtk:tree-path-new-from-string "2"))
-        (row nil))
-    (is (typep (setf row (gtk:tree-row-reference-new model path))
-               'gtk:tree-row-reference))
-    (is (gtk:tree-row-reference-valid row))
-    (is (typep (gtk:tree-row-reference-model row) 'gtk:tree-model))
-    (is (typep (gtk:tree-row-reference-path row) 'gtk:tree-path))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((model (create-and-fill-list-store))
+          (path (gtk:tree-path-new-from-string "2"))
+          (row nil))
+      (is (typep (setf row (gtk:tree-row-reference-new model path))
+                 'gtk:tree-row-reference))
+      (is (gtk:tree-row-reference-valid row))
+      (is (typep (gtk:tree-row-reference-model row) 'gtk:tree-model))
+      (is (typep (gtk:tree-row-reference-path row) 'gtk:tree-path)))))
 
 ;;;     gtk_tree_row_reference_new_proxy
 ;;;     gtk_tree_row_reference_free
@@ -265,64 +293,81 @@
 ;;;     gtk_tree_iter_copy
 ;;;     gtk_tree_iter_free
 
+;;; ----------------------------------------------------------------------------
+
 ;;;     gtk_tree_model_get_flags
 
 (test gtk-tree-model-flags
-  (let ((model (make-instance 'gtk:list-store)))
-    (is (equal '(:ITERS-PERSIST :LIST-ONLY) (gtk:tree-model-flags model)))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((model (make-instance 'gtk:list-store)))
+      (is (equal '(:ITERS-PERSIST :LIST-ONLY) (gtk:tree-model-flags model))))))
 
 ;;;     gtk_tree_model_get_n_columns
 
 (test gtk-tree-model-n-columns
-  (let ((model (make-instance 'gtk:list-store
-                              :column-types
-                              '("gint" "gchararray" "gboolean"))))
-    (is (= 3 (gtk:tree-model-n-columns model)))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((model (make-instance 'gtk:list-store
+                                :column-types
+                                '("gint" "gchararray" "gboolean"))))
+      (is (= 3 (gtk:tree-model-n-columns model))))))
 
 ;;;     gtk_tree_model_get_column_type
 
 (test gtk-tree-model-column-type
-  (let ((model (make-instance 'gtk:list-store
-                              :column-types
-                              '("gint" "gchararray" "gboolean"))))
-    (is (string= "gint" (g:type-name (gtk:tree-model-column-type model 0))))
-    (is (string= "gchararray"
-                 (g:type-name (gtk:tree-model-column-type model 1))))
-    (is (string= "gboolean"
-                 (g:type-name (gtk:tree-model-column-type model 2))))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((model (make-instance 'gtk:list-store
+                                :column-types
+                                '("gint" "gchararray" "gboolean"))))
+      (is (string= "gint" (g:type-name (gtk:tree-model-column-type model 0))))
+      (is (string= "gchararray"
+                   (g:type-name (gtk:tree-model-column-type model 1))))
+      (is (string= "gboolean"
+                   (g:type-name (gtk:tree-model-column-type model 2)))))))
 
 ;;;     gtk_tree_model_get_iter
 
 (test gtk-tree-model-iter
-  (let ((model (create-and-fill-list-store))
-        (path (gtk:tree-path-new-from-string "2")))
-    (is (eq 'gtk:tree-iter (type-of (gtk:tree-model-iter model path))))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((model (create-and-fill-list-store))
+          (path (gtk:tree-path-new-from-string "2")))
+      (is (typep (gtk:tree-model-iter model path) 'gtk:tree-iter)))))
 
 ;;;     gtk_tree_model_get_iter_from_string
 
 (test gtk-tree-model-iter-from-string
-  (let ((model (create-and-fill-list-store)))
-    (is (eq 'gtk:tree-iter
-            (type-of (gtk:tree-model-iter-from-string model "2"))))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((model (create-and-fill-list-store)))
+      (is (typep (gtk:tree-model-iter-from-string model "2") 'gtk:tree-iter)))))
 
 ;;;     gtk_tree_model_get_iter_first
 
 (test gtk-tree-model-iter-first
-  (let ((model (create-and-fill-list-store)))
-    (is (eq 'gtk:tree-iter (type-of (gtk:tree-model-iter-first model))))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((model (create-and-fill-list-store)))
+      (is (eq 'gtk:tree-iter (type-of (gtk:tree-model-iter-first model)))))))
 
 ;;;     gtk_tree_model_get_path
 
-;(test gtk-tree-model-path
-;  (let* ((model (create-and-fill-list-store))
-;         (iter (gtk:tree-model-iter-from-string model "2")))
-
-;    (is (string= "2"
-;                 (gtk:tree-path-to-string (gtk:tree-model-path model iter))))
-
-;))
+(test gtk-tree-model-path
+  (let ((*gtk-warn-deprecated* nil))
+    (let* ((model (create-and-fill-list-store))
+           (iter (gtk:tree-model-iter-from-string model "2"))
+           path)
+      (is (typep (setf path
+                       (gtk:tree-model-path model iter)) 'gtk:tree-path))
+      (is (string= "2"
+                   (gtk:tree-path-to-string path))))))
 
 ;;;     gtk_tree_model_get_value
+
+(test gtk-tree-model-value
+  (let ((*gtk-warn-deprecated* nil))
+    (let* ((model (create-and-fill-list-store))
+           (iter (gtk:tree-model-iter-from-string model "2")))
+      (is (= 2 (gtk:tree-model-value model iter 0)))
+      (is (string= "Name2" (gtk:tree-model-value model iter 1)))
+      (is-true (gtk:tree-model-value model iter 2)))))
+
 ;;;     gtk_tree_model_iter_next
 ;;;     gtk_tree_model_iter_previous
 ;;;     gtk_tree_model_iter_children
@@ -330,6 +375,7 @@
 ;;;     gtk_tree_model_iter_n_children
 ;;;     gtk_tree_model_iter_nth_child
 ;;;     gtk_tree_model_iter_parent
+
 ;;;     gtk_tree_model_get_string_from_iter
 ;;;     gtk_tree_model_ref_node
 ;;;     gtk_tree_model_unref_node
@@ -343,4 +389,4 @@
 ;;;     gtk_tree_model_rows_reordered
 ;;;     gtk_tree_model_rows_reordered_with_length
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; 2024-3-8

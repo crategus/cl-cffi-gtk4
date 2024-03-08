@@ -100,6 +100,11 @@
     file-chooser-widget-subtitle
     "subtitle" "gchararray" t nil)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj file-chooser-widget) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:FILE-CHOOSER-WIDGET is deprecated since 4.10.")))
+
 #+liber-documentation
 (setf (documentation 'file-chooser-widget 'type)
  "@version{2023-8-30}
@@ -282,7 +287,7 @@ lambda (widget)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- file-chooser-widget-search-mode ----------------------------------------
+;;; --- gtk:file-chooser-widget-search-mode ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "search-mode"
@@ -295,9 +300,9 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'file-chooser-widget-search-mode)
       "Accessor"
       (documentation 'file-chooser-widget-search-mode 'function)
- "@version{#2021-2-5}
-  @syntax[]{(gtk:file-chooser-widget-search-mode object) => mode}
-  @syntax[]{(setf (gtk:file-chooser-widget-search-mode object) mode)}
+ "@version{2024-3-8}
+  @syntax{(gtk:file-chooser-widget-search-mode object) => mode}
+  @syntax{(setf (gtk:file-chooser-widget-search-mode object) mode)}
   @argument[object]{a @class{gtk:file-chooser-widget} widget}
   @argument[mode]{a boolean whether in search mode}
   @begin{short}
@@ -306,25 +311,24 @@ lambda (widget)    :action
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser-widget} implementation is deprecated since 4.10.
-    Direct use of the widget is deprecated.
   @end{dictionary}
   @see-class{gtk:file-chooser-widget}")
 
-;;; --- file-chooser-widget-show-time ------------------------------------------
+;;; --- gtk:file-chooser-widget-show-time --------------------------------------
 
-#+liber-documentation
+#+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "show-time"
                                                'file-chooser-widget) t)
  "The @code{show-time} property of type @code{:boolean} (Read) @br{}
   Whether to show the time. Since 4.10 @br{}
   Default value: @em{false}")
 
-#+liber-documentation
+#+(and gtk-4-10 liber-documentation)
 (setf (liber:alias-for-function 'file-chooser-widget-show-time)
       "Accessor"
       (documentation 'file-chooser-widget-show-time 'function)
- "@version{#2023-5-5}
-  @syntax[]{(gtk:file-chooser-widget-show-time object) => setting}
+ "@version{2024-3-8}
+  @syntax{(gtk:file-chooser-widget-show-time object) => setting}
   @argument[object]{a @class{gtk:file-chooser-widget} widget}
   @argument[setting]{a boolean whether in search mode}
   @begin{short}
@@ -335,11 +339,10 @@ lambda (widget)    :action
   Since 4.10
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser-widget} implementation is deprecated since 4.10.
-    Direct use of the widget is deprecated.
   @end{dictionary}
   @see-class{gtk:file-chooser-widget}")
 
-;;; --- file-chooser-widget-subtitle -------------------------------------------
+;;; --- gtk:file-chooser-widget-subtitle ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "subtitle"
@@ -352,8 +355,8 @@ lambda (widget)    :action
 (setf (liber:alias-for-function 'file-chooser-widget-subtitle)
       "Accessor"
       (documentation 'file-chooser-widget-subtitle 'function)
- "@version{#2021-2-5}
-  @syntax[]{(gtk:file-chooser-widget-subtitle object) => subtitle}
+ "@version{2024-3-8}
+  @syntax{(gtk:file-chooser-widget-subtitle object) => subtitle}
   @argument[object]{a @class{gtk:file-chooser-widget} widget}
   @argument[subtitle]{a string with the subtitle}
   @begin{short}
@@ -362,7 +365,6 @@ lambda (widget)    :action
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser-widget} implementation is deprecated since 4.10.
-    Direct use of the widget is deprecated.
   @end{dictionary}
   @see-class{gtk:file-chooser-widget}")
 
@@ -374,10 +376,10 @@ lambda (widget)    :action
 
 (defun file-chooser-widget-new (action)
  #+liber-documentation
- "@version{#2021-2-5}
-  @argument[action]{a value of the @symbol{gtk:file-chooser-action} enumeration
-    for open or save mode}
-  @return{A new @class{gtk:file-chooser-widget} widget.}
+ "@version{2024-3-8}
+  @argument[action]{a @symbol{gtk:file-chooser-action} value for open or save
+    mode}
+  @return{The new @class{gtk:file-chooser-widget} widget.}
   @begin{short}
     Creates a new file chooser widget.
   @end{short}
@@ -385,7 +387,6 @@ lambda (widget)    :action
   is the same widget that is used by the @class{gtk:file-chooser-dialog} widget.
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser-widget} implementation is deprecated since 4.10.
-    Direct use of the widget is deprecated.
   @end{dictionary}
   @see-class{gtk:file-chooser-widget}
   @see-class{gtk:file-chooser-dialog}

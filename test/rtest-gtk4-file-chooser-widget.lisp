@@ -57,9 +57,12 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     search-mode
-;;;     show-time                                          Since 4.10
-;;;     subtitle
+(test gtk-file-chooser-widget-properties
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((widget (make-instance 'gtk:file-chooser-widget)))
+      (is-false (gtk:file-chooser-widget-search-mode widget))
+      (is-false (gtk:file-chooser-widget-show-time widget))
+      (is-false (gtk:file-chooser-widget-subtitle widget)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -80,4 +83,11 @@
 
 ;;;     gtk_file_chooser_widget_new
 
-;;; --- 2023-9-9 ---------------------------------------------------------------
+(test gtk-file-chooser-widget-new
+  (let ((*gtk-warn-deprecated* nil))
+    (is (typep (gtk:file-chooser-widget-new :open) 'gtk:file-chooser-widget))
+    (is (typep (gtk:file-chooser-widget-new :save) 'gtk:file-chooser-widget))
+    (is (typep (gtk:file-chooser-widget-new :select-folder)
+               'gtk:file-chooser-widget))))
+
+;;; 2024-3-8

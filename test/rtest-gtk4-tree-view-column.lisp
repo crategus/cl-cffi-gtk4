@@ -119,26 +119,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     alignment
-;;;     cell-area
-;;;     clickable
-;;;     expand
-;;;     fixed-width
-;;;     max-width
-;;;     min-width
-;;;     reorderable
-;;;     resizable
-;;;     sizing
-;;;     sort-column-id
-;;;     sort-indicator
-;;;     sort-order
-;;;     spacing
-;;;     title
-;;;     visible
-;;;     widget
-;;;     width
-;;;     x-offset
-
 (test gtk-tree-view-column-properties
   (let ((gtk-init:*gtk-warn-deprecated* nil))
     (let ((column (make-instance 'gtk:tree-view-column)))
@@ -169,17 +149,38 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_tree_view_column_new
+
+(test gtk-tree-view-column-new
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:tree-view-column-new) 'gtk:tree-view-column))))
+
 ;;;     gtk_tree_view_column_new_with_area
+
+(test gtk-tree-view-column-new-with-area
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((box (gtk:cell-area-box-new)))
+      (is (typep (gtk:tree-view-column-new-with-area box)
+                 'gtk:tree-view-column)))))
+
 ;;;     gtk_tree_view_column_new_with_attributes
-;;;
+
+(test gtk-tree-view-column-new-with-attributes
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((renderer (gtk:cell-renderer-text-new)))
+      (is (typep (gtk:tree-view-column-new-with-attributes "Example"
+                                                           renderer
+                                                           "text" 0
+                                                           "foreground" 1)
+                 'gtk:tree-view-column)))))
+
 ;;;     gtk_tree_view_column_pack_start
 ;;;     gtk_tree_view_column_pack_end
 ;;;     gtk_tree_view_column_clear
 ;;;     gtk_tree_view_column_add_attribute
 ;;;     gtk_tree_view_column_set_attributes
-;;;
+
 ;;;     GtkTreeCellDataFunc
-;;;
+
 ;;;     gtk_tree_view_column_set_cell_data_func
 ;;;     gtk_tree_view_column_clear_attributes
 ;;;     gtk_tree_view_column_clicked
@@ -188,18 +189,26 @@
 
 ;;;     gtk_tree_view_column_cell_get_size
 
-;; TODO: Does not return always zero values.
+(test gtk-tree-view-column-cell-size.1
+  (let ((column (gtk:tree-view-column-new-with-area (gtk:cell-area-box-new))))
+    (multiple-value-bind (xoffset yoffset width height)
+        (gtk:tree-view-column-cell-size column)
+      (declare (ignore xoffset yoffset))
+      (is (= 0 width))
+      (is (= 0 height)))))
 
-#+nil
-(test gkt-tree-view-column-cell-size
-  (let ((column (gtk:tree-view-column-new-with-area (gtk:cell-area-box-new)))
-        (area (gdk:rectangle-new :width 10 :height 20)))
-    (is (equal '(0 0 0 0)
-               (multiple-value-list
-                   (gtk:tree-view-column-cell-size column area))))
-    (is (equal '(0 0 0 0)
-               (multiple-value-list
-                   (gtk:tree-view-column-cell-size column nil))))))
+(test gtk-tree-view-column-cell-size.2
+  (let* ((renderer (gtk:cell-renderer-text-new))
+         (column (gtk:tree-view-column-new-with-area
+                     (gtk:tree-view-column-new-with-attributes "Example"
+                                                               renderer
+                                                               "text" 0
+                                                               "foreground" 1))))
+    (multiple-value-bind (xoffset yoffset width height)
+        (gtk:tree-view-column-cell-size column)
+      (declare (ignore xoffset yoffset))
+      (is (= 0 width))
+      (is (= 0 height)))))
 
 ;;;     gtk_tree_view_column_cell_get_position
 ;;;     gtk_tree_view_column_cell_is_visible
@@ -207,4 +216,4 @@
 ;;;     gtk_tree_view_column_queue_resize
 ;;;     gtk_tree_view_column_get_tree_view
 
-;;; 2024-2-19
+;;; 2024-3-8
