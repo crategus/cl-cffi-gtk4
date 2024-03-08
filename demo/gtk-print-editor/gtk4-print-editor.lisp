@@ -167,7 +167,7 @@
          (numlines 0))
     (setf (pango:layout-font-description layout) desc)
     (setf (pango:layout-width layout)
-          (truncate (* width pango:+pango-scale+)))
+          (truncate (* width pango:+scale+)))
     (setf (pango:layout-text layout) (print-data-text data))
     (setf numlines (pango:layout-line-count layout))
 

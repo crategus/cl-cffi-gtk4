@@ -24,13 +24,13 @@
 (defun create-tags (buffer)
   (gtk:text-buffer-create-tag buffer "heading"
                                      :weight 700 ; for :bold
-                                     :size (* 15 pango:+pango-scale+))
+                                     :size (* 15 pango:+scale+))
   (gtk:text-buffer-create-tag buffer "italic"
                                      :style :italic)
   (gtk:text-buffer-create-tag buffer "bold"
                                      :weight 700) ; for :bold
   (gtk:text-buffer-create-tag buffer "big"
-                                     :size (* 20 pango:+pango-scale+))
+                                     :size (* 20 pango:+scale+))
   (gtk:text-buffer-create-tag buffer "xx-small"
                                      :scale pango:+pango-scale-xx-small+)
   (gtk:text-buffer-create-tag buffer "x-large"
@@ -69,11 +69,11 @@
   (gtk:text-buffer-create-tag buffer "double-underline"
                                      :underline :double)
   (gtk:text-buffer-create-tag buffer "superscript"
-                                     :rise (* 10 pango:+pango-scale+)
-                                     :size (* 8 pango:+pango-scale+))
+                                     :rise (* 10 pango:+scale+)
+                                     :size (* 8 pango:+scale+))
   (gtk:text-buffer-create-tag buffer "subscript"
-                                     :rise (* -10 pango:+pango-scale+)
-                                     :size (* 8 pango:+pango-scale+))
+                                     :rise (* -10 pango:+scale+)
+                                     :size (* 8 pango:+scale+))
   (gtk:text-buffer-create-tag buffer "rtl-quote"
                                      :wrap-mode :word
                                      :direction :rtl

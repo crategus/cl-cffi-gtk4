@@ -606,97 +606,184 @@
 
      ;; Cairo demos
      "Cairo"
-     (("Cairo Stroke"
+     ("Examples from cairographics.org"
+      (("Arc"
+        ":drawfunc"
+        "draw-arc"
+        "cairo-example"
+        "draw-arc.lisp")
+       ("Arc Negative"
+        ":drawfunc"
+        "draw-arc-negative"
+        "cairo-example"
+        "draw-arc-negative.lisp")
+       ("Clip"
+        ":drawfunc"
+        "draw-clip"
+        "cairo-example"
+        "draw-clip.lisp")
+       ("Clip Image"
+        ":drawfunc"
+        "draw-clip-image"
+        "cairo-example"
+        "draw-clip-image.lisp")
+       ("Curve To"
+        ":drawfunc"
+        "draw-curve-to"
+        "cairo-example"
+        "draw-curve-to.lisp")
+       ("Dash"
+        ":drawfunc"
+        "draw-dash"
+        "cairo-example"
+        "draw-path.lisp")
+       ("Preserve Fill"
+        ":drawfunc"
+        "draw-fill-preserve"
+        "cairo-example"
+        "draw-fill-preserve.lisp")
+       ("Fill Style"
+        ":drawfunc"
+        "draw-fill-style"
+        "cairo-example"
+        "draw-fill-style.lisp")
+       ("Gradient"
+        ":drawfunc"
+        "draw-gradient"
+        "cairo-example"
+        "draw-gradient.lisp")
+       ("Image"
+        ":drawfunc"
+        "draw-image"
+        "cairo-example"
+        "draw-image.lisp")
+       ("Image Pattern"
+        ":drawfunc"
+        "draw-image-pattern"
+        "cairo-example"
+        "draw-image-pattern.lisp")
+       ("Multi Caps"
+        ":drawfunc"
+        "draw-multi-caps"
+        "cairo-example"
+        "draw-multi-caps.lisp")
+       ("Rounded Rectangle"
+        ":drawfunc"
+        "draw-rounded-rectangle"
+        "cairo-example"
+        "draw-rounded-rectangle.lisp")
+       ("Line Cap"
+        ":drawfunc"
+        "draw-line-cap"
+        "cairo-example"
+        "draw-line-cap.lisp")
+       ("Line Join"
+        ":drawfunc"
+        "draw-line-join"
+        "cairo-example"
+        "draw-line-join.lisp")
+       ("Text"
+        ":drawfunc"
+        "draw-text"
+        "cairo-example"
+        "draw-text.lisp")
+       ("Text Align Center"
+        ":drawfunc"
+        "draw-text-align-center"
+        "cairo-example"
+        "draw-text-align-center.lisp")
+       ("Text Extents"
+        ":drawfunc"
+        "draw-text-extents"
+        "cairo-example"
+        "draw-text-extents.lisp"))
+
+      "More Examples"
+      (("Cairo Stroke"
        ":drawfunc"
        "cairo-draw-stroke"
        "cairo-example"
        "draw-stroke.lisp")
-      ("Cairo Fill"
-       ":drawfunc"
-       "cairo-draw-fill"
-       "cairo-example"
-       "draw-fill.lisp")
-      ("Cairo Text"
-       ":drawfunc"
-       "cairo-draw-text"
-       "cairo-example"
-       "draw-text.lisp")
-      ("Cairo Paint"
-       ":drawfunc"
-       "cairo-draw-paint"
-       "cairo-example"
-       "draw-paint.lisp")
-      ("Cairo Mask"
-       ":drawfunc"
-       "cairo-draw-mask"
-       "cairo-example"
-       "draw-mask.lisp")
-      ("Cairo Source RGBA"
-       ":drawfunc"
-       "cairo-draw-source-rgba"
-       "cairo-example"
-       "draw-source-rgba.lisp")
-      ("Cairo Source Gradient"
-       ":drawfunc"
-       "cairo-draw-source-gradient"
-       "cairo-example"
-       "draw-source-gradient.lisp")
-      ("Cairo Path"
-       ":drawfunc"
-       "cairo-draw-path"
-       "cairo-example"
-       "draw-path.lisp")
-      ("Cairo Dash"
-       ":drawfunc"
-       "cairo-draw-dash"
-       "cairo-example"
-       "draw-path.lisp")
-      ("Cairo Dashes"
-       ":drawfunc"
-       "cairo-draw-dashes"
-       "cairo-example"
-       "draw-dashes.lisp")
-      ("Cairo Joins"
-       ":drawfunc"
-       "cairo-draw-joins"
-       "cairo-example"
-       "draw-joins.lisp")
-      ("Cairo Text centered"
-       ":drawfunc"
-       "cairo-draw-text-centered"
-       "cairo-example"
-       "draw-text-centered.lisp")
-      ("Cairo Text Glyph"
-       ":drawfunc"
-       "cairo-draw-text-glyph"
-       "cairo-example"
-       "draw-text-glyph.lisp")
-      ("Cairo Text Gradient"
-       ":drawfunc"
-       "cairo-draw-text-gradient"
-       "cairo-example"
-       "draw-text-gradient.lisp")
-      ("Cairo Text Shaded"
-       ":drawfunc"
-       "cairo-draw-text-shaded"
-       "cairo-example"
-       "draw-text-shaded.lisp")
-      ("Cairo Text Soulmate"
-       ":drawfunc"
-       "cairo-draw-text-soulmate"
-       "cairo-example"
-       "draw-text-soulmate.lisp")
-      ("Cairo Draw Logo"
-       ":drawfunc"
-       "cairo-draw-logo"
-       "cairo-example"
-       "draw-logo.lisp")
-      ("Cairo Draw Logo Translate"
-       ":drawfunc"
-       "cairo-draw-logo-translate"
-       "cairo-example"
-       "draw-logo.lisp"))
-
+       ("Cairo Fill"
+        ":drawfunc"
+        "cairo-draw-fill"
+        "cairo-example"
+        "draw-fill.lisp")
+       ("Cairo Text Letter"
+        ":drawfunc"
+        "cairo-draw-text-letter"
+        "cairo-example"
+        "draw-text-letter.lisp")
+       ("Cairo Paint"
+        ":drawfunc"
+        "cairo-draw-paint"
+        "cairo-example"
+        "draw-paint.lisp")
+       ("Cairo Mask"
+        ":drawfunc"
+        "cairo-draw-mask"
+        "cairo-example"
+        "draw-mask.lisp")
+       ("Cairo Source RGBA"
+        ":drawfunc"
+        "cairo-draw-source-rgba"
+        "cairo-example"
+        "draw-source-rgba.lisp")
+       ("Cairo Source Gradient"
+        ":drawfunc"
+        "cairo-draw-source-gradient"
+        "cairo-example"
+        "draw-source-gradient.lisp")
+       ("Cairo Path"
+        ":drawfunc"
+        "cairo-draw-path"
+        "cairo-example"
+        "draw-path.lisp")
+       ("Cairo Dashes"
+        ":drawfunc"
+        "cairo-draw-dashes"
+        "cairo-example"
+        "draw-dashes.lisp")
+       ("Cairo Joins"
+        ":drawfunc"
+        "cairo-draw-joins"
+        "cairo-example"
+        "draw-joins.lisp")
+       ("Cairo Text centered"
+        ":drawfunc"
+        "cairo-draw-text-centered"
+        "cairo-example"
+        "draw-text-centered.lisp")
+       ("Cairo Text Glyph"
+        ":drawfunc"
+        "cairo-draw-text-glyph"
+        "cairo-example"
+        "draw-text-glyph.lisp")
+       ("Cairo Text Gradient"
+        ":drawfunc"
+        "cairo-draw-text-gradient"
+        "cairo-example"
+        "draw-text-gradient.lisp")
+       ("Cairo Text Shaded"
+        ":drawfunc"
+        "cairo-draw-text-shaded"
+        "cairo-example"
+        "draw-text-shaded.lisp")
+       ("Cairo Text Soulmate"
+        ":drawfunc"
+        "cairo-draw-text-soulmate"
+        "cairo-example"
+        "draw-text-soulmate.lisp")
+       ("Cairo Draw Logo"
+        ":drawfunc"
+        "cairo-draw-logo"
+        "cairo-example"
+        "draw-logo.lisp")
+       ("Cairo Draw Logo Translate"
+        ":drawfunc"
+        "cairo-draw-logo-translate"
+        "cairo-example"
+        "draw-logo.lisp")))
      "Miscellaneous"
      (("Size Groups"
        ":window"
