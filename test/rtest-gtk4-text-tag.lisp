@@ -284,73 +284,72 @@
     (signals (error) (gtk:text-tag-foreground tag))
     (is-false (gtk:text-tag-foreground-rgba tag))
     (is-false (gtk:text-tag-foreground-set tag))
-;;;     indent
-;;;     indent-set
-;;;     insert-hyphens
-;;;     insert-hyphens-set
-;;;     invisible
-;;;     invisible-set
-;;;     justification
-;;;     justification-set
-;;;     language
-;;;     language-set
-;;;     left-margin
-;;;     left-margin-set
-;;;     letter-spacing
-;;;     letter-spacing-set
-;;;     line-height                                        Since 4.6
-;;;     line-height-set                                    Since 4.6
-;;;     name
-;;;     overline
-;;;     overline-rgba
-;;;     overline-set
-;;;     paragraph-background
-;;;     paragraph-background-rgba
-;;;     paragraph-background-set
-;;;     pixels-above-lines
-;;;     pixels-above-lines-set
-;;;     pixels-below-lines
-;;;     pixels-below-lines-set
-;;;     pixels-inside-wrap
-;;;     pixels-inside-wrap-set
-;;;     right-margin
-;;;     right-margin-set
-;;;     rise
-;;;     rise-set
-;;;     scale
-;;;     scale-set
-;;;     sentence                                           Since 4.6
-;;;     sentence-set                                       Since 4.6
-;;;     show-spaces
-;;;     show-spaces-set
-;;;     size
-;;;     size-points
-;;;     size-set
-;;;     stretch
-;;;     stretch-set
-;;;     strikethrough
-;;;     strikethrough-rgba
-;;;     strikethrough-rgba-set
-;;;     strikethrough-set
-;;;     style
-;;;     style-set
-;;;     tabs
-;;;     tabs-set
-;;;     text-transform                                     Since 4,6
-;;;     text-transform-set                                 Since 4.6
-;;;     underline
-;;;     underline-rgba
-;;;     underline-rgba-set
-;;;     underline-set
-;;;     variant
-;;;     variant-set
-;;;     weight
-;;;     weight-set
-;;;     word                                               Since 4.6
-;;;     word-set                                           Since 4.6
-;;;     wrap-mode
-;;;     wrap-mode-set
-))
+    (is (= 0 (gtk:text-tag-indent tag)))
+    (is-false (gtk:text-tag-indent-set tag))
+    (is-true (gtk:text-tag-insert-hyphens tag))
+    (is-false (gtk:text-tag-insert-hyphens-set tag))
+    (is-false (gtk:text-tag-invisible tag))
+    (is-false (gtk:text-tag-invisible-set tag))
+    (is (eq :left (gtk:text-tag-justification tag)))
+    (is-false (gtk:text-tag-justification-set tag))
+    (is (string= "de-de" (gtk:text-tag-language tag)))
+    (is-false (gtk:text-tag-language-set tag))
+    (is (= 0 (gtk:text-tag-left-margin tag)))
+    (is-false (gtk:text-tag-left-margin-set tag))
+    (is (= 0 (gtk:text-tag-letter-spacing tag)))
+    (is-false (gtk:text-tag-letter-spacing-set tag))
+    (is (= 0.0 (gtk:text-tag-line-height tag)))
+    (is-false (gtk:text-tag-line-height-set tag))
+    (is-false (gtk:text-tag-name tag))
+    (is (eq :none (gtk:text-tag-overline tag)))
+    (is-false (gtk:text-tag-overline-rgba tag))
+    (is-false (gtk:text-tag-overline-set tag))
+    (signals (error) (gtk:text-tag-paragraph-background tag))
+    (is-false (gtk:text-tag-paragraph-background-rgba tag))
+    (is-false (gtk:text-tag-paragraph-background-set tag))
+    (is (= 0 (gtk:text-tag-pixels-above-lines tag)))
+    (is-false (gtk:text-tag-pixels-above-lines-set tag))
+    (is (= 0 (gtk:text-tag-pixels-below-lines tag)))
+    (is-false (gtk:text-tag-pixels-below-lines-set tag))
+    (is (= 0 (gtk:text-tag-pixels-inside-wrap tag)))
+    (is-false (gtk:text-tag-pixels-inside-wrap-set tag))
+    (is (= 0 (gtk:text-tag-right-margin tag)))
+    (is-false (gtk:text-tag-right-margin-set tag))
+    (is (= 0 (gtk:text-tag-rise tag)))
+    (is-false (gtk:text-tag-rise-set tag))
+    (is (= 1.0d0 (gtk:text-tag-scale tag)))
+    (is-false (gtk:text-tag-scale-set tag))
+    (is-false (gtk:text-tag-sentence tag))
+    (is-false (gtk:text-tag-sentence-set tag))
+    (is-false (gtk:text-tag-show-spaces tag))
+    (is-false (gtk:text-tag-show-spaces-set tag))
+    (is (= 0 (gtk:text-tag-size tag)))
+    (is (= 0.0d0 (gtk:text-tag-size-points tag)))
+    (is-false (gtk:text-tag-size-set tag))
+    (is (eq :normal (gtk:text-tag-stretch tag)))
+    (is-false (gtk:text-tag-stretch-set tag))
+    (is-false (gtk:text-tag-strikethrough tag))
+    (is-false (gtk:text-tag-strikethrough-rgba tag))
+    (is-false (gtk:text-tag-strikethrough-rgba-set tag))
+    (is-false (gtk:text-tag-strikethrough-set tag))
+    (is (eq :normal (gtk:text-tag-style tag)))
+    (is-false (gtk:text-tag-style-set tag))
+    (is-false (gtk:text-tag-tabs tag))
+    (is-false (gtk:text-tag-tabs-set tag))
+    (is (eq :none (gtk:text-tag-text-transform tag)))
+    (is-false (gtk:text-tag-text-transform-set tag))
+    (is (eq :none (gtk:text-tag-underline tag)))
+    (is-false (gtk:text-tag-underline-rgba tag))
+    (is-false (gtk:text-tag-underline-rgba-set tag))
+    (is-false (gtk:text-tag-underline-set tag))
+    (is (eq :normal (gtk:text-tag-variant tag)))
+    (is-false (gtk:text-tag-variant-set tag))
+    (is (= 400 (gtk:text-tag-weight tag)))
+    (is-false (gtk:text-tag-weight-set tag))
+    (is-false (gtk:text-tag-word tag))
+    (is-false (gtk:text-tag-word-set tag))
+    (is (eq :none (gtk:text-tag-wrap-mode tag)))
+    (is-false (gtk:text-tag-wrap-mode-set tag))))
 
 ;;;     accumulative-margin
 
@@ -527,4 +526,4 @@
     (is (= 20 (setf (gtk:text-tag-indent tag) 20)))
     (is (equal '("indent" "indent") message))))
 
-;;; --- 2023-10-24 -------------------------------------------------------------
+;;; 2024-3-8
