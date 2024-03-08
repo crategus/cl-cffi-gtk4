@@ -95,7 +95,7 @@
   (let* ((buffer (gtk:text-view-buffer view))
          (bold (gtk:text-buffer-create-tag buffer nil
                                            :weight 700 ; for :bold
-                                           :scale pango:+pango-scale-x-large+))
+                                           :scale pango:+scale-x-large+))
          (mono (gtk:text-buffer-create-tag buffer nil
                                            :familiy "monospace"))
          (nobreaks (gtk:text-buffer-create-tag buffer nil

@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; gtk4-print-editor.lisp
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -25,7 +25,7 @@
 ;; TODO: Improve this example: Store the print settings. Do more error handling.
 
 (defpackage :gtk4-print-editor
-  (:use :common-lisp)
+  (:use :iterate :common-lisp)
   (:export :gtk4-print-editor))
 
 (in-package :gtk4-print-editor)
@@ -133,9 +133,9 @@
     (do ((line (read-line stream nil)
                (read-line stream nil)))
         ((null line))
-      (gtk:text-buffer-insert buffer line)
+      (gtk:text-buffer-insert buffer :cursor line)
       ;; We add an extra newline at the end of the file. Improve this!?
-      (gtk:text-buffer-insert buffer (format nil "~%"))))
+      (gtk:text-buffer-insert buffer :cursor (format nil "~%"))))
   (setf *file-changed* nil)
   (update-title *window*)
   (update-statusbar *statusbar*))
@@ -198,18 +198,20 @@
     (cairo:set-source-rgb cr 0 0 0)
     (let ((iter (pango:layout-iter (print-data-layout data)))
           (startpos 0))
-      (loop for i from 0
-            do (when (>= i start)
-                 (let ((line (pango:layout-iter-line iter))
-                       (baseline (pango:layout-iter-baseline iter)))
-                   (destructuring-bind (rect (x y width height))
-                       (multiple-value-list (pango:layout-iter-line-extents iter))
-                     (declare (ignore rect width height))
-                     (when (= i start)
-                       (setf startpos (/ y 1024)))
-                     (cairo:move-to cr (/ x 1024) (- (/ baseline 1024) startpos))
-                     (pango:cairo-show-layout-line cr line))))
-            while (and (< i end) (pango:layout-iter-next-line iter))))))
+      (iter (for i from 0)
+            (while (and (< i end) (pango:layout-iter-next-line iter)))
+            (when (>= i start)
+              (let ((line (pango:layout-iter-line iter))
+                    (baseline (pango:layout-iter-baseline iter)))
+                (pango:with-rectangle (ink)
+                  (pango:layout-iter-line-extents iter ink nil)
+                  (let ((x (pango:rectangle-x ink))
+                        (y (pango:rectangle-y ink)))
+                    (when (= i start)
+                      (setf startpos (/ y 1024)))
+                      (cairo:move-to cr (/ x 1024)
+                                        (- (/ baseline 1024) startpos))
+                      (pango:cairo-show-layout-line cr line)))))))))
 
 (defun create-custom-widget (operation data)
   (format t "in CREAGE-CUSTOM-WIDGET~%")
@@ -452,7 +454,7 @@
                         (list "page-setup" #'activate-page-setup)
                         (list "preview" #'activate-preview)
                         (list "print" #'activate-print)))
-         (argv (cons "gtk4print-editor"
+         (argv (cons "gtk4-print-editor"
                      (if argv argv (uiop:command-line-arguments))))
          (path-settings (sys-path "print-settings.ini"))
          (settings (gtk:print-settings-new-from-file path-settings))

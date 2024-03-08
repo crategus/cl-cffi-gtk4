@@ -32,9 +32,9 @@
   (gtk:text-buffer-create-tag buffer "big"
                                      :size (* 20 pango:+scale+))
   (gtk:text-buffer-create-tag buffer "xx-small"
-                                     :scale pango:+pango-scale-xx-small+)
+                                     :scale pango:+scale-xx-small+)
   (gtk:text-buffer-create-tag buffer "x-large"
-                                     :scale pango:+pango-scale-x-large+)
+                                     :scale pango:+scale-x-large+)
   (gtk:text-buffer-create-tag buffer "monospace"
                                      :family "monospace")
   (gtk:text-buffer-create-tag buffer "blue-foreground"
