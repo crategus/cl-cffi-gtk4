@@ -4107,40 +4107,48 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_pick ()
-;;;
-;;; GtkWidget *
-;;; gtk_widget_pick (GtkWidget *widget,
-;;;                  double x,
-;;;                  double y,
-;;;                  GtkPickFlags flags);
-;;;
-;;; Finds the descendant of widget (including widget itself) closest to the
-;;; screen at the point (x , y ). The point must be given in widget coordinates,
-;;; so (0, 0) is assumed to be the top left of widget 's content area.
-;;;
-;;; Usually widgets will return NULL if the given coordinate is not contained in
-;;; widget checked via gtk_widget_contains(). Otherwise they will recursively
-;;; try to find a child that does not return NULL. Widgets are however free to
-;;; customize their picking algorithm.
-;;;
-;;; This function is used on the toplevel to determine the widget below the
-;;; mouse cursor for purposes of hover highlighting and delivering events.
-;;;
-;;; widget :
-;;;     the widget to query
-;;;
-;;; x :
-;;;     X coordinate to test, relative to widget 's origin
-;;;
-;;; y :
-;;;     Y coordinate to test, relative to widget 's origin
-;;;
-;;; flags :
-;;;     Flags to influence what is picked
-;;;
-;;; Returns :
-;;;     The widget descendant at the given coordinate or NULL if none.
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_pick" %widget-pick) (g:object widget)
+  (widget (g:object widget))
+  (x :double)
+  (y :double)
+  (flags pick-flags))
+
+(defun widget-pick (widget x y flags)
+ #+liber-documentation
+ "@version{#2024-3-8}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[x]{a number coerced to a double float with the x coordinate to test,
+    relative to the origin of the widget}
+  @argument[y]{a number coerced to a double float with the y coordinate to test,
+    relative to the origin of the widget}
+  @argument[flags]{a @symbol{gtk:pick-flags} value to influence what is picked}
+  @return{The descendant @class{gtk:widget} widget at the given coordinate or
+    @code{nil} if none.}
+  @begin{short}
+    Finds the descendant of @arg{widget}, including @arg{widget} itself,
+    closest to the screen at the point @code{(x, y)}.
+  @end{short}
+  The point must be given in widget coordinates, so @code{(0, 0)} is assumed to
+  be the top left of the content area of the widget.
+
+  Usually widgets will return @code{nil} if the given coordinate is not
+  contained in widget checked via the @fun{gtk:widget-contains} function.
+  Otherwise they will recursively try to find a child that does not return
+  @code{nil}. Widgets are however free to customize their picking algorithm.
+
+  This function is used on the toplevel to determine the widget below the
+  mouse cursor for purposes of hover highlighting and delivering events.
+  @see-class{gtk:widget}
+  @see-symbol{gtk:pick-flags}
+  @see-function{gtk:widget-contains}"
+  (%widget-pick widget
+                (coerce x 'double-float)
+                (coerce y 'double-float)
+                flags))
+
+(export 'widget-pick)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_focus_child ()
