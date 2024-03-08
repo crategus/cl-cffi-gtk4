@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -86,7 +86,7 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-stylus 'type)
- "@version{#2020-9-11}
+ "@version{2024-2-21}
   @begin{short}
     The @class{gtk:gesture-stylus} class is a @class{gtk:gesture} implementation
     specific to stylus input.
@@ -143,7 +143,7 @@ lambda (gesture x y)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- gesture-stylus-stylus-only ---------------------------------------------
+;;; --- gtk:gesture-stylus-stylus-only -----------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "stylus-only" 'gesture-stylus) t)
@@ -157,7 +157,7 @@ lambda (gesture x y)    :run-last
 (setf (liber:alias-for-function 'gesture-stylus-stylus-only)
       "Accessor"
       (documentation 'gesture-stylus-stylus-only 'function)
- "@version{#2023-5-5}
+ "@version{2024-2-21}
   @syntax[]{(gtk:gesture-stylus-only object) => setting}
   @syntax[]{(setf (gtk:gesture-stylus-only object) setting)}
   @argument[object]{a @class{gtk:gesture-stylus} object}
@@ -181,9 +181,8 @@ lambda (gesture x y)    :run-last
 
 (defun gesture-stylus-new ()
  #+liber-documentation
- "@version{#2020-9-11}
-  @argument[widget]{a @class{gtk:gesture-stylus} object}
-  @return{A newly created @class{gtk:gesture-stylus} object.}
+ "@version{2024-2-21}
+  @return{The newly created @class{gtk:gesture-stylus} object.}
   @begin{short}
     Creates a new stylus gesture.
   @end{short}
@@ -193,7 +192,7 @@ lambda (gesture x y)    :run-last
 (export 'gesture-stylus-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_stylus_get_axis () -> gesture-stylus-axis
+;;; gtk_gesture_stylus_get_axis ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_stylus_get_axis" %gesture-stylus-axis) :boolean
@@ -203,16 +202,17 @@ lambda (gesture x y)    :run-last
 
 (defun gesture-stylus-axis (gesture axis)
  #+liber-documentation
- "@version{#2020-9-11}
+ "@version{2024-2-21}
   @argument[gesture]{a @class{gtk:gesture-stylus} object}
-  @argument[axis]{requested device axis of type @symbol{gdk:axis-use}}
-  @return{A double float with the current value for the axis.}
+  @argument[axis]{a @symbol{gdk:axis-use} value with the requested device axis}
+  @return{The double float with the current value for the axis.}
   @begin{short}
     Returns the current value for the requested axis.
   @end{short}
-  This function must be called from either the \"down\", \"motion\", \"up\" or
-  \"proximity\" signals.
-  @see-class{gtk:gesture-stylus}"
+  This function must be called from either the @code{\"down\"},
+  @code{\"motion\"}, @code{\"up\"} or @code{\"proximity\"} signals.
+  @see-class{gtk:gesture-stylus}
+  @see-symbol{gdk:axis-use}"
   (cffi:with-foreign-object (value :double)
     (when (%gesture-stylus-axis gesture axis value)
       (cffi:mem-ref value :double))))
@@ -275,20 +275,20 @@ lambda (gesture x y)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_stylus_get_device_tool () -> gesture-stylus-device-tool
+;;; gtk_gesture_stylus_get_device_tool ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_stylus_get_device_tool" gesture-stylus-device-tool)
     (g:object gdk:device-tool)
  #+liber-documentation
- "@version{#2022-8-3}
+ "@version{2024-2-21}
   @argument[gesture]{a @class{gtk:gesture-stylus} object}
   @return{The current @class{gdk:device-tool} object.}
   @begin{short}
     Returns the device tool currently driving input through this gesture.
   @end{short}
-  This function must be called from either the \"down\", \"motion\", \"up\" or
-  \"proximity\" signal handlers.
+  This function must be called from either the @code{\"down\"},
+  @code{\"motion\"}, @code{\"up\"} or @code{\"proximity\"} signal handlers.
   @see-class{gtk:gesture-stylus}
   @see-class{gdk:device-tool}"
   (gesture (g:object gesture-stylus)))

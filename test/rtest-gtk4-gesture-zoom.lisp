@@ -45,6 +45,14 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_zoom_new
+
+(test gtk-gesture-zoom-new
+  (is (typep (gtk:gesture-zoom-new) 'gtk:gesture-zoom)))
+
 ;;;     gtk_gesture_zoom_get_scale_delta
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-gesture-zoom-scale-delta
+  (let ((gesture (gtk:gesture-zoom-new)))
+    (is (= 1.0d0 (gtk:gesture-zoom-scale-delta gesture)))))
+
+;;; 2024-2-21

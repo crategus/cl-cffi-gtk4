@@ -43,6 +43,10 @@
 
 ;;;     stylus-only                                        Since 4.10
 
+(test gtk-gesture-stylus-properties
+  (let ((gesture (make-instance 'gtk:gesture-stylus)))
+    (is-true (gtk:gesture-stylus-stylus-only gesture))))
+
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     down
@@ -53,9 +57,23 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_stylus_new
+
+(test gtk-gesture-stylus-new
+  (is (typep (gtk:gesture-stylus-new) 'gtk:gesture-stylus)))
+
 ;;;     gtk_gesture_stylus_get_axis
+
+(test gtk-gesture-stylus-axis
+  (let ((gesture (gtk:gesture-stylus-new)))
+    (is-false (gtk:gesture-stylus-axis gesture :x))))
+
 ;;;     gtk_gesture_stylus_get_axes
 ;;;     gtk_gesture_stylus_get_backlog
+
 ;;;     gtk_gesture_stylus_get_device_tool
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-gesture-stylus-device-tool
+  (let ((gesture (gtk:gesture-stylus-new)))
+    (is-false (gtk:gesture-stylus-device-tool gesture))))
+
+;;; 2024-2-21

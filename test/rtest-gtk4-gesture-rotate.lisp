@@ -45,6 +45,14 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_gesture_rotate_new
+
+(test gtk-gestsure-rotate-new
+  (is (typep (gtk:gesture-rotate-new) 'gtk:gesture-rotate)))
+
 ;;;     gtk_gesture_rotate_get_angle_delta
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-gesture-rotate-angle-delta
+  (let ((gesture (gtk:gesture-rotate-new)))
+    (is (= 0.0d0 (gtk:gesture-rotate-angle-delta gesture)))))
+
+;;; 2024-2-19

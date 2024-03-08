@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -67,13 +67,13 @@
 
 #+liber-documentation
 (setf (documentation 'gesture-zoom 'type)
- "@version{#2020-9-11}
+ "@version{2024-2-21}
   @begin{short}
     The @class{gtk:gesture-zoom} class is a @class{gtk:gesture} implementation
     for 2-finger pinch/zoom gestures.
   @end{short}
   Whenever the distance between both tracked sequences changes, the
-  \"scale-changed\" signal is emitted to report the scale factor.
+  @code{\"scale-changed\"} signal is emitted to report the scale factor.
   @begin[Signal Details]{dictionary}
     @subheading{The \"scale-changed\" signal}
       @begin{pre}
@@ -99,9 +99,8 @@ lambda (gesture scale)    :run-first
 
 (defun gesture-zoom-new ()
  #+liber-documentation
- "@version{#2020-9-11}
-  @argument[widget]{a @class{gtk:widget} object}
-  @return{A newly created @class{gtk:gesture-zoom} object.}
+ "@version{2024-2-21}
+  @return{The newly created @class{gtk:gesture-zoom} object.}
   @begin{short}
     Returns a newly created gesture that recognizes pinch/zoom gestures.
   @end{short}
@@ -111,20 +110,20 @@ lambda (gesture scale)    :run-first
 (export 'gesture-zoom-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_zoom_get_scale_delta () -> gesture-zoom-scale-delta
+;;; gtk_gesture_zoom_get_scale_delta ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_zoom_get_scale_delta" gesture-zoom-scale-delta)
     :double
  #+liber-documentation
- "@version{#2020-9-11}
+ "@version{2024-2-21}
   @argument[widget]{a @class{gtk:gesture-zoom} object}
-  @return{A double float with the scale delta.}
+  @return{The double float with the scale delta.}
   @begin{short}
     If the gesture is active, this function returns the zooming difference since
-    the gesture was recognized (hence the starting point is considered 1:1).
+    the gesture was recognized, hence the starting point is considered 1:1.
   @end{short}
-  If the gesture is not active, 1 is returned.
+  If the gesture is not active, 1.0d0 is returned.
   @see-class{gtk:gesture-rotate}"
   (gesture (g:object gesture-zoom)))
 
