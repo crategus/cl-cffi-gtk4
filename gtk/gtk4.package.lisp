@@ -2116,7 +2116,7 @@ GtkCellRenderer         GtkWidget
       @about-function{text-iter-order}
     @end{subsection}
     @begin[GtkTextTag]{subsection}
-      A tag that can be applied to text in a @class{text-buffer} object.
+      A tag that can be applied to text in a @class{gtk:text-buffer} object.
       @about-class{text-tag}
       @about-generic{text-tag-accumulative-margin}
       @about-generic{text-tag-allow-breaks}

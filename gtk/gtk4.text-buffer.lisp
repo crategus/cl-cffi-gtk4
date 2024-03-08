@@ -2045,7 +2045,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-delete-selection (buffer &key interactive editable)
  #+liber-documentation
- "@version{#2020-11-16}
+ "@version{#2021-11-16}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[interactive]{a boolean whether the deletion is caused by user
     interaction}

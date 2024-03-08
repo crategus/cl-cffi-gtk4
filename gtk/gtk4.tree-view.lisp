@@ -1284,7 +1284,7 @@ lambda (view)    :action
 (export 'tree-view-new-with-model)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_selection -> tree-view-selection
+;;; gtk_tree_view_get_selection ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_selection" tree-view-selection)
