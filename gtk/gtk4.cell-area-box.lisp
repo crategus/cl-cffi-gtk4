@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,10 +83,10 @@
 
 #+liber-documentation
 (setf (documentation 'cell-area-box 'type)
- "@version{#2020-6-27}
+ "@version{2024-2-21}
   @begin{short}
     The @class{gtk:cell-area-box} object renders cell renderers into a row or a
-    column depending on its @symbol{gtk:orientation}.
+    column depending on its orientation.
   @end{short}
   The @class{gtk:cell-area-box} implementation uses a notion of packing. Packing
   refers to adding cell renderers with reference to a particular position in a
@@ -98,8 +98,8 @@
   right side.
 
   Alignments of @class{gtk:cell-renderer} objects rendered in adjacent rows can
-  be configured by configuring the @code{align} child cell property with the
-  @fun{gtk:cell-area-cell-set-property} function or by specifying the
+  be configured by configuring the align child cell property with the
+  @fun{gtk:cell-area-cell-property} function or by specifying the
   @arg{align} argument to the @fun{gtk:cell-area-box-pack-start} and
   @fun{gtk:cell-area-box-pack-end} functions.
   @begin[Warning]{dictionary}
@@ -110,7 +110,7 @@
   @see-slot{gtk:cell-area-box-spacing}
   @see-class{gtk:cell-renderer}
   @see-symbol{gtk:orientation}
-  @see-function{gtk:cell-area-cell-set-property}
+  @see-function{gtk:cell-area-cell-property}
   @see-function{gtk:cell-area-box-pack-start}
   @see-function{gtk:cell-area-box-pack-end}")
 
@@ -129,7 +129,7 @@
 (setf (liber:alias-for-function 'cell-area-box-spacing)
       "Accessor"
       (documentation 'cell-area-box-spacing 'function)
- "@version{#2020-6-27}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-area-box-spacing object) => spacing}
   @syntax[]{(setf (gtk:cell-area-box-spacing object) spacing)}
   @argument[object]{a @class{gtk:cell-area-box} object}
@@ -141,7 +141,7 @@
   @end{short}
   The @fun{gtk:cell-area-box-spacing} function gets the spacing added between
   cell renderers. The @setf{gtk:cell-area-box-spacing} function sets the spacing
-  to add between cell renderers in @arg{box}.
+  to add between cell renderers.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area-box} implementation is deprecated since 4.10. List
     views use widgets for displaying their contents.
@@ -156,8 +156,8 @@
 
 (defun cell-area-box-new ()
  #+liber-documentation
- "@version{#2020-6-27}
-  @return{A newly created @class{gtk:cell-area-box} object.}
+ "@version{2024-2-21}
+  @return{The newly created @class{gtk:cell-area-box} object.}
   @short{Creates a new cell area box.}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-area-box} implementation is deprecated since 4.10. List
@@ -182,7 +182,7 @@
 (defun cell-area-box-pack-start (box renderer
                                  &key (expand t) (align t) (fixed t))
  #+liber-documentation
- "@version{#2020-6-27}
+ "@version{#2024-2-21}
   @argument[box]{a @class{gtk:cell-area-box} widget}
   @argument[renderer]{a @class{gtk:cell-renderer} object to add}
   @argument[expand]{a boolean whether @arg{renderer} should receive extra space
@@ -221,7 +221,7 @@
 (defun cell-area-box-pack-end (box child
                                &key (expand t) (align t) (fixed t))
  #+liber-documentation
- "@version{#2020-6-27}
+ "@version{#2024-2-21}
   @argument[box]{a @class{gtk:cell-area-box} widget}
   @argument[renderer]{a @class{gtk:cell-renderer} object to add}
   @argument[expand]{a boolean whether @arg{renderer} should receive extra space
@@ -234,7 +234,6 @@
     Adds a renderer to cell area box, packed with reference to the end of
     the box.
   @end{short}
-
   The renderer is packed after, away from end of, any other
   @class{gtk:cell-renderer} object packed with reference to the end of the box.
   @begin[Warning]{dictionary}

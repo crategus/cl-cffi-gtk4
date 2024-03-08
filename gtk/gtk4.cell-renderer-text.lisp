@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -256,7 +256,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-text 'type)
- "@version{#2021-3-9}
+ "@version{2024-2-21}
   @begin{short}
     The @class{gtk:cell-renderer-text} object renders a given text in its cell,
     using the font, color and style information provided by its properties.
@@ -339,7 +339,7 @@ lambda (renderer path text)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- cell-renderer-text-align-set -------------------------------------------
+;;; --- gtk:cell-renderer-text-align-set ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "align-set"
@@ -352,7 +352,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-align-set)
       "Accessor"
       (documentation 'cell-renderer-text-align-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-align-set object) => align-set}
   @syntax[]{(setf (gtk:cell-renderer-text-align-set object) align-set)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -367,7 +367,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-alignment -------------------------------------------
+;;; --- gtk:cell-renderer-text-alignment ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "alignment"
@@ -384,11 +384,11 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-alignment)
       "Accessor"
       (documentation 'cell-renderer-text-alignment 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-alignment object) => alignment}
   @syntax[]{(setf (gtk:cell-renderer-text-alignment object) alignment)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[alignment]{a value of the @symbol{pango:alignment} enumeration}
+  @argument[alignment]{a @symbol{pango:alignment} value}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{alignment} slot of the
     @class{gtk:cell-renderer-text} class.
@@ -401,9 +401,10 @@ lambda (renderer path text)    :run-last
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:cell-renderer-text}")
+  @see-class{gtk:cell-renderer-text}
+  @see-symbol{pango:alignment}")
 
-;;; --- cell-renderer-text-attributes ------------------------------------------
+;;; --- gtk:cell-renderer-text-attributes --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "attributes"
@@ -416,11 +417,11 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-attributes)
       "Accessor"
       (documentation 'cell-renderer-text-attributes 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-attributes object) => attributes}
   @syntax[]{(setf (gtk:cell-renderer-text-attributes object) attributes)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[attributes]{a @class{pango:attr-list} structure}
+  @argument[attributes]{a @class{pango:attr-list} instance}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer]{attributes} slot of the
     @class{gtk:cell-renderer-text} class.
@@ -430,9 +431,10 @@ lambda (renderer path text)    :run-last
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:cell-renderer-text}")
+  @see-class{gtk:cell-renderer-text}
+  @see-class{pango:attr-list}")
 
-;;; --- cell-renderer-text-background ------------------------------------------
+;;; --- gtk:cell-renderer-text-background --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "background"
@@ -445,8 +447,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-background)
       "Accessor"
       (documentation 'cell-renderer-text-background 'function)
- "@version{#2020-6-13}
-  @syntax[]{(gtk:cell-renderer-text-background object) => background}
+ "@version{2024-2-21}
   @syntax[]{(setf (gtk:cell-renderer-text-background object) background)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[background]{a string with the background color}
@@ -460,7 +461,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-background-rgba -------------------------------------
+;;; --- gtk:cell-renderer-text-background-rgba ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "background-rgba"
@@ -473,11 +474,11 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-background-rgba)
       "Accessor"
       (documentation 'cell-renderer-text-background-rgba 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-background-rgba object) => background}
   @syntax[]{(setf (gtk:cell-renderer-text-background-rgba object) background)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[background]{a @class{gdk:rgba} color with the background color}
+  @argument[background]{a @class{gdk:rgba} instance with the background color}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{background-rgba} slot of the
     @class{gtk:cell-renderer-text} class.
@@ -486,9 +487,10 @@ lambda (renderer path text)    :run-last
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:cell-renderer-text}")
+  @see-class{gtk:cell-renderer-text}
+  @see-class{gdk:rgba}")
 
-;;; --- cell-renderer-text-background-set --------------------------------------
+;;; --- gtk:cell-renderer-text-background-set ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "background-set"
@@ -502,7 +504,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-background-set)
       "Accessor"
       (documentation 'cell-renderer-text-background-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-background-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-background-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -517,7 +519,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-editable --------------------------------------------
+;;; --- gtk:cell-renderer-text-editable ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "editable"
@@ -530,7 +532,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-editable)
       "Accessor"
       (documentation 'cell-renderer-text-editable 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-editable object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-editable object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -545,7 +547,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-editable-set ----------------------------------------
+;;; --- gtk:cell-renderer-text-editable-set ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "editable-set"
@@ -558,7 +560,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-editable-set)
       "Accessor"
       (documentation 'cell-renderer-text-editable-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-editable-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-editable-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -573,7 +575,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-ellipsize -------------------------------------------
+;;; --- gtk:cell-renderer-text-ellipsize ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "ellipsize"
@@ -582,7 +584,7 @@ lambda (renderer path text)    :run-last
   (Read / Write) @br{}
   Specifies the preferred place to ellipsize the string, if the cell renderer
   does not have enough room to display the entire string. Setting it to
-  @code{:none} turns off ellipsizing. See the
+  the @code{:none} value turns off ellipsizing. See the
   @slot[gtk:cell-renderer-text]{wrap-width} property for another way of making
   the text fit into a given width. @br{}
   Default value: @code{:none}")
@@ -591,7 +593,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-ellipsize)
       "Accessor"
       (documentation 'cell-renderer-text-ellipsize 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-ellipsize object) => mode}
   @syntax[]{(setf (gtk:cell-renderer-text-ellipsize object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -601,17 +603,19 @@ lambda (renderer path text)    :run-last
     @class{gtk:cell-renderer-text} class.
   @end{short}
   Specifies the preferred place to ellipsize the string, if the cell renderer
-  does not have enough room to display the entire string. Setting it to
-  @code{:none} turns off ellipsizing. See the
+  does not have enough room to display the entire string. Setting it to the
+  @code{:none} value turns off ellipsizing. See the
   @slot[gtk:cell-renderer-text]{wrap-width} property for another way of making
   the text fit into a given width.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:cell-renderer-text}")
+  @see-class{gtk:cell-renderer-text}
+  @see-symbol{pango:ellipsize-mode}
+  @see-function{gtk:cell-renderer-text-wrap-width}")
 
-;;; --- cell-renderer-text-ellipsize-set ---------------------------------------
+;;; --- gtk:cell-renderer-text-ellipsize-set -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "ellipsize-set"
@@ -624,7 +628,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-ellipsize-set)
       "Accessor"
       (documentation 'cell-renderer-text-ellipsize-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-ellipsize-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-ellipsize-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -639,7 +643,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-family ----------------------------------------------
+;;; --- gtk:cell-renderer-text-family ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "family"
@@ -652,7 +656,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-family)
       "Accessor"
       (documentation 'cell-renderer-text-family 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-family object) => font}
   @syntax[]{(setf (gtk:cell-renderer-text-family object) font)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -668,7 +672,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-family-set ------------------------------------------
+;;; --- gtk:cell-renderer-text-family-set --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "family-set"
@@ -681,7 +685,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-family-set)
       "Accessor"
       (documentation 'cell-renderer-text-family-set 'function)
- "@version{#2021-1-7}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-family-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-family-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -697,7 +701,7 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:cell-renderer-text}
   @see-function{gtk:cell-renderer-text-family}")
 
-;;; --- cell-renderer-text-font ------------------------------------------------
+;;; --- gtk:cell-renderer-text-font --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font"
@@ -710,7 +714,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-font)
       "Accessor"
       (documentation 'cell-renderer-text-font 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-font object) => font}
   @syntax[]{(setf (gtk:cell-renderer-text-font object) font)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -726,7 +730,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-font-desc -------------------------------------------
+;;; --- gtk:cell-renderer-text-font-desc ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font-desc"
@@ -739,7 +743,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-font-desc)
       "Accessor"
       (documentation 'cell-renderer-text-font-desc 'function)
- "@version{#2021-1-7}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-font-desc object) => font-desc}
   @syntax[]{(setf (gtk:cell-renderer-text-font-desc object) font-desc)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -756,7 +760,7 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:cell-renderer-text}
   @see-class{pango:font-description}")
 
-;;; --- cell-renderer-text-foreground ------------------------------------------
+;;; --- gtk:cell-renderer-text-foreground --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "foreground"
@@ -769,8 +773,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-foreground)
       "Accessor"
       (documentation 'cell-renderer-text-foreground 'function)
- "@version{#2020-6-13}
-  @syntax[]{(gtk:cell-renderer-text-foreground object) => foreground}
+ "@version{2024-2-21}
   @syntax[]{(setf (gtk:cell-renderer-text-foreground object) foreground)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[foreground]{a string with the foreground color}
@@ -784,7 +787,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-foreground-rgba -------------------------------------
+;;; --- gtk:cell-renderer-text-foreground-rgba ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "foreground-rgba"
@@ -797,16 +800,15 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-foreground-rgba)
       "Accessor"
       (documentation 'cell-renderer-text-foreground-rgba 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-foreground-rgba object) => foreground}
   @syntax[]{(setf (gtk:cell-renderer-text-foreground-rgba object) foreground)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
-  @argument[foreground]{a @class{gdk:rgba} color}
+  @argument[foreground]{a @class{gdk:rgba} instance}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-text]{foreground-rgba} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
-  The @class{gdk:rgba} foreground color.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -814,7 +816,7 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:cell-renderer-text}
   @see-class{gdk:rgba}")
 
-;;; --- cell-renderer-text-foreground-set --------------------------------------
+;;; --- gtk:cell-renderer-text-foreground-set ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "foreground-set"
@@ -828,7 +830,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-foreground-set)
       "Accessor"
       (documentation 'cell-renderer-text-foreground-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-foreground-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-foreground-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -843,7 +845,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-language --------------------------------------------
+;;; --- gtk:cell-renderer-text-language ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "language"
@@ -858,7 +860,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-language)
       "Accessor"
       (documentation 'cell-renderer-text-language 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-language object) => language}
   @syntax[]{(setf (gtk:cell-renderer-text-language object) language)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -876,7 +878,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-language-set ----------------------------------------
+;;; --- gtk:cell-renderer-text-language-set ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "language-set"
@@ -889,7 +891,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-language-set)
       "Accessor"
       (documentation 'cell-renderer-text-language-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-language-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-language-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -904,7 +906,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-markup ----------------------------------------------
+;;; --- gtk:cell-renderer-text-markup ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "markup"
@@ -917,8 +919,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-markup)
       "Accessor"
       (documentation 'cell-renderer-text-markup 'function)
- "@version{#2020-6-13}
-  @syntax[]{(gtk:cell-renderer-text-markup object) => markup}
+ "@version{2024-2-21}
   @syntax[]{(setf (gtk:cell-renderer-text-markup object) markup)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[markup]{a string with the marked up text to render}
@@ -932,7 +933,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-max-width-chars -------------------------------------
+;;; --- gtk:cell-renderer-text-max-width-chars ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-width-chars"
@@ -951,7 +952,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-max-width-chars)
       "Accessor"
       (documentation 'cell-renderer-text-max-width-chars 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-max-width-chars object) => width}
   @syntax[]{(setf (gtk:cell-renderer-text-max-width-chars object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -973,7 +974,7 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:cell-renderer-text}
   @see-class{gtk:cell-layout}")
 
-;;; --- cell-renderer-text-placeholder-text ------------------------------------
+;;; --- gtk:cell-renderer-text-placeholder-text --------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "placeholder-text"
@@ -989,7 +990,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-placeholder-text)
       "Accessor"
       (documentation 'cell-renderer-text-placeholder-text 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-placeholder-text object) => text}
   @syntax[]{(setf (gtk:cell-renderer-text-placeholder-text object) text)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1008,7 +1009,7 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:cell-renderer-text}
   @see-class{gtk:cell-renderer}")
 
-;;; --- cell-renderer-text-rise ------------------------------------------------
+;;; --- gtk:cell-renderer-text-rise --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "rise" 'cell-renderer-text) t)
@@ -1022,7 +1023,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-rise)
       "Accessor"
       (documentation 'cell-renderer-text-rise 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-rise object) => rise}
   @syntax[]{(setf (gtk:cell-renderer-text-rise object) rise)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1039,7 +1040,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-rise-set --------------------------------------------
+;;; --- gtk:cell-renderer-text-rise-set ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "rise-set"
@@ -1052,7 +1053,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-rise-set)
       "Accessor"
       (documentation 'cell-renderer-text-rise-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-rise-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-rise-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1067,7 +1068,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-scale -----------------------------------------------
+;;; --- gtk:cell-renderer-text-scale -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scale"
@@ -1081,7 +1082,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-scale)
       "Accessor"
       (documentation 'cell-renderer-text-scale 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-scale object) => scale}
   @syntax[]{(setf (gtk:cell-renderer-text-scale object) scale)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1096,7 +1097,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-scale-set -------------------------------------------
+;;; --- gtk:cell-renderer-text-scale-set ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scale-set"
@@ -1109,7 +1110,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-scale-set)
       "Accessor"
       (documentation 'cell-renderer-text-scale-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-scale-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-scale-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1125,7 +1126,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-single-paragraph-mode -------------------------------
+;;; --- gtk:cell-renderer-text-single-paragraph-mode ---------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "single-paragraph-mode"
@@ -1139,7 +1140,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-single-paragraph-mode)
       "Accessor"
       (documentation 'cell-renderer-text-single-paragraph-mode 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-single-paragraph-mode object) => mode}
   @syntax[]{(setf (gtk:cell-renderer-text-single-paragraph-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1154,7 +1155,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-size ------------------------------------------------
+;;; --- gtk:cell-renderer-text-size --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "size" 'cell-renderer-text) t)
@@ -1167,7 +1168,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-size)
       "Accessor"
       (documentation 'cell-renderer-text-size 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-size object) => size}
   @syntax[]{(setf (gtk:cell-renderer-text-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1182,7 +1183,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-size-points -----------------------------------------
+;;; --- gtk:cell-renderer-text-size-points -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "size-points"
@@ -1196,7 +1197,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-size-points)
       "Accessor"
       (documentation 'cell-renderer-text-size-points 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-size-points object) => size}
   @syntax[]{(setf (gtk:cell-renderer-text-size-points object) size)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1211,7 +1212,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-size-set --------------------------------------------
+;;; --- gtk:cell-renderer-text-size-set ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "size-set"
@@ -1224,7 +1225,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-size-set)
       "Accessor"
       (documentation 'cell-renderer-text-size-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-size-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-size-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1239,7 +1240,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-stretch ---------------------------------------------
+;;; --- gtk:cell-renderer-text-stretch -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "stretch"
@@ -1253,7 +1254,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-stretch)
       "Accessor"
       (documentation 'cell-renderer-text-stretch 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-stretch object) => stretch}
   @syntax[]{(setf (gtk:cell-renderer-text-stretch object) stretch)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1269,7 +1270,7 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:cell-renderer-text}
   @see-symbol{pango:stretch}")
 
-;;; --- cell-renderer-text-stretch-set -----------------------------------------
+;;; --- gtk:cell-renderer-text-stretch-set -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "stretch-set"
@@ -1282,7 +1283,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-stretch-set)
       "Accessor"
       (documentation 'cell-renderer-text-stretch-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-stretch-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-stretch-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1297,7 +1298,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-strikethrough ---------------------------------------
+;;; --- gtk:cell-renderer-text-strikethrough -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "strikethrough"
@@ -1310,7 +1311,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-strikethrough)
       "Accessor"
       (documentation 'cell-renderer-text-strikethrough 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-strikethrough object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-strikethrough object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1325,7 +1326,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-strikethrough-set -----------------------------------
+;;; --- gtk:cell-renderer-text-strikethrough-set -------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "strikethrough-set"
@@ -1339,7 +1340,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-strikethrough-set)
       "Accessor"
       (documentation 'cell-renderer-text-strikethrough-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-strikethrough-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-strikethrough-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1354,7 +1355,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-style -----------------------------------------------
+;;; --- gtk:cell-renderer-text-style -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "style"
@@ -1367,7 +1368,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-style)
       "Accessor"
       (documentation 'cell-renderer-text-style 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-style object) => style}
   @syntax[]{(setf (gtk:cell-renderer-text-style object) style)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1383,7 +1384,7 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:cell-renderer-text}
   @see-symbol{pango:style}")
 
-;;; --- cell-renderer-text-style-set -------------------------------------------
+;;; --- gtk:cell-renderer-text-style-set ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "style-set"
@@ -1396,7 +1397,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-style-set)
       "Accessor"
       (documentation 'cell-renderer-text-style-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-style-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-style-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1411,7 +1412,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-text ------------------------------------------------
+;;; --- gtk:cell-renderer-text-text --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text"
@@ -1424,7 +1425,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-text)
       "Accessor"
       (documentation 'cell-renderer-text-text 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-text object) => text}
   @syntax[]{(setf (gtk:cell-renderer-text-text object) text)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1439,7 +1440,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-underline -------------------------------------------
+;;; --- gtk:cell-renderer-text-underline ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "underline"
@@ -1453,7 +1454,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-underline)
       "Accessor"
       (documentation 'cell-renderer-text-underline 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-underline object) => underline}
   @syntax[]{(setf (gtk:cell-renderer-text-underline object) underline)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1470,7 +1471,7 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:cell-renderer-text}
   @see-symbol{pango:underline}")
 
-;;; --- cell-renderer-text-underline-set ---------------------------------------
+;;; --- gtk:cell-renderer-text-underline-set -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "underline-set"
@@ -1483,7 +1484,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-underline-set)
       "Accessor"
       (documentation 'cell-renderer-text-underline-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-underline-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-underline-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1498,7 +1499,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-variant ---------------------------------------------
+;;; --- gtk:cell-renderer-text-variant -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "variant"
@@ -1512,7 +1513,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-variant)
       "Accessor"
       (documentation 'cell-renderer-text-variant 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-variant object) => variant}
   @syntax[]{(setf (gtk:cell-renderer-text-variant object) variant)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1528,7 +1529,7 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:cell-renderer-text}
   @see-symbol{pango:variant}")
 
-;;; --- cell-renderer-text-variant-set -----------------------------------------
+;;; --- gtk:cell-renderer-text-variant-set -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "variant-set"
@@ -1541,7 +1542,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-variant-set)
       "Accessor"
       (documentation 'cell-renderer-text-variant-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-variant-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-variant-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1556,7 +1557,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-weight ----------------------------------------------
+;;; --- gtk:cell-renderer-text-weight ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "weight"
@@ -1570,7 +1571,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-weight)
       "Accessor"
       (documentation 'cell-renderer-text-weight 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-weight object) => weight}
   @syntax[]{(setf (gtk:cell-renderer-text-weight object) weight)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1585,7 +1586,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-weight-set ------------------------------------------
+;;; --- gtk:cell-renderer-text-weight-set --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "weight-set"
@@ -1598,7 +1599,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-weight-set)
       "Accessor"
       (documentation 'cell-renderer-text-weight-set 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-weight-set object) => setting}
   @syntax[]{(setf (gtk:cell-renderer-text-weight-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1613,7 +1614,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-width-chars -----------------------------------------
+;;; --- gtk:cell-renderer-text-width-chars -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "width-chars"
@@ -1629,7 +1630,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-width-chars)
       "Accessor"
       (documentation 'cell-renderer-text-width-chars 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-width-chars object) => width}
   @syntax[]{(setf (gtk:cell-renderer-text-width-chars object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1647,7 +1648,7 @@ lambda (renderer path text)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}")
 
-;;; --- cell-renderer-text-wrap-mode -------------------------------------------
+;;; --- gtk:cell-renderer-text-wrap-mode ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "wrap-mode"
@@ -1664,7 +1665,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-wrap-mode)
       "Accessor"
       (documentation 'cell-renderer-text-wrap-mode 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-wrap-mode object) => mode}
   @syntax[]{(setf (gtk:cell-renderer-text-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1681,9 +1682,10 @@ lambda (renderer path text)    :run-last
     Please do not use it in newly written code.
   @end{dictionary}
   @see-class{gtk:cell-renderer-text}
-  @see-symbol{pango:wrap-mode}")
+  @see-symbol{pango:wrap-mode}
+  @see-function{gtk:cell-renderer-text-wrap-width}")
 
-;;; --- cell-renderer-text-wrap-width ------------------------------------------
+;;; --- gtk:cell-renderer-text-wrap-width --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "wrap-width"
@@ -1699,7 +1701,7 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-wrap-width)
       "Accessor"
       (documentation 'cell-renderer-text-wrap-width 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-text-wrap-width object) => width}
   @syntax[]{(setf (gtk:cell-renderer-text-wrap-width object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
@@ -1716,7 +1718,8 @@ lambda (renderer path text)    :run-last
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:cell-renderer-text}")
+  @see-class{gtk:cell-renderer-text}
+  @see-function{gtk:cell-renderer-text-wrap-mode}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_cell_renderer_text_new
@@ -1726,7 +1729,7 @@ lambda (renderer path text)    :run-last
 
 (defun cell-renderer-text-new ()
  #+liber-documentation
- "@version{#2022-1-14}
+ "@version{2024-2-21}
   @return{The new @class{gtk:cell-renderer-text} object.}
   @begin{short}
     Creates a new cell renderer text.
@@ -1746,7 +1749,8 @@ lambda (renderer path text)    :run-last
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:tree-model}
-  @see-function{g:object-property}"
+  @see-function{g:object-property}
+  @see-function{gtk:cell-renderer-text-text}"
   (make-instance 'cell-renderer-text))
 
 (export 'cell-renderer-text-new)
@@ -1758,7 +1762,7 @@ lambda (renderer path text)    :run-last
 (cffi:defcfun ("gtk_cell_renderer_text_set_fixed_height_from_font"
                cell-renderer-text-set-fixed-height-from-font) :void
  #+liber-documentation
- "@version{#2022-1-14}
+ "@version{#2024-2-21}
   @argument[renderer]{a @class{gtk:cell-renderer-text} object}
   @argument[number-of-rows]{an integer with the number of rows of text each cell
     renderer is allocated, or -1}
@@ -1769,9 +1773,9 @@ lambda (renderer path text)    :run-last
   Further changes in these properties do not affect the height, so they must be
   accompanied by a subsequent call to this function. Using this function is
   unflexible, and should really only be used if calculating the size of a cell
-  is too slow, i.e., a massive number of cells displayed. If
-  @arg{number-of-rows} is -1, then the fixed height is unset, and the height is
-  determined by the properties again.
+  is too slow, i.e., a massive number of cells displayed. If the
+  @arg{number-of-rows} argument is -1, then the fixed height is unset, and the
+  height is determined by the properties again.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-text} implementation is deprecated since 4.10.
     Please do not use it in newly written code.

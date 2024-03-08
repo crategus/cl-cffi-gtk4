@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -77,7 +77,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-spin 'type)
- "@version{#2020-6-14}
+ "@version{2024-2-22}
   @begin{short}
     The @class{gtk:cell-renderer-spin} object renders text in a cell like
     @class{gtk:cell-renderer-text} object from which it is derived.
@@ -87,12 +87,14 @@
   @class{gtk:spin-button} widget. Of course, that means that the text has to be
   parseable as a floating point number.
 
-  The range of the spin button is taken from the adjustment property of the
-  cell renderer, which can be set explicitly or mapped to a column in the tree
-  model, like all properties of cell renders. The @class{gtk:cell-renderer-spin}
-  object also has properties for the \"climb-rate\" and the number of \"digits\"
-  to display. Other @class{gtk:spin-button} properties can be set in a handler
-  for the \"editing-started\" signal.
+  The range of the spin button is taken from the
+  @slot[gtk:cell-renderer-spin]{adjustment} property of the cell renderer, which
+  can be set explicitly or mapped to a column in the tree model, like all
+  properties of cell renders. The @class{gtk:cell-renderer-spin} object also has
+  the @slot[gtk:cell-renderer-spin]{climb-rate} and
+  @slot[gtk:cell-renderer-spin]{digits} properties. Other
+  @class{gtk:spin-button} properties can be set in a handler for the
+  @code{\"editing-started\"} signal.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spin} object is deprecated since 4.10. List
     views use widgets to display their contents. You should use the
@@ -109,7 +111,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- cell-renderer-spin-adjustment ------------------------------------------
+;;; --- gtk:cell-renderer-spin-adjustment --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "adjustment"
@@ -123,7 +125,7 @@
 (setf (liber:alias-for-function 'cell-renderer-spin-adjustment)
       "Accessor"
       (documentation 'cell-renderer-spin-adjustment 'function)
- "@version{#2020-6-14}
+ "@version{2024-2-22}
   @syntax[]{(gtk:cell-renderer-spin-adjustment object) => adjustment}
   @syntax[]{(setf (gtk:cell-renderer-spin-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:cell-renderer-spin} object}
@@ -141,7 +143,7 @@
   @see-class{gtk:cell-renderer-spin}
   @see-class{gtk:adjustment}")
 
-;;; --- cell-renderer-spin-climb-rate ------------------------------------------
+;;; --- gtk:cell-renderer-spin-climb-rate --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "climb-rate"
@@ -155,7 +157,7 @@
 (setf (liber:alias-for-function 'cell-renderer-spin-climb-rate)
       "Accessor"
       (documentation 'cell-renderer-spin-climb-rate 'function)
- "@version{#2020-6-14}
+ "@version{2024-2-22}
   @syntax[]{(gtk:cell-renderer-spin-climb-rate object) => climb-rate}
   @syntax[]{(setf (gtk:cell-renderer-spin-climb-rate object) climb-rate)}
   @argument[object]{a @class{gtk:cell-renderer-spin} object}
@@ -170,7 +172,7 @@
   @end{dictionary}
   @see-class{gtk:cell-renderer-spin}")
 
-;;; --- cell-renderer-spin-digits ----------------------------------------------
+;;; --- gtk:cell-renderer-spin-digits ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "digits"
@@ -184,7 +186,7 @@
 (setf (liber:alias-for-function 'cell-renderer-spin-digits)
       "Accessor"
       (documentation 'cell-renderer-spin-digits 'function)
- "@version{#2020-6-14}
+ "@version{2024-2-22}
   @syntax[]{(gtk:cell-renderer-spin-digits object) => digits}
   @syntax[]{(setf (gtk:cell-renderer-spin-digits object) digits)}
   @argument[object]{a @class{gtk:cell-renderer-spin} object}
@@ -208,8 +210,8 @@
 
 (defun cell-renderer-spin-new ()
  #+liber-documentation
- "@version{#2020-6-14}
-  @return{A new @class{gtk:cell-renderer-spin} object.}
+ "@version{2024-2-22}
+  @return{The new @class{gtk:cell-renderer-spin} object.}
   @short{Creates a new cell renderer spin object.}
   @begin[Warning]{dictionary}
     The @class{gtk:cell-renderer-spin} object is deprecated since 4.10.

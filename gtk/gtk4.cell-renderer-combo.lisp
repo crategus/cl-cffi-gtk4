@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,7 +81,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-combo 'type)
- "@version{#2020-6-20}
+ "@version{2024-2-21}
   @begin{short}
     The @class{gtk:cell-renderer-combo} object renders text in a cell like
     the @class{gtk:cell-renderer-text} object from which it is derived.
@@ -136,7 +136,7 @@ lambda (combo path iter)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- cell-renderer-combo-has-entry ------------------------------------------
+;;; --- gtk:cell-renderer-combo-has-entry --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-entry"
@@ -150,7 +150,7 @@ lambda (combo path iter)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-combo-has-entry)
       "Accessor"
       (documentation 'cell-renderer-combo-has-entry 'function)
- "@version{#2020-6-20}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-combo-has-entry object) => has-entry}
   @syntax[]{(setf (gtk:cell-renderer-combo-has-entry object) has-entry)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
@@ -168,7 +168,7 @@ lambda (combo path iter)    :run-last
   @end{dictionary}
   @see-class{gtk:cell-renderer-combo}")
 
-;;; --- cell-renderer-combo-model ----------------------------------------------
+;;; --- gtk:cell-renderer-combo-model ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'cell-renderer-combo) t)
@@ -181,7 +181,7 @@ lambda (combo path iter)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-combo-model)
       "Accessor"
       (documentation 'cell-renderer-combo-model 'function)
- "@version{#2020-6-20}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-combo-model object) => model}
   @syntax[]{(setf (gtk:cell-renderer-combo-model object) model)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
@@ -198,9 +198,10 @@ lambda (combo path iter)    :run-last
     Please do not use it in newly written code.
   @end{dictionary}
   @see-class{gtk:cell-renderer-combo}
-  @see-class{gtk:tree-model}")
+  @see-class{gtk:tree-model}
+  @see-function{gtk:cell-renderer-combo-text-column}")
 
-;;; --- cell-renderer-combo-text-column ----------------------------------------
+;;; --- gtk:cell-renderer-combo-text-column ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text-column"
@@ -219,7 +220,7 @@ lambda (combo path iter)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-combo-text-column)
       "Accessor"
       (documentation 'cell-renderer-combo-text-column 'function)
- "@version{#2020-6-20}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-renderer-combo-text-column object) => column}
   @syntax[]{(setf (gtk:cell-renderer-combo-text-column object) column)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
@@ -238,7 +239,8 @@ lambda (combo path iter)    :run-last
     The @class{gtk:cell-renderer-combo} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:cell-renderer-combo}")
+  @see-class{gtk:cell-renderer-combo}
+  @see-function{gtk:cell-renderer-combo-model}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_cell_renderer_combo_new ()
@@ -248,7 +250,7 @@ lambda (combo path iter)    :run-last
 
 (defun cell-renderer-combo-new ()
  #+liber-documentation
- "@version{#2020-5-31}
+ "@version{2024-2-21}
   @return{The new @class{gtk:cell-renderer-combo} object.}
   @begin{short}
     Creates a new cell renderer combo.
@@ -268,7 +270,8 @@ lambda (combo path iter)    :run-last
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-view-column}
   @see-class{gtk:tree-model}
-  @see-function{g:object-property}"
+  @see-function{g:object-property}
+  @see-function{gtk:cell-renderer-text-text}"
   (make-instance 'cell-renderer-combo))
 
 (export 'cell-renderer-combo-new)

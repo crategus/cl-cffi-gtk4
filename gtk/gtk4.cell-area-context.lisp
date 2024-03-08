@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-area-context 'type)
- "@version{#2020-6-28}
+ "@version{2024-2-21}
   @begin{short}
     The @class{gtk:cell-area-context} object is created by a given
     @class{gtk:cell-area} implementation via its @code{create_context()} virtual
@@ -126,7 +126,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- cell-area-context-area -------------------------------------------------
+;;; --- gtk:cell-area-context-area ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "area" 'cell-area-context) t)
@@ -138,7 +138,7 @@
 (setf (liber:alias-for-function 'cell-area-context-area)
       "Accessor"
       (documentation 'cell-area-context-area 'function)
- "@version{#2020-6-28}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-area-context-area object) => area}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[area]{a @class{gtk:cell-area} object}
@@ -162,7 +162,7 @@
   @see-class{gtk:cell-area-context}
   @see-class{gtk:cell-area}")
 
-;;; --- cell-area-context-minimum-height ---------------------------------------
+;;; --- gtk:cell-area-context-minimum-height -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "minimum-height"
@@ -178,7 +178,7 @@
 (setf (liber:alias-for-function 'cell-area-context-minimum-height)
       "Accessor"
       (documentation 'cell-area-context-minimum-height 'function)
- "@version{#2020-6-28}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-area-context-minimum-height object) => height}
   @syntax[]{(setf (gtk:cell-area-context-minimum-height object) height}
   @argument[context]{a @class{gtk:cell-area-context} object}
@@ -195,11 +195,10 @@
     This object will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:cell-area-context}
-  @see-class{gtk:cell-area}
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-height}")
 
-;;; --- cell-area-context-minimum-width ----------------------------------------
+;;; --- gtk:cell-area-context-minimum-width ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "minimum-width"
@@ -215,7 +214,7 @@
 (setf (liber:alias-for-function 'cell-area-context-minimum-width)
       "Accessor"
       (documentation 'cell-area-context-minimum-width 'function)
- "@version{#2020-6-28}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-area-context-minimum-width object) => width}
   @syntax[]{(setf (gtk:cell-area-context-minimum-width object) width}
   @argument[context]{a @class{gtk:cell-area-context} object}
@@ -236,7 +235,7 @@
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-width}")
 
-;;; --- cell-area-context-natural-height ---------------------------------------
+;;; --- gtk:cell-area-context-natural-height -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "natural-height"
@@ -252,7 +251,7 @@
 (setf (liber:alias-for-function 'cell-area-context-natural-height)
       "Accessor"
       (documentation 'cell-area-context-natural-height 'function)
- "@version{#2020-6-28}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-area-context-natural-height object) => height}
   @syntax[]{(setf (gtk:cell-area-context-natural-height object) height}
   @argument[context]{a @class{gtk:cell-area-context} object}
@@ -269,11 +268,10 @@
     This object will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:cell-area-context}
-  @see-class{gtk:cell-area}
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-height}")
 
-;;; --- cell-area-context-natural-width ----------------------------------------
+;;; --- gtk:cell-area-context-natural-width ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "natural-width"
@@ -289,7 +287,7 @@
 (setf (liber:alias-for-function 'cell-area-context-natural-width)
       "Accessor"
       (documentation 'cell-area-context-natural-width 'function)
- "@version{#2020-6-28}
+ "@version{2024-2-21}
   @syntax[]{(gtk:cell-area-context-natural-width object) => width}
   @syntax[]{(setf (gtk:cell-area-context-natural-width object) width}
   @argument[context]{a @class{gtk:cell-area-context} object}
@@ -306,7 +304,6 @@
     This object will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:cell-area-context}
-  @see-class{gtk:cell-area}
   @see-class{gtk:tree-model}
   @see-function{gtk:cell-area-preferred-width}")
 
@@ -317,7 +314,7 @@
 (cffi:defcfun ("gtk_cell_area_context_allocate" cell-area-context-allocate)
     :void
  #+liber-documentation
- "@version{#2020-6-28}
+ "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[width]{an integer with the allocated width for all
     @class{gtk:tree-model} rows rendered with context, or -1}
@@ -340,7 +337,8 @@
   @end{dictionary}
   @see-class{gtk:cell-area-context}
   @see-class{gtk:tree-model}
-  @see-class{gtk:tree-view}"
+  @see-class{gtk:tree-view}
+  @see-function{gtk:tree-view-fixed-height-mode}"
   (context (g:object cell-area-context))
   (width :int)
   (height :int))
@@ -353,7 +351,7 @@
 
 (cffi:defcfun ("gtk_cell_area_context_reset" cell-area-context-reset) :void
  #+liber-documentation
- "@version{#2020-6-28}
+ "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @begin{short}
     Resets any previously cached request and allocation data.
@@ -397,7 +395,7 @@
 
 (defun cell-area-context-preferred-width (context)
  #+liber-documentation
- "@version{#2020-6-27}
+ "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @begin{return}
     @arg{minimum-width} -- an integer with the minimum width, or @code{nil}
@@ -415,7 +413,6 @@
     This object will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:cell-area-context}
-  @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
   (cffi:with-foreign-objects ((minimum-width :int) (natural-width :int))
     (%cell-area-context-preferred-width context
@@ -438,7 +435,7 @@
 
 (defun cell-area-context-preferred-height (context)
  #+liber-documentation
- "@version{#2020-6-27}
+ "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @begin{return}
     @arg{minimum-height} -- an integer with the minimum height, or @code{nil}
@@ -457,7 +454,6 @@
     This object will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:cell-area-context}
-  @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
   (cffi:with-foreign-objects ((minimum-height :int) (natural-height :int))
     (%cell-area-context-preferred-height context
@@ -481,7 +477,7 @@
 
 (defun cell-area-context-preferred-height-for-width (context width)
  #+liber-documentation
- "@version{#2020-6-27}
+ "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[width]{an integer with a proposed width for allocation}
   @begin{return}
@@ -501,7 +497,6 @@
     This object will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:cell-area-context}
-  @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
   (cffi:with-foreign-objects ((minimum-height :int) (natural-height :int))
     (%cell-area-context-preferred-height-for-width context
@@ -526,7 +521,7 @@
 
 (defun cell-area-context-preferred-width-for-height (context height)
  #+liber-documentation
- "@version{#2020-6-27}
+ "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[height]{an integer with a proposed height for allocation}
   @begin{return}
@@ -546,7 +541,6 @@
     This object will be removed in GTK 5.
   @end{dictionary}
   @see-class{gtk:cell-area-context}
-  @see-class{gtk:cell-area}
   @see-function{gtk:cell-area-context-reset}"
   (cffi:with-foreign-objects ((minimum-width :int) (natural-width :int))
     (%cell-area-context-preferred-height-for-width context
@@ -570,7 +564,7 @@
 
 (defun cell-area-context-allocation (context)
  #+liber-documentation
- "@version{#2020-6-28}
+ "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @begin{return}
     @arg{width} -- an integer with the allocated width, or @code{nil} @br{}
@@ -602,7 +596,7 @@
 (cffi:defcfun ("gtk_cell_area_context_push_preferred_width"
                cell-area-context-push-preferred-width) :void
  #+liber-documentation
- "@version{#2020-6-28}
+ "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[minimum-width]{an integer with the proposed new minimum width for
     @arg{context}}
@@ -636,7 +630,7 @@
 (cffi:defcfun ("gtk_cell_area_context_push_preferred_height"
                cell-area-context-push-preferred-height) :void
  #+liber-documentation
- "@version{#2020-6-28}
+ "@version{#2024-2-21}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[minimum-height]{an integer with the proposed new minimum height for
     @arg{context}}

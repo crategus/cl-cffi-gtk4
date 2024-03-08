@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -76,7 +76,7 @@
 
 #+liber-documentation
 (setf (documentation 'cell-renderer-spinner 'type)
- "@version{#2020-6-13}
+ "@version{2024-2-22}
   @begin{short}
     The @class{gtk:cell-renderer-spinner} class renders a spinning animation in
     a cell, very similar to the @class{gtk:spinner} widget.
@@ -95,6 +95,7 @@
     4.10. List views use widgets to display their contents. You should use
     the @class{gtk:spinner} widget instead.
   @end{dictionary}
+  @see-constructor{gtk:cell-renderer-spinner-new}
   @see-slot{gtk:cell-renderer-spinner-active}
   @see-slot{gtk:cell-renderer-spinner-pulse}
   @see-slot{gtk:cell-renderer-spinner-size}
@@ -106,7 +107,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- cell-renderer-spinner-active -------------------------------------------
+;;; --- gtk:cell-renderer-spinner-active ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "active"
@@ -119,7 +120,7 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-active)
       "Accessor"
       (documentation 'cell-renderer-spinner-active 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-22}
   @syntax[]{(gtk:cell-renderer-spinner-active object) => active}
   @syntax[]{(setf (gtk:cell-renderer-spinner-active object) active)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
@@ -135,7 +136,7 @@
   @end{dictionary}
   @see-class{gtk:cell-renderer-spinner}")
 
-;;; --- cell-renderer-spinner-pulse --------------------------------------------
+;;; --- gtk:cell-renderer-spinner-pulse ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pulse"
@@ -151,7 +152,7 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-pulse)
       "Accessor"
       (documentation 'cell-renderer-spinner-pulse 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-22}
   @syntax[]{(gtk:cell-renderer-spinner-pulse object) => pulse}
   @syntax[]{(setf (gtk:cell-renderer-spinner-pulse object) pulse)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
@@ -168,9 +169,10 @@
     The @class{gtk:cell-renderer-spinner} implementation is deprecated since
     4.10. Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:cell-renderer-spinner}")
+  @see-class{gtk:cell-renderer-spinner}
+  @see-class{gtk:spinner}")
 
-;;; --- cell-renderer-spinner-size ---------------------------------------------
+;;; --- gtk:cell-renderer-spinner-size -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "size"
@@ -183,11 +185,11 @@
 (setf (liber:alias-for-function 'cell-renderer-spinner-size)
       "Accessor"
       (documentation 'cell-renderer-spinner-size 'function)
- "@version{#2020-6-13}
+ "@version{2024-2-22}
   @syntax[]{(gtk:cell-renderer-spinner-size object) => size}
   @syntax[]{(setf (gtk:cell-renderer-spinner-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
-  @argument[size]{a value of the @symbol{gtk:icon-size} enumeration}
+  @argument[size]{a @symbol{gtk:icon-size} value}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-spinner]{size} slot of the
     @class{gtk:cell-renderer-spinner} class.
@@ -197,7 +199,8 @@
     The @class{gtk:cell-renderer-spinner} implementation is deprecated since
     4.10. Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:cell-renderer-spinner}")
+  @see-class{gtk:cell-renderer-spinner}
+  @see-symbol{gtk:icon-size}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_cell_renderer_spinner_new ()
@@ -207,8 +210,8 @@
 
 (defun cell-renderer-spinner-new ()
  #+liber-documentation
- "@version{#2020-6-13}
-  @return{A new @class{gtk:cell-renderer} object.}
+ "@version{2024-2-22}
+  @return{The new @class{gtk:cell-renderer-spinner} object.}
   @begin{short}
     Returns a new cell renderer which will show a spinner to indicate activity.
   @end{short}

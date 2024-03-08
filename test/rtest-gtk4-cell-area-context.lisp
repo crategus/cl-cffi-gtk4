@@ -15,7 +15,7 @@
           (glib:symbol-for-gtype "GtkCellAreaContext")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkCellAreaContext")
-          (g:gtype (cffI:foreign-funcall "gtk_cell_area_context_get_type"
+          (g:gtype (cffi:foreign-funcall "gtk_cell_area_context_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GObject")
@@ -29,7 +29,7 @@
   ;; Check the class properties
   (is (equal '("area" "minimum-height" "minimum-width"
                       "natural-height" "natural-width")
-             (list-class-property-names "GtkCellAreaContext")))
+             (list-properties "GtkCellAreaContext")))
   ;; Check the list of signals
   (is (equal '()
              (list-signals "GtkCellAreaContext")))
@@ -52,16 +52,16 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-area-context-properties
-  (let ((context (make-instance 'gtk-cell-area-context)))
-    (is-false (gtk-cell-area-context-area context))
-    (is (= 0 (gtk-cell-area-context-minimum-height context)))
-    (signals (error) (setf (gtk-cell-area-context-minimum-height context) 10))
-    (is (= 0 (gtk-cell-area-context-minimum-width context)))
-    (signals (error) (setf (gtk-cell-area-context-minimum-width context) 10))
-    (is (= 0 (gtk-cell-area-context-natural-height context)))
-    (signals (error) (setf (gtk-cell-area-context-natural-height context) 10))
-    (is (= 0 (gtk-cell-area-context-natural-width context)))
-    (signals (error) (setf (gtk-cell-area-context-natural-width context) 10))))
+  (let ((context (make-instance 'gtk:cell-area-context)))
+    (is-false (gtk:cell-area-context-area context))
+    (is (= 0 (gtk:cell-area-context-minimum-height context)))
+    (signals (error) (setf (gtk:cell-area-context-minimum-height context) 10))
+    (is (= 0 (gtk:cell-area-context-minimum-width context)))
+    (signals (error) (setf (gtk:cell-area-context-minimum-width context) 10))
+    (is (= 0 (gtk:cell-area-context-natural-height context)))
+    (signals (error) (setf (gtk:cell-area-context-natural-height context) 10))
+    (is (= 0 (gtk:cell-area-context-natural-width context)))
+    (signals (error) (setf (gtk:cell-area-context-natural-width context) 10))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -75,4 +75,4 @@
 ;;;     gtk_cell_area_context_push_preferred_width
 ;;;     gtk_cell_area_context_push_preferred_height
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-2-21
