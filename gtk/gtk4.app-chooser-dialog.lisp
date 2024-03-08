@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2023 Dieter Kaiser
+;;; Copyright (C) 2013 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -117,6 +117,7 @@
     design of each platform and/or application requiring them.
   @end{dictionary}
   @see-constructor{gtk:app-chooser-dialog-new}
+  @see-constructor{gtk:app-chooser-dialog-new-for-content-type}
   @see-slot{gtk:app-chooser-dialog-gfile}
   @see-slot{gtk:app-chooser-dialog-heading}
   @see-class{gtk:dialog}
@@ -126,7 +127,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- app-chooser-dialog-gfile -----------------------------------------------
+;;; --- gtk:app-chooser-dialog-gfile -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "gfile" 'app-chooser-dialog) t)
@@ -139,7 +140,7 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-gfile)
       "Accessor"
       (documentation 'app-chooser-dialog-gfile 'function)
- "@version{#2023-8-29}
+ "@version{2023-8-29}
   @syntax[]{gtk:app-chooser-dialog-gfile object) => file}
   @syntax[]{(setf (gtk:app-chooser-dialog-gfile object) file)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
@@ -157,7 +158,7 @@
   @see-class{gtk:app-chooser-widget}
   @see-class{g:file}")
 
-;;; --- app-chooser-dialog-heading ---------------------------------------------
+;;; --- gtk:app-chooser-dialog-heading -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "heading" 'app-chooser-dialog) t)
@@ -170,7 +171,7 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-heading)
       "Accessor"
       (documentation 'app-chooser-dialog-heading 'function)
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @syntax[]{gtk:app-chooser-dialog-heading object) => heading}
   @syntax[]{(setf (gtk:app-chooser-dialog-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
@@ -181,9 +182,8 @@
   @end{short}
   The @fun{gtk:app-chooser-dialog-heading} function returns the text to display
   at the top of the dialog. The @setf{gtk:app-chooser-dialog-heading} function
-  sets the text to display at the top of the dialog.
-
-  If the heading is not set, the dialog displays a default text.
+  sets the text to display at the top of the dialog. If the heading is not set,
+  the dialog displays a default text.
   @begin[Warning]{dictionary}
     The @class{gtk:app-chooser-dialog} implementation is deprecated since 4.10.
   @end{dictionary}
@@ -196,11 +196,12 @@
 (cffi:defcfun ("gtk_app_chooser_dialog_new" app-chooser-dialog-new)
     (g:object widget)
  #+liber-documentation
- "@version{#2020-5-21}
+ "@version{#2024-2-22}
   @argument[parent]{a @class{gtk:window}, or @code{nil}}
-  @argument[flags]{flags of type @symbol{gtk:dialog-flags} for this dialog}
+  @argument[flags]{a @symbol{gtk:dialog-flags} value with the flags for this
+    dialog}
   @argument[file]{a @class{g:file} object}
-  @return{A newly created @class{gtk:app-chooser-dialog} widget.}
+  @return{The newly created @class{gtk:app-chooser-dialog} widget.}
   @begin{short}
     Creates a new application chooser dialog for the provided @class{g:file}
     object, to allow the user to select an application for it.
@@ -225,11 +226,12 @@
 (cffi:defcfun ("gtk_app_chooser_dialog_new_for_content_type"
                app-chooser-dialog-new-for-content-type) (g:object widget)
  #+liber-documentation
- "@version{#2020-5-21}
+ "@version{#2024-2-22}
   @argument[parent]{a @class{gtk:window}, or @code{nil}}
-  @argument[flags]{flags of type @symbol{gtk:dialog-flags} for this dialog}
+  @argument[flags]{a @symbol{gtk:dialog-flags} value with the flags for this
+    dialog}
   @argument[content-type]{a content type string}
-  @return{A newly created @class{gtk:app-chooser-dialog} widget.}
+  @return{The newly created @class{gtk:app-chooser-dialog} widget.}
   @begin{short}
     Creates a new application chooser dialog for the provided content type, to
     allow the user to select an application for it.
@@ -247,7 +249,7 @@
 (export 'app-chooser-dialog-new-for-content-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_dialog_get_widget () -> app-chooser-dialog-widget
+;;; gtk_app_chooser_dialog_get_widget ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_dialog_get_widget" app-chooser-dialog-widget)

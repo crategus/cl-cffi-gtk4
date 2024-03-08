@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2023 Dieter Kaiser
+;;; Copyright (C) 2013 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -136,16 +136,16 @@
   @see-class{gtk:app-chooser}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_get_app_info () -> app-chooser-app-info
+;;; gtk_app_chooser_get_app_info ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_get_app_info" app-chooser-app-info)
     (g:object g-app-info)
  #+liber-documentation
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @argument[object]{a @class{gtk:app-chooser} object}
   @begin{return}
-    A @class{g:app-info} object for the currently selected application, or
+    The @class{g:app-info} object for the currently selected application, or
     @code{nil} if none is selected.
   @end{return}
   @begin{short}
@@ -166,7 +166,7 @@
 
 (cffi:defcfun ("gtk_app_chooser_refresh" app-chooser-refresh) :void
  #+liber-documentation
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @argument[object]{a @class{gtk:app-chooser} object}
   @short{Reloads the list of applications.}
   @begin[Warning]{dictionary}

@@ -52,8 +52,10 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     gfile
-;;;     heading
+(test gtk-app-chooser-dialog-properties
+  (let ((dialog (make-instance 'gtk:app-chooser-dialog)))
+    (is-false (gtk:app-chooser-dialog-gfile dialog))
+    (is-false (gtk:app-chooser-dialog-heading dialog))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -61,4 +63,4 @@
 ;;;     gtk_app_chooser_dialog_new_for_content_type
 ;;;     gtk_app_chooser_dialog_get_widget
 
-;;; --- 2023-9-13 --------------------------------------------------------------
+;;; 2024-2-22

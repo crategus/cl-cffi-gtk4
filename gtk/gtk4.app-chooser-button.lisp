@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2023 Dieter Kaiser
+;;; Copyright (C) 2013 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -193,7 +193,7 @@ lambda (button item)    :has-details
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- app-chooser-button-heading ---------------------------------------------
+;;; --- gtk:app-chooser-button-heading -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "heading"
@@ -226,7 +226,7 @@ lambda (button item)    :has-details
   @end{dictionary}
   @see-class{gtk:app-chooser-button}")
 
-;;; --- app-chooser-button-modal -----------------------------------------------
+;;; --- gtk:app-chooser-button-modal -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal"
@@ -256,7 +256,7 @@ lambda (button item)    :has-details
   @end{dictionary}
   @see-class{gtk:app-chooser-button}")
 
-;;; --- app-chooser-button-show-default-item -----------------------------------
+;;; --- gtk:app-chooser-button-show-default-item -------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-default-item"
@@ -291,7 +291,7 @@ lambda (button item)    :has-details
   @end{dictionary}
   @see-class{gtk:app-chooser-button}")
 
-;;; --- app-chooser-button-show-dialog-item ------------------------------------
+;;; --- gtk:app-chooser-button-show-dialog-item --------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-dialog-item"
@@ -357,11 +357,11 @@ lambda (button item)    :has-details
 (cffi:defcfun ("gtk_app_chooser_button_append_custom_item"
                app-chooser-button-append-custom-item) :void
  #+liber-documentation
- "@version{#2020-5-21}
+ "@version{#2024-2-22}
   @argument[widget]{a @class{gtk:app-chooser-button} widget}
   @argument[name]{a string with the name of the custom item}
   @argument[label]{a string with the label for the custom item}
-  @argument[icon]{the icon of type @class{g:icon} for the custom item}
+  @argument[icon]{a @class{g:icon} instance with the icon for the custom item}
   @begin{short}
     Appends a custom item to the list of applications that is shown in the
     popup.
@@ -390,7 +390,7 @@ lambda (button item)    :has-details
 (cffi:defcfun ("gtk_app_chooser_button_append_separator"
                app-chooser-button-append-separator) :void
  #+liber-documentation
- "@version{#2020-5-21}
+ "@version{#2024-2-22}
   @argument[widget]{a @class{gtk:app-chooser-button} widget}
   @begin{short}
     Appends a separator to the list of applications that is shown in the popup.
@@ -410,7 +410,7 @@ lambda (button item)    :has-details
 (cffi:defcfun ("gtk_app_chooser_button_set_active_custom_item"
                app-chooser-button-set-active-custom-item) :void
  #+liber-documentation
- "@version{#2020-5-21}
+ "@version{#2024-2-22}
   @argument[widget]{a @class{gtk:app-chooser-button} widget}
   @argument[name]{a string with the name of the custom item}
   @begin{short}

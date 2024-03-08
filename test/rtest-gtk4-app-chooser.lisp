@@ -35,11 +35,23 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     content-type
+(test gtk-app-chooser-properties
+  (let ((button (make-instance 'gtk:app-chooser-button)))
+    (is-false (gtk:app-chooser-content-type button))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_app_chooser_get_app_info
+
+(test gtk-app-chooser-app-info
+  (let ((button (gtk:app-chooser-button-new "text/plain")))
+    (is (typep (gtk:app-chooser-app-info button) 'g:object))))
+
 ;;;     gtk_app_chooser_refresh
 
-;;; --- 2023-8-29 --------------------------------------------------------------
+(test gtk-app-chooser-refresh
+  (let ((button (gtk:app-chooser-button-new "text/plain")))
+    (is-false (gtk:app-chooser-refresh button))
+    (is (typep (gtk:app-chooser-app-info button) 'g:object))))
+
+;;; 2024-3-7

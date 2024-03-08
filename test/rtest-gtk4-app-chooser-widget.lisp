@@ -70,12 +70,14 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     default-text
-;;;     show-all
-;;;     show-default
-;;;     show-fallback
-;;;     show-other
-;;;     show-recommended
+(test gtk-app-chooser-widget-properties
+  (let ((widget (make-instance 'gtk:app-chooser-widget)))
+    (is-false (gtk:app-chooser-widget-default-text widget))
+    (is-false (gtk:app-chooser-widget-show-all widget))
+    (is-false (gtk:app-chooser-widget-show-default widget))
+    (is-false (gtk:app-chooser-widget-show-fallback widget))
+    (is-false (gtk:app-chooser-widget-show-other widget))
+    (is-true (gtk:app-chooser-widget-show-recommended widget))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -86,4 +88,8 @@
 
 ;;;     gtk_app_chooser_widget_new
 
-;;; --- 2023-10-16 -------------------------------------------------------------
+(test gtk-app-chooser-widget-new
+  (is (typep (gtk:app-chooser-widget-new "text/plain")
+             'gtk:app-chooser-widget)))
+
+;;; 2024-2-22

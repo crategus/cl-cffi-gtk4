@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2023 Dieter Kaiser
+;;; Copyright (C) 2013 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -118,7 +118,7 @@
 
 #+liber-documentation
 (setf (documentation 'app-chooser-widget 'type)
- "@version{2023-8-29}
+ "@version{2024-2-22}
   @begin{short}
     The @class{gtk:app-chooser-widget} widget is a widget for selecting
     applications.
@@ -128,13 +128,16 @@
   part of a larger widget if you have special needs.
 
   The @class{gtk:app-chooser-widget} widget offers detailed control over what
-  applications are shown, using the @code{show-default}, @code{show-recommended},
-  @code{show-fallback}, @code{show-other} and @code{show-all} properties. See
+  applications are shown, using the @slot[gtk:app-chooser-widget]{show-default},
+  @slot[gtk:app-chooser-widget]{show-recommended},
+  @slot[gtk:app-chooser-widget]{show-fallback},
+  @slot[gtk:app-chooser-widget]{show-other} and
+  @slot[gtk:app-chooser-widget]{show-all} properties. See
   the @class{gtk:app-chooser} documentation for more information about these
   groups of applications.
 
-  To keep track of the selected application, use the \"application-selected\"
-  and \"application-activated\" signals.
+  To keep track of the selected application, use the
+  @code{\"application-selected\"} and @code{\"application-activated\"} signals.
   @begin[CSS nodes]{dictionary}
     The @class{gtk:app-chooser-widget} implementation has a single CSS node with
     name @code{appchooser}.
@@ -182,22 +185,21 @@ lambda (widget application)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- app-chooser-widget-default-text ----------------------------------------
+;;; --- gtk:app-chooser-widget-default-text ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-text"
                                                'app-chooser-widget) t)
  "The @code{default-text} property of type @code{:string} (Read / Write) @br{}
   Determines the text that appears in the widget when there are no applications
-  for the given content type. See also the
-  @fun{gtk:app-chooser-widget-default-text} function. @br{}
+  for the given content type. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'app-chooser-widget-default-text)
       "Accessor"
       (documentation 'app-chooser-widget-default-text 'function)
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @syntax[]{(gtk:app-chooser-widget-default-text object) => text}
   @syntax[]{(setf (gtk:app-chooser-widget-default-text object) text)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -206,7 +208,7 @@ lambda (widget application)    :run-first
     Accessor of the @slot[gtk:app-chooser-widget]{default-text} slot of the
     @class{gtk:app-chooser-widget} class.
   @end{short}
-  The @fun{gtk:app-chooser-widger-default-text} function returns the text that
+  The @fun{gtk:app-chooser-widget-default-text} function returns the text that
   is shown if there are not applications that can handle the content type. The
   @setf{gtk:app-chooser-widget-default-text} function sets the text that is
   shown if there are not applications that can handle the content type.
@@ -215,7 +217,7 @@ lambda (widget application)    :run-first
   @end{dictionary}
   @see-class{gtk:app-chooser-widget}")
 
-;;; --- app-chooser-widget-show-all --------------------------------------------
+;;; --- gtk:app-chooser-widget-show-all ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-all"
@@ -231,7 +233,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-all)
       "Accessor"
       (documentation 'app-chooser-widget-show-all 'function)
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @syntax[]{(gtk:app-chooser-widget-show-all object) => setting}
   @syntax[]{(setf (gtk:app-chooser-widget-show-all object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -250,7 +252,7 @@ lambda (widget application)    :run-first
   @end{dictionary}
   @see-class{gtk:app-chooser-widget}")
 
-;;; --- app-chooser-widget-show-default ----------------------------------------
+;;; --- gtk:app-chooser-widget-show-default ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-default"
@@ -266,7 +268,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-default)
       "Accessor"
       (documentation 'app-chooser-widget-show-default 'function)
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @syntax[]{(gtk:app-chooser-widget-show-default object) => setting}
   @syntax[]{(setf (gtk:app-chooser-widget-show-default object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -285,7 +287,7 @@ lambda (widget application)    :run-first
   @end{dictionary}
   @see-class{gtk:app-chooser-widget}")
 
-;;; --- app-chooser-widget-show-fallback ---------------------------------------
+;;; --- gtk:app-chooser-widget-show-fallback -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-fallback"
@@ -301,7 +303,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-fallback)
       "Accessor"
       (documentation 'app-chooser-widget-show-fallback 'function)
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @syntax[]{(gtk:app-chooser-widget-show-fallback object) => setting}
   @syntax[]{(setf (gtk:app-chooser-widget-show-fallback object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -321,7 +323,7 @@ lambda (widget application)    :run-first
   @end{dictionary}
   @see-class{gtk:app-chooser-widget}")
 
-;;; --- app-chooser-widget-show-other ------------------------------------------
+;;; --- gtk:app-chooser-widget-show-other --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-other"
@@ -336,7 +338,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-other)
       "Accessor"
       (documentation 'app-chooser-widget-show-other 'function)
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @syntax[]{(gtk:app-chooser-widget-show-other object) => setting}
   @syntax[]{(setf (gtk:app-chooser-widget-show-other object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -356,7 +358,7 @@ lambda (widget application)    :run-first
   @end{dictionary}
   @see-class{gtk:app-chooser-widget}")
 
-;;; --- app-chooser-widget-show-recommended ------------------------------------
+;;; --- gtk:app-chooser-widget-show-recommended --------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-recommended"
@@ -372,7 +374,7 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-recommended)
       "Accessor"
       (documentation 'app-chooser-widget-show-recommended 'function)
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @syntax[]{(gtk:app-chooser-widget-show-recommended object) => setting}
   @syntax[]{(setf (gtk:app-chooser-widget-show-recommended object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
@@ -400,10 +402,10 @@ lambda (widget application)    :run-first
 
 (defun app-chooser-widget-new (content-type)
  #+liber-documentation
- "@version{#2020-5-21}
+ "@version{2024-2-22}
   @argument[content-type]{a string with the content type to show applications
     for}
-  @return{A newly created @class{gtk:app-chooser-widget} widget.}
+  @return{The newly created @class{gtk:app-chooser-widget} widget.}
   @begin{short}
     Creates a new application chooser widget for applications that can
     handle content of the given type.

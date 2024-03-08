@@ -64,11 +64,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     heading
-;;;     modal
-;;;     show-default-item
-;;;     show-dialog-item
-
 (test gtk-app-chooser-button-properties
   (let ((button (make-instance 'gtk:app-chooser-button)))
     (is-false (gtk:app-chooser-button-heading button))
@@ -95,4 +90,4 @@
 ;;;     gtk_app_chooser_button_append_separator
 ;;;     gtk_app_chooser_button_set_active_custom_item
 
-;;; --- 2023-10-16 -------------------------------------------------------------
+;;; 2024-2-22
