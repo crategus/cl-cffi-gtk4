@@ -1275,7 +1275,7 @@ lambda (label step count extend)    :action
   @class{pango:layout} object, e.g. to take some action if some part of the
   label is clicked. Remember when using the @class{pango:layout} functions you
   need to convert to and from pixels using the @fun{pango:pixels} function or
-  the @var{+pango-scale+} constant.
+  the @var{pango:+scale+} constant.
   @begin[Example]{dictionary}
     @begin{pre}
 (gtk:label-layout-offsets (make-instance 'gtk:label))
@@ -1288,7 +1288,7 @@ lambda (label step count extend)    :action
   @end{dictionary}
   @see-class{gtk:label}
   @see-class{pango:layout}
-  @see-variable{+pango-scale+}
+  @see-variable{pango:+scale+}
   @see-function{pango:pixels}"
   (cffi:with-foreign-objects ((x :int) (y :int))
     (%label-get-layout-offsets label x y)

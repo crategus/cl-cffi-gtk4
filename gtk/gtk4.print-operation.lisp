@@ -509,12 +509,12 @@ lambda (operation context page-nr)    :run-last
     (setf (pango:layout-font-description layout)
           (pango:font-description-from-string \"sans 14\"))
     (setf (pango:layout-text layout) \"Title\")
-    (setf (pango:layout-width layout) (* width +pango-scale+))
+    (setf (pango:layout-width layout) (* width pango:+scale+))
     (setf (pango:layout-alignment layout) :center)
     ;; Get the height of the text
     (multiple-value-bind (width height)
         (pango:layout-size layout)
-      (setf text-height (/ height +pango-scale+)))
+      (setf text-height (/ height pango:+scale+)))
     ;; Set color to black and center the text in header
     (cairo-set-source-rgb cr 0.0 0.0 0.0)
     (cairo-move-to cr 0 (floor (/ (- *header-height* text-height) 2)))
