@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -140,14 +140,13 @@
 (setf (liber:alias-for-symbol 'tree-model-flags)
       "GFlags"
       (liber:symbol-documentation 'tree-model-flags)
- "@version{#2020-6-8}
+ "@version{2024-2-21}
   @begin{short}
-    These flags indicate various properties of a @class{gtk:tree-model}.
+    These flags indicate various properties of a @class{gtk:tree-model} object.
   @end{short}
-
   They are returned by the @fun{gtk:tree-model-flags} function, and must be
-  static for the lifetime of the object. A more complete description of
-  @code{:iters-persist} can be found in the overview of this section.
+  static for the lifetime of the object. A more complete description of the
+  @code{:iters-persist} value can be found in the overview of this section.
   @begin{pre}
 (gobject:define-g-flags \"GtkTreeModelFlags\" tree-model-flags
   (:export t

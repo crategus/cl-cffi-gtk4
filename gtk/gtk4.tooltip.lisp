@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -65,7 +65,7 @@
   nil)
 
 (setf (documentation 'tooltip 'type)
- "@version{2023-8-29}
+ "@version{2024-2-21}
   @short{Add tips to your widgets.}
   Basic tooltips can be realized simply by using the
   @fun{gtk:widget-tooltip-text} or @fun{gtk:widget-tooltip-markup} functions
@@ -81,8 +81,8 @@
       needed to determine when and where to show a tooltip.
     @end{item}
     @begin{item}
-      Connect to the \"query-tooltip\" signal. The signal will be emitted when
-      a tooltip is supposed to be shown. One of the arguments passed to the
+      Connect to the @code{\"query-tooltip\"} signal. The signal will be emitted
+      when a tooltip is supposed to be shown. One of the arguments passed to the
       signal handler is a @class{gtk:tooltip} object. This is the object that
       we are about to display as a tooltip, and can be manipulated in your
       callback function using functions like the @fun{gtk:tooltip-set-icon}
@@ -90,8 +90,9 @@
       setting an image from a stock icon, or even putting in a custom widget.
     @end{item}
     @begin{item}
-      Return @em{true} from your \"query-tooltip\" handler. This causes the
-      tooltip to be show. If you return @em{false}, it will not be shown.
+      Return @em{true} from your @code{\"query-tooltip\"} signal handler. This
+      causes the tooltip to be show. If you return @em{false}, it will not be
+      shown.
     @end{item}
   @end{itemize}
   @see-function{gtk:widget-tooltip-text}
@@ -104,14 +105,14 @@
 
 (cffi:defcfun ("gtk_tooltip_set_markup" tooltip-set-markup) :void
  #+liber-documentation
- "@version{#2020-6-3}
+ "@version{#2024-2-21}
   @argument[tooltip]{a @class{gtk:tooltip} object}
-  @argument[markup]{a markup string, see Pango markup format, or @code{nil}}
+  @argument[markup]{a markup string, or @code{nil}}
   @begin{short}
     Sets the text of the tooltip to be @arg{markup}, which is marked up
     with the Pango text markup language.
   @end{short}
-  If @arg{markup} is @code{nil}, the label will be hidden.
+  If the @arg{markup} argument is @code{nil}, the label will be hidden.
   @see-class{gtk:tooltip}
   @see-function{gtk:tooltip-set-text}"
   (tooltip (g:object tooltip))
@@ -125,14 +126,14 @@
 
 (cffi:defcfun ("gtk_tooltip_set_text" tooltip-set-text) :void
  #+liber-documentation
- "@version{#2020-6-3}
+ "@version{#2024-2-21}
   @argument[tooltip]{a @class{gtk:tooltip} object}
-  @argument[text]{a text string or @code{nil}}
+  @argument[text]{a text string, or @code{nil}}
   @begin{short}
     Sets the text of the tooltip to be @arg{text}.
   @end{short}
-  If @arg{text} is @code{nil}, the label will be hidden. See also the
-  @fun{gtk:tooltip-set-markup} function.
+  If the @arg{text} argument is @code{nil}, the label will be hidden. See also
+  the @fun{gtk:tooltip-set-markup} function.
   @see-class{gtk:tooltip}
   @see-function{gtk:tooltip-set-markup}"
   (tooltip (g:object tooltip))

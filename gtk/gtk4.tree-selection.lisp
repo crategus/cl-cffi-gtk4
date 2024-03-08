@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -340,15 +340,15 @@ lambda (model path iter)
   (selection (g:object tree-selection)))
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_selection_get_tree_view -> tree-selection-tree-view
+;;; gtk_tree_selection_get_tree_view ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_selection_get_tree_view" tree-selection-tree-view)
     (g:object tree-view)
  #+liber-documentation
- "@version{#2021-1-23}
+ "@version{2024-2-22}
   @argument[selection]{a @class{gtk:tree-selection} object}
-  @return{A @class{gtk:tree-view} object.}
+  @return{The @class{gtk:tree-view} object.}
   @begin{short}
     Returns the tree view associated with @arg{selection}.
   @end{short}
@@ -356,7 +356,8 @@ lambda (model path iter)
     The @class{gtk:tree-selection} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:tree-selection}"
+  @see-class{gtk:tree-selection}
+  @see-class{gtk:tree-view}"
   (selection (g:object tree-selection)))
 
 (export 'tree-selection-tree-view)

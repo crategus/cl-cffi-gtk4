@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'color-chooser-widget 'type)
- "@version{#2021-1-23}
+ "@version{2024-2-22}
   @begin{short}
     The @class{gtk:color-chooser-widget} widget lets the user select a color.
   @end{short}
@@ -103,24 +103,6 @@
   @begin[CSS nodes]{dictionary}
     The @class{gtk:color-chooser-widget} class has a single CSS node with name
     @code{colorchooser}.
-  @end{dictionary}
-  @begin[Action details]{dictionary}
-    @subheading{The \"color.customize\" action}
-      Activates the color editor for the given color.
-      @begin[code]{table}
-        @entry[red]{the red value, between 0 and 1}
-        @entry[green]{the green value, between 0 and 1}
-        @entry[blue]{the blue value, between 0 and 1}
-        @entry[alpha]{the alpha value, between 0 and 1}
-      @end{table}
-    @subheading{The \"color.select\" action}
-      Emits the \"color-activated\" signal for the given color.
-      @begin[code]{table}
-        @entry[red]{the red value, between 0 and 1}
-        @entry[green]{the green value, between 0 and 1}
-        @entry[blue]{the blue value, between 0 and 1}
-        @entry[alpha]{the alpha value, between 0 and 1}
-      @end{table}
   @end{dictionary}
   @begin[Example]{dictionary}
     This example shows a color chooser widget in a window. The selected color
@@ -142,6 +124,8 @@
     @end{pre}
   @end{dictionary}
   @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser-widget} implementation is deprecated
+    since 4.10.
   @end{dictionary}
   @see-constructor{gtk:color-chooser-widget-new}
   @see-slot{gtk:color-chooser-widget-show-editor}
@@ -164,7 +148,7 @@
 (setf (liber:alias-for-function 'color-chooser-widget-show-editor)
       "Accessor"
       (documentation 'color-chooser-widget-show-editor 'function)
- "@version{#2020-5-23}
+ "@version{2024-2-22}
   @syntax[]{(gtk:color-chooser-widget-show-editor object) => show-editor}
   @syntax[]{(setf (gtk:color-chooser-widget-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-chooser-widget} widget}
@@ -173,10 +157,13 @@
     Accessor of the @slot[gtk:color-chooser-widget]{show-editor} slot of the
     @class{gtk:color-chooser-widget} class.
   @end{short}
-
-  The @code{show-editor} property is @em{true} when the color chooser is
-  showing the single-color editor. It can be set to switch the color chooser
-  into single-color editing mode.
+  The @slot[gtk:color-chooser-widget]{show-editor} property is @em{true} when
+  the color chooser is showing the single-color editor. It can be set to switch
+  the color chooser into single-color editing mode.
+  @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser-widget} implementation is deprecated
+    since 4.10.
+  @end{dictionary}
   @see-class{gtk:color-chooser-widget}")
 
 ;;; ----------------------------------------------------------------------------
@@ -187,9 +174,13 @@
 
 (defun color-chooser-widget-new ()
  #+liber-documentation
- "@version{#2020-5-23}
-  @return{A new @class{gtk:color-chooser-widget} widget.}
+ "@version{2024-2-22}
+  @return{The new @class{gtk:color-chooser-widget} widget.}
   @short{Creates a new color chooser widget.}
+  @begin[Warning]{dictionary}
+    The @class{gtk:color-chooser-widget} implementation is deprecated
+    since 4.10.
+  @end{dictionary}
   @see-class{gtk:color-chooser-widget}"
   (make-instance 'color-chooser-widget))
 

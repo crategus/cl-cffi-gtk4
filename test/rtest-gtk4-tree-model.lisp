@@ -29,12 +29,42 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GtkTreeModelFlags
+
+(test gtk-tree-model-flags-flags
+  ;; Check the type
+  (is (g:type-is-flags "GtkTreeModelFlags"))
+  ;; Check the registered name
+  (is (eq 'gtk:tree-model-flags
+          (glib:symbol-for-gtype "GtkTreeModelFlags")))
+  ;; Check the type initializer
+  (is (eq (g:gtype "GtkTreeModelFlags")
+          (g:gtype (cffi:foreign-funcall "gtk_tree_model_flags_get_type"
+                                         :size))))
+  ;; Check the names
+  (is (equal '("GTK_TREE_MODEL_ITERS_PERSIST" "GTK_TREE_MODEL_LIST_ONLY")
+             (list-flags-item-name "GtkTreeModelFlags")))
+  ;; Check the values
+  (is (equal '(1 2)
+             (list-flags-item-value "GtkTreeModelFlags")))
+  ;; Check the nick names
+  (is (equal '("iters-persist" "list-only")
+             (list-flags-item-nick "GtkTreeModelFlags")))
+  ;; Check the flags definition
+  (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkTreeModelFlags" GTK-TREE-MODEL-FLAGS
+                                      (:EXPORT T
+                                       :TYPE-INITIALIZER
+                                       "gtk_tree_model_flags_get_type")
+                                      (:ITERS-PERSIST 1)
+                                      (:LIST-ONLY 2))
+             (gobject:get-g-type-definition "GtkTreeModelFlags"))))
+
 ;;;     GtkTreeModel
 ;;;     GtkTreeIter
 ;;;     GtkTreePath
 ;;;     GtkTreeRowReference
 ;;;     GtkTreeModelIface
-;;;     GtkTreeModelFlags
+
 
 ;;; --- Functions --------------------------------------------------------------
 
