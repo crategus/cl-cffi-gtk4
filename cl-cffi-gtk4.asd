@@ -275,11 +275,11 @@
      ;; Tree, List and Icon Grid Widgets
      (:file "gtk4.tree-model")
      (:file "gtk4.tree-selection")
+     (:file "gtk4.cell-layout")
      (:file "gtk4.tree-view-column")
      (:file "gtk4.tree-view")
      (:file "gtk4.tree-view-dnd")
 
-     (:file "gtk4.cell-layout")
      (:file "gtk4.cell-view")
      (:file "gtk4.icon-view")
 
@@ -519,11 +519,11 @@
 
      ;; Surfaces, Toplevels, Popups
      (:file "rtest-gdk4-surface")
-;    (:file "rtest-gdk4-toplevel-layout")
+     (:file "rtest-gdk4-toplevel-layout")
      (:file "rtest-gdk4-toplevel")
-;    (:file "rtest-gdk4-toplevel-size")
+     (:file "rtest-gdk4-toplevel-size")
      (:file "rtest-gdk4-popup")
-;    (:file "rtest-gdk4-popup-layout")
+     (:file "rtest-gdk4-popup-layout")
 
      ;; Daw contexts
 ;    (:file "rtest-gdk4-draw-context")
@@ -612,7 +612,7 @@
 ;    gtk4.column-view-column.lisp
      (:file "rtest-gtk4-column-view-cell"        :if-feature :gtk-4-12)
      (:file "rtest-gtk4-column-view-row"         :if-feature :gtk-4-12)
-;    gtk4.drop-down.lisp
+     (:file "rtest-gtk4-drop-down")
 
      ;; GTK Core
      (:file "rtest-gtk4-enumerations")
@@ -722,32 +722,32 @@
      ;; Tree, List and Icon Grid Widgets
      (:file "rtest-gtk4-tree-model")
      (:file "rtest-gtk4-tree-model-subclassing")
-;    (:file "gtk4.tree-selection")
-;    (:file "gtk4.tree-view-column")
+     (:file "rtest-gtk4-tree-selection")
+     (:file "rtest-gtk4-tree-view-column")
 ;    (:file "gtk4.tree-view")
 ;    (:file "gtk4.tree-view-dnd")
 
      (:file "rtest-gtk4-cell-layout")
 ;    (:file "gtk4.cell-view")
-;    (:file "gtk4.icon-view")
+     (:file "rtest-gtk4-icon-view")
 
 ;    (:file "gtk4.tree-sortable")
 ;    (:file "gtk4.tree-model-sort")
 ;    (:file "gtk4.tree-model-filter")
 
      (:file "rtest-gtk4-cell-renderer")
-;    (:file "gtk4.cell-renderer-text")
-;    (:file "gtk4.cell-renderer-accel")
-;    (:file "gtk4.cell-renderer-combo")
+     (:file "rtest-gtk4-cell-renderer-text")
+     (:file "rtest-gtk4-cell-renderer-accel")
+     (:file "rtest-gtk4-cell-renderer-combo")
 ;    (:file "gtk4.cell-renderer-pixbuf")
-;    (:file "gtk4.cell-renderer-progress")
-;    (:file "gtk4.cell-renderer-spin")
-;    (:file "gtk4.cell-renderer-toggle")
-;    (:file "gtk4.cell-renderer-spinner")
+     (:file "rtest-gtk4-cell-renderer-progress")
+     (:file "rtest-gtk4-cell-renderer-spin")
+     (:file "rtest-gtk4-cell-renderer-toggle")
+     (:file "rtest-gtk4-cell-renderer-spinner")
 
      (:file "rtest-gtk4-cell-area")
-;    (:file "gtk4.cell-area-box")
-;    (:file "gtk4.cell-area-context")
+     (:file "rtest-gtk4-cell-area-box")
+     (:file "rtest-gtk4-cell-area-context")
 
 ;    (:file "gtk4.list-store")
 ;    (:file "gtk4.tree-store")
@@ -771,12 +771,11 @@
      (:file "rtest-gtk4-popover")
      (:file "rtest-gtk4-popover-menu")
 ;    (:file "gtk4.popover-menu-bar")
-;    (:file "gtk4.drop-down")
 
      ;; Selector Widgets and Dialogs
      (:file "rtest-gtk4-color-chooser")
-;    (:file "rtest-gtk4-color-button")
-;    (:file "rtest-gtk4-color-chooser-widget")
+;     (:file "rtest-gtk4-color-button")
+     (:file "rtest-gtk4-color-chooser-widget")
 ;    (:file "rtest-gtk4-color-chooser-dialog")
 
      (:file "rtest-gtk4-color-dialog"            :if-feature :gtk-4-10)
@@ -827,14 +826,14 @@
      ;; Printing
      (:file "rtest-gtk4-print-operation-preview")
      (:file "rtest-gtk4-print-operation")
-;    (:file "gtk4.print-context")
+     (:file "rtest-gtk4-print-context")
      (:file "rtest-gtk4-paper-size")
-;    (:file "gtk4.print-settings")
+     (:file "rtest-gtk4-print-settings")
      (:file "rtest-gtk4-page-setup")
      (:file "rtest-gtk4-page-setup-unix-dialog"  :if-feature (:not :windows))
      (:file "rtest-gtk4-print-unix-dialog"       :if-feature (:not :windows))
      (:file "rtest-gtk4-print-job"               :if-feature (:not :windows))
-;    (:file "gtk4.printer"                       :if-feature (:not :windows)))
+     (:file "rtest-gtk4-printer"                 :if-feature (:not :windows))
 
      ;; Shortcuts Widgets
      (:file "rtest-gtk4-shortcuts-window")

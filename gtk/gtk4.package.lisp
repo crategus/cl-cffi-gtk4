@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -3420,6 +3420,7 @@ GtkCellRenderer         GtkWidget
     @begin[GtkGestureStylus]{subsection}
       Gesture for stylus input.
       @about-class{gesture-stylus}
+      @about-generic{gesture-stylus-stylus-only}
       @about-function{gesture-stylus-new}
       @about-function{gesture-stylus-axis}
       @about-function{gesture-stylus-axes}
@@ -3518,7 +3519,6 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkSizeGroup]{subsection}
       Grouping widgets so they request the same size.
-      @about-symbol{size-group-mode}
       @about-class{size-group}
       @about-generic{size-group-mode}
       @about-function{size-group-new}
@@ -3665,6 +3665,7 @@ GtkCellRenderer         GtkWidget
     @begin[GtkSettings]{subsection}
       Sharing settings between applications.
       @about-symbol{settings-value}
+      @about-symbol{system-setting}
       @about-class{settings}
       @about-generic{settings-gtk-alternative-button-order}
       @about-generic{settings-gtk-alternative-sort-arrows}
@@ -3721,14 +3722,17 @@ GtkCellRenderer         GtkWidget
       @about-function{settings-reset-property}
     @end{subsection}
     @begin[Standard Enumerations]{subsection}
-      Public enumerated types used throughout GTK.
+      Enumerations and flags used throughout GTK.
       @about-symbol{align}
       @about-symbol{baseline-position}
       @about-symbol{delete-type}
       @about-symbol{direction-type}
       @about-symbol{icon-size}
+      @about-symbol{response-type}
+      @about-symbol{sensitivity-type}
       @about-symbol{text-direction}
       @about-symbol{justification}
+      @about-symbol{message-type}
       @about-symbol{movement-step}
       @about-symbol{natural-wrap-mode}
       @about-symbol{scroll-step}
@@ -3740,28 +3744,18 @@ GtkCellRenderer         GtkWidget
       @about-symbol{selection-mode}
       @about-symbol{wrap-mode}
       @about-symbol{sort-type}
-      @about-symbol{print-pages}
-      @about-symbol{page-set}
-      @about-symbol{number-up-layout}
       @about-symbol{ordering}
-      @about-symbol{page-orientation}
-      @about-symbol{print-quality}
-      @about-symbol{print-duplex}
-      @about-symbol{unit}
-      @about-symbol{tree-view-grid-lines}
+      @about-symbol{size-group-mode}
       @about-symbol{size-request-mode}
       @about-symbol{state-flags}
-      @about-symbol{level-bar-mode}
+      @about-symbol{border-style}
       @about-symbol{input-purpose}
       @about-symbol{input-hints}
-      @about-symbol{event-sequence-state}
-      @about-symbol{pan-direction}
       @about-symbol{pick-flags}
       @about-symbol{constraint-relation}
       @about-symbol{constraint-strength}
       @about-symbol{constraint-attribute}
       @about-symbol{constraint-vfl-parser-error}
-      @about-symbol{system-setting}
       @about-symbol{symbolic-color}
       @about-symbol{accessible-role}
       @about-symbol{accessible-state}
@@ -3861,7 +3855,6 @@ GtkCellRenderer         GtkWidget
     @begin[GtkDialog]{subsection}
       Create popup windows.
       @about-symbol{dialog-flags}
-      @about-symbol{response-type}
       @about-class{dialog}
       @about-generic{dialog-use-header-bar}
       @about-function{dialog-new}
@@ -3879,7 +3872,6 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkMessageDialog]{subsection}
       A convenient message window.
-      @about-symbol{message-type}
       @about-symbol{buttons-type}
       @about-class{message-dialog}
       @about-generic{message-dialog-buttons}
@@ -4060,7 +4052,7 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-model-rows-reordered-with-length}
     @end{subsection}
     @begin[GtkTreeSelection]{subsection}
-      The selection object for the @class{tree-view} widget.
+      The selection object for the @class{gtk:tree-view} widget.
       @about-class{tree-selection}
       @about-generic{tree-selection-mode}
       @about-symbol{tree-selection-func}
@@ -4085,7 +4077,7 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-selection-unselect-range}
     @end{subsection}
     @begin[GtkTreeViewColumn]{subsection}
-      A visible column in a @class{tree-view} widget.
+      A visible column in a @class{gtk:tree-view} widget.
       @about-symbol{tree-view-column-sizing}
       @about-class{tree-view-column}
       @about-generic{tree-view-column-alignment}
@@ -4650,7 +4642,6 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkComboBox]{subsection}
       A widget used to choose from a list of items.
-      @about-symbol{sensitivity-type}
       @about-class{combo-box}
       @about-generic{combo-box-active}
       @about-generic{combo-box-active-id}
@@ -4865,7 +4856,6 @@ GtkCellRenderer         GtkWidget
       @about-function{style-context-has-class}
       @about-function{style-context-scale}
       @about-function{style-context-to-string}
-      @about-symbol{border-style}
       @about-struct{border}
       @about-function{border-left}
       @about-function{border-right}

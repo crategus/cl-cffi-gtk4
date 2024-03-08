@@ -874,8 +874,8 @@
       with Pango functions like the @fun{pango:layout-text} function and get its
       size with the @fun{pango:layout-size} function. Note that Pango uses a
       fixed point system internally, so converting between Pango units and
-      pixels using the @var{pango:+pango-scale+} value or the
-      @fun{pango:pixels} function.
+      pixels using the @var{pango:+scale+} value or the @fun{pango:pixels}
+      function.
 
       Rendering a Pango layout is done most simply with the
       @fun{pango:cairo-show-layout} function. You can also draw pieces of the
