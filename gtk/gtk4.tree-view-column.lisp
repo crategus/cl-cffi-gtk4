@@ -824,9 +824,9 @@ lambda (column)    :run-last
     Accessor of the @slot[gtk:tree-view-column]{title} slot of the
     @class{gtk:tree-view-column} class.
   @end{short}
-  The @fun{gtk:tree-view-column-title} function returns the title of the the
-  tree view column. The @setf{gtk:tree-view-column-spacing} function sets the
-  title. If a custom widget has been set, then this value is ignored.
+  The @fun{gtk:tree-view-column-title} function returns the title of the tree
+  view column. The @setf{gtk:tree-view-column-title} function sets the title.
+  If a custom widget has been set, then this value is ignored.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view-column} implementation is deprecated since 4.10.
     Please do not use it in newly written code.

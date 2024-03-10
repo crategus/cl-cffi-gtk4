@@ -724,7 +724,7 @@
      (:file "rtest-gtk4-tree-model-subclassing")
      (:file "rtest-gtk4-tree-selection")
      (:file "rtest-gtk4-tree-view-column")
-;    (:file "gtk4.tree-view")
+     (:file "rtest-gtk4-tree-view")
 ;    (:file "gtk4.tree-view-dnd")
 
      (:file "rtest-gtk4-cell-layout")
