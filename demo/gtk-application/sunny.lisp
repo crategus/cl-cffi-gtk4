@@ -1,6 +1,6 @@
-;;;; Example Sunny - 2023-8-6
-
-;; FIXME: The keyboard accelerators do not work as expected. What is wrong?
+;;;; Example Sunny
+;;;;
+;;;; 2024-3-25
 
 (in-package :gtk4-application)
 
@@ -39,8 +39,8 @@
     (do ((line (read-line stream nil)
                (read-line stream nil)))
         ((null line))
-      (gtk:text-buffer-insert buffer line)
-      (gtk:text-buffer-insert buffer (format nil "~%")))))
+      (gtk:text-buffer-insert buffer :cursor line)
+      (gtk:text-buffer-insert buffer :cursor (format nil "~%")))))
 
 (defclass sunny (gtk:application)
   ()
@@ -129,11 +129,15 @@
           ;; Set the application menu
           (setf (gtk:application-menubar application)
                 (gtk:builder-object builder "menubar"))
-          ;; Set a second accelarator by hand
-          ;; FIXME: Both accelarators for "new" and "quit" does not work
-          ;; What is wrong?
-          (setf (gtk:application-accels-for-action application "app::new")
-                '("<Control>n"))
+          ;; Set accelerators
+          (setf (gtk:application-accels-for-action application "app.new")
+                "<Control>n")
+          ;; TODO: The accelerator from the UI definition does not work.
+          ;; but with the following definition it does
+          (setf (gtk:application-accels-for-action application "app.quit")
+                "<Control>q")
+          (setf (gtk:application-accels-for-action application "app.about")
+                "F1")
           )))
     ;; Connect signal "open" to the application
     (g:signal-connect app "open"
