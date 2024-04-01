@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -150,7 +150,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- tree-list-row-children -------------------------------------------------
+;;; --- gtk:tree-list-row-children ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "children" 'tree-list-row) t)
@@ -161,16 +161,16 @@
 (setf (liber:alias-for-function 'tree-list-row-children)
       "Accessor"
       (documentation 'tree-list-row-children 'function)
- "@version{#2023-9-25}
-  @syntax[]{(gtk:tree-list-row-children object) => autoexpand}
+ "@version{#2024-3-30}
+  @syntax[]{(gtk:tree-list-row-children object) => children}
   @argument[object]{a @class{gtk:tree-list-row} object}
   @argument[children]{a @class{g:list-model} object containing the children}
   @begin{short}
     Accessor of the @slot[gtk:tree-list-row]{children} slot of the
     @class{gtk:tree-list-row} class.
   @end{short}
-  If the row is expanded, the @fun{gtk:tree-list-row-children} function gets the
-  model holding the children of @arg{model}. This model is the model created by
+  If the row is expanded, the @fun{gtk:tree-list-row-children} function gets
+  the model holding the children of @arg{model}. This is the model created by
   the @symbol{gtk:tree-list-model-create-model-func} callback function and
   contains the original items, no matter what value the
   @slot[gtk:tree-list-model]{passthrough} property is set to.
@@ -502,30 +502,28 @@
 (cffi:defcallback tree-list-model-create-model-func (g:object g:list-model)
     ((item :pointer)
      (data :pointer))
-  (let ((ptr (glib:get-stable-pointer-value data)))
-    (funcall ptr item)))
+  (let ((object (cffi:convert-from-foreign item 'g:object))
+        (func (glib:get-stable-pointer-value data)))
+    (funcall func object)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-list-model-create-model-func)
       "Callback"
       (liber:symbol-documentation 'tree-list-model-create-model-func)
- "@version{#2023-9-24}
+ "@version{2024-3-30}
+  @syntax{lambda (object) => result}
+  @argument[object]{a @class{g:object} instance with the item that is being
+    expanded}
+  @argument[result]{a @class{g:list-model} object tracking the children of
+    @arg{object} or @code{nil} if @arg{object} can never have children}
   @begin{short}
     Prototype of the function called to create new child models when the
     @fun{gtk:tree-list-row-expanded} function is called.
   @end{short}
-  This function can return @code{nil} to indicate that @arg{item} is guaranteed
-  to be a leaf node and will never have children. If it does not have children
-  but may get children later, it should return an empty model that is filled
-  once children arrive.
-  @begin{pre}
-lambda (item)
-  @end{pre}
-  @begin[code]{table}
-    @entry[item]{A pointer to the item that is being expanded.}
-    @entry[Returns]{The @class{g:list-model} object tracking the children of
-      @arg{item} or @code{nil} if @arg{item} can never have children.}
-  @end{table}
+  This function can return @code{nil} to indicate that @arg{object} is
+  guaranteed to be a leaf node and will never have children. If it does not have
+  children but may get children later, it should return an empty model that is
+  filled once children arrive.
   @see-class{gtk:tree-list-model}
   @see-class{g:list-model}
   @see-function{gtk:tree-list-model-new}
@@ -548,7 +546,7 @@ lambda (item)
 
 (defun tree-list-model-new (root passthrough autoexpand func)
  #+liber-documentation
- "@version{#2023-9-24}
+ "@version{2024-3-30}
   @argument[root]{a @class{g:list-model} object to use as root}
   @argument[passthrough]{@em{true} to pass through items from the models}
   @argument[autoexpand]{@em{true} to set the
