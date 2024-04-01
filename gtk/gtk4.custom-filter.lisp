@@ -75,29 +75,29 @@
 ;;; GtkCustomFilterFunc ()
 ;;; ----------------------------------------------------------------------------
 
+;; TODO: Improve the documentation. Do we have a GTKTreeListRow?
+
 (cffi:defcallback custom-filter-func :boolean
     ((item :pointer)
      (data :pointer))
-  (let ((ptr (glib:get-stable-pointer-value data)))
-    (funcall ptr item)))
+  (let ((func (glib:get-stable-pointer-value data))
+        ;; Convert the pointer to a GObject
+        (object (cffi:convert-from-foreign item 'g:object)))
+    (funcall func object)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'custom-filter-func)
       "Callback"
       (liber:symbol-documentation 'custom-filter-func)
- "@version{#2023-9-6}
+ "@version{2024-3-28}
+  @syntax{lambda (item) => result}
+  @argument[object]{a @class{g:object} instance with the item to be matched}
+  @argument[result]{@em{true} to keep the item around}
   @begin{short}
     User function that is called to determine if the item should be matched.
   @end{short}
   If the filter matches the item, this function must return @em{true}. If the
   item should be filtered out, @em{false} must be returned.
-  @begin{pre}
-lambda (item)
-  @end{pre}
-  @begin[code]{table}
-    @entry[item]{A pointer to the item to be matched.}
-    @entry[Return]{@em{True} to keep the item around.}
-  @end{table}
   @see-class{gtk:custom-filter}")
 
 (export 'custom-filter-func)
@@ -106,30 +106,35 @@ lambda (item)
 ;;; gtk_custom_filter_new ()
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_custom_filter_new" %custom-filter-new) :void
+(cffi:defcfun ("gtk_custom_filter_new" %custom-filter-new)
+    (g:object custom-filter)
   (func :pointer)
   (data :pointer)
   (notify :pointer))
 
 (defun custom-filter-new (func)
  #+liber-documentation
- "@version{#2023-9-6}
+ "@version{2024-3-29}
   @argument[func]{a @symbol{gtk:custom-filter-func} callback function to filter
     items}
-  @return{A new @class{gtk:custom-filter} object}
+  @return{The new @class{gtk:custom-filter} object.}
   @begin{short}
     Creates a new custom filter using the given @arg{func} callback function to
     filter items.
   @end{short}
-  If @arg{func} is @code{nil}, the custom filter matches all items. If the
-  custom filter function changes its filtering behavior, the
+  If the @arg{func} argument is @code{nil}, the custom filter matches all items.
+  If the custom filter function changes its filtering behavior, the
   @fun{gtk:filter-changed} function needs to be called.
   @see-class{gtk:custom-filter}
   @see-symbol{gtk:custom-filter-func}
   @see-function{gtk:filter-changed}"
-  (%custom-filter-new (cffi:callback custom-filter-func)
-                      (glib:allocate-stable-pointer func)
-                      (cffi:callback glib:stable-pointer-destroy-notify)))
+  (if func
+      (%custom-filter-new (cffi:callback custom-filter-func)
+                          (glib:allocate-stable-pointer func)
+                          (cffi:callback glib:stable-pointer-destroy-notify))
+      (%custom-filter-new (cffi:null-pointer)
+                          (cffi:null-pointer)
+                          (cffi:null-pointer))))
 
 (export 'custom-filter-new)
 
