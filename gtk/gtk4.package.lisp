@@ -275,7 +275,7 @@
     @end{subsection}
     @begin[GtkSingleSelection]{subsection}
       A selection model that allows selecting a single item.
-      @about-variable{+gtk-invalid-list-position+}
+      @about-variable{gtk:+invalid-list-position+}
       @about-class{single-selection}
       @about-generic{single-selection-autoselect}
       @about-generic{single-selection-can-unselect}
@@ -4307,8 +4307,8 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkTreeSortable]{subsection}
       The interface for sortable models used by GtkTreeView.
-      @about-variable{+gtk-tree-sortable-default-sort-column-id+}
-      @about-variable{+gtk-tree-sortable-unsorted-sort-column-id+}
+      @about-variable{+tree-sortable-default-sort-column-id+}
+      @about-variable{+tree-sortable-unsorted-sort-column-id+}
       @about-class{tree-sortable}
       @about-symbol{GtkTreeSortableIface}
       @about-symbol{tree-iter-compare-func}

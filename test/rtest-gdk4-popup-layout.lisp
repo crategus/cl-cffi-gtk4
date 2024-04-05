@@ -47,12 +47,12 @@
 ;;;     GdkPopupLayout
 
 (test gdk-popup-layout-boxed
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GdkPopupLayout") g:+g-type-boxed+))
-  ;; Check the type initializer
+  ;; Check type
+  (is (g:type-is-boxed "GdkPopupLayout"))
+  ;; Check type initializer
   (is (eq (g:gtype "GdkPopupLayout")
           (g:gtype (cffi:foreign-funcall "gdk_popup_layout_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:popup-layout
           (glib:symbol-for-gtype "GdkPopupLayout"))))
 

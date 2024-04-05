@@ -8,11 +8,14 @@
 ;;;     GdkRGBA
 
 (test gdk-rgba-boxed
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GdkRGBA") g:+g-type-boxed+))
+  ;; Check type
+  (is (g:type-is-boxed "GdkRGBA"))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkRGBA")
-          (g:gtype (cffi:foreign-funcall "gdk_rgba_get_type" :size)))))
+          (g:gtype (cffi:foreign-funcall "gdk_rgba_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gdk:rgba
+          (glib:symbol-for-gtype "GdkRGBA"))))
 
 ;;; --- Accessors --------------------------------------------------------------
 

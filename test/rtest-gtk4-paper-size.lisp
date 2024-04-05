@@ -37,9 +37,9 @@
 ;;;     GtkPaperSize
 
 (test gtk-paper-size-boxed
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GtkPaperSize") g:+g-type-boxed+))
-  ;; Check the type initializer
+  ;; Check type
+  (is (g:type-is-boxed "GtkPaperSize"))
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPaperSize")
           (g:gtype (cffi:foreign-funcall "gtk_paper_size_get_type" :size))))
   ;; Check the registered name

@@ -42,13 +42,13 @@
 
 ;;;     GtkBorder
 
-(test gtk-border-struct
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GtkBorder") g:+g-type-boxed+))
-  ;; Check the type initializer
+(test gtk-border-boxed
+  ;; Check type
+  (is (g:type-is-boxed "GtkBorder"))
+  ;; Check type initializer
   (is (eq (g:gtype "GtkBorder")
           (g:gtype (cffi:foreign-funcall "gtk_border_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:border
           (glib:symbol-for-gtype "GtkBorder"))))
 

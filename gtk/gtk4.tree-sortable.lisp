@@ -68,10 +68,10 @@
 ;;; ----------------------------------------------------------------------------
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gtk-tree-sortable-default-sort-column-id+)
+(setf (liber:alias-for-variable '+tree-sortable-default-sort-column-id+)
       "Constant")
 
-(defconstant +gtk-tree-sortable-default-sort-column-id+ -1
+(defconstant +tree-sortable-default-sort-column-id+ -1
  #+liber-documentation
  "@version{#2021-3-5}
   @variable-value{-1}
@@ -83,17 +83,17 @@
   @see-class{gtk:tree-sortable}
   @see-function{gtk:tree-sortable-sort-column-id}")
 
-(export '+gtk-tree-sortable-default-sort-column-id+)
+(export '+tree-sortable-default-sort-column-id+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GTK_TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID
 ;;; ----------------------------------------------------------------------------
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gtk-tree-sortable-unsorted-sort-column-id+)
+(setf (liber:alias-for-variable '+tree-sortable-unsorted-sort-column-id+)
       "Constant")
 
-(defconstant +gtk-tree-sortable-unsorted-sort-column-id+ -2
+(defconstant +tree-sortable-unsorted-sort-column-id+ -2
  #+liber-documentation
  "@version{#2021-3-5}
   @variable-value{-2}
@@ -105,7 +105,7 @@
   @see-class{gtk:tree-sortable}
   @see-function{gtk:tree-sortable-sort-column-id}")
 
-(export '+gtk-tree-sortable-unsorted-sort-column-id+)
+(export '+tree-sortable-unsorted-sort-column-id+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkTreeSortable
@@ -396,13 +396,13 @@
     @arg{func}.
   @end{short}
   If the current sort column ID of @arg{sortable} is
-  @var{+gtk-tree-sortable-default-sort-column-id+}, then the model will sort
+  @var{gtk:+tree-sortable-default-sort-column-id+}, then the model will sort
   using this function.
 
   If @arg{func} is @code{nil}, then there will be no default comparison
   function. This means that once the model has been sorted, it cannot go back
   to the default state. In this case, when the current sort column ID of
-  @arg{sortable} is @var{+gtk-tree-sortable-default-sort-column-id+},
+  @arg{sortable} is @var{gtk:+tree-sortable-default-sort-column-id+},
   the model will be unsorted.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-sortable} implementation is deprecated since 4.10.

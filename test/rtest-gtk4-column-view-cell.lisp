@@ -15,7 +15,7 @@
           (glib:symbol-for-gtype "GtkColumnViewCell")))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkColumnViewCell")
-          (g:gtype (cffi:foreign-funcall "gtk_column_view_cell_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_column_view_cell_get_type"
                                          :size))))
   ;; Check the parent
   (is (eq (g:gtype "GtkListItem")
@@ -33,7 +33,7 @@
   (is (equal '()
              (list-signals "GtkColumnViewCell")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColumnViewCell" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColumnViewCell"
                                              GTK-COLUMN-VIEW-CELL
                                (:SUPERCLASS GTK-LIST-ITEM :EXPORT T :INTERFACES
                                 NIL :TYPE-INITIALIZER
@@ -63,9 +63,9 @@
     (is-false (gtk:column-view-cell-child cell))
     (is-false (gtk:column-view-cell-focusable cell))
     (is-false (gtk:column-view-cell-item cell))
-    (is (= gtk:+gtk-invalid-list-position+ 
+    (is (= gtk:+invalid-list-position+
            (gtk:column-view-cell-position cell)))
     (is-false (gtk:column-view-cell-selected cell))))
-  
+
 ;;; --- 2023-11-27 -------------------------------------------------------------
 

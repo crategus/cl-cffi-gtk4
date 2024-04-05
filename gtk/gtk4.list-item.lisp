@@ -267,7 +267,7 @@
 (setf (documentation (liber:slot-documentation "position" 'list-item) t)
  "The @code{position} property of type @code{:uint} (Read) @br{}
   Position of the item. @br{}
-  Default Value: @var{+gtk-invalid-list-position+}")
+  Default Value: @var{gtk:+invalid-list-position+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-item-position)
@@ -282,10 +282,10 @@
     @class{gtk:list-item} class.
   @end{short}
   Gets the position in the model that @arg{object} currently displays. If
-  @arg{object} is unbound, the @var{+gtk-invalid-list-position+} value is
+  @arg{object} is unbound, the @var{gtk:+invalid-list-position+} value is
   returned.
   @see-class{gtk:list-item}
-  @see-variable{+gtk-invalid-list-position+}")
+  @see-variable{gtk:+invalid-list-position+}")
 
 ;;; --- list-item-selectable ---------------------------------------------------
 

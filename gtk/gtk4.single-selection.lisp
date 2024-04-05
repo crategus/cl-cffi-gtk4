@@ -80,10 +80,10 @@
 ;;; ----------------------------------------------------------------------------
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gtk-invalid-list-position+)
+(setf (liber:alias-for-variable '+invalid-list-position+)
       "Constant")
 
-(defconstant +gtk-invalid-list-position+ 4294967295
+(defconstant +invalid-list-position+ 4294967295
  #+liber-documentation
  "@version{2023-8-13}
   @variable-value{4294967295}
@@ -98,7 +98,7 @@
   it does.
   @see-class{g:list-model}")
 
-(export '+gtk-invalid-list-position+)
+(export '+invalid-list-position+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkSingleSelection
@@ -308,7 +308,7 @@
 (setf (documentation (liber:slot-documentation "selected" 'single-selection) t)
  "The @code{selected} property of type @code{:uint} (Read / Write) @br{}
   Position of the selected item. @br{}
-  Default value: @var{+gtk-invalid-list-position+}")
+  Default value: @var{gtk:+invalid-list-position+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'single-selection-selected)
@@ -319,7 +319,7 @@
   @syntax[]{(setf (gtk:single-selection-selected object) position)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[position]{an unsigned integer with the item to select or the
-    @var{+gtk-invalid-list-position+} value}
+    @var{gtk:+invalid-list-position+} value}
   @begin{short}
     Accessor of the @slot[gtk:single-selection]{selected} slot of the
     @class{gtk:single-selection} class.
@@ -331,12 +331,12 @@
   @arg{position}.
 
   If the list does not have an item at @arg{position} or the
-  @var{+gtk-invalid-list-position+} value is given, the behavior depends on
+  @var{gtk:+invalid-list-position+} value is given, the behavior depends on
   the value of the @slot[gtk:single-selection]{autoselect} property. If it is
   set, no change will occur and the old item will stay selected. If it is unset,
   the selection will be unset and no item will be selected.
   @see-class{gtk:single-selection}
-  @see-variable{+gtk-invalid-list-position+}")
+  @see-variable{gtk:+invalid-list-position+}")
 
 ;;; --- single-selection-selected-item -----------------------------------------
 

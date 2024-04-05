@@ -86,7 +86,7 @@
     (is (typep (gtk:drop-down-factory dropdown) 'gtk:list-item-factory))
     (is-false (gtk:drop-down-list-factory dropdown))
     (is-false (gtk:drop-down-model dropdown))
-    (is (= gtk:+gtk-invalid-list-position+ (gtk:drop-down-selected dropdown)))
+    (is (= gtk:+invalid-list-position+ (gtk:drop-down-selected dropdown)))
     (is-false (gtk:drop-down-selected-item dropdown))
     (is-true (gtk:drop-down-show-arrow dropdown))))
 

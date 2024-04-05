@@ -8,13 +8,12 @@
 ;;;     GdkToplevelLayout
 
 (test gdk-toplevel-layout-boxed
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GdkToplevelLayout") g:+g-type-boxed+))
-  ;; Check the type initializer
+  ;; Check type
+  (is (g:type-is-boxed "GdkToplevelLayout"))
+  ;; Check type initializer
   (is (eq (g:gtype "GdkToplevelLayout")
-          (g:gtype (cffi:foreign-funcall "gdk_toplevel_layout_get_type"
-                                         :size))))
-  ;; Check the registered name
+          (g:gtype (cffi:foreign-funcall "gdk_toplevel_layout_get_type" :size))))
+  ;; Check registered name
   (is (eq 'gdk:toplevel-layout
           (glib:symbol-for-gtype "GdkToplevelLayout"))))
 

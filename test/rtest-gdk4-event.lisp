@@ -304,12 +304,12 @@
 ;;;     GdkEventSequence
 
 (test gdk-event-sequence-boxed
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GdkEventSequence") g:+g-type-boxed+))
-  ;; Check the type initializer
+  ;; Check type
+  (is (g:type-is-boxed "GdkEventSequence"))
+  ;; Check type initializer
   (is (eq (g:gtype "GdkEventSequence")
           (g:gtype (cffi:foreign-funcall "gdk_event_sequence_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:event-sequence
           (glib:symbol-for-gtype "GdkEventSequence"))))
 

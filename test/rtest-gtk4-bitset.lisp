@@ -9,13 +9,13 @@
 
 ;;;     GtkBitset
 
-(test gtk-bitset-structure
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GtkBitset") g:+g-type-boxed+))
-  ;; Check the type initializer
+(test gtk-bitset-boxed
+  ;; Check type
+  (is (g:type-is-boxed "GtkBitset"))
+  ;; Check type initializer
   (is (eq (g:gtype "GtkBitset")
           (g:gtype (cffi:foreign-funcall "gtk_bitset_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:bitset
           (glib:symbol-for-gtype "GtkBitset"))))
 

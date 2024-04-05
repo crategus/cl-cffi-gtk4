@@ -8,7 +8,7 @@
 ;;;     GTK_INVALID_LIST_POSITION
 
 (test gtk-invalid-list-position
-  (is (= 4294967295 gtk:+gtk-invalid-list-position+)))
+  (is (= 4294967295 gtk:+invalid-list-position+)))
 
 ;;;     GtkSingleSelection
 
@@ -39,7 +39,7 @@
   (is (equal '()
              (list-signals "GtkSingleSelection")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSingleSelection" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSingleSelection"
                                              GTK-SINGLE-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                                 ("GListModel" "GtkSectionModel"
@@ -77,11 +77,11 @@
   (let ((selection (gtk:single-selection-new (g:list-store-new "GObject"))))
     (is-true (gtk:single-selection-autoselect selection))
     (is-false (gtk:single-selection-can-unselect selection))
-    (is (eq (g:gtype "GObject") 
+    (is (eq (g:gtype "GObject")
             (gtk:single-selection-item-type selection)))
     (is (typep (gtk:single-selection-model selection) 'g:list-store))
     (is (= 0 (gtk:single-selection-n-items selection)))
-    (is (= gtk:+gtk-invalid-list-position+ 
+    (is (= gtk:+invalid-list-position+
            (gtk:single-selection-selected selection)))
     (is-false (gtk:single-selection-selected-item selection))))
 
@@ -92,7 +92,7 @@
 (test gtk-single-selection-new
   (is (typep (gtk:single-selection-new) 'gtk:single-selection))
   (is (typep (gtk:single-selection-new nil) 'gtk:single-selection))
-  (is (typep (gtk:single-selection-new (g:list-store-new "GObject")) 
+  (is (typep (gtk:single-selection-new (g:list-store-new "GObject"))
              'gtk:single-selection)))
 
 ;;; --- 2023-11-26 -------------------------------------------------------------

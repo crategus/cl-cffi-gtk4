@@ -38,12 +38,14 @@ dann benutzen Sie es immer noch.")
 ;;;   GtkTextIter
 
 (test gtk-text-iter-boxed
-  (is-true (g:type-is-a (g:gtype "GtkTextIter") g:+g-type-boxed+))
-  (is-true (eq 'gtk:text-iter (type-of (make-instance 'gtk:text-iter))))
-  (is (eq 'glib:boxed-opaque-info
-          (type-of (glib:get-boxed-info 'gtk:text-iter))))
-  (is (eq 'glib:boxed-opaque-info
-          (type-of (glib:get-boxed-info (g:gtype "GtkTextIter"))))))
+  ;; Check type
+  (is (g:type-is-boxed "GtkTextIter"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkTextIter")
+          (g:gtype (cffi:foreign-funcall "gtk_text_iter_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gtk:text-iter
+          (glib:symbol-for-gtype "GtkTextIter"))))
 
 ;;;     gtk_text_iter_get_buffer
 

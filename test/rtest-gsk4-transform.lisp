@@ -48,12 +48,12 @@
 ;;;     GskTransform
 
 (test gsk-transform-boxed
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GskTransform") g:+g-type-boxed+))
-  ;; Check the type initializer
+  ;; Check type
+  (is (g:type-is-boxed "GskTransform"))
+  ;; Check type initializer
   (is (eq (g:gtype "GskTransform")
           (g:gtype (cffi:foreign-funcall "gsk_transform_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gsk:transform
           (glib:symbol-for-gtype "GskTransform"))))
 

@@ -57,10 +57,10 @@
 (test gtk-list-header-properties
   (let ((header (make-instance 'gtk:list-header)))
     (is-false (gtk:list-header-child header))
-    (is (= gtk:+gtk-invalid-list-position+ (gtk:list-header-end header)))
+    (is (= gtk:+invalid-list-position+ (gtk:list-header-end header)))
     (is-false (gtk:list-header-item header))
     (is (= 0 (gtk:list-header-n-items header)))
-    (is (= gtk:+gtk-invalid-list-position+ (gtk:list-header-start header)))))
+    (is (= gtk:+invalid-list-position+ (gtk:list-header-start header)))))
 
 ;;; --- 2023-11-27 -------------------------------------------------------------
 

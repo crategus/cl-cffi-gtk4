@@ -293,7 +293,7 @@
 (setf (documentation (liber:slot-documentation "position" 'column-view-row) t)
  "The @code{position} property of type @code{:uint} (Read) @br{}
   Position of the row. @br{}
-  Default value: @var{+gtk-invalid-list-position+}")
+  Default value: @var{gtk:+invalid-list-position+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'column-view-row-position)
@@ -309,7 +309,7 @@
   @end{short}
   The @fun{gtk:column-view-row-position} function gets the position in the
   model that @arg{object} currently displays. If @arg{object} is unbound, the
-  @var{+gtk-invalid-list-position+} value is returned.
+  @var{gtk:+invalid-list-position+} value is returned.
 
   Since 4.12
   @see-class{gtk:column-view-row}

@@ -7,12 +7,15 @@
 
 ;;;     GtkRequisition
 
-(test gtk-requisition
-  ;; Type check
-  (is-true (g:type-is-a (g:gtype "GtkRequisition") g:+g-type-boxed+))
-  ;; Check the type initializer
+(test gtk-requisition-boxed
+  ;; Check type
+  (is (g:type-is-boxed "GtkRequisition"))
+  ;; Check type initializer
   (is (eq (g:gtype "GtkRequisition")
-          (g:gtype (cffi:foreign-funcall "gtk_requisition_get_type" :size)))))
+          (g:gtype (cffi:foreign-funcall "gtk_requisition_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gtk:requisition
+          (glib:symbol-for-gtype "GtkRequisition"))))
 
 (test gtk-requisition-new
   (is (typep (gtk:requisition-new) 'gtk:requisition)))

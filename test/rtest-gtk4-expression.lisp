@@ -10,13 +10,12 @@
 ;;;     GtkExpressionWatch
 
 (test gtk-expression-watch-boxed
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GtkExpressionWatch") g:+g-type-boxed+))
-  ;; Check the type initializer
+  ;; Check type
+  (is (g:type-is-boxed "GtkExpressionWatch"))
+  ;; Check type initializer
   (is (eq (g:gtype "GtkExpressionWatch")
-          (g:gtype (cffi:foreign-funcall "gtk_expression_watch_get_type"
-                                         :size))))
-  ;; Check the registered name
+          (g:gtype (cffi:foreign-funcall "gtk_expression_watch_get_type" :size))))
+  ;; Check registered name
   (is (eq 'gtk:expression-watch
           (glib:symbol-for-gtype "GtkExpressionWatch"))))
 

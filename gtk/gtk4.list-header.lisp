@@ -141,7 +141,7 @@
 (setf (documentation (liber:slot-documentation "end" 'list-header) t)
  "The @code{end} property of type @code{guint} (Read) @br{}
   The first position no longer part of the section. @br{}
-  Default value: @var{+gtk-invalid-list-position+}")
+  Default value: @var{gtk:+invalid-list-position+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-header-end)
@@ -157,11 +157,11 @@
   @end{short}
   The @fun{gtk:list-header-end} function gets the end position in the model of
   the section that @arg{object} is currently the header for. If @arg{object} is
-  unbound, the @var{+gtk-invalid-list-position+} value is returned.
+  unbound, the @var{gtk:+invalid-list-position+} value is returned.
 
   Since 4.12
   @see-class{gtk:list-header}
-  @see-variable{+gtk-invalid-list-position+}")
+  @see-variable{gtk:+invalid-list-position+}")
 
 ;;; --- gtk:list-header-item ---------------------------------------------------
 
@@ -225,7 +225,7 @@
 (setf (documentation (liber:slot-documentation "start" 'list-header) t)
  "The @code{start} property of type @code{guint} (Read) @br{}
   The first position of items in the section. @br{}
-  Default value: @var{+gtk-invalid-list-position+}")
+  Default value: @var{gtk:+invalid-list-position+}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'list-header-start)
@@ -242,11 +242,11 @@
   The @fun{gtk:list-header-start} function gets the start position in the model
   of the section that @arg{object} is currently the header for.
 
-  If @arg{object} is unbound, the @var{+gtk-invalid-list-position+} value is
+  If @arg{object} is unbound, the @var{gtk:+invalid-list-position+} value is
   returned.
 
   Since 4.12
   @see-class{gtk:list-header}
-  @see-variable{+gtk-invalid-list-position+}")
+  @see-variable{gtk:+invalid-list-position+}")
 
 ;;; --- End of file gtk4.list-header.lisp --------------------------------------

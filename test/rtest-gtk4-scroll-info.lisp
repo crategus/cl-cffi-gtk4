@@ -8,12 +8,12 @@
 ;;;     GtkScrollInfo
 
 (test gtk-scroll-info-boxed
-  ;; Type check
-  (is (g:type-is-a (g:gtype "GtkScrollInfo") g:+g-type-boxed+))
-  ;; Check the type initializer
+  ;; Check type
+  (is (g:type-is-boxed "GtkScrollInfo"))
+  ;; Check type initializer
   (is (eq (g:gtype "GtkScrollInfo")
           (g:gtype (cffi:foreign-funcall "gtk_scroll_info_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:scroll-info
           (glib:symbol-for-gtype "GtkScrollInfo"))))
 

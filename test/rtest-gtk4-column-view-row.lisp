@@ -77,7 +77,7 @@
     (is-true (gtk:column-view-row-activatable row))
     (is-true (gtk:column-view-row-focusable row))
     (is-false (gtk:column-view-row-item row))
-    (is (= gtk:+gtk-invalid-list-position+ (gtk:column-view-row-position row)))
+    (is (= gtk:+invalid-list-position+ (gtk:column-view-row-position row)))
     (is-true (gtk:column-view-row-selectable row))
     (is-false (gtk:column-view-row-selected row))))
 
