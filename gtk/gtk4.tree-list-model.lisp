@@ -35,8 +35,19 @@
 ;;;
 ;;;     GtkTreeListRow
 ;;;
+;;; Accessors
+;;;
+;;;     gtk_tree_list_row_get_children
+;;;     gtk_tree_list_row_get_depth
+;;;     gtk_tree_list_row_get_expanded
+;;;     gtk_tree_list_row_set_expanded
+;;;     gtk_tree_list_row_get_item
+;;;
 ;;; Functions
 ;;;
+;;;     gtk_tree_list_row_get_child_row
+;;;     gtk_tree_list_row_get_parent
+;;;     gtk_tree_list_row_get_position
 ;;;     gtk_tree_list_row_is_expandable
 ;;;
 ;;; Properties
@@ -178,7 +189,7 @@
   @see-class{g:list-model}
   @see-function{gtk:tree-list-model-passthrough}")
 
-;;; --- tree-list-row-depth ----------------------------------------------------
+;;; --- gtk:tree-list-row-depth ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "depth" 'tree-list-row) t)
@@ -205,7 +216,7 @@
   removed from its model at which point it will forever return 0.
   @see-class{gtk:tree-list-row}")
 
-;;; --- tree-list-row-expandable -----------------------------------------------
+;;; --- gtk:tree-list-row-expandable -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "expandable" 'tree-list-row) t)
@@ -229,7 +240,7 @@
   ever be expanded.
   @see-class{gtk:tree-list-row}")
 
-;;; --- tree-list-row-expanded -------------------------------------------------
+;;; --- gtk:tree-list-row-expanded ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "expanded" 'tree-list-row) t)
@@ -253,7 +264,7 @@
   expanded.
   @see-class{gtk:tree-list-row}")
 
-;;; --- tree-list-row-item -----------------------------------------------------
+;;; --- gtk:tree-list-row-item -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "item" 'tree-list-row) t)
@@ -275,6 +286,44 @@
   The @fun{gtk:tree-list-row-item} function gets the item corresponding to this
   row.
   @see-class{gtk:tree-list-row}")
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_tree_list_row_get_child_row
+;;;
+;;; If self is not expanded or position is greater than the number of children,
+;;; NULL is returned.
+;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_tree_list_row_get_parent
+;;;
+;;; Gets the row representing the parent for self.
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_tree_list_row_get_parent" tree-list-row-parent)
+    (g:object tree-list-row)
+ #+liber-documentation
+ "@version{2024-4-4}
+  @argument[row]{a @class{gtk:tree-list-row} object}
+  @return{The parent @class{gtk:tree-list-row} object.}
+  @begin{short}
+    Gets the row representing the parent for @arg{row}.
+  @end{short}
+  That is the row that would need to be collapsed to make this row disappear.
+  If @arg{row} is a row corresponding to the root model, @code{nil} is
+  returned. The value returned by this function never changes until the row is
+  removed from its model at which point it will forever return @code{nil}.
+  @see-class{gtk:tree-list-row}"
+  (row (g:object tree-list-row)))
+
+(export 'tree-list-row-parent)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_tree_list_row_get_position
+;;;
+;;; Returns the position in the GtkTreeListModel that self occupies at the
+;;; moment.
+;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_list_row_is_expandable
