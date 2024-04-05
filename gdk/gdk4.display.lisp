@@ -305,14 +305,15 @@ lambda (display setting)    :run-last
 (export 'display-open)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_default -> display-default
+;;; gdk_display_get_default ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_default" display-default) (g:object display)
  #+liber-documentation
- "@version{2023-7-29}
+ "@version{2024-4-1}
   @begin{return}
-    A @class{gdk:display} object, or @code{nil} if there is no default display.
+    The @class{gdk:display} object, or @code{nil} if there is no default
+    display.
   @end{return}
   @begin{short}
     Gets the default display.

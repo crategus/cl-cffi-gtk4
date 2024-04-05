@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -259,9 +259,9 @@
 
 #+liber-documentation
 (setf (documentation 'window 'type)
- "@version{2023-8-20}
+ "@version{2024-4-1}
   @begin{short}
-    A @class{gtk:window} widget is a toplevel window which can contain other
+    The @class{gtk:window} widget is a toplevel window which can contain other
     widgets.
   @end{short}
 
@@ -308,16 +308,6 @@ window.background [.csd / .solid-csd / .ssd] [.maximized / .fullscreen / .tiled]
     The @class{gtk:window} implementation uses the @code{:window} role of the
     @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
-  @begin[Action Details]{dictionary}
-    @subheading{The \"window.close\" action}
-      @indent{Close the window.}
-    @subheading{The \"window.toggle-maximized\" action}
-      @indent{Maximize or restore the window.}
-    @subheading{The \"window.minimize\" action}
-      @indent{Close the window.}
-    @subheading{The \"default.activate\" action}
-      @indent{Activate the default widget.}
-  @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"activate-default\" signal}
       @begin{pre}
@@ -362,8 +352,8 @@ lambda (window toggle)    :action
       @begin[code]{table}
         @entry[window]{The @class{gtk:window} widget on which the signal is
           emitted.}
-        @entry[toggle]{A boolean which toggles the debugger.}
-        @entry[Returns]{A boolean which is @em{true} if the key binding was
+        @entry[toggle]{The boolean which toggles the debugger.}
+        @entry[Returns]{The boolean which is @em{true} if the key binding was
           handled.}
       @end{table}
     @subheading{The \"keys-changed\" signal}
@@ -409,7 +399,7 @@ lambda (window)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- window-application -----------------------------------------------------
+;;; --- gtk:window-application -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "application" 'window) t)
@@ -453,7 +443,7 @@ lambda (window)    :run-first
   @see-function{gtk:application-add-window}
   @see-function{gtk:application-remove-window}")
 
-;;; --- window-child -----------------------------------------------------------
+;;; --- gtk:window-child -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'window) t)
@@ -478,7 +468,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-class{gtk:widget}")
 
-;;; --- window-decorated -------------------------------------------------------
+;;; --- gtk:window-decorated ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "decorated" 'window) t)
@@ -516,7 +506,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:widget-visible}")
 
-;;; --- window-default-height --------------------------------------------------
+;;; --- gtk:window-default-height ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-height" 'window) t)
@@ -543,7 +533,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:window-default-size}")
 
-;;; --- window-default-widget --------------------------------------------------
+;;; --- gtk:window-default-widget ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-widget" 'window) t)
@@ -573,7 +563,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-class{gtk:widget}")
 
-;;; --- window-default-width ---------------------------------------------------
+;;; --- gtk:window-default-width -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-width" 'window) t)
@@ -600,7 +590,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:window-default-size}")
 
-;;; --- window-deletable -------------------------------------------------------
+;;; --- gtk:window-deletable ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "deletable" 'window) t)
@@ -638,7 +628,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:widget-visible}")
 
-;;; --- window-destroy-with-parent ---------------------------------------------
+;;; --- gtk:window-destroy-with-parent -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "destroy-with-parent"
@@ -673,7 +663,7 @@ lambda (window)    :run-first
   main window they are associated with.
   @see-class{gtk:window}")
 
-;;; --- window-display ---------------------------------------------------------
+;;; --- gtk:window-display -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "display" 'window) t)
@@ -700,7 +690,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-class{gdk:display}")
 
-;;; --- window-focus-visible ---------------------------------------------------
+;;; --- gtk:window-focus-visible -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "focus-visible" 'window) t)
@@ -729,7 +719,7 @@ lambda (window)    :run-first
   applications.
   @see-class{gtk:window}")
 
-;;; --- window-focus-widget ----------------------------------------------------
+;;; --- gtk:window-focus-widget ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "focus-widget" 'window) t)
@@ -769,7 +759,7 @@ lambda (window)    :run-first
   @see-function{gtk:widget-has-focus}
   @see-function{gtk:widget-grab-focus}")
 
-;;; --- window-fullscreened ----------------------------------------------------
+;;; --- gtk:window-fullscreened ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fullscreened" 'window) t)
@@ -806,7 +796,7 @@ lambda (window)    :run-first
   @see-function{gtk:window-fullscreen}
   @see-function{gtk:window-unfullscreen}")
 
-;;; --- window-handle-menubar-accel --------------------------------------------
+;;; --- gtk:window-handle-menubar-accel ----------------------------------------
 
 #+(and gtk-4-2 liber-documentation)
 (setf (documentation (liber:slot-documentation "handle-menubar-accel"
@@ -838,7 +828,7 @@ lambda (window)    :run-first
   Since 4.2
   @see-class{gtk:window}")
 
-;;; --- window-hide-on-close ---------------------------------------------------
+;;; --- gtk:window-hide-on-close -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "hide-on-close" 'window) t)
@@ -866,7 +856,7 @@ lambda (window)    :run-first
   @fun{gtk:window-hide-on-close} function sets the property.
   @see-class{gtk:window}")
 
-;;; --- window-icon-name -------------------------------------------------------
+;;; --- gtk:window-icon-name ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-name" 'window) t)
@@ -898,7 +888,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-class{gtk:icon-theme}")
 
-;;; --- window-is-active -------------------------------------------------------
+;;; --- gtk:window-is-active ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "is-active" 'window) t)
@@ -926,7 +916,7 @@ lambda (window)    :run-first
   in an inactive window.
   @see-class{gtk:window}")
 
-;;; --- window-maximized -------------------------------------------------------
+;;; --- gtk:window-maximized ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "maximized" 'window) t)
@@ -957,7 +947,7 @@ lambda (window)    :run-first
   @see-function{gtk:window-maximize}
   @see-function{gtk:window-unmaximize}")
 
-;;; --- window-mnemonics-visible -----------------------------------------------
+;;; --- gtk:window-mnemonics-visible -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonics-visible"
@@ -987,7 +977,7 @@ lambda (window)    :run-first
   maintained by GTK based on user input, and should not be set by applications.
   @see-class{gtk:window}")
 
-;;; --- window-modal -----------------------------------------------------------
+;;; --- gtk:window-modal -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'window) t)
@@ -1020,7 +1010,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:window-transient-for}")
 
-;;; --- window-resizable -------------------------------------------------------
+;;; --- gtk:window-resizable ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "resizable" 'window) t)
@@ -1045,7 +1035,7 @@ lambda (window)    :run-first
   by default.
   @see-class{gtk:window}")
 
-;;; --- window-startup-id ------------------------------------------------------
+;;; --- gtk:window-startup-id --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "startup-id" 'window) t)
@@ -1083,7 +1073,7 @@ lambda (window)    :run-first
   @see-class{gdk:window}
   @see-function{gtk:window-present}")
 
-;;; --- window-suspended -------------------------------------------------------
+;;; --- gtk:window-suspended ---------------------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "suspended" 'window) t)
@@ -1112,7 +1102,7 @@ lambda (window)    :run-first
   @see-class{gtk:window}
   @see-function{gtk:window-is-suspended}")
 
-;;; --- window-title -----------------------------------------------------------
+;;; --- gtk:window-title -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'window) t)
@@ -1144,7 +1134,7 @@ lambda (window)    :run-first
   document filename.
   @see-class{gtk:window}")
 
-;;; --- window-titlebar --------------------------------------------------------
+;;; --- gtk:window-titlebar ----------------------------------------------------
 
 #+(and gtk-4-6 liber-documentation)
 (setf (documentation (liber:slot-documentation "titlebar" 'window) t)
@@ -1182,7 +1172,7 @@ lambda (window)    :run-first
   @see-class{gtk:header-bar}
   @see-function{gtk:widget-visible}")
 
-;;; --- window-transient-for ---------------------------------------------------
+;;; --- gtk:window-transient-for -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "transient-for" 'window) t)
@@ -1485,14 +1475,14 @@ lambda (window)    :run-first
 
 (cffi:defcfun ("gtk_window_present" window-present) :void
  #+liber-documentation
- "@version{2023-8-26}
+ "@version{2024-4-1}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
     Presents a window to the user.
   @end{short}
   This may mean raising the window in the stacking order, unminimizing it,
   moving it to the current desktop and/or giving it the keyboard focus, possibly
-  dependent on the user’s platform, window manager and preferences. If the
+  dependent on the platform of the user, window manager and preferences. If the
   window is hidden, this function also makes it visible.
   @see-class{gtk:window}
   @see-function{gtk:window-present-with-time}"

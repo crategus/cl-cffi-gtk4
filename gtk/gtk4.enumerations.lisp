@@ -694,24 +694,28 @@
 (setf (liber:alias-for-symbol 'orientation)
       "GEnum"
       (liber:symbol-documentation 'orientation)
- "@version{2023-3-19}
+ "@version{2024-4-1}
+  @begin{declaration}
+    @begin{pre}
+(gobject:define-g-enum \"GtkOrientation\" orientation
+  (:export t
+   :type-initializer \"gtk_orientation_get_type\")
+  (:horizontal 0)
+  (:vertical 1))
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:horizontal]{The object is in horizontal orientation.}
+      @entry[:vertical]{The object is in vertical orientation.}
+    @end{table}
+  @end{values}
   @begin{short}
     Represents the orientation of widgets and other objects which can be
     switched between horizontal and vertical orientation on the fly.
   @end{short}
   Typical examples are the @class{gtk:box} widget or the @class{gtk:gesture-pan}
   object.
-  @begin{pre}
-(gobject:define-g-enum \"GtkOrientation\" orientation
-  (:export t
-   :type-initializer \"gtk_orientation_get_type\")
-  (:horizontal 0)
-  (:vertical 1))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:horizontal]{The object is in horizontal orientation.}
-    @entry[:vertical]{The object is in vertical orientation.}
-  @end{table}
   @see-class{gtk:orientable}
   @see-class{gtk:box}
   @see-class{gtk:gesture-pan}")
