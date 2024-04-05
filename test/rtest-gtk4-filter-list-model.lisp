@@ -55,13 +55,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     filter
-;;;     incremental
-;;;     item-type
-;;;     model
-;;;     n-items
-;;;     pending
-
 (test gtk-filter-list-model-properties
   (let ((model (make-instance 'gtk:filter-list-model)))
     (is-false (gtk:filter-list-model-filter model))
@@ -114,11 +107,13 @@
 
     (is (eq (g:gtype "GObject") (gtk:filter-list-model-item-type model)))
     (is (= 6 (gtk:filter-list-model-n-items model)))
-    (is (equal '("string-filter-match-mode" "string-filter-new" "string-filter"
-                 "string-filter-ignore-case" "string-filter-search"
-                 "string-filter-expression")
-               (iter (for i from 0 below (gtk:filter-list-model-n-items model))
-                     (for object = (g:list-model-object model i))
-                     (collect (gtk:string-object-string object)))))))
+    (is (equal '("string-filter" "string-filter-expression"
+                 "string-filter-ignore-case" "string-filter-match-mode"
+                 "string-filter-new" "string-filter-search")
+               (sort (iter (with n = (gtk:filter-list-model-n-items model))
+                           (for i from 0 below n)
+                           (for object = (g:list-model-object model i))
+                           (collect (gtk:string-object-string object)))
+                     #'string<)))))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-1
