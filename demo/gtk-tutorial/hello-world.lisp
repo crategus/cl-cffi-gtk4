@@ -25,7 +25,7 @@
                         (lambda (window)
                           (declare (ignore window))
                           (format t "Ignore close request. Click the button.~%")
-                          gdk:+gdk-event-stop+))
+                          gdk:+event-stop+))
                 (g:signal-connect button "clicked"
                         (lambda (button)
                           (declare (ignore button))
