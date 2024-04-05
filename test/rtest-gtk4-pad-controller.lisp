@@ -97,13 +97,11 @@
          (entries '((:button 1 -1 "Action 1" "action1")
                     (:ring 1 -1 "Action 2" "action2")
                     (:strip 1 -1 "Action 3" "action3"))))
-
     (is-false (gtk:pad-controller-set-action-entries controller entries))
     ;; TODO: Does not return a GAction object. Why?
     (is-false (g:action-map-lookup-action group "action1"))
     (is-false (g:action-map-lookup-action group "action2"))
-    (is-false (g:action-map-lookup-action group "action3"))
-))
+    (is-false (g:action-map-lookup-action group "action3"))))
 
 ;;;     gtk_pad_controller_set_action
 
@@ -117,7 +115,6 @@
                                              "Action"
                                              "action"))
     ;; TODO: Does not return a GAction object. Why?
-    (is-false (g:action-map-lookup-action group "action"))
-))
+    (is-false (g:action-map-lookup-action group "action"))))
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; 2024-4-5
