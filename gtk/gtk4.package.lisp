@@ -823,6 +823,9 @@ GtkCellRenderer         GtkWidget
       @about-generic{tree-list-row-expandable}
       @about-generic{tree-list-row-expanded}
       @about-generic{tree-list-row-item}
+      @about-function{tree-list-row-child-row}
+      @about-function{tree-list-row-parent}
+      @about-function{tree-list-row-position}
       @about-function{tree-list-row-is-expandable}
       @about-class{tree-list-model}
       @about-generic{tree-list-model-autoexpand}
@@ -3782,11 +3785,11 @@ GtkCellRenderer         GtkWidget
     @begin[GtkStyleProvider]{subsection}
       Interface to provide style information to a @class{gtk:style-context}
       object.
-      @about-variable{+gtk-priority-fallback+}
-      @about-variable{+gtk-priority-theme+}
-      @about-variable{+gtk-priority-settings+}
-      @about-variable{+gtk-priority-application+}
-      @about-variable{+gtk-priority-user+}
+      @about-variable{+priority-fallback+}
+      @about-variable{+priority-theme+}
+      @about-variable{+priority-settings+}
+      @about-variable{+priority-application+}
+      @about-variable{+priority-user+}
       @about-class{style-provider}
     @end{subsection}
     @begin[GtkCssProvider]{subsection}

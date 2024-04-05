@@ -56,7 +56,7 @@ List-based Widgets
 
 Tree support
 
-  gtk4.tree-list-model.lisp            GtkTreeListModel, ...          GTK 4.12
+  gtk4.tree-list-model.lisp            GtkTreeListModel, ...          GTK 4.12 +
   gtk4.tree-list-row-sorter.lisp       GtkTreeListRowSorter           GTK 4.12
   gtk4.tree-expander.lisp              GtkTreeExpander                GTK 4.12
 
