@@ -141,17 +141,17 @@
 ;;; GDK_CURRENT_TIME
 ;;; ----------------------------------------------------------------------------
 
-(defconstant +gdk-current-time+ 0
+(defconstant +current-time+ 0
  #+liber-documentation
- "@version{2023-12-17}
+ "@version{2024-4-1}
   @begin{short}
     Represents the current time, and can be used anywhere a time is expected.
   @end{short}")
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gdk-current-time+) "Constant")
+(setf (liber:alias-for-variable '+current-time+) "Constant")
 
-(export '+gdk-current-time+)
+(export '+current-time+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GDK_PRIORITY_EVENTS
@@ -175,28 +175,28 @@
 ;;; GDK_EVENT_PROPAGATE
 ;;; ----------------------------------------------------------------------------
 
-(defconstant +gdk-event-propagate+ nil
+(defconstant +event-propagate+ nil
  #+liber-documentation
- "@version{2023-10-17}
+ "@version{2024-4-1}
   @variable-value{@em{false}}
   @begin{short}
     Use this value as the return value for continuing the propagation of an
     event handler.
   @end{short}
-  @see-variable{gdk:+gdk-event-stop+}")
+  @see-variable{gdk:+event-stop+}")
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gdk-event-propagate+) "Constant")
+(setf (liber:alias-for-variable '+event-propagate+) "Constant")
 
-(export '+gdk-event-propagate+)
+(export '+event-propagate+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GDK_EVENT_STOP
 ;;; ----------------------------------------------------------------------------
 
-(defconstant +gdk-event-stop+ t
+(defconstant +event-stop+ t
  #+liber-documentation
- "@version{2023-12-17}
+ "@version{2024-4-1}
   @variable-value{@em{true}}
   @begin{short}
     Use this value as the return value for stopping the propagation of an event
@@ -209,15 +209,15 @@
 (g:signal-connect window \"close-request\"
                   (lambda (widget event)
                     (declare (ignore widget event))
-                    gdk:+gdk-event-stop+))
+                    gdk:+event-stop+))
     @end{pre}
   @end{dictionary}
-  @see-variable{gdk:+gdk-event-propagate+}")
+  @see-variable{gdk:+event-propagate+}")
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gdk-event-stop+) "Constant")
+(setf (liber:alias-for-variable '+event-stop+) "Constant")
 
-(export '+gdk-event-stop+)
+(export '+event-stop+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GDK_BUTTON_PRIMARY
@@ -1115,10 +1115,10 @@
   @return{The unsigned integer with the time stamp field from @arg{event}.}
   @begin{short}
     Returns the time stamp from @arg{event}, if there is one, otherwise returns
-    @variable{gdk:+gdk-current-time+}.
+    @variable{gdk:+current-time+}.
   @end{short}
   @see-class{gdk:event}
-  @see-variable{gdk:+gdk-current-time+}"
+  @see-variable{gdk:+current-time+}"
   (event event))
 
 (export 'event-time)

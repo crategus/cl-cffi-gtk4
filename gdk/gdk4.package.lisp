@@ -732,14 +732,14 @@
   @begin[Miscellaneous]{section}
     @begin[Events]{subsection}
       Functions for handling events from the window system.
-      @about-variable{+gdk-current-time+}
-      @about-variable{+gdk-priority-events+}
-      @about-variable{+gdk-priority-redraw+}
-      @about-variable{+gdk-event-propagate+}
-      @about-variable{+gdk-event-stop+}
-      @about-variable{+gdk-buton-primary+}
-      @about-variable{+gdk-button-middle+}
-      @about-variable{+gdk-button-secondary+}
+      @about-variable{+current-time+}
+      @about-variable{+priority-events+}
+      @about-variable{+priority-redraw+}
+      @about-variable{+event-propagate+}
+      @about-variable{+event-stop+}
+      @about-variable{+buton-primary+}
+      @about-variable{+button-middle+}
+      @about-variable{+button-secondary+}
       @about-symbol{event-type}
       @about-symbol{keymap-key}
       @about-symbol{key-match}

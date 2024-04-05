@@ -41,7 +41,7 @@
   (is (equal '()
              (list-signals "GdkAppLaunchContext")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkAppLaunchContext" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkAppLaunchContext"
                                              GDK-APP-LAUNCH-CONTEXT
                        (:SUPERCLASS G-APP-LAUNCH-CONTEXT :EXPORT T :INTERFACES
                         NIL :TYPE-INITIALIZER
@@ -78,7 +78,7 @@
 (test gdk-app-launch-context-set-timestamp
   (let ((context (gdk:display-app-launch-context (gdk:display-default))))
     (is-false (gdk:app-launch-context-set-timestamp context
-                                                    gdk:+gdk-current-time+))))
+                                                    gdk:+current-time+))))
 
 ;;;     gdk_app_launch_context_set_icon
 

@@ -201,7 +201,7 @@ NIL
   @see-symbol{glib:+glib-major-version+}
   @see-symbol{glib:+glib-minor-version+}
   @see-symbol{glib:+glib-micro-version+}
-  @see-symbol{gdk-pixbuf:+gdk-pixbuf-version+}
+  @see-symbol{gdk-pixbuf:+version+}
   @see-function{pango:version-string}
   @see-function{cairo:version-string}"
   (format out "cl-cffi-gtk version: ~a~%" *cl-cffi-gtk-version*)
@@ -219,7 +219,7 @@ NIL
           glib:+glib-major-version+
           glib:+glib-minor-version+
           glib:+glib-micro-version+)
-  (format out "GDK-Pixbuf version: ~a~%" gdk-pixbuf:+gdk-pixbuf-version+)
+  (format out "GDK-Pixbuf version: ~a~%" gdk-pixbuf:+version+)
   (format out "Pango version: ~a~%" (pango:version-string))
   (format out "Cairo version: ~a~%" (cairo:version-string))
   (format out "Machine type: ~a~%" (machine-type))

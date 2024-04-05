@@ -4840,7 +4840,7 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (defun widget-apply-provider (widget provider
-                              &optional (priority +gtk-priority-application+))
+                              &optional (priority +priority-application+))
  #+liber-documentation
  "@version{2023-3-26}
   @argument[widget]{a @class{gtk:widget} widget}
@@ -4854,8 +4854,8 @@ lambda (widget)    :run-last
 
   The lower the priority of the style provider is, the earlier it will be used
   in the style construction. Typically this will be in the range between the
-  @var{+gtk-priority-fallback+} and @var{+gtk-priority-user+} priorities. The
-  default value is @var{+gtk-priority-application+}. See the
+  @var{gtk:+priority-fallback+} and @var{gtk:+priority-user+} priorities. The
+  default value is @var{gtk:+priority-application+}. See the
   @fun{gtk:style-context-add-provider} documentation for more information.
   @begin[Note]{dictionary}
     This function is a Lisp extension that provides a convenient way to apply a

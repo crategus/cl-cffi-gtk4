@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2023 Dieter Kaiser
+;;; Copyright (C) 2013 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -73,7 +73,7 @@
 (setf (liber:alias-for-class 'style-provider)
       "Interface"
       (documentation 'style-provider 'type)
- "@version{2023-3-26}
+ "@version{2024-4-1}
   @begin{short}
     The @class{gtk:style-provider} interface is an interface used to provide
     style information to a @class{gtk:style-context} object.
@@ -83,7 +83,7 @@
   providers to a style context and the @fun{gtk:widget-apply-provider}
   function to apply a provider to a widget and its children.
   @begin[Signal Details]{dictionary}
-    @subheading{The \"gtk:private-changed\" signal}
+    @subheading{The \"gtk-private-changed\" signal}
       @begin{pre}
 lambda (provider)    :run-last
       @end{pre}
@@ -102,13 +102,13 @@ lambda (provider)    :run-last
 ;;; GTK_STYLE_PROVIDER_PRIORITY_FALLBACK
 ;;; ----------------------------------------------------------------------------
 
-(defconstant +gtk-priority-fallback+ 1)
+(defconstant +priority-fallback+ 1)
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gtk-priority-fallback+)
+(setf (liber:alias-for-variable '+priority-fallback+)
       "Constant"
-      (documentation '+gtk-priority-fallback+ 'variable)
- "@version{2023-3-26}
+      (documentation '+priority-fallback+ 'variable)
+ "@version{2024-4-1}
   @variable-value{1}
   @begin{short}
     The priority used for default style information that is used in the absence
@@ -116,65 +116,65 @@ lambda (provider)    :run-last
   @end{short}
   Note that this is not very useful for providing default styling for custom
   style classes - themes are likely to override styling provided at this
-  priority with catch-all * {...@} rules.
+  priority with catch-all @code{* {...@}} rules.
   @see-class{gtk:style-provider}")
 
-(export '+gtk-priority-fallback+)
+(export '+priority-fallback+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GTK_STYLE_PROVIDER_PRIORITY_THEME
 ;;; ----------------------------------------------------------------------------
 
-(defconstant +gtk-priority-theme+ 200)
+(defconstant +priority-theme+ 200)
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gtk-priority-theme+)
+(setf (liber:alias-for-variable '+priority-theme+)
       "Constant"
-      (documentation '+gtk-priority-theme+ 'variable)
- "@version{2023-3-26}
+      (documentation '+priority-theme+ 'variable)
+ "@version{2024-4-1}
   @variable-value{200}
   @begin{short}
     The priority used for style information provided by themes.
   @end{short}
   @see-class{gtk:style-provider}")
 
-(export '+gtk-priority-theme+)
+(export '+priority-theme+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GTK_STYLE_PROVIDER_PRIORITY_SETTINGS
 ;;; ----------------------------------------------------------------------------
 
-(defconstant +gtk-priority-settings+ 400)
+(defconstant +priority-settings+ 400)
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gtk-priority-settings+)
+(setf (liber:alias-for-variable '+priority-settings+)
       "Constant"
-      (documentation '+gtk-priority-settings+ 'variable)
- "@version{2023-3-26}
+      (documentation '+priority-settings+ 'variable)
+ "@version{2024-4-1}
   @variable-value{400}
   @begin{short}
     The priority used for style information provided via the
     @class{gtk:settings} object.
   @end{short}
-  This priority is higher than the @var{+gtk-priority-theme+} value to let
+  This priority is higher than the @var{gtk:+priority-theme+} value to let
   settings override themes.
   @see-class{gtk:style-provider}
   @see-class{gtk:settings}
-  @see-variable{+gtk-priority-theme+}")
+  @see-variable{gtk:+priority-theme+}")
 
-(export '+gtk-priority-settings+)
+(export '+priority-settings+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
 ;;; ----------------------------------------------------------------------------
 
-(defconstant +gtk-priority-application+ 600)
+(defconstant +priority-application+ 600)
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gtk-priority-application+)
+(setf (liber:alias-for-variable '+priority-application+)
       "Constant"
-      (documentation '+gtk-priority-application+ 'variable)
- "@version{2023-3-26}
+      (documentation '+priority-application+ 'variable)
+ "@version{2024-4-1}
   @variable-value{600}
   @begin{short}
     A priority that can be used when adding a @class{gtk:style-provider} object
@@ -182,19 +182,19 @@ lambda (provider)    :run-last
   @end{short}
   @see-class{gtk:style-provider}")
 
-(export '+gtk-priority-application+)
+(export '+priority-application+)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GTK_STYLE_PROVIDER_PRIORITY_USER
 ;;; ----------------------------------------------------------------------------
 
-(defconstant +gtk-priority-user+ 800)
+(defconstant +priority-user+ 800)
 
 #+liber-documentation
-(setf (liber:alias-for-variable '+gtk-priority-user+)
+(setf (liber:alias-for-variable '+priority-user+)
       "Constant"
-      (documentation '+gtk-priority-user+ 'variable)
- "@version{2023-3-26}
+      (documentation '+priority-user+ 'variable)
+ "@version{2024-4-1}
   @variable-value{800}
   @begin{short}
     The priority used for the style information from the
@@ -204,6 +204,6 @@ lambda (provider)    :run-last
   word.
   @see-class{gtk:style-provider}")
 
-(export '+gtk-priority-user+)
+(export '+priority-user+)
 
 ;;; --- End of file gtk4.style-provider.lisp -----------------------------------

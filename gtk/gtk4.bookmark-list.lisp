@@ -149,7 +149,7 @@
     @class{gtk:bookmark-list} class.
   @end{short}
   The @fun{gtk:bookmark-list-attributes} function gets the attributes queried
-  on the children. The @setf{gtk:bookmark-list-attributes} function sets the 
+  on the children. The @setf{gtk:bookmark-list-attributes} function sets the
   attributes to be enumerated and starts the enumeration.
 
   If @arg{attributes} is @code{nil}, no attributes will be queried, but a list
@@ -205,9 +205,9 @@
     @class{gtk:bookmark-list} class.
   @end{short}
   The @fun{gtk:bookmark-list-io-priority} function gets the IO priority. The
-  @setf{gtk:bookmark-list-io-priority} function sets the IO priority to use 
-  while loading files. The default IO priority is 
-  @variable{g:+g-priority-default+}.
+  @setf{gtk:bookmark-list-io-priority} function sets the IO priority to use
+  while loading files. The default IO priority is
+  @variable{g:+priority-default+}.
   @see-class{gtk:bookmark-list}")
 
 ;;; --- bookmark-list-item-type ------------------------------------------------
@@ -326,8 +326,8 @@
   @begin{short}
     Returns @em{true} if the files are currently being loaded.
   @end{short}
-  Files will be added to @arg{bookmarklist} from time to time while loading is 
-  going on. The order in which are added is undefined and may change in between 
+  Files will be added to @arg{bookmarklist} from time to time while loading is
+  going on. The order in which are added is undefined and may change in between
   runs.
   @see-class{gtk:bookmark-list}"
   (object (g:object bookmark-list)))

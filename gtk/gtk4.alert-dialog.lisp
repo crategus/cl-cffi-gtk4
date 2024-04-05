@@ -130,7 +130,7 @@
     (g:timeout-add-seconds 10
                            (lambda ()
                              (g:cancellable-cancel cancellable)
-                             glib:+g-source-remove+))
+                             glib:+source-remove+))
     ;; Show the alert dialog
     (gtk:alert-dialog-choose dialog
         parent

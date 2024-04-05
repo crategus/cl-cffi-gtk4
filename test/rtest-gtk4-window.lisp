@@ -238,7 +238,7 @@
                   (when *verbose-gtk-window*
                     (format t "~&Signal handler CLOSE-REQUEST~%"))
                   ;; Stop the propagation of the event
-                  gdk:+gdk-event-stop+))
+                  gdk:+event-stop+))
 
             (is (typep window 'gtk:window))
             (is (eq app (gtk:window-application window)))
@@ -273,7 +273,7 @@
                   (when *verbose-gtk-window*
                     (format t "~&Signal handler CLOSE-REQUEST~%"))
                   ;; Stop the propagation of the event
-                  gdk:+gdk-event-stop+))
+                  gdk:+event-stop+))
             (is (typep window 'gtk:window))
             (is (eq app (gtk:window-application window)))
             (when *verbose-gtk-window*

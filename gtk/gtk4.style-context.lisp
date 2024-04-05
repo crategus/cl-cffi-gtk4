@@ -357,7 +357,7 @@
   @subheading{Custom styling in UI libraries and applications}
   If you are developing a library with custom widgets that render differently
   than standard components, you may need to add a @class{gtk:style-provider}
-  object yourself with the @var{+gtk-priority-fallback+} priority, either a
+  object yourself with the @var{gtk:+priority-fallback+} priority, either a
   @class{gtk:css-provider} object or a custom object implementing the
   @class{gtk:style-provider} interface. This way themes may still attempt to
   style your UI elements in a different way if needed so.
@@ -365,9 +365,9 @@
   If you are using custom styling on an application, you probably want then to
   make your style information prevail to the style information of the theme, so
   you must use a @class{gtk:style-provider} object with the
-  @var{+gtk-priority-application+} priority. Keep in mind that the user settings
+  @var{gtk:+priority-application+} priority. Keep in mind that the user settings
   in @file{XDG_CONFIG_HOME/gtk-4.0/gtk.css} will still take precedence over your
-  changes, as it uses the @var{+gtk-priority-user+} priority.
+  changes, as it uses the @var{gtk:+priority-user+} priority.
   @begin[Warning]{dictionary}
     The @class{gtk:style-context} implementation is deprecated since 4.10.
     The relevant API has been moved to the @class{gtk:widget} implementation
@@ -446,8 +446,7 @@
   @end{short}
   The lower the priority of the style provider is, the earlier it will be used
   in the style construction. Typically this will be in the range between the
-  @var{gtk:+gtk-priority-fallback+} and @var{gtk:+gtk-priority-user+}
-  priorities.
+  @var{gtk:+priority-fallback+} and @var{gtk:+priority-user+} priorities.
 
   Note that a style provider added by this function only affects the style of
   the widget to which @arg{context} belongs. If you want to affect the style of
@@ -484,13 +483,13 @@
   (priority :uint))
 
 (defun style-context-add-provider-for-display
-    (display provider &optional (priority +gtk-priority-application+))
+    (display provider &optional (priority +priority-application+))
  #+liber-documentation
  "@version{2023-10-4}
   @argument[display]{a @class{gdk:display} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @argument[priority]{an optional unsigned integer with the priority of the
-    style provider, the default value is @var{gtk:+gtk-priority-application+}}
+    style provider, the default value is @var{gtk:+priority-application+}}
   @begin{short}
     Adds a global style provider to the display, which will be used in style
     construction for all style contexts under the display.
