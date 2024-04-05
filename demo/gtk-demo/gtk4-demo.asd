@@ -4,10 +4,12 @@
   :author "Dieter Kaiser"
   :version "0.1.0"
   :license "MIT"
-  :serial t
+  :serial nil
+  :components ((:file "gtk4-demo-package")
+               (:file "gtk4-demo-catalog")
+               (:file "gtk4-demo"))
   :depends-on (:gtk4-example
                :pango-example
-               :cairo-example)
-  :components ((:file "gtk4-demo")))
+               :cairo-example))
 
-;;; 2024-3-29
+;;; 2024-4-4
