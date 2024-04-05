@@ -15,7 +15,7 @@
                            (lambda ()
                              (format t "Cancel cancellable~%")
                              (g:cancellable-cancel cancellable)
-                             glib:+g-source-remove+))
+                             glib:+source-remove+))
 
     (format t "Start Dialog Open~%")
     (gtk:file-dialog-open dialog parent cancellable #'file-opened)
@@ -37,7 +37,7 @@
                            (lambda ()
                              (format t "Cancel cancellable~%")
                              (g:cancellable-cancel cancellable)
-                             glib:+g-source-remove+))
+                             glib:+source-remove+))
 
     (format t "Start Dialog Open~%")
     (gtk:file-dialog-open-multiple dialog
@@ -60,7 +60,7 @@
                            (lambda ()
                              (format t "Cancel cancellable~%")
                              (g:cancellable-cancel cancellable)
-                             glib:+g-source-remove+))
+                             glib:+source-remove+))
 
     (format t "Start Dialog Save~%")
     (gtk:file-dialog-save dialog parent cancellable #'file-saved)
@@ -81,7 +81,7 @@
                            (lambda ()
                              (format t "Cancel cancellable~%")
                              (g:cancellable-cancel cancellable)
-                             glib:+g-source-remove+))
+                             glib:+source-remove+))
 
     (format t "Start Select Folder~%")
     (gtk:file-dialog-select-folder dialog parent cancellable #'folder-selected)
@@ -102,7 +102,7 @@
                            (lambda ()
                              (format t "Cancel cancellable~%")
                              (g:cancellable-cancel cancellable)
-                             glib:+g-source-remove+))
+                             glib:+source-remove+))
 
     (format t "Start Select Multiple Folders~%")
     (gtk:file-dialog-select-multiple-folders dialog

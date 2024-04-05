@@ -1,11 +1,8 @@
 (defpackage :gtk4-example
   (:use :cffi :iterate :split-sequence :common-lisp)
-  (:import-from :gtk  #:+gtk-priority-application+
-                      #:+gtk-priority-user+)
-  (:import-from :gdk  #:+gdk-event-propagate+
-                      #:+gdk-event-stop+)
-  (:import-from :glib #:+g-source-continue+
-                      #:+g-source-remove+)
+  (:import-from :gtk)
+  (:import-from :gdk)
+  (:import-from :glib)
   (:export #:run-example
            ;; Windows
            #:do-window-simple
@@ -140,7 +137,7 @@
            #:do-css-multiplebgs
            #:do-css-pixbufs
            #:do-css-shadows
-           
+
            ;; Subclassing
            #:do-sublclassing-figure
 
@@ -274,10 +271,10 @@ sem venenatis, vitae ultricies arcu laoreet."))
 (defun apply-css-to-widget (provider widget)
   (gtk:style-context-add-provider (gtk:widget-style-context widget)
                                   provider
-                                  +gtk-priority-user+)
+                                  gtk:+priority-user+)
   (do ((child (gtk:widget-first-child widget)
               (gtk:widget-next-sibling child)))
        ((not child))
     (apply-css-to-widget provider child)))
 
-;;; --- 2023-9-20 --------------------------------------------------------------
+;;; 2024-4-1

@@ -1,7 +1,9 @@
-;;;; Example Aspect Frame - 2023-9-18
+;;;; Aspect Frame
 ;;;;
 ;;;; In this example, we place a drawing area in an aspect frame. Enlarge and
 ;;;; shrink the window to see how the ratio of the drawing area is preserved.
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -36,4 +38,4 @@
                        0.0
                        (* 2.0 pi))
             (cairo:fill cr))))
-      (setf (gtk:widget-visible window) t)))
+      (gtk:window-present window)))

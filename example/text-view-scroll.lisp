@@ -30,7 +30,7 @@
         "Scroll to end scroll to end scroll to end scroll to end"))
       ;; Now scroll the end mark onscreen.
       (gtk:text-view-scroll-mark-onscreen view mark)
-      glib:+g-source-continue+)))
+      glib:+source-continue+)))
 
 ;; Scroll to the bottom of the text buffer
 (let ((count 0))
@@ -60,7 +60,7 @@
       (gtk:text-buffer-move-mark buffer mark iter)
       ;; Scroll the mark onscreen
       (gtk:text-view-scroll-mark-onscreen view mark)
-      glib:+g-source-continue+)))
+      glib:+source-continue+)))
 
 (defun setup-scroll (view to-end)
   (let* ((buffer (gtk:text-view-buffer view))

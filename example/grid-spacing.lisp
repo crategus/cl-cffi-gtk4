@@ -1,4 +1,6 @@
-;;;; Example Grid Spacing - 2022-11-11
+;;;; Grid Spacing
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -47,4 +49,4 @@
     (gtk:grid-attach grid button1 0 0 1 1)
     (gtk:grid-attach grid button2 1 0 1 1)
     (gtk:grid-attach grid button3 0 1 2 1)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

@@ -1,9 +1,9 @@
-;;;; Theming/CSS Basics
+;;;; CSS Basics
 ;;;;
-;;;; Gtk themes are written using CSS. Every widget is build of multiple items
+;;;; GTK themes are written using CSS. Every widget is build of multiple items
 ;;;; that you can style very similarly to a regular website.
 ;;;;
-;;;; 2023-12-16
+;;;; 2024-4-1
 
 (in-package :gtk4-example)
 
@@ -15,20 +15,18 @@
                                   :child view))
          (window (make-instance 'gtk:window
                                 :application application
-                                :title "Example CSS Basics"
+                                :title "CSS Basics"
                                 :child scrolled
                                 :default-height 420
                                 :default-width 600))
+         (display (gtk:widget-display window))
          (provider (make-instance 'gtk:css-provider)))
-    (gtk:widget-add-css-class scrolled "demo")
-    (gtk:style-context-add-provider-for-display (gdk:display-default)
-                                                provider
-                                                gtk:+gtk-priority-user+)
+    (gtk:widget-add-css-class scrolled "basics")
+    (gtk:style-context-add-provider-for-display display provider)
     (g:signal-connect window "destroy"
         (lambda (widget)
-          (declare (ignore widget))
-          (gtk:style-context-remove-provider-for-display (gdk:display-default)
-                                                         provider)))
+          (let ((display (gtk:widget-display widget)))
+            (gtk:style-context-remove-provider-for-display display provider))))
     (g:signal-connect text "changed"
         (lambda (buffer)
           (let ((start (gtk:text-buffer-start-iter buffer))
@@ -51,7 +49,7 @@
                               (gtk:css-location-lines endloc)
                               (gtk:css-location-line-bytes endloc))))
             (gtk:text-buffer-apply-tag text "error" start end)
-            +gdk-event-stop+)))
+            gdk:+event-stop+)))
     (gtk:text-tag-table-add (gtk:text-buffer-tag-table text)
                             (make-instance 'gtk:text-tag
                                            :name "error"

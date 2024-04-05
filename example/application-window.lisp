@@ -1,23 +1,25 @@
-;;;; Example Application Window with Menubar - 2023-8-7
+;;;; Application Window with Menubar
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
 (defun do-application-window (&optional (application nil))
-  (let ((menus         
+  (let ((menus
          "<interface>
-           <menu id='menubar'> 
-             <submenu> 
+           <menu id='menubar'>
+             <submenu>
                <attribute name='label'>_Edit</attribute>
-               <item> 
-                 <attribute name='label'>_Copy</attribute> 
-                 <attribute name='action'>win.copy</attribute> 
-               </item> 
-               <item> 
-                 <attribute name='label'>_Paste</attribute> 
-                 <attribute name='action'>win.paste</attribute> 
-               </item> 
-             </submenu> 
-           </menu> 
+               <item>
+                 <attribute name='label'>_Copy</attribute>
+                 <attribute name='action'>win.copy</attribute>
+               </item>
+               <item>
+                 <attribute name='label'>_Paste</attribute>
+                 <attribute name='action'>win.paste</attribute>
+               </item>
+             </submenu>
+           </menu>
          </interface>")
         (builder (make-instance 'gtk:builder))
         (window (make-instance 'gtk:application-window
@@ -30,4 +32,4 @@
     (setf (gtk:application-menubar application)
           (gtk:builder-object builder "menubar"))
     ;; Show the application window
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))

@@ -1,4 +1,4 @@
-;;;; Example Center Box - 2023-9-19
+;;;; Center Box
 ;;;;
 ;;;; The example shows three buttons with colored labels. The red button
 ;;;; shows the start position in the box, the green button the end position,
@@ -6,6 +6,8 @@
 ;;;;
 ;;;; In addition, this example demonstrate how to use CSS style information to
 ;;;; change the appearance of a widget.
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -53,9 +55,9 @@
       (setf (gtk:widget-width-request (gtk:button-child button)) 60)
       (setf (gtk:center-box-end-widget box) button))
     ;; Load CSS from data into the provider and apply CSS
-    (gtk:css-provider-load-from-data provider css-button)
+    (gtk:css-provider-load-from-string provider css-button)
     (gtk:widget-add-css-class box "centerbox")
     (gtk:style-context-add-provider-for-display (gtk:widget-display box)
                                                 provider)
     ;; Show the window.
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))

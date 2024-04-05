@@ -40,7 +40,7 @@
            (gtk:css-provider-load-from-data provider css-label)
            (gtk:style-context-add-provider context
                                            provider
-                                           +gtk-priority-user+))))
+                                           gtk:+priority-user+))))
     ;; Pack and show the widgets
     (gtk:box-append box button)
     (gtk:box-append box label)

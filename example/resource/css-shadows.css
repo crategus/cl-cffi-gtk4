@@ -4,7 +4,7 @@
  */
 
 /* Make the paned handle more visible */
-paned separator {
+.shadows paned separator {
   background-color: alpha(lightgrey, 0.80);
   background-image: linear-gradient(transparent,
                                     transparent 1px,
@@ -15,7 +15,7 @@ paned separator {
   background-position: center;
 }
 
-paned separator:hover {
+.shadows paned separator:hover {
   background-image: linear-gradient(transparent,
                                     transparent 1px,
                                     #555 1px, #555 4px,
@@ -23,7 +23,7 @@ paned separator:hover {
 }
 
 /* Get a nice background for the toolbar */
-toolbar {
+.shadows toolbar {
   background-image: linear-gradient(to left,
                                     transparent,
                                     rgba(255,255,255,.07) 50%,
@@ -44,7 +44,7 @@ toolbar {
   background-size: 29px, 59px, 73px, 109px;
 }
 
-button {
+.shadows button {
   color: black;
   padding: 10px;
   border-radius: 5px;
@@ -52,14 +52,14 @@ button {
   border: 1px transparent solid;
 }
 
-button:hover {
+.shadows button:hover {
   text-shadow: 3px 3px 5px alpha(black, 0.75);
   -gtk-icon-shadow: 3px 3px 5px alpha(black, 0.75);
   box-shadow: 3px 3px 5px alpha(black, 0.5) inset;
   border: solid 1px alpha(black, 0.75);
 }
 
-button:active {
+.shadows button:active {
   padding: 11px 9px 9px 11px;
   text-shadow: 1px 1px 2.5px alpha(black, 0.6);
   -gtk-icon-shadow: 1px 1px 2.5px alpha(black, 0.6);

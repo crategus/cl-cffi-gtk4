@@ -1,4 +1,6 @@
-;;;; Various Label - 2022-11-12
+;;;; Various Label
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -101,4 +103,4 @@
     (gtk:box-append hbox vbox1)
     (gtk:box-append hbox (gtk:separator-new :vertical))
     (gtk:box-append hbox vbox2)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

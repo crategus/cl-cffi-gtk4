@@ -1,12 +1,14 @@
-;;;; Theming/CSS Blend Modes - 2021-11-27
+;;;; CSS Blend Modes
 ;;;;
 ;;;; You can blend multiple backgrounds using the CSS blend modes available.
+;;;;
+;;;; 2024-4-2
 
 ;; FIXME: This example gives a warning. What is the problem?
 ;;        Gtk-CRITICAL **: 16:38:45.006:
 ;;        gtk_root_get_focus: assertion 'GTK_IS_ROOT (self)' failed
 
-(in-package #:gtk4-example)
+(in-package :gtk4-example)
 
 (defparameter +blend-modes+ '(("Color"         "color")
                               ("Color (burn)"  "color-burn")
@@ -26,25 +28,33 @@
                               ("Soft Light"    "soft-light")))
 
 (defun do-css-blendmodes (&optional application)
-  (let* ((builder (gtk:builder-new-from-file (sys-path "resource/css-blendmodes.ui")))
-         (provider (make-instance 'gtk:css-provider))
+  (let* ((path1 (sys-path "resource/css-blendmodes.ui" :gtk4-example))
+         (builder (gtk:builder-new-from-file path1))
          (listbox (make-instance 'gtk:list-box))
-         (window (gtk:builder-object builder "window")))
+         (window (gtk:builder-object builder "window"))
+         (display (gtk:widget-display window))
+         (provider (make-instance 'gtk:css-provider))
+         (path2 (sys-path "resource/gtk4-example.gresource" :gtk4-example))
+         (resource (g:resource-load path2)))
+    ;; Register the resources
+    (g:resources-register resource)
+    ;; Add the window to the application
     (setf (gtk:window-application window) application)
     ;; Setup the CSS provider for window
-    (gtk:style-context-add-provider-for-display (gdk:display-default)
-                                                provider
-                                                +gtk-priority-application+)
+    (gtk:style-context-add-provider-for-display display provider)
+    (g:signal-connect window "destroy"
+        (lambda (widget)
+          (let ((display (gtk:widget-display widget)))
+            (gtk:style-context-remove-provider-for-display display provider))))
     ;; Signal handler for listbox
     (g:signal-connect listbox "row-activated"
         (lambda (listbox row)
           (declare (ignore listbox))
           (let* ((mode (second (elt +blend-modes+
                                     (gtk:list-box-row-index row))))
-                 (str (format nil
-                              (read-file (sys-path "resource/css-blendmodes.css"))
-                      mode mode mode)))
-            (gtk:css-provider-load-from-data provider str))))
+                 (path (sys-path "resource/css-blendmodes.css" :gtk4-example))
+                 (str (format nil (read-file path) mode mode mode)))
+            (gtk:css-provider-load-from-string provider str))))
     ;; Fill the list box
     (let ((normal nil))
       (dolist (mode +blend-modes+)
@@ -64,4 +74,4 @@
                                                          "scrolledwindow"))
           listbox)
     ;; Show the window
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

@@ -60,7 +60,7 @@
                         ;; repeatedly, so we return this value here. If this
                         ;; was a single-shot timeout, we could also return
                         ;; G_SOURCE_REMOVE here to get rid of it.
-                        g:+g-source-continue+)))))
+                        g:+source-continue+)))))
     (setf (nuclear-animation-sourceid obj) sourceid)
     ;; Remove the timeout we registered when constructing the object.
     (tg:finalize obj (lambda ()

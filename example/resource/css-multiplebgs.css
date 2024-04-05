@@ -26,7 +26,7 @@ paned separator:hover {
     background-color: #eef;
     background-image: -gtk-scaled(url('resource:///css-multiplebgs/brick.png'));
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 75% 25%;
 }
 
 #canvas-default {

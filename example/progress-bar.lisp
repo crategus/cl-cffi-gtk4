@@ -1,4 +1,11 @@
-;;;;  Example Progress Bar- 2022-7-23
+;;;; Progress Bar
+;;;;
+;;;; The <tt>gtk:progress-bar</tt> widget is typically used to display the
+;;;; progress of a long running operation. It provides a visual clue that
+;;;; processing is underway. The <tt>gtk:progress-bar</tt> widget can be used
+;;;; in two different modes: percentage mode and activity mode.
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -14,7 +21,7 @@
                     0.01)))
         (when (> val 1.0) (setq val 0.0))
         (setf (gtk:progress-bar-fraction (pbar-widget pdata)) val)))
-  +g-source-continue+)
+  g:+source-continue+)
 
 (defun do-progress-bar (&optional application)
   (let* ((vbox (make-instance 'gtk:box
@@ -46,7 +53,7 @@
        (gtk:css-provider-load-from-data provider css-data)
        (gtk:style-context-add-provider context
                                        provider
-                                       +gtk-priority-application+))
+                                       gtk:+priority-application+))
     (setf (pbar-timer pdata)
           (g:timeout-add 100
                          (lambda ()
@@ -104,4 +111,4 @@
                  (gtk:check-button-active check))))
       (gtk:box-append vbox check))
 
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

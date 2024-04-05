@@ -1,4 +1,6 @@
-;;;; Example Level Bar - 2023-3-28
+;;;; Level Bar
+;;;;
+;;;; 2024-4-5
 
 (in-package :gtk4-example)
 
@@ -16,16 +18,17 @@
     (gtk:level-bar-add-offset-value levelbar "high" 8.0)
     (gtk:level-bar-add-offset-value levelbar "full" 10.0)
     ;; CSS to change the color for the values
-    (gtk:css-provider-load-from-data provider
-                                     "levelbar block.filled.empty {
-                                        background-color: red; }
-                                      levelbar block.filled.low {
-                                        background-color: orange; }
-                                      levelbar block.filled.high {
-                                        background-color: yellow; }
-                                      levelbar block.filled.full {
-                                        background-color: green; }")
-    (gtk:widget-apply-provider levelbar provider)
+    (gtk:css-provider-load-from-string provider
+                                       "levelbar block.filled.empty {
+                                          background-color: red; }
+                                        levelbar block.filled.low {
+                                          background-color: orange; }
+                                        levelbar block.filled.high {
+                                          background-color: yellow; }
+                                        levelbar block.filled.full {
+                                          background-color: green; }")
+    (gtk:style-context-add-provider-for-display (gdk:display-default)
+                                                provider)
     ;; Return the new level bar
     levelbar))
 
@@ -75,4 +78,4 @@
                                         :xalign 0.0
                                         :label "<b>Change value</b>"))
     (gtk:box-append vbox scale)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

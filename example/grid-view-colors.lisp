@@ -697,7 +697,7 @@ refill (GtkWidget    *button,
                                        ".view.compact > child {padding: 1px;}")
       (gtk:style-context-add-provider-for-display (gdk:display-default)
                                                   provider
-                                                  gtk:+gtk-priority-user+))
+                                                  gtk:+priority-user+))
 
     (g:signal-connect sort-model "notify::pending" #'update-progress-cb)
     (gtk:overlay-add-overlay overlay progress)

@@ -1,4 +1,9 @@
-;;;; Example Dialog Windows - 2022-11-11
+;;;; Various Dialog Windows
+;;;;
+;;;; In this example, various GtkDialog, GtkMessageDialog and GtkAboutDialog
+;;;; widgets are shown.
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -54,7 +59,7 @@
     (gtk:dialog-add-button dialog "Cancel" :cancel)
     (gtk:dialog-set-default-response dialog :cancel)
     ;; Show the dialog
-    (gtk:widget-show dialog)))
+    (gtk:window-present dialog)))
 
 (defun create-dialog-from-ui (parent)
   (let ((builder (make-instance 'gtk:builder)))
@@ -65,14 +70,14 @@
                           (format t "response ID is : ~a~%" response)
                           (gtk:window-destroy widget)))
       (setf (gtk:window-transient-for dialog) parent)
-      (gtk:widget-show dialog))))
+      (gtk:window-present dialog))))
 
 (defun create-message-dialog (parent &optional (mtype :info))
   (let ((dialog (make-instance 'gtk:message-dialog
                                :transient-for parent
                                :modal t
                                :message-type mtype
-                               :buttons :cancel
+                               :buttons :ok
                                :text "Message Dialog"
                                :secondary-text
                                (format nil
@@ -83,15 +88,16 @@
                         (declare (ignore response))
                         (gtk:window-destroy widget)))
     ;; Show the message dialog
-    (gtk:widget-show dialog)))
+    (gtk:window-present dialog)))
 
 (defun create-about-dialog (parent)
   (gtk:show-about-dialog parent
                          :modal t
                          :program-name "GTK Demo"
-                         :version "0.00"
+                         :version
+                         (asdf:component-version (asdf:find-system :gtk4-demo))
                          :copyright "(c) Dieter Kaiser"
-                         :website "github.com/crategus/cl-cffi-gtk"
+                         :website "github.com/crategus/cl-cffi-gtk4"
                          :website-label "Project web site"
                          :license (dialog-license-text)
                          :authors '("Dieter Kaiser")
@@ -176,7 +182,7 @@
     (let* ((radio (gtk:check-button-new-with-label "Info"))
            (group radio)
            (hbox (make-instance 'gtk:box
-                               :orientation :horizontal)))
+                                :orientation :horizontal)))
       (g:signal-connect radio "toggled"
                         (lambda (widget)
                            (setf mtype (radio-button-toggled widget))))
@@ -210,4 +216,4 @@
       (gtk:box-append hbox radio)
       (gtk:box-append vbox hbox))
     ;; Pack and show the widgets
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

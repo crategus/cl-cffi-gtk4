@@ -1,6 +1,8 @@
-;;;; Example Spinner - 2022-11-18
-
-;;;; GtkSpinner allows to show that background activity is on-going.
+;;;; Spinner
+;;;;
+;;;; <tt>GtkSpinner</tt> allows to show that background activity is on-going.
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -13,7 +15,7 @@
                               :margin-end 6
                               :spacing 3))
          (window (make-instance 'gtk:window
-                                :title "Example Spinner"
+                                :title "Spinner"
                                 :child vbox
                                 :application application))
          (sensitive (gtk:spinner-new))
@@ -53,4 +55,4 @@
                   (gtk:spinner-start insensitive)))))
       (g:signal-emit toggle "toggled")
       (gtk:box-append vbox toggle))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

@@ -1,6 +1,8 @@
-;;;; Theming/Shadows - 2022-12-3
+;;;; CSS Shadows
 ;;;;
 ;;;; This demo shows how to use CSS shadows.
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -32,6 +34,8 @@
                                :start-child toolbar
                                :end-child scrolled
                                :orientation :vertical
+                               :position 48
+                               :shrink-start-child nil
                                :wide-handle t))
          (window (make-instance 'gtk:window
                                 :application application
@@ -39,16 +43,18 @@
                                 :title "CSS Shadows"
                                 :default-height 420
                                 :default-width 600))
+         (display (gtk:widget-display window))
          (provider (make-instance 'gtk:css-provider)))
+    (gtk:widget-add-css-class window "shadows")
     (g:signal-connect text "changed"
         (lambda (buffer)
           (let ((start (gtk:text-buffer-start-iter buffer))
                 (end (gtk:text-buffer-end-iter buffer)))
             (gtk:text-buffer-remove-all-tags buffer start end)
-            (gtk:css-provider-load-from-data
+            (gtk:css-provider-load-from-string
                               provider
                               (gtk:text-buffer-get-text buffer start end nil))
-            (apply-css-to-widget provider window))))
+            (gtk:style-context-add-provider-for-display display provider))))
     (g:signal-connect provider "parsing-error"
         (lambda (provider section err)
           (declare (ignore provider err))
@@ -63,7 +69,7 @@
                           (gtk:css-location-lines endloc)
                           (gtk:css-location-line-bytes endloc))))
             (gtk:text-buffer-apply-tag text "error" start end)
-            +gdk-event-stop+)))
+            gdk:+event-stop+)))
     (gtk:text-tag-table-add (gtk:text-buffer-tag-table text)
                             (make-instance 'gtk:text-tag
                                            :name "error"
@@ -71,6 +77,10 @@
     (setf (gtk:text-buffer-text text)
           (read-file (sys-path "resource/css-shadows.css")))
     ;; Apply the provider to the window
-    (apply-css-to-widget provider window)
+    (gtk:style-context-add-provider-for-display display provider)
+    (g:signal-connect window "destroy"
+        (lambda (widget)
+          (let ((display (gtk:widget-display widget)))
+            (gtk:style-context-remove-provider-for-display display window))))
     ;; Show the window
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

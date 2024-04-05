@@ -1,4 +1,6 @@
-;;;; Example Box - 2023-9-19
+;;;; Box Append
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -49,4 +51,4 @@
                                      "<b>Homogeneous box with more spacing</b>"
                                      :xalign 0))
       (gtk:box-append vbox (make-box t 12))
-      (setf (gtk:widget-visible window) t))))
+      (gtk:window-present window))))

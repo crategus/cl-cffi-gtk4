@@ -1,8 +1,10 @@
-;;;; Assistant - 2023-9-17
+;;;; Assistant
 ;;;;
 ;;;; Demonstrates a sample multi-step assistant. Assistants are used to divide
 ;;;; an operation into several simpler sequential steps, and to guide the user
 ;;;; through these steps.
+;;;;
+;;;; 2024-4-4
 
 (in-package #:gtk4-example)
 
@@ -43,7 +45,7 @@
                              :spacing 12))
          (label (make-instance 'gtk:label
                                :use-markup t
-                               :label 
+                               :label
                                "<b>Optional data, you may continue.</b>"))
          (check (make-instance 'gtk:check-button
                                :child label)))
@@ -109,9 +111,9 @@
     (g:signal-connect assistant "prepare"
       (lambda (assistant page)
         (declare (ignore page))
-        ;; The fourth page (counting from zero) is the progress page. The user 
-        ;; clicked Apply to get here so we tell the assistant to commit, which 
-        ;; means the changes up to this point are permanent and cannot be 
+        ;; The fourth page (counting from zero) is the progress page. The user
+        ;; clicked Apply to get here so we tell the assistant to commit, which
+        ;; means the changes up to this point are permanent and cannot be
         ;; cancelled or revisited.
         (when (= 3 (gtk:assistant-current-page assistant))
           (gtk:assistant-commit assistant))))
@@ -120,12 +122,12 @@
         ;; Start a timer to simulate changes taking a few seconds to apply
         (g:timeout-add 100
                        (lambda ()
-                         (let ((fraction (+ 0.025d0 
+                         (let ((fraction (+ 0.025d0
                                             (gtk:progress-bar-fraction pbar))))
                            (cond ((< fraction 1.0d0)
-                                  (setf (gtk:progress-bar-fraction pbar) 
+                                  (setf (gtk:progress-bar-fraction pbar)
                                         fraction)
-                                  +g-source-continue+)
+                                  g:+source-continue+)
                                  (t
                                   ;; TODO: GTK:WINDOW-CLOSE does not work at
                                   ;; this place. Therefore, we have to duplicate
@@ -134,11 +136,11 @@
                                       (gtk:widget-display assistant)
                                        provider)
                                   (gtk:window-destroy assistant)
-                                  +g-source-remove+)))))))
+                                  g:+source-remove+)))))))
     ;; Create and add the pages of the assistant
     (create-assistant-page1 assistant)
     (create-assistant-page2 assistant)
     (create-assistant-page3 assistant)
     (create-assistant-page4 assistant pbar)
     ;; Show the assistant
-    (setf (gtk:widget-visible assistant) t)))
+    (gtk:window-present assistant)))

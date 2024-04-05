@@ -42,7 +42,7 @@
            (mark (gtk:text-buffer-get-insert buffer))
            (iter (gtk:text-buffer-iter-at-mark buffer mark)))
       (follow-if-link view iter)))
-  gdk:+gdk-event-propagate+)
+  gdk:+event-propagate+)
 
 (defun released-cb (view x y)
   (let ((x (round x))

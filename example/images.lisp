@@ -1,11 +1,13 @@
-;;;; Example Image Widgets - 2023-3-10
+;;;; Image Widgets
 ;;;;
-;;;; GtkImage is used to display an image. The image can be in a number of
-;;;; formats. Typically, you load an image into a GdkPixbuf, then display the
+;;;; <tt>GtkImage</tt> is used to display an image. The image can be in a number
+;;;; of formats. Typically, you load an image into a GdkPixbuf, then display the
 ;;;; pixbuf.
 ;;;;
 ;;;; This demo code shows some of the more obscure cases, in the simple case a
-;;;; call to the function gtk:image-new-from-file is all you need.
+;;;; call to the <tt>gtk:image-new-from-file</tt> is all you need.
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -23,7 +25,7 @@
                 (setf image-stream nil)
                 (gdk-pixbuf:pixbuf-loader-close pixbuf-loader)
                 (setf pixbuf-loader nil)
-                (return-from progressive-timeout +g-source-remove+))
+                (return-from progressive-timeout g:+source-remove+))
               ;; Load the buffer into GdkPixbufLoader
               (progn
                 (gdk-pixbuf:pixbuf-loader-write pixbuf-loader buffer 128))))
@@ -55,7 +57,7 @@
                  (gtk:picture-set-pixbuf picture nil)
                  (gtk:picture-set-pixbuf picture pixbuf))))))
     ;; Continue the GSource
-    +g-source-continue+)
+    g:+source-continue+)
 
   (defun do-images (&optional application)
     (let* ((timeout nil)
@@ -193,4 +195,4 @@
         (gtk:box-append vbox label)
         (gtk:box-append vbox frame))
 
-      (gtk:widget-show window))))
+      (gtk:window-present window))))

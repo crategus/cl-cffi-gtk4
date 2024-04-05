@@ -1,4 +1,6 @@
-;;;; Paned Widgets - 2022-11-11
+;;;; Paned Window
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -31,4 +33,4 @@
                          :label-xalign 0
                          :label-yalign 0))
     (setf (gtk:paned-start-child paned1) paned2)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

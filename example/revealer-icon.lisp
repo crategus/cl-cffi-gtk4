@@ -1,7 +1,9 @@
-;;;; Example Revealer Icon - 2023-8-8
+;;;; Example Revealer Icon
 ;;;;
-;;;; GtkRevealer is a container that animates showing and hiding
+;;;; <tt>GtkRevealer</tt> is a container that animates showing and hiding
 ;;;; of its sole child with nice transitions.
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -36,4 +38,4 @@
                         (setf timeout 0)
                         nil)
                       t)))))
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))

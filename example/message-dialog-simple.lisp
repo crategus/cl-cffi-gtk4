@@ -1,6 +1,23 @@
-;;;; Simple Message Dialog - 2023-5-7
+;;;; Simple Message Dialog
+;;;;
+;;;; This file contains two variants for creating a message dialog. The first
+;;;; variant uses the <tt>make-instance</tt> function. The second variant
+;;;; constructs the message dialog with the <tt>gtk:message-dialog-new</tt>
+;;;; function.
+;;;;
+;;;; The installed signal handler for the <tt>"response"</tt> signal writes the
+;;;; obtained reponse value as an integer on the console.
+;;;;
+;;;; <b>Warning:</b>
+;;;;
+;;;; The <tt>GtkMessageDialog</tt> widget is deprectated since version 4.10. See
+;;;; the <tt>GtkAlertDialog</tt> widget for a replacement of the message dialog.
+;;;;
+;;;; 2024-4-2
 
 (in-package :gtk4-example)
+
+;; Variant 1
 
 (defun create-message-dialog-simple (parent)
   (let ((dialog (make-instance 'gtk:message-dialog
@@ -9,27 +26,29 @@
                                :message-type :info
                                :buttons :ok
                                :text "Message Dialog"
-                               :secondary-text "With secondary text")))
+                               :secondary-text "The secondary text.")))
     ;; Handler for the "response" signal of the dialog
     (g:signal-connect dialog "response"
                       (lambda (dialog response)
                         (format t "Response is ~a~%" response)
                         (gtk:window-destroy dialog)))
-    (gtk:widget-show dialog)))
+    (gtk:window-present dialog)))
 
-;; A variant which uses the GTK:MESSAGE-DIALOG-NEW function
+;; Variant 2
+
 (defun create-message-dialog-simple2 (parent)
   (let ((dialog (gtk:message-dialog-new parent
                                         '(:modal)
                                         :info
                                         :ok-cancel
-                                        "Message Dialog for ~a"
+                                        "Message Dialog"
                                         parent)))
-    ;; Set secondary text
-    (setf (gtk:message-dialog-secondary-text dialog) "With secondary text")
+    ;; Set secondary text with the accessor
+    (setf (gtk:message-dialog-secondary-text dialog)
+          "Created with constructor and with two buttons.")
     ;; Handler for the "response" signal of the dialog
     (g:signal-connect dialog "response"
                       (lambda (dialog response)
                         (format t "Response is ~a~%" response)
                         (gtk:window-destroy dialog)))
-    (gtk:widget-show dialog)))
+    (gtk:window-present dialog)))

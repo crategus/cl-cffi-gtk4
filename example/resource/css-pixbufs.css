@@ -107,11 +107,11 @@
 }
 
 @keyframes size-the-image {
-    0% { background-size: 96px, 12px, 96px, 12px, 96px, 12px, 96px, 12px, auto }
-  100% { background-size: 12px, 96px, 12px, 96px, 12px, 96px, 12px, 96px, auto }
+    0% { background-size: 96px, 12px, 96px, 12px, 96px, 12px, 96px, 12px, auto; }
+  100% { background-size: 12px, 96px, 12px, 96px, 12px, 96px, 12px, 96px, auto; }
 }
 
-window {
+window.pixbufs {
     background-image: url("apple-red.png"),
                       url("gnome-applets.png"),
                       url("gnome-calendar.png"),
@@ -131,12 +131,11 @@ window {
 }
 
 /* Make the text editor has a nice style */
-.view, scrollbar, separator {
+window.pixbufs .view, scrollbar, separator {
   color: black;
   background-color: rgba(255,255,255,0.5);
 }
 
-.view:selected {
+window.pixbufs .view:selected {
   background-color: rgba(127,127,255,0.5);
 }
-

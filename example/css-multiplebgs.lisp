@@ -1,9 +1,22 @@
-;;;; Theming/Multiple Backgrounds - 2022-1-15
+;;;; CSS Multiple Backgrounds
 ;;;;
 ;;;; GTK themes are written using CSS. Every widget is build of multiple items
 ;;;; that you can style very similarly to a regular website.
+;;;;
+;;;; 2024-4-2
 
 (in-package :gtk4-example)
+
+;; TODO: What is the correct way to remove the provider?!
+
+#+nil
+(defun apply-css (provider widget)
+  (let ((display (gtk:widget-display widget)))
+    (gtk:style-context-add-provider-for-display display provider)
+    (g:object-set-data-full widget "provider"
+        (lambda ()
+          (gtk:style-context-remove-provider-for-display display provider)))
+))
 
 (defun create-radio-toolbar (area)
   (let ((group nil)
@@ -87,7 +100,7 @@
                               :orientation :vertical))
          (window (make-instance 'gtk:window
                                 :application application
-                                :title "Example CSS Multiple Backgrounds"
+                                :title "CSS Multiple Backgrounds"
                                 :child vbox
                                 :default-height 420
                                 :default-width 600))
@@ -99,21 +112,22 @@
                                 :valign :center
                                 :width-request 270
                                 :height-request 96))
+         (display (gtk:widget-display window))
          (provider (make-instance 'gtk:css-provider)))
-    (gtk:drawing-area-set-draw-func area
-        (lambda (widget cr width height)
-          (let ((context (gtk:widget-style-context widget)))
-            (gtk:render-background context cr 0 0 width height)
-            (gtk:render-frame context cr 0 0 width height))))
+    (g:signal-connect window "destroy"
+        (lambda (widget)
+          (let ((display (gtk:widget-display widget)))
+            (gtk:style-context-remove-provider-for-display display provider))))
     (g:signal-connect text "changed"
         (lambda (buffer)
           (let ((start (gtk:text-buffer-start-iter buffer))
                 (end (gtk:text-buffer-end-iter buffer)))
             (gtk:text-buffer-remove-all-tags buffer start end)
-            (gtk:css-provider-load-from-data
+            (gtk:css-provider-load-from-string
                               provider
                               (gtk:text-buffer-get-text buffer start end nil))
-            (apply-css-to-widget provider window))))
+            (gtk:style-context-add-provider-for-display display provider))))
+
     (g:signal-connect provider "parsing-error"
         (lambda (provider section err)
           (declare (ignore provider err))
@@ -128,7 +142,7 @@
                           (gtk:css-location-lines endloc)
                           (gtk:css-location-line-bytes endloc))))
             (gtk:text-buffer-apply-tag text "error" start end)
-            +gdk-event-stop+)))
+            gdk:+event-stop+)))
     (gtk:text-tag-table-add (gtk:text-buffer-tag-table text)
                             (make-instance 'gtk:text-tag
                                            :name "error"
@@ -141,6 +155,8 @@
     (gtk:box-append vbox toolbar)
     (gtk:box-append vbox overlay)
     ;; Apply the provider to the window
-    (apply-css-to-widget provider window)
+    (gtk:css-provider-load-from-path provider
+                                     (sys-path "resource/css-multiplebgs.css"))
+    (gtk:style-context-add-provider-for-display display provider)
     ;; Show the window
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

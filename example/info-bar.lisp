@@ -1,4 +1,12 @@
-;;;; Example Info Bar - 2022-11-18
+;;;; Info Bar
+;;;;
+;;;; The <tt>gtk:info-bar</tt> widget can be used to show messages to the user
+;;;; without showing a dialog. It is often temporarily shown at the top or
+;;;; bottom of a document. In contrast to the <tt>gtk:dialog</tt> widget, which
+;;;; has a horizontal action area at the bottom, the info bar has a vertical
+;;;; action area at the side.
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -46,14 +54,14 @@
     (gtk:box-append vbox infobar)
     (gtk:box-append vbox label)
     (gtk:widget-hide infobar)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))
 
 
 (defun do-info-bar-1 (&optional application)
   (let* ((vbox (make-instance 'gtk:box
                               :orientation :vertical))
          (window (make-instance 'gtk:window
-                                :title "Example Info bar"
+                                :title "Info bar"
                                 :child vbox
                                 :application application
                                 :default-width 250))
@@ -76,4 +84,4 @@
     (gtk:box-append vbox infobar)
     (setf (gtk:label-text message) "An Info Message in the content area.")
     (setf (gtk:info-bar-message-type infobar) :info)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

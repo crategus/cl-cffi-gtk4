@@ -1,4 +1,6 @@
-;;;; Example Revealer - 2023-8-8
+;;;; Revealer
+;;;;
+;;;; 2024-4-4
 
 (in-package :gtk4-example)
 
@@ -109,7 +111,7 @@
       (gtk:grid-attach grid revealer 2 0 1 1))
     (setf (gtk:widget-visible window) t)))
 
-(defun do-revealer-swing (&optional (application nil))
+(defun do-revealer-swing (&optional application)
   (let* ((grid (make-instance 'gtk:grid
                               :column-homogeneous t
                               :row-homogeneous t
@@ -214,4 +216,4 @@
                               :default)
       (gtk:grid-attach grid toggle   2 1 1 1)
       (gtk:grid-attach grid revealer 2 0 1 1))
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window) t))
