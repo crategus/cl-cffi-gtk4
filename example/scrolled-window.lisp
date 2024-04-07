@@ -1,9 +1,11 @@
-;;;; Example Scrolled Window - 2022-6-16
+;;;; Scrolled Window
 ;;;;
 ;;;; The scrolled window widget is a container that accepts a single child
 ;;;; widget, makes that child scrollable using either internally added
 ;;;; scrollbars or externally associated adjustments, and optionally draws a
 ;;;; frame around the child.
+;;;;
+;;;; 2024-4-6
 
 (in-package #:gtk4-example)
 
@@ -22,4 +24,4 @@
       ;; Make the picture unshrinkable.
       (setf (gtk:picture-can-shrink picture) nil)
       ;; Show the window with the scrolled and the picture
-      (gtk:widget-show window)))
+      (gtk:window-present window)))

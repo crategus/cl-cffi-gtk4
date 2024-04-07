@@ -1,8 +1,11 @@
 ;;;; Multiple Views
 ;;;;
-;;;; The GtkTextView widget displays a GtkTextBuffer. One GtkTextBuffer can be
-;;;; displayed by multiple GtkTextViews. This demo has two views displaying a
-;;;; single buffer, and shows off the widget's text formatting features.
+;;;; The <tt>GtkTextView</tt> widget displays a <tt>GtkTextBuffer</tt> object.
+;;;; One <tt>GtkTextBuffer</tt> object can be displayed by multiple
+;;;; <tt>GtkTextView</tt> widgets. This demo has two views displaying a single
+;;;; buffer, and shows off the widget's text formatting features.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

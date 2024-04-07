@@ -1,5 +1,15 @@
 ;;;; Statusbar
 ;;;;
+;;;; The <tt>gtk:statusbar</tt> widget is usually placed along the bottom of the
+;;;; main <tt>gtk:window</tt> widget of the application. It may provide a
+;;;; regular commentary of the status of the application as is usually the case
+;;;; in a web browser, for example, or may be used to simply output a message
+;;;; when the status changes, when an upload is complete in an FTP client, for
+;;;; example.
+;;;;
+;;;; Statusbars in GTK maintain a stack of messages. The message at the top of
+;;;; the stack of the statusbar is the one that will currently be displayed.
+;;;;
 ;;;; 2024-4-5
 
 (in-package :gtk4-example)

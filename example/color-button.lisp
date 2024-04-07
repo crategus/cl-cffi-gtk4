@@ -1,8 +1,10 @@
-;;;; Example Color Button - 2022-8-27
+;;;; Color Button
 ;;;;
 ;;;; The example shows a color button. The button is initialized with the color
-;;;; "Blue". The handler for the "color-set" signal prints the selected color
-;;;; on the console.
+;;;; "Blue". The handler for the <tt>"color-set"</tt> signal prints the selected
+;;;; color on the console.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -24,4 +26,4 @@
         (lambda (widget)
           (let ((rgba (gtk:color-chooser-rgba widget)))
             (format t "Selected color is ~a~%" (gdk:rgba-to-string rgba)))))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

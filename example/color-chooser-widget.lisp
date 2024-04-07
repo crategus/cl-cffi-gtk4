@@ -1,4 +1,6 @@
-;;;; Color Chooser Widget - 2022-6-18
+;;;; Color Chooser Widget
+;;;;
+;;;; 2024-4-6
 
 (in-package #:gtk4-example)
 
@@ -18,4 +20,4 @@
         (lambda (chooser color)
           (declare (ignore chooser))
           (format t "Selected color is ~a~%" (gdk:rgba-to-string color))))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

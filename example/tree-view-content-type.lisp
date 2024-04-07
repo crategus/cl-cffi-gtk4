@@ -1,4 +1,6 @@
-;;;; Example Tree View Content Type - 2022-11-24
+;;;; Tree View Content Type
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -71,4 +73,4 @@
                                   :application application
                                   :default-width 550
                                   :default-height 350)))
-        (gtk:widget-show window))))
+        (gtk:window-present window))))

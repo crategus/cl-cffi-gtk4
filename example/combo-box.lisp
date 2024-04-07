@@ -1,4 +1,22 @@
-;;;; Combo Box - 2022-11-26
+;;;; Combo Box
+;;;;
+;;;; The <tt>gtk:combo-box</tt> widget allows the user to choose from a list of
+;;;; valid choices. The <tt>gtk:combo-box</tt> widget displays the selected
+;;;; choice. When activated, the <tt>gtk:combo-box</tt> widget displays a popup
+;;;; which allows the user to make a new choice. The style in which the selected
+;;;; value is displayed, and the style of the popup is determined by the current
+;;;; theme. It may be similar to a Windows style combo box.
+;;;;
+;;;; The <tt>gtk:combo-box</tt> widget uses the model-view pattern. The list of
+;;;; valid choices is specified in the form of a tree model, and the display of
+;;;; the choices can be adapted to the data in the model by using cell
+;;;; renderers, as you would in a tree view. This is possible since the
+;;;; <tt>gtk:combo-box</tt> class implements the <tt>gtk:cell-layout</tt>
+;;;; interface. The tree model holding the valid choices is not restricted to a
+;;;; flat list, it can be a real tree, and the popup will reflect the tree
+;;;; structure.
+;;;;
+;;;; 2024-4-7
 
 (in-package :gtk4-example)
 
@@ -30,19 +48,25 @@
 (defun do-combo-box (&optional application)
   (let* ((hbox (make-instance 'gtk:box
                               :orientation :horizontal
+                              :margin-top 24
+                              :margin-bottom 24
+                              :margin-start 24
+                              :margin-end 24
                               :spacing 24))
          (window (make-instance 'gtk:window
-                               :title "Example Combo Box"
+                               :title "Combo Box"
                                :child hbox
                                :application application))
          (vbox1 (make-instance 'gtk:box
                                :orientation :vertical
-                               :spacing 6))
+                               :spacing 12))
          (vbox2 (make-instance 'gtk:box
                                :orientation :vertical
-                               :spacing 6))
-
-         (label (make-instance 'gtk:label :label "label"))
+                               :spacing 12))
+         (label (make-instance 'gtk:label
+                               :label "label"
+                               :halign :start
+                               :valign :center))
          (model (create-and-fill-list-store-combo-box *icon-list*))
          (combo (make-instance 'gtk:combo-box
                                :model model)))
@@ -85,4 +109,4 @@
     (gtk:box-append vbox2 label)
     (gtk:box-append hbox vbox1)
     (gtk:box-append hbox vbox2)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

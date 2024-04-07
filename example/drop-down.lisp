@@ -1,3 +1,25 @@
+;;;; Drop Down
+;;;;
+;;;; The <tt>gtk:drop-down</tt> widget is a widget that allows the user to
+;;;; choose an item from a list of options. The <tt>gtk:drop-down</tt> widget
+;;;; displays the selected choice.
+;;;;
+;;;; The options are given to the <tt>gtk:drop-down</tt> widget in the form of
+;;;; a <tt>g:list-model</tt> object, and how the individual options are
+;;;; represented is determined by a <tt>gtk:list-item-factory</tt> object. The
+;;;; default factory displays simple strings.
+;;;;
+;;;; The <tt>gtk:drop-down</tt> widget knows how to obtain strings from the
+;;;; items in a <tt>gtk:string-list</tt> object. For other models, you have to
+;;;; provide an expression to find the strings via the
+;;;; <tt>gtk:drop-down-expression</tt> function.
+;;;;
+;;;; The <tt>gtk:drop-down</tt> widget can optionally allow search in the popup,
+;;;; which is useful if the list of options is long. To enable the search entry,
+;;;; use the <tt>gtk:drop-down-enable-search</tt> function.
+;;;;
+;;;; 2024-4-6
+
 (in-package :gtk4-example)
 
 #|
@@ -256,7 +278,7 @@ strings_factory_new (gpointer data, gboolean full)
   (declare (ignore pspec))
   (format t "in SELECTED-ITEM-CHANGED~%")
   (let ((checkmark (g:object-data item "checkmark")))
-  
+
     (if (eq (gtk:drop-down-selected-item dropdown) (gtk:list-item-item item))
         (setf (gtk:widget-opacity checkmark) 1.0)
         (setf (gtk:widget-opacity checkmark) 0.0))))
@@ -296,7 +318,7 @@ strings_factory_new (gpointer data, gboolean full)
         ;; STRINGS-BIND-ITEM
         (lambda (factory item)
           (format t "in BIND for ~a, ~a~%" factory item)
-          
+
           (let* ((holder (gtk:list-item-item item))
                  (title (g:object-data item "title"))
 ;                 (image (g:object-data item "image"))
@@ -326,7 +348,7 @@ strings_factory_new (gpointer data, gboolean full)
             (format t "  handlers : ~a~%" (gobject:object-signal-handlers factory))
             (format t "  handlers : ~a~%" (gobject:object-signal-handlers item))
             (g:signal-handler-disconnect factory handler-id)
-          
+
           )))
     factory
 ))

@@ -1,7 +1,9 @@
-;;;; Example Text Entry Completion - 2022-7-25
+;;;; Text Entry Completion
 ;;;;
-;;;; GtkEntryCompletion provides a mechanism for adding support for completion
-;;;; in GtkEntry.
+;;;; <tt>GtkEntryCompletion</tt> provides a mechanism for adding support for
+;;;; completion in <tt>GtkEntry</tt>.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -58,4 +60,4 @@
                                    (format nil
                                            "Try writing <b>total</b> or ~
                                             <b>GNOME</b> for example.")))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

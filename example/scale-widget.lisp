@@ -1,4 +1,6 @@
-;;;; Example Scale Widget - 2023-8-25
+;;;; Scale Widget
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -151,4 +153,4 @@
                                      :label "Scrollbar Page Size:"))
       (gtk:box-append box scale)
       (gtk:box-append box1 box))
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))

@@ -1,4 +1,6 @@
-;;;; Example Font Button Label - 2022-11-20
+;;;; Font Button Label
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -23,7 +25,6 @@
                                :label "Font Button"
                                :use-markup t))
          (button (make-instance 'gtk:font-button)))
-
     (g:signal-connect button "font-set"
         (lambda (chooser)
           (let* (;; Get the font description
@@ -61,4 +62,4 @@
     (gtk:box-append box button)
     (gtk:box-append box label)
     ;; Show the widgets
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

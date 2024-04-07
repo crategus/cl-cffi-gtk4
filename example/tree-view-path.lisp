@@ -1,4 +1,6 @@
-;;;;  Example Tree View Path - 2022-11-24
+;;;; Tree View Path
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -84,4 +86,4 @@
                                   :application application
                                   :default-width 350
                                   :default-height 250)))
-        (gtk:widget-show window))))
+        (gtk:window-present window))))

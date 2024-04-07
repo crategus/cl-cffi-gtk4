@@ -1,4 +1,6 @@
-;;;; Simple Text View - 2023-10-4
+;;;; Simple Text View
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

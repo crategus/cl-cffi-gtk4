@@ -1,4 +1,6 @@
-;;;; Example GdkAppLaunchContext - 2023-9-18
+;;;; GdkAppLaunchContext
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -63,4 +65,4 @@
                       (if (g:app-info-launch-default-for-uri-finish result)
                           (gtk:window-destroy window)
                           (format t "Launching failed.~%")))))))
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))

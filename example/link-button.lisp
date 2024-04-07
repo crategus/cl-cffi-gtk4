@@ -1,4 +1,6 @@
-;;;; Link button - 2022-11-18
+;;;; Link button
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -31,4 +33,4 @@
     (gtk:box-append vbox
                     (gtk:link-button-new-with-label "http://www.gtk.org/"
                                                     "Project WebSite"))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

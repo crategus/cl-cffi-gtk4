@@ -1,10 +1,12 @@
 ;;;; Undo and Redo
 ;;;;
-;;;; The GtkTextView supports undo and redo through the use of a GtkTextBuffer.
-;;;; You can enable or disable undo support using
-;;;; gtk_text_buffer_set_enable_undo().
-;;;; Use Control+z to undo and Control+Shift+z or Control+y to redo previously
+;;;; The <tt>GtkTextView</tt> widget supports undo and redo through the use of a
+;;;; <tt>GtkTextBuffer</tt> object. You can enable or disable undo support using
+;;;; the <tt>gtk:text-buffer-enable-undo} function. Use <tt>Control+z</tt> to
+;;;; undo and <tt>Control+Shift+z</tt> or <tt>Control+y</tt> to redo previously
 ;;;; undone operations.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

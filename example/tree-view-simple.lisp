@@ -1,4 +1,6 @@
-;;;; Example Tree View Simple - 2022-11-24
+;;;; Tree View Simple
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -91,4 +93,4 @@
                     (title (gtk:tree-model-value model iter col-title)))
                (format t "Selected title is ~a~%" title)))))
       ;; Pack and show the widgets
-      (gtk:widget-show window))))
+      (gtk:window-present window))))

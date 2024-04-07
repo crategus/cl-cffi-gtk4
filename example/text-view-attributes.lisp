@@ -1,8 +1,10 @@
-;;;;  Text View Attributes - 2023-10-4
+;;;;  Text View Attributes
 ;;;;
 ;;;; This examples uses a tag to change the color for just one word in the
 ;;;; text view. CSS data is also loaded to change the font and the color
 ;;;; for the text view.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

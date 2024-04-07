@@ -1,4 +1,6 @@
-;;;; Example Toggle Buttons - 2023-11-19
+;;;; Toggle Buttons
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -53,4 +55,4 @@
     ;; Add a label which shows the status of the toggle buttons
     (gtk:box-append vbox label)
     ;; Show the window
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

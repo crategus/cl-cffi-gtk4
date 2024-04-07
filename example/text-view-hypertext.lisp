@@ -6,6 +6,8 @@
 ;;;; shows. We also demonstrate adding other things to a text view, such as
 ;;;; clickable icons and widgets which can also replace a character (try copying
 ;;;; the ghost text).
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

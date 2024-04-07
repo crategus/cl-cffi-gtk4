@@ -1,4 +1,6 @@
-;;;; Example Spin Button - 2023-9-30
+;;;; Spin Button
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -199,4 +201,4 @@
                                        :use-markup t))
         (gtk:box-append vbox label)
         (gtk:box-append vbox hbox)))
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))

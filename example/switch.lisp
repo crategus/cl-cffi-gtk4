@@ -1,4 +1,6 @@
-;;;; Example Switch - 2023-3-26
+;;;; Switch
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -28,4 +30,4 @@
               (setf (gtk:label-label label) "Switch is Off"))))
     (gtk:box-append box switch)
     (gtk:box-append box label)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

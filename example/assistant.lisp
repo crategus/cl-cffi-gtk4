@@ -91,7 +91,7 @@
                .pbar progressbar > trough > progress {
                    min-height : 36px; }"))
     ;; Change the appearance of the progress bar
-    (gtk:css-provider-load-from-data provider css)
+    (gtk:css-provider-load-from-string provider css)
     (gtk:widget-add-css-class assistant "pbar")
     (gtk:style-context-add-provider-for-display (gtk:widget-display assistant)
                                                 provider)

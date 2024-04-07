@@ -1,4 +1,6 @@
-;;;; Example Search Bar - 2023-8-26
+;;;; Search Bar
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

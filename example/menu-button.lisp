@@ -1,4 +1,6 @@
-;;;; Example Menu Button - 2023-3-25
+;;;; Menu Buttons
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -82,4 +84,4 @@
                                                        :label "Popover"))))
     (gtk:box-append box button)
     ;; Show the window
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

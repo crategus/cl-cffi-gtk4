@@ -1,6 +1,8 @@
-;;;; Example Entry Buffer - 2022-11-18
+;;;; Entry Buffer
 ;;;;
-;;;; GtkEntryBuffer provides the text content in a GtkEntry.
+;;;; <tt>GtkEntryBuffer</tt> provides the text content in a <tt>GtkEntry</tt>.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

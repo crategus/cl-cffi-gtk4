@@ -1,6 +1,8 @@
-;;;; Example Frame Widget - 2022-9-9
+;;;; Frame Widget Properties
 ;;;;
 ;;;; This example allows to change interactively the appearance of the frame.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -107,4 +109,4 @@
     (gtk:box-append content frame)
     (gtk:box-append content action)
     ;; Show the window.
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

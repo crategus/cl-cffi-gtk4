@@ -1,7 +1,9 @@
 ;;;; Automatic Scrolling
 ;;;;
-;;;; This example demonstrates how to use the gravity of GtkTextMarks to keep
-;;;; a text view scrolled to the bottom while appending text.
+;;;; This example demonstrates how to use the gravity of <tt>GtkTextMark</tt>
+;;;; objects to keep a text view scrolled to the bottom while appending text.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

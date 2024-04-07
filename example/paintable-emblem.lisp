@@ -1,9 +1,10 @@
 ;;;; Emblems
 ;;;;
-;;;; This demo shows how GdkPaintable can be used to overlay an emblem on top of
-;;;; an icon. The emblem can either be another icon, or an arbitrary paintable.
+;;;; This demo shows how <tt>GdkPaintable</tt> can be used to overlay an emblem
+;;;; on top of an icon. The emblem can either be another icon, or an arbitrary
+;;;; paintable.
 ;;;;
-;;;; 2023-10-29
+;;;; 2024-4-6
 
 (in-package :gtk)
 

@@ -1,9 +1,11 @@
-;;;; Example Color Button Label - 2022-8-28
+;;;; Color Button Label
 ;;;;
 ;;;; The example shows a color button. The button is initialized with the color
 ;;;; "Black". The handler for the "color-set" signal changes the color of the
 ;;;; "Color button" label. To change the color of the label the CSS color is
 ;;;; loaded in a CSS provider and the style context of the label is updated.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -44,4 +46,4 @@
     ;; Pack and show the widgets
     (gtk:box-append box button)
     (gtk:box-append box label)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

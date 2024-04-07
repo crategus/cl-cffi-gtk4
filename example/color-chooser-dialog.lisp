@@ -1,8 +1,10 @@
-;;;; Example Color Chooser Dialog - 2022-8-28
+;;;; Color Chooser Dialog
 ;;;;
 ;;;; Clicking on the drawing area opens a color chooser dialog to select a
 ;;;; background color for the drawing area. The default palette is replaced
 ;;;; for this color chooser dialog.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -83,4 +85,4 @@
                     (gtk:window-destroy dialog)))
               (gtk:widget-show dialog))))
       ;; Show the window
-      (gtk:widget-show window))))
+      (gtk:window-present window))))

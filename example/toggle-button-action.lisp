@@ -1,4 +1,6 @@
-;;;; Example Toggle Buttons with Action - 2023-11-19
+;;;; Toggle Buttons with Action
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -61,4 +63,4 @@
     (g:action-activate (g:action-map-lookup-action application "toggled")
                        (g:variant-new-string "center"))
     ;; Show the window
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

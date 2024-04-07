@@ -1,13 +1,14 @@
 ;;;; Simple Paintable
 ;;;;
-;;;; GdkPaintable is an interface used by GTK for drawings of any sort that do
-;;;; not require layouting or positioning.
+;;;; <tt>GdkPaintable</tt> is an interface used by GTK for drawings of any sort
+;;;; that do not require layouting or positioning.
 ;;;;
 ;;;; This demo code gives a simple example on how a paintable can be created.
 ;;;; Paintables can be used in many places inside GTK widgets, but the most
-;;;; common usage is inside GtkImage and that's what we're going to do here.
+;;;; common usage is inside <tt>GtkImage</tt> and that is what we are going to
+;;;; do here.
 ;;;;
-;;;; 2023-11-4
+;;;; 2024-4-6
 
 (in-package :gdk)
 

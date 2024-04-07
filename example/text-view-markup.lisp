@@ -1,9 +1,11 @@
-;;;; Markup - 2023-10-13
+;;;; Markup
 ;;;;
-;;;; GtkTextBuffer lets you define your own tags that can influence text
-;;;; formatting in a variety of ways. In this example, we show that
-;;;; GtkTextBuffer can load Pango markup and automatically generate suitable
-;;;; tags.
+;;;; <tt>GtkTextBuffer</tt> lets you define your own tags that can influence
+;;;; text formatting in a variety of ways. In this example, we show that
+;;;; <tt>GtkTextBuffer</tt> can load Pango markup and automatically generate
+;;;; suitable tags.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

@@ -1,6 +1,6 @@
 ;;;; Animated Paintable
 ;;;;
-;;;; GdkPaintable also allows paintables to change.
+;;;; <tt>GdkPaintable</tt> also allows paintables to change.
 ;;;;
 ;;;; This demo code gives an example of how this could work. It builds on the
 ;;;; previous simple example.
@@ -8,7 +8,7 @@
 ;;;; Paintables can also change their size, this works similarly, but we will
 ;;;; not demonstrate this here as our icon does not have any size.
 ;;;;
-;;;; 2023-11-9
+;;;; 2024-4-6
 
 (in-package :gdk)
 

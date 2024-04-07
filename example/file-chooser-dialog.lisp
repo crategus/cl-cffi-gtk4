@@ -1,4 +1,6 @@
-;;;; Example File Chooser Dialog - 2023-8-22
+;;;; File Chooser Dialog
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -26,4 +28,4 @@
     (gtk:file-filter-add-pixbuf-formats filter-picture)
     (gtk:file-chooser-add-filter dialog filter-picture)
     ;; Show the dialog
-    (setf (gtk:widget-visible dialog) t)))
+    (gtk:window-present dialog)))

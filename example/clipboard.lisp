@@ -1,10 +1,12 @@
-;;;; Clipboard - 2023-7-29
+;;;; Clipboard
 ;;;;
-;;;; GdkClipboard is used for clipboard handling. This demo shows how to copy
-;;;; and paste text, images, colors or files to and from the clipboard.
+;;;; <tt>GdkClipboard</tt> is used for clipboard handling. This demo shows how
+;;;; to copy and paste text, images, colors or files to and from the clipboard.
 ;;;;
 ;;;; You can also use Drag-And-Drop to copy the data from the source to the
 ;;;; target.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -138,7 +140,7 @@
 (defun drag-prepare-cb (source x y)
   (declare (ignore x y))
   (let ((button (gtk:event-controller-widget source)))
-    ;; TODO:GValue is a foreign type and less well implemented than other 
+    ;; TODO:GValue is a foreign type and less well implemented than other
     ;; GBoxed types. Consider to improve the implementation of GValue.
     (cffi:with-foreign-object (gvalue '(:struct g:value))
       (cond ((g:type-is-a (g:type-from-instance button) "GtkToggleButton")
@@ -205,4 +207,4 @@
     (setf (gtk:widget-sensitive paste) nil)
     (setf (gtk:window-application window) application)
     ;; Show the window
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))

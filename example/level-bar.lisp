@@ -1,6 +1,17 @@
 ;;;; Level Bar
 ;;;;
-;;;; 2024-4-5
+;;;; The <tt>gtk:level-bar widget</tt> is a bar widget that can be used as a
+;;;; level indicator. Typical use cases are displaying the strength of a
+;;;; password, or showing the charge level of a battery.
+;;;;
+;;;; Use the <tt>gtk:level-bar-value</tt> function to set the current value, and
+;;;; the <tt>gtk:level-bar-add-offset-value</tt> function to set the value
+;;;; offsets at which the bar will be considered in a different state. GTK will
+;;;; add a few offsets by default on the level bar: <tt>"low"</tt>,
+;;;; <tt>"high"</tt> and <tt>"full"</tt>, with values 0.25, 0.75 and 1.0
+;;;; respectively.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 

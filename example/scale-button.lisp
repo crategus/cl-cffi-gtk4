@@ -1,4 +1,6 @@
-;;;; Example Scale Button - 2023-3-26
+;;;; Scale Button
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -38,4 +40,4 @@
     (gtk:css-provider-load-from-data provider css-button)
     (gtk:widget-apply-provider button provider)
     ;; Show the window
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

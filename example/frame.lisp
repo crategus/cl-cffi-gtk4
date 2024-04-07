@@ -1,4 +1,6 @@
-;;;; Example Frame Widget - 2022-9-9
+;;;; Frame Widget
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -17,4 +19,4 @@
                                 :default-width 250
                                 :default-height 200
                                 :resizable nil)))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

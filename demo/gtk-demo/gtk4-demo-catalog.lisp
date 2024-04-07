@@ -411,12 +411,27 @@
        ":window"
        "DO-COMBO-BOX"
        "gtk4-example"
-       "combo-box.lisp")
+       "combo-box.lisp"
+       :keywords
+       "GtkComboBox"
+       "gtk:combo-box"
+       "gtk:combo-box-set-row-separator-func"
+       "gtk:combo-box-active-id"
+       "gtk:combo-box-id-column"
+       "gtk:combo-box-active")
       ("Combo Box Text"
        ":window"
        "DO-COMBO-BOX-TEXT"
        "gtk4-example"
-       "combo-box-text.lisp"))
+       "combo-box-text.lisp"
+       :keywords
+       "GtkComboBoxText"
+       "gtk:combo-box-active"
+       "gtk:combo-box-child"
+       "gtk:combo-box-text"
+       "gtk:combo-box-text-append-text"
+       "gtk:combo-box-text-active-text"
+       "gtk:combo-box-text-remove"))
 
      "Selectors (Color/File/Font)"
      (("Color Button"

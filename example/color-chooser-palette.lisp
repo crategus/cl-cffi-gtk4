@@ -1,4 +1,6 @@
-;;;; Color Chooser Palette - 2022-8-28
+;;;; Color Chooser Palette
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -139,7 +141,7 @@
       ("CornflowerBlue"        #x6495ED    "rgb(100, 149, 237)")
       ("MediumSlateBlue"       #x7B68EE    "rgb(123, 104, 238)")
       ("RoyalBlue"             #x4169E1    "rgb( 65, 105, 225)")
-      ("Blue"                  #x0000FF	   "rgb(  0,   0, 255)")
+      ("Blue"                  #x0000FF    "rgb(  0,   0, 255)")
       ("MediumBlue"            #x0000CD    "rgb(  0,   0, 205)")
       ("DarkBlue"              #x00008B    "rgb(  0,   0, 139)")
       ("Navy"                  #x000080    "rgb(  0,   0, 128)")
@@ -227,4 +229,4 @@
       (setf (gtk:combo-box-active combo-add-palette) 0)
       (gtk:box-append hbox color-chooser)
       (gtk:box-append hbox action-grid)
-      (gtk:widget-show window)))
+      (gtk:window-present window)))

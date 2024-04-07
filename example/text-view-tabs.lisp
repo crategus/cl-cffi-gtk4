@@ -1,8 +1,11 @@
-;;;; Text View Tabs - 2023-10-14
+;;;; Text View Tabs
 ;;;;
-;;;; GtkTextView can position text at fixed positions, using tabs. Tabs can
-;;;; specify alignment, and also allow aligning numbers on the decimal point.
-;;;; The example here has three tabs, with left, numeric and right alignment.
+;;;; <tt>GtkTextView</tt> can position text at fixed positions, using tabs. Tabs
+;;;; can specify alignment, and also allow aligning numbers on the decimal
+;;;; point. The example here has three tabs, with left, numeric and right
+;;;; alignment.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -41,5 +44,4 @@
           (format nil
                   "one~c2,0~cthree~%four~c5,555~csix~%seven~c88,88~cnine"
                   #\Tab #\Tab #\Tab #\Tab #\Tab #\Tab))
-    (gtk:window-present window)
-))
+    (gtk:window-present window)))

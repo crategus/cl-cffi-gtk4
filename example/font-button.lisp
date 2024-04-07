@@ -1,4 +1,6 @@
-;;;; Font Chooser Button - 2022-11-20
+;;;; Font Chooser Button
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -34,4 +36,4 @@
                      (gtk:font-chooser-font-face button)))
          (format t "   Font size   : ~A~%"
                    (gtk:font-chooser-font-size button))))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

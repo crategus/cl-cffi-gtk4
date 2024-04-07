@@ -1,4 +1,6 @@
-;;;; Example Check Buttons - 2023-3-20
+;;;; Check Buttons
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -43,4 +45,4 @@
     ;; Make the first check button active
     (setf (gtk:check-button-active (gtk:grid-child-at grid 1 0)) t)
     ;; Show the window and its content
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

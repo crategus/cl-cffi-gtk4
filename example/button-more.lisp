@@ -1,4 +1,6 @@
-;;;; Example More Buttons - 2023-9-19
+;;;; More Buttons
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -97,4 +99,4 @@
     (gtk:grid-attach grid button 1 2 1 1)
     ;; Show the window
     (gtk:size-group-add-widget group button)
-    (setf (gtk:widget-visible window) t)))
+    (gtk:window-present window)))

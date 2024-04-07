@@ -1,4 +1,6 @@
-;;;; Example Entry - 2022-11-17
+;;;; Entry
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -60,4 +62,4 @@
     ;; Pack and show the widgets
     (gtk:box-append vbox entry)
     (gtk:box-append vbox hbox)
-    (gtk:widget-show window)))
+    (gtk:window-present window)))

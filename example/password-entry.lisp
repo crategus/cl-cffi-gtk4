@@ -1,8 +1,11 @@
-;;;; Password Entry - 2023-9-30
+;;;; Password Entry
 ;;;;
-;;;; GtkPasswordEntry provides common functionality of entries that are used to
-;;;; enter passwords and other secrets. It will display a warning if CapsLock is
-;;;; on, and it can optionally provide a way to see the text.
+;;;; <tt>GtkPasswordEntry</tt> provides common functionality of entries that are
+;;;; used to enter passwords and other secrets. It will display a warning if
+;;;; <tt>CapsLock</tt> is on, and it can optionally provide a way to see the
+;;;; text.
+;;;;
+;;;; 2024-4-6
 
 (in-package :gtk4-example)
 
@@ -66,4 +69,4 @@
       (gtk:box-append box entry2)
       (gtk:header-bar-pack-end header button)
       (gtk:header-bar-pack-start header cancel)
-      (setf (gtk:widget-visible window) t))))
+      (gtk:window-present window))))
