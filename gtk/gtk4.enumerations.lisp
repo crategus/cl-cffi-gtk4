@@ -168,7 +168,24 @@
 (setf (liber:alias-for-symbol 'baseline-position)
       "GEnum"
       (liber:symbol-documentation 'baseline-position)
- "@version{2023-9-19}
+ "@version{2024-4-7}
+  @begin{declaration}
+    @begin{pre}
+(gobject:define-g-enum \"GtkBaselinePosition\" baseline-position
+  (:export t
+   :type-initializer \"gtk_baseline_position_get_type\")
+  (:top 0)
+  (:center 1)
+  (:bottom 2))
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:top]{Align the baseline at the top.}
+      @entry[:center]{Center the baseline.}
+      @entry[:bottom]{Align the baseline at the bottom.}
+    @end{table}
+  @end{values}
   @begin{short}
     Baseline position in a row of widgets.
   @end{short}
@@ -177,19 +194,6 @@
   space in the row is taller than the total requested height of the
   baseline aligned children then it can use a @symbol{gtk:baseline-position}
   value to select where to put the baseline inside the extra available space.
-  @begin{pre}
-(gobject:define-g-enum \"GtkBaselinePosition\" baseline-position
-  (:export t
-   :type-initializer \"gtk_baseline_position_get_type\")
-  (:top 0)
-  (:center 1)
-  (:bottom 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:top]{Align the baseline at the top.}
-    @entry[:center]{Center the baseline.}
-    @entry[:bottom]{Align the baseline at the bottom.}
-  @end{table}
   @see-class{gtk:box}
   @see-class{gtk:grid}")
 
@@ -409,25 +413,29 @@
 (setf (liber:alias-for-symbol 'sensitivity-type)
       "GEnum"
       (liber:symbol-documentation 'sensitivity-type)
- "@version{2023-9-1}
-  @begin{short}
-    Determines how GTK handles the sensitivity of various controls, such as
-    combo box buttons.
-  @end{short}
-  @begin{pre}
+ "@version{2024-4-7}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkSensitivityType\" sensitivity-type
   (:export t
    :type-initializer \"gtk_sensitivity_type_get_type\")
   (:auto 0)
   (:on 1)
   (:off 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:auto]{The control is made insensitive if no action can be
-      triggered.}
-    @entry[:on]{The control is always sensitive.}
-    @entry[:off]{The control is always insensitive.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:auto]{The control is made insensitive if no action can be
+        triggered.}
+      @entry[:on]{The control is always sensitive.}
+      @entry[:off]{The control is always insensitive.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Determines how GTK handles the sensitivity of various controls, such as
+    combo box buttons.
+  @end{short}
   @see-class{gtk:combo-box}")
 
 ;;; ----------------------------------------------------------------------------

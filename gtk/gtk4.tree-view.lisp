@@ -138,7 +138,7 @@
 ;;;     gtk_tree_view_set_search_entry
 ;;;
 ;;;     GtkTreeViewRowSeparatorFunc
-;;;     gtk_tree_view_get_row_separator_func
+;;;     gtk_tree_view_get_row_separator_func                not needed
 ;;;     gtk_tree_view_set_row_separator_func
 ;;;
 ;;;     gtk_tree_view_is_rubber_banding_active
@@ -3148,30 +3148,28 @@ lambda (model column key iter data)
     ((model (g:object tree-model))
      (iter (g:boxed tree-iter))
      (data :pointer))
-  (restart-case
-    (funcall (glib:get-stable-pointer-value data) model iter)
-    (return-true () t)
-    (return-false () nil)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (restart-case
+      (funcall func model iter)
+      (return-true () :report "Return T" t)
+      (return-false () :report "Return NIL" nil))))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-view-row-separator-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-row-separator-func)
- "@version{#2024-3-10}
+ "@version{2024-4-7}
+  @syntax{lambda (model iter) => result}
+  @argument[model]{a @class{gtk:tree-model} object}
+  @argument[iter]{a @class{gtk:tree-iter} instance pointing at a row in
+    @arg{model}}
+  @argument[result]{@em{true} if the row is a separator}
   @begin{short}
     Callback function type for determining whether the row pointed to by
     @arg{iter} should be rendered as a separator.
   @end{short}
   A common way to implement this is to have a boolean column in the model,
   whose values the callback function returns.
-  @begin{pre}
-lambda (model iter)
-  @end{pre}
-  @begin[code]{table}
-    @entry[model]{The @class{gtk:tree-model} object.}
-    @entry[iter]{The @class{gtk:tree-iter} instance pointing at a row in model.}
-    @entry[Return]{@em{True} if the row is a separator.}
-  @end{table}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}")
@@ -3179,20 +3177,7 @@ lambda (model iter)
 (export 'tree-view-row-separator-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_row_separator_func ()
-;;;
-;;; GtkTreeViewRowSeparatorFunc
-;;; gtk_tree_view_get_row_separator_func (GtkTreeView *tree_view);
-;;;
-;;; Returns the current row separator function.
-;;;
-;;; tree_view :
-;;;     a GtkTreeView
-;;;
-;;; Returns :
-;;;     the current row separator function.
-;;;
-;;; Since 2.6
+;;; gtk_tree_view_get_row_separator_func ()                 not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------

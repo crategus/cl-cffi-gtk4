@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -160,36 +160,36 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- box-baseline-child -----------------------------------------------------
+;;; --- gtk:box-baseline-child -------------------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "baseline-child" 'box) t)
  "The @code{baseline-child} property of type @code{:int} (Read / Write) @br{}
-  The position of the child widget that determines the baseline, in vertical
-  orientation. Since 4.12 @br{}
+  The child widget that determines the baseline, in vertical orientation.
+  Since 4.12 @br{}
   Default value: -1")
 
 #+(and gtk-4-12 liber-documentation)
 (setf (liber:alias-for-function 'box-baseline-child)
       "Accessor"
       (documentation 'box-baseline-child 'function)
- "@version{#2023-8-25}
-  @syntax[]{(gtk:box-baseline-child object) => position}
-  @syntax[]{(setf (gtk:box-baseline-child object) position)}
+ "@version{2024-4-7}
+  @syntax[]{(gtk:box-baseline-child object) => child}
+  @syntax[]{(setf (gtk:box-baseline-child object) child)}
   @argument[object]{a @class{gtk:box} widget}
-  @argument[position]{an integer with the position of the baseline child widget}
+  @argument[child]{an integer with the baseline child widget}
   @begin{short}
-    Accessor of the @slot[box]{baseline-child} slot of the @class{gtk:box}
+    Accessor of the @slot[gtk:box]{baseline-child} slot of the @class{gtk:box}
     class.
   @end{short}
-  The @fun{gtk:box-baseline-child} function gets the position of the baseline
-  child widget. The @setf{gtk:box-baseline-position} function sets the position.
+  The @fun{gtk:box-baseline-child} function gets the baseline child widget. The
+  @setf{gtk:box-baseline-position} function sets the baseline child widget.
   This affects only vertical boxes.
 
   Since 4.12
   @see-class{gtk:box}")
 
-;;; --- box-baseline-position --------------------------------------------------
+;;; --- gtk:box-baseline-position ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "baseline-position" 'box) t)
@@ -202,13 +202,13 @@
 (setf (liber:alias-for-function 'box-baseline-position)
       "Accessor"
       (documentation 'box-baseline-position 'function)
- "@version{2023-8-25}
+ "@version{2024-4-7}
   @syntax[]{(gtk:box-baseline-position object) => position}
   @syntax[]{(setf (gtk:box-baseline-position object) position)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[position]{a value of the @symbol{gtk:baseline-position} enumeration}
   @begin{short}
-    Accessor of the @slot[box]{baseline-position} slot of the
+    Accessor of the @slot[gtk:box]{baseline-position} slot of the
     @class{gtk:box} class.
   @end{short}
   The @fun{gtk:box-baseline-position} function gets the baseline position of a
@@ -221,7 +221,7 @@
   @see-class{gtk:box}
   @see-symbol{gtk:baseline-position}")
 
-;;; --- box-homogeneous --------------------------------------------------------
+;;; --- gtk:box-homogeneous ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "homogeneous" 'box) t)
@@ -233,14 +233,14 @@
 (setf (liber:alias-for-function 'box-homogeneous)
       "Accessor"
       (documentation 'box-homogeneous 'function)
- "@version{2023-8-25}
+ "@version{2024-4-7}
   @syntax[]{(gtk:box-homogeneous object) => homogeneous}
   @syntax[]{(setf (gtk:box-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[homogeneous]{@em{true} to create equal allotments, @em{false}
     for variable allotments}
   @begin{short}
-    Accessor of the @slot[box]{homogeneous} slot of the @class{gtk:box}
+    Accessor of the @slot[gtk:box]{homogeneous} slot of the @class{gtk:box}
     class.
   @end{short}
   The @fun{gtk:box-homogeneous} function returns whether or not all children of
@@ -248,7 +248,7 @@
   function sets the property.
   @see-class{gtk:box}")
 
-;;; --- box-spacing ------------------------------------------------------------
+;;; --- gtk:box-spacing --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "spacing" 'box) t)
@@ -261,7 +261,7 @@
 (setf (liber:alias-for-function 'box-spacing)
       "Accessor"
       (documentation 'box-spacing 'function)
- "@version{2023-8-25}
+ "@version{2024-4-7}
   @syntax[]{(gtk:box-spacing object) => spacing}
   @syntax[]{(setf (gtk:box-spacing object) spacing)}
   @argument[object]{a @class{gtk:box} widget}
@@ -271,8 +271,8 @@
     Accessor of the @slot[gtk:box]{spacing} slot of the @class{gtk:box} class.
   @end{short}
   The @fun{gtk:box-spacing} function returns the spacing between children. The
-  @setf{gtk:box-spacing} function sets the number of pixels to place between the
-  children of the box.
+  @setf{gtk:box-spacing} function sets the number of pixels to place between
+  the children of the box.
   @see-class{gtk:box}")
 
 ;;; ----------------------------------------------------------------------------
