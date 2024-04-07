@@ -23,7 +23,7 @@
   (is (equal '()
              (list-children "GtkComboBoxText")))
   ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkCellEditable")
              (list-interfaces "GtkComboBoxText")))
   ;; Check the properties
@@ -38,7 +38,7 @@
   ;; Accessible role
   (is (eq :COMBO-BOX (gtk:widget-class-accessible-role "GtkComboBoxText")))
   ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkComboBoxText" 
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkComboBoxText"
                                              GTK-COMBO-BOX-TEXT
                                (:SUPERCLASS GTK-COMBO-BOX :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -52,15 +52,39 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_combo_box_text_new
+
+(test gtk-combo-box-text-new
+  (is (typep (gtk:combo-box-text-new) 'gtk:combo-box-text)))
+
 ;;;     gtk_combo_box_text_new_with_entry
+
+(test gtk-combo-box-text-new-with-entry.1
+  (is (typep (gtk:combo-box-text-new-with-entry) 'gtk:combo-box-text)))
+
+(test gtk-combo-box-text-new-with-entry.2
+  (let ((combo (gtk:combo-box-text-new-with-entry)))
+    (is (typep combo 'gtk:combo-box-text))
+    (is (typep (gtk:combo-box-child combo) 'gtk:entry))))
+
 ;;;     gtk_combo_box_text_append
 ;;;     gtk_combo_box_text_prepend
 ;;;     gtk_combo_box_text_insert
+
 ;;;     gtk_combo_box_text_append_text
 ;;;     gtk_combo_box_text_prepend_text
 ;;;     gtk_combo_box_text_insert_text
+
 ;;;     gtk_combo_box_text_remove
 ;;;     gtk_combo_box_text_remove_all
+
 ;;;     gtk_combo_box_text_get_active_text
 
-;;; --- 2023-9-1 ---------------------------------------------------------------
+(test gtk-combo-box-text-active-text
+  (let* ((combo (gtk:combo-box-text-new-with-entry))
+         (entry (gtk:combo-box-child combo)))
+    (is (typep combo 'gtk:combo-box-text))
+    (is (typep entry 'gtk:entry))
+    (is (string= "text" (setf (gtk:editable-text entry) "text")))
+    (is (string= "text" (gtk:combo-box-text-active-text combo)))))
+
+;;; 2024-4-6

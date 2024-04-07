@@ -69,14 +69,10 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     baseline-child                                     Since 4.12
-;;;     baseline-position
-;;;     homogeneous
-;;;     spacing
-
 (test gtk-box-properties
   (let ((box (make-instance 'gtk:box :orientation :vertical :spacing 12)))
     (is (eq :vertical (gtk:orientable-orientation box)))
+    (is (= -1 (gtk:box-baseline-child box)))
     (is (eq :center (gtk:box-baseline-position box)))
     (is-false (gtk:box-homogeneous box))
     (is (= 12 (gtk:box-spacing box)))))
@@ -121,4 +117,4 @@
 ;;;     gtk_box_insert_child_after
 ;;;     gtk_box_reorder_child_after
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-7

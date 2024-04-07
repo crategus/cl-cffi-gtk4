@@ -12,13 +12,13 @@
   (is (g:type-is-enum "GtkSensitivityType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSensitivityType")
-          (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type"
                                          :size))))
   ;; Check the registered name
   (is (eq 'gtk:sensitivity-type
           (glib:symbol-for-gtype "GtkSensitivityType")))
   ;; Check the names
-  (is (equal '("GTK_SENSITIVITY_AUTO" "GTK_SENSITIVITY_ON" 
+  (is (equal '("GTK_SENSITIVITY_AUTO" "GTK_SENSITIVITY_ON"
                "GTK_SENSITIVITY_OFF")
              (list-enum-item-name "GtkSensitivityType")))
   ;; Check the values
@@ -30,8 +30,8 @@
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSensitivityType"
                                      GTK-SENSITIVITY-TYPE
-                                     (:EXPORT T 
-                                      :TYPE-INITIALIZER 
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
                                       "gtk_sensitivity_type_get_type")
                                      (:AUTO 0)
                                      (:ON 1)
@@ -101,17 +101,19 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     active
-;;;     active-id
-;;;     button-sensitivity
-;;;     child
-;;;     entry-text-column
-;;;     has-entry
-;;;     has-frame
-;;;     id-column
-;;;     model
-;;;     popup-fixed-width
-;;;     popup-shown
+(test gtk-combo-box-properties
+  (let ((combo (gtk:combo-box-new)))
+    (is (= -1 (gtk:combo-box-active combo)))
+    (is-false (gtk:combo-box-active-id combo))
+    (is (eq :auto (gtk:combo-box-button-sensitivity combo)))
+    (is (typep (gtk:combo-box-child combo) 'gtk:cell-view))
+    (is (= -1 (gtk:combo-box-entry-text-column combo)))
+    (is-false (gtk:combo-box-has-entry combo))
+    (is-true (gtk:combo-box-has-frame combo))
+    (is (= -1 (gtk:combo-box-id-column combo)))
+    (is-false (gtk:combo-box-model combo))
+    (is-true (gtk:combo-box-popup-fixed-width combo))
+    (is-false (gtk:combo-box-popup-shown combo))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -125,9 +127,27 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_combo_box_new
+
+(test gtk-combo-box-new
+  (is (typep (gtk:combo-box-new) 'gtk:combo-box)))
+
 ;;;     gtk_combo_box_new_with_entry
+
+(test gtk-combo-box-new-with-entry
+  (is (typep (gtk:combo-box-new-with-entry) 'gtk:combo-box)))
+
 ;;;     gtk_combo_box_new_with_model
+
+(test gtk-combo-box-new-with-model
+  (let ((model (gtk:list-store-new "gchararray")))
+    (is (typep (gtk:combo-box-new-with-model model) 'gtk:combo-box))))
+
 ;;;     gtk_combo_box_new_with_model_and_entry
+
+(test gtk-combo-box-new-with-model-and-entry
+  (let ((model (gtk:list-store-new "gchararray")))
+    (is (typep (gtk:combo-box-new-with-model-and-entry model) 'gtk:combo-box))))
+
 ;;;     gtk_combo_box_get_active_iter
 ;;;     gtk_combo_box_set_active_iter
 ;;;     gtk_combo_box_popup
@@ -136,4 +156,4 @@
 ;;;     gtk_combo_box_get_row_separator_func
 ;;;     gtk_combo_box_set_row_separator_func
 
-;;; --- 2023-9-1 ---------------------------------------------------------------
+;;; 2024-4-7
