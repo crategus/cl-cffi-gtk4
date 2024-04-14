@@ -645,8 +645,8 @@
      (:file "rtest-gtk4-builder")
 
      ;; Layout Managers
-;    (:file "gtk4.layout-manager")
-;    (:file "gtk4.layout-child")
+     (:file "rtest-gtk4-layout-manager")
+     (:file "rtest-gtk4-layout-child")
 ;    (:file "gtk4.bin-layout")
 ;    (:file "gtk4.box-layout")
 ;    (:file "gtk4.center-layout")
@@ -749,7 +749,7 @@
      (:file "rtest-gtk4-cell-area-box")
      (:file "rtest-gtk4-cell-area-context")
 
-;    (:file "gtk4.list-store")
+     (:file "rtest-gtk4-list-store")
 ;    (:file "gtk4.tree-store")
 
      ;; Numeric and Text Data Entry
@@ -781,10 +781,10 @@
      (:file "rtest-gtk4-color-dialog"            :if-feature :gtk-4-10)
      (:file "rtest-gtk4-color-dialog-button"     :if-feature :gtk-4-10)
 
-     (:file "rtest-gtk4-file-chooser")
-     (:file "rtest-gtk4-file-chooser-native")
-     (:file "rtest-gtk4-file-chooser-dialog")
-     (:file "rtest-gtk4-file-chooser-widget")
+     (:file "rtest-gtk4-file-chooser"            :if-feature (:not :windows))
+     (:file "rtest-gtk4-file-chooser-native"     :if-feature (:not :windows))
+     (:file "rtest-gtk4-file-chooser-dialog"     :if-feature (:not :windows))
+     (:file "rtest-gtk4-file-chooser-widget"     :if-feature (:not :windows))
 
      (:file "rtest-gtk4-file-dialog"             :if-feature :gtk-4-10)
      (:file "rtest-gtk4-file-launcher"           :if-feature :gtk-4-10)

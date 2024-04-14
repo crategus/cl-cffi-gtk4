@@ -1067,9 +1067,10 @@ GtkCellRenderer         GtkWidget
       @about-generic{center-box-baseline-position}
       @about-generic{center-box-center-widget}
       @about-generic{center-box-end-widget}
+      @about-generic{center-box-shrink-center-last}
       @about-generic{center-box-start-widget}
       @about-function{center-box-new}
-      @end{subsection}
+    @end{subsection}
     @begin[GtkGrid]{subsection}
       Arranges its child widgets in rows and columns.
       @about-class{grid}
@@ -1103,7 +1104,6 @@ GtkCellRenderer         GtkWidget
       @about-function{revealer-new}
     @end{subsection}
     @begin[GtkListBox]{subsection}
-      A list container.
       @about-class{list-box-row}
       @about-generic{list-box-row-activatable}
       @about-generic{list-box-row-child}
@@ -1118,9 +1118,6 @@ GtkCellRenderer         GtkWidget
       @about-generic{list-box-activate-on-single-click}
       @about-generic{list-box-selection-mode}
       @about-generic{list-box-show-separators}
-      @about-symbol{list-box-filter-func}
-      @about-symbol{list-box-sort-func}
-      @about-symbol{list-box-update-header-func}
       @about-function{list-box-new}
       @about-function{list-box-prepend}
       @about-function{list-box-append}
@@ -1139,12 +1136,15 @@ GtkCellRenderer         GtkWidget
       @about-function{list-box-set-placeholder}
       @about-function{list-box-row-at-index}
       @about-function{list-box-row-at-y}
-      @about-function{list-box-invalidate-filter}
-      @about-function{list-box-invalidate-headers}
-      @about-function{list-box-invalidate-sort}
+      @about-symbol{list-box-filter-func}
       @about-function{list-box-set-filter-func}
+      @about-function{list-box-invalidate-filter}
+      @about-symbol{list-box-update-header-func}
       @about-function{list-box-set-header-func}
+      @about-function{list-box-invalidate-headers}
+      @about-symbol{list-box-sort-func}
       @about-function{list-box-set-sort-func}
+      @about-function{list-box-invalidate-sort}
       @about-function{list-box-drag-highlight-row}
       @about-function{list-box-drag-unhighlight-row}
       @about-symbol{list-box-create-widget-func}
