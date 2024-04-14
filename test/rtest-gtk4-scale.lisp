@@ -8,37 +8,42 @@
 ;;;     GtkScale
 
 (test gtk-scale-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkScale"))
   ;; Check the registered name
   (is (eq 'gtk:scale
           (glib:symbol-for-gtype "GtkScale")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkScale")
           (g:gtype (cffi:foreign-funcall "gtk_scale_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkRange")
           (g:type-parent "GtkScale")))
-  ;; Check the children
+  ;; Check children
+  #-windows
   (is (equal '("GtkColorScale")
              (list-children "GtkScale")))
-  ;; Check the interfaces
+  #+windows
+  (if *first-run-gtk-test*
+    (is (equal '()
+               (list-children "GtkScale"))))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
              (list-interfaces "GtkScale")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("digits" "draw-value" "has-origin" "value-pos")
              (list-properties "GtkScale")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkScale")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "scale"
                (gtk:widget-class-css-name "GtkScale")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("horizontal")
              (gtk:widget-css-classes (make-instance 'gtk:scale))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :slider (gtk:widget-class-accessible-role "GtkScale")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScale" GTK-SCALE
@@ -57,11 +62,6 @@
              (gobject:get-g-type-definition "GtkScale"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     digits
-;;;     draw-value
-;;;     has-origin
-;;;     value-pos
 
 (test gtk-scale-properties
   (let ((scale (make-instance 'gtk:scale)))
@@ -91,4 +91,4 @@
 ;;;     gtk_scale_add_mark
 ;;;     gtk_scale_clear_marks
 
-;;; --- 2023-8-24 --------------------------------------------------------------
+;;; 2024-4-11

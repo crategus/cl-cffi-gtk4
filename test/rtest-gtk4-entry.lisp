@@ -8,25 +8,25 @@
 ;;;     GtkEntryIconPosition
 
 (test gtk-entry-icon-position
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkEntryIconPosition"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEntryIconPosition")
           (g:gtype (cffi:foreign-funcall "gtk_entry_icon_position_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:entry-icon-position
           (glib:symbol-for-gtype "GtkEntryIconPosition")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_ENTRY_ICON_PRIMARY" "GTK_ENTRY_ICON_SECONDARY")
              (list-enum-item-name "GtkEntryIconPosition")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1)
              (list-enum-item-value "GtkEntryIconPosition")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("primary" "secondary")
              (list-enum-item-nick "GtkEntryIconPosition")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkEntryIconPosition"
                              GTK-ENTRY-ICON-POSITION
                              (:EXPORT T
@@ -39,28 +39,32 @@
 ;;;     GtkEntry
 
 (test gtk-entry-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkEntry"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:entry
           (glib:symbol-for-gtype "GtkEntry")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEntry")
           (g:gtype (cffi:foreign-funcall "gtk_entry_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkEntry")))
-  ;; Check the children
+  ;; Check children
+  #-windows
   (if *first-run-gtk-test*
       (is (equal '()
                  (list-children "GtkEntry")))
       (is (equal '("GtkFileChooserEntry")
                  (list-children "GtkEntry"))))
-  ;; Check the interfaces
+  #+windows
+  (is (equal '()
+             (list-children "GtkEntry")))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable" "GtkCellEditable")
              (list-interfaces "GtkEntry")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("activates-default" "attributes" "buffer" "completion"
                "cursor-position" "editable" "editing-canceled"
                "enable-emoji-completion" "enable-undo" "extra-menu" "has-frame"
@@ -78,13 +82,18 @@
                "selection-bound" "show-emoji-icon" "tabs" "text" "text-length"
                "truncate-multiline" "visibility" "width-chars" "xalign")
              (list-properties "GtkEntry")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate" "icon-press" "icon-release")
              (list-signals "GtkEntry")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string= "entry"
                (gtk:widget-class-css-name "GtkEntry")))
-  ;; Check the class definition
+  ;; Check CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:entry))))
+  ;; Check accessible role
+  (is (eq :text-box (gtk:widget-class-accessible-role "GtkEntry")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntry" GTK-ENTRY
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkCellEditable"
@@ -259,4 +268,4 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; --- 2023-9-16 --------------------------------------------------------------
+;;; 2024-4-11

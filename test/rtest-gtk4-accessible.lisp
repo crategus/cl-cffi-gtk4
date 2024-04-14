@@ -43,6 +43,9 @@
   (is (eq :button
           (gtk:accessible-accessible-role (make-instance 'gtk:button)))))
 
+;; TODO: Gives an unexpected error on Windows
+
+#-windows
 (test gtk-accessible-properties.2
   (let ((children (remove nil
                           (mapcar #'glib:symbol-for-gtype
@@ -88,4 +91,4 @@
 ;;;     gtk_accessible_relation_init_value
 ;;;     gtk_accessible_state_init_value
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-11

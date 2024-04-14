@@ -8,29 +8,29 @@
 ;;;     GtkListTabBehavior
 
 (test gtk-list-tab-behavior
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkListTabBehavior"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkListTabBehavior")
-          (g:gtype (cffi:foreign-funcall "gtk_list_tab_behavior_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_list_tab_behavior_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:list-tab-behavior
           (glib:symbol-for-gtype "GtkListTabBehavior")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_LIST_TAB_ALL" "GTK_LIST_TAB_ITEM" "GTK_LIST_TAB_CELL")
              (list-enum-item-name "GtkListTabBehavior")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2)
              (list-enum-item-value "GtkListTabBehavior")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("all" "item" "cell")
              (list-enum-item-nick "GtkListTabBehavior")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkListTabBehavior"
                                      GTK-LIST-TAB-BEHAVIOR
-                                     (:EXPORT T 
-                                      :TYPE-INITIALIZER 
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
                                       "gtk_list_tab_behavior_get_type")
                                      (:ALL 0)
                                      (:ITEM 1)
@@ -40,30 +40,30 @@
 ;;;     GtkListScrollFlags
 
 (test gtk-list-scroll-flags
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GtkListScrollFlags"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:list-scroll-flags
           (glib:symbol-for-gtype "GtkListScrollFlags")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkListScrollFlags")
-          (g:gtype (cffi:foreign-funcall "gtk_list_scroll_flags_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_list_scroll_flags_get_type"
                                          :size))))
-  ;; Check the names
-  (is (equal '("GTK_LIST_SCROLL_NONE" "GTK_LIST_SCROLL_FOCUS" 
+  ;; Check names
+  (is (equal '("GTK_LIST_SCROLL_NONE" "GTK_LIST_SCROLL_FOCUS"
                "GTK_LIST_SCROLL_SELECT")
              (list-flags-item-name "GtkListScrollFlags")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2)
              (list-flags-item-value "GtkListScrollFlags")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("none" "focus" "select")
              (list-flags-item-nick "GtkListScrollFlags")))
-  ;; Check the flags definition
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkListScrollFlags"
                                       GTK-LIST-SCROLL-FLAGS
-                                      (:EXPORT T 
-                                       :TYPE-INITIALIZER 
+                                      (:EXPORT T
+                                       :TYPE-INITIALIZER
                                        "gtk_list_scroll_flags_get_type")
                                       (:NONE 0)
                                       (:FOCUS 1)
@@ -73,37 +73,37 @@
 ;;;     GtkListBase
 
 (test gtk-list-base-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkListBase"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:list-base
           (glib:symbol-for-gtype "GtkListBase")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkListBase")
           (g:gtype (cffi:foreign-funcall "gtk_list_base_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkListBase")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkGridView" "GtkListView")
              (list-children "GtkListBase")))
-  ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+  ;; Check interfaces
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkScrollable")
              (list-interfaces "GtkListBase")))
-  ;; Check the properties
-  (is (equal '("hadjustment" "hscroll-policy" "orientation" "vadjustment" 
+  ;; Check properties
+  (is (equal '("hadjustment" "hscroll-policy" "orientation" "vadjustment"
                "vscroll-policy")
              (list-properties "GtkListBase")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkListBase")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "widget"
                (gtk:widget-class-css-name "GtkListBase")))
-  ;; CSS classes
+  ;; Check CSS classes
   ;; GtkListBase is an abstract class
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkListBase")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListBase" GTK-LIST-BASE
@@ -119,41 +119,45 @@
 ;;;     GtkListView
 
 (test gtk-list-view-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkListView"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:list-view
           (glib:symbol-for-gtype "GtkListView")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkListView")
           (g:gtype (cffi:foreign-funcall "gtk_list_view_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkListBase")
           (g:type-parent "GtkListView")))
-  ;; Check the children
+  ;; Check children
+  #-windows
   (if *first-run-gtk-test*
       (is (equal '()
                  (list-children "GtkListView")))
       (is (equal '("GtkColumnListView")
                  (list-children "GtkListView"))))
-  ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+  #+windows
+  (is (equal '()
+             (list-children "GtkListView")))
+  ;; Check interfaces
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkScrollable")
              (list-interfaces "GtkListView")))
-  ;; Check the properties
-  (is (equal '("enable-rubberband" "factory" "header-factory" "model" 
+  ;; Check properties
+  (is (equal '("enable-rubberband" "factory" "header-factory" "model"
                "show-separators" "single-click-activate" "tab-behavior")
              (list-properties "GtkListView")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate")
              (list-signals "GtkListView")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "listview"
                (gtk:widget-class-css-name "GtkListView")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("view")
              (gtk:widget-css-classes (make-instance 'gtk:list-view))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :list (gtk:widget-class-accessible-role "GtkListView")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListView" GTK-LIST-VIEW
@@ -182,16 +186,6 @@
 
 ;;; --- Properties (GtkListView) -----------------------------------------------
 
-;;;     orientation
-
-;;;     enable-rubberband
-;;;     factory
-;;;     header-factory                                     Since 4.12
-;;;     model
-;;;     show-separators
-;;;     single-click-activate
-;;;     tab-behavior                                       Since 4.12
-
 (test gtk-list-view-properties
   (let ((listview (make-instance 'gtk:list-view)))
     (is (eq :vertical (gtk:list-base-orientation listview)))
@@ -204,8 +198,6 @@
     (is (eq :all (gtk:list-view-tab-behavior listview)))))
 
 ;;; --- Signals ----------------------------------------------------------------
-
-;;;     activate
 
 (test gtk-list-view-signals
   (let ((query (g:signal-query (g:signal-lookup "activate" "GtkListView"))))
@@ -225,8 +217,8 @@
 (test gtk-list-view-new
   (is (typep (gtk:list-view-new nil nil) 'gtk:list-view))
   (is (typep (gtk:list-view-new (gtk:no-selection-new nil) nil) 'gtk:list-view))
-  (is (typep (gtk:list-view-new nil 
-                                (gtk:signal-list-item-factory-new)) 
+  (is (typep (gtk:list-view-new nil
+                                (gtk:signal-list-item-factory-new))
              'gtk:list-view))
   (is (typep (gtk:list-view-new (gtk:no-selection-new nil)
                                 (gtk:signal-list-item-factory-new))
@@ -234,4 +226,4 @@
 
 ;;;     gtk_list_view_scroll_to                            Since 4.12
 
-;;; --- 2023-11-25 -------------------------------------------------------------
+;;; 2024-4-11

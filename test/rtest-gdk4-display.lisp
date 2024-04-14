@@ -8,34 +8,37 @@
 ;;;     GdkDisplay
 
 (test gdk-display-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkDisplay"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:display
           (glib:symbol-for-gtype "GdkDisplay")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkDisplay")
           (g:gtype (cffi:foreign-funcall "gdk_display_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkDisplay")))
-  ;; Check the children
+  ;; Check children
   #-windows
-  (is (equal '("GdkWaylandDisplay" "GdkX11Display")
-             (list-children "GdkDisplay")))
+  (if *first-run-gtk-test*
+      (is (equal '("GdkWaylandDisplay" "GdkX11Display")
+                 (list-children "GdkDisplay")))
+      (is (equal '("GdkBroadwayDisplay" "GdkWaylandDisplay" "GdkX11Display")
+                 (list-children "GdkDisplay"))))
   #+windows
   (is (equal '("GdkWin32Display")
              (list-children "GdkDisplay")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GdkDisplay")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("composited" "input-shapes" "rgba")
              (list-properties "GdkDisplay")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("closed" "opened" "seat-added" "seat-removed" "setting-changed")
              (list-signals "GdkDisplay")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplay" GDK-DISPLAY
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_display_get_type")
@@ -48,10 +51,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     composited
-;;;     input-shapes
-;;;     rgba
-
 (test gdk-display-properties
   (let ((display (gdk:display-default)))
     (is-true (gdk:display-composited display))
@@ -59,8 +58,6 @@
     (is-true (gdk:display-rgba display))))
 
 ;;; --- Signals ----------------------------------------------------------------
-
-;;;     closed
 
 (test gdk-display-closed-signal
   (let ((query (g:signal-query (g:signal-lookup "closed" "GdkDisplay"))))
@@ -73,8 +70,6 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
-;;;     opened
-
 (test gdk-display-opened-signal
   (let ((query (g:signal-query (g:signal-lookup "opened" "GdkDisplay"))))
     (is (string= "opened" (g:signal-query-signal-name query)))
@@ -85,8 +80,6 @@
     (is (equal '()
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
-
-;;;     seat-added
 
 (test gdk-display-seat-added-signal
   (let ((query (g:signal-query (g:signal-lookup "seat-added" "GdkDisplay"))))
@@ -99,8 +92,6 @@
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
 
-;;;     seat-removed
-
 (test gdk-display-seat-removed-signal
   (let ((query (g:signal-query (g:signal-lookup "seat-removed" "GdkDisplay"))))
     (is (string= "seat-removed" (g:signal-query-signal-name query)))
@@ -111,8 +102,6 @@
     (is (equal '("GdkSeat")
                (mapcar #'g:type-name (g:signal-query-param-types query))))
     (is-false (g:signal-query-signal-detail query))))
-
-;;;     setting-changed
 
 (test gdk-display-setting-changed-signal
   (let ((query (g:signal-query (g:signal-lookup "setting-changed" "GdkDisplay"))))
@@ -311,4 +300,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; 2024-1-7
+;;; 2024-4-11

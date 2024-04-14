@@ -8,33 +8,33 @@
 ;;;     GtkNativeDialog
 
 (test gtk-native-dialog-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkNativeDialog"))
-  ;; Check the registered name
+  ;; Check registered name
   ;; FIXME: We have no symbol for GtkNativeDialog. Why!?
   #+nil
   (is (eq 'gtk:native-dialog
           (glib:symbol-for-gtype "GtkNativeDialog")))
   (is-false (glib:symbol-for-gtype "GtkNativeDialog"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkNativeDialog")
           (g:gtype (cffi:foreign-funcall "gtk_native_dialog_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkNativeDialog")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkFileChooserNative")
              (list-children "GtkNativeDialog")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkNativeDialog")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("modal" "title" "transient-for" "visible")
              (list-properties "GtkNativeDialog")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("response")
              (list-signals "GtkNativeDialog")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNativeDialog" GTK-NATIVE-DIALOG
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_native_dialog_get_type")
@@ -64,4 +64,4 @@
 ;;;     gtk_native_dialog_hide
 ;;;     gtk_native_dialog_destroy
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-4-11
