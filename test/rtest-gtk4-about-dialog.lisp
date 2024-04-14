@@ -8,15 +8,15 @@
 ;;;     GtkLicense
 
 (test gtk-license
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkLicense"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkLicense")
           (g:gtype (cffi:foreign-funcall "gtk_license_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:license
           (glib:symbol-for-gtype "GtkLicense")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_LICENSE_UNKNOWN" "GTK_LICENSE_CUSTOM" "GTK_LICENSE_GPL_2_0"
                "GTK_LICENSE_GPL_3_0" "GTK_LICENSE_LGPL_2_1"
                "GTK_LICENSE_LGPL_3_0" "GTK_LICENSE_BSD" "GTK_LICENSE_MIT_X11"
@@ -26,16 +26,16 @@
                "GTK_LICENSE_AGPL_3_0_ONLY" "GTK_LICENSE_BSD_3"
                "GTK_LICENSE_APACHE_2_0" "GTK_LICENSE_MPL_2_0")
              (list-enum-item-name "GtkLicense")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17)
              (list-enum-item-value "GtkLicense")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("unknown" "custom" "gpl-2-0" "gpl-3-0" "lgpl-2-1" "lgpl-3-0"
                "bsd" "mit-x11" "artistic" "gpl-2-0-only" "gpl-3-0-only"
                "lgpl-2-1-only" "lgpl-3-0-only" "agpl-3-0" "agpl-3-0-only"
                "bsd-3" "apache-2-0" "mpl-2-0")
              (list-enum-item-nick "GtkLicense")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkLicense"
                              GTK-LICENSE
                              (:EXPORT T
@@ -63,40 +63,40 @@
 ;;;     GtkAboutDialog
 
 (test gtk-about-dialog-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkAboutDialog"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:about-dialog
           (glib:symbol-for-gtype "GtkAboutDialog")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAboutDialog")
           (g:gtype (cffi:foreign-funcall "gtk_about_dialog_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWindow")
           (g:type-parent "GtkAboutDialog")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkAboutDialog")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot")
              (list-interfaces "GtkAboutDialog")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("artists" "authors" "comments" "copyright" "documenters"
                "license" "license-type" "logo" "logo-icon-name" "program-name"
                "system-information" "translator-credits" "version" "website"
                "website-label" "wrap-license")
              (list-properties "GtkAboutDialog")))
-  ;; Check the list of signals
+  ;; Check signals
   (is (equal '("activate-link")
              (list-signals "GtkAboutDialog")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAboutDialog")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("background" "csd" "aboutdialog")
              (gtk:widget-css-classes (make-instance 'gtk:about-dialog))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :application (gtk:widget-class-accessible-role "GtkAboutDialog")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAboutDialog" GTK-ABOUT-DIALOG
@@ -139,8 +139,6 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
-;;;     activate-link
-
 (test gtk-about-dialog-activate-link-signal
   (let ((query (g:signal-query (g:signal-lookup "activate-link"
                                                 "GtkAboutDialog"))))
@@ -155,23 +153,6 @@
     (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     artists
-;;;     authors
-;;;     comments
-;;;     copyright
-;;;     documenters
-;;;     license
-;;;     license-type
-;;;     logo
-;;;     logo-icon-name
-;;;     program-name
-;;;     system-information
-;;;     translator-credits
-;;;     version
-;;;     website
-;;;     website-label
-;;;     wrap-license
 
 (test gtk-about-dialog-properties
   (let ((dialog (make-instance 'gtk:about-dialog)))
@@ -202,4 +183,4 @@
 ;;;     gtk_about_dialog_add_credit_section
 ;;;     gtk_show_about_dialog
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-11

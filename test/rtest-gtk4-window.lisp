@@ -10,26 +10,26 @@
 ;;;     GtkWindow
 
 (test gtk-window-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkWindow"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:window
           (glib:symbol-for-gtype "GtkWindow")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkWindow")
           (g:gtype (cffi:foreign-funcall "gtk_window_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkWindow")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkAboutDialog" "GtkApplicationWindow" "GtkAssistant"
                "GtkDialog" "GtkShortcutsWindow")
              (list-children "GtkWindow")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot")
              (list-interfaces "GtkWindow")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("application" "child" "decorated" "default-height"
                "default-widget" "default-width" "deletable"
                "destroy-with-parent" "display" "focus-visible"
@@ -38,19 +38,19 @@
                "mnemonics-visible" "modal" "resizable" "startup-id" "suspended"
                "title" "titlebar" "transient-for")
              (list-properties "GtkWindow")))
-  ;; Check the list of signals
+  ;; Check signals
   (is (equal '("activate-default" "activate-focus" "close-request"
                "enable-debugging" "keys-changed")
              (list-signals "GtkWindow")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkWindow")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("background")
              (gtk:widget-css-classes (make-instance 'gtk:window))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :application (gtk:widget-class-accessible-role "GtkWindow")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWindow" GTK-WINDOW
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -122,7 +122,7 @@
     (is (= 0  (gtk:window-default-width window)))
     (is-true  (gtk:window-deletable window))
     (is-false (gtk:window-destroy-with-parent window))
-    (is (typep (gtk:window-display window) 'gdk:display))
+    (is (eq (gdk:display-default) (gtk:window-display window)))
     (is-true  (gtk:window-focus-visible window))
     (is-false (gtk:window-focus-widget window))
     (is-false (gtk:window-fullscreened window))
@@ -142,12 +142,6 @@
     (is-false (gtk:window-transient-for window))))
 
 ;;; --- Signals ----------------------------------------------------------------
-
-;;;     activate-default
-;;;     activate-focus
-;;;     close-request
-;;;     enable-debugging
-;;;     keys-changed
 
 (test gtk-window-signals
   ;; Query info for "activate-default"
@@ -319,17 +313,40 @@
 ;;;     gtk_window_unminimize
 ;;;     gtk_window_get_default_icon_name
 ;;;     gtk_window_set_default_icon_name
+
 ;;;     gtk_window_get_toplevels
+
+(test gtk-window-toplevels
+  ; Destroy already existing windows
+  (dolist (window (gtk:window-list-toplevels))
+    (gtk:window-destroy window))
+  (is-false (gtk:window-list-toplevels))
+  (let ((window1 (make-instance 'gtk:window))
+        (window2 (make-instance 'gtk:application-window))
+        (window3 (make-instance 'gtk:about-dialog)))
+    (is (typep (gtk:window-toplevels) 'g:list-store))
+    (is (= 3 (g:list-model-n-items (gtk:window-toplevels))))
+    (is (eq window1 (g:list-model-object (gtk:window-toplevels) 0)))
+    (is (eq window2 (g:list-model-object (gtk:window-toplevels) 1)))
+    (is (eq window3 (g:list-model-object (gtk:window-toplevels) 2)))))
 
 ;;;     gtk_window_list_toplevels
 
-#+nil
 (test gtk-window-list-toplevels
-  (is (every (lambda (obj) (typep obj 'gtk:window))
-             (gtk:window-list-toplevels))))
+  ; Destroy already existing windows
+  (dolist (window (gtk:window-list-toplevels))
+    (gtk:window-destroy window))
+  (is-false (gtk:window-list-toplevels))
+  (let ((window1 (make-instance 'gtk:window))
+        (window2 (make-instance 'gtk:application-window))
+        (window3 (make-instance 'gtk:about-dialog)))
+    (is (= 3 (length (gtk:window-list-toplevels))))
+    (is (eq window1 (third (gtk:window-list-toplevels))))
+    (is (eq window2 (second (gtk:window-list-toplevels))))
+    (is (eq window3 (first (gtk:window-list-toplevels))))))
 
 ;;;     gtk_window_set_auto_startup_notification
 ;;;     gtk_window_set_interactive_debugging
 ;;;     gtk_window_is_suspended                            Since 4.12
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-11

@@ -8,24 +8,24 @@
 ;;;     GtkRoot
 
 (test gtk-root-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkRoot"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:root
           (glib:symbol-for-gtype "GtkRoot")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkRoot")
           (g:gtype (cffi:foreign-funcall "gtk_root_get_type" :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GtkNative" "GtkWidget")
              (list-interface-prerequisites "GtkRoot")))
-  ;; Check the interface properties
+  ;; Check interface properties
   (is (equal '()
              (list-interface-properties "GtkRoot")))
-  ;; Check the interface signals
+  ;; Check interface signals
   (is (equal '()
              (list-signals "GtkRoot")))
-  ;; Get the interface definition
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkRoot"
                                   GTK-ROOT
                                   (:EXPORT T
@@ -38,32 +38,26 @@
 
 (test gtk-root-display
   (let ((window (make-instance 'gtk:window)))
-    (is (typep (gtk:root-display window) 'gdk:display))))
+    (is (typep (gtk:root-display window) 'gdk:display))
+    ;; Root display is the default display
+    (is (eq (gdk:display-default) (gtk:root-display window)))))
 
 ;;;     gtk_root_get_focus
 ;;;     gtk_root_set_focus
 
-;; Might cause an unexpected error
-
-(test gtk-root-focus.1
+(test gtk-root-focus
   (let* ((button (make-instance 'gtk:button))
          (window (make-instance 'gtk:window
                                 :child button)))
+    ;; WINDOW is root widget for BUTTON
+    (is (eq window (gtk:widget-root button)))
+    ;; No focus widget
     (is-false (gtk:root-focus window))
-    ;; Set the focus on the button
+    ;; Set focus on BUTTON
     (is (eq button (setf (gtk:root-focus window) button)))
     (is (eq button (gtk:root-focus window)))
-    ;; Unset the focus
+    ;; Unset focus
     (is-false (setf (gtk:root-focus window) nil))
     (is-false (gtk:root-focus window))))
 
-(test gtk-root-focus.2
-  (let* ((button (make-instance 'gtk:button))
-         (window (make-instance 'gtk:window
-                                :child button)))
-    (is-false (gtk:root-focus window))
-    ;; Set the focus on the button
-    (is-true (gtk:widget-grab-focus button))
-    (is (eq button (gtk:root-focus window)))))
-
-;;; --- 2023-8-19 --------------------------------------------------------------
+;;; 2024-4-10

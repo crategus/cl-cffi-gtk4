@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -103,7 +103,7 @@
 
 #+liber-documentation
 (setf (documentation 'alert-dialog 'type)
- "@version{2023-9-20}
+ "@version{2024-4-11}
   @begin{short}
     The @class{gtk:alert-dialog} object collects the arguments that are needed
     to present a message to the user.
@@ -114,7 +114,7 @@
 
   If you do not need to wait for a button to be clicked, you can use the
   @fun{gtk:alert-dialog-show} function.
-  @begin[Example]{dictionary}
+  @begin{examples}
     Create an alert dialog with a @class{g:cancellable} object.
     @begin{pre}
 (defun create-alert-dialog (parent)
@@ -141,7 +141,7 @@
           (let ((result (gtk:alert-dialog-choose-finish source result)))
             (format t \"Alert dialog result is ~a~%\" result))))))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   Since 4.10
   @see-class{g:async-result}")
 
@@ -149,14 +149,14 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- alert-dialog-buttons ---------------------------------------------------
+;;; --- gtk:alert-dialog-buttons -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "buttons" 'alert-dialog) t)
  "The @code{buttons} property of type @type{g:strv-t} (Read / Write) @br{}
   Labels for buttons to show in the alert dialog. The labels should be
-  translated and may contain a \"_\" to indicate the mnemonic character. If this
-  property is not set, then a Close button is automatically created.")
+  translated and may contain a \"_\" to indicate the mnemonic character. If
+  this property is not set, then a Close button is automatically created.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'alert-dialog-buttons)
@@ -177,7 +177,7 @@
   Since 4.10
   @see-class{gtk:alert-dialog}")
 
-;;; --- alert-dialog-cancel-button ---------------------------------------------
+;;; --- gtk:alert-dialog-cancel-button -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "cancel-button" 'alert-dialog) t)
@@ -213,7 +213,7 @@
   Since 4.10
   @see-class{gtk:alert-dialog}")
 
-;;; --- alert-dialog-default-button --------------------------------------------
+;;; --- gtk:alert-dialog-default-button ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-button"
@@ -250,7 +250,7 @@
   Since 4.10
   @see-class{gtk:alert-dialog}")
 
-;;; --- alert-dialog-detail ----------------------------------------------------
+;;; --- gtk:alert-dialog-detail ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "detail" 'alert-dialog) t)
@@ -272,13 +272,13 @@
     @class{gtk:alert-dialog} class.
   @end{short}
   The @fun{gtk:alert-dialog-detail} function returns the detail text that will
-  be shown in the alert dialog. The @setf{gtk:alert-dialog-detail} function sets
-  the detail text.
+  be shown in the alert dialog. The @setf{gtk:alert-dialog-detail} function
+  sets the detail text.
 
   Since 4.10
   @see-class{gtk:alert-dialog}")
 
-;;; --- alert-dialog-message ---------------------------------------------------
+;;; --- gtk:alert-dialog-message -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "message" 'alert-dialog) t)
@@ -306,7 +306,7 @@
   Since 4.10
   @see-class{gtk:alert-dialog}")
 
-;;; --- alert-dialog-modal -----------------------------------------------------
+;;; --- gtk:alert-dialog-modal -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'alert-dialog) t)
@@ -341,10 +341,10 @@
 
 (defun alert-dialog-new (msg &rest args)
  #+liber-documentation
- "@version{2023-9-20}
+ "@version{2024-4-11}
   @argument[msg]{a format string for the message}
-  @argument[args]{a list of arguments for @arg{msg}}
-  @return{A new @class{gtk:alert-dialog} object.}
+  @argument[args]{arguments for @arg{msg}}
+  @return{The new @class{gtk:alert-dialog} object.}
   @begin{short}
     Creates a new alert dialog.
   @end{short}
@@ -419,7 +419,7 @@
  "@version{2023-9-20}
   @argument[dialog]{a @class{gtk:alert-dialog} object}
   @argument[result]{a @class{g:async-result} object with the result}
-  @return{An integer with the index of the button that was clicked, -1 if the
+  @return{The integer with the index of the button that was clicked, -1 if the
     alert dialog was cancelled and the @slot[gtk:alert-dialog]{cancel-button}
     property is not set.}
   @begin{short}

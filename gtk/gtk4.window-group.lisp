@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -63,9 +63,9 @@
 
 #+liber-documentation
 (setf (documentation 'window-group 'type)
- "@version{#2021-11-2}
+ "@version{2024-4-11}
   @begin{short}
-    A @class{gtk:window-group} object restricts the effect of grabs to windows
+    The @class{gtk:window-group} object restricts the effect of grabs to windows
     in the same group, thereby making window groups almost behave like separate
     applications.
   @end{short}
@@ -78,7 +78,8 @@
   windows in the window group are subsequently destroyed, then they will be
   removed from the window group and drop their references on the window group.
   When all window have been removed, the window group will be freed.
-  @see-constructor{gtk:window-group-new}")
+  @see-constructor{gtk:window-group-new}
+  @see-class{gtk:window}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_window_group_new
@@ -88,15 +89,13 @@
 
 (defun window-group-new ()
  #+liber-documentation
- "@version{#2021-11-2}
-  @return{A new @class{gtk:window-group} object.}
+ "@version{2024-4-11}
+  @return{The new @class{gtk:window-group} object.}
   @begin{short}
     Creates a new window group.
   @end{short}
-  Grabs added with the @fun{gtk:grab-add} function only affect windows within
-  the same window group.
-  @see-class{gtk:window-group}
-  @see-function{gtk:grab-add}"
+  Modality of windows only affect windows within the same window group.
+  @see-class{gtk:window-group}"
   (make-instance 'window-group))
 
 (export 'window-group-new)
@@ -107,12 +106,10 @@
 
 (cffi:defcfun (window-group-add-window "gtk_window_group_add_window") :void
  #+liber-documentation
- "@version{#2021-10-26}
+ "@version{2024-4-11}
   @argument[group]{a @class{gtk:window-group} object}
   @argument[window]{the @class{gtk:window} widget to add}
-  @begin{short}
-    Adds a window to a window group.
-  @end{short}
+  @short{Adds a window to a window group.}
   @see-class{gtk:window-group}
   @see-class{gtk:window}"
   (group (g:object window-group))
@@ -127,12 +124,10 @@
 (cffi:defcfun ("gtk_window_group_remove_window" window-group-remove-window)
     :void
  #+liber-documentation
- "@version{#2021-10-26}
+ "@version{2024-4-11}
   @argument[group]{a @class{gtk:window-group} object}
-  @argument[window]{the @class{gtk:window} widget to remove}
-  @begin{short}
-    Removes a window from a window group.
-  @end{short}
+  @argument[window]{a @class{gtk:window} widget to remove}
+  @short{Removes a window from a window group.}
   @see-class{gtk:window-group}
   @see-class{gtk:window}"
   (group (g:object window-group))
@@ -147,12 +142,10 @@
 (cffi:defcfun ("gtk_window_group_list_windows" window-group-list-windows)
     (g:list-t (g:object window))
  #+liber-documentation
- "@version{#2021-10-26}
+ "@version{2024-4-11}
   @argument[group]{a @class{gtk:window-group} object}
-  @return{A list of windows inside the window group.}
-  @begin{short}
-    Returns a list of windows that belong to the window group.
-  @end{short}
+  @return{The list of windows inside the window group.}
+  @short{Returns a list of windows that belong to the window group.}
   @see-class{gtk:window-group}
   @see-class{gtk:window}"
   (group (g:object window-group)))

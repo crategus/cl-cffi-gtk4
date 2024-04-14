@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -53,10 +53,6 @@
 ;;; GtkRoot
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: GtkRoot inherits from GtkNative in the C library, but in the Lisp
-;; implementation the inheritance works differently. This will causes problems
-;; Look more carefully into this subject.
-
 (gobject:define-g-interface "GtkRoot" root
   (:superclass g:object
    :export t
@@ -83,7 +79,7 @@
   @see-class{gtk:window}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_root_get_display -> root-display
+;;; gtk_root_get_display ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_root_get_display" root-display) (g:object gdk:display)
@@ -101,8 +97,8 @@
 (export 'root-display)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_root_get_focus
-;;; gtk_root_set_focus -> root-focus
+;;; gtk_root_get_focus ()
+;;; gtk_root_set_focus ()
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf root-focus) (value root)
@@ -114,19 +110,19 @@
 
 (cffi:defcfun ("gtk_root_get_focus" root-focus) (g:object widget)
  #+liber-documentation
- "@version{2023-8-19}
+ "@version{2024-4-10}
   @syntax[]{(gtk:root-focus root) => widget}
   @syntax[]{(setf (gtk:root-focus root) widget)}
   @argument[root]{a @class{gtk:root} widget}
   @argument[widget]{a @class{gtk:widget} focus widget, or @code{nil} if there
     is none}
   @begin{short}
-    The accessor function for the focus widget of the root widget.
+    The @fun{gtk:root-focus} function retrieves the current focused widget
+    within the root widget.
   @end{short}
-  The @fun{gtk:root-focus} function retrieves the current focused widget within
-  the root widget. Note that this is the widget that would have the focus if
-  the root widget is active. If the root widget is not focused then the
-  @fun{gtk:widget-has-focus} function will return @em{false} for the widget.
+  Note that this is the widget that would have the focus if the root widget is
+  active. If the root widget is not focused then the @fun{gtk:widget-has-focus}
+  function will return @em{false} for the widget.
 
   If the @arg{widget} argument is not the current focus widget, and is
   focusable, the @setf{gtk:root-focus} function sets it as the focus widget for

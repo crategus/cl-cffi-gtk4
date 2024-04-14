@@ -8,31 +8,31 @@
 ;;;     GtkAlertDialog
 
 (test gtk-alert-dialog-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkAlertDialog"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:alert-dialog
           (glib:symbol-for-gtype "GtkAlertDialog")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAlertDialog")
           (g:gtype (cffi:foreign-funcall "gtk_alert_dialog_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkAlertDialog")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkAlertDialog")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkAlertDialog")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("buttons" "cancel-button" "default-button" "detail" "message"
                "modal")
              (list-properties "GtkAlertDialog")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkAlertDialog")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAlertDialog" GTK-ALERT-DIALOG
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_alert_dialog_get_type")
@@ -51,12 +51,6 @@
              (gobject:get-g-type-definition "GtkAlertDialog"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     buttons
-;;;     cancel-button
-;;;     default-button
-;;;     detail
-;;;     message
 
 (test gtk-alert-dialog-properties.1
   (let ((dialog (make-instance 'gtk:alert-dialog)))
@@ -96,4 +90,4 @@
 ;;;     gtk_alert_dialog_choose_finish
 ;;;     gtk_alert_dialog_show
 
-;;; --- 2023-9-20 --------------------------------------------------------------
+;;; 2024-4-11

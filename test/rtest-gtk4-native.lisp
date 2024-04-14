@@ -8,24 +8,24 @@
 ;;;     GtkNative
 
 (test gtk-native-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkNative"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:native
           (glib:symbol-for-gtype "GtkNative")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkNative")
           (g:gtype (cffi:foreign-funcall "gtk_native_get_type" :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GtkWidget")
              (list-interface-prerequisites "GtkNative")))
-  ;; Get the names of the interface properties.
+  ;; Check interface properties.
   (is (equal '()
              (list-interface-properties "GtkNative")))
-  ;; Check the interface signals
+  ;; Check interface signals
   (is (equal '()
              (list-signals "GtkNative")))
-  ;; Get the interface definition
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkNative"
                                   GTK-NATIVE
                                   (:EXPORT T
@@ -37,56 +37,65 @@
 ;;;     gtk_native_get_for_surface
 ;;;     gtk_native_get_surface
 
-;; TODO: Look more carefully at the warning:
-;; Gsk-Message: 19:23:58.086: Failed to realize renderer of type 'GskGLRenderer'
-;; for surface 'GdkWaylandToplevel': Es wird versucht EGL zu verwenden, aber X11
-;; GLX ist bereits in Verwendung
+;; TODO: We get a warning, but the test works
+;; Gsk-Message: Failed to realize renderer of type 'GskGLRenderer' for surface
+;; 'GdkWaylandToplevel': Es wird versucht EGL zu verwenden, aber X11 GLX ist
+;; bereits in Verwendung
 
-#+nil
 (test gtk-native-surface/for-surface
   (let ((window (make-instance 'gtk:window))
         (surface nil))
-    (is-false (gtk:native-surface window))
-    (is-false (gtk:window-present window))
-    (is-false (gtk:window-destroy window))))
+    ;; Realize WINDOW to create GDK resources
+    (is-false (gtk:widget-realize window))
+    ;; Native widget for WINDOW is WINDOW itself
+    (is (eq window (gtk:widget-native window)))
+    ;; Get GDK surface
+    (is (typep (setf surface (gtk:native-surface window)) 'gdk:surface))
+    ;; Get WINDOW from GDK surface
+    (is (eq window (gtk:native-for-surface surface)))
+    ;; Unrealize WINDOW
+    (is-false (gtk:widget-unrealize window))))
 
 ;;;     gtk_native_get_renderer
 
-#+nil
 (test gtk-native-renderer
   (let ((window (make-instance 'gtk:window))
         (renderer nil))
-    (is-false (gtk:native-renderer window))
-    (is-false (gtk:window-present window))
+    ;; Realize WINDOW to create GDK resources
+    (is-false (gtk:widget-realize window))
+    ;; Get GSK renderer
     (is (typep (setf renderer (gtk:native-renderer window)) 'gsk:renderer))
-    (is (typep (gsk:renderer-surface renderer) 'gdk:surface))
-    (is (eq (gtk:native-surface window)
-            (gsk:renderer-surface renderer)))
-    (is-false (gtk:window-destroy window))))
+    ;; RENDERER has surface eq to surface of WINDOW
+    (is-true (gsk:renderer-realized renderer))
+    (is (eq (gtk:native-surface window) (gsk:renderer-surface renderer)))))
 
 ;;;     gtk_native_get_surface_transform
 
-#+nil
 (test gtk-native-surface-transform
   (let ((window (make-instance 'gtk:window)))
     (is (equal '(0d0 0d0)
                (multiple-value-list (gtk:native-surface-transform window))))
-    (is-false (gtk:window-present window))
+    (is-false (gtk:widget-realize window))
     (is (equal '(14d0 12d0)
                (multiple-value-list (gtk:native-surface-transform window))))
-    (is-false (gtk:window-destroy window))))
+    (is-false (gtk:widget-unrealize window))))
 
 ;;;     gtk_native_realize
 ;;;     gtk_native_unrealize
 
-;; Does not work in the testsuite. We get a warning from GDK. The surface is
-;; not created.
+;; TODO: Does not work in the testsuite. We get a warning from GDK. The surface
+;; is not created. But GTK:WIDGET-REALIZE and GTK:WIDGET-UNREALIZE is working.
+;;
+;;  (gtk-test:9391): Gdk-CRITICAL **: gdk_surface_get_frame_clock: assertion
+;;  'GDK_IS_SURFACE (surface)' failed
+;;
+;;  (gtk-test:9391): Gtk-CRITICAL **: gtk_native_realize: assertion 'clock !=
+;;   NULL' failed
 
 #+nil
 (test gtk-native-realize/unrealize
   (let ((window (make-instance 'gtk:window)))
-    (is-false (gtk:native-surface window))
-;    (is-false (gtk:native-realize window))
+    (is-false (gtk:native-realize window))
 ))
 
-;;; --- 2023-11-3 --------------------------------------------------------------
+;;; 2024-4-10

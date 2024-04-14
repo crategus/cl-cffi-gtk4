@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -173,7 +173,7 @@
   @see-function{gtk:assistant-add-action-widget}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkAssistantPage
+;;; GtkAssistantPage                                        not exported
 ;;; ----------------------------------------------------------------------------
 
 ;; NOTE: The gtk:assistant-page-complete and gtk:assistant-page-page-title,
@@ -236,7 +236,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- assistant-page-child ---------------------------------------------------
+;;; --- gtk:assistant-page-child -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'assistant-page) t)
@@ -265,7 +265,7 @@
   @see-class{gtk:assistant-page}
   @see-class{gtk:widget}")
 
-;;; --- assistant-page-complete ------------------------------------------------
+;;; --- gtk:assistant-page-complete --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "complete" 'assistant-page) t)
@@ -275,7 +275,7 @@
   control the sensitivity of the navigation buttons. @br{}
   Default value: @em{false}")
 
-;;; --- assistant-page-page-type -----------------------------------------------
+;;; --- gtk:assistant-page-page-type -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "page-type" 'assistant-page) t)
@@ -284,7 +284,7 @@
   The type of the assistant page. @br{}
   Default value: @code{:content}")
 
-;;; --- assistant-page-title ---------------------------------------------------
+;;; --- gtk:assistant-page-title -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'assistant-page) t)
@@ -320,9 +320,9 @@
 
 #+liber-documentation
 (setf (documentation 'assistant 'type)
- "@version{2023-9-15}
+ "@version{2024-4-9}
   @begin{short}
-    A @class{gtk:assistant} widget is used to represent a generally complex
+    The @class{gtk:assistant} widget is used to represent a generally complex
     operation splitted in several steps.
   @end{short}
   Each step consists of one or more pages. The assitant guides the user through
@@ -426,7 +426,7 @@ lambda (assistant page)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- assistant-pages --------------------------------------------------------
+;;; --- gtk:assistant-pages ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pages" 'assistant) t)
@@ -455,7 +455,7 @@ lambda (assistant page)    :run-last
   @see-class{gtk:assistant}
   @see-class{g:list-model}")
 
-;;; --- assistant-use-header-bar -----------------------------------------------
+;;; --- gtk:assistant-use-header-bar -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-header-bar" 'assistant) t)
@@ -491,7 +491,7 @@ lambda (assistant page)    :run-last
   @see-class{gtk:header-bar}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_assistant_new
+;;; gtk_assistant_new ()
 ;;; ----------------------------------------------------------------------------
 
 (defun assistant-new ()
@@ -511,7 +511,7 @@ lambda (assistant page)    :run-last
 (export 'assistant-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_assistant_get_page -> assistant-page
+;;; gtk_assistant_get_page ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_assistant_get_page" assistant-page)
@@ -536,8 +536,8 @@ lambda (assistant page)    :run-last
 (export 'assistant-page)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_assistant_get_current_page
-;;; gtk_assistant_set_current_page -> assistant-current-page
+;;; gtk_assistant_get_current_page ()
+;;; gtk_assistant_set_current_page ()
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf assistant-current-page) (index assistant)

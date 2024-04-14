@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -56,10 +56,6 @@
 ;;; GtkNative
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Prerequisite of GtkNative is GtkWidget. But we can not implement this,
-;; because, we get cirular dependicies in the class precedence list. Can we
-;; work on this?
-
 (gobject:define-g-interface "GtkNative" native
   (:superclass g:object
    :export t
@@ -70,7 +66,7 @@
 (setf (liber:alias-for-class 'native)
       "Interface"
       (documentation 'native 'type)
- "@version{2023-8-20}
+ "@version{2024-4-10}
   @begin{short}
     The @class{gtk:native} interface is the interface implemented by all widgets
     that can provide a @class{gdk:surface} object for widgets to render on.
@@ -81,8 +77,8 @@
   Every widget that is not itself a @class{gtk:native} widget is contained in
   one, and you can get it with the @fun{gtk:widget-native} function. To get the
   surface of a @class{gtk:native} widget, use the @fun{gtk:native-surface}
-  function. It is also possible to find the @class{gtk:native} function to
-  which a surface belongs, with the @fun{gtk:native-for-surface} function.
+  function. It is also possible to find the @class{gtk:native} widget to which
+  a surface belongs, with the @fun{gtk:native-for-surface} function.
 
   In addition to a @class{gdk:surface} object, a @class{gtk:native} widget also
   provides a @class{gsk:renderer} object for rendering on that surface. To get
@@ -92,7 +88,7 @@
   @see-class{gsk:renderer}")
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_native_get_for_surface -> native-for-surface
+;;;gtk_native_get_for_surface ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_get_for_surface" native-for-surface)
@@ -111,7 +107,7 @@
 (export 'native-for-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_get_surface -> native-surface
+;;; gtk_native_get_surface ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_get_surface" native-surface) (g:object gdk:surface)
@@ -129,7 +125,7 @@
 (export 'native-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_get_renderer -> native-renderer
+;;; gtk_native_get_renderer ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_get_renderer" native-renderer)
@@ -148,7 +144,7 @@
 (export 'native-renderer)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_get_surface_transform -> native-surface-transform
+;;; gtk_native_get_surface_transform ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_get_surface_transform" %native-surface-transform)
@@ -160,7 +156,7 @@
 (defun native-surface-transform (native)
  #+liber-documentation
  "@version{2023-8-20}
-  @syntax[]{(gtk:native-surface-transform native) => x,y}
+  @syntax[]{(gtk:native-surface-transform native) => x, y}
   @argument[native]{a @class{gtk:native} widget}
   @begin{return}
     @arg{x} -- a double float with the x coordinate @br{}
@@ -180,7 +176,7 @@
 (export 'native-surface-transform)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_realize
+;;; gtk_native_realize ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_realize" native-realize) :void
@@ -196,7 +192,7 @@
 (export 'native-realize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_unrealize
+;;; gtk_native_unrealize ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_unrealize" native-unrealize) :void
