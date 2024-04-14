@@ -325,7 +325,7 @@
 
 (cffi:defcfun ("gtk_box_prepend" box-prepend) :void
  #+liber-documentation
- "@version{#2023-8-25}
+ "@version{2024-4-11}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @short{Adds a child widget as the first child widget to the box.}
@@ -342,7 +342,7 @@
 
 (cffi:defcfun ("gtk_box_remove" box-remove) :void
  #+liber-documentation
- "@version{#2023-8-25}
+ "@version{2024-4-11}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -366,7 +366,7 @@
 
 (cffi:defcfun ("gtk_box_insert_child_after" box-insert-child-after) :void
  #+liber-documentation
- "@version{#2023-8-25}
+ "@version{2024-4-11}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @argument[sibling]{a @class{gtk:widget} sibling widget after which to insert
@@ -391,7 +391,7 @@
 
 (cffi:defcfun ("gtk_box_reorder_child_after" box-reorder-child-after) :void
  #+liber-documentation
- "@version{#2023-8-25}
+ "@version{2024-4-11}
   @argument[box]{a @class{gtk:box} widget}
   @argument[child]{a @class{gtk:widget} child widget to move}
   @argument[sibling]{a @class{gtk:widget} sibling widget to move @arg{child}

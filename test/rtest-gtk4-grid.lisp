@@ -8,35 +8,35 @@
 ;;;     GtkGrid
 
 (test gtk-grid-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkGrid"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:grid
           (glib:symbol-for-gtype "GtkGrid")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkGrid")
           (g:gtype (cffi:foreign-funcall "gtk_grid_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkGrid")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkGrid")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
              (list-interfaces "GtkGrid")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("baseline-row" "column-homogeneous" "column-spacing"
                "orientation" "row-homogeneous" "row-spacing")
              (list-properties "GtkGrid")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkGrid")))
-  ;; CSS information
+  ;; Check CSS name
   (is (string= "grid"
                (gtk:widget-class-css-name "GtkGrid")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkGrid" GTK-GRID
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
@@ -56,15 +56,21 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     baseline-row
-;;;     column-homogeneous
-;;;     column-spacing
-;;;     row-homogeneous
-;;;     row-spacing
+(test gtk-grid-properties
+  (let ((grid (make-instance 'gtk:grid)))
+    (is (= 0 (gtk:grid-baseline-row grid)))
+    (is-false (gtk:grid-column-homogeneous grid))
+    (is (= 0 (gtk:grid-column-spacing grid)))
+    (is-false (gtk:grid-row-homogeneous grid))
+    (is (= 0 (gtk:grid-row-spacing grid)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_grid_new
+
+(test gtk-grid-new
+  (is (typep (gtk:grid-new) 'gtk:grid)))
+
 ;;;     gtk_grid_attach
 ;;;     gtk_grid_attach_next_to
 ;;;     gtk_grid_remove
@@ -78,4 +84,4 @@
 ;;;     gtk_grid_get_row_baseline_position
 ;;;     gtk_grid_set_row_baseline_position
 
-;;; --- 2023-9-20 --------------------------------------------------------------
+;;; 2024-4-12

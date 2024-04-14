@@ -8,38 +8,38 @@
 ;;;     GtkCenterBox
 
 (test gtk-center-box-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCenterBox"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:center-box
           (glib:symbol-for-gtype "GtkCenterBox")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCenterBox")
           (g:gtype (cffi:foreign-funcall "gtk_center_box_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkCenterBox")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkCenterBox")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
              (list-interfaces "GtkCenterBox")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("baseline-position" "center-widget" "end-widget" "orientation"
                "shrink-center-last" "start-widget")
              (list-properties "GtkCenterBox")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkCenterBox")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "box"
                (gtk:widget-class-css-name "GtkCenterBox")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:center-box))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkCenterBox")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCenterBox" GTK-CENTER-BOX
@@ -62,12 +62,6 @@
              (gobject:get-g-type-definition "GtkCenterBox"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     baseline-position
-;;;     center-widget                                      Since 4.10
-;;;     end-widget                                         Since 4.10
-;;;     shrink-center-last                                 Since 4.12
-;;;     start-widget                                       Since 4.10
 
 (test gtk-center-box-properties.1
   (let ((box (gtk:center-box-new)))
@@ -99,4 +93,4 @@
 (test gtk-center-box-new
   (is (typep (gtk:center-box-new) 'gtk:center-box)))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-11

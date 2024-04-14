@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -189,9 +189,9 @@
     @end{pre}
     It organizes the first two buttons side-by-side in one cell each. The third
     button is in the last column but spans across two rows. This is defined by
-    the @code{row-span} property. The last button is located in the second row
-    and spans across two columns, which is defined by the @code{column-span}
-    property.
+    the @slot[gtk:grid-layout-child]{row-span} property. The last button is
+    located in the second row and spans across two columns, which is defined by
+    the @slot[gtk:grid-layout-child]{column-span} property.
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
     The @class{gtk:grid} implementation uses a single CSS node with name
@@ -214,6 +214,8 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
+;;; --- gtk:grid-baseline-row --------------------------------------------------
+
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "baseline-row" 'grid) t)
  "The @code{baseline-row} property of type @code{:int} (Read / Write) @br{}
@@ -226,7 +228,7 @@
 (setf (liber:alias-for-function 'grid-baseline-row)
       "Accessor"
       (documentation 'grid-baseline-row 'function)
- "@version{#2022-1-15}
+ "@version{2024-4-12}
   @syntax[]{(gtk:grid-baseline-row object) => row}
   @syntax[]{(setf (gtk:grid-baseline-row object) row)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -242,7 +244,7 @@
   the baseline in the parent of the grid.
   @see-class{gtk:grid}")
 
-;;; --- grid-column-homogeneous ------------------------------------------------
+;;; --- gtk:grid-column-homogeneous --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "column-homogeneous" 'grid) t)
@@ -255,7 +257,7 @@
 (setf (liber:alias-for-function 'grid-column-homogeneous)
       "Accessor"
       (documentation 'grid-column-homogeneous 'function)
- "@version{#2022-1-15}
+ "@version{2024-4-12}
   @syntax[]{(gtk:grid-column-homogeneous object) => homogenous}
   @syntax[]{(setf (gtk:grid-column-homogeneous object) homogenous)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -270,7 +272,7 @@
   @see-class{gtk:grid}
   @see-function{gtk:grid-row-homogeneous}")
 
-;;; --- grid-column-spacing ----------------------------------------------------
+;;; --- gtk:grid-column-spacing ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "column-spacing" 'grid) t)
@@ -283,7 +285,7 @@
 (setf (liber:alias-for-function 'grid-column-spacing)
       "Accessor"
       (documentation 'grid-column-spacing 'function)
- "@version{#2022-1-15}
+ "@version{2024-4-12}
   @syntax[]{(gtk:grid-column-spacing object) => spacing}
   @syntax[]{(setf (gtk:grid-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -299,7 +301,7 @@
   @see-class{gtk:grid}
   @see-function{gtk:grid-row-spacing}")
 
-;;; --- grid-row-homogeneous ---------------------------------------------------
+;;; --- gtk:grid-row-homogeneous -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "row-homogeneous" 'grid) t)
@@ -312,7 +314,7 @@
 (setf (liber:alias-for-function 'grid-row-homogeneous)
       "Accessor"
       (documentation 'grid-row-homogeneous 'function)
- "@version{#2022-1-15}
+ "@version{2024-4-12}
   @syntax[]{(gtk:grid-row-homogeneous object) => homogeneous}
   @syntax[]{(setf (gtk:grid-row-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -327,7 +329,7 @@
   @see-class{gtk:grid}
   @see-function{gtk:grid-column-homogeneous}")
 
-;;; --- grid-row-spacing -------------------------------------------------------
+;;; --- gtk:grid-row-spacing ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "row-spacing" 'grid) t)
@@ -340,7 +342,7 @@
 (setf (liber:alias-for-function 'grid-row-spacing)
       "Accessor"
       (documentation 'grid-row-spacing 'function)
- "@version{#2022-1-15}
+ "@version{2024-4-12}
   @syntax[]{(gtk:grid-row-spacing object) => spacing}
   @syntax[]{(setf (gtk:grid-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid} widget}
@@ -356,14 +358,14 @@
   @see-function{gtk:grid-column-spacing}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_new
+;;; gtk_grid_new ()
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline grid-new))
 
 (defun grid-new ()
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{2024-4-12}
   @return{The new @class{gtk:grid} widget.}
   @short{Creates a new grid widget.}
   @see-class{gtk:grid}"
@@ -372,7 +374,7 @@
 (export 'grid-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_attach
+;;; gtk_grid_attach ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_attach" grid-attach) :void
@@ -407,7 +409,7 @@
 (export 'grid-attach)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_attach_next_to
+;;; gtk_grid_attach_next_to ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_attach_next_to" grid-attach-next-to) :void
@@ -445,7 +447,7 @@
 (export 'grid-attach-next-to)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_remove
+;;; gtk_grid_remove ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_remove" grid-remove) :void
@@ -468,7 +470,7 @@
 (export 'grid-remove)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_get_child_at
+;;; gtk_grid_get_child_at ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_get_child_at" grid-child-at) (g:object widget)
@@ -492,7 +494,7 @@
 (export 'grid-child-at)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_query_child
+;;; gtk_grid_query_child ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_query_child" %grid-query-child) :void
@@ -535,7 +537,7 @@
 (export 'grid-query-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_insert_row
+;;; gtk_grid_insert_row ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_insert_row" grid-insert-row) :void
@@ -557,7 +559,7 @@
 (export 'grid-insert-row)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_insert_column
+;;; gtk_grid_insert_column ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_insert_column" grid-insert-column) :void
@@ -580,7 +582,7 @@
 (export 'grid-insert-column)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_remove_row
+;;; gtk_grid_remove_row ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_remove_row" grid-remove-row) :void
@@ -603,7 +605,7 @@
 (export 'grid-remove-row)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_remove_column
+;;; gtk_grid_remove_column ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_remove_column" grid-remove-column) :void
@@ -626,7 +628,7 @@
 (export 'grid-remove-column)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_insert_next_to
+;;; gtk_grid_insert_next_to ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_insert_next_to" grid-insert-next-to) :void
@@ -655,8 +657,8 @@
 (export 'grid-insert-next-to)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_get_row_baseline_position
-;;; gtk_grid_set_row_baseline_position -> grid-row-baseline-position
+;;; gtk_grid_get_row_baseline_position ()
+;;; gtk_grid_set_row_baseline_position ()
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf grid-row-baseline-position) (position grid row)

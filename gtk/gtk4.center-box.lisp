@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -148,6 +148,7 @@
   @see-slot{gtk:center-box-baseline-position}
   @see-slot{gtk:center-box-center-widget}
   @see-slot{gtk:center-box-end-widget}
+  @see-slot{gtk:center-box-shrink-center-last}
   @see-slot{gtk:center-box-start-widget}
   @see-class{gtk:box}")
 
@@ -155,7 +156,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- center-box-baseline-position -------------------------------------------
+;;; --- gtk:center-box-baseline-position ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "baseline-position"
@@ -189,7 +190,7 @@
   @see-class{gtk:center-box}
   @see-symbol{gtk:baseline-position}")
 
-;;; --- center-box-center-widget -----------------------------------------------
+;;; --- gtk:center-box-center-widget -------------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "center-widget" 'center-box) t)
@@ -215,7 +216,7 @@
   sets the center widget. To remove the existing center widget, pass @code{nil}.
   @see-class{gtk:center-box}")
 
-;;; --- center-box-end-widget --------------------------------------------------
+;;; --- gtk:center-box-end-widget ----------------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "end-widget" 'center-box) t)
@@ -243,7 +244,7 @@
   sets the end widget. To remove the existing end widget, pass @code{nil}.
   @see-class{gtk:center-box}")
 
-;;; --- center-box-shrink-center-last ------------------------------------------
+;;; --- gtk:center-box-shrink-center-last --------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "shrink-center-last"
@@ -261,7 +262,7 @@
 (setf (liber:alias-for-function 'center-box-shrink-center-last)
       "Accessor"
       (documentation 'center-box-shrink-center-last 'function)
- "@version{#2023-8-31}
+ "@version{2024-4-12}
   @syntax[]{(gtk:center-box-shrink-center-last object) => setting}
   @syntax[]{(setf (gtk:center-box-shrink-center-last object) setting)}
   @argument[box]{a @class{gtk:center-box} widget}
@@ -283,7 +284,7 @@
   Since 4.12
   @see-class{gtk:center-box}")
 
-;;; --- center-box-start-widget ------------------------------------------------
+;;; --- gtk:center-box-start-widget --------------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "start-widget" 'center-box) t)
@@ -326,8 +327,8 @@
 (export 'center-box-new)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_center_box_set_center_widget
-;;;gtk_center_box_get_center_widget -> center-box-center-widget
+;;;gtk_center_box_set_center_widget ()
+;;;gtk_center_box_get_center_widget ()
 ;;; ----------------------------------------------------------------------------
 
 #-gtk-4-10
@@ -360,8 +361,8 @@
 (export 'center-box-center-widget)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_center_box_set_start_widget
-;;;gtk_center_box_get_start_widget -> center-box-start-widget
+;;;gtk_center_box_set_start_widget ()
+;;;gtk_center_box_get_start_widget ()
 ;;; ----------------------------------------------------------------------------
 
 #-gtk-4-10
@@ -394,8 +395,8 @@
 (export 'center-box-start-widget)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_center_box_set_end_widget
-;;;gtk_center_box_get_end_widget -> center-box-end-widget
+;;;gtk_center_box_set_end_widget ()
+;;;gtk_center_box_get_end_widget ()
 ;;; ----------------------------------------------------------------------------
 
 #-gtk-4-10

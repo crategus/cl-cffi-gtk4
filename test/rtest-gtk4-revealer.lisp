@@ -8,16 +8,16 @@
 ;;;     GtkRevealerTransitionType
 
 (test gtk-revealer-transition-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkRevealerTransitionType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkRevealerTransitionType")
           (g:gtype (cffi:foreign-funcall "gtk_revealer_transition_type_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:revealer-transition-type
           (glib:symbol-for-gtype "GtkRevealerTransitionType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_REVEALER_TRANSITION_TYPE_NONE"
                "GTK_REVEALER_TRANSITION_TYPE_CROSSFADE"
                "GTK_REVEALER_TRANSITION_TYPE_SLIDE_RIGHT"
@@ -29,14 +29,14 @@
                "GTK_REVEALER_TRANSITION_TYPE_SWING_UP"
                "GTK_REVEALER_TRANSITION_TYPE_SWING_DOWN")
              (list-enum-item-name "GtkRevealerTransitionType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9)
              (list-enum-item-value "GtkRevealerTransitionType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("none" "crossfade" "slide-right" "slide-left" "slide-up"
                "slide-down" "swing-right" "swing-left" "swing-up" "swing-down")
              (list-enum-item-nick "GtkRevealerTransitionType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkRevealerTransitionType"
                              GTK-REVEALER-TRANSITION-TYPE
                              (:EXPORT T
@@ -57,37 +57,37 @@
 ;;;     GtkRevealer
 
 (test gtk-revealer-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkRevealer"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:revealer
           (glib:symbol-for-gtype "GtkRevealer")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkRevealer")
           (g:gtype (cffi:foreign-funcall "gtk_revealer_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkRevealer")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkRevealer")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkRevealer")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("child" "child-revealed" "reveal-child" "transition-duration"
                "transition-type")
              (list-properties "GtkRevealer")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkRevealer")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "revealer"
                (gtk:widget-class-css-name "GtkRevealer")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:revealer))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkRevealer")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkRevealer" GTK-REVEALER
@@ -107,12 +107,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     child
-;;;     child-revealed
-;;;     reveal-child
-;;;     transition-duration
-;;;     transition-type
-
 (test gtk-revealer-properties
   (let ((revealer (make-instance 'gtk:revealer)))
     (is-false (gtk:revealer-child revealer))
@@ -128,4 +122,4 @@
 (test gtk-revealer-new
   (is (typep (gtk:revealer-new) 'gtk:revealer)))
 
-;;; --- 2023-8-8 ---------------------------------------------------------------
+;;; 2024-4-12

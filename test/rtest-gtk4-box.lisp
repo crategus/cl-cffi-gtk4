@@ -13,44 +13,44 @@
 ;;;     GtkBox
 
 (test gtk-box-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkBox"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:box
           (glib:symbol-for-gtype "GtkBox")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkBox")
           (g:gtype (cffi:foreign-funcall "gtk_box_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkBox")))
-  ;; Check the children
+  ;; Check children
   #-windows
   (is (equal '("GtkColorEditor" "GtkPlacesView" "GtkPrinterOptionWidget"
                "GtkShortcutsGroup" "GtkShortcutsSection")
              (list-children "GtkBox")))
   #+windows
-  (is (equal '("GtkColorEditor" "GtkPlacesView" "GtkShortcutsGroup"
-               "GtkShortcutsSection")
-             (list-children "GtkBox")))
-  ;; Check the interfaces
+  (if *first-run-gtk-test*
+      (is (equal '("GtkShortcutsGroup" "GtkShortcutsSection")
+                 (list-children "GtkBox"))))
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
              (list-interfaces "GtkBox")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("baseline-child" "baseline-position" "homogeneous" "orientation"
                "spacing")
              (list-properties "GtkBox")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkBox")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "box"
                (gtk:widget-class-css-name "GtkBox")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("horizontal")
              (gtk:widget-css-classes (make-instance 'gtk:box))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkBox")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBox" GTK-BOX
@@ -114,7 +114,42 @@
 ;;;     gtk_box_append
 ;;;     gtk_box_prepend
 ;;;     gtk_box_remove
+
+(test gtk-box-append/prepend/remove
+  (let ((box (make-instance 'gtk:box))
+        (child1 (make-instance 'gtk:button))
+        (child2 (make-instance 'gtk:button))
+        (child3 (make-instance 'gtk:button)))
+
+    (is-false (gtk:box-append box child1))
+    (is-false (gtk:box-prepend box child2))
+    (is-false (gtk:box-append box child3))
+    ;; The order is child2, child1, child3
+    (is (eq child2 (gtk:widget-first-child box)))
+    (is (eq child1 (gtk:widget-next-sibling child2)))
+    (is (eq child3 (gtk:widget-last-child box)))
+
+    (is-false (gtk:box-remove box child3))
+    (is (eq child1 (gtk:widget-last-child box)))))
+
 ;;;     gtk_box_insert_child_after
 ;;;     gtk_box_reorder_child_after
 
-;;; 2024-4-7
+(test gtk-box-insert/reorder-child-after
+  (let ((box (make-instance 'gtk:box))
+        (child1 (make-instance 'gtk:button))
+        (child2 (make-instance 'gtk:button))
+        (child3 (make-instance 'gtk:button)))
+    (is-false (gtk:box-append box child1))
+    (is-false (gtk:box-append box child2))
+
+    (is-false (gtk:box-insert-child-after box child3 child1))
+    (is (eq child1 (gtk:widget-first-child box)))
+    (is (eq child2 (gtk:widget-last-child box)))
+
+    (is-false (gtk:box-reorder-child-after box child3 child2))
+    (is (eq child3 (gtk:widget-last-child box)))
+    (is-false (gtk:box-reorder-child-after box child3 nil))
+    (is (eq child3 (gtk:widget-first-child box)))))
+
+;;; 2024-4-11

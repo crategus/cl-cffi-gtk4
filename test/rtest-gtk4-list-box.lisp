@@ -8,34 +8,42 @@
 ;;;     GtkListBoxRow
 
 (test gtk-list-box-row-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkListBoxRow"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:list-box-row
           (glib:symbol-for-gtype "GtkListBoxRow")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkListBoxRow")
           (g:gtype (cffi:foreign-funcall "gtk_list_box_row_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkListBoxRow")))
-  ;; Check the children
+  ;; Check children
+  #-windows
   (is (equal '("GtkPlacesViewRow" "GtkSidebarRow")
              (list-children "GtkListBoxRow")))
-  ;; Check the interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" 
+  #+windows
+  (if *first-run-gtk-test*
+      (is (equal '()
+                 (list-children "GtkListBoxRow"))))
+  ;; Check interfaces
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
              (list-interfaces "GtkListBoxRow")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("action-name" "action-target" "activatable" "child" "selectable")
              (list-properties "GtkListBoxRow")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate")
              (list-signals "GtkListBoxRow")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "row"
                (gtk:widget-class-css-name "GtkListBoxRow")))
-  ;; Accessible role
+  ;; Check CSS classes
+  (is (equal '("activatable")
+             (gtk:widget-css-classes (make-instance 'gtk:list-box-row))))
+  ;; Check accessible role
   (is (eq :list-item (gtk:widget-class-accessible-role "GtkListBoxRow")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListBoxRow" GTK-LIST-BOX-ROW
@@ -53,49 +61,67 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     activatable
-;;;     child
-;;;     selectable
+(test gtk-list-box-row-properties
+  (let ((row (make-instance 'gtk:list-box-row)))
+    (is-true (gtk:list-box-row-activatable row))
+    (is-false (gtk:list-box-row-child row))
+    (is-true (gtk:list-box-row-selectable row))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     activate
+
+;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_list_box_row_new
+
+(test gtk-list-box-row-new
+  (is (typep (gtk:list-box-row-new) 'gtk:list-box-row)))
+
+;;;     gtk_list_box_row_changed
+;;;     gtk_list_box_row_is_selected
+;;;     gtk_list_box_row_get_header
+;;;     gtk_list_box_row_set_header
+;;;     gtk_list_box_row_get_index
 
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkListBox
 
 (test gtk-list-box-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkListBox"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:list-box
           (glib:symbol-for-gtype "GtkListBox")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkListBox")
           (g:gtype (cffi:foreign-funcall "gtk_list_box_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkListBox")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkListBox")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkListBox")))
-  ;; Check the properties
-  (is (equal '("accept-unpaired-release" "activate-on-single-click" 
+  ;; Check properties
+  (is (equal '("accept-unpaired-release" "activate-on-single-click"
                "selection-mode" "show-separators")
              (list-properties "GtkListBox")))
-  ;; Check the signals
-  (is (equal '("activate-cursor-row" "move-cursor" "row-activated" 
-               "row-selected" "select-all" "selected-rows-changed" 
+  ;; Check signals
+  (is (equal '("activate-cursor-row" "move-cursor" "row-activated"
+               "row-selected" "select-all" "selected-rows-changed"
                "toggle-cursor-row" "unselect-all")
              (list-signals "GtkListBox")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "list"
                (gtk:widget-class-css-name "GtkListBox")))
-  ;; Accessible role
+  ;; Check CSS classes
+  (is (equal '()
+             (gtk:widget-css-classes (make-instance 'gtk:list-box))))
+  ;; Check accessible role
   (is (eq :list (gtk:widget-class-accessible-role "GtkListBox")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkListBox" GTK-LIST-BOX
@@ -117,10 +143,12 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     accept-unpaired-release
-;;;     activate-on-single-click
-;;;     selection-mode
-;;;     show-separators
+(test gtk-list-box-properties
+  (let ((listbox (make-instance 'gtk:list-box)))
+    (is-false (gtk:list-box-accept-unpaired-release listbox))
+    (is-true (gtk:list-box-activate-on-single-click listbox))
+    (is (eq :single (gtk:list-box-selection-mode listbox)))
+    (is-false (gtk:list-box-show-separators listbox))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -140,6 +168,10 @@
 ;;;     GtkListBoxUpdateHeaderFunc
 
 ;;;     gtk_list_box_new
+
+(test gtk-list-box-new
+  (is (typep (gtk:list-box-new) 'gtk:list-box)))
+
 ;;;     gtk_list_box_prepend
 ;;;     gtk_list_box_append
 ;;;     gtk_list_box_insert
@@ -173,11 +205,4 @@
 
 ;;;     gtk_list_box_bind_model
 
-;;;     gtk_list_box_row_new
-;;;     gtk_list_box_row_changed
-;;;     gtk_list_box_row_is_selected
-;;;     gtk_list_box_row_get_header
-;;;     gtk_list_box_row_set_header
-;;;     gtk_list_box_row_get_index
-
-;;; --- 2023-8-31 --------------------------------------------------------------
+;;; 2024-4-13
