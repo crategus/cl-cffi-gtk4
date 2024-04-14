@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -511,7 +511,7 @@ lambda (entry pos)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- entry-activates-default ------------------------------------------------
+;;; --- gtk:entry-activates-default --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "activates-default" 'entry) t)
@@ -544,7 +544,7 @@ lambda (entry pos)    :run-last
   closed, since the default widget is usually one of the dialog buttons.
   @see-class{gtk:entry}")
 
-;;; --- entry-attributes -------------------------------------------------------
+;;; --- gtk:entry-attributes ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "attributes" 'entry) t)
@@ -575,7 +575,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-class{pango:attr-list}")
 
-;;; --- entry-buffer -----------------------------------------------------------
+;;; --- gtk:entry-buffer -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "buffer" 'entry) t)
@@ -587,7 +587,7 @@ lambda (entry pos)    :run-last
 (setf (liber:alias-for-function 'entry-buffer)
       "Accessor"
       (documentation 'entry-buffer 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-7}
   @syntax[]{(gtk:entry-buffer object) => buffer}
   @syntax[]{(setf (gtk:entry-buffer object) buffer)}
   @argument[object]{a @class{gtk:entry} widget}
@@ -601,7 +601,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-class{gtk:entry-buffer}")
 
-;;; --- entry-completion -------------------------------------------------------
+;;; --- gtk:entry-completion ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "completion" 'entry) t)
@@ -636,7 +636,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-class{gtk:entry-completion}")
 
-;;; --- entry-enable-emoji-completion ------------------------------------------
+;;; --- gtk:entry-enable-emoji-completion --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "enable-emoji-completion"
@@ -662,7 +662,7 @@ lambda (entry pos)    :run-last
   Whether to suggest Emoji replacements.
   @see-class{gtk:entry}")
 
-;;; --- entry-extra-menu -------------------------------------------------------
+;;; --- gtk:entry-extra-menu ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "extra-menu" 'entry) t)
@@ -689,7 +689,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-class{g:menu-model}")
 
-;;; --- entry-has-frame --------------------------------------------------------
+;;; --- gtk:entry-has-frame ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-frame" 'entry) t)
@@ -716,7 +716,7 @@ lambda (entry pos)    :run-last
   entry has a beveled frame around it.
   @see-class{gtk:entry}")
 
-;;; --- entry-im-module --------------------------------------------------------
+;;; --- gtk:entry-im-module ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "im-module" 'entry) t)
@@ -749,7 +749,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:im-context}
   @see-function{gtk:settings-gtk-im-module}")
 
-;;; --- entry-input-hints ------------------------------------------------------
+;;; --- gtk:entry-input-hints --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-hints" 'entry) t)
@@ -778,7 +778,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-symbol{gtk:input-hints}")
 
-;;; --- entry-input-purpose ----------------------------------------------------
+;;; --- gtk:entry-input-purpose ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-purpose" 'entry) t)
@@ -811,7 +811,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-symbol{gtk:input-purpose}")
 
-;;; --- entry-invisible-char ---------------------------------------------------
+;;; --- gtk:entry-invisible-char -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "invisible-char" 'entry) t)
@@ -848,7 +848,7 @@ lambda (entry pos)    :run-last
   @see-function{gtk:entry-visibility}
   @see-function{gtk:entry-unset-invisible-char}")
 
-;;; --- entry-invisible-char-set -----------------------------------------------
+;;; --- gtk:entry-invisible-char-set -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "invisible-char-set" 'entry) t)
@@ -874,7 +874,7 @@ lambda (entry pos)    :run-last
   Whether the invisible char has been set for the entry.
   @see-class{gtk:entry}")
 
-;;; --- entry-max-length -------------------------------------------------------
+;;; --- gtk:entry-max-length ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-length" 'entry) t)
@@ -913,7 +913,7 @@ lambda (entry pos)    :run-last
   @see-function{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-max-length}")
 
-;;; --- entry-overwrite-mode ---------------------------------------------------
+;;; --- gtk:entry-overwrite-mode -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "overwrite-mode" 'entry) t)
@@ -941,7 +941,7 @@ lambda (entry pos)    :run-last
   when typing.
   @see-class{gtk:entry}")
 
-;;; --- entry-placeholder-text -------------------------------------------------
+;;; --- gtk:entry-placeholder-text ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "placeholder-text" 'entry) t)
@@ -976,7 +976,7 @@ lambda (entry pos)    :run-last
   the initial focus setting until the first key event arrives.
   @see-class{gtk:entry}")
 
-;;; --- entry-primary-icon-activatable -----------------------------------------
+;;; --- gtk:entry-primary-icon-activatable -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-icon-activatable"
@@ -1007,7 +1007,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-activatable}")
 
-;;; --- entry-primary-icon-gicon -----------------------------------------------
+;;; --- gtk:entry-primary-icon-gicon -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-icon-gicon" 'entry) t)
@@ -1032,7 +1032,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-class{g:icon}")
 
-;;; --- entry-primary-icon-name ------------------------------------------------
+;;; --- gtk:entry-primary-icon-name --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-icon-name" 'entry) t)
@@ -1045,7 +1045,7 @@ lambda (entry pos)    :run-last
 (setf (liber:alias-for-function 'entry-primary-icon-name)
       "Accessor"
       (documentation 'entry-primary-icon-name 'function)
- "@version{#2023-9-16}
+ "@version{2023-4-7}
   @syntax[]{(gtk:entry-primary-icon-name object) => name}
   @syntax[]{(setf (gtk:entry-primary-icon-name object) name)}
   @argument[object]{a @class{gtk:entry} widget}
@@ -1059,7 +1059,7 @@ lambda (entry pos)    :run-last
   @see-function{gtk:entry-icon-name}
   @see-function{gtk:entry-secondary-icon-name}")
 
-;;; --- entry-primary-icon-paintable -------------------------------------------
+;;; --- gtk:entry-primary-icon-paintable ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-icon-paintable"
@@ -1085,7 +1085,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-class{gdk:paintable}")
 
-;;; --- entry-primary-icon-sensitive -------------------------------------------
+;;; --- gtk:entry-primary-icon-sensitive ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-icon-sensitive"
@@ -1121,7 +1121,7 @@ lambda (entry pos)    :run-last
   @see-function{gtk:entry-icon-sensitive}
   @see-function{gtk:entry-secondary-icon-sensitive}")
 
-;;; --- entry-primary-icon-storage-type ----------------------------------------
+;;; --- gtk:entry-primary-icon-storage-type ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-icon-storage-type"
@@ -1149,7 +1149,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-symbol{gtk:image-type}")
 
-;;; --- entry-primary-icon-tooltip-markup --------------------------------------
+;;; --- gtk:entry-primary-icon-tooltip-markup ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-icon-tooltip-markup"
@@ -1180,7 +1180,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-tooltip-markup}")
 
-;;; --- entry-primary-icon-tooltip-text ----------------------------------------
+;;; --- gtk:entry-primary-icon-tooltip-text ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "primary-icon-tooltip-text"
@@ -1194,7 +1194,7 @@ lambda (entry pos)    :run-last
 (setf (liber:alias-for-function 'entry-primary-icon-tooltip-text)
       "Accessor"
       (documentation 'entry-primary-icon-tooltip-text 'function)
- "@version{#2023-9-16}
+ "@version{2024-4-7}
   @syntax[]{(gtk:entry-primary-icon-tooltip-text object) => text}
   @syntax[]{(setf (gtk:entry-primary-icon-tooltip-text object) text)}
   @argument[object]{a @class{gtk:entry} widget}
@@ -1209,7 +1209,7 @@ lambda (entry pos)    :run-last
   @see-function{gtk:entry-icon-tooltip-text}
   @see-function{gtk:entry-secondary-icon-tooltip-text}")
 
-;;; --- entry-progress-fraction ------------------------------------------------
+;;; --- gtk:entry-progress-fraction --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "progress-fraction" 'entry) t)
@@ -1239,7 +1239,7 @@ lambda (entry pos)    :run-last
   bar. The fraction should be between 0.0 and 1.0, inclusive.
   @see-class{gtk:entry}")
 
-;;; --- entry-progress-pulse-step ----------------------------------------------
+;;; --- gtk:entry-progress-pulse-step ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "progress-pulse-step" 'entry) t)
@@ -1270,7 +1270,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-function{gtk:entry-progress-pulse}")
 
-;;; --- entry-scroll-offset ----------------------------------------------------
+;;; --- gtk:entry-scroll-offset ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scroll-offset" 'entry) t)
@@ -1296,7 +1296,7 @@ lambda (entry pos)    :run-last
   Number of pixels of the entry scrolled off the screen to the left.
   @see-class{gtk:entry}")
 
-;;; --- entry-secondary-icon-activatable ---------------------------------------
+;;; --- gtk:entry-secondary-icon-activatable -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-icon-activatable"
@@ -1327,7 +1327,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-activatable}")
 
-;;; --- entry-secondary-icon-gicon ---------------------------------------------
+;;; --- gtk:entry-secondary-icon-gicon -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-icon-gicon" 'entry) t)
@@ -1353,7 +1353,7 @@ lambda (entry pos)    :run-last
   @see-class{g:icon}
   @see-function{gtk:entry-icon-gicon}")
 
-;;; --- entry-secondary-icon-name ----------------------------------------------
+;;; --- gtk:entry-secondary-icon-name ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-icon-name" 'entry) t)
@@ -1366,7 +1366,7 @@ lambda (entry pos)    :run-last
 (setf (liber:alias-for-function 'entry-secondary-icon-name)
       "Accessor"
       (documentation 'entry-secondary-icon-name 'function)
- "@version{#2023-9-16}
+ "@version{2024-4-7}
   @syntax[]{(gtk:entry-secondary-icon-name object) => name}
   @syntax[]{(setf (gtk:entry-secondary-icon-name object) name)}
   @argument[object]{a @class{gtk:entry} widget}
@@ -1380,7 +1380,7 @@ lambda (entry pos)    :run-last
   @see-function{gtk:entry-icon-name}
   @see-function{gtk:entry-primary-icon-name}")
 
-;;; --- entry-secondary-icon-paintable -----------------------------------------
+;;; --- gtk:entry-secondary-icon-paintable -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-icon-paintable"
@@ -1407,7 +1407,7 @@ lambda (entry pos)    :run-last
   @see-class{gdk:paintable}
   @see-function{gtk:entry-icon-paintable}")
 
-;;; --- entry-secondary-icon-sensitive -----------------------------------------
+;;; --- gtk:entry-secondary-icon-sensitive -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-icon-sensitive"
@@ -1443,7 +1443,7 @@ lambda (entry pos)    :run-last
   @see-function{gtk:entry-icon-sensitive}
   @see-function{gtk:entry-secondary-icon-sensitive}")
 
-;;; --- entry-secondary-icon-storage-type --------------------------------------
+;;; --- gtk:entry-secondary-icon-storage-type ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-icon-storage-type"
@@ -1472,7 +1472,7 @@ lambda (entry pos)    :run-last
   @see-symbol{gtk:image-type}
   @see-function{gtk:entry-icon-storage-type}")
 
-;;; --- entry-secondary-icon-tooltip-markup ------------------------------------
+;;; --- gtk:entry-secondary-icon-tooltip-markup --------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-icon-tooltip-markup"
@@ -1503,7 +1503,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-tooltip-markup}")
 
-;;; --- entry-secondary-icon-tooltip-text --------------------------------------
+;;; --- gtk:entry-secondary-icon-tooltip-text ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "secondary-icon-tooltip-text"
@@ -1517,7 +1517,7 @@ lambda (entry pos)    :run-last
 (setf (liber:alias-for-function 'entry-secondary-icon-tooltip-text)
       "Accessor"
       (documentation 'entry-secondary-icon-tooltip-text 'function)
- "@version{#2023-9-16}
+ "@version{2024-4-7}
   @syntax[]{(gtk:entry-secondary-icon-tooltip-text object) => text}
   @syntax[]{(setf (gtk:entry-secondary-icon-tooltip-text object) text)}
   @argument[object]{a @class{gtk:entry} widget}
@@ -1532,7 +1532,7 @@ lambda (entry pos)    :run-last
   @see-function{gtk:entry-icon-tooltip-text}
   @see-function{gtk:entry-primary-icon-tooltip-text}")
 
-;;; --- entry-show-emoji-icon --------------------------------------------------
+;;; --- gtk:entry-show-emoji-icon ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-emoji-icon" 'entry) t)
@@ -1557,7 +1557,7 @@ lambda (entry pos)    :run-last
   Whether to show an icon for Emoji.
   @see-class{gtk:entry}")
 
-;;; --- entry-tabs -------------------------------------------------------------
+;;; --- gtk:entry-tabs ---------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tabs" 'entry) t)
@@ -1583,7 +1583,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry}
   @see-class{pango:tab-array}")
 
-;;; --- entry-text-length ------------------------------------------------------
+;;; --- gtk:entry-text-length --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text-length" 'entry) t)
@@ -1613,7 +1613,7 @@ lambda (entry pos)    :run-last
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-length}")
 
-;;; --- entry-truncate-multiline -----------------------------------------------
+;;; --- gtk:entry-truncate-multiline -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "truncate-multiline" 'entry) t)
@@ -1638,7 +1638,7 @@ lambda (entry pos)    :run-last
   If @em{true}, pasted multi-line text is truncated to the first line.
   @see-class{gtk:entry}")
 
-;;; --- entry-visibility -------------------------------------------------------
+;;; --- gtk:entry-visibility ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "visibility" 'entry) t)

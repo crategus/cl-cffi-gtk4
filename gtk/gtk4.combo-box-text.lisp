@@ -407,7 +407,7 @@
 
 (cffi:defcfun ("gtk_combo_box_text_remove" combo-box-text-remove) :void
  #+liber-documentation
- "@version{#2024-4-6}
+ "@version{2024-4-7}
   @argument[combo]{a @class{gtk:combo-box} widget}
   @argument[pos]{an integer with index of the item to remove}
   @begin{short}

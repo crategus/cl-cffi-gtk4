@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -217,7 +217,7 @@
 
 #+liber-documentation
 (setf (documentation 'label 'type)
- "@version{2023-4-15}
+ "@version{2024-5-7}
   @begin{short}
     The @class{gtk:label} widget displays a small amount of text.
   @end{short}
@@ -427,7 +427,7 @@ lambda (label uri)    :run-last
       @begin[code]{table}
         @entry[label]{The @class{gtk:label} widget on which the signal was
           emitted.}
-        @entry[uri]{A string with the URI that is activated.}
+        @entry[uri]{The string with the URI that is activated.}
         @entry[Returns]{@em{True} if the link has been activated.}
       @end{table}
     @subheading{The \"copy-clipboard\" signal}
@@ -462,7 +462,7 @@ lambda (label step count extend)    :action
         @entry[label]{The @class{gtk:label} widget which received the signal.}
         @entry[step]{The granularity of the move, as a value of the
           @symbol{gtk:movement-step} enumeration.}
-        @entry[count]{An integer with the number of step units to move.}
+        @entry[count]{The integer with the number of step units to move.}
         @entry[extend]{@em{True} if the move should extend the selection.}
       @end{table}
   @end{dictionary}
@@ -493,7 +493,7 @@ lambda (label step count extend)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- label-attributes -------------------------------------------------------
+;;; --- gtk:label-attributes ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "attributes" 'label) t)
@@ -539,7 +539,7 @@ lambda (label step count extend)    :action
   @see-function{gtk:label-use-markup}
   @see-function{gtk:label-use-underline}")
 
-;;; --- label-ellipsize --------------------------------------------------------
+;;; --- gtk:label-ellipsize ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "ellipsize" 'label) t)
@@ -576,7 +576,7 @@ lambda (label step count extend)    :action
   @see-class{gtk:label}
   @see-symbol{pango:ellipsize-mode}")
 
-;;; --- label-extra-menu -------------------------------------------------------
+;;; --- gtk:label-extra-menu ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "extra-menu" 'label) t)
@@ -603,7 +603,7 @@ lambda (label step count extend)    :action
   @see-class{gtk:label}
   @see-class{g:menu-model}")
 
-;;; --- label-justify ----------------------------------------------------------
+;;; --- gtk:label-justify ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "justify" 'label) t)
@@ -641,7 +641,7 @@ lambda (label step count extend)    :action
   @see-function{gtk:label-new}
   @see-function{gtk:widget-halign}")
 
-;;; --- label-label ------------------------------------------------------------
+;;; --- gtk:label-label --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "label" 'label) t)
@@ -676,7 +676,7 @@ lambda (label step count extend)    :action
   @see-function{gtk:label-use-markup}
   @see-function{gtk:label-use-underline}")
 
-;;; --- label-lines ------------------------------------------------------------
+;;; --- gtk:label-lines --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "lines" 'label) t)
@@ -707,7 +707,7 @@ lambda (label step count extend)    :action
   of lines.
   @see-class{gtk:label}")
 
-;;; --- label-max-width-chars --------------------------------------------------
+;;; --- gtk:label-max-width-chars ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-width-chars" 'label) t)
@@ -737,7 +737,7 @@ lambda (label step count extend)    :action
   desired maximum width.
   @see-class{gtk:label}")
 
-;;; --- label-mnemonic-keyval --------------------------------------------------
+;;; --- gtk:label-mnemonic-keyval ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonic-keyval" 'label) t)
@@ -770,7 +770,7 @@ lambda (label step count extend)    :action
   @end{dictionary}
   @see-class{gtk:label}")
 
-;;; --- label-mnemonic-widget --------------------------------------------------
+;;; --- gtk:label-mnemonic-widget ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonic-widget" 'label) t)
@@ -817,7 +817,7 @@ lambda (label step count extend)    :action
   @see-function{gtk:label-new-with-mnemonic}
   @see-function{gtk:label-use-underline}")
 
-;;; --- label-natural-wrap-mode ------------------------------------------------
+;;; --- gtk:label-natural-wrap-mode --------------------------------------------
 
 #+(and gtk-4-6 liber-documentation)
 (setf (documentation (liber:slot-documentation "natural-wrap-mode" 'label) t)
@@ -853,7 +853,7 @@ lambda (label step count extend)    :action
   @see-class{gtk:label}
   @see-function{gtk:label-wrap-mode}")
 
-;;; --- label-selectable -------------------------------------------------------
+;;; --- gtk:label-selectable ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selectable" 'label) t)
@@ -878,7 +878,7 @@ lambda (label step count extend)    :action
   paste.
   @see-class{gtk:label}")
 
-;;; --- label-single-line-mode -------------------------------------------------
+;;; --- gtk:label-single-line-mode ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "single-line-mode" 'label) t)
@@ -909,11 +909,7 @@ lambda (label step count extend)    :action
   the label is in single line mode.
   @see-class{gtk:label}")
 
-;;; --- label-tabs -------------------------------------------------------------
-
-;; TODO: PangoTabArray is a boxed type. But the automatic memory management
-;; might not work for accessor functions. Perhaps the implementation of
-;; the accessor functions must be improved. Check the implementation.
+;;; --- gtk:label-tabs ---------------------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "tabs" 'label) t)
@@ -943,7 +939,7 @@ lambda (label step count extend)    :action
   @see-class{gtk:label}
   @see-class{pango:tab-array}")
 
-;;; --- label-use-markup -------------------------------------------------------
+;;; --- gtk:label-use-markup ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-markup" 'label) t)
@@ -972,7 +968,7 @@ lambda (label step count extend)    :action
   @see-class{gtk:label}
   @see-function{gtk:label-set-markup}")
 
-;;; --- label-use-underline ----------------------------------------------------
+;;; --- gtk:label-use-underline ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-underline" 'label) t)
@@ -1000,7 +996,7 @@ lambda (label step count extend)    :action
   key.
   @see-class{gtk:label}")
 
-;;; --- label-width-chars ------------------------------------------------------
+;;; --- gtk:label-width-chars --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "width-chars" 'label) t)
@@ -1030,7 +1026,7 @@ lambda (label step count extend)    :action
   desired width.
   @see-class{gtk:label}")
 
-;;; --- label-wrap -------------------------------------------------------------
+;;; --- gtk:label-wrap ---------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "wrap" 'label) t)
@@ -1053,7 +1049,7 @@ lambda (label step count extend)    :action
   If set, wrap lines if the text becomes too wide.
   @see-class{gtk:label}")
 
-;;; --- label-wrap-mode --------------------------------------------------------
+;;; --- gtk:label-wrap-mode ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "wrap-mode" 'label) t)
@@ -1084,7 +1080,7 @@ lambda (label step count extend)    :action
   @see-symbol{pango:wrap-mode}
   @see-function{gtk:label-wrap}")
 
-;;; --- label-xalign -----------------------------------------------------------
+;;; --- gtk:label-xalign -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "xalign" 'label) t)
@@ -1115,7 +1111,7 @@ lambda (label step count extend)    :action
   @see-function{gtk:label-yalign}
   @see-function{gtk:widget-halign}")
 
-;;; --- label-yalign -----------------------------------------------------------
+;;; --- gtk:label-yalign -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "yalign" 'label) t)
@@ -1148,7 +1144,7 @@ lambda (label step count extend)    :action
   @see-function{gtk:widget-valign}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_new
+;;; gtk_label_new ()
 ;;; ----------------------------------------------------------------------------
 
 (defun label-new (text)
@@ -1169,8 +1165,8 @@ lambda (label step count extend)    :action
 (export 'label-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_get_text
-;;; gtk_label_set_text -> label-text
+;;; gtk_label_get_text ()
+;;; gtk_label_set_text ()
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf label-text) (text label)
@@ -1204,12 +1200,12 @@ lambda (label step count extend)    :action
 (export 'label-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_set_markup
+;;; gtk_label_set_markup ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_label_set_markup" label-set-markup) :void
  #+liber-documentation
- "@version{#2021-10-31}
+ "@version{2024-4-7}
   @argument[label]{a @class{gtk:label} widget}
   @argument[text]{a markup string}
   @begin{short}
@@ -1225,7 +1221,7 @@ lambda (label step count extend)    :action
 (export 'label-set-markup)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_set_markup_with_mnemonic
+;;; gtk_label_set_markup_with_mnemonic ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_label_set_markup_with_mnemonic"
@@ -1251,7 +1247,7 @@ lambda (label step count extend)    :action
 (export 'label-set-markup-with-mnemonic)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_get_layout_offsets -> label-layout-offsets
+;;; gtk_label_get_layout_offsets ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_label_get_layout_offsets" %label-get-layout-offsets) :void
@@ -1297,7 +1293,7 @@ lambda (label step count extend)    :action
 (export 'label-layout-offsets)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_new_with_mnemonic
+;;; gtk_label_new_with_mnemonic ()
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Check implementation with make-instance
@@ -1332,7 +1328,7 @@ lambda (label step count extend)    :action
 (export 'label-new-with-mnemonic)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_select_region
+;;; gtk_label_select_region ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_label_select_region" label-select-region) :void
@@ -1356,7 +1352,7 @@ lambda (label step count extend)    :action
 (export 'label-select-region)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_set_text_with_mnemonic
+;;; gtk_label_set_text_with_mnemonic ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_label_set_text_with_mnemonic" label-set-text-with-mnemonic)
@@ -1380,7 +1376,7 @@ lambda (label step count extend)    :action
 (export 'label-set-text-with-mnemonic)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_get_layout -> label-layout
+;;; gtk_label_get_layout ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_label_get_layout" label-layout) (g:object pango:layout)
@@ -1403,7 +1399,7 @@ lambda (label step count extend)    :action
 (export 'label-layout)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_get_selection_bounds -> label-selection-bounds
+;;; gtk_label_get_selection_bounds ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_label_get_selection_bounds" %label-get-selection-bounds)
@@ -1433,7 +1429,7 @@ lambda (label step count extend)    :action
 (export 'label-selection-bounds)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_label_get_current_uri -> label-current-uri
+;;; gtk_label_get_current_uri ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_label_get_current_uri" label-current-uri) :string

@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'native-dialog 'type)
- "@version{#2023-4-16}
+ "@version{2024-4-11}
   @begin{short}
     Native dialogs are platform dialogs that do not use the @class{gtk:dialog}
     or @class{gtk:window} classes.
@@ -120,7 +120,7 @@ lambda (dialog response)    :run-last
       @begin[code]{table}
         @entry[dialog]{The @class{gtk:native-dialog} object on which the signal
           is emitted.}
-        @entry[response]{An integer with the response ID.}
+        @entry[response]{The integer with the response ID.}
       @end{table}
   @end{dictionary}
   @see-slot{gtk:native-dialog-modal}
@@ -134,7 +134,7 @@ lambda (dialog response)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- native-dialog-modal ----------------------------------------------------
+;;; --- gtk:native-dialog-modal ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'native-dialog) t)
@@ -167,7 +167,7 @@ lambda (dialog response)    :run-last
   @see-class{gtk:native-dialog}
   @see-function{gtk:native-dialog-transient-for}")
 
-;;; --- native-dialog-title ----------------------------------------------------
+;;; --- gtk:native-dialog-title ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'native-dialog) t)
@@ -193,7 +193,7 @@ lambda (dialog response)    :run-last
   @setf{gtk:native-dialog-title} function sets the title.
   @see-class{gtk:native-dialog}")
 
-;;; --- native-dialog-transient-for --------------------------------------------
+;;; --- gtk:native-dialog-transient-for ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "transient-for"
@@ -227,7 +227,7 @@ lambda (dialog response)    :run-last
   @see-class{gtk:native-dialog}
   @see-class{gtk:window}")
 
-;;; --- native-dialog-visible --------------------------------------------------
+;;; --- gtk:native-dialog-visible ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "visible" 'native-dialog) t)
@@ -307,8 +307,8 @@ lambda (dialog response)    :run-last
   resources will be destroyed.
 
   Note that this does not release any reference to the object, as opposed to
-  destroying a @class{gtk:window} widget, because there is no reference from the
-  windowing system to the @class{gtk:native-dialog} widget.
+  destroying a @class{gtk:window} widget, because there is no reference from
+  the windowing system to the @class{gtk:native-dialog} widget.
   @see-class{gtk:native-dialog}
   @see-class{gtk:window}"
   (dialog (g:object native-dialog)))
