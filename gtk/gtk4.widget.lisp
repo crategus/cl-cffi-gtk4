@@ -1394,9 +1394,9 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-layout-manager)
       "Accessor"
       (documentation 'widget-layout-manager 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-12}
   @syntax[]{(gtk:widget-layout-manager object) => manager}
-  @syntax[]{(setf (gtk:widget-margin-bottom object) manager)}
+  @syntax[]{(setf (gtk:widget-layout-manager object) manager)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @begin{short}
@@ -1407,6 +1407,15 @@ lambda (widget)    :run-last
   by the widget. The @setf{gtk:widget-layout-manager} function sets the layout
   manager delegate instance that provides an implementation for measuring and
   allocating the children of the widget.
+  @begin{examples}
+    Get the layout manager for a button and a grid:
+    @begin{pre}
+(gtk:widget-layout-manager (make-instance 'gtk:button))
+=> #<GTK:BIN-LAYOUT {1005DDB073@}>
+(gtk:widget-layout-manager (make-instance 'gtk:grid))
+=> #<GTK:GRID-LAYOUT {1005DD9863@}>
+    @end{pre}
+  @end{examples}
   @see-class{gtk:widget}
   @see-class{gtk:layout-manager}")
 
@@ -2667,20 +2676,39 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_class_get_layout_manager_type ()
-;;;
-;;; GType
-;;; gtk_widget_class_get_layout_manager_type (GtkWidgetClass *widget_class);
-;;;
-;;; Retrieves the type of the GtkLayoutManager used by the GtkWidget class.
-;;;
-;;; See also: gtk_widget_class_set_layout_manager_type()
-;;;
-;;; widget_class :
-;;;     a GtkWidgetClass
-;;;
-;;; Returns :
-;;;     a GtkLayoutManager subclass, or G_TYPE_INVALID
 ;;; ----------------------------------------------------------------------------
+
+(defun widget-class-layout-manager-type (gtype)
+ #+liber-documentation
+ "@version{2024-4-12}
+  @argument[gtype]{a @class{g:type-t} type}
+  @return{The @class{g:type-t} type for the @class{gtk:layout-manager} object,
+    or @code{nil}}
+  @begin{short}
+    Retrieves the type of the @class{gtk:layout-manager} object used by the
+    widget of the given @arg{gtype} type.
+  @end{short}
+  @begin{examples}
+    @begin{pre}
+(gtk:widget-class-layout-manager-type \"GtkBox\")
+=> #<GTYPE :name \"GtkBoxLayout\" :id 99175136080768>
+(gtk:widget-class-layout-manager-type \"GtkButton\")
+=> #<GTYPE :name \"GtkBinLayout\" :id 99175136080464>
+(gtk:widget-class-layout-manager-type \"GtkWindow\")
+=> NIL
+    @end{pre}
+  @end{examples}
+  @see-class{gtk:widget}
+  @see-class{gtk:layout-manager}
+  @see-class{g:type-t}"
+  (let ((wclass (g:type-class-ref gtype)))
+    (unwind-protect
+      (cffi:foreign-funcall "gtk_widget_class_get_layout_manager_type"
+                            :pointer wclass
+                            g:type-t)
+      (g:type-class-unref wclass))))
+
+(export 'widget-class-layout-manager-type)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_class_set_activate_signal ()
@@ -5082,7 +5110,7 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_template_child -> widget-template-child
+;;; gtk_widget_get_template_child ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_template_child" widget-template-child) g:object
@@ -5117,7 +5145,7 @@ lambda (widget)    :run-last
 (export 'widget-template-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_set_template
+;;; gtk_widget_class_set_template ()
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_class_set_template" %widget-class-set-template) :void
