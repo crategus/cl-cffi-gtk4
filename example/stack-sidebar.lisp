@@ -1,10 +1,12 @@
-;;;; Stack Sidebar - 2023-8-9
+;;;; Stack Sidebar
 ;;;;
-;;;; GtkStackSidebar provides an automatic sidebar widget to control navigation
-;;;; of a GtkStack object. This widget automatically updates it content based on
-;;;; what is presently available in the GtkStack object, and using the "title"
-;;;; child property to set the display labels.
-
+;;;; The <tt>GtkStackSidebar</tt> widget provides an automatic sidebar widget to
+;;;; control navigation of a <tt>GtkStack</tt> widget. This widget automatically
+;;;; updates it content based on what is presently available in the
+;;;; <tt>GtkStack</tt> widget, and using the <tt>title</tt> child property to
+;;;; set the display labels.
+;;;;
+;;;; 2024-4-14
 
 (in-package :gtk4-example)
 
@@ -45,4 +47,4 @@
               (gtk:stack-add-titled stack label name name))))
       (gtk:box-append box sidebar)
       (gtk:box-append box stack)
-      (setf (gtk:widget-visible window) t)))
+      (gtk:window-present window)))

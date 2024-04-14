@@ -24,8 +24,16 @@
            #:do-grid-spacing
            #:do-revealer
            #:do-revealer-icon
+           #:do-list-box-complex
+           #:do-list-box-controls
+           #:do-flow-box
            #:do-stack
            #:do-stack-sidebar
+           #:do-action-bar
+           #:do-header-bar
+           #:do-overlay-interactive
+           #:do-overlay-decorative
+           #:do-notebook
            #:do-paned
            #:create-expander
            #:do-aspect-frame

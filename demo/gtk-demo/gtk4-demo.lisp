@@ -204,7 +204,7 @@
     (dolist (resource resources)
       (let ((file (sys-path resource (gtk-demo-package demo))))
         (cond ((member (pathname-type file)
-                       '("css" "ui" "xml" "lisp" "asd")
+                       '("css" "ui" "xml" "lisp" "asd" "txt")
                        :test #'string-equal)
                (let* ((buffer (gtk:text-buffer-new))
                       (view (make-instance 'gtk:text-view

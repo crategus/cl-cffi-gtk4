@@ -164,6 +164,61 @@
        "gtk4-example"
        "revealer-icon.lisp"
        "resource/revealer-icon.ui")
+      ("List Box Complex"
+       ":window"
+       "DO-LIST-BOX-COMPLEX"
+       "gtk4-example"
+       "list-box-complex.lisp"
+       "resource/list-box-complex.ui"
+       "resource/list-box-message.txt")
+      ("List Box Controls"
+       ":window"
+       "DO-LIST-BOX-CONTROLS"
+       "gtk4-example"
+       "list-box-controls.lisp"
+       "resource/list-box-controls.ui")
+      ("Flow Box"
+       ":window"
+       "DO-FLOW-BOX"
+       "gtk4-example"
+       "flow-box.lisp")
+      ("Stack"
+       ":window"
+       "DO-STACK"
+       "gtk4-example"
+       "stack.lisp"
+       "resource/stack.ui")
+      ("Stack Sidebar"
+       ":window"
+       "DO-STACK-SIDEBAR"
+       "gtk4-example"
+       "stack-sidebar.lisp")
+      ("Action Bar"
+       ":window"
+       "DO-ACTION-BAR"
+       "gtk4-example"
+       "action-bar.lisp")
+      ("Header Bar"
+       ":window"
+       "DO-HEADER-BAR"
+       "gtk4-example"
+       "header-bar.lisp")
+      ("Interactive overlay"
+       ":window"
+       "DO-OVERLAY-INTERACTIVE"
+       "gtk4-example"
+       "overlay-interactive.lisp")
+      ("Decorative overlay"
+       ":window"
+       "DO-OVERLAY-DECORATIVE"
+       "gtk4-example"
+       "overlay-decorative.lisp")
+      ("Notebook"
+       ":window"
+       "DO-NOTEBOOK"
+       "gtk4-example"
+       "notebook.lisp")
+
       ("Paned Window"
        ":window"
        "DO-PANED"
