@@ -275,10 +275,8 @@
 ;;; GdkToplevel
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Is it correct to derive the interface from GDK:SURFACE?!
-
 (gobject:define-g-interface "GdkToplevel" toplevel
-  (:superclass surface
+  (:superclass g:object
    :export t
    :type-initializer "gdk_toplevel_get_type")
   ((decorated
@@ -316,9 +314,9 @@
 (setf (liber:alias-for-class 'toplevel)
       "Interface"
       (documentation 'toplevel 'type)
- "@version{2014-1-9}
+ "@version{2014-4-7}
   @begin{short}
-    A @class{gdk:toplevel} object is a freestanding toplevel surface.
+    The @class{gdk:toplevel} object is a freestanding toplevel surface.
   @end{short}
   The @class{gdk:toplevel} interface provides useful APIs for interacting with
   the windowing system, such as controlling maximization and size of the
@@ -337,8 +335,8 @@ lambda (toplevel size)    :run-last
       to handle this signal. Failing to do so will result in an arbitrary size
       being used as a result.
       @begin[code]{table}
-        @entry[toplevel]{A @class{gdk:toplevel} object.}
-        @entry[size]{A @symbol{gdk:toplevel-size} instance.}
+        @entry[toplevel]{The @class{gdk:toplevel} object.}
+        @entry[size]{The @symbol{gdk:toplevel-size} instance.}
       @end{table}
   @end{dictionary}
   @see-slot{gdk:toplevel-decorated}
@@ -547,14 +545,14 @@ lambda (toplevel size)    :run-last
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "state" 'toplevel) t)
- "The @code{state} property of type @symbol{gdk:toplevel-status} (Read) @br{}
-  State.")
+ "The @code{state} property of type @symbol{gdk:toplevel-state} (Read) @br{}
+  The state of the toplevel.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'toplevel-state)
       "Accessor"
       (documentation 'toplevel-state 'function)
- "@version{#2023-4-8}
+ "@version{#2024-4-7}
   @syntax[]{(gdk:toplevel-state object) => state}
   @syntax[]{(setf (gdk:toplevel-state object) state)}
   @argument[object]{a @class{gdk:toplevel} object}
