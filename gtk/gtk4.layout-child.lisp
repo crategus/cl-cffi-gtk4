@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -75,7 +75,7 @@
 
 #+liber-documentation
 (setf (documentation 'layout-child 'type)
- "@version{2023-4-15}
+ "@version{2024-4-12}
   @begin{short}
     The @class{gtk:layout-child} class is the base class for objects that are
     meant to hold layout properties.
@@ -94,7 +94,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- layout-child-child-widget ----------------------------------------------
+;;; --- gtk:layout-child-child-widget ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child-widget" 'layout-child) t)
@@ -106,18 +106,18 @@
 (setf (liber:alias-for-function 'layout-child-child-widget)
       "Accessor"
       (documentation 'layout-child-child-widget 'function)
- "@version{#2023-4-17}
+ "@version{#2024-4-12}
   @syntax[]{(gtk:layout-child-child-widget object) => child}
   @argument[object]{a @class{gtk:layout-child} object}
   @argument[child]{a @class{gtk:widget} widget}
   @begin{short}
-    Retrieves the @class{gtk:widget} widget associated to the given
-    @arg{child}.
+    Retrieves the @class{gtk:widget} child widget associated to the given
+    @arg{object}.
   @end{short}
   @see-class{gtk:layout-child}
   @see-class{gtk:widget}")
 
-;;; --- layout-child-layout-manager --------------------------------------------
+;;; --- gtk:layout-child-layout-manager ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "layout-manager"
@@ -130,13 +130,13 @@
 (setf (liber:alias-for-function 'layout-child-layout-manager)
       "Accessor"
       (documentation 'layout-child-layout-manager 'function)
- "@version{#2023-4-17}
+ "@version{#2024-4-12}
   @syntax[]{(gtk:layout-child-layout-manager object) => manager}
   @argument[object]{a @class{gtk:layout-child} object}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @begin{short}
     Retrieves the @class{gtk:layout-manager} object that created the given
-    @arg{child}.
+    @arg{object}.
   @end{short}
   @see-class{gtk:layout-child}
   @see-class{gtk:layout-manager}")

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -72,7 +72,7 @@
 
 #+liber-documentation
 (setf (documentation 'layout-manager 'type)
- "@version{#2023-4-16}
+ "@version{2024-4-12}
   @begin{short}
     Layout managers are delegate classes that handle the preferred size and the
     allocation of a container widget.
@@ -118,7 +118,7 @@ create_layout_child (GtkLayoutManager *manager,
   @class{gtk:layout-child} instance until the widget is removed from its parent,
   or the parent removes the layout manager.
 
-  Each @class{gtk:-ayout-manager} instance creating a @class{gtk:layout-child}
+  Each @class{gtk:layout-manager} instance creating a @class{gtk:layout-child}
   instance should use the @fun{gtk:layout-manager-layout-child} function every
   time it needs to query the layout properties. Each @class{gtk:layout-child}
   instance should call the @fun{gtk:layout-manager-layout-changed} function
@@ -134,23 +134,23 @@ create_layout_child (GtkLayoutManager *manager,
   (manager (g:object layout-manager))
   (widget (g:object widget))
   (orientation orientation)
-  (for-size :int)
+  (size :int)
   (minimum (:pointer :int))
   (natural (:pointer :int))
   (minimum-baseline (:pointer :int))
   (natural-baseline (:pointer :int)))
 
-(defun layout-manager-measure (manager widget orientation for-size)
+(defun layout-manager-measure (manager widget orientation size)
  #+liber-documentation
- "@version{#2023-4-16}
+ "@version{2024-4-12}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @argument[widget]{a @class{gtk:widget} widget using @arg{manager}}
   @argument[orientation]{a @symbol{gtk:orientation} value to measure}
-  @argument[for-size]{an integer with the size for the opposite of
-    @arg{orientation}; for instance, if the orientation is @code{:horizontal},
-    this is the height of the widget; if the orientation is @code{:vertical},
-    this is the width of the widget; this allows to measure the height for the
-    given width, and the width for the given height; use -1 if the size is not
+  @argument[size]{an integer with the size for the opposite of
+  @arg{orientation}, for instance, if the orientation is @code{:horizontal},
+    this is the height of the widget, if the orientation is @code{:vertical},
+    this is the width of the widget, this allows to measure the height for the
+    given width, and the width for the given height, use -1 if the size is not
     known}
   @begin{return}
     @arg{minimum} -- an integer with the minimum size for the given size and
@@ -178,7 +178,7 @@ create_layout_child (GtkLayoutManager *manager,
     (%layout-manager-measure manager
                              widget
                              orientation
-                             for-size
+                             size
                              minimum
                              natural
                              minimum-baseline
@@ -196,7 +196,7 @@ create_layout_child (GtkLayoutManager *manager,
 
 (cffi:defcfun ("gtk_layout_manager_allocate" layout-manager-allocate) :void
  #+liber-documentation
- "@version{#2023-4-16}
+ "@version{2024-4-12}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @argument[widget]{a @class{gtk:widget} widget using @arg{manager}}
   @argument[width]{an integer with the new width of the widget}
@@ -204,9 +204,9 @@ create_layout_child (GtkLayoutManager *manager,
   @argument[baseline]{an integer with the baseline position of the widget,
     or -1}
   @begin{short}
-    This function assigns the given width, height, and baseline to a widget,
-    and computes the position and sizes of the children of the widget using the
-    layout management policy of manager .
+    This function assigns the given @arg{width}, @arg{height}, and
+    @arg{baseline} to a widget, and computes the position and sizes of the
+    children of the widget using the layout management policy of @arg{manager}.
   @end{short}
   @see-class{gtk:layout-manager}"
   (manager (g:object layout-manager))
@@ -224,12 +224,14 @@ create_layout_child (GtkLayoutManager *manager,
 (cffi:defcfun ("gtk_layout_manager_get_request_mode"
                layout-manager-request-mode) size-request-mode
  #+liber-documentation
- "@version{#2023-4-16}
+ "@version{2024-4-12}
   @argument[manager]{a @class{gtk:layout-manager} object}
+  @return{The @symbol{gtk:size-request-mode} value.}
   @begin{short}
     Retrieves the request mode of @arg{manager}.
   @end{short}
-  @see-class{gtk:layout-manager}"
+  @see-class{gtk:layout-manager}
+  @see-symbol{gtk:size-request-mode}"
   (manager (g:object layout-manager)))
 
 (export 'layout-manager-request-mode)
@@ -241,11 +243,11 @@ create_layout_child (GtkLayoutManager *manager,
 (cffi:defcfun ("gtk_layout_manager_get_widget" layout-manager-widget)
     (g:object widget)
  #+liber-documentation
- "@version{#2023-4-16}
+ "@version{2024-4-12}
   @argument[manager]{a @class{gtk:layout-manager} object}
-  @return{A @class{gtk:widget} widget.}
+  @return{The @class{gtk:widget} widget.}
   @begin{short}
-    Retrieves the widget using the given @class{gtk:layout-manager} object.
+    Retrieves the widget using the given @arg{manager}.
   @end{short}
   @see-class{gtk:layout-manager}
   @see-class{gtk:widget}"
@@ -260,10 +262,10 @@ create_layout_child (GtkLayoutManager *manager,
 (cffi:defcfun ("gtk_layout_manager_get_layout_child"
                layout-manager-layout-child) (g:object layout-child)
  #+liber-documentation
- "@version{#2023-4-16}
+ "@version{2024-4-12}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @argument[child]{a @class{gtk:widget} child widget}
-  @return{A @class{gtk:layout-child} object.}
+  @return{The @class{gtk:layout-child} object.}
   @begin{short}
     Retrieves a @class{gtk:layout-child} instance for the
     @class{gtk:layout-manager} object, creating one if necessary.
@@ -287,7 +289,7 @@ create_layout_child (GtkLayoutManager *manager,
 (cffi:defcfun ("gtk_layout_manager_layout_changed"
                layout-manager-layout-changed) :void
  #+liber-documentation
- "@version{#2023-4-16}
+ "@version{#2024-4-12}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @begin{short}
     Queues a resize on the @class{gtk:widget} widget using @arg{manager}, if
