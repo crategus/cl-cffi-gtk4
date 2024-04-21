@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -86,7 +86,7 @@
 
 #+liber-documentation
 (setf (documentation 'action-bar 'type)
- "@version{2023-8-9}
+ "@version{2024-4-21}
   @begin{short}
     The @class{gtk:action-bar} widget is designed to present contextual actions.
   @end{short}
@@ -102,8 +102,9 @@
   @begin[GtkActionBar as GtkBuildable]{dictionary}
     The @class{gtk:action-bar} implementation of the @class{gtk:buildable}
     interface supports adding children at the start or end sides by specifying
-    \"start\" or \"end\" as the \"type\" attribute of a @code{<child>} element,
-    or setting the center widget by specifying \"center\" value.
+    @code{\"start\"} or @code{\"end\"} as the @code{\"type\"} attribute of a
+    @code{<child>} element, or setting the center widget by specifying
+    @code{\"center\"} value.
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
@@ -142,8 +143,8 @@ actionbar
       "Accessor"
       (documentation 'action-bar-revealed 'function)
  "@version{2023-8-9}
-  @syntax[]{(gtk:action-bar-revealed object) => revealed}
-  @syntax[]{(setf (gtk:action-bar-revealed object) revealed)}
+  @syntax{(gtk:action-bar-revealed object) => revealed}
+  @syntax{(setf (gtk:action-bar-revealed object) revealed)}
   @argument[object]{a @class{gtk:action-bar} widget}
   @argument[revealed]{a boolean whether the action bar shows its contents}
   @begin{short}
@@ -152,11 +153,11 @@ actionbar
   @end{short}
   Changing the @slot[gtk:action-bar]{revealed} property will make the action bar
   reveal (@em{true}) or conceal (@em{false}) itself via a sliding transition.
-  @begin[Note]{dictionary}
+  @begin{notes}
     This does not show or hide the action bar in the
     @slot[gtk:widget]{visible} property sense, so revealing has no effect if
     the @slot[gtk:widget]{visible} property is @em{false}.
-  @end{dictionary}
+  @end{notes}
   @see-class{gtk:action-bar}
   @see-function{gtk:widget-visible}")
 
@@ -182,7 +183,7 @@ actionbar
 
 (cffi:defcfun ("gtk_action_bar_pack_start" action-bar-pack-start) :void
  #+liber-documentation
- "@version{#2023-8-9}
+ "@version{2024-4-21}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to
   @arg{actionbar}}
@@ -203,7 +204,7 @@ actionbar
 
 (cffi:defcfun ("gtk_action_bar_pack_end" action-bar-pack-end) :void
  #+liber-documentation
- "@version{#2023-8-9}
+ "@version{2024-4-21}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to
     @arg{actionbar}}
@@ -237,7 +238,7 @@ actionbar
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_action_bar_get_center_widget
-;;; gtk_action_bar_set_center_widget -> action-bar-center-widget
+;;; gtk_action_bar_set_center_widget
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf action-bar-center-widget) (widget actionbar)
@@ -250,17 +251,17 @@ actionbar
 (cffi:defcfun ("gtk_action_bar_get_center_widget" action-bar-center-widget)
     (g:object widget)
  #+liber-documentation
- "@version{#2023-8-9}
-  @syntax[]{(gtk:action-bar-center-widget actionbar) => widget}
-  @syntax[]{(setf (gtk:action-bar-center-widget actionbar) widget)}
+ "@version{2024-4-21}
+  @syntax{(gtk:action-bar-center-widget actionbar) => widget}
+  @syntax{(setf (gtk:action-bar-center-widget actionbar) widget)}
   @argument[actionbar]{a @class{gtk:action-bar} widget}
   @argument[widget]{a @class{gtk:widget} object to use for the center widget}
   @begin{short}
-    Accessor of the center widget of the action bar.
+    The @fun{gtk:action-bar-center-widget} function retrieves the center widget
+    of the action bar.
   @end{short}
-  The @fun{gtk:action-bar-center-widget} function retrieves the center widget
-  of the action bar. The @setf{gtk:action-bar-center-widget} function sets the
-  center widget for the action bar.
+  The @setf{gtk:action-bar-center-widget} function sets the center widget for
+  the action bar.
   @see-class{gtk:action-bar}
   @see-class{gtk:widget}"
   (actionbar (g:object action-bar)))

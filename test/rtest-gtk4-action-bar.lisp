@@ -8,36 +8,36 @@
 ;;;     GtkActionBar
 
 (test gtk-action-bar-class
-  ;; Type check
+  ;; Check Type
   (is (g:type-is-object "GtkActionBar"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:action-bar
           (glib:symbol-for-gtype "GtkActionBar")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkActionBar")
           (g:gtype (cffi:foreign-funcall "gtk_action_bar_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkActionBar")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkActionBar")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkActionBar")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("revealed")
              (list-properties "GtkActionBar")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkActionBar")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "actionbar"
                (gtk:widget-class-css-name "GtkActionBar")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:action-bar))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkActionBar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkActionBar" GTK-ACTION-BAR
@@ -51,12 +51,9 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     revealed
-
 (test gtk-action-bar-revealed
   (let ((actionbar (make-instance 'gtk:action-bar)))
-    (is-true (gtk:action-bar-revealed actionbar))
-))
+    (is-true (gtk:action-bar-revealed actionbar))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -71,4 +68,4 @@
 ;;;     gtk_action_bar_get_center_widget
 ;;;     gtk_action_bar_set_center_widget
 
-;;; --- 2023-8-9 ---------------------------------------------------------------
+;;; 2024-4-21

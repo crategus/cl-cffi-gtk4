@@ -9,7 +9,7 @@
 ;;;; full width of the box, even if the children at either side take up
 ;;;; different amounts of space.
 ;;;;
-;;;; 2024-4-14
+;;;; 2024-4-21
 
 (in-package :gtk4-example)
 
@@ -23,22 +23,35 @@
                                 :default-width 320
                                 :default-height 180))
           (actionbar (make-instance 'gtk:action-bar)))
-    (let* ((icon (g:themed-icon-new "media-skip-backward"))
-           (image (gtk:image-new-from-gicon icon))
-           (button (make-instance 'gtk:button
-                                  :child image)))
-      (gtk:action-bar-pack-start actionbar button))
-    (let* ((icon (g:themed-icon-new "media-playback-start"))
-           (image (gtk:image-new-from-gicon icon))
-           (button (make-instance 'gtk:button
-                                  :child image)))
-        (gtk:action-bar-pack-start actionbar button))
-    (let* ((icon (g:themed-icon-new "media-skip-forward"))
-           (image (gtk:image-new-from-gicon icon))
-           (button (make-instance 'gtk:button
-                                  :child image)))
-      (gtk:action-bar-pack-start actionbar button))
-      (gtk:box-append vbox (make-instance 'gtk:text-view
-                                          :vexpand t))
-      (gtk:box-append vbox actionbar)
-      (gtk:window-present window)))
+    ;; Pack start widgets
+    (let ((image (gtk:image-new-from-icon-name "media-skip-backward")))
+      (gtk:action-bar-pack-start actionbar
+                                 (make-instance 'gtk:button
+                                                :child image)))
+    (let ((image (gtk:image-new-from-icon-name "media-playback-start")))
+      (gtk:action-bar-pack-start actionbar
+                                 (make-instance 'gtk:button
+                                                :child image)))
+    (let ((image (gtk:image-new-from-icon-name "media-skip-forward")))
+      (gtk:action-bar-pack-start actionbar
+                                 (make-instance 'gtk:button
+                                                :child image)))
+    ;; Pack end widgets
+    (let ((image (gtk:image-new-from-icon-name "media-record")))
+      (gtk:action-bar-pack-end actionbar
+                               (make-instance 'gtk:button
+                                              :child image)))
+    (let ((image (gtk:image-new-from-icon-name "media-playback-stop")))
+      (gtk:action-bar-pack-end actionbar
+                               (make-instance 'gtk:button
+                                              :child image)))
+    ;; Set center widget
+    (let ((image (gtk:image-new-from-icon-name "media-eject")))
+      (setf (gtk:action-bar-center-widget actionbar)
+            (make-instance 'gtk:button
+                           :child image)))
+    ;; Pack widgets and present window
+    (gtk:box-append vbox (make-instance 'gtk:text-view
+                                        :vexpand t))
+    (gtk:box-append vbox actionbar)
+    (gtk:window-present window)))
