@@ -8,36 +8,36 @@
 ;;;     GtkAspectFrame
 
 (test gtk-aspect-frame-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkAspectFrame"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:aspect-frame
           (glib:symbol-for-gtype "GtkAspectFrame")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAspectFrame")
           (g:gtype (cffi:foreign-funcall "gtk_aspect_frame_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkAspectFrame")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkAspectFrame")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkAspectFrame")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("child" "obey-child" "ratio" "xalign" "yalign")
              (list-properties "GtkAspectFrame")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkAspectFrame")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "aspectframe"
                (gtk:widget-class-css-name "GtkAspectFrame")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:aspect-frame))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :generic (gtk:widget-class-accessible-role "GtkAspectFrame")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAspectFrame" GTK-ASPECT-FRAME
@@ -58,12 +58,6 @@
              (gobject:get-g-type-definition "GtkAspectFrame"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     child
-;;;     obey-child
-;;;     ratio
-;;;     xalign
-;;;     yalign
 
 (test gtk-aspect-frame-properties
   (let ((frame (make-instance 'gtk:aspect-frame)))
@@ -86,4 +80,4 @@
     (is (= 0.25 (gtk:aspect-frame-xalign frame)))
     (is (= 0.50 (gtk:aspect-frame-yalign frame)))))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-21
