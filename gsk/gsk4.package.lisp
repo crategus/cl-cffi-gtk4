@@ -235,8 +235,8 @@
     @about-function{transform-unref}
     @about-function{transform-category}
     @about-function{transform-print}
-    @about-function{transform-to-string}
     @about-function{transform-parse}
+    @about-function{transform-to-string}
     @about-function{transform-to-matrix}
     @about-function{transform-to-2d}
     @about-function{transform-to-2d-components}
@@ -251,8 +251,8 @@
     @about-function{transform-rotate-3d}
     @about-function{transform-scale}
     @about-function{transform-scale-3d}
-    @about-function{transform-perspective}
     @about-function{transform-skew}
+    @about-function{transform-perspective}
     @about-function{transform-equal}
     @about-function{transform-transform-bounds}
     @about-function{transform-transform-point}
