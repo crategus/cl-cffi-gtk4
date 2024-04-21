@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -39,17 +39,15 @@
 ;;; Functions
 ;;;
 ;;;     gsk_transform_new
-;;;     gsk_transform_ref
-;;;     gsk_transform_unref
+;;;     gsk_transform_ref                                   not exported
+;;;     gsk_transform_unref                                 not exported
 ;;;     gsk_transform_get_category
-;;;     gsk_transform_print
-;;;     gsk_transform_to_string
+;;;     gsk_transform_print                                 not implemented
 ;;;     gsk_transform_parse
+;;;     gsk_transform_to_string
 ;;;     gsk_transform_to_matrix
 ;;;     gsk_transform_to_2d
-
-;;;     gsk_transform_to_2d_components                     Since 4.6
-
+;;;     gsk_transform_to_2d_components                      Since 4.6
 ;;;     gsk_transform_to_affine
 ;;;     gsk_transform_to_translate
 ;;;     gsk_transform_transform
@@ -61,9 +59,7 @@
 ;;;     gsk_transform_rotate_3d
 ;;;     gsk_transform_scale
 ;;;     gsk_transform_scale_3d
-
-;;;     gsk_transform_skew                                 Since 4.6
-
+;;;     gsk_transform_skew                                  Since 4.6
 ;;;     gsk_transform_perspective
 ;;;     gsk_transform_equal
 ;;;     gsk_transform_transform_bounds
@@ -73,7 +69,7 @@
 (in-package :gsk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GskTransformCategory
+;;; GskTransformCategory
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GskTransformCategory" transform-category
@@ -91,32 +87,8 @@
 (setf (liber:alias-for-symbol 'transform-category)
       "GEnum"
       (liber:symbol-documentation 'transform-category)
- "@version{2023-10-31}
-  @begin{short}
-    The categories of matrices relevant for GSK and GTK.
-  @end{short}
-  Note that the enumeration values are ordered in a way that any category
-  includes matrices of all later categories. So if you want to for example
-  check if a matrix is a 2D matrix, the category value of the matrix is greater
-  or  equal the @code{:2d} value.
-
-  Also keep in mind that rounding errors may cause matrices to not conform to
-  their categories. Otherwise, matrix operations done via multiplication will
-  not worsen categories. So for the matrix multiplication @code{C = A * B},
-  @code{category(C) = (MIN (category(A), category(B))}.
-  @begin[Example]{dictionary}
-    With the helper function
-    @begin{pre}
-(defun category-value (category)
-  (cffi:convert-to-foreign category 'gsk:transform-category))
-    @end{pre}
-    you can check if a matrix with @code{category} is a 2D matrix
-    with
-    @begin{pre}
-(>= (category-value category) (category-value :2d))
-    @end{pre}
-  @end{dictionary}
-  @begin[Implementation]{dictionary}
+ "@version{2024-4-21}
+  @begin{declaration}
     @begin{pre}
 (gobject:define-g-enum \"GskTransformCategory\" transform-category
   (:export t
@@ -129,6 +101,8 @@
    :2d-translate
    :identity)
     @end{pre}
+  @end{declaration}
+  @begin{values}
     @begin[code]{table}
       @entry[:unknown]{The category of the matrix has not been determined.}
       @entry[:any]{Analyzing the matrix concluded that it does not fit in any
@@ -144,7 +118,31 @@
       @entry[:2d-translate]{The matrix is a 2D translation.}
       @entry[:identity]{The matrix is the identity matrix.}
     @end{table}
-  @end{dictionary}
+  @end{values}
+  @begin{short}
+    The categories of matrices relevant for GSK and GTK.
+  @end{short}
+  Note that the enumeration values are ordered in a way that any category
+  includes matrices of all later categories. So if you want to for example
+  check if a matrix is a 2D matrix, the category value of the matrix is greater
+  or  equal the @code{:2d} value.
+
+  Also keep in mind that rounding errors may cause matrices to not conform to
+  their categories. Otherwise, matrix operations done via multiplication will
+  not worsen categories. So for the matrix multiplication @code{C = A * B} the
+  result has the category @code{category(C) = (MIN (category(A), category(B))}.
+  @begin{examples}
+    With the helper function
+    @begin{pre}
+(defun category-value (category)
+  (cffi:convert-to-foreign category 'gsk:transform-category))
+    @end{pre}
+    you can check if a matrix with @code{category} is a 2D matrix
+    with
+    @begin{pre}
+(>= (category-value category) (category-value :2d))
+    @end{pre}
+  @end{examples}
   @see-class{gsk:transform}")
 
 ;;; ----------------------------------------------------------------------------
@@ -158,13 +156,23 @@
 (cffi:defcfun ("gsk_transform_new" %transform-new) :pointer)
 
 (glib:define-g-boxed-opaque transform "GskTransform"
+  :export t
+  :type-initializer "gsk_transform_get_type"
   :alloc (%transform-new))
 
 #+liber-documentation
 (setf (liber:alias-for-class 'transform)
       "GBoxed"
       (documentation 'transform 'type)
- "@version{2023-10-31}
+ "@version{2024-4-21}
+  @begin{declaration}
+    @begin{pre}
+(glib:define-g-boxed-opaque transform ¸\"GskTransform\"
+  :export t
+  :type-initializer \"gsk_transform_get_type\"
+  :alloc (%transform-new))
+    @end{pre}
+  @end{declaration}
   @begin{short}
     The @class{gsk:transform} structure is a structure to describe transform
     matrices.
@@ -177,18 +185,19 @@
   creation. This means code can safely expose them as properties of objects
   without having to worry about others changing them.
   @see-constructor{gsk:transform-new}
+  @see-constructor{gsk:transform-parse}
   @see-symbol{graphene:matrix-t}")
 
 (export 'transform)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_new ()
+;;; gsk_transform_new
 ;;; ----------------------------------------------------------------------------
 
 (defun transform-new ()
  #+liber-documentation
- "@version{2023-10-31}
-  @return{A new @class{gsk:transform} instance.}
+ "@version{2024-4-21}
+  @return{The new @class{gsk:transform} instance.}
   @short{Creates a new transform matrix.}
   @see-class{gsk:transform}"
   (make-instance 'transform))
@@ -196,53 +205,31 @@
 (export 'transform-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_ref ()
-;;;
-;;; GskTransform *
-;;; gsk_transform_ref (GskTransform *self);
-;;;
-;;; Acquires a reference on the given GskTransform.
-;;;
-;;; self :
-;;;     a GskTransform.
-;;;
-;;; Returns :
-;;;     the GskTransform with an additional reference.
+;;; gsk_transform_ref ()                                    not exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_ref" %transform-ref) (g:boxed transform)
   (transform (g:boxed transform)))
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_unref ()
-;;;
-;;; void
-;;; gsk_transform_unref (GskTransform *self);
-;;;
-;;; Releases a reference on the given GskTransform.
-;;;
-;;; If the reference was the last, the resources associated to the self are
-;;; freed.
-;;;
-;;; self :
-;;;     a GskTransform.
+;;; gsk_transform_unref ()                                  not exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_unref" %transform-unref) :void
   (transform (g:boxed transform)))
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_get_category ()
+;;; gsk_transform_get_category
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_get_category" transform-category)
     transform-category
  #+liber-documentation
- "@version{2023-10-31}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{A @symbol{gsk:transform-category} value with the category of the
-    transform.}
-  @short{Returns the category this transform belongs to.}
+  @return{The @symbol{gsk:transform-category} value with the category of the
+    transform matrix.}
+  @short{Returns the category this transform matrix belongs to.}
   @see-class{gsk:transform}
   @see-symbol{gsk:transform-category}"
   (transform (g:boxed transform)))
@@ -250,35 +237,73 @@
 (export 'transform-category)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_print ()
-;;;
-;;; void
-;;; gsk_transform_print (GskTransform *self,
-;;;                      GString *string);
-;;;
-;;; Converts self into a human-readable string representation suitable for
-;;; printing that can later be parsed with gsk_transform_parse().
-;;;
-;;; self :
-;;;     a GskTransform.
-;;;
-;;; string :
-;;;     The string to print into
+;;; gsk_transform_print ()                                  not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_to_string ()
+;;; gsk_transform_parse
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gsk_transform_parse" %transform-parse) :boolean
+  (str :string)
+  (transform :pointer))
+
+(defun transform-parse (str)
+ "@version{2024-4-21}
+  @argument[str]{a string to parse}
+  @return{The @class{gsk:transform} instance with the transform matrix.}
+  @begin{short}
+    Parses the given string into a transform matrix.
+  @end{short}
+  Strings printed via the @fun{gsk:transform-to-string} function can be read in
+  again successfully using this function. If the @arg{str} argument does not
+  describe a valid transform matrix, @em{false} is returned.
+  @begin{examples}
+    @begin{pre}
+(gsk:transform-parse \"translate(1,2)\")
+=> #<GSK:TRANSFORM {100A325D83@}>
+(gsk:transform-to-translate *)
+=> (1.0 2.0)
+(gsk:transform-parse \"translate(1,2) scale(3)\")
+=> #<GSK:TRANSFORM {100A327283@}>
+(gsk:transform-to-2d *)
+=> (3.0 0.0 0.0 3.0 1.0 2.0)
+(gsk:transform-parse \"xxxx\") => NIL
+    @end{pre}
+  @end{examples}
+  @see-class{gsk:transform}
+  @see-function{gsk:transform-to-string}"
+    (cffi:with-foreign-object (transform :pointer)
+      (when (%transform-parse str transform)
+        (cffi:convert-from-foreign (cffi:mem-ref transform :pointer)
+                                   '(g:boxed transform :return)))))
+
+(export 'transform-parse)
+
+;;; ----------------------------------------------------------------------------
+;;; gsk_transform_to_string
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_to_string" transform-to-string) :string
  #+liber-documentation
- "@version{2023-10-31}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{A string for @arg{transform}.}
+  @return{The string for @arg{transform}.}
   @begin{short}
-    Converts a matrix into a string that is suitable for printing and can later
-    be parsed with the @fun{gsk:transform-parse} function.
+    Converts a tansform matrix into a string that is suitable for printing and
+    can later be parsed with the @fun{gsk:transform-parse} function.
   @end{short}
+  @begin{examples}
+    @begin{pre}
+(gsk:transform-to-string (gsk:transform-new)) => \"none\"
+(graphene:with-point (p 1/2 2)
+  (let ((transform (gsk:transform-translate (gsk:transform-new) p)))
+    (gsk:transform-to-string transform)))
+=> \"translate(0.5, 2)\"
+(gsk:transform-to-string (gsk:transform-parse \"translate(1,2)\"))
+=> \"translate(1, 2)\"
+    @end{pre}
+  @end{examples}
   @see-class{gsk:transform}
   @see-function{gsk:transform-parse}"
   (transform (g:boxed transform)))
@@ -286,36 +311,7 @@
 (export 'transform-to-string)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_parse ()
-;;; ----------------------------------------------------------------------------
-
-;; FIXME: The implementation of gsk:transform-parse does not work. We get a
-;; GskTransform instance, if we access the instance we get a memory fault.
-
-(cffi:defcfun ("gsk_transform_parse" %transform-parse) :boolean
-  (str :string)
-  (transform (g:boxed transform :return)))
-
-(defun transform-parse (str)
- "@version{#2023-10-31}
-  @argument[str]{a string to parse}
-  @return{A @class{gsk:transform} instance with the transform}
-  @begin{short}
-    Parses the given string into a transform.
-  @end{short}
-  Strings printed via the @fun{transform-to-string} function can be read in
-  again successfully using this function. If the @arg{str} argument does not
-  describe a valid transform, @em{false} is returned.
-  @see-class{gsk:transform}
-  @see-function{gsk:transform-to-string}"
-  (let ((transform (transform-new)))
-    (when (%transform-parse str (%transform-ref transform))
-      transform)))
-
-(export 'transform-parse)
-
-;;; ----------------------------------------------------------------------------
-;;; gsk_transform_to_matrix ()
+;;; gsk_transform_to_matrix
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_to_matrix" %transform-to-matrix) :void
@@ -324,15 +320,16 @@
 
 (defun transform-to-matrix (transform matrix)
  #+liber-documentation
- "@version{2023-10-31}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[matrix]{a @symbol{graphene:matrix-t} instance with the matrix
     to set}
   @return{The @symbol{graphene:matrix-t} instance with the matrix.}
   @begin{short}
-    Computes the actual value of @arg{transform} and stores it in @arg{matrix}.
+    Computes the actual values of the transform matrix and stores it in
+    @arg{matrix}.
   @end{short}
-  The previous value of @arg{matrix} will be ignored.
+  The previous values of @arg{matrix} will be ignored.
   @see-class{gsk:transform}
   @see-symbol{graphene:matrix-t}"
   (%transform-to-matrix transform matrix)
@@ -341,7 +338,7 @@
 (export 'transform-to-matrix)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_to_2d ()
+;;; gsk_transform_to_2d
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_to_2d" %transform-to-2d) :void
@@ -355,10 +352,10 @@
 
 (defun  transform-to-2d (transform)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-3-21}
   @argument[transform]{a @class{gtk:transform} instance}
-  @return{A @code{(xx xy yx yy dx dy)} list with the single float values of the
-    2D transformation matrix.}
+  @return{The @code{(xx xy yx yy dx dy)} list with the single float values of
+    the 2D transformation matrix.}
   @begin{short}
     Converts a @class{gsk:transform} instace to a 2D transformation matrix.
   @end{short}
@@ -372,7 +369,7 @@
 | dx dy |   | tx ty  1 |
   @end{pre}
   This function can be used to convert between a @class{gsk:transform} instance
-  and a matrix type from other 2D drawing libraries, in particular Cairo.
+  and a matrix from other 2D drawing libraries, in particular Cairo.
   @see-class{gsk:transform}
   @see-function{gsk:transform-category}"
   (cffi:with-foreign-objects ((xx :float) (yx :float)
@@ -386,7 +383,7 @@
 (export 'transform-to-2d)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_to_2d_components ()
+;;; gsk_transform_to_2d_components
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-6
@@ -404,28 +401,32 @@
 #+gtk-4-6
 (defun transform-to-2d-components (transform)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{A @code{(xskew yskew xscale yscale angle dx dy)} list with
+  @return{The @code{(xskew yskew xscale yscale angle dx dy)} list with
     single float values for the 2D transformation factors}
   @begin{short}
     Converts a @class{gsk:transform} instance to 2D transformation factors.
   @end{short}
-  To recreate an equivalent transform from the factors returned by this
-  function, use
-  @begin{pre}
-gsk_transform_skew (
-    gsk_transform_scale (
-        gsk_transform_rotate (
-            gsk_transform_translate (NULL, &GRAPHENE_POINT_T (dx, dy)),
-            angle),
-        scale_x, scale_y),
-    skew_x, skew_y)
-  @end{pre}
-  The @arg{transform} parameter must be a 2D transformation. If you are not
+  The @arg{transform} argument must be a 2D transformation. If you are not
   sure, use the @fun{gsk:transform-category} function to check.
 
   Since 4.6
+  @begin{examples}
+    Recreate an equivalent transform matrix from the factors returned by this
+    function.
+    @begin{pre}
+(graphene:with-point (p)
+  (gsk:transform-skew
+      (gsk:transform-scale
+          (gsk:transform-rotate
+              (gsk:transform-translate (gsk:transform-new)
+                                       (graphene:point-init p dx dy))
+              angle)
+          xscale yscale)
+      xskew yskew))
+    @end{pre}
+  @end{examples}
   @see-class{gsk:transform}
   @see-function{gsk:transform-category}"
   (cffi:with-foreign-objects ((xskew :float)  (yskew :float)
@@ -442,7 +443,7 @@ gsk_transform_skew (
 (export 'transform-to-2d-components)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_to_affine ()
+;;; gsk_transform_to_affine
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_to_affine" %transform-to-affine) :void
@@ -454,18 +455,18 @@ gsk_transform_skew (
 
 (defun transform-to-affine (transform)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{A @code{(xscale yscale dx dy)} list of single float values with the
+  @return{The @code{(xscale yscale dx dy)} list of single float values with the
     2D affine transformation factors}
   @begin{short}
     Converts a @class{gsk:transform} instance to 2D affine transformation
     factors.
   @end{short}
-  The @arg{transform} parameter must be a 2D transformation. If you are not
+  The @arg{transform} argument must be a 2D transformation. If you are not
   sure, use the @fun{gsk:transform-category} function to check.
   @see-class{gsk:transform}
-  @see-function{gsk:transform-check}"
+  @see-function{gsk:transform-category}"
   (cffi:with-foreign-objects ((xscale :float) (yscale :float)
                               (dx :float) (dy :float))
     (%transform-to-affine transform xscale yscale dx dy)
@@ -475,7 +476,7 @@ gsk_transform_skew (
 (export 'transform-to-affine)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_to_translate ()
+;;; gsk_transform_to_translate
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_to_translate" %transform-to-translate) :void
@@ -485,14 +486,14 @@ gsk_transform_skew (
 
 (defun transform-to-translate (transform)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
-  @return{A @code{(dx dy)} list with single float values for a translation
+  @return{The @code{(dx dy)} list with single float values for a translation
     operation.}
   @begin{short}
     Converts a @class{gsk:transform} instance to a translation operation.
   @end{short}
-  The @arg{transform} parameter must be a 2D transformation. If you are not
+  The @arg{transform} arugment must be a 2D transformation. If you are not
   sure, use the @fun{gsk:transform-category} function to check.
   @see-class{gsk:transform}
   @see-function{gsk:transform-category}"
@@ -503,7 +504,7 @@ gsk_transform_skew (
 (export 'transform-to-translate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_transform ()
+;;; gsk_transform_transform
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_transform" %transform-transform)
@@ -513,10 +514,10 @@ gsk_transform_skew (
 
 (defun transform-transform (transform other)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[other]{a @class{gsk:transform} instance}
-  @return{A new @class{gsk:transform} instance.}
+  @return{The new @class{gsk:transform} instance.}
   @short{Applies all the operations from @arg{other} to @arg{transform}.}
   @see-class{gsk:transform}"
   (%transform-transform (%transform-ref transform)
@@ -525,10 +526,10 @@ gsk_transform_skew (
 (export 'transform-transform)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_invert ()
+;;; gsk_transform_invert
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Check the return value. Will @code{nil} be returned?!
+;; TODO: Will @code{nil} be returned?! Check this.
 
 (cffi:defcfun ("gsk_transform_invert" %transform-invert)
     (g:boxed transform :return)
@@ -536,9 +537,9 @@ gsk_transform_skew (
 
 (defun transform-invert (transform)
  #+liber-documentation
- "@version{2023-10-31}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance to invert}
-  @return{A @class{gsk:transform} instance with the inverted transform or
+  @return{The @class{gsk:transform} instance with the inverted transform or
     @code{nil} if the transform cannot be inverted.}
   @begin{short}
     Inverts the given transform.
@@ -553,7 +554,7 @@ gsk_transform_skew (
 (export 'transform-invert)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_matrix ()
+;;; gsk_transform_matrix
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_matrix" %transform-matrix)
@@ -563,7 +564,7 @@ gsk_transform_skew (
 
 (defun transform-matrix (transform matrix)
  #+liber-documentation
- "@version{#2022-9-17}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[matrix]{a @symbol{graphene:matrix-t} instance}
   @return{The new @class{gsk:transform} instance.}
@@ -577,7 +578,7 @@ gsk_transform_skew (
 (export 'transform-matrix)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_translate ()
+;;; gsk_transform_translate
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_translate" %transform-translate)
@@ -587,13 +588,13 @@ gsk_transform_skew (
 
 (defun transform-translate (transform point)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[point]{a @symbol{graphene:point-t} instance with the point to
-    translate the transform by}
+    translate the transform matrix by}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
-    Translates @arg{transform} in 2dimensional space by @arg{point}.
+    Translates the transform matrix in 2dimensional space by @arg{point}.
   @end{short}
   @see-class{gsk:transform}
   @see-symbol{graphene:point-t}"
@@ -602,7 +603,7 @@ gsk_transform_skew (
 (export 'transform-translate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_translate_3d ()
+;;; gsk_transform_translate_3d
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_translate_3d" %transform-translate-3d)
@@ -612,13 +613,13 @@ gsk_transform_skew (
 
 (defun transform-translate-3d (transform point)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[point]{a @symbol{graphene:point3d-t} instance with the point to
-    translate the transform by}
+    translate the transform matrix by}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
-    Translates @arg{transform} by @arg{point}.
+    Translates the transform matrix by @arg{point}.
   @end{short}
   @see-class{gsk:transform}
   @see-symbol{graphene:point3d-t}"
@@ -627,7 +628,7 @@ gsk_transform_skew (
 (export 'transform-translate-3d)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_rotate ()
+;;; gsk_transform_rotate
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_rotate" %transform-rotate)
@@ -637,14 +638,14 @@ gsk_transform_skew (
 
 (defun transform-rotate (transform angle)
  #+liber-documentation
- "@version{2023-10-30}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[angle]{a number coerced to a single float with the rotation angle,
     in degrees (clockwise)}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
-    Rotates @arg{transform} angle degrees in 2D - or in 3D speak, around the z
-    axis.
+    Rotates the transformation matrix @arg{angle} degrees in 2D, or in 3D speak,
+    around the z axis.
   @end{short}
   @see-class{gsk:transform}"
   (%transform-rotate (%transform-ref transform) (coerce angle 'single-float)))
@@ -652,7 +653,7 @@ gsk_transform_skew (
 (export 'transform-rotate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_rotate_3d ()
+;;; gsk_transform_rotate_3d
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_rotate_3d" %transform-rotate-3d)
@@ -663,17 +664,18 @@ gsk_transform_skew (
 
 (defun transform-rotate-3d (transform angle axis)
  #+liber-documentation
- "@version{2023-10-30}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[angle]{a number coerced to a single float with the rotation angle,
-    in degrees (clockwise)}
+    in degrees and clockwise}
   @argument[axis]{a @symbol{graphene:vec3-t} instance with the rotation axis}
   @return{The new @class{gsk:transform} instance.}
   @begin{short}
-    Rotates @arg{transform} angle degrees around @arg{axis}.
+    Rotates the transform matrix @arg{angle} degrees around @arg{axis}.
   @end{short}
   For a rotation in 2D space, use the @fun{gsk:transform-rotate} function.
   @see-class{gsk:transform}
+  @see-symbol{graphene:vec3-t}
   @see-function{gsk:transform-rotate}"
   (%transform-rotate-3d (%transform-ref transform)
                         (coerce angle 'single-float)
@@ -682,7 +684,7 @@ gsk_transform_skew (
 (export 'transform-rotate-3d)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_scale ()
+;;; gsk_transform_scale
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_scale" %transform-scale)
@@ -693,18 +695,19 @@ gsk_transform_skew (
 
 (defun transform-scale (transform xfactor yfactor)
  #+liber-documentation
- "@version{2023-10-30}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[xfactor]{a number coerced to a single float with the scaling factor
     on the x axis}
   @argument[yfactor]{a number coerced to a single float with the scaling factor
     on the y axis}
-  @return{A new @class{gsk:transform} instance.}
+  @return{The new @class{gsk:transform} instance.}
   @begin{short}
     Scales @arg{transform} in 2-dimensional space by the given factors.
   @end{short}
   Use the @fun{gsk:transform-scale-3d} function to scale in all 3 dimensions.
-  @see-class{gsk:transform}"
+  @see-class{gsk:transform}
+  @see-function{gsk:transform-scale-3d}"
   (%transform-scale (%transform-ref transform)
                     (coerce xfactor 'single-float)
                     (coerce yfactor 'single-float)))
@@ -712,7 +715,7 @@ gsk_transform_skew (
 (export 'transform-scale)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_scale_3d ()
+;;; gsk_transform_scale_3d
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_scale_3d" %transform-scale-3d)
@@ -724,7 +727,7 @@ gsk_transform_skew (
 
 (defun transform-scale-3d (transform xfactor yfactor zfactor)
  #+liber-documentation
- "@version{2023-10-30}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[xfactor]{a number coerced to a single float with the scaling factor
     on the x axis}
@@ -734,7 +737,7 @@ gsk_transform_skew (
     on the z axis}
   @return{A new @class{gsk:transform} instance.}
   @begin{short}
-    Scales @arg{transform} by the given factors.
+    Scales the transform matrix by the given factors.
   @end{short}
   @see-class{gsk:transform}"
   (%transform-scale-3d (%transform-ref transform)
@@ -750,14 +753,14 @@ gsk_transform_skew (
 
 #+gtk-4-6
 (cffi:defcfun ("gsk_transform_skew" %transform-skew) (g:boxed transform :return)
-  (transform (g:boxed transform :return))
+  (transform (g:boxed transform))
   (xskew :float)
   (yskew :float))
 
 #+gtk-4-6
 (defun transform-skew (transform xskew yskew)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[xskew]{a number coerced to a single float with the skew factor
     on the x axis, in degrees}
@@ -776,7 +779,7 @@ gsk_transform_skew (
 (export 'transform-skew)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_perspective ()
+;;; gsk_transform_perspective
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_perspective" %transform-perspective)
@@ -786,7 +789,7 @@ gsk_transform_skew (
 
 (defun transform-perspective (transform depth)
  #+liber-documentation
- "@version{#2023-10-30}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[depth]{a number coerced to a single float with the distance of the
     z=0 plane, lower values give a more flattened pyramid and therefore a more
@@ -795,8 +798,8 @@ gsk_transform_skew (
   @begin{short}
     Applies a perspective projection transform.
   @end{short}
-  This transform scales points in X and Y based on their Z value, scaling points
-  with positive Z values away from the origin, and those with negative Z values
+  This transform scales points in x and y based on their z value, scaling points
+  with positive z values away from the origin, and those with negative z values
   towards the origin. Points on the z=0 plane are unchanged.
   @see-class{gsk:transform}"
   (%transform-perspective (%transform-ref transform)
@@ -805,12 +808,12 @@ gsk_transform_skew (
 (export 'transform-perspective)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_equal ()
+;;; gsk_transform_equal
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_equal" transform-equal) :boolean
  #+liber-documentation
- "@version{#2023-10-30}
+ "@version{2024-4-21}
   @argument[first]{a first @class{gsk:transform} instance}
   @argument[second]{a second @class{gsk:transform} instance}
   @return{@em{True} if the two transforms perform the same operation.}
@@ -822,7 +825,7 @@ gsk_transform_skew (
 (export 'transform-equal)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_transform_bounds ()
+;;; gsk_transform_transform_bounds
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_transform_bounds" %transform-transform-bounds)
@@ -831,50 +834,51 @@ gsk_transform_skew (
   (rect (:pointer (:struct graphene:rect-t)))
   (bounds (:pointer (:struct graphene:rect-t))))
 
-(defun transform-transform-bounds (transform rect out)
+(defun transform-transform-bounds (transform rect bounds)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[rect]{a @symbol{graphene:rect-t} instance}
   @argument[bounds]{a @symbol{graphene:rect-t} instance for the bounds of
     the transformed rectangle}
-  @return{A @symbol{graphene:rect-t} instance with the bounds}
+  @return{The @symbol{graphene:rect-t} instance with the bounds.}
   @begin{short}
     Transforms a @symbol{graphene:rect-t} instance using the given transform
-    @arg{transform}.
+    matrix.
   @end{short}
   The result is the bounding box containing the coplanar quad.
   @see-class{gsk:transform}
   @see-symbol{graphene:rect-t}"
-  (%transform-transform-bounds transform rect out)
-  out)
+  (%transform-transform-bounds transform rect bounds)
+  bounds)
 
 (export 'transform-transform-bounds)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_transform_point ()
+;;; gsk_transform_transform_point
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_transform_point" %transform-transform-point) :void
   (transform (g:boxed transform))
   (point (:pointer (:struct graphene:point-t)))
-  (out (:pointer (:struct graphene:point-t))))
+  (result (:pointer (:struct graphene:point-t))))
 
-(defun transform-transform-point (transform point out)
+(defun transform-transform-point (transform point result)
  #+liber-documentation
- "@version{#2023-11-3}
+ "@version{2024-4-21}
   @argument[transform]{a @class{gsk:transform} instance}
   @argument[point]{a @symbol{graphene:point-t} instance}
-  @argument[out]{a @symbol{graphene:point-t} instance for the transformed point}
-  @return{A @symbol{graphene:point-t} instance with the transformed point.}
+  @argument[result]{a @symbol{graphene:point-t} instance for the transformed
+    point}
+  @return{The @symbol{graphene:point-t} instance with the transformed point.}
   @begin{short}
     Transforms a @symbol{graphene:point-t} instance using the given transform
-    @arg{transform}.
+    matrix.
   @end{short}
   @see-class{gsk:transform}
   @see-symbol{graphene:point-t}"
-  (%transform-transform-point transform point out)
-  out)
+  (%transform-transform-point transform point result)
+  result)
 
 (export 'transform-transform-point)
 
