@@ -86,7 +86,6 @@
 ;;;     gtk_widget_get_overflow
 ;;;     gtk_widget_set_overflow
 ;;;     gtk_widget_get_parent
-;;;     gtk_widget_set_parent
 ;;;     gtk_widget_set_receives_default
 ;;;     gtk_widget_get_receives_default
 ;;;     gtk_widget_get_root
@@ -109,9 +108,8 @@
 ;;; Functions
 ;;;
 ;;;     gtk_widget_in_destruction
-;;;     gtk_widget_unparent
-;;;     gtk_widget_show                                    Deprecated 4.10
-;;;     gtk_widget_hide                                    Deprecated 4.10
+;;;     gtk_widget_show                                     Deprecated 4.10
+;;;     gtk_widget_hide                                     Deprecated 4.10
 ;;;     gtk_widget_map
 ;;;     gtk_widget_unmap
 ;;;     gtk_widget_realize
@@ -139,10 +137,12 @@
 ;;;     gtk_widget_activate
 ;;;     gtk_widget_is_focus
 ;;;     gtk_widget_grab_focus
+;;;     gtk_widget_set_parent
+;;;     gtk_widget_unparent
 ;;;     gtk_widget_get_native
 ;;;     gtk_widget_get_ancestor
 ;;;     gtk_widget_is_ancestor
-;;;     gtk_widget_translate_coordinates                   Deprecated 4.12
+;;;     gtk_widget_translate_coordinates                    Deprecated 4.12
 ;;;     gtk_widget_add_controller
 ;;;     gtk_widget_remove_controller
 ;;;     gtk_widget_get_direction
@@ -176,15 +176,15 @@
 ;;;     gtk_widget_keynav_failed
 ;;;     gtk_widget_trigger_tooltip_query
 ;;;
-;;;     gtk_widget_get_allocated_width                     Deprecated 4.12
-;;;     gtk_widget_get_allocated_height                    Deprecated 4.12
-;;;     gtk_widget_get_allocation                          Deprecated 4.12
-;;;     gtk_widget_get_allocated_baseline                  Deprecated 4.12
+;;;     gtk_widget_get_allocated_width                      Deprecated 4.12
+;;;     gtk_widget_get_allocated_height                     Deprecated 4.12
+;;;     gtk_widget_get_allocation                           Deprecated 4.12
+;;;     gtk_widget_get_allocated_baseline                   Deprecated 4.12
 ;;;
 ;;;     gtk_widget_get_width
 ;;;     gtk_widget_get_height
 ;;;     gtk_widget_get_size
-;;;     gtk_widget_get_baseline                            Since 4.12
+;;;     gtk_widget_get_baseline                             Since 4.12
 ;;;     gtk_widget_compute_bounds
 ;;;     gtk_widget_compute_transform
 ;;;     gtk_widget_compute_point
@@ -211,14 +211,18 @@
 ;;;     gtk_widget_insert_after
 ;;;     gtk_widget_should_layout
 
-;;;     gtk_widget_get_color                               Since 4.10
+;;;     gtk_widget_get_color                                Since 4.10
 
 ;;;     gtk_widget_add_css_class
 ;;;     gtk_widget_remove_css_class
 ;;;     gtk_widget_has_css_class
 ;;;     gtk_widget_class_get_css_name
 ;;;     gtk_widget_class_set_css_name
-;;;     gtk_widget_get_style_context                       Deprecated 4.10
+;;;     gtk_widget_get_style_context                        Deprecated 4.10
+;;;
+;;;     gtk:widget-add-provider                             Lisp extension
+;;;     gtk:widget-remove-provider                          Lisp extension
+;;;
 ;;;     gtk_requisition_new
 ;;;     gtk_requisition_copy
 ;;;     gtk_requisition_free
@@ -228,7 +232,7 @@
 ;;;     gtk_widget_compute_expand
 ;;;
 ;;;     gtk_widget_init_template
-;;;     gtk_widget_dispose_template                        Since 4.8
+;;;     gtk_widget_dispose_template                         Since 4.8
 ;;;     gtk_widget_get_template_child
 ;;;     gtk_widget_class_set_template
 ;;;     gtk_widget_class_set_template_from_resource
@@ -398,8 +402,8 @@
       "Accessor"
       (documentation 'requisition-height 'function)
  "@version{#2021-9-14}
-  @syntax[]{(gtk:requisition-height instance) => height}
-  @syntax[]{(setf (gtk:requisition-height instance) height)}
+  @syntax{(gtk:requisition-height instance) => height}
+  @syntax{(setf (gtk:requisition-height instance) height)}
   @argument[instance]{a @class{gtk:requisition} instance}
   @argument[height]{an integer with the height}
   @begin{short}
@@ -424,8 +428,8 @@
       "Accessor"
       (documentation 'requisition-width 'function)
  "@version{#2021-9-14}
-  @syntax[]{(gtk:requisition-width instance) => width}
-  @syntax[]{(setf (gtk:requisition-width instance) width)}
+  @syntax{(gtk:requisition-width instance) => width}
+  @syntax{(setf (gtk:requisition-width instance) width)}
   @argument[instance]{a @class{gtk:requisition} instance}
   @argument[width]{an integer with the width}
   @begin{short}
@@ -444,7 +448,7 @@
 (export 'requisition-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_requisition_new ()
+;;; gtk_requisition_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline requisition-new))
@@ -466,7 +470,7 @@
 (export 'requisition-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_requisition_copy ()
+;;; gtk_requisition_copy
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline requisition-copy))
@@ -955,8 +959,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-can-focus 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-can-focus object) => setting}
-  @syntax[]{(setf (gtk:widget-can-focus object) setting)}
+  @syntax{(gtk:widget-can-focus object) => setting}
+  @syntax{(setf (gtk:widget-can-focus object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether or not @arg{widget} can own the input
     focus}
@@ -986,8 +990,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-can-target 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-can-target object) => setting}
-  @syntax[]{(setf (gtk:widget-can-target object) setting)}
+  @syntax{(gtk:widget-can-target object) => setting}
+  @syntax{(setf (gtk:widget-can-target object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether or not @arg{widget} can receive pointer
     events}
@@ -1012,8 +1016,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-css-classes 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:widget-css-classes object) => classes}
-  @syntax[]{(setf (gtk:widget-css-classes object) classes)}
+  @syntax{(gtk:widget-css-classes object) => classes}
+  @syntax{(setf (gtk:widget-css-classes object) classes)}
   @argument[object]{a @class{gtk:widget} widget}
   @argument[classes]{a list of strings with the CSS classes applied to the
     widget}
@@ -1040,8 +1044,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-css-name 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:widget-css-name object) => name}
-  @syntax[]{(setf (gtk:widget-css-classes object) name)}
+  @syntax{(gtk:widget-css-name object) => name}
+  @syntax{(setf (gtk:widget-css-classes object) name)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[name]{a string with the name of the widet in the CSS tree}
   @begin{short}
@@ -1065,8 +1069,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-cursor 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-cursor object) => cursor}
-  @syntax[]{(setf (gtk:widget-cursor object) cursor)}
+  @syntax{(gtk:widget-cursor object) => cursor}
+  @syntax{(setf (gtk:widget-cursor object) cursor)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[cursor]{a @class{gdk:cursor} object}
   @begin{short}
@@ -1094,8 +1098,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-focus-on-click 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-focus-on-click object) => setting}
-  @syntax[]{(setf (gtk:widget-focus-on-click object) setting)}
+  @syntax{(gtk:widget-focus-on-click object) => setting}
+  @syntax{(setf (gtk:widget-focus-on-click object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget should grab focus}
   @begin{short}
@@ -1123,8 +1127,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-focusable 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:widget-focusable object) => setting}
-  @syntax[]{(setf (gtk:widget-focusable object) setting)}
+  @syntax{(gtk:widget-focusable object) => setting}
+  @syntax{(setf (gtk:widget-focusable object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether @arg{object} itself will accept the
     input focus}
@@ -1163,8 +1167,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-halign 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:widget-halign object) => align}
-  @syntax[]{(setf (gtk:widget-halign object) align)}
+  @syntax{(gtk:widget-halign object) => align}
+  @syntax{(setf (gtk:widget-halign object) align)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[align]{a @symbol{gtk:align} value}
   @begin{short}
@@ -1190,7 +1194,7 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-has-default 'function)
  "@version{2024-2-16}
-  @syntax[]{(gtk:widget-has-default object) => setting}
+  @syntax{(gtk:widget-has-default object) => setting}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget is the default widget}
   @begin{short}
@@ -1214,7 +1218,7 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-has-focus 'function)
  "@version{2024-2-16}
-  @syntax[]{(gtk:widget-has-focus object) => setting}
+  @syntax{(gtk:widget-has-focus object) => setting}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget has the input focus}
   @begin{short}
@@ -1247,8 +1251,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-has-tooltip 'function)
  "@version{#2023-8-29}
-  @syntax[]{(gtk:widget-has-tooltip object) => setting}
-  @syntax[]{(setf (gtk:widget-has-tooltip object) setting)}
+  @syntax{(gtk:widget-has-tooltip object) => setting}
+  @syntax{(setf (gtk:widget-has-tooltip object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the emission of the \"query-toolip\"
     signal is enabled or disabled}
@@ -1277,8 +1281,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-height-request 'function)
  "@version{2023-9-19}
-  @syntax[]{(gtk:widget-height-request object) => height}
-  @syntax[]{(setf (gtk:widget-height-request object) height)}
+  @syntax{(gtk:widget-height-request object) => height}
+  @syntax{(setf (gtk:widget-height-request object) height)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[height]{an integer with the height request}
   @begin{short}
@@ -1303,8 +1307,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-hexpand 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-hexpand object) => setting}
-  @syntax[]{(setf (gtk:widget-hexpand object) setting)}
+  @syntax{(gtk:widget-hexpand object) => setting}
+  @syntax{(setf (gtk:widget-hexpand object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to expand horizontally}
   @begin{short}
@@ -1354,8 +1358,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-hexpand-set 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-hexpand-set object) => setting}
-  @syntax[]{(setf (gtk:widget-hexpand-set object) setting)}
+  @syntax{(gtk:widget-hexpand-set object) => setting}
+  @syntax{(setf (gtk:widget-hexpand-set object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to use the @code{hexpand} property}
   @begin{short}
@@ -1395,8 +1399,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-layout-manager 'function)
  "@version{2024-4-12}
-  @syntax[]{(gtk:widget-layout-manager object) => manager}
-  @syntax[]{(setf (gtk:widget-layout-manager object) manager)}
+  @syntax{(gtk:widget-layout-manager object) => manager}
+  @syntax{(setf (gtk:widget-layout-manager object) manager)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @begin{short}
@@ -1434,8 +1438,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-margin-bottom 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-margin-bottom object) => margin}
-  @syntax[]{(setf (gtk:widget-margin-bottom object) margin)}
+  @syntax{(gtk:widget-margin-bottom object) => margin}
+  @syntax{(setf (gtk:widget-margin-bottom object) margin)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer with the margin on bottom side of the widget}
   @begin{short}
@@ -1468,8 +1472,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-margin-end 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-margin-end object) => margin}
-  @syntax[]{(setf (gtk:widget-margin-end object) margin)}
+  @syntax{(gtk:widget-margin-end object) => margin}
+  @syntax{(setf (gtk:widget-margin-end object) margin)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer with the margin on end of the widget,
     horizontally}
@@ -1504,8 +1508,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-margin-start 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-margin-start object) => margin}
-  @syntax[]{(setf (gtk:widget-margin-start object) margin)}
+  @syntax{(gtk:widget-margin-start object) => margin}
+  @syntax{(setf (gtk:widget-margin-start object) margin)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer with the margin on start of the widget,
     horizontally}
@@ -1539,8 +1543,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-margin-top 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-margin-top object) => margin}
-  @syntax[]{(setf (gtk:widget-margin-top object) margin)}
+  @syntax{(gtk:widget-margin-top object) => margin}
+  @syntax{(setf (gtk:widget-margin-top object) margin)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[margin]{an integer with the margin on top side of the widget}
   @begin{short}
@@ -1570,8 +1574,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-name 'function)
  "@version{2023-10-5}
-  @syntax[]{(gtk:widget-name object) => name}
-  @syntax[]{(setf (gtk:widget-name object) name)}
+  @syntax{(gtk:widget-name object) => name}
+  @syntax{(setf (gtk:widget-name object) name)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[name]{a string with the name of the widget}
   @begin{short}
@@ -1604,8 +1608,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-opacity 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-opacity object) => opacity}
-  @syntax[]{(setf (gtk:widget-opacity object) opacity)}
+  @syntax{(gtk:widget-opacity object) => opacity}
+  @syntax{(setf (gtk:widget-opacity object) opacity)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[opacity]{a double float with the opacity of the widget}
   @begin{short}
@@ -1649,8 +1653,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-overflow 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-overflow object) => overflow}
-  @syntax[]{(setf (gtk:widget-overflow object) overflow)}
+  @syntax{(gtk:widget-overflow object) => overflow}
+  @syntax{(setf (gtk:widget-overflow object) overflow)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[overflow]{a value of the @symbol{gtk:overflow} enumeration}
   @begin{short}
@@ -1679,8 +1683,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-parent 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-parent object) => parent}
-  @syntax[]{(setf (gtk:widget-parent object) parent)}
+  @syntax{(gtk:widget-parent object) => parent}
+  @syntax{(setf (gtk:widget-parent object) parent)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[parent]{a @class{gtk:widget} parent widget}
   @begin{short}
@@ -1705,8 +1709,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-receives-default 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-receives-default object) => setting}
-  @syntax[]{(setf (gtk:widget-receives-default object) setting)}
+  @syntax{(gtk:widget-receives-default object) => setting}
+  @syntax{(setf (gtk:widget-receives-default object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget will receive the default
     action}
@@ -1738,7 +1742,7 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-root 'function)
  "@version{2023-9-30}
-  @syntax[]{(gtk:widget-root object) => root}
+  @syntax{(gtk:widget-root object) => root}
   @argument[object]{a @class{gtk:widget} object}
   @argument[root]{a @class{gtk:root} root widget}
   @begin{short}
@@ -1768,7 +1772,7 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-scale-factor 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-scale-factor object) => scale}
+  @syntax{(gtk:widget-scale-factor object) => scale}
   @argument[object]{a @class{gtk:widget} object}
   @argument[scale]{an integer with the scale factor}
   @begin{short}
@@ -1793,8 +1797,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-sensitive 'function)
  "@version{2023-9-30}
-  @syntax[]{(gtk:widget-sensitive object) => setting}
-  @syntax[]{(setf (gtk:widget-sensitive object) setting)}
+  @syntax{(gtk:widget-sensitive object) => setting}
+  @syntax{(setf (gtk:widget-sensitive object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether the widget responds to input}
   @begin{short}
@@ -1834,8 +1838,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-tooltip-markup 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-tooltip-markup object) => markup}
-  @syntax[]{(setf (gtk:widget-tooltip-markup object) markup)}
+  @syntax{(gtk:widget-tooltip-markup object) => markup}
+  @syntax{(setf (gtk:widget-tooltip-markup object) markup)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[markup]{a string with the text of the tooltip}
   @begin{short}
@@ -1876,8 +1880,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-tooltip-text 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-tooltip-text object) => text}
-  @syntax[]{(setf (gtk:widget-tooltip-text object) text)}
+  @syntax{(gtk:widget-tooltip-text object) => text}
+  @syntax{(setf (gtk:widget-tooltip-text object) text)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[text]{a string with the text of the tooltip}
   @begin{short}
@@ -1911,8 +1915,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-valign 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:widget-valign object) => align}
-  @syntax[]{(setf (gtk:widget-valign object) align)}
+  @syntax{(gtk:widget-valign object) => align}
+  @syntax{(setf (gtk:widget-valign object) align)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[align]{a value of the @symbol{gtk:align} enumeration}
   @begin{short}
@@ -1937,8 +1941,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-vexpand 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-vexpand object) => setting}
-  @syntax[]{(setf (gtk:widget-vexpand object) setting)}
+  @syntax{(gtk:widget-vexpand object) => setting}
+  @syntax{(setf (gtk:widget-vexpand object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to expand vertically}
   @begin{short}
@@ -1968,8 +1972,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-vexpand-set 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-vexpand-set object) => setting}
-  @syntax[]{(setf (gtk:widget-vexpand-set object) setting)}
+  @syntax{(gtk:widget-vexpand-set object) => setting}
+  @syntax{(setf (gtk:widget-vexpand-set object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether to use the @slot[gtk:widget]{vexpand}
     property}
@@ -2000,8 +2004,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-visible 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:widget-visible object) => setting}
-  @syntax[]{(setf (gtk:widget-visible object) setting)}
+  @syntax{(gtk:widget-visible object) => setting}
+  @syntax{(setf (gtk:widget-visible object) setting)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[setting]{a boolean whether @arg{widget} is visible}
   @begin{short}
@@ -2033,8 +2037,8 @@ lambda (widget)    :run-last
       "Accessor"
       (documentation 'widget-width-request 'function)
  "@version{2023-9-19}
-  @syntax[]{(gtk:widget-width-request object) => width}
-  @syntax[]{(setf (gtk:widget-width-request object) width)}
+  @syntax{(gtk:widget-width-request object) => width}
+  @syntax{(setf (gtk:widget-width-request object) width)}
   @argument[object]{a @class{gtk:widget} object}
   @argument[width]{an integer with the width request}
   @begin{short}
@@ -2063,24 +2067,6 @@ lambda (widget)    :run-last
   (widget (g:object widget)))
 
 (export 'widget-in-destruction)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_widget_unparent
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_widget_unparent" widget-unparent) :void
- #+liber-documentation
- "@version{#2022-9-10}
-  @argument[widget]{a @class{gtk:widget} object}
-  @begin{short}
-    Dissociate the widget from its parent.
-  @end{short}
-  This function is only for use in widget implementations, typically in dispose.
-  @see-class{gtk:widget}
-  @see-function{gtk:widget-parent}"
-  (widget (g:object widget)))
-
-(export 'widget-unparent)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_show
@@ -2486,7 +2472,7 @@ lambda (widget)    :run-last
 (export 'widget-size-allocate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_allocate ()
+;;; gtk_widget_allocate
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_allocate" widget-allocate) :void
@@ -2675,8 +2661,17 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_get_layout_manager_type ()
+;;; gtk_widget_class_get_layout_manager_type
 ;;; ----------------------------------------------------------------------------
+
+(defun (setf widget-class-layout-manager-type) (value gtype)
+  (let ((wclass (g:type-class-ref gtype)))
+    (unwind-protect
+      (cffi:foreign-funcall "gtk_widget_class_set_layout_manager_type"
+                            :pointer wclass
+                            g:type-t value
+                            :void)
+      (g:type-class-unref wclass))))
 
 (defun widget-class-layout-manager-type (gtype)
  #+liber-documentation
@@ -2791,7 +2786,7 @@ lambda (widget)    :run-last
 (export 'widget-activate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_is_focus ()
+;;; gtk_widget_is_focus
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_is_focus" widget-is-focus) :boolean
@@ -2839,7 +2834,43 @@ lambda (widget)    :run-last
 (export 'widget-grab-focus)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_native () -> widget-native
+;;; gtk_widget_set_parent
+
+;;; This function is useful only when implementing subclasses of GtkWidget.
+
+;;; Sets parent as the parent widget of widget , and takes care of some details
+;;; such as updating the state and style of the child to reflect its new
+;;; location and resizing the parent. The opposite function is
+;;; gtk_widget_unparent().
+
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_set_parent" widget-set-parent) :void
+  (widget (g:object widget))
+  (parent (g:object widget)))
+
+(export 'widget-set-parent)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_widget_unparent
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_unparent" widget-unparent) :void
+ #+liber-documentation
+ "@version{#2022-9-10}
+  @argument[widget]{a @class{gtk:widget} object}
+  @begin{short}
+    Dissociate the widget from its parent.
+  @end{short}
+  This function is only for use in widget implementations, typically in dispose.
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-parent}"
+  (widget (g:object widget)))
+
+(export 'widget-unparent)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_widget_get_native
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_native" widget-native) (g:object native)
@@ -2860,7 +2891,7 @@ lambda (widget)    :run-last
 (export 'widget-native)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_ancestor -> widget-ancestor
+;;; gtk_widget_get_ancestor
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_ancestor" widget-ancestor) (g:object widget)
@@ -2959,7 +2990,7 @@ lambda (widget)    :run-last
 (export 'widget-translate-coordinates)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_add_controller ()
+;;; gtk_widget_add_controller
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_add_controller" widget-add-controller) :void
@@ -2982,7 +3013,7 @@ lambda (widget)    :run-last
 (export 'widget-add-controller)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_remove_controller ()
+;;; gtk_widget_remove_controller
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_remove_controller" widget-remove-controller) :void
@@ -3008,7 +3039,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_direction
-;;; gtk_widget_set_direction -> widget-direction
+;;; gtk_widget_set_direction
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-direction) (direction widget)
@@ -3021,8 +3052,8 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_direction" widget-direction) text-direction
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-direction widget) => direction}
-  @syntax[]{(setf (gtk:widget-direction widget) direction)}
+  @syntax{(gtk:widget-direction widget) => direction}
+  @syntax{(setf (gtk:widget-direction widget) direction)}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[direction]{a value of the @symbol{gtk:text-direction} enumeration}
   @begin{short}
@@ -3050,7 +3081,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_default_direction
-;;; gtk_widget_set_default_direction -> widget-default-direction
+;;; gtk_widget_set_default_direction
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-default-direction) (direction)
@@ -3063,8 +3094,8 @@ lambda (widget)    :run-last
     text-direction
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-default-direction) => direction}
-  @syntax[]{(setf (gtk:widget-default-direction) direction)}
+  @syntax{(gtk:widget-default-direction) => direction}
+  @syntax{(setf (gtk:widget-default-direction) direction)}
   @argument[direction]{a value of the @symbol{gtk:text-direction} enumeration
     for the default direction, this cannot be @code{:none}.}
   @begin{short}
@@ -3103,7 +3134,7 @@ lambda (widget)    :run-last
 (export 'widget-create-pango-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_pango_context -> widget-pango-context
+;;; gtk_widget_get_pango_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_pango_context" widget-pango-context)
@@ -3136,7 +3167,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_font_options
-;;; gtk_widget_set_font_options -> widget-font-options
+;;; gtk_widget_set_font_options
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-font-options) (options widget)
@@ -3154,8 +3185,8 @@ lambda (widget)    :run-last
 (defun widget-font-options (widget)
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-font-options widget) => options}
-  @syntax[]{(setf (gtk:widget-font-options widget) options)}
+  @syntax{(gtk:widget-font-options widget) => options}
+  @syntax{(setf (gtk:widget-font-options widget) options)}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[options]{a @symbol{cairo:font-options-t} instance, or @code{nil} to
     unset any previously set default font options}
@@ -3176,7 +3207,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_font_map
-;;; gtk_widget_set_font_map -> widget-font-map
+;;; gtk_widget_set_font_map
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-font-map) (fontmap widget)
@@ -3190,8 +3221,8 @@ lambda (widget)    :run-last
     (g:object pango:font-map)
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-font-map widget) => fontmap}
-  @syntax[]{(setf (gtk:widget-font-map widget) fontmap)}
+  @syntax{(gtk:widget-font-map widget) => fontmap}
+  @syntax{(setf (gtk:widget-font-map widget) fontmap)}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[fontmap]{a @class{pango:font-map} object, or @code{nil} to unset any
     previously set font map}
@@ -3241,7 +3272,7 @@ lambda (widget)    :run-last
 (export 'widget-create-pango-layout)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_set_cursor_from_name ()
+;;; gtk_widget_set_cursor_from_name
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_set_cursor_from_name" %widget-set-cursor-from-name)
@@ -3297,8 +3328,8 @@ lambda (widget)    :run-last
 (export 'widget-mnemonic-activate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_get_accessible_role ()
-;;; gtk_widget_class_set_accessible_role ()
+;;; gtk_widget_class_get_accessible_role
+;;; gtk_widget_class_set_accessible_role
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-class-accessible-role) (role gtype)
@@ -3318,8 +3349,8 @@ lambda (widget)    :run-last
 (defun widget-class-accessible-role (gtype)
   #+liber-documentation
  "@version{2023-9-18}
-  @syntax[]{(gtk:widget-class-accessible-role gtype) => role}
-  @syntax[]{(setf (gtk:widget-class-accessible-role gtype) role)}
+  @syntax{(gtk:widget-class-accessible-role gtype) => role}
+  @syntax{(setf (gtk:widget-class-accessible-role gtype) role)}
   @argument[gtype]{a @class{g:type-t} type}
   @argument[role]{a @symbol{gtk:accessible-role} value}
   @begin{short}
@@ -3380,7 +3411,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_child_visible
-;;; gtk_widget_set_child_visible -> widget-child-visible
+;;; gtk_widget_set_child_visible
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-child-visible) (is-visible widget)
@@ -3393,8 +3424,8 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_child_visible" widget-child-visible) :boolean
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-child-visible widget) => visible}
-  @syntax[]{(setf (gtk:widget-child-visible widget) visible)}
+  @syntax{(gtk:widget-child-visible widget) => visible}
+  @syntax{(setf (gtk:widget-child-visible widget) visible)}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[visible]{if @em{true}, @arg{widget} should be mapped along with its
     parent}
@@ -3426,7 +3457,7 @@ lambda (widget)    :run-last
 (export 'widget-child-visible)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_settings -> widget-settings
+;;; gtk_widget_get_settings
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_settings" widget-settings) (g:object settings)
@@ -3449,7 +3480,7 @@ lambda (widget)    :run-last
 (export 'widget-settings)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_clipboard -> widget-clipboard
+;;; gtk_widget_get_clipboard
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_clipboard" widget-clipboard)
@@ -3491,7 +3522,7 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_display -> widget-display
+;;; gtk_widget_get_display
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_display" widget-display) (g:object gdk:display)
@@ -3514,7 +3545,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_size_request
-;;; gtk_widget_set_size_request -> widget-size-request
+;;; gtk_widget_set_size_request
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-size-request) (size widget)
@@ -3534,8 +3565,8 @@ lambda (widget)    :run-last
 (defun widget-size-request (widget)
  #+liber-documentation
  "@version{2023-10-18}
-  @syntax[]{(gtk:widget-size-request object) => width, height}
-  @syntax[]{(setf (gtk:widget-size-request object) (list width height))}
+  @syntax{(gtk:widget-size-request object) => width, height}
+  @syntax{(setf (gtk:widget-size-request object) (list width height))}
   @argument[object]{a @class{gtk:widget} object}
   @argument[width]{an integer with the width}
   @argument[height]{an integer with the height}
@@ -3772,7 +3803,7 @@ lambda (widget)    :run-last
 (export 'widget-trigger-tooltip-query)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_allocated_width -> widget-allocated-width
+;;; gtk_widget_get_allocated_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_allocated_width" %widget-allocated-width) :int
@@ -3809,7 +3840,7 @@ lambda (widget)    :run-last
 (export 'widget-allocated-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_allocated_height  -> widget-allocated-height
+;;; gtk_widget_get_allocated_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_allocated_height" %widget-allocated-height) :int
@@ -3847,7 +3878,7 @@ lambda (widget)    :run-last
 (export 'widget-allocated-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_allocation -> widget-allocation
+;;; gtk_widget_get_allocation
 ;;; ----------------------------------------------------------------------------
 
 ;; With the type gtk:allocation we get an error.
@@ -3904,7 +3935,7 @@ lambda (widget)    :run-last
 (export 'widget-allocation)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_allocated_baseline -> widget-allocated-baseline
+;;; gtk_widget_get_allocated_baseline
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_allocated_baseline" %widget-allocated-baseline)
@@ -3935,12 +3966,12 @@ lambda (widget)    :run-last
 (export 'widget-allocated-baseline)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_width () -> widget-width
+;;; gtk_widget_get_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_width" widget-width) :int
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2024-4-19}
   @argument[widget]{a @class{gtk:widget} widget}
   @return{The integer with the width of @arg{widget}.}
   @begin{short}
@@ -3951,18 +3982,19 @@ lambda (widget)    :run-last
   virtual function. For pointer events, see the @fun{gtk:widget-contains}
   function.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-contains}"
+  @see-function{gtk:widget-contains}
+  @see-function{gtk:widget-height}"
   (widget (g:object widget)))
 
 (export 'widget-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_height () -> widget-height
+;;; gtk_widget_get_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_height" widget-height) :int
  #+liber-documentation
- "@version{#2023-5-5}
+ "@version{2024-4-19}
   @argument[widget]{a @class{gtk:widget} widget}
   @return{The integer with the height of @arg{widget}.}
   @begin{short}
@@ -3973,13 +4005,14 @@ lambda (widget)    :run-last
   virtual function. For pointer events, see the @fun{gtk:widget-contains}
   function.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-contains}"
+  @see-function{gtk:widget-contains}
+  @see-function{gtk:widget-width}"
   (widget (g:object widget)))
 
 (export 'widget-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_size () -> widget-size
+;;; gtk_widget_get_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_size" widget-size) :int
@@ -4104,7 +4137,7 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_contains ()
+;;; gtk_widget_contains
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_contains" %widget-contains) :boolean
@@ -4134,7 +4167,7 @@ lambda (widget)    :run-last
 (export 'widget-contains)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_pick ()
+;;; gtk_widget_pick
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_pick" %widget-pick) (g:object widget)
@@ -4256,7 +4289,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_state_flags
-;;; gtk_widget_set_state_flags -> widget-state-flags
+;;; gtk_widget_set_state_flags
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-state-flags) (flags widget &optional (clear nil))
@@ -4270,8 +4303,8 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_state_flags" widget-state-flags) state-flags
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-state-flags widget) => flags}
-  @syntax[]{(setf (gtk:widget-state-flags widget clear) flags)}
+  @syntax{(gtk:widget-state-flags widget) => flags}
+  @syntax{(setf (gtk:widget-state-flags widget clear) flags)}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[flags]{a @symbol{gtk:state-flags} value}
   @argument[clear]{an optional boolean whether to clear state before turning on
@@ -4325,7 +4358,7 @@ lambda (widget)    :run-last
 (export 'widget-unset-state-flags)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_has_visible_focus ()
+;;; gtk_widget_has_visible_focus
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_has_visible_focus" widget-has-visible-focus) :boolean
@@ -4371,7 +4404,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_realized
-;;; gtk_widget_set_realized -> widget-realized
+;;; gtk_widget_set_realized
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: gtk_widget_set_realized has gone.
@@ -4386,8 +4419,8 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_realized" widget-realized) :boolean
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-realized widget) => realized}
-  @syntax[]{(setf (gtk:widget-realized widget) realized)}
+  @syntax{(gtk:widget-realized widget) => realized}
+  @syntax{(setf (gtk:widget-realized widget) realized)}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[realized]{@em{true} to mark the widget as realized}
   @begin{short}
@@ -4405,7 +4438,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_get_mapped
-;;; gtk_widget_set_mapped -> widget-mapped
+;;; gtk_widget_set_mapped
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: gtk_widget_set_mapped has gone.
@@ -4420,8 +4453,8 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_mapped" widget-mapped) :boolean
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:widget-mapped widget) => mapped}
-  @syntax[]{(setf (gtk:widget-mapped widget) mapped)}
+  @syntax{(gtk:widget-mapped widget) => mapped}
+  @syntax{(setf (gtk:widget-mapped widget) mapped)}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[mapped]{@em{true} to mark the widget as mapped}
   @begin{short}
@@ -4438,7 +4471,7 @@ lambda (widget)    :run-last
 (export 'widget-mapped)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_measure ()
+;;; gtk_widget_measure
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_measure" %widget-measure) :void
@@ -4527,7 +4560,7 @@ lambda (widget)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_next_sibling -> widget-next-sibling
+;;; gtk_widget_get_next_sibling
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_next_sibling" widget-next-sibling)
@@ -4546,7 +4579,7 @@ lambda (widget)    :run-last
 (export 'widget-next-sibling)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_prev_sibling -> widget-prev-sibling
+;;; gtk_widget_get_prev_sibling
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_prev_sibling" widget-prev-sibling)
@@ -4565,7 +4598,7 @@ lambda (widget)    :run-last
 (export 'widget-prev-sibling)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_first_child -> widget-first-child
+;;; gtk_widget_get_first_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_first_child" widget-first-child)
@@ -4584,7 +4617,7 @@ lambda (widget)    :run-last
 (export 'widget-first-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_last_child -> widget-last-child
+;;; gtk_widget_get_last_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_last_child" widget-last-child) (g:object widget)
@@ -4719,7 +4752,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_add_css_class" widget-add-css-class) :void
  #+liber-documentation
- "@version{2023-9-30}
+ "@version{2024-4-19}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[class]{a string with the style class to add, without the leading
     \".\" used for notation of style classes}
@@ -4728,7 +4761,7 @@ lambda (widget)    :run-last
   @end{short}
   After calling this function, the style of the widget will match for
   @arg{class}, after the CSS matching rules.
-  @begin[Example]{dictionary}
+  @begin{examples}
     Get the CSS style classes, add and remove a CSS style class:
     @begin{pre}
 (defvar dialog (make-instance 'gtk:about-dialog)) => DIALOG
@@ -4741,7 +4774,7 @@ lambda (widget)    :run-last
 (gtk:widget-css-classes dialog)
 => (\"background\" \"csd\" \"aboutdialog\")
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gtk:widget}
   @see-function{gtk:widget-remove-css-class}
   @see-function{gtk:widget-css-classes}"
@@ -4751,7 +4784,7 @@ lambda (widget)    :run-last
 (export 'widget-add-css-class)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_remove_css_class ()
+;;; gtk_widget_remove_css_class
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_remove_css_class" widget-remove-css-class) :void
@@ -4772,7 +4805,7 @@ lambda (widget)    :run-last
 (export 'widget-remove-css-class)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_has_css_class ()
+;;; gtk_widget_has_css_class
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_has_css_class" widget-has-css-class) :boolean
@@ -4793,7 +4826,7 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_class_get_css_name
-;;; gtk_widget_class_set_css_name -> widget-class-css-name
+;;; gtk_widget_class_set_css_name
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf widget-class-css-name) (name gtype)
@@ -4812,8 +4845,8 @@ lambda (widget)    :run-last
 (defun widget-class-css-name (gtype)
   #+liber-documentation
  "@version{2023-12-2}
-  @syntax[]{(gtk:widget-class-css-name gtype) => name}
-  @syntax[]{(setf (gtk:widget-class-css-name gtype) name)}
+  @syntax{(gtk:widget-class-css-name gtype) => name}
+  @syntax{(setf (gtk:widget-class-css-name gtype) name)}
   @argument[gtype]{a @class{g:type-t} type ID}
   @argument[name]{a string with the CSS name}
   @begin{short}
@@ -4833,7 +4866,7 @@ lambda (widget)    :run-last
 (export 'widget-class-css-name)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_style_context -> widget-style-context
+;;; gtk_widget_get_style_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_style_context" %widget-style-context)
@@ -4864,44 +4897,84 @@ lambda (widget)    :run-last
 (export 'widget-style-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; widget-apply-provider                                  Lisp extension
+;;; gtk:widget-add-provider                                 Lisp extension
 ;;; ----------------------------------------------------------------------------
 
-(defun widget-apply-provider (widget provider
-                              &optional (priority +priority-application+))
+(defun widget-add-provider (widget provider
+                            &optional (priority +priority-application+))
  #+liber-documentation
- "@version{2023-3-26}
+ "@version{2024-4-20}
   @argument[widget]{a @class{gtk:widget} widget}
   @argument[provider]{a @class{gtk:style-provider} object}
   @argument[priority]{an optional unsigned integer with the priority of the
     style provider}
+  @return{The string with an unique identifier for the added @arg{provider}.}
   @begin{short}
-    Adds a style provider to the style context of @arg{widget} and all child
-    widgets of @arg{widget}, to be used in style construction.
+    Adds a style provider to the display of @arg{widget} to be used in style
+    construction.
   @end{short}
+  The style provider is removed from the display when the widget is destroyed.
+  Call the @fun{gtk:widget-remove-provider} function with the returned unique
+  identifier to remove the provider from the display of the widget.
 
   The lower the priority of the style provider is, the earlier it will be used
   in the style construction. Typically this will be in the range between the
   @var{gtk:+priority-fallback+} and @var{gtk:+priority-user+} priorities. The
   default value is @var{gtk:+priority-application+}. See the
   @fun{gtk:style-context-add-provider} documentation for more information.
-  @begin[Note]{dictionary}
+  @begin{notes}
     This function is a Lisp extension that provides a convenient way to apply a
-    provider to the widget and its children.
-  @end{dictionary}
+    provider to the display of the widget. The style provider is added with the
+    @fun{gtk:style-context-add-provider-for-display} function. A destroy
+    notify callback function is installed with the @fun{g:object-set-data-full}
+    function. It removes the style provider with the
+    @fun{gtk:style-context-remove-provider-for-display} function for the display
+    when the widget is destroyed. Alternativly, you can remove the provider
+    from the display of the widget with the @fun{gtk:widget-remove-provider}
+    function.
+  @end{notes}
   @see-class{gtk:widget}
-  @see-function{gtk:style-context-add-provider}"
-  (let ((context (widget-style-context widget)))
-    (style-context-add-provider context provider priority)
-    (do ((child (widget-first-child widget)
-                (widget-next-sibling child)))
-         ((not child))
-      (widget-apply-provider child provider priority))))
+  @see-function{gtk:widget-remove-provider}"
+  (let ((display (widget-display widget))
+        (key (symbol-name (gensym))))
+    (style-context-add-provider-for-display display provider priority)
+    (gobject:object-set-data-full widget key
+        (lambda ()
+          (style-context-remove-provider-for-display display provider)))
+    key))
 
-(export 'widget-apply-provider)
+(export 'widget-add-provider)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_request_mode -> widget-request-mode
+;;; gtk:widget-remove-provider                              Lisp extension
+;;; ----------------------------------------------------------------------------
+
+(defun widget-remove-provider (widget key)
+ #+liber-documentation
+ "@version{2024-4-20}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[key]{a string with the unique identifier for the style provider,
+    this is the return value of the @fun{gtk:widget-add-provider} function}
+  @begin{short}
+    Removes a style provider from the display of the widget.
+  @end{short}
+  The style provider has been added with the @fun{gtk:widget-add-provider}
+  function.
+  @begin{notes}
+    This function calls the destroy notify callback function that has been
+    installed with the @fun{gtk:widget-add-provider} function. The destroy
+    notify callback function calls the
+    @fun{gtk:style-context-remove-provider-for-display} function.
+  @end{notes}
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-add-provider}
+  @see-function{gtk:style-context-remove-provider-for-display}"
+  (setf (gobject:object-data widget key) nil))
+
+(export 'widget-remove-provider)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_widget_get_request_mode
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_request_mode" widget-request-mode)
@@ -4924,7 +4997,7 @@ lambda (widget)    :run-last
 (export 'widget-request-mode)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_preferred_size -> widget-preferred-size
+;;; gtk_widget_get_preferred_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_preferred_size" %widget-preferred-size) :void
@@ -5145,7 +5218,7 @@ lambda (widget)    :run-last
 (export 'widget-template-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_set_template ()
+;;; gtk_widget_class_set_template
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_class_set_template" %widget-class-set-template) :void
@@ -5183,7 +5256,7 @@ lambda (widget)    :run-last
 (export 'widget-class-set-template)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_class_set_template_from_resource ()
+;;; gtk_widget_class_set_template_from_resource
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_class_set_template_from_resource"
