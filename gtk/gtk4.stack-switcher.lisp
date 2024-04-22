@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -73,7 +73,8 @@
    :export t
    :interfaces ("GtkAccessible"
                 "GtkBuildable"
-                "GtkConstraintTarget")
+                "GtkConstraintTarget"
+                "GtkOrientable")
    :type-initializer "gtk_stack_switcher_get_type")
   ((stack
     stack-switcher-stack
@@ -81,7 +82,7 @@
 
 #+liber-documentation
 (setf (documentation 'stack-switcher 'type)
- "@version{2023-8-9}
+ "@version{2024-4-15}
   @begin{short}
     The @class{gtk:stack-switcher} widget acts as a controller for a
     @class{gtk:stack} widget.
@@ -110,7 +111,7 @@
     and uses the @code{:tab} role of the @symbol{gtk:accessible-role}
     enumeration for its buttons.
   @end{dictionary}
-  @see-slot{gtk:stack-switcher-icon-size}
+  @see-constructor{gtk:stack-switcher-new}
   @see-slot{gtk:stack-switcher-stack}
   @see-class{gtk:stack}")
 
@@ -118,7 +119,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- stack-switcher-stack ---------------------------------------------------
+;;; --- gtk:stack-switcher-stack -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "stack" 'stack-switcher) t)
@@ -129,9 +130,9 @@
 (setf (liber:alias-for-function 'stack-switcher-stack)
       "Accessor"
       (documentation 'stack-switcher-stack 'function)
- "@version{2023-8-9}
-  @syntax[]{(gtk:stack-switcher-stack object) => stack}
-  @syntax[]{(setf (gtk:stack-switcher-stack object) stack)}
+ "@version{2024-4-15}
+  @syntax{(gtk:stack-switcher-stack object) => stack}
+  @syntax{(setf (gtk:stack-switcher-stack object) stack)}
   @argument[object]{a @class{gtk:stack-switcher} widget}
   @argument[stack]{a @class{gtk:stack} widget}
   @begin{short}
@@ -151,7 +152,7 @@
 
 (defun stack-switcher-new ()
  #+liber-documentation
- "@version{2023-8-9}
+ "@version{2024-4-15}
   @return{The new @class{gtk:stack-switcher} widget.}
   @short{Creates a new stack switcher.}
   @see-class{gtk:stack-switcher}"

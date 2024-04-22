@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'overlay 'type)
- "@version{#2022-7-31}
+ "@version{2024-4-16}
   @begin{short}
     The @class{gtk:overlay} widget is a container which contains a single main
     widget, on top of which it can place overlay widgets.
@@ -156,7 +156,7 @@ lambda (overlay widget allocation)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- overlay-child ------------------------------------------------------
+;;; --- gtk:overlay-child ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'overlay) t)
@@ -167,9 +167,9 @@ lambda (overlay widget allocation)    :run-last
 (setf (liber:alias-for-function 'overlay-child)
       "Accessor"
       (documentation 'overlay-child 'function)
- "@version{#2022-7-31}
-  @syntax[]{(gtk:overlay-child object) => child}
-  @syntax[]{(setf (gtk:overlay-child object) child)}
+ "@version{2024-4-22}
+  @syntax{(gtk:overlay-child object) => child}
+  @syntax{(setf (gtk:overlay-child object) child)}
   @argument[object]{a @class{gtk:overlay} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -182,18 +182,16 @@ lambda (overlay widget allocation)    :run-last
   @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_overlay_new ()
+;;; gtk_overlay_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline overlay-new))
 
 (defun overlay-new ()
  #+liber-documentation
- "@version{#2022-7-31}
-  @return{A new @class{gtk:overlay} widget.}
-  @begin{short}
-    Creates a new overlay widget.
-  @end{short}
+ "@version{2024-4-22}
+  @return{The new @class{gtk:overlay} widget.}
+  @short{Creates a new overlay widget.}
   @see-class{gtk:overlay}"
   (make-instance 'overlay))
 
@@ -205,7 +203,7 @@ lambda (overlay widget allocation)    :run-last
 
 (cffi:defcfun ("gtk_overlay_add_overlay" overlay-add-overlay) :void
  #+liber-documentation
- "@version{#2022-7-31}
+ "@version{2024-4-24}
   @argument[overlay]{a @class{gtk:overlay} widget}
   @argument[widget]{a @class{gtk:widget} child widget to be added}
   @begin{short}
@@ -226,7 +224,9 @@ lambda (overlay widget allocation)    :run-last
 
 (export 'overlay-add-overlay)
 
-;;; --- overlay-remove-overlay ---------------------------------------------
+;;; ----------------------------------------------------------------------------
+;;; gtk_overlay_remove_overlay
+;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_overlay_remove_overlay" overlay-remove-overlay) :void
  #+liber-documentation
@@ -247,7 +247,7 @@ lambda (overlay widget allocation)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_overlay_get_measure_overlay
-;;; gtk_overlay_set_measure_overlay -> overlay-measure-overlay
+;;; gtk_overlay_set_measure_overlay
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf overlay-measure-overlay) (value overlay widget)
@@ -261,9 +261,9 @@ lambda (overlay widget allocation)    :run-last
 (cffi:defcfun ("gtk_overlay_get_measure_overlay" overlay-measure-overlay)
     :boolean
  #+liber-documentation
- "@version{#2022-7-31}
-  @syntax[]{(gtk:overlay-measure-overlay overlay widget) => measure}
-  @syntax[]{(setf (gtk:overlay-measure-overlay overlay widget) measure)}
+ "@version{#2024-4-22}
+  @syntax{(gtk:overlay-measure-overlay overlay widget) => measure}
+  @syntax{(setf (gtk:overlay-measure-overlay overlay widget) measure)}
   @argument[overlay]{a @class{gtk:overlay} widget}
   @argument[widget]{a @class{gtk:widget} child widget}
   @argument[measure]{a boolean whether the child widget should be measured}
@@ -286,7 +286,7 @@ lambda (overlay widget allocation)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_overlay_get_clip_overlay
-;;; gtk_overlay_set_clip_overlay -> overlay-clip-overlay
+;;; gtk_overlay_set_clip_overlay
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf overlay-clip-overlay) (value overlay widget)
@@ -299,9 +299,9 @@ lambda (overlay widget allocation)    :run-last
 
 (cffi:defcfun ("gtk_overlay_get_clip_overlay" overlay-clip-overlay) :boolean
  #+liber-documentation
- "@version{#2022-7-31}
-  @syntax[]{(gtk:overlay-clip-overlay overlay widget) => clip}
-  @syntax[]{(setf (gtk:overlay-clip-overlay overlay widget) clip)}
+ "@version{#2024-4-22}
+  @syntax{(gtk:overlay-clip-overlay overlay widget) => clip}
+  @syntax{(setf (gtk:overlay-clip-overlay overlay widget) clip)}
   @argument[overlay]{a @class{gtk:overlay} widget}
   @argument[widget]{a @class{gtk:widget} child widget}
   @argument[clip]{a boolean whether the child widget should be clipped}

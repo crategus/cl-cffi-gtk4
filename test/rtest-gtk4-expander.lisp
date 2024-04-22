@@ -8,37 +8,37 @@
 ;;;     GtkExpander
 
 (test gtk-expander-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkExpander"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:expander
           (glib:symbol-for-gtype "GtkExpander")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkExpander")
           (g:gtype (cffi:foreign-funcall "gtk_expander_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkExpander")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkExpander")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkExpander")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("child" "expanded" "label" "label-widget" "resize-toplevel"
                "use-markup" "use-underline")
              (list-properties "GtkExpander")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate")
              (list-signals "GtkExpander")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "expander-widget"
                (gtk:widget-class-css-name "GtkExpander")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:expander))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :button (gtk:widget-class-accessible-role "GtkExpander")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkExpander" GTK-EXPANDER
@@ -63,14 +63,6 @@
              (gobject:get-g-type-definition "GtkExpander"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     child
-;;;     expanded
-;;;     label
-;;;     label-widget
-;;;     resize-toplevel
-;;;     use-markup
-;;;     use-underline
 
 (test gtk-expander-properties
   (let ((expander (make-instance 'gtk:expander)))
@@ -112,4 +104,4 @@
     (is-false (gtk:expander-use-markup expander))
     (is-true (gtk:expander-use-underline expander))))
 
-;;; --- 2023-8-23 --------------------------------------------------------------
+;;; 2024-4-17

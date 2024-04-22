@@ -171,8 +171,8 @@
       "Accessor"
       (documentation 'center-box-baseline-position 'function)
  "@version{2023-5-2}
-  @syntax[]{(gtk:center-box-baseline-position object) => position}
-  @syntax[]{(setf (gtk:center-box-baseline-position object) position)}
+  @syntax{(gtk:center-box-baseline-position object) => position}
+  @syntax{(setf (gtk:center-box-baseline-position object) position)}
   @argument[object]{a @class{gtk:center-box} widget}
   @argument[position]{a value of the @symbol{gtk:baseline-position} enumeration}
   @begin{short}
@@ -202,11 +202,11 @@
 (setf (liber:alias-for-function 'center-box-center-widget)
       "Accessor"
       (documentation 'center-box-center-widget 'function)
- "@version{2023-5-2}
-  @syntax[]{(gtk:center-box-center-widget object) => child}
-  @syntax[]{(setf (gtk:center-box-center-widget object) child)}
-  @argument[box]{a @class{gtk:center-box} widget}
-  @argument[object]{a @class{gtk:widget} center widget}
+ "@version{2024-4-15}
+  @syntax{(gtk:center-box-center-widget object) => child}
+  @syntax{(setf (gtk:center-box-center-widget object) child)}
+  @argument[object]{a @class{gtk:center-box} widget}
+  @argument[child]{a @class{gtk:widget} center widget}
   @begin{short}
     Accessor of the @slot[gtk:center-box]{center-widget} slot of the
     @class{gtk:center-box} class.
@@ -214,7 +214,8 @@
   The @fun{gtk:center-box-center-widget} function gets the center widget, or
   @code{nil} if there is none. The @setf{gtk:center-box-center-widget} function
   sets the center widget. To remove the existing center widget, pass @code{nil}.
-  @see-class{gtk:center-box}")
+  @see-class{gtk:center-box}
+  @see-class{gtk:widget}")
 
 ;;; --- gtk:center-box-end-widget ----------------------------------------------
 
@@ -224,17 +225,17 @@
   @br{}
   The widget that is placed at the end position. In vertical orientation, the
   end position is at the bottom. In horizontal orientation, the end position is
-  at the trailing edge wrt. to the text direction. Since 4.10")
+  at the trailing edge with respect to the text direction. Since 4.10")
 
 #+(and gtk-4-10 liber-documentation)
 (setf (liber:alias-for-function 'center-box-end-widget)
       "Accessor"
       (documentation 'center-box-end-widget 'function)
- "@version{2023-5-2}
-  @syntax[]{(gtk:center-box-end-widget object) => child}
-  @syntax[]{(setf (gtk:center-box-end-widget object) child)}
-  @argument[box]{a @class{gtk:center-box} widget}
-  @argument[object]{a @class{gtk:widget} end widget}
+ "@version{2024-4-15}
+  @syntax{(gtk:center-box-end-widget object) => child}
+  @syntax{(setf (gtk:center-box-end-widget object) child)}
+  @argument[object]{a @class{gtk:center-box} widget}
+  @argument[child]{a @class{gtk:widget} end widget}
   @begin{short}
     Accessor of the @slot[gtk:center-box]{end-widget} slot of the
     @class{gtk:center-box} class.
@@ -242,7 +243,8 @@
   The @fun{gtk:center-box-end-widget} function gets the end widget, or
   @code{nil} if there is none. The @setf{gtk:center-box-end-widget} function
   sets the end widget. To remove the existing end widget, pass @code{nil}.
-  @see-class{gtk:center-box}")
+  @see-class{gtk:center-box}
+  @see-class{gtk:widget}")
 
 ;;; --- gtk:center-box-shrink-center-last --------------------------------------
 
@@ -262,10 +264,10 @@
 (setf (liber:alias-for-function 'center-box-shrink-center-last)
       "Accessor"
       (documentation 'center-box-shrink-center-last 'function)
- "@version{2024-4-12}
-  @syntax[]{(gtk:center-box-shrink-center-last object) => setting}
-  @syntax[]{(setf (gtk:center-box-shrink-center-last object) setting)}
-  @argument[box]{a @class{gtk:center-box} widget}
+ "@version{2024-4-15}
+  @syntax{(gtk:center-box-shrink-center-last object) => setting}
+  @syntax{(setf (gtk:center-box-shrink-center-last object) setting)}
+  @argument[object]{a @class{gtk:center-box} widget}
   @argument[setting]{a boolean whether to shrink the center widget after other
     children}
   @begin{short}
@@ -292,15 +294,15 @@
   @br{}
   The widget that is placed at the start position. In vertical orientation, the
   start position is at the top. In horizontal orientation, the start position is
-  at the leading edge wrt. to the text direction. Since 4.10")
+  at the leading edge with respect to the text direction. Since 4.10")
 
 #+(and gtk-4-10 liber-documentation)
 (setf (liber:alias-for-function 'center-box-start-widget)
       "Accessor"
       (documentation 'center-box-start-widget 'function)
- "@version{2023-5-2}
-  @syntax[]{(gtk:center-box-start-widget object) => child}
-  @syntax[]{(setf (gtk:center-box-start-widget object) child)}
+ "@version{2024-4-15}
+  @syntax{(gtk:center-box-start-widget object) => child}
+  @syntax{(setf (gtk:center-box-start-widget object) child)}
   @argument[object]{a @class{gtk:center-box} widget}
   @argument[child]{a @class{gtk:widget} start widget}
   @begin{short}
@@ -310,7 +312,8 @@
   The @fun{gtk:center-box-start-widget} function gets the start widget, or
   @code{nil} if there is none. The @setf{gtk:center-box-start-widget} function
   sets the start widget. To remove the existing start widget, pass @code{nil}.
-  @see-class{gtk:center-box}")
+  @see-class{gtk:center-box}
+  @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_center_box_new
@@ -327,8 +330,8 @@
 (export 'center-box-new)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_center_box_set_center_widget ()
-;;;gtk_center_box_get_center_widget ()
+;;;gtk_center_box_set_center_widget
+;;;gtk_center_box_get_center_widget
 ;;; ----------------------------------------------------------------------------
 
 #-gtk-4-10
@@ -344,8 +347,8 @@
     (g:object widget)
  #+liber-documentation
  "@version{#2022-2-3}
-  @syntax[]{(gtk:center-box-center-widget box) => child}
-  @syntax[]{(setf (gtk:center-box-center-widget box) child)}
+  @syntax{(gtk:center-box-center-widget box) => child}
+  @syntax{(setf (gtk:center-box-center-widget box) child)}
   @argument[box]{a @class{gtk:center-box} widget}
   @argument[child]{a @class{gtk:widget} center widget}
   @begin{short}
@@ -361,8 +364,8 @@
 (export 'center-box-center-widget)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_center_box_set_start_widget ()
-;;;gtk_center_box_get_start_widget ()
+;;;gtk_center_box_set_start_widget
+;;;gtk_center_box_get_start_widget
 ;;; ----------------------------------------------------------------------------
 
 #-gtk-4-10
@@ -378,8 +381,8 @@
     (g:object widget)
  #+liber-documentation
  "@version{#2022-2-3}
-  @syntax[]{(gtk:center-box-start-widget box) => child}
-  @syntax[]{(setf (gtk:center-box-start-widget box) child)}
+  @syntax{(gtk:center-box-start-widget box) => child}
+  @syntax{(setf (gtk:center-box-start-widget box) child)}
   @argument[box]{a @class{gtk:center-box} widget}
   @argument[child]{a @class{gtk:widget} start widget}
   @begin{short}
@@ -395,8 +398,8 @@
 (export 'center-box-start-widget)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_center_box_set_end_widget ()
-;;;gtk_center_box_get_end_widget ()
+;;;gtk_center_box_set_end_widget
+;;;gtk_center_box_get_end_widget
 ;;; ----------------------------------------------------------------------------
 
 #-gtk-4-10
@@ -412,8 +415,8 @@
     (g:object widget)
  #+liber-documentation
  "@version{#2022-2-3}
-  @syntax[]{(gtk:center-box-end-widget box) => child}
-  @syntax[]{(setf (gtk:center-box-end-widget box) child)}
+  @syntax{(gtk:center-box-end-widget box) => child}
+  @syntax{(setf (gtk:center-box-end-widget box) child)}
   @argument[box]{a @class{gtk:center-box} widget}
   @argument[child]{a @class{gtk:widget} end widget}
   @begin{short}

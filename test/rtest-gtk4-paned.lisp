@@ -7,42 +7,42 @@
 
 ;;;     GtkPaned
 
-(test paned-class
-  ;; Type check
+(test gtk-paned-class
+  ;; Check type
   (is (g:type-is-object "GtkPaned"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:paned
           (glib:symbol-for-gtype "GtkPaned")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPaned")
           (g:gtype (cffi:foreign-funcall "gtk_paned_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkPaned")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkPaned")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
              (list-interfaces "GtkPaned")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("end-child" "max-position" "min-position" "orientation"
                "position" "position-set" "resize-end-child" "resize-start-child"
                "shrink-end-child" "shrink-start-child" "start-child"
                "wide-handle")
              (list-properties "GtkPaned")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("accept-position" "cancel-position" "cycle-child-focus"
                "cycle-handle-focus" "move-handle" "toggle-handle-focus")
              (list-signals "GtkPaned")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "paned"
                (gtk:widget-class-css-name "GtkPaned")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("horizontal")
              (gtk:widget-css-classes (make-instance 'gtk:paned))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkPaned")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPaned" GTK-PANED
@@ -75,17 +75,24 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     end-child
-;;;     max-position
-;;;     min-position
-;;;     position
-;;;     position-set
-;;;     resize-end-child
-;;;     resize-start-child
-;;;     shrink-end-child
-;;;     shrink-start-child
-;;;     start-child
-;;;     wide-handle
+(test gtk-paned-properties
+  (let* ((start (make-instance 'gtk:box))
+         (end (make-instance 'gtk:box))
+         (paned (make-instance 'gtk:paned
+                               :start-child start
+                               :end-child end)))
+
+    (is (eq end (gtk:paned-end-child paned)))
+    (is (= 2147483647 (gtk:paned-max-position paned)))
+    (is (= 0 (gtk:paned-min-position paned)))
+    (is (= 0 (gtk:paned-position paned)))
+    (is-false (gtk:paned-position-set paned))
+    (is-true (gtk:paned-resize-end-child paned))
+    (is-true (gtk:paned-resize-start-child paned))
+    (is-true (gtk:paned-shrink-end-child paned))
+    (is-true (gtk:paned-shrink-start-child paned))
+    (is (eq start (gtk:paned-start-child paned)))
+    (is-false (gtk:paned-wide-handle paned))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -100,4 +107,7 @@
 
 ;;;     gtk_paned_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-paned-new
+  (is (typep (gtk:paned-new :vertical) 'gtk:paned)))
+
+;;; 2024-4-22

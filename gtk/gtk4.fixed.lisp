@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -126,11 +126,9 @@
 
 (defun fixed-new ()
  #+liber-documentation
- "@version{#2022-2-12}
-  @return{A new @class{gtk:fixed} widget.}
-  @begin{short}
-    Creates a new fixed widget.
-  @end{short}
+ "@version{2024-4-19}
+  @return{The new @class{gtk:fixed} widget.}
+  @short{Creates a new fixed widget.}
   @see-class{gtk:fixed}"
   (make-instance 'fixed))
 
@@ -148,7 +146,7 @@
 
 (defun fixed-put (fixed child x y)
  #+liber-documentation
- "@version{#2022-2-12}
+ "@version{2024-4-19}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[x]{a number which is coerced to a double float with the horizontal
@@ -156,7 +154,7 @@
   @argument[y]{a number which is coerced to a double float with the vertical
     position to place the child widget at}
   @begin{short}
-    Adds a child widget to a fixed container and assigns a translation
+    Adds a child widget to a fixed widget and assigns a translation
     transformation to the given @arg{x} and @arg{y} coordinates to it.
   @end{short}
   @see-class{gtk:fixed}
@@ -175,7 +173,7 @@
 
 (cffi:defcfun ("gtk_fixed_remove" fixed-remove) :void
  #+liber-documentation
- "@version{#2022-2-12}
+ "@version{2024-4-19}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget to remove}
   @begin{short}
@@ -183,6 +181,7 @@
     the @fun{gtk:fixed-put} function.
   @end{short}
   @see-class{gtk:fixed}
+  @see-class{gtk:widget}
   @see-function{gtk:fixed-put}"
   (fixed (g:object fixed))
   (child (g:object widget)))
@@ -201,7 +200,7 @@
 
 (defun fixed-move (fixed child x y)
  #+liber-documentation
- "@version{#2022-2-12}
+ "@version{2024-4-19}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @argument[x]{a number which is coerced to a double float with the horizontal
@@ -210,7 +209,7 @@
     position to move the child widget to}
   @begin{short}
     Sets a translation transformation to the given @arg{x} and @arg{y}
-    coordinates to the child widget of the given fixed container.
+    coordinates to the child widget of the given fixed widget.
   @end{short}
   @see-class{gtk:fixed}
   @see-class{gtk:widget}
@@ -223,7 +222,7 @@
 (export 'fixed-move)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_fixed_get_child_position ()
+;;; gtk_fixed_get_child_position
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_fixed_get_child_position" %fixed-child-position) :void
@@ -234,7 +233,7 @@
 
 (defun fixed-child-position (fixed child)
  #+liber-documentation
- "@version{#2023-4-16}
+ "@version{2024-4-19}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget of @arg{fixed}}
   @begin{return}
@@ -257,8 +256,8 @@
 (export 'fixed-child-position)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_fixed_get_child_transform ()
-;;; gtk_fixed_set_child_transform ()
+;;; gtk_fixed_get_child_transform
+;;; gtk_fixed_set_child_transform
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf fixed-child-transform) (value fixed child)
@@ -271,9 +270,9 @@
 (cffi:defcfun ("gtk_fixed_get_child_transform" fixed-child-transform)
     (g:boxed gsk:transform)
  #+liber-documentation
- "@version{#2023-4-16}
-  @syntax[]{(gtk:fixed-child-transform object) => transform}
-  @syntax[]{(setf (gtk:fixed-child-transform object) transform)}
+ "@version{2024-4-19}
+  @syntax{(gtk:fixed-child-transform object) => transform}
+  @syntax{(setf (gtk:fixed-child-transform object) transform)}
   @argument[fixed]{a @class{gtk:fixed} widget}
   @argument[child]{a @class{gtk:widget} child widget of @arg{fixed}}
   @argument[transform]{a @class{gsk:transform} instance with the transformation
@@ -286,7 +285,11 @@
   @arg{child}. This is a convenience function that retrieves the
   @class{gtk:fixed-layout-child} instance associated to @arg{child} and calls
   the @fun{gtk:fixed-layout-child-transform} function.
-  @see-class{gtk:fixed}"
+  @see-class{gtk:fixed}
+  @see-class{gtk:widget}
+  @see-class{gsk:transform}
+  @see-class{gtk:fixed-layout-child}
+  @see-function{gtk:fixed-layout-child-transform}"
   (fixed (g:object fixed))
   (child (g:object widget)))
 

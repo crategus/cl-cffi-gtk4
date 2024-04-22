@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,13 +83,13 @@
 (setf (documentation 'stack-sidebar 'type)
  "@version{2023-8-9}
   @begin{short}
-    A @class{gtk:stack-sidebar} widget enables you to quickly and easily provide
-    a consistent \"sidebar\" object for your user interface.
+    The @class{gtk:stack-sidebar} widget enables you to quickly and easily
+    provide a consistent \"sidebar\" object for your user interface.
   @end{short}
 
   @image[stack-sidebar]{Figure: GtkStackSidebar}
 
-  In order to use a @class{gtk:stack-sidebar} widget, you simply use a
+  In order to use the @class{gtk:stack-sidebar} widget, you simply use the
   @class{gtk:stack} widget to organize your UI flow, and add the sidebar to
   your sidebar area. You can use the @fun{gtk:stack-sidebar-stack} function to
   connect the @class{gtk:stack-sidebar} widget to the @class{gtk:stack} widget.
@@ -107,7 +107,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- stack-sidebar-stack ----------------------------------------------------
+;;; --- gtk:stack-sidebar-stack ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "stack" 'stack-sidebar) t)
@@ -119,8 +119,8 @@
       "Accessor"
       (documentation 'stack-sidebar-stack 'function)
  "@version{2023-8-9}
-  @syntax[]{(gtk:stack-sidebar-stack object) => stack}
-  @syntax[]{(setf (gtk:stack-sidebar-stack object) stack)}
+  @syntax{(gtk:stack-sidebar-stack object) => stack}
+  @syntax{(setf (gtk:stack-sidebar-stack object) stack)}
   @argument[object]{a @class{gtk:stack-sidebar} widget}
   @argument[stack]{a @class{gtk:stack} widget}
   @begin{short}
