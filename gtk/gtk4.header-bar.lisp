@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2016 - 2023 Dieter Kaiser
+;;; Copyright (C) 2016 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -96,7 +96,7 @@
 
 #+liber-documentation
 (setf (documentation 'header-bar 'type)
- "@version{2023-9-30}
+ "@version{2024-4-16}
   @begin{short}
     The @class{gtk:header-bar} widget is similar to a horizontal @class{gtk:box}
     widget. It allows children to be placed at the start or the end. In
@@ -117,10 +117,10 @@
   while allowing the addition of child widgets.
   @begin[GtkHeaderBar as GtkBuildable]{dictionary}
     The @class{gtk:header-bar} widget implementation of the
-    @class{gtk:buildable} interface supports adding children at the start or end
-    sides by specifying @code{start} or @code{end} as the @code{type} attribute
-    of a @code{<child>} element, or setting the title widget by specifying
-    @code{title} value.
+    @class{gtk:buildable} interface supports adding children at the start or
+    end sides by specifying @code{\"start\"} or @code{\"end\"} as the
+    @code{\"type\"} attribute of a @code{<child>} element, or setting the title
+    widget by specifying @code{\"title\"} value.
 
     By default the @class{gtk:header-bar} widget uses a @class{gtk:label} widget
     displaying the title of the window it is contained in as the title widget,
@@ -178,7 +178,7 @@ headerbar
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- header-bar-decoration-layout -------------------------------------------
+;;; --- gtk:header-bar-decoration-layout ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "decoration-layout"
@@ -196,8 +196,8 @@ headerbar
       "Accessor"
       (documentation 'header-bar-decoration-layout 'function)
  "@version{2023-8-9}
-  @syntax[]{(gtk:header-bar-decoration-layout object) => layout}
-  @syntax[]{(setf (gtk:header-bar-decoration-layout object) layout)}
+  @syntax{(gtk:header-bar-decoration-layout object) => layout}
+  @syntax{(setf (gtk:header-bar-decoration-layout object) layout)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[layout]{a string with the decoration layout, or @code{nil} to unset
     the layout}
@@ -217,16 +217,16 @@ headerbar
 
   The format of the string is button names, separated by commas. A colon
   separates the buttons that should appear on the left from those on the right.
-  Recognized button names are \"minimize\", \"maximize\", \"close\", \"icon\"
-  for the window icon and \"menu\" for a menu button for the fallback
-  application menu.
+  Recognized button names are @code{\"minimize\"}, @code{\"maximize\"},
+  @code{\"close\"}, @code{\"icon\"} for the window icon and @code{\"menu\"} for
+  a menu button for the fallback application menu.
 
-  For example, \"menu:minimize,maximize,close\" specifies a Menu on the left,
-  and Minimize, Maximize and Close buttons on the right.
+  For example, @code{\"menu:minimize,maximize,close\"} specifies a Menu on the
+  left, and Minimize, Maximize and Close buttons on the right.
   @see-class{gtk:header-bar}
   @see-function{gtk:settings-gtk-decoration-layout}")
 
-;;; --- header-bar-show-title-buttons ------------------------------------------
+;;; --- gtk:header-bar-show-title-buttons --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-title-buttons"
@@ -234,9 +234,10 @@ headerbar
  "The @code{show-title-buttons} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether to show title buttons like Close, Minimize, Maximize. Which buttons
-  are actually shown and where is determined by the @code{decoration-layout}
-  property, and by the state of the window, e.g. a Close button will not be
-  shown if the window cannot be closed. @br{}
+  are actually shown and where is determined by the
+  @slot[gtk:header-bar]{decoration-layout} property, and by the state of the
+  window, e.g. a Close button will not be shown if the window cannot be closed.
+  @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -244,8 +245,8 @@ headerbar
       "Accessor"
       (documentation 'header-bar-show-title-buttons 'function)
  "@version{2023-3-9}
-  @syntax[]{(gtk:header-bar-show-title-buttons object) => setting}
-  @syntax[]{(setf (gtk:header-bar-show-title-buttons object) setting)}
+  @syntax{(gtk:header-bar-show-title-buttons object) => setting}
+  @syntax{(setf (gtk:header-bar-show-title-buttons object) setting)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[setting]{@em{true} if title buttons are shown}
   @begin{short}
@@ -259,7 +260,7 @@ headerbar
   Minimize.
   @see-class{gtk:header-bar}")
 
-;;; --- header-bar-title-widget ------------------------------------------------
+;;; --- gtk:header-bar-title-widget --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title-widget" 'header-bar) t)
@@ -272,8 +273,8 @@ headerbar
       "Accessor"
       (documentation 'header-bar-title-widget 'function)
  "@version{2023-8-9}
-  @syntax[]{(gtk:header-bar-title-widget object) => title}
-  @syntax[]{(setf (gtk:header-bar-title-widget object) title)}
+  @syntax{(gtk:header-bar-title-widget object) => title}
+  @syntax{(setf (gtk:header-bar-title-widget object) title)}
   @argument[object]{a @class{gtk:header-bar} widget}
   @argument[title]{a @class{gtk:widget} title widget of the header bar}
   @begin{short}
@@ -300,8 +301,8 @@ headerbar
 
 (defun header-bar-new ()
  #+liber-documentation
- "@version{2023-8-9}
-  @return{A new @class{gtk:header-bar} widget.}
+ "@version{2024-4-16}
+  @return{The new @class{gtk:header-bar} widget.}
   @short{Creates a new header bar.}
   @see-class{gtk:header-bar}"
   (make-instance 'header-bar))
@@ -314,7 +315,7 @@ headerbar
 
 (cffi:defcfun ("gtk_header_bar_pack_start" header-bar-pack-start) :void
  #+liber-documentation
- "@version{2023-9-30}
+ "@version{2024-4-16}
   @argument[header]{a @class{gtk:header-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget to be added to the
     header bar}
@@ -322,7 +323,7 @@ headerbar
     Adds a child widget to the header bar, packed with reference to the start
     of the header bar.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin{examples}
     Code fragment for a header bar with two buttons. The cancel button is
     placed on the left side and the done button on the right side of the header
     bar.
@@ -343,7 +344,7 @@ headerbar
   (gtk:header-bar-pack-end header button)
   ... )
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gtk:header-bar}
   @see-class{gtk:widget}
   @see-function{gtk:header-bar-pack-end}"

@@ -8,36 +8,36 @@
 ;;;     GtkHeaderBar
 
 (test gtk-header-bar-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkHeaderBar"))
   ;; Check the registered name
   (is (eq 'gtk:header-bar
           (glib:symbol-for-gtype "GtkHeaderBar")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkHeaderBar")
           (g:gtype (cffi:foreign-funcall "gtk_header_bar_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkHeaderBar")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkHeaderBar")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkHeaderBar")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("decoration-layout" "show-title-buttons" "title-widget")
              (list-properties "GtkHeaderBar")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkHeaderBar")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "headerbar"
                (gtk:widget-class-css-name "GtkHeaderBar")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:header-bar))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkHeaderBar")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkHeaderBar" GTK-HEADER-BAR
@@ -57,10 +57,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     decoration-layout
-;;;     show-title-buttons
-;;;     title-widget
-
 (test gtk-header-bar-properties
   (let ((headerbar (make-instance 'gtk:header-bar)))
     (is-false (gtk:header-bar-decoration-layout headerbar))
@@ -78,4 +74,4 @@
 ;;;     gtk_header_bar_pack_end
 ;;;     gtk_header_bar_remove
 
-;;; --- 2023-8-9 ---------------------------------------------------------------
+;;; 2024-4-16

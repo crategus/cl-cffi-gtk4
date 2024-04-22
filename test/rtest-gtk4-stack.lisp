@@ -8,16 +8,16 @@
 ;;;     GtkStackTransitionType
 
 (test gtk-stack-transition-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkStackTransitionType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkStackTransitionType")
           (g:gtype (cffi:foreign-funcall "gtk_stack_transition_type_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:stack-transition-type
           (glib:symbol-for-gtype "GtkStackTransitionType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_STACK_TRANSITION_TYPE_NONE"
                "GTK_STACK_TRANSITION_TYPE_CROSSFADE"
                "GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT"
@@ -42,10 +42,10 @@
                "GTK_STACK_TRANSITION_TYPE_ROTATE_RIGHT"
                "GTK_STACK_TRANSITION_TYPE_ROTATE_LEFT_RIGHT")
              (list-enum-item-name "GtkStackTransitionType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22)
              (list-enum-item-value "GtkStackTransitionType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("none" "crossfade" "slide-right" "slide-left" "slide-up"
                "slide-down" "slide-left-right" "slide-up-down" "over-up"
                "over-down" "over-left" "over-right" "under-up" "under-down"
@@ -53,7 +53,7 @@
                "over-left-right" "over-right-left" "rotate-left" "rotate-right"
                "rotate-left-right")
              (list-enum-item-nick "GtkStackTransitionType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkStackTransitionType"
                                      GTK-STACK-TRANSITION-TYPE
                                      (:EXPORT T
@@ -87,31 +87,31 @@
 ;;;     GtkStackPage
 
 (test gtk-stack-page-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkStackPage"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:stack-page
           (glib:symbol-for-gtype "GtkStackPage")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkStackPage")
           (g:gtype (cffi:foreign-funcall "gtk_stack_page_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkStackPage")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkStackPage")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible")
              (list-interfaces "GtkStackPage")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("accessible-role" "child" "icon-name" "name" "needs-attention"
                "title" "use-underline" "visible")
              (list-properties "GtkStackPage")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkStackPage")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStackPage" GTK-STACK-PAGE
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                                 ("GtkAccessible") :TYPE-INITIALIZER
@@ -133,14 +133,6 @@
              (gobject:get-g-type-definition "GtkStackPage"))))
 
 ;;; --- Properties (GtkStackPage) ----------------------------------------------
-
-;;;     child
-;;;     icon-name
-;;;     name
-;;;     needs-attention
-;;;     title
-;;;     use-underline
-;;;     visible
 
 (test gtk-stack-page-properties
   (let ((stack (gtk:stack-new))
@@ -164,38 +156,38 @@
 ;;;     GtkStack
 
 (test gtk-stack-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkStack"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:stack
           (glib:symbol-for-gtype "GtkStack")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkStack")
           (g:gtype (cffi:foreign-funcall "gtk_stack_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkStack")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkStack")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkStack")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("hhomogeneous" "interpolate-size" "pages" "transition-duration"
                "transition-running" "transition-type" "vhomogeneous"
                "visible-child" "visible-child-name")
              (list-properties "GtkStack")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkStack")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "stack"
                (gtk:widget-class-css-name "GtkStack")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:stack))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkStack")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStack" GTK-STACK
@@ -229,16 +221,6 @@
 
 ;;; --- Properties (GtkStack) --------------------------------------------------
 
-;;;     hhomogeneous
-;;;     interpolate-size
-;;;     pages
-;;;     transition-duration
-;;;     transition-running
-;;;     transition-type
-;;;     vhomogeneous
-;;;     visible-child
-;;;     visible-child-name
-
 (test gtk-stack-properties
   (let ((stack (make-instance 'gtk:stack)))
     (is-true (gtk:stack-hhomogeneous stack))
@@ -267,4 +249,4 @@
 ;;;     gtk_stack_get_page
 ;;;     gtk_stack_set_visible_child_full
 
-;;; --- 2023-8-8 ---------------------------------------------------------------
+;;; 2024-4-14

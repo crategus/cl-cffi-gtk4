@@ -228,9 +228,9 @@
 (setf (liber:alias-for-function 'grid-baseline-row)
       "Accessor"
       (documentation 'grid-baseline-row 'function)
- "@version{2024-4-12}
-  @syntax[]{(gtk:grid-baseline-row object) => row}
-  @syntax[]{(setf (gtk:grid-baseline-row object) row)}
+ "@version{2024-4-22}
+  @syntax{(gtk:grid-baseline-row object) => row}
+  @syntax{(setf (gtk:grid-baseline-row object) row)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[row]{an integer with the row index}
   @begin{short}
@@ -257,9 +257,9 @@
 (setf (liber:alias-for-function 'grid-column-homogeneous)
       "Accessor"
       (documentation 'grid-column-homogeneous 'function)
- "@version{2024-4-12}
-  @syntax[]{(gtk:grid-column-homogeneous object) => homogenous}
-  @syntax[]{(setf (gtk:grid-column-homogeneous object) homogenous)}
+ "@version{2024-4-22}
+  @syntax{(gtk:grid-column-homogeneous object) => homogenous}
+  @syntax{(setf (gtk:grid-column-homogeneous object) homogenous)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[homogeneous]{@em{true} to make columns homogeneous}
   @begin{short}
@@ -285,9 +285,9 @@
 (setf (liber:alias-for-function 'grid-column-spacing)
       "Accessor"
       (documentation 'grid-column-spacing 'function)
- "@version{2024-4-12}
-  @syntax[]{(gtk:grid-column-spacing object) => spacing}
-  @syntax[]{(setf (gtk:grid-column-spacing object) spacing)}
+ "@version{2024-4-22}
+  @syntax{(gtk:grid-column-spacing object) => spacing}
+  @syntax{(setf (gtk:grid-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[spacing]{an integer with the amount of space to insert between
     columns}
@@ -314,9 +314,9 @@
 (setf (liber:alias-for-function 'grid-row-homogeneous)
       "Accessor"
       (documentation 'grid-row-homogeneous 'function)
- "@version{2024-4-12}
-  @syntax[]{(gtk:grid-row-homogeneous object) => homogeneous}
-  @syntax[]{(setf (gtk:grid-row-homogeneous object) homogeneous)}
+ "@version{2024-4-22}
+  @syntax{(gtk:grid-row-homogeneous object) => homogeneous}
+  @syntax{(setf (gtk:grid-row-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[homogeneous]{@em{true} to make rows homogeneous}
   @begin{short}
@@ -342,9 +342,9 @@
 (setf (liber:alias-for-function 'grid-row-spacing)
       "Accessor"
       (documentation 'grid-row-spacing 'function)
- "@version{2024-4-12}
-  @syntax[]{(gtk:grid-row-spacing object) => spacing}
-  @syntax[]{(setf (gtk:grid-row-spacing object) spacing)}
+ "@version{2024-4-22}
+  @syntax{(gtk:grid-row-spacing object) => spacing}
+  @syntax{(setf (gtk:grid-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:grid} widget}
   @argument[spacing]{an integer with the amount of space to insert between rows}
   @begin{short}
@@ -358,7 +358,7 @@
   @see-function{gtk:grid-column-spacing}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_new ()
+;;; gtk_grid_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline grid-new))
@@ -374,7 +374,7 @@
 (export 'grid-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_attach ()
+;;; gtk_grid_attach
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_attach" grid-attach) :void
@@ -409,12 +409,12 @@
 (export 'grid-attach)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_attach_next_to ()
+;;; gtk_grid_attach_next_to
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_attach_next_to" grid-attach-next-to) :void
  #+liber-documentation
- "@version{#2022-1-15}
+ "@version{#2024-4-22}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[sibling]{a @class{gtk:widget} sibling widget of the grid that
@@ -431,8 +431,8 @@
   @end{short}
   The child widget is placed next to @arg{sibling}, on the side determined
   by @arg{side}. When the @arg{sibling} argument is @code{nil}, the child widget
-  is placed in row, for left or right placement, or column 0, for top or bottom
-  placement, at the end indicated by @arg{side}.
+  is placed in row 0, for left or right placement, or column 0, for top or
+  bottom placement, at the end indicated by @arg{side}.
   @see-class{gtk:grid}
   @see-class{gtk:widget}
   @see-symbol{gtk:position-type}
@@ -447,7 +447,7 @@
 (export 'grid-attach-next-to)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_remove ()
+;;; gtk_grid_remove
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_remove" grid-remove) :void
@@ -470,7 +470,7 @@
 (export 'grid-remove)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_get_child_at ()
+;;; gtk_grid_get_child_at
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_get_child_at" grid-child-at) (g:object widget)
@@ -494,7 +494,7 @@
 (export 'grid-child-at)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_query_child ()
+;;; gtk_grid_query_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_query_child" %grid-query-child) :void
@@ -537,7 +537,7 @@
 (export 'grid-query-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_insert_row ()
+;;; gtk_grid_insert_row
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_insert_row" grid-insert-row) :void
@@ -559,7 +559,7 @@
 (export 'grid-insert-row)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_insert_column ()
+;;; gtk_grid_insert_column
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_insert_column" grid-insert-column) :void
@@ -582,7 +582,7 @@
 (export 'grid-insert-column)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_remove_row ()
+;;; gtk_grid_remove_row
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_remove_row" grid-remove-row) :void
@@ -605,7 +605,7 @@
 (export 'grid-remove-row)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_remove_column ()
+;;; gtk_grid_remove_column
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_remove_column" grid-remove-column) :void
@@ -628,7 +628,7 @@
 (export 'grid-remove-column)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_insert_next_to ()
+;;; gtk_grid_insert_next_to
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_grid_insert_next_to" grid-insert-next-to) :void
@@ -657,8 +657,8 @@
 (export 'grid-insert-next-to)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_get_row_baseline_position ()
-;;; gtk_grid_set_row_baseline_position ()
+;;; gtk_grid_get_row_baseline_position
+;;; gtk_grid_set_row_baseline_position
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf grid-row-baseline-position) (position grid row)
@@ -673,8 +673,8 @@
                grid-row-baseline-position) position-type
  #+liber-documentation
  "@version{#2022-1-15}
-  @syntax[]{(gtk:grid-row-baseline-position grid row) => position}
-  @syntax[]{(setf (gtk:grid-row-baseline-position grid row) position)}
+  @syntax{(gtk:grid-row-baseline-position grid row) => position}
+  @syntax{(setf (gtk:grid-row-baseline-position grid row) position)}
   @argument[grid]{a @class{gtk:grid} widget}
   @argument[row]{an integer with a row index}
   @argument[position]{a value of the @symbol{gtk:positon-type} enumeration}

@@ -8,39 +8,39 @@
 ;;;     GtkStackSwitcher
 
 (test gtk-stack-switcher-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkStackSwitcher"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:stack-switcher
           (glib:symbol-for-gtype "GtkStackSwitcher")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkStackSwitcher")
           (g:gtype (cffi:foreign-funcall "gtk_stack_switcher_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkStackSwitcher")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkStackSwitcher")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
              (list-interfaces "GtkStackSwitcher")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("orientation" "stack")
              (list-properties "GtkStackSwitcher")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkStackSwitcher")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "stackswitcher"
                (gtk:widget-class-css-name "GtkStackSwitcher")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("linked")
              (gtk:widget-css-classes (make-instance 'gtk:stack-switcher))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :tab-list (gtk:widget-class-accessible-role "GtkStackSwitcher")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStackSwitcher"
                                              GTK-STACK-SWITCHER
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -54,11 +54,15 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     stack
-
-(test gtk-stack-switcher-stack
+(test gtk-stack-switcher-stack.1
   (let ((switcher (make-instance 'gtk:stack-switcher)))
     (is-false (gtk:stack-switcher-stack switcher))))
+
+(test gtk-stack-switch-stack.2
+  (let ((switcher (make-instance 'gtk:stack-switcher))
+        (stack (make-instance 'gtk:stack)))
+    (is (eq stack (setf (gtk:stack-switcher-stack switcher) stack)))
+    (is (eq stack (gtk:stack-switcher-stack switcher)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -67,4 +71,4 @@
 (test gtk-stack-switcher-new
   (is (typep (gtk:stack-switcher-new) 'gtk:stack-switcher)))
 
-;;; --- 2023-8-9 ---------------------------------------------------------------
+;;; 2024-4-15

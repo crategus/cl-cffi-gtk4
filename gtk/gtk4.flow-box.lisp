@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -176,7 +176,7 @@
 
 #+liber-documentation
 (setf (documentation 'flow-box-child 'type)
- "@version{2024-4-14}
+ "@version{2024-4-15}
   @begin{short}
     The @class{gtk:flow-box-child} widget is the kind of widget that can be
     added to a @class{gtk:flow-box} widget.
@@ -199,6 +199,8 @@ lambda (child)    :action
           is emitted.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:flow-box-child-new}
+  @see-slot{gtk:flow-box-child-child}
   @see-class{gtk:flow-box}")
 
 ;;; ----------------------------------------------------------------------------
@@ -217,8 +219,8 @@ lambda (child)    :action
       "Accessor"
       (documentation 'flow-box-child-child 'function)
  "@version{2024-4-14}
-  @syntax[]{(gtk:flow-box-child-child object) => child}
-  @syntax[]{(setf (gtk:flow-box-child-child object) child)}
+  @syntax{(gtk:flow-box-child-child object) => child}
+  @syntax{(setf (gtk:flow-box-child-child object) child)}
   @argument[object]{a @class{gtk:flow-box-child} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -529,8 +531,8 @@ lambda (flowbox)    :action
       "Accessor"
       (documentation 'flow-box-accept-unpaired-release 'function)
  "@version{2024-4-14}
-  @syntax[]{(gtk:flow-box-accept-unpaired-release object) => setting}
-  @syntax[]{(setf (gtk:flow-box-accept-unpaired-release object) setting)}
+  @syntax{(gtk:flow-box-accept-unpaired-release object) => setting}
+  @syntax{(setf (gtk:flow-box-accept-unpaired-release object) setting)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[setting]{a boolean whether to accept an unpaired release event}
   @begin{short}
@@ -555,8 +557,8 @@ lambda (flowbox)    :action
       "Accessor"
       (documentation 'flow-box-activate-on-single-click 'function)
  "@version{2024-4-14}
-  @syntax[]{(gtk:flow-box-activate-on-single-click object) => setting}
-  @syntax[]{(setf (gtk:flow-box-activate-on-single-click object) setting)}
+  @syntax{(gtk:flow-box-activate-on-single-click object) => setting}
+  @syntax{(setf (gtk:flow-box-activate-on-single-click object) setting)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[setting]{@em{false} to emit the @code{\"child-activated\"} signal
     on a single click}
@@ -583,8 +585,8 @@ lambda (flowbox)    :action
       "Accessor"
       (documentation 'flow-box-column-spacing 'function)
  "@version{2024-4-14}
-  @syntax[]{(gtk:flow-box-column-spacing object) => spacing}
-  @syntax[]{(setf (gtk:flow-box-column-spacing object) spacing)}
+  @syntax{(gtk:flow-box-column-spacing object) => spacing}
+  @syntax{(setf (gtk:flow-box-column-spacing object) spacing)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[spacing]{an unsigned integer with the spacing to use.}
   @begin{short}
@@ -610,8 +612,8 @@ lambda (flowbox)    :action
       "Accessor"
       (documentation 'flow-box-homogeneous 'function)
  "@version{2024-4-14}
-  @syntax[]{(gtk:flow-box-homogeneous object) => homogeneous}
-  @syntax[]{(setf (gtk:flow-box-homogeneous object) homogeneous)}
+  @syntax{(gtk:flow-box-homogeneous object) => homogeneous}
+  @syntax{(setf (gtk:flow-box-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[homogeneous]{@em{true} to create equal allotments, @em{false} for
     variable allotments}
@@ -640,8 +642,8 @@ lambda (flowbox)    :action
       "Accessor"
       (documentation 'flow-box-max-children-per-line 'function)
  "@version{2024-4-14}
-  @syntax[]{(gtk:flow-box-max-children-per-line object) => n-children}
-  @syntax[]{(setf (gtk:flow-box-max-children-per-line object) n-children)}
+  @syntax{(gtk:flow-box-max-children-per-line object) => n-children}
+  @syntax{(setf (gtk:flow-box-max-children-per-line object) n-children)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[n-children]{an unsigned integer with the maximum number of children
     per line}
@@ -677,8 +679,8 @@ lambda (flowbox)    :action
       "Accessor"
       (documentation 'flow-box-min-children-per-line 'function)
  "@version{2024-4-14}
-  @syntax[]{(gtk:flow-box-min-children-per-line object) => n-children}
-  @syntax[]{(setf (gtk:flow-box-min-children-per-line object) n-children)}
+  @syntax{(gtk:flow-box-min-children-per-line object) => n-children}
+  @syntax{(setf (gtk:flow-box-min-children-per-line object) n-children)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[n-children]{an unsigned integer with the minimum number of children
     per line}
@@ -706,8 +708,8 @@ lambda (flowbox)    :action
       "Accessor"
       (documentation 'flow-box-row-spacing 'function)
  "@version{2024-4-14}
-  @syntax[]{(gtk:flow-box-row-spacing object) => spacing}
-  @syntax[]{(setf (gtk:flow-box-row-spacing object) spacing)}
+  @syntax{(gtk:flow-box-row-spacing object) => spacing}
+  @syntax{(setf (gtk:flow-box-row-spacing object) spacing)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[spacing]{an unsigned integer with the spacing to use}
   @begin{short}
@@ -720,7 +722,7 @@ lambda (flowbox)    :action
   @see-class{gtk:flow-box}
   @see-function{gtk:flow-box-column-spacing}")
 
-;;; --- flow-box-selection-mode ------------------------------------------------
+;;; --- gtk:flow-box-selection-mode --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selection-mode" 'flow-box) t)
@@ -734,8 +736,8 @@ lambda (flowbox)    :action
       "Accessor"
       (documentation 'flow-box-selection-mode 'function)
  "@version{2024-4-14}
-  @syntax[]{(gtk:flow-box-selection-mode object) => mode}
-  @syntax[]{(setf (gtk:flow-box-selection-mode object) mode)}
+  @syntax{(gtk:flow-box-selection-mode object) => mode}
+  @syntax{(setf (gtk:flow-box-selection-mode object) mode)}
   @argument[object]{a @class{gtk:flow-box} widget}
   @argument[mode]{a value of the @symbol{gtk:selection-mode} enumeration}
   @begin{short}
@@ -1192,9 +1194,9 @@ lambda (flowbox)    :action
   For instance, to implement a search function that only shows the children
   matching the search terms.
 
-  The @arg{func} function will be called for each child widget after the call,
-  and it will continue to be called each time a child changes, via the
-  @fun{gtk:flow-box-child-changed} function or when the
+  The @arg{func} callback function will be called for each child widget after
+  the call, and it will continue to be called each time a child changes, via
+  the @fun{gtk:flow-box-child-changed} function or when the
   @fun{gtk:flow-box-invalidate-filter} function is called.
 
   Note that using a filter function is incompatible with using a model. See
@@ -1276,7 +1278,7 @@ lambda (flowbox)    :action
 
 (defun flow-box-set-sort-func (flowbox func)
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{#2024-4-15}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[func]{a @symbol{gtk:flow-box-sort-func} callback function for the
     sort function}
@@ -1285,8 +1287,8 @@ lambda (flowbox)    :action
     children of the flow box, based on the contents of the children.
   @end{short}
 
-  The @arg{func} function will be called for each child after the call,
-  and will continue to be called each time a child changes, via the
+  The @arg{func} callback function will be called for each child after the
+  call, and will continue to be called each time a child changes, via the
   @fun{gtk:flow-box-child-changed} function, and when the
   @fun{gtk:flow-box-invalidate-sort} function is called.
 

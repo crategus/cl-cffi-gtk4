@@ -173,9 +173,9 @@
 (setf (liber:alias-for-function 'box-baseline-child)
       "Accessor"
       (documentation 'box-baseline-child 'function)
- "@version{2024-4-7}
-  @syntax[]{(gtk:box-baseline-child object) => child}
-  @syntax[]{(setf (gtk:box-baseline-child object) child)}
+ "@version{2024-4-22}
+  @syntax{(gtk:box-baseline-child object) => child}
+  @syntax{(setf (gtk:box-baseline-child object) child)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[child]{an integer with the baseline child widget}
   @begin{short}
@@ -202,9 +202,9 @@
 (setf (liber:alias-for-function 'box-baseline-position)
       "Accessor"
       (documentation 'box-baseline-position 'function)
- "@version{2024-4-7}
-  @syntax[]{(gtk:box-baseline-position object) => position}
-  @syntax[]{(setf (gtk:box-baseline-position object) position)}
+ "@version{2024-4-22}
+  @syntax{(gtk:box-baseline-position object) => position}
+  @syntax{(setf (gtk:box-baseline-position object) position)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[position]{a value of the @symbol{gtk:baseline-position} enumeration}
   @begin{short}
@@ -233,9 +233,9 @@
 (setf (liber:alias-for-function 'box-homogeneous)
       "Accessor"
       (documentation 'box-homogeneous 'function)
- "@version{2024-4-7}
-  @syntax[]{(gtk:box-homogeneous object) => homogeneous}
-  @syntax[]{(setf (gtk:box-homogeneous object) homogeneous)}
+ "@version{2024-4-22}
+  @syntax{(gtk:box-homogeneous object) => homogeneous}
+  @syntax{(setf (gtk:box-homogeneous object) homogeneous)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[homogeneous]{@em{true} to create equal allotments, @em{false}
     for variable allotments}
@@ -261,9 +261,9 @@
 (setf (liber:alias-for-function 'box-spacing)
       "Accessor"
       (documentation 'box-spacing 'function)
- "@version{2024-4-7}
-  @syntax[]{(gtk:box-spacing object) => spacing}
-  @syntax[]{(setf (gtk:box-spacing object) spacing)}
+ "@version{2024-4-22}
+  @syntax{(gtk:box-spacing object) => spacing}
+  @syntax{(setf (gtk:box-spacing object) spacing)}
   @argument[object]{a @class{gtk:box} widget}
   @argument[spacing]{an integer with the number of pixels to put between
     children}

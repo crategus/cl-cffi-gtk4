@@ -228,8 +228,8 @@ lambda (row)    :action
       "Accessor"
       (documentation 'list-box-row-activatable 'function)
  "@version{2024-4-13}
-  @syntax[]{(gtk:list-box-row-activatable object) => activatable}
-  @syntax[]{(setf (gtk:list-box-row-activatable object) activatable)}
+  @syntax{(gtk:list-box-row-activatable object) => activatable}
+  @syntax{(setf (gtk:list-box-row-activatable object) activatable)}
   @argument[object]{a @class{gtk:list-box-row} widget}
   @argument[activatable]{@em{true} to mark the row as activatable}
   @begin{short}
@@ -253,8 +253,8 @@ lambda (row)    :action
       "Accessor"
       (documentation 'list-box-row-child 'function)
  "@version{2024-4-13}
-  @syntax[]{(gtk:list-box-row-child object) => child}
-  @syntax[]{(setf (gtk:list-box-row-child object) child)}
+  @syntax{(gtk:list-box-row-child object) => child}
+  @syntax{(setf (gtk:list-box-row-child object) child)}
   @argument[object]{a @class{gtk:list-box-row} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -279,8 +279,8 @@ lambda (row)    :action
       "Accessor"
       (documentation 'list-box-row-selectable 'function)
  "@version{2024-4-13}
-  @syntax[]{(gtk:list-box-row-selectable object) => selectable}
-  @syntax[]{(setf (gtk:list-box-row-selectable object) selectable)}
+  @syntax{(gtk:list-box-row-selectable object) => selectable}
+  @syntax{(setf (gtk:list-box-row-selectable object) selectable)}
   @argument[object]{a @class{gtk:list-box-row} widget}
   @argument[selectable]{@em{true} to mark the row as selectable}
   @begin{short}
@@ -376,9 +376,9 @@ lambda (row)    :action
 (cffi:defcfun ("gtk_list_box_row_get_header" list-box-row-header)
     (g:object widget)
  #+liber-documentation
- "@version{#2024-4-13}
-  @syntax[]{(gtk:list-box-row-header row) => header}
-  @syntax[]{(setf (gtk:list-box-row-header row) header)}
+ "@version{#2024-4-15}
+  @syntax{(gtk:list-box-row-header row) => header}
+  @syntax{(setf (gtk:list-box-row-header row) header)}
   @argument[row]{a @class{gtk:list-box-row} widget}
   @argument[header]{a @class{gtk:widget} object}
   @begin{short}
@@ -393,7 +393,6 @@ lambda (row)    :action
   only allowed to be called from a @symbol{gtk:list-box-update-header-func}
   callback function. It will replace any existing header in the row, and be
   shown in front of the row in the list box.
-  @see-class{gtk:list-box}
   @see-class{gtk:list-box-row}
   @see-class{gtk:widget}
   @see-symbol{gtk:list-box-update-header-func}"
@@ -407,9 +406,9 @@ lambda (row)    :action
 
 (cffi:defcfun ("gtk_list_box_row_get_index" list-box-row-index) :int
  #+liber-documentation
- "@version{#2024-4-13}
+ "@version{#2024-4-15}
   @argument[row]{a @class{gtk:list-box-row} widget}
-  @return{An integer with the index of the row in the list box, or -1 if the
+  @return{The integer with the index of the row in the list box, or -1 if the
     row is not in the list box.}
   @begin{short}
     Gets the current index of the row in its list box.
@@ -591,8 +590,8 @@ lambda (listbox)    :action
       "Accessor"
       (documentation 'list-box-accept-unpaired-release 'function)
  "@version{2024-4-12}
-  @syntax[]{(gtk:list-box-accept-unpaired-release object) => setting}
-  @syntax[]{(setf (gtk:list-box-accept-unpaired-release object) setting)}
+  @syntax{(gtk:list-box-accept-unpaired-release object) => setting}
+  @syntax{(setf (gtk:list-box-accept-unpaired-release object) setting)}
   @argument[object]{a @class{gtk:list-box} widget}
   @argument[setting]{a boolean whether to accept unpaired release}
   @begin{short}
@@ -616,8 +615,8 @@ lambda (listbox)    :action
       "Accessor"
       (documentation 'list-box-activate-on-single-click 'function)
  "@version{2024-4-12}
-  @syntax[]{(gtk:list-box-activate-on-single-click object) => setting}
-  @syntax[]{(setf (gtk:list-box-activate-on-single-click object) setting)}
+  @syntax{(gtk:list-box-activate-on-single-click object) => setting}
+  @syntax{(setf (gtk:list-box-activate-on-single-click object) setting)}
   @argument[object]{a @class{gtk:list-box} widget}
   @argument[setting]{a boolean whether to activate the row on a single click}
   @begin{short}
@@ -647,8 +646,8 @@ lambda (listbox)    :action
       "Accessor"
       (documentation 'list-box-selection-mode 'function)
  "@version{2024-4-12}
-  @syntax[]{(gtk:list-box-selection-mode object) => mode}
-  @syntax[]{(setf (gtk:list-box-selection-mode object) mode)}
+  @syntax{(gtk:list-box-selection-mode object) => mode}
+  @syntax{(setf (gtk:list-box-selection-mode object) mode)}
   @argument[object]{a @class{gtk:list-box} widget}
   @argument[mode]{a value of the @symbol{gtk:selection-mode} enumeration}
   @begin{short}
@@ -675,10 +674,10 @@ lambda (listbox)    :action
       "Accessor"
       (documentation 'list-box-show-separators 'function)
  "@version{2024-4-12}
-  @syntax[]{(gtk:list-box-show-separators object) => setting}
-  @syntax[]{(setf (gtk:list-box-show-separators object) setting)}
+  @syntax{(gtk:list-box-show-separators object) => setting}
+  @syntax{(setf (gtk:list-box-show-separators object) setting)}
   @argument[object]{a @class{gtk:list-box} widget}
-  @argument[setting]{a boolean whether to show separators between row}
+  @argument[setting]{a boolean whether to show separators between rows}
   @begin{short}
     Accessor of the @slot[gtk:list-box]{show-separators} slot of the
     @class{gtk:list-box} class.
@@ -1011,8 +1010,8 @@ lambda (listbox)    :action
     (g:object adjustment)
  #+liber-documentation
  "@version{#2024-4-13}
-  @syntax[]{(gtk:list-box-adjustment listbox) => adjustment}
-  @syntax[]{(setf (gtk:list-box-adjustment listbox) adjustment)}
+  @syntax{(gtk:list-box-adjustment listbox) => adjustment}
+  @syntax{(setf (gtk:list-box-adjustment listbox) adjustment)}
   @argument[listbox]{a @class{gtk:list-box} widget}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @begin{short}
@@ -1148,8 +1147,8 @@ lambda (listbox)    :action
   For instance, to implement a search function on a list that filters the
   original list to only show the matching rows.
 
-  The @arg{func} function will be called for each row after the call, and it
-  will continue to be called each time a row changes via the
+  The @arg{func} callback function will be called for each row after the call,
+  and it will continue to be called each time a row changes via the
   @fun{gtk:list-box-row-changed} function, or when the
   @fun{gtk:list-box-invalidate-filter} function is called.
 
@@ -1450,8 +1449,8 @@ lambda (listbox)    :action
 (setf (liber:alias-for-symbol 'list-box-create-widget-func)
       "Callback"
       (liber:symbol-documentation 'list-box-create-widget-func)
- "@version{#2024-4-13}
-  @syntax{lambda (item) => result}
+ "@version{#2024-4-15}
+  @syntax{lambda (object) => result}
   @argument[object]{a @class{g:object} object for the item from the model for
     which to create a widget for}
   @argument[result]{a @class{gtk:widget} object that represents @arg{item}}
