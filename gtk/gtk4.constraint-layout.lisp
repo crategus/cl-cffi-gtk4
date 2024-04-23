@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -70,7 +70,8 @@
 ;;; GtkConstraintLayoutChild
 ;;; ----------------------------------------------------------------------------
 
-(gobject:define-g-object-class "GtkConstraintLayoutChild" constraint-layout-child
+(gobject:define-g-object-class "GtkConstraintLayoutChild"
+                               constraint-layout-child
   (:superclass layout-child
    :export t
    :interfaces ()
@@ -79,7 +80,7 @@
 
 #+liber-documentation
 (setf (documentation 'constraint-layout-child 'type)
- "@version{#2023-4-20}
+ "@version{2024-4-23}
   @begin{short}
     The @class{gtk:constraint-layout-child} subclass for children in a
     @class{gtk:constraint-layout} object.
@@ -99,7 +100,7 @@
 
 #+liber-documentation
 (setf (documentation 'constraint-layout 'type)
- "@version{#2023-4-20}
+ "@version{2024-4-23}
   @begin{short}
     The @class{gtk:constraint-layout} object is a layout manager that uses
     relations between widget attributes, expressed via @class{gtk:constraint}
@@ -159,48 +160,52 @@
     The definition above will add two constraints to the
     @class{gtk:constraint-layout} object:
     @begin{itemize}
-      @item{a required constraint between the leading edge of \"button\" and
-        the leading edge of the widget using the constraint layout, plus 12
+      @item{a required constraint between the leading edge of @code{\"button\"}
+        and the leading edge of the widget using the constraint layout, plus 12
         pixels,}
-      @item{a strong, constant constraint making the width of \"button\"
+      @item{a strong, constant constraint making the width of @code{\"button\"}
         greater than, or equal to 250 pixels.}
     @end{itemize}
-    The \"target\" and \"target-attribute\" attributes are required.
+    The @code{\"target\"} and @code{\"target-attribute\"} attributes are
+    required.
 
-    The \"source\" and \"source-attribute\" attributes of the \"constraint\"
-    element are optional. If they are not specified, the constraint is assumed
-    to be a constant.
+    The @code{\"source\"} and @code{\"source-attribute\"} attributes of the
+    @code{\"constraint\"} element are optional. If they are not specified, the
+    constraint is assumed to be a constant.
 
-    The \"relation\" attribute is optional. If not specified, the constraint is
-    assumed to be an equality.
+    The @code{\"relation\"} attribute is optional. If not specified, the
+    constraint is assumed to be an equality.
 
-    The \"strength\" attribute is optional. If not specified, the constraint is
-    assumed to be required.
+    The @code{\"strength\"} attribute is optional. If not specified, the
+    constraint is assumed to be required.
 
-    The \"source\" and \"target\" attributes can be set to \"super\" to
-    indicate that the constraint target is the widget using the
-    @class{gtk:constraint-layout} object.
+    The @code{\"source\"} and @code{\"target\"} attributes can be set to
+    @code{\"super\"} to indicate that the constraint target is the widget using
+    the @class{gtk:constraint-layout} object.
 
-    There can be \"constant\" and \"multiplier\" attributes.
+    There can be @code{\"constant\"} and @code{\"multiplier\"} attributes.
 
-    Additionally, the \"constraints\" element can also contain a description of
-    the @class{gtk:constraint-guides} object used by the layout:
+    Additionally, the @code{\"constraints\"} element can also contain a
+    description of the @class{gtk:constraint-guide} object used by the layout:
     @begin{pre}
 <constraints>
   <guide min-width=\"100\" max-width=\"500\" name=\"hspace\"/>
   <guide min-height=\"64\" nat-height=\"128\" name=\"vspace\" strength=\"strong\"/>
 </constraints>
     @end{pre}
-    The \"guide\" element has the following optional attributes:
+    The @code{\"guide\"} element has the following optional attributes:
     @begin{itemize}
-      @item{\"min-width\", \"nat-width\", and \"max-width\", describe the
-        minimum, natural, and maximum width of the guide, respectively}
-      @item{\"min-height\", \"nat-height\", and \"max-height\", describe the
-        minimum, natural, and maximum height of the guide, respectively}
-      @item{\"strength\" describes the strength of the constraint on the
+      @item{@code{\"min-width\"}, @code{\"nat-width\"}, and
+        @code{\"max-width\"}, describe the minimum, natural, and maximum width
+        of the guide, respectively}
+      @item{@code{\"min-height\"}, @code{\"nat-height\"}, and
+       @code{\"max-height\"}, describe the minimum, natural, and maximum height
+       of the guide, respectively}
+      @item{@code{\"strength\"} describes the strength of the constraint on the
         natural size of the guide, if not specified, the constraint is assumed
         to have a medium strength}
-      @item{\"name\" describes a name for the guide, useful when debugging}
+      @item{@code{\"name\"} describes a name for the guide, useful when
+        debugging}
     @end{itemize}
   @end{dictionary}
   @begin[Using the Visual Format Language]{dictionary}
@@ -216,8 +221,9 @@
     @begin{pre}
 [button]-[textField]
     @end{pre}
-    Describes a constraint that binds the trailing edge of \"button\" to the
-    leading edge of \"textField\", leaving a default space between the two.
+    Describes a constraint that binds the trailing edge of @code{\"button\"\} to
+    the leading edge of @code{\"textField\"}, leaving a default space between
+    the two.
 
     Using VFL is also possible to specify predicates that describe constraints
     on attributes like width and height:
@@ -255,12 +261,12 @@ V:[button1(==button2)]
   @see-class{gtk:constraint-layout-child}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_layout_new ()
+;;; gtk_constraint_layout_new
 ;;; ----------------------------------------------------------------------------
 
 (defun constraint-layout-new ()
  #+liber-documentation
- "@version{#2023-4-20}
+ "@version{2023-4-23}
   @return{The newly created @class{gtk:constraint-layout} object.}
   @short{Creates a new @class{gtk:constraint-layout} layout manager.}
   @see-class{gtk:constraint-layout}"
@@ -269,13 +275,13 @@ V:[button1(==button2)]
 (export 'constraint-layout-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_layout_add_constraint ()
+;;; gtk_constraint_layout_add_constraint
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_constraint_layout_add_constraint"
                constraint-layout-add-constraint) :void
  #+liber-documentation
- "@version{#2023-4-20}
+ "@version{#2024-4-23}
   @argument[layout]{a @class{gtk:constraint-layout} object}
   @argument[constraint]{a @class{gtk:constraint} object}
   @begin{short}
@@ -294,57 +300,59 @@ V:[button1(==button2)]
   The layout acquires the ownership of constraint after calling this function.
   @see-class{gtk:constraint-layout}
   @see-class{gtk:constraint}
-  @see-class{gtk:constraint-guide}"
+  @see-class{gtk:constraint-guide}
+  @see-class{gtk:widget}
+  @see-function{gtk:constraint-source}
+  @see-function{gtk:constraint-target}"
   (layout (g:object constraint-layout))
   (constraint (g:object constraint)))
 
 (export 'constraint-layout-add-constraint)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_layout_remove_constraint ()
+;;; gtk_constraint_layout_remove_constraint
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_constraint_layout_remove_constraint"
                constraint-layout-remove-constraint) :void
  #+liber-documentation
- "@version{#2023-4-21}
+ "@version{#2024-4-23}
   @argument[layout]{a @class{gtk:constraint-layout} object}
   @argument[constraint]{a @class{gtk:constraint} object}
   @begin{short}
-    Removes constraint from the layout manager, so that it no longer influences
-    the layout.
+    Removes @arg{constraint} from the layout manager, so that it no longer
+    influences the layout.
   @end{short}
-  @see-class{gtk:constraint-layout}"
+  @see-class{gtk:constraint-layout}
+  @see-class{gtk:constraint}"
   (layout (g:object constraint-layout))
   (constraint (g:object constraint)))
 
 (export 'constraint-layout-remove-constraint)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_layout_remove_all_constraints ()
+;;; gtk_constraint_layout_remove_all_constraints
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_constraint_layout_remove_all_constraints"
                constraint-layout-remove-all-constraints) :void
  #+liber-documentation
- "@version{#2023-4-21}
+ "@version{#2024-4-23}
   @argument[layout]{a @class{gtk:constraint-layout} object}
-  @begin{short}
-    Removes all constraints from the layout manager.
-  @end{short}
+  @short{Removes all constraints from the layout manager.}
   @see-class{gtk:constraint-layout}"
   (layout (g:object constraint-layout)))
 
 (export 'constraint-layout-remove-all-constraints)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_layout_add_guide ()
+;;; gtk_constraint_layout_add_guide
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_constraint_layout_add_guide" constraint-layout-add-guide)
     :void
  #+liber-documentation
- "@version{#2023-4-21}
+ "@version{#2024-4-23}
   @argument[layout]{a @class{gtk:constraint-layout} object}
   @argument[guide]{a @class{gtk:constraint-guide} object}
   @begin{short}
@@ -354,27 +362,29 @@ V:[button1(==button2)]
   but it is not visible.
 
   The layout acquires the ownership of guide after calling this function.
-  @see-class{gtk:constraint-layout}"
+  @see-class{gtk:constraint-layout}
+  @see-class{gtk:constraint-guide}"
   (layout (g:object constraint-layout))
   (guide (g:object constraint-guide)))
 
 (export 'constraint-layout-add-guide)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_constraint_layout_remove_guide ()
+;;; gtk_constraint_layout_remove_guide
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_constraint_layout_remove_guide"
                constraint-layout-remove-guide) :void
  #+liber-documentation
- "@version{#2023-4-21}
+ "@version{#2024-4-23}
   @argument[layout]{a @class{gtk:constraint-layout} object}
   @argument[guide]{a @class{gtk:constraint-guide} object}
   @begin{short}
     Removes @arg{guide} from the layout manager, so that it no longer
     influences the layout.
   @end{short}
-  @see-class{gtk:constraint-layout}"
+  @see-class{gtk:constraint-layout}
+  @see-class{gtk:constraint-guide}"
   (layout (g:object constraint-layout))
   (guide (g:object constraint-guide)))
 

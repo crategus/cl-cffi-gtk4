@@ -12,26 +12,26 @@
 ;;;     GtkConstraintTarget
 
 (test gtk-constraint-target-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkConstraintTarget"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:constraint-target
           (glib:symbol-for-gtype "GtkConstraintTarget")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkConstraintTarget")
-          (g:gtype (cffi:foreign-funcall "gtk_constraint_target_get_type" 
+          (g:gtype (cffi:foreign-funcall "gtk_constraint_target_get_type"
                                          :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GObject")
              (list-interface-prerequisites "GtkConstraintTarget")))
-  ;; Check the interface properties
+  ;; Check interface properties
   (is (equal '()
              (list-interface-properties "GtkConstraintTarget")))
-  ;; Check the interface signals
+  ;; Check interface signals
   (is (equal '()
              (list-signals "GtkConstraintTarget")))
-  ;; Get the interface definition
-  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkConstraintTarget" 
+  ;; Get interface definition
+  (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkConstraintTarget"
                                           GTK-CONSTRAINT-TARGET
                             (:EXPORT T :TYPE-INITIALIZER
                              "gtk_constraint_target_get_type"))
@@ -40,31 +40,31 @@
 ;;;     GtkConstraint
 
 (test gtk-constraint-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkConstraint"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:constraint
           (glib:symbol-for-gtype "GtkConstraint")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkConstraint")
           (g:gtype (cffi:foreign-funcall "gtk_constraint_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkConstraint")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkConstraint")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkConstraint")))
-  ;; Check the properties
-  (is (equal '("constant" "multiplier" "relation" "source" "source-attribute" 
+  ;; Check properties
+  (is (equal '("constant" "multiplier" "relation" "source" "source-attribute"
                "strength" "target" "target-attribute")
              (list-properties "GtkConstraint")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkConstraint")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkConstraint" GTK-CONSTRAINT
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_constraint_get_type")
@@ -92,14 +92,16 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     constant
-;;;     multiplier
-;;;     relation
-;;;     source
-;;;     source-attribute
-;;;     strength
-;;;     target
-;;;     target-attribute
+(test gtk-constraint-properties
+  (let ((constraint (make-instance 'gtk:constraint)))
+    (is (= 0.0d0 (gtk:constraint-constant constraint)))
+    (is (= 1.0d0 (gtk:constraint-multiplier constraint)))
+    (is (eq :eq (gtk:constraint-relation constraint)))
+    (is-false (gtk:constraint-source constraint))
+    (is (eq :none (gtk:constraint-source-attribute constraint)))
+    (is (= 1001001000 (gtk:constraint-strength constraint)))
+    (is-false (gtk:constraint-target constraint))
+    (is (eq :none (gtk:constraint-target-attribute constraint)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -109,4 +111,4 @@
 ;;;     gtk_constraint_is_attached
 ;;;     gtk_constraint_is_constant
 
-;;; --- 2023-9-2 ---------------------------------------------------------------
+;;; 2024-4-23

@@ -8,31 +8,31 @@
 ;;;     GtkFixedLayoutChild
 
 (test gtk-fixed-layout-child-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFixedLayoutChild"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:fixed-layout-child
           (glib:symbol-for-gtype "GtkFixedLayoutChild")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFixedLayoutChild")
           (g:gtype (cffi:foreign-funcall "gtk_fixed_layout_child_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkLayoutChild")
           (g:type-parent "GtkFixedLayoutChild")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkFixedLayoutChild")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkFixedLayoutChild")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("transform")
              (list-properties "GtkFixedLayoutChild")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkFixedLayoutChild")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFixedLayoutChild" GTK-FIXED-LAYOUT-CHILD
                        (:SUPERCLASS GTK-LAYOUT-CHILD :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_fixed_layout_child_get_type")
@@ -42,7 +42,27 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     transform
+(test gtk-fixed-layout-child-transform
+  (let ((fixed (make-instance 'gtk:fixed))
+        (button (make-instance 'gtk:button))
+        layout childlayout)
+    ;; Put button in the fixed widget
+    (is-false (gtk:fixed-put fixed button 10 20))
+    ;; Get Layout Manager and Layout Manager for child widget
+    (is (typep (setf layout (gtk:widget-layout-manager fixed))
+               'gtk:layout-manager))
+    (is (typep (setf childlayout
+                    (gtk:layout-manager-layout-child layout button))
+               'gtk:fixed-layout-child))
+    (is (eq button (gtk:layout-child-child-widget childlayout)))
+    (is (eq layout (gtk:layout-child-layout-manager childlayout)))
+
+    (is (string= "translate(10, 20)"
+                 (gsk:transform-to-string
+                     (gtk:fixed-child-transform fixed button))))
+    ;; TODO: Should return the transform, but gives an critical error!?
+;    (is-false (gtk:fixed-layout-child-transform childlayout))
+))
 
 ;;;     GtkFixedLayout
 
@@ -80,5 +100,8 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_fixed_layout_new
+
+(test gtk-fixed-layout-new
+  (is (typep (gtk:fixed-layout-new) 'gtk:fixed-layout)))
 
 ;;; --- 2023-5-29 --------------------------------------------------------------

@@ -131,7 +131,7 @@ create_layout_child (GtkLayoutManager *manager,
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_layout_manager_measure" %layout-manager-measure) :void
-  (manager (g:object layout-manager))
+  (layout (g:object layout-manager))
   (widget (g:object widget))
   (orientation orientation)
   (size :int)
@@ -140,11 +140,11 @@ create_layout_child (GtkLayoutManager *manager,
   (minimum-baseline (:pointer :int))
   (natural-baseline (:pointer :int)))
 
-(defun layout-manager-measure (manager widget orientation size)
+(defun layout-manager-measure (layout widget orientation size)
  #+liber-documentation
  "@version{2024-4-12}
-  @argument[manager]{a @class{gtk:layout-manager} object}
-  @argument[widget]{a @class{gtk:widget} widget using @arg{manager}}
+  @argument[layout]{a @class{gtk:layout-manager} object}
+  @argument[widget]{a @class{gtk:widget} widget using @arg{layout}}
   @argument[orientation]{a @symbol{gtk:orientation} value to measure}
   @argument[size]{an integer with the size for the opposite of
   @arg{orientation}, for instance, if the orientation is @code{:horizontal},
@@ -163,7 +163,7 @@ create_layout_child (GtkLayoutManager *manager,
       natural size
   @end{return}
   @begin{short}
-    Measures the size of the widget using @arg{manager}, for the given
+    Measures the size of the widget using @arg{layout}, for the given
     orientation and size.
   @end{short}
   See the @class{gtk:widget} widgets geometry management section for more
@@ -175,7 +175,7 @@ create_layout_child (GtkLayoutManager *manager,
                               (natural :int)
                               (minimum-baseline :int)
                               (natural-baseline :int))
-    (%layout-manager-measure manager
+    (%layout-manager-measure layout
                              widget
                              orientation
                              size
@@ -196,9 +196,9 @@ create_layout_child (GtkLayoutManager *manager,
 
 (cffi:defcfun ("gtk_layout_manager_allocate" layout-manager-allocate) :void
  #+liber-documentation
- "@version{2024-4-12}
-  @argument[manager]{a @class{gtk:layout-manager} object}
-  @argument[widget]{a @class{gtk:widget} widget using @arg{manager}}
+ "@version{2024-4-19}
+  @argument[layout]{a @class{gtk:layout-manager} object}
+  @argument[widget]{a @class{gtk:widget} widget using @arg{layout}}
   @argument[width]{an integer with the new width of the widget}
   @argument[height]{an integer with the new height of the widget}
   @argument[baseline]{an integer with the baseline position of the widget,
@@ -206,10 +206,11 @@ create_layout_child (GtkLayoutManager *manager,
   @begin{short}
     This function assigns the given @arg{width}, @arg{height}, and
     @arg{baseline} to a widget, and computes the position and sizes of the
-    children of the widget using the layout management policy of @arg{manager}.
+    children of the widget using the layout management policy of @arg{layout}.
   @end{short}
-  @see-class{gtk:layout-manager}"
-  (manager (g:object layout-manager))
+  @see-class{gtk:layout-manager}
+  @see-class{gtk:widget}"
+  (layout (g:object layout-manager))
   (widget (g:object widget))
   (width :int)
   (height :int)
@@ -225,14 +226,14 @@ create_layout_child (GtkLayoutManager *manager,
                layout-manager-request-mode) size-request-mode
  #+liber-documentation
  "@version{2024-4-12}
-  @argument[manager]{a @class{gtk:layout-manager} object}
+  @argument[layout]{a @class{gtk:layout-manager} object}
   @return{The @symbol{gtk:size-request-mode} value.}
   @begin{short}
-    Retrieves the request mode of @arg{manager}.
+    Retrieves the request mode of @arg{layout}.
   @end{short}
   @see-class{gtk:layout-manager}
   @see-symbol{gtk:size-request-mode}"
-  (manager (g:object layout-manager)))
+  (layout (g:object layout-manager)))
 
 (export 'layout-manager-request-mode)
 
@@ -244,14 +245,14 @@ create_layout_child (GtkLayoutManager *manager,
     (g:object widget)
  #+liber-documentation
  "@version{2024-4-12}
-  @argument[manager]{a @class{gtk:layout-manager} object}
+  @argument[layout]{a @class{gtk:layout-manager} object}
   @return{The @class{gtk:widget} widget.}
   @begin{short}
-    Retrieves the widget using the given @arg{manager}.
+    Retrieves the widget using the given @arg{layout}.
   @end{short}
   @see-class{gtk:layout-manager}
   @see-class{gtk:widget}"
-  (manager (g:object layout-manager)))
+  (layout (g:object layout-manager)))
 
 (export 'layout-manager-widget)
 
@@ -262,22 +263,23 @@ create_layout_child (GtkLayoutManager *manager,
 (cffi:defcfun ("gtk_layout_manager_get_layout_child"
                layout-manager-layout-child) (g:object layout-child)
  #+liber-documentation
- "@version{2024-4-12}
-  @argument[manager]{a @class{gtk:layout-manager} object}
+ "@version{2024-4-19}
+  @argument[layout]{a @class{gtk:layout-manager} object}
   @argument[child]{a @class{gtk:widget} child widget}
   @return{The @class{gtk:layout-child} object.}
   @begin{short}
     Retrieves a @class{gtk:layout-child} instance for the
     @class{gtk:layout-manager} object, creating one if necessary.
   @end{short}
-  The child widget must be a child of the widget using @arg{manager}.
+  The child widget must be a child of the widget using @arg{layout}.
 
   The @class{gtk:layout-child} object is owned by the @class{gtk:layout-manager}
   object, and is guaranteed to exist as long @arg{child} is a child of the
-  @class{gtk:widget} object using the given @arg{manager}.
+  @class{gtk:widget} object using the given @arg{layout}.
   @see-class{gtk:layout-manager}
-  @see-class{gtk:layout-child}"
-  (manager (g:object layout-manager))
+  @see-class{gtk:layout-child}
+  @see-class{gtk:widget}"
+  (layout (g:object layout-manager))
   (child (g:object widget)))
 
 (export 'layout-manager-layout-child)
@@ -290,16 +292,16 @@ create_layout_child (GtkLayoutManager *manager,
                layout-manager-layout-changed) :void
  #+liber-documentation
  "@version{#2024-4-12}
-  @argument[manager]{a @class{gtk:layout-manager} object}
+  @argument[layout]{a @class{gtk:layout-manager} object}
   @begin{short}
-    Queues a resize on the @class{gtk:widget} widget using @arg{manager}, if
+    Queues a resize on the @class{gtk:widget} widget using @arg{layout}, if
     any.
   @end{short}
   This function should be called by subclasses of the @class{gtk:layout-manager}
   object in response to changes to their layout management policies.
   @see-class{gtk:layout-manager}
   @see-class{gtk:widget}"
-  (manager (g:object layout-manager)))
+  (layout (g:object layout-manager)))
 
 (export 'layout-manager-layout-changed)
 

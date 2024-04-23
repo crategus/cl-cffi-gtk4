@@ -44,9 +44,19 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;; TODO: How do we get the gtk:layout-child object?!
+(test gtk-layout-child-properties
+  (let ((fixed (make-instance 'gtk:fixed))
+        (button (make-instance 'gtk:button))
+        manager childmanager)
+    ;; Put button in the fixed widget
+    (is-false (gtk:fixed-put fixed button 0 0))
+    ;; Get Layout Manager and Layout Manager for child widget
+    (is (typep (setf manager (gtk:widget-layout-manager fixed))
+               'gtk:layout-manager))
+    (is (typep (setf childmanager
+                    (gtk:layout-manager-layout-child manager button))
+               'gtk:layout-child))
+    (is (eq button (gtk:layout-child-child-widget childmanager)))
+    (is (eq manager (gtk:layout-child-layout-manager childmanager)))))
 
-;;;     child-widget
-;;;     layout-manager
-
-;;; 2024-4-12
+;;; 2024-4-19

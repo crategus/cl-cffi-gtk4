@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -65,7 +65,7 @@
 
 #+liber-documentation
 (setf (documentation 'custom-layout 'type)
- "@version{#2023-4-19}
+ "@version{2024-4-23}
   @begin{short}
     The @class{gtk:custom-layout} class is a convenience type meant to be used
     as a transition mechanism between @class{gtk:widget} widgets implementing a

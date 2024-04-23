@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -61,7 +61,7 @@
 
 #+liber-documentation
 (setf (documentation 'bin-layout 'type)
- "@version{#2023-4-17}
+ "@version{2024-4-19}
   @begin{short}
     The @class{gtk:bin-layout} class is a @class{gtk:layout-manager} subclass
     useful for create \"bins\" of widgets.
@@ -74,14 +74,14 @@
   @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_bin_layout_new ()
+;;; gtk_bin_layout_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline bin-layout-new))
 
 (defun bin-layout-new ()
  #+liber-documentation
- "@version{#2023-4-17}
+ "@version{2024-4-19}
   @return{The newly created @class{gtk:bin-layout} object.}
   @short{Creates a new @class{gtk:bin-layout} object.}
   @see-class{gtk:bin-layout}"

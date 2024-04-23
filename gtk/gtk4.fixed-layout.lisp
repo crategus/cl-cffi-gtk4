@@ -69,7 +69,7 @@
 
 #+liber-documentation
 (setf (documentation 'fixed-layout-child 'type)
- "@version{#2023-4-16}
+ "@version{2024-4-23}
   @begin{short}
     The @class{gtk:layout-child} subclass for children in a
     @class{gtk:fixed-layout} class.
@@ -93,9 +93,9 @@
 (setf (liber:alias-for-function 'fixed-layout-child-transform)
       "Accessor"
       (documentation 'fixed-layout-child-transform 'function)
- "@version{#2023-4-16}
-  @syntax[]{(gtk:fixed-layout-child-transform object) => transform}
-  @syntax[]{(setf (gtk:fixed-layout-child-transform object) transform)}
+ "@version{#2024-4-23}
+  @syntax{(gtk:fixed-layout-child-transform object) => transform}
+  @syntax{(setf (gtk:fixed-layout-child-transform object) transform)}
   @argument[object]{a @class{gtk:fixed-layout-child} widget}
   @argument[transform]{a @class{gsk:transform} instance}
   @begin{short}
@@ -121,7 +121,7 @@
 
 #+liber-documentation
 (setf (documentation 'fixed-layout 'type)
- "@version{#2023-4-16}
+ "@version{2024-4-23}
   @begin{short}
     The @class{gtk:fixed-layout} object is a layout manager which can place
     child widgets at fixed positions, and with fixed sizes.
@@ -161,18 +161,16 @@
   @see-class{gtk:fixed-layout-child}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_fixed_layout_new ()
+;;; gtk_fixed_layout_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline fixed-layout-new))
 
 (defun fixed-layout-new ()
  #+liber-documentation
- "@version{#2023-4-16}
-  @return{A newly created @class{gtk:fixed-layout} object.}
-  @begin{short}
-    Creates a new @class{gtk:fixed-layout} object.
-  @end{short}
+ "@version{2024-4-24}
+  @return{The newly created @class{gtk:fixed-layout} object.}
+  @short{Creates a new @class{gtk:fixed-layout} object.}
   @see-class{gtk:fixed-layout}"
   (make-instance 'fixed-layout))
 

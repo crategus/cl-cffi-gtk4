@@ -44,11 +44,21 @@
 
 ;;;     gtk_layout_manager_measure
 
+#-windows
 (test gtk-layout-manager-measure.1
   (let* ((button (make-instance 'gtk:button :label "Button"))
          (layout (gtk:widget-layout-manager button)))
     (is (typep layout 'gtk:bin-layout))
     (is (equal '(46 46 -1 -1)
+               (multiple-value-list
+                   (gtk:layout-manager-measure layout button :horizontal -1))))))
+
+#+windows
+(test gtk-layout-manager-measure.1
+  (let* ((button (make-instance 'gtk:button :label "Button"))
+         (layout (gtk:widget-layout-manager button)))
+    (is (typep layout 'gtk:bin-layout))
+    (is (equal '(36 36 -1 -1)
                (multiple-value-list
                    (gtk:layout-manager-measure layout button :horizontal -1))))))
 

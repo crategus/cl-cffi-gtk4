@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,18 +81,20 @@
 
 #+liber-documentation
 (setf (documentation 'overlay-layout-child 'type)
- "@version{#2023-4-19}
+ "@version{2024-4-23}
   @begin{short}
     The @class{gtk:overlay-layout-child} subclass for children in a
     @class{gtk:overlay-layout} object.
   @end{short}
+  @see-slot{gtk:overlay-layout-child-clip-overlay}
+  @see-slot{gtk:overlay-layout-child-measure}
   @see-class{gtk:overlay-layout}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- overlay-layout-child-clip-overlay --------------------------------------
+;;; --- gtk:overlay-layout-child-clip-overlay ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "clip-overlay"
@@ -106,22 +108,22 @@
 (setf (liber:alias-for-function 'overlay-layout-child-clip-overlay)
       "Accessor"
       (documentation 'overlay-layout-child-clip-overlay 'function)
- "@version{#2023-4-19}
-  @syntax[]{(gtk:overlay-layout-child-clip-overlay object) => clip}
-  @syntax[]{(setf (gtk:overlay-layout-child-clip-overlay object) clip)}
+ "@version{#2024-4-23}
+  @syntax{(gtk:overlay-layout-child-clip-overlay object) => clip}
+  @syntax{(setf (gtk:overlay-layout-child-clip-overlay object) clip)}
   @argument[object]{a @class{gtk:overlay-layout-child} object}
   @argument[clip]{a boolean whether the child widget is clipped}
   @begin{short}
     Accessor of the @slot[gtk:overlay-layout-child]{clip-overlay} slot of the
     @class{gtk:overlay-layout-child} class.
   @end{short}
-  The @fun{gtk:overlay-layout-child-clip-region} function retrieves whether the
-  child widget is clipped. The
+  The @fun{gtk:overlay-layout-child-clip-overlay} function retrieves whether
+  the child widget is clipped. The
   @setf{gtk:overlay-layout-child-clip-overlay} function sets whether to clip
   the child widget.
   @see-class{gtk:overlay-layout-child}")
 
-;;; --- overlay-layout-child-measure -------------------------------------------
+;;; --- gtk:overlay-layout-child-measure ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "measure"
@@ -135,9 +137,9 @@
 (setf (liber:alias-for-function 'overlay-layout-child-measure)
       "Accessor"
       (documentation 'overlay-layout-child-measure 'function)
- "@version{#2023-4-19}
-  @syntax[]{(gtk:overlay-layout-child-measure object) => measure}
-  @syntax[]{(setf (gtk:overlay-layout-child-measure object) measure)}
+ "@version{#2024-4-23}
+  @syntax{(gtk:overlay-layout-child-measure object) => measure}
+  @syntax{(setf (gtk:overlay-layout-child-measure object) measure)}
   @argument[object]{a @class{gtk:overlay-layout-child} object}
   @argument[measure]{a boolean whether to measure the child widget}
   @begin{short}
@@ -162,7 +164,7 @@
 
 #+liber-documentation
 (setf (documentation 'overlay-layout 'type)
- "@version{#2023-4-19}
+ "@version{2024-4-23}
   @begin{short}
     The @class{gtk:overlay-layout} object is the layout manager used by
     the @class{gtk:overlay} widget.
@@ -176,12 +178,12 @@
   @see-class{gtk:overlay}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_overlay_layout_new ()
+;;; gtk_overlay_layout_new
 ;;; ----------------------------------------------------------------------------
 
 (defun overlay-layout-new ()
  #+liber-documentation
- "@version{#2023-4-19}
+ "@version{2024-4-23}
   @return{The newly created @class{gtk:overlay-layout} object}
   @short{Creates a new overlay layout manager.}
   @see-class{gtk:overlay-layout}"

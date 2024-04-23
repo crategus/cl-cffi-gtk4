@@ -75,7 +75,7 @@
 
 #+liber-documentation
 (setf (documentation 'layout-child 'type)
- "@version{2024-4-12}
+ "@version{2024-4-19}
   @begin{short}
     The @class{gtk:layout-child} class is the base class for objects that are
     meant to hold layout properties.
@@ -106,8 +106,8 @@
 (setf (liber:alias-for-function 'layout-child-child-widget)
       "Accessor"
       (documentation 'layout-child-child-widget 'function)
- "@version{#2024-4-12}
-  @syntax[]{(gtk:layout-child-child-widget object) => child}
+ "@version{2024-4-19}
+  @syntax{(gtk:layout-child-child-widget object) => child}
   @argument[object]{a @class{gtk:layout-child} object}
   @argument[child]{a @class{gtk:widget} widget}
   @begin{short}
@@ -130,8 +130,8 @@
 (setf (liber:alias-for-function 'layout-child-layout-manager)
       "Accessor"
       (documentation 'layout-child-layout-manager 'function)
- "@version{#2024-4-12}
-  @syntax[]{(gtk:layout-child-layout-manager object) => manager}
+ "@version{2024-4-19}
+  @syntax{(gtk:layout-child-layout-manager object) => manager}
   @argument[object]{a @class{gtk:layout-child} object}
   @argument[manager]{a @class{gtk:layout-manager} object}
   @begin{short}
