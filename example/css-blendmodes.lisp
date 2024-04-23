@@ -2,7 +2,7 @@
 ;;;;
 ;;;; You can blend multiple backgrounds using the CSS blend modes available.
 ;;;;
-;;;; 2024-4-2
+;;;; 2024-4-19
 
 ;; FIXME: This example gives a warning. What is the problem?
 ;;        Gtk-CRITICAL **: 16:38:45.006:
@@ -32,7 +32,6 @@
          (builder (gtk:builder-new-from-file path1))
          (listbox (make-instance 'gtk:list-box))
          (window (gtk:builder-object builder "window"))
-         (display (gtk:widget-display window))
          (provider (make-instance 'gtk:css-provider))
          (path2 (sys-path "resource/gtk4-example.gresource" :gtk4-example))
          (resource (g:resource-load path2)))
@@ -41,11 +40,7 @@
     ;; Add the window to the application
     (setf (gtk:window-application window) application)
     ;; Setup the CSS provider for window
-    (gtk:style-context-add-provider-for-display display provider)
-    (g:signal-connect window "destroy"
-        (lambda (widget)
-          (let ((display (gtk:widget-display widget)))
-            (gtk:style-context-remove-provider-for-display display provider))))
+    (gtk:widget-add-provider window provider)
     ;; Signal handler for listbox
     (g:signal-connect listbox "row-activated"
         (lambda (listbox row)

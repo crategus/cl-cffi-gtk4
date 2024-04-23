@@ -2,7 +2,7 @@
 ;;;;
 ;;;; An accordion demo written using CSS transitions and multiple backgrounds.
 ;;;;
-;;;; 2024-4-3
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -23,14 +23,9 @@
          (provider (make-instance 'gtk:css-provider))
          (path (sys-path "resource/css-accordion.css")))
     ;; Load and install the CSS for the accordion
-    (gtk:widget-add-css-class frame "accordion")
     (gtk:css-provider-load-from-path provider path)
-    (gtk:style-context-add-provider-for-display display provider)
-    ;; Remove the provider when destroying the window
-    (g:signal-connect window "destroy"
-        (lambda (widget)
-          (let ((display (gtk:widget-display widget)))
-            (gtk:style-context-remove-provider-for-display display provider))))
+    (gtk:widget-add-css-class frame "accordion")
+    (gtk:widget-add-provider frame provider)
     ;; Add the buttons to the box
     (gtk:box-append box
                     (gtk:button-new-with-label "This"))

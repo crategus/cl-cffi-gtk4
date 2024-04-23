@@ -3,7 +3,7 @@
 ;;;; This demo is done in honour of the Pixbufs demo further down.
 ;;;; It is done exclusively with CSS as the background of the window.
 ;;;;
-;;;; 2024-4-3
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -20,16 +20,10 @@
                                 :default-height 420
                                 :default-width 420))
          (provider (make-instance 'gtk:css-provider))
-         (display (gdk:display-default))
          (csspath (sys-path "resource/css-pixbufs.css")))
-    (gtk:widget-add-css-class window "pixbufs")
-    ;; Load CSS from file into the provider
+    ;; Load CSS from file into the provider and apply it
     (gtk:css-provider-load-from-path provider csspath)
-    ;; Apply CSS to the widgets
-    (gtk:style-context-add-provider-for-display display provider)
-    ;; Install destroy callback to remove provider from window
-    (g:object-set-data-full window "provider"
-        (lambda ()
-          (gtk:style-context-remove-provider-for-display display provider)))
+    (gtk:widget-add-css-class window "pixbufs")
+    (gtk:widget-add-provider container provider)
     ;; Show the window
     (gtk:window-present window)))

@@ -3,7 +3,7 @@
 ;;;; GTK themes are written using CSS. Every widget is build of multiple items
 ;;;; that you can style very similarly to a regular website.
 ;;;;
-;;;; 2024-4-1
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -19,14 +19,9 @@
                                 :child scrolled
                                 :default-height 420
                                 :default-width 600))
-         (display (gtk:widget-display window))
          (provider (make-instance 'gtk:css-provider)))
     (gtk:widget-add-css-class scrolled "basics")
-    (gtk:style-context-add-provider-for-display display provider)
-    (g:signal-connect window "destroy"
-        (lambda (widget)
-          (let ((display (gtk:widget-display widget)))
-            (gtk:style-context-remove-provider-for-display display provider))))
+    (gtk:widget-add-provider window provider)
     (g:signal-connect text "changed"
         (lambda (buffer)
           (let ((start (gtk:text-buffer-start-iter buffer))

@@ -43,7 +43,6 @@
                                 :title "CSS Shadows"
                                 :default-height 420
                                 :default-width 600))
-         (display (gtk:widget-display window))
          (provider (make-instance 'gtk:css-provider)))
     (gtk:widget-add-css-class window "shadows")
     (g:signal-connect text "changed"
@@ -53,8 +52,7 @@
             (gtk:text-buffer-remove-all-tags buffer start end)
             (gtk:css-provider-load-from-string
                               provider
-                              (gtk:text-buffer-get-text buffer start end nil))
-            (gtk:style-context-add-provider-for-display display provider))))
+                              (gtk:text-buffer-get-text buffer start end nil)))))
     (g:signal-connect provider "parsing-error"
         (lambda (provider section err)
           (declare (ignore provider err))
@@ -77,10 +75,6 @@
     (setf (gtk:text-buffer-text text)
           (read-file (sys-path "resource/css-shadows.css")))
     ;; Apply the provider to the window
-    (gtk:style-context-add-provider-for-display display provider)
-    (g:signal-connect window "destroy"
-        (lambda (widget)
-          (let ((display (gtk:widget-display widget)))
-            (gtk:style-context-remove-provider-for-display display window))))
+    (gtk:widget-add-provider window provider)
     ;; Show the window
     (gtk:window-present window)))

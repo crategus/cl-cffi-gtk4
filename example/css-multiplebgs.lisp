@@ -7,16 +7,7 @@
 
 (in-package :gtk4-example)
 
-;; TODO: What is the correct way to remove the provider?!
-
-#+nil
-(defun apply-css (provider widget)
-  (let ((display (gtk:widget-display widget)))
-    (gtk:style-context-add-provider-for-display display provider)
-    (g:object-set-data-full widget "provider"
-        (lambda ()
-          (gtk:style-context-remove-provider-for-display display provider)))
-))
+;; TODO: The brick is missing?!
 
 (defun create-radio-toolbar (area)
   (let ((group nil)
@@ -112,12 +103,7 @@
                                 :valign :center
                                 :width-request 270
                                 :height-request 96))
-         (display (gtk:widget-display window))
          (provider (make-instance 'gtk:css-provider)))
-    (g:signal-connect window "destroy"
-        (lambda (widget)
-          (let ((display (gtk:widget-display widget)))
-            (gtk:style-context-remove-provider-for-display display provider))))
     (g:signal-connect text "changed"
         (lambda (buffer)
           (let ((start (gtk:text-buffer-start-iter buffer))
@@ -125,9 +111,7 @@
             (gtk:text-buffer-remove-all-tags buffer start end)
             (gtk:css-provider-load-from-string
                               provider
-                              (gtk:text-buffer-get-text buffer start end nil))
-            (gtk:style-context-add-provider-for-display display provider))))
-
+                              (gtk:text-buffer-get-text buffer start end nil)))))
     (g:signal-connect provider "parsing-error"
         (lambda (provider section err)
           (declare (ignore provider err))
@@ -157,6 +141,6 @@
     ;; Apply the provider to the window
     (gtk:css-provider-load-from-path provider
                                      (sys-path "resource/css-multiplebgs.css"))
-    (gtk:style-context-add-provider-for-display display provider)
+    (gtk:widget-add-provider window provider)
     ;; Show the window
     (gtk:window-present window)))
