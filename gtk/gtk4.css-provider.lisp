@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2023 Dieter Kaiser
+;;; Copyright (C) 2013 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -33,35 +33,41 @@
 ;;;
 ;;; Types and Values
 ;;;
-;;;     GtkCssProvider
-;;;     GtkCssParserError                                  not implemented
-;;;     GtkCssParserWarning                                not implemented
 ;;;     GtkCssLocation
 ;;;     GtkCssSection
 ;;;
-;;;     GTK_CSS_PARSER_ERROR                               not implemented
-;;;
 ;;; Functions
 ;;;
-;;;     gtk_css_provider_load_named
-;;;     gtk_css_provider_load_from_data                    Deprecated 4.12
-;;;     gtk_css_provider_load_from_file
-;;;     gtk_css_provider_load_from_path
-;;;     gtk_css_provider_load_from_resource
-;;;     gtk_css_provider_load_from_bytes                   Since 4.12
-;;;     gtk_css_provider_load_from_string                  Since 4.12
-;;;     gtk_css_provider_new
-;;;     gtk_css_provider_to_string
-;;;
 ;;;     gtk_css_section_new
-;;;     gtk_css_section_ref                                not needed
-;;;     gtk_css_section_unref                              not needed
-;;;     gtk_css_section_print                              not needed
+;;;     gtk_css_section_ref                                 not needed
+;;;     gtk_css_section_unref                               not needed
+;;;     gtk_css_section_print                               not needed
 ;;;     gtk_css_section_to_string
 ;;;     gtk_css_section_get_file
 ;;;     gtk_css_section_get_parent
 ;;;     gtk_css_section_get_start_location
 ;;;     gtk_css_section_get_end_location
+;;;
+;;; ----------------------------------------------------------------------------
+;;;
+;;; Types and Values
+;;;
+;;;     GtkCssProvider
+;;;     GtkCssParserError                                   not implemented
+;;;     GtkCssParserWarning                                 not implemented
+;;;     GTK_CSS_PARSER_ERROR                                not implemented
+;;;
+;;; Functions
+;;;
+;;;     gtk_css_provider_new
+;;;     gtk_css_provider_to_string
+;;;     gtk_css_provider_load_named
+;;;     gtk_css_provider_load_from_data                     Deprecated 4.12
+;;;     gtk_css_provider_load_from_file
+;;;     gtk_css_provider_load_from_path
+;;;     gtk_css_provider_load_from_resource
+;;;     gtk_css_provider_load_from_bytes                    Since 4.12
+;;;     gtk_css_provider_load_from_string                   Since 4.12
 ;;;
 ;;; Signals
 ;;;
@@ -97,7 +103,25 @@
 (setf (liber:alias-for-symbol 'css-location)
       "CStruct"
       (liber:symbol-documentation 'css-location)
- "@version{#2022-8-20}
+ "@version{2024-4-23}
+  @begin{declaration}
+    @begin{pre}
+(cffi:defcstruct css-location
+  (bytes :size)
+  (chars :size)
+  (lines :size)
+  (line-bytes :size)
+  (line-chars :size))
+    @end{pre}
+    @begin[code]{table}
+      @entry[bytes]{Number of bytes parsed since the beginning.}
+      @entry[chars]{Number of characters parsed since the beginning.}
+      @entry[lines]{Number of full lines that have been parsed. If you want to
+        display this as a line number, you need to add 1 to this.}
+      @entry[line-bytes]{Number of bytes parsed since the last line break.}
+      @entry[line-chars]{Number of characters parsed since the last line break.}
+    @end{table}
+  @end{declaration}
   @begin{short}
     The @class{gtk:css-location} structure is used to present a location in a
     file or other source of data parsed by the CSS engine.
@@ -107,30 +131,15 @@
   can be used for printing the location in a file.
 
   Note that the lines parameter starts from 0 and is increased whenever a CSS
-  line break is encountered. CSS defines the C character sequences \"\\r\\n\",
-  \"\\r\", \"\\n\" and \"\\f\" as newlines. If your document uses different
-  rules for line breaking, you might want run into problems here.
-  @begin{pre}
-(cffi:defcstruct css-location
-  (bytes :size)
-  (chars :size)
-  (lines :size)
-  (line-bytes :size)
-  (line-chars :size))
-  @end{pre}
-  @begin[code]{table}
-    @entry[bytes]{Number of bytes parsed since the beginning.}
-    @entry[chars]{Number of characters parsed since the beginning.}
-    @entry[lines]{Number of full lines that have been parsed. If you want to
-      display this as a line number, you need to add 1 to this.}
-    @entry[line-bytes]{Number of bytes parsed since the last line break.}
-    @entry[line-chars]{Number of characters parsed since the last line break.}
-  @end{table}
-  @see-function{gtk:css-location-bytes}
-  @see-function{gtk:css-location-chars}
-  @see-function{gtk:css-location-lines}
-  @see-function{gtk:css-location-line-bytes}
-  @see-function{gtk:css-location-line-chars}
+  line break is encountered. CSS defines the C character sequences
+  @code{\"\\r\\n\"}, @code{\"\\r\"}, @code{\"\\n\"} and @code{\"\\f\"} as
+  newlines. If your document uses different rules for line breaking, you might
+  want run into problems here.
+  @see-slot{gtk:css-location-bytes}
+  @see-slot{gtk:css-location-chars}
+  @see-slot{gtk:css-location-lines}
+  @see-slot{gtk:css-location-line-bytes}
+  @see-slot{gtk:css-location-line-chars}
   @see-class{gtk:css-section}")
 
 (export 'css-location)
@@ -140,13 +149,14 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; --- gtk:css-location-bytes -------------------------------------------------
+
 #+liber-documentation
 (setf (liber:alias-for-function 'css-location-bytes) "Accessor")
 
 (defun css-location-bytes (location)
  #+liber-documentation
- "@version{#2022-8-20}
-  @syntax[]{(gtk:css-location-bytes location) => bytes}
+ "@version{2024-4-23}
+  @syntax{(gtk:css-location-bytes location) => bytes}
   @argument[location]{a @symbol{gtk:css-location} instance}
   @argument[bytes]{a @code{:size} value}
   @short{Returns the number of bytes parsed since the beginning.}
@@ -162,8 +172,8 @@
 
 (defun css-location-chars (location)
  #+liber-documentation
- "@version{#2022-8-20}
-  @syntax[]{(gtk:css-location-bytes location) => chars}
+ "@version{2024-4-23}
+  @syntax{(gtk:css-location-bytes location) => chars}
   @argument[location]{a @symbol{gtk:css-location} instance}
   @argument[bytes]{a @code{:size} value}
   @short{Returns the number of characters parsed since the beginning.}
@@ -179,8 +189,8 @@
 
 (defun css-location-lines (location)
  #+liber-documentation
- "@version{2022-12-4}
-  @syntax[]{(gtk:css-location-bytes location) => lines}
+ "@version{2024-4-23}
+  @syntax{(gtk:css-location-bytes location) => lines}
   @argument[location]{a @symbol{gtk:css-location} instance}
   @argument[lines]{a @code{:size} value}
   @short{Returns the number of full lines that have been parsed.}
@@ -196,8 +206,8 @@
 (setf (liber:alias-for-function 'css-location-line-bytes) "Accessor")
 
 (defun css-location-line-bytes (location)
- "@version{2022-12-4}
-  @syntax[]{(gtk:css-location-bytes location) => line-bytes}
+ "@version{2024-4-23}
+  @syntax{(gtk:css-location-bytes location) => line-bytes}
   @argument[location]{a @symbol{gtk:css-location} instance}
   @argument[line-bytes]{a @code{:size} value}
   @short{Returns the number of bytes parsed since the last line break.}
@@ -212,8 +222,8 @@
 (setf (liber:alias-for-function 'css-location-line-chars) "Accessor")
 
 (defun css-location-line-chars (location)
- "@version{#2022-8-20}
-  @syntax[]{(gtk:css-location-bytes location) => lines}
+ "@version{2024-4-23}
+  @syntax{(gtk:css-location-bytes location) => lines}
   @argument[location]{a @symbol{gtk:css-location} instance}
   @argument[lines]{a @code{:size} value}
   @short{Returns the number of characters parsed since the last line break.}
@@ -227,19 +237,47 @@
 ;;; ----------------------------------------------------------------------------
 
 (glib:define-g-boxed-opaque css-section "GtkCssSection"
+  :export t
   :type-initializer "gtk_css_section_get_type"
-  :alloc (error "GtkCssSection cannot be created from the Lisp side."))
+  :alloc (error "GtkCssSection cannot be created from the Lisp side"))
 
 #+liber-documentation
 (setf (liber:alias-for-class 'css-section)
       "GBoxed"
       (documentation 'css-section 'type)
- "@version{#2023-1-24}
+ "@version{2024-4-23}
+  @begin{declaration}
+    @begin{pre}
+(glib:define-g-boxed-opaque css-section \"GtkCssSection\"
+  :export t
+  :type-initializer \"gtk_css_section_get_type\"
+  :alloc (error \"GtkCssSection cannot be created from the Lisp side\"))
+    @end{pre}
+  @end{declaration}
   @begin{short}
     Defines a part of a CSS document.
   @end{short}
   Because sections are nested into one another, you can use the
   @fun{gtk:css-section-parent} function to get the containing region.
+  @begin{examples}
+    @begin{pre}
+(g:signal-connect provider \"parsing-error\"
+        (lambda (provider section err)
+          (declare (ignore provider err))
+          (let* ((startloc (gtk:css-section-start-location section))
+                 (start (gtk:text-buffer-iter-at-line-index
+                                text
+                                (gtk:css-location-lines startloc)
+                                (gtk:css-location-line-bytes startloc)))
+                 (endloc (gtk:css-section-end-location section))
+                 (end (gtk:text-buffer-iter-at-line-index
+                              text
+                              (gtk:css-location-lines endloc)
+                              (gtk:css-location-line-bytes endloc))))
+            (gtk:text-buffer-apply-tag text \"error\" start end)
+            gdk:+event-stop+)))
+    @end{pre}
+  @end{examples}
   @see-constructor{gtk:css-section-new}
   @see-class{gtk:css-provider}
   @see-function{gtk:css-section-parent}")
@@ -247,55 +285,175 @@
 (export 'css-section)
 
 ;;; ----------------------------------------------------------------------------
-;;; GTK_CSS_PARSER_ERROR
+;;; gtk:css-section-new
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_css_section_new" css-section-new)
+    (g:boxed css-section :return)
+ #+liber-documentation
+ "@version{2024-4-23}
+  @argument[file]{a namestring with the file this section refers to}
+  @argument[start]{a @symbol{gtk:css-location} instance with the start location}
+  @argument[end]{a @symbol{gtk:css-location} instance with the end location}
+  @begin{short}
+    Creates a new @class{gtk:css-section} instance referring to the section in
+    the given file from the @arg{start} location to the @arg{end} location.
+  @end{short}
+  @see-class{gtk:css-section}
+  @see-symbol{gtk:css-location}"
+  (file g:file-as-namestring)
+  (start (:pointer (:struct css-location)))
+  (end (:pointer (:struct css-location))))
+
+(export 'css-section-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_section_ref ()
 ;;;
-;;; #define GTK_CSS_PARSER_ERROR (gtk_css_parser_error_quark ())
+;;; GtkCssSection *
+;;; gtk_css_section_ref (GtkCssSection *section);
 ;;;
-;;; Domain for GtkCssParser errors.
+;;; Increments the reference count on section .
+;;;
+;;; section :
+;;;     a GtkCssSection
+;;;
+;;; Returns :
+;;;     section itself.
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkCssParserError
+;;; gtk_css_section_unref ()
 ;;;
-;;; Errors that can occur while parsing CSS.
+;;; void
+;;; gtk_css_section_unref (GtkCssSection *section);
 ;;;
-;;; These errors are unexpected and will cause parts of the given CSS to be
-;;; ignored.
+;;; Decrements the reference count on section , freeing the structure if the
+;;; reference count reaches 0.
 ;;;
-;;; GTK_CSS_PARSER_ERROR_FAILED :
-;;;     Unknown failure.
-;;;
-;;; GTK_CSS_PARSER_ERROR_SYNTAX :
-;;;     The given text does not form valid syntax
-;;;
-;;; GTK_CSS_PARSER_ERROR_IMPORT :
-;;;     Failed to import a resource
-;;;
-;;; GTK_CSS_PARSER_ERROR_NAME :
-;;;     The given name has not been defined
-;;;
-;;; GTK_CSS_PARSER_ERROR_UNKNOWN_VALUE :
-;;;     The given value is not correct
-;;;-----------------------------------------------------------------------------
-
-;;;-----------------------------------------------------------------------------
-;;; enum GtkCssParserWarning
-;;;
-;;; Warnings that can occur while parsing CSS.
-;;;
-;;; Unlike GtkCssParserErrors, warnings do not cause the parser to skip any
-;;; input, but they indicate issues that should be fixed.
-;;;
-;;; GTK_CSS_PARSER_WARNING_DEPRECATED :
-;;;     The given construct is deprecated and will be removed in a future
-;;;     version
-;;;
-;;; GTK_CSS_PARSER_WARNING_SYNTAX :
-;;;     A syntax construct was used that should be avoided
-;;;
-;;; GTK_CSS_PARSER_WARNING_UNIMPLEMENTED :
-;;;     A feature is not implemented
+;;; section :
+;;;     a GtkCssSection
 ;;; ----------------------------------------------------------------------------
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_section_print ()
+;;;
+;;; void
+;;; gtk_css_section_print (const GtkCssSection *section,
+;;;                        GString *string);
+;;;
+;;; Prints the section into string in a human-readable form. This is a form like
+;;; gtk.css:32:1-23 to denote line 32, characters 1 to 23 in the file gtk.css.
+;;;
+;;; section :
+;;;     a section
+;;;
+;;; string :
+;;;     a GString to print to
+;;; ----------------------------------------------------------------------------
+
+;; not needed, see gtk_css_section_to_string
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_section_to_string
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_css_section_to_string" css-section-to-string) :string
+ #+liber-documentation
+ "@version{2024-4-23}
+  @argument[section]{a @class{gtk:css-section} instance}
+  @return{The string with the human-readable text form.}
+  @begin{short}
+    Prints the section into a human-readable text form.
+  @end{short}
+  This is a form like @code{gtk.css:32:1-23} to denote line 32, characters 1
+  to 23 in the @file{gtk.css} file.
+  @see-class{gtk:css-section}"
+  (section (g:boxed css-section)))
+
+(export 'css-section-to-string)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_section_get_file
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_css_provider_get_file" css-section-file)
+    g:file-as-namestring
+ #+liber-documentation
+ "@version{#2024-4-23}
+  @argument[section]{a @class{gtk:css-section} instance}
+  @return{The namestring with the file that @arg{section} was parsed from or
+  @code{nil} if @arg{section} was parsed from other data.}
+  @begin{short}
+    Gets the file that the section was parsed from.
+  @end{short}
+  If no such file exists, for example because the CSS was loaded via the
+  @fun{gtk:css-provider-load-from-string} function, then @code{nil} is returned.
+  @see-class{gtk:css-section}
+  @see-class{g:file}
+  @see-function{gtk:css-provider-load-from-string}"
+  (section (g:boxed css-section)))
+
+(export 'css-section-file)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_section_get_parent
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_css_section_get_parent" css-section-parent)
+    (g:boxed css-section)
+ #+liber-documentation
+ "@version{#2024-4-23}
+  @argument[section]{a @class{gtk:css-section} instance}
+  @return{The @class{gtk:css-section} parent section, or @code{nil} if none.}
+  @begin{short}
+    Gets the parent section for the given section.
+  @end{short}
+  The parent section is the section that contains this section.
+  @see-class{gtk:css-section}"
+  (section (g:boxed css-section)))
+
+(export 'css-section-parent)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_section_get_start_location
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_css_section_get_start_location" css-section-start-location)
+    (:pointer (:struct css-location))
+ #+liber-documentation
+ "@version{2024-4-23}
+  @argument[section]{a @class{gtk:css-section} instance}
+  @return{The @symbol{gtk:css-location} instance with the start location of the
+    section.}
+  @begin{short}
+    Returns the location in the CSS document where this section starts.
+  @end{short}
+  @see-class{gtk:css-section}
+  @see-symbol{gtk:css-location}"
+  (section (g:boxed css-section)))
+
+(export 'css-section-start-location)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_section_get_end_location
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_css_section_get_end_location" css-section-end-location)
+    (:pointer (:struct css-location))
+ #+liber-documentation
+ "@version{2024-4-23}
+  @argument[section]{a @class{gtk:css-section} instance}
+  @return{The @symbol{gtk:css-location} instance with the end location of the
+    section.}
+  @begin{short}
+    Returns the location in the CSS document where this section ends.
+  @end{short}
+  @see-class{gtk:css-section}
+  @see-symbol{gtk:css-location}"
+  (section (g:boxed css-section)))
+
+(export 'css-section-end-location)
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkCssProvider
@@ -379,13 +537,36 @@ lambda (provider section error)    :run-last
 
 (defun css-provider-new ()
  #+liber-documentation
- "@version{2023-4-15}
-  @return{A new @class{gtk:css-provider} object.}
+ "@version{2024-4-19}
+  @return{The new @class{gtk:css-provider} object.}
   @short{Returns a newly created CSS provider object.}
   @see-class{gtk:css-provider}"
   (make-instance 'css-provider))
 
 (export 'css-provider-new)
+
+;;; ----------------------------------------------------------------------------
+;;; gtk_css_provider_to_string
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_css_provider_to_string" css-provider-to-string) :string
+ #+liber-documentation
+ "@version{2023-4-15}
+  @argument[provider]{a @class{gtk:css-provider} object to write to a string}
+  @return{A string representing the CSS provider.}
+  @begin{short}
+    Convertes the CSS provider into a string representation in CSS format.
+  @end{short}
+  Using the @fun{gtk:css-provider-load-from-data} function with the return
+  value from this function on a new CSS provider created with the
+  @fun{gtk:css-provider-new} function will basically create a duplicate of this
+  provider.
+  @see-class{gtk:css-provider}
+  @see-function{gtk:css-provider-new}
+  @see-function{gtk:css-provider-load-from-data}"
+  (provider (g:object css-provider)))
+
+(export 'css-provider-to-string)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_css_provider_load_named
@@ -469,8 +650,6 @@ lambda (provider section error)    :run-last
   @see-class{g:file}"
   (provider (g:object css-provider))
   (file g:object))
-;; TODO: Introduce the FILE-AS-NAMESTRING type
-;  (file g:file-as-namestring))
 
 (export 'css-provider-load-from-file)
 
@@ -570,198 +749,5 @@ lambda (provider section error)    :run-last
 
 #+gtk-4-12
 (export 'css-provider-load-from-string)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_provider_to_string
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_css_provider_to_string" css-provider-to-string) :string
- #+liber-documentation
- "@version{2023-4-15}
-  @argument[provider]{a @class{gtk:css-provider} object to write to a string}
-  @return{A string representing the CSS provider.}
-  @begin{short}
-    Convertes the CSS provider into a string representation in CSS format.
-  @end{short}
-  Using the @fun{gtk:css-provider-load-from-data} function with the return
-  value from this function on a new CSS provider created with the
-  @fun{gtk:css-provider-new} function will basically create a duplicate of this
-  provider.
-  @see-class{gtk:css-provider}
-  @see-function{gtk:css-provider-new}
-  @see-function{gtk:css-provider-load-from-data}"
-  (provider (g:object css-provider)))
-
-(export 'css-provider-to-string)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk:css-section-new
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_css_section_new" css-section-new)
-    (g:boxed css-section :return)
- #+liber-documentation
- "@version{#2023-8-30}
-  @argument[file]{a @class{g:file} object this section refers to}
-  @argument[start]{a @symbol{gtk:css-location} instance with the start location}
-  @argument[end]{a @symbol{gtk:css-location} instance with the end location}
-  @begin{short}
-    Creates a new @class{gtk:css-section} instance referring to the section in
-    the given file from the @arg{start} location to the @arg{end} location.
-  @end{short}
-  @see-class{gtk:css-section}
-  @see-symbol{gtk:css-location}"
-  (file g:object)
-  (start (:pointer (:struct css-location)))
-  (end (:pointer (:struct css-location))))
-
-(export 'css-section-new)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_ref ()
-;;;
-;;; GtkCssSection *
-;;; gtk_css_section_ref (GtkCssSection *section);
-;;;
-;;; Increments the reference count on section .
-;;;
-;;; section :
-;;;     a GtkCssSection
-;;;
-;;; Returns :
-;;;     section itself.
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_unref ()
-;;;
-;;; void
-;;; gtk_css_section_unref (GtkCssSection *section);
-;;;
-;;; Decrements the reference count on section , freeing the structure if the
-;;; reference count reaches 0.
-;;;
-;;; section :
-;;;     a GtkCssSection
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_print ()
-;;;
-;;; void
-;;; gtk_css_section_print (const GtkCssSection *section,
-;;;                        GString *string);
-;;;
-;;; Prints the section into string in a human-readable form. This is a form like
-;;; gtk.css:32:1-23 to denote line 32, characters 1 to 23 in the file gtk.css.
-;;;
-;;; section :
-;;;     a section
-;;;
-;;; string :
-;;;     a GString to print to
-;;; ----------------------------------------------------------------------------
-
-;; not needed, see gtk_css_section_to_string
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_to_string
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_css_section_to_string" css-section-to-string) :string
- #+liber-documentation
- "@version{#2022-8-20}
-  @argument[section]{a @class{gtk:css-section} instance}
-  @return{A string with the human-readable text form.}
-  @begin{short}
-    Prints the section into a human-readable text form.
-  @end{short}
-  This is a form like @code{gtk.css:32:1-23} to denote line 32, characters 1
-  to 23 in the @file{gtk.css} file.
-  @see-class{gtk:css-section}"
-  (section (g:boxed css-section)))
-
-(export 'css-section-to-string)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_get_file  -> css-section-file
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_css_provider_get_file" css-section-file) (g:object g:file)
- #+liber-documentation
- "@version{#2022-8-20}
-  @argument[section]{a @class{gtk:css-section} instance}
-  @return{The @class{g:file} object that @arg{section} was parsed from or
-  @code{nil} if @arg{section} was parsed from other data.}
-  @begin{short}
-    Gets the file that the section was parsed from.
-  @end{short}
-  If no such file exists, for example because the CSS was loaded via the
-  @fun{gtk:css-provider-load-from-data} function, then @code{nil} is returned.
-  @see-class{gtk:css-section}
-  @see-class{g:file}
-  @see-function{gtk:css-provider-load-from-data}"
-  (section (g:boxed css-section)))
-
-(export 'css-section-file)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_get_parent  -> css-section-parent
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_css_section_get_parent" css-section-parent)
-    (g:boxed css-section)
- #+liber-documentation
- "@version{#2022-8-20}
-  @argument[section]{a @class{gtk:css-section} instance}
-  @return{The @class{gtk:css-section} parent section, or @code{nil} if none.}
-  @begin{short}
-    Gets the parent section for the given section.
-  @end{short}
-  The parent section is the section that contains this section.
-  @see-class{gtk:css-section}"
-  (section (g:boxed css-section)))
-
-(export 'css-section-parent)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_get_start_location  -> css-section-start-location
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_css_section_get_start_location" css-section-start-location)
-    (:pointer (:struct css-location))
- #+liber-documentation
- "@version{2022-12-4}
-  @argument[section]{a @class{gtk:css-section} instance}
-  @return{A @symbol{gtk:css-location} instance with the start location of the
-    section.}
-  @begin{short}
-    Returns the location in the CSS document where this section starts.
-  @end{short}
-  @see-class{gtk:css-section}
-  @see-symbol{gtk:css-location}"
-  (section (g:boxed css-section)))
-
-(export 'css-section-start-location)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_css_section_get_end_location  -> css-section-end-location
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_css_section_get_end_location" css-section-end-location)
-    (:pointer (:struct css-location))
- #+liber-documentation
- "@version{2022-12-4}
-  @argument[section]{a @class{gtk:css-section} instance}
-  @return{A @symbol{gtk:css-location} instance with the end location of the
-    section.}
-  @begin{short}
-    Returns the location in the CSS document where this section ends.
-  @end{short}
-  @see-class{gtk:css-section}
-  @see-symbol{gtk:css-location}"
-  (section (g:boxed css-section)))
-
-(export 'css-section-end-location)
 
 ;;; --- End of file gtk4.css-provider.lisp -------------------------------------

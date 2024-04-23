@@ -5,12 +5,87 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GtkCssLocation
+
+(test gtk-css-location-properties
+  (cffi:with-foreign-object (location '(:struct gtk:css-location))
+
+    (cffi:with-foreign-slots ((gtk::bytes gtk::chars gtk::lines
+                               gtk::line-bytes gtk::line-chars)
+                              location
+                              (:struct gtk:css-location))
+      ;; Clear slots
+      (setf gtk::bytes 0
+            gtk::chars 0
+            gtk::lines 0
+            gtk::line-bytes 0
+            gtk::line-chars 0))
+    ;; Get values from CssLocation structure
+    (is (= 0 (gtk:css-location-bytes location)))
+    (is (= 0 (gtk:css-location-chars location)))
+    (is (= 0 (gtk:css-location-lines location)))
+    (is (= 0 (gtk:css-location-line-bytes location)))
+    (is (= 0 (gtk:css-location-line-chars location)))))
+
+;;;     GtkCssSection
+
+(test gtk-css-section-boxed
+  ;; Check type
+  (is (g:type-is-boxed "GtkCssSection"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkCssSection")
+          (g:gtype (cffi:foreign-funcall "gtk_css_section_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gtk:css-section
+          (glib:symbol-for-gtype "GtkCssSection"))))
+
+;;;     gtk_css_section_new
+
+(test gtk-css-section-new
+  (let ((filename (namestring (sys-path "resource/css-accordion.css")))
+        section)
+    (cffi:with-foreign-objects ((start '(:struct gtk:css-location))
+                                (end '(:struct gtk:css-location)))
+      ;; Set start slots
+      (cffi:with-foreign-slots ((gtk::bytes gtk::chars gtk::lines
+                                 gtk::line-bytes gtk::line-chars)
+                                start
+                                (:struct gtk:css-location))
+        (setf gtk::bytes 0
+              gtk::chars 0
+              gtk::lines 0
+              gtk::line-bytes 0
+              gtk::line-chars 0))
+      ;; Set end slots
+      (cffi:with-foreign-slots ((gtk::bytes gtk::chars gtk::lines
+                                 gtk::line-bytes gtk::line-chars)
+                                end
+                                (:struct gtk:css-location))
+        (setf gtk::bytes 10
+              gtk::chars 10
+              gtk::lines 5
+              gtk::line-bytes 0
+              gtk::line-chars 0))
+
+      (is (typep (setf section (gtk:css-section-new filename start end))
+                 'gtk:css-section))
+      (is (string= "css-accordion.css:1:1-6:1"
+                   (gtk:css-section-to-string section))))))
+
+;;;     gtk_css_section_ref                                not implemented
+;;;     gtk_css_section_unref                              not implemented
+;;;     gtk_css_section_print                              not implemented
+;;;     gtk_css_section_to_string
+;;;     gtk_css_section_get_file
+;;;     gtk_css_section_get_parent
+;;;     gtk_css_section_get_start_location
+;;;     gtk_css_section_get_end_location
+
+;;; --- Types and Values -------------------------------------------------------
+
 ;;;     GtkCssParserError                                  not implemented
 ;;;     GtkCssParserWarning                                not implemented
 ;;;     GTK_CSS_PARSER_ERROR                               not implemented
-
-;;;     GtkCssLocation
-;;;     GtkCssSection
 
 ;;;     GtkCssProvider
 
@@ -235,14 +310,4 @@
 "
                  (gtk:css-provider-to-string provider)))))
 
-;;;     gtk_css_section_new
-;;;     gtk_css_section_ref                                not implemented
-;;;     gtk_css_section_unref                              not implemented
-;;;     gtk_css_section_print                              not implemented
-;;;     gtk_css_section_to_string
-;;;     gtk_css_section_get_file
-;;;     gtk_css_section_get_parent
-;;;     gtk_css_section_get_start_location
-;;;     gtk_css_section_get_end_location
-
-;;; 2023-12-16
+;;; 2024-4-22
