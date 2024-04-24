@@ -8,25 +8,25 @@
 ;;;     GtkArrowType
 
 (test gtk-arrow-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkArrowType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkArrowType")
           (g:gtype (cffi:foreign-funcall "gtk_arrow_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:arrow-type
           (glib:symbol-for-gtype "GtkArrowType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_ARROW_UP" "GTK_ARROW_DOWN" "GTK_ARROW_LEFT"
                "GTK_ARROW_RIGHT" "GTK_ARROW_NONE")
              (list-enum-item-name "GtkArrowType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3 4)
              (list-enum-item-value "GtkArrowType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("up" "down" "left" "right" "none")
              (list-enum-item-nick "GtkArrowType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkArrowType"
                              GTK-ARROW-TYPE
                              (:EXPORT T
@@ -41,40 +41,40 @@
 ;;;     GtkMenuButton
 
 (test gtk-menu-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkMenuButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:menu-button
           (glib:symbol-for-gtype "GtkMenuButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkMenuButton")
           (g:gtype (cffi:foreign-funcall "gtk_menu_button_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkMenuButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkMenuButton")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkMenuButton")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("active" "always-show-arrow" "can-shrink" "child" "direction"
                "has-frame" "icon-name" "label" "menu-model" "popover" "primary"
                "use-underline")
              (list-properties "GtkMenuButton")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate")
              (list-signals "GtkMenuButton")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "menubutton"
                (gtk:widget-class-css-name "GtkMenuButton")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("popup")
              (gtk:widget-css-classes (make-instance 'gtk:menu-button))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :button (gtk:widget-class-accessible-role "GtkMenuButton")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMenuButton" GTK-MENU-BUTTON
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -112,8 +112,9 @@
 (test gtk-menu-button-properties
   (let ((button (make-instance 'gtk:menu-button)))
 ; gtk:menu-button-active is present since 4.10
-;    (is-false (gtk:menu-button-active button))
+    (is-false (gtk:menu-button-active button))
     (is-false (gtk:menu-button-always-show-arrow button))
+    (is-false (gtk:menu-button-can-shrink button))
     (is-false (gtk:menu-button-child button))
     (is (eq :down (gtk:menu-button-direction button)))
     (is-true (gtk:menu-button-has-frame button))
@@ -134,9 +135,9 @@
 
 (test gtk-menu-button-new
   (let ((button (gtk:menu-button-new)))
-; gtk:menu-button-active is present since 4.10
-;    (is-false (gtk:menu-button-active button))
+    (is-false (gtk:menu-button-active button))
     (is-false (gtk:menu-button-always-show-arrow button))
+    (is-false (gtk:menu-button-can-shrink button))
     (is-false (gtk:menu-button-child button))
     (is (eq :down (gtk:menu-button-direction button)))
     (is-true (gtk:menu-button-has-frame button))
@@ -153,4 +154,4 @@
 ;;;     GtkMenuButtonCreatePopupFunc
 ;;;     gtk_menu_button_set_create_popup_func
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-20
