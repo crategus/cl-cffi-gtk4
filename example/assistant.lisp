@@ -4,9 +4,9 @@
 ;;;; an operation into several simpler sequential steps, and to guide the user
 ;;;; through these steps.
 ;;;;
-;;;; 2024-4-4
+;;;; 2024-4-19
 
-(in-package #:gtk4-example)
+(in-package :gtk4-example)
 
 (defun create-assistant-page1 (assistant)
   (let ((box (make-instance 'gtk:box
@@ -93,21 +93,8 @@
     ;; Change the appearance of the progress bar
     (gtk:css-provider-load-from-string provider css)
     (gtk:widget-add-css-class assistant "pbar")
-    (gtk:style-context-add-provider-for-display (gtk:widget-display assistant)
-                                                provider)
+    (gtk:widget-add-provider assistant provider)
     ;; Signal handlers for the assistant
-    (g:signal-connect assistant "close"
-                      (lambda (widget)
-                        (gtk:style-context-remove-provider-for-display
-                            (gtk:widget-display widget)
-                            provider)
-                        (gtk:window-destroy widget)))
-    (g:signal-connect assistant "cancel"
-                      (lambda (widget)
-                        (gtk:style-context-remove-provider-for-display
-                            (gtk:widget-display widget)
-                            provider)
-                        (gtk:window-destroy widget)))
     (g:signal-connect assistant "prepare"
       (lambda (assistant page)
         (declare (ignore page))
@@ -129,12 +116,6 @@
                                         fraction)
                                   g:+source-continue+)
                                  (t
-                                  ;; TODO: GTK:WINDOW-CLOSE does not work at
-                                  ;; this place. Therefore, we have to duplicate
-                                  ;; the code of the DESTROY handler. Why?
-                                  (gtk:style-context-remove-provider-for-display
-                                      (gtk:widget-display assistant)
-                                       provider)
                                   (gtk:window-destroy assistant)
                                   g:+source-remove+)))))))
     ;; Create and add the pages of the assistant

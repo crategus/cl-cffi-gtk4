@@ -5,7 +5,7 @@
 ;;;; processing is underway. The <tt>gtk:progress-bar</tt> widget can be used
 ;;;; in two different modes: percentage mode and activity mode.
 ;;;;
-;;;; 2024-4-4
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -45,15 +45,12 @@
                         (setf (pbar-timer pdata) 0)))
 
     (let ((provider (gtk:css-provider-new))
-          (context (gtk:widget-style-context (pbar-widget pdata)))
-          ;; TODO: This does not work.
-          (css-data "progressbar > trough,
-                     progressbar > trough > progress {
+          (css-data "progressbar.pbar > trough,
+                     progressbar.pbar > trough > progress {
                          min-height : 24px; }"))
-       (gtk:css-provider-load-from-data provider css-data)
-       (gtk:style-context-add-provider context
-                                       provider
-                                       gtk:+priority-application+))
+       (gtk:css-provider-load-from-string provider css-data)
+       (gtk:widget-add-css-class (pbar-widget pdata) "pbar")
+       (gtk:widget-add-provider (pbar-widget pdata) provider))
     (setf (pbar-timer pdata)
           (g:timeout-add 100
                          (lambda ()

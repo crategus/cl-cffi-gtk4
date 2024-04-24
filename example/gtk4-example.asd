@@ -3,7 +3,7 @@
 (asdf:defsystem :gtk4-example
   :author "Dieter Kaiser"
   :license "MIT"
-  :serial t
+  :serial nil
   :depends-on (:cl-cffi-gtk4
                :split-sequence
                :local-time)
@@ -39,6 +39,10 @@
                (:file "expander")
                (:file "aspect-frame")
                (:file "fixed")
+
+               ;; Layout Managers
+               (:file "fixed-layout")
+               (:file "constraint-simple")
 
                ;; Display Widgets
                (:file "label-various")

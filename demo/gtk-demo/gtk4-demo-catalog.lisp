@@ -197,7 +197,12 @@
        ":window"
        "DO-ACTION-BAR"
        "gtk4-example"
-       "action-bar.lisp")
+       "action-bar.lisp"
+       :keywords
+       "gtk:action-bar"
+       "gtk:action-bar-pack-start"
+       "gtk:action-bar-pack-end"
+       "gtk:action-bar-center-widget")
       ("Header Bar"
        ":window"
        "DO-HEADER-BAR"
@@ -218,7 +223,6 @@
        "DO-NOTEBOOK"
        "gtk4-example"
        "notebook.lisp")
-
       ("Paned Window"
        ":window"
        "DO-PANED"
@@ -233,12 +237,51 @@
        ":window"
        "DO-ASPECT-FRAME"
        "gtk4-example"
-       "aspect-frame.lisp")
+       "aspect-frame.lisp"
+       :keywords
+       "gtk:aspect-frame")
       ("Fixed Container"
        ":window"
        "DO-FIXED"
        "gtk4-example"
-       "fixed.lisp"))
+       "fixed.lisp"
+       :keywords
+       "GtkFixed"
+       "gtk:fixed"
+       "gtk:fixed-put"
+       "gtk:fixed-move"
+       "gtk:fixed-child-position"
+       "gtk:fixed-child-transform"
+       "gtk:transform-to-string"
+       "gtk:transform-category"
+       "gtk:widget-width"
+       "gtk:widget-height"
+       ))
+
+      ;; Layout Managers
+      "Layout Managers"
+      (("Fixed Layout"
+        ":window"
+        "DO-FIXED-LAYOUT"
+        "gtk4-example"
+        "fixed-layout.lisp"
+        :keywords
+        "GtkFixed"
+        "gtk:fixed"
+        "gtk:fixed-put"
+        "gtk:fixed-child-transform"
+        "gsk:transform"
+        "gsk:transform-new"
+        "gsk:transform-translate"
+        "gsk:transform-translate-3d"
+        "gsk:transform-perspective"
+        "gsk:transform-rotate-3d"
+        "graphene:point-t"
+        "graphene:point3d-t"
+        "graphene:point3d-init"
+        "graphene:vec3-x-axis"
+        "graphene:vec3-y-axis"
+        ))
 
      "Display Widgets"
      (("Various Label"
@@ -389,8 +432,12 @@
        ":window"
        "DO-SEARCH-BAR"
        "gtk4-example"
-       "search-bar.lisp")
-       )
+       "search-bar.lisp"
+       :keywords
+       "gtk:search-bar"
+       "gtk:search-entry"
+       "gtk:search-bar-key-capture-widget"
+       "gtk:search-bar-connect-entry"))
 
      "Multiline Text Editor"
      (("Simple Text View"

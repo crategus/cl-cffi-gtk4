@@ -693,7 +693,7 @@ refill (GtkWidget    *button,
 
     ;; Add CSS for application specific style information
     (let ((provider (gtk:css-provider-new)))
-      (gtk:css-provider-load-from-data provider
+      (gtk:css-provider-load-from-string provider
                                        ".view.compact > child {padding: 1px;}")
       (gtk:style-context-add-provider-for-display (gdk:display-default)
                                                   provider

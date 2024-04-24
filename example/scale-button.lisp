@@ -1,6 +1,6 @@
 ;;;; Scale Button
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -37,7 +37,7 @@
                                    {background : orange;
                                     -gtk-icon-size : 48px;}")))
     ;; Load and apply provider to style the button
-    (gtk:css-provider-load-from-data provider css-button)
-    (gtk:widget-apply-provider button provider)
+    (gtk:css-provider-load-from-string provider css-button)
+    (gtk:widget-add-provider button provider)
     ;; Show the window
     (gtk:window-present window)))

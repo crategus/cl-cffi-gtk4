@@ -11,7 +11,7 @@
 ;;;; <tt>"high"</tt> and <tt>"full"</tt>, with values 0.25, 0.75 and 1.0
 ;;;; respectively.
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -30,16 +30,16 @@
     (gtk:level-bar-add-offset-value levelbar "full" 10.0)
     ;; CSS to change the color for the values
     (gtk:css-provider-load-from-string provider
-                                       "levelbar block.filled.empty {
+                                       "levelbar.lbar block.filled.empty {
                                           background-color: red; }
-                                        levelbar block.filled.low {
+                                        levelbar.lbar block.filled.low {
                                           background-color: orange; }
-                                        levelbar block.filled.high {
+                                        levelbar.lbar block.filled.high {
                                           background-color: yellow; }
-                                        levelbar block.filled.full {
+                                        levelbar.lbar block.filled.full {
                                           background-color: green; }")
-    (gtk:style-context-add-provider-for-display (gdk:display-default)
-                                                provider)
+    (gtk:widget-add-css-class levelbar "lbar")
+    (gtk:widget-add-provider levelbar provider)
     ;; Return the new level bar
     levelbar))
 

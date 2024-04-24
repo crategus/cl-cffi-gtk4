@@ -7,7 +7,7 @@
 ;;;; In addition, this example demonstrate how to use CSS style information to
 ;;;; change the appearance of a widget.
 ;;;;
-;;;; 2024-4-4
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -57,7 +57,6 @@
     ;; Load CSS from data into the provider and apply CSS
     (gtk:css-provider-load-from-string provider css-button)
     (gtk:widget-add-css-class box "centerbox")
-    (gtk:style-context-add-provider-for-display (gtk:widget-display box)
-                                                provider)
+    (gtk:widget-add-provider box provider)
     ;; Show the window.
     (gtk:window-present window)))

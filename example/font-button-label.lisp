@@ -1,6 +1,6 @@
 ;;;; Font Button Label
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -37,7 +37,8 @@
                  (variant (pango:font-description-variant desc))
                  (stretch (pango:font-description-stretch desc))
                  ;; Write the CSS string
-                 (css-label (format nil "label { font-family : ~a; ~
+                 (css-label (format nil "label.fontbutton
+                                               { font-family : ~a; ~
                                                  font-weight : ~a; ~
                                                  font-style : ~a; ~
                                                  font-variant : ~a; ~
@@ -48,14 +49,11 @@
                                         style
                                         variant
                                         stretch
-                                        size))
-                 ;; Get the style of the label
-                 (context (gtk:widget-style-context label)))
+                                        size)))
            ;; Update the font of the label
-           (gtk:css-provider-load-from-data provider css-label)
-           (gtk:style-context-add-provider context
-                                           provider
-                                           gtk:+priority-user+))))
+           (gtk:css-provider-load-from-string provider css-label)
+           (gtk:widget-add-css-class label "fontbutton")
+           (gtk:widget-add-provider label provider))))
     ;; Set a filter function to select fonts for the font chooser
     (gtk:font-chooser-set-filter-func button #'font-button-filter)
     ;; Pack the widgets

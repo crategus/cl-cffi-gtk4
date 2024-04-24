@@ -4,7 +4,7 @@
 ;;;; text view. CSS data is also loaded to change the font and the color
 ;;;; for the text view.
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -29,8 +29,7 @@
                                         color : Green;
                                         font : 20px Purisa; }")
     (gtk:widget-add-css-class window "viewstyle")
-    (gtk:style-context-add-provider-for-display (gtk:widget-display window)
-                                                provider)
+    (gtk:widget-add-provider window provider)
     ;; Use a tag to change the color for just one part of the text view
     (let ((tag (gtk:text-buffer-create-tag buffer
                                            "blue_foreground"

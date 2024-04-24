@@ -39,6 +39,10 @@
            #:do-aspect-frame
            #:do-fixed
 
+           ;; Layout Managers
+           #:do-fixed-layout
+           #:do-constraint-simple
+
            ;; Display Widgets
            #:do-label-various
            #:do-images

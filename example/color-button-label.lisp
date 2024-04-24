@@ -5,7 +5,7 @@
 ;;;; "Color button" label. To change the color of the label the CSS color is
 ;;;; loaded in a CSS provider and the style context of the label is updated.
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-4-19
 
 (in-package :gtk4-example)
 
@@ -36,13 +36,10 @@
        (lambda (widget)
          (let* ((rgba (gtk:color-chooser-rgba widget))
                 (css-label (format nil "label { color : ~a; }"
-                                       (gdk:rgba-to-string rgba)))
-                (context (gtk:widget-style-context label)))
+                                       (gdk:rgba-to-string rgba))))
            ;; Update the color of the label
-           (gtk:css-provider-load-from-data provider css-label)
-           (gtk:style-context-add-provider context
-                                           provider
-                                           gtk:+priority-user+))))
+           (gtk:css-provider-load-from-string provider css-label)
+           (gtk:widget-add-provider widget provider))))
     ;; Pack and show the widgets
     (gtk:box-append box button)
     (gtk:box-append box label)
