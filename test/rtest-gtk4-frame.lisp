@@ -8,36 +8,36 @@
 ;;;     GtkFrame
 
 (test gtk-frame-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFrame"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:frame
           (glib:symbol-for-gtype "GtkFrame")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFrame")
           (g:gtype (cffi:foreign-funcall "gtk_frame_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkFrame")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkFrame")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkFrame")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("child" "label" "label-widget" "label-xalign")
              (list-properties "GtkFrame")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkFrame")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "frame"
                (gtk:widget-class-css-name "GtkFrame")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:frame))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkFrame")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFrame" GTK-FRAME
@@ -121,4 +121,4 @@
     (is (= 0.3d0 (setf (gtk:frame-label-align frame) 0.3d0)))
     (is (= 0.3 (gtk:frame-label-align frame)))))
 
-;;; 2024-1-7
+;;; 2024-4-19
