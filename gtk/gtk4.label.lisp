@@ -1167,10 +1167,7 @@ lambda (label step count extend)    :action
 ;;; gtk_label_new_with_mnemonic
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Check implementation with make-instance
-
-(cffi:defcfun ("gtk_label_new_with_mnemonic" %label-new-with-mnemonic)
-    (g:object widget)
+(defun label-new-with-mnemonic (text)
  #+liber-documentation
  "@version{2024-4-24}
   @argument[text]{a string with the text of the label, with an underscore in
@@ -1194,9 +1191,6 @@ lambda (label step count extend)    :action
   activated by the mnemonic.
   @see-class{gtk:label}
   @see-function{gtk:label-mnemonic-widget}"
-  (text :string))
-
-(defun label-new-with-mnemonic (text)
   (make-instance 'label
                  :use-underline t
                  :label (or text (cffi:null-pointer))))
