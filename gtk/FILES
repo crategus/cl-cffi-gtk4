@@ -84,38 +84,38 @@ Windows
 
 Layout Containers
 
-  gtk4.box.lisp                        GtkBox                         GTK 4.12 .
-  gtk4.center-box.lisp                 GtkCenterBox                   GTK 4.12 .
-  gtk4.grid.lisp                       GtkGrid                        GTK 4.12 .
-  gtk4.revealer.lisp                   GtkRevealer                    GTK 4.12 .
-  gtk4.list-box.lisp                   GtkListBox                     GTK 4.12 .
-  gtk4.flow-box.lisp                   GtkFlowBox                     GTK 4.12 .
-  gtk4.stack.lisp                      GtkStack                       GTK 4.12 .
-  gtk4.stack-switcher.lisp             GtkStackSwitcher               GTK 4.12 .
-  gtk4.stack-sidebar.lisp              GtkStackSidebar                GTK 4.12 .
-  gtk4.action-bar.lisp                 GtkActionBar                   GTK 4.12 .
-  gtk4.header-bar.lisp                 GtkHeaderBar                   GTK 4.12 .
-  gtk4.overlay.lisp                    GtkOverlay                     GTK 4.12 .
-  gtk4.paned.lisp                      GtkPaned                       GTK 4.12 .
-  gtk4.notebook.lisp                   GtkNotebook                    GTK 4.12 .
-  gtk4.expander.lisp                   GtkExpander                    GTK 4.12 .
-  gtk4.aspect-frame.lisp               GtkAspectFrame                 GTK 4.12 .
-  gtk4.fixed.lisp                      GtkFixed                       GTK 4.12 .
+  gtk4.box.lisp                        GtkBox                         GTK 4.12
+  gtk4.center-box.lisp                 GtkCenterBox                   GTK 4.12
+  gtk4.grid.lisp                       GtkGrid                        GTK 4.12
+  gtk4.revealer.lisp                   GtkRevealer                    GTK 4.12
+  gtk4.list-box.lisp                   GtkListBox                     GTK 4.12
+  gtk4.flow-box.lisp                   GtkFlowBox                     GTK 4.12
+  gtk4.stack.lisp                      GtkStack                       GTK 4.12
+  gtk4.stack-switcher.lisp             GtkStackSwitcher               GTK 4.12
+  gtk4.stack-sidebar.lisp              GtkStackSidebar                GTK 4.12
+  gtk4.action-bar.lisp                 GtkActionBar                   GTK 4.12
+  gtk4.header-bar.lisp                 GtkHeaderBar                   GTK 4.12
+  gtk4.overlay.lisp                    GtkOverlay                     GTK 4.12
+  gtk4.paned.lisp                      GtkPaned                       GTK 4.12
+  gtk4.notebook.lisp                   GtkNotebook                    GTK 4.12
+  gtk4.expander.lisp                   GtkExpander                    GTK 4.12
+  gtk4.aspect-frame.lisp               GtkAspectFrame                 GTK 4.12
+  gtk4.fixed.lisp                      GtkFixed                       GTK 4.12
 
 Layout Managers
 
-  gtk4.layout-manager.lisp             GtkLayoutManager               GTK 4.12 .
-  gtk4.layout-child.lisp               GtkLayoutChild                 GTK 4.12 .
-  gtk4.bin-layout.lisp                 GtkBinLayout                   GTK 4.12 .
-  gtk4.box-layout.lisp                 GtkBoxLayout                   GTK 4.12&.
-  gtk4.center-layout.lisp              GtkCenterLayout                GTK 4.12&.
-  gtk4.fixed-layout.lisp               GtkFixedLayout                 GTK 4.12 .
-  gtk4.grid-layout.lisp                GtkGridLayout                  GTK 4.12 .
-  gtk4.overlay-layout.lisp             GtkOverlayLayout               GTK 4.12 .
-  gtk4.custom-layout.lisp              GtkCustomLayout                GTK 4.12&.
-  gtk4.constraint-layout.lisp          GtkConstraintLayout            GTK 4.12&.
-  gtk4.constraint.lisp                 GtkConstraint                  GTK 4.12 .
-  gtk4.constraint-guide.lisp           GtkConstraintGuide             GTK 4.12 .
+  gtk4.layout-manager.lisp             GtkLayoutManager               GTK 4.12
+  gtk4.layout-child.lisp               GtkLayoutChild                 GTK 4.12
+  gtk4.bin-layout.lisp                 GtkBinLayout                   GTK 4.12
+  gtk4.box-layout.lisp                 GtkBoxLayout                   GTK 4.12
+  gtk4.center-layout.lisp              GtkCenterLayout                GTK 4.12
+  gtk4.fixed-layout.lisp               GtkFixedLayout                 GTK 4.12
+  gtk4.grid-layout.lisp                GtkGridLayout                  GTK 4.12
+  gtk4.overlay-layout.lisp             GtkOverlayLayout               GTK 4.12
+  gtk4.custom-layout.lisp              GtkCustomLayout                GTK 4.12 &
+  gtk4.constraint-layout.lisp          GtkConstraintLayout            GTK 4.12 &
+  gtk4.constraint.lisp                 GtkConstraint                  GTK 4.12
+  gtk4.constraint-guide.lisp           GtkConstraintGuide             GTK 4.12
 
 Display Widgets
 

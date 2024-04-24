@@ -1396,6 +1396,7 @@ GtkCellRenderer         GtkWidget
     @begin[GtkBoxLayout]{subsection}
       Layout manager for placing all children in a single row or column.
       @about-class{box-layout}
+      @about-generic{box-layout-child}
       @about-generic{box-layout-baseline-position}
       @about-generic{box-layout-homogeneous}
       @about-generic{box-layout-spacing}
@@ -1404,6 +1405,7 @@ GtkCellRenderer         GtkWidget
     @begin[GtkCenterLayout]{subsection}
       A centering layout.
       @about-class{center-layout}
+      @about-generic{center-layout-shrink-center-last}
       @about-function{center-layout-new}
       @about-function{center-layout-orientation}
       @about-function{center-layout-baseline-position}
@@ -1525,14 +1527,14 @@ GtkCellRenderer         GtkWidget
       @about-generic{label-xalign}
       @about-generic{label-yalign}
       @about-function{label-new}
+      @about-function{label-new-with-mnemonic}
       @about-function{label-text}
       @about-function{label-set-markup}
-      @about-function{label-set-markup-with-mnemonic}
-      @about-function{label-layout-offsets}
-      @about-function{label-new-with-mnemonic}
-      @about-function{label-select-region}
       @about-function{label-set-text-with-mnemonic}
+      @about-function{label-set-markup-with-mnemonic}
       @about-function{label-layout}
+      @about-function{label-layout-offsets}
+      @about-function{label-select-region}
       @about-function{label-selection-bounds}
       @about-function{label-current-uri}
     @end{subsection}
@@ -2740,7 +2742,6 @@ GtkCellRenderer         GtkWidget
       @about-generic{widget-visible}
       @about-generic{widget-width-request}
       @about-function{widget-in-destruction}
-      @about-function{widget-unparent}
       @about-function{widget-show}
       @about-function{widget-hide}
       @about-function{widget-map}
@@ -2766,6 +2767,8 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-activate}
       @about-function{widget-is-focus}
       @about-function{widget-grab-focus}
+      @about-function{widget-set-parent}
+      @about-function{widget-unparent}
       @about-function{widget-native}
       @about-function{widget-ancestor}
       @about-function{widget-is-ancestor}
@@ -2832,7 +2835,8 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-has-css-class}
       @about-function{widget-class-css-name}
       @about-function{widget-style-context}
-      @about-function{widget-apply-provider}
+      @about-function{widget-add-provider}
+      @about-function{widget-remove-provider}
       @about-function{widget-request-mode}
       @about-function{widget-preferred-size}
       @about-function{distribute-natural-allocation}

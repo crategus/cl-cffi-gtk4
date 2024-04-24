@@ -647,17 +647,17 @@
      ;; Layout Managers
      (:file "rtest-gtk4-layout-manager")
      (:file "rtest-gtk4-layout-child")
-;    (:file "gtk4.bin-layout")
-;    (:file "gtk4.box-layout")
-;    (:file "gtk4.center-layout")
+     (:file "rtest-gtk4-bin-layout")
+     (:file "rtest-gtk4-box-layout")
+     (:file "rtest-gtk4-center-layout")
      (:file "rtest-gtk4-fixed-layout")
-;    (:file "gtk4.grid-layout")
-;    (:file "gtk4.overlay-layout")
-;    (:file "gtk4.custom-layout")
-;    (:file "gtk4.constraint-layout")
+     (:file "rtest-gtk4-grid-layout")
+     (:file "rtest-gtk4-overlay-layout")
+     (:file "rtest-gtk4-custom-layout")
+     (:file "rtest-gtk4-constraint-layout")
 
      (:file "rtest-gtk4-constraint")
-;    (:file "gtk4.constraint-guide")
+     (:file "rtest-gtk4-constraint-guide")
 
      ;; Abstract Base Classes
      (:file "rtest-gtk4-widget")
