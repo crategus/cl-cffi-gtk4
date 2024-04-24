@@ -95,7 +95,7 @@
 
   Each the @class{gtk:layout-child} instance storing the layout properties for
   a specific child widget is created through the
-  @fun{gtk:layout-manager-layout-child} method. A GtkLayoutManager controls the
+  @fun{gtk:layout-manager-layout-child} method. A layout manager controls the
   creation of its @class{gtk:layout-child} instances by overriding the
   @code{GtkLayoutManagerClass.create_layout_child()} virtual function. The
   typical implementation should look like:
@@ -127,7 +127,7 @@ create_layout_child (GtkLayoutManager *manager,
   @see-class{gtk:layout-child}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_layout_manager_measure ()
+;;; gtk_layout_manager_measure
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_layout_manager_measure" %layout-manager-measure) :void
@@ -191,7 +191,7 @@ create_layout_child (GtkLayoutManager *manager,
 (export 'layout-manager-measure)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_layout_manager_allocate ()
+;;; gtk_layout_manager_allocate
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_layout_manager_allocate" layout-manager-allocate) :void
@@ -219,7 +219,7 @@ create_layout_child (GtkLayoutManager *manager,
 (export 'layout-manager-allocate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_layout_manager_get_request_mode ()
+;;; gtk_layout_manager_get_request_mode
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_layout_manager_get_request_mode"
@@ -238,7 +238,7 @@ create_layout_child (GtkLayoutManager *manager,
 (export 'layout-manager-request-mode)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_layout_manager_get_widget ()
+;;; gtk_layout_manager_get_widget
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_layout_manager_get_widget" layout-manager-widget)
@@ -257,7 +257,7 @@ create_layout_child (GtkLayoutManager *manager,
 (export 'layout-manager-widget)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_layout_manager_get_layout_child ()
+;;; gtk_layout_manager_get_layout_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_layout_manager_get_layout_child"
@@ -285,7 +285,7 @@ create_layout_child (GtkLayoutManager *manager,
 (export 'layout-manager-layout-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_layout_manager_layout_changed ()
+;;; gtk_layout_manager_layout_changed
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_layout_manager_layout_changed"
