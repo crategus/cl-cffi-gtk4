@@ -8,43 +8,43 @@
 ;;;     GtkLabel
 
 (test gtk-label-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkLabel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:label
           (glib:symbol-for-gtype "GtkLabel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkLabel")
           (g:gtype (cffi:foreign-funcall "gtk_label_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkLabel")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkLabel")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkLabel")))
-  ;; Check the class properties
+  ;; Check properties
   (is (equal '("attributes" "ellipsize" "extra-menu" "justify" "label" "lines"
                "max-width-chars" "mnemonic-keyval" "mnemonic-widget"
                "natural-wrap-mode" "selectable" "single-line-mode" "tabs"
                "use-markup" "use-underline" "width-chars" "wrap" "wrap-mode"
                "xalign" "yalign")
              (list-properties "GtkLabel")))
-  ;; Check the list of signals
+  ;; Check signals
   (is (equal '("activate-current-link" "activate-link" "copy-clipboard"
                "move-cursor")
              (list-signals "GtkLabel")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "label"
                (gtk:widget-class-css-name "GtkLabel")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:label))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :label (gtk:widget-class-accessible-role "GtkLabel")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLabel" GTK-LABEL
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
@@ -87,27 +87,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     attributes
-;;;     ellipsize
-;;;     extra-menu
-;;;     justify
-;;;     label
-;;;     lines
-;;;     max-width-chars
-;;;     mnemonic-keyval
-;;;     mnemonic-widget
-;;;     natural-wrap-mode
-;;;     selectable
-;;;     single-line-mode
-;;;     tabs
-;;;     use-markup
-;;;     use-underline
-;;;     width-chars
-;;;     wrap
-;;;     wrap-mode
-;;;     xalign
-;;;     yalign
-
 (test gtk-label-properties
   (let ((label (make-instance 'gtk:label)))
     (is-false (gtk:label-attributes label))
@@ -142,16 +121,97 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_label_new
-;;;     gtk_label_set_text
-;;;     gtk_label_set_markup
-;;;     gtk_label_set_markup_with_mnemonic
-;;;     gtk_label_get_layout_offsets
-;;;     gtk_label_get_text
+
+(test gtk-label-new.1
+  (is (typep (gtk:label-new "label") 'gtk:label)))
+
+(test gtk-label-new.2
+  (let ((label (gtk:label-new "label")))
+    (is (string= "label" (gtk:label-label label)))
+    (is (string= "label" (gtk:label-text label)))))
+
 ;;;     gtk_label_new_with_mnemonic
-;;;     gtk_label_select_region
+
+(test gtk-label-new-with-mnemonic.1
+  (is (typep (gtk:label-new-with-mnemonic "_label") 'gtk:label)))
+
+(test gtk-label-new-with-mnemonic.2
+  (let ((label (gtk:label-new-with-mnemonic "_label")))
+    (is (string= "_label" (gtk:label-label label)))
+    (is (string= "label" (gtk:label-text label)))
+    (is-true (gtk:label-use-underline label))))
+
+;;;     gtk_label_get_text
+;;;     gtk_label_set_text
+
+(test gtk-label-text
+  (let ((label (gtk:label-new-with-mnemonic "_label")))
+
+    (is (string= "_label" (gtk:label-label label)))
+    (is (string= "label" (gtk:label-text label)))
+
+    (is (string= "New" (setf (gtk:label-text label) "New")))
+    (is (string= "New" (gtk:label-label label)))
+    (is (string= "New" (gtk:label-text label)))))
+
+;;;     gtk_label_set_markup
+
+(test gtk-label-set-markup
+  (let ((label (make-instance 'gtk:label)))
+    (is-false (gtk:label-set-markup label
+                                    "<small>Small text</small>"))
+    (is-true (gtk:label-use-markup label))
+    (is-false (gtk:label-use-underline label))
+    (is (string= "<small>Small text</small>"
+                 (gtk:label-label label)))
+    (is (string= "Small text" (gtk:label-text label)))))
+
 ;;;     gtk_label_set_text_with_mnemonic
+
+(test gtk-label-set-text-with-mnemonic
+  (let ((label (make-instance 'gtk:label)))
+
+    (is-false (gtk:label-set-text-with-mnemonic label "_label"))
+
+    (is (string= "_label" (gtk:label-label label)))
+    (is (string= "label" (gtk:label-text label)))))
+
+;;;     gtk_label_set_markup_with_mnemonic
+
+(test gtk-label-set-markup-with-mnemonic
+  (let ((label (make-instance 'gtk:label)))
+    (is-false (gtk:label-set-markup-with-mnemonic label
+                                                  "<small>_Small text</small>"))
+    (is-true (gtk:label-use-markup label))
+    (is-true (gtk:label-use-underline label))
+    (is (string= "<small>_Small text</small>"
+                 (gtk:label-label label)))
+    (is (string= "Small text" (gtk:label-text label)))))
+
 ;;;     gtk_label_get_layout
+
+(test gtk-label-layout
+  (let ((label (gtk:label-new "label")))
+    (is (typep (gtk:label-layout label) 'pango:layout))))
+
+;;;     gtk_label_get_layout_offsets
+
+(test gtk-label-layout-offsets
+  (let ((label (gtk:label-new "label")))
+
+    (is (equal '(0 -9)
+               (multiple-value-list (gtk:label-layout-offsets label))))))
+
+;;;     gtk_label_select_region
 ;;;     gtk_label_get_selection_bounds
+
+(test gtk-label-select-region
+  (let ((label (gtk:label-new "a long label")))
+    (is-true (setf (gtk:label-selectable label) t))
+    (is-false (gtk:label-select-region label 3 7))
+    (is (equal '(3 7)
+               (multiple-value-list (gtk:label-selection-bounds label))))))
+
 ;;;     gtk_label_get_current_uri
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-4-24
