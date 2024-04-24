@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -75,7 +75,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkSearchBar
+;;; GtkSearchBar
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkSearchBar" search-bar
@@ -100,16 +100,16 @@
 
 #+liber-documentation
 (setf (documentation 'search-bar 'type)
- "@version{2023-8-26}
+ "@version{2024-4-20}
   @begin{short}
     The @class{gtk:search-bar} widget is a container made to have a search
     entry.
   @end{short}
   It can also contain additional widgets, such as drop-down menus, or buttons.
   The search bar would appear when a search is started through typing on the
-  keyboard, or the application’s search mode is toggled on.
+  keyboard, or the search mode of the application is toggled on.
 
-  @image[search-bar]{GtkSearchBar}
+  @image[search-bar]{Figure: GtkSearchBar}
 
   For keyboard presses to start a search, the search bar must be told of a
   widget to capture key events from through the
@@ -120,30 +120,30 @@
 
   You will also need to tell the search bar about which entry you are using as
   your search entry using the @fun{gtk:search-bar-connect-entry} function.
-  @begin[Example]{dictionary}
+  @begin{examples}
     The following example shows you how to create a more complex search entry.
     @begin{pre}
-(defun do-search-bar (&optional (application nil))
+(defun do-search-bar (&optional application)
   (let* ((box (make-instance 'gtk:box
                              :orientation :horizontal
                              :spacing 6))
          (searchbar (make-instance 'gtk:search-bar
                                    :child box
                                    :valign :start))
-         (window (make-instance 'gtk:application-window
+         (window (make-instance 'gtk:window
                                 :title \"Search Bar\"
                                 :application application
                                 :child searchbar))
          (entry (make-instance 'gtk:search-entry
                                :hexpand t))
          (button (make-instance 'gtk:menu-button)))
+    (gtk:search-bar-connect-entry searchbar entry)
+    (setf (gtk:search-bar-key-capture-widget searchbar) window)
     (gtk:box-append box entry)
     (gtk:box-append box button)
-    (setf (gtk:search-bar-key-capture-widget searchbar) window)
-    (gtk:search-bar-connect-entry searchbar entry)
     (gtk:window-present window)))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 searchbar
@@ -166,13 +166,14 @@ searchbar
   @see-slot{gtk:search-bar-child}
   @see-slot{gtk:search-bar-key-capture-widget}
   @see-slot{gtk:search-bar-search-mode-enabled}
-  @see-slot{gtk:search-bar-show-close-button}")
+  @see-slot{gtk:search-bar-show-close-button}
+  @see-class{gtk:search-entry}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- search-bar-child -------------------------------------------------------
+;;; --- gtk:search-bar-child ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'search-bar) t)
@@ -184,9 +185,9 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-child)
       "Accessor"
       (documentation 'search-bar-child 'function)
- "@version{2023-8-26}
-  @syntax[]{(gtk:search-bar-child object) => child}
-  @syntax[]{(setf (gtk:search-bar-child object) child)}
+ "@version{2024-4-20}
+  @syntax{(gtk:search-bar-child object) => child}
+  @syntax{(setf (gtk:search-bar-child object) child)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -198,7 +199,7 @@ searchbar
   @see-class{gtk:search-bar}
   @see-class{gtk:widget}")
 
-;;; --- search-bar-key-capture-widget ------------------------------------------
+;;; --- gtk:search-bar-key-capture-widget --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "key-capture-widget"
@@ -211,9 +212,9 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-key-capture-widget)
       "Accessor"
       (documentation 'search-bar-key-capture-widget 'function)
- "@version{2023-8-26}
-  @syntax[]{(gtk:search-bar-key-capture-widget object) => widget}
-  @syntax[]{(setf (gtk:search-bar-key-capture-widget object) widget)}
+ "@version{2024-4-20}
+  @syntax{(gtk:search-bar-key-capture-widget object) => widget}
+  @syntax{(setf (gtk:search-bar-key-capture-widget object) widget)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[widget]{a @class{gtk:widget} key capture widget}
   @begin{short}
@@ -230,7 +231,7 @@ searchbar
   @see-class{gtk:search-bar}
   @see-class{gtk:widget}")
 
-;;; --- search-bar-search-mode-enabled -----------------------------------------
+;;; --- gtk:search-bar-search-mode-enabled -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "search-mode-enabled"
@@ -244,11 +245,11 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-search-mode-enabled)
       "Accessor"
       (documentation 'search-bar-search-mode-enabled 'function)
- "@version{2023-8-26}
-  @syntax[]{(gtk:search-bar-search-mode-enabled object) => search-mode}
-  @syntax[]{(setf (gtk:search-bar-search-mode-enabled object) search-mode)}
+ "@version{2024-4-20}
+  @syntax{(gtk:search-bar-search-mode-enabled object) => mode}
+  @syntax{(setf (gtk:search-bar-search-mode-enabled object) mode)}
   @argument[object]{a @class{gtk:search-bar} widget}
-  @argument[search-mode]{a boolean with the state of the search mode}
+  @argument[mode]{a boolean with the state of the search mode}
   @begin{short}
     Accessor of the @slot[gtk:search-bar]{search-mode-enabled} slot of the
     @class{gtk:search-bar} class.
@@ -256,7 +257,7 @@ searchbar
   Switches the search mode on or off.
   @see-class{gtk:search-bar}")
 
-;;; --- search-bar-show-close-button -------------------------------------------
+;;; --- gtk:search-bar-show-close-button ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-close-button"
@@ -270,9 +271,9 @@ searchbar
 (setf (liber:alias-for-function 'search-bar-show-close-button)
       "Accessor"
       (documentation 'search-bar-show-close-button 'function)
- "@version{2023-8-26}
-  @syntax[]{(gtk:search-bar-show-close-button object) => visible}
-  @syntax[]{(setf (gtk:search-bar-show-close-button object) visible)}
+ "@version{2024-4-20}
+  @syntax{(gtk:search-bar-show-close-button object) => visible}
+  @syntax{(setf (gtk:search-bar-show-close-button object) visible)}
   @argument[object]{a @class{gtk:search-bar} widget}
   @argument[visible]{a boolean whether the Close button will be shown or not}
   @begin{short}
@@ -283,19 +284,18 @@ searchbar
   button is shown. The @setf{gtk:search-bar-show-close-button} function shows
   or hides the Close button.
 
-  Applications that already have a \"search\" toggle button should not show a
-  Close button in their search bar, as it duplicates the role of the toggle
-  button.
+  Applications that already have a search toggle button should not show a Close
+  button in their search bar, as it duplicates the role of the toggle button.
   @see-class{gtk:search-bar}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_search_bar_new ()
+;;; gtk_search_bar_new
 ;;; ----------------------------------------------------------------------------
 
 (defun search-bar-new ()
  #+liber-documentation
- "@version{2023-8-26}
-  @return{A new @class{gtk:search-bar} widget.}
+ "@version{2024-4-20}
+  @return{The new @class{gtk:search-bar} widget.}
   @begin{short}
     Creates a search bar.
   @end{short}
@@ -308,12 +308,12 @@ searchbar
 (export 'search-bar-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_search_bar_connect_entry ()
+;;; gtk_search_bar_connect_entry
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_search_bar_connect_entry" search-bar-connect-entry) :void
  #+liber-documentation
- "@version{2023-8-26}
+ "@version{2024-4-20}
   @argument[searchbar]{a @class{gtk:search-bar} widget}
   @argument[entry]{a @class{gtk:entry} widget}
   @begin{short}
@@ -329,13 +329,13 @@ searchbar
 (export 'search-bar-connect-entry)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_search_bar_get_search_mode ()
+;;; gtk_search_bar_get_search_mode
 ;;; ----------------------------------------------------------------------------
 
 ;; Implemented as the accessor search-bar-search-mode-enabled
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_search_bar_set_search_mode ()
+;;; gtk_search_bar_set_search_mode
 ;;; ----------------------------------------------------------------------------
 
 ;; Implemented as the accessor (setf search-bar-search-mode-enabled)

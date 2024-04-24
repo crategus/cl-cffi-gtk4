@@ -8,39 +8,39 @@
 ;;;     GtkSearchBar
 
 (test gtk-search-bar-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSearchBar"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:search-bar
           (glib:symbol-for-gtype "GtkSearchBar")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSearchBar")
           (g:gtype (cffi:foreign-funcall "gtk_search_bar_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkSearchBar")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkSearchBar")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkSearchBar")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("child" "key-capture-widget" "search-mode-enabled"
                "show-close-button")
              (list-properties "GtkSearchBar")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkSearchBar")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "searchbar"
                (gtk:widget-class-css-name "GtkSearchBar")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:search-bar))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :search (gtk:widget-class-accessible-role "GtkSearchBar")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSearchBar" GTK-SEARCH-BAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -61,11 +61,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     child
-;;;     key-capture-widget
-;;;     search-mode-enabled
-;;;     show-close-button
-
 (test gtk-search-bar-properties
   (let ((searchbar (make-instance 'gtk:search-bar)))
     (is-false (gtk:search-bar-child searchbar))
@@ -82,4 +77,4 @@
 
 ;;;     gtk_search_bar_connect_entry
 
-;;; --- 2023-11-2 --------------------------------------------------------------
+;;; 2024-4-20
