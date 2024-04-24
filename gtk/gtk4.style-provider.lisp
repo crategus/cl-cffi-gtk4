@@ -73,15 +73,14 @@
 (setf (liber:alias-for-class 'style-provider)
       "Interface"
       (documentation 'style-provider 'type)
- "@version{2024-4-1}
+ "@version{2024-4-20}
   @begin{short}
     The @class{gtk:style-provider} interface is an interface used to provide
     style information to a @class{gtk:style-context} object.
   @end{short}
-  See the @fun{gtk:style-context-add-provider} and
-  @fun{gtk:style-context-add-provider-for-display} functions for adding style
-  providers to a style context and the @fun{gtk:widget-apply-provider}
-  function to apply a provider to a widget and its children.
+  See the @fun{gtk:style-context-add-provider-for-display} function for adding
+  style providers to a style context and the @fun{gtk:widget-add-provider}
+  function to add a style provider to the display of a widget.
   @begin[Signal Details]{dictionary}
     @subheading{The \"gtk-private-changed\" signal}
       @begin{pre}
@@ -95,8 +94,8 @@ lambda (provider)    :run-last
   @end{dictionary}
   @see-class{gtk:style-context}
   @see-class{gtk:css-provider}
-  @see-function{gtk:style-context-add-provider}
-  @see-function{gtk:style-context-add-provider-for-display}")
+  @see-function{gtk:style-context-add-provider-for-display}
+  @see-function{gtk:widget-add-provider}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GTK_STYLE_PROVIDER_PRIORITY_FALLBACK

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -146,15 +146,15 @@
 ;;; Accessors for GtkBorder
 ;;; ----------------------------------------------------------------------------
 
-;;; --- border-left ------------------------------------------------------------
+;;; --- gtk:border-left --------------------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'border-left)
       "Accessor"
       (documentation 'border-left 'function)
  "@version{2023-8-30}
-  @syntax[]{(gtk:border-left instance) => left}
-  @syntax[]{(setf gtk:border-left instance) left)}
+  @syntax{(gtk:border-left instance) => left}
+  @syntax{(setf gtk:border-left instance) left)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[left]{an integer with the width of the left border}
   @begin{short}
@@ -164,15 +164,15 @@
 
 (export 'border-left)
 
-;;; --- border-right -----------------------------------------------------------
+;;; --- gtk:border-right -------------------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'border-right)
       "Accessor"
       (documentation 'border-right 'function)
  "@version{2023-8-30}
-  @syntax[]{(gtk:border-right instance) => right}
-  @syntax[]{(setf gtk:border-right instance) right)}
+  @syntax{(gtk:border-right instance) => right}
+  @syntax{(setf gtk:border-right instance) right)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[right]{an integer with the width of the right border}
   @begin{short}
@@ -182,15 +182,15 @@
 
 (export 'border-right)
 
-;;; --- border-top -------------------------------------------------------------
+;;; --- gtk:border-top ---------------------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'border-top)
       "Accessor"
       (documentation 'border-top 'function)
  "@version{2023-8-30}
-  @syntax[]{(gtk:border-top instance) => top}
-  @syntax[]{(setf gtk:border-top instance) top)}
+  @syntax{(gtk:border-top instance) => top}
+  @syntax{(setf gtk:border-top instance) top)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[top]{an integer with the width of the top border}
   @begin{short}
@@ -200,15 +200,15 @@
 
 (export 'border-top)
 
-;;; --- border-bottom ----------------------------------------------------------
+;;; --- gtk:border-bottom ------------------------------------------------------
 
 #+liber-documentation
 (setf (liber:alias-for-function 'border-bottom)
       "Accessor"
       (documentation 'border-bottom 'function)
  "@version{2023-8-30}
-  @syntax[]{(gtk:border-top instance) => bottom}
-  @syntax[]{(setf gtk:border-top instance) bottom)}
+  @syntax{(gtk:border-top instance) => bottom}
+  @syntax{(setf gtk:border-top instance) bottom)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[bottom]{an integer with the width of the bottom border}
   @begin{short}
@@ -382,7 +382,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- style-context-display --------------------------------------------------
+;;; --- gtk:style-context-display ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "display" 'style-context) t)
@@ -394,8 +394,8 @@
       "Accessor"
       (documentation 'style-context-display 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:style-context-display object) => display}
-  @syntax[]{(setf (gtk:style-context-display object) display)}
+  @syntax{(gtk:style-context-display object) => display}
+  @syntax{(setf (gtk:style-context-display object) display)}
   @argument[object]{a @class{gtk:style-context} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
@@ -485,7 +485,7 @@
 (defun style-context-add-provider-for-display
     (display provider &optional (priority +priority-application+))
  #+liber-documentation
- "@version{2023-10-4}
+ "@version{2024-4-19}
   @argument[display]{a @class{gdk:display} object}
   @argument[provider]{a @class{gtk:style-provider} object}
   @argument[priority]{an optional unsigned integer with the priority of the
@@ -496,7 +496,7 @@
   @end{short}
   GTK uses this to make styling information from the @class{gtk:settings}
   object available.
-  @begin[Example]{dictionary}
+  @begin{examples}
     Change the color and the font in a text view: Create a provider, load CSS
     into the provider, add the style class and the provider to the parent
     window.
@@ -511,12 +511,12 @@
                                               provider)
   ... )
     @end{pre}
-  @end{dictionary}
-  @begin[Note]{dictionary}
+  @end{examples}
+  @begin{notes}
     If both priorities are the same, a style provider object added through the
     @fun{gtk:style-context-add-provider} function takes precedence over another
     added through this function.
-  @end{dictionary}
+  @end{notes}
   @see-class{gdk:display}
   @see-class{gtk:style-provider}
   @see-class{gtk:settings}
@@ -527,7 +527,7 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_style_context_get_state
-;;; gtk_style_context_set_state -> style-context-state
+;;; gtk_style_context_set_state
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf style-context-state) (state context)
@@ -543,8 +543,8 @@
 (defun style-context-state (context)
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:style-context-state context) => state}
-  @syntax[]{(setf (gtk:style-context-state context) state)}
+  @syntax{(gtk:style-context-state context) => state}
+  @syntax{(setf (gtk:style-context-state context) state)}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[state]{a value of the @symbol{gtk:state-flags} flags to represent}
   @begin{short}
@@ -575,7 +575,7 @@
 (export 'style-context-state)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_style_context_get_color -> style-context-color
+;;; gtk_style_context_get_color
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_style_context_get_color" %style-context-color) :void
@@ -607,7 +607,7 @@
 (export 'style-context-color)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_style_context_get_border -> style-context-border
+;;; gtk_style_context_get_border
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_style_context_get_border" %style-context-border) :void
@@ -640,7 +640,7 @@
 (export 'style-context-border)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_style_context_get_padding -> style-context-padding
+;;; gtk_style_context_get_padding
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_style_context_get_padding" %style-context-padding) :void
@@ -673,7 +673,7 @@
 (export 'style-context-padding)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_style_context_get_margin -> style-context-margin
+;;; gtk_style_context_get_margin
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_style_context_get_margin" %style-context-margin) :void
@@ -968,7 +968,7 @@ GtkEntry.entry { ... @}
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_style_context_get_scale
-;;; gtk_style_context_set_scale -> style-context-scale
+;;; gtk_style_context_set_scale
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf style-context-scale) (scale context)
@@ -984,8 +984,8 @@ GtkEntry.entry { ... @}
 (defun style-context-scale (context)
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:style-context-scale context) => scale}
-  @syntax[]{(setf (gtk:style-context-scale context) scale)}
+  @syntax{(gtk:style-context-scale context) => scale}
+  @syntax{(setf (gtk:style-context-scale context) scale)}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[scale]{an integer with a scale}
   @begin{short}
