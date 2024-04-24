@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2023 Dieter Kaiser
+;;; Copyright (C) 2013 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,7 +81,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkSearchEntry
+;;; GtkSearchEntry
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkSearchEntry" search-entry
@@ -105,7 +105,7 @@
 
 #+liber-documentation
 (setf (documentation 'search-entry 'type)
- "@version{2023-8-26}
+ "@version{2024-4-20}
   @begin{short}
     The @class{gtk:search-entry} widget is an entry widget that has been
     tailored for use as a search entry.
@@ -115,9 +115,9 @@
 
   @image[search-entry]{Figure: GtkSearchEntry}
 
-  It will show an inactive symbolic \"find\" icon when the search entry is
-  empty, and a symbolic \"clear\" icon when there is text. Clicking on the
-  \"clear\" icon will empty the search entry.
+  It will show an inactive symbolic find icon when the search entry is empty,
+  and a symbolic clear icon when there is text. Clicking on the clear icon will
+  empty the search entry.
 
   To make filtering appear more reactive, it is a good idea to not react to
   every change in the search entry text immediately, but only after a short
@@ -214,7 +214,7 @@ lambda (entry)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- search-entry-activates-default -----------------------------------------
+;;; --- gtk:search-entry-activates-default -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "activates-default"
@@ -229,9 +229,9 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-activates-default)
       "Accessor"
       (documentation 'search-entry-activates-default 'function)
- "@version{#2023-8-26}
-  @syntax[]{(gtk:search-entry-activates-default object) => setting}
-  @syntax[]{(setf (gtk:search-entry-activates-default object) setting)}
+ "@version{2024-4-20}
+  @syntax{(gtk:search-entry-activates-default object) => setting}
+  @syntax{(setf (gtk:search-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:search-entry} widget}
   @argument[setting]{@em{true} to activate the default widget of the window on
     @kbd{Enter} keypress}
@@ -249,7 +249,7 @@ lambda (entry)    :action
   buttons.
   @see-class{gtk:search-entry}")
 
-;;; --- search-entry-placeholder-text ------------------------------------------
+;;; --- gtk:search-entry-placeholder-text --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "placeholder-text"
@@ -264,9 +264,9 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-placeholder-text)
       "Accessor"
       (documentation 'search-entry-placeholder-text 'function)
- "@version{#2023-8-26}
-  @syntax[]{(gtk:search-entry-placeholder-text object) => text}
-  @syntax[]{(setf (gtk:search-entry-placeholder-text object) text)}
+ "@version{2024-4-20}
+  @syntax{(gtk:search-entry-placeholder-text object) => text}
+  @syntax{(setf (gtk:search-entry-placeholder-text object) text)}
   @argument[object]{a @class{gtk:search-entry} widget}
   @argument[text]{a string to be displayed when @arg{entry} is empty and
     unfocused, or @code{nil}}
@@ -285,24 +285,22 @@ lambda (entry)    :action
   by delaying the initial focus setting until the first key event arrives.
   @see-class{gtk:search-entry}")
 
-;;; --- search-entry-search-delay ----------------------------------------------
-
-;; TODO: Check the default value
+;;; --- gtk:search-entry-search-delay ------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "search-delay" 'search-entry) t)
  "The @code{search-delay} property of type @code{:uint} (Read / Write) @br{}
   The delay in milliseconds from last keypress to the search changed signal.
   @br{}
-  Default value: 0")
+  Default value: 150")
 
 #+(and gtk-4-8 liber-documentation)
 (setf (liber:alias-for-function 'search-entry-search-delay)
       "Accessor"
       (documentation 'search-entry-search-delay 'function)
- "@version{#2023-8-26}
-  @syntax[]{(gtk:search-entry-search-delay object) => delay}
-  @syntax[]{(setf (gtk:search-entry-search-delay object) delay)}
+ "@version{2024-4-20}
+  @syntax{(gtk:search-entry-search-delay object) => delay}
+  @syntax{(setf (gtk:search-entry-search-delay object) delay)}
   @argument[object]{a @class{gtk:search-entry} widget}
   @argument[delay]{an unsigned integer with the delay in milliseconds}
   @begin{short}
@@ -318,15 +316,15 @@ lambda (entry)    :action
   @see-class{gtk:search-entry}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_search_entry_new ()
+;;; gtk_search_entry_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline search-entry-new))
 
 (defun search-entry-new ()
  #+liber-documentation
- "@version{#2023-8-26}
-  @return{A new @class{gtk:search-entry} widget.}
+ "@version{2024-4-20}
+  @return{The new @class{gtk:search-entry} widget.}
   @begin{short}
     Creates a search entry, with a find icon when the search field is empty,
     and a clear icon when it is not.
@@ -337,9 +335,8 @@ lambda (entry)    :action
 (export 'search-entry-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_search_entry_get_key_capture_widget ()
-;;; gtk_search_entry_set_key_capture_widget ()
-;;; -> search-entry-key-capture-widget
+;;; gtk_search_entry_get_key_capture_widget
+;;; gtk_search_entry_set_key_capture_widget
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf search-entry-key-capture-widget) (widget entry)
@@ -352,9 +349,9 @@ lambda (entry)    :action
 (cffi:defcfun ("gtk_search_entry_get_key_capture_widget"
                search-entry-key-capture-widget) (g:object widget)
  #+liber-documentation
- "@version{#2023-8-26}
-  @syntax[]{(gtk:search-entry-key-capture-widget entry) => widget}
-  @syntax[]{(setf (gtk:search-entry-key-capture-widget entry) widget)}
+ "@version{#2024-4-20}
+  @syntax{(gtk:search-entry-key-capture-widget entry) => widget}
+  @syntax{(setf (gtk:search-entry-key-capture-widget entry) widget)}
   @argument[entry]{a @class{gtk:search-entry} widget}
   @argument[widget]{a @class{gtk:widget} key capture widget}
   @begin{short}

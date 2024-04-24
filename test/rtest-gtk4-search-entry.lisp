@@ -8,42 +8,42 @@
 ;;;     GtkSearchEntry
 
 (test gtk-search-entry-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSearchEntry"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:search-entry
           (glib:symbol-for-gtype "GtkSearchEntry")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSearchEntry")
           (g:gtype (cffi:foreign-funcall "gtk_search_entry_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkSearchEntry")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkSearchEntry")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkEditable")
              (list-interfaces "GtkSearchEntry")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("activates-default" "cursor-position" "editable" "enable-undo"
                "max-width-chars" "placeholder-text" "search-delay"
                "selection-bound" "text" "width-chars" "xalign")
              (list-properties "GtkSearchEntry")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate" "next-match" "previous-match" "search-changed"
                "search-started" "stop-search")
              (list-signals "GtkSearchEntry")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "entry"
                (gtk:widget-class-css-name "GtkSearchEntry")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("search")
              (gtk:widget-css-classes (make-instance 'gtk:search-entry))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :search-box (gtk:widget-class-accessible-role "GtkSearchEntry")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSearchEntry" GTK-SEARCH-ENTRY
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -60,10 +60,6 @@
              (gobject:get-g-type-definition "GtkSearchEntry"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     activates-default
-;;;     placeholder-text
-;;;     search-delay                                       Since 4.8
 
 (test gtk-search-entry-properties
   (let ((entry (make-instance 'gtk:search-entry)))
@@ -83,7 +79,11 @@
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_search_entry_new
+
+(test gtk-search-entry-new
+  (is (typep (gtk:search-entry-new) 'gtk:search-entry)))
+
 ;;;     gtk_search_entry_set_key_capture_widget
 ;;;     gtk_search_entry_get_key_capture_widget
 
-;;; --- 2023-11-2 --------------------------------------------------------------
+;;; 2024-4-20
