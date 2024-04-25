@@ -12,24 +12,24 @@
 ;;;     GtkLevelBarMode
 
 (test gtk-level-bar-mode
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkLevelBarMode"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkLevelBarMode")
           (g:gtype (cffi:foreign-funcall "gtk_level_bar_mode_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:level-bar-mode
           (glib:symbol-for-gtype "GtkLevelBarMode")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_LEVEL_BAR_MODE_CONTINUOUS" "GTK_LEVEL_BAR_MODE_DISCRETE")
              (list-enum-item-name "GtkLevelBarMode")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1)
              (list-enum-item-value "GtkLevelBarMode")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("continuous" "discrete")
              (list-enum-item-nick "GtkLevelBarMode")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkLevelBarMode"
                                      GTK-LEVEL-BAR-MODE
                                      (:EXPORT T
@@ -42,39 +42,39 @@
 ;;;     GtkLevelBar
 
 (test gtk-level-bar-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkLevelBar"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:level-bar
           (glib:symbol-for-gtype "GtkLevelBar")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkLevelBar")
           (g:gtype (cffi:foreign-funcall "gtk_level_bar_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkLevelBar")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkLevelBar")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
              (list-interfaces "GtkLevelBar")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("inverted" "max-value" "min-value" "mode" "orientation" "value")
              (list-properties "GtkLevelBar")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("offset-changed")
              (list-signals "GtkLevelBar")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "levelbar"
                (gtk:widget-class-css-name "GtkLevelBar")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("horizontal" "continuous")
              (gtk:widget-css-classes (make-instance 'gtk:level-bar))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :meter (gtk:widget-class-accessible-role "GtkLevelBar")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLevelBar" GTK-LEVEL-BAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkAccessibleRange"
@@ -94,12 +94,6 @@
              (gobject:get-g-type-definition "GtkLevelBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     inverted
-;;;     max-value
-;;;     min-value
-;;;     mode
-;;;     value
 
 (test gtk-level-bar-properties
   (let ((levelbar (make-instance 'gtk:level-bar)))
@@ -129,4 +123,4 @@
 ;;;     gtk_level_bar_remove_offset_value
 ;;;     gtk_level_bar_get_offset_value
 
-;;; --- 2023-8-24 --------------------------------------------------------------
+;;; 2024-4-25

@@ -8,25 +8,25 @@
 ;;;     GtkImageType
 
 (test gtk-image-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkImageType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkImageType")
           (g:gtype (cffi:foreign-funcall "gtk_image_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:image-type
           (glib:symbol-for-gtype "GtkImageType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_IMAGE_EMPTY" "GTK_IMAGE_ICON_NAME" "GTK_IMAGE_GICON"
                "GTK_IMAGE_PAINTABLE")
              (list-enum-item-name "GtkImageType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3)
              (list-enum-item-value "GtkImageType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("empty" "icon-name" "gicon" "paintable")
              (list-enum-item-nick "GtkImageType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkImageType"
                              GTK-IMAGE-TYPE
                              (:EXPORT T
@@ -40,36 +40,36 @@
 ;;;     GtkImage
 
 (test gtk-image-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkImage"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:image
           (glib:symbol-for-gtype "GtkImage")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkImage")
           (g:gtype (cffi:foreign-funcall "gtk_image_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkImage")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkImage")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkImage")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("file" "gicon" "icon-name" "icon-size" "paintable" "pixel-size"
                "resource" "storage-type" "use-fallback")
              (list-properties "GtkImage")))
-  ;; Check the list of signals
+  ;; Check list of signals
   (is (equal '()
              (list-signals "GtkImage")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string= "image"
                (gtk:widget-class-css-name "GtkImage")))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :img (gtk:widget-class-accessible-role "GtkImage")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkImage" GTK-IMAGE
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
@@ -246,4 +246,4 @@
 ;;;     gtk_image_set_from_icon_name
 ;;;     gtk_image_set_from_gicon
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-25

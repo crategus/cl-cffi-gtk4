@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -116,7 +116,7 @@
 
 #+liber-documentation
 (setf (documentation 'progress-bar 'type)
- "@version{2023-9-16}
+ "@version{2024-4-25}
   @begin{short}
     The @class{gtk:progress-bar} widget is typically used to display the
     progress of a long running operation.
@@ -177,7 +177,7 @@ progressbar[.osd]
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- progress-bar-ellipsize -------------------------------------------------
+;;; --- gtk:progress-bar-ellipsize ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "ellipsize" 'progress-bar) t)
@@ -196,9 +196,9 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-ellipsize)
       "Accessor"
       (documentation 'progress-bar-ellipsize 'function)
- "@version{#2023-9-18}
-  @syntax[]{(gtk:progress-bar-ellipsize object) => mode}
-  @syntax[]{(setf (gtk:progress-bar-ellipsize object) mode)}
+ "@version{2024-4-25}
+  @syntax{(gtk:progress-bar-ellipsize object) => mode}
+  @syntax{(setf (gtk:progress-bar-ellipsize object) mode)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[mode]{a value of the @symbol{pango:ellipsize-mode} enumeration}
   @begin{short}
@@ -206,13 +206,13 @@ progressbar[.osd]
     @class{gtk:progress-bar} class.
   @end{short}
   The @fun{gtk:progress-bar-ellipsize} function returns the ellipsizing position
-  of the progress bar. The @setf{gtk:progress-bar-ellipsize} function sets the 
+  of the progress bar. The @setf{gtk:progress-bar-ellipsize} function sets the
   mode used to ellipsize the text if there is not enough space to render the
   entire string.
   @see-class{gtk:progress-bar}
   @see-symbol{pango:ellipsize-mode}")
 
-;;; --- progress-bar-fraction --------------------------------------------------
+;;; --- gtk:progress-bar-fraction ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fraction" 'progress-bar) t)
@@ -225,9 +225,9 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-fraction)
       "Accessor"
       (documentation 'progress-bar-fraction 'function)
- "@version{2023-9-18}
-  @syntax[]{(gtk:progress-bar-fraction object) => fraction}
-  @syntax[]{(setf (gtk:progress-bar-fraction object) fraction)}
+ "@version{2024-4-25}
+  @syntax{(gtk:progress-bar-fraction object) => fraction}
+  @syntax{(setf (gtk:progress-bar-fraction object) fraction)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[fraction]{a double float with the fraction of the task that is
     been completed}
@@ -237,12 +237,12 @@ progressbar[.osd]
   @end{short}
   The @fun{gtk:progress-bar-fraction} function returns the current fraction
   from 0.0 to 1.0 of the task that is been completed. The
-  @setf{gtk:progress-bar-fraction} function causes the progress bar to 
+  @setf{gtk:progress-bar-fraction} function causes the progress bar to
   \"fill in\" the given fraction of the bar. The fraction should be between 0.0
   and 1.0, inclusive.
   @see-class{gtk:progress-bar}")
 
-;;; --- progress-bar-inverted --------------------------------------------------
+;;; --- gtk:progress-bar-inverted ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "inverted" 'progress-bar) t)
@@ -254,9 +254,9 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-inverted)
       "Accessor"
       (documentation 'progress-bar-inverted 'function)
- "@version{#2023-9-16}
-  @syntax[]{(gtk:progress-bar-inverted object) => inverted}
-  @syntax[]{(setf (gtk:progress-bar-inverted object) inverted)}
+ "@version{2024-4-25}
+  @syntax{(gtk:progress-bar-inverted object) => inverted}
+  @syntax{(setf (gtk:progress-bar-inverted object) inverted)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[inverted]{@em{true} to invert the progress bar}
   @begin{short}
@@ -267,7 +267,7 @@ progressbar[.osd]
   progress bars grow in the opposite direction.
   @see-class{gtk:progress-bar}")
 
-;;; --- progress-bar-pulse-step ------------------------------------------------
+;;; --- gtk:progress-bar-pulse-step --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pulse-step" 'progress-bar) t)
@@ -280,9 +280,9 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-pulse-step)
       "Accessor"
       (documentation 'progress-bar-pulse-step 'function)
- "@version{#2023-9-18}
-  @syntax[]{(gtk:progress-bar-pulse-step object) => fraction}
-  @syntax[]{(setf (gtk:progress-bar-pulse-step object) fraction)}
+ "@version{2024-4-25}
+  @syntax{(gtk:progress-bar-pulse-step object) => fraction}
+  @syntax{(setf (gtk:progress-bar-pulse-step object) fraction)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[fraction]{a double float with the fraction between 0.0 and 1.0}
   @begin{short}
@@ -290,32 +290,34 @@ progressbar[.osd]
     @class{gtk:progress-bar} class.
   @end{short}
   The @fun{gtk:progress-bar-pulse-step} function retrieves the pulse step which
-  is a fraction from 0.0 to 1.0. The @setf{gtk:progress-bar-pulse-step} function 
-  sets the fraction of total progress bar length to move the bouncing block for 
+  is a fraction from 0.0 to 1.0. The @setf{gtk:progress-bar-pulse-step} function
+  sets the fraction of total progress bar length to move the bouncing block for
   each call to the @fun{gtk:progress-bar-pulse} function.
   @see-class{gtk:progress-bar}
   @see-function{gtk:progress-bar-pulse}")
 
-;;; --- progress-bar-show-text -------------------------------------------------
+;;; --- gtk:progress-bar-show-text ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-text" 'progress-bar) t)
  "The @code{show-text} property of type @code{:boolean} (Read / Write) @br{}
   Sets whether the progress bar will show text superimposed over the bar. The
-  shown text is either the value of the @code{text} property or, if that is
-  @code{nil}, the @code{fraction} value, as a percentage. To make a progress
-  bar that is styled and sized suitably for containing text, even if the actual
-  text is blank, set the @code{show-text} property to @em{true} and the
-  @code{text} property to the empty string, not @code{nil}. @br{}
+  shown text is either the value of the @slot[gtk:progress-bar]{text} property
+  or, if that is @code{nil}, the @slot[gtk:progress-bar]{fraction} value, as a
+  percentage. To make a progress bar that is styled and sized suitably for
+  containing text, even if the actual text is blank, set the
+  @slot[gtk:progress-bar]{show-text} property to @em{true} and the
+  @slot[gtk:progres-bar]{text} property to the empty string, not @code{nil}.
+  @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'progress-bar-show-text)
       "Accessor"
       (documentation 'progress-bar-show-text 'function)
- "@version{#2023-9-18}
-  @syntax[]{(gtk:progress-bar-show-text object) => setting}
-  @syntax[]{(setf (gtk:progress-bar-show-text object) setting)}
+ "@version{2024-4-25}
+  @syntax{(gtk:progress-bar-show-text object) => setting}
+  @syntax{(setf (gtk:progress-bar-show-text object) setting)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[setting]{a boolean whether to show superimposed text}
   @begin{short}
@@ -324,8 +326,8 @@ progressbar[.osd]
   @end{short}
   The @fun{gtk:progress-bar-show-text} function gets the value of the
   @slot[gtk:progress-bar]{show-text} property. The
-  @setf{gtk:progress-bar-show-text} function sets whether the progress bar will 
-  show text superimposed over the bar. The shown text is either the value of the 
+  @setf{gtk:progress-bar-show-text} function sets whether the progress bar will
+  show text superimposed over the bar. The shown text is either the value of the
   @slot[gtk:progress-bar]{text} property or, if that is @code{nil}, the
   @slot[gtk:progress-bar]{fraction} value, as a percentage.
 
@@ -337,7 +339,7 @@ progressbar[.osd]
   @see-function{gtk:progress-bar-text}
   @see-function{gtk:progress-bar-fraction}")
 
-;;; --- progress-bar-text ------------------------------------------------------
+;;; --- gtk:progress-bar-text --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text" 'progress-bar) t)
@@ -349,9 +351,9 @@ progressbar[.osd]
 (setf (liber:alias-for-function 'progress-bar-text)
       "Accessor"
       (documentation 'progress-bar-text 'function)
- "@version{#2023-9-18}
-  @syntax[]{(gtk:progress-bar-text object) => text}
-  @syntax[]{(setf (gtk:progress-bar-text object) text)}
+ "@version{2024-4-25}
+  @syntax{(gtk:progress-bar-text object) => text}
+  @syntax{(setf (gtk:progress-bar-text object) text)}
   @argument[object]{a @class{gtk:progress-bar} widget}
   @argument[text]{a UTF-8 string, or @code{nil}}
   @begin{short}
@@ -361,7 +363,7 @@ progressbar[.osd]
   The @fun{gtk:progress-bar-text} function retrieves the text displayed
   superimposed on the progress bar, if any, otherwise @code{nil}. The return
   value is a reference to the text, not a copy of it, so will become invalid if
-  you change the text in the progress bar. The @setf{gtk:progress-bar-text} 
+  you change the text in the progress bar. The @setf{gtk:progress-bar-text}
   function causes the given text to appear superimposed on the progress bar.
 
   If the @arg{text} argument is @code{nil} and the
@@ -380,25 +382,23 @@ progressbar[.osd]
   @see-function{gtk:progress-bar-show-text}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_progress_bar_new ()
+;;; gtk_progress_bar_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline progress-bar-new))
 
 (defun progress-bar-new ()
  #+liber-documentation
- "@version{#2021-11-2}
-  @return{A @class{gtk:progress-bar} widget.}
-  @begin{short}
-    Creates a new progress bar.
-  @end{short}
+ "@version{2024-4-25}
+  @return{The @class{gtk:progress-bar} widget.}
+  @short{Creates a new progress bar.}
   @see-class{gtk:progress-bar}"
   (make-instance 'progress-bar))
 
 (export 'progress-bar-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_progress_bar_pulse ()
+;;; gtk_progress_bar_pulse
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_progress_bar_pulse" progress-bar-pulse) :void

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -83,14 +83,14 @@
 
 #+liber-documentation
 (setf (documentation 'spinner 'type)
- "@version{2023-8-24}
+ "@version{2024-4-25}
   @begin{short}
-    A @class{gtk:spinner} widget displays an icon size spinning animation.
+    The @class{gtk:spinner} widget displays an icon size spinning animation.
   @end{short}
 
   @image[spinner]{Figure: GtkSpinner}
 
-  It is often used as an alternative to a @class{gtk:progress-bar} widget for
+  It is often used as an alternative to the @class{gtk:progress-bar} widget for
   displaying indefinite activity, instead of actual progress.
 
   To start the animation, use the @fun{gtk:spinner-start} function, to stop it
@@ -118,9 +118,9 @@
 (setf (liber:alias-for-function 'spinner-spinning)
       "Accessor"
       (documentation 'spinner-spinning 'function)
- "@version{2023-8-24}
-  @syntax[]{(gtk:spinner-spinning object) => spinning}
-  @syntax[]{(setf (gtk:spinner-spinning object) spinning)}
+ "@version{2024-4-25}
+  @syntax{(gtk:spinner-spinning object) => spinning}
+  @syntax{(setf (gtk:spinner-spinning object) spinning)}
   @argument[object]{a @class{gtk:spinner} widget}
   @argument[spinning]{a boolean whether the spinner is spinning}
   @begin{short}
@@ -140,8 +140,8 @@
 
 (defun spinner-new ()
  #+liber-documentation
- "@version{2023-8-24}
-  @return{A new @class{gtk:spinner} widget.}
+ "@version{2024-4-25}
+  @return{The new @class{gtk:spinner} widget.}
   @short{Returns a new spinner.}
   Not yet started.
   @see-class{gtk:spinner}

@@ -8,37 +8,37 @@
 ;;;     GtkSpinner
 
 (test gtk-spinner-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkSpinner"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:spinner
           (glib:symbol-for-gtype "GtkSpinner")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkSpinner")
           (g:gtype (cffi:foreign-funcall "gtk_spinner_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkSpinner")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkSpinner")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkSpinner")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("spinning")
              (list-properties "GtkSpinner")))
-  ;; Check the list of signals
+  ;; Check list of signals
   (is (equal '()
              (list-signals "GtkSpinner")))
-  ;; CSS name
+  ;; Checkk CSS name
   (is (string= "spinner"
                (gtk:widget-class-css-name "GtkSpinner")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:spinner))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkSpinner")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkSpinner" GTK-SPINNER
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
@@ -73,4 +73,4 @@
     (is-false (gtk:spinner-stop spinner))
     (is-false (gtk:spinner-spinning spinner))))
 
-;;; --- 2023-8-24 --------------------------------------------------------------
+;;; 2024-4-25

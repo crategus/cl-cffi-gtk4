@@ -8,28 +8,28 @@
 ;;;     GtkInscriptionOverflow
 
 (test gtk-inscription-overflow
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkInscriptionOverflow"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkInscriptionOverflow")
           (g:gtype (cffi:foreign-funcall "gtk_inscription_overflow_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:inscription-overflow
           (glib:symbol-for-gtype "GtkInscriptionOverflow")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_INSCRIPTION_OVERFLOW_CLIP"
                "GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_START"
                "GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_MIDDLE"
                "GTK_INSCRIPTION_OVERFLOW_ELLIPSIZE_END")
              (list-enum-item-name "GtkInscriptionOverflow")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3)
              (list-enum-item-value "GtkInscriptionOverflow")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("clip" "ellipsize-start" "ellipsize-middle" "ellipsize-end")
              (list-enum-item-nick "GtkInscriptionOverflow")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkInscriptionOverflow"
                                      GTK-INSCRIPTION-OVERFLOW
                                      (:EXPORT T
@@ -44,37 +44,37 @@
 ;;;     GtkInscription
 
 (test gtk-inscription-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkInscription"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:inscription
           (glib:symbol-for-gtype "GtkInscription")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkInscription")
           (g:gtype (cffi:foreign-funcall "gtk_inscription_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkInscription")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkInscription")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkInscription")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("attributes" "markup" "min-chars" "min-lines" "nat-chars"
                "nat-lines" "text" "text-overflow" "wrap-mode" "xalign" "yalign")
              (list-properties "GtkInscription")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkInscription")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "label"
                (gtk:widget-class-css-name "GtkInscription")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:inscription))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :label (gtk:widget-class-accessible-role "GtkInscription")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkInscription" GTK-INSCRIPTION
@@ -88,7 +88,7 @@
                                  "gchararray" NIL T)
                                 (MIN-CHARS GTK-INSCRIPTION-MIN-CHARS
                                  "min-chars" "guint" T T)
-                            (MIN-LINES GTK-INSCRIPTION-MIN-LINES
+                                (MIN-LINES GTK-INSCRIPTION-MIN-LINES
                                  "min-lines" "guint" T T)
                                 (NAT-CHARS GTK-INSCRIPTION-NAT-CHARS
                                  "nat-chars" "guint" T T)
@@ -107,18 +107,6 @@
              (gobject:get-g-type-definition "GtkInscription"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     attributes
-;;;     markup
-;;;     min-chars
-;;;     min-lines
-;;;     nat-chars
-;;;     nat-lines
-;;;     text
-;;;     text-overflow
-;;;     wrap-mode
-;;;     xalign
-;;;     yalign
 
 (test gtk-inscription-properties
   (let ((widget (make-instance 'gtk:inscription)))
@@ -143,4 +131,4 @@
   (is (typep (gtk:inscription-new nil) 'gtk:inscription))
   (is (typep (gtk:inscription-new "text") 'gtk:inscription)))
 
-;;; --- 2023-10-18 -------------------------------------------------------------
+;;; 2024-4-25

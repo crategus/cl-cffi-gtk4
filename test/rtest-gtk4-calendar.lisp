@@ -8,39 +8,39 @@
 ;;;     GtkCalendar
 
 (test gtk-calendar-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCalendar"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:calendar
           (glib:symbol-for-gtype "GtkCalendar")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCalendar")
           (g:gtype (cffi:foreign-funcall "gtk_calendar_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkCalendar")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkCalendar")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkCalendar")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("day" "month" "show-day-names" "show-heading" "show-week-numbers"
                "year")
              (list-properties "GtkCalendar")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("day-selected" "next-month" "next-year" "prev-month" "prev-year")
              (list-signals "GtkCalendar")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "calendar"
                (gtk:widget-class-css-name "GtkCalendar")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("view")
              (gtk:widget-css-classes (make-instance 'gtk:calendar))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkCalendar")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCalendar" GTK-CALENDAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -59,13 +59,6 @@
              (gobject:get-g-type-definition "GtkCalendar"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     day
-;;;     month
-;;;     show-day-names
-;;;     show-heading
-;;;     show-week-numbers
-;;;     year
 
 (test gtk-calendar-properties
   (let* ((time (multiple-value-list (get-decoded-time)))
@@ -102,4 +95,4 @@
 ;;;     gtk_calendar_clear_marks
 ;;;     gtk_calendar_get_date
 
-;;; --- 2023-8-24 --------------------------------------------------------------
+;;; 2024-4-25

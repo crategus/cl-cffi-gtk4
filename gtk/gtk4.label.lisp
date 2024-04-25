@@ -229,8 +229,8 @@
   @subheading{Mnemonics}
   Labels may contain mnemonics. Mnemonics are underlined characters in the
   label, used for keyboard navigation. Mnemonics are created by providing a
-  string with an underscore before the mnemonic character, such as \"_File\",
-  to the @fun{gtk:label-new-with-mnemonic} or
+  string with an underscore before the mnemonic character, such as
+  @code{\"_File\"}, to the @fun{gtk:label-new-with-mnemonic} or
   @fun{gtk:label-set-text-with-mnemonic} functions.
 
   Mnemonics automatically activate any activatable widget the label is inside,
@@ -331,8 +331,7 @@
   displayed as a tooltip on the link. An example looks like this:
   @begin{pre}
 (gtk:label-set-markup label
-                      \"Go to the <span style=\"color: red\">
-                                   <a>GTK website</a></span> for more...\")
+                      \"Go to the <a>GTK website</a> for more...\")
   @end{pre}
   It is possible to implement custom handling for links and their tooltips
   with the @code{\"activate-link\"} signal and the @fun{gtk:label-current-uri}
@@ -498,7 +497,7 @@ lambda (label step count extend)    :action
 (setf (documentation (liber:slot-documentation "attributes" 'label) t)
  "The @code{attributes} property of type @class{pango:attr-list}
   (Read / Write) @br{}
-  A list of style attributes to apply to the text of the label.")
+  The list of style attributes to apply to the text of the label.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'label-attributes)
@@ -581,7 +580,7 @@ lambda (label step count extend)    :action
 (setf (documentation (liber:slot-documentation "extra-menu" 'label) t)
  "The @code{extra-menu} property of type @class{g:menu-model} (Read / Write)
   @br{}
-  A menu model whose contents will be appended to the context menu.")
+  The menu model whose contents will be appended to the context menu.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'label-extra-menu)

@@ -8,35 +8,35 @@
 ;;;     GtkProgressBar
 
 (test gtk-progress-bar-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkProgressBar"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:progress-bar
           (glib:symbol-for-gtype "GtkProgressBar")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkProgressBar")
           (g:gtype (cffi:foreign-funcall "gtk_progress_bar_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkProgressBar")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkProgressBar")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable" "GtkAccessibleRange")
              (list-interfaces "GtkProgressBar")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("ellipsize" "fraction" "inverted" "orientation" "pulse-step"
                "show-text" "text")
              (list-properties "GtkProgressBar")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkProgressBar")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string= "progressbar"
                (gtk:widget-class-css-name "GtkProgressBar")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkProgressBar" GTK-PROGRESS-BAR
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkAccessibleRange" "GtkBuildable"
@@ -57,16 +57,22 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     ellipsize
-;;;     fraction
-;;;     inverted
-;;;     pulse-step
-;;;     show-text
-;;;     text
+(test gtk-progress-bar-properties
+  (let ((bar (make-instance 'gtk:progress-bar)))
+    (is (eq :none (gtk:progress-bar-ellipsize bar)))
+    (is (= 0.0d0 (gtk:progress-bar-fraction bar)))
+    (is-false (gtk:progress-bar-inverted bar))
+    (is (= 0.1d0 (gtk:progress-bar-pulse-step bar)))
+    (is-false (gtk:progress-bar-show-text bar))
+    (is-false (gtk:progress-bar-text bar))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_progress_bar_new
+
+(test gtk-progress-bar-new
+  (is (typep (gtk:progress-bar-new) 'gtk:progress-bar)))
+
 ;;;     gtk_progress_bar_pulse
 
-;;; --- 2023-9-16 --------------------------------------------------------------
+;;; 2024-4-25

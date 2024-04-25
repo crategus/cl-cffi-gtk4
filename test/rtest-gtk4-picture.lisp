@@ -8,28 +8,28 @@
 ;;;     GtkContentFit                                      Since 4.8
 
 (test gtk-content-fit
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkContentFit"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkContentFit")
           (g:gtype (cffi:foreign-funcall "gtk_content_fit_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:content-fit
           (glib:symbol-for-gtype "GtkContentFit")))
-  ;; Check the names
-  (is (equal '("GTK_CONTENT_FIT_FILL" "GTK_CONTENT_FIT_CONTAIN" 
+  ;; Check names
+  (is (equal '("GTK_CONTENT_FIT_FILL" "GTK_CONTENT_FIT_CONTAIN"
                "GTK_CONTENT_FIT_COVER" "GTK_CONTENT_FIT_SCALE_DOWN")
              (list-enum-item-name "GtkContentFit")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3)
              (list-enum-item-value "GtkContentFit")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("fill" "contain" "cover" "scale-down")
              (list-enum-item-nick "GtkContentFit")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkContentFit" GTK-CONTENT-FIT
-                                     (:EXPORT T 
-                                      :TYPE-INITIALIZER 
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
                                       "gtk_content_fit_get_type")
                                      (:FILL 0)
                                      (:CONTAIN 1)
@@ -40,34 +40,34 @@
 ;;;     GtkPicture
 
 (test gtk-picture-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkPicture"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:picture
           (glib:symbol-for-gtype "GtkPicture")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPicture")
           (g:gtype (cffi:foreign-funcall "gtk_picture_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkPicture")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkPicture")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkPicture")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("alternative-text" "can-shrink" "content-fit" "file"
                "keep-aspect-ratio" "paintable")
              (list-properties "GtkPicture")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkPicture")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string= "picture"
                (gtk:widget-class-css-name "GtkPicture")))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :img (gtk:widget-class-accessible-role "GtkPicture")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPicture" GTK-PICTURE
@@ -89,23 +89,54 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     alternative-text
-;;;     can-shrink
-;;;     content-fit                                        Since 4.8
-;;;     file
-;;;     keep-aspect-ratio                                  Deprecated 4.8
-;;;     paintable
+(test gtk-picture-properties
+  (let ((picture (make-instance 'gtk:picture)))
+    (is-false (gtk:picture-alternative-text picture))
+    (is-true (gtk:picture-can-shrink picture))
+    (is (eq :contain (gtk:picture-content-fit picture)))
+    (is-false (gtk:picture-file picture))
+    (is-true (gtk:picture-keep-aspect-ratio picture))
+    (is-false (gtk:picture-paintable picture))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_picture_new
+
+(test gtk-picture-new
+  (is (typep (gtk:picture-new) 'gtk:picture)))
+
 ;;;     gtk_picture_new_for_paintable
+
+(test gtk-picture-new-for-paintable
+  (let ((paintable (gdk:texture-new-from-filename
+                       (sys-path "resource/gtk-logo-24.png"))))
+    (is (typep (gtk:picture-new-for-paintable paintable) 'gtk:picture))))
+
 ;;;     gtk_picture_new_for_pixbuf
+
+(test gtk-picture-new-for-pixbuf
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((pixbuf (gdk:pixbuf-new-from-file
+                      (sys-path "resource/gtk-logo-24.png"))))
+      (is (typep (gtk:picture-new-for-pixbuf pixbuf) 'gtk:picture)))))
+
 ;;;     gtk_picture_new_for_file
+
 ;;;     gtk_picture_new_for_filename
+
+(test gtk-picture-new-for-filename
+  (let ((filename (sys-path "resource/gtk-logo-24.png")))
+    (is (typep (gtk:picture-new-for-filename filename) 'gtk:picture))))
+
 ;;;     gtk_picture_new_for_resource
+
+(test gtk-picture-new-for-resource
+  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+    (let ((path "/com/crategus/test/gtk-logo-24.png"))
+    (is (typep (gtk:picture-new-for-resource path) 'gtk:picture)))))
+
 ;;;     gtk_picture_set_pixbuf
 ;;;     gtk_picture_set_filename
 ;;;     gtk_picture_set_resource
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-4-25

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -88,7 +88,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkCalendar
+;;; GtkCalendar
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkCalendar" calendar
@@ -118,7 +118,7 @@
 
 #+liber-documentation
 (setf (documentation 'calendar 'type)
- "@version{2023-8-24}
+ "@version{2024-4-25}
   @begin{short}
     The @class{gtk:calendar} widget displays a Gregorian calendar, one month at
     a time.
@@ -156,17 +156,13 @@ calendar.view
     @end{pre}
     The @class{gtk:calendar} implementation has a main node with name
     @code{calendar}. It contains a subnode called @code{header} containing the
-    widgets for switching between years and months.
-
-    The @code{grid} subnode contains all day labels, including week numbers on
-    the left. marked with the @code{.week-number} style class, and day names on
-    top, marked with the @code{.day-name} style class.
-
-    Day labels that belong to the previous or next month get the
-    @code{.other-month} style class. The label of the current day get the
-    @code{.today} style class.
-
-    Marked day labels get the @code{:selected} state assigned.
+    widgets for switching between years and months. The @code{grid} subnode
+    contains all day labels, including week numbers on the left. marked with
+    the @code{.week-number} style class, and day names on top, marked with the
+    @code{.day-name} style class. Day labels that belong to the previous or next
+    month get the @code{.other-month} style class. The label of the current day
+    get the @code{.today} style class. Marked day labels get the
+    @code{:selected} state assigned.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"day-selected\" signal}
@@ -184,7 +180,7 @@ lambda (calendar)    :run-first
       @end{pre}
       The signal is emitted when the user switched to the next month.
       @begin[code]{table}
-        @enty[calendar]{The @class{gtk:calendar} widget which received the
+        @entry[calendar]{The @class{gtk:calendar} widget which received the
           signal.}
       @end{table}
     @subheading{The \"next-year\" signal}
@@ -227,7 +223,7 @@ lambda (calendar)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- calendar-day -----------------------------------------------------------
+;;; --- gtk:calendar-day -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "day" 'calendar) t)
@@ -241,9 +237,9 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-day)
       "Accessor"
       (documentation 'calendar-day 'function)
- "@version{2023-8-24}
-  @syntax[]{(gtk:calender-day object) => day}
-  @syntax[]{(setf (gtk:calendar-day object) day)}
+ "@version{2024-4-25}
+  @syntax{(gtk:calender-day object) => day}
+  @syntax{(setf (gtk:calendar-day object) day)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[day]{an integer with the selected day}
   @begin{short}
@@ -256,7 +252,7 @@ lambda (calendar)    :run-first
   @see-function{gtk:calendar-date}
   @see-function{gtk:calendar-select-day}")
 
-;;; --- calendar-month ---------------------------------------------------------
+;;; --- gtk:calendar-month -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "month" 'calendar) t)
@@ -270,9 +266,9 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-month)
       "Accessor"
       (documentation 'calendar-month 'function)
- "@version{2023-8-24}
-  @syntax[]{(gtk:calendar-month object) => month}
-  @syntax[]{(setf (gtk:calendar-month object) month)}
+ "@version{2024-4-25}
+  @syntax{(gtk:calendar-month object) => month}
+  @syntax{(setf (gtk:calendar-month object) month)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[month]{an integer with the selected month}
   @begin{short}
@@ -282,7 +278,7 @@ lambda (calendar)    :run-first
   @see-class{gtk:calendar}
   @see-function{gtk:calendar-date}")
 
-;;; --- calendar-show-day-names ------------------------------------------------
+;;; --- gtk:calendar-show-day-names --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-day-names" 'calendar) t)
@@ -295,11 +291,11 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-day-names)
       "Accessor"
       (documentation 'calendar-show-day-names 'function)
- "@version{2023-8-24}
-  @syntax[]{(gtk:calendar-show-day-names object) => show-day-names}
-  @syntax[]{(setf (gtk:calendar-show-day-names object) show-day-names)}
+ "@version{2024-4-25}
+  @syntax{(gtk:calendar-show-day-names object) => setting}
+  @syntax{(setf (gtk:calendar-show-day-names object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
-  @argument[show-day-names]{a boolean whether day names are displayed}
+  @argument[setting]{a boolean whether day names are displayed}
   @begin{short}
     Accessor of the @slot[gtk:calendar]{show-day-names} slot of the
     @class{gtk:calendar} class.
@@ -307,7 +303,7 @@ lambda (calendar)    :run-first
   Determines whether day names are displayed.
   @see-class{gtk:calendar}")
 
-;;; --- calendar-show-heading --------------------------------------------------
+;;; --- gtk:calendar-show-heading ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-heading" 'calendar) t)
@@ -319,11 +315,11 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-heading)
       "Accessor"
       (documentation 'calendar-show-heading 'function)
- "@version{2023-8-24}
-  @syntax[]{(gtk:calendar-show-heading object) => show-heading}
-  @syntax[]{(setf (gtk:calendar-show-heading object) show-heading)}
+ "@version{2024-4-25}
+  @syntax{(gtk:calendar-show-heading object) => setting}
+  @syntax{(setf (gtk:calendar-show-heading object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
-  @argument[show-heading]{a boolean whether a heading is displayed}
+  @argument[setting]{a boolean whether a heading is displayed}
   @begin{short}
     Accessor of the @slot[gtk:calendar]{show-heading} slot of the
     @class{gtk:calendar} class.
@@ -331,7 +327,7 @@ lambda (calendar)    :run-first
   Determines whether a heading is displayed.
   @see-class{gtk:calendar}")
 
-;;; --- calendar-show-week-numbers -----------------------------------------
+;;; --- gtk:calendar-show-week-numbers -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-week-numbers" 'calendar) t)
@@ -344,11 +340,11 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-show-week-numbers)
       "Accessor"
       (documentation 'calendar-show-week-numbers 'function)
- "@version{2023-8-24}
-  @syntax[]{(gtk:calendar-show-week-numbers object) => show-week-numbers}
-  @syntax[]{(setf (gtk:calendar-show-week-numbers object) show-week-numbers)}
+ "@version{2024-4-25}
+  @syntax{(gtk:calendar-show-week-numbers object) => setting}
+  @syntax{(setf (gtk:calendar-show-week-numbers object) setting)}
   @argument[object]{a @class{gtk:calendar} widget}
-  @argument[show-week-numbers]{a boolean whether week numbers are displayed}
+  @argument[setting]{a boolean whether week numbers are displayed}
   @begin{short}
     Accessor of the @slot[gtk:calendar]{show-week-numbers} slot of the
     @class{gtk:calendar} class.
@@ -356,7 +352,7 @@ lambda (calendar)    :run-first
   Determines whether week numbers are displayed.
   @see-class{gtk:calendar}")
 
-;;; --- calendar-year ----------------------------------------------------------
+;;; --- gtk:calendar-year ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "year" 'calendar) t)
@@ -369,9 +365,9 @@ lambda (calendar)    :run-first
 (setf (liber:alias-for-function 'calendar-year)
       "Accessor"
       (documentation 'calendar-year 'function)
- "@version{2023-8-24}
-  @syntax[]{(gtk:calendar-year object) => year}
-  @syntax[]{(setf (gtk:calendar-year object) year)}
+ "@version{2024-4-25}
+  @syntax{(gtk:calendar-year object) => year}
+  @syntax{(setf (gtk:calendar-year object) year)}
   @argument[object]{a @class{gtk:calendar} widget}
   @argument[year]{an integer with the selected year}
   @begin{short}
@@ -383,15 +379,15 @@ lambda (calendar)    :run-first
   @see-function{gtk:calendar-date}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_calendar_new ()
+;;; gtk_calendar_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline calendar-new))
 
 (defun calendar-new ()
  #+liber-documentation
- "@version{#2021-12-18}
-  @return{A newly @class{gtk:calendar} widget.}
+ "@version{2024-3-25}
+  @return{The newly @class{gtk:calendar} widget.}
   @begin{short}
     Creates a new calendar, with the current date being selected.
   @end{short}
@@ -401,24 +397,11 @@ lambda (calendar)    :run-first
 (export 'calendar-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_calendar_select_day ()
+;;; gtk_calendar_select_day
 ;;; ----------------------------------------------------------------------------
 
-;;; New implementation needed!?
-
-;;; gtk_calendar_select_day ()
-;;;
-;;; void
-;;; gtk_calendar_select_day (GtkCalendar *self,
-;;;                          GDateTime *date);
-;;;
-;;; Will switch to date 's year and month and select its day.
-;;;
-;;; self :
-;;;     a GtkCalendar.
-;;;
-;;; date :
-;;;     a GDateTime representing the day to select.
+;; TODO: The C implementation introduces the GDateTime type. We pass in the
+;; day, month and year argument.
 
 (declaim (inline calendar-select-day))
 
@@ -430,7 +413,7 @@ lambda (calendar)    :run-first
   @argument[month]{an integer with the month}
   @argument[day]{an integer with the day between 1 and 31}
   @begin{short}
-    Will switch to the year and month of the date and slelect its day.
+    Will switch to the year and month of the date and select its day.
   @end{short}
   @see-class{gtk:calendar}
   @see-function{gtk:calendar-select-month}"
@@ -441,7 +424,7 @@ lambda (calendar)    :run-first
 (export 'calendar-select-day)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_calendar_mark_day ()
+;;; gtk_calendar_mark_day
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_calendar_mark_day" calendar-mark-day) :boolean
@@ -462,7 +445,7 @@ lambda (calendar)    :run-first
 (export 'calendar-mark-day)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_calendar_unmark_day ()
+;;; gtk_calendar_unmark_day
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_calendar_unmark_day" calendar-unmark-day) :boolean
@@ -483,7 +466,7 @@ lambda (calendar)    :run-first
 (export 'calendar-unmark-day)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_calendar_get_day_is_marked () -> calendar-day-is-marked
+;;; gtk_calendar_get_day_is_marked
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_calendar_get_day_is_marked" calendar-day-is-marked) :boolean
@@ -491,7 +474,7 @@ lambda (calendar)    :run-first
  "@version{#2023-8-24}
   @argument[calendar]{a @class{gtk:calendar} widget}
   @argument[day]{an unsigned integer with the day between 1 and 31}
-  @return{A boolean whether the day is marked.}
+  @return{The boolean whether the day is marked.}
   @begin{short}
     Returns if the day of the calendar is already marked.
   @end{short}
@@ -504,7 +487,7 @@ lambda (calendar)    :run-first
 (export 'calendar-day-is-marked)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_calendar_clear_marks ()
+;;; gtk_calendar_clear_marks
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_calendar_clear_marks" calendar-clear-marks) :void
@@ -522,24 +505,11 @@ lambda (calendar)    :run-first
 (export 'calendar-clear-marks)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_calendar_get_date () -> calendar-date
+;;; gtk_calendar_get_date
 ;;; ----------------------------------------------------------------------------
 
-;;; New implementation needed!?
-
-;;; gtk_calendar_get_date ()
-;;;
-;;; GDateTime *
-;;; gtk_calendar_get_date (GtkCalendar *self);
-;;;
-;;; Returns a GDateTime representing the shown year, month and the selected day,
-;;; in the local time zone.
-;;;
-;;; self :
-;;;     a GtkCalendar
-;;;
-;;; Returns :
-;;;     the GDate representing the shown date.
+;; TODO: The C implementation introduces the GDateTime type. We return
+;; the values from the calendar widget.
 
 (defun calendar-date (calendar)
  #+liber-documentation
@@ -554,8 +524,7 @@ lambda (calendar)    :run-first
     Obtains the selected date from the calendar.
   @end{short}
   @see-class{gtk:calendar}
-  @see-function{gtk:calendar-select-day}
-  @see-function{gtk:calendar-select-month}"
+  @see-function{gtk:calendar-select-day}"
   (values (calendar-year calendar)
           (calendar-month calendar)
           (calendar-day calendar)))

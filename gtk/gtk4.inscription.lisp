@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -67,7 +67,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkInscriptionOverflow
+;;; GtkInscriptionOverflow
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkInscriptionOverflow" inscription-overflow
@@ -82,12 +82,9 @@
 (setf (liber:alias-for-symbol 'inscription-overflow)
       "GEnum"
       (liber:symbol-documentation 'inscription-overflow)
- "@version{2023-10-13}
-  @begin{short}
-    The different methods to handle text in the @class{gtk:inscription} widget
-    when it does not fit the available space.
-  @end{short}
-  @begin{pre}
+ "@version{2024-4-25}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkInscriptionOverflow\" inscription-overflow
   (:export t
    :type-initializer \"gtk_inscription_overflow_get_type\")
@@ -95,13 +92,21 @@
   (:ellipsize-start 1)
   (:ellipsize-middle 2)
   (:ellipsize-end 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:clip]{Clip the remaining text.}
-    @entry[:ellipsize-start]{Omit characters at the start of the text.}
-    @entry[:ellipsize-middle]{Omit characters at the middle of the text.}
-    @entry[:ellipsize-end]{Omit characters at the end of the text.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:clip]{Clip the remaining text.}
+      @entry[:ellipsize-start]{Omit characters at the start of the text.}
+      @entry[:ellipsize-middle]{Omit characters at the middle of the text.}
+      @entry[:ellipsize-end]{Omit characters at the end of the text.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The different methods to handle text in the @class{gtk:inscription} widget
+    when it does not fit the available space.
+  @end{short}
+
   Since 4.8
   @see-class{gtk:inscription}")
 
@@ -152,7 +157,7 @@
 
 #+liber-documentation
 (setf (documentation 'inscription 'type)
- "@version{2023-10-18}
+ "@version{2024-4-25}
   @begin{short}
     The @class{gtk:inscription} widget is a widget to show text in a predefined
     area.
@@ -188,21 +193,21 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- inscription-attributes -------------------------------------------------
+;;; --- gtk:inscription-attributes ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "attributes" 'inscription) t)
  "The @code{attributes} property of type @class{pango:attr-list} (Read / Write)
   @br{}
-  A list of style attributes to apply to the text of the inscription.")
+  The list of style attributes to apply to the text of the inscription.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'inscription-attributes)
       "Accessor"
       (documentation 'inscription-attributes 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-attributes object) => attrs}
-  @syntax[]{(setf (gtk:inscription-attributes object) attrs)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-attributes object) => attrs}
+  @syntax{(setf (gtk:inscription-attributes object) attrs)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[attrs]{a @class{pango:attr-list} instance}
   @begin{short}
@@ -218,7 +223,7 @@
   @see-class{gtk:inscription}
   @see-class{pango:attr-list}")
 
-;;; --- inscription-markup -----------------------------------------------------
+;;; --- gtk:inscription-markup -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "markup" 'inscription) t)
@@ -235,8 +240,8 @@
 (setf (liber:alias-for-function 'inscription-markup)
       "Accessor"
       (documentation 'inscription-markup 'function)
- "@version{2023-10-18}
-  @syntax[]{(setf (gtk:inscription-markup object) attrs)}
+ "@version{2024-4-25}
+  @syntax{(setf (gtk:inscription-markup object) attrs)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[markup]{a string with the markup to display}
   @begin{short}
@@ -249,7 +254,7 @@
   Since 4.8
   @see-class{gtk:inscription}")
 
-;;; --- inscription-min-chars --------------------------------------------------
+;;; --- gtk:inscription-min-chars ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "min-chars" 'inscription) t)
@@ -267,9 +272,9 @@
 (setf (liber:alias-for-function 'inscription-min-chars)
       "Accessor"
       (documentation 'inscription-min-chars 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-min-chars object) => chars}
-  @syntax[]{(setf (gtk:inscription-min-chars object) chars)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-min-chars object) => chars}
+  @syntax{(setf (gtk:inscription-min-chars object) chars)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[chars]{an integer with the minimum number of characters that should
     fit, approximately}
@@ -281,7 +286,7 @@
   Since 4.8
   @see-class{gtk:inscription}")
 
-;;; --- inscription-min-lines --------------------------------------------------
+;;; --- gtk:inscription-min-lines ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "min-lines" 'inscription) t)
@@ -299,9 +304,9 @@
 (setf (liber:alias-for-function 'inscription-min-lines)
       "Accessor"
       (documentation 'inscription-min-lines 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-min-lines object) => lines}
-  @syntax[]{(setf (gtk:inscription-min-lines object) lines)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-min-lines object) => lines}
+  @syntax{(setf (gtk:inscription-min-lines object) lines)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[lines]{an integer with the minimum number of lines that should fit,
     approximately}
@@ -313,7 +318,7 @@
   Since 4.8
   @see-class{gtk:inscription}")
 
-;;; --- inscription-nat-chars --------------------------------------------------
+;;; --- gtk:inscription-nat-chars ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "nat-chars" 'inscription) t)
@@ -330,9 +335,9 @@
 (setf (liber:alias-for-function 'inscription-nat-chars)
       "Accessor"
       (documentation 'inscription-nat-chars 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-nat-chars object) => chars}
-  @syntax[]{(setf (gtk:inscription-nat-chars object) chars)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-nat-chars object) => chars}
+  @syntax{(setf (gtk:inscription-nat-chars object) chars)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[chars]{an integer with the number of characters that should ideally
     fit}
@@ -344,7 +349,7 @@
   Since 4.8
   @see-class{gtk:inscription}")
 
-;;; --- inscription-nat-lines --------------------------------------------------
+;;; --- gtk:inscription-nat-lines ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "nat-lines" 'inscription) t)
@@ -361,9 +366,9 @@
 (setf (liber:alias-for-function 'inscription-nat-lines)
       "Accessor"
       (documentation 'inscription-nat-lines 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-nat-lines object) => lines}
-  @syntax[]{(setf (gtk:inscription-nat-lines object) lines)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-nat-lines object) => lines}
+  @syntax{(setf (gtk:inscription-nat-lines object) lines)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[lines]{an integer with the number of lines that should ideally fit}
   @begin{short}
@@ -374,7 +379,7 @@
   Since 4.8
   @see-class{gtk:inscription}")
 
-;;; --- inscription-text -------------------------------------------------------
+;;; --- gtk:inscription-text ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text" 'inscription) t)
@@ -386,9 +391,9 @@
 (setf (liber:alias-for-function 'inscription-text)
       "Accessor"
       (documentation 'inscription-text 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-text object) => text}
-  @syntax[]{(setf (gtk:inscription-text object) text)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-text object) => text}
+  @syntax{(setf (gtk:inscription-text object) text)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[lines]{a string with the text to display}
   @begin{short}
@@ -399,7 +404,7 @@
   Since 4.8
   @see-class{gtk:inscription}")
 
-;;; --- inscription-text-overflow ----------------------------------------------
+;;; --- gtk:inscription-text-overflow ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text-overflow" 'inscription) t)
@@ -412,9 +417,9 @@
 (setf (liber:alias-for-function 'inscription-text-overflow)
       "Accessor"
       (documentation 'inscription-text-overflow 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-text-overflow object) => setting}
-  @syntax[]{(setf (gtk:inscription-text-overflow object) setting)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-text-overflow object) => setting}
+  @syntax{(setf (gtk:inscription-text-overflow object) setting)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[setting]{a @symbol{gtk:inscription-overflow} value}
   @begin{short}
@@ -426,7 +431,7 @@
   @see-class{gtk:inscription}
   @see-symbol{gtk:inscription-overflow}")
 
-;;; --- inscription-wrap-mode --------------------------------------------------
+;;; --- gtk:inscription-wrap-mode ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "wrap-mode" 'inscription) t)
@@ -440,9 +445,9 @@
 (setf (liber:alias-for-function 'inscription-wrap-mode)
       "Accessor"
       (documentation 'inscription-wrap-mode 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-wrap-mode object) => mode}
-  @syntax[]{(setf (gtk:inscription-wrap-mode object) mode)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-wrap-mode object) => mode}
+  @syntax{(setf (gtk:inscription-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[mode]{a @symbol{pango:wrap-mode} value}
   @begin{short}
@@ -454,7 +459,7 @@
   @see-class{gtk:inscription}
   @see-symbol{pango:wrap-mode}")
 
-;;; --- inscription-xalign -----------------------------------------------------
+;;; --- gtk:inscription-xalign -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "xalign" 'inscription) t)
@@ -468,9 +473,9 @@
 (setf (liber:alias-for-function 'inscription-xalign)
       "Accessor"
       (documentation 'inscription-xalign 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-xalign object) => xalign}
-  @syntax[]{(setf (gtk:inscription-xalign object) xalign)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-xalign object) => xalign}
+  @syntax{(setf (gtk:inscription-xalign object) xalign)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[xalign]{a single float with the xalign value, between 0 and 1}
   @begin{short}
@@ -481,7 +486,7 @@
   Since 4.8
   @see-class{gtk:inscription}")
 
-;;; --- inscription-yalign -----------------------------------------------------
+;;; --- gtk:inscription-yalign -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "yalign" 'inscription) t)
@@ -495,9 +500,9 @@
 (setf (liber:alias-for-function 'inscription-yalign)
       "Accessor"
       (documentation 'inscription-yalign 'function)
- "@version{2023-10-18}
-  @syntax[]{(gtk:inscription-yalign object) => yalign}
-  @syntax[]{(setf (gtk:inscription-yalign object) yalign)}
+ "@version{2024-4-25}
+  @syntax{(gtk:inscription-yalign object) => yalign}
+  @syntax{(setf (gtk:inscription-yalign object) yalign)}
   @argument[object]{a @class{gtk:inscription} widget}
   @argument[yalign]{a single float with the yalign value, between 0 and 1}
   @begin{short}
@@ -516,9 +521,9 @@
 
 (defun inscription-new (text)
  #+liber-documentation
- "@version{2023-10-18}
+ "@version{2024-4-25}
   @argument[text]{a string with the text to display}
-  @return{A new @class{gtk:inscription} widget.}
+  @return{The new @class{gtk:inscription} widget.}
   @begin{short}
     Creates a new @class{gtk:inscription} widget with the given text.
   @end{short}
@@ -526,7 +531,7 @@
   Since 4.8
   @see-class{gtk:inscription}"
   (make-instance 'inscription
-                 :text (if text text (cffi:null-pointer))))
+                 :text (or text (cffi:null-pointer))))
 
 (export 'inscription-new)
 
