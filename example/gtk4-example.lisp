@@ -42,6 +42,7 @@
            ;; Layout Managers
            #:do-fixed-layout
            #:do-constraint-simple
+           #:do-constraint-interactive
 
            ;; Display Widgets
            #:do-label-various

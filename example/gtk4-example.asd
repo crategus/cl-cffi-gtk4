@@ -43,6 +43,7 @@
                ;; Layout Managers
                (:file "fixed-layout")
                (:file "constraint-simple")
+               (:file "constraint-interactive")
 
                ;; Display Widgets
                (:file "label-various")

@@ -281,7 +281,17 @@
         "graphene:point3d-init"
         "graphene:vec3-x-axis"
         "graphene:vec3-y-axis"
-        ))
+        )
+        ("Simple Constraints"
+         ":window"
+         "DO-CONSTRAINT-SIMPLE"
+         "gtk4-example"
+         "constraint-simple.lisp")
+        ("Interactive Constraints"
+         ":window"
+         "DO-CONSTRAINT-INTERACTIVE"
+         "gtk4-example"
+         "constraint-interactive.lisp"))
 
      "Display Widgets"
      (("Various Label"
