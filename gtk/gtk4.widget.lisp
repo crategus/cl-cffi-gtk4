@@ -367,27 +367,32 @@
 (setf (liber:alias-for-class 'requisition)
       "GBoxed"
       (documentation 'requisition 'type)
- "@version{#2023-9-18}
-  @begin{short}
-    A @class{gtk:requisition} structure represents the desired size of a widget.
-  @end{short}
-  See the section called \"Height-for-width Geometry Management\" in the
-  @class{gtk:widget} documentation for more information.
-  @begin{pre}
+ "@version{2024-4-28}
+  @begin{declaration}
+    @begin{pre}
 (glib:define-g-boxed-cstruct requisition \"GtkRequisition\"
   (:export t
    :type-initializer \"gtk_requistion_get_type\")
   (width :int :initform 0)
   (height :int :initform 0))
-  @end{pre}
-  @begin[code]{table}
-    @entry[width]{An integer with the desired width of the widget.}
-    @entry[height]{An integer with the desired height of the widget.}
-  @end{table}
-  @see-slot{gtk:requisition-height}
-  @see-slot{gtk:requisition-width}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[width]{The integer with the desired width of the widget.}
+      @entry[height]{The integer with the desired height of the widget.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The @class{gtk:requisition} structure represents the desired size of a
+    widget.
+  @end{short}
+  See the section called \"Height-for-width Geometry Management\" in the
+  @class{gtk:widget} documentation for more information.
   @see-constructor{gtk:requisition-new}
   @see-constructor{gtk:requisition-copy}
+  @see-slot{gtk:requisition-height}
+  @see-slot{gtk:requisition-width}
   @see-class{gtk:widget}
   @see-function{gtk:widget-preferred-size}")
 
@@ -401,7 +406,7 @@
 (setf (liber:alias-for-function 'requisition-height)
       "Accessor"
       (documentation 'requisition-height 'function)
- "@version{#2021-9-14}
+ "@version{2024-4-28}
   @syntax{(gtk:requisition-height instance) => height}
   @syntax{(setf (gtk:requisition-height instance) height)}
   @argument[instance]{a @class{gtk:requisition} instance}
@@ -427,7 +432,7 @@
 (setf (liber:alias-for-function 'requisition-width)
       "Accessor"
       (documentation 'requisition-width 'function)
- "@version{#2021-9-14}
+ "@version{2024-4-28}
   @syntax{(gtk:requisition-width instance) => width}
   @syntax{(setf (gtk:requisition-width instance) width)}
   @argument[instance]{a @class{gtk:requisition} instance}
@@ -455,15 +460,11 @@
 
 (defun requisition-new (&key (width 0) (height 0))
  #+liber-documentation
- "@version{#2021-9-14}
+ "@version{2024-4-28}
   @argument[width]{an integer with the width, default 0}
   @argument[height]{an integer with the height, default 0}
-  @begin{return}
-    A new @class{gtk:requisition} instance.
-  @end{return}
-  @begin{short}
-    Allocates a new @class{gtk:requisition} instance.
-  @end{short}
+  @return{The new @class{gtk:requisition} instance.}
+  @short{Allocates a new @class{gtk:requisition} instance.}
   @see-class{gtk:requisition}"
   (make-requisition :width width :height height))
 
@@ -477,12 +478,10 @@
 
 (defun requisition-copy (requisition)
  #+liber-documentation
- "@version{#2021-9-14}
+ "@version{2024-4-28}
   @argument[requisition]{a @class{gtk:requisition} instance}
   @return{The copy of @arg{requisition}.}
-  @begin{short}
-    Copies a @class{gtk:requisition} instance.
-  @end{short}
+  @short{Copies a @class{gtk:requisition} instance.}
   @see-class{gtk:requisition}"
   (copy-requisition requisition))
 
@@ -617,7 +616,7 @@
 
 #+liber-documentation
 (setf (documentation 'widget 'type)
- "@version{#2021-9-14}
+ "@version{2024-4-28}
   @begin{short}
     The @class{gtk:widget} class is the base class all widgets in GTK derive
     from. It manages the widget life cycle, layout, states and style.
@@ -650,7 +649,7 @@
   that are not directly expressed as properties.
 
   If the widget uses a @class{gtk:layout-manager} object, the @class{gtk:widget}
-  implmentation supports a custom @code{<layout>} element, used to define
+  implementation supports a custom @code{<layout>} element, used to define
   layout properties:
   @begin{pre}
 <object class=\"GtkGrid\" id=\"my_grid\">
@@ -844,12 +843,12 @@ lambda (widget x y mode tooltip)    :run-last
      the @arg{tooltip} argument with the therefore destined function calls.
      @begin[code]{table}
        @entry[widget]{The @class{gtk:widget} object which received the signal.}
-       @entry[x]{An integer with the x coordinate of the cursor position where
+       @entry[x]{The integer with the x coordinate of the cursor position where
          the request has been emitted, relative to the left side of the widget.}
-       @entry[y]{An integer with the y coordinate of the cursor position where
+       @entry[y]{The integer with the y coordinate of the cursor position where
          the request has been emitted, relative to the top of the widget.}
        @entry[mode]{@em{True} if the tooltip was trigged using the keyboard.}
-       @entry[tooltip]{A @class{gtk:tooltip} object.}
+       @entry[tooltip]{The @class{gtk:tooltip} object.}
        @entry[Returns]{@em{True} if tooltip should be shown right now,
          @em{false} otherwise.}
      @end{table}
@@ -939,8 +938,7 @@ lambda (widget)    :run-last
   @see-slot{gtk:widget-vexpand-set}
   @see-slot{gtk:widget-visible}
   @see-slot{gtk:widget-width-request}
-  @see-class{gtk:buildable}
-  @see-class{gtk:style-context}")
+  @see-class{gtk:buildable}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -958,7 +956,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-can-focus)
       "Accessor"
       (documentation 'widget-can-focus 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-can-focus object) => setting}
   @syntax{(setf (gtk:widget-can-focus object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -989,7 +987,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-can-target)
       "Accessor"
       (documentation 'widget-can-target 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-can-target object) => setting}
   @syntax{(setf (gtk:widget-can-target object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1009,7 +1007,7 @@ lambda (widget)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "css-classes" 'widget) t)
  "The @code{css-classes} property of type @code{g:strv-t} (Read / Write) @br{}
-  A list of CSS classes applied to the widget.")
+  The list of CSS classes applied to the widget.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'widget-css-classes)
@@ -1068,7 +1066,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-cursor)
       "Accessor"
       (documentation 'widget-cursor 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-cursor object) => cursor}
   @syntax{(setf (gtk:widget-cursor object) cursor)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1097,7 +1095,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-focus-on-click)
       "Accessor"
       (documentation 'widget-focus-on-click 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-focus-on-click object) => setting}
   @syntax{(setf (gtk:widget-focus-on-click object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1238,8 +1236,8 @@ lambda (widget)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-tooltip" 'widget) t)
  "The @code{has-tooltip} property of type @code{:boolean} (Read / Write) @br{}
-  Enables or disables the emission of the @code{\"query-tooltip\"} signal on the
-  widget. Enables or disables the emission of the @code{\"query-tooltip\"}
+  Enables or disables the emission of the @code{\"query-tooltip\"} signal on
+  the widget. Enables or disables the emission of the @code{\"query-tooltip\"}
   signal on the widget. A @em{true} value indicates that the widget can have a
   tooltip, in this case the widget will be queried using the
   @code{\"query-tooltip\"} signal to determine whether it will provide a tooltip
@@ -1250,12 +1248,12 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-has-tooltip)
       "Accessor"
       (documentation 'widget-has-tooltip 'function)
- "@version{#2023-8-29}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-has-tooltip object) => setting}
   @syntax{(setf (gtk:widget-has-tooltip object) setting)}
   @argument[object]{a @class{gtk:widget} object}
-  @argument[setting]{a boolean whether the emission of the \"query-toolip\"
-    signal is enabled or disabled}
+  @argument[setting]{a boolean whether the emission of the
+    @code{\"query-toolip\"} signal is enabled or disabled}
   @begin{short}
     Accessor of the @slot[gtk:widget]{has-tooltip} slot of the
     @class{gtk:widget} class.
@@ -1306,7 +1304,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-hexpand)
       "Accessor"
       (documentation 'widget-hexpand 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-hexpand object) => setting}
   @syntax{(setf (gtk:widget-hexpand object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1340,7 +1338,6 @@ lambda (widget)    :run-last
   @slot[gtk:widget]{hexpand} property of the widget to be used, rather than
   looking at children and widget state.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-expand}
   @see-function{gtk:widget-vexpand}
   @see-function{gtk:widget-hexpand-set}
   @see-function{gtk:widget-compute-expand}")
@@ -1357,7 +1354,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-hexpand-set)
       "Accessor"
       (documentation 'widget-hexpand-set 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-hexpand-set object) => setting}
   @syntax{(setf (gtk:widget-hexpand-set object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1437,7 +1434,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-bottom)
       "Accessor"
       (documentation 'widget-margin-bottom 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-margin-bottom object) => margin}
   @syntax{(setf (gtk:widget-margin-bottom object) margin)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1453,7 +1450,6 @@ lambda (widget)    :run-last
   The margin will be added in addition to the size from the
   @fun{gtk:widget-size-request} function for example.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-margin}
   @see-function{gtk:widget-size-request}")
 
 ;;; --- gtk:widget-margin-end --------------------------------------------------
@@ -1471,7 +1467,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-end)
       "Accessor"
       (documentation 'widget-margin-end 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-margin-end object) => margin}
   @syntax{(setf (gtk:widget-margin-end object) margin)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1489,7 +1485,6 @@ lambda (widget)    :run-last
   added in addition to the size from the @fun{gtk:widget-size-request} function
   for example.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-margin}
   @see-function{gtk:widget-size-request}")
 
 ;;; --- gtk:widget-margin-start ------------------------------------------------
@@ -1507,7 +1502,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-start)
       "Accessor"
       (documentation 'widget-margin-start 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-margin-start object) => margin}
   @syntax{(setf (gtk:widget-margin-start object) margin)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1525,7 +1520,6 @@ lambda (widget)    :run-last
   margin will be added in addition to the size from the
   @fun{gtk:widget-size-request} function for example.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-margin}
   @see-function{gtk:widget-size-request}")
 
 ;;; --- gtk:widget-margin-top --------------------------------------------------
@@ -1542,7 +1536,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-margin-top)
       "Accessor"
       (documentation 'widget-margin-top 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-margin-top object) => margin}
   @syntax{(setf (gtk:widget-margin-top object) margin)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1558,7 +1552,6 @@ lambda (widget)    :run-last
   The margin will be added in addition to the size from the
   @fun{gtk:widget-size-request} function for example.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-margin}
   @see-function{gtk:widget-size-request}")
 
 ;;; --- gtk:widget-name --------------------------------------------------------
@@ -1591,8 +1584,7 @@ lambda (widget)    :run-last
   elements in a selector (period, #, >, *...), so using these will make your
   widget impossible to match by name. Any combination of alphanumeric symbols,
   dashes and underscores will suffice.
-  @see-class{gtk:widget}
-  @see-class{gtk:style-context}")
+  @see-class{gtk:widget}")
 
 ;;; --- gtk:widget-opacity -----------------------------------------------------
 
@@ -1607,7 +1599,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-opacity)
       "Accessor"
       (documentation 'widget-opacity 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-opacity object) => opacity}
   @syntax{(setf (gtk:widget-opacity object) opacity)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1621,23 +1613,26 @@ lambda (widget)    :run-last
   rendered partially transparent, with opacity 0.0 being fully transparent and
   1.0 fully opaque.
 
-  Opacity values are clamped to the [0.0,1.0] range. This works on both toplevel
-  widget, and child widgets, although there are some limitations:
-  @begin{itemize}
-    @begin{item}
-      For toplevel widgets this depends on the capabilities of the windowing
-      system. On X11 this has any effect only on X screens with a compositing
-      manager running. See the @fun{gtk:widget-is-composited} function. On
-      Windows it should work always, although setting the opacity of the window
-      after the window has been shown causes it to flicker once on Windows.
-    @end{item}
-    @begin{item}
-      For child widgets it does not work if any affected widget has a native
-      window, or disables double buffering.
-    @end{item}
-  @end{itemize}
+  Opacity works on both toplevel widgets and child widgets, although there are
+  some limitations. For toplevel widgets, applying opacity depends on the
+  capabilities of the windowing system. On X11, this has any effect only on X
+  displays with a compositing manager, see the @fun{gdk:display-is-composited}
+  function. On Windows and Wayland it should always work, although setting an
+  opacity after the window has been shown may cause some flicker.
+
+  Note that the opacity is inherited through inclusion. If you set a toplevel
+  widget to be partially translucent, all of its content will appear
+  translucent, since it is ultimatively rendered on that toplevel widget. The
+  opacity value itself is not inherited by child widgets, since that would make
+  widgets deeper in the hierarchy progressively more translucent. As a
+  consequence, @class{gtk:popover} and other @class{gtk:native} widgets with
+  their own surface will use their own opacity value, and thus by default
+  appear non-translucent, even if they are attached to a toplevel widget that
+  is translucent.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-is-composited}")
+  @see-class{gtk:native}
+  @see-class{gtk:popover}
+  @see-function{gdk:display-is-composited}")
 
 ;;; --- gtk:widget-overflow  ---------------------------------------------------
 
@@ -1652,7 +1647,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-overflow)
       "Accessor"
       (documentation 'widget-overflow 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-overflow object) => overflow}
   @syntax{(setf (gtk:widget-overflow object) overflow)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1682,23 +1677,27 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-parent)
       "Accessor"
       (documentation 'widget-parent 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-parent object) => parent}
-  @syntax{(setf (gtk:widget-parent object) parent)}
   @argument[object]{a @class{gtk:widget} object}
-  @argument[parent]{a @class{gtk:widget} parent widget}
+  @argument[parent]{a parent @class{gtk:widget} widget}
   @begin{short}
     Accessor of the @slot[gtk:widget]{parent} slot of the @class{gtk:widget}
     class.
   @end{short}
   The @fun{gtk:widget-parent} function returns the parent widget of the widget.
-  @see-class{gtk:widget}")
+  @begin{notes}
+    The @slot[gtk:widget]{parent} property is not writable. Use the
+    @fun{gtk:widget-set-parent} function if you need to set a parent widget
+    in a widget implementation.
+  @end{notes}
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-set-parent}")
 
 ;;; --- gtk:widget-receives-default --------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "receives-default"
-                                               'widget) t)
+(setf (documentation (liber:slot-documentation "receives-default" 'widget) t)
  "The @code{receives-default} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether the widget will receive the default action when it is focused. @br{}
@@ -1708,7 +1707,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-receives-default)
       "Accessor"
       (documentation 'widget-receives-default 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-receives-default object) => setting}
   @syntax{(setf (gtk:widget-receives-default object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1723,11 +1722,7 @@ lambda (widget)    :run-last
   focus, even if another widget is the default. The
   @setf{gtk:widget-receives-default} function specifies whether the widget will
   be treated as the default widget.
-
-  See the @fun{gtk:widget-grab-default} function for details about the meaning
-  of \"default\".
-  @see-class{gtk:widget}
-  @see-function{gtk:widget-grab-default}")
+  @see-class{gtk:widget}")
 
 ;;; --- gtk:widget-root --------------------------------------------------------
 
@@ -1771,7 +1766,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-scale-factor)
       "Accessor"
       (documentation 'widget-scale-factor 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-scale-factor object) => scale}
   @argument[object]{a @class{gtk:widget} object}
   @argument[scale]{an integer with the scale factor}
@@ -1781,8 +1776,7 @@ lambda (widget)    :run-last
   @end{short}
   On traditional systems this is 1, on high density outputs, it can be a higher
   value (typically 2).
-  @see-class{gtk:widget}
-  @see-function{gdk:window-scale-factor}")
+  @see-class{gtk:widget}")
 
 ;;; --- gtk:widget-sensitive ---------------------------------------------------
 
@@ -1827,17 +1821,18 @@ lambda (widget)    :run-last
   Sets the text of the tooltip to be the given string, which is marked up with
   the Pango text markup language. This is a convenience property which will take
   care of getting the tooltip shown if the given string is not @code{nil}. The
-  @code{has-tooltip} property will automatically be set to @em{true} and there
-  will be taken care of the @code{\"query-tooltip\"} signal in the default
-  signal handler. Note that if both the @code{tooltip-text} and
-  @code{tooltip-markup} properties are set, the last one wins. @br{}
+  @slot[gtk:widget]{has-tooltip} property will automatically be set to @em{true}
+  and there will be taken care of the @code{\"query-tooltip\"} signal in the
+  default signal handler. Note that if both the @slot[gtk:widget]{tooltip-text}
+  and @slot[gtk:widget]{tooltip-markup} properties are set, the last one wins.
+  @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'widget-tooltip-markup)
       "Accessor"
       (documentation 'widget-tooltip-markup 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-tooltip-markup object) => markup}
   @syntax{(setf (gtk:widget-tooltip-markup object) markup)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1858,7 +1853,7 @@ lambda (widget)    :run-last
   See also the @slot[gtk:widget]{tooltip-markup} property and the
   @fun{gtk:tooltip-set-markup} function.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-has-toolip}
+  @see-function{gtk:widget-has-tooltip}
   @see-function{gtk:tooltip-set-markup}")
 
 ;;; --- gtk:widget-tooltip-text ------------------------------------------------
@@ -1868,18 +1863,18 @@ lambda (widget)    :run-last
  "The @code{tooltip-text} property of type @code{:string} (Read / Write) @br{}
   Sets the text of the tooltip to be the given string. This is a convenience
   property which will take care of getting the tooltip shown if the given string
-  is not @code{nil}. The @code{has-tooltip} property will automatically be set
-  to @em{true} and there will be taken care of the @code{\"query-tooltip\"}
-  signal in the default signal handler. Note that if both the
-  @code{tooltip-text} and @code{tooltip-markup} properties are set, the last one
-  wins. @br{}
+  is not @code{nil}. The @slot[gtk:widget]{has-tooltip} property will
+  automatically be set to @em{true} and there will be taken care of the
+  @code{\"query-tooltip\"} signal in the default signal handler. Note that if
+  both the @slot[gtk:widget]{tooltip-text} and @slot[gtk:widget]{tooltip-markup}
+  properties are set, the last one wins. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'widget-tooltip-text)
       "Accessor"
       (documentation 'widget-tooltip-text 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-tooltip-text object) => text}
   @syntax{(setf (gtk:widget-tooltip-text object) text)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1930,6 +1925,7 @@ lambda (widget)    :run-last
   @see-function{gtk:widget-halign}")
 
 ;;; --- gtk:widget-vexpand -----------------------------------------------------
+
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "vexpand" 'widget) t)
  "The @code{vexpand} property of type @code{:boolean} (Read / Write) @br{}
@@ -1940,7 +1936,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-vexpand)
       "Accessor"
       (documentation 'widget-vexpand 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-vexpand object) => setting}
   @syntax{(setf (gtk:widget-vexpand object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1953,9 +1949,8 @@ lambda (widget)    :run-last
   available extra vertical space. The @setf{gtk:widget-vexpand} function sets
   whether the widget would like any available extra vertical space.
 
-  See the @fun{gtk:widget-hexpand} function for more detail.
+  See the @fun{gtk:widget-hexpand} function for more details.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-expand}
   @see-function{gtk:widget-hexpand}
   @see-function{gtk:widget-vexpand-set}")
 
@@ -1971,7 +1966,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-function 'widget-vexpand-set)
       "Accessor"
       (documentation 'widget-vexpand-set 'function)
- "@version{#2023-9-18}
+ "@version{2024-4-28}
   @syntax{(gtk:widget-vexpand-set object) => setting}
   @syntax{(setf (gtk:widget-vexpand-set object) setting)}
   @argument[object]{a @class{gtk:widget} object}
@@ -1986,7 +1981,7 @@ lambda (widget)    :run-last
   flag on this widget. The @setf{gtk:widget-vexpand-set} function sets whether
   the @slot[gtk:widget]{vexpand} property will be used.
 
-  See the @fun{gtk:widget-hexpand-set} function for more detail.
+  See the @fun{gtk:widget-hexpand-set} function for more details.
   @see-class{gtk:widget}
   @see-function{gtk:widget-vexpand}
   @see-function{gtk:widget-hexpand-set}")
@@ -2288,7 +2283,7 @@ lambda (widget)    :run-last
 (export 'widget-queue-allocate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_frame_clock -> widget-frame-clock
+;;; gtk_widget_get_frame_clock
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_get_frame_clock" widget-frame-clock)
@@ -2835,17 +2830,28 @@ lambda (widget)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_set_parent
-
-;;; This function is useful only when implementing subclasses of GtkWidget.
-
-;;; Sets parent as the parent widget of widget , and takes care of some details
-;;; such as updating the state and style of the child to reflect its new
-;;; location and resizing the parent. The opposite function is
-;;; gtk_widget_unparent().
-
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_set_parent" widget-set-parent) :void
+ #+liber-documentation
+ "@version{2024-4-28}
+  @argument[widget]{a @class{gtk:widget} widget}
+  @argument[parent]{a parent @class{gtk:widget} widget}
+  @begin{short}
+    Sets @arg{parent} as the parent widget of @arg{widget}.
+  @end{short}
+  This takes care of details such as updating the state and style of the child
+  to reflect its new location and resizing the parent. The opposite function
+  is the @fun{gtk:widget-unparent} function.
+
+  This function is useful only when implementing subclasses of the
+  @class{gtk:widget} widget.
+  @begin{notes}
+    The @slot[gtk:widget]{parent} property is not writable. You have to use
+    this function to set the parent widget.
+  @end{notes}
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-unparent}"
   (widget (g:object widget))
   (parent (g:object widget)))
 
