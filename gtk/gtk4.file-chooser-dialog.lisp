@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -66,7 +66,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkFileChooserDialog
+;;; GtkFileChooserDialog
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkFileChooserDialog" file-chooser-dialog
@@ -82,9 +82,14 @@
    :type-initializer "gtk_file_chooser_dialog_get_type")
   nil)
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj file-chooser-dialog) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:FILE-CHOOSER-DIALOG is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'file-chooser-dialog 'type)
- "@version{2023-8-27}
+ "@version{2024-4-26}
   @begin{short}
     The @class{gtk:file-chooser-dialog} widget is a dialog box suitable for use
     with \"File/Open\" or \"File/Save as\" commands.
@@ -132,7 +137,6 @@
     saved somewhere.
   @end{dictionary}
   @begin[Response Codes]{dictionary}
-  @subheading{Response Codes}
     The @class{gtk:file-chooser-dialog} widget inherits from the
     @class{gtk:dialog} widget, so buttons that go in its action area have
     response codes such as @code{:accept} and @code{:cancel}. For example, you
@@ -166,7 +170,7 @@
     To summarize, make sure you use a predefined response code when you use
     the @class{gtk:file-chooser-dialog} widget to ensure proper operation.
   @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin{examples}
     Typical usage: In the simplest of cases, you can the following code to use
     the @class{gtk:file-chooser-dialog} widget to select a file for opening:
     @begin{pre}
@@ -200,9 +204,9 @@
       ))
     (gtk:window-destroy dialog)))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[CSS nodes]{dictionary}
-    The @class{gtk:file-chooser-dialog} implmentation has a single CSS node
+    The @class{gtk:file-chooser-dialog} implementation has a single CSS node
     with the name @code{window} and @code{.filechooser} style class.
   @end{dictionary}
   @begin[Warning]{dictionary}
@@ -216,19 +220,19 @@
   @see-class{gtk:file-chooser-native}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_chooser_dialog_new ()
+;;; gtk_file_chooser_dialog_new
 ;;; ----------------------------------------------------------------------------
 
 (defun file-chooser-dialog-new (title parent action &rest buttons)
  #+liber-documentation
- "@version{2023-11-3}
+ "@version{2024-4-26}
   @argument[title]{a string with the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent window of the dialog,
     or @code{nil}}
   @argument[action]{a @symbol{gtk:file-chooser-action} value}
   @argument[buttons]{pairs with a button text and the response ID of type
     @symbol{gtk:response-type} for the button}
-  @return{A new @class{gtk:file-chooser-dialog} widget.}
+  @return{The new @class{gtk:file-chooser-dialog} widget.}
   @begin{short}
     Creates a new file chooser dialog.
   @end{short}

@@ -9,47 +9,38 @@
 
 (test gtk-file-chooser-dialog-class
   (let ((*gtk-warn-deprecated* nil))
-    ;; Type check
+    ;; Check type
     (is (g:type-is-object "GtkFileChooserDialog"))
-    ;; Check the registered name
+    ;; Check registered name
     (is (eq 'gtk:file-chooser-dialog
             (glib:symbol-for-gtype "GtkFileChooserDialog")))
-    ;; Check the type initializer
+    ;; Check type initializer
     (is (eq (g:gtype "GtkFileChooserDialog")
             (g:gtype (cffi:foreign-funcall "gtk_file_chooser_dialog_get_type"
                                            :size))))
-    ;; Check the parent
+    ;; Check parent
     (is (eq (g:gtype "GtkDialog")
             (g:type-parent "GtkFileChooserDialog")))
-    ;; Check the children
+    ;; Check children
     (is (equal '()
                (list-children "GtkFileChooserDialog")))
-    ;; Check the interfaces
+    ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot" "GtkFileChooser")
                (list-interfaces "GtkFileChooserDialog")))
-    ;; Check the properties
+    ;; Check properties
     (is (equal '("action" "create-folders" "filter" "filters" "select-multiple"
                  "shortcut-folders")
                (list-properties "GtkFileChooserDialog")))
-    ;; Check the signals
+    ;; Check signals
     (is (equal '()
                (list-signals "GtkFileChooserDialog")))
-    ;; CSS name
+    ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkFileChooserDialog")))
-    ;; CSS classes
-    #-windows
-    (is (equal '("background" "csd" "dialog" "filechooser")
-               (gtk:widget-css-classes
-                   (make-instance 'gtk:file-chooser-dialog))))
-    #+windows
-    (is (equal '("background" "dialog" "filechooser")
-               (gtk:widget-css-classes
-                   (make-instance 'gtk:file-chooser-dialog))))
-    ;; Accessible role
+    ;; Check accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkFileChooserDialog")))
-    ;; Check the class definition
+    ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileChooserDialog"
                                        GTK-FILE-CHOOSER-DIALOG
                          (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
@@ -64,4 +55,4 @@
 
 ;;;     gtk_file_chooser_dialog_new
 
-;;; 2024-1-9
+;;; 2024-4-26

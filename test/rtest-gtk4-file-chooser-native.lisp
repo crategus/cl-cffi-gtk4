@@ -8,32 +8,32 @@
 ;;;     GtkFileChooserNative
 
 (test gtk-file-chooser-native-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFileChooserNative"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:file-chooser-native
           (glib:symbol-for-gtype "GtkFileChooserNative")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFileChooserNative")
           (g:gtype (cffi:foreign-funcall "gtk_file_chooser_native_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkNativeDialog")
           (g:type-parent "GtkFileChooserNative")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkFileChooserNative")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkFileChooser")
              (list-interfaces "GtkFileChooserNative")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("accept-label" "action" "cancel-label" "create-folders" "filter"
                "filters" "select-multiple" "shortcut-folders")
              (list-properties "GtkFileChooserNative")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkFileChooserNative")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileChooserNative" GTK-FILE-CHOOSER-NATIVE
                        (:SUPERCLASS GTK-NATIVE-DIALOG :EXPORT T :INTERFACES
                         ("GtkFileChooser") :TYPE-INITIALIZER
@@ -46,22 +46,26 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     accept-label
-;;;     cancel-label
+(test gtk-file-chooser-native-properties
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((chooser (make-instance 'gtk:file-chooser-native)))
+      (is-false (gtk:file-chooser-native-accept-label chooser))
+      (is-false (gtk:file-chooser-native-cancel-label chooser)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_file_chooser_native_new
 
 (test gtk-file-chooser-native-new
-  (let* ((window (gtk:window-new))
-         (dialog (gtk:file-chooser-native-new "title"
-                                              window
-                                              :open
-                                              "Accept Label"
-                                              "Cancel Label")))
-  (is (typep dialog 'gtk:file-chooser-native))
-  (is (string= "Accept Label" (gtk:file-chooser-native-accept-label dialog)))
-  (is (string= "Cancel Label" (gtk:file-chooser-native-cancel-label dialog)))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let* ((window (gtk:window-new))
+           (dialog (gtk:file-chooser-native-new "title"
+                                                window
+                                                :open
+                                                "Accept Label"
+                                                "Cancel Label")))
+    (is (typep dialog 'gtk:file-chooser-native))
+    (is (string= "Accept Label" (gtk:file-chooser-native-accept-label dialog)))
+    (is (string= "Cancel Label" (gtk:file-chooser-native-cancel-label dialog))))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-4-26

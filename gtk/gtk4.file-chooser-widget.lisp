@@ -103,7 +103,7 @@
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj file-chooser-widget) &key)
   (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:FILE-CHOOSER-WIDGET is deprecated since 4.10.")))
+    (warn "GTK:FILE-CHOOSER-WIDGET is deprecated since 4.10")))
 
 #+liber-documentation
 (setf (documentation 'file-chooser-widget 'type)
@@ -174,7 +174,7 @@ lambda (widget path)    :action
       @begin[code]{table}
         @entry[widget]{The @class{gtk:file-chooser-widget} object which
           received the signal.}
-        @entry[path]{A string that gets put in the text entry for the file
+        @entry[path]{The string that gets put in the text entry for the file
           name.}
       @end{table}
     @subheading{The \"location-popup-on-paste\" signal}
@@ -228,7 +228,7 @@ lambda (widget index)    :action
       @begin[code]{table}
         @entry[widget]{The @class{gtk:file-chooser-widget} object which
           received the signal.}
-        @entry[index]{An integer with the number of the bookmark to switch to.}
+        @entry[index]{The integer with the number of the bookmark to switch to.}
       @end{table}
     @subheading{The \"recent-shortcut\" signal}
       @begin{pre}
@@ -369,7 +369,7 @@ lambda (widget)    :action
   @see-class{gtk:file-chooser-widget}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_chooser_widget_new ()
+;;; gtk_file_chooser_widget_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline file-chooser-widget-new))

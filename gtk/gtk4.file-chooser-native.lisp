@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,6 +81,11 @@
     file-chooser-native-cancel-label
     "cancel-label" "gchararray" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj file-chooser-native) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:FILE-CHOOSER-NATIVE is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'file-chooser-native 'type)
  "@version{2023-8-30}
@@ -145,7 +150,7 @@
       @item{Shortcut folders.}
     @end{itemize}
   @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin{examples}
     In the simplest of cases, you can use the following code to use the
     @class{gtk:file-chooser-dialog} widget to select a file for opening:
     @begin{pre}
@@ -172,7 +177,7 @@
     @end{pre}
     For more information on how to best set up a file dialog, see the
     @class{gtk:file-chooser-dialog} widget.
-  @end{dictionary}
+  @end{examples}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser-native} implementation is deprecated since 4.10.
     Use the @class{gtk:file-dialog} implementation instead.
@@ -189,7 +194,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- file-chooser-native-accept-label ---------------------------------------
+;;; --- gtk:file-chooser-native-accept-label -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accept-label"
@@ -203,16 +208,16 @@
 (setf (liber:alias-for-function 'file-chooser-native-accept-label)
       "Accessor"
       (documentation 'file-chooser-native-accept-label 'function)
- "@version{2023-5-5}
-  @syntax[]{(gtk:file-chooser-native-accept-label object) => label}
-  @syntax[]{(setf (gtk:file-chooser-native-accept-label object) label)}
+ "@version{2024-4-26}
+  @syntax{(gtk:file-chooser-native-accept-label object) => label}
+  @syntax{(setf (gtk:file-chooser-native-accept-label object) label)}
   @argument[object]{a @class{gtk:file-chooser-native} object}
   @argument[label]{a string with the custom label or @code{nil} for the default}
   @begin{short}
     Accessor of the @slot[gtk:file-chooser-native]{accept-label} slot of the
     @class{gtk:file-chooser-native} interface.
   @end{short}
-  The @fun{gtk:file-chooser-navtive-accept-label} function retrieves the custom
+  The @fun{gtk:file-chooser-native-accept-label} function retrieves the custom
   label text for the accept button. The
   @setf{gtk:file-chooser-native-accept-label} function sets the custom label
   text.
@@ -228,7 +233,7 @@
   @see-class{gtk:file-chooser-native}
   @see-class{gtk:file-dialog}")
 
-;;; --- file-chooser-native-cancel-label ---------------------------------------
+;;; --- gtk:file-chooser-native-cancel-label -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "cancel-label"
@@ -242,18 +247,18 @@
 (setf (liber:alias-for-function 'file-chooser-native-cancel-label)
       "Accessor"
       (documentation 'file-chooser-native-cancel-label 'function)
- "@version{2023-5-5}
-  @syntax[]{(gtk:file-chooser-native-cancel-label object) => label}
-  @syntax[]{(setf (gtk:file-chooser-native-cancel-label object) label)}
+ "@version{2024-4-26}
+  @syntax{(gtk:file-chooser-native-cancel-label object) => label}
+  @syntax{(setf (gtk:file-chooser-native-cancel-label object) label)}
   @argument[object]{a @class{gtk:file-chooser-native} object}
   @argument[label]{a string with the custom label or @code{nil} for the default}
   @begin{short}
     Accessor of the @slot[gtk:file-chooser-native]{cancel-label} slot of the
     @class{gtk:file-chooser-native} interface.
   @end{short}
-  The @fun{gtk:file-chooser-navtive-accept-label} function retrieves the custom
+  The @fun{gtk:file-chooser-native-cancel-label} function retrieves the custom
   label text for the cancel button. The
-  @setf{gtk:file-chooser-native-accept-label} function sets the custom label
+  @setf{gtk:file-chooser-native-cancel-label} function sets the custom label
   text.
 
   If characters in label are preceded by an underscore, they are underlined. If
@@ -268,13 +273,13 @@
   @see-class{gtk:file-dialog}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_chooser_native_new ()
+;;; gtk_file_chooser_native_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_chooser_native_new" file-chooser-native-new)
     (g:object file-chooser-native)
  #+liber-documentation
- "@version{2023-5-5}
+ "@version{2024-4-26}
   @argument[title]{a string with the title of the native file chooser}
   @argument[parent]{a @class{gtk:window} transient parent window}
   @argument[action]{a @symbol{gtk:file-chooser-action} value}
@@ -282,7 +287,7 @@
     or @code{nil} for the default}
   @argument[cancel-label]{a string with the text to go in the cancel button,
     or @code{nil} for the default}
-  @return{A new @class{gtk:file-chooser-native} object.}
+  @return{The new @class{gtk:file-chooser-native} object.}
   @short{Creates a new @class{gtk:file-chooser-native} object.}
   @begin[Warning]{dictionary}
     The @class{gtk:file-chooser-native} implementation is deprecated since 4.10.

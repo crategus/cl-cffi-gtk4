@@ -8,39 +8,39 @@
 ;;;     GtkFileChooserWidget
 
 (test gtk-file-chooser-widget-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFileChooserWidget"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:file-chooser-widget
           (glib:symbol-for-gtype "GtkFileChooserWidget")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFileChooserWidget")
           (g:gtype (cffi:foreign-funcall "gtk_file_chooser_widget_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkFileChooserWidget")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkFileChooserWidget")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkFileChooser")
              (list-interfaces "GtkFileChooserWidget")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("action" "create-folders" "filter" "filters" "search-mode"
                "select-multiple" "shortcut-folders" "show-time" "subtitle")
              (list-properties "GtkFileChooserWidget")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("desktop-folder" "down-folder" "home-folder" "location-popup"
                "location-popup-on-paste" "location-toggle-popup"
                "places-shortcut" "quick-bookmark" "recent-shortcut"
                "search-shortcut" "show-hidden" "up-folder")
              (list-signals "GtkFileChooserWidget")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string= "filechooser"
                (gtk:widget-class-css-name "GtkFileChooserWidget")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileChooserWidget"
                                      GTK-FILE-CHOOSER-WIDGET
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -90,4 +90,4 @@
     (is (typep (gtk:file-chooser-widget-new :select-folder)
                'gtk:file-chooser-widget))))
 
-;;; 2024-3-8
+;;; 2024-4-26
