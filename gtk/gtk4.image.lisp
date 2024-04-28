@@ -307,11 +307,11 @@
 (setf (liber:alias-for-function 'image-icon-name)
       "Accessor"
       (documentation 'image-icon-name 'function)
- "@version{2024-4-25}
-  @syntax{(gtk:image-icon-name object) => icon-name}
-  @syntax{(setf (gtk:image-icon-name object) icon-name)}
+ "@version{2024-4-26}
+  @syntax{(gtk:image-icon-name object) => name}
+  @syntax{(setf (gtk:image-icon-name object) name)}
   @argument[object]{a @class{gtk:image} widget}
-  @argument[icon-name]{a string with the name of the icon}
+  @argument[name]{a string with the name of the icon}
   @begin{short}
     Accessor of the @slot[gtk:image]{icon-name} slot of the @class{gtk:image}
     class.

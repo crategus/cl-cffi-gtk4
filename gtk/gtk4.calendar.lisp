@@ -415,8 +415,7 @@ lambda (calendar)    :run-first
   @begin{short}
     Will switch to the year and month of the date and select its day.
   @end{short}
-  @see-class{gtk:calendar}
-  @see-function{gtk:calendar-select-month}"
+  @see-class{gtk:calendar}"
   (setf (calendar-year calendar) year
         (calendar-month calendar) month
         (calendar-day calendar) day))

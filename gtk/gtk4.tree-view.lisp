@@ -219,11 +219,9 @@
 (setf (liber:alias-for-symbol 'tree-view-drop-position)
       "GEnum"
       (liber:symbol-documentation 'tree-view-drop-position)
- "@version{2024-3-9}
-  @begin{short}
-    An enumeration for determining where a dropped row goes in a tree view.
-  @end{short}
-  @begin{pre}
+ "@version{2024-4-27}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkTreeViewDropPosition\" tree-view-drop-position
   (:export t
    :type-initializer \"gtk_tree_view_drop_position_get_type\")
@@ -231,13 +229,20 @@
   (:after 1)
   (:into-or-before 2)
   (:into-or-after 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:before]{Dropped row is inserted before.}
-    @entry[:after]{Dropped row is inserted after.}
-    @entry[:into-or-before]{Dropped row becomes a child or is inserted before.}
-    @entry[:into-or-after]{Dropped row becomes a child or is inserted after.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:before]{Dropped row is inserted before.}
+      @entry[:after]{Dropped row is inserted after.}
+      @entry[:into-or-before]{Dropped row becomes a child or is inserted
+        before.}
+      @entry[:into-or-after]{Dropped row becomes a child or is inserted after.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    An enumeration for determining where a dropped row goes in a tree view.
+  @end{short}
   @see-class{gtk:tree-view}")
 
 ;;; ----------------------------------------------------------------------------
@@ -256,11 +261,9 @@
 (setf (liber:alias-for-symbol 'tree-view-grid-lines)
       "GEnum"
       (liber:symbol-documentation 'tree-view-grid-lines)
- "@version{2024-3-9}
-  @begin{short}
-    Used to indicate which grid lines to draw in a tree view.
-  @end{short}
-  @begin{pre}
+ "@version{2024-4-27}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkTreeViewGridLines\" tree-view-grid-lines
   (:export t
    :type-initializer \"gtk_tree_view_grid_lines_get_type\")
@@ -268,13 +271,19 @@
   (:horizontal 1)
   (:vertical 2)
   (:both 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{No grid lines.}
-    @entry[:horizontal]{Horizontal grid lines.}
-    @entry[:vertical]{Vertical grid lines.}
-    @entry[:both]{Horizontal and vertical grid lines.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{No grid lines.}
+      @entry[:horizontal]{Horizontal grid lines.}
+      @entry[:vertical]{Vertical grid lines.}
+      @entry[:both]{Horizontal and vertical grid lines.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Used to indicate which grid lines to draw in a tree view.
+  @end{short}
   @see-class{gtk:tree-view}")
 
 ;;; ----------------------------------------------------------------------------
@@ -343,7 +352,7 @@
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj tree-view) &key)
   (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:TREE-VIEW is deprecated since 4.10.")))
+    (warn "GTK:TREE-VIEW is deprecated since 4.10")))
 
 #+liber-documentation
 (setf (documentation 'tree-view 'type)
@@ -697,8 +706,7 @@ lambda (view)    :action
 ;;; --- gtk:tree-view-enable-search --------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "enable-search"
-                                               'tree-view) t)
+(setf (documentation (liber:slot-documentation "enable-search" 'tree-view) t)
  "The @code{enable-search} property of type @code{:boolean} (Read / Write) @br{}
   View allows user to search through columns interactively. @br{}
   Default value: @em{true}")
@@ -764,8 +772,7 @@ lambda (view)    :action
 ;;; --- gtk:tree-view-expander-column  -----------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "expander-column"
-                                               'tree-view) t)
+(setf (documentation (liber:slot-documentation "expander-column" 'tree-view) t)
  "The @code{expander-column} property of type @class{gtk:tree-view-column}
   (Read / Write) @br{}
   Set the column for the expander column.")
@@ -1257,7 +1264,7 @@ lambda (view)    :action
   @see-function{gtk:widget-has-tooltip}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_new ()
+;;; gtk_tree_view_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline tree-view-new))
@@ -1280,7 +1287,7 @@ lambda (view)    :action
 (export 'tree-view-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_new_with_model ()
+;;; gtk_tree_view_new_with_model
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline tree-view-new-with-model))
@@ -1306,7 +1313,7 @@ lambda (view)    :action
 (export 'tree-view-new-with-model)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_selection ()
+;;; gtk_tree_view_get_selection
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_selection" tree-view-selection)
@@ -1329,7 +1336,7 @@ lambda (view)    :action
 (export 'tree-view-selection)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_columns_autosize ()
+;;; gtk_tree_view_columns_autosize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_columns_autosize" tree-view-columns-autosize)
@@ -1351,7 +1358,7 @@ lambda (view)    :action
 (export 'tree-view-columns-autosize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_append_column ()
+;;; gtk_tree_view_append_column
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_append_column" tree-view-append-column) :int
@@ -1379,7 +1386,7 @@ lambda (view)    :action
 (export 'tree-view-append-column)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_remove_column ()
+;;; gtk_tree_view_remove_column
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_remove_column" tree-view-remove-column) :int
@@ -1403,7 +1410,7 @@ lambda (view)    :action
 (export 'tree-view-remove-column)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_insert_column ()
+;;; gtk_tree_view_insert_column
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_insert_column" tree-view-insert-column) :int
@@ -1435,7 +1442,7 @@ lambda (view)    :action
 (export 'tree-view-insert-column)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_insert_column_with_attributes ()
+;;; gtk_tree_view_insert_column_with_attributes
 ;;; ----------------------------------------------------------------------------
 
 (defun tree-view-insert-column-with-attributes (view
@@ -1479,7 +1486,7 @@ lambda (view)    :action
 (export 'tree-view-insert-column-with-attributes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_insert_column_with_data_func ()
+;;; gtk_tree_view_insert_column_with_data_func
 ;;; ----------------------------------------------------------------------------
 
 (defun tree-view-insert-column-with-data-func (view pos title renderer func)
@@ -1524,7 +1531,7 @@ lambda (view)    :action
 (export 'tree-view-insert-column-with-data-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_n_columns ()
+;;; gtk_tree_view_get_n_columns
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_n_columns" tree-view-n-columns) :int
@@ -1545,7 +1552,7 @@ lambda (view)    :action
 (export 'tree-view-n-columns)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_column ()
+;;; gtk_tree_view_get_column
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_column" tree-view-column)
@@ -1573,7 +1580,7 @@ lambda (view)    :action
 (export 'tree-view-column)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_columns ()
+;;; gtk_tree_view_get_columns
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_columns" tree-view-columns)
@@ -1596,7 +1603,7 @@ lambda (view)    :action
 (export 'tree-view-columns)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_move_column_after ()
+;;; gtk_tree_view_move_column_after
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_move_column_after" tree-view-move-column-after)
@@ -1625,7 +1632,7 @@ lambda (view)    :action
 (export 'tree-view-move-column-after)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkTreeViewColumnDropFunc ()
+;;; GtkTreeViewColumnDropFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback tree-view-column-drop-func :boolean
@@ -1672,7 +1679,7 @@ lambda (view column prev next)
 (export 'tree-view-column-drop-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_set_column_drag_function ()
+;;; gtk_tree_view_set_column_drag_function
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_set_column_drag_function"
@@ -1721,7 +1728,7 @@ lambda (view column prev next)
 (export 'tree-view-set-column-drag-function)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_scroll_to_point ()
+;;; gtk_tree_view_scroll_to_point
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_scroll_to_point" tree-view-scroll-to-point) :void
@@ -1755,7 +1762,7 @@ lambda (view column prev next)
 (export 'tree-view-scroll-to-point)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_scroll_to_cell ()
+;;; gtk_tree_view_scroll_to_cell
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_scroll_to_cell" %tree-view-scroll-to-cell) :void
@@ -1812,7 +1819,7 @@ lambda (view column prev next)
 (export 'tree-view-scroll-to-cell)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_set_cursor ()
+;;; gtk_tree_view_set_cursor
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_set_cursor" %tree-view-set-cursor) :void
@@ -1852,7 +1859,7 @@ lambda (view column prev next)
 (export 'tree-view-set-cursor)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_set_cursor_on_cell ()
+;;; gtk_tree_view_set_cursor_on_cell
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_set_cursor_on_cell" %tree-view-set-cursor-on-cell)
@@ -1897,7 +1904,7 @@ lambda (view column prev next)
 (export 'tree-view-set-cursor-on-cell)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_cursor ()
+;;; gtk_tree_view_get_cursor
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_cursor" %tree-view-get-cursor) :void
@@ -1931,7 +1938,7 @@ lambda (view column prev next)
 (export 'tree-view-get-cursor)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_row_activated ()
+;;; gtk_tree_view_row_activated
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_row_activated" tree-view-row-activated) :void
@@ -1957,7 +1964,7 @@ lambda (view column prev next)
 (export 'tree-view-row-activated)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_expand_all ()
+;;; gtk_tree_view_expand_all
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_expand_all" tree-view-expand-all) :void
@@ -1977,7 +1984,7 @@ lambda (view column prev next)
 (export 'tree-view-expand-all)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_collapse_all ()
+;;; gtk_tree_view_collapse_all
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_collapse_all" tree-view-collapse-all) :void
@@ -1997,7 +2004,7 @@ lambda (view column prev next)
 (export 'tree-view-collapse-all)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_expand_to_path ()
+;;; gtk_tree_view_expand_to_path
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_expand_to_path" tree-view-expand-to-path) :void
@@ -2021,7 +2028,7 @@ lambda (view column prev next)
 (export 'tree-view-expand-to-path)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_expand_row ()
+;;; gtk_tree_view_expand_row
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_expand_row" tree-view-expand-row) :boolean
@@ -2048,7 +2055,7 @@ lambda (view column prev next)
 (export 'tree-view-expand-row)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_collapse_row ()
+;;; gtk_tree_view_collapse_row
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_collapse_row" tree-view-collapse-row) :boolean
@@ -2072,7 +2079,7 @@ lambda (view column prev next)
 (export 'tree-view-collapse-row)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkTreeViewMappingFunc ()
+;;; GtkTreeViewMappingFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback tree-view-mapping-func :void
@@ -2105,7 +2112,7 @@ lambda (view path)
 (export 'tree-view-mapping-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_map_expanded_rows ()
+;;; gtk_tree_view_map_expanded_rows
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_map_expanded_rows" %tree-view-map-expanded-rows)
@@ -2137,7 +2144,7 @@ lambda (view path)
 (export 'tree-view-map-expanded-rows)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_row_expanded ()
+;;; gtk_tree_view_row_expanded
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_row_expanded" tree-view-row-expanded) :boolean
@@ -2162,7 +2169,7 @@ lambda (view path)
 (export 'tree-view-row-expanded)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_path_at_pos ()
+;;; gtk_tree_view_get_path_at_pos
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_path_at_pos" %tree-view-path-at-pos) :boolean
@@ -2231,7 +2238,7 @@ lambda (view path)
 (export 'tree-view-path-at-pos)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_is_blank_at_pos ()
+;;; gtk_tree_view_is_blank_at_pos
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_is_blank_at_pos" %tree-view-is-blank-at-pos)
@@ -2300,7 +2307,7 @@ lambda (view path)
 (export 'tree-view-is-blank-at-pos)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_cell_area ()
+;;; gtk_tree_view_get_cell_area
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_cell_area" %tree-view-cell-area) :void
@@ -2342,7 +2349,7 @@ lambda (view path)
 (export 'tree-view-cell-area)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_background_area ()
+;;; gtk_tree_view_get_background_area
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_background_area" %tree-view-background-area)
@@ -2388,7 +2395,7 @@ lambda (view path)
 (export 'tree-view-background-area)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_visible_rect ()
+;;; gtk_tree_view_get_visible_rect
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_visible_rect" %tree-view-visible-rect) :void
@@ -2418,7 +2425,7 @@ lambda (view path)
 (export 'tree-view-visible-rect)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_visible_range ()
+;;; gtk_tree_view_get_visible_range
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_visible_range" %tree-view-visible-range)
@@ -2455,7 +2462,7 @@ lambda (view path)
 (export 'tree-view-visible-range)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_convert_bin_window_to_tree_coords ()
+;;; gtk_tree_view_convert_bin_window_to_tree_coords
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_convert_bin_window_to_tree_coords"
@@ -2493,7 +2500,7 @@ lambda (view path)
 (export 'tree-view-convert-bin-window-to-tree-coords)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_convert_bin_window_to_widget_coords ()
+;;; gtk_tree_view_convert_bin_window_to_widget_coords
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_convert_bin_window_to_widget_coords"
@@ -2532,7 +2539,7 @@ lambda (view path)
 (export 'tree-view-convert-bin-window-to-widget-coords)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_convert_tree_to_bin_window_coords ()
+;;; gtk_tree_view_convert_tree_to_bin_window_coords
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_convert_tree_to_bin_window_coords"
@@ -2570,7 +2577,7 @@ lambda (view path)
 (export 'tree-view-convert-tree-to-bin-window-coords)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_convert_tree_to_widget_coords ()
+;;; gtk_tree_view_convert_tree_to_widget_coords
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_convert_tree_to_widget_coords"
@@ -2608,7 +2615,7 @@ lambda (view path)
 (export 'tree-view-convert-tree-to-widget-coords)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_convert_widget_to_bin_window_coords ()
+;;; gtk_tree_view_convert_widget_to_bin_window_coords
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_convert_widget_to_bin_window_coords"
@@ -2647,7 +2654,7 @@ lambda (view path)
 (export 'tree-view-convert-widget-to-bin-window-coords)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_convert_widget_to_tree_coords ()
+;;; gtk_tree_view_convert_widget_to_tree_coords
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_convert_widget_to_tree_coords"
@@ -2685,7 +2692,7 @@ lambda (view path)
 (export 'tree-view-convert-widget-to-tree-coords)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_enable_model_drag_dest ()
+;;; gtk_tree_view_enable_model_drag_dest
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Update implementation of drag and drop
@@ -2738,7 +2745,7 @@ lambda (view path)
 (export 'tree-view-enable-model-drag-dest)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_enable_model_drag_source ()
+;;; gtk_tree_view_enable_model_drag_source
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Update implementation of drag and drop
@@ -2797,7 +2804,7 @@ lambda (view path)
 (export 'tree-view-enable-model-drag-source)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_unset_rows_drag_source ()
+;;; gtk_tree_view_unset_rows_drag_source
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Update implementation of drag and drop
@@ -2827,7 +2834,7 @@ lambda (view path)
 (export 'tree-view-unset-rows-drag-source)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_unset_rows_drag_dest ()
+;;; gtk_tree_view_unset_rows_drag_dest
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Update implementation of drag and drop
@@ -2857,7 +2864,7 @@ lambda (view path)
 (export 'tree-view-unset-rows-drag-dest)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_set_drag_dest_row ()
+;;; gtk_tree_view_set_drag_dest_row
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Update implementation of drag and drop
@@ -2892,7 +2899,7 @@ lambda (view path)
 (export 'tree-view-set-drag-dest-row)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_drag_dest_row ()
+;;; gtk_tree_view_get_drag_dest_row
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Update implementation of drag and drop
@@ -2935,7 +2942,7 @@ lambda (view path)
 (export 'tree-view-get-drag-dest-row)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_dest_row_at_pos ()
+;;; gtk_tree_view_get_dest_row_at_pos
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Update implementation of drag and drop
@@ -2987,7 +2994,7 @@ lambda (view path)
 (export 'tree-view-get-dest-row-at-pos)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_create_row_drag_icon ()
+;;; gtk_tree_view_create_row_drag_icon
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_create_row_drag_icon"
@@ -3013,7 +3020,7 @@ lambda (view path)
 (export 'tree-view-create-row-drag-icon)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkTreeViewSearchEqualFunc ()
+;;; GtkTreeViewSearchEqualFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback tree-view-search-equal-func :boolean
@@ -3071,7 +3078,7 @@ lambda (model column key iter data)
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_set_search_equal_func ()
+;;; gtk_tree_view_set_search_equal_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_set_search_equal_func"
@@ -3102,8 +3109,8 @@ lambda (model column key iter data)
 (export 'tree-view-set-search-equal-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_search_entry ()
-;;; gtk_tree_view_set_search_entry ()
+;;; gtk_tree_view_get_search_entry
+;;; gtk_tree_view_set_search_entry
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf tree-view-search-entry) (value view)
@@ -3141,7 +3148,7 @@ lambda (model column key iter data)
 (export 'tree-view-search-entry)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkTreeViewRowSeparatorFunc ()
+;;; GtkTreeViewRowSeparatorFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback tree-view-row-separator-func :boolean
@@ -3177,11 +3184,11 @@ lambda (model column key iter data)
 (export 'tree-view-row-separator-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_row_separator_func ()                 not needed
+;;; gtk_tree_view_get_row_separator_func                    not needed
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_set_row_separator_func ()
+;;; gtk_tree_view_set_row_separator_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_set_row_separator_func"
@@ -3219,7 +3226,7 @@ lambda (model column key iter data)
 (export 'tree-view-set-row-separator-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_is_rubber_banding_active ()
+;;; gtk_tree_view_is_rubber_banding_active
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_is_rubber_banding_active"
@@ -3245,8 +3252,8 @@ lambda (model column key iter data)
 (export 'tree-view-is-rubber-banding-active)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_grid_lines ()
-;;; gtk_tree_view_set_grid_lines ()
+;;; gtk_tree_view_get_grid_lines
+;;; gtk_tree_view_set_grid_lines
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf tree-view-grid-lines) (value view)
@@ -3278,7 +3285,7 @@ lambda (model column key iter data)
 (export 'tree-view-grid-lines)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_set_tooltip_row ()
+;;; gtk_tree_view_set_tooltip_row
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_set_tooltip_row" tree-view-set-tooltip-row) :void
@@ -3307,7 +3314,7 @@ lambda (model column key iter data)
 (export 'tree-view-set-tooltip-row)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_set_tooltip_cell ()
+;;; gtk_tree_view_set_tooltip_cell
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_set_tooltip_cell" tree-view-set-tooltip-cell)
@@ -3346,7 +3353,7 @@ lambda (model column key iter data)
 (export 'tree-view-set-tooltip-cell)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_view_get_tooltip_context ()
+;;; gtk_tree_view_get_tooltip_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_view_get_tooltip_context" %tree-view-tooltip-context)
