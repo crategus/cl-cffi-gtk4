@@ -156,7 +156,7 @@
   @see-class{gtk:string-list}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_new ()
+;;; gtk_combo_box_text_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline combo-box-text-new))
@@ -181,7 +181,7 @@
 (export 'combo-box-text-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_new_with_entry ()
+;;; gtk_combo_box_text_new_with_entry
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline combo-box-text-new-with-entry))
@@ -208,7 +208,7 @@
 (export 'combo-box-text-new-with-entry)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_append ()
+;;; gtk_combo_box_text_append
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_combo_box_text_append" %combo-box-text-append) :void
@@ -243,7 +243,7 @@
 (export 'combo-box-text-append)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_prepend ()
+;;; gtk_combo_box_text_prepend
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_combo_box_text_prepend" %combo-box-text-prepend) :void
@@ -277,7 +277,7 @@
 (export 'combo-box-text-prepend)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_insert ()
+;;; gtk_combo_box_text_insert
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_combo_box_text_insert" %combo-box-text-insert) :void
@@ -315,7 +315,7 @@
 (export 'combo-box-text-insert)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_append_text ()
+;;; gtk_combo_box_text_append_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_combo_box_text_append_text" combo-box-text-append-text)
@@ -343,7 +343,7 @@
 (export 'combo-box-text-append-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_prepend_text ()
+;;; gtk_combo_box_text_prepend_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_combo_box_text_prepend_text" combo-box-text-prepend-text)
@@ -371,7 +371,7 @@
 (export 'combo-box-text-prepend-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_insert_text ()
+;;; gtk_combo_box_text_insert_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_combo_box_text_insert_text" combo-box-text-insert-text)
@@ -402,7 +402,7 @@
 (export 'combo-box-text-insert-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_remove ()
+;;; gtk_combo_box_text_remove
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_combo_box_text_remove" combo-box-text-remove) :void
@@ -426,7 +426,7 @@
 (export 'combo-box-text-remove)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_remove_all ()
+;;; gtk_combo_box_text_remove_all
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_combo_box_text_remove_all" combo-box-text-remove-all) :void
@@ -448,7 +448,7 @@
 (export 'combo-box-text-remove-all)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_combo_box_text_get_active_text ()
+;;; gtk_combo_box_text_get_active_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_combo_box_text_get_active_text"

@@ -8,26 +8,26 @@
 ;;;     GtkSensitivityType
 
 (test gtk-sensitivity-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkSensitivityType"))
   ;; Check the type initializer
   (is (eq (g:gtype "GtkSensitivityType")
           (g:gtype (cffi:foreign-funcall "gtk_sensitivity_type_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:sensitivity-type
           (glib:symbol-for-gtype "GtkSensitivityType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_SENSITIVITY_AUTO" "GTK_SENSITIVITY_ON"
                "GTK_SENSITIVITY_OFF")
              (list-enum-item-name "GtkSensitivityType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2)
              (list-enum-item-value "GtkSensitivityType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("auto" "on" "off")
              (list-enum-item-nick "GtkSensitivityType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkSensitivityType"
                                      GTK-SENSITIVITY-TYPE
                                      (:EXPORT T
@@ -41,36 +41,36 @@
 ;;;     GtkComboBox
 
 (test gtk-combo-box-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkComboBox"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:combo-box
           (glib:symbol-for-gtype "GtkComboBox")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkComboBox")
           (g:gtype (cffi:foreign-funcall "gtk_combo_box_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkComboBox")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkComboBoxText")
              (list-children "GtkComboBox")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkCellEditable")
              (list-interfaces "GtkComboBox")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("active" "active-id" "button-sensitivity" "child"
                "editing-canceled" "entry-text-column" "has-entry" "has-frame"
                "id-column" "model" "popup-fixed-width" "popup-shown")
              (list-properties "GtkComboBox")))
-  ;; Check the list of signals
+  ;; Check list of signals
   (is (equal '("activate" "changed" "format-entry-text" "move-active" "popdown"
                "popup")
              (list-signals "GtkComboBox")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string= "combobox"
                (gtk:widget-class-css-name "GtkComboBox")))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :COMBO-BOX (gtk:widget-class-accessible-role "GtkComboBox")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkComboBox" GTK-COMBO-BOX
@@ -102,18 +102,19 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-combo-box-properties
-  (let ((combo (gtk:combo-box-new)))
-    (is (= -1 (gtk:combo-box-active combo)))
-    (is-false (gtk:combo-box-active-id combo))
-    (is (eq :auto (gtk:combo-box-button-sensitivity combo)))
-    (is (typep (gtk:combo-box-child combo) 'gtk:cell-view))
-    (is (= -1 (gtk:combo-box-entry-text-column combo)))
-    (is-false (gtk:combo-box-has-entry combo))
-    (is-true (gtk:combo-box-has-frame combo))
-    (is (= -1 (gtk:combo-box-id-column combo)))
-    (is-false (gtk:combo-box-model combo))
-    (is-true (gtk:combo-box-popup-fixed-width combo))
-    (is-false (gtk:combo-box-popup-shown combo))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((combo (gtk:combo-box-new)))
+      (is (= -1 (gtk:combo-box-active combo)))
+      (is-false (gtk:combo-box-active-id combo))
+      (is (eq :auto (gtk:combo-box-button-sensitivity combo)))
+      (is (typep (gtk:combo-box-child combo) 'gtk:cell-view))
+      (is (= -1 (gtk:combo-box-entry-text-column combo)))
+      (is-false (gtk:combo-box-has-entry combo))
+      (is-true (gtk:combo-box-has-frame combo))
+      (is (= -1 (gtk:combo-box-id-column combo)))
+      (is-false (gtk:combo-box-model combo))
+      (is-true (gtk:combo-box-popup-fixed-width combo))
+      (is-false (gtk:combo-box-popup-shown combo)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -129,24 +130,29 @@
 ;;;     gtk_combo_box_new
 
 (test gtk-combo-box-new
-  (is (typep (gtk:combo-box-new) 'gtk:combo-box)))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:combo-box-new) 'gtk:combo-box))))
 
 ;;;     gtk_combo_box_new_with_entry
 
 (test gtk-combo-box-new-with-entry
-  (is (typep (gtk:combo-box-new-with-entry) 'gtk:combo-box)))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:combo-box-new-with-entry) 'gtk:combo-box))))
 
 ;;;     gtk_combo_box_new_with_model
 
 (test gtk-combo-box-new-with-model
-  (let ((model (gtk:list-store-new "gchararray")))
-    (is (typep (gtk:combo-box-new-with-model model) 'gtk:combo-box))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((model (gtk:list-store-new "gchararray")))
+      (is (typep (gtk:combo-box-new-with-model model) 'gtk:combo-box)))))
 
 ;;;     gtk_combo_box_new_with_model_and_entry
 
 (test gtk-combo-box-new-with-model-and-entry
-  (let ((model (gtk:list-store-new "gchararray")))
-    (is (typep (gtk:combo-box-new-with-model-and-entry model) 'gtk:combo-box))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((model (gtk:list-store-new "gchararray")))
+      (is (typep (gtk:combo-box-new-with-model-and-entry model)
+                 'gtk:combo-box)))))
 
 ;;;     gtk_combo_box_get_active_iter
 ;;;     gtk_combo_box_set_active_iter
@@ -156,4 +162,4 @@
 ;;;     gtk_combo_box_get_row_separator_func
 ;;;     gtk_combo_box_set_row_separator_func
 
-;;; 2024-4-7
+;;; 2024-4-26

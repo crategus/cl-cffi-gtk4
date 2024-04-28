@@ -8,34 +8,34 @@
 ;;;     GtkComboBoxText
 
 (test gtk-combo-box-text-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkComboBoxText"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:combo-box-text
           (glib:symbol-for-gtype "GtkComboBoxText")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkComboBoxText")
           (g:gtype (cffi:foreign-funcall "gtk_combo_box_text_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkComboBox")
           (g:type-parent "GtkComboBoxText")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkComboBoxText")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkCellEditable")
              (list-interfaces "GtkComboBoxText")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '()
              (list-properties "GtkComboBoxText")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkComboBoxText")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "combobox"
                (gtk:widget-class-css-name "GtkComboBoxText")))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :COMBO-BOX (gtk:widget-class-accessible-role "GtkComboBoxText")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkComboBoxText"
@@ -54,17 +54,20 @@
 ;;;     gtk_combo_box_text_new
 
 (test gtk-combo-box-text-new
-  (is (typep (gtk:combo-box-text-new) 'gtk:combo-box-text)))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:combo-box-text-new) 'gtk:combo-box-text))))
 
 ;;;     gtk_combo_box_text_new_with_entry
 
 (test gtk-combo-box-text-new-with-entry.1
-  (is (typep (gtk:combo-box-text-new-with-entry) 'gtk:combo-box-text)))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:combo-box-text-new-with-entry) 'gtk:combo-box-text))))
 
 (test gtk-combo-box-text-new-with-entry.2
-  (let ((combo (gtk:combo-box-text-new-with-entry)))
-    (is (typep combo 'gtk:combo-box-text))
-    (is (typep (gtk:combo-box-child combo) 'gtk:entry))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((combo (gtk:combo-box-text-new-with-entry)))
+      (is (typep combo 'gtk:combo-box-text))
+      (is (typep (gtk:combo-box-child combo) 'gtk:entry)))))
 
 ;;;     gtk_combo_box_text_append
 ;;;     gtk_combo_box_text_prepend
@@ -80,11 +83,12 @@
 ;;;     gtk_combo_box_text_get_active_text
 
 (test gtk-combo-box-text-active-text
-  (let* ((combo (gtk:combo-box-text-new-with-entry))
-         (entry (gtk:combo-box-child combo)))
-    (is (typep combo 'gtk:combo-box-text))
-    (is (typep entry 'gtk:entry))
-    (is (string= "text" (setf (gtk:editable-text entry) "text")))
-    (is (string= "text" (gtk:combo-box-text-active-text combo)))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let* ((combo (gtk:combo-box-text-new-with-entry))
+           (entry (gtk:combo-box-child combo)))
+      (is (typep combo 'gtk:combo-box-text))
+      (is (typep entry 'gtk:entry))
+      (is (string= "text" (setf (gtk:editable-text entry) "text")))
+      (is (string= "text" (gtk:combo-box-text-active-text combo))))))
 
-;;; 2024-4-6
+;;; 2024-4-26
