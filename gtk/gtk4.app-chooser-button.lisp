@@ -108,9 +108,14 @@
     app-chooser-button-show-dialog-item
     "show-dialog-item" "gboolean" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj app-chooser-button) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:APP-CHOOSER-BUTTON is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'app-chooser-button 'type)
- "@version{2023-8-29}
+ "@version{2024-4-26}
   @begin{short}
     The @class{gtk:app-chooser-button} widget is a widget that lets the user
     select an application.
@@ -178,7 +183,7 @@ lambda (button item)    :has-details
       @begin[code]{table}
         @entry[button]{The @class{gtk:app-chooser-button} widget which received
           the signal.}
-        @entry[item]{A string with the name of the activated item.}
+        @entry[item]{The string with the name of the activated item.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:app-chooser-button-new}
@@ -196,8 +201,7 @@ lambda (button item)    :has-details
 ;;; --- gtk:app-chooser-button-heading -----------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "heading"
-                                               'app-chooser-button) t)
+(setf (documentation (liber:slot-documentation "heading" 'app-chooser-button) t)
  "The @code{heading} property of @code{:string} (Read / Write) @br{}
   The text to show at the top of the dialog that can be opened from the
   button. The string may contain Pango markup. @br{}
@@ -207,9 +211,9 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-heading)
       "Accessor"
       (documentation 'app-chooser-button-heading 'function)
- "@version{2023-8-29}
-  @syntax[]{(gtk:app-chooser-button-heading object) => heading}
-  @syntax[]{(setf (gtk:app-chooser-button-heading object) heading)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-button-heading object) => heading}
+  @syntax{(setf (gtk:app-chooser-button-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
   @argument[heading]{a string containing Pango markup}
   @begin{short}
@@ -229,8 +233,7 @@ lambda (button item)    :has-details
 ;;; --- gtk:app-chooser-button-modal -------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "modal"
-                                               'app-chooser-button) t)
+(setf (documentation (liber:slot-documentation "modal" 'app-chooser-button) t)
  "The @code{modal} property of @code{:boolean} (Read / Write / Construct) @br{}
   Whether the dialog should be modal. @br{}
   Default value: @em{true}")
@@ -239,9 +242,9 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-modal)
       "Accessor"
       (documentation 'app-chooser-button-modal 'function)
- "@version{2023-8-29}
-  @syntax[]{(gtk:app-chooser-button-modal object) => setting}
-  @syntax[]{(setf (gtk:app-chooser-button-modal object) setting)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-button-modal object) => setting}
+  @syntax{(setf (gtk:app-chooser-button-modal object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
   @argument[setting]{a boolean whether the dialog is modal}
   @begin{short}
@@ -271,9 +274,9 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-show-default-item)
       "Accessor"
       (documentation 'app-chooser-button-show-default-item 'function)
- "@version{2023-8-29}
-  @syntax[]{(gtk:app-chooser-button-show-default-item object) => setting}
-  @syntax[]{(setf (gtk:app-chooser-button-show-default-item object) setting)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-button-show-default-item object) => setting}
+  @syntax{(setf (gtk:app-chooser-button-show-default-item object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
   @argument[setting]{a boolean whether the dropdown menu should show the default
     application}
@@ -306,9 +309,9 @@ lambda (button item)    :has-details
 (setf (liber:alias-for-function 'app-chooser-button-show-dialog-item)
       "Accessor"
       (documentation 'app-chooser-button-show-dialog-item 'function)
- "@version{2023-8-29}
-  @syntax[]{(gtk:app-chooser-button-show-dialog-item object) => setting}
-  @syntax[]{(setf (gtk:app-chooser-button-show-dialog-item object) setting)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-button-show-dialog-item object) => setting}
+  @syntax{(setf (gtk:app-chooser-button-show-dialog-item object) setting)}
   @argument[object]{a @class{gtk:app-chooser-button} widget}
   @argument[setting]{a boolean whether the dropdown menu shoult show a
     @class{gtk:app-chooser-dialog} widget}
@@ -326,7 +329,7 @@ lambda (button item)    :has-details
   @see-class{gtk:app-chooser-button}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_button_new ()
+;;; gtk_app_chooser_button_new
 ;;; ----------------------------------------------------------------------------
 
 (defun app-chooser-button-new (content-type)
@@ -334,7 +337,7 @@ lambda (button item)    :has-details
  "@version{2023-8-29}
   @argument[content-type]{a string with the content type to show applications
     for}
-  @return{A newly created @class{gtk:app-chooser-button} widget.}
+  @return{The newly created @class{gtk:app-chooser-button} widget.}
   @begin{short}
     Creates a new application chooser button for applications that can handle
     content of the given type.
@@ -344,14 +347,12 @@ lambda (button item)    :has-details
   @end{dictionary}
   @see-class{gtk:app-chooser-button}"
   (make-instance 'app-chooser-button
-                 :content-type (if content-type
-                                   content-type
-                                   (cffi:null-pointer))))
+                 :content-type (or content-type (cffi:null-pointer))))
 
 (export 'app-chooser-button-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_button_append_custom_item ()
+;;; gtk_app_chooser_button_append_custom_item
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_button_append_custom_item"
@@ -384,7 +385,7 @@ lambda (button item)    :has-details
 (export 'app-chooser-button-append-custom-item)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_button_append_separator ()
+;;; gtk_app_chooser_button_append_separator
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_button_append_separator"
@@ -404,7 +405,7 @@ lambda (button item)    :has-details
 (export 'app-chooser-button-append-separator)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_button_set_active_custom_item ()
+;;; gtk_app_chooser_button_set_active_custom_item
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_button_set_active_custom_item"

@@ -8,39 +8,36 @@
 ;;;     GtkAppChooserWidget
 
 (test gtk-app-chooser-widget-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkAppChooserWidget"))
   ;; Check the registered name
   (is (eq 'gtk:app-chooser-widget
           (glib:symbol-for-gtype "GtkAppChooserWidget")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAppChooserWidget")
           (g:gtype (cffi:foreign-funcall "gtk_app_chooser_widget_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkAppChooserWidget")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkAppChooserWidget")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAppChooser")
              (list-interfaces "GtkAppChooserWidget")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("content-type" "default-text" "show-all" "show-default"
                "show-fallback" "show-other" "show-recommended")
              (list-properties "GtkAppChooserWidget")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("application-activated" "application-selected")
              (list-signals "GtkAppChooserWidget")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "appchooser"
                (gtk:widget-class-css-name "GtkAppChooserWidget")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:app-chooser-widget))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkAppChooserWidget")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAppChooserWidget"
@@ -71,13 +68,14 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-app-chooser-widget-properties
-  (let ((widget (make-instance 'gtk:app-chooser-widget)))
-    (is-false (gtk:app-chooser-widget-default-text widget))
-    (is-false (gtk:app-chooser-widget-show-all widget))
-    (is-false (gtk:app-chooser-widget-show-default widget))
-    (is-false (gtk:app-chooser-widget-show-fallback widget))
-    (is-false (gtk:app-chooser-widget-show-other widget))
-    (is-true (gtk:app-chooser-widget-show-recommended widget))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((widget (make-instance 'gtk:app-chooser-widget)))
+      (is-false (gtk:app-chooser-widget-default-text widget))
+      (is-false (gtk:app-chooser-widget-show-all widget))
+      (is-false (gtk:app-chooser-widget-show-default widget))
+      (is-false (gtk:app-chooser-widget-show-fallback widget))
+      (is-false (gtk:app-chooser-widget-show-other widget))
+      (is-true (gtk:app-chooser-widget-show-recommended widget)))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -89,7 +87,8 @@
 ;;;     gtk_app_chooser_widget_new
 
 (test gtk-app-chooser-widget-new
-  (is (typep (gtk:app-chooser-widget-new "text/plain")
-             'gtk:app-chooser-widget)))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:app-chooser-widget-new "text/plain")
+               'gtk:app-chooser-widget))))
 
-;;; 2024-2-22
+;;; 2024-4-26

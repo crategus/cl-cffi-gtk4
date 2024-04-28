@@ -95,6 +95,11 @@
     app-chooser-dialog-heading
     "heading" "gchararray" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj app-chooser-dialog) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:APP-CHOOSER-DIALOG is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'app-chooser-dialog 'type)
  "@version{2023-8-29}
@@ -140,9 +145,9 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-gfile)
       "Accessor"
       (documentation 'app-chooser-dialog-gfile 'function)
- "@version{2023-8-29}
-  @syntax[]{gtk:app-chooser-dialog-gfile object) => file}
-  @syntax[]{(setf (gtk:app-chooser-dialog-gfile object) file)}
+ "@version{2024-4-26}
+  @syntax{gtk:app-chooser-dialog-gfile object) => file}
+  @syntax{(setf (gtk:app-chooser-dialog-gfile object) file)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
   @argument[file]{a @class{g:file} object}
   @begin{short}
@@ -171,9 +176,9 @@
 (setf (liber:alias-for-function 'app-chooser-dialog-heading)
       "Accessor"
       (documentation 'app-chooser-dialog-heading 'function)
- "@version{2024-2-22}
-  @syntax[]{gtk:app-chooser-dialog-heading object) => heading}
-  @syntax[]{(setf (gtk:app-chooser-dialog-heading object) heading)}
+ "@version{2024-4-26}
+  @syntax{gtk:app-chooser-dialog-heading object) => heading}
+  @syntax{(setf (gtk:app-chooser-dialog-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
   @argument[heading]{a string containing Pango markup}
   @begin{short}
@@ -190,7 +195,7 @@
   @see-class{gtk:app-chooser-dialog}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_dialog_new ()
+;;; gtk_app_chooser_dialog_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_dialog_new" app-chooser-dialog-new)
@@ -220,7 +225,7 @@
 (export 'app-chooser-dialog-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_dialog_new_for_content_type ()
+;;; gtk_app_chooser_dialog_new_for_content_type
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_dialog_new_for_content_type"
@@ -249,15 +254,15 @@
 (export 'app-chooser-dialog-new-for-content-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_dialog_get_widget ()
+;;; gtk_app_chooser_dialog_get_widget
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_dialog_get_widget" app-chooser-dialog-widget)
     (g:object widget)
  #+liber-documentation
- "@version{#2023-8-29}
+ "@version{#2024-4-26}
   @argument[dialog]{a @class{gtk:app-chooser-dialog} widget}
-  @return{The @class{gtk:app-chooser-widget} of @arg{dialog}.}
+  @return{The @class{gtk:app-chooser-widget} widget of @arg{dialog}.}
   @begin{short}
     Returns the application chooser widget of the dialog.
   @end{short}

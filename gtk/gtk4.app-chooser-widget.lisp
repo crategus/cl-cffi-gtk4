@@ -116,6 +116,11 @@
     app-chooser-widget-show-recommended
     "show-recommended" "gboolean" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj app-chooser-widget) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:APP-CHOOSER-WIDGET is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'app-chooser-widget 'type)
  "@version{2024-2-22}
@@ -199,9 +204,9 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-default-text)
       "Accessor"
       (documentation 'app-chooser-widget-default-text 'function)
- "@version{2024-2-22}
-  @syntax[]{(gtk:app-chooser-widget-default-text object) => text}
-  @syntax[]{(setf (gtk:app-chooser-widget-default-text object) text)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-widget-default-text object) => text}
+  @syntax{(setf (gtk:app-chooser-widget-default-text object) text)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
   @argument[text]{a string with the text that appears in the widget}
   @begin{short}
@@ -224,18 +229,18 @@ lambda (widget application)    :run-first
                                                'app-chooser-widget) t)
  "The @code{show-all} property of type @code{:boolean}
   (Read / Write / Construct) @br{}
-  If the @code{show-all} property is @em{true}, the application chooser
-  presents all applications in a single list, without subsections for default,
-  recommended or related applications. @br{}
+  If @em{true}, the application chooser presents all applications in a single
+  list, without subsections for default, recommended or related applications.
+  @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'app-chooser-widget-show-all)
       "Accessor"
       (documentation 'app-chooser-widget-show-all 'function)
- "@version{2024-2-22}
-  @syntax[]{(gtk:app-chooser-widget-show-all object) => setting}
-  @syntax[]{(setf (gtk:app-chooser-widget-show-all object) setting)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-widget-show-all object) => setting}
+  @syntax{(setf (gtk:app-chooser-widget-show-all object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
   @argument[setting]{a boolean whether the application chooser presents all
     applications in a single list}
@@ -268,9 +273,9 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-default)
       "Accessor"
       (documentation 'app-chooser-widget-show-default 'function)
- "@version{2024-2-22}
-  @syntax[]{(gtk:app-chooser-widget-show-default object) => setting}
-  @syntax[]{(setf (gtk:app-chooser-widget-show-default object) setting)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-widget-show-default object) => setting}
+  @syntax{(setf (gtk:app-chooser-widget-show-default object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
   @argument[setting]{a boolean whether the application chooser should show the
     default handler}
@@ -303,9 +308,9 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-fallback)
       "Accessor"
       (documentation 'app-chooser-widget-show-fallback 'function)
- "@version{2024-2-22}
-  @syntax[]{(gtk:app-chooser-widget-show-fallback object) => setting}
-  @syntax[]{(setf (gtk:app-chooser-widget-show-fallback object) setting)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-widget-show-fallback object) => setting}
+  @syntax{(setf (gtk:app-chooser-widget-show-fallback object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
   @argument[setting]{a boolean whether the application chooser should show a
     section for fallback applications}
@@ -338,9 +343,9 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-other)
       "Accessor"
       (documentation 'app-chooser-widget-show-other 'function)
- "@version{2024-2-22}
-  @syntax[]{(gtk:app-chooser-widget-show-other object) => setting}
-  @syntax[]{(setf (gtk:app-chooser-widget-show-other object) setting)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-widget-show-other object) => setting}
+  @syntax{(setf (gtk:app-chooser-widget-show-other object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
   @argument[setting]{a boolean whether the application chooser should show a
     section for other applications}
@@ -374,9 +379,9 @@ lambda (widget application)    :run-first
 (setf (liber:alias-for-function 'app-chooser-widget-show-recommended)
       "Accessor"
       (documentation 'app-chooser-widget-show-recommended 'function)
- "@version{2024-2-22}
-  @syntax[]{(gtk:app-chooser-widget-show-recommended object) => setting}
-  @syntax[]{(setf (gtk:app-chooser-widget-show-recommended object) setting)}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-widget-show-recommended object) => setting}
+  @syntax{(setf (gtk:app-chooser-widget-show-recommended object) setting)}
   @argument[object]{a @class{gtk:app-chooser-widget} widget}
   @argument[setting]{a boolean whether the application chooser shuld show a
     section for recommended applications}
@@ -395,7 +400,7 @@ lambda (widget application)    :run-first
   @see-class{gtk:app-chooser-widget}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_widget_new ()
+;;; gtk_app_chooser_widget_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline app-chooser-widget-new))

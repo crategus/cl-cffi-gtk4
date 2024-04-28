@@ -36,8 +36,9 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-app-chooser-properties
-  (let ((button (make-instance 'gtk:app-chooser-button)))
-    (is-false (gtk:app-chooser-content-type button))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((button (make-instance 'gtk:app-chooser-button)))
+      (is-false (gtk:app-chooser-content-type button)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -45,15 +46,17 @@
 
 #-windows
 (test gtk-app-chooser-app-info
-  (let ((button (gtk:app-chooser-button-new "text/plain")))
-    (is (typep (gtk:app-chooser-app-info button) 'g:object))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((button (gtk:app-chooser-button-new "text/plain")))
+      (is (typep (gtk:app-chooser-app-info button) 'g:object)))))
 
 ;;;     gtk_app_chooser_refresh
 
 #-windows
 (test gtk-app-chooser-refresh
-  (let ((button (gtk:app-chooser-button-new "text/plain")))
-    (is-false (gtk:app-chooser-refresh button))
-    (is (typep (gtk:app-chooser-app-info button) 'g:object))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((button (gtk:app-chooser-button-new "text/plain")))
+      (is-false (gtk:app-chooser-refresh button))
+      (is (typep (gtk:app-chooser-app-info button) 'g:object)))))
 
-;;; 2024-4-11
+;;; 2024-4-26

@@ -8,35 +8,35 @@
 ;;;     GtkAppChooserDialog
 
 (test gtk-app-chooser-dialog-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkAppChooserDialog"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:app-chooser-dialog
           (glib:symbol-for-gtype "GtkAppChooserDialog")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAppChooserDialog")
           (g:gtype (cffi:foreign-funcall "gtk_app_chooser_dialog_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkDialog")
           (g:type-parent "GtkAppChooserDialog")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkAppChooserDialog")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot" "GtkAppChooser")
              (list-interfaces "GtkAppChooserDialog")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("content-type" "gfile" "heading")
              (list-properties "GtkAppChooserDialog")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkAppChooserDialog")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string= "window"
                (gtk:widget-class-css-name "GtkAppChooserDialog")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAppChooserDialog"
                                              GTK-APP-CHOOSER-DIALOG
                        (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
@@ -53,9 +53,10 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-app-chooser-dialog-properties
-  (let ((dialog (make-instance 'gtk:app-chooser-dialog)))
-    (is-false (gtk:app-chooser-dialog-gfile dialog))
-    (is-false (gtk:app-chooser-dialog-heading dialog))))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (let ((dialog (make-instance 'gtk:app-chooser-dialog)))
+      (is-false (gtk:app-chooser-dialog-gfile dialog))
+      (is-false (gtk:app-chooser-dialog-heading dialog)))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -63,4 +64,4 @@
 ;;;     gtk_app_chooser_dialog_new_for_content_type
 ;;;     gtk_app_chooser_dialog_get_widget
 
-;;; 2024-2-22
+;;; 2024-4-26

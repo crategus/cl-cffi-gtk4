@@ -71,7 +71,7 @@
 (setf (liber:alias-for-class 'app-chooser)
       "Interface"
       (documentation 'app-chooser 'type)
- "@version{2023-8-29}
+ "@version{2024-4-26}
   @begin{short}
     The @class{gtk:app-chooser} interface is an interface that can be
     implemented by widgets which allow the user to choose an application,
@@ -103,6 +103,11 @@
   @see-class{gtk:app-chooser-dialog}
   @see-class{gtk:app-chooser-button}")
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj app-chooser) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:APP-CHOOSER is deprecated since 4.10")))
+
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
@@ -111,17 +116,15 @@
 (setf (documentation (liber:slot-documentation "content-type" 'app-chooser) t)
  "The @code{content-type} property of type @code{:string}
   (Read / Write / Construct) @br{}
-  The content type of the application chooser.
-  See the @code{GContentType} implementation for more information about content
-  types. @br{}
+  The content type of the application chooser. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'app-chooser-content-type)
       "Accessor"
       (documentation 'app-chooser-content-type 'function)
- "@version{2023-8-29}
-  @syntax[]{(gtk:app-chooser-content-type object) => content-type}
+ "@version{2024-4-26}
+  @syntax{(gtk:app-chooser-content-type object) => content-type}
   @argument[object]{a @class{gtk:app-chooser} object}
   @argument[content-type]{a string with the content type}
   @begin{short}
@@ -136,7 +139,7 @@
   @see-class{gtk:app-chooser}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_get_app_info ()
+;;; gtk_app_chooser_get_app_info
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_get_app_info" app-chooser-app-info)
@@ -161,7 +164,7 @@
 (export 'app-chooser-app-info)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_app_chooser_refresh ()
+;;; gtk_app_chooser_refresh
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_app_chooser_refresh" app-chooser-refresh) :void
