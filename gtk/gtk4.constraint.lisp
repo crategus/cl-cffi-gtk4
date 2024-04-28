@@ -423,7 +423,7 @@ target.target_attr = source.source_attr × multiplier + constant
 ;;; gtk_constraint_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_constraint_new" constraint-new) (g:object constraint)
+(cffi:defcfun ("gtk_constraint_new" %constraint-new) (g:object constraint)
  #+liber-documentation
  "@version{#2023-4-21}
   @argument[target]{a @class{gtk:constraint-target} object}
@@ -450,14 +450,33 @@ target.target_attr = source.source_attr × multiplier + constant
   @see-symbol{gtk:constraint-attribute}
   @see-symbol{gtk:constraint-relation}
   @see-symbol{gtk:constraint-strength}"
-  (target :pointer)
+  (target g:object)
   (target-attribute constraint-attribute)
   (relation constraint-relation)
-  (source :pointer)
+  (source g:object)
   (source-attribute constraint-attribute)
   (multiplier :double)
   (constant :double)
   (strength constraint-strength))
+
+(defun constraint-new (target
+                       target-attribute
+                       relation
+                       source
+                       source-attribute
+                       multiplier
+                       constant
+                       strength)
+  (cffi:foreign-funcall "gtk_constraint_new"
+                        g:object target
+                        constraint-attribute target-attribute
+                        constraint-relation relation
+                        g:object source
+                        constraint-attribute source-attribute
+                        :double (coerce multiplier 'double-float)
+                        :double (coerce constant 'double-float)
+                        constraint-strength strength
+                        (g:object constraint)))
 
 (export 'constraint-new)
 
@@ -465,7 +484,7 @@ target.target_attr = source.source_attr × multiplier + constant
 ;;; gtk_constraint_new_constant
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_constraint_new_constant" constraint-new-constant)
+(cffi:defcfun ("gtk_constraint_new_constant" %constraint-new-constant)
     (g:object constraint)
  #+liber-documentation
  "@version{#2023-4-21}
@@ -488,11 +507,24 @@ target.target_attr = source.source_attr × multiplier + constant
   @see-symbol{gtk:constraint-attribute}
   @see-symbol{gtk:constraint-relation}
   @see-symbol{gtk:constraint-strength}"
-  (target :pointer)
+  (target g:object)
   (target-attribute constraint-attribute)
   (relation constraint-relation)
   (constant :double)
   (strength constraint-strength))
+
+(defun constraint-new-constant (target
+                                target-attribute
+                                relation
+                                constant
+                                strength)
+  (cffi:foreign-funcall "gtk_constraint_new_constant"
+                        g:object target
+                        constraint-attribute target-attribute
+                        constraint-relation relation
+                        :double (coerce constant 'double-float)
+                        constraint-strength strength
+                        (g:object constraint)))
 
 (export 'constraint-new-constant)
 
