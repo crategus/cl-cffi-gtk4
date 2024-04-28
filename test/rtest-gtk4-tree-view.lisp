@@ -369,45 +369,48 @@
 ;;;     gtk_tree_view_move_column_after
 
 (test gtk-tree-view-move-column-after.1
-  (let ((view (gtk:tree-view-new))
-        (column0 (make-instance 'gtk:tree-view-column))
-        (column1 (make-instance 'gtk:tree-view-column))
-        (column2 (make-instance 'gtk:tree-view-column)))
-    ;; Add columns to the tree view
-    (is (= 1 (gtk:tree-view-append-column view column0)))
-    (is (= 2 (gtk:tree-view-append-column view column1)))
-    (is (= 3 (gtk:tree-view-append-column view column2)))
-    ;; Move columns
-    (is-false (gtk:tree-view-move-column-after view column0 column2))
-    (is (eq column1 (gtK:tree-view-column view 0)))
-    (is (eq column2 (gtk:tree-view-column view 1)))
-    (is (eq column0 (gtk:tree-view-column view 2)))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((view (gtk:tree-view-new))
+          (column0 (make-instance 'gtk:tree-view-column))
+          (column1 (make-instance 'gtk:tree-view-column))
+          (column2 (make-instance 'gtk:tree-view-column)))
+      ;; Add columns to the tree view
+      (is (= 1 (gtk:tree-view-append-column view column0)))
+      (is (= 2 (gtk:tree-view-append-column view column1)))
+      (is (= 3 (gtk:tree-view-append-column view column2)))
+      ;; Move columns
+      (is-false (gtk:tree-view-move-column-after view column0 column2))
+      (is (eq column1 (gtK:tree-view-column view 0)))
+      (is (eq column2 (gtk:tree-view-column view 1)))
+      (is (eq column0 (gtk:tree-view-column view 2))))))
 
 (test gtk-tree-view-move-column-after.2
-  (let ((view (gtk:tree-view-new))
-        (column0 (make-instance 'gtk:tree-view-column))
-        (column1 (make-instance 'gtk:tree-view-column))
-        (column2 (make-instance 'gtk:tree-view-column)))
-    ;; Add columns to the tree view
-    (is (= 1 (gtk:tree-view-append-column view column0)))
-    (is (= 2 (gtk:tree-view-append-column view column1)))
-    (is (= 3 (gtk:tree-view-append-column view column2)))
-    ;; Move columns
-    (is-false (gtk:tree-view-move-column-after view column2 nil))
-    (is (eq column2 (gtK:tree-view-column view 0)))
-    (is (eq column0 (gtk:tree-view-column view 1)))
-    (is (eq column1 (gtk:tree-view-column view 2)))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((view (gtk:tree-view-new))
+          (column0 (make-instance 'gtk:tree-view-column))
+          (column1 (make-instance 'gtk:tree-view-column))
+          (column2 (make-instance 'gtk:tree-view-column)))
+      ;; Add columns to the tree view
+      (is (= 1 (gtk:tree-view-append-column view column0)))
+      (is (= 2 (gtk:tree-view-append-column view column1)))
+      (is (= 3 (gtk:tree-view-append-column view column2)))
+      ;; Move columns
+      (is-false (gtk:tree-view-move-column-after view column2 nil))
+      (is (eq column2 (gtK:tree-view-column view 0)))
+      (is (eq column0 (gtk:tree-view-column view 1)))
+      (is (eq column1 (gtk:tree-view-column view 2))))))
 
 ;;;     GtkTreeViewColumnDropFunc
 ;;;     gtk_tree_view_set_column_drag_function
 
 (test gtk-tree-view-set-column-drag-function
-  (let ((view (gtk:tree-view-new)))
-    (is-false (gtk:tree-view-set-column-drag-function view
-                      (lambda (view column prev next)
-                        (declare (ignore view column prev next))
-                        t)))
-    (is-false (gtk:tree-view-set-column-drag-function view nil))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((view (gtk:tree-view-new)))
+      (is-false (gtk:tree-view-set-column-drag-function view
+                        (lambda (view column prev next)
+                          (declare (ignore view column prev next))
+                          t)))
+      (is-false (gtk:tree-view-set-column-drag-function view nil)))))
 
 ;;;     gtk_tree_view_scroll_to_point
 ;;;     gtk_tree_view_scroll_to_cell
@@ -417,9 +420,10 @@
 ;;;     gtk_tree_view_get_cursor
 
 (test gtk-tree-view-get-cursor
-  (let ((view (gtk:tree-view-new)))
-    (is (equal '(nil nil)
-               (multiple-value-list (gtk:tree-view-get-cursor view))))))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((view (gtk:tree-view-new)))
+      (is (equal '(nil nil)
+                 (multiple-value-list (gtk:tree-view-get-cursor view)))))))
 
 ;;;     gtk_tree_view_row_activated
 ;;;     gtk_tree_view_expand_all
@@ -471,4 +475,4 @@
 ;;;     gtk_tree_view_set_tooltip_cell
 ;;;     gtk_tree_view_get_tooltip_context
 
-;;; 2024-3-9
+;;; 2024-4-27

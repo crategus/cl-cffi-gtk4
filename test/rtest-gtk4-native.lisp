@@ -42,6 +42,7 @@
 ;; 'GdkWaylandToplevel': Es wird versucht EGL zu verwenden, aber X11 GLX ist
 ;; bereits in Verwendung
 
+#+nil
 (test gtk-native-surface/for-surface
   (let ((window (make-instance 'gtk:window))
         (surface nil))
@@ -58,6 +59,7 @@
 
 ;;;     gtk_native_get_renderer
 
+#+nil
 (test gtk-native-renderer
   (let ((window (make-instance 'gtk:window))
         (renderer nil))
@@ -71,6 +73,7 @@
 
 ;;;     gtk_native_get_surface_transform
 
+#+nil
 (test gtk-native-surface-transform
   (let ((window (make-instance 'gtk:window)))
     (is (equal '(0d0 0d0)

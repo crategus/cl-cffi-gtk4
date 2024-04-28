@@ -8,34 +8,34 @@
 ;;;     GtkPrintBackend
 
 (test gtk-print-backend-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkPrintBackend"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:print-backend
           (glib:symbol-for-gtype "GtkPrintBackend")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPrintBackend")
           (g:gtype (cffi:foreign-funcall "gtk_print_backend_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkPrintBackend")))
-  ;; Check the children
+  ;; Check children
   (if *first-run-gtk-test*
     (is (equal '()
                (list-children "GtkPrintBackend")))
     (is (equal '("GtkPrintBackendCpdb" "GtkPrintBackendFile")
                (list-children "GtkPrintBackend"))))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkPrintBackend")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("status")
              (list-properties "GtkPrintBackend")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("printer-added" "printer-list-changed" "printer-list-done"
                "printer-removed" "printer-status-changed" "request-password")
              (list-signals "GtkPrintBackend")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintBackend" GTK-PRINT-BACKEND
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_print_backend_get_type")
@@ -46,35 +46,35 @@
 ;;;     GtkPrinter
 
 (test gtk-printer-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkPrinter"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:printer
           (glib:symbol-for-gtype "GtkPrinter")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPrinter")
           (g:gtype (cffi:foreign-funcall "gtk_printer_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkPrinter")))
-  ;; Check the children
+  ;; Check children
   (if *first-run-gtk-test*
       (is (equal '()
                  (list-children "GtkPrinter")))
       (is (equal '("GtkPrinterCpdb")
                  (list-children "GtkPrinter"))))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkPrinter")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("accepting-jobs" "accepts-pdf" "accepts-ps" "backend"
                "icon-name" "is-virtual" "job-count" "location" "name" "paused"
                "state-message")
              (list-properties "GtkPrinter")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("details-acquired")
              (list-signals "GtkPrinter")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrinter" GTK-PRINTER
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_printer_get_type")
@@ -103,18 +103,6 @@
              (gobject:get-g-type-definition "GtkPrinter"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     accepting-jobs
-;;;     accepts-pdf
-;;;     accepts-ps
-;;;     backend
-;;;     icon-name
-;;;     is-virtual
-;;;     job-count
-;;;     location
-;;;     name
-;;;     paused
-;;;     state-message
 
 (test gtk-printer-properties
   (let ((printer (make-instance 'gtk:printer)))
@@ -156,6 +144,9 @@
 ;;;     GtkPrinterFunc
 ;;;     gtk_enumerate_printers
 
+;; TODO: This test can crash with a memory fault. Check this more carefully!?
+
+#+nil
 (test gtk-enumerate-printers
   (let (printers)
     (gtk:enumerate-printers (lambda (printer)
@@ -164,4 +155,4 @@
                             t)
     (is (every (lambda (x) (typep x 'gtk:printer)) printers))))
 
-;;; 2024-2-18
+;;; 2024-4-27

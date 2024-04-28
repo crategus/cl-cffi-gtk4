@@ -111,7 +111,7 @@
   (export 'store-items-count)
   (export 'store-item)
   (export 'store-add-item))
-  
+
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk-test)
@@ -142,45 +142,43 @@
     liststore))
 
 (test gtk-array-list-store-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkArrayListStore"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:array-list-store
           (glib:symbol-for-gtype "GtkArrayListStore")))
-  ;; Check the type initializer
+  ;; Check type initializer
 ;  (is (eq (g:gtype "GObject")
 ;          (g:gtype (cffi:foreign-funcall "gtk_array_list_store_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkArrayListStore")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkArrayListStore")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkTreeModel")
              (list-interfaces "GtkArrayListStore")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '()
              (list-properties "GtkArrayListStore")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkArrayListStore")))
-  ;; Check the class definition
-  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkArrayListStore" 
+  ;; Check class definition
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkArrayListStore"
                                              GTK-ARRAY-LIST-STORE
-                               (:SUPERCLASS G-OBJECT 
-                                :EXPORT T 
+                               (:SUPERCLASS G-OBJECT
+                                :EXPORT T
                                 :INTERFACES ("GtkTreeModel"))
                                NIL)
              (gobject:get-g-type-definition "GtkArrayListStore"))))
 
 (test array-list-store-item
-  (let ((store (make-instance 'gtk:array-list-store
-                              :column-types
-                              '("gint" "gchararray" "gboolean"))))
-    
-    (is (= 0 (gtk:store-items-count store)))
+  (let ((*gtk-warn-deprecated* nil))
+    (let ((store (make-instance 'gtk:array-list-store
+                                :column-types
+                                '("gint" "gchararray" "gboolean"))))
+      (is (= 0 (gtk:store-items-count store))))))
 
-))
-
-;;; 2023-10-28 -----------------------------------------------------------------
+;;; 2024-4-27

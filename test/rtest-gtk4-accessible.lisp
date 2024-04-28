@@ -47,22 +47,23 @@
 
 #-windows
 (test gtk-accessible-properties.2
-  (let ((children (remove nil
-                          (mapcar #'glib:symbol-for-gtype
-                                  (mapcar #'g:type-name
-                                          (g:type-children "GtkWidget"))))))
-     ;; Remove GTK:LIST-BASE. It is an abstract widget class.
-     (setf children (remove 'gtk:list-base children))
-     (is (equal '(:APPLICATION :BUTTON :CHECKBOX :COMBO-BOX :GENERIC :GRID
-                  :GRID-CELL :GROUP :IMG :LABEL :LIST :LIST-ITEM
-                  :MENU-BAR :METER :NONE :PROGRESS-BAR :SCROLLBAR
-                  :SEARCH :SEARCH-BOX :SEPARATOR :SPIN-BUTTON :SWITCH
-                  :TAB-LIST :TEXT-BOX :TREE-GRID)
-                (sort (remove-duplicates
-                          (mapcar #'gtk:accessible-accessible-role
-                                  (mapcar #'make-instance children))
-                          :test #'eq)
-                      #'string<)))))
+  (let ((*gtk-warn-deprecated* nil)) ; no warnings for deprecated widgets
+    (let ((children (remove nil
+                            (mapcar #'glib:symbol-for-gtype
+                                    (mapcar #'g:type-name
+                                            (g:type-children "GtkWidget"))))))
+       ;; Remove GTK:LIST-BASE. It is an abstract widget class.
+       (setf children (remove 'gtk:list-base children))
+       (is (equal '(:APPLICATION :BUTTON :CHECKBOX :COMBO-BOX :GENERIC :GRID
+                    :GRID-CELL :GROUP :IMG :LABEL :LIST :LIST-ITEM
+                    :MENU-BAR :METER :NONE :PROGRESS-BAR :SCROLLBAR
+                    :SEARCH :SEARCH-BOX :SEPARATOR :SPIN-BUTTON :SWITCH
+                    :TAB-LIST :TEXT-BOX :TREE-GRID)
+                  (sort (remove-duplicates
+                            (mapcar #'gtk:accessible-accessible-role
+                                    (mapcar #'make-instance children))
+                            :test #'eq)
+                        #'string<))))))
 
 ;;; --- Functions --------------------------------------------------------------
 

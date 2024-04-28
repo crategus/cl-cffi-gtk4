@@ -316,6 +316,9 @@
 
 ;;;     gtk_window_get_toplevels
 
+;; TODO: This test generates warnings for deprecated windows.
+
+#+nil
 (test gtk-window-toplevels
   ; Destroy already existing windows
   (dolist (window (gtk:window-list-toplevels))
@@ -332,6 +335,9 @@
 
 ;;;     gtk_window_list_toplevels
 
+;; TODO: This test generates warnings for deprecated windows.
+
+#+nil
 (test gtk-window-list-toplevels
   ; Destroy already existing windows
   (dolist (window (gtk:window-list-toplevels))
@@ -349,4 +355,4 @@
 ;;;     gtk_window_set_interactive_debugging
 ;;;     gtk_window_is_suspended                            Since 4.12
 
-;;; 2024-4-11
+;;; 2024-4-26

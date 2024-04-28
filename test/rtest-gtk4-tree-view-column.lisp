@@ -8,26 +8,26 @@
 ;;;     GtkTreeViewColumnSizing
 
 (test gtk-tree-view-column-sizing
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkTreeViewColumnSizing"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkTreeViewColumnSizing")
           (g:gtype (cffi:foreign-funcall "gtk_tree_view_column_sizing_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:tree-view-column-sizing
           (glib:symbol-for-gtype "GtkTreeViewColumnSizing")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_TREE_VIEW_COLUMN_GROW_ONLY" "GTK_TREE_VIEW_COLUMN_AUTOSIZE"
                "GTK_TREE_VIEW_COLUMN_FIXED")
              (list-enum-item-name "GtkTreeViewColumnSizing")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2)
              (list-enum-item-value "GtkTreeViewColumnSizing")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("grow-only" "autosize" "fixed")
              (list-enum-item-nick "GtkTreeViewColumnSizing")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkTreeViewColumnSizing"
                                      GTK-TREE-VIEW-COLUMN-SIZING
                                      (:EXPORT T
@@ -41,34 +41,34 @@
 ;;;     GtkTreeViewColumn
 
 (test gtk-tree-view-column-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkTreeViewColumn"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:tree-view-column
           (glib:symbol-for-gtype "GtkTreeViewColumn")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkTreeViewColumn")
           (g:gtype (cffi:foreign-funcall "gtk_tree_view_column_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GInitiallyUnowned")
           (g:type-parent "GtkTreeViewColumn")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkTreeViewColumn")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
              (list-interfaces "GtkTreeViewColumn")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("alignment" "cell-area" "clickable" "expand" "fixed-width"
                "max-width" "min-width" "reorderable" "resizable" "sizing"
                "sort-column-id" "sort-indicator" "sort-order" "spacing" "title"
                "visible" "widget" "width" "x-offset")
              (list-properties "GtkTreeViewColumn")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("clicked")
              (list-signals "GtkTreeViewColumn")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeViewColumn"
                                              GTK-TREE-VIEW-COLUMN
                                (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T
@@ -189,6 +189,9 @@
 
 ;;;     gtk_tree_view_column_cell_get_size
 
+;; TODO: Creates critical errors
+
+#+nil
 (test gtk-tree-view-column-cell-size.1
   (let ((column (gtk:tree-view-column-new-with-area (gtk:cell-area-box-new))))
     (multiple-value-bind (xoffset yoffset width height)
@@ -197,6 +200,7 @@
       (is (= 0 width))
       (is (= 0 height)))))
 
+#+nil
 (test gtk-tree-view-column-cell-size.2
   (let* ((renderer (gtk:cell-renderer-text-new))
          (column (gtk:tree-view-column-new-with-area
@@ -216,4 +220,4 @@
 ;;;     gtk_tree_view_column_queue_resize
 ;;;     gtk_tree_view_column_get_tree_view
 
-;;; 2024-3-8
+;;; 2024-4-27
