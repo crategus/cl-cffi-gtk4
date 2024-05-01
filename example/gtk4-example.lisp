@@ -135,6 +135,9 @@
            ;; Scrolling
            #:do-scrolled-window
 
+           ;; Printing
+           #:create-page-setup-dialog
+
            ;; Data exchange, Clipboards, Drag and Drop
            #:do-clipboard
 

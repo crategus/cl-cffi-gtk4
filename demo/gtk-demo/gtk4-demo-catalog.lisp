@@ -614,6 +614,12 @@
        "scrolled-window.lisp"))
 
      "Printing"
+     (("Page Setup Dialog"
+       ":dialog"
+       "CREATE-PAGE-SETUP-DIALOG"
+       "gtk4-example"
+       "page-setup-dialog.lisp"
+       "resource/page-setup.ini"))
 
      "Drag and Drop, Clipboard"
      (("Clipboard"

@@ -1,4 +1,6 @@
-;;;; Various Message Dialogs - 2022-11-11
+;;;; Various Message Dialogs
+;;;;
+;;;; 2024-5-1
 
 (in-package :gtk4-example)
 
@@ -14,14 +16,14 @@
                       (lambda (dialog response)
                         (declare (ignore response))
                         (gtk:window-destroy dialog)))
-    (gtk:widget-show dialog)))
+    (gtk:window-present dialog)))
 
 (defun do-message-dialog-new (&optional application)
   (let ((parent (make-instance 'gtk:window
                                :title "Show Message Dialog"
                                :application application)))
     (create-message-dialog-new parent "message.lisp")
-    (gtk:widget-show parent)))
+    (gtk:window-present parent)))
 
 ;; Example for GtkMessageDialog documentation
 (defun create-message-dialog-new-with-markup (parent filename)
@@ -36,14 +38,14 @@
                       (lambda (dialog response)
                         (declare (ignore response))
                         (gtk:window-destroy dialog)))
-    (gtk:widget-show dialog)))
+    (gtk:window-present dialog)))
 
 (defun do-message-dialog-new-with-markup (&optional application)
   (let ((parent (make-instance 'gtk:window
                                :title "Show Message Dialog"
                                :application application)))
     (create-message-dialog-new-with-markup parent "message.lisp")
-    (gtk:widget-show parent)))
+    (gtk:window-present parent)))
 
 ;; Example for GtkMessageDialog documentation
 ;; TODO: Check the usage of FILENAME in this example
@@ -64,14 +66,14 @@
     (gtk:message-dialog-format-secondary-text dialog
                                               "Error loading file ~s"
                                               "message.lisp")
-    (gtk:widget-show dialog)))
+    (gtk:window-present dialog)))
 
 (defun do-message-dialog-with-markup (&optional application)
   (let ((parent (make-instance 'gtk:window
                                :title "Show Message Dialog"
                                :application application)))
     (create-message-dialog-with-markup parent "message.lisp")
-    (gtk:widget-show parent)))
+    (gtk:window-present parent)))
 
 ;; Example for GtkMessageDialog documentation
 ;; TODO: Check the usage of FILENAME in this example
@@ -92,11 +94,11 @@
     (gtk:message-dialog-format-secondary-markup dialog
                                                 "Error loading file <b>~s</b>"
                                                 "message.lisp")
-    (gtk:widget-show dialog)))
+    (gtk:window-present dialog)))
 
 (defun do-message-dialog-with-secondary-markup (&optional application)
   (let ((parent (make-instance 'gtk:window
                                :title "Show Message Dialog"
                                :application application)))
     (create-message-dialog-with-secondary-markup parent "message.lisp")
-    (gtk:widget-show parent)))
+    (gtk:window-present parent)))

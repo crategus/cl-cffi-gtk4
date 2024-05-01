@@ -7,7 +7,7 @@
                                              parent
                                              '(:destroy-with-parent :modal)
                                              "OK"
-                                             :none)))
+                                             :ok)))
     (g:signal-connect dialog "response"
                       (lambda (widget response)
                         (declare (ignore response))
@@ -19,12 +19,12 @@
                                    :margin-bottom 12
                                    :margin-start 12
                                    :margin-end 12))
-    (gtk:widget-show dialog)))
+    (gtk:window-present dialog)))
 
 (defun do-dialog-quick-message (&optional application)
   (let ((parent (make-instance 'gtk:window
-                               :title "Show Quick Message"
+                               :title "Quick Message"
                                :application application)))
     (create-quick-message parent
                           "Quick Message with GtkDialog")
-    (gtk:widget-show parent)))
+    (gtk:window-present parent)))

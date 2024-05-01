@@ -1,11 +1,11 @@
 ;;;; Simple Constraints
 ;;;;
 ;;;; The <tt>GtkConstraintLayout</tt> object provides a layout manager that uses
-;;;; relations between widgets (also known as “constraints”) to compute the
+;;;; relations between widgets (also known as "constraints") to compute the
 ;;;; position and size of each child.
 ;;;;
 ;;;; In addition to child widgets, the constraints can involve spacer objects
-;;;; (also known as “guides”). This example has a guide between the two buttons
+;;;; (also known as "guides"). This example has a guide between the two buttons
 ;;;; in the top row.
 ;;;;
 ;;;; Try resizing the window to see how the constraints react to update the
@@ -234,7 +234,8 @@
   ;; Create constraints
   (build-constraints obj (gtk:widget-layout-manager obj)))
 
-(defun do-constraint-simple (&optional application)
+
+  (defun do-constraint-simple (&optional application)
   (let* ((box (make-instance 'gtk:box
                              :orientation :vertical
                              :spacing 12))
