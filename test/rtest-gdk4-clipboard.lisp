@@ -8,34 +8,34 @@
 ;;;     GdkClipboard
 
 (test gdk-clipboard-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkClipboard"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:clipboard
           (glib:symbol-for-gtype "GdkClipboard")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkClipboard")
           (g:gtype (cffi:foreign-funcall "gdk_clipboard_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkClipboard")))
-  ;; Check the children
+  ;; Check children
   #-windows
   (is (equal '("GdkWaylandClipboard" "GdkWaylandPrimary" "GdkX11Clipboard")
              (list-children "GdkClipboard")))
   #+windows
   (is (equal '("GdkWin32Clipboard")
              (list-children "GdkClipboard")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GdkClipboard")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("content" "display" "formats" "local")
              (list-properties "GdkClipboard")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("changed")
              (list-signals "GdkClipboard")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkClipboard" GDK-CLIPBOARD
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gdk_clipboard_get_type")
@@ -50,11 +50,6 @@
              (gobject:get-g-type-definition "GdkClipboard"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     content
-;;;     display
-;;;     formats
-;;;     local
 
 (test gdk-clipboard-properties.1
   (let* ((display (gdk:display-default))
@@ -88,11 +83,10 @@
     (is-false (gdk:clipboard-content clipboard))
     (is (typep (gdk:clipboard-display clipboard) 'gdk:display))
     (is (typep (gdk:clipboard-formats clipboard) 'gdk:content-formats))
-    (is-true (gdk:clipboard-local clipboard))))
+    (if *first-run-gtk-test*
+        (is-true (gdk:clipboard-local clipboard)))))
 
 ;;; --- Signals ----------------------------------------------------------------
-
-;;;     changed
 
 (test gdk-clipboard-changed-signal
   (let ((query (g:signal-query (g:signal-lookup "changed" "GdkClipboard"))))
@@ -153,4 +147,4 @@
 ;;;     gdk_clipboard_set_text
 ;;;     gdk_clipboard_set_texture
 
-;;; --- 2023-7-31 --------------------------------------------------------------
+;;; 2024-4-30

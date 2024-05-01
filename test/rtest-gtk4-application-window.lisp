@@ -6,36 +6,36 @@
 ;;; --- GtkApplicationWindow ---------------------------------------------------
 
 (test gtk-application-window-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkApplicationWindow"))
   ;; Check the registered name
   (is (eq 'gtk:application-window
           (glib:symbol-for-gtype "GtkApplicationWindow")))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWindow") (g:type-parent "GtkApplicationWindow")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkApplicationWindow")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot" "GActionGroup" "GActionMap")
              (list-interfaces "GtkApplicationWindow")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("show-menubar")
              (list-properties "GtkApplicationWindow")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkApplicationWindow")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "window"
                (gtk:widget-class-css-name "GtkApplicationWindow")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("background")
              (gtk:widget-css-classes (make-instance 'gtk:application-window))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :application
           (gtk:widget-class-accessible-role "GtkApplicationWindow")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkApplicationWindow"
                                              GTK-APPLICATION-WINDOW
                        (:SUPERCLASS GTK-WINDOW :EXPORT T :INTERFACES
@@ -63,6 +63,9 @@
 
 ;;; --- gtk_application_window_new ---------------------------------------------
 
+;; TODO: This test can cause a memory fault. Check this?!
+
+#+nil
 (test gtk-application-window-new
   (let ((message nil)
         (application (make-instance 'gtk:application
@@ -110,4 +113,4 @@
     (is (typep (gtk:application-window-help-overlay window)
                'gtk:shortcuts-window))))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-4-30

@@ -227,7 +227,6 @@
         (paper-size (gtk:paper-size-new "iso_a4")))
     ;; Write paper-size to key-file
     (gtk:paper-size-to-key-file paper-size key-file "Paper")
-
     (is (string= (g:key-file-to-data key-file)
 "[Paper]
 PPDName=A4

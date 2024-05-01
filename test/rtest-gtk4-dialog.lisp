@@ -8,25 +8,25 @@
 ;;;     GtkDialogFlags
 
 (test gtk-dialog-flags
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GtkDialogFlags"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:dialog-flags
           (glib:symbol-for-gtype "GtkDialogFlags")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkDialogFlags")
           (g:gtype (cffi:foreign-funcall "gtk_dialog_flags_get_type" :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_DIALOG_MODAL" "GTK_DIALOG_DESTROY_WITH_PARENT"
                "GTK_DIALOG_USE_HEADER_BAR")
              (list-flags-item-name "GtkDialogFlags")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(1 2 4)
              (list-flags-item-value "GtkDialogFlags")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("modal" "destroy-with-parent" "use-header-bar")
              (list-flags-item-nick "GtkDialogFlags")))
-  ;; Check the flags definition
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkDialogFlags"
                               GTK-DIALOG-FLAGS
                               (:EXPORT T
@@ -35,48 +35,6 @@
                               (:DESTROY-WITH-PARENT 2)
                               (:USE-HEADER-BAR 4))
              (gobject:get-g-type-definition "GtkDialogFlags"))))
-
-;;;     GtkResponseType
-
-(test gtk-response-type
-  ;; Check the type
-  (is (g:type-is-enum "GtkResponseType"))
-  ;; Check the type initializer
-  (is (eq (g:gtype "GtkResponseType")
-          (g:gtype (cffi:foreign-funcall "gtk_response_type_get_type" :size))))
-  ;; Check the registered name
-  (is (eq 'gtk:response-type
-          (glib:symbol-for-gtype "GtkResponseType")))
-  ;; Check the names
-  (is (equal '("GTK_RESPONSE_NONE" "GTK_RESPONSE_REJECT" "GTK_RESPONSE_ACCEPT"
-               "GTK_RESPONSE_DELETE_EVENT" "GTK_RESPONSE_OK"
-               "GTK_RESPONSE_CANCEL" "GTK_RESPONSE_CLOSE" "GTK_RESPONSE_YES"
-               "GTK_RESPONSE_NO" "GTK_RESPONSE_APPLY" "GTK_RESPONSE_HELP")
-             (list-enum-item-name "GtkResponseType")))
-  ;; Check the values
-  (is (equal '(-1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -11)
-             (list-enum-item-value "GtkResponseType")))
-  ;; Check the nick names
-  (is (equal '("none" "reject" "accept" "delete-event" "ok" "cancel" "close"
-               "yes" "no" "apply" "help")
-             (list-enum-item-nick "GtkResponseType")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkResponseType"
-                             GTK-RESPONSE-TYPE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_response_type_get_type")
-                             (:NONE -1)
-                             (:REJECT -2)
-                             (:ACCEPT -3)
-                             (:DELETE-EVENT -4)
-                             (:OK -5)
-                             (:CANCEL -6)
-                             (:CLOSE -7)
-                             (:YES -8)
-                             (:NO -9)
-                             (:APPLY -10)
-                             (:HELP -11))
-             (gobject:get-g-type-definition "GtkResponseType"))))
 
 ;;;     GtkDialog
 

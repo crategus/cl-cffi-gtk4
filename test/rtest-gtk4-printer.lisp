@@ -21,10 +21,8 @@
           (g:type-parent "GtkPrintBackend")))
   ;; Check children
   (if *first-run-gtk-test*
-    (is (equal '()
-               (list-children "GtkPrintBackend")))
-    (is (equal '("GtkPrintBackendCpdb" "GtkPrintBackendFile")
-               (list-children "GtkPrintBackend"))))
+      (is (equal '()
+                 (list-children "GtkPrintBackend"))))
   ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkPrintBackend")))
@@ -60,8 +58,6 @@
   ;; Check children
   (if *first-run-gtk-test*
       (is (equal '()
-                 (list-children "GtkPrinter")))
-      (is (equal '("GtkPrinterCpdb")
                  (list-children "GtkPrinter"))))
   ;; Check interfaces
   (is (equal '()

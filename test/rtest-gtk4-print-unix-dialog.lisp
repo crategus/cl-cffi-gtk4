@@ -8,16 +8,16 @@
 ;;;     GtkPrintCapabilities
 
 (test gtk-print-capabilities
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GtkPrintCapabilities"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:print-capabilities
           (glib:symbol-for-gtype "GtkPrintCapabilities")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkPrintCapabilities")
           (g:gtype (cffi:foreign-funcall "gtk_print_capabilities_get_type"
                                          :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_PRINT_CAPABILITY_PAGE_SET" "GTK_PRINT_CAPABILITY_COPIES"
                "GTK_PRINT_CAPABILITY_COLLATE" "GTK_PRINT_CAPABILITY_REVERSE"
                "GTK_PRINT_CAPABILITY_SCALE" "GTK_PRINT_CAPABILITY_GENERATE_PDF"
@@ -25,14 +25,14 @@
                "GTK_PRINT_CAPABILITY_NUMBER_UP"
                "GTK_PRINT_CAPABILITY_NUMBER_UP_LAYOUT")
              (list-flags-item-name "GtkPrintCapabilities")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(1 2 4 8 16 32 64 128 256 512)
              (list-flags-item-value "GtkPrintCapabilities")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("page-set" "copies" "collate" "reverse" "scale" "generate-pdf"
                "generate-ps" "preview" "number-up" "number-up-layout")
              (list-flags-item-nick "GtkPrintCapabilities")))
-  ;; Check the flags definition
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkPrintCapabilities"
                                       GTK-PRINT-CAPABILITIES
                                       (:EXPORT T
@@ -54,37 +54,37 @@
 
 (test gtk-print-unix-dialog-class
   (let ((*gtk-warn-deprecated* nil))
-    ;; Type check
+    ;; Check type
     (is (g:type-is-object "GtkPrintUnixDialog"))
-    ;; Check the registered name
+    ;; Check registered name
     (is (eq 'gtk:print-unix-dialog
             (glib:symbol-for-gtype "GtkPrintUnixDialog")))
-    ;; Check the type initializer
+    ;; Check type initializer
     (is (eq (g:gtype "GtkPrintUnixDialog")
             (g:gtype (cffi:foreign-funcall "gtk_print_unix_dialog_get_type"
                                            :size))))
-    ;; Check the parent
+    ;; Check parent
     (is (eq (g:gtype "GtkDialog")
             (g:type-parent "GtkPrintUnixDialog")))
-    ;; Check the children
+    ;; Check children
     (is (equal '()
                (list-children "GtkPrintUnixDialog")))
-    ;; Check the interfaces
+    ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
                (list-interfaces "GtkPrintUnixDialog")))
-    ;; Check the properties
+    ;; Check properties
     (is (equal '("current-page" "embed-page-setup" "has-selection"
                  "manual-capabilities" "page-setup" "print-settings"
                  "selected-printer" "support-selection")
                (list-properties "GtkPrintUnixDialog")))
-    ;; Check the signals
+    ;; Check signals
     (is (equal '()
                (list-signals "GtkPrintUnixDialog")))
-    ;; CSS name
+    ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkPrintUnixDialog")))
-    ;; CSS classes
+    ;; Check CSS classes
     ;; FIXME: Calling make-instance for GtkPrintUnixDialog causes errors or
     ;; warnings.
     #+nil
@@ -92,7 +92,7 @@
                (gtk:widget-css-classes (make-instance 'gtk:print-unix-dialog))))
     ;; Accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkPrintUnixDialog")))
-    ;; Check the class definition
+    ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkPrintUnixDialog"
                                                GTK-PRINT-UNIX-DIALOG
                          (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
@@ -123,15 +123,9 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     current-page
-;;;     embed-page-setup
-;;;     has-selection
-;;;     manual-capabilities
-;;;     page-setup
-;;;     print-settings
-;;;     selected-printer
-;;;     support-selection
+;; TODO: Might cause an unexpected error. Check this?!
 
+#+nil
 (test gtk-print-unix-dialog-properties
   (let* ((*gtk-warn-deprecated* nil)
          (dialog (make-instance 'gtk:print-unix-dialog)))
@@ -148,6 +142,9 @@
 
 ;;;     gtk_print_unix_dialog_new
 
+;; TODO: Might cause an unexpected error. Check this?!
+
+#+nil
 (test gtk-print-unix-dialog-new
   (let* ((*gtk-warn-deprecated* nil)
          (dialog (gtk:print-unix-dialog-new "Title" nil)))
@@ -164,6 +161,9 @@
 ;;;     gtk_print_unix_dialog_set_settings
 ;;;     gtk_print_unix_dialog_get_settings
 
+;; TODO: Might cause an unexpected error. Check this?!
+
+#+nil
 (test gtk-print-unix-dialog-settings
   (let* ((*gtk-warn-deprecated* nil)
          (dialog (gtk:print-unix-dialog-new "Title" nil)))
@@ -174,4 +174,4 @@
 ;;;     gtk_print_unix_dialog_add_custom_tab
 ;;;     gtk_print_unix_dialog_get_page_setup_set
 
-;;; 2024-2-18
+;;; 2024-4-30

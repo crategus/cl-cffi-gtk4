@@ -5,62 +5,29 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
-;;;     GtkMessageType
-
-(test gtk-message-type
-  ;; Check the type
-  (is (g:type-is-enum "GtkMessageType"))
-  ;; Check the type initializer
-  (is (eq (g:gtype "GtkMessageType")
-          (g:gtype (cffi:foreign-funcall "gtk_message_type_get_type" :size))))
-  ;; Check the registered name
-  (is (eq 'gtk:message-type
-          (glib:symbol-for-gtype "GtkMessageType")))
-  ;; Check the names
-  (is (equal '("GTK_MESSAGE_INFO" "GTK_MESSAGE_WARNING" "GTK_MESSAGE_QUESTION"
-               "GTK_MESSAGE_ERROR" "GTK_MESSAGE_OTHER")
-             (list-enum-item-name "GtkMessageType")))
-  ;; Check the values
-  (is (equal '(0 1 2 3 4)
-             (list-enum-item-value "GtkMessageType")))
-  ;; Check the nick names
-  (is (equal '("info" "warning" "question" "error" "other")
-             (list-enum-item-nick "GtkMessageType")))
-  ;; Check the enum definition
-  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkMessageType"
-                             GTK-MESSAGE-TYPE
-                             (:EXPORT T
-                              :TYPE-INITIALIZER "gtk_message_type_get_type")
-                             (:INFO 0)
-                             (:WARNING 1)
-                             (:QUESTION 2)
-                             (:ERROR 3)
-                             (:OTHER 4))
-             (gobject:get-g-type-definition "GtkMessageType"))))
-
 ;;;     GtkButtonsType
 
 (test gtk-buttons-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkButtonsType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkButtonsType")
           (g:gtype (cffi:foreign-funcall "gtk_buttons_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:buttons-type
           (glib:symbol-for-gtype "GtkButtonsType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_BUTTONS_NONE" "GTK_BUTTONS_OK" "GTK_BUTTONS_CLOSE"
                "GTK_BUTTONS_CANCEL" "GTK_BUTTONS_YES_NO"
                "GTK_BUTTONS_OK_CANCEL")
              (list-enum-item-name "GtkButtonsType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3 4 5)
              (list-enum-item-value "GtkButtonsType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("none" "ok" "close" "cancel" "yes-no" "ok-cancel")
              (list-enum-item-nick "GtkButtonsType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkButtonsType"
                              GTK-BUTTONS-TYPE
                              (:EXPORT T
@@ -79,43 +46,43 @@
   (let ((*gtk-warn-deprecated* nil))
     ;; Type check
     (is (g:type-is-object "GtkMessageDialog"))
-    ;; Check the registered name
+    ;; Check registered name
     (is (eq 'gtk:message-dialog
             (glib:symbol-for-gtype "GtkMessageDialog")))
     ;; Check the type initializer
     (is (eq (g:gtype "GtkMessageDialog")
             (g:gtype (cffi:foreign-funcall "gtk_message_dialog_get_type"
                                            :size))))
-    ;; Check the parent
+    ;; Check parent
     (is (eq (g:gtype "GtkDialog")
             (g:type-parent "GtkMessageDialog")))
-    ;; Check the children
+    ;; Check children
     (is (equal '()
                (list-children "GtkMessageDialog")))
-    ;; Check the interfaces
+    ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
                (list-interfaces "GtkMessageDialog")))
-    ;; Check the class properties
+    ;; Check class properties
     (is (equal '("buttons" "message-area" "message-type" "secondary-text"
                  "secondary-use-markup" "text" "use-markup")
                (list-properties "GtkMessageDialog")))
-    ;; Check the list of signals
+    ;; Check list of signals
     (is (equal '()
                (list-signals "GtkMessageDialog")))
-    ;; CSS name
+    ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkMessageDialog")))
-    ;; CSS classes
+    ;; Check CSS classes
     #-windows
     (is (equal '("background" "csd" "dialog" "message")
                (gtk:widget-css-classes (make-instance 'gtk:message-dialog))))
     #+windows
     (is (equal '("background" "dialog" "message")
                (gtk:widget-css-classes (make-instance 'gtk:message-dialog))))
-    ;; Accessible role
+    ;; Check accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkMessageDialog")))
-    ;; Check the class definition
+    ;; Check class definition
     (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkMessageDialog"
                                                GTK-MESSAGE-DIALOG
                          (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
@@ -140,14 +107,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     buttons
-;;;     message-area
-;;;     message-type
-;;;     secondary-text
-;;;     secondary-use-markup
-;;;     text
-;;;     use-markup
-
 (test gtk-message-dialog-properties
   (let ((*gtk-warn-deprecated* nil))
     (let ((dialog (make-instance 'gtk:message-dialog)))
@@ -166,4 +125,4 @@
 ;;;     gtk_message_dialog_format_secondary_text
 ;;;     gtk_message_dialog_format_secondary_markup
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; 2024-5-1

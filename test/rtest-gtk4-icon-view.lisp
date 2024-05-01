@@ -8,13 +8,13 @@
 ;;;     GtkIconViewDropPosition
 
 (test gtk-icon-view-drop-position
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkIconViewDropPosition"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkIconViewDropPosition")
           (g:gtype (cffi:foreign-funcall "gtk_icon_view_drop_position_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:icon-view-drop-position
           (glib:symbol-for-gtype "GtkIconViewDropPosition")))
   ;; Check the names
@@ -22,14 +22,14 @@
                "GTK_ICON_VIEW_DROP_LEFT" "GTK_ICON_VIEW_DROP_RIGHT"
                "GTK_ICON_VIEW_DROP_ABOVE" "GTK_ICON_VIEW_DROP_BELOW")
              (list-enum-item-name "GtkIconViewDropPosition")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3 4 5)
              (list-enum-item-value "GtkIconViewDropPosition")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("no-drop" "drop-into" "drop-left" "drop-right" "drop-above"
                "drop-below")
              (list-enum-item-nick "GtkIconViewDropPosition")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkIconViewDropPosition"
                                      GTK-ICON-VIEW-DROP-POSITION
                                      (:EXPORT T
@@ -46,43 +46,43 @@
 ;;;     GtkIconView
 
 (test gtk-icon-view-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkIconView"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:icon-view
           (glib:symbol-for-gtype "GtkIconView")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkIconView")
           (g:gtype (cffi:foreign-funcall "gtk_icon_view_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkIconView")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkIconView")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkCellLayout" "GtkScrollable")
              (list-interfaces "GtkIconView")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("activate-on-single-click" "cell-area" "column-spacing" "columns"
                "hadjustment" "hscroll-policy" "item-orientation" "item-padding"
                "item-width" "margin" "markup-column" "model" "pixbuf-column"
                "reorderable" "row-spacing" "selection-mode" "spacing"
                "text-column" "tooltip-column" "vadjustment" "vscroll-policy")
              (list-properties "GtkIconView")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate-cursor-item" "item-activated" "move-cursor"
                "select-all" "select-cursor-item" "selection-changed"
                "toggle-cursor-item" "unselect-all")
              (list-signals "GtkIconView")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "iconview"
                (gtk:widget-class-css-name "GtkIconView")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("view")
              (gtk:widget-css-classes (make-instance 'gtk:icon-view))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkIconView")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkIconView" GTK-ICON-VIEW
@@ -129,24 +129,6 @@
              (gobject:get-g-type-definition "GtkIconView"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     activate-on-single-click
-;;;     cell-area
-;;;     column-spacing
-;;;     columns
-;;;     item-orientation
-;;;     item-padding
-;;;     item-width
-;;;     margin
-;;;     markup-column
-;;;     model
-;;;     pixbuf-column
-;;;     reorderable
-;;;     row-spacing
-;;;     selection-mode
-;;;     spacing
-;;;     text-column
-;;;     tooltip-column
 
 (test gtk-icon-view-properties
   (let ((view (make-instance 'gtk:icon-view)))
@@ -215,4 +197,4 @@
 ;;;     gtk_icon_view_get_dest_item_at_pos
 ;;;     gtk_icon_view_create_drag_icon
 
-;;; 2024-2-21
+;;; 2024-5-1

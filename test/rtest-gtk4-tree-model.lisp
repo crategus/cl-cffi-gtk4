@@ -32,25 +32,25 @@
 ;;;     GtkTreeModelFlags
 
 (test gtk-tree-model-flags-flags
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GtkTreeModelFlags"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:tree-model-flags
           (glib:symbol-for-gtype "GtkTreeModelFlags")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkTreeModelFlags")
           (g:gtype (cffi:foreign-funcall "gtk_tree_model_flags_get_type"
                                          :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_TREE_MODEL_ITERS_PERSIST" "GTK_TREE_MODEL_LIST_ONLY")
              (list-flags-item-name "GtkTreeModelFlags")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(1 2)
              (list-flags-item-value "GtkTreeModelFlags")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("iters-persist" "list-only")
              (list-flags-item-nick "GtkTreeModelFlags")))
-  ;; Check the flags definition
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkTreeModelFlags" GTK-TREE-MODEL-FLAGS
                                       (:EXPORT T
                                        :TYPE-INITIALIZER
@@ -60,38 +60,63 @@
              (gobject:get-g-type-definition "GtkTreeModelFlags"))))
 
 ;;;     GtkTreeIter
+
+(test gtk-tree-iter-boxed
+  ;; Check type
+  (is (g:type-is-boxed "GtkTreeIter"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkTreeIter")
+          (g:gtype (cffi:foreign-funcall "gtk_tree_iter_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gtk:tree-iter
+          (glib:symbol-for-gtype "GtkTreeIter"))))
+
 ;;;     GtkTreePath
+
+(test gtk-tree-path-boxed
+  ;; Check type
+  (is (g:type-is-boxed "GtkTreePath"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkTreePath")
+          (g:gtype (cffi:foreign-funcall "gtk_tree_path_get_type" :size))))
+  ;; Check registered name
+  (is (eq 'gtk:tree-path
+          (glib:symbol-for-gtype "GtkTreePath"))))
+
 ;;;     GtkTreeRowReference
 ;;;     GtkTreeModelIface
 
 ;;;     GtkTreeModel
 
 (test gtk-tree-model-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkTreeModel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:tree-model
           (glib:symbol-for-gtype "GtkTreeModel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkTreeModel")
           (g:gtype (cffi:foreign-funcall "gtk_tree_model_get_type" :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GObject")
              (list-interface-prerequisites "GtkTreeModel")))
-  ;; Check the interface properties
+  ;; Check interface properties
   (is (equal '()
              (list-interface-properties "GtkTreeModel")))
-  ;; Check the interface signals
+  ;; Check interface signals
   (is (equal '("row-changed" "row-deleted" "row-has-child-toggled"
                "row-inserted" "rows-reordered")
              (list-signals "GtkTreeModel")))
-  ;; Get the interface definition
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkTreeModel" GTK-TREE-MODEL
                             (:EXPORT T :TYPE-INITIALIZER
                              "gtk_tree_model_get_type"))
              (gobject:get-g-type-definition "GtkTreeModel"))))
 
 ;;; --- Functions --------------------------------------------------------------
+
+;;;     gtk_tree_iter_copy
+;;;     gtk_tree_iter_free
 
 ;;;     GtkTreeModelForeachFunc
 
@@ -290,9 +315,6 @@
 ;;;     gtk_tree_row_reference_deleted
 ;;;     gtk_tree_row_reference_reordered
 
-;;;     gtk_tree_iter_copy
-;;;     gtk_tree_iter_free
-
 ;;; ----------------------------------------------------------------------------
 
 ;;;     gtk_tree_model_get_flags
@@ -389,4 +411,4 @@
 ;;;     gtk_tree_model_rows_reordered
 ;;;     gtk_tree_model_rows_reordered_with_length
 
-;;; 2024-3-8
+;;; 2024-5-1

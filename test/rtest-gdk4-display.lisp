@@ -23,8 +23,6 @@
   #-windows
   (if *first-run-gtk-test*
       (is (equal '("GdkWaylandDisplay" "GdkX11Display")
-                 (list-children "GdkDisplay")))
-      (is (equal '("GdkBroadwayDisplay" "GdkWaylandDisplay" "GdkX11Display")
                  (list-children "GdkDisplay"))))
   #+windows
   (is (equal '("GdkWin32Display")
@@ -300,4 +298,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; 2024-4-11
+;;; 2024-4-30

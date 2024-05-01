@@ -8,27 +8,27 @@
 ;;;     GtkAssistantPageType
 
 (test gtk-assistant-page-type-enumeration
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkAssistantPageType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAssistantPageType")
           (g:gtype (cffi:foreign-funcall "gtk_assistant_page_type_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:assistant-page-type
           (glib:symbol-for-gtype "GtkAssistantPageType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_ASSISTANT_PAGE_CONTENT" "GTK_ASSISTANT_PAGE_INTRO"
                "GTK_ASSISTANT_PAGE_CONFIRM" "GTK_ASSISTANT_PAGE_SUMMARY"
                "GTK_ASSISTANT_PAGE_PROGRESS" "GTK_ASSISTANT_PAGE_CUSTOM")
              (list-enum-item-name "GtkAssistantPageType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3 4 5)
              (list-enum-item-value "GtkAssistantPageType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("content" "intro" "confirm" "summary" "progress" "custom")
              (list-enum-item-nick "GtkAssistantPageType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAssistantPageType"
                              GTK-ASSISTANT-PAGE-TYPE
                              (:EXPORT T
@@ -45,30 +45,30 @@
 ;;;     GtkAssistantPage
 
 (test gtk-assistant-page-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkAssistantPage"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:assistant-page
           (glib:symbol-for-gtype "GtkAssistantPage")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkAssistantPage")
           (g:gtype (cffi:foreign-funcall "gtk_assistant_page_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkAssistantPage")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkAssistantPage")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkAssistantPage")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("child" "complete" "page-type" "title")
              (list-properties "GtkAssistantPage")))
-  ;; Check the list of signals
+  ;; Check list of signals
   (is (equal '()
              (list-signals "GtkAssistantPage")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistantPage"
                                              GTK-ASSISTANT-PAGE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -85,11 +85,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     child
-;;;     complete
-;;;     page-type
-;;;     title
-
 (test gtk-assistant-page-properties
   (let ((*gtk-warn-deprecated* nil))
     (let ((page (make-instance 'gtk:assistant-page)))
@@ -99,41 +94,41 @@
 
 (test gtk-assistant-class
   (let ((*gtk-warn-deprecated* nil))
-    ;; Type check
+    ;; Check type
     (is (g:type-is-object "GtkAssistant"))
-    ;; Check the registered name
+    ;; Check registered name
     (is (eq 'gtk:assistant
             (glib:symbol-for-gtype "GtkAssistant")))
-    ;; Check the type initializer
+    ;; Check type initializer
     (is (eq (g:gtype "GtkAssistant")
             (g:gtype (cffi:foreign-funcall "gtk_assistant_get_type" :size))))
-    ;; Check the parent
+    ;; Check parent
     (is (eq (g:gtype "GtkWindow")
             (g:type-parent "GtkAssistant")))
-    ;; Check the children
+    ;; Check children
     (is (equal '()
                (list-children "GtkAssistant")))
-    ;; Check the interfaces
+    ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot")
                (list-interfaces "GtkAssistant")))
-    ;; Check the class properties
+    ;; Check class properties
     (is (equal '("pages" "use-header-bar")
                (list-properties "GtkAssistant")))
-    ;; Check the list of signals
+    ;; Check list of signals
     (is (equal '("apply" "cancel" "close" "escape" "prepare")
                (list-signals "GtkAssistant")))
-    ;; CSS name
+    ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkAssistant")))
-    ;; CSS classes
+    ;; Check CSS classes
     #-windows
     (is (equal '("background" "assistant" "csd")
                (gtk:widget-css-classes (make-instance 'gtk:assistant))))
     #+windows
     (is (equal '("background" "assistant")
                (gtk:widget-css-classes (make-instance 'gtk:assistant))))
-    ;; Accessible role
+    ;; Check accessible role
     (is (eq :application (gtk:widget-class-accessible-role "GtkAssistant")))
     ;; Check the class definition
     (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkAssistant" GTK-ASSISTANT
@@ -147,9 +142,6 @@
                (gobject:get-g-type-definition "GtkAssistant")))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     pages
-;;;     use-header-bar
 
 (test gtk-assistant-properties
   (let ((*gtk-warn-deprecated* nil))
@@ -194,4 +186,4 @@
 ;;;     gtk_assistant_next_page
 ;;;     gtk_assistant_previous_page
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-5-1

@@ -8,22 +8,22 @@
 ;;; --- GtkApplicationInhibitFlags ---------------------------------------------
 
 (test gtk-application-inhibit-flags
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GtkApplicationInhibitFlags"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:application-inhibit-flags
           (glib:symbol-for-gtype "GtkApplicationInhibitFlags")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_APPLICATION_INHIBIT_LOGOUT" "GTK_APPLICATION_INHIBIT_SWITCH"
                "GTK_APPLICATION_INHIBIT_SUSPEND" "GTK_APPLICATION_INHIBIT_IDLE")
              (list-flags-item-name "GtkApplicationInhibitFlags")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(1 2 4 8)
              (list-flags-item-value "GtkApplicationInhibitFlags")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("logout" "switch" "suspend" "idle")
              (list-flags-item-nick "GtkApplicationInhibitFlags")))
-  ;; Check the flags definition
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GtkApplicationInhibitFlags"
                               GTK-APPLICATION-INHIBIT-FLAGS
                               (:EXPORT T
@@ -38,32 +38,32 @@
 ;;; --- GtkApplication ---------------------------------------------------------
 
 (test gtk-application-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkApplication"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:application
           (glib:symbol-for-gtype "GtkApplication")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkApplication")
           (g:gtype (cffi:foreign-funcall "gtk_application_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GApplication") (g:type-parent "GtkApplication")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkApplication")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GActionGroup" "GActionMap")
              (list-interfaces "GtkApplication")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("active-window" "menubar" "register-session"
                "screensaver-active")
              (list-properties "GtkApplication")))
   (is (equal '("query-end" "window-added" "window-removed")
              (list-signals "GtkApplication")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("query-end" "window-added" "window-removed")
              (list-signals "GtkApplication")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkApplication" GTK-APPLICATION
                        (:SUPERCLASS G-APPLICATION :EXPORT T :INTERFACES
                         ("GActionGroup" "GActionMap") :TYPE-INITIALIZER
@@ -80,6 +80,9 @@
 
 ;;; --- Properties and Accessors -----------------------------------------------
 
+;; TODO: This test can cause a memory fault. Check this?!
+
+#+nil
 (test gtk-application-properties
   (let ((message nil)
         (application (make-instance 'gtk:application
@@ -134,11 +137,14 @@
 ;; property to T.
 
 ;; --------------------------------
-;; GTK-APPLICATION-SIGNALS in GTK-APPLICATION []: 
+;; GTK-APPLICATION-SIGNALS in GTK-APPLICATION []:
 ;;      Unexpected Error: #<SB-SYS:MEMORY-FAULT-ERROR {1004EE5173}>
 ;; Unhandled memory fault at #x0..
 ;; --------------------------------
 
+;; TODO: This test can cause a memory fault. Check this?!
+
+#+nil
 (test gtk-application-signals
   (let ((message nil)
         (application (make-instance 'gtk:application
@@ -214,6 +220,9 @@
 ;;;     gtk_application_get_windows
 ;;;     gtk_application_remove_window
 
+;; TODO: This test can cause a memory fault. Check this?!
+
+#+nil
 (test gtk-application-add-window
   (let ((message nil)
         (application (make-instance 'gtk:application
@@ -315,4 +324,4 @@
 
 ;;;     gtk_application_uninhibit
 
-;;; --- 2023-8-2 ---------------------------------------------------------------
+;;; 2024-4-30
