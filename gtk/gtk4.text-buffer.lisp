@@ -500,7 +500,7 @@ lambda (buffer)    :run-last
       (documentation 'text-buffer-enable-undo 'function)
  "@version{2023-10-2}
   @syntax{(gtk:text-buffer-cursor-position object) => setting}
-  @syntax{(setf gtk:text-buffer-enable-undo object) setting)}
+  @syntax{(setf (gtk:text-buffer-enable-undo object) setting)}
   @argument[object]{a @class{gtk:text-buffer} object}
   @argument[setting]{@em{true} to enable undo}
   @begin{short}
@@ -603,7 +603,7 @@ lambda (buffer)    :run-last
   @see-function{gtk:text-buffer-get-slice}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_new ()
+;;; gtk_text_buffer_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline text-buffer-new))
@@ -623,7 +623,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_line_count ()
+;;; gtk_text_buffer_get_line_count
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_line_count" text-buffer-line-count) :int
@@ -642,7 +642,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-line-count)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_char_count ()
+;;; gtk_text_buffer_get_char_count
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_char_count" text-buffer-char-count) :int
@@ -663,10 +663,10 @@ lambda (buffer)    :run-last
 (export 'text-buffer-char-count)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_insert ()
-;;; gtk_text_buffer_insert_at_cursor ()                     not exported
-;;; gtk_text_buffer_insert_interactive ()                   not exported
-;;; gtk_text_buffer_insert_interactive_at_cursor ()         not exported
+;;; gtk_text_buffer_insert
+;;; gtk_text_buffer_insert_at_cursor                        not exported
+;;; gtk_text_buffer_insert_interactive                      not exported
+;;; gtk_text_buffer_insert_interactive_at_cursor            not exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_insert" %text-buffer-insert) :void
@@ -762,8 +762,8 @@ lambda (buffer)    :run-last
 (export 'text-buffer-insert)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_insert_range ()
-;;; gtk_text_buffer_insert_range_interactive ()             not exported
+;;; gtk_text_buffer_insert_range
+;;; gtk_text_buffer_insert_range_interactive                not exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_insert_range" %text-buffer-insert-range) :void
@@ -878,7 +878,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-insert-with-tags)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_insert_with_tags_by_name               not implemented
+;;; gtk_text_buffer_insert_with_tags_by_name                not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;; Implementation is included in the TEXT-BUFFER-INSERT-WITH-TAGS function.
@@ -914,7 +914,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-insert-markup)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_insert_paintable ()
+;;; gtk_text_buffer_insert_paintable
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_insert_paintable" text-buffer-insert-paintable)
@@ -967,7 +967,7 @@ lambda (buffer)    :run-last
   @argument[interactive]{a boolean whether the deletion is caused by user
     interaction}
   @argument[editable]{a boolean whether the text buffer is editable by default}
-  @return{A boolean whether some text was actually deleted.}
+  @return{The boolean whether some text was actually deleted.}
   @begin{short}
     Deletes text between the @arg{start} and @arg{end} iterators.
   @end{short}
@@ -998,7 +998,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-delete)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_delete_interactive                     not exported
+;;; gtk_text_buffer_delete_interactive                      not exported
 ;;; ----------------------------------------------------------------------------
 
 ;; Implementation is included in the TEXT-BUFFER-DELETE function.
@@ -1011,7 +1011,7 @@ lambda (buffer)    :run-last
   @argument[start]{a @class{gtk:text-iter} start of range to delete}
   @argument[end]{a @class{gtk:text-iter} end of range}
   @argument[editable]{a boolean whether @arg{buffer} is editable by default}
-  @return{A boolean whether some text was actually deleted.}
+  @return{The boolean whether some text was actually deleted.}
   @begin{short}
     Deletes all editable text in the given range.
   @end{short}
@@ -1085,7 +1085,7 @@ lambda (buffer)    :run-last
   @argument[start]{a @class{gtk:text-iter} start iterator of a range}
   @argument[end]{a @class{gtk:text-iter} end iterator of a range}
   @argument[include]{a boolean whether to include invisible text}
-  @return{An allocated UTF-8 string.}
+  @return{The allocated UTF-8 string.}
   @begin{short}
     Returns the text in the range [@arg{start}, @arg{end}).
   @end{short}
@@ -1120,7 +1120,7 @@ lambda (buffer)    :run-last
   @argument[start]{a @class{gtk:text-iter} start of a range}
   @argument[end]{a @class{gtk:text-iter} end of a range}
   @argument[include]{a boolean whether to include invisible text}
-  @return{An allocated UTF-8 string.}
+  @return{The allocated UTF-8 string.}
   @begin{short}
     Returns the text in the range [@arg{start}, @arg{end}).
   @end{short}
@@ -1157,7 +1157,7 @@ lambda (buffer)    :run-last
   @argument[position]{a @class{gtk:text-iter} iterator with the position to
     insert the anchor}
   @argument[anchor]{an optional @class{gtk:text-child-anchor} object}
-  @return{A @class{gtk:text-child-anchor} child widget anchor.}
+  @return{The @class{gtk:text-child-anchor} child widget anchor.}
   @begin{short}
     Inserts a child widget anchor into the text buffer at @arg{position}.
   @end{short}
@@ -1292,7 +1292,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-move-mark)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_move_mark_by_name                      not implemented
+;;; gtk_text_buffer_move_mark_by_name                       not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;; Included in the implementation of the TEXT-BUFFER-MOVE-MARK function.
@@ -1382,7 +1382,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-delete-mark)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_delete_mark_by_name                    not exported
+;;; gtk_text_buffer_delete_mark_by_name                     not exported
 ;;; ----------------------------------------------------------------------------
 
 ;; Included in the implementation of the GTK_TEXT-BUFFER-DELETE-MARK function.
@@ -1404,7 +1404,7 @@ lambda (buffer)    :run-last
   (name (:string :free-to-foreign t)))
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_mark -> text-buffer-mark
+;;; gtk_text_buffer_get_mark
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_mark" text-buffer-mark) (g:object text-mark)
@@ -1412,7 +1412,7 @@ lambda (buffer)    :run-last
  "@version{2023-10-5}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[name]{a string with a mark name}
-  @return{A @class{gtk:text-mark} object, or @code{nil}.}
+  @return{The @class{gtk:text-mark} object, or @code{nil}.}
   @begin{short}
     Returns the mark named @arg{name} in the text buffer, or @code{nil} if
     no such mark exists in the text buffer.
@@ -1436,7 +1436,7 @@ lambda (buffer)    :run-last
  #+liber-documentation
  "@version{2023-4-3}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @return{A @class{gtk:text-mark} insertion point mark.}
+  @return{The @class{gtk:text-mark} insertion point mark.}
   @begin{short}
     Returns the mark that represents the cursor (insertion point).
   @end{short}
@@ -1450,7 +1450,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-get-insert)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_selection_bound -> text-buffer-selection-bound
+;;; gtk_text_buffer_get_selection_bound
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_selection_bound"
@@ -1614,7 +1614,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-remove-tag)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_apply_tag_by_name                      no exported
+;;; gtk_text_buffer_apply_tag_by_name                       no exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_apply_tag_by_name"
@@ -1625,7 +1625,7 @@ lambda (buffer)    :run-last
   (end (g:boxed text-iter)))
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_remove_tag_by_name                     not exported
+;;; gtk_text_buffer_remove_tag_by_name                      not exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_remove_tag_by_name"
@@ -1708,7 +1708,6 @@ lambda (buffer)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_get_iter_at_line_offset
-;;; -> text-buffer-iter-at-line-offset
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_iter_at_line_offset"
@@ -1724,7 +1723,7 @@ lambda (buffer)    :run-last
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[line]{an integer with the line number counting from 0}
   @argument[offset]{an integer with the char offset from the start of the line}
-  @return{A @class{gtk:text-iter} iterator.}
+  @return{The @class{gtk:text-iter} iterator.}
   @begin{short}
     Obtains an iterator pointing to @arg{offset} within the given line.
   @end{short}
@@ -1742,7 +1741,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-iter-at-line-offset)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_iter_at_offset -> text-buffer-iter-at-offset
+;;; gtk_text_buffer_get_iter_at_offset
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_iter_at_offset"
@@ -1757,7 +1756,7 @@ lambda (buffer)    :run-last
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[offset]{an integer with the char offset from the start of the text
     buffer, counting from 0, or -1}
-  @return{A @class{gtk:text-iter} iterator.}
+  @return{The @class{gtk:text-iter} iterator.}
   @begin{short}
     Initializes the returned iterator to a position @arg{offset} chars from the
     start of the entire text buffer.
@@ -1774,7 +1773,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-iter-at-offset)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_iter_at_line -> text-buffer-iter-at-line
+;;; gtk_text_buffer_get_iter_at_line
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_iter_at_line"
@@ -1788,7 +1787,7 @@ lambda (buffer)    :run-last
  "@version{#2021-11-16}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[line]{an integer with the line number counting from 0}
-  @return{A @class{gtk:text-iter} iterator.}
+  @return{The @class{gtk:text-iter} iterator.}
   @begin{short}
     Initializes the returned iterator to the start of the given line.
   @end{short}
@@ -1801,7 +1800,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-iter-at-line)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_iter_at_line_index -> text-buffer-iter-at-line-index
+;;; gtk_text_buffer_get_iter_at_line_index
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_iter_at_line_index"
@@ -1817,7 +1816,7 @@ lambda (buffer)    :run-last
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[line]{an integer with the line number counting from 0}
   @argument[index]{an integer with the byte index from the start of the line}
-  @return{A @class{gtk:text-iter} iterator.}
+  @return{The @class{gtk:text-iter} iterator.}
   @begin{short}
     Obtains an iterator pointing to @arg{index} within the given line.
   @end{short}
@@ -1835,7 +1834,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-iter-at-line-index)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_iter_at_mark -> text-buffer-iter-at-mark
+;;; gtk_text_buffer_get_iter_at_mark
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_iter_at_mark" %text-buffer-iter-at-mark)
@@ -1850,7 +1849,7 @@ lambda (buffer)    :run-last
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[mark]{a @class{gtk:text-mark} object, or a string with the mark
     name in the text buffer}
-  @return{A @class{gtk:text-iter} iterator.}
+  @return{The @class{gtk:text-iter} iterator.}
   @begin{short}
     Returns the iterator with the current position of @arg{mark}.
   @end{short}
@@ -1865,7 +1864,6 @@ lambda (buffer)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_get_iter_at_child_anchor
-;;; -> text-buffer-iter-at-child-anchor
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_iter_at_child_anchor"
@@ -1880,7 +1878,7 @@ lambda (buffer)    :run-last
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[anchor]{a @class{gtk:text-child-anchor} anchor that appears in text
     buffer}
-  @return{A @class{gtk:text-iter} iterator.}
+  @return{The @class{gtk:text-iter} iterator.}
   @begin{short}
     Obtains the location of @arg{anchor} within the text buffer.
   @end{short}
@@ -1894,7 +1892,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-iter-at-child-anchor)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_start_iter -> text-buffer-start-iter
+;;; gtk_text_buffer_get_start_iter
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_start_iter" %text-buffer-start-iter) :void
@@ -1905,7 +1903,7 @@ lambda (buffer)    :run-last
  #+liber-documentation
  "@version{2022-12-4}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @return{A @class{gtk:text-iter} iterator.}
+  @return{The @class{gtk:text-iter} iterator.}
   @begin{short}
     Returns an iterator with the first position in the text buffer.
   @end{short}
@@ -1921,7 +1919,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-start-iter)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_end_iter -> text-buffer-end-iter
+;;; gtk_text_buffer_get_end_iter
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_end_iter" %text-buffer-end-iter) :void
@@ -1932,7 +1930,7 @@ lambda (buffer)    :run-last
  #+liber-documentation
  "@version{2022-12-4}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @return{A @class{gtk:text-iter} iterator.}
+  @return{The @class{gtk:text-iter} iterator.}
   @begin{short}
     Returns an iterator with the \"end iterator\", one past the last valid
     character in the text buffer.
@@ -1952,7 +1950,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-end-iter)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_bounds  -> text-buffer-bounds
+;;; gtk_text_buffer_get_bounds
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_bounds" %text-buffer-bounds) :void
@@ -1995,7 +1993,7 @@ lambda (buffer)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_get_modified
-;;; gtk_text_buffer_set_modified -> text-buffer-modified
+;;; gtk_text_buffer_set_modified
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf text-buffer-modified) (setting buffer)
@@ -2046,7 +2044,7 @@ lambda (buffer)    :run-last
   @argument[interactive]{a boolean whether the deletion is caused by user
     interaction}
   @argument[editable]{a boolean whether the text buffer is editable by default}
-  @return{A boolean whether there was a non-empty selection to delete.}
+  @return{The boolean whether there was a non-empty selection to delete.}
   @begin{short}
     Deletes the range between the @code{\"insert\"} and
     @code{\"selection_bound\"} marks, that is, the currently selected text.
@@ -2138,7 +2136,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-cut-clipboard)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_selection_bounds -> text-buffer-selection-bounds
+;;; gtk_text_buffer_get_selection_bounds
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_selection_bounds"
@@ -2173,7 +2171,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-selection-bounds)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_selection_content ()
+;;; gtk_text_buffer_get_selection_content
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_get_selection_content"
@@ -2181,7 +2179,7 @@ lambda (buffer)    :run-last
  #+liber-documentation
  "@version{#2023-10-11}
   @argument[buffer]{a @class{gtk:text-buffer} object}
-  @return{A @class{gdk:content-provider} object}
+  @return{The @class{gdk:content-provider} object}
   @begin{short}
     Get a content provider for this text buffer.
   @end{short}
@@ -2306,8 +2304,8 @@ lambda (buffer)    :run-last
 (export 'text-buffer-remove-selection-clipboard)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_get_max_undo_levels ()
-;;; gtk_text_buffer_set_max_undo_levels ()
+;;; gtk_text_buffer_get_max_undo_levels
+;;; gtk_text_buffer_set_max_undo_levels
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf text-buffer-max-undo-levels) (value buffer)
@@ -2339,7 +2337,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-max-undo-levels)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_undo ()
+;;; gtk_text_buffer_undo
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_undo" text-buffer-undo) :void
@@ -2355,7 +2353,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-undo)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_redo ()
+;;; gtk_text_buffer_redo
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_redo" text-buffer-redo) :void
@@ -2371,7 +2369,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-redo)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_begin_irreversible_action ()
+;;; gtk_text_buffer_begin_irreversible_action
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_begin_irreversible_action"
@@ -2396,7 +2394,7 @@ lambda (buffer)    :run-last
 (export 'text-buffer-begin-irreversible-action)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_end_irreversible_action ()
+;;; gtk_text_buffer_end_irreversible_action
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_buffer_end_irreversible_action"

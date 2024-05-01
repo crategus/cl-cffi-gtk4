@@ -423,9 +423,16 @@ target.target_attr = source.source_attr × multiplier + constant
 ;;; gtk_constraint_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_constraint_new" %constraint-new) (g:object constraint)
+(defun constraint-new (target
+                       target-attribute
+                       relation
+                       source
+                       source-attribute
+                       multiplier
+                       constant
+                       strength)
  #+liber-documentation
- "@version{#2023-4-21}
+ "@version{2024-4-29}
   @argument[target]{a @class{gtk:constraint-target} object}
   @argument[target-attribute]{a @symbol{gtk:constraint-attribute} value with
     the attribute of @arg{target} to be set}
@@ -450,23 +457,6 @@ target.target_attr = source.source_attr × multiplier + constant
   @see-symbol{gtk:constraint-attribute}
   @see-symbol{gtk:constraint-relation}
   @see-symbol{gtk:constraint-strength}"
-  (target g:object)
-  (target-attribute constraint-attribute)
-  (relation constraint-relation)
-  (source g:object)
-  (source-attribute constraint-attribute)
-  (multiplier :double)
-  (constant :double)
-  (strength constraint-strength))
-
-(defun constraint-new (target
-                       target-attribute
-                       relation
-                       source
-                       source-attribute
-                       multiplier
-                       constant
-                       strength)
   (cffi:foreign-funcall "gtk_constraint_new"
                         g:object target
                         constraint-attribute target-attribute
@@ -484,17 +474,20 @@ target.target_attr = source.source_attr × multiplier + constant
 ;;; gtk_constraint_new_constant
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_constraint_new_constant" %constraint-new-constant)
-    (g:object constraint)
+(defun constraint-new-constant (target
+                                target-attribute
+                                relation
+                                constant
+                                strength)
  #+liber-documentation
- "@version{#2023-4-21}
+ "@version{2024-4-29}
   @argument[target]{a @class{gtk:constraint-target} object}
   @argument[target-attribute]{a @symbol{gtk:constraint-attribute} value with
     the attribute of @arg{target} to be set}
   @argument[relation]{a @symbol{gtk:constraint-relation} value the relation
     equivalence between @arg{target-attribute} and @arg{source-attribute}}
-  @argument[constant]{a double float with a constant factor to be added to
-    @arg{source-attribute}}
+  @argument[constant]{a number coerced to a double float with a constant factor
+    to be added to @arg{source-attribute}}
   @argument[strength]{a @symbol{gtk:constraint-strength} value with the
     strength of the constraint}
   @return{The newly created @class{gtk:constraint} object.}
@@ -507,17 +500,6 @@ target.target_attr = source.source_attr × multiplier + constant
   @see-symbol{gtk:constraint-attribute}
   @see-symbol{gtk:constraint-relation}
   @see-symbol{gtk:constraint-strength}"
-  (target g:object)
-  (target-attribute constraint-attribute)
-  (relation constraint-relation)
-  (constant :double)
-  (strength constraint-strength))
-
-(defun constraint-new-constant (target
-                                target-attribute
-                                relation
-                                constant
-                                strength)
   (cffi:foreign-funcall "gtk_constraint_new_constant"
                         g:object target
                         constraint-attribute target-attribute

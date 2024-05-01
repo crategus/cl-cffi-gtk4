@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -146,7 +146,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- directory-list-attributes ----------------------------------------------
+;;; --- gtk:directory-list-attributes ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "attributes" 'directory-list) t)
@@ -159,8 +159,8 @@
       "Accessor"
       (documentation 'directory-list-attributes 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:directory-list-attributes object) => attributes}
-  @syntax[]{(setf gtk:directory-list-attributes object) attributes)}
+  @syntax{(gtk:directory-list-attributes object) => attributes}
+  @syntax{(setf (gtk:directory-list-attributes object) attributes)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[attributes]{a string with the attributes}
   @begin{short}
@@ -176,7 +176,7 @@
   @see-class{gtk:directory-list}
   @see-class{g:file-info}")
 
-;;; --- directory-list-error ---------------------------------------------------
+;;; --- gtk:directory-list-error -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "error" 'directory-list) t)
@@ -188,7 +188,7 @@
       "Accessor"
       (documentation 'directory-list-error 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:directory-list-error object) => error}
+  @syntax{(gtk:directory-list-error object) => error}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[error]{a @class{g:error} instance with the loading error or
   @code{nil} if loading finished successfully}
@@ -206,7 +206,7 @@
   @see-class{gtk:directory-list}
   @see-class{g:error}")
 
-;;; --- directory-list-file ----------------------------------------------------
+;;; --- gtk:directory-list-file ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "file" 'directory-list) t)
@@ -218,8 +218,8 @@
       "Accessor"
       (documentation 'directory-list-file 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:directory-list-file object) => file}
-  @syntax[]{(setf gtk:directory-list-file object) file)}
+  @syntax{(gtk:directory-list-file object) => file}
+  @syntax{(setf (gtk:directory-list-file object) file)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[file]{a @class{g:file} object to be enumerated}
   @begin{short}
@@ -233,7 +233,7 @@
   @see-class{gtk:directory-list}
   @see-class{g:file}")
 
-;;; --- directory-list-io-priortiy ---------------------------------------------
+;;; --- gtk:directory-list-io-priortiy -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "io-priority" 'directory-list) t)
@@ -247,8 +247,8 @@
       "Accessor"
       (documentation 'directory-list-io-priority 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:directory-list-io-priority object) => priority}
-  @syntax[]{(setf gtk:directory-list-io-priority object) priority)}
+  @syntax{(gtk:directory-list-io-priority object) => priority}
+  @syntax{(setf (gtk:directory-list-io-priority object) priority)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[priority]{an integer with the IO priority to use}
   @begin{short}
@@ -268,7 +268,7 @@
   @see-class{gtk:directory-list}
   @see-variable{g:+priority-default}")
 
-;;; --- directory-list-item-type ------------------------------------------------
+;;; --- gtk:directory-list-item-type -------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'directory-list) t)
@@ -287,7 +287,7 @@
       "Accessor"
       (documentation 'directory-list-item-type 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:directory-list-item-type object) => gtype}
+  @syntax{(gtk:directory-list-item-type object) => gtype}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -304,7 +304,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- directory-list-loading -------------------------------------------------
+;;; --- gtk:directory-list-loading ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "loading" 'directory-list) t)
@@ -317,7 +317,7 @@
       "Accessor"
       (documentation 'directory-list-loading 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:directory-list-loading object) => loading}
+  @syntax{(gtk:directory-list-loading object) => loading}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[loading]{@em{true} if files are being loaded}
   @begin{short}
@@ -326,7 +326,7 @@
   @end{short}
   @see-class{gtk:directory-list}")
 
-;;; --- directory-list-monitored -----------------------------------------------
+;;; --- gtk:directory-list-monitored -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "monitored" 'directory-list) t)
@@ -339,8 +339,8 @@
       "Accessor"
       (documentation 'directory-list-monitored 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:directory-list-monitored object) => monitored}
-  @syntax[]{(setf gtk:directory-list-monitored object) monitored)}
+  @syntax{(gtk:directory-list-monitored object) => monitored}
+  @syntax{(setf (gtk:directory-list-monitored object) monitored)}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[monitored]{@em{true} to monitor the directory for changes}
   @begin{short}
@@ -359,7 +359,7 @@
   initial loading and when monitoring was turned on.
   @see-class{gtk:directory-list}")
 
-;;; --- directory-list-n-items -------------------------------------------------
+;;; --- gtk:directory-list-n-items ---------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'directory-list) t)
@@ -372,7 +372,7 @@
       "Accessor"
       (documentation 'directory-list-n-items 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:directory-list-n-items object) => n-items}
+  @syntax{(gtk:directory-list-n-items object) => n-items}
   @argument[object]{a @class{gtk:directory-list} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -384,7 +384,7 @@
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_directory_list_new ()
+;;; gtk_directory_list_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline directory-list-new))
@@ -394,7 +394,7 @@
  "@version{#2023-9-21}
   @argument[attributes]{a string with the attributes to query with}
   @argument[file]{a @class{g:file} object to query}
-  @return{A @class{gtk:directory-list} object.}
+  @return{The @class{gtk:directory-list} object.}
   @begin{short}
     Creates a new directory list querying the given @arg{file} with the given
     @arg{attributes}.
@@ -407,7 +407,7 @@
 (export 'directory-list-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_directory_list_is_loading ()
+;;; gtk_directory_list_is_loading
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_directory_list_is_loading" directory-list-is-loading)

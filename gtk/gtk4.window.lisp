@@ -417,8 +417,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-application 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-application object) => application}
-  @syntax[]{(setf (gtk:window-application object) application)}
+  @syntax{(gtk:window-application object) => application}
+  @syntax{(setf (gtk:window-application object) application)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[application]{a @class{gtk:application} instance, or @code{nil}}
   @begin{short}
@@ -455,8 +455,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-child 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-child object) => child}
-  @syntax[]{(setf (gtk:window-child object) child)}
+  @syntax{(gtk:window-child object) => child}
+  @syntax{(setf (gtk:window-child object) child)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -481,8 +481,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-decorated 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-decorated object) => setting}
-  @syntax[]{(setf (gtk:window-decorated object) setting)}
+  @syntax{(gtk:window-decorated object) => setting}
+  @syntax{(setf (gtk:window-decorated object) setting)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[setting]{@em{true} to decorate the window}
   @begin{short}
@@ -520,8 +520,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-default-height 'function)
  "@version{2023-8-20}
-  @syntax[]{(gtk:window-default-height object) => height}
-  @syntax[]{(setf (gtk:window-default-height object) height)}
+  @syntax{(gtk:window-default-height object) => height}
+  @syntax{(setf (gtk:window-default-height object) height)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[height]{an integer with the default height}
   @begin{short}
@@ -547,8 +547,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-default-widget 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-default-widget object) => widget}
-  @syntax[]{(setf (gtk:window-default-widget object) widget)}
+  @syntax{(gtk:window-default-widget object) => widget}
+  @syntax{(setf (gtk:window-default-widget object) widget)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[widget]{a @class{gtk:widget} object to be the default widget, or
     @code{nil} to unset the default widget for the toplevel}
@@ -577,8 +577,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-default-width 'function)
  "@version{2023-8-20}
-  @syntax[]{(gtk:window-default-width object) => width}
-  @syntax[]{(setf (gtk:window-default-width object) width)}
+  @syntax{(gtk:window-default-width object) => width}
+  @syntax{(setf (gtk:window-default-width object) width)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[width]{an integer with the default width}
   @begin{short}
@@ -603,8 +603,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-deletable 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-deletable object) => setting}
-  @syntax[]{(setf (gtk:window-deletable object) setting)}
+  @syntax{(gtk:window-deletable object) => setting}
+  @syntax{(setf (gtk:window-deletable object) setting)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[setting]{@em{true} to decorate the window as deletable}
   @begin{short}
@@ -643,8 +643,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-destroy-with-parent 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-destroy-with-parent object) => setting}
-  @syntax[]{(setf (gtk:window-destroy-with-parent object) setting)}
+  @syntax{(gtk:window-destroy-with-parent object) => setting}
+  @syntax{(setf (gtk:window-destroy-with-parent object) setting)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[setting]{a boolean whether to destroy the window with its transient
     parent}
@@ -675,8 +675,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-display 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-display object) => display}
-  @syntax[]{(setf (gtk:window-display object) display)}
+  @syntax{(gtk:window-display object) => display}
+  @syntax{(setf (gtk:window-display object) display)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
@@ -705,8 +705,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-focus-visible 'function)
  "@version{2023-8-20}
-  @syntax[]{(gtk:window-focus-visible object) => setting}
-  @syntax[]{(setf (gtk:window-focus-visible object) setting)}
+  @syntax{(gtk:window-focus-visible object) => setting}
+  @syntax{(setf (gtk:window-focus-visible object) setting)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[setting]{a boolean whether \"focus-rectangles\" are currently
     visible in the window}
@@ -733,8 +733,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-focus-widget 'function)
  "@version{2024-4-10}
-  @syntax[]{(gtk:window-focus-widget object) => widget}
-  @syntax[]{(setf (gtk:window-focus-widget object) widget)}
+  @syntax{(gtk:window-focus-widget object) => widget}
+  @syntax{(setf (gtk:window-focus-widget object) widget)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[widget]{a @class{gtk:widget} focus widget}
   @begin{short}
@@ -772,8 +772,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-fullscreened 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-fullscreened object) => setting}
-  @syntax[]{(setf (gtk:window-fullscreened object) setting)}
+  @syntax{(gtk:window-fullscreened object) => setting}
+  @syntax{(setf (gtk:window-fullscreened object) setting)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[setting]{a boolean whether the window is fullscreen}
   @begin{short}
@@ -812,8 +812,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-handle-menubar-accel 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-handle-menubar-accel object) => setting}
-  @syntax[]{(setf (gtk:window-handle-menubar-accel object) setting)}
+  @syntax{(gtk:window-handle-menubar-accel object) => setting}
+  @syntax{(setf (gtk:window-handle-menubar-accel object) setting)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[setting]{a boolean whether the window frame should handle the
     @kbd{F10} key for activating menubars}
@@ -842,8 +842,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-hide-on-close 'function)
  "@version{2023-8-20}
-  @syntax[]{(gtk:window-hide-on-close object) => setting}
-  @syntax[]{(setf (gtk:window-hide-on-close object) setting)}
+  @syntax{(gtk:window-hide-on-close object) => setting}
+  @syntax{(setf (gtk:window-hide-on-close object) setting)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[setting]{a boolean whether the window should be hidden when the
     users clicks the Close button}
@@ -870,8 +870,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-icon-name 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-icon-name object) => name}
-  @syntax[]{(setf (gtk:window-icon-name object) name)}
+  @syntax{(gtk:window-icon-name object) => name}
+  @syntax{(setf (gtk:window-icon-name object) name)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[name]{a string with the name of the themed icon}
   @begin{short}
@@ -901,8 +901,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-is-active 'function)
  "@version{2023-8-20}
-  @syntax[]{(gtk:window-is-active object) => active}
-  @syntax[]{(setf (gtk:window-is-active object) active)}
+  @syntax{(gtk:window-is-active object) => active}
+  @syntax{(setf (gtk:window-is-active object) active)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[active]{a boolean whether the toplevel is the currently active
     window}
@@ -930,8 +930,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-maximized 'function)
  "@version{2023-8-20}
-  @syntax[]{(gtk:window-maximized object) => maximized}
-  @syntax[]{(setf (gtk:window-maximized object) maximized)}
+  @syntax{(gtk:window-maximized object) => maximized}
+  @syntax{(setf (gtk:window-maximized object) maximized)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[maximized]{a boolean whether the window is maximized}
   @begin{short}
@@ -964,8 +964,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-mnemonics-visible 'function)
  "@version{2023-8-20}
-  @syntax[]{(gtk:window-mnemonics-visible object) => setting}
-  @syntax[]{(setf (gtk:window-mnemonics-visible object) setting)}
+  @syntax{(gtk:window-mnemonics-visible object) => setting}
+  @syntax{(setf (gtk:window-mnemonics-visible object) setting)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[setting]{a boolean whether mnemonics are currently visible in the
     window}
@@ -990,8 +990,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-modal 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-modal object) => modal}
-  @syntax[]{(setf (gtk:window-modal object) modal)}
+  @syntax{(gtk:window-modal object) => modal}
+  @syntax{(setf (gtk:window-modal object) modal)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[modal]{a boolean whether the window is modal}
   @begin{short}
@@ -1023,8 +1023,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-resizable 'function)
  "@version{2023-8-20}
-  @syntax[]{(gtk:window-resizable object) => resizable}
-  @syntax[]{(setf (gtk:window-resizable object) resizable)}
+  @syntax{(gtk:window-resizable object) => resizable}
+  @syntax{(setf (gtk:window-resizable object) resizable)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[resizable]{@em{true} if the user can resize this window}
   @begin{short}
@@ -1049,7 +1049,7 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-startup-id 'function)
  "@version{2024-4-7}
-  @syntax[]{(setf (gtk:window-startup-id object) id)}
+  @syntax{(setf (gtk:window-startup-id object) id)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[id]{a string with the startup ID}
   @begin{short}
@@ -1086,7 +1086,7 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-suspended 'function)
  "@version{#2023-11-16}
-  @syntax[]{(gtk:window-suspended object) => suspended}
+  @syntax{(gtk:window-suspended object) => suspended}
   @argument[object]{a @class{gtk:window} widget}
   @argument[suspended]{a boolean whether the window is suspended}
   @begin{short}
@@ -1115,8 +1115,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-title 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-title object) => title}
-  @syntax[]{(setf (gtk:window-title object) title)}
+  @syntax{(gtk:window-title object) => title}
+  @syntax{(setf (gtk:window-title object) title)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[title]{a string with the title of the window}
   @begin{short}
@@ -1146,8 +1146,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-titlebar 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-titlebar window) => widget}
-  @syntax[]{(setf (gtk:window-titlebar window) widget)}
+  @syntax{(gtk:window-titlebar window) => widget}
+  @syntax{(setf (gtk:window-titlebar window) widget)}
   @argument[window]{a @class{gtk:window} widget}
   @argument[widget]{a @class{gtk:widget} object to use as titlebar}
   @begin{short}
@@ -1185,8 +1185,8 @@ lambda (window)    :run-first
       "Accessor"
       (documentation 'window-transient-for 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-transient-for object) => parent}
-  @syntax[]{(setf (gtk:window-transient-for object) parent)}
+  @syntax{(gtk:window-transient-for object) => parent}
+  @syntax{(setf (gtk:window-transient-for object) parent)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[parent]{a @class{gtk:window} parent window, or @code{nil}}
   @begin{short}
@@ -1213,7 +1213,7 @@ lambda (window)    :run-first
   @see-function{gtk:dialog-new-with-buttons}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_new ()
+;;; gtk_window_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_new" window-new) (g:object widget)
@@ -1237,7 +1237,7 @@ lambda (window)    :run-first
 (export 'window-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_destroy ()
+;;; gtk_window_destroy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_destroy" window-destroy) :void
@@ -1262,8 +1262,8 @@ lambda (window)    :run-first
 (export 'window-destroy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_get_default_size ()
-;;; gtk_window_set_default_size ()
+;;; gtk_window_get_default_size
+;;; gtk_window_set_default_size
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf window-default-size) (size window)
@@ -1274,8 +1274,8 @@ lambda (window)    :run-first
 (defun window-default-size (window)
  #+liber-documentation
  "@version{2023-9-18}
-  @syntax[]{(gtk:window-default-size window) => width, height}
-  @syntax[]{(setf (gtk:window-default-size window) (list width height))}
+  @syntax{(gtk:window-default-size window) => width, height}
+  @syntax{(setf (gtk:window-default-size window) (list width height))}
   @argument[window]{a @class{gtk:window} widget}
   @argument[width]{an integer with the default width of the window}
   @argument[height]{an integer with the default height of the window}
@@ -1326,13 +1326,13 @@ lambda (window)    :run-first
 (export 'window-default-size)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_is_active ()
+;;; gtk_window_is_active
 ;;; ----------------------------------------------------------------------------
 
 ;; Implemented as the window-is-active slot access function
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_is_maximized ()
+;;; gtk_window_is_maximized
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_is_maximized" window-is-maximized) :boolean
@@ -1359,7 +1359,7 @@ lambda (window)    :run-first
 (export 'window-is-maximized)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_is_fullscreen ()
+;;; gtk_window_is_fullscreen
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_is_fullscreen" window-is-fullscreen) :boolean
@@ -1386,7 +1386,7 @@ lambda (window)    :run-first
 (export 'window-is-fullscreen)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_get_toplevels ()
+;;; gtk_window_get_toplevels
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_get_toplevels" window-toplevels)
@@ -1407,7 +1407,7 @@ lambda (window)    :run-first
 (export 'window-toplevels)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_list_toplevels ()
+;;; gtk_window_list_toplevels
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_list_toplevels" window-list-toplevels)
@@ -1425,8 +1425,8 @@ lambda (window)    :run-first
 (export 'window-list-toplevels)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_get_focus ()
-;;; gtk_window_set_focus ()
+;;; gtk_window_get_focus
+;;; gtk_window_set_focus
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf window-focus) (focus window)
@@ -1439,8 +1439,8 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_focus" window-focus) (g:object widget)
  #+liber-documentation
  "@version{#2024-4-7}
-  @syntax[]{(gtk:window-focus window) => focus}
-  @syntax[]{(setf (gtk:window-focus window) focus)}
+  @syntax{(gtk:window-focus window) => focus}
+  @syntax{(setf (gtk:window-focus window) focus)}
   @argument[window]{a @class{gtk:window} widget}
   @argument[focus]{a @class{gtk:widget} object to be the focus widget, or
     @code{nil} to unset any focus widget for the toplevel window}
@@ -1469,7 +1469,7 @@ lambda (window)    :run-first
 (export 'window-focus)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_present ()
+;;; gtk_window_present
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_present" window-present) :void
@@ -1490,7 +1490,7 @@ lambda (window)    :run-first
 (export 'window-present)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_present_with_time ()
+;;; gtk_window_present_with_time
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_present_with_time" window-present-with-time) :void
@@ -1521,7 +1521,7 @@ lambda (window)    :run-first
 (export 'window-present-with-time)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_close ()
+;;; gtk_window_close
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_close" window-close) :void
@@ -1539,7 +1539,7 @@ lambda (window)    :run-first
 (export 'window-close)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_minimize ()
+;;; gtk_window_minimize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_minimize" window-minimize) :void
@@ -1567,7 +1567,7 @@ lambda (window)    :run-first
 (export 'window-minimize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_unminimize ()
+;;; gtk_window_unminimize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_unminimize" window-unminimize) :void
@@ -1593,7 +1593,7 @@ lambda (window)    :run-first
 (export 'window-unminimize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_maximize ()
+;;; gtk_window_maximize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_maximize" window-maximize) :void
@@ -1621,7 +1621,7 @@ lambda (window)    :run-first
 (export 'window-maximize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_unmaximize ()
+;;; gtk_window_unmaximize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_unmaximize" window-unmaximize) :void
@@ -1646,7 +1646,7 @@ lambda (window)    :run-first
 (export 'window-unmaximize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_fullscreen ()
+;;; gtk_window_fullscreen
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_fullscreen" window-fullscreen) :void
@@ -1672,7 +1672,7 @@ lambda (window)    :run-first
 (export 'window-fullscreen)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_fullscreen_on_monitor ()
+;;; gtk_window_fullscreen_on_monitor
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_fullscreen_on_monitor" window-fullscreen-on-monitor)
@@ -1701,7 +1701,7 @@ lambda (window)    :run-first
 (export 'window-fullscreen-on-monitor)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_unfullscreen ()
+;;; gtk_window_unfullscreen
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_unfullscreen" window-unfullscreen) :void
@@ -1728,8 +1728,8 @@ lambda (window)    :run-first
 (export 'window-unfullscreen)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_get_default_icon_name ()
-;;; gtk_window_set_default_icon_name ()
+;;; gtk_window_get_default_icon_name
+;;; gtk_window_set_default_icon_name
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf window-default-icon-name) (name)
@@ -1742,8 +1742,8 @@ lambda (window)    :run-first
     :string
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:window-default-icon-name) => name}
-  @syntax[]{(setf (gtk:window-default-icon-name) name)}
+  @syntax{(gtk:window-default-icon-name) => name}
+  @syntax{(setf (gtk:window-default-icon-name) name)}
   @argument[name]{a string with the name of the themed icon}
   @begin{short}
     Accessor of the default icon name of the window.
@@ -1758,7 +1758,7 @@ lambda (window)    :run-first
 (export 'window-default-icon-name)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_get_group ()
+;;; gtk_window_get_group
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_get_group" window-group)
@@ -1779,7 +1779,7 @@ lambda (window)    :run-first
 (export 'window-group)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_has_group ()
+;;; gtk_window_has_group
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_has_group" window-has-group) :boolean
@@ -1795,7 +1795,7 @@ lambda (window)    :run-first
 (export 'window-has-group)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_set_auto_startup_notification ()
+;;; gtk_window_set_auto_startup_notification
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_set_auto_startup_notification"
@@ -1822,8 +1822,8 @@ lambda (window)    :run-first
 (export 'window-set-auto-startup-notification)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_set_titlebar ()                              until 4.4
-;;; gtk_window_get_titlebar ()
+;;; gtk_window_set_titlebar                                 until 4.4
+;;; gtk_window_get_titlebar
 ;;; ----------------------------------------------------------------------------
 
 #-gtk-4-6
@@ -1838,8 +1838,8 @@ lambda (window)    :run-first
 (cffi:defcfun ("gtk_window_get_titlebar" window-titlebar) (g:object widget)
  #+liber-documentation
  "@version{#2023-9-18}
-  @syntax[]{(gtk:window-titlebar window) => widget}
-  @syntax[]{(setf (gtk:window-titlebar window) widget)}
+  @syntax{(gtk:window-titlebar window) => widget}
+  @syntax{(setf (gtk:window-titlebar window) widget)}
   @argument[window]{a @class{gtk:window} widget}
   @argument[widget]{a @class{gtk:widget} object to use as titlebar}
   @begin{short}
@@ -1866,7 +1866,7 @@ lambda (window)    :run-first
 (export 'window-titlebar)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_set_interactive_debugging ()
+;;; gtk_window_set_interactive_debugging
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_window_set_interactive_debugging"
@@ -1885,7 +1885,7 @@ lambda (window)    :run-first
 (export 'window-set-interactive-debugging)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_is_suspended ()
+;;; gtk_window_is_suspended
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-12

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -153,7 +153,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- file-filter-mime-types -------------------------------------------------
+;;; --- gtk:file-filter-mime-types ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mime-types" 'file-filter) t)
@@ -163,7 +163,7 @@
 
 (unexport 'file-filter-mime-types)
 
-;;; --- file-filter-name -------------------------------------------------------
+;;; --- gtk:file-filter-name ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "name" 'file-filter) t)
@@ -178,8 +178,8 @@
       "Accessor"
       (documentation 'file-filter-name 'function)
  "@version{2023-8-22}
-  @syntax[]{(gtk:file-filter-name object) => name}
-  @syntax[]{(setf (gtk:file-filter-name object) name)}
+  @syntax{(gtk:file-filter-name object) => name}
+  @syntax{(setf (gtk:file-filter-name object) name)}
   @argument[object]{a @class{gtk:file-filter} object}
   @argument[name]{a string with the human-readable name for the filter, or
     @code{nil} to remove any existing name}
@@ -193,7 +193,7 @@
   is a selectable list of filters.
   @see-class{gtk:file-filter}")
 
-;;; --- file-filter-patterns ---------------------------------------------------
+;;; --- gtk:file-filter-patterns -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "patterns" 'file-filter) t)
@@ -203,7 +203,7 @@
 
 (unexport 'file-filter-patterns)
 
-;;; --- file-filter-suffixes ---------------------------------------------------
+;;; --- gtk:file-filter-suffixes -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "suffixes" 'file-filter) t)
@@ -214,7 +214,7 @@
 (unexport 'file-filter-suffixes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_new ()
+;;; gtk_file_filter_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline file-filter-new))
@@ -222,7 +222,7 @@
 (defun file-filter-new ()
  #+liber-documentation
  "@version{2023-8-22}
-  @return{A new @class{gtk:file-filter} object.}
+  @return{The new @class{gtk:file-filter} object.}
   @begin{short}
     Creates a new file filter with no rules added to it.
   @end{short}
@@ -247,7 +247,7 @@
 (export 'file-filter-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_new_from_gvariant ()
+;;; gtk_file_filter_new_from_gvariant
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_filter_new_from_gvariant"
@@ -255,9 +255,9 @@
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[variant]{a @type{g:variant} instance of @code{a{sv@}} type}
-  @return{A new @class{gtk:file-filter} object.}
+  @return{The new @class{gtk:file-filter} object.}
   @begin{short}
-    Deserialize a file filter from an @code{a{sv@}} variant in the format
+    Deserialize a file filter from a @code{a{sv@}} variant in the format
     produced by the @fun{gtk:file-filter-to-gvariant} function.
   @end{short}
   @see-class{gtk:file-filter}
@@ -268,7 +268,7 @@
 (export 'file-filter-new-from-gvariant)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_add_mime_type ()
+;;; gtk_file_filter_add_mime_type
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_filter_add_mime_type" file-filter-add-mime-type) :void
@@ -284,7 +284,7 @@
 (export 'file-filter-add-mime-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_add_pattern ()
+;;; gtk_file_filter_add_pattern
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_filter_add_pattern" file-filter-add-pattern) :void
@@ -304,7 +304,7 @@
 (export 'file-filter-add-pattern)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_add_pixbuf_formats ()
+;;; gtk_file_filter_add_pixbuf_formats
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_filter_add_pixbuf_formats"
@@ -350,7 +350,7 @@
 (export 'file-filter-add-suffix)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_get_attributes ()
+;;; gtk_file_filter_get_attributes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_filter_get_attributes" file-filter-attributes)
@@ -358,7 +358,7 @@
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @return{A list of strings with the attributes.}
+  @return{The list of strings with the attributes.}
   @begin{short}
     Gets the attributes that need to be filled in for the @class{g:file-info}
     object passed to this file filter.
@@ -374,7 +374,7 @@
 (export 'file-filter-attributes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_file_filter_to_gvariant ()
+;;; gtk_file_filter_to_gvariant
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_file_filter_to_gvariant" file-filter-to-gvariant)
@@ -382,8 +382,8 @@
  #+liber-documentation
  "@version{#2023-5-5}
   @argument[filter]{a @class{gtk:file-filter} object}
-  @return{A new @type{g:variant} instance.}
-  @short{Serialize a file filter to an @code{a{sv@}} variant.}
+  @return{The new @type{g:variant} instance.}
+  @short{Serialize a file filter to a @code{a{sv@}} variant.}
   @see-class{gtk:file-filter}
   @see-type{g:variant}"
   (filter (g:object file-filter)))

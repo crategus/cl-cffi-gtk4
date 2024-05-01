@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -103,7 +103,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- actionable-action-name -------------------------------------------------
+;;; --- gtk:actionable-action-name ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "action-name" 'actionable) t)
@@ -116,8 +116,8 @@
       "Accessor"
       (documentation 'actionable-action-name 'function)
  "@version{2023-8-4}
-  @syntax[]{(gtk:actionable-action-name object) => name}
-  @syntax[]{(setf (gtk:actionable-action-name object) name)}
+  @syntax{(gtk:actionable-action-name object) => name}
+  @syntax{(setf (gtk:actionable-action-name object) name)}
   @argument[object]{a @class{gtk:actionable} widget}
   @argument[name]{a string with the action name, or @code{nil}}
   @begin{short}
@@ -149,14 +149,14 @@
   @see-class{gtk:application-window}
   @see-class{g:menu}")
 
-;;; --- actionable-action-target -----------------------------------------------
+;;; --- gtk:actionable-action-target -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "action-target" 'actionable) t)
- "The @code{action-target} property of type @type{glib:variant} (Read / Write)
+ "The @code{action-target} property of type @type{g:variant} (Read / Write)
   @br{}
   The parameter for action invocations. @br{}
-  Allowed values: a @type{glib:variant} parameter @br{}
+  Allowed values: a @type{g:variant} parameter @br{}
   Default value: @code{null-pointer}")
 
 #+liber-documentation
@@ -164,10 +164,10 @@
       "Accessor"
       (documentation 'actionable-action-target 'function)
  "@version{2023-8-4}
-  @syntax[]{(gtk:actionable-action-target object) => value}
-  @syntax[]{(setf (gtk:actionable-action-target object) value)}
+  @syntax{(gtk:actionable-action-target object) => value}
+  @syntax{(setf (gtk:actionable-action-target object) value)}
   @argument[object]{a @class{gtk:actionable} widget}
-  @argument[value]{a @type{glib:variant} parameter as the target value, or
+  @argument[value]{a @type{g:variant} parameter as the target value, or
     @code{null-pointer}}
   @begin{short}
     Accessor of the @slot[gtk:actionable]{action-target} slot of the
@@ -207,7 +207,7 @@
     @fun{gtk:actionable-action-target} function.
   @end{dictionary}
   @see-class{gtk:actionable}
-  @see-type{glib:variant}
+  @see-type{g:variant}
   @see-class{g:action}")
 
 ;;; ----------------------------------------------------------------------------

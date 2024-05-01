@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -145,7 +145,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- list-item-accessible-description ---------------------------------------
+;;; --- gtk:list-item-accessible-description -----------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "accessible-description"
@@ -155,7 +155,7 @@
   The accessible description to set on the list item. @br{}
   Default value: @code{nil}")
 
-;;; --- list-item-accessible-label ---------------------------------------------
+;;; --- gtk:list-item-accessible-label -----------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "accessible-label" 'list-item) t)
@@ -164,7 +164,7 @@
   The accessible label to set on the list item. @br{}
   Default value: @code{nil}")
 
-;;; --- list-item-activatable --------------------------------------------------
+;;; --- gtk:list-item-activatable ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "activatable" 'list-item) t)
@@ -177,8 +177,8 @@
       "Accessor"
       (documentation 'list-item-activatable 'function)
  "@version{2023-8-13}
-  @syntax[]{gtk:list-item-activatable object) => activatable}
-  @syntax[]{(setf gtk:list-item-activatable object) activatable)}
+  @syntax{(gtk:list-item-activatable object) => activatable}
+  @syntax{(setf (gtk:list-item-activatable object) activatable)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[activatable]{a boolean whether the item should be activatable}
   @begin{short}
@@ -200,7 +200,7 @@
   @see-class{gtk:list-view}
   @see-function{gtk:widget-activate}")
 
-;;; --- list-item-child --------------------------------------------------------
+;;; --- gtk:list-item-child ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'list-item) t)
@@ -212,8 +212,8 @@
       "Accessor"
       (documentation 'list-item-child 'function)
  "@version{2023-8-13}
-  @syntax[]{gtk:list-item-child object) => child}
-  @syntax[]{(setf gtk:list-item-child object) child)}
+  @syntax{(gtk:list-item-child object) => child}
+  @syntax{(setf (gtk:list-item-child object) child)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -229,7 +229,7 @@
   @see-class{gtk:list-item}
   @see-class{gtk:widget}")
 
-;;; --- list-item-focusable ----------------------------------------------------
+;;; --- gtk:list-item-focusable ------------------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "focusable" 'list-item) t)
@@ -237,7 +237,7 @@
   Whether the item can be focused with the keyboard. @br{}
   Default value: @em{true}")
 
-;;; --- list-item-item ---------------------------------------------------------
+;;; --- gtk:list-item-item -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "item" 'list-item) t)
@@ -249,7 +249,7 @@
       "Accessor"
       (documentation 'list-item-item 'function)
  "@version{2023-8-13}
-  @syntax[]{gtk:list-item-item object) => item}
+  @syntax{(gtk:list-item-item object) => item}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[item]{a @class{g:object} object with the item displayed}
   @begin{short}
@@ -261,7 +261,7 @@
   @see-class{gtk:list-item}
   @see-class{g:object}")
 
-;;; --- list-item-position -----------------------------------------------------
+;;; --- gtk:list-item-position -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "position" 'list-item) t)
@@ -274,7 +274,7 @@
       "Accessor"
       (documentation 'list-item-position 'function)
  "@version{2023-8-13}
-  @syntax[]{gtk:list-item-position object) => position}
+  @syntax{(gtk:list-item-position object) => position}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[position]{An unsigned integer with the position of the item.}
   @begin{short}
@@ -287,7 +287,7 @@
   @see-class{gtk:list-item}
   @see-variable{gtk:+invalid-list-position+}")
 
-;;; --- list-item-selectable ---------------------------------------------------
+;;; --- gtk:list-item-selectable -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selectable" 'list-item) t)
@@ -300,8 +300,8 @@
       "Accessor"
       (documentation 'list-item-selectable 'function)
  "@version{2023-8-13}
-  @syntax[]{gtk:list-item-selectable object) => selectable}
-  @syntax[]{(setf gtk:list-item-selectable object) selectable)}
+  @syntax{(gtk:list-item-selectable object) => selectable}
+  @syntax{(setf (gtk:list-item-selectable object) selectable)}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[selectable]{a boolean whether the item should b selectable}
   @begin{short}
@@ -322,7 +322,7 @@
   they will also be reset to be selectable by GTK.
   @see-class{gtk:list-item}")
 
-;;; --- list-item-selected -----------------------------------------------------
+;;; --- gtk:list-item-selected -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selected" 'list-item) t)
@@ -335,7 +335,7 @@
       "Accessor"
       (documentation 'list-item-selected 'function)
  "@version{2023-8-13}
-  @syntax[]{gtk:list-item-selected object) => selected}
+  @syntax{(gtk:list-item-selected object) => selected}
   @argument[object]{a @class{gtk:list-item} object}
   @argument[selected]{a boolean whether the item is selected}
   @begin{short}

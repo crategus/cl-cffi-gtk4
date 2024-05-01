@@ -146,7 +146,7 @@
       "Accessor"
       (documentation 'app-chooser-dialog-gfile 'function)
  "@version{2024-4-26}
-  @syntax{gtk:app-chooser-dialog-gfile object) => file}
+  @syntax{(gtk:app-chooser-dialog-gfile object) => file}
   @syntax{(setf (gtk:app-chooser-dialog-gfile object) file)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
   @argument[file]{a @class{g:file} object}
@@ -177,7 +177,7 @@
       "Accessor"
       (documentation 'app-chooser-dialog-heading 'function)
  "@version{2024-4-26}
-  @syntax{gtk:app-chooser-dialog-heading object) => heading}
+  @syntax{(gtk:app-chooser-dialog-heading object) => heading}
   @syntax{(setf (gtk:app-chooser-dialog-heading object) heading)}
   @argument[object]{a @class{gtk:app-chooser-dialog} widget}
   @argument[heading]{a string containing Pango markup}

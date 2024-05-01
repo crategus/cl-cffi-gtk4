@@ -281,7 +281,7 @@ V:[button1(==button2)]
 (cffi:defcfun ("gtk_constraint_layout_add_constraint"
                constraint-layout-add-constraint) :void
  #+liber-documentation
- "@version{#2024-4-23}
+ "@version{2024-4-29}
   @argument[layout]{a @class{gtk:constraint-layout} object}
   @argument[constraint]{a @class{gtk:constraint} object}
   @begin{short}
@@ -297,7 +297,8 @@ V:[button1(==button2)]
     @item{set to a @class{gtk:constraint-guide} object that is part of
       @arg{layout}}
   @end{itemize}
-  The layout acquires the ownership of constraint after calling this function.
+  The layout acquires the ownership of @arg{constraint} after calling this
+  function.
   @see-class{gtk:constraint-layout}
   @see-class{gtk:constraint}
   @see-class{gtk:constraint-guide}
@@ -316,7 +317,7 @@ V:[button1(==button2)]
 (cffi:defcfun ("gtk_constraint_layout_remove_constraint"
                constraint-layout-remove-constraint) :void
  #+liber-documentation
- "@version{#2024-4-23}
+ "@version{2024-4-29}
   @argument[layout]{a @class{gtk:constraint-layout} object}
   @argument[constraint]{a @class{gtk:constraint} object}
   @begin{short}
@@ -352,7 +353,7 @@ V:[button1(==button2)]
 (cffi:defcfun ("gtk_constraint_layout_add_guide" constraint-layout-add-guide)
     :void
  #+liber-documentation
- "@version{#2024-4-23}
+ "@version{2024-4-29}
   @argument[layout]{a @class{gtk:constraint-layout} object}
   @argument[guide]{a @class{gtk:constraint-guide} object}
   @begin{short}
@@ -361,7 +362,7 @@ V:[button1(==button2)]
   A guide can be used as the source or target of constraints, like a widget,
   but it is not visible.
 
-  The layout acquires the ownership of guide after calling this function.
+  The layout acquires the ownership of @arg{guide} after calling this function.
   @see-class{gtk:constraint-layout}
   @see-class{gtk:constraint-guide}"
   (layout (g:object constraint-layout))

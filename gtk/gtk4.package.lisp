@@ -3033,6 +3033,9 @@ GtkCellRenderer         GtkWidget
       Stores page setup information.
       @about-class{page-setup}
       @about-function{page-setup-new}
+      @about-function{page-setup-new-from-file}
+      @about-function{page-setup-new-from-key-file}
+      @about-function{page-setup-new-from-gvariant}
       @about-function{page-setup-copy}
       @about-function{page-setup-orientation}
       @about-function{page-setup-paper-size}
@@ -3045,9 +3048,6 @@ GtkCellRenderer         GtkWidget
       @about-function{page-setup-paper-height}
       @about-function{page-setup-page-width}
       @about-function{page-setup-page-height}
-      @about-function{page-setup-new-from-file}
-      @about-function{page-setup-new-from-key-file}
-      @about-function{page-setup-new-from-gvariant}
       @about-function{page-setup-load-file}
       @about-function{page-setup-load-key-file}
       @about-function{page-setup-to-file}
@@ -3860,7 +3860,6 @@ GtkCellRenderer         GtkWidget
   @begin[Deprecated]{section}
     @begin[Deprecated since GTK 4.10]{subsection}@end{subsection}
     @begin[GtkDialog]{subsection}
-      Create popup windows.
       @about-symbol{dialog-flags}
       @about-class{dialog}
       @about-generic{dialog-use-header-bar}
@@ -3878,7 +3877,6 @@ GtkCellRenderer         GtkWidget
       @about-function{dialog-header-bar}
     @end{subsection}
     @begin[GtkMessageDialog]{subsection}
-      A convenient message window.
       @about-symbol{buttons-type}
       @about-class{message-dialog}
       @about-generic{message-dialog-buttons}
@@ -3895,7 +3893,6 @@ GtkCellRenderer         GtkWidget
       @about-function{message-dialog-format-secondary-markup}
     @end{subsection}
     @begin[GtkAssistant]{subsection}
-      A widget used to guide users through multi-step operations.
       @about-symbol{assistant-page-type}
       @about-class{assistant-page}
       @about-generic{assistant-page-child}
@@ -3916,9 +3913,9 @@ GtkCellRenderer         GtkWidget
       @about-function{assistant-remove-page}
       @about-symbol{assistant-page-func}
       @about-function{assistant-set-forward-page-func}
-      @about-function{assistant-page-complete}
       @about-function{assistant-page-type}
       @about-function{assistant-page-title}
+      @about-function{assistant-page-complete}
       @about-function{assistant-add-action-widget}
       @about-function{assistant-remove-action-widget}
       @about-function{assistant-update-buttons-state}
@@ -3927,7 +3924,6 @@ GtkCellRenderer         GtkWidget
       @about-function{assistant-previous-page}
     @end{subsection}
     @begin[GtkInfoBar]{subsection}
-      Report important messages to the user.
       @about-class{info-bar}
       @about-generic{info-bar-message-type}
       @about-generic{info-bar-revealed}
@@ -3945,7 +3941,6 @@ GtkCellRenderer         GtkWidget
       @about-function{info-bar-remove-child}
     @end{subsection}
     @begin[GtkStatusbar]{subsection}
-      Report messages of minor importance to the user.
       @about-class{statusbar}
       @about-function{statusbar-new}
       @about-function{statusbar-context-id}
@@ -3996,12 +3991,16 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkTreeModel]{subsection}
       The tree interface used by the @class{gtk:tree-view} widget.
+      @about-symbol{tree-model-flags}
+      @about-struct{tree-iter}
+      @about-function{tree-iter-copy}
+      @about-function{tree-iter-free}
       @about-class{tree-path}
       @about-function{tree-path-new}
-      @about-function{tree-path-copy}
-      @about-function{tree-path-new-from-string}
-      @about-function{tree-path-new-from-indices}
       @about-function{tree-path-new-first}
+      @about-function{tree-path-new-from-indices}
+      @about-function{tree-path-new-from-string}
+      @about-function{tree-path-copy}
       @about-function{tree-path-append-index}
       @about-function{tree-path-prepend-index}
       @about-function{tree-path-depth}
@@ -4024,10 +4023,6 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-row-reference-inserted}
       @about-function{tree-row-reference-deleted}
       @about-function{tree-row-reference-reordered}
-      @about-struct{tree-iter}
-      @about-function{tree-iter-copy}
-      @about-function{tree-iter-free}
-      @about-symbol{tree-model-flags}
       @about-class{tree-model}
       @about-function{tree-model-flags}
       @about-function{tree-model-n-columns}
@@ -4214,12 +4209,11 @@ GtkCellRenderer         GtkWidget
     @begin[GtkTreeView Drag & Drop]{subsection}
       @about-class{tree-drag-source}
       @about-symbol{GtkTreeDragSourceIface}
-      @about-class{tree-drag-dest}
-      @about-symbol{GtkTreeDragDestIface}
-      @about-symbol{GTK_TYPE_TREE_ROW_DATA}
       @about-function{tree-drag-source-drag-data-delete}
       @about-function{tree-drag-source-drag-data-get}
       @about-function{tree-drag-source-row-draggable}
+      @about-class{tree-drag-dest}
+      @about-symbol{GtkTreeDragDestIface}
       @about-function{tree-drag-dest-drag-data-received}
       @about-function{tree-drag-dest-row-drop-possible}
       @about-function{tree-create-row-drag-content}
@@ -4276,7 +4270,6 @@ GtkCellRenderer         GtkWidget
       @about-generic{icon-view-spacing}
       @about-generic{icon-view-text-column}
       @about-generic{icon-view-tooltip-column}
-      @about-symbol{icon-view-foreach-func}
       @about-function{icon-view-new}
       @about-function{icon-view-new-with-area}
       @about-function{icon-view-new-with-model}
@@ -4284,6 +4277,7 @@ GtkCellRenderer         GtkWidget
       @about-function{icon-view-item-at-pos}
       @about-function{icon-view-set-cursor}
       @about-function{icon-view-get-cursor}
+      @about-symbol{icon-view-foreach-func}
       @about-function{icon-view-selected-foreach}
       @about-function{icon-view-cell-rect}
       @about-function{icon-view-select-path}

@@ -154,7 +154,7 @@
       (documentation 'border-left 'function)
  "@version{2023-8-30}
   @syntax{(gtk:border-left instance) => left}
-  @syntax{(setf gtk:border-left instance) left)}
+  @syntax{(setf (gtk:border-left instance) left)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[left]{an integer with the width of the left border}
   @begin{short}
@@ -172,7 +172,7 @@
       (documentation 'border-right 'function)
  "@version{2023-8-30}
   @syntax{(gtk:border-right instance) => right}
-  @syntax{(setf gtk:border-right instance) right)}
+  @syntax{(setf (gtk:border-right instance) right)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[right]{an integer with the width of the right border}
   @begin{short}
@@ -190,7 +190,7 @@
       (documentation 'border-top 'function)
  "@version{2023-8-30}
   @syntax{(gtk:border-top instance) => top}
-  @syntax{(setf gtk:border-top instance) top)}
+  @syntax{(setf (gtk:border-top instance) top)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[top]{an integer with the width of the top border}
   @begin{short}
@@ -208,7 +208,7 @@
       (documentation 'border-bottom 'function)
  "@version{2023-8-30}
   @syntax{(gtk:border-top instance) => bottom}
-  @syntax{(setf gtk:border-top instance) bottom)}
+  @syntax{(setf (gtk:border-top instance) bottom)}
   @argument[instance]{a @class{gtk:border} instance}
   @argument[bottom]{an integer with the width of the bottom border}
   @begin{short}
@@ -231,7 +231,7 @@
   @argument[right]{an integer with the width of the right border}
   @argument[top]{an integer with the width of the top border}
   @argument[bottom]{an integer with the width of the bottom border}
-  @return{A newly allocated @class{gtk:border} instance.}
+  @return{The newly allocated @class{gtk:border} instance.}
   @begin{short}
     Allocates a new @class{gtk:border} instance and initializes its elements.
   @end{short}
@@ -250,7 +250,7 @@
  #+liber-documentation
  "@version{2023-8-30}
   @argument[border]{a @class{gtk:border} instance}
-  @return{A copy of @arg{border}.}
+  @return{The @class{gtk:border} instance with the copy of @arg{border}.}
   @short{Copies a @class{gtk:border} instance.}
   @see-class{gtk:border}"
   (copy-border border))
@@ -1023,7 +1023,7 @@ GtkEntry.entry { ... @}
   @argument[context]{a @class{gtk:style-context} object}
   @argument[flags]{a @symbol{gtk:style-context-print-flags} value that
     determine what to print}
-  @return{A string representing the style context.}
+  @return{The string representing the style context.}
   @begin{short}
     Converts the style context into a string representation.
   @end{short}

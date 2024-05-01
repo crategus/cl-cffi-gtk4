@@ -311,7 +311,7 @@ lambda (expander)   :action
       (documentation 'expander-label-widget 'function)
  "@version{2024-4-17}
   @syntax{(gtk:expander-label-widget object) => widget}
-  @syntax{(setf gtk:expander-label-widget object) widget)}
+  @syntax{(setf (gtk:expander-label-widget object) widget)}
   @argument[object]{a @class{gtk:expander} widget}
   @argument[widget]{a @class{gtk:widget} label widget}
   @begin{short}

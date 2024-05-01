@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -192,7 +192,7 @@ lambda (area width height)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- drawing-area-content-height --------------------------------------------
+;;; --- gtk:drawing-area-content-height ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "content-height"
@@ -207,8 +207,8 @@ lambda (area width height)    :run-last
       "Accessor"
       (documentation 'drawing-area-content-height 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:drawing-area-content-height object) => height}
-  @syntax[]{(setf gtk:drawing-area-content-height object) height)}
+  @syntax{(gtk:drawing-area-content-height object) => height}
+  @syntax{(setf (gtk:drawing-area-content-height object) height)}
   @argument[object]{a @class{gtk:drawing-area} widget}
   @argument[height]{an integer with the content height}
   @begin{short}
@@ -229,7 +229,7 @@ lambda (area width height)    :run-last
   @see-function{gtk:drawing-area-content-width}
   @see-function{gtk:widget-valign}")
 
-;;; --- drawing-area-content-width ---------------------------------------------
+;;; --- gtk:drawing-area-content-width -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "content-width"
@@ -244,8 +244,8 @@ lambda (area width height)    :run-last
       "Accessor"
       (documentation 'drawing-area-content-width 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:drawing-area-content-width object) => width}
-  @syntax[]{(setf gtk:drawing-area-content-width object) width)}
+  @syntax{(gtk:drawing-area-content-width object) => width}
+  @syntax{(setf (gtk:drawing-area-content-width object) width)}
   @argument[object]{a @class{gtk:drawing-area} widget}
   @argument[width]{an integer with the content height}
   @begin{short}
@@ -275,7 +275,7 @@ lambda (area width height)    :run-last
 (defun drawing-area-new ()
  #+liber-documentation
  "@version{#2023-9-18}
-  @return{A new @class{gtk:drawing-area} widget.}
+  @return{The new @class{gtk:drawing-area} widget.}
   @short{Creates a new drawing area.}
   @see-class{gtk:drawing-area}"
   (make-instance 'drawing-area))

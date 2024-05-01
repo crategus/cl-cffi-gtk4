@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -35,7 +35,6 @@
 ;;;
 ;;;     GtkDialog
 ;;;     GtkDialogFlags
-;;;     GtkResponseType                          -> gtk4.enumerations.lisp
 ;;;
 ;;; Functions
 ;;;
@@ -104,25 +103,29 @@
 (setf (liber:alias-for-symbol 'dialog-flags)
       "GFlags"
       (liber:symbol-documentation 'dialog-flags)
- "@version{2023-8-21}
-  @begin{short}
-    Flags used to influence the @class{gtk:dialog} widget construction.
-  @end{short}
-  @begin{pre}
+ "@version{2024-5-1}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GtkDialogFlags\" dialog-flags
   (:export t
    :type-initializer \"gtk_dialog_flags_get_type\")
   (:modal               #.(ash 1 0))
   (:destroy-with-parent #.(ash 1 1))
   (:use-header-bar      #.(ash 1 2)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:modal]{Make the constructed dialog modal.}
-    @entry[:destroy-with-parent]{Destroy the dialog when its parent is
-      destroyed.}
-    @entry[:use-header-bar]{Create the dialog with actions in the header bar
-      instead of an action area.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:modal]{Make the constructed dialog modal.}
+      @entry[:destroy-with-parent]{Destroy the dialog when its parent is
+        destroyed.}
+      @entry[:use-header-bar]{Create the dialog with actions in the header bar
+        instead of an action area.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Flags used to influence the @class{gtk:dialog} widget construction.
+  @end{short}
   @see-class{gtk:dialog}")
 
 ;;; ----------------------------------------------------------------------------
@@ -182,7 +185,7 @@
 #+(and gtk-4-10 gtk-warn-deprecated)
 (defmethod initialize-instance :after ((obj dialog) &key)
   (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:DIALOG is deprecated since 4.10.")))
+    (warn "GTK:DIALOG is deprecated since 4.10")))
 
 #+liber-documentation
 (setf (documentation 'dialog 'type)
@@ -212,13 +215,13 @@
   Close button to the window decorations. If any of the action buttons use the
   @code{:close} or @code{:canel} response ID, the close button is omitted.
 
-  Clicking a button that was added as an action widget will emit the\"response\"
-  signal with a response ID that you specified. GTK will never assign a meaning
-  to positive response IDs. These are entirely user-defined. But for
-  convenience, you can use the response IDs in the @symbol{gtk:response-type}
-  enumeration, these all have values less than zero. If a dialog receives a
-  delete event, the @code{\"response\"} signal will be emitted with the
-  @code{:delete-event} response ID.
+  Clicking a button that was added as an action widget will emit the
+  @code{\"response\"} signal with a response ID that you specified. GTK will
+  never assign a meaning to positive response IDs. These are entirely
+  user-defined. But for convenience, you can use the response IDs in the
+  @symbol{gtk:response-type} enumeration, these all have values less than zero.
+  If a dialog receives a delete event, the @code{\"response\"} signal will be
+  emitted with the @code{:delete-event} response ID.
 
   Dialogs are created with a call to the @fun{gtk:dialog-new} function or the
   @fun{gtk:dialog-new-with-buttons} function. The latter is recommended. It
@@ -235,21 +238,25 @@
   @begin[Examples]{dictionary}
     Simple @class{gtk:dialog} widget usage:
     @begin{pre}
-;; Function to open a dialog displaying the message provided.
+;; Function to open a dialog to display the message provided.
 (defun create-quick-message (parent msg)
   (let ((dialog (gtk:dialog-new-with-buttons \"Message\"
                                              parent
-                                             '(:destroy-with-parent)
+                                             '(:destroy-with-parent :modal)
                                              \"OK\"
-                                             :none)))
+                                             :ok)))
     (g:signal-connect dialog \"response\"
                       (lambda (widget response)
                         (declare (ignore response))
                         (gtk:window-destroy widget)))
     (gtk:box-append (gtk:dialog-content-area dialog)
                     (make-instance 'gtk:label
-                                   :label msg))
-    (gtk:widget-show dialog)))
+                                   :label msg
+                                   :margin-top 12
+                                   :margin-bottom 12
+                                   :margin-start 12
+                                   :margin-end 12))
+    (gtk:window-present dialog)))
     @end{pre}
   @end{dictionary}
   @begin[GtkDialog as GtkBuildable]{dictionary}
@@ -322,12 +329,12 @@ lambda (dialog response)    :run-last
       @begin[code]{table}
         @entry[dialog]{The @class{gtk:dialog} widget on which the signal is
           emitted.}
-        @entry[response]{An integer with the response ID.}
+        @entry[response]{The integer with the response ID.}
       @end{table}
   @end{dictionary}
-  @see-slot{gtk:dialog-use-header-bar}
   @see-constructor{gtk:dialog-new}
   @see-constructor{gtk:dialog-new-with-buttons}
+  @see-slot{gtk:dialog-use-header-bar}
   @see-class{gtk:message-dialog}
   @see-class{gtk:window}")
 
@@ -335,7 +342,7 @@ lambda (dialog response)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- dialog-use-header-bar --------------------------------------------------
+;;; --- gtk:dialog-use-header-bar ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-header-bar" 'dialog) t)
@@ -351,9 +358,9 @@ lambda (dialog response)    :run-last
 (setf (liber:alias-for-function 'dialog-use-header-bar)
       "Accessor"
       (documentation 'dialog-use-header-bar 'function)
- "@version{2023-8-21}
-  @syntax[]{(gtk:dialog-use-header-bar object) => setting}
-  @syntax[]{(setf (gtk:dialog-use-header-bar object) setting)}
+ "@version{2024-5-1}
+  @syntax{(gtk:dialog-use-header-bar object) => setting}
+  @syntax{(setf (gtk:dialog-use-header-bar object) setting)}
   @argument[object]{a @class{gtk:dialog} widget}
   @argument[setting]{@em{true} if the dialog uses a header bar}
   @begin{short}
@@ -416,7 +423,7 @@ lambda (dialog response)    :run-last
 
 (defun dialog-new-with-buttons (title parent flags &rest buttons)
  #+liber-documentation
- "@version{2023-8-22}
+ "@version{2024-5-1}
   @argument[title]{a string with the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent of the dialog,
     or @code{nil}}
@@ -424,7 +431,7 @@ lambda (dialog response)    :run-last
   @argument[buttons]{pairs with a button text and the response ID for the
     button, which is a positive integer or a value of the
     @symbol{gtk:response-type} enumeration}
-  @return{A new @class{gtk:dialog} widget.}
+  @return{The new @class{gtk:dialog} widget.}
   @begin{short}
     Creates a new dialog with title @arg{title}, or @code{nil} for the default
     title, see the @fun{gtk:window-title} function, and transient parent
@@ -551,7 +558,7 @@ lambda (dialog response)    :run-last
 
 (defun dialog-add-buttons (dialog &rest buttons)
  #+liber-documentation
- "@version{#2023-8-22}
+ "@version{#2024-5-1}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[buttons]{pairs with a button text and the response ID, which is a
     positive integer or a value of the @symbol{gtk:response-type} enumeration}
@@ -573,10 +580,8 @@ lambda (dialog response)    :run-last
   @see-symbol{gtk:response-type}
   @see-function{gtk:dialog-add-button}
   @see-function{gtk:dialog-add-action-widget}"
-  (let ((n (/ (length buttons) 2)))
-    (assert (eql n (truncate (length buttons) 2)))
-    (dotimes (i n)
-      (dialog-add-button dialog (pop buttons) (pop buttons)))))
+  (iter (for (text id) on buttons by #'cddr)
+        (dialog-add-button dialog text id)))
 
 (export 'dialog-add-buttons)
 
@@ -675,7 +680,7 @@ lambda (dialog response)    :run-last
 (export 'dialog-set-response-sensitive)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_dialog_get_response_for_widget -> dialog-response-for-widget
+;;; gtk_dialog_get_response_for_widget
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_dialog_get_response_for_widget" dialog-response-for-widget)
@@ -706,15 +711,15 @@ lambda (dialog response)    :run-last
 (export 'dialog-response-for-widget)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_dialog_get_widget_for_response -> dialog-widget-for-response
+;;; gtk_dialog_get_widget_for_response
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_dialog_get_widget_for_response" dialog-widget-for-response)
     (g:object widget)
  #+liber-documentation
- "@version{#2023-8-22}
+ "@version{#2024-5-1}
   @argument[dialog]{a @class{gtk:dialog} widget}
-  @argument[response]{the response ID, which is a positive integer or a value
+  @argument[response]{a response ID, which is a positive integer or a value
     of the @symbol{gtk:response-type} enumeration}
   @return{The @class{gtk:widget} button that uses the given @arg{response}
     value, or @code{nil}.}
@@ -737,7 +742,7 @@ lambda (dialog response)    :run-last
 (export 'dialog-widget-for-response)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_dialog_get_content_area -> dialog-content-area
+;;; gtk_dialog_get_content_area
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_dialog_get_content_area" dialog-content-area)
@@ -761,7 +766,7 @@ lambda (dialog response)    :run-last
 (export 'dialog-content-area)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_dialog_get_header_bar -> dialog-header-bar
+;;; gtk_dialog_get_header_bar
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_dialog_get_header_bar" dialog-header-bar) (g:object widget)

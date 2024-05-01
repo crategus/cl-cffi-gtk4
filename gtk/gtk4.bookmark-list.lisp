@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -127,7 +127,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- bookmark-list-attributes -----------------------------------------------
+;;; --- gtk:bookmark-list-attributes -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "attributes" 'bookmark-list) t)
@@ -140,8 +140,8 @@
       "Accessor"
       (documentation 'bookmark-list-attributes 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:bookmark-list-attributes object) => attributes}
-  @syntax[]{(setf gtk:bookmark-list-attributes object) attributes)}
+  @syntax{(gtk:bookmark-list-attributes object) => attributes}
+  @syntax{(setf (gtk:bookmark-list-attributes object) attributes)}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[attributes]{a string with the attributes}
   @begin{short}
@@ -157,7 +157,7 @@
   @see-class{gtk:bookmark-list}
   @see-class{g:file-info}")
 
-;;; --- bookmark-list-filename -------------------------------------------------
+;;; --- gtk:bookmark-list-filename ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "filename" 'bookmark-list) t)
@@ -171,7 +171,7 @@
       "Accessor"
       (documentation 'bookmark-list-filename 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:bookmark-list-filename object) => filename}
+  @syntax{(gtk:bookmark-list-filename object) => filename}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[filename]{a string with the filename of the @file{.xbel} file}
   @begin{short}
@@ -182,7 +182,7 @@
   bookmark file that this list is loading.
   @see-class{gtk:bookmark-list}")
 
-;;; --- bookmark-list-io-priortiy ----------------------------------------------
+;;; --- gtk:bookmark-list-io-priortiy ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "io-priority" 'bookmark-list) t)
@@ -196,8 +196,8 @@
       "Accessor"
       (documentation 'bookmark-list-io-priority 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:bookmark-list-io-priority object) => priority}
-  @syntax[]{(setf gtk:bookmark-list-io-priority object) priority)}
+  @syntax{(gtk:bookmark-list-io-priority object) => priority}
+  @syntax{(setf (gtk:bookmark-list-io-priority object) priority)}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[priority]{an integer with the IO priority to use}
   @begin{short}
@@ -210,7 +210,7 @@
   @variable{g:+priority-default+}.
   @see-class{gtk:bookmark-list}")
 
-;;; --- bookmark-list-item-type ------------------------------------------------
+;;; --- gtk:bookmark-list-item-type --------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'bookmark-list) t)
@@ -229,7 +229,7 @@
       "Accessor"
       (documentation 'bookmark-list-item-type 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:bookmark-list-item-type object) => gtype}
+  @syntax{(gtk:bookmark-list-item-type object) => gtype}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -246,7 +246,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- bookmark-list-loading --------------------------------------------------
+;;; --- gtk:bookmark-list-loading ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "loading" 'bookmark-list) t)
@@ -259,7 +259,7 @@
       "Accessor"
       (documentation 'bookmark-list-loading 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:bookmark-list-loading object) => loading}
+  @syntax{(gtk:bookmark-list-loading object) => loading}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[loading]{@em{true} if files are being loaded}
   @begin{short}
@@ -268,7 +268,7 @@
   @end{short}
   @see-class{gtk:bookmark-list}")
 
-;;; --- bookmark-list-n-items --------------------------------------------------
+;;; --- gtk:bookmark-list-n-items ----------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'bookmark-list) t)
@@ -281,7 +281,7 @@
       "Accessor"
       (documentation 'bookmark-list-n-items 'function)
  "@version{#2023-9-7}
-  @syntax[]{(gtk:bookmark-list-n-items object) => n-items}
+  @syntax{(gtk:bookmark-list-n-items object) => n-items}
   @argument[object]{a @class{gtk:bookmark-list} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -293,7 +293,7 @@
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_bookmark_list_new ()
+;;; gtk_bookmark_list_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline bookmark-list-new))
@@ -303,7 +303,7 @@
  "@version{#2023-9-21}
   @argument[filename]{a string with the bookmark file to load}
   @argument[attributes]{a string with the attributes to query}
-  @return{A new @class{gtk:bookmark-list} object.}
+  @return{The new @class{gtk:bookmark-list} object.}
   @begin{short}
     Creates a new bookmark list with the given @arg{attributes}.
   @end{short}
@@ -315,7 +315,7 @@
 (export 'bookmark-list-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_bookmark_list_is_loading ()
+;;; gtk_bookmark_list_is_loading
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_bookmark_list_is_loading" bookmark-list-is-loading) :boolean

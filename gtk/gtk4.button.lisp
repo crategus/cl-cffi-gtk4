@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -209,8 +209,8 @@ lambda (button)    :action
       "Accessor"
       (documentation 'button-can-shrink 'function)
  "@version{2023-9-2}
-  @syntax[]{(gtk:button-can-shrink object) => setting}
-  @syntax[]{(setf (gtk:button-can-shrink object) setting)}
+  @syntax{(gtk:button-can-shrink object) => setting}
+  @syntax{(setf (gtk:button-can-shrink object) setting)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[setting]{a boolean whether the button can shrink}
   @begin{short}
@@ -240,8 +240,8 @@ lambda (button)    :action
       "Accessor"
       (documentation 'button-child 'function)
  "@version{2023-9-2}
-  @syntax[]{(gtk:button-child object) => child}
-  @syntax[]{(setf (gtk:button-child object) child)}
+  @syntax{(gtk:button-child object) => child}
+  @syntax{(setf (gtk:button-child object) child)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -292,8 +292,8 @@ lambda (button)    :action
       "Accessor"
       (documentation 'button-has-frame 'function)
  "@version{2023-9-2}
-  @syntax[]{(gtk:button-has-frame object) => setting}
-  @syntax[]{(setf (gtk:button-has-frame object) setting)}
+  @syntax{(gtk:button-has-frame object) => setting}
+  @syntax{(setf (gtk:button-has-frame object) setting)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[setting]{a boolean whether the button has a frame}
   @begin{short}
@@ -319,8 +319,8 @@ lambda (button)    :action
       "Accessor"
       (documentation 'button-icon-name 'function)
  "@version{2023-9-2}
-  @syntax[]{(gtk:button-icon-name object) => name}
-  @syntax[]{(setf (gtk:button-icon-name object) name)}
+  @syntax{(gtk:button-icon-name object) => name}
+  @syntax{(setf (gtk:button-icon-name object) name)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[name]{a string with an icon name, or @code{nil}}
   @begin{short}
@@ -351,8 +351,8 @@ lambda (button)    :action
       "Accessor"
       (documentation 'button-label 'function)
  "@version{2023-9-2}
-  @syntax[]{(gtk:button-label object) => label}
-  @syntax[]{(setf (gtk:button-label object) label)}
+  @syntax{(gtk:button-label object) => label}
+  @syntax{(setf (gtk:button-label object) label)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[label]{a string with the text of the label}
   @begin{short}
@@ -381,8 +381,8 @@ lambda (button)    :action
       "Accessor"
       (documentation 'button-use-underline 'function)
  "@version{2023-12-16}
-  @syntax[]{(gtk:button-use-underline object) => setting}
-  @syntax[]{(setf (gtk:button-use-underline object) setting)}
+  @syntax{(gtk:button-use-underline object) => setting}
+  @syntax{(setf (gtk:button-use-underline object) setting)}
   @argument[object]{a @class{gtk:button} widget}
   @argument[setting]{@em{true} if underlines in the text indicate mnemonics}
   @begin{short}
@@ -449,7 +449,7 @@ lambda (button)    :action
  "@version{2023-9-2}
   @argument[label]{a string with the text of the button, with an underscore in
     front of the mnemonic character}
-  @return{A new @class{gtk:button} widget.}
+  @return{The new @class{gtk:button} widget.}
   @begin{short}
     Creates a new button widget containing a label with a mnemonic.
   @end{short}
@@ -475,7 +475,7 @@ lambda (button)    :action
  #+liber-documentation
  "@version{2023-9-2}
   @argument[name]{a string with the icon name}
-  @return{A new @class{gtk:button} widget displaying the themed icon.}
+  @return{The new @class{gtk:button} widget displaying the themed icon.}
   @begin{short}
     Creates a new button containing an icon from the current icon theme.
   @end{short}

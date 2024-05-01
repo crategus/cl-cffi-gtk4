@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -131,7 +131,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkPrintStatus
+;;; GtkPrintStatus
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkPrintStatus" print-status
@@ -189,7 +189,7 @@
   @see-class{gtk:print-operation}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkPrintOperationAction
+;;; GtkPrintOperationAction
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkPrintOperationAction" print-operation-action
@@ -231,7 +231,7 @@
   @see-function{gtk:print-operation-run}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkPrintOperationResult
+;;; GtkPrintOperationResult
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkPrintOperationResult" print-operation-result
@@ -300,7 +300,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkPrintOperation
+;;; GtkPrintOperation
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkPrintOperation" print-operation
@@ -657,7 +657,7 @@ lambda (operation widget setup settings)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- print-operation-allow-async --------------------------------------------
+;;; --- gtk:print-operation-allow-async ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "allow-async"
@@ -676,15 +676,15 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-allow-async 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-allow-async object) => alloc-async}
-  @syntax[]{(setf (gtk:print-operation-allow-aysnc object) alloc-async)}
+  @syntax{(gtk:print-operation-allow-async object) => alloc-async}
+  @syntax{(setf (gtk:print-operation-allow-aysnc object) alloc-async)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[allow-async]{@em{true} to allow asynchronous operation}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{allow-async} slot of the
     @class{gtk:print-operation} class.
   @end{short}
-  The @fun{(setf gtk:print-operation-allow-async)} function sets whether the
+  The @setf{gtk:print-operation-allow-async} function sets whether the
   @fun{gtk:print-operation-run} function may return before the print operation
   is completed.
 
@@ -692,7 +692,7 @@ lambda (operation widget setup settings)    :run-last
   @see-class{gtk:print-operation}
   @see-function{gtk:print-operation-run}")
 
-;;; --- print-operation-current-page -------------------------------------------
+;;; --- gtk:print-operation-current-page ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "current-page"
@@ -710,21 +710,21 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-current-page 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-current-page object) => current-page}
-  @syntax[]{(setf (gtk:print-operation-current-page object) current-page)}
+  @syntax{(gtk:print-operation-current-page object) => current-page}
+  @syntax{(setf (gtk:print-operation-current-page object) current-page)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[current-page]{the current page, 0-based}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{current-page} slot of the
     @class{gtk:print-operation} class.
   @end{short}
-  The @fun{(setf gtk:print-operation-current-page)} function sets the current
-  page. If this is called before the @fun{gtk:print-operation-run} function, the
-  user will be able to select to print only the current page. Note that this
-  only makes sense for pre-paginated documents.
+  The @setf{gtk:print-operation-current-page} function sets the current page.
+  If this is called before the @fun{gtk:print-operation-run} function, the user
+  will be able to select to print only the current page. Note that this only
+  makes sense for pre-paginated documents.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-custom-tab-label ---------------------------------------
+;;; --- gtk:print-operation-custom-tab-label -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "custom-tab-label"
@@ -741,8 +741,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-custom-tab-label 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-tab-label object) => label}
-  @syntax[]{(setf (gtk:print-operation-tab-label object) label)}
+  @syntax{(gtk:print-operation-tab-label object) => label}
+  @syntax{(setf (gtk:print-operation-tab-label object) label)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[label]{a string with the label to use, or @code{nil} to use the
     default label}
@@ -750,11 +750,11 @@ lambda (operation widget setup settings)    :run-last
     Accessor of the @slot[gtk:print-operation]{custom-tab-label} slot of the
     @class{gtk:print-operation} class.
   @end{short}
-  The @fun{(setf gtk:print-operation-custom-tab-label)} function sets the label
-  for the tab holding custom widgets.
+  The @setf{gtk:print-operation-custom-tab-label} function sets the label for
+  the tab holding custom widgets.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-default-page-setup -------------------------------------
+;;; --- gtk:print-operation-default-page-setup ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-page-setup"
@@ -770,8 +770,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-default-page-setup 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-default-page-setup object) => page-setup}
-  @syntax[]{(setf (gtk:print-operation-default-page-setup object) page-setup)}
+  @syntax{(gtk:print-operation-default-page-setup object) => page-setup}
+  @syntax{(setf (gtk:print-operation-default-page-setup object) page-setup)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[page-setup]{a @class{gtk:page-setup}, or @code{nil}}
   @begin{short}
@@ -787,7 +787,7 @@ lambda (operation widget setup settings)    :run-last
   @code{\"request-page-setup\"} signal.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-embed-page-setup ---------------------------------------
+;;; --- gtk:print-operation-embed-page-setup -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "embed-page-setup"
@@ -803,8 +803,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-embed-page-setup 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-embed-page-setup object) => embed}
-  @syntax[]{(setf (gtk:print-operation-embed-page-setup object) embed)}
+  @syntax{(gtk:print-operation-embed-page-setup object) => embed}
+  @syntax{(setf (gtk:print-operation-embed-page-setup object) embed)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[embed]{@em{true} to embed page setup selection in the print dialog}
   @begin{short}
@@ -820,7 +820,7 @@ lambda (operation widget setup settings)    :run-last
   @class{gtk:print-operation} object.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-export-filename ----------------------------------------
+;;; --- gtk:print-operation-export-filename ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "export-filename"
@@ -839,8 +839,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-export-filename 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-export-filename object) => filename}
-  @syntax[]{(setf (gtk:print-operation-export-filename object) filename)}
+  @syntax{(gtk:print-operation-export-filename object) => filename}
+  @syntax{(setf (gtk:print-operation-export-filename object) filename)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[filename]{a string with the filename for the exported file}
   @begin{short}
@@ -859,7 +859,7 @@ lambda (operation widget setup settings)    :run-last
   dialog.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-has-selection ------------------------------------------
+;;; --- gtk:print-operation-has-selection --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-selection"
@@ -875,8 +875,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-has-selection 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-has-selection object object) => has-selection}
-  @syntax[]{(setf (gtk:print-operation-has-selection object) has-selection)}
+  @syntax{(gtk:print-operation-has-selection object object) => has-selection}
+  @syntax{(setf (gtk:print-operation-has-selection object) has-selection)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[has-selection]{@em{true} indicates that a selection exists}
   @begin{short}
@@ -892,7 +892,7 @@ lambda (operation widget setup settings)    :run-last
   @code{\"begin-print\"} signal.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-job-name -----------------------------------------------
+;;; --- gtk:print-operation-job-name -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "job-name" 'print-operation) t)
@@ -907,16 +907,16 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-job-name 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-job-name object) => job-name}
-  @syntax[]{(setf (gtk:print-operation-job-name object) job-name)}
+  @syntax{(gtk:print-operation-job-name object) => job-name}
+  @syntax{(setf (gtk:print-operation-job-name object) job-name)}
   @argument[object]{a @class{gtk:print-operation-job-name} object}
   @argument[job-name]{a string that identifies the print job}
   @begin{short}
     Accessor of the @slot[gtk:print-operation]{job-name} slot of the
     @class{gtk:print-operation} class.
   @end{short}
-  The @fun{(setf gtk:print-operation-job-name)} function sets the name of the
-  print job.
+  The @set{gtk:print-operation-job-name} function sets the name of the print
+  job.
 
   The name is used to identify the job, e.g. in monitoring applications like
   eggcups.
@@ -944,8 +944,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-n-pages 'function)
  "@version{2024-2-16}
-  @syntax[]{(gtk:print-operation-n-pages object) => npages}
-  @syntax[]{(setf (gtk:print-operation-n-pages object) npages)}
+  @syntax{(gtk:print-operation-n-pages object) => npages}
+  @syntax{(setf (gtk:print-operation-n-pages object) npages)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[npages]{an integer with the number of pages}
   @begin{short}
@@ -985,7 +985,7 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-n-pages-to-print 'function)
  "@version{2024-2-16}
-  @syntax[]{(gtk:print-operation-n-pages-to-print object) => npages}
+  @syntax{(gtk:print-operation-n-pages-to-print object) => npages}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[npages]{an integer with the number of pages to print}
   @begin{short}
@@ -1005,7 +1005,7 @@ lambda (operation widget setup settings)    :run-last
   @see-class{gtk:print-operation}
   @see-function{gtk:print-operation-n-pages}")
 
-;;; --- print-operation-print-settings -----------------------------------------
+;;; --- gtk:print-operation-print-settings -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "print-settings"
@@ -1021,8 +1021,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-print-settings 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-print-settings object) => settings}
-  @syntax[]{(setf (gtk:print-operation-print-settings object) settings)}
+  @syntax{(gtk:print-operation-print-settings object) => settings}
+  @syntax{(setf (gtk:print-operation-print-settings object) settings)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[settings]{a @class{gtk:print-settings} object}
   @begin{short}
@@ -1040,7 +1040,7 @@ lambda (operation widget setup settings)    :run-last
   @see-class{gtk:print-operation}
   @see-function{gtk:print-operation-run}")
 
-;;; --- print-operation-show-progress ------------------------------------------
+;;; --- gtk:print-operation-show-progress --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-progress"
@@ -1054,8 +1054,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-show-progress 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-show-progress object) => show-progress}
-  @syntax[]{(setf (gtk:print-operation-show-progress object) show-progress)}
+  @syntax{(gtk:print-operation-show-progress object) => show-progress}
+  @syntax{(setf (gtk:print-operation-show-progress object) show-progress)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[show-progress]{@em{true} to show a progress dialog}
   @begin{short}
@@ -1066,7 +1066,7 @@ lambda (operation widget setup settings)    :run-last
   dialog during the print operation.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-status -------------------------------------------------
+;;; --- gtk:print-operation-status ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "status" 'print-operation) t)
@@ -1079,7 +1079,7 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-status 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-status object) => status}
+  @syntax{(gtk:print-operation-status object) => status}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[status]{the status of type @symbol{gtk:print-status} of the print
     operation}
@@ -1094,7 +1094,7 @@ lambda (operation widget setup settings)    :run-last
   @see-class{gtk:print-operation}
   @see-function{gtk:print-operation-status-string}")
 
-;;; --- print-operation-status-string ------------------------------------------
+;;; --- gtk:print-operation-status-string --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "status-string"
@@ -1111,7 +1111,7 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-status-string 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-status-string object) => status-string}
+  @syntax{(gtk:print-operation-status-string object) => status-string}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[status-string]{a string representation of the status of the print
     operation}
@@ -1130,7 +1130,7 @@ lambda (operation widget setup settings)    :run-last
   @see-class{gtk:print-operation}
   @see-function{gtk:print-operation-status}")
 
-;;; --- print-operation-support-selection --------------------------------------
+;;; --- gtk:print-operation-support-selection ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "support-selection"
@@ -1146,8 +1146,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-support-selection 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-status-support-selection object) => setting}
-  @syntax[]{(setf (gtk:print-operation-support-selection object) setting)}
+  @syntax{(gtk:print-operation-status-support-selection object) => setting}
+  @syntax{(setf (gtk:print-operation-support-selection object) setting)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[setting]{@em{true} to support selection}
   @begin{short}
@@ -1160,7 +1160,7 @@ lambda (operation widget setup settings)    :run-last
   is supported by the print operation.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-track-print-status -------------------------------------
+;;; --- gtk:print-operation-track-print-status ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "track-print-status"
@@ -1179,8 +1179,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-track-print-status 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-track-print-status object) => track-status}
-  @syntax[]{(setf (gtk:print-operation-track-print-status object) track-status)}
+  @syntax{(gtk:print-operation-track-print-status object) => track-status}
+  @syntax{(setf (gtk:print-operation-track-print-status object) track-status)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[track-status]{@em{true} to track status after printing}
   @begin{short}
@@ -1196,7 +1196,7 @@ lambda (operation widget setup settings)    :run-last
   not be enabled unless needed.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-unit ---------------------------------------------------
+;;; --- gtk:print-operation-unit -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "unit" 'print-operation) t)
@@ -1211,8 +1211,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-unit 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-unit object) => unit}
-  @syntax[]{(setf (gtk:print-operation-unit object) unit)}
+  @syntax{(gtk:print-operation-unit object) => unit}
+  @syntax{(setf (gtk:print-operation-unit object) unit)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[unit]{the unit to use}
   @begin{short}
@@ -1225,7 +1225,7 @@ lambda (operation widget setup settings)    :run-last
   @symbol{gtk:unit} enumeration.
   @see-class{gtk:print-operation}")
 
-;;; --- print-operation-use-full-page ------------------------------------------
+;;; --- gtk:print-operation-use-full-page --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-full-page"
@@ -1243,8 +1243,8 @@ lambda (operation widget setup settings)    :run-last
       "Accessor"
       (documentation 'print-operation-use-full-page 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:print-operation-use-full-page object) => full-page}
-  @syntax[]{(setf (gtk:print-operation-use-full-page object) full-page)}
+  @syntax{(gtk:print-operation-use-full-page object) => full-page}
+  @syntax{(setf (gtk:print-operation-use-full-page object) full-page)}
   @argument[object]{a @class{gtk:print-operation} object}
   @argument[full-page]{@em{true} to set up the @class{gtk:print-context} object
     for the full page}
@@ -1261,7 +1261,7 @@ lambda (operation widget setup settings)    :run-last
   @see-class{gtk:print-operation}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_operation_new ()
+;;; gtk_print_operation_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline print-operation-new))
@@ -1269,7 +1269,7 @@ lambda (operation widget setup settings)    :run-last
 (defun print-operation-new ()
  #+liber-documentation
  "@version{2023-8-28}
-  @return{A new @class{gtk:print-operation} object.}
+  @return{The new @class{gtk:print-operation} object.}
   @begin{short}
     Creates a new @class{gtk:print-operation} object.
   @end{short}
@@ -1298,7 +1298,7 @@ lambda (operation widget setup settings)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_operation_run ()
+;;; gtk_print_operation_run
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_operation_run" %print-operation-run)
@@ -1373,7 +1373,7 @@ lambda (operation widget setup settings)    :run-last
 (export 'print-operation-run)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_operation_cancel ()
+;;; gtk_print_operation_cancel
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_operation_cancel" print-operation-cancel) :void
@@ -1392,7 +1392,7 @@ lambda (operation widget setup settings)    :run-last
 (export 'print-operation-cancel)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_operation_draw_page_finish ()
+;;; gtk_print_operation_draw_page_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_operation_draw_page_finish"
@@ -1414,7 +1414,7 @@ lambda (operation widget setup settings)    :run-last
 (export 'print-operation-draw-page-finish)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_operation_set_defer_drawing ()
+;;; gtk_print_operation_set_defer_drawing
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_operation_set_defer_drawing"
@@ -1437,7 +1437,7 @@ lambda (operation widget setup settings)    :run-last
 (export 'print-operation-set-defer-drawing)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_operation_is_finished ()
+;;; gtk_print_operation_is_finished
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_operation_is_finished" print-operation-is-finished)
@@ -1462,7 +1462,7 @@ lambda (operation widget setup settings)    :run-last
 (export 'print-operation-is-finished)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_run_page_setup_dialog ()
+;;; gtk_print_run_page_setup_dialog
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_run_page_setup_dialog" print-run-page-setup-dialog)
@@ -1472,7 +1472,7 @@ lambda (operation widget setup settings)    :run-last
   @argument[parent]{transient parent}
   @argument[page-setup]{an existing @class{gtk:page-setup} object}
   @argument[settings]{a @class{gtk:print-settings} object}
-  @return{A new @class{gtk:page-setup} object.}
+  @return{The new @class{gtk:page-setup} object.}
   @begin{short}
     Runs a page setup dialog, letting the user modify the values from
     @arg{page-setup}.
@@ -1494,7 +1494,7 @@ lambda (operation widget setup settings)    :run-last
 (export 'print-run-page-setup-dialog)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkPageSetupDoneFunc ()
+;;; GtkPageSetupDoneFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback page-setup-done-func :void
@@ -1525,7 +1525,7 @@ lambda (pagesetup)
 (export 'page-setup-done-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_print_run_page_setup_dialog_async ()
+;;; gtk_print_run_page_setup_dialog_async
 ;;; ----------------------------------------------------------------------------
 
 ;; FIXME: This function does not work!?

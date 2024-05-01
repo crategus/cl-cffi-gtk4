@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -78,7 +78,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkShortcutActionFlags
+;;; GtkShortcutActionFlags
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-flags "GtkShortcutActionFlags" shortcut-action-flags
@@ -256,7 +256,7 @@
   @see-constructor{gtk:signal-action-new}
   @see-class{gtk:shortcut-action}")
 
-;;; --- signal-action-signal-name ------------------------------------------
+;;; --- gtk:signal-action-signal-name ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "signal-name"
@@ -270,8 +270,8 @@
       "Accessor"
       (documentation 'signal-action-signal-name 'function)
  "@version{#2022-8-25}
-  @syntax[]{(gtk:signal-action-signal-name object) => name)}
-  @syntax[]{(setf (gtk:signal-action-signal-name object) name)}
+  @syntax{(gtk:signal-action-signal-name object) => name)}
+  @syntax{(setf (gtk:signal-action-signal-name object) name)}
   @argument[object]{a @class{gtk:signal-action} object}
   @argument[name]{a string with the name of the signal to emit}
   @begin{short}
@@ -305,7 +305,7 @@
   @see-constructor{gtk:named-action-new}
   @see-class{gtk:shortcut-action}")
 
-;;; --- named-action-action-name -------------------------------------------
+;;; --- gtk:named-action-action-name -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "action-name"
@@ -319,8 +319,8 @@
       "Accessor"
       (documentation 'named-action-action-name 'function)
  "@version{#2022-8-25}
-  @syntax[]{(gtk:named-action-action-name object) => name)}
-  @syntax[]{(setf (gtk:named-action-action-name object) name)}
+  @syntax{(gtk:named-action-action-name object) => name)}
+  @syntax{(setf (gtk:named-action-action-name object) name)}
   @argument[object]{a @class{gtk:named-action} object}
   @argument[name]{a string with the name of the actopm that will be activated}
   @begin{short}
@@ -332,7 +332,7 @@
   @see-class{gtk:named-action}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_action_to_string ()
+;;; gtk_shortcut_action_to_string
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_action_to_string" shortcut-action-to-string)
@@ -340,7 +340,7 @@
  #+liber-documentation
  "@version{#2022-8-26}
   @argument[shortcut]{a @class{gtk:shortcut-action} object}
-  @return{A human-readable string.}
+  @return{The human-readable string.}
   @begin{short}
     Prints the given action into a human-readable string.
   @end{short}
@@ -372,7 +372,7 @@
 ;; not needed, see the SHORTCUT-TO-STRING function
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_action_parse_string ()
+;;; gtk_shortcut_action_parse_string
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_action_parse_string" shortcut-action-parse-string)
@@ -380,7 +380,7 @@
  #+liber-documentation
  "@version{#2022-8-26}
   @argument[str]{a string to parse}
-  @return{A new @class{gtk:shortcut-action} object, or @code{nil} on error}
+  @return{The new @class{gtk:shortcut-action} object, or @code{nil} on error.}
   @begin{short}
     Tries to parse the given string into an action.
   @end{short}
@@ -399,7 +399,7 @@
 (export 'shortcut-action-parse-string)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_action_activate ()
+;;; gtk_shortcut_action_activate
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_action_activated" shortcut-action-activate)
@@ -409,8 +409,8 @@
   @argument[shortcut]{a @class{gtk:shortcut-action} object}
   @argument[flags]{a @symbol{gtk:shortcut-action-flags} value}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[args]{the @type{glib:variant} arguments to pass}
-  @return{@em{True} if the action was activaed sucessfully.}
+  @argument[args]{a @type{g:variant} arguments to pass}
+  @return{@em{True} if the action was activaed successfully.}
   @begin{short}
     Activates the action on the widget with the given @arg{args}.
   @end{short}
@@ -422,24 +422,24 @@
   activation otherwise had no effect, @em{false} will be returned.
   @see-class{gtk:shortcut-action}
   @see-class{gtk:widget}
-  @see-type{glib:variant}
+  @see-type{g:variant}
   @see-symbol{gtk:shortcut-flags}"
   (action (g:object shortcut-action))
   (flags shortcut-action-flags)
   (widget (g:object widget))
-  (args (:pointer (:struct glib:variant))))
+  (args (:pointer (:struct g:variant))))
 
 (export 'shortcut-action-activate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_nothing_action_get ()
+;;; gtk_nothing_action_get
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_nothing_action_get" nothing-action-get)
     (g:object shortcut-action)
  #+liber-documentation
  "@version{#2022-8-26}
-  @return{A @class{gtk:nothing-action} object.}
+  @return{The @class{gtk:nothing-action} object.}
   @begin{short}
     Gets the nothing action.
   @end{short}
@@ -449,12 +449,12 @@
 (export 'nothing-action-get)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkShortcutFunc ()
+;;; GtkShortcutFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback shortcut-func :boolean
     ((widget (g:object widget))
-     (args (:pointer (:struct glib:variant)))
+     (args (:pointer (:struct g:variant)))
      (data :pointer))
   (let ((fn (glib:get-stable-pointer-value data)))
     (funcall fn widget args)))
@@ -472,7 +472,7 @@ lambda (widget args)
   @end{pre}
   @begin[code]{table}
     @entry[widget]{a @class{gtk:widget} object passed to the activation}
-    @entry[args]{the @type{glib:variant} arguments passed to the activation}
+    @entry[args]{the @type{g:variant} arguments passed to the activation}
   @end{table}
   @see-class{gtk:flow-box}
   @see-class{gtk:flow-box-child}")
@@ -480,7 +480,7 @@ lambda (widget args)
 (export 'shortcut-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_callback_action_new ()
+;;; gtk_callback_action_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_callback_action_new" %callback-action-new)
@@ -493,7 +493,7 @@ lambda (widget args)
  #+liber-documentation
  "@version{#2022-8-26}
   @argument[func]{a @symbol{gtk:shortcut-func} callback function to call}
-  @return{A new @class{gtk:callback-action} object.}
+  @return{The new @class{gtk:callback-action} object.}
   @short{Create a custom action that calls the given callback when activated.}
   @see-class{gtk:callback-action}"
   (glib:with-stable-pointer (ptr func)
@@ -504,7 +504,7 @@ lambda (widget args)
 (export 'callback-action-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_mnemonic_action_get ()
+;;; gtk_mnemonic_action_get
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_mnemonic_action_get" mnemonic-action-get)
@@ -523,14 +523,14 @@ lambda (widget args)
 (export 'mnemonic-action-get)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_activate_action_get ()
+;;; gtk_activate_action_get
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_activate_action_get" activate-action-get)
     (g:object shortcut-action)
  #+liber-documentation
  "@version{#2022-8-26}
-  @return{A @class{gtk:shortcut-action} activate action.}
+  @return{The @class{gtk:shortcut-action} activate action.}
   @begin{short}
     Gets the activate action.
   @end{short}
@@ -542,7 +542,7 @@ lambda (widget args)
 (export 'activate-action-get)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_signal_action_new ()
+;;; gtk_signal_action_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline signal-action-new))
@@ -551,7 +551,7 @@ lambda (widget args)
  #+liber-documentation
  "@version{#2022-8-26}
   @argument[name]{a string with the name of the signal to emit}
-  @return{A @class{gtk:signal-action} object.}
+  @return{The @class{gtk:signal-action} object.}
   @begin{short}
     Creates an action that when activated, emits the given action signal on the
     provided widget unpacking the given args into arguments passed to the
@@ -564,7 +564,7 @@ lambda (widget args)
 (export 'signal-action-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_named_action_new ()
+;;; gtk_named_action_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline named-action-new))
@@ -573,7 +573,7 @@ lambda (widget args)
  #+liber-documentation
  "@version{#2022-8-26}
   @argument[name]{a string with the detailed name of the action}
-  @return{A new @class{gtk:named-action} object.}
+  @return{The new @class{gtk:named-action} object.}
   @begin{short}
     Creates an action that when activated, activates the action given by the
     detailed name on the widget passing the given arguments to it.

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -72,7 +72,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkEntryBuffer
+;;; GtkEntryBuffer
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkEntryBuffer" entry-buffer
@@ -140,7 +140,7 @@ lambda (buffer position chars n-chars)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- entry-buffer-length ----------------------------------------------------
+;;; --- gtk:entry-buffer-length ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "length" 'entry-buffer) t)
@@ -154,8 +154,8 @@ lambda (buffer position chars n-chars)    :run-first
       "Accessor"
       (documentation 'entry-buffer-length 'function)
  "@version{2023-1-30}
-  @syntax[]{(gtk:entry-buffer-length object) => length}
-  @syntax[]{(setf (gtk:entry-buffer-length object) length)}
+  @syntax{(gtk:entry-buffer-length object) => length}
+  @syntax{(setf (gtk:entry-buffer-length object) length)}
   @argument[object]{a @class{gtk:entry-buffer} object}
   @argument[length]{an unsigned integer with the length of the text}
   @begin{short}
@@ -167,7 +167,7 @@ lambda (buffer position chars n-chars)    :run-first
   @see-class{gtk:entry-buffer}
   @see-function{gtk:entry-buffer-bytes}")
 
-;;; --- entry-buffer-max-length ------------------------------------------------
+;;; --- gtk:entry-buffer-max-length --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-length" 'entry-buffer) t)
@@ -181,8 +181,8 @@ lambda (buffer position chars n-chars)    :run-first
       "Accessor"
       (documentation 'entry-buffer-max-length 'function)
  "@version{2023-1-30}
-  @syntax[]{(gtk:entry-buffer-max-length object) => length}
-  @syntax[]{(setf gtk:entry-buffer-max-length object) length)}
+  @syntax{(gtk:entry-buffer-max-length object) => length}
+  @syntax{(setf (gtk:entry-buffer-max-length object) length)}
   @argument[object]{a @class{gtk:entry-buffer} object}
   @argument[length]{an integer with the maximum length of the entry buffer,
     or 0 for no maximum, the value passed in will be clamped to the range
@@ -198,7 +198,7 @@ lambda (buffer position chars n-chars)    :run-first
   given length, then they will be truncated to fit.
   @see-class{gtk:entry-buffer}")
 
-;;; --- entry-buffer-text ------------------------------------------------------
+;;; --- gtk:entry-buffer-text --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text" 'entry-buffer) t)
@@ -211,8 +211,8 @@ lambda (buffer position chars n-chars)    :run-first
       "Accessor"
       (documentation 'entry-buffer-text 'function)
  "@version{2023-1-30}
-  @syntax[]{(gtk:entry-buffer-text object) => text}
-  @syntax[]{(setf gtk:entry-buffer-text object) text)}
+  @syntax{(gtk:entry-buffer-text object) => text}
+  @syntax{(setf (gtk:entry-buffer-text object) text)}
   @argument[object]{a @class{gtk:entry-buffer} object}
   @argument[text]{a string with the contents of the entry buffer}
   @begin{short}
@@ -228,14 +228,14 @@ lambda (buffer position chars n-chars)    :run-first
   @see-function{gtk:entry-buffer-insert-text}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_entry_buffer_new ()
+;;; gtk_entry_buffer_new
 ;;; ----------------------------------------------------------------------------
 
 (defun entry-buffer-new (&optional (text nil))
  #+liber-documentation
  "@version{2023-1-30}
   @argument[text]{a string with the initial entry buffer text, or nil}
-  @return{A new @class{gtk:entry-buffer} object.}
+  @return{The new @class{gtk:entry-buffer} object.}
   @begin{short}
     Create a new entry buffer.
   @end{short}
@@ -249,7 +249,7 @@ lambda (buffer position chars n-chars)    :run-first
 (export 'entry-buffer-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_entry_buffer_get_bytes () -> entry-buffer-bytes
+;;; gtk_entry_buffer_get_bytes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_entry_buffer_get_bytes" entry-buffer-bytes) :size
@@ -268,7 +268,7 @@ lambda (buffer position chars n-chars)    :run-first
 (export 'entry-buffer-bytes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_entry_buffer_insert_text ()
+;;; gtk_entry_buffer_insert_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_entry_buffer_insert_text" %entry-buffer-insert-text) :uint
@@ -283,7 +283,7 @@ lambda (buffer position chars n-chars)    :run-first
   @argument[buffer]{a @class{gtk:entry-buffer} object}
   @argument[position]{an integer with the position at which to insert text}
   @argument[text]{a string with the text to insert into the entry buffer}
-  @return{An unsigned integer with the number of characters actually inserted.}
+  @return{The unsigned integer with the number of characters actually inserted.}
   @begin{short}
     Inserts text into the contents of the entry buffer, at the given position.
   @end{short}
@@ -297,7 +297,7 @@ lambda (buffer position chars n-chars)    :run-first
 (export 'entry-buffer-insert-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_entry_buffer_delete_text ()
+;;; gtk_entry_buffer_delete_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_entry_buffer_delete_text" entry-buffer-delete-text) :uint
@@ -307,7 +307,7 @@ lambda (buffer position chars n-chars)    :run-first
   @argument[position]{an unsigned integer with the position at which to delete
     text}
   @argument[n-chars]{an integer with number of characters to delete}
-  @return{An unsigned integer with the number of characters deleted.}
+  @return{The unsigned integer with the number of characters deleted.}
   @begin{short}
     Deletes a sequence of characters from the entry buffer.
   @end{short}
@@ -327,7 +327,7 @@ lambda (buffer position chars n-chars)    :run-first
 (export 'entry-buffer-delete-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_entry_buffer_emit_deleted_text ()
+;;; gtk_entry_buffer_emit_deleted_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_entry_buffer_emit_deleted_text"
@@ -350,7 +350,7 @@ lambda (buffer position chars n-chars)    :run-first
 (export 'entry-buffer-emit-deleted-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_entry_buffer_emit_inserted_text ()
+;;; gtk_entry_buffer_emit_inserted_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_entry_buffer_emit_inserted_text"

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2013 - 2023 Dieter Kaiser
+;;; Copyright (C) 2013 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -326,7 +326,7 @@ lambda (application window)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- application-active-window ----------------------------------------------
+;;; --- gtk:application-active-window ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "active-window" 'application) t)
@@ -338,7 +338,7 @@ lambda (application window)    :run-first
       "Accessor"
       (documentation 'application-active-window 'function)
  "@version{2023-8-2}
-  @syntax[]{(gtk:application-active-window object) => window}
+  @syntax{(gtk:application-active-window object) => window}
   @argument[object]{a @class{gtk:application} instance}
   @argument[window]{a @class{gtk:window} widget}
   @begin{short}
@@ -353,7 +353,7 @@ lambda (application window)    :run-first
   @see-class{gtk:application}
   @see-class{gtk:window}")
 
-;;; --- application-menubar ----------------------------------------------------
+;;; --- gtk:application-menubar ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "menubar" 'application) t)
@@ -365,8 +365,8 @@ lambda (application window)    :run-first
       "Accessor"
       (documentation 'application-menubar 'function)
  "@version{2023-9-18}
-  @syntax[]{(gtk:application-menubar object) => menubar}
-  @syntax[]{(setf (gtk:application-menubar object) menubar)}
+  @syntax{(gtk:application-menubar object) => menubar}
+  @syntax{(setf (gtk:application-menubar object) menubar)}
   @argument[object]{a @class{gtk:application} instance}
   @argument[menubar]{a @class{g:menu-model} object, or @code{nil}}
   @begin{short}
@@ -395,7 +395,7 @@ lambda (application window)    :run-first
   @see-class{g:menu-model}
   @see-class{g:action-map}")
 
-;;; --- application-register-session -------------------------------------------
+;;; --- gtk:application-register-session ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "register-session"
@@ -410,8 +410,8 @@ lambda (application window)    :run-first
       "Accessor"
       (documentation 'application-register-session 'function)
  "@version{2023-8-2}
-  @syntax[]{(gtk:application-register-session object) => setting}
-  @syntax[]{(setf (gtk:application-register-session object) setting)}
+  @syntax{(gtk:application-register-session object) => setting}
+  @syntax{(setf (gtk:application-register-session object) setting)}
   @argument[object]{a @class{gtk:application} instance}
   @argument[setting]{a boolean whether to register with the session manager}
   @begin{short}
@@ -424,7 +424,7 @@ lambda (application window)    :run-first
   @see-class{gtk:application}
   @see-function{gtk:application-screensaver-active}")
 
-;;; ----- application-screensaver-active ---------------------------------------
+;;; ----- gtk:application-screensaver-active -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "screensaver-active"
@@ -441,7 +441,7 @@ lambda (application window)    :run-first
       "Accessor"
       (documentation 'application-screensaver-active 'function)
  "@version{2023-8-2}
-  @syntax[]{(gtk:application-screensaver-active object) => active}
+  @syntax{(gtk:application-screensaver-active object) => active}
   @argument[object]{a @class{gtk:application} instance}
   @argument[active]{a boolean whether the screensaver is active}
   @begin{short}
@@ -468,7 +468,7 @@ lambda (application window)    :run-first
     application ID}
   @argument[flags]{a @symbol{g:application-flags} value with the application
     flags}
-  @return{A new @class{gtk:application} instance.}
+  @return{The new @class{gtk:application} instance.}
   @begin{short}
     Creates a new application.
   @end{short}
@@ -554,7 +554,7 @@ lambda (application window)    :run-first
 (export 'application-remove-window)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_application_get_windows -> application-windows
+;;; gtk_application_get_windows
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_application_get_windows" application-windows)
@@ -562,7 +562,7 @@ lambda (application window)    :run-first
  #+liber-documentation
  "@version{2023-8-2}
   @argument[application]{a @class{gtk:application} instance}
-  @return{A list of @class{gtk:window} widgets.}
+  @return{The list of @class{gtk:window} widgets.}
   @begin{short}
     Gets a list of the windows associated with the application.
   @end{short}
@@ -588,7 +588,7 @@ lambda (application window)    :run-first
 (export 'application-windows)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_application_get_window_by_id -> application-window-by-id
+;;; gtk_application_get_window_by_id
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_application_get_window_by_id" application-window-by-id)
@@ -694,7 +694,7 @@ lambda (application window)    :run-first
 (export 'application-uninhibit)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_application_get_menu_by_id -> application-menu-by-id
+;;; gtk_application_get_menu_by_id
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_application_get_menu_by_id" application-menu-by-id)
@@ -724,7 +724,7 @@ lambda (application window)    :run-first
  #+liber-documentation
  "@version{2023-8-2}
   @argument[application]{a @class{gtk:application} instance}
-  @return{A list of strings with the detailed action names.}
+  @return{The list of strings with the detailed action names.}
   @begin{short}
     Lists the detailed action names which have associated accelerators.
   @end{short}
@@ -737,7 +737,7 @@ lambda (application window)    :run-first
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_application_get_accels_for_action
-;;; gtk_application_set_accels_for_action -> application-accels-for-action
+;;; gtk_application_set_accels_for_action
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf application-accels-for-action) (accels application name)
@@ -752,8 +752,8 @@ lambda (application window)    :run-first
                application-accels-for-action) g:strv-t
  #+liber-documentation
  "@version{2023-8-2}
-  @syntax[]{(gtk:application-accels-for-action application name) => accels}
-  @syntax[]{(setf (gtk:application-accels-for-action application name) accels)}
+  @syntax{(gtk:application-accels-for-action application name) => accels}
+  @syntax{(setf (gtk:application-accels-for-action application name) accels)}
   @argument[application]{a @class{gtk:application} instance}
   @argument[name]{a string with a detailed action name, specifying an action
     and target}
@@ -764,8 +764,8 @@ lambda (application window)    :run-first
   @end{short}
   The @fun{gtk:application-accels-for-action} function gets the keyboard
   accelerators that will trigger the given action. The
-  @fun{(setf gtk:application-accels-for-action)} function sets zero or more
-  keyboard accelerators.
+  @setf{gtk:application-accels-for-action} function sets zero or more keyboard
+  accelerators.
 
   The first item in the list of accelerators will be the primary accelerator,
   which may be displayed in the UI. To remove all accelerators for an action,
@@ -783,7 +783,7 @@ lambda (application window)    :run-first
 (export 'application-accels-for-action)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_application_get_actions_for_accel -> application-actions-for-accel
+;;; gtk_application_get_actions_for_accel
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_application_get_actions_for_accel"
@@ -792,7 +792,7 @@ lambda (application window)    :run-first
   @argument[application]{a @class{gtk:application} instance}
   @argument[accel]{a string with an accelerator that can be parsed by the
     @fun{gtk:accelerator-parse} function}
-  @return{A list of strings of actions for the @arg{accel} argument.}
+  @return{The list of strings of actions for the @arg{accel} argument.}
   @begin{short}
     Returns the list of actions, possibly empty, that the given accelerator
     maps to.

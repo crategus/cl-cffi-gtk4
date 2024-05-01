@@ -2,11 +2,11 @@
 ;;; gtk4.tree-view-dnd.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.0 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -39,8 +39,6 @@
 ;;;     GtkTreeDragDest
 ;;;     GtkTreeDragDestIface
 ;;;
-;;;     GTK_TYPE_TREE_ROW_DATA
-;;;
 ;;; Functions
 ;;;
 ;;;     gtk_tree_drag_source_drag_data_delete
@@ -49,8 +47,9 @@
 ;;;
 ;;;     gtk_tree_drag_dest_drag_data_received
 ;;;     gtk_tree_drag_dest_row_drop_possible
+;;;
 ;;;     gtk_tree_create_row_drag_content
-;;;     gtk_tree_get_row_drag_data
+;;;     gtk_tree_get_row_drag_data                          not exported
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -70,11 +69,16 @@
    :type-initializer "gtk_tree_drag_source_get_type")
   nil)
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj tree-drag-source) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:TREE-DRAG-SOURCE is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (liber:alias-for-class 'tree-drag-source)
       "Interface"
       (documentation 'tree-drag-source 'type)
- "@version{#2021-3-5}
+ "@version{2024-5-1}
   @begin{short}
     GTK supports drag and drop in tree views with a high-level and a low-level
     API.
@@ -103,25 +107,11 @@
   @see-class{gtk:list-store}
   @see-class{gtk:tree-store}
   @see-class{gtk:tree-model-filter}
-  @see-class{gtk:tree-model-sort}")
+  @see-class{gtk:tree-model-sort}
+  @see-class{gtk:drag-source}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkTreeDragSourceIface
-;;;
-;;; struct GtkTreeDragSourceIface {
-;;;   GTypeInterface g_iface;
-;;;
-;;;   /* VTable - not signals */
-;;;
-;;;   gboolean (* row_draggable)    (GtkTreeDragSource *drag_source,
-;;;                                  GtkTreePath       *path);
-;;;
-;;;   GdkContentProvider (* drag_data_get)  (GtkTreeDragSource *drag_source,
-;;;                                          GtkTreePath       *path);
-;;;
-;;;   gboolean (* drag_data_delete) (GtkTreeDragSource *drag_source,
-;;;                                  GtkTreePath       *path);
-;;; };
+;;; GtkTreeDragSourceIface
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-vtable ("GtkTreeDragSource" tree-drag-source)
@@ -138,13 +128,13 @@
                      (path (g:boxed tree-path)))))
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_drag_source_drag_data_delete ()
+;;; gtk_tree_drag_source_drag_data_delete
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_drag_source_drag_data_delete"
                tree-drag-source-drag-data-delete) :boolean
  #+liber-documentation
- "@version{#2021-3-5}
+ "@version{#2024-5-1}
   @argument[source]{a @class{gtk:tree-drag-source} object}
   @argument[path]{a @class{gtk:tree-path} instance with the row that was being
     dragged}
@@ -168,20 +158,20 @@
 (export 'tree-drag-source-drag-data-delete)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_drag_source_drag_data_get ()
+;;; gtk_tree_drag_source_drag_data_get
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_drag_source_drag_data_get"
-               tree-drag-source-drag-data-get) (g:object gdk-content-provider)
+               tree-drag-source-drag-data-get) (g:object gdk:content-provider)
  #+liber-documentation
- "@version{#2021-3-5}
+ "@version{#2024-5-1}
   @argument[source]{a @class{gtk:tree-drag-source} object}
   @argument[path]{a @class{gtk:tree-path} insance with the row that was dragged}
-  @return{A @class{gdk-content-provider} object for the given @arg{path} or
+  @return{The @class{gdk-content-provider} object for the given @arg{path} or
     @code{nil} if none exists.}
   @begin{short}
     Asks the @class{gtk:tree-drag-source} object to return a
-    @class{gdk-content-provider} object representing the row at @arg{path}.
+    @class{gdk:content-provider} object representing the row at @arg{path}.
   @end{short}
   Should robustly handle a @arg{path} no longer found in the model.
   @begin[Warning]{dictionary}
@@ -197,13 +187,13 @@
 (export 'tree-drag-source-drag-data-get)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_drag_source_row_draggable ()
+;;; gtk_tree_drag_source_row_draggable
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_drag_source_row_draggable"
                tree-drag-source-row-draggable) :boolean
  #+liber-documentation
- "@version{#2021-3-5}
+ "@version{#2024-5-1}
   @argument[source]{a @class{gtk:tree-drag-source} object}
   @argument[path]{a @class{gtk:tree-path} instance with the row on which user
     is initiating a drag}
@@ -233,11 +223,16 @@
    :type-initializer "gtk_tree_drag_dest_get_type")
   nil)
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj tree-drag-dest) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:TREE-DRAG-DEST is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (liber:alias-for-class 'tree-drag-dest)
       "Interface"
       (documentation 'tree-drag-dest 'type)
- "@version{#2021-3-5}
+ "@version{2024-5-1}
   @begin{short}
     GTK supports Drag-and-Drop in tree views with a high-level and a low-level
     API.
@@ -260,27 +255,14 @@
   @begin[Warning]{dictionary}
     The @class{gtk:tree-drag-dest} implementation is deprecated since 4.10.
     List views use widgets to display their contents. You can use the
-    @class{gtk:drop-rarget} implementation to implement a drop destination.
+    @class{gtk:drop-target} implementation to implement a drop destination.
   @end{dictionary}
   @see-class{gtk:list-store}
-  @see-class{gtk:tree-store}")
+  @see-class{gtk:tree-store}
+  @see-class{gtk:drop-target}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkTreeDragDestIface
-;;;
-;;; struct GtkTreeDragDestIface {
-;;;   GTypeInterface g_iface;
-;;;
-;;;   /* VTable - not signals */
-;;;
-;;;   gboolean (* drag_data_received) (GtkTreeDragDest   *drag_dest,
-;;;                                    GtkTreePath       *dest,
-;;;                                    const GValue      *value);
-;;;
-;;;   gboolean (* row_drop_possible)  (GtkTreeDragDest   *drag_dest,
-;;;                                    GtkTreePath       *dest_path,
-;;;                                    const GValue      *value);
-;;; };
+;;; GtkTreeDragDestIface
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-vtable ("GtkTreeDragDest" tree-drag-dest)
@@ -296,18 +278,18 @@
               (value (:pointer (:struct g:value))))))
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_drag_dest_drag_data_received ()
+;;; gtk_tree_drag_dest_drag_data_received
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_drag_dest_drag_data_received"
                tree-drag-dest-drag-data-received) :boolean
  #+liber-documentation
- "@version{#2021-3-5}
+ "@version{#2024-5-1}
   @argument[dest]{a @class{gtk:tree-drag-dest} object}
   @argument[path]{a @class{gtk:tree-path} instance with the row to drop in
     front of}
   @argument[value]{a @symbol{g:value} instance with the data to drop}
-  @return{A boolean whether a new row was created before position @arg{dest}.}
+  @return{The boolean whether a new row was created before position @arg{dest}.}
   @begin{short}
     Asks the @class{gtk:tree-drag-dest} object to insert a row before the path
     @arg{dest}, deriving the contents of the row from @arg{value}.
@@ -330,13 +312,13 @@
 (export 'tree-drag-dest-drag-data-received)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_drag_dest_row_drop_possible ()
+;;; gtk_tree_drag_dest_row_drop_possible
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_drag_dest_row_drop_possible"
                tree-drag-dest-row-drop-possible) :boolean
  #+liber-documentation
- "@version{#2021-3-5}
+ "@version{#2024-5-1}
   @argument[dest]{a @class{gtk:tree-drag-dest} object}
   @argument[path]{a @class{gtk:tree-path} instance with the destination row}
   @argument[value]{a @symbol{g:value} instance with the data being dropped}
@@ -345,8 +327,8 @@
     Determines whether a drop is possible before the given @arg{dest}, at the
     same depth as @arg{dest}.
   @end{short}
-  I.e., can we drop the data in @arg{data} at that location. The argument
-  @arg{dest} does not have to exist. The return value will almost certainly be
+  I.e., can we drop the data in @arg{data} at that location. The @arg{dest}
+  argument does not have to exist. The return value will almost certainly be
   @em{false} if the parent of @arg{dest} does not exist, though.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-drag-dest} implementation is deprecated since 4.10.
@@ -362,31 +344,37 @@
 (export 'tree-drag-dest-row-drop-possible)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_create_row_drag_content ()
-;;;
-;;; GdkContentProvider *
-;;; gtk_tree_create_row_drag_content (GtkTreeModel *tree_model,
-;;;                                   GtkTreePath *path);
-;;;
-;;; Creates a content provider for dragging path from tree_model .
-;;;
-;;; tree_model :
-;;;     a GtkTreeModel
-;;;
-;;; path :
-;;;     a row in tree_model
-;;;
-;;; Returns :
-;;;     a new GdkContentProvider.
+;;; gtk_tree_create_row_drag_content
 ;;; ----------------------------------------------------------------------------
 
+(cffi:defcfun ("gtk_tree_create_row_drag_content" tree-create-row-drag-content)
+    (g:object gdk:content-provider)
+ #+liber-documentation
+ "@version{#2025-5-1}
+  @argument[model]{a @class{gtk:tree-model} object}
+  @argument[path]{a @class{gtk:tree-path} instance with a row in @arg{model}}
+  @return{The new @class{gdk:content-provider} object.}
+  @begin{short}
+    Creates a content provider for dragging @arg{path} from @arg{model}.
+  @end{short}
+  @see-class{gtk:tree-model}
+  @see-class{gtk:tree-path}
+  @see-class{gdk:content-provider}"
+  (model (g:object tree-model))
+  (path (g:boxed tree-path)))
+
+(export 'tree-create-row-drag-content)
+
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_get_row_drag_data ()
+;;; gtk_tree_get_row_drag_data                              not exported
 ;;; ----------------------------------------------------------------------------
+
+;; TODO: This function is not fully implemented. The model and path arguments
+;; contains the returned values.
 
 (cffi:defcfun ("gtk_tree_get_row_drag_data" tree-get-row-drag-data) :boolean
  #+liber-documentation
- "@version{#2021-3-5}
+ "@version{#2024-5-1}
   @argument[data]{a @symol{g:value} instance}
   @argument[model]{a @class{gtk:tree-model} object}
   @argument[path]{a @class{gtk:tree-path} with a row in @arg{model}.}
@@ -411,7 +399,5 @@
   (value (:pointer (:struct g:value)))
   (model (g:object tree-model))
   (path (g:boxed tree-path)))
-
-(export 'tree-get-row-drag-data)
 
 ;;; --- End of file gtk4.tree-view-dnd.lisp ------------------------------------

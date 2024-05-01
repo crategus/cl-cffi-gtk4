@@ -2264,10 +2264,11 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_queue_allocate" widget-queue-allocate) :void
  #+liber-documentation
- "@version{#2021-9-21}
+ "@version{2024-4-29}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
-    Flags the widget for a rerun of the @code{size_allocate} function.
+    Flags the widget for a rerun of the @code{size_allocate ()} virtual
+    function.
   @end{short}
   Use this function instead of the @fun{gtk:widget-queue-resize} function when
   the  size request of the widget did not change but it wants to reposition its
