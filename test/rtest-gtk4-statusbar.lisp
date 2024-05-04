@@ -8,38 +8,38 @@
 ;;;     GtkStatusbar
 
 (test gtk-statusbar-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkStatusbar"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:statusbar
           (glib:symbol-for-gtype "GtkStatusbar")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkStatusbar")
           (g:gtype (cffi:foreign-funcall "gtk_statusbar_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkStatusbar")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkStatusbar")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkStatusbar")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '()
              (list-properties "GtkStatusbar")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("text-popped" "text-pushed")
              (list-signals "GtkStatusbar")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "statusbar"
                (gtk:widget-class-css-name "GtkStatusbar")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '()
              (gtk:widget-css-classes (make-instance 'gtk:statusbar))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkStatusbar")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkStatusbar" GTK-STATUSBAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -66,4 +66,4 @@
 ;;;     gtk_statusbar_remove
 ;;;     gtk_statusbar_remove_all
 
-;;; --- 2023-8-24 --------------------------------------------------------------
+;;; 2024-5-2

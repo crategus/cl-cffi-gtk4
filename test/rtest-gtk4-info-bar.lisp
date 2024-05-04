@@ -8,33 +8,33 @@
 ;;;     GtkInfoBar
 
 (test gtk-info-bar-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkInfoBar"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:info-bar
           (glib:symbol-for-gtype "GtkInfoBar")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkInfoBar")
           (g:gtype (cffi:foreign-funcall "gtk_info_bar_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkInfoBar")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkInfoBar")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkInfoBar")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("message-type" "revealed" "show-close-button")
              (list-properties "GtkInfoBar")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("close" "response")
              (list-signals "GtkInfoBar")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "infobar"
                (gtk:widget-class-css-name "GtkInfoBar")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("info")
              (gtk:widget-css-classes (make-instance 'gtk:info-bar))))
   ;; Accessible role
@@ -55,10 +55,6 @@
              (gobject:get-g-type-definition "GtkInfoBar"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     message-type
-;;;     revealed
-;;;     show-close-button
 
 (test gtk-info-bar-properties
   (let ((infobar (make-instance 'gtk:info-bar)))
@@ -97,4 +93,4 @@
 ;;;     gtk_info_bar_add_child
 ;;;     gtk_info_bar_remove_child
 
-;;; --- 2023-8-24 --------------------------------------------------------------
+;;; 2024-5-2

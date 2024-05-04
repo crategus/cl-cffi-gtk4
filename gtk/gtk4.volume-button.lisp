@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -63,7 +63,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkVolumeButton
+;;; GtkVolumeButton
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Implement the GtkAccessibleRange interface
@@ -71,7 +71,8 @@
 (gobject:define-g-object-class "GtkVolumeButton" volume-button
   (:superclass scale-button
    :export t
-   :interfaces ("GtkAccessible"
+   :interfaces ("GtkAccessibleRange"
+                "GtkAccessible"
                 "GtkBuildable"
                 "GtkConstraintTarget"
                 "GtkOrientable")
@@ -82,7 +83,7 @@
 
 #+liber-documentation
 (setf (documentation 'volume-button 'type)
- "@version{2023-3-26}
+ "@version{2024-5-2}
   @begin{short}
     The @class{gtk:volume-button} class is a subclass of the
     @class{gtk:scale-button} class that has been tailored for use as a volume
@@ -115,11 +116,11 @@
 (setf (liber:alias-for-function 'volume-button-use-symbolic)
       "Accessor"
       (documentation 'volume-button-use-symbolic 'function)
- "@version{2023-3-26}
-  @syntax[]{(gtk:volume-button-use-symbolic object) => use-symbolic}
-  @syntax[]{(setf (gtk:volume-button-use-symbolic object) use-symbolic)}
+ "@version{2024-5-2}
+  @syntax{(gtk:volume-button-use-symbolic object) => setting}
+  @syntax{(setf (gtk:volume-button-use-symbolic object) setting)}
   @argument[object]{a @class{gtk:volume-button} widget}
-  @argument[use-symbolic]{a boolean whether to use symbolic icons}
+  @argument[setting]{a boolean whether to use symbolic icons}
   @begin{short}
     Accessor of the @slot[gtk:volume-button]{use-symbolic} slot of the
     @class{gtk:volume-button} class.
@@ -135,15 +136,15 @@
   @see-class{gtk:volume-button}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_volume_button_new ()
+;;; gtk_volume_button_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline volume-button-new))
 
 (defun volume-button-new ()
  #+liber-documentation
- "@version{2023-3-26}
-  @return{A new @class{gtk:volume-button} widget.}
+ "@version{2024-5-2}
+  @return{The new @class{gtk:volume-button} widget.}
   @begin{short}
     Creates a volume button, with a range between 0.0 and 1.0, with
     a stepping of 0.02.

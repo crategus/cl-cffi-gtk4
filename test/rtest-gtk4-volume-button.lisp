@@ -8,37 +8,37 @@
 ;;;     GtkVolumeButton
 
 (test gtk-volume-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkVolumeButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:volume-button
           (glib:symbol-for-gtype "GtkVolumeButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkVolumeButton")
           (g:gtype (cffi:foreign-funcall "gtk_volume_button_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkScaleButton")
           (g:type-parent "GtkVolumeButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkVolumeButton")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkAccessibleRange" "GtkOrientable")
              (list-interfaces "GtkVolumeButton")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("use-symbolic")
              (list-properties "GtkVolumeButton")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkVolumeButton")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "scalebutton"
                (gtk:widget-class-css-name "GtkVolumeButton")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("scale")
              (gtk:widget-css-classes (make-instance 'gtk:volume-button))))
-  ;; Accessible role
+  ;; Chekc accessible role
   (is (eq :group (gtk:widget-class-accessible-role "GtkVolumeButton")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkVolumeButton" GTK-VOLUME-BUTTON
@@ -71,4 +71,4 @@
     (is (= 0.02d0 (gtk:adjustment-step-increment
                       (gtk:scale-button-adjustment button))))))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-5-2

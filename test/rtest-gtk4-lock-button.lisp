@@ -8,40 +8,40 @@
 ;;;     GtkLockButton
 
 (test gtk-lock-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkLockButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:lock-button
           (glib:symbol-for-gtype "GtkLockButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkLockButton")
           (g:gtype (cffi:foreign-funcall "gtk_lock_button_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkButton")
           (g:type-parent "GtkLockButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkLockButton")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
              (list-interfaces "GtkLockButton")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("permission" "text-lock" "text-unlock" "tooltip-lock"
                "tooltip-not-authorized" "tooltip-unlock")
              (list-properties "GtkLockButton")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkLockButton")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkLockButton")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("lock")
              (gtk:widget-css-classes (make-instance 'gtk:lock-button))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :button (gtk:widget-class-accessible-role "GtkLockButton")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLockButton" GTK-LOCK-BUTTON
                        (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
@@ -75,4 +75,4 @@
 
 ;;;     gtk_lock_button_new
 
-;;; --- 2023-11-2 --------------------------------------------------------------
+;;; 2024-5-2

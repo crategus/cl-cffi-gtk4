@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2021 - 2023 Dieter Kaiser
+;;; Copyright (C) 2021 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -72,7 +72,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkLockButton
+;;; GtkLockButton
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkLockButton" lock-button
@@ -102,9 +102,14 @@
     lock-button-tooltip-unlock
     "tooltip-unlock" "gchararray" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj lock-button) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:LOCK-BUTTON is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'lock-button 'type)
- "@version{2023-3-25}
+ "@version{2024-5-2}
   @begin{short}
     The @class{gtk:lock-button} widget is a widget that can be used in control
     panels or preference dialogs to allow users to obtain and revoke
@@ -114,32 +119,10 @@
   @image[lock-button]{Figure: GtkLockButton}
 
   The required authorization is represented by a @class{g:permission} object.
-  Concrete implementations of the @class{g:permission} may use @code{PolicyKit}
-  or some other authorization framework. To obtain a @code{PolicyKit}-based
-  @class{g:permission} object, use the @code{polkit_permission_new()} function.
-
-  If the user is not currently allowed to perform the action, but can obtain
-  the permission, the widget looks like this:
-
-  @image[lock-button-locked]{Figure: Locked}
-
-  The user can click the button to request the permission. Depending on the
-  platform, this may pop up an authentication dialog or ask the user to
-  authenticate in some other way. Once the user has obtained the permission,
-  the widget changes to this:
-
-  @image[lock-button-unlocked]{Figure: Unlocked}
-
-  The permission can be dropped again by clicking the button. If the user is
-  not able to obtain the permission at all, the widget looks like this:
-
-  @image[lock-button-sorry]{Figure: Hidden}
-
-  If the user has the permission and cannot drop it, the button is hidden.
-
-  The text and tooltips that are shown in the various cases can be adjusted
-  with the @code{text-lock}, @code{text-unlock}, @code{tooltip-lock},
-  @code{tooltip-unlock} and @code{tooltip-not-authorized} properties.
+  Concrete implementations of the @class{g:permission} class may use the
+  @code{PolicyKit} library or some other authorization framework. To obtain a
+  @code{PolicyKit}-based @class{g:permission} object, use the
+  @code{polkit_permission_new()} function.
   @begin[Warning]{dictionary}
     The @class{gtk:lock-button} implementation has been deprecated since version
     4.10 and should not be used in newly written code. This widget will be
@@ -158,7 +141,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- lock-button-permission -------------------------------------------------
+;;; --- gtk:lock-button-permission ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "permission" 'lock-button) t)
@@ -170,9 +153,9 @@
 (setf (liber:alias-for-function 'lock-button-permission)
       "Accessor"
       (documentation 'lock-button-permission 'function)
- "@version{#2023-3-25}
-  @syntax[]{(gtk:lock-button-permission object) => permission}
-  @syntax[]{(setf (gtk:lock-button-permission object) permission)}
+ "@version{#2024-5-2}
+  @syntax{(gtk:lock-button-permission object) => permission}
+  @syntax{(setf (gtk:lock-button-permission object) permission)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[permission]{a @class{g:permission} object, or @code{nil}}
   @begin{short}
@@ -190,7 +173,7 @@
   @see-class{gtk:lock-button}
   @see-class{g:permission}")
 
-;;; --- lock-button-text-lock --------------------------------------------------
+;;; --- gtk:lock-button-text-lock ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text-lock" 'lock-button) t)
@@ -203,9 +186,9 @@
 (setf (liber:alias-for-function 'lock-button-text-lock)
       "Accessor"
       (documentation 'lock-button-text-lock 'function)
- "@version{#2023-3-25}
-  @syntax[]{(gtk:lock-button-text-lock object) => text}
-  @syntax[]{(setf (gtk:lock-button-text-lock object) text)}
+ "@version{#2024-5-2}
+  @syntax{(gtk:lock-button-text-lock object) => text}
+  @syntax{(setf (gtk:lock-button-text-lock object) text)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[text]{a string with the text to display}
   @begin{short}
@@ -220,7 +203,7 @@
   @end{dictionary}
   @see-class{gtk:lock-button}")
 
-;;; --- lock-button-text-unlock ------------------------------------------------
+;;; --- gtk:lock-button-text-unlock --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text-unlock" 'lock-button) t)
@@ -233,9 +216,9 @@
 (setf (liber:alias-for-function 'lock-button-text-unlock)
       "Accessor"
       (documentation 'lock-button-text-unlock 'function)
- "@version{#2023-3-25}
-  @syntax[]{(gtk:lock-button-text-unlock object) => text}
-  @syntax[]{(setf (gtk:lock-button-text-unlock object) text)}
+ "@version{#2024-5-2}
+  @syntax{(gtk:lock-button-text-unlock object) => text}
+  @syntax{(setf (gtk:lock-button-text-unlock object) text)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[text]{a string with the text to display}
   @begin{short}
@@ -250,22 +233,22 @@
   @end{dictionary}
   @see-class{gtk:lock-button}")
 
-;;; --- lock-button-tooltip-lock -----------------------------------------------
+;;; --- gtk:lock-button-tooltip-lock -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tooltip-lock" 'lock-button) t)
  "The @code{tooltip-lock} property of type @class{:string}
   (Read / Write / Construct) @br{}
   The tooltip to display when prompting the user to lock. @br{}
-  Default value: \"Dialog is unlocked.\n Click to prevent further changes\"")
+  Default value: \"Dialog is unlocked.\\n Click to prevent further changes\"")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'lock-button-tooltip-lock)
       "Accessor"
       (documentation 'lock-button-tooltip-lock 'function)
- "@version{#2023-3-25}
-  @syntax[]{(gtk:lock-button-tooltip-lock object) => tooltip}
-  @syntax[]{(setf (gtk:lock-button-tooltip-lock object) tooltip)}
+ "@version{#2024-5-2}
+  @syntax{(gtk:lock-button-tooltip-lock object) => tooltip}
+  @syntax{(setf (gtk:lock-button-tooltip-lock object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[tooltip]{a string with the tooltip to display}
   @begin{short}
@@ -280,7 +263,7 @@
   @end{dictionary}
   @see-class{gtk:lock-button}")
 
-;;; --- lock-button-tooltip-not-authorized ---------------------------------
+;;; --- gtk:lock-button-tooltip-not-authorized ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tooltip-not-authorized"
@@ -290,15 +273,15 @@
   The tooltip to display when prompting the user cannot obtain authorization.
   @br{}
   Default value: \"System policy prevents changes.
-                 \nContact your system administrator\"")
+                 \\nContact your system administrator\"")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'lock-button-tooltip-not-authorized)
       "Accessor"
       (documentation 'lock-button-tooltip-not-authorized 'function)
- "@version{#2023-3-25}
-  @syntax[]{(gtk:lock-button-tooltip-not-authorized object) => tooltip}
-  @syntax[]{(setf (gtk:lock-button-tooltip-not-authorized object) tooltip)}
+ "@version{#2024-5-2}
+  @syntax{(gtk:lock-button-tooltip-not-authorized object) => tooltip}
+  @syntax{(setf (gtk:lock-button-tooltip-not-authorized object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[tooltip]{a string with the tooltip to display}
   @begin{short}
@@ -313,22 +296,22 @@
   @end{dictionary}
   @see-class{gtk:lock-button}")
 
-;;; --- lock-button-tooltip-unlock ---------------------------------------------
+;;; --- gtk:lock-button-tooltip-unlock -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tooltip-unlock" 'lock-button) t)
  "The @code{tooltip-unlock} property of type @class{:string}
   (Read / Write / Construct) @br{}
   The tooltip to display when prompting the user to unlock. @br{}
-  Default value: \"Dialog is locked.\nClick to make changes\"")
+  Default value: \"Dialog is locked.\\nClick to make changes\"")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'lock-button-tooltip-unlock)
       "Accessor"
       (documentation 'lock-button-tooltip-unlock 'function)
- "@version{#2023-3-25}
-  @syntax[]{(gtk:lock-button-tooltip-unlock object) => tooltip}
-  @syntax[]{(setf (gtk:lock-button-tooltip-unlock object) tooltip)}
+ "@version{#2024-5-2}
+  @syntax{(gtk:lock-button-tooltip-unlock object) => tooltip}
+  @syntax{(setf (gtk:lock-button-tooltip-unlock object) tooltip)}
   @argument[object]{a @class{gtk:lock-button} widget}
   @argument[tooltip]{a string with the tooltip to display}
   @begin{short}
@@ -344,14 +327,14 @@
   @see-class{gtk:lock-button}")
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_lock_button_new ()
+;;;gtk_lock_button_new
 ;;; ----------------------------------------------------------------------------
 
 (defun lock-button-new (permission)
  #+liber-documentation
- "@version{#2023-3-25}
+ "@version{#2024-5-2}
   @argument[permission]{a @class{g:permission} object}
-  @return{A new @class{gtk:lock-button} widget.}
+  @return{The new @class{gtk:lock-button} widget.}
   @short{Creates a new lock button which reflects the permission.}
   @begin[Warning]{dictionary}
     The @class{gtk:lock-button} implementation has been deprecated since version

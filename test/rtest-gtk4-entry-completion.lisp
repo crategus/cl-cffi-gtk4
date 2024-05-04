@@ -8,33 +8,33 @@
 ;;;     GtkEntryCompletion
 
 (test gtk-entry-completion-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkEntryCompletion"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:entry-completion
           (glib:symbol-for-gtype "GtkEntryCompletion")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEntryCompletion")
           (g:gtype (cffi:foreign-funcall "gtk_entry_completion_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkEntryCompletion")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkEntryCompletion")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
              (list-interfaces "GtkEntryCompletion")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("cell-area" "inline-completion" "inline-selection"
                "minimum-key-length" "model" "popup-completion" "popup-set-width"
                "popup-single-match" "text-column")
              (list-properties "GtkEntryCompletion")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("cursor-on-match" "insert-prefix" "match-selected" "no-matches")
              (list-signals "GtkEntryCompletion")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryCompletion"
                                              GTK-ENTRY-COMPLETION
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
@@ -64,16 +64,6 @@
              (gobject:get-g-type-definition "GtkEntryCompletion"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     cell-area
-;;;     inline-completion
-;;;     inline-selection
-;;;     minimum-key-length
-;;;     model
-;;;     popup-completion
-;;;     popup-set-width
-;;;     popup-single-match
-;;;     text-column
 
 (test gtk-entry-completion-properties
   (let ((gtk-init:*gtk-warn-deprecated* nil))
@@ -120,4 +110,4 @@
 ;;;     gtk_entry_completion_get_completion_prefix
 ;;;     gtk_entry_completion_insert_prefix
 
-;;; 2024-2-19
+;;; 2024-5-2

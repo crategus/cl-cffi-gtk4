@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -78,11 +78,16 @@
    :type-initializer "gtk_statusbar_get_type")
  nil)
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj statusbar) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:STATUSBAR is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'statusbar 'type)
- "@version{2023-8-24}
+ "@version{2024-5-2}
   @begin{short}
-    A @class{gtk:statusbar} widget is usually placed along the bottom of the
+    The @class{gtk:statusbar} widget is usually placed along the bottom of the
     main @class{gtk:window} widget of the application.
   @end{short}
   It may provide a regular commentary of the status of the application as is
@@ -133,9 +138,9 @@ lambda (statusbar context text)    :run-last
       @begin[code]{table}
         @entry[statusbar]{The @class{gtk:statusbar} widget which received the
           signal.}
-        @entry[context]{An unsigned integer with the context ID of the
+        @entry[context]{The unsigned integer with the context ID of the
           relevant message/statusbar.}
-        @entry[text]{A string with the message that was just popped.}
+        @entry[text]{The string with the message that was just popped.}
       @end{table}
     @subheading{The \"text-pushed\" signal}
       @begin{pre}
@@ -146,22 +151,22 @@ lambda (statusbar context text)    :run-last
       @begin[code]{table}
         @entry[statusbar]{The @class{gtk:statusbar} widget which received the
           signal.}
-        @entry[context]{An unsigned integer with the context ID of the
+        @entry[context]{The unsigned integer with the context ID of the
           relevant message/statusbar.}
-        @entry[text]{A string with the message that was pushed.}
+        @entry[text]{The string with the message that was pushed.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:statusbar-new}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_statusbar_new ()
+;;; gtk_statusbar_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline statusbar-new))
 
 (defun statusbar-new ()
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{2024-5-2}
   @return{The new @class{gtk:statusbar} widget.}
   @short{Creates a new statusbar ready for messages.}
   @begin[Warning]{dictionary}
@@ -174,7 +179,7 @@ lambda (statusbar context text)    :run-last
 (export 'statusbar-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_statusbar_get_context_id () -> statusbar-context-id
+;;; gtk_statusbar_get_context_id
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_statusbar_get_context_id" %statusbar-get-context-id) :uint
@@ -183,11 +188,11 @@ lambda (statusbar context text)    :run-last
 
 (defun statusbar-context-id (statusbar context)
  #+liber-documentation
- "@version{#2023-8-24}
+ "@version{#2024-5-2}
   @argument[statusbar]{a @class{gtk:statusbar} widget}
   @argument[context]{a string with the textual description of what context the
     new message is being used in}
-  @return{An integer context ID.}
+  @return{The integer context ID.}
   @begin{short}
     Returns a new context identifier, given a description of the actual context.
   @end{short}
@@ -204,7 +209,7 @@ lambda (statusbar context text)    :run-last
 (export 'statusbar-context-id)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_statusbar_push ()
+;;; gtk_statusbar_push
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_statusbar_push" %statusbar-push) :uint
@@ -219,7 +224,7 @@ lambda (statusbar context text)    :run-last
   @argument[context]{an unsigned integer with the context ID of the message, as
     returned by the @fun{gtk:statusbar-context-id} function}
   @argument[text]{a string with the message to add to @arg{statusbar}}
-  @return{An unsigned integer with a message ID that can be used with the
+  @return{The unsigned integer with a message ID that can be used with the
     @fun{gtk:statusbar-remove} function.}
   @begin{short}
     Pushes a new message onto the stack of the statusbar.
@@ -236,7 +241,7 @@ lambda (statusbar context text)    :run-last
 (export 'statusbar-push)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_statusbar_pop ()
+;;; gtk_statusbar_pop
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_statusbar_pop" %statusbar-pop) :void
@@ -265,7 +270,7 @@ lambda (statusbar context text)    :run-last
 (export 'statusbar-pop)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_statusbar_remove ()
+;;; gtk_statusbar_remove
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_statusbar_remove" %statusbar-remove) :void
@@ -297,7 +302,7 @@ lambda (statusbar context text)    :run-last
 (export 'statusbar-remove)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_statusbar_remove_all ()
+;;; gtk_statusbar_remove_all
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_statusbar_remove_all" %statusbar-remove-all) :void

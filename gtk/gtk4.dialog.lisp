@@ -189,7 +189,7 @@
 
 #+liber-documentation
 (setf (documentation 'dialog 'type)
- "@version{2023-8-21}
+ "@version{2024-5-2}
   @begin{short}
     Dialogs are a convenient way to prompt the user for a small amount of input.
   @end{short}
@@ -213,7 +213,7 @@
 
   The @class{gtk:dialog} widgets uses some heuristics to decide whether to add a
   Close button to the window decorations. If any of the action buttons use the
-  @code{:close} or @code{:canel} response ID, the close button is omitted.
+  @code{:close} or @code{:cancel} response ID, the Close button is omitted.
 
   Clicking a button that was added as an action widget will emit the
   @code{\"response\"} signal with a response ID that you specified. GTK will
@@ -231,12 +231,10 @@
   from user input, can be created by calling the @fun{gtk:window-modal} function
   on the dialog. When using the @fun{gtk:dialog-new-with-buttons} function, you
   can also pass the @code{:modal} flag to make a dialog modal.
-
-  For the simple dialog in the following example, a @class{gtk:message-dialog}
-  widget would save some effort. But you would need to create the dialog
-  contents manually if you had more than a simple message in the dialog.
   @begin[Examples]{dictionary}
-    Simple @class{gtk:dialog} widget usage:
+    For the simple dialog in the following example, a @class{gtk:message-dialog}
+    widget would save some effort. But you would need to create the dialog
+    contents manually if you had more than a simple message in the dialog.
     @begin{pre}
 ;; Function to open a dialog to display the message provided.
 (defun create-quick-message (parent msg)
@@ -275,9 +273,9 @@
     The @class{gtk:dialog} implementation supports adding action widgets by
     specifying @code{\"action\"} as the @code{\"type\"} attribute of a
     @code{<child>} element. The widget will be added either to the action area
-    or the headerbar of the dialog, depending on the @code{use-header-bar}
-    property. The response ID has to be associated with the action widget using
-    the @code{<action-widgets>} element.
+    or the headerbar of the dialog, depending on the
+    @slot[gtk:dialog]{use-header-bar} property. The response ID has to be
+    associated with the action widget using the @code{<action-widgets>} element.
 
     @b{Example:} A @class{gtk:dialog} UI definition fragment.
     @begin{pre}
@@ -423,20 +421,19 @@ lambda (dialog response)    :run-last
 
 (defun dialog-new-with-buttons (title parent flags &rest buttons)
  #+liber-documentation
- "@version{2024-5-1}
-  @argument[title]{a string with the title of the dialog, or @code{nil}}
-  @argument[parent]{a @class{gtk:window} transient parent of the dialog,
+ "@version{2024-5-2}
+  @argument[title]{a string with the title for the dialog, or @code{nil}}
+  @argument[parent]{a @class{gtk:window} transient parent for the dialog,
     or @code{nil}}
-  @argument[flags]{a list of flags of type @symbol{gtk:dialog-flags}}
+  @argument[flags]{a @symbol{gtk:dialog-flags} value with the flags for the
+    dialog}
   @argument[buttons]{pairs with a button text and the response ID for the
     button, which is a positive integer or a value of the
     @symbol{gtk:response-type} enumeration}
   @return{The new @class{gtk:dialog} widget.}
   @begin{short}
     Creates a new dialog with title @arg{title}, or @code{nil} for the default
-    title, see the @fun{gtk:window-title} function, and transient parent
-    @arg{parent}, or @code{nil} for none, see the @fun{gtk:window-transient-for}
-    function.
+    title, and transient parent @arg{parent}, or @code{nil} for none.
   @end{short}
   The @arg{flags} argument can be used to make the dialog modal with the
   @code{:modal} flag of the @symbol{gtk:dialog-flags} flags and/or to have it
@@ -473,9 +470,7 @@ lambda (dialog response)    :run-last
   @see-class{gtk:dialog}
   @see-class{gtk:window}
   @see-symbol{gtk:dialog-flags}
-  @see-symbol{gtk:response-type}
-  @see-function{gtk:window-title}
-  @see-function{gtk:window-transient-for}"
+  @see-symbol{gtk:response-type}"
   (let ((dialog (make-instance 'dialog))
         (flags (if (listp flags) flags (list flags))))
     (when title
@@ -558,7 +553,7 @@ lambda (dialog response)    :run-last
 
 (defun dialog-add-buttons (dialog &rest buttons)
  #+liber-documentation
- "@version{#2024-5-1}
+ "@version{#2024-5-2}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[buttons]{pairs with a button text and the response ID, which is a
     positive integer or a value of the @symbol{gtk:response-type} enumeration}
@@ -567,10 +562,10 @@ lambda (dialog response)    :run-last
     repeatedly.
   @end{short}
   Each button must have both text and response ID.
-  @begin[Note]{dictionary}
+  @begin{notes}
     The Lisp implementation does not call the C function, but the
     @fun{gtk:dialog-add-button} function is called in a loop to add the buttons.
-  @end{dictionary}
+  @end{notes}
   @begin[Warning]{dictionary}
     The @class{gtk:dialog} implementation is deprecated since 4.10. Use the
     @class{gtk:window} widget instead.
@@ -655,7 +650,7 @@ lambda (dialog response)    :run-last
 (cffi:defcfun ("gtk_dialog_set_response_sensitive"
                dialog-set-response-sensitive) :void
  #+liber-documentation
- "@version{#2023-8-22}
+ "@version{#2024-5-2}
   @argument[dialog]{a @class{gtk:dialog} widget}
   @argument[response]{a response ID, which is a positive integer or a value
     of the @symbol{gtk:response-type} enumeration}
@@ -664,7 +659,7 @@ lambda (dialog response)    :run-last
     Calls the @fun{gtk:widget-sensitive} function for each widget in the
     action area of the dialog with the given @arg{response} value.
   @end{short}
-  A convenient way to sensitize/desensitize dialog buttons.
+  This is a convenient way to sensitize/desensitize dialog buttons.
   @begin[Warning]{dictionary}
     The @class{gtk:dialog} implementation is deprecated since 4.10. Use the
     @class{gtk:window} widget instead.
