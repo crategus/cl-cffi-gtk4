@@ -345,7 +345,13 @@
        ":window"
        "DO-GRID-VIEW-CLOCKS"
        "gtk4-example"
-       "grid-view-clocks.lisp")
+       "grid-view-clocks.lisp"
+       :keywords
+       "define-g-object-subclass"
+       "gdk:paintable"
+       "gdk:paintable-snapshot"
+       "gtk:grid-view"
+       )
 ; TODO: The example is not finished
 ;      ("Colors"
 ;       ":window"
