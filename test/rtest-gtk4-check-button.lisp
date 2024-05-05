@@ -8,35 +8,35 @@
 ;;;     GtkCheckButton
 
 (test gtk-check-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCheckButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:check-button
           (glib:symbol-for-gtype "GtkCheckButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCheckButton")
           (g:gtype (cffi:foreign-funcall "gtk_check_button_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkCheckButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkCheckButton")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
              (list-interfaces "GtkCheckButton")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("action-name" "action-target" "active" "child" "group"
                "inconsistent" "label" "use-underline")
              (list-properties "GtkCheckButton")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate" "toggled")
              (list-signals "GtkCheckButton")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string= "checkbutton"
                (gtk:widget-class-css-name "GtkCheckButton")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCheckButton" GTK-CHECK-BUTTON
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
@@ -83,8 +83,27 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
-;;;     activate                                           Since 4.2
-;;;     toggled
+(test gtk-check-button-activate-signal
+  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkCheckButton"))))
+    (is (string= "activate" (g:signal-query-signal-name query)))
+    (is (string= "GtkCheckButton" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
+(test gtk-check-button-toggled-signal
+  (let ((query (g:signal-query (g:signal-lookup "toggled" "GtkCheckButton"))))
+    (is (string= "toggled" (g:signal-query-signal-name query)))
+    (is (string= "GtkCheckButton" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -104,4 +123,4 @@
     (is (string= "_label" (gtk:check-button-label button)))
     (is-true (gtk:check-button-use-underline button))))
 
-;;; --- 2023-9-16 --------------------------------------------------------------
+;;; 2024-5-4

@@ -8,37 +8,37 @@
 ;;;     GtkButton
 
 (test gtk-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:button
           (glib:symbol-for-gtype "GtkButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkButton")
           (g:gtype (cffi:foreign-funcall "gtk_button_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkLinkButton" "GtkLockButton" "GtkToggleButton")
              (list-children "GtkButton")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
              (list-interfaces "GtkButton")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("action-name" "action-target" "can-shrink" "child" "has-frame"
                "icon-name" "label" "use-underline")
              (list-properties "GtkButton")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate" "clicked")
              (list-signals "GtkButton")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string="button"
                (gtk:widget-class-css-name "GtkButton")))
-  ;; Accessibility role
+  ;; Check accessibility role
   (is (eq :button (gtk:widget-class-accessible-role "GtkButton")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkButton" GTK-BUTTON
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkActionable" "GtkBuildable"
@@ -70,8 +70,27 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
-;;;     activate
-;;;     clicked
+(test gtk-button-activate-signal
+  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkButton"))))
+    (is (string= "activate" (g:signal-query-signal-name query)))
+    (is (string= "GtkButton" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
+
+(test gtk-button-clicked-signal
+  (let ((query (g:signal-query (g:signal-lookup "clicked" "GtkButton"))))
+    (is (string= "clicked" (g:signal-query-signal-name query)))
+    (is (string= "GtkButton" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -115,4 +134,4 @@
     (is (string= "_battery" (gtk:button-label button)))
     (is-true (gtk:button-use-underline button))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-5-4

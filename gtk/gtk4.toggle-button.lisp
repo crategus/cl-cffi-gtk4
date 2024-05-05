@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -96,10 +96,10 @@
 
 #+liber-documentation
 (setf (documentation 'toggle-button 'type)
- "@version{2023-3-19}
+ "@version{2024-5-4}
   @begin{short}
-    A @class{gtk:toggle-button} widget is a @class{gtk:button} widget which will
-    remain \"pressed-in\" when clicked.
+    The @class{gtk:toggle-button} widget is a @class{gtk:button} widget which
+    will remain \"pressed-in\" when clicked.
   @end{short}
   Clicking again will cause the toggle button to return to its normal state.
 
@@ -112,71 +112,18 @@
   @class{gtk:button} documentation for more information.
 
   The state of a @class{gtk:toggle-button} widget can be set and retrieved using
-  the @fun{gtk:toggle-button-active} function. To simply switch the state of a
-  toggle button, use the @fun{gtk:toggle-button-toggled} function.
+  the @fun{gtk:toggle-button-active} function.
 
   @subheading{Grouping}
-  Toggle buttons can be grouped together, to form mutually exclusive groups -
-  only one of the buttons can be toggled at a time, and toggling another one
+  Toggle buttons can be grouped together, to form mutually exclusive groups.
+  Only one of the buttons can be toggled at a time, and toggling another one
   will switch the currently toggled one off. To add a toggle button to a group,
   use the @fun{gtk:toggle-button-group} function.
-  @begin[CSS nodes]{dictionary}
-    The @class{gtk:toggle-button} implementation has a single CSS node with name
-    @code{button}. To differentiate it from a plain button, it gets the
-    @code{.toggle} style class.
-  @end{dictionary}
-  @begin[Example]{dictionary}
-    This example has two toggle buttons. The toggle buttons are used to switch
-    the column and row spacing of a grid.
-    @begin{pre}
-(defun do-grid-spacing (&optional (application nil))
-  (let* ((grid (make-instance 'gtk:grid
-                              :margin-top 12
-                              :margin-bottom 12
-                              :margin-start 12
-                              :margin-end 12
-                              :column-homogeneous t
-                              :column-spacing 6
-                              :row-homogeneous t
-                              :row-spacing 6))
-         (window (make-instance 'gtk:window
-                                :title \"Grid Spacing\"
-                                :application application
-                                :child grid
-                                :default-width 320))
-         (button1 (make-instance 'gtk:toggle-button
-                                 :label \"More Row Spacing\"))
-         (button2 (make-instance 'gtk:toggle-button
-                                 :label \"More Col Spacing\"))
-         (button3 (make-instance 'gtk:button
-                                 :label \"Button\")))
-    ;; Signal handler for the first toggle button
-    (g:signal-connect button1 \"toggled\"
-       (lambda (widget)
-         (if (gtk:toggle-button-active widget)
-             (progn
-               (setf (gtk:grid-row-spacing grid) 48)
-               (setf (gtk:button-label widget) \"Less Row Spacing\"))
-             (progn
-               (setf (gtk:grid-row-spacing grid) 6)
-               (setf (gtk:button-label widget) \"More Row Spacing\")))))
-    ;; Signal handler for the second toggle button
-    (g:signal-connect button2 \"toggled\"
-       (lambda (widget)
-         (if (gtk:toggle-button-active widget)
-             (progn
-               (setf (gtk:grid-column-spacing grid) 48)
-               (setf (gtk:button-label widget) \"Less Col Spacing\"))
-             (progn
-               (setf (gtk:grid-column-spacing grid) 6)
-               (setf (gtk:button-label widget) \"More Col Spacing\")))))
-    ;; Pack and show the widgets
-    (gtk:grid-attach grid button1 0 0 1 1)
-    (gtk:grid-attach grid button2 1 0 1 1)
-    (gtk:grid-attach grid button3 0 1 2 1)
-    (gtk:widget-show window)))
-    @end{pre}
-    In this example three toggle buttons are grouped together.
+  @begin{examples}
+    In this example three toggle buttons are grouped together via the
+    @class{gtk:actionable} API, by using the same action with parameter type
+    and @code{\"s\"} state type for all buttons in the group, and giving each
+    button its own target value.
     @begin{pre}
 (defun do-toggle-button-action (&optional application)
   (let* ((vbox (make-instance 'gtk:box
@@ -187,7 +134,7 @@
                               :margin-start 48
                               :margin-end 48))
          (window (make-instance 'gtk:window
-                                :title \"Toggle Buttons Action\"
+                                :title \"Toggle Buttons with Action\"
                                 :child vbox
                                 :application application
                                 :resizable nil))
@@ -204,31 +151,31 @@
     ;; Configure the \"toggled\" action
     (g:action-map-add-action application action)
     (g:signal-connect action \"activate\"
-        (lambda (action parameter)
-          (g:action-change-state action parameter)))
+            (lambda (action parameter)
+              (g:action-change-state action parameter)))
     (g:signal-connect action \"change-state\"
-        (lambda (action parameter)
-          (let ((str (g:variant-string parameter)))
-            (cond ((string= str \"top\")
-                   (setf (gtk:label-label label)
-                         \"<b>Button Top is active</b>\"))
-                  ((string= str \"center\")
-                   (setf (gtk:label-label label)
-                         \"<b>Button Center is active</b>\"))
-                  (t
-                   (setf (gtk:label-label label)
-                         \"<b>Button Bottom is active</b>\")))
-            (setf (g:action-state action) parameter))))
+            (lambda (action parameter)
+              (let ((str (g:variant-string parameter)))
+                (cond ((string= str \"top\")
+                       (setf (gtk:label-label label)
+                             \"<b>Button Top is active</b>\"))
+                      ((string= str \"center\")
+                       (setf (gtk:label-label label)
+                             \"<b>Button Center is active</b>\"))
+                      (t
+                       (setf (gtk:label-label label)
+                             \"<b>Button Bottom is active</b>\")))
+                (setf (g:action-state action) parameter))))
     ;; Create three grouped toggle buttons
-    (setf button (gtk:toggle-button-new-with-mnemonic \"Toggle Button _Top\"))
+    (setf button (gtk:toggle-button-new-with-mnemonic \"Button _Top\"))
     (gtk:actionable-set-detailed-action-name button \"app.toggled::top\")
     (gtk:box-append vbox button)
     ;; Create and add the second radio button to the group
-    (setf button (gtk:toggle-button-new-with-mnemonic \"Toggle Button _Center\"))
+    (setf button (gtk:toggle-button-new-with-mnemonic \"Button _Center\"))
     (gtk:actionable-set-detailed-action-name button \"app.toggled::center\")
     (gtk:box-append vbox button)
     ;; Create and add the third toggle button to the group
-    (setf button (gtk:toggle-button-new-with-mnemonic \"Toggle Button _Bottom\"))
+    (setf button (gtk:toggle-button-new-with-mnemonic \"Button _Bottom\"))
     (gtk:actionable-set-detailed-action-name button \"app.toggled::bottom\")
     (gtk:box-append vbox button)
     ;; Add a label which shows the status of the toggle buttons
@@ -236,9 +183,14 @@
     ;; Make the \"app.toggled::center\" action active
     (g:action-activate (g:action-map-lookup-action application \"toggled\")
                        (g:variant-new-string \"center\"))
-    ;; Show the window
-    (gtk:widget-show window)))
+    ;; Present window
+    (gtk:window-present window)))
     @end{pre}
+  @end{examples}
+  @begin[CSS nodes]{dictionary}
+    The @class{gtk:toggle-button} implementation has a single CSS node with name
+    @code{button}. To differentiate it from a plain button, it gets the
+    @code{.toggle} style class.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"toggled\" signal}
@@ -263,7 +215,7 @@ lambda (toggle)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- toggle-button-active ---------------------------------------------------
+;;; --- gtk:toggle-button-active -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "active" 'toggle-button) t)
@@ -275,9 +227,9 @@ lambda (toggle)    :run-first
 (setf (liber:alias-for-function 'toggle-button-active)
       "Accessor"
       (documentation 'toggle-button-active 'function)
- "@version{2023-10-5}
-  @syntax[]{(gtk:toggle-button-active object) => active}
-  @syntax[]{(setf (gtk:toggle-button-active object) active)}
+ "@version{2024-5-4}
+  @syntax{(gtk:toggle-button-active object) => active}
+  @syntax{(setf (gtk:toggle-button-active object) active)}
   @argument[object]{a @class{gtk:toggle-button} widget}
   @argument[active]{@em{true} if the toggle button should be pressed in}
   @begin{short}
@@ -293,7 +245,7 @@ lambda (toggle)    :run-first
   @code{\"toggled\"} signal to be emitted.
   @see-class{gtk:toggle-button}")
 
-;;; --- toggle-button-group ----------------------------------------------------
+;;; --- gtk:toggle-button-group ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "group" 'toggle-button) t)
@@ -304,8 +256,8 @@ lambda (toggle)    :run-first
 (setf (liber:alias-for-function 'toggle-button-group)
       "Accessor"
       (documentation 'toggle-button-group 'function)
- "@version{2023-3-19}
-  @syntax[]{(setf (gtk:toggle-button-group object) group)}
+ "@version{2024-5-4}
+  @syntax{(setf (gtk:toggle-button-group object) group)}
   @argument[object]{a @class{gtk:toggle-button} widget}
   @argument[group]{another @class{gtk:toggle-button} widget to form a group
     with}
@@ -318,8 +270,8 @@ lambda (toggle)    :run-first
   active at a time.
 
   Note that the same effect can be achieved via the @class{gtk:actionable} API,
-  by using the same action with parameter type and \"s\" state type for all
-  buttons in the group, and giving each button its own target value.
+  by using the same action with parameter type and @code{\"s\"} state type for
+  all buttons in the group, and giving each button its own target value.
   @see-class{gtk:toggle-button}
   @see-class{gtk:actionable}")
 
@@ -331,8 +283,8 @@ lambda (toggle)    :run-first
 
 (defun toggle-button-new ()
  #+liber-documentation
- "@version{2023-3-19}
-  @return{A new @class{gtk:toggle-button} widget.}
+ "@version{2024-5-4}
+  @return{The new @class{gtk:toggle-button} widget.}
   @begin{short}
     Creates a new toggle button.
   @end{short}
@@ -354,10 +306,10 @@ lambda (toggle)    :run-first
 
 (defun toggle-button-new-with-label (label)
  #+liber-documentation
- "@version{2023-3-19}
+ "@version{2024-5-4}
   @argument[label]{a string containing the message to be placed in the toggle
     button}
-  @return{A new @class{gtk:toggle-button} widget.}
+  @return{The new @class{gtk:toggle-button} widget.}
   @short{Creates a new toggle button with a text label.}
   @see-class{gtk:toggle-button}
   @see-function{gtk:toggle-button-new}
@@ -375,10 +327,10 @@ lambda (toggle)    :run-first
 
 (defun toggle-button-new-with-mnemonic (label)
  #+liber-documentation
- "@version{2023-3-19}
+ "@version{2024-5-4}
   @argument[label]{a string with the text of the button, with an underscore in
     front of the mnemonic character}
-  @return{A new @class{gtk:toggle-button} widget.}
+  @return{The new @class{gtk:toggle-button} widget.}
   @begin{short}
     Creates a new toggle button containing a label.
   @end{short}
@@ -405,7 +357,7 @@ lambda (toggle)    :run-first
 
 (defun toggle-button-toggled (button)
  #+liber-documentation
- "@version{#2023-10-5}
+ "@version{2024-5-4}
   @argument[button]{a @class{gtk:toggle-button} widget}
   @begin{short}
     Emits the @code{\"toggled\"} signal on the toggle button.
@@ -417,7 +369,7 @@ lambda (toggle)    :run-first
   @see-class{gtk:toggle-button}"
   #+(and gtk-4-10 gtk-warn-deprecated)
   (when gtk-init:*gtk-warn-deprecated*
-    (warn "GTK:TOGGLE-BUTTON-TOGGLED is deprecated since 4.10."))
+    (warn "GTK:TOGGLE-BUTTON-TOGGLED is deprecated since 4.10"))
   (%toggle-button-toggled button))
 
 (export 'toggle-button-toggled)

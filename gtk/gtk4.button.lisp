@@ -125,7 +125,7 @@
 
 #+liber-documentation
 (setf (documentation 'button 'type)
- "@version{2023-9-2}
+ "@version{2024-5-4}
   @begin{short}
     The @class{gtk:button} widget is generally used to trigger a callback
     function that is called when the button is pressed.
@@ -161,9 +161,9 @@
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      The signal on the @class{gtk:button} widget is an action signal and
-      emitting it causes the button to animate press then release. Applications
-      should never connect to this signal, but use the \"clicked\" signal.
+      This signal is an action signal and emitting it causes the button to
+      animate press then release. Applications should never connect to this
+      signal, but use the @code{\"clicked\"} signal.
       @begin[code]{table}
         @entry[button]{The @class{gtk:button} widget which received the signal.}
       @end{table}
@@ -239,7 +239,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-child)
       "Accessor"
       (documentation 'button-child 'function)
- "@version{2023-9-2}
+ "@version{2024-5-4}
   @syntax{(gtk:button-child object) => child}
   @syntax{(setf (gtk:button-child object) child)}
   @argument[object]{a @class{gtk:button} widget}
@@ -256,7 +256,7 @@ lambda (button)    :action
   likely, you will either set the accessibility label or description for the
   button explicitly, or you will set a labelled-by or described-by relations
   from the child widget to the button.
-  @begin[Examples]{dictionary}
+  @begin{examples}
     Get the text of the label from the button:
     @begin{pre}
 (defvar button (gtk:button-new-with-label \"Save\"))
@@ -275,7 +275,7 @@ lambda (button)    :action
 (setf (gtk:button-child button) box)
 => #<GTK:BOX {1003471C73@}>
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gtk:button}
   @see-class{gtk:widget}")
 
@@ -291,7 +291,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-has-frame)
       "Accessor"
       (documentation 'button-has-frame 'function)
- "@version{2023-9-2}
+ "@version{2024-5-4}
   @syntax{(gtk:button-has-frame object) => setting}
   @syntax{(setf (gtk:button-has-frame object) setting)}
   @argument[object]{a @class{gtk:button} widget}
@@ -302,7 +302,6 @@ lambda (button)    :action
   @end{short}
   The @fun{gtk:button-has-frame} function returns whether the button has a
   frame. The @setf{gtk:button-has-frame} function sets the style of the button.
-
   Buttons can have a flat appearance or a frame drawn around them.
   @see-class{gtk:button}")
 
@@ -343,7 +342,7 @@ lambda (button)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "label" 'button) t)
  "The @code{label} property of type @code{:string} (Read / Write) @br{}
-  Text of the label inside the button, if the button contains a label. @br{}
+  The text of the label inside the button, if the button contains a label. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation

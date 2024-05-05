@@ -111,7 +111,6 @@
 
 (test gtk-menu-button-properties
   (let ((button (make-instance 'gtk:menu-button)))
-; gtk:menu-button-active is present since 4.10
     (is-false (gtk:menu-button-active button))
     (is-false (gtk:menu-button-always-show-arrow button))
     (is-false (gtk:menu-button-can-shrink button))
@@ -127,7 +126,16 @@
 
 ;;; --- Signals ----------------------------------------------------------------
 
-;;;     activate
+(test gtk-menu-button-activate-signal
+  (let ((query (g:signal-query (g:signal-lookup "activate" "GtkMenuButton"))))
+    (is (string= "activate" (g:signal-query-signal-name query)))
+    (is (string= "GtkMenuButton" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -150,8 +158,20 @@
 
 ;;;     gtk_menu_button_popup
 ;;;     gtk_menu_button_popdown
-
 ;;;     GtkMenuButtonCreatePopupFunc
 ;;;     gtk_menu_button_set_create_popup_func
 
-;;; 2024-4-20
+(test gtk-menu-button-set-create-popup-func
+  (let ((button (gtk:menu-button-new))
+        (msg ""))
+    (is-false (gtk:menu-button-set-create-popup-func button
+                      (lambda (button)
+                        (is (eq (g:gtype "GtkMenuButton")
+                                (g:object-type button)))
+                        (setf msg "Create popup function")
+                        gdk:+event-stop+)))
+    (is-false (gtk:menu-button-popup button))
+    (is (string= "Create popup function" msg))
+    (is-false (gtk:menu-button-popdown button))))
+
+;;; 2024-5-4

@@ -8,39 +8,39 @@
 ;;;     GtkLinkButton
 
 (test gtk-link-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkLinkButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:link-button
           (glib:symbol-for-gtype "GtkLinkButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkLinkButton")
           (g:gtype (cffi:foreign-funcall "gtk_link_button_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkButton")
           (g:type-parent "GtkLinkButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkLinkButton")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
              (list-interfaces "GtkLinkButton")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("uri" "visited")
              (list-properties "GtkLinkButton")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate-link")
              (list-signals "GtkLinkButton")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkLinkButton")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("flat" "link")
              (gtk:widget-css-classes (make-instance 'gtk:link-button))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :link (gtk:widget-class-accessible-role "GtkLinkButton")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLinkButton" GTK-LINK-BUTTON
                        (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
@@ -58,10 +58,18 @@
     (is-false (gtk:link-button-uri button))
     (is-false (gtk:link-button-visited button))))
 
-
 ;;; --- Signals ----------------------------------------------------------------
 
-;;;     activate-link
+(test gtk-link-button-activate-link-signal
+  (let ((query (g:signal-query (g:signal-lookup "activate-link" "GtkLinkButton"))))
+    (is (string= "activate-link" (g:signal-query-signal-name query)))
+    (is (string= "GtkLinkButton" (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "gboolean" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -79,4 +87,4 @@
     (is (string= "http://crategus.com" (gtk:link-button-uri button)))
     (is (string= "Label" (gtk:button-label button)))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-5-4

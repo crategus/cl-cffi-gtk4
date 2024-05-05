@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -204,7 +204,7 @@
 
 #+liber-documentation
 (setf (documentation 'menu-button 'type)
- "@version{2023-3-24}
+ "@version{2024-5-4}
   @begin{short}
     The @class{gtk:menu-button} widget is used to display a popup when clicked
     on.
@@ -215,13 +215,14 @@
   @image[menu-button]{Figure: GtkMenuButton}
 
   The @class{gtk:menu-button} widget can show either an icon, set with the
-  @code{icon-name} property, or a label, set with the @code{label} property. If
-  neither is explicitly set, a @class{gtk:image} widget is automatically
-  created, using an arrow image oriented according to \"direction\" or the
-  generic \"open-menu-symbolic\" icon if the direction is not set.
+  @slot[gtk:menu-button]{icon-name} property, or a label, set with the
+  @slot[gtk:menu-button]{label} property. If neither is explicitly set, a
+  @class{gtk:image} widget is automatically created, using an arrow image
+  oriented according to the @slot[gtk:menu-button]{direction} property or the
+  generic @code{\"open-menu-symbolic\"} icon if the direction is not set.
 
-  The positioning of the popup is determined by the @code{direction} property
-  of the menu button.
+  The positioning of the popup is determined by the
+  @slot[gtk:menu-button]{direction} property of the menu button.
 
   For menus, the @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign}
   properties of the menu are also taken into account. For example, when the
@@ -296,7 +297,8 @@ lambda (button)    :action
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "active" 'menu-button) t)
  "The @code{active} property of type @code{:boolean} (Read / Write) @br{}
-  Whether the menu button is active.")
+  Whether the menu button is active. @br{}
+  Default value: @em{false}")
 
 #+(and gtk-4-10 liber-documentation)
 (setf (liber:alias-for-function 'menu-button-active)
@@ -324,7 +326,9 @@ lambda (button)    :action
                                                'menu-button) t)
  "The @code{always-show-arrow} property of type @code{:boolean} (Read / Write)
   @br{}
-  Whether to show a dropdown arrow even when using an icon or a custom child.")
+  Whether to show a dropdown arrow even when using an icon or a custom child.
+  @br{}
+  Default value: @em{false}")
 
 #+(and gtk-4-4 liber-documentation)
 (setf (liber:alias-for-function 'menu-button-always-show-arrow)
@@ -353,7 +357,7 @@ lambda (button)    :action
 (setf (documentation (liber:slot-documentation "can-shrink" 'menu-button) t)
  "The @code{can-shrink} property of type @code{:boolean} (Read / Write) @br{}
   Whether the size of the menu button can be made smaller than the natural size
-  of its contents.
+  of its contents. @br{}
   Default value: @em{false}")
 
 #+(and gtk-4-12 liber-documentation)
@@ -537,14 +541,13 @@ lambda (button)    :action
 ;;; --- gtk:menu-button-menu-model ---------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "menu-model"
-                                               'menu-button) t)
+(setf (documentation (liber:slot-documentation "menu-model" 'menu-button) t)
  "The @code{menu-model} property of type @class{g:menu-model} (Read / Write)
   @br{}
   The menu model from which the popup will be created. Depending on the
-  @code{use-popover} property, that may be a menu or a popover. See the
-  @fun{gtk:menu-button-menu-model} function for the interaction with the
-  @code{popup} property.")
+  @slot[gtk:menu-button]{use-popover} property, that may be a menu or a popover.
+  See the @fun{gtk:menu-button-menu-model} function for the interaction with
+  the @slot[gtk:menu-button]{popup} property.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'menu-button-menu-model)
@@ -615,7 +618,8 @@ lambda (button)    :action
 (setf (documentation (liber:slot-documentation "primary" 'menu-button) t)
  "The @code{primary} property of type @code{:boolean} (Read / Write) @br{}
   Whether the menu button acts as a primary menu. Primary menus can be opened
-  using the @kbd{F10} key.")
+  using the @kbd{F10} key. @br{}
+  Default value: @em{false}")
 
 #+(and gtk-4-4 liber-documentation)
 (setf (liber:alias-for-function 'menu-button-primary)
@@ -644,7 +648,8 @@ lambda (button)    :action
 (setf (documentation (liber:slot-documentation "use-underline" 'menu-button) t)
  "The @code{use-underline} property of type @code{:boolean} (Read / Write) @br{}
   If set, an underline in the text indicates the next character should be used
-  for the mnemonic accelerator key.")
+  for the mnemonic accelerator key. @br{}
+  Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'menu-button-use-underline)
@@ -690,7 +695,7 @@ lambda (button)    :action
 
 (cffi:defcfun ("gtk_menu_button_popup" menu-button-popup) :void
  #+liber-documentation
- "@version{#2024-4-20}
+ "@version{2024-5-4}
   @argument[button]{a @class{gtk:menu-button} widget}
   @short{Pop up the menu.}
   @see-class{gtk:menu-button}"
@@ -704,7 +709,7 @@ lambda (button)    :action
 
 (cffi:defcfun ("gtk_menu_button_popdown" menu-button-popdown) :void
  #+liber-documentation
- "@version{#2024-4-20}
+ "@version{2024-5-4}
   @argument[button]{a @class{gtk:menu-button} widget}
   @short{Dismiss the menu.}
   @see-class{gtk:menu-button}"
@@ -726,7 +731,7 @@ lambda (button)    :action
 (setf (liber:alias-for-symbol 'menu-button-create-popup-func)
       "Callback"
       (liber:symbol-documentation 'menu-button-create-popup-func)
- "@version{#2024-4-20}
+ "@version{2024-5-4}
   @syntax{lambda (button)}
   @argument[button]{a @class{gtk:menu-button} widget}
   @begin{short}
@@ -755,7 +760,7 @@ lambda (button)    :action
 
 (defun menu-button-set-create-popup-func (button func)
  #+liber-documentation
- "@version{#2024-4-20}
+ "@version{2024-5-4}
   @argument[button]{a @class{gtk:menu-button} widget}
   @argument[func]{a @symbol{gtk:menu-button-create-popup-func} callback
     function to call when a popuop is about to be shown, but none has been
@@ -773,11 +778,17 @@ lambda (button)    :action
   @see-symbol{gtk:menu-button-create-popup-func}
   @see-function{gtk:menu-button-popover}
   @see-function{gtk:menu-button-menu-model}"
-  (%menu-button-set-create-popup-func
-          button
-          (cffi:callback menu-button-create-popup-func)
-          (glib:allocate-stable-pointer func)
-          (cffi:callback glib:stable-pointer-destroy-notify)))
+  (if func
+      (%menu-button-set-create-popup-func
+              button
+              (cffi:callback menu-button-create-popup-func)
+              (glib:allocate-stable-pointer func)
+              (cffi:callback glib:stable-pointer-destroy-notify))
+      (%menu-button-set-create-popup-func
+              button
+              (cffi:null-pointer)
+              (cffi:null-pointer)
+              (cffi:null-pointer))))
 
 (export 'menu-button-set-create-popup-func)
 

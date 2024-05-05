@@ -80,7 +80,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkLinkButton
+;;; GtkLinkButton
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkLinkButton" link-button
@@ -100,14 +100,14 @@
 
 #+liber-documentation
 (setf (documentation 'link-button 'type)
- "@version{2023-3-18}
+ "@version{2024-5-4}
   @begin{short}
-    A @class{gtk:link-button} widget is a @class{gtk:button} widget with a
+    The @class{gtk:link-button} widget is a @class{gtk:button} widget with a
     hyperlink, similar to the one used by web browsers, which triggers an
     action when clicked. It is useful to show quick links to resources.
   @end{short}
   A link button is created by calling either the @fun{gtk:link-button-new} or
-  @fun{gtk:link-button-new-with-label} functions. If using the former, the URI
+  @fun{gtk:link-button-new-with-label} function. If using the former, the URI
   you pass to the constructor is used as a label for the widget.
 
   @image[link-button]{Figure: GtkLinkButton}
@@ -115,10 +115,10 @@
   The URI bound to a @class{gtk:link-button} widget can be set specifically or
   retrieved using the @fun{gtk:link-button-uri} function.
 
-  By default, the @class{gtk:link-button} widget calls the @fun{gtk:show-uri}
-  function when the button is clicked. This behaviour can be overridden by
-  connecting to the @code{\"activate-link\"} signal and returning @em{true} from
-  the signal handler.
+  By default, the @class{gtk:link-button} widget calls the
+  @fun{gtk:file-launcher-launch} function when the button is clicked. This
+  behaviour can be overridden by connecting to the @code{\"activate-link\"}
+  signal and returning @em{true} from the signal handler.
   @begin[CSS nodes]{dictionary}
     The @class{gtk:link-button} implementation has a single CSS node with name
     @code{button}. To differentiate it from a plain @class{gtk:button} widget,
@@ -134,10 +134,11 @@
 lambda (button)    :run-last
       @end{pre}
       The signal is emitted each time the link button has been clicked. The
-      default handler will call the @fun{gtk:show-uri} function with the URI
-      stored inside the @code{uri} property. To override the default behavior,
-      you can connect to the @code{\"activate-link\"} signal and stop the
-      propagation of the signal by returning @em{true} from your handler.
+      default handler will call the @fun{gtk:file-launcher-launch} function
+      with the URI stored inside the @slot[gtk:link-button]{uri} property.
+      To override the default behavior, you can connect to the
+      @code{\"activate-link\"} signal and stop the propagation of the signal by
+      returning @em{true} from your handler.
       @begin[code]{table}
         @entry[button]{The @class{gtk:link-button} widget that emitted the
           signal.}
@@ -165,7 +166,7 @@ lambda (button)    :run-last
 (setf (liber:alias-for-function 'link-button-uri)
       "Accessor"
       (documentation 'link-button-uri 'function)
- "@version{2023-3-18}
+ "@version{2024-5-4}
   @syntax[]{(gtk:link-button-uri object) => uri}
   @syntax[]{(setf (gtk:link-button-uri object) uri)}
   @argument[object]{a @class{gtk:link-button} widget}
@@ -175,8 +176,9 @@ lambda (button)    :run-last
     @class{gtk:link-button} class.
   @end{short}
   The @fun{gtk:link-button-uri} function retrieves the URI. The
-  @setf{gtk:link-button-uri} function sets @arg{uri} as the URI where the link
-  button points. As a side-effect this unsets the visited state of the button.
+  @setf{gtk:link-button-uri} function sets @slot[gtk:link-button]{uri} as the
+  URI where the link button points. As a side-effect this unsets the visited
+  state of the button.
   @see-class{gtk:link-button}")
 
 ;;; --- gtk:link-button-visited ------------------------------------------------
@@ -210,7 +212,7 @@ lambda (button)    :run-last
   @see-class{gtk:link-button}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_link_button_new ()
+;;; gtk_link_button_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline link-button-new))
@@ -230,7 +232,7 @@ lambda (button)    :run-last
 (export 'link-button-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_link_button_new_with_label ()
+;;; gtk_link_button_new_with_label
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline link-button-new-with-label))

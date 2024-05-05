@@ -8,39 +8,39 @@
 ;;;     GtkToggleButton
 
 (test toggle-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkToggleButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:toggle-button
           (glib:symbol-for-gtype "GtkToggleButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkToggleButton")
           (g:gtype (cffi:foreign-funcall "gtk_toggle_button_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkButton")
           (g:type-parent "GtkToggleButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkToggleButton")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkActionable")
              (list-interfaces "GtkToggleButton")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("active" "group")
              (list-properties "GtkToggleButton")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("toggled")
              (list-signals "GtkToggleButton")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkToggleButton")))
-  ;; CSS classes
+  ;; Check CSS classes
   (is (equal '("toggle")
              (gtk:widget-css-classes (make-instance 'gtk:toggle-button))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :toggle-button (gtk:widget-class-accessible-role "GtkToggleButton")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkToggleButton" GTK-TOGGLE-BUTTON
                        (:SUPERCLASS GTK-BUTTON :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkActionable" "GtkBuildable"
@@ -54,12 +54,28 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     active
-;;;     group
+(test gtk-toggle-button-properties
+  (let ((button (make-instance 'gtk:toggle-button)))
+    (is-false (gtk:toggle-button-active button))
+    ;; GROUP is not readable
+    (signals (error) (gtk:toggle-button-group button))
+    (is (typep (setf (gtk:toggle-button-group button)
+                     (make-instance 'gtk:toggle-button))
+               'gtk:toggle-button))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
-;;;     toggled
+(test gtk-toggle-button-toggled-signal
+  (let ((query (g:signal-query (g:signal-lookup "toggled" "GtkToggleButton"))))
+    (is (string= "toggled" (g:signal-query-signal-name query)))
+    (is (string= "GtkToggleButton"
+                 (g:type-name (g:signal-query-owner-type query))))
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))
+    (is-false (g:signal-query-signal-detail query))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -88,4 +104,18 @@
 
 ;;;     gtk_toggle_button_toggled
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-toggle-button-toggled
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (button (gtk:toggle-button-new))
+         (msg nil))
+    (g:signal-connect button "toggled"
+                      (lambda (toggle)
+                        (is (eq (g:gtype "GtkToggleButton")
+                                (g:object-type toggle)))
+                        (setf msg "Button TOGGLED")
+                        gdk:+event-stop+))
+    (is-false (gtk:toggle-button-active button))
+    (is-false (gtk:toggle-button-toggled button))
+    (is (string= "Button TOGGLED" msg))))
+
+;;; 2024-5-4

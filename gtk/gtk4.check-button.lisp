@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -120,42 +120,41 @@
 
 #+liber-documentation
 (setf (documentation 'check-button 'type)
- "@version{2023-9-18}
+ "@version{2024-5-4}
   @begin{short}
-    A @class{gtk:check-button} widget places a label next to an indicator.
+    The @class{gtk:check-button} widget places a label next to an indicator.
   @end{short}
 
   @image[check-button]{Figure: GtkCheckButton}
 
-  A @class{gtk:check-button} widget is created by calling either the
+  The @class{gtk:check-button} widget is created by calling either the
   @fun{gtk:check-button-new} or @fun{gtk:check-button-new-with-label} functions.
-
   The state of a check button can be set specifically using the
   @fun{gtk:check-button-active} function.
 
   @subheading{Inconsistent state}
   In addition to \"on\" and \"off\", check buttons can be an \"in between\"
-  state that is neither on nor off. This can be used e.g. when the user has
-  selected a range of elements, such as some text or spreadsheet cells, that
-  are affected by a check button, and the current values in that range are
+  state that is neither on nor off. This can be used, for example, when the
+  user has selected a range of items, such as some text or spreadsheet cells,
+  that are affected by a check button, and the current values in that range are
   inconsistent. To set a check button to inconsistent state, use the
   @fun{gtk:check-button-inconsistent} function.
 
   @subheading{Grouping}
-  Check buttons can be grouped together, to form mutually exclusive groups -
-  only one of the buttons can be toggled at a time, and toggling another one
+  Check buttons can be grouped together, to form mutually exclusive groups.
+  Only one of the buttons can be toggled at a time, and toggling another one
   will switch the currently toggled one off. Grouped check buttons use a
   different indicator, and are commonly referred to as radio buttons. To add a
   @class{gtk:check-button} widget to a group, use the
   @fun{gtk:check-button-group} function.
-  @begin[Example]{dictionary}
-    This examples shows check and radio buttons.
+  @begin{examples}
+    This example shows check and radio buttons.
     @begin{pre}
 (defun do-check-button (&optional application)
   (let* ((grid (make-instance 'gtk:grid
-                              :halign :center
-                              :column-spacing 12
+                              :column-spacing 24
                               :row-spacing 12
+                              :halign :center
                               :margin-top 12
                               :margin-bottom 12
                               :margin-start 12
@@ -164,38 +163,38 @@
                                 :title \"Check Buttons\"
                                 :child grid
                                 :application application
-                                :resizable nil)))
+                                :resizable nil))
+         (group nil) (button nil))
     ;; Create three radio buttons and put the buttons into the grid
-    (let ((group nil)
-          (button (gtk:check-button-new-with-label \"Radio Button 1\")))
-      (gtk:grid-attach grid button 0 0 1 1)
-      (setf group button)
-      ;; Create and add the second radio button to the group
-      (setf button (gtk:check-button-new-with-label \"Radio Button 2\"))
-      (setf (gtk:check-button-group button) group)
-      (gtk:grid-attach grid button 0 1 1 1)
-      ;; Make the second button active
-      (setf (gtk:check-button-active button) t)
-      ;; Create and add the third radio button to the group
-      (setf button (gtk:check-button-new-with-label \"Radio Button 3\"))
-      (setf (gtk:check-button-group button) group)
-      (gtk:grid-attach grid button 0 2 1 1))
+    (setf button (gtk:check-button-new-with-label \"Radio 1\"))
+    (setf group button)
+    (gtk:grid-attach grid button 0 0 1 1)
+    ;; Create and add the second radio button to the group
+    (setf button (gtk:check-button-new-with-label \"Radio 2\"))
+    (setf (gtk:check-button-group button) group)
+    (gtk:grid-attach grid button 0 1 1 1)
+    ;; Make second radio button active
+    (setf (gtk:check-button-active button) t)
+    ;; Create and add the third radio button to the group
+    (setf button (gtk:check-button-new-with-label \"Radio 3\"))
+    (setf (gtk:check-button-group button) group)
+    (gtk:grid-attach grid button 0 2 1 1)
     ;; Create three check buttons and put the buttons into the grid
     (gtk:grid-attach grid
-                     (gtk:check-button-new-with-label \"Check Button 1\")
+                     (gtk:check-button-new-with-mnemonic \"Check _1\")
                      1 0 1 1)
     (gtk:grid-attach grid
-                     (gtk:check-button-new-with-label \"Check Button 2\")
+                     (gtk:check-button-new-with-mnemonic \"Check _2\")
                        1 1 1 1)
     (gtk:grid-attach grid
-                     (gtk:check-button-new-with-label \"Check Button 3\")
+                     (gtk:check-button-new-with-mnemonic \"Check _3\")
                      1 2 1 1)
-    ;; Make the first check button active
+    ;; Make first check button active
     (setf (gtk:check-button-active (gtk:grid-child-at grid 1 0)) t)
-    ;; Show the window and its content
-    (gtk:widget-show window)))
+    ;; Present window
+    (gtk:window-present window)))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 checkbutton[.text-button]
@@ -203,9 +202,9 @@ checkbutton[.text-button]
 ╰── [label]
     @end{pre}
     The @class{gtk:check-button} implementation has a main node with name
-    @code{checkbutton}. If the @code{label} property is set, it contains a label
-    child. The indicator node is named @code{check} when no group is set, and
-    @code{radio} if the check button is grouped together with other check
+    @code{checkbutton}. If the @code{label} property is set, it contains a
+    label child. The indicator node is named @code{check} when no group is set,
+    and @code{radio} if the check button is grouped together with other check
     buttons.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
@@ -219,8 +218,8 @@ lambda (checkbutton)    :action
       @end{pre}
       Emitted when the check button is activated. The signal is an action signal
       and emitting it causes the button to animate press then release.
-      Applications should never connect to this signal, but use the \"toggled\"
-      signal. Since 4.2
+      Applications should never connect to this signal, but use the
+      @code{\"toggled\"} signal. Since 4.2
       @begin[code]{table}
         @entry[checkbutton]{The @class{gtk:check-button} widget which received
           the signal.}
@@ -229,7 +228,8 @@ lambda (checkbutton)    :action
       @begin{pre}
 lambda (checkbutton)    :run-first
       @end{pre}
-      Emitted when the @code{active} property of the check button changes.
+      Emitted when the @slot[gtk:check-button]{active} property of the check
+      button changes.
       @begin[code]{table}
         @entry[checkbutton]{The @class{gtk:check-button} widget which received
           the signal.}
@@ -251,32 +251,32 @@ lambda (checkbutton)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- check-button-active ----------------------------------------------------
+;;; --- gtk:check-button-active ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "active" 'check-button) t)
  "The @code{active} property of type @code{:boolean} (Read / Write) @br{}
-  If the check button should be pressed in. @br{}
+  Whether the check button should be pressed in. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'check-button-active)
       "Accessor"
       (documentation 'check-button-active 'function)
- "@version{2023-3-20}
-  @syntax[]{(gtk:check-button-active object) => active}
-  @syntax[]{(setf (gtk:check-button-active object) active)}
+ "@version{2024-5-4}
+  @syntax{(gtk:check-button-active object) => active}
+  @syntax{(setf (gtk:check-button-active object) active)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[active]{a boolean whether the check button should be pressed in}
   @begin{short}
     Accessor of the @slot[gtk:check-button]{active} slot of the
     @class{gtk:check-button} class.
   @end{short}
-  Setting the @code{active} property to @em{true} will add the @code{:checked}
-  state to both the check button and the indicator CSS node.
+  Setting the @slot[gtk:check-button]{active} property to @em{true} will add
+  the @code{:checked} state to both the check button and the indicator CSS node.
   @see-class{gtk:check-button}")
 
-;;; --- check-button-child -----------------------------------------------------
+;;; --- gtk:check-button-child -------------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "child" 'check-button) t)
@@ -287,9 +287,9 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-child)
       "Accessor"
       (documentation 'check-button-child 'function)
- "@version{2023-4-15}
-  @syntax[]{(gtk:check-button-child object) => child}
-  @syntax[]{(setf (gtk:check-button-child object) child)}
+ "@version{2024-5-4}
+  @syntax{(gtk:check-button-child object) => child}
+  @syntax{(setf (gtk:check-button-child object) child)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -310,7 +310,7 @@ lambda (checkbutton)    :run-first
   @see-class{gtk:check-button}
   @see-function{gtk:check-button-label}")
 
-;;; --- check-button-group -----------------------------------------------------
+;;; --- gtk:check-button-group -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "group" 'check-button) t)
@@ -321,8 +321,8 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-group)
       "Accessor"
       (documentation 'check-button-group 'function)
- "@version{2023-3-20}
-  @syntax[]{(setf (gtk:check-button-group object) group)}
+ "@version{2024-5-4}
+  @syntax{(setf (gtk:check-button-group object) group)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[group]{a @class{gtk:check-button} widget}
   @begin{short}
@@ -337,26 +337,26 @@ lambda (checkbutton)    :run-first
   is also commonly known as a \"radio button\".
 
   Note that the same effect can be achieved via the @class{gtk:actionable} API,
-  by using the same action with parameter type and state type \"s\" for all
-  buttons in the group, and giving each button its own target value.
+  by using the same action with parameter type and @code{\"s\"} state type for
+  all buttons in the group, and giving each button its own target value.
   @see-class{gtk:check-button}
   @see-function{gtk:actionable}")
 
-;;; --- check-button-inconsistent ----------------------------------------------
+;;; --- gtk:check-button-inconsistent ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "inconsistent" 'check-button) t)
  "The @code{inconsistent} property of type @code{:boolean} (Read / Write) @br{}
-  If the check button is in an \"in between\" state. @br{}
+  Whether the check button is in an \"in between\" state. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'check-button-inconsistent)
       "Accessor"
       (documentation 'check-button-inconsistent 'function)
- "@version{2023-3-20}
-  @syntax[]{(gtk:check-button-inconsistent object) => inconsistent}
-  @syntax[]{(setf (gtk:check-button-inconsistent object) inconsistent)}
+ "@version{2024-5-4}
+  @syntax{(gtk:check-button-inconsistent object) => inconsistent}
+  @syntax{(setf (gtk:check-button-inconsistent object) inconsistent)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[inconsistent]{a boolean whether the check button is in an \"in
     between\" state}
@@ -373,22 +373,22 @@ lambda (checkbutton)    :run-first
   appearance, not the semantics of the button.
   @see-class{gtk:check-button}")
 
-;;; --- check-button-label -----------------------------------------------------
+;;; --- gtk:check-button-label -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "label" 'check-button) t)
  "The @code{label} property of type @code{:string} (Read / Write) @br{}
-  Text of the label widget inside the button, if the button contains a label
-  widget. @br{}
+  The text of the label widget inside the button, if the button contains a
+  label widget. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'check-button-label)
       "Accessor"
       (documentation 'check-button-label 'function)
- "@version{2023-3-20}
-  @syntax[]{(gtk:check-button-label object) => label}
-  @syntax[]{(setf (gtk:check-button-label object) label)}
+ "@version{2024-5-4}
+  @syntax{(gtk:check-button-label object) => label}
+  @syntax{(setf (gtk:check-button-label object) label)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[label]{a string with the text of the label widget inside the button}
   @begin{short}
@@ -397,7 +397,7 @@ lambda (checkbutton)    :run-first
   @end{short}
   @see-class{gtk:check-button}")
 
-;;; --- check-button-use-underline ---------------------------------------------
+;;; --- gtk:check-button-use-underline -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-underline" 'check-button) t)
@@ -410,9 +410,9 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-use-underline)
       "Accessor"
       (documentation 'check-button-use-underline 'function)
- "@version{2023-3-20}
-  @syntax[]{(gtk:check-button-use-underline object) => setting}
-  @syntax[]{(setf (gtk:check-button-use-underline object) setting)}
+ "@version{2024-5-4}
+  @syntax{(gtk:check-button-use-underline object) => setting}
+  @syntax{(setf (gtk:check-button-use-underline object) setting)}
   @argument[object]{a @class{gtk:check-button} widget}
   @argument[setting]{a boolean whether an underline in the text indicates the
     next character should be used for the mnemonic accelerator key}
@@ -430,8 +430,8 @@ lambda (checkbutton)    :run-first
 
 (defun check-button-new ()
  #+liber-documentation
- "@version{2023-3-20}
-  @return{A @class{gtk:check-button} widget.}
+ "@version{2024-5-4}
+  @return{The @class{gtk:check-button} widget.}
   @short{Creates a new check button.}
   @see-class{gtk:check-button}
   @see-function{gtk:check-button-new-with-label}
@@ -448,9 +448,9 @@ lambda (checkbutton)    :run-first
 
 (defun check-button-new-with-label (label)
  #+liber-documentation
- "@version{2023-3-20}
+ "@version{2024-5-4}
   @argument[label]{a string with the text for the check button}
-  @return{A @class{gtk:check-button} widget.}
+  @return{The @class{gtk:check-button} widget.}
   @begin{short}
     Creates a new check button with a @class{gtk:label} widget to the right
     of it.
@@ -472,10 +472,10 @@ lambda (checkbutton)    :run-first
 
 (defun check-button-new-with-mnemonic (label)
 #+liber-documentation
- "@version{2023-3-20}
+ "@version{2024-5-4}
   @argument[label]{a string with the text of the button, with an underscore in
     front of the mnemonic character}
-  @return{A @class{gtk:check-button} widget.}
+  @return{The @class{gtk:check-button} widget.}
   @begin{short}
     Creates a new check button widget containing a label.
   @end{short}
