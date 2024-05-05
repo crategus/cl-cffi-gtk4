@@ -1729,7 +1729,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Buttons and Toggles]{section}
     @begin[GtkButton]{subsection}
-      A widget that emits a signal when clicked on.
       @about-class{button}
       @about-generic{button-child}
       @about-generic{button-has-frame}
@@ -1742,7 +1741,6 @@ GtkCellRenderer         GtkWidget
       @about-function{button-new-from-icon-name}
     @end{subsection}
     @begin[GtkToggleButton]{subsection}
-      Create buttons which retain their state.
       @about-class{toggle-button}
       @about-generic{toggle-button-active}
       @about-generic{toggle-button-group}
@@ -1752,7 +1750,6 @@ GtkCellRenderer         GtkWidget
       @about-function{toggle-button-toggled}
     @end{subsection}
     @begin[GtkCheckButton]{subsection}
-      Create widgets with a discrete toggle button.
       @about-class{check-button}
       @about-generic{check-button-active}
       @about-generic{check-button-child}
@@ -1766,7 +1763,6 @@ GtkCellRenderer         GtkWidget
       @about-function{check-button-set-group}
     @end{subsection}
     @begin[GtkMenuButton]{subsection}
-      A widget that shows a popup when clicked on.
       @about-symbol{arrow-type}
       @about-class{menu-button}
       @about-generic{menu-button-active}
@@ -1787,7 +1783,6 @@ GtkCellRenderer         GtkWidget
       @about-function{menu-button-set-create-popup-func}
     @end{subsection}
     @begin[GtkLinkButton]{subsection}
-      Create buttons bound to a URL.
       @about-class{link-button}
       @about-generic{link-button-uri}
       @about-generic{link-button-visited}
@@ -1795,7 +1790,6 @@ GtkCellRenderer         GtkWidget
       @about-function{link-button-new-with-label}
     @end{subsection}
     @begin[GtkScaleButton]{subsection}
-      A button which pops up a scale.
       @about-class{scale-button}
       @about-generic{scale-button-adjustment}
       @about-generic{scale-button-icons}
@@ -1806,7 +1800,6 @@ GtkCellRenderer         GtkWidget
       @about-function{scale-button-minus-button}
     @end{subsection}
     @begin[GtkSwitch]{subsection}
-      A \"light switch\" style toggle.
       @about-class{switch}
       @about-generic{switch-active}
       @about-generic{switch-state}
@@ -3951,7 +3944,6 @@ GtkCellRenderer         GtkWidget
       @about-function{statusbar-message}
     @end{subsection}
     @begin[GtkLockButton]{subsection}
-      A widget to unlock or lock privileged operations.
       @about-class{lock-button}
       @about-generic{lock-button-permission}
       @about-generic{lock-button-text-lock}
@@ -3962,13 +3954,11 @@ GtkCellRenderer         GtkWidget
       @about-function{lock-button-new}
     @end{subsection}
     @begin[GtkVolumeButton]{subsection}
-      A button which pops up a volume control.
       @about-class{volume-button}
       @about-generic{volume-button-use-symbolic}
       @about-function{volume-button-new}
     @end{subsection}
     @begin[GtkEntryCompletion]{subsection}
-      Completion functionality for the @class{gtk:entry} widget.
       @about-class{entry-completion}
       @about-generic{entry-completion-cell-area}
       @about-generic{entry-completion-inline-completion}
@@ -3990,7 +3980,6 @@ GtkCellRenderer         GtkWidget
       @about-function{entry-completion-insert-prefix}
     @end{subsection}
     @begin[GtkTreeModel]{subsection}
-      The tree interface used by the @class{gtk:tree-view} widget.
       @about-symbol{tree-model-flags}
       @about-struct{tree-iter}
       @about-function{tree-iter-copy}
@@ -4054,7 +4043,6 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-model-rows-reordered-with-length}
     @end{subsection}
     @begin[GtkTreeSelection]{subsection}
-      The selection object for the @class{gtk:tree-view} widget.
       @about-class{tree-selection}
       @about-generic{tree-selection-mode}
       @about-symbol{tree-selection-func}
@@ -4079,7 +4067,6 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-selection-unselect-range}
     @end{subsection}
     @begin[GtkTreeViewColumn]{subsection}
-      A visible column in a @class{gtk:tree-view} widget.
       @about-symbol{tree-view-column-sizing}
       @about-class{tree-view-column}
       @about-generic{tree-view-column-alignment}
@@ -4123,7 +4110,6 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-view-column-tree-view}
     @end{subsection}
     @begin[GtkTreeView]{subsection}
-      A widget for displaying both trees and lists.
       @about-symbol{tree-view-drop-position}
       @about-symbol{tree-view-grid-lines}
       @about-class{tree-view}
