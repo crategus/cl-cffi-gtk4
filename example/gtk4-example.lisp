@@ -64,7 +64,7 @@
            #:do-video
 
            ;; Button and Toggle Widgets
-           #:do-button-more
+           #:do-button-various
            #:do-toggle-button
            #:do-toggle-button-action
            #:do-check-button

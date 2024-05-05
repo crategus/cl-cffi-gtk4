@@ -1,13 +1,14 @@
 ;;;; Check Buttons
 ;;;;
-;;;; 2024-4-6
+;;;; 2024-5-4
 
 (in-package :gtk4-example)
 
 (defun do-check-button (&optional application)
   (let* ((grid (make-instance 'gtk:grid
-                              :column-spacing 12
+                              :column-spacing 24
                               :row-spacing 12
+                              :halign :center
                               :margin-top 12
                               :margin-bottom 12
                               :margin-start 12
@@ -19,30 +20,30 @@
                                 :resizable nil))
          (group nil) (button nil))
     ;; Create three radio buttons and put the buttons into the grid
-    (setf button (gtk:check-button-new-with-label "Radio Button 1"))
+    (setf button (gtk:check-button-new-with-label "Radio 1"))
     (setf group button)
     (gtk:grid-attach grid button 0 0 1 1)
     ;; Create and add the second radio button to the group
-    (setf button (gtk:check-button-new-with-label "Radio Button 2"))
+    (setf button (gtk:check-button-new-with-label "Radio 2"))
     (setf (gtk:check-button-group button) group)
     (gtk:grid-attach grid button 0 1 1 1)
-    ;; Make the second button active
+    ;; Make second radio button active
     (setf (gtk:check-button-active button) t)
     ;; Create and add the third radio button to the group
-    (setf button (gtk:check-button-new-with-label "Radio Button 3"))
+    (setf button (gtk:check-button-new-with-label "Radio 3"))
     (setf (gtk:check-button-group button) group)
     (gtk:grid-attach grid button 0 2 1 1)
     ;; Create three check buttons and put the buttons into the grid
     (gtk:grid-attach grid
-                     (gtk:check-button-new-with-mnemonic "Check Button _1")
+                     (gtk:check-button-new-with-mnemonic "Check _1")
                      1 0 1 1)
     (gtk:grid-attach grid
-                     (gtk:check-button-new-with-mnemonic "Check Button _2")
+                     (gtk:check-button-new-with-mnemonic "Check _2")
                        1 1 1 1)
     (gtk:grid-attach grid
-                     (gtk:check-button-new-with-mnemonic "Check Button _3")
+                     (gtk:check-button-new-with-mnemonic "Check _3")
                      1 2 1 1)
-    ;; Make the first check button active
+    ;; Make first check button active
     (setf (gtk:check-button-active (gtk:grid-child-at grid 1 0)) t)
-    ;; Show the window and its content
+    ;; Present window
     (gtk:window-present window)))

@@ -65,7 +65,7 @@
                (:file "video")
 
                ;; Buttons and Toggle Widgets
-               (:file "button-more")
+               (:file "button-various")
                (:file "toggle-button")
                (:file "toggle-button-action")
                (:file "check-button")

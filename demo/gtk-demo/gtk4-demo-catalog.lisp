@@ -366,11 +366,17 @@
        "video.lisp"))
 
      "Button and Toggle Widgets"
-     (("More Buttons"
+     (("Various Buttons"
        ":window"
-       "DO-BUTTON-MORE"
+       "DO-BUTTON-VARIOUS"
        "gtk4-example"
-       "button-more.lisp")
+       "button-various.lisp"
+       :keywords
+       "gtk:button"
+       "gtk:button-new-with-label"
+       "gtk:button-new-with-mnemonic"
+       "gtk:button-new-with-icon-name"
+       "gtk:size-group")
       ("Toggle Buttons"
        ":window"
        "DO-TOGGLE-BUTTON"

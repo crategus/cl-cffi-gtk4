@@ -1,6 +1,16 @@
-;;;; More Buttons
+;;;; Various Buttons
 ;;;;
-;;;; 2024-4-6
+;;;; The <tt>gtk:button</tt> widget is generally used to trigger a callback
+;;;; function that is called when the button is pressed.
+;;;;
+;;;; The <tt>gtk:button</tt> widget can hold any valid child widget. That is,
+;;;; it can hold almost any other standard <tt>gtk:widget</tt> widget. The most
+;;;; commonly used child is the <tt>gtk:label</tt> widget.
+;;;;
+;;;; This example uses a <tt>gtk:size-group</tt> object for grouping the
+;;;; buttons together so they all request the same amount of space.
+;;;;
+;;;; 2024-5-4
 
 (in-package :gtk4-example)
 
@@ -22,9 +32,9 @@
                                 :modal t)))
     (gtk:alert-dialog-show dialog parent)))
 
-(defun do-button-more (&optional application)
+(defun do-button-various (&optional application)
   (let* ((grid (make-instance 'gtk:grid
-                              :column-spacing 9
+                              :column-spacing 18
                               :row-spacing 9
                               :margin-top 12
                               :margin-bottom 12
@@ -32,7 +42,7 @@
                               :margin-end 12
                               :halign :center))
          (window (make-instance 'gtk:window
-                                :title "More Buttons"
+                                :title "Various Buttons"
                                 :child grid
                                 :application application
                                 :resizable nil))
@@ -93,10 +103,10 @@
     (gtk:box-append box (make-instance 'gtk:image :icon-name "edit-cut"))
     (gtk:box-append box (make-instance 'gtk:label :label "Edit Cut"))
     (setf button (make-instance 'gtk:button :child box))
+    (gtk:grid-attach grid button 1 2 1 1)
     (g:signal-connect button "clicked"
                       (lambda (button)
                         (on-button-clicked window button)))
-    (gtk:grid-attach grid button 1 2 1 1)
-    ;; Show the window
     (gtk:size-group-add-widget group button)
+    ;; Present window
     (gtk:window-present window)))

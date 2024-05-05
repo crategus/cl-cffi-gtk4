@@ -1,6 +1,14 @@
 ;;;; Toggle Buttons
 ;;;;
-;;;; 2024-4-6
+;;;; The <tt>gtk:toggle-button</tt> widget is a <tt>gtk:button</tt> widget which
+;;;; will remain "pressed-in" when clicked. Clicking again will cause the toggle
+;;;; button to return to its normal state.
+;;;;
+;;;; Toggle buttons can be grouped together, to form mutually exclusive groups.
+;;;; Only one of the buttons can be toggled at a time, and toggling another one
+;;;; will switch the currently toggled one off.
+;;;;
+;;;; 2024-5-4
 
 (in-package :gtk4-example)
 

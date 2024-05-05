@@ -11,7 +11,7 @@
 ;;;; You can also use the GTK Inspector, available from the menu on the top
 ;;;; right, to poke at the running demos, and see how they are put together.
 ;;;;
-;;;; 2024-4-1
+;;;; Last version: 2024-5-5
 
 (in-package :gtk4-demo)
 
@@ -123,7 +123,9 @@
 (defun dump-list-store (model &optional (prefix ""))
   (dotimes (i (g:list-store-n-items model))
     (let ((object (g:list-model-object model i)))
-      (format t "~a~a~%" prefix (gtk-demo-title object))
+      (if (gtk-demo-name object)
+          (format t "~a~a~%" prefix (string-upcase (gtk-demo-name object)))
+          (format t "~%~a~a~%" prefix (gtk-demo-title object)))
     (when (gtk-demo-children object)
       (let ((model (gtk-demo-children object)))
       (dump-list-store model (concatenate 'string "  " prefix)))))))
