@@ -8,31 +8,31 @@
 ;;;     GtkCellArea
 
 (test gtk-cell-area-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCellArea"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-area
           (glib:symbol-for-gtype "GtkCellArea")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellArea")
           (g:gtype (cffi:foreign-funcall "gtk_cell_area_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GInitiallyUnowned")
           (g:type-parent "GtkCellArea")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkCellAreaBox")
              (list-children "GtkCellArea")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkCellLayout" "GtkBuildable")
              (list-interfaces "GtkCellArea")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("edit-widget" "edited-cell" "focus-cell")
              (list-properties "GtkCellArea")))
-  ;; Check the list of signals
+  ;; Check list of signals
   (is (equal '("add-editable" "apply-attributes" "focus-changed"
                "remove-editable")
              (list-signals "GtkCellArea")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellArea" GTK-CELL-AREA
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
                         ("GtkBuildable" "GtkCellLayout") :TYPE-INITIALIZER
@@ -121,8 +121,6 @@
 
 ;;;     GtkCellCallback
 ;;;     GtkCellAllocCallback
-
-;;;     GTK_CELL_AREA_WARN_INVALID_CELL_PROPERTY_ID
 
 ;;;     gtk_cell_area_add
 ;;;     gtk_cell_area_remove
@@ -289,4 +287,4 @@
 ;;;     gtk_cell_area_inner_cell_area
 ;;;     gtk_cell_area_request_renderer
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-5-4

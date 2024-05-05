@@ -8,30 +8,30 @@
 ;;;     GtkTreeSelection
 
 (test gtk-tree-selection-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkTreeSelection"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:tree-selection
           (glib:symbol-for-gtype "GtkTreeSelection")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkTreeSelection")
           (g:gtype (cffi:foreign-funcall "gtk_tree_selection_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkTreeSelection")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkTreeSelection")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkTreeSelection")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("mode")
              (list-properties "GtkTreeSelection")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("changed")
              (list-signals "GtkTreeSelection")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkTreeSelection" GTK-TREE-SELECTION
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER
@@ -83,4 +83,4 @@
 ;;;     gtk_tree_selection_select_range
 ;;;     gtk_tree_selection_unselect_range
 
-;;; 2024-3-8
+;;; 2024-5-3
