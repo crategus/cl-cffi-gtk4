@@ -2338,28 +2338,25 @@
 
 (cffi:defcallback text-char-predicate :boolean
     ((char g:unichar)
-     (user-data :pointer))
-  (let ((func (glib:get-stable-pointer-value user-data)))
+     (data :pointer))
+  (let ((func (glib:get-stable-pointer-value data)))
     (funcall func char)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'text-char-predicate)
       "Callback"
       (liber:symbol-documentation 'text-char-predicate)
- "@version{#2023-2-2}
+ "@version{#2024-5-4}
+  @syntax{lambda (ch) => result}
+  @argument[ch]{a @class{g:unichar} Unichar character}
+  @argument[result]{@em{true}, if the character was found}
   @begin{short}
     A callback function used by the @fun{gtk:text-iter-find-char} function to
     search a char in the text buffer.
   @end{short}
-  @begin{pre}
-lambda (ch)
-  @end{pre}
-  @begin[code]{table}
-    @entry[ch]{A Unichar character.}
-    @entry[Returns]{@em{True} if the character was found.}
-  @end{table}
   @see-class{gtk:text-iter}
   @see-class{gtk:text-buffer}
+  @see-class{g:unichar}
   @see-function{gtk:text-iter-find-char}")
 
 (export 'text-char-predicate)

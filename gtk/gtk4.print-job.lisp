@@ -423,31 +423,28 @@ lambda (job)    :run-last
 (export 'print-job-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkPrintJobCompleteFunc ()
+;;; GtkPrintJobCompleteFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback print-job-complete-func :void
     ((job (g:object print-job))
      (data :pointer)
      (err :pointer))
-  (funcall (glib:get-stable-pointer-value data) job err))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func job err)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'print-job-complete-func)
       "Callback"
       (liber:symbol-documentation 'print-job-complete-func)
- "@version{#2021-12-25}
+ "@version{#2024-5-4}
+  @syntax{lambda (job)}
+  @argument[job]{a @class{gtk:print-job} object}
   @begin{short}
     The type of callback that is passed to the @fun{gtk:print-job-send}
     function.
   @end{short}
   It is called when the print job has been completely sent.
-  @begin{pre}
- lambda (job)
-  @end{pre}
-  @begin[code]{table}
-    @entry[job]{A @class{gtk:print-job} object.}
-  @end{table}
   @see-class{gtk:print-job}
   @see-function{gtk:print-job-send}")
 

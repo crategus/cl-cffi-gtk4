@@ -283,22 +283,13 @@
 (setf (liber:alias-for-symbol 'tree-model-filter-visible-func)
       "Callback"
       (liber:symbol-documentation 'tree-model-filter-visible-func)
- "@version{#2024-4-29}
-  @begin{declaration}
-    @begin{pre}
-lambda (model iter) => result
-    @end{pre}
-  @end{declaration}
-  @begin{values}
-    @begin[code]{table}
-      @entry[model]{The child model of the @class{gtk:tree-model-filter}
-        object.}
-      @entry[iter]{The @class{gtk:tree-iter} iterator pointing to the row in
-        model whose visibility is determined.}
-      @entry[result]{The boolean whether the row indicated by @arg{iter} is
-        visible.}
-    @end{table}
-  @end{values}
+ "@version{#2024-5-3}
+  @syntax{lambda (model iter) => result}
+  @argument[model]{a child model of the @class{gtk:tree-model-filter} object}
+  @argument[iter]{a @class{gtk:tree-iter} iterator pointing to the row in model
+    whose visibility is determined}
+  @argument[result]{a boolean whether the row indicated by @arg{iter} is
+    visible}
   @begin{short}
     A callback function which decides whether the row indicated by @arg{iter}
     is visible.
@@ -373,23 +364,15 @@ lambda (model iter) => result
 (setf (liber:alias-for-symbol 'tree-model-filter-modify-func)
       "Callback"
       (liber:symbol-documentation 'tree-model-filter-modify-func)
- "@version{#2024-4-29}
-  @begin{declaration}
-    @begin{pre}
-lambda (model iter value column)
-    @end{pre}
-  @end{declaration}
-  @begin{values}
-    @begin[code]{table}
-      @entry[model]{The @class{gtk:tree-model-filter} object.}
-      @entry[iter]{The @class{gtk:tree-iter} iterator pointing to the row whose
-        display values are determined.}
-      @entry[value]{The @symbol{g:value} which is already initialized for with
-        the correct type for the column @arg{column}.}
-      @entry[column]{The integer with the column whose display value is
-        determined.}
-    @end{table}
-  @end{values}
+ "@version{#2024-5-3}
+  @syntax{lambda (model iter value column)}
+  @argument[model]{a @class{gtk:tree-model-filter} object}
+  @argument[iter]{a @class{gtk:tree-iter} iterator pointing to the row whose
+    display values are determined}
+  @argument[value]{a @symbol{g:value} which is already initialized for with
+    the correct type for the column @arg{column}}
+  @argument[column]{an integer with the column whose display value is
+    determined}
   @begin{short}
     A callback function which calculates display values from raw values in the
     model.

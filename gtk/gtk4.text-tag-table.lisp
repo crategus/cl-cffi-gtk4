@@ -140,23 +140,20 @@ lambda (table tag)    :run-last
 (cffi:defcallback text-tag-table-foreach-func :void
     ((tag (g:object text-tag))
      (data :pointer))
-  (funcall (glib:get-stable-pointer-value data) tag))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func tag)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'text-tag-table-foreach-func)
       "Callback"
       (liber:symbol-documentation 'text-tag-table-foreach-func)
- "@version{#2023-8-26}
+ "@version{#2024-5-4}
+  @syntax{lambda (tag)}
+  @argument[tag]{a @class{gtk:text-tag} object}
   @begin{short}
     The type of callback function passed to the @fun{gtk:text-tag-table-foreach}
     function.
   @end{short}
-  @begin{pre}
-lambda (tag)
-  @end{pre}
-  @begin[code]{table}
-    @entry[tag]{The @class{gtk:text-tag} object.}
-  @end{table}
   @see-class{gtk:text-tag-table}
   @see-function{gtk:text-tag-table-foreach}")
 

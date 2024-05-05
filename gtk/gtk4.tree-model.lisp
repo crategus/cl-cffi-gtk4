@@ -196,14 +196,9 @@
 (setf (liber:alias-for-class 'tree-iter)
       "GBoxed"
       (documentation 'tree-iter 'type)
- "@version{2024-5-1}
-  @begin{short}
-    The @class{gtk:tree-iter} structure is the primary structure for accessing
-    a @class{gtk:tree-model} object. Models are expected to put a unique integer
-    in the @arg{stamp} member, and put model specific data in the three
-    @arg{user-data} members.
-  @end{short}
-  @begin{pre}
+ "@version{2024-5-3}
+  @begin{declaration}
+    @begin{pre}
 (glib:define-g-boxed-cstruct tree-iter \"GtkTreeIter\"
   (:export t
    :type-initializer \"gtk_tree_iter_get_type\")
@@ -211,13 +206,22 @@
   (user-data pointer-as-integer :initform 0)
   (user-data-2 pointer-as-integer :initform 0)
   (user-data-3 pointer-as-integer :initform 0))
-  @end{pre}
-  @begin[code]{table}
-    @entry[stamp]{A unique stamp to catch invalid iterators.}
-    @entry[user-data]{Model specific data.}
-    @entry[user-data-2]{Model specific data.}
-    @entry[user-data-3]{Model specific data.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[stamp]{A unique stamp to catch invalid iterators.}
+      @entry[user-data]{Model specific data.}
+      @entry[user-data-2]{Model specific data.}
+      @entry[user-data-3]{Model specific data.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The @class{gtk:tree-iter} structure is the primary structure for accessing
+    a @class{gtk:tree-model} object. Models are expected to put a unique integer
+    in the @arg{stamp} member, and put model specific data in the three
+    @arg{user-data} members.
+  @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-iter} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
@@ -339,8 +343,8 @@
 
 (defun tree-path-new-from-indices (&rest indices)
  #+liber-documentation
- "@version{2024-5-1}
-  @argument[indices]{a list of integers}
+ "@version{2024-5-3}
+  @argument[indices]{integers for the indices}
   @return{The newly created @class{gtk:tree-path} instance.}
   @begin{short}
     Creates a new tree path with @arg{indices} as indices.
@@ -779,7 +783,7 @@
 (setf (liber:alias-for-class 'tree-row-reference)
       "GBoxed"
       (documentation 'tree-row-reference 'type)
- "@version{2024-1-5}
+ "@version{2024-5-1}
   @begin{declaration}
     @begin{pre}
 (glib:define-g-boxed-opaque gtk:tree-row-reference \"GtkTreeRowReference\"
@@ -1865,20 +1869,12 @@ lambda (model path iter new-order)    :run-first
 (setf (liber:alias-for-symbol 'tree-model-foreach-func)
       "Callback"
       (liber:symbol-documentation 'tree-model-foreach-func)
- "@version{#2024-5-1}
-  @begin{declaration}
-    @begin{pre}
- lambda (model path iter) => result
-    @end{pre}
-  @end{declaration}
-  @begin{values}
-    @begin[code]{table}
-      @entry[model]{The @class{gtk:tree-model} object being iterated.}
-      @entry[path]{The current @class{gtk:tree-path} instance.}
-      @entry[iter]{The current @class{gtk:tree-iter} iterator.}
-      @entry[result]{@em{True} to stop iterating, @em{false} to continue.}
-    @end{table}
-  @end{values}
+ "@version{#2024-5-3}
+  @syntax{lambda (model path iter) => result}
+  @argument[model]{a @class{gtk:tree-model} object being iterated}
+  @argument[path]{a current @class{gtk:tree-path} instance}
+  @argument[iter]{a current @class{gtk:tree-iter} iterator}
+  @argument[result]{@em{true} to stop iterating, @em{false} to continue}
   @begin{short}
     Type of the callback function passed to the @fun{gtk:tree-model-foreach}
     function to iterate over the rows in a tree model.

@@ -451,29 +451,24 @@ case PROP_EXPRESSION:
 (export 'expression-bind)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkExpressionNotify ()
+;;; GtkExpressionNotify
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback expression-notify :void
     ((data :pointer))
-  (let ((ptr (glib:get-stable-pointer-value data)))
-    (funcall ptr)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'expression-notify)
       "Callback"
       (liber:symbol-documentation 'expression-notify)
- "@version{#2023-9-14}
+ "@version{#2024-5-4}
+  @syntax{lambda ()}
   @begin{short}
     Callback called by the @fun{gtk:expression-watch} function when the
     expression value changes.
   @end{short}
-  @begin{pre}
-lambda ()
-  @end{pre}
-  @begin[code]{table}
-    No arguments and no return value.
-  @end{table}
   @see-function{gtk:expression-watch}")
 
 (export 'expression-notify)

@@ -391,29 +391,25 @@ scale[.fine-tune][.marks-before][.marks-after]
     ((scale (g:object scale))
      (value :double)
      (data :pointer))
-  (let ((ptr (glib:get-stable-pointer-value data)))
-    (funcall ptr scale value)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func scale value)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'scale-format-value-func)
       "Callback"
       (liber:symbol-documentation 'scale-format-value-func)
- "@version{#2023-3-25}
+ "@version{#2024-5-3}
+  @syntax{lambda (scale value) => result}
+  @argument[scale]{a @class{gtk:scale} widget}
+  @argument[value]{a double float with the numeric value to format}
+  @argument[result]{a string describing a textual representation of the given
+    numerical value}
   @begin{short}
     A callback function which allows you to change how the scale value is
     displayed.
   @end{short}
   The callback function is set with the @fun{gtk:scale-set-format-value-func}
   function.
-  @begin{pre}
-lambda (scale value)
-  @end{pre}
-  @begin[code]{table}
-    @entry[scale]{A @class{gtk:scale} widget.}
-    @entry[value]{A double float with the numeric value to format.}
-    @entry[Returns]{A string describing a textual representation of the
-      given numerical value.}
-  @end{table}
   @see-class{gtk:scale}
   @see-function{gtk:scale-set-format-value-func}")
 

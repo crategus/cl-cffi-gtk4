@@ -551,26 +551,23 @@
     ((key :string)
      (value :string)
      (data :pointer))
-  (restart-case
-      (funcall (glib:get-stable-pointer-value data) key value)
-    (return () nil)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (restart-case
+      (funcall func key value)
+      (return () :report "Return NIL" nil))))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'print-settings-func)
       "Callback"
       (liber:symbol-documentation 'print-settings-func)
- "@version{2024-2-17}
+ "@version{2024-5-4}
+  @syntax{lambda (key value)}
+  @argument[key]{a string with the key value}
+  @argument[value]{a string with the value for @arg{key}}
   @begin{short}
     The callback function that is called from the
     @fun{gtk:print-settings-foreach} function.
   @end{short}
-  @begin{pre}
-lambda (key value)
-  @end{pre}
-  @begin[code]{table}
-    @entry[key]{A string with the key value.}
-    @entry[value]{A string with the value for @arg{key}.}
-  @end{table}
   @see-class{gtk:print-settings}
   @see-function{gtk:print-settings-foreach}")
 

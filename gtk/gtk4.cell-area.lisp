@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -46,8 +46,6 @@
 ;;;
 ;;;     GtkCellCallback
 ;;;     GtkCellAllocCallback
-;;;
-;;;     GTK_CELL_AREA_WARN_INVALID_CELL_PROPERTY_ID
 ;;;
 ;;;     gtk_cell_area_add
 ;;;     gtk_cell_area_remove
@@ -140,6 +138,11 @@
    (focus-cell
     cell-area-focus-cell
     "focus-cell" "GtkCellRenderer" t nil)))
+
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj cell-area) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:CELL-AREA is deprecated since 4.10")))
 
 #+liber-documentation
 (setf (documentation 'cell-area 'type)
@@ -528,10 +531,10 @@ lambda (area renderer editable)    :run-first
   @see-class{gtk:cell-area-box}")
 
 ;;; ----------------------------------------------------------------------------
-;;; Property Details
+;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- cell-area-edit-widget --------------------------------------------------
+;;; --- gtk:cell-area-edit-widget ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "edit-widget" 'cell-area) t)
@@ -544,8 +547,8 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edit-widget)
       "Accessor"
       (documentation 'cell-area-edit-widget 'function)
- "@version{2023-5-13}
-  @syntax[]{(gtk:cell-area-edit-widget object) => widget}
+ "@version{2024-5-4}
+  @syntax{(gtk:cell-area-edit-widget object) => widget}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[widget]{a @class{gtk:cell-editable} widget}
   @begin{short}
@@ -561,7 +564,7 @@ lambda (area renderer editable)    :run-first
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-editable}")
 
-;;; --- cell-area-edited-cell --------------------------------------------------
+;;; --- gtk:cell-area-edited-cell ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "edited-cell" 'cell-area) t)
@@ -574,8 +577,8 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-edited-cell)
       "Accessor"
       (documentation 'cell-area-edited-cell 'function)
- "@version{2023-5-13}
-  @syntax[]{(gtk:cell-area-edited-cell object) => renderer}
+ "@version{2024-5-4}
+  @syntax{(gtk:cell-area-edited-cell object) => renderer}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @begin{short}
@@ -591,7 +594,7 @@ lambda (area renderer editable)    :run-first
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}")
 
-;;; --- cell-area-focus-cell ---------------------------------------------------
+;;; --- gtk:cell-area-focus-cell -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "focus-cell" 'cell-area) t)
@@ -603,9 +606,9 @@ lambda (area renderer editable)    :run-first
 (setf (liber:alias-for-function 'cell-area-focus-cell)
       "Accessor"
       (documentation 'cell-area-focus-cell 'function)
- "@version{2023-5-13}
-  @syntax[]{(gtk:cell-area-edited-cell object) => renderer}
-  @syntax[]{(setf (gtk:cell-area-edited-cell object) renderer}
+ "@version{2024-5-4}
+  @syntax{(gtk:cell-area-edited-cell object) => renderer}
+  @syntax{(setf (gtk:cell-area-edited-cell object) renderer}
   @argument[object]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to give focus to}
   @begin{short}
@@ -627,26 +630,6 @@ lambda (area renderer editable)    :run-first
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:tree-view-set-cursor-on-cell}")
-
-;;; ----------------------------------------------------------------------------
-;;; GTK_CELL_AREA_WARN_INVALID_CELL_PROPERTY_ID()
-;;;
-;;; #define GTK_CELL_AREA_WARN_INVALID_CELL_PROPERTY_ID(object,
-;;;                                                     property_id, pspec)
-;;;
-;;; This macro should be used to emit a standard warning about unexpected
-;;; properties in set_cell_property() and get_cell_property() implementations.
-;;;
-;;; object :
-;;;     the GObject on which set_cell_property() or get_get_property() was
-;;;     called
-;;;
-;;; property_id :
-;;;     the numeric id of the property
-;;;
-;;; pspec :
-;;;     the GParamSpec of the property
-;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_cell_area_add ()
@@ -673,7 +656,7 @@ lambda (area renderer editable)    :run-first
 (export 'cell-area-add)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_remove ()
+;;; gtk_cell_area_remove
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_remove" cell-area-remove) :void
@@ -694,7 +677,7 @@ lambda (area renderer editable)    :run-first
 (export 'cell-area-remove)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_has_renderer ()
+;;; gtk_cell_area_has_renderer
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_has_renderer" cell-area-has-renderer) :boolean
@@ -716,34 +699,30 @@ lambda (area renderer editable)    :run-first
 (export 'cell-area-has-renderer)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkCellCallback ()
+;;; GtkCellCallback
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback cell-callback :boolean
     ((renderer (g:object cell-renderer))
      (data :pointer))
-  (let ((fn (glib:get-stable-pointer-value data)))
+  (let ((func (glib:get-stable-pointer-value data)))
     (restart-case
-      (funcall fn renderer)
-      (return-from-cell-callback () nil))))
+      (funcall func renderer)
+      (return-from-cell-callback () :report "Return NIL" nil))))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'cell-callback)
       "Callback"
       (liber:symbol-documentation 'cell-callback)
- "@version{2023-5-13}
+ "@version{2024-5-3}
+  @syntax{lambda (renderer) => result}
+  @argument[renderer]{a @class{gtk:cell-renderer} object to operate on}
+  @argument[result]{@em{true} to stop iterating over cells}
   @begin{short}
     The type of the callback function used for iterating over the cell renderers
     of a @class{gtk:cell-area} object, see the @fun{gtk:cell-area-foreach}
     function.
   @end{short}
-  @begin{pre}
-lambda (renderer)
-  @end{pre}
-  @begin[code]{table}
-    @entry[renderer]{The @class{gtk:cell-renderer} object to operate on.}
-    @entry[Returns]{@em{True} to stop iterating over cells.}
-  @end{table}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-area-foreach}")
@@ -751,7 +730,7 @@ lambda (renderer)
 (export 'cell-callback)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_foreach ()
+;;; gtk_cell_area_foreach
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_foreach" %cell-area-foreach) :void
@@ -779,7 +758,7 @@ lambda (renderer)
 (export 'cell-area-foreach)
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkCellAllocCallback ()
+;;; GtkCellAllocCallback
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback cell-alloc-callback :boolean
@@ -787,34 +766,30 @@ lambda (renderer)
      (cell (g:boxed gdk:rectangle))
      (background (g:boxed gdk:rectangle))
      (data :pointer))
-  (let ((fn (glib:get-stable-pointer-value data)))
+  (let ((func (glib:get-stable-pointer-value data)))
     (restart-case
-      (funcall fn renderer cell background)
-      (return-from-cell-alloc-callback () nil))))
+      (funcall func renderer cell background)
+      (return-from-cell-alloc-callback () :report "Return NIL" nil))))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'cell-alloc-callback)
       "Callback"
       (liber:symbol-documentation 'cell-alloc-callback)
- "@version{2023-5-13}
+ "@version{2024-5-4}
+  @syntax{lambda (renderer cell background) => result}
+  @argument[renderer]{a @class{gtk:cell-renderer} object to operate on}
+  @argument[cell]{a @class{gdk:rectangle} area allocated to @arg{renderer}
+    inside the rectangle provided to the @fun{gtk:cell-area-foreach-alloc}
+    function}
+  @argument[background]{a @class{gdk:rectangle} background area for
+    @arg{renderer} inside the background area provided to the
+    @fun{gtk:cell-area-foreach-alloc} function}
+  @argument[result]{@em{true} to stop iterating over cells}
   @begin{short}
     The type of the callback function used for iterating over the cell
     renderers of a @class{gtk:cell-area} object, see the
     @fun{gtk:cell-area-foreach-alloc} function.
   @end{short}
-  @begin{pre}
-lambda (renderer cell background)
-  @end{pre}
-  @begin[code]{table}
-    @entry[renderer]{The @class{gtk:cell-renderer} object to operate on.}
-    @entry[cell]{The @class{gdk:rectangle} area allocated to @arg{renderer}
-      inside the rectangle provided to the @fun{gtk:cell-area-foreach-alloc}
-      function.}
-    @entry[background]{The @class{gdk:rectangle} background area for
-      @arg{renderer} inside the background area provided to the
-      @fun{gtk:cell-area-foreach-alloc} function.}
-    @entry[Returns]{@em{True} to stop iterating over cells.}
-  @end{table}
   @see-class{gtk:cell-area}
   @see-class{gtk:cell-renderer}
   @see-class{gdk:rectangle}
@@ -823,7 +798,7 @@ lambda (renderer cell background)
 (export 'cell-alloc-callback)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_foreach_alloc ()
+;;; gtk_cell_area_foreach_alloc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_foreach_alloc" %cell-area-foreach-alloc) :void
@@ -871,7 +846,7 @@ lambda (renderer cell background)
 (export 'cell-area-foreach-alloc)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_event ()
+;;; gtk_cell_area_event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_event" cell-area-event) :int
@@ -952,7 +927,7 @@ lambda (renderer cell background)
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_cell_allocation ()
+;;; gtk_cell_area_get_cell_allocation
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_cell_allocation" %cell-area-cell-allocation)
@@ -966,7 +941,7 @@ lambda (renderer cell background)
 
 (defun cell-area-cell-allocation (area context widget renderer cell)
  #+liber-documentation
- "@version{#2021-12-19}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object used to hold sizes
     for area}
@@ -975,7 +950,7 @@ lambda (renderer cell background)
     for}
   @argument[cell]{a @class{gdk:rectangle} instance with the whole allocated
     area for @arg{area} in @arg{widget} for this row}
-  @return{A @class{gdk:rectangle} instance with the allocation for
+  @return{The @class{gdk:rectangle} instance with the allocation for
     @arg{renderer}.}
   @begin{short}
     Derives the allocation of the cell renderer inside the cell area if
@@ -998,7 +973,7 @@ lambda (renderer cell background)
 (export 'cell-area-cell-allocation)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_cell_at_position ()
+;;; gtk_cell_area_get_cell_at_position
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_cell_at_position" %cell-area-cell-at-position)
@@ -1048,15 +1023,15 @@ lambda (renderer cell background)
 (export 'cell-area-cell-at-position)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_create_context ()
+;;; gtk_cell_area_create_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_create_context" cell-area-create-context)
     (g:object cell-area-context)
  #+liber-documentation
- "@version{#2021-12-19}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
-  @return{A newly created @class{gtk:cell-area-context} object which can be
+  @return{The newly created @class{gtk:cell-area-context} object which can be
     used with @arg{area}.}
   @begin{short}
     Creates a cell area context to be used with @arg{area} for all purposes.
@@ -1077,16 +1052,16 @@ lambda (renderer cell background)
 (export 'cell-area-create-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_copy_context ()
+;;; gtk_cell_area_copy_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_copy_context" cell-area-copy-context)
     (g:object cell-area-context)
  #+liber-documentation
- "@version{#2021-12-19}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object to copy}
-  @return{A newly created @class{gtk:cell-area-context} object copy of
+  @return{The newly created @class{gtk:cell-area-context} object copy of
     @arg{context}.}
   @begin{short}
     This is sometimes needed for cases where rows need to share alignments in
@@ -1111,7 +1086,7 @@ lambda (renderer cell background)
 (export 'cell-area-copy-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_request_mode ()
+;;; gtk_cell_area_get_request_mode
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_request_mode" cell-area-request-mode)
@@ -1134,7 +1109,7 @@ lambda (renderer cell background)
 (export 'cell-area-request-mode)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_preferred_width () -> cell-area-preferred-width
+;;; gtk_cell_area_get_preferred_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_preferred_width" %cell-area-preferred-width)
@@ -1187,7 +1162,7 @@ lambda (renderer cell background)
 (export 'cell-area-preferred-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_preferred_height_for_width ()
+;;; gtk_cell_area_get_preferred_height_for_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_preferred_height_for_width"
@@ -1252,7 +1227,7 @@ lambda (renderer cell background)
 (export 'cell-area-preferred-height-for-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_preferred_height () -> cell-area-preferred-height
+;;; gtk_cell_area_get_preferred_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_preferred_height" %cell-area-preferred-height)
@@ -1269,7 +1244,7 @@ lambda (renderer cell background)
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object to perform this
     request with}
-  @argument[widget]{the @class{gtk:widget} where area will be rendering}
+  @argument[widget]{a @class{gtk:widget} where area will be rendering}
   @begin{return}
     @arg{minimum-height} -- an integer with the minimum height, or @code{nil}
       @br{}
@@ -1305,7 +1280,7 @@ lambda (renderer cell background)
 (export 'cell-area-preferred-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_preferred_width_for_height ()
+;;; gtk_cell_area_get_preferred_width_for_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_preferred_width_for_height"
@@ -1371,7 +1346,7 @@ lambda (renderer cell background)
 (export 'cell-area-preferred-width-for-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_current_path_string ()
+;;; gtk_cell_area_get_current_path_string
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_current_path_string"
@@ -1400,7 +1375,7 @@ lambda (renderer cell background)
 (export 'cell-area-current-path-string)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_apply_attributes ()
+;;; gtk_cell_area_apply_attributes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_apply_attributes" cell-area-apply-attributes)
@@ -1434,7 +1409,7 @@ lambda (renderer cell background)
 (export 'cell-area-apply-attributes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_attribute_connect ()
+;;; gtk_cell_area_attribute_connect
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_attribute_connect" cell-area-attribute-connect)
@@ -1465,7 +1440,7 @@ lambda (renderer cell background)
 (export 'cell-area-attribute-connect)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_attribute_disconnect ()
+;;; gtk_cell_area_attribute_disconnect
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_attribute_disconnect"
@@ -1493,17 +1468,17 @@ lambda (renderer cell background)
 (export 'cell-area-attribute-disconnect)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_attribute_get_column ()
+;;; gtk_cell_area_attribute_get_column
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_attribute_get_column"
                cell-area-attribute-column) :int
  #+liber-documentation
- "@version{#2021-12-20}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
   @argument[attribute]{a string with an attribute on the renderer}
-  @return{An integer with the model column, or -1.}
+  @return{The integer with the model column, or -1.}
   @begin{short}
     Returns the model column that an attribute has been mapped to, or -1 if the
     attribute is not mapped.
@@ -1542,7 +1517,7 @@ lambda (renderer cell background)
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_class_find_cell_property ()
+;;; gtk_cell_area_class_find_cell_property
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_class_find_cell_property"
@@ -1580,7 +1555,7 @@ lambda (renderer cell background)
 (export 'cell-area-class-find-cell-property)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_class_list_cell_properties ()
+;;; gtk_cell_area_class_list_cell_properties
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_class_list_cell_properties"
@@ -1591,9 +1566,9 @@ lambda (renderer cell background)
 
 (defun cell-area-class-list-cell-properties (gtype)
  #+liber-documentation
- "@version{#2021-12-19}
+ "@version{#2024-5-4}
   @argument[gtype]{a @class{g:type-t} type ID}
-  @return{A list of @symbol{g:param-spec} instances.}
+  @return{The list of @symbol{g:param-spec} instances.}
   @short{Returns the cell properties of a cell area class.}
   @begin[Note]{dictionary}
     In the Lisp binding we pass the type of a cell area class and not
@@ -1611,16 +1586,16 @@ lambda (renderer cell background)
       (cffi:with-foreign-object (n-props :uint)
         (let ((pspecs (%cell-area-class-list-cell-properties class n-props)))
           (unwind-protect
-            (loop for count from 0 below (cffi:mem-ref n-props :uint)
-                  for pspec = (cffi:mem-aref pspecs :pointer count)
-                  collect pspec)
+            (iter (for count from 0 below (cffi:mem-ref n-props :uint))
+                  (for pspec = (cffi:mem-aref pspecs :pointer count))
+                  (collect pspec))
             (glib:free pspecs))))
       (g:type-class-unref class))))
 
 (export 'cell-area-class-list-cell-properties)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_add_with_properties ()
+;;; gtk_cell_area_add_with_properties
 ;;; ----------------------------------------------------------------------------
 
 (defun cell-area-add-with-properties (area renderer &rest args)
@@ -1629,7 +1604,7 @@ lambda (renderer cell background)
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object to be placed inside
     @arg{area}}
-  @argument[args]{a list of property names and values}
+  @argument[args]{property names and values}
   @begin{short}
     Adds renderer to @arg{area}, setting cell properties at the same time.
   @end{short}
@@ -1648,16 +1623,16 @@ lambda (renderer cell background)
 (export 'cell-area-add-with-properties)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_cell_set ()
+;;; gtk_cell_area_cell_set
 ;;; ----------------------------------------------------------------------------
 
 (defun cell-area-cell-set (area renderer &rest args)
  #+liber-documentation
- "@version{#2021-12-20}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object which is cell inside
     @arg{area}}
-  @argument[args]{a list of cell property names and values}
+  @argument[args]{cell property names and values}
   @begin{short}
     Sets one or more cell properties for the cell in the cell area.
   @end{short}
@@ -1669,24 +1644,23 @@ lambda (renderer cell background)
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-area-cell-get}
   @see-function{gtk:cell-area-cell-property}"
-  (loop for (name value) on args by #'cddr
-        do (setf (cell-area-cell-property area renderer name) value)))
+  (iter (for (name value) on args by #'cddr)
+        (setf (cell-area-cell-property area renderer name) value)))
 
 (export 'cell-area-cell-set)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_cell_get ()
+;;; gtk_cell_area_cell_get
 ;;; ----------------------------------------------------------------------------
 
 (defun cell-area-cell-get (area renderer &rest args)
  #+liber-documentation
- "@version{#2021-12-20}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object which is inside
     @arg{area}}
-  @return[args]{a list of strings with the cell property names to get the
-    values for}
-  @return{A list with the values of the cell properties.}
+  @argument[args]{strings with the cell property names to get the values for}
+  @return{The list with the values of the cell properties.}
   @begin{short}
     Gets the values of one or more cell properties for the cell renderer in
     the cell area.
@@ -1699,8 +1673,8 @@ lambda (renderer cell background)
   @see-class{gtk:cell-renderer}
   @see-function{gtk:cell-area-cell-set}
   @see-function{gtk:cell-area-cell-property}"
-  (loop for arg in args
-        collect (cell-area-cell-property area renderer arg)))
+  (iter (for arg in args)
+        (collect (cell-area-cell-property area renderer arg))))
 
 (export 'cell-area-cell-get)
 
@@ -1755,8 +1729,8 @@ lambda (renderer cell background)
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_cell_set_property ()
-;;; gtk_cell_area_cell_get_property () -> cell-area-cell-property
+;;; gtk_cell_area_cell_set_property
+;;; gtk_cell_area_cell_get_property
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_cell_set_property" %cell-area-cell-set-property)
@@ -1785,9 +1759,9 @@ lambda (renderer cell background)
 
 (defun cell-area-cell-property (area renderer property)
  #+liber-documentation
- "@version{#2021-12-19}
-  @syntax[]{(gtk:cell-area-property area renderer property) => value}
-  @syntax[]{(setf (gtk:cell-area-property area renderer property) value)}
+ "@version{#2024-5-4}
+  @syntax{(gtk:cell-area-property area renderer property) => value}
+  @syntax{(setf (gtk:cell-area-property area renderer property) value)}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object which is inside
     @arg{area}}
@@ -1817,14 +1791,14 @@ lambda (renderer cell background)
 (export 'cell-area-cell-property)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_is_activatable ()
+;;; gtk_cell_area_is_activatable
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_is_activatable" cell-area-is-activatable) :boolean
  #+liber-documentation
- "@version{#2021-12-20}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
-  @return{A boolean whether @arg{area} can do anything when activated.}
+  @return{The boolean whether @arg{area} can do anything when activated.}
   @begin{short}
     Returns whether the cell area can do anything when activated, after applying
      new attributes to @arg{area}.
@@ -1839,12 +1813,12 @@ lambda (renderer cell background)
 (export 'cell-area-is-activatable)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_activate ()
+;;; gtk_cell_area_activate
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_activate" cell-area-activate) :boolean
  #+liber-documentation
- "@version{#2021-12-20}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[context]{a @class{gtk:cell-area-context} object in @arg{context}
     with the current row data}
@@ -1855,7 +1829,7 @@ lambda (renderer cell background)
     this row of data}
   @argument[edit-only]{if @em{true} then only cell renderers that are
     @code{:editable} will be activated}
-  @return{A boolean whether @arg{area} was successfully activated.}
+  @return{The boolean whether @arg{area} was successfully activated.}
   @begin{short}
     Activates @arg{area}, usually by activating the currently focused cell,
     however some subclasses which embed widgets in the area can also activate
@@ -1880,7 +1854,7 @@ lambda (renderer cell background)
 (export 'cell-area-activate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_focus ()
+;;; gtk_cell_area_focus
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_focus" cell-area-focus) :boolean
@@ -1910,7 +1884,7 @@ lambda (renderer cell background)
 (export 'cell-area-focus)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_add_focus_sibling ()
+;;; gtk_cell_area_add_focus_sibling
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_add_focus_sibling" cell-area-add-focus-sibling)
@@ -1942,7 +1916,7 @@ lambda (renderer cell background)
 (export 'cell-area-add-focus-sibling)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_remove_focus_sibling ()
+;;; gtk_cell_area_remove_focus_sibling
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_remove_focus_sibling"
@@ -1971,14 +1945,14 @@ lambda (renderer cell background)
 (export 'cell-area-remove-focus-sibling)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_is_focus_sibling ()
+;;; gtk_cell_area_is_focus_sibling
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_is_focus_sibling" cell-area-is-focus-sibling)
     :boolean
  #+liber-documentation
- "@version{#2021-12-20}
-  @argument[area]{a @class{gtk:cellArea} object}
+ "@version{#2024-5-4}
+  @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object expected to have focus}
   @argument[sibling]{a @class{gtk:cell-renderer} object to check against
     the sibling list of the cell renderer}
@@ -2002,16 +1976,16 @@ lambda (renderer cell background)
 (export 'cell-area-is-focus-sibling)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_focus_siblings ()
+;;; gtk_cell_area_get_focus_siblings
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_focus_siblings" cell-area-focus-siblings)
     (g:list-t (g:object cell-renderer) :free-from-foreign nil)
  #+liber-documentation
- "@version{#2021-12-20}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[renderer]{a @class{gtk:cell-renderer} object expected to have focus}
-  @return{A list of @class{gtk:cell-renderer} objects.}
+  @return{The list of @class{gtk:cell-renderer} objects.}
   @begin{short}
     Gets the focus sibling cell renderers for @arg{renderer}.
   @end{short}
@@ -2027,7 +2001,7 @@ lambda (renderer cell background)
 (export 'cell-area-focus-siblings)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_get_focus_from_sibling ()
+;;; gtk_cell_area_get_focus_from_sibling
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_get_focus_from_sibling"
@@ -2058,12 +2032,12 @@ lambda (renderer cell background)
 (export 'cell-area-focus-from-sibling)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_activate_cell ()
+;;; gtk_cell_area_activate_cell
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_activate_cell" cell-area-activate-cell) :boolean
  #+liber-documentation
- "@version{#2021-12-20}
+ "@version{#2024-5-4}
   @argument[area]{a @class{gtk:cell-area} object}
   @argument[widget]{a @class{gtk:widget} object that @arg{area} is rendering
     onto}
@@ -2075,7 +2049,7 @@ lambda (renderer cell background)
     coordinates of @arg{renderer} for the current row}
   @argument[flags]{a value of the @symbol{gtk:cell-renderer-state} flags for
     @arg{renderer}}
-  @return{A boolean whether cell activation was successful.}
+  @return{The boolean whether cell activation was successful.}
   @begin{short}
     This is used by @class{gtk:cell-area} subclasses when handling events to
     activate cells, the base @class{gtk:cell-area} class activates cells for
@@ -2102,7 +2076,7 @@ lambda (renderer cell background)
 (export 'cell-area-activate-cell)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_stop_editing ()
+;;; gtk_cell_area_stop_editing
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_stop_editing" cell-area-stop-editing) :void
@@ -2132,7 +2106,7 @@ lambda (renderer cell background)
 (export 'cell-area-stop-editing)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_inner_cell_area ()
+;;; gtk_cell_area_inner_cell_area
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_inner_cell_area" %cell-area-inner-cell-area) :void
@@ -2162,6 +2136,9 @@ lambda (renderer cell background)
     views use widgets for displaying their contents.
   @end{dictionary}
   @see-class{gtk:cell-area}
+  @see-class{gtk:widget}
+  @see-class{gtk:cell-renderer}
+  @see-class{gdk:rectangle}
   @see-function{gtk:cell-area-request-renderer}"
   (let ((inner (gdk:rectangle-new)))
     (%cell-area-inner-cell-area area widget cell inner)
@@ -2170,7 +2147,7 @@ lambda (renderer cell background)
 (export 'cell-area-inner-cell-area)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_request_renderer ()
+;;; gtk_cell_area_request_renderer
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_request_renderer" %cell-area-request-renderer)

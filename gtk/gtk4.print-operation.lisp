@@ -1498,27 +1498,23 @@ lambda (operation widget setup settings)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback page-setup-done-func :void
-    ((page-setup (g:object page-setup))
+    ((setup (g:object page-setup))
      (data :pointer))
-  (let ((fn (glib:get-stable-pointer-value data)))
-    (funcall fn page-setup)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func setup)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'page-setup-done-func)
       "Callback"
       (liber:symbol-documentation 'page-setup-done-func)
- "@version{#2023-10-21}
+ "@version{#2024-5-3}
+  @syntax{lambda (pagesetup)}
+  @argument[pagesetup]{a @class{gtk:page-setup} object}
   @begin{short}
     The type of function that is passed to the
     @fun{gtk:print-run-page-setup-dialog-async} function.
   @end{short}
   This function will be called when the page setup dialog is dismissed.
-  @begin{pre}
-lambda (pagesetup)
-  @end{pre}
-  @begin[code]{table}
-    @entry[pagesetup]{A @class{gtk:page-setup} object.}
-  @end{table}
   @see-class{gtk:page-setup}
   @see-function{gtk:print-run-page-setup-dialog-async}")
 

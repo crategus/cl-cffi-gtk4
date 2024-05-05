@@ -71,7 +71,7 @@
 (gobject:define-g-object-class "GtkMapListModel" map-list-model
   (:superclass g:object
    :export t
-   :interfaces ("GListModel" 
+   :interfaces ("GListModel"
                 #+gtk-4-12 "GtkSectionModel")
    :type-initializer "gtk_map_list_model_get_type")
   ((has-map
@@ -244,23 +244,24 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkMapListModelMapFunc ()
+;;; GtkMapListModelMapFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback map-list-model-map-func :pointer
     ((item :pointer)
      (data :pointer))
-  (let ((ptr (glib:get-stable-pointer-value data)))
-    (funcall ptr item)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func item)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'map-list-model-map-func)
       "Callback"
       (liber:symbol-documentation 'map-list-model-map-func)
- "@version{#2023-9-15}
+ "@version{#2024-5-3}
+  @syntax{lambda (item) => result}
   @argument[item]{a pointer to the item to map}
-  @return{A pointer to the item to map to. This function may not return
-    @code{cffi:null-pointer}.}
+  @argument[result]{a pointer to the item to map to, this function may not
+    return @code{cffi:null-pointer}}
   @begin{short}
     User function that is called to map an item of the original model to an item
     expected by the map model.

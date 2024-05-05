@@ -84,7 +84,7 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkDragCancelReason
+;;; GdkDragCancelReason
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkDragCancelReason" drag-cancel-reason
@@ -98,28 +98,32 @@
 (setf (liber:alias-for-symbol 'drag-cancel-reason)
       "GEnum"
       (liber:symbol-documentation 'drag-cancel-reason)
- "@version{2024-1-7}
-  @begin{short}
-    Used in the @class{gdk:drag} object to the reason of a cancelled DND
-    operation.
-  @end{short}
-  @begin{pre}
-(gobject:define-g-enum \"GdkDragCanelReason\" drag-cancel-reason
+ "@version{2024-5-2}
+  @begin{declaration}
+    @begin{pre}
+(gobject:define-g-enum \"GdkDragCancelReason\" drag-cancel-reason
   (:export t
    :type-initializer \"gdk_drag_cancel_reason_get_type\")
   :no-target
   :user-cancelled
   :error)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:no-target]{There is no suitable drop target.}
-    @entry[:user-cancelled]{Drag cancelled by the user.}
-    @entry[:error]{Unspecified error.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:no-target]{There is no suitable drop target.}
+      @entry[:user-cancelled]{Drag cancelled by the user.}
+      @entry[:error]{Unspecified error.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Used in the @class{gdk:drag} object to the reason of a cancelled DND
+    operation.
+  @end{short}
   @see-class{gdk:drag}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkDragAction
+;;; GdkDragAction
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-flags "GdkDragAction" drag-action
@@ -135,12 +139,9 @@
 (setf (liber:alias-for-symbol 'drag-action)
       "GFlags"
       (liber:symbol-documentation 'drag-action)
- "@version{2024-1-7}
-  @begin{short}
-    Used in @class{gdk:drop} and @class{gdk:drag} objects to indicate the
-    actions that the destination can and should do with the dropped data.
-  @end{short}
-  @begin{pre}
+ "@version{2024-5-2}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GdkDragAction\" drag-action
   (:export t
    :type-initializer \"gdk_drag_action_get_type\")
@@ -149,16 +150,23 @@
   (:move #.(ash 1 1))
   (:link #.(ash 1 2))
   (:ask #.(ash 1 3)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:copy]{Copy the data.}
-    @entry[:move]{Move the data, i.e. first copy it, then delete it from the
-      source using the @code{DELETE} target of the X selection protocol.}
-    @entry[:link]{Add a link to the data. Note that this is only useful if
-      source and destination agree on what it means, and is not supported on
-      all platforms.}
-    @entry[:ask]{Ask the user what to do with the data.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:copy]{Copy the data.}
+      @entry[:move]{Move the data, i.e. first copy it, then delete it from the
+        source using the @code{DELETE} target of the X selection protocol.}
+      @entry[:link]{Add a link to the data. Note that this is only useful if
+        source and destination agree on what it means, and is not supported on
+        all platforms.}
+      @entry[:ask]{Ask the user what to do with the data.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Used in @class{gdk:drop} and @class{gdk:drag} objects to indicate the
+    actions that the destination can and should do with the dropped data.
+  @end{short}
   @see-function{gdk:drag}
   @see-function{gdk:drop}")
 
@@ -205,7 +213,7 @@
 
 #+liber-documentation
 (setf (documentation 'drag 'type)
- "@version{2024-1-7}
+ "@version{2024-5-2}
   @begin{short}
     The @class{gdk:drag} object represents the source of an ongoing DND
     operation.
@@ -227,8 +235,8 @@ lambda (drag reason)    :run-last
       @begin[code]{table}
         @entry[drag]{The @class{gdk:drag} object on which the signal is
           emitted.}
-        @entry[reason]{A @symbol{gdk:drag-cancel-reason} value with the reason
-        the drag was cancelled.}
+        @entry[reason]{The @symbol{gdk:drag-cancel-reason} value with the
+          reason the drag was cancelled.}
       @end{table}
     @subheading{The \"dnd-finished\" signal}
       @begin{pre}
@@ -276,8 +284,8 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-actions)
       "Accessor"
       (documentation 'drag-actions 'function)
- "@version{#2023-8-4}
-  @syntax[]{(gdk:drag-actions object) => actions}
+ "@version{#2024-5-2}
+  @syntax{(gdk:drag-actions object) => actions}
   @argument[object]{a @class{gdk:drag} object}
   @argument[actions]{a @symbol{gdk:drag-action} value}
   @begin{short}
@@ -301,8 +309,8 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-content)
       "Accessor"
       (documentation 'drag-content 'function)
- "@version{#2023-8-4}
-  @syntax[]{(gdk:drag-content object) => content}
+ "@version{#2024-5-2}
+  @syntax{(gdk:drag-content object) => content}
   @argument[object]{a @class{gdk:drag} object}
   @argument[content]{a @class{gdk:content-provider} object associated to
     @arg{object}}
@@ -327,8 +335,8 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-device)
       "Accessor"
       (documentation 'drag-device 'function)
- "@version{#2023-8-4}
-  @syntax[]{(gdk:drag-device object) => device}
+ "@version{#2024-5-2}
+  @syntax{(gdk:drag-device object) => device}
   @argument[object]{a @class{gdk:drag} object}
   @argument[device]{a @class{gdk:device} object associated to @arg{object}}
   @begin{short}
@@ -351,8 +359,8 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-display)
       "Accessor"
       (documentation 'drag-display 'function)
- "@version{#2023-8-4}
-  @syntax[]{(gdk:drag-display object) => display}
+ "@version{#2024-5-2}
+  @syntax{(gdk:drag-display object) => display}
   @argument[object]{a @class{gdk:drag} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
@@ -376,8 +384,8 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-formats)
       "Accessor"
       (documentation 'drag-formats 'function)
- "@version{#2023-8-4}
-  @syntax[]{(gdk:drag-formats object) => formats}
+ "@version{#2024-5-2}
+  @syntax{(gdk:drag-formats object) => formats}
   @argument[object]{a @class{gdk:drag} object}
   @argument[formats]{a @class{gdk:content-formats} object}
   @begin{short}
@@ -402,8 +410,8 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-selected-action)
       "Accessor"
       (documentation 'drag-selected-action 'function)
- "@version{#2023-8-4}
-  @syntax[]{(gdk:drag-selected-action object) => action}
+ "@version{#2024-5-2}
+  @syntax{(gdk:drag-selected-action object) => action}
   @argument[object]{a @class{gdk:drag} object}
   @argument[action]{a @symbol{gdk:drag-action} value}
   @begin{short}
@@ -427,8 +435,8 @@ lambda (drag)    :run-last
 (setf (liber:alias-for-function 'drag-surface)
       "Accessor"
       (documentation 'drag-surface 'function)
- "@version{#2023-8-4}
-  @syntax[]{(gdk:drag-surface object) => surface}
+ "@version{#2024-5-2}
+  @syntax{(gdk:drag-surface object) => surface}
   @argument[object]{a @class{gdk:drag} object}
   @argument[surface]{a @class{gdk:surface} object where the drag originates}
   @begin{short}
@@ -441,7 +449,7 @@ lambda (drag)    :run-last
   @see-class{gdk:surface}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drag_drop_done ()
+;;; gdk_drag_drop_done
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_drop_done" drag-drop-done) :void
@@ -466,7 +474,7 @@ lambda (drag)    :run-last
 (export 'drag-drop-done)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drag_begin ()
+;;; gdk_drag_begin
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_begin" drag-begin) (g:object drag)
@@ -513,7 +521,7 @@ lambda (drag)    :run-last
 (export 'drag-begin)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drag_get_drag_surface ()
+;;; gdk_drag_get_drag_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_drag_surface" drag-drag-surface) (g:object surface)
@@ -536,7 +544,7 @@ lambda (drag)    :run-last
 (export 'drag-drag-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drag_set_hotspot ()
+;;; gdk_drag_set_hotspot
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_set_hotspot" drag-set-hotspot) :void
@@ -560,7 +568,7 @@ lambda (drag)    :run-last
 (export 'drag-set-hotspot)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_drag_action_is_unique ()
+;;; gdk_drag_action_is_unique
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_drag_action_is_unique" drag-action-is-unique) :boolean

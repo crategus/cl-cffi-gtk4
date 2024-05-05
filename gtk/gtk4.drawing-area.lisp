@@ -292,29 +292,25 @@ lambda (area width height)    :run-last
      (width :int)
      (height :int)
      (data :pointer))
-  (let ((ptr (glib:get-stable-pointer-value data)))
-    (funcall ptr area cr width height)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func area cr width height)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'drawing-area-draw-func)
       "Callback"
       (liber:symbol-documentation 'drawing-area-draw-func)
- "@version{2023-9-18}
+ "@version{2024-5-4}
+  @syntax{lambda (area cr width height)}
+  @argument[area]{a @class{gtk:drawing-area} widget}
+  @argument[cr]{a @symbol{cairo:context-t} instance to draw to}
+  @argument[height]{an integer with the actual width of the contents}
+  @argument[width]{an integer with the actual height of the contents}
   @begin{short}
     Whenever the drawing area needs to redraw, this callback function will be
     called.
   @end{short}
   This function should exclusively redraw the contents of the drawing area and
   must not call any widget functions that cause changes.
-  @begin{pre}
-lambda (area cr width height)
-  @end{pre}
-  @begin[code]{table}
-    @entry[area]{A @class{gtk:drawing-area} widget.}
-    @entry[cr]{A @symbol{cairo:context-t} instance to draw to.}
-    @entry[height]{An integer with the actual width of the contents.}
-    @entry[width]{An integer with the actual height of the contents.}
-  @end{table}
   @see-class{gtk:drawing-area}
   @see-symbol{cairo:context-t}
   @see-function{gtk:drawing-area-content-height}

@@ -456,24 +456,20 @@
     ((widget (g:object widget))
      (args (:pointer (:struct g:variant)))
      (data :pointer))
-  (let ((fn (glib:get-stable-pointer-value data)))
-    (funcall fn widget args)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func widget args)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'shortcut-func)
       "Callback"
       (liber:symbol-documentation 'shortcut-func)
- "@version{#2022-8-26}
+ "@version{#2024-5-4}
+  @syntax{lambda (widget args)}
+  @argument[widget]{a @class{gtk:widget} object passed to the activation}
+  @argument[args]{@type{g:variant} arguments passed to the activation}
   @begin{short}
     Prototype for shortcuts based on user callbacks.
   @end{short}
-  @begin{pre}
-lambda (widget args)
-  @end{pre}
-  @begin[code]{table}
-    @entry[widget]{a @class{gtk:widget} object passed to the activation}
-    @entry[args]{the @type{g:variant} arguments passed to the activation}
-  @end{table}
   @see-class{gtk:flow-box}
   @see-class{gtk:flow-box-child}")
 

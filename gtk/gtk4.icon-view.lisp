@@ -1292,18 +1292,10 @@ lambda (view)    :action
 (setf (liber:alias-for-symbol 'icon-view-foreach-func)
       "Callback"
       (liber:symbol-documentation 'icon-view-foreach-func)
- "@version{#2024-5-1}
-  @begin{declaration}
-    @begin{pre}
-lambda (view path)
-    @end{pre}
-  @end{declaration}
-  @begin{values}
-    @begin[code]{table}
-      @entry[view]{A @class{gtk:icon-view} widget.}
-      @entry[path]{The @class{gtk:tree-path} instance of a selected row.}
-    @end{table}
-  @end{values}
+ "@version{#2024-5-3}
+  @syntax{lambda (view path)}
+  @argument[view]{a @class{gtk:icon-view} widget}
+  @argument[path]{a @class{gtk:tree-path} instance of a selected row}
   @begin{short}
     A callback function used by the @fun{gtk:icon-view-selected-foreach}
     function to map all selected rows.

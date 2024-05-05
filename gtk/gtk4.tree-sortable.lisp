@@ -209,7 +209,7 @@
   (has-default-sort-func (:boolean (sortable (g:object tree-sortable)))))
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkTreeIterCompareFunc ()
+;;; GtkTreeIterCompareFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback tree-iter-compare-func :int
@@ -217,14 +217,20 @@
      (iter1 (g:boxed tree-iter))
      (iter2 (g:boxed tree-iter))
      (data :pointer))
-  (let ((fn (glib:get-stable-pointer-value data)))
-    (funcall fn model iter1 iter2)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func model iter1 iter2)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-iter-compare-func)
       "Callback"
       (liber:symbol-documentation 'tree-iter-compare-func)
- "@version{#2021-3-5}
+ "@version{#2024-5-4}
+  @syntax{lambda (model iter1 iter2) => result}
+  @argument[model]{a @class{gtk:tree-model} object the comparison is within}
+  @argument[iter1]{a @class{gtk:tree-iter} iterator in @arg{model}}
+  @argument[iter2]{another @class{gtk:tree-iter} iterator in @arg{model}}
+  @argument[result]{a negative integer, zero or a positive integer depending on
+    whether @arg{iter1} sorts before, with or after @arg{iter2}}
   @begin{short}
     A @symbol{gtk:tree-iter-compare-func} callback function should return a
     negative integer, zero, or a positive integer if @arg{iter1} sorts before
@@ -239,16 +245,6 @@
 
   For example, if the model is a product catalogue, then a compare function for
   the \"price\" column could be one which returns price-of(a) - price-of(b).
-  @begin{pre}
- lambda (model iter1 iter2)
-  @end{pre}
-  @begin[code]{table}
-    @entry[model]{The @class{gtk:tree-model} object the comparison is within.}
-    @entry[iter1]{A @class{gtk:tree-iter} iterator in @arg{model}.}
-    @entry[iter2]{Another @class{gtk:tree-iter} iterator in @arg{model}.}
-    @entry[Returns]{A negative integer, zero or a positive integer depending on
-      whether @arg{iter1} sorts before, with or after @arg{iter2}.}
-  @end{table}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-class{gtk:tree-sortable}

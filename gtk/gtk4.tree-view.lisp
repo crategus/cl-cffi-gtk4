@@ -1641,16 +1641,24 @@ lambda (view)    :action
      (prev (g:object tree-view-column))
      (next (g:object tree-view-column))
      (data :pointer))
-  (let ((fn (glib:get-stable-pointer-value data)))
+  (let ((func (glib:get-stable-pointer-value data)))
     (restart-case
-      (funcall fn view column prev next)
-      (return () nil))))
+      (funcall func view column prev next)
+      (return () :report "Return NIL" nil))))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-view-column-drop-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-column-drop-func)
- "@version{#2024-3-10}
+ "@version{#2024-5-4}
+  @syntax{lambda (view column prev next) => result}
+  @argument[view]{a @class{gtk:tree-view} widget}
+  @argument[column]{a @class{gtk:tree-view-column} object being dragged}
+  @argument[prev]{a @class{gtk:tree-view-column} object on one side of
+    @arg{column}}
+  @argument[next]{a @class{gtk:tree-view-column} object on the other side of
+    @arg{column}}
+  @argument[result]{@em{true}, if @arg{column} can be dropped in this spot}
   @begin{short}
     Callback function type for determining whether @arg{column} can be dropped
     in a particular spot as determined by @arg{prev} and @arg{next}.
@@ -1661,18 +1669,6 @@ lambda (view)    :action
   spot. Please note that returning @em{true} does not actually indicate that
   the column drop was made, but is meant only to indicate a possible drop spot
   to the user.
-  @begin{pre}
-lambda (view column prev next)
-  @end{pre}
-  @begin[code]{table}
-    @entry[view]{The @class{gtk:tree-view} widget.}
-    @entry[column]{The @class{gtk:tree-view-column} object being dragged.}
-    @entry[prev]{The @class{gtk:tree-view-column} object on one side of
-      @arg{column}.}
-    @entry[next]{The @class{gtk:tree-view-column} object on the other side of
-      @arg{column}.}
-    @entry[Return]{@em{True}, if @arg{column} can be dropped in this spot.}
-  @end{table}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-view-column}")
 
@@ -2086,25 +2082,21 @@ lambda (view column prev next)
     ((view (g:object tree-view))
      (path (g:boxed tree-path))
      (data :pointer))
-  (let ((fn (glib:get-stable-pointer-value data)))
-    (funcall fn view path)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (funcall func view path)))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-view-mapping-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-mapping-func)
- "@version{#2024-3-10}
+ "@version{#2024-5-4}
+  @syntax{lambda (view path)}
+  @argument[view]{a @class{gtk:tree-view} widget}
+  @argument[path]{a @class{gtk:tree-path} instance that is expanded}
   @begin{short}
     Callback function used for the @fun{gtk:tree-view-map-expanded-rows}
     function.
   @end{short}
-  @begin{pre}
-lambda (view path)
-  @end{pre}
-  @begin[code]{table}
-    @entry[view]{The @class{gtk:tree-view} widget.}
-    @entry[path]{The @class{gtk:tree-path} instance that is expanded.}
-  @end{table}
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-path}
   @see-function{gtk:tree-view-map-expanded-rows}")
@@ -3029,33 +3021,30 @@ lambda (view path)
    (key :string)
    (iter (g:boxed tree-iter))
    (data :pointer))
-  (restart-case
-    (funcall (glib:get-stable-pointer-value data) model column key iter)
-    (return-true () t)
-    (return-false () t)))
+  (let ((func (glib:get-stable-pointer-value data)))
+    (restart-case
+      (funcall func model column key iter)
+      (return-true () :report "Return T" t)
+      (return-false () :report "Return NIL" nil))))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'tree-view-search-equal-func)
       "Callback"
       (liber:symbol-documentation 'tree-view-search-equal-func)
- "@version{#2024-3-10}
+ "@version{#2024-5-4}
+  @syntax{lambda (model column key iter data) => result}
+  @argument[model]{a @class{gtk:tree-model} object being searched}
+  @argument[column]{an integer with the search column set by the
+    @fun{gtk:tree-view-search-column} function}
+  @argument[key]{a key string to compare with}
+  @argument[iter]{a @class{gtk:tree-iter} iterator pointing the row of
+    @arg{model} that should be compared with @arg{key}}
+  @argument[result]{@em{false}, if the row matches, @em{true} otherwise}
   @begin{short}
     A callback function used for checking whether a row in model matches a
     search key string entered by the user.
   @end{short}
   Note the return value is reversed from what you would normally expect.
-  @begin{pre}
-lambda (model column key iter data)
-  @end{pre}
-  @begin[code]{table}
-    @entry[model]{The @class{gtk:tree-model} object being searched.}
-    @entry[column]{An integer with the search column set by the
-      @fun{gtk:tree-view-search-column} function.}
-    @entry[key]{The key string to compare with.}
-    @entry[iter]{The @class{gtk:tree-iter} iterator pointing the row of
-      @arg{model} that should be compared with @arg{key}.}
-    @entry[Return]{@em{False} if the row matches, @em{true} otherwise.}
-  @end{table}
   @see-class{gtk:tree-model}
   @see-class{gtk:tree-iter}
   @see-function{gtk:tree-view-set-search-equal-func}")

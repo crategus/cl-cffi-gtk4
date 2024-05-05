@@ -72,7 +72,7 @@
   @see-class{gtk:filter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkCustomFilterFunc ()
+;;; GtkCustomFilterFunc
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Improve the documentation. Do we have a GTKTreeListRow?

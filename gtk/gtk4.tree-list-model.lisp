@@ -545,7 +545,7 @@
   @see-class{gtk:tree-list-model}")
 
 ;;; ----------------------------------------------------------------------------
-;;; GtkTreeListModelCreateModelFunc ()
+;;; GtkTreeListModelCreateModelFunc
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcallback tree-list-model-create-model-func (g:object g:list-model)

@@ -382,22 +382,13 @@
 (setf (liber:alias-for-symbol 'cell-layout-data-func)
       "Callback"
       (liber:symbol-documentation 'cell-layout-data-func)
- "@version{#2024-5-1}
-  @begin{declaration}
-    @begin{pre}
-lambda (layout cell model iter)
-    @end{pre}
-  @end{declaration}
-  @begin{values}
-    @begin[code]{table}
-      @entry[layout]{The @class{gtk:cell-layout} object.}
-      @entry[cell]{The @class{gtk:cell-renderer} object whose value is to be
-        set.}
-      @entry[model]{The @class{gtk:tree-model} object.}
-      @entry[iter]{The @class{gtk:tree-iter} iterator indicating the row to set
-        the value for.}
-    @end{table}
-  @end{values}
+ "@version{#2024-5-3}
+  @syntax{lambda (layout cell model iter)}
+  @argument[layout]{a @class{gtk:cell-layout} object}
+  @argument[cell]{a @class{gtk:cell-renderer} object whose value is to be set}
+  @argument[model]{a @class{gtk:tree-model} object}
+  @argument[iter]{a @class{gtk:tree-iter} iterator indicating the row to set
+    the value for}
   @begin{short}
     A callback function which should set the value of @arg{layout}'s cell
    renderer(s) as appropriate.
