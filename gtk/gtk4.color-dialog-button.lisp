@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -93,7 +93,7 @@
   @image[color-button]{Figure: GtkColorDialogButton}
 
   It is a suitable widget for selecting a color in a preference dialog.
-  
+
   Since 4.10
   @begin[CSS nodes]{dictionary}
     @begin{pre}
@@ -111,8 +111,8 @@ colorbutton
       @begin{pre}
 lambda (button)    :action
       @end{pre}
-      Emitted when the color dialog button is activated. The signal is an action 
-      signal and emitting it causes the button to pop up its dialog. The signal 
+      Emitted when the color dialog button is activated. The signal is an action
+      signal and emitting it causes the button to pop up its dialog. The signal
       can be directly emitted on objects from user code. Since 4.12
   @end{dictionary}
   @see-class{gtk:color-dialog}")
@@ -121,7 +121,7 @@ lambda (button)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- color-dialog-button-dialog ---------------------------------------------
+;;; --- gtk:color-dialog-button-dialog -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "dialog" 'color-dialog-button) t)
@@ -135,8 +135,8 @@ lambda (button)    :action
       "Accessor"
       (documentation 'color-dialog-button-dialog 'function)
  "@version{2023-7-28}
-  @syntax[]{(gtk:color-dialog-button-dialog object) => dialog}
-  @syntax[]{(setf (gtk:color-dialog-button-dialog object) dialog)}
+  @syntax{(gtk:color-dialog-button-dialog object) => dialog}
+  @syntax{(setf (gtk:color-dialog-button-dialog object) dialog)}
   @argument[object]{a @class{gtk:color-dialog-button} object}
   @argument[dialog]{a @class{gtk:color-dialog} object}
   @begin{short}
@@ -152,7 +152,7 @@ lambda (button)    :action
   @see-class{gtk:color-dialog-button}
   @see-class{gtk:color-dialog}")
 
-;;; --- color-dialog-button-rgba -----------------------------------------------
+;;; --- gtk:color-dialog-button-rgba -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "rgba" 'color-dialog-button) t)
@@ -168,8 +168,8 @@ lambda (button)    :action
       "Accessor"
       (documentation 'color-dialog-button-rgba 'function)
  "@version{2023-7-28}
-  @syntax[]{(gtk:color-dialog-button-rgba object) => rgba}
-  @syntax[]{(setf (gtk:color-dialog-button-rgba object) rgba)}
+  @syntax{(gtk:color-dialog-button-rgba object) => rgba}
+  @syntax{(setf (gtk:color-dialog-button-rgba object) rgba)}
   @argument[object]{a @class{gtk:color-dialog-button} object}
   @argument[rgba]{a @class{gdk:rgba} instance}
   @begin{short}

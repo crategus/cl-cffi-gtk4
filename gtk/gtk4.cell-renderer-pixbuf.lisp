@@ -131,7 +131,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- cell-renderer-pixbuf-gicon ---------------------------------------------
+;;; --- gtk:cell-renderer-pixbuf-gicon -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "gicon" 'cell-renderer-pixbuf) t)
@@ -144,8 +144,8 @@
       "Accessor"
       (documentation 'cell-renderer-pixbuf-gicon 'function)
  "@version{#2021-3-13}
-  @syntax[]{(gtk:cell-renderer-pixbuf-gicon object) => icon}
-  @syntax[]{(setf (gtk:cell-renderer-pixbuf-gicon object) icon)}
+  @syntax{(gtk:cell-renderer-pixbuf-gicon object) => icon}
+  @syntax{(setf (gtk:cell-renderer-pixbuf-gicon object) icon)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[icon]{a @class{g:icon} object}
   @begin{short}
@@ -161,7 +161,7 @@
   @see-class{gtk:cell-renderer-pixbuf}
   @see-class{g:icon}")
 
-;;; --- cell-renderer-pixbuf-icon-name -----------------------------------------
+;;; --- gtk:cell-renderer-pixbuf-icon-name -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-name"
@@ -176,8 +176,8 @@
       "Accessor"
       (documentation 'cell-renderer-pixbuf-icon-name 'function)
  "@version{#2021-3-13}
-  @syntax[]{(gtk:cell-renderer-pixbuf-icon-name object) => icon-name}
-  @syntax[]{(setf (gtk:cell-renderer-pixbuf-icon-name object) icon-name)}
+  @syntax{(gtk:cell-renderer-pixbuf-icon-name object) => icon-name}
+  @syntax{(setf (gtk:cell-renderer-pixbuf-icon-name object) icon-name)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[icon-name]{a string with the name of the themed icon to display}
   @begin{short}
@@ -192,7 +192,7 @@
   @end{dictionary}
   @see-class{gtk:cell-renderer-pixbuf}")
 
-;;; --- cell-renderer-pixbuf-icon-size -----------------------------------------
+;;; --- gtk:cell-renderer-pixbuf-icon-size -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-size"
@@ -207,8 +207,8 @@
       "Accessor"
       (documentation 'cell-renderer-pixbuf-icon-size 'function)
  "@version{#2022-7-28}
-  @syntax[]{(gtk:cell-renderer-pixbuf-icon-size object) => size}
-  @syntax[]{(setf (gtk:cell-renderer-pixbuf-icon-size object) size)}
+  @syntax{(gtk:cell-renderer-pixbuf-icon-size object) => size}
+  @syntax{(setf (gtk:cell-renderer-pixbuf-icon-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[size]{a @symbol{gtk:icon-size} value}
   @begin{short}
@@ -223,7 +223,7 @@
   @see-class{gtk:cell-renderer-pixbuf}
   @see-symbol{gtk:icon-size}")
 
-;;; --- cell-renderer-pixbuf-pixbuf --------------------------------------------
+;;; --- gtk:cell-renderer-pixbuf-pixbuf ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pixbuf"
@@ -237,8 +237,8 @@
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf 'function)
  "@version{#2021-3-13}
-  @syntax[]{(gtk:cell-renderer-pixbuf-pixbuf object) => pixbuf}
-  @syntax[]{(setf (gtk:cell-renderer-pixbuf-pixbuf object) pixbuf)}
+  @syntax{(gtk:cell-renderer-pixbuf-pixbuf object) => pixbuf}
+  @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
@@ -252,7 +252,7 @@
   @see-class{gtk:cell-renderer-pixbuf}
   @see-class{gdk-pixbuf:pixbuf}")
 
-;;; --- cell-renderer-pixbuf-pixbuf-expander-closed ----------------------------
+;;; --- gtk:cell-renderer-pixbuf-pixbuf-expander-closed ------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pixbuf-expander-closed"
@@ -266,8 +266,8 @@
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-closed 'function)
  "@version{#2021-3-13}
-  @syntax[]{(gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) => pixbuf}
-  @syntax[]{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) pixbuf)}
+  @syntax{(gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) => pixbuf}
+  @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
@@ -281,7 +281,7 @@
   @see-class{gtk:cell-renderer-pixbuf}
   @see-class{gdk-pixbuf:pixbuf}")
 
-;;; --- cell-renderer-pixbuf-pixbuf-expander-open ------------------------------
+;;; --- gtk:cell-renderer-pixbuf-pixbuf-expander-open --------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pixbuf-expander-open"
@@ -295,8 +295,8 @@
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-open 'function)
  "@version{#2021-3-13}
-  @syntax[]{(gtk:cell-renderer-pixbuf-pixbuf-expander-open object) => pixbuf}
-  @syntax[]{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-open object) pixbuf)}
+  @syntax{(gtk:cell-renderer-pixbuf-pixbuf-expander-open object) => pixbuf}
+  @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-open object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
@@ -310,7 +310,7 @@
   @see-class{gtk:cell-renderer-pixbuf}
   @see-class{gdk-pixbuf:pixbuf}")
 
-;;; --- cell-renderer-pixbuf-texture -------------------------------------------
+;;; --- gtk:cell-renderer-pixbuf-texture ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "texture"
@@ -323,8 +323,8 @@
       "Accessor"
       (documentation 'cell-renderer-pixbuf-texture 'function)
  "@version{#2022-7-28}
-  @syntax[]{(gtk:cell-renderer-pixbuf-texture object) => texture}
-  @syntax[]{(setf (gtk:cell-renderer-pixbuf-texture object) texture)}
+  @syntax{(gtk:cell-renderer-pixbuf-texture object) => texture}
+  @syntax{(setf (gtk:cell-renderer-pixbuf-texture object) texture)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[texture]{a @class{gdk:texture} instance to render}
   @begin{short}
@@ -339,7 +339,7 @@
   @see-class{gdk:texture}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_renderer_pixbuf_new ()
+;;; gtk_cell_renderer_pixbuf_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline cell-renderer-pixbuf-new))

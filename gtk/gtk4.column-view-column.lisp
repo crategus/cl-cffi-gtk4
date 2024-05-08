@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -153,7 +153,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- column-view-column-column-view -----------------------------------------
+;;; --- gtk:column-view-column-column-view -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "column-view"
@@ -166,7 +166,7 @@
       "Accessor"
       (documentation 'column-view-column-column-view 'function)
  "@version{#2023-9-9}
-  @syntax[]{(gtk:column-view-column-column-view object) => columnview}
+  @syntax{(gtk:column-view-column-column-view object) => columnview}
   @argument[object]{a @class{gtk:column-view} object}
   @argument[columnview]{a @class{gtk:column-view} widget displaying
     @arg{object}}
@@ -179,7 +179,7 @@
   to a column view yet, @code{nil} is returned.
   @see-class{gtk:column-view}")
 
-;;; --- column-view-column-expand ----------------------------------------------
+;;; --- gtk:column-view-column-expand ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "expand" 'column-view-column) t)
@@ -192,8 +192,8 @@
       "Accessor"
       (documentation 'column-view-column-expand 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:column-view-column-expand object) => expand}
-  @syntax[]{(setf (gtk:column-view-column-expand object) expand)}
+  @syntax{(gtk:column-view-column-expand object) => expand}
+  @syntax{(setf (gtk:column-view-column-expand object) expand)}
   @argument[object]{a @class{gtk:column-view-column} object}
   @argument[expand]{@em{true} if this column expands}
   @begin{short}
@@ -201,12 +201,12 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-expand} function returns whether this column
-  should expand. The @setf{gtk:column-view-column-expand} function sets the 
-  column to take available extra space. The extra space is shared equally 
+  should expand. The @setf{gtk:column-view-column-expand} function sets the
+  column to take available extra space. The extra space is shared equally
   amongst all columns that have the expand set to @em{true}.
   @see-class{gtk:column-view}")
 
-;;; --- column-view-column-factory ---------------------------------------------
+;;; --- gtk:column-view-column-factory -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "factory" 'column-view-column) t)
@@ -219,8 +219,8 @@
       "Accessor"
       (documentation 'column-view-column-factory 'function)
  "@version{#2023-9-10}
-  @syntax[]{(gtk:column-view-column-factory object) => factory}
-  @syntax[]{(setf (gtk:column-view-column-factory object) factory)}
+  @syntax{(gtk:column-view-column-factory object) => factory}
+  @syntax{(setf (gtk:column-view-column-factory object) factory)}
   @argument[object]{a @class{gtk:column-view-column} object}
   @argument[factory]{a @class{gtk:list-item-factory} object to use, or
     @code{nil} for none}
@@ -234,7 +234,7 @@
   @see-class{gtk:column-view-column}
   @see-class{gtk:list-item-factory}")
 
-;;; --- column-view-column-fixed-width -----------------------------------------
+;;; --- gtk:column-view-column-fixed-width -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fixed-width"
@@ -250,8 +250,8 @@
       "Accessor"
       (documentation 'column-view-column-fixed-width 'function)
  "@version{#2023-9-10}
-  @syntax[]{(gtk:column-view-column-fixed-width object) => width}
-  @syntax[]{(setf (gtk:column-view-column-fixed-width object) width)}
+  @syntax{(gtk:column-view-column-fixed-width object) => width}
+  @syntax{(setf (gtk:column-view-column-fixed-width object) width)}
   @argument[object]{a @class{gtk:column-view-column} object}
   @argument[width]{an integer with the fixed width of the column}
   @begin{short}
@@ -259,8 +259,8 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-fixed-width} function gets the fixed width of
-  the column. The @setf{gtk:column-view-column-fixed-width} function sets the 
-  fixed width. If @arg{width} is not -1, sets the fixed width of @arg{object}, 
+  the column. The @setf{gtk:column-view-column-fixed-width} function sets the
+  fixed width. If @arg{width} is not -1, sets the fixed width of @arg{object},
   otherwise unsets it.
 
   Setting a fixed width overrides the automatically calculated width.
@@ -268,7 +268,7 @@
   property.
   @see-class{gtk:column-view-column}")
 
-;;; --- column-view-column-header-menu -----------------------------------------
+;;; --- gtk:column-view-column-header-menu -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "header-menu"
@@ -282,8 +282,8 @@
       "Accessor"
       (documentation 'column-view-column-header-menu 'function)
  "@version{#2023-9-10}
-  @syntax[]{(gtk:column-view-column-header-menu object) => menu}
-  @syntax[]{(setf (gtk:column-view-column-header-menu object) menu)}
+  @syntax{(gtk:column-view-column-header-menu object) => menu}
+  @syntax{(setf (gtk:column-view-column-header-menu object) menu)}
   @argument[object]{a @class{gtk:column-view-column} object}
   @argument[menu]{a @class{g:menu-model} object, or @code{nil}}
   @begin{short}
@@ -292,12 +292,12 @@
   @end{short}
   The @fun{gtk:column-view-column-header-menu} function gets the menu model
   that is used to create the context menu for the column header. The
-  @setf{gtk:column-view-column-header-menu} function sets the menu model that is 
+  @setf{gtk:column-view-column-header-menu} function sets the menu model that is
   used to create the context menu for the column header.
   @see-class{gtk:column-view-column}
   @see-class{g:menu-model}")
 
-;;; --- column-view-column-id --------------------------------------------------
+;;; --- gtk:column-view-column-id ----------------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "id" 'column-view-column) t)
@@ -312,8 +312,8 @@
       "Accessor"
       (documentation 'column-view-column-id 'function)
  "@version{#2023-9-10}
-  @syntax[]{(gtk:column-view-column-id object) => id}
-  @syntax[]{(setf (gtk:column-view-column-id object) id)}
+  @syntax{(gtk:column-view-column-id object) => id}
+  @syntax{(setf (gtk:column-view-column-id object) id)}
   @argument[object]{a @class{gtk:column-view-column} object}
   @argument[id]{a string with the ID to use for this column}
   @begin{short}
@@ -321,14 +321,14 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-id} function returns the ID. The
-  @setf{gtk:column-view-column-id} function sets the ID of this column. GTK 
-  makes no use of this, but applications can use it when storing column view 
+  @setf{gtk:column-view-column-id} function sets the ID of this column. GTK
+  makes no use of this, but applications can use it when storing column view
   configuration. It is up to callers to ensure uniqueness of IDs.
 
   Since 4.10
   @see-class{gtk:column-view-column}")
 
-;;; --- column-view-column-resizable -------------------------------------------
+;;; --- gtk:column-view-column-resizable ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "resizable"
@@ -342,8 +342,8 @@
       "Accessor"
       (documentation 'column-view-column-resizable 'function)
  "@version{#2023-9-10}
-  @syntax[]{(gtk:column-view-column-resizable object) => resizable}
-  @syntax[]{(setf (gtk:column-view-column-resizable object) resizable)}
+  @syntax{(gtk:column-view-column-resizable object) => resizable}
+  @syntax{(setf (gtk:column-view-column-resizable object) resizable)}
   @argument[object]{a @class{gtk:column-view-column} object}
   @argument[resizable]{@em{true} if this column is resizable}
   @begin{short}
@@ -351,11 +351,11 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-resizable} function returns whether this
-  column is resizable. The @setf{gtk:column-view-column-resizable} function sets 
+  column is resizable. The @setf{gtk:column-view-column-resizable} function sets
   whether this column should be resizable by dragging.
   @see-class{gtk:column-view-column}")
 
-;;; --- column-view-column-sorter ----------------------------------------------
+;;; --- gtk:column-view-column-sorter ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "sorter" 'column-view-column) t)
@@ -367,8 +367,8 @@
       "Accessor"
       (documentation 'column-view-column-sorter 'function)
  "@version{#2023-9-10}
-  @syntax[]{(gtk:column-view-column-sorter object) => sorter}
-  @syntax[]{(setf (gtk:column-view-column-sorter object) sorter)}
+  @syntax{(gtk:column-view-column-sorter object) => sorter}
+  @syntax{(setf (gtk:column-view-column-sorter object) sorter)}
   @argument[object]{a @class{gtk:column-view-column} object}
   @argument[sorter]{a @class{gtk:sorter} object}
   @begin{short}
@@ -376,9 +376,9 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-sorter} function returns the sorter that is
-  associated with the column. The @setf{gtk:column-view-column-sorter} function 
-  associates a sorter with the column. If sorter is @code{nil}, the column will 
-  not let users change the sorting by clicking on its header. This sorter can be 
+  associated with the column. The @setf{gtk:column-view-column-sorter} function
+  associates a sorter with the column. If sorter is @code{nil}, the column will
+  not let users change the sorting by clicking on its header. This sorter can be
   made active by clicking on the column header, or by calling the
   @fun{gtk:column-view-sort-by-column} function.
 
@@ -388,7 +388,7 @@
   @see-function{gtk:column-view-sort-by-column}
   @see-function{gtk:column-view-sorter}")
 
-;;; --- column-view-column-title -----------------------------------------------
+;;; --- gtk:column-view-column-title -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'column-view-column) t)
@@ -401,8 +401,8 @@
       "Accessor"
       (documentation 'column-view-column-title 'function)
  "@version{#2023-9-10}
-  @syntax[]{(gtk:column-view-column-title object) => title}
-  @syntax[]{(setf (gtk:column-view-column-title object) title)}
+  @syntax{(gtk:column-view-column-title object) => title}
+  @syntax{(setf (gtk:column-view-column-title object) title)}
   @argument[object]{a @class{gtk:column-view-column} object}
   @argument[title]{a string with the title of the column}
   @begin{short}
@@ -410,13 +410,13 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-title} function  returns the title. The
-  @setf{gtk:column-view-column-sorter} function sets the title of this column. 
-  The title is displayed in the header of a @class{gtk:column-view} widget for 
+  @setf{gtk:column-view-column-sorter} function sets the title of this column.
+  The title is displayed in the header of a @class{gtk:column-view} widget for
   this column and is therefore user-facing text that should be translated.
   @see-class{gtk:column-view-column}
   @see-class{gtk:column-view}")
 
-;;; --- column-view-column-visible ---------------------------------------------
+;;; --- gtk:column-view-column-visible -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "visible" 'column-view-column) t)
@@ -429,8 +429,8 @@
       "Accessor"
       (documentation 'column-view-column-visible 'function)
  "@version{#2023-9-10}
-  @syntax[]{(gtk:column-view-column-visible object) => visible}
-  @syntax[]{(setf (gtk:column-view-column-visible object) visible)}
+  @syntax{(gtk:column-view-column-visible object) => visible}
+  @syntax{(setf (gtk:column-view-column-visible object) visible)}
   @argument[object]{a @class{gtk:column-view-column} object}
   @argument[visible]{@em{true} if this column is visible}
   @begin{short}
@@ -438,12 +438,12 @@
     @class{gtk:column-view-column} class.
   @end{short}
   The @fun{gtk:column-view-column-visible} function returns whether this column
-  is visible. The @setf{gtk:column-view-column-visible} function sets whether 
+  is visible. The @setf{gtk:column-view-column-visible} function sets whether
   this column should be visible in views.
   @see-class{gtk:column-view-column}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_column_view_column_new ()
+;;; gtk_column_view_column_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline column-view-column-new))
@@ -454,13 +454,13 @@
   @argument[title]{a string with the title to use for this column}
   @argument[factory]{a @class{gtk:list-item-factory} object to populate items
     with}
-  @return{A new @class{gtk:column-view-column} object using the given
+  @return{The new @class{gtk:column-view-column} object using the given
     @arg{factory}.}
   @begin{short}
     Creates a new column that uses the given @arg{factory} for mapping
     items to widgets.
   @end{short}
-  You most likely want to call the @fun{gtk:column-view-append-column} function 
+  You most likely want to call the @fun{gtk:column-view-append-column} function
   next.
   @see-class{gtk:column-view-column}
   @see-class{gtk:list-item-factory}

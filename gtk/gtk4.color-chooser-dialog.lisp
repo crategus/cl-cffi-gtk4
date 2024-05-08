@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -66,7 +66,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkColorChooserDialog
+;;; GtkColorChooserDialog
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkColorChooserDialog" color-chooser-dialog
@@ -88,7 +88,7 @@
 (setf (documentation 'color-chooser-dialog 'type)
  "@version{#2022-8-28}
   @begin{short}
-    The @class{gtk:color-chooser-dialog} widget is a dialog for choosing a 
+    The @class{gtk:color-chooser-dialog} widget is a dialog for choosing a
     color.
   @end{short}
   It implements the @class{gtk:color-chooser} interface and does not provide
@@ -181,9 +181,9 @@
       ;; Show the window
       (gtk:widget-show window))))
     @end{pre}
-  @end{dictionary}  
+  @end{dictionary}
   @begin[Warning]{dictionary}
-    The @class{gtk:color-chooser-dialog} implementation is deprecated since 
+    The @class{gtk:color-chooser-dialog} implementation is deprecated since
     4.10. Use the @class{gtk:color-dialog} object instead.
   @end{dictionary}
   @see-constructor{gtk:color-chooser-dialog-new}
@@ -209,8 +209,8 @@
       "Accessor"
       (documentation 'color-chooser-dialog-show-editor 'function)
  "@version{#2022-8-28}
-  @syntax[]{(gtk:color-chooser-dialog-show-editor object) => show-editor}
-  @syntax[]{(setf (gtk:color-chooser-dialog-show-editor object) show-editor)}
+  @syntax{(gtk:color-chooser-dialog-show-editor object) => show-editor}
+  @syntax{(setf (gtk:color-chooser-dialog-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-chooser-dialog} widget}
   @argument[show-editor]{a boolean whether to show the single-color editor}
   @begin{short}
@@ -220,13 +220,13 @@
   @em{True} when the color chooser dialog is showing the single-color editor.
   It can be set to switch the color chooser into single-color editing mode.
   @begin[Warning]{dictionary}
-    The @class{gtk:color-chooser-dialog} implementation is deprecated since 
+    The @class{gtk:color-chooser-dialog} implementation is deprecated since
     4.10. Use the @class{gtk:color-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:color-chooser-dialog}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_color_chooser_dialog_new ()
+;;; gtk_color_chooser_dialog_new
 ;;; ----------------------------------------------------------------------------
 
 (defun color-chooser-dialog-new (title parent)
@@ -235,10 +235,10 @@
   @argument[title]{a string with the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent of the dialog,
     or @code{nil}}
-  @return{A new @class{gtk:color-chooser-dialog} widget.}
+  @return{The new @class{gtk:color-chooser-dialog} widget.}
   @short{Creates a new color chooser dialog.}
   @begin[Warning]{dictionary}
-    The @class{gtk:color-chooser-dialog} implementation is deprecated since 
+    The @class{gtk:color-chooser-dialog} implementation is deprecated since
     4.10. Use the @class{gtk:color-dialog} object instead.
   @end{dictionary}
   @see-class{gtk:window}

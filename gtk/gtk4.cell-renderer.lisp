@@ -127,8 +127,8 @@
       "GFlags"
       (liber:symbol-documentation 'cell-renderer-state)
  "@version{#2021-3-7}
-  @short{Tells how a cell is to be rendererd.}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GtkCellRendererState\" cell-renderer-state
   (:export t
    :type-initializer \"gtk_cell_renderer_state_get_type\")
@@ -139,17 +139,21 @@
   (:focused     #.(ash 1 4))
   (:expandable  #.(ash 1 5))
   (:expanded    #.(ash 1 6)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:selected]{The cell is currently selected, and probably has a
-      selection colored background to render to.}
-    @entry[:prelit]{The mouse is hovering over the cell.}
-    @entry[:insensitive]{The cell is drawn in an insensitive manner.}
-    @entry[:sorted]{The cell is in a sorted row.}
-    @entry[:focused]{The cell is in the focus row.}
-    @entry[:expandable]{The cell is in a row that can be expanded.}
-    @entry[:expanded]{The cell is in a row that is expanded.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:selected]{The cell is currently selected, and probably has a
+        selection colored background to render to.}
+      @entry[:prelit]{The mouse is hovering over the cell.}
+      @entry[:insensitive]{The cell is drawn in an insensitive manner.}
+      @entry[:sorted]{The cell is in a sorted row.}
+      @entry[:focused]{The cell is in the focus row.}
+      @entry[:expandable]{The cell is in a row that can be expanded.}
+      @entry[:expanded]{The cell is in a row that is expanded.}
+    @end{table}
+  @end{values}
+  @short{Tells how a cell is to be rendererd.}
   @see-class{gtk:cell-renderer}")
 
 ;;; ----------------------------------------------------------------------------
@@ -168,23 +172,27 @@
       "GEnum"
       (liber:symbol-documentation 'cell-renderer-mode)
  "@version{#2021-3-7}
-  @short{Identifies how the user can interact with a particular cell.}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkCellRendererMode\" cell-renderer-mode
   (:export t
    :type-initializer \"gtk_cell_renderer_mode_get_type\")
   (:inert 0)
   (:activatable 1)
   (:editable 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:inert]{The cell is just for display and cannot be interacted with.
-      Note that this does not mean that e.g. the row being drawn cannot be
-      selected - just that a particular element of it cannot be individually
-      modified.}
-    @entry[:activatable]{The cell can be clicked.}
-    @entry[:editable]{The cell can be edited or otherwise modified.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:inert]{The cell is just for display and cannot be interacted with.
+        Note that this does not mean that e.g. the row being drawn cannot be
+        selected - just that a particular element of it cannot be individually
+        modified.}
+      @entry[:activatable]{The cell can be clicked.}
+      @entry[:editable]{The cell can be edited or otherwise modified.}
+    @end{table}
+  @end{values}
+  @short{Identifies how the user can interact with a particular cell.}
   @see-class{gtk:cell-renderer}")
 
 ;;; ----------------------------------------------------------------------------

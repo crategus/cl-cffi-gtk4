@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -126,7 +126,7 @@ lambda (chooser color)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- color-chooser-rgba -------------------------------------------------
+;;; --- gtk:color-chooser-rgba -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "rgba" 'color-chooser) t)
@@ -139,8 +139,8 @@ lambda (chooser color)    :run-first
       "Accessor"
       (documentation 'color-chooser-rgba 'function)
  "@version{#2022-8-27}
-  @syntax[]{(gtk:color-chooser-rgba object) => color}
-  @syntax[]{(setf (gtk:color-chooser-rgba object) color)}
+  @syntax{(gtk:color-chooser-rgba object) => color}
+  @syntax{(setf (gtk:color-chooser-rgba object) color)}
   @argument[object]{a @class{gtk:color-chooser} widget}
   @argument[color]{a @struct{gdk:rgba} color}
   @begin{short}
@@ -156,7 +156,7 @@ lambda (chooser color)    :run-first
   @see-struct{gdk:rgba}
   @see-class{gtk:color-chooser}")
 
-;;; --- color-chooser-use-alpha --------------------------------------------
+;;; --- gtk:color-chooser-use-alpha --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-alpha"
@@ -173,8 +173,8 @@ lambda (chooser color)    :run-first
       "Accessor"
       (documentation 'color-chooser-use-alpha 'function)
  "@version{#2022-8-27}
-  @syntax[]{(gtk:color-chooser-use-alpha object) => use-alpha}
-  @syntax[]{(setf (gtk:color-chooser-use-alpha object) use-alpha)}
+  @syntax{(gtk:color-chooser-use-alpha object) => use-alpha}
+  @syntax{(setf (gtk:color-chooser-use-alpha object) use-alpha)}
   @argument[object]{a @class{gtk:color-chooser} widget}
   @argument[use-alpha]{@em{true} if the color chooser should use alpha channel,
     @em{false} if not}
@@ -192,7 +192,7 @@ lambda (chooser color)    :run-first
   @see-class{gtk:color-chooser}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_color_chooser_add_palette ()
+;;; gtk_color_chooser_add_palette
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_color_chooser_add_palette" %color-chooser-add-palette) :void
@@ -251,7 +251,7 @@ lambda (chooser color)    :run-first
 (export 'color-chooser-add-palette)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_hsv_to_rgb ()
+;;; gtk_hsv_to_rgb
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_hsv_to_rgb" %hsv-to-rgb) :void
@@ -291,7 +291,7 @@ lambda (chooser color)    :run-first
 (export 'hsv-to-rgb)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_rgb_to_hsv ()
+;;; gtk_rgb_to_hsv
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Check the implementation for the GTK3 library

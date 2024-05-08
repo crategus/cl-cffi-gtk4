@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -130,8 +130,8 @@
       "Accessor"
       (documentation 'column-view-cell-child 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-cell-child object) => child}
-  @syntax[]{(setf (gtk:column-view-cell-child object) child)}
+  @syntax{(gtk:column-view-cell-child object) => child}
+  @syntax{(setf (gtk:column-view-cell-child object) child)}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -161,8 +161,8 @@
       "Accessor"
       (documentation 'column-view-cell-focusable 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-cell-focusable object) => focusable}
-  @syntax[]{(setf (gtk:column-view-cell-focusable object) focusable)}
+  @syntax{(gtk:column-view-cell-focusable object) => focusable}
+  @syntax{(setf (gtk:column-view-cell-focusable object) focusable)}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[focusable]{a boolean whether the item should be focusable}
   @begin{short}
@@ -195,7 +195,7 @@
       "Accessor"
       (documentation 'column-view-cell-item 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-cell-item object) => item}
+  @syntax{(gtk:column-view-cell-item object) => item}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[item]{a @class{g:object} object with the item displayed}
   @begin{short}
@@ -222,7 +222,7 @@
       "Accessor"
       (documentation 'column-view-cell-position 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-cell-position object) => position}
+  @syntax{(gtk:column-view-cell-position object) => position}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[position]{an unsigned integer with the position of the item}
   @begin{short}
@@ -249,7 +249,7 @@
       "Accessor"
       (documentation 'column-view-cell-selected 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-cell-selected object) => selected}
+  @syntax{(gtk:column-view-cell-selected object) => selected}
   @argument[object]{a @class{gtk:column-view-cell} object}
   @argument[selected]{a boolean whether the item is currently selected}
   @begin{short}

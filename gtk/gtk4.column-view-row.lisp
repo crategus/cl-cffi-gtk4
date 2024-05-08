@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -142,8 +142,8 @@
       "Accessor"
       (documentation 'column-view-row-accessible-description 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-row-accessible-description object) => description}
-  @syntax[]{(setf (gtk:column-view-row-accessible-description object) description)}
+  @syntax{(gtk:column-view-row-accessible-description object) => description}
+  @syntax{(setf (gtk:column-view-row-accessible-description object) description)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[description]{a string with the accessible description}
   @begin{short}
@@ -173,8 +173,8 @@
       "Accessor"
       (documentation 'column-view-row-accessible-label 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-row-accessible-label object) => label}
-  @syntax[]{(setf (gtk:column-view-row-accessible-label object) label)}
+  @syntax{(gtk:column-view-row-accessible-label object) => label}
+  @syntax{(setf (gtk:column-view-row-accessible-label object) label)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[label]{a string with the accesible label}
   @begin{short}
@@ -202,8 +202,8 @@
       "Accessor"
       (documentation 'column-view-row-activatable 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-row-activatable object) => activatable}
-  @syntax[]{(setf (gtk:column-view-row-activatable object) activatable)}
+  @syntax{(gtk:column-view-row-activatable object) => activatable}
+  @syntax{(setf (gtk:column-view-row-activatable object) activatable)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[activatable]{a boolean whether the row can be activated}
   @begin{short}
@@ -238,8 +238,8 @@
       "Accessor"
       (documentation 'column-view-row-focusable 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-row-focusable object) => focusable}
-  @syntax[]{(setf (gtk:column-view-row-focusable object) focusable)}
+  @syntax{(gtk:column-view-row-focusable object) => focusable}
+  @syntax{(setf (gtk:column-view-row-focusable object) focusable)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[focusable]{a boolean whether the row can be focused}
   @begin{short}
@@ -272,7 +272,7 @@
       "Accessor"
       (documentation 'column-view-row-item 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-row-item object) => item}
+  @syntax{(gtk:column-view-row-item object) => item}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[item]{a @class{g:object} object with the item for the row}
   @begin{short}
@@ -300,7 +300,7 @@
       "Accessor"
       (documentation 'column-view-row-position 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-row-position object) => position}
+  @syntax{(gtk:column-view-row-position object) => position}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[position]{an unsigned integer with the position of the row}
   @begin{short}
@@ -328,8 +328,8 @@
       "Accessor"
       (documentation 'column-view-row-selectable 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-row-selectable object) => selectable}
-  @syntax[]{(setf (gtk:column-view-row-selectable object) selectable)}
+  @syntax{(gtk:column-view-row-selectable object) => selectable}
+  @syntax{(setf (gtk:column-view-row-selectable object) selectable)}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[selectable]{a boolean whether the row can be selected}
   @begin{short}
@@ -365,7 +365,7 @@
       "Accessor"
       (documentation 'column-view-row-selected 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:column-view-row-selected object) => selected}
+  @syntax{(gtk:column-view-row-selected object) => selected}
   @argument[object]{a @class{gtk:column-view-row} object}
   @argument[selected]{a boolean whether the item in the row is selected}
   @begin{short}

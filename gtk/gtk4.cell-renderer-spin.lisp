@@ -57,7 +57,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkCellRendererSpin
+;;; GtkCellRendererSpin
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkCellRendererSpin" cell-renderer-spin
@@ -126,8 +126,8 @@
       "Accessor"
       (documentation 'cell-renderer-spin-adjustment 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-spin-adjustment object) => adjustment}
-  @syntax[]{(setf (gtk:cell-renderer-spin-adjustment object) adjustment)}
+  @syntax{(gtk:cell-renderer-spin-adjustment object) => adjustment}
+  @syntax{(setf (gtk:cell-renderer-spin-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:cell-renderer-spin} object}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @begin{short}
@@ -158,8 +158,8 @@
       "Accessor"
       (documentation 'cell-renderer-spin-climb-rate 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-spin-climb-rate object) => climb-rate}
-  @syntax[]{(setf (gtk:cell-renderer-spin-climb-rate object) climb-rate)}
+  @syntax{(gtk:cell-renderer-spin-climb-rate object) => climb-rate}
+  @syntax{(setf (gtk:cell-renderer-spin-climb-rate object) climb-rate)}
   @argument[object]{a @class{gtk:cell-renderer-spin} object}
   @argument[climb-rate]{a double float with the acceleration rate}
   @begin{short}
@@ -175,8 +175,7 @@
 ;;; --- gtk:cell-renderer-spin-digits ------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "digits"
-                                               'cell-renderer-spin) t)
+(setf (documentation (liber:slot-documentation "digits" 'cell-renderer-spin) t)
  "The @code{digits} property of type @code{:uint} (Read / Write) @br{}
   The number of decimal places to display. @br{}
   Allowed values: <= 20 @br{}
@@ -187,8 +186,8 @@
       "Accessor"
       (documentation 'cell-renderer-spin-digits 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-spin-digits object) => digits}
-  @syntax[]{(setf (gtk:cell-renderer-spin-digits object) digits)}
+  @syntax{(gtk:cell-renderer-spin-digits object) => digits}
+  @syntax{(setf (gtk:cell-renderer-spin-digits object) digits)}
   @argument[object]{a @class{gtk:cell-renderer-spin} object}
   @argument[digits]{an unsigned integer with the number of decimal places to
     display}
@@ -203,7 +202,7 @@
   @see-class{gtk:cell-renderer-spin}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_renderer_spin_new ()
+;;; gtk_cell_renderer_spin_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline cell-renderer-spin-new))

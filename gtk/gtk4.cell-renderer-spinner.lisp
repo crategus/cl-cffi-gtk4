@@ -56,7 +56,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkCellRendererSpinner
+;;; GtkCellRendererSpinner
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkCellRendererSpinner" cell-renderer-spinner
@@ -121,8 +121,8 @@
       "Accessor"
       (documentation 'cell-renderer-spinner-active 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-spinner-active object) => active}
-  @syntax[]{(setf (gtk:cell-renderer-spinner-active object) active)}
+  @syntax{(gtk:cell-renderer-spinner-active object) => active}
+  @syntax{(setf (gtk:cell-renderer-spinner-active object) active)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
   @argument[active]{a boolean whether the spinner is active}
   @begin{short}
@@ -153,8 +153,8 @@
       "Accessor"
       (documentation 'cell-renderer-spinner-pulse 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-spinner-pulse object) => pulse}
-  @syntax[]{(setf (gtk:cell-renderer-spinner-pulse object) pulse)}
+  @syntax{(gtk:cell-renderer-spinner-pulse object) => pulse}
+  @syntax{(setf (gtk:cell-renderer-spinner-pulse object) pulse)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
   @argument[pulse]{an unsigned integer with the pulse of the spinner}
   @begin{short}
@@ -175,8 +175,7 @@
 ;;; --- gtk:cell-renderer-spinner-size -----------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "size"
-                                               'cell-renderer-spinner) t)
+(setf (documentation (liber:slot-documentation "size" 'cell-renderer-spinner) t)
  "The @code{size} property of type @symbol{gtk:icon-size} (Read / Write) @br{}
   The icon size that specifies the size of the rendered spinner. @br{}
   Default value: @code{:menu}")
@@ -186,8 +185,8 @@
       "Accessor"
       (documentation 'cell-renderer-spinner-size 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-spinner-size object) => size}
-  @syntax[]{(setf (gtk:cell-renderer-spinner-size object) size)}
+  @syntax{(gtk:cell-renderer-spinner-size object) => size}
+  @syntax{(setf (gtk:cell-renderer-spinner-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-spinner} object}
   @argument[size]{a @symbol{gtk:icon-size} value}
   @begin{short}
@@ -203,7 +202,7 @@
   @see-symbol{gtk:icon-size}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_renderer_spinner_new ()
+;;; gtk_cell_renderer_spinner_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline cell-renderer-spinner-new))

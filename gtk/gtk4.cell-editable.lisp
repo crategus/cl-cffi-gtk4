@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -139,8 +139,8 @@ lambda (editable)    :run-last
       "Accessor"
       (documentation 'cell-editable-editing-canceled 'function)
  "@version{#2022-7-25}
-  @syntax[]{(gtk:cell-editable-editing-canceled object) => canceled}
-  @syntax[]{(setf (gtk:cell-editable-editing-canceled object) canceled)}
+  @syntax{(gtk:cell-editable-editing-canceled object) => canceled}
+  @syntax{(setf (gtk:cell-editable-editing-canceled object) canceled)}
   @argument[object]{a @class{gtk:cell-editable} object}
   @argument[canceled]{a boolean whether editing on the cell has been canceled}
   @begin{short}
@@ -155,7 +155,7 @@ lambda (editable)    :run-last
   @see-class{gtk:editable}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_editable_start_editing ()
+;;; gtk_cell_editable_start_editing
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_editable_start_editing" cell-editable-start-editing)
@@ -194,7 +194,7 @@ lambda (editable)    :run-last
 (export 'cell-editable-start-editing)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_editable_editing_done ()
+;;; gtk_cell_editable_editing_done
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_editable_editing_done" cell-editable-editing-done)
@@ -215,7 +215,7 @@ lambda (editable)    :run-last
 (export 'cell-editable-editing-done)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_editable_remove_widget ()
+;;; gtk_cell_editable_remove_widget
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_editable_remove_widget" cell-editable-remove-widget)

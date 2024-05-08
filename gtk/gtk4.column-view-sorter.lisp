@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -56,7 +56,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; Class GtkColumnViewSorter
+;;; GtkColumnViewSorter
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkColumnViewSorter" column-view-sorter
@@ -130,7 +130,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
       "Accessor"
       (documentation 'column-view-sorter-primary-sort-column 'function)
  "@version{2023-10-13}
-  @syntax[]{(gtk:column-view-sorter-primary-sort-column object) => column}
+  @syntax{(gtk:column-view-sorter-primary-sort-column object) => column}
   @argument[object]{a @class{gtk:column-view-sorter} object}
   @argument[column]{a @class{gtk:column-view-column} object with the primary
     sort column}
@@ -160,7 +160,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
       "Accessor"
       (documentation 'column-view-sorter-primary-sort-order 'function)
  "@version{2023-10-13}
-  @syntax[]{(gtk:column-view-sorter-primary-sort-order object) => order}
+  @syntax{(gtk:column-view-sorter-primary-sort-order object) => order}
   @argument[object]{a @class{gtk:column-view-sorter} object}
   @argument[column]{a @symbol{gtk:sort-type} value with the primary sort order}
   @begin{short}
@@ -185,7 +185,7 @@ for (i = gtk_column_view_sorter_get_n_sort_columns (sorter) - 1; i >= 0; i--)
  #+liber-documentation
  "@version{#2023-10-13}
   @argument[sorter]{a @class{gtk:column-view-sorter} object}
-  @return{An unsigned integer with the number of sort columns.}
+  @return{The unsigned integer with the number of sort columns.}
   @begin{short}
     Returns the number of columns by which the sorter sorts.
   @end{short}

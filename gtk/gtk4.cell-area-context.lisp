@@ -139,7 +139,7 @@
       "Accessor"
       (documentation 'cell-area-context-area 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-area-context-area object) => area}
+  @syntax{(gtk:cell-area-context-area object) => area}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[area]{a @class{gtk:cell-area} object}
   @begin{short}
@@ -179,8 +179,8 @@
       "Accessor"
       (documentation 'cell-area-context-minimum-height 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-area-context-minimum-height object) => height}
-  @syntax[]{(setf (gtk:cell-area-context-minimum-height object) height}
+  @syntax{(gtk:cell-area-context-minimum-height object) => height}
+  @syntax{(setf (gtk:cell-area-context-minimum-height object) height}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[height]{an integer with the minimum height}
   @begin{short}
@@ -215,8 +215,8 @@
       "Accessor"
       (documentation 'cell-area-context-minimum-width 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-area-context-minimum-width object) => width}
-  @syntax[]{(setf (gtk:cell-area-context-minimum-width object) width}
+  @syntax{(gtk:cell-area-context-minimum-width object) => width}
+  @syntax{(setf (gtk:cell-area-context-minimum-width object) width}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[width]{an integer with the minimum width}
   @begin{short}
@@ -252,8 +252,8 @@
       "Accessor"
       (documentation 'cell-area-context-natural-height 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-area-context-natural-height object) => height}
-  @syntax[]{(setf (gtk:cell-area-context-natural-height object) height}
+  @syntax{(gtk:cell-area-context-natural-height object) => height}
+  @syntax{(setf (gtk:cell-area-context-natural-height object) height}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[height]{an integer with the natural height}
   @begin{short}
@@ -288,8 +288,8 @@
       "Accessor"
       (documentation 'cell-area-context-natural-width 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-area-context-natural-width object) => width}
-  @syntax[]{(setf (gtk:cell-area-context-natural-width object) width}
+  @syntax{(gtk:cell-area-context-natural-width object) => width}
+  @syntax{(setf (gtk:cell-area-context-natural-width object) width}
   @argument[context]{a @class{gtk:cell-area-context} object}
   @argument[width]{an integer with the natural width}
   @begin{short}
@@ -308,7 +308,7 @@
   @see-function{gtk:cell-area-preferred-width}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_context_allocate ()
+;;; gtk_cell_area_context_allocate
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_context_allocate" cell-area-context-allocate)
@@ -346,7 +346,7 @@
 (export 'cell-area-context-allocate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_context_reset ()
+;;; gtk_cell_area_context_reset
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_context_reset" cell-area-context-reset) :void
@@ -384,7 +384,7 @@
 (export 'cell-area-context-reset)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_context_get_preferred_width ()
+;;; gtk_cell_area_context_get_preferred_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_context_get_preferred_width"
@@ -424,7 +424,7 @@
 (export 'cell-area-context-preferred-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_context_get_preferred_height ()
+;;; gtk_cell_area_context_get_preferred_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_context_get_preferred_height"
@@ -465,7 +465,7 @@
 (export 'cell-area-context-preferred-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_context_get_preferred_height_for_width ()
+;;; gtk_cell_area_context_get_preferred_height_for_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_context_get_preferred_height_for_width"
@@ -509,7 +509,7 @@
 (export 'cell-area-context-preferred-height-for-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_context_get_preferred_width_for_height ()
+;;; gtk_cell_area_context_get_preferred_width_for_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_context_get_preferred_width_for_height"
@@ -553,7 +553,7 @@
 (export 'cell-area-context-preferred-width-for-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_context_get_allocation () -> cell-area-context-allocation
+;;; gtk_cell_area_context_get_allocation
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_context_get_allocation"
@@ -590,7 +590,7 @@
 (export 'cell-area-context-allocation)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_context_push_preferred_width ()
+;;; gtk_cell_area_context_push_preferred_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_context_push_preferred_width"
@@ -624,7 +624,7 @@
 (export 'cell-area-context-push-preferred-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_context_push_preferred_height ()
+;;; gtk_cell_area_context_push_preferred_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_context_push_preferred_height"

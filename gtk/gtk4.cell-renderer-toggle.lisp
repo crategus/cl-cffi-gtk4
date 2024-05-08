@@ -70,7 +70,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkCellRendererToggle
+;;; GtkCellRendererToggle
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkCellRendererToggle" cell-renderer-toggle
@@ -144,8 +144,8 @@ lambda (renderer path)    :run-last
       "Accessor"
       (documentation 'cell-renderer-toggle-activatable 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-toggle-activatable object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-toggle-activatable object) setting)}
+  @syntax{(gtk:cell-renderer-toggle-activatable object) => setting}
+  @syntax{(setf (gtk:cell-renderer-toggle-activatable object) setting)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
   @argument[setting]{a boolean value to set}
   @begin{short}
@@ -175,8 +175,8 @@ lambda (renderer path)    :run-last
       "Accessor"
       (documentation 'cell-renderer-toggle-active 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-toggle-active object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-toggle-active object) setting)}
+  @syntax{(gtk:cell-renderer-toggle-active object) => setting}
+  @syntax{(setf (gtk:cell-renderer-toggle-active object) setting)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
   @argument[setting]{a boolean value to set}
   @begin{short}
@@ -206,8 +206,8 @@ lambda (renderer path)    :run-last
       "Accessor"
       (documentation 'cell-renderer-toggle-inconsistent 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-toggle-inconsistent object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-toggle-inconsistent object) setting)}
+  @syntax{(gtk:cell-renderer-toggle-inconsistent object) => setting}
+  @syntax{(setf (gtk:cell-renderer-toggle-inconsistent object) setting)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
   @argument[setting]{a boolean value to set}
   @begin{short}
@@ -234,8 +234,8 @@ lambda (renderer path)    :run-last
       "Accessor"
       (documentation 'cell-renderer-toggle-radio 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:cell-renderer-toggle-radio object) => radio}
-  @syntax[]{(setf (gtk:cell-renderer-toggle-radio object) radio)}
+  @syntax{(gtk:cell-renderer-toggle-radio object) => radio}
+  @syntax{(setf (gtk:cell-renderer-toggle-radio object) radio)}
   @argument[toggle]{a @class{gtk:cell-renderer-toggle} object}
   @argument[radio]{@em{true} to make the toggle look like a radio button}
   @begin{short}
@@ -259,7 +259,7 @@ lambda (renderer path)    :run-last
   @see-class{gtk:tree-view-column}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_renderer_toggle_new ()
+;;; gtk_cell_renderer_toggle_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline cell-renderer-toggle-new))

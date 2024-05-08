@@ -553,7 +553,7 @@ lambda (provider section error)    :run-last
  #+liber-documentation
  "@version{2023-4-15}
   @argument[provider]{a @class{gtk:css-provider} object to write to a string}
-  @return{A string representing the CSS provider.}
+  @return{The string representing the CSS provider.}
   @begin{short}
     Convertes the CSS provider into a string representation in CSS format.
   @end{short}

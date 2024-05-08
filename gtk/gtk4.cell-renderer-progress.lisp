@@ -131,8 +131,8 @@
       "Accessor"
       (documentation 'cell-renderer-progress-inverted 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-progress-inverted object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-progress-inverted object) setting)}
+  @syntax{(gtk:cell-renderer-progress-inverted object) => setting}
+  @syntax{(setf (gtk:cell-renderer-progress-inverted object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
   @argument[setting]{a boolean whether to invert the direction in which the
     progress bar grows}
@@ -166,8 +166,8 @@
       "Accessor"
       (documentation 'cell-renderer-progress-pulse 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-progress-pulse object) => pulse}
-  @syntax[]{(setf (gtk:cell-renderer-progress-pulse object) pulse)}
+  @syntax{(gtk:cell-renderer-progress-pulse object) => pulse}
+  @syntax{(setf (gtk:cell-renderer-progress-pulse object) pulse)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
   @argument[pulse]{an integer for the pulse value}
   @begin{short}
@@ -202,8 +202,8 @@
       "Accessor"
       (documentation 'cell-renderer-progress-text 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-progress-text object) => text}
-  @syntax[]{(setf (gtk:cell-renderer-progress-text object) text)}
+  @syntax{(gtk:cell-renderer-progress-text object) => text}
+  @syntax{(setf (gtk:cell-renderer-progress-text object) text)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
   @argument[text]{a string for the label which will be drawn over the progress
     bar}
@@ -236,8 +236,8 @@
       "Accessor"
       (documentation 'cell-renderer-progress-text-xalign 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-progress-text-xalign object) => align}
-  @syntax[]{(setf (gtk:cell-renderer-progress-text-xalign object) align)}
+  @syntax{(gtk:cell-renderer-progress-text-xalign object) => align}
+  @syntax{(setf (gtk:cell-renderer-progress-text-xalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
   @argument[align]{a single float which controls the horizontal alignment}
   @begin{short}
@@ -268,8 +268,8 @@
       "Accessor"
       (documentation 'cell-renderer-progress-text-yalign 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-progress-text-yalign object) => align}
-  @syntax[]{(setf (gtk:cell-renderer-progress-text-yalign object) align)}
+  @syntax{(gtk:cell-renderer-progress-text-yalign object) => align}
+  @syntax{(setf (gtk:cell-renderer-progress-text-yalign object) align)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
   @argument[align]{a single float which controls the vertical alignment}
   @begin{short}
@@ -284,7 +284,7 @@
   @end{dictionary}
   @see-class{gtk:cell-renderer-progress}")
 
-;;; --- cell-renderer-progress-value -------------------------------------------
+;;; --- gtk:cell-renderer-progress-value ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "value"
@@ -300,8 +300,8 @@
       "Accessor"
       (documentation 'cell-renderer-progress-value 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-progress-value object) => value}
-  @syntax[]{(setf (gtk:cell-renderer-progress-value object) value)}
+  @syntax{(gtk:cell-renderer-progress-value object) => value}
+  @syntax{(setf (gtk:cell-renderer-progress-value object) value)}
   @argument[object]{a @class{gtk:cell-renderer-progress} object}
   @argument[value]{an integer which determines the percentage the progress bar
     will be filled in}
@@ -317,7 +317,7 @@
   @see-class{gtk:cell-renderer-progress}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_renderer_progress_new ()
+;;; gtk_cell_renderer_progress_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline cell-renderer-progress-new))

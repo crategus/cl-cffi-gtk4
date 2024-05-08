@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2022 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -76,7 +76,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkColorButton
+;;; GtkColorButton
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkColorButton" color-button
@@ -187,7 +187,7 @@ lambda (button)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- color-button-modal -----------------------------------------------------
+;;; --- gtk:color-button-modal -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'color-button) t)
@@ -195,13 +195,13 @@ lambda (button)    :run-first
   Whether the color chooser dialog is modal. @br{}
   Default value: @em{true}")
 
-#+ liber-documentation
+#+liber-documentation
 (setf (liber:alias-for-function 'color-button-modal)
       "Accessor"
       (documentation 'color-button-modal 'function)
  "@version{#2023-7-28}
-  @syntax[]{(gtk:color-button-modal object) => modal)}
-  @syntax[]{(setf (gtk:color-button-modal object) modal)}
+  @syntax{(gtk:color-button-modal object) => modal)}
+  @syntax{(setf (gtk:color-button-modal object) modal)}
   @argument[object]{a @class{gtk:color-button} widget}
   @argument[modal]{a boolean whether the color chooser dialog is modal}
   @begin{short}
@@ -216,11 +216,10 @@ lambda (button)    :run-first
   @end{dictionary}
   @see-class{gtk:color-button}")
 
-;;; --- color-button-show-editor -------------------------------------------
+;;; --- gtk:color-button-show-editor -------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "show-editor"
-                                               'color-button) t)
+(setf (documentation (liber:slot-documentation "show-editor" 'color-button) t)
  "The @code{show-editor} property of type @code{:boolean} (Read / Write) @br{}
   Set the property to @em{true} to skip the palette in the color chooser dialog
   and go directly to the color editor. This property should be used in cases
@@ -233,8 +232,8 @@ lambda (button)    :run-first
       "Accessor"
       (documentation 'color-button-show-editor 'function)
  "@version{#2022-8-27}
-  @syntax[]{(gtk:color-button-show-editor object) => show-editor)}
-  @syntax[]{(setf (gtk:color-button-show-editor object) show-editor)}
+  @syntax{(gtk:color-button-show-editor object) => show-editor)}
+  @syntax{(setf (gtk:color-button-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-button} widget}
   @argument[show-editor]{a boolean whether to skip the palette in the color
     chooser dialog}
@@ -252,7 +251,7 @@ lambda (button)    :run-first
   @end{dictionary}
   @see-class{gtk:color-button}")
 
-;;; --- color-button-title -----------------------------------------------------
+;;; --- gtk:color-button-title -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'color-button) t)
@@ -265,8 +264,8 @@ lambda (button)    :run-first
       "Accessor"
       (documentation 'color-button-title 'function)
  "@version{#2022-8-27}
-  @syntax[]{(gtk:color-button-title object) => title)}
-  @syntax[]{(setf (gtk:color-button-title object) title)}
+  @syntax{(gtk:color-button-title object) => title)}
+  @syntax{(setf (gtk:color-button-title object) title)}
   @argument[object]{a @class{gtk:color-button} widget}
   @argument[title]{a string containing the title of the color chooser dialog}
   @begin{short}
@@ -282,7 +281,7 @@ lambda (button)    :run-first
   @see-class{gtk:color-button}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_color_button_new ()
+;;; gtk_color_button_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline color-button-new))
@@ -290,7 +289,7 @@ lambda (button)    :run-first
 (defun color-button-new ()
  #+liber-documentation
  "@version{#2022-8-27}
-  @return{A new @class{gtk:color-button} widget.}
+  @return{The new @class{gtk:color-button} widget.}
   @begin{short}
     Creates a new color button.
   @end{short}
@@ -309,7 +308,7 @@ lambda (button)    :run-first
 (export 'color-button-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_color_button_new_with_rgba ()
+;;; gtk_color_button_new_with_rgba
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline color-button-new-with-rgba))
@@ -318,7 +317,7 @@ lambda (button)    :run-first
  #+liber-documentation
  "@version{#2022-8-27}
   @argument[rgba]{a @struct{gdk:rgba} color to set the current color with}
-  @return{A new @class{gtk:color-button} widget.}
+  @return{The new @class{gtk:color-button} widget.}
   @begin{short}
     Creates a new color button with the given RGBA color.
   @end{short}

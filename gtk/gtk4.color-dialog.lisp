@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -106,7 +106,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- color-dialog-modal -----------------------------------------------------
+;;; --- gtk:color-dialog-modal -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'color-dialog) t)
@@ -119,8 +119,8 @@
       "Accessor"
       (documentation 'color-dialog-modal 'function)
  "@version{2023-7-28}
-  @syntax[]{(gtk:color-dialog-modal object) => modal)}
-  @syntax[]{(setf (gtk:color-dialog-modal object) modal)}
+  @syntax{(gtk:color-dialog-modal object) => modal)}
+  @syntax{(setf (gtk:color-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:color-dialog} object}
   @argument[modal]{a boolean whether the color chooser dialog is modal}
   @begin{short}
@@ -134,7 +134,7 @@
   Since 4.10
   @see-class{gtk:color-dialog}")
 
-;;; --- color-dialog-title -----------------------------------------------------
+;;; --- gtk:color-dialog-title -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'color-dialog) t)
@@ -148,8 +148,8 @@
       "Accessor"
       (documentation 'color-dialog-title 'function)
  "@version{2023-7-28}
-  @syntax[]{(gtk:color-dialog-title object) => title)}
-  @syntax[]{(setf (gtk:color-dialog-title object) title)}
+  @syntax{(gtk:color-dialog-title object) => title)}
+  @syntax{(setf (gtk:color-dialog-title object) title)}
   @argument[object]{a @class{gtk:color-dialog} object}
   @argument[title]{a string with the title}
   @begin{short}
@@ -163,7 +163,7 @@
   Since 4.10
   @see-class{gtk:color-dialog}")
 
-;;; --- color-dialog-with-alpha ------------------------------------------------
+;;; --- gtk:color-dialog-with-alpha --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "with-alpha" 'color-dialog) t)
@@ -178,8 +178,8 @@
       "Accessor"
       (documentation 'color-dialog-with-alpha 'function)
  "@version{2023-7-28}
-  @syntax[]{(gtk:color-dialog-with-alpha object) => setting)}
-  @syntax[]{(setf (gtk:color-dialog-with-alpha object) setting)}
+  @syntax{(gtk:color-dialog-with-alpha object) => setting)}
+  @syntax{(setf (gtk:color-dialog-with-alpha object) setting)}
   @argument[object]{a @class{gtk:color-dialog} object}
   @argument[setting]{a boolean whether colors may have alpha}
   @begin{short}
@@ -201,7 +201,7 @@
 (defun color-dialog-new ()
  #+liber-documentation
  "@version{2023-7-28}
-  @return{A new @class{gtk:color-dialog} object.}
+  @return{The new @class{gtk:color-dialog} object.}
   @short{Creates a new @class{gtk:color-dialog} object.}
 
   Since 4.10
@@ -272,7 +272,7 @@
  "@version{#2023-7-28}
   @argument[dialog]{a @class{gtk:color-dialog} object}
   @argument[result]{a @class{g:async-result} instance}
-  @return{A @class{gdk:rgba} instance with the selected color, or @code{nil}.}
+  @return{The @class{gdk:rgba} instance with the selected color, or @code{nil}.}
   @begin{short}
     Finishes the @fun{gtk:color-dialog-choose-rgba} function call and returns
     the resulting color.

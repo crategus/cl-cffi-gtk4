@@ -151,8 +151,8 @@ lambda (combo path iter)    :run-last
       "Accessor"
       (documentation 'cell-renderer-combo-has-entry 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-combo-has-entry object) => has-entry}
-  @syntax[]{(setf (gtk:cell-renderer-combo-has-entry object) has-entry)}
+  @syntax{(gtk:cell-renderer-combo-has-entry object) => has-entry}
+  @syntax{(setf (gtk:cell-renderer-combo-has-entry object) has-entry)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
   @argument[has-entry]{a boolean whether the cell renderer will include an
     entry}
@@ -182,8 +182,8 @@ lambda (combo path iter)    :run-last
       "Accessor"
       (documentation 'cell-renderer-combo-model 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-combo-model object) => model}
-  @syntax[]{(setf (gtk:cell-renderer-combo-model object) model)}
+  @syntax{(gtk:cell-renderer-combo-model object) => model}
+  @syntax{(setf (gtk:cell-renderer-combo-model object) model)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
   @argument[model]{a @class{gtk:tree-model} object}
   @begin{short}
@@ -221,8 +221,8 @@ lambda (combo path iter)    :run-last
       "Accessor"
       (documentation 'cell-renderer-combo-text-column 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-combo-text-column object) => column}
-  @syntax[]{(setf (gtk:cell-renderer-combo-text-column object) column)}
+  @syntax{(gtk:cell-renderer-combo-text-column object) => column}
+  @syntax{(setf (gtk:cell-renderer-combo-text-column object) column)}
   @argument[object]{a @class{gtk:cell-renderer-combo} object}
   @argument[column]{an integer which specifies the model colum which holds the
     possible values for the combo box}
@@ -243,7 +243,7 @@ lambda (combo path iter)    :run-last
   @see-function{gtk:cell-renderer-combo-model}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_renderer_combo_new ()
+;;; gtk_cell_renderer_combo_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline cell-renderer-combo-new))

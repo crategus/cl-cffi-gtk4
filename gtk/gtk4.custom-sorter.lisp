@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -71,7 +71,7 @@
   @see-class{gtk:sorter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_custom_sorter_new ()
+;;; gtk_custom_sorter_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_custom_sorter_new" %custom-sorter-new)
@@ -85,7 +85,7 @@
  "@version{2023-9-13}
   @argument[func]{a @symbol{g:compare-data-func} callback function to use for
     sorting}
-  @return{A new @class{gtk:custom-sorter} object.}
+  @return{The new @class{gtk:custom-sorter} object.}
   @begin{short}
     Creates a new custom sorter that works by calling the @arg{func} callback
     function to compare items.
@@ -103,7 +103,7 @@
 (export 'custom-sorter-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_custom_sorter_set_sort_func ()
+;;; gtk_custom_sorter_set_sort_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_custom_sorter_set_sort_func" %custom-sorter-set-sort-func)

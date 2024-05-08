@@ -107,7 +107,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkCellRendererText
+;;; GtkCellRendererText
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkCellRendererText" cell-renderer-text
@@ -353,8 +353,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-align-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-align-set object) => align-set}
-  @syntax[]{(setf (gtk:cell-renderer-text-align-set object) align-set)}
+  @syntax{(gtk:cell-renderer-text-align-set object) => align-set}
+  @syntax{(setf (gtk:cell-renderer-text-align-set object) align-set)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[align-set]{a boolean whether this tag affects the alignment mode}
   @begin{short}
@@ -385,8 +385,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-alignment 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-alignment object) => alignment}
-  @syntax[]{(setf (gtk:cell-renderer-text-alignment object) alignment)}
+  @syntax{(gtk:cell-renderer-text-alignment object) => alignment}
+  @syntax{(setf (gtk:cell-renderer-text-alignment object) alignment)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[alignment]{a @symbol{pango:alignment} value}
   @begin{short}
@@ -418,8 +418,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-attributes 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-attributes object) => attributes}
-  @syntax[]{(setf (gtk:cell-renderer-text-attributes object) attributes)}
+  @syntax{(gtk:cell-renderer-text-attributes object) => attributes}
+  @syntax{(setf (gtk:cell-renderer-text-attributes object) attributes)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[attributes]{a @class{pango:attr-list} instance}
   @begin{short}
@@ -448,7 +448,7 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-background 'function)
  "@version{2024-2-21}
-  @syntax[]{(setf (gtk:cell-renderer-text-background object) background)}
+  @syntax{(setf (gtk:cell-renderer-text-background object) background)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[background]{a string with the background color}
   @begin{short}
@@ -475,8 +475,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-background-rgba 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-background-rgba object) => background}
-  @syntax[]{(setf (gtk:cell-renderer-text-background-rgba object) background)}
+  @syntax{(gtk:cell-renderer-text-background-rgba object) => background}
+  @syntax{(setf (gtk:cell-renderer-text-background-rgba object) background)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[background]{a @class{gdk:rgba} instance with the background color}
   @begin{short}
@@ -505,8 +505,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-background-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-background-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-background-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-background-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-background-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the background color}
   @begin{short}
@@ -533,8 +533,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-editable 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-editable object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-editable object) setting)}
+  @syntax{(gtk:cell-renderer-text-editable object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-editable object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether the text can be modified by the user}
   @begin{short}
@@ -561,8 +561,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-editable-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-editable-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-editable-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-editable-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-editable-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects text editability}
   @begin{short}
@@ -594,8 +594,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-ellipsize 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-ellipsize object) => mode}
-  @syntax[]{(setf (gtk:cell-renderer-text-ellipsize object) mode)}
+  @syntax{(gtk:cell-renderer-text-ellipsize object) => mode}
+  @syntax{(setf (gtk:cell-renderer-text-ellipsize object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[mode]{a @symbol{pango:ellipsize-mode} value}
   @begin{short}
@@ -629,8 +629,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-ellipsize-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-ellipsize-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-ellipsize-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-ellipsize-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-ellipsize-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the ellipsize mode}
   @begin{short}
@@ -657,8 +657,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-family 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-family object) => font}
-  @syntax[]{(setf (gtk:cell-renderer-text-family object) font)}
+  @syntax{(gtk:cell-renderer-text-family object) => font}
+  @syntax{(setf (gtk:cell-renderer-text-family object) font)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[font]{a string with the name of the font family}
   @begin{short}
@@ -686,8 +686,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-family-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-family-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-family-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-family-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-family-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font family}
   @begin{short}
@@ -715,8 +715,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-font 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-font object) => font}
-  @syntax[]{(setf (gtk:cell-renderer-text-font object) font)}
+  @syntax{(gtk:cell-renderer-text-font object) => font}
+  @syntax{(setf (gtk:cell-renderer-text-font object) font)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[font]{a string with the font description}
   @begin{short}
@@ -744,8 +744,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-font-desc 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-font-desc object) => font-desc}
-  @syntax[]{(setf (gtk:cell-renderer-text-font-desc object) font-desc)}
+  @syntax{(gtk:cell-renderer-text-font-desc object) => font-desc}
+  @syntax{(setf (gtk:cell-renderer-text-font-desc object) font-desc)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[font-desc]{a @class{pango:font-description} instance}
   @begin{short}
@@ -774,7 +774,7 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-foreground 'function)
  "@version{2024-2-21}
-  @syntax[]{(setf (gtk:cell-renderer-text-foreground object) foreground)}
+  @syntax{(setf (gtk:cell-renderer-text-foreground object) foreground)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[foreground]{a string with the foreground color}
   @begin{short}
@@ -801,8 +801,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-foreground-rgba 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-foreground-rgba object) => foreground}
-  @syntax[]{(setf (gtk:cell-renderer-text-foreground-rgba object) foreground)}
+  @syntax{(gtk:cell-renderer-text-foreground-rgba object) => foreground}
+  @syntax{(setf (gtk:cell-renderer-text-foreground-rgba object) foreground)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[foreground]{a @class{gdk:rgba} instance}
   @begin{short}
@@ -831,8 +831,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-foreground-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-foreground-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-foreground-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-foreground-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-foreground-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the foreground color}
   @begin{short}
@@ -861,8 +861,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-language 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-language object) => language}
-  @syntax[]{(setf (gtk:cell-renderer-text-language object) language)}
+  @syntax{(gtk:cell-renderer-text-language object) => language}
+  @syntax{(setf (gtk:cell-renderer-text-language object) language)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[language]{a string with the language this text is in}
   @begin{short}
@@ -892,8 +892,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-language-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-language-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-language-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-language-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-language-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the language}
   @begin{short}
@@ -920,7 +920,7 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-markup 'function)
  "@version{2024-2-21}
-  @syntax[]{(setf (gtk:cell-renderer-text-markup object) markup)}
+  @syntax{(setf (gtk:cell-renderer-text-markup object) markup)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[markup]{a string with the marked up text to render}
   @begin{short}
@@ -953,8 +953,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-max-width-chars 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-max-width-chars object) => width}
-  @syntax[]{(setf (gtk:cell-renderer-text-max-width-chars object) width)}
+  @syntax{(gtk:cell-renderer-text-max-width-chars object) => width}
+  @syntax{(setf (gtk:cell-renderer-text-max-width-chars object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[width]{an integer with the maximum width of the cell}
   @begin{short}
@@ -991,8 +991,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-placeholder-text 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-placeholder-text object) => text}
-  @syntax[]{(setf (gtk:cell-renderer-text-placeholder-text object) text)}
+  @syntax{(gtk:cell-renderer-text-placeholder-text object) => text}
+  @syntax{(setf (gtk:cell-renderer-text-placeholder-text object) text)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[text]{a string with the placeholder text}
   @begin{short}
@@ -1024,8 +1024,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-rise 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-rise object) => rise}
-  @syntax[]{(setf (gtk:cell-renderer-text-rise object) rise)}
+  @syntax{(gtk:cell-renderer-text-rise object) => rise}
+  @syntax{(setf (gtk:cell-renderer-text-rise object) rise)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[rise]{an integer with the offset of text above the baseline}
   @begin{short}
@@ -1054,8 +1054,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-rise-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-rise-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-rise-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-rise-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-rise-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the rise}
   @begin{short}
@@ -1083,8 +1083,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-scale 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-scale object) => scale}
-  @syntax[]{(setf (gtk:cell-renderer-text-scale object) scale)}
+  @syntax{(gtk:cell-renderer-text-scale object) => scale}
+  @syntax{(setf (gtk:cell-renderer-text-scale object) scale)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[scale]{a double float with the font scaling factor}
   @begin{short}
@@ -1111,8 +1111,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-scale-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-scale-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-scale-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-scale-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-scale-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag scales the font size by a
    factor}
@@ -1141,8 +1141,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-single-paragraph-mode 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-single-paragraph-mode object) => mode}
-  @syntax[]{(setf (gtk:cell-renderer-text-single-paragraph-mode object) mode)}
+  @syntax{(gtk:cell-renderer-text-single-paragraph-mode object) => mode}
+  @syntax{(setf (gtk:cell-renderer-text-single-paragraph-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[mode]{a boolean whether to keep all text in a single paragraph}
   @begin{short}
@@ -1169,8 +1169,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-size 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-size object) => size}
-  @syntax[]{(setf (gtk:cell-renderer-text-size object) size)}
+  @syntax{(gtk:cell-renderer-text-size object) => size}
+  @syntax{(setf (gtk:cell-renderer-text-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[size]{an integer with the font size}
   @begin{short}
@@ -1198,8 +1198,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-size-points 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-size-points object) => size}
-  @syntax[]{(setf (gtk:cell-renderer-text-size-points object) size)}
+  @syntax{(gtk:cell-renderer-text-size-points object) => size}
+  @syntax{(setf (gtk:cell-renderer-text-size-points object) size)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[size]{a double float with the font size in points}
   @begin{short}
@@ -1226,8 +1226,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-size-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-size-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-size-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-size-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-size-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font size}
   @begin{short}
@@ -1255,8 +1255,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-stretch 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-stretch object) => stretch}
-  @syntax[]{(setf (gtk:cell-renderer-text-stretch object) stretch)}
+  @syntax{(gtk:cell-renderer-text-stretch object) => stretch}
+  @syntax{(setf (gtk:cell-renderer-text-stretch object) stretch)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[stretch]{a @symbol{pango:stretch} value with the font stretch}
   @begin{short}
@@ -1284,8 +1284,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-stretch-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-stretch-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-stretch-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-stretch-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-stretch-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font stretch}
   @begin{short}
@@ -1312,8 +1312,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-strikethrough 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-strikethrough object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-strikethrough object) setting)}
+  @syntax{(gtk:cell-renderer-text-strikethrough object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-strikethrough object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether to strike through the text}
   @begin{short}
@@ -1341,8 +1341,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-strikethrough-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-strikethrough-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-strikethrough-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-strikethrough-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-strikethrough-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects strikethrough}
   @begin{short}
@@ -1369,8 +1369,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-style 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-style object) => style}
-  @syntax[]{(setf (gtk:cell-renderer-text-style object) style)}
+  @syntax{(gtk:cell-renderer-text-style object) => style}
+  @syntax{(setf (gtk:cell-renderer-text-style object) style)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[style]{a @symbol{pango:style} value with the font style}
   @begin{short}
@@ -1398,8 +1398,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-style-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-style-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-style-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-style-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-style-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font style}
   @begin{short}
@@ -1426,8 +1426,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-text 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-text object) => text}
-  @syntax[]{(setf (gtk:cell-renderer-text-text object) text)}
+  @syntax{(gtk:cell-renderer-text-text object) => text}
+  @syntax{(setf (gtk:cell-renderer-text-text object) text)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[text]{a string with the text to render}
   @begin{short}
@@ -1455,8 +1455,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-underline 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-underline object) => underline}
-  @syntax[]{(setf (gtk:cell-renderer-text-underline object) underline)}
+  @syntax{(gtk:cell-renderer-text-underline object) => underline}
+  @syntax{(setf (gtk:cell-renderer-text-underline object) underline)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[underline]{a @symbol{pango:underline} value with the style of
     underline for this text}
@@ -1485,8 +1485,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-underline-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-underline-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-underline-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-underline-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-underline-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects underlining}
   @begin{short}
@@ -1514,8 +1514,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-variant 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-variant object) => variant}
-  @syntax[]{(setf (gtk:cell-renderer-text-variant object) variant)}
+  @syntax{(gtk:cell-renderer-text-variant object) => variant}
+  @syntax{(setf (gtk:cell-renderer-text-variant object) variant)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[variant]{a @symbol{pango:variant} value with the font variant}
   @begin{short}
@@ -1543,8 +1543,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-variant-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-variant-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-variant-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-variant-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-variant-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font variant}
   @begin{short}
@@ -1572,8 +1572,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-weight 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-weight object) => weight}
-  @syntax[]{(setf (gtk:cell-renderer-text-weight object) weight)}
+  @syntax{(gtk:cell-renderer-text-weight object) => weight}
+  @syntax{(setf (gtk:cell-renderer-text-weight object) weight)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[weight]{an integer with the font weight}
   @begin{short}
@@ -1600,8 +1600,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-weight-set 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-weight-set object) => setting}
-  @syntax[]{(setf (gtk:cell-renderer-text-weight-set object) setting)}
+  @syntax{(gtk:cell-renderer-text-weight-set object) => setting}
+  @syntax{(setf (gtk:cell-renderer-text-weight-set object) setting)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[setting]{a boolean whether this tag affects the font weight}
   @begin{short}
@@ -1631,8 +1631,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-width-chars 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-width-chars object) => width}
-  @syntax[]{(setf (gtk:cell-renderer-text-width-chars object) width)}
+  @syntax{(gtk:cell-renderer-text-width-chars object) => width}
+  @syntax{(setf (gtk:cell-renderer-text-width-chars object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[width]{an integer with the width of the cell}
   @begin{short}
@@ -1666,8 +1666,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-wrap-mode 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-wrap-mode object) => mode}
-  @syntax[]{(setf (gtk:cell-renderer-text-wrap-mode object) mode)}
+  @syntax{(gtk:cell-renderer-text-wrap-mode object) => mode}
+  @syntax{(setf (gtk:cell-renderer-text-wrap-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[mode]{a @symbol{pango:wrap-mode} value}
   @begin{short}
@@ -1702,8 +1702,8 @@ lambda (renderer path text)    :run-last
       "Accessor"
       (documentation 'cell-renderer-text-wrap-width 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-text-wrap-width object) => width}
-  @syntax[]{(setf (gtk:cell-renderer-text-wrap-width object) width)}
+  @syntax{(gtk:cell-renderer-text-wrap-width object) => width}
+  @syntax{(setf (gtk:cell-renderer-text-wrap-width object) width)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[width]{an integer with the minimum width at which text is wrapped}
   @begin{short}

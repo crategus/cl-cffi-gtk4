@@ -64,7 +64,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkCellRendererAccelMode
+;;; GtkCellRendererAccelMode
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkCellRendererAccelMode" cell-renderer-accel-mode
@@ -78,27 +78,31 @@
       "GEnum"
       (liber:symbol-documentation 'cell-renderer-accel-mode)
  "@version{2024-2-21}
+  @begin{declaration}
+    @begin{pre}
+(gobject:define-g-enum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
+  (:export t
+   :type-initializer \"gtk_cell_renderer_accel_mode_get_type\")
+  (:gtk 0)
+  (:other 1))
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:gtk]{GTK accelerators mode.}
+      @entry[:other]{Other accelerator mode.}
+    @end{table}
+  @end{values}
   @begin{short}
     Determines if the edited accelerators are GTK accelerators.
   @end{short}
   If they are, consumed modifiers are suppressed, only accelerators accepted by
   GTK are allowed, and the accelerators are rendered in the same way as they
   are in menus.
-  @begin{pre}
-(gobject:define-g-enum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
-  (:export t
-   :type-initializer \"gtk_cell_renderer_accel_mode_get_type\")
-  (:gtk 0)
-  (:other 1))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:gtk]{GTK accelerators mode.}
-    @entry[:other]{Other accelerator mode.}
-  @end{table}
   @see-class{gtk:cell-renderer-accel}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkCellRendererAccel
+;;; GtkCellRendererAccel
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkCellRendererAccel" cell-renderer-accel
@@ -188,8 +192,8 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
       "Accessor"
       (documentation 'cell-renderer-accel-accel-key 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-accel-accel-key object) => key}
-  @syntax[]{(setf (gtk:cell-renderer-accel-accel-key object) key)}
+  @syntax{(gtk:cell-renderer-accel-accel-key object) => key}
+  @syntax{(setf (gtk:cell-renderer-accel-accel-key object) key)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
   @argument[key]{an unsigned integer with the keyval of the accelerator}
   @begin{short}
@@ -220,8 +224,8 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
       "Accessor"
       (documentation 'cell-renderer-accel-accel-mode 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-accel-accel-mode object) => mode}
-  @syntax[]{(setf (gtk:cell-renderer-accel-accel-mode object) mode)}
+  @syntax{(gtk:cell-renderer-accel-accel-mode object) => mode}
+  @syntax{(setf (gtk:cell-renderer-accel-accel-mode object) mode)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
   @argument[mode]{a @symbol{gtk:cell-renderer-accel-mode} value}
   @begin{short}
@@ -253,8 +257,8 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
       "Accessor"
       (documentation 'cell-renderer-accel-accel-mods 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-accel-accel-mods object) => accel-mods}
-  @syntax[]{(setf (gtk:cell-renderer-accel-accel-mods object) accel-mods)}
+  @syntax{(gtk:cell-renderer-accel-accel-mods object) => accel-mods}
+  @syntax{(setf (gtk:cell-renderer-accel-accel-mods object) accel-mods)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
   @argument[accel-mode]{a @symbol{gdk:modifier-type} value with the modifier
     mask of the accelerator}
@@ -286,8 +290,8 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
       "Accessor"
       (documentation 'cell-renderer-accel-keycode 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-renderer-accel-keycode object) => keycode}
-  @syntax[]{(setf (gtk:cell-renderer-accel-keycode object) keycode)}
+  @syntax{(gtk:cell-renderer-accel-keycode object) => keycode}
+  @syntax{(setf (gtk:cell-renderer-accel-keycode object) keycode)}
   @argument[object]{a @class{gtk:cell-renderer-accel} object}
   @argument[keycode]{an unsigned integer with the hardware keycode of the
     accelerator}
@@ -305,7 +309,7 @@ lambda (accel path accel-key accel-mods hardware-keycode)    :run-last
   @see-class{gtk:cell-renderer-accel}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_renderer_accel_new ()
+;;; gtk_cell_renderer_accel_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline cell-renderer-accel-new))

@@ -66,7 +66,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkColorChooserWidget
+;;; GtkColorChooserWidget
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkColorChooserWidget" color-chooser-widget
@@ -149,8 +149,8 @@
       "Accessor"
       (documentation 'color-chooser-widget-show-editor 'function)
  "@version{2024-2-22}
-  @syntax[]{(gtk:color-chooser-widget-show-editor object) => show-editor}
-  @syntax[]{(setf (gtk:color-chooser-widget-show-editor object) show-editor)}
+  @syntax{(gtk:color-chooser-widget-show-editor object) => show-editor}
+  @syntax{(setf (gtk:color-chooser-widget-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-chooser-widget} widget}
   @argument[show-editor]{a boolean whether to show the single-color editor}
   @begin{short}
@@ -167,7 +167,7 @@
   @see-class{gtk:color-chooser-widget}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_color_chooser_widget_new ()
+;;; gtk_color_chooser_widget_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline color-chooser-widget-new))

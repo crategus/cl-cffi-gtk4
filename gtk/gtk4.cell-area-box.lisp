@@ -67,7 +67,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkCellAreaBox
+;;; GtkCellAreaBox
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkCellAreaBox" cell-area-box
@@ -130,8 +130,8 @@
       "Accessor"
       (documentation 'cell-area-box-spacing 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:cell-area-box-spacing object) => spacing}
-  @syntax[]{(setf (gtk:cell-area-box-spacing object) spacing)}
+  @syntax{(gtk:cell-area-box-spacing object) => spacing}
+  @syntax{(setf (gtk:cell-area-box-spacing object) spacing)}
   @argument[object]{a @class{gtk:cell-area-box} object}
   @argument[spacing]{an integer with the space to add between
     @class{gtk:cell-renderer} objects}
@@ -149,7 +149,7 @@
   @see-class{gtk:cell-area-box}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_box_new ()
+;;; gtk_cell_area_box_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline cell-area-box-new))
@@ -169,7 +169,7 @@
 (export 'cell-area-box-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_box_pack_start ()
+;;; gtk_cell_area_box_pack_start
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_box_pack_start" %cell-area-box-pack-start) :void
@@ -208,7 +208,7 @@
 (export 'cell-area-box-pack-start)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_cell_area_box_pack_end ()
+;;; gtk_cell_area_box_pack_end
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_cell_area_box_pack_end" %cell-area-box-pack-end) :void
