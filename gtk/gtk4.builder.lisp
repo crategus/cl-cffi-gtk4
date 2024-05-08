@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -104,7 +104,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkBuilderError                                   not exported
+;;; GtkBuilderError                                         not exported
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkBuilderError" builder-error
@@ -235,8 +235,8 @@
 (setf (documentation 'builder 'type)
  "@version{2023-9-18}
   @begin{short}
-    A @class{gtk:builder} object reads XML descriptions of a user interface and
-    instantiates the described objects.
+    The @class{gtk:builder} object reads XML descriptions of a user interface
+    and instantiates the described objects.
   @end{short}
   To create a @class{gtk:builder} object from a user interface description, call
   the @fun{gtk:builder-new-from-file}, @fun{gtk:builder-new-from-resource} or
@@ -509,7 +509,7 @@ hello_button__clicked (GtkButton *button,
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- builder-current-object -------------------------------------------------
+;;; --- gtk:builder-current-object ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "current-object" 'builder) t)
@@ -522,8 +522,8 @@ hello_button__clicked (GtkButton *button,
       "Accessor"
       (documentation 'builder-current-object 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:builder-current-object object) => current}
-  @syntax[]{(setf (gtk:builder-current-object object) current)}
+  @syntax{(gtk:builder-current-object object) => current}
+  @syntax{(setf (gtk:builder-current-object object) current)}
   @argument[object]{a @class{gtk:builder} object}
   @argument[current]{a @class{g:object} instance}
   @begin{short}
@@ -545,7 +545,7 @@ hello_button__clicked (GtkButton *button,
   @see-function{gtk:widget-init-template}
   @see-function{gtk:builder-new-from-resource}")
 
-;;; --- builder-scope ----------------------------------------------------------
+;;; --- gtk:builder-scope ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scope" 'builder) t)
@@ -559,8 +559,8 @@ hello_button__clicked (GtkButton *button,
       "Accessor"
       (documentation 'builder-scope 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:builder-scope object) => scope}
-  @syntax[]{(setf (gtk:builder-scope object) scope)}
+  @syntax{(gtk:builder-scope object) => scope}
+  @syntax{(setf (gtk:builder-scope object) scope)}
   @argument[object]{a @class{gtk:builder} object}
   @argument[scope]{a @code{GtkBuilderScope} object}
   @begin{short}
@@ -577,7 +577,7 @@ hello_button__clicked (GtkButton *button,
   @end{dictionary}
   @see-class{gtk:builder}")
 
-;;; --- builder-translation-domain ---------------------------------------------
+;;; --- gtk:builder-translation-domain -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "translation-domain" 'builder) t)
@@ -594,8 +594,8 @@ hello_button__clicked (GtkButton *button,
       "Accessor"
       (documentation 'builder-translation-domain 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:builder-translation-domain object) => domain}
-  @syntax[]{(setf (gtk:builder-translation-domain object) domain)}
+  @syntax{(gtk:builder-translation-domain object) => domain}
+  @syntax{(setf (gtk:builder-translation-domain object) domain)}
   @argument[object]{a @class{gtk:builder} object}
   @argument[domain]{a string with the translation domain or @code{nil}}
   @begin{short}
@@ -621,7 +621,7 @@ hello_button__clicked (GtkButton *button,
 (defun builder-new ()
  #+liber-documentation
  "@version{#2022-1-10}
-  @return{A new @class{gtk:builder} object.}
+  @return{The new @class{gtk:builder} object.}
   @begin{short}
     Creates a new builder object.
   @end{short}
@@ -649,7 +649,7 @@ hello_button__clicked (GtkButton *button,
  #+liber-documentation
  "@version{2023-1-29}
   @argument[path]{a pathname or a namestring for the file}
-  @return{A @class{gtk:builder} object containing the described interface.}
+  @return{The @class{gtk:builder} object containing the described interface.}
   @begin{short}
     Builds the @class{gtk:builder} UI definition from a user interface
     description file.
@@ -674,7 +674,7 @@ hello_button__clicked (GtkButton *button,
  #+liber-documentation
  "@version{#2023-8-3}
   @argument[path]{a path or namestring with the @class{g:resource} path}
-  @return{A @class{gtk:builder} object containing the described interface.}
+  @return{The @class{gtk:builder} object containing the described interface.}
   @begin{short}
     Builds the @class{gtk:builder} UI definition from a resource path.
   @end{short}
@@ -703,7 +703,7 @@ hello_button__clicked (GtkButton *button,
  #+liber-documentation
  "@version{#2022-9-13}
   @argument[string]{a string with the user interface description}
-  @return{A @class{gtk:builder} object containing the interface described by
+  @return{The @class{gtk:builder} object containing the interface described by
     @arg{string}.}
   @begin{short}
     Builds the user interface described by @arg{string} in the
@@ -880,18 +880,18 @@ hello_button__clicked (GtkButton *button,
   (let ((i (gensym))
         (str (gensym)))
     `(let ((,strptr (cffi:foreign-alloc :pointer :count (1+ (length ,strs)))))
-       (loop for ,i from 0
-             for ,str in ,strs
-             do (setf (cffi:mem-aref ,strptr :pointer ,i)
-                      (cffi:foreign-string-alloc ,str)))
+       (iter (for ,i from 0)
+             (for ,str in ,strs)
+             (setf (cffi:mem-aref ,strptr :pointer ,i)
+                   (cffi:foreign-string-alloc ,str)))
        (setf (cffi:mem-aref ,strptr :pointer (length ,strs)) (cffi:null-pointer))
        (unwind-protect
          (progn ,@body)
          (progn
-           (loop for ,i from 0
-                 repeat (1- (length ,strs))
-                 do (cffi:foreign-string-free (cffi:mem-aref ,strptr
-                                                             :pointer ,i)))
+           (iter (for ,i from 0)
+                 (repeat (1- (length ,strs)))
+                 (cffi:foreign-string-free (cffi:mem-aref ,strptr
+                                                          :pointer ,i)))
            (cffi:foreign-string-free ,strptr))))))
 
 (defun builder-add-objects-from-file (builder path &rest args)
@@ -900,7 +900,7 @@ hello_button__clicked (GtkButton *button,
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a pathname or namestring with the name of the file to parse}
   @argument[args]{strings with the object IDs to build}
-  @return{A positive value on success, 0 if an error occurred.}
+  @return{The positive value on success, 0 if an error occurred.}
   @begin{short}
     Parses a file containing a @class{gtk:builder} UI definition building only
     the requested objects and merges them with the current contents of builder.
@@ -938,7 +938,7 @@ hello_button__clicked (GtkButton *button,
   @argument[builder]{a @class{gtk:builder} object}
   @argument[path]{a string with the path of the resource file to parse}
   @argument[args]{strings with the object IDs to build}
-  @return{A positive value on success, 0 if an error occurred.}
+  @return{The positive value on success, 0 if an error occurred.}
   @begin{short}
     Parses a resource file containing a @class{gtk:builder} UI definition
     building only the requested objects and merges them with the current
@@ -977,7 +977,7 @@ hello_button__clicked (GtkButton *button,
   @argument[builder]{a @class{gtk:builder} object}
   @argument[string]{a string to parse}
   @argument[args]{strings with the object IDs to build}
-  @return{A positive value on success, 0 if an error occurred.}
+  @return{The positive value on success, 0 if an error occurred.}
   @begin{short}
     Parses a string containing a @class{gtk:builder} UI definition building only
     the requested objects and merges them with the current contents of builder.

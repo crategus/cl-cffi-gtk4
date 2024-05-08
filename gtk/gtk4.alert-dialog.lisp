@@ -163,8 +163,8 @@
       "Accessor"
       (documentation 'alert-dialog-buttons 'function)
  "@version{2023-9-20}
-  @syntax[]{(gtk:alert-dialog-buttons object) => buttons}
-  @syntax[]{(setf (gtk:alert-dialog-buttons object) buttons)}
+  @syntax{(gtk:alert-dialog-buttons object) => buttons}
+  @syntax{(setf (gtk:alert-dialog-buttons object) buttons)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[buttons]{a list of strings with the button labels}
   @begin{short}
@@ -197,8 +197,8 @@
       "Accessor"
       (documentation 'alert-dialog-cancel-button 'function)
  "@version{2023-9-20}
-  @syntax[]{(gtk:alert-dialog-cancel-button object) => button}
-  @syntax[]{(setf (gtk:alert-dialog-cancel-button object) button)}
+  @syntax{(gtk:alert-dialog-cancel-button object) => button}
+  @syntax{(setf (gtk:alert-dialog-cancel-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[button]{an integer with the new Cancel button}
   @begin{short}
@@ -234,8 +234,8 @@
       "Accessor"
       (documentation 'alert-dialog-default-button 'function)
  "@version{2023-9-20}
-  @syntax[]{(gtk:alert-dialog-default-button object) => button}
-  @syntax[]{(setf (gtk:alert-dialog-default-button object) button)}
+  @syntax{(gtk:alert-dialog-default-button object) => button}
+  @syntax{(setf (gtk:alert-dialog-default-button object) button)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[button]{an integer with the new Default button}
   @begin{short}
@@ -263,8 +263,8 @@
       "Accessor"
       (documentation 'alert-dialog-detail 'function)
  "@version{2023-9-20}
-  @syntax[]{(gtk:alert-dialog-detail object) => detail}
-  @syntax[]{(setf (gtk:alert-dialog-detail object) detail)}
+  @syntax{(gtk:alert-dialog-detail object) => detail}
+  @syntax{(setf (gtk:alert-dialog-detail object) detail)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[detail]{a string with the detail text}
   @begin{short}
@@ -291,8 +291,8 @@
       "Accessor"
       (documentation 'alert-dialog-message 'function)
  "@version{2023-9-20}
-  @syntax[]{(gtk:alert-dialog-message object) => message}
-  @syntax[]{(setf (gtk:alert-dialog-message object) message)}
+  @syntax{(gtk:alert-dialog-message object) => message}
+  @syntax{(setf (gtk:alert-dialog-message object) message)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[message]{a string with the message}
   @begin{short}
@@ -319,8 +319,8 @@
       "Accessor"
       (documentation 'alert-dialog-modal 'function)
  "@version{2023-9-20}
-  @syntax[]{(gtk:alert-dialog-modal object) => modal}
-  @syntax[]{(setf (gtk:alert-dialog-modal object) modal)}
+  @syntax{(gtk:alert-dialog-modal object) => modal}
+  @syntax{(setf (gtk:alert-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:alert-dialog} object}
   @argument[modal]{a boolean whether the alert dialog is modal}
   @begin{short}

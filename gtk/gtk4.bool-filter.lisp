@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -92,7 +92,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- bool-filter-expression -------------------------------------------------
+;;; --- gtk:bool-filter-expression ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "expression" 'bool-filter) t)
@@ -105,8 +105,8 @@
       "Accessor"
       (documentation 'bool-filter-expression 'function)
  "@version{2023-9-9}
-  @syntax[]{(gtk:bool-filter-expression object) => expression}
-  @syntax[]{(setf (gtk:bool-filter-expression object) expression)}
+  @syntax{(gtk:bool-filter-expression object) => expression}
+  @syntax{(setf (gtk:bool-filter-expression object) expression)}
   @argument[object]{a @class{gtk:bool-filter} object}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
@@ -120,7 +120,7 @@
   @see-class{gtk:bool-filter}
   @see-class{gtk:expression}")
 
-;;; --- bool-filter-invert -----------------------------------------------------
+;;; --- gtk:bool-filter-invert -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "invert" 'bool-filter) t)
@@ -133,8 +133,8 @@
       "Accessor"
       (documentation 'bool-filter-invert 'function)
  "@version{2023-9-9}
-  @syntax[]{(gtk:bool-filter-invert object) => invert}
-  @syntax[]{(setf (gtk:bool-filter-invert object) invert)}
+  @syntax{(gtk:bool-filter-invert object) => invert}
+  @syntax{(setf (gtk:bool-filter-invert object) invert)}
   @argument[object]{a @class{gtk:bool-filter} object}
   @argument[expression]{@em{true} to invert}
   @begin{short}
@@ -147,7 +147,7 @@
   @see-class{gtk:bool-filter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_bool_filter_new ()
+;;; gtk_bool_filter_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline bool-filter-new))
@@ -156,7 +156,7 @@
  "@version{2023-9-9}
   @argument[expression]{a @class{gtk:expression} instance or @code{nil} for
     none}
-  @return{A new @class{gtk:bool-filter} object.}
+  @return{The new @class{gtk:bool-filter} object.}
   @begin{short}
     Creates a new bool filter.
   @end{short}

@@ -101,12 +101,8 @@
       "GFlags"
       (liber:symbol-documentation 'application-inhibit-flags)
  "@version{2023-8-2}
-  @begin{short}
-    Types of user actions that may be blocked by a @class{gtk:application}
-    instance.
-  @end{short}
-  See the @fun{gtk:application-inhibit} function.
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GtkApplicationInhibitFlags\" application-inhibit-flags
   (:export t
    :type-initializer \"gtk_application_inhibit_flags_get_type\")
@@ -114,14 +110,23 @@
   (:switch  #.(ash 1 1))
   (:suspend #.(ash 1 2))
   (:idle    #.(ash 1 3)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:logout]{Inhibit ending the user session by logging out or by
-      shutting down the computer.}
-    @entry[:switch]{Inhibit user switching.}
-    @entry[:suspend]{Inhibit suspending the session or computer.}
-    @entry[:idle]{Inhibit the session being marked as idle and possibly locked.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:logout]{Inhibit ending the user session by logging out or by
+        shutting down the computer.}
+      @entry[:switch]{Inhibit user switching.}
+      @entry[:suspend]{Inhibit suspending the session or computer.}
+      @entry[:idle]{Inhibit the session being marked as idle and possibly
+        locked.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Types of user actions that may be blocked by a @class{gtk:application}
+    instance.
+  @end{short}
+  See the @fun{gtk:application-inhibit} function.
   @see-class{gtk:application}
   @see-function{gtk:application-inhibit}")
 

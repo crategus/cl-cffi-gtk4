@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -85,14 +85,14 @@
   @see-class{gtk:builder}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_buildable_get_buildable_id -> buildable-buildable-id
+;;; gtk_buildable_get_buildable_id
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_buildable_get_buildable_id" buildable-buildable-id) :string
  #+liber-documentation
  "@version{2023-8-7}
   @argument[buildable]{a @class{gtk:buildable} object}
-  @return{A string with the ID of the buildable object.}
+  @return{The string with the ID of the buildable object.}
   @begin{short}
     Gets the ID of the buildable object.
   @end{short}

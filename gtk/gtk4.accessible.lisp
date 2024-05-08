@@ -35,16 +35,16 @@
 ;;;
 ;;;     GtkAccessible
 ;;;
-;;;     GtkAccessibleRole                                  gtk.enumerations
-;;;     GtkAccessibleState                                 gtk.enumerations
-;;;     GtkAccessibleProperty                              gtk.enumerations
-;;;     GtkAccessibleRelation                              gtk.enumerations
-;;;     GtkAccessibleTristate                              gtk.enumerations
-;;;     GtkAccessibleInvalidState                          gtk.enumerations
-;;;     GtkAccessibleAutocomplete                          gtk.enumerations
-;;;     GtkAccessibleSort                                  gtk.enumerations
+;;;     GtkAccessibleRole                                   gtk4.enumerations
+;;;     GtkAccessibleState                                  gtk4.enumerations
+;;;     GtkAccessibleProperty                               gtk4.enumerations
+;;;     GtkAccessibleRelation                               gtk4.enumerations
+;;;     GtkAccessibleTristate                               gtk4.enumerations
+;;;     GtkAccessibleInvalidState                           gtk4.enumerations
+;;;     GtkAccessibleAutocomplete                           gtk4.enumerations
+;;;     GtkAccessibleSort                                   gtk4.enumerations
 ;;;
-;;;     GtkAccessiblePlatformState                         Since 4.10
+;;;     GtkAccessiblePlatformState                          Since 4.10
 ;;;
 ;;; Accessors
 ;;;
@@ -52,19 +52,19 @@
 ;;;
 ;;; Functions
 ;;;
-;;;     gtk_accessible_get_accessible_parent               Since 4.10
-;;;     gtk_accessible_set_accessible_parent               Since 4.10
-;;;     gtk_accessible_get_at_context                      Since 4.10
-;;;     gtk_accessible_get_bounds                          Since 4.10
-;;;     gtk_accessible_get_first_accessible_child          Since 4.10
-;;;     gtk_accessible_get_next_accessible_sibling         Since 4.10
-;;;     gtk_accessible_get_platform_state                  Since 4.10
+;;;     gtk_accessible_get_accessible_parent                Since 4.10
+;;;     gtk_accessible_set_accessible_parent                Since 4.10
+;;;     gtk_accessible_get_at_context                       Since 4.10
+;;;     gtk_accessible_get_bounds                           Since 4.10
+;;;     gtk_accessible_get_first_accessible_child           Since 4.10
+;;;     gtk_accessible_get_next_accessible_sibling          Since 4.10
+;;;     gtk_accessible_get_platform_state                   Since 4.10
 ;;;
 ;;;     gtk_accessible_reset_property
 ;;;     gtk_accessible_reset_relation
 ;;;     gtk_accessible_reset_state
 ;;;
-;;;     gtk_accessible_update_next_accessible_sibling      Since 4.10
+;;;     gtk_accessible_update_next_accessible_sibling       Since 4.10
 ;;;
 ;;;     gtk_accessible_update_property
 ;;;     gtk_accessible_update_property_value
@@ -105,16 +105,29 @@
 (setf (liber:alias-for-symbol 'accessible-platform-state)
       "GEnum"
       (liber:symbol-documentation 'accessible-platform-state)
- "@version{#2023-9-16}
+ "@version{2024-5-8}
+  @begin{declaration}
+    @begin{pre}
+(gobject:define-g-enum \"GtkAccessiblePlatformState\" accessible-platform-state
+  (:export t
+   :type-initializer \"gtk_accessible_platform_state_get_type\")
+  (:focusable 0)
+  (:focused 1)
+  (:active 2))
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:focusable]{Whether the accessible can be focused.}
+      @entry[:focused]{Whether the accessible has focus.}
+      @entry[:active]{Whether the accessible is active.}
+    @end{table}
+  @end{values}
   @begin{short}
     The various platform states which can be queried using the
     @fun{gtk:accessible-platform-state} function.
   @end{short}
-  @begin[code]{table}
-    @entry[:focusable]{Whether the accessible can be focused.}
-    @entry[:focused]{Whether the accessible has focus.}
-    @entry[:active]{Whether the accessible is active.}
-  @end{table}
+
   Since 4.10
   @see-function{gtk:accessible-platform-state}")
 
@@ -133,7 +146,7 @@
 (setf (liber:alias-for-class 'accessible)
       "Interface"
       (documentation 'accessible 'type)
- "@version{2023-8-13}
+ "@version{2024-5-8}
   @begin{short}
     The @class{gtk:accessible} interface is an interface for describing UI
     elements for Assistive Technologies.
@@ -155,8 +168,8 @@
 
   The attributes are updated every time a state of a UI element changes in a
   way that should be reflected by assistive technologies. For instance, if a
-  @class{gtk:widget} visibility changes, the @code{:hidden} state will also
-  change to reflect the @slot[gtk:widget]{visible} property.
+  widget visibility changes, the @code{:hidden} state will also change to
+  reflect the @slot[gtk:widget]{visible} property of the widget.
   @see-slot{gtk:accessible-accessible-role}
   @see-class{gtk:widget}
   @see-symbol{gtk:accessible-role}
@@ -169,11 +182,10 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- accessible-accessible-role ---------------------------------------------
+;;; --- gtk:accessible-accessible-role -----------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "accessible-role"
-                                               'accessible) t)
+(setf (documentation (liber:slot-documentation "accessible-role" 'accessible) t)
  "The @code{accessible-role} property of type @symbol{gtk:accessible-role}
   (Read / Write) @br{}
   The accessible role of the given assistive implementation. The accessible
@@ -183,9 +195,9 @@
 (setf (liber:alias-for-function 'accessible-accessible-role)
       "Accessor"
       (documentation 'accessible-accessible-role 'function)
- "@version{2023-8-13}
-  @syntax[]{(gtk:accessible-accessible-role object) => role}
-  @syntax[]{(setf (gtk:accessible-accessible-role object) role)}
+ "@version{2024-5-8}
+  @syntax{(gtk:accessible-accessible-role object) => role}
+  @syntax{(setf (gtk:accessible-accessible-role object) role)}
   @argument[object]{a @class{gtk:accessible} widget}
   @argument[role]{a value of the @symbol{gtk:accessible-role} enumeration}
   @begin{short}
@@ -361,10 +373,10 @@
 
 (defun accessible-update-property-value (accessible properties values)
  #+liber-documentation
- "@version{#2022-7-24}
+ "@version{#2024-5-8}
   @argument[accessible]{a @class{gtk:accessible} object}
   @argument[properties]{a list of @class{gtk:accessible-property} values}
-  @argument[values]{a list of @symbol{g:value} instance, one for each property}
+  @argument[values]{a list of @symbol{g:value} instances, one for each property}
   @begin{short}
     Updates an array of accessible properties.
   @end{short}
@@ -378,10 +390,10 @@
   (let ((n (length values)))
     (cffi:with-foreign-objects ((value-ar '(:struct g:value) n)
                                 (prop-ar 'accessible-property n))
-      (loop for i from 0 below n
-            for value in values
-            for property in properties
-         do (cffi:with-foreign-object (gvalue '(:struct g:value))
+      (iter (for i from 0 below n)
+            (for value in values)
+            (for property in properties)
+            (cffi:with-foreign-object (gvalue '(:struct g:value))
               (setf (cffi:mem-aref prop-ar 'accessible-property i) property)
               (g:value-init gvalue)
               (accessible-property-init-value property gvalue)
@@ -390,8 +402,8 @@
                                    (gobject:value-type gvalue)
                                    :zero-gvalue t)))
       (%accessible-update-property-value accessible n prop-ar value-ar)
-      (loop for i from 0 below n
-         do (gobject:value-unset (cffi:mem-aptr value-ar
+      (iter (for i from 0 below n)
+            (gobject:value-unset (cffi:mem-aptr value-ar
                                                 '(:struct g:value) i))))))
 
 (export 'accessible-update-property-value)

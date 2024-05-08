@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -99,7 +99,7 @@ lambda (context)    :run-first
       Emitted when the attributes of the accessible for the
       @class{gtk:at-context} instance change.
       @begin[code]{table}
-        @entry[context]{A @class{gtk:at-context} object.}
+        @entry[context]{The @class{gtk:at-context} object.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:at-context-create}
@@ -109,7 +109,7 @@ lambda (context)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- at-context-accessible --------------------------------------------------
+;;; --- gtk:at-context-accessible ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accessible" 'at-context) t)
@@ -122,7 +122,7 @@ lambda (context)    :run-first
       "Accessor"
       (documentation 'at-context-accessible 'function)
  "@version{2023-8-31}
-  @syntax[]{(gtk:at-context-accessible object) => accessible}
+  @syntax{(gtk:at-context-accessible object) => accessible}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[accessible]{a @class{gtk:accessible} object}
   @begin{short}
@@ -133,7 +133,7 @@ lambda (context)    :run-first
   @see-class{gtk:at-context}
   @see-class{gtk:accessible}")
 
-;;; --- at-context-accessible-role ---------------------------------------------
+;;; --- gtk:at-context-accessible-role -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accessible-role" 'at-context) t)
@@ -148,7 +148,7 @@ lambda (context)    :run-first
       "Accessor"
       (documentation 'at-context-accessible-role 'function)
  "@version{2023-8-31}
-  @syntax[]{(gtk:at-context-accessible-role object) => role}
+  @syntax{(gtk:at-context-accessible-role object) => role}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[role]{a @symbol{gtk:accessible-role} value}
   @begin{short}
@@ -159,7 +159,7 @@ lambda (context)    :run-first
   @see-class{gtk:at-context}
   @see-symbol{gtk:accessible-role}")
 
-;;; --- at-context-display -----------------------------------------------------
+;;; --- gtk:at-context-display -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "display" 'at-context) t)
@@ -171,7 +171,7 @@ lambda (context)    :run-first
       "Accessor"
       (documentation 'at-context-display 'function)
  "@version{2023-8-31}
-  @syntax[]{(gtk:at-context-display object) => display}
+  @syntax{(gtk:at-context-display object) => display}
   @argument[object]{a @class{gtk:at-context} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
@@ -182,7 +182,7 @@ lambda (context)    :run-first
   @see-class{gdk:display}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_at_context_create ()
+;;; gtk_at_context_create
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_at_context_create" at-context-create) (g:object at-context)
