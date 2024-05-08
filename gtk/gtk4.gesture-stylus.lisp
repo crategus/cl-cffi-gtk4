@@ -100,8 +100,8 @@ lambda (gesture x y)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
           signal is emitted.}
-        @entry[x]{A double float with the x coordinate of the stylus event.}
-        @entry[y]{A double float with the y coordinate of the stylus event.}
+        @entry[x]{The double float with the x coordinate of the stylus event.}
+        @entry[y]{The double float with the y coordinate of the stylus event.}
       @end{table}
     @subheading{The \"motion\" signal}
       @begin{pre}
@@ -110,8 +110,8 @@ lambda (gesture x y)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
           signal is emitted.}
-        @entry[x]{A double float with the x coordinate of the stylus event.}
-        @entry[y]{A double float with the y coordinate of the stylus event.}
+        @entry[x]{The double float with the x coordinate of the stylus event.}
+        @entry[y]{The double float with the y coordinate of the stylus event.}
       @end{table}
     @subheading{The \"proximity\" signal}
       @begin{pre}
@@ -120,8 +120,8 @@ lambda (gesture x y)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
           signal is emitted.}
-        @entry[x]{A double float with the x coordinate of the stylus event.}
-        @entry[y]{A double float with the y coordinate of the stylus event.}
+        @entry[x]{The double float with the x coordinate of the stylus event.}
+        @entry[y]{The double float with the y coordinate of the stylus event.}
       @end{table}
     @subheading{The \"up\" signal}
       @begin{pre}
@@ -130,8 +130,8 @@ lambda (gesture x y)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-stylus} object on which the
           signal is emitted.}
-        @entry[x]{A double float with the x coordinate of the stylus event.}
-        @entry[y]{A double float with the y coordinate of the stylus event.}
+        @entry[x]{The double float with the x coordinate of the stylus event.}
+        @entry[y]{The double float with the y coordinate of the stylus event.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:gesture-stylus-new}
@@ -158,8 +158,8 @@ lambda (gesture x y)    :run-last
       "Accessor"
       (documentation 'gesture-stylus-stylus-only 'function)
  "@version{2024-2-21}
-  @syntax[]{(gtk:gesture-stylus-only object) => setting}
-  @syntax[]{(setf (gtk:gesture-stylus-only object) setting)}
+  @syntax{(gtk:gesture-stylus-only object) => setting}
+  @syntax{(setf (gtk:gesture-stylus-only object) setting)}
   @argument[object]{a @class{gtk:gesture-stylus} object}
   @argument[setting]{a boolean whether the gesture is used exclusivly for
     stylus events}
@@ -176,7 +176,7 @@ lambda (gesture x y)    :run-last
   @see-class{gtk:gesture-stylus}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_stylus_new ()
+;;; gtk_gesture_stylus_new
 ;;; ----------------------------------------------------------------------------
 
 (defun gesture-stylus-new ()
@@ -192,7 +192,7 @@ lambda (gesture x y)    :run-last
 (export 'gesture-stylus-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_stylus_get_axis ()
+;;; gtk_gesture_stylus_get_axis
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_stylus_get_axis" %gesture-stylus-axis) :boolean
@@ -275,7 +275,7 @@ lambda (gesture x y)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_stylus_get_device_tool ()
+;;; gtk_gesture_stylus_get_device_tool
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_stylus_get_device_tool" gesture-stylus-device-tool)

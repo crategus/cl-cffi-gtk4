@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -101,7 +101,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- multi-filter-item-type -------------------------------------------------
+;;; --- gtk:multi-filter-item-type ---------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'multi-filter) t)
@@ -120,7 +120,7 @@
       "Accessor"
       (documentation 'multi-filter-item-type 'function)
  "@version{#2023-8-16}
-  @syntax[]{(gtk:multi-filter-item-type object) => gtype}
+  @syntax{(gtk:multi-filter-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -137,7 +137,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- multi-filter-n-items ---------------------------------------------------
+;;; --- gtk:multi-filter-n-items -----------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'multi-filter) t)
@@ -150,7 +150,7 @@
       "Accessor"
       (documentation 'multi-filter-n-items 'function)
  "@version{#2023-8-16}
-  @syntax[]{(gtk:multi-filter-n-items object) => n-items}
+  @syntax{(gtk:multi-filter-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-filter} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -162,7 +162,7 @@
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_multi_filter_append ()
+;;; gtk_multi_filter_append
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_multi_filter_append" multi-filter-append) :void
@@ -181,7 +181,7 @@
 (export 'multi-filter-append)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_multi_filter_remove ()
+;;; gtk_multi_filter_remove
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_multi_filter_remove" multi-filter-remove) :void
@@ -226,14 +226,14 @@
   @see-class{gtk:multi-filter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_any_filter_new ()
+;;; gtk_any_filter_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline any-filter-new))
 
 (defun any-filter-new ()
  "@version{2023-8-16}
-  @return{A new @class{gtk:any-filter} object.}
+  @return{The new @class{gtk:any-filter} object.}
   @begin{short}
     Creates a new empty \"any\" filter.
   @end{short}
@@ -271,12 +271,12 @@
   @see-class{gtk:multi-filter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_every_filter_new ()
+;;; gtk_every_filter_new
 ;;; ----------------------------------------------------------------------------
 
 (defun every-filter-new ()
  "@version{2023-8-16}
-  @return{A new @class{gtk:every-filter} object.}
+  @return{The new @class{gtk:every-filter} object.}
   @begin{short}
     Creates a new empty \"every\" filter.
   @end{short}

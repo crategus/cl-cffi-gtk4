@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -104,7 +104,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- no-selection-item-type -------------------------------------------------
+;;; --- gtk:no-selection-item-type ---------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'no-selection) t)
@@ -123,7 +123,7 @@
       "Accessor"
       (documentation 'no-selection-item-type 'function)
  "@version{2023-9-6}
-  @syntax[]{(gtk:no-selection-item-type object) => gtype}
+  @syntax{(gtk:no-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -140,7 +140,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- no-selection-model -----------------------------------------------------
+;;; --- gtk:no-selection-model -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'no-selection) t)
@@ -152,8 +152,8 @@
       "Accessor"
       (documentation 'no-selection-model 'function)
  "@version{2023-9-6}
-  @syntax[]{(gtk:no-selection-model object) => model}
-  @syntax[]{(setf (gtk:no-selection-model object) model)}
+  @syntax{(gtk:no-selection-model object) => model}
+  @syntax{(setf (gtk:no-selection-model object) model)}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
@@ -167,7 +167,7 @@
   @see-class{gtk:no-selection}
   @see-class{g:list-model}")
 
-;;; --- no-selection-n-items ---------------------------------------------------
+;;; --- gtk:no-selection-n-items -----------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'no-selection) t)
@@ -180,7 +180,7 @@
       "Accessor"
       (documentation 'no-selection-n-items 'function)
  "@version{2023-9-6}
-  @syntax[]{(gtk:no-selection-n-items object) => n-items}
+  @syntax{(gtk:no-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:no-selection} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -192,7 +192,7 @@
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_no_selection_new ()
+;;; gtk_no_selection_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline no-selection-new))
@@ -201,7 +201,7 @@
  #+liber-documentation
  "@version{2023-9-6}
   @argument[model]{a @class{g:list-model} object to manage, or @code{nil}}
-  @return{A new @class{gtk:no-selection} object.}
+  @return{The new @class{gtk:no-selection} object.}
   @begin{short}
     Creates a new selection to handle @arg{model}.
   @end{short}

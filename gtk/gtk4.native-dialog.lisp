@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -147,8 +147,8 @@ lambda (dialog response)    :run-last
       "Accessor"
       (documentation 'native-dialog-modal 'function)
  "@version{#2023-4-16}
-  @syntax[]{(gtk:native-dialog-modal object) => modal}
-  @syntax[]{(setf (gtk:native-dialog-modal object) modal)}
+  @syntax{(gtk:native-dialog-modal object) => modal}
+  @syntax{(setf (gtk:native-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:native-dialog} widget}
   @argument[modal]{@em{true} if the dialog is modal}
   @begin{short}
@@ -180,8 +180,8 @@ lambda (dialog response)    :run-last
       "Accessor"
       (documentation 'native-dialog-title 'function)
  "@version{#2023-4-16}
-  @syntax[]{(gtk:native-dialog-title object) => title}
-  @syntax[]{(setf (gtk:native-dialog-title object) title)}
+  @syntax{(gtk:native-dialog-title object) => title}
+  @syntax{(setf (gtk:native-dialog-title object) title)}
   @argument[object]{a @class{gtk:native-dialog} widget}
   @argument[title]{a string with the title of the dialog, or @code{nil} if
     none has been set explicitly}
@@ -207,8 +207,8 @@ lambda (dialog response)    :run-last
       "Accessor"
       (documentation 'native-dialog-transient-for 'function)
  "@version{#2023-4-16}
-  @syntax[]{(gtk:native-dialog-transient-for object) => parent}
-  @syntax[]{(setf (gtk:native-dialog-transient-for object) parent)}
+  @syntax{(gtk:native-dialog-transient-for object) => parent}
+  @syntax{(setf (gtk:native-dialog-transient-for object) parent)}
   @argument[object]{a @class{gtk:native-dialog} widget}
   @argument[parent]{a @class{gtk:window} parent window}
   @begin{short}
@@ -240,8 +240,8 @@ lambda (dialog response)    :run-last
       "Accessor"
       (documentation 'native-dialog-visible 'function)
  "@version{#2023-4-16}
-  @syntax[]{(gtk:native-dialog-visible object) => visible}
-  @syntax[]{(setf (gtk:native-dialog-visible object) visible)}
+  @syntax{(gtk:native-dialog-visible object) => visible}
+  @syntax{(setf (gtk:native-dialog-visible object) visible)}
   @argument[object]{a @class{gtk:native-dialog} widget}
   @argument[visible]{@em{true} if the dialog is visible}
   @begin{short}
@@ -252,7 +252,7 @@ lambda (dialog response)    :run-last
   @see-class{gtk:native-dialog}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_show ()
+;;; gtk_native_dialog_show
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_dialog_show" native-dialog-show) :void
@@ -271,7 +271,7 @@ lambda (dialog response)    :run-last
 (export 'native-dialog-show)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_hide ()
+;;; gtk_native_dialog_hide
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_native_dialog_hide" native-dialog-hide) :void
@@ -292,7 +292,7 @@ lambda (dialog response)    :run-last
 (export 'native-dialog-hide)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_dialog_destroy ()
+;;; gtk_native_dialog_destroy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_native_dialog_destroy" native-dialog-destroy) :void

@@ -65,7 +65,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkGestureLongPress
+;;; GtkGestureLongPress
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkGestureLongPress" gesture-long-press
@@ -112,10 +112,10 @@ lambda (gesture x y)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-long-press} object which received
           the signal.}
-        @entry[x]{A double float with the x coordinate where the press happened,
-          relative to the widget allocation.}
-        @entry[y]{A double float with the y coordinate where the press happened,
-          relative to the widget allocation.}
+        @entry[x]{The double float with the x coordinate where the press
+          happened, relative to the widget allocation.}
+        @entry[y]{The double float with the y coordinate where the press
+          happened, relative to the widget allocation.}
       @end{table}
   @end{dictionary}
   @see-slot{gtk:gesture-long-press-delay-factor}
@@ -141,8 +141,8 @@ lambda (gesture x y)    :run-last
       "Accessor"
       (documentation 'gesture-long-press-delay-factor 'function)
  "@version{2024-2-19}
-  @syntax[]{(gtk:gesture-long-press-delay-factor object) => factor)}
-  @syntax[]{(setf (gtk:gesture-long-press-delay-factor object) factor)}
+  @syntax{(gtk:gesture-long-press-delay-factor object) => factor)}
+  @syntax{(setf (gtk:gesture-long-press-delay-factor object) factor)}
   @argument[object]{a @class{gtk:gesture-long-press} object}
   @argument[factor]{a double float with the factor by which to modify
     the default timeout}
@@ -153,7 +153,7 @@ lambda (gesture x y)    :run-last
   @see-class{gtk:gesture-long-press}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_long_press_new ()
+;;; gtk_gesture_long_press_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline gesture-long-press-new))

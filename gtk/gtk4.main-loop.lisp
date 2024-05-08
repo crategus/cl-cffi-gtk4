@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -194,7 +194,7 @@
 (cffi:defcfun ("gtk_is_initialized" is-initialized) :boolean
  #+liber-documentation
  "@version{2023-8-30}
-  @return{A boolean with the initialization status.}
+  @return{The boolean with the initialization status.}
   @begin{short}
     Use this function to check if GTK has been initialized with the
     @fun{gtk:init} or @fun{gtk:init-check} functions.
@@ -226,7 +226,7 @@
 (export 'disable-setlocale)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_get_default_language -> default-language
+;;; gtk_get_default_language
 ;;; ----------------------------------------------------------------------------
 
 (defun default-language ()
@@ -258,7 +258,7 @@
 (export 'default-language)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_get_locale_direction -> locale-direction
+;;; gtk_get_locale_direction
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_get_locale_direction" locale-direction) text-direction

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -192,7 +192,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- media-stream-duration --------------------------------------------------
+;;; --- gtk:media-stream-duration ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "duration" 'media-stream) t)
@@ -206,7 +206,7 @@
       "Accessor"
       (documentation 'media-stream-duration 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-duration object) => duration}
+  @syntax{(gtk:media-stream-duration object) => duration}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[duration]{an integer with the duration of the stream}
   @begin{short}
@@ -217,7 +217,7 @@
   If the duration is not known, 0 will be returned.
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-ended -----------------------------------------------------
+;;; --- gtk:media-stream-ended -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "ended" 'media-stream) t)
@@ -230,7 +230,7 @@
       "Accessor"
       (documentation 'media-stream-ended 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-ended object) => ended}
+  @syntax{(gtk:media-stream-ended object) => ended}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[ended]{a boolean whether the playback is finished}
   @begin{short}
@@ -241,7 +241,7 @@
   playback is finished.
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-error -----------------------------------------------------
+;;; --- gtk:media-stream-error -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "error" 'media-stream) t)
@@ -254,7 +254,7 @@
       "Accessor"
       (documentation 'media-stream-error 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-error object) => error}
+  @syntax{(gtk:media-stream-error object) => error}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[error]{@code{nil} if not in an error state or the @code{GError}
     of the stream}
@@ -277,7 +277,7 @@
   @see-class{gtk:media-stream}
   @see-class{gtk:media-file}")
 
-;;; --- media-stream-has-audio -------------------------------------------------
+;;; --- gtk:media-stream-has-audio ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-audio" 'media-stream) t)
@@ -290,7 +290,7 @@
       "Accessor"
       (documentation 'media-stream-has-audio 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-has-audio object) => setting}
+  @syntax{(gtk:media-stream-has-audio object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream has audio}
   @begin{short}
@@ -301,7 +301,7 @@
   audio.
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-has-video -------------------------------------------------
+;;; --- gtk:media-stream-has-video ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-video" 'media-stream) t)
@@ -314,7 +314,7 @@
       "Accessor"
       (documentation 'media-stream-has-video 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-has-video object) => setting}
+  @syntax{(gtk:media-stream-has-video object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream has video}
   @begin{short}
@@ -325,7 +325,7 @@
   video.
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-loop ------------------------------------------------------
+;;; --- gtk:media-stream-loop --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "loop" 'media-stream) t)
@@ -338,8 +338,8 @@
       "Accessor"
       (documentation 'media-stream-loop 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-loop object) => setting}
-  @syntax[]{(setf (gtk:media-stream-loop object) setting)}
+  @syntax{(gtk:media-stream-loop object) => setting}
+  @syntax{(setf (gtk:media-stream-loop object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream should loop}
   @begin{short}
@@ -354,7 +354,7 @@
   Those streams will ignore the loop setting and just end.
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-muted -----------------------------------------------------
+;;; --- gtk:media-stream-muted -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "muted" 'media-stream) t)
@@ -367,8 +367,8 @@
       "Accessor"
       (documentation 'media-stream-muted 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-muted object) => setting}
-  @syntax[]{(setf (gtk:media-stream-muted object) setting)}
+  @syntax{(gtk:media-stream-muted object) => setting}
+  @syntax{(setf (gtk:media-stream-muted object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{@em{true} if the stream should be muted}
   @begin{short}
@@ -385,7 +385,7 @@
   not have an audible effect.
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-playing ---------------------------------------------------
+;;; --- gtk:media-stream-playing -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "playing" 'media-stream) t)
@@ -398,8 +398,8 @@
       "Accessor"
       (documentation 'media-stream-playing 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-playing object) => setting}
-  @syntax[]{(setf (gtk:media-stream-playing object) setting)}
+  @syntax{(gtk:media-stream-playing object) => setting}
+  @syntax{(setf (gtk:media-stream-playing object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether to start or pause playback}
   @begin{short}
@@ -411,7 +411,7 @@
   pauses playback of the stream.
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-prepared --------------------------------------------------
+;;; --- gtk:media-stream-prepared ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "prepared" 'media-stream) t)
@@ -425,8 +425,8 @@
       "Accessor"
       (documentation 'media-stream-prepared 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-prepared object) => setting}
-  @syntax[]{(setf (gtk:media-stream-prepared object) setting)}
+  @syntax{(gtk:media-stream-prepared object) => setting}
+  @syntax{(setf (gtk:media-stream-prepared object) setting)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether the stream has finished initializing
     and existence of audio and video is known}
@@ -436,7 +436,7 @@
   @end{short}
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-seekable --------------------------------------------------
+;;; --- gtk:media-stream-seekable ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "seekable" 'media-stream) t)
@@ -449,7 +449,7 @@
       "Accessor"
       (documentation 'media-stream-seekable 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-seekable object) => setting}
+  @syntax{(gtk:media-stream-seekable object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether the stream is known to support seeking}
   @begin{short}
@@ -458,7 +458,7 @@
   @end{short}
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-seeking ---------------------------------------------------
+;;; --- gtk:media-stream-seeking -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "seeking" 'media-stream) t)
@@ -471,7 +471,7 @@
       "Accessor"
       (documentation 'media-stream-seeking 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-seeking object) => setting}
+  @syntax{(gtk:media-stream-seeking object) => setting}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[setting]{a boolean whether a seek is in progress}
   @begin{short}
@@ -480,7 +480,7 @@
   @end{short}
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-timestamp -------------------------------------------------
+;;; --- gtk:media-stream-timestamp ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "timestamp" 'media-stream) t)
@@ -494,7 +494,7 @@
       "Accessor"
       (documentation 'media-stream-timestamp 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-timestamp object) => timestamp}
+  @syntax{(gtk:media-stream-timestamp object) => timestamp}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[timestamp]{an integer with the timestamp in microseconds}
   @begin{short}
@@ -505,7 +505,7 @@
   timestamp in microseconds.
   @see-class{gtk:media-stream}")
 
-;;; --- media-stream-volume ----------------------------------------------------
+;;; --- gtk:media-stream-volume ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "volume" 'media-stream) t)
@@ -519,8 +519,8 @@
       "Accessor"
       (documentation 'media-stream-volume 'function)
  "@version{#2023-5-2}
-  @syntax[]{(gtk:media-stream-volume object) => volume}
-  @syntax[]{(setf (gtk:media-stream-playing object) volume)}
+  @syntax{(gtk:media-stream-volume object) => volume}
+  @syntax{(setf (gtk:media-stream-playing object) volume)}
   @argument[object]{a @class{gtk:media-stream} object}
   @argument[volume]{a double float with the volume of the stream from 0.0 to
     1.0}
@@ -541,7 +541,7 @@
   @see-class{gtk:media-stream}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_is_prepared ()
+;;; gtk_media_stream_is_prepared
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_is_prepared" media-stream-is-prepared) :boolean
@@ -559,7 +559,7 @@
 (export 'media-stream-is-prepared)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_play ()
+;;; gtk_media_stream_play
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_play" media-stream-play) :void
@@ -576,7 +576,7 @@
 (export 'media-stream-play)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_pause ()
+;;; gtk_media_stream_pause
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_pause" media-stream-pause) :void
@@ -593,7 +593,7 @@
 (export 'media-stream-pause)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_is_seekable ()
+;;; gtk_media_stream_is_seekable
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_is_seekable" media-stream-is-seekable) :boolean
@@ -618,7 +618,7 @@
 (export 'media-stream-is-seekable)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_is_seeking ()
+;;; gtk_media_stream_is_seeking
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_is_seeking" media-stream-is-seeking) :boolean
@@ -635,7 +635,7 @@
 (export 'media-stream-is-seeking)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_seek ()
+;;; gtk_media_stream_seek
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_seek" media-stream-seek) :void
@@ -661,7 +661,7 @@
 (export 'media-stream-seek)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_realize ()
+;;; gtk_media_stream_realize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_realize" media-stream-realize) :void
@@ -697,7 +697,7 @@
 (export 'media-stream-realize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_unrealize ()
+;;; gtk_media_stream_unrealize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_unrealize" media-stream-unrealize) :void
@@ -775,7 +775,7 @@
 ;; deprecated since 4.4 and not implemented
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_update ()
+;;; gtk_media_stream_update
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_update" media-stream-update) :void
@@ -811,7 +811,7 @@
 ;; deprecated since 4.4 and not implemented
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_seek_success ()
+;;; gtk_media_stream_seek_success
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_seek_success" media-stream-seek-success) :void
@@ -836,7 +836,7 @@
 (export 'media-stream-seek-success)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_stream_seek_failed ()
+;;; gtk_media_stream_seek_failed
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_stream_seek_failed" media-stream-seek-failed) :void

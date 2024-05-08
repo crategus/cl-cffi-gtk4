@@ -276,7 +276,7 @@ lambda (controller)    :run-first
  #+liber-documentation
  "@version{#2023-10-21}
   @argument[scroll]{a @class{gtk:event-controller-scroll} object}
-  @return{A @symbol{gdk:scroll-unit} value with the scroll unit.}
+  @return{The @symbol{gdk:scroll-unit} value with the scroll unit.}
   @begin{short}
     Gets the scroll unit of the last @code{\"scroll\"} signal received.
   @end{short}

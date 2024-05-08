@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -110,8 +110,8 @@
       "Accessor"
       (documentation 'media-controls-media-stream 'function)
  "@version{#2023-4-29}
-  @syntax[]{(gtk:media-controls-media-stream object) => stream}
-  @syntax[]{(setf (gtk:media-controls-media-stream object) stream)}
+  @syntax{(gtk:media-controls-media-stream object) => stream}
+  @syntax{(setf (gtk:media-controls-media-stream object) stream)}
   @argument[object]{a @class{gtk:media-controls} widget}
   @argument[stream]{a @class{gtk:media-stream} object, or @code{nil}}
   @begin{short}
@@ -125,7 +125,7 @@
   @see-class{gtk:media-stream}")
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_media_controls_new ()
+;;;gtk_media_controls_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline media-controls-new))
@@ -134,7 +134,7 @@
  #+liber-documentation
  "@version{#2023-4-29}
   @argument[stream]{a @class{gtk:media-stream} object}
-  @return{A new @class{gtk:media-controls} widget.}
+  @return{The new @class{gtk:media-controls} widget.}
   @short{Creates the new media controls managing the media stream passed to it.}
   @see-class{gtk:media-controls}
   @see-class{gtk:media-stream}"

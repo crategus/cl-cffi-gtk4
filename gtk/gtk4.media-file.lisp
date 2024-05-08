@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -114,7 +114,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- media-file-file --------------------------------------------------------
+;;; --- gtk:media-file-file ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "file" 'media-file) t)
@@ -126,8 +126,8 @@
       "Accessor"
       (documentation 'media-file-file 'function)
  "@version{#2023-5-3}
-  @syntax[]{(gtk:media-file-file object) => file}
-  @syntax[]{(setf (gtk:media-file-file object) file)}
+  @syntax{(gtk:media-file-file object) => file}
+  @syntax{(setf (gtk:media-file-file object) file)}
   @argument[object]{a @class{gtk:media-file} object}
   @argument[file]{a @class{g:file} object with the file to play}
   @begin{short}
@@ -143,7 +143,7 @@
   @see-class{gtk:media-file}
   @see-class{g:file}")
 
-;;; --- media-file-input-stream ------------------------------------------------
+;;; --- gtk:media-file-input-stream --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-stream" 'media-file) t)
@@ -157,8 +157,8 @@
       "Accessor"
       (documentation 'media-file-input-stream 'function)
  "@version{#2023-5-3}
-  @syntax[]{(gtk:media-file-input-stream object) => stream}
-  @syntax[]{(setf (gtk:media-file-input-stream object) stream)}
+  @syntax{(gtk:media-file-input-stream object) => stream}
+  @syntax{(setf (gtk:media-file-input-stream object) stream)}
   @argument[object]{a @class{gtk:media-file} object}
   @argument[stream]{a @code{GInputStream} object with the stream to play from}
   @begin{short}
@@ -176,7 +176,7 @@
   @see-class{gtk:media-file}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_file_new ()
+;;; gtk_media_file_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline media-file-new))
@@ -184,7 +184,7 @@
 (defun media-file-new ()
  #+liber-documentation
  "@version{#2023-5-3}
-  @return{A new @class{gtk:media-file} object.}
+  @return{The new @class{gtk:media-file} object.}
   @short{Creates a new empty media file.}
   @see-class{gtk:media-file}"
   (make-instance 'media-file))
@@ -192,7 +192,7 @@
 (export 'media-file-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_file_new_for_filename ()
+;;; gtk_media_file_new_for_filename
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_file_new_for_filename" %media-file-new-for-filename)
@@ -203,7 +203,7 @@
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[filename]{a pathname or namestring with the file to open}
-  @return{A new @class{gtk:media-file} object playing @arg{filename}.}
+  @return{The new @class{gtk:media-file} object playing @arg{filename}.}
   @short{Creates a new media file.}
   This is a utility function that converts the given filename to a
   @class{g:file} object and calls the @fun{gtk:media-file-new-for-file}
@@ -216,7 +216,7 @@
 (export 'media-file-new-for-filename)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_file_new_for_resource ()
+;;; gtk_media_file_new_for_resource
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_file_new_for_resource" %media-file-new-for-resource)
@@ -227,7 +227,7 @@
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[path]{a string with the resource path to open}
-  @return{A new @class{gtk:media-file} object playing @arg{path}.}
+  @return{The new @class{gtk:media-file} object playing @arg{path}.}
   @short{Creates a new media file.}
   This is a utility function that converts the given resource to a
   @class{g:file} object and calls the @fun{gtk:media-file-new-for-file}
@@ -240,7 +240,7 @@
 (export 'media-file-new-for-resource)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_file_new_for_file ()
+;;; gtk_media_file_new_for_file
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline media-file-new-for-file))
@@ -249,7 +249,7 @@
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[file]{a @class{g:file} object with the file to play}
-  @return{A new @class{gtk:media-file} object playing @arg{file}.}
+  @return{The new @class{gtk:media-file} object playing @arg{file}.}
   @short{Creates a new media file.}
   @see-class{gtk:media-file}
   @see-class{g:file}"
@@ -259,7 +259,7 @@
 (export 'media-file-new-for-file)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_file_new_for_input_stream ()
+;;; gtk_media_file_new_for_input_stream
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline media-file-new-for-input-stream))
@@ -268,7 +268,7 @@
  #+liber-documentation
  "@version{#2023-5-3}
   @argument[stream]{a @code{GInputStream} object with the stream to play}
-  @return{A new @class{gtk:media-file} object playing @arg{stream}.}
+  @return{The new @class{gtk:media-file} object playing @arg{stream}.}
   @short{Creates a new media file to play @arg{stream}.}
   If you want the resulting media to be seekable, the stream should implement
   the @code{GSeekable} interface.
@@ -279,7 +279,7 @@
 (export 'media-file-new-for-input-stream)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_media_file_clear ()
+;;;gtk_media_file_clear
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_file_clear" media-file-clear) :void
@@ -293,7 +293,7 @@
 (export 'media-file-clear)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_file_set_filename ()
+;;; gtk_media_file_set_filename
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_file_set_filename" %media-file-set-filename) :void
@@ -317,7 +317,7 @@
 (export 'media-file-set-filename)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_media_file_set_resource ()
+;;; gtk_media_file_set_resource
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_media_file_set_resource" %media-file-set-resource) :void

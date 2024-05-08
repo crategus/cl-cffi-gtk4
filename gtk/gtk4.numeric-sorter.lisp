@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -95,7 +95,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- numeric-sorter-expression ----------------------------------------------
+;;; --- gtk:numeric-sorter-expression ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "expression" 'numeric-sorter) t)
@@ -108,8 +108,8 @@
       "Accessor"
       (documentation 'numeric-sorter-expression 'function)
  "@version{#2023-9-5}
-  @syntax[]{(gtk:numeric-sorter-expression object) => expression}
-  @syntax[]{(setf (gtk:numeric-sorter-expression object) expression)}
+  @syntax{(gtk:numeric-sorter-expression object) => expression}
+  @syntax{(setf (gtk:numeric-sorter-expression object) expression)}
   @argument[object]{a @class{gtk:numeric-sorter} object}
   @argument[expression]{a @class{gtk:expression} instance, or @code{nil}}
   @begin{short}
@@ -127,7 +127,7 @@
   @see-class{gtk:numeric-sorter}
   @see-class{gtk:expression}")
 
-;;; --- numeric-sorter-sort-order ----------------------------------------------
+;;; --- gtk:numeric-sorter-sort-order ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "sort-order" 'numeric-sorter) t)
@@ -141,8 +141,8 @@
       "Accessor"
       (documentation 'numeric-sorter-sort-order 'function)
  "@version{#2023-9-5}
-  @syntax[]{(gtk:numeric-sorter-sort-order object) => order}
-  @syntax[]{(setf (gtk:numeric-sorter-sort-order object) order)}
+  @syntax{(gtk:numeric-sorter-sort-order object) => order}
+  @syntax{(setf (gtk:numeric-sorter-sort-order object) order)}
   @argument[object]{a @class{gtk:numeric-sorter} object}
   @argument[order]{a @symbol{gtk:sort-type} value}
   @begin{short}
@@ -156,7 +156,7 @@
   @see-symbol{gtk:sort-type}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_numeric_sorter_new ()
+;;; gtk_numeric_sorter_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline numeric-sorter-new))
@@ -165,7 +165,7 @@
  #+liber-documentation
  "@version{#2023-9-13}
   @argument[expression]{a @class{gtk:expression} instance to evalute}
-  @return{A new @class{gtk:numeric-sorter} object.}
+  @return{The new @class{gtk:numeric-sorter} object.}
   @begin{short}
     Creates a new numeric sorter using the given @arg{expression}.
   @end{short}

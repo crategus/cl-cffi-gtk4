@@ -88,7 +88,7 @@
   @see-class{gsk:renderer}")
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_native_get_for_surface ()
+;;;gtk_native_get_for_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_get_for_surface" native-for-surface)
@@ -107,7 +107,7 @@
 (export 'native-for-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_get_surface ()
+;;; gtk_native_get_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_get_surface" native-surface) (g:object gdk:surface)
@@ -125,7 +125,7 @@
 (export 'native-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_get_renderer ()
+;;; gtk_native_get_renderer
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_get_renderer" native-renderer)
@@ -144,7 +144,7 @@
 (export 'native-renderer)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_get_surface_transform ()
+;;; gtk_native_get_surface_transform
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_get_surface_transform" %native-surface-transform)
@@ -156,7 +156,7 @@
 (defun native-surface-transform (native)
  #+liber-documentation
  "@version{2023-8-20}
-  @syntax[]{(gtk:native-surface-transform native) => x, y}
+  @syntax{(gtk:native-surface-transform native) => x, y}
   @argument[native]{a @class{gtk:native} widget}
   @begin{return}
     @arg{x} -- a double float with the x coordinate @br{}
@@ -176,7 +176,7 @@
 (export 'native-surface-transform)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_realize ()
+;;; gtk_native_realize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_realize" native-realize) :void
@@ -192,7 +192,7 @@
 (export 'native-realize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_native_unrealize ()
+;;; gtk_native_unrealize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_native_unrealize" native-unrealize) :void

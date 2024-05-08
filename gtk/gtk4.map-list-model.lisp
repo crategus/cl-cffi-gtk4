@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -128,7 +128,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- map-list-model-has-map -------------------------------------------------
+;;; --- gtk:map-list-model-has-map ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-map" 'map-list-model) t)
@@ -141,7 +141,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
       "Accessor"
       (documentation 'map-list-model-has-map 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:map-list-model-has-map object) => setting}
+  @syntax{(gtk:map-list-model-has-map object) => setting}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[setting]{a boolean whether a map function is set for this model}
   @begin{short}
@@ -152,7 +152,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   currently set on @arg{object}.
   @see-class{gtk:map-list-model}")
 
-;;; --- map-list-model-item-type -----------------------------------------------
+;;; --- gtk:map-list-model-item-type -------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'map-list-model) t)
@@ -171,7 +171,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
       "Accessor"
       (documentation 'map-list-model-item-type 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:map-list-model-item-type object) => gtype}
+  @syntax{(gtk:map-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -188,7 +188,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- map-list-model-model ---------------------------------------------------
+;;; --- gtk:map-list-model-model -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'map-list-model) t)
@@ -201,8 +201,8 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
       "Accessor"
       (documentation 'map-list-model-model 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:map-list-model-model object) => model}
-  @syntax[]{(setf (gtk:map-list-model-model object) model)}
+  @syntax{(gtk:map-list-model-model object) => model}
+  @syntax{(setf (gtk:map-list-model-model object) model)}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[model]{a @class{g:list-model} object that gets mapped}
   @begin{short}
@@ -218,7 +218,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   doing and have set up an appropriate map function.
   @see-class{gtk:map-list-model}")
 
-;;; --- map-list-model-n-items -------------------------------------------------
+;;; --- gtk:map-list-model-n-items ---------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'map-list-model) t)
@@ -232,7 +232,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
       "Accessor"
       (documentation 'map-list-model-n-items 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:map-list-model-n-items object) => n-items}
+  @syntax{(gtk:map-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:map-list-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -273,7 +273,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 (export 'map-list-model-map-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_map_list_model_new ()
+;;; gtk_map_list_model_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_map_list_model_new" %map-list-model-new)
@@ -289,7 +289,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
   @argument[model]{a @class{g:list-model} object to map or @code{nil} for none}
   @argument[func]{a @symbol{gkt:map-list-model-map-func} callback function
     to map items or @code{nil}}
-  @return{A new @class{gtk:map-list-model} object.}
+  @return{The new @class{gtk:map-list-model} object.}
   @begin{short}
     Creates a new @class{gtk:map-list-model} object for the given arguments.
   @end{short}
@@ -303,7 +303,7 @@ model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
 (export 'map-list-model-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_map_list_model_set_map_func ()
+;;; gtk_map_list_model_set_map_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_map_list_model_set_map_func" %map-list-model-set-map-func)

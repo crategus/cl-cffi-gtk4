@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -88,11 +88,11 @@ lambda (gesture n x y)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
-        @entry[n]{An integer with how many touch/button press happened with
+        @entry[n]{The integer with how many touch/button press happened with
           this one.}
-        @entry[x]{A double float with the X coordinate, in widget allocation
+        @entry[x]{The double float with the X coordinate, in widget allocation
           coordinates.}
-        @entry[y]{A double float with the Y coordinate, in widget allocation
+        @entry[y]{The double float with the Y coordinate, in widget allocation
           coordinates.}
       @end{table}
     @subheading{The \"released\" signal}
@@ -106,11 +106,11 @@ lambda (gesture n x y)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
-        @entry[n]{An integer with the number of presses that is paired with
+        @entry[n]{The integer with the number of presses that is paired with
           this release.}
-        @entry[x]{A double float with the X coordinate, in widget allocation
+        @entry[x]{The double float with the X coordinate, in widget allocation
           coordinates.}
-        @entry[y]{A double float with the Y coordinate, in widget allocation
+        @entry[y]{The double float with the Y coordinate, in widget allocation
           coordinates.}
       @end{table}
     @subheading{The \"stopped\" signal}
@@ -134,8 +134,8 @@ lambda (gesture x y button sequence)    :run-last
       @begin[code]{table}
         @entry[gesture]{The @class{gtk:gesture-click} object which received the
           signal.}
-        @entry[x]{A double float with the X coordinate of the event.}
-        @entry[y]{A double float with the Y coordinate of the event.}
+        @entry[x]{The double float with the X coordinate of the event.}
+        @entry[y]{The double float with the Y coordinate of the event.}
         @entry[button]{An unsigned integer with the button being released.}
         @entry[sequence]{A @class{gdk:event-sequence} instance being released.}
       @end{table}
@@ -144,7 +144,7 @@ lambda (gesture x y button sequence)    :run-last
   @see-class{gtk:gesture}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_click_new ()
+;;; gtk_gesture_click_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline gesture-click-new))
@@ -152,7 +152,7 @@ lambda (gesture x y button sequence)    :run-last
 (defun gesture-click-new ()
  #+liber-documentation
  "@version{2023-10-18}
-  @return{A newly created @class{gtk:gesture-click} object.}
+  @return{The newly created @class{gtk:gesture-click} object.}
   @begin{short}
     Returns a newly created gesture that recognizes single and multiple presses.
   @end{short}

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -82,7 +82,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- orientable-orientation -------------------------------------------------
+;;; --- gtk:orientable-orientation ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "orientation" 'orientable) t)
@@ -96,8 +96,8 @@
       "Accessor"
       (documentation 'orientable-orientation 'function)
  "@version{#2022-1-16}
-  @syntax[]{(gtk:orientable-orientation object) => orientation}
-  @syntax[]{(setf (gtk:orientable-orientation object) orientation)}
+  @syntax{(gtk:orientable-orientation object) => orientation}
+  @syntax{(setf (gtk:orientable-orientation object) orientation)}
   @argument[object]{a @class{gtk:orientable} widget}
   @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
   @begin{short}

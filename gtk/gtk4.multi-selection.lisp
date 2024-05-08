@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -103,7 +103,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- multi-selection-item-type ----------------------------------------------
+;;; --- gtk:multi-selection-item-type ------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'multi-selection) t)
@@ -122,7 +122,7 @@
       "Accessor"
       (documentation 'multi-selection-item-type 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:multi-selection-item-type object) => gtype}
+  @syntax{(gtk:multi-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -139,7 +139,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- multi-selection-model --------------------------------------------------
+;;; --- gtk:multi-selection-model ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'multi-selection) t)
@@ -151,8 +151,8 @@
       "Accessor"
       (documentation 'multi-selection-model 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:multi-selection-model object) => model}
-  @syntax[]{(setf (gtk:multi-selection-model object) model)}
+  @syntax{(gtk:multi-selection-model object) => model}
+  @syntax{(setf (gtk:multi-selection-model object) model)}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
@@ -166,7 +166,7 @@
   @see-class{gtk:multi-selection}
   @see-class{g:list-model}")
 
-;;; --- multi-selection-n-items ------------------------------------------------
+;;; --- gtk:multi-selection-n-items --------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'multi-selection) t)
@@ -179,7 +179,7 @@
       "Accessor"
       (documentation 'multi-selection-n-items 'function)
  "@version{2023-9-6}
-  @syntax[]{(gtk:multi-selection-n-items object) => n-items}
+  @syntax{(gtk:multi-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:multi-selection} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -191,7 +191,7 @@
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_multi_selection_new ()
+;;; gtk_multi_selection_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline multi-selection-new))
@@ -200,7 +200,7 @@
  #+liber-documentation
  "@version{#2023-9-6}
   @argument[model]{a @class{g:list-model} object to manage, or @code{nil}}
-  @return{A new @class{gtk:multi-selection} object.}
+  @return{The new @class{gtk:multi-selection} object.}
   @begin{short}
     Creates a new selection to handle @arg{model}.
   @end{short}
