@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -117,8 +117,8 @@
       "Accessor"
       (documentation 'list-header-child 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:list-header-child object) => child}
-  @syntax[]{(setf (gtk:list-header-child object) child)}
+  @syntax{(gtk:list-header-child object) => child}
+  @syntax{(setf (gtk:list-header-child object) child)}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -148,7 +148,7 @@
       "Accessor"
       (documentation 'list-header-end 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:list-header-end object) => end}
+  @syntax{(gtk:list-header-end object) => end}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[end]{an unsigned integer with the end position of the section}
   @begin{short}
@@ -175,7 +175,7 @@
       "Accessor"
       (documentation 'list-header-item 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:list-header-item object) => item}
+  @syntax{(gtk:list-header-item object) => item}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[item]{a @class{g:object} object with the item displayed}
   @begin{short}
@@ -204,7 +204,7 @@
       "Accessor"
       (documentation 'list-header-n-items 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:list-header-n-items object) => n-items}
+  @syntax{(gtk:list-header-n-items object) => n-items}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[n-items]{an unsigned integer with the number of items in the
     section}
@@ -232,7 +232,7 @@
       "Accessor"
       (documentation 'list-header-start 'function)
  "@version{2023-11-27}
-  @syntax[]{(gtk:list-header-start object) => start}
+  @syntax{(gtk:list-header-start object) => start}
   @argument[object]{a @class{gtk:list-header} object}
   @argument[start]{an unsigned integer with the start position of the section}
   @begin{short}

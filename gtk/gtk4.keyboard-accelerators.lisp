@@ -46,7 +46,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accelerator_valid ()
+;;; gtk_accelerator_valid
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_accelerator_valid" accelerator-valid) :boolean
@@ -60,7 +60,7 @@
     valid keyboard accelerator.
   @end{short}
   For example, the @code{GDK_KEY_a} keyval plus @code{GDK_CONTROL_MASK} is
-  valid - this is a @kbd{Ctrl+a} accelerator. But, you cannot, for instance, 
+  valid - this is a @kbd{Ctrl+a} accelerator. But, you cannot, for instance,
   use the @code{GDK_KEY_Control_L} keyval as an accelerator.
   @see-symbol{gdk:modifier-type}"
   (keyval :uint)
@@ -69,7 +69,7 @@
 (export 'accelerator-valid)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accelerator_parse ()
+;;; gtk_accelerator_parse
 ;;; ----------------------------------------------------------------------------
 
 (defun accelerator-parse (accelerator)
@@ -84,12 +84,12 @@
   @begin{short}
     Parses a string representing an accelerator.
   @end{short}
-  The format looks like @kbd{<Control>a} or @kbd{<Shift><Alt>F1} or 
+  The format looks like @kbd{<Control>a} or @kbd{<Shift><Alt>F1} or
   @kbd{<Release>z}. The last one is for key release.
 
   The parser is fairly liberal and allows lower or upper case, and also
-  abbreviations such as @kbd{<Ctl>} and @kbd{<Ctrl>}. Key names are parsed 
-  using the @fun{gdk:keyval-from-name} function. For character keys the name is 
+  abbreviations such as @kbd{<Ctl>} and @kbd{<Ctrl>}. Key names are parsed
+  using the @fun{gdk:keyval-from-name} function. For character keys the name is
   not the symbol, but the lowercase name, e.g. one would use @kbd{<Ctrl>minus}
   instead of @kbd{<Ctrl>-}.
 
@@ -124,16 +124,16 @@
 (export 'accelerator-parse)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accelerator_name ()
+;;; gtk_accelerator_name
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_accelerator_name" accelerator-name) :string
  #+liber-documentation
  "@version{2023-8-4}
   @argument[key]{an unsigned integer with the accelerator keyval}
-  @argument[mask]{a @symbol{gdk:modifier-type} value with the accelerator 
+  @argument[mask]{a @symbol{gdk:modifier-type} value with the accelerator
     modifier mask}
-  @return{A string with the accelerator name.}
+  @return{The string with the accelerator name.}
   @begin{short}
     Converts an accelerator keyval and modifier mask into a string parseable by
     the @fun{gtk:accelerator-parse} function.
@@ -155,16 +155,16 @@
 (export 'accelerator-name)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accelerator_get_label () -> accelerator-label
+;;; gtk_accelerator_get_label
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_accelerator_get_label" accelerator-label) :string
  #+liber-documentation
  "@version{2023-8-4}
   @argument[key]{an unsigned integer with the accelerator keyval}
-  @argument[mask]{a @symbol{gdk:modifier-type} value with the accelerator 
+  @argument[mask]{a @symbol{gdk:modifier-type} value with the accelerator
     modifier mask}
-  @return{A string representing the accelerator.}
+  @return{The string representing the accelerator.}
   @begin{short}
     Converts an accelerator keyval and modifier mask into a string which can be
     used to represent the accelerator to the user.
@@ -290,14 +290,14 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_accelerator_get_default_mod_mask ()
+;;; gtk_accelerator_get_default_mod_mask
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_accelerator_get_default_mod_mask"
                accelerator-default-mod-mask) gdk:modifier-type
  #+liber-documentation
  "@version{2023-8-4}
-  @return{A @symbol{gdk:modifier-type} value with the accelerator modifier 
+  @return{The @symbol{gdk:modifier-type} value with the accelerator modifier
     mask.}
   @begin{short}
     Gets the default modifier mask.

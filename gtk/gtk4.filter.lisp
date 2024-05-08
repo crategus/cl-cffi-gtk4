@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -61,7 +61,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkFilterMatch
+;;; GtkFilterMatch
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkFilterMatch" filter-match
@@ -76,33 +76,37 @@
       "GEnum"
       (liber:symbol-documentation 'filter-match)
  "@version{2023-8-16}
-  @begin{short}
-    Describes the known strictness of a filter.
-  @end{short}
-  Note that for filters where the strictness is not known, the @code{:some}
-  value is always an acceptable value, even if a filter does match all or no
-  items.
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkFilterMatch\" filter-match
   (:export t
    :type-initializer \"gtk_filter_match_get_type\")
   :some
   :none
   :all)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:some]{The filter matches some items, the @fun{gtk:filter-match}
-      function may return @em{true} or @em{false}.}
-    @entry[:none]{The filter does not match any item, the @fun{gtk:filter-match}
-      function will always return @em{false}.}
-    @entry[:all]{The filter matches all items, the @fun{gtk:filter-match}
-    function will alays return @em{true}.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:some]{The filter matches some items, the @fun{gtk:filter-match}
+        function may return @em{true} or @em{false}.}
+      @entry[:none]{The filter does not match any item, the
+        @fun{gtk:filter-match} function will always return @em{false}.}
+      @entry[:all]{The filter matches all items, the @fun{gtk:filter-match}
+        function will alays return @em{true}.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes the known strictness of a filter.
+  @end{short}
+  Note that for filters where the strictness is not known, the @code{:some}
+  value is always an acceptable value, even if a filter does match all or no
+  items.
   @see-class{gtk:filter}
   @see-function{gtk:filter-match}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkFilterChange
+;;; GtkFilterChange
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkFilterChange" filter-change
@@ -117,30 +121,34 @@
       "GEnum"
       (liber:symbol-documentation 'filter-change)
  "@version{2023-8-16}
-  @begin{short}
-    Describes changes in a filter in more detail and allows objects using the
-    filter to optimize refiltering items.
-  @end{short}
-  If you are writing an implementation and are not sure which value to pass,
-  the @code{:different} value is always a correct choice.
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkFilterChange\" filter-change
   (:export t
    :type-initializer \"gtk_filter_change_get_type\")
   :different
   :less-strict
   :more-strict)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:different]{The filter change cannot be described with any of the
-      other enumeration values.}
-    @entry[:less-strict]{The filter is less strict than it was before. All
-      items that it used to return @em{true} for still return @em{true}, others
-      now may, too.}
-    @entry[:more-strict]{The filter is more strict than it was before. All
-      items that it used to return @em{false} for still return @em{false},
-      others now may, too.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:different]{The filter change cannot be described with any of the
+        other enumeration values.}
+      @entry[:less-strict]{The filter is less strict than it was before. All
+        items that it used to return @em{true} for still return @em{true},
+        others now may, too.}
+      @entry[:more-strict]{The filter is more strict than it was before. All
+        items that it used to return @em{false} for still return @em{false},
+        others now may, too.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes changes in a filter in more detail and allows objects using the
+    filter to optimize refiltering items.
+  @end{short}
+  If you are writing an implementation and are not sure which value to pass,
+  the @code{:different} value is always a correct choice.
   @see-class{gtk:filter}")
 
 ;;; ----------------------------------------------------------------------------
@@ -158,7 +166,7 @@
 (setf (documentation 'filter 'type)
  "@version{2023-11-3}
   @begin{short}
-    A @class{gtk:filter} object describes the filtering to be performed by a
+    The @class{gtk:filter} object describes the filtering to be performed by a
     @class{gtk:filter-list-model} object.
   @end{short}
   The model will use the filter to determine if it should include items or not
@@ -187,14 +195,14 @@ lambda (filter change)    :run-last
       need to be changed, but only some. Refer to the @symbol{gtk:filter-change}
       documentation for details.
       @begin[code]{table}
-        @entry[filter]{A @class{gtk:filter} object.}
-        @entry[change]{A @symbol{gtk:filter-change} value.}
+        @entry[filter]{The @class{gtk:filter} object.}
+        @entry[change]{The @symbol{gtk:filter-change} value.}
       @end{table}
   @end{dictionary}
   @see-class{gtk:filter-list-model}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_filter_match ()
+;;; gtk_filter_match
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_filter_match" %filter-match) :boolean
@@ -225,14 +233,14 @@ lambda (filter change)    :run-last
 (export 'filter-match)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_filter_get_strictness ()
+;;; gtk_filter_get_strictness
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_filter_get_strictness" filter-strictness) filter-match
  #+liber-documentation
  "@version{2023-11-3}
   @argument[filter]{a @class{gtk:filter} object}
-  @return{A @symbol{gtk:filter-match} value with the strictness of
+  @return{The @symbol{gtk:filter-match} value with the strictness of
     @arg{filter}.}
   @begin{short}
     Gets the known strictness of the filter.
@@ -249,7 +257,7 @@ lambda (filter change)    :run-last
 (export 'filter-strictness)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_filter_changed ()
+;;; gtk_filter_changed
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_filter_changed" filter-changed) :void

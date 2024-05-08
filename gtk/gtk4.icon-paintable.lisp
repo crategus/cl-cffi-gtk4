@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -143,7 +143,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- icon-paintable-file ----------------------------------------------------
+;;; --- gtk:icon-paintable-file ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "file" 'icon-paintable) t)
@@ -156,7 +156,7 @@
       "Accessor"
       (documentation 'icon-paintable-file 'function)
  "@version{2023-8-30}
-  @syntax[]{(gtk:icon-paintable-file object) => file}
+  @syntax{(gtk:icon-paintable-file object) => file}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[file]{a @class{g-file} object for the icon, or @code{nil}}
   @begin{short}
@@ -169,7 +169,7 @@
   @see-class{gtk:icon-paintable}
   @see-class{g-file}")
 
-;;; --- icon-paintable-icon-name -----------------------------------------------
+;;; --- gtk:icon-paintable-icon-name -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "icon-name" 'icon-paintable) t)
@@ -182,7 +182,7 @@
       "Accessor"
       (documentation 'icon-paintable-icon-name 'function)
  "@version{2023-8-30}
-  @syntax[]{(gtk:icon-paintable-icon-name object) => name}
+  @syntax{(gtk:icon-paintable-icon-name object) => name}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[name]{a string with the themed icon name for the icon, or
     @code{nil} if its not a themed icon}
@@ -204,7 +204,7 @@
   @see-class{gtk:icon-theme}
   @see-function{gtk:icon-theme-lookup-icon}")
 
-;;; --- icon-paintable-is-symbolic ---------------------------------------------
+;;; --- gtk:icon-paintable-is-symbolic -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "is-symbolic" 'icon-paintable) t)
@@ -217,7 +217,7 @@
       "Accessor"
       (documentation 'icon-paintable-is-symbolic 'function)
  "@version{2023-8-30}
-  @syntax[]{(gtk:icon-paintable-is-symbolic object) => symbolic}
+  @syntax{(gtk:icon-paintable-is-symbolic object) => symbolic}
   @argument[object]{a @class{gtk:icon-paintable} object}
   @argument[symbolic]{@em{true} if the icon is symbolic, @em{false} otherwise}
   @begin{short}
@@ -234,7 +234,7 @@
   @see-class{gtk:image}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_icon_paintable_new_for_file ()
+;;; gtk_icon_paintable_new_for_file
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_icon_paintable_new_for_file" icon-paintable-new-for-file)
@@ -244,7 +244,7 @@
   @argument[file]{a @class{g-file} object}
   @argument[size]{an integer with the desired icon size}
   @argument[scale]{an integer with he desired scale}
-  @return{A @class{gtk:icon-paintable} object containing the icon.}
+  @return{The @class{gtk:icon-paintable} object containing the icon.}
   @begin{short}
     Creates a @class{gtk:icon-paintable} object for a file with a given size
     and scale.

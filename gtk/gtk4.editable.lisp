@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -223,8 +223,8 @@ lambda (editable start end)    :run-last
       @begin[code]{table}
         @entry[editable]{The @class{gtk:editable} widget which received the
           signal.}
-        @entry[start]{An integer with the start position.}
-        @entry[end]{An integer with the end position.}
+        @entry[start]{The integer with the start position.}
+        @entry[end]{The integer with the end position.}
       @end{table}
     @subheading{The \"insert-text\" signal}
       @begin{pre}
@@ -238,10 +238,10 @@ lambda (editable text length position)    :run-last
       @begin[code]{table}
         @entry[editable]{The @class{gtk:editable} widget which received the
           signal.}
-        @entry[text]{A string with the new text to insert.}
-        @entry[length]{An integer with the length of the new text, in bytes, or
+        @entry[text]{The string with the new text to insert.}
+        @entry[length]{The integer with the length of the new text, in bytes, or
           -1 if @arg{text} is null-terminated.}
-        @entry[position]{A pointer to an integer with the position, in
+        @entry[position]{The pointer to an integer with the position, in
           characters, at which to insert the new text. This is an in-out
           parameter. After the signal emission is finished, it should point
           after the newly inserted text. You get the Lisp value of
@@ -255,7 +255,7 @@ lambda (editable text length position)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- editable-cursor-position -----------------------------------------------
+;;; --- gtk:editable-cursor-position -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "cursor-position" 'editable) t)
@@ -269,8 +269,8 @@ lambda (editable text length position)    :run-last
       "Accessor"
       (documentation 'editable-cursor-position 'function)
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-cursor-position object) => position}
-  @syntax[]{(setf (gtk:editable-cursor-position object) position)}
+  @syntax{(gtk:editable-cursor-position object) => position}
+  @syntax{(setf (gtk:editable-cursor-position object) position)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[position]{an integer with the current cursor position}
   @begin{short}
@@ -280,7 +280,7 @@ lambda (editable text length position)    :run-last
   The current position of the insertion cursor in chars.
   @see-class{gtk:editable}")
 
-;;; --- editable-editable ------------------------------------------------------
+;;; --- gtk:editable-editable --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "editable" 'editable) t)
@@ -293,8 +293,8 @@ lambda (editable text length position)    :run-last
       "Accessor"
       (documentation 'editable-editable 'function)
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-editable object) => setting}
-  @syntax[]{(setf (gtk:editable-editable object) setting)}
+  @syntax{(gtk:editable-editable object) => setting}
+  @syntax{(setf (gtk:editable-editable object) setting)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[setting]{a boolean whether the user is allowed to edit the text in
     the widget}
@@ -307,7 +307,7 @@ lambda (editable text length position)    :run-last
   edit the text in the editable widget or not.
   @see-class{gtk:editable}")
 
-;;; --- editable-enable-undo ---------------------------------------------------
+;;; --- gtk:editable-enable-undo -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "enable-undo" 'editable) t)
@@ -320,8 +320,8 @@ lambda (editable text length position)    :run-last
       "Accessor"
       (documentation 'editable-enable-undo 'function)
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-enable-undo object) => setting}
-  @syntax[]{(setf (gtk:editable-enable-undo object) setting)}
+  @syntax{(gtk:editable-enable-undo object) => setting}
+  @syntax{(setf (gtk:editable-enable-undo object) setting)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[setting]{a boolean whether undo is enabled}
   @begin{short}
@@ -340,7 +340,7 @@ lambda (editable text length position)    :run-last
   @see-class{gtk:editable}
   @see-function{gtk:text-visibility}")
 
-;;; --- editable-max-width-chars -----------------------------------------------
+;;; --- gtk:editable-max-width-chars -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-width-chars" 'editable) t)
@@ -354,8 +354,8 @@ lambda (editable text length position)    :run-last
       "Accessor"
       (documentation 'editable-max-width-chars 'function)
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-max-width-chars object) => max}
-  @syntax[]{(setf (gtk:editable-max-width-chars object) max)}
+  @syntax{(gtk:editable-max-width-chars object) => max}
+  @syntax{(setf (gtk:editable-max-width-chars object) max)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[max]{an integer with the maximum width of the editable widget, in
     characters}
@@ -368,7 +368,7 @@ lambda (editable text length position)    :run-last
   @setf{gtk:editable-max-width-chars} function sets the desired maximum width.
   @see-class{gtk:editable}")
 
-;;; --- editable-selection-bound -----------------------------------------------
+;;; --- gtk:editable-selection-bound -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selection-bound" 'editable) t)
@@ -383,8 +383,8 @@ lambda (editable text length position)    :run-last
       "Accessor"
       (documentation 'editable-selection-bound 'function)
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-selection-bound object) => end}
-  @syntax[]{(setf (gtk:editable-selection-bound object) end)}
+  @syntax{(gtk:editable-selection-bound object) => end}
+  @syntax{(setf (gtk:editable-selection-bound object) end)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[end]{an integer with the position of the opposite end of the
     selection from the cursor in chars}
@@ -395,7 +395,7 @@ lambda (editable text length position)    :run-last
   The position of the opposite end of the selection from the cursor in chars.
   @see-class{gtk:editable}")
 
-;;; --- editable-text ----------------------------------------------------------
+;;; --- gtk:editable-text ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text" 'editable) t)
@@ -408,8 +408,8 @@ lambda (editable text length position)    :run-last
       "Accessor"
       (documentation 'editable-text 'function)
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-text object) => text}
-  @syntax[]{(setf (gtk:editable-text object) text)}
+  @syntax{(gtk:editable-text object) => text}
+  @syntax{(setf (gtk:editable-text object) text)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[text]{a string with the contents of the editable widget}
   @begin{short}
@@ -421,7 +421,7 @@ lambda (editable text length position)    :run-last
   widget to the given value, replacing the current contents.
   @see-class{gtk:editable}")
 
-;;; --- editable-width-chars ---------------------------------------------------
+;;; --- gtk:editable-width-chars -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "width-chars" 'editable) t)
@@ -435,8 +435,8 @@ lambda (editable text length position)    :run-last
       "Accessor"
       (documentation 'editable-width-chars 'function)
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-width-chars object) => width}
-  @syntax[]{(setf (gtk:editable-width-chars object) width)}
+  @syntax{(gtk:editable-width-chars object) => width}
+  @syntax{(setf (gtk:editable-width-chars object) width)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[width]{an integer with the width in chars}
   @begin{short}
@@ -452,7 +452,7 @@ lambda (editable text length position)    :run-last
   size reverts to the default size.
   @see-class{gtk:editable}")
 
-;;; --- editable-xalign --------------------------------------------------------
+;;; --- gtk:editable-xalign ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "xalign" 'editable) t)
@@ -467,8 +467,8 @@ lambda (editable text length position)    :run-last
       "Accessor"
       (documentation 'editable-xalign 'function)
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-xalign object) => align}
-  @syntax[]{(setf (gtk:editable-xalign object) align)}
+  @syntax{(gtk:editable-xalign object) => align}
+  @syntax{(setf (gtk:editable-xalign object) align)}
   @argument[object]{a @class{gtk:editable} widget}
   @argument[align]{a single float with the horizontal alignmemnt}
   @begin{short}
@@ -480,7 +480,7 @@ lambda (editable text length position)    :run-last
   @see-class{gtk:editable}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_get_chars () -> editable-chars
+;;; gtk_editable_get_chars
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_editable_get_chars" %editable-chars) :string
@@ -496,7 +496,7 @@ lambda (editable text length position)    :run-last
     value is 0}
   @argument[end]{an integer with the end position of text, the default value
     is -1}
-  @return{A string with the contents of the widget.}
+  @return{The string with the contents of the widget.}
   @begin{short}
     Retrieves a sequence of characters.
   @end{short}
@@ -511,7 +511,7 @@ lambda (editable text length position)    :run-last
 (export 'editable-chars)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_insert_text ()
+;;; gtk_editable_insert_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_editable_insert_text" %editable-insert-text) :void
@@ -526,7 +526,7 @@ lambda (editable text length position)    :run-last
   @argument[editable]{a @class{gtk:editable} widget}
   @argument[text]{a string with the text to insert}
   @argument[position]{an integer with the position where @arg{text} is inserted}
-  @return{An integer with the position after the newly inserted text.}
+  @return{The integer with the position after the newly inserted text.}
   @begin{short}
     Inserts @arg{text} into the contents of the widget, at position
     @arg{position}.
@@ -542,7 +542,7 @@ lambda (editable text length position)    :run-last
 (export 'editable-insert-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_delete_text ()
+;;; gtk_editable_delete_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_editable_delete_text" %editable-delete-text) :void
@@ -570,7 +570,7 @@ lambda (editable text length position)    :run-last
 (export 'editable-delete-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_get_selection_bounds () -> editable-selection-bounds
+;;; gtk_editable_get_selection_bounds
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_editable_get_selection_bounds" %editable-selection-bounds)
@@ -602,7 +602,7 @@ lambda (editable text length position)    :run-last
 (export 'editable-selection-bounds)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_select_region ()
+;;; gtk_editable_select_region
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_editable_select_region" %editable-select-region) :void
@@ -631,7 +631,7 @@ lambda (editable text length position)    :run-last
 (export 'editable-select-region)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_delete_selection ()
+;;; gtk_editable_delete_selection
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_editable_delete_selection" editable-delete-selection) :void
@@ -648,8 +648,8 @@ lambda (editable text length position)    :run-last
 (export 'editable-delete-selection)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_set_position ()
-;;; gtk_editable_get_position () -> editable-position
+;;; gtk_editable_set_position
+;;; gtk_editable_get_position
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf editable-position) (position editable)
@@ -662,8 +662,8 @@ lambda (editable text length position)    :run-last
 (cffi:defcfun ("gtk_editable_get_position" editable-position) :int
  #+liber-documentation
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-position editable) => position}
-  @syntax[]{(setf (gtk:editable-position editable) position)}
+  @syntax{(gtk:editable-position editable) => position}
+  @syntax{(setf (gtk:editable-position editable) position)}
   @argument[editable]{a @class{gtk:editable} widget}
   @argument[position]{an integer with the position of the cursor}
   @begin{short}
@@ -685,8 +685,8 @@ lambda (editable text length position)    :run-last
 (export 'editable-position)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_get_alignment ()
-;;; gtk_editable_set_alignment () -> editable-alignment
+;;; gtk_editable_get_alignment
+;;; gtk_editable_set_alignment
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf editable-alignment) (align editable)
@@ -695,8 +695,8 @@ lambda (editable text length position)    :run-last
 (defun editable-alignment (editable)
  #+liber-documentation
  "@version{2023-10-24}
-  @syntax[]{(gtk:editable-alignment editable) => align}
-  @syntax[]{(setf (gtk:editable-alignment editable) align)}
+  @syntax{(gtk:editable-alignment editable) => align}
+  @syntax{(setf (gtk:editable-alignment editable) align)}
   @argument[editable]{a @class{gtk:editable} widget}
   @argument[align]{a single float with the horizontal alignment, from 0.0 (left)
   to 1.0 (right), reversed for RTL layouts}

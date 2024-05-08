@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -104,7 +104,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- flatten-list-model-item-type -------------------------------------------
+;;; --- gtk:flatten-list-model-item-type ---------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type"
@@ -124,7 +124,7 @@
       "Accessor"
       (documentation 'flatten-list-model-item-type 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:flatten-list-model-item-type object) => gtype}
+  @syntax{(gtk:flatten-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -141,7 +141,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- flatten-list-model-model -----------------------------------------------
+;;; --- gtk:flatten-list-model-model -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'flatten-list-model) t)
@@ -153,8 +153,8 @@
       "Accessor"
       (documentation 'flatten-list-model-model 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:flatten-list-model-model object) => model}
-  @syntax[]{(setf (gtk:flatten-list-model-model object) model)}
+  @syntax{(gtk:flatten-list-model-model object) => model}
+  @syntax{(setf (gtk:flatten-list-model-model object) model)}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[model]{a @class{g:list-model} object that gets flattened}
   @begin{short}
@@ -167,7 +167,7 @@
   @see-class{gtk:flatten-list-model}
   @see-class{g:list-model}")
 
-;;; --- flatten-list-model-n-items ---------------------------------------------
+;;; --- gtk:flatten-list-model-n-items -----------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'flatten-list-model) t)
@@ -180,7 +180,7 @@
       "Accessor"
       (documentation 'flatten-list-model-n-items 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:flatten-list-model-n-items object) => n-items}
+  @syntax{(gtk:flatten-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:flatten-list-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -192,7 +192,7 @@
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_flatten_list_model_new ()
+;;; gtk_flatten_list_model_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline flatten-list-model-new))
@@ -201,7 +201,7 @@
  #+liber-documentation
  "@version{#2023-9-14}
   @argument[model]{a @class{g:list-model} object to be flattened}
-  @return{A new @class{gtk:flatten-list-model} object.}
+  @return{The new @class{gtk:flatten-list-model} object.}
   @begin{short}
     Creates a new @class{gtk:flatten-list-model} object that flattens
     @arg{model}.
@@ -214,7 +214,7 @@
 (export 'flatten-list-model-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_flatten_list_model_get_model_for_item ()
+;;; gtk_flatten_list_model_get_model_for_item
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_flatten_list_model_get_model_for_item"

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -76,13 +76,13 @@
   @see-class{gtk:text-view}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_im_multicontext_new ()
+;;; gtk_im_multicontext_new
 ;;; ----------------------------------------------------------------------------
 
 (defun im-multicontext-new ()
  #+liber-documentation
  "@version{2023-8-29}
-  @return{A new @class{gtk:im-multicontext} object.}
+  @return{The new @class{gtk:im-multicontext} object.}
   @begin{short}
     Creates a new input method context supporting multiple, switchable
     input methods.

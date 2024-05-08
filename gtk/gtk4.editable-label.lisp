@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -72,7 +72,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkEditableLabel
+;;; GtkEditableLabel
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkEditableLabel" editable-label
@@ -142,7 +142,7 @@ editablelabel[.editing]
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- editable-label-editing -------------------------------------------------
+;;; --- gtk:editable-label-editing ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "editing" 'editable-label) t)
@@ -155,8 +155,8 @@ editablelabel[.editing]
       "Accessor"
       (documentation 'editable-label-editing 'function)
  "@version{#2022-6-12}
-  @syntax[]{(gtk:editable-label-editing object) => setting}
-  @syntax[]{(setf (gtk:editable-label-editing object) setting)}
+  @syntax{(gtk:editable-label-editing object) => setting}
+  @syntax{(setf (gtk:editable-label-editing object) setting)}
   @argument[object]{a @class{gtk:editable-label} widget}
   @argument[setting]{a boolean whether the label is currently in editing mode}
   @begin{short}
@@ -168,7 +168,7 @@ editablelabel[.editing]
   @see-class{gtk:editable-label}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_label_new ()
+;;; gtk_editable_label_new
 ;;; ----------------------------------------------------------------------------
 
 (defun editable-label-new (text)
@@ -183,7 +183,7 @@ editablelabel[.editing]
 (export 'editable-label-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_label_start_editing ()
+;;; gtk_editable_label_start_editing
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_editable_label_start_editing" editable-label-start-editing)
@@ -198,7 +198,7 @@ editablelabel[.editing]
 (export 'editable-label-start-editing)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_editable_label_stop_editing ()
+;;; gtk_editable_label_stop_editing
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_editable_label_stop_editing" editable-label-stop-editing)

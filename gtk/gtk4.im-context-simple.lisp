@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -61,7 +61,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkIMContextSimple
+;;; GtkIMContextSimple
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkIMContextSimple" im-context-simple
@@ -113,13 +113,13 @@ dead_acute a
   @see-class{gtk:im-context}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_im_context_simple_new ()
+;;; gtk_im_context_simple_new
 ;;; ----------------------------------------------------------------------------
 
 (defun im-context-simple-new ()
  #+liber-documentation
  "@version{2023-8-29}
-  @return{A new @class{gtk:im-context-simple} object.}
+  @return{The new @class{gtk:im-context-simple} object.}
   @short{Creates a new simple input method.}
   @see-class{gtk:im-context-simple}"
   (make-instance 'im-context-simple))

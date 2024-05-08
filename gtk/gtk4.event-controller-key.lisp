@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -60,7 +60,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkEventControllerKey
+;;; GtkEventControllerKey
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkEventControllerKey" event-controller-key
@@ -98,8 +98,8 @@ lambda (controller keyval keycode state)    :run-last
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-key} object which
           received the signal.}
-        @entry[keyval]{An unsigned integer with the pressed key.}
-        @entry[keycode]{An unsigned integer with the raw code of the pressed
+        @entry[keyval]{The unsigned integer with the pressed key.}
+        @entry[keycode]{The unsigned integer with the raw code of the pressed
           key.}
         @entry[state]{The @symbol{gdk:modifier-type} bitmask representing the
           state of modifier keys and pointer buttons.}
@@ -114,8 +114,8 @@ lambda (controller keyval keycode state)    :run-last
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-key} object which
           received the signal.}
-        @entry[keyval]{An unsigned integer with the released key.}
-        @entry[keycode]{An unsigned integer with the raw code of the released
+        @entry[keyval]{The unsigned integer with the released key.}
+        @entry[keycode]{The unsigned integer with the raw code of the released
           key.}
         @entry[state]{The @symbol{gdk:modifier-type} bitmask representing the
           state of modifier keys and pointer buttons.}
@@ -131,14 +131,14 @@ lambda (controller state)    :run-last
           which received the signal.}
         @entry[state]{The @symbol{gdk:modifier-type} bitmask, representing the
           state of modifier keys and pointer buttons.}
-        @entry[Returns]{A not documented boolean.}
+        @entry[Returns]{The not documented boolean.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:event-controller-key-new}
   @see-class{gtk:event-controller}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_key_new ()
+;;; gtk_event_controller_key_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline event-controller-key-new))
@@ -154,9 +154,8 @@ lambda (controller state)    :run-last
 (export 'event-controller-key-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_key_get_im_context ()
-;;; gtk_event_controller_key_set_im_context ()
-;;; -> event-controller-key-im-context
+;;; gtk_event_controller_key_get_im_context
+;;; gtk_event_controller_key_set_im_context
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf event-controller-key-im-context) (value controller)
@@ -170,8 +169,8 @@ lambda (controller state)    :run-last
                event-controller-key-im-context) (g:object im-context)
  #+liber-documentation
  "@version{#2022-8-23}
-  @syntax[]{(gtk:event-controller-key-im-context controller) => context}
-  @syntax[]{(setf (gtk:event-controller-key-im-context controller) context)}
+  @syntax{(gtk:event-controller-key-im-context controller) => context}
+  @syntax{(setf (gtk:event-controller-key-im-context controller) context)}
   @argument[controller]{a @class{gtk:event-controller-key} object}
   @argument[context]{a @class{gtk:im-context} object}
   @begin{short}
@@ -187,7 +186,7 @@ lambda (controller state)    :run-last
 (export 'event-controller-key-im-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_key_forward ()
+;;; gtk_event_controller_key_forward
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_event_controller_key_forward" event-controller-key-forward)
@@ -196,12 +195,12 @@ lambda (controller state)    :run-last
  "@version{#2022-8-23}
   @argument[controller]{a @class{gtk:event-controller-key} object}
   @argument[widget]{a @class{gtk:widget} object}
-  @return{A boolean whether the widget handled the event}
+  @return{The boolean whether the widget handled the event}
   @begin{short}
     Forwards the current event of this controller to a widget.
   @end{short}
-  This function can only be used in handlers for the \"key-pressed\",
-  \"key-released\" or \"modifiers\" signals.
+  This function can only be used in handlers for the @code{\"key-pressed\"},
+  @code{\"key-released\"} or @code{\"modifiers\"} signals.
   @see-class{gtk:event-controller-key}
   @see-class{gtk:widget}"
   (controller (g:object event-controller-key))
@@ -210,7 +209,7 @@ lambda (controller state)    :run-last
 (export 'event-controller-key-forward)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_key_get_group () -> event-controller-key-group
+;;; gtk_event_controller_key_get_group
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_event_controller_key_get_group" event-controller-key-group)
@@ -218,7 +217,7 @@ lambda (controller state)    :run-last
  #+liber-documentation
  "@version{#2022-8-23}
   @argument[controller]{a @class{gtk:event-controller-key} object}
-  @return{An unsigned integer with the key group.}
+  @return{The unsigned integer with the key group.}
   @begin{short}
     Gets the key group of the current event of the controller.
   @end{short}

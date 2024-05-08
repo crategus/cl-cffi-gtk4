@@ -102,13 +102,8 @@
       "GFlags"
       (liber:symbol-documentation 'font-chooser-level)
  "@version{2023-8-28}
-  @begin{short}
-    The @symbol{gtk:font-chooser-level} flags specifies the granularity of font
-    selection that is desired in a font chooser.
-  @end{short}
-  These flags may be extended in the future. Applications should ignore
-  unknown values.
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GtkFontChooserLevel\" font-chooser-level
   (:export t
    :type-initializer \"gtk_font_chooser_level_get_type\")
@@ -117,14 +112,23 @@
   (:size       #.(ash 1 1))
   (:variations #.(ash 1 2))
   (:features   #.(ash 1 3)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:family]{Allow selecting a font family.}
-    @entry[:style]{Allow selecting a specific font face.}
-    @entry[:size]{Allow selecting a specific font size.}
-    @entry[:variations]{Allow changing OpenType font variation axes.}
-    @entry[:features]{Allow selecting specific OpenType font features.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:family]{Allow selecting a font family.}
+      @entry[:style]{Allow selecting a specific font face.}
+      @entry[:size]{Allow selecting a specific font size.}
+      @entry[:variations]{Allow changing OpenType font variation axes.}
+      @entry[:features]{Allow selecting specific OpenType font features.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The @symbol{gtk:font-chooser-level} flags specifies the granularity of font
+    selection that is desired in a font chooser.
+  @end{short}
+  These flags may be extended in the future. Applications should ignore
+  unknown values.
   @see-class{gtk:font-chooser}")
 
 ;;; ----------------------------------------------------------------------------
@@ -204,7 +208,7 @@ lambda (fontchooser fontname)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- font-chooser-font ------------------------------------------------------
+;;; --- gtk:font-chooser-font --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font" 'font-chooser) t)
@@ -217,8 +221,8 @@ lambda (fontchooser fontname)    :run-first
       "Accessor"
       (documentation 'font-chooser-font 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-chooser-font object) => fontname}
-  @syntax[]{(setf (gtk:font-chooser-font object) fontname)}
+  @syntax{(gtk:font-chooser-font object) => fontname}
+  @syntax{(setf (gtk:font-chooser-font object) fontname)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[fontname]{a string with the font name like \"Helvetica 12\" or
     \"Times Bold 18\"}
@@ -245,7 +249,7 @@ lambda (fontchooser fontname)    :run-first
   @see-class{gtk:font-chooser}
   @see-function{pango:font-description-equal}")
 
-;;; --- font-chooser-font-desc -------------------------------------------------
+;;; --- gtk:font-chooser-font-desc ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font-desc" 'font-chooser) t)
@@ -258,8 +262,8 @@ lambda (fontchooser fontname)    :run-first
       "Accessor"
       (documentation 'font-chooser-font-desc 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-chooser-font-desc object) => font-desc}
-  @syntax[]{(setf (gtk:font-chooser-font-desc object) font-desc)}
+  @syntax{(gtk:font-chooser-font-desc object) => font-desc}
+  @syntax{(setf (gtk:font-chooser-font-desc object) font-desc)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[font-desc]{a @class{pango:font-description} instance}
   @begin{short}
@@ -281,7 +285,7 @@ lambda (fontchooser fontname)    :run-first
   @see-class{pango:font-description}
   @see-function{pango:font-description-equal}")
 
-;;; --- font-chooser-font-features ---------------------------------------------
+;;; --- gtk:font-chooser-font-features -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font-features" 'font-chooser) t)
@@ -295,7 +299,7 @@ lambda (fontchooser fontname)    :run-first
       "Accessor"
       (documentation 'font-chooser-font-features 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-chooser-font-features object) => features}
+  @syntax{(gtk:font-chooser-font-features object) => features}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[features]{a string with the currently selected font features}
   @begin{short}
@@ -313,7 +317,7 @@ lambda (fontchooser fontname)    :run-first
   @end{dictionary}
   @see-class{gtk:font-chooser}")
 
-;;; --- font-chooser-language --------------------------------------------------
+;;; --- gtk:font-chooser-language ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "language" 'font-chooser) t)
@@ -326,8 +330,8 @@ lambda (fontchooser fontname)    :run-first
       "Accessor"
       (documentation 'font-chooser-language 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-chooser-language object) => language}
-  @syntax[]{(setf (gtk:font-chooser-language object) language)}
+  @syntax{(gtk:font-chooser-language object) => language}
+  @syntax{(setf (gtk:font-chooser-language object) language)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[language]{a RFC-3066 format string representing the language}
   @begin{short}
@@ -350,7 +354,7 @@ lambda (fontchooser fontname)    :run-first
   @see-class{gtk:font-chooser}
   @see-function{pango:language-to-string}")
 
-;;; --- font-chooser-level -----------------------------------------------------
+;;; --- gtk:font-chooser-level -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "level" 'font-chooser) t)
@@ -364,8 +368,8 @@ lambda (fontchooser fontname)    :run-first
       "Accessor"
       (documentation 'font-chooser-level 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-chooser-level object) => level}
-  @syntax[]{(setf (gtk:font-chooser-level object) level)}
+  @syntax{(gtk:font-chooser-level object) => level}
+  @syntax{(setf (gtk:font-chooser-level object) level)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[level]{the desired level of granularity of type
     @symbol{gtk:font-chooser-level}}
@@ -384,7 +388,7 @@ lambda (fontchooser fontname)    :run-first
   @see-class{gtk:font-chooser}
   @see-symbol{gtk:font-chooser-level}")
 
-;;; --- font-chooser-preview-text ----------------------------------------------
+;;; --- gtk:font-chooser-preview-text ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "preview-text" 'font-chooser) t)
@@ -397,8 +401,8 @@ lambda (fontchooser fontname)    :run-first
       "Accessor"
       (documentation 'font-chooser-preview-text 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-chooser-preview-text object) => text}
-  @syntax[]{(setf (gtk:font-chooser-preview-text object) text)}
+  @syntax{(gtk:font-chooser-preview-text object) => text}
+  @syntax{(setf (gtk:font-chooser-preview-text object) text)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[text]{a string with the text to display in the preview area}
   @begin{short}
@@ -417,7 +421,7 @@ lambda (fontchooser fontname)    :run-first
   @see-class{gtk:font-chooser}
   @see-function{pango:language-sample-string}")
 
-;;; --- font-chooser-show-preview-entry ----------------------------------------
+;;; --- gtk:font-chooser-show-preview-entry ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-preview-entry"
@@ -432,8 +436,8 @@ lambda (fontchooser fontname)    :run-first
       "Accessor"
       (documentation 'font-chooser-show-preview-entry 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-chooser-show-preview-entry object) => show-entry}
-  @syntax[]{(setf (gtk:font-chooser-show-preview-entry object) show-entry)}
+  @syntax{(gtk:font-chooser-show-preview-entry object) => show-entry}
+  @syntax{(setf (gtk:font-chooser-show-preview-entry object) show-entry)}
   @argument[object]{a @class{gtk:font-chooser} object}
   @argument[show-entry]{a boolean whether to show the editable preview entry or
     not}
@@ -450,7 +454,7 @@ lambda (fontchooser fontname)    :run-first
   @see-class{gtk:font-chooser}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_font_chooser_get_font_family () -> font-chooser-font-family
+;;; gtk_font_chooser_get_font_family
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_chooser_get_font_family" font-chooser-font-family)
@@ -489,7 +493,7 @@ lambda (fontchooser fontname)    :run-first
 (export 'font-chooser-font-family)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_font_chooser_get_font_face () -> font-chooser-font-face
+;;; gtk_font_chooser_get_font_face
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_chooser_get_font_face" font-chooser-font-face)
@@ -518,7 +522,7 @@ lambda (fontchooser fontname)    :run-first
 (export 'font-chooser-font-face)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_font_chooser_get_font_size () -> font-chooser-font-size
+;;; gtk_font_chooser_get_font_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_chooser_get_font_size" font-chooser-font-size) :int
@@ -575,7 +579,7 @@ lambda (fontchooser fontname)    :run-first
 (export 'font-filter-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_font_chooser_set_filter_func ()
+;;; gtk_font_chooser_set_filter_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_chooser_set_filter_func" %font-chooser-set-filter-func)
@@ -632,8 +636,8 @@ lambda (fontchooser fontname)    :run-first
 (export 'font-chooser-set-filter-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_font_chooser_set_font_map ()
-;;; gtk_font_chooser_get_font_map () -> font-chooser-font-map
+;;; gtk_font_chooser_set_font_map
+;;; gtk_font_chooser_get_font_map
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf font-chooser-font-map) (fontmap fontchooser)
@@ -647,8 +651,8 @@ lambda (fontchooser fontname)    :run-first
     (g:object pango:font-map)
  #+liber-documentation
  "@version{#2023-8-28}
-  @syntax[]{(gtk:font-chooser-font-map fontchooser) => fontmap}
-  @syntax[]{(setf (gtk:font-chooser-font-map fontchooser) fontmap)}
+  @syntax{(gtk:font-chooser-font-map fontchooser) => fontmap}
+  @syntax{(setf (gtk:font-chooser-font-map fontchooser) fontmap)}
   @argument[fontchooser]{a @class{gtk:font-chooser} widget}
   @argument[fontmap]{a @class{pango:font-map} object, or @code{nil}}
   @begin{short}

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -129,7 +129,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- filter-list-model-filter -----------------------------------------------
+;;; --- gtk:filter-list-model-filter -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "filter" 'filter-list-model) t)
@@ -141,8 +141,8 @@
       "Accessor"
       (documentation 'filter-list-model-filter 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:filter-list-model-filter object) => filter}
-  @syntax[]{(setf (gtk:filter-list-model-filter object) filter)}
+  @syntax{(gtk:filter-list-model-filter object) => filter}
+  @syntax{(setf (gtk:filter-list-model-filter object) filter)}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[filter]{a @class{gtk:filter} object to use or @code{nil} to not
     filter items}
@@ -156,7 +156,7 @@
   @see-class{gtk:filter-list-model}
   @see-class{gtk:filter}")
 
-;;; --- filter-list-model-incremental ------------------------------------------
+;;; --- gtk:filter-list-model-incremental --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "incremental"
@@ -170,8 +170,8 @@
       "Accessor"
       (documentation 'filter-list-model-incremental 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:filter-list-model-incremental object) => incremental}
-  @syntax[]{(setf (gtk:filter-list-model-incremental object) incremental)}
+  @syntax{(gtk:filter-list-model-incremental object) => incremental}
+  @syntax{(setf (gtk:filter-list-model-incremental object) incremental)}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[incremental]{@em{true} if incremental filtering is enabled}
   @begin{short}
@@ -197,7 +197,7 @@
   @see-class{gtk:filter-list-model}
   @see-function{gtk:filter-list-model-pending}")
 
-;;; --- filter-list-model-item-type --------------------------------------------
+;;; --- gtk:filter-list-model-item-type ----------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type"
@@ -217,7 +217,7 @@
       "Accessor"
       (documentation 'filter-list-model-item-type 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:filter-list-model-item-type object) => gtype}
+  @syntax{(gtk:filter-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -234,7 +234,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- filter-list-model-model ------------------------------------------------
+;;; --- gtk:filter-list-model-model --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'filter-list-model) t)
@@ -246,8 +246,8 @@
       "Accessor"
       (documentation 'filter-list-model-model 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:filter-list-model-model object) => model}
-  @syntax[]{(setf (gtk:filter-list-model-model object) model)}
+  @syntax{(gtk:filter-list-model-model object) => model}
+  @syntax{(setf (gtk:filter-list-model-model object) model)}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[model]{a @class{g:list-model} object that gets filtered}
   @begin{short}
@@ -264,7 +264,7 @@
   @see-class{gtk:filter-list-model}
   @see-class{g:list-model}")
 
-;;; --- filter-list-model-n-items ----------------------------------------------
+;;; --- gtk:filter-list-model-n-items ------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'filter-list-model) t)
@@ -277,7 +277,7 @@
       "Accessor"
       (documentation 'filter-list-model-n-items 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:filter-list-model-n-items object) => n-items}
+  @syntax{(gtk:filter-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -288,7 +288,7 @@
   @see-class{gtk:filter-list-model}
   @see-function{g:list-model-n-items}")
 
-;;; --- filter-list-model-pending ----------------------------------------------
+;;; --- gtk:filter-list-model-pending ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pending" 'filter-list-model) t)
@@ -301,7 +301,7 @@
       "Accessor"
       (documentation 'filter-list-model-pending 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:filter-list-model-pending object) => pending}
+  @syntax{(gtk:filter-list-model-pending object) => pending}
   @argument[object]{a @class{gtk:filter-list-model} object}
   @argument[pending]{an unsigned integer with the number of items not yet
     filtered.}
@@ -328,7 +328,7 @@
   @see-function{gtk:filter-list-model-incremental}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_filter_list_model_new ()
+;;; gtk_filter_list_model_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline filter-list-model-new))

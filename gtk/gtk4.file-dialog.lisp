@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -123,7 +123,7 @@
 (setf (documentation 'file-dialog 'type)
  "@version{2023-7-22}
   @begin{short}
-    A @class{gtk:file-dialog} object collects the arguments that are needed to
+    The @class{gtk:file-dialog} object collects the arguments that are needed to
     present a file chooser dialog to the user, such as a title for the dialog
     and whether it should be modal.
   @end{short}
@@ -150,7 +150,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- file-dialog-accept-label -----------------------------------------------
+;;; --- gtk:file-dialog-accept-label -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accept-label" 'file-dialog) t)
@@ -162,8 +162,8 @@
       "Accessor"
       (documentation 'file-dialog-accept-label 'function)
  "@version{2023-7-22}
-  @syntax[]{(gtk:file-dialog-accept-label object) => label}
-  @syntax[]{(setf (gtk:file-dialog-accept-label object) label)}
+  @syntax{(gtk:file-dialog-accept-label object) => label}
+  @syntax{(setf (gtk:file-dialog-accept-label object) label)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[label]{a string with the accept label}
   @begin{short}
@@ -181,7 +181,7 @@
   Since 4.10
   @see-class{gtk:file-dialog}")
 
-;;; --- file-dialog-default-filter ---------------------------------------------
+;;; --- gtk:file-dialog-default-filter -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-filter" 'file-dialog) t)
@@ -200,8 +200,8 @@
       "Accessor"
       (documentation 'file-dialog-default-filter 'function)
  "@version{2023-7-22}
-  @syntax[]{(gtk:file-dialog-default-filter object) => filter}
-  @syntax[]{(setf (gtk:file-dialog-default-filter object) filter)}
+  @syntax{(gtk:file-dialog-default-filter object) => filter}
+  @syntax{(setf (gtk:file-dialog-default-filter object) filter)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[filter]{a @class{gtk:file-filter} object}
   @begin{short}
@@ -221,7 +221,7 @@
   @see-class{gtk:file-filter}
   @see-function{gtk:file-dialog-filters}")
 
-;;; --- file-dialog-filters ----------------------------------------------------
+;;; --- gtk:file-dialog-filters ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "filters" 'file-dialog) t)
@@ -233,8 +233,8 @@
       "Accessor"
       (documentation 'file-dialog-filters 'function)
  "@version{2023-7-22}
-  @syntax[]{(gtk:file-dialog-filters object) => filters}
-  @syntax[]{(setf (gtk:file-dialog-filters object) filters)}
+  @syntax{(gtk:file-dialog-filters object) => filters}
+  @syntax{(setf (gtk:file-dialog-filters object) filters)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[filters]{a @class{g:list-model} object with the
     @class{gtk:file-filter} objects}
@@ -252,7 +252,7 @@
   @see-class{g:list-model}
   @see-function{gtk:file-dialog-default-filter}")
 
-;;; --- file-dialog-initial-file -----------------------------------------------
+;;; --- gtk:file-dialog-initial-file -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "initial-file" 'file-dialog) t)
@@ -267,8 +267,8 @@
       "Accessor"
       (documentation 'file-dialog-initial-file 'function)
  "@version{2023-7-22}
-  @syntax[]{(gtk:file-dialog-initial-file object) => file}
-  @syntax[]{(setf (gtk:file-dialog-initial-file object) file)}
+  @syntax{(gtk:file-dialog-initial-file object) => file}
+  @syntax{(setf (gtk:file-dialog-initial-file object) file)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[file]{a @class{g:file} object with the file}
   @begin{short}
@@ -289,7 +289,7 @@
   @see-function{gtk:file-dialog-initial-folder}
   @see-function{gtk:file-dialog-initial-name}")
 
-;;; --- file-dialog-initial-folder -----------------------------------------------
+;;; --- gtk:file-dialog-initial-folder -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "initial-folder" 'file-dialog) t)
@@ -302,8 +302,8 @@
       "Accessor"
       (documentation 'file-dialog-initial-folder 'function)
  "@version{2023-7-22}
-  @syntax[]{(gtk:file-dialog-initial-folder object) => folder}
-  @syntax[]{(setf (gtk:file-dialog-initial-folder object) folder)}
+  @syntax{(gtk:file-dialog-initial-folder object) => folder}
+  @syntax{(setf (gtk:file-dialog-initial-folder object) folder)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[folder]{a @class{g:file} object with the folder}
   @begin{short}
@@ -318,7 +318,7 @@
   @see-class{gtk:file-dialog}
   @see-class{g:file}")
 
-;;; --- file-dialog-initial-name -----------------------------------------------
+;;; --- gtk:file-dialog-initial-name -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "initial-name" 'file-dialog) t)
@@ -331,8 +331,8 @@
       "Accessor"
       (documentation 'file-dialog-initial-name 'function)
  "@version{2023-7-22}
-  @syntax[]{(gtk:file-dialog-initial-name object) => name}
-  @syntax[]{(setf (gtk:file-dialog-initial-name object) name)}
+  @syntax{(gtk:file-dialog-initial-name object) => name}
+  @syntax{(setf (gtk:file-dialog-initial-name object) name)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[name]{a string with the name}
   @begin{short}
@@ -340,8 +340,8 @@
     @class{gtk:file-dialog} class.
   @end{short}
   The @fun{gtk:file-dialog-initial-name} function gets the name for the file
-  that should be initially set. The @setf{gtk:file-dialog-initial-name} function 
-  sets the name. For saving dialogs, this will usually be pre-entered into the 
+  that should be initially set. The @setf{gtk:file-dialog-initial-name} function
+  sets the name. For saving dialogs, this will usually be pre-entered into the
   name field.
 
   If a file with this name already exists in the directory set via the
@@ -352,7 +352,7 @@
   @see-class{gtk:file-dialog}
   @see-function{gtk:file-dialog-initial-folder}")
 
-;;; --- file-dialog-modal ------------------------------------------------------
+;;; --- gtk:file-dialog-modal --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'file-dialog) t)
@@ -365,8 +365,8 @@
       "Accessor"
       (documentation 'file-dialog-modal 'function)
  "@version{2023-7-22}
-  @syntax[]{(gtk:file-dialog-modal object) => modal}
-  @syntax[]{(setf (gtk:file-dialog-modal object) modal)}
+  @syntax{(gtk:file-dialog-modal object) => modal}
+  @syntax{(setf (gtk:file-dialog-modal object) modal)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[modal]{a boolean whether the file chooser dialog is modal}
   @begin{short}
@@ -380,7 +380,7 @@
   Since 4.10
   @see-class{gtk:file-dialog}")
 
-;;; --- file-dialog-title ------------------------------------------------------
+;;; --- gtk:file-dialog-title --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'file-dialog) t)
@@ -393,8 +393,8 @@
       "Accessor"
       (documentation 'file-dialog-title 'function)
  "@version{2023-7-22}
-  @syntax[]{(gtk:file-dialog-title object) => title}
-  @syntax[]{(setf (gtk:file-dialog-title object) title)}
+  @syntax{(gtk:file-dialog-title object) => title}
+  @syntax{(setf (gtk:file-dialog-title object) title)}
   @argument[object]{a @class{gtk:file-dialog} object}
   @argument[title]{a string with the title}
   @begin{short}
@@ -402,7 +402,7 @@
     @class{gtk:file-dialog} class.
   @end{short}
   The @fun{gtk:file-dialog-title} function returns the title that will be shown
-  on the file chooser dialog. The @setf{gtk:file-dialog-title} function sets the 
+  on the file chooser dialog. The @setf{gtk:file-dialog-title} function sets the
   title.
 
   Since 4.10
@@ -486,7 +486,7 @@
  "@version{2023-7-27}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{A @class{g:file} object with the file that was selected, otherwise
+  @return{The @class{g:file} object with the file that was selected, otherwise
     @code{nil}.}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-open} function call and returns the
@@ -563,7 +563,7 @@
  "@version{#2023-7-22}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{A @class{g:list-model} object with the @class{g:file} objects that
+  @return{The @class{g:list-model} object with the @class{g:file} objects that
     were selected, otherwise @code{nil}.}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-open-multiple} function call and returns
@@ -638,7 +638,7 @@
  "@version{#2023-7-22}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{A @class{g:file} object with the file that was selected, otherwise
+  @return{The @class{g:file} object with the file that was selected, otherwise
     @code{nil}.}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-save} function call and returns the
@@ -715,7 +715,7 @@
  "@version{#2023-7-22}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{A @class{g:file} object with the file that was selected, otherwise
+  @return{The @class{g:file} object with the file that was selected, otherwise
     @code{nil}.}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-select-folder} function call and returns
@@ -795,7 +795,7 @@
  "@version{#2023-7-22}
   @argument[dialog]{a @class{gtk:file-dialog} object}
   @argument[result]{a @class{g:async-result} object}
-  @return{A @class{g:file} object with the file that was selected, otherwise
+  @return{The @class{g:file} object with the file that was selected, otherwise
     @code{nil}.}
   @begin{short}
     Finishes the @fun{gtk:file-dialog-select-multiple-folders} function call

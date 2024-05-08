@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -64,7 +64,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkEventControllerFocus
+;;; GtkEventControllerFocus
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkEventControllerFocus" event-controller-focus
@@ -130,7 +130,7 @@ lambda (controller)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- event-controller-focus-contains-focus ----------------------------------
+;;; --- gtk:event-controller-focus-contains-focus ------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "contains-focus"
@@ -147,7 +147,7 @@ lambda (controller)    :run-last
       "Accessor"
       (documentation 'event-controller-focus-contains-focus 'function)
  "@version{#2022-8-23}
-  @syntax[]{(gtk:event-controller-focus-contains-focus object) => contains}
+  @syntax{(gtk:event-controller-focus-contains-focus object) => contains}
   @argument[object]{a @class{gtk:event-controller-focus} object}
   @argument[contains]{a boolean whether focus is within @arg{object}}
   @begin{short}
@@ -158,7 +158,7 @@ lambda (controller)    :run-last
   if focus is within the controllers widget or one of its children.
   @see-class{gtk:event-controller-focus}")
 
-;;; --- event-controller-focus-is-focus ----------------------------------------
+;;; --- gtk:event-controller-focus-is-focus ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "is-focus"
@@ -174,7 +174,7 @@ lambda (controller)    :run-last
       "Accessor"
       (documentation 'event-controller-focus-is-focus 'function)
  "@version{#2022-8-23}
-  @syntax[]{(gtk:event-controller-focus-is-focus object) => is-focus}
+  @syntax{(gtk:event-controller-focus-is-focus object) => is-focus}
   @argument[object]{a @class{gtk:event-controller-focus} object}
   @argument[is-focus]{a boolean whether focus is within the controllers widget,
     but not one of its children}
@@ -187,7 +187,7 @@ lambda (controller)    :run-last
   @see-class{gtk:event-controller-focus}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_focus_new ()
+;;; gtk_event_controller_focus_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline event-controller-focus-new))
@@ -195,7 +195,7 @@ lambda (controller)    :run-last
 (defun event-controller-focus-new ()
  #+liber-documentation
  "@version{#2022-8-23}
-  @return{A new @class{gtk:event-controller-focus} object.}
+  @return{The new @class{gtk:event-controller-focus} object.}
   @short{Creates a new event controller that will handle focus events.}
   @see-class{gtk:event-controller-focus}"
   (make-instance 'event-controller-focus))

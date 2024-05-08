@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -77,7 +77,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkIMContext
+;;; GtkIMContext
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkIMContext" im-context
@@ -138,7 +138,7 @@ lambda (context str)    :run-last
       @begin[code]{table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
-        @entry[str]{A string with the completed character(s) entered by the
+        @entry[str]{The string with the completed character(s) entered by the
           user.}
       @end{table}
     @subheading{The \"delete-surrounding\" signal}
@@ -150,10 +150,11 @@ lambda (context offset n-chars)    :run-last
       @begin[code]{table}
         @entry[context]{The @class{gtk:im-context} object on which the signal
           is emitted.}
-        @entry[offset]{An integer with the character offset from the cursor
+        @entry[offset]{The integer with the character offset from the cursor
           position of the text to be deleted. A negative value indicates a
           position before the cursor.}
-        @entry[n-chars]{An integer with the number of characters to be deleted.}
+        @entry[n-chars]{The integer with the number of characters to be
+          deleted.}
         @entry[Returns]{@em{True} if the signal was handled.}
       @end{table}
     @subheading{The \"preedit-changed\" signal}
@@ -210,7 +211,7 @@ lambda (context)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- im-context-input-hints -------------------------------------------------
+;;; --- gtk:im-context-input-hints ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-hints" 'im-context) t)
@@ -223,8 +224,8 @@ lambda (context)    :run-last
       "Accessor"
       (documentation 'im-context-input-hints 'function)
  "@version{2023-8-29}
-  @syntax[]{(gtk:im-context-input-hints object) => hints}
-  @syntax[]{(setf (gtk:im-context-input-hints object) hints)}
+  @syntax{(gtk:im-context-input-hints object) => hints}
+  @syntax{(setf (gtk:im-context-input-hints object) hints)}
   @argument[object]{a @class{gtk:im-context} object}
   @argument[hints]{a value of the @symbol{gtk:input-hints} enumeration}
   @begin{short}
@@ -234,7 +235,7 @@ lambda (context)    :run-last
   Hints for the text field behaviour.
   @see-class{gtk:im-context}")
 
-;;; --- im-context-input-purpose -----------------------------------------------
+;;; --- gtk:im-context-input-purpose -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "input-purpose" 'im-context) t)
@@ -248,8 +249,8 @@ lambda (context)    :run-last
       "Accessor"
       (documentation 'im-context-input-purpose 'function)
  "@version{2023-8-29}
-  @syntax[]{(gtk:im-context-input-purpose object) => purpose}
-  @syntax[]{(setf (gtk:im-context-input-purpose object) purpose)}
+  @syntax{(gtk:im-context-input-purpose object) => purpose}
+  @syntax{(setf (gtk:im-context-input-purpose object) purpose)}
   @argument[object]{a @class{gtk:im-context} object}
   @argument[purpose]{a value of the @symbol{gtk:input-purpose}
     enumeration}

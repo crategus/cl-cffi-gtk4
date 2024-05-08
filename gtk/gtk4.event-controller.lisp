@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -82,7 +82,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkPropagationPhase
+;;; GtkPropagationPhase
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkPropagationPhase" propagation-phase
@@ -98,11 +98,8 @@
       "GEnum"
       (liber:symbol-documentation 'propagation-phase)
  "@version{#2022-8-22}
-  @begin{short}
-    Describes the stage at which events are fed into a
-    @class{gtk:event-controller} object.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkPropagationPhase\" propagation-phase
   (:export t
    :type-initializer \"gtk_propagation_phase_get_type\")
@@ -110,24 +107,31 @@
   (:capture 1)
   (:bubble 2)
   (:target 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{Events are not delivered.}
-    @entry[:capture]{Events are delivered in the capture phase. The capture
-      phase happens before the bubble phase, runs from the toplevel down to the
-      event widget. This option should only be used on containers that might
-      possibly handle events before their children do.}
-    @entry[:bubble]{Events are delivered in the bubble phase. The bubble phase
-      happens after the capture phase, and before the default handlers are run.
-      This phase runs from the event widget, up to the toplevel.}
-    @entry[:target]{Events are delivered in the default widget event handlers,
-      note that widget implementations must chain up on button, motion, touch
-      and grab broken handlers for controllers in this phase to be run.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{Events are not delivered.}
+      @entry[:capture]{Events are delivered in the capture phase. The capture
+        phase happens before the bubble phase, runs from the toplevel down to
+        the event widget. This option should only be used on containers that
+        might possibly handle events before their children do.}
+      @entry[:bubble]{Events are delivered in the bubble phase. The bubble phase
+        happens after the capture phase, and before the default handlers are
+        run. This phase runs from the event widget, up to the toplevel.}
+      @entry[:target]{Events are delivered in the default widget event handlers,
+        note that widget implementations must chain up on button, motion, touch
+        and grab broken handlers for controllers in this phase to be run.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes the stage at which events are fed into a
+    @class{gtk:event-controller} object.
+  @end{short}
   @see-class{gtk:event-controller}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkPropagationLimit
+;;; GtkPropagationLimit
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkPropagationLimit" propagation-limit
@@ -141,28 +145,32 @@
       "GEnum"
       (liber:symbol-documentation 'propagation-limit)
  "@version{#2022-8-22}
-  @begin{short}
-    Describes limits of a @class{gtk:event-controller} object for handling
-    events targeting other widgets.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkPropagationLimit\" propagation-limit
   (:export t
    :type-initializer \"gtk_propagation_limit_get_type\")
   (:none 0)
   (:same-native 1))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{Events are handled regardless of what their target is.}
-    @entry[:same-native]{Events are only handled if their target is in the same
-    @class{gtk:native} widget as the event controllers widget. Note that some
-      event types have two targets (origin and destination).}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{Events are handled regardless of what their target is.}
+      @entry[:same-native]{Events are only handled if their target is in the
+        same @class{gtk:native} widget as the event controllers widget. Note
+        that some event types have two targets (origin and destination).}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes limits of a @class{gtk:event-controller} object for handling
+    events targeting other widgets.
+  @end{short}
   @see-class{gtk:event-controller}
   @see-class{gtk:native}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkEventController
+;;; GtkEventController
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkEventController" event-controller
@@ -210,7 +218,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- event-controller-name --------------------------------------------------
+;;; --- gtk:event-controller-name ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "name" 'event-controller) t)
@@ -223,8 +231,8 @@
       "Accessor"
       (documentation 'event-controller-name 'function)
  "@version{#2022-8-22}
-  @syntax[]{(gtk:event-controller-name object) => name)}
-  @syntax[]{(setf (gtk:event-controller-name object) name)}
+  @syntax{(gtk:event-controller-name object) => name)}
+  @syntax{(setf (gtk:event-controller-name object) name)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[name]{a string with the name for the controller}
   @begin{short}
@@ -236,7 +244,7 @@
   name can be used for debugging purposes.
   @see-class{gtk:event-controller}")
 
-;;; --- event-controller-propagation-limit -------------------------------------
+;;; --- gtk:event-controller-propagation-limit ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "propagation-limit"
@@ -251,8 +259,8 @@
       "Accessor"
       (documentation 'event-controller-propagation-limit 'function)
  "@version{#2022-8-22}
-  @syntax[]{(gtk:event-controller-propagation-limit object) => limit)}
-  @syntax[]{(setf (gtk:event-controller-propagation-limit object) limit)}
+  @syntax{(gtk:event-controller-propagation-limit object) => limit)}
+  @syntax{(setf (gtk:event-controller-propagation-limit object) limit)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[limit]{a value of the @symbol{gtk:propagation-limit} enumeration}
   @begin{short}
@@ -269,7 +277,7 @@
   @see-class{gtk:event-controller}
   @see-symbol{gtk:propagation-limit}")
 
-;;; --- event-controller-propagation-phase -------------------------------------
+;;; --- gtk:event-controller-propagation-phase ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "propagation-phase"
@@ -284,8 +292,8 @@
       "Accessor"
       (documentation 'event-controller-propagation-phase 'function)
  "@version{#2022-8-22}
-  @syntax[]{(gtk:event-controller-propagation-phase object) => phase)}
-  @syntax[]{(setf (gtk:event-controller-propagation-phase object) phase)}
+  @syntax{(gtk:event-controller-propagation-phase object) => phase)}
+  @syntax{(setf (gtk:event-controller-propagation-phase object) phase)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[phase]{a value of the @symbol{gtk:propagation-phase} enumeration}
   @begin{short}
@@ -302,7 +310,7 @@
   @see-class{gtk:event-controller}
   @see-symbol{gtk:propagation-phase}")
 
-;;; --- event-controller-widget ------------------------------------------------
+;;; --- gtk:event-controller-widget --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "widget" 'event-controller) t)
@@ -315,8 +323,8 @@
       "Accessor"
       (documentation 'event-controller-widget 'function)
  "@version{#2022-8-22}
-  @syntax[]{(gtk:event-controller-widget object) => widget)}
-  @syntax[]{(setf (gtk:event-controller-widget object) widget)}
+  @syntax{(gtk:event-controller-widget object) => widget)}
+  @syntax{(setf (gtk:event-controller-widget object) widget)}
   @argument[object]{a @class{gtk:event-controller} object}
   @argument[widget]{a @class{gtk:widget} widget}
   @begin{short}
@@ -329,7 +337,7 @@
   @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_reset ()
+;;; gtk_event_controller_reset
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_event_controller_reset" event-controller-reset) :void
@@ -349,7 +357,7 @@
 (export 'event-controller-reset)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_get_current_event ()
+;;; gtk_event_controller_get_current_event
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_event_controller_get_current_event"
@@ -370,7 +378,7 @@
 (export 'event-controller-current-event)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_get_current_event_device ()
+;;; gtk_event_controller_get_current_event_device
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_event_controller_get_current_event_device"
@@ -391,7 +399,7 @@
 (export 'event-controller-current-event-device)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_get_current_event_state ()
+;;; gtk_event_controller_get_current_event_state
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_event_controller_get_current_event_state"
@@ -412,7 +420,7 @@
 (export 'event-controller-current-event-state)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_get_current_event_time ()
+;;; gtk_event_controller_get_current_event_time
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_event_controller_get_current_event_time"
@@ -420,7 +428,7 @@
  #+liber-documentation
  "@version{#2022-8-22}
   @argument[controller]{a @class{gtk:event-controller} object}
-  @return{An unsigned integer with the timestamp of the event that is currently
+  @return{The unsigned integer with the timestamp of the event that is currently
     handled @arg{controller}.}
   @begin{short}
     Returns the timestamp of the event that is currently being handled by the

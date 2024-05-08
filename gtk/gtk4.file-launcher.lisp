@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -81,7 +81,7 @@
 (setf (documentation 'file-launcher 'type)
  "@version{#2023-10-12}
   @begin{short}
-    A @class{gtk:file-launcher} object collects the arguments that are needed
+    The @class{gtk:file-launcher} object collects the arguments that are needed
     to open a file with an application.
   @end{short}
   Depending on system configuration, user preferences and available APIs, this
@@ -105,13 +105,13 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- file-launcher-always-ask -----------------------------------------------
+;;; --- gtk:file-launcher-always-ask -------------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "always-ask" 'file-launcher) t)
  "The @code{always-ask} property of type @code{:boolean} (Read / Write) @br{}
-  Whether to ask the user to choose an application for opening the file. If 
-  @em{false}, the file might be opened with a default application or the 
+  Whether to ask the user to choose an application for opening the file. If
+  @em{false}, the file might be opened with a default application or the
   previous choice. Since 4.12 @br{}
   Default value: @em{false}")
 
@@ -120,24 +120,24 @@
       "Accessor"
       (documentation 'file-launcher-always-ask 'function)
  "@version{#2023-11-4}
-  @syntax[]{(gtk:file-launcher-always-ask object) => setting}
-  @syntax[]{(setf (gtk:file-launcher-always-ask object) setting)}
+  @syntax{(gtk:file-launcher-always-ask object) => setting}
+  @syntax{(setf (gtk:file-launcher-always-ask object) setting)}
   @argument[object]{a @class{gtk:file-launcher} object}
   @argument[setting]{a boolean whether to always ask the user}
   @begin{short}
     Accessor of the @slot[gtk:file-launcher]{always-ask} slot of the
     @class{gtk:file-launcher} class.
   @end{short}
-  The @fun{gtk:file-launcher-always-ask} function returns whether to ask the 
-  user to choose an application for opening the file. The 
-  @setf{gtk:file-launcher-always-ask} function sets whether to always ask the 
-  user. If @em{false}, the file might be opened with a default application or 
+  The @fun{gtk:file-launcher-always-ask} function returns whether to ask the
+  user to choose an application for opening the file. The
+  @setf{gtk:file-launcher-always-ask} function sets whether to always ask the
+  user. If @em{false}, the file might be opened with a default application or
   the previous choice.
 
   Since 4.12
   @see-class{gtk:file-launcher}")
 
-;;; --- file-launcher-file -----------------------------------------------------
+;;; --- gtk:file-launcher-file -------------------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "file" 'file-launcher) t)
@@ -149,8 +149,8 @@
       "Accessor"
       (documentation 'file-launcher-file 'function)
  "@version{#2023-10-12}
-  @syntax[]{(gtk:file-launcher-file object) => file}
-  @syntax[]{(setf (gtk:file-launcher-file object) file)}
+  @syntax{(gtk:file-launcher-file object) => file}
+  @syntax{(setf (gtk:file-launcher-file object) file)}
   @argument[object]{a @class{gtk:file-launcher} object}
   @argument[file]{a @class{g:file} object}
   @begin{short}

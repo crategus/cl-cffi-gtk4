@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -237,7 +237,7 @@ lambda (area)    :run-last
       of how the construction failed.
       @begin[code]{table}
         @entry[area]{The @class{gtk:gl-area} widget that emitted the signal.}
-        @entry[Returns]{A newly created @class{gdk:gl-context} object. The
+        @entry[Returns]{The newly created @class{gdk:gl-context} object. The
           @class{gtk:gl-area} widget will take ownership of the returned value.}
       @end{table}
     @subheading{The \"render\" signal}
@@ -266,8 +266,8 @@ lambda (area width height)    :run-last
       sets up the GL viewport.
       @begin[code]{table}
         @entry[area]{The @class{gtk:gl-area} widget that emitted the signal.}
-        @entry[width]{An integer with the width of the viewport.}
-        @entry[height]{An integer with the height of the viewport.}
+        @entry[width]{The integer with the width of the viewport.}
+        @entry[height]{The integer with the height of the viewport.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:gl-area-new}
@@ -323,7 +323,7 @@ lambda (area width height)    :run-last
 ;;; Since 4.12
 ;;; ----------------------------------------------------------------------------
 
-;;; --- gl-area-auto-render ----------------------------------------------------
+;;; --- gtk:gl-area-auto-render ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "auto-render" 'gl-area) t)
@@ -342,8 +342,8 @@ lambda (area width height)    :run-last
       "Accessor"
       (documentation 'gl-area-auto-render 'function)
  "@version{#2022-8-21}
-  @syntax[]{(gtk:gl-area-auto-render object) => setting}
-  @syntax[]{(setf (gtk:gl-area-auto-render object) setting)}
+  @syntax{(gtk:gl-area-auto-render object) => setting}
+  @syntax{(setf (gtk:gl-area-auto-render object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[setting]{a boolean whether the area is auto rendering}
   @begin{short}
@@ -364,7 +364,7 @@ lambda (area width height)    :run-last
   @see-class{gtk:gl-area}
   @see-function{gtk:gl-area-queue-render}")
 
-;;; --- gl-area-context --------------------------------------------------------
+;;; --- gtk:gl-area-context ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "context" 'gl-area) t)
@@ -379,8 +379,8 @@ lambda (area width height)    :run-last
       "Accessor"
       (documentation 'gl-area-context 'function)
  "@version{#2022-8-21}
-  @syntax[]{(gtk:gl-area-context object) => context}
-  @syntax[]{(setf (gtk:gl-area-context object) context)}
+  @syntax{(gtk:gl-area-context object) => context}
+  @syntax{(setf (gtk:gl-area-context object) context)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[context]{a @class{gdk:gl-context} object}
   @begin{short}
@@ -392,7 +392,7 @@ lambda (area width height)    :run-last
   @see-class{gtk:gl-area}
   @see-class{gdk:gl-context}")
 
-;;; --- gl-area-has-depth-buffer -----------------------------------------------
+;;; --- gtk:gl-area-has-depth-buffer -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-depth-buffer" 'gl-area) t)
@@ -407,8 +407,8 @@ lambda (area width height)    :run-last
       "Accessor"
       (documentation 'gl-area-has-depth-buffer 'function)
  "@version{#2022-8-21}
-  @syntax[]{(gtk:gl-area-has-depth-buffer object) => setting}
-  @syntax[]{(setf (gtk:gl-area-has-depth-buffer object) setting)}
+  @syntax{(gtk:gl-area-has-depth-buffer object) => setting}
+  @syntax{(setf (gtk:gl-area-has-depth-buffer object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[setting]{a boolean whether the widget will allocate and enable a
     depth buffer}
@@ -424,7 +424,7 @@ lambda (area width height)    :run-last
   buffer for the target framebuffer. Otherwise there will be none.
   @see-class{gtk:gl-area}")
 
-;;; --- gl-area-has-stencil-buffer ---------------------------------------------
+;;; --- gtk:gl-area-has-stencil-buffer -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-stencil-buffer" 'gl-area) t)
@@ -439,8 +439,8 @@ lambda (area width height)    :run-last
       "Accessor"
       (documentation 'gl-area-has-stencil-buffer 'function)
  "@version{#2022-8-21}
-  @syntax[]{(gtk:gl-area-has-stencil-buffer object) => setting}
-  @syntax[]{(setf (gtk:gl-area-has-stencil-buffer object) setting)}
+  @syntax{(gtk:gl-area-has-stencil-buffer object) => setting}
+  @syntax{(setf (gtk:gl-area-has-stencil-buffer object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[setting]{a boolean whether the widget will allocate and enable a
     stencil buffer}
@@ -456,7 +456,7 @@ lambda (area width height)    :run-last
   buffer for the target framebuffer. Otherwise there will be none.
   @see-class{gtk:gl-area}")
 
-;;; --- gl-area-use-es ---------------------------------------------------------
+;;; --- gtk:gl-area-use-es -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-es" 'gl-area) t)
@@ -470,8 +470,8 @@ lambda (area width height)    :run-last
       "Accessor"
       (documentation 'gl-area-use-es 'function)
  "@version{#2022-8-21}
-  @syntax[]{(gtk:gl-area-use-es object) => setting}
-  @syntax[]{(setf (gtk:gl-area-use-es object) setting)}
+  @syntax{(gtk:gl-area-use-es object) => setting}
+  @syntax{(setf (gtk:gl-area-use-es object) setting)}
   @argument[object]{a @class{gtk:gl-area} widget}
   @argument[setting]{a boolean whether the widget should create an OpenGL ES
     context}
@@ -491,7 +491,7 @@ lambda (area width height)    :run-last
   @see-class{gdk:gl-context}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gl_area_new ()
+;;; gtk_gl_area_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline gl-area-new))
@@ -499,7 +499,7 @@ lambda (area width height)    :run-last
 (defun gl-area-new ()
  #+liber-documentation
  "@version{#2022-8-21}
-  @return{A new @class{gtk:gl-area} widget.}
+  @return{The new @class{gtk:gl-area} widget.}
   @short{Creates a new @class{gtk:gl-area} widget.}
   @see-class{gtk:gl-area}"
   (make-instance 'gl-area))
@@ -507,7 +507,7 @@ lambda (area width height)    :run-last
 (export 'gl-area-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gl_area_make_current ()
+;;; gtk_gl_area_make_current
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gl_area_make_current" gl-area-make-current) :void
@@ -526,7 +526,7 @@ lambda (area width height)    :run-last
 (export 'gl-area-make-current)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gl_area_queue_render ()
+;;; gtk_gl_area_queue_render
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gl_area_queue_render" gl-area-queue-render) :void
@@ -548,7 +548,7 @@ lambda (area width height)    :run-last
 (export 'gl-area-queue-render)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gl_area_attach_buffers ()
+;;; gtk_gl_area_attach_buffers
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gl_area_attach_buffers" gl-area-attach-buffers) :void
@@ -615,8 +615,8 @@ lambda (area width height)    :run-last
 (export 'gl-area-error)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gl_area_get_required_version ()
-;;; gtk_gl_area_set_required_version ()
+;;; gtk_gl_area_get_required_version
+;;; gtk_gl_area_set_required_version
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf gl-area-required-version) (value area)
@@ -636,8 +636,8 @@ lambda (area width height)    :run-last
 (defun gl-area-required-version (area)
  #+liber-documentation
  "@version{#2023-10-21}
-  @syntax[]{(gtk:gl-area-required-version area) => major, minor}
-  @syntax[]{(setf (gtk:gl-area-required-version area) '(major minor))}
+  @syntax{(gtk:gl-area-required-version area) => major, minor}
+  @syntax{(setf (gtk:gl-area-required-version area) '(major minor))}
   @argument[area]{a @class{gtk:gl-area} object}
   @argument[major]{an integer with the required major version}
   @argument[minor]{an integer with the required minor version}

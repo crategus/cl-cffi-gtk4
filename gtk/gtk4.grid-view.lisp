@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -197,7 +197,7 @@ lambda (gridview position)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- grid-view-enable-rubberband --------------------------------------------
+;;; --- gtk:grid-view-enable-rubberband ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "enable-rubberband"
@@ -212,8 +212,8 @@ lambda (gridview position)    :run-last
       "Accessor"
       (documentation 'grid-view-enable-rubberband 'function)
  "@version{#2023-9-9}
-  @syntax[]{(gtk:grid-view-enable-rubberband object) => setting}
-  @syntax[]{(setf (gtk:grid-view-enable-rubberband object) setting)}
+  @syntax{(gtk:grid-view-enable-rubberband object) => setting}
+  @syntax{(setf (gtk:grid-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[setting]{@em{true} if rubberband selection is enabled}
   @begin{short}
@@ -226,7 +226,7 @@ lambda (gridview position)    :run-last
   changed by dragging with the mouse.
   @see-class{gtk:grid-view}")
 
-;;; --- grid-view-factory ------------------------------------------------------
+;;; --- gtk:grid-view-factory --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "factory" 'grid-view) t)
@@ -239,8 +239,8 @@ lambda (gridview position)    :run-last
       "Accessor"
       (documentation 'grid-view-factory 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:grid-view-factory object) => factory}
-  @syntax[]{(setf (gtk:grid-view-factory object) factory)}
+  @syntax{(gtk:grid-view-factory object) => factory}
+  @syntax{(setf (gtk:grid-view-factory object) factory)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[factory]{a @class{gtk:list-item-factory} object to use, or
     @code{nil} for none}
@@ -254,7 +254,7 @@ lambda (gridview position)    :run-last
   @see-class{gtk:grid-view}
   @see-class{gtk:selection-model}")
 
-;;; --- grid-view-max-columns --------------------------------------------------
+;;; --- gtk:grid-view-max-columns ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-columns" 'grid-view) t)
@@ -269,8 +269,8 @@ lambda (gridview position)    :run-last
       "Accessor"
       (documentation 'grid-view-max-columns 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:grid-view-max-colums object) => max}
-  @syntax[]{(setf (gtk:grid-view-max-columns object) max)}
+  @syntax{(gtk:grid-view-max-colums object) => max}
+  @syntax{(setf (gtk:grid-view-max-columns object) max)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[max]{an unsigned integer with the maximum of columns}
   @begin{short}
@@ -285,7 +285,7 @@ lambda (gridview position)    :run-last
   @see-class{gtk:grid-view}
   @see-function{gtk:grid-view-min-columns}")
 
-;;; --- grid-view-min-columns --------------------------------------------------
+;;; --- gtk:grid-view-min-columns ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "min-columns" 'grid-view) t)
@@ -299,8 +299,8 @@ lambda (gridview position)    :run-last
       "Accessor"
       (documentation 'grid-view-min-columns 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:grid-view-max-colums object) => min}
-  @syntax[]{(setf (gtk:grid-view-min-columns object) min)}
+  @syntax{(gtk:grid-view-max-colums object) => min}
+  @syntax{(setf (gtk:grid-view-min-columns object) min)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[min]{an unsigned integer with the minimum of columns}
   @begin{short}
@@ -315,7 +315,7 @@ lambda (gridview position)    :run-last
   @see-class{gtk:grid-view}
   @see-function{gtk:grid-view-max-columns}")
 
-;;; --- grid-view-model --------------------------------------------------------
+;;; --- gtk:grid-view-model ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'grid-view) t)
@@ -328,8 +328,8 @@ lambda (gridview position)    :run-last
       "Accessor"
       (documentation 'grid-view-model 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:grid-view-model object) => model}
-  @syntax[]{(setf (gtk:grid-view-model object) model)}
+  @syntax{(gtk:grid-view-model object) => model}
+  @syntax{(setf (gtk:grid-view-model object) model)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[model]{a @class{gtk:selection-model} object to use}
   @begin{short}
@@ -342,7 +342,7 @@ lambda (gridview position)    :run-last
   @see-class{gtk:grid-view}
   @see-class{gtk:selection-model}")
 
-;;; --- grid-view-single-click-activate ----------------------------------------
+;;; --- gtk:grid-view-single-click-activate ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "single-click-activate"
@@ -357,8 +357,8 @@ lambda (gridview position)    :run-last
       "Accessor"
       (documentation 'grid-view-single-click-activate 'function)
  "@version{#2023-9-9}
-  @syntax[]{(gtk:grid-view-single-click-activate object) => setting}
-  @syntax[]{(setf (gtk:grid-view-single-click-activate object) setting)}
+  @syntax{(gtk:grid-view-single-click-activate object) => setting}
+  @syntax{(setf (gtk:grid-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:grid-view} object}
   @argument[setting]{@em{true} if rows are activated on single click}
   @begin{short}
@@ -371,7 +371,7 @@ lambda (gridview position)    :run-last
   be activated on single click and selected on hover.
   @see-class{gtk:grid-view}")
 
-;;; --- grid-view-tab-behavior -------------------------------------------------
+;;; --- gtk:grid-view-tab-behavior ---------------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "tab-behavior" 'grid-view) t)
@@ -381,7 +381,7 @@ lambda (gridview position)    :run-last
   Default value: @code{:all}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_grid_view_new ()
+;;; gtk_grid_view_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline grid-view-new))
@@ -392,7 +392,7 @@ lambda (gridview position)    :run-last
   @argument[model]{a @class{gtk:selection-model} object to use, or @code{nil}}
   @argument[factory]{a @class{gtk:list-item-factory} object to populate items
     with or @code{nil}}
-  @return{A new @class{gtk:grid-view} widget using the given @arg{model} and
+  @return{The new @class{gtk:grid-view} widget using the given @arg{model} and
     @arg{factory}.}
   @begin{short}
     Creates a new grid view that uses the given @arg{factory} for mapping items

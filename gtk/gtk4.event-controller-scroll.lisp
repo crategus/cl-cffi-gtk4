@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -67,7 +67,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkEventControllerScrollFlags
+;;; GtkEventControllerScrollFlags
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-flags "GtkEventControllerScrollFlags"
@@ -86,10 +86,8 @@
       "GFlags"
       (liber:symbol-documentation 'event-controller-scroll-flags)
  "@version{#2022-8-23}
-  @begin{short}
-    Describes the behavior of a @class{gtk:event-controller-scroll} object.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GtkEventControllerScrollFlags\"
                         event-controller-scroll-flags
   (:export t
@@ -100,19 +98,25 @@
   (:discrete 4)
   (:kinetic 8)
   (:both-axes 16))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{Do not emit scroll.}
-    @entry[:vertical]{Emit scroll with vertical deltas.}
-    @entry[:horizontal]{Emit scroll with horizontal deltas.}
-    @entry[:discrete]{Only emit deltas that are multiples of 1.}
-    @entry[:kinetic]{Emit \"decelerate\" after continuous scroll finishes.}
-    @entry[:both-axes]{Emit scroll on both axes.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{Do not emit scroll.}
+      @entry[:vertical]{Emit scroll with vertical deltas.}
+      @entry[:horizontal]{Emit scroll with horizontal deltas.}
+      @entry[:discrete]{Only emit deltas that are multiples of 1.}
+      @entry[:kinetic]{Emit \"decelerate\" after continuous scroll finishes.}
+      @entry[:both-axes]{Emit scroll on both axes.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes the behavior of a @class{gtk:event-controller-scroll} object.
+  @end{short}
   @see-class{gtk:event-controller-scroll}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkEventControllerScroll
+;;; GtkEventControllerScroll
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkEventControllerScroll"
@@ -212,7 +216,7 @@ lambda (controller)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- event-controller-scroll-flags ------------------------------------------
+;;; --- gtk:event-controller-scroll-flags --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "flags"
@@ -226,8 +230,8 @@ lambda (controller)    :run-first
       "Accessor"
       (documentation 'event-controller-scroll-flags 'function)
  "@version{#2022-8-23}
-  @syntax[]{(gtk:event-controller-scroll-flags object) => flags)}
-  @syntax[]{(setf (gtk:event-controller-scroll-flags object) flags)}
+  @syntax{(gtk:event-controller-scroll-flags object) => flags)}
+  @syntax{(setf (gtk:event-controller-scroll-flags object) flags)}
   @argument[object]{a @class{gtk:event-controller-scroll} object}
   @argument[flags]{a @symbol{gtk:event-controller-scroll-flags} value}
   @begin{short}
@@ -241,7 +245,7 @@ lambda (controller)    :run-first
   @see-symbol{gtk:event-controller-scroll-flags}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_scroll_new ()
+;;; gtk_event_controller_scroll_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline event-controller-scroll-new))
@@ -263,7 +267,7 @@ lambda (controller)    :run-first
 (export 'event-controller-scroll-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_scroll_get_unit ()
+;;; gtk_event_controller_scroll_get_unit
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-8

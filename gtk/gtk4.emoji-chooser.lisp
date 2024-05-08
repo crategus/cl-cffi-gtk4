@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -127,14 +127,14 @@ lambda (chooser text)    :run-last
       The signal is emitted when the user selects an Emoji.
       @begin[code]{table}
         @entry[chooser]{The @class{gtk:emoji-chooser} widget.}
-        @entry[text]{A string with the Unicode sequence for the picked Emoji,
+        @entry[text]{The string with the Unicode sequence for the picked Emoji,
           in UTF-8.}
       @end{table}
   @end{dictionary}
   @see-class{gtk:popover}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_emoji_chooser_new ()
+;;; gtk_emoji_chooser_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline emoji-chooser-new))
@@ -142,7 +142,7 @@ lambda (chooser text)    :run-last
 (defun emoji-chooser-new ()
  #+liber-documentation
  "@version{2023-8-28}
-  @return{A new @class{gtk:emoji-chooser} widget.}
+  @return{The new @class{gtk:emoji-chooser} widget.}
   @short{Creates a new Emoji chooser dialog.}
   @see-class{gtk:emoji-chooser}"
   (make-instance 'emoji-chooser))

@@ -96,23 +96,27 @@
       "GEnum"
       (liber:symbol-documentation 'event-sequence-state)
  "@version{#2022-8-22}
-  @begin{short}
-    Describes the state of a @class{gdk:event-sequence} instance in a
-    @class{gtk:gesture} object.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkEventSequenceState\" event-sequence-state
   (:export t
    :type-initializer \"gtk_event_sequence_state_get_type\")
   (:none 0)
   (:claimed 1)
   (:denied 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{The sequence is handled, but not grabbed.}
-    @entry[:claimed]{The sequence is handled and grabbed.}
-    @entry[:denied]{The sequence is denied.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{The sequence is handled, but not grabbed.}
+      @entry[:claimed]{The sequence is handled and grabbed.}
+      @entry[:denied]{The sequence is denied.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes the state of a @class{gdk:event-sequence} instance in a
+    @class{gtk:gesture} object.
+  @end{short}
   @see-class{gtk:gesture}
   @see-class{gdk:event-sequence}")
 

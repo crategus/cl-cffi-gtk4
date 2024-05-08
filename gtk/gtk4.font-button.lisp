@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -162,7 +162,7 @@ lambda (fontbutton)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- font-button-modal ------------------------------------------------------
+;;; --- gtk:font-button-modal --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modal" 'font-button) t)
@@ -175,8 +175,8 @@ lambda (fontbutton)    :run-first
       "Accessor"
       (documentation 'font-button-modal 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-button-modal object) => modal}
-  @syntax[]{(setf (gtk:font-button-modal object) modal)}
+  @syntax{(gtk:font-button-modal object) => modal}
+  @syntax{(setf (gtk:font-button-modal object) modal)}
   @argument[object]{a @class{gtk:font-button} widget}
   @argument[modal]{a boolean whether the dialog is modal}
   @begin{short}
@@ -192,7 +192,7 @@ lambda (fontbutton)    :run-first
   @end{dictionary}
   @see-class{gtk:font-button}")
 
-;;; --- font-button-title ------------------------------------------------------
+;;; --- gtk:font-button-title --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "title" 'font-button) t)
@@ -205,8 +205,8 @@ lambda (fontbutton)    :run-first
       "Accessor"
       (documentation 'font-button-title 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-button-title object) => title}
-  @syntax[]{(setf (gtk:font-button-title object) title)}
+  @syntax{(gtk:font-button-title object) => title}
+  @syntax{(setf (gtk:font-button-title object) title)}
   @argument[object]{a @class{gtk:font-button} widget}
   @argument[title]{a string containing the font chooser dialog title}
   @begin{short}
@@ -222,7 +222,7 @@ lambda (fontbutton)    :run-first
   @end{dictionary}
   @see-class{gtk:font-button}")
 
-;;; --- font-button-use-font ---------------------------------------------------
+;;; --- gtk:font-button-use-font -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-font" 'font-button) t)
@@ -236,8 +236,8 @@ lambda (fontbutton)    :run-first
       "Accessor"
       (documentation 'font-button-use-font 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-button-title object) => use-font}
-  @syntax[]{(setf (gtk:font-button-title object) use-font)}
+  @syntax{(gtk:font-button-title object) => use-font}
+  @syntax{(setf (gtk:font-button-title object) use-font)}
   @argument[object]{a @class{gtk:font-button} widget}
   @argument[use-font]{if @em{true}, font name will be written using font chosen}
   @begin{short}
@@ -252,7 +252,7 @@ lambda (fontbutton)    :run-first
   @end{dictionary}
   @see-class{gtk:font-button}")
 
-;;; --- font-button-use-size ---------------------------------------------------
+;;; --- gtk:font-button-use-size -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-size" 'font-button) t)
@@ -266,8 +266,8 @@ lambda (fontbutton)    :run-first
       "Accessor"
       (documentation 'font-button-use-size 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-button-use-size object) => use-size}
-  @syntax[]{(setf (gtk:font-button-use-size object) use-size)}
+  @syntax{(gtk:font-button-use-size object) => use-size}
+  @syntax{(setf (gtk:font-button-use-size object) use-size)}
   @argument[object]{a @class{gtk:font-button} widget}
   @argument[use-size]{if @em{true}, the font name will be written using the
     selected size}
@@ -284,7 +284,7 @@ lambda (fontbutton)    :run-first
   @see-class{gtk:font-button}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_font_button_new ()
+;;; gtk_font_button_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline font-button-new))
@@ -292,7 +292,7 @@ lambda (fontbutton)    :run-first
 (defun font-button-new ()
  #+liber-documentation
  "@version{2023-8-28}
-  @return{A new @class{gtk:font-button} widget.}
+  @return{The new @class{gtk:font-button} widget.}
   @short{Creates a new font picker widget.}
   @begin[Warning]{dictionary}
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use
@@ -304,7 +304,7 @@ lambda (fontbutton)    :run-first
 (export 'font-button-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_font_button_new_with_font ()
+;;; gtk_font_button_new_with_font
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline font-button-new-with-font))
@@ -314,7 +314,7 @@ lambda (fontbutton)    :run-first
  "@version{2023-8-28}
   @argument[fontname]{a string with the name of the font to display in the font
     chooser dialog}
-  @return{A new @class{gtk:font-button} widget.}
+  @return{The new @class{gtk:font-button} widget.}
   @short{Creates a new font picker widget.}
   @begin[Warning]{dictionary}
     The @class{gtk:font-button} implementation is deprecated since 4.10. Use

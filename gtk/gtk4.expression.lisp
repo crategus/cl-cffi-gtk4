@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -264,7 +264,7 @@ case PROP_EXPRESSION:
 (export 'expression)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_ref ()
+;;; gtk_expression_ref
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_expression_ref" expression-ref) expression
@@ -281,7 +281,7 @@ case PROP_EXPRESSION:
 (export 'expression-ref)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_unref ()
+;;; gtk_expression_unref
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_expression_unref" expression-unref) :void
@@ -299,7 +299,7 @@ case PROP_EXPRESSION:
 (export 'expression-unref)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_get_value_type ()
+;;; gtk_expression_get_value_type
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_expression_get_value_type" expression-value-type) g:type-t
@@ -320,7 +320,7 @@ case PROP_EXPRESSION:
 (export 'expression-value-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_is_static ()
+;;; gtk_expression_is_static
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_expression_is_static" expression-is-static) :boolean
@@ -343,7 +343,7 @@ case PROP_EXPRESSION:
 (export 'expression-is-static)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_evaluate ()
+;;; gtk_expression_evaluate
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_expression_evaluate" %expression-evaluate) :boolean
@@ -413,7 +413,7 @@ case PROP_EXPRESSION:
 (export 'expression-evaluate-value)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_bind ()
+;;; gtk_expression_bind
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_expression_bind" expression-bind) (g:boxed expression-watch)
@@ -474,7 +474,7 @@ case PROP_EXPRESSION:
 (export 'expression-notify)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_watch ()
+;;; gtk_expression_watch
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_expression_watch" %expression-watch)
@@ -542,7 +542,7 @@ case PROP_EXPRESSION:
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_watch_evaluate ()
+;;; gtk_expression_watch_evaluate
 ;;; ----------------------------------------------------------------------------
 
 ;; FIXME: This implementation is wrong.
@@ -571,7 +571,7 @@ case PROP_EXPRESSION:
 (export 'expression-watch-evaluate)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_expression_watch_unwatch ()
+;;; gtk_expression_watch_unwatch
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_expression_watch_unwatch" expression-watch-unwatch) :void
@@ -589,7 +589,7 @@ case PROP_EXPRESSION:
 (export 'expression-watch-unwatch)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_property_expression_new ()
+;;; gtk_property_expression_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_property_expression_new" %property-expression-new)
@@ -605,7 +605,7 @@ case PROP_EXPRESSION:
   @argument[expression]{a @class{gtk:expression} instance to evaluate to get
     the object to query or @code{nil} to query the @arg{this} object}
   @argument[property]{a string with the name of the property}
-  @return{A new @class{gtk:expression} instance.}
+  @return{The new @class{gtk:expression} instance.}
   @begin{short}
     Creates an expression that looks up a property via the given expression or
     the @arg{this} argument when @arg{expression} is @code{nil}.
@@ -620,7 +620,7 @@ case PROP_EXPRESSION:
 (export 'property-expression-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_property_expression_new_for_pspec ()
+;;; gtk_property_expression_new_for_pspec
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_property_expression_new_for_pspec"
@@ -650,7 +650,7 @@ case PROP_EXPRESSION:
 (export 'property-expression-new-for-pspec)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_property_expression_get_expression ()
+;;; gtk_property_expression_get_expression
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_property_expression_get_expression"
@@ -672,7 +672,7 @@ case PROP_EXPRESSION:
 (export 'property-expression-expression)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_property_expression_get_pspec ()
+;;; gtk_property_expression_get_pspec
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_property_expression_get_pspec" property-expression-pspec)
@@ -692,7 +692,7 @@ case PROP_EXPRESSION:
 (export 'property-expression-pspec)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_constant_expression_new ()
+;;; gtk_constant_expression_new
 ;;; ----------------------------------------------------------------------------
 
 (defun constant-expression-new (gtype value)
@@ -700,7 +700,7 @@ case PROP_EXPRESSION:
  "@version{2023-11-7}
   @argument[gtype]{a @symbol{g:type-t} type}
   @argument[value]{a value corresponding to @arg{gtype}}
-  @return{A new @class{gtk:expression} instance.}
+  @return{The new @class{gtk:expression} instance.}
   @begin{short}
     Creates an expression that evaluates to the object given by the arguments.
   @end{short}
@@ -720,7 +720,7 @@ case PROP_EXPRESSION:
 (export 'constant-expression-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_constant_expression_new_for_value ()
+;;; gtk_constant_expression_new_for_value
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_constant_expression_new_for_value"
@@ -728,7 +728,7 @@ case PROP_EXPRESSION:
  #+liber-documentation
  "@version{2023-11-6}
   @argument[value]{a @symbol{g:value} instance}
-  @return{A new @class{gtk:expression} instance.}
+  @return{The new @class{gtk:expression} instance.}
   @begin{short}
     Creates an expression that always evaluates to the given @arg{value}.
   @end{short}
@@ -739,7 +739,7 @@ case PROP_EXPRESSION:
 (export 'constant-expression-new-for-value)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_constant_expression_get_value ()
+;;; gtk_constant_expression_get_value
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_constant_expression_get_value" constant-expression-value)
@@ -757,7 +757,7 @@ case PROP_EXPRESSION:
 (export 'constant-expression-value)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_object_expression_new ()
+;;; gtk_object_expression_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_object_expression_new" object-expression-new) expression
@@ -780,7 +780,7 @@ case PROP_EXPRESSION:
 (export 'object-expression-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_object_expression_get_object ()
+;;; gtk_object_expression_get_object
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_object-expression_get_object" object-expression-object)
@@ -879,8 +879,8 @@ case PROP_EXPRESSION:
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_value_get_expression ()
-;;; gtk_value_set_expression ()
+;;; gtk_value_get_expression
+;;; gtk_value_set_expression
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf value-expression) (value gvalue)
@@ -893,8 +893,8 @@ case PROP_EXPRESSION:
 (cffi:defcfun ("gtk_value_get_expression" value-expression) expression
  #+liber-documentation
  "@version{2023-11-6}
-  @syntax[]{(gtk:value-expression value) => expression}
-  @syntax[]{(setf (gtk:value-expression value) expression)}
+  @syntax{(gtk:value-expression value) => expression}
+  @syntax{(setf (gtk:value-expression value) expression)}
   @argument[value]{a @symbol{g:value} instance initialized with the
     \"GtkExpression\" type}
   @argument[expression]{a @class{gtk:expression} instance}

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -100,8 +100,8 @@ lambda (controller x y)    :run-first
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-motion} object which
           received the signal.}
-        @entry[x]{a double float with the x coordinate}
-        @entry[y]{a double float with the y coordinate}
+        @entry[x]{The double float with the x coordinate.}
+        @entry[y]{The double float with the y coordinate.}
       @end{table}
     @subheading{The \"leave\" signal}
       @begin{pre}
@@ -120,8 +120,8 @@ lambda (controller x y)    :run-first
       @begin[code]{table}
         @entry[controller]{The @class{gtk:event-controller-motion} object which
           received the signal.}
-        @entry[x]{a double float with the x coordinate}
-        @entry[y]{a double float with the y coordinate}
+        @entry[x]{The double float with the x coordinate.}
+        @entry[y]{The double float with the y coordinate.}
       @end{table}
   @end{dictionary}
   @see-class{gtk:event-controller}")
@@ -130,7 +130,7 @@ lambda (controller x y)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- event-controller-motion-contains-pointer ---------------------------
+;;; --- gtk:event-controller-motion-contains-pointer ---------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "contains-pointer"
@@ -146,7 +146,7 @@ lambda (controller x y)    :run-first
       "Accessor"
       (documentation 'event-controller-motion-contains-pointer 'function)
  "@version{#2022-8-23}
-  @syntax[]{(gtk:event-controller-motion-contains-pointer object) => contains)}
+  @syntax{(gtk:event-controller-motion-contains-pointer object) => contains)}
   @argument[object]{a @class{gtk:event-controller-motion} object}
   @argument[contains]{a boolean whether the pointer is within @arg{object}}
   @begin{short}
@@ -158,7 +158,7 @@ lambda (controller x y)    :run-first
   children.
   @see-class{gtk:event-controller-motion}")
 
-;;; --- event-controller-motion-is-pointer ---------------------------------
+;;; --- gtk:event-controller-motion-is-pointer ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "is-pointer"
@@ -175,7 +175,7 @@ lambda (controller x y)    :run-first
       "Accessor"
       (documentation 'event-controller-motion-is-pointer 'function)
  "@version{#2022-8-23}
-  @syntax[]{(gtk:event-controller-motion-is-pointer object) => is-pointer)}
+  @syntax{(gtk:event-controller-motion-is-pointer object) => is-pointer)}
   @argument[object]{a @class{gtk:event-controller-motion} object}
   @argument[is-pointer]{a boolean whether the pointer is within @arg{object}}
   @begin{short}
@@ -187,7 +187,7 @@ lambda (controller x y)    :run-first
   @see-class{gtk:event-controller-motion}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_event_controller_motion_new ()
+;;; gtk_event_controller_motion_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline event-controller-motion-new))

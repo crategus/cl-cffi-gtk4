@@ -1857,16 +1857,16 @@ lambda (view)    :action
   @see-symbol{gdk-drag-action}"
   (let ((n-targets (length targets)))
     (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
-      (loop for i from 0 below n-targets
-            for target-ptr = (cffi:mem-aptr targets-ptr
-                                            '(:struct %target-entry) i)
-            for entry in targets
-            do (cffi:with-foreign-slots ((target flags info)
-                                         target-ptr
-                                         (:struct %target-entry))
-                 (setf target (first entry))
-                 (setf flags (second entry))
-                 (setf info (third entry))))
+      (iter (for i from 0 below n-targets)
+            (for target-ptr = (cffi:mem-aptr targets-ptr
+                                             '(:struct %target-entry) i))
+            (for entry in targets)
+            (cffi:with-foreign-slots ((target flags info)
+                                      target-ptr
+                                      (:struct %target-entry))
+              (setf target (first entry))
+              (setf flags (second entry))
+              (setf info (third entry))))
       (%icon-view-enable-model-drag-source view
                                            mask
                                            targets-ptr
@@ -1911,16 +1911,16 @@ lambda (view)    :action
   @see-symbol{gdk-drag-action}"
   (let ((n-targets (length targets)))
     (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
-      (loop for i from 0 below n-targets
-            for target-ptr = (cffi:mem-aptr targets-ptr
-                                            '(:struct %target-entry) i)
-            for entry in targets
-            do (cffi:with-foreign-slots ((target flags info)
-                                         target-ptr
-                                         (:struct %target-entry))
-                 (setf target (first entry))
-                 (setf flags (second entry))
-                 (setf info (third entry))))
+      (iter (for i from 0 below n-targets)
+            (for target-ptr = (cffi:mem-aptr targets-ptr
+                                             '(:struct %target-entry) i))
+            (for entry in targets)
+            (cffi:with-foreign-slots ((target flags info)
+                                      target-ptr
+                                      (:struct %target-entry))
+              (setf target (first entry))
+              (setf flags (second entry))
+              (setf info (third entry))))
       (%icon-view-enable-model-drag-dest view
                                          targets-ptr
                                          n-targets

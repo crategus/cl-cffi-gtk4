@@ -72,7 +72,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkGestureSingle
+;;; GtkGestureSingle
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkGestureSingle" gesture-single
@@ -130,8 +130,8 @@
       "Accessor"
       (documentation 'gesture-single-button 'function)
  "@version{2024-2-19}
-  @syntax[]{(gtk:gesture-single-button object) => button)}
-  @syntax[]{(setf (gtk:gesture-single-button object) button)}
+  @syntax{(gtk:gesture-single-button object) => button)}
+  @syntax{(setf (gtk:gesture-single-button object) button)}
   @argument[object]{a @class{gtk:gesture-single} object}
   @argument[button]{an unsigned integer with the button number to listen to,
     or 0 for any button}
@@ -160,8 +160,8 @@
       "Accessor"
       (documentation 'gesture-single-exclusive 'function)
  "@version{2024-2-19}
-  @syntax[]{(gtk:gesture-single-exclusive object) => exclusive)}
-  @syntax[]{(setf (gtk:gesture-single-exclusive object) exclusive)}
+  @syntax{(gtk:gesture-single-exclusive object) => exclusive)}
+  @syntax{(setf (gtk:gesture-single-exclusive object) exclusive)}
   @argument[object]{a @class{gtk:gesture-single} object}
   @argument[exclusive]{@em{true} to make the gesture exclusive}
   @begin{short}
@@ -188,8 +188,8 @@
       "Accessor"
       (documentation 'gesture-single-touch-only 'function)
  "@version{2024-2-19}
-  @syntax[]{(gtk:gesture-single-touch-only object) => touch-only)}
-  @syntax[]{(setf (gtk:gesture-single-touch-only object) touch-only)}
+  @syntax{(gtk:gesture-single-touch-only object) => touch-only)}
+  @syntax{(setf (gtk:gesture-single-touch-only object) touch-only)}
   @argument[object]{a @class{gtk:gesture-single} object}
   @argument[touch-only]{a boolean whether gesture handles only touch events}
   @begin{short}
@@ -206,7 +206,7 @@
   @see-class{gtk:gesture-single}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_single_get_current_button ()
+;;; gtk_gesture_single_get_current_button
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_single_get_current_button"
@@ -214,7 +214,7 @@
  #+liber-documentation
  "@version{2024-2-19}
   @argument[gesture]{a @class{gtk:gesture-single} object}
-  @return{An unsigned integer with the current button number.}
+  @return{The unsigned integer with the current button number.}
   @begin{short}
     Returns the button number currently interacting with @arg{gesture}, or 0 if
     there is none.
@@ -225,7 +225,7 @@
 (export 'gesture-single-current-button)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_single_get_current_sequence ()
+;;; gtk_gesture_single_get_current_sequence
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_gesture_single_get_current_sequence"

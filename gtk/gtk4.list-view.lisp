@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -118,29 +118,34 @@
       "GEnum"
       (liber:symbol-documentation 'list-tab-behavior)
  "@version{2023-11-25}
-  @begin{short}
-    Used to configure the focus behavior in the @code{:forward} and
-    @code{:backward} direction, like the @kbd{Tab} key in a
-    @class{gtk:list-view} widget.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkListTabBehavior\" list-tab-behavior
   (:export t
    :type-initializer \"gtk_list_tab_behavior_get_type\")
   (:all 0)
   (:item 1)
   (:cell 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:all]{Cycle through all focusable items of the list.}
-    @entry[:item]{Cycle through a single list element, then move focus out of
-      the list. Moving focus between items needs to be done with the arrow
-      keys.}
-    @entry[:cell]{Cycle only through a single cell, then move focus out of the
-      list. Moving focus between cells needs to be done with the arrow keys.
-      This is only relevant for cell-based widgets like the
-      @class{gtk:column-view} widget, otherwise it behaves like @code{:item}.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:all]{Cycle through all focusable items of the list.}
+      @entry[:item]{Cycle through a single list element, then move focus out of
+        the list. Moving focus between items needs to be done with the arrow
+        keys.}
+      @entry[:cell]{Cycle only through a single cell, then move focus out of the
+        list. Moving focus between cells needs to be done with the arrow keys.
+        This is only relevant for cell-based widgets like the
+        @class{gtk:column-view} widget, otherwise it behaves like @code{:item}.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Used to configure the focus behavior in the @code{:forward} and
+    @code{:backward} direction, like the @kbd{Tab} key in a
+    @class{gtk:list-view} widget.
+  @end{short}
+
   Since 4.12
   @see-class{gtk:list-view}
   @see-class{gtk:column-view}")
@@ -162,22 +167,27 @@
       "GFlags"
       (liber:symbol-documentation 'list-scroll-flags)
  "@version{2023-11-25}
-  @begin{short}
-    List of actions to perform when scrolling to items in a list widget.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GtkListScrollFlags\" list-scroll-flags
   (:export t
    :type-initializer \"gtk_list_scroll_flags_get_type\")
   (:none 0)
   (:focus #.(ash 1 0))
   (:select #.(ash 1 1)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{Do not do anything extra.}
-    @entry[:focus]{Focus the target item.}
-    @entry[:select]{Select the target item and unselect all other items.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{Do not do anything extra.}
+      @entry[:focus]{Focus the target item.}
+      @entry[:select]{Select the target item and unselect all other items.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    List of actions to perform when scrolling to items in a list widget.
+  @end{short}
+
   Since 4.12
   @see-class{gtk:list-view}")
 
@@ -213,7 +223,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- list-base-orientation --------------------------------------------------
+;;; --- gtk:list-base-orientation ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "orientation" 'list-base) t)
@@ -227,8 +237,8 @@
       "Accessor"
       (documentation 'list-base-orientation 'function)
  "@version{2023-11-25}
-  @syntax[]{(gtk:list-base-orientation object) => orientation}
-  @syntax[]{(setf (gtk:list-base-orientation object) orientation)}
+  @syntax{(gtk:list-base-orientation object) => orientation}
+  @syntax{(setf (gtk:list-base-orientation object) orientation)}
   @argument[object]{a @class{gtk:list-base} widget}
   @argument[orientation]{a @symbol{gtk:orientation} value}
   @begin{short}
@@ -415,7 +425,7 @@ lambda (listview position)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- list-view-enable-rubberband --------------------------------------------
+;;; --- gtk:list-view-enable-rubberband ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "enable-rubberband"
@@ -430,8 +440,8 @@ lambda (listview position)    :run-last
       "Accessor"
       (documentation 'list-view-enable-rubberband 'function)
  "@version{2023-11-25}
-  @syntax[]{(gtk:list-view-enable-rubberband object) => setting}
-  @syntax[]{(setf (gtk:list-view-enable-rubberband object) setting)}
+  @syntax{(gtk:list-view-enable-rubberband object) => setting}
+  @syntax{(setf (gtk:list-view-enable-rubberband object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[setting]{@em{true} if rubberband selection is enabled}
   @begin{short}
@@ -444,7 +454,7 @@ lambda (listview position)    :run-last
   changed by dragging with the mouse.
   @see-class{gtk:list-view}")
 
-;;; --- list-view-factory ------------------------------------------------------
+;;; --- gtk:list-view-factory --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "factory" 'list-view) t)
@@ -457,8 +467,8 @@ lambda (listview position)    :run-last
       "Accessor"
       (documentation 'list-view-factory 'function)
  "@version{2023-11-25}
-  @syntax[]{(gtk:list-view-factory object) => factory}
-  @syntax[]{(setf (gtk:list-view-factory object) factory)}
+  @syntax{(gtk:list-view-factory object) => factory}
+  @syntax{(setf (gtk:list-view-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[factory]{a @class{gtk:list-item-factory} object to use, or
     @code{nil} for none}
@@ -472,7 +482,7 @@ lambda (listview position)    :run-last
   @see-class{gtk:list-view}
   @see-class{gtk:list-item-factory}")
 
-;;; --- list-view-header-factory -----------------------------------------------
+;;; --- gtk:list-view-header-factory -------------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "header-factory" 'list-view) t)
@@ -485,8 +495,8 @@ lambda (listview position)    :run-last
       "Accessor"
       (documentation 'list-view-header-factory 'function)
  "@version{2023-11-25}
-  @syntax[]{(gtk:list-view-header-factory object) => factory}
-  @syntax[]{(setf (gtk:list-view-header-factory object) factory)}
+  @syntax{(gtk:list-view-header-factory object) => factory}
+  @syntax{(setf (gtk:list-view-header-factory object) factory)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[factory]{a @class{gtk:list-item-factory} object to use}
   @begin{short}
@@ -504,7 +514,7 @@ lambda (listview position)    :run-last
   @see-class{gtk:list-item-factory}
   @see-class{gtk:list-header}")
 
-;;; --- list-view-model --------------------------------------------------------
+;;; --- gtk:list-view-model ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'list-view) t)
@@ -517,8 +527,8 @@ lambda (listview position)    :run-last
       "Accessor"
       (documentation 'list-view-model 'function)
  "@version{2023-11-25}
-  @syntax[]{(gtk:list-view-model object) => model}
-  @syntax[]{(setf (gtk:list-view-model object) model)}
+  @syntax{(gtk:list-view-model object) => model}
+  @syntax{(setf (gtk:list-view-model object) model)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[model]{a @class{gtk:selection-model} object to use}
   @begin{short}
@@ -531,7 +541,7 @@ lambda (listview position)    :run-last
   @see-class{gtk:list-view}
   @see-class{gtk:selection-model}")
 
-;;; --- list-view-show-separators ----------------------------------------------
+;;; --- gtk:list-view-show-separators ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-separators" 'list-view) t)
@@ -545,8 +555,8 @@ lambda (listview position)    :run-last
       "Accessor"
       (documentation 'list-view-show-separators 'function)
  "@version{2023-11-25}
-  @syntax[]{(gtk:list-view-show-separators object) => setting}
-  @syntax[]{(setf (gtk:list-view-show-separators object) setting)}
+  @syntax{(gtk:list-view-show-separators object) => setting}
+  @syntax{(setf (gtk:list-view-show-separators object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[setting]{@em{true} if the list box shows separators}
   @begin{short}
@@ -558,7 +568,7 @@ lambda (listview position)    :run-last
   function sets whether the list box should show separators between rows.
   @see-class{gtk:list-view}")
 
-;;; --- list-view-single-click-activate ----------------------------------------
+;;; --- gtk:list-view-single-click-activate ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "single-click-activate"
@@ -573,8 +583,8 @@ lambda (listview position)    :run-last
       "Accessor"
       (documentation 'list-view-single-click-activate 'function)
  "@version{2023-11-25}
-  @syntax[]{(gtk:list-view-single-click-activate object) => setting}
-  @syntax[]{(setf (gtk:list-view-single-click-activate object) setting)}
+  @syntax{(gtk:list-view-single-click-activate object) => setting}
+  @syntax{(setf (gtk:list-view-single-click-activate object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[setting]{@em{true} if rows are activated on single click}
   @begin{short}
@@ -587,7 +597,7 @@ lambda (listview position)    :run-last
   be activated on single click and selected on hover.
   @see-class{gtk:list-view}")
 
-;;; --- list-view-tab-behavior -------------------------------------------------
+;;; --- gtk:list-view-tab-behavior ---------------------------------------------
 
 #+(and gtk-4-12 liber-documentation)
 (setf (documentation (liber:slot-documentation "tab-behavior" 'list-view) t)
@@ -601,8 +611,8 @@ lambda (listview position)    :run-last
       "Accessor"
       (documentation 'list-view-tab-behavior 'function)
  "@version{2023-11-25}
-  @syntax[]{(gtk:list-view-tab-behavior object) => setting}
-  @syntax[]{(setf (gtk:list-view-tab-behavior object) setting)}
+  @syntax{(gtk:list-view-tab-behavior object) => setting}
+  @syntax{(setf (gtk:list-view-tab-behavior object) setting)}
   @argument[object]{a @class{gtk:list-view} object}
   @argument[setting]{a @symbol{gtk:list-tab-behavior} value}
   @begin{short}
@@ -618,7 +628,7 @@ lambda (listview position)    :run-last
   @see-symbol{gtk:list-tab-behavior}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_list_view_new ()
+;;; gtk_list_view_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline list-view-new))

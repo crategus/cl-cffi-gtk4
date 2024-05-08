@@ -66,7 +66,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkPanDirection
+;;; GtkPanDirection
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkPanDirection" pan-direction
@@ -82,10 +82,8 @@
       "GEnum"
       (liber:symbol-documentation 'pan-direction)
  "@version{2024-2-19}
-  @begin{short}
-    Describes the panning direction of a @class{gtk:gesture-pan} object.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkPanDirection\" pan-direction
   (:export t
    :type-initializer \"gtk_pan_direction_get_type\")
@@ -93,17 +91,23 @@
   :right
   :up
   :down)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:left]{Panned towards the left.}
-    @entry[:right]{Panned towards the right.}
-    @entry[:up]{Panned upwards.}
-    @entry[:down]{Panned downwards.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:left]{Panned towards the left.}
+      @entry[:right]{Panned towards the right.}
+      @entry[:up]{Panned upwards.}
+      @entry[:down]{Panned downwards.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes the panning direction of a @class{gtk:gesture-pan} object.
+  @end{short}
   @see-class{gtk:gesture-pan}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkGesturePan
+;;; GtkGesturePan
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkGesturePan" gesture-pan
@@ -142,9 +146,9 @@ lambda (gesture direction offset)    :run-last
     @begin[code]{table}
       @entry[gesture]{The @class{gtk:gesture-pan} object which received the
         signal.}
-      @entry[direction]{Current @symbol{gtk:pan-direction} value of the pan
+      @entry[direction]{The current @symbol{gtk:pan-direction} value of the pan
         gesture.}
-      @entry[offset]{A double float with the offset along the gesture
+      @entry[offset]{The double float with the offset along the gesture
         orientation.}
     @end{table}
   @end{dictionary}
@@ -171,8 +175,8 @@ lambda (gesture direction offset)    :run-last
       "Accessor"
       (documentation 'gesture-pan-orientation 'function)
  "@version{2024-2-19}
-  @syntax[]{(gtk:gesture-pan-orientation object) => orientation)}
-  @syntax[]{(setf (gtk:gesture-pan-orientation object) orientation)}
+  @syntax{(gtk:gesture-pan-orientation object) => orientation)}
+  @syntax{(setf (gtk:gesture-pan-orientation object) orientation)}
   @argument[object]{a @class{gtk:gesture} object}
   @argument[orientation]{a @symbol{gtk:orientation} value}
   @begin{short}
@@ -186,7 +190,7 @@ lambda (gesture direction offset)    :run-last
   @see-symbol{gtk:orientation}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_gesture_pan_new ()
+;;; gtk_gesture_pan_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline gesture-pan-new))

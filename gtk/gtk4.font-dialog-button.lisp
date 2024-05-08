@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -100,13 +100,8 @@
       "GEnum"
       (liber:symbol-documentation 'font-level)
  "@version{2023-8-27}
-  @begin{short}
-    The level of granularity for the font selection.
-  @end{short}
-  Depending on this value, the @class{pango:font-description} instance that is
-  returned by the @fun{gtk:font-dialog-button-font-desc} function will have
-  more or less fields set.
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkFontLevel\" font-level
   (:export t
    :type-initializer \"gtk_font_level_get_type\")
@@ -114,14 +109,24 @@
   (:face 1)
   (:font 2)
   (:features 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:family]{Select a font family.}
-    @entry[:face]{Select a font face (i.e. a family and a style).}
-    @entry[:font]{Select a font (i.e. a face with a size, and possibly font
-      variations).}
-    @entry[:features]{Select a font and font features.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:family]{Select a font family.}
+      @entry[:face]{Select a font face (i.e. a family and a style).}
+      @entry[:font]{Select a font (i.e. a face with a size, and possibly font
+        variations).}
+      @entry[:features]{Select a font and font features.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The level of granularity for the font selection.
+  @end{short}
+  Depending on this value, the @class{pango:font-description} instance that is
+  returned by the @fun{gtk:font-dialog-button-font-desc} function will have
+  more or less fields set.
+
   Since 4.10
   @see-class{gtk:font-dialog-button}
   @see-class{pango:font-description}
@@ -197,7 +202,7 @@ fontbutton
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- font-dialog-button-dialog ----------------------------------------------
+;;; --- gtk:font-dialog-button-dialog ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "dialog" 'font-dialog-button) t)
@@ -210,8 +215,8 @@ fontbutton
       "Accessor"
       (documentation 'font-dialog-button-dialog 'function)
  "@version{#2023-10-19}
-  @syntax[]{(gtk:font-dialog-button-dialog object) => dialog}
-  @syntax[]{(setf (gtk:font-dialog-button-dialog object) dialog)}
+  @syntax{(gtk:font-dialog-button-dialog object) => dialog}
+  @syntax{(setf (gtk:font-dialog-button-dialog object) dialog)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[dialog]{a @class{gtk:font-dialog} object}
   @begin{short}
@@ -226,7 +231,7 @@ fontbutton
   Since 4.10
   @see-class{gtk:font-dialog-button}")
 
-;;; --- font-dialog-button-font-desc -------------------------------------------
+;;; --- gtk:font-dialog-button-font-desc ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font-desc"
@@ -243,8 +248,8 @@ fontbutton
       "Accessor"
       (documentation 'font-dialog-button-font-desc 'function)
  "@version{#2023-10-19}
-  @syntax[]{(gtk:font-dialog-button-font-desc object) => desc}
-  @syntax[]{(setf (gtk:font-dialog-button-font-desc object) desc)}
+  @syntax{(gtk:font-dialog-button-font-desc object) => desc}
+  @syntax{(setf (gtk:font-dialog-button-font-desc object) desc)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[desc]{a @class{pango:font-description} instance}
   @begin{short}
@@ -260,7 +265,7 @@ fontbutton
   @see-class{gtk:font-dialog-button}
   @see-class{pango:font-description}")
 
-;;; --- font-dialog-button-font-features ---------------------------------------
+;;; --- gtk:font-dialog-button-font-features -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font-features"
@@ -276,8 +281,8 @@ fontbutton
       "Accessor"
       (documentation 'font-dialog-button-font-features 'function)
  "@version{#2023-10-19}
-  @syntax[]{(gtk:font-dialog-button-font-features object) => features}
-  @syntax[]{(setf (gtk:font-dialog-button-font-features object) features)}
+  @syntax{(gtk:font-dialog-button-font-features object) => features}
+  @syntax{(setf (gtk:font-dialog-button-font-features object) features)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[features]{a string with the selected font features}
   @begin{short}
@@ -290,7 +295,7 @@ fontbutton
 
   This function is what should be used to obtain the font features that were
   chosen by the user. To get informed about changes, listen to the
-  \"notify::font-features\" signal.
+  @code{\"notify::font-features\"} signal.
 
   Note that the button will only let users choose font features if
   the @slot[gtk:font-dialog-button]{level} property is set to @code{:features}.
@@ -298,7 +303,7 @@ fontbutton
   Since 4.10
   @see-class{gtk:font-dialog-button}")
 
-;;; --- font-dialog-button-language --------------------------------------------
+;;; --- gtk:font-dialog-button-language ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "language"
@@ -315,8 +320,8 @@ fontbutton
       "Accessor"
       (documentation 'font-dialog-button-language 'function)
  "@version{#2023-10-19}
-  @syntax[]{(gtk:font-dialog-button-language object) => language}
-  @syntax[]{(setf (gtk:font-dialog-button-language object) language)}
+  @syntax{(gtk:font-dialog-button-language object) => language}
+  @syntax{(setf (gtk:font-dialog-button-language object) language)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[language]{a @class{pango:language} instance}
   @begin{short}
@@ -331,7 +336,7 @@ fontbutton
   @see-class{gtk:font-dialog-button}
   @see-class{pango:language}")
 
-;;; --- font-dialog-button-level -----------------------------------------------
+;;; --- gtk:font-dialog-button-level -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "level" 'font-dialog-button) t)
@@ -344,8 +349,8 @@ fontbutton
       "Accessor"
       (documentation 'font-dialog-button-level 'function)
  "@version{#2023-10-19}
-  @syntax[]{(gtk:font-dialog-button-level object) => level}
-  @syntax[]{(setf (gtk:font-dialog-button-level object) level)}
+  @syntax{(gtk:font-dialog-button-level object) => level}
+  @syntax{(setf (gtk:font-dialog-button-level object) level)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[level]{a @symbol{gtk:font-level} value}
   @begin{short}
@@ -360,7 +365,7 @@ fontbutton
   @see-class{gtk:font-dialog-button}
   @see-symbol{gtk:font-level}")
 
-;;; --- font-dialog-button-use-font --------------------------------------------
+;;; --- gtk:font-dialog-button-use-font ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-font"
@@ -374,8 +379,8 @@ fontbutton
       "Accessor"
       (documentation 'font-dialog-button-use-font 'function)
  "@version{#2023-10-19}
-  @syntax[]{(gtk:font-dialog-button-use-font object) => setting}
-  @syntax[]{(setf (gtk:font-dialog-button-use-font object) setting)}
+  @syntax{(gtk:font-dialog-button-use-font object) => setting}
+  @syntax{(setf (gtk:font-dialog-button-use-font object) setting)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[setting]{a boolean whether the buttons label will be drawn in the
     selected font}
@@ -390,7 +395,7 @@ fontbutton
   Since 4.10
   @see-class{gtk:font-dialog-button}")
 
-;;; --- font-dialog-button-use-size --------------------------------------------
+;;; --- gtk:font-dialog-button-use-size ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "use-size"
@@ -404,8 +409,8 @@ fontbutton
       "Accessor"
       (documentation 'font-dialog-button-use-size 'function)
  "@version{#2023-10-19}
-  @syntax[]{(gtk:font-dialog-button-use-size object) => setting}
-  @syntax[]{(setf (gtk:font-dialog-button-use-size object) setting)}
+  @syntax{(gtk:font-dialog-button-use-size object) => setting}
+  @syntax{(setf (gtk:font-dialog-button-use-size object) setting)}
   @argument[object]{a @class{gtk:font-dialog-button} object}
   @argument[setting]{a boolean whether the buttons label will use the selected
     font size}

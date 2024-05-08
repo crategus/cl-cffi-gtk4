@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -62,7 +62,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkFontChooserDialog
+;;; GtkFontChooserDialog
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkFontChooserDialog" font-chooser-dialog
@@ -104,7 +104,7 @@
   @see-class{gtk:dialog}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_font_chooser_dialog_new ()
+;;; gtk_font_chooser_dialog_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_font_chooser_dialog_new" font-chooser-dialog-new)
@@ -114,7 +114,7 @@
   @argument[title]{a string with the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent of the dialog, or
     @code{nil}}
-  @return{A new @class{gtk:font-chooser-dialog} widget.}
+  @return{The new @class{gtk:font-chooser-dialog} widget.}
   @short{Creates a new font chooser dialog.}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser-dialog} implementation is deprecated since 4.10.

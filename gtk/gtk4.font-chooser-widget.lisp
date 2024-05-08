@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -105,7 +105,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- font-chooser-widget-tweak-action ---------------------------------------
+;;; --- gtk:font-chooser-widget-tweak-action -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tweak-action"
@@ -121,8 +121,8 @@
       "Accessor"
       (documentation 'font-chooser-widget-tweak-action 'function)
  "@version{2023-8-28}
-  @syntax[]{(gtk:font-chooser-widget-tweak-action object) => action}
-  @syntax[]{(setf (gtk:font-chooser-widget-tweak-action object) action)}
+  @syntax{(gtk:font-chooser-widget-tweak-action object) => action}
+  @syntax{(setf (gtk:font-chooser-widget-tweak-action object) action)}
   @argument[object]{a @class{gtk:font-chooser-widget} widget}
   @argument[action]{a @class{g:action} toggle action}
   @begin{short}
@@ -141,7 +141,7 @@
   @see-class{g:action}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_font_chooser_widget_new ()
+;;; gtk_font_chooser_widget_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline font-chooser-widget-new))
@@ -149,7 +149,7 @@
 (defun font-chooser-widget-new ()
  #+liber-documentation
  "@version{2023-8-28}
-  @return{A new @class{gtk:font-chooser-widget} widget.}
+  @return{The new @class{gtk:font-chooser-widget} widget.}
   @short{Creates a new font chooser widget.}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser-widget} implementation is deprecated since 4.10.
