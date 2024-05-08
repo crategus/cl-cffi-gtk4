@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -107,7 +107,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- drag-icon-child --------------------------------------------------------
+;;; --- gtk:drag-icon-child ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'drag-icon) t)
@@ -119,8 +119,8 @@
       "Accessor"
       (documentation 'drag-icon-child 'function)
  "@version{#2023-7-31}
-  @syntax[]{(gtk:drag-icon-child object) => child}
-  @syntax[]{(setf (gtk:drag-icon-child object) child)}
+  @syntax{(gtk:drag-icon-child object) => child}
+  @syntax{(setf (gtk:drag-icon-child object) child)}
   @argument[object]{a @class{gtk:drag-icon} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -134,7 +134,7 @@
   @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drag_icon_get_for_drag ()
+;;; gtk_drag_icon_get_for_drag
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_icon_get_for_drag" drag-icon-for-drag)
@@ -155,7 +155,7 @@
 (export 'drag-icon-for-drag)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drag_icon_set_from_paintable ()
+;;; gtk_drag_icon_set_from_paintable
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_icon_set_from_paintable" drag-icon-set-from-paintable)
@@ -182,7 +182,7 @@
 (export 'drag-icon-set-from-paintable)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drag_icon_create_widget_for_value ()
+;;; gtk_drag_icon_create_widget_for_value
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_icon_create_widget_for_value"
@@ -190,8 +190,8 @@
  #+liber-documentation
  "@version{#2023-7-31}
   @argument[gvalue]{a @symbol{g:value} instance}
-  @return{A new @class{gtk:widget} widget for displaying @arg{gvalue} as a drag
-    icon.}
+  @return{The new @class{gtk:widget} widget for displaying @arg{gvalue} as a
+    drag icon.}
   @begin{short}
     Creates a widget that can be used as a drag icon for the given @arg{gvalue}.
   @end{short}

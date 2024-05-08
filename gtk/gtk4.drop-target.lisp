@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -239,7 +239,7 @@ lambda (target x y)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- drop-target-actions ----------------------------------------------------
+;;; --- gtk:drop-target-actions ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "actions" 'drop-target) t)
@@ -253,8 +253,8 @@ lambda (target x y)    :run-last
       "Accessor"
       (documentation 'drop-target-actions 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:drop-target-actions object) => actions}
-  @syntax[]{(setf (gtk:drop-target-actions object) actions)}
+  @syntax{(gtk:drop-target-actions object) => actions}
+  @syntax{(setf (gtk:drop-target-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[actions]{a @symbol{gdk:drag-action} value}
   @begin{short}
@@ -266,7 +266,7 @@ lambda (target x y)    :run-last
   @see-class{gtk:drop-target}
   @see-symbol{gdk:drag-action}")
 
-;;; --- drop-target-current-drop -----------------------------------------------
+;;; --- gtk:drop-target-current-drop -------------------------------------------
 
 #+(and gtk-4-4 liber-documentation)
 (setf (documentation (liber:slot-documentation "current-drop" 'drop-target) t)
@@ -278,7 +278,7 @@ lambda (target x y)    :run-last
       "Accessor"
       (documentation 'drop-target-current-drop 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:drop-target-current-drop object) => drop}
+  @syntax{(gtk:drop-target-current-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object with the current drop}
   @begin{short}
@@ -292,7 +292,7 @@ lambda (target x y)    :run-last
   @see-class{gtk:drop-target}
   @see-symbol{gdk:drop}")
 
-;;; --- drop-target-drop -------------------------------------------------------
+;;; --- gtk:drop-target-drop -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "drop" 'drop-target) t)
@@ -304,7 +304,7 @@ lambda (target x y)    :run-last
       "Accessor"
       (documentation 'drop-target-drop 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:drop-target-drop object) => drop}
+  @syntax{(gtk:drop-target-drop object) => drop}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[drop]{a @class{gdk:drop} object with the current drop}
   @begin{short}
@@ -318,7 +318,7 @@ lambda (target x y)    :run-last
   @see-class{gtk:drop-target}
   @see-symbol{gdk:drop}")
 
-;;; --- drop-target-formats ----------------------------------------------------
+;;; --- gtk:drop-target-formats ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "formats" 'drop-target) t)
@@ -330,7 +330,7 @@ lambda (target x y)    :run-last
       "Accessor"
       (documentation 'drop-target-formats 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:drop-target-formats object) => formats}
+  @syntax{(gtk:drop-target-formats object) => formats}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[formats]{a @class{gdk:content-formats} instance with the
     supported data formats}
@@ -344,7 +344,7 @@ lambda (target x y)    :run-last
   @see-class{gtk:drop-target}
   @see-class{gdk:content-formats}")
 
-;;; --- drop-target-preload ----------------------------------------------------
+;;; --- gtk:drop-target-preload ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "preload" 'drop-target) t)
@@ -367,8 +367,8 @@ lambda (target x y)    :run-last
       "Accessor"
       (documentation 'drop-target-preload 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:drop-target-preload object) => preload}
-  @syntax[]{(setf (gtk:drop-target-preload object) preload)}
+  @syntax{(gtk:drop-target-preload object) => preload}
+  @syntax{(setf (gtk:drop-target-preload object) preload)}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[preload]{a boolean whether the drop data should be preloaded}
   @begin{short}
@@ -380,7 +380,7 @@ lambda (target x y)    :run-last
   @setf{gtk:drop-target-preload} function sets the property.
   @see-class{gtk:drop-target}")
 
-;;; --- drop-target-value ------------------------------------------------------
+;;; --- gtk:drop-target-value --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "value" 'drop-target) t)
@@ -396,7 +396,7 @@ lambda (target x y)    :run-last
       "Accessor"
       (documentation 'drop-target-value 'function)
  "@version{#2023-9-18}
-  @syntax[]{(gtk:drop-target-value object) => value}
+  @syntax{(gtk:drop-target-value object) => value}
   @argument[object]{a @class{gtk:drop-target} object}
   @argument[value]{a @symbol{g:value} instance with the current drop data}
   @begin{short}
@@ -409,7 +409,7 @@ lambda (target x y)    :run-last
   @see-symbol{g:value}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_new ()
+;;; gtk_drop_target_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_target_new" drop-target-new) (g:object drop-target)
@@ -418,7 +418,7 @@ lambda (target x y)    :run-last
   @argument[gtype]{a @class{g:type-t} type with the supported type}
   @argument[actions]{a @symbol{gdk:drag-action} value with the supported
     actions}
-  @return{A new @class{gtk:drop-target} object.}
+  @return{The new @class{gtk:drop-target} object.}
   @begin{short}
     Creates a new drop target.
   @end{short}
@@ -434,8 +434,8 @@ lambda (target x y)    :run-last
 (export 'drop-target-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_set_gtypes ()
-;;; gtk_drop_target_get_gtypes ()
+;;; gtk_drop_target_set_gtypes
+;;; gtk_drop_target_get_gtypes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_target_set_gtypes" %drop-target-set-gtypes) :void
@@ -461,8 +461,8 @@ lambda (target x y)    :run-last
 (defun drop-target-gtypes (target)
  #+liber-documentation
  "@version{2023-9-18}
-  @syntax[]{(gtk:drop-target-gtypes target) => gtypes}
-  @syntax[]{(setf (gtk:drop-target-gtypes target) gtypes)}
+  @syntax{(gtk:drop-target-gtypes target) => gtypes}
+  @syntax{(setf (gtk:drop-target-gtypes target) gtypes)}
   @argument[target]{a @class{gtk:drop-target} object}
   @argument[gtypes]{a list of @class{g:type-t} types}
   @begin{short}
@@ -483,7 +483,7 @@ lambda (target x y)    :run-last
 (export 'drop-target-gtypes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_reject ()
+;;; gtk_drop_target_reject
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_target_reject" drop-target-reject) :void

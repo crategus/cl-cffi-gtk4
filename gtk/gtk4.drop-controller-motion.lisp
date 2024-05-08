@@ -134,7 +134,7 @@ lambda (controller x y)    :run-first
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- drop-controller-motion-contains-pointer --------------------------------
+;;; --- gtk:drop-controller-motion-contains-pointer ----------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "contains-pointer"
@@ -150,7 +150,7 @@ lambda (controller x y)    :run-first
       "Accessor"
       (documentation 'drop-controller-motion-contains-pointer 'function)
  "@version{#2023-9-29}
-  @syntax[]{(gtk:drop-controller-motion-contains-pointer object) => contains}
+  @syntax{(gtk:drop-controller-motion-contains-pointer object) => contains}
   @argument[object]{a @class{gtk:drop-controller-motion} object}
   @argument[contains]{@em{true} if a dragging pointer is within @arg{object}
     or one of its children}
@@ -162,7 +162,7 @@ lambda (controller x y)    :run-first
   value of the property.
   @see-class{gtk:drop-controller-motion}")
 
-;;; --- drop-controller-motion-drop --------------------------------------------
+;;; --- gtk:drop-controller-motion-drop ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "drop"
@@ -180,7 +180,7 @@ lambda (controller x y)    :run-first
       "Accessor"
       (documentation 'drop-controller-motion-drop 'function)
  "@version{#2023-9-29}
-  @syntax[]{(gtk:drop-controller-motion-drop object) => drop}
+  @syntax{(gtk:drop-controller-motion-drop object) => drop}
   @argument[object]{a @class{gtk:drop-controller-motion} object}
   @argument[drop]{a @class{gdk:drop} object currently happening within
     @arg{object} or @code{nil} if none}
@@ -193,7 +193,7 @@ lambda (controller x y)    :run-first
   @see-class{gtk:drop-controller-motion}
   @see-class{gdk:drop}")
 
-;;; --- drop-controller-motion-is-pointer --------------------------------------
+;;; --- gtk:drop-controller-motion-is-pointer ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "is-pointer"
@@ -210,7 +210,7 @@ lambda (controller x y)    :run-first
       "Accessor"
       (documentation 'drop-controller-motion-is-pointer 'function)
  "@version{#2023-9-29}
-  @syntax[]{(gtk:drop-controller-motion-is-pointer object) => is-pointer}
+  @syntax{(gtk:drop-controller-motion-is-pointer object) => is-pointer}
   @argument[object]{a @class{gtk:drop-controller-motion} object}
   @argument[is-pointer]{@em{true} if a dragging pointer is within @arg{object}
     but not one of its children}
@@ -224,7 +224,7 @@ lambda (controller x y)    :run-first
   @see-class{gtk:drop-controller-motion}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drop_controller_motion_new ()
+;;; gtk_drop_controller_motion_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline drop-controller-motion-new))

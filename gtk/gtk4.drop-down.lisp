@@ -214,8 +214,8 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-enable-search 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-enable-search object) => setting}
-  @syntax[]{(setf (gtk:drop-down-enable-search object) setting)}
+  @syntax{(gtk:drop-down-enable-search object) => setting}
+  @syntax{(setf (gtk:drop-down-enable-search object) setting)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[setting]{a boolean whether to enable search}
   @begin{short}
@@ -246,8 +246,8 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-expression 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-expression object) => expression}
-  @syntax[]{(setf (gtk:drop-down-expression object) expression)}
+  @syntax{(gtk:drop-down-expression object) => expression}
+  @syntax{(setf (gtk:drop-down-expression object) expression)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[expression]{a @class{gtk:expression} object, or @code{nil}}
   @begin{short}
@@ -274,8 +274,8 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-factory 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-factory object) => factory}
-  @syntax[]{(setf (gtk:drop-down-factory object) factory)}
+  @syntax{(gtk:drop-down-factory object) => factory}
+  @syntax{(setf (gtk:drop-down-factory object) factory)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[factory]{a @class{gtk:list-item-factory} object, or @code{nil}
     for none}
@@ -304,8 +304,8 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-header-factory 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-header-factory object) => factory}
-  @syntax[]{(setf (gtk:drop-down-header-factory object) factory)}
+  @syntax{(gtk:drop-down-header-factory object) => factory}
+  @syntax{(setf (gtk:drop-down-header-factory object) factory)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[factory]{a @class{gtk:list-item-factory} object, or @code{nil}
     for none}
@@ -335,8 +335,8 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-list-factory 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-list-factory object) => factory}
-  @syntax[]{(setf (gtk:drop-down-list-factory object) factory)}
+  @syntax{(gtk:drop-down-list-factory object) => factory}
+  @syntax{(setf (gtk:drop-down-list-factory object) factory)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[factory]{a @class{gtk:list-item-factory} object, or @code{nil}
     for none}
@@ -363,8 +363,8 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-model 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-model object) => model}
-  @syntax[]{(setf (gtk:drop-down-model object) model)}
+  @syntax{(gtk:drop-down-model object) => model}
+  @syntax{(setf (gtk:drop-down-model object) model)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[model]{a @class{g:list-model} object to use, or @code{nil} for none}
   @begin{short}
@@ -390,8 +390,8 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-search-match-mode 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-search-match-mode object) => mode}
-  @syntax[]{(setf (gtk:drop-down-search-match-mode object) mode)}
+  @syntax{(gtk:drop-down-search-match-mode object) => mode}
+  @syntax{(setf (gtk:drop-down-search-match-mode object) mode)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[mode]{a @symbol{gtk:string-filter-match-mode} value with the
     match mode}
@@ -421,8 +421,8 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-selected 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-selected object) => selected}
-  @syntax[]{(setf (gtk:drop-down-selected object) selected)}
+  @syntax{(gtk:drop-down-selected object) => selected}
+  @syntax{(setf (gtk:drop-down-selected object) selected)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[selected]{an unsigned integer with the position of the item to
     select, or the @var{gtk:+invalid-list-position+} value if no position is
@@ -448,7 +448,7 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-selected-item 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-selected-item object) => item}
+  @syntax{(gtk:drop-down-selected-item object) => item}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[item]{A pointer to the selected item.}
   @begin{short}
@@ -472,8 +472,8 @@ lambda (dropdown)    :action
       "Accessor"
       (documentation 'drop-down-show-arrow 'function)
  "@version{2024-1-10}
-  @syntax[]{(gtk:drop-down-show-arrow object) => setting}
-  @syntax[]{(setf (gtk:drop-down-show-arrow object) setting)}
+  @syntax{(gtk:drop-down-show-arrow object) => setting}
+  @syntax{(setf (gtk:drop-down-show-arrow object) setting)}
   @argument[object]{a @class{gtk:drop-down} widget}
   @argument[setting]{a boolean whether to show an arrow within the widget}
   @begin{short}
@@ -488,7 +488,7 @@ lambda (dropdown)    :action
   @see-class{gtk:drop-down}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_new ()
+;;; gtk_drop_down_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_down_new" %drop-down-new) (g:object widget)
@@ -515,7 +515,7 @@ lambda (dropdown)    :action
 (export 'drop-down-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drop_down_new_from_strings ()
+;;; gtk_drop_down_new_from_strings
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_down_new_from_strings" drop-down-new-from-strings)

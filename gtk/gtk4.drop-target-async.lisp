@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 -2023 Dieter Kaiser
+;;; Copyright (C) 2022 -2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -222,7 +222,7 @@ lambda (target drop x y)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- drop-target-async-actions ----------------------------------------------
+;;; --- gtk:drop-target-async-actions ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "actions" 'drop-target-async) t)
@@ -235,8 +235,8 @@ lambda (target drop x y)    :run-last
       "Accessor"
       (documentation 'drop-target-async-actions 'function)
  "@version{#2023-9-29}
-  @syntax[]{(gtk:drop-target-async-actions object) => actions}
-  @syntax[]{(setf (gtk:drop-target-async-actions object) actions)}
+  @syntax{(gtk:drop-target-async-actions object) => actions}
+  @syntax{(setf (gtk:drop-target-async-actions object) actions)}
   @argument[object]{a @class{gtk:drop-target-async} object}
   @argument[actions]{a @symbol{gdk:drag-action} value}
   @begin{short}
@@ -249,7 +249,7 @@ lambda (target drop x y)    :run-last
   @see-class{gtk:drop-target-async}
   @see-symbol{gdk:drag-action}")
 
-;;; --- drop-target-async-formats ----------------------------------------------
+;;; --- gtk:drop-target-async-formats ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "formats" 'drop-target-async) t)
@@ -262,8 +262,8 @@ lambda (target drop x y)    :run-last
       "Accessor"
       (documentation 'drop-target-async-formats 'function)
  "@version{#2023-9-29}
-  @syntax[]{(gtk:drop-target-async-formats object) => formats}
-  @syntax[]{(setf (gtk:drop-target-async-formats object) formats)}
+  @syntax{(gtk:drop-target-async-formats object) => formats}
+  @syntax{(setf (gtk:drop-target-async-formats object) formats)}
   @argument[object]{a @class{gtk:drop-target-async} object}
   @argument[formats]{a @class{gdk:content-formats} instance with the
     supported data formats}
@@ -279,7 +279,7 @@ lambda (target drop x y)    :run-last
   @see-class{gdk:content-formats}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_async_new ()
+;;; gtk_drop_target_async_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_target_async_new" drop-target-async-new)
@@ -301,7 +301,7 @@ lambda (target drop x y)    :run-last
 (export 'drop-target-async-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drop_target_async_reject_drop ()
+;;; gtk_drop_target_async_reject_drop
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drop_target_async_reject_drop"

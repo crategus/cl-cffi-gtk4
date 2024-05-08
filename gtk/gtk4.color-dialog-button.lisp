@@ -196,7 +196,7 @@ lambda (button)    :action
  #+liber-documentation
  "@version{2023-7-28}
   @argument[dialog]{an optional @class{gtk:color-dialog} object to use}
-  @return{A new @class{gtk:color-dialog-button} widget.}
+  @return{The new @class{gtk:color-dialog-button} widget.}
   @begin{short}
     Creates a new @class{gtk:color-dialog-button} widget with the given
     @arg{dialog}.

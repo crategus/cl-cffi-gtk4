@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -188,7 +188,7 @@ lambda (source x y)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- drag-source-actions ----------------------------------------------------
+;;; --- gtk:drag-source-actions ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "actions" 'drag-source) t)
@@ -204,8 +204,8 @@ lambda (source x y)    :run-last
       "Accessor"
       (documentation 'drag-source-actions 'function)
  "@version{#2023-7-23}
-  @syntax[]{(gtk:drag-source-actions object) => actions}
-  @syntax[]{(setf (gtk:drag-source-actions object) actions)}
+  @syntax{(gtk:drag-source-actions object) => actions}
+  @syntax{(setf (gtk:drag-source-actions object) actions)}
   @argument[object]{a @class{gtk:drag-source} object}
   @argument[actions]{a @symbol{gdk:drag-action} value with the actions to offer}
   @begin{short}
@@ -225,7 +225,7 @@ lambda (source x y)    :run-last
   @see-class{gtk:drag-source}
   @see-symbol{gdk:drag-action}")
 
-;;; --- drag-source-content ----------------------------------------------------
+;;; --- gtk:drag-source-content ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "content" 'drag-source) t)
@@ -239,8 +239,8 @@ lambda (source x y)    :run-last
       "Accessor"
       (documentation 'drag-source-content 'function)
  "@version{#2023-7-23}
-  @syntax[]{(gtk:drag-source-content object) => content}
-  @syntax[]{(setf (gtk:drag-source-content object) content)}
+  @syntax{(gtk:drag-source-content object) => content}
+  @syntax{(setf (gtk:drag-source-content object) content)}
   @argument[object]{a @class{gtk:drag-source} object}
   @argument[content]{a @class{gdk:content-provider} object of @arg{source},
     or @code{nil}}
@@ -260,7 +260,7 @@ lambda (source x y)    :run-last
   @see-class{gdk:content-provider}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drag_source_new ()
+;;; gtk_drag_source_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline drag-source-new))
@@ -276,7 +276,7 @@ lambda (source x y)    :run-last
 (export 'drag-source-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drag_source_set_icon ()
+;;; gtk_drag_source_set_icon
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_source_set_icon" drag-source-set-icon) :void
@@ -306,7 +306,7 @@ lambda (source x y)    :run-last
 (export 'drag-source-set-icon)
 
 ;;; ----------------------------------------------------------------------------
-;;;gtk_drag_source_drag_cancel ()
+;;;gtk_drag_source_drag_cancel
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_source_drag_cancel" drag-source-drag-cancel) :void
@@ -320,7 +320,7 @@ lambda (source x y)    :run-last
 (export 'drag-source-drag-cancel)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drag_source_get_drag ()
+;;; gtk_drag_source_get_drag
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_source_get_drag" drag-source-drag) (g:object gdk:drag)
@@ -337,7 +337,7 @@ lambda (source x y)    :run-last
 (export 'drag-source-drag)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_drag_check_threshold ()
+;;; gtk_drag_check_threshold
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_drag_check_threshold" drag-check-threshold) :boolean
