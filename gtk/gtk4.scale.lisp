@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -85,7 +85,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkScale
+;;; GtkScale
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkScale" scale
@@ -206,7 +206,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- scale-digits -----------------------------------------------------------
+;;; --- gtk:scale-digits -------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "digits" 'scale) t)
@@ -220,8 +220,8 @@ scale[.fine-tune][.marks-before][.marks-after]
       "Accessor"
       (documentation 'scale-digits 'function)
  "@version{2023-8-25}
-  @syntax[]{(gtk:scale-digits object) => digits}
-  @syntax[]{(setf (gtk:scale-digits object) digits)}
+  @syntax{(gtk:scale-digits object) => digits}
+  @syntax{(setf (gtk:scale-digits object) digits)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[digits]{an integer with the number of decimal places to display,
     e.g. use 1 to display 1.0, 2 to display 1.00, etc}
@@ -236,7 +236,7 @@ scale[.fine-tune][.marks-before][.marks-after]
   value matches the value the user saw.
   @see-class{gtk:scale}")
 
-;;; --- scale-draw-value -------------------------------------------------------
+;;; --- gtk:scale-draw-value ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "draw-value" 'scale) t)
@@ -249,8 +249,8 @@ scale[.fine-tune][.marks-before][.marks-after]
       "Accessor"
       (documentation 'scale-draw-value 'function)
  "@version{2023-8-25}
-  @syntax[]{(gtk:scale-draw-value object) => draw-value}
-  @syntax[]{(setf (gtk:scale-digits object) draw-value)}
+  @syntax{(gtk:scale-draw-value object) => draw-value}
+  @syntax{(setf (gtk:scale-digits object) draw-value)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[draw-value]{@em{true} to draw the value}
   @begin{short}
@@ -263,7 +263,7 @@ scale[.fine-tune][.marks-before][.marks-after]
   displayed as a string next to the slider.
   @see-class{gtk:scale}")
 
-;;; --- scale-has-origin -------------------------------------------------------
+;;; --- gtk:scale-has-origin ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-origin" 'scale) t)
@@ -276,8 +276,8 @@ scale[.fine-tune][.marks-before][.marks-after]
       "Accessor"
       (documentation 'scale-has-origin 'function)
  "@version{2023-8-25}
-  @syntax[]{(gtk:scale-has-origin object) => has-origin}
-  @syntax[]{(setf (gtk:scale-digits object) has-origin)}
+  @syntax{(gtk:scale-has-origin object) => has-origin}
+  @syntax{(setf (gtk:scale-digits object) has-origin)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[has-origin]{@em{true} if the scale has an origin}
   @begin{short}
@@ -292,7 +292,7 @@ scale[.fine-tune][.marks-before][.marks-after]
   side, of the scale and the current value.
   @see-class{gtk:scale}")
 
-;;; --- scale-value-pos --------------------------------------------------------
+;;; --- gtk:scale-value-pos ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "value-pos" 'scale) t)
@@ -306,8 +306,8 @@ scale[.fine-tune][.marks-before][.marks-after]
       "Accessor"
       (documentation 'scale-value-pos 'function)
  "@version{2023-8-25}
-  @syntax[]{(gtk:scale-value-pos object) => pos}
-  @syntax[]{(setf (gtk:scale-digits object) pos)}
+  @syntax{(gtk:scale-value-pos object) => pos}
+  @syntax{(setf (gtk:scale-digits object) pos)}
   @argument[object]{a @class{gtk:scale} widget}
   @argument[pos]{a @symbol{gtk:position-type} value with the position in which
     the current value is displayed}
@@ -322,7 +322,7 @@ scale[.fine-tune][.marks-before][.marks-after]
   @see-symbol{gtk:position-type}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scale_new ()
+;;; gtk_scale_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline scale-new))
@@ -333,7 +333,7 @@ scale[.fine-tune][.marks-before][.marks-after]
   @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
   @argument[adjustment]{a @class{gtk:adjustment} object which sets the range
     of the scale, or @code{nil} to create a new adjustment}
-  @return{A new @class{gtk:scale} widget.}
+  @return{The new @class{gtk:scale} widget.}
   @short{Creates a new scale widget.}
   @see-class{gtk:scale}
   @see-symbol{gtk:orientation}
@@ -345,7 +345,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 (export 'scale-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scale_new_with_range ()
+;;; gtk_scale_new_with_range
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline scale-new-with-range))
@@ -358,7 +358,7 @@ scale[.fine-tune][.marks-before][.marks-after]
   @argument[max]{a double float with the maximum value}
   @argument[step]{a double float with the step increment, tick size, used
     with keyboard shortcuts}
-  @return{A new @class{gtk:scale} widget.}
+  @return{The new @class{gtk:scale} widget.}
   @begin{short}
     Creates a new scale widget with the given @arg{orientation} that lets the
     user input a number between @arg{min} and @arg{max}, including @arg{min}
@@ -416,7 +416,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 (export 'scale-format-value-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scale_set_format_value_func ()
+;;; gtk_scale_set_format_value_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_scale_set_format_value_func" %scale-set-format-value-func)
@@ -453,7 +453,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 (export 'scale-set-format-value-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scale_get_layout () -> scale-layout
+;;; gtk_scale_get_layout
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_scale_get_layout" scale-layout)
@@ -474,7 +474,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 (export 'scale-layout)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scale_get_layout_offsets () -> scale-layout-offsets
+;;; gtk_scale_get_layout_offsets
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_scale_get_layout_offsets" %scale-get-layout-offsets) :void
@@ -511,7 +511,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 (export 'scale-layout-offsets)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scale_add_mark ()
+;;; gtk_scale_add_mark
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_scale_add_mark" scale-add-mark) :void
@@ -544,7 +544,7 @@ scale[.fine-tune][.marks-before][.marks-after]
 (export 'scale-add-mark)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scale_clear_marks ()
+;;; gtk_scale_clear_marks
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_scale_clear_marks" scale-clear-marks) :void

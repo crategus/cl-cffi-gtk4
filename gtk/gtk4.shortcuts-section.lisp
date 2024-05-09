@@ -66,7 +66,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkShortcutsSection
+;;; GtkShortcutsSection
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkShortcutsSection" shortcuts-section
@@ -141,8 +141,8 @@ lambda (section arg)    :action
       "Accessor"
       (documentation 'shortcuts-section-max-height 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-section-max-height object) => height}
-  @syntax[]{(setf (gtk:shortcuts-section-max-height object) height)}
+  @syntax{(gtk:shortcuts-section-max-height object) => height}
+  @syntax{(setf (gtk:shortcuts-section-max-height object) height)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
   @argument[height]{an unsigned with the maximum number of lines to allow per
     column}
@@ -172,8 +172,8 @@ lambda (section arg)    :action
       "Accessor"
       (documentation 'shortcuts-section-section-name 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-section-section-name object) => name}
-  @syntax[]{(setf (gtk:shortcuts-section-section-name object) name)}
+  @syntax{(gtk:shortcuts-section-section-name object) => name}
+  @syntax{(setf (gtk:shortcuts-section-section-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
   @argument[name]{a string with a unique name to identify this section}
   @begin{short}
@@ -202,8 +202,8 @@ lambda (section arg)    :action
       "Accessor"
       (documentation 'shortcuts-section-title 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-section-title object) => title}
-  @syntax[]{(setf (gtk:shortcuts-section-title object) title)}
+  @syntax{(gtk:shortcuts-section-title object) => title}
+  @syntax{(setf (gtk:shortcuts-section-title object) title)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
   @argument[title]{a string to show in the section selector}
   @begin{short}
@@ -232,8 +232,8 @@ lambda (section arg)    :action
       "Accessor"
       (documentation 'shortcuts-section-view-name 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-section-view-name object) => name}
-  @syntax[]{(setf (gtk:shortcuts-section-view-name object) name)}
+  @syntax{(gtk:shortcuts-section-view-name object) => name}
+  @syntax{(setf (gtk:shortcuts-section-view-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
   @argument[name]{a string with a view name to filter the groups in this
     section by}

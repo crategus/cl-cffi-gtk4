@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -104,7 +104,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- window-handle-child ----------------------------------------------------
+;;; --- gtk:window-handle-child ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'window-handle) t)
@@ -116,8 +116,8 @@
       "Accessor"
       (documentation 'window-handle-child 'function)
  "@version{2023-7-23}
-  @syntax[]{(gtk:window-handle-child object) => child}
-  @syntax[]{(setf (gtk:window-handle-child object) child)}
+  @syntax{(gtk:window-handle-child object) => child}
+  @syntax{(setf (gtk:window-handle-child object) child)}
   @argument[object]{a @class{gtk:window} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -131,7 +131,7 @@
   @see-class{gtk:widget}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_handle_new ()
+;;; gtk_window_handle_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline window-handle-new))
@@ -139,7 +139,7 @@
 (defun window-handle-new ()
  #+liber-documentation
  "@version{2023-7-23}
-  @return{A new @class{gtk:window-handle} widget.}
+  @return{The new @class{gtk:window-handle} widget.}
   @short{Creates new @class{gtk:window-handle} widget.}
   @see-class{gtk:window-handle}"
   (make-instance 'window-handle))

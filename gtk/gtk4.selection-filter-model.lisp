@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -97,7 +97,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- selection-filter-model-item-type ---------------------------------------
+;;; --- gtk:selection-filter-model-item-type -----------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type"
@@ -117,7 +117,7 @@
       "Accessor"
       (documentation 'selection-filter-model-item-type 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:selection-filter-model-item-type object) => gtype}
+  @syntax{(gtk:selection-filter-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:selection-filter-model} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -134,7 +134,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- selection-filter-model-model -------------------------------------------
+;;; --- gtk:selection-filter-model-model ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model"
@@ -147,8 +147,8 @@
       "Accessor"
       (documentation 'selection-filter-model-model 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:selection-filter-model-model object) => model}
-  @syntax[]{(setf (gtk:selection-filter-model-model object) model)}
+  @syntax{(gtk:selection-filter-model-model object) => model}
+  @syntax{(setf (gtk:selection-filter-model-model object) model)}
   @argument[object]{a @class{gtk:selection-filter-model} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
@@ -166,7 +166,7 @@
   @see-class{gtk:selection-filter-model}
   @see-class{g:list-model}")
 
-;;; --- selection-filter-model-n-items -----------------------------------------
+;;; --- gtk:selection-filter-model-n-items -------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items"
@@ -180,7 +180,7 @@
       "Accessor"
       (documentation 'selection-filter-model-n-items 'function)
  "@version{#2023-9-6}
-  @syntax[]{(gtk:selection-filter-model-n-items object) => n-items}
+  @syntax{(gtk:selection-filter-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:selection-filter-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -192,7 +192,7 @@
   @see-function{g:list-model-n-items}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_filter_model_new ()
+;;; gtk_selection_filter_model_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline selection-filter-model-new))
@@ -202,7 +202,7 @@
  "@version{#2023-9-6}
   @argument[model]{a @class{gtk:selection-model} object to filter, or
     @code{nil}}
-  @return{A new @class{gtk:selection-filter-model} object.}
+  @return{The new @class{gtk:selection-filter-model} object.}
   @begin{short}
     Creates a new @class{gtk:selection-filter-model} object that will include
     the selected items from the underlying selection model.

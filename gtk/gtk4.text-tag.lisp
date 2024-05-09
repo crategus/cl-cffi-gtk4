@@ -565,8 +565,8 @@
       "Accessor"
       (documentation 'text-tag-accumulative-margin 'function)
  "@version{2023-8-26}
-  @syntax[]{(gtk:text-tag-accumulative-margin object) => setting}
-  @syntax[]{(setf (gtk:text-tag-accumulative-margin object) setting)}
+  @syntax{(gtk:text-tag-accumulative-margin object) => setting}
+  @syntax{(setf (gtk:text-tag-accumulative-margin object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether the margins accumulate}
   @begin{short}
@@ -592,8 +592,8 @@
       "Accessor"
       (documentation 'text-tag-allow-breaks 'function)
  "@version{2023-8-26}
-  @syntax[]{(gtk:text-tag-allow-breaks object) => setting}
-  @syntax[]{(setf (gtk:text-tag-allow-breaks object) setting)}
+  @syntax{(gtk:text-tag-allow-breaks object) => setting}
+  @syntax{(setf (gtk:text-tag-allow-breaks object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether breaks are allowed}
   @begin{short}
@@ -617,8 +617,8 @@
       "Accessor"
       (documentation 'text-tag-allow-breaks-set 'function)
  "@version{2023-8-26}
-  @syntax[]{(gtk:text-tag-allow-breaks-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-allow-breaks-set object) setting)}
+  @syntax{(gtk:text-tag-allow-breaks-set object) => setting}
+  @syntax{(setf (gtk:text-tag-allow-breaks-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects line breaks}
   @begin{short}
@@ -641,7 +641,7 @@
       "Accessor"
       (documentation 'text-tag-background 'function)
  "@version{2023-10-24}
-  @syntax[]{(setf (gtk:text-tag-background object) background)}
+  @syntax{(setf (gtk:text-tag-background object) background)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[background]{a string with the background color}
   @begin{short}
@@ -677,8 +677,8 @@
       "Accessor"
       (documentation 'text-tag-background-full-height 'function)
  "@version{2023-8-26}
-  @syntax[]{(gtk:text-tag-background-full-height object) => setting}
-  @syntax[]{(setf (gtk:text-tag-background-full-height object) setting)}
+  @syntax{(gtk:text-tag-background-full-height object) => setting}
+  @syntax{(setf (gtk:text-tag-background-full-height object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether the background fills the entire line
     height}
@@ -706,8 +706,8 @@
       "Accessor"
       (documentation 'text-tag-background-full-height-set 'function)
  "@version{2023-8-26}
-  @syntax[]{(gtk:text-tag-background-full-height-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-background-full-height-set object) setting)}
+  @syntax{(gtk:text-tag-background-full-height-set object) => setting}
+  @syntax{(setf (gtk:text-tag-background-full-height-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects background height}
   @begin{short}
@@ -731,8 +731,8 @@
       "Accessor"
       (documentation 'text-tag-background-rgba 'function)
  "@version{2023-8-26}
-  @syntax[]{(gtk:text-tag-background-rgba object) => color}
-  @syntax[]{(setf (gtk:text-tag-background-rgba object) color)}
+  @syntax{(gtk:text-tag-background-rgba object) => color}
+  @syntax{(setf (gtk:text-tag-background-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a @class{gdk:rgba} color}
   @begin{short}
@@ -759,8 +759,8 @@
       "Accessor"
       (documentation 'text-tag-background-set 'function)
  "@version{2023-8-26}
-  @syntax[]{(gtk:text-tag-background-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-background-set object) setting)}
+  @syntax{(gtk:text-tag-background-set object) => setting}
+  @syntax{(setf (gtk:text-tag-background-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the background color}
   @begin{short}
@@ -786,8 +786,8 @@
       "Accessor"
       (documentation 'text-tag-direction 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-direction object) => direction}
-  @syntax[]{(setf (gtk:text-tag-direction object) direction)}
+  @syntax{(gtk:text-tag-direction object) => direction}
+  @syntax{(setf (gtk:text-tag-direction object) direction)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[direction]{a @symbol{gtk:text-direction} value}
   @begin{short}
@@ -811,8 +811,8 @@
       "Accessor"
       (documentation 'text-tag-editable 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-editable object) => editable}
-  @syntax[]{(setf (gtk:text-tag-editable object) editable)}
+  @syntax{(gtk:text-tag-editable object) => editable}
+  @syntax{(setf (gtk:text-tag-editable object) editable)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[editable]{a boolean whether the text can be modified}
   @begin{short}
@@ -836,8 +836,8 @@
       "Accessor"
       (documentation 'text-tag-editable-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-editable-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-editable-set object) setting)}
+  @syntax{(gtk:text-tag-editable-set object) => setting}
+  @syntax{(setf (gtk:text-tag-editable-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects text editability}
   @begin{short}
@@ -862,8 +862,8 @@
       "Accessor"
       (documentation 'text-tag-fallback 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-fallback object) => fallback}
-  @syntax[]{(setf (gtk:text-tag-fallback object) fallback)}
+  @syntax{(gtk:text-tag-fallback object) => fallback}
+  @syntax{(setf (gtk:text-tag-fallback object) fallback)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[fallback]{a boolean whether font fallback is enabled}
   @begin{short}
@@ -888,8 +888,8 @@
       "Accessor"
       (documentation 'text-tag-fallback-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-fallback-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-fallback-set object) setting)}
+  @syntax{(gtk:text-tag-fallback-set object) => setting}
+  @syntax{(setf (gtk:text-tag-fallback-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this affects font fallback}
   @begin{short}
@@ -912,8 +912,8 @@
       "Accessor"
       (documentation 'text-tag-family 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-family object) => family}
-  @syntax[]{(setf (gtk:text-tag-family object) family)}
+  @syntax{(gtk:text-tag-family object) => family}
+  @syntax{(setf (gtk:text-tag-family object) family)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[family]{a string with the name of the font family}
   @begin{short}
@@ -937,8 +937,8 @@
       "Accessor"
       (documentation 'text-tag-family-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-family-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-family-set object) setting)}
+  @syntax{(gtk:text-tag-family-set object) => setting}
+  @syntax{(setf (gtk:text-tag-family-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the font family}
   @begin{short}
@@ -964,8 +964,8 @@
       "Accessor"
       (documentation 'text-tag-font 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-font object) => font}
-  @syntax[]{(setf (gtk:text-tag-font object) font)}
+  @syntax{(gtk:text-tag-font object) => font}
+  @syntax{(setf (gtk:text-tag-font object) font)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[font]{a string with a font description}
   @begin{short}
@@ -991,8 +991,8 @@
       "Accessor"
       (documentation 'text-tag-font-desc 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-font-desc object) => font-desc}
-  @syntax[]{(setf (gtk:text-tag-font object) font-desc)}
+  @syntax{(gtk:text-tag-font-desc object) => font-desc}
+  @syntax{(setf (gtk:text-tag-font object) font-desc)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[font-desc]{a @class{pango:font-description} instance with a font
     description}
@@ -1017,8 +1017,8 @@
       "Accessor"
       (documentation 'text-tag-font-features 'function)
  "@version{2024-3-9}
-  @syntax[]{(gtk:text-tag-font-features object) => features}
-  @syntax[]{(setf (gtk:text-tag-font-features object) features)}
+  @syntax{(gtk:text-tag-font-features object) => features}
+  @syntax{(setf (gtk:text-tag-font-features object) features)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[features]{a string with the OpenType font features}
   @begin{short}
@@ -1043,8 +1043,8 @@
       "Accessor"
       (documentation 'text-tag-font-features-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-font-features-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-font-features-set object) setting)}
+  @syntax{(gtk:text-tag-font-features-set object) => setting}
+  @syntax{(setf (gtk:text-tag-font-features-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects font features}
   @begin{short}
@@ -1068,7 +1068,7 @@
       "Accessor"
       (documentation 'text-tag-foreground 'function)
  "@version{2023-10-24}
-  @syntax[]{(setf (gtk:text-tag-foreground object) color)}
+  @syntax{(setf (gtk:text-tag-foreground object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a string with the foreground color}
   @begin{short}
@@ -1101,8 +1101,8 @@
       "Accessor"
       (documentation 'text-tag-foreground-rgba 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-foreground-rgba object) => color}
-  @syntax[]{(setf (gtk:text-tag-foreground-rgba object) color)}
+  @syntax{(gtk:text-tag-foreground-rgba object) => color}
+  @syntax{(setf (gtk:text-tag-foreground-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a @class{gdk:rgba} color}
   @begin{short}
@@ -1129,8 +1129,8 @@
       "Accessor"
       (documentation 'text-tag-foreground-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-foreground-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-foreground-set object) setting)}
+  @syntax{(gtk:text-tag-foreground-set object) => setting}
+  @syntax{(setf (gtk:text-tag-foreground-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tags affect the foreground color}
   @begin{short}
@@ -1155,8 +1155,8 @@
       "Accessor"
       (documentation 'text-tag-indent 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-indent object) => indent}
-  @syntax[]{(setf (gtk:text-tag-indent object) indent)}
+  @syntax{(gtk:text-tag-indent object) => indent}
+  @syntax{(setf (gtk:text-tag-indent object) indent)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[indent]{an integer with the amount to indent}
   @begin{short}
@@ -1180,8 +1180,8 @@
       "Accessor"
       (documentation 'text-tag-indent-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-indent-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-indent-set object) setting)}
+  @syntax{(gtk:text-tag-indent-set object) => setting}
+  @syntax{(setf (gtk:text-tag-indent-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects indentation}
   @begin{short}
@@ -1206,8 +1206,8 @@
       "Accessor"
       (documentation 'text-tag-insert-hyphens 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-insert-hyphens object) => setting}
-  @syntax[]{(setf (gtk:text-tag-insert-hyphens object) setting)}
+  @syntax{(gtk:text-tag-insert-hyphens object) => setting}
+  @syntax{(setf (gtk:text-tag-insert-hyphens object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether to insert hyphens at breaks}
   @begin{short}
@@ -1233,8 +1233,8 @@
       "Accessor"
       (documentation 'text-tag-insert-hyphens-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-insert-hyphens-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-insert-hyphens-set object) setting)}
+  @syntax{(gtk:text-tag-insert-hyphens-set object) => setting}
+  @syntax{(setf (gtk:text-tag-insert-hyphens-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects insertion of hyphens}
   @begin{short}
@@ -1260,8 +1260,8 @@
       "Accessor"
       (documentation 'text-tag-invisible 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-invisible object) => invisible}
-  @syntax[]{(setf (gtk:text-tag-invisible object) invisible)}
+  @syntax{(gtk:text-tag-invisible object) => invisible}
+  @syntax{(setf (gtk:text-tag-invisible object) invisible)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[invisible]{a boolean whether this text is hidden}
   @begin{short}
@@ -1287,8 +1287,8 @@
       "Accessor"
       (documentation 'text-tag-invisible-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-invisible-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-invisible-set object) setting)}
+  @syntax{(gtk:text-tag-invisible-set object) => setting}
+  @syntax{(setf (gtk:text-tag-invisible-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects visibility}
   @begin{short}
@@ -1313,8 +1313,8 @@
       "Accessor"
       (documentation 'text-tag-justification 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-justification object) => justification}
-  @syntax[]{(setf (gtk:text-tag-justification object) justification)}
+  @syntax{(gtk:text-tag-justification object) => justification}
+  @syntax{(setf (gtk:text-tag-justification object) justification)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[justification]{a @symbol{gtk:justification} value}
   @begin{short}
@@ -1340,8 +1340,8 @@
       "Accessor"
       (documentation 'text-tag-justification-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-justification-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-justification-set object) setting)}
+  @syntax{(gtk:text-tag-justification-set object) => setting}
+  @syntax{(setf (gtk:text-tag-justification-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects paragraph justification}
   @begin{short}
@@ -1368,8 +1368,8 @@
       "Accessor"
       (documentation 'text-tag-language 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-language object) => language}
-  @syntax[]{(setf (gtk:text-tag-language object) language)}
+  @syntax{(gtk:text-tag-language object) => language}
+  @syntax{(setf (gtk:text-tag-language object) language)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[language]{a string with language this text is in}
   @begin{short}
@@ -1397,8 +1397,8 @@
       "Accessor"
       (documentation 'text-tag-language-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-language-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-language-set object) setting)}
+  @syntax{(gtk:text-tag-language-set object) => setting}
+  @syntax{(setf (gtk:text-tag-language-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the language}
   @begin{short}
@@ -1423,8 +1423,8 @@
       "Accessor"
       (documentation 'text-tag-left-margin 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-left-margin object) => margin}
-  @syntax[]{(setf (gtk:text-tag-left-margin object) margin)}
+  @syntax{(gtk:text-tag-left-margin object) => margin}
+  @syntax{(setf (gtk:text-tag-left-margin object) margin)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[margin]{an integer with the width of the left margin in pixels}
   @begin{short}
@@ -1449,8 +1449,8 @@
       "Accessor"
       (documentation 'text-tag-left-margin-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-left-margin-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-left-margin-set object) setting)}
+  @syntax{(gtk:text-tag-left-margin-set object) => setting}
+  @syntax{(setf (gtk:text-tag-left-margin-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the left margin}
   @begin{short}
@@ -1475,8 +1475,8 @@
       "Accessor"
       (documentation 'text-tag-letter-spacing 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-letter-spacing object) => spacing}
-  @syntax[]{(setf (gtk:text-tag-letter-spacing object) spacing)}
+  @syntax{(gtk:text-tag-letter-spacing object) => spacing}
+  @syntax{(setf (gtk:text-tag-letter-spacing object) spacing)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[spacing]{an integer with extra spacing between graphems in Pango
     units}
@@ -1503,8 +1503,8 @@
       "Accessor"
       (documentation 'text-tag-letter-spacing-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-letter-spacing-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-letter-spacing-set object) setting)}
+  @syntax{(gtk:text-tag-letter-spacing-set object) => setting}
+  @syntax{(setf (gtk:text-tag-letter-spacing-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects letter spacing}
   @begin{short}
@@ -1527,8 +1527,8 @@
       "Accessor"
       (documentation 'text-tag-line-height 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-line-height object) => height}
-  @syntax[]{(setf (gtk:text-tag-line-height object) height)}
+  @syntax{(gtk:text-tag-line-height object) => height}
+  @syntax{(setf (gtk:text-tag-line-height object) height)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[height]{a float with the factor to scale line height by}
   @begin{short}
@@ -1555,8 +1555,8 @@
       "Accessor"
       (documentation 'text-tag-line-height-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-line-height-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-line-height-set object) setting)}
+  @syntax{(gtk:text-tag-line-height-set object) => setting}
+  @syntax{(setf (gtk:text-tag-line-height-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects line height}
   @begin{short}
@@ -1583,7 +1583,7 @@
       "Accessor"
       (documentation 'text-tag-name 'function)
  "@version{2023-10-5}
-  @syntax[]{(gtk:text-tag-name object) => name}
+  @syntax{(gtk:text-tag-name object) => name}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[name]{a string with the name of the text tag}
   @begin{short}
@@ -1607,8 +1607,8 @@
       "Accessor"
       (documentation 'text-tag-overline 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-overline object) => setting}
-  @syntax[]{(setf (gtk:text-tag-overline object) setting}
+  @syntax{(gtk:text-tag-overline object) => setting}
+  @syntax{(setf (gtk:text-tag-overline object) setting}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a @symbol{pango:overline} value}
   @begin{short}
@@ -1631,8 +1631,8 @@
       "Accessor"
       (documentation 'text-tag-overline-rgba 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-overline-rgba object) => rgba}
-  @syntax[]{(setf (gtk:text-tag-overline-rgba object) rgba}
+  @syntax{(gtk:text-tag-overline-rgba object) => rgba}
+  @syntax{(setf (gtk:text-tag-overline-rgba object) rgba}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[rgba]{a @class{gdk:rgba} instance with the color}
   @begin{short}
@@ -1658,8 +1658,8 @@
       "Accessor"
       (documentation 'text-tag-overline-rgba-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-overline-rgba-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-overline-rgba-set object) setting}
+  @syntax{(gtk:text-tag-overline-rgba-set object) => setting}
+  @syntax{(setf (gtk:text-tag-overline-rgba-set object) setting}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects overlining color}
   @begin{short}
@@ -1683,8 +1683,8 @@
       "Accessor"
       (documentation 'text-tag-overline-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-overline-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-overline-set object) setting}
+  @syntax{(gtk:text-tag-overline-set object) => setting}
+  @syntax{(setf (gtk:text-tag-overline-set object) setting}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects overlining}
   @begin{short}
@@ -1709,8 +1709,8 @@
       "Accessor"
       (documentation 'text-tag-paragraph-background 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-paragraph-background object) => color}
-  @syntax[]{(setf (gtk:text-tag-paragraph-background object) color)}
+  @syntax{(gtk:text-tag-paragraph-background object) => color}
+  @syntax{(setf (gtk:text-tag-paragraph-background object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a string with the paragraph background color}
   @begin{short}
@@ -1736,8 +1736,8 @@
       "Accessor"
       (documentation 'text-tag-paragraph-background-rgba 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-paragraph-background-rgba object) => color}
-  @syntax[]{(setf (gtk:text-tag-paragraph-background-rgba object) color)}
+  @syntax{(gtk:text-tag-paragraph-background-rgba object) => color}
+  @syntax{(setf (gtk:text-tag-paragraph-background-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a @class{gdk:rgba} color}
   @begin{short}
@@ -1765,8 +1765,8 @@
       "Accessor"
       (documentation 'text-tag-paragraph-background-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-paragraph-background-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-paragraph-background-set object) setting)}
+  @syntax{(gtk:text-tag-paragraph-background-set object) => setting}
+  @syntax{(setf (gtk:text-tag-paragraph-background-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this affects the paragraph background
     color}
@@ -1795,8 +1795,8 @@
       "Accessor"
       (documentation 'text-tag-pixels-above-lines 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-pixels-above-lines object) => pixels}
-  @syntax[]{(setf (gtk:text-tag-pixels-above-lines object) pixels)}
+  @syntax{(gtk:text-tag-pixels-above-lines object) => pixels}
+  @syntax{(setf (gtk:text-tag-pixels-above-lines object) pixels)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[pixels]{an integer with the pixels of blank space above paragraphs}
   @begin{short}
@@ -1822,8 +1822,8 @@
       "Accessor"
       (documentation 'text-tag-pixels-above-lines-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-pixels-above-lines-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-pixels-above-lines-set object) setting)}
+  @syntax{(gtk:text-tag-pixels-above-lines-set object) => setting}
+  @syntax{(setf (gtk:text-tag-pixels-above-lines-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the number of pixels
     above lines}
@@ -1851,8 +1851,8 @@
       "Accessor"
       (documentation 'text-tag-pixels-below-lines 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-pixels-below-lines object) => pixels}
-  @syntax[]{(setf (gtk:text-tag-pixels-below-lines object) pixels)}
+  @syntax{(gtk:text-tag-pixels-below-lines object) => pixels}
+  @syntax{(setf (gtk:text-tag-pixels-below-lines object) pixels)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[pixels]{an integer with the pixels of blank space below paragraphs}
   @begin{short}
@@ -1878,8 +1878,8 @@
       "Accessor"
       (documentation 'text-tag-pixels-below-lines-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-pixels-below-lines-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-pixels-below-lines-set object) setting)}
+  @syntax{(gtk:text-tag-pixels-below-lines-set object) => setting}
+  @syntax{(setf (gtk:text-tag-pixels-below-lines-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the number of pixels
     below lines}
@@ -1907,8 +1907,8 @@
       "Accessor"
       (documentation 'text-tag-pixels-inside-wrap 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-pixels-inside-wrap object) => pixels}
-  @syntax[]{(setf (gtk:text-tag-pixels-inside-wrap object) pixels)}
+  @syntax{(gtk:text-tag-pixels-inside-wrap object) => pixels}
+  @syntax{(setf (gtk:text-tag-pixels-inside-wrap object) pixels)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[pixels]{an integer with the pixels of blank space between wrapped
     lines in a paragraph}
@@ -1935,8 +1935,8 @@
       "Accessor"
       (documentation 'text-tag-pixels-inside-wrap-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-pixels-inside-wrap-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-pixels-inside-wrap-set object) setting)}
+  @syntax{(gtk:text-tag-pixels-inside-wrap-set object) => setting}
+  @syntax{(setf (gtk:text-tag-pixels-inside-wrap-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the number of pixels
     between wrapped lines}
@@ -1962,8 +1962,8 @@
       "Accessor"
       (documentation 'text-tag-right-margin 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-right-margin object) => margin}
-  @syntax[]{(setf (gtk:text-tag-right-margin object) margin)}
+  @syntax{(gtk:text-tag-right-margin object) => margin}
+  @syntax{(setf (gtk:text-tag-right-margin object) margin)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[margin]{an integer with the right margin in pixels}
   @begin{short}
@@ -1988,8 +1988,8 @@
       "Accessor"
       (documentation 'text-tag-right-margin-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-right-margin-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-right-margin-set object) setting)}
+  @syntax{(gtk:text-tag-right-margin-set object) => setting}
+  @syntax{(setf (gtk:text-tag-right-margin-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the right margin}
   @begin{short}
@@ -2014,8 +2014,8 @@
       "Accessor"
       (documentation 'text-tag-rise 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-rise object) => rise}
-  @syntax[]{(setf (gtk:text-tag-rise object) rise)}
+  @syntax{(gtk:text-tag-rise object) => rise}
+  @syntax{(setf (gtk:text-tag-rise object) rise)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[rise]{an integer with the offset of text above the baseline in
     Pango units}
@@ -2041,8 +2041,8 @@
       "Accessor"
       (documentation 'text-tag-rise-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-rise-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-rise-set object) setting)}
+  @syntax{(gtk:text-tag-rise-set object) => setting}
+  @syntax{(setf (gtk:text-tag-rise-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the rise}
   @begin{short}
@@ -2069,8 +2069,8 @@
       "Accessor"
       (documentation 'text-tag-scale 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-scale object) => scale}
-  @syntax[]{(setf (gtk:text-tag-scale object) scale)}
+  @syntax{(gtk:text-tag-scale object) => scale}
+  @syntax{(setf (gtk:text-tag-scale object) scale)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[scale]{a double float with the font size as a scale factor}
   @begin{short}
@@ -2097,8 +2097,8 @@
       "Accessor"
       (documentation 'text-tag-scale-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-scale-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-scale-set object) setting)}
+  @syntax{(gtk:text-tag-scale-set object) => setting}
+  @syntax{(setf (gtk:text-tag-scale-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag scales the font size}
   @begin{short}
@@ -2122,8 +2122,8 @@
       "Accessor"
       (documentation 'text-tag-sentence 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-sentence object) => setting}
-  @syntax[]{(setf (gtk:text-tag-sentence object) setting)}
+  @syntax{(gtk:text-tag-sentence object) => setting}
+  @syntax{(setf (gtk:text-tag-sentence object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag represents a single sentence}
   @begin{short}
@@ -2149,8 +2149,8 @@
       "Accessor"
       (documentation 'text-tag-sentence-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-sentence-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-sentence-set object) setting)}
+  @syntax{(gtk:text-tag-sentence-set object) => setting}
+  @syntax{(setf (gtk:text-tag-sentence-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the
     @slot[gtk:text-tag]{sentence} property.}
@@ -2177,8 +2177,8 @@
       "Accessor"
       (documentation 'text-tag-show-spaces 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-show-spaces object) => setting}
-  @syntax[]{(setf (gtk:text-tag-show-spaces object) setting)}
+  @syntax{(gtk:text-tag-show-spaces object) => setting}
+  @syntax{(setf (gtk:text-tag-show-spaces object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a @symbol{pango:show-flags} value}
   @begin{short}
@@ -2204,8 +2204,8 @@
       "Accessor"
       (documentation 'text-tag-show-spaces-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-show-spaces-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-show-spaces-set object) setting)}
+  @syntax{(gtk:text-tag-show-spaces-set object) => setting}
+  @syntax{(setf (gtk:text-tag-show-spaces-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects rendering of invisible
     characters}
@@ -2231,8 +2231,8 @@
       "Accessor"
       (documentation 'text-tag-size 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-size object) => size}
-  @syntax[]{(setf (gtk:text-tag-size object) size)}
+  @syntax{(gtk:text-tag-size object) => size}
+  @syntax{(setf (gtk:text-tag-size object) size)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[size]{an integer with the the font size in Pango units}
   @begin{short}
@@ -2258,8 +2258,8 @@
       "Accessor"
       (documentation 'text-tag-size-points 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-size-points object) => size}
-  @syntax[]{(setf (gtk:text-tag-size-points object) size)}
+  @syntax{(gtk:text-tag-size-points object) => size}
+  @syntax{(setf (gtk:text-tag-size-points object) size)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[size]{a double float with the the font size in points}
   @begin{short}
@@ -2284,8 +2284,8 @@
       "Accessor"
       (documentation 'text-tag-size-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-size-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-size-set object) setting)}
+  @syntax{(gtk:text-tag-size-set object) => setting}
+  @syntax{(setf (gtk:text-tag-size-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the font size}
   @begin{short}
@@ -2311,8 +2311,8 @@
       "Accessor"
       (documentation 'text-tag-stretch 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-stretch object) => stretch}
-  @syntax[]{(setf (gtk:text-tag-stretch object) stretch)}
+  @syntax{(gtk:text-tag-stretch object) => stretch}
+  @syntax{(setf (gtk:text-tag-stretch object) stretch)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[stretch]{a @symbol{pango:stretch} value}
   @begin{short}
@@ -2338,8 +2338,8 @@
       "Accessor"
       (documentation 'text-tag-stretch-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-stretch-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-stretch-set object) setting)}
+  @syntax{(gtk:text-tag-stretch-set object) => setting}
+  @syntax{(setf (gtk:text-tag-stretch-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag afects the font stretch}
   @begin{short}
@@ -2363,8 +2363,8 @@
       "Accessor"
       (documentation 'text-tag-strikethrough 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-strikethrough object) => strikethrough}
-  @syntax[]{(setf (gtk:text-tag-strikethrough object) strikethrough)}
+  @syntax{(gtk:text-tag-strikethrough object) => strikethrough}
+  @syntax{(setf (gtk:text-tag-strikethrough object) strikethrough)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[strikethrough]{a boolean whether to strike through the text}
   @begin{short}
@@ -2391,8 +2391,8 @@
       "Accessor"
       (documentation 'text-tag-strikethrough-rgba 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-strikethrough-rgba object) => color}
-  @syntax[]{(setf (gtk:text-tag-strikethrough-rgba object) color)}
+  @syntax{(gtk:text-tag-strikethrough-rgba object) => color}
+  @syntax{(setf (gtk:text-tag-strikethrough-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a @class{gdk:rgba} instance with the color}
   @begin{short}
@@ -2421,8 +2421,8 @@
       "Accessor"
       (documentation 'text-tag-strikethrough-rgba-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-strikethrough-rgba-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-strikethrough-rgba-set object) setting)}
+  @syntax{(gtk:text-tag-strikethrough-rgba-set object) => setting}
+  @syntax{(setf (gtk:text-tag-strikethrough-rgba-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether a @slot[gtk:text-tag]{strikethrough-rgba}
     property has been set}
@@ -2448,8 +2448,8 @@
       "Accessor"
       (documentation 'text-tag-strikethrough-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-strikethrough-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-strikethrough-set object) setting)}
+  @syntax{(gtk:text-tag-strikethrough-set object) => setting}
+  @syntax{(setf (gtk:text-tag-strikethrough-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects strikethrough}
   @begin{short}
@@ -2473,8 +2473,8 @@
       "Accessor"
       (documentation 'text-tag-style 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-style object) => style}
-  @syntax[]{(setf (gtk:text-tag-style object) style)}
+  @syntax{(gtk:text-tag-style object) => style}
+  @syntax{(setf (gtk:text-tag-style object) style)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[style]{a @symbol{pango:style} value}
   @begin{short}
@@ -2500,8 +2500,8 @@
       "Accessor"
       (documentation 'text-tag-style-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-style-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-style-set object) setting)}
+  @syntax{(gtk:text-tag-style-set object) => setting}
+  @syntax{(setf (gtk:text-tag-style-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the font style}
   @begin{short}
@@ -2524,8 +2524,8 @@
       "Accessor"
       (documentation 'text-tag-tabs 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-tabs object) => tabs}
-  @syntax[]{(setf (gtk:text-tag-tabs object) tabs)}
+  @syntax{(gtk:text-tag-tabs object) => tabs}
+  @syntax{(setf (gtk:text-tag-tabs object) tabs)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[tabs]{a @class{pango:tab-array} instance with the custom tabs}
   @begin{short}
@@ -2550,8 +2550,8 @@
       "Accessor"
       (documentation 'text-tag-tabs-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-tabs-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-tabs-set object) setting)}
+  @syntax{(gtk:text-tag-tabs-set object) => setting}
+  @syntax{(setf (gtk:text-tag-tabs-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this affects tabs}
   @begin{short}
@@ -2575,8 +2575,8 @@
       "Accessor"
       (documentation 'text-tag-text-transform 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-text-transform object) => transform}
-  @syntax[]{(setf (gtk:text-tag-text-transform object) transform)}
+  @syntax{(gtk:text-tag-text-transform object) => transform}
+  @syntax{(setf (gtk:text-tag-text-transform object) transform)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[transform]{a @symbol{pango:text-transform} value}
   @begin{short}
@@ -2605,8 +2605,8 @@
       "Accessor"
       (documentation 'text-tag-text-transform-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-text-transform-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-text-transform-set object) setting)}
+  @syntax{(gtk:text-tag-text-transform-set object) => setting}
+  @syntax{(setf (gtk:text-tag-text-transform-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the
     @slot[gtk:text-tag]{text-transform} property.}
@@ -2634,8 +2634,8 @@
       "Accessor"
       (documentation 'text-tag-underline 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-underline object) => underline}
-  @syntax[]{(setf (gtk:text-tag-underline object) underline)}
+  @syntax{(gtk:text-tag-underline object) => underline}
+  @syntax{(setf (gtk:text-tag-underline object) underline)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[underline]{a @symbol{pango:underline} value}
   @begin{short}
@@ -2665,8 +2665,8 @@
       "Accessor"
       (documentation 'text-tag-underline-rgba 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-underline-rgba object) => color}
-  @syntax[]{(setf (gtk:text-tag-underline-rgba object) color)}
+  @syntax{(gtk:text-tag-underline-rgba object) => color}
+  @syntax{(setf (gtk:text-tag-underline-rgba object) color)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[color]{a @class{gdk:rgba} instance with the color}
   @begin{short}
@@ -2699,8 +2699,8 @@
       "Accessor"
       (documentation 'text-tag-underline-rgba-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-underline-rgba-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-underline-rgba-set object) setting)}
+  @syntax{(gtk:text-tag-underline-rgba-set object) => setting}
+  @syntax{(setf (gtk:text-tag-underline-rgba-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether the @slot[gtk:text-tag]{underline-rgba}
     property has been set}
@@ -2725,8 +2725,8 @@
       "Accessor"
       (documentation 'text-tag-underline-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-underline-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-underline-set object) setting)}
+  @syntax{(gtk:text-tag-underline-set object) => setting}
+  @syntax{(setf (gtk:text-tag-underline-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects underlining}
   @begin{short}
@@ -2752,8 +2752,8 @@
       "Accessor"
       (documentation 'text-tag-variant 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-variant object) => variant}
-  @syntax[]{(setf (gtk:text-tag-variant object) variant)}
+  @syntax{(gtk:text-tag-variant object) => variant}
+  @syntax{(setf (gtk:text-tag-variant object) variant)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[variant]{a @symbol{pango:variant} value}
   @begin{short}
@@ -2779,8 +2779,8 @@
       "Accessor"
       (documentation 'text-tag-variant-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-variant-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-variant-set object) setting)}
+  @syntax{(gtk:text-tag-variant-set object) => setting}
+  @syntax{(setf (gtk:text-tag-variant-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this affects the font variant}
   @begin{short}
@@ -2806,8 +2806,8 @@
       "Accessor"
       (documentation 'text-tag-weight 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-weight object) => weight}
-  @syntax[]{(setf (gtk:text-tag-weight object) weight)}
+  @syntax{(gtk:text-tag-weight object) => weight}
+  @syntax{(setf (gtk:text-tag-weight object) weight)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[weight]{an integer for the font weight}
   @begin{short}
@@ -2833,8 +2833,8 @@
       "Accessor"
       (documentation 'text-tag-weight-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-weight-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-weight-set object) setting)}
+  @syntax{(gtk:text-tag-weight-set object) => setting}
+  @syntax{(setf (gtk:text-tag-weight-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the font weight}
   @begin{short}
@@ -2858,8 +2858,8 @@
       "Accessor"
       (documentation 'text-tag-word 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-word object) => setting}
-  @syntax[]{(setf (gtk:text-tag-word object) setting)}
+  @syntax{(gtk:text-tag-word object) => setting}
+  @syntax{(setf (gtk:text-tag-word object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag represents a single word}
   @begin{short}
@@ -2886,8 +2886,8 @@
       "Accessor"
       (documentation 'text-tag-word-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-word-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-word-set object) setting)}
+  @syntax{(gtk:text-tag-word-set object) => setting}
+  @syntax{(setf (gtk:text-tag-word-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects the
     @slot[gtk:text-tag]{word} property.}
@@ -2916,8 +2916,8 @@
       "Accessor"
       (documentation 'text-tag-wrap-mode 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-wrap-mode object) => wrap-mode}
-  @syntax[]{(setf (gtk:text-tag-wrap-mode object) wrap-mode)}
+  @syntax{(gtk:text-tag-wrap-mode object) => wrap-mode}
+  @syntax{(setf (gtk:text-tag-wrap-mode object) wrap-mode)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[wrap-mode]{a @symbol{gtk:wrap-mode} value}
   @begin{short}
@@ -2942,8 +2942,8 @@
       "Accessor"
       (documentation 'text-tag-wrap-mode-set 'function)
  "@version{2024-3-8}
-  @syntax[]{(gtk:text-tag-wrap-mode-set object) => setting}
-  @syntax[]{(setf (gtk:text-tag-wrap-mode-set object) setting)}
+  @syntax{(gtk:text-tag-wrap-mode-set object) => setting}
+  @syntax{(setf (gtk:text-tag-wrap-mode-set object) setting)}
   @argument[object]{a @class{gtk:text-tag} object}
   @argument[setting]{a boolean whether this tag affects line wrap mode}
   @begin{short}
@@ -2963,7 +2963,7 @@
  "@version{2023-10-24}
   @argument[name]{a string with the tag name, or @code{nil}}
   @argument[args]{list of property keywords and values}
-  @return{A new @class{gtk:text-tag} object.}
+  @return{The new @class{gtk:text-tag} object.}
   @begin{short}
     Creates a new tag.
   @end{short}
@@ -2983,7 +2983,7 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_tag_get_priority
-;;; gtk_text_tag_set_priority -> text-tag-priority
+;;; gtk_text_tag_set_priority
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf text-tag-priority) (priority tag)
@@ -2996,8 +2996,8 @@
 (cffi:defcfun ("gtk_text_tag_get_priority" text-tag-priority) :int
  #+liber-documentation
  "@version{2023-10-24}
-  @syntax[]{(gtk:text-tag-priority tag) => priority}
-  @syntax[]{(setf (gtk:text-tag-priority tag) priority)}
+  @syntax{(gtk:text-tag-priority tag) => priority}
+  @syntax{(setf (gtk:text-tag-priority tag) priority)}
   @argument[tag]{a @class{gtk:text-tag} object}
   @argument[priority]{an integer with the priority of the tag}
   @begin{short}

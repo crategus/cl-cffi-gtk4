@@ -327,19 +327,18 @@
   (let ((n (length values)))
     (cffi:with-foreign-objects ((value-ar '(:struct g:value) n)
                                 (columns-ar :int n))
-      (loop for i from 0 below n
-            for value in values
-            for gtype = (tree-model-column-type store i)
-            do (setf (cffi:mem-aref columns-ar :int i) i)
-               (gobject:set-g-value (cffi:mem-aptr value-ar '(:struct g:value)
-                                                            i)
-                                    value
-                                    gtype
-                                    :zero-gvalue t))
+      (iter (for i from 0 below n)
+            (for value in values)
+            (for gtype = (tree-model-column-type store i))
+            (setf (cffi:mem-aref columns-ar :int i) i)
+            (gobject:set-g-value (cffi:mem-aptr value-ar '(:struct g:value) i)
+                                 value
+                                 gtype
+                                 :zero-gvalue t))
       (%tree-store-set-valuesv store iter columns-ar value-ar n)
-      (loop for i from 0 below n
-            do (gobject:value-unset (cffi:mem-aptr value-ar
-                                                   '(:struct g:value) i)))
+      (iter (for i from 0 below n)
+            (gobject:value-unset (cffi:mem-aptr value-ar
+                                                '(:struct g:value) i)))
       iter)))
 
 (export 'tree-store-set)

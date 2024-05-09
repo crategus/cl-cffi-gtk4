@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -97,7 +97,7 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- tree-list-row-sorter-sorter --------------------------------------------
+;;; --- gtk:tree-list-row-sorter-sorter ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "sorter"
@@ -110,8 +110,8 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
       "Accessor"
       (documentation 'tree-list-row-sorter-sorter 'function)
  "@version{#2023-9-10}
-  @syntax[]{(gtk:tree-list-row-sorter-sorter object) => sorter}
-  @syntax[]{(setf (gtk:tree-list-row-sorter-sorter object) sorter)}
+  @syntax{(gtk:tree-list-row-sorter-sorter object) => sorter}
+  @syntax{(setf (gtk:tree-list-row-sorter-sorter object) sorter)}
   @argument[object]{a @class{gtk:tree-list-row-sorter} object}
   @argument[sorter]{a @class{gtk:sorter} object to use, or @code{nil}}
   @begin{short}
@@ -126,7 +126,7 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
   @see-function{gtk:tree-list-row-item}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_list_row_sorter_new ()
+;;; gtk_tree_list_row_sorter_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline tree-list-row-sorter-new))
@@ -135,7 +135,7 @@ gtk_column_view_set_model (view, G_LIST_MODEL (selection));
  #+liber-documentation
  "@version{#2023-9-26}
   @argument[sorter]{a @class{gtk:sorter} object}
-  @return{A new @class{gtk:tree-list-row-sorter} object.}
+  @return{The new @class{gtk:tree-list-row-sorter} object.}
   @begin{short}
     Create a special-purpose sorter that applies the sorting of sorter to the
     levels of a @class{gtk:tree-list-model} object.

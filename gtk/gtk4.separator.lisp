@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -104,7 +104,7 @@
  #+liber-documentation
  "@version{#2022-9-9}
   @argument[orientation]{a value of the  @symbol{gtk:orientation} enumeration}
-  @return{A new @class{gtk:separator} widget.}
+  @return{The new @class{gtk:separator} widget.}
   @begin{short}
     Creates a new separator widget with the given @arg{orientation}.
   @end{short}

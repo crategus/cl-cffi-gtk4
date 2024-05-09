@@ -79,7 +79,7 @@
   @see-class{gtk:window}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_root_get_display ()
+;;; gtk_root_get_display
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_root_get_display" root-display) (g:object gdk:display)
@@ -97,8 +97,8 @@
 (export 'root-display)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_root_get_focus ()
-;;; gtk_root_set_focus ()
+;;; gtk_root_get_focus
+;;; gtk_root_set_focus
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf root-focus) (value root)
@@ -111,8 +111,8 @@
 (cffi:defcfun ("gtk_root_get_focus" root-focus) (g:object widget)
  #+liber-documentation
  "@version{2024-4-10}
-  @syntax[]{(gtk:root-focus root) => widget}
-  @syntax[]{(setf (gtk:root-focus root) widget)}
+  @syntax{(gtk:root-focus root) => widget}
+  @syntax{(setf (gtk:root-focus root) widget)}
   @argument[root]{a @class{gtk:root} widget}
   @argument[widget]{a @class{gtk:widget} focus widget, or @code{nil} if there
     is none}

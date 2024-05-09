@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -70,7 +70,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkViewport
+;;; GtkViewport
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkViewport" viewport
@@ -118,7 +118,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- viewport-child -----------------------------------------------------
+;;; --- gtk:viewport-child -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'viewport) t)
@@ -130,8 +130,8 @@
       "Accessor"
       (documentation 'viewport-child 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:viewport-child object) => child}
-  @syntax[]{(setf (gtk:viewport-child object) child)}
+  @syntax{(gtk:viewport-child object) => child}
+  @syntax{(setf (gtk:viewport-child object) child)}
   @argument[object]{a @class{gtk:viewport} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -141,7 +141,7 @@
   @see-class{gtk:viewport}
   @see-class{gtk:widget}")
 
-;;; --- viewport-scroll-to-focus -------------------------------------------
+;;; --- gtk:viewport-scroll-to-focus -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scroll-to-focus"
@@ -156,8 +156,8 @@
       "Accessor"
       (documentation 'viewport-scroll-to-focus 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:viewport-scroll-to-focus object) => setting}
-  @syntax[]{(setf (gtk:viewport-scroll-to-focus object) setting)}
+  @syntax{(gtk:viewport-scroll-to-focus object) => setting}
+  @syntax{(setf (gtk:viewport-scroll-to-focus object) setting)}
   @argument[object]{a @class{gtk:viewport} widget}
   @argument[setting]{a boolean whether to keep the focus widget scrolled to
     view}
@@ -172,7 +172,7 @@
   @see-class{gtk:viewport}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_viewport_new ()
+;;; gtk_viewport_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline viewport-new))
@@ -182,7 +182,7 @@
  "@version{2023-8-6}
   @argument[hadjustment]{a horizontal @class{gtk:adjustment} object}
   @argument[vadjustment]{a vertical @class{gtk:adjustment} object}
-  @return{A new @class{gtk:viewport} widget.}
+  @return{The new @class{gtk:viewport} widget.}
   @begin{short}
     Creates a new viewport with the given adjustments, of with default
     adjustments if none are given.

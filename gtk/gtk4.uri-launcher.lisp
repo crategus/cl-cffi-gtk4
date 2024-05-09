@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -91,7 +91,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- uri-launcher-uri -------------------------------------------------------
+;;; --- gtk:uri-launcher-uri ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "uri" 'uri-launcher) t)
@@ -103,8 +103,8 @@
       "Accessor"
       (documentation 'uri-launcher-uri 'function)
  "@version{#2023-10-12}
-  @syntax[]{(gtk:uri-launcher-uri object) => uri}
-  @syntax[]{(setf (gtk:uri-launcher-uri object) uri)}
+  @syntax{(gtk:uri-launcher-uri object) => uri}
+  @syntax{(setf (gtk:uri-launcher-uri object) uri)}
   @argument[object]{a @class{gtk:uri-launcher} object}
   @argument[uri]{a string with the URI}
   @begin{short}

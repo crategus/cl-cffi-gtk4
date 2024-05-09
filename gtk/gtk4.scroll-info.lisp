@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -61,10 +61,10 @@
       (documentation 'scroll-info 'type)
  "@version{2023-11-16}
   @begin{short}
-    The @class{gtk:scroll-info} structure can be used to provide more accurate 
+    The @class{gtk:scroll-info} structure can be used to provide more accurate
     data on how a scroll operation should be performed.
   @end{short}
-  Scrolling functions usually allow passing a @code{nil} scroll info which will 
+  Scrolling functions usually allow passing a @code{nil} scroll info which will
   cause the default values to be used and just scroll the element into view.
 
   Since 4.12
@@ -79,7 +79,7 @@
 (defun scroll-info-new ()
  #+liber-documentation
  "@version{2023-11-16}
-  @return{A new @class{gtk:scroll-info} instance.}
+  @return{The new @class{gtk:scroll-info} instance.}
   @begin{short}
     Creates a new scroll info for scrolling an element into view.
   @end{short}
@@ -124,12 +124,12 @@
                         :void)
   value)
 
-(cffi:defcfun ("gtk_scroll_info_get_enable_horizontal" 
+(cffi:defcfun ("gtk_scroll_info_get_enable_horizontal"
                scroll-info-enable-horizontal) :boolean
  #+liber-documentation
  "@version{2023-11-16}
-  @syntax[]{(gtk:scroll-info-enable-horizontal scrollinfo) => enable}
-  @syntax[]{(setf (gtk:scroll-info-enable-horizontal scrollinfo) enable)}
+  @syntax{(gtk:scroll-info-enable-horizontal scrollinfo) => enable}
+  @syntax{(setf (gtk:scroll-info-enable-horizontal scrollinfo) enable)}
   @argument[scrollinfo]{a @class{gtk:scroll-info} instance}
   @argument[enable]{a boolean whether scrolling in the horizontal direction
     should happen}
@@ -137,7 +137,7 @@
     Turns horizontal scrolling on or off.
   @end{short}
 
-  Since 4.12   
+  Since 4.12
   @see-class{gtk:scroll-info}
   @see-function{gtk:scroll-info-enable-vertical}"
   (scrollinfo (g:boxed scroll-info)))
@@ -156,12 +156,12 @@
                         :void)
   value)
 
-(cffi:defcfun ("gtk_scroll_info_get_enable_vertical" 
+(cffi:defcfun ("gtk_scroll_info_get_enable_vertical"
                scroll-info-enable-vertical) :boolean
  #+liber-documentation
  "@version{2023-11-16}
-  @syntax[]{(gtk:scroll-info-enable-vertical scrollinfo) => enable}
-  @syntax[]{(setf (gtk:scroll-info-enable-vertical scrollinfo) enable)}
+  @syntax{(gtk:scroll-info-enable-vertical scrollinfo) => enable}
+  @syntax{(setf (gtk:scroll-info-enable-vertical scrollinfo) enable)}
   @argument[scrollinfo]{a @class{gtk:scroll-info} instance}
   @argument[enable]{a boolean whether scrolling in the vertical direction
     should happen}
@@ -169,7 +169,7 @@
     Turns vertical scrolling on or off.
   @end{short}
 
-  Since 4.12   
+  Since 4.12
   @see-class{gtk:scroll-info}
   @see-function{gtk:scroll-info-enable-vertical}"
   (scrollinfo (g:boxed scroll-info)))

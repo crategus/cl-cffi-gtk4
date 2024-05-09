@@ -285,12 +285,8 @@
       "GFlags"
       (liber:symbol-documentation 'style-context-print-flags)
  "@version{2023-8-30}
-  @begin{short}
-    Flags that modify the behavior of the @fun{gtk:style-context-to-string}
-    function.
-  @end{short}
-  New values may be added to this enumeration.
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GtkStyleContextPrintFlags\" style-context-print-flags
   (:export t
    :type-initializer \"gtk_style_context_print_flags_get_type\")
@@ -298,14 +294,23 @@
   (:recurse #.(ash 1 0))
   (:show-style #.(ash 1 1))
   (:show-change #.(ash 1 2)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{}
-    @entry[:recurse]{Print the entire tree of CSS nodes starting at the node
-    of the style context.}
-    @entry[:show-style]{Show the values of the CSS properties for each node.}
-    @entry[:show-change]{Show information about what changes affect the styles.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{}
+      @entry[:recurse]{Print the entire tree of CSS nodes starting at the node
+        of the style context.}
+      @entry[:show-style]{Show the values of the CSS properties for each node.}
+      @entry[:show-change]{Show information about what changes affect the
+        styles.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Flags that modify the behavior of the @fun{gtk:style-context-to-string}
+    function.
+  @end{short}
+  New values may be added to this enumeration.
   @see-class{gtk:style-context}
   @see-function{gtk:style-context-to-string}")
 

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -101,7 +101,7 @@
 ;;; Property and Accesor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- shortcut-label-accelerator ---------------------------------------------
+;;; --- gtk:shortcut-label-accelerator -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "accelerator" 'shortcut-label) t)
@@ -116,8 +116,8 @@
       "Accessor"
       (documentation 'shortcut-label-accelerator 'function)
  "@version{#2022-7-24}
-  @syntax[]{(gtk:shortcut-label-accelerator object) => accelerator}
-  @syntax[]{(setf (gtk:shortcut-label-accelerator object) accelerator)}
+  @syntax{(gtk:shortcut-label-accelerator object) => accelerator}
+  @syntax{(setf (gtk:shortcut-label-accelerator object) accelerator)}
   @argument[object]{a @class{gtk:shortcut-label} widget}
   @argument[accelerator]{a string with the accelerator}
   @begin{short}
@@ -129,7 +129,7 @@
   @setf{gtk:shortcut-label-accelerator} function sets the accelerator.
   @see-class{gtk:shortcut-label}")
 
-;;; --- shortcut-label-disabled-text -------------------------------------------
+;;; --- gtk:shortcut-label-disabled-text ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "disabled-text"
@@ -143,8 +143,8 @@
       "Accessor"
       (documentation 'shortcut-label-disabled-text 'function)
  "@version{#2022-7-24}
-  @syntax[]{(gtk:shortcut-label- object) => disabled-text}
-  @syntax[]{(setf (gtk:shortcut-label-accelerator object) disabled-text)}
+  @syntax{(gtk:shortcut-label- object) => disabled-text}
+  @syntax{(setf (gtk:shortcut-label-accelerator object) disabled-text)}
   @argument[object]{a @class{gtk:shortcut-label} widget}
   @argument[accelerator]{a string with text to be displayed when no accelerator
     is set}
@@ -158,14 +158,14 @@
   @see-class{gtk:shortcut-label}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_label_new ()
+;;; gtk_shortcut_label_new
 ;;; ----------------------------------------------------------------------------
 
 (defun shortcut-label-new (accelerator)
  #+liber-documentation
  "@version{#2022-7-24}
   @argument[accelerator]{a string with the initial accelerator}
-  @return{A newly @class{gtk:shortcut-label} widget.}
+  @return{The newly @class{gtk:shortcut-label} widget.}
   @begin{short}
     Creates a new shortcut label with @arg{accelerator} set.
   @end{short}

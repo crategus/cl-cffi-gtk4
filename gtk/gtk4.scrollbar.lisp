@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -66,7 +66,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkScrollbar
+;;; GtkScrollbar
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkScrollbar" scrollbar
@@ -136,7 +136,7 @@ scrollbar
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- scrollbar-adjustment ---------------------------------------------------
+;;; --- gtk:scrollbar-adjustment -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "adjustment" 'scrollbar) t)
@@ -149,8 +149,8 @@ scrollbar
       "Accessor"
       (documentation 'scrollbar-adjustment 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrollbar-adjustment object) => adjustment}
-  @syntax[]{(setf (gtk:scrollbar-adjustment object) adjustment)}
+  @syntax{(gtk:scrollbar-adjustment object) => adjustment}
+  @syntax{(setf (gtk:scrollbar-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:scrollbar} widget}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @begin{short}
@@ -164,7 +164,7 @@ scrollbar
   @see-class{gtk:adjustment}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scrollbar_new ()
+;;; gtk_scrollbar_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline scrollbar-new))

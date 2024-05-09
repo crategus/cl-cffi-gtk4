@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -168,7 +168,7 @@ lambda (table tag)    :run-last
 (defun text-tag-table-new ()
  #+liber-documentation
  "@version{2023-8-26}
-  @return{A new @class{gtk:text-tag-table} object.}
+  @return{The new @class{gtk:text-tag-table} object.}
   @begin{short}
     Creates a new tag table.
   @end{short}
@@ -187,7 +187,7 @@ lambda (table tag)    :run-last
  "@version{2023-8-26}
   @argument[table]{a @class{gtk:text-tag-table} object}
   @argument[tag]{a @class{gtk:text-tag} object}
-  @return{A boolean which is @em{true} on success.}
+  @return{The boolean which is @em{true} on success.}
   @begin{short}
     Adds a tag to the tag table.
   @end{short}
@@ -273,14 +273,14 @@ lambda (table tag)    :run-last
 (export 'text-tag-table-foreach)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_tag_table_get_size -> text-table-size
+;;; gtk_text_tag_table_get_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_tag_table_get_size" text-tag-table-size) :int
  #+liber-documentation
  "@version{#2023-8-26}
   @argument[table]{a @class{gtk:text-tag-table} object}
-  @return{An integer with the number of tags in @arg{table}.}
+  @return{The integer with the number of tags in @arg{table}.}
   @begin{short}
     Returns the size of the number of tags in the tag table.
   @end{short}

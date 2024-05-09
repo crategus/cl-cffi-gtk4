@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -64,9 +64,9 @@
 ;;;
 ;;; Actions
 ;;;
-;;;     listitem.toggle-expand	
-;;;     listitem.collapse	
-;;;     listitem.expand	
+;;;     listitem.toggle-expand
+;;;     listitem.collapse
+;;;     listitem.expand
 ;;;
 ;;; Hierarchy
 ;;;
@@ -179,7 +179,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- tree-expander-child ----------------------------------------------------
+;;; --- gtk:tree-expander-child ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'tree-expander) t)
@@ -191,8 +191,8 @@
       "Accessor"
       (documentation 'tree-expander-child 'function)
  "@version{#2023-9-26}
-  @syntax[]{(gtk:tree-expander-child object) => child}
-  @syntax[]{(setf (gtk:tree-expander-child object) child)}
+  @syntax{(gtk:tree-expander-child object) => child}
+  @syntax{(setf (gtk:tree-expander-child object) child)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[child]{a @class{gtk:widget} widget}
   @begin{short}
@@ -205,7 +205,7 @@
   @see-class{gtk:tree-expander}
   @see-class{gtk:widget}")
 
-;;; --- tree-expander-hide-expander --------------------------------------------
+;;; --- gtk:tree-expander-hide-expander ----------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "hide-expander"
@@ -224,8 +224,8 @@
       "Accessor"
       (documentation 'tree-expander-hide-expander 'function)
  "@version{#2023-9-26}
-  @syntax[]{(gtk:tree-expander-hide-expander object) => setting}
-  @syntax[]{(setf (gtk:tree-expander-hide-expander object) setting)}
+  @syntax{(gtk:tree-expander-hide-expander object) => setting}
+  @syntax{(setf (gtk:tree-expander-hide-expander object) setting)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[setting]{a boolean whether the expander icon should be hidden}
   @begin{short}
@@ -241,7 +241,7 @@
   @see-class{gtk:tree-expander}
   @see-class{gtk:tree-list-row}")
 
-;;; --- tree-expander-indent-for-depth -----------------------------------------
+;;; --- gtk:tree-expander-indent-for-depth -------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "indent-for-depth"
@@ -256,8 +256,8 @@
       "Accessor"
       (documentation 'tree-expander-indent-for-depth 'function)
  "@version{#2023-9-26}
-  @syntax[]{(gtk:tree-expander-indent-for-depth object) => setting}
-  @syntax[]{(setf (gtk:tree-expander-indent-for-depth object) setting)}
+  @syntax{(gtk:tree-expander-indent-for-depth object) => setting}
+  @syntax{(setf (gtk:tree-expander-indent-for-depth object) setting)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[setting]{a boolean whether the expander indents the child according
     to its depth}
@@ -273,7 +273,7 @@
   Since 4.10
   @see-class{gtk:tree-expander}")
 
-;;; --- tree-expander-indent-for-icon ------------------------------------------
+;;; --- gtk:tree-expander-indent-for-icon --------------------------------------
 
 #+(and gtk-4-6 liber-documentation)
 (setf (documentation (liber:slot-documentation "indent-for-icon"
@@ -289,8 +289,8 @@
       "Accessor"
       (documentation 'tree-expander-indent-for-icon 'function)
  "@version{#2023-9-26}
-  @syntax[]{(gtk:tree-expander-indent-for-icon object) => setting}
-  @syntax[]{(setf (gtk:tree-expander-indent-for-icon object) setting)}
+  @syntax{(gtk:tree-expander-indent-for-icon object) => setting}
+  @syntax{(setf (gtk:tree-expander-indent-for-icon object) setting)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[setting]{@em{true} if the child should be indented without expander,
     otherwise @em{false}}
@@ -307,7 +307,7 @@
   Since 4.6
   @see-class{gtk:tree-expander}")
 
-;;; --- tree-expander-item -----------------------------------------------------
+;;; --- gtk:tree-expander-item -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "item" 'tree-expander) t)
@@ -319,7 +319,7 @@
       "Accessor"
       (documentation 'tree-expander-item 'function)
  "@version{#2023-9-26}
-  @syntax[]{(gtk:tree-expander-item object) => item}
+  @syntax{(gtk:tree-expander-item object) => item}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[item]{a @class{g:object} object with the item of the row}
   @begin{short}
@@ -335,7 +335,7 @@
   @see-class{gtk:tree-expander}
   @see-class{g:object}")
 
-;;; --- tree-expander-list-row -------------------------------------------------
+;;; --- gtk:tree-expander-list-row ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "list-row" 'tree-expander) t)
@@ -348,8 +348,8 @@
       "Accessor"
       (documentation 'tree-expander-list-row 'function)
  "@version{#2023-9-26}
-  @syntax[]{(gtk:tree-expander-list-row object) => row}
-  @syntax[]{(setf (gtk:tree-expander-list-row object) row)}
+  @syntax{(gtk:tree-expander-list-row object) => row}
+  @syntax{(setf (gtk:tree-expander-list-row object) row)}
   @argument[object]{a @class{gtk:tree-expander} object}
   @argument[row]{a @class{gtk:tree-list-row} object}
   @begin{short}
@@ -363,7 +363,7 @@
   @see-class{gtk:tree-list-row}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_expander_new ()
+;;; gtk_tree_expander_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline tree-expander-new))
@@ -371,7 +371,7 @@
 (defun tree-expander-new ()
  #+liber-documentation
  "@version{#2023-9-26}
-  @return{A new @class{gtk:tree-expander} widget}
+  @return{The new @class{gtk:tree-expander} widget.}
   @short{Creates a new tree expander.}
   @see-class{gtk:tree-expander}"
   (make-instance 'tree-expander))

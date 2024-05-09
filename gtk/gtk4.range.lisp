@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -99,7 +99,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkRange
+;;; GtkRange
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkRange" range
@@ -209,7 +209,7 @@ lambda (range)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- range-adjustment -------------------------------------------------------
+;;; --- gtk:range-adjustment ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "adjustment" 'range) t)
@@ -222,8 +222,8 @@ lambda (range)    :run-last
       "Accessor"
       (documentation 'range-adjustment 'function)
  "@version{2023-8-24}
-  @syntax[]{(gtk:range-adjustment object) => adjustement}
-  @syntax[]{(setf (gtk:range-adjustment object) adjustment)}
+  @syntax{(gtk:range-adjustment object) => adjustement}
+  @syntax{(setf (gtk:range-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[adjustment]{a @class{gtk:adjustment} object}
   @begin{short}
@@ -243,7 +243,7 @@ lambda (range)    :run-last
   @see-class{gtk:adjustment}
   @see-class{gtk:scale}")
 
-;;; --- range-fill-level -------------------------------------------------------
+;;; --- gtk:range-fill-level ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fill-level" 'range) t)
@@ -256,8 +256,8 @@ lambda (range)    :run-last
       "Accessor"
       (documentation 'range-fill-level 'function)
  "@version{2023-8-24}
-  @syntax[]{(range-fill-level object) => fill-level}
-  @syntax[]{(setf (gtk:range-fill-level object) fill-level)}
+  @syntax{(range-fill-level object) => fill-level}
+  @syntax{(setf (gtk:range-fill-level object) fill-level)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[fill-level]{a double float with the new position of the fill level
     indicator}
@@ -287,7 +287,7 @@ lambda (range)    :run-last
   @see-function{gtk:range-show-fill-level}
   @see-function{gtk:range-restrict-to-fill-level}")
 
-;;; --- range-inverted ---------------------------------------------------------
+;;; --- gtk:range-inverted -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "inverted" 'range) t)
@@ -300,8 +300,8 @@ lambda (range)    :run-last
       "Accessor"
       (documentation 'range-inverted 'function)
  "@version{2023-8-24}
-  @syntax[]{(gtk:range-inverted object) => setting}
-  @syntax[]{(setf (gtk:range-inverted object) setting)}
+  @syntax{(gtk:range-inverted object) => setting}
+  @syntax{(setf (gtk:range-inverted object) setting)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[setting]{@em{true} to invert the range}
   @begin{short}
@@ -315,7 +315,7 @@ lambda (range)    :run-last
   top or on the right rather than on the bottom or left.
   @see-class{gtk:range}")
 
-;;; --- range-restrict-to-fill-level -------------------------------------------
+;;; --- gtk:range-restrict-to-fill-level ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "restrict-to-fill-level"
@@ -331,8 +331,8 @@ lambda (range)    :run-last
       "Accessor"
       (documentation 'range-restrict-to-fill-level 'function)
  "@version{2023-8-24}
-  @syntax[]{(gtk:range-restrict-to-fill-level object) => setting}
-  @syntax[]{(setf (gtk:range-restrict-to-fill-level object) setting)}
+  @syntax{(gtk:range-restrict-to-fill-level object) => setting}
+  @syntax{(setf (gtk:range-restrict-to-fill-level object) setting)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[setting]{a boolean whether the fill level restricts slider movement}
   @begin{short}
@@ -347,7 +347,7 @@ lambda (range)    :run-last
   @see-class{gtk:range}
   @see-function{gtk:range-fill-level}")
 
-;;; --- range-round-digits -----------------------------------------------------
+;;; --- gtk:range-round-digits -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "round-digits" 'range) t)
@@ -362,8 +362,8 @@ lambda (range)    :run-last
       "Accessor"
       (documentation 'range-round-digits 'function)
  "@version{2023-8-24}
-  @syntax[]{(gtk:range-round-digits object) => round-digits}
-  @syntax[]{(setf (gtk:range-round-digits object) round-digits)}
+  @syntax{(gtk:range-round-digits object) => round-digits}
+  @syntax{(setf (gtk:range-round-digits object) round-digits)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[round-digits]{an integer with the precision in digits, or -1}
   @begin{short}
@@ -376,7 +376,7 @@ lambda (range)    :run-last
   @code{\"change-value\"} signal.
   @see-class{gtk:range}")
 
-;;; --- range-show-fill-level --------------------------------------------------
+;;; --- gtk:range-show-fill-level ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-fill-level" 'range) t)
@@ -391,8 +391,8 @@ lambda (range)    :run-last
       "Accessor"
       (documentation 'range-show-fill-level 'function)
  "@version{2023-8-24}
-  @syntax[]{(gtk:range-show-fill-level object) => show-fill-level}
-  @syntax[]{(setf (gtk:range-show-fill-level object) show-fill-level)}
+  @syntax{(gtk:range-show-fill-level object) => show-fill-level}
+  @syntax{(setf (gtk:range-show-fill-level object) show-fill-level)}
   @argument[object]{a @class{gtk:range} widget}
   @argument[show-fill-level]{a boolean whether a fill level indicator graphics
     is shown}
@@ -409,8 +409,8 @@ lambda (range)    :run-last
   @see-function{gtk:range-fill-level}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_range_get_value ()
-;;; gtk_range_set_value () -> range-value
+;;; gtk_range_get_value
+;;; gtk_range_set_value
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf range-value) (value range)
@@ -419,8 +419,8 @@ lambda (range)    :run-last
 (defun range-value (range)
  #+liber-documentation
  "@version{2023-8-24}
-  @syntax[]{(gtk:range-value range) => value}
-  @syntax[]{(setf (gtk:range-value range) value)}
+  @syntax{(gtk:range-value range) => value}
+  @syntax{(setf (gtk:range-value range) value)}
   @argument[range]{a @class{gtk:range} widget}
   @argument[value]{a double float with the value of the range}
   @begin{short}
@@ -438,7 +438,7 @@ lambda (range)    :run-last
 (export 'range-value)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_range_set_increments ()
+;;; gtk_range_set_increments
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline range-set-increments))
@@ -463,7 +463,7 @@ lambda (range)    :run-last
 (export 'range-set-increments)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_range_set_range ()
+;;; gtk_range_set_range
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline range-set-range))
@@ -487,8 +487,8 @@ lambda (range)    :run-last
 (export 'range-set-range)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_range_get_flippable ()
-;;; gtk_range_set_flippable () -> range-flippable
+;;; gtk_range_get_flippable
+;;; gtk_range_set_flippable
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf range-flippable) (flippable range)
@@ -501,8 +501,8 @@ lambda (range)    :run-last
 (cffi:defcfun ("gtk_range_get_flippable" range-flippable) :boolean
  #+liber-documentation
  "@version{#2023-8-24}
-  @syntax[]{gtk:range-flippable range) => flippable}
-  @syntax[]{(setf (gtk:range-flippable range) flippable)}
+  @syntax{gtk:range-flippable range) => flippable}
+  @syntax{(setf (gtk:range-flippable range) flippable)}
   @argument[range]{a @class{gtk:range} widget}
   @argument[[flippable]{@em{true} to make the range flippable}
   @begin{short}
@@ -517,7 +517,7 @@ lambda (range)    :run-last
 (export 'range-flippable)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_range_get_range_rect () -> range-range-rect
+;;; gtk_range_get_range_rect
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_range_get_range_rect" %range-get-range-rect) :void
@@ -543,7 +543,7 @@ lambda (range)    :run-last
 (export 'range-range-rect)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_range_get_slider_range () -> range-slider-range
+;;; gtk_range_get_slider_range
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_range_get_slider_range" %range-get-slider-range) :void
@@ -577,8 +577,8 @@ lambda (range)    :run-last
 (export 'range-slider-range)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_range_set_slider_size_fixed ()
-;;; gtk_range_get_slider_size_fixed () -> range-slider-size-fixed
+;;; gtk_range_set_slider_size_fixed
+;;; gtk_range_get_slider_size_fixed
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf range-slider-size-fixed) (fixed range)
@@ -592,8 +592,8 @@ lambda (range)    :run-last
     :boolean
  #+liber-documentation
  "@version{#2023-8-24}
-  @syntax[]{(gtk:range-slider-size-fixed range) => fixed}
-  @syntax[]{(setf (gtk:range-slider-size-fixed range) fixed)}
+  @syntax{(gtk:range-slider-size-fixed range) => fixed}
+  @syntax{(setf (gtk:range-slider-size-fixed range) fixed)}
   @argument[range]{a @class{gtk:range} widget}
   @argument[fixed]{@em{true} to make the slider size constant}
   @begin{short}

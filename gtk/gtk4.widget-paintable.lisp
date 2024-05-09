@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -107,7 +107,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- widget-paintable-widget ------------------------------------------------
+;;; --- gtk:widget-paintable-widget --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "widget" 'widget-paintable) t)
@@ -119,8 +119,8 @@
       "Accessor"
       (documentation 'widget-paintable-widget 'function)
  "@version{2023-8-31}
-  @syntax[]{(gtk:widget-paintable-widget object) => widget}
-  @syntax[]{(setf (gtk:widget-paintable-widget object) widget)}
+  @syntax{(gtk:widget-paintable-widget object) => widget}
+  @syntax{(setf (gtk:widget-paintable-widget object) widget)}
   @argument[object]{a @class{gtk:widget-paintable} object}
   @argument[widget]{a @class{gtk:widget} widget to observe or @code{nil}}
   @begin{short}
@@ -133,7 +133,7 @@
   @see-class{gtk:widget-paintable}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_paintable_new ()
+;;; gtk_widget_paintable_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_paintable_new" widget-paintable-new)
@@ -141,7 +141,7 @@
  #+liber-documentation
  "@version{2023-8-31}
   @argument[widget]{a @class{gtk:widget} widget or @code{nil}}
-  @return{A new @class{gtk:widget-paintable} object.}
+  @return{The new @class{gtk:widget-paintable} object.}
   @short{Creates a new paintable widget observing the given @arg{widget}.}
   @see-class{gtk:widget-paintable}
   @see-class{gtk:widget}"

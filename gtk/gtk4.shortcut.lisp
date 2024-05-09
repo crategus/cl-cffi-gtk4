@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -115,7 +115,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- shortcut-action --------------------------------------------------------
+;;; --- gtk:shortcut-action ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "action" 'shortcut) t)
@@ -128,8 +128,8 @@
       "Accessor"
       (documentation 'shortcut-action 'function)
  "@version{2023-7-23}
-  @syntax[]{(gtk:shortcut-action object) => action)}
-  @syntax[]{(setf (gtk:shortcut-action object) action)}
+  @syntax{(gtk:shortcut-action object) => action)}
+  @syntax{(setf (gtk:shortcut-action object) action)}
   @argument[object]{a @class{gtk:shortcut} object}
   @argument[action]{a @class{gtk:shortcut-action} object}
   @begin{short}
@@ -142,7 +142,7 @@
   @see-class{gtk:shortcut}
   @see-class{gtk:shortcut-action}")
 
-;;; --- shortcut-arguments -----------------------------------------------------
+;;; --- gtk:shortcut-arguments -------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "arguments" 'shortcut) t)
@@ -155,8 +155,8 @@
       "Accessor"
       (documentation 'shortcut-arguments 'function)
  "@version{2023-7-23}
-  @syntax[]{(gtk:shortcut-arguments object) => args)}
-  @syntax[]{(setf (gtk:shortcut-arguments object) args)}
+  @syntax{(gtk:shortcut-arguments object) => args)}
+  @syntax{(setf (gtk:shortcut-arguments object) args)}
   @argument[object]{a @class{gtk:shortcut} object}
   @argument[args]{a @type{g:variant} value to pass when activating the
     shortcut}
@@ -170,7 +170,7 @@
   @see-class{gtk:shortcut}
   @see-type{g:variant}")
 
-;;; --- shortcut-trigger -------------------------------------------------------
+;;; --- gtk:shortcut-trigger ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "trigger" 'shortcut) t)
@@ -183,8 +183,8 @@
       "Accessor"
       (documentation 'shortcut-trigger 'function)
  "@version{2023-7-23}
-  @syntax[]{(gtk:shortcut-trigger object) => trigger)}
-  @syntax[]{(setf (gtk:shortcut-trigger object) trigger)}
+  @syntax{(gtk:shortcut-trigger object) => trigger)}
+  @syntax{(setf (gtk:shortcut-trigger object) trigger)}
   @argument[object]{a @class{gtk:shortcut} object}
   @argument[trigger]{a @class{gtk:shortcut-trigger} object}
   @begin{short}
@@ -198,7 +198,7 @@
   @see-class{gtk:shortcut-trigger}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_new ()
+;;; gtk_shortcut_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline shortcut-new))
@@ -210,7 +210,7 @@
     the shortcut}
   @argument[action]{a @class{gtk:shortcut-action} object that will be
     activated upon triggering}
-  @return{A new @class{gtk:shortcut} object.}
+  @return{The new @class{gtk:shortcut} object.}
   @begin{short}
     Creates a new shortcut that is triggered by @arg{trigger} and then
     activates @arg{action}.

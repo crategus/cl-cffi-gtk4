@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -155,7 +155,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- single-selection-autoselect --------------------------------------------
+;;; --- gtk:single-selection-autoselect ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "autoselect"
@@ -169,8 +169,8 @@
       "Accessor"
       (documentation 'single-selection-autoselect 'function)
  "@version{2023-11-26}
-  @syntax[]{(gtk:single-selection-autoselect object) => autoselect}
-  @syntax[]{(setf (gtk:single-selection-autoselect object) autoselect)}
+  @syntax{(gtk:single-selection-autoselect object) => autoselect}
+  @syntax{(setf (gtk:single-selection-autoselect object) autoselect)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[autoselect]{@em{true} if autoselect is enabled}
   @begin{short}
@@ -186,7 +186,7 @@
   is deleted and it will disallow unselecting the current item.
   @see-class{gtk:single-selection}")
 
-;;; --- single-selection-can-unselect ------------------------------------------
+;;; --- gtk:single-selection-can-unselect --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "can-unselect"
@@ -200,8 +200,8 @@
       "Accessor"
       (documentation 'single-selection-can-unselect 'function)
  "@version{2023-11-26}
-  @syntax[]{(gtk:single-selection-can-unselect object) => setting}
-  @syntax[]{(setf (gtk:single-selection-can-unselect object) setting)}
+  @syntax{(gtk:single-selection-can-unselect object) => setting}
+  @syntax{(setf (gtk:single-selection-can-unselect object) setting)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[setting]{@em{true} to allow unselecting}
   @begin{short}
@@ -215,7 +215,7 @@
   @see-class{gtk:single-selection}
   @see-function{gtk:single-selection-autoselect}")
 
-;;; --- single-selection-item-type ---------------------------------------------
+;;; --- gtk:single-selection-item-type -----------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'single-selection) t)
@@ -234,7 +234,7 @@
       "Accessor"
       (documentation 'single-selection-item-type 'function)
  "@version{2023-9-6}
-  @syntax[]{(gtk:single-selection-item-type object) => gtype}
+  @syntax{(gtk:single-selection-item-type object) => gtype}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -251,7 +251,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- single-selection-model -------------------------------------------------
+;;; --- gtk:single-selection-model ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'single-selection) t)
@@ -263,8 +263,8 @@
       "Accessor"
       (documentation 'single-selection-model 'function)
  "@version{2023-9-6}
-  @syntax[]{(gtk:single-selection-model object) => model}
-  @syntax[]{(setf (gtk:single-selection-model object) model)}
+  @syntax{(gtk:single-selection-model object) => model}
+  @syntax{(setf (gtk:single-selection-model object) model)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[model]{a @class{g:list-model} object to wrap}
   @begin{short}
@@ -278,7 +278,7 @@
   @see-class{gtk:single-selection}
   @see-class{g:list-model}")
 
-;;; --- single-selection-n-items -----------------------------------------------
+;;; --- gtk:single-selection-n-items -------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'single-selection) t)
@@ -291,7 +291,7 @@
       "Accessor"
       (documentation 'single-selection-n-items 'function)
  "@version{2023-9-6}
-  @syntax[]{(gtk:single-selection-n-items object) => n-items}
+  @syntax{(gtk:single-selection-n-items object) => n-items}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -302,7 +302,7 @@
   @see-class{g:single-selection}
   @see-function{g:list-model-n-items}")
 
-;;; --- single-selection-selected ----------------------------------------------
+;;; --- gtk:single-selection-selected ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selected" 'single-selection) t)
@@ -315,8 +315,8 @@
       "Accessor"
       (documentation 'single-selection-selected 'function)
  "@version{2023-11-26}
-  @syntax[]{(gtk:single-selection-selected object) => position}
-  @syntax[]{(setf (gtk:single-selection-selected object) position)}
+  @syntax{(gtk:single-selection-selected object) => position}
+  @syntax{(setf (gtk:single-selection-selected object) position)}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[position]{an unsigned integer with the item to select or the
     @var{gtk:+invalid-list-position+} value}
@@ -338,7 +338,7 @@
   @see-class{gtk:single-selection}
   @see-variable{gtk:+invalid-list-position+}")
 
-;;; --- single-selection-selected-item -----------------------------------------
+;;; --- gtk:single-selection-selected-item -------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "selected-item"
@@ -351,7 +351,7 @@
       "Accessor"
       (documentation 'single-selection-selected-item 'function)
  "@version{2023-9-6}
-  @syntax[]{(gtk:single-selection-selected object) => item}
+  @syntax{(gtk:single-selection-selected object) => item}
   @argument[object]{a @class{gtk:single-selection} object}
   @argument[item]{a @code{:pointer} to the selected item}
   @begin{short}
@@ -363,7 +363,7 @@
   @see-class{gtk:single-selection}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_single_selection_new ()
+;;; gtk_single_selection_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline single-selection-new))

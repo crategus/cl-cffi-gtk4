@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -145,7 +145,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- size-group-mode --------------------------------------------------------
+;;; --- gtk:size-group-mode ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mode" 'size-group) t)
@@ -160,8 +160,8 @@
       "Accessor"
       (documentation 'size-group-mode 'function)
  "@version{2023-3-18}
-  @syntax[]{(gtk:size-group-mode object) => mode}
-  @syntax[]{(setf (gtk:size-group-mode object) mode)}
+  @syntax{(gtk:size-group-mode object) => mode}
+  @syntax{(setf (gtk:size-group-mode object) mode)}
   @argument[object]{a @class{gtk:size-group} object}
   @argument[mode]{a @symbol{gtk:size-group-mode} value to set for the size
     group}
@@ -180,7 +180,7 @@
   @see-symbol{gtk:size-group-mode}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_size_group_new ()
+;;; gtk_size_group_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline size-group-new))
@@ -189,7 +189,7 @@
  #+liber-documentation
  "@version{2023-3-18}
   @argument[mode]{a @symbol{gtk:size-group-mode} value for the new size group}
-  @return{A newly created @class{gtk:size-group} object.}
+  @return{The newly created @class{gtk:size-group} object.}
   @begin{short}
     Create a new size group.
   @end{short}
@@ -201,7 +201,7 @@
 (export 'size-group-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_size_group_add_widget ()
+;;; gtk_size_group_add_widget
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_size_group_add_widget" size-group-add-widget) :void
@@ -229,7 +229,7 @@
 (export 'size-group-add-widget)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_size_group_remove_widget ()
+;;; gtk_size_group_remove_widget
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_size_group_remove_widget" size-group-remove-widget) :void
@@ -249,7 +249,7 @@
 (export 'size-group-remove-widget)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_size_group_get_widgets () -> size-group-widgets
+;;; gtk_size_group_get_widgets
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_size_group_get_widgets" size-group-widgets)

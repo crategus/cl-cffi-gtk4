@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -116,7 +116,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- text-mark-left-gravity -------------------------------------------------
+;;; --- gtk:text-mark-left-gravity ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "left-gravity" 'text-mark) t)
@@ -130,7 +130,7 @@
       "Accessor"
       (documentation 'text-mark-left-gravity 'function)
  "@version{#2023-8-26}
-  @syntax[]{(gtk:text-mark-left-gravity object) => gravity}
+  @syntax{(gtk:text-mark-left-gravity object) => gravity}
   @argument[object]{a @class{gtk:text-mark} object}
   @argument[gravity]{@em{true} if the text mark has left gravity}
   @begin{short}
@@ -143,7 +143,7 @@
   newly-inserted text, otherwise to the right.
   @see-class{gtk:text-mark}")
 
-;;; --- text-mark-name ---------------------------------------------------------
+;;; --- gtk:text-mark-name -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "name" 'text-mark) t)
@@ -157,7 +157,7 @@
       "Accessor"
       (documentation 'text-mark-name 'function)
  "@version{#2023-8-26}
-  @syntax[]{(gtk:text-mark-name object) => name}
+  @syntax{(gtk:text-mark-name object) => name}
   @argument[object]{a @class{gtk:text-mark} object}
   @argument[name]{a string with the name of the text mark}
   @begin{short}
@@ -206,7 +206,7 @@
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_mark_set_visible
-;;; gtk_text_mark_get_visible -> text-mark-visible
+;;; gtk_text_mark_get_visible
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf text-mark-visible) (visibility mark)
@@ -219,8 +219,8 @@
 (cffi:defcfun ("gtk_text_mark_get_visible" text-mark-visible) :boolean
  #+liber-documentation
  "@version{#2023-8-26}
-  @syntax[]{(gtk:text-mark-visible mark) => visibility}
-  @syntax[]{(setf (gtk:text-mark-visible mark) visibility)}
+  @syntax{(gtk:text-mark-visible mark) => visibility}
+  @syntax{(setf (gtk:text-mark-visible mark) visibility)}
   @argument[mark]{a @class{gtk:text-mark} object}
   @argument[visibility]{a boolean whether the text mark is visible}
   @return{@em{True} if the text mark is visible.}
@@ -241,14 +241,14 @@
 (export 'text-mark-visible)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_mark_get_deleted -> text-mark-deleted
+;;; gtk_text_mark_get_deleted
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_mark_get_deleted" text-mark-deleted) :boolean
  #+liber-documentation
  "@version{#2023-8-26}
   @argument[mark]{a @class{gtk:text-mark} object}
-  @return{A boolean whether the text mark is deleted.}
+  @return{The boolean whether the text mark is deleted.}
   @begin{short}
     Returns @em{true} if the text mark has been removed from its text buffer
     with the @fun{gtk:text-buffer-delete-mark} function.
@@ -263,7 +263,7 @@
 (export 'text-mark-deleted)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_mark_get_buffer -> text-mark-buffer
+;;; gtk_text_mark_get_buffer
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_text_mark_get_buffer" text-mark-buffer)

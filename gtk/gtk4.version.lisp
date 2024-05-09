@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -77,13 +77,14 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_get_major_version -> major-version
+;;; gtk_get_major_version
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_get_major_version" major-version) :uint
  #+liber-documentation
  "@version{2023-3-24}
-  @return{An unsigned integer with the major version number of the GTK library.}
+  @return{The unsigned integer with the major version number of the GTK
+    library.}
   @begin{short}
     Returns the major version number of the GTK library.
   @end{short}
@@ -94,13 +95,14 @@
 (export 'major-version)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_get_minor_version -> minor-version
+;;; gtk_get_minor_version
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_get_minor_version" minor-version) :uint
  #+liber-documentation
  "@version{2023-3-24}
-  @return{An unsigned integer with the minor version number of the GTK library.}
+  @return{The unsigned integer with the minor version number of the GTK
+    library.}
   @begin{short}
     Returns the minor version number of the GTK library.
   @end{short}
@@ -111,13 +113,14 @@
 (export 'minor-version)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_get_micro_version -> micro-version
+;;; gtk_get_micro_version
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_get_micro_version" micro-version) :uint
  #+liber-documentation
  "@version{2023-3-24}
-  @return{An unsigned integer with the micro version number of the GTK library.}
+  @return{The unsigned integer with the micro version number of the GTK
+    library.}
   @begin{short}
     Returns the micro version number of the GTK library.
   @end{short}

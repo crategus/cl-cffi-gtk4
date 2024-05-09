@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -80,26 +80,31 @@
       "GEnum"
       (liber:symbol-documentation 'collation)
  "@version{2023-9-5}
-  @begin{short}
-    Describes how a @class{gtk:string-sorter} object turns strings into sort
-    keys to compare them.
-  @end{short}
-  Note that the result of sorting will in general depend on the current locale
-  unless the mode is @code{:none}.
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkCollation\" collation
   (:export t
    :type-initializer \"gtk_collation_get_type\")
   (:none 0)
   (:unicode 1)
   (:filename 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{Do not do any collation.}
-    @entry[:unicode]{Use the @code{g_utf8_collate_key()} function.}
-    @entry[:filename]{Use the @code{g_utf8_collate_key_for_filename()}
-      function.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{Do not do any collation.}
+      @entry[:unicode]{Use the @code{g_utf8_collate_key()} function.}
+      @entry[:filename]{Use the @code{g_utf8_collate_key_for_filename()}
+        function.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes how a @class{gtk:string-sorter} object turns strings into sort
+    keys to compare them.
+  @end{short}
+  Note that the result of sorting will in general depend on the current locale
+  unless the mode is @code{:none}.
+
   Since 4.10
   @see-class{gtk:string-sorter}")
 
@@ -147,7 +152,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- string-sorter-collation ------------------------------------------------
+;;; --- gtk:string-sorter-collation --------------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "collation" 'string-sorter) t)
@@ -164,8 +169,8 @@
       "Accessor"
       (documentation 'string-sorter-collation 'function)
  "@version{#2023-9-5}
-  @syntax[]{(gtk:string-sorter-collation object) => collation}
-  @syntax[]{(setf (gtk:string-sorter-collation object) collation)}
+  @syntax{(gtk:string-sorter-collation object) => collation}
+  @syntax{(setf (gtk:string-sorter-collation object) collation)}
   @argument[object]{a @class{gtk:string-sorter} object}
   @argument[collation]{a @symbol{gtk:collation} value}
   @begin{short}
@@ -180,7 +185,7 @@
   @see-class{gtk:string-sorter}
   @see-symbol{gtk:collation}")
 
-;;; --- string-sorter-expression -----------------------------------------------
+;;; --- gtk:string-sorter-expression -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "expression" 'string-sorter) t)
@@ -193,8 +198,8 @@
       "Accessor"
       (documentation 'string-sorter-expression 'function)
  "@version{#2023-9-5}
-  @syntax[]{(gtk:string-sorter-expression object) => expression}
-  @syntax[]{(setf (gtk:string-sorter-expression object) expression)}
+  @syntax{(gtk:string-sorter-expression object) => expression}
+  @syntax{(setf (gtk:string-sorter-expression object) expression)}
   @argument[object]{a @class{gtk:string-sorter} object}
   @argument[expression]{a @class{gtk:expression} instance, or @code{nil}}
   @begin{short}
@@ -209,7 +214,7 @@
   @see-class{gtk:string-sorter}
   @see-class{gtk:expression}")
 
-;;; --- string-sorter-ignore-case ----------------------------------------------
+;;; --- gtk:string-sorter-ignore-case ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "ignore-case" 'string-sorter) t)
@@ -222,8 +227,8 @@
       "Accessor"
       (documentation 'string-sorter-ignore-case 'function)
  "@version{#2023-9-5}
-  @syntax[]{(gtk:string-sorter-ignore-case object) => setting}
-  @syntax[]{(setf (gtk:string-sorter-ignore-case object) setting)}
+  @syntax{(gtk:string-sorter-ignore-case object) => setting}
+  @syntax{(setf (gtk:string-sorter-ignore-case object) setting)}
   @argument[object]{a @class{gtk:string-sorter} object}
   @argument[setting]{@em{true} to ignore case differences}
   @begin{short}
@@ -236,7 +241,7 @@
   @see-class{gtk:string-sorter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_string_sorter_new ()
+;;; gtk_string_sorter_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline string-sorter-new))
@@ -245,7 +250,7 @@
  #+liber-documentation
  "@version{#2023-9-13}
   @argument[expression]{a @class{gtk:expression} instance to evaluate}
-  @return{A new @class{gtk:string-sorter} object.}
+  @return{The new @class{gtk:string-sorter} object.}
   @begin{short}
     Creates a new string sorter that compares items using the given
     @arg{expression}.

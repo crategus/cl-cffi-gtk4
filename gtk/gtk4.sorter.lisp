@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -63,7 +63,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkSorterOrder
+;;; GtkSorterOrder
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkSorterOrder" sorter-order
@@ -78,34 +78,38 @@
       "GEnum"
       (liber:symbol-documentation 'sorter-order)
  "@version{2023-9-4}
-  @begin{short}
-    Describes the type of order that a @class{gtk:sorter} object may describe.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkSorterOrder\" sorter-order
   (:export t
    :type-initializer \"gtk_sorter_order_get_type\")
   (:partial 0)
   (:none 1)
   (:total 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:partial]{A partial order. Any value of the @symbol{gtk:ordering}
-      enumeration is possible.}
-    @entry[:none]{No order, all elements are considered equal. The
-      @fun{gtk:sorter-compare} function will only return the @code{:equal}
-      value of the @symbol{gtk:ordering} enumeration.}
-    @entry[:total]{A total order. The @fun{gtk:sorter-compare} function will
-      only return the @code{:equal} value of the @symbol{gtk:ordering}
-      enumeration if an item is compared with itself. Two different items will
-      never cause this value to be returned.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:partial]{A partial order. Any value of the @symbol{gtk:ordering}
+        enumeration is possible.}
+      @entry[:none]{No order, all elements are considered equal. The
+        @fun{gtk:sorter-compare} function will only return the @code{:equal}
+        value of the @symbol{gtk:ordering} enumeration.}
+      @entry[:total]{A total order. The @fun{gtk:sorter-compare} function will
+        only return the @code{:equal} value of the @symbol{gtk:ordering}
+        enumeration if an item is compared with itself. Two different items will
+        never cause this value to be returned.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes the type of order that a @class{gtk:sorter} object may describe.
+  @end{short}
   @see-class{gtk:sorter}
   @see-symbol{gtk:ordering}
   @see-function{gtk:sorter-compare}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkSorterChange
+;;; GtkSorterChange
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkSorterChange" sorter-change
@@ -121,11 +125,8 @@
       "GEnum"
       (liber:symbol-documentation 'sorter-change)
  "@version{2023-9-4}
-  @begin{short}
-    Describes changes in a sorter in more detail and allows users to optimize
-    resorting.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkSorterChange\" sorter-change
   (:export t
    :type-initializer \"gtk_sorter_change_get_type\")
@@ -133,21 +134,28 @@
   (:inverted 1)
   (:less-strict 2)
   (:more-strict 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:different]{The sorter change cannot be described by any of the
-      other enumeration values.}
-    @entry[:inverted]{The sort order was inverted. Comparisons that returned
-      the @code{:smaller} value now return the @code{:larger} value of the
-      @symbol{gtk:ordering} enumeration and vice versa. Other comparisons
-      return the same values as before.}
-    @entry[:less-strict]{The sorter is less strict. Comparisons may now return
-      the @code{:equal} value of the @symbol{gtk:ordering} enumeration that did
-      not do so before.}
-    @entry[:more-strict]{The sorter is more strict. Comparisons that did return
-      the @code{:equal} value of the @symbol{gtk:ordering} enumeration may not
-      do so anymore.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:different]{The sorter change cannot be described by any of the
+        other enumeration values.}
+      @entry[:inverted]{The sort order was inverted. Comparisons that returned
+        the @code{:smaller} value now return the @code{:larger} value of the
+        @symbol{gtk:ordering} enumeration and vice versa. Other comparisons
+        return the same values as before.}
+      @entry[:less-strict]{The sorter is less strict. Comparisons may now return
+        the @code{:equal} value of the @symbol{gtk:ordering} enumeration that
+        did not do so before.}
+      @entry[:more-strict]{The sorter is more strict. Comparisons that did
+        return the @code{:equal} value of the @symbol{gtk:ordering} enumeration
+        may not do so anymore.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes changes in a sorter in more detail and allows users to optimize
+    resorting.
+  @end{short}
   @see-class{gtk:sorter}
   @see-symbol{gtk:ordering}")
 
@@ -205,7 +213,7 @@ lambda (sorter change)    :run-last
   @see-class{gtk:sort-list-model}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_sorter_compare ()
+;;; gtk_sorter_compare
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_sorter_compare" sorter-compare) ordering
@@ -214,7 +222,7 @@ lambda (sorter change)    :run-last
   @argument[sorter]{a @class{gtk:sorter} object}
   @argument[item1]{a pointer to the first item to compare}
   @argument[item2]{a pointer to the second item to compare}
-  @return{A @symbol{gtk:ordering} value with @code{:equal} if @arg{item1} =
+  @return{The @symbol{gtk:ordering} value with @code{:equal} if @arg{item1} =
     @arg{item2}, @code{:smaller} if @arg{item1} < @arg{item2}, @code{:larger}
     if @arg{item1} > @arg{item2}.}
   @begin{short}
@@ -241,14 +249,14 @@ lambda (sorter change)    :run-last
 (export 'sorter-compare)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_sorter_get_order ()
+;;; gtk_sorter_get_order
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_sorter_get_order" sorter-order) sorter-order
  #+liber-documentation
  "@version{#2023-9-12}
   @argument[sorter]{a @class{gtk:sorter} object}
-  @return{A @symbol{gtk:sorter-order} value.}
+  @return{The @symbol{gtk:sorter-order} value.}
   @begin{short}
     Gets the order that @arg{sorter} conforms to.
   @end{short}
@@ -261,7 +269,7 @@ lambda (sorter change)    :run-last
 (export 'sorter-order)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_sorter_changed ()
+;;; gtk_sorter_changed
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_sorter_changed" sorter-changed) :void
@@ -299,7 +307,7 @@ lambda (sorter change)    :run-last
  #+liber-documentation
  "@version{2023-9-13}
   @argument[result]{An integer with the result of a comparison function}
-  @return{A @symbol{gtk:ordering} value.}
+  @return{The @symbol{gtk:ordering} value.}
   @begin{short}
     Converts the result of a @symbol{g:compare-data-func} function to a
     @symbol{gtk:ordering} value.

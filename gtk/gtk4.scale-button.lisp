@@ -112,14 +112,13 @@
 
 #+liber-documentation
 (setf (documentation 'scale-button 'type)
- "@version{2023-3-25}
+ "@version{2024-5-7}
   @begin{short}
     The @class{gtk:scale-button} widget provides a button which pops up a scale
     widget.
   @end{short}
   This kind of widget is commonly used for volume controls in multimedia
-  applications, and GTK provides a @class{gtk:volume-button} subclass that is
-  tailored for this use case.
+  applications.
   @begin[CSS nodes]{dictionary}
     The @class{gtk:scale-button} implementation has a single CSS node with name
     @code{scalebutton}. To differentiate it from a plain @class{gtk:button}
@@ -155,14 +154,14 @@ lambda (button value)    :run-last
       @begin[code]{table}
         @entry[button]{The @class{gtk:scale-button} widget which received the
           signal.}
-        @entry[value]{A double float with the new value.}
+        @entry[value]{The double float with the new value.}
       @end{table}
   @end{dictionary}
   @see-constructor{gtk:scale-button-new}
+  @see-slot{gtk:scale-button-active}
   @see-slot{gtk:scale-button-adjustment}
   @see-slot{gtk:scale-button-icons}
-  @see-slot{gtk:scale-button-value}
-  @see-class{gtk:volume-button}")
+  @see-slot{gtk:scale-button-value}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -180,7 +179,7 @@ lambda (button value)    :run-last
 (setf (liber:alias-for-function 'scale-button-active)
       "Accessor"
       (documentation 'scale-button-active 'function)
- "@version{2024-5-4}
+ "@version{2024-5-7}
   @syntax{(gtk:scale-button-active object object) => active}
   @argument[object]{a @class{gtk:scale-button} widget}
   @argument[active]{a boolean whether the scale button should be pressed in}
@@ -188,7 +187,7 @@ lambda (button value)    :run-last
     Accessor of the @slot[gtk:scale-button]{active} slot of the
     @class{gtk:scale-button} class.
   @end{short}
-  The @fun{gtk:scal-button-active} function queries a scale button and returns
+  The @fun{gtk:scale-button-active} function queries a scale button and returns
   its current state. Returns @em{true} if the scale button is pressed in and
   @em{false} if it is raised.
 
@@ -207,7 +206,7 @@ lambda (button value)    :run-last
 (setf (liber:alias-for-function 'scale-button-adjustment)
       "Accessor"
       (documentation 'scale-button-adjustment 'function)
- "@version{2024-5-4}
+ "@version{2024-5-7}
   @syntax{(gtk:scale-button-adjustment object object) => adjustment}
   @syntax{(setf (gtk:scale-button-adjustment object) adjustment)}
   @argument[object]{a @class{gtk:scale-button} widget}
@@ -241,7 +240,7 @@ lambda (button value)    :run-last
 (setf (liber:alias-for-function 'scale-button-icons)
       "Accessor"
       (documentation 'scale-button-icons 'function)
- "@version{2024-5-4}
+ "@version{2024-5-7}
   @syntax{(gtk:scale-button-icons object object) => icons}
   @syntax{(setf (gtk:scale-button-icons object) icons)}
   @argument[object]{a @class{gtk:scale-button} widget}
@@ -276,7 +275,7 @@ lambda (button value)    :run-last
 (setf (liber:alias-for-function 'scale-button-value)
       "Accessor"
       (documentation 'scale-button-value 'function)
- "@version{2024-5-4}
+ "@version{2024-5-7}
   @syntax{(gtk:scale-button-value object) => value}
   @syntax{(setf (gtk:scale-button-value object) value)}
   @argument[object]{a @class{gtk:scale-button} widget}
@@ -301,14 +300,14 @@ lambda (button value)    :run-last
 
 (defun scale-button-new (min max step icons)
  #+liber-documentation
- "@version{#2023-3-25}
+ "@version{2024-5-7}
   @argument[min]{a double float with the minimum value of the scale}
   @argument[max]{a double float with the maximum value of the scale}
   @argument[step]{a double float with the stepping of the value when a scroll
     wheel event, or up/down arrow event occurs}
   @argument[icons]{a list of strings with the icon names, or @code{nil} if you
     want to set the list later with the @fun{gtk:scale-button-icons} function}
-  @return{A new @class{gtk:scale-button} widget.}
+  @return{The new @class{gtk:scale-button} widget.}
   @begin{short}
     Creates a scale button, with a range between @arg{min} and @arg{max}, with
     a stepping of @arg{step}.
@@ -337,7 +336,7 @@ lambda (button value)    :run-last
 (cffi:defcfun ("gtk_scale_button_get_popup" scale-button-popup)
     (g:object widget)
  #+liber-documentation
- "@version{#2023-3-25}
+ "@version{2024-5-7}
   @argument[button]{a @class{gtk:scale-button} widget}
   @return{The @class{gtk:widget} popup of the scale button.}
   @short{Retrieves the popup of the scale button.}
@@ -354,7 +353,7 @@ lambda (button value)    :run-last
 (cffi:defcfun ("gtk_scale_button_get_plus_button" scale-button-plus-button)
     (g:object widget)
  #+liber-documentation
- "@version{#2023-3-25}
+ "@version{2024-5-7}
   @argument[button]{a @class{gtk:scale-button} widget}
   @return{The @class{gtk:widget} widget for the plus button of the scale
     button.}
@@ -373,7 +372,7 @@ lambda (button value)    :run-last
 (cffi:defcfun ("gtk_scale_button_get_minus_button" scale-button-minus-button)
     (g:object widget)
  #+liber-documentation
- "@version{#2023-3-25}
+ "@version{2024-5-7}
   @argument[button]{a @class{gtk:scale-button} widget}
   @return{The @class{gtk:widget} widget for the minus button of the scale
     button.}

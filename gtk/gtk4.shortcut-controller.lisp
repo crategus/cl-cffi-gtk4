@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -74,10 +74,6 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkShortcutScope
-;;; ----------------------------------------------------------------------------
-
-;;; ----------------------------------------------------------------------------
 ;;; GtkShortcutScope
 ;;; ----------------------------------------------------------------------------
 
@@ -93,30 +89,34 @@
       "GEnum"
       (liber:symbol-documentation 'shortcut-scope)
  "@version{2023-7-23}
-  @begin{short}
-    Describes where @class{gtk:shortcut} objects added to the
-    @class{gtk:shortcut-controller} object get handled.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkShortcutScope\" shortcut-scope
   (:export t
    :type-initializer \"gtk_shortcut_scope_get_type\")
   :local
   :managed
   :global)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:local]{Shortcuts are handled inside the widget the controller
-      belongs to.}
-    @entry[:managed]{Shortcuts are handled by the first ancestor that is a
-      @class{gtk:shortcut-manager} object.}
-    @entry[:global]{Shortcuts are handled by the root widget.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:local]{Shortcuts are handled inside the widget the controller
+        belongs to.}
+      @entry[:managed]{Shortcuts are handled by the first ancestor that is a
+        @class{gtk:shortcut-manager} object.}
+      @entry[:global]{Shortcuts are handled by the root widget.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes where @class{gtk:shortcut} objects added to the
+    @class{gtk:shortcut-controller} object get handled.
+  @end{short}
   @see-class{gtk:shortcut}
   @see-class{gtk:shortcut-manager}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkShortcutController
+;;; GtkShortcutController
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkShortcutController" shortcut-controller
@@ -199,7 +199,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- shortcut-controller-item-type ------------------------------------------
+;;; --- gtk:shortcut-controller-item-type --------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type"
@@ -212,7 +212,7 @@
       "Accessor"
       (documentation 'shortcut-controller-item-type 'function)
  "@version{2023-7-23}
-  @syntax[]{(gtk:shortcut-controller-item-type object) => gtype)}
+  @syntax{(gtk:shortcut-controller-item-type object) => gtype)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[gtype]{a @class{g:type-t} item type}
   @begin{short}
@@ -224,7 +224,7 @@
   @see-class{gtk:shortcut-controller}
   @see-class{g:list-model}")
 
-;;; --- shortcut-controller-mnemonic-modifiers ---------------------------------
+;;; --- gtk:shortcut-controller-mnemonic-modifiers -----------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonic-modifiers"
@@ -239,8 +239,8 @@
       "Accessor"
       (documentation 'shortcut-controller-mnemonic-modifiers 'function)
  "@version{2023-7-23}
-  @syntax[]{(gtk:shortcut-controller-mnemonic-modifiers object) => modifiers)}
-  @syntax[]{(setf (gtk:shortcut-controller-mnemonic-modifiers object) modifiers)}
+  @syntax{(gtk:shortcut-controller-mnemonic-modifiers object) => modifiers)}
+  @syntax{(setf (gtk:shortcut-controller-mnemonic-modifiers object) modifiers)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[modifiers]{a @symbol{gdk:modifier-type} value}
   @begin{short}
@@ -265,7 +265,7 @@
   @see-class{gtk:shortcut-controller}
   @see-symbol{gdk:modifier-type}")
 
-;;; --- shortcut-controller-model ----------------------------------------------
+;;; --- gtk:shortcut-controller-model ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'shortcut-controller) t)
@@ -278,8 +278,8 @@
       "Accessor"
       (documentation 'shortcut-controller-model 'function)
  "@version{2023-7-23}
-  @syntax[]{(gtk:shortcut-controller-model object) => model)}
-  @syntax[]{(setf (gtk:shortcut-controller-model object) model)}
+  @syntax{(gtk:shortcut-controller-model object) => model)}
+  @syntax{(setf (gtk:shortcut-controller-model object) model)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[model]{a @class{g:list-model} object}
   @begin{short}
@@ -290,7 +290,7 @@
   @see-class{gtk:shortcut-controller}
   @see-class{g:list-model}")
 
-;;; --- shortcut-controller-n-items --------------------------------------------
+;;; --- gtk:shortcut-controller-n-items ----------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items"
@@ -304,7 +304,7 @@
       "Accessor"
       (documentation 'shortcut-controller-n-items 'function)
  "@version{2023-7-23}
-  @syntax[]{(gtk:shortcut-controller-n-items object) => n-items)}
+  @syntax{(gtk:shortcut-controller-n-items object) => n-items)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[n-items]{an unsigned integer with the number of items in the
     list model}
@@ -317,7 +317,7 @@
   @see-class{gtk:shortcut-controller}
   @see-class{g:list-model}")
 
-;;; --- shortcut-controller-scope ----------------------------------------------
+;;; --- gtk:shortcut-controller-scope ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scope" 'shortcut-controller) t)
@@ -331,8 +331,8 @@
       "Accessor"
       (documentation 'shortcut-controller-scope 'function)
  "@version{2023-7-23}
-  @syntax[]{(gtk:shortcut-controller-scope object) => scope)}
-  @syntax[]{(setf (gtk:shortcut-controller-scope object) scope)}
+  @syntax{(gtk:shortcut-controller-scope object) => scope)}
+  @syntax{(setf (gtk:shortcut-controller-scope object) scope)}
   @argument[object]{a @class{gtk:shortcut-controller} object}
   @argument[scope]{a @symbol{gtk:shortcut-scope} value}
   @begin{short}
@@ -353,7 +353,7 @@
   @see-symbol{gtk:shortcut-scope}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_controller_new ()
+;;; gtk_shortcut_controller_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline shortcut-controller-new))
@@ -361,7 +361,7 @@
 (defun shortcut-controller-new ()
  #+liber-documentation
  "@version{2023-7-23}
-  @return{A newly created @class{gtk:shortcut-controller} object.}
+  @return{The newly created @class{gtk:shortcut-controller} object.}
   @short{Creates a new shortcut controller.}
   @see-class{gtk:shortcut-controller}
   @see-function{gtk:shortcut-controller-new-for-model}"
@@ -370,7 +370,7 @@
 (export 'shortcut-controller-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_controller_new_for_model ()
+;;; gtk_shortcut_controller_new_for_model
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline shortcut-controller-new-for-model))
@@ -379,7 +379,7 @@
   #+liber-documentation
   "@version{#2023-7-23}
   @argument[model]{a @class{g:list-model} object containing shortcuts}
-  @return{A newly creaged @class{gtk:shortcut-controller} object.}
+  @return{The newly created @class{gtk:shortcut-controller} object.}
   @begin{short}
     Creates a new shortcut controller that takes its shortcuts from the given
     list model.
@@ -395,7 +395,7 @@
 (export 'shortcut-controller-new-for-model)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_controller_add_shortcut ()
+;;; gtk_shortcut_controller_add_shortcut
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_controller_add_shortcut"
@@ -417,7 +417,7 @@
 (export 'shortcut-controller-add-shortcut)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_controller_remove_shortcut ()
+;;; gtk_shortcut_controller_remove_shortcut
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_controller_remove_shortcut"

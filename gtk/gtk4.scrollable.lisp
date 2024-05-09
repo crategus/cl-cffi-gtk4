@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -67,7 +67,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkScrollablePolicy
+;;; GtkScrollablePolicy
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkScrollablePolicy" scrollable-policy
@@ -81,21 +81,25 @@
       "GEnum"
       (liber:symbol-documentation 'scrollable-policy)
  "@version{2023-8-6}
-  @begin{short}
-    Defines the policy to be used in a scrollable widget when updating the
-    scrolled window adjustments in a given orientation.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkScrollablePolicy\" scrollable-policy
   (:export t
    :type-initializer \"gtk_scrollable_policy_get_type\")
   (:minimum 0)
   (:natural 1))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:minimum]{Scrollable adjustments are based on the minimum size.}
-    @entry[:natural]{Scrollable adjustments are based on the natural size.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:minimum]{Scrollable adjustments are based on the minimum size.}
+      @entry[:natural]{Scrollable adjustments are based on the natural size.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Defines the policy to be used in a scrollable widget when updating the
+    scrolled window adjustments in a given orientation.
+  @end{short}
   @see-class{gtk:scrollable}")
 
 ;;; ----------------------------------------------------------------------------
@@ -166,7 +170,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- scrollable-hadjustment -------------------------------------------------
+;;; --- gtk:scrollable-hadjustment ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "hadjustment" 'scrollable) t)
@@ -180,8 +184,8 @@
       "Accessor"
       (documentation 'scrollable-hadjustment 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrollable-hadjustment object) => hadjustment}
-  @syntax[]{(setf (gtk:scrollable-hadjustment object) hadjustment)}
+  @syntax{(gtk:scrollable-hadjustment object) => hadjustment}
+  @syntax{(setf (gtk:scrollable-hadjustment object) hadjustment)}
   @argument[object]{a @class{gtk:scrollable} widget}
   @argument[hadjustment]{a @class{gtk:adjustment} object}
   @begin{short}
@@ -195,7 +199,7 @@
   @see-class{gtk:adjustment}
   @see-function{gtk:scrollable-vadjustment}")
 
-;;; --- scrollable-hscroll-policy ----------------------------------------------
+;;; --- gtk:scrollable-hscroll-policy ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "hscroll-policy" 'scrollable) t)
@@ -211,8 +215,8 @@
       "Accessor"
       (documentation 'scrollable-hscroll-policy 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrollable-hscroll-policy object) => policy}
-  @syntax[]{(setf (gtk:scrollable-hscroll-policy object) policy)}
+  @syntax{(gtk:scrollable-hscroll-policy object) => policy}
+  @syntax{(setf (gtk:scrollable-hscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
   @argument[policy]{a @symbol{gtk:scrollable-policy} value for the horizontal
     scrolling policy}
@@ -229,7 +233,7 @@
   @see-symbol{gtk:scrollable-policy}
   @see-function{gtk:scrollable-vscroll-policy}")
 
-;;; --- scrollabe-vadjustment --------------------------------------------------
+;;; --- gtk:scrollabe-vadjustment ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "vadjustment" 'scrollable) t)
@@ -243,8 +247,8 @@
       "Accessor"
       (documentation 'scrollable-vadjustment 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrollable-vadjustment object) => vadjustment}
-  @syntax[]{(setf (gtk:scrollable-vadjustment object) vadjustment)}
+  @syntax{(gtk:scrollable-vadjustment object) => vadjustment}
+  @syntax{(setf (gtk:scrollable-vadjustment object) vadjustment)}
   @argument[object]{a @class{gtk:scrollable} widget}
   @argument[vadjustment]{a @class{gtk:adjustment} object}
   @begin{short}
@@ -258,7 +262,7 @@
   @see-class{gtk:adjustment}
   @see-function{gtk:scrollable-hadjustment}")
 
-;;; --- scrollable-vscroll-policy ----------------------------------------------
+;;; --- gtk:scrollable-vscroll-policy ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "vscroll-policy" 'scrollable) t)
@@ -274,8 +278,8 @@
       "Accessor"
       (documentation 'scrollable-vscroll-policy 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrollable-vscroll-policy object) => policy}
-  @syntax[]{(setf (gtk:scrollable-vscroll-policy object) policy)}
+  @syntax{(gtk:scrollable-vscroll-policy object) => policy}
+  @syntax{(setf (gtk:scrollable-vscroll-policy object) policy)}
   @argument[object]{a @class{gtk:scrollable} widget}
   @argument[policy]{a @symbol{gtk:scrollable-policy} value for the vertical
     scrolling policy}
@@ -293,7 +297,7 @@
   @see-function{gtk:scrollable-hscroll-policy}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scrollable_get_border () -> scrollable-border
+;;; gtk_scrollable_get_border
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_scrollable_get_border" %scrollable-border) :boolean
@@ -303,7 +307,7 @@
 (defun scrollable-border (scrollable)
  "@version{2023-8-6}
   @argument[scrollable]{a @class{gtk:scrollable} widget}
-  @return{A @class{gtk:border} instance or @code{nil}.}
+  @return{The @class{gtk:border} instance or @code{nil}.}
   @begin{short}
     Returns the size of a non-scrolling border around the outside of the
     scrollable.

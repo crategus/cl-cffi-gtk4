@@ -91,20 +91,25 @@
       "GFlags"
       (liber:symbol-documentation 'shortcut-action-flags)
  "@version{#2022-8-25}
+  @begin{declaration}
+    @begin{pre}
+(gobject:define-g-flags \"GtkShortcutActionFlags\" shortcut-action-flags
+  (:export t
+   :type-initializer \"gtk_shortcut_action_flags_get_type\")
+  (:exclusive #.(ash 1 0)))
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:exclusive]{The action is the only action that can be activated.
+        If this flag is not set, a future activation may select a different
+        action.}
+    @end{table}
+  @end{values}
   @begin{short}
     List of flags that can be passed to action activation.
   @end{short}
   More flags may be added in the future.
-  @begin{pre}
-(gobject:define-g-enum \"GtkShortcutActionFlags\" shortcut-action-flags
-  (:export t
-   :type-initializer \"gtk_shortcut_action_flags_get_type\")
-  (:exclusive #.(ash 1 0)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:exclusive]{The action is the only action that can be activated. If
-      this flag is not set, a future activation may select a different action.}
-  @end{table}
   @see-class{gtk:shortcut-action}")
 
 ;;; ----------------------------------------------------------------------------

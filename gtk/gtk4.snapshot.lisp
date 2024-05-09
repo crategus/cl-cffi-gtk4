@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -137,7 +137,7 @@
   @see-class{gdk:snapshot}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_snapshot_new ()
+;;; gtk_snapshot_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline snapshot-new))
@@ -145,7 +145,7 @@
 (defun snapshot-new ()
  #+liber-documentation
  "@version{#2023-10-21}
-  @return{A newly allocated @class{gtk:snapshot} object.}
+  @return{The newly allocated @class{gtk:snapshot} object.}
   @short{Creates a new @class{gtk:snapshot} object.}
   @see-class{gtk:snapshot}"
   (make-instance 'snapshot))
@@ -187,7 +187,7 @@
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[size]{a @symbol{graphene:size-t} instance with the size of the
     resulting paintable or @code{nil} to use the bounds of the snapshot}
-  @return{A new @class{gdk:paintable} object.}
+  @return{The new @class{gdk:paintable} object.}
   @begin{short}
     Returns a paintable encapsulating the render node that was constructed by
     @arg{snapshot}.
@@ -900,8 +900,8 @@ pixel = transpose(matrix) * pixel + offset
   @argument[snapshot]{a @class{gtk:snapshot} object}
   @argument[bounds]{a @symbol{graphene:rect-t} instance with the bounds for the
     new node}
-  @return{A @symbol{cairo:context-t} instance suitable for drawing the contents
-    of the newly created render node.}
+  @return{The @symbol{cairo:context-t} instance suitable for drawing the
+    contents of the newly created render node.}
   @begin{short}
     Creates a new @class{gsk:cairo-node} instance and appends it to the current
     render node of @arg{snapshot}, without changing the current node.

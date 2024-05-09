@@ -66,7 +66,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkShortcutsWindow
+;;; GtkShortcutsWindow
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkShortcutsWindow" shortcuts-window
@@ -176,8 +176,8 @@ lambda (shortcutswindow)    :action
       "Accessor"
       (documentation 'shortcuts-window-section-name 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-window-section-name object) => name}
-  @syntax[]{(setf (gtk:shortcuts-window-section-name object) name)}
+  @syntax{(gtk:shortcuts-window-section-name object) => name}
+  @syntax{(setf (gtk:shortcuts-window-section-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-window} widget}
   @argument[name]{a string with a name of the section to show}
   @begin{short}
@@ -205,8 +205,8 @@ lambda (shortcutswindow)    :action
       "Accessor"
       (documentation 'shortcuts-window-view-name 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-window-view-name object) => name}
-  @syntax[]{(setf (gtk:shortcuts-window-view-name object) name)}
+  @syntax{(gtk:shortcuts-window-view-name object) => name}
+  @syntax{(setf (gtk:shortcuts-window-view-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-window} widget}
   @argument[name]{a string with the view name by which to filter the contents}
   @begin{short}

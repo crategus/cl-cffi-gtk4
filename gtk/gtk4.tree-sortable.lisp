@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -253,7 +253,7 @@
 (export 'tree-iter-compare-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_sortable_sort_column_changed ()
+;;; gtk_tree_sortable_sort_column_changed
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_sortable_sort_column_changed"
@@ -274,7 +274,7 @@
 (export 'tree-sortable-sort-column-changed)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_sortable_get_sort_column_id ()
+;;; gtk_tree_sortable_get_sort_column_id
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf tree-sortable-sort-column-id) (value sortable)
@@ -298,9 +298,9 @@
 (defun tree-sortable-sort-column-id (sortable)
  #+liber-documentation
  "@version{#2021-3-5}
-  @syntax[]{(gtk:tree-sortable-sort-column-id sortable) => colum-id, order}
-  @syntax[]{(setf (gtk:tree-sortable-sort-column-id sortable) column-id)}
-  @syntax[]{(setf (gtk:tree-sortable-sort-column-id sortable) '(column-id order))}
+  @syntax{(gtk:tree-sortable-sort-column-id sortable) => colum-id, order}
+  @syntax{(setf (gtk:tree-sortable-sort-column-id sortable) column-id)}
+  @syntax{(setf (gtk:tree-sortable-sort-column-id sortable) '(column-id order))}
   @argument[sortable]{a @class{gtk:tree-sortable} object}
   @argument[column-id]{an integer with the sort column ID}
   @argument[order]{a value of the @symbol{gtk:sort-type} enumeration}
@@ -333,7 +333,7 @@
 (export 'tree-sortable-sort-column-id)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_sortable_set_sort_func ()
+;;; gtk_tree_sortable_set_sort_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_sortable_set_sort_func" %tree-sortable-set-sort-func)
@@ -372,7 +372,7 @@
 (export 'tree-sortable-set-sort-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_sortable_set_default_sort_func ()
+;;; gtk_tree_sortable_set_default_sort_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_sortable_set_default_sort_func"
@@ -415,7 +415,7 @@
 (export 'tree-sortable-set-default-sort-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_sortable_has_default_sort_func ()
+;;; gtk_tree_sortable_has_default_sort_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_sortable_has_default_sort_func"

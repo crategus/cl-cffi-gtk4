@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -133,11 +133,8 @@
       "GEnum"
       (liber:symbol-documentation 'policy-type)
  "@version{2023-8-6}
-  @begin{short}
-    Determines how the size should be computed to achieve one of the visibility
-    mode for the scrollbars.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkPolicyType\" policy-type
   (:export t
    :type-initializer \"gtk_policy_type_get_type\")
@@ -145,18 +142,25 @@
   (:automatic 1)
   (:never 2)
   (:external 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:always]{The scrollbar is always visible. The view size is
-      independent of the content.}
-    @entry[:automatic]{The scrollbar will appear and disappear as necessary.
-      For example, when all of a @class{gtk:tree-view} widget cannot be seen.}
-    @entry[:never]{The scrollbar should never appear. In this mode the content
-      determines the size.}
-    @entry[:external]{Do not show a scrollbar, but do not force the size to
-      follow the content. This can be used e.g. to make multiple scrolled
-      windows share a scrollbar.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:always]{The scrollbar is always visible. The view size is
+        independent of the content.}
+      @entry[:automatic]{The scrollbar will appear and disappear as necessary.
+        For example, when all of a @class{gtk:tree-view} widget cannot be seen.}
+      @entry[:never]{The scrollbar should never appear. In this mode the content
+        determines the size.}
+      @entry[:external]{Do not show a scrollbar, but do not force the size to
+        follow the content. This can be used e.g. to make multiple scrolled
+        windows share a scrollbar.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Determines how the size should be computed to achieve one of the visibility
+    mode for the scrollbars.
+  @end{short}
   @see-class{gtk:scrolled-window}")
 
 ;;; ----------------------------------------------------------------------------
@@ -176,12 +180,8 @@
       "GEnum"
       (liber:symbol-documentation 'corner-type)
  "@version{2023-8-6}
-  @begin{short}
-    Specifies which corner a child widget should be placed in when packed into
-    a @class{gtk:scrolled-window} widget.
-  @end{short}
-  This is effectively the opposite of where the scroll bars are placed.
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkCornerType\" corner-type
   (:export t
    :type-initializer \"gtk_corner_type_get_type\")
@@ -189,17 +189,25 @@
   (:bottom-left 1)
   (:top-right 2)
   (:bottom-right 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:top-left]{Place the scrollbars on the right and bottom of the
-      widget (default behaviour).}
-    @entry[:bottom-left]{Place the scrollbars on the top and right of the
-      widget.}
-    @entry[:top-right]{Place the scrollbars on the left and bottom of the
-      widget.}
-    @entry[:bottom-right]{Place the scrollbars on the top and left of the
-      widget.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:top-left]{Place the scrollbars on the right and bottom of the
+        widget (default behaviour).}
+      @entry[:bottom-left]{Place the scrollbars on the top and right of the
+        widget.}
+      @entry[:top-right]{Place the scrollbars on the left and bottom of the
+        widget.}
+      @entry[:bottom-right]{Place the scrollbars on the top and left of the
+        widget.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Specifies which corner a child widget should be placed in when packed into
+    a @class{gtk:scrolled-window} widget.
+  @end{short}
+  This is effectively the opposite of where the scroll bars are placed.
   @see-class{gtk:scrolled-window}")
 
 ;;; ----------------------------------------------------------------------------
@@ -431,7 +439,7 @@ lambda (window scroll horizontal)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- scrolled-window-child --------------------------------------------------
+;;; --- gtk:scrolled-window-child ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'scrolled-window) t)
@@ -443,8 +451,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-child 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-child object) => child}
-  @syntax[]{(setf (gtk:scrolled-window-child object) child)}
+  @syntax{(gtk:scrolled-window-child object) => child}
+  @syntax{(setf (gtk:scrolled-window-child object) child)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -456,7 +464,7 @@ lambda (window scroll horizontal)    :action
   @see-class{gtk:scrolled-window}
   @see-class{gtk:widget}")
 
-;;; --- scrolled-window-hadjustment --------------------------------------------
+;;; --- gtk:scrolled-window-hadjustment ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "hadjustment"
@@ -470,8 +478,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-hadjustment 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-hadjustment object) => adjustment}
-  @syntax[]{(setf (gtk:scrolled-window-hadjustment object) adjustment)}
+  @syntax{(gtk:scrolled-window-hadjustment object) => adjustment}
+  @syntax{(setf (gtk:scrolled-window-hadjustment object) adjustment)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[adjustment]{a @class{gtk:adjustment} object with the horizontal
     scroll adjustment}
@@ -488,7 +496,7 @@ lambda (window scroll horizontal)    :action
   @see-class{gtk:adjustment}
   @see-function{gtk:scrolled-window-vadjustment}")
 
-;;; --- scrolled-window-has-frame ----------------------------------------------
+;;; --- gtk:scrolled-window-has-frame ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-frame" 'scrolled-window) t)
@@ -501,8 +509,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-has-frame 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-has-frame object) => setting}
-  @syntax[]{(setf (gtk:scrolled-window-child object) setting)}
+  @syntax{(gtk:scrolled-window-has-frame object) => setting}
+  @syntax{(setf (gtk:scrolled-window-child object) setting)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[setting]{a boolean whether to draw a frame around the contents}
   @begin{short}
@@ -514,7 +522,7 @@ lambda (window scroll horizontal)    :action
   changes the frame drawn around the contents of the scrolled window.
   @see-class{gtk:scrolled-window}")
 
-;;; --- scrolled-window-hscrollbar-policy --------------------------------------
+;;; --- gtk:scrolled-window-hscrollbar-policy ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "hscrollbar-policy"
@@ -529,8 +537,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-hscrollbar-policy 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-hscrollbar-policy object) => policy}
-  @syntax[]{(setf (gtk:scrolled-window-hscrollbar-policy object) policy)}
+  @syntax{(gtk:scrolled-window-hscrollbar-policy object) => policy}
+  @syntax{(setf (gtk:scrolled-window-hscrollbar-policy object) policy)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[policy]{a @symbol{gtk:policy-type} value}
   @begin{short}
@@ -541,7 +549,7 @@ lambda (window scroll horizontal)    :action
   @see-symbol{gtk:policy-type}
   @see-function{gtk:scrolled-window-vscrollbar-policy}")
 
-;;; --- scrolled-window-kinetic-scrolling --------------------------------------
+;;; --- gtk:scrolled-window-kinetic-scrolling ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "kinetic-scrolling"
@@ -557,8 +565,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-kinetic-scrolling 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-kinetic-scrolling object) => scrolling}
-  @syntax[]{(setf (gtk:scrolled-window-kinetic-scrolling object) scrolling)}
+  @syntax{(gtk:scrolled-window-kinetic-scrolling object) => scrolling}
+  @syntax{(setf (gtk:scrolled-window-kinetic-scrolling object) scrolling)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[scrolling]{@em{true} to enable kinetic scrolling}
   @begin{short}
@@ -573,7 +581,7 @@ lambda (window scroll horizontal)    :action
   Kinetic scrolling only applies to input devices of @code{:touchscreen} type.
   @see-class{gtk:scrolled-window}")
 
-;;; --- scrolled-window-max-content-height -------------------------------------
+;;; --- gtk:scrolled-window-max-content-height ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-content-height"
@@ -588,8 +596,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-max-content-height 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-max-content-height object) => height}
-  @syntax[]{(setf (gtk:scrolled-window-max-content-height object) height)}
+  @syntax{(gtk:scrolled-window-max-content-height object) => height}
+  @syntax{(setf (gtk:scrolled-window-max-content-height object) height)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[height]{an integer with the maximum content height}
   @begin{short}
@@ -607,7 +615,7 @@ lambda (window scroll horizontal)    :action
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-min-content-height}")
 
-;;; --- scrolled-window-max-content-width --------------------------------------
+;;; --- gtk:scrolled-window-max-content-width ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-content-width"
@@ -622,8 +630,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-max-content-width 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-max-content-width object) => width}
-  @syntax[]{(setf (gtk:scrolled-window-max-content-width object) width)}
+  @syntax{(gtk:scrolled-window-max-content-width object) => width}
+  @syntax{(setf (gtk:scrolled-window-max-content-width object) width)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[width]{an integer with the maximum content width}
   @begin{short}
@@ -640,7 +648,7 @@ lambda (window scroll horizontal)    :action
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-min-content-width}")
 
-;;; --- scrolled-window-min-content-height -------------------------------------
+;;; --- gtk:scrolled-window-min-content-height ---------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "min-content-height"
@@ -656,8 +664,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-min-content-height 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-min-content-height object) => height}
-  @syntax[]{(setf (gtk:scrolled-window-min-content-height object) height)}
+  @syntax{(gtk:scrolled-window-min-content-height object) => height}
+  @syntax{(setf (gtk:scrolled-window-min-content-height object) height)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[height]{an integer with the minimal content height}
   @begin{short}
@@ -672,7 +680,7 @@ lambda (window scroll horizontal)    :action
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-max-content-height}")
 
-;;; --- scrolled-window-min-content-width --------------------------------------
+;;; --- gtk:scrolled-window-min-content-width ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "min-content-width"
@@ -687,8 +695,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-min-content-width 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-min-content-width object) => width}
-  @syntax[]{(setf (gtk:scrolled-window-min-content-width object) width)}
+  @syntax{(gtk:scrolled-window-min-content-width object) => width}
+  @syntax{(setf (gtk:scrolled-window-min-content-width object) width)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[width]{an integer with the minimal content width}
   @begin{short}
@@ -703,7 +711,7 @@ lambda (window scroll horizontal)    :action
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-max-content-width}")
 
-;;; --- scrolled-window-overlay-scrolling --------------------------------------
+;;; --- gtk:scrolled-window-overlay-scrolling ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "overlay-scrolling"
@@ -720,8 +728,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-overlay-scrolling 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-overlay-scrolling object) => scrolling}
-  @syntax[]{(setf (gtk:scrolled-window-overlay-scrolling object) scrolling)}
+  @syntax{(gtk:scrolled-window-overlay-scrolling object) => scrolling}
+  @syntax{(setf (gtk:scrolled-window-overlay-scrolling object) scrolling)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[scrolling]{a boolean whether to enable overly scrolling}
   @begin{short}
@@ -734,7 +742,7 @@ lambda (window scroll horizontal)    :action
   overlay scrolling.
   @see-class{gtk:scrolled-window}")
 
-;;; --- scrolled-window-propagate-natural-height -------------------------------
+;;; --- gtk:scrolled-window-propagate-natural-height ---------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "propagate-natural-height"
@@ -752,8 +760,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-propagate-natural-height 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-propagate-natural-height object) => propagate}
-  @syntax[]{(setf (gtk:scrolled-window-propagate-natural-height object) propagate)}
+  @syntax{(gtk:scrolled-window-propagate-natural-height object) => propagate}
+  @syntax{(setf (gtk:scrolled-window-propagate-natural-height object) propagate)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[propagate]{a boolean whether to propagate natural height}
   @begin{short}
@@ -768,7 +776,7 @@ lambda (window scroll horizontal)    :action
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-propagate-natural-width}")
 
-;;; --- scrolled-window-propagate-natural-width --------------------------------
+;;; --- gtk:scrolled-window-propagate-natural-width ----------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "propagate-natural-width"
@@ -786,8 +794,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-propagate-natural-width 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-propagate-natural-width object) => propagate}
-  @syntax[]{(setf (gtk:scrolled-window-propagate-natural-width object) propagate)}
+  @syntax{(gtk:scrolled-window-propagate-natural-width object) => propagate}
+  @syntax{(setf (gtk:scrolled-window-propagate-natural-width object) propagate)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[propagate]{a boolean whether to propagate natural width}
   @begin{short}
@@ -801,7 +809,7 @@ lambda (window scroll horizontal)    :action
   @see-class{gtk:scrolled-window}
   @see-function{gtk:scrolled-window-propagate-natural-height}")
 
-;;; --- scrolled-window-vadjustment --------------------------------------------
+;;; --- gtk:scrolled-window-vadjustment ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "vadjustment"
@@ -815,8 +823,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-vadjustment 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-vadjustment object) => adjustment}
-  @syntax[]{(setf (gtk:scrolled-window-vadjustment object) adjustment)}
+  @syntax{(gtk:scrolled-window-vadjustment object) => adjustment}
+  @syntax{(setf (gtk:scrolled-window-vadjustment object) adjustment)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[adjustment]{a @class{gtk:adjustment} object with the vertical
     scroll adjustment}
@@ -833,7 +841,7 @@ lambda (window scroll horizontal)    :action
   @see-class{gtk:adjustment}
   @see-function{gtk:scrolled-window-hadjustment}")
 
-;;; --- scrolled-window-vscrollbar-policy --------------------------------------
+;;; --- gtk:scrolled-window-vscrollbar-policy ----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "vscrollbar-policy"
@@ -848,8 +856,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-vscrollbar-policy 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-vscrollbar-policy object) => policy}
-  @syntax[]{(setf (gtk:scrolled-window-vscrollbar-policy object) policy)}
+  @syntax{(gtk:scrolled-window-vscrollbar-policy object) => policy}
+  @syntax{(setf (gtk:scrolled-window-vscrollbar-policy object) policy)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[policy]{a value of the @symbol{gtk:policy-type} enumeration}
   @begin{short}
@@ -860,7 +868,7 @@ lambda (window scroll horizontal)    :action
   @see-symbol{gtk:policy-type}
   @see-function{gtk:scrolled-window-hscrollbar-policy}")
 
-;;; --- scrolled-window-window-placement ---------------------------------------
+;;; --- gtk:scrolled-window-window-placement -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "window-placement"
@@ -875,8 +883,8 @@ lambda (window scroll horizontal)    :action
       "Accessor"
       (documentation 'scrolled-window-window-placement 'function)
  "@version{2023-8-6}
-  @syntax[]{(gtk:scrolled-window-window-placement object) => placement}
-  @syntax[]{(setf (gtk:scrolled-window-window-placement object) placement)}
+  @syntax{(gtk:scrolled-window-window-placement object) => placement}
+  @syntax{(setf (gtk:scrolled-window-window-placement object) placement)}
   @argument[object]{a @class{gtk:scrolled-window} widget}
   @argument[placement]{a value of the @symbol{gtk:corner-type} enumeration}
   @begin{short}
@@ -889,7 +897,7 @@ lambda (window scroll horizontal)    :action
   @see-function{gtk:scrolled-window-placement}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scrolled_window_new ()
+;;; gtk_scrolled_window_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline scrolled-window-new))
@@ -901,7 +909,7 @@ lambda (window scroll horizontal)    :action
     adjustment}
   @argument[vadjustment]{a @class{gtk:adjustment} object with the vertical
     adjustment}
-  @return{A new @class{gtk:scrolled-window} widget.}
+  @return{The new @class{gtk:scrolled-window} widget.}
   @begin{short}
     Creates a new scrolled window.
   @end{short}
@@ -918,7 +926,7 @@ lambda (window scroll horizontal)    :action
 (export 'scrolled-window-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scrolled_window_get_hscrollbar () -> srolled-window-hscrollbar
+;;; gtk_scrolled_window_get_hscrollbar
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_scrolled_window_get_hscrollbar" scrolled-window-hscrollbar)
@@ -941,7 +949,7 @@ lambda (window scroll horizontal)    :action
 (export 'scrolled-window-hscrollbar)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scrolled_window_get_vscrollbar () -> scrolled-window-vscrollbar
+;;; gtk_scrolled_window_get_vscrollbar
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_scrolled_window_get_vscrollbar" scrolled-window-vscrollbar)
@@ -964,8 +972,8 @@ lambda (window scroll horizontal)    :action
 (export 'scrolled-window-vscrollbar)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scrolled_window_set_policy ()
-;;; gtk_scrolled_window_get_policy () -> scrolled-window-policy
+;;; gtk_scrolled_window_set_policy
+;;; gtk_scrolled_window_get_policy
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf scrolled-window-policy) (policy window)
@@ -980,8 +988,8 @@ lambda (window scroll horizontal)    :action
 (defun scrolled-window-policy (window)
  #+liber-documentation
  "@version{#2021-10-14}
-  @syntax[]{(gtk:scrolled-window-policy window) => hpolicy, vpolicy}
-  @syntax[]{(setf (gtk:scrolled-window-policy window) (list hpolicy vpolicy))}
+  @syntax{(gtk:scrolled-window-policy window) => hpolicy, vpolicy}
+  @syntax{(setf (gtk:scrolled-window-policy window) (list hpolicy vpolicy))}
   @argument[window]{a @class{gtk:scrolled-window} widget}
   @argument[hpolicy]{a value of the @symbol{gtk:policy-type}
     enumeration for the policy for horizontal bar}
@@ -1008,8 +1016,8 @@ lambda (window scroll horizontal)    :action
 (export 'scrolled-window-policy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scrolled_window_set_placement ()
-;;; gtk_scrolled_window_get_placement () -> scrolled-window-placement
+;;; gtk_scrolled_window_set_placement
+;;; gtk_scrolled_window_get_placement
 ;;; ----------------------------------------------------------------------------
 
 ;; gtk_scrolled_window_set_placement sets the new value for the placement
@@ -1025,8 +1033,8 @@ lambda (window scroll horizontal)    :action
 (defun scrolled-window-placement (window)
  #+liber-documentation
  "@version{#2021-10-14}
-  @syntax[]{(gtk:scrolled-window-placement window) => placement}
-  @syntax[]{(setf (gtk:scrolled-window-placement window) placement)}
+  @syntax{(gtk:scrolled-window-placement window) => placement}
+  @syntax{(setf (gtk:scrolled-window-placement window) placement)}
   @argument[window]{a @class{gtk:scrolled-window} widget}
   @argument[placement]{a value of the @symbol{gtk:corner-type} enumeration with
     the position of the child window}
@@ -1058,7 +1066,7 @@ lambda (window scroll horizontal)    :action
 (export 'scrolled-window-placement)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_scrolled_window_unset_placement ()
+;;; gtk_scrolled_window_unset_placement
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_scrolled_window_unset_placement"

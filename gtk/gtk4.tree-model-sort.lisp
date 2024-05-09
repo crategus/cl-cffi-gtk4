@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -155,8 +155,7 @@
 ;;; ----------------------------------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "model"
-                                               'tree-model-sort) t)
+(setf (documentation (liber:slot-documentation "model" 'tree-model-sort) t)
  "The @code{model} property of type @class{gtk:tree-model}
   (Read / Write / Construct) @br{}
   The model to sort.")
@@ -166,7 +165,7 @@
       "Accessor"
       (documentation 'tree-model-sort-model 'function)
  "@version{#2021-3-10}
-  @syntax[]{(gtk:tree-model-sort-model object) => model}
+  @syntax{(gtk:tree-model-sort-model object) => model}
   @argument[object]{a @class{gtk:tree-model-sort} object}
   @argument[model]{the @class{gtk:tree-model} child model being sorted}
   @begin{short}
@@ -183,7 +182,7 @@
   @see-class{gtk:tree-model-sort}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_sort_new_with_model ()
+;;; gtk_tree_model_sort_new_with_model
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline tree-model-sort-new-with-model))
@@ -192,7 +191,7 @@
  #+liber-documentation
  "@version{#2021-3-10}
   @argument[model]{a @class{gtk:tree-model} object}
-  @return{A new @class{gtk:tree-model} object.}
+  @return{The new @class{gtk:tree-model} object.}
   @begin{short}
     Creates a new tree model, with @arg{model} as the child model.
   @end{short}
@@ -208,7 +207,7 @@
 (export 'tree-model-sort-new-with-model)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_sort_convert_child_path_to_path ()
+;;; gtk_tree_model_sort_convert_child_path_to_path
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_sort_convert_child_path_to_path"
@@ -218,7 +217,7 @@
  "@version{#2021-3-10}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[path]{a @class{gtk:tree-path} instance to convert}
-  @return{A @class{gtk:tree-path} instance, or @code{nil}.}
+  @return{The @class{gtk:tree-path} instance, or @code{nil}.}
   @begin{short}
     Converts @arg{path} to a path relative to @arg{model}.
   @end{short}
@@ -237,7 +236,7 @@
 (export 'tree-model-sort-convert-child-path-to-path)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_sort_convert_child_iter_to_iter ()
+;;; gtk_tree_model_sort_convert_child_iter_to_iter
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_sort_convert_child_iter_to_iter"
@@ -267,15 +266,13 @@
   @see-class{gtk:tree-model-sort}
   @see-class{gtk:tree-iter}"
   (let ((sort-iter (make-tree-iter)))
-    (when (%tree-model-sort-convert-child-iter-to-iter model
-                                                           sort-iter
-                                                           iter)
+    (when (%tree-model-sort-convert-child-iter-to-iter model sort-iter iter)
       sort-iter)))
 
 (export 'tree-model-sort-convert-child-iter-to-iter)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_sort_convert_path_to_child_path ()
+;;; gtk_tree_model_sort_convert_path_to_child_path
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_sort_convert_path_to_child_path"
@@ -285,7 +282,7 @@
  "@version{#2021-3-10}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[path]{a @class{gtk:tree-path} instance to convert}
-  @return{A @class{gtk:tree-path} instance, or @code{nil}.}
+  @return{The @class{gtk:tree-path} instance, or @code{nil}.}
   @begin{short}
     Converts @arg{path} to a path on the child model of @arg{model}.
   @end{short}
@@ -304,7 +301,7 @@
 (export 'tree-model-sort-convert-path-to-child-path)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_sort_convert_iter_to_child_iter ()
+;;; gtk_tree_model_sort_convert_iter_to_child_iter
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_sort_convert_iter_to_child_iter"
@@ -338,7 +335,7 @@
 (export 'tree-model-sort-convert-iter-to-child-iter)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_sort_reset_default_sort_func ()
+;;; gtk_tree_model_sort_reset_default_sort_func
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_sort_reset_default_sort_func"
@@ -362,7 +359,7 @@
 (export 'tree-model-sort-reset-default-sort-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_sort_clear_cache ()
+;;; gtk_tree_model_sort_clear_cache
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_sort_clear_cache" tree-model-sort-clear-cache)
@@ -389,7 +386,7 @@
 (export 'tree-model-sort-clear-cache)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_sort_iter_is_valid ()
+;;; gtk_tree_model_sort_iter_is_valid
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_sort_iter_is_valid"

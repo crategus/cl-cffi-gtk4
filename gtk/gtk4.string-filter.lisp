@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -65,7 +65,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkStringFilterMatchMode
+;;; GtkStringFilterMatchMode
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkStringFilterMatchMode" string-filter-match-mode
@@ -80,23 +80,27 @@
       "GEnum"
       (liber:symbol-documentation 'string-filter-match-mode)
  "@version{2023-8-17}
-  @begin{short}
-    Specifies how search strings are matched inside text.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkStringFilterMatchMode\" string-filter-match-mode
   (:export t
    :type-initializer \"gtk_string_filter_match_mode_get_type\")
   (:exact 0)
   (:substring 1)
   (:prefix 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:exact]{The search string and text must match exactly.}
-    @entry[:substring]{The search string must be contained as a substring
-      inside the text.}
-    @entry[:prefix]{The text must begin with the search string.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:exact]{The search string and text must match exactly.}
+      @entry[:substring]{The search string must be contained as a substring
+        inside the text.}
+      @entry[:prefix]{The text must begin with the search string.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Specifies how search strings are matched inside text.
+  @end{short}
   @see-class{gtk:string-filter}")
 
 ;;; ----------------------------------------------------------------------------
@@ -142,7 +146,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- string-filter-expression -----------------------------------------------
+;;; --- gtk:string-filter-expression -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "expression" 'string-filter) t)
@@ -155,8 +159,8 @@
       "Accessor"
       (documentation 'string-filter-expression 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:string-filter-expression object) => expression}
-  @syntax[]{(setf (gtk:string-filter-expression object) expression)}
+  @syntax{(gtk:string-filter-expression object) => expression}
+  @syntax{(setf (gtk:string-filter-expression object) expression)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[expression]{a @class{gtk:expression} instance}
   @begin{short}
@@ -170,7 +174,7 @@
   @see-class{gtk:string-filter}
   @see-class{gtk:expression}")
 
-;;; --- string-filter-ignore-case ----------------------------------------------
+;;; --- gtk:string-filter-ignore-case ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "ignore-case" 'string-filter) t)
@@ -183,8 +187,8 @@
       "Accessor"
       (documentation 'string-filter-ignore-case 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:string-filter-ignore-case object) => ignore}
-  @syntax[]{(setf (gtk:stringt-filter-ignore-case object) ignore)}
+  @syntax{(gtk:string-filter-ignore-case object) => ignore}
+  @syntax{(setf (gtk:stringt-filter-ignore-case object) ignore)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[ignore]{@em{true} to ignore case}
   @begin{short}
@@ -196,7 +200,7 @@
   sets whether the filter ignores case differences.
   @see-class{gtk:string-filter}")
 
-;;; --- string-filter-match-mode -----------------------------------------------
+;;; --- gtk:string-filter-match-mode -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "match-mode" 'string-filter) t)
@@ -210,8 +214,8 @@
       "Accessor"
       (documentation 'string-filter-match-mode 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:string-filter-match-mode object) => mode}
-  @syntax[]{(setf (gtk:stringt-filter-match-mode object) mode)}
+  @syntax{(gtk:string-filter-match-mode object) => mode}
+  @syntax{(setf (gtk:stringt-filter-match-mode object) mode)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[mode]{a @symbol{gtk:string-filter-match-mode} value}
   @begin{short}
@@ -224,7 +228,7 @@
   @see-class{gtk:string-filter}
   @see-symbol{gtk:string-filter-match-mode}")
 
-;;; --- string-filter-search ---------------------------------------------------
+;;; --- gtk:string-filter-search -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "search" 'string-filter) t)
@@ -237,8 +241,8 @@
       "Accessor"
       (documentation 'string-filter-search 'function)
  "@version{2023-9-28}
-  @syntax[]{(gtk:string-filter-search object) => search}
-  @syntax[]{(setf (gtk:stringt-filter-search object) search)}
+  @syntax{(gtk:string-filter-search object) => search}
+  @syntax{(setf (gtk:stringt-filter-search object) search)}
   @argument[object]{a @class{gtk:string-filter} object}
   @argument[search]{a string to search for or @code{nil} to clear the search}
   @begin{short}
@@ -250,7 +254,7 @@
   @see-class{gtk:string-filter}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_string_filter_new ()
+;;; gtk_string_filter_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline string-filter-new))
@@ -259,7 +263,7 @@
  "@version{2023-9-28}
   @argument[expression]{a @class{gtk:expression} instance with the expression
     to evaluate or @code{nil} for none}
-  @return{A new @class{gtk:string-filter} object.}
+  @return{The new @class{gtk:string-filter} object.}
   @begin{short}
     Creates a new string filter.
   @end{short}

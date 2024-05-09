@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -117,7 +117,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- slice-list-model-item-type ---------------------------------------------
+;;; --- gtk:slice-list-model-item-type -----------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "item-type" 'slice-list-model) t)
@@ -136,7 +136,7 @@
       "Accessor"
       (documentation 'slice-list-model-item-type 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:slice-list-model-item-type object) => gtype}
+  @syntax{(gtk:slice-list-model-item-type object) => gtype}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[gtype]{a @class{g:type-t} type}
   @begin{short}
@@ -153,7 +153,7 @@
   @see-class{g:object}
   @see-function{g:list-model-item-type}")
 
-;;; --- slice-list-model-model -------------------------------------------------
+;;; --- gtk:slice-list-model-model ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'slice-list-model) t)
@@ -165,8 +165,8 @@
       "Accessor"
       (documentation 'slice-list-model-model 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:slice-list-model-model object) => model}
-  @syntax[]{(setf (gtk:slice-list-model-model object) model)}
+  @syntax{(gtk:slice-list-model-model object) => model}
+  @syntax{(setf (gtk:slice-list-model-model object) model)}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[model]{a @class{g:list-model} object to be sliced}
   @begin{short}
@@ -180,7 +180,7 @@
   @see-class{gtk:slice-list-model}
   @see-class{g:list-model}")
 
-;;; --- slice-list-model-n-items -----------------------------------------------
+;;; --- gtk:slice-list-model-n-items -------------------------------------------
 
 #+(and gtk-4-8 liber-documentation)
 (setf (documentation (liber:slot-documentation "n-items" 'slice-list-model) t)
@@ -194,7 +194,7 @@
       "Accessor"
       (documentation 'slice-list-model-n-items 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:slice-list-model-n-items object) => n-items}
+  @syntax{(gtk:slice-list-model-n-items object) => n-items}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[n-items]{an unsigned integer with the number of items contained in
     the model}
@@ -205,7 +205,7 @@
   @see-class{g:slice-list-model}
   @see-function{g:list-model-n-items}")
 
-;;; --- slice-list-model-offset ------------------------------------------------
+;;; --- gtk:slice-list-model-offset --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "model" 'slice-list-model) t)
@@ -218,8 +218,8 @@
       "Accessor"
       (documentation 'slice-list-model-offset 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:slice-list-model-offset object) => offset}
-  @syntax[]{(setf (gtk:slice-list-model-offset object) offset)}
+  @syntax{(gtk:slice-list-model-offset object) => offset}
+  @syntax{(setf (gtk:slice-list-model-offset object) offset)}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[offset]{an integer with the offset}
   @begin{short}
@@ -232,7 +232,7 @@
   @arg{object} will end up empty.
   @see-class{gtk:slice-list-model}")
 
-;;; --- slice-list-model-size --------------------------------------------------
+;;; --- gtk:slice-list-model-size ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "size" 'slice-list-model) t)
@@ -245,8 +245,8 @@
       "Accessor"
       (documentation 'slice-list-model-size 'function)
  "@version{#2023-9-3}
-  @syntax[]{(gtk:slice-list-model-size object) => size}
-  @syntax[]{(setf (gtk:slice-list-model-size object) size)}
+  @syntax{(gtk:slice-list-model-size object) => size}
+  @syntax{(setf (gtk:slice-list-model-size object) size)}
   @argument[object]{a @class{gtk:slice-list-model} object}
   @argument[size]{an unsigned integer with the size}
   @begin{short}
@@ -260,7 +260,7 @@
   @see-class{gtk:slice-list-model}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_slice_list_model_new ()
+;;; gtk_slice_list_model_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline slice-list-model-new))
@@ -271,7 +271,7 @@
   @argument[model]{a @class{g:list-model} object to use, or @code{nil}}
   @argument[offset]{an unsigned integer with the offset of the slize}
   @argument[size]{an unsigned integer with the maximum size of the slize}
-  @return{A new @class{gtk:slice-list-model} object.}
+  @return{The new @class{gtk:slice-list-model} object.}
   @begin{short}
     Creates a new slice model that presents the slice from @arg{offset} to
     @arg{offset} + @arg{size} out of the given @arg{model}.

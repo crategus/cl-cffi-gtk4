@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -148,7 +148,7 @@ windowcontrols
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- window-contols-decoration-layout ---------------------------------------
+;;; --- gtk:window-contols-decoration-layout -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "decoration-layout"
@@ -164,8 +164,8 @@ windowcontrols
       "Accessor"
       (documentation 'window-controls-decoration-layout 'function)
  "@version{2023-8-9}
-  @syntax[]{(gtk:window-controls-decoration-layout object) => layout}
-  @syntax[]{(setf (gtk:window-controls-decoration-layout object) layout)}
+  @syntax{(gtk:window-controls-decoration-layout object) => layout}
+  @syntax{(setf (gtk:window-controls-decoration-layout object) layout)}
   @argument[object]{a @class{gtk:window-controls} widget}
   @argument[layout]{a string with the decoration layout, or @code{nil} to unset
     the decoration layout}
@@ -191,7 +191,7 @@ windowcontrols
   @see-class{gtk:window-controls}
   @see-symbol{gtk:pack-type}")
 
-;;; --- window-contols-empty ---------------------------------------------------
+;;; --- gtk:window-contols-empty -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "empty" 'window-controls) t)
@@ -204,8 +204,8 @@ windowcontrols
       "Accessor"
       (documentation 'window-controls-empty 'function)
  "@version{2023-8-9}
-  @syntax[]{(gtk:window-controls-empty object) => empty}
-  @syntax[]{(setf (gtk:window-controls-empty object) empty)}
+  @syntax{(gtk:window-controls-empty object) => empty}
+  @syntax{(setf (gtk:window-controls-empty object) empty)}
   @argument[object]{a @class{gtk:window-controls} widget}
   @argument[empty]{@em{true} if the widget has window buttons, otherwise
     @em{false}}
@@ -217,7 +217,7 @@ windowcontrols
   window buttons.
   @see-class{gtk:window-controls}")
 
-;;; --- window-contols-side ----------------------------------------------------
+;;; --- gtk:window-contols-side ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "side" 'window-controls) t)
@@ -230,8 +230,8 @@ windowcontrols
       "Accessor"
       (documentation 'window-controls-side 'function)
  "@version{2023-8-9}
-  @syntax[]{(gtk:window-controls-side object) => side}
-  @syntax[]{(setf (gtk:window-controls-side object) side)}
+  @syntax{(gtk:window-controls-side object) => side}
+  @syntax{(setf (gtk:window-controls-side object) side)}
   @argument[object]{a @class{gtk:window-controls} widget}
   @argument[side]{a @symbol{gtk:pack-type} value}
   @begin{short}
@@ -245,7 +245,7 @@ windowcontrols
   @see-symbol{gtk:pack-type}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_window_controls_new ()
+;;; gtk_window_controls_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline window-controls-new))
@@ -254,7 +254,7 @@ windowcontrols
  #+liber-documentation
  "@version{2023-8-9}
   @argument[side]{a @symbol{gtk:pack-type} value}
-  @return{A new @class{gtk:window-controls} widget.}
+  @return{The new @class{gtk:window-controls} widget.}
   @short{Creates a new @class{gtk:window-controls} widget.}
   @see-class{gtk:window-controls}
   @see-symbol{gtk:pack-type}"

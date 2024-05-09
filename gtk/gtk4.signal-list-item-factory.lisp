@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -161,14 +161,14 @@ lambda (factory item)    :run-first
   @see-class{gtk:list-item-factory}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_signal_list_item_factory_new ()
+;;; gtk_signal_list_item_factory_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline signal-list-item-factory-new))
 
 (defun signal-list-item-factory-new ()
  "@version{2023-11-26}
-  @return{A new @class{gtk:signal-list-item-factory} object.}
+  @return{The new @class{gtk:signal-list-item-factory} object.}
   @begin{short}
     Creates a new @class{gtk:signal-list-item-factory} object.
   @end{short}

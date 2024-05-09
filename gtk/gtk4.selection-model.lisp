@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -131,10 +131,10 @@ lambda (model position n-items)    :run-last
       model to change the selection state of any of the items in the selection
       model, though it would be rather useless to emit such a signal.
       @begin[code]{table}
-        @entry[model]{A @class{gtk:selection-model} object.}
-        @entry[position]{An unsigned integer with the first item that may have
+        @entry[model]{The @class{gtk:selection-model} object.}
+        @entry[position]{The unsigned integer with the first item that may have
           changed.}
-        @entry[n-items]{An unsigned integer with the number of items with
+        @entry[n-items]{The unsigned integer with the number of items with
           changes.}
       @end{table}
   @end{dictionary}
@@ -142,7 +142,7 @@ lambda (model position n-items)    :run-last
   @see-class{gtk:single-selection}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_is_selected ()
+;;; gtk_selection_model_is_selected
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_is_selected" selection-model-is-selected)
@@ -163,8 +163,8 @@ lambda (model position n-items)    :run-last
 (export 'selection-model-is-selected)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_get_selection ()
-;;; gtk_selection_model_set_selection ()
+;;; gtk_selection_model_get_selection
+;;; gtk_selection_model_set_selection
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf selection-model-selection) (selected model mask)
@@ -179,8 +179,8 @@ lambda (model position n-items)    :run-last
     (g:object bitset)
  #+liber-documentation
  "@version{#2023-9-14}
-  @syntax[]{(gtk:selection-model-selection model) => selected}
-  @syntax[]{(setf (gtk:selection-model-selection model mask) selected)}
+  @syntax{(gtk:selection-model-selection model) => selected}
+  @syntax{(setf (gtk:selection-model-selection model mask) selected)}
   @argument[model]{a @class{gtk:selection-model} object}
   @argument[selected]{a @class{gtk:bitset} instance specifying the items which
     are selected or should be selected or unselected}
@@ -230,7 +230,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (export 'selection-model-selection)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_get_selection_in_range ()
+;;; gtk_selection_model_get_selection_in_range
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_get_selection_in_range"
@@ -241,9 +241,9 @@ gtk_selection_model_selection_changed (model, first_changed_item,
   @argument[position]{an unsigned integer with the start of the queried range}
   @argument[n-items]{an unsigned integer with the number of items in the queried
     range}
-  @return{A @class{gtk:bitset} instance that matches the selection state for the
-    given state with all other values being undefined. The bitset must not be
-    modified.}
+  @return{The @class{gtk:bitset} instance that matches the selection state for
+    the given state with all other values being undefined. The bitset must not
+    be modified.}
   @begin{short}
     Gets a bitset containing a set where the values in the range
     [@arg{position}, @arg{position} + @arg{n-items}) match the selected state of
@@ -264,7 +264,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (export 'selection-model-selection-in-range)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_select_item ()
+;;; gtk_selection_model_select_item
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_select_item" selection-model-select-item)
@@ -289,7 +289,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (export 'selection-model-select-item)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_unselect_item ()
+;;; gtk_selection_model_unselect_item
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_unselect_item"
@@ -311,7 +311,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (export 'selection-model-unselect-item)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_select_range ()
+;;; gtk_selection_model_select_range
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_select_range" selection-model-select-range)
@@ -337,7 +337,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (export 'selection-model-select-range)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_unselect_range ()
+;;; gtk_selection_model_unselect_range
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_unselect_range"
@@ -360,7 +360,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (export 'selection-model-unselect-range)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_select_all ()
+;;; gtk_selection_model_select_all
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_select_all" selection-model-select-all)
@@ -379,7 +379,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (export 'selection-model-select-all)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_unselect_all ()
+;;; gtk_selection_model_unselect_all
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_unselect_all" selection-model-unselect-all)
@@ -398,7 +398,7 @@ gtk_selection_model_selection_changed (model, first_changed_item,
 (export 'selection-model-unselect-all)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_selection_model_selection_changed ()
+;;; gtk_selection_model_selection_changed
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_selection_model_selection_changed"

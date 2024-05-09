@@ -152,14 +152,8 @@
       "GEnum"
       (liber:symbol-documentation 'system-setting)
  "@version{2024-3-8}
-  @begin{short}
-    Values that can be passed to the @code{GtkWidget::system_setting_changed}
-    virtual function.
-  @end{short}
-  The values indicate which system setting has changed. Widgets may need to drop
-  caches, or react otherwise. Most of the values correspond to
-  @class{gtk:settings} properties.
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkSystemSetting\" system-setting
   (:export t
    :type-initializer \"gtk_system_setting_get_type\")
@@ -168,22 +162,32 @@
   :font-config
   :display
   :icon-theme)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:dpi]{The @slot[gtk:settings]{gtk-xft-dpi} setting has changed.}
-    @entry[:font-name]{The @slot[gtk:settings]{gtk-font-name} setting has
-      changed.}
-    @entry[:font-config]{The font configuration has changed in a way that
-      requires text to be redrawn. This can be any of the
-      @slot[gtk:settings]{gtk-xft-antialias},
-      @slot[gtk:settings]{gtk-xft-hinting},
-      @slot[gtk:settings]{gtk-xft-hintstyle}
-      @slot[gtk:settings]{gtk-xft-rgba} or
-      @slot[gtk:settings]{gtk-fontconfig-timestamp} settings.}
-    @entry[:display]{The display has changed.}
-    @entry[:icon-theme]{The icon theme has changed in a way that requires icons
-      to be looked up again.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:dpi]{The @slot[gtk:settings]{gtk-xft-dpi} setting has changed.}
+      @entry[:font-name]{The @slot[gtk:settings]{gtk-font-name} setting has
+        changed.}
+      @entry[:font-config]{The font configuration has changed in a way that
+        requires text to be redrawn. This can be any of the
+        @slot[gtk:settings]{gtk-xft-antialias},
+        @slot[gtk:settings]{gtk-xft-hinting},
+        @slot[gtk:settings]{gtk-xft-hintstyle}
+        @slot[gtk:settings]{gtk-xft-rgba} or
+        @slot[gtk:settings]{gtk-fontconfig-timestamp} settings.}
+      @entry[:display]{The display has changed.}
+      @entry[:icon-theme]{The icon theme has changed in a way that requires
+        icons to be looked up again.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Values that can be passed to the @code{GtkWidget::system_setting_changed}
+    virtual function.
+  @end{short}
+  The values indicate which system setting has changed. Widgets may need to drop
+  caches, or react otherwise. Most of the values correspond to
+  @class{gtk:settings} properties.
   @see-class{gtk:settings}
   @see-function{gtk:settings-gtk-xft-dpi}
   @see-function{gtk:settings-gtk-font-name}

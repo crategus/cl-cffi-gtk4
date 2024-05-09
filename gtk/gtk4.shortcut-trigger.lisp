@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -134,7 +134,7 @@
   @see-constructor{gtk:keyval-trigger-new}
   @see-class{gtk:shortcut-trigger}")
 
-;;; --- keyval-trigger-keyval ----------------------------------------------
+;;; --- gtk:keyval-trigger-keyval ----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "keyval" 'keyval-trigger) t)
@@ -147,7 +147,7 @@
       "Accessor"
       (documentation 'keyval-trigger-keyval 'function)
  "@version{#2022-8-26}
-  @syntax[]{(gtk:keyval-trigger-keyval object) => keyval)}
+  @syntax{(gtk:keyval-trigger-keyval object) => keyval)}
   @argument[object]{a @class{gtk:keyval-trigger} object}
   @argument[keyval]{an unsigned integer with the keyval}
   @begin{short}
@@ -158,7 +158,7 @@
   pressed to succed triggering @arg{object}.
   @see-class{gtk:keyval-trigger}")
 
-;;; --- keyval-trigger-modifiers -------------------------------------------
+;;; --- gtk:keyval-trigger-modifiers -------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "modifiers"
@@ -172,7 +172,7 @@
       "Accessor"
       (documentation 'keyval-trigger-modifiers 'function)
  "@version{#2022-8-26}
-  @syntax[]{(gtk:keyval-trigger-modifiers object) => modifiers)}
+  @syntax{(gtk:keyval-trigger-modifiers object) => modifiers)}
   @argument[object]{a @class{gtk:keyval-trigger} object}
   @argument[modifiers]{a @symbol{gdk:modifiers-type} value}
   @begin{short}
@@ -207,7 +207,7 @@
   @see-constructor{gtk:mnemonic-trigger-new}
   @see-class{gtk:shortcut-trigger}")
 
-;;; --- mnemonic-trigger-keyval --------------------------------------------
+;;; --- gtk:mnemonic-trigger-keyval --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "keyval"
@@ -221,7 +221,7 @@
       "Accessor"
       (documentation 'mnemonic-trigger-keyval 'function)
  "@version{#2022-8-26}
-  @syntax[]{(gtk:mnemonic-trigger-keyval object) => keyval)}
+  @syntax{(gtk:mnemonic-trigger-keyval object) => keyval)}
   @argument[object]{a @class{gtk:mnemonic-trigger} object}
   @argument[keyval]{an unsigned integer with the keyval}
   @begin{short}
@@ -260,7 +260,7 @@
   @see-constructor{gtk:alternative-trigger-new}
   @see-class{gtk:shortcut-trigger}")
 
-;;; --- alternative-trigger-first ------------------------------------------
+;;; --- gtk:alternative-trigger-first ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "first"
@@ -274,7 +274,7 @@
       "Accessor"
       (documentation 'alternative-trigger-first 'function)
  "@version{#2022-8-26}
-  @syntax[]{(gtk:alternative-trigger-first object) => shortcut)}
+  @syntax{(gtk:alternative-trigger-first object) => shortcut)}
   @argument[object]{a @class{gtk:mnemonic-trigger} object}
   @argument[shortcut]{a first @class{gtk:shortcut-trigger} object}
   @begin{short}
@@ -287,7 +287,7 @@
   @see-class{gtk:alternative-trigger}
   @see-function{gtk:alternative-trigger-second}")
 
-;;; --- alternative-trigger-second -----------------------------------------
+;;; --- gtk:alternative-trigger-second -----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "second"
@@ -301,7 +301,7 @@
       "Accessor"
       (documentation 'alternative-trigger-second 'function)
  "@version{#2022-8-26}
-  @syntax[]{(gtk:alternative-trigger-second object) => shortcut)}
+  @syntax{(gtk:alternative-trigger-second object) => shortcut)}
   @argument[object]{a @class{gtk:mnemonic-trigger} object}
   @argument[shortcut]{a second @class{gtk:shortcut-trigger} object}
   @begin{short}
@@ -334,7 +334,7 @@
   @see-class{gtk:shortcut-trigger}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_trigger_trigger ()
+;;; gtk_shortcut_trigger_trigger
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_trigger_trigger" shortcut-trigger-trigger)
@@ -344,7 +344,7 @@
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
   @argument[event]{a @class{gdk:event} event}
   @argument[enable]{a boolean whether mnemonics should trigger}
-  @return{A @symbol{gdk:key-match} value whether the event triggered the
+  @return{The @symbol{gdk:key-match} value whether the event triggered the
     shortcut.}
   @begin{short}
     Checks if the given event triggers @arg{shortcut}.
@@ -426,7 +426,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_trigger_to_string ()
+;;; gtk_shortcut_trigger_to_string
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_trigger_to_string" shortcut-trigger-to-string)
@@ -434,7 +434,7 @@
  #+liber-documentation
  "@version{#2022-8-26}
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
-  @return{A human-readable string.}
+  @return{The human-readable string.}
   @begin{short}
     Prints the given trigger into a human-readable string.
   @end{short}
@@ -466,7 +466,7 @@
 ;; not needed, see the SHORTCUT-TRIGGER-TO-STRING function
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_trigger_to_label ()
+;;; gtk_shortcut_trigger_to_label
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_trigger_to_label" shortcut-trigger-to-label)
@@ -475,7 +475,7 @@
  "@version{#2022-8-26}
   @argument[shortcut]{a @class{gtk:shortcut-trigger} object}
   @argument[display]{a @class{gdk:display} object}
-  @return{A string with the textual representation for the given trigger.}
+  @return{The string with the textual representation for the given trigger.}
   @begin{short}
     Gets textual representation for the given trigger.
   @end{short}
@@ -529,7 +529,7 @@
 ;; not needed, see the SHORTCUT-TRIGGER-PRINT-LABEL function
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_shortcut_trigger_parse_string ()
+;;; gtk_shortcut_trigger_parse_string
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_shortcut_trigger_parse_string"
@@ -537,7 +537,7 @@
  #+liber-documentation
  "@version{#2022-8-26}
   @argument[str]{a string to parse}
-  @return{A new @class{gtk:shortcut-trigger} object, or @code{nil} on error}
+  @return{The new @class{gtk:shortcut-trigger} object, or @code{nil} on error.}
   @begin{short}
     Tries to parse the given string into a trigger.
   @end{short}
@@ -564,7 +564,7 @@
 (export 'shortcut-trigger-parse-string)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_keyval_trigger_new ()
+;;; gtk_keyval_trigger_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline keyval-trigger-new))
@@ -575,7 +575,7 @@
   @argument[keyval]{an unsigned integer with the keyval to trigger for}
   @argument[modifiers]{a @symbol{gdk:modifier-type} value that need to be
     present}
-  @return{A new @class{gtk:shortcut-trigger} object.}
+  @return{The new @class{gtk:shortcut-trigger} object.}
   @begin{short}
     Creates a @class{gtk:shortcut-trigger} object that will trigger whenever the
     key with the given keyval and modifiers is pressed.
@@ -588,7 +588,7 @@
 (export 'keyval-trigger-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_mnemonic_trigger_new ()
+;;; gtk_mnemonic_trigger_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline mnemonic-trigger-new))
@@ -597,7 +597,7 @@
  #+liber-documentation
  "@version{#2022-8-26}
   @argument[keyval]{an unsigned integer with the keyval to trigger for}
-  @return{A new @class{gtk:mnemonic-trigger} object.}
+  @return{The new @class{gtk:mnemonic-trigger} object.}
   @begin{short}
     Creates a @class{gtk:shortcut-trigger} object that will trigger whenever
     the key with the given keyval is pressed and mnemonics have been activated.
@@ -611,7 +611,7 @@
 (export 'mnemonic-trigger-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_alternative_trigger_new ()
+;;; gtk_alternative_trigger_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline alternative-trigger-new))
@@ -621,7 +621,7 @@
  "@version{#2022-8-26}
   @argument[first]{a @class{gtk:shortcut-trigger} object}
   @argument[second]{a @class{gtk:shortcut-trigger} object}
-  @return{A new @class{gtk:shortcut-trigger} object.}
+  @return{The new @class{gtk:shortcut-trigger} object.}
   @begin{short}
     Creates a @class{gtk:shortcut-trigger} object that will trigger whenever
     either of the two given triggers gets triggered.
@@ -636,14 +636,14 @@
 (export 'alternative-trigger-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_never_trigger_get ()
+;;; gtk_never_trigger_get
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_never_trigger_get" never-trigger-get)
     (g:object shortcut-trigger)
  #+liber-documentation
  "@version{#2022-8-26}
-  @return{A @class{gtk:never-trigger} object.}
+  @return{The @class{gtk:never-trigger} object.}
   @begin{short}
     Gets the never trigger.
   @end{short}

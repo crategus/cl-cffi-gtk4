@@ -1366,7 +1366,7 @@ lambda (view)    :action
  "@version{2024-3-9}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[column]{a @class{gtk:tree-view-column} object to add}
-  @return{An integer with the number of columns in @arg{view} after appending.}
+  @return{The integer with the number of columns in @arg{view} after appending.}
   @begin{short}
     Appends @arg{column} to the list of columns in the tree view.
   @end{short}
@@ -2718,16 +2718,16 @@ lambda (view)    :action
   @see-function{gtk:tree-view-reorderable}"
   (let ((n-targets (length targets)))
     (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
-      (loop for i from 0 below n-targets
-            for target-ptr = (cffi:mem-aptr targets-ptr
-                                            '(:struct %target-entry) i)
-            for entry in targets
-            do (cffi:with-foreign-slots ((target flags info)
-                                         target-ptr
-                                         (:struct %target-entry))
-                 (setf target (first entry))
-                 (setf flags (second entry))
-                 (setf info (third entry))))
+      (iter (for i from 0 below n-targets)
+            (for target-ptr = (cffi:mem-aptr targets-ptr
+                                             '(:struct %target-entry) i))
+            (for entry in targets)
+            (cffi:with-foreign-slots ((target flags info)
+                                      target-ptr
+                                      (:struct %target-entry))
+              (setf target (first entry))
+              (setf flags (second entry))
+              (setf info (third entry))))
       (%tree-view-enable-model-drag-dest view
                                          targets-ptr
                                          n-targets
@@ -2776,16 +2776,16 @@ lambda (view)    :action
   @see-function{gtk:tree-view-reorderable}"
   (let ((n-targets (length targets)))
     (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
-      (loop for i from 0 below n-targets
-            for target-ptr = (cffi:mem-aptr targets-ptr
-                                            '(:struct %target-entry) i)
-            for entry in targets
-            do (cffi:with-foreign-slots ((target flags info)
-                                         target-ptr
-                                         (:struct %target-entry))
-                 (setf target (first entry))
-                 (setf flags (second entry))
-                 (setf info (third entry))))
+      (iter (for i from 0 below n-targets)
+            (for target-ptr = (cffi:mem-aptr targets-ptr
+                                             '(:struct %target-entry) i))
+            (for entry in targets)
+            (cffi:with-foreign-slots ((target flags info)
+                                      target-ptr
+                                      (:struct %target-entry))
+              (setf target (first entry))
+              (setf flags (second entry))
+              (setf info (third entry))))
       (%tree-view-enable-model-drag-source view
                                            mask
                                            targets-ptr

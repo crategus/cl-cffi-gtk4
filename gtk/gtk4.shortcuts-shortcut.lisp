@@ -67,7 +67,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkShortcutType
+;;; GtkShortcutType
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkShortcutType" shortcut-type
@@ -89,11 +89,8 @@
       "GEnum"
       (liber:symbol-documentation 'shortcut-type)
  "@version{2024-2-18}
-  @begin{short}
-    The @symbol{gtk:shortcut-type} enumeration specifies the kind of shortcut
-    that is being described.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkShortcutType\" gtk:shortcut-type
   (:export t
    :type-initializer \"gtk_shortcut_type_get_type\")
@@ -107,29 +104,36 @@
   :gesture
   :gesture-swipe-left
   :gesture-swipe-right)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:accelerator]{The shortcut is a keyboard accelerator. The
-      @slot[gtk:shortcuts-shortcut]{accelerator} property will be used.}
-    @entry[:gesture-pinch]{The shortcut is a pinch gesture. GTK provides an
-      icon and subtitle.}
-    @entry[:gesture-stretch]{The shortcut is a stretch gesture. GTK provides an
-      icon and subtitle.}
-    @entry[:gesture-rotate-clockwise]{The shortcut is a clockwise rotation
-      gesture. GTK provides an icon and subtitle.}
-    @entry[:gesture-rotate-counter-clockwise]{The shortcut is a counterclockwise
-      rotation gesture. GTK provides an icon and subtitle.}
-    @entry[:gesture-two-finger-swipe-left]{The shortcut is a two-finger swipe
-      gesture. GTK provides an icon and subtitle.}
-    @entry[:gesture-two-finger-swipe-right]{The shortcut is a two-finger swipe
-      gesture. GTK provides an icon and subtitle.}
-    @entry[:gesture]{The shortcut is a gesture. The
-      @slot[gtk:shortcuts-shortcut]{icon} property will be used.}
-    @entry[:gesture-swipe-left]{The shortcut is a swipe gesture. GTK provides
-      an icon and subtitle.}
-    @entry[:gesture-swipe-right]{The shortcut is a swipe gesture. GTK provides
-      an icon and subtitle.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:accelerator]{The shortcut is a keyboard accelerator. The
+        @slot[gtk:shortcuts-shortcut]{accelerator} property will be used.}
+      @entry[:gesture-pinch]{The shortcut is a pinch gesture. GTK provides an
+        icon and subtitle.}
+      @entry[:gesture-stretch]{The shortcut is a stretch gesture. GTK provides
+        an icon and subtitle.}
+      @entry[:gesture-rotate-clockwise]{The shortcut is a clockwise rotation
+        gesture. GTK provides an icon and subtitle.}
+      @entry[:gesture-rotate-counter-clockwise]{The shortcut is a
+        counterclockwise rotation gesture. GTK provides an icon and subtitle.}
+      @entry[:gesture-two-finger-swipe-left]{The shortcut is a two-finger swipe
+        gesture. GTK provides an icon and subtitle.}
+      @entry[:gesture-two-finger-swipe-right]{The shortcut is a two-finger swipe
+        gesture. GTK provides an icon and subtitle.}
+      @entry[:gesture]{The shortcut is a gesture. The
+        @slot[gtk:shortcuts-shortcut]{icon} property will be used.}
+      @entry[:gesture-swipe-left]{The shortcut is a swipe gesture. GTK provides
+        an icon and subtitle.}
+      @entry[:gesture-swipe-right]{The shortcut is a swipe gesture. GTK provides
+        an icon and subtitle.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The @symbol{gtk:shortcut-type} enumeration specifies the kind of shortcut
+    that is being described.
+  @end{short}
   @see-class{gtk:shortcuts-shortcut}
   @see-function{gtk:shortcuts-shortcut-accelerator}
   @see-function{gtk:shortcuts-shortcut-icon}")
@@ -220,8 +224,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-accel-size-group 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-accel-size-group object) => group}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-accel-size-group object) group)}
+  @syntax{(gtk:shortcuts-shortcut-accel-size-group object) => group}
+  @syntax{(setf (gtk:shortcuts-shortcut-accel-size-group object) group)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[group]{a @class{gtk:size-group} object}
   @begin{short}
@@ -254,8 +258,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-accelerator 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-accelerator object) => accelerator}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-accelerator object) accelerator)}
+  @syntax{(gtk:shortcuts-shortcut-accelerator object) => accelerator}
+  @syntax{(setf (gtk:shortcuts-shortcut-accelerator object) accelerator)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[accelerator]{a string with the accelerator}
   @begin{short}
@@ -302,8 +306,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-action-name 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-action-name object) => name}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-action-name object) name)}
+  @syntax{(gtk:shortcuts-shortcut-action-name object) => name}
+  @syntax{(setf (gtk:shortcuts-shortcut-action-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[name]{a string with the detailed action name}
   @begin{short}
@@ -334,8 +338,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-direction 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-direction object) => direction}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-direction object) direction)}
+  @syntax{(gtk:shortcuts-shortcut-direction object) => direction}
+  @syntax{(setf (gtk:shortcuts-shortcut-direction object) direction)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[direction]{a @symbol{gtk:text-direction} value}
   @begin{short}
@@ -362,8 +366,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-icon 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-icon object) => icon}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-icon object) icon)}
+  @syntax{(gtk:shortcuts-shortcut-icon object) => icon}
+  @syntax{(setf (gtk:shortcuts-shortcut-icon object) icon)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[icon]{a @class{g:icon} object}
   @begin{short}
@@ -392,8 +396,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-icon-set 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-icon-set object) => setting}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-icon-set object) setting)}
+  @syntax{(gtk:shortcuts-shortcut-icon-set object) => setting}
+  @syntax{(setf (gtk:shortcuts-shortcut-icon-set object) setting)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[setting]{a boolean whether an icon has been set}
   @begin{short}
@@ -418,8 +422,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-shortcut-type 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-shortcut-type object) => type}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-shortcut-type object) type)}
+  @syntax{(gtk:shortcuts-shortcut-shortcut-type object) => type}
+  @syntax{(setf (gtk:shortcuts-shortcut-shortcut-type object) type)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[type]{a @symbol{gtk:shortcut-type} value}
   @begin{short}
@@ -446,8 +450,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-subtitle 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-subtitle object) => subtitle}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-subtitle object) subtitle)}
+  @syntax{(gtk:shortcuts-shortcut-subtitle object) => subtitle}
+  @syntax{(setf (gtk:shortcuts-shortcut-subtitle object) subtitle)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[subtitle]{a string with the subtitle for the shortcut}
   @begin{short}
@@ -473,8 +477,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-subtitle-set 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-subtitle-set object) => setting}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-subtitle-set object) setting)}
+  @syntax{(gtk:shortcuts-shortcut-subtitle-set object) => setting}
+  @syntax{(setf (gtk:shortcuts-shortcut-subtitle-set object) setting)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[setting]{a boolean whether a subtitle has been set}
   @begin{short}
@@ -499,8 +503,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-title 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-title object) => title}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-title object) title)}
+  @syntax{(gtk:shortcuts-shortcut-title object) => title}
+  @syntax{(setf (gtk:shortcuts-shortcut-title object) title)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[title]{a string with the textual description for the shortcut}
   @begin{short}
@@ -526,8 +530,8 @@
       "Accessor"
       (documentation 'shortcuts-shortcut-title-size-group 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:shortcuts-shortcut-title-size-group object) => group}
-  @syntax[]{(setf (gtk:shortcuts-shortcut-title-size-group object) group)}
+  @syntax{(gtk:shortcuts-shortcut-title-size-group object) => group}
+  @syntax{(setf (gtk:shortcuts-shortcut-title-size-group object) group)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[group]{a @class{gtk:size-group} object}
   @begin{short}

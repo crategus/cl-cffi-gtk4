@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2023 Dieter Kaiser
+;;; Copyright (C) 2023 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -100,7 +100,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- string-object-string ---------------------------------------------------
+;;; --- gtk:string-object-string -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "string" 'string-object) t)
@@ -113,7 +113,7 @@
       "Accessor"
       (documentation 'string-object-string 'function)
  "@version{2023-9-7}
-  @syntax[]{(gtk:string-object-string object) => string}
+  @syntax{(gtk:string-object-string object) => string}
   @argument[object]{a @class{gtk:string-object} object}
   @argument[string]{a string}
   @begin{short}
@@ -125,7 +125,7 @@
   @see-class{gtk:string-object}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_string_object_new ()
+;;; gtk_string_object_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline string-object-new))
@@ -138,7 +138,7 @@
  #+liber-documentation
  "@version{2023-9-28}
   @argument[string]{a string to wrap, or @code{nil}}
-  @return{A new @class{gtk:string-object} object.}
+  @return{The new @class{gtk:string-object} object.}
   @begin{short}
     Wraps a string in an object for use with a @class{g:list-model} object.
   @end{short}
@@ -218,7 +218,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- string-list-strings ----------------------------------------------------
+;;; --- gtk:string-list-strings ------------------------------------------------
 
 #+(and gtk-4-10 liber-documentation)
 (setf (documentation (liber:slot-documentation "strings" 'string-list) t)
@@ -233,14 +233,14 @@
 (unexport 'string-list-strings)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_string_list_new ()
+;;; gtk_string_list_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_string_list_new" string-list-new) (g:object string-list)
  #+liber-documentation
  "@version{2023-9-28}
   @argument[strings]{a list of strings to put in the model}
-  @return{A new @class{gtk:string-list} object.}
+  @return{The new @class{gtk:string-list} object.}
   @begin{short}
     Creates a new string list with the given @arg{strings}.
   @end{short}
@@ -257,7 +257,7 @@
 (export 'string-list-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_string_list_append ()
+;;; gtk_string_list_append
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_string_list_append" string-list-append) :void
@@ -302,7 +302,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_string_list_remove ()
+;;; gtk_string_list_remove
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_string_list_remove" string-list-remove) :void
@@ -323,7 +323,7 @@
 (export 'string-list-remove)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_string_list_splice ()
+;;; gtk_string_list_splice
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_string_list_splice" %string-list-splice) :void
@@ -360,7 +360,7 @@
 (export 'string-list-splice)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_string_list_get_string ()
+;;; gtk_string_list_get_string
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_string_list_get_string" string-list-string) :string
