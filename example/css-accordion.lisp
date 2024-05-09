@@ -2,7 +2,7 @@
 ;;;;
 ;;;; An accordion demo written using CSS transitions and multiple backgrounds.
 ;;;;
-;;;; 2024-4-19
+;;;; Last version: 2024-5-6
 
 (in-package :gtk4-example)
 
@@ -19,7 +19,6 @@
                                 :child frame
                                 :default-height 300
                                 :default-width 600))
-         (display (gtk:widget-display window))
          (provider (make-instance 'gtk:css-provider))
          (path (sys-path "resource/css-accordion.css")))
     ;; Load and install the CSS for the accordion
