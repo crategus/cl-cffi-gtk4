@@ -1791,6 +1791,7 @@ GtkCellRenderer         GtkWidget
     @end{subsection}
     @begin[GtkScaleButton]{subsection}
       @about-class{scale-button}
+      @about-generic{scale-button-active}
       @about-generic{scale-button-adjustment}
       @about-generic{scale-button-icons}
       @about-generic{scale-button-value}
@@ -3191,15 +3192,15 @@ GtkCellRenderer         GtkWidget
       @about-class{accessible-range}
       @about-class{accessible}
       @about-generic{accessible-accessible-role}
-      @about-function{accessible-update-state}
-      @about-function{accessible-update-state-value}
+      @about-function{accessible-reset-property}
+      @about-function{accessible-reset-relation}
       @about-function{accessible-reset-state}
       @about-function{accessible-update-property}
       @about-function{accessible-update-property-value}
-      @about-function{accessible-reset-property}
       @about-function{accessible-update-relation}
       @about-function{accessible-update-relation-value}
-      @about-function{accessible-reset-relation}
+      @about-function{accessible-update-state}
+      @about-function{accessible-update-state-value}
       @about-function{accessible-property-init-value}
       @about-function{accessible-relation-init-value}
       @about-function{accessible-state-init-value}
