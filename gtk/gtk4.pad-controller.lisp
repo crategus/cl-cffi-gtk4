@@ -58,7 +58,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkPadActionType
+;;; GtkPadActionType
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkPadActionType" pad-action-type
@@ -96,13 +96,13 @@
   @see-class{gtk:pad-controller}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkPadActionEntry                               not implemented
+;;; GtkPadActionEntry                                       not implemented
 ;;; ----------------------------------------------------------------------------
 
 ;; We pass the entries as Lisp lists. This structure is not needed.
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkPadController
+;;; GtkPadController
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkPadController" pad-controller
@@ -192,8 +192,8 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
       "Accessor"
       (documentation 'pad-controller-action-group 'function)
  "@version{2023-3-11}
-  @syntax[]{(gtk:pad-controller-action-group object) => group)}
-  @syntax[]{(setf (gtk:pad-controller-action-group object) group)}
+  @syntax{(gtk:pad-controller-action-group object) => group)}
+  @syntax{(setf (gtk:pad-controller-action-group object) group)}
   @argument[object]{a @class{gtk:pad-controller} object}
   @argument[group]{a @class{g:action-group} object}
   @begin{short}
@@ -216,8 +216,8 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
       "Accessor"
       (documentation 'pad-controller-pad 'function)
  "@version{2023-3-11}
-  @syntax[]{(gtk:pad-controller-pad object) => pad)}
-  @syntax[]{(setf (gtk:pad-controller-pad object) pad)}
+  @syntax{(gtk:pad-controller-pad object) => pad)}
+  @syntax{(setf (gtk:pad-controller-pad object) pad)}
   @argument[object]{a @class{gtk:pad-controller} object}
   @argument[pad]{a @class{gdk:device} object}
   @begin{short}
@@ -228,7 +228,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
   @see-class{gdk:device}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_pad_controller_new ()
+;;; gtk_pad_controller_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_pad_controller_new" pad-controller-new)
@@ -268,7 +268,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 (export 'pad-controller-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_pad_controller_set_action_entries ()
+;;; gtk_pad_controller_set_action_entries
 ;;; ----------------------------------------------------------------------------
 
 (defun pad-controller-set-action-entries (controller entries)
@@ -292,7 +292,7 @@ pad_controller = gtk_pad_controller_new (action_group, NULL);
 (export 'pad-controller-set-action-entries)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_pad_controller_set_action ()
+;;; gtk_pad_controller_set_action
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_pad_controller_set_action" pad-controller-set-action) :void

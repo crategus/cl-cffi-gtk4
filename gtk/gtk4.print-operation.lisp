@@ -152,11 +152,8 @@
       "GEnum"
       (liber:symbol-documentation 'print-status)
  "@version{2023-8-28}
-  @begin{short}
-    The status gives a rough indication of the completion of a running print
-    operation.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkPrintStatus\" print-status
   (:export t
    :type-initializer \"gtk_print_status_get_type\")
@@ -169,23 +166,30 @@
   (:printing 6)
   (:finished 7)
   (:finished-aborted 8))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:initial]{The printing has not started yet. This status is set
-      initially, and while the print dialog is shown.}
-    @entry[:preparing]{This status is set while the @code{\"begin-print\"}
-      signal is emitted and during pagination.}
-    @entry[:generating-data]{This status is set while the pages are being
-      rendered.}
-    @entry[:sending-data]{The print job is being sent off to the printer.}
-    @entry[:pending]{The print job has been sent to the printer, but is not
-      printed for some reason, e.g. the printer may be stopped.}
-    @entry[:pending-issue]{Some problem has occurred during printing,
-      e.g. a paper jam.}
-    @entry[:printing]{The printer is processing the print job.}
-    @entry[:finished]{The printing has been completed successfully.}
-    @entry[:finished-aborted]{The printing has been aborted.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:initial]{The printing has not started yet. This status is set
+        initially, and while the print dialog is shown.}
+      @entry[:preparing]{This status is set while the @code{\"begin-print\"}
+        signal is emitted and during pagination.}
+      @entry[:generating-data]{This status is set while the pages are being
+        rendered.}
+      @entry[:sending-data]{The print job is being sent off to the printer.}
+      @entry[:pending]{The print job has been sent to the printer, but is not
+        printed for some reason, e.g. the printer may be stopped.}
+      @entry[:pending-issue]{Some problem has occurred during printing,
+        e.g. a paper jam.}
+      @entry[:printing]{The printer is processing the print job.}
+      @entry[:finished]{The printing has been completed successfully.}
+      @entry[:finished-aborted]{The printing has been aborted.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The status gives a rough indication of the completion of a running print
+    operation.
+  @end{short}
   @see-class{gtk:print-operation}")
 
 ;;; ----------------------------------------------------------------------------
@@ -205,11 +209,8 @@
       "GEnum"
       (liber:symbol-documentation 'print-operation-action)
  "@version{2023-8-28}
-  @begin{short}
-    The action parameter to the @fun{gtk:print-operation-run} function
-    determines what action the print operation should perform.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkPrintOperationAction\" print-operation-action
   (:export t
    :type-initializer \"gtk_print_operation_action_get_type\")
@@ -217,16 +218,23 @@
   (:print 1)
   (:preview 2)
   (:export 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:print-dialog]{Show the print dialog.}
-    @entry[:print]{Start to print without showing the print dialog, based on
-      the current print settings.}
-    @entry[:preview]{Show the print preview.}
-    @entry[:export]{Export to a file. This requires the
-      @slot[gtk:print-operation]{export-filename} property of the
-      @class{gtk:print-operation} object to be set.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:print-dialog]{Show the print dialog.}
+      @entry[:print]{Start to print without showing the print dialog, based on
+        the current print settings.}
+      @entry[:preview]{Show the print preview.}
+      @entry[:export]{Export to a file. This requires the
+        @slot[gtk:print-operation]{export-filename} property of the
+        @class{gtk:print-operation} object to be set.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The action parameter to the @fun{gtk:print-operation-run} function
+    determines what action the print operation should perform.
+  @end{short}
   @see-class{gtk:print-operation}
   @see-function{gtk:print-operation-run}")
 
@@ -247,11 +255,8 @@
       "GEnum"
       (liber:symbol-documentation 'print-operation-result)
  "@version{2023-8-28}
-  @begin{short}
-    A value of this type is returned by the @fun{gtk:print-operation-run}
-    function.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkPrintOperationResult\" print-operation-result
   (:export t
    :type-initializer \"gtk_print_operation_result_get_type\")
@@ -259,20 +264,27 @@
   (:apply 1)
   (:cancel 2)
   (:in-progress 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:error]{An error has occured.}
-    @entry[:apply]{The print settings should be stored.}
-    @entry[:cancel]{The print operation has been canceled, the print settings
-      should not be stored.}
-    @entry[:in-progress]{The print operation is not complete yet. This value
-      will only be returned when running asynchronously.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:error]{An error has occured.}
+      @entry[:apply]{The print settings should be stored.}
+      @entry[:cancel]{The print operation has been canceled, the print settings
+        should not be stored.}
+      @entry[:in-progress]{The print operation is not complete yet. This value
+        will only be returned when running asynchronously.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    A value of this type is returned by the @fun{gtk:print-operation-run}
+    function.
+  @end{short}
   @see-class{gtk:print-operation}
   @see-function{gtk:print-operation-run}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkPrintError
+;;; GtkPrintError
 ;;;
 ;;; Error codes that identify various errors that can occur while using the GTK
 ;;; printing support.

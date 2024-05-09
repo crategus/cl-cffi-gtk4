@@ -87,21 +87,25 @@
       "GFlags"
       (liber:symbol-documentation 'popover-menu-flags)
  "@version{#2022-7-29}
-  @begin{short}
-    Flags that affect how popover menus are created from a menu model.
-  @end{short}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GtkPopoverMenuFlags\" popover-menu-flags
   (:export t
    :type-initializer \"gtk_popover_menu_flags_get_type\")
   (:none 0)
   (:nested #.(ash 1 0)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{No flags set.}
-    @entry[:nested]{Create submenus as nested popovers. Without this flag,
-      submenus are created as sliding pages that replace the main menu.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{No flags set.}
+      @entry[:nested]{Create submenus as nested popovers. Without this flag,
+        submenus are created as sliding pages that replace the main menu.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Flags that affect how popover menus are created from a menu model.
+  @end{short}
   @see-class{gtk:popover-menu}")
 
 ;;; ----------------------------------------------------------------------------
@@ -235,7 +239,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- popover-menu-menu-model ------------------------------------------------
+;;; --- gtk:popover-menu-menu-model --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "menu-model" 'popover-menu) t)
@@ -248,8 +252,8 @@
       "Accessor"
       (documentation 'popover-menu-menu-model 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-menu-menu-model object) => model}
-  @syntax[]{(setf (gtk:popover-menu-menu-model object) model)}
+  @syntax{(gtk:popover-menu-menu-model object) => model}
+  @syntax{(setf (gtk:popover-menu-menu-model object) model)}
   @argument[object]{a @class{gtk:popover-menu} widget}
   @argument[model]{a @class{g:menu-model} object}
   @begin{short}
@@ -263,7 +267,7 @@
   @see-class{gtk:popover-menu}
   @see-class{g:menu-model}")
 
-;;; --- popover-menu-visible-submenu -------------------------------------------
+;;; --- gtk:popover-menu-visible-submenu ---------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "visible-submenu"
@@ -277,8 +281,8 @@
       "Accessor"
       (documentation 'popover-menu-visible-submenu 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-menu-visible-submenu object) => submenu}
-  @syntax[]{(setf (gtk:popover-menu-visible-submenu object) submenu)}
+  @syntax{(gtk:popover-menu-visible-submenu object) => submenu}
+  @syntax{(setf (gtk:popover-menu-visible-submenu object) submenu)}
   @argument[object]{a @class{gtk:popover-menu} widget}
   @argument[submenu]{a string with the name of the submenu}
   @begin{short}
@@ -289,7 +293,7 @@
   @see-class{gtk:popover-menu}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_menu_new_from_model ()
+;;; gtk_popover_menu_new_from_model
 ;;; ----------------------------------------------------------------------------
 
 (defun popover-menu-new-from-model (model)
@@ -323,7 +327,7 @@
 (export 'popover-menu-new-from-model)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_menu_new_from_model_full ()
+;;; gtk_popover_menu_new_from_model_full
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_popover_menu_new_from_model_full"
@@ -358,7 +362,7 @@
 (export 'popover-menu-new-from-model-full)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_menu_add_child ()
+;;; gtk_popover_menu_add_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_popover_menu_add_child" popover-menu-add-child) :boolean
@@ -383,7 +387,7 @@
 (export 'popover-menu-add-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_menu_remove_child ()
+;;; gtk_popover_menu_remove_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_popover_menu_remove_child" popover-menu-remove-child)

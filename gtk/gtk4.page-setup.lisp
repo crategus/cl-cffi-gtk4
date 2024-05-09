@@ -436,8 +436,8 @@
     :double
  #+liber-documentation
  "@version{2024-4-30}
-  @syntax[]{(gtk:page-setup-right-margin setup unit) => margin}
-  @syntax[]{(setf (gtk:page-setup-right-margin setup unit) margin)}
+  @syntax{(gtk:page-setup-right-margin setup unit) => margin}
+  @syntax{(setf (gtk:page-setup-right-margin setup unit) margin)}
   @argument[setup]{a @class{gtk:page-setup} object}
   @argument[unit]{a @symbol{gtk:unit} value}
   @argument[margin]{a number coerced to a double float with the right margin in

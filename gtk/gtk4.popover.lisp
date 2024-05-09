@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -99,7 +99,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkPopover
+;;; GtkPopover
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkPopover" popover
@@ -140,7 +140,7 @@
 (setf (documentation 'popover 'type)
  "@version{#2022-7-29}
   @begin{short}
-    A @class{gtk:popover} widget is a bubble-like context window, primarily
+    The @class{gtk:popover} widget is a bubble-like context window, primarily
     meant to provide context-dependent information or options.
   @end{short}
   Popovers are attached to a parent widget. By default, they point to the whole
@@ -247,7 +247,7 @@ lambda (popover)    :run-last
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- popover-autohide -------------------------------------------------------
+;;; --- gtk:popover-autohide ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "autohide" 'popover) t)
@@ -260,8 +260,8 @@ lambda (popover)    :run-last
       "Accessor"
       (documentation 'popover-autohide 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-autohide object) => setting}
-  @syntax[]{(setf (gtk:popover-autohide object) setting)}
+  @syntax{(gtk:popover-autohide object) => setting}
+  @syntax{(setf (gtk:popover-autohide object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[setting]{a boolean whether to dismiss the popover on outside clicks}
   @begin{short}
@@ -279,7 +279,7 @@ lambda (popover)    :run-last
   different from the current one, will cause the popup to be hidden.
   @see-class{gtk:popover}")
 
-;;; --- popover-cascade-popdown ------------------------------------------------
+;;; --- gtk:popover-cascade-popdown --------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "cascade-popdown" 'popover) t)
@@ -293,8 +293,8 @@ lambda (popover)    :run-last
       "Accessor"
       (documentation 'popover-cascade-popdown 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-cascade-popdown object) => setting}
-  @syntax[]{(setf (gtk:popover-cascade-popdown object) setting)}
+  @syntax{(gtk:popover-cascade-popdown object) => setting}
+  @syntax{(setf (gtk:popover-cascade-popdown object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[setting]{a boolean whether the popover should follow a child
     closing}
@@ -308,7 +308,7 @@ lambda (popover)    :run-last
   stay visible.
   @see-class{gtk:popover}")
 
-;;; --- popover-child ----------------------------------------------------------
+;;; --- gtk:popover-child ------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "child" 'popover) t)
@@ -320,8 +320,8 @@ lambda (popover)    :run-last
       "Accessor"
       (documentation 'popover-child 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-child object) => child}
-  @syntax[]{(setf (gtk:popover-child object) child)}
+  @syntax{(gtk:popover-child object) => child}
+  @syntax{(setf (gtk:popover-child object) child)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[child]{a @class{gtk:widget} child widget}
   @begin{short}
@@ -333,7 +333,7 @@ lambda (popover)    :run-last
   @see-class{gtk:popover}
   @see-class{gtk:widget}")
 
-;;; --- popover-default-widget -------------------------------------------------
+;;; --- gtk:popover-default-widget ---------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "default-widget" 'popover) t)
@@ -346,8 +346,8 @@ lambda (popover)    :run-last
       "Accessor"
       (documentation 'popover-default-widget 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-default-widget object) => widget}
-  @syntax[]{(setf (gtk:popover-default-widget object) widget)}
+  @syntax{(gtk:popover-default-widget object) => widget}
+  @syntax{(setf (gtk:popover-default-widget object) widget)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[widget]{a @class{gtk:widget} default widget, or @code{nil} to
     unset the default widget}
@@ -364,7 +364,7 @@ lambda (popover)    :run-last
   @see-class{gtk:popover}
   @see-class{gtk:widget}")
 
-;;; --- popover-has-arrow ------------------------------------------------------
+;;; --- gtk:popover-has-arrow --------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-arrow" 'popover) t)
@@ -377,8 +377,8 @@ lambda (popover)    :run-last
       "Accessor"
       (documentation 'popover-has-arrow 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-has-arrow object) => setting}
-  @syntax[]{(setf (gtk:popover-has-arrow object) setting)}
+  @syntax{(gtk:popover-has-arrow object) => setting}
+  @syntax{(setf (gtk:popover-has-arrow object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[setting]{a boolean whether the popover has an arrow}
   @begin{short}
@@ -391,7 +391,7 @@ lambda (popover)    :run-last
   arrow.
   @see-class{gtk:popover}")
 
-;;; --- popover-mnemonics-visible ----------------------------------------------
+;;; --- gtk:popover-mnemonics-visible ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "mnemonics-visible" 'popover) t)
@@ -405,8 +405,8 @@ lambda (popover)    :run-last
       "Accessor"
       (documentation 'popover-mnemonics-visible 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-mnemonics-visible object) => setting}
-  @syntax[]{(setf (gtk:popover-mnemonics-visible object) setting)}
+  @syntax{(gtk:popover-mnemonics-visible object) => setting}
+  @syntax{(setf (gtk:popover-mnemonics-visible object) setting)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[setting]{a boolean whether mnemonics are currently visible in the
     popover}
@@ -417,7 +417,7 @@ lambda (popover)    :run-last
   Whether mnemonics are currently visible in this popover.
   @see-class{gtk:popover}")
 
-;;; --- popover-pointing-to ----------------------------------------------------
+;;; --- gtk:popover-pointing-to ------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pointing-to" 'popover) t)
@@ -430,21 +430,21 @@ lambda (popover)    :run-last
       "Accessor"
       (documentation 'popover-pointing-to 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-pointing-to object) => rect}
-  @syntax[]{(setf (gtk:popover-pointing-to object) rect)}
+  @syntax{(gtk:popover-pointing-to object) => rect}
+  @syntax{(setf (gtk:popover-pointing-to object) rect)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[rect]{a @class{gdk:rectangle} instance to point to}
   @begin{short}
-    Accessor of the @slot[gtk:popover]{pointing-to} slot of the 
+    Accessor of the @slot[gtk:popover]{pointing-to} slot of the
     @class{gtk:popover} class.
   @end{short}
-  The @fun{gtk:popover-pointing-to} function gets the rectangle that the popover 
-  points to. The @setf{gtk:popover-pointing-to} function sets the rectangle that 
+  The @fun{gtk:popover-pointing-to} function gets the rectangle that the popover
+  points to. The @setf{gtk:popover-pointing-to} function sets the rectangle that
   popover points to. This is in the coordinate space of the popover parent.
   @see-class{gtk:popover}
   @see-class{gdk:rectangle}")
 
-;;; --- popover-position -------------------------------------------------------
+;;; --- gtk:popover-position ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "position" 'popover) t)
@@ -458,8 +458,8 @@ lambda (popover)    :run-last
       "Accessor"
       (documentation 'popover-position 'function)
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-pointing-to object) => position}
-  @syntax[]{(setf (gtk:popover-pointing-to object) position)}
+  @syntax{(gtk:popover-pointing-to object) => position}
+  @syntax{(setf (gtk:popover-pointing-to object) position)}
   @argument[object]{a @class{gtk:popover} widget}
   @argument[position]{a @symbol{gtk:position-type} value with the preferred
     popover position}
@@ -478,7 +478,7 @@ lambda (popover)    :run-last
   @see-symbol{gtk:position-type}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_new ()
+;;; gtk_popover_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline popover-new))
@@ -486,7 +486,7 @@ lambda (popover)    :run-last
 (defun popover-new ()
  #+liber-documentation
  "@version{#2022-7-29}
-  @return{A new @class{gtk:popover} widget.}
+  @return{The new @class{gtk:popover} widget.}
   @short{Creates a new popover.}
   @see-class{gtk:popover}
   @see-class{gtk:widget}"
@@ -495,7 +495,7 @@ lambda (popover)    :run-last
 (export 'popover-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_popup ()
+;;; gtk_popover_popup
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_popover_popup" popover-popup) :void
@@ -515,7 +515,7 @@ lambda (popover)    :run-last
 (export 'popover-popup)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_popdown ()
+;;; gtk_popover_popdown
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_popover_popdown" popover-popdown) :void
@@ -535,7 +535,7 @@ lambda (popover)    :run-last
 (export 'popover-popdown)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_present ()
+;;; gtk_popover_present
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_popover_present" popover-present) :void
@@ -551,8 +551,8 @@ lambda (popover)    :run-last
 (export 'popover-present)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_get_offset ()
-;;; gtk_popover_set_offset () -> popover-offset
+;;; gtk_popover_get_offset
+;;; gtk_popover_set_offset
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf popover-offset) (value popover)
@@ -572,8 +572,8 @@ lambda (popover)    :run-last
 (defun popover-offset (popover)
  #+liber-documentation
  "@version{#2022-7-29}
-  @syntax[]{(gtk:popover-offset popover) => xoffset, yoffset}
-  @syntax[]{(setf (gtk:popover-offset popover) '(xoffset yoffset))}
+  @syntax{(gtk:popover-offset popover) => xoffset, yoffset}
+  @syntax{(setf (gtk:popover-offset popover) '(xoffset yoffset))}
   @argument[popover]{a @class{gtk:popover} widget}
   @argument[xoffset]{an integer with the xoffset}
   @argument[yoffset]{an integer with the yoffset}
@@ -582,7 +582,7 @@ lambda (popover)    :run-last
   @end{short}
   The @fun{gtk:popover-offset} function gets the offset to use when calculating
   the position of the popover. The @setf{gtk:popover-offset} function sets the
-  offset. These values are used when preparing the @class{gtk:popup-layout} 
+  offset. These values are used when preparing the @class{gtk:popup-layout}
   object for positioning the popover.
   @see-class{gtk:popover}
   @see-class{gtk:popover-layout}"

@@ -115,7 +115,7 @@
   @see-class{gtk:printer}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkPrinter
+;;; GtkPrinter
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkPrinter" printer
@@ -217,7 +217,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-accepting-jobs 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-accepting-jobs object) => accepting-jobs}
+  @syntax{(gtk:printer-accepting-jobs object) => accepting-jobs}
   @argument[object]{a @class{gtk:printer} object}
   @argument[accepting-jobs]{a boolean whether the printer is accepting jobs}
   @begin{short}
@@ -241,7 +241,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-accepts-pdf 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-accepts-pdf object) => accepts-pdf}
+  @syntax{(gtk:printer-accepts-pdf object) => accepts-pdf}
   @argument[object]{a @class{gtk:printer} object}
   @argument[accepts-pdf]{a boolean whether the printer can accept PDF}
   @begin{short}
@@ -265,7 +265,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-accepts-ps 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-accepts-ps object) => accepts-ps}
+  @syntax{(gtk:printer-accepts-ps object) => accepts-ps}
   @argument[object]{a @class{gtk:printer} object}
   @argument[accepts-ps]{a boolean whether the printer can accept PostScript}
   @begin{short}
@@ -288,7 +288,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-backend 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-backend object) => backend}
+  @syntax{(gtk:printer-backend object) => backend}
   @argument[object]{a @class{gtk:printer} object}
   @argument[backend]{a @class{gtk:print-backend} object}
   @return{The @class{gtk:print-backend} backend of the printer.}
@@ -313,7 +313,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-icon-name 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-icon-name object) => icon-name}
+  @syntax{(gtk:printer-icon-name object) => icon-name}
   @argument[object]{a @class{gtk:printer} object}
   @argument[icon-name]{a string with the icon name}
   @begin{short}
@@ -337,7 +337,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-is-virtual 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-is-virtual object) => is-virtual}
+  @syntax{(gtk:printer-is-virtual object) => is-virtual}
   @argument[object]{a @class{gtk:printer} object}
   @argument[is-virtual]{a boolean whether the printer is real hardware printer}
   @begin{short}
@@ -362,7 +362,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-job-count 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-job-count object) => count}
+  @syntax{(gtk:printer-job-count object) => count}
   @argument[object]{a @class{gtk:printer} object}
   @argument[count]{an integer with the number of jobs queued on the printer}
   @begin{short}
@@ -385,7 +385,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-location 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-location object) => location}
+  @syntax{(gtk:printer-location object) => location}
   @argument[object]{a @class{gtk:printer} object}
   @argument[location]{a string with the location of the printer}
   @begin{short}
@@ -409,7 +409,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-name 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-name object) => name}
+  @syntax{(gtk:printer-name object) => name}
   @argument[object]{a @class{gtk:printer} object}
   @argument[name]{a string with the name of the printer}
   @begin{short}
@@ -433,7 +433,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-paused 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-paused object) => paused}
+  @syntax{(gtk:printer-paused object) => paused}
   @argument[object]{a @class{gtk:printer} object}
   @argument[paused]{a boolean whether the printer is paused}
   @begin{short}
@@ -456,7 +456,7 @@ lambda (printer success)    :run-last
       "Accessor"
       (documentation 'printer-state-message 'function)
  "@version{2024-2-18}
-  @syntax[]{(gtk:printer-state-message object) => message}
+  @syntax{(gtk:printer-state-message object) => message}
   @argument[object]{a @class{gtk:printer} object}
   @argument[message]{a string with the current state of the printer}
   @begin{short}
@@ -467,7 +467,7 @@ lambda (printer success)    :run-last
   @see-class{gtk:printer}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_new ()
+;;; gtk_printer_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline printer-new))
@@ -478,7 +478,7 @@ lambda (printer success)    :run-last
   @argument[name]{a string with the name of the printer}
   @argument[backend]{a @class{gtk:print-backend} object}
   @argument[virtual]{a boolean whether the printer is virtual}
-  @return{A new @class{gtk:printer} object.}
+  @return{The new @class{gtk:printer} object.}
   @short{Creates a new printer.}
   @see-class{gtk:printer}
   @see-class{gtk:print-backend}"
@@ -490,14 +490,14 @@ lambda (printer success)    :run-last
 (export 'printer-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_get_description ()
+;;; gtk_printer_get_description
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_get_description" printer-description) :string
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer]{a @class{gtk:printer} object}
-  @return{A string with the description of @arg{printer}.}
+  @return{The string with the description of @arg{printer}.}
   @short{Gets the description of the printer.}
   @see-class{gtk:printer}"
   (printer (g:object printer)))
@@ -505,7 +505,7 @@ lambda (printer success)    :run-last
 (export 'printer-description)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_is_active ()
+;;; gtk_printer_is_active
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_is_active" printer-is-active) :boolean
@@ -522,7 +522,7 @@ lambda (printer success)    :run-last
 (export 'printer-is-active)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_is_paused ()
+;;; gtk_printer_is_paused
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_is_paused" printer-is-paused) :boolean
@@ -540,7 +540,7 @@ lambda (printer success)    :run-last
 (export 'printer-is-paused)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_is_accepting_jobs ()
+;;; gtk_printer_is_accepting_jobs
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_is_accepting_jobs" printer-is-accepting-jobs)
@@ -556,7 +556,7 @@ lambda (printer success)    :run-last
 (export 'printer-is-accepting-jobs)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_is_default ()
+;;; gtk_printer_is_default
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_is_default" printer-is-default) :boolean
@@ -583,7 +583,7 @@ lambda (printer success)    :run-last
 ;;; Implemented as the Accessor of the "accepts-pdf" slot
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_list_papers ()
+;;; gtk_printer_list_papers
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_list_papers" printer-list-papers)
@@ -591,7 +591,7 @@ lambda (printer success)    :run-last
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer]{a @class{gtk:printer} object}
-  @return{A list of @class{gtk:page-setup} objects.}
+  @return{The list of @class{gtk:page-setup} objects.}
   @begin{short}
      Lists all the paper sizes the printer supports.
   @end{short}
@@ -607,7 +607,7 @@ lambda (printer success)    :run-last
 (export 'printer-list-papers)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_compare ()
+;;; gtk_printer_compare
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_compare" printer-compare) :int
@@ -627,7 +627,7 @@ lambda (printer success)    :run-last
 (export 'printer-compare)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_has_details ()
+;;; gtk_printer_has_details
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_has_details" printer-has-details) :boolean
@@ -643,7 +643,7 @@ lambda (printer success)    :run-last
 (export 'printer-has-details)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_request_details ()
+;;; gtk_printer_request_details
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_request_details" printer-request-details) :void
@@ -662,7 +662,7 @@ lambda (printer success)    :run-last
 (export 'printer-request-details)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_get_capabilities ()
+;;; gtk_printer_get_capabilities
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_get_capabilities" printer-capabilities)
@@ -691,7 +691,7 @@ lambda (printer success)    :run-last
 (export 'printer-capabilities)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_get_default_page_size ()
+;;; gtk_printer_get_default_page_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_get_default_page_size" printer-default-page-size)
@@ -699,7 +699,7 @@ lambda (printer success)    :run-last
  #+liber-documentation
  "@version{#2021-12-25}
   @argument[printer]{a @class{gtk:printer} object}
-  @return{A @class{gtk:page-setup} object with the default page size of the
+  @return{The @class{gtk:page-setup} object with the default page size of the
     printer.}
   @short{Returns the default page size of the printer.}
   @see-class{gtk:printer}
@@ -709,7 +709,7 @@ lambda (printer success)    :run-last
 (export 'printer-default-page-size)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_get_hard_margins ()
+;;; gtk_printer_get_hard_margins
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_printer_get_hard_margins" %printer-hard-margins) :boolean
@@ -754,7 +754,7 @@ lambda (printer success)    :run-last
 (export 'printer-hard-margins)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_printer_get_hard_margins_for_paper_size ()
+;;; gtk_printer_get_hard_margins_for_paper_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_print_get_hard_margins_for_paper_size"
@@ -834,7 +834,7 @@ lambda (printer success)    :run-last
 (export 'printer-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_enumerate_printers ()
+;;; gtk_enumerate_printers
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_enumerate_printers" %enumerate-printers) :void

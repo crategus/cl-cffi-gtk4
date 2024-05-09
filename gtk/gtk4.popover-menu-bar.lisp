@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -120,7 +120,7 @@ menubar
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- popover-menu-bar-menu-model --------------------------------------------
+;;; --- gtk:popover-menu-bar-menu-model ----------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "menu-model"
@@ -135,8 +135,8 @@ menubar
       "Accessor"
       (documentation 'popover-menu-bar-menu-model 'function)
  "@version{#2023-3-12}
-  @syntax[]{(gtk:popover-menu-bar-menu-model object) => model}
-  @syntax[]{(setf (gtk:popover-menu-bar-menu-model object) model)}
+  @syntax{(gtk:popover-menu-bar-menu-model object) => model}
+  @syntax{(setf (gtk:popover-menu-bar-menu-model object) model)}
   @argument[object]{a @class{gtk:popover-menu} widget}
   @argument[model]{a @class{g:menu-model} object}
   @begin{short}
@@ -150,14 +150,14 @@ menubar
   @see-class{g:menu-model}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_menu_bar_new_from_model ()
+;;; gtk_popover_menu_bar_new_from_model
 ;;; ----------------------------------------------------------------------------
 
 (defun popover-menu-bar-new-from-model (model)
  #+liber-documentation
  "@version{#2023-3-12}
   @argument[model]{a @class{g:menu-model} object, or @code{nil}}
-  @return{A new @class{gtk:popover-menu-bar} widget.}
+  @return{The new @class{gtk:popover-menu-bar} widget.}
   @begin{short}
     Creates a @class{gtk:popover-menu-bar} widget from a @class{g:menu-model}
     object.
@@ -172,7 +172,7 @@ menubar
 (export 'popover-menu-bar-new-from-model)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_menu_bar_add_child ()
+;;; gtk_popover_menu_bar_add_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_popover_menu_bar_add_child" popover-menu-bar-add-child)
@@ -198,7 +198,7 @@ menubar
 (export 'popover-menu-bar-add-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_popover_menu_bar_remove_child ()
+;;; gtk_popover_menu_bar_remove_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_popover_menu_bar_remove_child"

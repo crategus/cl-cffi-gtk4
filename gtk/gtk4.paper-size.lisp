@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -144,7 +144,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GtkUnit
+;;; GtkUnit
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GtkUnit" unit
@@ -161,8 +161,8 @@
       "GEnum"
       (liber:symbol-documentation 'unit)
  "@version{2023-1-31}
-  @short{Enumeration for dimenstions of paper sizes.}
-  @begin{pre}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-enum \"GtkUnit\" unit
   (:export t
    :type-initializer \"gtk_unit_get_type\")
@@ -170,13 +170,17 @@
   (:points 1)
   (:inch 2)
   (:mm 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{No units.}
-    @entry[:points]{Dimensions in points.}
-    @entry[:inch]{Dimensions in inches.}
-    @entry[:mm]{Dimensions in millimeters.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{No units.}
+      @entry[:points]{Dimensions in points.}
+      @entry[:inch]{Dimensions in inches.}
+      @entry[:mm]{Dimensions in millimeters.}
+    @end{table}
+  @end{values}
+  @short{Enumeration for dimenstions of paper sizes.}
   @see-class{gtk:paper-size}")
 
 ;;; ----------------------------------------------------------------------------
@@ -199,7 +203,7 @@
   @end{short}
   It uses the standard called \"PWG 5101.1-2002 PWG: Standard for Media
   Standardized Names\" to name the paper sizes and to get the data for the page
-  sizes. In addition to standard paper sizes, the @class{gtk:paper-size} 
+  sizes. In addition to standard paper sizes, the @class{gtk:paper-size}
   structure allows to construct custom paper sizes with arbitrary dimensions.
 
   The @class{gtk:paper-size} instance stores not only the dimensions (width and
@@ -215,18 +219,18 @@
 (export 'paper-size)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_new ()
+;;; gtk_paper_size_new
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_paper_size_new" %paper-size-new) 
+(cffi:defcfun ("gtk_paper_size_new" %paper-size-new)
     (g:boxed paper-size :return)
   (name :string))
-  
+
 (defun paper-size-new (&optional name)
  #+liber-documentation
  "@version{2023-8-28}
   @argument[name]{a string with the paper size name, or @code{nil}}
-  @return{A new @class{gtk:paper-size} instance.}
+  @return{The new @class{gtk:paper-size} instance.}
   @begin{short}
     Creates a new @class{gtk:paper-size} instance by parsing a PWG 5101.1-2002
     paper name.
@@ -241,7 +245,7 @@
 (export 'paper-size-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_new_from_ppd ()
+;;; gtk_paper_size_new_from_ppd
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_new_from_ppd" %paper-size-new-from-ppd)
@@ -280,7 +284,7 @@
 (export 'paper-size-new-from-ppd)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_new_from_ipp ()
+;;; gtk_paper_size_new_from_ipp
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_new_from_ipp" %paper-size-new-from-ipp)
@@ -313,7 +317,7 @@
 (export 'paper-size-new-from-ipp)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_new_custom ()
+;;; gtk_paper_size_new_custom
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_new_custom" %paper-size-new-custom)
@@ -335,7 +339,7 @@
     in units of @arg{unit}}
   @argument[unit]{a @symbol{gtk:unit} value for @arg{width} and @arg{height},
     not @code{:none}}
-  @return{A new @class{gtk:paper-size} instance.}
+  @return{The new @class{gtk:paper-size} instance.}
   @begin{short}
     Creates a new @class{gtk:paper-size} instance with the given parameters.
   @end{short}
@@ -350,7 +354,7 @@
 (export 'paper-size-new-custom)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_copy ()
+;;; gtk_paper_size_copy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_copy" paper-size-copy)
@@ -358,7 +362,7 @@
  #+liber-documentation
  "@version{2023-1-31}
   @argument[size]{a @class{gtk:paper-size} instance}
-  @return{A copy of @arg{size}.}
+  @return{The copy of @arg{size}.}
   @begin{short}
     Copies an existing @class{gtk:paper-size} instance.
   @end{short}
@@ -368,7 +372,7 @@
 (export 'paper-size-copy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_free ()                                 not needed
+;;; gtk_paper_size_free                                     not needed
 ;;; ----------------------------------------------------------------------------
 
 #+nil
@@ -383,7 +387,7 @@
   (size (g:boxed paper-size)))
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_is_equal ()
+;;; gtk_paper_size_is_equal
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_is_equal" paper-size-is-equal) :boolean
@@ -404,7 +408,7 @@
 (export 'paper-size-is-equal)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_paper_sizes () -> paper-size-paper-sizes
+;;; gtk_paper_size_get_paper_sizes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_paper_sizes" paper-size-paper-sizes)
@@ -425,14 +429,14 @@
 (export 'paper-size-paper-sizes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_name () -> paper-size-name
+;;; gtk_paper_size_get_name
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_name" paper-size-name) :string
  #+liber-documentation
  "@version{2023-1-31}
   @argument[size]{a @class{gtk:paper-size} instance}
-  @return{A string with the name of the paper size.}
+  @return{The string with the name of the paper size.}
   @begin{short}
     Gets the name of the paper size.
   @end{short}
@@ -442,7 +446,7 @@
 (export 'paper-size-name)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_display_name () -> paper-size-display-name
+;;; gtk_paper_size_get_display_name
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_display_name" paper-size-display-name)
@@ -450,7 +454,7 @@
  #+liber-documentation
  "@version{2023-1-31}
   @argument[size]{a @class{gtk:paper-size} instance}
-  @return{A string with the human readable name of the paper size.}
+  @return{The string with the human readable name of the paper size.}
   @begin{short}
     Gets the human readable name of the paper size.
   @end{short}
@@ -460,14 +464,14 @@
 (export 'paper-size-display-name)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_ppd_name () -> paper-size-ppd-name
+;;; gtk_paper_size_get_ppd_name
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_ppd_name" paper-size-ppd-name) :string
  #+liber-documentation
  "@version{2023-1-31}
   @argument[size]{a @class{gtk:paper-size} instance}
-  @return{A string with the PPD name of the paper size.}
+  @return{The string with the PPD name of the paper size.}
   @begin{short}
     Gets the PPD name of the paper size, which may be @code{nil}.
   @end{short}
@@ -477,7 +481,7 @@
 (export 'paper-size-ppd-name)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_width () -> paper-size-width
+;;; gtk_paper_size_get_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_width" paper-size-width) :double
@@ -486,7 +490,7 @@
   @argument[size]{a @class{gtk:paper-size} instance}
   @argument[unit]{a @symbol{gtk:unit} value for the return value,
     not @code{:none}}
-  @return{A double float with the paper width.}
+  @return{The double float with the paper width.}
   @begin{short}
     Gets the paper width of the paper size, in units of @arg{unit}.
   @end{short}
@@ -499,7 +503,7 @@
 (export 'paper-size-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_height () -> paper-size-height
+;;; gtk_paper_size_get_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_height" paper-size-height) :double
@@ -508,7 +512,7 @@
   @argument[size]{a @class{gtk:paper-size} instance}
   @argument[unit]{a @symbol{gtk:unit} value for the return value,
     not @code{:none}}
-  @return{A double float with the paper height.}
+  @return{The double float with the paper height.}
   @begin{short}
     Gets the paper height of the paper size, in units of @arg{unit}.
   @end{short}
@@ -521,14 +525,14 @@
 (export 'paper-size-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_is_ipp ()
+;;; gtk_paper_size_is_ipp
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_is_ipp" paper-size-is-ipp) :boolean
  #+liber-documentation
  "@version{2023-1-31}
   @argument[size]{a @class{gtk:paper-size} instance}
-  @return{A boolean whether the paper size is an IPP paper size.}
+  @return{The boolean whether the paper size is an IPP paper size.}
   @begin{short}
     Returns @em{true} if the paper size is an IPP standard paper size.
   @end{short}
@@ -538,14 +542,14 @@
 (export 'paper-size-is-ipp)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_is_custom ()
+;;; gtk_paper_size_is_custom
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_is_custom" paper-size-is-custom) :boolean
  #+liber-documentation
  "@version{2023-1-31}
   @argument[size]{a @class{gtk:paper-size} instance}
-  @return{A boolean whether @arg{size} is a custom paper size.}
+  @return{The boolean whether @arg{size} is a custom paper size.}
   @short{Returns @em{true} if @arg{size} is not a standard paper size.}
   @see-class{gtk:paper-size}"
   (size (g:boxed paper-size)))
@@ -553,7 +557,7 @@
 (export 'paper-size-is-custom)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_set_size ()
+;;; gtk_paper_size_set_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_set_size" %paper-size-set-size) :void
@@ -584,8 +588,7 @@
 (export 'paper-size-set-size)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_default_top_margin ()
-;;; -> paper-size-default-top-margin
+;;; gtk_paper_size_get_default_top_margin
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_default_top_margin"
@@ -595,7 +598,7 @@
   @argument[size]{a @class{gtk:paper-size} instance}
   @argument[unit]{a @symbol{gtk:unit} value for the return value, not
     @code{:none}}
-  @return{A double float with the default top margin.}
+  @return{The double float with the default top margin.}
   @begin{short}
     Gets the default top margin for the paper size.
   @end{short}
@@ -608,8 +611,7 @@
 (export 'paper-size-default-top-margin)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_default_bottom_margin ()
-;;; -> paper-size-default-bottom-margin
+;;; gtk_paper_size_get_default_bottom_margin
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_default_bottom_margin"
@@ -619,7 +621,7 @@
   @argument[size]{a @class{gtk:paper-size} instance}
   @argument[unit]{a @symbol{gtk:unit} value for the return value, not
     @code{:none}}
-  @return{A double float with the default bottom margin.}
+  @return{The double float with the default bottom margin.}
   @begin{short}
     Gets the default bottom margin for the paper size.
   @end{short}
@@ -632,8 +634,7 @@
 (export 'paper-size-default-bottom-margin)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_default_left_margin ()
-;;; -> paper-size-default-left-margin
+;;; gtk_paper_size_get_default_left_margin
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_default_left_margin"
@@ -643,7 +644,7 @@
   @argument[size]{a @class{gtk:paper-size} instance}
   @argument[unit]{a @symbol{gtk:unit} value for the return value, not
     @code{:none}}
-  @return{A double float with the default left margin.}
+  @return{The double float with the default left margin.}
   @begin{short}
     Gets the default left margin for the paper size.
   @end{short}
@@ -656,8 +657,7 @@
 (export 'paper-size-default-left-margin)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_default_right_margin ()
-;;; -> paper-size-default-right-margin
+;;; gtk_paper_size_get_default_right_margin
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_default_right_margin"
@@ -667,7 +667,7 @@
   @argument[size]{a @class{gtk:paper-size} instance}
   @argument[unit]{a @symbol{gtk:unit} value for the return value, not
     @code{:none}}
-  @return{A double float with the default right margin.}
+  @return{The double float with the default right margin.}
   @begin{short}
     Gets the default right margin for the paper size.
   @end{short}
@@ -680,7 +680,7 @@
 (export 'paper-size-default-right-margin)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_get_default () -> paper-size-default
+;;; gtk_paper_size_get_default
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_get_default" paper-size-default) :string
@@ -703,7 +703,7 @@
 (export 'paper-size-default)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_new_from_key_file ()
+;;; gtk_paper_size_new_from_key_file
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Consider to change the error handling: use with-ignore-g-error?
@@ -737,7 +737,7 @@
 (export 'paper-size-new-from-key-file)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_new_from_gvariant ()
+;;; gtk_paper_size_new_from_gvariant
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_new_from_gvariant" paper-size-new-from-gvariant)
@@ -745,7 +745,7 @@
  #+liber-documentation
  "@version{2023-1-31}
   @argument[value]{a @code{a{sv@}} @type{g:variant} instance}
-  @return{A @class{gtk:paper-size} instance.}
+  @return{The @class{gtk:paper-size} instance.}
   @begin{short}
     Deserialize a paper size from a @code{a{sv@}} variant in the format
     produced by the @fun{gtk:paper-size-to-gvariant} function.
@@ -758,7 +758,7 @@
 (export 'paper-size-new-from-gvariant)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_to_key_file ()
+;;; gtk_paper_size_to_key_file
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_to_key_file" paper-size-to-key-file) :void
@@ -780,7 +780,7 @@
 (export 'paper-size-to-key-file)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_paper_size_to_gvariant ()
+;;; gtk_paper_size_to_gvariant
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_paper_size_to_gvariant" paper-size-to-gvariant)
@@ -788,7 +788,7 @@
  #+liber-documentation
  "@version{2023-1-31}
   @argument[size]{a @class{gtk:paper-size} instance}
-  @return{A new @type{g:variant} instance.}
+  @return{The new @type{g:variant} instance.}
   @begin{short}
     Serialize a paper size to a @code{a{sv@}} variant instance.
   @end{short}

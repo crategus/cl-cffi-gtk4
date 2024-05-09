@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -104,7 +104,7 @@
   @see-class{gtk:entry-buffer}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_password_entry_buffer_new ()
+;;; gtk_password_entry_buffer_new
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-4
@@ -213,7 +213,7 @@ lambda (entry)    :action
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- password-entry-activates-default ---------------------------------------
+;;; --- gtk:password-entry-activates-default -----------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "activates-default"
@@ -229,8 +229,8 @@ lambda (entry)    :action
       "Accessor"
       (documentation 'password-entry-activates-default 'function)
  "@version{2023-9-30}
-  @syntax[]{(gtk:password-entry-activates-default object) => setting}
-  @syntax[]{(setf (gtk:password-entry-activates-default object) setting)}
+  @syntax{(gtk:password-entry-activates-default object) => setting}
+  @syntax{(setf (gtk:password-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
   @argument[setting]{@em{true} to activate the default widget of the window on
     @kbd{Enter} keypress}
@@ -247,7 +247,7 @@ lambda (entry)    :action
   closed, since the default widget is usually one of the dialog buttons.
   @see-class{gtk:password-entry}")
 
-;;; --- password-entry-extra-menu ----------------------------------------------
+;;; --- gtk:password-entry-extra-menu ------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "extra-menu"
@@ -261,8 +261,8 @@ lambda (entry)    :action
       "Accessor"
       (documentation 'password-entry-extra-menu 'function)
  "@version{2023-9-30}
-  @syntax[]{(gtk:password-entry-extra-menu object) => menu}
-  @syntax[]{(setf (gtk:password-entry-extra-menu object) menu)}
+  @syntax{(gtk:password-entry-extra-menu object) => menu}
+  @syntax{(setf (gtk:password-entry-extra-menu object) menu)}
   @argument[object]{a @class{gtk:password-entry} widget}
   @argument[menu]{a @class{g:menu-model} object}
   @begin{short}
@@ -275,7 +275,7 @@ lambda (entry)    :action
   @see-class{gtk:password-entry}
   @see-class{g:menu-model}")
 
-;;; --- password-entry-placeholder-text ----------------------------------------
+;;; --- gtk:password-entry-placeholder-text ------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "placeholder-text"
@@ -291,8 +291,8 @@ lambda (entry)    :action
       "Accessor"
       (documentation 'password-entry-placeholder-text 'function)
  "@version{2023-9-30}
-  @syntax[]{(gtk:password-entry-placeholder-text object) => text}
-  @syntax[]{(setf (gtk:password-entry-placeholder-text object) text)}
+  @syntax{(gtk:password-entry-placeholder-text object) => text}
+  @syntax{(setf (gtk:password-entry-placeholder-text object) text)}
   @argument[object]{a @class{gtk:password-entry} widget}
   @argument[text]{a string to be displayed when @arg{entry} is empty and
     unfocused, or @code{nil}}
@@ -311,7 +311,7 @@ lambda (entry)    :action
   the initial focus setting until the first key event arrives.
   @see-class{gtk:password-entry}")
 
-;;; --- password-entry-show-peek-icon ------------------------------------------
+;;; --- gtk:password-entry-show-peek-icon --------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "show-peek-icon"
@@ -326,8 +326,8 @@ lambda (entry)    :action
       "Accessor"
       (documentation 'password-entry-show-peek-icon 'function)
  "@version{2023-9-30}
-  @syntax[]{(gtk:password-entry-show-peek-icon object) => setting}
-  @syntax[]{(setf (gtk:password-entry-show-peek-icon object) setting)}
+  @syntax{(gtk:password-entry-show-peek-icon object) => setting}
+  @syntax{(setf (gtk:password-entry-show-peek-icon object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
   @argument[setting]{a boolean whether to show the peek icon}
   @begin{short}
@@ -342,7 +342,7 @@ lambda (entry)    :action
   @see-class{gtk:password-entry}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_password_entry_new ()
+;;; gtk_password_entry_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline password-entry-new))
@@ -350,7 +350,7 @@ lambda (entry)    :action
 (defun password-entry-new ()
  #+liber-documentation
  "@version{2023-9-30}
-  @return{A new @class{gtk:password-entry} widget.}
+  @return{The new @class{gtk:password-entry} widget.}
   @short{Creates a password text entry field.}
   @see-class{gtk:password-entry}"
   (make-instance 'password-entry))
