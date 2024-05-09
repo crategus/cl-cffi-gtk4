@@ -385,9 +385,8 @@
     (gtk:builder-add-from-string builder *ui-info*)
     (setf (gtk:application-menubar application)
           (gtk:builder-object builder "menubar"))
-    (loop for (name accel) on accels by #'cddr
-          do (setf (gtk:application-accels-for-action application name)
-                   accel))))
+    (iter (for (name accel) on accels by #'cddr)
+          (setf (gtk:application-accels-for-action application name) accel))))
 
 (defun print-editor-activate (application)
   (format t "in ACTIVATE~%")
