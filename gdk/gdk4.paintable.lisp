@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 -2023 Dieter Kaiser
+;;; Copyright (C) 2022 -2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -68,7 +68,7 @@
 (in-package :gdk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkPaintableFlags
+;;; GdkPaintableFlags
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-flags "GdkPaintableFlags" paintable-flags
@@ -81,24 +81,28 @@
 (setf (liber:alias-for-symbol 'paintable-flags)
       "GFlags"
       (liber:symbol-documentation 'paintable-flags)
- "@version{2023-7-30}
-  @begin{short}
-    Flags about a @class{gdk:paintable} object.
-  @end{short}
-  Implementations use these for optimizations such as caching.
-  @begin{pre}
+ "@version{2024-5-5}
+  @begin{declaration}
+    @begin{pre}
 (gobject:define-g-flags \"GdkPaintableFlags\" paintable-flags
   (:export t
    :type-initializer \"gdk_paintable_flags_get_type\")
   (:static-size #.(ash 1 0))
   (:static-contents #.(ash 1 1)))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:static-size]{The size is immutable. The @code{\"invalidate-size\"}
-    signal will never be emitted.}
-    @entry[:static-contents]{The content is immutable. The
-      @code{\"invalidate-contents\"} signal will never be emitted.}
-  @end{table}
+    @end{pre}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:static-size]{The size is immutable. The @code{\"invalidate-size\"}
+      signal will never be emitted.}
+      @entry[:static-contents]{The content is immutable. The
+        @code{\"invalidate-contents\"} signal will never be emitted.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Flags about a @class{gdk:paintable} object.
+  @end{short}
+  Implementations use these for optimizations such as caching.
   @see-class{gdk:paintable}")
 
 ;;; ----------------------------------------------------------------------------
@@ -123,7 +127,7 @@
   @see-class{gtk:snapshot}")
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GdkPaintable
+;;; GdkPaintable
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-interface "GdkPaintable" paintable
@@ -135,7 +139,7 @@
 (setf (liber:alias-for-class 'paintable)
       "Interface"
       (documentation 'paintable 'type)
- "@version{2023-7-30}
+ "@version{2024-5-5}
   @begin{short}
     The @class{gdk:paintable} interface is a simple interface used by GDK and
     GTK to represent objects that can be painted anywhere at any size without
@@ -218,7 +222,7 @@
     the paintable is not dynamic as the default implementation returns no flags
     and that will make the implementation likely quite slow.
   @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin{examples}
     This is a complete example for the implementation of a subclass which
     implements the @class{gdk:paintable} interface.
     @begin{pre}
@@ -267,7 +271,7 @@
 (defmethod paintable-get-flags-impl ((paintable nuclear-icon))
   (list :static-contents :static-size))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Signal Details]{dictionary}
     @subheading{The \"invalidate-contents\" signal}
       @begin{pre}
@@ -277,7 +281,7 @@ lambda (paintable)    :run-last
       event would be videos changing to the next frame or the icon theme for an
       icon changing.
       @begin[code]{table}
-        @entry[paintable]{A @class{gdk:paintable} object.}
+        @entry[paintable]{The @class{gdk:paintable} object.}
       @end{table}
     @subheading{The \"invalidate-size\" signal}
       @begin{pre}
@@ -290,7 +294,7 @@ lambda (paintable)    :run-last
       Examples for such an event would be a paintable displaying the contents
       of a toplevel surface being resized.
       @begin[code]{table}
-        @entry[paintable]{A @class{gdk:paintable} object.}
+        @entry[paintable]{The @class{gdk:paintable} object.}
       @end{table}
   @end{dictionary}
   @see-class{gdk:texture}
@@ -334,7 +338,7 @@ lambda (paintable)    :run-last
   @begin{short}
     Method called from the @fun{gdk:paintable-snapshot} function.
   @end{short}
-  @begin[Default methode]{dictionary}
+  @begin[Default method]{dictionary}
     @begin{pre}
 (defmethod paintable-snapshot-impl ((paintable paintable) snapshot width height)
   (error \"Paintable of type ~a  does not implement GDK:PAINTABLE-SNAPSHOT-IMPL\"
@@ -519,16 +523,16 @@ lambda (paintable)    :run-last
 (export 'paintable-get-intrinsic-aspect-ratio-impl)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_get_current_image ()
+;;; gdk_paintable_get_current_image
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_get_current_image" paintable-current-image)
     (g:object paintable)
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2024-5-5}
   @argument[paintable]{a @class{gdk:paintable} object}
-  @return{An immutable @class{gdk:paintable} object for the current contents of
-    @arg{paintable}.}
+  @return{The immutable @class{gdk:paintable} object for the current contents
+    of @arg{paintable}.}
   @begin{short}
     Gets an immutable paintable for the current contents displayed by
     @arg{paintable}.
@@ -542,17 +546,17 @@ lambda (paintable)    :run-last
 (export 'paintable-current-image)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_snapshot ()
+;;; gdk_paintable_snapshot
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_snapshot" paintable-snapshot) :void
  #+liber-documentation
- "@version{#2023-8-1}
+ "@version{#2024-5-5}
   @argument[paintable]{a @class{gdk:paintable} object}
   @argument[snapshot]{a @class{gdk:snapshot} object}
   @argument[width]{a double float with the width to snapshot in}
   @argument[height]{a double float with the height to snapshot in}
-  @return{A @class{gdk:snapshot} object to snapshot to}
+  @return{The @class{gdk:snapshot} object to snapshot to.}
   @begin{short}
     Snapshots the given @arg{paintable} with the given @arg{width} and
     @arg{height} at the current @code{(0,0)} offset of the snapshot.
@@ -569,14 +573,14 @@ lambda (paintable)    :run-last
 (export 'paintable-snapshot)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_get_flags ()
+;;; gdk_paintable_get_flags
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_get_flags" paintable-flags) paintable-flags
  #+liber-documentation
- "@version{2023-8-1}
+ "@version{2024-5-5}
   @argument[paintable]{a @class{gdk:paintable} object}
-  @return{A @symbol{gdk:paintable-flags} value for this paintable.}
+  @return{The @symbol{gdk:paintable-flags} value for this paintable.}
   @begin{short}
     Get flags for the paintable.
   @end{short}
@@ -589,15 +593,15 @@ lambda (paintable)    :run-last
 (export 'paintable-flags)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_get_intrinsic_width ()
+;;; gdk_paintable_get_intrinsic_width
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_get_intrinsic_width" paintable-intrinsic-width)
     :int
  #+liber-documentation
- "@version{2023-8-1}
+ "@version{2024-5-5}
   @argument[paintable]{a @class{gdk:paintable} object}
-  @return{An integer with the the intrinsic width of @arg{paintable} or 0 if
+  @return{The integer with the the intrinsic width of @arg{paintable} or 0 if
     none.}
   @begin{short}
     Gets the preferred width the paintable would like to be displayed at.
@@ -616,15 +620,15 @@ lambda (paintable)    :run-last
 (export 'paintable-intrinsic-width)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_get_intrinsic_height ()
+;;; gdk_paintable_get_intrinsic_height
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_get_intrinsic_height" paintable-intrinsic-height)
     :int
  #+liber-documentation
- "@version{2023-8-1}
+ "@version{2024-5-5}
   @argument[paintable]{a @class{gdk:paintable} object}
-  @return{An integer with the the intrinsic height of @arg{paintable} or 0 if
+  @return{The integer with the the intrinsic height of @arg{paintable} or 0 if
     none.}
   @begin{short}
     Gets the preferred height the paintable would like to be displayed at.
@@ -643,15 +647,15 @@ lambda (paintable)    :run-last
 (export 'paintable-intrinsic-height)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_get_intrinsic_aspect_ratio ()
+;;; gdk_paintable_get_intrinsic_aspect_ratio
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_get_intrinsic_aspect_ratio"
                paintable-intrinsic-aspect-ratio) :double
  #+liber-documentation
- "@version{2023-8-1}
+ "@version{2024-5-5}
   @argument[paintable]{a @class{gdk:paintable} object}
-  @return{A double float with the intrinsic aspect ratio of @arg{paintable}
+  @return{The double float with the intrinsic aspect ratio of @arg{paintable}
     or 0 if none.}
   @begin{short}
     Gets the preferred aspect ratio the paintable would like to be displayed at.
@@ -678,7 +682,7 @@ lambda (paintable)    :run-last
 (export 'paintable-intrinsic-aspect-ratio)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_compute_concrete_size ()
+;;; gdk_paintable_compute_concrete_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_compute_concrete_size"
@@ -730,7 +734,7 @@ lambda (paintable)    :run-last
 (export 'paintable-compute-concrete-size)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_invalidate_contents ()
+;;; gdk_paintable_invalidate_contents
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_invalidate_contents"
@@ -757,7 +761,7 @@ lambda (paintable)    :run-last
 (export 'paintable-invalidate-contents)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_invalidate_size ()
+;;; gdk_paintable_invalidate_size
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_invalidate_size" paintable-invalidate-size) :void
@@ -780,18 +784,18 @@ lambda (paintable)    :run-last
 (export 'paintable-invalidate-size)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_paintable_new_empty ()
+;;; gdk_paintable_new_empty
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_paintable_new_empty" paintable-new-empty)
     (g:object paintable)
  #+liber-documentation
- "@version{#2023-8-1}
-  @argument[width]{An integer with the intrinsic width to report. Can be 0
-    for no width.}
-  @argument[height]{An integer with the intrinsic height to report. Can be 0
-    for no height.}
-  @return{A new @class{gdk:paintable} object.}
+ "@version{#2024-5-5}
+  @argument[width]{an integer with the intrinsic width to report. Can be 0
+    for no width}
+  @argument[height]{an integer with the intrinsic height to report. Can be 0
+    for no height}
+  @return{The new @class{gdk:paintable} object.}
   @begin{short}
     Returns a paintable that has the given intrinsic size and draws nothing.
   @end{short}
