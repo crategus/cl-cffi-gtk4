@@ -10,8 +10,8 @@
                                   :column-types
                                   '("gint" "gchararray" "gboolean"))))
     ;; Fill in some data
-    (loop for data in listdata
-          for i from 0 do
+    (iter (for data in listdata)
+          (for i from 0)
           ;; Add a new row to the model
           (gtk:list-store-set liststore
                               (gtk:list-store-append liststore)

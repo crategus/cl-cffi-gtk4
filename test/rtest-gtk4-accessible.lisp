@@ -5,6 +5,40 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
+;;;     GtkAccessiblePlatformState
+
+(test gtk-accessible-platfom-state
+  ;; Check type
+  (is (g:type-is-enum "GtkAccessiblePlatformState"))
+  ;; Check type initializer
+  (is (eq (g:gtype "GtkAccessiblePlatformState")
+          (g:gtype (cffi:foreign-funcall "gtk_accessible_platform_state_get_type"
+                                         :size))))
+  ;; Check registered name
+  (is (eq 'gtk:accessible-platform-state
+          (glib:symbol-for-gtype "GtkAccessiblePlatformState")))
+  ;; Check names
+  (is (equal '("GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSABLE"
+               "GTK_ACCESSIBLE_PLATFORM_STATE_FOCUSED"
+               "GTK_ACCESSIBLE_PLATFORM_STATE_ACTIVE")
+             (list-enum-item-name "GtkAccessiblePlatformState")))
+  ;; Check values
+  (is (equal '(0 1 2)
+             (list-enum-item-value "GtkAccessiblePlatformState")))
+  ;; Check nick names
+  (is (equal '("focusable" "focused" "active")
+             (list-enum-item-nick "GtkAccessiblePlatformState")))
+  ;; Check enum definition
+  (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessiblePlatformState"
+                                     GTK-ACCESSIBLE-PLATFORM-STATE
+                                     (:EXPORT T
+                                      :TYPE-INITIALIZER
+                                      "gtk_accessible_platform_state_get_type")
+                                     (:FOCUSABLE 0)
+                                     (:FOCUSED 1)
+                                     (:ACTIVE 2))
+             (gobject:get-g-type-definition "GtkAccessiblePlatformState"))))
+
 ;;;     GtkAccessible
 
 (test gtk-accessible-interface
