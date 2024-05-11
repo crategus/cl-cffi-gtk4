@@ -67,6 +67,17 @@
        "css-shadows.lisp"
        "resource/css-shadows.css"))
 
+     "Interface Builder"
+     (("Builder"
+       ":window"
+       "DO-BUILDER"
+       "gtk4-example"
+       "builder.lisp"
+       "resource/builder.ui"
+       :keywords
+       "GtkBuilder"
+       "gtk:builder"))
+
      "Windows"
      (("Simple Window"
        ":window"
@@ -626,7 +637,8 @@
        "scrolled-window.lisp"))
 
      "Printing"
-     (("Page Setup Dialog"
+     (#-windows
+      ("Page Setup Dialog"
        ":dialog"
        "CREATE-PAGE-SETUP-DIALOG"
        "gtk4-example"

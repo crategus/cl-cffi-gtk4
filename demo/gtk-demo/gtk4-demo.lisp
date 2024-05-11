@@ -66,7 +66,7 @@
 (defun create-and-fill-list-store (data &optional (parent nil))
   (let ((model (g:list-store-new "GtkDemo")))
     (dolist (entry (mklist data))
-      (cond ((or (atom entry) (every #'atom entry))
+      (cond ((and entry (or (atom entry) (every #'atom entry)))
              (destructuring-bind (title &optional ftype name package file
                                         &rest args)
                  (mklist entry)

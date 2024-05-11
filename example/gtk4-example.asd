@@ -9,6 +9,9 @@
                :local-time)
   :components ((:file "gtk4-example")
 
+               ;; Interface builder
+               (:file "builder")
+
                ;; Windows
                (:file "window-simple")
                (:file "dialog-quick-message")
@@ -132,7 +135,7 @@
                (:file "scrolled-window")
 
                ;; Printing
-               (:file "page-setup-dialog")
+               (:file "page-setup-dialog"         :if-feature (:not :windows))
 
                ;; Data exchange, Clipboards, Drag and Drop
                (:file "clipboard")

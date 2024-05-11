@@ -4,6 +4,10 @@
   (:import-from :gdk)
   (:import-from :glib)
   (:export #:run-example
+
+           ;; Interface builder
+           #:do-builder
+
            ;; Windows
            #:do-window-simple
            #:do-dialog-quick-message
