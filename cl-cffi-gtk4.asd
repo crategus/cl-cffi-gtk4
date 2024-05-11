@@ -731,8 +731,8 @@
 ;    (:file "gtk4.cell-view")
      (:file "rtest-gtk4-icon-view")
 
-;    (:file "gtk4.tree-sortable")
-;    (:file "gtk4.tree-model-sort")
+     (:file "rtest-gtk4-tree-sortable")
+     (:file "rtest-gtk4-tree-model-sort")
      (:file "rtest-gtk4-tree-model-filter")
 
      (:file "rtest-gtk4-cell-renderer")

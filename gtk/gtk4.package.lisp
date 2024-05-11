@@ -4291,20 +4291,18 @@ GtkCellRenderer         GtkWidget
       @about-function{icon-view-create-drag-icon}
     @end{subsection}
     @begin[GtkTreeSortable]{subsection}
-      The interface for sortable models used by GtkTreeView.
       @about-variable{+tree-sortable-default-sort-column-id+}
       @about-variable{+tree-sortable-unsorted-sort-column-id+}
       @about-class{tree-sortable}
       @about-symbol{GtkTreeSortableIface}
-      @about-symbol{tree-iter-compare-func}
       @about-function{tree-sortable-sort-column-changed}
       @about-function{tree-sortable-sort-column-id}
+      @about-symbol{tree-iter-compare-func}
       @about-function{tree-sortable-set-sort-func}
       @about-function{tree-sortable-set-default-sort-func}
       @about-function{tree-sortable-has-default-sort-func}
     @end{subsection}
     @begin[GtkTreeModelSort]{subsection}
-      A GtkTreeModel which makes an underlying tree model sortable.
       @about-class{tree-model-sort}
       @about-generic{tree-model-sort-model}
       @about-function{tree-model-sort-new-with-model}
@@ -4317,7 +4315,6 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-model-sort-iter-is-valid}
     @end{subsection}
     @begin[GtkTreeModelFilter]{subsection}
-      A GtkTreeModel which hides parts of an underlying tree model.
       @about-class{tree-model-filter}
       @about-generic{tree-model-filter-child-model}
       @about-generic{tree-model-filter-virtual-root}
