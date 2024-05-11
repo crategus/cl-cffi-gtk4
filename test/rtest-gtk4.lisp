@@ -143,4 +143,21 @@ sem venenatis, vitae ultricies arcu laoreet."))
   (mapcar #'gobject:enum-item-value
           (gobject:get-enum-items gtype)))
 
-;;; --- 2023-8-22 --------------------------------------------------------------
+;; Create and fill a GTK:LIST-STORE for use as a model
+(defun create-and-fill-gtk-list-store ()
+  (let ((liststore (make-instance 'gtk:list-store
+                                  :column-types
+                                  '("gint" "gchararray" "gboolean")))
+        (counter 0))
+    ;; Fill in external symbols of GTK package
+    (do-external-symbols (symbol (find-package "GTK"))
+      ;; Add a new row to the model
+      (gtk:list-store-set liststore
+                          (gtk:list-store-append liststore)
+                          (incf counter)
+                          (symbol-name symbol)
+                          nil))
+    ;; Return the new list store
+    liststore))
+
+;;; 2024-5-9

@@ -47,7 +47,7 @@
 ;;;     gtk_tree_model_sort_convert_path_to_child_path
 ;;;     gtk_tree_model_sort_convert_iter_to_child_iter
 ;;;     gtk_tree_model_sort_reset_default_sort_func
-;;;     gtk_tree_model_sort_clear_cache
+;;;     gtk_tree_model_sort_clear_cache                     not exported
 ;;;     gtk_tree_model_sort_iter_is_valid
 ;;;
 ;;; Properties
@@ -69,7 +69,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkTreeModelSort
+;;; GtkTreeModelSort
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkTreeModelSort" tree-model-sort
@@ -85,7 +85,7 @@
 
 #+liber-documentation
 (setf (documentation 'tree-model-sort 'type)
- "@version{#2021-3-10}
+ "@version{2024-5-9}
   @begin{short}
     The @class{gtk:tree-model-sort} object is a model which implements the
     @class{gtk:tree-sortable} interface.
@@ -96,16 +96,14 @@
   to provide a way to sort a different model without modifying it. Note that
   the sort function used by the @class{gtk:tree-model-sort} object is not
   guaranteed to be stable.
-
-  The use of this is best demonstrated through an example. In the following
-  sample code we create two @class{gtk:tree-view} widgets each with a view of
-  the same data. As the model is wrapped here by a @class{gtk:tree-model-sort}
-  object, the two @class{gtk:tree-view} widgets can each sort their view of the
-  data without affecting the other. By contrast, if we simply put the same
-  model in each widget, then sorting the first would sort the second.
-
-  @b{Example:} Using a @class{gtk:tree-model-sort} object
-  @begin{pre}
+  @begin{examples}
+    The use of this is best demonstrated through an example. In the following
+    sample code we create two @class{gtk:tree-view} widgets each with a view of
+    the same data. As the model is wrapped here by a @class{gtk:tree-model-sort}
+    object, the two @class{gtk:tree-view} widgets can each sort their view of
+    the data without affecting the other. By contrast, if we simply put the same
+    model in each widget, then sorting the first would sort the second.
+    @begin{pre}
 (let* (;; Get the child model
        (child-model (gtk:my-model()))
        ;; Create the first tree view
@@ -115,40 +113,46 @@
        (sort-model2 (gtk:tree-vmodel-sort-new-with-model child-model))
        (tree-view2 (gtk:tree-view-new-with-model sort-model2)))
   ;; Now we can sort the two models independently
-  (setf (gtk:tree-sortable-sort-column-id sort-model1) col-1)
+  (setf (gtk:tree-sortable-sort-column-id sort-model1) col1)
   (setf (gtk:tree-sortable-sort-column-id sort-model1) '(col1 :descending))
   ... )
-  @end{pre}
-  To demonstrate how to access the underlying child model from the sort model,
-  the next example will be a callback for the @class{gtk:tree-selection}
-  \"changed\" signal. In this callback, we get a string from @code{COLUMN_1} of
-  the model. We then modify the string, find the same selected row on the child
-  model, and change the row there.
-
-  @b{Example:} Accessing the child model in a selection changed callback
-  @begin{pre}
+    @end{pre}
+    To demonstrate how to access the underlying child model from the sort model,
+    the next example will be a callback for the @code{\"changed\"} signal of the
+    @class{gtk:tree-selection} object. In this callback, we get a string from
+    @code{col1} of the model. We then modify the string, find the same selected
+    row on the child model, and change the row there.
+    @begin{pre}
 (defun selection-changed (selection)
   (let* ((view (gtk:tree-selection-tree-view selection))
          ;; Get the current selected row and the model
          (sort-model (gtk:tree-view-model view))
          (sort-iter (gtk:tree-selection-selected selection))
          ;; Look up the current value on the selected row and get a new value
-         (value (gtk:tree-model-value sort-model sort-iter col-1))
+         (value (gtk:tree-model-value sort-model sort-iter col1))
          (new-value (change-the-value value))
          ;; Get the child model and an iterator on the child model
          (model (gtk:tree-model-sort-model sort-model))
          (iter (gtk:tree-model-sort-convert-iter-to-child-iter sort-model
                                                                sort-iter)))
     ;; Change the value of the row in the child model
-    (gtk:list-store-set-value model iter col-1 new-value)))
-  @end{pre}
+    (gtk:list-store-set-value model iter col1 new-value)))
+    @end{pre}
+  @end{examples}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
     Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
+  @see-constructor{gtk:tree-model-sort-new-with-model}
   @see-slot{gtk:tree-model-sort-model}
   @see-class{gtk:tree-model}
-  @see-class{gtk:tree-sortable}")
+  @see-class{gtk:tree-sortable}
+  @see-class{gtk:sort-list-model}")
+
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj tree-model-sort) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:TREE-MODEL-SORT is deprecated since 4.10")))
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
@@ -164,10 +168,10 @@
 (setf (liber:alias-for-function 'tree-model-sort-model)
       "Accessor"
       (documentation 'tree-model-sort-model 'function)
- "@version{#2021-3-10}
+ "@version{2024-5-9}
   @syntax{(gtk:tree-model-sort-model object) => model}
   @argument[object]{a @class{gtk:tree-model-sort} object}
-  @argument[model]{the @class{gtk:tree-model} child model being sorted}
+  @argument[model]{a @class{gtk:tree-model} child model being sorted}
   @begin{short}
     Accessor of the @slot[gtk:tree-model-sort]{model} slot of the
     @class{gtk:tree-model-sort} class.
@@ -179,7 +183,8 @@
     Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
   @see-class{gtk:tree-model}
-  @see-class{gtk:tree-model-sort}")
+  @see-class{gtk:tree-model-sort}
+  @see-class{gtk:sort-list-model}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_model_sort_new_with_model
@@ -189,8 +194,8 @@
 
 (defun tree-model-sort-new-with-model (model)
  #+liber-documentation
- "@version{#2021-3-10}
-  @argument[model]{a @class{gtk:tree-model} object}
+ "@version{2024-5-9}
+  @argument[model]{a @class{gtk:tree-model} object, or @code{nil}}
   @return{The new @class{gtk:tree-model} object.}
   @begin{short}
     Creates a new tree model, with @arg{model} as the child model.
@@ -200,7 +205,8 @@
     Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
   @see-class{gtk:tree-model}
-  @see-class{gtk:tree-model-sort}"
+  @see-class{gtk:tree-model-sort}
+  @see-class{gtk:sort-list-model}"
   (make-instance 'tree-model-sort
                  :model model))
 
@@ -214,7 +220,7 @@
                tree-model-sort-convert-child-path-to-path)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2021-3-10}
+ "@version{#2024-5-9}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[path]{a @class{gtk:tree-path} instance to convert}
   @return{The @class{gtk:tree-path} instance, or @code{nil}.}
@@ -229,7 +235,8 @@
     Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
   @see-class{gtk:tree-model-sort}
-  @see-class{gtk:tree-path}"
+  @see-class{gtk:tree-path}
+  @see-class{gtk:sort-list-model}"
   (model (g:object tree-model-sort))
   (path (g:boxed tree-path)))
 
@@ -247,13 +254,13 @@
 
 (defun tree-model-sort-convert-child-iter-to-iter (model iter)
  #+liber-documentation
- "@version{#2021-3-10}
+ "@version{#2024-5-9}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[iter]{a valid @class{gtk:tree-iter} instance pointing to a
     row on the child model}
   @begin{return}
-    A valid @class{gtk:tree-iter} iterator to a visible row in the sorted model,
-    or @code{nil}.
+    The valid @class{gtk:tree-iter} iterator to a visible row in the sorted
+    model, or @code{nil}.
   @end{return}
   @begin{short}
     Returns the iterator to the row in @arg{model} that corresponds to the row
@@ -264,7 +271,8 @@
     Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
   @see-class{gtk:tree-model-sort}
-  @see-class{gtk:tree-iter}"
+  @see-class{gtk:tree-iter}
+  @see-class{gtk:sort-list-model}"
   (let ((sort-iter (make-tree-iter)))
     (when (%tree-model-sort-convert-child-iter-to-iter model sort-iter iter)
       sort-iter)))
@@ -279,7 +287,7 @@
                tree-model-sort-convert-path-to-child-path)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2021-3-10}
+ "@version{#2024-5-9}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[path]{a @class{gtk:tree-path} instance to convert}
   @return{The @class{gtk:tree-path} instance, or @code{nil}.}
@@ -294,7 +302,8 @@
     Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
   @see-class{gtk:tree-model-sort}
-  @see-class{gtk:tree-path}"
+  @see-class{gtk:tree-path}
+  @see-class{gtk:sort-list-model}"
   (model (g:object tree-model-sort))
   (path (g:boxed tree-path)))
 
@@ -312,22 +321,21 @@
 
 (defun tree-model-sort-convert-iter-to-child-iter (model iter)
  #+liber-documentation
- "@version{#2021-3-10}
+ "@version{#2024-5-9}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[iter]{a valid @class{gtk:tree-iter} iterator pointing to a
     row on @arg{model}}
-  @begin{return}
-    A @class{gtk:tree-iter} iterator.
-  @end{return}
+  @return{The @class{gtk:tree-iter} iterator.}
   @begin{short}
-  Converts @arg{iter} to point to a row on @arg{model}.
+    Converts @arg{iter} to point to a row on @arg{model}.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
     Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
   @see-class{gtk:tree-model-sort}
-  @see-class{gtk:tree-iter}"
+  @see-class{gtk:tree-iter}
+  @see-class{gtk:sort-list-model}"
   (let ((child-iter (make-tree-iter)))
     (%tree-model-sort-convert-iter-to-child-iter model child-iter iter)
     child-iter))
@@ -341,7 +349,7 @@
 (cffi:defcfun ("gtk_tree_model_sort_reset_default_sort_func"
                tree-model-sort-reset-default-sort-func) :void
  #+liber-documentation
- "@version{#2021-3-10}
+ "@version{#2024-5-9}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @begin{short}
     This resets the default sort function to be in the 'unsorted' state.
@@ -353,13 +361,14 @@
     The @class{gtk:tree-model-sort} implementation is deprecated since 4.10.
     Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
-  @see-class{gtk:tree-model-sort}"
+  @see-class{gtk:tree-model-sort}
+  @see-class{gtk:sort-list-model}"
   (model (g:object tree-model-sort)))
 
 (export 'tree-model-sort-reset-default-sort-func)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_tree_model_sort_clear_cache
+;;; gtk_tree_model_sort_clear_cache                         not exported
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_model_sort_clear_cache" tree-model-sort-clear-cache)
@@ -383,8 +392,6 @@
   @see-function{gtk:tree-model-ref-node}"
   (model (g:object tree-model-sort)))
 
-(export 'tree-model-sort-clear-cache)
-
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_model_sort_iter_is_valid
 ;;; ----------------------------------------------------------------------------
@@ -392,13 +399,13 @@
 (cffi:defcfun ("gtk_tree_model_sort_iter_is_valid"
                tree-model-sort-iter-is-valid) :boolean
  #+liber-documentation
- "@version{#2021-3-10}
+ "@version{#2024-5-9}
   @argument[model]{a @class{gtk:tree-model-sort} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
   @return{@em{True} if @arg{iter} is valid, @code{nil} if @arg{iter} is
     invalid.}
   @begin{short}
-    Checks if the given @arg{iter} is a valid iter for this
+    Checks if the given @arg{iter} is a valid iterator for this
     @class{gtk:tree-model-sort} object.
   @end{short}
   @begin[Note]{dictionary}
@@ -409,7 +416,8 @@
     Use the @class{gtk:sort-list-model} implementation instead.
   @end{dictionary}
   @see-class{gtk:tree-model-sort}
-  @see-class{gtk:tree-iter}"
+  @see-class{gtk:tree-iter}
+  @see-class{gtk:sort-list-model}"
   (model (g:object tree-model-sort))
   (iter (g:boxed tree-iter)))
 

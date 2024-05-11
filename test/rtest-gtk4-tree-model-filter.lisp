@@ -3,22 +3,6 @@
 (def-suite gtk-tree-model-filter :in gtk-suite)
 (in-suite gtk-tree-model-filter)
 
-(defun create-and-fill-model ()
-  (let ((liststore (make-instance 'gtk:list-store
-                                  :column-types
-                                  '("gint" "gchararray" "gboolean")))
-        (counter 0))
-    ;; Fill in external symbols of GTK package
-    (do-external-symbols (symbol (find-package "GTK"))
-      ;; Add a new row to the model
-      (gtk:list-store-set liststore
-                          (gtk:list-store-append liststore)
-                          (incf counter)
-                          (symbol-name symbol)
-                          nil))
-    ;; Return the new list store
-    liststore))
-
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkTreeModelFilter
@@ -78,7 +62,7 @@
 
 (test gtk-tree-model-filter-new
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let* ((child (create-and-fill-model))
+    (let* ((child (create-and-fill-gtk-list-store))
            (model (gtk:tree-model-filter-new child nil)))
       (is (typep child 'gtk:tree-model))
       (is (typep model 'gtk:tree-model))
@@ -92,7 +76,7 @@
 
 (test gtk-tree-model-filter-set-visible-func
   (let ((gtk-init:*gtk-warn-deprecated* nil))
-    (let* ((child (create-and-fill-model))
+    (let* ((child (create-and-fill-gtk-list-store))
            (model (gtk:tree-model-filter-new child nil)))
 
       (gtk:tree-model-filter-set-visible-func model
@@ -119,4 +103,4 @@
 ;;;     gtk_tree_model_filter_refilter
 ;;;     gtk_tree_model_filter_clear_cache
 
-;;; 2024-4-29
+;;; 2024-5-9
