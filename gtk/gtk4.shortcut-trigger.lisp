@@ -571,18 +571,19 @@
 
 (defun keyval-trigger-new (keyval modifiers)
  #+liber-documentation
- "@version{#2022-8-26}
-  @argument[keyval]{an unsigned integer with the keyval to trigger for}
+ "@version{2024-5-10}
+  @argument[keyval]{a char or an unsigned integer with the keyval to trigger
+    for}
   @argument[modifiers]{a @symbol{gdk:modifier-type} value that need to be
     present}
   @return{The new @class{gtk:shortcut-trigger} object.}
   @begin{short}
-    Creates a @class{gtk:shortcut-trigger} object that will trigger whenever the
-    key with the given keyval and modifiers is pressed.
+    Creates a @class{gtk:shortcut-trigger} object that will trigger whenever
+    the key with the given @arg{keyval} and @arg{modifiers} is pressed.
   @end{short}
   @see-class{keyval-trigger}"
   (make-instance 'keyval-trigger
-                 :keyval keyval
+                 :keyval (if (integerp keyval) keyval (char-code keyval))
                  :modifiers modifiers))
 
 (export 'keyval-trigger-new)
