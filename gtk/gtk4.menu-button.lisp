@@ -123,7 +123,6 @@
       (liber:symbol-documentation 'arrow-type)
  "@version{2024-4-20}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkArrowType\" arrow-type
   (:export t
    :type-initializer \"gtk_arrow_type_get_type\")
@@ -132,7 +131,6 @@
   (:left 2)
   (:right 3)
   (:none 4))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

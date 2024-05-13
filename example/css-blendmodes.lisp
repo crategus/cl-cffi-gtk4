@@ -33,7 +33,7 @@
          (listbox (make-instance 'gtk:list-box))
          (window (gtk:builder-object builder "window"))
          (provider (make-instance 'gtk:css-provider))
-         (path2 (sys-path "resource/gtk4-example.gresource" :gtk4-example))
+         (path2 (sys-path "gtk4-example.gresource" :gtk4-example))
          (resource (g:resource-load path2)))
     ;; Register the resources
     (g:resources-register resource)

@@ -11,7 +11,7 @@
 ;;;; You can also use the GTK Inspector, available from the menu on the top
 ;;;; right, to poke at the running demos, and see how they are put together.
 ;;;;
-;;;; Last version: 2024-5-5
+;;;; Last version: 2024-5-12
 
 (in-package :gtk4-demo)
 
@@ -58,18 +58,13 @@
 
 ;; Create the list store as the model for the data
 
-(defun mklist (obj)
-  (if (listp obj)
-      obj
-      (list obj)))
-
 (defun create-and-fill-list-store (data &optional (parent nil))
   (let ((model (g:list-store-new "GtkDemo")))
-    (dolist (entry (mklist data))
+    (dolist (entry (glib-sys:mklist data))
       (cond ((and entry (or (atom entry) (every #'atom entry)))
              (destructuring-bind (title &optional ftype name package file
                                         &rest args)
-                 (mklist entry)
+                 (glib-sys:mklist entry)
                (let* (;; Extract keywords from args
                       (keywords (mapcar #'string-upcase
                                         (rest (member :keywords args))))
@@ -100,12 +95,12 @@
   model))
 
 (defun find-demo-by-name (data name &optional result)
-  (dolist (entry (mklist data))
+  (dolist (entry (glib-sys:mklist data))
     (cond ((or (atom entry) (every #'atom entry))
            (destructuring-bind (title
                                 &optional ftype name1 package file
                                 &rest args)
-               (mklist entry)
+               (glib-sys:mklist entry)
              (declare (ignore args))
              (when (string-equal name name1)
                (setf result (make-instance 'gtk-demo
@@ -204,7 +199,7 @@
     (dotimes (i (- (gtk:notebook-n-pages *notebook*) 2))
       (gtk:notebook-remove-page *notebook* 2))
     (dolist (resource resources)
-      (let ((file (sys-path resource (gtk-demo-package demo))))
+      (let ((file (glib-sys:sys-path resource (gtk-demo-package demo))))
         (cond ((member (pathname-type file)
                        '("css" "ui" "xml" "lisp" "asd" "txt" "ini")
                        :test #'string-equal)
@@ -233,7 +228,8 @@
   (let* ((row (gtk:single-selection-selected-item selection))
          (demo (if row (gtk:tree-list-row-item row))))
     (when (and demo (gtk-demo-filename demo))
-      (load-file (sys-path (gtk-demo-filename demo) (gtk-demo-package demo)))
+      (load-file (glib-sys:sys-path (gtk-demo-filename demo)
+                                    (gtk-demo-package demo)))
       (add-data-tabs demo)
       (setf (gtk:window-title window) (gtk-demo-title demo)))))
 
@@ -364,51 +360,49 @@
     (gobject:object-ref (gtk-demo-children object))))
 
 (defun activate (application)
-  ;; Register the resources
-  (gio:with-g-resources (resource (sys-path "gtk4-demo.gresource"))
-    (let* ((builder (gtk:builder-new-from-resource "/ui/main.ui"))
-           (window (gtk:builder-object builder "window"))
-           (listview (gtk:builder-object builder "listview"))
-           (searchbar (gtk:builder-object builder "searchbar"))
-           (action (g:simple-action-new "run" nil))
-           (listmodel (create-and-fill-list-store *gtk-demos*))
-           (treemodel (gtk:tree-list-model-new listmodel
-                                               nil
-                                               t
-                                               #'get-child-model))
-           (filter (gtk:custom-filter-new #'demo-filter-by-name))
-           (filtermodel (gtk:filter-list-model-new treemodel filter))
-           (selection (gtk:single-selection-new filtermodel))
-           (searchentry (gtk:builder-object builder "search-entry")))
-      (gtk:application-add-window application window)
-      (g:signal-connect window "close-request"
-                        (lambda (window)
-                          (declare (ignore window))
-                          (activate-quit application)))
-      (g:signal-connect action "activate"
-                        (lambda (action parameter)
-                          (activate-run application action parameter)))
-      (g:action-map-add-action window action)
-      (setf *notebook* (gtk:builder-object builder "notebook"))
-      (setf *infoview* (gtk:builder-object builder "info-textview"))
-      (setf *sourceview* (gtk:builder-object builder "source-textview"))
-      (setf *selection* selection)
-      (g:signal-connect listview "activate"
-                        (lambda (listview position)
-                          (activate-cb listview position application)))
-      (g:signal-connect searchbar "notify::search-mode-enabled"
-                        (lambda (searchbar pspec)
-                          (declare (ignore pspec))
-                          (clear-search searchbar filter)))
-      (g:signal-connect searchentry "search-changed"
-                        (lambda (entry)
-                          (demo-search-changed-cb entry filter)))
-      (g:signal-connect selection "notify::selected-item"
-                        (lambda (selection pspec)
-                          (declare (ignore pspec))
-                          (selection-cb window selection)))
-      (setf (gtk:list-view-model listview) selection)
-      (selection-cb window selection))))
+  (let* ((builder (gtk:builder-new-from-resource "/ui/main.ui"))
+         (window (gtk:builder-object builder "window"))
+         (listview (gtk:builder-object builder "listview"))
+         (searchbar (gtk:builder-object builder "searchbar"))
+         (action (g:simple-action-new "run" nil))
+         (listmodel (create-and-fill-list-store *gtk-demos*))
+         (treemodel (gtk:tree-list-model-new listmodel
+                                             nil
+                                             t
+                                             #'get-child-model))
+         (filter (gtk:custom-filter-new #'demo-filter-by-name))
+         (filtermodel (gtk:filter-list-model-new treemodel filter))
+         (selection (gtk:single-selection-new filtermodel))
+         (searchentry (gtk:builder-object builder "search-entry")))
+    (gtk:application-add-window application window)
+    (g:signal-connect window "close-request"
+                      (lambda (window)
+                        (declare (ignore window))
+                        (activate-quit application)))
+    (g:signal-connect action "activate"
+                      (lambda (action parameter)
+                        (activate-run application action parameter)))
+    (g:action-map-add-action window action)
+    (setf *notebook* (gtk:builder-object builder "notebook"))
+    (setf *infoview* (gtk:builder-object builder "info-textview"))
+    (setf *sourceview* (gtk:builder-object builder "source-textview"))
+    (setf *selection* selection)
+    (g:signal-connect listview "activate"
+                      (lambda (listview position)
+                        (activate-cb listview position application)))
+    (g:signal-connect searchbar "notify::search-mode-enabled"
+                      (lambda (searchbar pspec)
+                        (declare (ignore pspec))
+                        (clear-search searchbar filter)))
+    (g:signal-connect searchentry "search-changed"
+                      (lambda (entry)
+                        (demo-search-changed-cb entry filter)))
+    (g:signal-connect selection "notify::selected-item"
+                      (lambda (selection pspec)
+                        (declare (ignore pspec))
+                        (selection-cb window selection)))
+    (setf (gtk:list-view-model listview) selection)
+    (selection-cb window selection)))
 
 (defun command-line (application cmdline)
   (let ((options (g:application-command-line-options-dict cmdline))
@@ -477,58 +471,66 @@
 ;;; ----------------------------------------------------------------------------
 
 (defun gtk4-demo (&rest argv)
-  (let* (;; Create the application
-         (app (make-instance 'gtk:application
-                             :application-id "com.crategus.gtk4-demo"
-                             :flags :handles-command-line))
-         ;; Get the command line arguments
-         (argv (cons "gtk4-demo" (or argv (uiop:command-line-arguments))))
-         ;; Define action entries
-         (entries (list (list "about" #'activate-about)
-                        (list "quit"
-                              (lambda (action parameter)
-                                (declare (ignore action parameter))
-                                (activate-quit app)))
-                        (list "inspector" #'activate-inspector)))
-         ;; Define options
-         (options (list (list "version"                     ; long name
-                              #\v                           ; short name
-                              :none                         ; flags
-                              :none                         ; arg
-                              nil                           ; arg data
-                              "Show program version"        ; description
-                              nil)                          ; arg description
-                        (list "run" #\r
-                              :none
-                              :string
-                              nil
-                              "Run Example"
-                              "EXAMPLE")
-                         (list "list" #\l
-                               :none
-                               :none
-                               nil
-                               "List examples"
-                               nil)
-                         (list "autoquit" #\a
-                               :none
-                               :none
-                               nil
-                               "Quit after a delay"
-                               nil))))
-    ;; Add actions entries for the application
-    (g:action-map-add-action-entries app entries)
-    ;; Add accelerators for the application
-    (setf (gtk:application-accels-for-action app "app.about") "F1")
-    (setf (gtk:application-accels-for-action app "app.quit") "<Control>q")
-    (setf (gtk:application-accels-for-action app "app.inspector") "<Control>d")
-    ;; Add comand line options
-    (g:application-add-main-option-entries app options)
-    ;; Connect signal handlers for the application
-    (g:signal-connect app "activate" #'activate)
-    (g:signal-connect app "command-line" #'command-line)
-    (g:signal-connect app "handle-local-options" #'local-options)
-    ;; Run the application
-    (g:application-run app argv)))
+  ;; Register resources
+  (gio:with-resources ((resource1 (glib-sys:check-and-create-resources
+                                         "gtk4-demo.xml"
+                                         "gtk4-demo"))
+                       (resource2 (glib-sys:check-and-create-resources
+                                         "gtk4-example.xml"
+                                         "gtk4-example"
+                                         "resource/")))
+    (let* (;; Create the application
+           (app (make-instance 'gtk:application
+                               :application-id "com.crategus.gtk4-demo"
+                               :flags :handles-command-line))
+           ;; Get the command line arguments
+           (argv (cons "gtk4-demo" (or argv (uiop:command-line-arguments))))
+           ;; Define action entries
+           (entries (list (list "about" #'activate-about)
+                          (list "quit"
+                                (lambda (action parameter)
+                                  (declare (ignore action parameter))
+                                  (activate-quit app)))
+                          (list "inspector" #'activate-inspector)))
+           ;; Define options
+           (options (list (list "version"                     ; long name
+                                #\v                           ; short name
+                                :none                         ; flags
+                                :none                         ; arg
+                                nil                           ; arg data
+                                "Show program version"        ; description
+                                nil)                          ; arg description
+                          (list "run" #\r
+                                :none
+                                :string
+                                nil
+                                "Run Example"
+                                "EXAMPLE")
+                           (list "list" #\l
+                                 :none
+                                 :none
+                                 nil
+                                 "List examples"
+                                 nil)
+                           (list "autoquit" #\a
+                                 :none
+                                 :none
+                                 nil
+                                 "Quit after a delay"
+                                 nil))))
+      ;; Add actions entries for the application
+      (g:action-map-add-action-entries app entries)
+      ;; Add accelerators for the application
+      (setf (gtk:application-accels-for-action app "app.about") "F1")
+      (setf (gtk:application-accels-for-action app "app.quit") "<Control>q")
+      (setf (gtk:application-accels-for-action app "app.inspector") "<Control>d")
+      ;; Add comand line options
+      (g:application-add-main-option-entries app options)
+      ;; Connect signal handlers for the application
+      (g:signal-connect app "activate" #'activate)
+      (g:signal-connect app "command-line" #'command-line)
+      (g:signal-connect app "handle-local-options" #'local-options)
+      ;; Run the application
+      (g:application-run app argv))))
 
 ;;; --- End of file gtk4-demo.lisp ---------------------------------------------
