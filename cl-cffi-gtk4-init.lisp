@@ -1,7 +1,7 @@
 ;;; ----------------------------------------------------------------------------
 ;;; cl-cffi-gtk4-init.lisp
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -23,7 +23,7 @@
 ;;; ----------------------------------------------------------------------------
 
 (defpackage :gtk-init
-  (:use :cl :cffi)
+  (:use :cl)
   (:export *gtk-warn-deprecated*))
 
 (in-package :gtk-init)
@@ -41,7 +41,7 @@
 
 (glib-init:at-init ()
   (eval-when (:compile-toplevel :load-toplevel :execute)
-    (define-foreign-library gtk4
+    (cffi:define-foreign-library gtk4
       ((:and :unix (:not :darwin))
        (:or "libgtk-4.so.1" "libgtk-4.so.0" "libgtk-4.so"))
       (:darwin (:or "libgtk-4.0.dylib"
@@ -53,7 +53,7 @@
     ;; push the hostname on *features*
     (pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)
     (pushnew :gtk4 *features*))
-  (use-foreign-library gtk4))
+  (cffi:use-foreign-library gtk4))
 
 (glib-init::push-library-version-features gtk
     ;; We can not call the Lisp implementations gtk-major-version and
