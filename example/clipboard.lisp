@@ -6,7 +6,9 @@
 ;;;; You can also use Drag-And-Drop to copy the data from the source to the
 ;;;; target.
 ;;;;
-;;;; 2024-4-6
+;;;; Last version: 2024-5-14
+
+;; TODO: Improve the example: We get an error when dragging a NIL file.
 
 (in-package :gtk4-example)
 
@@ -45,12 +47,16 @@
       (update-copy-button (gtk:widget-ancestor button "GtkStack")))))
 
 (defun file-open-cb (button)
+  #-windows
   (let ((dialog (gtk:file-dialog-new)))
     (gtk:file-dialog-open dialog
                           (gtk:widget-ancestor button "GtkWindow")
                           nil
                           (lambda (source result)
-                            (file-open-response-cb source result button)))))
+                            (file-open-response-cb source result button))))
+  #+windows
+  (let ((dialog (gtk:alert-dialog-new "File Open not implemented for Windows")))
+    (gtk:alert-dialog-show dialog (gtk:widget-root button))))
 
 (defun copy-button-clicked (source)
   (let ((clipboard (gtk:widget-clipboard source))

@@ -3,7 +3,7 @@
 ;;;; Demonstrates a traditional interface, loaded from a XML description, and
 ;;;; shows how to connect actions to the menu items and toolbar buttons.
 ;;;;
-;;;; Last version: 2024-5-10
+;;;; Last version: 2024-5-13
 
 (in-package :gtk4-example)
 
@@ -88,49 +88,24 @@
     (setf (gtk:window-transient-for about) window)
     (setf (gtk:window-hide-on-close about) t)
     ;; Prepare shortcut controller
-    (setf (gtk:shortcut-controller-scope controller) :global)
+    ;; TODO: F1 opens the global about dialog. Can we improve this?!
+    (setf (gtk:shortcut-controller-scope controller) :local)
     (gtk:widget-add-controller window controller)
     ;; Add shortcuts
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new #\n :control-mask)
-                              (gtk:named-action-new "win.new")))
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new #\o :control-mask)
-                              (gtk:named-action-new "win.open")))
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new #\s :control-mask)
-                              (gtk:named-action-new "win.save")))
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new #\s
-                                                  '(:control-mask :shift-mask))
-                              (gtk:named-action-new "win.save-as")))
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new #\q :control-mask)
-                              (gtk:named-action-new "win.quit")))
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new #\c :control-mask)
-                              (gtk:named-action-new "win.copy")))
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new #\x :control-mask)
-                              (gtk:named-action-new "win.cut")))
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new #\v :control-mask)
-                              (gtk:named-action-new "win.paste")))
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new 65470 :none)
-                              (gtk:named-action-new "win.help")))
-    (gtk:shortcut-controller-add-shortcut
-            controller
-            (gtk:shortcut-new (gtk:keyval-trigger-new 65476 :none)
-                              (gtk:named-action-new "win.about")))
+    (let ((shortcuts '(#\n :control-mask "win.new"
+                       #\o :control-mask "win.open"
+                       #\s :control-mask "win.save"
+                       #\s (:control-mask :shift-mask) "win.save-as"
+                       #\q :control-mask "win.quit"
+                       #\c :control-mask "win.copy"
+                       #\x :control-mask "win.paste"
+                       ;; TODO: GTK Demo has already F1 in use
+                       65470 :none "win.help"               ; key F1
+                       65476 :none "win.about")))           ; key F7
+      (iter (for (keyval modifier name) on shortcuts by #'cdddr)
+            (gtk:shortcut-controller-add-shortcut
+                    controller
+                    (gtk:shortcut-new (gtk:keyval-trigger-new keyval modifier)
+                                      (gtk:named-action-new name)))))
     ;; Present window
     (gtk:window-present window)))
