@@ -14,6 +14,14 @@
 ;; push the hostname on *features*
 (pushnew (intern (string-upcase (machine-instance)) :keyword) *features*)
 
+(setf (glib-sys:get-current-package) "cl-cffi-gtk4")
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (glib-sys:check-and-create-resources "test/rtest-gtk4.xml"
+                                       "cl-cffi-gtk4"
+                                       "test/resource/"
+                                       :verbose t))
+
 (def-suite gtk-test)
 (def-suite gsk-suite :in gtk-test)
 (def-suite gdk-suite :in gtk-test)

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/crategus/test">
+    <file>ducky.png</file>
+    <file>floppybuddy.gif</file>
+    <file>gtk-logo-24.png</file>
+    <file>stack.ui</file>
+    <file>dialog.ui</file>
+    <file>dialog2.ui</file>
+    <file>application.ui</file>
+    <file>css-accordion.css</file>
+    <file>gtk-logo.webm</file>
+  </gresource>
+</gresources>

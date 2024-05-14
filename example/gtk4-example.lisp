@@ -226,9 +226,9 @@ sem venenatis, vitae ultricies arcu laoreet."))
 (defun read-file (filename)
   (with-open-file (instream filename :direction :input :if-does-not-exist nil)
     (when instream
-      (let ((string (make-string (file-length instream))))
-        (read-sequence string instream)
-        string))))
+      (let ((str (make-string (file-length instream))))
+        (read-sequence str instream)
+        str))))
 
 (defun window-draw-func (title drawfunc application
                          &optional (width 600) (height 600))
@@ -247,54 +247,37 @@ sem venenatis, vitae ultricies arcu laoreet."))
     ;; Show the window.
     (setf (gtk:widget-visible window) t)))
 
- ;; A wrapper to run an example
-(defun run-example (func &optional (functype :window) (filename nil))
-  (let ((resource (when filename
-                        (g:resource-load (sys-path filename))))
-        ;; Create an application
-        (app (make-instance 'gtk:application
-                            :application-id "com.crategus.run-example"
-                            :resource-base-path (null-pointer))))
-    ;; Register the resources
-    (when resource
-      (g:resources-register resource))
-    ;; Connect signal "activate" to the application
-    (g:signal-connect app "activate"
-        (lambda (application)
-          (cond ((eq :window functype)
-                 ;; Start example as application window
-                 (funcall func application))
-                ((eq :dialog functype)
-                 ;; Start example as transient for application window
-                 (let ((window (make-instance 'gtk:application-window
-                                :application application
-                                :title "GTK Example"
-                                :default-width 600
-                                :default-height 400)))
-                   (setf (gtk:widget-visible window) t)
-                   (funcall func window)))
-                ((eq :drawfunc functype)
-                 (window-draw-func "GTK Example" func application))
-                (t
-                 (error "Type of function is unknown.")))))
-    ;; Connect signal "shutdown"
-    (g:signal-connect app "shutdown"
-        (lambda (application)
-          (declare (ignore application))
-          ;; Unregister the resources
-          (when resource
-            (g:resources-unregister resource))))
-    ;; Run the application
-    (g:application-run app nil)))
+;; A wrapper to run an example
+(defun run-example (func &optional (functype :window))
+  ;; Load resources for the examples
+  (g:with-resource (resource (glib-sys:check-and-create-resources
+                                     "gtk4-example.xml"     ; source
+                                     "gtk4-example"         ; package
+                                     "resource/"))          ; source directory
+    (let (;; Create an application
+          (app (make-instance 'gtk:application
+                              :application-id "com.crategus.run-example"
+                              :resource-base-path (null-pointer))))
+      ;; Connect signal "activate" to the application
+      (g:signal-connect app "activate"
+          (lambda (application)
+            (cond ((eq :window functype)
+                   ;; Start example as application window
+                   (funcall func application))
+                  ((eq :dialog functype)
+                   ;; Start example as transient for application window
+                   (let ((window (make-instance 'gtk:application-window
+                                                :application application
+                                                :title "GTK Example"
+                                                :default-width 600
+                                                :default-height 400)))
+                     (setf (gtk:widget-visible window) t)
+                     (funcall func window)))
+                  ((eq :drawfunc functype)
+                   (window-draw-func "GTK Example" func application))
+                  (t
+                   (error "Type of function is unknown.")))))
+      ;; Run the application
+      (g:application-run app nil))))
 
-;; Recursivly apply CSS to a widget and all child widgets
-(defun apply-css-to-widget (provider widget)
-  (gtk:style-context-add-provider (gtk:widget-style-context widget)
-                                  provider
-                                  gtk:+priority-user+)
-  (do ((child (gtk:widget-first-child widget)
-              (gtk:widget-next-sibling child)))
-       ((not child))
-    (apply-css-to-widget provider child)))
-
-;;; 2024-4-1
+;;; 2024-5-14
