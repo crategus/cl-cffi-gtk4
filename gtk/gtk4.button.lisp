@@ -317,7 +317,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'button-icon-name)
       "Accessor"
       (documentation 'button-icon-name 'function)
- "@version{2023-9-2}
+ "@version{2024-5-14}
   @syntax{(gtk:button-icon-name object) => name}
   @syntax{(setf (gtk:button-icon-name object) name)}
   @argument[object]{a @class{gtk:button} widget}
@@ -329,7 +329,7 @@ lambda (button)    :action
   The @fun{gtk:button-icon-name} function returns the icon name of the button.
   If the icon name has not been set the return value will be @code{nil}. This
   will be the case if you create an empty button with the @fun{gtk:button-new}
-  function to use as a container. The @setf{gtk:button-has-frame} function adds
+  function to use as a container. The @setf{gtk:button-icon-name} function adds
   a @class{gtk:image} widget with the given icon name as a child widget. If the
   button already contains a child widget, that child widget will be removed and
   replaced with the image.

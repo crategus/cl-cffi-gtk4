@@ -1210,16 +1210,16 @@ lambda (label step count extend)    :action
 
 (cffi:defcfun ("gtk_label_get_text" label-text) :string
  #+liber-documentation
- "@version{2024-4-24}
+ "@version{2024-5-13}
   @syntax{(gtk:label-text label) => text}
   @syntax{(setf (gtk:label-text-label) text)}
   @argument[label]{a @class{gtk:label} widget}
   @argument[text]{a string with the text}
   @begin{short}
-    Accessor of the text in the label.
+    The @fun{gtk:label-text} function fetches the text from a label, as
+    displayed on the screen.
   @end{short}
-  The @fun{gtk:label-text} function fetches the text from a label, as displayed
-  on the screen. The @setf{gtk:label-text} function sets the text.
+  The @setf{gtk:label-text} function sets the text.
 
   It overwrites any text that was there before. This will also clear any
   previously set mnemonic accelerators. This does not include any embedded

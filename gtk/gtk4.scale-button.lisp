@@ -275,7 +275,7 @@ lambda (button value)    :run-last
 (setf (liber:alias-for-function 'scale-button-value)
       "Accessor"
       (documentation 'scale-button-value 'function)
- "@version{2024-5-7}
+ "@version{2024-5-14}
   @syntax{(gtk:scale-button-value object) => value}
   @syntax{(setf (gtk:scale-button-value object) value)}
   @argument[object]{a @class{gtk:scale-button} widget}
@@ -288,8 +288,8 @@ lambda (button value)    :run-last
   button. The @setf{gtk:scale-button-value} function sets the current value.
 
   If the value is outside the minimum or maximum range values, it will be
-  clamped to fit inside them. The scale button emits the \"value-changed\"
-  signal if the value changes.
+  clamped to fit inside them. The scale button emits the
+  @code{\"value-changed\"} signal if the value changes.
   @see-class{gtk:scale-button}")
 
 ;;; ----------------------------------------------------------------------------

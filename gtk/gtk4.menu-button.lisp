@@ -542,10 +542,9 @@ lambda (button)    :action
 (setf (documentation (liber:slot-documentation "menu-model" 'menu-button) t)
  "The @code{menu-model} property of type @class{g:menu-model} (Read / Write)
   @br{}
-  The menu model from which the popup will be created. Depending on the
-  @slot[gtk:menu-button]{use-popover} property, that may be a menu or a popover.
-  See the @fun{gtk:menu-button-menu-model} function for the interaction with
-  the @slot[gtk:menu-button]{popup} property.")
+  The menu model from which the popup will be created. See the
+  @fun{gtk:menu-button-menu-model} function for the interaction with the
+  @slot[gtk:menu-button]{popover} property.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'menu-button-menu-model)
@@ -623,7 +622,7 @@ lambda (button)    :action
 (setf (liber:alias-for-function 'menu-button-primary)
       "Accessor"
       (documentation 'menu-button-primary 'function)
- "@version{2023-3-24}
+ "@version{2024-5-14}
   @syntax{(gtk:menu-button-primary object) => setting}
   @syntax{(setf (gtk:menu-button-primary object) setting)}
   @argument[object]{a @class{gtk:menu-button} widget}
@@ -634,8 +633,7 @@ lambda (button)    :action
   @end{short}
   The @fun{gtk:menu-button-primary} function returns whether the menu button
   acts as a primary menu. The @setf{gtk:menu-button-primary} function sets
-  whether menu button acts as a primary menu. Primary menus can be opened with
-  the @kbd{F10} key.
+  the property. Primary menus can be opened with the @kbd{F10} key.
 
   Since 4.4
   @see-class{gtk:menu-button}")
@@ -761,7 +759,7 @@ lambda (button)    :action
  "@version{2024-5-4}
   @argument[button]{a @class{gtk:menu-button} widget}
   @argument[func]{a @symbol{gtk:menu-button-create-popup-func} callback
-    function to call when a popuop is about to be shown, but none has been
+    function to call when a popup is about to be shown, but none has been
     provided via other means, or @code{nil} to reset to default behavior}
   @begin{short}
     Sets @arg{func} to be called when a popup is about to be shown.

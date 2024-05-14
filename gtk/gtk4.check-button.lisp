@@ -386,7 +386,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-label)
       "Accessor"
       (documentation 'check-button-label 'function)
- "@version{2024-5-4}
+ "@version{2024-5-14}
   @syntax{(gtk:check-button-label object) => label}
   @syntax{(setf (gtk:check-button-label object) label)}
   @argument[object]{a @class{gtk:check-button} widget}
@@ -395,7 +395,14 @@ lambda (checkbutton)    :run-first
     Accessor of the @slot[gtk:check-button]{label} slot of the
     @class{gtk:check-button} class.
   @end{short}
-  @see-class{gtk:check-button}")
+  The @fun{gtk:check-button-label} function returns the label of the check
+  button or @code{nil} if the @slot[gtk:check-button]{child} porperty is set.
+  The @setf{gtk:check-button-label} function sets the text. If the
+  @slot[gtk:check-button]{use-underline} property is @em{true}, an underscore
+  in @arg{label} is interpreted as mnemonic indicator, see the
+  @fun{gtk:check-button-use-underline} function for details on this behavior.
+  @see-class{gtk:check-button}
+  @see-function{gtk:check-button-use-underline}")
 
 ;;; --- gtk:check-button-use-underline -----------------------------------------
 
@@ -410,7 +417,7 @@ lambda (checkbutton)    :run-first
 (setf (liber:alias-for-function 'check-button-use-underline)
       "Accessor"
       (documentation 'check-button-use-underline 'function)
- "@version{2024-5-4}
+ "@version{2024-5-14}
   @syntax{(gtk:check-button-use-underline object) => setting}
   @syntax{(setf (gtk:check-button-use-underline object) setting)}
   @argument[object]{a @class{gtk:check-button} widget}
@@ -420,7 +427,15 @@ lambda (checkbutton)    :run-first
     Accessor of the @slot[gtk:check-button]{use-underline} slot of the
     @class{gtk:check-button} class.
   @end{short}
-  @see-class{gtk:check-button}")
+  The @fun{gtk:check-button-use-underline} function returns whether underlines
+  in the label indicate mnemonics. The @setf{gtk:check-button-use-underline}
+  function sets whether underlines in the label indicate mnemonics.
+
+  If the setting is @em{true}, an underscore character indicates a mnemonic
+  accelerator key. This behavior is similar to the
+  @slot[gtk:label]{use-underline} property of the @class{gtk:label} widget.
+  @see-class{gtk:check-button}
+  @see-function{gtk:label-use-underline}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_check_button_new
