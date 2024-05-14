@@ -137,13 +137,13 @@ Media Support
 
 Buttons and Toggles
 
-  gtk4.button.lisp                     GtkButton                      GTK 4.12 .
-  gtk4.toggle-button.lisp              GtkToggleButton                GTK 4.12 .
-  gtk4.check-button.lisp               GtkCheckButton                 GTK 4.12 .
-  gtk4.menu-button.lisp                GtkMenuButton                  GTK 4.12&.
-  gtk4.link-button.lisp                GtkLinkButton                  GTK 4.12 .
-  gtk4.scale-button.lisp               GtkScaleButton                 GTK 4.12 .
-  gtk4.switch.lisp                     GtkSwitch                      GTK 4.12 .
+  gtk4.button.lisp                     GtkButton                      GTK 4.12
+  gtk4.toggle-button.lisp              GtkToggleButton                GTK 4.12
+  gtk4.check-button.lisp               GtkCheckButton                 GTK 4.12
+  gtk4.menu-button.lisp                GtkMenuButton                  GTK 4.12 &
+  gtk4.link-button.lisp                GtkLinkButton                  GTK 4.12
+  gtk4.scale-button.lisp               GtkScaleButton                 GTK 4.12
+  gtk4.switch.lisp                     GtkSwitch                      GTK 4.12
 
 Numeric and Text Data Entry
 
