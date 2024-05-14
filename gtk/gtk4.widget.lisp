@@ -369,13 +369,11 @@
       (documentation 'requisition 'type)
  "@version{2024-4-28}
   @begin{declaration}
-    @begin{pre}
 (glib:define-g-boxed-cstruct requisition \"GtkRequisition\"
   (:export t
    :type-initializer \"gtk_requistion_get_type\")
   (width :int :initform 0)
   (height :int :initform 0))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -5568,20 +5566,21 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_insert_action_group" widget-insert-action-group)
     :void
  #+liber-documentation
- "@version{#2023-3-12}
+ "@version{2024-5-13}
   @argument[widget]{a @class{gtk:widget} object}
-  @argument[name]{a string with the prefix for actions in @arg{group}}
+  @argument[prefix]{a string with the prefix for actions in @arg{group}}
   @argument[group]{a @class{g:action-group} object}
   @begin{short}
-    Inserts @arg{group} into @arg{widget}.
+    Inserts an action group into @arg{widget}.
   @end{short}
   Children of @arg{widget} that implement the @class{gtk:actionable} interface
   can then be associated with actions in @arg{group} by setting their
-  @code{action-name} to \"prefix.action-name\".
+  @slot[gtk:actionable]{action-name} property to the
+  @code{\"prefix.action-name\"} value.
   @see-class{gtk:widget}
   @see-class{g:action-group}"
   (widget (g:object widget))
-  (name :string)
+  (prefix :string)
   (group (g:object g:action-group)))
 
 (export 'widget-insert-action-group)

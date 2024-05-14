@@ -130,13 +130,11 @@
       (liber:symbol-documentation 'level-bar-mode)
  "@version{2024-4-25}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkLevelBarMode\" level-bar-mode
   (:export t
    :type-initializer \"gtk_level_bar_mode_get_type\")
   (:continuous 0)
   (:discrete 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

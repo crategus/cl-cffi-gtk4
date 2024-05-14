@@ -105,14 +105,14 @@
       (liber:symbol-documentation 'css-location)
  "@version{2024-4-23}
   @begin{declaration}
-    @begin{pre}
 (cffi:defcstruct css-location
   (bytes :size)
   (chars :size)
   (lines :size)
   (line-bytes :size)
   (line-chars :size))
-    @end{pre}
+  @end{declaration}
+  @begin{values}
     @begin[code]{table}
       @entry[bytes]{Number of bytes parsed since the beginning.}
       @entry[chars]{Number of characters parsed since the beginning.}
@@ -121,7 +121,7 @@
       @entry[line-bytes]{Number of bytes parsed since the last line break.}
       @entry[line-chars]{Number of characters parsed since the last line break.}
     @end{table}
-  @end{declaration}
+  @end{values}
   @begin{short}
     The @class{gtk:css-location} structure is used to present a location in a
     file or other source of data parsed by the CSS engine.
@@ -247,12 +247,10 @@
       (documentation 'css-section 'type)
  "@version{2024-4-23}
   @begin{declaration}
-    @begin{pre}
 (glib:define-g-boxed-opaque css-section \"GtkCssSection\"
   :export t
   :type-initializer \"gtk_css_section_get_type\"
   :alloc (error \"GtkCssSection cannot be created from the Lisp side\"))
-    @end{pre}
   @end{declaration}
   @begin{short}
     Defines a part of a CSS document.

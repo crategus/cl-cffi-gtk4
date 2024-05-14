@@ -88,13 +88,11 @@
       (liber:symbol-documentation 'popover-menu-flags)
  "@version{#2022-7-29}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkPopoverMenuFlags\" popover-menu-flags
   (:export t
    :type-initializer \"gtk_popover_menu_flags_get_type\")
   (:none 0)
   (:nested #.(ash 1 0)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

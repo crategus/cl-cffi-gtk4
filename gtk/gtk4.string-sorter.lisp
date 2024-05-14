@@ -81,14 +81,12 @@
       (liber:symbol-documentation 'collation)
  "@version{2023-9-5}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkCollation\" collation
   (:export t
    :type-initializer \"gtk_collation_get_type\")
   (:none 0)
   (:unicode 1)
   (:filename 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

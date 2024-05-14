@@ -97,14 +97,12 @@
       (liber:symbol-documentation 'event-sequence-state)
  "@version{#2022-8-22}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkEventSequenceState\" event-sequence-state
   (:export t
    :type-initializer \"gtk_event_sequence_state_get_type\")
   (:none 0)
   (:claimed 1)
   (:denied 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

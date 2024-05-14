@@ -1037,7 +1037,7 @@ hello_button__clicked (GtkButton *button,
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_builder_get_object -> builder-object
+;;; gtk_builder_get_object
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_builder_get_object" builder-object) g:object

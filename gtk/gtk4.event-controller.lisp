@@ -99,7 +99,6 @@
       (liber:symbol-documentation 'propagation-phase)
  "@version{#2022-8-22}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPropagationPhase\" propagation-phase
   (:export t
    :type-initializer \"gtk_propagation_phase_get_type\")
@@ -107,7 +106,6 @@
   (:capture 1)
   (:bubble 2)
   (:target 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -146,13 +144,11 @@
       (liber:symbol-documentation 'propagation-limit)
  "@version{#2022-8-22}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPropagationLimit\" propagation-limit
   (:export t
    :type-initializer \"gtk_propagation_limit_get_type\")
   (:none 0)
   (:same-native 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

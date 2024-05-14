@@ -107,7 +107,6 @@
       (liber:symbol-documentation 'content-fit)
  "@version{2024-4-25}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkContentFit\" content-fit
   (:export t
    :type-initializer \"gtk_content_fit_get_type\")
@@ -115,7 +114,6 @@
   (:contain 1)
   (:cover 2)
   (:scale-down 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

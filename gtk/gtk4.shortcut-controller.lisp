@@ -90,14 +90,12 @@
       (liber:symbol-documentation 'shortcut-scope)
  "@version{2023-7-23}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkShortcutScope\" shortcut-scope
   (:export t
    :type-initializer \"gtk_shortcut_scope_get_type\")
   :local
   :managed
   :global)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -401,7 +399,7 @@
 (cffi:defcfun ("gtk_shortcut_controller_add_shortcut"
                shortcut-controller-add-shortcut) :void
  #+liber-documentation
- "@version{#2023-7-23}
+ "@version{2024-5-13}
   @argument[controller]{a @class{gtk:shortcut-controller} object}
   @argument[shortcut]{a @class{gtk:shortcut} object to add}
   @begin{short}

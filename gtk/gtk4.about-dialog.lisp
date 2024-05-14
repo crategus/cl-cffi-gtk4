@@ -152,7 +152,6 @@
       (liber:symbol-documentation 'license)
  "@version{2024-4-11}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkLicense\" license
   (:export t
    :type-initializer \"gtk_license_get_type\")
@@ -174,7 +173,6 @@
   (:bsd-3 15)
   (:apache-2-0 16)
   (:mpl-2-0 17))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

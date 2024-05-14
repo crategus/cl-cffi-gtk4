@@ -90,7 +90,6 @@
       (liber:symbol-documentation 'shortcut-type)
  "@version{2024-2-18}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkShortcutType\" gtk:shortcut-type
   (:export t
    :type-initializer \"gtk_shortcut_type_get_type\")
@@ -104,7 +103,6 @@
   :gesture
   :gesture-swipe-left
   :gesture-swipe-right)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

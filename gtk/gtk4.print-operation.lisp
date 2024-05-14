@@ -153,7 +153,6 @@
       (liber:symbol-documentation 'print-status)
  "@version{2023-8-28}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPrintStatus\" print-status
   (:export t
    :type-initializer \"gtk_print_status_get_type\")
@@ -166,7 +165,6 @@
   (:printing 6)
   (:finished 7)
   (:finished-aborted 8))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -210,7 +208,6 @@
       (liber:symbol-documentation 'print-operation-action)
  "@version{2023-8-28}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPrintOperationAction\" print-operation-action
   (:export t
    :type-initializer \"gtk_print_operation_action_get_type\")
@@ -218,7 +215,6 @@
   (:print 1)
   (:preview 2)
   (:export 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -256,7 +252,6 @@
       (liber:symbol-documentation 'print-operation-result)
  "@version{2023-8-28}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPrintOperationResult\" print-operation-result
   (:export t
    :type-initializer \"gtk_print_operation_result_get_type\")
@@ -264,7 +259,6 @@
   (:apply 1)
   (:cancel 2)
   (:in-progress 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

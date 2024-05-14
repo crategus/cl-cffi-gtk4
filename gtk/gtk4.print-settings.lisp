@@ -150,7 +150,6 @@
       (liber:symbol-documentation 'page-orientation)
  "@version{2024-2-17}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPageOrienation\" page-orientation
   (:export t
    :type-initializer \"gtk_page_orientation_get_type\")
@@ -158,7 +157,6 @@
   :landscape
   :reverse-portrait
   :reverse-landscape)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -189,14 +187,12 @@
       (liber:symbol-documentation 'print-duplex)
  "@version{2024-2-17}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPrintDuplex\" print-duplex
   (:export t
    :type-initializer \"gtk_print_duplex_get_type\")
   :simplex
   :horizontal
   :vertical)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -227,7 +223,6 @@
       (liber:symbol-documentation 'print-quality)
  "@version{2024-2-17}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPrintQuality\" print-quality
   (:export t
    :type-initializer \"gtk_print_quality_get_type\")
@@ -235,7 +230,6 @@
   :normal
   :high
   :draft)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -271,7 +265,6 @@
       (liber:symbol-documentation 'number-up-layout)
  "@version{2024-2-17}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkNubmerUpLayout\" number-up-layout
   (:export t
    :type-initializer \"gtk_number_up_layout_get_type\")
@@ -283,7 +276,6 @@
   (:top-to-bottom-right-to-left 5)
   (:bottom-to-top-left-to-right 6)
   (:bottom-to-top-right-to-left 7))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -322,7 +314,6 @@
       (liber:symbol-documentation 'print-pages)
  "@version{2024-2-17}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPrintPages\" print-pages
   (:export t
    :type-initializer \"gtk_print_pages_get_type\")
@@ -330,7 +321,6 @@
   (:current 1)
   (:ranges 2)
   (:selection 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -386,14 +376,12 @@
       (liber:symbol-documentation 'page-set)
  "@version{2024-2-17}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPageSet\" page-set
   (:export t
    :type-initializer \"gtk_page_set_get_type\")
   (:all 0)
   (:even 1)
   (:odd 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

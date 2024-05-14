@@ -119,14 +119,12 @@
       (liber:symbol-documentation 'list-tab-behavior)
  "@version{2023-11-25}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkListTabBehavior\" list-tab-behavior
   (:export t
    :type-initializer \"gtk_list_tab_behavior_get_type\")
   (:all 0)
   (:item 1)
   (:cell 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -168,14 +166,12 @@
       (liber:symbol-documentation 'list-scroll-flags)
  "@version{2023-11-25}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkListScrollFlags\" list-scroll-flags
   (:export t
    :type-initializer \"gtk_list_scroll_flags_get_type\")
   (:none 0)
   (:focus #.(ash 1 0))
   (:select #.(ash 1 1)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

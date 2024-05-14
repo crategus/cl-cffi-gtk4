@@ -103,7 +103,6 @@
       (liber:symbol-documentation 'font-chooser-level)
  "@version{2023-8-28}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkFontChooserLevel\" font-chooser-level
   (:export t
    :type-initializer \"gtk_font_chooser_level_get_type\")
@@ -112,7 +111,6 @@
   (:size       #.(ash 1 1))
   (:variations #.(ash 1 2))
   (:features   #.(ash 1 3)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

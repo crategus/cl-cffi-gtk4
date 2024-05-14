@@ -187,13 +187,11 @@
       (liber:symbol-documentation 'entry-icon-position)
  "@version{2023-9-16}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkEntryIconPosition\" entry-icon-position
   (:export t
    :type-initializer \"gtk_entry_icon_position_get_type\")
   (:primary 0)
   (:secondary 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

@@ -162,7 +162,6 @@
       (liber:symbol-documentation 'unit)
  "@version{2023-1-31}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkUnit\" unit
   (:export t
    :type-initializer \"gtk_unit_get_type\")
@@ -170,7 +169,6 @@
   (:points 1)
   (:inch 2)
   (:mm 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

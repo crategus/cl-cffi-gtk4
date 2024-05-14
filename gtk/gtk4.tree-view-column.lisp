@@ -156,14 +156,12 @@
       (liber:symbol-documentation 'tree-view-column-sizing)
  "@version{2024-4-27}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkTreeViewColumnSizing\" tree-view-column-sizing
   (:export t
    :type-initializer \"gtk_tree_view_column_sizing_get_type\")
   (:grow-only 0)
   (:autosize 1)
   (:fixed 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

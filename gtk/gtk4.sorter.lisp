@@ -79,14 +79,12 @@
       (liber:symbol-documentation 'sorter-order)
  "@version{2023-9-4}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSorterOrder\" sorter-order
   (:export t
    :type-initializer \"gtk_sorter_order_get_type\")
   (:partial 0)
   (:none 1)
   (:total 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -126,7 +124,6 @@
       (liber:symbol-documentation 'sorter-change)
  "@version{2023-9-4}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSorterChange\" sorter-change
   (:export t
    :type-initializer \"gtk_sorter_change_get_type\")
@@ -134,7 +131,6 @@
   (:inverted 1)
   (:less-strict 2)
   (:more-strict 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

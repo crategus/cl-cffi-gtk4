@@ -105,14 +105,12 @@
       (liber:symbol-documentation 'dialog-flags)
  "@version{2024-5-1}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkDialogFlags\" dialog-flags
   (:export t
    :type-initializer \"gtk_dialog_flags_get_type\")
   (:modal               #.(ash 1 0))
   (:destroy-with-parent #.(ash 1 1))
   (:use-header-bar      #.(ash 1 2)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

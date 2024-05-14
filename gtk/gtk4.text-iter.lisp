@@ -159,14 +159,12 @@
       (liber:symbol-documentation 'text-search-flags)
  "@version{2023-2-2}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkTextSearchFlags\" text-search-flags
   (:export t
    :type-initializer \"gtk_text_search_flags_get_type\")
   (:visible-only 1)
   (:text-only 2)
   (:case-insensitive 4))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

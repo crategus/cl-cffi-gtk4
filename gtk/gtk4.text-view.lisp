@@ -233,7 +233,6 @@
       (liber:symbol-documentation 'text-window-type)
  "@version{2023-10-4}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkTextWindowType\" text-window-type
   (:export t
    :type-initializer \"gtk_text_window_type_get_type\")
@@ -243,7 +242,6 @@
   (:right 4)
   (:top 5)
   (:bottom 6))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -276,13 +274,11 @@
       (liber:symbol-documentation 'text-extend-selection)
  "@version{2023-10-4}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkTextExtendSelection\" text-extend-selection
   (:export t
    :type-initializer \"gtk_text_extend_selection_get_type\")
   (:word 0)
   (:line 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

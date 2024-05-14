@@ -178,7 +178,6 @@
       (liber:symbol-documentation 'icon-view-drop-position)
  "@version{2024-5-1}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkIconViewDropPosition\" icon-view-drop-position
   (:export t
    :type-initializer \"gtk_icon_view_drop_position_get_type\")
@@ -188,7 +187,6 @@
   (:drop-right 3)
   (:drop-above 4)
   (:drop-below 5))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

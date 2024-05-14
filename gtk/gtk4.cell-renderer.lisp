@@ -128,7 +128,6 @@
       (liber:symbol-documentation 'cell-renderer-state)
  "@version{#2021-3-7}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkCellRendererState\" cell-renderer-state
   (:export t
    :type-initializer \"gtk_cell_renderer_state_get_type\")
@@ -139,7 +138,6 @@
   (:focused     #.(ash 1 4))
   (:expandable  #.(ash 1 5))
   (:expanded    #.(ash 1 6)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -173,14 +171,12 @@
       (liber:symbol-documentation 'cell-renderer-mode)
  "@version{#2021-3-7}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkCellRendererMode\" cell-renderer-mode
   (:export t
    :type-initializer \"gtk_cell_renderer_mode_get_type\")
   (:inert 0)
   (:activatable 1)
   (:editable 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

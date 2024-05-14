@@ -169,7 +169,6 @@
       (liber:symbol-documentation 'stack-transition-type)
  "@version{2024-4-14}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkStackTransitionType\" stack-transition-type
   (:export t
    :type-initializer \"gtk_stack_transition_type_get_type\")
@@ -196,7 +195,6 @@
   (:rotate-left 20)
   (:rotate-right 21)
   (:rotate-left-right 22))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

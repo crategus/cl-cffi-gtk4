@@ -102,7 +102,6 @@
       (liber:symbol-documentation 'application-inhibit-flags)
  "@version{2023-8-2}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkApplicationInhibitFlags\" application-inhibit-flags
   (:export t
    :type-initializer \"gtk_application_inhibit_flags_get_type\")
@@ -110,7 +109,6 @@
   (:switch  #.(ash 1 1))
   (:suspend #.(ash 1 2))
   (:idle    #.(ash 1 3)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

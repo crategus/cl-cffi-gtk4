@@ -171,13 +171,11 @@
       (liber:symbol-documentation 'notebook-tab)
  "@version{2024-4-16}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkNotebookTab\" notebook-tab
   (:export t
    :type-initializer \"gtk_notebook_tab_get_type\")
   (:tab-first 0)
   (:tab-last 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

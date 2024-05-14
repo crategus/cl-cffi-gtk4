@@ -81,14 +81,12 @@
       (liber:symbol-documentation 'string-filter-match-mode)
  "@version{2023-8-17}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkStringFilterMatchMode\" string-filter-match-mode
   (:export t
    :type-initializer \"gtk_string_filter_match_mode_get_type\")
   (:exact 0)
   (:substring 1)
   (:prefix 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

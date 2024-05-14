@@ -99,7 +99,6 @@
       (liber:symbol-documentation 'buttons-type)
  "@version{2024-5-1}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkButtonsType\" buttons-type
   (:export t
    :type-initializer \"gtk_buttons_type_get_type\")
@@ -109,7 +108,6 @@
   (:cancel 3)
   (:yes-no 4)
   (:ok-cancel 5))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

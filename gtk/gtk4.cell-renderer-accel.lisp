@@ -79,13 +79,11 @@
       (liber:symbol-documentation 'cell-renderer-accel-mode)
  "@version{2024-2-21}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkCellRendererAccelMode\" cell-renderer-accel-mode
   (:export t
    :type-initializer \"gtk_cell_renderer_accel_mode_get_type\")
   (:gtk 0)
   (:other 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

@@ -74,14 +74,12 @@
       (liber:symbol-documentation 'pad-action-type)
  "@version{2024-4-5}
     @begin{declaration}
-  @begin{pre}
 (gobject:define-g-enum \"GtkPadActionType\" pad-action-type
   (:export t
    :type-initializer \"gtk_pad_action_type_get_type\")
   :button
   :ring
   :strip)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

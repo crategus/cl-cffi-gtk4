@@ -286,7 +286,6 @@
       (liber:symbol-documentation 'style-context-print-flags)
  "@version{2023-8-30}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkStyleContextPrintFlags\" style-context-print-flags
   (:export t
    :type-initializer \"gtk_style_context_print_flags_get_type\")
@@ -294,7 +293,6 @@
   (:recurse #.(ash 1 0))
   (:show-style #.(ash 1 1))
   (:show-change #.(ash 1 2)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

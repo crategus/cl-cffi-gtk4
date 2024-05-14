@@ -101,7 +101,6 @@
       (liber:symbol-documentation 'font-level)
  "@version{2023-8-27}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkFontLevel\" font-level
   (:export t
    :type-initializer \"gtk_font_level_get_type\")
@@ -109,7 +108,6 @@
   (:face 1)
   (:font 2)
   (:features 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

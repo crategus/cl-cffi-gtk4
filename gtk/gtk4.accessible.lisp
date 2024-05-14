@@ -107,14 +107,12 @@
       (liber:symbol-documentation 'accessible-platform-state)
  "@version{2024-5-8}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAccessiblePlatformState\" accessible-platform-state
   (:export t
    :type-initializer \"gtk_accessible_platform_state_get_type\")
   (:focusable 0)
   (:focused 1)
   (:active 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

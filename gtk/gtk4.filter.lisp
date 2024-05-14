@@ -77,14 +77,12 @@
       (liber:symbol-documentation 'filter-match)
  "@version{2023-8-16}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkFilterMatch\" filter-match
   (:export t
    :type-initializer \"gtk_filter_match_get_type\")
   :some
   :none
   :all)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -122,14 +120,12 @@
       (liber:symbol-documentation 'filter-change)
  "@version{2023-8-16}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkFilterChange\" filter-change
   (:export t
    :type-initializer \"gtk_filter_change_get_type\")
   :different
   :less-strict
   :more-strict)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

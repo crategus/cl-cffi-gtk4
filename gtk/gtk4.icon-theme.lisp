@@ -103,7 +103,6 @@
       (liber:symbol-documentation 'icon-lookup-flags)
  "@version{2023-10-3}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkIconLookupFlags\" icon-lookup-flags
   (:export t
    :type-initializer \"gtk_icon_lookup_flags_get_type\")
@@ -111,7 +110,6 @@
   (:force-regular  #.(ash 1 0))
   (:force-symbolic #.(ash 1 1))
   (:preload        #.(ash 1 2)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

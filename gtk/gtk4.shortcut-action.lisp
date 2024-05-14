@@ -92,12 +92,10 @@
       (liber:symbol-documentation 'shortcut-action-flags)
  "@version{#2022-8-25}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkShortcutActionFlags\" shortcut-action-flags
   (:export t
    :type-initializer \"gtk_shortcut_action_flags_get_type\")
   (:exclusive #.(ash 1 0)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -572,7 +570,7 @@
 
 (defun named-action-new (name)
  #+liber-documentation
- "@version{#2022-8-26}
+ "@version{2024-5-13}
   @argument[name]{a string with the detailed name of the action}
   @return{The new @class{gtk:named-action} object.}
   @begin{short}

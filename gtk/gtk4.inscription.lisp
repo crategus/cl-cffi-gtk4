@@ -84,7 +84,6 @@
       (liber:symbol-documentation 'inscription-overflow)
  "@version{2024-4-25}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkInscriptionOverflow\" inscription-overflow
   (:export t
    :type-initializer \"gtk_inscription_overflow_get_type\")
@@ -92,7 +91,6 @@
   (:ellipsize-start 1)
   (:ellipsize-middle 2)
   (:ellipsize-end 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

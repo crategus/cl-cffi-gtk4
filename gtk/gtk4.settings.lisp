@@ -153,7 +153,6 @@
       (liber:symbol-documentation 'system-setting)
  "@version{2024-3-8}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSystemSetting\" system-setting
   (:export t
    :type-initializer \"gtk_system_setting_get_type\")
@@ -162,7 +161,6 @@
   :font-config
   :display
   :icon-theme)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

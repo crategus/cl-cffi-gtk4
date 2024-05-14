@@ -105,7 +105,6 @@
       (liber:symbol-documentation 'align)
  "@version{2024-4-19}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAlign\" align
   (:export t
    :type-initializer \"gtk_align_get_type\")
@@ -119,7 +118,6 @@
   (:baseline 4)
   #+gtk-4-12
   (:baseline-center 5))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -175,14 +173,12 @@
       (liber:symbol-documentation 'baseline-position)
  "@version{2024-4-7}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkBaselinePosition\" baseline-position
   (:export t
    :type-initializer \"gtk_baseline_position_get_type\")
   (:top 0)
   (:center 1)
   (:bottom 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -224,7 +220,6 @@
       (liber:symbol-documentation 'delete-type)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkDeleteType\" delete-type
   (:export t
    :type-initializer \"gtk_delete_type_get_type\")
@@ -236,7 +231,6 @@
   (:paragraph-ends 5)
   (:paragraphs 6)
   (:whitespace 7))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -282,7 +276,6 @@
       (liber:symbol-documentation 'direction-type)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkDirectionType\" direction-type
   (:export t
    :type-initializer \"gtk_direction_type_get_type\")
@@ -292,7 +285,6 @@
   (:down 3)
   (:left 4)
   (:right 5))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -323,14 +315,12 @@
       (liber:symbol-documentation 'icon-size)
  "@version{2023-9-20}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkIconSize\" icon-size
   (:export t
    :type-initializer \"gtk_icon_size_get_type\")
   (:inherit 0)
   (:normal 1)
   (:large 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -377,7 +367,6 @@
       (liber:symbol-documentation 'response-type)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkResponseType\" response-type
   (:export t
    :type-initializer \"gtk_response_type_get_type\")
@@ -392,7 +381,6 @@
   (:no -9)
   (:apply -10)
   (:help -11))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -436,14 +424,12 @@
       (liber:symbol-documentation 'sensitivity-type)
  "@version{2024-4-7}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSensitivityType\" sensitivity-type
   (:export t
    :type-initializer \"gtk_sensitivity_type_get_type\")
   (:auto 0)
   (:on 1)
   (:off 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -476,14 +462,12 @@
       (liber:symbol-documentation 'text-direction)
  "@version{2024-3-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkTextDirection\" text-direction
   (:export t
    :type-initializer \"gtk_text_direction_get_type\")
   (:none 0)
   (:ltr 1)
   (:rtl 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -516,7 +500,6 @@
       (liber:symbol-documentation 'justification)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkJustification\" justification
   (:export t
    :type-initializer \"gtk_justification_get_type\")
@@ -524,7 +507,6 @@
   (:right 1)
   (:center 2)
   (:fill 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -560,7 +542,6 @@
       (liber:symbol-documentation 'message-type)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkMessageType\" message-type
   (:export t
    :type-initializer \"gtk_message_type_get_type\")
@@ -569,7 +550,6 @@
   (:question 2)
   (:error 3)
   (:other 4))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -609,7 +589,6 @@
       (liber:symbol-documentation 'movement-step)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkMovementStep\" movement-step
   (:export t
    :type-initializer \"gtk_movement_step_get_type\")
@@ -623,7 +602,6 @@
   (:pages 7)
   (:buffer-ends 8)
   (:horizontal-pages 9))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -665,14 +643,12 @@
       (liber:symbol-documentation 'natural-wrap-mode)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkNaturalWrapMode\" natural-wrap-mode
   (:export t
    :type-initializer \"gtk_natural_wrap_mode_get_type\")
   (:inherit 0)
   (:none 1)
   (:word 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -717,8 +693,7 @@
       "GEnum"
       (liber:symbol-documentation 'scroll-step)
  "@version{2024-3-7}
-  @short{Passed as argument to various keybinding signals.}
-  @begin{pre}
+  @begin{declaration}
 (gobject:define-g-enum \"GtkScrollStep\" scroll-step
   (:export t
    :type-initializer \"gtk_scroll_step_get_type\")
@@ -728,7 +703,8 @@
   (:horizontal-steps 3)
   (:horizontal-pages 4)
   (:horizontal-ends 5))
-  @end{pre}")
+  @end{declaration}
+  @short{Passed as argument to various keybinding signals.}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkOrientation
@@ -746,13 +722,11 @@
       (liber:symbol-documentation 'orientation)
  "@version{2024-4-1}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkOrientation\" orientation
   (:export t
    :type-initializer \"gtk_orientation_get_type\")
   (:horizontal 0)
   (:vertical 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -786,13 +760,11 @@
       (liber:symbol-documentation 'overflow)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkOverflow\" overflow
   (:export t
    :type-initializer \"gtk_overflow_get_type\")
   (:visible 0)
   (:hidden 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -826,13 +798,11 @@
       (liber:symbol-documentation 'pack-type)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPackType\" pack-type
   (:export t
    :type-initializer \"gtk_pack_type_get_type\")
   (:start 0)
   (:end 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -864,7 +834,6 @@
       (liber:symbol-documentation 'position-type)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkPositionType\" position-type
   (:export t
    :type-initializer \"gtk_position_type_get_type\")
@@ -872,7 +841,6 @@
   (:right 1)
   (:top 2)
   (:bottom 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -920,7 +888,6 @@
       (liber:symbol-documentation 'scroll-type)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkScrollType\" scroll-type
   (:export t
    :type-initializer \"gtk_scroll_type_get_type\")
@@ -940,7 +907,6 @@
   (:page-right 13)
   (:start 14)
   (:end 15))
-    @end{pre}
   @end{declaration}
   @begin{short}
     The scrolling types of this enumeration are a parameter for signal
@@ -969,7 +935,6 @@
       (liber:symbol-documentation 'selection-mode)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSelectionMode\" gtk:selection-mode
   (:export t
    :type-initializer \"gtk_selection_mode_get_type\")
@@ -977,7 +942,6 @@
   (:single 1)
   (:browse 2)
   (:multiple 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1018,7 +982,6 @@
       (liber:symbol-documentation 'wrap-mode)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkWrapMode\" wrap-mode
   (:export t
    :type-initializer \"gtk_wrap_mode_get_type\")
@@ -1026,7 +989,6 @@
   (:char 1)
   (:word 2)
   (:word-char 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1060,13 +1022,11 @@
       (liber:symbol-documentation 'sort-type)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSortType\" sort-type
   (:export t
    :type-initializer \"gtk_sort_type_get_type\")
   (:ascending 0)
   (:descending 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1094,14 +1054,12 @@
       (liber:symbol-documentation 'ordering)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkOrdering\" ordering
   (:export t
    :type-initializer \"gtk_ordering_get_type\")
   (:smaller -1)
   (:equal 0)
   (:larger 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1138,7 +1096,6 @@
       (liber:symbol-documentation 'size-group-mode)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSizeGroupMode\" size-group-mode
   (:export t
    :type-initializer \"gtk_size_group_mode_get_type\")
@@ -1146,7 +1103,6 @@
   (:horizontal 1)
   (:vertical 2)
   (:both 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1180,14 +1136,12 @@
       (liber:symbol-documentation 'size-request-mode)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSizeRequestMode\" size-request-mode
   (:export t
    :type-initializer \"gtk_size_request_mode_get_type\")
   (:height-for-width 0)
   (:width-for-height 1)
   (:constant-size 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1234,7 +1188,6 @@
       (liber:symbol-documentation 'state-flags)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkStateFlags\" state-flags
   (:export t
    :type-initializer \"gtk_state_flags_get_type\")
@@ -1254,7 +1207,6 @@
   (:drop-active   #.(ash 1 12))
   (:focus-visible #.(ash 1 13))
   (:focus-within  #.(ash 1 14)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1309,7 +1261,6 @@
       (liber:symbol-documentation 'border-style)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkBorderStyle\" border-style
   (:export t
    :type-initializer \"gtk_border_style_get_type\")
@@ -1323,7 +1274,6 @@
   :double
   :groove
   :ridge)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1369,7 +1319,6 @@
       (liber:symbol-documentation 'input-purpose)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkInputPurpose\" input-purpose
   (:export t
    :type-initializer \"gtk_input_purpose_get_type\")
@@ -1384,7 +1333,6 @@
   (:password 8)
   (:pin 9)
   (:terminal 10))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1449,7 +1397,6 @@
       (liber:symbol-documentation 'input-hints)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkInputHints\" input-hints
   (:export t
    :type-initializer \"gtk_input_hints_get_type\")
@@ -1466,7 +1413,6 @@
   (:emoji               #.(ash 1 9))
   (:no-emoji            #.(ash 1 10))
   (:private             #.(ash 1 11)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1521,14 +1467,12 @@
       (liber:symbol-documentation 'pick-flags)
  "@version{2024-3-8}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-flags \"GtkPickFlags\" pick-flags
   (:export t
    :type-initializer \"gtk_pick_flags_get_type\")
   (:default 0)
   (:insensitive #.(ash 1 0))
   (:non-targetable #.(ash 1 1)))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1562,14 +1506,12 @@
       (liber:symbol-documentation 'constraint-relation)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkConstraintRelation\" constraint-relation
   (:export t
    :type-initializer \"gtk_constraint_relation_get_type\")
   (:le -1)
   (:eq 0)
   (:ge 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1600,7 +1542,6 @@
       (liber:symbol-documentation 'constraint-strength)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkConstraintStrength\" constraint-strength
   (:export t
    :type-initializer \"gtk_constraint_strength_get_type\")
@@ -1608,7 +1549,6 @@
   (:strong   1000000000)
   (:medium   1000)
   (:weak     1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1651,7 +1591,6 @@
       (liber:symbol-documentation 'constraint-attribute)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkConstraintAttribute\" constraint-attribute
   (:export t
    :type-initializer \"gtk_constraint_attribute_get_type\")
@@ -1667,7 +1606,6 @@
   :center-x
   :center-y
   :baseline)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1715,7 +1653,6 @@
       (liber:symbol-documentation 'constraint-vfl-parser-error)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkConstraintVflParserError\" constraint-vfl-parser-error
   (:export t
    :type-initializer \"gtk_constraint_vfl_parser_error\")
@@ -1725,7 +1662,6 @@
   :invalid-metric
   :invalid-priority
   :invalid-relation)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1762,7 +1698,6 @@
       (liber:symbol-documentation 'symbolic-color)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSymbolicColor\" symbolic-color
   (:export t
    :type-initializer \"gtk_symbolic_color_get_type\")
@@ -1770,7 +1705,6 @@
   (:error 1)
   (:warning 2)
   (:success 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -1883,7 +1817,6 @@
       (liber:symbol-documentation 'accessible-role)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAccessibleRole\" accessible-role
   (:export t
    :type-initializer \"gtk_accessible_role_get_type\")
@@ -1969,7 +1902,6 @@
   :toggle-button
   #+gtk-4-12
   :application)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -2110,7 +2042,6 @@
       (liber:symbol-documentation 'accessible-state)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAccessibleState\" gtk:accessible-state
   (:export t
    :type-initializer \"gtk_accessible_state_get_type\")
@@ -2124,7 +2055,6 @@
    :selected
    #+gtk-4-12
    :visited)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -2195,7 +2125,6 @@
       (liber:symbol-documentation 'accessible-property)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAccessibleProperty\" accessible-property
   (:export t
    :type-initializer \"gtk_accessible_property_get_type\")
@@ -2218,7 +2147,6 @@
   :value-min
   :value-now
   :value-text)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -2310,7 +2238,6 @@
       (liber:symbol-documentation 'accessible-relation)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAccessibleRelation\" accessible-relation
   (:export t
    :type-initializer \"gtk_accessible_relation_get_type\")
@@ -2332,7 +2259,6 @@
   :row-index-text
   :row-span
   :set-size)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -2404,14 +2330,12 @@
       (liber:symbol-documentation 'accessible-tristate)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAccessibleTristate\" accessible-tristate
   (:export t
    :type-initializer \"gtk_accessible_tristate_get_type\")
   :false
   :true
   :mixed)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -2446,7 +2370,6 @@
       (liber:symbol-documentation 'accessible-invalid-state)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAccessibleInvalidState\" accessible-invalid-state
   (:export t
    :type-initializer \"gtk_accessible_invalid_state_get_type\")
@@ -2454,7 +2377,6 @@
   :true
   :grammar
   :spelling)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -2490,7 +2412,6 @@
       (liber:symbol-documentation 'accessible-autocomplete)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAccessibleAutocomplete\" accessible-autocomplete
   (:export t
    :type-initializer \"gtk_accessible_autocomplete_get_type\")
@@ -2498,7 +2419,6 @@
   :inline
   :list
   :both)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -2540,7 +2460,6 @@
       (liber:symbol-documentation 'accessible-sort)
  "@version{2024-4-24}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkAccessibleSort\" accessible-sort
   (:export t
    :type-initializer \"gtk_accessible_sort_get_type\")
@@ -2548,7 +2467,6 @@
   :ascending
   :descending
   :other)
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

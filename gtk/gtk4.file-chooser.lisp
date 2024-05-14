@@ -102,14 +102,12 @@
       (liber:symbol-documentation 'file-chooser-action)
  "@version{2024-4-26}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkFileChooserAction\" gtk:file-chooser-action
   (:export t
    :type-initializer \"gtk_file_chooser_action_get_type\")
   (:open 0)
   (:save 1)
   (:select-folder 2))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

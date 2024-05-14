@@ -205,7 +205,7 @@
 
 (defun shortcut-new (trigger action)
  #+liber-documentation
- "@version{#2023-7-23}
+ "@version{2024-5-13}
   @argument[trigger]{a @class{gtk:shortcut-trigger} object that will trigger
     the shortcut}
   @argument[action]{a @class{gtk:shortcut-action} object that will be

@@ -124,13 +124,11 @@
       (liber:symbol-documentation 'spin-button-update-policy)
  "@version{2023-9-30}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSpinButtonUpdatePolicy\" spin-button-update-policy
   (:export t
    :type-initializer \"gtk_spin_button_update_policy_get_type\")
   (:always 0)
   (:if-valid 1))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -170,7 +168,6 @@
       (liber:symbol-documentation 'spin-type)
  "@version{2023-9-30}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkSpinType\" spin-type
   (:export t
    :type-initializer \"gtk_spin_type_get_type\")
@@ -181,7 +178,6 @@
   (:home 4)
   (:end 5)
   (:user-defined 6))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}

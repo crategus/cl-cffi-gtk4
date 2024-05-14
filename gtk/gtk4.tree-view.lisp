@@ -221,7 +221,6 @@
       (liber:symbol-documentation 'tree-view-drop-position)
  "@version{2024-4-27}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkTreeViewDropPosition\" tree-view-drop-position
   (:export t
    :type-initializer \"gtk_tree_view_drop_position_get_type\")
@@ -229,7 +228,6 @@
   (:after 1)
   (:into-or-before 2)
   (:into-or-after 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -263,7 +261,6 @@
       (liber:symbol-documentation 'tree-view-grid-lines)
  "@version{2024-4-27}
   @begin{declaration}
-    @begin{pre}
 (gobject:define-g-enum \"GtkTreeViewGridLines\" tree-view-grid-lines
   (:export t
    :type-initializer \"gtk_tree_view_grid_lines_get_type\")
@@ -271,7 +268,6 @@
   (:horizontal 1)
   (:vertical 2)
   (:both 3))
-    @end{pre}
   @end{declaration}
   @begin{values}
     @begin[code]{table}
