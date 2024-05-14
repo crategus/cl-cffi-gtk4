@@ -84,35 +84,33 @@
 
 ;;; --- Types and Values -------------------------------------------------------
 
-;;;     GtkBuilderError
-
 ;;;     GtkBuilder
 
 (test gtk-builder-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkBuilder"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:builder
           (glib:symbol-for-gtype "GtkBuilder")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkBuilder")
           (g:gtype (cffi:foreign-funcall "gtk_builder_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkBuilder")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkBuilder")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkBuilder")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("current-object" "scope" "translation-domain")
              (list-properties "GtkBuilder")))
-  ;; Check the list of signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkBuilder")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkBuilder" GTK-BUILDER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_builder_get_type")
@@ -151,21 +149,21 @@
   ;; Check Lisp extension for initializing builder
   (let ((builder (make-instance 'gtk:builder :from-string *stack-ui*)))
     (is (typep (gtk:builder-object builder "stack") 'gtk:stack)))
-  (let ((builder (make-instance 'gtk:builder
-                                :from-file
-                                (sys-path "resource/application.ui"))))
+  (let* ((path (glib-sys:sys-path "test/resource/application.ui"))
+         (builder (make-instance 'gtk:builder
+                                :from-file path)))
     (is (typep (gtk:builder-object builder "menubar") 'g:menu))))
 
 ;;;     gtk_builder_new_from_file
 
 (test gtk-builder-new-from-file
-  (is (typep (gtk:builder-new-from-file (sys-path "resource/application.ui") )
-             'gtk:builder)))
+  (let ((path (glib-sys:sys-path "test/resource/application.ui")))
+    (is (typep (gtk:builder-new-from-file path) 'gtk:builder))))
 
 ;;;     gtk_builder_new_from_resource
 
 (test gtk-builder-new-from-resource
-  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+  (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
     (is (typep (gtk:builder-new-from-resource "/com/crategus/test/stack.ui")
                'gtk:builder))))
 
@@ -177,14 +175,14 @@
 ;;;     gtk_builder_add_from_file
 
 (test gtk-builder-add-from-file
-  (let ((builder (gtk:builder-new)))
-    (is-true (gtk:builder-add-from-file builder
-                                        (sys-path "resource/application.ui")))))
+  (let ((path (glib-sys:sys-path "test/resource/application.ui"))
+        (builder (gtk:builder-new)))
+    (is-true (gtk:builder-add-from-file builder path))))
 
 ;;;     gtk_builder_add_from_resource
 
 (test gtk-builder-add-from-resource
-  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+  (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
     (let ((builder (gtk:builder-new)))
       (is-true (gtk:builder-add-from-resource builder
                                               "/com/crategus/test/stack.ui")))))
@@ -200,10 +198,9 @@
 ;;;     gtk_builder_add_objects_from_file
 
 (test gtk-builder-add-objects-from-file.1
-  (let ((builder (gtk:builder-new)))
-    (is-true (gtk:builder-add-objects-from-file builder
-                                                (sys-path "resource/stack.ui")
-                                                "window1"))
+  (let ((path (glib-sys:sys-path "test/resource/stack.ui"))
+        (builder (gtk:builder-new)))
+    (is-true (gtk:builder-add-objects-from-file builder path "window1"))
     (is (typep (gtk:builder-object builder "window1") 'gtk:window))
     (is (equal '(GTK:STACK-PAGE GTK:GRID GTK:CHECK-BUTTON GTK:STACK-SWITCHER
                  GTK:STACK-PAGE GTK:STACK-PAGE GTK:WINDOW GTK:IMAGE GTK:STACK
@@ -211,11 +208,9 @@
                (mapcar 'type-of (gtk:builder-objects builder))))))
 
 (test gtk-builder-add-objects-from-file.2
-  (let ((builder (gtk:builder-new)))
-    (is-true (gtk:builder-add-objects-from-file builder
-                                                (sys-path "resource/stack.ui")
-                                                "window1"
-                                                "stack"))
+  (let ((path (glib-sys:sys-path "test/resource/stack.ui"))
+        (builder (gtk:builder-new)))
+    (is-true (gtk:builder-add-objects-from-file builder path "window1" "stack"))
     (is (typep (gtk:builder-object builder "window1") 'gtk:window))
     (is (equal '(GTK:STACK-PAGE GTK:GRID GTK:CHECK-BUTTON GTK:STACK-SWITCHER
                  GTK:STACK-PAGE GTK:STACK-PAGE GTK:WINDOW GTK:IMAGE GTK:STACK
@@ -225,11 +220,12 @@
 ;;;     gtk_builder_add_objects_from_resource
 
 (test gtk-builder-add-objects-from-resource
-  (gio:with-g-resources (resource (sys-path "resource/rtest-resource.gresource"))
+  (g:with-resource (resource (glib-sys:sys-path "test/rtest-gtk4.gresource"))
     (let ((builder (gtk:builder-new)))
-      (is-true (gtk:builder-add-objects-from-resource builder
-                            "/com/crategus/test/stack.ui"
-                            "window1"))
+      (is-true (gtk:builder-add-objects-from-resource
+                       builder
+                       "/com/crategus/test/stack.ui"
+                       "window1"))
       (is (typep (gtk:builder-object builder "window1") 'gtk:window))
       (is (equal '(GTK:STACK-PAGE GTK:GRID GTK:CHECK-BUTTON GTK:STACK-SWITCHER
                    GTK:STACK-PAGE GTK:STACK-PAGE GTK:WINDOW GTK:IMAGE GTK:STACK
@@ -295,4 +291,4 @@
 ;;;     gtk_builder_value_from_string
 ;;;     gtk_builder_value_from_string_type
 
-;;; --- 2023-11-2 --------------------------------------------------------------
+;;; 2024-5-13
