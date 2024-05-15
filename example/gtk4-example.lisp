@@ -47,6 +47,7 @@
            #:do-fixed-layout
            #:do-constraint-simple
            #:do-constraint-interactive
+           #:do-constraint-builder
 
            ;; Display Widgets
            #:do-label-various
@@ -146,6 +147,7 @@
            #:do-clipboard
 
            ;; Miscellaneous
+           #:do-cursors
            #:do-size-group
            #:do-emblemed-icon
            #:do-event-controller
@@ -171,6 +173,8 @@
            ))
 
 (in-package :gtk4-example)
+
+(setf (glib-sys:get-current-package) "gtk4-example")
 
 (defvar *some-text*
         (format nil "One of the important things to remember about text in ~

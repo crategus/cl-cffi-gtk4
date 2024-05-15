@@ -269,40 +269,48 @@
        "gtk:widget-height"
        ))
 
-      ;; Layout Managers
-      "Layout Managers"
-      (("Fixed Layout"
-        ":window"
-        "DO-FIXED-LAYOUT"
-        "gtk4-example"
-        "fixed-layout.lisp"
-        :keywords
-        "GtkFixed"
-        "gtk:fixed"
-        "gtk:fixed-put"
-        "gtk:fixed-child-transform"
-        "gsk:transform"
-        "gsk:transform-new"
-        "gsk:transform-translate"
-        "gsk:transform-translate-3d"
-        "gsk:transform-perspective"
-        "gsk:transform-rotate-3d"
-        "graphene:point-t"
-        "graphene:point3d-t"
-        "graphene:point3d-init"
-        "graphene:vec3-x-axis"
-        "graphene:vec3-y-axis"
-        )
-        ("Simple Constraints"
-         ":window"
-         "DO-CONSTRAINT-SIMPLE"
-         "gtk4-example"
-         "constraint-simple.lisp")
-        ("Interactive Constraints"
-         ":window"
-         "DO-CONSTRAINT-INTERACTIVE"
-         "gtk4-example"
-         "constraint-interactive.lisp"))
+     ;; Layout Managers
+     "Layout Managers"
+     (("Fixed Layout"
+       ":window"
+       "DO-FIXED-LAYOUT"
+       "gtk4-example"
+       "fixed-layout.lisp"
+       :keywords
+       "GtkFixed"
+       "gtk:fixed"
+       "gtk:fixed-put"
+       "gtk:fixed-child-transform"
+       "gsk:transform"
+       "gsk:transform-new"
+       "gsk:transform-translate"
+       "gsk:transform-translate-3d"
+       "gsk:transform-perspective"
+       "gsk:transform-rotate-3d"
+       "graphene:point-t"
+       "graphene:point3d-t"
+       "graphene:point3d-init"
+       "graphene:vec3-x-axis"
+       "graphene:vec3-y-axis")
+      ("Simple Constraints"
+       ":window"
+       "DO-CONSTRAINT-SIMPLE"
+       "gtk4-example"
+       "constraint-simple.lisp")
+      ("Interactive Constraints"
+       ":window"
+       "DO-CONSTRAINT-INTERACTIVE"
+       "gtk4-example"
+       "constraint-interactive.lisp")
+      ("Constraints Builder"
+       ":window"
+       "DO-CONSTRAINT-BUILDER"
+       "gtk4-example"
+       "constraint-builder.lisp"
+       "resource/constraint-builder.ui"
+       :keywords
+       "GtkConstraintLayout"
+       "gtk:constraint-layout"))
 
      "Display Widgets"
      (("Various Label"
@@ -882,7 +890,16 @@
         "cairo-example"
         "draw-logo.lisp")))
      "Miscellaneous"
-     (("Size Groups"
+     (("Cursors"
+       ":window"
+       "DO-CURSORS"
+       "gtk4-example"
+       "cursors.lisp"
+       "resource/cursors.ui"
+       :keywords
+       "GdkCursor"
+       "gdk:cursor")
+      ("Size Groups"
        ":window"
        "DO-SIZE-GROUP"
        "gtk4-example"

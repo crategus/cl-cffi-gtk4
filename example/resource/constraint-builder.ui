@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <object class="GtkWindow" id="window1">
+  <object class="GtkWindow" id="window">
     <property name="title" translatable="yes">Constraints Builder</property>
     <property name="default-width">260</property>
     <child>

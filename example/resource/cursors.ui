@@ -646,7 +646,7 @@
   </object>
   <object class="GtkWindow" id="window">
     <property name="default-width">300</property>
-    <property name="default-height">300</property>
+    <property name="default-height">560</property>
     <property name="title">Cursors</property>
     <child>
       <object class="GtkScrolledWindow">
@@ -658,8 +658,8 @@
             <property name="orientation">vertical</property>
             <property name="margin-start">60</property>
             <property name="margin-end">60</property>
-            <property name="margin-top">60</property>
-            <property name="margin-bottom">60</property>
+            <property name="margin-top">24</property>
+            <property name="margin-bottom">24</property>
             <property name="spacing">10</property>
             <property name="halign">center</property>
             <child>

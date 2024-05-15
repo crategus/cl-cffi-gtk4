@@ -47,6 +47,7 @@
                (:file "fixed-layout")
                (:file "constraint-simple")
                (:file "constraint-interactive")
+               (:file "constraint-builder")
 
                ;; Display Widgets
                (:file "label-various")
@@ -141,6 +142,7 @@
                (:file "clipboard")
 
                ;; Miscellaneous
+               (:file "cursors")
                (:file "size-group")
                (:file "emblemed-icon")
 ;               (:file "event-controller")
