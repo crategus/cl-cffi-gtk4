@@ -153,22 +153,22 @@
   extra cells to the @class{gtk:tree-view} widget with completion matches.
 
   \"Completion functionality\" means that when the user modifies the text in
-  the entry, the @class{gtk:entry-completion} object checks which rows in the
-  model match the current content of the entry, and displays a list of matches.
-  By default, the matching is done by comparing the entry text
+  the text entry, the @class{gtk:entry-completion} object checks which rows in
+  the model match the current content of the text entry, and displays a list of
+  matches. By default, the matching is done by comparing the text
   case-insensitively against the text column of the model, see the
   @fun{gtk:entry-completion-text-column} function, but this can be overridden
   with a custom match function, see the
   @fun{gtk:entry-completion-set-match-func} function.
 
-  When the user selects a completion, the content of the entry is updated. By
-  default, the content of the entry is replaced by the text column of the
-  model, but this can be overridden by connecting to the
-  @code{\"match-selected\"} signal and updating the entry in the signal handler.
-  Note that you should return @em{true} from the signal handler to suppress the
-  default behaviour.
+  When the user selects a completion, the content of the text entry is updated.
+  By default, the content of the text entry is replaced by the text column of
+  the model, but this can be overridden by connecting to the
+  @code{\"match-selected\"} signal and updating the text entry in the signal
+  handler. Note that you should return @em{true} from the signal handler to
+  suppress the default behaviour.
 
-  To add completion functionality to an entry, use the
+  To add completion functionality to a text entry, use the
   @fun{gtk:entry-completion} function.
 
   The @class{gtk:entry-completion} object uses a @class{gtk:tree-model-filter}
@@ -193,7 +193,7 @@
 lambda (widget model iter)    :run-last
       @end{pre}
       Gets emitted when a match from the cursor is on a match of the list. The
-      default behaviour is to replace the contents of the entry with the
+      default behaviour is to replace the contents of the text entry with the
       contents of the text column in the row pointed to by @arg{iter}. Note
       that @arg{model} is the model that was passed to the
       @fun{gtk:entry-completion-model} function.
@@ -210,11 +210,11 @@ lambda (widget model iter)    :run-last
 lambda (widget prefix)    :run-last
       @end{pre}
       Gets emitted when the inline autocompletion is triggered. The default
-      behaviour is to make the entry display the whole prefix and select the
-      newly inserted part. Applications may connect to this signal in order to
-      insert only a smaller part of the prefix into the entry, e.g. the entry
-      used in the @class{gtk:file-chooser} widget inserts only the part of the
-      prefix up to the next '/'.
+      behaviour is to make the text entry display the whole prefix and select
+      the newly inserted part. Applications may connect to this signal in order
+      to insert only a smaller part of the prefix into the text entry, for
+      example, the text entry used in the @class{gtk:file-chooser} widget
+      inserts only the part of the prefix up to the next '/'.
       @begin[code]{table}
         @entry[widget]{The @class{gtk:entry-completion} object which received
           the signal.}
@@ -227,7 +227,7 @@ lambda (widget prefix)    :run-last
 lambda (widget model iter)    :run-last
       @end{pre}
       Gets emitted when a match from the list is selected. The default behaviour
-      is to replace the contents of the entry with the contents of the text
+      is to replace the contents of the text entry with the contents of the text
       column in the row pointed to by @arg{iter}. Note that @arg{model} is the
       model that was passed to the @fun{gtk:entry-completion-model} function.
       @begin[code]{table}
@@ -313,7 +313,7 @@ lambda (widget)    :run-last
  "The @code{inline-completion} property of type @code{:boolean} (Read / Write)
   @br{}
   Determines whether the common prefix of the possible completions should be
-  inserted automatically in the entry. Note that this requires the
+  inserted automatically in the text entry. Note that this requires the
   @slot[gtk:entry-completion]{text-column} property to be set, even if you are
   using a custom match function. @br{}
   Default value: @em{false}")
@@ -333,9 +333,8 @@ lambda (widget)    :run-last
   @end{short}
   The @fun{gtk:entry-completion-inline-completion} function returns whether the
   common prefix of the possible completions should be automatically inserted in
-  the entry. The @setf{gtk:entry-completion-inline-completion} function sets
-  whether the common prefix of the possible completions should be automatically
-  inserted in the entry.
+  the text entry. The @setf{gtk:entry-completion-inline-completion} function
+  sets the property.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -350,7 +349,7 @@ lambda (widget)    :run-last
  "The @code{inline-selection} property of type @code{:boolean} (Read / Write)
   @br{}
   Determines whether the possible completions on the popup will appear in the
-  entry as you navigate through them. @br{}
+  text entry as you navigate through them. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -369,7 +368,7 @@ lambda (widget)    :run-last
   The @fun{gtk:entry-completion-inline-selection} function returns @em{true} if
   inline selection mode is turned on. The
   @setf{gtk:entry-completion-inline-selection} function sets whether it is
-  possible to cycle through the possible completions inside the entry.
+  possible to cycle through the possible completions inside the text entry.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
@@ -401,10 +400,10 @@ lambda (widget)    :run-last
     Accessor of the @slot[gtk:entry-completion]{minimum-key-length} slot of the
     @class{gtk:entry-completion} class.
   @end{short}
-  The @fun{gtk:entry-completion-minimum-key-length} function returns the minimum
-  key length as set for the entry completion. The
+  The @fun{gtk:entry-completion-minimum-key-length} function returns the
+  minimum key length as set for the entry completion. The
   @setf{gtk:entry-completion-minimum-key-length} function sets the length of
-  the search key for completion to be at least @arg{length}.
+  the search key for the entry completion to be at least @arg{length}.
 
   This is useful for long lists, where completing using a small key takes a
   lot of time and will come up with meaningless results anyway, i.e., a too
@@ -502,15 +501,16 @@ lambda (widget)    :run-last
   @syntax{(setf (gtk:entry-completion-popup-set-width object) setting)}
   @argument[object]{a @class{gtk:entry-completion} object}
   @argument[setting]{@em{true} to make the width of the popup the same as the
-    entry}
+    text entry}
   @begin{short}
     Accessor of the @slot[gtk:entry-completion]{popup-set-width} slot of the
     @class{gtk:entry-completion} class.
   @end{short}
   The @fun{gtk:entry-completion-popup-set-width} function returns whether the
-  completion popup window will be resized to the width of the entry. The
+  completion popup window will be resized to the width of the text entry. The
   @setf{gtk:entry-completion-popup-set-width} function sets whether the
-  completion popup window will be resized to be the same width as the entry.
+  completion popup window will be resized to be the same width as the text
+  entry.
   @begin[Warning]{dictionary}
     The @class{gtk:entry-completion} implementation is deprecated since 4.10.
     This object will be removed in GTK 5.
