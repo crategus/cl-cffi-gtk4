@@ -16,6 +16,24 @@
       "main.ui"
       "main-listitem.ui"
       "gtk4-demo.xml")
+
+     "Application"
+     (("Simple Application"
+       ":application"
+       "APPLICATION-SIMPLE"
+       "gtk4-application"
+       "application-simple.lisp")
+      ("Application Menu"
+       ":application"
+       "APPLICATION-MENU"
+       "gtk4-application"
+       "application-menu.lisp")
+      ("Sunny"
+       ":application"
+       "SUNNY"
+       "gtk4-application"
+       "sunny.lisp"))
+
      "Theming in GTK"                                       ; Title
      (("CSS Accordion"                                      ; Title
        ":WINDOW"                                            ; Type
@@ -623,7 +641,15 @@
        ":window"
        "DO-DRAWING-AREA"
        "gtk4-example"
-       "drawing-area.lisp"))
+       "drawing-area.lisp")
+      ("Scribble on Drawing Area"
+       ":window"
+       "DO-DRAWING-AREA-SCRIBBLE"
+       "gtk4-example"
+       "drawing-area-scribble.lisp"
+       :keywords
+       "GtkDrawingArea"
+       "gtk:drawing-area"))
 
      "Ornaments"
      (("Frame"

@@ -269,6 +269,24 @@
           (;; Example called from a draw handler
            (eq functype :drawfunc)
            (window-draw-func title func application))
+          (;; Example is an application
+           (eq functype :application)
+           #+sbcl
+           (let ((app (format nil "(~a:~a)" package funcname)))
+             (format t "Launch ~a:~a~%" package funcname)
+             (uiop:launch-program (list "sbcl"
+                                        "--noinform"
+                                        "--eval"
+                                        "(asdf:load-system :gtk4-application)"
+                                        "--eval"
+                                        app
+                                        "--eval"
+                                        "(sb-ext:exit)")))
+           #-sbcl
+           (let* ((msg "Launch application only implemented for SBCL")
+                  (dialog (gtk:alert-dialog-new msg))
+                  (window (gtk:application-active-window application)))
+             (gtk:alert-dialog-show dialog window)))
           (t (format t "NO function found.")))))
 
 ;;; ----------------------------------------------------------------------------
@@ -474,11 +492,11 @@
   ;; Register resources
   (gio:with-resources ((resource1 (glib-sys:check-and-create-resources
                                          "gtk4-demo.xml"
-                                         "gtk4-demo"))
+                                         :package "gtk4-demo"))
                        (resource2 (glib-sys:check-and-create-resources
                                          "gtk4-example.xml"
-                                         "gtk4-example"
-                                         "resource/")))
+                                         :package "gtk4-example"
+                                         :sourcedir "resource/")))
     (let* (;; Create the application
            (app (make-instance 'gtk:application
                                :application-id "com.crategus.gtk4-demo"

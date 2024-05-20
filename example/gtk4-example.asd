@@ -131,6 +131,7 @@
 
                ;; Widgets for custom drawing
                (:file "drawing-area")
+               (:file "drawing-area-scribble")
 
                ;; Scrolling
                (:file "scrolled-window")

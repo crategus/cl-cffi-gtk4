@@ -9,6 +9,7 @@
                (:file "gtk4-demo-catalog")
                (:file "gtk4-demo"))
   :depends-on (:gtk4-example
+               :gtk4-application
                :pango-example
                :cairo-example))
 

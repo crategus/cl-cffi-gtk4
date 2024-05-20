@@ -136,6 +136,7 @@
 
            ;; Widgets for custom drawing
            #:do-drawing-area
+           #:do-drawing-area-scribble
 
            ;; Scrolling
            #:do-scrolled-window
@@ -255,9 +256,9 @@ sem venenatis, vitae ultricies arcu laoreet."))
 (defun run-example (func &optional (functype :window))
   ;; Load resources for the examples
   (g:with-resource (resource (glib-sys:check-and-create-resources
-                                     "gtk4-example.xml"     ; source
-                                     "gtk4-example"         ; package
-                                     "resource/"))          ; source directory
+                                     "gtk4-example.xml"
+                                     :package "gtk4-example"
+                                     :sourcedir "resource/"))
     (let (;; Create an application
           (app (make-instance 'gtk:application
                               :application-id "com.crategus.run-example"
