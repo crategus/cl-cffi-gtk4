@@ -661,6 +661,7 @@
 
      ;; Abstract Base Classes
      (:file "rtest-gtk4-widget")
+;    (:file "rtest-gtk4-widget-subclassing")
      (:file "rtest-gtk4-range")
 
      ;; Layout Containers
@@ -739,7 +740,7 @@
      (:file "rtest-gtk4-cell-renderer-text")
      (:file "rtest-gtk4-cell-renderer-accel")
      (:file "rtest-gtk4-cell-renderer-combo")
-;    (:file "gtk4.cell-renderer-pixbuf")
+     (:file "rtest-gtk4-cell-renderer-pixbuf")
      (:file "rtest-gtk4-cell-renderer-progress")
      (:file "rtest-gtk4-cell-renderer-spin")
      (:file "rtest-gtk4-cell-renderer-toggle")
@@ -750,7 +751,7 @@
      (:file "rtest-gtk4-cell-area-context")
 
      (:file "rtest-gtk4-list-store")
-;    (:file "gtk4.tree-store")
+     (:file "rtest-gtk4-tree-store")
 
      ;; Numeric and Text Data Entry
      (:file "rtest-gtk4-editable")

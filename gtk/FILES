@@ -147,7 +147,7 @@ Buttons and Toggles
 
 Numeric and Text Data Entry
 
-  gtk4.editable.lisp                   GtkEditable                    GTK 4.12&.
+  gtk4.editable.lisp                   GtkEditable                    GTK 4.12 &
   gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.12 .
   gtk4.text.lisp                       GtkText                        GTK 4.12 .
   gtk4.entry.lisp                      GtkEntry                       GTK 4.12 .
@@ -347,7 +347,7 @@ Deprecated
   gtk4.cell-area-context.lisp           GtkCellAreaContext            GTK 4.12 .
 
   gtk4.cell-editable.lisp               GtkCellEditable               GTK 4.12 .
-  gtk4.cell-renderer.lisp               GtkCellRenderer               GTK 4.12&.
+  gtk4.cell-renderer.lisp               GtkCellRenderer               GTK 4.12 .
   gtk4.cell-renderer-text.lisp          GtkCellRendererText           GTK 4.12 .
   gtk4.cell-renderer-accel.lisp         GtkCellRendererAccel          GTK 4.12 .
   gtk4.cell-renderer-combo.lisp         GtkCellRendererCombo          GTK 4.12 .
