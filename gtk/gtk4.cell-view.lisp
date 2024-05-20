@@ -109,11 +109,16 @@
     cell-view-model
     "model" "GtkTreeModel" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj cell-view) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:CELL-VIEW is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'cell-view 'type)
- "@version{#2021-5-4}
+ "@version{2024-5-20}
   @begin{short}
-    A @class{gtk:cell-view} widget displays a single row of a
+    The @class{gtk:cell-view} widget displays a single row of a
     @class{gtk:tree-model} object using a @class{gtk:cell-area} object and
     @class{gtk:cell-area-context} object.
   @end{short}
@@ -171,7 +176,7 @@
 (setf (liber:alias-for-function 'cell-view-cell-area)
       "Accessor"
       (documentation 'cell-view-cell-area 'function)
- "@version{#2021-5-4}
+ "@version{2024-5-20}
   @syntax{(gtk:cell-view-cell-area object) => cellarea}
   @syntax{(setf (gtk:cell-view-cell-area object) cellarea)}
   @argument[object]{a @class{gtk:cell-view} object}
@@ -180,10 +185,9 @@
     Accessor of the @slot[gtk:cell-view]{cell-area} slot of the
     @class{gtk:cell-view} class.
   @end{short}
-
-  The cell area rendering cells. If no cell area is specified when creating the
-  cell view with the @fun{gtk:cell-view-new-with-context} function a
-  horizontally oriented @class{gtk:cell-area-box} object will be used.
+  If no cell area is specified when creating the cell view with the
+  @fun{gtk:cell-view-new-with-context} function a horizontally oriented
+  @class{gtk:cell-area-box} object will be used.
   @begin[Warning]{dictionary}
     The @class{gtk:cell-view} implementation is deprecated since 4.10.
     Please do not use it in newly written code.
@@ -212,7 +216,7 @@
 (setf (liber:alias-for-function 'cell-view-cell-area-context)
       "Accessor"
       (documentation 'cell-view-cell-area-context 'function)
- "@version{#2021-5-4}
+ "@version{2024-5-20}
   @syntax{(gtk:cell-view-cell-area-context object) => context}
   @syntax{(setf (gtk:cell-view-cell-area-context object) context)}
   @argument[object]{a @class{gtk:cell-view} object}
@@ -221,12 +225,10 @@
     Accessor of the @slot[gtk:cell-view]{cell-area-context} slot of the
     @class{gtk:cell-view} class.
   @end{short}
-
-  The cell area used to compute the geometry of the cell view. A group of cell
-  views can be assigned the same context in order to ensure the sizes and cell
-  alignments match across all the views with the same context. The
-  @class{gtk:combo-box} menus uses this to assign the same context to all cell
-  views in the menu items for a single menu, each submenu creates its own
+  A group of cell views can be assigned the same context in order to ensure the
+  sizes and cell alignments match across all the views with the same context.
+  The @class{gtk:combo-box} menus uses this to assign the same context to all
+  cell views in the menu items for a single menu, each submenu creates its own
   context since the size of each submenu does not depend on parent or sibling
   menus.
   @begin[Warning]{dictionary}
@@ -240,8 +242,7 @@
 ;;; --- gtk:cell-view-draw-sensitive -------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "draw-sensitive"
-                                               'cell-view) t)
+(setf (documentation (liber:slot-documentation "draw-sensitive" 'cell-view) t)
  "The @code{draw-sensitive} property of type @code{:boolean} (Read / Write)
   @br{}
   Whether all cells should be draw as sensitive for this view regardless of
@@ -253,20 +254,18 @@
 (setf (liber:alias-for-function 'cell-view-draw-sensitive)
       "Accessor"
       (documentation 'cell-view-draw-sensitive 'function)
- "@version{#2021-5-4}
-  @syntax{(gtk:cell-view-draw-sensitive object) => draw-sensitive}
-  @syntax{(setf (gtk:cell-view-draw-sensitive object) draw-sensitive)}
+ "@version{2024-5-20}
+  @syntax{(gtk:cell-view-draw-sensitive object) => setting}
+  @syntax{(setf (gtk:cell-view-draw-sensitive object) setting)}
   @argument[object]{a @class{gtk:cell-view} object}
-  @argument[draw-sensitive]{a boolean whether to draw all cells in a sensitive
-    state}
+  @argument[setting]{a boolean whether to draw all cells in a sensitive state}
   @begin{short}
     Accessor of the @slot[gtk:tree-view]{draw-sensitive} slot of the
     @class{gtk:cell-view} class.
   @end{short}
   The @fun{gtk:cell-view-draw-sensitive} function gets whether the cell view is
   configured to draw all of its cells in a sensitive state. The
-  @setf{gtk:cell-view-draw-sensitive} function sets whether cell view should
-  draw all of its cells in a sensitive state.
+  @setf{gtk:cell-view-draw-sensitive} function sets the property.
 
   This is used by @class{gtk:combo-box} menus to ensure that rows with
   insensitive cells that contain children appear sensitive in the parent menu
@@ -292,17 +291,16 @@
 (setf (liber:alias-for-function 'cell-view-fit-model)
       "Accessor"
       (documentation 'cell-view-fit-model 'function)
- "@version{#2021-5-4}
-  @syntax{(gtk:cell-view-fit-model object) => fit-model}
-  @syntax{(setf (gtk:cell-view-fit-model object) fit-model)}
+ "@version{2024-5-20}
+  @syntax{(gtk:cell-view-fit-model object) => setting}
+  @syntax{(setf (gtk:cell-view-fit-model object) setting)}
   @argument[object]{a @class{gtk:cell-view} object}
-  @argument[fit-model]{whether the cell view should request space for the whole
+  @argument[setting]{whether the cell view should request space for the whole
     model}
   @begin{short}
     Accessor of the @slot[gtk:cell-view]{fit-model}  slot of the
     @class{gtk:cell-view} class.
   @end{short}
-
   The @fun{gtk:cell-view-fit-model} function gets whether the cell view is
   configured to request space to fit the entire @class{gtk:tree-model}
   object. The @setf{gtk:cell-view-fit-model} function sets the property.
@@ -328,7 +326,7 @@
 (setf (liber:alias-for-function 'cell-view-model)
       "Accessor"
       (documentation 'cell-view-model 'function)
- "@version{#2021-5-4}
+ "@version{2024-5-20}
   @syntax{(gtk:cell-view-model object) => model}
   @syntax{(setf (gtk:cell-view-model object) model)}
   @argument[object]{a @class{gtk:cell-view} object}
@@ -337,9 +335,8 @@
     Accessor of the @slot[gtk:cell-view]{model} slot of the
     @class{gtk:cell-view} class.
   @end{short}
-
-  The @fun{gtk:cell-view-model} function returns the model for the cell view. If
-  no model is used @code{nil} is returned. The @setf{gtk:cell-view-model}
+  The @fun{gtk:cell-view-model} function returns the model for the cell view.
+  If no model is used @code{nil} is returned. The @setf{gtk:cell-view-model}
   function sets the model. If the cell view already has a model set, it will
   remove it before setting the new model. If @arg{model} is @code{nil}, then it
   will unset the old model.
@@ -358,7 +355,7 @@
 
 (defun cell-view-new ()
  #+liber-documentation
- "@version{#2021-5-4}
+ "@version{2024-5-20}
   @return{The new @class{gtk:cell-view} widget.}
   @begin{short}
     Creates a new cell view.
@@ -380,7 +377,7 @@
 
 (defun cell-view-new-with-context (cellarea context)
  #+liber-documentation
- "@version{#2021-5-4}
+ "@version{2024-5-20}
   @argument[cellarea]{a @class{gtk:cell-area} object to layout cells}
   @argument[context]{a @class{gtk:cell-area-context} object in which to
     calculate cell geometry}
@@ -389,7 +386,6 @@
     Creates a new cell view with a specific cell area to layout cells and a
     specific cell area context.
   @end{short}
-
   Specifying the same context for a handfull of cells lets the underlying area
   synchronize the geometry for those cells, in this way alignments with cell
   views for other rows are possible.
@@ -413,7 +409,7 @@
 (cffi:defcfun ("gtk_cell_view_new_with_text" cell-view-new-with-text)
     (g:object cell-view)
  #+liber-documentation
- "@version{#2021-5-4}
+ "@version{2024-5-20}
   @argument[text]{a string with the text to display in the cell view}
   @return{The newly created @class{gtk:cell-view} widget.}
   @begin{short}
@@ -437,7 +433,7 @@
 (cffi:defcfun ("gtk_cell_view_new_with_markup" cell-view-new-with-markup)
     (g:object cell-view)
  #+liber-documentation
- "@version{#2021-5-4}
+ "@version{2024-5-20}
   @argument[markup]{a string with the text to display in the cell view}
   @return{The newly created @class{gtk:cell-view} widget.}
   @begin{short}
@@ -462,7 +458,7 @@
 (cffi:defcfun ("gtk_cell_view_new_with_texture" cell-view-new-with-texture)
     (g:object cell-view)
   #+liber-documentation
- "@version{#2021-5-4}
+ "@version{2024-5-20}
   @argument[texture]{a @class{gdk:texture} object with the image to display in
     the cell view}
   @return{The newly created @class{gtk:cell-view} widget.}
@@ -477,7 +473,7 @@
   @see-class{gtk:cell-view}
   @see-class{gdk:texture}
   @see-class{gtk:cell-renderer-pixbuf}"
-  (pixbuf (g:object gdk-pixbuf:pixbuf)))
+  (texture (g:object gdk:texture)))
 
 (export 'cell-view-new-with-texture)
 
@@ -496,18 +492,18 @@
 (cffi:defcfun ("gtk_cell_view_get_display_row" cell-view-displayed-row)
     (g:boxed tree-path :return)
  #+liber-documentation
- "@version{#2023-1-28}
+ "@version{#2024-5-20}
   @syntax{(gtk:cell-view-display-row cellview) => path}
   @syntax{(setf (gtk:cell-view-display-row cellview) path)}
   @argument[cellview]{a @class{gtk:cell-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance or @code{nil} to unset}
   @begin{short}
-    The @fun{gtk:cell-view-display-row} function returns a @class{gtk:tree-path}
-    instance referring to the currently displayed row.
+    The @fun{gtk:cell-view-displayed-row} function returns a
+    @class{gtk:tree-path} instance referring to the currently displayed row.
   @end{short}
   If no row is currently displayed, @code{nil} is returned.
 
-  The @setf{gtk:cell-view-display-row} function sets the row of the model that
+  The @setf{gtk:cell-view-displayed-row} function sets the row of the model that
   is currently displayed by the cell view. If the path is unset, then the
   contents of the cell view \"stick\" at their last value. This is not normally
   a desired result, but may be a needed intermediate state if say, the model
