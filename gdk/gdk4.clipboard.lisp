@@ -94,7 +94,7 @@
     "content" "GdkContentProvider" t nil)
    (display
     clipboard-display
-    "display" "GdkDisplay" t t)
+    "display" "GdkDisplay" t nil)
    (formats
     clipboard-formats
     "formats" "GdkContentFormats" t nil)
@@ -229,7 +229,7 @@ lambda (clipboard)    :run-last
 ;;; --- gdk:clipboard-local ----------------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "formats" 'clipboard) t)
+(setf (documentation (liber:slot-documentation "local" 'clipboard) t)
  "The @code{local} property of type @code{:boolean} (Read) @br{}
   @em{True} if the contents of the clipboard are owned by this process. @br{}
   Default value: @em{true}")
@@ -253,7 +253,7 @@ lambda (clipboard)    :run-last
   @see-function{gdk:clipboard-is-local}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_is_local ()
+;;; gdk_clipboard_is_local
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_is_local" clipboard-is-local) :boolean
@@ -274,7 +274,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-is-local)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_store_async ()
+;;; gdk_clipboard_store_async
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_store_async" %clipboard-store-async) :void
@@ -315,7 +315,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-store-async)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_store_finish ()
+;;; gdk_clipboard_store_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipoard_store_finish" %clipboard-store-finish) :boolean
@@ -407,7 +407,7 @@ lambda (clipboard)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_value_async ()
+;;; gdk_clipboard_read_value_async
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_read_value_async" %clipboard-read-value-async)
@@ -456,7 +456,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-read-value-async)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_value_finish ()
+;;; gdk_clipboard_read_value_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_read_value_finish" %clipboard-read-value-finish)
@@ -485,7 +485,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-read-value-finish)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_texture_async ()
+;;; gdk_clipboard_read_texture_async
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_read_texture_async"
@@ -528,7 +528,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-read-texture-async)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_texture_finish ()
+;;; gdk_clipboard_read_texture_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipoard_read_texture_finish"
@@ -557,7 +557,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-read-texture-finish)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_text_async ()
+;;; gdk_clipboard_read_text_async
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_read_text_async" %clipboard-read-text-async) :void
@@ -597,7 +597,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-read-text-async)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_read_text_finish ()
+;;; gdk_clipboard_read_text_finish
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipoard_read_text_finish"
@@ -657,7 +657,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-set-content)
 
 ;;; ----------------------------------------------------------------------------
-;;;gdk_clipboard_set ()
+;;;gdk_clipboard_set
 ;;; ----------------------------------------------------------------------------
 
 (defun clipboard-set (clipboard gtype value)
@@ -703,7 +703,7 @@ lambda (clipboard)    :run-last
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_set_value ()
+;;; gdk_clipboard_set_value
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_set_value" clipboard-set-value) :void
@@ -725,7 +725,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-set-value)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_set_text ()
+;;; gdk_clipboard_set_text
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_set_text" clipboard-set-text) :void
@@ -741,7 +741,7 @@ lambda (clipboard)    :run-last
 (export 'clipboard-set-text)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_clipboard_set_texture ()
+;;; gdk_clipboard_set_texture
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_clipboard_set_texture" clipboard-set-texture) :void
