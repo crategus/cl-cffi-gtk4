@@ -81,8 +81,6 @@
 ;;; GtkTreeStore
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Implement the missing interfaces
-
 (gobject:define-g-object-class "GtkTreeStore" tree-store
   (:superclass g:object
    :export t
@@ -94,9 +92,14 @@
    :type-initializer "gtk_tree_store_get_type")
   nil)
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj tree-store) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:TREE-STORE is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'tree-store 'type)
- "@version{#2021-3-3}
+ "@version{2024-5-16}
   @begin{short}
     The @class{gtk:tree-store} object is a list model for use with a
     @class{gtk:tree-view} widget.
@@ -109,7 +112,7 @@
     The @class{gtk:tree-store} implementation of the @class{gtk:buildable}
     interface allows to specify the model columns with a @code{<columns>}
     element that may contain multiple @code{<column>} elements, each specifying
-    one model column. The \"type\" attribute specifies the data type for
+    one model column. The @code{\"type\"} attribute specifies the data type for
     the column.
 
     @b{Example:} A UI Definition fragment for a tree store
@@ -150,11 +153,11 @@
 
 (declaim (inline tree-store-new))
 
-(defun tree-store-new (&rest column-types)
+(defun tree-store-new (&rest types)
  #+liber-documentation
- "@version{2022-11-24}
-  @argument[column-types]{all @class{g:type-t} types for the columns, from first
-    to last}
+ "@version{2024-5-16}
+  @argument[types]{all @class{g:type-t} types for the columns, from first to
+    last}
   @return{The new @class{gtk:tree-store} object.}
   @begin{short}
     Creates a new tree store as with columns of the types passed in.
@@ -163,8 +166,8 @@
   supported.
   @begin[Example]{dictionary}
     The following example creates a new @class{gtk:tree-store} object with
-    three columns, of type \"gint\", \"gchararray\", and \"GdkPixbuf\"
-    respectively.
+    three columns, of type @code{\"gint\"}, @code{\"gchararray\"}, and
+    @code{\"GdkPixbuf\"} respectively.
     @begin{pre}
 (gtk:tree-store-new \"gint\" \"gchararray\" \"GdkPixbuf\")
     @end{pre}
@@ -176,7 +179,7 @@
   @see-class{g:type-t}
   @see-class{gtk:tree-store}"
   (make-instance 'tree-store
-                 :column-types column-types))
+                 :column-types types))
 
 (export 'tree-store-new)
 
@@ -209,9 +212,9 @@
 
 (defun tree-store-set-column-types (store types)
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
-  @argument[types]{a list @class{g:type-t} types, one for each column}
+  @argument[types]{a list with the @class{g:type-t} types, one for each column}
   @begin{short}
     This function is meant primarily for GObjects that inherit from the
     @class{gtk:tree-store} class, and should only be used when constructing a
@@ -247,16 +250,16 @@
 
 (defun tree-store-set-value (store iter column value)
  #+liber-documentation
- "@version{#2021-3-3}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[iter]{a valid @class{gtk:tree-iter} iterator for the row being
     modified}
   @argument[column]{an integer with the column number to modify}
-  @argument[value]{new value for the cell}
+  @argument[value]{a new value for the cell}
   @begin{short}
     Sets the data in the cell specified by @arg{iter} and @arg{column}.
   @end{short}
-  The type of value must be convertible to the type of the column.
+  The type of @arg{value} must be convertible to the type of the column.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-store} implementation is deprecated since 4.10.
     Use the @class{gtk:tree-list-model} object instead.
@@ -281,11 +284,11 @@
 
 (defun tree-store-set (store iter &rest values)
  #+liber-documentation
- "@version{2022-11-24}
+ "@version{2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[iter]{a valid @class{gtk:tree-iter} iterator for the row being
     modified}
-  @argument[values]{the values to set}
+  @argument[values]{values to set}
   @return{The @class{gtk:tree-iter} iterator for the row being modified.}
   @begin{short}
     Sets the values of one or more cells in the row referenced by @arg{iter}.
@@ -370,24 +373,6 @@
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_tree_store_set_valuesv" %tree-store-set-valuesv) :void
- #+liber-documentation
- "@version{#2013-7-4}
-  @argument[tree-store]{a @class{gtk:tree-store} object}
-  @argument[iter]{a valid @class{gtk:tree-iter} for the row being modified}
-  @argument[columns]{an array of column numbers}
-  @argument[values]{an array of @symbol{g:value}'s}
-  @argument[n-values]{the length of the columns and values arrays}
-  @begin{short}
-    A variant of the @fun{gtk:tree-store-set} function which takes the columns
-    and values as two arrays. This function is mainly intended
-    for language bindings or in case the number of columns to change is not
-    known until run-time.
-  @end{short}
-  @begin[Warning]{dictionary}
-    The @class{gtk:tree-store} implementation is deprecated since 4.10.
-    Use the @class{gtk:tree-list-model} object instead.
-  @end{dictionary}
-  @see-function{gtk:tree-store-set}"
   (store (g:object tree-store))
   (iter (g:boxed tree-iter))
   (columns :pointer)
@@ -400,7 +385,7 @@
 
 (cffi:defcfun ("gtk_tree_store_remove" tree-store-remove) :boolean
  #+liber-documentation
- "@version{#2021-3-5}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[iter]{a valid @class{gtk:tree-iter} iterator}
   @return{@em{True} if @arg{iter} is still valid, @code{nil} if not.}
@@ -433,7 +418,7 @@
 
 (defun tree-store-insert (store parent position)
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[parent]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
   @argument[position]{an integer with the position to insert the new row}
@@ -475,7 +460,7 @@
 
 (defun tree-store-insert-before (store parent sibling)
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[parent]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
   @argument[sibling]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
@@ -517,7 +502,7 @@
 
 (defun tree-store-insert-after (store parent sibling)
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[parent]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
   @argument[sibling]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
@@ -553,7 +538,7 @@
 
 (defun tree-store-insert-with-values (store parent position &rest values)
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[parent]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
   @argument[position]{an integer with the position to insert the new row, or -1
@@ -621,25 +606,6 @@
 
 (cffi:defcfun ("gtk_tree_store_insert_with_valuesv"
                %tree-store-insert-with-valuesv) :void
- #+liber-documentation
- "@version{#2013-3-27}
-  @argument[tree_store]{A GtkTreeStore}
-  @argument[iter]{An unset GtkTreeIter to set the new row, or NULL.}
-  @argument[parent]{A valid GtkTreeIter, or NULL.}
-  @argument[position]{position to insert the new row}
-  @argument[columns]{an array of column numbers}
-  @argument[values]{an array of GValues}
-  @argument[n_values]{the length of the columns and values arrays}
-  @begin{short}
-    A variant of gtk_tree_store_insert_with_values() which takes the columns and
-    values as two arrays, instead of varargs. This function is mainly intended
-    for language bindings.
-  @end{short}
-  @begin[Warning]{dictionary}
-    The @class{gtk:tree-store} implementation is deprecated since 4.10.
-    Use the @class{gtk:tree-list-model} object instead.
-  @end{dictionary}
-  @see-class{gtk:tree-store}"
   (store (g:object tree-store))
   (iter (g:boxed tree-iter))
   (parent (g:boxed tree-iter))
@@ -659,7 +625,7 @@
 
 (defun tree-store-prepend (store parent)
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[parent]{a valid @class{gtk:tree-iter} iterator, or @code{nil}}
   @return{The @class{gtk:tree-iter} iterator.}
@@ -728,7 +694,7 @@
 
 (cffi:defcfun ("gtk_tree_store_is_ancestor" tree-store-is-ancestor) :boolean
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[iter]{a valid @class{gtk:tree-iter} iterator}
   @argument[descendant]{a valid @class{gtk:tree-iter} iterator}
@@ -756,7 +722,7 @@
 
 (cffi:defcfun ("gtk_tree_store_iter_depth" tree-store-iter-depth) :int
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[iter]{a valid @class{gtk:tree-iter} iterator}
   @return{The depth of @arg{iter}.}
@@ -782,7 +748,7 @@
 
 (cffi:defcfun ("gtk_tree_store_clear" tree-store-clear) :void
  #+liber-documentation
- "@version{#2021-3-5}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @short{Removes all rows from the tree store.}
   @begin[Warning]{dictionary}
@@ -800,7 +766,7 @@
 
 (cffi:defcfun ("gtk_tree_store_iter_is_valid" tree-store-iter-is-valid) :boolean
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
   @return{@em{True} if @arg{iter} is valid, @code{nil} if @arg{iter} is
@@ -809,9 +775,9 @@
     Checks if the given @arg{iter} is a valid iterator for this
     @class{gtk:tree-store} object.
   @end{short}
-  @begin[Warning]{dictionary}
+  @begin{notes}
     This function is slow. Only use it for debugging and/or testing purposes.
-  @end{dictionary}
+  @end{notes}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-store} implementation is deprecated since 4.10.
     Use the @class{gtk:tree-list-model} object instead.
@@ -834,7 +800,7 @@
 
 (defun tree-store-reorder (store parent order)
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:list-store} object}
   @argument[parent]{a @class{gtk:tree-iter} iterator}
   @argument[order]{a list of integer mapping the new position of each child row
@@ -865,7 +831,7 @@
 
 (cffi:defcfun ("gtk_tree_store_swap" tree-store-swap) :void
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[a]{a @class{gtk:tree-iter} iterator}
   @argument[b]{another @class{gtk:tree-iter} iterator}
@@ -891,7 +857,7 @@
 
 (cffi:defcfun ("gtk_tree_store_move_before" tree-store-move-before) :void
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store}}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
   @argument[position]{a @class{gtk:tree-iter} iterator or @code{nil}}
@@ -920,7 +886,7 @@
 
 (cffi:defcfun ("gtk_tree_store_move_after" tree-store-move-after) :void
  #+liber-documentation
- "@version{#2021-3-11}
+ "@version{#2024-5-16}
   @argument[store]{a @class{gtk:tree-store} object}
   @argument[iter]{a @class{gtk:tree-iter} iterator}
   @argument[position]{a @class{gtk:tree-iter} iterator}

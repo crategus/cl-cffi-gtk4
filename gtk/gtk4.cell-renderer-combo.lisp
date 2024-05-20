@@ -108,19 +108,19 @@ lambda (combo path iter)    :run-last
       @end{pre}
       The signal is emitted each time after the user selected an item in the
       combo box, either by using the mouse or the arrow keys. Contrary to the
-      @class{gtk:combo-box} widget, the \"changed\" signal is not emitted for
-      changes made to a selected item in the entry. The @arg{iter} argument
-      corresponds to the newly selected item in the combo box and it is relative
-      to the @class{gtk:tree-model} object set via the model property on the
-      @class{gtk:cell-renderer-combo} object. Note that as soon as you change
-      the model displayed in the tree view, the tree view will immediately cease
-      the editing operating. This means that you most probably want to refrain
-      from changing the model until the combo cell renderer emits the edited or
-      \"editing-canceled\" signal.
+      @class{gtk:combo-box} widget, the @code{\"changed\"} signal is not emitted
+      for changes made to a selected item in the text entry. The @arg{iter}
+      argument corresponds to the newly selected item in the combo box and it is
+      relative to the @class{gtk:tree-model} object set via the model property
+      on the @class{gtk:cell-renderer-combo} object. Note that as soon as you
+      change the model displayed in the tree view, the tree view will
+      immediately cease the editing operating. This means that you most probably
+      want to refrain from changing the model until the combo cell renderer
+      emits the edited or @code{\"editing-canceled\"} signal.
       @begin[code]{table}
         @entry[combo]{The @class{gtk:cell-renderer-combo} object on which the
           signal is emitted.}
-        @entry[path]{A string of the path identifying the edited cell, relative
+        @entry[path]{The string of the path identifying the edited cell, relative
           to the tree view model.}
         @entry[iter]{The @class{gtk:tree-iter} instance selected in the combo
            box, relative to the combo box model.}

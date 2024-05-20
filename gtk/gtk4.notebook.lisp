@@ -1096,32 +1096,32 @@ lambda (notebook page num)    :run-last
   (assert (typep menu '(or null g:object (member :default))))
   (case pos
     (:end
-      (if menu
-          (notebook-append-page-menu notebook
-                                         child
-                                         tab
-                                         (if (eq menu :default)
-                                             (cffi:null-pointer)
-                                             menu))
-          (notebook-append-page notebook child tab)))
+     (if menu
+         (notebook-append-page-menu notebook
+                                    child
+                                    tab
+                                    (if (eq menu :default)
+                                        (cffi:null-pointer)
+                                        menu))
+         (notebook-append-page notebook child tab)))
     (:start
      (if menu
          (notebook-prepend-page-menu notebook
-                                         child
-                                         tab
-                                         (if (eq menu :default)
-                                             (cffi:null-pointer)
-                                             menu))
+                                     child
+                                     tab
+                                     (if (eq menu :default)
+                                         (cffi:null-pointer)
+                                         menu))
          (notebook-prepend-page notebook child tab)))
     (otherwise
      (if menu
          (notebook-insert-page-menu notebook
-                                        child
-                                        tab
-                                        (if (eq menu :default)
-                                            (cffi:null-pointer)
-                                            menu)
-                                        pos)
+                                    child
+                                    tab
+                                    (if (eq menu :default)
+                                        (cffi:null-pointer)
+                                        menu)
+                                    pos)
          (notebook-insert-page notebook
                                    child
                                    tab
@@ -1431,7 +1431,7 @@ lambda (notebook page num)    :run-last
 (export 'notebook-nth-page)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_notebook_get_n_pages -> notebook-n-pages
+;;; gtk_notebook_get_n_pages
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_notebook_get_n_pages" notebook-n-pages) :int

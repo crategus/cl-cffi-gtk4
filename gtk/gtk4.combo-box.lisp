@@ -251,7 +251,7 @@ lambda (combo)    :run-last
       The signal is emitted when the active item is changed. The can be due to
       the user selecting a different item from the list, or due to a call to
       the @fun{gtk:combo-box-active-iter} function. It will also be emitted
-      while typing into the entry of a combo box with an entry.
+      while typing into the text entry of a combo box with an entry.
       @begin[code]{table}
         @entry[combo]{The @class{gtk:combo-box} widget that received the
           signal.}
@@ -263,11 +263,12 @@ lambda (combo pathstr)    :run-last
       A signal which allows you to change how the text displayed in a entry of
       the combo box is displayed. Connect a signal handler which returns an
       allocated string representing @arg{path}. That string will then be used
-      to set the text in the entry of the combo box. The default signal handler
-      uses the text from the @slot[gtk:combo-box]{entry-text-column} property
-      model column. Here is an example signal handler which fetches data from
-      the model and displays it in the entry. For combo boxes that are created
-      with an entry. See the @slot[gtk:combo-box]{has-entry} property.
+      to set the text in the text entry of the combo box. The default signal
+      handler uses the text from the @slot[gtk:combo-box]{entry-text-column}
+      property model column. Here is an example signal handler which fetches
+      data from the model and displays it in the text entry. For combo boxes
+      that are created with a text entry. See the
+      @slot[gtk:combo-box]{has-entry} property.
       @begin{pre}
 (defun format-entry-text-callback (combo pathstr)
   (let* ((model (gtk:combo-box-model combo))
@@ -568,7 +569,7 @@ lambda (combo)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-frame" 'combo-box) t)
  "The @code{has-frame} property of type @code{:boolean} (Read / Write) @br{}
-  Controls whether a frame is drawn around the entry. @br{}
+  Controls whether a frame is drawn around the text entry. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -579,12 +580,12 @@ lambda (combo)    :action
   @syntax{(gtk:combo-box-has-frame object) => setting}
   @syntax{(setf (gtk:combo-box-has-frame object) setting)}
   @argument[object]{a @class{gtk:combo-box} widget}
-  @argument[setting]{a boolean whether a frame is drawn around the entry}
+  @argument[setting]{a boolean whether a frame is drawn around the text entry}
   @begin{short}
     Accessor of the @slot[gtk:combo-box]{has-frame} slot of the
     @class{gtk:combo-box} class.
   @end{short}
-  Controls whether a frame is drawn around the entry.
+  Controls whether a frame is drawn around the text entry.
   @begin[Warning]{dictionary}
     The @class{gtk:combo-box} implementation is deprecated since 4.10. Use the
     @class{gtk:drop-down} widget instead.

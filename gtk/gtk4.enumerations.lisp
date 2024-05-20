@@ -1359,7 +1359,7 @@
   allowed characters, and does not replace input validation. It is fine for an
   on-screen keyboard to let the user override the character set restriction
   that is expressed by the purpose. The application is expected to validate
-  the entry contents, even if it specified a purpose.
+  the text entry contents, even if it specified a purpose.
 
   The difference between the @code{:digits} and @code{:number} values is that
   the former accepts only digits while the latter also some punctuation, like
@@ -1440,7 +1440,7 @@
     applications.
   @end{short}
   Note that input methods may already tailor their behaviour according to the
-  @symbol{gtk:input-purpose} value of the entry.
+  @symbol{gtk:input-purpose} value of the text entry.
 
   Some common sense is expected when using these flags - mixing
   @code{:lowercase} with any of the uppercase hints makes no sense.

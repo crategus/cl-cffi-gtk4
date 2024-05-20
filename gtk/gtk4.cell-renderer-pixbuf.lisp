@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -60,7 +60,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkCellRendererPixbuf
+;;; GtkCellRendererPixbuf
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkCellRendererPixbuf" cell-renderer-pixbuf
@@ -79,7 +79,7 @@
     "icon-size" "GtkIconSize" t t)
    (pixbuf
     cell-renderer-pixbuf-pixbuf
-    "pixbuf" "GdkPixbuf" t nil)
+    "pixbuf" "GdkPixbuf" nil t)
    (pixbuf-expander-closed
     cell-renderer-pixbuf-pixbuf-expander-closed
     "pixbuf-expander-closed" "GdkPixbuf" t t)
@@ -90,12 +90,17 @@
     cell-renderer-pixbuf-texture
     "texture" "GdkTexture" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj cell-renderer-pixbuf) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:CELL-RENDERER-PIXBUF is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'cell-renderer-pixbuf 'type)
- "@version{#2021-3-13}
+ "@version{2024-5-16}
   @begin{short}
-    A @class{gtk:cell-renderer-pixbuf} object can be used to render an image in
-    a cell.
+    The @class{gtk:cell-renderer-pixbuf} object can be used to render an image
+    in a cell.
   @end{short}
   It allows to render either a given @class{gdk-pixbuf:pixbuf} object, set via
   the @slot[gtk:cell-renderer-pixbuf]{pixbuf} property, or a named icon, set via
@@ -143,7 +148,7 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-gicon)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-gicon 'function)
- "@version{#2021-3-13}
+ "@version{2024-5-16}
   @syntax{(gtk:cell-renderer-pixbuf-gicon object) => icon}
   @syntax{(setf (gtk:cell-renderer-pixbuf-gicon object) icon)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
@@ -175,11 +180,11 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-icon-name)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-icon-name 'function)
- "@version{#2021-3-13}
-  @syntax{(gtk:cell-renderer-pixbuf-icon-name object) => icon-name}
-  @syntax{(setf (gtk:cell-renderer-pixbuf-icon-name object) icon-name)}
+ "@version{2024-5-16}
+  @syntax{(gtk:cell-renderer-pixbuf-icon-name object) => name}
+  @syntax{(setf (gtk:cell-renderer-pixbuf-icon-name object) name)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
-  @argument[icon-name]{a string with the name of the themed icon to display}
+  @argument[name]{a string with the name of the themed icon to display}
   @begin{short}
     Accessor of the @slot[gtk:cell-renderer-pixbuf]{icon-name} slot of the
     @class{gtk:cell-renderer-pixbuf} class.
@@ -206,7 +211,7 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-icon-size)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-icon-size 'function)
- "@version{#2022-7-28}
+ "@version{2024-5-16}
   @syntax{(gtk:cell-renderer-pixbuf-icon-size object) => size}
   @syntax{(setf (gtk:cell-renderer-pixbuf-icon-size object) size)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
@@ -228,16 +233,14 @@
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "pixbuf"
                                                'cell-renderer-pixbuf) t)
- "The @code{pixbuf} property of type  @class{gdk-pixbuf:pixbuf} (Read / Write)
-  @br{}
+ "The @code{pixbuf} property of type  @class{gdk-pixbuf:pixbuf} (Write) @br{}
   The pixbuf to render.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf 'function)
- "@version{#2021-3-13}
-  @syntax{(gtk:cell-renderer-pixbuf-pixbuf object) => pixbuf}
+ "@version{2024-5-16}
   @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
@@ -259,13 +262,13 @@
                                                'cell-renderer-pixbuf) t)
  "The @code{pixbuf-expander-closed} property of type @class{gdk-pixbuf:pixbuf}
   (Read / Write) @br{}
-  Pixbuf for closed expander.")
+  The pixbuf for the closed expander.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-closed)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-closed 'function)
- "@version{#2021-3-13}
+ "@version{2024-5-16}
   @syntax{(gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) => pixbuf}
   @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-closed object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
@@ -288,13 +291,13 @@
                                                'cell-renderer-pixbuf) t)
  "The @code{pixbuf-expander-open} property of type @class{gdk-pixbuf:pixbuf}
   (Read / Write) @br{}
-  Pixbuf for open expander.")
+  The pixbuf for the open expander.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-pixbuf-expander-open)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-pixbuf-expander-open 'function)
- "@version{#2021-3-13}
+ "@version{2024-5-16}
   @syntax{(gtk:cell-renderer-pixbuf-pixbuf-expander-open object) => pixbuf}
   @syntax{(setf (gtk:cell-renderer-pixbuf-pixbuf-expander-open object) pixbuf)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
@@ -322,7 +325,7 @@
 (setf (liber:alias-for-function 'cell-renderer-pixbuf-surface)
       "Accessor"
       (documentation 'cell-renderer-pixbuf-texture 'function)
- "@version{#2022-7-28}
+ "@version{2024-5-16}
   @syntax{(gtk:cell-renderer-pixbuf-texture object) => texture}
   @syntax{(setf (gtk:cell-renderer-pixbuf-texture object) texture)}
   @argument[object]{a @class{gtk:cell-renderer-pixbuf} object}
@@ -346,7 +349,7 @@
 
 (defun cell-renderer-pixbuf-new ()
  #+liber-documentation
- "@version{#2021-3-13}
+ "@version{2024-5-16}
   @return{The new @class{gtk:cell-renderer-pixbuf} object.}
   @begin{short}
     Creates a new cell renderer pixbuf.

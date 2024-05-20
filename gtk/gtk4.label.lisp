@@ -252,10 +252,10 @@
 (gtk:button-new-with-mnemonic \"_Hello\")
   @end{pre}
   To create a mnemonic for a widget alongside the label, such as a
-  @class{gtk:entry} widget, you have to point the label at the entry with the
-  @fun{gtk:label-mnemonic-widget} function:
+  @class{gtk:entry} widget, you have to point the label at the text entry with
+  the @fun{gtk:label-mnemonic-widget} function:
   @begin{pre}
-;; Pressing Alt+H will focus the entry
+;; Pressing Alt+H will focus the text entry
 (let ((entry (make-instance 'gtk:entry))
       (label (gtk:label-new-with-mnemonic \"_Hello\")))
    (setf (gtk:label-mnemonic-widget label) entry)
@@ -1410,9 +1410,10 @@ lambda (label step count extend)    :action
  "@version{2024-4-24}
   @argument[label]{a @class{gtk:label} widget}
   @begin{return}
-    @arg{start} -- an integer with the start of selection, as a character
+    @arg{start} -- an integer with the start of the selection, as a character
       offset @br{}
-    @arg{end} -- an integer with the end of selection, as a character offset
+    @arg{end} -- an integer with the end of the selection, as a character
+      offset
   @end{return}
   @begin{short}
     Gets the selected range of characters in the label.

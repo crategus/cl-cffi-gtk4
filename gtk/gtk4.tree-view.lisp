@@ -2171,7 +2171,7 @@ lambda (view)    :action
 
 (defun tree-view-path-at-pos (view x y)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2024-5-16}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[x]{an integer with the x position to be identified (relative to
     the bin window)}
@@ -2194,19 +2194,19 @@ lambda (view)    :action
   non-@code{nil}, then it will be filled with the @class{gtk:tree-path} instance
   at that point. If the @arg{column} argument is non-@code{nil}, then it will be
   filled with the column at that point. The @arg{xcell} and @arg{ycell} values
-  return the coordinates relative to the cell background (i.e. the
-  @code{background-area} passed to the @fun{gtk:cell-renderer-render} function).
-  This function is only meaningful if @arg{view} is realized. Therefore this
-  function will always return @em{false} if @arg{view} is not realized or does
-  not have a model.
+  return the coordinates relative to the cell background, for example, the
+  @code{background} argument passed to the @fun{gtk:cell-renderer-snapshot}
+  function. This function is only meaningful if @arg{view} is realized.
+  Therefore this function will always return @em{false} if @arg{view} is not
+  realized or does not have a model.
 
-  For converting widget coordinates, e.g. the ones you get from the
+  For converting widget coordinates, for example, the ones you get from the
   @code{\"query-tooltip\"} signal, please see the
   @fun{gtk:tree-view-convert-widget-to-bin-window-coords} function.
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-view-column}
-  @see-function{gtk:cell-renderer-render}
+  @see-function{gtk:cell-renderer-snapshot}
   @see-function{gtk:tree-view-bin-window}
   @see-function{gtk:tree-view-convert-widget-to-bin-window-coords}"
   (cffi:with-foreign-objects ((path :pointer)
@@ -2306,7 +2306,7 @@ lambda (view)    :action
 
 (defun tree-view-cell-area (view path column)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2024-5-16}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance for the row, or @code{nil}
     to get only horizontal coordinates}
@@ -2318,18 +2318,18 @@ lambda (view)    :action
     the row specified by @arg{path} and the column specified by @arg{column}.
   @end{short}
   If the @arg{path} argument is @code{nil}, or points to a path not currently
-  displayed, the @arg{y} and @arg{height} fields of the rectangle will be filled
-  with 0. If the @arg{column} argument is @code{nil}, the @arg{x} and
+  displayed, the @arg{y} and @arg{height} fields of the rectangle will be
+  filled with 0. If the @arg{column} argument is @code{nil}, the @arg{x} and
   @arg{width} fields will be filled with 0. The sum of all cell rectangles does
   not cover the entire tree. There are extra pixels in between rows, for
-  example. The returned rectangle is equivalent to the @arg{cell-area} passed
-  to the @fun{gtk:cell-renderer-render} function. This function is only valid
-  if the tree view is realized.
+  example. The returned rectangle is equivalent to the @arg{area} argument
+  passed to the @fun{gtk:cell-renderer-snapshot} function. This function is
+  only valid if the tree view is realized.
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-view-column}
   @see-class{gdk:rectangle}
-  @see-function{gtk:cell-renderer-render}"
+  @see-function{gtk:cell-renderer-snapshot}"
   (let ((rect (gdk:rectangle-new)))
     (%tree-view-cell-area view path column rect)
     rect))
@@ -2349,7 +2349,7 @@ lambda (view)    :action
 
 (defun tree-view-background-area (view path column)
  #+liber-documentation
- "@version{#2024-3-10}
+ "@version{#2024-5-16}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[path]{a @class{gtk:tree-path} instance for the row, or @code{nil}
     to get only horizontal coordinates}
@@ -2365,16 +2365,16 @@ lambda (view)    :action
   the tree, the @arg{y} and @arg{height} fields of the rectangle will be filled
   with 0. If the @arg{column} argument is @code{nil}, the @arg{x} and
   @arg{width} fields will be filled with 0. The returned rectangle is equivalent
-  to the @code{background-area} passed to the @fun{gtk:cell-renderer-render}
-  function. These background areas tile to cover the entire bin window. Contrast
-  with the @code{cell-area}, returned by the @fun{gtk:tree-view-cell-area}
-  function, which returns only the cell itself, excluding surrounding borders
-  and the tree expander area.
+  to the @code{background} argument passed to the
+  @fun{gtk:cell-renderer-snapshot} function. These background areas tile to
+  cover the entire bin window. Contrast with the @code{area} argument, returned
+  by the @fun{gtk:tree-view-cell-area} function, which returns only the cell
+  itself, excluding surrounding borders and the tree expander area.
   @see-class{gtk:tree-view}
   @see-class{gtk:tree-path}
   @see-class{gtk:tree-view-column}
   @see-class{gdk:rectangle}
-  @see-function{gtk:cell-renderer-render}
+  @see-function{gtk:cell-renderer-snapshot}
   @see-function{gtk:tree-view-cell-area}"
   (let ((rect (gdk:rectangle-new)))
     (%tree-view-background-area view path column rect)

@@ -952,7 +952,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "im-module" 'text-view) t)
  "The @code{im-module} property of type @code{:string} (Read / Write) @br{}
-  Which IM (input method) module should be used for this entry. See the
+  Which IM (input method) module should be used for the text view. See the
   @class{gtk:im-context} documentation. Setting this to a non-@code{nil} value
   overrides the system-wide IM module setting. See the
   @slot[gtk:settings]{gtk-im-module} setting. @br{}
@@ -966,12 +966,12 @@ lambda (view)    :action
   @syntax{(gtk:text-view-im-module object) => module}
   @syntax{(setf (gtk:text-view-im-module object) module)}
   @argument[object]{a @class{gtk:text-view} widget}
-  @argument[module]{a string with the IM module to use for the entry}
+  @argument[module]{a string with the IM module to use for the text view}
   @begin{short}
     Accessor of the @slot[gtk:text-view]{im-module} slot of the
     @class{gtk:text-view} class.
   @end{short}
-  Which IM (input method) module should be used for this entry. See the
+  Which IM (input method) module should be used for the text view. See the
   @class{gtk:im-context} class. Setting this to a non-@code{nil} value overrides
   the system-wide IM module setting. See the @slot[gtk:settings]{gtk-im-module}
   setting.

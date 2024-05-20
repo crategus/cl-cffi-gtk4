@@ -1179,8 +1179,8 @@ lambda (listbox)    :action
   @end{short}
   Call this when the result of the filter function on the list box is changed
   due to an external factor. For instance, this would be used if the filter
-  function just looked for a specific search string and the entry with the
-  search string has changed.
+  function just looked for a specific search string and the search entry with
+  the search string has changed.
   @see-class{gtk:list-box}
   @see-function{gtk:list-box-set-filter-func}"
   (listbox (g:object list-box)))

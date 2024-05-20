@@ -1228,8 +1228,8 @@ lambda (flowbox)    :action
 
   Call this function when the result of the filter function on the flow box is
   changed due ot an external factor. For instance, this would be used if the
-  filter function just looked for a specific search term, and the entry with
-  the string has changed.
+  filter function just looked for a specific search term, and the search entry
+  with the string has changed.
   @see-class{gtk:flow-box}
   @see-function{gtk:flow-box-set-filter-func}"
   (flowbox (g:object flow-box)))
