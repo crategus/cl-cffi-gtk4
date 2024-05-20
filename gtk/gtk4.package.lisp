@@ -1809,7 +1809,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Numeric and Text Data Entry]{section}
     @begin[GtkEditable]{subsection}
-      Interface for text-editing widgets.
       @about-symbol{editable-properties}
       @about-class{editable}
       @about-generic{editable-cursor-position}
@@ -1835,7 +1834,6 @@ GtkCellRenderer         GtkWidget
       @about-function{editable-property}
     @end{subsection}
     @begin[GtkEntryBuffer]{subsection}
-      Text buffer for the @class{gtk:entry} widget.
       @about-class{entry-buffer}
       @about-generic{entry-buffer-length}
       @about-generic{entry-buffer-max-length}
@@ -1848,7 +1846,6 @@ GtkCellRenderer         GtkWidget
       @about-function{entry-buffer-emit-inserted-text}
     @end{subsection}
     @begin[GtkText]{subsection}
-      A simple single-line text entry field.
       @about-class{text}
       @about-generic{text-activates-default}
       @about-generic{text-attributes}
@@ -1876,7 +1873,6 @@ GtkCellRenderer         GtkWidget
       @about-function{text-compute-cursor-extents}
     @end{subsection}
     @begin[GtkEntry]{subsection}
-      A single line text entry field.
       @about-symbol{entry-icon-position}
       @about-class{entry}
       @about-generic{entry-activates-default}
@@ -1942,7 +1938,6 @@ GtkCellRenderer         GtkWidget
       @about-function{entry-grab-focus-without-selecting}
     @end{subsection}
     @begin[GtkPasswordEntry]{subsection}
-      An entry for secrets.
       @about-class{password-entry-buffer}
       @about-function{password-entry-buffer-new}
       @about-class{password-entry}
@@ -1953,7 +1948,6 @@ GtkCellRenderer         GtkWidget
       @about-function{password-entry-new}
     @end{subsection}
     @begin[GtkScale]{subsection}
-      A slider widget for selecting a value from a range.
       @about-class{scale}
       @about-generic{scale-digits}
       @about-generic{scale-draw-value}
@@ -1969,7 +1963,6 @@ GtkCellRenderer         GtkWidget
       @about-function{scale-clear-marks}
     @end{subsection}
     @begin[GtkSpinButton]{subsection}
-      Retrieve an integer or floating-point number from the user.
       @about-symbol{spin-button-update-policy}
       @about-symbol{spin-type}
       @about-class{spin-button}
@@ -1992,7 +1985,6 @@ GtkCellRenderer         GtkWidget
       @about-function{spin-button-update}
     @end{subsection}
     @begin[GtkSearchEntry]{subsection}
-      An entry which shows a search icon.
       @about-class{search-entry}
       @about-generic{search-entry-activates-default}
       @about-generic{search-entry-placeholder-text}
@@ -2000,7 +1992,6 @@ GtkCellRenderer         GtkWidget
       @about-function{search-entry-key-capture-widget}
     @end{subsection}
     @begin[GtkSearchBar]{subsection}
-      A toolbar to integrate a search entry with.
       @about-class{search-bar}
       @about-generic{search-bar-child}
       @about-generic{search-bar-key-capture-widget}
@@ -2011,7 +2002,6 @@ GtkCellRenderer         GtkWidget
       @about-function{search-bar-search-mode}
     @end{subsection}
     @begin[GtkEditableLabel]{subsection}
-      A label that can be edited.
       @about-class{editable-label}
       @about-generic{editable-label-editing}
       @about-function{editable-label-new}
@@ -4418,7 +4408,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-editable-remove-widget}
     @end{subsection}
     @begin[GtkCellRenderer]{subsection}
-      An object for rendering a single cell.
       @about-symbol{cell-renderer-state}
       @about-symbol{cell-renderer-mode}
       @about-class{cell-renderer}
@@ -4455,7 +4444,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-renderer-request-mode}
     @end{subsection}
     @begin[GtkCellRendererText]{subsection}
-      Renders text in a cell.
       @about-class{cell-renderer-text}
       @about-generic{cell-renderer-text-align-set}
       @about-generic{cell-renderer-text-alignment}
@@ -4507,7 +4495,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-renderer-text-set-fixed-height-from-font}
     @end{subsection}
     @begin[GtkCellRendererAccel]{subsection}
-      Renders a keyboard accelerator in a cell.
       @about-symbol{cell-renderer-accel-mode}
       @about-class{cell-renderer-accel}
       @about-generic{cell-renderer-accel-accel-key}
@@ -4517,7 +4504,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-renderer-accel-new}
     @end{subsection}
     @begin[GtkCellRendererCombo]{subsection}
-      Renders a combobox in a cell.
       @about-class{cell-renderer-combo}
       @about-generic{cell-renderer-combo-has-entry}
       @about-generic{cell-renderer-combo-model}
@@ -4525,7 +4511,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-renderer-combo-new}
     @end{subsection}
     @begin[GtkCellRendererPixbuf]{subsection}
-      Renders a pixbuf in a cell.
       @about-class{cell-renderer-pixbuf}
       @about-generic{cell-renderer-pixbuf-gicon}
       @about-generic{cell-renderer-pixbuf-icon-name}
@@ -4537,7 +4522,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-renderer-pixbuf-new}
     @end{subsection}
     @begin[GtkCellRendererProgress]{subsection}
-      Renders numbers as progress bars.
       @about-class{cell-renderer-progress}
       @about-generic{cell-renderer-progress-inverted}
       @about-generic{cell-renderer-progress-pulse}
@@ -4548,7 +4532,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-renderer-progress-new}
     @end{subsection}
     @begin[GtkCellRendererSpin]{subsection}
-      Renders a spin button in a cell.
       @about-class{cell-renderer-spin}
       @about-generic{cell-renderer-spin-adjustment}
       @about-generic{cell-renderer-spin-climb-rate}
@@ -4556,7 +4539,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-renderer-spin-new}
     @end{subsection}
     @begin[GtkCellRendererToggle]{subsection}
-      Renders a toggle button in a cell.
       @about-class{cell-renderer-toggle}
       @about-generic{cell-renderer-toggle-activatable}
       @about-generic{cell-renderer-toggle-active}
@@ -4565,7 +4547,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-renderer-toggle-new}
     @end{subsection}
     @begin[GtkCellRendererSpinner]{subsection}
-      Renders a spinning animation in a cell.
       @about-class{cell-renderer-spinner}
       @about-generic{cell-renderer-spinner-active}
       @about-generic{cell-renderer-spinner-pulse}
@@ -4573,7 +4554,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-renderer-spinner-new}
     @end{subsection}
     @begin[GtkListStore]{subsection}
-      A list-like data structure that can be used with the GtkTreeView.
       @about-class{list-store}
       @about-function{list-store-new}
       @about-function{list-store-newv}
@@ -4598,8 +4578,6 @@ GtkCellRenderer         GtkWidget
       @about-function{list-store-move-after}
     @end{subsection}
     @begin[GtkTreeStore]{subsection}
-      A tree-like data structure that can be used with the @class{gtk:tree-view}
-      widget.
       @about-class{tree-store}
       @about-function{tree-store-new}
       @about-function{tree-store-newv}

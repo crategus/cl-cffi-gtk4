@@ -29,7 +29,7 @@
 ;;;
 ;;; GtkEntry
 ;;;
-;;;     A single line text entry field
+;;;     A single line text entry
 ;;;
 ;;; Types and Values
 ;;;
@@ -195,14 +195,14 @@
   @end{declaration}
   @begin{values}
     @begin[code]{table}
-      @entry[:primary]{At the beginning of the entry, depending on the text
-        direction.}
-      @entry[:secondary]{At the end of the entry, depending on the text
+      @entry[:primary]{At the beginning of the text entry, depending on the
+        text direction.}
+      @entry[:secondary]{At the end of the text entry, depending on the text
         direction.}
     @end{table}
   @end{values}
   @begin{short}
-    Specifies the side of the entry at which an icon is placed.
+    Specifies the side of the text entry at which an icon is placed.
   @end{short}
   @see-class{gtk:entry}")
 
@@ -341,7 +341,7 @@
 (setf (documentation 'entry 'type)
  "@version{2023-9-16}
   @begin{short}
-    The @class{gtk:entry} widget is a single line text entry widget.
+    The @class{gtk:entry} widget is a single line text entry.
   @end{short}
   A fairly large set of key bindings are supported by default. If the entered
   text is longer than the allocation of the widget, the widget will scroll so
@@ -349,34 +349,34 @@
 
   @image[entry]{Figure: GtkEntry}
 
-  When using an entry for passwords and other sensitive information, it can be
-  put into \"password mode\" using the @fun{gtk:entry-visibility} function. In
-  this mode, entered text is displayed using a 'invisible' character. By
+  When using a text entry for passwords and other sensitive information, it can
+  be put into \"password mode\" using the @fun{gtk:entry-visibility} function.
+  In this mode, entered text is displayed using a 'invisible' character. By
   default, GTK picks the best invisible character that is available in the
   current font, but it can be changed with the @fun{gtk:entry-invisible-char}
   function.
 
   The @class{gtk:entry} widget has the ability to display progress or activity
-  information behind the text. To make an entry display such information, use
-  the @fun{gtk:entry-progress-fraction} or @fun{gtk:entry-progress-pulse-step}
-  functions.
+  information behind the text. To make a text entry display such information,
+  use the @fun{gtk:entry-progress-fraction} or
+  @fun{gtk:entry-progress-pulse-step} functions.
 
   Additionally, the @class{gtk:entry} widget can show icons at either side of
-  the entry. These icons can be activatable by clicking, can be set up as drag
-  source and can have tooltips. To add an icon, use the
+  the text entry. These icons can be activatable by clicking, can be set up as
+  drag source and can have tooltips. To add an icon, use the
   @fun{gtk:entry-set-icon-from-gicon} function or one of the various other
   functions that set an icon from an icon name or a paintable. To trigger an
-  action when the user clicks an icon, connect to the \"icon-press\" signal. To
-  allow DND operations from an icon, use the
+  action when the user clicks an icon, connect to the @code{\"icon-press\"}
+  signal. To allow DND operations from an icon, use the
   @fun{gtk:entry-set-icon-drag-source} function. To set a tooltip on an icon,
   use the @fun{gtk:entry-icon-tooltip-text} function or the corresponding
   function for markup.
 
   Note that functionality or information that is only available by clicking on
-  an icon in an entry may not be accessible at all to users which are not able
-  to use a mouse or other pointing device. It is therefore recommended that
-  any such functionality should also be available by other means, e.g. via the
-  context menu of the entry.
+  an icon in an text entry may not be accessible at all to users which are not
+  able to use a mouse or other pointing device. It is therefore recommended that
+  any such functionality should also be available by other means, for example,
+  via the context menu of the text entry.
   @begin[CSS nodes]{dictionary}
     @begin{pre}
 entry[.flat][.warning][.error]
@@ -386,17 +386,18 @@ entry[.flat][.warning][.error]
 ╰── [progress[.pulse]]
     @end{pre}
     The @class{gtk:entry} implementation has a main node with the name
-    @code{entry}. Depending on the properties of the entry, the
+    @code{entry}. Depending on the properties of the text entry, the
     @code{.read-only} and @code{.flat} style classes may appear. The
     @code{.warning} and @code{.error} style classes may also be used with
     entries.
 
-    When the entry shows icons, it adds subnodes with the name @code{image}
+    When the text entry shows icons, it adds subnodes with the name @code{image}
     and the @code{.left} or @code{.right} style class, depending on where the
     icon appears.
 
-    When the entry shows progress, it adds a subnode with the name progress. The
-    node has the @code{.pulse} style class when the shown progress is pulsing.
+    When the text entry shows progress, it adds a subnode with the name
+    progress. The node has the @code{.pulse} style class when the shown
+    progress is pulsing.
 
     For all the subnodes added to the text node in various situations, see the
     @class{gtk:text} widget.
@@ -432,8 +433,8 @@ entry[.flat][.warning][.error]
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      A keybinding signal which gets emitted when the user activates the entry.
-      Applications should not connect to it, but may emit it with the
+      A keybinding signal which gets emitted when the user activates the text
+      entry. Applications should not connect to it, but may emit it with the
       @fun{g:signal-emit} function if they need to control activation
       programmatically. The default bindings for this signal are all forms of
       the @kbd{Enter} key.
@@ -541,9 +542,9 @@ lambda (entry pos)    :run-last
   the default widget, when the @kbd{Enter} key is pressed.
 
   If the @arg{setting} argument is @em{true}, pressing the @kbd{Enter} key in
-  the entry will activate the default widget for the window containing the
-  entry. This usually means that the dialog box containing the entry will be
-  closed, since the default widget is usually one of the dialog buttons.
+  the text entry will activate the default widget for the window containing the
+  text entry. This usually means that the dialog box containing the text entry
+  will be closed, since the default widget is usually one of the dialog buttons.
   @see-class{gtk:entry}")
 
 ;;; --- gtk:entry-attributes ---------------------------------------------------
@@ -552,11 +553,11 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "attributes" 'entry) t)
  "The @code{attributes} property of type @class{pango:attr-list} (Read / Write)
   @br{}
-  A list of Pango attributes to apply to the text of the entry. This is mainly
-  useful to change the size or weight of the text. The @code{start-index} and
-  @code{end-index} of the @class{pango:attribute} instance must refer to the
-  text of the @class{gtk:entry-buffer} object, i.e. without the preedit
-  string.")
+  The list of Pango attributes to apply to the text of the text entry. This is
+  mainly useful to change the size or weight of the text. The @code{start-index}
+  and @code{end-index} of the @class{pango:attribute} structure must refer to
+  the text of the @class{gtk:entry-buffer} object, for example, without the
+  preedit string.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'entry-attributes)
@@ -572,8 +573,8 @@ lambda (entry pos)    :run-last
     class.
   @end{short}
   The @fun{gtk:entry-attributes} function gets the attribute list, if any. The
-  @setf{gtk:entry-attributes} function sets a attributes list. The attributes in
-  the list are applied to the entry text.
+  @setf{gtk:entry-attributes} function sets a attributes list. The attributes
+  in the list are applied to the text of the text entry.
   @see-class{gtk:entry}
   @see-class{pango:attr-list}")
 
@@ -583,7 +584,7 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "buffer" 'entry) t)
  "The @code{buffer} property of type @class{gtk:entry-buffer}
   (Read / Write / Construct) @br{}
-  Text buffer object which actually stores entry text.")
+  The entry buffer which actually stores the text for the text entry.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'entry-buffer)
@@ -599,7 +600,8 @@ lambda (entry pos)    :run-last
     class.
   @end{short}
   The @fun{gtk:entry-buffer} function gets the entry buffer which holds the text
-  for the entry. The @setf{gtk:entry-buffer} function sets the entry buffer.
+  for the text entry. The @setf{gtk:entry-buffer} function sets the entry
+  buffer.
   @see-class{gtk:entry}
   @see-class{gtk:entry-buffer}")
 
@@ -625,8 +627,8 @@ lambda (entry pos)    :run-last
     class.
   @end{short}
   The @fun{gtk:entry-completion} function returns the auxiliary completion
-  object currently in use by the entry. The @setf{gtk:entry-completion} function
-  sets the auxiliary completion object.
+  object currently in use by the text entry. The @setf{gtk:entry-completion}
+  function sets the auxiliary completion object.
 
   All further configuration of the completion mechanism is done on
   @arg{completion} using the @class{gtk:entry-completion} API. Completion is
@@ -687,7 +689,7 @@ lambda (entry pos)    :run-last
   @end{short}
   The @fun{gtk:entry-extra-menu} function gets the menu model. The
   @setf{gtk:entry-extra-menu} function sets a menu model to add when
-  constructing the context menu for the text entry field.
+  constructing the context menu for the text entry.
   @see-class{gtk:entry}
   @see-class{g:menu-model}")
 
@@ -696,7 +698,7 @@ lambda (entry pos)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "has-frame" 'entry) t)
  "The @code{has-frame} property of type @code{:boolean} (Read / Write) @br{}
-  @em{False} removes outside bevel from the text entry field. @br{}
+  @em{False} removes outside bevel from the text entry. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -713,8 +715,8 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{has-frame} slot of the @class{gtk:entry}
     class.
   @end{short}
-  The @fun{gtk:entry-has-frame} function returns whether the text entry field
-  has a beveled frame. The @setf{gtk:entry-has-frame} function sets whether the
+  The @fun{gtk:entry-has-frame} function returns whether the text entry has a
+  beveled frame. The @setf{gtk:entry-has-frame} function sets whether the the
   entry has a beveled frame around it.
   @see-class{gtk:entry}")
 
@@ -723,7 +725,7 @@ lambda (entry pos)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "im-module" 'entry) t)
  "The @code{im-module} property of type @code{:string} (Read / Write) @br{}
-  Which IM input method module should be used for this text entry field. See the
+  The IM (Input Method) module that should be used for the text entry. See the
   @class{gtk:im-context} documentation. Setting this to a non-@code{nil} value
   overrides the system-wide IM module setting. See the
   @slot[gtk:settings]{gtk-im-module} setting. @br{}
@@ -737,13 +739,13 @@ lambda (entry pos)    :run-last
   @syntax{(gtk:entry-im-module object) => setting}
   @syntax{(setf (gtk:entry-im-module object) setting)}
   @argument[object]{a @class{gtk:entry} widget}
-  @argument[setting]{a string which IM input method module should be used for
-    the entry}
+  @argument[setting]{a string with the IM (Input Method] module that should be
+    used for the text entry}
   @begin{short}
     Accessor of the @slot[gtk:entry]{im-module} slot of the @class{gtk:entry}
     class.
   @end{short}
-  Which IM input method module should be used for this entry. See the
+  The IM (Input Method) module that should be used for the text entry. See the
   @class{gtk:im-context} documentation. Setting this to a non-@code{nil} value
   overrides the system-wide IM module setting. See the
   @slot[gtk:settings]{im-module} setting.
@@ -786,7 +788,7 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "input-purpose" 'entry) t)
  "The @code{input-purpose} property of type @symbol{gtk:input-purpose}
   (Read / Write) @br{}
-  The purpose of the text entry field. This property can be used by on-screen
+  The purpose of the text entry. This property can be used by on-screen
   keyboards and other input methods to adjust their behaviour. Note that setting
   the purpose to the @code{:password} or @code{:pin} values is independent from
   setting the @slot[gtk:entry]{visibility} property. @br{}
@@ -818,8 +820,8 @@ lambda (entry pos)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "invisible-char" 'entry) t)
  "The @code{invisible-char} property of type @code{:uint} (Read / Write) @br{}
-  The invisible character is used when masking entry contents in \"password
-  mode\". @br{}
+  The invisible character is used when masking the text entry contents in
+  \"password mode\". @br{}
   Default value: \"*\"")
 
 #+liber-documentation
@@ -856,7 +858,7 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "invisible-char-set" 'entry) t)
  "The @code{invisible-char-set} property of type @code{:boolean} (Read / Write)
   @br{}
-  Whether the invisible char has been set for the text entry field. @br{}
+  Whether the invisible char has been set for the text entry. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -868,12 +870,12 @@ lambda (entry pos)    :run-last
   @syntax{(setf (gtk:entry-invisible-char-set object) setting)}
   @argument[object]{a @class{gtk:entry} widget}
   @argument[setting]{a boolean whether the invisible char has been set for the
-    entry}
+    text entry}
   @begin{short}
     Accessor of the @slot[gtk:entry]{invisible-char-set} slot of the
     @class{gtk:entry} class.
   @end{short}
-  Whether the invisible char has been set for the entry.
+  Whether the invisible char has been set for the text entry.
   @see-class{gtk:entry}")
 
 ;;; --- gtk:entry-max-length ---------------------------------------------------
@@ -881,7 +883,7 @@ lambda (entry pos)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "max-length" 'entry) t)
  "The @code{max-length} property of type @code{:int} (Read / Write) @br{}
-  Maximum number of characters for this entry. Zero if no maximum. @br{}
+  The maximum number of characters for the text entry. Zero if no maximum. @br{}
   Allowed values: [0,65535] @br{}
   Default value: 0")
 
@@ -893,14 +895,15 @@ lambda (entry pos)    :run-last
   @syntax{(gtk:entry-max-length object) => max}
   @syntax{(setf (gtk:entry-max-length object) max)}
   @argument[object]{a @class{gtk:entry} widget}
-  @argument[max]{the maximum length of the entry, or 0 for no maximum, the
-    value passed in will be clamped to the range [0, 65536]}
+  @argument[max]{an integer with the maximum length of the text entry, or 0 for
+    no maximum, the value passed in will be clamped to the range [0, 65536]}
   @begin{short}
     Accessor of the @slot[gtk:entry]{max-length} slot of the @class{gtk:entry}
     class.
   @end{short}
   The @fun{gtk:entry-max-length} function retrieves the maximum allowed length
-  of the text in the entry, or 0 if there is no maximum. This is equivalent to:
+  of the text in the text entry, or 0 if there is no maximum. This is equivalent
+  to:
   @begin{pre}
     (gtk:entry-buffer-max-length (gtk:entry-buffer object))
   @end{pre}
@@ -921,7 +924,7 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "overwrite-mode" 'entry) t)
  "The @code{overwrite-mode} property of type @code{:boolean} (Read / Write)
   @br{}
-  If text is overwritten when typing in the text entry field. @br{}
+  If text is overwritten when typing in the text entry. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -949,7 +952,7 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "placeholder-text" 'entry) t)
  "The @code{placeholder-text} property of type @code{:string} (Read / Write)
   @br{}
-  The text that will be displayed in the text entry field when it is empty and
+  The text that will be displayed in the text entry when it is empty and
   unfocused. @br{}
   Default value: @code{nil}")
 
@@ -968,12 +971,12 @@ lambda (entry pos)    :run-last
     @class{gtk:entry} class.
   @end{short}
   The @fun{gtk:entry-placeholder-text} function retrieves the text that will be
-  displayed when the entry is empty and unfocused. The
+  displayed when the text entry is empty and unfocused. The
   @setf{gtk:entry-placeholder-text} function sets the text. This can be used to
-  give a visual hint of the expected contents of the entry.
+  give a visual hint of the expected contents of the text entry.
 
-  Note that since the placeholder text gets removed when the entry received
-  focus, using this feature is a bit problematic if the entry is given the
+  Note that since the placeholder text gets removed when the text entry received
+  focus, using this feature is a bit problematic if the text entry is given the
   initial focus in a window. Sometimes this can be worked around by delaying
   the initial focus setting until the first key event arrives.
   @see-class{gtk:entry}")
@@ -985,9 +988,10 @@ lambda (entry pos)    :run-last
                                                'entry) t)
  "The @code{primary-icon-activatable} property of type @code{:boolean}
   (Read / Write) @br{}
-  Whether the primary icon is activatable. GTK emits the \"icon-press\" and
-  \"icon-release\" signals only on sensitive, activatable icons. Sensitive, but
-  non-activatable icons can be used for purely informational purposes. @br{}
+  Whether the primary icon is activatable. GTK emits the @code{\"icon-press\"}
+  and @code{\"icon-release\"} signals only on sensitive, activatable icons.
+  Sensitive, but non-activatable icons can be used for purely informational
+  purposes. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -1003,9 +1007,10 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{primary-icon-activatable} slot of the
     @class{gtk:entry} class.
   @end{short}
-  Whether the primary icon is activatable. GTK emits the \"icon-press\" and
-  \"icon-release\" signals only on sensitive, activatable icons. Sensitive, but
-  non-activatable icons can be used for purely informational purposes.
+  Whether the primary icon is activatable. GTK emits the @code{\"icon-press\"}
+  and @code{\"icon-release\"} signals only on sensitive, activatable icons.
+  Sensitive, but non-activatable icons can be used for purely informational
+  purposes.
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-activatable}")
 
@@ -1015,7 +1020,7 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "primary-icon-gicon" 'entry) t)
  "The @code{primary-icon-gicon} property of type @class{g:icon} (Read / Write)
   @br{}
-  The icon to use for the primary icon for the text entry field.")
+  The icon to use for the primary icon for the text entry.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'entry-primary-icon-gicon)
@@ -1030,7 +1035,7 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{primary-icon-gicon} slot of the
     @class{gtk:entry} class.
   @end{short}
-  The icon to use for the primary icon for the text entry field.
+  The icon to use for the primary icon for the text entry.
   @see-class{gtk:entry}
   @see-class{g:icon}")
 
@@ -1040,7 +1045,7 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "primary-icon-name" 'entry) t)
  "The @code{primary-icon-name} property of type @code{:string} (Read / Write)
   @br{}
-  The icon name to use for the primary icon for the entry. @br{}
+  The icon name to use for the primary icon for the text entry. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -1056,7 +1061,7 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{primary-icon-name} slot of the
     @class{gtk:entry} class.
   @end{short}
-  The icon name to use for the primary icon for the text entry field.
+  The icon name to use for the primary icon for the text entry.
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-name}
   @see-function{gtk:entry-secondary-icon-name}")
@@ -1068,7 +1073,7 @@ lambda (entry pos)    :run-last
                                                'entry) t)
  "The @code{primary-icon-paintable} property of type @class{gdk:paintable}
   (Read / Write) @br{}
-  A paintable to use as the primary icon for the text entry field.")
+  The paintable to use as the primary icon for the text entry.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'entry-primary-icon-paintable)
@@ -1083,7 +1088,7 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{primary-icon-paintable} slot of the
     @class{gtk:entry} class.
   @end{short}
-  A paintable to use as the primary icon for the entry.
+  A paintable to use as the primary icon for the text entry.
   @see-class{gtk:entry}
   @see-class{gdk:paintable}")
 
@@ -1095,10 +1100,10 @@ lambda (entry pos)    :run-last
  "The @code{primary-icon-sensitive} property of type @code{:boolean}
   (Read / Write) @br{}
   Whether the primary icon is sensitive. An insensitive icon appears grayed out.
-  GTK does not emit the \"icon-press\" and \"icon-release\" signals and does
-  not allow drag and drop from insensitive icons. An icon should be set
-  insensitive if the action that would trigger when clicked is currently not
-  available. @br{}
+  GTK does not emit the @code{\"icon-press\"} and @code{\"icon-release\"}
+  signals and does not allow drag and drop from insensitive icons. An icon
+  should be set insensitive if the action that would trigger when clicked is
+  currently not available. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -1115,10 +1120,10 @@ lambda (entry pos)    :run-last
     @class{gtk:entry} class.
   @end{short}
   Whether the primary icon is sensitive. An insensitive icon appears grayed out.
-  GTK does not emit the \"icon-press\" and \"icon-release\" signals and does
-  not allow drag and drop from insensitive icons. An icon should be set
-  insensitive if the action that would trigger when clicked is currently not
-  available.
+  GTK does not emit the @code{\"icon-press\"} and @code{\"icon-release\"}
+  signals and does not allow drag and drop from insensitive icons. An icon
+  should be set insensitive if the action that would trigger when clicked is
+  currently not available.
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-sensitive}
   @see-function{gtk:entry-secondary-icon-sensitive}")
@@ -1130,8 +1135,7 @@ lambda (entry pos)    :run-last
                                                'entry) t)
  "The @code{primary-icon-storage-type} property of type @symbol{gtk:image-type}
   (Read) @br{}
-  The representation which is used for the primary icon of the text entry
-  field. @br{}
+  The representation which is used for the primary icon of the text entry. @br{}
   Default value: @code{:empty}")
 
 #+liber-documentation
@@ -1147,7 +1151,7 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{primary-icon-storage-type} slot of the
     @class{gtk:entry} class.
   @end{short}
-  The representation which is used for the primary icon of the text entry field.
+  The representation which is used for the primary icon of the text entry.
   @see-class{gtk:entry}
   @see-symbol{gtk:image-type}")
 
@@ -1237,8 +1241,8 @@ lambda (entry pos)    :run-last
   @end{short}
   The @fun{gtk:entry-progress-fraction} function returns the current fraction
   that is been completed. The @setf{gtk:entry-progress-fraction} function causes
-  the entry progress indicator to \"fill in\" the given fraction of the progress
-  bar. The fraction should be between 0.0 and 1.0, inclusive.
+  the text entry progress indicator to \"fill in\" the given fraction of the
+  progress bar. The fraction should be between 0.0 and 1.0, inclusive.
   @see-class{gtk:entry}")
 
 ;;; --- gtk:entry-progress-pulse-step ------------------------------------------
@@ -1247,8 +1251,8 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "progress-pulse-step" 'entry) t)
  "The @code{progress-pulse-step} property of type @code{:double} (Read / Write)
   @br{}
-  The fraction of total entry width to move the progress bouncing block for
-  each call to the @fun{gtk:entry-progress-pulse} function. @br{}
+  The fraction of total text entry width to move the progress bouncing block
+  for each call to the @fun{gtk:entry-progress-pulse} function. @br{}
   Allowed values: [0,1] @br{}
   Default value: 0.0")
 
@@ -1267,8 +1271,8 @@ lambda (entry pos)    :run-last
   @end{short}
   The @fun{gtk:entry-progress-pulse-step} function retrieves the pulse step as
   a fraction from 0.0 to 1.0. The @setf{gtk:entry-progress-pulse-step} function
-  sets the fraction of total entry width to move the progress bouncing block for
-  each call to the @fun{gtk:entry-progress-pulse} function.
+  sets the fraction of total text entry width to move the progress bouncing
+  block for each call to the @fun{gtk:entry-progress-pulse} function.
   @see-class{gtk:entry}
   @see-function{gtk:entry-progress-pulse}")
 
@@ -1277,7 +1281,8 @@ lambda (entry pos)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "scroll-offset" 'entry) t)
  "The @code{scroll-offset} property of type @code{:int} (Read) @br{}
-  Number of pixels of the entry scrolled off the screen to the left. @br{}
+  The number of pixels of the text entry scrolled off the screen to the left.
+  @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1289,13 +1294,13 @@ lambda (entry pos)    :run-last
   @syntax{(gtk:entry-scroll-offset object) => offset}
   @syntax{(setf (gtk:entry-scroll-offset object) offset)}
   @argument[object]{a @class{gtk:entry} widget}
-  @argument[offset]{an integer with the number of pixels of the entry scrolled
-    off}
+  @argument[offset]{an integer with the number of pixels of the text entry
+    scrolled off}
   @begin{short}
     Accessor of the @slot[gtk:entry]{scroll-offset} slot of the
     @class{gtk:entry} class.
   @end{short}
-  Number of pixels of the entry scrolled off the screen to the left.
+  The number of pixels of the text entry scrolled off the screen to the left.
   @see-class{gtk:entry}")
 
 ;;; --- gtk:entry-secondary-icon-activatable -----------------------------------
@@ -1305,9 +1310,10 @@ lambda (entry pos)    :run-last
                                                'entry) t)
  "The @code{secondary-icon-activatable} property of type @code{:boolean}
   (Read / Write) @br{}
-  Whether the secondary icon is activatable. GTK emits the \"icon-press\" and
-  \"icon-release\" signals only on sensitive, activatable icons. Sensitive, but
-  non-activatable icons can be used for purely informational purposes. @br{}
+  Whether the secondary icon is activatable. GTK emits the @code{\"icon-press\"}
+  and @code{\"icon-release\"} signals only on sensitive, activatable icons.
+  Sensitive, but non-activatable icons can be used for purely informational
+  purposes. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -1323,9 +1329,10 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{secondary-icon-activatable} slot of the
     @class{gtk:entry} class.
   @end{short}
-  Whether the secondary icon is activatable. GTK emits the \"icon-press\" and
-  \"icon-release\" signals only on sensitive, activatable icons. Sensitive, but
-  non-activatable icons can be used for purely informational purposes.
+  Whether the secondary icon is activatable. GTK emits the @code{\"icon-press\"}
+  and @code{\"icon-release\"} signals only on sensitive, activatable icons.
+  Sensitive, but non-activatable icons can be used for purely informational
+  purposes.
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-activatable}")
 
@@ -1335,7 +1342,7 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "secondary-icon-gicon" 'entry) t)
  "The @code{secondary-icon-gicon} property of type @class{g:icon} (Read / Write)
   @br{}
-  The icon to use for the secondary icon for the text entry field.")
+  The icon to use for the secondary icon for the text entry.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'entry-secondary-icon-gicon)
@@ -1350,7 +1357,7 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{secondary-icon-gicon} slot of the
     @class{gtk:entry} class.
   @end{short}
-  The icon to use for the secondary icon for the text entry field.
+  The icon to use for the secondary icon for the text entry.
   @see-class{gtk:entry}
   @see-class{g:icon}
   @see-function{gtk:entry-icon-gicon}")
@@ -1361,7 +1368,7 @@ lambda (entry pos)    :run-last
 (setf (documentation (liber:slot-documentation "secondary-icon-name" 'entry) t)
  "The @code{secondary-icon-name} property of type @code{:string} (Read / Write)
   @br{}
-  The icon name to use for the secondary icon for the text entry field. @br{}
+  The icon name to use for the secondary icon for the text entry. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
@@ -1377,7 +1384,7 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{secondary-icon-name} slot of the
     @class{gtk:entry} class.
   @end{short}
-  The icon name to use for the secondary icon for the text entry field.
+  The icon name to use for the secondary icon for the text entry.
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-name}
   @see-function{gtk:entry-primary-icon-name}")
@@ -1389,7 +1396,7 @@ lambda (entry pos)    :run-last
                                                'entry) t)
  "The @code{secondary-icon-paintable} property of type @class{gdk:paintable}
   (Read / Write) @br{}
-  A paintable to use as the secondary icon for the text entry field.")
+  The paintable to use as the secondary icon for the text entry.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'entry-secondary-icon-paintable)
@@ -1404,7 +1411,7 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{secondary-icon-paintable} slot of the
     @class{gtk:entry} class.
   @end{short}
-  A paintable to use as the secondary icon for the entry.
+  The paintable to use as the secondary icon for the text entry.
   @see-class{gtk:entry}
   @see-class{gdk:paintable}
   @see-function{gtk:entry-icon-paintable}")
@@ -1417,10 +1424,10 @@ lambda (entry pos)    :run-last
  "The @code{secondary-icon-sensitive} property of type @code{:boolean}
   (Read / Write) @br{}
   Whether the secondary icon is sensitive. An insensitive icon appears grayed
-  out. GTK does not emit the \"icon-press\" and \"icon-release\" signals and
-  does not allow drag and drop from insensitive icons. An icon should be set
-  insensitive if the action that would trigger when clicked is currently not
-  available.@br{}
+  out. GTK does not emit the @code{\"icon-press\"} and @code{\"icon-release\"}
+  signals and does not allow drag and drop from insensitive icons. An icon
+  should be set insensitive if the action that would trigger when clicked is
+  currently not available.@br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -1437,10 +1444,10 @@ lambda (entry pos)    :run-last
     @class{gtk:entry} class.
   @end{short}
   Whether the secondary icon is sensitive. An insensitive icon appears grayed
-  out. GTK does not emit the \"icon-press\" and \"icon-release\" signals and
-  does not allow drag and drop from insensitive icons. An icon should be set
-  insensitive if the action that would trigger when clicked is currently not
-  available.
+  out. GTK does not emit the @code{\"icon-press\"} and @code{\"icon-release\"}
+  signals and does not allow drag and drop from insensitive icons. An icon
+  should be set insensitive if the action that would trigger when clicked is
+  currently not available.
   @see-class{gtk:entry}
   @see-function{gtk:entry-icon-sensitive}
   @see-function{gtk:entry-secondary-icon-sensitive}")
@@ -1452,7 +1459,8 @@ lambda (entry pos)    :run-last
                                                'entry) t)
  "The @code{secondary-icon-storage-type} property of type
   @symbol{gtk:image-type} (Read) @br{}
-  The representation which is used for the secondary icon of the entry. @br{}
+  The representation which is used for the secondary icon of the text entry.
+  @br{}
   Default value: @code{:empty}")
 
 #+liber-documentation
@@ -1468,8 +1476,7 @@ lambda (entry pos)    :run-last
     Accessor of the @slot[gtk:entry]{secondary-icon-storage-type} slot of the
     @class{gtk:entry} class.
   @end{short}
-  The representation which is used for the secondary icon of the text entry
-  field.
+  The representation which is used for the secondary icon of the text entry.
   @see-class{gtk:entry}
   @see-symbol{gtk:image-type}
   @see-function{gtk:entry-icon-storage-type}")
@@ -1564,7 +1571,7 @@ lambda (entry pos)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tabs" 'entry) t)
  "The @code{tabs} property of type @class{pango:tab-array} (Read / Write) @br{}
-  A list of tabstop locations to apply to the text of the entry.")
+  The list of tabstop locations to apply to the text of the text entry.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'entry-tabs)
@@ -1578,10 +1585,9 @@ lambda (entry pos)    :run-last
   @begin{short}
     Accessor of the @slot[gtk:entry]{tabs} slot of the @class{gtk:entry} class.
   @end{short}
-  The @fun{gtk:entry-tabs} function gets the tabstops that were set on the entry
-  using the @setf{gtk:entry-tabs} function, if any.
-
-  The tabstops in the array are applied to the entry text.
+  The @fun{gtk:entry-tabs} function gets the tabstops that were set on the text
+  entry using the @setf{gtk:entry-tabs} function, if any. The tabstops are
+  applied to the text of the text entry.
   @see-class{gtk:entry}
   @see-class{pango:tab-array}")
 
@@ -1590,7 +1596,7 @@ lambda (entry pos)    :run-last
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "text-length" 'entry) t)
  "The @code{text-length} property of type @code{:uint} (Read) @br{}
-  The length of the text in the entry. @br{}
+  The length of the text in the text entry. @br{}
   Allowed values: <= 65535 @br{}
   Default value: 0")
 
@@ -1607,7 +1613,7 @@ lambda (entry pos)    :run-last
     class.
   @end{short}
   The @fun{gtk:entry-text-length} function retrieves the current length of the
-  text in the entry, or 0 if there are none. This is equivalent to:
+  text in the text entry, or 0 if there are none. This is equivalent to:
   @begin{pre}
 (gtk:entry-buffer-length (gtk:entry-buffer object))
   @end{pre}
@@ -1657,18 +1663,18 @@ lambda (entry pos)    :run-last
   @syntax{(gtk:entry-visibility object) => visible}
   @syntax{(setf (gtk:entry-visibility object) visible)}
   @argument[object]{a @class{gtk:entry} widget}
-  @argument[visible]{@em{true} if the contents of the entry are displayed as
-    plaintext}
+  @argument[visible]{@em{true} if the contents of the text entry are displayed
+    as plaintext}
   @begin{short}
     Accessor of the @slot[gtk:entry]{visibility} slot of the @class{gtk:entry}
     class.
   @end{short}
-  The @fun{gtk:entry-visibility} function retrieves whether the text in the text
-  entry field is visible. The @setf{gtk:entry-visibility} function sets whether
-  the contents of the text entry field are visible or not.
+  The @fun{gtk:entry-visibility} function retrieves whether the text in the
+  text entry is visible. The @setf{gtk:entry-visibility} function sets whether
+  the contents of the text entry are visible or not.
 
   When visibility is set to @em{false}, characters are displayed as the
-  invisible char, and will also appear that way when the text in the entry
+  invisible char, and will also appear that way when the text in the text entry
   is copied elsewhere. By default, GTK picks the best invisible character
   available in the current font, but it can be changed with the
   @fun{gtk:entry-invisible-char} function.
@@ -1685,9 +1691,7 @@ lambda (entry pos)    :run-last
  #+liber-documentation
  "@version{#2023-9-16}
   @return{The new @class{gtk:entry} widget.}
-  @begin{short}
-    Creates a new text entry field.
-  @end{short}
+  @short{Creates a new text entry.}
   @see-class{gtk:entry}"
   (make-instance 'entry))
 
@@ -1702,10 +1706,10 @@ lambda (entry pos)    :run-last
 (defun entry-new-with-buffer (buffer)
  #+liber-documentation
  "@version{#2023-9-16}
-  @argument[buffer]{a @class{gtk:entry-buffer} object to use for the entry}
+  @argument[buffer]{a @class{gtk:entry-buffer} object to use for the text entry}
   @return{The new @class{gtk:entry} widget.}
   @begin{short}
-    Creates a new entry with the specified text buffer.
+    Creates a new text entry with the specified entry buffer.
   @end{short}
   @see-class{gtk:entry}
   @see-class{gtk:entry-buffer}"
@@ -1742,23 +1746,22 @@ lambda (entry pos)    :run-last
 (defun (setf entry-alignment) (align entry)
   (cffi:foreign-funcall "gtk_entry_set_alignment"
                         (g:object entry) entry
-                        :float align
+                        :float (coerce align 'single-float)
                         :void)
   align)
 
 (cffi:defcfun ("gtk_entry_get_alignment" entry-alignment) :float
  #+liber-documentation
- "@version{#2023-9-16}
+ "@version{2024-5-18}
   @syntax{(gtk:entry-alignment entry) => align}
   @syntax{(setf (gtk:entry-alignment entry) align)}
   @argument[entry]{a @class{gtk:entry} widget}
-  @argument[align]{a float with the horizontal alignment, from 0.0
-    (left) to 1.0 (right), reversed for RTL layouts}
+  @argument[align]{a number coerced to a float with the horizontal alignment,
+    from 0.0 (left) to 1.0 (right), reversed for RTL layouts}
   @begin{short}
-    Accessor of the horizontal positioning of the entry.
+    This controls the horizontal positioning of the contents when the displayed
+    text is shorter than the width of the text entry.
   @end{short}
-  This controls the horizontal positioning of the contents when the displayed
-  text is shorter than the width of the entry.
   @see-class{gtk:entry}"
   (entry (g:object entry)))
 
@@ -1775,8 +1778,8 @@ lambda (entry pos)    :run-last
   @begin{short}
     Indicates that some progress is made, but you do not know how much.
   @end{short}
-  Causes the progress indicator of the entry to enter \"activity mode\", where
-  a block bounces back and forth. Each call to the
+  Causes the progress indicator of the text entry to enter \"activity mode\",
+  where a block bounces back and forth. Each call to the
   @fun{gtk:entry-progress-pulse} function causes the block to move by a little
   bit. The amount of movement per pulse is determined by the
   @fun{gtk:entry-progress-pulse-step} function.
@@ -1795,10 +1798,10 @@ lambda (entry pos)    :run-last
  "@version{#2023-9-16}
   @argument[entry]{a @class{gtk:entry} widget}
   @begin{short}
-    Reset the input method context of the entry if needed.
+    Reset the input method context of the text entry if needed.
   @end{short}
-  This can be necessary in the case where modifying the buffer would confuse
-  on-going input method behavior.
+  This can be necessary in the case where modifying the entry buffer would
+  confuse on-going input method behavior.
   @see-class{gtk:entry}"
   (entry (g:object entry)))
 
@@ -1841,8 +1844,8 @@ lambda (entry pos)    :run-last
   @argument[pos]{an icon position of type @symbol{gtk:entry-icon-position}}
   @argument[name]{a string with the icon name, or @code{nil}}
   @begin{short}
-    Sets the icon shown in the entry at the specified position from the current
-    icon theme.
+    Sets the icon shown in the text entry at the specified position from the
+    current icon theme.
   @end{short}
   If the icon name is not known, a \"broken image\" icon will be displayed
   instead. If the @arg{name} argument is @code{nil}, no icon will be shown in
@@ -1866,8 +1869,8 @@ lambda (entry pos)    :run-last
   @argument[pos]{an icon position of type @symbol{gtk:entry-icon-position}}
   @argument[icon]{the icon of type @class{g:icon} to set, or @code{nil}}
   @begin{short}
-    Sets the icon shown in the entry at the specified position from the current
-    icon theme.
+    Sets the icon shown in the text entry at the specified position from the
+    current icon theme.
   @end{short}
   If the icon is not known, a \"broken image\" icon will be displayed instead.
 
@@ -2014,7 +2017,7 @@ lambda (entry pos)    :run-last
   @argument[pos]{an icon position of type @symbol{gtk:entry-icon-position}}
   @argument[activatable]{@em{true} if the icon should be activatable}
   @begin{short}
-    Accessor of the activatable property of the icon in the entry.
+    Accessor of the activatable property of the icon in the text entry.
   @end{short}
   The @fun{gtk:entry-icon-activatable} function returns whether the icon is
   activatable. The @setf{gtk:entry-icon-activatable} function sets whether the
@@ -2053,7 +2056,7 @@ lambda (entry pos)    :run-last
   @argument[sensitive]{specifies whether the icon should appear sensitive or
     insensitive}
   @begin{short}
-    Accessor of the sensitive property of the icon in the entry.
+    Accessor of the sensitive property of the icon in the text entry.
   @end{short}
   The @fun{gtk:entry-icon-sensitive} function returns whether the icon appears
   sensitive or insensitive. The @setf{gtk:entry-icon-sensitive} function sets
@@ -2084,8 +2087,8 @@ lambda (entry pos)    :run-last
     Finds the icon at the given position and return its index.
   @end{short}
   The coordinates of the posistion are relative to the top left corner of the
-  entry. If x, y does not lie inside an icon, -1 is returned. This function is
-  intended for use in a \"query-tooltip\" signal handler.
+  text entry. If x, y does not lie inside an icon, -1 is returned. This function
+  is intended for use in a @code{\"query-tooltip\"} signal handler.
   @see-class{gtk:entry}"
   (entry (g:object entry))
   (x :int)
@@ -2115,10 +2118,10 @@ lambda (entry pos)    :run-last
   @argument[pos]{an icon position of type @symbol{gtk:entry-icon-position}}
   @argument[tooltip]{the contents of the tooltip for the icon, or @code{nil}}
   @begin{short}
-    Accessor of the tooltip text on the icon in the entry.
+    Accessor of the tooltip text on the icon in the text entry.
   @end{short}
   The @fun{gtk:entry-icon-tooltip-text} function gets the contents of the
-  tooltip on the icon at the specified position in the entry. The
+  tooltip on the icon at the specified position in the text entry. The
   @setf{gtk:entry-icon-tooltip-text} function sets a tooltip for the icon at the
   specified position. Use @code{nil} for @arg{tooltip} to remove an existing
   tooltip.
@@ -2160,10 +2163,10 @@ lambda (entry pos)    :run-last
   @argument[pos]{an icon position of type @symbol{gtk:entry-icon-position}}
   @argument[tooltip]{the contents of the tooltip for the icon, or @code{nil}}
   @begin{short}
-    Accessor of the tooltip markup on the icon in the entry.
+    Accessor of the tooltip markup on the icon in the text entry.
   @end{short}
   The @fun{gtk:entry-icon-tooltip-markup} function gets the contents of the
-  tooltip on the icon at the specified position in the entry. The
+  tooltip on the icon at the specified position in the text entry. The
   @setf{gtk:entry-icon-tooltip-markup} function sets the tooltip for the icon at
   the specified position. The @arg{tooltip} argument is assumed to be marked up
   with the Pango text markup language. Use @code{nil} for @arg{tooltip} to
@@ -2250,14 +2253,14 @@ lambda (entry pos)    :run-last
   @return{@arg{area} -- a @class{gdk:rectangle} instance with the area of the
     icon}
   @begin{short}
-    Gets the area where the icon of the entry at @arg{pos} is drawn.
+    Gets the area where the icon of the text entry at @arg{pos} is drawn.
   @end{short}
-  This function is useful when drawing something to the entry in a draw
+  This function is useful when drawing something to the text entry in a draw
   callback function.
 
-  If the entry is not realized or has no icon at the given position,
-  @arg{area} is filled with zeros. Otherwise, @arg{area} will be filled with the
-  allocation of the icon, relative to the allocation of the entry.
+  If the text entry is not realized or has no icon at the given position,
+  @arg{area} is filled with zeros. Otherwise, @arg{area} will be filled with
+  the allocation of the icon, relative to the allocation of the text entry.
   @see-class{gtk:entry}"
   (let ((area (gdk:rectangle-new)))
     (%entry-get-icon-area entry pos area)
@@ -2275,12 +2278,12 @@ lambda (entry pos)    :run-last
  "@version{#2023-9-16}
   @argument[entry]{a @class{gtk:entry} widget}
   @begin{short}
-    Causes entry to have keyboard focus.
+    Causes the text entry to have keyboard focus.
   @end{short}
   It behaves like the @fun{gtk:widget-grab-focus} function, except that it
-  does not select the contents of the entry. You only want to call this on some
-  special entries which the user usually does not want to replace all text in,
-  such as search-as-you-type entries.
+  does not select the contents of the text entry. You only want to call this on
+  some special entries which the user usually does not want to replace all text
+  in, such as search-as-you-type entries.
   @see-class{gtk:entry}
   @see-function{gtk:widget-grab-focus}"
   (entry (g:object entry)))

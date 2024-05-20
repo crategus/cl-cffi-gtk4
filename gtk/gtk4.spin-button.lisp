@@ -278,11 +278,12 @@ spinbutton.vertical
 ╰── button.down
     @end{pre}
     The @class{gtk:spin-button} implementation main CSS node has the name
-    @code{spinbutton}. It creates subnodes for the entry and the two buttons,
-    with these names. The button nodes have the @code{.up} and @code{.down}
-    style classes. The @class{gtk:entry} subnodes, if present, are put below
-    the entry node. The orientation of the spin button is reflected in the
-    @code{.vertical} or @code{.horizontal} style class on the main node.
+    @code{spinbutton}. It creates subnodes for the text entry and the two
+    buttons, with these names. The button nodes have the @code{.up} and
+    @code{.down} style classes. The @class{gtk:entry} subnodes, if present, are
+    put below the text entry node. The orientation of the spin button is
+    reflected in the @code{.vertical} or @code{.horizontal} style class on the
+    main node.
   @end{dictionary}
   @begin[Example]{dictionary}
     Code fragment for creating a spin button. The value from the spin button is
@@ -336,8 +337,8 @@ lambda (button value)    :run-last
       @end{pre}
       Can be used to influence the conversion of the users input into a double
       float value. The signal handler is expected to use the
-      @fun{gtk:editable-text} function to retrieve the text of the entry and
-      set @arg{value} to the new value. The default conversion uses the
+      @fun{gtk:editable-text} function to retrieve the text of the text entry
+      and set @arg{value} to the new value. The default conversion uses the
       @code{g_strtod()} function.
       @begin[code]{table}
         @entry[button]{The @class{gtk:spin-button} widget on which the signal

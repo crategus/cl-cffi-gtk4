@@ -155,8 +155,8 @@
 (setf (documentation 'password-entry 'type)
  "@version{2023-9-30}
   @begin{short}
-    The @class{gtk:password-entry} class is text entry field that has been
-    tailored for entering secrets.
+    The @class{gtk:password-entry} class is a text entry that has been tailored
+    for entering secrets.
   @end{short}
 
   @image[password-entry]{Figure: GtkPasswordEntry}
@@ -178,8 +178,8 @@ entry.password
     ┊
     @end{pre}
     The @class{gtk:password-entry} implementation has a single CSS node with
-    name @code{entry} that carries a @code{.passwordstyle} style class. The text
-    CSS node below it has a child with name @code{image} and
+    name @code{entry} that carries a @code{.passwordstyle} style class. The
+    text CSS node below it has a child with name @code{image} and
     @code{.caps-lock-indicator} style class for the @kbd{Caps Lock} icon, and
     possibly other children.
   @end{dictionary}
@@ -192,9 +192,9 @@ entry.password
       @begin{pre}
 lambda (entry)    :action
       @end{pre}
-      A keybinding signal which gets emitted when the user activates the entry.
-      Applications should not connect to it, but may emit it with the
-      @fun{g:signal-emit} function if they need to control activation
+      A keybinding signal which gets emitted when the user activates the
+      password entry. Applications should not connect to it, but may emit it
+      with the @fun{g:signal-emit} function if they need to control activation
       programmatically. The default bindings for this signal are all forms of
       the @kbd{Enter} key.
       @begin[code]{table}
@@ -242,19 +242,19 @@ lambda (entry)    :action
   activate the default widget, when the @kbd{Enter} key is pressed.
 
   If the @arg{setting} argument is @em{true}, pressing the @kbd{Enter} key in
-  the entry will activate the default widget for the window containing the
-  entry. This usually means that the dialog box containing the entry will be
-  closed, since the default widget is usually one of the dialog buttons.
+  the password entry will activate the default widget for the window containing
+  the password entry. This usually means that the dialog box containing the
+  password entry will be closed, since the default widget is usually one of the
+  dialog buttons.
   @see-class{gtk:password-entry}")
 
 ;;; --- gtk:password-entry-extra-menu ------------------------------------------
 
 #+liber-documentation
-(setf (documentation (liber:slot-documentation "extra-menu"
-                                               'password-entry) t)
+(setf (documentation (liber:slot-documentation "extra-menu" 'password-entry) t)
  "The @code{extra-menu} property of type @class{g:menu-model} (Read / Write)
   @br{}
-  A menu model whose contents will be appended to the context menu.")
+  The menu model whose contents will be appended to the context menu.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'password-entry-extra-menu)
@@ -271,7 +271,7 @@ lambda (entry)    :action
   @end{short}
   The @fun{gtk:password-entry-extra-menu} function gets the menu model. The
   @setf{gtk:password-entry-extra-menu} function sets a menu model to add when
-  constructing the context menu for the text entry field.
+  constructing the context menu for the password entry.
   @see-class{gtk:password-entry}
   @see-class{g:menu-model}")
 
@@ -282,7 +282,7 @@ lambda (entry)    :action
                                                'password-entry) t)
  "The @code{placeholder-text} property of type @code{:string} (Read / Write)
   @br{}
-  The text that will be displayed in the text entry field when it is empty and
+  The text that will be displayed in the password entry when it is empty and
   unfocused. @br{}
   Default value: @code{nil}")
 
@@ -301,14 +301,15 @@ lambda (entry)    :action
     @class{gtk:password-entry} class.
   @end{short}
   The @fun{gtk:password-entry-placeholder-text} function retrieves the text
-  that will be displayed when the entry is empty and unfocused. The
+  that will be displayed when the password entry is empty and unfocused. The
   @setf{gtk:password-entry-placeholder-text} function sets the text. This
-  can be used to give a visual hint of the expected contents of the entry.
+  can be used to give a visual hint of the expected contents of the password
+  entry.
 
-  Note that since the placeholder text gets removed when the entry received
-  focus, using this feature is a bit problematic if the entry is given the
-  initial focus in a window. Sometimes this can be worked around by delaying
-  the initial focus setting until the first key event arrives.
+  Note that since the placeholder text gets removed when the password entry
+  received focus, using this feature is a bit problematic if the password entry
+  is given the initial focus in a window. Sometimes this can be worked around
+  by delaying the initial focus setting until the first key event arrives.
   @see-class{gtk:password-entry}")
 
 ;;; --- gtk:password-entry-show-peek-icon --------------------------------------
@@ -334,11 +335,11 @@ lambda (entry)    :action
     Accessor of the @slot[gtk:password-entry]{show-peek-icon} slot of the
     @class{gtk:password-entry} class.
   @end{short}
-  The @fun{gtk:password-entry-show-peek-icon} function returns whether the entry
-  is showing a clickable icon to reveal the contents of the entry in clear text.
-  The @setf{gtk:password-entry-show-peek-icon} function sets whether the entry
-  should have a clickable icon. Setting this to @em{false} also hides the text
-  again.
+  The @fun{gtk:password-entry-show-peek-icon} function returns whether the
+  password entry is showing a clickable icon to reveal the contents of the
+  password entry in clear text. The @setf{gtk:password-entry-show-peek-icon}
+  function sets whether the password entry should have a clickable icon.
+  Setting this to @em{false} also hides the text again.
   @see-class{gtk:password-entry}")
 
 ;;; ----------------------------------------------------------------------------
@@ -351,7 +352,7 @@ lambda (entry)    :action
  #+liber-documentation
  "@version{2023-9-30}
   @return{The new @class{gtk:password-entry} widget.}
-  @short{Creates a password text entry field.}
+  @short{Creates a password entry.}
   @see-class{gtk:password-entry}"
   (make-instance 'password-entry))
 

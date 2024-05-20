@@ -317,10 +317,11 @@ searchbar
   @argument[searchbar]{a @class{gtk:search-bar} widget}
   @argument[entry]{a @class{gtk:entry} widget}
   @begin{short}
-    Connects the entry widget passed as the one to be used in this search bar.
+    Connects the text entry passed as the one to be used in the search bar.
   @end{short}
-  The entry should be a descendant of the search bar. This is only required if
-  the entry is not the direct child of the search bar, as in our main example.
+  The text entry should be a descendant of the search bar. This is only required
+  if the text entry is not the direct child of the search bar, as in our main
+  example.
   @see-class{gtk:search-bar}
   @see-class{gtk:entry}"
   (searchbar (g:object search-bar))

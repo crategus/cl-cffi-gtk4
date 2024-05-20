@@ -107,8 +107,8 @@
 (setf (documentation 'search-entry 'type)
  "@version{2024-4-20}
   @begin{short}
-    The @class{gtk:search-entry} widget is an entry widget that has been
-    tailored for use as a search entry.
+    The @class{gtk:search-entry} widget is a text entry that has been tailored
+    for use as a search entry.
   @end{short}
   The main API for interacting with a @class{gtk:search-entry} widget as entry
   is the @class{gtk:editable} interface.
@@ -186,7 +186,7 @@ lambda (entry)    :action
 lambda (entry)    :run-last
       @end{pre}
       The signal is emitted with a short delay of 150 milliseconds after the
-      last change to the entry text.
+      last change to the text entry.
       @begin[code]{table}
         @entry[entry]{The @class{gtk:search-entry} widget on which the signal is
           emitted.}
@@ -256,7 +256,7 @@ lambda (entry)    :action
                                                'search-entry) t)
  "The @code{placeholder-text} property of type @code{:string} (Read / Write)
   @br{}
-  The text that will be displayed in the text entry field when it is empty and
+  The text that will be displayed in the text entry when it is empty and
   unfocused. @br{}
   Default value: @code{nil}")
 
@@ -366,8 +366,8 @@ lambda (entry)    :action
 
   If the search entry is part of a @class{gtk:search-bar} widget, it is
   preferable to call the @fun{gtk:search-bar-key-capture-widget} function
-  instead, which will reveal the entry in addition to triggering the search
-  entry.
+  instead, which will reveal the text entry in addition to triggering the
+  search entry.
   @see-class{gtk:search-entry}
   @see-class{gtk:search-bar}
   @see-class{gtk:widget}

@@ -91,8 +91,8 @@
 (setf (documentation 'editable-label 'type)
  "@version{#2022-6-12}
   @begin{short}
-    A @class{gtk:editable-label} widget is a @class{gtk:label} widget that allows
-    users to edit the text by switching the widget to an \"edit mode\".
+    The @class{gtk:editable-label} widget is a @class{gtk:label} widget that
+    allows users to edit the text by switching the widget to an \"edit mode\".
   @end{short}
 
   @image[editable-label]{Figure: GtkEditableLabel}
@@ -112,7 +112,7 @@ editablelabel[.editing]
     ╰── text
     @end{pre}
     The @class{gtk:editable-label} implementation has a main node with the name
-    @code{editablelabel}. When the entry is in editing mode, it gets the
+    @code{editablelabel}. When the text entry is in editing mode, it gets the
     @code{.editing} style class. For all the subnodes added to the text node in
     various situations, see the @class{gtk:text} documentation.
   @end{dictionary}
