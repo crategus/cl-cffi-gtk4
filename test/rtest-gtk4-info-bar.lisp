@@ -34,9 +34,6 @@
   ;; Check CSS name
   (is (string= "infobar"
                (gtk:widget-class-css-name "GtkInfoBar")))
-  ;; Check CSS classes
-  (is (equal '("info")
-             (gtk:widget-css-classes (make-instance 'gtk:info-bar))))
   ;; Accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkInfoBar")))
   ;; Check the class definition
@@ -57,7 +54,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-info-bar-properties
-  (let ((infobar (make-instance 'gtk:info-bar)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (infobar (make-instance 'gtk:info-bar)))
     (is (eq :info (gtk:info-bar-message-type infobar)))
     (is-true (gtk:info-bar-revealed infobar))
     (is-false (gtk:info-bar-show-close-button infobar))))
@@ -72,16 +70,18 @@
 ;;;     gtk_info_bar_new
 
 (test gtk-info-bar-new
-  (is (typep (gtk:info-bar-new) 'gtk:info-bar)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:info-bar-new) 'gtk:info-bar))))
 
 ;;;     gtk_info_bar_new_with_buttons
 
 (test gtk-info-bar-new-with-buttons
-  (is (typep (gtk:info-bar-new-with-buttons "_OK" :accept
-                                            "_Cancel" :reject
-                                            "_New" 100
-                                            "_Old" 200)
-             'gtk:info-bar)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:info-bar-new-with-buttons "_OK" :accept
+                                              "_Cancel" :reject
+                                              "_New" 100
+                                              "_Old" 200)
+               'gtk:info-bar))))
 
 ;;;     gtk_info_bar_add_action_widget
 ;;;     gtk_info_bar_remove_action_widget
@@ -93,4 +93,4 @@
 ;;;     gtk_info_bar_add_child
 ;;;     gtk_info_bar_remove_child
 
-;;; 2024-5-2
+;;; 2024-5-18

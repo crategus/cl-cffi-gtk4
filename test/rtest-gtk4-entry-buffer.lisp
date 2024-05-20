@@ -5,37 +5,37 @@
 
 ;; Ensure the initialization of GtkPasswordEntryBuffer
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (cffi:foreign-funcall "gtk_password_entry_buffer_get_type" :size))
+  (g:type-ensure "GtkPasswordEntryBuffer"))
 
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkEntryBuffer
 
-(test entry-buffer-class
-  ;; Type check
+(test gtk-entry-buffer-class
+  ;; Check type
   (is (g:type-is-object "GtkEntryBuffer"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:entry-buffer
           (glib:symbol-for-gtype "GtkEntryBuffer")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEntryBuffer")
           (g:gtype (cffi:foreign-funcall "gtk_entry_buffer_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkEntryBuffer")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkPasswordEntryBuffer")
              (list-children "GtkEntryBuffer")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkEntryBuffer")))
-  ;; Check the class properties
+  ;; Check class properties
   (is (equal '("length" "max-length" "text")
              (list-properties "GtkEntryBuffer")))
-  ;; Check the list of signals
+  ;; Check signals
   (is (equal '("deleted-text" "inserted-text")
              (list-signals "GtkEntryBuffer")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkEntryBuffer" GTK-ENTRY-BUFFER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gtk_entry_buffer_get_type")
@@ -47,7 +47,7 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-(test entry-buffer-properties
+(test gtk-entry-buffer-properties
   (let ((buffer (make-instance 'gtk:entry-buffer)))
     (is (= 0 (gtk:entry-buffer-length buffer)))
     (signals (error) (setf (gtk:entry-buffer-length buffer) 10))
@@ -56,11 +56,47 @@
     (is (string= "" (gtk:entry-buffer-text buffer)))
     (is (string= "text" (setf (gtk:entry-buffer-text buffer) "text")))))
 
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     deleted-text
+
+(test gtk-entry-buffer-deleted-text-signal
+  (let* ((name "deleted-text") (gtype "GtkEntryBuffer")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("guint" "guint")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     inserted-text
+
+(test gtk-entry-buffer-inserted-text-signal
+  (let* ((name "inserted-text") (gtype "GtkEntryBuffer")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("guint" "gchararray" "guint")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_entry_buffer_new
 
-(test entry-buffer-new
+(test gtk-entry-buffer-new
   (is (typep (gtk:entry-buffer-new) 'gtk:entry-buffer))
   (is (string= "" (gtk:entry-buffer-text (gtk:entry-buffer-new))))
   (is (string= "This is text."
@@ -68,7 +104,7 @@
 
 ;;;     gtk_entry_buffer_get_bytes
 
-(test entry-buffer-bytes
+(test gtk-entry-buffer-bytes
   (is (= 13 (gtk:entry-buffer-length (gtk:entry-buffer-new "This is text."))))
   (is (= 13 (gtk:entry-buffer-bytes (gtk:entry-buffer-new "This is text."))))
   (is (= 7 (gtk:entry-buffer-length (gtk:entry-buffer-new "Ägypten"))))
@@ -77,7 +113,7 @@
 ;;;     gtk_entry_buffer_insert_text
 ;;;     gtk_entry_buffer_delete_text
 
-(test entry-buffer-insert/delete-text
+(test gtk-entry-buffer-insert/delete-text
   (let ((buffer (make-instance 'gtk:entry-buffer)))
     (is (string= "" (gtk:entry-buffer-text buffer)))
     ;; Insert text
@@ -95,7 +131,7 @@
 
 ;;;   gtk_entry_buffer_emit_deleted_text
 
-(test entry-buffer-emit-deleted-text
+(test gtk-entry-buffer-emit-deleted-text
   (let ((buffer (gtk:entry-buffer-new "first second third")))
     (g:signal-connect buffer "deleted-text"
         (lambda (object position n-chars)
@@ -109,7 +145,7 @@
 
 ;;;   gtk_entry_buffer_emit_inserted_text
 
-(test entry-buffer-emit-inserted-text
+(test gtk-entry-buffer-emit-inserted-text
   (let ((buffer (gtk:entry-buffer-new "first second third")))
     (g:signal-connect buffer "inserted-text"
         (lambda (object position text n-chars)
@@ -120,4 +156,4 @@
           nil))
     (gtk:entry-buffer-emit-inserted-text buffer 6 "text" 7)))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-5-17

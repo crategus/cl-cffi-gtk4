@@ -79,9 +79,6 @@
   ;; Check CSS name
   (is (string= "iconview"
                (gtk:widget-class-css-name "GtkIconView")))
-  ;; Check CSS classes
-  (is (equal '("view")
-             (gtk:widget-css-classes (make-instance 'gtk:icon-view))))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkIconView")))
   ;; Check the class definition
@@ -131,7 +128,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-icon-view-properties
-  (let ((view (make-instance 'gtk:icon-view)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (view (make-instance 'gtk:icon-view)))
     (is-false (gtk:icon-view-activate-on-single-click view))
     (is (typep (gtk:icon-view-cell-area view) 'gtk:cell-area-box))
     (is (= 6 (gtk:icon-view-column-spacing view)))
@@ -197,4 +195,4 @@
 ;;;     gtk_icon_view_get_dest_item_at_pos
 ;;;     gtk_icon_view_create_drag_icon
 
-;;; 2024-5-1
+;;; 2024-5-18

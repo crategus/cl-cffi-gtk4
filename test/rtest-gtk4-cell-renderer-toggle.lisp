@@ -8,31 +8,31 @@
 ;;;     GtkCellRendererToggle
 
 (test gtk-cell-renderer-toggle-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCellRendererToggle"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-renderer-toggle
           (glib:symbol-for-gtype "GtkCellRendererToggle")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellRendererToggle")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_toggle_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkCellRenderer")
           (g:type-parent "GtkCellRendererToggle")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkCellRendererToggle")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkCellRendererToggle")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("activatable" "active" "inconsistent" "radio")
              (list-properties "GtkCellRendererToggle")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("toggled")
              (list-signals "GtkCellRendererToggle")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererToggle"
                                GTK-CELL-RENDERER-TOGGLE
                                (:SUPERCLASS GTK-CELL-RENDERER :EXPORT T
@@ -53,17 +53,36 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-toggle-properties
-  (let ((renderer (make-instance 'gtk:cell-renderer-toggle)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (renderer (make-instance 'gtk:cell-renderer-toggle)))
     (is-true (gtk:cell-renderer-toggle-activatable renderer))
     (is-false (gtk:cell-renderer-toggle-active renderer))
     (is-false (gtk:cell-renderer-toggle-inconsistent renderer))
     (is-false (gtk:cell-renderer-toggle-radio renderer))))
+
+;;; ---- Signals ---------------------------------------------------------------
+
+(test gtk-cell-renderer-toggle-toggled-signal
+  (let* ((name "toggled") (gtype "GtkCellRendererToggle")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_cell_renderer_toggle_new
 
 (test gtk-cell-renderer-toggle-new
-  (is (typep (gtk:cell-renderer-toggle-new) 'gtk:cell-renderer-toggle)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:cell-renderer-toggle-new) 'gtk:cell-renderer-toggle))))
 
-;;; 2024-2-22
+;;; 2024-5-18

@@ -8,31 +8,31 @@
 ;;;     GtkCellRendererCombo
 
 (test gtk-cell-renderer-combo-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCellRendererCombo"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-renderer-combo
           (glib:symbol-for-gtype "GtkCellRendererCombo")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellRendererCombo")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_combo_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkCellRendererText")
           (g:type-parent "GtkCellRendererCombo")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkCellRendererCombo")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkCellRendererCombo")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("has-entry" "model" "text-column")
              (list-properties "GtkCellRendererCombo")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("changed")
              (list-signals "GtkCellRendererCombo")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererCombo"
                                              GTK-CELL-RENDERER-COMBO
                                (:SUPERCLASS GTK-CELL-RENDERER-TEXT :EXPORT T
@@ -50,7 +50,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-combo-properties
-  (let ((renderer (make-instance 'gtk:cell-renderer-combo)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (renderer (make-instance 'gtk:cell-renderer-combo)))
     (is-true (gtk:cell-renderer-combo-has-entry renderer))
     (is-false (gtk:cell-renderer-combo-model renderer))
     (is (= -1 (gtk:cell-renderer-combo-text-column renderer)))))
@@ -59,11 +60,27 @@
 
 ;;;     changed
 
+(test gtk-cell-renderer-combo-changed-signal
+  (let* ((name "changed") (gtype "GtkCellRendererCombo")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gchararray" "GtkTreeIter")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_cell_renderer_combo_new
 
 (test gtk-cell-renderer-combo-new
-  (is (typep (gtk:cell-renderer-combo-new) 'gtk:cell-renderer-combo)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:cell-renderer-combo-new) 'gtk:cell-renderer-combo))))
 
-;;; 2024-2-21
+;;; 2024-5-18

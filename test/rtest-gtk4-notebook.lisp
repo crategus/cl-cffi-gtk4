@@ -3,6 +3,11 @@
 (def-suite gtk-notebook :in gtk-suite)
 (in-suite gtk-notebook)
 
+;; Ensure initialization of the GtkNotebookPage type.
+;; This should remove a warning from the testsuite, but it does not.
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (g:type-ensure "GtkNotebookPages"))
+
 ;;; --- Types and Values -------------------------------------------------------
 
 ;;;     GtkNotebookTab

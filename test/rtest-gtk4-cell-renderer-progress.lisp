@@ -8,32 +8,32 @@
 ;;;     GtkCellRendererProgress
 
 (test gtk-cell-renderer-progress-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCellRendererProgress"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-renderer-progress
           (glib:symbol-for-gtype "GtkCellRendererProgress")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellRendererProgress")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_progress_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkCellRenderer")
           (g:type-parent "GtkCellRendererProgress")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkCellRendererProgress")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkOrientable")
              (list-interfaces "GtkCellRendererProgress")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("inverted" "orientation" "pulse" "text" "text-xalign"
                "text-yalign" "value")
              (list-properties "GtkCellRendererProgress")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkCellRendererProgress")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererProgress"
                                GTK-CELL-RENDERER-PROGRESS
                                (:SUPERCLASS GTK-CELL-RENDERER :EXPORT T
@@ -58,7 +58,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-progress-properties
-  (let ((renderer (make-instance 'gtk:cell-renderer-progress)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (renderer (make-instance 'gtk:cell-renderer-progress)))
     (is-false (gtk:cell-renderer-progress-inverted renderer))
     (is (= -1 (gtk:cell-renderer-progress-pulse renderer)))
     (is-false (gtk:cell-renderer-progress-text renderer))
@@ -71,6 +72,7 @@
 ;;;     gtk_cell_renderer_progress_new
 
 (test gtk:cell-renderer-progress-new
-  (is (typep (gtk:cell-renderer-progress-new) 'gtk:cell-renderer-progress)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:cell-renderer-progress-new) 'gtk:cell-renderer-progress))))
 
-;;; 2024-2-21
+;;; 2024-5-18

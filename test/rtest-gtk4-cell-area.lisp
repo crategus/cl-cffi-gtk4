@@ -48,7 +48,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-area-properties
-  (let ((area (make-instance 'gtk:cell-area-box)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (area (make-instance 'gtk:cell-area-box)))
     (is-false (gtk:cell-area-edit-widget area))
     (signals (error)
              (setf (gtk:cell-area-edit-widget area) (make-instance 'gtk:entry)))
@@ -129,8 +130,9 @@
 ;;;     gtk_cell_area_foreach
 
 (test gtk-cell-area-foreach
-  (let ((area (gtk:cell-area-box-new))
-        (message nil))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (area (gtk:cell-area-box-new))
+         (message nil))
     ;; Add five cell renderer to the area box
     (gtk:cell-area-box-pack-start area (gtk:cell-renderer-pixbuf-new))
     (gtk:cell-area-box-pack-start area (gtk:cell-renderer-progress-new))
@@ -209,8 +211,9 @@
 ;;;     gtk_cell_area_class_find_cell_property
 
 (test gtk-cell-area-class-find-cell-property
-  (let ((area (make-instance 'gtk:cell-area-box))
-        (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (area (make-instance 'gtk:cell-area-box))
+         (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
     (is-false (gtk:cell-area-add area renderer))
     (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
                                                                "align")))
@@ -224,8 +227,9 @@
 ;;;     gtk_cell_area_class_list_cell_properties
 
 (test gtk-cell-area-class-find-cell-property
-  (let ((area (make-instance 'gtk:cell-area-box))
-        (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (area (make-instance 'gtk:cell-area-box))
+         (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
     (is-false (gtk:cell-area-add area renderer))
     (is (cffi:pointerp (gtk:cell-area-class-find-cell-property "GtkCellAreaBox"
                                                                "align")))
@@ -242,8 +246,9 @@
 ;;;     gtk_cell_area_cell_get
 
 (test gtk-cell-area-cell-set/get
-  (let ((area (make-instance 'gtk:cell-area-box))
-        (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (area (make-instance 'gtk:cell-area-box))
+         (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
     (is-false (gtk:cell-area-add area renderer))
     (is-false (gtk:cell-area-cell-set area
                                       renderer
@@ -266,8 +271,9 @@
 ;;;     gtk_cell_area_cell_get_property
 
 (test gtk-cell-area-cell-property
-  (let ((area (make-instance 'gtk:cell-area-box))
-        (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (area (make-instance 'gtk:cell-area-box))
+         (renderer (make-instance 'gtk:cell-renderer-pixbuf)))
     (is-false (gtk:cell-area-add area renderer))
     (is-false (gtk:cell-area-cell-property area renderer "align"))
     (is-false (gtk:cell-area-cell-property area renderer "expand"))
@@ -287,4 +293,4 @@
 ;;;     gtk_cell_area_inner_cell_area
 ;;;     gtk_cell_area_request_renderer
 
-;;; 2024-5-4
+;;; 2024-5-18

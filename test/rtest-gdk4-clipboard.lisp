@@ -51,35 +51,30 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
+;; Check properties of the default clipboard
 (test gdk-clipboard-properties.1
   (let* ((display (gdk:display-default))
          (clipboard (gdk:display-clipboard display)))
-
     (is (typep display 'gdk:display))
     (is (typep clipboard 'gdk:clipboard))
-
+    (is-true (gdk:clipboard-set-content clipboard nil))
     (signals (error) (setf (gdk:clipboard-content clipboard) nil))
     (is-false (gdk:clipboard-content clipboard))
-    ;; TODO: The display property is construct only. We do not get an error?
-;    (is (typep (setf (gdk:clipboard-display clipboard) (gdk:display-default))
-;               'gdk:display))
     (is (typep (gdk:clipboard-display clipboard) 'gdk:display))
-
     (signals (error) (setf (gdk:clipboard-formats clipboard) nil))
     (is (typep (gdk:clipboard-formats clipboard) 'gdk:content-formats))
-
     (signals (error) (setf (gdk:clipboard-local clipboard) nil))
     ;; The value is false in the second run of the testsuite.
     (is-true (or (gdk:clipboard-local clipboard)
                  (not (gdk:clipboard-local clipboard))))))
 
+;; Check primary clipboard
 (test gdk-clipboard-properties.2
   (let* ((display (gdk:display-default))
          (clipboard (gdk:display-primary-clipboard display)))
-
     (is (typep display 'gdk:display))
     (is (typep clipboard 'gdk:clipboard))
-
+    (is-true (gdk:clipboard-set-content clipboard nil))
     (is-false (gdk:clipboard-content clipboard))
     (is (typep (gdk:clipboard-display clipboard) 'gdk:display))
     (is (typep (gdk:clipboard-formats clipboard) 'gdk:content-formats))
@@ -147,4 +142,4 @@
 ;;;     gdk_clipboard_set_text
 ;;;     gdk_clipboard_set_texture
 
-;;; 2024-4-30
+;;; 2024-5-18

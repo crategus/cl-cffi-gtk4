@@ -8,26 +8,26 @@
 ;;;     GtkCellRendererText
 
 (test gtk-cell-renderer-text-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCellRendererText"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-renderer-text
           (glib:symbol-for-gtype "GtkCellRendererText")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellRendererText")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_text_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkCellRenderer")
           (g:type-parent "GtkCellRendererText")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GtkCellRendererAccel" "GtkCellRendererCombo"
                "GtkCellRendererSpin")
              (list-children "GtkCellRendererText")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkCellRendererText")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("align-set" "alignment" "attributes" "background"
                "background-rgba" "background-set" "editable" "editable-set"
                "ellipsize" "ellipsize-set" "family" "family-set" "font"
@@ -43,7 +43,7 @@
   ;; Check the signals
   (is (equal '("edited")
              (list-signals "GtkCellRendererText")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererText" GTK-CELL-RENDERER-TEXT
                                (:SUPERCLASS GTK-CELL-RENDERER :EXPORT T
                                 :INTERFACES NIL :TYPE-INITIALIZER
@@ -158,7 +158,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-text-properties
-  (let ((renderer (make-instance 'gtk:cell-renderer-text)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (renderer (make-instance 'gtk:cell-renderer-text)))
     (is-false (gtk:cell-renderer-text-align-set renderer))
     (is (eq :left (gtk:cell-renderer-text-alignment renderer)))
     (is-false (gtk:cell-renderer-text-attributes renderer))
@@ -220,13 +221,29 @@
 
 ;;;     edited
 
+(test gtk-cell-renderer-text-edited-signal
+  (let* ((name "edited") (gtype "GtkCellRendererText")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gchararray" "gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_cell_renderer_text_new
 
 (test gtk-cell-renderer-text-new
-  (is (typep (gtk:cell-renderer-text-new) 'gtk:cell-renderer-text)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:cell-renderer-text-new) 'gtk:cell-renderer-text))))
 
 ;;;     gtk_cell_renderer_text_set_fixed_height_from_font
 
-;;; 2024-2-21
+;;; 2024-5-18

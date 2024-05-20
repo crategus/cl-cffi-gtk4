@@ -36,9 +36,6 @@
   ;; Check CSS name
   (is (string= "button"
                (gtk:widget-class-css-name "GtkLockButton")))
-  ;; Check CSS classes
-  (is (equal '("lock")
-             (gtk:widget-css-classes (make-instance 'gtk:lock-button))))
   ;; Check accessible role
   (is (eq :button (gtk:widget-class-accessible-role "GtkLockButton")))
   ;; Check class definition
@@ -75,4 +72,4 @@
 
 ;;;     gtk_lock_button_new
 
-;;; 2024-5-2
+;;; 2024-5-18

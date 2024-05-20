@@ -18,8 +18,8 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (glib-sys:check-and-create-resources "test/rtest-gtk4.xml"
-                                       "cl-cffi-gtk4"
-                                       "test/resource/"
+                                       :package "cl-cffi-gtk4"
+                                       :sourcedir "test/resource/"
                                        :verbose t))
 
 (def-suite gtk-test)

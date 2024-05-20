@@ -8,31 +8,31 @@
 ;;;     GtkCellRendererSpin
 
 (test gtk-cell-renderer-spin-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCellRendererSpin"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-renderer-spin
           (glib:symbol-for-gtype "GtkCellRendererSpin")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellRendererSpin")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_spin_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkCellRendererText")
           (g:type-parent "GtkCellRendererSpin")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkCellRendererSpin")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkCellRendererSpin")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("adjustment" "climb-rate" "digits")
              (list-properties "GtkCellRendererSpin")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkCellRendererSpin")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererSpin"
                                              GTK-CELL-RENDERER-SPIN
                                (:SUPERCLASS GTK-CELL-RENDERER-TEXT :EXPORT T
@@ -49,7 +49,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-spin-properties
-  (let ((renderer (make-instance 'gtk:cell-renderer-spin)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (renderer (make-instance 'gtk:cell-renderer-spin)))
     (is-false (gtk:cell-renderer-spin-adjustment renderer))
     (is (= 0.0d0 (gtk:cell-renderer-spin-climb-rate renderer)))
     (is (= 0 (gtk:cell-renderer-spin-digits renderer)))))
@@ -59,6 +60,7 @@
 ;;;     gtk_cell_renderer_spin_new
 
 (test gtk-cell-renderer-spin-new
-  (is (typep (gtk:cell-renderer-spin-new) 'gtk:cell-renderer-spin)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:cell-renderer-spin-new) 'gtk:cell-renderer-spin))))
 
-;;; 2024-2-22
+;;; 2024-5-18

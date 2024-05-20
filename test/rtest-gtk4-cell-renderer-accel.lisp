@@ -8,26 +8,26 @@
 ;;;     GtkCellRendererAccelMode
 
 (test gtk-cell-renderer-accel-mode
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GtkCellRendererAccelMode"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellRendererAccelMode")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_accel_mode_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-renderer-accel-mode
           (glib:symbol-for-gtype "GtkCellRendererAccelMode")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GTK_CELL_RENDERER_ACCEL_MODE_GTK"
                "GTK_CELL_RENDERER_ACCEL_MODE_OTHER")
              (list-enum-item-name "GtkCellRendererAccelMode")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1)
              (list-enum-item-value "GtkCellRendererAccelMode")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("gtk" "other")
              (list-enum-item-nick "GtkCellRendererAccelMode")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkCellRendererAccelMode"
                                      GTK-CELL-RENDERER-ACCEL-MODE
                                      (:EXPORT T
@@ -40,31 +40,31 @@
 ;;;     GtkCellRendererAccel
 
 (test gtk-cell-renderer-accel-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkCellRendererAccel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:cell-renderer-accel
           (glib:symbol-for-gtype "GtkCellRendererAccel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkCellRendererAccel")
           (g:gtype (cffi:foreign-funcall "gtk_cell_renderer_accel_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkCellRendererText")
           (g:type-parent "GtkCellRendererAccel")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkCellRendererAccel")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkCellRendererAccel")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("accel-key" "accel-mode" "accel-mods" "keycode")
              (list-properties "GtkCellRendererAccel")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("accel-cleared" "accel-edited")
              (list-signals "GtkCellRendererAccel")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkCellRendererAccel"
                                              GTK-CELL-RENDERER-ACCEL
                                (:SUPERCLASS GTK-CELL-RENDERER-TEXT :EXPORT T
@@ -83,7 +83,8 @@
 ;;; --- Properties -------------------------------------------------------------
 
 (test gtk-cell-renderer-accel-properties
-  (let ((renderer (make-instance 'gtk:cell-renderer-accel)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (renderer (make-instance 'gtk:cell-renderer-accel)))
     (is (= 0 (gtk:cell-renderer-accel-accel-key renderer)))
     (is (eq :gtk (gtk:cell-renderer-accel-accel-mode renderer)))
     (is-false (gtk:cell-renderer-accel-accel-mods renderer))
@@ -92,13 +93,45 @@
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     accel-cleared
+
+(test gtk-cell-renderer-accel-accel-cleared-signal
+  (let* ((name "accel-cleared") (gtype "GtkCellRendererAccel")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gchararray")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;;     accel-edited
+
+(test gtk-cell-renderer-accel-accel-edited-signal
+  (let* ((name "accel-edited") (gtype "GtkCellRendererAccel")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gchararray" "guint" "GdkModifierType" "guint")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_cell_renderer_accel_new
 
 (test gtk-cell-renderer-accel-new
-  (is (typep (gtk:cell-renderer-accel-new) 'gtk:cell-renderer-accel)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:cell-renderer-accel-new) 'gtk:cell-renderer-accel))))
 
-;;; 2024-2-21
+;;; 2024-5-18

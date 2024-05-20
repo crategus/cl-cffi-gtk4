@@ -10,25 +10,25 @@
 ;;;     GtkEditable
 
 (test gtk-editable-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkEditable"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:editable
           (glib:symbol-for-gtype "GtkEditable")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkEditable")
           (g:gtype (cffi:foreign-funcall "gtk_editable_get_type" :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GtkWidget")
              (list-interface-prerequisites "GtkEditable")))
-  ;; Get the names of the interface properties.
+  ;; Check interface properties
   (is (equal '("cursor-position" "editable" "enable-undo" "max-width-chars"
                "selection-bound" "text" "width-chars" "xalign")
              (list-interface-properties "GtkEditable")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("changed" "delete-text" "insert-text")
              (list-signals "GtkEditable")))
-  ;; Get the interface definition
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkEditable"
                                   GTK-EDITABLE
                                   (:EXPORT T
@@ -90,6 +90,59 @@
     (is (= 10 (setf (gtk:editable-width-chars editable) 10)))
     (is (= 0.0 (gtk:editable-xalign editable)))
     (is (= 0.5 (setf (gtk:editable-xalign editable) 1/2)))))
+
+;;; --- Signals ----------------------------------------------------------------
+
+;;;     changed
+
+(test gtk-editable-changed-signal
+  (let* ((name "changed") (gtype "GtkEditable")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     delete-text
+
+(test gtk-editable-delete-text-signal
+  (let* ((name "delete-text") (gtype "GtkEditable")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gint" "gint")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
+;;;     insert-text
+
+(test gtk-editable-insert-text-signal
+  (let* ((name "insert-text") (gtype "GtkEditable")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-LAST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '("gchararray" "gint" "gpointer")
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -180,4 +233,4 @@
 ;;;     gtk_editable_delegate_set_property
 ;;;     gtk_editable_delegate_get_property
 
-;;; --- 2023-10-24 -------------------------------------------------------------
+;;; 2024-5-17

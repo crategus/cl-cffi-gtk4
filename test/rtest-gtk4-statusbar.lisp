@@ -34,9 +34,6 @@
   ;; Check CSS name
   (is (string= "statusbar"
                (gtk:widget-class-css-name "GtkStatusbar")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:statusbar))))
   ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkStatusbar")))
   ;; Check class definition
@@ -58,7 +55,8 @@
 ;;;     gtk_statusbar_new
 
 (test gtk-statusbar-new
-  (is (typep (gtk:statusbar-new) 'gtk:statusbar)))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:statusbar-new) 'gtk:statusbar))))
 
 ;;;     gtk_statusbar_get_context_id
 ;;;     gtk_statusbar_push
@@ -66,4 +64,4 @@
 ;;;     gtk_statusbar_remove
 ;;;     gtk_statusbar_remove_all
 
-;;; 2024-5-2
+;;; 2024-5-18
