@@ -1,4 +1,16 @@
-;;;; Example GtkFileChooserNative - 2023-8-30
+;;;; File Chooser Native
+;;;;
+;;;; The <tt>gtk:file-chooser-native</tt> class is an abstraction of a dialog
+;;;; suitable for use with "File Open" or "File Save as" commands. By default,
+;;;; this just uses a <tt>gtk:file-chooser-dialog</tt> widget to implement the
+;;;; actual dialog. However, on certain platforms, such as Windows and MacOS,
+;;;; the native platform file chooser is used instead. When the application is
+;;;; running in a sandboxed environment without direct filesystem access such as
+;;;; Flatpak, the <tt>gtk:file-chooser-native</tt> object may call the proper
+;;;; APIs (portals) to let the user choose a file and make it available to the
+;;;; application.
+;;;;
+;;;; Last version: 2024-5-20
 
 (in-package :gtk4-example)
 
@@ -11,7 +23,8 @@
     ;; Connect a signal handler
     (g:signal-connect native "response"
         (lambda (dialog response)
-          (when (= -3 response) ; -3 for the :accept value
+          (when (eq :accept
+                    (gtk:response-type-keyword response))
             (let* ((file (gtk:file-chooser-file dialog))
                    (launcher (gtk:file-launcher-new file)))
               ;; Open the file

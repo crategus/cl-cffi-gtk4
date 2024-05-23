@@ -624,7 +624,18 @@
        ":dialog"
        "CREATE-FILE-CHOOSER-DIALOG"
        "gtk4-example"
-       "file-chooser-dialog.lisp")
+       "file-chooser-dialog.lisp"
+       :keywords
+       "GtkFileChooserDialog"
+       "gtk:file-chooser-dialog")
+      ("File Chooser Native"
+       ":dialog"
+       "CREATE-FILE-CHOOSER-NATIVE"
+       "gtk4-example"
+       "file-chooser-native.lisp"
+       :keywords
+       "GtkFileChooserNative"
+       "gtk:file-chooser-native")
       ("Font Button"
        ":window"
        "DO-FONT-BUTTON"
