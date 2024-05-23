@@ -773,12 +773,12 @@ lambda (renderer path text)    :run-last
 (setf (liber:alias-for-function 'cell-renderer-text-foreground)
       "Accessor"
       (documentation 'cell-renderer-text-foreground 'function)
- "@version{2024-2-21}
+ "@version{2024-5-22}
   @syntax{(setf (gtk:cell-renderer-text-foreground object) foreground)}
   @argument[object]{a @class{gtk:cell-renderer-text} object}
   @argument[foreground]{a string with the foreground color}
   @begin{short}
-    Accessor of the slot @slot[gtk:cell-renderer-text]{foreground} slot of the
+    Accessor of the @slot[gtk:cell-renderer-text]{foreground} slot of the
     @class{gtk:cell-renderer-text} class.
   @end{short}
   @begin[Warning]{dictionary}

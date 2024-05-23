@@ -231,14 +231,14 @@ lambda (section arg)    :action
 (setf (liber:alias-for-function 'shortcuts-section-view-name)
       "Accessor"
       (documentation 'shortcuts-section-view-name 'function)
- "@version{2024-2-18}
+ "@version{2024-5-22}
   @syntax{(gtk:shortcuts-section-view-name object) => name}
   @syntax{(setf (gtk:shortcuts-section-view-name object) name)}
   @argument[object]{a @class{gtk:shortcuts-section} widget}
   @argument[name]{a string with a view name to filter the groups in this
     section by}
   @begin{short}
-    Accessor of the slot @slot[gtk:shortcuts-section]{view-name} of the
+    Accessor of the @slot[gtk:shortcuts-section]{view-name} slot of the
     @class{gtk:shortcuts-section} class.
   @end{short}
   A view name to filter the groups in this section by. See the

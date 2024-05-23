@@ -527,13 +527,13 @@
 (setf (liber:alias-for-function 'shortcuts-shortcut-title-size-group)
       "Accessor"
       (documentation 'shortcuts-shortcut-title-size-group 'function)
- "@version{2024-2-18}
+ "@version{2024-5-22}
   @syntax{(gtk:shortcuts-shortcut-title-size-group object) => group}
   @syntax{(setf (gtk:shortcuts-shortcut-title-size-group object) group)}
   @argument[object]{a @class{gtk:shortcuts-shortcut} widget}
   @argument[group]{a @class{gtk:size-group} object}
   @begin{short}
-    Accessor of the slot @slot[gtk:shortcuts-shortcut]{title-size-group} of the
+    Accessor of the @slot[gtk:shortcuts-shortcut]{title-size-group} slot of the
     @class{gtk:shortcuts-shortcut} class.
   @end{short}
   The size group for the textual portion of this shortcut. This is used
