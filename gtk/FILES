@@ -148,14 +148,14 @@ Buttons and Toggles
 Numeric and Text Data Entry
 
   gtk4.editable.lisp                   GtkEditable                    GTK 4.12 &
-  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.12 .
-  gtk4.text.lisp                       GtkText                        GTK 4.12 .
-  gtk4.entry.lisp                      GtkEntry                       GTK 4.12 .
-  gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.12 .
-  gtk4.scale.lisp                      GtkScale                       GTK 4.12 .
-  gtk4.spin-button.lisp                GtkSpinButton                  GTK 4.12 .
-  gtk4.search-entry.lisp               GtkSearchEntry                 GTK 4.12 .
-  gtk4.search-bar.lisp                 GtkSearchBar                   GTK 4.12 .
+  gtk4.entry-buffer.lisp               GtkEntryBuffer                 GTK 4.12
+  gtk4.text.lisp                       GtkText                        GTK 4.12
+  gtk4.entry.lisp                      GtkEntry                       GTK 4.12
+  gtk4.password-entry.lisp             GtkPasswordEntry               GTK 4.12
+  gtk4.scale.lisp                      GtkScale                       GTK 4.12
+  gtk4.spin-button.lisp                GtkSpinButton                  GTK 4.12
+  gtk4.search-entry.lisp               GtkSearchEntry                 GTK 4.12
+  gtk4.search-bar.lisp                 GtkSearchBar                   GTK 4.12
   gtk4.editable-label.lisp             GtkEditableLabel               GTK 4.12
 
 Multiline Text Editor
@@ -329,8 +329,8 @@ Deprecated
   gtk4.entry-completion.lisp            GtkEntryCompletion            GTK 4.12
 
   gtk4.tree-model.lisp                  GtkTreeModel                  GTK 4.12 &
-  gtk4.tree-selection.lisp              GtkTreeSelection              GTK 4.12 .
-  gtk4.tree-view-column.lisp            GtkTreeViewColumn             GTK 4.12 .
+  gtk4.tree-selection.lisp              GtkTreeSelection              GTK 4.12
+  gtk4.tree-view-column.lisp            GtkTreeViewColumn             GTK 4.12
   gtk4.tree-view.lisp                   GtkTreeView                   GTK 4.12&.
   gtk4.tree-view-dnd.lisp               GtkTreeView Drag & Drop       GTK 4.12&.
 
@@ -364,25 +364,25 @@ Deprecated
   gtk4.combo-box-text.lisp              GtkComboBoxText               GTK 4.12
 
   gtk4.app-chooser.lisp                 GtkAppChooser                 GTK 4.12
-  gtk4.app-chooser-button.lisp          GtkAppChooserButton           GTK 4.12
-  gtk4.app-chooser-dialog.lisp          GtkAppChooserDialog           GTK 4.12
   gtk4.app-chooser-widget.lisp          GtkAppChooserWidget           GTK 4.12
+  gtk4.app-chooser-dialog.lisp          GtkAppChooserDialog           GTK 4.12
+  gtk4.app-chooser-button.lisp          GtkAppChooserButton           GTK 4.12
 
-  gtk4.color-chooser.lisp               GtkColorChooser               GTK 4.12 .
-  gtk4.color-button.lisp                GtkColorButton                GTK 4.12 .
-  gtk4.color-chooser-widget.lisp        GtkColorChooserWidget         GTK 4.12 .
-  gtk4.color-chooser-dialog.lisp        GtkColorChooserDialog         GTK 4.12 .
+  gtk4.color-chooser.lisp               GtkColorChooser               GTK 4.12
+  gtk4.color-chooser-widget.lisp        GtkColorChooserWidget         GTK 4.12
+  gtk4.color-chooser-dialog.lisp        GtkColorChooserDialog         GTK 4.12
+  gtk4.color-button.lisp                GtkColorButton                GTK 4.12
 
-  gtk4.file-chooser.lisp                GtkFileChooser                GTK 4.12&.
-  gtk4.file-chooser-native.lisp         GtkFileChooserNative          GTK 4.12 .
-  gtk4.file-chooser-dialog.lisp         GtkFileChooserDialog          GTK 4.12 .
-  gtk4.file-chooser-widget.lisp         GtkFileChooserWidget          GTK 4.12 .
+  gtk4.file-chooser.lisp                GtkFileChooser                GTK 4.12 &
+  gtk4.file-chooser-widget.lisp         GtkFileChooserWidget          GTK 4.12
+  gtk4.file-chooser-dialog.lisp         GtkFileChooserDialog          GTK 4.12
+  gtk4.file-chooser-native.lisp         GtkFileChooserNative          GTK 4.12
 
-  gtk4.font-chooser.lisp                GtkFontChooser                GTK 4.12 .
-  gtk4.font-button.lisp                 GtkFontButton                 GTK 4.12 .
-  gtk4.font-chooser-widget.lisp         GtkFontChooserWidget          GTK 4.12 .
-  gtk4.font-chooser-dialog.lisp         GtkFontChooserDialog          GTK 4.12 .
+  gtk4.font-chooser.lisp                GtkFontChooser                GTK 4.12
+  gtk4.font-chooser-widget.lisp         GtkFontChooserWidget          GTK 4.12
+  gtk4.font-chooser-dialog.lisp         GtkFontChooserDialog          GTK 4.12
+  gtk4.font-button.lisp                 GtkFontButton                 GTK 4.12
 
   gtk4.style-context.lisp               GtkStyleContext               GTK 4.12 .
 
-2024-5-3
+2024-5-23

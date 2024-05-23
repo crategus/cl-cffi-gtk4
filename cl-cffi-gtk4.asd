@@ -729,7 +729,7 @@
      (:file "rtest-gtk4-tree-view-dnd")
 
      (:file "rtest-gtk4-cell-layout")
-;    (:file "gtk4.cell-view")
+     (:file "rtest-gtk4-cell-view")
      (:file "rtest-gtk4-icon-view")
 
      (:file "rtest-gtk4-tree-sortable")
@@ -764,7 +764,7 @@
      (:file "rtest-gtk4-spin-button")
      (:file "rtest-gtk4-search-entry")
      (:file "rtest-gtk4-search-bar")
-;    (:file "gtk4.editable-label")
+     (:file "rtest-gtk4-editable-label")
 
      ;; Combo Box, Popover
      (:file "rtest-gtk4-combo-box")
@@ -775,9 +775,9 @@
 
      ;; Selector Widgets and Dialogs
      (:file "rtest-gtk4-color-chooser")
-;     (:file "rtest-gtk4-color-button")
+     (:file "rtest-gtk4-color-button")
      (:file "rtest-gtk4-color-chooser-widget")
-;    (:file "rtest-gtk4-color-chooser-dialog")
+     (:file "rtest-gtk4-color-chooser-dialog")
 
      (:file "rtest-gtk4-color-dialog"            :if-feature :gtk-4-10)
      (:file "rtest-gtk4-color-dialog-button"     :if-feature :gtk-4-10)

@@ -4197,7 +4197,6 @@ GtkCellRenderer         GtkWidget
       @about-function{tree-get-row-drag-data}
     @end{subsection}
     @begin[GtkCellLayout]{subsection}
-      An interface for packing cells.
       @about-class{cell-layout}
       @about-function{cell-layout-pack-start}
       @about-function{cell-layout-pack-end}
@@ -4212,7 +4211,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-layout-clear-attributes}
     @end{subsection}
     @begin[GtkCellView]{subsection}
-      A widget displaying a single row of a GtkTreeModel.
       @about-class{cell-view}
       @about-generic{cell-view-cell-area}
       @about-generic{cell-view-cell-area-context}
@@ -4227,7 +4225,6 @@ GtkCellRenderer         GtkWidget
       @about-function{cell-view-displayed-row}
     @end{subsection}
     @begin[GtkIconView]{subsection}
-      A widget which displays a list of icons in a grid.
       @about-symbol{icon-view-drop-position}
       @about-class{icon-view}
       @about-generic{icon-view-activate-on-single-click}
@@ -4644,14 +4641,30 @@ GtkCellRenderer         GtkWidget
       @about-function{combo-box-text-active-text}
     @end{subsection}
     @begin[GtkAppChooser]{subsection}
-      Interface implemented by widgets for choosing an application.
       @about-class{app-chooser}
       @about-generic{app-chooser-content-type}
       @about-function{app-chooser-app-info}
       @about-function{app-chooser-refresh}
     @end{subsection}
+    @begin[GtkAppChooserWidget]{subsection}
+      @about-class{app-chooser-widget}
+      @about-generic{app-chooser-widget-default-text}
+      @about-generic{app-chooser-widget-show-all}
+      @about-generic{app-chooser-widget-show-default}
+      @about-generic{app-chooser-widget-show-fallback}
+      @about-generic{app-chooser-widget-show-other}
+      @about-generic{app-chooser-widget-show-recommended}
+      @about-function{app-chooser-widget-new}
+    @end{subsection}
+    @begin[GtkAppChooserDialog]{subsection}
+      @about-class{app-chooser-dialog}
+      @about-generic{app-chooser-dialog-gfile}
+      @about-generic{app-chooser-dialog-heading}
+      @about-function{app-chooser-dialog-new}
+      @about-function{app-chooser-dialog-new-for-content-type}
+      @about-function{app-chooser-dialog-widget}
+    @end{subsection}
     @begin[GtkAppChooserButton]{subsection}
-      A button to launch an application chooser dialog.
       @about-class{app-chooser-button}
       @about-generic{app-chooser-button-heading}
       @about-generic{app-chooser-button-modal}
@@ -4662,28 +4675,7 @@ GtkCellRenderer         GtkWidget
       @about-function{app-chooser-button-append-separator}
       @about-function{app-chooser-button-set-active-custom-item}
     @end{subsection}
-    @begin[GtkAppChooserDialog]{subsection}
-      An application chooser dialog.
-      @about-class{app-chooser-dialog}
-      @about-generic{app-chooser-dialog-gfile}
-      @about-generic{app-chooser-dialog-heading}
-      @about-function{app-chooser-dialog-new}
-      @about-function{app-chooser-dialog-new-for-content-type}
-      @about-function{app-chooser-dialog-widget}
-    @end{subsection}
-    @begin[GtkAppChooserWidget]{subsection}
-      Application chooser widget that can be embedded in other widgets.
-      @about-class{app-chooser-widget}
-      @about-generic{app-chooser-widget-default-text}
-      @about-generic{app-chooser-widget-show-all}
-      @about-generic{app-chooser-widget-show-default}
-      @about-generic{app-chooser-widget-show-fallback}
-      @about-generic{app-chooser-widget-show-other}
-      @about-generic{app-chooser-widget-show-recommended}
-      @about-function{app-chooser-widget-new}
-    @end{subsection}
     @begin[GtkColorChooser]{subsection}
-      Interface implemented by widgets for choosing colors.
       @about-class{color-chooser}
       @about-generic{color-chooser-rgba}
       @about-generic{color-chooser-use-alpha}
@@ -4691,8 +4683,17 @@ GtkCellRenderer         GtkWidget
       @about-function{hsv-to-rgb}
       @about-function{rgb-to-hsv}
     @end{subsection}
+    @begin[GtkColorChooserWidget]{subsection}
+      @about-class{color-chooser-widget}
+      @about-generic{color-chooser-widget-show-editor}
+      @about-function{color-chooser-widget-new}
+    @end{subsection}
+    @begin[GtkColorChooserDialog]{subsection}
+      @about-class{color-chooser-dialog}
+      @about-generic{color-chooser-dialog-show-editor}
+      @about-function{color-chooser-dialog-new}
+    @end{subsection}
     @begin[GtkColorButton]{subsection}
-      A button to launch a color chooser dialog.
       @about-class{color-button}
       @about-generic{color-button-modal}
       @about-generic{color-button-show-editor}
@@ -4700,21 +4701,7 @@ GtkCellRenderer         GtkWidget
       @about-function{color-button-new}
       @about-function{color-button-new-with-rgba}
     @end{subsection}
-    @begin[GtkColorChooserWidget]{subsection}
-      A widget for choosing colors.
-      @about-class{color-chooser-widget}
-      @about-generic{color-chooser-widget-show-editor}
-      @about-function{color-chooser-widget-new}
-    @end{subsection}
-    @begin[GtkColorChooserDialog]{subsection}
-      A dialog for choosing colors.
-      @about-class{color-chooser-dialog}
-      @about-generic{color-chooser-dialog-show-editor}
-      @about-function{color-chooser-dialog-new}
-    @end{subsection}
     @begin[GtkFileChooser]{subsection}
-      File chooser interface used by the @class{gtk:file-chooser-widget} and
-      @class{gtk:file-chooser-dialog} widgets.
       @about-symbol{file-chooser-action}
       @about-class{file-chooser}
       @about-generic{file-chooser-action}
@@ -4736,27 +4723,22 @@ GtkCellRenderer         GtkWidget
       @about-function{file-chooser-remove-choice}
       @about-function{file-chooser-choice}
     @end{subsection}
-    @begin[GtkFileChooserNative]{subsection}
-      A native file chooser dialog, suitable for \"File Open\" or \"File Save\"
-      commands.
-      @about-class{file-chooser-native}
-      @about-generic{file-chooser-native-accept-label}
-      @about-generic{file-chooser-native-cancel-label}
-      @about-function{file-chooser-native-new}
-    @end{subsection}
-    @begin[GtkFileChooserDialog]{subsection}
-      A file chooser dialog, suitable for \"File Open\" or \"File Save\"
-      commands.
-      @about-class{file-chooser-dialog}
-      @about-function{file-chooser-dialog-new}
-    @end{subsection}
     @begin[GtkFileChooserWidget]{subsection}
-      A file chooser widget.
       @about-class{file-chooser-widget}
       @about-generic{file-chooser-widget-search-mode}
       @about-generic{file-chooser-widget-show-time}
       @about-generic{file-chooser-widget-subtitle}
       @about-function{file-chooser-widget-new}
+    @end{subsection}
+    @begin[GtkFileChooserDialog]{subsection}
+      @about-class{file-chooser-dialog}
+      @about-function{file-chooser-dialog-new}
+    @end{subsection}
+    @begin[GtkFileChooserNative]{subsection}
+      @about-class{file-chooser-native}
+      @about-generic{file-chooser-native-accept-label}
+      @about-generic{file-chooser-native-cancel-label}
+      @about-function{file-chooser-native-new}
     @end{subsection}
     @begin[GtkFontChooser]{subsection}
       Interface implemented by widgets displaying fonts.
@@ -4776,8 +4758,16 @@ GtkCellRenderer         GtkWidget
       @about-function{font-chooser-set-filter-func}
       @about-function{font-chooser-font-map}
     @end{subsection}
+    @begin[GtkFontChooserWidget]{subsection}
+      @about-class{font-chooser-widget}
+      @about-generic{font-chooser-widget-tweak-action}
+      @about-function{font-chooser-widget-new}
+    @end{subsection}
+    @begin[GtkFontChooserDialog]{subsection}
+      @about-class{font-chooser-dialog}
+      @about-function{font-chooser-dialog-new}
+    @end{subsection}
     @begin[GtkFontButton]{subsection}
-      A button to launch a font chooser dialog.
       @about-class{font-button}
       @about-generic{font-button-modal}
       @about-generic{font-button-title}
@@ -4786,19 +4776,7 @@ GtkCellRenderer         GtkWidget
       @about-function{font-button-new}
       @about-function{font-button-new-with-font}
     @end{subsection}
-    @begin[GtkFontChooserWidget]{subsection}
-      A widget for selecting fonts.
-      @about-class{font-chooser-widget}
-      @about-generic{font-chooser-widget-tweak-action}
-      @about-function{font-chooser-widget-new}
-    @end{subsection}
-    @begin[GtkFontChooserDialog]{subsection}
-      A dialog for selecting fonts.
-      @about-class{font-chooser-dialog}
-      @about-function{font-chooser-dialog-new}
-    @end{subsection}
     @begin[GtkStyleContext]{subsection}
-      Stores styling information affecting a widget.
       @about-symbol{style-context-print-flags}
       @about-class{style-context}
       @about-generic{style-context-display}
