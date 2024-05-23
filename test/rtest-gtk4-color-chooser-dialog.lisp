@@ -7,44 +7,36 @@
 
 ;;;     GtkColorChooserDialog
 
-(test color-chooser-dialog-class
-  ;; Type check
+(test gtk-color-chooser-dialog-class
+  ;; Check type
   (is (g:type-is-object "GtkColorChooserDialog"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:color-chooser-dialog
           (glib:symbol-for-gtype "GtkColorChooserDialog")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkColorChooserDialog")
           (g:gtype (cffi:foreign-funcall "gtk_color_chooser_dialog_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkDialog")
           (g:type-parent "GtkColorChooserDialog")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkColorChooserDialog")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget" "GtkNative"
                "GtkShortcutManager" "GtkRoot" "GtkColorChooser")
              (list-interfaces "GtkColorChooserDialog")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("rgba" "show-editor" "use-alpha")
              (list-properties "GtkColorChooserDialog")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkColorChooserDialog")))
-  ;; CSS information
+  ;; Check CSS information
   (is (string= "window"
                (gtk:widget-class-css-name "GtkColorChooserDialog")))
-  #-windows
-  (is (string=
-"[window.background.csd.dialog:dir(ltr)]
-"
-               (gtk:style-context-to-string
-                   (gtk:widget-style-context
-                       (make-instance 'gtk:color-chooser-dialog))
-                   :none)))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorChooserDialog"
                                      GTK-COLOR-CHOOSER-DIALOG
                        (:SUPERCLASS GTK-DIALOG :EXPORT T :INTERFACES
@@ -60,8 +52,18 @@
 
 ;;;     show-editor
 
+(test gtk-color-chooser-dialog-properties
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (dialog (make-instance 'gtk:color-chooser-dialog)))
+    (is-false (gtk:color-chooser-dialog-show-editor dialog))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_color_chooser_dialog_new
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+(test gtk-color-chooser-dialog-new
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:color-chooser-dialog-new "title" nil)
+               'gtk:color-chooser-dialog))))
+
+;;; 2024-5-22

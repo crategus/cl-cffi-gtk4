@@ -61,7 +61,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkFontChooserWidget
+;;; GtkFontChooserWidget
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkFontChooserWidget" font-chooser-widget
@@ -76,15 +76,20 @@
     font-chooser-widget-tweak-action
     "tweak-action" "GAction" t nil)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj font-chooser-widget) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:FONT-CHOOSER-WIDGET is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'font-chooser-widget 'type)
- "@version{2023-8-28}
+ "@version{2024-5-22}
   @begin{short}
     The @class{gtk:font-chooser-widget} widget lists the available fonts,
     styles and sizes, allowing the user to select a font.
   @end{short}
   It is used in the @class{gtk:font-chooser-dialog} widget to provide a dialog
-  box for selecting fonts.
+  for selecting fonts.
 
   To set or to get the font which is initially selected, use the
   @fun{gtk:font-chooser-font} or @fun{gtk:font-chooser-font-desc} functions.

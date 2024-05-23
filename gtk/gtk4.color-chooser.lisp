@@ -80,11 +80,16 @@
     color-chooser-use-alpha
     "use-alpha" "gboolean" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj color-chooser) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:COLOR-CHOOSER is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (liber:alias-for-class 'color-chooser)
       "Interface"
       (documentation 'color-chooser 'type)
- "@version{#2022-8-27}
+ "@version{2024-5-21}
   @begin{short}
     The @class{gtk:color-chooser} interface is an interface that is implemented
     by widgets for choosing colors.
@@ -138,7 +143,7 @@ lambda (chooser color)    :run-first
 (setf (liber:alias-for-function 'color-chooser-rgba)
       "Accessor"
       (documentation 'color-chooser-rgba 'function)
- "@version{#2022-8-27}
+ "@version{2024-5-21}
   @syntax{(gtk:color-chooser-rgba object) => color}
   @syntax{(setf (gtk:color-chooser-rgba object) color)}
   @argument[object]{a @class{gtk:color-chooser} widget}
@@ -172,7 +177,7 @@ lambda (chooser color)    :run-first
 (setf (liber:alias-for-function 'color-chooser-use-alpha)
       "Accessor"
       (documentation 'color-chooser-use-alpha 'function)
- "@version{#2022-8-27}
+ "@version{2024-5-21}
   @syntax{(gtk:color-chooser-use-alpha object) => use-alpha}
   @syntax{(setf (gtk:color-chooser-use-alpha object) use-alpha)}
   @argument[object]{a @class{gtk:color-chooser} widget}
@@ -202,12 +207,9 @@ lambda (chooser color)    :run-first
   (n-colors :int)
   (colors :pointer))
 
-(defun color-chooser-add-palette (chooser
-                                  orientation
-                                  colors-per-line
-                                  colors)
+(defun color-chooser-add-palette (chooser orientation colors-per-line colors)
  #+liber-documentation
- "@version{#2022-8-27}
+ "@version{2024-5-21}
   @argument[chooser]{a @class{gtk:color-chooser} widget}
   @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
   @argument[colors-per-line]{an integer with the number of colors to show in
@@ -264,7 +266,7 @@ lambda (chooser color)    :run-first
 
 (defun hsv-to-rgb (h s v)
  #+liber-documentation
- "@version{2023-12-3}
+ "@version{2024-5-21}
   @argument[h]{a number coerced to a float with the hue component}
   @argument[s]{a number coerced to a float with the saturation component}
   @argument[v]{a number coerced to a float with the value component}
@@ -277,7 +279,6 @@ lambda (chooser color)    :run-first
     Converts a color from HSV space to RGB. Input values must be in the
     [0.0, 1.0] range, output values will be in the same range.
   @end{short}
-  @see-class{gtk:hsv}
   @see-function{gtk:rgb-to-hsv}"
   (cffi:with-foreign-objects ((r :float) (g :float) (b :float))
     (%hsv-to-rgb (coerce h 'single-float)
@@ -306,7 +307,7 @@ lambda (chooser color)    :run-first
 
 (defun rgb-to-hsv (r g b)
  #+liber-documentation
- "@version{2023-12-3}
+ "@version{2024-5-21}
   @argument[r]{a number coerced to a float with the red component}
   @argument[g]{a number coerced to a float with the green component}
   @argument[b]{a number coerced to a float with the blue component}
@@ -319,7 +320,6 @@ lambda (chooser color)    :run-first
     Converts a color from RGB space to HSV. Input values must be in the
     [0.0, 1.0] range. Output values will be in the same range.
   @end{short}
-  @see-class{gtk:hsv}
   @see-function{gtk:hsv-to-rgb}"
   (cffi:with-foreign-objects ((h :float) (s :float) (v :float))
     (%rgb-to-hsv (coerce r 'single-float)

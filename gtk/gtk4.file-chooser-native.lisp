@@ -88,9 +88,9 @@
 
 #+liber-documentation
 (setf (documentation 'file-chooser-native 'type)
- "@version{2023-8-30}
+ "@version{2024-5-22}
   @begin{short}
-    The @class{gtk:file-chooser-native} class is an abstraction of a dialog box
+    The @class{gtk:file-chooser-native} class is an abstraction of a dialog
     suitable for use with \"File Open\" or \"File Save as\" commands.
   @end{short}
   By default, this just uses a @class{gtk:file-chooser-dialog} widget to
@@ -163,7 +163,8 @@
     ;; Connect a signal handler
     (g:signal-connect native \"response\"
         (lambda (dialog response)
-          (when (= -3 response) ; -3 for the :accept value
+          (when (eq :accept
+                    (gtk:response-type-keyword response))
             (let* ((file (gtk:file-chooser-file dialog))
                    (launcher (gtk:file-launcher-new file)))
               ;; Open the file

@@ -84,7 +84,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkAppChooserButton
+;;; GtkAppChooserButton
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkAppChooserButton" app-chooser-button
@@ -115,7 +115,7 @@
 
 #+liber-documentation
 (setf (documentation 'app-chooser-button 'type)
- "@version{2024-4-26}
+ "@version{2024-5-21}
   @begin{short}
     The @class{gtk:app-chooser-button} widget is a widget that lets the user
     select an application.
@@ -126,8 +126,8 @@
 
   Initially, a @class{gtk:app-chooser-button} widget selects the first
   application in its list, which will either be the most-recently used
-  application or, if the @code{show-default-item} property is @em{true}, the
-  default application.
+  application or, if the @slot[gtk:app-chooser-button]{show-default-item}
+  property is @em{true}, the default application.
 
   The list of applications shown in a @class{gtk:app-chooser-button} widget
   includes the recommended applications for the given content type. When the

@@ -84,9 +84,14 @@
     color-chooser-dialog-show-editor
     "show-editor" "gboolean" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj color-chooser-dialog) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:COLOR-CHOOSER-DIALOG is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'color-chooser-dialog 'type)
- "@version{#2022-8-28}
+ "@version{2024-5-21}
   @begin{short}
     The @class{gtk:color-chooser-dialog} widget is a dialog for choosing a
     color.
@@ -99,7 +104,7 @@
   To create a @class{gtk:color-chooser-dialog} widget, use the
   @fun{gtk:color-chooser-dialog-new} function. To get or change the initially
   selected color, use the @fun{gtk:color-chooser-rgba} function.
-  @begin[Example]{dictionary}
+  @begin{examples}
     Clicking on the drawing area opens a color chooser dialog to select a
     background color for the drawing area. The default palettes are replaced
     for this color chooser dialog.
@@ -144,18 +149,20 @@
                   (green (gdk:rgba-green bg-color))
                   (blue (gdk:rgba-blue bg-color)))
                   ;; Paint the current color on the drawing area
-                  (cairo-set-source-rgb cr red green blue)
-                  (cairo-paint cr)
+                  (cairo:set-source-rgb cr red green blue)
+                  (cairo:paint cr)
                   ;; Print a hint on the drawing area
-                  (cairo-set-source-rgb cr (- 1 red) (- 1 green) (- 1 blue))
-                  (cairo-select-font-face cr \"Sans\")
-                  (cairo-set-font-size cr 12)
-                  (cairo-move-to cr 12 24)
-                  (cairo-show-text cr message))))
+                  (cairo:set-source-rgb cr (- 1 red)
+                                           (- 1 green)
+                                           (- 1 blue))
+                  (cairo:select-font-face cr \"Sans\")
+                  (cairo:set-font-size cr 12)
+                  (cairo:move-to cr 12 24)
+                  (cairo:show-text cr message))))
       ;; Add the controller to the drawing area
       (gtk:widget-add-controller area gesture)
       ;; Create and run a color chooser dialog to select a background color
-      (g-signal-connect gesture \"pressed\"
+      (g:signal-connect gesture \"pressed\"
           (lambda (gesture n x y)
             (declare (ignore gesture n x y))
             (let ((dialog (make-instance 'gtk:color-chooser-dialog
@@ -168,7 +175,7 @@
               ;; Set the actual background color for the color chooser
               (setf (gtk:color-chooser-rgba dialog) bg-color)
               ;; Connect handler to the response signal of the dialog
-              (g-signal-connect dialog \"response\"
+              (g:signal-connect dialog \"response\"
                   (lambda (dialog response)
                     (when (= -5 response) ; the :ok value
                       ;; Change the background color for the drawing area
@@ -179,9 +186,9 @@
                     (gtk:window-destroy dialog)))
               (gtk:widget-show dialog))))
       ;; Show the window
-      (gtk:widget-show window))))
+      (gtk:window-present window))))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Warning]{dictionary}
     The @class{gtk:color-chooser-dialog} implementation is deprecated since
     4.10. Use the @class{gtk:color-dialog} object instead.
@@ -208,7 +215,7 @@
 (setf (liber:alias-for-function 'color-chooser-dialog-show-editor)
       "Accessor"
       (documentation 'color-chooser-dialog-show-editor 'function)
- "@version{#2022-8-28}
+ "@version{2024-5-21}
   @syntax{(gtk:color-chooser-dialog-show-editor object) => show-editor}
   @syntax{(setf (gtk:color-chooser-dialog-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-chooser-dialog} widget}
@@ -231,7 +238,7 @@
 
 (defun color-chooser-dialog-new (title parent)
  #+liber-documentation
- "@version{#2022-8-28}
+ "@version{2024-5-21}
   @argument[title]{a string with the title of the dialog, or @code{nil}}
   @argument[parent]{a @class{gtk:window} transient parent of the dialog,
     or @code{nil}}
@@ -243,9 +250,10 @@
   @end{dictionary}
   @see-class{gtk:window}
   @see-class{gtk:color-chooser-dialog}"
-  (make-instance 'color-chooser-dialog
-                 :title (if title title (cffi:null-pointer))
-                 :parent parent))
+  (cffi:foreign-funcall "gtk_color_chooser_dialog_new"
+                        :string (or title (cffi:null-pointer))
+                        (g:object window) (or parent (cffi:null-pointer))
+                        (g:object color-chooser-dialog)))
 
 (export 'color-chooser-dialog-new)
 

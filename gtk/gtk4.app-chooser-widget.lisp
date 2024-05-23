@@ -86,7 +86,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkAppChooserWidget
+;;; GtkAppChooserWidget
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkAppChooserWidget" app-chooser-widget

@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2012 - 2023 Dieter Kaiser
+;;; Copyright (C) 2012 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -101,7 +101,7 @@
 (setf (liber:alias-for-symbol 'font-chooser-level)
       "GFlags"
       (liber:symbol-documentation 'font-chooser-level)
- "@version{2023-8-28}
+ "@version{2024-5-22}
   @begin{declaration}
 (gobject:define-g-flags \"GtkFontChooserLevel\" font-chooser-level
   (:export t
@@ -125,8 +125,7 @@
     The @symbol{gtk:font-chooser-level} flags specifies the granularity of font
     selection that is desired in a font chooser.
   @end{short}
-  These flags may be extended in the future. Applications should ignore
-  unknown values.
+  Applications should ignore unknown values.
   @see-class{gtk:font-chooser}")
 
 ;;; ----------------------------------------------------------------------------
@@ -158,18 +157,23 @@
     font-chooser-show-preview-entry
     "show-preview-entry" "gboolean" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj font-chooser) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:FONT-CHOOSER is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (liber:alias-for-class 'font-chooser)
       "Interface"
       (documentation 'font-chooser 'type)
- "@version{2023-8-28}
+ "@version{2024-5-22}
   @begin{short}
     The @class{gtk:font-chooser} interface is an interface that can be
     implemented by widgets displaying the list of fonts.
   @end{short}
-  In GTK, the main widgets that implement this interface are
+  In GTK, the main widgets that implement this interface are the
   @class{gtk:font-chooser-widget}, @class{gtk:font-chooser-dialog} and
-  @class{gtk:font-button}.
+  @class{gtk:font-button} widgets.
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog} and @class{gtk:font-dialog-button} widgets
@@ -186,7 +190,7 @@ lambda (fontchooser fontname)    :run-first
       @begin[code]{table}
         @entry[fontchooser]{The @class{gtk:font-chooser} widget which received
           the signal.}
-        @entry[fontname]{A string with the font name.}
+        @entry[fontname]{The string with the font name.}
       @end{table}
   @end{dictionary}
   @see-slot{gtk:font-chooser-font}
@@ -211,7 +215,7 @@ lambda (fontchooser fontname)    :run-first
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "font" 'font-chooser) t)
  "The @code{font} property of type @code{:string} (Read / Write) @br{}
-  The font description as a string, e.g. \"Sans Italic 12\". @br{}
+  The font description as a string, for example, \"Sans Italic 12\". @br{}
   Default value: \"Sans 12\"")
 
 #+liber-documentation
@@ -320,14 +324,15 @@ lambda (fontchooser fontname)    :run-first
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "language" 'font-chooser) t)
  "The @code{language} property of type @code{:string} (Read / Write) @br{}
-  The language for which the @code{font-features} property were selected, in a
-  format that is compatible with CSS and with Pango attributes.")
+  The language for which the @slot[gtk:font-chooser]{font-features} property
+  were selected, in a format that is compatible with CSS and with Pango
+  attributes.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'font-chooser-language)
       "Accessor"
       (documentation 'font-chooser-language 'function)
- "@version{2023-8-28}
+ "@version{2024-5-22}
   @syntax{(gtk:font-chooser-language object) => language}
   @syntax{(setf (gtk:font-chooser-language object) language)}
   @argument[object]{a @class{gtk:font-chooser} object}
@@ -339,11 +344,11 @@ lambda (fontchooser fontname)    :run-first
   The @fun{gtk:font-chooser-language} function gets the language that is used
   for font features. The @setf{gtk:font-chooser-language} function sets the
   language. See the @fun{pango:language-to-string} function.
-  @begin[Example]{dictionary}
+  @begin{examples}
     @begin{pre}
 (gtk:font-chooser-language (make-instance 'gtk:font-button)) => \"de-de\"
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog} and @class{gtk:font-dialog-button} widgets
@@ -359,18 +364,18 @@ lambda (fontchooser fontname)    :run-first
  "The @code{level} property of type @symbol{gtk:font-chooser-level}
   (Read / Write) @br{}
   The level of granularity to offer for selecting fonts. @br{}
-  Default value: @code{(:STYLE :SIZE)}")
+  Default value: @code{'(:STYLE :SIZE)}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'font-chooser-level)
       "Accessor"
       (documentation 'font-chooser-level 'function)
- "@version{2023-8-28}
+ "@version{2024-5-22}
   @syntax{(gtk:font-chooser-level object) => level}
   @syntax{(setf (gtk:font-chooser-level object) level)}
   @argument[object]{a @class{gtk:font-chooser} object}
-  @argument[level]{the desired level of granularity of type
-    @symbol{gtk:font-chooser-level}}
+  @argument[level]{a @symbol{gtk:font-chooser-level} value for the desired
+    level of granularity of type}
   @begin{short}
     Accessor of the @slot[gtk:font-chooser]{level} slot of the
     @class{gtk:font-chooser} class.
@@ -458,10 +463,10 @@ lambda (fontchooser fontname)    :run-first
 (cffi:defcfun ("gtk_font_chooser_get_font_family" font-chooser-font-family)
     (g:object pango:font-family)
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2024-5-22}
   @argument[fontchooser]{a @class{gtk:font-chooser} object}
   @begin{return}
-    A @class{pango:font-family} object representing the selected font family,
+    The @class{pango:font-family} object representing the selected font family,
     or @code{nil}.
   @end{return}
   @begin{short}
@@ -469,7 +474,7 @@ lambda (fontchooser fontname)    :run-first
   @end{short}
   Font families are a collection of font faces. If the selected font is not
   installed, returns @code{nil}.
-  @begin[Example]{dictionary}
+  @begin{examples}
     @begin{pre}
 (defvar fontbutton (make-instance 'gtk:font-button :font \"Serif Bold 10\"))
 => FONTBUTTON
@@ -478,7 +483,7 @@ lambda (fontchooser fontname)    :run-first
 (pango:font-family-name *)
 => \"Sans\"
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog} and @class{gtk:font-dialog-button} widgets
@@ -497,15 +502,15 @@ lambda (fontchooser fontname)    :run-first
 (cffi:defcfun ("gtk_font_chooser_get_font_face" font-chooser-font-face)
     (g:object pango:font-face)
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2024-5-22}
   @argument[fontchooser]{a @class{gtk:font-chooser} object}
   @begin{return}
-    A @class{pango:font-face} object representing the selected font group
+    The @class{pango:font-face} object representing the selected font group
     details, or @code{nil}.
   @end{return}
   @begin{short}
     Gets the Pango font face representing the selected font group details,
-    i.e. family, slant, weight, width, etc.
+    for example, family, slant, weight, width, etc.
   @end{short}
   If the selected font is not installed, returns @code{nil}.
   @begin[Warning]{dictionary}
@@ -525,10 +530,10 @@ lambda (fontchooser fontname)    :run-first
 
 (cffi:defcfun ("gtk_font_chooser_get_font_size" font-chooser-font-size) :int
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2024-5-22}
   @argument[fontchooser]{a @class{gtk:font-chooser} object}
   @begin{return}
-    An integer representing the selected font size in Pango units,
+    The integer representing the selected font size in Pango units,
     or -1 if no font size is selected.
   @end{return}
   @begin{short}
@@ -559,14 +564,14 @@ lambda (fontchooser fontname)    :run-first
 (setf (liber:alias-for-symbol 'font-filter-func)
       "Callback"
       (liber:symbol-documentation 'font-filter-func)
- "@version{#2024-5-4}
+ "@version{#2024-5-22}
   @syntax{lambda (family face) => result}
   @argument[family]{a @class{pango:font-family} object}
   @argument[face]{a @class{pango:font-face} object belonging to @arg{family}}
   @argument[result]{@em{true} if the font should be displayed}
   @begin{short}
     The callback function that is used for deciding what fonts get shown in a
-    @class{gtk:font-chooser} object.
+    @class{gtk:font-chooser} widget.
   @end{short}
   See the @fun{gtk:font-chooser-set-filter-func} function.
   @see-class{gtk:font-chooser}
@@ -589,14 +594,14 @@ lambda (fontchooser fontname)    :run-first
 
 (defun font-chooser-set-filter-func (fontchooser func)
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2024-5-22}
   @argument[fontchooser]{a @class{gtk:font-chooser} object}
   @argument[filter]{a @symbol{gtk:font-filter-func} callback, or @code{nil}}
   @begin{short}
     Adds a filter function that decides which fonts to display in the font
     chooser.
   @end{short}
-  @begin[Example]{dictionary}
+  @begin{examples}
     A callback filter function to select fonts from the font families \"Sans\"
     and \"Serif\":
     @begin{pre}
@@ -611,7 +616,7 @@ lambda (fontchooser fontname)    :run-first
 ;; Remove the filter function from the font button
 (gtk:font-chooser-set-filter-func button nil)
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog} and @class{gtk:font-dialog-button} widgets
@@ -648,7 +653,7 @@ lambda (fontchooser fontname)    :run-first
 (cffi:defcfun ("gtk_font_chooser_get_font_map" font-chooser-font-map)
     (g:object pango:font-map)
  #+liber-documentation
- "@version{#2023-8-28}
+ "@version{#2024-5-22}
   @syntax{(gtk:font-chooser-font-map fontchooser) => fontmap}
   @syntax{(setf (gtk:font-chooser-font-map fontchooser) fontmap)}
   @argument[fontchooser]{a @class{gtk:font-chooser} widget}
@@ -661,29 +666,14 @@ lambda (fontchooser fontname)    :run-first
   @setf{gtk:font-chooser-font-map} function sets a custom font map to use for
   the font chooser widget. A custom font map can be used to present application
   specific fonts instead of or in addition to the normal system fonts.
-  @begin[Example]{dictionary}
-    The example from the C documentation uses the @code{Fontconfig} library for
-    configuring and customizing font access. This library is not available
-    for the Lisp binding.
-    @begin{pre}
-FcConfig *config;
-PangoFontMap *fontmap;
-
-config = FcInitLoadConfigAndFonts ();
-FcConfigAppFontAddFile (config, my_app_font_file);
-
-fontmap = pango_cairo_font_map_new_for_font_type (CAIRO_FONT_TYPE_FT);
-pango_fc_font_map_set_config (PANGO_FC_FONT_MAP (fontmap), config);
-
-gtk_font_chooser_set_font_map (font_chooser, fontmap);
-    @end{pre}
+  @begin{examples}
     Note that other GTK widgets will only be able to use the application
     specific font if it is present in the font map they use. The following
     code updates the font map for a @class{gtk:label} widget with @arg{fontmap}.
     @begin{pre}
 (setf (pango:context-font-map (gtk:widget-pango-context label)) fontmap)
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Warning]{dictionary}
     The @class{gtk:font-chooser} implementation is deprecated since 4.10. Use
     the @class{gtk:font-dialog} and @class{gtk:font-dialog-button} widgets

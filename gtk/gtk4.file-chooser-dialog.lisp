@@ -91,7 +91,7 @@
 (setf (documentation 'file-chooser-dialog 'type)
  "@version{2024-4-26}
   @begin{short}
-    The @class{gtk:file-chooser-dialog} widget is a dialog box suitable for use
+    The @class{gtk:file-chooser-dialog} widget is a dialog suitable for use
     with \"File/Open\" or \"File/Save as\" commands.
   @end{short}
   This widget works by putting a @class{gtk:file-chooser-widget} widget inside
@@ -145,17 +145,17 @@
 (let ((dialog (gtk:file-chooser-dialog-new \"Open File\"
                                            parent-window
                                            :open
-                                           \"gtk-cancel\" :cancel
-                                           \"gtk-open\" :accept)))
+                                           \"Cancel\" :cancel
+                                           \"Open\" :accept)))
   ... )
     @end{pre}
-    This will create buttons for \"Cancel\" and \"Open\" that use stock
-    response identifiers from the @symbol{gtk:response-type} enumeration. For
-    most dialog boxes you can use your own custom response codes rather than
-    the ones in the @symbol{gtk:response-type} enumeration, but the
+    This will create buttons for \"Cancel\" and \"Open\" that  identifiers from
+    the @symbol{gtk:response-type} enumeration. For most dialogs you can use
+    your own custom response codes rather than the ones in the
+    @symbol{gtk:response-type} enumeration, but the
     @class{gtk:file-chooser-dialog} widget assumes that its \"accept\"-type
-    action, e.g. an \"Open\" or \"Save\" button, will have one of the following
-    response codes:
+    action, for example, an \"Open\" or \"Save\" button, will have one of the
+    following response codes:
     @begin{pre}
   @code{:accept}
   @code{:ok}
@@ -178,8 +178,8 @@
   (let ((dialog (gtk:file-chooser-dialog-new \"Open File\"
                                              window
                                              :open
-                                             \"gtk-cancel\" :cancel
-                                             \"gtk-open\" :accept)))
+                                             \"Cancel\" :cancel
+                                             \"Open\" :accept)))
     (if (eq :accept (gtk:dialog-run dialog))
       (let ((filename (gtk:file-chooser-filename dialog)))
         ...
@@ -192,8 +192,8 @@
   (let ((dialog (gtk:file-chooser-dialog-new \"Save File\"
                                              window
                                              :save
-                                             \"gtk-cancel\" :cancel
-                                             \"gtk-save\" :accept)))
+                                             \"Cancel\" :cancel
+                                             \"Save\" :accept)))
     (setf (gtk:file-chooser-do-overwrite-confirmation dialog) t)
     (if filename
         (setf (gtk:file-chooser-filename dialog) filename)

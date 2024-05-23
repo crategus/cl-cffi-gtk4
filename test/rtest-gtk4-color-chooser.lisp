@@ -8,18 +8,24 @@
 ;;;     GtkColorChooser
 
 (test gtk-color-chooser-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GtkColorChooser"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:color-chooser
           (glib:symbol-for-gtype "GtkColorChooser")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkColorChooser")
           (g:gtype (cffi:foreign-funcall "gtk_color_chooser_get_type" :size))))
-  ;; Get the names of the interface properties.
+  ;; Check interface prerequisites
+  (is (equal '("GObject")
+             (list-interface-prerequisites "GtkColorChooser")))
+  ;; Check interface properties.
   (is (equal '("rgba" "use-alpha")
              (list-interface-properties "GtkColorChooser")))
-  ;; Get the interface definition
+  ;; Check interface signals
+  (is (equal '("color-activated")
+             (list-signals "GtkColorChooser")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GtkColorChooser" GTK-COLOR-CHOOSER
                     (:EXPORT T :TYPE-INITIALIZER "gtk_color_chooser_get_type")
                     (RGBA GTK-COLOR-CHOOSER-RGBA "rgba" "GdkRGBA" T T)
@@ -29,11 +35,9 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     rgba
-;;;     use-alpha
-
 (test gtk-color-chooser-properties
-  (let ((chooser (make-instance 'gtk:color-button)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (chooser (make-instance 'gtk:color-button)))
     (is (typep (gtk:color-chooser-rgba chooser) 'gdk:rgba))
     (is (typep (setf (gtk:color-chooser-rgba chooser) (gdk:rgba-parse "Blue"))
                'gdk:rgba))
@@ -77,4 +81,4 @@
   (is (equal '(0.0 0.0 1.0) (multiple-value-list (gtk:rgb-to-hsv 1 1 1))))
   (is (equal '(0.0 0.0 0.5) (multiple-value-list (gtk:rgb-to-hsv 0.5 0.5 0.5)))))
 
-;;; --- 2023-12-3 --------------------------------------------------------------
+;;; 2024-5-21

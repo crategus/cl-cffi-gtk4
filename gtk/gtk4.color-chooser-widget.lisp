@@ -81,9 +81,14 @@
     color-chooser-widget-show-editor
     "show-editor" "gboolean" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj color-chooser-widget) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:COLOR-CHOOSER-WIDGET is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'color-chooser-widget 'type)
- "@version{2024-2-22}
+ "@version{2024-5-21}
   @begin{short}
     The @class{gtk:color-chooser-widget} widget lets the user select a color.
   @end{short}
@@ -104,25 +109,29 @@
     The @class{gtk:color-chooser-widget} class has a single CSS node with name
     @code{colorchooser}.
   @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin{examples}
     This example shows a color chooser widget in a window. The selected color
     is print on the console.
     @begin{pre}
 (defun do-color-chooser-widget (&optional application)
-  (let* ((color-chooser (make-instance 'gtk:color-chooser-widget))
+  (let* ((color-chooser (make-instance 'gtk:color-chooser-widget
+                                       :margin-top 12
+                                       :margin-bottom 12
+                                       :margin-start 12
+                                       :margin-end 12))
          (window (make-instance 'gtk:window
                                  :application application
                                  :child color-chooser
-                                 :title \"Example Color Chooser Widget\"
+                                 :title \"Color Chooser Widget\"
                                  :border-width 12
                                  :default-width 400)))
     (g:signal-connect color-chooser \"color-activated\"
         (lambda (chooser color)
           (declare (ignore chooser))
           (format t \"Selected color is ~a~%\" (gdk:rgba-to-string color))))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Warning]{dictionary}
     The @class{gtk:color-chooser-widget} implementation is deprecated
     since 4.10.
@@ -133,7 +142,7 @@
   @see-class{gtk:color-chooser-dialog}")
 
 ;;; ----------------------------------------------------------------------------
-;;; Property and Accesor Details
+;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
 #+liber-documentation

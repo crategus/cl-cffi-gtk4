@@ -97,9 +97,14 @@
     color-button-title
     "title" "gchararray" t t)))
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj color-button) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:COLOR-BUTTON is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'color-button 'type)
- "@version{#2022-8-27}
+ "@version{2024-5-21}
   @begin{short}
     The @class{gtk:color-button} widget is a button which displays the currently
     selected color and allows to open a color chooser dialog to change the
@@ -118,7 +123,7 @@ colorbutton
     @code{colorbutton} which contains a button node. To differentiate it from
     a plain @class{gtk:button} widget, it gets the @code{.color} style class.
   @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin{examples}
     The example shows a color button. The button is initialized with the color
     \"Blue\". The handler for the \"color-set\" signal prints the selected
     color on the console.
@@ -137,13 +142,13 @@ colorbutton
                                  :child button
                                  :default-width 270
                                  :default-height 210)))
-    (g-signal-connect button \"color-set\"
+    (g:signal-connect button \"color-set\"
         (lambda (widget)
           (let ((rgba (gtk:color-chooser-rgba widget)))
             (format t \"Selected color is ~a~%\" (gdk:rgba-to-string rgba)))))
-    (gtk:widget-show window)))
+    (gtk:window-present window)))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Warning]{dictionary}
     The @class{gtk:color-button} implementation is deprecated since 4.10.
     Use the @class{gtk:color-dialog-button} widget instead.
@@ -168,17 +173,17 @@ lambda (button)    :run-first
       signal, use the @fun{gtk:color-chooser-rgba} function to find out which
       color was just selected. Note that this signal is only emitted when the
       user changes the color. If you need to react to programmatic color
-      changes as well, use the \"notify::color\" signal.
+      changes as well, use the @code{\"notify::color\"} signal.
       @begin[code]{table}
         @entry[button]{The @class{gtk:color-button} widget which received the
           signal.}
       @end{table}
   @end{dictionary}
+  @see-constructor{gtk:color-button-new}
+  @see-constructor{gtk:color-button-new-with-rgba}
   @see-slot{gtk:color-button-modal}
   @see-slot{gtk:color-button-show-editor}
   @see-slot{gtk:color-button-title}
-  @see-constructor{gtk:color-button-new}
-  @see-constructor{gtk:color-button-new-with-rgba}
   @see-class{gtk:color-chooser}
   @see-class{gtk:color-chooser-dialog}
   @see-class{gtk:font-button}")
@@ -199,8 +204,8 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-modal)
       "Accessor"
       (documentation 'color-button-modal 'function)
- "@version{#2023-7-28}
-  @syntax{(gtk:color-button-modal object) => modal)}
+ "@version{2024-5-21}
+  @syntax{(gtk:color-button-modal object) => modal}
   @syntax{(setf (gtk:color-button-modal object) modal)}
   @argument[object]{a @class{gtk:color-button} widget}
   @argument[modal]{a boolean whether the color chooser dialog is modal}
@@ -231,8 +236,8 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-show-editor)
       "Accessor"
       (documentation 'color-button-show-editor 'function)
- "@version{#2022-8-27}
-  @syntax{(gtk:color-button-show-editor object) => show-editor)}
+ "@version{2024-5-21}
+  @syntax{(gtk:color-button-show-editor object) => show-editor}
   @syntax{(setf (gtk:color-button-show-editor object) show-editor)}
   @argument[object]{a @class{gtk:color-button} widget}
   @argument[show-editor]{a boolean whether to skip the palette in the color
@@ -263,8 +268,8 @@ lambda (button)    :run-first
 (setf (liber:alias-for-function 'color-button-title)
       "Accessor"
       (documentation 'color-button-title 'function)
- "@version{#2022-8-27}
-  @syntax{(gtk:color-button-title object) => title)}
+ "@version{2024-5-21}
+  @syntax{(gtk:color-button-title object) => title}
   @syntax{(setf (gtk:color-button-title object) title)}
   @argument[object]{a @class{gtk:color-button} widget}
   @argument[title]{a string containing the title of the color chooser dialog}
@@ -288,15 +293,15 @@ lambda (button)    :run-first
 
 (defun color-button-new ()
  #+liber-documentation
- "@version{#2022-8-27}
+ "@version{2024-5-21}
   @return{The new @class{gtk:color-button} widget.}
   @begin{short}
     Creates a new color button.
   @end{short}
-  This returns a widget in the form of a small button containing a swatch
-  representing the currently selected color. When the button is clicked, a
-  color chooser dialog will open, allowing the user to select a color. The
-  swatch will be updated to reflect the new color when the user finishes.
+  This returns a widget in the form of a button containing a swatch representing
+  the currently selected color. When the button is clicked, a color chooser
+  dialog will open, allowing the user to select a color. The swatch will be
+  updated to reflect the new color when the user finishes.
   @begin[Warning]{dictionary}
     The @class{gtk:color-button} implementation is deprecated since 4.10.
     Use the @class{gtk:color-dialog-button} widget instead.
@@ -315,16 +320,16 @@ lambda (button)    :run-first
 
 (defun color-button-new-with-rgba (rgba)
  #+liber-documentation
- "@version{#2022-8-27}
+ "@version{2024-5-21}
   @argument[rgba]{a @struct{gdk:rgba} color to set the current color with}
   @return{The new @class{gtk:color-button} widget.}
   @begin{short}
     Creates a new color button with the given RGBA color.
   @end{short}
-  This returns a widget in the form of a small button containing a swatch
-  representing the currently selected color. When the button is clicked, a
-  color chooser dialog will open, allowing the user to select a color. The
-  swatch will be updated to reflect the new color when the user finishes.
+  This returns a widget in the form of a button containing a swatch representing
+  the currently selected color. When the button is clicked, a color chooser
+  dialog will open, allowing the user to select a color. The swatch will be
+  updated to reflect the new color when the user finishes.
   @begin[Warning]{dictionary}
     The @class{gtk:color-button} implementation is deprecated since 4.10.
     Use the @class{gtk:color-dialog-button} widget instead.

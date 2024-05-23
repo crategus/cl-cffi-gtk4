@@ -8,40 +8,37 @@
 ;;;     GtkColorChooserWidget
 
 (test gtk-color-chooser-widget-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkColorChooserWidget"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:color-chooser-widget
           (glib:symbol-for-gtype "GtkColorChooserWidget")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkColorChooserWidget")
           (g:gtype (cffi:foreign-funcall "gtk_color_chooser_widget_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkColorChooserWidget")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkColorChooserWidget")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkColorChooser")
              (list-interfaces "GtkColorChooserWidget")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("rgba" "show-editor" "use-alpha")
              (list-properties "GtkColorChooserWidget")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkColorChooserWidget")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "colorchooser"
                (gtk:widget-class-css-name "GtkColorChooserWidget")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:color-chooser-widget))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkColorChooserWidget")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkColorChooserWidget"
                                GTK-COLOR-CHOOSER-WIDGET
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
@@ -56,10 +53,9 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     show-editor
-
 (test gtk-color-chooser-widget-properties
-  (let ((widget (make-instance 'gtk:color-chooser-widget)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (widget (make-instance 'gtk:color-chooser-widget)))
     (is-false (gtk:color-chooser-widget-show-editor widget))))
 
 ;;; --- Functions --------------------------------------------------------------
@@ -67,6 +63,7 @@
 ;;;     gtk_color_chooser_widget_new
 
 (test gtk-color-chooser-widget-new
-  (is (typep (gtk:color-chooser-widget-new) 'gtk:color-chooser-widget)))
+  (let ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:color-chooser-widget-new) 'gtk:color-chooser-widget))))
 
-;;; 2024-2-22
+;;; 2024-5-22

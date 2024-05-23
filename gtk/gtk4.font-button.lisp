@@ -81,7 +81,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkFontButton
+;;; GtkFontButton
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkFontButton" font-button
@@ -107,7 +107,7 @@
 
 #+liber-documentation
 (setf (documentation 'font-button 'type)
- "@version{2023-8-28}
+ "@version{2024-5-22}
   @begin{short}
     The @class{gtk:font-button} widget is a button which displays the currently
     selected font and allows to open a font chooser dialog to change the font.
@@ -143,7 +143,7 @@ lambda (fontbutton)    :run-first
       signal, use the @fun{gtk:font-chooser-font} function to find out which
       font was just selected. Note that this signal is only emitted when the
       user changes the font. If you need to react to programmatic font changes
-      as well, use the \"notify::font-name\" signal.
+      as well, use the @code{\"notify::font-name\"} signal.
       @begin[code]{table}
         @entry[fontbutton]{The @class{gtk:font-button} widget which received
           the signal.}

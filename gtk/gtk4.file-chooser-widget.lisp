@@ -6,7 +6,7 @@
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -141,9 +141,9 @@ lambda (widget)    :action
       used to make the file chooser go to a child of the current folder in the
       file hierarchy. The subfolder that will be used is displayed in the path
       bar widget of the file chooser. For example, if the path bar is showing
-      \"/foo/bar/baz\", with bar currently displayed, then this will cause the
-      file chooser to switch to the \"baz\" subfolder. The default binding for
-      this signal is the @kbd{Alt+Down} key.
+      @file{\"/foo/bar/baz\"}, with @file{bar} currently displayed, then this
+      will cause the file chooser to switch to the @file{\"baz\"} subfolder.
+      The default binding for this signal is the @kbd{Alt+Down} key.
       @begin[code]{table}
         @entry[widget]{The @class{gtk:file-chooser-widget} object which
           received the signal.}
@@ -293,7 +293,7 @@ lambda (widget)    :action
 (setf (documentation (liber:slot-documentation "search-mode"
                                                'file-chooser-widget) t)
  "The @code{search-mode} property of type @code{:boolean} (Read / Write) @br{}
-  Search mode. @br{}
+  The search mode. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -348,7 +348,7 @@ lambda (widget)    :action
 (setf (documentation (liber:slot-documentation "subtitle"
                                                'file-chooser-widget) t)
  "The @code{subtitle} property of type @code{:string} (Read) @br{}
-  Subtitle. @br{}
+  The subtitle. @br{}
   Default value: \"\"")
 
 #+liber-documentation

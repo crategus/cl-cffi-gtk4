@@ -78,6 +78,11 @@
    :type-initializer "gtk_font_chooser_dialog_get_type")
   nil)
 
+#+(and gtk-4-10 gtk-warn-deprecated)
+(defmethod initialize-instance :after ((obj font-chooser-dialog) &key)
+  (when gtk-init:*gtk-warn-deprecated*
+    (warn "GTK:FONT-CHOOSER-DIALOG is deprecated since 4.10")))
+
 #+liber-documentation
 (setf (documentation 'font-chooser-dialog 'type)
  "@version{2023-8-28}

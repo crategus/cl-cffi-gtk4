@@ -8,41 +8,38 @@
 ;;;     GtkFontButton
 
 (test gtk-font-button-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFontButton"))
   ;; Check the registered name
   (is (eq 'gtk:font-button
           (glib:symbol-for-gtype "GtkFontButton")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFontButton")
           (g:gtype (cffi:foreign-funcall "gtk_font_button_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkFontButton")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkFontButton")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkFontChooser")
              (list-interfaces "GtkFontButton")))
-  ;; Check the properties
+  ;; Check properties
   (is (equal '("font" "font-desc" "font-features" "language" "level" "modal"
                "preview-text" "show-preview-entry" "title" "use-font"
                "use-size")
              (list-properties "GtkFontButton")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("activate" "font-set")
              (list-signals "GtkFontButton")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "fontbutton"
                (gtk:widget-class-css-name "GtkFontButton")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:font-button))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkFontButton")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontButton" GTK-FONT-BUTTON
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -60,13 +57,9 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     modal
-;;;     title
-;;;     use-font
-;;;     use-size
-
 (test gtk-font-button-properties
-  (let ((button (make-instance 'gtk:font-button)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (button (make-instance 'gtk:font-button)))
     (is-true (gtk:font-button-modal button))
     (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
     (is-false (gtk:font-button-use-font button))
@@ -81,12 +74,14 @@
 ;;;     gtk_font_button_new
 
 (test gtk-font-button-new
-  (is (typep (gtk:font-button-new) 'gtk:font-button)))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil))
+    (is (typep (gtk:font-button-new) 'gtk:font-button))))
 
 ;;;     gtk_font_button_new_with_font
 
 (test gtk-font-button-new-with-font
-  (let ((button (gtk:font-button-new-with-font "Sans Italic 12")))
+  (let* ((gtk-init:*gtk-warn-deprecated* nil)
+         (button (gtk:font-button-new-with-font "Sans Italic 12")))
     (is-true (gtk:font-button-modal button))
     (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
     (is-false (gtk:font-button-use-font button))
@@ -100,4 +95,4 @@
     (is-false (gtk:font-chooser-preview-text button))
     (is-true (gtk:font-chooser-show-preview-entry button))))
 
-;;; --- 2023-8-28 --------------------------------------------------------------
+;;; 2024-5-22

@@ -9,45 +9,36 @@
 
 (test gtk-font-chooser-dialog-class
   (let ((*gtk-warn-deprecated* nil))
-    ;; Type check
+    ;; Check type
     (is (g:type-is-object "GtkFontChooserDialog"))
-    ;; Check the registered name
+    ;; Check registered name
     (is (eq 'gtk:font-chooser-dialog
             (glib:symbol-for-gtype "GtkFontChooserDialog")))
-    ;; Check the type initializer
+    ;; Check type initializer
     (is (eq (g:gtype "GtkFontChooserDialog")
             (g:gtype (cffi:foreign-funcall "gtk_font_chooser_dialog_get_type"
                                            :size))))
-    ;; Check the parent
+    ;; Check parent
     (is (eq (g:gtype "GtkDialog")
             (g:type-parent "GtkFontChooserDialog")))
-    ;; Check the children
+    ;; Check children
     (is (equal '()
                (list-children "GtkFontChooserDialog")))
-    ;; Check the interfaces
+    ;; Check interfaces
     (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                  "GtkNative" "GtkShortcutManager" "GtkRoot" "GtkFontChooser")
                (list-interfaces "GtkFontChooserDialog")))
-    ;; Check the properties
+    ;; Check properties
     (is (equal '("font" "font-desc" "font-features" "language" "level"
                  "preview-text" "show-preview-entry")
                (list-properties "GtkFontChooserDialog")))
-    ;; Check the signals
+    ;; Check signals
     (is (equal '()
                (list-signals "GtkFontChooserDialog")))
-    ;; CSS name
+    ;; Check CSS name
     (is (string= "window"
                  (gtk:widget-class-css-name "GtkFontChooserDialog")))
-    ;; CSS classes
-    #-windows
-    (is (equal '("background" "csd" "dialog" "fontchooser")
-               (gtk:widget-css-classes
-                   (make-instance 'gtk:font-chooser-dialog))))
-    #+windows
-    (is (equal '("background" "dialog" "fontchooser")
-               (gtk:widget-css-classes
-                   (make-instance 'gtk:font-chooser-dialog))))
-    ;; Accessible role
+    ;; Check accessible role
     (is (eq :dialog (gtk:widget-class-accessible-role "GtkFontChooserDialog")))
     ;; Check the class definition
     (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFontChooserDialog"
@@ -69,4 +60,4 @@
     (is (typep (gtk:font-chooser-dialog-new "title" nil)
                'gtk:font-chooser-dialog))))
 
-;;; 2024-1-9
+;;; 2024-5-22

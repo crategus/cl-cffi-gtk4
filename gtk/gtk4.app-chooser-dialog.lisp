@@ -74,7 +74,7 @@
 (in-package :gtk)
 
 ;;; ----------------------------------------------------------------------------
-;;; struct GtkAppChooserDialog
+;;; GtkAppChooserDialog
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-object-class "GtkAppChooserDialog" app-chooser-dialog
