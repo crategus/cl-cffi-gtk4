@@ -89,7 +89,7 @@
 
 #+liber-documentation
 (setf (documentation 'editable-label 'type)
- "@version{#2022-6-12}
+ "@version{2024-5-23}
   @begin{short}
     The @class{gtk:editable-label} widget is a @class{gtk:label} widget that
     allows users to edit the text by switching the widget to an \"edit mode\".
@@ -121,16 +121,16 @@ editablelabel[.editing]
       Switch the widget out of editing mode. If @arg{commit} is @em{true}, then
       the results of the editing are taken as the new value of the
       @slot[gtk:editable]{text} property. The default binding for this action
-      is the @kbd{Escape} key. This action is disabled when the @code{editing}
-      property is @em{false}.
+      is the @kbd{Escape} key. This action is disabled when the
+      @slot[gtk:editable-label]{editing} property is @em{false}.
       @begin[code]{table}
-        @entry[commit]{A boolean whether to make changes permanent.}
+        @entry[commit]{The boolean whether to make changes permanent.}
       @end{table}
     @subheading{The \"editing.start\" action}
       Switch the widget into editing mode, so that the user can make changes to
       the text. The default bindings for this action are clicking on the widget
-      and the @kbd{Enter} key. This action is disabled when the @code{editing}
-      property is @em{false}.
+      and the @kbd{Enter} key. This action is disabled when the
+      @slot[gtk:editable-label]{editing} property is @em{false}.
   @end{dictionary}
   @see-constructor{gtk:editable-label-new}
   @see-slot{gtk:editable-label-editing}
@@ -154,7 +154,7 @@ editablelabel[.editing]
 (setf (liber:alias-for-function 'editable-label-editing)
       "Accessor"
       (documentation 'editable-label-editing 'function)
- "@version{#2022-6-12}
+ "@version{2024-5-23}
   @syntax{(gtk:editable-label-editing object) => setting}
   @syntax{(setf (gtk:editable-label-editing object) setting)}
   @argument[object]{a @class{gtk:editable-label} widget}
@@ -172,7 +172,7 @@ editablelabel[.editing]
 ;;; ----------------------------------------------------------------------------
 
 (defun editable-label-new (text)
- "@version{#2022-6-12}
+ "@version{2024-5-23}
   @argument[text]{a string with the text for the label}
   @return{The new @class{gtk:editable-label} widget.}
   @short{Creates a new editable label.}

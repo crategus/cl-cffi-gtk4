@@ -285,7 +285,7 @@ spinbutton.vertical
     reflected in the @code{.vertical} or @code{.horizontal} style class on the
     main node.
   @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin{examples}
     Code fragment for creating a spin button. The value from the spin button is
     retrieved with the @fun{gtk:spin-button-value} function in a signal handler
     as a floating point number. Use the @fun{gtk:spin-button-value-as-int}
@@ -310,7 +310,7 @@ spinbutton.vertical
                       (let ((value (gtk:spin-button-value widget)))))
                         ... ))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Accessibility]{dictionary}
     The @class{gtk:spin-button} implementation uses the @code{:spin-button} role
     of the @symbol{gtk:accessible-role} enumeration.
@@ -328,7 +328,7 @@ lambda (button scroll)    :action
       @begin[code]{table}
         @entry[button]{The @class{gtk:spin-button} widget on which the signal
           was emitted.}
-        @entry[scroll]{A value of the @symbol{gtk:scroll-type} enumeration to
+        @entry[scroll]{The value of the @symbol{gtk:scroll-type} enumeration to
           specify the speed and amount of change.}
       @end{table}
     @subheading{The \"input\" signal}
@@ -343,7 +343,7 @@ lambda (button value)    :run-last
       @begin[code]{table}
         @entry[button]{The @class{gtk:spin-button} widget on which the signal
           was emitted.}
-        @entry[value]{A pointer to a double float with the return location for
+        @entry[value]{The pointer to a double float with the return location for
           the new value.}
         @entry[Returns]{@em{True} for a successful conversion, @em{false} if
           the input was not handled, and -1 if the conversion failed.}
@@ -659,7 +659,7 @@ lambda (button)    :run-last
   @see-class{gtk:spin-button}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_spin_button_new ()
+;;; gtk_spin_button_new
 ;;; ----------------------------------------------------------------------------
 
 (declaim (inline spin-button-new))
@@ -689,7 +689,7 @@ lambda (button)    :run-last
 (export 'spin-button-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_spin_button_new_with_range ()
+;;; gtk_spin_button_new_with_range
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_spin_button_new_with_range" %spin-button-new-with-range)
@@ -717,11 +717,11 @@ lambda (button)    :run-last
   The way in which the precision is derived works best if @arg{step} is a power
   of ten. If the resulting precision is not suitable for your needs, use the
   @fun{gtk:spin-button-digits} function to correct it.
-  @begin[Note]{dictionary}
-    In the Lisp implementation the arguments @arg{min}, @arg{max}, and
-    @arg{step} are coerced to a double float number.
-  @end{dictionary}
-  @begin[Example]{dictionary}
+  @begin{notes}
+    In the Lisp implementation the @arg{min}, @arg{max}, and @arg{step}
+    arguments are coerced to a double float number.
+  @end{notes}
+  @begin{examples}
     In this example the arguments of the function are given as integer numbers.
     @begin{pre}
 (defvar spinbutton (gtk:spin-button-new-with-range 5 15 5)) => SPINBUTTON
@@ -735,7 +735,7 @@ lambda (button)    :run-last
 (gtk:adjustment-upper adjustment) => 15.0d0
 (gtk:adjustment-value adjustment) =>5.0d0
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-function{gtk:spin-button}
   @see-function{gtk:spin-button-digits}"
   (%spin-button-new-with-range (coerce min 'double-float)
@@ -745,8 +745,8 @@ lambda (button)    :run-last
 (export 'spin-button-new-with-range)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_spin_button_get_increments ()
-;;; gtk_spin_button_set_increments () -> spin-button-increments
+;;; gtk_spin_button_get_increments
+;;; gtk_spin_button_set_increments
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf spin-button-increments) (increments button)
@@ -772,20 +772,20 @@ lambda (button)    :run-last
   @argument[step]{a double float increment applied for a button 1 press}
   @argument[page]{a double float increment applied for a button 2 press}
   @begin{short}
-    Accessor of the step and page increments of the spin button.
+    The @fun{gtk:spin-button-increments} function gets the current step and
+    page increments used by the spin button.
   @end{short}
-  The @fun{gtk:spin-button-increments} function gets the current step and page
-  increments used by the spin button. The @setf{gtk:spin-button-increments}
-  function sets the step and page increments.
+  The @setf{gtk:spin-button-increments} function sets the step and page
+  increments.
 
   This affects how quickly the value changes when the arrows of the spin button
   are activated.
-  @begin[Note]{dictionary}
+  @begin{notes}
     The values for the page and step increments are stored in the
     @slot[gtk:adjustment]{page-increment} and
-    @slot[gtk:adjustment]{step-increment} slots of the adjustment associated
-    with the spin button.
-  @end{dictionary}
+    @slot[gtk:adjustment]{step-increment} properties of the adjustment
+    associated with the spin button.
+  @end{notes}
   @see-class{gtk:spin-button}
   @see-function{gtk:adjustment-page-increment}
   @see-function{gtk:adjustment-step-increment}"
@@ -797,8 +797,8 @@ lambda (button)    :run-last
 (export 'spin-button-increments)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_spin_button_get_range ()
-;;; gtk_spin_button_set_range () -> spin-button-range
+;;; gtk_spin_button_get_range
+;;; gtk_spin_button_set_range
 ;;; ----------------------------------------------------------------------------
 
 (defun (setf spin-button-range) (range button)
@@ -824,11 +824,11 @@ lambda (button)    :run-last
   @argument[min]{a double float minimum allowable value}
   @argument[max]{a double float maximum allowable value}
   @begin{short}
-    Accessor of the minimum and maximum value of the spin button.
+    The @fun{gtk:spin-button-range} function gets the minimum and maximum
+    allowed values for the spin button.
   @end{short}
-  The @fun{gtk:spin-button-range} function gets the minimum  and maximum allowed
-  values for the spin button. The @setf{gtk:spin-button-range} function sets the
-  minimum and maximum allowable values.
+  The @setf{gtk:spin-button-range} function sets the minimum and maximum
+  allowable values.
 
   If the current value is outside this range, it will be adjusted to fit
   within the range, otherwise it will remain unchanged.
@@ -885,7 +885,7 @@ lambda (button)    :run-last
 (export 'spin-button-configure)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_spin_button_spin ()
+;;; gtk_spin_button_spin
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_spin_button_spin" spin-button-spin) :void
@@ -897,8 +897,8 @@ lambda (button)    :run-last
   @argument[increment]{a double float step increment to apply in the specified
     direction}
   @begin{short}
-    Increment or decrement a spin button's value in a specified direction by a
-    specified amount.
+    Increment or decrement the value of the spin button in a specified
+    direction by a specified amount.
   @end{short}
   @see-class{gtk:spin-button}
   @see-symbol{gtk:spin-type}"
@@ -909,7 +909,7 @@ lambda (button)    :run-last
 (export 'spin-button-spin)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_spin_button_update ()
+;;; gtk_spin_button_update
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_spin_button_update" spin-button-update) :void

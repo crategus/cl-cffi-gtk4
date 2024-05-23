@@ -115,7 +115,7 @@
 (setf (documentation 'scale 'type)
  "@version{2023-8-25}
   @begin{short}
-    A @class{gtk:scale} widget is a slider control used to select a numeric
+    The @class{gtk:scale} widget is a slider control used to select a numeric
     value.
   @end{short}
   To use it, you will probably want to investigate the methods on its base
@@ -133,11 +133,12 @@
   music players.
   @begin[GtkScale as GtkBuildable]{dictionary}
     The @class{gtk:scale} widget supports a custom @code{<marks>} element, which
-    can contain multiple @code{<mark>} elements. The \"value\" and \"position\"
-    attributes have the same meaning as the parameters of the
-    @fun{gtk:scale-add-mark} function of the same name. If the element is not
-    empty, its content is taken as the markup to show at the mark. It can be
-    translated with the usual \"translatable\" and \"context\" attributes.
+    can contain multiple @code{<mark>} elements. The @code{\"value\"} and
+    @code{\"position\"} attributes have the same meaning as the parameters of
+    the @fun{gtk:scale-add-mark} function of the same name. If the element is
+    not empty, its content is taken as the markup to show at the mark. It can
+    be translated with the usual @code{\"translatable\"} and @code{\"context\"}
+    attributes.
   @end{dictionary}
   @begin[CSS nodes]{dictionary}
     @begin{pre}
@@ -186,9 +187,9 @@ scale[.fine-tune][.marks-before][.marks-after]
     The main CSS node gets the @code{marks-before} and/or @code{marks-after}
     style classes added depending on what marks are present.
 
-    If the scale is displaying the value, see the @code{draw-value} property,
-    there is subnode with name @code{value}. This node will get the @code{.top}
-    or @code{.bottom} style classes similar to the marks node.
+    If the scale is displaying the value, see the @slot[gtk:scale]{draw-value}
+    property, there is subnode with name @code{value}. This node will get the
+    @code{.top} or @code{.bottom} style classes similar to the marks node.
   @end{dictionary}
   @begin[Accessibility]{dictionary}
     The @class{gtk:scale} implementation uses the @code{:slider} role of the
@@ -354,10 +355,10 @@ scale[.fine-tune][.marks-before][.marks-after]
  #+liber-documentation
  "@version{2023-8-25}
   @argument[orientation]{a value of the @symbol{gtk:orientation} enumeration}
-  @argument[min]{a double float with the minimum value}
-  @argument[max]{a double float with the maximum value}
-  @argument[step]{a double float with the step increment, tick size, used
-    with keyboard shortcuts}
+  @argument[min]{a number coerced to a double float with the minimum value}
+  @argument[max]{a number coerced to a double float with the maximum value}
+  @argument[step]{a number coerced to a double float with the step increment,
+    tick size, used with keyboard shortcuts}
   @return{The new @class{gtk:scale} widget.}
   @begin{short}
     Creates a new scale widget with the given @arg{orientation} that lets the
@@ -487,8 +488,9 @@ scale[.fine-tune][.marks-before][.marks-after]
  "@version{#2023-8-25}
   @argument[scale]{a @class{gtk:scale} widget}
   @begin{return}
-    @arg{x} -- an integer with the x offset of layout, or @code{nil} @br{}
-    @arg{y} -- an integer with the y offset of layout, or @code{nil}
+    @arg{x} -- an integer with the x offset of the Pango layout, or @code{nil}
+    @br{}
+    @arg{y} -- an integer with the y offset of the Pango layout, or @code{nil}
   @end{return}
   @begin{short}
     Obtains the coordinates where the scale will draw the Pango layout
@@ -523,7 +525,9 @@ scale[.fine-tune][.marks-before][.marks-after]
   @argument[position]{a value of the @symbol{gtk:position-type} enumeration}
   @argument[markup]{a string with the text to be shown at the mark, using Pango
     markup, or @code{nil}}
-  @short{Adds a mark at value.}
+  @begin{short}
+    Adds a mark at @arg{value}.
+  @end{short}
   A mark is indicated visually by drawing a tick mark next to the scale, and
   GTK makes it easy for the user to position the scale exactly at the marks
   value. For a horizontal scale, @code{:top} and @code{:left} are drawn above

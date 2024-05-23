@@ -91,9 +91,9 @@
 
 #+(and gtk-4-4 liber-documentation)
 (setf (documentation 'password-entry-buffer 'type)
- "@version{2023-10-18}
+ "@version{2024-5-23}
   @begin{short}
-    A @class{gtk:entry-buffer} object that locks the underlying memory to
+    The @class{gtk:entry-buffer} object that locks the underlying memory to
     prevent it from being swapped to disk.
   @end{short}
   The @class{gtk:password-entry} widget uses a the
@@ -228,7 +228,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'password-entry-activates-default)
       "Accessor"
       (documentation 'password-entry-activates-default 'function)
- "@version{2023-9-30}
+ "@version{2024-5-22}
   @syntax{(gtk:password-entry-activates-default object) => setting}
   @syntax{(setf (gtk:password-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:password-entry} widget}
@@ -243,9 +243,9 @@ lambda (entry)    :action
 
   If the @arg{setting} argument is @em{true}, pressing the @kbd{Enter} key in
   the password entry will activate the default widget for the window containing
-  the password entry. This usually means that the dialog box containing the
-  password entry will be closed, since the default widget is usually one of the
-  dialog buttons.
+  the password entry. This usually means that the dialog containing the password
+  entry will be closed, since the default widget is usually one of the dialog
+  buttons.
   @see-class{gtk:password-entry}")
 
 ;;; --- gtk:password-entry-extra-menu ------------------------------------------

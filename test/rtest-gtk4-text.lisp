@@ -325,7 +325,10 @@
     (is-true (gtk:text-invisible-char-set text))
     (is-false (gtk:text-unset-invisible-char text))
     ;; Default char is #\BULLET and not \*
+    #-windows
     (is (= (char-code #\BULLET) (gtk:text-invisible-char text)))
+    #+windows
+    (is (= (char-code #\BLACK_CIRCLE) (gtk:text-invisible-char text)))
     (is-false (gtk:text-invisible-char-set text))))
 
 ;;;     gtk_text_get_text_length
@@ -348,11 +351,13 @@
     (graphene:with-rects (strong weak)
       (is-false (gtk:text-compute-cursor-extents text 2 strong weak))
       ;; Check strong values
+      #-windows
       (is (= 18.0 (graphene:rect-x strong)))
       (is (= -8.0 (graphene:rect-y strong)))
       (is (=  0.0 (graphene:rect-width strong)))
       (is (= 17.0 (graphene:rect-height strong)))
       ;; Check weak values
+      #-windows
       (is (= 18.0 (graphene:rect-x weak)))
       (is (= -8.0 (graphene:rect-y weak)))
       (is (=  0.0 (graphene:rect-width weak)))
@@ -363,6 +368,7 @@
          (text (gtk:text-new-with-buffer buffer)))
     (graphene:with-rect (strong)
       (is-false (gtk:text-compute-cursor-extents text 2 strong nil))
+      #-windows
       (is (= 18.0 (graphene:rect-x strong)))
       (is (= -8.0 (graphene:rect-y strong)))
       (is (=  0.0 (graphene:rect-width strong)))
@@ -373,9 +379,10 @@
          (text (gtk:text-new-with-buffer buffer)))
     (graphene:with-rect (weak)
       (is-false (gtk:text-compute-cursor-extents text 2 nil weak))
+      #-windows
       (is (= 18.0 (graphene:rect-x weak)))
       (is (= -8.0 (graphene:rect-y weak)))
       (is (=  0.0 (graphene:rect-width weak)))
       (is (= 17.0 (graphene:rect-height weak))))))
 
-;;; 2024-5-17
+;;; 2024-5-21

@@ -229,7 +229,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'search-entry-activates-default)
       "Accessor"
       (documentation 'search-entry-activates-default 'function)
- "@version{2024-4-20}
+ "@version{2024-5-22}
   @syntax{(gtk:search-entry-activates-default object) => setting}
   @syntax{(setf (gtk:search-entry-activates-default object) setting)}
   @argument[object]{a @class{gtk:search-entry} widget}
@@ -244,7 +244,7 @@ lambda (entry)    :action
 
   If the @arg{setting} argument is @em{true}, pressing the @kbd{Enter} key in
   the search entry will activate the default widget for the window containing
-  the search entry. This usually means that the dialog box containing the search
+  the search entry. This usually means that the dialog containing the search
   entry will be closed, since the default widget is usually one of the dialog
   buttons.
   @see-class{gtk:search-entry}")

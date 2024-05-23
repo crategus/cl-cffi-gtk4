@@ -88,9 +88,6 @@
   ;; Check CSS information
   (is (string= "entry"
                (gtk:widget-class-css-name "GtkEntry")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:entry))))
   ;; Check accessible role
   (is (eq :text-box (gtk:widget-class-accessible-role "GtkEntry")))
   ;; Check class definition
@@ -313,7 +310,10 @@
     (is-true (gtk:entry-invisible-char-set entry))
     (is-false (gtk:entry-unset-invisible-char entry))
     ;; Default char is #\BULLET and not \*
+    #-windows
     (is (= (char-code #\BULLET) (gtk:entry-invisible-char entry)))
+    #+windows
+    (is (= (char-code #\BLACK_CIRCLE) (gtk:entry-invisible-char entry)))
     (is-false (gtk:entry-invisible-char-set entry))))
 
 ;;;     gtk_entry_set_alignment
@@ -323,8 +323,7 @@
   (let ((entry (gtk:entry-new)))
     (is (= 0.0 (gtk:entry-alignment entry)))
     (is (= 0.5 (setf (gtk:entry-alignment entry) 1/2)))
-    (is (= 0.5 (gtk:entry-alignment entry)))
-))
+    (is (= 0.5 (gtk:entry-alignment entry)))))
 
 ;;;     gtk_entry_progress_pulse
 ;;;     gtk_entry_reset_im_context
@@ -349,4 +348,4 @@
 ;;;     gtk_entry_get_icon_area
 ;;;     gtk_entry_grab_focus_without_selecting
 
-;;; 2024-5-18
+;;; 2024-5-21

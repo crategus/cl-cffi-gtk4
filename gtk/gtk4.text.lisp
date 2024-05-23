@@ -470,7 +470,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-activates-default)
       "Accessor"
       (documentation 'text-activates-default 'function)
- "@version{2024-5-17}
+ "@version{2024-5-22}
   @syntax{(gtk:text-activates-default object) => setting}
   @syntax{(setf (gtk:text-activates-default object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -482,8 +482,8 @@ lambda (entry)    :action
   @end{short}
   If the @slot[gtk:text]{activates-default} property is @em{true}, pressing
   @kbd{Enter} in the text entry will activate the default widget for the window
-  containing the text entry. This usually means that the dialog box containing
-  the text entry will be closed, since the default widget is usually one of the
+  containing the text entry. This usually means that the dialog containing the
+  text entry will be closed, since the default widget is usually one of the
   dialog buttons.
   @see-class{gtk:text}")
 
@@ -646,11 +646,11 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-input-hints)
       "Accessor"
       (documentation 'text-input-hints 'function)
- "@version{2024-5-17}
+ "@version{2024-5-23}
   @syntax{(gtk:text-input-hints object) => hints}
   @syntax{(setf (gtk:text-input-hints object) hints)}
   @argument[object]{a @class{gtk:text} widget}
-  @argument[module]{a @symbol{gtk:input-hints} value}
+  @argument[hints]{a @symbol{gtk:input-hints} value}
   @begin{short}
     Accessor of the @slot[gtk:text]{input-hints} slot of the @class{gtk:text}
     class.
@@ -802,7 +802,7 @@ lambda (entry)    :action
 (setf (liber:alias-for-function 'text-overwrite-mode)
       "Accessor"
       (documentation 'text-overwrite-mode 'function)
- "@version{2024-5-17}
+ "@version{2024-5-23}
   @syntax{(gtk:text-overwrite-mode object) => setting}
   @syntax{(setf (gtk:text-overwrite-mode object) setting)}
   @argument[object]{a @class{gtk:text} widget}
@@ -812,8 +812,8 @@ lambda (entry)    :action
     class.
   @end{short}
   The @fun{gtk:text-overwrite-mode} function gets the value of the property.
-  The @setf{gtk:text-max-length} function sets whether the text is overwritten
-  when typing in the text entry.
+  The @setf{gtk:text-overwrite-mode} function sets whether the text is
+  overwritten when typing in the text entry.
   @see-class{gtk:text}")
 
 ;;; --- gtk:text-placeholder-text ----------------------------------------------
