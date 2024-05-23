@@ -407,6 +407,18 @@
   @see-class{gtk:dialog}
   @see-function{gtk:dialog-add-button}")
 
+(defun response-type-keyword (response)
+  (assert (typep response '(or integer keyword)))
+  (if (and (integerp response)
+           (member response
+                   (mapcar #'gobject:enum-item-value
+                           (gobject:get-enum-items
+                               (g:gtype "GtkResponseType")))))
+      (cffi:foreign-enum-keyword 'response-type response)
+      response))
+
+(export 'response-type-keyword)
+
 ;;; ----------------------------------------------------------------------------
 ;;; GtkSensitivityType
 ;;; ----------------------------------------------------------------------------
