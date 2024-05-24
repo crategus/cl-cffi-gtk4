@@ -1,6 +1,8 @@
-;;;; Simple Application - 2023-7-16
+;;;; Simple Application
 ;;;;
 ;;;; This example is included in the API documentation for GtkApplication.
+;;;;
+;;;; Last version: 2024-5-23
 
 (in-package :gtk4-application)
 
@@ -19,8 +21,8 @@
                                        :title "Simple Application"
                                        :default-width 480
                                        :default-height 300)))
-            ;; Make the window visible
-            (setf (gtk:widget-visible window) t)
+            ;; Present the application window
+            (gtk:window-present window)
             (g:application-release application))))
   ;; Run the application
   (g:application-run app argv)))

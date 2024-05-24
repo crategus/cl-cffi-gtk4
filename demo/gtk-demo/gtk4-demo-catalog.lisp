@@ -22,12 +22,24 @@
        ":application"
        "APPLICATION-SIMPLE"
        "gtk4-application"
-       "application-simple.lisp")
-      ("Application Menu"
+       "application-simple.lisp"
+       :keywords
+       "GtkApplication"
+       "gtk:application"
+       "g:application-flags"
+       "g:application-hold"
+       "g:application-release"
+       "g:application-run")
+      ("Application Resources"
        ":application"
-       "APPLICATION-MENU"
+       "APPLICATION-RESOURCES"
        "gtk4-application"
-       "application-menu.lisp")
+       "application-resources.lisp")
+      ("Application Menubar"
+       ":application"
+       "APPLICATION-MENUBAR"
+       "gtk4-application"
+       "application-menubar.lisp")
       ("Sunny"
        ":application"
        "SUNNY"

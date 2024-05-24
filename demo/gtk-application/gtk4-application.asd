@@ -8,7 +8,7 @@
   :components ((:file "gtk4-application")
                (:file "application-command-line")
                (:file "application-inhibit")
-               (:file "application-menu")
+               (:file "application-menubar")
                (:file "application-notification")
                (:file "application-simple")
                (:file "application-resources")
@@ -16,4 +16,4 @@
                (:file "sunny")
               ))
 
-;;; --- 2023-8-3 ---------------------------------------------------------------
+;;; 2024-5-24

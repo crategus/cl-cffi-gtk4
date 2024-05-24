@@ -26,8 +26,8 @@
                                        :title "Application Command Line"
                                        :default-width 480
                                        :default-height 300)))
-            ;; Show the application window
-            (gtk:widget-show window))))
+            ;; Present the application window
+            (gtk:window-present window))))
     ;; Connect signal "handle-local-options"
     (g:signal-connect app "handle-local-options"
         (lambda (application options)

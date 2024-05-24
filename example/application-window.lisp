@@ -1,10 +1,10 @@
 ;;;; Application Window with Menubar
 ;;;;
-;;;; 2024-4-4
+;;;; Last version: 2024-5-24
 
 (in-package :gtk4-example)
 
-(defun do-application-window (&optional (application nil))
+(defun do-application-window (&optional application)
   (let ((menus
          "<interface>
            <menu id='menubar'>
@@ -31,5 +31,5 @@
     ;; Set the menubar
     (setf (gtk:application-menubar application)
           (gtk:builder-object builder "menubar"))
-    ;; Show the application window
+    ;; Present the application window
     (gtk:window-present window)))

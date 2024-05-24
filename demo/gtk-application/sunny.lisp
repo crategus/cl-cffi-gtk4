@@ -64,8 +64,10 @@
                                 :default-height 320)))
     ;; Load the file into the buffer
     (when filename
-      (let ((buffer (gtk:text-view-buffer textview)))
-        (load-file-into-buffer buffer (sys-path filename))))
+      ;; TODO: Is this correct???
+      (let ((buffer (gtk:text-view-buffer textview))
+            (path (glib-sys:sys-path filename "gtk4-application")))
+        (load-file-into-buffer buffer path)))
     ;; Show the window
     (gtk:window-present window)))
 

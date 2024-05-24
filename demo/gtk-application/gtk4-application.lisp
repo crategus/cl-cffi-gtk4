@@ -4,7 +4,7 @@
   (:use :common-lisp)
   (:export #:application-cmdline
            #:application-inhibit
-           #:application-menu
+           #:application-menubar
            #:application-notification
            #:application-simple
            #:application-resources
@@ -14,8 +14,4 @@
 
 (in-package :gtk4-application)
 
-(defun sys-path (filename)
-  (let ((system-path (asdf:system-source-directory :gtk4-application)))
-    (princ-to-string (merge-pathnames filename system-path))))
-
-;;; --- 2023-7-16 --------------------------------------------------------------
+;;; 2024-5-24

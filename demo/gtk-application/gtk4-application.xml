@@ -5,6 +5,6 @@
     <file>help-overlay.ui</file>
   </gresource>
   <gresource prefix="/com/crategus/application/icons">
-    <file>my-gtk-logo.png</file>
+    <file>gtk-logo.png</file>
   </gresource>
 </gresources>
