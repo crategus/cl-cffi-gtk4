@@ -430,20 +430,20 @@ lambda (theme)    :run-last
 (cffi:defcfun ("gtk_icon_theme_get_for_display" icon-theme-for-display)
     (g:object icon-theme)
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2024-5-24}
   @argument[display]{a @class{gdk:display} object}
   @return{The unique @class{gtk:icon-theme} object associated with the given
-    display. This icon theme is associated with the display and can be used as
-    long as the display is open.}
+    @arg{display}. This icon theme is associated with the display and can be
+    used as long as the display is open.}
   @begin{short}
     Gets the icon theme object associated with @arg{display}.
   @end{short}
   If this function has not previously been called for the given display, a new
   icon theme object will be created and associated with the display. Icon theme
   objects are fairly expensive to create, so using this function is usually a
-  better choice than calling than the @fun{gtk:icon-theme-new} function and
-  setting the display yourself. By using this function a single icon theme
-  object will be shared between users.
+  better choice than calling the @fun{gtk:icon-theme-new} function and setting
+  the display yourself. By using this function a single icon theme object will
+  be shared between users.
   @see-class{gtk:icon-theme}
   @see-class{gdk:display}
   @see-class{gtk:icon-theme-new}"

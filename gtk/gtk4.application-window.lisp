@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'application-window 'type)
- "@version{2023-3-11}
+ "@version{2024-5-24}
   @begin{short}
     The @class{gtk:application-window} class is a @class{gtk:window} subclass
     that offers some extra functionality for better integration with
@@ -130,11 +130,12 @@
 
   See the @class{gtk:popover-menu} documentation for information about the XML
   language used by the @class{gtk:builder} object for menu models.
-  @begin[Example]{dictionary}
+  @begin{examples}
     Create an application window with a menubar.
     @begin{pre}
-(defvar *menus*
-        \"<interface>
+(defun do-application-window (&optional application)
+  (let ((menus
+         \"<interface>
            <menu id='menubar'>
              <submenu>
                <attribute name='label'>_Edit</attribute>
@@ -149,22 +150,20 @@
              </submenu>
            </menu>
          </interface>\")
-
-(defun do-application-window (&optional (application nil))
-  (let ((builder (make-instance 'gtk:builder))
+        (builder (make-instance 'gtk:builder))
         (window (make-instance 'gtk:application-window
                                :application application
                                :title \"Application Window\"
                                :show-menubar t)))
     ;; Read the menus from a string
-    (gtk:builder-add-from-string builder *menus*)
+    (gtk:builder-add-from-string builder menus)
     ;; Set the menubar
     (setf (gtk:application-menubar application)
           (gtk:builder-object builder \"menubar\"))
-    ;; Show the application window
-    (setf (gtk:widget-visible window) t)))
+    ;; Present the application window
+    (gtk:window-present window)))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-slot{gtk:application-window-show-menubar}
   @see-constructor{gtk:application-window-new}
   @see-class{gtk:window}
@@ -266,7 +265,7 @@
 (cffi:defcfun ("gtk_application_window_get_help_overlay"
                application-window-help-overlay) (g:object shortcuts-window)
  #+liber-documentation
- "@version{2023-9-18}
+ "@version{2024-5-24}
   @syntax{(gtk:application-window-help-overlay window) => overlay}
   @syntax{(setf (gtk:application-window-help-overlay window) overlay)}
   @argument[window]{a @class{gtk:application-window} widget}
@@ -277,7 +276,7 @@
   The @fun{gtk:application-window-help-overlay} function gets the shortcuts
   window. The @setf{gtk:applicaton-window-help-overlay} function associates a
   shortcuts window with the application window, and sets up an action with the
-  name \"win.show-help-overlay\" to present it.
+  name @code{\"win.show-help-overlay\"} to present it.
   @see-class{gtk:application-window}
   @see-class{gtk:shortcuts-window}"
   (window (g:object application-window)))

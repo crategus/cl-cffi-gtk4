@@ -153,7 +153,7 @@
 
 #+liber-documentation
 (setf (documentation 'application 'type)
- "@version{2022-11-25}
+ "@version{2024-5-24}
   @begin{short}
     The @class{gtk:application} class is a high-level API for writing
     applications.
@@ -207,15 +207,14 @@
   or performing a disk backup. The session manager may not honor the inhibitor,
   but it can be expected to inform the user about the negative consequences of
   ending the session while inhibitors are present.
-  @begin[Example]{dictionary}
+  @begin{examples}
     A simple application.
     @begin{pre}
 (defun application-simple (&rest argv)
   (let (;; Create an application
         (app (make-instance 'gtk:application
                             :flags :default-flags
-                            :application-id
-                            \"com.crategus.application-simple\")))
+                            :application-id \"com.crategus.application-simple\")))
     ;; Connect signal \"activate\" to the application
     (g:signal-connect app \"activate\"
         (lambda (application)
@@ -226,8 +225,8 @@
                                        :title \"Simple Application\"
                                        :default-width 480
                                        :default-height 300)))
-            ;; Make the window visible
-            (setf (gtk:widget-visible window) t)
+            ;; Present the application window
+            (gtk:window-present window)
             (g:application-release application))))
   ;; Run the application
   (g:application-run app argv)))
@@ -250,30 +249,44 @@
     @begin{pre}
 (defun application-resources (&rest argv)
   ;; Register the resources
-  (gio:with-g-resources (resource (sys-path \"resource/application.gresource\"))
+  (g:with-resource (resource (glib-sys:check-and-create-resources
+                                     \"gtk4-application.xml\"
+                                     :package \"gtk4-application\"
+                                     :sourcedir \"resource/\"))
     (let (;; Create an application
           (app (make-instance 'gtk:application
                                :flags :default-flags
-                               :application-id \"com.crategus.application\")))
+                               :application-id
+                               \"com.crategus.application\")))
       ;; Connect \"activate\" signal
       (g:signal-connect app \"activate\"
           (lambda (application)
             (g:application-hold application)
             ;; Create an application window
-            (let ((window (make-instance 'gtk:application-window
+            (let (;; Define action entries for the menu items
+                  (entries (list (list \"about\")))
+                  (accels (list (list \"win-show-help-overlay\" \"F1\")
+                                (list \"win.about\" \"<Control>A\")))
+                  (window (make-instance 'gtk:application-window
                                          :application application
                                          :title \"Application Resources\"
                                          :show-menubar t
-                                         :icon-name \"my-gtk-logo\"
+                                         :icon-name \"gtk-logo\"
                                          :default-width 480
                                          :default-height 300)))
-              ;; Make the window visible
-              (setf (gtk:widget-visible window) t)
+              ;; Add accelerators for the application
+              (iter (for (name accel) on accels by #'cddr)
+                    (setf (gtk:application-accels-for-action application name)
+                          accel))
+              ;; Add the action entries to the application window
+              (g:action-map-add-action-entries window entries)
+              ;; Present the window
+              (gtk:window-present window)
               (g:application-release application))))
-    ;; Run the application
-    (g:application-run app argv))))
+      ;; Run the application
+      (g:application-run app argv))))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @begin[Signal Details]{dictionary}
     @subheading{The \"query-end\" signal}
       @begin{pre}
@@ -367,7 +380,7 @@ lambda (application window)    :run-first
 (setf (liber:alias-for-function 'application-menubar)
       "Accessor"
       (documentation 'application-menubar 'function)
- "@version{2023-9-18}
+ "@version{2024-5-24}
   @syntax{(gtk:application-menubar object) => menubar}
   @syntax{(setf (gtk:application-menubar object) menubar)}
   @argument[object]{a @class{gtk:application} instance}
@@ -382,7 +395,7 @@ lambda (application window)    :run-first
 
   This is a menubar in the traditional sense. This can only be done in the
   primary instance of the application, after it has been registered. The
-  handler for the \"startup\" signal is a good place to set the menubar.
+  handler for the @code{\"startup\"} signal is a good place to set the menubar.
 
   Depending on the desktop environment, the menubar may appear at the top of
   each window, or at the top of the screen. In some environments, if both the

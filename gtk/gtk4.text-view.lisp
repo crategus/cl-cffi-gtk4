@@ -496,7 +496,7 @@
 
 #+liber-documentation
 (setf (documentation 'text-view 'type)
- "@version{2023-10-4}
+ "@version{2024-5-24}
   @begin{short}
     GTK has a powerful framework for multiline text editing.
   @end{short}
@@ -582,7 +582,7 @@ lambda (view granularity count)    :action
           signal.}
         @entry[granularity]{The granularity of the deletion, as a value of the
           @symbol{gtk:delete-type} enumeration.}
-        @entry[count]{An integer with the number of type units to delete.}
+        @entry[count]{The integer with the number of type units to delete.}
       @end{table}
     @subheading{The \"extend-selection\" signal}
       @begin{pre}
@@ -649,7 +649,7 @@ lambda (view step count extend)    :action
           signal.}
         @entry[step]{The granularity of the move, as a value of the
           @symbol{gtk:movement-step} enumeration.}
-        @entry[count]{An integer with the number of step units to move.}
+        @entry[count]{The integer with the number of step units to move.}
         @entry[extend]{@em{True} if the move should extend the selection.}
       @end{table}
     @subheading{The \"move-viewport\" signal}
@@ -665,7 +665,7 @@ lambda (view step count)    :action
           signal.}
         @entry[step]{The granularity of the move, as a value of the
           @symbol{gtk:movement-step} enumeration.}
-        @entry[count]{An integer with the number of step units to move.}
+        @entry[count]{The integer with the number of step units to move.}
       @end{table}
     @subheading{The \"paste-clipboard\" signal}
       @begin{pre}
@@ -689,7 +689,7 @@ lambda (view preedit)    :action
       @begin[code]{table}
         @entry[view]{The @class{gtk:text-view} object which received the
           signal.}
-        @entry[preedit]{A string with the current preedit text.}
+        @entry[preedit]{The string with the current preedit text.}
       @end{table}
     @subheading{The \"select-all\" signal}
       @begin{pre}
@@ -919,13 +919,13 @@ lambda (view)    :action
   @see-class{gtk:text-view}
   @see-function{gtk:text-tag-editable}")
 
-;;; --- gtk:text-view-extra_menu -----------------------------------------------
+;;; --- gtk:text-view-extra-menu -----------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "extra-menu" 'text-view) t)
  "The @code{extra-menu} property of type @class{g:menu-model} (Read / Write)
   @br{}
-  Menu model to append to the context menu.")
+  The menu model to append to the context menu.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-view-extra-menu)
@@ -952,7 +952,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "im-module" 'text-view) t)
  "The @code{im-module} property of type @code{:string} (Read / Write) @br{}
-  Which IM (input method) module should be used for the text view. See the
+  The IM (input method) module that should be used for the text view. See the
   @class{gtk:im-context} documentation. Setting this to a non-@code{nil} value
   overrides the system-wide IM module setting. See the
   @slot[gtk:settings]{gtk-im-module} setting. @br{}
@@ -984,7 +984,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "indent" 'text-view) t)
  "The @code{indent} property of type @code{:int} (Read / Write) @br{}
-  Amount to indent the paragraph, in pixels. @br{}
+  The amount to indent the paragraph, in pixels. @br{}
   Default value: 0")
 
 #+liber-documentation
@@ -1015,8 +1015,8 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "input-hints" 'text-view) t)
  "The @code{input-hints} property of type @symbol{gtk:input-hints}
   (Read / Write) @br{}
-  Additional hints, beyond the @code{\"input-purpose\"} signal, that allow input
-  methods to fine-tune their behaviour.")
+  The additional hints, beyond the @code{\"input-purpose\"} signal, that allow
+  input methods to fine-tune their behaviour.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-view-input-hints)
@@ -1044,7 +1044,7 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "input-purpose" 'text-view) t)
  "The @code{input-purpose} property of type @symbol{gtk:input-purpose}
   (Read / Write) @br{}
-  The purpose of this text field. This property can be used by on-screen
+  The purpose of the text view. This property can be used by on-screen
   keyboards and other input methods to adjust their behaviour. @br{}
   Default value: @code{:free-form}")
 
@@ -1074,7 +1074,7 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "justification" 'text-view) t)
  "The @code{justification} property of type @symbol{gtk:justification}
   (Read / Write) @br{}
-  Left, right, or center justification. @br{}
+  The left, right, or center justification. @br{}
   Default value: @code{:left}")
 
 #+liber-documentation
@@ -1104,7 +1104,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "left-margin" 'text-view) t)
  "The @code{left-margin} property of type @code{:int} (Read / Write) @br{}
-  Width of the left margin in pixels. @br{}
+  The width of the left margin in pixels. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1190,7 +1190,7 @@ lambda (view)    :action
                                                'text-view) t)
  "The @code{pixels-above-lines} property of type @code{:int} (Read / Write)
   @br{}
-  Pixels of blank space above paragraphs. @br{}
+  The pixels of blank space above paragraphs. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1223,7 +1223,7 @@ lambda (view)    :action
                                                'text-view) t)
  "The @code{pixels-below-lines} property of type @code{:int} (Read / Write)
   @br{}
-  Pixels of blank space below paragraphs. @br{}
+  The pixels of blank space below paragraphs. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1256,7 +1256,7 @@ lambda (view)    :action
                                                'text-view) t)
  "The @code{pixels-inside-wrap} property of type @code{:int} (Read / Write)
   @br{}
-  Pixels of blank space between wrapped lines in a paragraph. @br{}
+  The pixels of blank space between wrapped lines in a paragraph. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1288,7 +1288,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "right-margin" 'text-view) t)
  "The @code{right-margin} property of type @code{:int} (Read / Write) @br{}
-  Width of the right margin in pixels. @br{}
+  The width of the right margin in pixels. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1318,7 +1318,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "tabs" 'text-view) t)
  "The @code{tabs} property of type @class{pango:tab-array} (Read / Write) @br{}
-  Custom tabs for this text.")
+  The custom tabs for this text.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'text-view-tabs)

@@ -1059,7 +1059,7 @@ hello_button__clicked (GtkButton *button,
 (export 'builder-object)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_builder_get_objects -> builder-objects
+;;; gtk_builder_get_objects
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_builder_get_objects" builder-objects) (g:slist-t g:object)
@@ -1103,7 +1103,7 @@ hello_button__clicked (GtkButton *button,
 (export 'builder-expose-object)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_builder_get_type_from_name -> builder-type-from-name    not exported
+;;; gtk_builder_get_type_from_name                          not exported
 ;;; ----------------------------------------------------------------------------
 
 ;; The default implementation returns (gtype name) e.g. (gtype "GtkDialog").

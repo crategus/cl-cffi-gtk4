@@ -305,7 +305,7 @@ lambda (display setting)    :run-last
 (export 'display-open)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_default ()
+;;; gdk_display_get_default
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_default" display-default) (g:object display)
@@ -329,7 +329,7 @@ lambda (display setting)    :run-last
 (export 'display-default)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_name -> display-name
+;;; gdk_display_get_name
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_name" display-name) :string
@@ -532,7 +532,7 @@ lambda (display setting)    :run-last
 (export 'display-supports-input-shapes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_app_launch_context -> display-app-launch-context
+;;; gdk_display_get_app_launch_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_app_launch_context"
@@ -591,7 +591,7 @@ lambda (display setting)    :run-last
 (export 'display-notify-startup-complete)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_default_seat -> display-default-seat
+;;; gdk_display_get_default_seat
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_default_seat"
@@ -612,7 +612,7 @@ lambda (display setting)    :run-last
 (export 'display-default-seat)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_list_seats ()
+;;; gdk_display_list_seats
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_list_seats" display-list-seats)
@@ -631,7 +631,7 @@ lambda (display setting)    :run-last
 (export 'display-list-seats)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_monitors -> display-monitors
+;;; gdk_display_get_monitors
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: Consider to export the CREATE-GOBJECT-FROM-POINTER function
@@ -667,7 +667,7 @@ lambda (display setting)    :run-last
 (export 'display-monitors)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_monitor_at_surface -> display-monitor-at-surface
+;;; gdk_display_get_monitor_at_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_monitor_at_surface" display-monitor-at-surface)
@@ -691,7 +691,7 @@ lambda (display setting)    :run-last
 (export 'display-monitor-at-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_clipboard -> display-clipboard
+;;; gdk_display_get_clipboard
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_clipboard" display-clipboard)
@@ -708,7 +708,7 @@ lambda (display setting)    :run-last
 (export 'display-clipboard)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_primary_clipboard -> display-primary-clipboard
+;;; gdk_display_get_primary_clipboard
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_primary_clipboard" display-primary-clipboard)
@@ -729,7 +729,7 @@ lambda (display setting)    :run-last
 (export 'display-primary-clipboard)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_display_get_setting -> display-setting
+;;; gdk_display_get_setting
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_setting" %display-setting) :boolean
@@ -764,7 +764,6 @@ lambda (display setting)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_get_startup_notification_id                Deprecated 4.10
-;;; -> display-startup-notification-id
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_display_get_startup_notification_id"
