@@ -206,8 +206,8 @@
   @end{short}
   The @fun{gtk:bookmark-list-io-priority} function gets the IO priority. The
   @setf{gtk:bookmark-list-io-priority} function sets the IO priority to use
-  while loading files. The default IO priority is
-  @variable{g:+priority-default+}.
+  while loading files. The default IO priority is the @var{g:+priority-default+}
+  value.
   @see-class{gtk:bookmark-list}")
 
 ;;; --- gtk:bookmark-list-item-type --------------------------------------------

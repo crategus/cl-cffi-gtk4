@@ -325,10 +325,9 @@
     @class{gtk:single-selection} class.
   @end{short}
   The @fun{gtk:single-selection-selected} function gets the position of the
-  selected item. If no item is selected, the
-  @variable{gtk:invalid-list-position+} is returned. The
-  @setf{gtk:single-selection-selected} function selects the item at the given
-  @arg{position}.
+  selected item. If no item is selected, the @var{gtk:+invalid-list-position+}
+  value is returned. The @setf{gtk:single-selection-selected} function selects
+  the item at the given @arg{position}.
 
   If the list does not have an item at @arg{position} or the
   @var{gtk:+invalid-list-position+} value is given, the behavior depends on

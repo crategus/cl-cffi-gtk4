@@ -298,7 +298,7 @@
   @argument[parent]{a @class{gtk:window} widget}
   @argument[uri]{a string with the URI to show}
   @argument[timestamp]{an unsigned integer with the timestamp from the event
-    that triggered this call, or the @variable{gdk:+current-time+} value}
+    that triggered this call, or the @var{gdk:+current-time+} value}
   @begin{short}
     This function launches the default application for showing a given URI, or
     shows an error dialog if that fails.

@@ -260,10 +260,10 @@
   while loading files.
 
   Setting the priority while @arg{object} is loading will reprioritize the
-  ongoing load as soon as possible. The default IO priority is
-  @variable{g:+priority-default+}, which is higher than the GTK redraw
+  ongoing load as soon as possible. The default IO priority is the
+  @var{g:+priority-default+} value, which is higher than the GTK redraw
   priority. If you are loading a lot of directories in parallel, lowering it to
-  something like the @variable{g:+priority-default-idle+} value may increase
+  something like the @var{g:+priority-default-idle+} value may increase
   responsiveness.
   @see-class{gtk:directory-list}
   @see-variable{g:+priority-default}")
