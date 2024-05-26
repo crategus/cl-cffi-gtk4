@@ -2,7 +2,7 @@
 ;;; gtk4.file-launcher.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -33,10 +33,12 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_file_launcher_get_always_ask                   Since 4.12
-;;;     gtk_file_launcher_set_always_ask                   Since 4.12
+;;;     gtk_file_launcher_get_always_ask                    Since 4.12
+;;;     gtk_file_launcher_set_always_ask                    Since 4.12
 ;;;     gtk_file_launcher_get_file
 ;;;     gtk_file_launcher_set_file
+;;;     gtk_file_launcher_get_writable                      Since 4.14
+;;;     gtk_file_launcher_set_writable                      Since 4.14
 ;;;
 ;;; Functions
 ;;;
@@ -49,8 +51,9 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     always-ask                                         Since 4.12
+;;;     always-ask                                          Since 4.12
 ;;;     file
+;;;     writable                                            Since 4.14
 ;;;
 ;;; Object Hierarchy
 ;;;
@@ -75,11 +78,15 @@
     "always-ask" "gboolean" t t)
    (file
     file-launcher-file
-    "file" "GFile" t t)))
+    "file" "GFile" t t)
+   #+gtk-4-14
+   (writable
+    file-launcher-writable
+    "writable" "gboolean" t t)))
 
 #+liber-documentation
 (setf (documentation 'file-launcher 'type)
- "@version{#2023-10-12}
+ "@version{2024-5-26}
   @begin{short}
     The @class{gtk:file-launcher} object collects the arguments that are needed
     to open a file with an application.
@@ -99,6 +106,7 @@
   @see-constructor{gtk:file-launcher-new}
   @see-slot{gtk:file-launcher-always-ask}
   @see-slot{gtk:file-launcher-file}
+  @see-slot{gtk:file-launcher-writable}
   @see-class{gtk:uri-launcher}")
 
 ;;; ----------------------------------------------------------------------------
@@ -119,7 +127,7 @@
 (setf (liber:alias-for-function 'file-launcher-always-ask)
       "Accessor"
       (documentation 'file-launcher-always-ask 'function)
- "@version{#2023-11-4}
+ "@version{2024-5-26}
   @syntax{(gtk:file-launcher-always-ask object) => setting}
   @syntax{(setf (gtk:file-launcher-always-ask object) setting)}
   @argument[object]{a @class{gtk:file-launcher} object}
@@ -139,16 +147,16 @@
 
 ;;; --- gtk:file-launcher-file -------------------------------------------------
 
-#+(and gtk-4-10 liber-documentation)
+#+liber-documentation
 (setf (documentation (liber:slot-documentation "file" 'file-launcher) t)
  "The @code{file} property of type @class{g:file} (Read / Write) @br{}
   The file to launch. Since 4.10")
 
-#+(and gtk-4-10 liber-documentation)
+#+liber-documentation
 (setf (liber:alias-for-function 'file-launcher-file)
       "Accessor"
       (documentation 'file-launcher-file 'function)
- "@version{#2023-10-12}
+ "@version{2024-5-26}
   @syntax{(gtk:file-launcher-file object) => file}
   @syntax{(setf (gtk:file-launcher-file object) file)}
   @argument[object]{a @class{gtk:file-launcher} object}
@@ -163,6 +171,34 @@
   Since 4.10
   @see-class{gtk:file-launcher}
   @see-class{g:file}")
+
+;;; --- gtk:file-launcher-writable ---------------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "writable" 'file-launcher) t)
+ "The @code{writable} property of type @code{gboolean} (Read / Write) @br{}
+  Whether to make the file writable for the handler. Since 4.14 @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'file-launcher-writable)
+      "Accessor"
+      (documentation 'file-launcher-writable 'function)
+ "@version{2024-5-26}
+  @syntax{(gtk:file-launcher-writable object) => writable}
+  @syntax{(setf (gtk:file-launcher-writable object) writable)}
+  @argument[object]{a @class{gtk:file-launcher} object}
+  @argument[writable]{a boolean whether to make the file writable}
+  @begin{short}
+    Accessor of the @slot[gtk:file-launcher]{writable} slot of the
+    @class{gtk:file-launcher} class.
+  @end{short}
+  The @fun{gtk:file-launcher-writable} function returns whether to make the
+  file writable for the handler. The @setf{gtk:file-launcher-writable} function
+  sets whether to make the file writable for the handler.
+
+  Since 4.14
+  @see-class{gtk:file-launcher}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_file_launcher_new

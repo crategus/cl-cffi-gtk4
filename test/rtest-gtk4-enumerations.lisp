@@ -1237,13 +1237,15 @@
                "GTK_ACCESSIBLE_ROLE_TREE_GRID" "GTK_ACCESSIBLE_ROLE_TREE_ITEM"
                "GTK_ACCESSIBLE_ROLE_WIDGET" "GTK_ACCESSIBLE_ROLE_WINDOW"
                "GTK_ACCESSIBLE_ROLE_TOGGLE_BUTTON"
-               "GTK_ACCESSIBLE_ROLE_APPLICATION")
+               "GTK_ACCESSIBLE_ROLE_APPLICATION" "GTK_ACCESSIBLE_ROLE_PARAGRAPH"
+               "GTK_ACCESSIBLE_ROLE_BLOCK_QUOTE" "GTK_ACCESSIBLE_ROLE_ARTICLE"
+               "GTK_ACCESSIBLE_ROLE_COMMENT" "GTK_ACCESSIBLE_ROLE_TERMINAL")
              (list-enum-item-name "GtkAccessibleRole")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
                25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
                47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
-               69 70 71 72 73 74 75 76 77 78 79)
+               69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84)
              (list-enum-item-value "GtkAccessibleRole")))
   ;; Check nick names
   (is (equal '("alert" "alert-dialog" "banner" "button" "caption" "cell"
@@ -1259,7 +1261,8 @@
                "slider" "spin-button" "status" "structure" "switch" "tab"
                "table" "tab-list" "tab-panel" "text-box" "time" "timer"
                "toolbar" "tooltip" "tree" "tree-grid" "tree-item" "widget"
-               "window" "toggle-button" "application")
+               "window" "toggle-button" "application" "paragraph" "block-quote"
+               "article" "comment" "terminal")
              (list-enum-item-nick "GtkAccessibleRole")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkAccessibleRole"
@@ -1345,7 +1348,12 @@
                              (:WIDGET 76)
                              (:WINDOW 77)
                              (:TOGGLE-BUTTON 78)
-                             (:APPLICATION 79))
+                             (:APPLICATION 79)
+                             (:PARAGRAPH 80)
+                             (:BLOCK-QUOTE 81)
+                             (:ARTICLE 82)
+                             (:COMMENT 83)
+                             (:TERMINAL 84))
              (gobject:get-g-type-definition "GtkAccessibleRole"))))
 
 ;;;     GtkAccessibleState
@@ -1671,4 +1679,4 @@
                              (:OTHER 3))
              (gobject:get-g-type-definition "GtkAccessibleSort"))))
 
-;;; 2024-5-1
+;;; 2024-5-25

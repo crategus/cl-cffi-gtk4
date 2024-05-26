@@ -28,8 +28,9 @@
              (list-interfaces "GtkSearchEntry")))
   ;; Check properties
   (is (equal '("activates-default" "cursor-position" "editable" "enable-undo"
-               "max-width-chars" "placeholder-text" "search-delay"
-               "selection-bound" "text" "width-chars" "xalign")
+               "input-hints" "input-purpose" "max-width-chars"
+               "placeholder-text" "search-delay" "selection-bound" "text"
+               "width-chars" "xalign")
              (list-properties "GtkSearchEntry")))
   ;; Check signals
   (is (equal '("activate" "next-match" "previous-match" "search-changed"
@@ -52,6 +53,10 @@
                                ((ACTIVATES-DEFAULT
                                  GTK-SEARCH-ENTRY-ACTIVATES-DEFAULT
                                  "activates-default" "gboolean" T T)
+                                (INPUT-HINTS GTK-SEARCH-ENTRY-INPUT-HINTS
+                                 "input-hints" "GtkInputHints" T T)
+                                (INPUT-PURPOSE GTK-SEARCH-ENTRY-INPUT-PURPOSE
+                                 "input-purpose" "GtkInputPurpose" T T)
                                 (PLACEHOLDER-TEXT
                                  GTK-SEARCH-ENTRY-PLACEHOLDER-TEXT
                                  "placeholder-text" "gchararray" T T)
@@ -64,6 +69,8 @@
 (test gtk-search-entry-properties
   (let ((entry (make-instance 'gtk:search-entry)))
     (is-false (gtk:search-entry-activates-default entry))
+    (is-false (gtk:search-entry-input-hints entry))
+    (is (eq :free-form (gtk:search-entry-input-purpose entry)))
     (is-false (gtk:search-entry-placeholder-text entry))
     (is (= 150 (gtk:search-entry-search-delay entry)))))
 
@@ -86,4 +93,4 @@
 ;;;     gtk_search_entry_set_key_capture_widget
 ;;;     gtk_search_entry_get_key_capture_widget
 
-;;; 2024-4-20
+;;; 2024-5-26

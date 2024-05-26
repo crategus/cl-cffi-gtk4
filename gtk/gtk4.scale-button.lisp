@@ -2,7 +2,7 @@
 ;;; gtk4.scale-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -37,9 +37,11 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_scale_button_get_active                        Since 4.10
+;;;     gtk_scale_button_get_active                         Since 4.10
 ;;;     gtk_scale_button_get_adjustment
 ;;;     gtk_scale_button_set_adjustment
+;;;     gtk_scale_button_get_has_frame                      Since 4.14
+;;;     gtk_scale_button_set_has_frame                      Since 4.14
 ;;;     gtk_scale_button_set_icons
 ;;;     gtk_scale_button_get_value
 ;;;     gtk_scale_button_set_value
@@ -53,8 +55,9 @@
 ;;;
 ;;; Properties
 ;;;
-;;;     active                                             Since 4.10
+;;;     active                                              Since 4.10
 ;;;     adjustment
+;;;     has-frame                                           Since 4.14
 ;;;     icons
 ;;;     value
 ;;;
@@ -103,6 +106,10 @@
    (adjustment
     scale-button-adjustment
     "adjustment" "GtkAdjustment" t t)
+   #+gtk-4-14
+   (has-frame
+    scale-button-has-frame
+    "has-frame" "gboolean" t t)
    (icons
     scale-button-icons
     "icons" "GStrv" t t)
@@ -160,6 +167,7 @@ lambda (button value)    :run-last
   @see-constructor{gtk:scale-button-new}
   @see-slot{gtk:scale-button-active}
   @see-slot{gtk:scale-button-adjustment}
+  @see-slot{gtk:scale-button-has-frame}
   @see-slot{gtk:scale-button-icons}
   @see-slot{gtk:scale-button-value}")
 
@@ -220,6 +228,34 @@ lambda (button value)    :run-last
   the adjustment.
   @see-class{gtk:scale-button}
   @see-class{gtk:adjustment}")
+
+;;; --- gtk:scale-button-has-frame ---------------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "has-frame" 'scale-button) t)
+ "The @code{has-frame} property of type @code{gboolean} (Read / Write) @br{}
+  Whether the scale button has a frame. Since 4.14 @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'scale-button-has-frame)
+      "Accessor"
+      (documentation 'scale-button-has-frame 'function)
+ "@version{2024-5-26}
+  @syntax{(gtk:scale-button-has-frame object object) => setting}
+  @syntax{(setf (gtk:scale-button-has-frame object) setting)}
+  @argument[object]{a @class{gtk:scale-button} widget}
+  @argument[setting]{a boolean whether the scale button has a frame}
+  @begin{short}
+    Accessor of the @slot[gtk:scale-button]{has-frame} slot of the
+    @class{gtk:scale-button} class.
+  @end{short}
+  The @fun{gtk:scale-button-has-frame} function returns whether the scale button
+  has a frame. The @setf{gtk:scale-button-has-frame} function sets the style of
+  the scale button.
+
+  Since 4.14
+  @see-class{gtk:scale-button}")
 
 ;;; --- gtk:scale-button-icons -------------------------------------------------
 

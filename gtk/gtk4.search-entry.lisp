@@ -2,7 +2,7 @@
 ;;; gtk4.search-entry.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -37,10 +37,14 @@
 ;;;
 ;;; Accessors
 ;;;
-;;;     gtk_search_entry_get_search_delay                  Since 4.8
-;;;     gtk_search_entry_set_search_delay                  Since 4.8
-;;;     gtk_search_entry_get_placeholder_text              Since 4.10
-;;;     gtk_search_entry_set_placeholder_text              Since 4.10
+;;;     gtk_search_entry_get_input_hints                    Since 4.14
+;;;     gtk_search_entry_set_input_hints                    Since 4.14
+;;;     gtk_search_entry_get_input_purpose                  Since 4.14
+;;;     gtk_search_entry_set_input-purpose                  Since 4.14
+;;;     gtk_search_entry_get_placeholder_text               Since 4.10
+;;;     gtk_search_entry_set_placeholder_text               Since 4.10
+;;;     gtk_search_entry_get_search_delay                   Since 4.8
+;;;     gtk_search_entry_set_search_delay                   Since 4.8
 ;;;
 ;;; Functions
 ;;;
@@ -51,8 +55,10 @@
 ;;; Properties
 ;;;
 ;;;     activates-default
+;;;     input-hints                                         Since 4.14
+;;;     input-purpose                                       Since 4.14
 ;;;     placeholder-text
-;;;     search-delay                                       Since 4.8
+;;;     search-delay                                        Since 4.8
 ;;;
 ;;; Signals
 ;;;
@@ -95,6 +101,14 @@
   ((activates-default
     search-entry-activates-default
     "activates-default" "gboolean" t t)
+   #+gtk-4-14
+   (input-hints
+    search-entry-input-hints
+    "input-hints" "GtkInputHints" t t)
+   #+gtk-4-14
+   (input-purpose
+    search-entry-input-purpose
+    "input-purpose" "GtkInputPurpose" t t)
    (placeholder-text
     search-entry-placeholder-text
     "placeholder-text" "gchararray" t t)
@@ -105,7 +119,7 @@
 
 #+liber-documentation
 (setf (documentation 'search-entry 'type)
- "@version{2024-4-20}
+ "@version{2024-5-26}
   @begin{short}
     The @class{gtk:search-entry} widget is a text entry that has been tailored
     for use as a search entry.
@@ -206,6 +220,8 @@ lambda (entry)    :action
   @end{dictionary}
   @see-constructor{gtk:search-entry-new}
   @see-slot{gtk:search-entry-activates-default}
+  @see-slot{gtk:search-entry-input-hints}
+  @see-slot{gtk:search-entry-input-purpose}
   @see-slot{gtk:search-entry-placeholder-text}
   @see-slot{gtk:search-entry-search-delay}
   @see-class{gtk:entry}")
@@ -248,6 +264,68 @@ lambda (entry)    :action
   entry will be closed, since the default widget is usually one of the dialog
   buttons.
   @see-class{gtk:search-entry}")
+
+;;; --- gtk:search-entry-input-hints -------------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "input-hints" 'search-entry) t)
+ "The @code{input-hints} property of type @symbol{gtk:input-hints}
+  (Read / Write) @br{}
+  The hints about input for the search entry used to alter the behaviour of
+  input methods. Since 4.14 @br{}
+  Default value: @code{:none}")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'search-entry-input-hints)
+      "Accessor"
+      (documentation 'search-entry-input-hints 'function)
+ "@version{2024-5-26}
+  @syntax{(gtk:search-entry-input-hints object) => hints}
+  @syntax{(setf (gtk:search-entry-input-hints object) hints)}
+  @argument[object]{a @class{gtk:search-entry} widget}
+  @argument[hints]{a @symbol{gtk:input-hints} value}
+  @begin{short}
+    Accessor of the @slot[gtk:search-entry]{input-hints} slot of the
+    @class{gtk:search-entry} class.
+  @end{short}
+  The @fun{gtk:search-entry-input-hints} function gets the input hints for
+  the search entry. The @setf{gtk:search-entry-input-hints} function sets the
+  input hints.
+
+  Since 4.14
+  @see-class{gtk:search-entry}
+  @see-symbol{gtk:input-hints}")
+
+;;; --- gtk:search-entry-input-purpose -----------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "input-purpose" 'search-entry) t)
+ "The @code{input-purpose} property of type @symbol{gtk:input-purpose}
+  (Read / Write) @br{}
+  The purpose for the search entry input used to alter the behaviour of input
+  methods. Since 4.14 @br{}
+  Default value: @code{:free-form}")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'search-entry-input-purpose)
+      "Accessor"
+      (documentation 'search-entry-input-purpose 'function)
+ "@version{2024-5-26}
+  @syntax{(gtk:search-entry-input-purpose object) => purpose}
+  @syntax{(setf (gtk:search-entry-input-purpose object) purpose)}
+  @argument[object]{a @class{gtk:search-entry} widget}
+  @argument[purpose]{a @symbol{gtk:input-purpose} value}
+  @begin{short}
+    Accessor of the @slot[gtk:search-entry]{input-purpose} slot of the
+    @class{gtk:search-entry} class.
+  @end{short}
+  The @fun{gtk:search-entry-input-purpose} function gets the input purpose of
+  the search entry. The @setf{gtk:search-entry-input-purpose} function sets
+  the input purpose.
+
+  Since 4.14
+  @see-class{gtk:search-entry}
+  @see-symbol{gtk:input-purpose}")
 
 ;;; --- gtk:search-entry-placeholder-text --------------------------------------
 

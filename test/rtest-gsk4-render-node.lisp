@@ -8,16 +8,16 @@
 ;;;     GskRenderNodeType
 
 (test gsk-render-node-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GskRenderNodeType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GskRenderNodeType")
           (g:gtype (cffi:foreign-funcall "gsk_render_node_type_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gsk:render-node-type
           (glib:symbol-for-gtype "GskRenderNodeType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GSK_NOT_A_RENDER_NODE" "GSK_CONTAINER_NODE" "GSK_CAIRO_NODE"
                "GSK_COLOR_NODE" "GSK_LINEAR_GRADIENT_NODE"
                "GSK_REPEATING_LINEAR_GRADIENT_NODE" "GSK_RADIAL_GRADIENT_NODE"
@@ -28,13 +28,14 @@
                "GSK_ROUNDED_CLIP_NODE" "GSK_SHADOW_NODE" "GSK_BLEND_NODE"
                "GSK_CROSS_FADE_NODE" "GSK_TEXT_NODE" "GSK_BLUR_NODE"
                "GSK_DEBUG_NODE" "GSK_GL_SHADER_NODE" "GSK_TEXTURE_SCALE_NODE"
-               "GSK_MASK_NODE")
+               "GSK_MASK_NODE" "GSK_FILL_NODE" "GSK_STROKE_NODE"
+               "GSK_SUBSURFACE_NODE")
              (list-enum-item-name "GskRenderNodeType")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-               25 26 27)
+               25 26 27 28 29 30)
              (list-enum-item-value "GskRenderNodeType")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("not-a-render-node" "container-node" "cairo-node" "color-node"
                "linear-gradient-node" "repeating-linear-gradient-node"
                "radial-gradient-node" "repeating-radial-gradient-node"
@@ -43,9 +44,10 @@
                "opacity-node" "color-matrix-node" "repeat-node" "clip-node"
                "rounded-clip-node" "shadow-node" "blend-node" "cross-fade-node"
                "text-node" "blur-node" "debug-node" "gl-shader-node"
-               "texture-scale-node" "mask-node")
+               "texture-scale-node" "mask-node" "fill-node" "stroke-node"
+               "subsurface-node")
              (list-enum-item-nick "GskRenderNodeType")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GskRenderNodeType"
                                      GSK-RENDER-NODE-TYPE
                                      (:EXPORT T
@@ -78,7 +80,10 @@
                                      (:DEBUG-NODE 24)
                                      (:GL-SHADER-NODE 25)
                                      (:TEXTURE-SCALE-NODE 26)
-                                     (:MASK-NODE 27))
+                                     (:MASK-NODE 27)
+                                     (:FILL-NODE 28)
+                                     (:STROKE-NODE 29)
+                                     (:SUBSURFACE-NODE 30))
              (gobject:get-g-type-definition "GskRenderNodeType"))))
 
 ;;;     GskRenderNode
@@ -549,4 +554,4 @@
 ;;;     gsk_gl_shader_node_get_args
 ;;;     gsk_gl_shader_node_get_shader
 
-;;; --- 2023-11-3 --------------------------------------------------------------
+;;; 2024-5-25

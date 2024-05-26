@@ -24,7 +24,7 @@
              (list-children "GtkText")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-               "GtkEditable")
+               "GtkEditable" "GtkAccessibleText")
              (list-interfaces "GtkText")))
   ;; Check class properties
   (is (equal '("activates-default" "attributes" "buffer" "cursor-position"
@@ -44,8 +44,8 @@
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkText" GTK-TEXT
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
-                         "GtkEditable")
+                        ("GtkAccessible" "GtkAccessibleText" "GtkBuildable"
+                         "GtkConstraintTarget" "GtkEditable")
                         :TYPE-INITIALIZER "gtk_text_get_type")
                        ((ACTIVATES-DEFAULT GTK-TEXT-ACTIVATES-DEFAULT
                          "activates-default" "gboolean" T T)
@@ -385,4 +385,4 @@
       (is (=  0.0 (graphene:rect-width weak)))
       (is (= 17.0 (graphene:rect-height weak))))))
 
-;;; 2024-5-21
+;;; 2024-5-26

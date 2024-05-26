@@ -2,7 +2,7 @@
 ;;; gtk4.text.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -135,6 +135,7 @@
 ;;; Implemented Interfaces
 ;;;
 ;;;     GtkAccessible
+;;;     GtkAccessibleText                                   Since 4.14
 ;;;     GtkBuildable
 ;;;     GtkConstraintTarget
 ;;;     GtkEditable
@@ -149,7 +150,8 @@
 (gobject:define-g-object-class "GtkText" text
   (:superclass widget
    :export t
-   :interfaces ("GtkAccessible"
+   :interfaces ("GtkAccessibleText"
+                "GtkAccessible"
                 "GtkBuildable"
                 "GtkConstraintTarget"
                 "GtkEditable")

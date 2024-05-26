@@ -48,6 +48,7 @@
                "gtk-print-preview-command" "gtk-recent-files-enabled"
                "gtk-recent-files-max-age" "gtk-shell-shows-app-menu"
                "gtk-shell-shows-desktop" "gtk-shell-shows-menubar"
+               "gtk-show-status-shapes"
                "gtk-sound-theme-name" "gtk-split-cursor" "gtk-theme-name"
                "gtk-titlebar-double-click" "gtk-titlebar-middle-click"
                "gtk-titlebar-right-click" "gtk-xft-antialias"
@@ -170,6 +171,9 @@
                         (GTK-SHELL-SHOWS-MENUBAR
                          GTK-SETTINGS-GTK-SHELL-SHOWS-MENUBAR
                          "gtk-shell-shows-menubar" "gboolean" T T)
+                        (GTK-SHOW-STATUS-SHAPES
+                         GTK-SETTINGS-GTK-SHOW-STATUS-SHAPES
+                         "gtk-show-status-shapes" "gboolean" T T)
                         (GTK-SOUND-THEME-NAME GTK-SETTINGS-GTK-SOUND-THEME-NAME
                          "gtk-sound-theme-name" "gchararray" T T)
                         (GTK-SPLIT-CURSOR GTK-SETTINGS-GTK-SPLIT-CURSOR
@@ -234,7 +238,7 @@
     (is (= 500 (gtk:settings-gtk-long-press-time settings)))
     (is-true (gtk:settings-gtk-overlay-scrolling settings))
     (is-true (gtk:settings-gtk-primary-button-warps-slider settings))
-    (is (string= "cpdb,file" (gtk:settings-gtk-print-backends settings)))
+    (is (string= "cups,file" (gtk:settings-gtk-print-backends settings)))
     (is (string= "evince --unlink-tempfile --preview --print-settings %s %f"
                  (gtk:settings-gtk-print-preview-command settings)))
     ;; FIXME: Signals an error: null-pointer in parse-g-param-spec.
@@ -290,7 +294,8 @@
                  "gtk-print-backends" "gtk-print-preview-command"
                  "gtk-recent-files-enabled" "gtk-recent-files-max-age"
                  "gtk-shell-shows-app-menu" "gtk-shell-shows-desktop"
-                 "gtk-shell-shows-menubar" "gtk-sound-theme-name"
+                 "gtk-shell-shows-menubar" "gtk-show-status-shapes"
+                 "gtk-sound-theme-name"
                  "gtk-split-cursor" "gtk-theme-name" "gtk-titlebar-double-click"
                  "gtk-titlebar-middle-click" "gtk-titlebar-right-click"
                  "gtk-xft-antialias" "gtk-xft-dpi" "gtk-xft-hinting"
@@ -302,4 +307,4 @@
                                        "GtkSettings"))
                            #'string<))))))
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-5-25

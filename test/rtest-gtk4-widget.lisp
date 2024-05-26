@@ -32,62 +32,58 @@
 ;;; --- GtkWidget --------------------------------------------------------------
 
 (test gtk-widget-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkWidget"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:widget
           (glib:symbol-for-gtype "GtkWidget")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkWidget")
           (g:gtype (cffi:foreign-funcall "gtk_widget_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GInitiallyUnowned")
           (g:type-parent "GtkWidget")))
-  ;; Check the children
+  ;; Check children
   #-windows
   (if *first-run-gtk-test*
       (is (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
-                   "GtkAspectFrame" "GtkBox" "GtkBuiltinIcon" "GtkButton"
-                   "GtkCalendar" "GtkCellView" "GtkCenterBox" "GtkCheckButton"
-                   "GtkColorButton" "GtkColorChooserWidget"
-                   "GtkColorDialogButton" "GtkColorPlane" "GtkColorSwatch"
-                   "GtkColumnView" "GtkColumnViewTitle" "GtkComboBox" "GtkDragIcon" "GtkDrawingArea"
+                   "GtkAspectFrame"
+ "GtkBox" "GtkBuiltinIcon" "GtkButton" "GtkCalendar" "GtkCellView"
+ "GtkCenterBox" "GtkCheckButton" "GtkColorButton" "GtkColorChooserWidget"
+ "GtkColorDialogButton" "GtkColorPlane" "GtkColorSwatch" "GtkColumnView"
+ "GtkColumnViewTitle" "GtkComboBox" "GtkDragIcon" "GtkDrawingArea"
  "GtkDropDown" "GtkEditableLabel" "GtkEntry" "GtkExpander" "GtkFileChooserCell"
  "GtkFileChooserErrorStack" "GtkFileChooserWidget" "GtkFileThumbnail"
  "GtkFixed" "GtkFlowBox" "GtkFlowBoxChild" "GtkFontButton"
  "GtkFontChooserWidget" "GtkFontDialogButton" "GtkFrame" "GtkGLArea" "GtkGizmo"
- "GtkGrid" "GtkHeaderBar" "GtkIconView" "GtkImage" "GtkInfoBar"
- "GtkInscription" "GtkLabel" "GtkLevelBar" "GtkListBase" "GtkListBox"
- "GtkListBoxRow" "GtkListItemBase" "GtkMediaControls" "GtkMenuButton"
- "GtkModelButton" "GtkNotebook" "GtkOverlay" "GtkPaned" "GtkPanedHandle"
- "GtkPasswordEntry" "GtkPathBar" "GtkPicture" "GtkPlacesSidebar" "GtkPopover"
- "GtkPopoverContent" "GtkPopoverMenuBar" "GtkProgressBar" "GtkRange"
- "GtkRevealer" "GtkScaleButton" "GtkScrollbar" "GtkScrolledWindow"
- "GtkSearchBar" "GtkSearchEntry" "GtkSeparator" "GtkShortcutLabel"
- "GtkShortcutsShortcut" "GtkSpinButton" "GtkSpinner" "GtkStack"
- "GtkStackSidebar" "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch" "GtkText"
- "GtkTextHandle" "GtkTextView" "GtkTooltipWindow" "GtkTreeExpander"
+ "GtkGraphicsOffload" "GtkGrid" "GtkHeaderBar" "GtkIconView" "GtkImage"
+ "GtkInfoBar" "GtkInscription" "GtkLabel" "GtkLevelBar" "GtkListBase"
+ "GtkListBox" "GtkListBoxRow" "GtkListItemBase" "GtkMediaControls"
+ "GtkMenuButton" "GtkModelButton" "GtkNotebook" "GtkOverlay" "GtkPaned"
+ "GtkPanedHandle" "GtkPasswordEntry" "GtkPathBar" "GtkPicture"
+ "GtkPlacesSidebar" "GtkPopover" "GtkPopoverContent" "GtkPopoverMenuBar"
+ "GtkProgressBar" "GtkRange" "GtkRevealer" "GtkScaleButton" "GtkScrollbar"
+ "GtkScrolledWindow" "GtkSearchBar" "GtkSearchEntry" "GtkSeparator"
+ "GtkShortcutLabel" "GtkShortcutsShortcut" "GtkSpinButton" "GtkSpinner"
+ "GtkStack" "GtkStackSidebar" "GtkStackSwitcher" "GtkStatusbar" "GtkSwitch"
+ "GtkText" "GtkTextHandle" "GtkTextView" "GtkTooltipWindow" "GtkTreeExpander"
  "GtkTreeView" "GtkVideo" "GtkViewport" "GtkWindow" "GtkWindowControls"
  "GtkWindowHandle")
                  (list-children "GtkWidget")))
-      (is  (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget"
-                    "GtkAspectFrame" "GtkBox" "GtkBuiltinIcon" "GtkButton"
-                    "GtkCalendar" "GtkCellView" "GtkCenterBox" "GtkCheckButton"
-                    "GtkColorButton" "GtkColorChooserWidget"
-                    "GtkColorDialogButton" "GtkColorPlane" "GtkColorSwatch"
-                    "GtkColumnView" "GtkColumnViewTitle" "GtkComboBox"
-                    "GtkDragIcon" "GtkDrawingArea" "GtkDropDown"
-                    "GtkEditableLabel" "GtkEntry" "GtkExpander"
-                    "GtkFileChooserCell" "GtkFileChooserErrorStack"
-                    "GtkFileChooserWidget" "GtkFileThumbnail" "GtkFixed"
-                    "GtkFlowBox" "GtkFlowBoxChild" "GtkFontButton"
-                    "GtkFontChooserWidget" "GtkFontDialogButton" "GtkFrame"
-                    "GtkGLArea" "GtkGizmo" "GtkGrid" "GtkHeaderBar"
-                    "GtkIconView" "GtkImage" "GtkInfoBar" "GtkInscription"
-                    "GtkLabel" "GtkLevelBar" "GtkListBase" "GtkListBox"
- "GtkListBoxRow" "GtkListItemBase" "GtkMediaControls" "GtkMenuButton"
- "GtkModelButton" "GtkNotebook" "GtkOverlay" "GtkPageThumbnail" "GtkPaned"
- "GtkPanedHandle" "GtkPasswordEntry" "GtkPathBar" "GtkPicture"
+      (is  (equal '("GtkActionBar" "GtkAppChooserButton" "GtkAppChooserWidget" "GtkAspectFrame"
+ "GtkBox" "GtkBuiltinIcon" "GtkButton" "GtkCalendar" "GtkCellView"
+ "GtkCenterBox" "GtkCheckButton" "GtkColorButton" "GtkColorChooserWidget"
+ "GtkColorDialogButton" "GtkColorPlane" "GtkColorSwatch" "GtkColumnView"
+ "GtkColumnViewTitle" "GtkComboBox" "GtkDragIcon" "GtkDrawingArea"
+ "GtkDropDown" "GtkEditableLabel" "GtkEntry" "GtkExpander" "GtkFileChooserCell"
+ "GtkFileChooserErrorStack" "GtkFileChooserWidget" "GtkFileThumbnail"
+ "GtkFixed" "GtkFlowBox" "GtkFlowBoxChild" "GtkFontButton"
+ "GtkFontChooserWidget" "GtkFontDialogButton" "GtkFrame" "GtkGLArea" "GtkGizmo"
+ "GtkGraphicsOffload" "GtkGrid" "GtkHeaderBar" "GtkIconView" "GtkImage"
+ "GtkInfoBar" "GtkInscription" "GtkLabel" "GtkLevelBar" "GtkListBase"
+ "GtkListBox" "GtkListBoxRow" "GtkListItemBase" "GtkMediaControls"
+ "GtkMenuButton" "GtkModelButton" "GtkNotebook" "GtkOverlay" "GtkPageThumbnail"
+ "GtkPaned" "GtkPanedHandle" "GtkPasswordEntry" "GtkPathBar" "GtkPicture"
  "GtkPlacesSidebar" "GtkPopover" "GtkPopoverContent" "GtkPopoverMenuBar"
  "GtkProgressBar" "GtkRange" "GtkRevealer" "GtkScaleButton" "GtkScrollbar"
  "GtkScrolledWindow" "GtkSearchBar" "GtkSearchEntry" "GtkSeparator"
@@ -119,10 +115,10 @@
  "GtkTreeExpander" "GtkTreeView" "GtkVideo" "GtkViewport" "GtkWindow"
  "GtkWindowControls" "GtkWindowHandle")
                  (list-children "GtkWidget"))))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkWidget")))
-  ;; Get the class properties
+  ;; Check class properties
   (is (equal '("accessible-role" "can-focus" "can-target" "css-classes"
                "css-name" "cursor" "focus-on-click" "focusable" "halign"
                "has-default" "has-focus" "has-tooltip" "height-request"
@@ -132,14 +128,14 @@
                "sensitive" "tooltip-markup" "tooltip-text" "valign" "vexpand"
                "vexpand-set" "visible" "width-request")
              (list-properties "GtkWidget")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '("destroy" "direction-changed" "hide" "keynav-failed" "map"
                "mnemonic-activate" "move-focus" "query-tooltip" "realize" "show"
                "state-flags-changed" "unmap" "unrealize")
              (list-signals "GtkWidget")))
-  ;; CSS information
+  ;; Check CSS information
   ;; No CSS information for a abstract class
-  ;; Get the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkWidget" GTK-WIDGET
                        (:SUPERCLASS G-INITIALLY-UNOWNED :EXPORT T :INTERFACES
                         ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
@@ -520,4 +516,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; 2024-4-20
+;;; 2024-5-25

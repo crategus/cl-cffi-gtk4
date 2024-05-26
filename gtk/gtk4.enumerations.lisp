@@ -2,7 +2,7 @@
 ;;; gtk4.enumerations.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -1821,13 +1821,23 @@
   #+gtk-4-10
   :toggle-button
   #+gtk-4-12
-  :application)
+  :application
+  #+gtk-4-14
+  :paragraph
+  #+gtk-4-14
+  :block-quote
+  #+gtk-4-14
+  :article
+  #+gtk-4-14
+  :comment
+  #+gtk-4-14
+  :terminal)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'accessible-role)
       "GEnum"
       (liber:symbol-documentation 'accessible-role)
- "@version{2024-4-24}
+ "@version{2024-5-25}
   @begin{declaration}
 (gobject:define-g-enum \"GtkAccessibleRole\" accessible-role
   (:export t
@@ -1913,7 +1923,17 @@
   #+gtk-4-10
   :toggle-button
   #+gtk-4-12
-  :application)
+  :application
+  #+gtk-4-14
+  :paragraph
+  #+gtk-4-14
+  :block-quote
+  #+gtk-4-14
+  :article
+  #+gtk-4-14
+  :comment
+  #+gtk-4-14
+  :terminal)
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -2021,6 +2041,14 @@
         depressed by a second activation. Since: 4.10}
       @entry[:application]{A toplevel element of a graphical user interface.
         This is the role that GTK uses by default for windows. Since 4.12}
+      @entry[:paragraph]{A paragraph of content. Since 4.14}
+      @entry[:block-quote]{A section of content that is quoted from another
+        source. Since 4.14}
+      @entry[:article]{A section of a page that consists of a composition that
+        forms an independent part of a document, page, or site. Since 4.14}
+      @entry[:comment]{A comment contains content expressing reaction to other
+        content. Since 4.14}
+      @entry[:terminal]{A virtual terminal. Since 4.14}
     @end{table}
   @end{values}
   @begin{short}

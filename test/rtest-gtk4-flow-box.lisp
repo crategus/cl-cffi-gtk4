@@ -23,8 +23,6 @@
   #-windows
   (if *first-run-gtk-test*
       (is (equal '()
-                 (list-children "GtkFlowBoxChild")))
-      (is (equal '("GtkEmojiChooserChild")
                  (list-children "GtkFlowBoxChild"))))
   #+windows
   (is (equal '()

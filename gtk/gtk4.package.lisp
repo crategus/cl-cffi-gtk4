@@ -2,7 +2,7 @@
 ;;; gtk4.package.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -387,6 +387,8 @@
       @about-generic{string-object-string}
       @about-function{string-object-new}
       @about-class{string-list}
+      @about-generic{string-list-item-type}
+      @about-generic{string-list-n-items}
       @about-generic{string-list-strings}
       @about-function{string-list-new}
       @about-function{string-list-append}
@@ -719,7 +721,6 @@ GtkCellRenderer         GtkWidget
       @about-generic{list-header-start}
     @end{subsection}
     @begin[GtkListView]{subsection}
-      A widget for displaying lists.
       @about-symbol{list-tab-behavior}
       @about-symbol{list-scroll-flags}
       @about-class{list-base}
@@ -736,7 +737,6 @@ GtkCellRenderer         GtkWidget
       @about-function{list-view-scroll-to}
     @end{subsection}
     @begin[GtkGridView]{subsection}
-      A widget for displaying grids.
       @about-class{grid-view}
       @about-generic{grid-view-enable-rubberband}
       @about-generic{grid-view-factory}
@@ -748,7 +748,6 @@ GtkCellRenderer         GtkWidget
       @about-function{grid-view-scroll-to}
     @end{subsection}
     @begin[GtkColumnView]{subsection}
-      A widget for displaying lists in multiple columns.
       @about-class{column-view}
       @about-generic{column-view-columns}
       @about-generic{column-view-enable-rubberband}
@@ -765,7 +764,6 @@ GtkCellRenderer         GtkWidget
       @about-function{column-view-sort-by-column}
     @end{subsection}
     @begin[GtkColumnViewColumn]{subsection}
-      The column added to GtkColumnView.
       @about-class{column-view-column}
       @about-generic{column-view-column-column-view}
       @about-generic{column-view-column-expand}
@@ -1656,10 +1654,11 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Media Support]{section}
     @begin[GtkVideo]{subsection}
-      A widget for displaying video.
+      @about-symbol{graphics-offload-enabled}
       @about-class{video}
       @about-generic{video-autoplay}
       @about-generic{video-file}
+      @about-generic{video-graphics-offload}
       @about-generic{video-loop}
       @about-generic{video-media-stream}
       @about-function{video-new}
@@ -1793,6 +1792,7 @@ GtkCellRenderer         GtkWidget
       @about-class{scale-button}
       @about-generic{scale-button-active}
       @about-generic{scale-button-adjustment}
+      @about-generic{scale-button-has-frame}
       @about-generic{scale-button-icons}
       @about-generic{scale-button-value}
       @about-function{scale-button-new}
@@ -1966,7 +1966,7 @@ GtkCellRenderer         GtkWidget
       @about-symbol{spin-button-update-policy}
       @about-symbol{spin-type}
       @about-class{spin-button}
-      @about-symbol{GTK_INPUT_ERROR}
+      @about-generic{spin-button-activates-default}
       @about-generic{spin-button-adjustment}
       @about-generic{spin-button-climb-rate}
       @about-generic{spin-button-digits}
@@ -1987,7 +1987,10 @@ GtkCellRenderer         GtkWidget
     @begin[GtkSearchEntry]{subsection}
       @about-class{search-entry}
       @about-generic{search-entry-activates-default}
+      @about-generic{search-entry-input-hints}
+      @about-generic{search-entry-input-purpose}
       @about-generic{search-entry-placeholder-text}
+      @about-generic{search-entry-search-delay}
       @about-function{search-entry-new}
       @about-function{search-entry-key-capture-widget}
     @end{subsection}
@@ -2385,6 +2388,7 @@ GtkCellRenderer         GtkWidget
       Popovers to use as menus.
       @about-symbol{popover-menu-flags}
       @about-class{popover-menu}
+      @about-generic{popover-menu-flags}
       @about-generic{popover-menu-menu-model}
       @about-generic{popover-menu-visible-submenu}
       @about-function{popover-menu-new-from-model}
@@ -2443,6 +2447,7 @@ GtkCellRenderer         GtkWidget
       @about-class{file-launcher}
       @about-generic{file-launcher-always-ask}
       @about-generic{file-launcher-file}
+      @about-generic{file-launcher-writable}
       @about-function{file-launcher-new}
       @about-function{file-launcher-launch}
       @about-function{file-launcher-launch-finish}
@@ -3180,6 +3185,7 @@ GtkCellRenderer         GtkWidget
       @about-symbol{accessible-sort}
       @about-symbol{accessible-platform-state}
       @about-class{accessible-range}
+      @about-class{accessible-text}
       @about-class{accessible}
       @about-generic{accessible-accessible-role}
       @about-function{accessible-reset-property}
@@ -3697,6 +3703,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{settings-gtk-shell-shows-app-menu}
       @about-generic{settings-gtk-shell-shows-desktop}
       @about-generic{settings-gtk-shell-shows-menubar}
+      @about-generic{settings-gtk-show-status-shapes}
       @about-generic{settings-gtk-sound-theme-name}
       @about-generic{settings-gtk-split-cursor}
       @about-generic{settings-gtk-theme-name}

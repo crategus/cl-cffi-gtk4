@@ -23,7 +23,8 @@
   (is (equal '()
              (list-children "GtkLabel")))
   ;; Check interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+               "GtkAccessibleText")
              (list-interfaces "GtkLabel")))
   ;; Check properties
   (is (equal '("attributes" "ellipsize" "extra-menu" "justify" "label" "lines"
@@ -47,7 +48,8 @@
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkLabel" GTK-LABEL
                        (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+                        ("GtkAccessible" "GtkAccessibleText"
+                         "GtkBuildable" "GtkConstraintTarget")
                         :TYPE-INITIALIZER "gtk_label_get_type")
                        ((ATTRIBUTES GTK-LABEL-ATTRIBUTES "attributes"
                          "PangoAttrList" T T)
@@ -223,4 +225,4 @@
 
 ;;;     gtk_label_get_current_uri
 
-;;; 2024-4-24
+;;; 2024-5-26

@@ -2,7 +2,7 @@
 ;;; gtk4.settings.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -34,7 +34,7 @@
 ;;; Types and Values
 ;;;
 ;;;     GtkSettings
-;;;     GtkSettingsValue                                   not implemented
+;;;     GtkSettingsValue                                    not implemented
 ;;;     GtkSystemSetting
 ;;;
 ;;; Functions
@@ -69,7 +69,7 @@
 ;;;     gtk-error-bell
 ;;;     gtk-font-name
 ;;;     gtk-fontconfig-timestamp
-;;;     gtk-hint-font-metrics                              Since 4.6
+;;;     gtk-hint-font-metrics                               Since 4.6
 ;;;     gtk-icon-theme-name
 ;;;     gtk-im-module
 ;;;     gtk-keynav-use-caret
@@ -84,6 +84,7 @@
 ;;;     gtk-shell-shows-app-menu
 ;;;     gtk-shell-shows-desktop
 ;;;     gtk-shell-shows-menubar
+;;;     gtk-show-status-shapes                              Since 4.14
 ;;;     gtk-sound-theme-name
 ;;;     gtk-split-cursor
 ;;;     gtk-theme-name
@@ -322,6 +323,10 @@
    (gtk-shell-shows-menubar
     settings-gtk-shell-shows-menubar
     "gtk-shell-shows-menubar" "gboolean" t t)
+   #+gtk-4-14
+   (gtk-show-status-shapes
+    settings-gtk-show-status-shapes
+    "gtk-show-status-shapes" "gboolean" t t)
    (gtk-sound-theme-name
     settings-gtk-sound-theme-name
     "gtk-sound-theme-name" "gchararray" t t)
@@ -358,7 +363,7 @@
 
 #+liber-documentation
 (setf (documentation 'settings 'type)
- "@version{2023-8-30}
+ "@version{2024-5-25}
   @begin{short}
     The @class{gtk:settings} object provide a mechanism to share global settings
     between applications.
@@ -385,55 +390,56 @@
   There is one @class{gtk:settings} instance per display. It can be obtained
   with the @fun{gtk:settings-for-display} function, but in many cases, it is
   more convenient to use the @fun{gtk:widget-settings} function.
-  @see-slot{gtk-alternative-button-order}
-  @see-slot{gtk-alternative-sort-arrows}
-  @see-slot{gtk-application-prefer-dark-theme}
-  @see-slot{gtk-cursor-aspect-ratio}
-  @see-slot{gtk-cursor-blink}
-  @see-slot{gtk-cursor-blink-time}
-  @see-slot{gtk-cursor-blink-timeout}
-  @see-slot{gtk-cursor-theme-name}
-  @see-slot{gtk-cursor-theme-size}
-  @see-slot{gtk-decoration-layout}
-  @see-slot{gtk-dialogs-use-header}
-  @see-slot{gtk-dnd-drag-threshold}
-  @see-slot{gtk-double-click-distance}
-  @see-slot{gtk-double-click-time}
-  @see-slot{gtk-enable-accels}
-  @see-slot{gtk-enable-animations}
-  @see-slot{gtk-enable-event-sounds}
-  @see-slot{gtk-enable-input-feedback-sounds}
-  @see-slot{gtk-enable-primary-paste}
-  @see-slot{gtk-entry-password-hint-timeout}
-  @see-slot{gtk-entry-select-on-focus}
-  @see-slot{gtk-error-bell}
-  @see-slot{gtk-font-name}
-  @see-slot{gtk-fontconfig-timestamp}
-  @see-slot{gtk-icon-theme-name}
-  @see-slot{gtk-im-module}
-  @see-slot{gtk-keynav-use-caret}
-  @see-slot{gtk-label-select-on-focus}
-  @see-slot{gtk-long-press-time}
-  @see-slot{gtk-overlay-scrolling}
-  @see-slot{gtk-primary-button-warps-slider}
-  @see-slot{gtk-print-backends}
-  @see-slot{gtk-print-preview-command}
-  @see-slot{gtk-recent-files-enabled}
-  @see-slot{gtk-recent-files-max-age}
-  @see-slot{gtk-shell-shows-app-menu}
-  @see-slot{gtk-shell-shows-desktop}
-  @see-slot{gtk-shell-shows-menubar}
-  @see-slot{gtk-sound-theme-name}
-  @see-slot{gtk-split-cursor}
-  @see-slot{gtk-theme-name}
-  @see-slot{gtk-titlebar-double-click}
-  @see-slot{gtk-titlebar-middle-click}
-  @see-slot{gtk-titlebar-right-click}
+  @see-slot{gtk:settings-gtk-alternative-button-order}
+  @see-slot{gtk:settings-gtk-alternative-sort-arrows}
+  @see-slot{gtk:settings-gtk-application-prefer-dark-theme}
+  @see-slot{gtk:settings-gtk-cursor-aspect-ratio}
+  @see-slot{gtk:settings-gtk-cursor-blink}
+  @see-slot{gtk:settings-gtk-cursor-blink-time}
+  @see-slot{gtk:settings-gtk-cursor-blink-timeout}
+  @see-slot{gtk:settings-gtk-cursor-theme-name}
+  @see-slot{gtk:settings-gtk-cursor-theme-size}
+  @see-slot{gtk:settings-gtk-decoration-layout}
+  @see-slot{gtk:settings-gtk-dialogs-use-header}
+  @see-slot{gtk:settings-gtk-dnd-drag-threshold}
+  @see-slot{gtk:settings-gtk-double-click-distance}
+  @see-slot{gtk:settings-gtk-double-click-time}
+  @see-slot{gtk:settings-gtk-enable-accels}
+  @see-slot{gtk:settings-gtk-enable-animations}
+  @see-slot{gtk:settings-gtk-enable-event-sounds}
+  @see-slot{gtk:settings-gtk-enable-input-feedback-sounds}
+  @see-slot{gtk:settings-gtk-enable-primary-paste}
+  @see-slot{gtk:settings-gtk-entry-password-hint-timeout}
+  @see-slot{gtk:settings-gtk-entry-select-on-focus}
+  @see-slot{gtk:settings-gtk-error-bell}
+  @see-slot{gtk:settings-gtk-font-name}
+  @see-slot{gtk:settings-gtk-fontconfig-timestamp}
+  @see-slot{gtk:settings-gtk-icon-theme-name}
+  @see-slot{gtk:settings-gtk-im-module}
+  @see-slot{gtk:settings-gtk-keynav-use-caret}
+  @see-slot{gtk:settings-gtk-label-select-on-focus}
+  @see-slot{gtk:settings-gtk-long-press-time}
+  @see-slot{gtk:settings-gtk-overlay-scrolling}
+  @see-slot{gtk:settings-gtk-primary-button-warps-slider}
+  @see-slot{gtk:settings-gtk-print-backends}
+  @see-slot{gtk:settings-gtk-print-preview-command}
+  @see-slot{gtk:settings-gtk-recent-files-enabled}
+  @see-slot{gtk:settings-gtk-recent-files-max-age}
+  @see-slot{gtk:settings-gtk-shell-shows-app-menu}
+  @see-slot{gtk:settings-gtk-shell-shows-desktop}
+  @see-slot{gtk:settings-gtk-shell-shows-menubar}
+  @see-slot{gtk:settings-gtk-show-status-shapes}
+  @see-slot{gtk:settings-gtk-sound-theme-name}
+  @see-slot{gtk:settings-gtk-split-cursor}
+  @see-slot{gtk:settings-gtk-theme-name}
+  @see-slot{gtk:settings-gtk-titlebar-double-click}
+  @see-slot{gtk:settings-gtk-titlebar-middle-click}
+  @see-slot{gtk:settings-gtk-titlebar-right-click}
   @see-slot{gtk-xft-antialias}
-  @see-slot{gtk-xft-dpi}
-  @see-slot{gtk-xft-hinting}
-  @see-slot{gtk-xft-hintstyle}
-  @see-slot{gtk-xft-rgba}
+  @see-slot{gtk:settings-gtk-xft-dpi}
+  @see-slot{gtk:settings-gtk-xft-hinting}
+  @see-slot{gtk:settings-gtk-xft-hintstyle}
+  @see-slot{gtk:settings-gtk-xft-rgba}
   @see-class{g:key-file}")
 
 ;;; ----------------------------------------------------------------------------
@@ -1612,6 +1618,37 @@
   @end{short}
   Set to @em{true} if the desktop environment is displaying the menubar,
   @em{false} if the application should display it itself.
+  @see-class{gtk:settings}")
+
+;;; --- gtk:settings-gtk-show-status-shapes ------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "gtk-show-status-shapes"
+                                               'settings) t)
+ "The @code{gtk-show-status-shapes} property of type @code{:boolean}
+  (Read / Write) @br{}
+  If @em{true}, widgets like switches include shapes to indicate their on/off
+  state. Since 4.14 @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'settings-gtk-show-status-shapes)
+      "Accessor"
+      (documentation 'settings-gtk-show-status-shapes 'function)
+ "@version{2024-5-26}
+  @syntax{(gtk:settings-gtk-shell-shows-menubar object) => setting}
+  @syntax{(setf (gtk:settings-gtk-shell-shows-menubar object) setting)}
+  @argument[object]{a @class{gtk:settings} object}
+  @argument[setting]{a boolean whether widgets include shapes to indicate their
+    on/off state}
+  @begin{short}
+    Accessor of the @slot[gtk:settings]{gtk-shell-shows-menubar} slot of the
+    @class{gtk:settings} class.
+  @end{short}
+  If @em{true}, widgets like switches include shapes to indicate their on/off
+  state.
+
+  Since 4.14
   @see-class{gtk:settings}")
 
 ;;; --- gtk:settings-gtk-sound-theme-name --------------------------------------

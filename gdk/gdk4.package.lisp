@@ -172,6 +172,7 @@
   @begin[General]{section}
     @begin[Enumerations]{subsection}
       @about-symbol{gdk:gravity}
+      @about-variable{gdk:+modifier-mask+}
       @about-symbol{gdk:modifier-type}
     @end{subsection}
     @begin[GdkRectangle]{subsection}
@@ -216,7 +217,6 @@
       @about-function{rgba-to-string}
     @end{subsection}
     @begin[Key Values]{subsection}
-      Functions for manipulating keyboard codes
       @about-function{keyval-name}
       @about-function{keyval-from-name}
       @about-function{keyval-convert-case}
@@ -227,10 +227,18 @@
       @about-function{keyval-to-unicode}
       @about-function{unicode-to-keyval}
     @end{subsection}
+    @begin[GdkDmabufFormats]{subsection}
+      @about-class{dmabuf-formats}
+      @about-function{dmabuf-formats-contains}
+      @about-function{dmabuf-formats-equal}
+      @about-function{dmabuf-formats-format}
+      @about-function{dmabuf-formats-n-formats}
+      @about-function{dmabuf-formats-ref}
+      @about-function{dmabuf-formats-unref}
+    @end{subsection}
   @end{section}
   @begin[Displays, Devices, Monitors, and Seats]{section}
     @begin[GdkDisplayManager]{subsection}
-      Maintains a list of all open GdkDisplays.
       @about-class{display-manager}
       @about-generic{display-manager-default-display}
       @about-function{display-manager-get}
@@ -239,11 +247,12 @@
       @about-function{set-allowed-backends}
     @end{subsection}
     @begin[GdkDisplay]{subsection}
-      Controls a set of monitors and their associated input devices.
       @about-class{display}
       @about-generic{display-composited}
+      @about-generic{display-dmabuf-formats}
       @about-generic{display-input-shapes}
       @about-generic{display-rgba}
+      @about-generic{display-shadow-width}
       @about-function{display-open}
       @about-function{display-default}
       @about-function{display-name}
@@ -282,7 +291,6 @@
       @about-generic{device-tool-tool-type}
     @end{subsection}
     @begin[GdkDevice]{subsection}
-      Object representing an input device.
       @about-symbol{input-source}
       @about-symbol{axis-use}
       @about-symbol{axis-flags}
@@ -310,7 +318,6 @@
       @about-function{device-timestamp}
     @end{subsection}
     @begin[GdkDevicePad]{subsection}
-      Pad device interface.
       @about-symbol{device-pad-feature}
       @about-class{device-pad}
       @about-function{device-pad-n-groups}
@@ -319,7 +326,6 @@
       @about-function{device-pad-feature-group}
     @end{subsection}
     @begin[GdkMonitor]{subsection}
-      Object representing an output.
       @about-symbol{subpixel-layout}
       @about-class{monitor}
       @about-generic{monitor-connector}
@@ -329,6 +335,7 @@
       @about-generic{monitor-manufacturer}
       @about-generic{monitor-model}
       @about-generic{monitor-refresh-rate}
+      @about-generic{monitor-scale}
       @about-generic{monitor-scale-factor}
       @about-generic{monitor-subpixel-layout}
       @about-generic{monitor-valid}
@@ -336,7 +343,6 @@
       @about-function{monitor-is-valid}
     @end{subsection}
     @begin[GdkSeat]{subsection}
-      Object representing a user seat.
       @about-symbol{seat-capabilities}
       @about-class{seat}
       @about-generic{seat-display}
@@ -405,13 +411,13 @@
   @end{section}
   @begin[Surfaces, Toplevels, Popups]{section}
     @begin[Surfaces]{subsection}
-      Onscreen display areas in the target window system.
       @about-class{surface}
       @about-generic{surface-cursor}
       @about-generic{surface-display}
       @about-generic{surface-frame-clock}
       @about-generic{surface-height}
       @about-generic{surface-mapped}
+      @about-generic{surface-scale}
       @about-generic{surface-scale-factor}
       @about-generic{surface-width}
       @about-function{surface-new-toplevel}
@@ -434,7 +440,6 @@
       @about-function{surface-device-cursor}
     @end{subsection}
     @begin[GdkToplevelSize]{subsection}
-      Information for computing toplevel size.
       @about-symbol{toplevel-size}
       @about-function{toplevel-size-bounds}
       @about-function{toplevel-size-set-size}
@@ -442,7 +447,6 @@
       @about-function{toplevel-size-set-shadow-width}
     @end{subsection}
     @begin[GdkToplevelLayout]{subsection}
-      Information for presenting toplevels.
       @about-class{toplevel-layout}
       @about-function{toplevel-layout-new}
       @about-function{toplevel-layout-ref}
@@ -455,7 +459,6 @@
       @about-function{toplevel-layout-resizable}
     @end{subsection}
     @begin[GdkToplevel]{subsection}
-      Interface for toplevel surfaces.
       @about-symbol{toplevel-state}
       @about-symbol{fullscreen-mode}
       @about-symbol{surface-edge}
@@ -484,7 +487,6 @@
       @about-function{toplevel-titlebar-gesture}
     @end{subsection}
     @begin[GdkPopupLayout]{subsection}
-      Information for presenting popups.
       @about-symbol{anchor-hints}
       @about-class{popup-layout}
       @about-function{popup-layout-new}
@@ -500,7 +502,6 @@
       @about-function{popup-layout-shadow-width}
       @end{subsection}
     @begin[GdkPopup]{subsection}
-      Interface for popup surfaces.
       @about-class{popup}
       @about-generic{popup-autohide}
       @about-generic{popup-parent}
@@ -513,7 +514,6 @@
   @end{section}
   @begin[Draw contexts]{section}
     @begin[GdkDrawContext]{subsection}
-      Base class for draw contexts.
       @about-class{draw-context}
       @about-generic{draw-context-display}
       @about-generic{draw-context-surface}
@@ -523,7 +523,6 @@
       @about-function{draw-context-frame-region}
     @end{subsection}
     @begin[GdkGLContext]{subsection}
-      OpenGL draw context
       @about-symbol{gl-api}
       @about-symbol{gl-error}
       @about-class{gl-context}
@@ -545,7 +544,6 @@
       @about-function{gl-context-is-shared}
     @end{subsection}
     @begin[GdkVulkanContext]{subsection}
-      Vulkan draw context.
       @about-symbol{vulkan-error}
       @about-class{vulkan-context}
       @about-function{vulkan-context-device}
@@ -560,14 +558,12 @@
       @about-function{vulkan-context-queue-family-index}
     @end{subsection}
     @begin[GdkCairoContext]{subsection}
-      Cairo draw context.
       @about-class{cairo-context}
       @about-function{cairo-context-cairo-create}
     @end{subsection}
   @end{section}
   @begin[Clipboard, Drag and Drop]{section}
     @begin[Content Formats]{subsection}
-      Advertising and negotiating of content exchange formats.
       @about-class{content-formats}
       @about-function{intern-mime-type}
       @about-function{content-formats-new}
@@ -600,7 +596,6 @@
       @about-function{content-formats-builder-to-formats}
     @end{subsection}
     @begin[GdkContentProvider]{subsection}
-      Provides content for data transfer between applications.
       @about-class{content-provider}
       @about-generic{content-provider-formats}
       @about-generic{content-provider-storable-formats}
@@ -616,7 +611,6 @@
       @about-function{content-provider-value}
     @end{subsection}
     @begin[GdkContentSerializer]{subsection}
-      Serialize content for transfer.
       @about-class{content-serializer}
       @about-symbol{content-serialize-func}
       @about-function{content-serializer-mime-type}
@@ -634,7 +628,6 @@
       @about-function{content-serialize-finish}
     @end{subsection}
     @begin[GdkContentDeserializer]{subsection}
-      Deserialize content for transfer.
       @about-class{content-deserializer}
       @about-symbol{content-deserialize-func}
       @about-function{content-deserializer-mime-type}
@@ -652,7 +645,6 @@
       @about-function{content-deserialize-finish}
     @end{subsection}
     @begin[Clipboards]{subsection}
-      Share data between applications for Copy-and-Paste.
       @about-class{clipboard}
       @about-generic{clipboard-content}
       @about-generic{clipboard-display}
@@ -677,7 +669,6 @@
       @about-function{clipboard-set-texture}
     @end{subsection}
     @begin[GdkDrag]{subsection}
-      Functions for controlling drag and drop handling.
       @about-symbol{drag-cancel-reason}
       @about-symbol{drag-action}
       @about-class{drag}
@@ -695,7 +686,6 @@
       @about-function{drag-action-is-unique}
     @end{subsection}
     @begin[GdkDrop]{subsection}
-      Functions for controlling drag and drop handling.
       @about-class{drop}
       @about-generic{drop-actions}
       @about-generic{drop-device}
@@ -718,7 +708,6 @@
   @end{section}
   @begin[Application launching]{section}
     @begin[GdkAppLaunchContext]{subsection}
-      Startup notification for applications
       @about-class{app-launch-context}
       @about-generic{app-launch-context-display}
       @about-function{app-launch-context-set-desktop}
@@ -729,7 +718,6 @@
   @end{section}
   @begin[Miscellaneous]{section}
     @begin[Events]{subsection}
-      Functions for handling events from the window system.
       @about-variable{+current-time+}
       @about-variable{+priority-events+}
       @about-variable{+priority-redraw+}
@@ -811,7 +799,6 @@
       @about-function{events-distance}
     @end{subsection}
     @begin[Cursors]{subsection}
-      Named and texture cursors.
       @about-class{cursor}
       @about-generic{cursor-fallback}
       @about-generic{cursor-hotspot-x}
@@ -822,7 +809,6 @@
       @about-function{cursor-new-from-name}
     @end{subsection}
     @begin[GdkFrameTimings]{subsection}
-      Object holding timing information for a single frame.
       @about-class{frame-timings}
       @about-function{frame-timings-ref}
       @about-function{frame-timings-unref}
@@ -834,7 +820,6 @@
       @about-function{frame-timings-predicted-presentation-time}
     @end{subsection}
     @begin[GdkFrameClock]{subsection}
-      Synchronizes painting to a surface.
       @about-symbol{frame-clock-phase}
       @about-class{frame-clock}
       @about-function{frame-clock-frame-time}

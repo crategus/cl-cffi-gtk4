@@ -2,7 +2,7 @@
 ;;; gtk4.about-dialog.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -144,13 +144,15 @@
   (:agpl-3-0-only 14)
   (:bsd-3 15)
   (:apache-2-0 16)
-  (:mpl-2-0 17))
+  (:mpl-2-0 17)
+  #+gtk-4-14
+  (:0bsd 18))
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'license)
       "GEnum"
       (liber:symbol-documentation 'license)
- "@version{2024-4-11}
+ "@version{2024-5-25}
   @begin{declaration}
 (gobject:define-g-enum \"GtkLicense\" license
   (:export t
@@ -172,7 +174,9 @@
   (:agpl-3-0-only 14)
   (:bsd-3 15)
   (:apache-2-0 16)
-  (:mpl-2-0 17))
+  (:mpl-2-0 17)
+  #+gtk-4-14
+  (:0bsd 18))
   @end{declaration}
   @begin{values}
     @begin[code]{table}
@@ -198,6 +202,7 @@
       @entry[:bsd-3]{The 3-clause BSD license.}
       @entry[:apache-2-0]{The Apache License, version 2.0.}
       @entry[:mpl-2-0]{The Mozilla Public License, version 2.0.}
+      @entry[:0bsd]{Zero-clause BSD license. Since 4.14}
     @end{table}
   @end{values}
   @begin{short}

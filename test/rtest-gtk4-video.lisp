@@ -8,59 +8,57 @@
 ;;;     GtkVideo
 
 (test gtk-video-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkVideo"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:video
           (glib:symbol-for-gtype "GtkVideo")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkVideo")
           (g:gtype (cffi:foreign-funcall "gtk_video_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget") (g:type-parent "GtkVideo")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkVideo")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
              (list-interfaces "GtkVideo")))
-  ;; Check the class properties
-  (is (equal '("autoplay" "file" "loop" "media-stream")
+  ;; Check class properties
+  (is (equal '("autoplay" "file" "graphics-offload" "loop" "media-stream")
              (list-properties "GtkVideo")))
-  ;; Check the list of signals
+  ;; Check list of signals
   (is (equal '()
              (list-signals "GtkVideo")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "video"
                (gtk:widget-class-css-name "GtkVideo")))
-  ;; CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:video))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :widget (gtk:widget-class-accessible-role "GtkVideo")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkVideo" GTK-VIDEO
-                       (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                        ("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-                        :TYPE-INITIALIZER "gtk_video_get_type")
-                       ((AUTOPLAY GTK-VIDEO-AUTOPLAY "autoplay" "gboolean" T T)
-                        (FILE GTK-VIDEO-FILE "file" "GFile" T T)
-                        (LOOP GTK-VIDEO-LOOP "loop" "gboolean" T T)
-                        (MEDIA-STREAM GTK-VIDEO-MEDIA-STREAM "media-stream"
-                         "GtkMediaStream" T T)))
+                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                                ("GtkAccessible" "GtkBuildable"
+                                 "GtkConstraintTarget")
+                                :TYPE-INITIALIZER "gtk_video_get_type")
+                               ((AUTOPLAY GTK-VIDEO-AUTOPLAY "autoplay"
+                                 "gboolean" T T)
+                                (FILE GTK-VIDEO-FILE "file" "GFile" T T)
+                                (GRAPHICS-OFFLOAD GTK-VIDEO-GRAPHICS-OFFLOAD
+                                 "graphics-offload" "GtkGraphicsOffloadEnabled"
+                                 T T)
+                                (LOOP GTK-VIDEO-LOOP "loop" "gboolean" T T)
+                                (MEDIA-STREAM GTK-VIDEO-MEDIA-STREAM
+                                 "media-stream" "GtkMediaStream" T T)))
              (gobject:get-g-type-definition "GtkVideo"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     autoplay
-;;;     file
-;;;     loop
-;;;     media-stream
 
 (test gtk-video-properties
   (let ((video (make-instance 'gtk:video)))
     (is-false (gtk:video-autoplay video))
     (is-false (gtk:video-file video))
+    (is (eq :disabled (gtk:video-graphics-offload video)))
     (is-false (gtk:video-loop video))
     (is-false (gtk:video-media-stream video))))
 
@@ -109,4 +107,4 @@
 ;;;     gtk_video_set_filename
 ;;;     gtk_video_set_resource
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-5-26

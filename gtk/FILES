@@ -226,6 +226,7 @@ Accessibility
 
   gtk4.accessible.lisp                 GtkAccessible                  GTK 4.12&.
   gtk4.accessible-range.lisp           GtkAccessibleRange             GTK 4.12 .
+  gtk4.accessible-text.lisp            GtkAccessibleText              GTK 4.15 +
   gtk4.at-context.lisp                 GtkATContext                   GTK 4.12 .
 
 Input Methods

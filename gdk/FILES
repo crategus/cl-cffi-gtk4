@@ -11,6 +11,7 @@ List of files for the GDK 4 Library
   gdk4.rectangle.lisp              GdkRectangle                       GDK 4.10
   gdk4.rgba.lisp                   GdkRGBA                            GDK 4.12
   gdk4.keyval.lisp                 Key Values                         GDK 4.10
+  gdk4.dmabuf-formats.lisp         GdkDmabufFormats                   GDK 4.14 +
 
  Displays, Devices, Monitors, Seats
 

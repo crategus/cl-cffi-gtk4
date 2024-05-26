@@ -2,11 +2,11 @@
 ;;; gtk4.popover-menu.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2019 - 2023 Dieter Kaiser
+;;; Copyright (C) 2019 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -38,6 +38,8 @@
 ;;;
 ;;; Accessors
 ;;;
+;;;     gtk_popover_menu_get_flags                          Since 4.14
+;;;     gtk_popover_menu_set_flags                          Since 4.14
 ;;;     gtk_popover_menu_set_menu_model
 ;;;     gtk_popover_menu_get_menu_model
 ;;;
@@ -50,6 +52,7 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     flags                                               Since 4.14
 ;;;     menu-model
 ;;;     visible-submenu
 ;;;
@@ -119,7 +122,11 @@
                  "GtkNative"
                  "GtkShortcutManager")
     :type-initializer "gtk_popover_menu_get_type")
-  ((menu-model
+  (#+gtk-4-14
+   (flags
+    popover-menu-flags
+    "flags" "GtkPopoverMenuFlags" t t)
+   (menu-model
     popover-menu-menu-model
     "menu-model" "GMenuModel" t t)
    (visible-submenu
@@ -128,7 +135,7 @@
 
 #+liber-documentation
 (setf (documentation 'popover-menu 'type)
- "@version{#2022-7-29}
+ "@version{2024-5-26}
   @begin{short}
     The @class{gtk:popover-menu} class is a subclass of the @class{gtk:popover}
     class that treats its children like menus and allows switching between them.
@@ -227,15 +234,52 @@
     @code{:menu-item}, @code{:menu-item-checkbox} role or @code{menu-item-radio}
     roles, depending on the action they are connected to.
   @end{dictionary}
-  @see-slot{gtk:popover-menu-menu-model}
-  @see-slot{gtk:popover-menu-visible-submenu}
   @see-constructor{gtk:popover-menu-new-from-model}
   @see-constructor{gtk:popover-menu-new-from-model-full}
+  @see-slot{gtk:popover-menu-flags}
+  @see-slot{gtk:popover-menu-menu-model}
+  @see-slot{gtk:popover-menu-visible-submenu}
   @see-class{gtk:popover}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
+
+;;; --- gtk:popover-menu-flags -------------------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "flags" 'popover-menu) t)
+ "The @code{flags} property of type @symbol{gtk:popover-menu-flags}
+  (Read / Write) @br{}
+  The flags that popover uses to create/display a menu from its model. If a
+  model is set and the flags change, contents are rebuilt, so if setting
+  properties individually, set flags before model to avoid a redundant rebuild.
+  Since 4.14 @br{}
+  Default value: @code{:sliding}")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'popover-menu-flags)
+      "Accessor"
+      (documentation 'popover-menu-flags 'function)
+ "@version{2024-5-26}
+  @syntax{(gtk:popover-menu-flags object) => flags}
+  @syntax{(setf (gtk:popover-menu-flags object) flags)}
+  @argument[object]{a @class{gtk:popover-menu} widget}
+  @argument[flags]{a @symbol{gtk:popover-menu-flags} value}
+  @begin{short}
+    Accessor of the @slot[gtk:popover-menu]{flags} slot of the
+    @class{gtk:popover-menu} class.
+  @end{short}
+  The @fun{gtk:popover-menu-flags} function returns the flags that popover uses
+  to create/display a menu from its model. The @setf{gtk:popover-menu-flags}
+  function sets the flags that popover uses.
+
+  If a model is set and the flags change, contents are rebuilt, so if setting
+  properties individually, set flags before model to avoid a redundant rebuild.
+
+  Since 4.14
+  @see-class{gtk:popover-menu}
+  @see-symbol{gtk:popover-menu-flags}")
 
 ;;; --- gtk:popover-menu-menu-model --------------------------------------------
 
@@ -249,7 +293,7 @@
 (setf (liber:alias-for-function 'popover-menu-menu-model)
       "Accessor"
       (documentation 'popover-menu-menu-model 'function)
- "@version{#2022-7-29}
+ "@version{2024-5-26}
   @syntax{(gtk:popover-menu-menu-model object) => model}
   @syntax{(setf (gtk:popover-menu-menu-model object) model)}
   @argument[object]{a @class{gtk:popover-menu} widget}
@@ -278,7 +322,7 @@
 (setf (liber:alias-for-function 'popover-menu-visible-submenu)
       "Accessor"
       (documentation 'popover-menu-visible-submenu 'function)
- "@version{#2022-7-29}
+ "@version{2024-5-26}
   @syntax{(gtk:popover-menu-visible-submenu object) => submenu}
   @syntax{(setf (gtk:popover-menu-visible-submenu object) submenu)}
   @argument[object]{a @class{gtk:popover-menu} widget}

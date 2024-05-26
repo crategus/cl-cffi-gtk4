@@ -2,7 +2,7 @@
 ;;; gdk4.event.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -246,7 +246,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkEventType
+;;; GdkEventType
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkEventType" event-type
@@ -289,9 +289,8 @@
 (setf (liber:alias-for-symbol 'event-type)
       "GEnum"
       (liber:symbol-documentation 'event-type)
- "@version{2023-12-17}
-  @short{Specifies the type of a @class{gdk:event} instance.}
-  @begin{pre}
+ "@version{2024-5-26}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkEventType\" event-type
   (:export t
    :type-initializer \"gdk_event_type_get_type\")
@@ -326,51 +325,54 @@
   :pad-group-mode
   :touchpad-hold
   :event-last)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:nothing]{A special code to indicate a null event.}
-    @entry[:delete]{The window manager has requested that the toplevel window
-      be hidden or destroyed, usually when the user clicks on a special icon
-      in the title bar.}
-    @entry[:motion-notify]{The pointer, usually a mouse, has moved.}
-    @entry[:button-press]{A mouse button has been pressed.}
-    @entry[:button-release]{A mouse button has been released.}
-    @entry[:key-press]{A key has been pressed.}
-    @entry[:key-release]{A key has been released.}
-    @entry[:enter-notifiy]{The pointer has entered the window.}
-    @entry[:leave-notify]{The pointer has left the window.}
-    @entry[:focus-change]{The keyboard focus has entered or left the window.}
-    @entry[:proximity-in]{An input device has moved into contact with a
-      sensing surface, e.g. a touchscreen or graphics tablet.}
-    @entry[:proximity-out]{An input device has moved out of contact with a
-      sensing surface.}
-    @entry[:drag-enter]{The mouse has entered the window while a drag is in
-      progress.}
-    @entry[:drag-leave]{The mouse has left the window while a drag is in
-      progress.}
-    @entry[:drag-motion]{The mouse has moved in the window while a drag is in
-      progress.}
-    @entry[:drop-start]{A drop operation onto the window has started.}
-    @entry[:scroll]{The scroll wheel was turned.}
-    @entry[:grab-broken]{A pointer or keyboard grab was broken.}
-    @entry[:touch-begin]{A new touch event sequence has just started.}
-    @entry[:touch-update]{A touch event sequence has been updated.}
-    @entry[:touch-end]{A touch event sequence has finished.}
-    @entry[:touch-cancel]{A touch event sequence has been canceled.}
-    @entry[:touchpad-swipe]{A touchpad swipe gesture event, the current state
-      is determined by its phase field.}
-    @entry[:touchpad-pinch]{A touchpad pinch gesture event, the current state
-      is determined by its phase field.}
-    @entry[:pad-button-press]{A tablet pad button press event.}
-    @entry[:pad-button-release]{A tablet pad button release event.}
-    @entry[:pad-ring]{A tablet pad axis event from a \"ring\".}
-    @entry[:pad-strip]{A tablet pad axis event from a \"strip\".}
-    @entry[:pad-group-mode]{A tablet pad group mode change.}
-    @entry[:touchpad-hold]{A touchpad hold gesture event, the current state is
-      determined by its phase field. Since 4.6}
-    @entry[:event-last]{Marks the end of the @symbol{gdk:event-type}
-      enumeration.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:nothing]{A special code to indicate a null event.}
+      @entry[:delete]{The window manager has requested that the toplevel window
+        be hidden or destroyed, usually when the user clicks on a special icon
+        in the title bar.}
+      @entry[:motion-notify]{The pointer, usually a mouse, has moved.}
+      @entry[:button-press]{A mouse button has been pressed.}
+      @entry[:button-release]{A mouse button has been released.}
+      @entry[:key-press]{A key has been pressed.}
+      @entry[:key-release]{A key has been released.}
+      @entry[:enter-notifiy]{The pointer has entered the window.}
+      @entry[:leave-notify]{The pointer has left the window.}
+      @entry[:focus-change]{The keyboard focus has entered or left the window.}
+      @entry[:proximity-in]{An input device has moved into contact with a
+        sensing surface, e.g. a touchscreen or graphics tablet.}
+      @entry[:proximity-out]{An input device has moved out of contact with a
+        sensing surface.}
+      @entry[:drag-enter]{The mouse has entered the window while a drag is in
+        progress.}
+      @entry[:drag-leave]{The mouse has left the window while a drag is in
+        progress.}
+      @entry[:drag-motion]{The mouse has moved in the window while a drag is in
+        progress.}
+      @entry[:drop-start]{A drop operation onto the window has started.}
+      @entry[:scroll]{The scroll wheel was turned.}
+      @entry[:grab-broken]{A pointer or keyboard grab was broken.}
+      @entry[:touch-begin]{A new touch event sequence has just started.}
+      @entry[:touch-update]{A touch event sequence has been updated.}
+      @entry[:touch-end]{A touch event sequence has finished.}
+      @entry[:touch-cancel]{A touch event sequence has been canceled.}
+      @entry[:touchpad-swipe]{A touchpad swipe gesture event, the current state
+        is determined by its phase field.}
+      @entry[:touchpad-pinch]{A touchpad pinch gesture event, the current state
+        is determined by its phase field.}
+      @entry[:pad-button-press]{A tablet pad button press event.}
+      @entry[:pad-button-release]{A tablet pad button release event.}
+      @entry[:pad-ring]{A tablet pad axis event from a \"ring\".}
+      @entry[:pad-strip]{A tablet pad axis event from a \"strip\".}
+      @entry[:pad-group-mode]{A tablet pad group mode change.}
+      @entry[:touchpad-hold]{A touchpad hold gesture event, the current state
+        is determined by its phase field. Since 4.6}
+      @entry[:event-last]{Marks the end of the @symbol{gdk:event-type}
+        enumeration.}
+    @end{table}
+  @end{values}
+  @short{Specifies the type of a @class{gdk:event} instance.}
   @see-class{gdk:event}")
 
 ;;; ----------------------------------------------------------------------------
@@ -404,7 +406,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkKeyMatch
+;;; GdkKeyMatch
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkKeyMatch" key-match
@@ -418,31 +420,33 @@
 (setf (liber:alias-for-symbol 'key-match)
       "GEnum"
       (liber:symbol-documentation 'key-match)
- "@version{2023-12-17}
-  @begin{short}
-    Describes how well an event matches a given keyval and modifiers.
-  @end{short}
-  The @symbol{gdk:key-match} values are returned by the
-  @fun{gdk:key-event-matches} function.
-  @begin{pre}
+ "@version{2024-5-26}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkKeyMatch\" key-match
   (:export t
    :type-initializer \"gdk_key_match_get_type\")
   (:none 0)
   (:partial 1)
   (:exact 2))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:none]{The key event does not match.}
-    @entry[:partial]{The key event matches if keyboard state (specifically, the
-      currently active group) is ignored.}
-    @entry[:exact]{The key event matches.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:none]{The key event does not match.}
+      @entry[:partial]{The key event matches if keyboard state (specifically,
+        the currently active group) is ignored.}
+      @entry[:exact]{The key event matches.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Describes how well an event matches a given keyval and modifiers.
+  @end{short}
+  The @symbol{gdk:key-match} values are returned by the
+  @fun{gdk:key-event-matches} function.
   @see-class{gdk:key-event}
   @see-function{gdk:key-event-matches}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkTouchpadGesturePhase
+;;; GdkTouchpadGesturePhase
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkTouchpadGesturePhase" touchpad-gesture-phase
@@ -457,7 +461,25 @@
 (setf (liber:alias-for-symbol 'touchpad-gesture-phase)
       "GEnum"
       (liber:symbol-documentation 'touchpad-gesture-phase)
- "@version{2023-12-17}
+ "@version{2024-5-26}
+  @begin{declaration}
+(gobject:define-g-enum \"GdkTouchpadGesturePhase\" touchpad-gesture-phase
+  (:export t
+   :type-initializer \"gdk_touchpad_gesture_phase_get_type\")
+  (:begin 0)
+  (:update 1)
+  (:end 2)
+  (:cancel 3))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:begin]{The gesture has begun.}
+      @entry[:update]{The gesture has been updated.}
+      @entry[:end]{The gesture was finished, changes should be permanently
+        applied.}
+      @entry[:cancel]{The gesture was cancelled, all changes should be undone.}
+    @end{table}
+  @end{values}
   @begin{short}
     The @symbol{gdk:touchpad-gesture-phase} enumeration specifies the current
     state of a touchpad gesture.
@@ -475,26 +497,10 @@
   In these cases, the last event will report the @code{:cancel} phase, this
   should be used as a hint to undo any visible/permanent changes that were done
   throughout the progress of the gesture.
-  @begin{pre}
-(gobject:define-g-enum \"GdkTouchpadGesturePhase\" touchpad-gesture-phase
-  (:export t
-   :type-initializer \"gdk_touchpad_gesture_phase_get_type\")
-  (:begin 0)
-  (:update 1)
-  (:end 2)
-  (:cancel 3))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:begin]{The gesture has begun.}
-    @entry[:update]{The gesture has been updated.}
-    @entry[:end]{The gesture was finished, changes should be permanently
-      applied.}
-    @entry[:cancel]{The gesture was cancelled, all changes should be undone.}
-  @end{table}
   @see-class{gdk:touchpad-event}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkScrollDirection
+;;; GdkScrollDirection
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkScrollDirection" scroll-direction
@@ -510,9 +516,8 @@
 (setf (liber:alias-for-symbol 'scroll-direction)
       "GEnum"
       (liber:symbol-documentation 'scroll-direction)
- "@version{2023-12-17}
-  @short{Specifies the direction for a @class{gdk:scroll-event} event.}
-  @begin{pre}
+ "@version{2024-5-26}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkScrollDirection\" scroll-direction
   (:export t
    :type-initializer \"gdk_scroll_direction_get_type\")
@@ -521,21 +526,24 @@
   (:left 2)
   (:right 3)
   (:smooth 4))
-  @end{pre}
-  @begin[code]{table}
-    @entry[:up]{The window is scrolled up.}
-    @entry[:down]{The window is scrolled down.}
-    @entry[:left]{The window is scrolled to the left.}
-    @entry[:right]{The window is scrolled to the right.}
-    @entry[:smooth]{The scrolling is determined by the delta values in the
-      @class{gdk:scroll-event} event. See the @fun{gdk:scroll-event-deltas}
-      function.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:up]{The window is scrolled up.}
+      @entry[:down]{The window is scrolled down.}
+      @entry[:left]{The window is scrolled to the left.}
+      @entry[:right]{The window is scrolled to the right.}
+      @entry[:smooth]{The scrolling is determined by the delta values in the
+        @class{gdk:scroll-event} event. See the @fun{gdk:scroll-event-deltas}
+        function.}
+    @end{table}
+  @end{values}
+  @short{Specifies the direction for a @class{gdk:scroll-event} event.}
   @see-class{gdk:scroll-event}
   @see-function{gdk:scroll-event-deltas}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkCrossingMode
+;;; GdkCrossingMode
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkCrossingMode" crossing-mode
@@ -555,9 +563,8 @@
 (setf (liber:alias-for-symbol 'crossing-mode)
       "GEnum"
       (liber:symbol-documentation 'crossing-mode)
- "@version{2023-12-17}
-  @short{Specifies the crossing mode for enter and leave events.}
-  @begin{pre}
+ "@version{2024-5-26}
+  @begin{declaration}
 (gobject:define-g-enum \"GdkCrosssingMode\" crossing-mode
   (:export t
    :type-initializer \"gdk_crossing_mode_get_type\")
@@ -570,27 +577,30 @@
   :touch-begin
   :touch-end
   :device-switch)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:normal]{Crossing because of pointer motion.}
-    @entry[:grab]{Crossing because a grab is activated.}
-    @entry[:ungrab]{Crossing because a grab is deactivated.}
-    @entry[:gtk-grab]{Crossing because a GTK grab is activated.}
-    @entry[:gtk-ungrab]{Crossing because a GTK grab is deactivated.}
-    @entry[:state-changed]{Crossing because a GTK widget changed state, e.g.
-      sensitivity.}
-    @entry[:touch-begin]{Crossing because a touch sequence has begun, this
-      event is synthetic as the pointer might have not left the window.}
-    @entry[:touch-end]{Crossing because a touch sequence has ended, this event
-      is synthetic as the pointer might have not left the window.}
-    @entry[:device-switch]{Crossing because of a device switch, i.e. a mouse
-      taking control of the pointer after a touch device, this event is
-      synthetic as the pointer did not leave the window.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:normal]{Crossing because of pointer motion.}
+      @entry[:grab]{Crossing because a grab is activated.}
+      @entry[:ungrab]{Crossing because a grab is deactivated.}
+      @entry[:gtk-grab]{Crossing because a GTK grab is activated.}
+      @entry[:gtk-ungrab]{Crossing because a GTK grab is deactivated.}
+      @entry[:state-changed]{Crossing because a GTK widget changed state,
+        for example, sensitivity.}
+      @entry[:touch-begin]{Crossing because a touch sequence has begun, this
+        event is synthetic as the pointer might have not left the window.}
+      @entry[:touch-end]{Crossing because a touch sequence has ended, this
+        event is synthetic as the pointer might have not left the window.}
+      @entry[:device-switch]{Crossing because of a device switch, i.e. a mouse
+        taking control of the pointer after a touch device, this event is
+        synthetic as the pointer did not leave the window.}
+    @end{table}
+  @end{values}
+  @short{Specifies the crossing mode for enter and leave events.}
   @see-class{gdk:crossing-event}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkScrollUnit
+;;; GdkScrollUnit
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-8
@@ -604,7 +614,21 @@
 (setf (liber:alias-for-symbol 'scroll-unit)
       "GEnum"
       (liber:symbol-documentation 'scroll-unit)
- "@version{2023-12-17}
+ "@version{2024-5-26}
+  @begin{declaration}
+(gobject:define-g-enum \"GdkScrollUnit\" scroll-unit
+  (:export t
+   :type-initializer \"gdk_scroll_unit_get_type\")
+  :wheel
+  :surface)
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:wheel]{The delta is in number of wheel clicks.}
+      @entry[:surface]{The delta is in surface pixels to scroll directly on
+        screen.}
+    @end{table}
+  @end{values}
   @begin{short}
     Specifies the unit of scroll deltas.
   @end{short}
@@ -622,23 +646,12 @@
   1 surface logical pixel is equal to 1 real screen pixel multiplied by the
   final scale factor of your graphical interface, the product of the desktop
   scale factor and eventually a custom scale factor in your application.
-  @begin{pre}
-(gobject:define-g-enum \"GdkScrollUnit\" scroll-unit
-  (:export t
-   :type-initializer \"gdk_scroll_unit_get_type\")
-  :wheel
-  :surface)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:wheel]{The delta is in number of wheel clicks.}
-    @entry[:surface]{The delta is in surface pixels to scroll directly on
-      screen.}
-  @end{table}
+
   Since 4.8
   @see-function{gtk:event-controller-scroll-unit}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GdkNotifyType
+;;; GdkNotifyType
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GdkNotifyType" notify-type
@@ -655,11 +668,8 @@
 (setf (liber:alias-for-symbol 'notify-type)
       "GEnum"
       (liber:symbol-documentation 'notify-type)
- "@version{2023-12-17}
-  @short{Specifies the kind of crossing for enter and leave events.}
-  See the X11 protocol specification of @code{LeaveNotify} for full details of
-  crossing event generation.
-  @begin{pre}
+ "@version{2024-5-26}
+  @begin{declaration}
 (gobject:define-g-enum notify-type
   (:export t
    :type-initializer \"gdk_notify_type_get_type\")
@@ -669,21 +679,26 @@
   :nonlinear
   :nonlinear-virtual
   :unknown)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:ancestor]{The window is entered from an ancestor or left towards
-      an ancestor.}
-    @entry[:virtual]{The pointer moves between an ancestor and an inferior of
-      the window.}
-    @entry[:inferior]{The window is entered from an inferior or left towards
-      an inferior.}
-    @entry[:nonlinear]{The window is entered from or left towards a window
-      which is neither an ancestor nor an inferior.}
-    @entry[:nonlinear-virtual]{The pointer moves between two windows which are
-      not ancestors of each other and the window is part of the ancestor chain
-      between one of these windows and their least common ancestor.}
-    @entry[:unknown]{An unknown type of enter/leave event occurred.}
-  @end{table}
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:ancestor]{The window is entered from an ancestor or left towards
+        an ancestor.}
+      @entry[:virtual]{The pointer moves between an ancestor and an inferior of
+        the window.}
+      @entry[:inferior]{The window is entered from an inferior or left towards
+        an inferior.}
+      @entry[:nonlinear]{The window is entered from or left towards a window
+        which is neither an ancestor nor an inferior.}
+      @entry[:nonlinear-virtual]{The pointer moves between two windows which
+        are not ancestors of each other and the window is part of the ancestor
+        chain between one of these windows and their least common ancestor.}
+      @entry[:unknown]{An unknown type of enter/leave event occurred.}
+    @end{table}
+  @end{values}
+  @short{Specifies the kind of crossing for enter and leave events.}
+  See the X11 protocol specification of @code{LeaveNotify} for full details of
+  crossing event generation.
   @see-class{gdk:crossing-event}")
 
 ;;; ----------------------------------------------------------------------------
@@ -693,7 +708,7 @@
 (glib:define-g-boxed-opaque event-sequence "GdkEventSequence"
   :export t
   :type-initializer "gdk_event_sequence_get_type"
-  :alloc (error "GdkEventSequence cannot be created from the Lisp side."))
+  :alloc (error "GdkEventSequence cannot be created from the Lisp side"))
 
 #+liber-documentation
 (setf (liber:alias-for-class 'event-sequence)
@@ -713,7 +728,6 @@
 ;;; GdkEvent
 ;;;
 ;;; This section describes functions dealing with events from the window system.
-;;;
 ;;; ----------------------------------------------------------------------------
 
 (cffi:define-foreign-type event ()
@@ -1030,7 +1044,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_event_type ()
+;;; gdk_event_get_event_type
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_event_type" event-event-type) event-type
@@ -1046,7 +1060,7 @@
 (export 'event-event-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_surface ()
+;;; gdk_event_get_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_surface" event-surface) (g:object surface)
@@ -1062,7 +1076,7 @@
 (export 'event-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_device ()
+;;; gdk_event_get_device
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_device" event-device) (g:object device)
@@ -1078,7 +1092,7 @@
 (export 'event-device)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_device_tool ()
+;;; gdk_event_get_device_tool
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_device_tool" event-device-tool)
@@ -1105,7 +1119,7 @@
 (export 'event-device-tool)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_time ()
+;;; gdk_event_get_time
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_time" event-time) :uint32
@@ -1115,7 +1129,7 @@
   @return{The unsigned integer with the time stamp field from @arg{event}.}
   @begin{short}
     Returns the time stamp from @arg{event}, if there is one, otherwise returns
-    @variable{gdk:+current-time+}.
+    @var{gdk:+current-time+}.
   @end{short}
   @see-class{gdk:event}
   @see-variable{gdk:+current-time+}"
@@ -1124,7 +1138,7 @@
 (export 'event-time)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_display ()
+;;; gdk_event_get_display
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_display" event-display) (g:object display)
@@ -1140,7 +1154,7 @@
 (export 'event-display)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_seat ()
+;;; gdk_event_get_seat
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_seat" event-seat) (g:object seat)
@@ -1156,7 +1170,7 @@
 (export 'event-seat)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_event_sequence ()
+;;; gdk_event_get_event_sequence
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_event_sequence" event-event-sequence)
@@ -1176,7 +1190,7 @@
 (export 'event-event-sequence)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_modifier_state ()
+;;; gdk_event_get_modifier_state
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_modifier_state" event-modifier-state)
@@ -1194,7 +1208,7 @@
 (export 'event-modifier-state)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_position ()
+;;; gdk_event_get_position
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_position" %event-position) :boolean
@@ -1220,7 +1234,7 @@
 (export 'event-position)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_axes ()
+;;; gdk_event_get_axes
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_axes" %event-axes) :boolean
@@ -1246,7 +1260,7 @@
 (export 'event-axes)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_axis ()
+;;; gdk_event_get_axis
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_axis" %event-axis) :boolean
@@ -1298,7 +1312,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_get_pointer_emulated ()
+;;; gdk_event_get_pointer_emulated
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_get_pointer_emulated" event-pointer-emulated) :boolean
@@ -1316,7 +1330,7 @@
 (export 'event-pointer-emulated)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_event_triggers_context_menu ()
+;;; gdk_event_triggers_context_menu
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_event_triggers_context_menu" event-triggers-context-menu)
@@ -1336,7 +1350,7 @@
 (export 'event-triggers-context-menu)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_button_event_get_button ()
+;;; gdk_button_event_get_button
 ;;; ----------------------------------------------------------------------------
 
 ;; TODO: We check for the correct event type. Implement this more general.
@@ -1358,7 +1372,7 @@
 (export 'button-event-button)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_scroll_event_get_direction ()
+;;; gdk_scroll_event_get_direction
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_scroll_event_get_direction" scroll-event-direction)
@@ -1376,7 +1390,7 @@
 (export 'scroll-event-direction)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_scroll_event_get_deltas ()
+;;; gdk_scroll_event_get_deltas
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_scroll_event_get_deltas" %scroll-event-deltas) :void
@@ -1407,7 +1421,7 @@
 (export 'scroll-event-deltas)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_scroll_event_is_stop ()
+;;; gdk_scroll_event_is_stop
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_scroll_event_is_stop" scroll-event-is-stop) :boolean
@@ -1430,7 +1444,7 @@
 (export 'scroll-event-is-stop)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_key_event_get_keyval ()
+;;; gdk_key_event_get_keyval
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_keyval" key-event-keyval) :uint
@@ -1445,7 +1459,7 @@
 (export 'key-event-keyval)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_key_event_get_keycode ()
+;;; gdk_key_event_get_keycode
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_keycode" key-event-keycode) :uint
@@ -1460,7 +1474,7 @@
 (export 'key-event-keycode)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_key_event_get_consumed_modifiers ()
+;;; gdk_key_event_get_consumed_modifiers
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_consumed_modifiers"
@@ -1477,7 +1491,7 @@
 (export 'key-event-consumed-modifiers)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_key_event_get_layout ()
+;;; gdk_key_event_get_layout
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_layout" key-event-layout) :uint
@@ -1492,7 +1506,7 @@
 (export 'key-event-layout)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_key_event_get_level ()
+;;; gdk_key_event_get_level
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_level" key-event-level) :uint
@@ -1507,7 +1521,7 @@
 (export 'key-event-level)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_key_event_is_modifier ()
+;;; gdk_key_event_is_modifier
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_is_modifier" key-event-is-modifier) :boolean
@@ -1522,7 +1536,7 @@
 (export 'key-event-is-modifier)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_key_event_matches ()
+;;; gdk_key_event_matches
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_matches" key-event-matches) key-match
@@ -1550,7 +1564,7 @@
 (export 'key-event-matches)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_key_event_get_match ()
+;;; gdk_key_event_get_match
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_key_event_get_match" %key-event-match) :boolean
@@ -1581,7 +1595,7 @@
 (export 'key-event-match)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_focus_event_get_in ()
+;;; gdk_focus_event_get_in
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_focus_event_get_in" focus-event-in) :boolean
@@ -1598,7 +1612,7 @@
 (export 'focus-event-in)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_touch_event_get_emulating_pointer ()
+;;; gdk_touch_event_get_emulating_pointer
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touch_event_get_emulating_pointer"
@@ -1616,7 +1630,7 @@
 (export 'touch-event-emulating-pointer)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_crossing_event_get_mode ()
+;;; gdk_crossing_event_get_mode
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_crossing_event_get_mode" crossing-event-mode) crossing-mode
@@ -1632,7 +1646,7 @@
 (export 'crossing-event-mode)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_crossing_event_get_detail ()
+;;; gdk_crossing_event_get_detail
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_crossing_event_get_detail" crossing-event-detail)
@@ -1649,7 +1663,7 @@
 (export 'crossing-event-detail)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_crossing_event_get_focus ()
+;;; gdk_crossing_event_get_focus
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_crossing_event_get_focus" crossing-event-focus) :boolean
@@ -1664,7 +1678,7 @@
 (export 'crossing-event-focus)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_grab_broken_event_get_grab_surface ()
+;;; gdk_grab_broken_event_get_grab_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_grab_broken_event_get_grab_surface"
@@ -1681,7 +1695,7 @@
 (export 'grab-broken-event-grab-surface)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_grab_broken_event_get_implicit ()
+;;; gdk_grab_broken_event_get_implicit
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_grab_boken_event_get_implicit" grab-broken-event-implicit)
@@ -1697,7 +1711,7 @@
 (export 'grab-broken-event-implicit)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_dnd_event_get_drop ()
+;;; gdk_dnd_event_get_drop
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_dnd_event_get_drop" dnd-event-drop) (g:object drop)
@@ -1713,7 +1727,7 @@
 (export 'dnd-event-drop)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_touchpad_event_get_gesture_phase ()
+;;; gdk_touchpad_event_get_gesture_phase
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_gesture_phase"
@@ -1731,7 +1745,7 @@
 (export 'touchpad-event-gesture-phase)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_touchpad_event_get_n_fingers ()
+;;; gdk_touchpad_event_get_n_fingers
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_n_fingers" touchpad-event-n-fingers)
@@ -1747,7 +1761,7 @@
 (export 'touchpad-event-n-fingers)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_touchpad_event_get_deltas ()
+;;; gdk_touchpad_event_get_deltas
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_deltas" %touchpad-event-deltas) :void
@@ -1773,7 +1787,7 @@
 (export 'touchpad-event-deltas)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_touchpad_event_get_pinch_angle_delta ()
+;;; gdk_touchpad_event_get_pinch_angle_delta
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_pinch_angle_delta"
@@ -1789,7 +1803,7 @@
 (export 'touchpad-event-pinch-angle-delta)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_touchpad_event_get_pinch_scale ()
+;;; gdk_touchpad_event_get_pinch_scale
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_touchpad_event_get_pinch_scale" touchpad-event-pinch-scale)
@@ -1805,7 +1819,7 @@
 (export 'touchpad-event-pinch-scale)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_pad_event_get_axis_value ()
+;;; gdk_pad_event_get_axis_value
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_pad_event_get_axis_value" %pad-event-axis-value) :void
@@ -1831,7 +1845,7 @@
 (export 'pad-event-axis-value)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_pad_event_get_button ()
+;;; gdk_pad_event_get_button
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_pad_event_get_button" pad-event-button) :uint
@@ -1846,7 +1860,7 @@
 (export 'pad-event-button)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_pad_event_get_group_mode ()
+;;; gdk_pad_event_get_group_mode
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_pad_event_get_group_mode" %pad-event-group-mode) :void
@@ -1872,7 +1886,7 @@
 (export 'pad-event-group-mode)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_events_get_angle ()
+;;; gdk_events_get_angle
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_events_get_angle" %events-angle) :boolean
@@ -1900,7 +1914,7 @@
 (export 'events-angle)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_events_get_center ()
+;;; gdk_events_get_center
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_events_get_center" %events-center) :boolean
@@ -1931,7 +1945,7 @@
 (export 'events-center)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_events_get_distance ()
+;;; gdk_events_get_distance
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gdk_events_get_distance" %events-distance) :boolean

@@ -2,7 +2,7 @@
 ;;; gtk4.string-list.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -40,7 +40,7 @@
 ;;;
 ;;;     gtk_string_list_new
 ;;;     gtk_string_list_append
-;;;     gtk_string_list_take                               not needed
+;;;     gtk_string_list_take                                not needed
 ;;;     gtk_string_list_remove
 ;;;     gtk_string_list_splice
 ;;;     gtk_string_list_get_string
@@ -50,7 +50,9 @@
 ;;;
 ;;; Properties (GtkStringList)
 ;;;
-;;;     strings                                            Since 4.10
+;;;     item-type                                           Since 4.14
+;;;     n-items                                             Since 4.14
+;;;     strings                                             Since 4.10
 ;;;
 ;;; Properties (GtkStringObject)
 ;;;
@@ -167,14 +169,22 @@
    :interfaces ("GListModel"
                 "GtkBuildable")
    :type-initializer "gtk_string_list_get_type")
-  (#+gtk-4-10
+  (#+gtk-4-14
+   (item-type
+    string-list-item-type
+    "item-type" "GType" t nil)
+   #+gtk-4-14
+   (n-items
+    string-list-n-items
+    "n-items" "guint" t nil)
+   #+gtk-4-10
    (strings
     %string-list-strings
     "strings" "GStrv" nil nil)))
 
 #+liber-documentation
 (setf (documentation 'string-list 'type)
- "@version{2023-9-28}
+ "@version{2024-5-25}
   @begin{short}
     The @class{gtk:string-list} class is a list model that wraps an array of
     strings.
@@ -211,12 +221,59 @@
     @end{pre}
   @end{dictionary}
   @see-constructor{gtk:string-list-new}
+  @see-slot{gtk:string-list-item-type}
+  @see-slot{gtk:string-list-n-items}
   @see-class{gtk:string-object}
   @see-class{g:list-model}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
+
+;;; --- gtk:string-list-item-type ----------------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "item-type" 'string-list) t)
+ "The @code{item-type} property of type @class{g:type-t} (read) @br{}
+  The type of items contained in the string list. Since 4.14 ")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'string-list-item-type)
+      "Accessor"
+      (documentation 'string-list-item-type 'function)
+ "@version{2024-5-26}
+  @syntax{(gtk:string-list-item-type object) => type}
+  @syntax{(setf (gtk:string-list-item-type object) type)}
+  @argument[object]{a @class{gtk:string-list} object}
+  @argument[type]{a @class{g:type-t} type}
+  @begin{short}
+    Accessor of the @slot[gtk:string-list]{item-type} slot of the
+    @class{gtk:string-list} class.
+  @end{short}
+  @see-class{gtk:string-list}
+  @see-class{g:type-t}")
+
+;;; --- gtk:string-list-n-items ------------------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "n-items" 'string-list) t)
+ "The @code{n-items} property of type @code{:uint} (read) @br{}
+  The number of items contained in the string list. Since 4.14 ")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'string-list-item-type)
+      "Accessor"
+      (documentation 'string-list-item-type 'function)
+ "@version{2024-5-26}
+  @syntax{(gtk:string-list-item-type object) => nitems}
+  @syntax{(setf (gtk:string-list-item-type object) nitems)}
+  @argument[object]{a @class{gtk:string-list} object}
+  @argument[nitems]{an unsigned integer}
+  @begin{short}
+    Accessor of the @slot[gtk:string-list]{n-items} slot of the
+    @class{gtk:string-list} class.
+  @end{short}
+  @see-class{gtk:string-list}")
 
 ;;; --- gtk:string-list-strings ------------------------------------------------
 

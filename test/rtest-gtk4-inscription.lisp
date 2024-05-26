@@ -59,7 +59,8 @@
   (is (equal '()
              (list-children "GtkInscription")))
   ;; Check interfaces
-  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+               "GtkAccessibleText")
              (list-interfaces "GtkInscription")))
   ;; Check properties
   (is (equal '("attributes" "markup" "min-chars" "min-lines" "nat-chars"
@@ -79,8 +80,8 @@
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkInscription" GTK-INSCRIPTION
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget")
+                                ("GtkAccessible" "GtkAccessibleText"
+                                 "GtkBuildable" "GtkConstraintTarget")
                                 :TYPE-INITIALIZER "gtk_inscription_get_type")
                                ((ATTRIBUTES GTK-INSCRIPTION-ATTRIBUTES
                                  "attributes" "PangoAttrList" T T)
@@ -131,4 +132,4 @@
   (is (typep (gtk:inscription-new nil) 'gtk:inscription))
   (is (typep (gtk:inscription-new "text") 'gtk:inscription)))
 
-;;; 2024-4-25
+;;; 2024-5-26

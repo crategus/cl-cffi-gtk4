@@ -6,12 +6,12 @@
 ;;;     GdkGravity
 
 (test gdk-gravity
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkGravity"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkGravity")
           (g:gtype (cffi:foreign-funcall "gdk_gravity_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:gravity
           (glib:symbol-for-gtype "GdkGravity")))
   ;; Check the names
@@ -20,14 +20,14 @@
                "GDK_GRAVITY_EAST" "GDK_GRAVITY_SOUTH_WEST" "GDK_GRAVITY_SOUTH"
                "GDK_GRAVITY_SOUTH_EAST" "GDK_GRAVITY_STATIC")
              (list-enum-item-name "GdkGravity")))
-  ;; Check the values
+  ;; Check values
   (is (equal '(1 2 3 4 5 6 7 8 9 10)
              (list-enum-item-value "GdkGravity")))
-  ;; Check the nick names
+  ;; Check nick names
   (is (equal '("north-west" "north" "north-east" "west" "center" "east"
                "south-west" "south" "south-east" "static")
              (list-enum-item-nick "GdkGravity")))
-  ;; Check the enum definition
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkGravity"
                              GDK-GRAVITY
                              (:EXPORT T
@@ -46,36 +46,43 @@
 
 ;;;     GDK_MODIFIER_MASK
 
+(test gdk-modifier-mask
+  (is (= 469769999
+         (cffi:convert-to-foreign gdk:+modifier-mask+ 'gdk:modifier-type))))
+
 ;;;     GdkModifierType
 
 (test gdk-modifier-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GdkModifierType"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:modifier-type
           (glib:symbol-for-gtype "GdkModifierType")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkModifierType")
           (g:gtype (cffi:foreign-funcall "gdk_modifier_type_get_type" :size))))
-  ;; Check the names
-  (is (equal '("GDK_SHIFT_MASK" "GDK_LOCK_MASK" "GDK_CONTROL_MASK"
-               "GDK_ALT_MASK" "GDK_BUTTON1_MASK" "GDK_BUTTON2_MASK"
-               "GDK_BUTTON3_MASK" "GDK_BUTTON4_MASK" "GDK_BUTTON5_MASK"
-               "GDK_SUPER_MASK" "GDK_HYPER_MASK" "GDK_META_MASK")
+  ;; Check names
+  (is (equal '("GDK_NO_MODIFIER_MASK" "GDK_SHIFT_MASK" "GDK_LOCK_MASK"
+               "GDK_CONTROL_MASK" "GDK_ALT_MASK" "GDK_BUTTON1_MASK"
+               "GDK_BUTTON2_MASK" "GDK_BUTTON3_MASK" "GDK_BUTTON4_MASK"
+               "GDK_BUTTON5_MASK" "GDK_SUPER_MASK" "GDK_HYPER_MASK"
+               "GDK_META_MASK")
              (list-flags-item-name "GdkModifierType")))
-  ;; Check the values
-  (is (equal '(1 2 4 8 256 512 1024 2048 4096 67108864 134217728 268435456)
+  ;; Check values
+  (is (equal '(0 1 2 4 8 256 512 1024 2048 4096 67108864 134217728 268435456)
              (list-flags-item-value "GdkModifierType")))
-  ;; Check the nick names
-  (is (equal '("shift-mask" "lock-mask" "control-mask" "alt-mask" "button1-mask"
-               "button2-mask" "button3-mask" "button4-mask" "button5-mask"
-               "super-mask" "hyper-mask" "meta-mask")
+  ;; Check nick names
+  (is (equal '("no-modifier-mask" "shift-mask" "lock-mask" "control-mask"
+               "alt-mask" "button1-mask" "button2-mask" "button3-mask"
+               "button4-mask" "button5-mask" "super-mask" "hyper-mask"
+               "meta-mask")
              (list-flags-item-nick "GdkModifierType")))
-  ;; Check the flags definition
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkModifierType"
                               GDK-MODIFIER-TYPE
                               (:EXPORT T
                                :TYPE-INITIALIZER "gdk_modifier_type_get_type")
+                              (:no-modifier-mask 0)
                               (:SHIFT-MASK 1)
                               (:LOCK-MASK 2)
                               (:CONTROL-MASK 4)
@@ -90,4 +97,4 @@
                               (:META-MASK 268435456))
              (gobject:get-g-type-definition "GdkModifierType"))))
 
-;;; --- 2023-5-29 --------------------------------------------------------------
+;;; 2024-5-25

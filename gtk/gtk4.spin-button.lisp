@@ -2,7 +2,7 @@
 ;;; gtk4.spin-button.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -40,6 +40,8 @@
 ;;;
 ;;; Accessors
 ;;;
+;;;     gtk_spin_button_get_activates_default               Since 4.14
+;;;     gtk_spin_button_set_activates_default               Since 4.14
 ;;;     gtk_spin_button_set_adjustment
 ;;;     gtk_spin_button_get_adjustment
 ;;;     gtk_spin_button_set_climb_rate
@@ -72,6 +74,7 @@
 ;;;
 ;;; Properties
 ;;;
+;;;     activates-default                                   Since 4.14
 ;;;     adjustment
 ;;;     climb-rate
 ;;;     digits
@@ -83,6 +86,7 @@
 ;;;
 ;;; Signals
 ;;;
+;;;     activate                                            Since 4.14
 ;;;     change-value
 ;;;     input
 ;;;     output
@@ -211,7 +215,11 @@
                 "GtkEditable"
                 "GtkCellEditable")
    :type-initializer "gtk_spin_button_get_type")
-  ((adjustment
+  (#+gtk-4-14
+   (activates-default
+    spin-button-activates-default
+    "activates-default" "gboolean" t t)
+   (adjustment
     spin-button-adjustment
     "adjustment" "GtkAdjustment" t t)
    (climb-rate
@@ -238,7 +246,7 @@
 
 #+liber-documentation
 (setf (documentation 'spin-button 'type)
- "@version{2023-9-30}
+ "@version{2024-5-26}
   @begin{short}
     The @class{gtk:spin-button} widget is an ideal way to allow the user to set
     the value of some attribute.
@@ -422,6 +430,7 @@ lambda (button)    :run-last
   @end{dictionary}
   @see-constructor{gtk:spin-button-new}
   @see-constructor{gtk:spin-button-new-with-range}
+  @see-slot{gtk:spin-button-activates-default}
   @see-slot{gtk:spin-button-adjustment}
   @see-slot{gtk:spin-button-climb-rate}
   @see-slot{gtk:spin-button-digits}
@@ -435,6 +444,38 @@ lambda (button)    :run-last
 ;;; ----------------------------------------------------------------------------
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
+
+;;; --- gtk:spin-button-activates-default --------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "activates-default"
+                                               'spin-button) t)
+ "The @code{activates-default} property of type @code{gboolean} (Read / Write)
+  @br{}
+  Whether to activate the default widget when the spin button is activated.
+  Since 4.16 @br{}
+  Default value: @em{false}")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'spin-button-activates-default)
+      "Accessor"
+      (documentation 'spin-button-activates-default 'function)
+ "@version{2024-5-26}
+  @syntax{(gtk:spin-button-activates-default object) => setting}
+  @syntax{(setf (gtk:spin-button-adjustment object) setting)}
+  @argument[object]{a @class{gtk:spin-button} widget}
+  @argument[setting]{@em{true} to activate the default widget on activation}
+  @begin{short}
+    Accessor of the @slot[gtk:spin-button]{activates-default} slot of the
+    @class{gtk:spin-button} class.
+  @end{short}
+  The @fun{gtk:spin-button-activates-default} function gets whether activating
+  the spin button will activate the default widget for the window containing
+  the spin button. The @setf{gtk:spin-button-activates-default} function sets
+  the property.
+
+  Since 4.14
+  @see-class{gtk:spin-button}")
 
 ;;; --- gtk:spin-button-adjustment ---------------------------------------------
 

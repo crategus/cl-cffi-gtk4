@@ -10,7 +10,8 @@
 (test gtk-accelerator-valid
   (is-true (gtk:accelerator-valid (char-code #\a) :shift-mask))
   (is-true (gtk:accelerator-valid (char-code #\a) :control-mask))
-  (is-false (gtk:accelerator-valid (char-code #\fullwidth_macron) :none)))
+  (is-false (gtk:accelerator-valid (char-code #\fullwidth_macron)
+                                   :no-modifier-mask)))
 
 ;;;     gtk_accelerator_parse
 

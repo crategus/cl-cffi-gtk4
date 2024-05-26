@@ -2,11 +2,11 @@
 ;;; gsk.render-node.lisp
 ;;;
 ;;; The documentation of this file is taken from the GSK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2022 - 2023 Dieter Kaiser
+;;; Copyright (C) 2022 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -213,7 +213,7 @@
 (in-package :gsk)
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GskRenderNodeType
+;;; GskRenderNodeType
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GskRenderNodeType" render-node-type
@@ -248,17 +248,20 @@
   #+gtk-4-10
   :texture-scale-node
   #+gtk-4-10
-  :mask-node)
+  :mask-node
+  #+gtk-4-14
+  :fill-node
+  #+gtk-4-14
+  :stroke-node
+  #+gtk-4-14
+  :subsurface-node)
 
 #+liber-documentation
 (setf (liber:alias-for-symbol 'render-node-type)
       "GEnum"
       (liber:symbol-documentation 'render-node-type)
- "@version{2023-9-22}
-  @begin{short}
-    The type of a node determines what the node is rendering.
-  @end{short}
-  @begin{pre}
+ "@version{2024-5-25}
+  @begin{declaration}
 (gobject:define-g-enum \"GskRenderNodeType\" render-node-type
   (:export t
    :type-initializer \"gsk_render_node_type_get_type\")
@@ -291,44 +294,59 @@
   #+gtk-4-10
   :texture-scale-node
   #+gtk-4-10
-  :mask-node)
-  @end{pre}
-  @begin[code]{table}
-    @entry[:not-a-render-node]{Error type. No node will ever have this type.}
-    @entry[:container-node]{A node containing a stack of children.}
-    @entry[:cairo-node]{A node drawing a `cairo_surface_t`}
-    @entry[:color-node]{A node drawing a single color rectangle.}
-    @entry[:linear-gradient-node]{A node drawing a linear gradient.}
-    @entry[:repeating-linear-gradient-node]{A node drawing a repeating linear
-      gradient.}
-    @entry[:radial-gradient-node]{A node drawing a radial gradient.}
-    @entry[:repeating-radial-gradient-node]{A node drawing a repeating radial
-      gradient.}
-    @entry[:conic-gradient-node]{A node drawing a conic gradient.}
-    @entry[:border-node]{A node stroking a border around an area.}
-    @entry[:texture-node]{A node drawing a `GdkTexture`.}
-    @entry[:inset-shadow-node]{A node drawing an inset shadow.}
-    @entry[:outset-shadow-node]{A node drawing an outset shadow.}
-    @entry[:transform-node]{A node that renders its child after applying a
-      matrix transform.}
-    @entry[:opacity-node]{A node that changes the opacity of its child.}
-    @entry[:color-matrix-node]{A node that applies a color matrix to every
-      pixel.}
-    @entry[:repeat-node]{A node that repeats the child's contents.}
-    @entry[:clip-node]{A node that clips its child to a rectangular area.}
-    @entry[:rounded-clip-node]{A node that clips its child to a rounded
-      rectangle.}
-    @entry[:shadow-node]{A node that draws a shadow below its child.}
-    @entry[:blend-node]{A node that blends two children together.}
-    @entry[:cross-fade-node]{A node that cross-fades between two children.}
-    @entry[:text-node]{A node containing a glyph string.}
-    @entry[:blur-node]{A node that applies a blur.}
-    @entry[:debug-node]{Debug information that does not affect the rendering.}
-    @entry[:gl-shader-node]{A node that uses OpenGL fragment shaders to render.}
-    @entry[:texture-scale-node]{A node drawing a @class{gdk:texture} object
-      scaled and filtered. Since 4.10}
-    @entry[:mask-node]{A node that masks one child with another. Since 4.10}
-  @end{table}
+  :mask-node
+  #+gtk-4-14
+  :fill-node
+  #+gtk-4-14
+  :stroke-node
+  #+gtk-4-14
+  :subsurface-node)
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:not-a-render-node]{Error type. No node will ever have this type.}
+      @entry[:container-node]{A node containing a stack of children.}
+      @entry[:cairo-node]{A node drawing a `cairo_surface_t`}
+      @entry[:color-node]{A node drawing a single color rectangle.}
+      @entry[:linear-gradient-node]{A node drawing a linear gradient.}
+      @entry[:repeating-linear-gradient-node]{A node drawing a repeating linear
+        gradient.}
+      @entry[:radial-gradient-node]{A node drawing a radial gradient.}
+      @entry[:repeating-radial-gradient-node]{A node drawing a repeating radial
+        gradient.}
+      @entry[:conic-gradient-node]{A node drawing a conic gradient.}
+      @entry[:border-node]{A node stroking a border around an area.}
+      @entry[:texture-node]{A node drawing a `GdkTexture`.}
+      @entry[:inset-shadow-node]{A node drawing an inset shadow.}
+      @entry[:outset-shadow-node]{A node drawing an outset shadow.}
+      @entry[:transform-node]{A node that renders its child after applying a
+        matrix transform.}
+      @entry[:opacity-node]{A node that changes the opacity of its child.}
+      @entry[:color-matrix-node]{A node that applies a color matrix to every
+        pixel.}
+      @entry[:repeat-node]{A node that repeats the child's contents.}
+      @entry[:clip-node]{A node that clips its child to a rectangular area.}
+      @entry[:rounded-clip-node]{A node that clips its child to a rounded
+        rectangle.}
+      @entry[:shadow-node]{A node that draws a shadow below its child.}
+      @entry[:blend-node]{A node that blends two children together.}
+      @entry[:cross-fade-node]{A node that cross-fades between two children.}
+      @entry[:text-node]{A node containing a glyph string.}
+      @entry[:blur-node]{A node that applies a blur.}
+      @entry[:debug-node]{Debug information that does not affect the rendering.}
+      @entry[:gl-shader-node]{A node that uses OpenGL fragment shaders to render.}
+      @entry[:texture-scale-node]{A node drawing a @class{gdk:texture} object
+        scaled and filtered. Since 4.10}
+      @entry[:mask-node]{A node that masks one child with another. Since 4.10}
+      @entry[:fill-node]{A node that fills a path. Since 4.14}
+      @entry[:stroke-node]{A node that strokes a path. Since 4.14}
+      @entry[:subsurface-node]{A node that possibly redirects part of the scene
+        graph to a subsurface. Since 4.14}
+    @end{table}
+  @end{values}
+  @begin{short}
+    The type of a node determines what the node is rendering.
+  @end{short}
   @see-class{gsk:render-node}")
 
 ;;; ----------------------------------------------------------------------------
@@ -376,7 +394,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GskScalingFilter
+;;; GskScalingFilter
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GskScalingFilter" scaling-filter
@@ -465,7 +483,7 @@
   (radius :float))
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GskBlendMode
+;;; GskBlendMode
 ;;; ----------------------------------------------------------------------------
 
 (gobject:define-g-enum "GskBlendMode" blend-mode
@@ -554,7 +572,7 @@
   @see-class{gsk:render-node}")
 
 ;;; ----------------------------------------------------------------------------
-;;; enum GskMaskMode
+;;; GskMaskMode
 ;;; ----------------------------------------------------------------------------
 
 #+gtk-4-10
@@ -633,7 +651,7 @@
 (export 'render-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_render_node_ref ()
+;;; gsk_render_node_ref
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_render_node_ref" render-node-ref) render-node
@@ -648,7 +666,7 @@
 (export 'render-node-ref)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_render_node_unref ()
+;;; gsk_render_node_unref
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_render_node_unref" render-node-unref) :void
@@ -665,7 +683,7 @@
 (export 'render-node-unref)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_render_node_get_node_type ()
+;;; gsk_render_node_get_node_type
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_render_node_get_node_type" render-node-node-type)
@@ -682,7 +700,7 @@
 (export 'render-node-node-type)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_render_node_draw ()
+;;; gsk_render_node_draw
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_render_node_draw" render-node-draw) :void
@@ -733,7 +751,7 @@
 ;;; ----------------------------------------------------------------------------
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_render_node_serialize ()
+;;; gsk_render_node_serialize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_render_node_serialize" render-node-serialize)
@@ -761,7 +779,7 @@
 (export 'render-node-serialize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_render_node_deserialize ()
+;;; gsk_render_node_deserialize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_render_node_deserialize" %render-node-deserialize)
@@ -787,7 +805,7 @@
 (export 'render-node-deserialize)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_render_node_write_to_file ()
+;;; gsk_render_node_write_to_file
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_render_node_write_to_file" %render-node-write-to-file)
@@ -821,7 +839,7 @@ color {
 (export 'render-node-write-to-file)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_render_node_get_bounds ()
+;;; gsk_render_node_get_bounds
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_render_node_get_bounds" %render-node-bounds) :void
@@ -865,7 +883,7 @@ color {
 (export 'container-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_container_node_new ()
+;;; gsk_container_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_container_node_new" %container-node-new) render-node
@@ -893,7 +911,7 @@ color {
 (export 'container-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_container_node_get_n_children ()
+;;; gsk_container_node_get_n_children
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_container_node_get_n_children" container-node-n-children)
@@ -911,7 +929,7 @@ color {
 (export 'container-node-n-children)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_container_node_get_child ()
+;;; gsk_container_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_container_node_get_child" container-node-child) render-node
@@ -948,7 +966,7 @@ color {
 (export 'cairo-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_cairo_node_new ()
+;;; gsk_cairo_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cairo_node_new" cairo-node-new) render-node
@@ -971,7 +989,7 @@ color {
 (export 'cairo-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_cairo_node_get_draw_context ()
+;;; gsk_cairo_node_get_draw_context
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cairo_node_get_draw_context" cairo-node-draw-context)
@@ -993,7 +1011,7 @@ color {
 (export 'cairo-node-draw-context)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_cairo_node_get_surface ()
+;;; gsk_cairo_node_get_surface
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cairo_node_get_surface" cairo-node-surface)
@@ -1032,7 +1050,7 @@ color {
 (export 'color-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_color_node_new ()
+;;; gsk_color_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_color_node_new" color-node-new) render-node
@@ -1055,7 +1073,7 @@ color {
 (export 'color-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_color_node_get_color ()
+;;; gsk_color_node_get_color
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_color_node_get_color" color-node-color) (g:boxed gdk:rgba)
@@ -1091,7 +1109,7 @@ color {
 (export 'linear-gradient-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_linear_gradient_node_new ()
+;;; gsk_linear_gradient_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_linear_gradient_node_new" %linear-gradient-node-new)
@@ -1141,7 +1159,7 @@ color {
 (export 'linear-gradient-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_linear_gradient_node_get_start ()
+;;; gsk_linear_gradient_node_get_start
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_linear_gradient_node_get_start" linear-gradient-node-start)
@@ -1159,7 +1177,7 @@ color {
 (export 'linear-gradient-node-start)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_linear_gradient_node_get_end ()
+;;; gsk_linear_gradient_node_get_end
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_linear_gradient_node_get_end" linear-gradient-node-end)
@@ -1177,7 +1195,7 @@ color {
 (export 'linear-gradient-node-end)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_linear_gradient_node_get_n_color_stops ()
+;;; gsk_linear_gradient_node_get_n_color_stops
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_linear_gradient_node_get_n_color_stops"
@@ -1193,7 +1211,7 @@ color {
 (export 'linear-gradient-node-n-color-stops)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_linear_gradient_node_get_color_stops ()
+;;; gsk_linear_gradient_node_get_color_stops
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_linear_gradient_node_get_color_stops"
@@ -1243,7 +1261,7 @@ color {
 (export 'repeating-linear-gradient-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_repeating_linear_gradient_node_new ()
+;;; gsk_repeating_linear_gradient_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_repeating_linear_gradient_node_new"
@@ -1315,7 +1333,7 @@ color {
 (export 'radial-gradient-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_radial_gradient_node_new ()
+;;; gsk_radial_gradient_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_radial_gradient_node_new" %radial-gradient-node-new)
@@ -1385,7 +1403,7 @@ color {
 (export 'radial-gradient-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_radial_gradient_node_get_n_color_stops ()
+;;; gsk_radial_gradient_node_get_n_color_stops
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_radial_gradient_node_get_n_color_stops"
@@ -1401,7 +1419,7 @@ color {
 (export 'radial-gradient-node-n-color-stops)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_radial_gradient_node_get_color_stops ()
+;;; gsk_radial_gradient_node_get_color_stops
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_radial_gradient_node_get_color_stops"
@@ -1431,7 +1449,7 @@ color {
 (export 'radial-gradient-node-color-stops)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_radial_gradient_node_get_start ()
+;;; gsk_radial_gradient_node_get_start
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_radial_gradient_node_get_start" radial-gradient-node-start)
@@ -1447,7 +1465,7 @@ color {
 (export 'radial-gradient-node-start)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_radial_gradient_node_get_end ()
+;;; gsk_radial_gradient_node_get_end
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_radial_gradient_node_get_end" radial-gradient-node-end)
@@ -1463,7 +1481,7 @@ color {
 (export 'radial-gradient-node-end)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_radial_gradient_node_get_hradius ()
+;;; gsk_radial_gradient_node_get_hradius
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_radial_gradient_node_get_hradius"
@@ -1479,7 +1497,7 @@ color {
 (export 'radial-gradient-node-hradius)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_radial_gradient_node_get_vradius ()
+;;; gsk_radial_gradient_node_get_vradius
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_radial_gradient_node_get_vradius"
@@ -1495,7 +1513,7 @@ color {
 (export 'radial-gradient-node-vradius)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_radial_gradient_node_get_center ()
+;;; gsk_radial_gradient_node_get_center
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_radial_gradient_node_get_center"
@@ -1533,7 +1551,7 @@ color {
 (export 'repeating-radial-gradient-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_repeating_radial_gradient_node_new ()
+;;; gsk_repeating_radial_gradient_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_repeating_radial_gradient_node_new"
@@ -1623,7 +1641,7 @@ color {
 (export 'conic-gradient-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_conic_gradient_node_new ()
+;;; gsk_conic_gradient_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_conic_gradient_node_new" %conic-gradient-node-new)
@@ -1678,7 +1696,7 @@ color {
 (export 'conic-gradient-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_conic_gradient_node_get_n_color_stops ()
+;;; gsk_conic_gradient_node_get_n_color_stops
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_conic_gradient_node_get_n_color_stops"
@@ -1695,7 +1713,7 @@ color {
 (export 'conic-gradient-node-n-color-stops)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_conic_gradient_node_get_color_stops ()
+;;; gsk_conic_gradient_node_get_color_stops
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_conic_gradient_node_get_color_stops"
@@ -1725,7 +1743,7 @@ color {
 (export 'conic-gradient-node-color-stops)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_conic_gradient_node_get_center ()
+;;; gsk_conic_gradient_node_get_center
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_conic_gradient_node_get_center"
@@ -1746,7 +1764,7 @@ color {
 (export 'conic-gradient-node-center)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_conic_gradient_node_get_rotation ()
+;;; gsk_conic_gradient_node_get_rotation
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_conic_gradient_node_get_rotation"
@@ -1782,7 +1800,7 @@ color {
 (export 'border-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_border_node_new ()
+;;; gsk_border_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_border_node_new" %border-node-new) render-node
@@ -1819,7 +1837,7 @@ color {
 (export 'border-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_border_node_get_outline ()
+;;; gsk_border_node_get_outline
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_border_node_get_outline" border-node-outline)
@@ -1838,7 +1856,7 @@ color {
 (export 'border-node-outline)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_border_node_get_widths ()
+;;; gsk_border_node_get_widths
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_border_node_get_widths" %border-node-widths)
@@ -1862,7 +1880,7 @@ color {
 (export 'border-node-widths)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_border_node_get_colors ()
+;;; gsk_border_node_get_colors
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_border_node_get_colors" %border-node-colors) :pointer
@@ -1909,7 +1927,7 @@ color {
 (export 'texture-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_texture_node_new ()
+;;; gsk_texture_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_texture_node_new" texture-node-new) render-node
@@ -1932,7 +1950,7 @@ color {
 (export 'texture-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_texture_node_get_texture ()
+;;; gsk_texture_node_get_texture
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_texture_node_get_texture" texture-node-texture)
@@ -1969,7 +1987,7 @@ color {
 (export 'inset-shadow-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_inset_shadow_node_new ()
+;;; gsk_inset_shadow_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_inset_shadow_node_new" %inset-shadow-node-new) render-node
@@ -2010,7 +2028,7 @@ color {
 (export 'inset-shadow-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_inset_shadow_node_get_outline ()
+;;; gsk_inset_shadow_node_get_outline
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_inset_shadow_node_get_outline" inset-shadow-node-outline)
@@ -2027,7 +2045,7 @@ color {
 (export 'inset-shadow-node-outline)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_inset_shadow_node_get_color ()
+;;; gsk_inset_shadow_node_get_color
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_inset_shadow_node_get_color" inset-shadow-node-color)
@@ -2044,7 +2062,7 @@ color {
 (export 'inset-shadow-node-color)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_inset_shadow_node_get_dx ()
+;;; gsk_inset_shadow_node_get_dx
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_inset_shadow_node_get_dx" inset-shadow-node-dx) :float
@@ -2059,7 +2077,7 @@ color {
 (export 'inset-shadow-node-dx)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_inset_shadow_node_get_dy ()
+;;; gsk_inset_shadow_node_get_dy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_inset_shadow_node_get_dy" inset-shadow-node-dy) :float
@@ -2074,7 +2092,7 @@ color {
 (export 'inset-shadow-node-dy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_inset_shadow_node_get_spread ()
+;;; gsk_inset_shadow_node_get_spread
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_inset_shadow_node_get_spread" inset-shadow-node-spread)
@@ -2090,7 +2108,7 @@ color {
 (export 'inset-shadow-node-spread)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_inset_shadow_node_get_blur_radius ()
+;;; gsk_inset_shadow_node_get_blur_radius
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_inset_shadow_node_get_blur_radius"
@@ -2126,7 +2144,7 @@ color {
 (export 'outset-shadow-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_outset_shadow_node_new ()
+;;; gsk_outset_shadow_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_outset_shadow_node_new" %outset-shadow-node-new) render-node
@@ -2168,7 +2186,7 @@ color {
 (export 'outset-shadow-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_outset_shadow_node_get_outline ()
+;;; gsk_outset_shadow_node_get_outline
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_outset_shadow_node_get_outline" outset-shadow-node-outline)
@@ -2185,7 +2203,7 @@ color {
 (export 'outset-shadow-node-outline)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_outset_shadow_node_get_color ()
+;;; gsk_outset_shadow_node_get_color
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_outset_shadow_node_get_color" outset-shadow-node-color)
@@ -2202,7 +2220,7 @@ color {
 (export 'outset-shadow-node-color)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_outset_shadow_node_get_dx ()
+;;; gsk_outset_shadow_node_get_dx
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_outset_shadow_node_get_dx" outset-shadow-node-dx) :float
@@ -2217,7 +2235,7 @@ color {
 (export 'outset-shadow-node-dx)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_outset_shadow_node_get_dy ()
+;;; gsk_outset_shadow_node_get_dy
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_outset_shadow_node_get_dy" outset-shadow-node-dy) :float
@@ -2232,7 +2250,7 @@ color {
 (export 'outset-shadow-node-dy)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_outset_shadow_node_get_spread ()
+;;; gsk_outset_shadow_node_get_spread
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_outset_shadow_node_get_spread" outset-shadow-node-spread)
@@ -2248,7 +2266,7 @@ color {
 (export 'outset-shadow-node-spread)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_outset_shadow_node_get_blur_radius ()
+;;; gsk_outset_shadow_node_get_blur_radius
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_outset_shadow_node_get_blur_radius"
@@ -2286,7 +2304,7 @@ color {
 (export 'transform-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_node_new ()
+;;; gsk_transform_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_node_new" transform-node-new) render-node
@@ -2310,7 +2328,7 @@ color {
 (export 'transform-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_node_get_child ()
+;;; gsk_transform_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_node_get_child" transform-node-child) render-node
@@ -2330,7 +2348,7 @@ color {
 (export 'transform-node-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_transform_node_get_transform ()
+;;; gsk_transform_node_get_transform
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_transform_node_get_transform" transform-node-transform)
@@ -2369,7 +2387,7 @@ color {
 (export 'opacity-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_opacity_node_new ()
+;;; gsk_opacity_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_opacity_node_new" %opacity-node-new) render-node
@@ -2391,7 +2409,7 @@ color {
 (export 'opacity-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_opacity_node_get_child ()
+;;; gsk_opacity_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_opacity_node_get_child" opacity-node-child) render-node
@@ -2410,7 +2428,7 @@ color {
 (export 'opacity-node-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_opacity_node_get_opacity ()
+;;; gsk_opacity_node_get_opacity
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_opacity_node_get_opacity" opacity-node-opacity) :float
@@ -2445,7 +2463,7 @@ color {
 (export 'color-matrix-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_color_matrix_node_new ()
+;;; gsk_color_matrix_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_color_matrix_node_new" color-matrix-node-new) render-node
@@ -2473,7 +2491,7 @@ color {
 (export 'color-matrix-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_color_matrix_node_get_child ()
+;;; gsk_color_matrix_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_color_matrix_node_get_child" color-matrix-node-child)
@@ -2494,7 +2512,7 @@ color {
 (export 'color-matrix-node-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_color_matrix_node_get_color_matrix ()
+;;; gsk_color_matrix_node_get_color_matrix
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_color_matrix_node_get_color-matrix"
@@ -2514,7 +2532,7 @@ color {
 (export 'color-matrix-node-color-matrix)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_color_matrix_node_get_color_offset ()
+;;; gsk_color_matrix_node_get_color_offset
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_color_matrix_node_get_color_offset"
@@ -2554,7 +2572,7 @@ color {
 (export 'repeat-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_repeat_node_new ()
+;;; gsk_repeat_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_repeat_node_new" repeat-node-new) render-node
@@ -2580,7 +2598,7 @@ color {
 (export 'repeat-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_repeat_node_get_child ()
+;;; gsk_repeat_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_repeat_node_get_child" repeat-node-child) render-node
@@ -2596,7 +2614,7 @@ color {
 (export 'repeat-node-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_repeat_node_get_child_bounds ()
+;;; gsk_repeat_node_get_child_bounds
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_repeat_node_get_child_bounds" repeat-node-child-bounds)
@@ -2633,7 +2651,7 @@ color {
 (export 'clip-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_clip_node_new ()
+;;; gsk_clip_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_clip_node_new" clip-node-new) render-node
@@ -2655,7 +2673,7 @@ color {
 (export 'clip-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_clip_node_get_child ()
+;;; gsk_clip_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_clip_node_get_child" clip-node-child) render-node
@@ -2674,7 +2692,7 @@ color {
 (export 'clip-node-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_clip_node_get_clip ()
+;;; gsk_clip_node_get_clip
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_clip_node_get_clip" clip-node-clip)
@@ -2714,7 +2732,7 @@ color {
 (export 'rounded-clip-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_clip_node_new ()
+;;; gsk_rounded_clip_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_clip_node_new" rounded-clip-node-new) render-node
@@ -2736,7 +2754,7 @@ color {
 (export 'rounded-clip-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_clip_node_get_child ()
+;;; gsk_rounded_clip_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_clip_node_get_child" rounded-clip-node-child)
@@ -2756,7 +2774,7 @@ color {
 (export 'rounded-clip-node-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_rounded_clip_node_get_clip ()
+;;; gsk_rounded_clip_node_get_clip
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_rounded_clip_node_get_clip" rounded-clip-node-clip)
@@ -2796,7 +2814,7 @@ color {
 (export 'shadow-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_shadow_node_new ()
+;;; gsk_shadow_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_shadow_node_new" %shadow-node-new) render-node
@@ -2839,7 +2857,7 @@ color {
 (export 'shadow-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_shadow_node_get_shadow ()
+;;; gsk_shadow_node_get_shadow
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_shadow_node_get_shadow" %shadow-node-shadow) :pointer
@@ -2866,7 +2884,7 @@ color {
 (export 'shadow-node-shadow)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_shadow_node_get_n_shadows ()
+;;; gsk_shadow_node_get_n_shadows
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_shadow_node_get_n_shadows" shadow-node-n-shadows) :size
@@ -2881,7 +2899,7 @@ color {
 (export 'shadow-node-n-shadows)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_shadow_node_get_child ()
+;;; gsk_shadow_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_shadow_node_get_child" shadow-node-child) render-node
@@ -2917,7 +2935,7 @@ color {
 (export 'blend-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blend_node_new ()
+;;; gsk_blend_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_blend_node_new" blend-node-new) render-node
@@ -2942,7 +2960,7 @@ color {
 (export 'blend-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blend_node_get_bottom_child ()
+;;; gsk_blend_node_get_bottom_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_blend_node_get_bottom_child" blend-node-bottom-child)
@@ -2961,7 +2979,7 @@ color {
 (export 'blend-node-bottom-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blend_node_get_top_child ()
+;;; gsk_blend_node_get_top_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_blend_node_get_top_child" blend-node-top-child) render-node
@@ -2979,7 +2997,7 @@ color {
 (export 'blend-node-top-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blend_node_get_blend_mode ()
+;;; gsk_blend_node_get_blend_mode
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_blend_node_get_blend_mode" blend-node-blend-mode) blend-mode
@@ -3017,7 +3035,7 @@ color {
 (export 'cross-fade-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_cross_fade_node_new ()
+;;; gsk_cross_fade_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cross_fade_node_new" cross-fade-node-new) render-node
@@ -3043,7 +3061,7 @@ color {
 (export 'cross-fade-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_cross_fade_node_get_start_child ()
+;;; gsk_cross_fade_node_get_start_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cross_fade_node_get_start_child"
@@ -3062,7 +3080,7 @@ color {
 (export 'cross-fade-node-start-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_cross_fade_node_get_end_child ()
+;;; gsk_cross_fade_node_get_end_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cross_fade_node_get_end_child"
@@ -3081,7 +3099,7 @@ color {
 (export 'cross-fade-node-end-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_cross_fade_node_get_progress ()
+;;; gsk_cross_fade_node_get_progress
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_cross_fade_node_get_progress" cross-fade-node-progress)
@@ -3117,7 +3135,7 @@ color {
 (export 'text-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_text_node_new ()
+;;; gsk_text_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_text_node_new" text-node-new) render-node
@@ -3147,7 +3165,7 @@ color {
 (export 'text-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_text_node_get_font ()
+;;; gsk_text_node_get_font
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_text_node_get_font" text-node-font) (g:object pango:font)
@@ -3193,7 +3211,7 @@ color {
 (export 'text-node-glyphs)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_text_node_get_color ()
+;;; gsk_text_node_get_color
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_text_node_get_color" text-node-color) (g:boxed gdk:rgba)
@@ -3209,7 +3227,7 @@ color {
 (export 'text-node-color)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_text_node_has_color_glyphs ()
+;;; gsk_text_node_has_color_glyphs
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_text_node_has_color_glyphs" text-node-has-color-glyphs)
@@ -3225,7 +3243,7 @@ color {
 (export 'text-node-has-color-glyphs)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_text_node_get_num_glyphs ()
+;;; gsk_text_node_get_num_glyphs
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_text_node_get_num_glyphs" text-node-num-glyphs) :uint
@@ -3240,7 +3258,7 @@ color {
 (export 'text-node-num-glyphs)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_text_node_get_offset ()
+;;; gsk_text_node_get_offset
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_text_node_get_offset" text-node-offset)
@@ -3278,7 +3296,7 @@ color {
 (export 'blur-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blur_node_new ()
+;;; gsk_blur_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_blur_node_new" blur-node-new) render-node
@@ -3298,7 +3316,7 @@ color {
 (export 'blur-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blur_node_get_child ()
+;;; gsk_blur_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_blur_node_get_child" blur-node-child) render-node
@@ -3317,7 +3335,7 @@ color {
 (export 'blur-node-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_blur_node_get_radius ()
+;;; gsk_blur_node_get_radius
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_blur_node_get_radius" blur-node-radius) :float
@@ -3355,7 +3373,7 @@ color {
 (export 'debug-node)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_debug_node_new ()
+;;; gsk_debug_node_new
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_debug_node_new" debug-node-new) render-node
@@ -3378,7 +3396,7 @@ color {
 (export 'debug-node-new)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_debug_node_get_child ()
+;;; gsk_debug_node_get_child
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_debug_node_get_child" debug-node-child) render-node
@@ -3396,7 +3414,7 @@ color {
 (export 'debug-node-child)
 
 ;;; ----------------------------------------------------------------------------
-;;; gsk_debug_node_get_message ()
+;;; gsk_debug_node_get_message
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gsk_debug_node_get_message" debug-node-message) :string

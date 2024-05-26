@@ -8,43 +8,48 @@
 ;;;     GtkFileLauncher
 
 (test gtk-file-launcher-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkFileLauncher"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:file-launcher
           (glib:symbol-for-gtype "GtkFileLauncher")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkFileLauncher")
           (g:gtype (cffi:foreign-funcall "gtk_file_launcher_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GtkFileLauncher")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkFileLauncher")))
-  ;; Check the interfaces
+  ;; Check interfaces
   (is (equal '()
              (list-interfaces "GtkFileLauncher")))
-  ;; Check the properties
-  (is (equal '("always-ask" "file")
+  ;; Check properties
+  (is (equal '("always-ask" "file" "writable")
              (list-properties "GtkFileLauncher")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkFileLauncher")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFileLauncher" GTK-FILE-LAUNCHER
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gtk_file_launcher_get_type")
                                ((ALWAYS-ASK GTK-FILE-LAUNCHER-ALWAYS-ASK
                                  "always-ask" "gboolean" T T)
                                 (FILE GTK-FILE-LAUNCHER-FILE "file" "GFile" T
-                                 T)))
+                                 T)
+                                (WRITABLE GTK-FILE-LAUNCHER-WRITABLE "writable"
+                                 "gboolean" T T)))
              (gobject:get-g-type-definition "GtkFileLauncher"))))
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     always-ask                                         Since 4.12
-;;;     file
+(test gtk-file-launcher-properties
+  (let ((launcher (make-instance 'gtk:file-launcher)))
+    (is-false (gtk:file-launcher-always-ask launcher))
+    (is-false (gtk:file-launcher-file launcher))
+    (is-false (gtk:file-launcher-writable launcher))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -55,4 +60,4 @@
 ;;;     gtk_file_launcher_open_containing_folder
 ;;;     gtk_file_launcher_open_containing_folder_finish
 
-;;; --- 2023-11-4 --------------------------------------------------------------
+;;; 2024-5-26

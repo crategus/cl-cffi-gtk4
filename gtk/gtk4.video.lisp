@@ -2,7 +2,7 @@
 ;;; gtk4.video.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -41,6 +41,8 @@
 ;;;     gtk_video_set_autoplay
 ;;;     gtk_video_get_file
 ;;;     gtk_video_set_file
+;;;     gtk_video_get_graphics_offload                      Since 4.14
+;;;     gtk_video_set_graphics_offload                      Since 4.14
 ;;;     gtk_video_get_loop
 ;;;     gtk_video_set_loop
 ;;;     gtk_video_get_media_stream
@@ -60,6 +62,7 @@
 ;;;
 ;;;     autoplay
 ;;;     file
+;;;     graphics-offload                                    Since 4.14
 ;;;     loop
 ;;;     media-stream
 ;;;
@@ -78,6 +81,42 @@
 ;;; ----------------------------------------------------------------------------
 
 (in-package :gtk)
+
+;;; ----------------------------------------------------------------------------
+;;; GtkGraphicsOffloadEnabled
+;;; ----------------------------------------------------------------------------
+
+#+gtk-4-14
+(gobject:define-g-enum "GtkGraphicsOffloadEnabled" graphics-offload-enabled
+  (:export t
+   :type-initializer "gtk_graphics_offload_enabled_get_type")
+  (:enabled 0)
+  (:disabled 1))
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-symbol 'graphics-offload-enabled)
+      "GEnum"
+      (liber:symbol-documentation 'graphics-offload-enabled)
+ "@version{2024-5-26}
+  @begin{declaration}
+(gobject:define-g-enum \"GtkGraphicsOffloadEnabled\" graphics-offload-enabled
+  (:export t
+   :type-initializer \"gtk_graphics_offload_enabled_get_type\")
+  (:enabled 0)
+  (:disabled 1))
+  @end{declaration}
+  @begin{values}
+    @begin[code]{table}
+      @entry[:enabled]{Graphics offloading is enabled.}
+      @entry[:disabled]{Graphics offloading is disabled.}
+    @end{table}
+  @end{values}
+  @begin{short}
+    Represents the state of graphics offloading.
+  @end{short}
+
+  Since 4.14
+  @see-class{gtk:video}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; GtkVideo
@@ -104,6 +143,10 @@
    (file
     video-file
     "file" "GFile" t t)
+   #+gtk-4-14
+   (graphics-offload
+    video-graphics-offload
+    "graphics-offload" "GtkGraphicsOffloadEnabled" t t)
    (loop
     video-loop
     "loop" "gboolean" t t)
@@ -199,6 +242,37 @@
   makes @arg{object} play the given @arg{file}.
   @see-class{gtk:video}
   @see-class{g:file}")
+
+;;; --- gtk:video-graphics-offload ---------------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "graphics-offload" 'video) t)
+ "The @code{graphics-offload} property of type
+  @symbol{gtk:graphics-offload-enabled} (Read / Write) @br{}
+  Whether to enable graphics offload. Since 4.14 @br{}
+  Default value: @code{:disabled}")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'video-graphics-offload)
+      "Accessor"
+      (documentation 'video-graphics-offload 'function)
+ "@version{#2024-5-26}
+  @syntax{(gtk:video-graphics-offload object) => setting}
+  @syntax{(setf (gtk:video-graphics-offload object) setting)}
+  @argument[object]{a @class{gtk:video} widget}
+  @argument[setting]{a @symbol{gtk:graphics-offload-enabled} value}
+  @begin{short}
+    Accessor of the @slot[gtk:video]{graphics-offload} slot of the
+    @class{gtk:video} class.
+  @end{short}
+  The @fun{gtk:video-graphics-offload} function returns whether graphics offload
+  is enabled. The @setf{gtk:video-graphics-offload} function sets whether to
+  enable graphics offload. See the @symbol{gtk:graphics-offload-enabled}
+  documentation for more information on graphics offload.
+
+  Since 4.14
+  @see-class{gtk:video}
+  @see-symbol{gtk:graphics-offload-enabled}")
 
 ;;; --- gtk:video-loop ---------------------------------------------------------
 

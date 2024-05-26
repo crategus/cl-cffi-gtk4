@@ -24,7 +24,7 @@
 
 (defsystem :cl-cffi-gtk4
   :name "cl-cffi-gtk4"
-  :version "0.7.0"
+  :version "0.8.0"
   :author "Dieter Kaiser"
   :license "MIT"
   :serial t
@@ -39,6 +39,7 @@
      (:file "gdk4.rectangle")
      (:file "gdk4.rgba")
      (:file "gdk4.keyval")
+     (:file "gdk4.dmabuf-formats"                 :if-feature :gtk-4-14)
 
      ;; Display, Seat, Device, Monitor
      (:file "gdk4.display-manager")
@@ -52,7 +53,7 @@
      ;; Paintables, Textures
      (:file "gdk4.paintable")
      (:file "gdk4.texture")
-     (:file "gdk4.texture-downloader"            :if-feature :gtk-4-10)
+     (:file "gdk4.texture-downloader"             :if-feature :gtk-4-10)
 
      ;; Events
      (:file "gdk4.event")
@@ -126,7 +127,8 @@
 
      ;; Interfaces
      (:file "gtk4.accessible")
-     (:file "gtk4.accessible-range"              :if-feature :gtk-4-10)
+     (:file "gtk4.accessible-range"               :if-feature :gtk-4-10)
+     (:file "gtk4.accessible-text"                :if-feature :gtk-4-14)
      (:file "gtk4.actionable")
      (:file "gtk4.cell-editable")
      (:file "gtk4.native")
@@ -158,9 +160,9 @@
      (:file "gtk4.multi-sorter")
      (:file "gtk4.string-sorter")
      (:file "gtk4.numeric-sorter")
-     (:file "gtk4.column-view-sorter"            :if-feature :gtk-4-10)
+     (:file "gtk4.column-view-sorter"             :if-feature :gtk-4-10)
 
-     (:file "gtk4.section-model"                 :if-feature :gtk-4-12)
+     (:file "gtk4.section-model"                  :if-feature :gtk-4-12)
      (:file "gtk4.selection-model")
      (:file "gtk4.no-selection")
      (:file "gtk4.single-selection")
@@ -201,14 +203,14 @@
      (:file "gtk4.list-item-factory")
      (:file "gtk4.signal-list-item-factory")
      (:file "gtk4.builder-list-item-factory")
-     (:file "gtk4.scroll-info"                   :if-feature :gtk-4-12)
-     (:file "gtk4.list-header"                   :if-feature :gtk-4-12)
+     (:file "gtk4.scroll-info"                    :if-feature :gtk-4-12)
+     (:file "gtk4.list-header"                    :if-feature :gtk-4-12)
      (:file "gtk4.list-view")
      (:file "gtk4.grid-view")
      (:file "gtk4.column-view")
      (:file "gtk4.column-view-column")
-     (:file "gtk4.column-view-cell"              :if-feature :gtk-4-12)
-     (:file "gtk4.column-view-row"               :if-feature :gtk-4-12)
+     (:file "gtk4.column-view-cell"               :if-feature :gtk-4-12)
+     (:file "gtk4.column-view-row"                :if-feature :gtk-4-12)
      (:file "gtk4.drop-down")
 
      ;; Tree support
@@ -237,7 +239,7 @@
 
      ;; Display Widgets
      (:file "gtk4.label")
-     (:file "gtk4.inscription"                   :if-feature :gtk-4-8)
+     (:file "gtk4.inscription"                    :if-feature :gtk-4-8)
      (:file "gtk4.image")
      (:file "gtk4.picture")
      (:file "gtk4.spinner")
@@ -330,25 +332,25 @@
      (:file "gtk4.color-chooser-widget")
      (:file "gtk4.color-chooser-dialog")
 
-     (:file "gtk4.color-dialog"                  :if-feature :gtk-4-10)
-     (:file "gtk4.color-dialog-button"           :if-feature :gtk-4-10)
+     (:file "gtk4.color-dialog"                   :if-feature :gtk-4-10)
+     (:file "gtk4.color-dialog-button"            :if-feature :gtk-4-10)
 
      (:file "gtk4.file-chooser")
      (:file "gtk4.file-chooser-native")
      (:file "gtk4.file-chooser-dialog")
      (:file "gtk4.file-chooser-widget")
 
-     (:file "gtk4.file-dialog"                   :if-feature :gtk-4-10)
-     (:file "gtk4.file-launcher"                 :if-feature :gtk-4-10)
-     (:file "gtk4.uri-launcher"                  :if-feature :gtk-4-10)
+     (:file "gtk4.file-dialog"                    :if-feature :gtk-4-10)
+     (:file "gtk4.file-launcher"                  :if-feature :gtk-4-10)
+     (:file "gtk4.uri-launcher"                   :if-feature :gtk-4-10)
 
      (:file "gtk4.font-chooser")
      (:file "gtk4.font-button")
      (:file "gtk4.font-chooser-widget")
      (:file "gtk4.font-chooser-dialog")
 
-     (:file "gtk4.font-dialog"                   :if-feature :gtk-4-10)
-     (:file "gtk4.font-dialog-button"            :if-feature :gtk-4-10)
+     (:file "gtk4.font-dialog"                    :if-feature :gtk-4-10)
+     (:file "gtk4.font-dialog-button"             :if-feature :gtk-4-10)
 
      (:file "gtk4.emoji-chooser")
 
@@ -370,7 +372,7 @@
      (:file "gtk4.dialog")
      (:file "gtk4.message-dialog")
      (:file "gtk4.about-dialog")
-     (:file "gtk4.alert-dialog"                  :if-feature :gtk-4-10)
+     (:file "gtk4.alert-dialog"                   :if-feature :gtk-4-10)
      (:file "gtk4.assistant")
      (:file "gtk4.window-group")
      (:file "gtk4.native-dialog")
@@ -382,10 +384,10 @@
      (:file "gtk4.paper-size")
      (:file "gtk4.print-settings")
      (:file "gtk4.page-setup")
-     (:file "gtk4.page-setup-unix-dialog"        :if-feature (:not :windows))
-     (:file "gtk4.print-unix-dialog"             :if-feature (:not :windows))
-     (:file "gtk4.print-job"                     :if-feature (:not :windows))
-     (:file "gtk4.printer"                       :if-feature (:not :windows))
+     (:file "gtk4.page-setup-unix-dialog"         :if-feature (:not :windows))
+     (:file "gtk4.print-unix-dialog"              :if-feature (:not :windows))
+     (:file "gtk4.print-job"                      :if-feature (:not :windows))
+     (:file "gtk4.printer"                        :if-feature (:not :windows))
 
      ;; Shortcuts Widgets
      (:file "gtk4.shortcuts-window")
@@ -479,7 +481,7 @@
 
 (defsystem :cl-cffi-gtk4/test
   :name "cl-cffi-gtk4/test"
-  :version "0.7.0"
+  :version "0.8.0"
   :author "Dieter Kaiser"
   :license "MIT"
   :depends-on (:cl-cffi-gtk4 :fiveam :iterate)
@@ -498,6 +500,7 @@
      (:file "rtest-gdk4-rectangle")
      (:file "rtest-gdk4-rgba")
      (:file "rtest-gdk4-keyval")
+     (:file "rtest-gdk4-dmabuf-formats"           :if-feature :gtk-4-14)
 
      ;; Displays, Devices, Monitors, Seats
      (:file "rtest-gdk4-display-manager")
@@ -580,9 +583,9 @@
      (:file "rtest-gtk4-multi-sorter")
      (:file "rtest-gtk4-string-sorter")
      (:file "rtest-gtk4-numeric-sorter")
-     (:file "rtest-gtk4-column-view-sorter"      :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-column-view-sorter"       :if-feature :gtk-4-10)
 
-;    (:file "gtk4.section-model"                 :if-feature :gtk-4-12)
+;    (:file "gtk4.section-model"                  :if-feature :gtk-4-12)
      (:file "rtest-gtk4-selection-model")
      (:file "rtest-gtk4-no-selection")
      (:file "rtest-gtk4-single-selection")
@@ -604,14 +607,14 @@
      (:file "rtest-gtk4-list-item-factory")
 ;    gtk4.signal-list-item-factory.lisp
 ;    gtk4.builder-list-item-factory.lisp
-     (:file "rtest-gtk4-scroll-info"             :if-feature :gtk-4-12)
-     (:file "rtest-gtk4-list-header"             :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-scroll-info"              :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-list-header"              :if-feature :gtk-4-12)
      (:file "rtest-gtk4-list-view")
 ;    gtk4.grid-view.lisp
 ;    gtk4.column-view.lisp
 ;    gtk4.column-view-column.lisp
-     (:file "rtest-gtk4-column-view-cell"        :if-feature :gtk-4-12)
-     (:file "rtest-gtk4-column-view-row"         :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-column-view-cell"         :if-feature :gtk-4-12)
+     (:file "rtest-gtk4-column-view-row"          :if-feature :gtk-4-12)
      (:file "rtest-gtk4-drop-down")
 
      ;; GTK Core
@@ -628,7 +631,8 @@
 
      ;; Interfaces
      (:file "rtest-gtk4-accessible")
-     (:file "rtest-gtk4-accessible-range"        :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-accessible-range"         :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-accessible-text"          :if-feature :gtk-4-14)
      (:file "rtest-gtk4-actionable")
      (:file "rtest-gtk4-cell-editable")
      (:file "rtest-gtk4-native")
@@ -685,7 +689,7 @@
 
      ;; Display Widgets
      (:file "rtest-gtk4-label")
-     (:file "rtest-gtk4-inscription"             :if-feature :gtk-4-8)
+     (:file "rtest-gtk4-inscription"              :if-feature :gtk-4-8)
      (:file "rtest-gtk4-image")
      (:file "rtest-gtk4-picture")
      (:file "rtest-gtk4-spinner")
@@ -696,10 +700,10 @@
      (:file "rtest-gtk4-calendar")
 
      ;; Media Support
-     (:file "rtest-gtk4-video"                   :if-feature (:not :windows))
-     (:file "rtest-gtk4-media-controls"          :if-feature (:not :windows))
-     (:file "rtest-gtk4-media-stream"            :if-feature (:not :windows))
-     (:file "rtest-gtk4-media-file"              :if-feature (:not :windows))
+     (:file "rtest-gtk4-video"                    :if-feature (:not :windows))
+     (:file "rtest-gtk4-media-controls"           :if-feature (:not :windows))
+     (:file "rtest-gtk4-media-stream"             :if-feature (:not :windows))
+     (:file "rtest-gtk4-media-file"               :if-feature (:not :windows))
 
      ;; Buttons and Toggles
      (:file "rtest-gtk4-button")
@@ -779,25 +783,25 @@
      (:file "rtest-gtk4-color-chooser-widget")
      (:file "rtest-gtk4-color-chooser-dialog")
 
-     (:file "rtest-gtk4-color-dialog"            :if-feature :gtk-4-10)
-     (:file "rtest-gtk4-color-dialog-button"     :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-color-dialog"             :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-color-dialog-button"      :if-feature :gtk-4-10)
 
-     (:file "rtest-gtk4-file-chooser"            :if-feature (:not :windows))
-     (:file "rtest-gtk4-file-chooser-native"     :if-feature (:not :windows))
-     (:file "rtest-gtk4-file-chooser-dialog"     :if-feature (:not :windows))
-     (:file "rtest-gtk4-file-chooser-widget"     :if-feature (:not :windows))
+     (:file "rtest-gtk4-file-chooser"             :if-feature (:not :windows))
+     (:file "rtest-gtk4-file-chooser-native"      :if-feature (:not :windows))
+     (:file "rtest-gtk4-file-chooser-dialog"      :if-feature (:not :windows))
+     (:file "rtest-gtk4-file-chooser-widget"      :if-feature (:not :windows))
 
-     (:file "rtest-gtk4-file-dialog"             :if-feature :gtk-4-10)
-     (:file "rtest-gtk4-file-launcher"           :if-feature :gtk-4-10)
-     (:file "rtest-gtk4-uri-launcher"            :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-file-dialog"              :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-file-launcher"            :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-uri-launcher"             :if-feature :gtk-4-10)
 
      (:file "rtest-gtk4-font-chooser")
      (:file "rtest-gtk4-font-button")
      (:file "rtest-gtk4-font-chooser-widget")
      (:file "rtest-gtk4-font-chooser-dialog")
 
-     (:file "rtest-gtk4-font-dialog"             :if-feature :gtk-4-10)
-     (:file "rtest-gtk4-font-dialog-button"      :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-font-dialog"              :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-font-dialog-button"       :if-feature :gtk-4-10)
 
      (:file "rtest-gtk4-emoji-chooser")
 
@@ -819,7 +823,7 @@
      (:file "rtest-gtk4-dialog")
      (:file "rtest-gtk4-message-dialog")
      (:file "rtest-gtk4-about-dialog")
-     (:file "rtest-gtk4-alert-dialog"            :if-feature :gtk-4-10)
+     (:file "rtest-gtk4-alert-dialog"             :if-feature :gtk-4-10)
      (:file "rtest-gtk4-assistant")
      (:file "rtest-gtk4-window-group")
      (:file "rtest-gtk4-native-dialog")
@@ -831,10 +835,10 @@
      (:file "rtest-gtk4-paper-size")
      (:file "rtest-gtk4-print-settings")
      (:file "rtest-gtk4-page-setup")
-     (:file "rtest-gtk4-page-setup-unix-dialog"  :if-feature (:not :windows))
-     (:file "rtest-gtk4-print-unix-dialog"       :if-feature (:not :windows))
-     (:file "rtest-gtk4-print-job"               :if-feature (:not :windows))
-     (:file "rtest-gtk4-printer"                 :if-feature (:not :windows))
+     (:file "rtest-gtk4-page-setup-unix-dialog"   :if-feature (:not :windows))
+     (:file "rtest-gtk4-print-unix-dialog"        :if-feature (:not :windows))
+     (:file "rtest-gtk4-print-job"                :if-feature (:not :windows))
+     (:file "rtest-gtk4-printer"                  :if-feature (:not :windows))
 
      ;; Shortcuts Widgets
      (:file "rtest-gtk4-shortcuts-window")

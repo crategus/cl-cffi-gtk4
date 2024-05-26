@@ -31,20 +31,25 @@
   (is (equal '()
              (list-interfaces "GdkDisplay")))
   ;; Check properties
-  (is (equal '("composited" "input-shapes" "rgba")
+  (is (equal '("composited" "dmabuf-formats" "input-shapes" "rgba"
+               "shadow-width")
              (list-properties "GdkDisplay")))
   ;; Check signals
   (is (equal '("closed" "opened" "seat-added" "seat-removed" "setting-changed")
              (list-signals "GdkDisplay")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplay" GDK-DISPLAY
-                       (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
-                        :TYPE-INITIALIZER "gdk_display_get_type")
-                       ((COMPOSITED GDK-DISPLAY-COMPOSITED "composited"
-                         "gboolean" T NIL)
-                        (INPUT-SHAPES GDK-DISPLAY-INPUT-SHAPES "input-shapes"
-                         "gboolean" T NIL)
-                        (RGBA GDK-DISPLAY-RGBA "rgba" "gboolean" T NIL)))
+                               (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
+                                :TYPE-INITIALIZER "gdk_display_get_type")
+                               ((COMPOSITED GDK-DISPLAY-COMPOSITED "composited"
+                                 "gboolean" T NIL)
+                                (DMABUF-FORMATS GDK-DISPLAY-DMABUF-FORMATS
+                                 "dmabuf-formats" "GdkDmabufFormats" T NIL)
+                                (INPUT-SHAPES GDK-DISPLAY-INPUT-SHAPES
+                                 "input-shapes" "gboolean" T NIL)
+                                (RGBA GDK-DISPLAY-RGBA "rgba" "gboolean" T NIL)
+                                (SHADOW-WIDTH GDK-DISPLAY-SHADOW-WIDTH
+                                 "shadow-width" "gboolean" T NIL)))
              (gobject:get-g-type-definition "GdkDisplay"))))
 
 ;;; --- Properties -------------------------------------------------------------
@@ -52,8 +57,10 @@
 (test gdk-display-properties
   (let ((display (gdk:display-default)))
     (is-true (gdk:display-composited display))
+    (is-true (gdk:display-composited display))
     (is-true (gdk:display-input-shapes display))
-    (is-true (gdk:display-rgba display))))
+    (is-true (gdk:display-rgba display))
+    (is-true (gdk:display-shadow-width display))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
@@ -293,16 +300,16 @@
 #-windows
 (test gdk-display-translate-key
   (let ((display (gdk:display-default)))
-    (is (= 97 (gdk:display-translate-key display 38 :none 0)))
+    (is (= 97 (gdk:display-translate-key display 38 :no-modifier-mask 0)))
     (is (= 65 (gdk:display-translate-key display 38 :shift-mask 0)))))
 
 #+windows
 (test gdk-display-translate-key
   (let ((display (gdk:display-default)))
-    (is (= 65362 (gdk:display-translate-key display 38 :none 0)))
+    (is (= 65362 (gdk:display-translate-key display 38 :no-modifier-mask 0)))
     (is (= 65362 (gdk:display-translate-key display 38 :shift-mask 0)))))
 
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; 2024-5-16
+;;; 2024-5-26

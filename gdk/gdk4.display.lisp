@@ -2,7 +2,7 @@
 ;;; gdk4.display.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -35,6 +35,10 @@
 ;;;
 ;;;     GdkDisplay
 ;;;
+;;; Accessors
+;;;
+;;;     gdk_display_get_dmabuf_formats                      Since 4.14
+;;;
 ;;; Functions
 ;;;
 ;;;     gdk_display_open
@@ -49,8 +53,9 @@
 ;;;     gdk_display_is_rgba
 ;;;     gdk_display_is_composited
 ;;;     gdk_display_supports_input_shapes
+;;;     gdk_display_supports_shadow_width                   Since 4.14
 ;;;     gdk_display_get_app_launch_context
-;;;     gdk_display_notify_startup_complete                Deprecated 4.10
+;;;     gdk_display_notify_startup_complete                 Deprecated 4.10
 ;;;     gdk_display_get_default_seat
 ;;;     gdk_display_list_seats
 ;;;     gdk_display_get_monitors
@@ -58,19 +63,21 @@
 ;;;     gdk_display_get_clipboard
 ;;;     gdk_display_get_primary_clipboard
 ;;;     gdk_display_get_setting
-;;;     gdk_display_get_startup_notification_id            Deprecated 4.10
-;;;     gdk_display_put_event                              Deprecated 4.10
+;;;     gdk_display_get_startup_notification_id             Deprecated 4.10
+;;;     gdk_display_put_event                               Deprecated 4.10
 ;;;     gdk_display_map_keyval
 ;;;     gdk_display_map_keycode
 ;;;     gdk_display_translate_key
-;;;     gdk_display_prepare_gl                             Since 4.4
-;;;     gdk_display_create_gl_context                      Since 4.6
+;;;     gdk_display_prepare_gl                              Since 4.4
+;;;     gdk_display_create_gl_context                       Since 4.6
 ;;;
 ;;; Properties
 ;;;
 ;;;     composited
+;;;     dmabuf-formats                                      Since 4.14
 ;;;     input-shapes
 ;;;     rgba
+;;;     shadow-width                                        Since 4.14
 ;;;
 ;;; Signals
 ;;;
@@ -100,25 +107,33 @@
   ((composited
     display-composited
     "composited" "gboolean" t nil)
+   #+gtk-4-14
+   (dmabuf-formats
+    display-dmabuf-formats
+    "dmabuf-formats" "GdkDmabufFormats" t nil)
    (input-shapes
     display-input-shapes
     "input-shapes" "gboolean" t nil)
    (rgba
     display-rgba
-    "rgba" "gboolean" t nil)))
+    "rgba" "gboolean" t nil)
+   #+gtk-4-14
+   (shadow-width
+    display-shadow-width
+    "shadow-width" "gboolean" t nil)))
 
 #+liber-documentation
 (setf (documentation 'display 'type)
- "@version{2024-1-7}
+ "@version{2024-5-25}
   @begin{short}
     The @class{gdk:display} object is the GDK representation of a workstation.
   @end{short}
   The purpose is two fold:
   @begin{itemize}
-    @item{To manage and provide information about input devices, e.g. pointers
-      and keyboards.}
-    @item{To manage and provide information about output devices, e.g. monitors
-      and projectors.}
+    @item{To manage and provide information about input devices, for example,
+      pointers and keyboards.}
+    @item{To manage and provide information about output devices, for example,
+      monitors and projectors.}
   @end{itemize}
   Most of the input device handling has been factored out into separate
   @class{gdk:seat} objects. Every display has one or more seats, which can be
@@ -138,8 +153,8 @@ lambda (display is-error)    :run-last
       @begin[code]{table}
         @entry[display]{The @class{gdk:display} object on which the signal is
           emitted.}
-       @entry[is-error]{A boolean that is @em{true} if @arg{display} was closed
-         due to an error.}
+       @entry[is-error]{The boolean that is @em{true} if @arg{display} was
+         closed due to an error.}
       @end{table}
     @subheading{The \"opened\" signal}
       @begin{pre}
@@ -179,11 +194,13 @@ lambda (display setting)    :run-last
     @begin[code]{table}
       @entry[display]{The @class{gdk:display} object on which the signal is
         emitted.}
-      @entry[setting]{A string with the name of the setting that changed.}
+      @entry[setting]{The string with the name of the setting that changed.}
     @end{table}
   @see-slot{gdk:display-composited}
+  @see-slot{gdk:display-dmabuf-formats}
   @see-slot{gdk:display-input-shapes}
   @see-slot{gdk:display-rgba}
+  @see-slot{gdk:display-shadow-width}
   @see-class{gdk:seat}
   @see-class{gdk:monitor}
   @see-function{gdk:display-default-seat}
@@ -206,7 +223,7 @@ lambda (display setting)    :run-last
       "Accessor"
       (documentation 'display-composited 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:display-composited object) => composited}
+  @syntax{(gdk:display-composited object) => composited}
   @argument[object]{a @class{gdk:display} object}
   @argument[composited]{@em{true} if the display properly composites the alpha
     channel}
@@ -224,6 +241,37 @@ lambda (display setting)    :run-last
   @see-class{gdk:display}
   @see-function{gdk:display-is-rgba}")
 
+;;; --- gdk:display-dmabuf-formats ---------------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "dmabuf-formats" 'display) t)
+ "The @code{dmabuf-formats} property of type @class{gdk:dmabuf-formats} (Read)
+  @br{}
+  The dma-buf formats that are supported on the display. Since 4.14")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'display-dmabuf-formats)
+      "Accessor"
+      (documentation 'display-dmabuf-formats 'function)
+ "@version{2024-5-26}
+  @syntax{(gdk:display-dmabuf-formats object) => formats}
+  @argument[object]{a @class{gdk:display} object}
+  @argument[formats]{a @class{gdk:dmabuf-formats} instance}
+  @begin{short}
+    Returns the dma-buf formats that are supported on the display.
+  @end{short}
+  GTK may use OpenGL or Vulkan to support some formats. Calling this function
+  will then initialize them if they are not yet.
+
+  The formats returned by this function can be used for negotiating buffer
+  formats with producers such as v4l, pipewire or GStreamer. To learn more
+  about dma-bufs, see the @class{gdk:dmabuf-texture-builder} documentation.
+
+  Since 4.14
+  @see-class{gdk:display}
+  @see-symbol{gdk:dmabuf-formats}
+  @see-class{gdk:dmabuf-texture-builder}")
+
 ;;; --- gdk:display-input-shapes -----------------------------------------------
 
 #+liber-documentation
@@ -236,7 +284,7 @@ lambda (display setting)    :run-last
       "Accessor"
       (documentation 'display-input-shapes 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:display-input-shapes object) => setting}
+  @syntax{(gdk:display-input-shapes object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if the display supports input shapes}
   @begin{short}
@@ -263,7 +311,7 @@ lambda (display setting)    :run-last
       "Accessor"
       (documentation 'display-rgba 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:display-rgba object) => setting}
+  @syntax{(gdk:display-rgba object) => setting}
   @argument[object]{a @class{gdk:display} object}
   @argument[setting]{@em{true} if the display supports an alpha channel}
   @begin{short}
@@ -282,6 +330,32 @@ lambda (display setting)    :run-last
   On modern displays, this value is always @em{true}.
   @see-class{gdk:display}
   @see-function{gdk:display-is-composited}")
+
+;;; --- gdk:display-shadow-width -----------------------------------------------
+
+#+(and gtk-4-14 liber-documentation)
+(setf (documentation (liber:slot-documentation "shadow-width" 'display) t)
+ "The @code{shadow-width} property of type @code{:boolean} (Read) @br{}
+  @em{True} if the display supports extensible frames. Since 4.14")
+
+#+(and gtk-4-14 liber-documentation)
+(setf (liber:alias-for-function 'display-shadow-width)
+      "Accessor"
+      (documentation 'display-shadow-width 'function)
+ "@version{2024-5-26}
+  @syntax{(gdk:display-shadow-width object) => setting}
+  @argument[object]{a @class{gdk:display} object}
+  @argument[setting]{@em{true} if surfaces can draw shadows or @em{false} if
+    the display does not support this functionality}
+  @begin{short}
+    Returns whether it is possible for a surface to draw outside of the window
+    area.
+  @end{short}
+  If @em{true} is returned the application decides if it wants to draw shadows.
+  If @em{false} is returned, the compositor decides if it wants to draw shadows.
+
+  Since 4.14
+  @see-class{gdk:display}")
 
 ;;; ----------------------------------------------------------------------------
 ;;; gdk_display_open
