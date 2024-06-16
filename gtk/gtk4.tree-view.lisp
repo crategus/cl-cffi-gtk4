@@ -2,7 +2,7 @@
 ;;; gtk4.tree-view.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -462,9 +462,9 @@ lambda (view arg1 arg2 arg3)    :action
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
-        @entry[arg1]{an undocumented boolean}
-        @entry[arg2]{an undocumented boolean}
-        @entry[arg3]{an undocumented boolean}
+        @entry[arg1]{undocumented boolean}
+        @entry[arg2]{undocumented boolean}
+        @entry[arg3]{undocumented boolean}
       @end{table}
     @subheading{The \"move-cursor\" signal}
       @begin{pre}
@@ -475,18 +475,18 @@ lambda (view step direction)    :action
       the @fun{g:signal-emit} function if they need to control the cursor
       programmatically. In contrast to the @fun{gtk:tree-view-get-cursor} and
       @fun{gtk:tree-view-set-cursor-on-cell} functions when moving horizontally
-      \"move-cursor\" does not reset the current selection.
+      @code{\"move-cursor\"} does not reset the current selection.
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
         @entry[step]{The granularity of the move, as a value of the
-          @symbol{gtk:movement-step} enumeration. The values
-          @code{:logical-positions}, @code{:visual-positions},
-          @code{:display-lines}, @code{:pages} and @code{:buffer-ends} are
-          supported. The values @code{:logical-positions} and
-          @code{:visual-positions} are treated identically.}
+          @symbol{gtk:movement-step} enumeration. The @code{:logical-positions},
+          @code{:visual-positions}, @code{:display-lines}, @code{:pages} and
+          @code{:buffer-ends} values are supported. The
+          @code{:logical-positions} and @code{:visual-positions} values are
+          treated identically.}
         @entry[direction]{The integer with the direction to move: +1 to move
-          forwards; -1 to move backwards. The resulting movement is undefined
+          forwards, -1 to move backwards. The resulting movement is undefined
           for all other values.}
         @entry[Returns]{@em{True} if @arg{step} is supported, @em{false}
           otherwise.}
@@ -553,7 +553,7 @@ lambda (view arg)    :action
       @begin[code]{table}
         @entry[view]{The @class{gtk:tree-view} widget on which the signal is
           emitted.}
-        @entry[arg]{an undocumented boolean}
+        @entry[arg]{undocumented boolean}
       @end{table}
     @subheading{The \"start-interactive-search\" signal}
       @begin{pre}
@@ -704,7 +704,8 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "enable-search" 'tree-view) t)
  "The @code{enable-search} property of type @code{:boolean} (Read / Write) @br{}
-  View allows user to search through columns interactively. @br{}
+  Whether the tree view allows user to search through columns interactively.
+  @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -771,7 +772,7 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "expander-column" 'tree-view) t)
  "The @code{expander-column} property of type @class{gtk:tree-view-column}
   (Read / Write) @br{}
-  Set the column for the expander column.")
+  The column for the expander column.")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'tree-view-expander-column)
@@ -851,7 +852,7 @@ lambda (view)    :action
                                                'tree-view) t)
  "The @code{headers-clickable} property of type @code{:boolean} (Read / Write)
   @br{}
-  Column headers respond to click events. @br{}
+  Whether column headers respond to click events. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -882,7 +883,7 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "headers-visible" 'tree-view) t)
  "The @code{headers-visible} property of type @code{:boolean} (Read / Write)
   @br{}
-  Show the column header buttons. @br{}
+  Wether to show the column header buttons. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -913,9 +914,7 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "hover-expand" 'tree-view) t)
  "The @code{hover-expand} property of type @code{:boolean} (Read / Write) @br{}
   Enables or disables the hover expansion mode of the tree view. Hover
-  expansion makes rows expand or collapse if the pointer moves over them.
-  This mode is primarily intended for tree views in popups, e.g. in
-  @class{gtk:combo-box} or @class{gtk:entry-completion} widgets. @br{}
+  expansion makes rows expand or collapse if the pointer moves over them. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -949,9 +948,7 @@ lambda (view)    :action
   @br{}
   Enables or disables the hover selection mode of the tree view. Hover
   selection makes the selected row follow the pointer. Currently, this works
-  only for the selection modes @code{:single} and @code{:browse}. This mode is
-  primarily intended for tree views in popups, e.g. in @class{gtk:combo-box}
-  or @class{gtk:entry-completion} widgets. @br{}
+  only for the @code{:single} and @code{:browse} selection modes. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -986,7 +983,7 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "level-indentation"
                                                'tree-view) t)
  "The @code{level-indentation} property of type @code{:int} (Read / Write) @br{}
-  Extra indentation for each level. @br{}
+  The extra indentation for each level. @br{}
   Allowed values: >= 0 @br{}
   Default value: 0")
 
@@ -1055,7 +1052,7 @@ lambda (view)    :action
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "reorderable" 'tree-view) t)
  "The @code{reorderable} property of type @code{:boolean} (Read / Write) @br{}
-  View is reorderable. @br{}
+  The tree view is reorderable. @br{}
   Default value: @em{false}")
 
 #+liber-documentation
@@ -1137,7 +1134,7 @@ lambda (view)    :action
 (setf (documentation (liber:slot-documentation "search-column" 'tree-view) t)
  "The @code{search-column} property of type @code{:int} (Read / Write) @br{}
   Model column to search through during interactive search. @br{}
-  Allowed values: >= -1 @br{}
+  The allowed values: >= -1 @br{}
   Default value: -1")
 
 #+liber-documentation
@@ -1240,7 +1237,7 @@ lambda (view)    :action
 
   If you only plan to have simple (text-only) tooltips on full rows, you can
   use this function to have the @class{gtk:tree-view} widget handle these
-  automatically for you. The argument @arg{column} should be set to the column
+  automatically for you. The @arg{column} argument should be set to the column
   in the tree view's model containing the tooltip texts, or -1 to disable this
   feature.
 
@@ -1451,7 +1448,7 @@ lambda (view)    :action
   @argument[pos]{an integer with the position to insert the new column in}
   @argument[title]{a string with the title to set the header to}
   @argument[renderer]{a @class{gtk:cell-renderer} object}
-  @argument[attributes]{a list of attributes}
+  @argument[attributes]{pairs of attributes}
   @return{The integer with the number of columns in @arg{view} after insertion.}
   @begin{short}
     Creates a new @class{gtk:tree-view-column} object and inserts it into the
@@ -1909,10 +1906,10 @@ lambda (view)    :action
  "@version{2024-3-10}
   @argument[view]{a @class{gtk:tree-view} widget}
   @begin{return}
-    @arg{path} -- a current @class{gtk:tree-path} instance with the cursor path,
+    @arg{path} -- a @class{gtk:tree-path} instance with the cursor path,
       or @code{nil} @br{}
-    @arg{focus} -- a current @class{gtk:tree-view-column} object with the focus
-      column, or @code{nil}
+    @arg{focus} -- a @class{gtk:tree-view-column} object with the focus column,
+      or @code{nil}
   @end{return}
   @begin{short}
     Returns @arg{path} and @arg{focus} with the current path and focus column.
@@ -2510,15 +2507,13 @@ lambda (view)    :action
     @arg{wy} -- an integer with the widget y coordinate
   @end{return}
   @begin{short}
-    Converts bin window coordinates, see the @fun{gtk:tree-view-bin-window}
-    function, to widget relative coordinates.
+    Converts bin window coordinates to widget relative coordinates.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:tree-view}
-  @see-function{gtk:tree-view-bin-window}"
+  @see-class{gtk:tree-view}"
   (cffi:with-foreign-objects ((wx :int) (wy :int))
     (%tree-view-convert-bin-window-to-widget-coords view x y wx wy)
     (values (cffi:mem-ref wx :int)
@@ -2625,15 +2620,13 @@ lambda (view)    :action
     @arg{by} -- an integer with the bin window y coordinate
   @end{return}
   @begin{short}
-    Converts widget coordinates to coordinates for the bin window, see the
-    @fun{gtk:tree-view-bin-window} function.
+    Converts widget coordinates to coordinates for the bin window.
   @end{short}
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
   @end{dictionary}
-  @see-class{gtk:tree-view}
-  @see-function{gtk:tree-view-bin-window}"
+  @see-class{gtk:tree-view}"
   (cffi:with-foreign-objects ((bx :int) (by :int))
     (%tree-view-convert-widget-to-bin-window-coords view x y bx by)
     (values (cffi:mem-ref bx :int)
@@ -2683,79 +2676,48 @@ lambda (view)    :action
 ;;; gtk_tree_view_enable_model_drag_dest
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Update implementation of drag and drop
-
-#+nil
 (cffi:defcfun ("gtk_tree_view_enable_model_drag_dest"
                %tree-view-enable-model-drag-dest) :void
-  (view (g:object tree-view))
-  (targets :pointer)
-  (n-targets :int)
-  (actions gdk-drag-action))
-
-#+nil
-(defun tree-view-enable-model-drag-dest (view targets actions)
  #+liber-documentation
- "@version{#2021-10-2}
+ "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[targets]{a list of target entries that the drag will support}
-  @argument[actions]{the @symbol{gdk-drag-action} bitmask of possible actions
+  @argument[formats]{a @class{gdk:content-formats} instance with the target
+    formats that the drag will support}
+  @argument[actions]{a @symbol{gdk:drag-action} bitmask of possible actions
     for a drag from this widget}
   @begin{short}
     Turns the tree view into a drop destination for automatic DND.
   @end{short}
-  Calling this method sets \"reorderable\" to the @em{false} value.
+  Calling this method sets the @slot[gtk:tree-view]{reorderable} property to
+  the @em{false} value.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-view} implementation is deprecated since 4.10. Please
     do not use it in newly written code.
   @end{dictionary}
   @see-class{gtk:tree-view}
-  @see-symbol{gdk-drag-action}
+  @see-class{gdk:content-formats}
+  @see-symbol{gdk:drag-action}
   @see-function{gtk:tree-view-reorderable}"
-  (let ((n-targets (length targets)))
-    (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
-      (iter (for i from 0 below n-targets)
-            (for target-ptr = (cffi:mem-aptr targets-ptr
-                                             '(:struct %target-entry) i))
-            (for entry in targets)
-            (cffi:with-foreign-slots ((target flags info)
-                                      target-ptr
-                                      (:struct %target-entry))
-              (setf target (first entry))
-              (setf flags (second entry))
-              (setf info (third entry))))
-      (%tree-view-enable-model-drag-dest view
-                                         targets-ptr
-                                         n-targets
-                                         actions))))
+  (view (g:object tree-view))
+  (formats (g:boxed gdk:content-formats))
+  (actions gdk:drag-action))
 
-#+nil
 (export 'tree-view-enable-model-drag-dest)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_view_enable_model_drag_source
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Update implementation of drag and drop
-
-#+nil
 (cffi:defcfun ("gtk_tree_view_enable_model_drag_source"
                %tree-view-enable-model-drag-source) :void
-  (view (g:object tree-view))
-  (mask gdk:modifier-type)
-  (targets :pointer)
-  (n-targets :int)
-  (actions gdk-drag-action))
-
-#+nil
-(defun tree-view-enable-model-drag-source (view mask targets actions)
  #+liber-documentation
- "@version{#2021-10-2}
+ "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[mask]{a @symbol{gdk:modifier-type} mask of allowed buttons to start
     drag}
-  @argument[targets]{a list of target entries that the drag will support}
-  @argument[actions]{the @symbol{gdk-drag-action} bitmask of possible actions
+  @argument[formts]{a @class{gdk:conent-formats} instance with the targt formats
+    that the drag will support}
+  @argument[actions]{a @symbol{gdk:drag-action} bitmask of possible actions
     for a drag from this widget}
   @begin{short}
     Turns the tree view into a drag source for automatic DND.
@@ -2767,41 +2729,25 @@ lambda (view)    :action
     not use it in newly written code.
   @end{dictionary}
   @see-class{gtk:tree-view}
+  @see-class{gdk:content-formats}
   @see-symbol{gdk:modifier-type}
-  @see-symbol{gdk-drag-action}
+  @see-symbol{gdk:drag-action}
   @see-function{gtk:tree-view-reorderable}"
-  (let ((n-targets (length targets)))
-    (cffi:with-foreign-object (targets-ptr '(:struct %target-entry) n-targets)
-      (iter (for i from 0 below n-targets)
-            (for target-ptr = (cffi:mem-aptr targets-ptr
-                                             '(:struct %target-entry) i))
-            (for entry in targets)
-            (cffi:with-foreign-slots ((target flags info)
-                                      target-ptr
-                                      (:struct %target-entry))
-              (setf target (first entry))
-              (setf flags (second entry))
-              (setf info (third entry))))
-      (%tree-view-enable-model-drag-source view
-                                           mask
-                                           targets-ptr
-                                           n-targets
-                                           actions))))
+  (view (g:object tree-view))
+  (mask gdk:modifier-type)
+  (formats (g:boxed gdk:content-formats))
+  (actions gdk:drag-action))
 
-#+nil
 (export 'tree-view-enable-model-drag-source)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_view_unset_rows_drag_source
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Update implementation of drag and drop
-
-#+nil
 (cffi:defcfun ("gtk_tree_view_unset_rows_drag_source"
                tree-view-unset-rows-drag-source) :void
  #+liber-documentation
- "@version{#2021-2-26}
+ "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
   @begin{short}
     Undoes the effect of the @fun{gtk:tree-view-enable-model-drag-source}
@@ -2818,20 +2764,16 @@ lambda (view)    :action
   @see-function{gtk:tree-view-reorderable}"
   (view (g:object tree-view)))
 
-#+nil
 (export 'tree-view-unset-rows-drag-source)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_view_unset_rows_drag_dest
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Update implementation of drag and drop
-
-#+nil
 (cffi:defcfun ("gtk_tree_view_unset_rows_drag_dest"
                tree-view-unset-rows-drag-dest) :void
  #+liber-documentation
- "@version{#2021-2-26}
+ "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
   @begin{short}
     Undoes the effect of the @fun{gtk:tree-view-enable-model-drag-dest}
@@ -2848,22 +2790,18 @@ lambda (view)    :action
   @see-function{gtk:tree-view-reorderable}"
   (view (g:object tree-view)))
 
-#+nil
 (export 'tree-view-unset-rows-drag-dest)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_view_set_drag_dest_row
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Update implementation of drag and drop
-
-#+nil
 (cffi:defcfun ("gtk_tree_view_set_drag_dest_row" tree-view-set-drag-dest-row)
     :void
  #+liber-documentation
- "@version{#2021-2-26}
+ "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
-  @argument[path]{the @class{gtk:tree-path} instance of the row to highlight,
+  @argument[path]{a @class{gtk:tree-path} instance of the row to highlight,
     or @code{nil}}
   @argument[pos]{a @symbol{gtk:tree-view-drop-position} value wich specifies
     whether to drop before, after or into the row}
@@ -2883,31 +2821,26 @@ lambda (view)    :action
   (path (g:boxed tree-path))
   (pos tree-view-drop-position))
 
-#+nil
 (export 'tree-view-set-drag-dest-row)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_view_get_drag_dest_row
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Update implementation of drag and drop
-
-#+nil
 (cffi:defcfun ("gtk_tree_view_get_drag_dest_row" %tree-view-get-drag-dest-row)
     :void
   (view (g:object tree-view))
   (path :pointer)
   (pos :pointer))
 
-#+nil
 (defun tree-view-get-drag-dest-row (view)
  #+liber-documentation
- "@version{#2021-2-26}
+ "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
   @begin{return}
-    @arg{path} -- the @class{gtk:tree-path} instance of the highlighted row,
+    @arg{path} -- a @class{gtk:tree-path} instance of the highlighted row,
       or @code{nil} @br{}
-    @arg{pos}  -- the @symbol{gtk:tree-view-drop-position} position, or
+    @arg{pos}  -- a @symbol{gtk:tree-view-drop-position} position, or
       @code{nil}
   @end{return}
   @begin{short}
@@ -2926,37 +2859,33 @@ lambda (view)    :action
     (values (cffi:mem-ref path '(g:boxed tree-path :return))
             (cffi:mem-ref pos 'tree-view-drop-position))))
 
-#+nil
 (export 'tree-view-get-drag-dest-row)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_tree_view_get_dest_row_at_pos
 ;;; ----------------------------------------------------------------------------
 
-;; TODO: Update implementation of drag and drop
-
-#+nil
 (cffi:defcfun ("gtk_tree_view_get_dest_row_at_pos"
                %tree-view-get-dest-row-at-pos) :boolean
   (view (g:object tree-view))
-  (drag-x :int)
-  (drag-y :int)
+  (xdrag :int)
+  (ydrag :int)
   (path :pointer)
   (pos :pointer))
 
 #+nil
 (defun tree-view-get-dest-row-at-pos (view x y)
  #+liber-documentation
- "@version{#2021-2-26}
+ "@version{#2024-5-28}
   @argument[view]{a @class{gtk:tree-view} widget}
   @argument[x]{an integer with the position to determine the destination row
     for}
   @argument[y]{an integer with the position to determine the destination row
     for}
   @begin{return}
-    @arg{path} -- the @class{gtk:tree-path} instance of the highlighted row,
+    @arg{path} -- a @class{gtk:tree-path} instance of the highlighted row,
       or @code{nil} @br{}
-    @arg{pos}  -- the @symbol{gtk:tree-view-drop-position} position,
+    @arg{pos}  -- a @symbol{gtk:tree-view-drop-position} position,
       or @code{nil}
   @end{return}
   @begin{short}
@@ -2978,7 +2907,6 @@ lambda (view)    :action
       (values (cffi:mem-ref path '(g:boxed tree-path :return))
               (cffi:mem-ref pos 'tree-view-drop-position)))))
 
-#+nil
 (export 'tree-view-get-dest-row-at-pos)
 
 ;;; ----------------------------------------------------------------------------

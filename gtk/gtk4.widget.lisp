@@ -2,7 +2,7 @@
 ;;; gtk4.widget.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -110,10 +110,15 @@
 ;;;     gtk_widget_in_destruction
 ;;;     gtk_widget_show                                     Deprecated 4.10
 ;;;     gtk_widget_hide                                     Deprecated 4.10
+
 ;;;     gtk_widget_map
 ;;;     gtk_widget_unmap
+;;;     gtk_widget_get_mapped
+
 ;;;     gtk_widget_realize
 ;;;     gtk_widget_unrealize
+;;;     gtk_widget_get_realized
+
 ;;;     gtk_widget_queue_draw
 ;;;     gtk_widget_queue_resize
 ;;;     gtk_widget_queue_allocate
@@ -151,13 +156,13 @@
 ;;;     gtk_widget_set_default_direction
 ;;;     gtk_widget_create_pango_context
 ;;;     gtk_widget_get_pango_context
-;;;     gtk_widget_get_font_options
-;;;     gtk_widget_set_font_options
+;;;     gtk_widget_get_font_options                         Deprecated 4.16
+;;;     gtk_widget_set_font_options                         Deprecated 4.16
 ;;;     gtk_widget_get_font_map
 ;;;     gtk_widget_set_font_map
 ;;;     gtk_widget_create_pango_layout
 ;;;     gtk_widget_set_cursor_from_name
-;;;     gtk_widget_mnemonic_activate
+;;;
 ;;;     gtk_widget_class_get_accessible_role
 ;;;     gtk_widget_class_set_accessible_role
 ;;;     gtk_widget_child_focus
@@ -169,9 +174,12 @@
 ;;;     gtk_widget_get_display
 ;;;     gtk_widget_get_size_request
 ;;;     gtk_widget_set_size_request
+;;;
 ;;;     gtk_widget_list_mnemonic_labels
 ;;;     gtk_widget_add_mnemonic_label
 ;;;     gtk_widget_remove_mnemonic_label
+;;;     gtk_widget_mnemonic_activate
+;;;
 ;;;     gtk_widget_error_bell
 ;;;     gtk_widget_keynav_failed
 ;;;     gtk_widget_trigger_tooltip_query
@@ -199,8 +207,7 @@
 ;;;     gtk_widget_unset_state_flags
 ;;;     gtk_widget_has_visible_focus
 ;;;     gtk_widget_is_drawable
-;;;     gtk_widget_get_realized
-;;;     gtk_widget_get_mapped
+;;;
 ;;;     gtk_widget_measure
 ;;;     gtk_widget_snapshot_child
 ;;;     gtk_widget_get_next_sibling
@@ -2132,7 +2139,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_map" widget-map) :void
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{2024-6-2}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Causes a widget to be mapped if it is not already.
@@ -2150,7 +2157,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_unmap" widget-unmap ) :void
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{2024-6-2}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Causes a widget to be unmapped if it is currently mapped.
@@ -2163,17 +2170,34 @@ lambda (widget)    :run-last
 (export 'widget-unmap)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_widget_get_mapped
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_get_mapped" widget-mapped) :boolean
+ #+liber-documentation
+ "@version{2024-6-2}
+  @argument[widget]{a @class{gtk:widget} object}
+  @return{@em{True} if the widget is mapped, @em{false} otherwise.}
+  @begin{short}
+    This function determines whether the widget is mapped.
+  @end{short}
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-map}"
+  (widget (g:object widget)))
+
+(export 'widget-mapped)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_realize
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_realize" widget-realize) :void
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{2024-6-2}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Creates the GDK resources associated with a widget.
   @end{short}
-  For example, the GDK window will be created when a widget is realized.
   Normally realization happens implicitly. If you show a widget and all its
   parent containers, then the widget will be realized and mapped automatically.
 
@@ -2185,11 +2209,9 @@ lambda (widget)    :run-last
   This function is primarily used in widget implementations, and is not very
   useful otherwise. Many times when you think you might need it, a better
   approach is to connect to a signal that will be called after the widget is
-  realized automatically, such as the @code{\"draw\"} signal. Or simply use the
-  @fun{g:signal-connect} function with the @code{\"realize\"} signal.
+  realized automatically, such as the @code{\"realize\"} signal.
   @see-class{gtk:widget}
-  @see-function{gtk:widget-unrealize}
-  @see-function{g:signal-connect}"
+  @see-function{gtk:widget-unrealize}"
   (widget (g:object widget)))
 
 (export 'widget-realize)
@@ -2200,12 +2222,12 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_unrealize" widget-unrealize) :void
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{2024-6-2}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Causes a widget to be unrealized.
   @end{short}
-  Frees all GDK resources associated with the widget This function is only
+  Frees all GDK resources associated with the widget. This function is only
   useful in widget implementations.
   @see-class{gtk:widget}
   @see-function{gtk:widget-realize}"
@@ -2214,12 +2236,30 @@ lambda (widget)    :run-last
 (export 'widget-unrealize)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_widget_get_realized
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_get_realized" widget-realized) :boolean
+ #+liber-documentation
+ "@version{2024-6-2}
+  @argument[widget]{a @class{gtk:widget} object}
+  @return{@em{True} if the widget is realized, @em{false} otherwise.}
+  @begin{short}
+    This function determines whether the widget is realized.
+  @end{short}
+  @see-class{gtk:widget}
+  @see-function{gtk:widget-realize}"
+  (widget (g:object widget)))
+
+(export 'widget-realized)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_queue_draw
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_queue_draw" widget-queue-draw) :void
  #+liber-documentation
- "@version{#2023-8-4}
+ "@version{2024-6-2}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Schedules the widget to be redrawn in the paint phase of the current or the
@@ -2236,7 +2276,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_queue_resize" widget-queue-resize) :void
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{#2024-6-2}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Flags a widget to have its size renegotiated.
@@ -2246,12 +2286,13 @@ lambda (widget)    :run-last
   queues a resize to ensure there is enough space for the new text.
 
   This function is only for use in widget implementations.
-  @begin[Note]{dictionary}
+  @begin{notes}
     You cannot call the @fun{gtk:widget-queue-resize} function on a widget from
     inside its implementation of the @code{size_allocate} virtual method. Calls
     to this function from inside the virtual method will be silently ignored.
-  @end{dictionary}
-  @see-class{gtk:widget}"
+  @end{notes}
+  @see-class{gtk:widget}
+  @see-class{gtk:label}"
   (widget (g:object widget)))
 
 (export 'widget-queue-resize)
@@ -2288,7 +2329,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_frame_clock" widget-frame-clock)
     (g:object gdk-frame-clock)
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{2024-6-2}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{gdk:frame-clock} object, or @code{nil} if @arg{widget} is
     unrealized.}
@@ -2341,7 +2382,7 @@ lambda (widget)    :run-last
 (setf (liber:alias-for-symbol 'tick-callback)
       "Callback"
       (liber:symbol-documentation 'tick-callback)
- "@version{#2024-5-4}
+ "@version{#2024-6-3}
   @syntax{lambda (widget clock) => result}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[clock]{a @class{gdk:frame-clock} object for the widget, same as
@@ -2371,7 +2412,7 @@ lambda (widget)    :run-last
 
 (defun widget-add-tick-callback (widget func)
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{#2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[func]{a @symbol{gtk:tick-callback} callback function to call for
     updating animations}
@@ -2390,21 +2431,22 @@ lambda (widget)    :run-last
   If you want a repaint or relayout, and are not changing widget properties that
   would trigger that, for example, changing the text of a @class{gtk:label}
   widget, then you will have to call the @fun{gtk:widget-queue-resize} function
-  or the @fun{gtk:widget-queue-draw-area} function yourself.
+  or the @fun{gtk:widget-queue-draw} function yourself.
 
   The @fun{gdk:frame-clock-frame-time} function should generally be used for
   timing continuous animations and the
   @fun{gdk:frame-timings-predicted-presentation-time} function if you are
   trying to display isolated frames at particular times.
 
-  This is a more convenient alternative to connecting directly to the \"update\"
-  signal of the @class{gdk:frame-clock} object, since you do not have to worry
-  about when the @class{gdk:frame-clock} object is assigned to a widget.
+  This is a more convenient alternative to connecting directly to the
+  @code{\"update\"} signal of the @class{gdk:frame-clock} object, since you do
+  not have to worry about when the @class{gdk:frame-clock} object is assigned
+  to a widget.
   @see-class{gtk:widget}
   @see-class{gdk:frame-clock}
   @see-function{gtk:widget-remove-tick-callback}
   @see-function{gtk:widget-queue-resize}
-  @see-function{gtk:widget-queue-draw-area}
+  @see-function{gtk:widget-queue-draw}
   @see-function{gdk:frame-clock-frame-time}
   @see-function{gdk:frame-timings-predicted-presentation-time}"
   (%widget-add-tick-callback widget
@@ -2421,7 +2463,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_remove_tick_callback" widget-remove-tick-callback)
     :void
  #+liber-documentation
- "@version{#2021-9-16}
+ "@version{#2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[id]{an unsigned integer with the ID returned by the
     @fun{gtk:widget-add-tick-callback} function}
@@ -2897,7 +2939,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_ancestor" widget-ancestor) (g:object widget)
  #+liber-documentation
- "@version{2023-9-18}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[gtype]{an ancestor @class{g:type-t} type}
   @return{The @class{gtk:widget} ancestor widget, or @arg{nil} if not found.}
@@ -2924,7 +2966,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_ancestor" widget-is-ancestor) :boolean
  #+liber-documentation
- "@version{#2021-9-19}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[ancestor]{another @class{gtk:widget} object}
   @return{@em{True} if @arg{ancestor} contains the widget as a child,
@@ -2941,7 +2983,7 @@ lambda (widget)    :run-last
 (export 'widget-is-ancestor)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_widget_translate_coordinates
+;;; gtk_widget_translate_coordinates                        Deprecated 4.12
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_translate_coordinates" %widget-translate-coordinates)
@@ -3119,7 +3161,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_create_pango_context" widget-create-pango-context)
     (g:object pango:context :already-referenced)
  #+liber-documentation
- "@version{#2021-9-19}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The new @class{pango:context} object.}
   @begin{short}
@@ -3141,7 +3183,7 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_get_pango_context" widget-pango-context)
     (g:object pango:context)
  #+liber-documentation
- "@version{#2021-9-19}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The @class{pango:context} object for the widget.}
   @begin{short}
@@ -3249,7 +3291,7 @@ lambda (widget)    :run-last
 
 (defun widget-create-pango-layout (widget text)
  #+liber-documentation
- "@version{#2021-9-19}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[text]{a string with the text to set on the layout, can be
     @code{nil}}
@@ -3268,7 +3310,7 @@ lambda (widget)    :run-last
   @see-class{pango:layout}
   @see-function{pango:layout-context-changed}"
   (%widget-create-pango-layout widget
-                               (if text text (cffi:null-pointer))))
+                               (or text (cffi:null-pointer))))
 
 (export 'widget-create-pango-layout)
 
@@ -3305,28 +3347,6 @@ lambda (widget)    :run-last
                                 (if name name (cffi:null-pointer))))
 
 (export 'widget-set-cursor-from-name)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_widget_mnemonic_activate
-;;; ----------------------------------------------------------------------------
-
-(cffi:defcfun ("gtk_widget_mnemonic_activate" widget-mnemonic-activate) :boolean
- #+liber-documentation
- "@version{#2021-9-19}
-  @argument[widget]{a @class{gtk:widget} object}
-  @argument[cycling]{@em{true} if there are other widgets with the same
-    mnemonic}
-  @return{@em{True} if the signal has been handled.}
-  @begin{short}
-    Emits the @code{\"mnemonic-activate\"} signal.
-  @end{short}
-  The default handler for this signal activates the widget if @arg{cycling} is
-  @em{false}, and just grabs the focus if @arg{cycling} is @em{true}.
-  @see-class{gtk:widget}"
-  (widget (g:object widget))
-  (cycling :boolean))
-
-(export 'widget-mnemonic-activate)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_class_get_accessible_role
@@ -3463,19 +3483,19 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_get_settings" widget-settings) (g:object settings)
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @return{The relevant @class{gtk:settings} object.}
   @begin{short}
     Gets the settings object holding the settings used for this widget.
   @end{short}
-
   Note that this function can only be called when the widget is attached to a
   toplevel, since the settings object is specific to a particular
-  @class{gdk:screen} object.
+  @class{gdk:display} object. If you want to monitor the widget for changes in
+  its settings, connect to the @code{notify::display} signal.
   @see-class{gtk:widget}
   @see-class{gtk:settings}
-  @see-class{gdk:screen}"
+  @see-class{gdk:display}"
   (widget (g:object widget)))
 
 (export 'widget-settings)
@@ -3628,9 +3648,9 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_list_mnemonic_labels" widget-list-mnemonic-labels)
     (g:list-t (g:object widget))
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
-  @return{The list of @class{gtk:widget} mnemonic labels.}
+  @return{The list of @class{gtk:widget} objects with the mnemonic labels.}
   @begin{short}
     Returns a list of the widgets, normally labels, for which this widget is
     the target of a mnemonic.
@@ -3658,7 +3678,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_add_mnemonic_label" widget-add-mnemonic-label) :void
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[label]{a @class{gtk:widget} object that acts as a mnemonic label
     for @arg{widget}}
@@ -3687,16 +3707,16 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_widget_remove_mnemonic_label" widget-remove-mnemonic-label)
     :void
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[label]{a @class{gtk:widget} object that was previously set as a
     mnemonic label for @arg{widget}}
   @begin{short}
     Removes a widget from the list of mnemonic labels for this widget.
   @end{short}
-  See the function @fun{gtk:widget-list-mnemonic-labels} for a list of mnemonic
+  See the @fun{gtk:widget-list-mnemonic-labels} function for a list of mnemonic
   labels for the widget. The widget must have previously been added to the list
-  with the function @fun{gtk:widget-add-mnemonic-label}.
+  with the @fun{gtk:widget-add-mnemonic-label} function.
   @see-class{gtk:widget}
   @see-function{gtk:widget-add-mnemonic-label}
   @see-function{gtk:widget-list-mnemonic-labels}"
@@ -3706,24 +3726,46 @@ lambda (widget)    :run-last
 (export 'widget-remove-mnemonic-label)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk_widget_mnemonic_activate
+;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_widget_mnemonic_activate" widget-mnemonic-activate) :boolean
+ #+liber-documentation
+ "@version{2024-6-3}
+  @argument[widget]{a @class{gtk:widget} object}
+  @argument[cycling]{@em{true} if there are other widgets with the same
+    mnemonic}
+  @return{@em{True} if the signal has been handled.}
+  @begin{short}
+    Emits the @code{\"mnemonic-activate\"} signal.
+  @end{short}
+  The default handler for this signal activates the widget if @arg{cycling} is
+  @em{false}, and just grabs the focus if @arg{cycling} is @em{true}.
+  @see-class{gtk:widget}"
+  (widget (g:object widget))
+  (cycling :boolean))
+
+(export 'widget-mnemonic-activate)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_error_bell
 ;;; ----------------------------------------------------------------------------
 
 (cffi:defcfun ("gtk_widget_error_bell" widget-error-bell) :void
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Notifies the user about an input-related error on this widget.
   @end{short}
   If the @slot[gtk:settings]{gtk-error-bell} setting is @em{true}, it calls the
-  @fun{gdk:window-beep} function, otherwise it does nothing.
+  @fun{gdk:surface-beep} function, otherwise it does nothing.
 
-  Note that the effect of the @fun{gdk:window-beep} function can be configured
+  Note that the effect of the @fun{gdk:surface-beep} function can be configured
   in many ways, depending on the windowing backend and the desktop environment
   or window manager that is used.
   @see-class{gtk:widget}
-  @see-function{gdk:window-beep}
+  @see-function{gdk:surface-beep}
   @see-function{gtk:settings-gtk-error-bell}"
   (widget (g:object widget)))
 
@@ -3735,7 +3777,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_keynav_failed" widget-keynav-failed) :boolean
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{2024-6-3}
   @argument[widget]{a @class{gtk:widget} object}
   @argument[direction]{a @symbol{gtk:direction-type} value for the direction
     of focus movement}
@@ -3743,41 +3785,38 @@ lambda (widget)    :run-last
     emitting widget should try to handle the keyboard navigation attempt in its
     parent container(s).}
   @begin{short}
-    This function should be called whenever keyboard navigation within a single
-    widget hits a boundary.
+    Emits the @code{notify::keynav-failed} signal on the widget.
   @end{short}
-  The function emits the @code{\"keynav-failed\"} signal on the widget and its
-  return value should be interpreted in a way similar to the return value of the
-  @fun{gtk:widget-child-focus} function:
-  @begin{itemize}
-    @item{When @em{true} is returned, stay in the widget, the failed keyboard
-      navigation is Ok and/or there is nowhere we can/should move the focus
-      to.}
-    @item{When @em{false} is returned, the caller should continue with keyboard
-      navigation outside the widget, e.g. by calling the
-      @fun{gtk:widget-child-focus} function on the toplevel of the widget.}
-  @end{itemize}
-  The default \"keynav-failed\" handler returns @em{true} for
-  @code{:tab-forward} and @code{:tab-backward}. For the other
-  @symbol{gtk:direction-type} values, it looks at the
-  @slot[gtk:settings]{gtk-keynav-cursor-only} setting and returns @em{false}
-  if the setting is @em{true}. This way the entire user interface becomes
-  cursor-navigatable on input devices such as mobile phones which only have
-  cursor keys but no tab key.
+  This function should be called whenever keyboard navigation within a single
+  widget hits a boundary.
 
-  Whenever the default handler returns @em{true}, it also calls the
-  @fun{gtk:widget-error-bell} function to notify the user of the failed
+  The return value of this function should be interpreted in a way similar to
+  the return value of @fun{gtk:widget-child-focus} function. When @em{true} is
+  returned, stay in the widget, the failed keyboard navigation is OK and/or
+  there is nowhere we can/should move the focus to. When @em{false} is returned,
+  the caller should continue with keyboard navigation outside the widget, for
+  example, by calling the @fun{gtk:widget-child-focus} function on the toplevel
+  of the widget.
+
+  The default @code{keynav-failed} handler returns @em{false} for the
+  @code{:tab-forward} and @code{:tab-backward} values of the
+  @symbol{gtk:direction-type} enumeration. For the other values of the
+  @symbol{gtk:direction-type} enumeration it returns @em{true}.
+
+  Whenever the default handler returns @em{true}, it also calls
+  the @fun{gtk:widget-error-bell} function to notify the user of the failed
   keyboard navigation.
 
-  A use case for providing an own implementation of \"keynav-failed\", either
-  by connecting to it or by overriding it, would be a row of @class{gtk:entry}
-  widgets where the user should be able to navigate the entire row with the
-  cursor keys, as e.g. known from user interfaces that require entering license
-  keys.
+  A use case for providing an own implementation of the @code{\"keynav-failed\"}
+  handler (either by connecting to it or by overriding it) would be a row of
+  @class{gtk:entry} widgets where the user should be able to navigate the
+  entire row with the cursor keys, as for example, known from user interfaces
+  that require entering license keys.
   @see-class{gtk:widget}
+  @see-class{gtk:entry}
+  @see-symbol{gtk:direction-type}
   @see-function{gtk:widget-child-focus}
-  @see-function{gtk:widget-error-bell}
-  @see-function{gtk:settings-gtk-keynav-cursor-only}"
+  @see-function{gtk:widget-error-bell}"
   (widget (g:object widget))
   (direction direction-type))
 
@@ -3790,15 +3829,13 @@ lambda (widget)    :run-last
 (cffi:defcfun ("gtk_tooltip_trigger_tooltip_query" widget-trigger-tooltip-query)
     :void
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{#2024-6-8}
   @argument[widget]{a @class{gtk:widget} object}
   @begin{short}
     Triggers a tooltip query on the display where the toplevel of @arg{widget}
     is located.
   @end{short}
-  See the @fun{gtk:tooltip-trigger-tooltip-query} function for more information.
-  @see-class{gtk:widget}
-  @see-function{gtk:tooltip-trigger-tooltip-query}"
+  @see-class{gtk:widget}"
   (widget (g:object widget)))
 
 (export 'widget-trigger-tooltip-query)
@@ -4255,7 +4292,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_sensitive" widget-is-sensitive) :boolean
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{#2024-6-8}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if @arg{widget} is effectively sensitive.}
   @begin{short}
@@ -4274,7 +4311,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_visible" widget-is-visible) :boolean
  #+liber-documentation
- "@version{#2023-7-26}
+ "@version{#2024-6-8}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if @arg{widget} and all its parents are visible.}
   @begin{short}
@@ -4391,7 +4428,7 @@ lambda (widget)    :run-last
 
 (cffi:defcfun ("gtk_widget_is_drawable" widget-is-drawable) :boolean
  #+liber-documentation
- "@version{#2021-9-20}
+ "@version{#2024-6-8}
   @argument[widget]{a @class{gtk:widget} object}
   @return{@em{True} if @arg{widget} is drawable, @em{false} otherwise.}
   @begin{short}
@@ -4402,74 +4439,6 @@ lambda (widget)    :run-last
   (widget (g:object widget)))
 
 (export 'widget-is-drawable)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_realized
-;;; gtk_widget_set_realized
-;;; ----------------------------------------------------------------------------
-
-;; TODO: gtk_widget_set_realized has gone.
-
-(defun (setf widget-realized) (realized widget)
-  (cffi:foreign-funcall "gtk_widget_set_realized"
-                        (g:object widget) widget
-                        :boolean realized
-                        :void)
-  realized)
-
-(cffi:defcfun ("gtk_widget_get_realized" widget-realized) :boolean
- #+liber-documentation
- "@version{#2023-9-18}
-  @syntax{(gtk:widget-realized widget) => realized}
-  @syntax{(setf (gtk:widget-realized widget) realized)}
-  @argument[widget]{a @class{gtk:widget} object}
-  @argument[realized]{@em{true} to mark the widget as realized}
-  @begin{short}
-    The @fun{gtk:widget-realized} function determines whether the widget is
-    realized.
-  @end{short}
-  The @setf{gtk:widget-realized} function marks the widget as being realized.
-
-  This function should only ever be called in a derived \"realize\" or
-  \"unrealize\" implementation of the widget.
-  @see-class{gtk:widget}"
-  (widget (g:object widget)))
-
-(export 'widget-realized)
-
-;;; ----------------------------------------------------------------------------
-;;; gtk_widget_get_mapped
-;;; gtk_widget_set_mapped
-;;; ----------------------------------------------------------------------------
-
-;; TODO: gtk_widget_set_mapped has gone.
-
-(defun (setf widget-mapped) (mapped widget)
-  (cffi:foreign-funcall "gtk_widget_set_mapped"
-                        (g:object widget) widget
-                        :boolean mapped
-                        :void)
-  mapped)
-
-(cffi:defcfun ("gtk_widget_get_mapped" widget-mapped) :boolean
- #+liber-documentation
- "@version{#2023-9-18}
-  @syntax{(gtk:widget-mapped widget) => mapped}
-  @syntax{(setf (gtk:widget-mapped widget) mapped)}
-  @argument[widget]{a @class{gtk:widget} object}
-  @argument[mapped]{@em{true} to mark the widget as mapped}
-  @begin{short}
-    The @fun{gtk:widget-mapped} function determines whether the widget is
-    mapped.
-  @end{short}
-  The @setf{gtk:widget-mapped} function marks the widget as being mapped.
-
-  This function should only ever be called in a derived \"map\" or \"unmap\"
-  implementation of the widget.
-  @see-class{gtk:widget}"
-  (widget (g:object widget)))
-
-(export 'widget-mapped)
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_widget_measure
