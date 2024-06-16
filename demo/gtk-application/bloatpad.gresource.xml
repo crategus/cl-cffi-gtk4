@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/crategus/bloatpad">
+    <file>bloatpad-menus.ui</file>
+    <file>bloatpad-help-overlay.ui</file>
+    <file>format-justify-center-symbolic.symbolic.png</file>
+    <file>format-justify-left-symbolic.symbolic.png</file>
+    <file>format-justify-right-symbolic.symbolic.png</file>
+    <file>view-fullscreen-symbolic.symbolic.png</file>
+    <file>view-restore-symbolic.symbolic.png</file>
+  </gresource>
+</gresources>

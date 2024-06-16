@@ -1,6 +1,6 @@
-;;;; Example Sunny
+;;;; Application Sunny
 ;;;;
-;;;; 2024-3-25
+;;;; 2024-6-2
 
 (in-package :gtk4-application)
 
@@ -28,26 +28,15 @@
   </menu>
 </interface>")
 
-(defun clear-buffer (buffer)
-  (multiple-value-bind (start end)
-      (gtk:text-buffer-bounds buffer)
-    (gtk:text-buffer-delete buffer start end)))
-
-(defun load-file-into-buffer (buffer filename)
-  (with-open-file (stream filename)
-    (clear-buffer buffer)
-    (do ((line (read-line stream nil)
-               (read-line stream nil)))
-        ((null line))
-      (gtk:text-buffer-insert buffer :cursor line)
-      (gtk:text-buffer-insert buffer :cursor (format nil "~%")))))
-
-(defclass sunny (gtk:application)
-  ()
-  (:metaclass gobject:gobject-class))
+(gobject:define-g-object-subclass "Sunny" sunny
+  (:superclass gtk:application
+   :export t
+   :interfaces ())
+  nil)
 
 (defun new-sunny-window (application filename)
-  (let* ((textview (make-instance 'gtk:text-view))
+  (let* ((textview (make-instance 'gtk:text-view
+                                  :monospace t))
          (scrolled (make-instance 'gtk:scrolled-window
                                   :child textview
                                   :hexpand t
@@ -63,12 +52,10 @@
                                 :default-width 480
                                 :default-height 320)))
     ;; Load the file into the buffer
-    (when filename
-      ;; TODO: Is this correct???
-      (let ((buffer (gtk:text-view-buffer textview))
-            (path (glib-sys:sys-path filename "gtk4-application")))
-        (load-file-into-buffer buffer path)))
-    ;; Show the window
+    (when (and filename (probe-file filename))
+      (let ((buffer (gtk:text-view-buffer textview)))
+        (gtk:text-buffer-load-file buffer filename)))
+    ;; Present the window
     (gtk:window-present window)))
 
 (defun sunny-action-new (application action parameter)
@@ -76,13 +63,14 @@
   (g:application-activate application))
 
 (defun sunny-action-about (application action parameter)
-  (declare (ignore application action parameter))
-  (gtk:show-about-dialog nil
-                         :modal t
-                         :program-name "Sunny"
-                         :title "About Sunny"
-                         :logo-icon-name "sunny"
-                         :comments "A cheap Bloatpad clone."))
+  (declare (ignore action parameter))
+  (let ((parent (gtk:application-active-window application)))
+    (gtk:show-about-dialog parent
+                           :modal t
+                           :program-name "Sunny"
+                           :title "About Sunny"
+                           :logo-icon-name "sunny"
+                           :comments "A cheap Bloatpad clone.")))
 
 (defun sunny-action-quit (application action parameter)
   (declare (ignore action parameter))
@@ -91,7 +79,7 @@
       (gtk:window-destroy window))))
 
 (defun sunny (&rest argv)
-  (let ((argv (cons "sunny" (if argv argv (uiop:command-line-arguments))))
+  (let ((argv (cons "sunny" (or argv (uiop:command-line-arguments))))
         ;; Create the application
         (app (make-instance 'sunny
                             :application-id "com.crategus.sunny"
@@ -103,20 +91,17 @@
                                      #'(lambda (action parameter)
                                          (sunny-action-about application
                                                              action
-                                                             parameter))
-                                     nil nil nil)
+                                                             parameter)))
                                (list "quit"
                                      #'(lambda (action parameter)
                                          (sunny-action-quit application
                                                             action
-                                                            parameter))
-                                     nil nil nil)
+                                                            parameter)))
                                (list "new"
                                      #'(lambda (action parameter)
                                          (sunny-action-new application
                                                            action
-                                                           parameter))
-                                     nil nil)))
+                                                           parameter)))))
                 (builder (make-instance 'gtk:builder)))
           ;; Set the application name
           (unless (g:application-name)
@@ -139,15 +124,14 @@
           (setf (gtk:application-accels-for-action application "app.quit")
                 "<Control>q")
           (setf (gtk:application-accels-for-action application "app.about")
-                "F1")
-          )))
+                "F1"))))
     ;; Connect signal "open" to the application
     (g:signal-connect app "open"
         (lambda (application files n-files hint)
           (declare (ignore hint))
           (dotimes (i n-files)
             (let* ((file (cffi:mem-aref files '(g:object g:file) i))
-                   (filename (g:file-basename file)))
+                   (filename (g:file-get-parse-name file)))
               (new-sunny-window application filename)))))
     ;; Connect signal "activate" to the application
     (g:signal-connect app "activate"

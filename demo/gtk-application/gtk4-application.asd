@@ -2,6 +2,7 @@
 
 (asdf:defsystem :gtk4-application
   :author "Dieter Kaiser"
+  :version "0.1.0"
   :license "MIT"
   :serial t
   :depends-on (:cl-cffi-gtk4)
@@ -14,6 +15,7 @@
                (:file "application-resources")
                (:file "application-register")
                (:file "sunny")
+               (:file "bloatpad")
               ))
 
-;;; 2024-5-24
+;;; 2024-5-27
