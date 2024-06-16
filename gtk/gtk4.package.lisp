@@ -856,7 +856,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Application support]{section}
     @begin[GtkApplication]{subsection}
-      Application class.
       @about-symbol{application-inhibit-flags}
       @about-class{application}
       @about-generic{application-active-window}
@@ -876,7 +875,6 @@ GtkCellRenderer         GtkWidget
       @about-function{application-actions-for-accel}
     @end{subsection}
     @begin[GtkApplicationWindow]{subsection}
-      A @class{gtk:window} subclass with @class{gtk:application} support.
       @about-class{application-window}
       @about-generic{application-window-show-menubar}
       @about-function{application-window-new}
@@ -886,13 +884,10 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Interface builder]{section}
     @begin[GtkBuildable]{subsection}
-      Interface for objects that can be built by a @class{gtk:builder} UI
-      description.
       @about-class{buildable}
       @about-function{buildable-buildable-id}
     @end{subsection}
     @begin[GtkBuilder]{subsection}
-      Build an interface from an XML UI definition.
       @about-class{builder}
       @about-generic{builder-current-object}
       @about-generic{builder-scope}
@@ -1254,7 +1249,6 @@ GtkCellRenderer         GtkWidget
       @about-function{header-bar-remove}
     @end{subsection}
     @begin[GtkOverlay]{subsection}
-      A container which overlays widgets on top of each other.
       @about-class{overlay}
       @about-generic{overlay-child}
       @about-function{overlay-new}
@@ -2108,7 +2102,6 @@ GtkCellRenderer         GtkWidget
       @about-function{text-iter-order}
     @end{subsection}
     @begin[GtkTextTag]{subsection}
-      A tag that can be applied to text in a @class{gtk:text-buffer} object.
       @about-class{text-tag}
       @about-generic{text-tag-accumulative-margin}
       @about-generic{text-tag-allow-breaks}
@@ -2225,7 +2218,6 @@ GtkCellRenderer         GtkWidget
       @about-function{text-mark-buffer}
     @end{subsection}
     @begin[GtkTextBuffer]{subsection}
-      Stores attributed text for display in a @class{gtk:text-view} widget.
       @about-class{text-buffer}
       @about-generic{text-buffer-can-redo}
       @about-generic{text-buffer-can-undo}
@@ -2235,6 +2227,7 @@ GtkCellRenderer         GtkWidget
       @about-generic{text-buffer-tag-table}
       @about-generic{text-buffer-text}
       @about-function{text-buffer-new}
+      @about-function{text-buffer-load-file}
       @about-function{text-buffer-line-count}
       @about-function{text-buffer-char-count}
       @about-function{text-buffer-insert}
@@ -2551,13 +2544,11 @@ GtkCellRenderer         GtkWidget
       @about-function{scrollable-border}
     @end{subsection}
     @begin[GtkScrollbar]{subsection}
-      A Scrollbar.
       @about-class{scrollbar}
       @about-generic{scrollbar-adjustment}
       @about-function{scrollbar-new}
     @end{subsection}
     @begin[GtkScrolledWindow]{subsection}
-      Adds scrollbars to its child widget.
       @about-symbol{policy-type}
       @about-symbol{corner-type}
       @about-class{scrolled-window}
@@ -2584,7 +2575,6 @@ GtkCellRenderer         GtkWidget
       @about-function{scrolled-window-unset-placement}
     @end{subsection}
     @begin[GtkViewport]{subsection}
-      An adapter which makes widgets scrollable.
       @about-class{viewport}
       @about-generic{viewport-child}
       @about-generic{viewport-scroll-to-focus}
@@ -2735,8 +2725,10 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-hide}
       @about-function{widget-map}
       @about-function{widget-unmap}
+      @about-function{widget-mapped}
       @about-function{widget-realize}
       @about-function{widget-unrealize}
+      @about-function{widget-realized}
       @about-function{widget-queue-draw}
       @about-function{widget-queue-resize}
       @about-function{widget-queue-allocate}
@@ -2772,7 +2764,6 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-font-map}
       @about-function{widget-create-pango-layout}
       @about-function{widget-set-cursor-from-name}
-      @about-function{widget-mnemonic-activate}
       @about-function{widget-class-accessible-role}
       @about-function{widget-child-focus}
       @about-function{widget-child-visible}
@@ -2785,6 +2776,7 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-list-mnemonic-labels}
       @about-function{widget-add-mnemonic-label}
       @about-function{widget-remove-mnemonic-label}
+      @about-function{widget-mnemonic-activate}
       @about-function{widget-error-bell}
       @about-function{widget-keynav-failed}
       @about-function{widget-trigger-tooltip-query}
@@ -2807,8 +2799,6 @@ GtkCellRenderer         GtkWidget
       @about-function{widget-unset-state-flags}
       @about-function{widget-has-visible-focus}
       @about-function{widget-is-drawable}
-      @about-function{widget-realized}
-      @about-function{widget-mapped}
       @about-function{widget-measure}
       @about-function{widget-snapshot-child}
       @about-function{widget-next-sibling}

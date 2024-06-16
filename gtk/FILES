@@ -332,8 +332,8 @@ Deprecated
   gtk4.tree-model.lisp                  GtkTreeModel                  GTK 4.12 &
   gtk4.tree-selection.lisp              GtkTreeSelection              GTK 4.12
   gtk4.tree-view-column.lisp            GtkTreeViewColumn             GTK 4.12
-  gtk4.tree-view.lisp                   GtkTreeView                   GTK 4.12&.
-  gtk4.tree-view-dnd.lisp               GtkTreeView Drag & Drop       GTK 4.12&.
+  gtk4.tree-view.lisp                   GtkTreeView                   GTK 4.12
+  gtk4.tree-view-dnd.lisp               GtkTreeView Drag & Drop       GTK 4.12
 
   gtk4.cell-layout.lisp                 GtkCellLayout                 GTK 4.12 .
   gtk4.cell-view.lisp                   GtkCellView                   GTK 4.12 .
