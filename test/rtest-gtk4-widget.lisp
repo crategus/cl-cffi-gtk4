@@ -17,8 +17,12 @@
   (is (eq 'gtk:requisition
           (glib:symbol-for-gtype "GtkRequisition"))))
 
+;;;     gtk_requisition_new
+
 (test gtk-requisition-new
   (is (typep (gtk:requisition-new) 'gtk:requisition)))
+
+;;;     gtk_requisition_copy
 
 (test gtk-requisition-copy
   (let ((requisition (gtk:requisition-new)))
@@ -249,14 +253,80 @@
 ;;;     gtk_widget_unparent
 ;;;     gtk_widget_show
 ;;;     gtk_widget_hide
+
 ;;;     gtk_widget_map
 ;;;     gtk_widget_unmap
+;;;     gtk_widget_get_mapped
+
+;; TODO: Can we avoid the warnings from GSK?
+
+;; Gsk-Message: 17:32:52.746: Failed to realize renderer of type
+;; 'GskNglRenderer' for surface 'GdkWaylandToplevel':
+;; Es wird versucht EGL zu verwenden, aber X11 GLX ist bereits in Verwendung
+
+;; Gsk-Message: 17:32:52.746: Failed to realize renderer of type
+;; 'GskGLRenderer' for surface 'GdkWaylandToplevel':
+;;; Es wird versucht EGL zu verwenden, aber X11 GLX ist bereits in Verwendung
+
+(test gtk-widget-map/unmap
+  (let* ((button (gtk:button-new-with-label "label"))
+         (window (make-instance 'gtk:window
+                                :child button)))
+    (is (eq window (gtk:widget-root button)))
+    (is-false (gtk:widget-realized button))
+    (is-false (gtk:widget-mapped button))
+    ;; Map button
+    (is-false (gtk:widget-map button))
+    (is-true (gtk:widget-realized button))
+    (is-true (gtk:widget-mapped button))
+    ;; Unmap button
+    (is-false (gtk:widget-unmap button))
+    (is-true (gtk:widget-realized button))
+    (is-false (gtk:widget-mapped button))))
+
 ;;;     gtk_widget_realize
 ;;;     gtk_widget_unrealize
+;;;     gtk_widget_get_realized
+
+;; TODO: Can we avoid the warnings from GSK?
+
+;; Gsk-Message: 17:32:52.753: Failed to realize renderer of type
+;;; 'GskNglRenderer' for surface 'GdkWaylandToplevel':
+;;; Es wird versucht EGL zu verwenden, aber X11 GLX ist bereits in Verwendung
+
+;;; Gsk-Message: 17:32:52.753: Failed to realize renderer of type
+;; 'GskGLRenderer' for surface 'GdkWaylandToplevel':
+;;; Es wird versucht EGL zu verwenden, aber X11 GLX ist bereits in Verwendung
+
+(test gtk-widget-realize/unrealize
+  (let* ((button (gtk:button-new-with-label "label"))
+         (window (make-instance 'gtk:window
+                                :child button)))
+    (is (eq window (gtk:widget-root button)))
+    (is-false (gtk:widget-realized button))
+    (is-false (gtk:widget-mapped button))
+    ;; Realize button
+    (is-false (gtk:widget-realize button))
+    (is-true (gtk:widget-realized button))
+    (is-false (gtk:widget-mapped button))
+    ;; Unrealize button
+    (is-false (gtk:widget-unrealize button))
+    (is-false (gtk:widget-realized button))
+    (is-false (gtk:widget-mapped button))))
+
 ;;;     gtk_widget_queue_draw
 ;;;     gtk_widget_queue_resize
 ;;;     gtk_widget_queue_allocate
+
 ;;;     gtk_widget_get_frame_clock
+
+(test gtk-widget-frame-clock
+  (let* ((button (gtk:button-new-with-label "label"))
+         (window (make-instance 'gtk:window
+                                :child button)))
+    (declare (ignore window))
+    (is-false (gtk:widget-realize button))
+    (is (typep (gtk:widget-frame-clock button) 'gdk:frame-clock))))
 
 ;;;     GtkTickCallback
 
@@ -294,8 +364,18 @@
 
 ;;;     gtk_widget_grab_focus
 ;;;     gtk_widget_get_native
+
 ;;;     gtk_widget_get_ancestor
 ;;;     gtk_widget_is_ancestor
+
+(test gtk-widget-ancestor/is-ancestor
+  (let ((box (make-instance 'gtk:box))
+        (button (make-instance 'gtk:button)))
+    (is-false (gtk:box-append box button))
+    (is (eq box (gtk:widget-ancestor button "GtkBox")))
+    (is-true (gtk:widget-is-ancestor button box))
+    (is-false (gtk:widget-is-ancestor box button))))
+
 ;;;     gtk_widget_translate_coordinates
 ;;;     gtk_widget_add_controller
 ;;;     gtk_widget_remove_controller
@@ -303,15 +383,66 @@
 ;;;     gtk_widget_set_direction
 ;;;     gtk_widget_get_default_direction
 ;;;     gtk_widget_set_default_direction
+
 ;;;     gtk_widget_create_pango_context
+
+(test gtk-widget-create-pango-context
+  (let ((button (make-instance 'gtk:button))
+        context)
+    (is (typep (setf context
+                     (gtk:widget-create-pango-context button)) 'pango:context))
+    (is (typep (pango:context-font-map context) 'pango:font-map))
+    #-windows
+    (is (string= "Ubuntu 14.667px"
+                 (pango:font-description-to-string
+                     (pango:context-font-description context))))
+    #+windows
+    (is (string= "Segoe UI 12px"
+                 (pango:font-description-to-string
+                     (pango:context-font-description context))))
+    (is (eq :ltr (pango:context-base-dir context)))))
+
 ;;;     gtk_widget_get_pango_context
+
+(test gtk-widget-pango-context
+  (let ((button (make-instance 'gtk:button))
+        context)
+    (is (typep (setf context
+                     (gtk:widget-pango-context button)) 'pango:context))
+    (is (typep (pango:context-font-map context) 'pango:font-map))
+    #-windows
+    (is (string= "Ubuntu 14.667px"
+                 (pango:font-description-to-string
+                     (pango:context-font-description context))))
+    #+windows
+    (is (string= "Segoe UI 12px"
+                 (pango:font-description-to-string
+                     (pango:context-font-description context))))
+    (is (eq :ltr (pango:context-base-dir context)))))
+
 ;;;     gtk_widget_get_font_options
 ;;;     gtk_widget_set_font_options
 ;;;     gtk_widget_get_font_map
 ;;;     gtk_widget_set_font_map
+
 ;;;     gtk_widget_create_pango_layout
+
+(test gtk-widget-create-pango-layout.1
+  (let ((button (make-instance 'gtk:button))
+        layout)
+    (is (typep (setf layout
+                     (gtk:widget-create-pango-layout button nil)) 'pango:layout))
+    (is (string= "" (pango:layout-text layout)))))
+
+(test gtk-widget-create-pango-layout.1
+  (let ((button (make-instance 'gtk:button))
+        layout)
+    (is (typep (setf layout
+                     (gtk:widget-create-pango-layout button "text"))
+               'pango:layout))
+    (is (string= "text" (pango:layout-text layout)))))
+
 ;;;     gtk_widget_set_cursor_from_name
-;;;     gtk_widget_mnemonic_activate
 
 ;;;     gtk_widget_class_get_accessible_role
 ;;;     gtk_widget_class_set_accessible_role
@@ -326,17 +457,74 @@
 ;;;     gtk_widget_child_focus
 ;;;     gtk_widget_get_child_visible
 ;;;     gtk_widget_set_child_visible
+
 ;;;     gtk_widget_get_settings
+
+(test gtk-widget-settings
+  (let ((window (make-instance 'gtk:window))
+        (button (gtk:button-new-with-label "label")))
+    (is (eq button (setf (gtk:window-child window) button)))
+    (is (typep (gtk:widget-settings button) 'gtk:settings))
+    (is (eq (gtk:settings-default) (gtk:widget-settings button)))))
+
 ;;;     gtk_widget_get_clipboard
 ;;;     gtk_widget_get_primary_clipboard
 ;;;     gtk_widget_get_display
 ;;;     gtk_widget_get_size_request
 ;;;     gtk_widget_set_size_request
+
 ;;;     gtk_widget_list_mnemonic_labels
+
+(test gtk-widget-list-mnemonic-labels
+  (let ((button (gtk:button-new-with-mnemonic "_New")))
+    (is (every (lambda (x) (typep x 'gtk:label))
+               (gtk:widget-list-mnemonic-labels button)))))
+
 ;;;     gtk_widget_add_mnemonic_label
 ;;;     gtk_widget_remove_mnemonic_label
+
+(test gtk-widget-add-mnemonic-label
+  (let ((button (make-instance 'gtk:button))
+        (label (gtk:label-new-with-mnemonic "_New")))
+    (is-false (gtk:widget-add-mnemonic-label button label))
+    (is (eq label (first (gtk:widget-list-mnemonic-labels button))))
+    (is-false (gtk:widget-remove-mnemonic-label button label))
+    (is-false (gtk:widget-list-mnemonic-labels button))))
+
+;;;     gtk_widget_mnemonic_activate
+
+(test gtk-widget-mnemonic-activate
+  (let ((button (gtk:button-new-with-mnemonic "_New"))
+        (msg nil))
+    (g:signal-connect button "mnemonic-activate"
+        (lambda (widget cycling)
+          (declare (ignore widget))
+          (is-false cycling)
+          (setf msg "in mnemonic-activate")
+          gdk:+event-stop+))
+    (is-true (gtk:widget-mnemonic-activate button nil))
+    (is (string= "in mnemonic-activate" msg))))
+
 ;;;     gtk_widget_error_bell
+
+(test gtk-widget-error-bell
+  (let ((button (gtk:button-new)))
+    (is-false (gtk:widget-error-bell button))))
+
 ;;;     gtk_widget_keynav_failed
+
+(test gtk-widget-keynav-failed
+  (let ((entry (make-instance 'gtk:entry))
+        (msg nil))
+    (g:signal-connect entry "keynav-failed"
+        (lambda (widget direction)
+          (declare (ignore widget))
+          (is (eq :up direction))
+          (setf msg "in keynav-failed")
+          gdk:+event-stop+))
+    (is-true (gtk:widget-keynav-failed entry :up))
+    (is (string= "in keynav-failed" msg))))
+
 ;;;     gtk_widget_trigger_tooltip_query
 ;;;     gtk_widget_get_allocated_width
 ;;;     gtk_widget_get_allocated_height
@@ -365,8 +553,6 @@
     (is-false (gtk:widget-has-visible-focus button))))
 
 ;;;     gtk_widget_is_drawable
-;;;     gtk_widget_get_realized
-;;;     gtk_widget_get_mapped
 
 ;;;     gtk_widget_measure
 
@@ -483,9 +669,6 @@
     (is (stringp (setf cssid (gtk:widget-add-provider widget provider))))
     (is-false (gtk:widget-remove-provider widget cssid))))
 
-;;;     gtk_requisition_new
-;;;     gtk_requisition_copy
-;;;     gtk_requisition_free
 ;;;     gtk_widget_get_request_mode
 ;;;     gtk_widget_get_preferred_size
 ;;;     gtk_distribute_natural_allocation
@@ -516,4 +699,4 @@
 ;;;     gtk_widget_class_query_action
 ;;;     gtk_widget_action_set_enabled
 
-;;; 2024-5-25
+;;; 2024-6-3

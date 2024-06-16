@@ -16,17 +16,17 @@
 
 ;;;     gtk_get_major_version
 
-(test major-version
+(test gtk-major-version
   (is (= 4 (gtk:major-version))))
 
 ;;;     gtk_get_minor_version
 
-(test minor-version
+(test gtk-minor-version
   (is (<= 6 (gtk:minor-version))))
 
 ;;;     gtk_get_micro_version
 
-(test micro-version
+(test gtk-micro-version
   (is (<= 0 (gtk:micro-version))))
 
 ;;;     gtk_get_binary_age                                 not implemented
@@ -34,9 +34,9 @@
 
 ;;;     gtk_check_version
 
-(test check-version
+(test gtk-check-version
   (is (string= "GTK version too old (major mismatch)"
                (gtk:check-version 5 0 0)))
   (is-false (gtk:check-version 4 0 0)))
 
-;;; --- 2023-3-24 --------------------------------------------------------------
+;;; 2024-6-10

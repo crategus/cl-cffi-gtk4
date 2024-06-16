@@ -2,6 +2,52 @@
 
 (in-suite gtk-test)
 
+;;; ----------------------------------------------------------------------------
+
+;; Finally, check the fundamental types known to GTK
+(test g-type-fundamentals
+  (let* ((glib::*warn-unknown-gtype* nil)
+         (nmax (cffi:foreign-funcall "g_type_fundamental_next" :size))
+         (gtypes (iter (for x from 1 below nmax)
+                       (for gtype = (g:gtype (ash x 2)))
+                       (when gtype (collect gtype)))))
+  (is (equal '("void"
+               "GInterface"
+               "gchar"
+               "guchar"
+               "gboolean"
+               "gint"
+               "guint"
+               "glong"
+               "gulong"
+               "gint64"
+               "guint64"
+               "GEnum"
+               "GFlags"
+               "gfloat"
+               "gdouble"
+               "gchararray"
+               "gpointer"
+               "GBoxed"
+               "GParam"
+               "GObject"
+               "GVariant"
+               "GtkExpression"
+               "GdkEvent"
+               "GskRenderNode"
+               "GstIntRange"
+               "GstInt64Range"
+               "GstDoubleRange"
+               "GstFractionRange"
+               "GstFraction"
+               "GstBitmask"
+               "GstFlagSet"
+               "GstValueList"
+               "GstValueArray")
+             (mapcar #'glib:gtype-name gtypes)))))
+
+;;; ----------------------------------------------------------------------------
+
 (test gtk-test-finished
   (cond (*first-run-gtk-test*
          (setf *first-run-gtk-test* nil)
@@ -9,4 +55,4 @@
         (t
          (format t "~%Second or more run of the gtk-test suite finished.~%"))))
 
-;;; --- 2023-8-23 --------------------------------------------------------------
+;;; 2024-6-10

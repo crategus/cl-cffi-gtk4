@@ -59,9 +59,9 @@
 
 (test gtk-popover-menu-properties
   (let ((popover (make-instance 'gtk:popover-menu)))
-    (is-fals (gtk:popover-menu-flags popover))
-    (is-fals (gtk:popover-menu-menu-model popover))
-    (is-fals (gtk:popover-menu-visible-submenu popover))))
+    (is-false (gtk:popover-menu-flags popover))
+    (is-false (gtk:popover-menu-menu-model popover))
+    (is-false (gtk:popover-menu-visible-submenu popover))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -70,4 +70,4 @@
 ;;;     gtk_popover_menu_add_child
 ;;;     gtk_popover_menu_remove_child
 
-;;; 2024-5-26
+;;; 2024-5-28

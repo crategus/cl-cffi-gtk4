@@ -10,7 +10,7 @@
 (test gtk-font-button-class
   ;; Check type
   (is (g:type-is-object "GtkFontButton"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:font-button
           (glib:symbol-for-gtype "GtkFontButton")))
   ;; Check type initializer
@@ -61,13 +61,31 @@
   (let* ((gtk-init:*gtk-warn-deprecated* nil)
          (button (make-instance 'gtk:font-button)))
     (is-true (gtk:font-button-modal button))
+    #-windows
     (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
+    #+windows
+    (is (string= "Eine Schrift wählen" (gtk:font-button-title button)))
     (is-false (gtk:font-button-use-font button))
     (is-false (gtk:font-button-use-size button))))
 
 ;;; --- Signals ----------------------------------------------------------------
 
 ;;;     font-set
+
+(test gtk-font-button-font-set-signal
+  (let* ((name "font-set") (gtype "GtkFontButton")
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (string= gtype (g:type-name (g:signal-query-owner-type query))))
+    ;; Check flags
+    (is (equal '(:RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
 
 ;;; --- Functions --------------------------------------------------------------
 
@@ -83,7 +101,10 @@
   (let* ((gtk-init:*gtk-warn-deprecated* nil)
          (button (gtk:font-button-new-with-font "Sans Italic 12")))
     (is-true (gtk:font-button-modal button))
+    #-windows
     (is (string= "Wählen Sie eine Schrift" (gtk:font-button-title button)))
+    #+windows
+    (is (string= "Eine Schrift wählen" (gtk:font-button-title button)))
     (is-false (gtk:font-button-use-font button))
     (is-false (gtk:font-button-use-size button))
 
@@ -95,4 +116,4 @@
     (is-false (gtk:font-chooser-preview-text button))
     (is-true (gtk:font-chooser-show-preview-entry button))))
 
-;;; 2024-5-22
+;;; 2024-6-1

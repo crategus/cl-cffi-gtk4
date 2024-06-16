@@ -37,6 +37,17 @@
                      buffer contains multibyte characters, bad things will ~
                      happen."))
 
+(defvar *some-lines*
+        (format nil
+                "One of the important things to remember about text in
+GTK is that it is in the UTF-8 encoding. This means that
+one character can be encoded as multiple bytes. Character
+counts are usually referred to as offsets, while byte
+counts are called indexes. If you confuse these two,
+things will work fine with ASCII, but as soon as your
+buffer contains multibyte characters, bad things will
+happen."))
+
 (defvar *lorem-ipsum-short*
         (format nil "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ~
 Nunc scelerisque aliquam dui id ullamcorper. Sed placerat felis sed aliquam ~

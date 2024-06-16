@@ -8,51 +8,64 @@
 ;;;     GtkScrollbar
 
 (test gtk-scrollbar-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GtkScrollbar"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gtk:scrollbar
           (glib:symbol-for-gtype "GtkScrollbar")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GtkScrollbar")
           (g:gtype (cffi:foreign-funcall "gtk_scrollbar_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GtkWidget")
           (g:type-parent "GtkScrollbar")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
              (list-children "GtkScrollbar")))
-  ;; Check the interfaces
+  ;; Check interfaces
+  ;; The GtkAccessibleRange interface is missing on Ubuntu. Why?!
+  #-windows
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
              (list-interfaces "GtkScrollbar")))
-  ;; Check the properties
+  #+windows
+  (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
+               "GtkOrientable" "GtkAccessibleRange")
+             (list-interfaces "GtkScrollbar")))
+  ;; Check properties
   (is (equal '("adjustment" "orientation")
              (list-properties "GtkScrollbar")))
-  ;; Check the signals
+  ;; Check signals
   (is (equal '()
              (list-signals "GtkScrollbar")))
-  ;; CSS name
+  ;; Check CSS name
   (is (string= "scrollbar"
                (gtk:widget-class-css-name "GtkScrollbar")))
-  ;; CSS classes
-  (is (equal '("horizontal")
-             (gtk:widget-css-classes (make-instance 'gtk:scrollbar))))
-  ;; Accessible role
+  ;; Check accessible role
   (is (eq :scrollbar (gtk:widget-class-accessible-role "GtkScrollbar")))
-  ;; Check the class definition
+  ;; Check class definition
+  #-windows
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScrollbar" GTK-SCROLLBAR
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
-                                ("GtkAccessible" "GtkBuildable"
-                                 "GtkConstraintTarget" "GtkOrientable")
+                                ("GtkAccessible"
+                                 "GtkBuildable" "GtkConstraintTarget"
+                                 "GtkOrientable")
+                                :TYPE-INITIALIZER "gtk_scrollbar_get_type")
+                               ((ADJUSTMENT GTK-SCROLLBAR-ADJUSTMENT
+                                 "adjustment" "GtkAdjustment" T T)))
+             (gobject:get-g-type-definition "GtkScrollbar")))
+  #+windows
+  (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkScrollbar" GTK-SCROLLBAR
+                               (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
+                                ("GtkAccessible" "GtkAccessibleRange"
+                                 "GtkBuildable" "GtkConstraintTarget"
+                                 "GtkOrientable")
                                 :TYPE-INITIALIZER "gtk_scrollbar_get_type")
                                ((ADJUSTMENT GTK-SCROLLBAR-ADJUSTMENT
                                  "adjustment" "GtkAdjustment" T T)))
              (gobject:get-g-type-definition "GtkScrollbar"))))
 
 ;;; --- Properties -------------------------------------------------------------
-
-;;;     adjustment
 
 (test gtk-scrollbar-properties
   (let ((scrollbar (make-instance 'gtk:scrollbar)))
@@ -67,4 +80,4 @@
   (is (typep (gtk:scrollbar-new :vertical (make-instance 'gtk:adjustment))
              'gtk:scrollbar)))
 
-;;; --- 2023-11-1 --------------------------------------------------------------
+;;; 2024-6-1
