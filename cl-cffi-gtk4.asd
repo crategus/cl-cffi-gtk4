@@ -484,7 +484,7 @@
   :version "0.8.0"
   :author "Dieter Kaiser"
   :license "MIT"
-  :depends-on (:cl-cffi-gtk4 :fiveam :iterate)
+  :depends-on (:cl-cffi-gtk4 :cl-cffi-glib/test :fiveam :iterate)
   :perform (test-op (o c)
                (uiop:symbol-call :fiveam :run!
                                  (uiop:find-symbol* :gtk-test
@@ -618,6 +618,7 @@
      (:file "rtest-gtk4-drop-down")
 
      ;; GTK Core
+     (:file "rtest-gtk4-version")
      (:file "rtest-gtk4-enumerations")
      (:file "rtest-gtk4-main-loop")
 ;     (:file "gtk4.mount-operation")
