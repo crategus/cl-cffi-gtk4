@@ -1958,13 +1958,12 @@
 ;;; gtk_settings_get_default
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_settings_get_default" settings-default)
-    (g:object settings)
+(cffi:defcfun ("gtk_settings_get_default" settings-default) (g:object settings)
  #+liber-documentation
- "@version{2023-8-30}
+ "@version{2024-6-2}
   @begin{return}
-    A @class{gtk:settings} object. If there is no default display, then returns
-    @code{nil}.
+    The @class{gtk:settings} object. If there is no default display, then
+    returns @code{nil}.
   @end{return}
   @begin{short}
     Gets the @class{gtk:settings} object for the default GDK display, creating

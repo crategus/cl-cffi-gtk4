@@ -2,7 +2,7 @@
 ;;; gtk4.application.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -576,7 +576,7 @@ lambda (application window)    :run-first
 (cffi:defcfun ("gtk_application_get_windows" application-windows)
     (g:list-t (g:object window) :free-from-foreign nil)
  #+liber-documentation
- "@version{2023-8-2}
+ "@version{2024-6-2}
   @argument[application]{a @class{gtk:application} instance}
   @return{The list of @class{gtk:window} widgets.}
   @begin{short}
@@ -585,7 +585,7 @@ lambda (application window)    :run-first
   The list is sorted by most recently focused windows, such that the first
   element is the currently focused window. This is useful for choosing a parent
   for a transient window.
-  @begin[Example]{dictionary}
+  @begin{examples}
     In this example, the function iterates over the list of the windows and
     destroys the windows. After the last window is destroyed, the application
     quits.
@@ -596,7 +596,7 @@ lambda (application window)    :run-first
     (dolist (window windows)
       (gtk:window-destroy window))))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gtk:application}
   @see-class{gtk:window}"
   (application (g:object application)))

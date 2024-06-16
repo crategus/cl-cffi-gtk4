@@ -2,7 +2,7 @@
 ;;; gtk4.application-window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -95,7 +95,7 @@
 
 #+liber-documentation
 (setf (documentation 'application-window 'type)
- "@version{2024-5-24}
+ "@version{2024-6-2}
   @begin{short}
     The @class{gtk:application-window} class is a @class{gtk:window} subclass
     that offers some extra functionality for better integration with
@@ -107,9 +107,9 @@
   interfaces, to let you add window specific actions that will be exported by
   the associated @class{gtk:application} instance, together with its
   application-wide actions. Window specific actions are prefixed with the
-  \"win.\" prefix and application-wide actions are prefixed with the \"app.\"
-  prefix. Actions must be addressed with the prefixed name when referring to
-  them from a @class{g:menu-model} object.
+  @code{\"win.\"} prefix and application-wide actions are prefixed with the
+  @code{\"app.\"} prefix. Actions must be addressed with the prefixed name when
+  referring to them from a @class{g:menu-model} object.
 
   Note that widgets that are placed inside an application window can also
   activate these actions, if they implement the @class{gtk:actionable}

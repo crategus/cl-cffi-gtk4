@@ -2,7 +2,7 @@
 ;;; gtk4.scrolled-window.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -265,7 +265,7 @@
 
 #+liber-documentation
 (setf (documentation 'scrolled-window 'type)
- "@version{2023-8-6}
+ "@version{2024-6-2}
   @begin{short}
     The @class{gtk:scrolled-window} widget is a container that accepts a single
     child widget, makes that child scrollable using either internally added
@@ -313,9 +313,9 @@
   if the policy causes scrollbars to be present.
 
   If a @class{gtk:scrolled-window} widget does not behave quite as you would
-  like, or does not have exactly the right layout, it is very possible to set up
-  your own scrolling with the @class{gtk:scrollbar} widget and for example a
-  @class{gtk:grid} widget.
+  like, or does not have exactly the right layout, it is very possible to set
+  up your own scrolling with the @class{gtk:scrollbar} widget and for example
+  a @class{gtk:grid} widget.
 
   @subheading{Touch support}
   The @class{gtk:scrolled-window} widget has built-in support for touch devices.
@@ -351,32 +351,33 @@
       @begin{pre}
 lambda (window pos)    :run-last
       @end{pre}
-      The signal is emitted whenever user initiated scrolling makes the scrolled
-      window firmly surpass, i.e. with some edge resistance, the lower or upper
-      limits defined by the adjustment in that orientation. A similar behavior
-      without edge resistance is provided by the @code{\"edge-reached\"} signal.
-      Note: The @arg{pos} argument is LTR/RTL aware, so callers should be aware
-      too if intending to provide behavior on horizontal edges.
+      The signal is emitted whenever user initiated scrolling makes the
+      scrolled window firmly surpass, for example, with some edge resistance,
+      the lower or upper limits defined by the adjustment in that orientation.
+      A similar behavior without edge resistance is provided by the
+      @code{\"edge-reached\"} signal. Note: The @arg{pos} argument is LTR/RTL
+      aware, so callers should be aware too if intending to provide behavior on
+      horizontal edges.
       @begin[code]{table}
         @entry[window]{The @class{gtk:scrolled-window} widget which received the
           signal.}
-        @entry[pos]{Edge side as a value of the @symbol{gtk:position-type}
+        @entry[pos]{The edge side as a value of the @symbol{gtk:position-type}
           enumeration that was hit.}
       @end{table}
     @subheading{The \"edge-reached\" signal}
       @begin{pre}
 lambda (window pos)    :run-last
       @end{pre}
-      The signal is emitted whenever user-initiated scrolling makes the scrolled
-      window exactly reach the lower or upper limits defined by the adjustment
-      in that orientation. A similar behavior with edge resistance is provided
-      by the \"edge-overshot\" signal.
-      Note: The @arg{pos} argument is LTR/RTL aware, so callers should be aware
-      too if intending to provide behavior on horizontal edges.
+      The signal is emitted whenever user-initiated scrolling makes the
+      scrolled window exactly reach the lower or upper limits defined by the
+      adjustment in that orientation. A similar behavior with edge resistance
+      is provided by the @code{\"edge-overshot\"} signal. Note: The @arg{pos}
+      argument is LTR/RTL aware, so callers should be aware too if intending to
+      provide behavior on horizontal edges.
       @begin[code]{table}
         @entry[window]{The @class{gtk:scrolled-window} widget which received the
           signal.}
-        @entry[pos]{Edge side as a value of the @symbol{gtk:position-type}
+        @entry[pos]{The edge side as a value of the @symbol{gtk:position-type}
           enumeration that was hit.}
       @end{table}
     @subheading{The \"move-focus-out\" signal}
@@ -405,10 +406,10 @@ lambda (window scroll horizontal)    :action
         @begin[code]{table}
           @entry[window]{The @class{gtk:scrolled-window} widget which received
             the signal.}
-          @entry[scroll]{A value of the @symbol{gtk:scroll-type} enumeration
+          @entry[scroll]{The value of the @symbol{gtk:scroll-type} enumeration
             describing how much to scroll.}
-          @entry[horizontal]{A boolean whether the keybinding scrolls the child
-            horizontally or not.}
+          @entry[horizontal]{The boolean whether the keybinding scrolls the
+            child horizontally or not.}
         @end{table}
   @end{dictionary}
   @see-constructor{gtk:scrolled-window-new}

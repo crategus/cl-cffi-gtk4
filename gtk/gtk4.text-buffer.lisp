@@ -2,7 +2,7 @@
 ;;; gtk4.text-buffer.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -623,6 +623,22 @@ lambda (buffer)    :run-last
 (export 'text-buffer-new)
 
 ;;; ----------------------------------------------------------------------------
+;;; gtk:text-buffer-load-file
+;;; ----------------------------------------------------------------------------
+
+(defun text-buffer-load-file (buffer path)
+  (let ((filename (namestring path)))
+    (with-open-file (stream filename)
+      (setf (text-buffer-text buffer) "")
+      (do ((line (read-line stream nil)
+                 (read-line stream nil)))
+          ((null line))
+        (text-buffer-insert buffer :cursor line)
+        (text-buffer-insert buffer :cursor (format nil "~%"))))))
+
+(export 'text-buffer-load-file)
+
+;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_get_line_count
 ;;; ----------------------------------------------------------------------------
 
@@ -696,19 +712,19 @@ lambda (buffer)    :run-last
   (len :int)
   (editable :boolean))
 
-(defun text-buffer-insert (buffer pos text &key (interactive nil) (editable t))
+(defun text-buffer-insert (buffer pos text &key interactive editable)
  #+liber-documentation
- "@version{2024-3-31}
+ "@version{2024-6-2}
   @syntax{(gtk:text-buffer-insert buffer pos text) => t}
   @syntax{(gtk:text-buffer-insert buffer pos text :interactive t) => t}
-  @syntax{(gtk:text-buffer-insert buffer pos text :interactive t :editable nil) => t}
+  @syntax{(gtk:text-buffer-insert buffer pos text :interactive t :editable t) => t}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[pos]{a @class{gtk:text-iter} iterator or the @code{:cursor} value}
   @argument[text]{a string with the text in UTF-8 format}
   @argument[interactive]{a boolean whether the deletion is caused by user
     interaction, the default value is @em{false}}
   @argument[editable]{a boolean whether @arg{buffer} is editable by default,
-    the default value is @em{true}}
+    the default value is @em{false}}
   @return{The boolean whether the text was actually inserted.}
   @begin{short}
     Inserts text in the text buffer.
@@ -729,7 +745,7 @@ lambda (buffer)    :run-last
   default handler for the signal. The iterator is invalidated when insertion
   occurs, because the text buffer contents change, but the default signal
   handler revalidates it to point to the end of the inserted text.
-  @begin[Note]{dictionary}
+  @begin{notes}
     The @fun{gtk:text-buffer-insert} function combines the
     @code{gtk_text_buffer_insert()}, @code{gtk_text_buffer_insert_at_cursor()},
     @code{gtk_text_buffer_insert_interactive()}, and
@@ -737,7 +753,7 @@ lambda (buffer)    :run-last
     function using the @arg{interactive}, and @arg{editable} keyword arguments.
     The corresponding Lisp functions except for the @fun{gtk:text-buffer-insert}
     function are not exported in the Lisp implementation.
-  @end{dictionary}
+  @end{notes}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-iter}
   @see-function{gtk:text-view-editable}"
@@ -783,7 +799,7 @@ lambda (buffer)    :run-last
 (defun text-buffer-insert-range (buffer iter start end &key interactive
                                                             editable)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2024-5-31}
   @syntax{(gtk:text-buffer-insert-range buffer iter start end) => t}
   @syntax{(gtk:text-buffer-insert-range buffer iter start end :interactive t)
     => t}
@@ -823,7 +839,8 @@ lambda (buffer)    :run-last
   @end{dictionary}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-iter}
-  @see-function{gtk:text-view-editable}"
+  @see-function{gtk:text-view-editable}
+  @see-function{gtk:text-buffer-insert}"
   (if interactive
       (%text-buffer-insert-range-interactive buffer
                                              iter
@@ -895,7 +912,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-insert-markup (buffer iter markup)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2024-5-31}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[iter]{a @class{gtk:text-iter} iterator with a position in the text
     buffer}
@@ -908,7 +925,8 @@ lambda (buffer)    :run-last
   Insertion actually occurs in the default handler for the signal. The iterator
   will point to the end of the inserted text on return.
   @see-class{gtk:text-buffer}
-  @see-class{gtk:text-iter}"
+  @see-class{gtk:text-iter}
+  @see-function{gtk:text-buffer-insert}"
   (%text-buffer-insert-markup buffer iter markup -1))
 
 (export 'text-buffer-insert-markup)
@@ -947,7 +965,15 @@ lambda (buffer)    :run-last
 
 ;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_delete
+;;; gtk_text_buffer_delete_interactive                      not exported
 ;;; ----------------------------------------------------------------------------
+
+(cffi:defcfun ("gtk_text_buffer_delete_interactive"
+               %text-buffer-delete-interactive) :boolean
+  (buffer (g:object text-buffer))
+  (start (g:boxed text-iter))
+  (end (g:boxed text-iter))
+  (editable :boolean))
 
 (cffi:defcfun ("gtk_text_buffer_delete" %text-buffer-delete) :void
   (buffer (g:object text-buffer))
@@ -956,7 +982,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-delete (buffer start end &key interactive editable)
  #+liber-documentation
- "@version{2023-4-3}
+ "@version{2024-6-1}
   @syntax{(gtk:text-buffer-delete buffer start end) => t}
   @syntax{(gtk:text-buffer-delete buffer start end :interactive t) => t}
   @syntax{(gtk:text-buffer-delete buffer start end :interactive t
@@ -965,8 +991,9 @@ lambda (buffer)    :run-last
   @argument[start]{a @class{gtk:text-iter} start position in the text buffer}
   @argument[end]{a @class{gtk:text-iter} end position in the text buffer}
   @argument[interactive]{a boolean whether the deletion is caused by user
-    interaction}
-  @argument[editable]{a boolean whether the text buffer is editable by default}
+    interaction, the default value is @code{nil}}
+  @argument[editable]{a boolean whether the text buffer is editable by default,
+    the default value is @code{nil}}
   @return{The boolean whether some text was actually deleted.}
   @begin{short}
     Deletes text between the @arg{start} and @arg{end} iterators.
@@ -982,7 +1009,10 @@ lambda (buffer)    :run-last
   If the @arg{interactive} keyword argument is @em{true} deletes all editable
   text for each editable sub range of [@arg{start}, @arg{end}). The @arg{start}
   and @arg{end} iterators are revalidated to point to the location of the last
-  deleted range, or left untouched if no text was deleted.
+  deleted range, or left untouched if no text was deleted. If the @arg{editable}
+  keyword argument is @code{true} deletes in addition the not editable text.
+  This case is equivalent to calling the @fun{gtk:text-buffer-delete} function
+  with the @code{nil} value for the @arg{interactive} keyword argument.
   @begin[Note]{dictionary}
     The @code{gtk_text_buffer_delete_interactive()} function is included in
     this function and not implemented in the Lisp libraray.
@@ -998,40 +1028,6 @@ lambda (buffer)    :run-last
 (export 'text-buffer-delete)
 
 ;;; ----------------------------------------------------------------------------
-;;; gtk_text_buffer_delete_interactive                      not exported
-;;; ----------------------------------------------------------------------------
-
-;; Implementation is included in the TEXT-BUFFER-DELETE function.
-
-(cffi:defcfun ("gtk_text_buffer_delete_interactive"
-               %text-buffer-delete-interactive) :boolean
- #+liber-documentation
- "@version{#2021-8-17}
-  @argument[buffer]{a @class{gtk:text-buffer} object}
-  @argument[start]{a @class{gtk:text-iter} start of range to delete}
-  @argument[end]{a @class{gtk:text-iter} end of range}
-  @argument[editable]{a boolean whether @arg{buffer} is editable by default}
-  @return{The boolean whether some text was actually deleted.}
-  @begin{short}
-    Deletes all editable text in the given range.
-  @end{short}
-  Calls the function @fun{gtk:text-buffer-delete} for each editable sub range
-  of [@arg{start}, @arg{end}). @arg{start} and @arg{end} are revalidated to
-  point to the location of the last deleted range, or left untouched if no
-  text was deleted.
-  @begin[Note]{dictionary}
-    In the Lisp implementation this function is called from the function
-    @fun{gtk:text-buffer-delete}.
-  @end{dictionary}
-  @see-class{gtk:text-buffer}
-  @see-class{gtk:text-iter}
-  @see-function{gtk:text-buffer-delete}"
-  (buffer (g:object text-buffer))
-  (start (g:boxed text-iter))
-  (end (g:boxed text-iter))
-  (editable :boolean))
-
-;;; ----------------------------------------------------------------------------
 ;;; gtk_text_buffer_backspace
 ;;; ----------------------------------------------------------------------------
 
@@ -1043,7 +1039,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-backspace (buffer iter &key interactive editable)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2024-5-31}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[iter]{a @class{gtk:text-iter} position in @arg{buffer}}
   @argument[interactive]{a boolean whether the deletion is caused by user
@@ -1115,7 +1111,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-get-slice (buffer start end &optional include)
  #+liber-documentation
- "@version{#2021-11-16}
+ "@version{2024-5-31}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[start]{a @class{gtk:text-iter} start of a range}
   @argument[end]{a @class{gtk:text-iter} end of a range}
@@ -1719,13 +1715,13 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-iter-at-line-offset (buffer line offset)
  #+liber-documentation
- "@version{#2021-8-18}
+ "@version{2024-6-1}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @argument[line]{an integer with the line number counting from 0}
   @argument[offset]{an integer with the char offset from the start of the line}
   @return{The @class{gtk:text-iter} iterator.}
   @begin{short}
-    Obtains an iterator pointing to @arg{offset} within the given line.
+    Obtains an iterator pointing to @arg{offset} within the given @arg{line}.
   @end{short}
   Note characters, not bytes, UTF-8 may encode one character as multiple bytes.
 
@@ -1733,7 +1729,8 @@ lambda (buffer)    :run-last
   buffer, the end iterator is returned. And if the @arg{offset} argument is
   off the end of the line, the iterator at the end of the line is returned.
   @see-class{gtk:text-buffer}
-  @see-class{gtk:text-iter}"
+  @see-class{gtk:text-iter}
+  @see-function{gtk:text-buffer-iter-at-offset}"
   (let ((iter (make-instance 'text-iter)))
     (%text-buffer-iter-at-line-offset buffer iter line offset)
     iter))
@@ -1960,7 +1957,7 @@ lambda (buffer)    :run-last
 
 (defun text-buffer-bounds (buffer)
  #+liber-documentation
- "@version{2023-4-3}
+ "@version{2024-6-1}
   @argument[buffer]{a @class{gtk:text-buffer} object}
   @begin{return}
     @arg{start} -- a @class{gtk:text-iter} iterator with the first position in
@@ -1969,19 +1966,19 @@ lambda (buffer)    :run-last
       text buffer
   @end{return}
   @begin{short}
-    Retrieves the first and last iterators in the text buffer, i.e. the entire
-    text buffer lies within the range [@arg{start}, @arg{end}).
+    Retrieves the first and last iterators in the text buffer.
   @end{short}
-  @begin[Example]{dictionary}
+  The entire text buffer lies within the range [@arg{start}, @arg{end}).
+  @begin{examples}
     Get the start and end itererator for a text buffer and clear the text
-    buffer:
+    buffer.
     @begin{pre}
 (defun clear-buffer (buffer)
   (multiple-value-bind (start end)
       (gtk:text-buffer-bounds buffer)
     (gtk:text-buffer-delete buffer start end)))
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gtk:text-buffer}
   @see-class{gtk:text-iter}"
   (let ((start (make-instance 'text-iter))

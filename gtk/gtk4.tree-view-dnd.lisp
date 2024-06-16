@@ -2,7 +2,7 @@
 ;;; gtk4.tree-view-dnd.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -78,27 +78,11 @@
 (setf (liber:alias-for-class 'tree-drag-source)
       "Interface"
       (documentation 'tree-drag-source 'type)
- "@version{2024-5-1}
+ "@version{2024-5-28}
   @begin{short}
-    GTK supports drag and drop in tree views with a high-level and a low-level
-    API.
+    Interface for Drag-and-Drop destinations in the @class{gtk:tree-view}
+    widget.
   @end{short}
-
-  The low-level API consists of the GTK DND API, augmented by some tree view
-  utility functions:
-  @fun{gtk:tree-view-set-drag-dest-row},
-  @fun{gtk:tree-view-get-drag-dest-row},
-  @fun{gtk:tree-view-get-dest-row-at-pos},
-  @fun{gtk:tree-view-create-row-drag-icon},
-  @fun{gtk:tree-set-row-drag-data} and @fun{gtk:tree-get-row-drag-data}. This
-  API leaves a lot of flexibility, but nothing is done automatically, and
-  implementing advanced features like hover-to-open-rows or autoscrolling on
-  top of this API is a lot of work.
-
-  On the other hand, if you write to the high-level API, then all the
-  bookkeeping of rows is done for you, as well as things like hover-to-open
-  and auto-scroll, but your models have to implement the
-  @class{gtk:tree-drag-source} and @class{gtk:tree-drag-dest} interfaces.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-drag-source} implementation is deprecated since 4.10.
     List views use widgets to display their contents. You can use the
@@ -167,7 +151,7 @@
  "@version{#2024-5-1}
   @argument[source]{a @class{gtk:tree-drag-source} object}
   @argument[path]{a @class{gtk:tree-path} insance with the row that was dragged}
-  @return{The @class{gdk-content-provider} object for the given @arg{path} or
+  @return{The @class{gdk:content-provider} instance for the given @arg{path} or
     @code{nil} if none exists.}
   @begin{short}
     Asks the @class{gtk:tree-drag-source} object to return a
@@ -234,24 +218,9 @@
       (documentation 'tree-drag-dest 'type)
  "@version{2024-5-1}
   @begin{short}
-    GTK supports Drag-and-Drop in tree views with a high-level and a low-level
-    API.
+    Interface for Drag-and-Drop destinations in the @class{gtk:tree-view}
+    widget.
   @end{short}
-
-  The low-level API consists of the GTK DND API, augmented by some tree view
-  utility functions: @fun{gtk:tree-view-set-drag-dest-row},
-  @fun{gtk:tree-view-get-drag-dest-row},
-  @fun{gtk:tree-view-get-dest-row-at-pos},
-  @fun{gtk:tree-view-create-row-drag-icon},
-  @fun{gtk:tree-set-row-drag-data} and @fun{gtk:tree-get-row-drag-data}. This
-  API leaves a lot of flexibility, but nothing is done automatically, and
-  implementing advanced features like hover-to-open-rows or autoscrolling on
-  top of this API is a lot of work.
-
-  On the other hand, if you write to the high-level API, then all the
-  bookkeeping of rows is done for you, as well as things like hover-to-open
-  and auto-scroll, but your models have to implement the
-  @class{gtk:tree-drag-source} and @class{gtk:tree-drag-dest} interfaces.
   @begin[Warning]{dictionary}
     The @class{gtk:tree-drag-dest} implementation is deprecated since 4.10.
     List views use widgets to display their contents. You can use the

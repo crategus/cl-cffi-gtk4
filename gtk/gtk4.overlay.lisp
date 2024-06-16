@@ -2,7 +2,7 @@
 ;;; gtk4.overlay.lisp
 ;;;
 ;;; The documentation of this file is taken from the GTK 4 Reference Manual
-;;; Version 4.12 and modified to document the Lisp binding to the GTK library.
+;;; Version 4.14 and modified to document the Lisp binding to the GTK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
@@ -94,7 +94,7 @@
 
 #+liber-documentation
 (setf (documentation 'overlay 'type)
- "@version{2024-4-16}
+ "@version{2024-6-2}
   @begin{short}
     The @class{gtk:overlay} widget is a container which contains a single main
     widget, on top of which it can place overlay widgets.
@@ -103,9 +103,9 @@
   @image[overlay]{Figure: GtkOverlay}
 
   The position of each overlay widget is determined by its
-  @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties. E.g. a
-  overlay widget with both alignments set to @code{:start} will be placed at
-  the top left corner of the main widget, whereas an overlay with the
+  @slot[gtk:widget]{halign} and @slot[gtk:widget]{valign} properties. For
+  example, an overlay widget with both alignments set to @code{:start} will be
+  placed at the top left corner of the main widget, whereas an overlay with the
   @slot[gtk:widget]{halign} property set to @code{:center} and the
   @slot[gtk:widget]{valign} property set to @code{:end} will be placed a the
   bottom edge of the main widget, horizontally centered. The position can be
