@@ -157,8 +157,8 @@
     (liber:generate-html-documentation
       '(:gtk :gdk :gsk
         :gdk-pixbuf
-        :gobject
         :glib
+        :gobject
         :gio
         :pango
         :cairo
@@ -183,8 +183,8 @@
     (liber:generate-html-documentation
       '(:gtk :gdk :gsk
         :gdk-pixbuf
-        :gobject
         :glib
+        :gobject
         :gio
         :pango
         :cairo
