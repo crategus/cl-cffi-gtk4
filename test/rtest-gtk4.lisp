@@ -1,6 +1,32 @@
 (defpackage :gtk-test
   (:use :fiveam :iterate :common-lisp)
   (:export #:run!)
+  (:import-from :glib-test #:list-children
+                           #:list-interfaces
+                           #:list-properties
+                           #:list-interface-properties
+                           #:list-interface-prerequisites
+                           #:list-signals
+                           #:list-flags-item-name
+                           #:list-flags-item-value
+                           #:list-flags-item-nick
+                           #:list-enum-item-name
+                           #:list-enum-item-value
+                           #:list-enum-item-nick)
+  (:export                 #:list-children
+                           #:list-interfaces
+                           #:list-properties
+                           #:list-interface-properties
+                           #:list-interface-prerequisites
+                           #:list-signals
+                           #:list-style-properties          ; for GTK4
+                           #:list-child-properties          ; for GTK4
+                           #:list-flags-item-name
+                           #:list-flags-item-value
+                           #:list-flags-item-nick
+                           #:list-enum-item-name
+                           #:list-enum-item-value
+                           #:list-enum-item-nick)
   (:import-from :gtk-init *gtk-warn-deprecated*)
   (:import-from :gobject)
   (:import-from :gio)
@@ -102,15 +128,17 @@ sem venenatis, vitae ultricies arcu laoreet."))
   (or (< (abs (- x y)) eps-factor)
       (< (abs (- x y)) (* eps-factor (max (abs x) (abs y))))))
 
-
+#+nil
 (defun list-children (gtype)
   (sort (mapcar #'g:type-name (g:type-children gtype))
         #'string<))
 
+#+nil
 (defun list-interfaces (gtype)
   (mapcar #'g:type-name (g:type-interfaces gtype)))
 
 ;; A sorted list of the class property names without inherited properties
+#+nil
 (defun list-properties (gtype)
   (sort (set-difference (mapcar #'g:param-spec-name
                                 (g:object-class-list-properties gtype))
@@ -120,15 +148,18 @@ sem venenatis, vitae ultricies arcu laoreet."))
                         :test #'string=)
         #'string<))
 
+#+nil
 (defun list-interface-properties (gtype)
   (mapcar #'g:param-spec-name
           (g:object-interface-list-properties gtype)))
 
+#+nil
 (defun list-interface-prerequisites (gtype)
   (mapcar #'g:type-name
           (g:type-interface-prerequisites gtype)))
 
 ;; A sorted list of the signal names of a class
+#+nil
 (defun list-signals (gtype)
   (sort (mapcar #'g:signal-name
                 (g:signal-list-ids gtype)) #'string<))
@@ -138,26 +169,32 @@ sem venenatis, vitae ultricies arcu laoreet."))
   (let ((widget (make-instance (glib:symbol-for-gtype gtype))))
     (gtk:style-context-to-string (gtk:widget-style-context widget) flags)))
 
+#+nil
 (defun list-flags-item-name (gtype)
   (mapcar #'gobject:flags-item-name
           (gobject:get-flags-items gtype)))
 
+#+nil
 (defun list-flags-item-nick (gtype)
   (mapcar #'gobject:flags-item-nick
           (gobject:get-flags-items gtype)))
 
+#+nil
 (defun list-flags-item-value (gtype)
   (mapcar #'gobject:flags-item-value
           (gobject:get-flags-items gtype)))
 
+#+nil
 (defun list-enum-item-name (gtype)
   (mapcar #'gobject:enum-item-name
           (gobject:get-enum-items gtype)))
 
+#+nil
 (defun list-enum-item-nick (gtype)
   (mapcar #'gobject:enum-item-nick
           (gobject:get-enum-items gtype)))
 
+#+nil
 (defun list-enum-item-value (gtype)
   (mapcar #'gobject:enum-item-value
           (gobject:get-enum-items gtype)))
@@ -179,4 +216,4 @@ sem venenatis, vitae ultricies arcu laoreet."))
     ;; Return the new list store
     liststore))
 
-;;; 2024-5-9
+;;; 2024-6-29

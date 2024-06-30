@@ -259,7 +259,7 @@
 
 #+liber-documentation
 (setf (documentation 'window 'type)
- "@version{2024-4-7}
+ "@version{2024-6-30}
   @begin{short}
     The @class{gtk:window} widget is a toplevel window which can contain other
     widgets.
@@ -1015,7 +1015,7 @@ lambda (window)    :run-first
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "resizable" 'window) t)
  "The @code{resizable} property of type @code{:boolean} (Read / Write) @br{}
-  If @em{true}, users can resize the window. @br{}
+  If @em{true} users can resize the window. @br{}
   Default value: @em{true}")
 
 #+liber-documentation
@@ -1040,8 +1040,8 @@ lambda (window)    :run-first
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "startup-id" 'window) t)
  "The @code{startup-id} property of type @code{:string} (Write) @br{}
-  A write-only property for setting the startup notification identifier of the
-  window. @br{}
+  The write-only property for setting the startup notification identifier of
+  the window. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation

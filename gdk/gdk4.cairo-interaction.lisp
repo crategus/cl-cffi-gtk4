@@ -49,13 +49,28 @@
 
 (cffi:defcfun ("gdk_cairo_set_source_rgba" cairo-set-source-rgba) :void
  #+liber-documentation
- "@version{2023-9-19}
+ "@version{2024-6-30}
   @argument[cr]{a @symbol{cairo:context-t} instance}
   @argument[rgba]{a @class{gdk:rgba} color}
   @begin{short}
     Sets the specified @arg{rgba} color as the source color of the Cairo
     context.
   @end{short}
+  @begin{examples}
+    This code fragment from the GTK Demo sets a draw function for a
+    @class{gtk:drawing-area} widget. The color is parsed to a @struct{gdk:rgba}
+    color and then set as the source color for the @fun{cairo:paint} operation
+    on the Cairo context.
+    @begin{pre}
+(gtk:drawing-area-set-draw-func area
+        (lambda (widget cr width height)
+          (declare (ignore widget width height))
+          (let ((rgba (gdk:rgba-parse color)))
+            (when rgba
+              (gdk:cairo-set-source-rgba cr rgba)
+              (cairo:paint cr)))))
+    @end{pre}
+  @end{examples}
   @see-symbol{cairo:context-t}
   @see-class{gdk:rgba}"
   (cr (:pointer (:struct cairo:context-t)))

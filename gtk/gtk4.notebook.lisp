@@ -535,7 +535,7 @@
 
 #+liber-documentation
 (setf (documentation 'notebook 'type)
- "@version{2024-4-17}
+ "@version{2024-6-30}
   @begin{short}
     The @class{gtk:notebook} widget is a layout container whose children are
     pages that can be switched between using tab labels along one edge.
@@ -622,12 +622,15 @@ notebook
   @begin[Signal Details]{dictionary}
     @subheading{The \"change-current-page\" signal}
       @begin{pre}
-lambda (notebook offset)    :action
+lambda (notebook page)    :action
       @end{pre}
+      Emitted when the current page should be changed. The default bindings for
+      this signal are the @kbd{Ctrl+Alt+PgUp}, @kbd{Ctrl+Alt+PgDn},
+      @kbd{Ctrl+PgUp} and @kbd{Ctrl+PgDn} keys.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
-        @entry[offset]{The integer with the offset to step forward or backward
-          for a negative integer.}
+        @entry[page]{The integer with the page index.}
+        @entry[Returns]{Whether the page was changed.}
       @end{table}
     @subheading{The \"create-window\" signal}
       @begin{pre}
@@ -636,8 +639,8 @@ lambda (notebook page)    :run-last
       The signal is emitted when a detachable tab is dropped on the root window.
       A handler for this signal can create a window containing a notebook where
       the tab will be attached. It is also responsible for moving/resizing the
-      window and adding the necessary properties to the notebook, e.g. the
-      @code{group-name} property.
+      window and adding the necessary properties to the notebook, for example,
+      the @code{group-name} property.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[page]{The @class{gtk:widget} tab of @arg{notebook} that is being
@@ -649,18 +652,23 @@ lambda (notebook page)    :run-last
       @begin{pre}
 lambda (notebook tab)    :action
       @end{pre}
+      Emitted when a tab should be focused.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[tab]{The value of the @symbol{gtk:notebook-tab} enumeration.}
+        @entry[Returns]{Whether the tab has been focused.}
       @end{table}
     @subheading{The \"move-focus-out\" signal}
       @begin{pre}
 lambda (notebook direction)    :action
       @end{pre}
+      Emitted when focus was moved out. The default bindings for this signal
+      are the @kbd{Ctrl+Tab}, @kbd{Ctrl+Shift+Tab}, @kbd{Ctrl+←}, @kbd{Ctrl+→},
+      @kbd{Ctrl+↑} and @kbd{Ctrl+↓}.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
-        @entry[direction]{The value of the @symbol{gtk:direction-type}
-          enumeration.}
+        @entry[direction]{The @symbol{gtk:direction-type} value with the
+          direction to move the focus.}
       @end{table}
     @subheading{The \"page-added\" signal}
       @begin{pre}
@@ -699,19 +707,27 @@ lambda (notebook child num)    :run-last
       @begin{pre}
 lambda (notebook direction move-to-last)   :action
       @end{pre}
+      Emitted when the tab should be reordered. The default bindings for this
+      signal are the @kbd{Alt+Home}, @kbd{Alt+End}, @kbd{Alt+PgUp},
+      @kbd{Alt+PgDn}, @kbd{Alt+←}, @kbd{Alt+→}, @kbd{Alt+↑} and @kbd{Alt+↓}
+      keys.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
         @entry[direction]{The value of the @symbol{gtk:direction-type}
           enumeration.}
-        @entry[move-to-last]{The boolean.}
+        @entry[move-to-last]{Whether to move to the last position.}
+        @entry[Returns]{Whether the tab was moved.}
       @end{table}
     @subheading{The \"select-page\" signal}
       @begin{pre}
 lambda (notebook move-focus)    :action
       @end{pre}
+      Emitted when a page should be selected. The default binding for this
+      signal is the @kbd{␣} key.
       @begin[code]{table}
         @entry[notebook]{The @class{gtk:notebook} widget emitting the signal.}
-        @entry[move-focus]{The boolean.}
+        @entry[move-focus]{Whether to move focus.}
+        @entry[Returns]{Whether the page was selected.}
       @end{table}
     @subheading{The \"switch-page\" signal}
       @begin{pre}
@@ -1123,9 +1139,9 @@ lambda (notebook page num)    :run-last
                                         menu)
                                     pos)
          (notebook-insert-page notebook
-                                   child
-                                   tab
-                                   pos)))))
+                               child
+                               tab
+                               pos)))))
 
 (export 'notebook-add-page)
 
@@ -1139,7 +1155,7 @@ lambda (notebook page num)    :run-last
 
 (defun notebook-remove-page (notebook page-or-number)
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{2024-6-30}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @argument[page-or-number]{an integer with the index of a notebook page,
     starting from 0, if -1, the last page will be removed, or the
@@ -1148,12 +1164,12 @@ lambda (notebook page num)    :run-last
     Removes a page from the notebook given the page widget or its index in the
     notebook.
   @end{short}
-  @begin[Note]{dictionary}
+  @begin{notes}
     In the Lisp implementation the argument can be an integer for the index or
     the page widget. The index of the page widget is got with the function
     @fun{gtk:notebook-page-num} and passed to the C function.
-  @end{dictionary}
-  @begin[Example]{dictionary}
+  @end{notes}
+  @begin{examples}
     @begin{pre}
 (defvar notebook (make-instance 'gtk:notebook))
 => NOTEBOOK
@@ -1166,7 +1182,7 @@ lambda (notebook page num)    :run-last
 => 0
 (gtk:notebook-remove-page notebook 0)
     @end{pre}
-  @end{dictionary}
+  @end{examples}
   @see-class{gtk:notebook}
   @see-function{gtk:notebook-page-num}"
   (%notebook-remove-page notebook
@@ -1206,7 +1222,7 @@ lambda (notebook page num)    :run-last
 
 (cffi:defcfun ("gtk_notebook_page_num" notebook-page-num) :int
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{2024-6-30}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @argument[child]{a @class{gtk:widget} child}
   @begin{return}
@@ -1229,7 +1245,7 @@ lambda (notebook page num)    :run-last
 
 (cffi:defcfun ("gtk_notebook_next_page" notebook-next-page) :void
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{#2024-6-30}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @begin{short}
     Switches to the next page.
@@ -1247,7 +1263,7 @@ lambda (notebook page num)    :run-last
 
 (cffi:defcfun ("gtk_notebook_prev_page" notebook-prev-page) :void
  #+liber-documentation
- "@version{#2021-17-17}
+ "@version{#2024-6-30}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @begin{short}
     Switches to the previous page.
@@ -1265,7 +1281,7 @@ lambda (notebook page num)    :run-last
 
 (cffi:defcfun ("gtk_notebook_reorder_child" notebook-reorder-child) :void
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{2024-6-30}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @argument[child]{a @class{gtk:widget} child page to move}
   @argument[pos]{an integer with the position, or -1 to move to the end}
@@ -1291,7 +1307,7 @@ lambda (notebook page num)    :run-last
 
 (defun notebook-popup-enable (notebook)
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{#2024-6-30}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @begin{short}
     Enables the popup menu.
@@ -1317,7 +1333,7 @@ lambda (notebook page num)    :run-last
 
 (defun notebook-popup-disable (notebook)
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{#2024-6-30}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @begin{short}
     Disables the popup menu.
@@ -1412,9 +1428,9 @@ lambda (notebook page num)    :run-last
 ;;; gtk_notebook_get_nth_page
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_notebook" notebook-nth-page) (g:object widget)
+(cffi:defcfun ("gtk_notebook_get_nth_page" notebook-nth-page) (g:object widget)
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{2024-6-30}
   @argument[notebook]{a @class{gtk:notebook} widget}
   @argument[num]{an integer with the index of a page in the notebook, or -1 to
     get the last page}
@@ -1573,7 +1589,7 @@ lambda (notebook page num)    :run-last
 (cffi:defcfun ("gtk_notebook_get_tab_reorderable" notebook-tab-reorderable)
     :boolean
  #+liber-documentation
- "@version{#2024-4-17}
+ "@version{2024-6-30}
   @syntax{(gtk:notebook-tab-reorderable notebook child) => reorderable}
   @syntax{(setf (gtk:notebook-tab-reorderable notebook child) reorderable)}
   @argument[notebook]{a @class{gtk:notebook} widget}
@@ -1610,7 +1626,7 @@ lambda (notebook page num)    :run-last
 (cffi:defcfun ("gtk_notebook_get_tab_detachable" notebook-tab-detachable)
     :boolean
  #+liber-documentation
- "@version{#2024-4-17}
+ "@version{2024-6-30}
   @syntax{(gtk:notebook-tab-detachable notebook child) => detachable}
   @syntax{(setf (gtk:notebook-tab-detachable notebook child) detachable)}
   @argument[notebook]{a @class{gtk:notebook} widget}
@@ -1627,11 +1643,11 @@ lambda (notebook page num)    :run-last
   @fun{gtk:notebook-group-name} function, to allow automatic tabs interchange
   between them.
   @begin{examples}
-    If you want a widget to interact with a notebook through DnD, i.e. accept
+    If you want a widget to interact with a notebook through DnD, that is accept
     dragged tabs from it, it must be set as a drop destination and accept the
-    \"GTK_NOTEBOOK_TAB\" target. The notebook will fill the selection with a
-    GtkWidget** pointing to the child widget that corresponds to the dropped
-    tab.
+    @code{\"GTK_NOTEBOOK_TAB\"} target. The notebook will fill the selection
+    with a GtkWidget** pointing to the child widget that corresponds to the
+    dropped tab.
     @begin{pre}
 static void
 on_drop_zone_drag_data_received (GtkWidget        *widget,

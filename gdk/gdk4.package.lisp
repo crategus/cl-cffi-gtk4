@@ -176,7 +176,6 @@
       @about-symbol{gdk:modifier-type}
     @end{subsection}
     @begin[GdkRectangle]{subsection}
-      Simple graphical data type.
       @about-struct{rectangle}
       @about-function{rectangle-x}
       @about-function{rectangle-y}
@@ -190,18 +189,6 @@
       @about-function{rectangle-union}
     @end{subsection}
     @begin[GdkRGBA]{subsection}
-      The @struct{gdk:rgba} structure is a convenient way to pass RGBA colors
-      around. It is based on Cairo's way to deal with colors and mirrors its
-      behavior. All values are in the range from 0.0 to 1.0 inclusive. So the
-      color
-      @begin{pre}
-(gdk:rgba-new :red 0.0 :green 0.0 :blue 0.0 :alpha 0.0)
-      @end{pre}
-      represents transparent black and
-      @begin{pre}
-(gdk:rgba-new :red 1.0 :green 1.0 :blue 1.0 :alpha 1.0)
-      @end{pre}
-      is opaque white. Other values will be clamped to this range when drawing.
       @about-struct{rgba}
       @about-function{rgba-red}
       @about-function{rgba-green}

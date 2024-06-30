@@ -190,7 +190,7 @@
             (gtk:editable-insert-text editable
                                       (string-upcase text)
                                       (cffi:mem-ref position :intptr))
-            (g:signal-stop-emission-by-name editable \"insert-text\")
+            (g:signal-stop-emission editable \"insert-text\")
             (g:signal-handler-unblock editable handlerid))))
     @end{pre}
   @end{examples}

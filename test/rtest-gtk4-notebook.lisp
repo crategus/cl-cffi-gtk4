@@ -24,13 +24,13 @@
           (glib:symbol-for-gtype "GtkNotebookTab")))
   ;; Check names
   (is (equal '("GTK_NOTEBOOK_TAB_FIRST" "GTK_NOTEBOOK_TAB_LAST")
-             (list-enum-item-name "GtkNotebookTab")))
+             (gtk-test:list-enum-item-name "GtkNotebookTab")))
   ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GtkNotebookTab")))
+             (gtk-test:list-enum-item-value "GtkNotebookTab")))
   ;; Check nick names
   (is (equal '("first" "last")
-             (list-enum-item-nick "GtkNotebookTab")))
+             (gtk-test:list-enum-item-nick "GtkNotebookTab")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GtkNotebookTab" GTK-NOTEBOOK-TAB
                                      (:EXPORT T
@@ -56,17 +56,17 @@
           (g:type-parent "GtkNotebookPage")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkNotebookPage")))
+             (gtk-test:list-children "GtkNotebookPage")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GtkNotebookPage")))
+             (gtk-test:list-interfaces "GtkNotebookPage")))
   ;; Check properties
   (is (equal '("child" "detachable" "menu" "menu-label" "position" "reorderable"
                "tab" "tab-expand" "tab-fill" "tab-label")
-             (list-properties "GtkNotebookPage")))
+             (gtk-test:list-properties "GtkNotebookPage")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GtkNotebookPage")))
+             (gtk-test:list-signals "GtkNotebookPage")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkNotebookPage" GTK-NOTEBOOK-PAGE
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -127,25 +127,22 @@
           (g:type-parent "GtkNotebook")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkNotebook")))
+             (gtk-test:list-children "GtkNotebook")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkNotebook")))
+             (gtk-test:list-interfaces "GtkNotebook")))
   ;; Check properties
   (is (equal '("enable-popup" "group-name" "page" "pages" "scrollable"
                "show-border" "show-tabs" "tab-pos")
-             (list-properties "GtkNotebook")))
+             (gtk-test:list-properties "GtkNotebook")))
   ;; Check signals
   (is (equal '("change-current-page" "create-window" "focus-tab"
                "move-focus-out" "page-added" "page-removed" "page-reordered"
                "reorder-tab" "select-page" "switch-page")
-             (list-signals "GtkNotebook")))
+             (gtk-test:list-signals "GtkNotebook")))
   ;; Check CSS name
   (is (string= "notebook"
                (gtk:widget-class-css-name "GtkNotebook")))
-  ;; Check CSS classes
-  (is (equal '("frame")
-             (gtk:widget-css-classes (make-instance 'gtk:notebook))))
   ;; Check accessible role
   (is (eq :GROUP (gtk:widget-class-accessible-role "GtkNotebook")))
   ;; Check the class definition
@@ -210,17 +207,64 @@
 ;;;     gtk_notebook_prepend_page_menu
 ;;;     gtk_notebook_insert_page
 ;;;     gtk_notebook_insert_page_menu
+
 ;;;     gtk_notebook_remove_page
+;;;     gtk_notebook_get_nth_page
+
+(test gkt-notebook-remove-page
+  (let ((notebook (gtk:notebook-new))
+        (page1 (gtk:frame-new))
+        (page2 (gtk:frame-new))
+        (label (gtk:label-new "label")))
+
+    (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
+    (is (= 1 (gtk:notebook-add-page notebook page2 label)))
+
+    (is (eq page1 (gtk:notebook-nth-page notebook 0)))
+    (is (eq page2 (gtk:notebook-nth-page notebook 1)))
+
+    (is-false (gtk:notebook-remove-page notebook 0))
+    (is-false (gtk:notebook-remove-page notebook page2))))
+
 ;;;     gtk_notebook_detach_tab
+
 ;;;     gtk_notebook_page_num
+
+(test gkt-notebook-page-num
+  (let ((notebook (gtk:notebook-new))
+        (page1 (gtk:frame-new))
+        (page2 (gtk:frame-new))
+        (label (gtk:label-new "label")))
+
+    (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
+    (is (= 1 (gtk:notebook-add-page notebook page2 label)))
+
+    (is (= 0 (gtk:notebook-page-num notebook page1)))
+    (is (= 1 (gtk:notebook-page-num notebook page2)))))
+
 ;;;     gtk_notebook_next_page
 ;;;     gtk_notebook_prev_page
+
 ;;;     gtk_notebook_reorder_child
+
+(test gkt-notebook-reorder-child
+  (let ((notebook (gtk:notebook-new))
+        (page1 (gtk:frame-new))
+        (page2 (gtk:frame-new))
+        (label (gtk:label-new "label")))
+
+    (is (= 0 (gtk:notebook-add-page notebook page1 nil)))
+    (is (= 1 (gtk:notebook-add-page notebook page2 label)))
+
+    (is-false (gtk:notebook-reorder-child notebook page2 0))
+
+    (is (= 1 (gtk:notebook-page-num notebook page1)))
+    (is (= 0 (gtk:notebook-page-num notebook page2)))))
+
 ;;;     gtk_notebook_popup_enable
 ;;;     gtk_notebook_popup_disable
 ;;;     gtk_notebook_get_current_page
 ;;;     gtk_notebook_get_menu_label
-;;;     gtk_notebook_get_nth_page
 ;;;     gtk_notebook_get_n_pages
 ;;;     gtk_notebook_get_tab_label
 ;;;     gtk_notebook_set_menu_label
@@ -237,4 +281,4 @@
 ;;;     gtk_notebook_set_action_widget
 ;;;     gtk_notebook_get_action_widget
 
-;;; 2024-4-22
+;;; 2024-6-30

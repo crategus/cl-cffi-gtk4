@@ -548,7 +548,7 @@
      (:file "rtest-gdk4-app-launch-context")
 
      ;; Miscellaneous
-;    (:file "rtest-gdk4-cursor")
+     (:file "rtest-gdk4-cursor")
 ;    (:file "rtest-gdk4-frame-timings")
 ;    (:file "rtest-gdk4-frame-clock")
 

@@ -23,25 +23,22 @@
   #-windows
   (if *first-run-gtk-test*
       (is (equal '()
-                 (list-children "GtkFlowBoxChild"))))
+                 (gtk-test:list-children "GtkFlowBoxChild"))))
   #+windows
   (is (equal '()
-             (list-children "GtkFlowBoxChild")))
+             (gtk-test:list-children "GtkFlowBoxChild")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget")
-             (list-interfaces "GtkFlowBoxChild")))
+             (gtk-test:list-interfaces "GtkFlowBoxChild")))
   ;; Check properties
   (is (equal '("child")
-             (list-properties "GtkFlowBoxChild")))
+             (gtk-test:list-properties "GtkFlowBoxChild")))
   ;; Check signals
   (is (equal '("activate")
-             (list-signals "GtkFlowBoxChild")))
+             (gtk-test:list-signals "GtkFlowBoxChild")))
   ;; Check CSS name
   (is (string= "flowboxchild"
                (gtk:widget-class-css-name "GtkFlowBoxChild")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:flow-box-child))))
   ;; Check accessible role
   (is (eq :grid-cell (gtk:widget-class-accessible-role "GtkFlowBoxChild")))
   ;; Check class definition
@@ -57,8 +54,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     child
-
 (test gtk-flow-box-child-properties
   (let* ((button (gtk:button-new))
          (child (make-instance 'gtk:flow-box-child
@@ -69,6 +64,22 @@
 
 ;;;     activate
 
+(test gtk-flow-box-child-activate-signal
+  (let* ((name "activate")
+         (gtype (g:gtype "GtkFlowBoxChild"))
+         (query (g:signal-query (g:signal-lookup name gtype))))
+    ;; Retrieve name and gtype
+    (is (string= name (g:signal-query-signal-name query)))
+    (is (eq gtype (g:signal-query-owner-type query)))
+    ;; Check flags
+    (is (equal '(:ACTION :RUN-FIRST)
+               (sort (g:signal-query-signal-flags query) #'string<)))
+    ;; Check return type
+    (is (string= "void" (g:type-name (g:signal-query-return-type query))))
+    ;; Check parameter types
+    (is (equal '()
+               (mapcar #'g:type-name (g:signal-query-param-types query))))))
+
 ;;; --- Functions --------------------------------------------------------------
 
 ;;;     gtk_flow_box_child_new
@@ -77,7 +88,35 @@
   (is (typep (gtK:flow-box-child-new) 'gtk:flow-box-child)))
 
 ;;;     gtk_flow_box_child_get_index
+
+(test gtk-flow-box-child-index
+  (let ((flowbox (gtk:flow-box-new))
+        (child1 (gtk:flow-box-child-new))
+        (child2 (gtk:flow-box-child-new)))
+    (is-false (gtk:flow-box-insert flowbox child1 -1))
+    (is (= 0 (gtk:flow-box-child-index child1)))
+    (is-false (gtk:flow-box-insert flowbox child2 -1))
+    (is (= 1 (gtk:flow-box-child-index child2)))))
+
 ;;;     gtk_flow_box_child_is_selected
+
+(test gtk-flow-box-child-index
+  (let ((flowbox (gtk:flow-box-new))
+        (child1 (gtk:flow-box-child-new))
+        (child2 (gtk:flow-box-child-new)))
+    ;; Insert child widgets
+    (is-false (gtk:flow-box-insert flowbox child1 -1))
+    (is-false (gtk:flow-box-insert flowbox child2 -1))
+    ;; Child widgets are not selected
+    (is-false (gtk:flow-box-child-is-selected child1))
+    (is-false (gtk:flow-box-child-is-selected child2))
+    ;; Select child1
+    (is-false (gtk:flow-box-select-child flowbox child1))
+    (is-true (gtk:flow-box-child-is-selected child1))
+    ;; Select child2
+    (is-false (gtk:flow-box-select-child flowbox child2))
+    (is-true (gtk:flow-box-child-is-selected child2))))
+
 ;;;     gtk_flow_box_child_changed
 
 ;;; --- Types and Values -------------------------------------------------------
@@ -98,31 +137,28 @@
           (g:type-parent "GtkFlowBox")))
   ;; Check children
   (is (equal '()
-             (list-children "GtkFlowBox")))
+             (gtk-test:list-children "GtkFlowBox")))
   ;; Check interfaces
   (is (equal '("GtkAccessible" "GtkBuildable" "GtkConstraintTarget"
                "GtkOrientable")
-             (list-interfaces "GtkFlowBox")))
+             (gtk-test:list-interfaces "GtkFlowBox")))
   ;; Check properties
   (is (equal '("accept-unpaired-release" "activate-on-single-click"
                "column-spacing" "homogeneous" "max-children-per-line"
                "min-children-per-line" "orientation" "row-spacing"
                "selection-mode")
-             (list-properties "GtkFlowBox")))
+             (gtk-test:list-properties "GtkFlowBox")))
   ;; Check signals
   (is (equal '("activate-cursor-child" "child-activated" "move-cursor"
                "select-all" "selected-children-changed" "toggle-cursor-child"
                "unselect-all")
-             (list-signals "GtkFlowBox")))
+             (gtk-test:list-signals "GtkFlowBox")))
   ;; Check CSS name
   (is (string= "flowbox"
                (gtk:widget-class-css-name "GtkFlowBox")))
-  ;; Check CSS classes
-  (is (equal '()
-             (gtk:widget-css-classes (make-instance 'gtk:flow-box-child))))
   ;; Check accessible role
   (is (eq :GRID (gtk:widget-class-accessible-role "GtkFlowBox")))
-  ;; Check the class definition
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GtkFlowBox" GTK-FLOW-BOX
                                (:SUPERCLASS GTK-WIDGET :EXPORT T :INTERFACES
                                 ("GtkAccessible" "GtkBuildable"
@@ -181,11 +217,71 @@
   (is (typep (gtk:flow-box-new) 'gtk:flow-box)))
 
 ;;;     gtk_flow_box_insert
+;;;     gtk_flow_box_get_child_at_index
+
+(test gtk-flow-box-insert
+  (let ((flowbox (gtk:flow-box-new))
+        (child1 (gtk:flow-box-child-new))
+        (child2 (gtk:flow-box-child-new))
+        (child3 (gtk:flow-box-child-new)))
+
+    (is-false (gtk:flow-box-insert flowbox child1 0))
+    (is (eq child1 (gtk:flow-box-child-at-index flowbox 0)))
+
+    (is-false (gtk:flow-box-insert flowbox child2 0))
+    (is (eq child2 (gtk:flow-box-child-at-index flowbox 0)))
+    (is (eq child1 (gtk:flow-box-child-at-index flowbox 1)))
+
+    (is-false (gtk:flow-box-insert flowbox child3 -1))
+    (is (eq child3 (gtk:flow-box-child-at-index flowbox 2)))
+    (is (eq child2 (gtk:flow-box-child-at-index flowbox 0)))
+    (is (eq child1 (gtk:flow-box-child-at-index flowbox 1)))))
+
 ;;;     gtk_flow_box_append                                Since 4.6
 ;;;     gtk_flow_box_prepend                               Since 4.6
+
+(test gtk-flow-box-append/prepend
+  (let ((flowbox (gtk:flow-box-new))
+        (child1 (gtk:flow-box-child-new))
+        (child2 (gtk:flow-box-child-new))
+        (child3 (gtk:flow-box-child-new)))
+
+    (is-false (gtk:flow-box-append flowbox child1))
+    (is (eq child1 (gtk:flow-box-child-at-index flowbox 0)))
+
+    (is-false (gtk:flow-box-prepend flowbox child2))
+    (is (eq child2 (gtk:flow-box-child-at-index flowbox 0)))
+    (is (eq child1 (gtk:flow-box-child-at-index flowbox 1)))
+
+    (is-false (gtk:flow-box-append flowbox child3))
+    (is (eq child3 (gtk:flow-box-child-at-index flowbox 2)))
+    (is (eq child2 (gtk:flow-box-child-at-index flowbox 0)))
+    (is (eq child1 (gtk:flow-box-child-at-index flowbox 1)))))
+
 ;;;     gtk_flow_box_remove
 ;;;     gtk_flow_box_remove_all                            Since 4.12
-;;;     gtk_flow_box_get_child_at_index
+
+(test gtk-flow-box-append/prepend
+  (let ((flowbox (gtk:flow-box-new))
+        (child1 (gtk:flow-box-child-new))
+        (child2 (gtk:flow-box-child-new))
+        (child3 (gtk:flow-box-child-new)))
+
+    (is-false (gtk:flow-box-append flowbox child1))
+    (is-false (gtk:flow-box-append flowbox child2))
+    (is-false (gtk:flow-box-append flowbox child3))
+
+    (is (eq child3 (gtk:flow-box-child-at-index flowbox 2)))
+    (is (eq child2 (gtk:flow-box-child-at-index flowbox 1)))
+    (is (eq child1 (gtk:flow-box-child-at-index flowbox 0)))
+
+    (is-false (gtk:flow-box-remove flowbox child1))
+    (is (eq child3 (gtk:flow-box-child-at-index flowbox 1)))
+    (is (eq child2 (gtk:flow-box-child-at-index flowbox 0)))
+
+    (is-false (gtk:flow-box-remove-all flowbox))
+    (is-false (gtk:flow-box-child-at-index flowbox 0))))
+
 ;;;     gtk_flow_box_get_child_at_pos
 ;;;     gtk_flow_box_set_hadjustment
 ;;;     gtk_flow_box_set_vadjustment

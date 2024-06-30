@@ -182,8 +182,8 @@
     added to a @class{gtk:flow-box} widget.
   @end{short}
   @begin[Accessibility]{dictionary}
-    The @class{gtk:flow-box-child} implementation uses the @code{:grid-cell} role
-    of the @symbol{gtk:accessible-role} enumeration.
+    The @class{gtk:flow-box-child} implementation uses the @code{:grid-cell}
+    role of the @symbol{gtk:accessible-role} enumeration.
   @end{dictionary}
   @begin[Signal Details]{dictionary}
     @subheading{The \"activate\" signal}
@@ -259,7 +259,7 @@ lambda (child)    :action
 
 (cffi:defcfun ("gtk_flow_box_child_get_index" flow-box-child-index) :int
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{2024-6-29}
   @argument[child]{a @class{gtk:flow-box-child} widget}
   @return{The integer with the index of the child, or -1 if the child is not
     in a flow box.}
@@ -277,7 +277,7 @@ lambda (child)    :action
 (cffi:defcfun ("gtk_flow_box_child_is_selected" flow-box-child-is-selected)
     :boolean
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{2024-6-29}
   @argument[child]{a @class{gtk:flow-box-child} widget}
   @return{@em{True} if @arg{child} is selected.}
   @begin{short}
@@ -772,7 +772,7 @@ lambda (flowbox)    :action
 
 (cffi:defcfun ("gtk_flow_box_insert" flow-box-insert) :void
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to add}
   @argument[position]{an integer with the position to insert the child widget
@@ -802,7 +802,7 @@ lambda (flowbox)    :action
 #+gtk-4-6
 (cffi:defcfun ("gtk_flow_box_append" flow-box-append) :void
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to append}
   @begin{short}
@@ -829,7 +829,7 @@ lambda (flowbox)    :action
 #+gtk-4-6
 (cffi:defcfun ("gtk_flow_box_append" flow-box-prepend) :void
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to prepend}
   @begin{short}
@@ -855,7 +855,7 @@ lambda (flowbox)    :action
 
 (cffi:defcfun ("gtk_flow_box_remove" flow-box-remove) :void
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[child]{a @class{gtk:widget} child widget to remove}
   @short{Removes a child widget from the flow box.}
@@ -873,7 +873,7 @@ lambda (flowbox)    :action
 #+gtk-4-12
 (cffi:defcfun ("gtk_flow_box_remove_all" flow-box-remove-all) :void
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @begin{short}
     Removes all child widgets from the flow box.
@@ -893,7 +893,7 @@ lambda (flowbox)    :action
 (cffi:defcfun ("gtk_flow_box_get_child_at_index" flow-box-child-at-index)
     (g:object flow-box-child)
  #+liber-documentation
- "@version{#2021-12-6}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[index]{an integer with the position of the child widget}
   @return{The child widget, which will always be a @class{gtk:flow-box-child}
@@ -1076,7 +1076,7 @@ lambda (flowbox)    :action
 
 (cffi:defcfun ("gtk_flow_box_select_child" flow-box-select-child) :void
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[child]{a @class{gtk:widget} child widget of the flow box}
   @begin{short}
@@ -1156,7 +1156,7 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-symbol 'flow-box-filter-func)
       "Callback"
       (liber:symbol-documentation 'flow-box-filter-func)
- "@version{#2024-4-14}
+ "@version{2024-6-30}
   @syntax{lambda (child) => result}
   @argument[child]{a @class{gtk:flow-box-child} widget that may be filtered}
   @argument[result]{@em{true} if the child should be visible, @em{false}
@@ -1183,7 +1183,7 @@ lambda (flowbox)    :action
 
 (defun flow-box-set-filter-func (flowbox func)
  #+liber-documentation
- "@version{#2024-4-14}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[func]{a @symbol{gtk:flow-box-filter-func} callback function that
     lets you filter which children to show}
@@ -1220,12 +1220,11 @@ lambda (flowbox)    :action
 (cffi:defcfun ("gtk_flow_box_invalidate_filter" flow-box-invalidate-filter)
     :void
  #+liber-documentation
- "@version{#2021-12-15}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @begin{short}
     Updates the filtering for all children in the flow box.
   @end{short}
-
   Call this function when the result of the filter function on the flow box is
   changed due ot an external factor. For instance, this would be used if the
   filter function just looked for a specific search term, and the search entry
@@ -1251,7 +1250,7 @@ lambda (flowbox)    :action
 (setf (liber:alias-for-symbol 'flow-box-sort-func)
       "Callback"
       (liber:symbol-documentation 'flow-box-sort-func)
- "@version{#2024-4-14}
+ "@version{2024-6-30}
   @syntax{lambda (child1 child2) => result}
   @argument[child1]{a first @class{gtk:flow-box-child} widget}
   @argument[child2]{a second @class{gtk:flow-box-child} widget}
@@ -1278,7 +1277,7 @@ lambda (flowbox)    :action
 
 (defun flow-box-set-sort-func (flowbox func)
  #+liber-documentation
- "@version{#2024-4-15}
+ "@version{2024-6-30}
   @argument[flowbox]{a @class{gtk:flow-box} widget}
   @argument[func]{a @symbol{gtk:flow-box-sort-func} callback function for the
     sort function}

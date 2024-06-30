@@ -930,7 +930,6 @@ GtkCellRenderer         GtkWidget
       @about-function{native-unrealize}
     @end{subsection}
     @begin[GtkWindow]{subsection}
-      Toplevel which can contain other widgets.
       @about-class{window}
       @about-generic{window-application}
       @about-generic{window-child}
@@ -984,7 +983,6 @@ GtkCellRenderer         GtkWidget
       @about-function{window-is-suspended}
     @end{subsection}
     @begin[GtkAboutDialog]{subsection}
-      Display information about an application.
       @about-symbol{license}
       @about-class{about-dialog}
       @about-generic{about-dialog-artists}
@@ -1019,7 +1017,6 @@ GtkCellRenderer         GtkWidget
       @about-function{alert-dialog-show}
     @end{subsection}
     @begin[GtkWindowGroup]{subsection}
-      Limit the effect of grabs.
       @about-class{window-group}
       @about-function{window-group-new}
       @about-function{window-group-add-window}
@@ -1027,7 +1024,6 @@ GtkCellRenderer         GtkWidget
       @about-function{window-group-list-windows}
     @end{subsection}
     @begin[GtkNativeDialog]{subsection}
-      Integrate with native dialogs.
       @about-class{native-dialog}
       @about-generic{native-dialog-modal}
       @about-generic{native-dialog-title}
@@ -1040,8 +1036,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Layout Widgets]{section}
     @begin[GtkBox]{subsection}
-      The @class{gtk:box} widget arranges child widgets into a single row or
-      column.
       @about-class{box}
       @about-generic{box-baseline-child}
       @about-generic{box-baseline-position}
@@ -1055,7 +1049,6 @@ GtkCellRenderer         GtkWidget
       @about-function{box-reorder-child-after}
     @end{subsection}
     @begin[GtkCenterBox]{subsection}
-      A centering container.
       @about-class{center-box}
       @about-generic{center-box-baseline-position}
       @about-generic{center-box-center-widget}
@@ -1065,7 +1058,6 @@ GtkCellRenderer         GtkWidget
       @about-function{center-box-new}
     @end{subsection}
     @begin[GtkGrid]{subsection}
-      Arranges its child widgets in rows and columns.
       @about-class{grid}
       @about-generic{grid-baseline-row}
       @about-generic{grid-column-homogeneous}
@@ -1086,7 +1078,6 @@ GtkCellRenderer         GtkWidget
       @about-function{grid-row-baseline-position}
     @end{subsection}
     @begin[GtkRevealer]{subsection}
-      Hide and show with animation.
       @about-symbol{revealer-transition-type}
       @about-class{revealer}
       @about-generic{revealer-child}
@@ -1144,7 +1135,6 @@ GtkCellRenderer         GtkWidget
       @about-function{list-box-bind-model}
     @end{subsection}
     @begin[GtkFlowBox]{subsection}
-      A container that allows reflowing its children.
       @about-class{flow-box-child}
       @about-generic{flow-box-child-child}
       @about-function{flow-box-child-new}
@@ -1187,7 +1177,6 @@ GtkCellRenderer         GtkWidget
       @about-function{flow-box-bind-model}
     @end{subsection}
     @begin[GtkStack]{subsection}
-      A stacking container.
       @about-symbol{stack-transition-type}
       @about-class{stack-page}
       @about-generic{stack-page-child}
@@ -1274,7 +1263,6 @@ GtkCellRenderer         GtkWidget
       @about-function{paned-new}
     @end{subsection}
     @begin[GtkNotebook]{subsection}
-      A tabbed notebook container.
       @about-symbol{notebook-tab}
       @about-class{notebook-page}
       @about-generic{notebook-page-child}
@@ -1496,7 +1484,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Display Widgets]{section}
     @begin[GtkLabel]{subsection}
-      A widget that displays a small to medium amount of text.
       @about-class{label}
       @about-generic{label-attributes}
       @about-generic{label-ellipsize}
@@ -1547,7 +1534,6 @@ GtkCellRenderer         GtkWidget
       @about-function{inscription-new}
     @end{subsection}
     @begin[GtkImage]{subsection}
-      A widget displaying an image.
       @about-symbol{image-type}
       @about-class{image}
       @about-generic{image-file}
@@ -2491,7 +2477,6 @@ GtkCellRenderer         GtkWidget
   @end{section}
   @begin[Widgets for custom drawing]{section}
     @begin[GtkDrawingArea]{subsection}
-      A widget for custom user interface elements.
       @about-class{drawing-area}
       @about-generic{drawing-area-content-height}
       @about-generic{drawing-area-content-width}

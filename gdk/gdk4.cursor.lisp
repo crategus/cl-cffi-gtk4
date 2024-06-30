@@ -2,11 +2,11 @@
 ;;; gdk4.cursor.lisp
 ;;;
 ;;; The documentation of this file is taken from the GDK 4 Reference Manual
-;;; Version 4.10 and modified to document the Lisp binding to the GDK library.
+;;; Version 4.12 and modified to document the Lisp binding to the GDK library.
 ;;; See <http://www.gtk.org>. The API documentation of the Lisp binding is
 ;;; available from <http://www.crategus.com/books/cl-cffi-gtk4/>.
 ;;;
-;;; Copyright (C) 2011 - 2023 Dieter Kaiser
+;;; Copyright (C) 2011 - 2024 Dieter Kaiser
 ;;;
 ;;; Permission is hereby granted, free of charge, to any person obtaining a
 ;;; copy of this software and associated documentation files (the "Software"),
@@ -91,9 +91,9 @@
 
 #+liber-documentation
 (setf (documentation 'cursor 'type)
- "@version{#2023-8-7}
+ "@version{2024-6-30}
   @begin{short}
-    A @class{gdk:cursor} object represents a cursor.
+    The @class{gdk:cursor} object represents a cursor.
   @end{short}
   Cursors are immutable objects, so once you created them, there is no way to
   modify them later. Create a new cursor when you want to change something
@@ -137,7 +137,7 @@
 ;;; Property and Accessor Details
 ;;; ----------------------------------------------------------------------------
 
-;;; --- cursor-fallback --------------------------------------------------------
+;;; --- gdk:cursor-fallback ----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "fallback" 'cursor) t)
@@ -149,8 +149,8 @@
 (setf (liber:alias-for-function 'cursor-fallback)
       "Accessor"
       (documentation 'cursor-fallback 'function)
- "@version{#2023-8-7}
-  @syntax[]{(gdk:cursor-fallback object) => fallback}
+ "@version{2024-6-30}
+  @syntax{(gdk:cursor-fallback object) => fallback}
   @argument[object]{a @class{gdk:cursor} object}
   @argument[fallback]{a @class{gdk:cursor} object with the fallback of the
     cursor or @code{nil} to use the default cursor as fallback}
@@ -169,7 +169,7 @@
   @see-class{gdk:cursor}
   @see-class{gdk:display}")
 
-;;; --- cursor-hotspot-x -------------------------------------------------------
+;;; --- gdk:cursor-hotspot-x ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "hotspot-x" 'cursor) t)
@@ -183,10 +183,10 @@
 (setf (liber:alias-for-function 'cursor-hotspot-x)
       "Accessor"
       (documentation 'cursor-hotspot-x 'function)
- "@version{#2023-8-7}
-  @syntax[]{(gdk:cursor-hotspot-x object) => hotspot-x}
+ "@version{2024-6-30}
+  @syntax{(gdk:cursor-hotspot-x object) => hotspot}
   @argument[object]{a @class{gdk:cursor} object}
-  @argument[hotspot-x]{an integer with the horizontal offset of the hotspot or
+  @argument[hotspot]{an integer with the horizontal offset of the hotspot or
     0 for named cursors}
   @begin{short}
     Accessor of the @slot[gdk:cursor]{hotspot-x} slot of the @class{gdk:cursor}
@@ -203,7 +203,7 @@
   @see-function{gdk:cursor-new-from-texture}
   @see-function{gdk:cursor-hotspot-y}")
 
-;;; --- cursor-hotspot-y -------------------------------------------------------
+;;; --- gdk:cursor-hotspot-y ---------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "hotspot-y" 'cursor) t)
@@ -217,10 +217,10 @@
 (setf (liber:alias-for-function 'cursor-hotspot-y)
       "Accessor"
       (documentation 'cursor-hotspot-y 'function)
- "@version{#2023-8-7}
-  @syntax[]{(gdk:cursor-hotspot-y object) => hotspot-y}
+ "@version{2024-6-30}
+  @syntax{(gdk:cursor-hotspot-y object) => hotspot}
   @argument[object]{a @class{gdk:cursor} object}
-  @argument[hotspot-y]{an integer with the vertical offset of the hotspot or
+  @argument[hotspot]{an integer with the vertical offset of the hotspot or
     0 for named cursors}
   @begin{short}
     Accessor of the @slot[gdk:cursor]{hotspot-y} slot of the @class{gdk:cursor}
@@ -237,21 +237,21 @@
   @see-function{gdk:cursor-new-from-texture}
   @see-function{gdk:cursor-hotspot-x}")
 
-;;; --- cursor-name ------------------------------------------------------------
+;;; --- gdk:cursor-name --------------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "name" 'cursor) t)
  "The @code{name} property of type @code{:string}
   (Read / Write / Construct only) @br{}
-  Name of the cursor. @br{}
+  The name of the cursor. @br{}
   Default value: @code{nil}")
 
 #+liber-documentation
 (setf (liber:alias-for-function 'cursor-name)
       "Accessor"
       (documentation 'cursor-name 'function)
- "@version{#2023-8-7}
-  @syntax[]{(gdk:cursor-name object) => name}
+ "@version{2024-6-30}
+  @syntax{(gdk:cursor-name object) => name}
   @argument[object]{a @class{gdk:cursor} object}
   @argument[name]{a string with the name of the cursor or @code{nil} if it is
     not a named cursor}
@@ -263,7 +263,7 @@
   cursor is not a named cursor, @code{nil} will be returned.
   @see-class{gdk:cursor}")
 
-;;; --- cursor-texture ---------------------------------------------------------
+;;; --- gdk:cursor-texture -----------------------------------------------------
 
 #+liber-documentation
 (setf (documentation (liber:slot-documentation "texture" 'cursor) t)
@@ -275,8 +275,8 @@
 (setf (liber:alias-for-function 'cursor-texture)
       "Accessor"
       (documentation 'cursor-texture 'function)
- "@version{#2023-8-7}
-  @syntax[]{(gdk:cursor-texture object) => texture}
+ "@version{2024-6-30}
+  @syntax{(gdk:cursor-texture object) => texture}
   @argument[object]{a @class{gdk:cursor} object}
   @argument[texture]{a @class{gdk:texture} object with the texture for
   @arg{cursor} or @code{nil} if it is a named cursor}
@@ -290,47 +290,54 @@
   @see-class{gdk:texture}")
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cursor_new_from_texture ()
+;;; gdk_cursor_new_from_texture
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_cursor_new_from_texture" cursor-new-from-texture)
+(cffi:defcfun ("gdk_cursor_new_from_texture" %cursor-new-from-texture)
     (g:object cursor)
+  (texture (g:object texture))
+  (xhotspot :int)
+  (yhotspot :int)
+  (fallback (g:object cursor)))
+
+(defun cursor-new-from-texture (texture xhotspot yhotspot &optional fallback)
  #+liber-documentation
- "@version{#2023-8-7}
+ "@version{2024-6-30}
   @argument[texture]{a @class{gdk:texture} object with the texture providing
     the pixel data}
-  @argument[hotspot-x]{an integer with the horizontal offset of the hotspot of
+  @argument[xhotspot]{an integer with the horizontal offset of the hotspot of
     the cursor}
-  @argument[hotspot-y]{an integer with the vertical offset of the hotspot of
+  @argument[yhotspot]{an integer with the vertical offset of the hotspot of
     the cursor}
-  @argument[fallback]{@code{nil} or the @class{gdk:cursor} object to fall back
-    to when this one cannot be supported}
-  @return{A new @class{gdk:cursor} object.}
+  @argument[fallback]{an optional @class{gdk:cursor} object to fall back to
+    when this one cannot be supported, the default is @code{nil}}
+  @return{The new @class{gdk:cursor} object.}
   @begin{short}
     Creates a new cursor from a @class{gdk:texture} object.
   @end{short}
   @see-class{gdk:cursor}
   @see-class{gdk:texture}"
-  (texture (g:object texture))
-  (hotspot-x :int)
-  (hotspot-y :int)
-  (fallback (g:object cursor)))
+  (%cursor-new-from-texture texture xhotspot yhotspot fallback))
 
 (export 'cursor-new-from-texture)
 
 ;;; ----------------------------------------------------------------------------
-;;; gdk_cursor_new_from_name ()
+;;; gdk_cursor_new_from_name
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gdk_cursor_new_from_name" cursor-new-from-name)
+(cffi:defcfun ("gdk_cursor_new_from_name" %cursor-new-from-name)
     (g:object cursor)
+  (name :string)
+  (fallback (g:object cursor)))
+
+(defun cursor-new-from-name (name &optional fallback)
  #+liber-documentation
- "@version{#2021-12-11}
+ "@version{2024-6-30}
   @argument[name]{a string with the name of the cursor}
-  @argument[fallback]{@code{nil} or a @class{gdk:cursor} object to fall back to
-    when this one cannot be supported}
-  @return{A new @class{gdk:cursor} object, or @code{nil} if there is no cursor
-    with the given @arg{name}.}
+  @argument[fallback]{an optional @class{gdk:cursor} object to fall back to
+    when this one cannot be supported, the default is @code{nil}}
+  @return{The new @class{gdk:cursor} object, or @code{nil} if there is no
+    cursor with the given @arg{name}.}
   @begin{short}
     Creates a new cursor by looking up @arg{name} in the current cursor theme.
   @end{short}
@@ -375,13 +382,12 @@
   @end{table}
   @begin[Examples]{dictionary}
     @begin{pre}
-(gdk:cursor-new-from-name \"wait\" nil)
+(gdk:cursor-new-from-name \"wait\")
 => #<GDK:CURSOR {1013383A73@}>
     @end{pre}
   @end{dictionary}
   @see-class{gdk:cursor}"
-  (name :string)
-  (fallback (g:object cursor)))
+  (%cursor-new-from-name name fallback))
 
 (export 'cursor-new-from-name)
 

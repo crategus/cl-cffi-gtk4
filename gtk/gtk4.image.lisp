@@ -130,8 +130,8 @@
     Describes the image data representation used by a @class{gtk:image} widget.
   @end{short}
   If you want to get the image from the widget, you can only get the currently
-  stored representation. e.g. if the @fun{gtk:image-storage-type} function
-  returns the @code{:paintable} value, then you can call the
+  stored representation. For example, if the @fun{gtk:image-storage-type}
+  function returns the @code{:paintable} value, then you can call the
   @fun{gtk:image-paintable} function. For empty images, you can request any
   storage type, but they will all return @code{nil} values.
   @see-class{gtk:image}
@@ -684,7 +684,7 @@
 
 (cffi:defcfun ("gtk_image_clear" image-clear) :void
  #+liber-documentation
- "@version{#2021-12-22}
+ "@version{2024-6-30}
   @argument[image]{a @class{gtk:image} widget}
   @short{Resets the image to be empty.}
   @see-class{gtk:image}"
@@ -696,19 +696,22 @@
 ;;; gtk_image_set_from_file
 ;;; ----------------------------------------------------------------------------
 
-(cffi:defcfun ("gtk_image_set_from_file" image-set-from-file) :void
+(cffi:defcfun ("gtk_image_set_from_file" %image-set-from-file) :void
+  (image (g:object image))
+  (filename :string))
+
+(defun image-set-from-file (image path)
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{2024-6-30}
   @argument[image]{a @class{gtk:image} widget}
-  @argument[filename]{a string with a filename}
+  @argument[path]{a pathname or namestring for the file to load}
   @begin{short}
     Sets the image to display @arg{filename}.
   @end{short}
   See the @fun{gtk:image-new-from-file} function for details.
   @see-class{gtk:image}
   @see-function{gtk:image-new-from-file}"
-  (image (g:object image))
-  (filename :string))
+  (%image-set-from-file image (namestring path)))
 
 (export 'image-set-from-file)
 
@@ -718,7 +721,7 @@
 
 (cffi:defcfun ("gtk_image_set_from_resource" image-set-from-resource) :void
  #+liber-documentation
- "@version{#2021-12-17}
+ "@version{2024-6-30}
   @argument[image]{a @class{gtk:image} widget}
   @argument[resource]{a string with a resource path}
   @begin{short}
@@ -744,20 +747,19 @@
 
 (defun image-set-from-pixbuf (image pixbuf)
  #+liber-documentation
- "@version{2024-4-25}
+ "@version{2024-6-30}
   @argument[image]{a @class{gtk:image} widget}
   @argument[pixbuf]{a @class{gdk-pixbuf:pixbuf} object}
   @begin{short}
     Sets the image to display @arg{pixbuf}.
   @end{short}
-  See the @fun{gtk:image-new-from-pixbuf} function for more details.
   @begin[Warning]{dictionary}
     This function is deprecated since 4.12. Use the
     @fun{gtk:image-set-from-paintable} function instead.
   @end{dictionary}
   @see-class{gtk:image}
   @see-class{gdk-pixbuf:pixbuf}
-  @see-function{gtk:image-new-from-pixbuf}"
+  @see-function{gdk:image-set-from-paintable}"
   #+(and gtk-4-12 gtk-warn-deprecated)
   (when gtk-init:*gtk-warn-deprecated*
     (warn "GTK:IMAGE-SET-FROM-PIXBUF is deprecated since 4.12"))
@@ -771,7 +773,7 @@
 
 (cffi:defcfun ("gtk_image_set_from_paintable" image-set-from-paintable) :void
  #+liber-documentation
- "@version{#2022-7-20}
+ "@version{2024-6-30}
   @argument[image]{a @class{gtk:image} widget}
   @argument[paintable]{a @class{gdk:paintable} object}
   @begin{short}
@@ -792,7 +794,7 @@
 
 (cffi:defcfun ("gtk_image_set_from_icon_name" image-set-from-icon-name) :void
  #+liber-documentation
- "@version{#2023-10-18}
+ "@version{2024-6-30}
   @argument[image]{a @class{gtk:image} widget}
   @argument[name]{a string with an icon name}
   @begin{short}

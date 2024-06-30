@@ -523,8 +523,8 @@
   @syntax[]{(gdk:gl-context-uses-es object) => setting}
   @syntax[]{(setf gdk:gl-context-use-es object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
-  @argument[setting]{An integer whether the context uses OpenGL instead of
-    OpenGL, or -1 to allow auto-detection.}
+  @argument[setting]{an integer whether the context uses OpenGL instead of
+    OpenGL, or -1 to allow auto-detection}
   @begin{short}
     The @fun{gdk:gl-context-uses-es} function checks whether the context is
     using an OpenGL or OpenGL ES profile.
