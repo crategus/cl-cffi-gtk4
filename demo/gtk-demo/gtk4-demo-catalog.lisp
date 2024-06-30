@@ -222,7 +222,18 @@
        ":window"
        "DO-FLOW-BOX"
        "gtk4-example"
-       "flow-box.lisp")
+       "flow-box.lisp"
+       :keywords
+       "GtkFlowBox"
+       "GtkFlowBoxChild"
+       "gtk:flow-box"
+       "gtk:flow-box-child"
+       "gtk:flow-box-child-child"
+       "gtk:flow-box-invalidate-filter"
+       "gtk:flow-box-set-filter-func"
+       "gtk:flow-box-set-sort-func"
+       "gtk:flow-box-append"
+       "gtk:flow-box-select-child")
       ("Stack"
        ":window"
        "DO-STACK"

@@ -38,7 +38,7 @@
                (gtk:editable-insert-text editable
                                          (string-upcase text)
                                          (mem-ref position :intptr))
-               (g:signal-stop-emission-by-name editable "insert-text")
+               (g:signal-stop-emission editable "insert-text")
                (g:signal-handler-unblock editable handlerid))))
     ;; Insert more text, this emits the "insert-text" signal
     (gtk:editable-insert-text entry " world" pos)

@@ -20,5 +20,9 @@
                                          "Text for page ~a" (1+ i))))
             (label (make-instance 'gtk:label
                                   :label (format nil "Page ~a" (1+ i)))))
-        (gtk:notebook-add-page notebook page label)))
+        (gtk:notebook-add-page notebook page label)
+        ;; Make the tabs detachable
+        (setf (gtk:notebook-tab-detachable notebook page) t)
+        ;; Make the tabs reorderable
+        (setf (gtk:notebook-tab-reorderable notebook page) t)))
     (gtk:window-present window)))
