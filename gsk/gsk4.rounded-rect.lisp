@@ -142,7 +142,7 @@
 (defun rounded-rect-bounds (rect)
  #+liber-documentation
  "@version{2023-12-4}
-  @syntax[]{(gsk:rounded-rect-bounds rect) => bounds}
+  @syntax{(gsk:rounded-rect-bounds rect) => bounds}
   @argument[rect]{a @symbol{gsk:rounded-rect} instance}
   @argument[bounds]{a @symbol{graphene:rect-t} instance}
   @short{Accessor of the @arg{bounds} slot of the rounded rectangle.}
@@ -155,7 +155,7 @@
 (defun rounded-rect-corner (rect nth)
  #+liber-documentation
  "@version{2023-12-4}
-  @syntax[]{(gsk:rounded-rect-corner rect nth) => corner}
+  @syntax{(gsk:rounded-rect-corner rect nth) => corner}
   @argument[rect]{a @symbol{gsk:rounded-rect} instance}
   @argument[nth]{an integer with the number of the corner to retrieve}
   @argument[corner]{a @symbol{graphene:size-t} instance with the size of

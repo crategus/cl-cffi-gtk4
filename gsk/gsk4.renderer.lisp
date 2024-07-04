@@ -115,7 +115,7 @@
       "Accessor"
       (documentation 'renderer-realized 'function)
  "@version{#2023-10-22}
-  @syntax[]{(gsk:renderer-realized object) => realized}
+  @syntax{(gsk:renderer-realized object) => realized}
   @argument[object]{a @class{gsk:renderer} instance}
   @argument[realized]{a boolean whether the renderer has been associated with
     a surface or draw context}
@@ -137,7 +137,7 @@
       "Accessor"
       (documentation 'renderer-surface 'function)
  "@version{#2023-10-22}
-  @syntax[]{(gsk:renderer-surface object) => surface}
+  @syntax{(gsk:renderer-surface object) => surface}
   @argument[object]{a @class{gsk:renderer} instance}
   @argument[surface]{a @class{gdk:surface} object}
   @begin{short}
