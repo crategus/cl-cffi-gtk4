@@ -16,16 +16,16 @@
   ;; Check the registered name
   (is (eq 'gsk:corner
           (glib:symbol-for-gtype "GskCorner")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GSK_CORNER_TOP_LEFT" "GSK_CORNER_TOP_RIGHT"
                "GSK_CORNER_BOTTOM_RIGHT" "GSK_CORNER_BOTTOM_LEFT")
-             (list-enum-item-name "GskCorner")))
+             (gtk-test:list-enum-item-name "GskCorner")))
   ;; Check the values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GskCorner")))
+             (gtk-test:list-enum-item-value "GskCorner")))
   ;; Check the nick names
   (is (equal '("top-left" "top-right" "bottom-right" "bottom-left")
-             (list-enum-item-nick "GskCorner")))
+             (gtk-test:list-enum-item-nick "GskCorner")))
   ;; Check the enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GskCorner" GSK-CORNER
                                      (:EXPORT T
@@ -237,4 +237,4 @@
 ;;;     gsk_rounded_rect_contains_rect
 ;;;     gsk_rounded_rect_intersects_rect
 
-;;; --- 2023-12-4 --------------------------------------------------------------
+;;; 2024-7-4

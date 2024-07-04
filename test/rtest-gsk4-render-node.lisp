@@ -30,11 +30,11 @@
                "GSK_DEBUG_NODE" "GSK_GL_SHADER_NODE" "GSK_TEXTURE_SCALE_NODE"
                "GSK_MASK_NODE" "GSK_FILL_NODE" "GSK_STROKE_NODE"
                "GSK_SUBSURFACE_NODE")
-             (list-enum-item-name "GskRenderNodeType")))
+             (gtk-test:list-enum-item-name "GskRenderNodeType")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
                25 26 27 28 29 30)
-             (list-enum-item-value "GskRenderNodeType")))
+             (gtk-test:list-enum-item-value "GskRenderNodeType")))
   ;; Check nick names
   (is (equal '("not-a-render-node" "container-node" "cairo-node" "color-node"
                "linear-gradient-node" "repeating-linear-gradient-node"
@@ -46,7 +46,7 @@
                "text-node" "blur-node" "debug-node" "gl-shader-node"
                "texture-scale-node" "mask-node" "fill-node" "stroke-node"
                "subsurface-node")
-             (list-enum-item-nick "GskRenderNodeType")))
+             (gtk-test:list-enum-item-nick "GskRenderNodeType")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GskRenderNodeType"
                                      GSK-RENDER-NODE-TYPE

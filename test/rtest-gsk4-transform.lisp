@@ -23,13 +23,13 @@
                "GSK_TRANSFORM_CATEGORY_2D_AFFINE"
                "GSK_TRANSFORM_CATEGORY_2D_TRANSLATE"
                "GSK_TRANSFORM_CATEGORY_IDENTITY")
-             (list-enum-item-name "GskTransformCategory")))
+             (gtk-test:list-enum-item-name "GskTransformCategory")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5 6)
-             (list-enum-item-value "GskTransformCategory")))
+             (gtk-test:list-enum-item-value "GskTransformCategory")))
   ;; Check nick names
   (is (equal '("unknown" "any" "3d" "2d" "2d-affine" "2d-translate" "identity")
-             (list-enum-item-nick "GskTransformCategory")))
+             (gtk-test:list-enum-item-nick "GskTransformCategory")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GskTransformCategory"
                                      GSK-TRANSFORM-CATEGORY
