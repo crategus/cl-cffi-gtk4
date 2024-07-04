@@ -160,11 +160,11 @@ Numeric and Text Data Entry
 
 Multiline Text Editor
 
-  gtk4.text-iter.lisp                  GtkTextIter                    GTK 4.12 .
-  gtk4.text-tag.lisp                   GtkTextTag                     GTK 4.12 .
-  gtk4.text-tag-table.lisp             GtkTextTagTable                GTK 4.12 .
-  gtk4.text-mark.lisp                  GtkTextMark                    GTK 4.12 .
-  gtk4.text-buffer.lisp                GtkTextBuffer                  GTK 4.12 +
+  gtk4.text-iter.lisp                  GtkTextIter                    GTK 4.12
+  gtk4.text-tag.lisp                   GtkTextTag                     GTK 4.12
+  gtk4.text-tag-table.lisp             GtkTextTagTable                GTK 4.12
+  gtk4.text-mark.lisp                  GtkTextMark                    GTK 4.12
+  gtk4.text-buffer.lisp                GtkTextBuffer                  GTK 4.12 .
   gtk4.text-view.lisp                  GtkTextView                    GTK 4.12 .
 
 Combo Box, Popover
