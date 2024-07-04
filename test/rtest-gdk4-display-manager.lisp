@@ -8,31 +8,31 @@
 ;;;     GdkDisplayManager
 
 (test gdk-display-manager-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkDisplayManager"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:display-manager
           (glib:symbol-for-gtype "GdkDisplayManager")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkDisplayManager")
           (g:gtype (cffi:foreign-funcall "gdk_display_manager_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkDisplayManager")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GdkDisplayManager")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GdkDisplayManager")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkDisplayManager")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GdkDisplayManager")))
+  ;; Check properties
   (is (equal '("default-display")
-             (list-properties "GdkDisplayManager")))
-  ;; Check the signals
+             (gtk-test:list-properties "GdkDisplayManager")))
+  ;; Check signals
   (is (equal '("display-opened")
-             (list-signals "GdkDisplayManager")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GdkDisplayManager")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplayManager"
                                              GDK-DISPLAY-MANAGER
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -85,4 +85,4 @@
 
 ;;;     gdk_set_allowed_backends
 
-;;; --- 2023-7-16 --------------------------------------------------------------
+;;; 2024-7-4

@@ -8,27 +8,27 @@
 ;;;     GdkInputSource
 
 (test gdk-input-source
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkInputSource"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkInputSource")
           (g:gtype (cffi:foreign-funcall "gdk_input_source_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:input-source
           (glib:symbol-for-gtype "GdkInputSource")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_SOURCE_MOUSE" "GDK_SOURCE_PEN" "GDK_SOURCE_KEYBOARD"
                "GDK_SOURCE_TOUCHSCREEN" "GDK_SOURCE_TOUCHPAD"
                "GDK_SOURCE_TRACKPOINT" "GDK_SOURCE_TABLET_PAD")
-             (list-enum-item-name "GdkInputSource")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkInputSource")))
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6)
-             (list-enum-item-value "GdkInputSource")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkInputSource")))
+  ;; Check nick names
   (is (equal '("mouse" "pen" "keyboard" "touchscreen" "touchpad" "trackpoint"
                "tablet-pad")
-             (list-enum-item-nick "GdkInputSource")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkInputSource")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkInputSource"
                              GDK-INPUT-SOURCE
                              (:EXPORT T
@@ -45,28 +45,28 @@
 ;;;     GdkAxisUse
 
 (test gdk-axis-use
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkAxisUse"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkAxisUse")
           (g:gtype (cffi:foreign-funcall "gdk_axis_use_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:axis-use
           (glib:symbol-for-gtype "GdkAxisUse")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_AXIS_IGNORE" "GDK_AXIS_X" "GDK_AXIS_Y" "GDK_AXIS_DELTA_X"
                "GDK_AXIS_DELTA_Y" "GDK_AXIS_PRESSURE" "GDK_AXIS_XTILT"
                "GDK_AXIS_YTILT" "GDK_AXIS_WHEEL" "GDK_AXIS_DISTANCE"
                "GDK_AXIS_ROTATION" "GDK_AXIS_SLIDER" "GDK_AXIS_LAST")
-             (list-enum-item-name "GdkAxisUse")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkAxisUse")))
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12)
-             (list-enum-item-value "GdkAxisUse")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkAxisUse")))
+  ;; Check nick names
   (is (equal '("ignore" "x" "y" "delta-x" "delta-y" "pressure" "xtilt" "ytilt"
                "wheel" "distance" "rotation" "slider" "last")
-             (list-enum-item-nick "GdkAxisUse")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkAxisUse")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkAxisUse"
                              GDK-AXIS-USE
                              (:EXPORT T
@@ -89,29 +89,29 @@
 ;;;     GdkAxisFlags
 
 (test gdk-axis-flags
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GdkAxisFlags"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:axis-flags
           (glib:symbol-for-gtype "GdkAxisFlags")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkAxisFlags")
           (g:gtype (cffi:foreign-funcall "gdk_axis_flags_get_type" :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_AXIS_FLAG_X" "GDK_AXIS_FLAG_Y" "GDK_AXIS_FLAG_DELTA_X"
                "GDK_AXIS_FLAG_DELTA_Y" "GDK_AXIS_FLAG_PRESSURE"
                "GDK_AXIS_FLAG_XTILT" "GDK_AXIS_FLAG_YTILT" "GDK_AXIS_FLAG_WHEEL"
                "GDK_AXIS_FLAG_DISTANCE" "GDK_AXIS_FLAG_ROTATION"
                "GDK_AXIS_FLAG_SLIDER")
-             (list-flags-item-name "GdkAxisFlags")))
-  ;; Check the values
+             (gtk-test:list-flags-item-name "GdkAxisFlags")))
+  ;; Check values
   (is (equal '(2 4 8 16 32 64 128 256 512 1024 2048)
-             (list-flags-item-value "GdkAxisFlags")))
-  ;; Check the nick names
+             (gtk-test:list-flags-item-value "GdkAxisFlags")))
+  ;; Check nick names
   (is (equal '("x" "y" "delta-x" "delta-y" "pressure" "xtilt" "ytilt" "wheel"
                "distance" "rotation" "slider")
-             (list-flags-item-nick "GdkAxisFlags")))
-  ;; Check the flags definition
+             (gtk-test:list-flags-item-nick "GdkAxisFlags")))
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkAxisFlags"
                               GDK-AXIS-FLAGS
                               (:EXPORT T
@@ -132,37 +132,37 @@
 ;;;     GdkDevice
 
 (test gdk-device-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkDevice"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:device
           (glib:symbol-for-gtype "GdkDevice")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkDevice")
           (g:gtype (cffi:foreign-funcall "gdk_device_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkDevice")))
-  ;; Check the children
+  ;; Check children
   #-windows
-  (is (equal '("GdkWaylandDevice" "GdkX11DeviceXI2")
-             (list-children "GdkDevice")))
+  (is (equal '("GdkX11DeviceXI2")
+             (gtk-test:list-children "GdkDevice")))
   #+windows
   (is (equal '("GdkDeviceVirtual" "GdkDeviceWin32")
-             (list-children "GdkDevice")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GdkDevice")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkDevice")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GdkDevice")))
+  ;; Check properties
   (is (equal '("caps-lock-state" "direction" "display" "has-bidi-layouts"
                "has-cursor" "modifier-state" "n-axes" "name" "num-lock-state"
                "num-touches" "product-id" "scroll-lock-state" "seat" "source"
                "tool" "vendor-id")
-             (list-properties "GdkDevice")))
-  ;; Check the signals
+             (gtk-test:list-properties "GdkDevice")))
+  ;; Check signals
   (is (equal '("changed" "tool-changed")
-             (list-signals "GdkDevice")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GdkDevice")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDevice" GDK-DEVICE
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_device_get_type")
@@ -198,23 +198,6 @@
 
 ;;; --- Properties -------------------------------------------------------------
 
-;;;     caps-lock-state
-;;;     direction
-;;;     display
-;;;     has-bidi-layouts
-;;;     has-cursor
-;;;     modifier-state
-;;;     n-axes
-;;;     name
-;;;     num-lock-state
-;;;     num-touches
-;;;     product-id
-;;;     scroll-lock-state
-;;;     seat
-;;;     source
-;;;     tool
-;;;     vendor-id
-
 (test gdk-device-properties.1
   (let* ((seat (gdk:display-default-seat (gdk:display-default)))
          (device (gdk:seat-pointer seat)))
@@ -224,9 +207,12 @@
     (is-false (gdk:device-has-bidi-layouts device))
     (is-true (gdk:device-has-cursor device))
     (is-false (gdk:device-modifier-state device))
+    #-windows
+    (is (= 4 (gdk:device-n-axes device)))
+    #+windows
     (is (= 2 (gdk:device-n-axes device)))
     #-windows
-    (is (string= "Core Pointer" (gdk:device-name device)))
+    (is (string= "Virtual core pointer" (gdk:device-name device)))
     #+windows
     (is (string= "Virtual Core Pointer" (gdk:device-name device)))
     (is-false (gdk:device-num-lock-state device))
@@ -249,7 +235,7 @@
     (is-false (gdk:device-modifier-state device))
     (is (= 0 (gdk:device-n-axes device)))
     #-windows
-    (is (string= "Core Keyboard" (gdk:device-name device)))
+    (is (string= "Virtual core keyboard" (gdk:device-name device)))
     #+windows
     (is (string= "Virtual Core Keyboard" (gdk:device-name device)))
     (is (typep (gdk:device-num-lock-state device) 'boolean))
@@ -310,4 +296,4 @@
          (device (gdk:seat-keyboard seat)))
     (is (= 0 (gdk:device-timestamp device)))))
 
-;;; 2024-1-7
+;;; 2024-7-4

@@ -8,15 +8,15 @@
 ;;;     GdkToplevelState
 
 (test gdk-toplevel-state
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GdkToplevelState"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:toplevel-state
           (glib:symbol-for-gtype "GdkToplevelState")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkToplevelState")
           (g:gtype (cffi:foreign-funcall "gdk_toplevel_state_get_type" :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_TOPLEVEL_STATE_MINIMIZED" "GDK_TOPLEVEL_STATE_MAXIMIZED"
                "GDK_TOPLEVEL_STATE_STICKY" "GDK_TOPLEVEL_STATE_FULLSCREEN"
                "GDK_TOPLEVEL_STATE_ABOVE" "GDK_TOPLEVEL_STATE_BELOW"
@@ -29,18 +29,18 @@
                "GDK_TOPLEVEL_STATE_LEFT_TILED"
                "GDK_TOPLEVEL_STATE_LEFT_RESIZABLE"
                "GDK_TOPLEVEL_STATE_SUSPENDED")
-             (list-flags-item-name "GdkToplevelState")))
-  ;; Check the values
+             (gtk-test:list-flags-item-name "GdkToplevelState")))
+  ;; Check values
   (is (equal '(1 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384 32768
                65536)
-             (list-flags-item-value "GdkToplevelState")))
-  ;; Check the nick names
+             (gtk-test:list-flags-item-value "GdkToplevelState")))
+  ;; Check nick names
   (is (equal '("minimized" "maximized" "sticky" "fullscreen" "above" "below"
                "focused" "tiled" "top-tiled" "top-resizable" "right-tiled"
                "right-resizable" "bottom-tiled" "bottom-resizable" "left-tiled"
                "left-resizable" "suspended")
-             (list-flags-item-nick "GdkToplevelState")))
-  ;; Check the flags definition
+             (gtk-test:list-flags-item-nick "GdkToplevelState")))
+  ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkToplevelState" GDK-TOPLEVEL-STATE
                                       (:EXPORT T
                                        :TYPE-INITIALIZER
@@ -67,25 +67,25 @@
 ;;;     GdkFullscreenMode
 
 (test gdk-fullscreen-mode
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkFullscreenMode"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkFullscreenMode")
           (g:gtype (cffi:foreign-funcall "gdk_fullscreen_mode_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:fullscreen-mode
           (glib:symbol-for-gtype "GdkFullscreenMode")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_FULLSCREEN_ON_CURRENT_MONITOR"
                "GDK_FULLSCREEN_ON_ALL_MONITORS")
-             (list-enum-item-name "GdkFullscreenMode")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkFullscreenMode")))
+  ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GdkFullscreenMode")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkFullscreenMode")))
+  ;; Check nick names
   (is (equal '("current-monitor" "all-monitors")
-             (list-enum-item-nick "GdkFullscreenMode")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkFullscreenMode")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkFullscreenMode" GDK-FULLSCREEN-MODE
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -97,28 +97,28 @@
 ;;;     GdkSurfaceEdge
 
 (test gdk-surface-edge
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkSurfaceEdge"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkSurfaceEdge")
           (g:gtype (cffi:foreign-funcall "gdk_surface_edge_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:surface-edge
           (glib:symbol-for-gtype "GdkSurfaceEdge")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_SURFACE_EDGE_NORTH_WEST" "GDK_SURFACE_EDGE_NORTH"
                "GDK_SURFACE_EDGE_NORTH_EAST" "GDK_SURFACE_EDGE_WEST"
                "GDK_SURFACE_EDGE_EAST" "GDK_SURFACE_EDGE_SOUTH_WEST"
                "GDK_SURFACE_EDGE_SOUTH" "GDK_SURFACE_EDGE_SOUTH_EAST")
-             (list-enum-item-name "GdkSurfaceEdge")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkSurfaceEdge")))
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7)
-             (list-enum-item-value "GdkSurfaceEdge")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkSurfaceEdge")))
+  ;; Check nick names
   (is (equal '("north-west" "north" "north-east" "west" "east" "south-west"
                "south" "south-east")
-             (list-enum-item-nick "GdkSurfaceEdge")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkSurfaceEdge")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkSurfaceEdge" GDK-SURFACE-EDGE
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -136,26 +136,26 @@
 ;;;     GdkTitlebarGesture                                 Since 4.4
 
 (test gdk-titlebar-gesture
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkTitlebarGesture"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkTitlebarGesture")
           (g:gtype (cffi:foreign-funcall "gdk_titlebar_gesture_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:titlebar-gesture
           (glib:symbol-for-gtype "GdkTitlebarGesture")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_TITLEBAR_GESTURE_DOUBLE_CLICK"
                "GDK_TITLEBAR_GESTURE_RIGHT_CLICK"
                "GDK_TITLEBAR_GESTURE_MIDDLE_CLICK")
-             (list-enum-item-name "GdkTitlebarGesture")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkTitlebarGesture")))
+  ;; Check values
   (is (equal '(1 2 3)
-             (list-enum-item-value "GdkTitlebarGesture")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkTitlebarGesture")))
+  ;; Check nick names
   (is (equal '("double-click" "right-click" "middle-click")
-             (list-enum-item-nick "GdkTitlebarGesture")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkTitlebarGesture")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkTitlebarGesture" GDK-TITLEBAR-GESTURE
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -168,26 +168,26 @@
 ;;;     GdkToplevel
 
 (test gdk-toplevel-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GdkToplevel"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:toplevel
           (glib:symbol-for-gtype "GdkToplevel")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkToplevel")
           (g:gtype (cffi:foreign-funcall "gdk_toplevel_get_type" :size))))
-  ;; Check the interface Prerequisites
+  ;; Check interface Prerequisites
   (is (equal '("GdkSurface")
-             (list-interface-prerequisites "GdkToplevel")))
-  ;; Check the interface properties
+             (gtk-test:list-interface-prerequisites "GdkToplevel")))
+  ;; Check interface properties
   (is (equal '("decorated" "deletable" "fullscreen-mode" "icon-list" "modal"
                "shortcuts-inhibited" "startup-id" "state" "title"
                "transient-for")
-             (list-interface-properties "GdkToplevel")))
-  ;; Check the signals
+             (gtk-test:list-interface-properties "GdkToplevel")))
+  ;; Check signals
   (is (equal '("compute-size")
-             (list-signals "GdkToplevel")))
-  ;; Get the interface definition
+             (gtk-test:list-signals "GdkToplevel")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GdkToplevel" GDK-TOPLEVEL
                             (:EXPORT T :TYPE-INITIALIZER
                              "gdk_toplevel_get_type")

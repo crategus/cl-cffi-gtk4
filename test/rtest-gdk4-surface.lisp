@@ -8,35 +8,35 @@
 ;;;     GdkSurface
 
 (test gdk-surface-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkSurface"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:surface
           (glib:symbol-for-gtype "GdkSurface")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkSurface")
           (g:gtype (cffi:foreign-funcall "gdk_surface_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkSurface")))
-  ;; Check the children
+  ;; Check children
   #-windows
-  (is (equal '("GdkWaylandSurface" "GdkX11Surface")
-             (list-children "GdkSurface")))
+  (is (equal '("GdkX11Surface")
+             (gtk-test:list-children "GdkSurface")))
   #+windows
   (is (equal '("GdkWin32Surface")
-             (list-children "GdkSurface")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GdkSurface")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkSurface")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GdkSurface")))
+  ;; Check class properties
   (is (equal '("cursor" "display" "frame-clock" "height" "mapped" "scale"
                "scale-factor" "width")
-             (list-properties "GdkSurface")))
-  ;; Check the list of signals
+             (gtk-test:list-properties "GdkSurface")))
+  ;; Check signals
   (is (equal '("enter-monitor" "event" "layout" "leave-monitor" "render")
-             (list-signals "GdkSurface")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GdkSurface")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkSurface" GDK-SURFACE
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                                 :TYPE-INITIALIZER "gdk_surface_get_type")
@@ -185,4 +185,4 @@
 ;;;     gdk_surface_get_device_cursor
 ;;;     gdk_surface_set_device_cursor
 
-;;; 2024-1-8
+;;; 2024-7-3

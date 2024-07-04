@@ -23,15 +23,15 @@
 ;;;     GdkEventType
 
 (test gdk-event-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkEventType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkEventType")
           (g:gtype (cffi:foreign-funcall "gdk_event_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:event-type
           (glib:symbol-for-gtype "GdkEventType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_DELETE" "GDK_MOTION_NOTIFY" "GDK_BUTTON_PRESS"
                "GDK_BUTTON_RELEASE" "GDK_KEY_PRESS" "GDK_KEY_RELEASE"
                "GDK_ENTER_NOTIFY" "GDK_LEAVE_NOTIFY" "GDK_FOCUS_CHANGE"
@@ -42,12 +42,12 @@
                "GDK_TOUCHPAD_PINCH" "GDK_PAD_BUTTON_PRESS"
                "GDK_PAD_BUTTON_RELEASE" "GDK_PAD_RING" "GDK_PAD_STRIP"
                "GDK_PAD_GROUP_MODE" "GDK_TOUCHPAD_HOLD" "GDK_EVENT_LAST")
-             (list-enum-item-name "GdkEventType")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkEventType")))
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
                25 26 27 28 29)
-             (list-enum-item-value "GdkEventType")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkEventType")))
+  ;; Check nick names
   (is (equal '("delete" "motion-notify" "button-press" "button-release"
                "key-press" "key-release" "enter-notify" "leave-notify"
                "focus-change" "proximity-in" "proximity-out" "drag-enter"
@@ -56,8 +56,8 @@
                "touchpad-swipe" "touchpad-pinch" "pad-button-press"
                "pad-button-release" "pad-ring" "pad-strip" "pad-group-mode"
                "touchpad-hold" "event-last")
-             (list-enum-item-nick "GdkEventType")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkEventType")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkEventType" GDK-EVENT-TYPE
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -99,25 +99,25 @@
 ;;;     GdkKeyMatch
 
 (test gdk-key-match
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkKeyMatch"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkKeyMatch")
           (g:gtype (cffi:foreign-funcall "gdk_key_match_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:key-match
           (glib:symbol-for-gtype "GdkKeyMatch")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_KEY_MATCH_NONE" "GDK_KEY_MATCH_PARTIAL"
                "GDK_KEY_MATCH_EXACT")
-             (list-enum-item-name "GdkKeyMatch")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkKeyMatch")))
+  ;; Check values
   (is (equal '(0 1 2)
-             (list-enum-item-value "GdkKeyMatch")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkKeyMatch")))
+  ;; Check nick names
   (is (equal '("none" "partial" "exact")
-             (list-enum-item-nick "GdkKeyMatch")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkKeyMatch")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkKeyMatch" GDK-KEY-MATCH
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -130,28 +130,28 @@
 ;;;     GdkTouchpadGesturePhase
 
 (test gdk-touchpad-gesture-phase
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkTouchpadGesturePhase"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkTouchpadGesturePhase")
           (g:gtype (cffi:foreign-funcall "gdk_touchpad_gesture_phase_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:touchpad-gesture-phase
           (glib:symbol-for-gtype "GdkTouchpadGesturePhase")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_TOUCHPAD_GESTURE_PHASE_BEGIN"
                "GDK_TOUCHPAD_GESTURE_PHASE_UPDATE"
                "GDK_TOUCHPAD_GESTURE_PHASE_END"
                "GDK_TOUCHPAD_GESTURE_PHASE_CANCEL")
-             (list-enum-item-name "GdkTouchpadGesturePhase")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkTouchpadGesturePhase")))
+  ;; Check values
   (is (equal '(0 1 2 3)
-             (list-enum-item-value "GdkTouchpadGesturePhase")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkTouchpadGesturePhase")))
+  ;; Check nick names
   (is (equal '("begin" "update" "end" "cancel")
-             (list-enum-item-nick "GdkTouchpadGesturePhase")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkTouchpadGesturePhase")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkTouchpadGesturePhase"
                                      GDK-TOUCHPAD-GESTURE-PHASE
                                      (:EXPORT T
@@ -166,26 +166,26 @@
 ;;;     GdkScrollDirection
 
 (test gdk-scroll-direction
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkScrollDirection"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkScrollDirection")
           (g:gtype (cffi:foreign-funcall "gdk_scroll_direction_get_type"
                                          :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:scroll-direction
           (glib:symbol-for-gtype "GdkScrollDirection")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_SCROLL_UP" "GDK_SCROLL_DOWN" "GDK_SCROLL_LEFT"
                "GDK_SCROLL_RIGHT" "GDK_SCROLL_SMOOTH")
-             (list-enum-item-name "GdkScrollDirection")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkScrollDirection")))
+  ;; Check values
   (is (equal '(0 1 2 3 4)
-             (list-enum-item-value "GdkScrollDirection")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkScrollDirection")))
+  ;; Check nick names
   (is (equal '("up" "down" "left" "right" "smooth")
-             (list-enum-item-nick "GdkScrollDirection")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkScrollDirection")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkScrollDirection" GDK-SCROLL-DIRECTION
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -200,28 +200,28 @@
 ;;;     GdkCrossingMode
 
 (test gdk-crossing-mode
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkCrossingMode"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkCrossingMode")
           (g:gtype (cffi:foreign-funcall "gdk_crossing_mode_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:crossing-mode
           (glib:symbol-for-gtype "GdkCrossingMode")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_CROSSING_NORMAL" "GDK_CROSSING_GRAB" "GDK_CROSSING_UNGRAB"
                "GDK_CROSSING_GTK_GRAB" "GDK_CROSSING_GTK_UNGRAB"
                "GDK_CROSSING_STATE_CHANGED" "GDK_CROSSING_TOUCH_BEGIN"
                "GDK_CROSSING_TOUCH_END" "GDK_CROSSING_DEVICE_SWITCH")
-             (list-enum-item-name "GdkCrossingMode")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkCrossingMode")))
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7 8)
-             (list-enum-item-value "GdkCrossingMode")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkCrossingMode")))
+  ;; Check nick names
   (is (equal '("normal" "grab" "ungrab" "gtk-grab" "gtk-ungrab" "state-changed"
                "touch-begin" "touch-end" "device-switch")
-             (list-enum-item-nick "GdkCrossingMode")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkCrossingMode")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkCrossingMode" GDK-CROSSING-MODE
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -240,24 +240,24 @@
 ;;;     GdkScrollUnit                                      Since 4.8
 
 (test gdk-scroll-unit
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkScrollUnit"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkScrollUnit")
           (g:gtype (cffi:foreign-funcall "gdk_scroll_unit_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:scroll-unit
           (glib:symbol-for-gtype "GdkScrollUnit")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_SCROLL_UNIT_WHEEL" "GDK_SCROLL_UNIT_SURFACE")
-             (list-enum-item-name "GdkScrollUnit")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkScrollUnit")))
+  ;; Check values
   (is (equal '(0 1)
-             (list-enum-item-value "GdkScrollUnit")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkScrollUnit")))
+  ;; Check nick names
   (is (equal '("wheel" "surface")
-             (list-enum-item-nick "GdkScrollUnit")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkScrollUnit")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkScrollUnit" GDK-SCROLL-UNIT
                                      (:EXPORT T
                                       :TYPE-INITIALIZER
@@ -269,27 +269,27 @@
 ;;;     GdkNotifyType
 
 (test gdk-notify-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkNotifyType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkNotifyType")
           (g:gtype (cffi:foreign-funcall "gdk_notify_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:notify-type
           (glib:symbol-for-gtype "GdkNotifyType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_NOTIFY_ANCESTOR" "GDK_NOTIFY_VIRTUAL" "GDK_NOTIFY_INFERIOR"
                "GDK_NOTIFY_NONLINEAR" "GDK_NOTIFY_NONLINEAR_VIRTUAL"
                "GDK_NOTIFY_UNKNOWN")
-             (list-enum-item-name "GdkNotifyType")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkNotifyType")))
+  ;; Check values
   (is (equal '(0 1 2 3 4 5)
-             (list-enum-item-value "GdkNotifyType")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkNotifyType")))
+  ;; Check nick names
   (is (equal '("ancestor" "virtual" "inferior" "nonlinear" "nonlinear-virtual"
                "unknown")
-             (list-enum-item-nick "GdkNotifyType")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkNotifyType")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkNotifyType"
     GDK-NOTIFY-TYPE
     (:EXPORT T :TYPE-INITIALIZER "gdk_notify_type_get_type")
@@ -317,33 +317,33 @@
 
 #+nil
 (test event-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkEvent"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:event
           (glib:symbol-for-gtype "GdkEvent")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkEvent")
           (g:gtype (cffi:foreign-funcall "gdk_event_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkEvent")))
-  ;; Check the children
+  ;; Check children
   (is (equal '("GdkButtonEvent" "GdkCrossingEvent" "GdkDNDEvent"
                "GdkDeleteEvent" "GdkFocusEvent" "GdkGrabBrokenEvent"
                "GdkKeyEvent" "GdkMotionEvent" "GdkPadEvent" "GdkProximityEvent"
                "GdkScrollEvent" "GdkTouchEvent" "GdkTouchpadEvent")
-             (list-children "GdkEvent")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GdkEvent")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkEvent")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GdkEvent")))
+  ;; Check properties
   (is (equal '()
-             (list-properties "GdkEvent")))
-  ;; Check the signals
+             (gtk-test:list-properties "GdkEvent")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GdkEvent")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GdkEvent")))
+  ;; Check class definition
   (is (equal '()
              (gobject:get-g-type-definition "GdkEvent"))))
 

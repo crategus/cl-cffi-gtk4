@@ -21,20 +21,20 @@
           (g:type-parent "GdkClipboard")))
   ;; Check children
   #-windows
-  (is (equal '("GdkWaylandClipboard" "GdkWaylandPrimary" "GdkX11Clipboard")
-             (list-children "GdkClipboard")))
+  (is (equal '("GdkX11Clipboard")
+             (gtk-test:list-children "GdkClipboard")))
   #+windows
   (is (equal '("GdkWin32Clipboard")
-             (list-children "GdkClipboard")))
+             (gtk-test:list-children "GdkClipboard")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkClipboard")))
+             (gtk-test:list-interfaces "GdkClipboard")))
   ;; Check properties
   (is (equal '("content" "display" "formats" "local")
-             (list-properties "GdkClipboard")))
+             (gtk-test:list-properties "GdkClipboard")))
   ;; Check signals
   (is (equal '("changed")
-             (list-signals "GdkClipboard")))
+             (gtk-test:list-signals "GdkClipboard")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkClipboard" GDK-CLIPBOARD
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -142,4 +142,4 @@
 ;;;     gdk_clipboard_set_text
 ;;;     gdk_clipboard_set_texture
 
-;;; 2024-5-18
+;;; 2024-7-3

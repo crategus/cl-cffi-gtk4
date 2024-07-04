@@ -19,13 +19,13 @@
                                          :size))))
   ;; Check names
   (is (equal '("GDK_PAINTABLE_STATIC_SIZE" "GDK_PAINTABLE_STATIC_CONTENTS")
-             (list-flags-item-name "GdkPaintableFlags")))
+             (gtk-test:list-flags-item-name "GdkPaintableFlags")))
   ;; Check values
   (is (equal '(1 2)
-             (list-flags-item-value "GdkPaintableFlags")))
+             (gtk-test:list-flags-item-value "GdkPaintableFlags")))
   ;; Check nick names
   (is (equal '("size" "contents")
-             (list-flags-item-nick "GdkPaintableFlags")))
+             (gtk-test:list-flags-item-nick "GdkPaintableFlags")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkPaintableFlags"
                                       GDK-PAINTABLE-FLAGS
@@ -52,16 +52,16 @@
           (g:type-parent "GdkSnapshot")))
   ;; Check children
   (is (equal '("GtkSnapshot")
-             (list-children "GdkSnapshot")))
+             (gtk-test:list-children "GdkSnapshot")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkSnapshot")))
+             (gtk-test:list-interfaces "GdkSnapshot")))
   ;; Check properties
   (is (equal '()
-             (list-properties "GdkSnapshot")))
+             (gtk-test:list-properties "GdkSnapshot")))
   ;; Check signals
   (is (equal '()
-             (list-signals "GdkSnapshot")))
+             (gtk-test:list-signals "GdkSnapshot")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkSnapshot" GDK-SNAPSHOT
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -82,13 +82,13 @@
           (g:gtype (cffi:foreign-funcall "gdk_paintable_get_type" :size))))
   ;; Check interface prerequisites
   (is (equal '("GObject")
-             (list-interface-prerequisites "GdkPaintable")))
+             (gtk-test:list-interface-prerequisites "GdkPaintable")))
   ;; Check interface properties
   (is (equal '()
-             (list-interface-properties "GdkPaintable")))
+             (gtk-test:list-interface-properties "GdkPaintable")))
   ;; Check signals
   (is (equal '("invalidate-contents" "invalidate-size")
-             (list-signals "GdkPaintable")))
+             (gtk-test:list-signals "GdkPaintable")))
   ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GdkPaintable" GDK-PAINTABLE
                             (:EXPORT T :TYPE-INITIALIZER
@@ -130,4 +130,4 @@
 ;;;     gdk_paintable_invalidate_size
 ;;;     gdk_paintable_new_empty
 
-;;; 2024-5-5
+;;; 2024-7-3

@@ -22,14 +22,14 @@
                "GDK_SUBPIXEL_LAYOUT_HORIZONTAL_BGR"
                "GDK_SUBPIXEL_LAYOUT_VERTICAL_RGB"
                "GDK_SUBPIXEL_LAYOUT_VERTICAL_BGR")
-             (list-enum-item-name "GdkSubpixelLayout")))
+             (gtk-test:list-enum-item-name "GdkSubpixelLayout")))
   ;; Check values
   (is (equal '(0 1 2 3 4 5)
-             (list-enum-item-value "GdkSubpixelLayout")))
+             (gtk-test:list-enum-item-value "GdkSubpixelLayout")))
   ;; Check nick names
   (is (equal '("unknown" "none" "horizontal-rgb" "horizontal-bgr" "vertical-rgb"
                "vertical-bgr")
-             (list-enum-item-nick "GdkSubpixelLayout")))
+             (gtk-test:list-enum-item-nick "GdkSubpixelLayout")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkSubpixelLayout"
                              GDK-SUBPIXEL-LAYOUT
@@ -59,22 +59,22 @@
           (g:type-parent "GdkMonitor")))
   ;; Check children
   #-windows
-  (is (equal '("GdkWaylandMonitor" "GdkX11Monitor")
-             (list-children "GdkMonitor")))
+  (is (equal '("GdkX11Monitor")
+             (gtk-test:list-children "GdkMonitor")))
   #+windows
   (is (equal '("GdkWin32Monitor")
-             (list-children "GdkMonitor")))
+             (gtk-test:list-children "GdkMonitor")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkMonitor")))
+             (gtk-test:list-interfaces "GdkMonitor")))
   ;; Check properties
   (is (equal '("connector" "description" "display" "geometry" "height-mm"
                "manufacturer" "model" "refresh-rate" "scale" "scale-factor"
                "subpixel-layout" "valid" "width-mm")
-             (list-properties "GdkMonitor")))
+             (gtk-test:list-properties "GdkMonitor")))
   ;; Check signals
   (is (equal '("invalidate")
-             (list-signals "GdkMonitor")))
+             (gtk-test:list-signals "GdkMonitor")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkMonitor" GDK-MONITOR
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -117,7 +117,7 @@
     #+windows
     (is-false (gdk:monitor-connector monitor))
     #-windows
-    (is (stringp (gdk:monitor-description monitor)))
+    (is-false(gdk:monitor-description monitor))
     #+windows
     (is-false (gdk:monitor-description monitor))
     (is (typep (gdk:monitor-display monitor) 'gdk:display))

@@ -8,24 +8,24 @@
 ;;;     GdkPopup
 
 (test gdk-popup-interface
-  ;; Type check
+  ;; Check type
   (is (g:type-is-interface "GdkPopup"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:popup
           (glib:symbol-for-gtype "GdkPopup")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkPopup")
           (g:gtype (cffi:foreign-funcall "gdk_popup_get_type" :size))))
-  ;; Check the interface prerequisites
+  ;; Check interface prerequisites
   (is (equal '("GdkSurface")
-             (list-interface-prerequisites "GdkPopup")))
-  ;; Check the interface properties
+             (gtk-test:list-interface-prerequisites "GdkPopup")))
+  ;; Check interface properties
   (is (equal '("autohide" "parent")
-             (list-interface-properties "GdkPopup")))
-  ;; Check the signals
+             (gtk-test:list-interface-properties "GdkPopup")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GdkPopup")))
-  ;; Get the interface definition
+             (gtk-test:list-signals "GdkPopup")))
+  ;; Check interface definition
   (is (equal '(GOBJECT:DEFINE-G-INTERFACE "GdkPopup" GDK-POPUP
                             (:EXPORT T :TYPE-INITIALIZER "gdk_popup_get_type")
                             (AUTOHIDE GDK-POPUP-AUTOHIDE "autohide" "gboolean"
@@ -47,4 +47,4 @@
 ;;;     gdk_popup_get_position_x
 ;;;     gdk_popup_get_position_y
 
-;;; --- 2023-7-30 --------------------------------------------------------------
+;;; 2024-7-4

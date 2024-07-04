@@ -22,21 +22,21 @@
   ;; Check children
   #-windows
   (if *first-run-gtk-test*
-      (is (equal '("GdkWaylandDisplay" "GdkX11Display")
-                 (list-children "GdkDisplay"))))
+      (is (equal '("GdkX11Display")
+                 (gtk-test:list-children "GdkDisplay"))))
   #+windows
   (is (equal '("GdkWin32Display")
-             (list-children "GdkDisplay")))
+             (gtk-test:list-children "GdkDisplay")))
   ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkDisplay")))
+             (gtk-test:list-interfaces "GdkDisplay")))
   ;; Check properties
   (is (equal '("composited" "dmabuf-formats" "input-shapes" "rgba"
                "shadow-width")
-             (list-properties "GdkDisplay")))
+             (gtk-test:list-properties "GdkDisplay")))
   ;; Check signals
   (is (equal '("closed" "opened" "seat-added" "seat-removed" "setting-changed")
-             (list-signals "GdkDisplay")))
+             (gtk-test:list-signals "GdkDisplay")))
   ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDisplay" GDK-DISPLAY
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -141,7 +141,7 @@
 
 #-windows
 (test gdk-display-name
-  (let ((name "wayland-0")
+  (let ((name ":1")
         (display (gdk:display-default)))
     (is (string= name (gdk:display-name display)))))
 
@@ -259,8 +259,8 @@
 #-windows
 (test gdk-display-map-keyval
   (let ((display (gdk:display-default)))
-    (is (equal '((38 0 0) (38 1 0)) (gdk:display-map-keyval display 97)))
-    (is (equal '((38 0 1) (38 1 1)) (gdk:display-map-keyval display 65)))))
+    (is (equal '((38 0 0)) (gdk:display-map-keyval display 97)))
+    (is (equal '((38 0 1)) (gdk:display-map-keyval display 65)))))
 
 #+windows
 (test gdk-display-map-keyval
@@ -281,14 +281,8 @@
 #-windows
 (test gdk-display-map-keycode
   (let ((display (gdk:display-default)))
-    (is (equal '((97 38 0 0)
-                 (65 38 0 1)
-                 (230 38 0 2)
-                 (198 38 0 3)
-                 (97 38 1 0)
-                 (65 38 1 1)
-                 (230 38 1 2)
-                 (198 38 1 3)) (gdk:display-map-keycode display 38)))))
+    (is (equal '((97 38 0 0) (65 38 0 1) (230 38 0 2) (198 38 0 3))
+               (gdk:display-map-keycode display 38)))))
 
 #+windows
 (test gdk-display-map-keycode
@@ -312,4 +306,4 @@
 ;;;     gdk_display_prepare_gl                             Since 4.4
 ;;;     gdk_display_create_gl_context                      Since 4.6
 
-;;; 2024-5-26
+;;; 2024-7-3

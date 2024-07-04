@@ -44,30 +44,30 @@
 
 #+nil
 (test gdk-nuclear-icon-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkNuclearIcon"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:nuclear-icon
           (glib:symbol-for-gtype "GdkNuclearIcon")))
   ;; We have no type initializer
 ;  (is (eq (g:gtype "GObject")
 ;          (g:gtype (cffi:foreign-funcall "g_object_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkNuclearIcon")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GdkNuclearIcon")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GdkNuclearIcon")))
+  ;; Check interfaces
   (is (equal '("GdkPaintable")
-             (list-interfaces "GdkNuclearIcon")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GdkNuclearIcon")))
+  ;; Check properties
   (is (equal '("rotation")
-             (list-properties "GdkNuclearIcon")))
-  ;; Check the signals
+             (gtk-test:list-properties "GdkNuclearIcon")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GdkNuclearIcon")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GdkNuclearIcon")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkNuclearIcon" GDK-NUCLEAR-ICON
                                (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES
                                 ("GdkPaintable"))
@@ -101,7 +101,7 @@
 (test gdk-nuclear-icon-new.3
   (let ((icon (make-instance 'gdk:nuclear-icon
                              :rotation 90)))
-    ;; Check the g:object-property accessor
+    ;; Check g:object-property accessor
     (is (=  90 (g:object-property icon "rotation")))
     (is (= 180 (setf (g:object-property icon "rotation") 180)))
     (is (= 180 (g:object-property icon "rotation")))))
@@ -109,7 +109,7 @@
 #+nil
 (test gdk-nuclear-icon-new.4
   (let ((icon (g:object-new "GdkNuclearIcon" :rotation 90)))
-    ;; Check the g:object-property accessor
+    ;; Check g:object-property accessor
     (is (=  90 (g:object-property icon "rotation")))
     (is (= 180 (setf (g:object-property icon "rotation") 180)))
     (is (= 180 (g:object-property icon "rotation")))))
@@ -127,4 +127,4 @@
     (is-false (g:object-notify icon "rotation"))
     (is (string= "Signal notify::rotation" message))))
 
-;;; --- 2023-11-8 --------------------------------------------------------------
+;;; 2024-7-4

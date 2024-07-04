@@ -8,28 +8,28 @@
 ;;;     GdkDeviceToolType
 
 (test gdk-device-tool-type
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-enum "GdkDeviceToolType"))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkDeviceToolType")
           (g:gtype (cffi:foreign-funcall "gdk_device_tool_type_get_type" :size))))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:device-tool-type
           (glib:symbol-for-gtype "GdkDeviceToolType")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_DEVICE_TOOL_TYPE_UNKNOWN" "GDK_DEVICE_TOOL_TYPE_PEN"
                "GDK_DEVICE_TOOL_TYPE_ERASER" "GDK_DEVICE_TOOL_TYPE_BRUSH"
                "GDK_DEVICE_TOOL_TYPE_PENCIL" "GDK_DEVICE_TOOL_TYPE_AIRBRUSH"
                "GDK_DEVICE_TOOL_TYPE_MOUSE" "GDK_DEVICE_TOOL_TYPE_LENS")
-             (list-enum-item-name "GdkDeviceToolType")))
-  ;; Check the values
+             (gtk-test:list-enum-item-name "GdkDeviceToolType")))
+  ;; Check values
   (is (equal '(0 1 2 3 4 5 6 7)
-             (list-enum-item-value "GdkDeviceToolType")))
-  ;; Check the nick names
+             (gtk-test:list-enum-item-value "GdkDeviceToolType")))
+  ;; Check nick names
   (is (equal '("unknown" "pen" "eraser" "brush" "pencil" "airbrush" "mouse"
                "lens")
-             (list-enum-item-nick "GdkDeviceToolType")))
-  ;; Check the enum definition
+             (gtk-test:list-enum-item-nick "GdkDeviceToolType")))
+  ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkDeviceToolType"
                              GDK-DEVICE-TOOL-TYPE
                              (:EXPORT T
@@ -47,30 +47,30 @@
 ;;;     GdkDeviceTool
 
 (test gdk-device-tool-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkDeviceTool"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:device-tool
           (glib:symbol-for-gtype "GdkDeviceTool")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkDeviceTool")
           (g:gtype (cffi:foreign-funcall "gdk_device_tool_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkDeviceTool")))
-  ;; Check the children
+  ;; Check children
   (is (equal '()
-             (list-children "GdkDeviceTool")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GdkDeviceTool")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkDeviceTool")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GdkDeviceTool")))
+  ;; Check properties
   (is (equal '("axes" "hardware-id" "serial" "tool-type")
-             (list-properties "GdkDeviceTool")))
-  ;; Check the signals
+             (gtk-test:list-properties "GdkDeviceTool")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GdkDeviceTool")))
-  ;; Check the class definition
+             (gtk-test:list-signals "GdkDeviceTool")))
+  ;; Check class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkDeviceTool" GDK-DEVICE-TOOL
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
                         :TYPE-INITIALIZER "gdk_device_tool_get_type")

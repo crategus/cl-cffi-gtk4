@@ -92,4 +92,4 @@
     (is (gdk:rectangle-equal (gdk:rectangle-new :x 10 :y 10 :width 10 :height 10)
                              (gdk:rectangle-union rect1 rect3)))))
 
-;;; --- 2023-4-14 --------------------------------------------------------------
+;;; 2024-7-4

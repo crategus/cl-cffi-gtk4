@@ -8,28 +8,28 @@
 ;;;     GdkSeatCapabilities
 
 (test gdk-seat-capabilities
-  ;; Check the type
+  ;; Check type
   (is (g:type-is-flags "GdkSeatCapabilities"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:seat-capabilities
           (glib:symbol-for-gtype "GdkSeatCapabilities")))
   ;; Check the type initializer
   (is (eq (g:gtype "GdkSeatCapabilities")
           (g:gtype (cffi:foreign-funcall "gdk_seat_capabilities_get_type"
                                          :size))))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_SEAT_CAPABILITY_NONE" "GDK_SEAT_CAPABILITY_POINTER"
                "GDK_SEAT_CAPABILITY_TOUCH" "GDK_SEAT_CAPABILITY_TABLET_STYLUS"
                "GDK_SEAT_CAPABILITY_KEYBOARD" "GDK_SEAT_CAPABILITY_TABLET_PAD"
                "GDK_SEAT_CAPABILITY_ALL_POINTING" "GDK_SEAT_CAPABILITY_ALL")
-             (list-flags-item-name "GdkSeatCapabilities")))
-  ;; Check the values
+             (gtk-test:list-flags-item-name "GdkSeatCapabilities")))
+  ;; Check values
   (is (equal '(0 1 2 4 8 16 7 15)
-             (list-flags-item-value "GdkSeatCapabilities")))
-  ;; Check the nick names
+             (gtk-test:list-flags-item-value "GdkSeatCapabilities")))
+  ;; Check nick names
   (is (equal '("none" "pointer" "touch" "tablet-stylus" "keyboard" "tablet-pad"
                "all-pointing" "all")
-             (list-flags-item-nick "GdkSeatCapabilities")))
+             (gtk-test:list-flags-item-nick "GdkSeatCapabilities")))
   ;; Check the flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkSeatCapabilities"
                               GDK-SEAT-CAPABILITIES
@@ -49,33 +49,33 @@
 ;;;     GdkSeat
 
 (test gdk-seat-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkSeat"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:seat
           (glib:symbol-for-gtype "GdkSeat")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkSeat")
           (g:gtype (cffi:foreign-funcall "gdk_seat_get_type" :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GObject")
           (g:type-parent "GdkSeat")))
-  ;; Check the children
+  ;; Check children
   #-windows
-  (is (equal '("GdkSeatDefault" "GdkWaylandSeat")
-             (list-children "GdkSeat")))
+  (is (equal '("GdkSeatDefault")
+             (gtk-test:list-children "GdkSeat")))
   #+windows
   (is (equal '("GdkSeatDefault")
-             (list-children "GdkSeat")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GdkSeat")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkSeat")))
-  ;; Check the properties
+             (gtk-test:list-interfaces "GdkSeat")))
+  ;; Check properties
   (is (equal '("display")
-             (list-properties "GdkSeat")))
-  ;; Check the signals
+             (gtk-test:list-properties "GdkSeat")))
+  ;; Check signals
   (is (equal '("device-added" "device-removed" "tool-added" "tool-removed")
-             (list-signals "GdkSeat")))
+             (gtk-test:list-signals "GdkSeat")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkSeat" GDK-SEAT
                        (:SUPERCLASS G-OBJECT :EXPORT T :INTERFACES NIL
@@ -114,7 +114,7 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is (typep (gdk:seat-pointer seat) 'gdk:device))
     #-windows
-    (is (string= "Core Pointer"
+    (is (string= "Virtual core pointer"
                  (gdk:device-name (gdk:seat-pointer seat))))
     #+windows
     (is (string= "Virtual Core Pointer"
@@ -126,7 +126,7 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is (typep (gdk:seat-keyboard seat) 'gdk:device))
     #-windows
-    (is (string= "Core Keyboard"
+    (is (string= "Virtual core keyboard"
                  (gdk:device-name (gdk:seat-keyboard seat))))
     #+windows
     (is (string= "Virtual Core Keyboard"
@@ -145,4 +145,4 @@
   (let ((seat (gdk:display-default-seat (gdk:display-default))))
     (is-false (gdk:seat-tools seat))))
 
-;;; --- 2023-7-16 --------------------------------------------------------------
+;;; 2024-7-3

@@ -14,19 +14,19 @@
   ;; Check registered name
   (is (eq 'gdk:gravity
           (glib:symbol-for-gtype "GdkGravity")))
-  ;; Check the names
+  ;; Check names
   (is (equal '("GDK_GRAVITY_NORTH_WEST" "GDK_GRAVITY_NORTH"
                "GDK_GRAVITY_NORTH_EAST" "GDK_GRAVITY_WEST" "GDK_GRAVITY_CENTER"
                "GDK_GRAVITY_EAST" "GDK_GRAVITY_SOUTH_WEST" "GDK_GRAVITY_SOUTH"
                "GDK_GRAVITY_SOUTH_EAST" "GDK_GRAVITY_STATIC")
-             (list-enum-item-name "GdkGravity")))
+             (gtk-test:list-enum-item-name "GdkGravity")))
   ;; Check values
   (is (equal '(1 2 3 4 5 6 7 8 9 10)
-             (list-enum-item-value "GdkGravity")))
+             (gtk-test:list-enum-item-value "GdkGravity")))
   ;; Check nick names
   (is (equal '("north-west" "north" "north-east" "west" "center" "east"
                "south-west" "south" "south-east" "static")
-             (list-enum-item-nick "GdkGravity")))
+             (gtk-test:list-enum-item-nick "GdkGravity")))
   ;; Check enum definition
   (is (equal '(GOBJECT:DEFINE-G-ENUM "GdkGravity"
                              GDK-GRAVITY
@@ -67,16 +67,16 @@
                "GDK_BUTTON2_MASK" "GDK_BUTTON3_MASK" "GDK_BUTTON4_MASK"
                "GDK_BUTTON5_MASK" "GDK_SUPER_MASK" "GDK_HYPER_MASK"
                "GDK_META_MASK")
-             (list-flags-item-name "GdkModifierType")))
+             (gtk-test:list-flags-item-name "GdkModifierType")))
   ;; Check values
   (is (equal '(0 1 2 4 8 256 512 1024 2048 4096 67108864 134217728 268435456)
-             (list-flags-item-value "GdkModifierType")))
+             (gtk-test:list-flags-item-value "GdkModifierType")))
   ;; Check nick names
   (is (equal '("no-modifier-mask" "shift-mask" "lock-mask" "control-mask"
                "alt-mask" "button1-mask" "button2-mask" "button3-mask"
                "button4-mask" "button5-mask" "super-mask" "hyper-mask"
                "meta-mask")
-             (list-flags-item-nick "GdkModifierType")))
+             (gtk-test:list-flags-item-nick "GdkModifierType")))
   ;; Check flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkModifierType"
                               GDK-MODIFIER-TYPE
@@ -97,4 +97,4 @@
                               (:META-MASK 268435456))
              (gobject:get-g-type-definition "GdkModifierType"))))
 
-;;; 2024-5-25
+;;; 2024-7-3

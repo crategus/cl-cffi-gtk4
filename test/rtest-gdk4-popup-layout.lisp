@@ -20,14 +20,14 @@
   (is (equal '("GDK_ANCHOR_FLIP_X" "GDK_ANCHOR_FLIP_Y" "GDK_ANCHOR_SLIDE_X"
                "GDK_ANCHOR_SLIDE_Y" "GDK_ANCHOR_RESIZE_X" "GDK_ANCHOR_RESIZE_Y"
                "GDK_ANCHOR_FLIP" "GDK_ANCHOR_SLIDE" "GDK_ANCHOR_RESIZE")
-             (list-flags-item-name "GdkAnchorHints")))
+             (gtk-test:list-flags-item-name "GdkAnchorHints")))
   ;; Check the values
   (is (equal '(1 2 4 8 16 32 3 12 48)
-             (list-flags-item-value "GdkAnchorHints")))
+             (gtk-test:list-flags-item-value "GdkAnchorHints")))
   ;; Check the nick names
   (is (equal '("flip-x" "flip-y" "slide-x" "slide-y" "resize-x" "resize-y"
                "flip" "slide" "resize")
-             (list-flags-item-nick "GdkAnchorHints")))
+             (gtk-test:list-flags-item-nick "GdkAnchorHints")))
   ;; Check the flags definition
   (is (equal '(GOBJECT:DEFINE-G-FLAGS "GdkAnchorHints" GDK-ANCHOR-HINTS
                                       (:EXPORT T

@@ -12,34 +12,34 @@
 ;;;     GdkAppLaunchContext
 
 (test gdk-app-launch-context-class
-  ;; Type check
+  ;; Check type
   (is (g:type-is-object "GdkAppLaunchContext"))
-  ;; Check the registered name
+  ;; Check registered name
   (is (eq 'gdk:app-launch-context
           (glib:symbol-for-gtype "GdkAppLaunchContext")))
-  ;; Check the type initializer
+  ;; Check type initializer
   (is (eq (g:gtype "GdkAppLaunchContext")
           (g:gtype (cffi:foreign-funcall "gdk_app_launch_context_get_type"
                                          :size))))
-  ;; Check the parent
+  ;; Check parent
   (is (eq (g:gtype "GAppLaunchContext")
           (g:type-parent "GdkAppLaunchContext")))
-  ;; Check the children
+  ;; Check children
   #-windows
-  (is (equal '("GdkWaylandAppLaunchContext")
-             (list-children "GdkAppLaunchContext")))
+  (is (equal '("GdkX11AppLaunchContext")
+             (gtk-test:list-children "GdkAppLaunchContext")))
   #+windows
   (is (equal '()
-             (list-children "GdkAppLaunchContext")))
-  ;; Check the interfaces
+             (gtk-test:list-children "GdkAppLaunchContext")))
+  ;; Check interfaces
   (is (equal '()
-             (list-interfaces "GdkAppLaunchContext")))
-  ;; Check the class properties
+             (gtk-test:list-interfaces "GdkAppLaunchContext")))
+  ;; Check class properties
   (is (equal '("display")
-             (list-properties "GdkAppLaunchContext")))
-  ;; Check the signals
+             (gtk-test:list-properties "GdkAppLaunchContext")))
+  ;; Check signals
   (is (equal '()
-             (list-signals "GdkAppLaunchContext")))
+             (gtk-test:list-signals "GdkAppLaunchContext")))
   ;; Check the class definition
   (is (equal '(GOBJECT:DEFINE-G-OBJECT-CLASS "GdkAppLaunchContext"
                                              GDK-APP-LAUNCH-CONTEXT
@@ -98,4 +98,4 @@
     (is-false (gdk:app-launch-context-set-icon-name context
                                                     (cffi:null-pointer)))))
 
-;;; --- 2023-7-16 --------------------------------------------------------------
+;;; 2024-7-3
