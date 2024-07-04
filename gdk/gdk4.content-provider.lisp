@@ -120,7 +120,7 @@ lambda (provider)    :run-last
       "Accessor"
       (documentation 'content-provider-formats 'function)
  "@version{#2023-8-4}
-  @syntax[]{(gdk:content-provider-formats object) => formats}
+  @syntax{(gdk:content-provider-formats object) => formats}
   @argument[object]{a @class{gdk:content-provider} object}
   @argument[formats]{a @class{gdk:conten-formats} instance with the formats of
     the content provider}
@@ -146,7 +146,7 @@ lambda (provider)    :run-last
       "Accessor"
       (documentation 'content-provider-storable-formats 'function)
  "@version{#2023-8-4}
-  @syntax[]{(gdk:content-provider-storable-formats object) => formats}
+  @syntax{(gdk:content-provider-storable-formats object) => formats}
   @argument[object]{a @class{gdk:content-provider} object}
   @argument[formats]{a @class{gdk:conten-formats} instance with the storable
     formats of the content provider}

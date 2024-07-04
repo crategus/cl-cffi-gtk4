@@ -112,7 +112,7 @@
       "Accessor"
       (documentation 'draw-context-display 'function)
  "@version{2023-8-3}
-  @syntax[]{(gdk:draw-context-display object) => display}
+  @syntax{(gdk:draw-context-display object) => display}
   @argument[object]{a @class{gdk:draw-context} object}
   @argument[display]{a @class{gdk:display} object or @code{nil}}
   @begin{short}
@@ -137,7 +137,7 @@
       "Accessor"
       (documentation 'draw-context-surface 'function)
  "@version{2023-8-3}
-  @syntax[]{(gdk:draw-context-surface object) => surface}
+  @syntax{(gdk:draw-context-surface object) => surface}
   @argument[object]{a @class{gdk:draw-context} object}
   @argument[surface]{a @class{gdk:surface} object or @code{nil}}
   @begin{short}

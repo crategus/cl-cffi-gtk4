@@ -200,7 +200,7 @@
 (defun keyval-convert-case (keyval)
  #+liber-documentation
  "@version{2023-4-14}
-  @syntax[]{(gdk:keyval-convert-case keyval) => lower, upper}
+  @syntax{(gdk:keyval-convert-case keyval) => lower, upper}
   @argument[keyval]{an unsigned integer with the key value}
   @argument[lower]{an unsigned integer with the lowercase version of
     @arg{keyval}}

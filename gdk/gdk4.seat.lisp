@@ -198,7 +198,7 @@ lambda (seat tool)    :run-last
       "Accessor"
       (documentation 'seat-display 'function)
  "@version{2023-4-15}
-  @syntax[]{(gdk:seat-display object) => display}
+  @syntax{(gdk:seat-display object) => display}
   @argument[object]{a @class{gdk:seat} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}

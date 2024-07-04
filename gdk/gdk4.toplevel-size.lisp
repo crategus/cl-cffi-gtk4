@@ -86,7 +86,7 @@
 (defun toplevel-size-bounds (size)
  #+liber-documentation
  "@version{#2023-4-10}
-  @syntax[]{(gdk:toplevel-size size) => width, height}
+  @syntax{(gdk:toplevel-size size) => width, height}
   @argument[size]{a @symbol{gdk:toplevel-size} instance}
   @argument[width]{an integer with the width}
   @argument[height]{an integer with the height}

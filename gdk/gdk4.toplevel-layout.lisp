@@ -197,8 +197,8 @@
 (defun toplevel-layout-maximized (layout)
  #+liber-documentation
  "@version{2024-1-9}
-  @syntax[]{(gdk:toplevel-layout-maximized layout) => maximized}
-  @syntax[]{(setf (gdk:toplevel-layout-maximized layout) maximized)}
+  @syntax{(gdk:toplevel-layout-maximized layout) => maximized}
+  @syntax{(setf (gdk:toplevel-layout-maximized layout) maximized)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[maximized]{a boolean whether the toplevel should be maximized}
   @begin{short}
@@ -237,8 +237,8 @@
 (defun toplevel-layout-fullscreen (layout)
  #+liber-documentation
  "@version{2024-1-9}
-  @syntax[]{(gdk:toplevel-layout-fullscreen layout) => fullscreen}
-  @syntax[]{(setf (gdk:toplevel-layout-fullscreen layout) fullscreen)}
+  @syntax{(gdk:toplevel-layout-fullscreen layout) => fullscreen}
+  @syntax{(setf (gdk:toplevel-layout-fullscreen layout) fullscreen)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[fullscreen]{a boolean whether the layout specifies the fullscreen
     state for the toplevel}
@@ -289,8 +289,8 @@
     :boolean
  #+liber-documentation
  "@version{2024-1-9}
-  @syntax[]{(gdk:toplevel-layout-resizable layout) => resizable}
-  @syntax[]{(setf (gdk:toplevel-layout-resizable layout) resizable)}
+  @syntax{(gdk:toplevel-layout-resizable layout) => resizable}
+  @syntax{(setf (gdk:toplevel-layout-resizable layout) resizable)}
   @argument[layout]{a @class{gdk:toplevel-layout} instance}
   @argument[resizable]{@em{true} if the layout is resizable}
   @begin{short}

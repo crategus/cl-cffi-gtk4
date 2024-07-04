@@ -238,8 +238,8 @@
       "Accessor"
       (documentation 'gl-context-allowed-apis 'function)
  "@version{#2023-8-4}
-  @syntax[]{(gdk:gl-context-allowed-apis object) => apis}
-  @syntax[]{(setf (gdk:gl-context-allowed-apis object) apis)}
+  @syntax{(gdk:gl-context-allowed-apis object) => apis}
+  @syntax{(setf (gdk:gl-context-allowed-apis object) apis)}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[apis]{a @symbol{gdk:gl-apis} value}
   @begin{short}
@@ -274,7 +274,7 @@
       "Accessor"
       (documentation 'gl-context-api 'function)
  "@version{#2023-8-4}
-  @syntax[]{(gdk:gl-context-api object) => api}
+  @syntax{(gdk:gl-context-api object) => api}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[api]{a @symbol{gdk:gl-api} value}
   @begin{short}
@@ -302,7 +302,7 @@
       "Accessor"
       (documentation 'gl-context-shared-context 'function)
  "@version{#2023-8-4}
-  @syntax[]{(gdk:gl-context-shared-context object) => context}
+  @syntax{(gdk:gl-context-shared-context object) => context}
   @argument[object]{a @class{gdk:gl-context} object}
   @argument[context]{a @class{gdk:gl-context} object or @code{nil}}
   @begin{short}
@@ -405,8 +405,8 @@
 (defun gl-context-required-version (context)
  #+liber-documentation
  "@version{#2023-8-3}
-  @syntax[]{(gdk:gl-context-required-version object) => major, minor}
-  @@syntax[]{(setf gdk:gl-context-required-version object) (list major minor))}
+  @syntax{(gdk:gl-context-required-version object) => major, minor}
+  @syntax{(setf gdk:gl-context-required-version object) (list major minor))}
   @argument[context]{a @class{gdk:gl-context} object}
   @begin{return}
     @arg{major} - an integer with the major version to request @br{}
@@ -446,8 +446,8 @@
                gl-context-debug-enabled) :boolean
  #+liber-documentation
  "@version{#2023-8-3}
-  @syntax[]{(gdk:gl-context-debug-enabled object) => enabled}
-  @syntax[]{(setf gdk:gl-context-debug-enabled object) enabled)}
+  @syntax{(gdk:gl-context-debug-enabled object) => enabled}
+  @syntax{(setf gdk:gl-context-debug-enabled object) enabled)}
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[enabled]{a boolean whether debugging is enabled}
   @begin{short}
@@ -481,8 +481,8 @@
                gl-context-forward-compatible) :boolean
  #+liber-documentation
  "@version{#2023-8-3}
-  @syntax[]{(gdk:gl-context-forward-compatible object) => setting}
-  @syntax[]{(setf gdk:gl-context-forward-compatible object) setting)}
+  @syntax{(gdk:gl-context-forward-compatible object) => setting}
+  @syntax{(setf gdk:gl-context-forward-compatible object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[setting]{a boolean whether @arg{context} is forward compatible}
   @begin{short}
@@ -520,8 +520,8 @@
 (cffi:defcfun ("gdk_gl_context_get_use_es" gl-context-use-es) :boolean
  #+liber-documentation
  "@version{#2023-8-3}
-  @syntax[]{(gdk:gl-context-uses-es object) => setting}
-  @syntax[]{(setf gdk:gl-context-use-es object) setting)}
+  @syntax{(gdk:gl-context-uses-es object) => setting}
+  @syntax{(setf gdk:gl-context-use-es object) setting)}
   @argument[context]{a @class{gdk:gl-context} object}
   @argument[setting]{an integer whether the context uses OpenGL instead of
     OpenGL, or -1 to allow auto-detection}

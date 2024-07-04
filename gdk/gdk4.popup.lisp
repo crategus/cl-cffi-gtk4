@@ -108,8 +108,8 @@
       "Accessor"
       (documentation 'popup-autohide 'function)
  "@version{#2023-4-9}
-  @syntax[]{(gdk:popup-autohide object) => autohide}
-  @syntax[]{(setf (gdk:popup-autohide object) autohide)}
+  @syntax{(gdk:popup-autohide object) => autohide}
+  @syntax{(setf (gdk:popup-autohide object) autohide)}
   @argument[object]{a @class{gdk:popup} object}
   @argument[autohide]{@em{True} if @arg{popup} will autohide.}
   @begin{short}
@@ -134,8 +134,8 @@
       "Accessor"
       (documentation 'popup-parent 'function)
  "@version{#2023-4-9}
-  @syntax[]{(gdk:popup-parent object) => parent}
-  @syntax[]{(setf (gdk:popup-parent object) parent)}
+  @syntax{(gdk:popup-parent object) => parent}
+  @syntax{(setf (gdk:popup-parent object) parent)}
   @argument[object]{a @class{gdk:popup} object}
   @argument[parent]{a @class{gdk:surface} parent surface}
   @begin{short}

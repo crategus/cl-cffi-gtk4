@@ -312,8 +312,8 @@
     (g:boxed rectangle)
  #+liber-documentation
  "@version{2024-2-17}
-  @syntax[]{(gdk:popup-layout-anchor-rect layout) => rect}
-  @syntax[]{(setf (gdk:popup-layout-anchor-rect layout) rect)}
+  @syntax{(gdk:popup-layout-anchor-rect layout) => rect}
+  @syntax{(setf (gdk:popup-layout-anchor-rect layout) rect)}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[rect]{an anchor @class{gdk:rectangle} instance}
   @begin{short}
@@ -342,8 +342,8 @@
     gravity
  #+liber-documentation
  "@version{2024-2-17}
-  @syntax[]{(gdk:popup-layout-rect-anchor layout) => gravity}
-  @syntax[]{(setf (gdk:popup-layout-rect-anchor layout) gravity)}
+  @syntax{(gdk:popup-layout-rect-anchor layout) => gravity}
+  @syntax{(setf (gdk:popup-layout-rect-anchor layout) gravity)}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[gravity]{a @symbol{gdk:gravity} value with the anchor on the
     anchor rectangle}
@@ -375,8 +375,8 @@
                popup-layout-surface-anchor) gravity
  #+liber-documentation
  "@version{2024-2-17}
-  @syntax[]{(gdk:popup-layout-surface-anchor layout) => gravity}
-  @syntax[]{(setf (gdk:popup-layout-surface-anchor layout) gravity)}
+  @syntax{(gdk:popup-layout-surface-anchor layout) => gravity}
+  @syntax{(setf (gdk:popup-layout-surface-anchor layout) gravity)}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[gravity]{a @symbol{gdk:gravity} value with the anchor on the
     popup surface}
@@ -408,8 +408,8 @@
     anchor-hints
  #+liber-documentation
  "@version{2024-2-17}
-  @syntax[]{(gdk:popup-layout-anchor-hints layout) => hints}
-  @syntax[]{(setf (gdk:popup-layout-anchor-hints layout) hints)}
+  @syntax{(gdk:popup-layout-anchor-hints layout) => hints}
+  @syntax{(setf (gdk:popup-layout-anchor-hints layout) hints)}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[hints]{a @symbol{gdk:anchor-hints} value}
   @begin{short}
@@ -450,8 +450,8 @@
 (defun popup-layout-offset (layout)
  #+liber-documentation
  "@version{2024-2-17}
-  @syntax[]{(gdk:popup-layout-offset layout) => dx, dy}
-  @syntax[]{(setf (gdk:popup-layout-offset layout) (list dx dy))}
+  @syntax{(gdk:popup-layout-offset layout) => dx, dy}
+  @syntax{(setf (gdk:popup-layout-offset layout) (list dx dy))}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[dx]{an integer with the delta x coordinate}
   @argument[dx]{an integer with the delta y coordinate}
@@ -499,8 +499,8 @@
 (defun popup-layout-shadow-width (layout)
  #+liber-documentation
  "@version{2024-2-17}
-  @syntax[]{(gdk:popup-layout-shadow-width layout) => left, right, top, bottom}
-  @syntax[]{(setf (gdk:popup-layout-shadow-width layout)
+  @syntax{(gdk:popup-layout-shadow-width layout) => left, right, top, bottom}
+  @syntax{(setf (gdk:popup-layout-shadow-width layout)
     (list left right top bottom))}
   @argument[layout]{a @class{gdk:popup-layout} instance}
   @argument[left]{an integer with the left shadow width}

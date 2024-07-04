@@ -270,7 +270,7 @@
       "Accessor"
       (documentation 'texture-height 'function)
  "@version{#2023-4-12}
-  @syntax[]{(gdk:texture-height object) => height}
+  @syntax{(gdk:texture-height object) => height}
   @argument[object]{a @class{gdk:texture} object}
   @argument[height]{an integer with the height of the texture}
   @begin{short}
@@ -296,7 +296,7 @@
       "Accessor"
       (documentation 'texture-width 'function)
  "@version{#2023-4-12}
-  @syntax[]{(gdk:texture-width object) => width}
+  @syntax{(gdk:texture-width object) => width}
   @argument[object]{a @class{gdk:texture} object}
   @argument[width]{an integer with the width of the texture}
   @begin{short}

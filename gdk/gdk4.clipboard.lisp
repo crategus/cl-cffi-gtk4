@@ -158,7 +158,7 @@ lambda (clipboard)    :run-last
       "Accessor"
       (documentation 'clipboard-content 'function)
  "@version{2023-7-30}
-  @syntax[]{(gdk:clipboard-content object) => content}
+  @syntax{(gdk:clipboard-content object) => content}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[content]{a @class{gdk:content-provider} instance}
   @begin{short}
@@ -190,7 +190,7 @@ lambda (clipboard)    :run-last
       "Accessor"
       (documentation 'clipboard-display 'function)
  "@version{2023-7-30}
-  @syntax[]{(gdk:clipboard-display object) => display}
+  @syntax{(gdk:clipboard-display object) => display}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
@@ -214,7 +214,7 @@ lambda (clipboard)    :run-last
       "Accessor"
       (documentation 'clipboard-formats 'function)
  "@version{2023-7-30}
-  @syntax[]{(gdk:clipboard-formats object) => formats}
+  @syntax{(gdk:clipboard-formats object) => formats}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @begin{short}
@@ -239,7 +239,7 @@ lambda (clipboard)    :run-last
       "Accessor"
       (documentation 'clipboard-local 'function)
  "@version{2023-7-30}
-  @syntax[]{(gdk:clipboard-local object) => local}
+  @syntax{(gdk:clipboard-local object) => local}
   @argument[object]{a @class{gdk:clipboard} object}
   @argument[local]{a boolean whether the contents of the clipboard are owned
     by this process}

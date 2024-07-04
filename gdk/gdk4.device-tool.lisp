@@ -154,7 +154,7 @@
       "Accessor"
       (documentation 'device-tool-axes 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-tool-axes object) => axes}
+  @syntax{(gdk:device-tool-axes object) => axes}
   @argument[object]{a @class{gdk:device-tool} object}
   @argument[axes]{a @symbol{gdk:axis-flags} value}
   @begin{short}
@@ -179,7 +179,7 @@
       "Accessor"
       (documentation 'device-tool-hardware-id 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-tool-hardware-id object) => hardware-id}
+  @syntax{(gdk:device-tool-hardware-id object) => hardware-id}
   @argument[object]{a @class{gdk:device-tool} object}
   @argument[hardware-id]{an unsigned integer with the hardware identificator of
     the device tool}
@@ -216,7 +216,7 @@
       "Accessor"
       (documentation 'device-tool-serial 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-tool-serial object) => serial}
+  @syntax{(gdk:device-tool-serial object) => serial}
   @argument[object]{a @class{gdk:device-tool} object}
   @argument[serial]{an unsigned integer with the serial ID for the device tool}
   @begin{short}
@@ -242,7 +242,7 @@
       "Accessor"
       (documentation 'device-tool-tool-type 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-tool-tool-type object) => tool-type}
+  @syntax{(gdk:device-tool-tool-type object) => tool-type}
   @argument[object]{a @class{gdk:device-tool} object}
   @argument[tool-type]{a @symbol{gdk:device-tool-type} value}
   @begin{short}

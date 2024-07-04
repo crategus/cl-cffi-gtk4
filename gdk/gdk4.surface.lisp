@@ -223,8 +223,8 @@ lambda (surface region)    :run-last
       "Accessor"
       (documentation 'surface-cursor 'function)
  "@version{2024-1-8}
-  @syntax[]{(gdk:surface-cursor object) => cursor}
-  @syntax[]{(setf (gdk:surface-cursor object) cursor)}
+  @syntax{(gdk:surface-cursor object) => cursor}
+  @syntax{(setf (gdk:surface-cursor object) cursor)}
   @argument[object]{a @class{gdk:surface} object}
   @argument[cursor]{a @class{gdk:cursor} object}
   @begin{short}
@@ -261,8 +261,8 @@ lambda (surface region)    :run-last
       "Accessor"
       (documentation 'surface-display 'function)
  "@version{2024-1-8}
-  @syntax[]{(gdk:surface-display object) => display}
-  @syntax[]{(setf (gdk:surface-display object) display)}
+  @syntax{(gdk:surface-display object) => display}
+  @syntax{(setf (gdk:surface-display object) display)}
   @argument[object]{a @class{gdk:surface} object}
   @argument[display]{a @class{gdk:display} object associated with @arg{surface}}
   @begin{short}
@@ -287,8 +287,8 @@ lambda (surface region)    :run-last
       "Accessor"
       (documentation 'surface-frame-clock 'function)
  "@version{2024-1-8}
-  @syntax[]{(gdk:surface-frame-clock object) => clock}
-  @syntax[]{(setf (gdk:surface-frame-clock object) clock)}
+  @syntax{(gdk:surface-frame-clock object) => clock}
+  @syntax{(setf (gdk:surface-frame-clock object) clock)}
   @argument[object]{a @class{gdk:surface} object}
   @argument[clock]{a @class{gdk:frame-clock} object}
   @begin{short}
@@ -315,8 +315,8 @@ lambda (surface region)    :run-last
       "Accessor"
       (documentation 'surface-height 'function)
  "@version{2024-1-8}
-  @syntax[]{(gdk:surface-height object) => height}
-  @syntax[]{(setf (gdk:surface-height object) height)}
+  @syntax{(gdk:surface-height object) => height}
+  @syntax{(setf (gdk:surface-height object) height)}
   @argument[object]{a @class{gdk:surface} object}
   @argument[width]{an integer with the height of the surface}
   @begin{short}
@@ -342,8 +342,8 @@ lambda (surface region)    :run-last
       "Accessor"
       (documentation 'surface-mapped 'function)
  "@version{2024-1-8}
-  @syntax[]{(gdk:surface-mapped object) => mapped}
-  @syntax[]{(setf (gdk:surface-mapped object) mapped)}
+  @syntax{(gdk:surface-mapped object) => mapped}
+  @syntax{(setf (gdk:surface-mapped object) mapped)}
   @argument[object]{a @class{gdk:surface} object}
   @argument[mapped]{a boolean whether the surface has been mapped}
   @begin{short}
@@ -370,8 +370,8 @@ lambda (surface region)    :run-last
       "Accessor"
       (documentation 'surface-scale 'function)
  "@version{2024-1-8}
-  @syntax[]{(gdk:surface-scale object) => scale}
-  @syntax[]{(setf (gdk:surface-scale object) scale)}
+  @syntax{(gdk:surface-scale object) => scale}
+  @syntax{(setf (gdk:surface-scale object) scale)}
   @argument[object]{a @class{gdk:surface} object}
   @argument[scale]{a double float with the scale}
   @begin{short}
@@ -406,8 +406,8 @@ lambda (surface region)    :run-last
       "Accessor"
       (documentation 'surface-scale-factor 'function)
  "@version{2024-1-8}
-  @syntax[]{(gdk:surface-scale-factor object) => factor}
-  @syntax[]{(setf (gdk:surface-scale-factor object) factor)}
+  @syntax{(gdk:surface-scale-factor object) => factor}
+  @syntax{(setf (gdk:surface-scale-factor object) factor)}
   @argument[object]{a @class{gdk:surface} object}
   @argument[factor]{an integer with the scale factor}
   @begin{short}
@@ -441,8 +441,8 @@ lambda (surface region)    :run-last
       "Accessor"
       (documentation 'surface-width 'function)
  "@version{2024-1-8}
-  @syntax[]{(gdk:surface-width object) => width}
-  @syntax[]{(setf (gdk:surface-width object) width)}
+  @syntax{(gdk:surface-width object) => width}
+  @syntax{(setf (gdk:surface-width object) width)}
   @argument[object]{a @class{gdk:surface} object}
   @argument[width]{an integer with the width of the surface}
   @begin{short}
@@ -892,8 +892,8 @@ lambda (surface region)    :run-last
     (g:object cursor)
  #+liber-documentation
  "@version{#2023-4-8}
-  @syntax[]{(gdk:surface-device-cursor surface device) => cursor}
-  @syntax[]{(setf (gdk:surface-device-cursor surface device) cursor)}
+  @syntax{(gdk:surface-device-cursor surface device) => cursor}
+  @syntax{(setf (gdk:surface-device-cursor surface device) cursor)}
   @argument[surface]{a @class{gdk:surface} object}
   @argument[device]{a @class{gdk:device} object}
   @argument[cursor]{a @class{gdk:cursor} object}

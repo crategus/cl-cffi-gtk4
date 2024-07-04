@@ -120,8 +120,8 @@
       "Accessor"
       (documentation 'rgba-red 'function)
  "@version{2023-1-22}
-  @syntax[]{(gdk:rgba-red instance) => red}
-  @syntax[]{(setf (gdk:rgba-red instance) red)}
+  @syntax{(gdk:rgba-red instance) => red}
+  @syntax{(setf (gdk:rgba-red instance) red)}
   @argument[instance]{a @struct{gdk:rgba} color}
   @argument[red]{a number coerced to a float with the intensity of the red
   channel from 0.0 to 1.0}
@@ -138,8 +138,8 @@
       "Accessor"
       (documentation 'rgba-green 'function)
  "@version{2023-1-22}
-  @syntax[]{(gdk:rgba-green instance) => green}
-  @syntax[]{(setf (gdk:rgba-green instance) green)}
+  @syntax{(gdk:rgba-green instance) => green}
+  @syntax{(setf (gdk:rgba-green instance) green)}
   @argument[instance]{a @struct{gdk:rgba} color}
   @argument[green]{a number coerced to a float with intensity of the green
     channel from 0.0 to 1.0}
@@ -156,8 +156,8 @@
       "Accessor"
       (documentation 'rgba-blue 'function)
  "@version{2023-1-22}
-  @syntax[]{(gdk:rgba-blue instance) => blue}
-  @syntax[]{(setf (gdk:rgba-blue instance) blue)}
+  @syntax{(gdk:rgba-blue instance) => blue}
+  @syntax{(setf (gdk:rgba-blue instance) blue)}
   @argument[instance]{a @struct{gdk:rgba} color}
   @argument[blue]{a number coerced to a float with intensity of the blue channel
     from 0.0 to 1.0}
@@ -174,8 +174,8 @@
       "Accessor"
       (documentation 'rgba-alpha 'function)
  "@version{2023-1-22}
-  @syntax[]{(gdk:rgba-alpha instance) => alpha}
-  @syntax[]{(setf (gdk:rgba-alpha instance) alpha)}
+  @syntax{(gdk:rgba-alpha instance) => alpha}
+  @syntax{(setf (gdk:rgba-alpha instance) alpha)}
   @argument[instance]{a @struct{gdk:rgba} color}
   @argument[alpha]{a number coerced to a float with opacity of the color from
     0.0 for completely translucent to 1.0 for opaque}

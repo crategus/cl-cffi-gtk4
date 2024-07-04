@@ -369,8 +369,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-decorated 'function)
  "@version{#2023-4-8}
-  @syntax[]{(gdk:toplevel-decorated object) => decorated}
-  @syntax[]{(setf (gdk:toplevel-decorated object) decorated)}
+  @syntax{(gdk:toplevel-decorated object) => decorated}
+  @syntax{(setf (gdk:toplevel-decorated object) decorated)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[decorated]{a boolean whether to request decorations}
   @begin{short}
@@ -395,8 +395,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-deletable 'function)
  "@version{#2023-4-8}
-  @syntax[]{(gdk:toplevel-deletable object) => deletable}
-  @syntax[]{(setf (gdk:toplevel-deletable object) deletable)}
+  @syntax{(gdk:toplevel-deletable object) => deletable}
+  @syntax{(setf (gdk:toplevel-deletable object) deletable)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[deletable]{a boolean whether to request a delete button}
   @begin{short}
@@ -421,8 +421,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-fullscreen-mode 'function)
  "@version{#2023-4-8}
-  @syntax[]{(gdk:toplevel-fullscreen-mode object) => mode}
-  @syntax[]{(setf (gdk:toplevel-fullscreen-mode object) mode)}
+  @syntax{(gdk:toplevel-fullscreen-mode object) => mode}
+  @syntax{(setf (gdk:toplevel-fullscreen-mode object) mode)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[mode]{a boolean with the fullscreen mode of the surface}
   @begin{short}
@@ -443,8 +443,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-icon-list 'function)
  "@version{#2023-4-8}
-  @syntax[]{(gdk:toplevel-icon-list object) => surfaces}
-  @syntax[]{(setf (gdk:toplevel-icon-list object) surfaces)}
+  @syntax{(gdk:toplevel-icon-list object) => surfaces}
+  @syntax{(setf (gdk:toplevel-icon-list object) surfaces)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[surfaces]{a list of textures to use as icon, of different sizes}
   @begin{short}
@@ -473,8 +473,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-modal 'function)
  "@version{#2023-4-8}
-  @syntax[]{(gdk:toplevel-modal object) => modal}
-  @syntax[]{(setf (gdk:toplevel-modal object) modal)}
+  @syntax{(gdk:toplevel-modal object) => modal}
+  @syntax{(setf (gdk:toplevel-modal object) modal)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[modal]{@em{true} if the surface is modal, @em{false} otherwise}
   @begin{short}
@@ -505,8 +505,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-shortcuts-inhibited 'function)
  "@version{#2023-4-8}
-  @syntax[]{(gdk:toplevel-shortcuts-inhibited object) => inhibited}
-  @syntax[]{(setf (gdk:toplevel-shortcuts-inhibited object) inhibited)}
+  @syntax{(gdk:toplevel-shortcuts-inhibited object) => inhibited}
+  @syntax{(setf (gdk:toplevel-shortcuts-inhibited object) inhibited)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[inhibited]{a boolean whether keyboard shortcuts are inhibited}
   @begin{short}
@@ -528,8 +528,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-startup-id 'function)
  "@version{#2023-4-8}
-  @syntax[]{(gdk:toplevel-startup-id object) => startup-id}
-  @syntax[]{(setf (gdk:toplevel-startup-id object) startup-id)}
+  @syntax{(gdk:toplevel-startup-id object) => startup-id}
+  @syntax{(setf (gdk:toplevel-startup-id object) startup-id)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[startup-id]{a string with startup-notification identifier}
   @begin{short}
@@ -553,8 +553,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-state 'function)
  "@version{#2024-4-7}
-  @syntax[]{(gdk:toplevel-state object) => state}
-  @syntax[]{(setf (gdk:toplevel-state object) state)}
+  @syntax{(gdk:toplevel-state object) => state}
+  @syntax{(setf (gdk:toplevel-state object) state)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[state]{a @symbol{gdk:toplevel-state} value}
   @begin{short}
@@ -579,8 +579,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-title 'function)
  "@version{#2023-4-8}
-  @syntax[]{(gdk:toplevel-title object) => title}
-  @syntax[]{(setf (gdk:toplevel-title object) title)}
+  @syntax{(gdk:toplevel-title object) => title}
+  @syntax{(setf (gdk:toplevel-title object) title)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[state]{a string with the title of surface}
   @begin{short}
@@ -604,8 +604,8 @@ lambda (toplevel size)    :run-last
       "Accessor"
       (documentation 'toplevel-transient-for 'function)
  "@version{#2023-4-8}
-  @syntax[]{(gdk:toplevel-transient-for object) => parent}
-  @syntax[]{(setf (gdk:toplevel-transient-for object) parent)}
+  @syntax{(gdk:toplevel-transient-for object) => parent}
+  @syntax{(setf (gdk:toplevel-transient-for object) parent)}
   @argument[object]{a @class{gdk:toplevel} object}
   @argument[parent]{a toplevel @class{gdk:surface} object}
   @begin{short}

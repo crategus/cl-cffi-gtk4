@@ -133,7 +133,7 @@
       "Accessor"
       (documentation 'drop-actions 'function)
  "@version{#2023-8-7}
-  @syntax[]{(gdk:drop-actions object) => actions}
+  @syntax{(gdk:drop-actions object) => actions}
   @argument[object]{a @class{gdk:drop} object}
   @argument[actions]{a @symbol{gdk:drag-action} value}
   @begin{short}
@@ -171,7 +171,7 @@
       "Accessor"
       (documentation 'drop-device 'function)
  "@version{#2023-8-7}
-  @syntax[]{(gdk:drop-device object) => device}
+  @syntax{(gdk:drop-device object) => device}
   @argument[object]{a @class{gdk:drop} object}
   @argument[device]{a @class{gdk:device} object performing the drop}
   @begin{short}
@@ -194,7 +194,7 @@
       "Accessor"
       (documentation 'drop-display 'function)
  "@version{#2023-8-7}
-  @syntax[]{(gdk:drop-display object) => display}
+  @syntax{(gdk:drop-display object) => display}
   @argument[object]{a @class{gdk:drop} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
@@ -219,7 +219,7 @@
       "Accessor"
       (documentation 'drop-drag 'function)
  "@version{#2023-8-7}
-  @syntax[]{(gdk:drop-drag object) => drag}
+  @syntax{(gdk:drop-drag object) => drag}
   @argument[object]{a @class{gdk:drop} object}
   @argument[drag]{a corresponding @class{gdk:drag} object}
   @begin{short}
@@ -244,7 +244,7 @@
       "Accessor"
       (documentation 'drop-formats 'function)
  "@version{#2023-8-7}
-  @syntax[]{(gdk:drop-formats object) => formats}
+  @syntax{(gdk:drop-formats object) => formats}
   @argument[object]{a @class{gdk:drop} object}
   @argument[formats]{a @class{gdk:content-formats} instance}
   @begin{short}
@@ -269,7 +269,7 @@
       "Accessor"
       (documentation 'drop-surface 'function)
  "@version{#2023-8-7}
-  @syntax[]{(gdk:drop-surface object) => surface}
+  @syntax{(gdk:drop-surface object) => surface}
   @argument[object]{a @class{gdk:drop} object}
   @argument[surface]{a @class{gdk:surface} object performing the drop}
   @begin{short}

@@ -396,7 +396,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-caps-lock-state 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-caps-lock-state object) => setting}
+  @syntax{(gdk:device-caps-lock-state object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{a boolean whether the keyboard caps lock is on}
   @begin{short}
@@ -420,7 +420,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-direction 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-direction object) => direction}
+  @syntax{(gdk:device-direction object) => direction}
   @argument[object]{a @class{gdk:device} object}
   @argument[direction]{a @symbol{pango:direction} value}
   @begin{short}
@@ -445,7 +445,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-display 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-display object) => display}
+  @syntax{(gdk:device-display object) => display}
   @argument[object]{a @class{gdk:device} object}
   @argument[display]{a @class{gdk:display} object}
   @begin{short}
@@ -470,7 +470,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-has-bidi-layouts 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-has-bidi-layouts object) => setting}
+  @syntax{(gdk:device-has-bidi-layouts object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{@em{true} if there are layouts with both directions,
     @em{false} otherwise}
@@ -497,7 +497,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-has-cursor 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-has-cursor object) => setting}
+  @syntax{(gdk:device-has-cursor object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{@em{true} if the pointer follows device motion}
   @begin{short}
@@ -522,7 +522,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-modifier-state 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-modifier-state object) => state}
+  @syntax{(gdk:device-modifier-state object) => state}
   @argument[object]{a @class{gdk:device} object}
   @argument[state]{a @symbol{gdk:modifier-state} value with the current modifier
     state}
@@ -548,7 +548,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-n-axes 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-n-axes object) => n-axes}
+  @syntax{(gdk:device-n-axes object) => n-axes}
   @argument[object]{a @class{gdk:device} object}
   @argument[n-axes]{an unsigned integer with the number of axes in the device}
   @begin{short}
@@ -572,7 +572,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-name 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-name object) => name}
+  @syntax{(gdk:device-name object) => name}
   @argument[object]{a @class{gdk:device} object}
   @argument[name]{a string with the name of the device}
   @begin{short}
@@ -596,7 +596,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-num-lock-state 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-num-lock-state object) => setting}
+  @syntax{(gdk:device-num-lock-state object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[setting]{@em{true} if Num Lock is on for the device}
   @begin{short}
@@ -622,7 +622,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-num-touches 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-num-touches object) => num-touches}
+  @syntax{(gdk:device-num-touches object) => num-touches}
   @argument[object]{a @class{gdk:device} object}
   @argument[num-touches]{an unsigned integer with the number of touch points}
   @begin{short}
@@ -647,7 +647,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-product-id 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-product-id object) => product-id}
+  @syntax{(gdk:device-product-id object) => product-id}
   @argument[object]{a @class{gdk:device} object}
   @argument[product-id]{a string with the product ID, or @code{nil}}
   @begin{short}
@@ -674,7 +674,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-scroll-lock-state 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-scroll-lock-id object) => setting}
+  @syntax{(gdk:device-scroll-lock-id object) => setting}
   @argument[object]{a @class{gdk:device} object}
   @argument[scroll-lock-id]{@em{true} if Scroll Lock is on for the device}
   @begin{short}
@@ -697,8 +697,8 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-seat 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-seat object) => seat}
-  @syntax[]{(setf (gdk:device-seat object) seat)}
+  @syntax{(gdk:device-seat object) => seat}
+  @syntax{(setf (gdk:device-seat object) seat)}
   @argument[object]{a @class{gdk:device} object}
   @argument[seat]{a @class{gdk:seat} object}
   @begin{short}
@@ -724,7 +724,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-source 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-source object) => source}
+  @syntax{(gdk:device-source object) => source}
   @argument[object]{a @class{gdk:device} object}
   @argument[source]{a @symbol{gdk:input-source} value}
   @begin{short}
@@ -747,7 +747,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-tool 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-tool object) => tool}
+  @syntax{(gdk:device-tool object) => tool}
   @argument[object]{a @class{gdk:device} object}
   @argument[tool]{a @symbol{gdk:device-tool} object}
   @begin{short}
@@ -773,7 +773,7 @@ lambda (device tool)    :run-last
       "Accessor"
       (documentation 'device-vendor-id 'function)
  "@version{2024-1-7}
-  @syntax[]{(gdk:device-vendor-id object) => vendor-id}
+  @syntax{(gdk:device-vendor-id object) => vendor-id}
   @argument[object]{a @class{gdk:device} object}
   @argument[vendor-id]{a string with the vendor ID, or @code{nil}}
   @begin{short}
